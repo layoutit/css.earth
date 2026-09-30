@@ -13,7 +13,7 @@ curation never changes the source transform or upgrades registration evidence.
 
 | Workspace | Source dossier | Current registration evidence |
 | --- | --- | --- |
-| [Pleiades](http://127.0.0.1:4331/alignment?subject=m45) | [M45 sources](../models/m45/README.md) | Six Alignment views; four baked lenses. The original optical, two Spitzer composites and WISE are relatively star-verified; their completed diffuse and residual layers are reused from the pinned processing cache. Usama/IAU and Andreo add wider optical comparison footprints with explicitly unverified bright-star seeds. 2MASS is mostly stars; coarse IRIS supplies little usable cloud detail. Both are hidden. |
+| [Pleiades](http://127.0.0.1:4331/alignment?subject=m45) | [M45 sources](../models/m45/README.md) | Six Alignment views; four baked datasets. The original optical, two Spitzer composites and WISE are relatively star-verified; their completed diffuse and residual layers are reused from the pinned processing cache. Usama/IAU and Andreo add wider optical comparison footprints with explicitly unverified bright-star seeds. 2MASS is mostly stars; coarse IRIS supplies little usable cloud detail. Both are hidden. |
 | [Crab](http://127.0.0.1:4331/alignment?subject=m1) | [M1 sources](../models/m1/README.md) | Six views: Hubble, two Webb treatments, Spitzer, VLA and Chandra. Stellar correspondence, a documented common-grid bridge and an explicit Webb scale calibration are separate evidence paths. Keep epoch/expansion and absolute-astrometry limits explicit. |
 | [Lagoon](http://127.0.0.1:4331/alignment?subject=m8) | [M8 sources](../models/m8/README.md) | Three selected: ESO optical/VISTA and Spitzer, with held-out RMS approximately 0.76″ and 1.00″ respectively. Hubble close-ups remain hidden; Herschel is zero-filled over the central nebula and is rejected for this comparison. |
 
@@ -50,13 +50,13 @@ numerical qualification records are tracked.
 
 | Object | Prepared model | Remaining interpretation/visual limits |
 | --- | --- | --- |
-| Pleiades · four lenses | Positive display emission on an authored dust surface, with locally scoped literature constraints; 450 conditional field lights. | Saturated optical cores/halos survive NOX; fine fibres blur and the surface reads as a thin sheet from the side. Reflection/scattering and global dust depth are not recovered. |
-| Lagoon · three lenses | A curved emission front with local Her 36 constraints; VISTA contributes less to geometric fitting; 650 conditional field lights. | Residual blobs, oblique banding and hard infrared footprint boundaries remain. Local velocities are retained as evidence, not converted into a global depth law. |
-| Crab · six lenses | Qualified released 3D line-emission points plus separate torus/jet wind terms and a named pulsar. | Conditional expansion-law depth, mixed epochs, authored wind terms and spectral weights. No recovered gas density or full radiative transfer. |
+| Pleiades · four datasets | Positive display emission on an authored dust surface, with locally scoped literature constraints; 450 conditional field lights. | Saturated optical cores/halos survive NOX; fine fibres blur and the surface reads as a thin sheet from the side. Reflection/scattering and global dust depth are not recovered. |
+| Lagoon · three datasets | A curved emission front with local Her 36 constraints; VISTA contributes less to geometric fitting; 650 conditional field lights. | Residual blobs, oblique banding and hard infrared footprint boundaries remain. Local velocities are retained as evidence, not converted into a global depth law. |
+| Crab · six datasets | Qualified released 3D line-emission points plus separate torus/jet wind terms and a named pulsar. | Conditional expansion-law depth, mixed epochs, authored wind terms and spectral weights. No recovered gas density or full radiative transfer. |
 
-Pleiades and Lagoon preserve identical geometry and alpha across their RGB lenses.
+Pleiades and Lagoon preserve identical geometry and alpha across their RGB datasets.
 Crab uses [explicit emitting components](sampled-volumes.md): the same coordinate
-frame, with different tracer emission weights. Its X-ray lens must not become a
+frame, with different tracer emission weights. Its X-ray dataset must not become a
 recoloured optical shell. Each README and `processing-evidence.json` owns the
 actual tested result, source receipts, camera checks and unresolved limitations.
 

@@ -33,13 +33,13 @@ The nine binnings scatter by 0.10 au, 0.16° and 0.55°. A mirrored reading woul
 
 Each sky column's three colour channels are spread along the disc with one depth profile and normalised so the column keeps its colour, so the view from Earth reproduces the images and every other direction shows a disc. The light is drawn to 237 au, where the ring's deprojected median reaches the per-pixel noise; the author refuses a grid that would cut light above the noise.
 
-**Checked against the published figure.** Rendered from Earth in the application, the ring's long axis lies 77.9° clockwise from up with axis ratio 0.875; the paper's Figure 1 panel gives 78.5° and 0.876 (a mirror would give 101.5°). Luminance correlates at 0.985, the brightness profile is within 0.035 of the ring's peak, and the ring is near-neutral in both. [Evidence](evidence/rendered.json).
+**Checked against the published figure.** Rendered from Earth in the application, the ring's long axis lies 77.9° clockwise from up with axis ratio 0.875; the paper's Figure 1 panel gives 78.5° and 0.876 (a mirror would give 101.5°). Luminance correlates at 0.985, the brightness profile is within 0.035 of the ring's peak, and the ring is near-neutral in both. Evidence.
 
 **Opacity is the one setting the source cannot give.** In the renderer's emission model a column's brightness and how much it hides are one number, and the real ring blocks a small fraction of a percent of the light behind it. The top of the stretch reaches an alpha of 0.5, the value whose rendered profile matches the figure best (0.032 against 0.035 at 0.7). The median drawn line of sight hides 6% of what is behind it, and the render is at 0.48 of the printed figure's brightness.
 
 ## Evidence
 
-- [`evidence/rendered.json`](evidence/rendered.json) and [its image](evidence/rendered-from-earth.webp): the ring rendered from Earth and measured against the published panel.
+- `evidence/rendered.json` and its image: the ring rendered from Earth and measured against the published panel.
 - [`disc-envelope.test.mts`](../../../packages/telescope-cli/authoring/circumstellar/disc-envelope.test.mts): a synthetic inclined ring is recovered from its own projection, the stated near side lies toward the observer, a spherical shell is refused as a ring, and a ridge of noise is refused.
 - [`imaging.test.mts`](../../../packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts): coron3 programs parse, and the occulter is read from the observation's name.
 - `node packages/telescope-cli/authoring/circumstellar/author.mts hd-181327-disc --check` reproduces the grid, recipe, delivery, presentation, preview and manifest; `fit-figure-stretch.mts hd-181327-disc reflectance <figure>` reproduces the stretch.

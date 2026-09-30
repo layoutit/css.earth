@@ -43,13 +43,13 @@ test('prepared compiler transport reflects source depth exactly once without cha
   assert.equal(compilerFrame(source.boundsUnits, true).frame.referenceFrame, COMPILER_PHYSICAL_REFERENCE);
 });
 
-test('default compiler bake refuses projected-image-only lenses before creating output', async () => {
+test('default compiler bake refuses projected-image-only datasets before creating output', async () => {
   await assert.rejects(bakeCompiler({ root: tmpdir(), outputDirectory: 'should-not-create-image-extrusion', id: 'invalid-xy-material',
     fieldIdentity: 'fixture-field', boundsArcsec: { min: [-1, -1, -1], max: [1, 1, 1] },
     skyBoundsArcsec: { min: [-1, -1], max: [1, 1] }, sampleEmission(_x, _y, _z, out) { out[0] = out[1] = out[2] = 1; },
     // This exercises the actual default boundary, with no fine-feature option to select a safer path.
     // @ts-expect-error Historical XY image samplers are deliberately forbidden at the new boundary.
-    lenses: [{ id: 'legacy', label: 'Legacy projected color', sampleRgb(_x: number, _y: number, out: [number, number, number]) { out[0] = 255; return true; } }],
+    datasets: [{ id: 'legacy', label: 'Legacy projected color', sampleRgb(_x: number, _y: number, out: [number, number, number]) { out[0] = 255; return true; } }],
   }), /3D material sampler/);
 });
 
@@ -59,7 +59,7 @@ test('the actual CSS compiler backend rejects an oversized explicit plan before 
     skyBoundsArcsec: { min: [-1, -1], max: [1, 1] },
     sampling: { sliceCounts: { x: 50, y: 50, z: 52 }, imageWidth: 512, samplesPerSlab: 4 },
     sampleEmission() { throw new Error('The rejected plan must not sample its field.'); },
-    lenses: [{ id: 'material', label: 'Material', sampleMaterial(_x, _y, _z, out) { out.fill(255); return true; } }],
+    datasets: [{ id: 'material', label: 'Material', sampleMaterial(_x, _y, _z, out) { out.fill(255); return true; } }],
   }), /503 retained elements; limit is 500/);
 });
 

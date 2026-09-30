@@ -39,7 +39,7 @@
       "subject": "HST photometry and Keck near-infrared photometry",
       "status": "deferred",
       "finding": "Integrated brightness/color measurements cannot supply resolved surface texels. No separate Color or composition map qualified.",
-      "revisitWhen": "A spatially resolved Juliet measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Juliet measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/juliet/source/manifest.json",
         "https://doi.org/10.1006/icar.2001.6596"

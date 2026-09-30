@@ -33,7 +33,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Shape and size
 
-This package uses the observed 1.25:1 outline ratio for a prolate ellipsoid, assumes equal short axes, and scales its volume-equivalent radius to JPL's 85 km. The resulting modeled semi-axes are approximately 98.63 × 78.91 × 78.91 km. These combine an observed elongation with a separate size estimate and an explicit depth assumption; they are not three measured dimensions or a fit to Cassini's exact view. The active lens states that the shape, depth and viewing orientation are approximate. No craters or other terrain are invented.
+This package uses the observed 1.25:1 outline ratio for a prolate ellipsoid, assumes equal short axes, and scales its volume-equivalent radius to JPL's 85 km. The resulting modeled semi-axes are approximately 98.63 × 78.91 × 78.91 km. These combine an observed elongation with a separate size estimate and an explicit depth assumption; they are not three measured dimensions or a fit to Cassini's exact view. The active dataset states that the shape, depth and viewing orientation are approximate. No craters or other terrain are invented.
 
 The radius table is reproducible from `source/measurements.json`: `q = 150/120`, `b = c = 85/q^(1/3)`, `a = q*b`, followed by radial intersection with that ellipsoid on the checked-in 5° grid. Shared meshoptimizer preparation targets 480 native triangle leaves under the 2,000-leaf budget. The simplification tolerance is separate from observational uncertainty. The physical reference radius remains 85 km; camera framing accounts for the longer axis.
 

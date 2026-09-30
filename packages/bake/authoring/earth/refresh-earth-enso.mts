@@ -54,17 +54,17 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     const path = resolve(temp, 'source.nc'); await writeFile(path, bytes);
     const decoded = await readCoraltempAnomaly(path, recipe);
     const content = await readRefreshContent(resolve(source, 'content/object.json'));
-    const lens = ensoContent(recipe), index = content.lenses.controls.findIndex(lens => lens.id === 'enso');
-    if (index < 0) content.lenses.controls.splice(3, 0, lens); else content.lenses.controls[index] = lens;
+    const dataset = ensoContent(recipe), index = content.datasets.controls.findIndex(dataset => dataset.id === 'enso');
+    if (index < 0) content.datasets.controls.splice(3, 0, dataset); else content.datasets.controls[index] = dataset;
     if (!content.resources.some(resource => resource.href === advisoryUrl)) content.resources.push(Object.assign({label: 'NOAA', role: 'climate', description: 'ENSO advisory'}, {href: advisoryUrl}));
-    const bindings = await readRefreshBindings(resolve(source, 'content/lens-bindings.json'));
-    const binding = bindings.controls.find(lens => lens.id === 'enso');
+    const bindings = await readRefreshBindings(resolve(source, 'content/dataset-bindings.json'));
+    const binding = bindings.controls.find(dataset => dataset.id === 'enso');
     if (!binding) throw new Error('ENSO presentation binding is missing.');
-    binding.qualification = lens.notes;
+    binding.qualification = dataset.notes;
     const updates = new Map<string, Buffer>([
       ['science/coraltemp-latest.nc', bytes],
       ['preparation/paged-ellipsoid.json', json(config)], ['content/object.json', json(content)],
-      ['content/lens-bindings.json', json(bindings)] ]);
+      ['content/dataset-bindings.json', json(bindings)] ]);
     const manifest = await readRefreshManifest(resolve(source, 'manifest.json'));
     manifest.inputs = manifest.inputs.filter(entry => !['noaa-oisst', 'noaa-coraltemp-product', 'noaa-enso-advisory', 'noaa-coraltemp-checksum'].includes(entry.id));
     const newInputs = [ { id: 'noaa-coraltemp-anomaly', path: map.path, origin: url } ];

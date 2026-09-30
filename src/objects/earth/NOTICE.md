@@ -62,7 +62,7 @@ No published illustration is copied and no author or EarthScope endorsement is
 implied. EMC repository citation: IRIS DMC (2011),
 [doi:10.17611/DP/EMC.1](https://doi.org/10.17611/DP/EMC.1).
 
-Retired city-detail prototype (outside the globe MVP): ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium. The 2021 v200 annual RGBNIR composites are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The retired city lens used the provider-rendered RGB PNGs directly through Terrascope WMTS and prepared their placement. Earlier COG experiments extracted RGB, applied a fixed display transfer, resampled geographic pages and encoded WebP. It does not use the categorical land-cover map. The publisher's metadata and attribution are recorded in `source/city/provenance.json`; no ESA or Copernicus endorsement is implied.
+Retired city-detail prototype (outside the globe MVP): ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium. The 2021 v200 annual RGBNIR composites are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The retired city dataset used the provider-rendered RGB PNGs directly through Terrascope WMTS and prepared their placement. Earlier COG experiments extracted RGB, applied a fixed display transfer, resampled geographic pages and encoded WebP. It does not use the categorical land-cover map. The publisher's metadata and attribution are recorded in `source/city/provenance.json`; no ESA or Copernicus endorsement is implied.
 
 ## GeoNames city catalogue
 

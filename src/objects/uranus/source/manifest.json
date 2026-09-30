@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "hubble-opal-uranus-2025a-color",
@@ -11,7 +11,7 @@
       "redistribution": "checked scientific archive product with full credit",
       "consumers": [
         "scene",
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -43,7 +43,7 @@
       "acquisition": "pinned Hubble OPAL Cycle 33 FQ727N global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -75,7 +75,7 @@
       "acquisition": "pinned Hubble OPAL Cycle 33 F845M global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -131,7 +131,7 @@
       "consumers": [
         "navigation",
         "scene",
-        "lenses"
+        "datasets"
       ],
       "historicalAcquisition": "node src/objects/uranus/tools/acquire.mjs --refresh",
       "sourceBinding": {
@@ -402,22 +402,6 @@
       }
     },
     {
-      "id": "uranus-authored-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Project-authored sky and Sun composition for the shared lane",
-      "credit": "cssEarth",
-      "license": "Project-authored specification",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source",
-      "consumers": [
-        "celestial"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored scene composition; physical and observed inputs retain separate source records."
-      }
-    },
-    {
       "id": "uranus-authored-solar-system",
       "path": "presentation/solar-system.json",
       "origin": "Project-authored physical scene scale",
@@ -445,7 +429,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -480,7 +464,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -515,7 +499,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -550,7 +534,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -585,7 +569,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -620,7 +604,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -655,7 +639,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -690,7 +674,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -725,7 +709,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -760,7 +744,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -795,7 +779,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -830,7 +814,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -865,7 +849,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -900,7 +884,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -935,7 +919,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -970,7 +954,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1005,7 +989,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1040,7 +1024,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1075,7 +1059,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1110,7 +1094,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1145,7 +1129,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1180,7 +1164,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1215,7 +1199,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1250,7 +1234,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1285,7 +1269,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1320,7 +1304,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1355,7 +1339,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1390,7 +1374,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1425,7 +1409,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1460,7 +1444,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1495,7 +1479,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1530,7 +1514,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1565,7 +1549,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1600,7 +1584,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1635,7 +1619,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1670,7 +1654,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1705,7 +1689,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1740,7 +1724,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1775,7 +1759,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1810,7 +1794,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1845,7 +1829,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1880,7 +1864,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1915,7 +1899,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1950,7 +1934,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1985,7 +1969,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -2020,7 +2004,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -2055,7 +2039,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -2090,7 +2074,7 @@
       "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
       "redistribution": "Original public OPAL high-level science product.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [

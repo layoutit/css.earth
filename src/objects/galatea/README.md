@@ -33,7 +33,7 @@ Galatea has one **Shape model** dataset. The paper's abstract states the triaxia
 
 `source/measurements.json` records the exact analytic radial formula, units, sampling, source citation and material. `source/shape/ellipsoid.tab` samples that formula every 5°. The reference radius is 88 km, approximately the 87.75 km volume-equivalent radius of these axes. The older 79 km spherical value in `pck00011.tpc` is not used as the body's shape.
 
-Surface, minimap, thumbnail and companion portrait share this interpretation. Flood lighting and the optional Shadows mode describe the same geometry. There is no photographed terminator to remove, no separate atmosphere, no invented visible color, and no elevation lens for this three-axis model.
+Surface, minimap, thumbnail and companion portrait share this interpretation. Flood lighting and the optional Shadows mode describe the same geometry. There is no photographed terminator to remove, no separate atmosphere, no invented visible color, and no elevation dataset for this three-axis model.
 
 ## Dataset survey
 

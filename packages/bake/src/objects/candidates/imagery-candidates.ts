@@ -1,4 +1,4 @@
-/** Before wiring or re-registering a photograph lens, find whether a public archive holds finer frames than the body ships
+/** Before wiring or re-registering a photograph dataset, find whether a public archive holds finer frames than the body ships
  * (`packages/bake/cli/imagery-candidates.mts` prints what these find).
  *
  * `--archives` searches the observatory archives OPUS does not index, for bodies seen from the ground or from Earth orbit: ALMA,
@@ -8,8 +8,8 @@
  *
  * One public service, read only: the PDS Rings Node's OPUS, which computes surface geometry for the bodies imaged by Voyager,
  * Galileo, Cassini, New Horizons and the other missions it indexes. For every catalogued body OPUS covers, its finest body-centre
- * resolution among images is set against the finest imagery the body already ships: a photograph lens's finest cast frame, or a
- * natural-colour or monochrome map lens's native scale (their prepared reports).
+ * resolution among images is set against the finest imagery the body already ships: a photograph dataset's finest cast frame, or a
+ * natural-colour or monochrome map dataset's native scale (their prepared reports).
  * The verdict is advisory: finer frames still need a camera, registration and reuse terms before they can ship. */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -57,29 +57,29 @@ export function parseOpusFrames(page: unknown): { available: number; frames: Opu
   return { available: Number(record.available ?? frames.length), frames };
 }
 
-export interface ShippedImagery { readonly lens: string; readonly kind: 'photograph' | 'map'; readonly source: string; readonly meters: number | null }
+export interface ShippedImagery { readonly dataset: string; readonly kind: 'photograph' | 'map'; readonly source: string; readonly meters: number | null }
 
-/** The finest imagery each lens ships, finest first, from the body's prepared surfaces report: a photograph lens's finest cast frame, or a
- * map lens's native scale (its georeference, else its source width at the equator; null when the report states neither). False-colour,
- * scientific and shape lenses are not imagery. */
+/** The finest imagery each dataset ships, finest first, from the body's prepared surfaces report: a photograph dataset's finest cast frame, or a
+ * map dataset's native scale (its georeference, else its source width at the equator; null when the report states neither). False-colour,
+ * scientific and shape datasets are not imagery. */
 export function shippedImagery(surfaces: unknown, radiusKm: number): ShippedImagery[] {
   const result: ShippedImagery[] = [];
-  for (const lens of requireArray(requireRecord(surfaces).surfaces).map(value => requireRecord(value))) {
-    if (lens.falseColor === true || lens.scientific !== undefined || lens.appearance !== undefined) continue;
-    const id = String(lens.id);
-    if (lens.observation !== undefined) {
+  for (const dataset of requireArray(requireRecord(surfaces).surfaces).map(value => requireRecord(value))) {
+    if (dataset.falseColor === true || dataset.scientific !== undefined || dataset.appearance !== undefined) continue;
+    const id = String(dataset.id);
+    if (dataset.observation !== undefined) {
       let finest: ShippedImagery | undefined;
-      for (const frame of requireArray(requireRecord(lens.observation).frames).map(value => requireRecord(value))) {
+      for (const frame of requireArray(requireRecord(dataset.observation).frames).map(value => requireRecord(value))) {
         const meters = Number(requireRecord(frame.footprint ?? {}).nadirMedianMeters);
-        if (meters > 0 && (!finest || meters < (finest.meters ?? Infinity))) finest = { lens: id, kind: 'photograph', source: String(frame.id), meters };
+        if (meters > 0 && (!finest || meters < (finest.meters ?? Infinity))) finest = { dataset: id, kind: 'photograph', source: String(frame.id), meters };
       }
       if (finest) result.push(finest);
       continue;
     }
-    if (lens.source === undefined || lens.projection === undefined) continue;
-    const source = requireRecord(lens.source), resolution = lens.sourceGeoreference === undefined ? undefined : requireRecord(lens.sourceGeoreference).resolution;
+    if (dataset.source === undefined || dataset.projection === undefined) continue;
+    const source = requireRecord(dataset.source), resolution = dataset.sourceGeoreference === undefined ? undefined : requireRecord(dataset.sourceGeoreference).resolution;
     const meters = Array.isArray(resolution) ? Math.abs(Number(resolution[0])) : 2 * Math.PI * radiusKm * 1000 / Number(source.width);
-    result.push({ lens: id, kind: 'map', source: String(source.id), meters: meters > 0 && Number.isFinite(meters) ? meters : null });
+    result.push({ dataset: id, kind: 'map', source: String(source.id), meters: meters > 0 && Number.isFinite(meters) ? meters : null });
   }
   return result.sort((a, b) => (a.meters ?? Infinity) - (b.meters ?? Infinity));
 }

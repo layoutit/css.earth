@@ -19,7 +19,7 @@ const recipes = requireArray(requireRecord(requireRecord(JSON.parse(recipeText))
 const results = [];
 for (const recipe of recipes) {
   const id = requireString(recipe.id), policy = requireRecord(recipe.validity);
-  const entry = entries.find(entry => entry.lensId === id);
+  const entry = entries.find(entry => entry.datasetId === id);
   if (!entry) throw new Error(`Missing source for ${id}.`);
   const path = requireString(entry.path), labelPath = `reference/${basename(path,'.tif')}.lbl`;
   const bytes = await readFile(resolve(root,path)), label = await readFile(resolve(root,labelPath),'utf8');

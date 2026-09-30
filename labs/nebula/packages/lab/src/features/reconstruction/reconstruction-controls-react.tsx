@@ -7,11 +7,11 @@ import { defaultOverlayPlacement, parseCloudAppearance, sameCloudAppearance, typ
 import type { PreparedReconstruction, ReconstructionCandidate, ReconstructionCatalogue, ReconstructionRequest } from './reconstruction-types.ts';
 import { readCloudAppearance, saveCloudAppearance } from './cloud-appearance-store.ts';
 import { CloudAppearanceControls } from './cloud-appearance-controls';
-import { LensLevelsPanel, LevelsIcon, LEVELS_TOOLTIP } from './lens-levels-panel';
+import { DatasetLevelsPanel, LevelsIcon, LEVELS_TOOLTIP } from './dataset-levels-panel';
 import { differenceTool } from './difference-map';
-import { LensRadialPanel, RadialIcon, RADIAL_TOOLTIP } from './lens-radial-panel';
+import { DatasetRadialPanel, RadialIcon, RADIAL_TOOLTIP } from './dataset-radial-panel';
 import type { DifferenceOverlayState } from '../legacy-viewer/difference-plane';
-import { saveLensSettings } from './lens-settings-export.ts';
+import { saveDatasetSettings } from './dataset-settings-export.ts';
 import { ImageCredit } from '../workspace/image-credit';
 import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 import { WorkspaceTools } from '../workspace/workspace-tools';
@@ -44,14 +44,14 @@ interface Props { context: string | null; viewerBusy: boolean;
 interface View { imageId: string; candidates: ReconstructionCandidate[]; selectDisabled: boolean; processDisabled: boolean;
   appearance: CloudAppearance; appearanceDirty: boolean; processing?: ReconstructionProcessingCapability;
   running: boolean; cancelling: boolean; job: Job | null; text: string; error: boolean; credit: string; sourcePageUrl?: string; displayedResultId?: string;
-  /** The displayed result when it is a baked image lens, which is what the levels measurement compares. */
-  lensResultId?: string; }
+  /** The displayed result when it is a baked image dataset, which is what the levels measurement compares. */
+  datasetResultId?: string; }
 const initialView: View = { imageId: 'benchmark', candidates: [], selectDisabled: true, processDisabled: true,
   appearance: parseCloudAppearance(), appearanceDirty: false,
   running: false, cancelling: false, job: null, text: '', error: false, credit: 'Historical photo-based LMC experiment.' };
 export function ReconstructionControls({ context, viewerBusy: busy, onSelect, captureSettings, difference, onDifference }: Props) {
   const [view, setView] = useState<View>(initialView);
-  const [exportLabel, setExportLabel] = useState('Save lens settings');
+  const [exportLabel, setExportLabel] = useState('Save dataset settings');
   const actions = useRef<{ choose?(value: string): void; appearance?(value: CloudAppearance): void; process?(): void; cancel?(): void; export?(): void; busy?(value: boolean): void }>({});
   useEffect(() => {
   let messageText = '', messageError = false;
@@ -75,7 +75,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
       running, cancelling: job?.status === 'cancelling', job, text: messageText, error: messageError,
       credit: row?.credit ?? 'Historical photo-based LMC experiment.', sourcePageUrl: row?.sourcePageUrl,
       displayedResultId: selection.displayedResultId,
-      lensResultId: row?.prepared?.finiteMaterial && row.prepared.resultId === selection.displayedResultId ? row.prepared.resultId : undefined });
+      datasetResultId: row?.prepared?.finiteMaterial && row.prepared.resultId === selection.displayedResultId ? row.prepared.resultId : undefined });
   }
   function stopObserver() { version++; controller?.abort(); controller = null; job = null; }
   async function json(path: string, init: RequestInit = {}, signal = controller?.signal) {
@@ -104,7 +104,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
         appearance = readCloudAppearance(subjectId, selection.imageId, displayedAppearance);
         selection.displayedResultId = prepared?.resultId; saveSelection();
         const skipped = catalogue?.finiteModel?.skipped?.length; // Never present an older fit as the newest one silently.
-        message(`${skipped ? `Older finite model shown · ${skipped} newer lens index rejected. ` : ''}${prepared ? displayedProcessing?.densityPreview === false ? `${displayedProcessing.modelLabel} · offline refit only.` : 'Reconstruction loaded.' : 'Unpainted density reference.'}`, Boolean(skipped));
+        message(`${skipped ? `Older finite model shown · ${skipped} newer dataset index rejected. ` : ''}${prepared ? displayedProcessing?.densityPreview === false ? `${displayedProcessing.modelLabel} · offline refit only.` : 'Reconstruction loaded.' : 'Unpainted density reference.'}`, Boolean(skipped));
       }
     } finally { if (current()) { mounting = false; render(); } }
   }
@@ -182,7 +182,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
   actions.current.export = () => {
     if (!subjectId || loading || mounting || viewerBusy || active(job)) return;
     setExportLabel('Saving…');
-    void saveLensSettings(subjectId, { ...selection }, captureSettings?.()).then(() => setExportLabel('✓ Lens settings saved'), error => { setExportLabel('Save lens settings'); message(error.message, true); });
+    void saveDatasetSettings(subjectId, { ...selection }, captureSettings?.()).then(() => setExportLabel('✓ Dataset settings saved'), error => { setExportLabel('Save dataset settings'); message(error.message, true); });
   };
   actions.current.process = () => {
     if (!previewAllowed()) { message(selectedProcessing(catalogue, candidate())?.reason ?? 'This saved method does not support density Preview.'); return; }
@@ -261,7 +261,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
       disabled={view.selectDisabled} onChange={event => actions.current.choose?.(event.target.value)}>
       <option value="benchmark">Unpainted density</option>
       {view.candidates.map(row => <option key={row.imageId} value={row.imageId} disabled={Boolean(row.unavailable)} title={row.unavailable}>
-        {row.label}{row.unavailable ? ' · no lens' : row.prepared ? ' · saved' : ''}</option>)}
+        {row.label}{row.unavailable ? ' · no dataset' : row.prepared ? ' · saved' : ''}</option>)}
     </select>
     </WorkspaceImagePicker>
     <ImageCredit credit={view.credit} active={context !== null && view.imageId !== 'benchmark' && view.candidates.some(row => row.imageId === view.imageId)} />
@@ -276,14 +276,14 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
       {view.appearanceDirty && !view.running && !view.error && !view.processDisabled ? 'Changes ready · Preview to apply.' : view.text}</p>
     <progress id="reconstruction-progress" aria-label="Reconstruction progress" hidden={!view.running}
       max={total && Number.isFinite(current) ? total : undefined} value={total && Number.isFinite(current) ? current : undefined} />
-    {/* Levels, the difference map and the radial profile need a source image: no tools for the unpainted density or an unbaked lens. */}
-    <WorkspaceTools tools={view.lensResultId ? [{ id: 'levels', label: 'Levels', tooltip: LEVELS_TOOLTIP, icon: <LevelsIcon />,
-      panel: <LensLevelsPanel key={view.lensResultId} resultId={view.lensResultId} /> },
-      ...differenceTool(view.lensResultId, difference, onDifference),
+    {/* Levels, the difference map and the radial profile need a source image: no tools for the unpainted density or an unbaked dataset. */}
+    <WorkspaceTools tools={view.datasetResultId ? [{ id: 'levels', label: 'Levels', tooltip: LEVELS_TOOLTIP, icon: <LevelsIcon />,
+      panel: <DatasetLevelsPanel key={view.datasetResultId} resultId={view.datasetResultId} /> },
+      ...differenceTool(view.datasetResultId, difference, onDifference),
       { id: 'radial', label: 'Radial profile', tooltip: RADIAL_TOOLTIP, icon: <RadialIcon />,
-        panel: <LensRadialPanel key={view.lensResultId} resultId={view.lensResultId} /> }] : []} />
-    <button id="save-lens-settings" type="button" className="text-button" disabled={view.selectDisabled || view.running}
-      title="Save this browser’s lens, filter, brightness and star settings locally for the app handoff. Includes stored settings for all images; does not bake."
+        panel: <DatasetRadialPanel key={view.datasetResultId} resultId={view.datasetResultId} /> }] : []} />
+    <button id="save-dataset-settings" type="button" className="text-button" disabled={view.selectDisabled || view.running}
+      title="Save this browser’s dataset, filter, brightness and star settings locally for the app handoff. Includes stored settings for all images; does not bake."
       onClick={() => actions.current.export?.()}>{exportLabel}</button>
   </section>;
 }

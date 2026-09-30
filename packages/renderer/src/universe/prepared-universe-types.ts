@@ -4,11 +4,11 @@ import type { PreparedPointAppearance } from '../stars/types.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { BackgroundPointBank } from './background-points.js';
-import type { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
+import type { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
-import type { LensBillboards } from './lens-billboards.js';
+import type { DatasetBillboards } from './dataset-billboards.js';
 
 export type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
@@ -34,9 +34,9 @@ export interface PreparedUniverseOptions {
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
   /** Bodies the world draws as plain dots; see `mountPreparedWorldContext`. */
   plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
-  /** Projected size at which any lens bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.
-   * It may only raise the prepared thresholds: a small cloud is decoration, not worth its lens payload. */
-  lensVisibility?: PreparedPointVisibility;
+  /** Projected size at which any dataset bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.
+   * It may only raise the prepared thresholds: a small cloud is decoration, not worth its dataset payload. */
+  datasetVisibility?: PreparedPointVisibility;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
   /** Published stellar extents, radius in metres by object id: each such galaxy's caption hangs under what is drawn of
@@ -51,18 +51,18 @@ export interface PreparedUniverseOptions {
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */
   imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
   loadImageLayer?(id: string): Promise<PreparedImageLayerBank>;
-  /** Volume lens banks are identified and framed from their descriptor alone; their heavy prepared
-   * payload (all lenses, plus catalogue points) is fetched only through {@link loadVolumeLens}, the
+  /** Volume dataset banks are identified and framed from their descriptor alone; their heavy prepared
+   * payload (all datasets, plus catalogue points) is fetched only through {@link loadVolumeDataset}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */
-  volumeLensBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
-  /** Prepared before any lens is fetched: each bank's context visibility and, where it has one, its Sun-facing
-   * billboard in a shared atlas. A small or distant bank draws its billboard; its lenses load only once large. */
-  lensBillboards?: { readonly plan: LensBillboards; readonly atlasUrl: string };
+  volumeDatasetBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
+  /** Prepared before any dataset is fetched: each bank's context visibility and, where it has one, its Sun-facing
+   * billboard in a shared atlas. A small or distant bank draws its billboard; its datasets load only once large. */
+  datasetBillboards?: { readonly plan: DatasetBillboards; readonly atlasUrl: string };
   /** Mount the prepared celestial sky cube. Phones leave it out: its faces cost tens of megabytes of layers. */
   sky?: boolean;
-  loadVolumeLens?(id: string): Promise<Parameters<typeof createPreparedVolumeLenses>[0]>;
+  loadVolumeDataset?(id: string): Promise<Parameters<typeof createPreparedVolumeDatasets>[0]>;
   /** Testable cap for hidden banks with no active navigation subscriber. */
-  warmVolumeLensDomNodeBudget?: number;
+  warmVolumeDatasetDomNodeBudget?: number;
   catalog?: PreparedCatalogBank;
   /** Fade metadata is sufficient to gate the catalogue without fetching or parsing its records. */
   catalogBank?: Omit<PreparedCatalogBank, 'payload' | 'galaxySample' | 'nebulae' | 'clusters'> & {

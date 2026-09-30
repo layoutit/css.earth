@@ -8,7 +8,7 @@ It is the only planet known around TOI-1846. Its orbit and size follow Soubkiou 
 
 **Orbit.** Soubkiou et al. 2025 (2025MNRAS.541.3249S), via the NASA Exoplanet Archive ps table (pl_refname SOUBKIOU_ET_AL_2025): P 3.9306737 d Soubkiou et al. 2025 (2025MNRAS.541.3249S), via the NASA Exoplanet Archive ps table (pl_refname SOUBKIOU_ET_AL_2025): a/R* 19.75; Soubkiou et al. 2025 (2025MNRAS.541.3249S), via the NASA Exoplanet Archive ps table (pl_refname SOUBKIOU_ET_AL_2025): inclination 88.65 degrees No archive row states an eccentricity; the orbit is taken as circular Soubkiou et al. 2025 (2025MNRAS.541.3249S), via the NASA Exoplanet Archive ps table (pl_refname SOUBKIOU_ET_AL_2025): transit mid-time 2459565.95523 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1846's measured colour (#ffc587, the colour lens of toi-1846 (src/objects/toi-1846/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1846's measured colour (#ffc587, the colour dataset of toi-1846 (src/objects/toi-1846/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1846's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

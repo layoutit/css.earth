@@ -48,13 +48,13 @@ Overlaps are scale-free. Read each against the same-shape column, which is what 
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `zimpol` | 63 | 60 | 6.51° | 3.98° | 5.15° | its other 63 frames | 0 of 63 | — | 1 of 63 | — | ×1.26 | conflict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.24](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ### Shape
@@ -63,7 +63,7 @@ The asteroid validation report records the earlier source, preparation and brows
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1635.9 m error; the authored stopping threshold is 1700 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 825.8 m and maximum 2337.6 m.
 
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
+Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
 ## Known problems
 
@@ -73,7 +73,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Eugenia from 33° south to 59° north, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20190803-042450, zimpol-20190803-042850. The level fit finds them 5.14× and 5.54× dimmer than their apparition's first frame, which anchors that apparition's level, and 4.51× and 4.87× dimmer than its median frame; the lens's level budget is 4×. They close the 2019-08-03 series from 04:12 to 04:28, whose other frames stay within the budget, and the figure shows neither.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Eugenia from 33° south to 59° north, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20190803-042450, zimpol-20190803-042850. The level fit finds them 5.14× and 5.54× dimmer than their apparition's first frame, which anchors that apparition's level, and 4.51× and 4.87× dimmer than its median frame; the dataset's level budget is 4×. They close the 2019-08-03 series from 04:12 to 04:28, whose other frames stay within the budget, and the figure shows neither.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
 
@@ -82,7 +82,7 @@ The SPHERE photograph is photographed illumination from the survey's deconvolved
 <details>
 <summary>Selected data</summary>
 
-- [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/45_Eugenia_adam.obj): radius 93.990870 km. The ADAM model is an alternative reconstruction of the same shape. Excluded as a second lens. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
+- [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/45_Eugenia_adam.obj): radius 93.990870 km. The ADAM model is an alternative reconstruction of the same shape. Excluded as a second dataset. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
 
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/45Eugenia/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
 

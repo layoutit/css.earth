@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ds-tuc-a-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "ds-tuc-a-b-surface-{id}{suffix}.webp",
-      "thumbnail": "ds-tuc-a-b-lens-{id}.webp",
+      "thumbnail": "ds-tuc-a-b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffefeb, the colour lens of ds-tuc-a (src/objects/ds-tuc-a/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffefeb, the colour dataset of ds-tuc-a (src/objects/ds-tuc-a/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "ds-tuc-a",
           "srgb": "#ffefeb",
-          "source": "the colour lens of ds-tuc-a (src/objects/ds-tuc-a/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of ds-tuc-a (src/objects/ds-tuc-a/source/photometry/stellar-color.json)"
         }
       }
     }

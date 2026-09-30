@@ -10,13 +10,13 @@ The [navigation marker](source/preparation/navigation.json) adds a prepared curv
 - **Rotation:** unmeasured. The display axis is celestial north in the plane of the sky (`source/preparation/rotation.json`).
 - **The debris ring** is the attached volume [hd-181327-disc](../hd-181327-disc/README.md): six JWST/NIRCam coronagraph images of programme 2780 (Gáspár et al. 2026, [arXiv:2608.27437](https://arxiv.org/abs/2608.27437)) in the reflectance colour of the paper's Figure 1, placed in depth on a disc fitted to them.
 
-Catalogue colour: the swatch that search, the catalogue and the minimap show is this lens's prepared colour, #eeedff.
+Catalogue colour: the swatch that search, the catalogue and the minimap show is this dataset's prepared colour, #eeedff.
 
 ## Evidence
 
 - `tests/objects/unit/hd-181327/source.test.mts`: the manifest verifies; the astronomy record repeats the archived Gaia row; radius and GM are the FLAME values; the colour is (238, 237, 255); the limb law is the Claret (2017) grid at the archived Gaia temperature and gravity.
 - `tests/objects/unit/hd-181327/default-view.test.mts`: the default camera looks at the Earth-facing hemisphere with the display axis up.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`src/objects/object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts)) checks that the catalogue colour #eeedff is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`src/objects/object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts)) checks that the catalogue colour #eeedff is the colour dataset's prepared colour.
 
 ## Known problems
 

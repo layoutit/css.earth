@@ -225,7 +225,7 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
 });
 
 test('a planet takes its colour from what is measured: the emission row with the smallest relative uncertainty, else its host\'s light on the gray', async () => {
-  const { EMISSION_COLUMNS, parseEmissionRows, pickThermalRow } = await import('./planet-lenses.mts');
+  const { EMISSION_COLUMNS, parseEmissionRows, pickThermalRow } = await import('./planet-datasets.mts');
   const { hostLitGray } = await import('@cssearth/bake/objects/color');
   const csv = [EMISSION_COLUMNS,
     'WASP-39 b,0.8,0.4,,,,,,,,,TESS,,"<a refstr=X href=https://ui.adsabs.harvard.edu/abs/2021AJ....162..127W/abstract target=ref>Wong et al. 2021</a>"',
@@ -245,7 +245,7 @@ test('a planet takes its colour from what is measured: the emission row with the
   assert.ok(Math.abs(luminance(red) - luminance([128, 128, 128])) < 0.01, 'at the gray\'s brightness');
 });
 
-test('band photometry in a spec is checked by the lens\'s own parser: three bands red to blue on a shared range from zero', async () => {
+test('band photometry in a spec is checked by the dataset\'s own parser: three bands red to blue on a shared range from zero', async () => {
   const { parsePhotometryEntries } = await import('./spec.mts');
   const photometry = { unit: 'µJy', source: { citation: 'Carter et al. (2023), ApJL 951, L20', url: 'https://arxiv.org/abs/2208.14990', locator: 'Table 3, HIP 65426 b' },
     bands: [{ band: 'F444W', wavelengthMicrometres: 4.4, value: 300, error: 20 }, { band: 'F356W', wavelengthMicrometres: 3.56, value: 250, error: 15 }, { band: 'F300M', wavelengthMicrometres: 3.0, value: 120, error: 10 }],
@@ -257,9 +257,9 @@ test('band photometry in a spec is checked by the lens\'s own parser: three band
   assert.throws(() => parsePhotometryEntries([{ id: 'x', photometry }, { id: 'x', photometry }]), /listed twice/);
 });
 
-test('a generated planet with a measured dayside temperature keeps its thermal lens text; the shape-only text is only for a shape planet', async () => {
+test('a generated planet with a measured dayside temperature keeps its thermal dataset text; the shape-only text is only for a shape planet', async () => {
   const { hostedPackage } = await import('./hosted.mts');
-  const { EMISSION_COLUMNS } = await import('./planet-lenses.mts');
+  const { EMISSION_COLUMNS } = await import('./planet-datasets.mts');
   const emission = [EMISSION_COLUMNS, 'HD 219134 b,4.5,1.0,300,45,-45,0,1400,80,-80,0,Spitzer,IRAC,"<a refstr=Y href=https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract target=ref>Kammer et al. 2018</a>"'].join('\n');
   // The Charts tab's archive spectra (planet-charts.mts): three measured transmission bins and a limit that is left out; no emission bins.
   const { spectrumColumns } = await import('./planet-charts.mts'), cite = '"<a refstr=A href=https://arxiv.org/abs/2110.06729 target=ref>A et al. 2022</a>"';
@@ -282,7 +282,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
     const text = JSON.parse(String(files.get('src/objects/hd-219134b/text.json'))), content = JSON.parse(String(files.get('src/objects/hd-219134b/source/content/object.json')));
     assertWholePackage(files, 'hd-219134b', true);
     const charts = JSON.parse(String(files.get('src/objects/hd-219134b/source/content/charts.json'))) as { charts: Record<string, any>[] };
-    return { datasets: Object.keys(text.datasets), notes: String(content.lenses.controls[0].notes), lens: String(content.lenses.controls[0].id), facts: content.panel.facts as { id: string; value: string }[],
+    return { datasets: Object.keys(text.datasets), notes: String(content.datasets.controls[0].notes), dataset: String(content.datasets.controls[0].id), facts: content.panel.facts as { id: string; value: string }[],
       charts: charts.charts, chartControls: content.charts as { id: string; titleKey: string }[], readme: String(files.get('src/objects/hd-219134b/README.md')),
       spectrum: JSON.parse(String(files.get('src/objects/hd-219134b/source/science/archive-spectra/transmission.json') ?? 'null')) as { measurements: { y: number; minus: number; plus: number }[] } | null };
   };
@@ -294,10 +294,10 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   const axis = glow.charts[1]!.y as { minimum: number; maximum: number };
   assert.ok(axis.minimum <= 1.17 && axis.maximum >= 1.35, 'the axis holds every bar and its error');
   assert.match(glow.readme, /\*\*Charts\.\*\* The orbits of HD 219134's planets from above, from their hosted-orbit records, and its transmission spectrum, 3 bins from A et al\. 2022/u);
-  assert.deepEqual([glow.lens, glow.datasets], ['thermal', ['thermal']]);
+  assert.deepEqual([glow.dataset, glow.datasets], ['thermal', ['thermal']]);
   assert.match(glow.notes, /black body at the dayside brightness temperature/u);
   const shape = await build({});
-  assert.deepEqual([shape.lens, shape.datasets], ['shape', ['shape']]);
+  assert.deepEqual([shape.dataset, shape.datasets], ['shape', ['shape']]);
   assert.match(shape.notes, /the gray marks an unresolved surface/u);
   // Host light adds its sentence to the base note; the scaffold's TODO never survives (a regression #691 introduced).
   assert.doesNotMatch(shape.notes, /TODO/u);
@@ -353,7 +353,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
   const composite = (name: string, mass: number) => `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"${name}",${mass},0,Mass,${ref('One et al. 2019', '2019AJ....1....1O')}`;
-  const { EMISSION_COLUMNS } = await import('./planet-lenses.mts');
+  const { EMISSION_COLUMNS } = await import('./planet-datasets.mts');
   const emission = (name: string) => name === 'HD 1 b' ? `${EMISSION_COLUMNS}\nHD 1 b,4.5,1.0,300,45,-45,0,1400,80,-80,0,Spitzer,IRAC,${ref('Four et al. 2022', '2022AJ....1....4F')}` : `${EMISSION_COLUMNS}\n`;
   const archive: Archive = {
     async text(url) {
@@ -467,11 +467,11 @@ test('a refresh regenerates what the tool wrote and keeps what a person wrote', 
     const o = resolve(dir, 'src/objects/x-b'), put = async (path: string, value: unknown) => { await mkdir(resolve(o, path, '..'), { recursive: true }); await writeFile(resolve(o, path), typeof value === 'string' ? value : JSON.stringify(value)); };
     const spec = { kind: 'planet' as const, id: 'x-b', name: 'X b', description: 'd', paper: { url: 'https://arxiv.org/abs/2110.06729', credit: 'A' }, orbit: { archive: 'nasa-ps' as const }, text: { card: 'X b crosses its star every 3 days.', introduction: drafted.split(' This account')[0]!, locator: 'row' } };
     await put(STORED_SPEC, storedHostedSpec(spec, 'x', 7));
-    await put('source/content/object.json', { lenses: { controls: [{ id: 'shape' }] } });
+    await put('source/content/object.json', { datasets: { controls: [{ id: 'shape' }] } });
     await put('source/manifest.json', { inputs: [{ path: 'photometry/old.csv' }], documents: [] });
     await put('text.json', { card: { text: 'A person\'s card.' }, introduction: { text: spec.text.introduction } });
     await put('README.md', readme(drafted)); await put('investigations.json', { entries: ['a person\'s'] });
-    const files = new Map<string, string>([['src/objects/x-b/source/content/object.json', JSON.stringify({ lenses: { controls: [{ id: 'shape' }] } })],
+    const files = new Map<string, string>([['src/objects/x-b/source/content/object.json', JSON.stringify({ datasets: { controls: [{ id: 'shape' }] } })],
       ['src/objects/x-b/source/manifest.json', JSON.stringify({ inputs: [], documents: [] })], ['src/objects/x-b/text.json', JSON.stringify({ card: { text: 'new card' }, introduction: { text: 'new introduction' } })],
       ['src/objects/x-b/README.md', regenerated], ['src/objects/x-b/investigations.json', '{}']]);
     const { kept, stale } = await mergeRefresh(files, 'x-b', dir);
@@ -485,9 +485,9 @@ test('a refresh regenerates what the tool wrote and keeps what a person wrote', 
     assert.equal(again.has('src/objects/x-b/README.md'), false, "a person's README is not written over");
     assert.equal(files.has('src/objects/x-b/investigations.json'), false, 'the ledger is not written over');
     assert.deepEqual(await refreshSpec(dir, ['x-b']), { stars: [{ host: 'x', planets: [{ ...(({ kind, ...rest }) => rest)(spec), order: 7 }], companions: [] }] });
-    // A person's lens is never dropped.
-    await put('source/content/object.json', { lenses: { controls: [{ id: 'shape' }, { id: 'radial-field-2017' }] } });
-    await assert.rejects(mergeRefresh(files, 'x-b', dir), /lenses the tool does not make \(radial-field-2017\)/u);
+    // A person's dataset is never dropped.
+    await put('source/content/object.json', { datasets: { controls: [{ id: 'shape' }, { id: 'radial-field-2017' }] } });
+    await assert.rejects(mergeRefresh(files, 'x-b', dir), /datasets the tool does not make \(radial-field-2017\)/u);
     await assert.rejects(refreshSpec(dir, ['hand-made']), /not made by new-object/u);
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
@@ -657,7 +657,7 @@ test('an imaged planet\'s K, H and J magnitudes become the band colour, each cit
   assert.equal(photometry.source.url, 'https://ui.adsabs.harvard.edu/abs/2017AJ....154...10R');
   assert.match(photometry.source.citation, /^Rajan et al\. \(2017\), as compiled in Best/u);
   assert.equal(photometry.displayRange[1], Math.max(...photometry.bands.map(band => band.value)));
-  assert.doesNotThrow(() => parsePhotometryEntries(entries), 'the lens\'s own parser accepts the draft');
+  assert.doesNotThrow(() => parsePhotometryEntries(entries), 'the dataset\'s own parser accepts the draft');
   assert.deepEqual(notes.map(note => note.split(':')[0]), ['af-lep-b', 'x']);
   assert.match(notes[0]!, /no MKO K magnitude/u);
 });

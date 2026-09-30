@@ -6,4 +6,4 @@ Shape: a sphere of the model radius in the shared neutral gray; no image or colo
 
 Placement: its star at Gaia DR3 astrometry (see that package's credits).
 
-Illustration lens: NASA's artist's concept map of GJ 504 b from Eyes on Exoplanets, NASA/JPL-Caltech (https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/GJ_504_b.jpg), used unchanged under NASA's media guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/). An artist's concept, not an observation.
+Illustration dataset: NASA's artist's concept map of GJ 504 b from Eyes on Exoplanets, NASA/JPL-Caltech (https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/GJ_504_b.jpg), used unchanged under NASA's media guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/). An artist's concept, not an observation.

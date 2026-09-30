@@ -15,14 +15,14 @@ source notes, credits, test reports and where to save them. Its
 [standards mapping](../../docs/provenance/CONTRACT.md#standards-basis) combines
 PDS4 1.26.0 provenance guidance with ISO 24495-1:2023 plain-language principles,
 using the existing files.
-For a telescope-derived view, start with the [telescope command guide](../../packages/telescope-cli/README.md#using-a-result-in-a-body-scene). Its qualified delivery and standalone sphere export do not automatically create a normal scene lens.
+For a telescope-derived view, start with the [telescope command guide](../../packages/telescope-cli/README.md#using-a-result-in-a-body-scene). Its qualified delivery and standalone sphere export do not automatically create a normal scene dataset.
 
 ## Package layout
 
 ```text
 src/objects/<id>/
   README.md                    sources, processing, evidence and known problems
-  investigations.json          every examined source, route, lens and frame, with its decision
+  investigations.json          every examined source, route, dataset and frame, with its decision
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  catalogue entry, recipe and prepared transport reference
   text.json                    card line, introduction and dataset text, with their sources
@@ -31,7 +31,6 @@ src/objects/<id>/
   source/content/              body-owned facts, dataset recipes and controls
   source/                      original inputs, labels and necessary source notes
   prepared/                    generated content, geometry and lineage records
-  prepared/page.json           generated page assets and controls
   inventory.json               generated inventory of the baked files (public textures and prepared/*)
 
 public/scenes/<id>/             installed/generated serving assets

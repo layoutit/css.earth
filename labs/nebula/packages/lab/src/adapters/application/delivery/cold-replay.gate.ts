@@ -1,7 +1,7 @@
 import { nebulaBakeBackend } from '@cssearth/bake/nebula';
 /** Explicit expensive gate (not default unit-test discovery):
  * node labs/nebula/packages/lab/src/adapters/application/delivery/run-cold-replay.mts --timeout-seconds 1800
- * Optional --objects m42,helix,m45,m8,m1 selects a bounded subset; every selected object's lenses run.
+ * Optional --objects m42,helix,m45,m8,m1 selects a bounded subset; every selected object's datasets run.
  * Each child has a hard deadline, isolated cwd/root, and only declared compact inputs/profile.
  */
 import assert from 'node:assert/strict';
@@ -41,19 +41,19 @@ async function worker(id: string, source: string): Promise<void> {
   const model = record(value), expected = readCompilerBakeResult(model.scene);
   if (expected.starSprites) await copy(expected.starSprites.profile.path);
   if (id === 'm1') {
-    assert.ok(Array.isArray(model.lenses));
-    for (const item of [model.particles, ...model.lenses.map(lens => record(lens).points)]) {
+    assert.ok(Array.isArray(model.datasets));
+    for (const item of [model.particles, ...model.datasets.map(dataset => record(dataset).points)]) {
       await copy(pin(item).path);
     }
   } else assert.equal(readCompactCompiler(value).objectId, id);
-  console.log(`START ${id}: ${expected.lenses.length} lenses; isolated compact inputs ready`);
+  console.log(`START ${id}: ${expected.datasets.length} datasets; isolated compact inputs ready`);
   const inputPin = { path };
   const result = id === 'm1'
     ? await replayCompactSampled(root, inputPin, 'prepared', nebulaBakeBackend)
     : await replayCompactCompiler(root, inputPin, 'prepared', nebulaBakeBackend);
   assertReplayScene(result.scene, expected);
   const resources = await verifyReplayFiles(root, result.scene);
-  console.log(`PASS ${id}: ${expected.lenses.length} lenses, ${resources} resources; field/stars/frame/bytes unchanged`);
+  console.log(`PASS ${id}: ${expected.datasets.length} datasets, ${resources} resources; field/stars/frame/bytes unchanged`);
 }
 async function main(): Promise<void> {
   const args = process.argv.slice(2);

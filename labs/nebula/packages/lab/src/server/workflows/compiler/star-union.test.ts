@@ -39,7 +39,7 @@ test('registered union adds a real infrared-only star, retains the optical ancho
   assert.equal(all.selection.detectionCounts.optical, 2); assert.equal(all.selection.detectionCounts.infrared, 2);
   assert.equal(all.selection.mergedCandidates, 3); assert.equal(all.stars.length, 3);
   const shared = all.stars.find(star => star.id === 'optical-0')!, observed = baseline.find(star => star.id === shared.id)!;
-  assert.deepEqual(shared.positionArcsec, observed.positionArcsec, 'Cross-lens matching must retain measured anchor XY and conditional depth.');
+  assert.deepEqual(shared.positionArcsec, observed.positionArcsec, 'Cross-dataset matching must retain measured anchor XY and conditional depth.');
   assert.deepEqual(all.selection.selected.find(star => star.id === shared.id)!.detectedIn, ['optical', 'infrared']);
   const selected = await compilerUnionStars(reference, model, 2, [reference, ir], configuration);
   assert.equal(selected.stars.length, 2);
@@ -50,7 +50,7 @@ test('registered union adds a real infrared-only star, retains the optical ancho
   assert.deepEqual(irOnly, all.stars.find(star => star.id === irOnly.id), 'Budgeting cannot move, resize or recolor the observation.');
 });
 
-test('source exposure normalization changes selection scores only and preserves actual per-lens measured light', async () => {
+test('source exposure normalization changes selection scores only and preserves actual per-dataset measured light', async () => {
   const reference = optical(), low = infrared(), high = infrared(2);
   const a = await compilerUnionStars(reference, model, 2, [reference, low], configuration);
   const b = await compilerUnionStars(reference, model, 2, [reference, high], configuration);

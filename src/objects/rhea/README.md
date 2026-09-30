@@ -90,7 +90,7 @@ differences include real surface alteration and E-ring dust. Photographed shadow
 and coarse inserts remain; no inpainting, color synthesis or shadow-removal correction is
 applied.
 
-Shared curvature lighting and optional Shadows remain available on every lens.
+Shared curvature lighting and optional Shadows remain available on every dataset.
 
 Independent landmarks: [Tirawa](https://planetarynames.wr.usgs.gov/Feature/6026), 34.2° N,
 151.7° W (208.3° E), and [Inktomi](https://planetarynames.wr.usgs.gov/Feature/14671), 14.1° S,
@@ -143,7 +143,7 @@ its values; it is neither geometric albedo nor calibrated reflectance.
 Rhea used calibrated ISS frames. Source sigma is internal maplet agreement, not absolute height
 uncertainty.
 
-The Shape lens uses the shared neutral gray over the source mesh to distinguish geometry from
+The Shape dataset uses the shared neutral gray over the source mesh to distinguish geometry from
 imagery. The Photographic views retain pre-existing image seams, shadows and local control
 differences. Source reference radii and projections do not become spherical geometry
 constraints.
@@ -213,4 +213,4 @@ and test results are linked in [Evidence](#evidence).
 
 Photographic normal/enhanced and elevation/albedo display atlases use quarter dimensions. Infrared and ice-absorption scales retain their existing values. The closed mesh culls its back faces.
 
-This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. Device evidence records the published bytes, decoded size estimates, trace results and remaining stalls.

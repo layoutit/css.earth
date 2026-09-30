@@ -44,13 +44,13 @@ Feature notes: 3 of the labelled names carry a caption note, the lead summary of
 
 ## Mars Express and Trek layers reviewed
 
-We checked the Phobos layers that [NASA Phobos Trek](https://trek.nasa.gov/phobos/) offers from Mars Express work, and traced each to its producer, on 2026-09-27 and 2026-09-28. Only the crater catalogue became a lens. The [investigation ledger](investigations.json) keeps each decision and what would reopen it.
+We checked the Phobos layers that [NASA Phobos Trek](https://trek.nasa.gov/phobos/) offers from Mars Express work, and traced each to its producer, on 2026-09-27 and 2026-09-28. Only the crater catalogue became a dataset. The [investigation ledger](investigations.json) keeps each decision and what would reopen it.
 
 - **HRSC 100 m DEM** ([Willner et al. 2010](https://doi.org/10.1016/j.epsl.2009.07.033); USGS GeoTIFF and the 2016 PDS release MEX-MSA-HRSC-5-REFDR-PHOBOS-MAPS-V1.0). Its label calls the values “Height above Spheroid” on the 11.1 km sphere: the quantity Elevation already shows. Sampled in the app's frame, HRSC minus SPC height has mean −15 m and RMS 284 m (r = 0.975); the difference is a smooth two-hemisphere pattern of about ±0.5 km, not new terrain. The HRSC atlas's dynamic heights exist only as contours on map sheets.
 - **MExLab SRC and Viking DEM** ([Karachevtseva et al. 2014](https://doi.org/10.1016/j.pss.2013.12.015)). Trek's copy is a 1° grid of height above the 11.08 km sphere (RMS 340 m against SPC). Same quantity, coarser.
 - **Roughness, 1 km baseline** (both the MExLab and the HRSC versions). Trek credits them to JPL and states no formula or unit. The values are signed and follow the DEM minus its local mean (r = 0.93 for both), so they show local relief from an older DEM.
 - **HRSC V/NIR spectral index.** The only public copy is a colour picture with seven legend classes and an unexplained white class. The producer's PDS release holds four regional colour image sets, not an index grid.
-- **PH9224GT crater catalogue.** Added as the Crater catalogue lens (above). Trek's crater count and abundance maps are binnings of the same catalogue and were not added.
+- **PH9224GT crater catalogue.** Added as the Crater catalogue dataset (above). Trek's crater count and abundance maps are binnings of the same catalogue and were not added.
 
 [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
@@ -83,7 +83,7 @@ Every one of the 196,608 source table rows is registered to its source triangle.
 
 The full source mesh now supplies a 1,600-face native triangle presentation. The authored transfer limit is 250 m.
 
-The facet-science flat preview is explicitly 640 × 320, with nearest, lossless packing for its minimap and temporary projective textures. It makes 204,800 unique-ray queries per lens; ambiguous radial intersections remain missing. This is a display-preview resolution, not a new scientific grid. The complete 196,608-row source tables, native triangle atlas dimensions and original-row atlas indices are unchanged. Native material colors still query the full source surface directly and never sample this reduced flat preview.
+The facet-science flat preview is explicitly 640 × 320, with nearest, lossless packing for its minimap and temporary projective textures. It makes 204,800 unique-ray queries per dataset; ambiguous radial intersections remain missing. This is a display-preview resolution, not a new scientific grid. The complete 196,608-row source tables, native triangle atlas dimensions and original-row atlas indices are unchanged. Native material colors still query the full source surface directly and never sample this reduced flat preview.
 
 </details>
 

@@ -120,7 +120,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `rotation-axis` | 5 | antares, ce-tauri, pi1-gruis, polaris, r-doradus | A measured position angle of the rotation axis is published. |
 | `damit-catalogue` | 4 | eurybates, orus, patroclus, polymele | A future DAMIT export lists Eurybates, or another release provides a numerical model with documented frame, scale and terms. |
 | `dem-geology-composition-maps` | 4 | bianca, cressida, desdemona, rosalind | A Bianca source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs. |
-| `jwst-hst-system-images` | 4 | bianca, cressida, desdemona, rosalind | A spatially resolved Bianca measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
+| `jwst-hst-system-images` | 4 | bianca, cressida, desdemona, rosalind | A spatially resolved Bianca measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
 | `published-nucleus-size` | 4 | comet-153p, comet-c1956-r1, comet-c2006-p1, comet-c2020-f3 | A published nucleus radius (photometric, thermal or radar) would replace the assumed display radius. |
 | `shape-solution-2` | 4 | badenia, brucia, dike, proserpina | A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model. |
 | `surface-imagery-10` | 4 | hela, kemi, lyyli, taurinensis | A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched. |
@@ -134,7 +134,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `recorded-survey-5` | 3 | ida, gaspra, lutetia | A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion. |
 | `recorded-survey-6` | 3 | ida, vesta, gaspra | New source evidence resolves the specific limitation recorded here; reuse the pinned prior finding rather than repeat the unchanged survey. |
 | `scientific-registration` | 3 | m31, m33, smc | A qualification task supplies the original metadata or paper fields and an independent registration comparison for these exact inputs. |
-| `sphere-photograph-lens` | 3 | daphne, elektra, eugenia | A registration reference that places these frames within three degrees: a map, resolved markings, or a rotation record and mesh that the silhouette confirms. |
+| `sphere-photograph-dataset` | 3 | daphne, elektra, eugenia | A registration reference that places these frames within three degrees: a map, resolved markings, or a rotation record and mesh that the silhouette confirms. |
 | `spin-axis` | 3 | wasp-121, wasp-18, wasp-76 | The orbit's orientation on the sky is measured, for example by astrometry or interferometry of the planet. |
 | `surface-imagery-11` | 3 | cerberus, ivar, toro | A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched. |
 | `alternative-model-1` | 2 | comet-137p, comet-162p | New observations distinguish this alternative, or a comparison consistently uses its own axis definition and scale. |
@@ -144,7 +144,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `dated-test-run` | 2 | jupiter, saturn | A dated test or browser run for this Jupiter version is recorded in the package. |
 | `display-orientation` | 2 | deedee, makemake | A measured pole or rotation period for 2014 UZ224 is published. |
 | `filter-feature-refinement` | 2 | calypso, telesto | Independent interior controls can qualify a refinement without weakening the existing criteria or replacing the published frame. |
-| `lorri-lens` | 2 | hydra, nix | A meaningfully different view confirms the registration with interior holdouts and the mesh-to-kernel frame binding is verified. |
+| `lorri-dataset` | 2 | hydra, nix | A meaningfully different view confirms the registration with interior holdouts and the mesh-to-kernel frame binding is verified. |
 | `mvic-leisa-composition` | 2 | hydra, nix | A target-specific composition product has interpretable calibration, coordinates and qualified transfer onto this source mesh. |
 | `north-south-degeneracy` | 2 | hd-189733b, wasp-43b | The orbit's sky orientation is measured. |
 | `optical-scientific-surfaces` | 2 | sn263-beta, sn263-gamma | A component-specific observation, registered scientific map or qualified spin solution is located. |
@@ -154,7 +154,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `porter-2025-release` | 2 | hydra, nix | The numerical model, albedo or camera release is located with its coordinate and version bindings. |
 | `recorded-survey-7` | 2 | lutetia, mathilde | A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion. |
 | `second-apparition-levels` | 2 | iris, pallas | The frames are placed on a common photometric scale, by the producers or by a documented per-frame normalisation, or a released frame is found that shares surface with both apparitions within the level fit's angle limit. |
-| `spectral-route` | 2 | ymir, siarnaq | A released interpretable spectrum can support a chart; a registered spatial product would be needed for a surface lens. |
+| `spectral-route` | 2 | ymir, siarnaq | A released interpretable spectrum can support a chart; a registered spatial product would be needed for a surface dataset. |
 | `sphere-cross-frame-registration` | 2 | nemesis, victoria | A registration reference independent of this body's outline: a spacecraft map, or frames resolving surface markings. |
 | `spin-direction` | 2 | iota-horologii, luhman-16b | Interferometry or another method measures the axis's position angle. |
 | `synchronous-rotation` | 2 | hd-189733b, wasp-43b | A rotation period of HD 189733b is measured. |
@@ -174,15 +174,15 @@ The source each decision examined. Watching these is how a decision reopens.
 | `belton-1991-tables` | 1 | comet-1p | The original tables can be checked against the selected model version and public compilation. |
 | `binary-planet-candidate` | 1 | eps-indi-ab | Follow-up imaging confirms or rules out a companion of the planet. |
 | `ca06-stack-normal-reflectance` | 1 | arrokoth | A controlled registration of the normalized stack to the Porter 2024 mesh is performed. |
-| `carbon-oxide-spectroscopy` | 1 | umbriel | A spatially resolved Umbriel measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
+| `carbon-oxide-spectroscopy` | 1 | umbriel | A spatially resolved Umbriel measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
 | `cassini-2010-2015-registration` | 1 | aegaeon | The producer's navigated image centre/attitude or an independently checked camera registration becomes available for the identified 2010 disc; validate interior placement on the fixed ellipsoid before preparation. Do not repeat the existence or longitude checks as if they were unresolved source retrieval. |
 | `cassini-2017-southern-color-insufficient-controls` | 1 | epimetheus | Independent control points qualify these frames without weakening the registration criteria. |
 | `cassini-iss-approach-mosaic` | 1 | phoebe | A published Phoebe photometric model valid near 90 degrees phase normalizes the overlaps within the level-matching budget. |
-| `cassini-n1355869401` | 1 | himalia | A registered mapped release supports a defined lens. |
+| `cassini-n1355869401` | 1 | himalia | A registered mapped release supports a defined dataset. |
 | `category-3-tail-extent` | 1 | heliosphere | Observations establish the heliopause tail extent or its closure. |
 | `category-4-values` | 1 | heliosphere | A revised IBEX analysis replaces the manually constrained values. |
 | `cfht-optical` | 1 | helix | Obtain a usable native image with terms and WCS, then verify broader useful coverage and independent stellar registration. |
-| `change-2-figure-lens` | 1 | toutatis | Measured cameras or surface control points for this mesh, with disjoint holdouts, become available. |
+| `change-2-figure-dataset` | 1 | toutatis | Measured cameras or surface control points for this mesh, with disjoint holdouts, become available. |
 | `change-2-release` | 1 | toutatis | A restorable calibrated image set or fused mesh with its source-frame registration is released. |
 | `chapman-1995-body-frame` | 1 | dactyl | Published observation geometry or a distributed control solution binds the selected axes to the encounter camera without an assumed pole or spin phase. |
 | `chatzifrantzis-optical` | 1 | helix | Acquire permission and a suitable native unwatermarked source, then qualify astrometry and full footprint. |
@@ -191,7 +191,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `circumstellar-disc` | 1 | gq-lup | A disc package is scoped for this system. |
 | `close-zoom-missing-tiles` | 1 | earth | The cause of the missing close-zoom tiles is found, or the behaviour stops reproducing. |
 | `closeup-reproduction-at-current-main` | 1 | comet-9p | The replay discrepancy is traced to its source, camera or software input and both partitions meet the existing budget. |
-| `cloud-imagery` | 1 | venus | A published global UV cloud mosaic with grid metadata and a permissive licence, or a stated method for compositing Akatsuki L3b exposures that names what it does with cloud motion between them, would let the default cloud lens stop being an illustration. |
+| `cloud-imagery` | 1 | venus | A published global UV cloud mosaic with grid metadata and a permissive licence, or a stated method for compositing Akatsuki L3b exposures that names what it does with cloud motion between them, would let the default cloud dataset stop being an illustration. |
 | `colour-hue-uncertainty` | 1 | luhman-16 | A resolved optical spectrum with higher signal below 650 nm is published. |
 | `companion-wasp-76-b` | 1 | wasp-76 | An orbit or a separate object package for the companion is wanted. |
 | `component-radii` | 1 | vhs-1256-1257 | A radius of either component is measured. |
@@ -207,7 +207,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `coverage-gaps` | 1 | pluto | A global product with complete Pluto coverage, or a validity mask for these maps, is released. |
 | `crifo-2002-harmonic-shape` | 1 | comet-1p | The original numerical shape and frame are recovered and tested against held-out imagery with their stated uncertainty. |
 | `d-g-e-ring-profiles` | 1 | saturn | A dataset resolves complete D, G and E ring profiles. |
-| `daily-viirs-imagery` | 1 | earth | A daily or composite VIIRS product provides gap-free global coverage suitable for the surface lens. |
+| `daily-viirs-imagery` | 1 | earth | A daily or composite VIIRS product provides gap-free global coverage suitable for the surface dataset. |
 | `dark-red-spot-colour-variation` | 1 | haumea | A published surface map or rotationally resolved colour model fixes the region's extent and contrast in a body-fixed frame. |
 | `dated-marci-weather` | 1 | mars | A matched dated pair is chosen and prepared with its archive coverage. |
 | `dated-report` | 1 | pluto | A dated run for this Pluto version is recorded in the package. |
@@ -255,10 +255,10 @@ The source each decision examined. Watching these is how a decision reopens.
 | `high-latitude-interpolation` | 1 | heliosphere | A release supplies measured high-latitude heliopause distances instead of interpolated ones. |
 | `hri-2005-and-spc` | 1 | comet-9p | The original image, camera and matching SPC mesh can be restored together and independently registered. |
 | `hri-25-iterations` | 1 | comet-103p | A matched comparison shows a useful reduction in restoration artifacts without losing required surface detail. |
-| `hst-astrometry-and-size-study` | 1 | thalassa | A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
-| `hst-photometry-and-keck-near-infrared-photometry` | 1 | juliet | A spatially resolved Juliet measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
-| `hst-photometry-ground-based-near-infrared-studies-an` | 1 | cordelia | A spatially resolved Cordelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
-| `hst-photometry-recovery-and-observer-account` | 1 | ophelia | A spatially resolved Ophelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
+| `hst-astrometry-and-size-study` | 1 | thalassa | A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
+| `hst-photometry-and-keck-near-infrared-photometry` | 1 | juliet | A spatially resolved Juliet measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
+| `hst-photometry-ground-based-near-infrared-studies-an` | 1 | cordelia | A spatially resolved Cordelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
+| `hst-photometry-recovery-and-observer-account` | 1 | ophelia | A spatially resolved Ophelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
 | `hst-registration-companion` | 1 | omega-centauri | Independent absolute astrometry is required beyond the existing relative native-image registration. |
 | `hubble-companion-follow-up` | 1 | deedee | A published companion detection or resolved shape product changes the system interpretation. |
 | `image-to-shape-feature-registration` | 1 | comet-1p | Independent surface features with a verified model frame validate the photographic placement within stated source uncertainty. |
@@ -275,15 +275,15 @@ The source each decision examined. Watching these is how a decision reopens.
 | `jiram-orbits-51-to-60` | 1 | io | Additional sequences pass the existing registration and three-frame overlap checks, or a supported partial-disc registration method qualifies the 57/58 trials; revisit 59/60 when archive products are available. |
 | `jpl-map-search` | 1 | nereid | A linked Nereid map or shape release provides downloadable data with coordinates, quantity and coverage for inspection. |
 | `jpl-texture-catalog-pds-shape-releases-and-usgs-mapp` | 1 | juliet | The inspected shape archive or a cited primary release publishes a Juliet-specific numerical model with its frame, units and reconstruction method. |
-| `juno-and-mapped-products` | 1 | amalthea | A cited release supplies resolved Amalthea measurements with sufficient body-fixed coverage for a distinct lens. |
+| `juno-and-mapped-products` | 1 | amalthea | A cited release supplies resolved Amalthea measurements with sufficient body-fixed coverage for a distinct dataset. |
 | `juno-sru-pia26751` | 1 | thebe | A source release supplies camera geometry, calibration and a registered product for this observation. |
 | `juno-uvs-oxygen-emission-maps` | 1 | ganymede | Reconsider only for a scientifically supported observation view that preserves the atmospheric and reflected-light distinction; this is not a candidate for literal surface chemistry under the current fixed-scene scope. |
 | `jwst-bockelee-morvan-2024-surface-composition` | 1 | ganymede | Inspect the paper's data-availability route and retrieve the numerical map or reproducible source closure before selecting a surface quantity. |
 | `jwst-eclipses-not-used` | 1 | hd-189733b | A reduction of these visits from raw, or a published map that uses them. |
 | `jwst-followup` | 1 | dysnomia | Dysnomia-resolved spectra or fluxes are extracted from these programmes, or a published analysis of them appears. |
 | `jwst-holdings` | 1 | wd-1856-534b | A published phase curve or emission spectrum from programme 9033 or 9157 gives a day-night or colour measurement. |
-| `jwst-hst-atmosphere` | 1 | hd-209458b | When a transmission or emission spectrum is reduced here and a lens that draws it is designed. |
-| `jwst-inner-moon-spectroscopy` | 1 | thalassa | A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
+| `jwst-hst-atmosphere` | 1 | hd-209458b | When a transmission or emission spectrum is reduced here and a dataset that draws it is designed. |
+| `jwst-inner-moon-spectroscopy` | 1 | thalassa | A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
 | `jwst-nircam-system-image` | 1 | hd-29391 | The reduced image is deposited, the reduction script is published, or a larger reference library (other HD 30562 observations) reproduces the paper’s 4.7 sigma detection. |
 | `jwst-niriss-phase-curve` | 1 | kelt-9b | The program's data become public or its paper publishes a map. |
 | `jwst-nirspec-phase-curve` | 1 | wasp-76b | Its paper publishes a map, or the user asks for our own reduction. |
@@ -291,7 +291,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `jwst-protopapa-2024-carbon-dioxide-peroxide` | 1 | charon | A release provides spatially resolved measurements with body-coordinate registration, or a separately authorized non-spatial spectroscopy view makes the existing disk-integrated measurements useful. |
 | `jwst-rotational-maps` | 1 | luhman-16b | The maps are released. |
 | `karkoschka-2003-additional-despina-images-c1129447-c` | 1 | despina | A Despina observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits. |
-| `keck-spectral-photometry` | 1 | belinda | A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
+| `keck-spectral-photometry` | 1 | belinda | A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
 | `king-2022-sphere-composition` | 1 | europa | Reopen if the authors or archive publish explicit numerical-data reuse terms or a replacement release. Preserve the exact ratio wavelengths, component-specific uncertainty and no-data; do not manufacture an aggregate ice posterior. |
 | `king-fletcher-2022-sphere-composition` | 1 | ganymede | Reopen if the authors or archive publish explicit numerical-data reuse terms, corrected fit metadata, or a replacement release. Keep posterior bounds and no-data; do not present individual salts as identified deposits. |
 | `ksanfomality-2017-processed-giotto` | 1 | comet-1p | A reproducible Halley input and processing record, usable raster and reuse terms, and independent surface registration establish the added information. |
@@ -303,7 +303,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `leisa-registration` | 1 | pluto | The release or a successor publishes coordinate metadata for the LEISA maps. |
 | `liciacube-texture` | 1 | dimorphos | A specific LICIACube image has documented camera-to-shape registration, usable coverage and calibrated interpretation. |
 | `limb-halo` | 1 | earth | The public PSG API accepts calls again, or the local container returns a limb radiance that changes with altitude. |
-| `limb-only-registration` | 1 | dinkinesh | New independent terrain/frame evidence. An outline fit alone cannot reopen the photographic lens. |
+| `limb-only-registration` | 1 | dinkinesh | New independent terrain/frame evidence. An outline fit alone cannot reopen the photographic dataset. |
 | `limb-registration-limit` | 1 | puck | A Puck camera or surface-control record permits independent interior holdouts beyond the fitted limb centre. |
 | `line-of-sight-separation` | 1 | hd-189733-companion | An orbit or precise relative parallax of the pair is published. |
 | `llorri-photography` | 1 | selam | A Selam-specific source geometry/frame and matched camera solution support independent interior surface checks. |
@@ -381,7 +381,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `pds-voyager-iss-products` | 1 | cordelia | A Cordelia observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits. |
 | `pds-xml-and-spin` | 1 | squannit | The native labels and spin table are retrieved and reconciled with the selected author OBJ and attitude conventions. |
 | `pending-limb-fit` | 1 | chiron | The separate limb-fit paper appears, or the Lucky Star collaboration releases the chord solution. |
-| `per-lens-opacity` | 1 | lmc | The lens contract admits a per-lens opacity scale, or a re-acquired AllWISE composite with a real stretch is registered. |
+| `per-dataset-opacity` | 1 | lmc | The dataset contract admits a per-dataset opacity scale, or a re-acquired AllWISE composite with a real stretch is registered. |
 | `perry-daylight-distant-background` | 1 | io | An independently checked reflected-sunlight removal or background estimator qualifies the excluded observations without saturation or reflection artifacts. |
 | `ph9224gt-crater-catalogue` | 1 | phobos | The shared feature lane supports a point catalogue of craters with radii beyond Gazetteer nomenclature. |
 | `photographic-registration` | 1 | larissa | A Larissa camera or surface-control release supports independent interior holdouts from a different viewing geometry. |
@@ -400,7 +400,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `pole-and-period-metadata` | 1 | arrokoth | The archive metadata is corrected, or a publication settles the pole and rotation period. |
 | `pole-inclination` | 1 | betelgeuse | A published inclination with a stated method. |
 | `post-impact-mri` | 1 | comet-9p | A specific frame has a supported nucleus-only footprint and independently checked camera registration. |
-| `programme-4758-second-visit` | 1 | beta-pictoris-disc | The disc lens needs lower noise at its outer edge. |
+| `programme-4758-second-visit` | 1 | beta-pictoris-disc | The disc dataset needs lower noise at its outer edge. |
 | `projected-power-spectrum` | 1 | m45 | Qualify matching spatial frequencies, beam/noise treatment and tracer association before a projected-statistic comparison. |
 | `radar-unseen-facets` | 1 | asteroid-2001-sn263 | The existing scientific-data preparation qualifies this source facet list as a distinct coverage view while preserving its angular threshold and facet correspondence. |
 | `radial-ring-colour` | 1 | saturn | A radius-indexed ring colour or reflectance profile is released. |
@@ -422,7 +422,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `sbib-regional-rgb` | 1 | phoebe | Source-specific registration with independent controls qualifies the candidate. |
 | `sbmt-camera-route` | 1 | comet-9p | A public or already-authorized Tempel image, pointing and exact model bundle is available for qualification. |
 | `sbmt-dinkinesh-data` | 1 | dinkinesh | A public release or authorized accessible SBMT dataset with its mesh and image geometry. |
-| `sbmt-native-preparation-oracle` | 1 | itokawa | Before using this SUM/UV route in a photographic lens, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs. |
+| `sbmt-native-preparation-oracle` | 1 | itokawa | Before using this SUM/UV route in a photographic dataset, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs. |
 | `schleicher-2015-lightcurve` | 1 | comet-1p | A released orientation solution or an independently checked fit uses these lightcurves to establish the exact model phase and observation cameras. |
 | `scientific-review` | 1 | sun | A dated scientific review of the prepared solar maps is recorded in this package. |
 | `search-completeness` | 1 | smc | A systematic archive sweep for SMC imagery and distance tracers is run and recorded. |
@@ -444,7 +444,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `spiderman-offset-slot` | 1 | wasp-76b | SPIDERMAN's authors or May et al. state how the parameter was applied. |
 | `spin-pole` | 1 | chiron | A published spin-pole solution from light-curve inversion, a measured limb fit or a shape model supplies a body pole independent of the ring plane. |
 | `spin-pole-registration` | 1 | eris | A published pole solution or longitude system for Eris allows the displayed orientation to be registered. |
-| `spitzer-3-6um` | 1 | wasp-76b | A second lens per planet is wanted. |
+| `spitzer-3-6um` | 1 | wasp-76b | A second dataset per planet is wanted. |
 | `spot-rotation` | 1 | hd-189733 | A published multi-epoch spot track or a source-backed surface-coordinate and evolution model is available for HD 189733 A. |
 | `spotless-disc-test` | 1 | r-doradus | CASA is taken up in this repository, or the measurement set becomes available in a form that does not need it. |
 | `spotless-twin-size` | 1 | betelgeuse | A reconstruction of these or more data (the public 25 February 2020 night, another recipe or another code) whose spotless twins stay clean across ±2 percent in size, or a published spotless-disc test of the MATISSE images. |
@@ -467,7 +467,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `szego-2001-rotation-model` | 1 | comet-1p | The primary full text and numerical model can be read and matched to the observation and shape frames. |
 | `tempest-companion-geometry` | 1 | dinkinesh | A changed public release, linked numeric mesh, camera table or epoch-bound frame declaration matching the selected STL. |
 | `tes-bandfield-2002-mineral-abundances` | 1 | mars | The paper’s masking rule for zero cells is read and recorded (the shared VICAR REAL reader now exists). |
-| `tess-phase-curve` | 1 | kelt-9b | A second lens per planet is wanted, or TESS becomes the only band for either planet. |
+| `tess-phase-curve` | 1 | kelt-9b | A second dataset per planet is wanted, or TESS becomes the only band for either planet. |
 | `themis-coverage-fill` | 1 | mars | A validity mask accompanies the mosaic, or a gap-free day-IR product is released. |
 | `theresa-rerun-hotspot-latitude` | 1 | wasp-43b | The authors' 2024 code or a map fitted with the rotation axis on the orbit normal is published, or new eclipse data constrain the latitude. |
 | `thermal-and-mineral-spectra` | 1 | phobos | A registered mapped product with documented quantity, frame and coverage becomes available. |
@@ -484,9 +484,9 @@ The source each decision examined. Watching these is how a decision reopens.
 | `updated-shape-survey` | 1 | methone | A released full study or body-specific local-elevation product can be assessed. |
 | `usama-widefield` | 1 | m45 | Pass the unchanged independent registration gate over a useful spatial hull and inspect source/processing quality before adding a derivative. |
 | `usgs-lpi-mapped-products` | 1 | galatea | A Galatea source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs. |
-| `usgs-mapping-and-published-photometry` | 1 | naiad | A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
+| `usgs-mapping-and-published-photometry` | 1 | naiad | A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
 | `usgs-mapping-pds-shape-releases-jpl-texture-catalog` | 1 | ophelia | The inspected shape archive or a cited primary release publishes a Ophelia-specific numerical model with its frame, units and reconstruction method. |
-| `usgs-pds-mapped-products-elevation-geology-and-spect` | 1 | portia | A spatially resolved Portia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens. |
+| `usgs-pds-mapped-products-elevation-geology-and-spect` | 1 | portia | A spatially resolved Portia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset. |
 | `usgs-pds-mapping-colour-composition-and-altimetry-se` | 1 | larissa | A Larissa source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs. |
 | `usgs-photo-control` | 1 | dactyl | An independently bound camera solution can predict the named centers, or additional distributed source controls permit disjoint fitting and validation. |
 | `uvs-auroral-grids` | 1 | jupiter | A dated polar grid with units, geometry and an appropriate rendering interpretation is qualified. |
@@ -543,7 +543,7 @@ deposit or paper it was checked against, or record that its next move is work he
 | `display-orientation` | 2 | deedee, makemake |
 | `filter-feature-refinement` | 2 | calypso, telesto |
 | `limb-law` | 2 | eris, makemake |
-| `lorri-lens` | 2 | hydra, nix |
+| `lorri-dataset` | 2 | hydra, nix |
 | `mvic-leisa-composition` | 2 | hydra, nix |
 | `optical-scientific-surfaces` | 2 | sn263-beta, sn263-gamma |
 | `other-hrii-scans` | 2 | comet-103p, comet-9p |
@@ -559,7 +559,7 @@ deposit or paper it was checked against, or record that its next move is work he
 | `cassini-n1355869401` | 1 | himalia |
 | `category-3-tail-extent` | 1 | heliosphere |
 | `category-4-values` | 1 | heliosphere |
-| `change-2-figure-lens` | 1 | toutatis |
+| `change-2-figure-dataset` | 1 | toutatis |
 | `close-zoom-missing-tiles` | 1 | earth |
 | `closeup-reproduction-at-current-main` | 1 | comet-9p |
 | `contact-binary-alternative` | 1 | kerberos |

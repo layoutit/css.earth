@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "stooke-mosaic",
@@ -31,7 +31,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "coverage": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
@@ -79,7 +79,7 @@
         "scientific-surfaces",
         "facet-science"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "projection": {
@@ -218,7 +218,7 @@
         "latitudeDegrees": 10,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "lutetia",
   "displayName": "Lutetia",
@@ -175,6 +175,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the Jorda–Vincent rotation model released with the PDS Lutetia shape"
   },
   "presentation": {
-    "defaultLens": "osiris"
+    "defaultDataset": "osiris"
   }
 }

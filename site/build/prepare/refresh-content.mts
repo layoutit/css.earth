@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-prepare only an object's prepared content record after an edit that touches nothing else (a credit, a provenance path),
  * with the content stage full preparation uses. The stage runs into a scratch folder; the tool refuses unless every other
- * prepared file the stage writes is byte-identical to the object's current one, so no lens, scene or image drifts. Pins are
+ * prepared file the stage writes is byte-identical to the object's current one, so no dataset, scene or image drifts. Pins are
  * refreshed first; the shared sources catalogue is rebuilt afterwards.
  *
  *   node site/build/prepare/refresh-content.mts <object-id> [<object-id> ...] */
@@ -12,8 +12,8 @@ import { pathToFileURL } from 'node:url';
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { refreshPreparedInventory } from '@cssearth/bake/contract';
 
-/** Prepared files the content stage writes that depend on lens images in the public folder, which the scratch run omits. */
-const IMAGE_DERIVED = new Set(['lenses.json']);
+/** Prepared files the content stage writes that depend on dataset images in the public folder, which the scratch run omits. */
+const IMAGE_DERIVED = new Set(['datasets.json']);
 
 export async function refreshContent(id: string, root = process.cwd()) {
   const objectDirectory = resolve(root, 'src/objects', id), sourceDirectory = resolve(objectDirectory, 'source'), preparedDirectory = resolve(objectDirectory, 'prepared');

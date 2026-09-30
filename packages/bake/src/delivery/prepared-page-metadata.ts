@@ -1,7 +1,7 @@
 import { requireRecord } from '@cssearth/core';
 
-/** The page's share of the runtime: assets and controls beside the scene. It is a build output that
- * restore-object-json writes from the restored runtime, never committed, and the descriptor names it by path only. */
+/** The page's share of the runtime: assets and controls beside the scene. The site builds it from the restored runtime
+ * when read (@cssearth/objects/node preparedPageData); the descriptor names it by path only. */
 export function preparePageMetadata(id: string, input: unknown) {
   const definition = requireRecord(input);
   if (definition.id !== id || !definition.assets || !definition.controls) {

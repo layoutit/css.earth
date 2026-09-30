@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "puck",
   "displayName": "Puck",
@@ -113,6 +113,6 @@
     "sunSource": "JPL Uranus-system ephemeris and IAU/WGCCRE Puck rotation; calibrated Voyager image is registered in that source body frame."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

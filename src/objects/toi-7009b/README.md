@@ -8,7 +8,7 @@ It is the only planet known around TOI-7009. Its orbit and size follow Morello e
 
 **Orbit.** Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): P 2.3206612 d Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): a/R* 10.95; Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): inclination 86.1 degrees No archive row states an eccentricity; the orbit is taken as circular Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): transit mid-time 2460392.3627 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-7009's measured colour (#ffc59f, the colour lens of toi-7009 (src/objects/toi-7009/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-7009's measured colour (#ffc59f, the colour dataset of toi-7009 (src/objects/toi-7009/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-7009's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (84), folded onto its orbit. Upper limits and rows without an error are left out.
 

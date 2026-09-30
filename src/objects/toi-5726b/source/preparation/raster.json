@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/toi-5726b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "toi-5726b-surface-{id}{suffix}.webp",
-      "thumbnail": "toi-5726b-lens-{id}.webp",
+      "thumbnail": "toi-5726b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#fff4f5, the colour lens of toi-5726 (src/objects/toi-5726/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#fff4f5, the colour dataset of toi-5726 (src/objects/toi-5726/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "toi-5726",
           "srgb": "#fff4f5",
-          "source": "the colour lens of toi-5726 (src/objects/toi-5726/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of toi-5726 (src/objects/toi-5726/source/photometry/stellar-color.json)"
         }
       }
     }

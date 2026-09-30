@@ -40,7 +40,7 @@
         "assets",
         "features",
         "panel-content",
-        "lenses",
+        "datasets",
         "starfield",
         "sky-sun",
         "system-markers",
@@ -56,7 +56,7 @@
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "normal",
               "source": "content",
@@ -99,7 +99,7 @@
         "kind": "sphere",
         "radiusKm": 1821.49
       },
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "materials": [
         {
           "id": "lighting",
@@ -115,10 +115,6 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json"
-        },
-        {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json"
         },
         {
           "id": "presentation",
@@ -172,6 +168,6 @@
       }
     }
   },
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "type": "layered-body"
 }

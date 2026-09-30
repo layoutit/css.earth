@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-67p",
   "displayName": "67P",
@@ -808,8 +808,8 @@
             }
           ]
         },
-        "lensId": "osiris",
-        "additionalLensIds": [
+        "datasetId": "osiris",
+        "additionalDatasetIds": [
           "regions",
           "geology"
         ]
@@ -862,8 +862,8 @@
             }
           ]
         },
-        "lensId": "albedo",
-        "additionalLensIds": [
+        "datasetId": "albedo",
+        "additionalDatasetIds": [
           "slope",
           "absorption",
           "ice"
@@ -876,6 +876,6 @@
     "qualification": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

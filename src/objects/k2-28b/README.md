@@ -8,7 +8,7 @@ It is the only planet known around K2-28. Its orbit and size follow Hirano et al
 
 **Orbit.** Stefansson et al. 2018 (2018AJ....156..266S), via the NASA Exoplanet Archive ps table (pl_refname STEFANSSON_ET_AL__2018): P 2.2604455 d Hirano et al. 2016 (2016ApJ...820...41H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2016): a/R* 17.9; Hirano et al. 2016 (2016ApJ...820...41H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2016): inclination 88.9 degrees Hirano et al. 2016 (2016ApJ...820...41H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2016): e 0 Stefansson et al. 2018 (2018AJ....156..266S), via the NASA Exoplanet Archive ps table (pl_refname STEFANSSON_ET_AL__2018): transit mid-time 2457931.89779 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-28's measured colour (#ffbf7b, the colour lens of k2-28 (src/objects/k2-28/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-28's measured colour (#ffbf7b, the colour dataset of k2-28 (src/objects/k2-28/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-28's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (42, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 

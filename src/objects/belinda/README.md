@@ -20,7 +20,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - The table's sigma column describes magnitude uncertainty, not an axis error. The original Voyager uncertainty table was not directly accessible; the inspected 2024 primary research table explicitly reproduces it.
 
-- No camera-registered photographic lens is qualified.
+- No camera-registered photographic dataset is qualified.
 
 - **Rotation:** The shared linear rotation retains −577.362817°/day and freezes the small periodic terms after that epoch. [source/preparation/rotation.json](source/preparation/rotation.json) records the evaluation matrix and source elements; this does not imply landmark registration.
 

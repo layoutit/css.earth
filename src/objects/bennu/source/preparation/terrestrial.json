@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "bennu",
   "displayName": "Bennu",
@@ -540,7 +540,7 @@
     },
     "radialTerrainAlternatives": [
       {
-        "lensId": "gravity-anomaly",
+        "datasetId": "gravity-anomaly",
         "path": "shape/g_03170mm_spc_obj_0000n00000_v042.obj",
         "format": "wavefront-obj",
         "grid": {
@@ -559,8 +559,8 @@
         }
       },
       {
-        "lensId": "slope",
-        "additionalLensIds": [
+        "datasetId": "slope",
+        "additionalDatasetIds": [
           "geopotential"
         ],
         "path": "shape/g_01680mm_alt_obj_0000n00000_v020.obj",
@@ -581,7 +581,7 @@
         }
       },
       {
-        "lensId": "thermal-inertia",
+        "datasetId": "thermal-inertia",
         "path": "shape/g_06330mm_spo_obj_0000n00000_v034.obj",
         "format": "wavefront-obj",
         "grid": {
@@ -600,8 +600,8 @@
         }
       },
       {
-        "lensId": "hydration",
-        "additionalLensIds": [
+        "datasetId": "hydration",
+        "additionalDatasetIds": [
           "carbon"
         ],
         "path": "shape/g_03170mm_spc_obj_0000n00000_v020.obj",
@@ -627,6 +627,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/kelt-24b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "kelt-24b-surface-{id}{suffix}.webp",
-      "thumbnail": "kelt-24b-lens-{id}.webp",
+      "thumbnail": "kelt-24b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#eeedff, the colour lens of kelt-24 (src/objects/kelt-24/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#eeedff, the colour dataset of kelt-24 (src/objects/kelt-24/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "kelt-24",
           "srgb": "#eeedff",
-          "source": "the colour lens of kelt-24 (src/objects/kelt-24/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of kelt-24 (src/objects/kelt-24/source/photometry/stellar-color.json)"
         }
       }
     }

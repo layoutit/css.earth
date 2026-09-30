@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/triton/",
   "sourceWidth": 14336,
   "sourceHeight": 7168,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "triton-{id}{suffix}.webp",
-      "thumbnail": "triton-lens-{id}.webp",
+      "thumbnail": "triton-dataset-{id}.webp",
       "source": "observations/fully_processed.zip",
       "falseColor": false,
       "science": {
@@ -108,7 +108,7 @@
     {
       "id": "enhanced",
       "output": "triton-{id}{suffix}.webp",
-      "thumbnail": "triton-lens-{id}.webp",
+      "thumbnail": "triton-dataset-{id}.webp",
       "source": "observations/tnmap-cyl-KH.jpg",
       "falseColor": false,
       "science": {
@@ -128,7 +128,7 @@
     {
       "id": "ultraviolet",
       "output": "triton-{id}{suffix}.webp",
-      "thumbnail": "triton-lens-{id}.webp",
+      "thumbnail": "triton-dataset-{id}.webp",
       "source": "observations/tnmap-cyl-KH-obu.jpg",
       "falseColor": true,
       "science": {
@@ -148,7 +148,7 @@
     {
       "id": "voyager-color",
       "output": "triton-{id}{suffix}.webp",
-      "thumbnail": "triton-lens-{id}.webp",
+      "thumbnail": "triton-dataset-{id}.webp",
       "source": "observations/voyager-color/c1139313.equi.tif",
       "falseColor": true,
       "science": {

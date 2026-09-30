@@ -8,7 +8,7 @@ It is the only planet known around TOI-2081. Its orbit and size follow Esparza-B
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 10.50543617136 d Esparza-Borges et al. 2022 (2022A&A...666A..10E), via the NASA Exoplanet Archive ps table (pl_refname ESPARZA_BORGES_ET_AL_2022): a/R* 30.3; Esparza-Borges et al. 2022 (2022A&A...666A..10E), via the NASA Exoplanet Archive ps table (pl_refname ESPARZA_BORGES_ET_AL_2022): inclination 89.34 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459757.444606 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2081's measured colour (#ffbe85, the colour lens of toi-2081 (src/objects/toi-2081/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2081's measured colour (#ffbe85, the colour dataset of toi-2081 (src/objects/toi-2081/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2081's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (81, 84, 85), folded onto its orbit. Upper limits and rows without an error are left out.
 

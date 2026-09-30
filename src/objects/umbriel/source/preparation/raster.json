@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/umbriel/",
   "sourceWidth": 5760,
   "sourceHeight": 2880,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "umbriel-{id}{suffix}.webp",
-      "thumbnail": "umbriel-lens-{id}.webp",
+      "thumbnail": "umbriel-dataset-{id}.webp",
       "source": "observations/uumap-cyl-180180.cub.gz",
       "falseColor": false,
       "science": {
@@ -60,7 +60,7 @@
     {
       "id": "voyager-color",
       "output": "umbriel-{id}{suffix}.webp",
-      "thumbnail": "umbriel-lens-{id}.webp",
+      "thumbnail": "umbriel-dataset-{id}.webp",
       "source": "observations/voyager-color/c2679704.equi.tif",
       "falseColor": true,
       "science": {

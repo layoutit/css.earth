@@ -1,6 +1,6 @@
 # JunoCam
 
-JunoCam is the colour camera on NASA's Juno spacecraft. Its calibrated images reach this project from the PDS Cartography and Imaging Sciences Node, and its geometry from the Juno SPICE kernels NAIF publishes. This guide describes how one image becomes a photograph lens on a body, what was measured on the four images of Europa, and what is not explained. The toolkit ships no lens of its own: a body's package states one, as any other photograph lens.
+JunoCam is the colour camera on NASA's Juno spacecraft. Its calibrated images reach this project from the PDS Cartography and Imaging Sciences Node, and its geometry from the Juno SPICE kernels NAIF publishes. This guide describes how one image becomes a photograph dataset on a body, what was measured on the four images of Europa, and what is not explained. The toolkit ships no dataset of its own: a body's package states one, as any other photograph dataset.
 
 ## Why JunoCam needs its own route
 
@@ -24,7 +24,7 @@ Juno passed Europa on 29 September 2022. With the bank's kernels the closest app
 
 **The reader against its sources.**
 
-- Juno's position relative to Europa from [`@cssearth/spice`](../packages/spice/README.md) agrees with JPL Horizons' merged Juno trajectory to 1.1 m or better at the four image epochs (the receipt's `horizons` block). This checks the type 1 SPK reader, which no earlier lens used on a spacecraft this fast.
+- Juno's position relative to Europa from [`@cssearth/spice`](../packages/spice/README.md) agrees with JPL Horizons' merged Juno trajectory to 1.1 m or better at the four image epochs (the receipt's `horizons` block). This checks the type 1 SPK reader, which no earlier dataset used on a spacecraft this fast.
 - The labels state the altitude and sub-spacecraft point at mid-image. Evaluated at the start time, this reader gives 95 to 118 km less altitude, which is five seconds of flight at the range rate.
 - Strip rays reproduce the field-of-view corner and boresight vectors that the instrument kernel lists for all four strips to 5 × 10⁻⁸ ([`junocam.test.mts`](../packages/bake/src/objects/layers/terrestrial/missions/junocam.test.mts)). NAIF computed those vectors with its own code, so this settles the distortion inverse and the half-pixel origin.
 
@@ -43,7 +43,7 @@ The pointing offsets are inside the kernel's stated jitter. The ephemeris offset
 
 **Against the USGS mosaic.** Against Europa's Voyager and Galileo mosaic the median offset of image 2 is 0.1 km east and 0.3 km south over 404 patches. The offset changes with longitude, and it changes the same way in all four images, which saw that ground at different places in the field and through different strips: about −9 km east at 0° to 20° E, under 2 km at 20° to 50° E, and +3 to +7 km at 50° to 80° E. A camera error would move with the field position. This one stays with the ground, so it belongs to the mosaic's control, not to these cameras.
 
-**Brightness between images.** The images were taken at phase angles from 81° to 57°. One gain per image brings them to image 1's level: 0.83, 0.86 and 0.91. With the acquisition lighting kept, overlapping images then disagree by 5.8 % (mean log scatter over six pairs). A Lambert division gives the same 5.8 %, and more Lommel-Seeliger weight gives more: 6.7 % at a Lunar-Lambert weight of 0.3, 7.7 % at 0.6, and pure Lommel-Seeliger exceeds the 1.5 × gain budget. The lens keeps the acquisition lighting.
+**Brightness between images.** The images were taken at phase angles from 81° to 57°. One gain per image brings them to image 1's level: 0.83, 0.86 and 0.91. With the acquisition lighting kept, overlapping images then disagree by 5.8 % (mean log scatter over six pairs). A Lambert division gives the same 5.8 %, and more Lommel-Seeliger weight gives more: 6.7 % at a Lunar-Lambert weight of 0.3, 7.7 % at 0.6, and pure Lommel-Seeliger exceeds the 1.5 × gain budget. The dataset keeps the acquisition lighting.
 
 **Cost.** Four images load in 40 s, 15 s of it for image 1, with 1.2 GB of pixel geometry resident. Casting only lit, camera-facing columns took image 1 from 741 MB to 516 MB.
 
@@ -55,8 +55,8 @@ The pointing offsets are inside the kernel's stated jitter. The ephemeris offset
 
 ## Limits
 
-- Colour images only: the recipe takes the red, green and blue strips. The methane strip and single-filter images are read by the decoder and have no lens format.
-- The colour is JunoCam's band ratios on one display range. It is not a natural-colour reconstruction, and the lens says so.
+- Colour images only: the recipe takes the red, green and blue strips. The methane strip and single-filter images are read by the decoder and have no dataset format.
+- The colour is JunoCam's band ratios on one display range. It is not a natural-colour reconstruction, and the dataset says so.
 - The limb fit needs a lit limb in view. An image that shows only surface, with no sky, cannot be fitted this way.
 - The fit moves two epochs. It cannot correct a pointing error across the scan; on Europa no such error was left to correct (under 1.2 px when fitted as a third parameter).
 - Summed or compressed-only products are refused: `SAMPLING_FACTOR` must be 1 and the product an RDR.
@@ -74,4 +74,4 @@ node --test packages/telescope-cli/src/archives/juno/*.test.mts packages/bake/au
 pnpm build:spice && pnpm --filter @cssearth/spice test
 ```
 
-`archive.mts` pins a target's calibrated colour images from a volume's index, by URL and size. `measure.mts` downloads what the work directory lacks (136 MB for Europa; `--raw <dir>` reads files already on disk), adds each digest to the program the first time it holds the bytes, fits every image and writes the receipt. The [archive ledger](junocam-ledger.md) says what else JunoCam photographed. A prepared lens report carries the same fit for the mesh its package states.
+`archive.mts` pins a target's calibrated colour images from a volume's index, by URL and size. `measure.mts` downloads what the work directory lacks (136 MB for Europa; `--raw <dir>` reads files already on disk), adds each digest to the program the first time it holds the bytes, fits every image and writes the receipt. The [archive ledger](junocam-ledger.md) says what else JunoCam photographed. A prepared dataset report carries the same fit for the mesh its package states.

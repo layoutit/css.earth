@@ -8,7 +8,7 @@ It is the only planet known around TOI-762 A. Its orbit and size follow Hartman 
 
 **Orbit.** Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): P 3.4716826 d Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): a/R* 17.29; Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): inclination 87.5 degrees No archive row states an eccentricity; the orbit is taken as circular Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): transit mid-time 2459850.25847 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-762-a's measured colour (#ffcd89, the colour lens of toi-762-a (src/objects/toi-762-a/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-762-a's measured colour (#ffcd89, the colour dataset of toi-762-a (src/objects/toi-762-a/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-762 A's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (90, 99, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -5,12 +5,12 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
 import { cssViewFromOrientation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
-import { assertCompilerBankIdentity, assertCompilerLensGeometry } from '../../server/workflows/compiler/bank-validation.ts';
+import { assertCompilerBankIdentity, assertCompilerDatasetGeometry } from '../../server/workflows/compiler/bank-validation.ts';
 
 export const compilerRenderer: CompilerViewerBackend<PreparedCssVolume, VolumeCameraPublication> = {
   ...volumeRenderer,
   assertIdentity: assertCompilerBankIdentity,
-  assertLensGeometry: assertCompilerLensGeometry,
+  assertDatasetGeometry: assertCompilerDatasetGeometry,
   starProjection(publication, frame, viewport) {
     const local = presentPhysicalPoseInVolume(publication.world.pose, frame);
     const rotation = cssViewFromOrientation(local.orientationXyzw);

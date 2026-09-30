@@ -42,8 +42,8 @@ test("a drawn subject's page carries none of the scene's own selections, so a co
   assert.equal(write('/sun/?dataset=spectral-slope&feature=12&v=saved', 'sun', 'milky-way'), '/milky-way/?v=saved');
   const focus = withPreparedFocus(at('/sun/?dataset=spectral-slope&feature=12'), 'sun', 'm42', null);
   assert.equal(focus.pathname + focus.search, '/m42/');
-  const lens = withPreparedFocus(at('/sun/?dataset=spectral-slope'), 'sun', 'm42', 'optical');
-  assert.equal(lens.pathname + lens.search, '/m42/?dataset=optical', "a focus's dataset is its own lens");
+  const dataset = withPreparedFocus(at('/sun/?dataset=spectral-slope'), 'sun', 'm42', 'optical');
+  assert.equal(dataset.pathname + dataset.search, '/m42/?dataset=optical', "a focus's dataset is its own dataset");
   assert.deepEqual(readSceneDatasetUrl(at('/milky-way/?dataset=spectral-slope'), 'sun'), { requested: false, id: null });
   assert.equal(withSceneDataset(at('/milky-way/'), 'sun', 'spectral-slope').search, '', 'the scene never writes its dataset there');
 });

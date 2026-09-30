@@ -20,9 +20,9 @@ Psyche is a main-belt asteroid whose observations suggest a mixture of metal and
 
 ### ALMA thermal maps
 
-The Thermal inertia and Dielectric constant lenses show the maps Cambioni, de Kleer & Shepard (2022) fitted to ALMA 1.3 mm images of Psyche's thermal emission, taken on 2019 June 19 over about two-thirds of one rotation at about 30 km resolution ([de Kleer et al. 2021](https://doi.org/10.3847/PSJ/ac01ec)). Thermal inertia says how slowly the top centimetres heat and cool; the dielectric constant says how strongly the material responds to an electric field, which the authors read as the balance of metal and silicate. They are model fits, not photographs.
+The Thermal inertia and Dielectric constant datasets show the maps Cambioni, de Kleer & Shepard (2022) fitted to ALMA 1.3 mm images of Psyche's thermal emission, taken on 2019 June 19 over about two-thirds of one rotation at about 30 km resolution ([de Kleer et al. 2021](https://doi.org/10.3847/PSJ/ac01ec)). Thermal inertia says how slowly the top centimetres heat and cool; the dielectric constant says how strongly the material responds to an electric field, which the authors read as the balance of metal and silicate. They are model fits, not photographs.
 
-The [Zenodo release](https://doi.org/10.5281/zenodo.6321315) (CC BY 4.0) is kept unchanged in [source/thermal](source/thermal): one value per 5-degree node, 73 × 37, with NaN where the authors dropped a node (reduced chi-squared above 10, or three or fewer observations). 1,895 of 2,701 nodes are mapped, about 80% of the surface by area. Each lens draws one colour per node over the half-step around it, with no smoothing; dropped nodes show the missing-data grid.
+The [Zenodo release](https://doi.org/10.5281/zenodo.6321315) (CC BY 4.0) is kept unchanged in [source/thermal](source/thermal): one value per 5-degree node, 73 × 37, with NaN where the authors dropped a node (reduced chi-squared above 10, or three or fewer observations). 1,895 of 2,701 nodes are mapped, about 80% of the surface by area. Each dataset draws one colour per node over the half-step around it, with no smoothing; dropped nodes show the missing-data grid.
 
 | Quantity | Mapped range | Median uncertainty (10th to 90th percentile) |
 | --- | --- | --- |
@@ -32,7 +32,7 @@ The [Zenodo release](https://doi.org/10.5281/zenodo.6321315) (CC BY 4.0) is kept
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/16_Psyche_param.txt), read longitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.14](https://doi.org/10.1051/0004-6361/202141781) |
 
-The maps are in the body frame of the Shepard et al. (2021) shape: longitude 0 on the major axis, east positive. The lenses ride the ADAM mesh, like the SPHERE photograph, and each mesh direction is carried into the map frame through the two published spin states at the ALMA midpoint, 2019-06-19 07:52 UTC ([alma-body-frame.json](source/thermal/alma-body-frame.json)). The map frame's state is Cambioni et al. (2022) equation 2 (pole ecliptic 36°, −8°; phase 341.56° at J2000, TDB; period 4.195948 h); the mesh's is LAM's parameter file, read in UTC as the photograph lens reads it. At that epoch the mesh prime meridian lies at map longitude −4.11° and the two poles differ by 1.63°.
+The maps are in the body frame of the Shepard et al. (2021) shape: longitude 0 on the major axis, east positive. The datasets ride the ADAM mesh, like the SPHERE photograph, and each mesh direction is carried into the map frame through the two published spin states at the ALMA midpoint, 2019-06-19 07:52 UTC ([alma-body-frame.json](source/thermal/alma-body-frame.json)). The map frame's state is Cambioni et al. (2022) equation 2 (pole ecliptic 36°, −8°; phase 341.56° at J2000, TDB; period 4.195948 h); the mesh's is LAM's parameter file, read in UTC as the photograph dataset reads it. At that epoch the mesh prime meridian lies at map longitude −4.11° and the two poles differ by 1.63°.
 
 ## Evidence
 
@@ -46,7 +46,7 @@ The asteroid validation report records the earlier source, preparation and brows
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1985.3 m error; the authored stopping threshold is 2100 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1043.4 m and maximum 2069.4 m.
 
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
+Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
 ### SPHERE photograph
 
@@ -77,21 +77,21 @@ Overlaps are scale-free. Read each against the same-shape column, which is what 
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `zimpol` | 60 | 49 | 4.64° | 3.29° | 3.28° | its other 60 frames | 1 of 60 | — | 10 of 60, -2.00° | — | ×1.59 | conflict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.14](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ## Known problems
 
 - The ALMA maps are coarse and uncertain: one value per 5 degrees at about 30 km resolution, and a median thermal-inertia uncertainty of 134, 75% of the median value. Neighbouring colours often differ by less than their uncertainty.
-- Cambioni et al. (2022) hatch 60° to 120° west in their frame as possibly affected by model artifacts: it was seen at high emission angles in under a third of the images and may hide unmapped topography. Those nodes are drawn like the rest; the lens notes say so.
+- Cambioni et al. (2022) hatch 60° to 120° west in their frame as possibly affected by model artifacts: it was seen at high emission angles in under a third of the images and may hide unmapped topography. Those nodes are drawn like the rest; the dataset notes say so.
 - The maps were fitted on the Shepard et al. (2021) shape, not the ADAM mesh. Their overall sizes agree to about 2%: Shepard's equivalent ellipsoid is 274 × 234 × 171 km (their Table 5) and a least-squares ellipsoid through the ADAM vertices is 280 × 235 × 173 km (measured). A node is placed by its direction from the centre, so where the two shapes differ locally its value lands on slightly different ground.
-- The LAM parameter file does not state its time scale. It is read in UTC, as for the photograph lens; read in TDB it would move the mesh prime meridian 1.65° in map longitude. The shape check leans only slightly toward UTC: its peak is 1° from the UTC placement and 3° from the TDB one, at correlations 0.821 and 0.822.
+- The LAM parameter file does not state its time scale. It is read in UTC, as for the photograph dataset; read in TDB it would move the mesh prime meridian 1.65° in map longitude. The shape check leans only slightly toward UTC: its peak is 1° from the UTC placement and 3° from the TDB one, at correlations 0.821 and 0.822.
 
 Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 111.5 km reference sphere, with a -40 to 40 km legend. This includes global shape, not height above a gravitational equipotential.
 
@@ -110,11 +110,11 @@ The SPHERE photograph is photographed illumination from the survey's deconvolved
 
 - [Original ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj): radius 111.887165 km. The SPHERE photograph and the ALMA maps ride it, because the release's rotation record describes this reconstruction; the Shape and Elevation views keep the MPCD refinement, which uses resolved SPHERE detail (survey section 3 and Appendix B).
 
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/16Psyche/): individual, illuminated, resolved telescope images. The deconvolved camera-1 frames of the 2019 apparition, the one the survey's Figure B.14 shows, are the SPHERE photograph lens; the reduced `Red/` products are not used. This is photographed illumination, not a registered global reflectance mosaic, and the frames remain the observational constraints behind the selected reconstruction.
+- [Released SPHERE images](https://observations.lam.fr/astero/Data/16Psyche/): individual, illuminated, resolved telescope images. The deconvolved camera-1 frames of the 2019 apparition, the one the survey's Figure B.14 shows, are the SPHERE photograph dataset; the reduced `Red/` products are not used. This is photographed illumination, not a registered global reflectance mosaic, and the frames remain the observational constraints behind the selected reconstruction.
 
 - [Individual research](https://observations.lam.fr/astero/Papers/Viikinkoski2018.pdf): complementary interpretation and model/image comparisons. The later [Ferrais et al. (2020)](https://doi.org/10.1051/0004-6361/202038100) release includes updated shape and relative-albedo results.
 
-- [DAMIT relative albedo](https://damit.cuni.cz/projects/damit/stored_files/open/105/albedo) and its [paired older ADAM shape](https://damit.cuni.cz/projects/damit/stored_files/open/108/shape.txt): available numeric data, 1352 per-facet values and a 678-vertex/1352-facet model. Unresolved for this presentation: correspondence and coverage on the selected 3234-vertex MPCD release have not been established. No albedo or composition lens is claimed. Paper figure maps are not substituted for the numeric source.
+- [DAMIT relative albedo](https://damit.cuni.cz/projects/damit/stored_files/open/105/albedo) and its [paired older ADAM shape](https://damit.cuni.cz/projects/damit/stored_files/open/108/shape.txt): available numeric data, 1352 per-facet values and a 678-vertex/1352-facet model. Unresolved for this presentation: correspondence and coverage on the selected 3234-vertex MPCD release have not been established. No albedo or composition dataset is claimed. Paper figure maps are not substituted for the numeric source.
 
 </details>
 

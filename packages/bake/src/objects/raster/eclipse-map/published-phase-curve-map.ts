@@ -213,7 +213,7 @@ function extremes(flux: (xi: number) => number, steps = 72000) {
 }
 
 export async function loadPublishedPhaseCurveMap(root: string, value: unknown) {
-  const lens = requireRecord(value, 'published phase-curve lens'), path = requireString(lens.path, 'path');
+  const dataset = requireRecord(value, 'published phase-curve dataset'), path = requireString(dataset.path, 'path');
   if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('A published phase curve must be inside the source directory.');
   const json = JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
   if (requireRecord(requireRecord(json, 'published phase curve').model, 'model').kind === 'starry') return loadStarryPhaseCurveMap(root, parseStarryPhaseCurve(json));

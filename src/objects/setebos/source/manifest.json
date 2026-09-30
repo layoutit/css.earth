@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "lightcurve-approximation",
@@ -82,7 +82,7 @@
       },
       "width": 64,
       "height": 32,
-      "lensId": "model",
+      "datasetId": "model",
       "label": "Shape model",
       "falseColor": false,
       "sourceBinding": {
@@ -155,7 +155,7 @@
         "latitudeDegrees": 20,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "model"
+        "datasetId": "model"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

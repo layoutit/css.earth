@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-circumstellar-volume@1",
+  "schema": "cssearth-circumstellar-volume@2",
   "id": "beta-pictoris-disc",
   "host": "beta-pictoris",
   "name": "Beta Pictoris debris disc",
@@ -16,8 +16,8 @@
     "halfUnits": 135,
     "slabs": 78
   },
-  "defaultLens": "visible",
-  "lenses": [
+  "defaultDataset": "visible",
+  "datasets": [
     {
       "id": "visible",
       "geometry": "edge-on",
@@ -63,7 +63,7 @@
       "stretch": {
         "a": 10,
         "top": 530,
-        "source": "Stated, not fitted: the top is the 99.5th percentile of the image within 12 au of the midplane beyond the inner edge (529.6 counts per pixel per second), and a = 10 is the display's log strength, the same as the JWST lens's."
+        "source": "Stated, not fitted: the top is the 99.5th percentile of the image within 12 au of the midplane beyond the inner edge (529.6 counts per pixel per second), and a = 10 is the display's log strength, the same as the JWST dataset's."
       },
       "innerMaskArcsec": 0.8,
       "innerMaskSource": "Where the disc outshines what the subtraction leaves off it and the deposit covers most of the sky. At 14 to 16 au from the star the midplane is 318 times the noise measured 3.6 to 4.1 arcseconds out against 137 for the median light more than 35% of the radius off the midplane, and 44% of the pixels are blank; at 16 to 18 au, 243 against 116 with 13% blank; at 20 to 25 au, 146 against 57 with none blank. Nothing is drawn inside 0.8 arcseconds (15.7 au).",
@@ -73,12 +73,12 @@
         4.1
       ],
       "nearSidePositionAngleDeg": 300,
-      "nearSideSource": "The north-west side is drawn nearer, as for the JWST lens: Rebollido et al. (2024, Section 6), from the bow toward the north-west that Milli et al. (2014), Golimowski et al. (2006) and Apai et al. (2015) attribute to forward scattering.",
+      "nearSideSource": "The north-west side is drawn nearer, as for the JWST dataset: Rebollido et al. (2024, Section 6), from the bow toward the north-west that Milli et al. (2014), Golimowski et al. (2006) and Apai et al. (2015) attribute to forward scattering.",
       "topAlpha": 0.5,
       "noiseFade": {
         "fromNoise": 1,
         "toNoise": 3,
-        "source": "Stated, a display choice, as for the JWST lens: a column fades in as its brightness rises from one to three times the per-pixel noise measured 3.6 to 4.1 arcseconds out."
+        "source": "Stated, a display choice, as for the JWST dataset: a column fades in as its brightness rises from one to three times the per-pixel noise measured 3.6 to 4.1 arcseconds out."
       },
       "published": {
         "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
@@ -241,7 +241,7 @@
       "stretch": {
         "a": 10,
         "top": 6.3,
-        "source": "Stated, not fitted: the top is the 99.5th percentile of the three channels within 12 au of the midplane beyond the inner edge (6.26 in MJy/sr-per-Jy units), and a = 10 is the display's log strength, the same as the other lenses'."
+        "source": "Stated, not fitted: the top is the 99.5th percentile of the three channels within 12 au of the midplane beyond the inner edge (6.26 in MJy/sr-per-Jy units), and a = 10 is the display's log strength, the same as the other datasets'."
       },
       "innerMaskArcsec": 1.5,
       "innerMaskSource": "Golimowski et al. (2006, Section 2.2): the residuals of the PSF subtraction preclude accurate photometry of the disc within 1.5 arcseconds (about 30 au) of the star. Nothing is drawn inside 1.5 arcseconds (29.5 au at 19.63 pc).",
@@ -251,12 +251,12 @@
         13
       ],
       "nearSidePositionAngleDeg": 300,
-      "nearSideSource": "The north-west side is drawn nearer, as for the JWST lens: Rebollido et al. (2024, Section 6), from the bow toward the north-west that Milli et al. (2014), Golimowski et al. (2006) and Apai et al. (2015) attribute to forward scattering.",
+      "nearSideSource": "The north-west side is drawn nearer, as for the JWST dataset: Rebollido et al. (2024, Section 6), from the bow toward the north-west that Milli et al. (2014), Golimowski et al. (2006) and Apai et al. (2015) attribute to forward scattering.",
       "topAlpha": 0.5,
       "noiseFade": {
         "fromNoise": 1,
         "toNoise": 3,
-        "source": "Stated, a display choice, as for the other lenses: a column fades in as its brightness rises from one to three times the per-pixel noise measured 10 to 13 arcseconds out."
+        "source": "Stated, a display choice, as for the other datasets: a column fades in as its brightness rises from one to three times the per-pixel noise measured 10 to 13 arcseconds out."
       },
       "published": {
         "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
@@ -271,7 +271,7 @@
         "iterations": 200,
         "source": "The axially symmetric emission inference of Wenger, Lorenz & Magnor (2013) as the nebula lab implements it, run by labs/nebula/run.mts reconstruct-circumstellar: the symmetry axis is the disc normal, tau 0.001 on the displayed [0, 1] values (the lab's M2-9 setting) and 200 iterations."
       },
-      "beyondGrid": "the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three lenses share, so switching dataset does not move the object, and its 1.7 au cells are what the inner lenses need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn."
+      "beyondGrid": "the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three datasets share, so switching dataset does not move the object, and its 1.7 au cells are what the inner datasets need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn."
     }
   ]
 }

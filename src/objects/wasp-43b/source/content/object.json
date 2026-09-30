@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-43b",
   "displayName": "WASP-43b",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "temperature",
         "label": "NIRSpec",
         "qualification": "Published map · Challener et al. 2024 · JWST NIRSpec 2.9–5.2 µm, 2023",
-        "thumbnail": "wasp-43b-lens-temperature.webp",
+        "thumbnail": "wasp-43b-dataset-temperature.webp",
         "surface": "wasp-43b-surface-temperature@2x.webp",
         "poles": "wasp-43b-poles-temperature@2x.webp",
         "source": {
@@ -128,7 +128,7 @@
         "id": "miri",
         "label": "MIRI",
         "qualification": "Reduced here from raw JWST exposures · MIRI 5–10.5 µm, 2022",
-        "thumbnail": "wasp-43b-lens-miri.webp",
+        "thumbnail": "wasp-43b-dataset-miri.webp",
         "surface": "wasp-43b-surface-miri@2x.webp",
         "poles": "wasp-43b-poles-miri@2x.webp",
         "source": {

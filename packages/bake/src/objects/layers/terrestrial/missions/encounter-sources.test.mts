@@ -12,7 +12,7 @@ const anchors=parseAnchors(JSON.parse(await readFile(resolve(root,'packages/bake
 for(const body of ['comet-81p','comet-9p','comet-103p'])test(`${body}: real source pixels match independent FITS decoding and all cameras pass held-out controls`,async()=>{
  const source=resolve(root,`src/objects/${body}/source`),recipe=JSON.parse(await readFile(resolve(source,'preparation/terrestrial.json'), 'utf8')),manifest=JSON.parse(await readFile(resolve(source,'manifest.json'), 'utf8'));
  const shape=required(requireArray(manifest.inputs).map(value=>fixtureRecord(value)).find(e=>e.path===recipe.geometry.radialTerrain.path));
- for(const lens of recipe.raster.surfaceObservations)for(const frame of lens.frames){
+ for(const dataset of recipe.raster.surfaceObservations)for(const frame of dataset.frames){
   const bytes=await readFile(resolve(source,frame.path)),control=JSON.parse(await readFile(resolve(source,frame.controlPath), 'utf8')),reference=required(anchors.products.find(p=>p.body===body&&p.path===frame.path));
   const decoded=decodeEncounterFits(bytes,control.observation);
   assert.equal(decoded.width,reference.width);assert.equal(decoded.height,reference.height);assert.equal(decoded.units,reference.units);

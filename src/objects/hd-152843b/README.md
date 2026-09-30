@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 152843. Its orbit and size follow Nichols
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.62075439967 d Nicholson et al. 2024 (2024MNRAS.532.4632N), via the NASA Exoplanet Archive ps table (pl_refname NICHOLSON_ET_AL__2024): a/R* derived from its semi-major axis 0.1049 au and stellar radius 1.43 solar radii; Nicholson et al. 2024 (2024MNRAS.532.4632N), via the NASA Exoplanet Archive ps table (pl_refname NICHOLSON_ET_AL__2024): inclination 89.26 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458994.287456 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 18 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-152843's measured colour (#f6f2ff, the colour lens of hd-152843 (src/objects/hd-152843/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-152843's measured colour (#f6f2ff, the colour dataset of hd-152843 (src/objects/hd-152843/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 152843's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (25, 52, 79), folded onto its orbit. Upper limits and rows without an error are left out.
 

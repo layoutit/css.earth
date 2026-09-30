@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "toi-1273b",
   "displayName": "TOI-1273 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by TOI-1273; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "toi-1273b-lens-shape.webp",
+        "thumbnail": "toi-1273b-dataset-shape.webp",
         "surface": "toi-1273b-surface-shape@2x.webp",
         "poles": "toi-1273b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of TOI-1273 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-1273's light, as its colour lens measures it."
+        "notes": "No image or colour of TOI-1273 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-1273's light, as its colour dataset measures it."
       }
     ]
   },

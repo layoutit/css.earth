@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/trappist-1c/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature",
       "output": "trappist-1c-surface-{id}{suffix}.webp",
-      "thumbnail": "trappist-1c-lens-{id}.webp",
+      "thumbnail": "trappist-1c-dataset-{id}.webp",
       "source": "science/jwst-trappist-1/c-dayside-15um.json",
       "falseColor": true,
       "science": {
@@ -67,7 +67,7 @@
     {
       "id": "illustration",
       "output": "trappist-1c-surface-{id}{suffix}.webp",
-      "thumbnail": "trappist-1c-lens-{id}.webp",
+      "thumbnail": "trappist-1c-dataset-{id}.webp",
       "source": "illustration/TRAPPIST-1_c.jpg",
       "falseColor": false,
       "science": {

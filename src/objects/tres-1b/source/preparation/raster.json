@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/tres-1b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "thermal",
       "output": "tres-1b-surface-{id}{suffix}.webp",
-      "thumbnail": "tres-1b-lens-{id}.webp",
+      "thumbnail": "tres-1b-dataset-{id}.webp",
       "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {

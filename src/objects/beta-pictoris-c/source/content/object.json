@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "beta-pictoris-c",
   "displayName": "Beta Pictoris c",
@@ -74,15 +74,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "beta-pictoris-c-lens-shape.webp",
+        "thumbnail": "beta-pictoris-c-dataset-shape.webp",
         "surface": "beta-pictoris-c-surface-shape@2x.webp",
         "poles": "beta-pictoris-c-poles-shape@2x.webp",
         "source": {

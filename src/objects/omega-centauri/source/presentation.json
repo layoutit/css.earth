@@ -1,19 +1,19 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "omega-centauri",
   "name": "Omega Centauri",
-  "defaultLens": "eso1119b",
+  "defaultDataset": "eso1119b",
   "sharedInputs": [
     "physical-evidence",
     "photometric-mge",
     "distance"
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "eso1119b",
       "label": "VST · optical G / R / I",
       "title": "Omega Centauri in the wider VST field",
-      "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map. The original VST image supplies the fitted light distribution. This application integration candidate still fails the fixed image-stability gate at axis handoffs; rotation can reveal changes between slab directions.",
+      "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical datasets share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map. The original VST image supplies the fitted light distribution. This application integration candidate still fails the fixed image-stability gate at axis handoffs; rotation can reveal changes between slab directions.",
       "summary": "Integrated optical starlight with conditional oblate depth; individual stellar positions are not recovered.",
       "detail": "14540 × 14540 px · publisher optical composite",
       "facts": [
@@ -48,7 +48,7 @@
       "id": "eso0844a",
       "label": "WFI · optical B / V / I",
       "title": "Omega Centauri through the WFI optical mosaic",
-      "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map. The WFI image recolors the same fitted geometry over its smaller observed footprint; the publisher reports DSS-filled mosaic gaps. This application integration candidate still fails the fixed image-stability gate at axis handoffs; rotation can reveal changes between slab directions.",
+      "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical datasets share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map. The WFI image recolors the same fitted geometry over its smaller observed footprint; the publisher reports DSS-filled mosaic gaps. This application integration candidate still fails the fixed image-stability gate at axis handoffs; rotation can reveal changes between slab directions.",
       "summary": "A second optical view on the same conditional geometry, limited to the WFI mosaic footprint.",
       "detail": "8040 × 7560 px · publisher optical composite",
       "facts": [
@@ -123,6 +123,6 @@
     }
   ],
   "bank": {
-    "path": "src/objects/omega-centauri/prepared/lenses.json"
+    "path": "src/objects/omega-centauri/prepared/datasets.json"
   }
 }

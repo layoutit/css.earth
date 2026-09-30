@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "usgs-voyager-galileo-global-1km",
@@ -16,7 +16,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 15138,
@@ -78,7 +78,7 @@
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
-        "lenses",
+        "datasets",
         "presentation",
         "features"
       ],
@@ -125,7 +125,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "Galileo color",
       "falseColor": true,
       "width": 1440,
@@ -187,7 +187,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Infrared",
       "falseColor": true,
       "width": 2048,
@@ -367,7 +367,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -389,24 +389,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored CSS geometry, UV sampling and seam settings."
-      }
-    },
-    {
-      "id": "callisto-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Callisto celestial recipe",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside the inputs.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
       }
     },
     {
@@ -451,7 +433,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -468,7 +450,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -485,71 +467,71 @@
     },
     {
       "path": "observations/C0605271600R.LBL",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "observations/CALLISTO-nomenclature.kmz",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "observations/PIA03456-release.json",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "preparation/galileo-color-conversion.json",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "preparation/prepare-galileo-color.py",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/agent-feature-patches.png",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/agent-named-fixed-camera.png",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/agent-native-predicted.png",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/agent-source-unmodified.png",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/galileo-color-conversion-proof.json",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/galileo-color-registration.json",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/registration-fit-original.log",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/registration-fit-original.py",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/registration-independent-original.py",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/registration-independent-review.json",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/registration-independent-review.md",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "validation/registration-fit-exploratory.json",
-      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored dataset metadata."
     },
     {
       "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.xml"

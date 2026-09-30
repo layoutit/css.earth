@@ -21,23 +21,23 @@ export interface AuthoredPresentationBasis { readonly bodyToPresentation: Matrix
 /** `systemMatrix` is the solved system node transform of a lane whose frame is the ecliptic presentation frame. */
 export function authoredPresentationBasis(sources: ReadonlyMap<string, Value>, systemMatrix: Matrix3): AuthoredPresentationBasis {
   const model = sources.get('shape-model');
-  if (optional(model, 'schema') === 'cssearth-shape-model@1') return checked(systemMatrix, required(model, 'displayRadius'), 50);
+  if (optional(model, 'schema') === 'cssearth-shape-model@2') return checked(systemMatrix, required(model, 'displayRadius'), 50);
   const solar = sources.get('solar-system'), terrestrial = sources.get('terrestrial');
   const geometry = sources.get('geometry'), presentation = sources.get('presentation'), paged = sources.get('paged-ellipsoid');
   if (optional(solar, 'schema') === 'cssearth-solar-system-preparation@1') {
     return checked(systemMatrix, required(solar, 'bodyRadiusUnits'), 50);
   }
-  if (optional(terrestrial, 'schema') === 'cssearth-terrestrial-preparation@1') {
+  if (optional(terrestrial, 'schema') === 'cssearth-terrestrial-preparation@2') {
     if (required(terrestrial, 'kind') === 'solid-observation-body') return checked(systemMatrix, required(required(terrestrial, 'geometry'), 'radius'), 50);
   }
-  if (optional(geometry, 'schema') === 'cssearth-layered-oblate-preparation@1') {
+  if (optional(geometry, 'schema') === 'cssearth-layered-oblate-preparation@2') {
     const p = required(geometry, 'parameters');
     return checked(chain(mesh([0, 0, required(p, 'objectPresentationNodeDegrees')]), mesh([required(p, 'objectObliquityDegrees'), 0, 0]), mesh([0, 0, required(p, 'meshRotationZ')])),
       required(p, 'equatorialRadius'), required(p, 'tileSize'));
   }
   if (optional(geometry, 'schema') === 'cssearth-banded-ellipsoid@1') {
     const radius = () => required(required(geometry, 'shape'), 'equatorialRadius'), tile = () => required(required(geometry, 'planOptions'), 'tileSize');
-    if (optional(presentation, 'schema') === 'cssearth-normalized-disc-presentation@1') {
+    if (optional(presentation, 'schema') === 'cssearth-normalized-disc-presentation@2') {
       return checked(chain(mesh(required(presentation, 'systemRotation')), mesh([0, 0, negated(required(presentation, 'bodyRotationZDegrees'))])), radius(), tile());
     }
     if (optional(presentation, 'schema') === 'cssearth-layered-surface-presentation@1') {

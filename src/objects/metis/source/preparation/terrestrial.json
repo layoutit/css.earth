@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "metis",
   "displayName": "Metis",
@@ -196,6 +196,6 @@
     "sunSource": "JPL Jupiter-system ephemeris and IAU rotation; PCK reference ellipsoid, east-positive scene longitude."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-75732e",
   "displayName": "55 Cnc e",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 2,360 K. The disc itself is unresolved.",
-        "thumbnail": "hd-75732e-lens-thermal.webp",
+        "thumbnail": "hd-75732e-dataset-thermal.webp",
         "surface": "hd-75732e-surface-thermal@2x.webp",
         "poles": "hd-75732e-poles-thermal@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "illustration",
         "label": "Illustration",
         "qualification": "An artist's surface from NASA's 55 Cnc e 3D model; not an observation.",
-        "thumbnail": "hd-75732e-lens-illustration.webp",
+        "thumbnail": "hd-75732e-dataset-illustration.webp",
         "surface": "hd-75732e-surface-illustration@2x.webp",
         "poles": "hd-75732e-poles-illustration@2x.webp",
         "source": {

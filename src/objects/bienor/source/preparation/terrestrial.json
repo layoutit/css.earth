@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "bienor",
   "displayName": "Bienor",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

@@ -69,7 +69,7 @@
       "id": "cassini-iss-photograph",
       "subject": "Cassini ISS narrow-angle photograph N1465662798_2 through SPICE kernel cameras",
       "status": "included",
-      "finding": "One CISSCAL-calibrated clear-filter frame from the June 2004 approach, 0.466 km per pixel from 77,935 km at 86 degrees phase, cast through a kernel camera refined to the lit limb by 0.0095 degrees. The relief sweep against the shape places it at -0.75 degrees with peak correlation 0.76 and is decisive; the registration verdict needs three decisive frames, so this single-frame lens has none. Coverage is 14.6 percent of the surface, the sunlit half of one side.",
+      "finding": "One CISSCAL-calibrated clear-filter frame from the June 2004 approach, 0.466 km per pixel from 77,935 km at 86 degrees phase, cast through a kernel camera refined to the lit limb by 0.0095 degrees. The relief sweep against the shape places it at -0.75 degrees with peak correlation 0.76 and is decisive; the registration verdict needs three decisive frames, so this single-frame dataset has none. Coverage is 14.6 percent of the surface, the sunlit half of one side.",
       "evidence": [
         "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798"
       ]

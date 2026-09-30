@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/iras-04125-2902b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "iras-04125-2902b-surface-{id}{suffix}.webp",
-      "thumbnail": "iras-04125-2902b-lens-{id}.webp",
+      "thumbnail": "iras-04125-2902b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffd5a9, the colour lens of iras-04125-2902 (src/objects/iras-04125-2902/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffd5a9, the colour dataset of iras-04125-2902 (src/objects/iras-04125-2902/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "iras-04125-2902",
           "srgb": "#ffd5a9",
-          "source": "the colour lens of iras-04125-2902 (src/objects/iras-04125-2902/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of iras-04125-2902 (src/objects/iras-04125-2902/source/photometry/stellar-color.json)"
         }
       }
     }

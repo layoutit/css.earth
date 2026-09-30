@@ -51,9 +51,9 @@ test("allow-missing (deploy only) skips a genuinely missing R2 file so the objec
     const helix = await writeContextPackage(root, "helix");
     await writeContextPackage(root, "lmc");
     const bankBytes = Buffer.from(JSON.stringify(helix.bank));
-    const file = resolve(helix.directory, "prepared/lenses.json");
+    const file = resolve(helix.directory, "prepared/datasets.json");
     await rm(file);
-    const asset = { id: "helix", key: "helix/lenses.json", location: "prepared" as const, filename: "lenses.json", file,
+    const asset = { id: "helix", key: "helix/datasets.json", location: "prepared" as const, filename: "datasets.json", file,
       url: "https://example.invalid/helix/lenses.json", bytes: bankBytes.length,
       sha256: createHash("sha256").update(bankBytes).digest("hex") };
     const fetcher = async () => new Response(null, { status: 404 });
@@ -68,7 +68,7 @@ test("allow-missing (deploy only) skips a genuinely missing R2 file so the objec
     assert.equal(availability.lmc.available, true);
 
     // Default mode (no allow-missing) still fails outright on the exact same 404.
-    await assert.rejects(installRuntimeAssets([asset], { fetcher }), /helix\/lenses\.json \(HTTP 404\)/);
+    await assert.rejects(installRuntimeAssets([asset], { fetcher }), /helix\/datasets\.json \(HTTP 404\)/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -154,17 +154,3 @@ test("a connection that drops while the body streams is retried, and a failure n
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("restoring a body derives the page files R2 never holds, once", async () => {
-  const root = await mkdtemp(join(tmpdir(), "cssearth-setup-derive-"));
-  try {
-    const source = fileURLToPath(new URL("../../src/objects/thetis", import.meta.url));
-    const directory = resolve(root, "src/objects/thetis");
-    await cp(source, directory, { recursive: true });
-    await cp(fileURLToPath(new URL("../../public/scenes/thetis", import.meta.url)), resolve(root, "public/scenes/thetis"), { recursive: true });
-    for (const file of ["object.json", "page.json"]) await rm(resolve(directory, "prepared", file));
-    const { deriveRestoredPreparedFiles } = await import("@cssearth/bake/asset-publication");
-    assert.deepEqual(await deriveRestoredPreparedFiles(["thetis", "not-a-scene-body"], root), { pages: 1 });
-    for (const file of ["object.json", "page.json"]) assert.ok((await readFile(resolve(directory, "prepared", file))).length > 0, file);
-    assert.deepEqual(await deriveRestoredPreparedFiles(["thetis"], root), { pages: 0 }, "a body that has them is left alone");
-  } finally { await rm(root, { recursive: true, force: true }); }
-});

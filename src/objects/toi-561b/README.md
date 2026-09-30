@@ -8,7 +8,7 @@ It is one of 4 planets known around TOI-561. Its orbit and size follow Piotto et
 
 **Orbit.** Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): P 0.4465697 d Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): a/R* 2.683; Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): inclination 87 degrees Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): e 0 Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): transit mid-time 2459317.75002 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-561's measured colour (#ffede4, the colour lens of toi-561 (src/objects/toi-561/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-561's measured colour (#ffede4, the colour dataset of toi-561 (src/objects/toi-561/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-561's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (45, 46, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

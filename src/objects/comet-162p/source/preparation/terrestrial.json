@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-162p",
   "displayName": "Siding Spring",
@@ -105,6 +105,6 @@
     "qualification": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

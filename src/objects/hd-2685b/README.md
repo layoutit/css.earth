@@ -8,7 +8,7 @@ It is the only planet known around HD 2685. Its orbit and size follow Jones et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.1269046 d Jones et al. 2019 (2019A&A...625A..16J), via the NASA Exoplanet Archive ps table (pl_refname JONES_ET_AL__2019): a/R* 7.6974; Jones et al. 2019 (2019A&A...625A..16J), via the NASA Exoplanet Archive ps table (pl_refname JONES_ET_AL__2019): inclination 89.252 degrees Jones et al. 2019 (2019A&A...625A..16J), via the NASA Exoplanet Archive ps table (pl_refname JONES_ET_AL__2019): e 0.091 Jones et al. 2019 (2019A&A...625A..16J), via the NASA Exoplanet Archive ps table (pl_refname JONES_ET_AL__2019): omega 184.36 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460174.637067 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-2685's measured colour (#e8e9ff, the colour lens of hd-2685 (src/objects/hd-2685/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-2685's measured colour (#e8e9ff, the colour dataset of hd-2685 (src/objects/hd-2685/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 2685's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (68, 94, 95), folded onto its orbit. Upper limits and rows without an error are left out.
 

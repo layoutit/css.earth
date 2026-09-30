@@ -2,7 +2,7 @@
 
 **Blocked at visual qualification; not delivered.** Omega Centauri is registered in
 the Lab and uses a published oblate MGE light profile. Bake 1 completed but was
-visually rejected. Bake 2 produced neutral geometry, then failed during lens
+visually rejected. Bake 2 produced neutral geometry, then failed during dataset
 painting. Bake 3 completed for local inspection after the material roundoff fix;
 its unchanged neutral geometry still fails the axis-handoff image gate. A separately
 authorized adaptive-layer bake reduces retained slabs from 779 to 459 but also
@@ -22,7 +22,7 @@ The generic photometric compiler separates a smooth MGE envelope from finite
 positive image residuals. The current candidate uses an authored envelope fraction
 of 0.95, an 8-fit-pixel smoothing scale, and a maximum of 4096 residual features.
 Each residual receives one conditional depth and finite XYZ material; each optical
-lens supplies coarse envelope chromaticity and component colors on common geometry.
+dataset supplies coarse envelope chromaticity and component colors on common geometry.
 The selected analytic fit retained 4085 features, with total RMSE 0.03825, 5.90%
 missing light and 17.79% excess light. These display-fit metrics are not a visual
 acceptance or a calibrated photometric validation.
@@ -35,10 +35,10 @@ core texture. This is neither measured stellar depth nor a dynamical mass model.
 
 ## Source images
 
-| Lens | Native publisher image |
+| Dataset | Native publisher image |
 | --- | --- |
 | [VST/OmegaCAM, eso1119b](https://www.eso.org/public/images/eso1119b/) | Optical G/R/I, 14540 × 14540 pixels, 50.88′ square; light/geometry reference. |
-| [WFI, eso0844a](https://www.eso.org/public/images/eso0844a/) | Optical B/V/I, 8040 × 7560 pixels, 31.88′ × 29.99′; second material lens. Some publisher mosaic gaps contain DSS data. |
+| [WFI, eso0844a](https://www.eso.org/public/images/eso0844a/) | Optical B/V/I, 8040 × 7560 pixels, 31.88′ × 29.99′; second material dataset. Some publisher mosaic gaps contain DSS data. |
 
 Native TIFFs, complete AVM metadata and identities are pinned. Angular registration
 uses native dimensions. Earlier 8192-pixel WebP preparation is historical; it is not
@@ -73,7 +73,7 @@ wording. Neither historical receipt qualifies the corrected native inputs.
 ## Actual results and current blocker
 
 The current inspection uses **459 retained slabs**, with one neutral bank and two
-optical lenses. [Front, oblique and both side views](evidence/2026-09-20/README.md)
+optical datasets. Front, oblique and both side views
 show the actual retained-DOM compiler renderer. The inspection wrapper is not the
 main application or a promoted Lab delivery. The object remains a research subject;
 no unfinished application package or new runtime bank is shipped here.
@@ -81,17 +81,17 @@ no unfinished application package or new runtime bank is shipped here.
 - **Bake 1:** `41d62d…c3e962` completed but was visually rejected for large bright
   clumps from the finite supports.
 - **Bake 2:** `412d07…1fa7bdca` stopped at 66% during VST painting; the
-  [original receipt](evidence/2026-09-20/bake2-compile.json) records the failure.
+  original receipt records the failure.
   A valid convex color mixture produced `255.00000000000003`. The correction
   rejects nonfinite values before bounding finite roundoff; its regression and
-  32,173,980 retained samples per lens pass. This does not qualify the renderer.
+  32,173,980 retained samples per dataset pass. This does not qualify the renderer.
 - **Bake 3:** `omega-centauri-bake3`
-  completed both lenses in 271.59 seconds for local inspection. The
-  [compile receipt](evidence/2026-09-20/bake3-compile.json) and
-  [Lab browser report](evidence/2026-09-20/bake3-browser.json) identify that state.
+  completed both datasets in 271.59 seconds for local inspection. The
+  compile receipt and
+  Lab browser report identify that state.
   All 1,040 neutral PNGs and geometry match bake 2, as recorded by the
-  [complete identity comparison](evidence/2026-09-20/bake3-identity.json).
-  Its failed [handoff measurements](evidence/2026-09-20/legacy-handoffs.json)
+  complete identity comparison.
+  Its failed handoff measurements
   therefore remain applicable. Historical screenshot paths inside that report
   are local archival paths; the four current images are retained beside it.
 
@@ -104,7 +104,7 @@ no unfinished application package or new runtime bank is shipped here.
 These checks ran on the working tree based on main plus the registration, photometric
 compiler, compact replay, coordinate transport and adaptive-layer changes now
 published in this branch. That base commit alone is not the tested version.
-The [validation record](evidence/2026-09-20/validation.json) pins the tested sources
+The validation record pins the tested sources
 and records reused checks, local failures and omitted application qualification.
 
 ## Adaptive-layer experiment — unaccepted
@@ -113,30 +113,30 @@ New compiler bakes plan at most **500 total XYZ slabs** while integrating every
 reference depth sample. This experiment reused bake 3's pinned field and both
 materials without source acquisition or refitting. Its inspection identity is
 `omega-centauri-adaptive`.
-The [bake receipt](evidence/2026-09-20/layer-bake.json) records 461 planned slabs
+The bake receipt records 461 planned slabs
 (147/143/171), 459 retained slabs (146/142/171), and 230.94 seconds for the bake.
 That is **41.1% fewer retained planes**, with approximately 5–7% fewer texture bytes.
 It is not a corresponding bake-speed claim: depth sampling work is preserved.
 
-The [browser comparison](evidence/2026-09-20/layer-handoffs.json) uses the same
+The browser comparison uses the same
 renderer, camera and interpolation for original and optimized banks. Front-view
 normalized L1 stays below 0.0065 and luminance changes by about 1.2%. Both optical
-lenses and neutral still fail the unchanged 0.04 X/Z and Y/Z image-handoff limit.
+datasets and neutral still fail the unchanged 0.04 X/Z and Y/Z image-handoff limit.
 The additional X/Y diagnostic is recorded too; its old neutral outlier is not used
 as a stable comparison. The planner's displacement estimate is not rendered-quality
 acceptance.
 
-The [numerical alignment probe](evidence/2026-09-20/numerical-alignment.json)
+The numerical alignment probe
 fits translation, scale and rotation. It reduces L1 by only 2.6–5%; all twelve
 old/new X/Z and Y/Z pairs remain failed. Native relative registration separately
 passes at 0.097175 arcsec held-out RMS. These results do not support a simple global
 2D misregistration as the explanation; they do not exclude sampling or compositing
-defects. [Luminosity-weighted shape moments](evidence/2026-09-20/shape-moments.json)
+defects. Luminosity-weighted shape moments
 in the retained envelope domain give approximate principal-axis ratios
 1 : 0.98 : 0.83; this is not an observed isophotal shape measurement or side-view
 rendering acceptance.
 
-The independent [Crab replay comparison](evidence/2026-09-20/crab-comparison.json)
+The independent Crab replay comparison
 reduces 542 retained slabs to 391 and verifies all 2,737 texture pins and decoded
 alpha/geometry. Twelve of fourteen handoffs pass before and after. The two Spitzer
 failures persist and worsen, so this experiment does not promote Crab either.

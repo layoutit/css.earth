@@ -8,7 +8,7 @@ import { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, 0, 1, 0, 1, 0],
   metersPerUnit: 1, bodyRadiusM: 1 };
-const descriptor = (id: string, order: number, classification: string) => ({ schema: 'cssearth-object@1', id, properties: {
+const descriptor = (id: string, order: number, classification: string) => ({ schema: 'cssearth-object@2', id, properties: {
   catalog: { name: id, systemName: 'Solar System', classification, color: '#aabbcc', distanceAu: 1, description: `The ${id}.`, order, context: { name: id } },
   worldFrame: frame } });
 const au = (value: number) => ({ meters: value * 149597870700, value, unit: 'AU', quantity: 'geometric', referencePoint: 'heliocentre', epochJdTt: 2461286.5 });

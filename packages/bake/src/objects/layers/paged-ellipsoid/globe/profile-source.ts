@@ -65,10 +65,10 @@ export function parsePagedProfile(value: unknown) {
   return Object.assign({}, assets, metadata, {camera: assets.camera});
 }
 export const isPagedEllipsoidRecipe = (value: unknown): boolean => record(value) && value.schema === 'cssearth-paged-ellipsoid@1';
-const lens = object({id: string, maximumZoom: number, view: optional(string), surfaceBankId: optional(string), surfaceUrl: optional(string),
+const dataset = object({id: string, maximumZoom: number, view: optional(string), surfaceBankId: optional(string), surfaceUrl: optional(string),
   polesUrl: optional(string), surfacePagePrefix: optional(string), interiorTextures: optional(dictionary(string)),
   focus: optional(object({longitude: number, latitude: number, zoom: number, northUp: optional(boolean),
     transition: optional(object({durationMilliseconds: number, preserveZoom: boolean}))}))});
-const lenses = object({defaultLens: string, controls: array(lens)});
-export const parsePagedLensBindings = (value: unknown) => parse(value, lenses, 'paged lens bindings');
-export type PagedLensBindings = Infer<typeof lenses>;
+const datasets = object({defaultDataset: string, controls: array(dataset)});
+export const parsePagedDatasetBindings = (value: unknown) => parse(value, datasets, 'paged dataset bindings');
+export type PagedDatasetBindings = Infer<typeof datasets>;

@@ -103,7 +103,7 @@ async function main(settingsPath:string){
  if(envelope)console.log(JSON.stringify({phase:'envelope',...envelope.metrics}));
  const detailTarget=envelope?target.map((v,p)=>coverage[p]?Math.max(0,v-envelope.projection[p]!):0):target;
  const fitted=fitSimulationGuidedEmission({target:detailTarget,coverage,width,height,bounds},s.controls,prior,s.depth,{onProgress:console.log});
- // The fitted field carries the model's name, so every lens material names the model it colours.
+ // The fitted field carries the model's name, so every dataset material names the model it colours.
  fitted.field.identity=resultId;
  const chroma=envelopeSettings?envelopeChromaSettings(envelopeSettings):null;
  const envelopeAt=envelope?createEnvelopeSampler(envelope.grid,prior):null,envelopeColor=envelope&&envelopeSettings&&chroma?envelopeChromaticity(envelopeSource?.rgb??rgb,envelopeSource?.coverage??coverage,width,height,bounds,envelopeSettings.scalePixels,chroma.halfSaturationQuantile,chroma.skyQuantile,chroma.coverageTaper):null;
@@ -136,7 +136,7 @@ async function main(settingsPath:string){
  await json(resolve(staging,'prepared/volume-slices.json'),painted.slices);
  const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:'cssearth-density-volume@1',data};
  await json(resolve(staging,'prepared/volume.json'),prepared);
- const descriptor={schema:'cssearth-object@1',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
+ const descriptor={schema:'cssearth-object@2',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
  await json(resolve(staging,'object.json'),descriptor);
  const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(l=>l.id)),partLeafIds=referenceLeafIds.map(leaf=>'all-light::'+leaf);
  const inspection={...prepared,data:{...data,stacks:data.stacks.map(stack=>({...stack,leaves:stack.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};

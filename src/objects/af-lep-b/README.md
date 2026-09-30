@@ -12,7 +12,7 @@ AF Lep b is the lowest-mass imaged planet whose mass was weighed through its orb
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
 
 **Rotation.** No rotation period or spin axis of AF Lep b is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

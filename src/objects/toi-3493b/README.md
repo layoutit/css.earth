@@ -8,7 +8,7 @@ It is the only planet known around TOI-3493. Its orbit and size follow Chaturved
 
 **Orbit.** Chaturvedi et al. 2025 (2025A&A...697A.169C), via the NASA Exoplanet Archive ps table (pl_refname CHATURVEDI_ET_AL_2025): P 8.1594667 d Chaturvedi et al. 2025 (2025A&A...697A.169C), via the NASA Exoplanet Archive ps table (pl_refname CHATURVEDI_ET_AL_2025): a/R* 14.07; Chaturvedi et al. 2025 (2025A&A...697A.169C), via the NASA Exoplanet Archive ps table (pl_refname CHATURVEDI_ET_AL_2025): inclination 89.25 degrees No archive row states an eccentricity; the orbit is taken as circular Chaturvedi et al. 2025 (2025A&A...697A.169C), via the NASA Exoplanet Archive ps table (pl_refname CHATURVEDI_ET_AL_2025): transit mid-time 2459313.0467455 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-3493's measured colour (#fff5f7, the colour lens of toi-3493 (src/objects/toi-3493/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-3493's measured colour (#fff5f7, the colour dataset of toi-3493 (src/objects/toi-3493/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-3493's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (37, 64, 91), folded onto its orbit. Upper limits and rows without an error are left out.
 

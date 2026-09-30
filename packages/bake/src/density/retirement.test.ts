@@ -63,7 +63,7 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
       bake: { sliceCounts: { x: 1, y: 1, z: 2 }, unitsPerSourceUnit: 1, imageWidth: 8, samplesPerSlab: 1, cropTransparent: true, opticalWeight: 1,
         imageEncoding: { format: 'png' as 'png' | 'webp' } }, anchors: [], provenance: { path: 'provenance.json' },
       sky: { path: 'sky.json' } };
-    const descriptor = { schema: 'cssearth-object@1', id: 'test-cloud', type: 'density-volume', properties: {
+    const descriptor = { schema: 'cssearth-object@2', id: 'test-cloud', type: 'density-volume', properties: {
       volume: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: bounds },
       preparation: { source: 'source/volume.json' } } };
     async function prepare() {

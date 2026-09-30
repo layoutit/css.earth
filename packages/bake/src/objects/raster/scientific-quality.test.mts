@@ -19,15 +19,15 @@ test('scientific quality masks intersect measured support without erasing valid 
   await writeFile(join(root,'count.cub'),cube([5,0,13,4,5,6,7,8]));
   await writeFile(join(root,'maplet.cub'),cube([125,125,99999,250,1500,1501,500,750]));
   const mask={format:'isis3',path:'count.cub',grid,sampling:'nearest',minimum:5};
-  const lens={format:'isis3',path:'values.cub',grid,sampling:'nearest',qualityMasks:[mask,{format:'isis3',path:'maplet.cub',grid:{...grid,noData:99999},sampling:'nearest',maximum:1500}]};
-  const surface=await loadScienceSurface(root,lens);
+  const dataset={format:'isis3',path:'values.cub',grid,sampling:'nearest',qualityMasks:[mask,{format:'isis3',path:'maplet.cub',grid:{...grid,noData:99999},sampling:'nearest',maximum:1500}]};
+  const surface=await loadScienceSurface(root,dataset);
   assert.equal(surface.sample(45,45),0,'Five images and125m support a valid zero science value');
   for(const lon of [135,225,315])assert.equal(surface.sample(lon,45),null,'Zero/few images or missing maplet reject finite science');
   assert.ok(Math.abs(required(surface.sample(45,-45))-.8)<1e-6,'Exact1500m threshold included');
   assert.equal(surface.sample(135,-45),null,'Coarser-than-threshold excluded');
   assert.equal(surface.sample(89.999,45),0);assert.equal(surface.sample(90.001,45),null,'No quality-edge interpolation');
   const counts=await loadScienceSurface(root,mask);assert.equal(counts.sample(135,45),0,'A diagnostic retains actual zero image count');
-  assert.throws(()=>validateScienceQualityMasks({...lens,sampling:'bilinear'}),/nearest/);
-  assert.throws(()=>validateScienceQualityMasks({...lens,qualityMasks:[{...mask,minimum:NaN}]}),/bounded/);
+  assert.throws(()=>validateScienceQualityMasks({...dataset,sampling:'bilinear'}),/nearest/);
+  assert.throws(()=>validateScienceQualityMasks({...dataset,qualityMasks:[{...mask,minimum:NaN}]}),/bounded/);
  }finally{await rm(root,{recursive:true,force:true});}
 });

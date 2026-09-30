@@ -5,13 +5,13 @@ import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
 import { loadNativeSourcePoleSampler, prepareSurfaces } from './surfaces.ts';
 import { parseRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
-import { loadNativeObservationPoleSampler, parseObservationLens } from '../objects/layers/observation/index.ts';
+import { loadNativeObservationPoleSampler, parseObservationDataset } from '../objects/layers/observation/index.ts';
 
 describe('native source pole sampling', () => {
     it('stores constant opaque lossless surfaces as one exact texel while preserving their coordinate domain and polar alpha', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-constant-surface-'));
         try {
-            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
+            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
                 width: 64, height: 32, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 thumbnail: { size: 8 }, surfaces: [{ id: 'color', source: 'color.json', falseColor: false, output: '{id}{suffix}.webp',
@@ -49,7 +49,7 @@ describe('native source pole sampling', () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-numeric-angular-'));
         try {
             await sharp({create:{width:128,height:64,channels:3,background:'#488ecc'}}).png().toFile(join(directory,'photo.png'));
-            const base = {schema:'cssearth-raster-recipe@1',publicBase:'/scenes/test/',sourceWidth:128,sourceHeight:64,
+            const base = {schema:'cssearth-raster-recipe@2',publicBase:'/scenes/test/',sourceWidth:128,sourceHeight:64,
                 width:64,height:32,latitudeBands:4,polarTile:16,resample:'source-packed',unpackedResizeBeforePack:true,
                 polarProjection:'angular-nearest',polesOutput:'poles-{id}{suffix}.webp',surfaceMetadata:{schema:'test@1'},
                 thumbnail:{size:8,crop:{left:12,top:12,width:16,height:16}},surfaces:[{id:'photo',source:'photo.png',falseColor:false,output:'{id}{suffix}.webp',thumbnail:'thumb-{id}.webp'}]};
@@ -78,7 +78,7 @@ describe('native source pole sampling', () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-small-surface-'));
         try {
             await sharp({ create: { width: 128, height: 64, channels: 3, background: '#488ecc' } }).png().toFile(join(directory, 'source.png'));
-            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
+            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
                 width: 128, height: 64, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 thumbnail: {size: 8}, surfaces: [{id: 'science', source: 'source.png', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp', resolutionScale: .5}] });
@@ -103,14 +103,14 @@ describe('native source pole sampling', () => {
             expect(() => parseRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]})).toThrow(/integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }
     });
-    it('draws a catalogue lens over an earlier surface: empty cells take its pixels scaled, feature cells keep their colour', async () => {
+    it('draws a catalogue dataset over an earlier surface: empty cells take its pixels scaled, feature cells keep their colour', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-underlay-'));
         try {
             await sharp({ create: { width: 64, height: 32, channels: 3, background: { r: 200, g: 100, b: 50 } } }).png().toFile(join(directory, 'photo.png'));
             const photo = { id: 'photo', source: 'photo.png', falseColor: false, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp' };
             const catalogue = { id: 'dunes', source: 'dunes.tif', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp',
                 science: { scientific: { displaySampling: 'nearest' } }, underlay: { surface: 'photo', brightness: 0.5 } };
-            const recipe = { schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
+            const recipe = { schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
                 width: 64, height: 32, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 thumbnail: { size: 8 }, surfaces: [photo, catalogue] };
@@ -140,17 +140,17 @@ describe('native source pole sampling', () => {
             expect(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, bits: 9 } }] })).toThrow(/bits must be an integer from 1 to 8, not 9/);
             expect(() => parseRasterRecipe({ ...recipe, surfaces: [catalogue, photo] })).toThrow(/earlier surface photo/);
             expect(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0 } }] })).toThrow(/brightness must be in \(0, 1\], not 0/);
-            expect(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, science: undefined }] })).toThrow(/science lens/);
+            expect(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, science: undefined }] })).toThrow(/science dataset/);
         } finally { await rm(directory, { recursive: true, force: true }); }
     });
-    it('centres the lens thumbnail on a declared longitude, wrapping across the map edge', async () => {
+    it('centres the dataset thumbnail on a declared longitude, wrapping across the map edge', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-thumbnail-centre-'));
         try {
             // Red at the left edge (longitude 0), blue elsewhere: a crop centred on longitude 0 straddles the seam.
             const pixels = Buffer.alloc(128 * 64 * 3);
             for (let y = 0; y < 64; y++) for (let x = 0; x < 128; x++) pixels.set(x < 4 || x >= 124 ? [255, 0, 0] : [0, 0, 255], (y * 128 + x) * 3);
             await sharp(pixels, { raw: { width: 128, height: 64, channels: 3 } }).png().toFile(join(directory, 'source.png'));
-            const base = { schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
+            const base = { schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
                 width: 128, height: 64, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 surfaces: [{ id: 'seam', source: 'source.png', falseColor: false, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp' }] };
@@ -197,7 +197,7 @@ describe('native source pole sampling', () => {
                 pixels.set([40 + x, 80 + y, 120], (y * 8 + x) * 3);
             const path = join(directory, 'coverage.png');
             await writeFile(path, await sharp(pixels, { raw: { width: 8, height: 4, channels: 3 } }).png().toBuffer());
-            const plan = parseObservationLens({ id: 'photo', input: 'coverage.png', nativeSourcePoles: true,
+            const plan = parseObservationDataset({ id: 'photo', input: 'coverage.png', nativeSourcePoles: true,
                 coverage: { kind: 'black-fill', southConnected: true } });
             const sampler = await loadNativeObservationPoleSampler(path, plan), color = [0, 0, 0, 0];
             expect(sampler.sample(67.5, 67.5, color)).toBe(true);

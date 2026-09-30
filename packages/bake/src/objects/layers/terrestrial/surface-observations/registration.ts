@@ -1,13 +1,13 @@
 /**
  * The registration stage: every camera route is measured after it loads, the same way, and the numbers go into the
- * lens report instead of a body's prose.
+ * dataset report instead of a body's prose.
  *
  * Two measurements, both advisory. The silhouette compares the limb the mesh projects with the contour the frame shows,
  * frame by frame, and reports the position-angle residual with the noise floor the frames themselves set: consecutive
  * exposures minutes apart see one geometry, so the scatter of their residuals is measurement, and what survives
  * subtracting it in quadrature is the systematic part a wrong camera would leave. The reference sweep turns the body
  * under each frame against a surface reference and reports the peak offset and the margin over both mirrors. The
- * reference is a mapped observation of the same body when the lens names one, and otherwise the lens's other frames.
+ * reference is a mapped observation of the same body when the dataset names one, and otherwise the dataset's other frames.
  *
  * Hard failure stays where it was, on lit shape over sky in the format that loads the frame. This stage never throws
  * for a bad number; it records the number. A frame it cannot judge is reported with the reason.
@@ -64,7 +64,7 @@ export interface SilhouetteReport {
 export interface ReferenceFrameReport extends Partial<RegistrationResult> { id: string; skipped?: string; decisive?: boolean }
 export interface ReferenceReport {
   kind: 'observation' | 'frames' | 'none';
-  /** The observation the lens named, or the frames that stood in, or why there was nothing. */
+  /** The observation the dataset named, or the frames that stood in, or why there was nothing. */
   observation?: string; referenceFrames?: number; reason?: string;
   shading: 'radial' | 'face';
   rule: typeof DECISIVE;
@@ -184,14 +184,14 @@ export function silhouetteRegistration(frames: readonly ObservationFrame[]): Sil
   return { rule: SILHOUETTE, frames: rows, scored: scored.length, rmsDegrees: rms, noiseFloorDegrees: noise, systematicDegrees: systematic, pairs: pairs.length };
 }
 
-/** The mapped observation a lens names as its reference, as a luminance sampler in the body frame. */
+/** The mapped observation a dataset names as its reference, as a luminance sampler in the body frame. */
 async function observationReference(context: LoadContext, observationId: string): Promise<SurfaceReference> {
   const raster = requireRecord(context.config.raster), observations = requireArray(raster.observations).map(value => requireRecord(value));
   const observation = observations.find(entry => entry.id === observationId);
-  if (!observation) throw new Error(`The lens names reference observation ${observationId}, which the recipe does not state.`);
+  if (!observation) throw new Error(`The dataset names reference observation ${observationId}, which the recipe does not state.`);
   const manifest = context.source.manifest;
   if (!manifest) throw new Error('The reference observation needs the source manifest.');
-  const inputs = requireArray(manifest.inputs).map(value => requireRecord(value)), entry = inputs.find(input => input.lensId === observationId);
+  const inputs = requireArray(manifest.inputs).map(value => requireRecord(value)), entry = inputs.find(input => input.datasetId === observationId);
   if (!entry) throw new Error(`Reference observation ${observationId} has no pinned source.`);
   const photograph = await loadNativePhotograph(context.sourceDirectory, entry, observation.validity), rgb = [0, 0, 0];
   return { sample: (longitude, latitude) => photograph.sample(longitude, latitude, rgb) ? 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2] : null };
@@ -209,7 +209,7 @@ function prepareAll(frames: readonly ObservationFrame[], rows: { id: string; ski
   return out;
 }
 
-/** Each frame turned under a reference: a named observation of the body, or the lens's other frames. */
+/** Each frame turned under a reference: a named observation of the body, or the dataset's other frames. */
 export async function referenceRegistration(frames: readonly ObservationFrame[], context: LoadContext, observationId?: string, prepared?: Prepared[]): Promise<ReferenceReport> {
   const rows: ReferenceFrameReport[] = [], offsets: number[] = [];
   const carried = prepared ?? prepareAll(frames, rows);
@@ -259,7 +259,7 @@ export function reliefRegistration(frames: readonly ObservationFrame[], prepared
   return { rule: { ...RELIEF_DECISIVE, minimumFrames: DECISIVE.minimumFrames }, frames: rows, decisive: offsets.length, medianOffsetDegrees: sorted.length >= DECISIVE.minimumFrames ? sorted[Math.floor(sorted.length / 2)] : null };
 }
 
-/** The stage for one lens, or null when no frame carries a camera to measure. */
+/** The stage for one dataset, or null when no frame carries a camera to measure. */
 export async function registrationStage(frames: readonly ObservationFrame[], recipe: Record<string, unknown>, context: LoadContext): Promise<RegistrationStageReport | null> {
   if (!frames.some(frame => frame.detector)) return null;
   const reference = recipe.reference === undefined ? undefined : requireString(requireRecord(recipe.reference).observation, 'reference observation');
@@ -271,7 +271,7 @@ export async function registrationStage(frames: readonly ObservationFrame[], rec
 }
 
 /**
- * Which reference a lens lets turn its cameras about the pole (`by`), whether the silhouette may tilt them about the
+ * Which reference a dataset lets turn its cameras about the pole (`by`), whether the silhouette may tilt them about the
  * line of sight (`tilt`), and how far the other decisive references may disagree before a turn is declined.
  */
 export interface RefinementRecipe { by?: 'relief' | 'frames' | 'map'; tilt?: 'silhouette'; agreementDegrees: number }
@@ -289,7 +289,7 @@ export function parseRefinement(value: unknown): RefinementRecipe {
 export const TILT = { minimumScored: 3 } as const;
 export interface TiltDecision { applied: boolean; tiltDegrees: number | null; reason: string; scored: number; medianResidualDegrees: number | null; noiseFloorDegrees: number | null }
 
-/** Whether the silhouette may tilt the lens: the median of its scored residuals, when there are enough and the floor does not swallow it. */
+/** Whether the silhouette may tilt the dataset: the median of its scored residuals, when there are enough and the floor does not swallow it. */
 export function tiltDecision(stage: RegistrationStageReport): TiltDecision {
   const residuals = stage.silhouette.frames.map(frame => frame.residualDegrees).filter((r): r is number => r !== undefined).sort((a, b) => a - b);
   const median = residuals.length ? residuals[Math.floor(residuals.length / 2)] : null, floor = stage.silhouette.noiseFloorDegrees;
@@ -302,7 +302,7 @@ export function tiltDecision(stage: RegistrationStageReport): TiltDecision {
 export interface RefinementDecision { by: RefinementRecipe['by']; applied: boolean; turnDegrees: number | null; reason: string; medians: Record<string, number | null> }
 
 /**
- * Whether the named reference may turn the lens: it must be decisive over the rule's count of frames, and every other
+ * Whether the named reference may turn the dataset: it must be decisive over the rule's count of frames, and every other
  * reference that is decisive must put its median within the stated agreement. A conflict is reported, not resolved.
  */
 export function refinementDecision(stage: RegistrationStageReport, recipe: RefinementRecipe): RefinementDecision {

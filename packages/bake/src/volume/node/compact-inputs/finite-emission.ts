@@ -2,7 +2,7 @@
  * Offline replay of an accepted simulation-guided finite-emission delivery.
  *
  * The fitted emission field, its envelope gain map, the neutral alpha bank and the pinned depth density
- * are delivered inputs, so no fit, star removal or registration runs here. Per lens this repeats the
+ * are delivered inputs, so no fit, star removal or registration runs here. Per dataset this repeats the
  * accepted material arithmetic exactly: bilinear registered colour inside the coverage mask, component
  * plus envelope emission through the same perspective transform, and the same alpha-limited slab
  * material recolouring the same neutral textures at the same encoder settings.
@@ -14,7 +14,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { createEmissionField } from '../../fields/emission.ts';
 import { createEmissionMaterial } from '../../materials/component-material.ts';
-import { compilerSlabMaterial, lensChannelGainMaterial, validateChannelGain, validateLensToneCurve, type LensTone } from '../../materials/slab-material.ts';
+import { compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, validateDatasetToneCurve, type DatasetTone } from '../../materials/slab-material.ts';
 import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings, validateEnvelopeSettings } from '../../fields/simulation-envelope.ts';
 import { physicalToField, angularScale } from '../../coordinates/observer-tangent.ts';
 import { parseCloudAppearance } from '../../materials/cloud-appearance.ts';
@@ -27,7 +27,7 @@ import { loadSimulationPrior } from './simulation-prior.ts';
 import { localPath, pinned, type Pin } from './io.ts';
 import { containedPath } from './density-grid.ts';
 
-export const COMPACT_FINITE_EMISSION_SCHEMA = 'cssearth-compact-finite-emission@1';
+export const COMPACT_FINITE_EMISSION_SCHEMA = 'cssearth-compact-finite-emission@2';
 
 const parsePin = (value: unknown, label: string): Pin => {
   const pin = record(value, label);
@@ -50,7 +50,7 @@ async function json(root: string, pin: Pin): Promise<unknown> {
   return JSON.parse((pin.path.endsWith('.gz') ? gunzipSync(bytes) : bytes).toString('utf8'));
 }
 
-export interface CompactFiniteLens {
+export interface CompactFiniteDataset {
   imageId: string;
   /** Directory of regenerated material textures, matching the accepted delivery layout. */
   directory: string;
@@ -60,10 +60,10 @@ export interface CompactFiniteLens {
 }
 
 /**
- * Regenerate every lens of one delivered finite-emission model into `destination/<imageId>`.
+ * Regenerate every dataset of one delivered finite-emission model into `destination/<imageId>`.
  * Returns the painted banks; the delivery owner compiles, packs and verifies them.
  */
-export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, destination: string): Promise<CompactFiniteLens[]> {
+export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, destination: string): Promise<CompactFiniteDataset[]> {
   const input = record(await json(root, inputPin), 'compact finite emission');
   assert.equal(input.schema, COMPACT_FINITE_EMISSION_SCHEMA);
   assert.equal(input.method, 'simulation-guided-finite-material@1');
@@ -106,9 +106,9 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
     zRange: [zRange[0]!, zRange[1]!] as [number, number], gain: Float32Array.from(gain as number[]) };
   const envelopeAt = createEnvelopeSampler(envelopeGrid, depthPrior);
 
-  const lenses = input.lenses;
-  assert.ok(Array.isArray(lenses) && lenses.length > 0, 'A delivered finite model has at least one lens.');
-  // A lens tone curve is indexed by the model's own front-projection byte at the texel's sky position, read
+  const datasets = input.datasets;
+  assert.ok(Array.isArray(datasets) && datasets.length > 0, 'A delivered finite model has at least one dataset.');
+  // A dataset tone curve is indexed by the model's own front-projection byte at the texel's sky position, read
   // from the delivered projection exactly as the accepted bake read the model's `fit-projection.png`.
   const levelAt = input.toneProjection === undefined ? null : await (async () => {
     const grid = record(input.toneProjection, 'delivered tone projection');
@@ -127,26 +127,26 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
       return at(i, j) * (1 - fu) * (1 - fv) + at(i + 1, j) * fu * (1 - fv) + at(i, j + 1) * (1 - fu) * fv + at(i + 1, j + 1) * fu * fv;
     };
   })();
-  const seen = new Set<string>(), results: CompactFiniteLens[] = [];
-  for (const value of lenses as unknown[]) {
-    const lens = record(value, 'delivered lens');
-    const imageId = lens.imageId;
-    assert.ok(typeof imageId === 'string' && /^[a-z][a-z0-9-]*$/.test(imageId), 'Invalid delivered lens id.');
-    assert.ok(!seen.has(imageId), 'Duplicate delivered lens.'); seen.add(imageId);
-    const filter = record(lens.densityFilter, 'delivered density filter');
+  const seen = new Set<string>(), results: CompactFiniteDataset[] = [];
+  for (const value of datasets as unknown[]) {
+    const dataset = record(value, 'delivered dataset');
+    const imageId = dataset.imageId;
+    assert.ok(typeof imageId === 'string' && /^[a-z][a-z0-9-]*$/.test(imageId), 'Invalid delivered dataset id.');
+    assert.ok(!seen.has(imageId), 'Duplicate delivered dataset.'); seen.add(imageId);
+    const filter = record(dataset.densityFilter, 'delivered density filter');
     assert.deepEqual({ cutoff: filter.cutoff, softness: filter.softness, showRemoved: filter.showRemoved },
       { cutoff: 0, softness: .25, showRemoved: false }, 'Compact replay requires the accepted unchanged density filter.');
-    const bounds = bounds2(lens.tangentBoundsKpc, `${imageId} tangent bounds`);
+    const bounds = bounds2(dataset.tangentBoundsKpc, `${imageId} tangent bounds`);
 
-    const registered = await pinned(root, parsePin(lens.registered, `${imageId} registered image`));
+    const registered = await pinned(root, parsePin(dataset.registered, `${imageId} registered image`));
     const decoded = await sharp(registered).removeAlpha().raw().toBuffer({ resolveWithObject: true });
     const { width, height } = decoded.info, rgb = decoded.data;
     // Only this mask's alpha is read, at the registered resolution and again at envelope scale, exactly
     // as the accepted bake read the registered original's alpha.
-    const maskBytes = await pinned(root, parsePin(lens.coverage, `${imageId} coverage mask`));
+    const maskBytes = await pinned(root, parsePin(dataset.coverage, `${imageId} coverage mask`));
     const coverage = await sharp(maskBytes).resize(width, height, { fit: 'fill' }).ensureAlpha().raw().toBuffer();
 
-    const lensMaterial = createEmissionMaterial(field, { id: imageId, sampleRgb(x, y, out) {
+    const datasetMaterial = createEmissionMaterial(field, { id: imageId, sampleRgb(x, y, out) {
       const tx = x / A, ty = y / A, u = (tx - bounds.min[0]) / (bounds.max[0] - bounds.min[0]) * width - .5,
         v = (bounds.max[1] - ty) / (bounds.max[1] - bounds.min[1]) * height - .5;
       if (u < 0 || v < 0 || u > width - 1 || v > height - 1) return false;
@@ -162,10 +162,10 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
       return true;
     } }, preparedField);
 
-    const lensRgb = await sharp(registered).resize(envelopeGrid.width, envelopeGrid.height, { fit: 'fill' }).removeAlpha().raw().toBuffer();
-    const lensAlpha = await sharp(maskBytes).resize(envelopeGrid.width, envelopeGrid.height, { fit: 'fill' }).ensureAlpha().raw().toBuffer();
-    const lensCoverage = Uint8Array.from({ length: envelopeGrid.width * envelopeGrid.height }, (_, p) => lensAlpha[p * 4 + 3]! >= 250 ? 1 : 0);
-    const envelopeColor = envelopeChromaticity(lensRgb, lensCoverage, envelopeGrid.width, envelopeGrid.height, envelopeGrid.bounds, settings.scalePixels, chroma.halfSaturationQuantile, chroma.skyQuantile, chroma.coverageTaper);
+    const datasetRgb = await sharp(registered).resize(envelopeGrid.width, envelopeGrid.height, { fit: 'fill' }).removeAlpha().raw().toBuffer();
+    const datasetAlpha = await sharp(maskBytes).resize(envelopeGrid.width, envelopeGrid.height, { fit: 'fill' }).ensureAlpha().raw().toBuffer();
+    const datasetCoverage = Uint8Array.from({ length: envelopeGrid.width * envelopeGrid.height }, (_, p) => datasetAlpha[p * 4 + 3]! >= 250 ? 1 : 0);
+    const envelopeColor = envelopeChromaticity(datasetRgb, datasetCoverage, envelopeGrid.width, envelopeGrid.height, envelopeGrid.bounds, settings.scalePixels, chroma.halfSaturationQuantile, chroma.skyQuantile, chroma.coverageTaper);
 
     const sampleEmission = (x: number, y: number, z: number, out: Vector3) => {
       const p = physicalToField([x, y, z], distance);
@@ -178,22 +178,22 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
       const p = physicalToField([x, y, z], distance);
       preparedField.sampleEmission(p[0], p[1], p[2], componentLight);
       const ce = componentLight[0], ee = envelopeAt(p[0], p[1], p[2]);
-      const hasComponent = ce > 0 && lensMaterial.sampleMaterial(p[0], p[1], p[2], componentColor);
+      const hasComponent = ce > 0 && datasetMaterial.sampleMaterial(p[0], p[1], p[2], componentColor);
       const hasEnvelope = ee > 0 && envelopeColor(p[0], p[1], envelopeRgb);
       const cw = hasComponent ? ce : 0, ew = hasEnvelope ? ee : 0;
       if (!(cw + ew > 0)) return false;
       for (let c = 0; c < 3; c++) out[c] = Math.min(255, Math.max(0, (cw * componentColor[c]! + ew * envelopeRgb[c]!) / (cw + ew)));
       return true;
     };
-    // A delivered lens may carry its own per-channel display correction and fitted tone curve against its own
+    // A delivered dataset may carry its own per-channel display correction and fitted tone curve against its own
     // source image; both straddle the alpha chroma limit exactly as the accepted bake applies them.
-    let tone: LensTone | null = null;
-    if (lens.toneCurve !== undefined) {
+    let tone: DatasetTone | null = null;
+    if (dataset.toneCurve !== undefined) {
       assert.ok(levelAt, `${imageId} carries a tone curve but the delivery has no tone projection.`);
-      tone = { curve: validateLensToneCurve(lens.toneCurve), levelAt };
+      tone = { curve: validateDatasetToneCurve(dataset.toneCurve), levelAt };
     }
-    const slabMaterial = lensChannelGainMaterial(compilerSlabMaterial(sampleEmission, sampleMaterial), sampleEmission,
-      exposureGain, fullChromaAlphaByte, lens.channelGain === undefined ? null : validateChannelGain(lens.channelGain), tone);
+    const slabMaterial = datasetChannelGainMaterial(compilerSlabMaterial(sampleEmission, sampleMaterial), sampleEmission,
+      exposureGain, fullChromaAlphaByte, dataset.channelGain === undefined ? null : validateChannelGain(dataset.channelGain), tone);
 
     const directory = resolve(destination, imageId);
     await mkdir(directory, { recursive: true });

@@ -8,7 +8,7 @@ It is the only planet known around TOI-4492. Its orbit and size follow Lillo-Box
 
 **Orbit.** Lillo-Box et al. 2026 (2026arXiv260719756L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2026): P 4.4331824 d Lillo-Box et al. 2026 (2026arXiv260719756L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2026): a/R* 9.17; Lillo-Box et al. 2026 (2026arXiv260719756L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2026): inclination 88.78 degrees No archive row states an eccentricity; the orbit is taken as circular Lillo-Box et al. 2026 (2026arXiv260719756L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2026): transit mid-time 2460555.31972 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-4492's measured colour (#fff0e9, the colour lens of toi-4492 (src/objects/toi-4492/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-4492's measured colour (#fff0e9, the colour dataset of toi-4492 (src/objects/toi-4492/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-4492's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (82), folded onto its orbit. Upper limits and rows without an error are left out.
 

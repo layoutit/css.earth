@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "prospero",
   "displayName": "Prospero",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons geometric vectors. Published doubled rotational interpretation; phase/pole are illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

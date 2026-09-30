@@ -16,7 +16,7 @@
       "id": "dlr-mars-express-mosaic",
       "subject": "DLR Mars Express SRC 12 m global mosaic",
       "status": "excluded",
-      "finding": "Lower-density overlapping monochrome content underlies the selected mosaic, so it is not a second lens.",
+      "finding": "Lower-density overlapping monochrome content underlies the selected mosaic, so it is not a second dataset.",
       "revisitWhen": "A distinct registered product supplies materially different valid coverage.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/phobos/source/manifest.json",
@@ -27,7 +27,7 @@
       "id": "hrsc-viking-dem",
       "subject": "HRSC/Viking 100 m terrain model (Willner et al. 2010; PDS MEX-MSA-HRSC-5-REFDR-PHOBOS-MAPS-V1.0 and the USGS 2 ppd GeoTIFF)",
       "status": "excluded",
-      "finding": "Both copies store height above the 11.1 km sphere (PDS label: MEX:DTM_DESC \"Height above Spheroid\"), the quantity the Elevation lens already shows from the newer SPC shape. Sampled in the app frame, USGS DEM minus SPC radial height has mean -15 m and RMS 284 m (r = 0.975, best shift within 1 degree); the PDS DTM gives mean +27 m, RMS 280 m. It adds no datum or quantity, only older, coarser relief; the dynamic heights of the HRSC atlas exist only as map-sheet contours.",
+      "finding": "Both copies store height above the 11.1 km sphere (PDS label: MEX:DTM_DESC \"Height above Spheroid\"), the quantity the Elevation dataset already shows from the newer SPC shape. Sampled in the app frame, USGS DEM minus SPC radial height has mean -15 m and RMS 284 m (r = 0.975, best shift within 1 degree); the PDS DTM gives mean +27 m, RMS 280 m. It adds no datum or quantity, only older, coarser relief; the dynamic heights of the HRSC atlas exist only as map-sheet contours.",
       "revisitWhen": "DLR or another producer releases a gridded dynamic-height (geopotential) product for Phobos.",
       "evidence": [
         "https://planetarymaps.usgs.gov/mosaic/Phobos_ME_HRSC_DEM_Global_2ppd.tif",
@@ -50,7 +50,7 @@
       "id": "thermal-and-mineral-spectra",
       "subject": "Disk-integrated thermal and mineralogical spectra",
       "status": "deferred",
-      "finding": "The recorded survey found no qualified mapped product, so disk spectra are not texture lenses.",
+      "finding": "The recorded survey found no qualified mapped product, so disk spectra are not texture datasets.",
       "revisitWhen": "A registered mapped product with documented quantity, frame and coverage becomes available.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/phobos/source/manifest.json",
@@ -72,7 +72,7 @@
       "id": "trek-roughness-1km-baseline",
       "subject": "NASA Trek average roughness, 1 km baseline, from the MExLab 200 m DEM (and the HRSC 100 m DEM twin)",
       "status": "excluded",
-      "finding": "The only numeric original is a JPL Trek derivative (Float32 GeoTIFF, 350 x 175 cells at 1.03 degrees, about 200 m) whose metadata gives no formula and no unit; its values are signed (-153 to +120, median 0.07) and track the source DEM minus its 5 x 5 cell mean (r = 0.93), so it is an undocumented local-relief residual of an older 1 degree DEM, not a published roughness distinct from the SPC Elevation and Slope lenses. The HRSC twin (Phobos_ME_HRSC_AvgRoughness1kmBaseline_Global_2ppd, credited by Trek to Heather Lethcoe at JPL) is the same kind of product: values -125 to +133, mean 0, correlation 0.93 with the HRSC DEM minus its 11 x 11 cell (about 1.1 km) mean; its metadata also states no formula or unit.",
+      "finding": "The only numeric original is a JPL Trek derivative (Float32 GeoTIFF, 350 x 175 cells at 1.03 degrees, about 200 m) whose metadata gives no formula and no unit; its values are signed (-153 to +120, median 0.07) and track the source DEM minus its 5 x 5 cell mean (r = 0.93), so it is an undocumented local-relief residual of an older 1 degree DEM, not a published roughness distinct from the SPC Elevation and Slope datasets. The HRSC twin (Phobos_ME_HRSC_AvgRoughness1kmBaseline_Global_2ppd, credited by Trek to Heather Lethcoe at JPL) is the same kind of product: values -125 to +133, mean 0, correlation 0.93 with the HRSC DEM minus its 11 x 11 cell (about 1.1 km) mean; its metadata also states no formula or unit.",
       "revisitWhen": "The producer or a paper publishes the roughness definition and unit, or a roughness map computed from the selected Ernst et al. (2023) shape is released.",
       "evidence": [
         "https://trek.nasa.gov/phobos/TrekWS/rest/cat/data/stream?label=AvgRoughness1kmBaseline_DTM_MExLab_200_final",
@@ -101,7 +101,7 @@
       "id": "ph9224gt-crater-catalogue",
       "subject": "PH9224GT global catalogue of 9,224 Phobos craters (Salamuniccar et al. 2014), with its Trek crater count and abundance rasters",
       "status": "included",
-      "finding": "Crater catalogue lens: every 0.125 degree cell a catalogued rim circle (published centre and angular radius, Radius_deg) crosses, drawn over the Monochrome mosaic in grey. The Trek ArcGIS layer returns all 9,224 points in five pages; its Radius_m equals Radius_deg on the 11.1 km sphere for every record. The catalogue names 15 craters; their centres lie 0.16 to 0.95 km from the IAU Gazetteer centres (Skyresh 3.25 km, where the Gazetteer is also 3.1 km from the SPC depression) and 0.06 to 0.64 km from the depression each makes in the SPC shape (Stickney 0.63, Hall 0.28, Roche 0.42 km). Needs the circle presence in geology-grid.py and a scientific underlay in the terrestrial lane.",
+      "finding": "Crater catalogue dataset: every 0.125 degree cell a catalogued rim circle (published centre and angular radius, Radius_deg) crosses, drawn over the Monochrome mosaic in grey. The Trek ArcGIS layer returns all 9,224 points in five pages; its Radius_m equals Radius_deg on the 11.1 km sphere for every record. The catalogue names 15 craters; their centres lie 0.16 to 0.95 km from the IAU Gazetteer centres (Skyresh 3.25 km, where the Gazetteer is also 3.1 km from the SPC depression) and 0.06 to 0.64 km from the depression each makes in the SPC shape (Stickney 0.63, Hall 0.28, Roche 0.42 km). Needs the circle presence in geology-grid.py and a scientific underlay in the terrestrial lane.",
       "evidence": [
         "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer",
         "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=PH9224GT_Phobos2000",
@@ -124,7 +124,7 @@
       "subject": "SBMT facet table field Gravitational magnitude (m/s^2) of the Ernst et al. (2023) shape",
       "status": "deferred",
       "finding": "The released facet table that supplies Relative albedo and Slope also carries surface gravitational acceleration and its uncertainty per facet, under the same density, rotation and Mars assumptions as Slope. It fits the existing facet-scalars route; it was outside the Mars Express scope of this change.",
-      "revisitWhen": "A Phobos change adds facet-table lenses.",
+      "revisitWhen": "A Phobos change adds facet-table datasets.",
       "evidence": [
         "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
         "https://doi.org/10.1186/s40623-023-01814-7"

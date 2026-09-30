@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "shape-parameters",
@@ -55,7 +55,7 @@
         "latitudeDegrees": 20,
         "ambient": 0.35,
         "diffuse": 0.65,
-        "lensId": "model"
+        "datasetId": "model"
       }
     }
   ],

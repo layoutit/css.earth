@@ -138,17 +138,17 @@ export function decodeNpyLonLatGrid({ values, longitudes, latitudes }: { values:
 
 /** Load the recipe's value, node and frame files. Paths are relative to the object's source directory. */
 export async function loadNpyLonLatGrid(root: string, value: unknown) {
-  const lens = requireRecord(value, 'npy grid lens'), grid = requireRecord(lens.grid, 'grid');
-  if (lens.sampling !== 'nearest' || grid.longitudeDirection !== 'east') {
+  const dataset = requireRecord(value, 'npy grid dataset'), grid = requireRecord(dataset.grid, 'grid');
+  if (dataset.sampling !== 'nearest' || grid.longitudeDirection !== 'east') {
     throw new TypeError('An .npy longitude/latitude grid is sampled at its nearest node with east-positive longitudes.');
   }
   const read = async (path: unknown, label: string) => readNpy(await readFile(resolve(root, insideRoot(requireString(path, label), label))));
-  const values = await read(lens.path, 'path');
+  const values = await read(dataset.path, 'path');
   const longitudes = await read(grid.longitudePath, 'grid.longitudePath'), latitudes = await read(grid.latitudePath, 'grid.latitudePath');
   if (values.shape[1] !== requireFiniteNumber(grid.width, 'grid.width') || values.shape[0] !== requireFiniteNumber(grid.height, 'grid.height')) {
     throw new TypeError('The .npy grid shape differs from the recipe width and height.');
   }
-  const frame = lens.frameTransfer === undefined ? null : requireRecord(lens.frameTransfer, 'frameTransfer');
+  const frame = dataset.frameTransfer === undefined ? null : requireRecord(dataset.frameTransfer, 'frameTransfer');
   const transfer = frame && await loadSpinFrameTransfer(root, insideRoot(requireString(frame.path, 'frameTransfer.path'), 'frameTransfer.path'),
     insideRoot(requireString(frame.meshSpinPath, 'frameTransfer.meshSpinPath'), 'frameTransfer.meshSpinPath'));
   const decoded = decodeNpyLonLatGrid({ values, longitudes, latitudes }, transfer?.meshToGrid ?? null);
@@ -167,10 +167,10 @@ export async function loadNpyLonLatGrid(root: string, value: unknown) {
     ...(transfer ? { frameTransfer: transfer.report } : {}) } };
 }
 
-/** Paths the lens reads besides its value array, so preparation can require each to be pinned. */
+/** Paths the dataset reads besides its value array, so preparation can require each to be pinned. */
 export function npyLonLatGridDependencies(value: unknown) {
-  const lens = requireRecord(value), grid = requireRecord(lens.grid);
-  const frame = lens.frameTransfer === undefined ? null : requireRecord(lens.frameTransfer);
+  const dataset = requireRecord(value), grid = requireRecord(dataset.grid);
+  const frame = dataset.frameTransfer === undefined ? null : requireRecord(dataset.frameTransfer);
   return [grid.longitudePath, grid.latitudePath, ...(frame ? [frame.path, frame.meshSpinPath] : [])]
     .map(path => requireString(path));
 }

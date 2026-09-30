@@ -88,11 +88,11 @@ export function anomalyColor(value: number, recipe: AnomalyPalette) {
     (recipe.palette[Math.min(index + 1, recipe.palette.length - 1)][c] - channel) * fraction));
 }
 
-/** The dated ENSO lens recipe; its reader text is ensoText's and its notes restate the product and date. */
+/** The dated ENSO dataset recipe; its reader text is ensoText's and its notes restate the product and date. */
 export function ensoContent(recipe: CoraltempRecipe) {
   const date = new Date(`${recipe.date}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
   return { id: 'enso', label: 'ENSO',
-    thumbnail: '/scenes/earth/earth-lens-enso.webp', falseColor: true,
+    thumbnail: '/scenes/earth/earth-dataset-enso.webp', falseColor: true,
     source: { id: 'noaa-coraltemp-anomaly', url: coraltempProductUrl },
     facts: [{ id: 'enso-status', label: 'NOAA status', value: recipe.advisory.status },
       { id: 'enso-advisory-date', label: 'Advisory issued', value: recipe.advisory.date },

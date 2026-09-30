@@ -49,8 +49,8 @@ The [manifest](source/manifest.json) records byte identities, complete credits, 
 
 ## Evidence
 
-- [Default view](evidence/2026-09-29/dots-and-stars.jpg): the photograph with the catalogue dots only (left) and with the LGGS stars added (right), in the app before the dots took their look from the photograph.
-- [Dots from the photograph](evidence/2026-09-29/dots-from-photograph.jpg): the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
+- Default view: the photograph with the catalogue dots only (left) and with the LGGS stars added (right), in the app before the dots took their look from the photograph.
+- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
 - The generated [runtime inventory](inventory.json) lists the 86 layer images, the bank, presentation and provenance, the six catalogue banks and the two drawn banks, `dots` and `stars`.
 - Measured in the app on this branch, dots hidden: tilting from face-on to just before edge-on dims the photograph's total light from 3.4 to about 0.5 (screen luminance above the sky), and the edge-on layers that take over show 0.16. A brighter edge-on bake (up to 5×, still thin) was tried and not adopted.
 

@@ -112,7 +112,7 @@ test('checkout restores a missing compressed observation without refreshing exis
     records.map(entry => ({ kind: 'download', groups: ['refresh'], path: entry.path, url: entry.origin })) }));
   await writeFile(resolve(source, 'existing.png'), existing);
   await writeFile(resolve(source, 'preparation/acquisition.json'), plan);
-  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@2', inputs: records,
+  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@3', inputs: records,
     documents: [{ ...pin('preparation/acquisition.json', plan), purpose: 'Acquisition plan' }], generatedIntermediates: [] });
   await run(root, [RESTORE, '--object=titan']);
   assert.deepEqual(requests, ['/observation.IMG.gz']);
@@ -141,12 +141,12 @@ test('repository volume package restores a missing download from the object sour
   const origin = `http://127.0.0.1:${address.port}`;
   await writeRestore(root, origin);
   await json(resolve(root, 'src/objects/nebula/source/manifest.json'), {
-    schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', inputs: [{
+    schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', inputs: [{
       id: 'volume', path: 'src/objects/nebula/source.bin', origin: `${origin}/publisher.bin`,
     }], documents: [{ id: 'preview', path: 'src/objects/nebula/preview.png', origin: `${origin}/preview.png` }], generatedIntermediates: [],
   });
   await json(resolve(root, 'src/objects/nebula/source/presentation.json'), {
-    schema: 'cssearth-volume-presentation-source@1',
+    schema: 'cssearth-volume-presentation-source@2',
   });
   await rm(resolve(root, 'site/objects.mts'));
   await run(root, [RESTORE, '--repository-volumes']);
@@ -180,10 +180,10 @@ test('repository volume restore refuses a publisher page and takes a built input
   await writeRestore(root, origin);
   const composite = 'src/objects/galaxy/source/optical-composite.jpg', generator = 'packages/bake/authoring/galaxy/compose-optical.mts';
   const manifest = (input: Record<string, unknown>) => json(resolve(root, 'src/objects/galaxy/source/manifest.json'), {
-    schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', documents: [], generatedIntermediates: [],
+    schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', documents: [], generatedIntermediates: [],
     inputs: [{ id: 'optical', path: composite, origin: `${origin}/public/images/panorama/`, ...input }],
   });
-  await json(resolve(root, 'src/objects/galaxy/source/presentation.json'), { schema: 'cssearth-volume-presentation-source@1' });
+  await json(resolve(root, 'src/objects/galaxy/source/presentation.json'), { schema: 'cssearth-volume-presentation-source@2' });
   await rm(resolve(root, 'site/objects.mts'));
 
   // A download whose origin turns out to be a page: both the mirror miss and the HTML body are named, and nothing is written.
@@ -257,7 +257,7 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
     await writeFile(resolve(process.argv[3], 'mur-gibs.png'), 'pinned mosaic');
   `);
   await writeFile(resolve(source, 'science/mur-gibs-tiles.tar.gz'), archive);
-  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@2', inputs: [{
+  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@3', inputs: [{
     ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['enso'],
     credit: 'Fixture', license: 'CC0', acquisition: 'Pinned archive', redistribution: 'Allowed',
   }], generatedIntermediates: [{ ...pin('science/mur-gibs.png', mosaic), generator: 'MUR archive restore' }], documents: [] });
@@ -280,7 +280,7 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
     await writeFile(resolve(root, `public/scenes/titan/${name}.webp`), name);
   }
   await json(resolve(prepared, 'runtime.json'), { scene: { image: url('surface') } });
-  await json(resolve(prepared, 'controls.json'), { lenses: [{ thumbnailUrl: url('thumbnail') }] });
+  await json(resolve(prepared, 'controls.json'), { datasets: [{ thumbnailUrl: url('thumbnail') }] });
   await json(resolve(prepared, 'content.json'), { charts: [{ src: url('chart') }] });
   await json(resolve(prepared, 'surfaces.json'), { intermediateMap: url('source-map') });
   await run(root, ['packages/bake/cli/object-operations.mts', 'manifest', 'titan']);

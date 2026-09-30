@@ -1,5 +1,5 @@
 /**
- * Write the two JPL Horizons tables a ground-based lens's cameras are derived from, for exactly its frames
+ * Write the two JPL Horizons tables a ground-based dataset's cameras are derived from, for exactly its frames
  * (`packages/bake/cli/sphere-horizons.mts` fetches, reports and writes them).
  *
  * The observer table is Paranal (code 309) at each frame's exposure start as the frame's own header states it, the
@@ -20,7 +20,7 @@ import { loadObserverCameraInputs, zimpolExposure } from './observer-cameras.ts'
 
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
 const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
-/** A lens's two refresh steps in its acquisition plan, replacing any it had for those paths. */
+/** A dataset's two refresh steps in its acquisition plan, replacing any it had for those paths. */
 export async function writeHorizonsOperations(objectId: string, sourceDirectory: string) {
   const { record, frames } = await loadObserverCameraInputs(sourceDirectory);
   const command = horizonsCommand(JSON.parse(await readFile(resolve(ROOT, 'packages/astronomy/data/bodies', `${objectId}.json`), 'utf8')));

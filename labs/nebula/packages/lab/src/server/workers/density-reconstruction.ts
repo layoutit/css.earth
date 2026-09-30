@@ -116,7 +116,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   await json(resolve(output,'source/provenance.json'),provenance);
   await json(resolve(output,'source/validation.json'),validation);
   await json(resolve(output,'prepared/volume.json'),prepared);
-  const resultDescriptor={schema:'cssearth-object@1',id:work.id,type:'density-volume',properties:{volume:frame,
+  const resultDescriptor={schema:'cssearth-object@2',id:work.id,type:'density-volume',properties:{volume:frame,
     preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
   await json(resolve(output,'object.json'),resultDescriptor);
   const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(leaf=>leaf.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);

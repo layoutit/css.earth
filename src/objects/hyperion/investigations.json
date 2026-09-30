@@ -25,7 +25,7 @@
       "id": "usgs-voyager-network",
       "subject": "USGS Voyager control network map",
       "status": "excluded",
-      "finding": "The [USGS Voyager control network](https://astrogeology.usgs.gov/search/map/hyperion_image_control_network) has a four-frame high-pass-filtered Voyager map. It is much coarser than the selected Cassini data and uses an older frame; it is not an extra lens.",
+      "finding": "The [USGS Voyager control network](https://astrogeology.usgs.gov/search/map/hyperion_image_control_network) has a four-frame high-pass-filtered Voyager map. It is much coarser than the selected Cassini data and uses an older frame; it is not an extra dataset.",
       "revisitWhen": "It offers finer coverage than Cassini in this model's frame.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/hyperion_image_control_network"
@@ -53,7 +53,7 @@
     },
     {
       "id": "cassini-n1513999046",
-      "subject": "Cassini ISS frame N1513999046 in the Monochrome lens",
+      "subject": "Cassini ISS frame N1513999046 in the Monochrome dataset",
       "status": "excluded",
       "finding": "Its published camera places 36% of the lit source shape on the photograph's sky, above the 25% at which preparation refuses a frame.",
       "revisitWhen": "A corrected camera or pointing solution for the frame registers it with interior holdouts.",

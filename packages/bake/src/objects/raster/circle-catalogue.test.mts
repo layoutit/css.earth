@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parsePdsVertexFacetShape } from '@cssearth/bake/objects/geometry';
-import { checkDelimitedLabel, createCircleCatalogue, parseCircleCatalogueLens, parseCircleRows, validateCircleCatalogue } from '@cssearth/bake/objects/raster';
+import { checkDelimitedLabel, createCircleCatalogue, parseCircleCatalogueDataset, parseCircleRows, validateCircleCatalogue } from '@cssearth/bake/objects/raster';
 
 // A 1 km sphere as a subdivided cube, written as a PDS vertex-facet table in km.
 function sphereTable(n = 24) {
@@ -19,7 +19,7 @@ function sphereTable(n = 24) {
   return { text, grid: { metersPerUnit: 1000, expectedVertices: vertices.length, expectedFaces: faces.length } };
 }
 const fields = ['Pond Number', 'X', 'Y', 'Z', 'Latitude', 'Longitude', 'Distance', 'Diameter'].map((name, i) => ({ name, unit: i === 0 ? 'none' : i === 4 || i === 5 ? 'degree' : 'km' }));
-const lens = (records: number) => ({ format: 'circle-catalogue', path: 'ponds/table.csv', labelPath: 'ponds/table.xml', meshPath: 'shape/sphere.tab',
+const dataset = (records: number) => ({ format: 'circle-catalogue', path: 'ponds/table.csv', labelPath: 'ponds/table.xml', meshPath: 'shape/sphere.tab',
   sampling: 'nearest', displaySampling: 'nearest', categories: [{ value: 'outside', label: 'No catalogued pond', color: '#808080' }, { value: 'pond', label: 'Pond', color: '#00ffff' }],
   table: { expectedRecords: records, metersPerUnit: 1000, fields, idField: 'Pond Number', centerFields: ['X', 'Y', 'Z'], diameterField: 'Diameter',
     latitudeField: 'Latitude', longitudeField: 'Longitude', distanceField: 'Distance', consistency: { angleDegrees: 0.01, distanceMeters: 2 } },
@@ -33,7 +33,7 @@ const label = (records: number, file = 'table.csv') => `<File><file_name>${file}
 const sphere = sphereTable(), mesh = parsePdsVertexFacetShape(sphere.text, sphere.grid);
 
 test('a circle covers source-surface points within half its published diameter and nothing beyond', () => {
-  const profile = parseCircleCatalogueLens(lens(2));
+  const profile = parseCircleCatalogueDataset(dataset(2));
   const rows = parseCircleRows([row(1, 0, 0, 1, 0.2), row(2, 30, 90, 1.5, 0.05)].join('\r\n') + '\r\n', profile);
   const catalogue = createCircleCatalogue(rows, profile, mesh);
   assert.deepEqual(catalogue.report.withheldCircles, [2], 'a centre 500 m off the surface is withheld, not moved');
@@ -47,7 +47,7 @@ test('a circle covers source-surface points within half its published diameter a
 });
 
 test('rows must reproduce their printed coordinates, and the label must describe the recipe', () => {
-  const profile = parseCircleCatalogueLens(lens(1));
+  const profile = parseCircleCatalogueDataset(dataset(1));
   const bad = row(1, 0, 0, 1, 0.1).replace(',0.00,0.00,', ',0.50,0.00,');
   assert.throws(() => parseCircleRows(bad + '\r\n', profile), /record 1 centre disagrees/);
   assert.throws(() => parseCircleRows(row(1, 0, 0, 1, 0.1) + '\n', profile), /CRLF/);
@@ -58,19 +58,19 @@ test('rows must reproduce their printed coordinates, and the label must describe
 
 test('the recipe is bound to the rendered mesh and its simplification allowance', () => {
   const terrain = { path: 'shape/sphere.tab', simplification: { maximumErrorMeters: 300 } };
-  assert.doesNotThrow(() => validateCircleCatalogue(lens(1), terrain));
-  assert.throws(() => validateCircleCatalogue({ ...lens(1), meshPath: 'shape/other.tab' }, terrain), /surface circle catalogue needs/);
-  assert.throws(() => validateCircleCatalogue({ ...lens(1), surfaceSampling: { method: 'closest-source-point', maximumDistanceMeters: 400 } }, terrain), /surface circle catalogue needs/);
-  assert.throws(() => validateCircleCatalogue({ ...lens(1), displaySampling: 'bilinear' }, terrain), /surface circle catalogue needs/);
+  assert.doesNotThrow(() => validateCircleCatalogue(dataset(1), terrain));
+  assert.throws(() => validateCircleCatalogue({ ...dataset(1), meshPath: 'shape/other.tab' }, terrain), /surface circle catalogue needs/);
+  assert.throws(() => validateCircleCatalogue({ ...dataset(1), surfaceSampling: { method: 'closest-source-point', maximumDistanceMeters: 400 } }, terrain), /surface circle catalogue needs/);
+  assert.throws(() => validateCircleCatalogue({ ...dataset(1), displaySampling: 'bilinear' }, terrain), /surface circle catalogue needs/);
 });
 
 test('over an underlay, one category marks the circles and surface outside them is missing', () => {
-  const recipe = { ...lens(1), categories: [{ value: 'pond', label: 'Pond', color: '#00ffff' }], underlay: { surface: 'normal', brightness: 0.35, grayscale: true, bits: 6 } };
+  const recipe = { ...dataset(1), categories: [{ value: 'pond', label: 'Pond', color: '#00ffff' }], underlay: { surface: 'normal', brightness: 0.35, grayscale: true, bits: 6 } };
   const terrain = { path: 'shape/sphere.tab', simplification: { maximumErrorMeters: 300 } };
   assert.doesNotThrow(() => validateCircleCatalogue(recipe, terrain));
   assert.throws(() => validateCircleCatalogue({ ...recipe, underlay: undefined }, terrain), /two categories/);
-  assert.throws(() => validateCircleCatalogue({ ...lens(1), underlay: recipe.underlay }, terrain), /one category over its underlay/);
-  const profile = parseCircleCatalogueLens(recipe);
+  assert.throws(() => validateCircleCatalogue({ ...dataset(1), underlay: recipe.underlay }, terrain), /one category over its underlay/);
+  const profile = parseCircleCatalogueDataset(recipe);
   const catalogue = createCircleCatalogue(parseCircleRows(row(1, 0, 0, 1, 0.2) + '\r\n', profile), profile, mesh);
   const at = (degrees: number) => { const a = degrees * Math.PI / 180; return [Math.cos(a) * 1000, Math.sin(a) * 1000, 0]; };
   assert.equal(catalogue.samplePoint(at(5))?.value, 0, 'inside is the one category');

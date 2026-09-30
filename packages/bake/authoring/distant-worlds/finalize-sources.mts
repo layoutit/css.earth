@@ -36,7 +36,7 @@ for (const b of bodies) {
     const source=await createSourceManifest({objectId:b.id,objectName:b.name,sourceRoot:src});
     const radial=await loadRadialTerrain({config,sourceDirectory:src,source});
     if (!radial) throw new TypeError('The source snapshot requires a radial terrain.');
-    const recipe={generator:'tools/objects/terrestrial-layers/radial-snapshot.mts',inputs:['published-shape','model-surface'],size:512,longitudeDegrees:55,latitudeDegrees:20,ambient:.45,diffuse:.55,lensId:'model'};
+    const recipe={generator:'tools/objects/terrestrial-layers/radial-snapshot.mts',inputs:['published-shape','model-surface'],size:512,longitudeDegrees:55,latitudeDegrees:20,ambient:.45,diffuse:.55,datasetId:'model'};
     const context=await renderRadialSnapshot({...recipe,faces:radial.faces,map});
     await write(resolve(src,'presentation/context.png'),context);
     const navigation=await read('src/objects/annefrank/source/preparation/navigation.json');

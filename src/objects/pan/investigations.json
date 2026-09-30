@@ -47,8 +47,7 @@
       "finding": "N1530371111_1, N1524970213_1 and N1867600368_1 expand sampled Monochrome physical-area coverage from 35.1% to 63.6%. The two older views are coarse (about 1.62 and 1.32 km/pixel); the 2017 addition is about 587 m/pixel. The released camera rows and unchanged meshes are retained. Native-source and preparation checks passed; current-main browser qualification remains pending.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pan_document.pdf",
-        "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pan/evidence/cassini-coverage/refresh.json"
+        "https://pds-rings.seti.org/cassini/iss/"
       ]
     },
     {
@@ -67,9 +66,7 @@
       "status": "unresolved",
       "finding": "The accepted extra views expand coverage but remain coarse and leave bright seams near the ridge. The maximum overlap gain is about 2.40 within2.5; the measured display stretch does not establish absolute albedo or resolve the seam.",
       "revisitWhen": "Independent overlap/calibration evidence supports a more consistent level without inventing far-side brightness.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pan/evidence/cassini-coverage/display-measurement.json"
-      ]
+      "evidence": []
     }
   ]
 }

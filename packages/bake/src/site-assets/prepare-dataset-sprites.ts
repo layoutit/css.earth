@@ -19,23 +19,22 @@ export async function prepareDatasetSprites(root = process.cwd()) {
   for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true }))
     .filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
     const id = sourceId(folder.name);
-    let page: unknown;
-    try { page = JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared/page.json'), 'utf8')); }
+    // The runtime's controls, as published beside it; a folder without them has no datasets to draw.
+    let controls: unknown;
+    try { controls = JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared/controls.json'), 'utf8')); }
     catch (error) {
       if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') continue;
       throw error;
     }
-    const record = sourceObject(page);
-    if (record.schema !== 'cssearth-object-page@1' || record.id !== id) throw new TypeError(`Invalid page data for ${id}`);
-    const lenses = sourceArray(sourceObject(sourceObject(record.controls).lenses).controls, sourceObject);
-    if (lenses.length < 2) continue;
-    const columns = Math.ceil(Math.sqrt(lenses.length));
-    const parts = await Promise.all(lenses.map(async (lens, index) => {
-      const lensId = sourceId(lens.id);
-      const sidebarEntry = sidebarImages[`${id}/${lensId}`];
-      const url = sidebarEntry ? sourceText(sourceObject(sidebarEntry).url2x) : sourceText(lens.thumbnailUrl);
+    const datasets = sourceArray(sourceObject(sourceObject(controls).datasets).controls, sourceObject);
+    if (datasets.length < 2) continue;
+    const columns = Math.ceil(Math.sqrt(datasets.length));
+    const parts = await Promise.all(datasets.map(async (dataset, index) => {
+      const datasetId = sourceId(dataset.id);
+      const sidebarEntry = sidebarImages[`${id}/${datasetId}`];
+      const url = sidebarEntry ? sourceText(sourceObject(sidebarEntry).url2x) : sourceText(dataset.thumbnailUrl);
       if (!/^\/(?:scenes|navigation)\/[a-z0-9_@./-]+\.webp$/u.test(url) || url.includes('/../'))
-        throw new TypeError(`Invalid dataset thumbnail URL for ${id}/${lensId}: ${url}`);
+        throw new TypeError(`Invalid dataset thumbnail URL for ${id}/${datasetId}: ${url}`);
       const input = await readFile(resolve(root, 'public', url.slice(1)));
       // The old <img> used object-fit: cover; bake that same crop into the sprite.
       return { input: await sharp(input).resize(tile, tile, { fit: 'cover', kernel: 'lanczos3' }).png().toBuffer(),

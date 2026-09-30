@@ -3,7 +3,7 @@ import { mkdir, rename, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createStarRemover } from '../../services/star-removal.ts';
 import { createReconstructor } from '../../services/density-reconstruction.ts';
-import { promoteVolumeLenses, type VolumeLensPromotion } from './volume-lens-promotion.ts';
+import { promoteVolumeDatasets, type VolumeDatasetPromotion } from './volume-dataset-promotion.ts';
 import { parseBakeArgs, readRecipe } from './config.ts';
 import { bakeDensity, bakePreviews, bakeSeparationPreviews } from './assets.ts';
 import { prepareBaseline, prepareEnvironment } from './removal.ts';
@@ -31,7 +31,7 @@ export async function bakeNebula(root: string, args: string[]) {
   assert.ok(selected.length, `Unknown image: ${options.image}`);
   const catalogue = JSON.parse((await pinned(root, recipe.catalogue)).toString());
   for (const image of selected) assert.equal(catalogue.targets.flatMap((target: any) => target.images).filter((input: any) => input.id === image.imageId).length, 1);
-  const promotion = JSON.parse((await pinned(root, recipe.promotion)).toString()) as VolumeLensPromotion;
+  const promotion = JSON.parse((await pinned(root, recipe.promotion)).toString()) as VolumeDatasetPromotion;
   const subject = (await json(resolve(root, 'labs/nebula/packages/lab/src/state/subjects.json'))).find((value: any) => value.id === recipe.subjectId);
   assert.equal(subject?.stars, recipe.stars.path);
   assert.deepEqual(subject.density.starAlignmentReference, recipe.starAlignment);
@@ -83,20 +83,20 @@ export async function bakeNebula(root: string, args: string[]) {
     let output: string | undefined;
     controller.signal.throwIfAborted();
     if (options.stage === 'all') {
-      const lenses = selected.map(image => {
-        const lens = promotion.lenses.find(value => value.imageId === image.imageId);
-        assert.ok(lens, `Missing saved presentation: ${image.imageId}`);
-        return { ...lens, resultId: results.find(value => value.imageId === image.imageId)!.resultId! };
+      const datasets = selected.map(image => {
+        const dataset = promotion.datasets.find(value => value.imageId === image.imageId);
+        assert.ok(dataset, `Missing saved presentation: ${image.imageId}`);
+        return { ...dataset, resultId: results.find(value => value.imageId === image.imageId)!.resultId! };
       });
-      const replay = { ...promotion, defaultLens: lenses.some(lens => lens.imageId === promotion.defaultLens) ? promotion.defaultLens : lenses[0]!.imageId, lenses };
-      output = `.local/nebula-lab/bakes/${recipe.id}-lenses`;
+      const replay = { ...promotion, defaultDataset: datasets.some(dataset => dataset.imageId === promotion.defaultDataset) ? promotion.defaultDataset : datasets[0]!.imageId, datasets };
+      output = `.local/nebula-lab/bakes/${recipe.id}-datasets`;
       const pending = resolve(root, output + '.pending');
       await rm(pending, { recursive: true, force: true });
       try {
-        await promoteVolumeLenses(root, replay, pending);
+        await promoteVolumeDatasets(root, replay, pending);
         const manifest = await json(resolve(pending, 'source/lens-manifest.json'));
         for (const path of Object.keys(manifest.outputs)) await pinned(pending, { path });
-        // The recipe's lens bank is replaced whole by its newest complete replay.
+        // The recipe's dataset bank is replaced whole by its newest complete replay.
         await rm(resolve(root, output), { recursive: true, force: true });
         await rename(pending, resolve(root, output));
       } finally { await rm(pending, { recursive: true, force: true }); }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "mercury-physical-solar-system-recipe",
@@ -215,14 +215,14 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
+      "origin": "Repository-authored Mercury panel, dataset, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside Mercury inputs.",
       "redistribution": "Prepared shell content with source provenance.",
       "consumers": [
         "panel",
-        "lenses",
+        "datasets",
         "charts"
       ],
       "sourceBinding": {
@@ -257,7 +257,7 @@
       "consumers": [
         "assets",
         "charts",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -298,24 +298,6 @@
       }
     },
     {
-      "id": "mercury-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Mercury sky, sun, and marker recipe.",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside Mercury inputs.",
-      "redistribution": "Prepared celestial assets.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
-      }
-    },
-    {
       "id": "mercury-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Mercury presentation capability recipe.",
@@ -341,7 +323,7 @@
       "redistribution": "Prepared raster assets.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -357,7 +339,7 @@
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
-        "lenses",
+        "datasets",
         "presentation",
         "features"
       ],
@@ -484,9 +466,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "topography",
+      "datasetId": "topography",
       "capture": {
         "attributions": [
           {
@@ -521,7 +503,7 @@
       "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
       "consumers": [
         "assets",
-        "lenses",
+        "datasets",
         "scene"
       ],
       "title": "MESSENGER MDIS BDR low-Sun monochrome mosaic",
@@ -563,7 +545,7 @@
       "redistribution": "Preparation provenance and reproducibility.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -583,7 +565,7 @@
       "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
       "consumers": [
         "assets",
-        "lenses",
+        "datasets",
         "scene"
       ],
       "title": "MESSENGER MDIS LOI higher-Sun monochrome mosaic",
@@ -625,7 +607,7 @@
       "redistribution": "Preparation provenance and reproducibility.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -645,7 +627,7 @@
       "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
       "consumers": [
         "assets",
-        "lenses",
+        "datasets",
         "scene"
       ],
       "title": "MESSENGER MDIS enhanced-color mosaic",
@@ -687,7 +669,7 @@
       "redistribution": "Preparation provenance and reproducibility.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -708,9 +690,9 @@
       "redistribution": "Original numeric product restored from its origin or source cache; prepared display images with credit.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "gravity",
+      "datasetId": "gravity",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -741,9 +723,9 @@
       "redistribution": "Original numeric product restored from its origin or source cache; prepared display images with credit.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "crust",
+      "datasetId": "crust",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -773,7 +755,7 @@
       "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
       "consumers": [
         "assets",
-        "lenses",
+        "datasets",
         "scene"
       ],
       "title": "MESSENGER MDIS MD3 color global mosaic",
@@ -815,7 +797,7 @@
       "redistribution": "Preparation provenance and reproducibility.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",

@@ -6,7 +6,7 @@ H II regions and young clusters in the NGC6357 environment.
 
 This first comparison batch pins the official ESO **Publication TIFF 4K** variants, downloaded unchanged on 2026-09-12. These retain each master image’s full footprint; no local resizing or cropping was used. Native star removal runs on the selected TIFF’s actual pixel grid. Larger publisher masters remain available for a later quality comparison.
 
-| Lens | Processing grid | Angular field | Publisher |
+| Dataset | Processing grid | Angular field | Publisher |
 |---|---|---|---|
 | ESO/DSS2 · optical / near-infrared | 4000 × 3464 | 225.70′ × 195.48′ | [Source](https://www.eso.org/public/images/eso1226c/) |
 | ESO VISTA · infrared | 4000 × 4000 | 90.92′ × 90.92′ | [Source](https://www.eso.org/public/images/eso1309a/) |

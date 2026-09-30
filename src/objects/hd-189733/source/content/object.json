@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-189733",
   "displayName": "HD 189733 A",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "activity-model",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "activity-model",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge fitted here to TESS transits of HD 189733b. The disc itself is unresolved.",
-        "thumbnail": "hd-189733-lens-color.webp",
+        "thumbnail": "hd-189733-dataset-color.webp",
         "surface": "hd-189733-surface-color@2x.webp",
         "poles": "hd-189733-poles-color@2x.webp",
         "source": {
@@ -83,7 +83,7 @@
         "id": "activity-model",
         "label": "Spot model",
         "qualification": "A published hypothetical dense-spot-band layout from Narrett, Rackham & de Wit (2024), Figure 7 left. Their HST spectral model gives 42% mean spot coverage, and their TESS-band spot/photosphere intensity ratio is 0.099. This is an illustrative arrangement, not an observed surface map; the pattern is stationary.",
-        "thumbnail": "hd-189733-lens-activity-model.webp",
+        "thumbnail": "hd-189733-dataset-activity-model.webp",
         "surface": "hd-189733-surface-activity-model@2x.webp",
         "poles": "hd-189733-poles-activity-model@2x.webp",
         "source": {
@@ -98,7 +98,7 @@
         "id": "spot-2021",
         "label": "2021 spot",
         "qualification": "Static reconstruction of one TESS spot-crossing candidate in HD 189733b transit 2165. The paper gives a minimum 5° angular radius and 7.6% TESS-band contrast; position along the transit chord comes from its timing and the hosted orbit. Shape, sky orientation and Gaia-colour application are display assumptions.",
-        "thumbnail": "hd-189733-lens-spot-2021.webp",
+        "thumbnail": "hd-189733-dataset-spot-2021.webp",
         "surface": "hd-189733-surface-spot-2021@2x.webp",
         "poles": "hd-189733-poles-spot-2021@2x.webp",
         "source": {

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "ab-pic-b",
   "displayName": "AB Pic b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "infrared",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "infrared",
     "controls": [
       {
         "id": "infrared",
         "label": "Infrared colour",
         "qualification": "False colour from its measured flux in three infrared bands (Liu Dupuy & Allers (2016); Dupuy & Liu (2012), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
-        "thumbnail": "ab-pic-b-lens-infrared.webp",
+        "thumbnail": "ab-pic-b-dataset-infrared.webp",
         "surface": "ab-pic-b-surface-infrared@2x.webp",
         "poles": "ab-pic-b-poles-infrared@2x.webp",
         "source": {

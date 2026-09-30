@@ -3,7 +3,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../prepared-shell-titles.mjs";
-import { lensBillboardColors, prepareLensLabels, prepareLenses } from "@cssearth/bake/objects/content";
+import { datasetBillboardColors, prepareDatasetLabels, prepareDatasets } from "@cssearth/bake/objects/content";
 import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
 import type {
   ContentPreparationContext,
@@ -22,7 +22,7 @@ const titleMap: Record<string, { label: string; src: string; width: number; heig
   surfacePhotos: PREPARED_SHELL_TITLES.surfacePhotos,
   telescopeImages: PREPARED_SHELL_TITLES.telescopeImages,
   resources: PREPARED_SHELL_TITLES.resources,
-  lenses: PREPARED_SHELL_TITLES.lenses,
+  datasets: PREPARED_SHELL_TITLES.datasets,
   settings: PREPARED_SHELL_TITLES.settings,
 };
 
@@ -56,24 +56,24 @@ export function prepareObjectContent(
   source: ObjectContentSource,
   assets: PreparedRasterAssets = {},
 ): PreparedObjectContent {
-  if (source.schema !== "cssearth-object-content@1" || source.version !== 1) {
+  if (source.schema !== "cssearth-object-content@2" || source.version !== 1) {
     throw new Error(`${source.id}: unsupported object content schema`);
   }
   // The page sets the display name in the shared title font; no object carries its own title artwork.
   const title = { label: source.displayName };
   const { facts, moreFacts } = parseFactsheet(source.panel);
-  const lensControls = source.lenses.labels
-    ? prepareLensLabels({ controls: source.lenses.controls }, source.lenses.labels).controls
-    : source.lenses.controls;
+  const datasetControls = source.datasets.labels
+    ? prepareDatasetLabels({ controls: source.datasets.controls }, source.datasets.labels).controls
+    : source.datasets.controls;
   return {
     objectId: source.id,
     title,
     facts,
     moreFacts,
-    lenses: prepareLenses(source.id, {
-      title: requiredShellTitle(source.lenses.titleKey),
-      defaultLens: source.lenses.defaultLens,
-      controls: lensControls,
+    datasets: prepareDatasets(source.id, {
+      title: requiredShellTitle(source.datasets.titleKey),
+      defaultDataset: source.datasets.defaultDataset,
+      controls: datasetControls,
     }, assets),
     settings: {
       title: requiredShellTitle(source.settings.titleKey),
@@ -134,10 +134,10 @@ export async function prepareObjectContentAssets({
     };
   }
   const prepared = prepareObjectContent(source, assets);
-  const lenses = await deriveLensBillboardColors(prepared.lenses, publicDirectory);
-  const preparedWithAssets = { ...prepared, lenses };
+  const datasets = await deriveDatasetBillboardColors(prepared.datasets, publicDirectory);
+  const preparedWithAssets = { ...prepared, datasets };
   const content: PreparedObjectContentDocument = {
-    schema: "cssearth-prepared-content@1",
+    schema: "cssearth-prepared-content@2",
     objectId: preparedWithAssets.objectId,
     title: preparedWithAssets.title,
     facts: preparedWithAssets.facts,
@@ -158,11 +158,11 @@ export async function prepareObjectContentAssets({
   if (chartAssets && content.charts.some((chart) => !chartAssets?.urls.includes(chart.src))) {
     throw new Error(`${source.id}: generated chart assets do not match authored chart URLs`);
   }
-  const lensesDocument = { schema: "cssearth-prepared-lenses@1", objectId: preparedWithAssets.objectId, ...preparedWithAssets.lenses };
-  const shellLenses = {
-    title: preparedWithAssets.lenses.title,
-    defaultLens: preparedWithAssets.lenses.defaultLens,
-    controls: preparedWithAssets.lenses.controls.map(({ id, label, thumbnailUrl, noData, facts, legend, legendNote, volume, step }) => ({
+  const datasetsDocument = { schema: "cssearth-prepared-datasets@1", objectId: preparedWithAssets.objectId, ...preparedWithAssets.datasets };
+  const shellDatasets = {
+    title: preparedWithAssets.datasets.title,
+    defaultDataset: preparedWithAssets.datasets.defaultDataset,
+    controls: preparedWithAssets.datasets.controls.map(({ id, label, thumbnailUrl, noData, facts, legend, legendNote, volume, step }) => ({
       id,
       label,
       thumbnailUrl,
@@ -175,22 +175,22 @@ export async function prepareObjectContentAssets({
     })),
   };
   const controls = {
-    lenses: shellLenses.controls.length ? shellLenses : null,
+    datasets: shellDatasets.controls.length ? shellDatasets : null,
     settings: preparedWithAssets.settings,
   };
   await mkdir(publicDirectory, { recursive: true });
   await mkdir(outputDirectory, { recursive: true });
   await Promise.all([
     writeFile(resolve(outputDirectory, "content.json"), `${JSON.stringify(content)}\n`),
-    writeFile(resolve(outputDirectory, "lenses.json"), `${JSON.stringify(lensesDocument)}\n`),
+    writeFile(resolve(outputDirectory, "datasets.json"), `${JSON.stringify(datasetsDocument)}\n`),
     writeFile(resolve(outputDirectory, "controls.json"), `${JSON.stringify(controls)}\n`),
   ]);
   return {
     id: preparedWithAssets.objectId,
     content,
-    lenses: preparedWithAssets.lenses,
+    datasets: preparedWithAssets.datasets,
     controls,
-    files: ["content.json", "lenses.json", "controls.json"],
+    files: ["content.json", "datasets.json", "controls.json"],
   };
 }
 
@@ -200,7 +200,7 @@ async function prepareRasterLegendAssets(
   publicDirectory: string,
 ): Promise<void> {
   const sharp = (await import("sharp")).default;
-  for (const control of source.lenses.controls) {
+  for (const control of source.datasets.controls) {
     const legend = control.legend;
     if (!legend?.sourcePath || !legend.image || !legend.rasterRecipe) continue;
     const recipe = legend.rasterRecipe;
@@ -249,17 +249,17 @@ async function prepareRasterLegendAssets(
   }
 }
 
-async function deriveLensBillboardColors(
-  lenses: PreparedObjectContent["lenses"],
+async function deriveDatasetBillboardColors(
+  datasets: PreparedObjectContent["datasets"],
   publicDirectory: string,
-): Promise<PreparedObjectContent["lenses"]> {
-  const colors = await lensBillboardColors(lenses.controls, lenses.defaultLens, publicDirectory);
+): Promise<PreparedObjectContent["datasets"]> {
+  const colors = await datasetBillboardColors(datasets.controls, datasets.defaultDataset, publicDirectory);
   return {
-    ...lenses,
-    controls: lenses.controls.map((control) => ({
+    ...datasets,
+    controls: datasets.controls.map((control) => ({
       ...control,
       billboardColor: colors.get(typeof control.id === "string" ? control.id : "") ??
-        (control.view === "interior" ? colors.get(lenses.defaultLens) : undefined),
+        (control.view === "interior" ? colors.get(datasets.defaultDataset) : undefined),
     })),
   };
 }

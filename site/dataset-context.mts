@@ -5,8 +5,8 @@ import type { LineageSource } from '@cssearth/objects/provenance';
 const datasetFacilityLabels: Readonly<Record<string, string>> = Object.freeze({ vst: 'VLT' });
 
 /** The directly captured instrument/facility that belongs in a dataset row. */
-export function datasetSourceDetail(lensId: string, sources: readonly LineageSource[], catalog: ExplorationCatalog) {
-  const labels = sources.filter(source => source.lensId === lensId).flatMap(source => {
+export function datasetSourceDetail(datasetId: string, sources: readonly LineageSource[], catalog: ExplorationCatalog) {
+  const labels = sources.filter(source => source.datasetId === datasetId).flatMap(source => {
     if (source.capture?.observation?.instrument) return [source.capture.observation.instrument];
     return (source.capture?.attributions ?? []).flatMap(attribution => {
       if (attribution.kind === 'facility') {
@@ -24,11 +24,11 @@ export function datasetSourceDetail(lensId: string, sources: readonly LineageSou
 }
 
 /** The missions, facilities and unresolved credits a dataset card shows beside its summary. */
-export function datasetContributors(objectId: string, lensId: string, graph: ContributionGraph, catalog: ExplorationCatalog,
+export function datasetContributors(objectId: string, datasetId: string, graph: ContributionGraph, catalog: ExplorationCatalog,
   directSourceIds?: readonly string[]) {
   const direct = directSourceIds && new Set(directSourceIds);
   const edges = (graph.byObject[objectId] ?? []).map(index => graph.edges[index])
-    .filter(edge => edge.lensIds.includes(lensId) && (!direct || direct.has(edge.sourceId)));
+    .filter(edge => edge.datasetIds.includes(datasetId) && (!direct || direct.has(edge.sourceId)));
   const missionIds = new Set(edges.flatMap(({ attribution }) =>
     attribution.kind !== 'unresolved' && attribution.missionId ? [attribution.missionId] : []));
   const facilityIds = new Set(edges.flatMap(({ attribution }) =>

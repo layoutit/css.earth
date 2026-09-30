@@ -18,7 +18,7 @@ const SITE_ZOOM_SHARE = 0.6;
 /** Prepared nomenclature catalogue: IAU/USGS Gazetteer centre points anchored to the body mesh.
  * Preparation resolves every surface anchor, priority, label kind and tooltip text; runtime
  * only projects the prepared anchors through the current camera. */
-export const SURFACE_FEATURES_CONFIG_SCHEMA = 'cssearth-surface-features@1';
+export const SURFACE_FEATURES_CONFIG_SCHEMA = 'cssearth-surface-features@2';
 export const SURFACE_FEATURES_SOURCE_SCHEMA = 'cssearth-surface-features-source@1';
 /** Gazetteer descriptor-term codes and the label kind their geometry suggests: compact landforms get a point
  * marker and rim circle, elongated ones a linear label, extended terrains a region label. Recipes may override. */
@@ -44,7 +44,7 @@ export interface SurfaceFeaturesConfig {
   readonly surfaceMap: string;
   readonly output: string; readonly publicBase: string;
   readonly target: { readonly className: string; readonly withoutClassName: string | null };
-  readonly lensIds: readonly string[];
+  readonly datasetIds: readonly string[];
   readonly kinds: Readonly<Record<SurfaceFeatureKind, readonly string[]>>;
   readonly excludedTypeCodes: Readonly<Record<string, string>>;
   readonly labelPolicy: SurfaceFeaturePolicy;
@@ -102,8 +102,8 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
   if (new Set(all).size !== all.length) throw new TypeError('A Gazetteer type code maps to one label kind.');
   const excluded = record(input.excludedTypeCodes ?? {}, 'features recipe excludedTypeCodes');
   for (const [code, reason] of Object.entries(excluded)) { if (!/^[A-Z]{2}$/u.test(code) || all.includes(code)) throw new TypeError(`Excluded type ${code} must not also be labelled.`); text(reason, `excludedTypeCodes.${code}`); }
-  const lensIds = input.lensIds;
-  if (!Array.isArray(lensIds) || !lensIds.length || lensIds.some(id => typeof id !== 'string' || !id) || new Set(lensIds).size !== lensIds.length) throw new TypeError('features recipe lensIds must list distinct lens ids.');
+  const datasetIds = input.datasetIds;
+  if (!Array.isArray(datasetIds) || !datasetIds.length || datasetIds.some(id => typeof id !== 'string' || !id) || new Set(datasetIds).size !== datasetIds.length) throw new TypeError('features recipe datasetIds must list distinct dataset ids.');
   const policy: SurfaceFeaturePolicy = {
     minimumZoomShare: finite(policyInput.minimumZoomShare, 'labelPolicy.minimumZoomShare'),
     minimumDiameterPixels: finite(policyInput.minimumDiameterPixels, 'labelPolicy.minimumDiameterPixels'),
@@ -127,7 +127,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     members: members === null ? null : { attributes: relativePath(members.attributes, 'members.attributes'), projection: members.projection === null ? null : relativePath(members.projection, 'members.projection'), metadata: members.metadata === null ? null : relativePath(members.metadata, 'members.metadata') },
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
-    lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
+    datasetIds: Object.freeze([...datasetIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
     ...(selectionBankCount === undefined ? {} : { selectionBankCount }),
     outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.landmarks === undefined ? {} : { landmarks: parseLandmarksRecipe(input.landmarks) }),
   });
@@ -187,7 +187,7 @@ export interface SurfaceFeaturePreparationContext {
   readonly objectId: string; readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string;
   readonly config: unknown; readonly maxEntries: number; readonly radiusKm: number; readonly meshRadiusUnits: number;
   readonly tree: { readonly nodes: readonly { readonly className: string | null; readonly parent: number; readonly style?: string }[]; readonly scene: number };
-  readonly declaredLensIds: readonly string[];
+  readonly declaredDatasetIds: readonly string[];
   /** Explicit authored sphere; permits coordinate-only mission landmarks without a triangle hit mesh. */
   readonly referenceSphere?: true;
   /** The prepared picking mesh of a shape-model body: anchors and outline points are cast onto it instead of a reference sphere. */
@@ -299,7 +299,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   if (config.naturalEarth) { for (const layer of config.naturalEarth.layers) if (!manifest.inputs.some(entry => entry.path === layer.archive)) throw new TypeError(`Natural Earth layer ${layer.id} is not pinned by its source manifest.`); }
   else if (config.archive !== null && !manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Surface feature archive is not pinned by its source manifest.');
   if (config.landmarks && !manifest.inputs.some(entry => entry.path === config.landmarks!.document)) throw new TypeError('Landmark document is not pinned by its source manifest.');
-  for (const id of config.lensIds) if (!context.declaredLensIds.includes(id)) throw new TypeError(`Surface feature lens ${id} is not declared by the object.`);
+  for (const id of config.datasetIds) if (!context.declaredDatasetIds.includes(id)) throw new TypeError(`Surface feature dataset ${id} is not declared by the object.`);
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(context.sourceDirectory, config.surfaceMap), 'utf8')));
   const loadedTraces = config.traces ? await loadTraces(context.sourceDirectory, config.traces) : null;
   const traceStats = { matched: 0, byCode: {} as Record<string, number>, unmatched: [] as string[] };
@@ -548,7 +548,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   }
   const plan: PreparedSurfaceFeaturePlan = {
     catalog: catalogDescriptor, ...(selection ? { selection } : {}),
-    target: hitTarget(context, config.target), lensIds: config.lensIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
+    target: hitTarget(context, config.target), datasetIds: config.datasetIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
     ...(context.hitMesh ? { surfaceRadiusUnits: meshRadiusBand(context.hitMesh.triangles) } : {}), ...(context.surface ? { surfaceEllipsoidUnits: context.surface.plan() } : {}),
     outline: config.outline,
   };

@@ -26,8 +26,8 @@
       "id": "spectral-route",
       "subject": "Siarnaq JWST NIRSpec PRISM spectrum",
       "status": "deferred",
-      "finding": "Belyakov and Brown (2025) presents unresolved 0.7–5.3 micrometre NIRSpec PRISM measurements. They constrain unresolved composition and do not support a surface lens.",
-      "revisitWhen": "A released interpretable spectrum can support a chart; a registered spatial product would be needed for a surface lens.",
+      "finding": "Belyakov and Brown (2025) presents unresolved 0.7–5.3 micrometre NIRSpec PRISM measurements. They constrain unresolved composition and do not support a surface dataset.",
+      "revisitWhen": "A released interpretable spectrum can support a chart; a registered spatial product would be needed for a surface dataset.",
       "evidence": [
         "https://doi.org/10.3847/PSJ/adc55d",
         "https://arxiv.org/abs/2503.20046"

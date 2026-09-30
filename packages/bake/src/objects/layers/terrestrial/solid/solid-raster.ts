@@ -1,8 +1,8 @@
 import { readObservation, type ObservationRaster, colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor, loadControlledObservationGeometry, matchObservedColorLevels, npyLonLatGridDependencies, pds3GridDependencies } from '../../../raster/index.ts';
-import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid } from '../raster-grid.ts';
+import { scientificPreviewGrid, datasetTextureGrid, type SolidRasterGrid } from '../raster-grid.ts';
 import { createRasterEmitter } from '../raster-output.ts';
 import { parseSolidRasterConfig, parseSurfaceSource } from '../records/solid-source.ts';
-import { radialModelForLens } from '../alternative-lenses.ts';
+import { radialModelForDataset } from '../alternative-datasets.ts';
 import { renderRadialSnapshot } from '../radial-snapshot.ts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from '../shape-material.ts';
 import { lambertAttenuationAtlas, type LambertAttenuationParameters, requireTerrainMesh } from '../../../geometry/index.ts';
@@ -28,32 +28,32 @@ interface SolidMaterialConfig {
 const DISPLAY_ENCODING: WebpOptions = { alphaQuality: 100, effort: 4 };
 
 /** Surface composition is source-dependent; the projection/packing is shared. */
-interface RasterRadialModel { lensIds: string[]; radial: RadialState; config: {geometry: unknown}; }
+interface RasterRadialModel { datasetIds: string[]; radial: RadialState; config: {geometry: unknown}; }
 const OBSERVATION_PREVIEW_DIVISOR = 4;
 
 export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config:input, source, radial, radialModels }: {sourceDirectory:string;publicDirectory:string;outputDirectory:string;config:unknown;source:Awaited<ReturnType<typeof createSourceManifest>>;radial?:RadialState|null;radialModels?:readonly RasterRadialModel[]}) {
   const config=parseSolidRasterConfig(input);
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const { width, height, bandCount, gutter } = config.raster;
-  const modelForLens = (lensId: string) => radialModels?.length ? radialModelForLens(radialModels, lensId) : null;
+  const modelForDataset = (datasetId: string) => radialModels?.length ? radialModelForDataset(radialModels, datasetId) : null;
   const emit = createRasterEmitter(publicDirectory, config.publicBase), surfaces: SolidSurface[] = [], observations = new Map<string,ObservationRaster>();
   const entries = config.raster.observations.length ? (await source.validateGroup('surfaces')).map(parseSurfaceSource) : [];
   if (entries.length !== config.raster.observations.length ||
-      new Set(entries.map(entry => entry.lensId)).size !== entries.length ||
-      entries.some(entry => !config.raster.observations.some(recipe => recipe.id === entry.lensId))) {
+      new Set(entries.map(entry => entry.datasetId)).size !== entries.length ||
+      entries.some(entry => !config.raster.observations.some(recipe => recipe.id === entry.datasetId))) {
     throw new Error('Observation recipe does not consume its complete pinned surface group.');
   }
   for (const recipe of config.raster.observations) {
-    const entry=entries.find(item=>item.lensId===recipe.id);
+    const entry=entries.find(item=>item.datasetId===recipe.id);
     if (!entry) throw new Error(`Observation ${recipe.id} has no pinned source.`);
     if (recipe.validity.labelPath && ![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === recipe.validity.labelPath)) throw new Error('Observation label has no source pin.');
-    const grid = lensTextureGrid(recipe, config.raster);
+    const grid = datasetTextureGrid(recipe, config.raster);
     const observation = await readObservation(sourceDirectory, entry, recipe.validity, grid.width, grid.height);
     let monochromePixels=0;
     if(recipe.monochromeBase){const base=observations.get(recipe.monochromeBase);if(!base)throw new Error('Observed fallback ordering is invalid.');
       for(let i=0;i<observation.missing.length;i++)if(observation.missing[i]&&!base.missing[i]){observation.rgb.set(base.rgb.subarray(i*3,i*3+3),i*3);observation.missing[i]=0;monochromePixels++}}
-    observations.set(entry.lensId, observation);
-    surfaces.push(await packSurface(entry.lensId, observation.rgb, observation.missing, {
+    observations.set(entry.datasetId, observation);
+    surfaces.push(await packSurface(entry.datasetId, observation.rgb, observation.missing, {
       label: entry.label, falseColor: entry.falseColor,
       source: { id: entry.id, width: entry.width, height: entry.height },
       projection: {...entry.projection,...recipe.projection}, coverage: entry.coverage,
@@ -66,7 +66,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const view of config.raster.shapeViews ?? []) {
     const entries = await source.validateGroup(view.consumer);
-    const modelConfig = modelForLens(view.id)?.config ?? config;
+    const modelConfig = modelForDataset(view.id)?.config ?? config;
     const terrain = requireRecord(requireRecord(modelConfig.geometry).radialTerrain);
     const entry = entries.find(input => input.path === terrain.path);
     if (!entry) throw new Error('Shape display is not bound to the rendered source mesh.');
@@ -78,16 +78,16 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       source: { id: entry.id } }));
   }
   for (const recipe of config.raster.surfaceObservations ?? []) {
-    const model = modelForLens(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;
+    const model = modelForDataset(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;
     if (!observationRadial?.grid?.closestPoint) throw new Error('Georeferenced observations require source-preserving terrain.');
     const observation = await loadSurfaceObservation({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
     observationRadial.observationSurfaces ??= new Map();
     observationRadial.observationSurfaces.set(recipe.id, observation);
-    // The map of a photographed lens only gives its billboard colour and coverage count; the atlas and thumbnail sample the
+    // The map of a photographed dataset only gives its billboard colour and coverage count; the atlas and thumbnail sample the
     // photographs directly. A quarter of the map's width and height carries both.
     const previewWidth = Math.max(2, Math.round(width / OBSERVATION_PREVIEW_DIVISOR)), previewHeight = Math.max(1, Math.round(height / OBSERVATION_PREVIEW_DIVISOR));
     const { rgb, missing } = observation.preview(previewWidth, previewHeight);
-    // A palette lens is false colour: its legend strip is emitted beside the surface, like a scientific lens.
+    // A palette dataset is false colour: its legend strip is emitted beside the surface, like a scientific dataset.
     const display = requireRecord(recipe).display, palette = display === undefined ? undefined : requireRecord(display).palette as readonly string[] | undefined;
     const legend = palette ? await emit(`${config.namespace}-${recipe.id}-legend.webp`, sharp(Buffer.concat(Array.from({ length: 256 }, (_, x) => Buffer.from(interpolatePalette(palette, x / 255)))),
       { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: 'lanczos3' })) : null;
@@ -100,79 +100,79 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       .extend({ left: 24, right: 24, top: 0, bottom: 0, background: { r: 0, g: 0, b: 0, alpha: 0 } }));
     surfaces.push(surface);
   }
-  for (const lens of config.raster.scientific ?? []) {
-    const model = modelForLens(lens.id), scienceRadial = model?.radial ?? radial, scienceConfig = model?.config ?? config;
-    await source.validateGroup(lens.consumer);
-    for(const mask of lens.qualityMasks??[])if(!source.manifest.inputs.some(input=>input.path===mask.path&&input.consumers.includes(lens.consumer)))
-      throw new Error(`Scientific quality mask ${mask.path} lacks a pinned source in ${lens.consumer}.`);
-    const sourcePath = lens.facetField?.path ?? lens.path;
-    const entry = source.manifest.inputs.find(input => input.path === sourcePath && input.consumers.includes(lens.consumer));
-    if (!entry) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
-    if (lens.facetField && ![lens.path, lens.facetField.labelPath].every(path => source.manifest.inputs.some(input =>
-      input.path === path && input.consumers.includes(lens.consumer)))) throw new Error('Facet field lacks its pinned source mesh or label.');
-    const additionalSources = (lens.additionalGrids ?? []).map(grid => {
-      const input = source.manifest.inputs.find(input => input.path === grid.path && input.consumers.includes(lens.consumer));
+  for (const dataset of config.raster.scientific ?? []) {
+    const model = modelForDataset(dataset.id), scienceRadial = model?.radial ?? radial, scienceConfig = model?.config ?? config;
+    await source.validateGroup(dataset.consumer);
+    for(const mask of dataset.qualityMasks??[])if(!source.manifest.inputs.some(input=>input.path===mask.path&&input.consumers.includes(dataset.consumer)))
+      throw new Error(`Scientific quality mask ${mask.path} lacks a pinned source in ${dataset.consumer}.`);
+    const sourcePath = dataset.facetField?.path ?? dataset.path;
+    const entry = source.manifest.inputs.find(input => input.path === sourcePath && input.consumers.includes(dataset.consumer));
+    if (!entry) throw new Error(`Scientific source ${dataset.id} differs from its manifest.`);
+    if (dataset.facetField && ![dataset.path, dataset.facetField.labelPath].every(path => source.manifest.inputs.some(input =>
+      input.path === path && input.consumers.includes(dataset.consumer)))) throw new Error('Facet field lacks its pinned source mesh or label.');
+    const additionalSources = (dataset.additionalGrids ?? []).map(grid => {
+      const input = source.manifest.inputs.find(input => input.path === grid.path && input.consumers.includes(dataset.consumer));
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, width: requireRecord(input).width, height: requireRecord(input).height};
     });
-    const renderedMeshPath = lens.format === 'vtk-cell-categories' ? requireString(lens.surfaceSampling?.renderedMeshPath) : ['facet-scalars', 'obj-uv-fits', 'circle-catalogue'].includes(lens.format) ? lens.meshPath : lens.path;
-    const terrain = lens.surfaceSampling ? requireRecord(scienceConfig.geometry).radialTerrain : undefined;
+    const renderedMeshPath = dataset.format === 'vtk-cell-categories' ? requireString(dataset.surfaceSampling?.renderedMeshPath) : ['facet-scalars', 'obj-uv-fits', 'circle-catalogue'].includes(dataset.format) ? dataset.meshPath : dataset.path;
+    const terrain = dataset.surfaceSampling ? requireRecord(scienceConfig.geometry).radialTerrain : undefined;
     const terrainPath = terrain === undefined ? undefined : requireString(requireRecord(terrain).path);
-    if (lens.surfaceSampling && (!scienceRadial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && renderedMeshPath !== terrainPath))) {
+    if (dataset.surfaceSampling && (!scienceRadial?.grid?.closestPoint || (dataset.format !== 'pds3-scalar-map' && renderedMeshPath !== terrainPath))) {
       throw new Error('Source-surface science requires the actual rendered source mesh.');
     }
-    if (lens.format === 'pds3-scalar-map') {
-      for (const path of [lens.labelPath, requireString(lens.surfaceSampling?.ambiguityReference?.path)]) {
-        if (!source.manifest.inputs.some(input => input.path === path && input.consumers.includes(lens.consumer))) throw new Error(`Unpinned scalar-map dependency: ${path}`);
+    if (dataset.format === 'pds3-scalar-map') {
+      for (const path of [dataset.labelPath, requireString(dataset.surfaceSampling?.ambiguityReference?.path)]) {
+        if (!source.manifest.inputs.some(input => input.path === path && input.consumers.includes(dataset.consumer))) throw new Error(`Unpinned scalar-map dependency: ${path}`);
       }
     }
-    const dependencies = lens.format === 'facet-scalars' ? [lens.meshPath, lens.table?.labelPath].filter(Boolean)
-      : lens.format === 'obj-uv-fits' || lens.format === 'circle-catalogue' ? [lens.meshPath, lens.labelPath]
-      : lens.format === 'vtk-cell-categories' ? [requireString(lens.surfaceSampling?.renderedMeshPath), lens.symbols?.paths, lens.symbols?.locations].filter(Boolean)
-      : lens.format === 'image-plane-dem' ? [lens.comparison?.path].filter(Boolean)
-      : lens.format === 'geologic-shapefile' ? [requireString(requireRecord(lens.grid).attributePath), requireString(requireRecord(lens.grid).projectionPath)]
-      : lens.format === 'pds-image' ? [lens.labelPath]
-      : lens.format === 'npy-lonlat-grid' ? npyLonLatGridDependencies(lens)
-      : lens.format === 'pds3-grid' ? pds3GridDependencies(lens) : [];
+    const dependencies = dataset.format === 'facet-scalars' ? [dataset.meshPath, dataset.table?.labelPath].filter(Boolean)
+      : dataset.format === 'obj-uv-fits' || dataset.format === 'circle-catalogue' ? [dataset.meshPath, dataset.labelPath]
+      : dataset.format === 'vtk-cell-categories' ? [requireString(dataset.surfaceSampling?.renderedMeshPath), dataset.symbols?.paths, dataset.symbols?.locations].filter(Boolean)
+      : dataset.format === 'image-plane-dem' ? [dataset.comparison?.path].filter(Boolean)
+      : dataset.format === 'geologic-shapefile' ? [requireString(requireRecord(dataset.grid).attributePath), requireString(requireRecord(dataset.grid).projectionPath)]
+      : dataset.format === 'pds-image' ? [dataset.labelPath]
+      : dataset.format === 'npy-lonlat-grid' ? npyLonLatGridDependencies(dataset)
+      : dataset.format === 'pds3-grid' ? pds3GridDependencies(dataset) : [];
     for (const pathValue of dependencies) {
       const path = requireString(pathValue);
       if (![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === path)) throw new Error(`Unpinned scientific dependency: ${path}`);
-      if (lens.format === 'image-plane-dem') await source.validatePath(path);
+      if (dataset.format === 'image-plane-dem') await source.validatePath(path);
     }
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
-    const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling && scienceRadial ? requireTerrainMesh(scienceRadial.grid) : undefined);
-    if (lens.surfaceSampling) {
+    const raster = await loadScienceSurface(sourceDirectory, dataset, dataset.surfaceSampling && scienceRadial ? requireTerrainMesh(scienceRadial.grid) : undefined);
+    if (dataset.surfaceSampling) {
       if (!scienceRadial) throw new Error('Source-surface science requires retained terrain.');
       scienceRadial.scientificSurfaces ??= new Map();
-      scienceRadial.scientificSurfaces.set(lens.id, raster);
+      scienceRadial.scientificSurfaces.set(dataset.id, raster);
     }
-    const grid = lensTextureGrid(lens, config.raster);
-    const preview = scientificPreviewGrid(lens, { ...config.raster, ...grid });
-    const painted = paintScienceSurface(raster, lens, preview.width, preview.height), missing = painted.missing;
+    const grid = datasetTextureGrid(dataset, config.raster);
+    const preview = scientificPreviewGrid(dataset, { ...config.raster, ...grid });
+    const painted = paintScienceSurface(raster, dataset, preview.width, preview.height), missing = painted.missing;
     let rgb: Uint8Array = painted.rgb;
-    if (lens.underlay) {
-      // The cells with no catalogued feature show an earlier observation lens, not the missing-coverage grid.
-      const base = observations.get(lens.underlay.surface);
-      // A source-surface lens is underlaid here for its flat map and preview, and again per texel in its radial atlas.
-      if (!base || !lens.categories || lens.textureScale || lens.previewGrid || preview.width !== width || preview.height !== height)
-        throw new Error(`${lens.id}: underlay needs a categorical lens on the full raster grid over an earlier observation, not ${lens.underlay.surface}.`);
-      rgb = underlaidRgb(rgb, missing, base.rgb, lens.id, lens.underlay);
+    if (dataset.underlay) {
+      // The cells with no catalogued feature show an earlier observation dataset, not the missing-coverage grid.
+      const base = observations.get(dataset.underlay.surface);
+      // A source-surface dataset is underlaid here for its flat map and preview, and again per texel in its radial atlas.
+      if (!base || !dataset.categories || dataset.textureScale || dataset.previewGrid || preview.width !== width || preview.height !== height)
+        throw new Error(`${dataset.id}: underlay needs a categorical dataset on the full raster grid over an earlier observation, not ${dataset.underlay.surface}.`);
+      rgb = underlaidRgb(rgb, missing, base.rgb, dataset.id, dataset.underlay);
     }
     const scale = Buffer.alloc(256 * 3);
-    for (let x = 0; x < 256; x++) scale.set(colorForValue(lens.categories ? Math.min(lens.categories.length - 1, Math.floor(x * lens.categories.length / 256)) : lens.minimum + x / 255 * (lens.maximum - lens.minimum), lens), x * 3);
-    const legend = await emit(`${config.namespace}-${lens.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: lens.categories ? 'nearest' : 'lanczos3' }));
-    surfaces.push(await packSurface(lens.id, rgb, null, { label: lens.label, falseColor: true,
+    for (let x = 0; x < 256; x++) scale.set(colorForValue(dataset.categories ? Math.min(dataset.categories.length - 1, Math.floor(x * dataset.categories.length / 256)) : dataset.minimum + x / 255 * (dataset.maximum - dataset.minimum), dataset), x * 3);
+    const legend = await emit(`${config.namespace}-${dataset.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: dataset.categories ? 'nearest' : 'lanczos3' }));
+    surfaces.push(await packSurface(dataset.id, rgb, null, { label: dataset.label, falseColor: true,
       source: { id: entry.id, width: requireRecord(entry).width, height: requireRecord(entry).height },
       ...(additionalSources.length ? {additionalSources} : {}),
       projection: requireRecord(entry).projection, coverage: requireRecord(entry).coverage, scientific: true, legend,
-      ...(lens.previewGrid ? { previewGrid: preview } : {}),
+      ...(dataset.previewGrid ? { previewGrid: preview } : {}),
       ...(raster.fieldReport ? { facetField: raster.fieldReport } : {}),
       ...(raster.report ? { scalarMap: raster.report } : {}),
-      ...(lens.surfaceSampling ? { surfaceSampling: { ...lens.surfaceSampling,
+      ...(dataset.surfaceSampling ? { surfaceSampling: { ...dataset.surfaceSampling,
         previewPolicy: 'Radial rays with more than one distinct source intersection are withheld; the triangle atlas samples the source surface in 3D.' } } : {}),
-      ...(lens.textureScale ? { textureScale: lens.textureScale } : {}),
-      ...(lens.underlay ? { underlay: { ...lens.underlay, pixels: missing.reduce((sum, value) => sum + value, 0) } }
-        : { missingPixels: missing.reduce((sum, value) => sum + value, 0) }) }, { categorical: Boolean(lens.categories), displaySampling: lens.displaySampling, ...preview, gutter: grid.gutter }));
+      ...(dataset.textureScale ? { textureScale: dataset.textureScale } : {}),
+      ...(dataset.underlay ? { underlay: { ...dataset.underlay, pixels: missing.reduce((sum, value) => sum + value, 0) } }
+        : { missingPixels: missing.reduce((sum, value) => sum + value, 0) }) }, { categorical: Boolean(dataset.categories), displaySampling: dataset.displaySampling, ...preview, gutter: grid.gutter }));
   }
   for (const recipe of config.raster.observedColors ?? []) {
     const photometry=recipe.photometry?{profile:recipe.photometry.profile,geometry:await loadControlledObservationGeometry({sourceDirectory,entries:(await source.validateGroup(recipe.photometry.consumer)).map(shape({path:text,id:text,imageId:text})),vectors:recipe.photometry.vectors})}:null;
@@ -229,7 +229,7 @@ export function underlaidRgb(rgb: Uint8Array, missing: Uint8Array, base: Uint8Ar
 
 export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; config: Pick<SolidMaterialConfig, 'namespace' | 'publicBase' | 'raster'>; radial?: boolean}) {
   for (const surface of surfaces) {
-    const { poleSize } = lensTextureGrid(surface, config.raster);
+    const { poleSize } = datasetTextureGrid(surface, config.raster);
     const { data, info } = await sharp(resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1)))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     const filename = `${config.namespace}-${surface.id}-poles@2x.webp`;
     surface.polesUrl = `${config.publicBase}${filename}`;

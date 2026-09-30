@@ -12,7 +12,7 @@ VHS 1256-1257 b is a young companion of about 12 Jupiter masses, 8 arcseconds (a
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false colour comes from JWST (the [ledger](investigations.json) says what would change that).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false colour comes from JWST (the [ledger](investigations.json) says what would change that).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

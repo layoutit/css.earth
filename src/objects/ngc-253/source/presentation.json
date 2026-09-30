@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "ngc-253",
   "name": "Sculptor Galaxy (NGC 253)",
-  "defaultLens": "optical",
+  "defaultDataset": "optical",
   "bank": {
     "path": "src/objects/ngc-253/prepared/image-layers.json"
   },
@@ -17,7 +17,7 @@
     }
   ],
   "sharedInputs": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "optical",
       "label": "ESO · optical",

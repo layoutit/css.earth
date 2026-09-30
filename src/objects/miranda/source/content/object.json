@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "miranda",
   "displayName": "Miranda",
@@ -74,9 +74,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome",
       "elevation": "Elevation",
@@ -86,7 +86,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "miranda-lens-normal.webp",
+        "thumbnail": "miranda-dataset-normal.webp",
         "surface": "miranda-normal@2x.webp",
         "poles": "miranda-poles-normal@2x.webp",
         "source": {
@@ -100,7 +100,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "thumbnail": "miranda-lens-elevation.webp",
+        "thumbnail": "miranda-dataset-elevation.webp",
         "surface": "miranda-elevation@2x.webp",
         "poles": "miranda-poles-elevation@2x.webp",
         "source": {
@@ -149,7 +149,7 @@
       {
         "id": "geology",
         "label": "Geology",
-        "thumbnail": "miranda-lens-geology.webp",
+        "thumbnail": "miranda-dataset-geology.webp",
         "surface": "miranda-geology@2x.webp",
         "poles": "miranda-poles-geology@2x.webp",
         "falseColor": true,
@@ -279,7 +279,7 @@
       {
         "id": "voyager-color",
         "label": "Voyager color",
-        "thumbnail": "miranda-lens-voyager-color.webp",
+        "thumbnail": "miranda-dataset-voyager-color.webp",
         "surface": "miranda-voyager-color@2x.webp",
         "poles": "miranda-poles-voyager-color@2x.webp",
         "source": {

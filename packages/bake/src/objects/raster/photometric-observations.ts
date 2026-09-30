@@ -246,7 +246,7 @@ export function tieBandRatios(rgb: Float32Array, owners: Uint8Array, width: numb
 
 /**
  * Brightness-match the corrected colour to the monochrome base along footprint boundaries. Per observation by default, each
- * clamped so its brightest value encodes without clipping. `pooled` fits one gain for the whole lens from every boundary sample,
+ * clamped so its brightest value encodes without clipping. `pooled` fits one gain for the whole dataset from every boundary sample,
  * for observations already on one calibration (band levels solved): a per-observation fit would re-open the seams, and an
  * observation that never borders the base would get none. The pooled clamp keeps 99.9 % of the texels within range.
  */

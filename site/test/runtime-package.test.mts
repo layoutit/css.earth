@@ -21,11 +21,11 @@ async function preparedRuntime(id: string): Promise<unknown> {
   return text === null ? null : JSON.parse(text);
 }
 
-/** The lens ids the prepared controls publish, in their published order. */
-function lensIds(definition: unknown): string[] {
+/** The dataset ids the prepared controls publish, in their published order. */
+function datasetIds(definition: unknown): string[] {
   const controls = requireRecord(requireRecord(definition).controls, 'runtime controls');
-  const lenses = controls.lenses === undefined ? [] : requireArray(requireRecord(controls.lenses, 'runtime lenses').controls, 'runtime lens controls');
-  return lenses.map((lens, index) => requireString(requireRecord(lens, `lens ${index}`).id, `lens ${index} id`));
+  const datasets = controls.datasets === undefined ? [] : requireArray(requireRecord(controls.datasets, 'runtime datasets').controls, 'runtime dataset controls');
+  return datasets.map((dataset, index) => requireString(requireRecord(dataset, `dataset ${index}`).id, `dataset ${index} id`));
 }
 
 for (const id of selectedObjectIds(SCENE_OBJECTS.map(object => object.id))) {
@@ -54,16 +54,16 @@ for (const id of selectedObjectIds(SCENE_OBJECTS.map(object => object.id))) {
     } finally { f.restore(); }
   });
 
-  const ids = lensIds(definition);
-  if (ids.length > 1) test(`${id}: lens selection keeps the retained tree and commits every published lens`, async () => {
+  const ids = datasetIds(definition);
+  if (ids.length > 1) test(`${id}: dataset selection keeps the retained tree and commits every published dataset`, async () => {
     const f = await preparedSelectionFixture(definition);
     try {
       const records = f.stage.querySelectorAll('*');
-      for (const lens of [...ids.slice(1), ids[0]]) {
-        const request = f.selection.dispatch({ kind: 'lens', id: lens });
+      for (const dataset of [...ids.slice(1), ids[0]]) {
+        const request = f.selection.dispatch({ kind: 'dataset', id: dataset });
         await f.settle();
-        assert.equal(await request, true, lens);
-        assert.equal(required(f.selection.state().committed).lensId, lens);
+        assert.equal(await request, true, dataset);
+        assert.equal(required(f.selection.state().committed).datasetId, dataset);
         assert.deepEqual(f.stage.querySelectorAll('*'), records);
       }
       assert.deepEqual(f.errors, []);

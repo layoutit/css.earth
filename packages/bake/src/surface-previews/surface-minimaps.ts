@@ -4,7 +4,7 @@ import { DECORATIVE_WEBP, applyUnderlay, composeLimbPreview, detectMissingCovera
 import { coverageDirection } from '../objects/default-view/index.ts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.ts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.ts';
-const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
+const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeDatasets:optional(array(text))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -40,16 +40,16 @@ async function writeMinimap(pipeline:Sharp, nearest:boolean, file:string) {
   await writeFile(file, chosen.data);
   return chosen.info;
 }
-/** Where a lens's map has data, as the area-weighted mean body-fixed direction of its covered cells in the surface map's frame
+/** Where a dataset's map has data, as the area-weighted mean body-fixed direction of its covered cells in the surface map's frame
  * (longitude 0 at the map's left edge), for the camera stage to turn a partial map toward. The lane's own missing-cell mask
  * when it has one; otherwise the gray gap fill found by its graticule in the minimap before its lossy encoding, where the fill
  * is still exact. None for a preview that is not a whole-body map (a limb plate). */
 async function minimapCoverage(pipeline:Sharp, leftEdgeLongitudeDeg:number, exact?:{ missing:Uint8Array; width:number; height:number }) {
-  if (exact) return roundedDirection(coverageDirection({ lens: '', ...exact, leftEdgeLongitudeDeg: 0 }));
+  if (exact) return roundedDirection(coverageDirection({ dataset: '', ...exact, leftEdgeLongitudeDeg: 0 }));
   const { data, info } = await pipeline.clone().removeAlpha().raw().toBuffer({ resolveWithObject: true });
   if (info.width !== 2 * info.height) return undefined;
   const missing = detectMissingCoverage(data, info, { longitudeOffsetDegrees: leftEdgeLongitudeDeg });
-  return roundedDirection(coverageDirection({ lens: '', missing, width: info.width, height: info.height, leftEdgeLongitudeDeg }));
+  return roundedDirection(coverageDirection({ dataset: '', missing, width: info.width, height: info.height, leftEdgeLongitudeDeg }));
 }
 const roundedDirection = (direction: readonly number[]) => direction.map(value => Math.round(value * 1e4) / 1e4);
 const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutEnlargement: true,
@@ -61,7 +61,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const prepared = await optionalJson(resolve(outputDirectory, 'surfaces.json'));
   const rasterInput = await optionalJson(resolve(objectDirectory, 'source/preparation/raster.json'));
   const sourceSurfaces=requireArray(rasterInput?.surfaces ?? []).map(parsePreviewSurface);
-  const sourceLenses=requireArray(rasterInput?.lenses ?? []).map(value=>shape({id:text})(value));
+  const sourceDatasets=requireArray(rasterInput?.datasets ?? []).map(value=>shape({id:text})(value));
   const surfaces = new Map(sourceSurfaces.map(surface => [surface.id, surface] as const));
   const selected = photographs ? new Set(photographs) : null;
   // Raster-lane surfaces with a scientific interpretation preview through the same decoders the lane packs with.
@@ -76,9 +76,9 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const framingValue=await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const framing=framingValue && parseMinimapFraming(framingValue);
   const images = [];
-  const excluded = framing?.excludeLenses ?? [];
+  const excluded = framing?.excludeDatasets ?? [];
   if (!isArray(excluded) || excluded.some(id => typeof id !== 'string' ||
-      !surfaces.has(id) && !sourceLenses.some(lens => lens.id === id))) throw new Error('Invalid excluded minimap lenses');
+      !surfaces.has(id) && !sourceDatasets.some(dataset => dataset.id === id))) throw new Error('Invalid excluded minimap datasets');
   for (const surface of surfaces.values()) {
     if (excluded.includes(surface.id) || selected && !selected.has(surface.id)) continue;
     const input = surface.map ? resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1)))
@@ -112,13 +112,13 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
         }
         pipeline = sharp(rgb, { raw: { width: plate.size, height: plate.size, channels: 3 } }).resize(minimapResize(false));
       } else {
-        // A lens drawn over another surface previews with that same underlay, as the raster lane packs it.
-        const lens = requireArray(recipe.surfaces).map(value => requireRecord(value)).find(value => value.id === surface.id);
-        const underlay = lens && isRecord(lens.underlay) ? lens.underlay : null;
+        // A dataset drawn over another surface previews with that same underlay, as the raster lane packs it.
+        const dataset = requireArray(recipe.surfaces).map(value => requireRecord(value)).find(value => value.id === surface.id);
+        const underlay = dataset && isRecord(dataset.underlay) ? dataset.underlay : null;
         if (underlay) {
           const base = requireArray(recipe.surfaces).map(value => requireRecord(value)).find(value => value.id === underlay.surface);
           if (!base || base.science !== undefined || base.exposure !== undefined || !interpreted.missing)
-            throw new TypeError(`${basename(objectDirectory)}/${surface.id}: the minimap previews an underlay only from a plain photograph surface without exposure and with this lens's missing-cell mask (underlay ${String(underlay.surface)}).`);
+            throw new TypeError(`${basename(objectDirectory)}/${surface.id}: the minimap previews an underlay only from a plain photograph surface without exposure and with this dataset's missing-cell mask (underlay ${String(underlay.surface)}).`);
           const baseRgba = await readRgba(resolve(objectDirectory, 'source', requireString(base.source)), width, height, true, typeof base.sharpen === 'number' ? base.sharpen : undefined);
           const drawn = applyUnderlay(Uint8Array.from(withAlpha(interpreted, width, height)), interpreted.missing, baseRgba, surface.id,
             { brightness: requireFiniteNumber(underlay.brightness), ...(typeof underlay.grayscale === 'boolean' ? { grayscale: underlay.grayscale } : {}), ...(typeof underlay.bits === 'number' ? { bits: underlay.bits } : {}) });
@@ -154,14 +154,14 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     const result = await writeMinimap(previewPipeline, false, resolve(outputDirectory, path));
     images.push({ id: preview.id, path, width: result.width, height: result.height, ...(coverage ? { coverage } : {}) });
   }
-  const [controls, lenses, bindings] = await Promise.all([
+  const [controls, datasets, bindings] = await Promise.all([
     optionalJson(resolve(outputDirectory, 'controls.json')),
-    optionalJson(resolve(outputDirectory, 'lenses.json')),
+    optionalJson(resolve(outputDirectory, 'datasets.json')),
     optionalJson(resolve(objectDirectory, 'source/content/lens-bindings.json')),
   ]);
-  const shell=controls?.lenses ? parsePreviewControls(controls.lenses).controls : [];
-  assertSurfacePreviewCoverage(shell.filter(lens => !excluded.includes(lens.id) && (!selected || selected.has(lens.id))), images,
-    [...(lenses ? parsePreviewControls(lenses).controls : []), ...(bindings ? parsePreviewControls(bindings).controls : [])]);
+  const shell=controls?.datasets ? parsePreviewControls(controls.datasets).controls : [];
+  assertSurfacePreviewCoverage(shell.filter(dataset => !excluded.includes(dataset.id) && (!selected || selected.has(dataset.id))), images,
+    [...(datasets ? parsePreviewControls(datasets).controls : []), ...(bindings ? parsePreviewControls(bindings).controls : [])]);
   if (selected) {
     const existing = await optionalJson(resolve(outputDirectory, 'minimaps.json'));
     const previous = requireArray(existing?.images).map(value => ({ ...requireRecord(value), ...shape({ id: text, path: text, width: number, height: number })(value) }));

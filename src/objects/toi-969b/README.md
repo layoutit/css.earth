@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-969. Its orbit and size follow Lillo-Box
 
 **Orbit.** Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): P 1.8237305 d Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): a/R* 8.47; Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): inclination 86.75 degrees No archive row states an eccentricity; the orbit is taken as circular Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): transit mid-time 2459248.37709 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-969's measured colour (#ffc8a3, the colour lens of toi-969 (src/objects/toi-969/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-969's measured colour (#ffc8a3, the colour dataset of toi-969 (src/objects/toi-969/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-969's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (34), folded onto its orbit. Upper limits and rows without an error are left out.
 

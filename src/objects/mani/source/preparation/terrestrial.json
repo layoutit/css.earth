@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "mani",
   "displayName": "Máni",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative pole RA 0°, declination 90° and arbitrary meridian; the occultation position angle does not determine an inertial spin pole."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

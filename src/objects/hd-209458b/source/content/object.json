@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-209458b",
   "displayName": "HD 209458 b",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 1,499 K. The disc itself is unresolved.",
-        "thumbnail": "hd-209458b-lens-thermal.webp",
+        "thumbnail": "hd-209458b-dataset-thermal.webp",
         "surface": "hd-209458b-surface-thermal@2x.webp",
         "poles": "hd-209458b-poles-thermal@2x.webp",
         "source": {
@@ -57,7 +57,7 @@
         "id": "temperature",
         "label": "Spitzer",
         "qualification": "Published fit · Zellem et al. 2014 · Spitzer 4.5 µm, 2010 · longitude only",
-        "thumbnail": "hd-209458b-lens-temperature.webp",
+        "thumbnail": "hd-209458b-dataset-temperature.webp",
         "surface": "hd-209458b-surface-temperature@2x.webp",
         "poles": "hd-209458b-poles-temperature@2x.webp",
         "source": {

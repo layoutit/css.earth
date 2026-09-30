@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "gryphia",
   "displayName": "Gryphia",
@@ -111,6 +111,6 @@
     "sunSource": "Fixed illustrative display orientation for a qualified convex shape of a known tumbler; the incomplete physical attitude is not propagated."
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

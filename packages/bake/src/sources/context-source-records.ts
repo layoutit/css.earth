@@ -28,10 +28,10 @@ export async function contextLineages({ route, root = process.cwd(), input = (pa
     if (raw.provenance === undefined) continue;
     const presentation = sourceObject(raw.provenance);
     const manifest = sourceObject(JSON.parse((await input(`${base}/source/manifest.json`)).toString()));
-    if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
+    if (manifest.schema !== 'cssearth-volume-source-manifest@2' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
     const products = sourceArray(presentation.products, raw => {
       const value = sourceObject(raw), interpretation = sourceObject(value.interpretation);
-      return { id: sourceText(value.id), label: sourceText(value.label), inputs: [...sourceArray(value.inputs, sourceText)], parents: [], lensIds: [],
+      return { id: sourceText(value.id), label: sourceText(value.label), inputs: [...sourceArray(value.inputs, sourceText)], parents: [], datasetIds: [],
         observationAttribution: 'none' as const, limitations: [...sourceArray(value.limitations, sourceText)],
         interpretation: { ...(typeof interpretation.kind === 'string' ? { kind: interpretation.kind } : {}),
           ...(typeof interpretation.sourceKind === 'string' ? { sourceKind: interpretation.sourceKind } : {}) } };

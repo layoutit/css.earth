@@ -71,29 +71,29 @@ The public scene retains its missing-imagery grid. Merged
 [PR #199](https://github.com/layoutit/css.earth/pull/199) preserves the earlier
 investigation; it did not qualify a photographic surface.
 
-The [whole-body label capture](evidence/surface-labels/whole-body-2c24ca749.jpg), taken
+The whole-body label capture, taken
 on 2026-09-12 in the in-app browser at 1280 × 720, shows Acmon and
 Celmis with neither place selected. Both names are visible while the whole moon
 fits on screen; rotating hides the far-side names. The catalog's coordinates,
 diameters and mesh anchors remain unchanged. All 68 catalog and terrain checks
 passed on this revision, including Dactyl's two names.
 
-The [browser conformance report](evidence/dactyl-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/dactyl-dpr-1.webm) and [DPR 2 video](evidence/dactyl-dpr-2.webm) retain the input sequences. These were captured; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer. The production check below repeats the navigation and presentation affected by later changes.
+The browser conformance report passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its DPR 1 video and DPR 2 video retain the input sequences. These were captured; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer. The production check below repeats the navigation and presentation affected by later changes.
 
 ![Dactyl with Shadows off](evidence/dactyl-shadows-false.png)
 
-The [Shadows-on view](evidence/dactyl-shadows-true.png) was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer and browser-review. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
+The Shadows-on view was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer and browser-review. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
 
 ![Dactyl’s approximate orbit around Ida](evidence/dactyl-approximate-orbit.png)
 
-The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-review.json) verifies visible **(approx)** labels, dashed paths, the standard **1 px** circle/orbit stroke, and selection of Ida with one mounted scene. Alternating existing retained segments carry the dashes; approximate circles omit the ordinary selected-body thickening. [Integrated checks and their limits](../dinkinesh/README.md#integrated-validation) cover the combined catalog.
+The production navigation check verifies visible **(approx)** labels, dashed paths, the standard **1 px** circle/orbit stroke, and selection of Ida with one mounted scene. Alternating existing retained segments carry the dashes; approximate circles omit the ordinary selected-body thickening. [Integrated checks and their limits](../dinkinesh/README.md#integrated-validation) cover the combined catalog.
 
 ## Camera and orientation experiment
 
 The [retained report](evidence/registration/report.json) records a diagnostic
 run on 2026-09-14, with the
 new diagnostic and its dependencies identified by path. It does not prepare
-a photographic lens. [Pinned inputs](evidence/registration/inputs.json) include
+a photographic dataset. [Pinned inputs](evidence/registration/inputs.json) include
 the original mission VICAR image, its label, the mission clock and leap-second
 kernels, and the SSI instrument definition already retained beside Ida.
 
@@ -304,7 +304,7 @@ this source-only change.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dactyl (retrieved 2026-09-11, re-retrieved 2026-09-18, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and the metadata datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries.
 
-Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 run): the refreshed catalogue still labels 2 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band against the 2026-09-18 export. The Gazetteer regenerates this export on its own schedule (USGS Astrogeology, observed weekly): the 2026-09-11 snapshot’s exact bytes were superseded upstream, and the only other reachable copy of this file (a separate checkout’s scratch output) was itself stale and did not match either pin, so the manifest is re-pinned to the 2026-09-18 bytes; `source/manifest.json` and `source/features/manifest.json` record the acquisition. The 2026-09-12 run’s headless Chrome probe (`output/probe-spheres.mts`, ignored scratch), which mounted the page, selected every lens and pinned Acmon from the sidebar search with no console errors or failed requests, has not been re-run against the 2026-09-18 export.
+Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 run): the refreshed catalogue still labels 2 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band against the 2026-09-18 export. The Gazetteer regenerates this export on its own schedule (USGS Astrogeology, observed weekly): the 2026-09-11 snapshot’s exact bytes were superseded upstream, and the only other reachable copy of this file (a separate checkout’s scratch output) was itself stale and did not match either pin, so the manifest is re-pinned to the 2026-09-18 bytes; `source/manifest.json` and `source/features/manifest.json` record the acquisition. The 2026-09-12 run’s headless Chrome probe (`output/probe-spheres.mts`, ignored scratch), which mounted the page, selected every dataset and pinned Acmon from the sidebar search with no console errors or failed requests, has not been re-run against the 2026-09-18 export.
 
 The label-discovery update restores the current Gazetteer ZIP and records its
 new byte pin. Its prepared names, coordinates, diameters, notes and mesh anchors

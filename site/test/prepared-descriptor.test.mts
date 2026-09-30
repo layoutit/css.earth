@@ -5,7 +5,7 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 import { publishPreparedDescriptor, readPreparedDescriptor } from '../prepared-descriptor.mts';
 
 const descriptor: ObjectDescriptor = {
-  schema: 'cssearth-object@1', id: 'earth', type: 'layered-body', properties: {},
+  schema: 'cssearth-object@2', id: 'earth', type: 'layered-body', properties: {},
   prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' },
 };
 

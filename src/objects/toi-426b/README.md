@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-426. Its orbit and size follow Castro-Go
 
 **Orbit.** Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): P 1.32050258 d Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): a/R* 5.16; Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): inclination 87 degrees No archive row states an eccentricity; the orbit is taken as circular Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): transit mid-time 2458438.52836 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-426's measured colour (#fff1ee, the colour lens of toi-426 (src/objects/toi-426/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-426's measured colour (#fff1ee, the colour dataset of toi-426 (src/objects/toi-426/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-426's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (5, 32, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

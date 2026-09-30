@@ -1,6 +1,6 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedVolumeLenses, createPreparedVolumeLenses, imageFocusDatasets } from '@cssearth/renderer/universe';
+import { loadPreparedVolumeDatasets, createPreparedVolumeDatasets, imageFocusDatasets } from '@cssearth/renderer/universe';
 import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSelectionTarget, savedWorldCamera } from '@cssearth/renderer/navigation';
 import type { PreparedWorldCameraFrame, SharedView } from '@cssearth/renderer/navigation';
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
@@ -10,7 +10,7 @@ import { isRecord } from '@cssearth/core';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from './focus-fragment.mts';
 import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
-import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusLens } from './prepared-focus.mts';
+import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusDataset } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 
@@ -31,31 +31,31 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
     spliceFocusBanks(root, parseHTML(html).document);
   }
   const unavailable = objectId !== undefined && (shell.querySelector<HTMLElement>('[data-focus-unavailable]')?.dataset.unavailableObjects?.split(' ') ?? []).includes(objectId);
-  const bank = unavailable ? undefined : [...shell.querySelectorAll<HTMLElement>('[data-focus-lens-bank]')].find(bank => bank.dataset.focusLensBank === objectId);
+  const bank = unavailable ? undefined : [...shell.querySelectorAll<HTMLElement>('[data-focus-dataset-bank]')].find(bank => bank.dataset.focusDatasetBank === objectId);
   let presentation: PreparedFocusPresentation | undefined;
   if (bank) {
     const input: unknown = JSON.parse(requiredElement(bank, 'script[data-focus-resources]').textContent ?? '');
     if (!isRecord(input) || !isRecord(input.resources)) throw new TypeError('Prepared focus resources are missing.');
     const descriptor = parseObjectDescriptor(input.descriptor), resources = input.resources;
     if (descriptor.id !== objectId) throw new TypeError('Prepared focus resource identity differs.');
-    // Image-layer galaxies such as M31 are already drawn by the world context; only volume banks mount focus lenses.
+    // Image-layer galaxies such as M31 are already drawn by the world context; only volume banks mount focus datasets.
     if (descriptor.type === 'image-layer-bank') {
       const datasets = imageFocusDatasets(descriptor.id);
-      resolvePreparedFocusLens(selection.lens, datasets);
-      presentation = { ...datasets, selectLens() {} };
+      resolvePreparedFocusDataset(selection.dataset, datasets);
+      presentation = { ...datasets, selectDataset() {} };
     } else {
       const resolve = (path: string): string => {
         const value = resources[path];
         if (typeof value !== 'string' || !value) throw new TypeError('Prepared focus resource is undeclared.');
         return value;
       };
-      const payload = await loadPreparedVolumeLenses(descriptor, { read: async path => {
+      const payload = await loadPreparedVolumeDatasets(descriptor, { read: async path => {
         const response = await fetcher(new URL(resolve(path), url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
         if (!response.ok) throw new Error('Prepared focus bank could not load.');
         return response.arrayBuffer();
       } });
-      const lensId = resolvePreparedFocusLens(selection.lens, payload)!;
-      const focus = resolvePreparedFocus(selected, payload.framingRadiusUnits * payload.lenses[0].volume.frame.metersPerUnit,
+      const datasetId = resolvePreparedFocusDataset(selection.dataset, payload)!;
+      const focus = resolvePreparedFocus(selected, payload.framingRadiusUnits * payload.datasets[0].volume.frame.metersPerUnit,
         PREPARED_WORLD_PRESENTATION.galaxies);
       const focalCss = definition.camera.projection.cssPerspective;
       const viewport = { focalPixels: 1000, widthPixels: 1e9, heightPixels: 1e9, principalOffsetPixels: [0, 0] as const };
@@ -72,12 +72,12 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
           playback: { speed: 1, motionRequested: false, times: [...definition.motion ?? [], ...definition.animations.filter(plan => plan.mode === 'motion')].map(() => 0) } };
       }
       const end = stage.ownerDocument.createElement('span'); end.hidden = true; stage.append(end);
-      const runtime = createPreparedVolumeLenses({ payload, resolveResource: path => resolve(`prepared/${path}`) }).mount({ host: stage, before: end, nativeFocalCss: focalCss });
-      runtime.selectLens(lensId); runtime.publish({ world, viewport });
+      const runtime = createPreparedVolumeDatasets({ payload, resolveResource: path => resolve(`prepared/${path}`) }).mount({ host: stage, before: end, nativeFocalCss: focalCss });
+      runtime.selectDataset(datasetId); runtime.publish({ world, viewport });
       end.remove();
-      presentation = { ...runtime.state(), selectLens() {} };
+      presentation = { ...runtime.state(), selectDataset() {} };
     }
-  } else resolvePreparedFocusLens(selection.lens, null, unavailable);
+  } else resolvePreparedFocusDataset(selection.dataset, null, unavailable);
   const card = createPreparedFocusCard(root, id => {
     for (const radio of root.querySelectorAll<HTMLInputElement>(':scope > .object-native-tabs > input')) radio.toggleAttribute('checked', radio.value === id);
   });

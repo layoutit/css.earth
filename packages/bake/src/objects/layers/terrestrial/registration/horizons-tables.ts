@@ -1,7 +1,7 @@
 /** JPL Horizons tables for exact exposure starts: the observer table at each start and the heliocentric table at each start
  * less the light time over the observer range, asked in batches of 25 epochs (Horizons refuses longer time lists) and joined
  * into one table; and the refresh steps that ask for exactly those queries again. `packages/bake/cli/sphere-horizons.mts` writes
- * them beside a lens's frames and pins them in its manifest. */
+ * them beside a dataset's frames and pins them in its manifest. */
 import { horizonsRows, observerRowValues, rowJd } from './observer-cameras.ts';
 
 export const HORIZONS_API = 'https://ssd.jpl.nasa.gov/api/horizons.api';
@@ -25,7 +25,7 @@ export function horizonsCommand(record: unknown): string {
 }
 
 const timeList = (epochs: readonly number[]) => `'${epochs.map(epoch => epoch.toFixed(9)).join(' ')}'`;
-/** Paranal, where the ground-based lenses were exposed. A space telescope is a Horizons centre too: JWST is 500@-170. */
+/** Paranal, where the ground-based datasets were exposed. A space telescope is a Horizons centre too: JWST is 500@-170. */
 export const PARANAL = '309';
 /** ALMA's array centre, which Horizons has no site code for: a centre written `coord@<body>:<east longitude°>,<latitude°>,<altitude km>`
  * is asked as geodetic coordinates. The values are the ones CASA's observatory table gives for ALMA. */
@@ -88,7 +88,7 @@ export async function horizonsTables(command: string, starts: readonly number[],
 export const HORIZONS_TIME_LIST = 'horizons-time-list';
 
 /**
- * The refresh steps that ask Horizons again for exactly the queries a lens's two tables answer: the parameters without
+ * The refresh steps that ask Horizons again for exactly the queries a dataset's two tables answer: the parameters without
  * the time list, and the epochs the time list held. Horizons prints the date it was asked in each response's header,
  * so a refresh compares the rows, not the bytes.
  */

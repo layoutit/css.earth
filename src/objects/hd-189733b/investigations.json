@@ -27,7 +27,7 @@
       "subject": "The deposit's SPARTA-reduction map (output_S.npy)",
       "status": "excluded",
       "finding": "The same fit on the SPARTA reduction of the MIRI data. It duplicates the Eureka! map's data and method; the paper leads with the Eureka! map.",
-      "revisitWhen": "The SPARTA and Eureka! maps are found to differ in a way the lens should show.",
+      "revisitWhen": "The SPARTA and Eureka! maps are found to differ in a way the dataset should show.",
       "evidence": [
         "https://zenodo.org/records/15103479"
       ]
@@ -36,7 +36,7 @@
       "id": "raw-miri-map",
       "subject": "This project's map from the raw MIRI exposures",
       "status": "excluded",
-      "finding": "tools/objects/eclipse-map/hd-189733b-raw-map.test.mts fits the two MIRI eclipses reduced from raw (JWST program 2021) and matches the deposited dayside with correlation 0.94, hot spot 41 E 7 N. It uses MIRI only, without the Spitzer data that break the ramp-map degeneracy, so it is a check, not a lens.",
+      "finding": "tools/objects/eclipse-map/hd-189733b-raw-map.test.mts fits the two MIRI eclipses reduced from raw (JWST program 2021) and matches the deposited dayside with correlation 0.94, hot spot 41 E 7 N. It uses MIRI only, without the Spitzer data that break the ramp-map degeneracy, so it is a check, not a dataset.",
       "revisitWhen": "A raw reduction adds the Spitzer data, or the program's remaining observations are mapped.",
       "evidence": [
         "https://www.stsci.edu/jwst/science-execution/program-information?id=2021",
@@ -100,7 +100,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for HD 189733b",
       "status": "included",
-      "finding": "The deposited temperature map seen from the host star in the lens palette, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
+      "finding": "The deposited temperature map seen from the host star in the dataset palette, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733b/source/presentation/context.png"
       ]
@@ -119,9 +119,9 @@
     },
     {
       "id": "nasa-eyes-illustration",
-      "subject": "NASA Eyes on Exoplanets artist's concept map as an illustration lens",
+      "subject": "NASA Eyes on Exoplanets artist's concept map as an illustration dataset",
       "status": "included",
-      "finding": "Shown as the non-default Illustration lens, never as imagery: the map NASA's Eyes on Exoplanets app lists for HD 189733b (HD_189733_b.jpg), resized unchanged onto the sphere with its left edge at 0° longitude, so its longitudes are arbitrary. No image resolves this planet; nothing in the map was observed. NASA credits the app NASA/JPL-Caltech and calls each planet's look an artist's concept; the file itself carries no credit or date.",
+      "finding": "Shown as the non-default Illustration dataset, never as imagery: the map NASA's Eyes on Exoplanets app lists for HD 189733b (HD_189733_b.jpg), resized unchanged onto the sphere with its left edge at 0° longitude, so its longitudes are arbitrary. No image resolves this planet; nothing in the map was observed. NASA credits the app NASA/JPL-Caltech and calls each planet's look an artist's concept; the file itself carries no credit or date.",
       "evidence": [
         "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HD_189733_b.jpg",
         "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"

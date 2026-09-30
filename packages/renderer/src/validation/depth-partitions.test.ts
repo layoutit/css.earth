@@ -4,7 +4,7 @@ import { parsePreparedObjectRuntime } from './index.js';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 
 // The mutable fixture keeps the parsed-JSON shape the mutations below rely on.
-const source: ReturnType<typeof JSON.parse> = JSON.parse(await readFile(new URL('../../../../src/objects/deimos/prepared/object.json', import.meta.url), 'utf8')).data;
+const source: ReturnType<typeof JSON.parse> = JSON.parse(await readFile(new URL('../../../../src/objects/deimos/prepared/runtime.json', import.meta.url), 'utf8'));
 // The published Deimos package can retain native depth. Validate the optional
 // partition transport against explicit carriers, independent of that bake choice.
 const prepared = structuredClone(source), groups: { root: number; scene: number }[] = [];

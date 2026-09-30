@@ -4,7 +4,7 @@ import { defineOverview, overviewEntry, overviewHolding } from './overview-objec
 const zoom = { enter: { distancePc: 5e6 }, returnBelow: { distancePc: 4e6 }, frame: { distance: { distancePc: 1e8 } } };
 const authored = { name: 'Local Group', description: 'Our galaxy group.', order: 2, zoom, holds: [{ classifications: ['galaxy'], list: 'Galaxies' }] };
 const descriptor = (overview: unknown, properties: Record<string, unknown> = {}) =>
-  ({ schema: 'cssearth-object@1', id: 'local-group', type: 'galaxy-catalog', properties: { overview, ...properties } });
+  ({ schema: 'cssearth-object@2', id: 'local-group', type: 'galaxy-catalog', properties: { overview, ...properties } });
 const entry = (changes: Record<string, unknown> = {}) => ({ kind: 'overview', id: 'local-group', name: 'Local Group', description: 'x', order: 2, zoom,
   holds: [], packages: [], route: '/local-group/', sceneHostId: 'sun', ...changes });
 
@@ -19,7 +19,7 @@ describe('overview entries', () => {
   });
 
   it('leaves a package without one out', () => {
-    expect(overviewEntry({ schema: 'cssearth-object@1', id: 'm31', type: 'x', properties: {} }, 'sun')).toBeNull();
+    expect(overviewEntry({ schema: 'cssearth-object@2', id: 'm31', type: 'x', properties: {} }, 'sun')).toBeNull();
   });
 
   it('refuses an incomplete overview, naming the package', () => {

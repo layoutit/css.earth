@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/be-ceti/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "be-ceti-surface-{id}{suffix}.webp",
-      "thumbnail": "be-ceti-lens-{id}.webp",
+      "thumbnail": "be-ceti-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
@@ -51,7 +51,7 @@
     {
       "id": "radial-field",
       "output": "be-ceti-surface-{id}{suffix}.webp",
-      "thumbnail": "be-ceti-lens-{id}.webp",
+      "thumbnail": "be-ceti-dataset-{id}.webp",
       "source": "science/willamo-2022/becet.dat",
       "falseColor": true,
       "science": {
@@ -94,7 +94,7 @@
     {
       "id": "meridional-field",
       "output": "be-ceti-surface-{id}{suffix}.webp",
-      "thumbnail": "be-ceti-lens-{id}.webp",
+      "thumbnail": "be-ceti-dataset-{id}.webp",
       "source": "science/willamo-2022/becet.dat",
       "falseColor": true,
       "science": {
@@ -137,7 +137,7 @@
     {
       "id": "azimuthal-field",
       "output": "be-ceti-surface-{id}{suffix}.webp",
-      "thumbnail": "be-ceti-lens-{id}.webp",
+      "thumbnail": "be-ceti-dataset-{id}.webp",
       "source": "science/willamo-2022/becet.dat",
       "falseColor": true,
       "science": {

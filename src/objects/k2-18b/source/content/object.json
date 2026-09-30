@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "k2-18b",
   "displayName": "K2-18 b",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by K2-18; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "k2-18b-lens-shape.webp",
+        "thumbnail": "k2-18b-dataset-shape.webp",
         "surface": "k2-18b-surface-shape@2x.webp",
         "poles": "k2-18b-poles-shape@2x.webp",
         "source": {
@@ -51,7 +51,7 @@
           "url": "https://arxiv.org/abs/1909.04642"
         },
         "falseColor": false,
-        "notes": "No image or colour of this planet exists (it has never been resolved: its size, orbit and transmission spectrum are measured, not its surface; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit. The gray takes the colour of k2-18's light, as its colour lens measures it."
+        "notes": "No image or colour of this planet exists (it has never been resolved: its size, orbit and transmission spectrum are measured, not its surface; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit. The gray takes the colour of k2-18's light, as its colour dataset measures it."
       }
     ]
   },

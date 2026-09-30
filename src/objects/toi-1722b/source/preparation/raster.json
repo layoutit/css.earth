@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/toi-1722b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "toi-1722b-surface-{id}{suffix}.webp",
-      "thumbnail": "toi-1722b-lens-{id}.webp",
+      "thumbnail": "toi-1722b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#fff7fe, the colour lens of toi-1722 (src/objects/toi-1722/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#fff7fe, the colour dataset of toi-1722 (src/objects/toi-1722/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "toi-1722",
           "srgb": "#fff7fe",
-          "source": "the colour lens of toi-1722 (src/objects/toi-1722/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of toi-1722 (src/objects/toi-1722/source/photometry/stellar-color.json)"
         }
       }
     }

@@ -1,5 +1,5 @@
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
-// The five Uranian moons' Voyager colour lenses: each frame placed by limb fit and registered to the moon's Schenk mosaic,
+// The five Uranian moons' Voyager colour datasets: each frame placed by limb fit and registered to the moon's Schenk mosaic,
 // every placed tile pinned, and the prepared composite reporting its band levels. One test file, five packages: the route is
 // the same and the numbers per moon are read from their own reports.
 import assert from "node:assert/strict";
@@ -42,8 +42,8 @@ for (const moon of MOONS) {
 
   test(`${moon}: the whole-disc colour is tied to Bell and McCord (1991) and the prepared report shows the measured ratios and gains`, async () => {
     const [raster, assets] = await Promise.all(["source/preparation/raster.json", "prepared/assets.json"].map(path => read(moon, path)));
-    const lens = requireRecord(required((raster.surfaces as { id: string }[]).find(surface => surface.id === "voyager-color")));
-    const policy = requireRecord(requireRecord(requireRecord(requireRecord(lens.science).photometry).profile).bandRatios);
+    const dataset = requireRecord(required((raster.surfaces as { id: string }[]).find(surface => surface.id === "voyager-color")));
+    const policy = requireRecord(requireRecord(requireRecord(requireRecord(dataset.science).photometry).profile).bandRatios);
     assert.equal(policy.reference, "GREEN"); assert.equal(policy.source, "bell-mccord-1991");
     const ratios = requireRecord(policy.ratios);
     for (const band of ["VIOLET", "UV"]) assert.ok(typeof ratios[band] === "number" && (ratios[band] as number) > 0.85 && (ratios[band] as number) < 1.1, `${band} ratio read from Fig. 2`);
@@ -54,20 +54,20 @@ for (const moon of MOONS) {
     const gains = tie.gains as number[]; assert.equal(gains[0], 1); for (const gain of gains) assert.ok(gain > 0.8 && gain < 1.3, `gain ${gain} stays a calibration-sized correction`);
   });
 
-  test(`${moon}: every tile of a complete set is pinned for the lens with its geometry label, and the lens names those sets`, async () => {
+  test(`${moon}: every tile of a complete set is pinned for the dataset with its geometry label, and the dataset names those sets`, async () => {
     const [manifest, raster, placement] = await Promise.all(["source/manifest.json", "source/preparation/raster.json", "source/reference/voyager-color-placement.json"].map(path => read(moon, path)));
     const inputs = manifest.inputs as { id: string; path: string; consumers: string[]; observation?: string; filter?: string; imageId?: string }[];
     const tiles = inputs.filter(input => input.consumers.includes("voyager-color")), labels = inputs.filter(input => input.consumers.includes("voyager-color-photometry"));
     assert.ok(tiles.length >= 3 && tiles.length % 3 === 0, "tiles come in complete filter sets");
     assert.equal(labels.length, tiles.length);
     for (const tile of tiles) assert.ok(labels.some(label => label.imageId === tile.id), `${tile.id} has its geometry label`);
-    const lens = requireRecord(required((raster.surfaces as { id: string }[]).find(surface => surface.id === "voyager-color")));
-    const profile = requireRecord(requireRecord(requireRecord(lens.science).photometry).profile);
+    const dataset = requireRecord(required((raster.surfaces as { id: string }[]).find(surface => surface.id === "voyager-color")));
+    const profile = requireRecord(requireRecord(requireRecord(dataset.science).photometry).profile);
     const weights = requireRecord(profile.observationWeights);
     assert.deepEqual(Object.keys(weights).sort(), [...new Set(tiles.map(tile => tile.observation))].sort(), "the recipe weighs exactly the pinned sets");
     assert.equal(profile.withheld, "next-observation");
     assert.ok(Object.hasOwn(weights, requireRecord(profile.bandLevels).reference as string), "the band-level reference is one of the sets");
-    assert.equal(requireRecord(lens.science).monochromeBase, "normal");
+    assert.equal(requireRecord(dataset.science).monochromeBase, "normal");
     const frames = placement.frames as Frame[];
     for (const tile of tiles) assert.ok(frames.some(frame => frame.placed && frame.tiles?.some(t => t.framePath === tile.path)), `${tile.path} was written by the placement`);
   });

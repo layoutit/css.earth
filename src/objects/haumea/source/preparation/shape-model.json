@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-shape-model@1",
+  "schema": "cssearth-shape-model@2",
   "displayName": "Haumea",
   "displayRadius": 230,
   "quadBudget": 2000,
@@ -21,7 +21,7 @@
   },
   "surfaces": [
     {
-      "lens": "color",
+      "dataset": "color",
       "source": "photometry/disc-color.json",
       "science": {
         "kind": "disc-integrated-color",
@@ -30,7 +30,7 @@
       }
     },
     {
-      "lens": "illustration",
+      "dataset": "illustration",
       "source": "nasa-haumea.glb",
       "science": {
         "kind": "glb-base-color",

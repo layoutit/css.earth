@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-29615",
   "displayName": "HD 29615",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "hd-29615-lens-color.webp",
+        "thumbnail": "hd-29615-dataset-color.webp",
         "surface": "hd-29615-surface-color@2x.webp",
         "poles": "hd-29615-poles-color@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "radial-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "hd-29615-lens-radial-field.webp",
+        "thumbnail": "hd-29615-dataset-radial-field.webp",
         "surface": "hd-29615-surface-radial-field@2x.webp",
         "poles": "hd-29615-poles-radial-field@2x.webp",
         "source": {
@@ -125,7 +125,7 @@
         "id": "meridional-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "hd-29615-lens-meridional-field.webp",
+        "thumbnail": "hd-29615-dataset-meridional-field.webp",
         "surface": "hd-29615-surface-meridional-field@2x.webp",
         "poles": "hd-29615-poles-meridional-field@2x.webp",
         "source": {
@@ -180,7 +180,7 @@
         "id": "azimuthal-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "hd-29615-lens-azimuthal-field.webp",
+        "thumbnail": "hd-29615-dataset-azimuthal-field.webp",
         "surface": "hd-29615-surface-azimuthal-field@2x.webp",
         "poles": "hd-29615-poles-azimuthal-field@2x.webp",
         "source": {
@@ -235,7 +235,7 @@
         "id": "brightness",
         "label": "Brightness",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "hd-29615-lens-brightness.webp",
+        "thumbnail": "hd-29615-dataset-brightness.webp",
         "surface": "hd-29615-surface-brightness@2x.webp",
         "poles": "hd-29615-poles-brightness@2x.webp",
         "source": {

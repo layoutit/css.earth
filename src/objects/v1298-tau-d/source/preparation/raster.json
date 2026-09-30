@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/v1298-tau-d/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "v1298-tau-d-surface-{id}{suffix}.webp",
-      "thumbnail": "v1298-tau-d-lens-{id}.webp",
+      "thumbnail": "v1298-tau-d-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffe6cf, the colour lens of v1298-tau (src/objects/v1298-tau/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffe6cf, the colour dataset of v1298-tau (src/objects/v1298-tau/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "v1298-tau",
           "srgb": "#ffe6cf",
-          "source": "the colour lens of v1298-tau (src/objects/v1298-tau/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of v1298-tau (src/objects/v1298-tau/source/photometry/stellar-color.json)"
         }
       }
     }

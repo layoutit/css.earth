@@ -73,7 +73,7 @@ export function readObservedStarCataloguePin(value: unknown): ObservedStarCatalo
 export function compilerControlsForRecipe(recipe: CompilerRecipe, requested?: CompilerControls): CompilerControls {
   return readCompilerControls(requested ?? recipe.defaultControls ?? defaultCompilerControls);
 }
-/** IDs prevent catalogue reordering from transferring a source's authored weight to another lens. */
+/** IDs prevent catalogue reordering from transferring a source's authored weight to another dataset. */
 export function compilerSourceWeights(recipe: CompilerRecipe, sourceIds: string[], requested: number[] = []): number[] {
   if (!sourceIds.length || new Set(sourceIds).size !== sourceIds.length ||
       Object.keys(recipe.sourceWeights ?? {}).some(id => !sourceIds.includes(id)))

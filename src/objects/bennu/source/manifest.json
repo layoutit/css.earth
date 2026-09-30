@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "bennu-shape",
@@ -13,7 +13,7 @@
         "terrain",
         "elevation"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "projection": {
         "kind": "body-fixed-triangle-mesh",
         "longitudeDirection": "east",
@@ -54,7 +54,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Albedo",
       "falseColor": false,
       "width": 25134,
@@ -98,7 +98,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "surface",
+      "datasetId": "surface",
       "label": "Monochrome",
       "falseColor": false,
       "width": 31417,
@@ -142,7 +142,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "spectral",
+      "datasetId": "spectral",
       "label": "Spectral color",
       "falseColor": true,
       "width": 6284,
@@ -208,7 +208,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "blue",
+      "datasetId": "blue",
       "label": "Blue · 473 nm",
       "falseColor": false,
       "width": 6284,
@@ -253,7 +253,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "green",
+      "datasetId": "green",
       "label": "Green · 550 nm",
       "falseColor": false,
       "width": 6284,
@@ -298,7 +298,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "red",
+      "datasetId": "red",
       "label": "Red · 698 nm",
       "falseColor": false,
       "width": 6284,
@@ -343,7 +343,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "near-infrared",
+      "datasetId": "near-infrared",
       "label": "Near infrared · 847 nm",
       "falseColor": false,
       "width": 6284,
@@ -460,7 +460,7 @@
       "consumers": [
         "gravity-anomaly"
       ],
-      "lensId": "gravity-anomaly",
+      "datasetId": "gravity-anomaly",
       "projection": {
         "kind": "source-triangle-facet-field",
         "units": "fraction of uniform-density surface acceleration",
@@ -672,7 +672,7 @@
       "consumers": [
         "slope"
       ],
-      "lensId": "slope",
+      "datasetId": "slope",
       "projection": {
         "kind": "source-triangle-facet-field",
         "units": "degrees",
@@ -744,7 +744,7 @@
       "consumers": [
         "geopotential"
       ],
-      "lensId": "geopotential",
+      "datasetId": "geopotential",
       "projection": {
         "kind": "source-triangle-facet-field",
         "units": "meters",
@@ -888,7 +888,7 @@
       "consumers": [
         "thermal-inertia"
       ],
-      "lensId": "thermal-inertia",
+      "datasetId": "thermal-inertia",
       "projection": {
         "kind": "source-triangle-facet-field",
         "units": "J m^-2 K^-1 s^-1/2",
@@ -1067,7 +1067,7 @@
       "consumers": [
         "hydration"
       ],
-      "lensId": "hydration",
+      "datasetId": "hydration",
       "projection": {
         "kind": "source-triangle-facet-field",
         "units": "band depth fraction",
@@ -1139,7 +1139,7 @@
       "consumers": [
         "carbon"
       ],
-      "lensId": "carbon",
+      "datasetId": "carbon",
       "projection": {
         "kind": "source-triangle-facet-field",
         "units": "%·µm",
@@ -1222,7 +1222,7 @@
         "latitudeDegrees": 20,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

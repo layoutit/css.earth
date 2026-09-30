@@ -24,7 +24,7 @@
       "id": "usgs-mdis-md3-color",
       "subject": "USGS MESSENGER MDIS MD3 color global mosaic, 665 m, edition 1 (2016)",
       "status": "included",
-      "finding": "Added as the Color lens. USGS places the 1000, 750 and 430 nm filter images in red, green and blue (PDS data set MESS-H-MDIS-5-RDR-MD3-V1.0), each photometrically normalized and stretched about 0-0.2 reflectance into 8 bits. The enhanced mosaic is built from the same bands but shows principal components and the 430/1000 nm ratio, so the two differ: 26.5% of pixels at pixelmatch threshold 0.1. It is reduced with the same native pixel-area mean as the other native maps; 25 independent footprints match. Gaps beyond about 84N and 80S are the gray grid, the same pixels as in the enhanced map. 1000 nm is outside human vision, so it is not natural color.",
+      "finding": "Added as the Color dataset. USGS places the 1000, 750 and 430 nm filter images in red, green and blue (PDS data set MESS-H-MDIS-5-RDR-MD3-V1.0), each photometrically normalized and stretched about 0-0.2 reflectance into 8 bits. The enhanced mosaic is built from the same bands but shows principal components and the 430/1000 nm ratio, so the two differ: 26.5% of pixels at pixelmatch threshold 0.1. It is reduced with the same native pixel-area mean as the other native maps; 25 independent footprints match. Gaps beyond about 84N and 80S are the gray grid, the same pixels as in the enhanced map. 1000 nm is outside human vision, so it is not natural color.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m",
         "https://astrogeology.usgs.gov/ckan/dataset/fc37692f-e806-4632-b300-0250bb61c3de/resource/0313deb7-ad46-4ad9-96fd-cd7e8886443c/download/mercury_messenger_mdis_basemap_md3color_mosaic_global_665m_pds3.lbl",
@@ -37,9 +37,7 @@
       "status": "excluded",
       "finding": "Retired the modeled polar completion. Native enhanced-color observations are reduced directly; missing source footprints are gray grid.",
       "revisitWhen": "Do not synthesize missing observations. A future observed product may replace the gaps.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/enhanced-check.json"
-      ]
+      "evidence": []
     },
     {
       "id": "usgs-shaded-relief-topography",
@@ -169,26 +167,20 @@
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
       "finding": "MESSENGER DEM v2 replaces the colored topography input. Native DN uses 0.5 m per unit; central-meridian 180 placement checked against independent native bytes.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/usgs-numeric/numeric-checks.json"
-      ]
+      "evidence": []
     },
     {
       "id": "native-mdis-bdr-loi-enhanced",
       "subject": "Native USGS BDR, LOI and enhanced-color GeoTIFFs, edition 1 (2016)",
       "status": "included",
       "finding": "BDR and LOI share the Monochrome arrow selector. All three maps use native area means at the existing 4K display size. Publisher display stretches are retained and qualified separately. Enhanced-color polar gaps remain missing; no terrain or neighboring hue is used to reconstruct them.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/bdr-check.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/loi-check.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/enhanced-check.json"
-      ]
+      "evidence": []
     },
     {
       "id": "hgm008-gravity-anomaly",
       "subject": "MESSENGER HgM008 free-air gravity anomaly grid, degree 90 (NASA Mercury Trek, Anomaly_Map_HgM008_Lmax90_16ppd)",
       "status": "included",
-      "finding": "Adopted as the Gravity lens. The PDS archive holds only the HgM008 coefficients; this numeric GeoTIFF (mGal) was produced by the model's author at NASA Goddard and published by Trek. A sum of the PDS coefficients (degrees 2-90, factor l-1) matches it within 0.15 mGal at 12 cells. The file name says 16ppd; the grid is 0.1 degree. The Trek description calls it a northern orthographic map; the file is a global geographic grid.",
+      "finding": "Adopted as the Gravity dataset. The PDS archive holds only the HgM008 coefficients; this numeric GeoTIFF (mGal) was produced by the model's author at NASA Goddard and published by Trek. A sum of the PDS coefficients (degrees 2-90, factor l-1) matches it within 0.15 mGal at 12 cells. The file name says 16ppd; the grid is 0.1 degree. The Trek description calls it a northern orthographic map; the file is a global geographic grid.",
       "evidence": [
         "https://trek.nasa.gov/tiles/Mercury/EQ/Anomaly_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
         "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl",
@@ -199,7 +191,7 @@
       "id": "hgm008-crustal-thickness",
       "subject": "Genova et al. (2019) crustal-thickness model from HgM008 and MLA topography (NASA Mercury Trek, CrustalThickness_Map_HgM008_16ppd)",
       "status": "included",
-      "finding": "Adopted as the Crust lens and labelled as a model: crust 2,800 kg/m3, crust-mantle contrast 400 kg/m3, mean 35 km, degrees 2-60 with finite-amplitude corrections (paper text and Figure 1 caption). The grid's area-weighted mean is 34.40 km, and 522 cells in Rachmaninoff fall below zero (minimum -3.03 km); both are shown as published. The GeoTIFF declares NaN as no-data, which the shared scientific GeoTIFF reader cannot yet declare; the lens needs that one-line reader change before it can bake.",
+      "finding": "Adopted as the Crust dataset and labelled as a model: crust 2,800 kg/m3, crust-mantle contrast 400 kg/m3, mean 35 km, degrees 2-60 with finite-amplitude corrections (paper text and Figure 1 caption). The grid's area-weighted mean is 34.40 km, and 522 cells in Rachmaninoff fall below zero (minimum -3.03 km); both are shown as published. The GeoTIFF declares NaN as no-data, which the shared scientific GeoTIFF reader cannot yet declare; the dataset needs that one-line reader change before it can bake.",
       "evidence": [
         "https://trek.nasa.gov/tiles/Mercury/EQ/CrustalThickness_Map_HgM008_16ppd/1.0.0/WMTSCapabilities.xml",
         "https://doi.org/10.1029/2018GL081135",
@@ -210,7 +202,7 @@
       "id": "hgm008-gravity-disturbance",
       "subject": "MESSENGER HgM008 gravity disturbance grid, degree 90 (NASA Mercury Trek, Disturbance_Map_HgM008_Lmax90_16ppd)",
       "status": "excluded",
-      "finding": "Not added. It is the same HgM008 field with degree weighting l+1 instead of l-1 (confirmed within 1.6 mGal by a coefficient sum), so it repeats the Gravity lens with slightly different amplitudes. The paper shows the free-air anomaly. Its georeference stretches 5,762 x 2,881 samples over the globe with identical first and last columns and constant polar rows, which looks like a node grid labelled as cells.",
+      "finding": "Not added. It is the same HgM008 field with degree weighting l+1 instead of l-1 (confirmed within 1.6 mGal by a coefficient sum), so it repeats the Gravity dataset with slightly different amplitudes. The paper shows the free-air anomaly. Its georeference stretches 5,762 x 2,881 samples over the globe with identical first and last columns and constant polar rows, which looks like a node grid labelled as cells.",
       "revisitWhen": "A reader needs the radial gravity itself rather than the conventional anomaly.",
       "evidence": [
         "https://trek.nasa.gov/tiles/Mercury/EQ/Disturbance_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
@@ -221,7 +213,7 @@
       "id": "hgm008-degree-strength",
       "subject": "MESSENGER HgM008 degree-strength map (NASA Mercury Trek, DegreeStrength_Map_HgM008_4ppd)",
       "status": "included",
-      "finding": "Used as the documented resolution limit of the Gravity and Crust lenses rather than as its own lens: degree 45.6-73.0 north of 60 N and 10.9-15.1 south of 30 S, about 105-125 km versus 500-700 km half-wavelength. A quality mask would need a threshold the product does not publish.",
+      "finding": "Used as the documented resolution limit of the Gravity and Crust datasets rather than as its own dataset: degree 45.6-73.0 north of 60 N and 10.9-15.1 south of 30 S, about 105-125 km versus 500-700 km half-wavelength. A quality mask would need a threshold the product does not publish.",
       "evidence": [
         "https://trek.nasa.gov/tiles/Mercury/EQ/DegreeStrength_Map_HgM008_4ppd/1.0.0/WMTSCapabilities.xml"
       ]

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "lp-714-47",
   "displayName": "LP 714-47",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "lp-714-47-lens-color.webp",
+        "thumbnail": "lp-714-47-dataset-color.webp",
         "surface": "lp-714-47-surface-color@2x.webp",
         "poles": "lp-714-47-poles-color@2x.webp",
         "source": {

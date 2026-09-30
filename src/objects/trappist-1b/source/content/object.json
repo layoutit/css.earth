@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "trappist-1b",
   "displayName": "TRAPPIST-1b",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "temperature",
         "label": "MIRI 15 µm",
         "qualification": "Reduced here from raw JWST exposures · MIRI 15 µm, 2022–2023",
-        "thumbnail": "trappist-1b-lens-temperature.webp",
+        "thumbnail": "trappist-1b-dataset-temperature.webp",
         "surface": "trappist-1b-surface-temperature@2x.webp",
         "poles": "trappist-1b-poles-temperature@2x.webp",
         "source": {
@@ -128,7 +128,7 @@
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of TRAPPIST-1b, from Eyes on Exoplanets; not an observation.",
-        "thumbnail": "trappist-1b-lens-illustration.webp",
+        "thumbnail": "trappist-1b-dataset-illustration.webp",
         "surface": "trappist-1b-surface-illustration@2x.webp",
         "poles": "trappist-1b-poles-illustration@2x.webp",
         "source": {

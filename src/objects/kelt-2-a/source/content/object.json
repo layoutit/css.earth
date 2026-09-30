@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kelt-2-a",
   "displayName": "KELT-2 A",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "kelt-2-a-lens-color.webp",
+        "thumbnail": "kelt-2-a-dataset-color.webp",
         "surface": "kelt-2-a-surface-color@2x.webp",
         "poles": "kelt-2-a-poles-color@2x.webp",
         "source": {

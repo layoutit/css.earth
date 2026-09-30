@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 80653. Its orbit and size follow Naponiel
 
 **Orbit.** Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): P 0.71957926 d Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): a/R* 2.973; Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): inclination 81.7 degrees Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): e 0 Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): transit mid-time 2458095.56741 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-80653's measured colour (#fff4f5, the colour lens of hd-80653 (src/objects/hd-80653/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-80653's measured colour (#fff4f5, the colour dataset of hd-80653 (src/objects/hd-80653/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 80653's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (45, 46), folded onto its orbit. Upper limits and rows without an error are left out.
 

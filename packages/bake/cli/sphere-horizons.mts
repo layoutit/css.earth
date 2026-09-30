@@ -1,5 +1,5 @@
 /**
- * Write the two JPL Horizons tables a ground-based lens's cameras are derived from, for exactly its frames. The queries
+ * Write the two JPL Horizons tables a ground-based dataset's cameras are derived from, for exactly its frames. The queries
  * and the writers are in `@cssearth/bake/objects/layers/terrestrial`.
  *
  *   node packages/bake/cli/sphere-horizons.mts <object-id>          fetch both tables and report them without writing

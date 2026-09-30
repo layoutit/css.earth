@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "victoria",
   "displayName": "Victoria",
@@ -105,6 +105,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

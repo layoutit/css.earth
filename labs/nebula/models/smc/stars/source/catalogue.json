@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-pinned-catalogue@1",
+  "schema": "cssearth-pinned-catalogue@2",
   "catalogue": "J/AJ/140/416",
   "files": [
     {
@@ -20,8 +20,8 @@
     }
   ],
   "depthModel": {
-    "finiteLensRecipe": {
-      "path": "labs/nebula/models/smc/constrained/finite-lenses.json"
+    "finiteDatasetRecipe": {
+      "path": "labs/nebula/models/smc/constrained/finite-datasets.json"
     }
   }
 }

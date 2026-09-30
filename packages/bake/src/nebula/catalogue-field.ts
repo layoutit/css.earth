@@ -44,8 +44,8 @@ function parseField(input: unknown) {
   }
   if (!Array.isArray(selection.retainIds)) throw new TypeError('Catalogue field needs explicit retained identities.');
   const retainIds = selection.retainIds.map(text);
-  const retainedAppearance = selection.retainedAppearance ?? 'lens';
-  if (retainedAppearance !== 'lens' && retainedAppearance !== 'anchor') throw new TypeError('Invalid retained star appearance policy.');
+  const retainedAppearance = selection.retainedAppearance ?? 'dataset';
+  if (retainedAppearance !== 'dataset' && retainedAppearance !== 'anchor') throw new TypeError('Invalid retained star appearance policy.');
   if (new Set(retainIds).size !== retainIds.length || retainIds.length > maximumStars) throw new TypeError('Invalid retained catalogue identities or budget.');
   if (!Array.isArray(value.stars)) throw new TypeError('Catalogue field requires source rows.');
   const ids = new Set<string>();
@@ -184,7 +184,7 @@ export async function prepareNebulaCatalogueField(root: string, pin: { path: str
     astrometry: 'ICRS directions propagated by tangent-vector Gaia pmra (mu_alpha*cos(dec)) and pmdec in Julian years; null components are zero. Distance held at the Bailer-Jones geometric posterior median; no radial velocity or perspective acceleration. Gaia TCB epoch approximated in TT Julian years.',
     distance: 'Bailer-Jones et al. 2021 EDR3 geometric posterior medians, not cluster membership. Original lower/upper posterior quantiles remain in the pinned source; uncertainties do not become fabricated depth scatter.',
     retainedDepth: 'Explicit retained points keep their pre-existing physical positions and depth provenance; no Gaia distance is assigned to them. Angular matches suppress duplicate field rows only.',
-    retainedAppearance: s.retainedAppearance === 'anchor' ? 'Retained cores use their detecting source aperture photometry in every lens, including where a selected image has no coverage. Positions remain fixed; colors are source display colors, not measurements in the selected spectral band.' : 'Retained sources preserve the selected lens material.',
+    retainedAppearance: s.retainedAppearance === 'anchor' ? 'Retained cores use their detecting source aperture photometry in every dataset, including where a selected image has no coverage. Positions remain fixed; colors are source display colors, not measurements in the selected spectral band.' : 'Retained sources preserve the selected dataset material.',
     coverage: 'Authored sphere and smoothstep outer feather in three physical dimensions; independent of nebula image bounds. Brightness budget includes retained points.',
     photometry: 'Measured Gaia G controls display area via diameter proportional to 10^(-0.2*(G-referenceMagnitude)); physical display footprint calibrated at source distance and reference focal length. These are display footprints, not stellar diameters. Faint-end opacity uses a separate smoothstep taper.',
     color: { source: 'https://arxiv.org/abs/2107.08734', method: 'Cardiel et al. 2021 Table 1 RGB polynomial; relative fluxes normalized to maximum then sRGB encoded for CSS display.',

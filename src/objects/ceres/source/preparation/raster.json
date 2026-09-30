@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ceres/",
   "sourceWidth": 4096,
   "sourceHeight": 2048,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "ceres-fc-global.png",
       "falseColor": false,
       "science": {
@@ -38,7 +38,7 @@
     {
       "id": "enhanced",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "PIA19977.jpg",
       "falseColor": false,
       "science": {
@@ -56,7 +56,7 @@
     {
       "id": "elevation",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/ceres-hamo-dtm.tif",
       "falseColor": true,
       "science": {
@@ -106,7 +106,7 @@
     {
       "id": "clay-band",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
       "falseColor": true,
       "science": {
@@ -173,7 +173,7 @@
     {
       "id": "ammonium-band",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
       "falseColor": true,
       "science": {
@@ -248,7 +248,7 @@
     {
       "id": "clay-centre",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.IMG",
       "falseColor": true,
       "science": {
@@ -309,7 +309,7 @@
     {
       "id": "ammonium-centre",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.IMG",
       "falseColor": true,
       "science": {
@@ -370,7 +370,7 @@
     {
       "id": "gravity",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/gravity/JGDWN_CER18D_ACCEL_0018.IMG",
       "falseColor": true,
       "science": {
@@ -419,7 +419,7 @@
     {
       "id": "gravity-uncertainty",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/gravity/JGDWN_CER18D_ACCERR_0018.IMG",
       "falseColor": true,
       "science": {
@@ -466,7 +466,7 @@
     {
       "id": "bouguer",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/gravity/JGDWN_CER18D_BOU_0018.IMG",
       "falseColor": true,
       "science": {
@@ -515,7 +515,7 @@
     {
       "id": "geoid",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/gravity/JGDWN_CER18D_GEOID_0018.IMG",
       "falseColor": true,
       "science": {
@@ -564,7 +564,7 @@
     {
       "id": "hydrogen",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/grand/GRD_HYDROGEN_MAP.TAB",
       "falseColor": true,
       "science": {
@@ -604,7 +604,7 @@
     {
       "id": "iron",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/grand/GRD_IRON_MAP.TAB",
       "falseColor": true,
       "science": {
@@ -644,7 +644,7 @@
     {
       "id": "neutron-counts",
       "output": "ceres-{id}{suffix}.webp",
-      "thumbnail": "ceres-lens-{id}.webp",
+      "thumbnail": "ceres-dataset-{id}.webp",
       "source": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.TAB",
       "falseColor": true,
       "science": {

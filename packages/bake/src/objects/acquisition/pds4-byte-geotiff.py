@@ -1,6 +1,6 @@
 """Lossless offline wrapping of declared PDS4 byte maps for the GeoTIFF reader.
 
-The output retains DN values and missing constants. The scientific lens applies
+The output retains DN values and missing constants. The scientific dataset applies
 the explicitly recorded physical scale; no enhancement or resampling occurs.
 """
 import json

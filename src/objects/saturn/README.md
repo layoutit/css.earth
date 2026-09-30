@@ -23,13 +23,13 @@ Source selections, recorded trials and open questions are in the [investigation 
 On 2026-09-20, Saturn was regenerated from its checked source closure and
 inspected in Chromium at a 1,440 x 1,100 CSS-pixel viewport. The retained DOM
 contained no `saturn-weather` asset or style reference. The matched-camera
-[before/after crop](evidence/weather-overlay-removal.webp) shows the former
+before/after crop shows the former
 project-authored storm ovals on the left and the source-backed visible mosaic
 on the right. This image is review evidence, not an input to the runtime view.
 
 The focused no-weather regression passes against the prepared scene, runtime
 inventory and provenance document. The independent radial-preparation test
-also reproduces all four canonical ring lenses, confirming that removal of the
+also reproduces all four canonical ring datasets, confirming that removal of the
 weather path did not alter the Cassini UVIS ring recipe.
 
 ## Known problems
@@ -176,7 +176,7 @@ solar tint. The earlier hand-authored gap clearings, alpha caps and F-ring
 core are gone; the Encke and Keeler gaps, the Cassini division and the F
 ring come from the occultation.
 
-[`evidence/opal-surface-uvis-rings.webp`](evidence/opal-surface-uvis-rings.webp) shows
+`evidence/opal-surface-uvis-rings.webp` shows
 the prepared solar-tinted body surface and the prepared ring texture from this
 source pair, as inspected before acceptance.
 
@@ -198,7 +198,7 @@ no measured cloud detail inside the missing rows.
 <details>
 <summary>Ultraviolet, methane and thermal interpretation</summary>
 
-### Observation lenses
+### Observation datasets
 
 The optional ultraviolet and methane views use
 [Hubble OPAL Cycle 32 Saturn global maps](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32)
@@ -236,7 +236,7 @@ rather than being claimed nonexistent.
 
 The broad ring response is cross-checked against the same Hubble WFC3 program
 17843 sequence from 2025-08-29: `ifcu37ccq` in F225W, `ifcu37cdq` in F631N,
-and `ifcu37ceq` in FQ889N. The prepared lens textures modify broad ring-band
+and `ifcu37ceq` in FQ889N. The prepared dataset textures modify broad ring-band
 color and luminance while retaining the UVIS occultation alpha profile,
 narrow gaps, ringlets, and DPR-specific readability floors. Hubble does not
 resolve a complete replacement profile for the D, G, and E rings in these
@@ -246,7 +246,7 @@ frames, so those details remain qualified visible-light morphology.
 - F631N ring frame `ifcu37cdq_drz.fits`
 - FQ889N ring frame `ifcu37ceq_drz.fits`
 
-Every lens has prepared body, polar, ring, exterior material, atmospheric
+Every dataset has prepared body, polar, ring, exterior material, atmospheric
 cutaway material and thumbnail assets.
 
 </details>
@@ -280,7 +280,7 @@ rim light. The curved shells use prepared Lambert shading. All use the same
 object-space light direction as the exterior scene. This treatment improves
 legibility; it does not claim that exposed material inside Saturn receives
 direct sunlight. The structural section, metallic-hydrogen, and diffuse-core
-textures are one shared schematic bank because none of the observation lenses
+textures are one shared schematic bank because none of the observation datasets
 measures below Saturn's atmosphere. Normal, F225W ultraviolet, FQ889N methane,
 and the schematic thermal illustration each have prepared outer-polar and atmospheric
 cutaway materials; those declared false-color responses do not recolor the
@@ -399,7 +399,7 @@ colour and alpha, exact for the prepared surface's mean colour (measured at
 bake). The 5,188 x 4,160 `saturn-orbit-material.webp` RGBA preparation master packs
 256 prepared camera-elevation material fields in a 16 x 16 grid. Each field has
 a 256-pixel tile and a two-pixel gutter. Runtime export retains one active
-variant atlas and one generated high-resolution default frame. The four lenses
+variant atlas and one generated high-resolution default frame. The four datasets
 each have full, no-shadow, and ringless exterior and cutaway masters, so the
 controls remove only the requested phenomena without removing Saturn's
 lighting. The browser selects one prepared address only when camera input
@@ -569,10 +569,10 @@ Source inspection compared the TIFF rows with the component FITS rows; all selec
 
 Checked on 27 September 2026; subsequent changes add documentation and retained evidence only. Chrome exercised all 8 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
 
-[Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
+Source inspection retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
 
 The three packages restored 479 files (160.17 MB) into an empty directory, with every file matching its inventory entry. This body adds 1.59 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
 
 ![Dated OPAL map with the shared sequence controls](evidence/opal-dates-desktop.webp)
 
-Saturn was also inspected with Shadows enabled and flood lighting. At 390 × 844, Play advanced the sequence, Pause held it, and the page had no horizontal overflow. Selecting Visible color stopped the loop. [Mobile controls](evidence/opal-dates-mobile.webp).
+Saturn was also inspected with Shadows enabled and flood lighting. At 390 × 844, Play advanced the sequence, Pause held it, and the page had no horizontal overflow. Selecting Visible color stopped the loop. Mobile controls.

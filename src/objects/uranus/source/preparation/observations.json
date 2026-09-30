@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-observed-surfaces@1",
+  "schema": "cssearth-observed-surfaces@2",
   "sources": [
     {
       "id": "hubble-opal-uranus-2025a-color",
@@ -418,7 +418,7 @@
       "license": "CC BY 4.0"
     }
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "normal",
       "source": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
@@ -507,7 +507,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-normal.webp",
+          "filename": "uranus-dataset-normal.webp",
           "transforms": [
             {
               "kind": "crop",
@@ -665,7 +665,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-methane.webp",
+          "filename": "uranus-dataset-methane.webp",
           "transforms": [
             {
               "kind": "crop",
@@ -826,7 +826,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-near-infrared.webp",
+          "filename": "uranus-dataset-near-infrared.webp",
           "transforms": [
             {
               "kind": "crop",
@@ -959,7 +959,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2014a.webp",
+          "filename": "uranus-dataset-visible-2014a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1084,7 +1084,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2015a.webp",
+          "filename": "uranus-dataset-visible-2015a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1209,7 +1209,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2016a.webp",
+          "filename": "uranus-dataset-visible-2016a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1334,7 +1334,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2017a.webp",
+          "filename": "uranus-dataset-visible-2017a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1459,7 +1459,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2018a.webp",
+          "filename": "uranus-dataset-visible-2018a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1584,7 +1584,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2019a.webp",
+          "filename": "uranus-dataset-visible-2019a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1709,7 +1709,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2020a.webp",
+          "filename": "uranus-dataset-visible-2020a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1834,7 +1834,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2021a.webp",
+          "filename": "uranus-dataset-visible-2021a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1959,7 +1959,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2022a.webp",
+          "filename": "uranus-dataset-visible-2022a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -2084,7 +2084,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2023a.webp",
+          "filename": "uranus-dataset-visible-2023a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -2209,7 +2209,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2024a.webp",
+          "filename": "uranus-dataset-visible-2024a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -2334,7 +2334,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "uranus-lens-visible-2025a.webp",
+          "filename": "uranus-dataset-visible-2025a.webp",
           "transforms": [
             {
               "kind": "resize",

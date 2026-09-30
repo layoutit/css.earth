@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "nasa-hubble-jupiter-navigation-marker",
@@ -36,7 +36,7 @@
       "redistribution": "checked Hubble WFC3 global-map snapshot",
       "consumers": [
         "body",
-        "lenses"
+        "datasets"
       ],
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
@@ -213,7 +213,7 @@
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked Hubble OPAL high-level science product",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
@@ -246,7 +246,7 @@
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked Hubble OPAL high-level science product",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {

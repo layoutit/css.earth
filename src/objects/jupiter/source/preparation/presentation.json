@@ -1,7 +1,7 @@
 {
-  "schema": "cssearth-normalized-disc-presentation@1",
+  "schema": "cssearth-normalized-disc-presentation@2",
   "namespace": "jupiter",
-  "defaultLens": "normal",
+  "defaultDataset": "normal",
   "camera": {
     "schema": "cssjupiter-prepared-camera@6",
     "model": "shared-cubic-sky-unbounded-accumulated-matrix3d",
@@ -57,7 +57,7 @@
       "url": "/scenes/jupiter/jupiter-rings@2x.webp"
     }
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "normal",
       "surface": "/scenes/jupiter/jupiter-surface@2x.webp",
@@ -65,13 +65,13 @@
     },
     {
       "id": "ultraviolet",
-      "surface": "/scenes/jupiter/jupiter-lens-ultraviolet@2x.webp",
-      "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles@2x.webp"
+      "surface": "/scenes/jupiter/jupiter-dataset-ultraviolet@2x.webp",
+      "poles": "/scenes/jupiter/jupiter-dataset-ultraviolet-poles@2x.webp"
     },
     {
       "id": "methane",
-      "surface": "/scenes/jupiter/jupiter-lens-methane@2x.webp",
-      "poles": "/scenes/jupiter/jupiter-lens-methane-poles@2x.webp"
+      "surface": "/scenes/jupiter/jupiter-dataset-methane@2x.webp",
+      "poles": "/scenes/jupiter/jupiter-dataset-methane-poles@2x.webp"
     },
     {
       "id": "visible-2015a",

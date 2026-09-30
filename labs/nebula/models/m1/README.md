@@ -35,7 +35,7 @@ filaments and all 351 compact lights retain their positions.
 | VLA radio | Same qualified publisher-grid transfer | Preserve compact emission; zero residual |
 | Chandra X-ray | Same qualified publisher-grid transfer | Preserve compact emission; zero residual |
 
-The auxiliary Hubble 2017 image is an astrometric bridge, not a seventh lens.
+The auxiliary Hubble 2017 image is an astrometric bridge, not a seventh dataset.
 Its 129 visually inspected stellar identities yield 43 held-out fit points and
 0.146″ RMS. Transfer receipts pin both original grids and their identity pixel
 mapping. Radio/X-ray knots never masquerade as matched field stars; those bands
@@ -109,7 +109,7 @@ this choice. Jet lengths, widths, relative strengths and pulsar depth/size are
 explicit display assumptions. The pulsar's catalogue ICRS position and proper
 motion remain separate from its authored in-cloud depth.
 
-The sampled ejecta and analytic wind occupy the same angular frame. Each lens
+The sampled ejecta and analytic wind occupy the same angular frame. Each dataset
 weights those fixed components by tracer: Chandra uses the inner wind, while
 optical filaments primarily use ejecta. The neutral view shows their union.
 This does not force X-ray brightness across the outer optical cloud. There is
@@ -132,8 +132,8 @@ and analysis stages through the shared lab commands. Shifted, mirrored and
 wrong-scale stellar controls fail; deleting the explicit Webb calibration
 restores the original failed plausibility gate. The 17 affected registration,
 source-treatment and catalogue tests, plus the lab TypeScript check, passed.
-The [processing receipt](processing-evidence.json) pins the completed six-lens
-volume and actual camera inspection. All lenses, the compact pulsar, original
+The [processing receipt](processing-evidence.json) pins the completed six-dataset
+volume and actual camera inspection. All datasets, the compact pulsar, original
 overlays and refresh work without reprocessing. **Immediate presentation remains
 unresolved:** newly painted CSS layers can take several seconds to settle after
 a material or camera change. Settled oblique views retain the ejecta; the initial
@@ -177,8 +177,8 @@ limits. A better front projection alone does not establish a correct 3D object.
 
 The completed first fit reduces missing Hubble display light from 72.5% to 22.2%
 and Webb infrared from 71.2% to about 19.3%; excess light is approximately 7% in
-both. All five fitted lenses improve withheld-pixel error. Fitting takes 12.75 s
-with prepared inputs; the complete six-lens bake took 509.72 s. Fifty-one focused
+both. All five fitted datasets improve withheld-pixel error. Fitting takes 12.75 s
+with prepared inputs; the complete six-dataset bake took 509.72 s. Fifty-one focused
 tests and strict lab TypeScript pass. Byte comparisons preserve both base grids,
 all 351 light records, physical bounds/sampling and every raw Chandra slab.
 The inferred glow remains broad from oblique views, and faint RGBA8 contours and

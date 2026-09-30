@@ -95,11 +95,11 @@ async function drainFrames<T>(fixture: ReturnType<typeof fixtureFactory>, { task
 }
 const range = (pose: WorldCameraPose["pose"], origin: readonly number[]) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
 
-const photographicArrival: PreparedArrivalView = { defaultLens: 'photo', lensIds: ['photo'], rotation: [1,0,0,0,-1,0,0,0,-1] };
+const photographicArrival: PreparedArrivalView = { defaultDataset: 'photo', datasetIds: ['photo'], rotation: [1,0,0,0,-1,0,0,0,-1] };
 
 test('billboard covers attachment at the final viewport framing with no second camera flight', async () => {
   const arrival: PreparedArrivalView = { ...photographicArrival, billboard: {
-    url: '/scenes/body/arrival.webp', lens: 'photo', size: 1024, distanceM: 8000,
+    url: '/scenes/body/arrival.webp', dataset: 'photo', size: 1024, distanceM: 8000,
     focalPixels: 1000, rotation: photographicArrival.rotation } };
   const f = fixtureFactory(arrival), { document, window } = parseHTML('<html><body><div class="object-input-surface"><main></main></div></body></html>');
   Object.defineProperty(window.HTMLImageElement.prototype, 'decode', { configurable: true, value: async () => {} });
@@ -151,7 +151,7 @@ test('billboard covers attachment at the final viewport framing with no second c
 
 test('billboard arrival converges its projected size before completing across viewports', async () => {
   const arrival: PreparedArrivalView = { ...photographicArrival, billboard: {
-    url: '/scenes/body/arrival.webp', lens: 'photo', size: 1024, distanceM: 8000,
+    url: '/scenes/body/arrival.webp', dataset: 'photo', size: 1024, distanceM: 8000,
     focalPixels: 1000, rotation: photographicArrival.rotation } };
   for (const [widthPixels, heightPixels, framingRadiusPixels] of [[390, 844, 100], [820, 1180, 240], [1440, 900, 300]]) {
     for (const hz of [60, 120]) {

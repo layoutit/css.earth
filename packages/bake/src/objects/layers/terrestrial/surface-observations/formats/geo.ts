@@ -1,7 +1,7 @@
 /**
  * Georeferenced photographs: archive backplanes (OSIRIS GEO, AMICA Gaskell, PDS4 geometry cubes), archived camera closures
  * (OSIRIS reflectance, L'LORRI, New Horizons LORRI and MVIC) and cameras derived from SPICE kernels. GEO_SCHEMAS states what
- * each format adds to the lens shape every format shares (recipe.mts).
+ * each format adds to the dataset shape every format shares (recipe.mts).
  */
 import type { CameraKind, LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.ts';
 import type { NumericRaster, SpiceCameraDeclaration } from '../../../../raster/index.ts';
@@ -27,15 +27,15 @@ import { archiveBackplanes, castSourceRays } from '../geometry.ts';
 import { cameraFrame } from '../footprint.ts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.ts';
 import { deriveLimits } from '../limits.ts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.ts';
+import { DATASET_KEYS, MOSAIC_KEYS, OPTIONAL_DATASET_KEYS, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.ts';
 
-/** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
+/** What a format adds to the shared dataset shape, and which of the shared choices its product supports. */
 interface GeoSchema {
   camera: Extract<CameraKind, 'backplane-fit' | 'archived-closure' | 'kernels'>;
   /** Inputs a frame names beside its id, image path and start time. */
   frame: { required: readonly string[]; optional?: readonly string[] };
-  /** Blocks the lens adds beside the shared keys. */
-  lens: { required: readonly string[]; optional?: readonly string[] };
+  /** Blocks the dataset adds beside the shared keys. */
+  dataset: { required: readonly string[]; optional?: readonly string[] };
   /** The historical disk functions the format accepts, and whether it may name a published photometric model instead. */
   photometry: readonly string[]; published: boolean;
   display: 'percentiles' | 'displayRange'; maximumFrames: number;
@@ -45,40 +45,40 @@ interface GeoSchema {
 
 export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
   // Archive backplanes carry each pixel's surface point; the camera is fitted to them.
-  'osiris-geo': { camera: 'backplane-fit', frame: { required: ['qualityPath'] }, lens: { required: ['filter', 'allowLossy'], optional: ['radiometry'] },
+  'osiris-geo': { camera: 'backplane-fit', frame: { required: ['qualityPath'] }, dataset: { required: ['filter', 'allowLossy'], optional: ['radiometry'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 24 },
   // AMICA admits lossy frames and counts them in the report; one flat field serves every frame.
-  'amica-gaskell': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath'] }, lens: { required: ['filter', 'flatPath'] },
+  'amica-gaskell': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath'] }, dataset: { required: ['filter', 'flatPath'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 10 },
-  [PDS4_GEOMETRY_CUBE_FORMAT]: { camera: 'backplane-fit', frame: { required: ['labelPath'] }, lens: { required: ['filter', 'cube'] },
+  [PDS4_GEOMETRY_CUBE_FORMAT]: { camera: 'backplane-fit', frame: { required: ['labelPath'] }, dataset: { required: ['filter', 'cube'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Archived cameras close over the exact source mesh, so they may also keep the acquisition illumination.
-  'osiris-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter', 'allowLossy'], optional: ['limbRefinement'] },
+  'osiris-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, dataset: { required: ['filter', 'allowLossy'], optional: ['limbRefinement'] },
     photometry: ['lommel-seeliger', 'minnaert', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
-  'llorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
+  'llorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, dataset: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Paired raw frames supply detector validity; the native decoder rejects compressed inputs.
-  'near-msi-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'originalPath'] }, lens: { required: ['filter', 'limbRefinement'] },
+  'near-msi-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'originalPath'] }, dataset: { required: ['filter', 'limbRefinement'] },
     photometry: ['retained-observation'], published: false, display: 'percentiles', maximumFrames: 8 },
-  'nh-lorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
+  'nh-lorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, dataset: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Registered enhanced colour keeps its acquisition illumination. Its decoder checks these bands and data-number units against the label.
-  'nh-mvic-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'labelPath'] }, lens: { required: ['filter'] },
+  'nh-mvic-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'labelPath'] }, dataset: { required: ['filter'] },
     photometry: ['retained-observation'], published: false, display: 'displayRange', maximumFrames: 1,
     color: { bands: ['NIR', 'RED', 'BLUE'], inputQuantity: 'derived-band-value', units: 'archive-derived data numbers; enhanced NIR / RED / BLUE color' } },
   // A VICAR frame brings its PDS3 label; a FITS frame carries its own header.
-  [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
+  [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, dataset: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   // The same camera for an archive whose bands are planes of one array. The composite is a scientific visualization
   // of three calibrated bands, as every band composite here is; it is not a qualified natural-colour reconstruction.
-  [SPICE_CAMERA_COLOR_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
+  [SPICE_CAMERA_COLOR_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, dataset: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
     photometry: ['retained-observation'], published: true, display: 'displayRange', maximumFrames: 8,
     color: { bands: ['RED', 'GREEN', 'BLUE'], inputQuantity: 'radiance', units: 'calibrated radiance; the detector\'s red, green and blue bands' } },
 };
 export const GEO_FORMATS = Object.keys(GEO_SCHEMAS);
 
 const CONTEXT = 'georeferenced observation recipe';
-export const parseGeoLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
+export const parseGeoDataset = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
   frames: array(shape({ id: text, path: text, startTime: text, qualityPath: optional(text), labelPath: optional(text), originalPath: optional(text), cameraPath: optional(text) })),
   filter: text, allowLossy: optional(boolean), radiometry: optional(text), flatPath: optional(text),
   cube: optional(parseGeometryCube), spice: optional(parseSpiceCamera), limbRefinement: optional(parseLimbRefinement),
@@ -86,28 +86,28 @@ export const parseGeoLens = shape({ id: text, format: text, consumer: text, meta
   photometry: publishedOr(shape({ model: text, phaseCorrection: optional(parsePhasePhotometry), coefficient: optional(number), phaseCoefficientPerDegree: optional(number),
     referenceIncidenceDegrees: number, referenceEmissionDegrees: number, maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number })),
   display: parseDisplay });
-type GeoLens = ReturnType<typeof parseGeoLens>;
-type GeoFrame = GeoLens['frames'][number];
+type GeoDataset = ReturnType<typeof parseGeoDataset>;
+type GeoFrame = GeoDataset['frames'][number];
 
 const schemaOf = (format: unknown) => {
   const key = String(format);
   if (!Object.hasOwn(GEO_SCHEMAS, key)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
   return GEO_SCHEMAS[key];
 };
-const cubeDeclaration = (recipe: Pick<GeoLens, 'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
-const spiceDeclaration = (recipe: Pick<GeoLens, 'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
+const cubeDeclaration = (recipe: Pick<GeoDataset, 'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
+const spiceDeclaration = (recipe: Pick<GeoDataset, 'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
 /** A frame's own inputs, the inputs its frames share and everything one frame consumes. Kernels from a shared bank are pinned by the bank's manifest, not the body's. */
 const framePaths = (frame: GeoFrame) => [frame.path, frame.qualityPath, frame.labelPath, frame.originalPath, frame.cameraPath].filter((path): path is string => path !== undefined);
-const sharedPaths = (recipe: GeoLens) => [...(recipe.flatPath === undefined ? [] : [recipe.flatPath]), ...(recipe.spice && !recipe.spice.kernelSet ? recipe.spice.kernels : [])];
-const consumedPaths = (recipe: GeoLens, frame: GeoFrame) => [...framePaths(frame), ...sharedPaths(recipe)];
+const sharedPaths = (recipe: GeoDataset) => [...(recipe.flatPath === undefined ? [] : [recipe.flatPath]), ...(recipe.spice && !recipe.spice.kernelSet ? recipe.spice.kernels : [])];
+const consumedPaths = (recipe: GeoDataset, frame: GeoFrame) => [...framePaths(frame), ...sharedPaths(recipe)];
 const within = (value: number | undefined, low: number, high: number) => value !== undefined && value >= low && value <= high;
 const AXES = ['X', '-X', 'Y', '-Y', 'Z', '-Z'];
 
 function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   const record = requireRecord(value), schema = schemaOf(record.format);
-  checkKeys(record, [...LENS_KEYS, ...schema.lens.required], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, ...(schema.lens.optional ?? [])], CONTEXT);
+  checkKeys(record, [...DATASET_KEYS, ...schema.dataset.required], [...MOSAIC_KEYS, ...OPTIONAL_DATASET_KEYS, ...(schema.dataset.optional ?? [])], CONTEXT);
   for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'startTime', ...schema.frame.required], schema.frame.optional ?? [], `${CONTEXT} frame`);
-  const recipe = decodeProfile(parseGeoLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
+  const recipe = decodeProfile(parseGeoDataset, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
     { selections: ['lowest-emission', 'recipe-order', ...(recipe.format === 'osiris-geo' ? ['finest-resolution'] : [])], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
@@ -122,7 +122,7 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
 }
 
 /** A published model record, or one of the format's historical disk functions within the bounds every camera route shares. */
-function validatePhotometry(recipe: GeoLens, schema: GeoSchema) {
+function validatePhotometry(recipe: GeoDataset, schema: GeoSchema) {
   const photometry = recipe.photometry, emission = recipe.transfer.maximumEmissionDegrees;
   if ('referenceDegrees' in photometry) {
     if (!schema.published || !validPublishedPhotometryShape(photometry, emission)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
@@ -171,7 +171,7 @@ function validateLimbRefinement(refinement: ReturnType<typeof parseLimbRefinemen
       (refinement.minimumSharpness !== undefined && (!Number.isFinite(refinement.minimumSharpness) || refinement.minimumSharpness < 0 || refinement.minimumSharpness > 0.9))) throw new TypeError('Invalid camera limb refinement.');
 }
 
-async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory, source, radial, config, entries }: LoadContext, photometry: ObservationPhotometry): Promise<ObservationFrame> {
+async function loadGeoFrame(recipe: GeoDataset, frame: GeoFrame, { sourceDirectory, source, radial, config, entries }: LoadContext, photometry: ObservationPhotometry): Promise<ObservationFrame> {
   const paths = consumedPaths(recipe, frame);
   if (entries.length !== paths.length || !paths.every(path => entries.some(e => e.path === path))) throw new Error('GEO observation must consume its exact pinned image and quality companion.');
   const read = (path: string | undefined) => readFile(resolve(sourceDirectory, requireString(path)));
@@ -256,7 +256,7 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     ...(recipe.radiometry === 'radiance-factor' ? { radianceFactor: osirisRadianceFactorScale(decoded.history) } : {}), report: quality.report }, decoded.shapeModel);
 }
 
-function displayUnits(recipe: GeoLens, photometry: ObservationPhotometry) {
+function displayUnits(recipe: GeoDataset, photometry: ObservationPhotometry) {
   const retained = !('referenceDegrees' in recipe.photometry) && recipe.photometry.model === 'retained-observation';
   const quantity = (name: string) => retained ? `relative ${name} with original illumination` : `relative disk-normalized ${name}`;
   return photometry.units ?? `${recipe.format === 'amica-gaskell' ? 'relative flat-fielded detector brightness with approximate disk normalization'
@@ -269,9 +269,9 @@ function displayUnits(recipe: GeoLens, photometry: ObservationPhotometry) {
 
 export const geoFormat: SurfaceObservationFormat = {
   validate: validateGeoRecipe,
-  paths: value => { const recipe = parseGeoLens(value); return [...new Set(recipe.frames.flatMap(frame => consumedPaths(recipe, frame)))]; },
+  paths: value => { const recipe = parseGeoDataset(value); return [...new Set(recipe.frames.flatMap(frame => consumedPaths(recipe, frame)))]; },
   async load(value, context) {
-    const recipe = parseGeoLens(value);
+    const recipe = parseGeoDataset(value);
     // One photometric treatment serves every frame of a mosaic.
     const photometry = 'referenceDegrees' in recipe.photometry ? await publishedPhotometry(context.sourceDirectory, context.source.manifest, recipe.photometry) : diskPhotometry(recipe.photometry);
     const frames: ObservationFrame[] = [];

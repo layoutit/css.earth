@@ -20,7 +20,7 @@ The [navigation marker recipe](source/preparation/navigation.json) supplies the 
 | ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04), 7 September 2026, via GIBS | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
 
 City search runs on the GeoNames places catalogue in [source/places](source/places/) (see
-[City coordinates](#city-coordinates)). The WorldCover city imagery pages and the Buenos Aires noise lens
+[City coordinates](#city-coordinates)). The WorldCover city imagery pages and the Buenos Aires noise dataset
 were removed with their preparation machinery in the pull request that enabled this search; their last
 source records are in the repository history before that change.
 
@@ -32,7 +32,7 @@ The linked reports identify their tested sources, prepared files and limitations
   frames from 2023 (one every two months, at staggered hours) by `packages/bake/cli/fit-epic-limb.mts`: Minnaert
   k 0.394 at 680 nm, 0.428 at 551 nm and 0.410 at 443 nm, with frame-to-frame spreads of 0.07, 0.04 and 0.03. Below
   0.5 the edge is brighter than the centre under full light, from the atmosphere and clouds seen at a slant.
-  [Per-frame fits](evidence/epic-limb-fit.json).
+  Per-frame fits.
 
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
@@ -72,7 +72,7 @@ Default map labels ([features recipe](source/preparation/features.json)): only o
 
 The public feature transport keeps those default map labels in the first-interaction catalogue. Search-only names are deterministically sharded by feature id; selecting one verifies and loads only its bank, while the global search index retains the original prepared order.
 
-Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepare-authored.js earth --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) (707 s, every pinned Earth source present and verified) prepared 5,467 names: 258 countries, 3,000 populated places, 48 landmarks and the geographic regions, seas and river centrelines. 456 label the map by default (171 countries, 88 capitals, 129 cities, 48 landmarks, 7 continents, 5 oceans and 8 highlights); the rest are search-only. Of the 301 delivered Earth files only `earth-features.json` changed; the provenance basis stays `prepared`. `tests/objects/unit/earth/features.test.mts` checks the default classes, country label points, the city zoom floor and search-only names against the delivered catalogue. The three captures in [`evidence/default-labels/`](evidence/default-labels/) show the default view, one wheel step closer and the closest view at 1400 × 900 CSS px on the local dev server.
+Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepare-authored.js earth --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) (707 s, every pinned Earth source present and verified) prepared 5,467 names: 258 countries, 3,000 populated places, 48 landmarks and the geographic regions, seas and river centrelines. 456 label the map by default (171 countries, 88 capitals, 129 cities, 48 landmarks, 7 continents, 5 oceans and 8 highlights); the rest are search-only. Of the 301 delivered Earth files only `earth-features.json` changed; the provenance basis stays `prepared`. `tests/objects/unit/earth/features.test.mts` checks the default classes, country label points, the city zoom floor and search-only names against the delivered catalogue. The three captures in `evidence/default-labels/` show the default view, one wheel step closer and the closest view at 1400 × 900 CSS px on the local dev server.
 
 - Night-light coverage stops at 75° N and 65° S. The mirror lacks quality bands;
   aurora and transient lights cannot be filtered further.
@@ -82,7 +82,7 @@ Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepa
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
-- The limb law is a Minnaert fit to whole-disc EPIC frames, clouds included; bins scatter 18–50% about it because clouds move, and a flattened average stands in for every scene. It applies to every lens, including the cloud-free map. The overlay has one colour and alpha per pixel, exact for the map's displayed mean colour. The night-lights lens takes no lighting or halo, since city light is emitted.
+- The limb law is a Minnaert fit to whole-disc EPIC frames, clouds included; bins scatter 18–50% about it because clouds move, and a flattened average stands in for every scene. It applies to every dataset, including the cloud-free map. The overlay has one colour and alpha per pixel, exact for the map's displayed mean colour. The night-lights dataset takes no lighting or halo, since city light is emitted.
 
 ## Methods and source notes
 
@@ -181,10 +181,10 @@ radians. Measured on 2026-09-25 in headless Chrome at 1,280 × 800 CSS px, the c
 resolves field patterns and the Paraná delta's channels that the previous finest level blurred. The
 smaller levels keep their pixel sizes: the first view's startup set is 331 KB against 335 KB, and the
 default view differs from the previous bake in 2,976 of 4.1 million pixels (pixelmatch, threshold 0.1),
-all on high-contrast edges. Each lens's own camera limit follows its data: Visible color, Cloud
+all on high-contrast edges. Each dataset's own camera limit follows its data: Visible color, Cloud
 coverage, Night lights (VIIRS, 86,400 samples across) and ENSO (MUR imagery, 16,384 across) take the
 new level and zoom limit 8. Elevation is sampled from GEBCO at a stride of 10 (8,640 across), coarser
-than the new level, so its map stops at the 4,096 level (`maximumTextureWidth`) and its lens keeps zoom
+than the new level, so its map stops at the 4,096 level (`maximumTextureWidth`) and its dataset keeps zoom
 limit 4; no view downloads an Elevation page that is only its source upsampled. The interior views keep
 their resolution and limit.
 That 2026-09-25 rebake changed no source projection, Earth geometry, lighting, atmosphere,

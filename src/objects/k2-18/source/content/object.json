@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "k2-18",
   "displayName": "K2-18",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (LAMOST). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
-        "thumbnail": "k2-18-lens-color.webp",
+        "thumbnail": "k2-18-dataset-color.webp",
         "surface": "k2-18-surface-color@2x.webp",
         "poles": "k2-18-poles-color@2x.webp",
         "source": {

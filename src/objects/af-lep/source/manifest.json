@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "af-lep-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -49,22 +49,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "af-lep-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield"
       ]
     },
     {
@@ -108,7 +92,7 @@
       "acquisition": "Gaia DataLink download in source/preparation/acquisition.json: the externally calibrated BP/RP sampled mean spectrum of source_id 3009908378049913216, 343 samples from 336 to 1020 nm.",
       "redistribution": "Spectrum redistributed with attribution.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -130,7 +114,7 @@
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -150,7 +134,7 @@
       "redistribution": "Catalogue rows retained unchanged with their citation.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -169,7 +153,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The colour dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -186,7 +170,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

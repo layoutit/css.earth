@@ -26,9 +26,9 @@ units. This fixes screen encoding; it does not reconstruct natural color.
 
 ## Evidence
 
-The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 color-encoding capture checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. Image delivery verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
-[Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The native MVIC label and independent Astropy sample/camera checks still apply: the cube, camera and shape are unchanged; the final display encoding changed.
+Displayed surface · DPR 2 · Shadows · Mobile. The native MVIC label and independent Astropy sample/camera checks still apply: the cube, camera and shape are unchanged; the final display encoding changed.
 
 The [registration audit](evidence/photography/registration.json) binds its source
 images, control file and source mesh by hash. It evaluates frozen cameras: it does
@@ -43,7 +43,7 @@ The reader tests compare native pixels, quality decisions and 50 TAN-SIP camera
 projections across the detectors. Both million-pixel detector quality masks also
 match Astropy's accepted-pixel counts.
 
-The [browser capture record](evidence/photography/capture.json) binds the tested
+The browser capture record binds the tested
 package and preparation code to the inspected views. LORRI and MVIC switch
 successfully at DPR 1 and 2; each retains 1,000 triangles with Shadows and Orbit
 off. The reverse view shows the unmapped grid. The 390 px mobile view switches
@@ -52,7 +52,7 @@ runtime files, totaling 10.45 MB, against their inventory entries.
 
 Clean checks: native readers and color sampling, source/UV tests, source and
 runtime closure, preparation and affected-test TypeScript, JavaScript ownership,
-dataset switching, lens race, reacquisition, rejection/retry and destruction.
+dataset switching, dataset race, reacquisition, rejection/retry and destruction.
 
 The full browser suite is not green: desktop breakpoint zoom preservation,
 mobile wheel suppression and the wheel-distance check fail. The latter two also
@@ -65,8 +65,8 @@ do not establish full-site or all-body readiness. No renderer changes were made.
 <summary>Earlier albedo and shape evidence</summary>
 
 2026-09-10: the previous default changed to Modeled albedo and faced the imaged southern
-hemisphere. The [current view checks](evidence/spacecraft-default/validation.json)
-bind the tested code and assets to the [opening view](evidence/spacecraft-default/default-dpr1.png).
+hemisphere. The current view checks
+bind the tested code and assets to the opening view.
 All 35 runtime image hashes, the source UV attribution, and the 1,000-face
 prepared terrain match the previous revision. No imagery upload is required.
 The source and minimap tests pass, as does the tooling TypeScript check.
@@ -98,12 +98,12 @@ show mapped southern detail separately.
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `lorri` | 1 | 0 | — | — | — | none (one frame and no reference observation) | 0 of 0 | — | 0 of 1 | — | — | no verdict |
 | `mvic` | 1 | 1 | 3.00° | — | — | none (one frame and no reference observation) | 0 of 0 | — | 0 of 1 | — | — | no verdict |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ## Known problems

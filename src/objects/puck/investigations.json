@@ -25,7 +25,7 @@
       "id": "other-voyager-filters-and-processed-press-images",
       "subject": "Other Voyager filters and processed press images",
       "status": "unresolved",
-      "finding": "No separately registered color observation at comparable useful resolution was located. A redistributed enlargement of the same clear image does not justify a second lens.",
+      "finding": "No separately registered color observation at comparable useful resolution was located. A redistributed enlargement of the same clear image does not justify a second dataset.",
       "revisitWhen": "A Puck observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/puck/source/manifest.json"
@@ -56,8 +56,8 @@
       "id": "near-infrared-photometry-of-uranus-s-inner-moons",
       "subject": "Near-infrared photometry of Uranus's inner moons",
       "status": "excluded",
-      "finding": "Integrated spectral/brightness measurements are useful science but do not provide a spatially registered Puck composition or color map. Excluded as a surface lens.",
-      "revisitWhen": "A spatially resolved Puck measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "finding": "Integrated spectral/brightness measurements are useful science but do not provide a spatially registered Puck composition or color map. Excluded as a surface dataset.",
+      "revisitWhen": "A spatially resolved Puck measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/puck/source/manifest.json",
         "https://www.sciencedirect.com/science/article/pii/S0019103522004237"

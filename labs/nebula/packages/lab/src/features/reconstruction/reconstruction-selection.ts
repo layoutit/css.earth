@@ -6,7 +6,7 @@ type Catalogue = Pick<ReconstructionCatalogue, 'finiteModel'> & { candidates: re
 /** Processing capability of the selected image; undefined means no saved result constrains a fresh density Preview. */
 export function selectedProcessing(catalogue: Catalogue | null, row: Pick<ReconstructionCandidate, 'prepared'> | undefined): ReconstructionProcessingCapability | undefined {
   if (row?.prepared) return row.prepared.processing ?? reconstructionProcessingCapability(undefined);
-  // A finite model owns this view: an image without its baked lens cannot fall back to density repainting.
+  // A finite model owns this view: an image without its baked dataset cannot fall back to density repainting.
   if (catalogue?.finiteModel) return reconstructionProcessingCapability('simulation-guided-finite-material@1');
   return undefined;
 }

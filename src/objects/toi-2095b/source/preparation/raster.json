@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/toi-2095b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "toi-2095b-surface-{id}{suffix}.webp",
-      "thumbnail": "toi-2095b-lens-{id}.webp",
+      "thumbnail": "toi-2095b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffbe84, the colour lens of toi-2095 (src/objects/toi-2095/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffbe84, the colour dataset of toi-2095 (src/objects/toi-2095/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "toi-2095",
           "srgb": "#ffbe84",
-          "source": "the colour lens of toi-2095 (src/objects/toi-2095/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of toi-2095 (src/objects/toi-2095/source/photometry/stellar-color.json)"
         }
       }
     }

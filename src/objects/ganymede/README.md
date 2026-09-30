@@ -79,11 +79,11 @@ shown km² counts the sampled cells at the 8192 × 4096 prepared density. The
 polygons cover 99.60% of the sphere. Gray covers 0.40%: 0.21% beyond 80° N and
 0.18% beyond 80° S, where the map has no polygons. Cells where polygons of two
 units overlap cover 0.001% and are withheld. Details:
-[units.json](evidence/geology/units.json).
+units.json.
 
 **Registration.** Gazetteer centres of features the map text names fall in the
 expected unit in 13 of 15 cases when longitudes are read east-positive, and 3 of
-15 when read west-positive ([features.json](evidence/geology/features.json)):
+15 when read west-positive (features.json):
 Galileo, Nicholson, Barnard, Marius and Perrine Regiones in dark cratered material,
 Uruk Sulcus in light material, Osiris and Tros in fresh crater material, Gilgamesh
 in basin interior plains, and Epigeus, Zakar, Teshub and Hathor in young palimpsest
@@ -92,25 +92,25 @@ large features whose centre point lands on a neighbour: Harpagia Sulcus centres 
 lg2 while ls2, which the pamphlet names there, is the largest unit within 350 km;
 Xibalba Sulcus centres on a c2 crater inside light material. Over the monochrome
 mosaic, dark units average 54–63 DN, light units 74–85 DN and fresh craters and
-Gilgamesh 95–110 DN ([flat map](evidence/geology/units-flat.png) ·
-[over the mosaic](evidence/geology/units-over-mosaic.webp), both 0–360° E, north up).
+Gilgamesh 95–110 DN (flat map ·
+over the mosaic, both 0–360° E, north up).
 This checks the frame and gross registration; it is not a measured offset.
 
 ## DLR mosaic
 
-**What Juno adds.** Comparing the producer's two 2 km previews (with and without Juno) locates the Juno images: 13.0% of the globe, about 310° to 60° east and 14° S to 70° N, around Tros crater. The product guide calls this the leading side; the measured footprint is centred at 357° E, 25° N. There the Juno photographs show craters and grooves that the USGS mosaic and DLR's own Voyager–Galileo version blur ([footprint](evidence/dlr-juno/footprint-usgs-dlr-dlr-without-juno.webp) · [close-up](evidence/dlr-juno/detail-usgs-dlr-dlr-without-juno.webp), each USGS | DLR with Juno | DLR without Juno, one pixel per prepared texel, about 2 km). Fine detail (high-pass RMS over local contrast) inside the footprint is 0.55 against 0.50 for the USGS mosaic, and 0.60 against 0.45 between DLR's previews with and without Juno. Outside the footprint the DLR mosaic is no sharper than the USGS one (0.52 against 0.54).
+**What Juno adds.** Comparing the producer's two 2 km previews (with and without Juno) locates the Juno images: 13.0% of the globe, about 310° to 60° east and 14° S to 70° N, around Tros crater. The product guide calls this the leading side; the measured footprint is centred at 357° E, 25° N. There the Juno photographs show craters and grooves that the USGS mosaic and DLR's own Voyager–Galileo version blur (footprint · close-up, each USGS | DLR with Juno | DLR without Juno, one pixel per prepared texel, about 2 km). Fine detail (high-pass RMS over local contrast) inside the footprint is 0.55 against 0.50 for the USGS mosaic, and 0.60 against 0.45 between DLR's previews with and without Juno. Outside the footprint the DLR mosaic is no sharper than the USGS one (0.52 against 0.54).
 
-**Coverage.** On the prepared 8192 × 4096 grid the DLR mosaic has imagery on 99.88% of the sphere and the USGS mosaic on 99.57%. The DLR map adds 0.39%, mostly the caps above about 87°; it lacks 0.08% that the USGS map has, near the south pole. Juno itself fills 0.013% of the sphere that the USGS map leaves empty ([coverage map](evidence/dlr-juno/coverage.webp): green added, red lost, blue the Juno images).
+**Coverage.** On the prepared 8192 × 4096 grid the DLR mosaic has imagery on 99.88% of the sphere and the USGS mosaic on 99.57%. The DLR map adds 0.39%, mostly the caps above about 87°; it lacks 0.08% that the USGS map has, near the south pole. Juno itself fills 0.013% of the sphere that the USGS map leaves empty (coverage map: green added, red lost, blue the Juno images).
 
 **Why a separate view.** The DLR map is a different control network. Tile-by-tile correlation against the USGS mosaic finds shifts of a median 7 texels (14 km), 90th percentile 15 texels (30 km), up to 28 texels (57 km); near Anat, the crater that defines Ganymede's longitude, the east–west shift is within one texel and the north–south shift about three. The False color view fills missing color with Monochrome pixels, and the Geology polygons and the labels follow the USGS frame, so replacing Monochrome would put its fallback and those overlays tens of kilometres off. Pixelmatch (threshold 0.1) flags 40.6% of texels between the two maps, 12.4 million of them outside the Juno footprint: the whole base changes, not only the Juno area.
 
-**Preparation.** The recipe reads the GeoTIFF with the byte-monochrome GeoTIFF route (`geotiff-byte-monochrome`), which checks the grid, origin, sphere and no-data value and keeps the 8-bit values (display range 0–255). Run on this file on 28 September 2026, the bake's decoder produced a map identical to the scratch bilinear check (0 mask or value differences, 1.38 GB peak memory). The resampled texture goes through the lossy lane like the other photographs. Measurements, inputs and hashes: [measure.json](evidence/dlr-juno/measure.json).
+**Preparation.** The recipe reads the GeoTIFF with the byte-monochrome GeoTIFF route (`geotiff-byte-monochrome`), which checks the grid, origin, sphere and no-data value and keeps the 8-bit values (display range 0–255). Run on this file on 28 September 2026, the bake's decoder produced a map identical to the scratch bilinear check (0 mask or value differences, 1.38 GB peak memory). The resampled texture goes through the lossy lane like the other photographs. Measurements, inputs and hashes: measure.json.
 
 ## Evidence
 
-The 14 September 2026 composition preparation added **Ice fraction** and **Dark material** as a local preview. They are now withheld from publication until reuse terms are explicit; the evidence below records that preview. [Native-value evidence](evidence/composition/native-values.json) compares all 64,800 geographic nodes in each of four converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. [Fresh restoration](evidence/composition/restoration.json) downloads the original archive into an empty source root and reproduces all seven composition manifest entries.
+The 14 September 2026 composition preparation added **Ice fraction** and **Dark material** as a local preview. They are now withheld from publication until reuse terms are explicit; the evidence below records that preview. Native-value evidence compares all 64,800 geographic nodes in each of four converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. Fresh restoration downloads the original archive into an empty source root and reproduces all seven composition manifest entries.
 
-[Ice fraction](evidence/composition/ice-fraction.png) · [Dark material](evidence/composition/dark-material.png) · [Shadows](evidence/composition/dark-material-shadows.png) · [DPR 2](evidence/composition/ice-fraction-dpr2.png). The [browser receipt](evidence/composition/browser.json) pins the tested files above, viewport, camera, selected textures and inspected captures. Switching datasets retains the same 450 surface leaves. [Delivery evidence](evidence/composition/delivery.json) verifies the unchanged scene and prior assets; ten added image files total 350,918 bytes.
+Ice fraction · Dark material · Shadows · DPR 2. The browser receipt pins the tested files above, viewport, camera, selected textures and inspected captures. Switching datasets retains the same 450 surface leaves. Delivery evidence verifies the unchanged scene and prior assets; ten added image files total 350,918 bytes.
 
 Focused checks pass: numeric conversion/acquisition (15), body behavior and content (14 across both moons), source/provenance (30), source-usage conservation (1), and strict preparation/tool TypeScript. The new provenance check follows converted grids through their pinned recipes to the native archive. Eight shared startup-fixture/import-closure failures across the two bodies were reproduced; these remain outside this surface change. Full application checks and public asset installation are not qualified. The local preview omits six unavailable unrelated nebula context banks; see the browser receipt. The texture bake receipt retains its original source hashes; later content and provenance refreshes do not claim another full bake.
 
@@ -127,7 +127,7 @@ Earlier shared-lane migration (12 September 2026): the terrestrial solid-observa
 
 Earlier run, 2026-09-12: [`node tools/objects/dist/prepare-authored.js ganymede --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/ganymede/*.test.mts` passed except the shared runtime-package and import-closure tests that failed identically on that main revision (recorded in the migration's pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, geology, oxygen-signature) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2161).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, enhanced, geology, oxygen-signature) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2161).
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
@@ -137,7 +137,7 @@ Map edge correction (2026-09-28): the raster lane's photograph decoder writes th
 
 - Focused checks run from the shared runners in [site/test](../../../site/test/runtime-package.test.mts) (runtime package and feature catalogue, scoped with `CSSEARTH_TEST_OBJECTS=ganymede`) and the shared browser conformance harness.
 
-Composition conversion: the two withheld views consume posterior medians for `derived_total_ices` and `derived_total_synthetic`, respectively. The pinned 8,845,543-byte fit (`cd7843ce…9261c8e4`) contributes 38,473 valid and 26,327 missing native nodes to each lens. It is resampled only by reversing latitude, reordering east-positive longitudes and repeating the seam: no smoothing, gap fill, or abundance aggregation. [The conversion record](source/composition/model-conversion.json) pins the output hashes, value ranges and posterior-interval products.
+Composition conversion: the two withheld views consume posterior medians for `derived_total_ices` and `derived_total_synthetic`, respectively. The pinned 8,845,543-byte fit (`cd7843ce…9261c8e4`) contributes 38,473 valid and 26,327 missing native nodes to each dataset. It is resampled only by reversing latitude, reordering east-positive longitudes and repeating the seam: no smoothing, gap fill, or abundance aggregation. [The conversion record](source/composition/model-conversion.json) pins the output hashes, value ranges and posterior-interval products.
 
 ## Known problems
 
@@ -153,13 +153,13 @@ Feature notes: 68 of the labelled names carry a caption note, the lead summary o
 
 - The rendered shape is a mean-radius sphere, not a resolved terrain mesh.
 
-- **Composition lenses:** The input coordinates are latitude north-positive and longitude east-positive. The paper uses an equirectangular product, but the 1° node grid is a resampling container, not 1° scientific resolution: SPHERE resolves roughly 100–150 km features. Ice fraction and dark material are fitted MCMC model abundances, with 16th/84th-percentile bounds in the release; they are not direct detections of individual chemicals. The prepared lens keeps source no-data visible.
+- **Composition datasets:** The input coordinates are latitude north-positive and longitude east-positive. The paper uses an equirectangular product, but the 1° node grid is a resampling container, not 1° scientific resolution: SPHERE resolves roughly 100–150 km features. Ice fraction and dark material are fitted MCMC model abundances, with 16th/84th-percentile bounds in the release; they are not direct detections of individual chemicals. The prepared dataset keeps source no-data visible.
 
 - **Ganymede fit metadata:** `fit_SPHERE.json.gz` names only the 2015 observation. Its valid mask is, apart from five omitted 2015 nodes, exactly the union of the four released 2015/2021 SPHERE reflectance masks. [The footprint comparison](evidence/composition/registration.json) supports combined coverage but does not establish each cell's contributing epoch or weight. The original header is preserved.
 
-- **Reuse:** Zenodo exposes the release as open/`other-open`, while the tag has no explicit data licence and the paper's availability statement does not grant rights to the numerical files. The two composition views are therefore withheld: they have no lens, surface recipe or dataset text, and no composition asset is published. The pinned source, conversion record and evidence stay so the views can return once explicit reuse terms exist.
+- **Reuse:** Zenodo exposes the release as open/`other-open`, while the tag has no explicit data licence and the paper's availability statement does not grant rights to the numerical files. The two composition views are therefore withheld: they have no dataset, surface recipe or dataset text, and no composition asset is published. The pinned source, conversion record and evidence stay so the views can return once explicit reuse terms exist.
 
-- **Geology attributes:** four polygons carry a `UNITNAME` that differs from their `TERRAIN` and `Unit` fields and from the separate label points: record 1946 (545,327 km², south-west of Barnard Regio) is young light grooved material by `UNITNAME` but dark cratered by the other three; records 1843 (306,748 km², light subdued 3 against light undivided), 1786 (22,953 km²) and 2101 (5,803 km²) are the others. A fifth, record 2924 (31,394 km²), has `Unit` `l` against light grooved material in both name fields. The lens follows `UNITNAME`, the field the authors' map project colors; the mosaic inside record 1946 averages 72.8 DN, between the dark (62.5) and young light grooved (78.8) means, so it does not settle the question. [units.json](evidence/geology/units.json) lists them.
+- **Geology attributes:** four polygons carry a `UNITNAME` that differs from their `TERRAIN` and `Unit` fields and from the separate label points: record 1946 (545,327 km², south-west of Barnard Regio) is young light grooved material by `UNITNAME` but dark cratered by the other three; records 1843 (306,748 km², light subdued 3 against light undivided), 1786 (22,953 km²) and 2101 (5,803 km²) are the others. A fifth, record 2924 (31,394 km²), has `Unit` `l` against light grooved material in both name fields. The dataset follows `UNITNAME`, the field the authors' map project colors; the mosaic inside record 1946 averages 72.8 DN, between the dark (62.5) and young light grooved (78.8) means, so it does not settle the question. units.json lists them.
 - **Geology label points:** the separate point labels disagree with the colored polygon unit at 129 of 3,042 comparable locations, the 124 found against `Unit` plus the five points inside the records above; 870 ejecta labels have no polygon unit. The audit keeps them.
 - **Geology symbology files:** `layerSymbology/GanymedeUnits.lyr` in the same ZIP is an older lookup (one palimpsest value, a crater-ejecta value) that does not match the shipped attributes; its shared colors equal the project's. NASA Trek's layer uses different colors for p1, p2, pu, pi and reticulate material. Neither is used.
 - **Geology structures:** contacts, grooves, furrows, crater rims and other line and point symbols are not shown. Geology has not been baked or checked in a browser since the color change.
@@ -189,7 +189,7 @@ Preparation maps canonical output pixel centres through each GeoTIFF's actual me
 
 **Monochrome** preserves the USGS observation mosaic. **False color** shows its independent near-infrared/green/violet interpretation.
 
-[USGS map I-2762](https://pubs.usgs.gov/imap/i2762/) and the [USGS globe description](https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_image_mosaic_globe) describe radiometric calibration, empirical Lunar–Lambert photometric normalization, and linear brightness corrections fitted to overlapping images. We retain this published processing; there is no additional guessed global photometric model. Photographed terrain shadows and varying source resolution can remain. The shared Shadows control adds approximate spherical lighting in both lenses.
+[USGS map I-2762](https://pubs.usgs.gov/imap/i2762/) and the [USGS globe description](https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_image_mosaic_globe) describe radiometric calibration, empirical Lunar–Lambert photometric normalization, and linear brightness corrections fitted to overlapping images. We retain this published processing; there is no additional guessed global photometric model. Photographed terrain shadows and varying source resolution can remain. The shared Shadows control adds approximate spherical lighting in both datasets.
 
 The USGS color product maps SSI 991 nm to red, 559 nm to green and 413 nm to blue. Published monochrome polar coverage remains monochrome. No terrain is painted or extrapolated.
 
@@ -201,7 +201,7 @@ Prepared maps are 8192 × 4096 (about 2.02 km per equatorial texel), downsampled
 
 Its 2631.2 km mean radius, pole/spin model, synchronous orbit and epoch come from the pinned astronomy package (JPL satellite elements and IAU/WGCCRE rotation). The small cartographic reference-radius difference remains a source-map fact, not a change to Ganymede's physical radius.
 
-[NASA Ganymede facts](https://science.nasa.gov/jupiter/jupiter-moons/ganymede/facts/) support the introduction, ocean interpretation, thin oxygen atmosphere and approximately 1.07 million km orbit. The tenuous atmosphere is factual content; it does not justify a visible atmospheric halo. No rings, terrain-height lens, magnetosphere illustration or speculative layer is included.
+[NASA Ganymede facts](https://science.nasa.gov/jupiter/jupiter-moons/ganymede/facts/) support the introduction, ocean interpretation, thin oxygen atmosphere and approximately 1.07 million km orbit. The tenuous atmosphere is factual content; it does not justify a visible atmospheric halo. No rings, terrain-height dataset, magnetosphere illustration or speculative layer is included.
 
 ## Preparation ownership
 

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "trappist-1c-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -49,23 +49,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "trappist-1c-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield",
-        "sky-sun"
       ]
     },
     {
@@ -130,7 +113,7 @@
       "licenseEvidence": [
         "https://svo2.cab.inta-csic.es/theory/fps/index.php?mode=use"
       ],
-      "acquisition": "Restored through source/preparation/acquisition.json from the SVO Filter Profile Service VOTable for JWST/MIRI.F1500W, unchanged; photon-counting detector (DetectorType 1), for the MIRI lens's temperature conversion.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO Filter Profile Service VOTable for JWST/MIRI.F1500W, unchanged; photon-counting detector (DetectorType 1), for the MIRI dataset's temperature conversion.",
       "redistribution": "Not redistributed in git; restored from the SVO.",
       "consumers": [
         "trappist-1c-bare-rock-model"
@@ -154,7 +137,7 @@
       "licenseEvidence": [
         "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
       ],
-      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 2600 K, log g 5.0, [M/H] 0, the grid point nearest TRAPPIST-1 (Agol et al. 2021: 2566 K, log g 5.24), for the MIRI lens's temperature conversion, unchanged VOTable.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 2600 K, log g 5.0, [M/H] 0, the grid point nearest TRAPPIST-1 (Agol et al. 2021: 2566 K, log g 5.24), for the MIRI dataset's temperature conversion, unchanged VOTable.",
       "redistribution": "Not redistributed in git; restored from the SVO.",
       "consumers": [
         "trappist-1c-bare-rock-model"
@@ -177,7 +160,7 @@
       "redistribution": "NASA media; an artist's concept, not an observation",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -193,10 +176,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "lens-colour-context-marker",
+      "id": "dataset-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
-      "credit": "The default lens's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -211,7 +194,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],
@@ -236,7 +219,7 @@
       "path": "reference/rendered-model-day.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: the branch's dev server at /trappist-1c/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: the default camera on the day side: the bare-rock model at 407 K under the star, with the lens panel labelled a model."
+        "reason": "Evidence capture: the branch's dev server at /trappist-1c/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: the default camera on the day side: the bare-rock model at 407 K under the star, with the dataset panel labelled a model."
       }
     },
     {

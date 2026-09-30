@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "m8",
   "name": "Lagoon Nebula",
-  "defaultLens": "eso-optical",
+  "defaultDataset": "eso-optical",
   "sharedInputs": [
     "eso-optical",
     "eso-vista",
@@ -11,7 +11,7 @@
     "distance",
     "stellar-field"
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "eso-optical",
       "label": "ESO · optical",
@@ -106,7 +106,7 @@
     }
   ],
   "bank": {
-    "path": "src/objects/m8/prepared/lenses.json"
+    "path": "src/objects/m8/prepared/datasets.json"
   },
   "recipes": [
     {

@@ -4,8 +4,8 @@ interface InstallProgress {completed: number; total: number; installed: number; 
 /** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */
 const TRANSIENT_RETRIES = 3, RETRY_BACKOFF_MS = 500;
 const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
-import { existsSync } from "node:fs";
-import { readFile } from "node:fs/promises";
+import { existsSync, statSync } from "node:fs";
+import { readFile, utimes } from "node:fs/promises";
 import { resolve } from "node:path";
 import { publishSourceBytes } from "../delivery/index.ts";
 import { PREPARED_CATALOGUE, readPreparedObjects } from "@cssearth/objects/node";
@@ -28,21 +28,33 @@ export function readAllowMissingFlag(args: readonly string[] = []) {
 // files, so a 429 is retried like a 5xx, after the Retry-After it names when it names one.
 export const RUNTIME_ASSET_CONCURRENCY = 256;
 export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = RUNTIME_ASSET_CONCURRENCY,
-  allowMissing = false, onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
-  onProgress?: (progress: InstallProgress) => void} = {}) {
+  allowMissing = false, trustFresh = false, onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
+  /** Trust a file written after its inventory by its size (a developer's `setup:assets`); CI hashes every file. */
+  trustFresh?: boolean; onProgress?: (progress: InstallProgress) => void} = {}) {
   let next = 0, installed = 0, reused = 0, skipped = 0;
   // A fresh checkout should learn about every missing or drifted file in one
   // run, so keep installing after a failure and report them together.
   const failures: string[] = [];
+  // With `trustFresh`, a file written after its object's inventory was last checked out holds what that inventory pins, so
+  // a matching size is enough. One older than its inventory predates a checkout that may have changed the pin, and is hashed; a verified
+  // file is then touched so the next run trusts it. Hashing all 110,000 files cost every dev start 24 s. A same-size
+  // local edit to a prepared file is left for CI and publishing, which hash every asset (verifyInventory).
+  const inventoryTimes = new Map<string, Promise<number>>();
+  const inventoryTime = (path: string) => {
+    let time = inventoryTimes.get(path);
+    if (!time) inventoryTimes.set(path, time = Promise.resolve(statSync(path, { throwIfNoEntry: false })?.mtimeMs ?? Number.POSITIVE_INFINITY));
+    return time;
+  };
   await Promise.all(Array.from({ length: Math.min(concurrency, assets.length) }, async () => {
     while (next < assets.length) {
       const asset = assets[next++];
       try {
+        // Synchronous: 110,000 async stats queue on libuv's four threads and cost seconds of idle.
+        const info = statSync(asset.file, { throwIfNoEntry: false });
         let existing: Buffer | undefined;
-        try { existing = await readFile(asset.file); }
-        catch (error) { if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error; }
-        if (existing?.length === asset.bytes &&
-            sha256(existing) === asset.sha256) {
+        if (info?.size === asset.bytes && !(trustFresh && asset.inventory && info.mtimeMs > await inventoryTime(asset.inventory))) existing = await readFile(asset.file);
+        if (info?.size === asset.bytes && (existing === undefined || sha256(existing) === asset.sha256)) {
+          if (existing !== undefined) { const now = new Date(); await utimes(asset.file, now, now); }
           reused++;
         } else {
           // A dropped connection, a 5xx or a 429 is not a missing asset. Across 5,500+ files a single transient
@@ -109,33 +121,6 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
  * restores inventoried files from R2. `--location` narrows to one location; `--metadata` restores only the
  * prepared presentation of the volume objects, which is all a deploy catalogue reads.
  */
-/**
- * The files under a body's `prepared/` that a checkout derives itself (`isRegeneratedPreparedFile`): the JSON transport
- * and page from the restored runtime. R2 never holds them, so a body restored into a checkout that has not baked it has
- * none until something derives them, and the first prepare step to read one fails with a bare ENOENT. Derive them here for
- * every restored scene body that lacks one; a body that has them is left alone, so a repeat run costs nothing. Needs the
- * renderer build (`pnpm prepare:shell`); without it the caller is told which command finishes the job instead of failing
- * on an import.
- */
-export async function deriveRestoredPreparedFiles(ids: readonly string[], root: string, checkout = process.cwd()) {
-  // A deploy runs setup before `pnpm build:tools` writes the scene catalogue; its second setup run derives the files.
-  if (Object.values(PREPARED_CATALOGUE).some(path => !existsSync(resolve(checkout, path)))) {
-    console.log("Derived page data not written: the scene catalogue is not generated. Run pnpm build:tools && pnpm prepare:object-json.");
-    return { pages: 0 };
-  }
-  const SCENE_OBJECTS = readPreparedObjects(checkout).sceneObjects;
-  const missing = (id: string, file: string) => !existsSync(resolve(root, "src/objects", id, "prepared", file));
-  const pages = ids.filter(id => SCENE_OBJECTS.some(object => object.id === id) && (missing(id, "page.json") || missing(id, "object.json")));
-  if (!pages.length) return { pages: 0 };
-  if (!existsSync(resolve(checkout, "packages/renderer/dist/index.js"))) {
-    console.log(`Derived page data not written for ${pages.length} restored object(s): the renderer is not built. Run pnpm prepare:shell && pnpm prepare:object-json.`);
-    return { pages: 0 };
-  }
-  const { restoreObjectJson } = await import("./restore-object-json.ts");
-  await restoreObjectJson(pages, root, { restoredOnly: true, checkout });
-  return { pages: pages.length };
-}
-
 export async function setupAssets(args: readonly string[], root = process.cwd()) {
   const allowMissing = readAllowMissingFlag(args), metadata = args.includes("--metadata");
   const locationArg = args.find(arg => arg.startsWith("--location="))?.slice("--location=".length);
@@ -144,13 +129,9 @@ export async function setupAssets(args: readonly string[], root = process.cwd())
   const { ids, assets } = metadata ? await volumeMetadataAssets(root)
     : await (async () => { const ids = inventoriedObjectIds(rest, root); return { ids, assets: await inventoryAssets(root, ids, { location: locationArg as AssetLocation | undefined }) }; })();
   console.log(`Setting up ${metadata ? 'catalogue metadata for ' : ''}${ids.length} object(s): ${assets.length} file(s). No source preparation or geometry mirror required.`);
-  const result = await installRuntimeAssets(assets, { allowMissing, onProgress: ({ completed, total }) => {
+  const result = await installRuntimeAssets(assets, { allowMissing, trustFresh: true, onProgress: ({ completed, total }) => {
     if (completed % 100 === 0) console.log(`Prepared files: ${completed}/${total}`);
   } });
   console.log(`Setup complete: ${result.installed} downloaded, ${result.reused} reused${result.skipped ? `, ${result.skipped} skipped (missing on R2, allow-missing)` : ""}.`);
-  if (!metadata && locationArg !== "public") {
-    const derived = await deriveRestoredPreparedFiles(ids, root);
-    if (derived.pages) console.log(`Derived page data for ${derived.pages} object(s).`);
-  }
   return result;
 }

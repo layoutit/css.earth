@@ -3,16 +3,16 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative } from 'node:path';
 import type { Vector3 } from '../../contracts/volume-recipe.ts';
 import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
-import { readCompilerBakeResult, type CompilerBakeResult, type CompilerLensVolume, type CompilerPin } from '../../contracts/compiler-bake.ts';
+import { readCompilerBakeResult, type CompilerBakeResult, type CompilerDatasetVolume, type CompilerPin } from '../../contracts/compiler-bake.ts';
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
 import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '../../coordinates/compiler-frame.ts';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { recolorCloudSlices } from '../slices/material.ts';
-import { compilerAlpha, verifyCompilerSharedAlpha, type BakeCompilerOptions, type CompilerLensInput } from './bake.ts';
+import { compilerAlpha, verifyCompilerSharedAlpha, type BakeCompilerOptions, type CompilerDatasetInput } from './bake.ts';
 
 export interface RetainedMaterialBankOptions {
   root: string; outputDirectory: string; scene: CompilerBakeResult; neutralSlicesPin: CompilerPin;
-  lens: CompilerLensInput; sampleEmission: BakeCompilerOptions['sampleEmission'];
+  dataset: CompilerDatasetInput; sampleEmission: BakeCompilerOptions['sampleEmission'];
   onProgress?(progress: { completed: number; total: number }): void;
 }
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -73,12 +73,12 @@ export interface RetainedMaterialBackend<Volume> {
  readVolume(value:unknown):Volume;
  compileVolume(input:Parameters<import('./bake.ts').CompilerBakeBackend['compileVolume']>[0]):Volume;
  assertBankIdentity(volume:Volume,scene:CompilerBakeResult):void;
- assertLensGeometry(neutral:Volume,textured:Volume,scene:CompilerBakeResult):void;
+ assertDatasetGeometry(neutral:Volume,textured:Volume,scene:CompilerBakeResult):void;
 }
-export async function prepareRetainedMaterialBank<Volume>(options: RetainedMaterialBankOptions, backend:RetainedMaterialBackend<Volume>): Promise<CompilerLensVolume> {
-  const { root, outputDirectory, lens, neutralSlicesPin } = options;
-  if (!isAbsolute(root) || !path(outputDirectory) || !lens || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(lens.id) ||
-      typeof lens.label !== 'string' || !lens.label.trim() || typeof lens.sampleMaterial !== 'function' ||
+export async function prepareRetainedMaterialBank<Volume>(options: RetainedMaterialBankOptions, backend:RetainedMaterialBackend<Volume>): Promise<CompilerDatasetVolume> {
+  const { root, outputDirectory, dataset, neutralSlicesPin } = options;
+  if (!isAbsolute(root) || !path(outputDirectory) || !dataset || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(dataset.id) ||
+      typeof dataset.label !== 'string' || !dataset.label.trim() || typeof dataset.sampleMaterial !== 'function' ||
       typeof options.sampleEmission !== 'function') throw new TypeError('Retained compiler material requires a 3D material sampler and emission sampler.');
   const scene = readCompilerBakeResult(options.scene), sourceDirectory = dirname(containedPath(root, scene.neutral.path));
   if (!neutralSlicesPin || !path(neutralSlicesPin.path) ||
@@ -92,7 +92,7 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
   const slices = readSlices(JSON.parse((await sourceBytes(root, neutralSlicesPin)).toString('utf8')), scene);
   const compile = (bank: VolumeSlices) => backend.compileVolume({ id: `compiler-${scene.volumeId ?? scene.id}`,
     frame: scene.frame, slices: scene.frame.referenceFrame === COMPILER_PHYSICAL_REFERENCE ? compilerPreparedSlices(bank) : bank });
-  backend.assertLensGeometry(neutral, compile(slices), scene);
+  backend.assertDatasetGeometry(neutral, compile(slices), scene);
   const neutralAlpha = await compilerAlpha(sourceDirectory, slices);
   const origin = scene.coordinates.localOriginArcsec;
   const material = compilerSlabMaterial((x, y, z, out) => {
@@ -100,7 +100,7 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
     if (out.some(n => !Number.isFinite(n) || n < 0) || Math.max(...out) - Math.min(...out) > 1e-12)
       throw new TypeError('Retained compiler emission must be finite nonnegative neutral XYZ emission.');
   }, (x, y, z, out) => {
-    out.fill(NaN); const observed = lens.sampleMaterial(x, y, z, out);
+    out.fill(NaN); const observed = dataset.sampleMaterial(x, y, z, out);
     if (typeof observed !== 'boolean') throw new TypeError('Retained compiler XYZ material must return a coverage boolean.');
     return observed;
   });
@@ -111,13 +111,13 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
   if (JSON.stringify(geometry(slices)) !== JSON.stringify(geometry(painted.slices))) throw new Error('Retained compiler material changed quad geometry.');
   await verifyCompilerSharedAlpha(neutralAlpha, output, painted.slices);
   painted.slices.provenance = { schema: 'cssearth-compiler-retained-material@1', fieldIdentity: scene.fieldIdentity,
-    materialLensId: lens.id, neutral: scene.neutral, neutralSlices: neutralSlicesPin,
+    materialDatasetId: dataset.id, neutral: scene.neutral, neutralSlices: neutralSlicesPin,
     reference: slices.provenance, coverage: painted.coverage };
-  const volume = compile(painted.slices); backend.assertLensGeometry(neutral, volume, scene);
+  const volume = compile(painted.slices); backend.assertDatasetGeometry(neutral, volume, scene);
   const bytes = Buffer.from(JSON.stringify(volume) + '\n');
   await writeFile(containedPath(output, 'volume-slices.json'), JSON.stringify(painted.slices) + '\n');
   await writeFile(containedPath(output, 'volume.json'), bytes);
   const { positiveAlphaTexels, recoloredTexels, outsideImageTexels } = painted.coverage;
-  return { id: lens.id, label: lens.label, volume: { path: relative(root, containedPath(output, 'volume.json')) },
+  return { id: dataset.id, label: dataset.label, volume: { path: relative(root, containedPath(output, 'volume.json')) },
     coverage: { positiveAlphaTexels, recoloredTexels, outsideImageTexels } };
 }

@@ -9,11 +9,11 @@ import ObjectFactsheet from "./ObjectFactsheet.astro";
 import InformationTabs from './InformationTabs.astro';
 import { satelliteSystemFromUrl } from '../navigation/navigation-scope.mts';
 import DatasetContextPanels from "./DatasetContextPanels.astro";
-import DatasetLenses from "./DatasetLenses.astro";
+import DatasetList from "./DatasetList.astro";
 import TreeDisclosure from './TreeDisclosure.astro';
 import { readObjectArticleUrl } from '../server/object-article.mts';
-const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], lenses } = Astro.props;
-const hasLenses = Boolean(lenses && lenses.controls.length > 0);
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], datasets } = Astro.props;
+const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const articleUrl = await readObjectArticleUrl(objectId);
@@ -33,7 +33,7 @@ const articleUrl = await readObjectArticleUrl(objectId);
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
       <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" open>
       <h2 class="object-mobile-information-heading">Datasets</h2>
-      {hasLenses && lenses && <DatasetLenses {objectId} {lenses} />}
+      {hasDatasets && datasets && <DatasetList {objectId} {datasets} />}
       {galleries.map((gallery) => (
       <details id={`${objectId}-${gallery.id}`} class="object-gallery-panel" hidden={gallery.hidden}>
         <summary class="object-panel-summary">

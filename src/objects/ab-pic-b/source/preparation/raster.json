@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ab-pic-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "infrared",
       "output": "ab-pic-b-surface-{id}{suffix}.webp",
-      "thumbnail": "ab-pic-b-lens-{id}.webp",
+      "thumbnail": "ab-pic-b-dataset-{id}.webp",
       "source": "photometry/band-color.json",
       "falseColor": true,
       "science": {

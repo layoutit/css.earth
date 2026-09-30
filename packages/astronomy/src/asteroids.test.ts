@@ -61,7 +61,6 @@ describe('asteroid positions against JPL Horizons', () => {
       // SN263: ceil(maximum independently measured 30-day endpoint error * 1.05).
       'asteroid-2001-sn263': 250,
       // Dinkinesh: ceil(991.491 km independent endpoint maximum * 1.05).
-      // Retained samples and measured errors: src/objects/dinkinesh/evidence/galileo-lucy/orbit-errors.json.
       dinkinesh: 1042,
       // 3I/ATLAS: ceil(964.450 km independent endpoint maximum * 1.15); two-body path without its fitted non-gravitational acceleration.
       'comet-3i': 1110,

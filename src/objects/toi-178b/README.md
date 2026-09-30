@@ -8,7 +8,7 @@ It is one of 6 planets known around TOI-178. Its orbit and size follow Leleu et 
 
 **Orbit.** Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2024): P 1.9145601 d Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2024): a/R* derived by Kepler's third law from its period 1.9145601 d, stellar mass 0.647 and radius 0.662 solar units; Leleu et al. 2021 (2021A&A...649A..26L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2021): inclination 88.8 degrees No archive row states an eccentricity; the orbit is taken as circular Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2024): transit mid-time 2458931.1793 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-178's measured colour (#ffc8a5, the colour lens of toi-178 (src/objects/toi-178/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-178's measured colour (#ffc8a5, the colour dataset of toi-178 (src/objects/toi-178/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-178's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (29, 69, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

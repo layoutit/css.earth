@@ -21,7 +21,7 @@ the elements that own stacking; an inherited depth variable on the shared stage 
 |---|---|
 | `@cssearth/renderer` | the object runtime (`createObjectRuntime`), the object contract, prepared-object loading, parsing and asset origins |
 | `@cssearth/renderer/navigation` | the world camera and its rotation maths, view URLs, selection targets and the prepared world-camera frame parser |
-| `@cssearth/renderer/universe` | the universe context (`createPreparedUniverse`), the world-frame queue and the loaders of volumes, point appearances, surface shells, image layers and volume lenses |
+| `@cssearth/renderer/universe` | the universe context (`createPreparedUniverse`), the world-frame queue and the loaders of volumes, point appearances, surface shells, image layers and volume datasets |
 | `@cssearth/renderer/platform/*` | single modules the application and tools import on their own (`object-orbit`, `camera-input`, `camera-layout`, `prepared-wheel-zoom`, `prepared-residency`, `object-contract`, `prepared-image-store`, `object-selection-runtime`, `prepared-presentation`, `perspective-dolly`, `solar-view-direction`, `prepared-object-assets`, `surface-fly-to`, `directional-sun-coordinate`) |
 | `@cssearth/renderer/testing` | the same implementations, exposed for tests |
 | `@cssearth/renderer/scene-native-waits`, `…/prepared-object-worker`, `…/world-context-planner-worker` | native wait helpers and the two worker entries |
@@ -69,7 +69,7 @@ No new geometry, texture or device-specific level policy is introduced.
 
 The connection-order regression uses Neptune's real prepared groups in `src/platform/object-selection-runtime.test.mts`.
 The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
-[Matched iPad captures](evidence/initial-leaf-backing.json) record the reduced layer allocation, remaining first-paint
+Matched iPad captures record the reduced layer allocation, remaining first-paint
 stalls and measurement limits.
 
 ## Evidence

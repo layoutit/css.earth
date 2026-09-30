@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-2345. Its orbit and size follow Eschen e
 
 **Orbit.** Eschen et al. 2025 (2025MNRAS.544.2614E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2025): P 1.0528573 d Eschen et al. 2025 (2025MNRAS.544.2614E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2025): a/R* 5.03; Eschen et al. 2025 (2025MNRAS.544.2614E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2025): inclination 86.9 degrees No archive row states an eccentricity; the orbit is taken as circular Eschen et al. 2025 (2025MNRAS.544.2614E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2025): transit mid-time 2459116.7208 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2345's measured colour (#ffd2b7, the colour lens of toi-2345 (src/objects/toi-2345/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2345's measured colour (#ffd2b7, the colour dataset of toi-2345 (src/objects/toi-2345/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2345's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (97, 105, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

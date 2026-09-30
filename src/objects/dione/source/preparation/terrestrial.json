@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "dione",
   "displayName": "Dione",
@@ -368,6 +368,6 @@
     "sunSource": "JPL Dione orbit plus VSOP87 Saturn position and IAU/WGCCRE Dione rotation"
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

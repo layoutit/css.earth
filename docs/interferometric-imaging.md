@@ -1,6 +1,6 @@
 # Interferometric imaging
 
-A star's surface reaches this project as interferometric data, not as a picture. This guide describes how that data becomes a lens, which checks decide whether it may, and what has been measured. Each star's README records its own run.
+A star's surface reaches this project as interferometric data, not as a picture. This guide describes how that data becomes a dataset, which checks decide whether it may, and what has been measured. Each star's README records its own run.
 
 ## Stages
 
@@ -11,11 +11,11 @@ A star's surface reaches this project as interferometric data, not as a picture.
    - it fits its own data to a reduced chi-squared of 3 or better, on squared visibilities and on closure phases;
    - its spots are at least twice as strong as those of every spotless twin within 2 percent of the fitted size;
    - its spots come back from two interleaved halves of the data: once each half's own spotless twin is subtracted, the two halves' spots correlate at 0.5 or more.
-5. **Cast.** A flat image goes onto the sphere through the `surface-observation` route with a computed camera, as for Betelgeuse and π¹ Gruis. A sphere reconstruction goes through `surface-lens.mts`, which writes the float32 image map the `terrestrial-scientific` lens reads, to be stated with `outputLongitudeOrigin: -90`.
+5. **Cast.** A flat image goes onto the sphere through the `surface-observation` route with a computed camera, as for Betelgeuse and π¹ Gruis. A sphere reconstruction goes through `surface-dataset.mts`, which writes the float32 image map the `terrestrial-scientific` dataset reads, to be stated with `outputLongitudeOrigin: -90`.
 
 The four CHARA-imaged fast rotators are oblate and gravity-darkened; the three
 Betelgeuse epochs are MATISSE reconstructions cast onto the sphere. Both routes
-end in the same lens.
+end in the same dataset.
 
 ![Regulus, Alderamin, Rasalhague and Caph beside Betelgeuse in December 2018, February 2020 and December 2020](images/star-enhancements.png)
 
@@ -81,14 +81,14 @@ Measured on 2026-09-16 with the pinned recipes and the spotless simulations the 
 | --- | --- | --- | --- | --- |
 | π¹ Gruis, SQUEEZE | 2.45 and 1.06 | 5.22 | 0.95 | cast (shipped) |
 | Betelgeuse, SQUEEZE | 0.35 and 1.12 | 2.73 | 0.79 | cast (shipped) |
-| Betelgeuse, `image-star.mts --calibrated` on the pinned files, twins at 42.2 to 43.9 mas | 0.31 and 1.20 | 1.24 (2.02 at best) | 0.57 | not cast; lens kept with a label |
+| Betelgeuse, `image-star.mts --calibrated` on the pinned files, twins at 42.2 to 43.9 mas | 0.31 and 1.20 | 1.24 (2.02 at best) | 0.57 | not cast; dataset kept with a label |
 | Polaris, SQUEEZE, April 2021 | 1.76 and 2.28 | 1.05 | −0.13 | not cast |
 | Polaris, ROTIR sphere, April 2021 | 1.45 and 5.58 | 1.53 | 0.28 | not cast |
 | R Dor, SQUEEZE, AMBER continuum | 1.74 and 2.99 | 1.31 | 0.36 | not cast |
 | R Aqr, SQUEEZE, PIONIER 2019 from raw, 16 nights, 5% and 2° error floors | 58 and 63 | 15.6 | 0.27 (without floors) | not cast |
 | R Aqr, `image-star.mts` on `seasons/r-aqr-pionier-2019`: lost fringes removed, 5%, 5e-6 and 2° floors | 71.8 and 71.9 | 5.76 (10.2 against the full-size twin) | 0.48 | not cast |
 
-The spot ratio depends on the twin's size. On one half of Betelgeuse's February 2020 data, a spotless disc leaves patches with rms 0.03 at 42.0 mas, 0.12 at 42.8 mas and 0.05 at 43.8 mas, against 0.13 in that half's image. More iterations (10 000), four chains and half-size pixels (0.39 mas) did not make a spotty twin clean. π¹ Gruis's twins stay at 0.012 to 0.019 over ±2 percent. The rows above measured with one twin are kept as measured. Since the check judges by the spottiest twin within 2 percent, Betelgeuse's image does not pass it. The Betelgeuse lens is kept by decision and says on the page that its patches are not confirmed.
+The spot ratio depends on the twin's size. On one half of Betelgeuse's February 2020 data, a spotless disc leaves patches with rms 0.03 at 42.0 mas, 0.12 at 42.8 mas and 0.05 at 43.8 mas, against 0.13 in that half's image. More iterations (10 000), four chains and half-size pixels (0.39 mas) did not make a spotty twin clean. π¹ Gruis's twins stay at 0.012 to 0.019 over ±2 percent. The rows above measured with one twin are kept as measured. Since the check judges by the spottiest twin within 2 percent, Betelgeuse's image does not pass it. The Betelgeuse dataset is kept by decision and says on the page that its patches are not confirmed.
 
 Single nights are not used for the third condition. π¹ Gruis's first night alone fails the spotless check (ratio 0.99) and its second passes (4.09); each Polaris night alone correlates 0.92 or 0.93 with its spotless twin. Alternate exposures keep nearly the same coverage in both halves, which is why each half's own spotless twin must be subtracted before the halves are compared.
 
@@ -152,9 +152,9 @@ The final image, after the 0.907 flux-scale correction applied to the visibiliti
 
 Two things do not match the paper and are not explained here. Its Table 1 gives 77 by 52 mas for this date where robust 0 in CASA gives 48.2 by 21.4; AIPS and CASA scale the Briggs robust parameter differently, which is a candidate and is not verified. And its text describes the array as reaching about 5 km, where the delivered data hold projected baselines from 14 to 8040 kilo-wavelengths — 18 m to 10.4 km at this frequency — after the delivery's own flag on spacings beyond 10 km. The paper states no brightness temperatures in its text, and the scale of its Figure 1 was not read.
 
-## Sphere maps on a lens
+## Sphere maps on a dataset
 
-`surface.jl` writes ROTIR's map on its own coordinates. `surface-lens.mts` turns it into body east longitude, with ROTIR longitude equal to body longitude minus 90 degrees, and leaves unobserved cells and cells beyond 70 degrees of emission as no data. `surface-lens.test.mts` measures that convention. It casts the Polaris map through the production camera and compares it with ROTIR's own sky projection: correlation 0.978 for the derived cast and 0.238 for the mirrored one. The same test reads the written map through the image-map loader and checks that the painter asks for body longitude 0 in the column a camera-cast lens uses.
+`surface.jl` writes ROTIR's map on its own coordinates. `surface-dataset.mts` turns it into body east longitude, with ROTIR longitude equal to body longitude minus 90 degrees, and leaves unobserved cells and cells beyond 70 degrees of emission as no data. `surface-dataset.test.mts` measures that convention. It casts the Polaris map through the production camera and compares it with ROTIR's own sky projection: correlation 0.978 for the derived cast and 0.238 for the mirrored one. The same test reads the written map through the image-map loader and checks that the painter asks for body longitude 0 in the column a camera-cast dataset uses.
 
 ## Known limits
 

@@ -46,13 +46,13 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   if ((pageId !== objectId && drawnPageFromUrl(url, objectId) !== pageId) || descriptor.prepared?.url !== 'prepared/object.json') {
     throw new Error(`Prepared dataset descriptor identity drifted: page ${pageId}, scene ${objectId}, focus ${String(focusId)}.`);
   }
-  // On a catalogue focus's page `dataset` selects the focus's lens; the scene keeps its own default.
+  // On a catalogue focus's page `dataset` selects the focus's dataset; the scene keeps its own default.
   const dataset = readSceneDatasetUrl(url, objectId);
   const focusing = focusId !== null;
-  let lensId = dataset.id ?? undefined;
+  let datasetId = dataset.id ?? undefined;
   const shell = region(html, 'search-shell');
   const buttons = [...shell.document.querySelectorAll<HTMLButtonElement>('.object-information-panel button[name="dataset"]:not([data-dataset-step])')];
-  if (lensId && !buttons.some(button => button.getAttribute('value') === lensId)) throw new RangeError('Dataset unavailable on this object.');
+  if (datasetId && !buttons.some(button => button.getAttribute('value') === datasetId)) throw new RangeError('Dataset unavailable on this object.');
   const read = async (path: string) => {
     const response = await fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
     if (!response.ok) throw new Error('Prepared dataset could not load.');
@@ -65,8 +65,8 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   const feature = featureIds.length && definition.features ? await loadPreparedSurfaceFeature(definition.features, objectId, featureIds[0]!,
     AbortSignal.timeout(15_000), (path, init) => fetcher(new URL(path, url.origin), { ...init, redirect: 'error' })) : null;
   if (featureIds.length && !feature) throw new RangeError('Feature unavailable on this object.');
-  if (feature && definition.features && !definition.features.lensIds.includes(lensId ?? definition.controls.lenses?.defaultLens ?? '')) {
-    lensId = definition.features.lensIds[0];
+  if (feature && definition.features && !definition.features.datasetIds.includes(datasetId ?? definition.controls.datasets?.defaultDataset ?? '')) {
+    datasetId = definition.features.datasetIds[0];
   }
   const settings: Record<string, number | boolean> = {};
   if (settingRequest) {
@@ -84,10 +84,10 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     if (!response.ok) throw new Error(`${objectId}: hash group ${path} answered ${response.status}.`);
     return response.json();
   });
-  const written = serializePreparedScene(definition, lensId, settings, (_key, address) => address).textures;
+  const written = serializePreparedScene(definition, datasetId, settings, (_key, address) => address).textures;
   await Promise.all(written.map(({ key, address }) => published.ensure(key, address)));
-  const selected = serializePreparedScene(definition, lensId, settings, (_key, address) => published.url(address));
-  const activeLens = lensId ?? definition.controls.lenses?.defaultLens;
+  const selected = serializePreparedScene(definition, datasetId, settings, (_key, address) => published.url(address));
+  const activeDataset = datasetId ?? definition.controls.datasets?.defaultDataset;
   const scene = region(html, 'prepared-scene');
   const stage = requiredElement<HTMLElement>(scene.document, '.object-stage');
   // A page with an arrival billboard ships an empty stage without the prepared-object mark (ObjectLayout's startup). A
@@ -104,7 +104,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   stage.className = ['object-stage', ...selected.classes].join(' ');
   for (const [name, value] of Object.entries(selected.attributes)) stage.setAttribute(name, value);
   stage.setAttribute('style', selected.style);
-  if (activeLens) stage.dataset.preparedDataset = activeLens;
+  if (activeDataset) stage.dataset.preparedDataset = activeDataset;
   stage.dataset.preparedSettings = JSON.stringify(settings);
   stage.innerHTML = selected.html;
   if (saved || focusing) {
@@ -112,7 +112,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     if (!frame) throw new RangeError('A saved view requires a prepared world frame.');
     saved = await renderNativeFocus(shell.document, stage, url, definition, frame, saved, fetcher);
     if (saved) {
-      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, lensId, settings), stage, frame, saved);
+      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, saved);
       stage.dataset.preparedView = formatSharedView(saved).slice(2);
     }
   }
@@ -129,9 +129,9 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     stage.append(root);
   }
   publishDatasetSelection(buttons,
-    [...shell.document.querySelectorAll<HTMLElement>('[data-lens-details]')].map(panel => ({ id: panel.dataset.lensDetails!, panel })),
-    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')], new Set([activeLens ?? null]),
-    shell.document.querySelector('.object-information-panel .object-lenses'));
+    [...shell.document.querySelectorAll<HTMLElement>('[data-dataset-details]')].map(panel => ({ id: panel.dataset.datasetDetails!, panel })),
+    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')], new Set([activeDataset ?? null]),
+    shell.document.querySelector('.object-information-panel .object-datasets'));
   if (dataset.requested || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
   for (const input of shell.document.querySelectorAll<HTMLInputElement>('.object-settings input[name]')) {
     if (Object.hasOwn(settings, input.name)) {

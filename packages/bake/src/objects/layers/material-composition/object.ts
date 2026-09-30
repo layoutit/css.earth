@@ -33,7 +33,7 @@ import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '../observed-su
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,JSON.stringify(value)+'\n');
 
-export const isLayeredOblateRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-layered-oblate-preparation@1';
+export const isLayeredOblateRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-layered-oblate-preparation@2';
 
 /** A full source-to-consumer pipeline; no runtime product is a preparation input. */
 export async function prepareLayeredOblateObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>}) {
@@ -47,13 +47,13 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const requiredSource=(id:string)=>{const source=sources.get(id);if(!source)throw new TypeError(`Layered preparation requires ${id}.`);return source;};
   const required=(id:string)=>requiredSource(id).value;
   const geometry=parse(required('geometry'),layeredRecipe,'layered geometry'),surface=parse(required('surface'),spectralRecipe,'spectral material'),materials=parse(required('materials'),cutawayRecipe,'cutaway material'),radialMotion=parse(required('radial-motion'),radialMotionRecipe,'radial motion'),rings=parseRadialLayerRecipe(required('rings')),presentationConfig=parse(required('presentation'),layeredPresentationRecipe,'layered presentation');
-  const contentSource=shape({displayName:text,lenses:shape({controls:array(shape({id:text}))})})(required('content'));
+  const contentSource=shape({displayName:text,datasets:shape({controls:array(shape({id:text}))})})(required('content'));
   if(!isLayeredOblateRecipe(geometry)||[geometry,surface,materials,radialMotion,presentationConfig].some(config=>config.namespace!==descriptor.id))throw new TypeError('Authored capability identity differs.');
   if(descriptor.recipe.shape.kind!=='ellipsoid')throw new TypeError('Layered oblate preparation requires an ellipsoid.');
   if(descriptor.recipe.shape.radiusKm!==geometry.parameters.objectEquatorialRadiusKm||descriptor.recipe.shape.polarRadiusKm!==geometry.parameters.objectPolarRadiusKm)throw new TypeError('Authored ellipsoid shape differs from pinned preparation facts.');
   if(descriptor.recipe.shape.kind!=='ellipsoid'||!descriptor.recipe.rings||!descriptor.recipe.cutaway)throw new TypeError('Layered oblate preparation requires declared ellipsoid, radial layer, and cutaway capabilities.');
-  const declared=descriptor.recipe.surfaces.flatMap(surface=>surface.lenses.map(lens=>lens.id));
-  if(JSON.stringify(declared)!==JSON.stringify(contentSource.lenses.controls.map(lens=>lens.id)))throw new TypeError('Authored lenses differ from content controls.');
+  const declared=descriptor.recipe.surfaces.flatMap(surface=>surface.datasets.map(dataset=>dataset.id));
+  if(JSON.stringify(declared)!==JSON.stringify(contentSource.datasets.controls.map(dataset=>dataset.id)))throw new TypeError('Authored datasets differ from content controls.');
   const sourceDirectory=resolve(objectRoot,'source');
   const sourceManifest=await createSourceManifest({objectId:descriptor.id,objectName:contentSource.displayName,sourceRoot:sourceDirectory});await sourceManifest.verify();
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(outputDirectory,{recursive:true})]);
@@ -63,24 +63,24 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const radial=await prepareRadialMotionAndShadow({...context,config:radialMotion,radialRecipe:rings});
   const baseCompiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:radial});
   const metadata=await baseCompiler.prepareBaseMaterialSurfaces();
-  const materialLenses=await prepareSpectralMaterialVariants({...context,config:surface});
+  const materialDatasets=await prepareSpectralMaterialVariants({...context,config:surface});
   // Dated RGB observations share the body's visible-light material and rings.
   const observationSource=sources.get('observations');
   const observations=observationSource?parseObservedSurfaceRecipe(observationSource.value):null;
   if(observations)await prepareObservedSurfaces({...context,config:observations,write:true});
-  const normal=materialLenses.controls.find(lens=>lens.id===materialLenses.defaultLens);
+  const normal=materialDatasets.controls.find(dataset=>dataset.id===materialDatasets.defaultDataset);
   if(!normal)throw new Error('Layered observations require the default material.');
-  const observedLenses=(observations?.lenses??[]).map(lens=>{
+  const observedDatasets=(observations?.datasets??[]).map(dataset=>{
     const product=(kind:string)=>{
-      const matches=lens.products.filter(product=>product.kind===kind), selected=matches.find(product=>product.filename.includes('@2x'))??matches[0];
-      if(!selected)throw new Error(`Observation ${lens.id} has no ${kind} product.`);
+      const matches=dataset.products.filter(product=>product.kind===kind), selected=matches.find(product=>product.filename.includes('@2x'))??matches[0];
+      if(!selected)throw new Error(`Observation ${dataset.id} has no ${kind} product.`);
       return `${geometry.publicPrefix}${selected.filename}`;
     };
-    return {...normal,id:lens.id,materialLens:materialLenses.defaultLens,surfaceUrl:product('surface'),surface2xUrl:product('surface'),polesUrl:product('poles'),thumbnailUrl:product('thumbnail')};
+    return {...normal,id:dataset.id,materialDataset:materialDatasets.defaultDataset,surfaceUrl:product('surface'),surface2xUrl:product('surface'),polesUrl:product('poles'),thumbnailUrl:product('thumbnail')};
   });
-  const presentationLenses={...materialLenses,controls:[...materialLenses.controls,...observedLenses]};
+  const presentationDatasets={...materialDatasets,controls:[...materialDatasets.controls,...observedDatasets]};
   const views=await prepareCutawayMaterials({...context,config:materials,objectLightDirection:radial.ringSource.shadowModel.objectLightDirection});
-  const compiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:{...radial,lenses:materialLenses,views}});
+  const compiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:{...radial,datasets:materialDatasets,views}});
   const material=await compiler.composeMaterialSurfaces(metadata);
   const {runtimeScene:scene}=await compiler.prepareLayeredScene(material);
   // The raw material masters only feed the composition above; they are not published, and prepared/ holds published files.
@@ -93,18 +93,17 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   if(relative(projectRoot,stylesheetPath).startsWith('..'))throw new TypeError('Layered stylesheet escapes project.');
   const stylesheet=await readFile(stylesheetPath,'utf8');
   const layouts=prepareLayeredLeafLayouts({scene,stylesheet,config:presentationConfig});
-  const raw=await prepareLayeredOblatePresentation({publicDirectory,config:presentationConfig,plan:scene,layouts,lenses:presentationLenses,views,sky,sun});
+  const raw=await prepareLayeredOblatePresentation({publicDirectory,config:presentationConfig,plan:scene,layouts,datasets:presentationDatasets,views,sky,sun});
   const normalizedPresentation={...raw,materials:prepareMaterialTracks(raw),variants:raw.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
   const presentation=withFocusedCamera(normalizedPresentation,sky);
   requirePreparedPresentation(presentation,{controls});
-  const definition={...presentation,schema:'cssearth-object-runtime@4',id:descriptor.id,controls};
+  const definition={...presentation,schema:'cssearth-object-runtime@5',id:descriptor.id,controls};
   // Only consumer-used scene data is published. Dormant moon/orbit generators,
   // raw masters and diagnostic shader metadata are not runtime dependencies.
-  const values={scene,sky,sun,runtime:definition,'material-lenses':presentationLenses,views,layouts};
+  const values={scene,sky,sun,runtime:definition,'material-datasets':presentationDatasets,views,layouts};
   for(const[name,value]of Object.entries(values))await writeJson(resolve(outputDirectory,`${name}.json`),value);
   await prepareLayeredConsumerManifest({id:descriptor.id,definition,content,stylesheet,publicDirectory,objectDirectory:write?objectRoot:outputDirectory});
-  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:definition});
-  await writeFile(resolve(outputDirectory,'object.json'),payload);
+  // The prepared/object.json transport is built from runtime.json when read (@cssearth/objects/node prepared-transport).
   if(write) {
     await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json'}},null,2)+'\n');
   }

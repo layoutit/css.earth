@@ -19,7 +19,7 @@ Rotation is assumed synchronous. Limbach et al. (2025) expect tidal locking; no 
 
 ## Evidence
 
-See the [system evidence](../wd-1856-534/evidence/README.md).
+See the system evidence.
 
 ## Known problems
 

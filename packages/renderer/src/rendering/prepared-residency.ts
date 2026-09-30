@@ -23,7 +23,7 @@ import { createPreparedImageStore } from "./prepared-image-store.js";
 import { createPreparedAssetResolver } from "./prepared-asset-origin.js";
 
 // Demands are prepared keys in priority order. This owner knows capacities and
-// leases, not planets, texture rows, lens semantics, or presentation elements.
+// leases, not planets, texture rows, dataset semantics, or presentation elements.
 export function createPreparedResidency({
   assets, createImage, onReady = () => {}, onWarmError = () => {}, onCleanupError = onWarmError,
   schedule = setTimeout, unschedule = clearTimeout, assetOrigin, readAssetHashes,

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "surface-pluto-color-mosaic-jpg",
@@ -14,7 +14,7 @@
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "scene",
-        "lenses",
+        "datasets",
         "navigation"
       ],
       "capture": {
@@ -39,7 +39,7 @@
       }
     },
     {
-      "id": "lenses-pluto-monochrome-tif",
+      "id": "datasets-pluto-monochrome-tif",
       "path": "lenses/pluto-monochrome.tif",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
       "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
@@ -50,7 +50,7 @@
       "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -74,7 +74,7 @@
       }
     },
     {
-      "id": "lenses-pluto-dem-tif",
+      "id": "datasets-pluto-dem-tif",
       "path": "lenses/pluto-dem.tif",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
       "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
@@ -85,7 +85,7 @@
       "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -135,7 +135,7 @@
       }
     },
     {
-      "id": "lenses-pluto-dem-lbl",
+      "id": "datasets-pluto-dem-lbl",
       "path": "lenses/pluto-dem.lbl",
       "origin": "https://astrogeology.usgs.gov/ckan/dataset/f1332f71-8003-4a75-a330-acce6a3bf09f/resource/70d0d3ac-6ccb-4062-9cc7-25565ef776a4/download/pluto_newhorizons_global_dem_300m_jul2017_16bit.lbl",
       "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
@@ -146,7 +146,7 @@
       "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -284,7 +284,7 @@
       "redistribution": "Prepared raster assets.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -306,24 +306,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored CSS geometry, UV sampling and seam settings."
-      }
-    },
-    {
-      "id": "pluto-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Pluto sky, sun, and marker recipe",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside the inputs.",
-      "redistribution": "Prepared celestial assets.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
       }
     },
     {
@@ -368,7 +350,7 @@
       "redistribution": "Preparation provenance and reproducibility.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -378,14 +360,14 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
+      "origin": "Repository-authored Pluto panel, dataset, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside the inputs.",
       "redistribution": "Prepared shell content with source provenance.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",

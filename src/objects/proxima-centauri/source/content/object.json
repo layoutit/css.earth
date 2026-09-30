@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "proxima-centauri",
   "displayName": "Proxima Centauri",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere.",
-        "thumbnail": "proxima-centauri-lens-color.webp",
+        "thumbnail": "proxima-centauri-dataset-color.webp",
         "surface": "proxima-centauri-surface-color@2x.webp",
         "poles": "proxima-centauri-poles-color@2x.webp",
         "source": {

@@ -8,7 +8,7 @@ It is the only planet known around WASP-29. Its orbit and size follow Stassun et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.92271133124 d Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): a/R* 12.18; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): inclination 88.8 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460929.713786 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-29's measured colour (#ffd3b8, the colour lens of wasp-29 (src/objects/wasp-29/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-29's measured colour (#ffd3b8, the colour dataset of wasp-29 (src/objects/wasp-29/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of WASP-29's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (96, 103, 105), folded onto its orbit. Upper limits and rows without an error are left out.
 

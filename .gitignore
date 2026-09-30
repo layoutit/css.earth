@@ -117,7 +117,7 @@ src/objects/*/source/**/*.tab
 src/objects/*/source/**/*.obj
 src/objects/*/source/**/*.bds
 
-# Numeric grids the missing-data lenses download through their acquisition plans.
+# Numeric grids the missing-data datasets download through their acquisition plans.
 # Mars catalogue query pages are NASA Trek downloads the catalogues acquisition group restores; the rasterized
 # grids they make are small and tracked, like the geologic-unit grids.
 src/objects/mars/source/catalogues/*/*.query*.json
@@ -205,10 +205,10 @@ src/objects/*/source/**/*.bpc
 !src/objects/*/source/science/geology-*/*.gdb.zip
 !src/objects/*/source/science/geology-*/Screenshot *.png
 
-# SMC compact replay inputs: small PNGs prepare:nebulae needs to rebuild the lens bank and the neutral emission volume.
+# SMC compact replay inputs: small PNGs prepare:nebulae needs to rebuild the dataset bank and the neutral emission volume.
 !src/objects/smc/source/compact/lenses/*/*.png
 !src/objects/smc/source/compact/neutral/slices/*/*.png
-# LMC compact replay inputs, the same shape plus the model projection its lens tone curves read.
+# LMC compact replay inputs, the same shape plus the model projection its dataset tone curves read.
 !src/objects/lmc/source/compact/lenses/*/*.png
 !src/objects/lmc/source/compact/neutral/slices/*/*.png
 !src/objects/lmc/source/compact/fit-projection.png
@@ -268,14 +268,14 @@ src/objects/*/source/**/*.bpc
 /site/prepared-facilities.json
 /site/prepared-catalogue.mjs
 /site/prepared-overview-objects.json
-/site/prepared-lens-volumes.json
+/site/prepared-dataset-volumes.json
 /site/prepared-stellar-extents.json
 /site/prepared-local-group-galaxies.json
 /site/prepared-context-objects.mts
 /site/prepared-context-json.mts
 /site/prepared-feature-index.json
-/site/prepared-lens-billboards.json
-/site/prepared-lens-billboards.webp
+/site/prepared-dataset-billboards.json
+/site/prepared-dataset-billboards.webp
 /public/navigation/dataset-sprites/
 /public/features/
 /packages/astronomy/src/data/generated/
@@ -364,3 +364,99 @@ src/objects/mars/source/crust/*.dat
 
 # Netlify functions bundled by site/build/bundle-netlify-functions.mts during build:deploy.
 netlify/functions-bundled/
+
+# Per-object download rules, collected from the object folders. Rules shared by many objects apply to every object.
+src/objects/*/source/photometry/*.dat
+src/objects/*/source/photometry/*.gz
+src/objects/*/source/reference/*.pdf
+src/objects/*/source/shape/*.wf
+src/objects/be-ceti/source/science/willamo-2022/*.dat
+src/objects/ce-tauri/source/observations/*.fit
+src/objects/chi1-orionis/source/science/willamo-2022/*.dat
+src/objects/dione/source/vims/data/**/*.img
+src/objects/donaldjohanson/source/shape/*.bds
+src/objects/europa/source/geology/*.shp
+src/objects/europa/source/geology/*.dbf
+src/objects/europa/source/geology/*.shx
+src/objects/europa/source/geology/*.sbn
+src/objects/europa/source/geology/*.sbx
+src/objects/europa/source/geology/*.cpg
+src/objects/europa/source/composition/fit_SPHERE.json.gz
+src/objects/europa/source/composition/reflectance_SPHERE.json.gz
+src/objects/europa/source/galileo/*.tif
+src/objects/ganymede/source/composition/fit_SPHERE.json.gz
+src/objects/gj-504-b/source/illustration/GJ_504_b.jpg
+src/objects/hat-p-11b/source/illustration/HAT-P-11_b.jpg
+src/objects/hd-110067/source/photometry/espresso.fits
+src/objects/hd-181327/source/photometry/tess/
+src/objects/hd-189733/source/photometry/tess/
+src/objects/hd-189733b/source/science/lally-2025/output_E.npy
+src/objects/hd-189733b/source/illustration/HD_189733_b.jpg
+src/objects/hd-29615/source/science/willamo-2022/*.dat
+src/objects/hd-35296/source/science/willamo-2022/*.dat
+src/objects/hd-75732e/source/illustration/55_Cancri_e_1_24364.glb
+src/objects/iota-horologii/source/science/alvarado-gomez-2025/*.dat
+src/objects/kepler-22b/source/illustration/Kepler-22_b.jpg
+src/objects/kepler-452b/source/illustration/Kepler-452_b.jpg
+src/objects/kepler-7b/source/illustration/Kepler-7_b.jpg
+src/objects/luhman-16/source/photometry/faherty-2014-mage.txt
+src/objects/luhman-16b/source/science/ureshino-2026/*.npy
+src/objects/luhman-16b/source/photometry/faherty-2014-mage.txt
+src/objects/moon/source/geology/*.shp
+src/objects/moon/source/geology/*.dbf
+src/objects/moon/source/geology/*.shx
+src/objects/moon/source/geology/*.sbn
+src/objects/moon/source/geology/*.sbx
+src/objects/moon/source/geology/*.cpg
+src/objects/moon/source/science/diviner-ghrm/*.img
+src/objects/moon/source/science/lola/*.img
+src/objects/r-doradus/source/observations/*
+src/objects/rhea/source/vims/data/**/*.img
+src/objects/titan/source/geology/*.shp
+src/objects/titan/source/geology/*.lyr
+src/objects/trappist-1b/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/trappist-1b/source/science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml
+src/objects/trappist-1b/source/illustration/TRAPPIST-1_b.jpg
+src/objects/trappist-1c/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/trappist-1c/source/science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml
+src/objects/trappist-1c/source/illustration/TRAPPIST-1_c.jpg
+src/objects/trappist-1d/source/illustration/TRAPPIST-1_d.jpg
+src/objects/trappist-1e/source/illustration/TRAPPIST-1_e.jpg
+src/objects/trappist-1f/source/illustration/TRAPPIST-1_f.jpg
+src/objects/trappist-1g/source/illustration/TRAPPIST-1_g.jpg
+src/objects/trappist-1h/source/illustration/TRAPPIST-1_h.jpg
+src/objects/v1358-orionis/source/science/willamo-2022/*.dat
+src/objects/wasp-103b/source/science/kreidberg-2018/pressure-temperature.dat
+src/objects/wasp-121b/source/science/evans-soma-2025/*.txt
+src/objects/wasp-18b/source/science/challener-2025/*.npz
+src/objects/wasp-43b/source/science/challener-2024/wasp-43b.tar
+src/objects/wasp-43b/source/science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml
+!src/objects/*/source/presentation/context.png
+!src/objects/*/source/reference/*.csv
+!src/objects/asteroid-1992-sk/source/reference/pds-a10115_spin_state.csv
+!src/objects/asteroid-2001-sn263/source/shape/*.tab
+!src/objects/asteroid-2001-sn263/source/reference/*.tab
+!src/objects/betelgeuse-shell/source/previews/*.jpg
+!src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits
+!src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits
+!src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-4mas.fits
+!src/objects/betelgeuse/source/observations/betelgeuse-matisse-2018-12-continuum-squeeze.fits
+!src/objects/betelgeuse/source/observations/betelgeuse-matisse-2018-12-continuum-3mas.fits
+!src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-12-continuum-squeeze.fits
+!src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits
+!src/objects/dione/source/vims/dione-infrared.tif
+!src/objects/dione/source/vims/dione-water-ice.tif
+!src/objects/haumea/source/alma/haumea-band7-continuum-cutout.fits
+!src/objects/pi1-gruis/source/observations/pi1-gruis-pionier-2014-09-squeeze.fits
+!src/objects/pi1-gruis/source/observations/pi1-gruis-pionier-2014-09-2.1mas.fits
+!src/objects/piazzia/source/reference/*.tab
+!src/objects/r-doradus/source/observations/r-doradus-alma-338ghz-0p625mas.fits
+!src/objects/ra-shalom/source/reference/pds-a2100_spin_state.csv
+!src/objects/rhea/source/vims/rhea-infrared.tif
+!src/objects/rhea/source/vims/rhea-water-ice.tif
+!src/objects/sn263-beta/source/shape/*.tab
+!src/objects/sn263-beta/source/reference/*.tab
+!src/objects/sn263-gamma/source/shape/*.tab
+!src/objects/sn263-gamma/source/reference/*.tab
+!src/objects/susi/source/reference/*.tab
+!src/objects/titan/source/geology/titan-geologic-units.tif

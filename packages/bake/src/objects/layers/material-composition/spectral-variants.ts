@@ -2,7 +2,7 @@ import { writeLossyWebp } from '../../../raster/index.ts';
 import {parse} from '@cssearth/core/schema';
 import {spectralRecipe, type SpectralRecipe} from './spectral-recipe.ts';
 import type {Channels, OutputInfo} from 'sharp';
-type SpectralLens = SpectralRecipe['lenses'][number];
+type SpectralDataset = SpectralRecipe['datasets'][number];
 type ColorPalette = readonly (readonly number[])[];
 interface RawImage {data: Buffer; info: {width: number; height: number; channels: Channels}}
 interface ScalarMap {width: number; height: number; values: Float32Array; coverage: Uint8Array}
@@ -18,12 +18,12 @@ import {validateRelativePath} from '../giant/index.ts';
 /** Compose source-selected scalar/thermal surfaces and the corresponding material variants. */
 export async function prepareSpectralMaterialVariants({sourceDirectory,publicDirectory,stagingDirectory,config: input}: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown}) {
 const config = parse(input, spectralRecipe, 'spectral material recipe');
-validateMaterialRecipe(config, 'cssearth-spectral-material-variants@1');
-if(!Array.isArray(config.lenses)||config.lenses.some(plan=>!['scalar-map','morphology-response'].includes(plan.operation)))throw new TypeError('Unsupported spectral material operation.');
+validateMaterialRecipe(config, 'cssearth-spectral-material-variants@2');
+if(!Array.isArray(config.datasets)||config.datasets.some(plan=>!['scalar-map','morphology-response'].includes(plan.operation)))throw new TypeError('Unsupported spectral material operation.');
 validateRelativePath(config.sourceSubdirectory);
-for(const plan of config.lenses)for(const filename of plan.sourceFiles)validateRelativePath(filename);
-// Every lens names its files; they are the inputs, read from the source subdirectory.
-await verifyObservationSources(sourceDirectory,config.lenses.flatMap(plan=>plan.sourceFiles.map(filename=>({path:`${config.sourceSubdirectory}/${filename}`}))));
+for(const plan of config.datasets)for(const filename of plan.sourceFiles)validateRelativePath(filename);
+// Every dataset names its files; they are the inputs, read from the source subdirectory.
+await verifyObservationSources(sourceDirectory,config.datasets.flatMap(plan=>plan.sourceFiles.map(filename=>({path:`${config.sourceSubdirectory}/${filename}`}))));
 
 
 
@@ -57,10 +57,10 @@ const poleAtlasHeight = config.parameters.poleAtlasHeight;
 const polarBoundaryLatitude = config.parameters.polarBoundaryLatitude;
 const materialModes = config.parameters.materialModes;
 const surfaceAxisRatio = config.parameters.objectEquatorialRadiusKm / config.parameters.objectPolarRadiusKm;
-const materialVariantId = (lensId: string, mode: string) =>
-  mode === "full" ? lensId : `${lensId}-${mode}`;
+const materialVariantId = (datasetId: string, mode: string) =>
+  mode === "full" ? datasetId : `${datasetId}-${mode}`;
 
-const lensPlans = config.lenses;
+const datasetPlans = config.datasets;
 
 const normalAssets = Object.freeze({
   surface: resolve(stagingRoot, config.files.surface),
@@ -90,15 +90,15 @@ const normalAssets = Object.freeze({
 });
 const highResolutionDetailPromise = prepareHighResolutionDetailCarrier();
 
-const prepared: Awaited<ReturnType<typeof prepareLens>>[] = [];
+const prepared: Awaited<ReturnType<typeof prepareDataset>>[] = [];
 await prepareThumbnail(normalAssets.surface, resolve(publicRoot, config.files.normalThumbnail));
-for (const plan of lensPlans) prepared.push(await prepareLens(plan));
+for (const plan of datasetPlans) prepared.push(await prepareDataset(plan));
 
 const descriptor = {...config.descriptor,controls:config.controlOrder.map(id=>{const control=prepared.find(plan=>plan.id===id)??config.descriptor.controls.find(control=>control.id===id);if(!control)throw new TypeError(`Missing spectral control ${id}`);return control;})};
 
 
 
-async function prepareLens(plan: SpectralLens) {
+async function prepareDataset(plan: SpectralDataset) {
   const surfacePath = resolve(publicRoot, `${config.namespace}-surface-${plan.id}.webp`);
   const surface2xPath = resolve(publicRoot, `${config.namespace}-surface-${plan.id}@2x.webp`);
   const preparedSurface = plan.operation === "morphology-response"
@@ -155,16 +155,16 @@ async function prepareLens(plan: SpectralLens) {
       plan,
     ),
   ]));
-  const thumbnailPath = resolve(publicRoot, `${config.namespace}-lens-${plan.id}.webp`);
+  const thumbnailPath = resolve(publicRoot, `${config.namespace}-dataset-${plan.id}.webp`);
   await prepareThumbnail(surfacePath, thumbnailPath);
   return Object.freeze({
     id: plan.id,
-    materialLens: plan.id,
+    materialDataset: plan.id,
     label: plan.label,
     shortLabel: plan.shortLabel,
     filter: plan.filter,
     wavelength: plan.wavelength,
-    thumbnailUrl: `${config.publicPrefix}${config.namespace}-lens-${plan.id}.webp`,
+    thumbnailUrl: `${config.publicPrefix}${config.namespace}-dataset-${plan.id}.webp`,
     surfaceUrl: `${config.publicPrefix}${config.namespace}-surface-${plan.id}.webp`,
     surface2xUrl: `${config.publicPrefix}${config.namespace}-surface-${plan.id}@2x.webp`,
     polesUrl: `${config.publicPrefix}${config.namespace}-poles-${plan.id}.webp`,
@@ -217,7 +217,7 @@ async function writeProjectiveSurface(source: RawImage, width: number, height: n
     .toFile(outputPath);
 }
 
-async function prepareScalarSurface(plan: Extract<SpectralLens,{operation:'scalar-map'}>) {
+async function prepareScalarSurface(plan: Extract<SpectralDataset,{operation:'scalar-map'}>) {
   const maps = await Promise.all(plan.sourceFiles.map(async (filename) =>
     readFitsPrimary(await readFile(resolve(sourceRoot, config.sourceSubdirectory, filename)))));
   if (maps.some(({ width, height }) => width !== config.scalar.width || height !== config.scalar.height)) {
@@ -242,7 +242,7 @@ async function prepareScalarSurface(plan: Extract<SpectralLens,{operation:'scala
   });
 }
 
-async function prepareThermalSurface(plan: SpectralLens): Promise<RawImage> {
+async function prepareThermalSurface(plan: SpectralDataset): Promise<RawImage> {
   const detail = await highResolutionDetailPromise;
   const { width, height } = detail.source.info;
   const output = Buffer.alloc(width * height * 4);
@@ -387,7 +387,7 @@ function falseColorMap(map: ScalarMap, palette: ColorPalette, low: number, high:
   return output;
 }
 
-async function preparePolarAtlas(body: RawImage, plan: SpectralLens, outputPath: string) {
+async function preparePolarAtlas(body: RawImage, plan: SpectralDataset, outputPath: string) {
   const existing = await sharp(normalAssets.poles).ensureAlpha().raw()
     .toBuffer({ resolveWithObject: true });
   const output = colorizeRgba(existing.data, plan.palette, config.colorExponent);
@@ -431,7 +431,7 @@ async function preparePolarAtlas(body: RawImage, plan: SpectralLens, outputPath:
 
 
 
-async function prepareMaterial(inputPath: string, outputPath: string, plan: SpectralLens) {
+async function prepareMaterial(inputPath: string, outputPath: string, plan: SpectralDataset) {
   const source = await sharp(inputPath).ensureAlpha().raw()
     .toBuffer({ resolveWithObject: true });
   const output = colorizeRgba(source.data, plan.palette, plan.materialGain);

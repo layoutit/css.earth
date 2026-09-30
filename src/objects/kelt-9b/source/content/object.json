@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kelt-9b",
   "displayName": "KELT-9b",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "temperature",
         "label": "Spitzer",
         "qualification": "Published fit · Mansfield et al. 2020 · Spitzer 4.5 µm, 2018 · longitude only",
-        "thumbnail": "kelt-9b-lens-temperature.webp",
+        "thumbnail": "kelt-9b-dataset-temperature.webp",
         "surface": "kelt-9b-surface-temperature@2x.webp",
         "poles": "kelt-9b-poles-temperature@2x.webp",
         "source": {

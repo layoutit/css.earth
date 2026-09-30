@@ -106,8 +106,8 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   if (sourceData.observations.frame.centerIcrsDegrees.some((n, i) => Math.abs(n - sampled.centerIcrsDegrees[i]!) > 1e-8))
     throw new TypeError('Spatial sample origin and registered observations differ.');
   const reference = sourceData.images.find(image => image.id === recipe.defaultSourceId);
-  if (!reference || Object.keys(sampled.lensComponents).length !== sourceData.images.length || sourceData.images.some(image => !sampled.lensComponents[image.id]))
-    throw new TypeError('Every sampled spectral lens needs an explicit component mixture.');
+  if (!reference || Object.keys(sampled.datasetComponents).length !== sourceData.images.length || sourceData.images.some(image => !sampled.datasetComponents[image.id]))
+    throw new TypeError('Every sampled spectral dataset needs an explicit component mixture.');
   const inputPins = [{ path: recipe.sampledRecipe }, { path: sampled.evidence.path }, { path: sampled.source.path }];
   // Named by its compiler recipe, like every compiler result; reused while its saved request is unchanged.
   const id = recipe.id, identity = { version: COMPILER_VERSION, recipePath: request.recipePath, recipe, inputPins, starProfile: COMPILER_STAR_PROFILE_PATH,
@@ -151,7 +151,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
       const image = sourceData.images.find(image => image.id === sourceId);
       if (!image) throw new TypeError('Emission-fit source unavailable.');
       progress(`Fitting ${image.label} · measured filaments and inferred diffuse emission…`, .27);
-      const fit = fitSampledEmission(prepared, image, sampled.lensComponents[sourceId]!, sampled.emissionFit, skyBounds, signal);
+      const fit = fitSampledEmission(prepared, image, sampled.datasetComponents[sourceId]!, sampled.emissionFit, skyBounds, signal);
       fitsBySource.set(sourceId, fit);
       emissionFits.push({ sourceId, grid: await save(`diffuse-${sourceId}.float32`, float32LittleEndian(fit.diffuse)),
         receipt: await save(`emission-fit-${sourceId}.json`, Buffer.from(JSON.stringify(fit.receipt))) });
@@ -163,7 +163,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   const referenceFit = fitsBySource.get(reference.id);
   const neutralField = referenceFit ? prepared.field({ ejecta: referenceFit.receipt.ejectaGain, pwn: 1 }, 1, referenceFit.diffuse) : field;
   const mixtureFields = new Map(sourceData.images.map(image => [image.id,
-    fitsBySource.get(image.id)?.field ?? prepared.field(sampled.lensComponents[image.id]!)]));
+    fitsBySource.get(image.id)?.field ?? prepared.field(sampled.datasetComponents[image.id]!)]));
   const samplePlanningEmission = maximumPlanningEmission([neutralField.sampleEmission,
     ...sourceData.images.map(image => mixtureFields.get(image.id)!.sampleEmission)]);
   started = performance.now();
@@ -171,15 +171,15 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   // Within one mixture the normal baker enforces exact shared alpha for its RGB materials.
   const groups = new Map<string, typeof sourceData.images>();
   for (const image of sourceData.images) {
-    const weights = sampled.lensComponents[image.id]!, key = fitsBySource.has(image.id) ? image.id : `${weights.ejecta},${weights.pwn}`;
+    const weights = sampled.datasetComponents[image.id]!, key = fitsBySource.has(image.id) ? image.id : `${weights.ejecta},${weights.pwn}`;
     const group = groups.get(key) ?? []; group.push(image); groups.set(key, group);
   }
   const neutral = await bakeCompiler({ root, outputDirectory: `${directory}/scene-neutral`, id, fieldIdentity, boundsArcsec: field.bounds,
     samplePlanningEmission,
-    skyBoundsArcsec: skyBounds, sampleEmission: neutralField.sampleEmission, lenses: [{ id: 'neutral-material', label: 'Neutral components', sampleMaterial(_x, _y, _z, rgb) { rgb.fill(255); return true; } }],
+    skyBoundsArcsec: skyBounds, sampleEmission: neutralField.sampleEmission, datasets: [{ id: 'neutral-material', label: 'Neutral components', sampleMaterial(_x, _y, _z, rgb) { rgb.fill(255); return true; } }],
     stars: stars.map(({ materials: _materials, ...star }) => star), signal,
     progress: p => progress(`Neutral components · ${p.message}`, .3 + .08 * sampledBakeProgress(p)) });
-  const lenses: CompilerBakeResult['lenses'] = [], materialReceipts: { material: ReturnType<typeof prepareSampledMaterial>['receipt'];
+  const datasets: CompilerBakeResult['datasets'] = [], materialReceipts: { material: ReturnType<typeof prepareSampledMaterial>['receipt'];
     fit?: ReturnType<typeof fitSampledMaterialColors>['receipt'] }[] = []; let groupIndex = 0;
   let referenceMaterial: ReturnType<typeof prepareSampledMaterial>['sampleMaterial'] | undefined;
   for (const images of groups.values()) {
@@ -187,9 +187,9 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     const materials = images.map(image => {
       progress(`Assigning ${image.label} colors to finite 3D emitters…`, .38 + .5 * groupIndex / groups.size);
       const fit = fitsBySource.get(image.id);
-      const fittedMaterial = fit ? fitSampledMaterialColors(fits.values, sampled, prepared, image, sampled.lensComponents[image.id]!,
+      const fittedMaterial = fit ? fitSampledMaterialColors(fits.values, sampled, prepared, image, sampled.datasetComponents[image.id]!,
         { ...fit.receipt, diffuse: fit.diffuse }, signal) : undefined;
-      const material = prepareSampledMaterial(fits.values, sampled, prepared, image, sampled.lensComponents[image.id]!,
+      const material = prepareSampledMaterial(fits.values, sampled, prepared, image, sampled.datasetComponents[image.id]!,
         fit ? { ...fit.receipt, diffuse: fit.diffuse, colors: fittedMaterial?.colors } : undefined, signal);
       materialReceipts.push({ material: material.receipt, ...(fittedMaterial ? { fit: fittedMaterial.receipt } : {}) });
       if (image.id === reference.id) referenceMaterial = material.sampleMaterial;
@@ -198,14 +198,14 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     const bank = await bakeCompiler({ root, outputDirectory: `${directory}/scene-${groupIndex}`, id, fieldIdentity,
       sampling: neutral.sampling,
       boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: mixture.sampleEmission,
-      lenses: materials, signal,
+      datasets: materials, signal,
       progress: p => progress(`${images.map(i => i.label).join(' / ')} · ${p.message}`, .4 + .5 * (groupIndex + sampledBakeProgress(p)) / groups.size) });
-    lenses.push(...bank.lenses); groupIndex++;
+    datasets.push(...bank.datasets); groupIndex++;
   }
   progress('Registering spectral pixels on the retained union geometry…', .91);
-  const registered = await registerComponentBanks(root, `${directory}/registered`, neutral, lenses, signal);
+  const registered = await registerComponentBanks(root, `${directory}/registered`, neutral, datasets, signal);
   const scene = await prepareSampledSceneStars(root, `${directory}/star-materials`, {
-    ...registered, lenses: sourceData.images.map(image => registered.lenses.find(lens => lens.id === image.id)!),
+    ...registered, datasets: sourceData.images.map(image => registered.datasets.find(dataset => dataset.id === image.id)!),
   }, stars);
   pipeline.push({ id: 'bake', label: 'Bake component-aware spectral volumes', state: 'complete', seconds: (performance.now() - started) / 1000 });
   const sources: CompilerResult['sources'] = [];
@@ -215,9 +215,9 @@ export async function compileSampledNebula(root: string, request: CompilerReques
       boundsArcsec: skyBounds, original: await save(`source-${image.id}.png`, original.bytes), starless: await save(`starless-${image.id}.png`, starless.bytes) });
   }
   if (!referenceMaterial) throw new Error('Reference 3D material was not prepared.');
-  const comparison = await sampledPanels(referenceFit?.field ?? prepared.field(sampled.lensComponents[reference.id]!), reference, skyBounds, referenceMaterial);
+  const comparison = await sampledPanels(referenceFit?.field ?? prepared.field(sampled.datasetComponents[reference.id]!), reference, skyBounds, referenceMaterial);
   const sampledPrior = { recipe: await save('sampled-recipe.json', sampledBytes), evidence: await save('physical-evidence.json', evidenceBytes), source: inputPins[2],
-    emissionComponents: sampled.lensComponents, coordinateEvidence: prepared.evidence, emissionFit: sampled.emissionFit, emissionFits };
+    emissionComponents: sampled.datasetComponents, coordinateEvidence: prepared.evidence, emissionFit: sampled.emissionFit, emissionFits };
   const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, inputPins,
     recipe, recipePath: request.recipePath, request, sampledPrior, pipeline,
     materials: { method: 'finite-emitter-chromaticity@1', qualification: 'requires-front-and-side-visual-acceptance', receipts: materialReceipts,

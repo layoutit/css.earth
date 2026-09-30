@@ -31,7 +31,7 @@ test('OPUS rows parse in column order, and a row without a centre resolution is 
     { opusId: 'nh-lorri-lor_0299174108', instrument: 'New Horizons LORRI', time: '2015-07-14T10:03:09.806', centerKmPerPixel: 0.30188, phaseDegrees: null }]);
 });
 
-test('imagery is each photograph lens\'s finest frame and each map lens\'s native scale; false colour, science and shape are not', () => {
+test('imagery is each photograph dataset\'s finest frame and each map dataset\'s native scale; false colour, science and shape are not', () => {
   const surfaces = { surfaces: [
     { id: 'shape', appearance: 'neutral', source: { id: 'shape', width: 100 }, projection: 'x' },
     { id: 'normal', observation: { frames: [{ id: 'a', footprint: { nadirMedianMeters: 900 } }, { id: 'b', footprint: { nadirMedianMeters: 450 } }] } },
@@ -41,11 +41,11 @@ test('imagery is each photograph lens\'s finest frame and each map lens\'s nativ
     { id: 'elevation', falseColor: false, scientific: {}, projection: 'equirectangular', source: { id: 'dtm', width: 2048 } },
     { id: 'unscaled', falseColor: false, projection: 'equirectangular', source: { id: 'usgs-frames' } }] };
   // A 198 km body: a 5760-pixel global map is 2 pi 198000 / 5760 = 216 m at the equator.
-  assert.deepEqual(shippedImagery(surfaces, 198).map(item => [item.lens, item.kind, item.meters === null ? null : Math.round(item.meters)]),
+  assert.deepEqual(shippedImagery(surfaces, 198).map(item => [item.dataset, item.kind, item.meters === null ? null : Math.round(item.meters)]),
     [['global', 'map', 216], ['mosaic', 'map', 417], ['normal', 'photograph', 450], ['unscaled', 'map', null]]);
 });
 
-test('the verdict: too few pixels first, then no lens, then the upgrade factor', () => {
+test('the verdict: too few pixels first, then no dataset, then the upgrade factor', () => {
   // Hydra's best MVIC colour scan: about 50 km across at 4.6 km/px is 11 px.
   assert.equal(imageryVerdict({ shippedMeters: 1137, opusKmPerPixel: 4.6, diameterKm: 50, minimumPixels: 50 }).verdict, 'too-small');
   assert.equal(imageryVerdict({ shippedMeters: null, opusKmPerPixel: 0.3, diameterKm: 50, minimumPixels: 50 }).verdict, 'candidate');

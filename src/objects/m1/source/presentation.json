@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "m1",
   "name": "Crab Nebula",
-  "defaultLens": "hubble-optical",
+  "defaultDataset": "hubble-optical",
   "sharedInputs": [
     "hubble-optical",
     "webb-infrared",
@@ -18,7 +18,7 @@
     "distance",
     "stellar-field"
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "hubble-optical",
       "label": "Hubble · optical lines",
@@ -201,7 +201,7 @@
     }
   ],
   "bank": {
-    "path": "src/objects/m1/prepared/lenses.json"
+    "path": "src/objects/m1/prepared/datasets.json"
   },
   "recipes": [
     {

@@ -10,7 +10,7 @@ export interface SolidReplayScene {
  rings?: ReplayRings;
  camera:CameraPlan;sky:ReturnType<typeof validatePreparedCubicSky>;sun:ReturnType<typeof validateDirectionalSunPlan>;systemTransform:string;
  bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
- surfaceTriangles?:number[][][];surfaceLensRanges?:readonly {lensId:string;start:number;count:number}[];
+ surfaceTriangles?:number[][][];surfaceDatasetRanges?:readonly {datasetId:string;start:number;count:number}[];
 }
 import {camera} from '../../../scene/index.ts';
 import {parse} from '@cssearth/core/schema';
@@ -24,7 +24,7 @@ const leaf=shape({tag:optional(text),className:optional(text),style:text,attribu
 const parseReplayRings:Decoder<ReplayRings>=shape({leaves:array(leaf),resource:shape({key:text,url:text,pool:text}),coverage:requireRecord,qualification:array(shape({id:text,qualification:text}))});
 export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:optional(parseReplayRings),camera:cameraPlan,sky:validatePreparedCubicSky,
   sun:validateDirectionalSunPlan,systemTransform:text,bodyLeaves:array(leaf),
-  surfaceTriangles:optional(array(array(array(number)))),surfaceLensRanges:optional(array(shape({lensId:text,start:number,count:number})))});
+  surfaceTriangles:optional(array(array(array(number)))),surfaceDatasetRanges:optional(array(shape({datasetId:text,start:number,count:number})))});
 /** Git and the runtime inventory identify every prepared byte; a digest recorded beside an asset is refused. */
 const absent=(value:unknown):undefined=>{if(value!==undefined)throw new TypeError(`is a recorded digest (${JSON.stringify(value)}); prepared assets carry none`);return undefined;};
 const asset=shape({url:text,width:number,height:number,bytes:number,sha256:absent});
@@ -34,6 +34,6 @@ const surface:Decoder<import('./solid-contract.ts').SolidSurface>=(value:unknown
 export const parseReplaySurfaces=shape({surfaces:array(surface)});
 export const parseReplayMaterial=shape({surfaces:array(surface),lighting:shape({url:text,columns:number,rowCount:number,frameCount:number,
   frames:array(shape({resource:text,frame:number,row:number,backgroundPosition:text,backgroundSize:text}))})});
-export const parseReplayLenses=shape({controls:array(shape({id:text,billboardColor:optional(text)}))});
-export const parseReplayControls=shape({lenses:parseReplayLenses});
+export const parseReplayDatasets=shape({controls:array(shape({id:text,billboardColor:optional(text)}))});
+export const parseReplayControls=shape({datasets:parseReplayDatasets});
 export const parseReplayMinimaps=shape({images:array(shape({id:text}))});

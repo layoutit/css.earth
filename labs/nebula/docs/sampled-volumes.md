@@ -47,8 +47,8 @@ also require requalification; their existing pinned assets were not replaced.
    Sources omitted from this fit retain their original mixture; Crab's Chandra
    wind therefore stays separate from its optical/infrared diffuse proxy.
 5. The baker prepares XYZ slabs in one unchanged angular frame. Within a mixture,
-   RGB lenses retain identical alpha. Between different tracers, component opacity
-   intentionally differs. Lens switching performs no fitting or baking.
+   RGB datasets retain identical alpha. Between different tracers, component opacity
+   intentionally differs. Dataset switching performs no fitting or baking.
 
 All displayed banks, including neutral, use one retained mesh. Preparation unions
 their actual nonempty raster footprints, because RGBA8 quantization can extend a
@@ -87,7 +87,7 @@ cannot identify synchrotron separately from dust, lines or processing artifacts.
 After fitting, atoms are sampled once into ordinary float grids; the existing
 XYZ baker and retained renderer consume the result. Original ejecta/wind arrays,
 astrometry, velocities and the existing star catalogue remain unchanged. The
-neutral view includes the reference lens's fitted diffuse field. Grid and fit
+neutral view includes the reference dataset's fitted diffuse field. Grid and fit
 receipts are hashed and checked alongside the base model before cached reuse.
 
 ## Registration and compact emission

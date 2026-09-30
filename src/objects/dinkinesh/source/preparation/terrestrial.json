@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "dinkinesh",
   "displayName": "Dinkinesh",
@@ -66,7 +66,7 @@
     },
     "radialTerrainAlternatives": [
       {
-        "lensId": "shape",
+        "datasetId": "shape",
         "path": "shape/model.obj",
         "format": "wavefront-obj",
         "grid": {
@@ -90,6 +90,6 @@
     "sunSource": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain. JPL supplies the heliocentric orbit; the mesh view has no propagated spin epoch."
   },
   "presentation": {
-    "defaultLens": "tempest-shape"
+    "defaultDataset": "tempest-shape"
   }
 }

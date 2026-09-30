@@ -10,8 +10,8 @@ export function mountStars<Bank, Publication>(backend: CompilerViewerBackend<Ban
     node.style.cssText = `position:absolute;left:50%;top:50%;display:block;border-radius:50%;background:${color};opacity:${star.alpha};visibility:hidden;text-decoration:none`;
     root.append(node); return node;
   });
-  function applyAppearance(index: number, lens: string | null) {
-    const appearance = compilerStarAppearance(result.stars[index]!, lens), node = nodes[index]!, sprites = result.starSprites;
+  function applyAppearance(index: number, dataset: string | null) {
+    const appearance = compilerStarAppearance(result.stars[index]!, dataset), node = nodes[index]!, sprites = result.starSprites;
     if (sprites && atlasUrl) {
       const entry = sprites.entries[appearance.rgb.join(',')]!;
       node.style.borderRadius = '0'; node.style.backgroundColor = 'transparent';
@@ -25,8 +25,8 @@ export function mountStars<Bank, Publication>(backend: CompilerViewerBackend<Ban
     }
   }
   result.stars.forEach((_star, index) => applyAppearance(index, null));
-  let visible = true, destroyed = false, lensId: string | null = null;
-  root.dataset.photometryLens = 'reference';
+  let visible = true, destroyed = false, datasetId: string | null = null;
+  root.dataset.photometryDataset = 'reference';
   return { publish(publication: Publication) {
     if (destroyed) return;
     const projection = backend.starProjection(publication, result.frame, { width: host.clientWidth, height: host.clientHeight });
@@ -34,7 +34,7 @@ export function mountStars<Bank, Publication>(backend: CompilerViewerBackend<Ban
     let count = 0;
     result.stars.forEach((star, index) => {
       const point = projection.project(star.positionUnits), node = nodes[index]!;
-      const appearance = compilerStarAppearance(star, lensId);
+      const appearance = compilerStarAppearance(star, datasetId);
       const diameter = (appearance.diameterUnits === undefined ? appearance.widthPx! : appearance.diameterUnits * focal / point.depth) * (result.starSprites?.diameterScale ?? 1);
       const shown = visible && appearance.alpha > 0 && point.depth > 0 && Math.abs(point.x) < halfWidth + diameter && Math.abs(point.y) < halfHeight + diameter;
       node.style.visibility = shown ? '' : 'hidden'; if (shown) {
@@ -43,9 +43,9 @@ export function mountStars<Bank, Publication>(backend: CompilerViewerBackend<Ban
       }
     });
     root.dataset.visibleStars = String(count);
-  }, setLens(value: string | null) {
-    lensId = value; root.dataset.photometryLens = value ?? 'reference';
-    result.stars.forEach((_star, index) => applyAppearance(index, lensId));
+  }, setDataset(value: string | null) {
+    datasetId = value; root.dataset.photometryDataset = value ?? 'reference';
+    result.stars.forEach((_star, index) => applyAppearance(index, datasetId));
   }, setVisible(value: boolean) { visible = value; root.style.display = value ? 'block' : 'none'; root.dataset.visibleStars = value ? root.dataset.visibleStars ?? '0' : '0'; },
   destroy() { destroyed = true; root.remove(); } };
 }

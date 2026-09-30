@@ -20,9 +20,9 @@ const legend = object({
 });
 // Reader text lives in the package's text.json, so the content recipe carries facts, dataset recipes and legends only.
 const content = object({
-  schema: literal('cssearth-object-content@1'), version: literal(1), id: string, displayName: string,
+  schema: literal('cssearth-object-content@2'), version: literal(1), id: string, displayName: string,
   panel: object({facts: array(fact), moreFacts: optional(array(fact)), schema: optional(string), objectId: optional(string), sources: optional(json)}),
-  lenses: object({titleKey: literal('lenses'), defaultLens: string, labels: optional(dictionary(string)),
+  datasets: object({titleKey: literal('datasets'), defaultDataset: string, labels: optional(dictionary(string)),
     controls: array(object({id: string, label: string, thumbnail: string, shortLabel: optional(string), filter: optional(string),
       qualification: optional(string), surface: optional(string), poles: optional(string), material: optional(string),
       legendNote: optional(string), falseColor: optional(boolean), view: optional(literal('exterior', 'interior')),

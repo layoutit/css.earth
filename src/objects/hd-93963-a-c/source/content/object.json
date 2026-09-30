@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-93963-a-c",
   "displayName": "HD 93963 A c",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by HD 93963; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hd-93963-a-c-lens-shape.webp",
+        "thumbnail": "hd-93963-a-c-dataset-shape.webp",
         "surface": "hd-93963-a-c-surface-shape@2x.webp",
         "poles": "hd-93963-a-c-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of HD 93963 A c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-93963-a's light, as its colour lens measures it."
+        "notes": "No image or colour of HD 93963 A c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-93963-a's light, as its colour dataset measures it."
       }
     ]
   },

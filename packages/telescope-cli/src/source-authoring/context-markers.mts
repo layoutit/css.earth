@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-/** Navigation markers for placed stars and hosted planets, rendered from each body's own default lens instead of the scaffold's
+/** Navigation markers for placed stars and hosted planets, rendered from each body's own default dataset instead of the scaffold's
  * flat gray disc:
  *
- * - a star: the photosphere colour of its colour lens, dimmed toward the limb by the lens's limb-darkening law (a uniform disc
+ * - a star: the photosphere colour of its colour dataset, dimmed toward the limb by the dataset's limb-darkening law (a uniform disc
  *   when it has none);
- * - a planet whose default lens is one colour (the neutral gray under its host's light, the black-body colour of its measured day side,
- *   or the false colour of its band photometry): a uniform disc of that colour, as the lens draws the sphere;
- * - a body whose default lens is a map (a hosted planet, or a brown dwarf with a surface map): that map in an orthographic view
+ * - a planet whose default dataset is one colour (the neutral gray under its host's light, the black-body colour of its measured day side,
+ *   or the false colour of its band photometry): a uniform disc of that colour, as the dataset draws the sphere;
+ * - a body whose default dataset is a map (a hosted planet, or a brown dwarf with a surface map): that map in an orthographic view
  *   centred on longitude 0 (a hosted planet's substellar point, as seen from its star), north up and east to the right, in the
- *   lens's palette and range, with any borders the lens draws.
+ *   dataset's palette and range, with any borders the dataset draws.
  *
  * Both are deterministic functions of pinned package inputs.
  *
@@ -30,20 +30,20 @@ export const MARKER_PATH = 'presentation/context.png';
 export const MARKER_SIZE = 512;
 /** The disc fills this share of the marker, as the scaffold's disc did. */
 const FILL = 0.9;
-/** Borders a lens draws are black, as in the papers' figures and the prepared lens. */
+/** Borders a dataset draws are black, as in the papers' figures and the prepared dataset. */
 const OUTLINE = [0, 0, 0] as const;
 
 const readJson = async (path: string) => JSON.parse(await readFile(path, 'utf8')) as unknown;
 const defaultSurface = async (id: string) => {
   const raster = requireRecord(await readJson(resolve(objects, id, 'source/preparation/raster.json')));
   const content = requireRecord(await readJson(resolve(objects, id, 'source/content/object.json')));
-  const lenses = requireRecord(content.lenses), defaultLens = requireString(lenses.defaultLens, `${id} default lens`);
-  // A lens that draws an attached volume (a debris disc) paints the body itself with the surface it names.
-  const control = requireArray(lenses.controls).map(entry => requireRecord(entry)).find(entry => entry.id === defaultLens);
-  const lens = control?.volume === undefined ? defaultLens : requireString(requireRecord(control.volume).surface, `${id} ${defaultLens} volume surface`);
-  const surface = requireArray(raster.surfaces).map(entry => requireRecord(entry)).find(entry => entry.id === lens);
-  if (!surface) throw new TypeError(`${id}: the default lens ${lens} has no raster surface.`);
-  return { lens, science: requireRecord(surface.science), source: requireString(surface.source, `${id} surface source`) };
+  const datasets = requireRecord(content.datasets), defaultDataset = requireString(datasets.defaultDataset, `${id} default dataset`);
+  // A dataset that draws an attached volume (a debris disc) paints the body itself with the surface it names.
+  const control = requireArray(datasets.controls).map(entry => requireRecord(entry)).find(entry => entry.id === defaultDataset);
+  const dataset = control?.volume === undefined ? defaultDataset : requireString(requireRecord(control.volume).surface, `${id} ${defaultDataset} volume surface`);
+  const surface = requireArray(raster.surfaces).map(entry => requireRecord(entry)).find(entry => entry.id === dataset);
+  if (!surface) throw new TypeError(`${id}: the default dataset ${dataset} has no raster surface.`);
+  return { dataset, science: requireRecord(surface.science), source: requireString(surface.source, `${id} surface source`) };
 };
 
 /** Paint a disc texel by texel: `shade` receives the orthographic position (x east, y north, both within the unit disc) and returns
@@ -61,7 +61,7 @@ function disc(shade: (x: number, y: number) => readonly [number, number, number]
   return sharp(rgba, { raw: { width: MARKER_SIZE, height: MARKER_SIZE, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
 }
 
-/** A placed star's marker: its colour lens, dimmed toward the limb where a limb-darkening law is given, a uniform disc where not. */
+/** A placed star's marker: its colour dataset, dimmed toward the limb where a limb-darkening law is given, a uniform disc where not. */
 export async function starMarker(id: string, { requireLimbDarkening = true } = {}) {
   const source = resolve(objects, id, 'source'), { science } = await defaultSurface(id);
   const { color, limbDarkening } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), science, 'photometry/stellar-color.json');
@@ -74,7 +74,7 @@ export async function starMarker(id: string, { requireLimbDarkening = true } = {
   });
 }
 
-/** A hosted planet's marker: its default lens map seen from the host star. */
+/** A hosted planet's marker: its default dataset map seen from the host star. */
 export async function planetMarker(id: string) {
   const source = resolve(objects, id, 'source'), { science } = await defaultSurface(id);
   const map = await loadScienceSurface(source, science);
@@ -89,8 +89,8 @@ export async function planetMarker(id: string) {
   });
 }
 
-/** The one colour a flat planet lens paints the sphere with, read the way interpret.mts reads it; undefined for a map lens. */
-async function flatLensColor(id: string, science: Record<string, unknown>, surfaceSource: string): Promise<readonly [number, number, number] | undefined> {
+/** The one colour a flat planet dataset paints the sphere with, read the way interpret.mts reads it; undefined for a map dataset. */
+async function flatDatasetColor(id: string, science: Record<string, unknown>, surfaceSource: string): Promise<readonly [number, number, number] | undefined> {
   const source = resolve(objects, id, 'source'), read = (path: string) => readFile(resolve(source, path));
   if (science.kind === 'neutral-shape') return science.hostLight === undefined ? [128, 128, 128] : hostLitGray(requireString(requireRecord(science.hostLight).srgb, `${id} hostLight.srgb`));
   if (science.kind === 'dayside-thermal-color') return (await loadStellarPhotometricColor(read, science, surfaceSource)).color.srgb;
@@ -98,13 +98,13 @@ async function flatLensColor(id: string, science: Record<string, unknown>, surfa
   return undefined;
 }
 
-/** A body whose default lens is a photosphere colour is drawn as a star; a planet whose lens is one colour as a disc of it; a body
- * whose default lens is a map (a hosted planet, or a brown dwarf with a surface map) as that map. */
+/** A body whose default dataset is a photosphere colour is drawn as a star; a planet whose dataset is one colour as a disc of it; a body
+ * whose default dataset is a map (a hosted planet, or a brown dwarf with a surface map) as that map. */
 async function markerFor(id: string) {
   const { science, source } = await defaultSurface(id);
-  const flat = await flatLensColor(id, science, source);
+  const flat = await flatDatasetColor(id, science, source);
   if (flat) return disc(() => flat);
-  // A colour lens without a limb-darkening law (none measured) is drawn as the uniform disc it is on the sphere.
+  // A colour dataset without a limb-darkening law (none measured) is drawn as the uniform disc it is on the sphere.
   return science.kind === 'stellar-photometric-color' ? starMarker(id, { requireLimbDarkening: science.limbDarkening !== undefined }) : planetMarker(id);
 }
 

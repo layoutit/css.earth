@@ -8,15 +8,16 @@ interface Props {
   tabs?: readonly { id: string; label: string; count?: number }[];
   initialTab?: string;
   hidden?: boolean;
+  satelliteSystem?: boolean;
 }
 const { idPrefix, group, label = group === 'overview' ? 'Body overview' : 'Object information', panelSuffix = 'content',
-  tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' }, { id: 'moons', label: 'Moons' }], initialTab, hidden = false } = Astro.props;
+  tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' }, { id: 'moons', label: 'Moons' }], initialTab, hidden = false, satelliteSystem = false } = Astro.props;
 // These controls' selection rules; ObjectLayout places them in the scene head, where navigation retains them.
 collectInformationTabStyle(Astro.locals, informationTabStyle(`${idPrefix}-information`,
   tabs.map(tab => ({ id: `${idPrefix}-${tab.id}-tab`, panelId: `${idPrefix}-${tab.id}-${panelSuffix}` }))));
 ---
 <div class:list={[group === 'overview' ? 'object-tabs' : 'object-card-tabs', 'object-native-tabs']}
-  role="radiogroup" aria-label={label} {hidden}>
+  role="radiogroup" aria-label={label} data-satellite-system={satelliteSystem || undefined} {hidden}>
   {tabs.map((tab) => <>
     <input class="object-native-tab" type="radio" name={`${idPrefix}-information`} id={`${idPrefix}-${tab.id}-tab`}
       data-information-tab={tab.id} data-information-group={group} value={tab.id} aria-controls={`${idPrefix}-${tab.id}-${panelSuffix}`} checked={tab.id === (initialTab ?? tabs[0]?.id)} />

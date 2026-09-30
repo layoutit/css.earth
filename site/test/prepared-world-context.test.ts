@@ -30,7 +30,7 @@ function mountTestContext({ annotationPriorities, annotationLandmarks, ...option
   const encode = createWorldContextFrameEncoder();
   const layer = mountPreparedWorldContext({ ...options, requestPublication() {
     if (options.requestPublication?.()) return true;
-    if (latest && options.plan.schema === 'cssearth-world-context@1') publish(...latest);
+    if (latest && options.plan.schema === 'cssearth-world-context@2') publish(...latest);
     return true;
   } });
   function publish(world: WorldCameraPose, viewport: Parameters<typeof layer.publish>[1], frame?: WorldContextFrame | PlannedWorldContext) {
@@ -232,7 +232,7 @@ function plan(scale: number) {
   const focus = point('sun', 'Sun', '#f5a623', [0, 0, 0], 10);
   const front = point('mercury', 'Mercury', '#9d9388', [100, 0, 0], 1);
   const hidden = point('venus', 'Venus', '#d6aa69', [0, 0, -20], 1);
-  return parsePreparedWorldContext({ schema: 'cssearth-world-context@1',
+  return parsePreparedWorldContext({ schema: 'cssearth-world-context@2',
     frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: scale, bodyRadiusM: 10 * scale },
     focus, bodies: [{ ...front, orbit: orbit([100, 0, 0], scale) }, { ...hidden, orbit: orbit([0, 0, -20], scale) }],
     camera: { minimumDistanceM: 12 * scale, maximumDistanceM: 10_000 * scale, framingReferenceZoom: 1, presentation },

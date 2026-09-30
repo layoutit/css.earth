@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "jupiter",
   "displayName": "Jupiter",
@@ -126,14 +126,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Visible color",
-        "thumbnail": "/scenes/jupiter/jupiter-lens-normal.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-normal.webp",
         "surface": "/scenes/jupiter/jupiter-surface.webp",
         "poles": "/scenes/jupiter/jupiter-poles.webp",
         "falseColor": false,
@@ -146,9 +146,9 @@
       {
         "id": "ultraviolet",
         "label": "Ultraviolet",
-        "thumbnail": "/scenes/jupiter/jupiter-lens-ultraviolet-thumbnail.webp",
-        "surface": "/scenes/jupiter/jupiter-lens-ultraviolet.webp",
-        "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-ultraviolet-thumbnail.webp",
+        "surface": "/scenes/jupiter/jupiter-dataset-ultraviolet.webp",
+        "poles": "/scenes/jupiter/jupiter-dataset-ultraviolet-poles.webp",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -189,9 +189,9 @@
       {
         "id": "methane",
         "label": "Methane",
-        "thumbnail": "/scenes/jupiter/jupiter-lens-methane-thumbnail.webp",
-        "surface": "/scenes/jupiter/jupiter-lens-methane.webp",
-        "poles": "/scenes/jupiter/jupiter-lens-methane-poles.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-methane-thumbnail.webp",
+        "surface": "/scenes/jupiter/jupiter-dataset-methane.webp",
+        "poles": "/scenes/jupiter/jupiter-dataset-methane-poles.webp",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -237,7 +237,7 @@
           "group": "opal-visible",
           "label": "2015-01-19"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2015a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2015a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2015a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2015a-poles@2x.webp",
         "falseColor": false,
@@ -258,7 +258,7 @@
           "group": "opal-visible",
           "label": "2016-02-09"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2016a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2016a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2016a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2016a-poles@2x.webp",
         "falseColor": false,
@@ -279,7 +279,7 @@
           "group": "opal-visible",
           "label": "2017-04-03"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2017a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2017a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2017a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2017a-poles@2x.webp",
         "falseColor": false,
@@ -300,7 +300,7 @@
           "group": "opal-visible",
           "label": "2018-04-17"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2018a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2018a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2018a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2018a-poles@2x.webp",
         "falseColor": false,
@@ -321,7 +321,7 @@
           "group": "opal-visible",
           "label": "2019-06-26"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2019a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2019a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2019a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2019a-poles@2x.webp",
         "falseColor": false,
@@ -342,7 +342,7 @@
           "group": "opal-visible",
           "label": "2020-08-24"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2020a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2020a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2020a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2020a-poles@2x.webp",
         "falseColor": false,
@@ -363,7 +363,7 @@
           "group": "opal-visible",
           "label": "2021-09-04"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2021a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2021a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2021a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2021a-poles@2x.webp",
         "falseColor": false,
@@ -384,7 +384,7 @@
           "group": "opal-visible",
           "label": "2022-11-12"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2022a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2022a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2022a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2022a-poles@2x.webp",
         "falseColor": false,
@@ -405,7 +405,7 @@
           "group": "opal-visible",
           "label": "2024-01-05"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2024a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2024a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2024a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2024a-poles@2x.webp",
         "falseColor": false,
@@ -426,7 +426,7 @@
           "group": "opal-visible",
           "label": "2024-11-19"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2024c.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2024c.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2024c@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2024c-poles@2x.webp",
         "falseColor": false,
@@ -447,7 +447,7 @@
           "group": "opal-visible",
           "label": "2025-12-11"
         },
-        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2025a.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-visible-2025a.webp",
         "surface": "/scenes/jupiter/jupiter-visible-2025a@2x.webp",
         "poles": "/scenes/jupiter/jupiter-visible-2025a-poles@2x.webp",
         "falseColor": false,
@@ -464,7 +464,7 @@
         "id": "magnetic",
         "label": "Magnetic field",
         "shortLabel": "Br",
-        "thumbnail": "/scenes/jupiter/jupiter-lens-magnetic.webp",
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-magnetic.webp",
         "surface": "/scenes/jupiter/jupiter-magnetic@2x.webp",
         "poles": "/scenes/jupiter/jupiter-magnetic-poles@2x.webp",
         "falseColor": true,
@@ -602,8 +602,8 @@
     },
     {
       "label": "Hubble OPAL",
-      "role": "lenses",
-      "description": "UV & methane lenses",
+      "role": "datasets",
+      "description": "UV & methane datasets",
       "href": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
     },
     {

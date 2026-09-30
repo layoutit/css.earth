@@ -21,7 +21,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "paged-ellipsoid",
@@ -32,7 +32,7 @@
           "path": "source/content/object.json"
         },
         {
-          "id": "lens-bindings",
+          "id": "dataset-bindings",
           "path": "source/content/lens-bindings.json"
         },
         {
@@ -70,7 +70,7 @@
           "id": "body",
           "source": "paged-ellipsoid",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "normal",
               "source": "content",
@@ -116,7 +116,7 @@
       "cutaway": {
         "source": "paged-ellipsoid",
         "surface": "body",
-        "lens": "cross-section"
+        "dataset": "cross-section"
       },
       "atmosphere": {
         "source": "paged-ellipsoid",
@@ -180,6 +180,6 @@
       "orientationReference": 4
     }
   },
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "type": "layered-body"
 }

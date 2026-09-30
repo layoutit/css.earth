@@ -24,7 +24,7 @@ Lane change (this PR): the terrestrial solid-observation lane was retired for Ar
 
 Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js ariel --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/ariel/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, elevation) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 6638).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, elevation) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 6638).
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
@@ -32,9 +32,9 @@ Map edge correction (2026-09-28): the raster lane's photograph decoder writes th
 
 Kachina Chasmata's Gazetteer centre has mosaic imagery but no valid DEM sample, which the numeric regression preserves.
 
-### Voyager color lens (run of 2026-09-22, this version)
+### Voyager color dataset (run of 2026-09-22, this version)
 
-Sources. The lens uses Voyager 2 ISS narrow-angle GEOMED frames from the PDS Ring-Moon Systems Node
+Sources. The dataset uses Voyager 2 ISS narrow-angle GEOMED frames from the PDS Ring-Moon Systems Node
 (volumes VGISS_7201–7207, inventoried through the OPUS API): every complete green/violet/ultraviolet
 set of Ariel that the archive holds, 21 frames in 7 sets, listed in
 [the frame recipe](source/preparation/voyager-color-frames.json). The camera comes from the pinned
@@ -60,7 +60,7 @@ Oracle. `node tools/objects/voyager-iss/oracle.mts ariel --write` ([then](https:
 its high-passed detail against the mosaic in the frame plane
 ([report](source/reference/voyager-color-oracle.json)): 9 frames compared, mean
 correlation 0.39, mean residual 25.1 km. The mosaic is the same control the
-Monochrome lens uses, so the colour lands on the ground the reader already sees.
+Monochrome dataset uses, so the colour lands on the ground the reader already sees.
 
 Colour. Each set is composed as a complete green/violet/ultraviolet triplet, corrected with the same
 Lunar-Lambert disk function as the monochrome mosaic to incidence 30°, emission 0°, used within 60°
@@ -78,9 +78,9 @@ cosine-weighted means over the coloured footprint meet them; spatial colour diff
 Voyager's own. The ordering agrees with independent measurements: Karkoschka (2001, *Icarus* 151,
 51) finds the moons grey with a slightly red slope and Miranda slightly bluish, and DeColibus et al.
 (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)) measure
-V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole lens then takes one brightness gain
+V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole dataset then takes one brightness gain
 against the monochrome base (the median over every footprint boundary); the brightest 0.1 % of texels
-may clip. The prepared map is in [evidence](evidence/voyager-color/map.png).
+may clip. The prepared map is in evidence.
 
 Tests. `node --test tools/objects/voyager-iss/*.test.mts packages/bake/src/objects/raster/photometric-observations.test.mts` (then [`tests/objects/terrestrial/photometric-observations.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/photometric-observations.test.mts); now [`packages/bake/src/objects/raster/photometric-observations.test.mts`](../../../packages/bake/src/objects/raster/photometric-observations.test.mts)) (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer's ground floor, and the composer's withheld, band-level,
@@ -88,11 +88,11 @@ band-ratio and non-positive-sample rules on synthetic frames;
 `node --test packages/objects/src/node/voyager-color.test.mts` reads this moon's reports and
 checks the placement, registration and oracle numbers above, that every tile of a complete set is
 pinned with its geometry label, and that the prepared report carries the measured and published
-ratios; `node --test tests/objects/unit/ariel/*.test.mts` covers the runtime package with the new lens.
+ratios; `node --test tests/objects/unit/ariel/*.test.mts` covers the runtime package with the new dataset.
 
 ## Known problems
 
-- The Voyager color lens is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. Its whole-disc band ratios are tied to Bell and McCord (1991) read from a figure at ±0.02, and their ultraviolet calibration carries a stated ±10 % uncertainty; the archive's own ratios are in the prepared report.
+- The Voyager color dataset is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. Its whole-disc band ratios are tied to Bell and McCord (1991) read from a figure at ±0.02, and their ultraviolet calibration carries a stated ±10 % uncertainty; the archive's own ratios are in the prepared report.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ariel (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge is measured against the georeferenced source at every preparation (see the map edge correction above).
 
@@ -119,7 +119,7 @@ The mosaic's own ISIS history records `photomet` on 2020-02-22 with ellipsoid an
 
 The DEM's numeric extrema are approximately −7.024 and +5.796 km. Its displayed scale is −8 to +6 km. Northwest cartographic lighting uses a unit direction (−0.5 east, +0.5 north, +0.7071 up), ambient 0.25, and the actual 1000 m/km height conversion without height exaggeration.
 
-Both lenses use the same fixed 5760 × 2880 prepared sampling bank, 64-pixel projective gutters and 1024-pixel pole tiles independently of DPR. This density supports the retained projective mapping and does not add native detail. The shared 450-face sphere uses the vendored 578.9 km mean radius; elevation colors do not displace its geometry. Both views support shared flood curvature and optional directional Shadows. The default camera targets 270° E, 50° S.
+Both datasets use the same fixed 5760 × 2880 prepared sampling bank, 64-pixel projective gutters and 1024-pixel pole tiles independently of DPR. This density supports the retained projective mapping and does not add native detail. The shared 450-face sphere uses the vendored 578.9 km mean radius; elevation colors do not displace its geometry. Both views support shared flood curvature and optional directional Shadows. The default camera targets 270° E, 50° S.
 
 Minimaps and thumbnails use the same prepared interpretation. The navigation/context marker is a purpose-sized crop of observed southern terrain, with shared full-phase curvature; it is not a new full-disc observation. Its original normalized-map crop is (2200, 1100), 700 × 700 pixels. Original cube bytes are retained unchanged inside gzip with both original and compressed hashes in the manifest. Content-addressed source URLs allow automated restoration without the upstream browser challenge; large source binaries are excluded from Git and runtime installation.
 

@@ -2,6 +2,7 @@
 import ObjectCardHeader from './ObjectCardHeader.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import MoonList from './MoonList.astro';
+import InformationTabs from './InformationTabs.astro';
 import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { prepareBodyMoons } from '../prepare-body-moons.mts';
@@ -22,7 +23,9 @@ const moons = system ? prepareBodyMoons(hostId) : [];
     data-source-subject={`satellite-system:${hostId}`} data-source-document={source.href} data-source-label={source.label}>
     <ObjectBreadcrumbs objectId={hostId} satelliteSystem />
   </ObjectCardHeader>
-  <div class="object-results-scroll object-card-tabpanel" data-satellite-system
+  <InformationTabs idPrefix={`${hostId}-system`} group="satellite-system" satelliteSystem
+    label={`${system.name} information`} tabs={[{ id: 'moons', label: 'Moons', count: moons.length }]} />
+  <div id={`${hostId}-system-moons-content`} class="object-results-scroll object-card-tabpanel" data-satellite-system
     role="region" aria-label={`Bodies in the ${system.name}`}>
     <MoonList {moons} {host} />
   </div>

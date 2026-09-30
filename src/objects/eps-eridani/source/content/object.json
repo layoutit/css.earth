@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "eps-eridani",
   "displayName": "ε Eridani",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "eps-eridani-lens-color.webp",
+        "thumbnail": "eps-eridani-dataset-color.webp",
         "surface": "eps-eridani-surface-color@2x.webp",
         "poles": "eps-eridani-poles-color@2x.webp",
         "source": {
@@ -57,10 +57,10 @@
         "id": "dust-ring",
         "label": "Dust ring · ALMA 1.3 mm",
         "scope": "system",
-        "thumbnail": "eps-eridani-lens-color.webp",
+        "thumbnail": "eps-eridani-dataset-color.webp",
         "volume": {
           "objectId": "eps-eridani-disc",
-          "lensId": "dust",
+          "datasetId": "dust",
           "surface": "color"
         },
         "notes": "The star in the colour of its spectrum, with the belt of dust 70 au out in its own glow at 1.3 millimetres, as ALMA imaged it in December 2019 (project 2019.1.00696.S). It is the ALMA pipeline's image from the public archive, brought to the resolution of the image Booth et al. (2023) made from the same observations and shown in the colour map and scale of their Figure 1. It is noisier than theirs, and its ring is fainter. The star's own glow and two sources behind the disc are removed as Booth et al. model them, and sky fainter than twice the image noise fades out. The ring's size and tilt (69.6 au, 33.7°) are Booth et al.'s fit to these observations. The image has no third axis, so the depth is inferred: a tilted ring projects to it better than a spherical shell or a constant depth. Its thickness is the one Wolff et al. (2025) use in their model of this belt, and its east side is drawn nearer on their assumption that it shares planet b's orbital plane. Planet b orbits at 3.5 au, far inside it.",

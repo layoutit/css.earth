@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "asteroid-2003-vs2",
   "displayName": "2003 VS2",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Uses the published model-derived ecliptic pole (longitude 228°, latitude 39°), converted using J2000 mean obliquity 23.439291111°; J2000 is assumed because the paper does not specify equinox. The 59°/121° aspect ambiguity and unquoted pole uncertainty remain; prime meridian and rotational phase are arbitrary."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

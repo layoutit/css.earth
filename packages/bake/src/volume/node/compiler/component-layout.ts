@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
-import type { CompilerBakeResult, CompilerLensVolume, CompilerPin } from '../../contracts/compiler-bake.ts';
+import type { CompilerBakeResult, CompilerDatasetVolume, CompilerPin } from '../../contracts/compiler-bake.ts';
 import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '../../coordinates/compiler-frame.ts';
 import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlabInterval, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
 import type { CompilerBakeBackend, CompiledVolumeArtifact } from './bake.ts';
@@ -100,7 +100,7 @@ export function padComponentSlice(reference: RegisteredSlice, component: Registe
 }
 
 export async function registerComponentBanks(root: string, outputDirectory: string, neutral: CompilerBakeResult,
-  lenses: CompilerLensVolume[], signal: AbortSignal,
+  datasets: CompilerDatasetVolume[], signal: AbortSignal,
   readPinned: (pin: CompilerPin) => Promise<Buffer>, backend: ComponentBankBackend): Promise<CompilerBakeResult> {
   const readVolume = async (pin: CompilerPin) => backend.validateVolume(JSON.parse((await readPinned(pin)).toString()));
   const catalogue = async (pin: CompilerPin) => {
@@ -132,7 +132,7 @@ export async function registerComponentBanks(root: string, outputDirectory: stri
       throw new TypeError('Component raster differs from its registered crop.');
     return decoded.data;
   };
-  const banks = await Promise.all([{ id: 'neutral', volume: neutral.neutral }, ...lenses].map(async item => ({
+  const banks = await Promise.all([{ id: 'neutral', volume: neutral.neutral }, ...datasets].map(async item => ({
     ...item, original: await readVolume(item.volume), slices: new Map((await catalogue(item.volume)).map(q => [q.id, q])),
     resources: [] as Array<{ path: string; bytes: number; width: number; height: number }>,
   })));
@@ -196,5 +196,5 @@ export async function registerComponentBanks(root: string, outputDirectory: stri
     await writeFile(resolve(root, path), bytes); pins.set(bank.id, { volume: { path } });
   }
   return { ...neutral, neutral: pins.get('neutral')!.volume,
-    lenses: lenses.map(lens => ({ ...lens, ...pins.get(lens.id)! })) };
+    datasets: datasets.map(dataset => ({ ...dataset, ...pins.get(dataset.id)! })) };
 }

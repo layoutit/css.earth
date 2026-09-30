@@ -106,7 +106,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
     await json(resolve(sourceDirectory, 'volume.json'), volume);
     const reference = parseLabModelJson(await readFile(target.referenceObject, 'utf8'));
     const frame = { ...reference.properties.frame, boundsUnits: target.boundsKpc };
-    await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@1', id: target.id,
+    await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@2', id: target.id,
       type: 'density-volume', properties: { volume: frame,
         preparation: { source: 'source/volume.json' } } });
     console.log(`PARTICLES_BAKE ${target.id}: ${(100 * provenance.display.massRetention).toFixed(2)}% stellar mass inside display bounds`);

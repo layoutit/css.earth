@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "asteroid-2001-sn263",
   "displayName": "2001 SN263 Alpha",
@@ -64,6 +64,6 @@
     "sunSource": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations. Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

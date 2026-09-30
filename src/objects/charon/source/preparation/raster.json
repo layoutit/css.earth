@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/charon/",
   "sourceWidth": 12800,
   "sourceHeight": 6400,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "charon-{id}{suffix}.webp",
-      "thumbnail": "charon-lens-{id}.webp",
+      "thumbnail": "charon-dataset-{id}.webp",
       "source": "observations/charon-mosaic.tif",
       "falseColor": false,
       "science": {
@@ -51,7 +51,7 @@
     {
       "id": "enhanced-color",
       "output": "charon-{id}{suffix}.webp",
-      "thumbnail": "charon-lens-{id}.webp",
+      "thumbnail": "charon-dataset-{id}.webp",
       "source": "observations/nh_charon_color_mosaic.img",
       "falseColor": true,
       "science": {
@@ -86,7 +86,7 @@
     {
       "id": "elevation",
       "output": "charon-{id}{suffix}.webp",
-      "thumbnail": "charon-lens-{id}.webp",
+      "thumbnail": "charon-dataset-{id}.webp",
       "source": "science/charon-dem.tif",
       "falseColor": true,
       "science": {
@@ -140,7 +140,7 @@
     {
       "id": "albedo",
       "output": "charon-{id}{suffix}.webp",
-      "thumbnail": "charon-lens-{id}.webp",
+      "thumbnail": "charon-dataset-{id}.webp",
       "source": "science/nh-charon-bond-georeferenced.tif",
       "falseColor": true,
       "science": {
@@ -195,7 +195,7 @@
     {
       "id": "water-ice",
       "output": "charon-{id}{suffix}.webp",
-      "thumbnail": "charon-lens-{id}.webp",
+      "thumbnail": "charon-dataset-{id}.webp",
       "source": "science/leisa/water-ice.tif",
       "falseColor": true,
       "resolutionScale": 0.32,
@@ -246,7 +246,7 @@
     {
       "id": "ammonia",
       "output": "charon-{id}{suffix}.webp",
-      "thumbnail": "charon-lens-{id}.webp",
+      "thumbnail": "charon-dataset-{id}.webp",
       "source": "science/leisa/ammonia.tif",
       "falseColor": true,
       "resolutionScale": 0.32,

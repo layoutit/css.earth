@@ -1,9 +1,9 @@
 {
-  "schema": "cssearth-volume-lens-promotion@1",
+  "schema": "cssearth-volume-dataset-promotion@1",
   "id": "smc",
-  "defaultLens": "smc-horalek-wide",
+  "defaultDataset": "smc-horalek-wide",
   "framingRadiusUnits": 7,
-  "lenses": [
+  "datasets": [
     {
       "imageId": "smc-horalek-wide",
       "label": "Horálek optical",

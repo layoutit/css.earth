@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-observed-polar-surfaces@1",
+  "schema": "cssearth-observed-polar-surfaces@2",
   "namespace": "jupiter",
   "publicPrefix": "/scenes/jupiter/",
   "dimensions": {
@@ -57,8 +57,8 @@
     "position": "centre"
   },
   "descriptor": {
-    "schema": "cssjupiter-prepared-lenses@1",
-    "defaultLens": "normal",
+    "schema": "cssjupiter-prepared-datasets@1",
+    "defaultDataset": "normal",
     "runtimeFilters": false,
     "runtimeRasterization": false,
     "controls": [],
@@ -70,7 +70,7 @@
       "runtimeAuthorityRequests": false
     }
   },
-  "lenses": [
+  "datasets": [
     {
       "id": "normal",
       "operation": "rgb-polar-structure",
@@ -80,7 +80,7 @@
         "label": "Normal",
         "shortLabel": "RGB",
         "measurement": "Hubble WFC3 visible-color global map",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-normal.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-normal.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-surface.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-surface@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-poles.webp",
@@ -93,7 +93,7 @@
         "surface2x": "jupiter-surface@2x.webp",
         "poles": "jupiter-poles.webp",
         "poles2x": "jupiter-poles@2x.webp",
-        "thumbnail": "jupiter-lens-normal.webp"
+        "thumbnail": "jupiter-dataset-normal.webp"
       },
       "coverage": {
         "columnStride": 16,
@@ -197,11 +197,11 @@
       "qualification": "F275W single-band Hubble OPAL observation, 11 December 2025; declared false color. Gray grid marks unavailable polar-connected zero fill; no Juno structure or spectral extrapolation. Dark interior samples remain observations.",
       "operation": "scalar-observed-gaps",
       "files": {
-        "surface": "jupiter-lens-ultraviolet.webp",
-        "surface2x": "jupiter-lens-ultraviolet@2x.webp",
-        "poles": "jupiter-lens-ultraviolet-poles.webp",
-        "poles2x": "jupiter-lens-ultraviolet-poles@2x.webp",
-        "thumbnail": "jupiter-lens-ultraviolet-thumbnail.webp"
+        "surface": "jupiter-dataset-ultraviolet.webp",
+        "surface2x": "jupiter-dataset-ultraviolet@2x.webp",
+        "poles": "jupiter-dataset-ultraviolet-poles.webp",
+        "poles2x": "jupiter-dataset-ultraviolet-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-ultraviolet-thumbnail.webp"
       },
       "scalar": {
         "bitpix": -32,
@@ -251,11 +251,11 @@
       "qualification": "FQ889N single-band Hubble OPAL observation, 11 December 2025; declared false color. Gray grid marks unavailable polar-connected zero fill; no Juno structure or spectral extrapolation. Dark interior samples remain observations.",
       "operation": "scalar-observed-gaps",
       "files": {
-        "surface": "jupiter-lens-methane.webp",
-        "surface2x": "jupiter-lens-methane@2x.webp",
-        "poles": "jupiter-lens-methane-poles.webp",
-        "poles2x": "jupiter-lens-methane-poles@2x.webp",
-        "thumbnail": "jupiter-lens-methane-thumbnail.webp"
+        "surface": "jupiter-dataset-methane.webp",
+        "surface2x": "jupiter-dataset-methane@2x.webp",
+        "poles": "jupiter-dataset-methane-poles.webp",
+        "poles2x": "jupiter-dataset-methane-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-methane-thumbnail.webp"
       },
       "scalar": {
         "bitpix": -32,
@@ -286,7 +286,7 @@
         "surface2x": "jupiter-visible-2015a@2x.webp",
         "poles": "jupiter-visible-2015a-poles.webp",
         "poles2x": "jupiter-visible-2015a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2015a.webp"
+        "thumbnail": "jupiter-dataset-visible-2015a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.fits",
@@ -309,7 +309,7 @@
           "label": "2015-01-19"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2015a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2015a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2015a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2015a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2015a-poles.webp",
@@ -327,7 +327,7 @@
         "surface2x": "jupiter-visible-2016a@2x.webp",
         "poles": "jupiter-visible-2016a-poles.webp",
         "poles2x": "jupiter-visible-2016a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2016a.webp"
+        "thumbnail": "jupiter-dataset-visible-2016a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.fits",
@@ -350,7 +350,7 @@
           "label": "2016-02-09"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2016a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2016a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2016a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2016a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2016a-poles.webp",
@@ -368,7 +368,7 @@
         "surface2x": "jupiter-visible-2017a@2x.webp",
         "poles": "jupiter-visible-2017a-poles.webp",
         "poles2x": "jupiter-visible-2017a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2017a.webp"
+        "thumbnail": "jupiter-dataset-visible-2017a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.fits",
@@ -391,7 +391,7 @@
           "label": "2017-04-03"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2017a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2017a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2017a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2017a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2017a-poles.webp",
@@ -409,7 +409,7 @@
         "surface2x": "jupiter-visible-2018a@2x.webp",
         "poles": "jupiter-visible-2018a-poles.webp",
         "poles2x": "jupiter-visible-2018a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2018a.webp"
+        "thumbnail": "jupiter-dataset-visible-2018a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.fits",
@@ -432,7 +432,7 @@
           "label": "2018-04-17"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2018a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2018a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2018a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2018a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2018a-poles.webp",
@@ -450,7 +450,7 @@
         "surface2x": "jupiter-visible-2019a@2x.webp",
         "poles": "jupiter-visible-2019a-poles.webp",
         "poles2x": "jupiter-visible-2019a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2019a.webp"
+        "thumbnail": "jupiter-dataset-visible-2019a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.fits",
@@ -473,7 +473,7 @@
           "label": "2019-06-26"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2019a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2019a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2019a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2019a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2019a-poles.webp",
@@ -491,7 +491,7 @@
         "surface2x": "jupiter-visible-2020a@2x.webp",
         "poles": "jupiter-visible-2020a-poles.webp",
         "poles2x": "jupiter-visible-2020a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2020a.webp"
+        "thumbnail": "jupiter-dataset-visible-2020a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n_v1_globalmap.fits",
@@ -514,7 +514,7 @@
           "label": "2020-08-24"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2020a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2020a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2020a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2020a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2020a-poles.webp",
@@ -532,7 +532,7 @@
         "surface2x": "jupiter-visible-2021a@2x.webp",
         "poles": "jupiter-visible-2021a-poles.webp",
         "poles2x": "jupiter-visible-2021a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2021a.webp"
+        "thumbnail": "jupiter-dataset-visible-2021a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n_v1_globalmap.fits",
@@ -555,7 +555,7 @@
           "label": "2021-09-04"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2021a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2021a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2021a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2021a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2021a-poles.webp",
@@ -573,7 +573,7 @@
         "surface2x": "jupiter-visible-2022a@2x.webp",
         "poles": "jupiter-visible-2022a-poles.webp",
         "poles2x": "jupiter-visible-2022a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2022a.webp"
+        "thumbnail": "jupiter-dataset-visible-2022a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n_v1_globalmap.fits",
@@ -596,7 +596,7 @@
           "label": "2022-11-12"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2022a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2022a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2022a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2022a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2022a-poles.webp",
@@ -614,7 +614,7 @@
         "surface2x": "jupiter-visible-2024a@2x.webp",
         "poles": "jupiter-visible-2024a-poles.webp",
         "poles2x": "jupiter-visible-2024a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2024a.webp"
+        "thumbnail": "jupiter-dataset-visible-2024a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n_v1_globalmap.fits",
@@ -637,7 +637,7 @@
           "label": "2024-01-05"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2024a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2024a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2024a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2024a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2024a-poles.webp",
@@ -655,7 +655,7 @@
         "surface2x": "jupiter-visible-2024c@2x.webp",
         "poles": "jupiter-visible-2024c-poles.webp",
         "poles2x": "jupiter-visible-2024c-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2024c.webp"
+        "thumbnail": "jupiter-dataset-visible-2024c.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n_v1_globalmap.fits",
@@ -678,7 +678,7 @@
           "label": "2024-11-19"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2024c.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2024c.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2024c.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2024c@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2024c-poles.webp",
@@ -696,7 +696,7 @@
         "surface2x": "jupiter-visible-2025a@2x.webp",
         "poles": "jupiter-visible-2025a-poles.webp",
         "poles2x": "jupiter-visible-2025a-poles@2x.webp",
-        "thumbnail": "jupiter-lens-visible-2025a.webp"
+        "thumbnail": "jupiter-dataset-visible-2025a.webp"
       },
       "coverageSources": [
         "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n_v1_globalmap.fits",
@@ -719,7 +719,7 @@
           "label": "2025-12-11"
         },
         "measurement": "Published OPAL colour composite",
-        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2025a.webp",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-visible-2025a.webp",
         "surfaceUrl": "/scenes/jupiter/jupiter-visible-2025a.webp",
         "surface2xUrl": "/scenes/jupiter/jupiter-visible-2025a@2x.webp",
         "polesUrl": "/scenes/jupiter/jupiter-visible-2025a-poles.webp",
@@ -737,7 +737,7 @@
         "surface2x": "jupiter-magnetic@2x.webp",
         "poles": "jupiter-magnetic-poles.webp",
         "poles2x": "jupiter-magnetic-poles@2x.webp",
-        "thumbnail": "jupiter-lens-magnetic.webp"
+        "thumbnail": "jupiter-dataset-magnetic.webp"
       },
       "label": "Magnetic field",
       "shortLabel": "Br",

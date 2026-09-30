@@ -230,8 +230,8 @@
   animation-play-state: paused;
 }
 
-.object-stage[data-object-id="venus"][data-lens="radar"] .venus-body,
-.object-stage[data-object-id="venus"][data-lens="elevation"] .venus-body {
+.object-stage[data-object-id="venus"][data-dataset="radar"] .venus-body,
+.object-stage[data-object-id="venus"][data-dataset="elevation"] .venus-body {
   animation-duration: 96s;
 }
 
@@ -249,21 +249,21 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="venus"][data-lens="elevation"] .polycss-scene s.venus-polar {
+.object-stage[data-object-id="venus"][data-dataset="elevation"] .polycss-scene s.venus-polar {
   background-image:
     url("/scenes/venus/venus-poles-elevation@2x.webp") !important;
 }
 
 /* Akatsuki's ultraviolet view is of the cloud tops, so it keeps the cloud deck's
-   36s rotation above rather than the 96s solid-body rate the radar lenses use. */
-.object-stage[data-object-id="venus"][data-lens="ultraviolet"]
+   36s rotation above rather than the 96s solid-body rate the radar datasets use. */
+.object-stage[data-object-id="venus"][data-dataset="ultraviolet"]
   .polycss-scene
   s:not(.venus-polar) {
   background-image:
     url("/scenes/venus/venus-ultraviolet@2x.webp") !important;
 }
 
-.object-stage[data-object-id="venus"][data-lens="ultraviolet"]
+.object-stage[data-object-id="venus"][data-dataset="ultraviolet"]
   .polycss-scene
   s.venus-polar {
   background-image:
@@ -282,8 +282,8 @@
   transform-origin: 50% 50%;
 }
 
-.object-stage[data-object-id="venus"][data-lens="radar"] .venus-fixed-material,
-.object-stage[data-object-id="venus"][data-lens="elevation"] .venus-fixed-material {
+.object-stage[data-object-id="venus"][data-dataset="radar"] .venus-fixed-material,
+.object-stage[data-object-id="venus"][data-dataset="elevation"] .venus-fixed-material {
   background-image: url("/scenes/venus/venus-observation-material@2x.webp");
 }
 
@@ -373,8 +373,8 @@
   transform-origin: 50% 50%;
 }
 
-.object-stage[data-object-id="mars"][data-lens="elevation"] .mars-fixed-material,
-.object-stage[data-object-id="mars"][data-lens="thermal"] .mars-fixed-material {
+.object-stage[data-object-id="mars"][data-dataset="elevation"] .mars-fixed-material,
+.object-stage[data-object-id="mars"][data-dataset="thermal"] .mars-fixed-material {
   background-image: url("/scenes/mars/mars-observation-material@2x.webp");
 }
 

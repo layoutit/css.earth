@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /** Fit the one display number a published colour image does not print: the brightness stretch that maps a reflectance-colour
- * lens onto the publisher's own figure panel.
+ * dataset onto the publisher's own figure panel.
  *
- *   node packages/telescope-cli/authoring/circumstellar/fit-figure-stretch.mts <object id> <lens id> <figure.png> [--raw <dir>]...
+ *   node packages/telescope-cli/authoring/circumstellar/fit-figure-stretch.mts <object id> <dataset id> <figure.png> [--raw <dir>]...
  *
- * The lens's recipe (circumstellar.json) names its bands, the stellar flux each is divided by and, under `stretch.fit`, the
+ * The dataset's recipe (circumstellar.json) names its bands, the stellar flux each is divided by and, under `stretch.fit`, the
  * figure panel: its pixel box and its scale in figure pixels per arcsecond, north up and east left. Each band's MAST mosaic
  * is read about the star onto exactly that panel's pixel grid, divided by the star's flux, and averaged into the red, green
  * and blue channels the recipe names; each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / top, the form
@@ -97,17 +97,17 @@ export async function fitFigureStretch(figure: string, panel: { x0: number; y0: 
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), [id, lensId, figure] = args.filter((arg, i) => !arg.startsWith('--') && args[i - 1] !== '--raw');
-  if (!id || !lensId || !figure) throw new TypeError('Usage: fit-figure-stretch <object id> <lens id> <figure.png> [--raw <dir>]...');
+  const args = process.argv.slice(2), [id, datasetId, figure] = args.filter((arg, i) => !arg.startsWith('--') && args[i - 1] !== '--raw');
+  if (!id || !datasetId || !figure) throw new TypeError('Usage: fit-figure-stretch <object id> <dataset id> <figure.png> [--raw <dir>]...');
   const repository = resolve(import.meta.dirname, '../../../..'), recipe = requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', id, 'source/circumstellar.json'), 'utf8')) as unknown);
-  const lens = requireArray(recipe.lenses).map(value => requireRecord(value)).find(value => value.id === lensId);
-  if (!lens) throw new Error(`${id} has no lens ${lensId}.`);
-  const fitRecord = requireRecord(requireRecord(lens.stretch).fit), box = requireRecord(fitRecord.panel);
+  const dataset = requireArray(recipe.datasets).map(value => requireRecord(value)).find(value => value.id === datasetId);
+  if (!dataset) throw new Error(`${id} has no dataset ${datasetId}.`);
+  const fitRecord = requireRecord(requireRecord(dataset.stretch).fit), box = requireRecord(fitRecord.panel);
   const scene = requireRecord(requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', String(recipe.host), 'prepared/scene.json'), 'utf8')) as unknown).worldFrame);
   const distancePc = Math.hypot(...requireArray(scene.originM).map(v => requireFiniteNumber(v))) / 3.085677581491367e16;
   const panel = { x0: requireFiniteNumber(box.x0), y0: requireFiniteNumber(box.y0), width: requireFiniteNumber(box.width), height: requireFiniteNumber(box.height), pixelsPerArcsec: requireFiniteNumber(fitRecord.pixelsPerArcsec) };
-  const annulus = requireArray(lens.backgroundAnnulusArcsec).map(v => requireFiniteNumber(v)) as [number, number];
-  const { channels } = await reflectanceChannels({ program: String(lens.program), channels: lens.channels as never, stellarFluxJy: requireRecord(lens.stellarFluxJy) as never, distancePc,
+  const annulus = requireArray(dataset.backgroundAnnulusArcsec).map(v => requireFiniteNumber(v)) as [number, number];
+  const { channels } = await reflectanceChannels({ program: String(dataset.program), channels: dataset.channels as never, stellarFluxJy: requireRecord(dataset.stellarFluxJy) as never, distancePc,
     halfUnits: panel.width / 2 / panel.pixelsPerArcsec * distancePc, size: panel.width, backgroundAnnulusArcsec: annulus, downloads: resolve(repository, `.local/${id}`),
     sources: args.flatMap((arg, i) => arg === '--raw' ? [resolve(args[i + 1]!)] : []) });
   const result = await fitFigureStretch(resolve(figure), panel, channels, panel.width);

@@ -1,5 +1,5 @@
-/** A new star's colour lens from the best spectrum any archive holds of it. The routes are tried in this order, and each candidate is
- * downloaded and read with the colour lens's own reader (stellar-photometric-color.mts), so a route counts only if it yields a colour:
+/** A new star's colour dataset from the best spectrum any archive holds of it. The routes are tried in this order, and each candidate is
+ * downloaded and read with the colour dataset's own reader (stellar-photometric-color.mts), so a route counts only if it yields a colour:
  *
  * 1. stis-ngsl: the HST/STIS Next Generation Spectral Library (space spectrophotometry, 168-1020 nm), by HD number.
  * 2. gaia-xp: the Gaia DR3 externally calibrated BP/RP sampled spectrum (space, absolute flux), when Gaia published one.
@@ -45,7 +45,7 @@ const dataProduct = (id: string, title: string, identifier: [string, string], la
   evidence: [{ url: evidence[0], checkedOn: CHECKED, locator: evidence[1] }], relations: [], statements: [{ kind: 'credit', text: credit, scope: 'citation', evidence: creditEvidence }], publisher } });
 const CDS = 'Centre de Données astronomiques de Strasbourg';
 
-/** One route that yielded a spectrum: its file, how the lens reads it, where it came from and how to restore it. */
+/** One route that yielded a spectrum: its file, how the dataset reads it, where it came from and how to restore it. */
 export interface Candidate {
   readonly route: ColorRoute; readonly label: string; readonly file: string; readonly bytes: Buffer;
   readonly record: (path: string) => Omit<MeasuredSpectrumRecord, 'gaps'>; readonly gaps: Gap[];
@@ -60,7 +60,7 @@ const shared = new Map<string, Promise<Buffer>>();
 const once = (context: Context, url: string) => { let bytes = shared.get(url); if (!bytes) { bytes = context.archive.bytes(url); shared.set(url, bytes); bytes.catch(() => shared.delete(url)); } return bytes; };
 const download = (url: string) => (path: string) => ({ kind: 'download', groups: ['restore', 'refresh'], path, url });
 
-/** Read a candidate with the lens's reader: its samples, its derived gaps and the colour they give. Throws when it yields none. */
+/** Read a candidate with the dataset's reader: its samples, its derived gaps and the colour they give. Throws when it yields none. */
 function evaluate(bytes: Buffer, record: Omit<MeasuredSpectrumRecord, 'gaps'>, cmf: Map<number, readonly number[]>) {
   const spectrum = readMeasuredSpectrum(bytes, { ...record, gaps: [] }), gaps = coverageGaps(spectrum.wavelengthsNm);
   return { gaps, color: measuredSpectrumColor(spectrum, cmf, gaps) };
@@ -206,7 +206,7 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
     const binding = candidate.route === 'gaia-xp' && entryId !== `${id}-crosscheck-spectrum` ? undefined
       : { kind: 'catalogued', references: [{ catalogueId: candidate.catalogue!.id, role: 'material', evidence: `src/objects/${id}/source/${path}` }] };
     inputs.push({ id: entryId, path, origin: candidate.origin, credit: candidate.credit, ...candidate.license, acquisition: candidate.acquisition,
-      redistribution: 'One archived spectrum or catalogue file, unchanged, with citation', consumers: ['assets', 'lenses'], ...(binding ? { sourceBinding: binding } : {}) });
+      redistribution: 'One archived spectrum or catalogue file, unchanged, with citation', consumers: ['assets', 'datasets'], ...(binding ? { sourceBinding: binding } : {}) });
     if (binding && Object.keys(candidate.catalogue!.record).length) catalogue.push(candidate.catalogue!);
   };
   if (!primary) {
@@ -233,7 +233,7 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
     crossCheck = { route: second.route, difference };
   }
   inputs.push({ id: `${id}-stellar-color`, path: 'photometry/stellar-color.json', origin: primary.origin, credit: `${primary.credit}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
-    acquisition: 'Authored method record: names the archived spectrum, how it is read and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'lenses'],
+    acquisition: 'Authored method record: names the archived spectrum, how it is read and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'datasets'],
     ...(primary.route === 'gaia-xp' ? { sourceBinding: { kind: 'local', reason: 'Project-authored colour recipe naming the Gaia DR3 spectrum bound above; repinned when edited.' } }
       : { sourceBinding: { kind: 'catalogued', references: [{ catalogueId: primary.catalogue!.id, role: 'material', evidence: `src/objects/${id}/source/photometry/stellar-color.json#/measuredSpectrum` }, CMF_METHOD] } }) });
   return { record, files, acquisition, inputs, catalogue, color: primary.color, route: primary.route, tried, ...(crossCheck ? { crossCheck } : {}), ...(todo ? { todo } : {}),
@@ -250,7 +250,7 @@ export function planckChoice(id: string, t: Cited, why: string, tried: readonly 
     note: `${why}, so the colour is a Planck spectrum at its published temperature.` },
     whitePoint: 'sRGB D65', normalization: 'brightest linear sRGB channel = 1', ...(gamut ? { gamut } : {}) };
   const inputs = [{ id: `${id}-stellar-color`, path: 'photometry/stellar-color.json', origin: t.url, credit: `${t.source}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
-    acquisition: 'Authored method record: names the published temperature and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'lenses'],
+    acquisition: 'Authored method record: names the published temperature and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'datasets'],
     sourceBinding: { kind: 'local', reason: 'Project-authored colour recipe naming the cited temperature; repinned when edited.' } }];
   // Below about 1,800 K a black body's colour lies outside sRGB (a brown dwarf, a cool companion): it is then shown mixed with the
   // least white that brings it inside, and the record says so; a colour inside the gamut keeps its record plain.

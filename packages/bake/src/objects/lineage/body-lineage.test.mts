@@ -13,7 +13,7 @@ const present = <T,>(value: T | undefined, label: string): T => {
   return value;
 };
 
-/** A one-lens raster body: an observation it reads, an archive entry it does not, and its recipe. */
+/** A one-dataset raster body: an observation it reads, an archive entry it does not, and its recipe. */
 async function fixture(t: TestContext) {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-lineage-test-'));
   t.after(() => rm(root, { recursive: true, force: true }));
@@ -22,21 +22,21 @@ async function fixture(t: TestContext) {
   const pin = (id: string, path: string) => ({ id, path, origin: `https://example.org/${path}`, sourceBinding: { kind: 'local', reason: 'Authored test fixture' },
     credit: 'Fixture archive', license: 'CC0', acquisition: 'Exact fixture input', consumers: ['surfaces'] });
   await Promise.all([
-    writeFile(resolve(source, 'preparation/raster.json'), JSON.stringify({ schema: 'cssearth-raster-recipe@1', polesOutput: 'poles-{id}.webp',
+    writeFile(resolve(source, 'preparation/raster.json'), JSON.stringify({ schema: 'cssearth-raster-recipe@2', polesOutput: 'poles-{id}.webp',
       surfaces: [{ id: 'surface', source: 'observation.dat', output: 'surface{suffix}.webp', thumbnail: 'surface-thumbnail.webp', falseColor: false }] })),
-    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema: 'cssearth-authoritative-sources@2', inputs: [pin('observation', 'observation.dat'), pin('unused', 'unused.dat')],
+    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema: 'cssearth-authoritative-sources@3', inputs: [pin('observation', 'observation.dat'), pin('unused', 'unused.dat')],
       documents: [{ path: 'preparation/raster.json' }], generatedIntermediates: [] })),
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [{ id: 'raster', path: 'source/preparation/raster.json' }] } } })),
-    writeFile(resolve(root, 'prepared/lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface@2x.webp' }] })),
+    writeFile(resolve(root, 'prepared/datasets.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface@2x.webp' }] })),
   ]);
   return { root, source, manifestPath: resolve(source, 'manifest.json'), rasterPath: resolve(source, 'preparation/raster.json') };
 }
 
-test('a lens reads only the sources its recipe consumes, without their bytes', async t => {
+test('a dataset reads only the sources its recipe consumes, without their bytes', async t => {
   const { root } = await fixture(t), lineage = await bodyLineage(root);
   assert.deepEqual(lineage.sources.map(source => source.id), ['observation']);
   assert.deepEqual(productSourceIds(lineage, 'surface'), ['observation']);
-  assert.deepEqual(present(lineage.products[0], 'surface').lensIds, ['surface']);
+  assert.deepEqual(present(lineage.products[0], 'surface').datasetIds, ['surface']);
 });
 
 test('controlled photographic inserts bind every consumed photograph alongside the global base', async t => {

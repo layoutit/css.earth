@@ -3,7 +3,7 @@ interface Props { title: string; metadata?: string | null; lead?: string; descri
 const { title, metadata, lead, description } = Astro.props;
 ---
 <slot name="header">
-  <h3 class="object-lens-details-title">{title}{metadata && <span class="object-selected-content-meta"> ({metadata})</span>}</h3>
+  <h3 class="object-dataset-details-title">{title}{metadata && <span class="object-selected-content-meta"> ({metadata})</span>}</h3>
 </slot>
 <slot />
-<p class="object-lens-details-copy">{lead && <><strong class="object-lens-details-lead">{lead}.</strong> </>}{description}</p>
+<p class="object-dataset-details-copy">{lead && <><strong class="object-dataset-details-lead">{lead}.</strong> </>}{description}</p>

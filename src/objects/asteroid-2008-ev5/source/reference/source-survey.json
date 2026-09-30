@@ -23,7 +23,7 @@
     {
       "url": "https://arxiv.org/abs/1310.6715",
       "adds": "WISE thermophysical constraints (Ali-Lagoa et al., 2013)",
-      "status": "excluded from spatial lenses",
+      "status": "excluded from spatial datasets",
       "reason": "Disk-integrated thermal fits infer effective diameter, thermal inertia and grain-size ranges. These are not resolved regolith imagery or a spatial temperature map; the radar vertices are not silently rescaled to the thermal-fit diameter."
     },
     {

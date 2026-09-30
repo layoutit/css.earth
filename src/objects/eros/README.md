@@ -58,7 +58,7 @@ cover the probes and software/input pins in the
 The new observation records support preparation tests. The production surface
 continues to use the controlled Golish maps listed above. The comparison does
 not qualify this individual frame's physical registration or a new photographic
-lens. SBMT's archive uses the public access pair published by its client
+dataset. SBMT's archive uses the public access pair published by its client
 (`public` / `wide-open`); the acquisition plan records that public authorization
 header and verifies each downloaded file's bytes.
 
@@ -69,23 +69,23 @@ The photographic atlas samples each original grid directly with a 2 × 2 texel f
 | normal | 10682 × 5341 |
 | infrared | 10682 × 5341 |
 
-Current atlases are 3503 × 3720 pixels, with 796 retained faces. The [delivery record](evidence/spectral-bands/delivery-and-browser.json) records each encoded file size and decoded RGBA estimate. Existing mesh leaves and full-size surface atlases match the main revision named there. Sampling details are in `prepared/surfaces.json`; source resolution, gaps and registration limits still apply.
+Current atlases are 3503 × 3720 pixels, with 796 retained faces. The delivery record records each encoded file size and decoded RGBA estimate. Existing mesh leaves and full-size surface atlases match the main revision named there. Sampling details are in `prepared/surfaces.json`; source resolution, gaps and registration limits still apply.
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 52.033 / 132.260 / 275.739 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 
-The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
+The earlier source notes report Headless Chrome 152 checks of the then-selected datasets with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-The [native-value check](evidence/spectral-bands/native-values.json) compares all seven production samplers with independent float32 byte reads and coordinates from the original ISIS labels, including fractional footprints, source extrema and gaps. It verifies decoding and display transfer; it does not revalidate the mission’s calibration or physical registration.
+The native-value check compares all seven production samplers with independent float32 byte reads and coordinates from the original ISIS labels, including fractional footprints, source extrema and gaps. It verifies decoding and display transfer; it does not revalidate the mission’s calibration or physical registration.
 
-The native check passed 1,701 source probes. At most 0.13% of valid native samples in any band lie outside the common display range. The [restoration check](evidence/spectral-bands/source-restoration.json) extracted every added input and label through the production acquisition recipe into an empty directory and matched the preparation inputs byte for byte; it reused the cached publisher ZIP.
+The native check passed 1,701 source probes. At most 0.13% of valid native samples in any band lie outside the common display range. The restoration check extracted every added input and label through the production acquisition recipe into an empty directory and matched the preparation inputs byte for byte; it reused the cached publisher ZIP.
 
-The [delivery and browser record](evidence/spectral-bands/delivery-and-browser.json) identifies the tested inventories and the 27 September 2026 run. All seven wavelength controls, keyboard stepping and mobile layout passed in Headless Chrome; each switch kept one mounted scene. Eros’s existing default and infrared links were also checked. Every body asset installed from R2 into an empty destination with matching size and hash. The body install is 37.80 MB; this is not measured cold page transfer. Existing full-size atlases and mesh leaves are unchanged.
+The delivery and browser record identifies the tested inventories and the 27 September 2026 run. All seven wavelength controls, keyboard stepping and mobile layout passed in Headless Chrome; each switch kept one mounted scene. Eros’s existing default and infrared links were also checked. Every body asset installed from R2 into an empty destination with matching size and hash. The body install is 37.80 MB; this is not measured cold page transfer. Existing full-size atlases and mesh leaves are unchanged.
 
-Inspected evidence: [native map](evidence/spectral-bands/blue-native-map.webp), [overview](evidence/spectral-bands/overview.webp), [lighting](evidence/spectral-bands/lighting.webp), [close view](evidence/spectral-bands/close.webp), [phone controls](evidence/spectral-bands/phone.webp). The flat native map and rendered body are different projections, so no pixel-parity claim is made.
+Inspected evidence: native map, overview, lighting, close view, phone controls. The flat native map and rendered body are different projections, so no pixel-parity claim is made.
 
 ### Ponds registration, 28 September 2026
 
-The [registration record](evidence/ponds/registration.json) names the input bytes and results. The table's label, record count and field units match the recipe; every row's centre reproduces its printed latitude, longitude and distance within 0.009° and 1.1 m. Centres were projected to the full ver128q mesh with a 60 m limit chosen before measuring (a little under half the 131.9 m median facet edge). In the app on 28 September 2026 (headless Chromium, this bake), the Ponds view showed the cyan ponds over the dimmed photograph on the body and in the minimap. Compared with the 550 nm map, most ponds are too small to see at 10 m pixels, so no offset between catalogue and photographs is claimed.
+The registration record names the input bytes and results. The table's label, record count and field units match the recipe; every row's centre reproduces its printed latitude, longitude and distance within 0.009° and 1.1 m. Centres were projected to the full ver128q mesh with a 60 m limit chosen before measuring (a little under half the 131.9 m median facet edge). In the app on 28 September 2026 (headless Chromium, this bake), the Ponds view showed the cyan ponds over the dimmed photograph on the body and in the minimap. Compared with the 550 nm map, most ponds are too small to see at 10 m pixels, so no offset between catalogue and photographs is claimed.
 
 ## Known problems
 

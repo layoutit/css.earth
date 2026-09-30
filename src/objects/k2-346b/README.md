@@ -8,7 +8,7 @@ It is the only planet known around K2-346. Its orbit and size follow de Leon et 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 26.19445485478 d de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): a/R* 56.68; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 89.51661 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459521.873206 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 24 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-346's measured colour (#ffd4ba, the colour lens of k2-346 (src/objects/k2-346/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-346's measured colour (#ffd4ba, the colour dataset of k2-346 (src/objects/k2-346/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-346's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (46, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

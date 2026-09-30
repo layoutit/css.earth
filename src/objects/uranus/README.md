@@ -11,7 +11,7 @@ The visible-color surface is the rotation-A global map from
 observed in October 2025. The checked composite combines F467M, F547M, and
 F657N; the OPAL readme says its color maps carry "slight contrast
 enhancement". FQ727N and F845M FITS maps supply two separately prepared false-color
-observation lenses. Their palettes and percentile stretches are declared in
+observation datasets. Their palettes and percentile stretches are declared in
 `source/preparation/observations.json`; no browser filtering is used.
 
 Ring radii, widths, and normal optical depths come from the
@@ -49,7 +49,7 @@ photometric phase coefficients in `source/photometry/phase.json`.
   the 16 ring wedges match the single ring image they replace to a mean alpha
   error of 1.20/255 inside a wedge and 2.52/255 within 2 px of a wedge
   boundary. The package tests left from the earlier lane are retired and the
-  rest pass. [Before and after](evidence/shared-lane-before-after.webp).
+  rest pass. Before and after.
 
 ## Known problems
 
@@ -59,7 +59,7 @@ ends the usable observation six rows north of the map equator so resampling at
 the coverage fringe cannot become a fabricated feature. The checked NASA/JPL
 Voyager 2 PIA18182 full-disc observation supplies a central-disc chromatic
 baseline for the visible-color map. OPAL detail is feathered into that uniform
-baseline across twelve prepared rows. The single-filter lenses use the
+baseline across twelve prepared rows. The single-filter datasets use the
 observed-disc mean from their own checked FITS products as their uniform
 unobserved-area baseline. No local feature is reflected, extended, or invented
 outside the observed OPAL coverage.
@@ -67,18 +67,18 @@ outside the observed OPAL coverage.
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="uranus-source-and-preparation-record"></a>
-<a id="visible-surface-and-observation-lenses"></a>
+<a id="visible-surface-and-observation-datasets"></a>
 <a id="rings"></a>
 <a id="satellite-source-archive"></a>
 <a id="body-orientation-and-charts"></a>
 <a id="reproduction"></a>
 
-The lighting overlay has one colour and alpha per pixel, so its per-channel limb law is exact for the colour map's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The FQ727N and F845M lenses share the colour map's bank; OPAL applied no Minnaert correction to those two maps, so their limb is not their own law.
+The lighting overlay has one colour and alpha per pixel, so its per-channel limb law is exact for the colour map's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The FQ727N and F845M datasets share the colour map's bank; OPAL applied no Minnaert correction to those two maps, so their limb is not their own law.
 
 <details>
 <summary>Methods and source notes</summary>
 
-**Visible surface and observation lenses**
+**Visible surface and observation datasets**
 
 The checked [Webb NIRCam Uranus portrait](https://science.nasa.gov/asset/webb/uranus-nircam-image/)
 is a visual-composition reference only. It is not sampled into the runtime
@@ -110,7 +110,7 @@ source-color equirectangular and polar atlases prepared at DPR 1 and DPR 2.
 Its orientation is solved from its pole and rotation at the scene epoch, so the
 face toward the camera is the one Uranus turns to it then; the hand-typed
 rotations it replaced were about 160° off. Lighting is one 256-frame bank
-indexed by the Sun's direction in view and shared by every lens. Each frame puts
+indexed by the Sun's direction in view and shared by every dataset. Each frame puts
 back the limb darkening OPAL removed from the colour map, with the README's own
 Minnaert coefficients: k 0.57 in F657N, 0.80 in F547M and 0.85 in F467M
 ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). Red barely darkens toward the limb while green and blue do, so the
@@ -152,7 +152,7 @@ Source inspection compared the TIFF rows with the component FITS rows; all selec
 
 Checked on 27 September 2026; subsequent changes add documentation and retained evidence only. Chrome exercised all 12 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
 
-[Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
+Source inspection retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
 
 The three packages restored 479 files (160.17 MB) into an empty directory, with every file matching its inventory entry. This body adds 2.35 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
 

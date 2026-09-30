@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "arcturus",
   "displayName": "Arcturus",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
-        "thumbnail": "arcturus-lens-color.webp",
+        "thumbnail": "arcturus-dataset-color.webp",
         "surface": "arcturus-surface-color@2x.webp",
         "poles": "arcturus-poles-color@2x.webp",
         "source": {

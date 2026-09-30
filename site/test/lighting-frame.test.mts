@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { projectRoot } from './fixtures/objects.mts';
 import { sourceTest } from '@cssearth/objects/node/source-test';
+import { objectPageCss } from '@cssearth/objects';
 
 const test = sourceTest();
 const json = async (path: string) => JSON.parse(await readFile(resolve(projectRoot, path), 'utf8')) as Record<string, any>;
@@ -19,8 +20,8 @@ test('every composite lit body sizes its lighting frame to its own sphere', asyn
     // The composite presentation draws the lighting bank on one frame over the sphere; the row-bank cutaway lights each face.
     if (!raster?.lighting || presentation?.mode !== 'composite') continue;
     const descriptor = await json(`src/objects/${id}/object.json`);
-    const css = (await Promise.all((descriptor.properties.page?.stylesheets ?? []).map((path: string) => readFile(resolve(projectRoot, path), 'utf8').catch(() => '')))).join('\n');
-    const rules = [...css.matchAll(new RegExp(`([^{}]*\\.${id}-fixed-material\\s*)\\{([^}]*)\\}`, 'gu'))].filter(([, selector]) => !selector!.includes('hide-shadows') && !selector!.includes('[data-lens'));
+    const css = (await Promise.all((descriptor.properties.page?.stylesheets ?? []).map(async (path: string) => objectPageCss(await readFile(resolve(projectRoot, path), 'utf8').catch(() => ''), id)))).join('\n');
+    const rules = [...css.matchAll(new RegExp(`([^{}]*\\.${id}-fixed-material\\s*)\\{([^}]*)\\}`, 'gu'))].filter(([, selector]) => !selector!.includes('hide-shadows') && !selector!.includes('[data-dataset'));
     const sized = rules.map(([, , body]) => body!).filter(body => /\bwidth:\s*[\d.]+px/u.test(body)).at(-1);
     if (!sized) { wrong.push(`${id}: no stylesheet rule gives .${id}-fixed-material a width, so the lighting frame is 0 x 0`); continue; }
     const width = Number(/\bwidth:\s*([\d.]+)px/u.exec(sized)![1]), scale = Number(/scale\(([\d.]+)\)/u.exec(sized)?.[1] ?? 1);
@@ -43,13 +44,13 @@ test('a shape-only planet under a star with a measured colour is lit by that col
 });
 
 test('every self-luminous body loads a stylesheet that places its limb plate', async () => {
-  // A lit planet's stylesheet written over an emissive one (the band-colour relens did, before it was fixed) loses the glow's plates.
+  // A lit planet's stylesheet written over an emissive one (the band-colour dataset rebuild did, before it was fixed) loses the glow's plates.
   const missing: string[] = [];
   for (const { id } of SCENE_OBJECTS) {
     const raster = await optional(`src/objects/${id}/source/preparation/raster.json`);
     if (!raster?.emission) continue;
     const descriptor = await json(`src/objects/${id}/object.json`);
-    const css = (await Promise.all((descriptor.properties.page?.stylesheets ?? []).map((path: string) => readFile(resolve(projectRoot, path), 'utf8').catch(() => '')))).join('\n');
+    const css = (await Promise.all((descriptor.properties.page?.stylesheets ?? []).map(async (path: string) => objectPageCss(await readFile(resolve(projectRoot, path), 'utf8').catch(() => ''), id)))).join('\n');
     if (!new RegExp(`\\.${id}-limb-layer\\b`, 'u').test(css)) missing.push(`${id}: no stylesheet places .${id}-limb-layer`);
   }
   assert.deepEqual(missing, []);

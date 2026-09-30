@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-provenance@1",
+  "schema": "cssearth-volume-provenance@2",
   "title": "Beta Pictoris debris disc: JWST coronagraph imaging given the depth of the fitted disc",
   "kind": "observed-sky-image-on-fitted-envelope",
   "authors": [],
@@ -79,17 +79,17 @@
   ],
   "paper": [
     {
-      "lens": "visible",
+      "dataset": "visible",
       "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
       "url": "https://arxiv.org/abs/2401.05271"
     },
     {
-      "lens": "contrast",
+      "dataset": "contrast",
       "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
       "url": "https://arxiv.org/abs/2401.05271"
     },
     {
-      "lens": "colour",
+      "dataset": "colour",
       "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
       "url": "https://arxiv.org/abs/2401.05271"
     }
@@ -106,7 +106,7 @@
       "halfUnits": 135,
       "slabs": 78
     },
-    "lenses": {
+    "datasets": {
       "visible": {
         "geometry": "edge-on",
         "bands": [
@@ -144,7 +144,7 @@
         "stretch": {
           "a": 10,
           "top": 530,
-          "source": "Stated, not fitted: the top is the 99.5th percentile of the image within 12 au of the midplane beyond the inner edge (529.6 counts per pixel per second), and a = 10 is the display's log strength, the same as the JWST lens's."
+          "source": "Stated, not fitted: the top is the 99.5th percentile of the image within 12 au of the midplane beyond the inner edge (529.6 counts per pixel per second), and a = 10 is the display's log strength, the same as the JWST dataset's."
         },
         "registration": null,
         "bandMidplanes": {
@@ -157,7 +157,7 @@
         "noiseFade": {
           "fromNoise": 1,
           "toNoise": 3,
-          "source": "Stated, a display choice, as for the JWST lens: a column fades in as its brightness rises from one to three times the per-pixel noise measured 3.6 to 4.1 arcseconds out."
+          "source": "Stated, a display choice, as for the JWST dataset: a column fades in as its brightness rises from one to three times the per-pixel noise measured 3.6 to 4.1 arcseconds out."
         },
         "innerMaskUnits": 15.707768308430014,
         "midplaneHalfHeightUnits": 12,
@@ -1539,7 +1539,7 @@
         "stretch": {
           "a": 10,
           "top": 6.3,
-          "source": "Stated, not fitted: the top is the 99.5th percentile of the three channels within 12 au of the midplane beyond the inner edge (6.26 in MJy/sr-per-Jy units), and a = 10 is the display's log strength, the same as the other lenses'."
+          "source": "Stated, not fitted: the top is the 99.5th percentile of the three channels within 12 au of the midplane beyond the inner edge (6.26 in MJy/sr-per-Jy units), and a = 10 is the display's log strength, the same as the other datasets'."
         },
         "registration": null,
         "bandMidplanes": {
@@ -1562,7 +1562,7 @@
         "noiseFade": {
           "fromNoise": 1,
           "toNoise": 3,
-          "source": "Stated, a display choice, as for the other lenses: a column fades in as its brightness rises from one to three times the per-pixel noise measured 10 to 13 arcseconds out."
+          "source": "Stated, a display choice, as for the other datasets: a column fades in as its brightness rises from one to three times the per-pixel noise measured 10 to 13 arcseconds out."
         },
         "innerMaskUnits": 29.452065578306275,
         "midplaneHalfHeightUnits": 12,
@@ -2228,11 +2228,11 @@
   "limitations": [
     "No third axis was observed. The depth is reconstructed by assuming the disc is symmetric about its normal: each ring of radius and height carries one emission, fitted so the volume reprojects to the image. Real asymmetries the image shows are kept where the fit allows, but anything the symmetry cannot place is not measured.",
     "Which side of the midplane tilts toward the observer is a stated convention; an image this close to edge-on barely changes with it.",
-    "Where no pixel sees a ring of radius and height, nothing constrains it and it stays empty: inside each lens’s inner edge the disc is not drawn.",
-    "Inside each lens’s inner edge the image is not data and is not drawn; the star and planets are their own spheres.",
+    "Where no pixel sees a ring of radius and height, nothing constrains it and it stays empty: inside each dataset’s inner edge the disc is not drawn.",
+    "Inside each dataset’s inner edge the image is not data and is not drawn; the star and planets are their own spheres.",
     "Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model, and the real disc blocks a small fraction of a percent of what is behind it.",
     "Nothing finer than an image’s pixels or the grid’s cells is in the drawn volume.",
-    "colour: the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three lenses share, so switching dataset does not move the object, and its 1.7 au cells are what the inner lenses need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn.",
+    "colour: the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three datasets share, so switching dataset does not move the object, and its 1.7 au cells are what the inner datasets need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn.",
     "visible: the HST/STIS behind its coronagraph image is the authors’ own reduction (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits), combined from observations made in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923), and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in grey, brightness only.",
     "contrast: the colours are the disc’s contrast to the star in F410M and F210M, mapped to blue and red by wavelength: infrared colours, not what an eye would see. MAST’s coronagraphy products are drawn as the pipeline made them, and the stellar flux the contrast is computed against is a model atmosphere.",
     "colour: the colours are the disc’s contrast to the star in F435W, F606W, F814W, blue, green and red, which the eye would see as its colour against the star’s: a white disc scatters like the star shines. The reference star’s light was removed at the flux ratio the paper states, not at the scale that best cancels it here, and what that leaves near the star and along the occulting finger is drawn with the disc (beta-pictoris-9987.psf-subtraction.json records the scale a free fit would choose)."

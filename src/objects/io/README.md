@@ -30,8 +30,8 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Photographic refresh, 12 September 2026,:
-[monochrome detail](evidence/photographic-detail/monochrome.png) and
-[the Pele hemisphere in false color](evidence/photographic-detail/pele-hemisphere.png)
+monochrome detail and
+the Pele hemisphere in false color
 were inspected in Chrome, 1280 × 720, with Shadows on/off and DPR 1 and 2.
 The native color mosaic remains soft around Pele; increasing the atlas size
 cannot recover detail absent from the observations.
@@ -43,7 +43,7 @@ catalogue pin changes in the runtime definition. The ten photographic files
 total 5.22 MB, previously 2.30 MB; the largest decoded atlas is 195 MiB.
 Three unrelated scientific thumbnails were unavailable locally, and cross-body
 search used a preview index of these three moons. This does not qualify all
-scientific lenses or the aggregate application.
+scientific datasets or the aggregate application.
 
 This photographic refresh preserves the source maps, masks, geometry and scene
 structure. It increased photograph sampling to 4096 × 2048 and 8192 × 4096; only the 8192 × 4096 map ships now.
@@ -54,7 +54,7 @@ at 18.71° S, 104.72° E, consistent with the [Gazetteer](https://planetarynames
 
 Earlier run (12 September 2026): [`node tools/objects/dist/prepare-authored.js io --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/io/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, geology, spectral-slope, visible-absorption) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 3459).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, enhanced, geology, spectral-slope, visible-absorption) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 3459).
 
 The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF edge with the decoded output edge. The current check uses the decoder coordinates and the mounted photographic deposit.
 
@@ -64,7 +64,7 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 
 ### Stereo elevation (28 September 2026)
 
-The Elevation lens colors the Trek GeoTIFF's heights from −2 km (blue) to 6 km (dark red) and adds fixed northwest relief lighting. The shared GeoTIFF sampler reads the original Float32 values; nothing is filled or smoothed. The map is prepared lossless.
+The Elevation dataset colors the Trek GeoTIFF's heights from −2 km (blue) to 6 km (dark red) and adds fixed northwest relief lighting. The shared GeoTIFF sampler reads the original Float32 values; nothing is filled or smoothed. The map is prepared lossless.
 
 What the file is. 11,500 × 5,750 Float32 samples in geographic degrees on the `GCS_Io_2015` sphere (radius 1,821,490 m), east-positive, starting at 180° W and 90° N, 0.0313° per sample (about 1 km). No-data is −3.4 × 10³⁸. Neither the file, the [Trek record](https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM) nor its [FGDC metadata](https://trek.nasa.gov/io/TrekWS/rest/cat/metadata/fgdc/html?label=IoDEM) states the height unit or datum.
 
@@ -74,7 +74,7 @@ Units and datum. The heights are metres relative to Io's limb-profile ellipsoid,
 - Our measurement agrees: 85.3% of all samples lie within ±1,000 m. Equatorial 20° boxes at the sub-Jovian and leading points average +219 m and +378 m. Heights above a sphere would differ there by 10 km, the difference between the IAU ellipsoid's 1,829.4 and 1,819.4 km axes.
 - The journal article returned HTTP 403, so its own datum statement was not read. The [ledger](investigations.json) keeps this open.
 
-Frame check. The Gazetteer centres share the Voyager/Galileo mosaic frame of the Monochrome lens, so named mountains test the registration independently of the DEM:
+Frame check. The Gazetteer centres share the Voyager/Galileo mosaic frame of the Monochrome dataset, so named mountains test the registration independently of the DEM:
 
 - 24 of 30 covered mountains, mesas, plana and tholi stand above a ring twice their radius (mean +813 m). With longitudes mirrored, 13 of 29 do (mean +40 m).
 - Shifting all centres, the score peaks at 0 to −0.5° in longitude and 0 to +1° in latitude. Features hundreds of kilometres wide limit this check to about a degree (30 km).
@@ -111,7 +111,7 @@ pixel/line and checks separate, interleaved holdouts. The worst holdout error
 is 0.000219 pixels; the worst range discrepancy is 0.0149%. These measure
 transfer of the published geometry, not its absolute position accuracy.
 
-[Native-value checks](evidence/jiram-perry/native-values.json) compare three
+Native-value checks compare three
 representative products from PJ16, PJ43 and PJ55 with their original calibrated
 PDS images. All 55,296 M-band values in each match exactly after a horizontal
 flip, with no vertical flip or unit scaling. Early PDS labels can misleadingly
@@ -129,7 +129,7 @@ least three frames, then each cell selects the visit with the finest footprint.
 There is no gap filling, smear correction or optional nonlinear flat-field
 correction. The old 0–0.15 display scale and object geometry are unchanged.
 
-[The position check](evidence/jiram-perry/map-check.json) finds 60 of 72 local
+The position check finds 60 of 72 local
 peaks above 0.03 W sr⁻¹ m⁻² within 3° of a Davies et al. (2024) catalogue
 source, versus 13 with longitudes mirrored. Twelve peaks fall farther away.
 This supports orientation and approximate locations; it does not identify all
@@ -152,11 +152,11 @@ source cache; the recipe, detached label and 525 kB screening receipt remain
 in Git. The receipt supports the complete accepted/rejected product selection
 and holds measured input identities and registration residuals.
 
-The [qualification record](evidence/jiram-perry/qualification.json) identifies
+The qualification record identifies
 the tested inputs, browser settings, focused tests and delivery checks.
-Inspected views include [the coverage edge](evidence/jiram-perry/coverage-edge.png),
-[Shadows on](evidence/jiram-perry/heat-shadows.png) and
-[the mobile dataset sheet](evidence/jiram-perry/heat-mobile.png).
+Inspected views include the coverage edge,
+Shadows on and
+the mobile dataset sheet.
 The four changed heat images total 263,490 bytes, 107,912 bytes more than the
 previous map. Other surface textures, geometry and lighting assets match the
 base inventory.
@@ -211,10 +211,10 @@ the initial map's valid grid cells; unsupported edge columns account for the
 lost coverage. Neither total heat flow nor absolute radiometric accuracy is
 qualified by this correction.
 
-See the [measured positions](evidence/jiram-close-passes/final-map-check.json) and
-[screened fits](evidence/jiram-close-passes/close-receipt.json).
+See the measured positions and
+screened fits.
 
-The [corrected map in the browser](evidence/jiram-close-passes/volcanic-heat.png)
+The corrected map in the browser
 was inspected on 27 September in Chromium at 1440 × 900, DPR 1 and 2,
 with Shadows off and on, and at 390 × 844, DPR 2. No page errors or failed
 desktop asset requests occurred. The preparation code and map are from
@@ -226,8 +226,8 @@ new source-cache float map matched the file it was measured from byte for byte. 
 and smear remain; the screenshot does not establish absolute radiometry.
 
 The 17 orbit-57 and 22 orbit-58 images did not yield three overlapping qualified
-night-side frames per cell. Their [December](evidence/jiram-close-passes/orbit57-receipt.json)
-and [February](evidence/jiram-close-passes/orbit58-receipt.json) trials are retained;
+night-side frames per cell. Their December
+and February trials are retained;
 their sparse partial-disc fits are not promoted by relaxing the registration
 policy. The investigated archive has no volumes 59 or 60. The ledger records
 these limits and the other indexed visits not reduced in this change.
@@ -245,12 +245,12 @@ the new dates or finer map.
 - **Frames.** The M-band frames of the four orbits in Mura et al. (2024), Table 1: 59 frames, which match their passes in time and distance. The orbit 43, 47 and 49 frames name no target in their labels; we found them by projecting Io through each frame's SPICE camera.
 - **Which half is M.** A 256-line frame holds the L band in its first 128 lines and the M band in its last 128 (the imager's two filters, Mura et al. 2024, Section 2.1). Sunlit Io, divided by the cosine of incidence, reads 0.023 to 0.030 W sr⁻¹ m⁻² in the first half and 0.014 in M-band-only frames of nearby dates, the ratio of sunlight at 3.3–3.6 µm to 4.5–5.0 µm. The kernels' L-band frame also places the first-half disc within 13 lines.
 - **Pointing.** The fitted offsets are constant within an orbit: about 5 lines for orbits 41 and 43, and about 530 lines (7°) for orbits 47 and 49, after JIRAM stopped using its despinning mirror from orbit 44 (Mura et al. 2024, Section 2.1). Good fits sit within 4 lines of their orbit's offset; false fits, on nearly empty frames, sit 13 or more away. Frames more than 8 lines from their orbit's offset are rejected.
-- **Accepted.** 34 frames, at 13.5 to 27 km per pixel, median correlation 0.92. Rejected: 8 with too little sunlit disc, 7 off their orbit's offset, 7 below a correlation of 0.5, 3 with the best offset on the search edge. [One registered frame per orbit](evidence/volcanic-heat/registration.png) shows the fitted limb (red) and terminator (blue).
-- **Against the paper's figure.** [Our four per-orbit maps under Figure 2A](evidence/volcanic-heat/figure-2.png), on its axes and scale: the hot spots fall in the same places at similar brightness.
+- **Accepted.** 34 frames, at 13.5 to 27 km per pixel, median correlation 0.92. Rejected: 8 with too little sunlit disc, 7 off their orbit's offset, 7 below a correlation of 0.5, 3 with the best offset on the search edge. One registered frame per orbit shows the fitted limb (red) and terminator (blue).
+- **Against the paper's figure.** Our four per-orbit maps under Figure 2A, on its axes and scale: the hot spots fall in the same places at similar brightness.
 - **Against the paper's numbers.** Table 3 of Mura et al. (2024) gives each hot spot's total M-band output. Integrating our radiance within 2.5° of each, above the local background, gives a median ratio of 1.06 (middle half 0.72 to 1.32) over 94 measurements in the per-orbit maps, and 0.83 (0.46 to 1.11) for the 46 hot spots fully inside the merged map, where spots can be stitched from different orbits (test, [table extract](source/science/mura-2024/table3-m-band.json)).
 - **Against an independent catalogue.** Of 24 local peaks above 0.03 W sr⁻¹ m⁻², 22 lie within 3° of a hot spot in Table A1 of [Davies et al. (2024)](https://doi.org/10.3847/PSJ/ad4346) (Galileo, Keck, Gemini and JIRAM detections); with longitudes mirrored, 4 do. The unmatched peaks are Monan Patera, Volund B and Kotar Patera in Mura et al.'s Table 2, which Davies et al. place 3 to 5° away.
 
-Edge meridian, 13 September 2026: the Normal and Enhanced GeoTIFFs span 360° of longitude, and their recipe now declares `wrapLongitude`. Before, the 2× maps kept one missing column at 180°, filled by the gray coverage grid. A [matched crop](evidence/wrap-longitude/crop.json) of the Normal 2× map, taken from main's published file and from this version, has 33 of 36,864 pixels over the Pixelmatch threshold of 0.1 ([report](evidence/wrap-longitude/change.json)). The largest change is 36 levels at the 180° column; no other column changes by more than 7, which is WebP re-encoding. The [comparison](evidence/wrap-longitude/comparison.png) shows the map pixels and this version in the browser.
+Edge meridian, 13 September 2026: the Normal and Enhanced GeoTIFFs span 360° of longitude, and their recipe now declares `wrapLongitude`. Before, the 2× maps kept one missing column at 180°, filled by the gray coverage grid. A matched crop of the Normal 2× map, taken from main's published file and from this version, has 33 of 36,864 pixels over the Pixelmatch threshold of 0.1 (report). The largest change is 36 levels at the 180° column; no other column changes by more than 7, which is WebP re-encoding. The comparison shows the map pixels and this version in the browser.
 
 ## Known problems
 
@@ -306,7 +306,7 @@ Exact source byte lengths, credits and direct restoration URLs are in `source/ma
 
 Both GeoTIFFs contain 11445 × 5723 samples on a 1000 m grid. Actual monochrome detail varies from approximately 1–10 km per pixel. Color detail varies from 1.3–21 km per pixel; the published false-color product combines Galileo near-infrared, green and violet color ratios with Voyager/Galileo monochrome detail. This is an existing USGS derived observation product, not a new detail transfer in cssEarth.
 
-USGS reports calibration, geometric control, Lunar–Lambert limb-darkening correction with coefficient 0.7, and seam matching in production of these products. We preserve the published display values, with no second photometric correction or brightness fit. Photographed terrain shadows remain possible. Our existing **Shadows** control remains active for both lenses; its globe lighting is approximate and cannot infer relief hidden in a photographed shadow.
+USGS reports calibration, geometric control, Lunar–Lambert limb-darkening correction with coefficient 0.7, and seam matching in production of these products. We preserve the published display values, with no second photometric correction or brightness fit. Photographed terrain shadows remain possible. Our existing **Shadows** control remains active for both datasets; its globe lighting is approximate and cannot infer relief hidden in a photographed shadow.
 
 ## Coordinates and validity
 

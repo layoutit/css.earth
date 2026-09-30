@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/l-168-9b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "l-168-9b-surface-{id}{suffix}.webp",
-      "thumbnail": "l-168-9b-lens-{id}.webp",
+      "thumbnail": "l-168-9b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffbf8b, the colour lens of l-168-9 (src/objects/l-168-9/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffbf8b, the colour dataset of l-168-9 (src/objects/l-168-9/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "l-168-9",
           "srgb": "#ffbf8b",
-          "source": "the colour lens of l-168-9 (src/objects/l-168-9/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of l-168-9 (src/objects/l-168-9/source/photometry/stellar-color.json)"
         }
       }
     }

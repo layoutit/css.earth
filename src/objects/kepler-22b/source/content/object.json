@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kepler-22b",
   "displayName": "Kepler-22 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by Kepler-22; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "kepler-22b-lens-shape.webp",
+        "thumbnail": "kepler-22b-dataset-shape.webp",
         "surface": "kepler-22b-surface-shape@2x.webp",
         "poles": "kepler-22b-poles-shape@2x.webp",
         "source": {
@@ -64,13 +64,13 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of Kepler-22 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-22's light, as its colour lens measures it."
+        "notes": "No image or colour of Kepler-22 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-22's light, as its colour dataset measures it."
       },
       {
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of Kepler-22 b, from Eyes on Exoplanets; not an observation.",
-        "thumbnail": "kepler-22b-lens-illustration.webp",
+        "thumbnail": "kepler-22b-dataset-illustration.webp",
         "surface": "kepler-22b-surface-illustration@2x.webp",
         "poles": "kepler-22b-poles-illustration@2x.webp",
         "source": {

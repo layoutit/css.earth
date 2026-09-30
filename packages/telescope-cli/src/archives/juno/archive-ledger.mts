@@ -5,7 +5,7 @@
  *   node packages/telescope-cli/src/archives/juno/archive-ledger.mts --local    rewrites only the part the pinned programs, receipts and packages own
  *
  * Every count comes from the index tables of the PDS JunoCam volumes. An object's state comes from what exists here: a
- * program with a receipt within its budget makes its images "measured", and a package lens of the `junocam-camera` format
+ * program with a receipt within its budget makes its images "measured", and a package dataset of the `junocam-camera` format
  * makes them "cast". An image counts as measured only when the receipt parses, states the registration schema, names that
  * program, that target, that budget and that image as the program pins it, and pins the kernels it registered against; a
  * receipt that says anything else is reported as a problem and proves nothing. The pixel scale is the label altitude times
@@ -111,7 +111,7 @@ export async function measuredPrograms(directory = PROGRAMS) {
   return (await junoReceipts(directory)).measured;
 }
 
-/** Packages that state a lens of the JunoCam format. */
+/** Packages that state a dataset of the JunoCam format. */
 export async function castingObjects(shipped: ReadonlySet<string>) {
   const casting: string[] = [];
   for (const id of shipped) {
@@ -125,8 +125,8 @@ export function objectStates(targets: readonly TargetHoldings[], measured: Await
   return targets.filter(entry => entry.objectId !== null).map(entry => {
     const programs = measured.filter(program => program.target === entry.target), measuredImages = programs.reduce((sum, program) => sum + program.images, 0), castBy = casting.filter(id => id === entry.objectId);
     const state = castBy.length ? 'cast' : measuredImages ? 'measured' : 'not measured';
-    const why = castBy.length ? `The ${castBy.join(', ')} package states a junocam-camera lens.`
-      : measuredImages ? `${measuredImages} image(s) registered within ${POLICY.maximumResidualPixels} px in ${programs.map(program => program.program).join(', ')}; no package lens yet.`
+    const why = castBy.length ? `The ${castBy.join(', ')} package states a junocam-camera dataset.`
+      : measuredImages ? `${measuredImages} image(s) registered within ${POLICY.maximumResidualPixels} px in ${programs.map(program => program.program).join(', ')}; no package dataset yet.`
       : entry.colourImages ? 'No program of this target is pinned.' : 'No calibrated image holds the red, green and blue strips the format reads.';
     return { id: entry.objectId!, target: entry.target, colourImages: entry.colourImages, measuredImages, programs: programs.map(program => program.program), castBy, state, why };
   });

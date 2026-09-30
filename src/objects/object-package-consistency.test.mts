@@ -1,7 +1,7 @@
 /** Package facts that copying one object into another used to get wrong, checked across every object:
  * no scaffold placeholder is left, every content provenance path resolves, every editorial credit link is cited by its own
  * package, and every placed star's catalogue distance, colour and stylesheet follow from its own records: its colour is its
- * measured colour lens, or the star field's colour fit at the effective temperature its measurement record cites. */
+ * measured colour dataset, or the star field's colour fit at the effective temperature its measurement record cites. */
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -101,12 +101,12 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
     const raster = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/preparation/raster.json'), 'utf8')) as unknown);
     const measured = requireArray(raster.surfaces).map(surface => requireRecord(surface)).find(surface => isRecord(surface.science) && surface.science.kind === 'stellar-photometric-color');
     if (measured) {
-      // The colour the preparation report records for the lens: the measured disc colour, before any gravity darkening by latitude.
+      // The colour the preparation report records for the dataset: the measured disc colour, before any gravity darkening by latitude.
       const reports: Record<string, unknown>[] = [];
       const walkReports = (value: unknown) => { if (isRecord(value)) { if (isRecord(value.stellarPhotometricColor)) reports.push(value.stellarPhotometricColor); Object.values(value).forEach(walkReports); } else if (Array.isArray(value)) value.forEach(walkReports); };
       walkReports(JSON.parse(await readFile(resolve(directory, 'prepared/assets.json'), 'utf8')) as unknown);
       const srgb = requireArray(reports[0]?.srgb).map(value => requireFiniteNumber(value));
-      assert.equal(catalog.color, `#${srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`, `${id}: the catalogue colour is the prepared colour of its measured ${String(measured.id)} lens`);
+      assert.equal(catalog.color, `#${srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`, `${id}: the catalogue colour is the prepared colour of its measured ${String(measured.id)} dataset`);
       // An independent second spectrum, when the colour record names one, agrees within the threshold or the record says why not.
       const colorRecord = requireRecord(JSON.parse(await readFile(resolve(directory, 'source', requireString(measured.source)), 'utf8')) as unknown);
       if (colorRecord.crossCheck !== undefined) {

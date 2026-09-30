@@ -12,7 +12,7 @@
  *   `controlled-ortho`; their raw GEOMED products are read from the given directory (the same PDS Ring-Moon Systems Node
  *   volume as the pinned approach frames), so the comparison is frame against the same frame placed by bundle adjustment.
  * - `mosaic`: every limb-placed frame against a controlled cylindrical mosaic of the body (an ISIS cube pinned as another
- *   lens), for bodies whose controlled release is a mosaic rather than per-frame orthophotos. The comparison grid follows the
+ *   dataset), for bodies whose controlled release is a mosaic rather than per-frame orthophotos. The comparison grid follows the
  *   mosaic's pixel, and the search reaches ±60 cells.
  * With --write, the report goes to the recipe's `output.oracle` path beside the placement report.
  */

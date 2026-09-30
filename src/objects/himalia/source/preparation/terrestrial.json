@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "himalia",
   "displayName": "Himalia",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Jupiter-system ephemeris. Illustrative display pole aligned to the fitted orbital normal, with an arbitrary meridian. This is not a measured spin axis, synchronous rotation, or a current landmark phase."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "apophis",
   "displayName": "Apophis",
@@ -105,6 +105,6 @@
     "sunSource": "Pinned JPL Horizons elements and a fixed illustrative source-model frame; no tumbling attitude propagation"
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

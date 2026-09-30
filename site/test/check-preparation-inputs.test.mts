@@ -64,15 +64,15 @@ test('a bake refuses to start while other objects\' prepared files are missing o
   const root = await mkdtemp(join(tmpdir(), 'cssearth-inputs-'));
   try {
     const inventory = (files: Record<string, string>) => JSON.stringify({ schema: 'cssearth-inventory@1', assets: Object.entries(files).map(([filename, text]) => ({ location: 'prepared', filename, bytes: Buffer.byteLength(text), sha256: createHash('sha256').update(text).digest('hex') })) });
-    await put(join(root, 'src/objects/alpha/inventory.json'), inventory({ 'controls.json': '{"a":1}', 'lenses.json': '{}' }));
+    await put(join(root, 'src/objects/alpha/inventory.json'), inventory({ 'controls.json': '{"a":1}', 'datasets.json': '{}' }));
     await put(join(root, 'src/objects/alpha/prepared/controls.json'), '{"a":1}');
-    await put(join(root, 'src/objects/alpha/prepared/lenses.json'), '{"stale":true}');
+    await put(join(root, 'src/objects/alpha/prepared/datasets.json'), '{"stale":true}');
     await put(join(root, 'src/objects/beta/inventory.json'), inventory({ 'controls.json': '{}' }));
     await mkdir(join(root, 'src/objects/gamma'), { recursive: true });
-    assert.deepEqual(await missingPreparedFiles([], { projectRoot: root }), ['alpha/prepared/lenses.json', 'beta/prepared/controls.json'], 'a wrong size and a missing file; an object with no inventory has nothing to miss');
-    assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/lenses.json'], 'the bake writes the files of the objects it bakes');
+    assert.deepEqual(await missingPreparedFiles([], { projectRoot: root }), ['alpha/prepared/datasets.json', 'beta/prepared/controls.json'], 'a wrong size and a missing file; an object with no inventory has nothing to miss');
+    assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/datasets.json'], 'the bake writes the files of the objects it bakes');
     await put(join(root, 'src/objects/sun/inventory.json'), inventory({ 'world-context.json': '{"old":1}', 'runtime.json': '{}' }));
     await put(join(root, 'src/objects/sun/prepared/world-context.json'), '{"rebuilt":true}');
-    assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/lenses.json', 'sun/prepared/runtime.json'], 'the Sun\'s world files are the bake\'s own output; its other files are not');
+    assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/datasets.json', 'sun/prepared/runtime.json'], 'the Sun\'s world files are the bake\'s own output; its other files are not');
   } finally { await rm(root, { recursive: true, force: true }); }
 });

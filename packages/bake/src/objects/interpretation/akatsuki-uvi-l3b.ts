@@ -1,6 +1,6 @@
 // Preparation only. Akatsuki (Venus Climate Orbiter) UVI Level 3b: one exposure already map-projected
 // by the mission's own `al3map` converter onto a 2880x1440 longitude-latitude grid at 0.125 degrees,
-// delivered as NetCDF-4 (an HDF5 container). One exposure sees one hemisphere, so the lens keeps the
+// delivered as NetCDF-4 (an HDF5 container). One exposure sees one hemisphere, so the dataset keeps the
 // unobserved side as a declared data gap; nothing is interpolated, extrapolated or filled.
 import * as h5 from 'h5wasm/node';
 import { number, object, parse, string } from '@cssearth/core/schema';

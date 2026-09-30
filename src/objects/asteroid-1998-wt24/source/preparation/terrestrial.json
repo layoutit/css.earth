@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "asteroid-1998-wt24",
   "displayName": "1998 WT24",
@@ -105,6 +105,6 @@
     "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

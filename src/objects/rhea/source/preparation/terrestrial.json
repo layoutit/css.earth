@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "rhea",
   "displayName": "Rhea",
@@ -257,6 +257,6 @@
     "sunSource": "JPL Rhea orbit plus VSOP87 Saturn position and IAU/WGCCRE Rhea rotation"
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

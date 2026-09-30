@@ -15,7 +15,7 @@ The [catalogue](catalogue.json) binds these recipes to a downloaded six-object [
 
 ## First processing result · 2026-09-12
 
-**Five completed experiments, one registration impasse. Visual acceptance is open for all five.** Each completed object has two lenses on shared opacity/geometry and 650 conditional compact lights. All depths in these five fields are unconstrained by measured velocities.
+**Five completed experiments, one registration impasse. Visual acceptance is open for all five.** Each completed object has two datasets on shared opacity/geometry and 650 conditional compact lights. All depths in these five fields are unconstrained by measured velocities.
 
 | Target | Matched stars | Held-out RMS, frame pixels | Emission components | Unassigned display signal |
 | --- | ---: | ---: | ---: | ---: |
@@ -30,7 +30,7 @@ These numbers describe registration and normalized image fitting, not scientific
 
 The batch exposed and corrected two shared registration problems: spatial coverage was evaluated outside the common footprint, and a 6,000-brightest-star cap omitted matching optical/infrared constellations. A single 12,000-candidate retry fixes M8 and Horsehead while retaining successful smaller-pool fits. Residual tolerances and independent held-out stars are unchanged.
 
-Browser inspection used Chromium 148.0.7778.96 at 1600×1050, DPR 1, default Detail 65%, Faint 35%, Depth 1×. All five load directly from validated offline receipts; both lenses, retained rotation, original overlay, star toggle and refresh pass without processing requests or script errors. M42 also passed cancelled-refit/refresh preservation. Front and oblique screenshots were inspected; they show real deficiencies:
+Browser inspection used Chromium 148.0.7778.96 at 1600×1050, DPR 1, default Detail 65%, Faint 35%, Depth 1×. All five load directly from validated offline receipts; both datasets, retained rotation, original overlay, star toggle and refresh pass without processing requests or script errors. M42 also passed cancelled-refit/refresh preservation. Front and oblique screenshots were inspected; they show real deficiencies:
 
 - **Source separation:** residual saturated stars/halos become broad emission components, especially in wide infrared fields.
 - **Coverage:** optical M42/Carina covers less sky than VISTA; missing color remains neutral with visible straight boundaries. NGC 6357's DSS context includes unrelated surrounding structures.
@@ -57,7 +57,7 @@ The first batch uses **unchanged ESO Publication TIFF 4K downloads**, with every
 2. Register their stars in the common sky frame. Hold out independent stars; require the same residual and spatial-coverage gates across the area both images observe. Preserve margins outside that overlap.
 3. Run NOX once on each complete downloaded grid; retain original, starless and residual images.
 4. Extract multiscale structure and fit the combined relative-luminosity target with an explicitly unmeasured depth prior.
-5. Bake one field, identical neutral opacity for both image lenses, and conditional compact lights.
+5. Bake one field, identical neutral opacity for both image datasets, and conditional compact lights.
 6. Validate all output resources, then expose the completed result in the existing lab without starting another job on navigation.
 
 Sources have different wavelengths, stretches and depths of coverage. Missing optical coverage must not be stretched into the wider infrared view. Compact lights are image detections with modeled depth, not established members. A positive-emission fit cannot recover obscuring dust or illumination-dependent reflection physics; M78 and Horsehead deliberately make those limits visible.

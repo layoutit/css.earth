@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createMaterialSlots, resyncCloudSupport, unfilteredCloud } from './material-slots.ts';
 import type { CloudDensityFilter } from '@cssearth/bake/volume';
 
-test('material toggles, lens swaps and density cutoffs share one texture-slot generation', () => {
+test('material toggles, dataset swaps and density cutoffs share one texture-slot generation', () => {
   const slots = createMaterialSlots();
   const cutoff = slots.begin('cutoff'), neutral = slots.begin('material');
   assert.equal(slots.current(cutoff), false, 'a material change supersedes an in-flight cutoff');

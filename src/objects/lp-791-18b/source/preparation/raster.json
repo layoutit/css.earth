@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/lp-791-18b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "lp-791-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "lp-791-18b-lens-{id}.webp",
+      "thumbnail": "lp-791-18b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffb66b, the colour lens of lp-791-18 (src/objects/lp-791-18/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffb66b, the colour dataset of lp-791-18 (src/objects/lp-791-18/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "lp-791-18",
           "srgb": "#ffb66b",
-          "source": "the colour lens of lp-791-18 (src/objects/lp-791-18/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of lp-791-18 (src/objects/lp-791-18/source/photometry/stellar-color.json)"
         }
       }
     }

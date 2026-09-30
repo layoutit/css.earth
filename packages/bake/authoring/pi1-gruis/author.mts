@@ -37,8 +37,8 @@ export async function authorPi1Gruis({ check = false } = {}) {
   const pixelMas = raw.axes.scale[0];
   const beam = writeReconstruction(raw, convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas), [['BEAMFWHM', BEAM_FWHM_MAS, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', RAW_IMAGE_PATH.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
   const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
-  const lens = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').lens, 'lens');
-  const display = requireRecord(lens.display, 'display'), frame = requireRecord(requireArray(lens.frames)[0], 'frame');
+  const dataset = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').dataset, 'dataset');
+  const display = requireRecord(dataset.display, 'display'), frame = requireRecord(requireArray(dataset.frames)[0], 'frame');
   const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
   const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
   const outputs: [string, Buffer][] = [[BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];

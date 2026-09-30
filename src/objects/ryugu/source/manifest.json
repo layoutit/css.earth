@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "ryugu-shape",
@@ -13,7 +13,7 @@
         "terrain",
         "elevation"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "projection": {
         "kind": "body-fixed-triangle-mesh",
         "longitudeDirection": "east",
@@ -54,7 +54,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 1800,
@@ -98,7 +98,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "Enhanced color",
       "falseColor": true,
       "width": 3600,
@@ -261,7 +261,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "close-up",
+      "datasetId": "close-up",
       "label": "Equatorial close-up",
       "falseColor": false,
       "width": 10000,
@@ -308,7 +308,7 @@
       "consumers": [
         "thermal-inertia"
       ],
-      "lensId": "thermal-inertia",
+      "datasetId": "thermal-inertia",
       "label": "Thermal inertia",
       "falseColor": true,
       "width": 3600,
@@ -355,7 +355,7 @@
       "consumers": [
         "spectral-slope"
       ],
-      "lensId": "spectral-slope",
+      "datasetId": "spectral-slope",
       "label": "Spectral slope",
       "falseColor": true,
       "width": 3600,
@@ -410,7 +410,7 @@
         "latitudeDegrees": 20,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

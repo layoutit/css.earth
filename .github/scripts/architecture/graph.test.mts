@@ -40,13 +40,13 @@ const FILES: Readonly<Record<string, string>> = {
   'packages/renderer/src/navigation/orbit.ts': 'export const orbit = 1;\n',
   'packages/renderer/src/navigation/camera.ts': 'export const camera = 1;\n',
   'labs/prepare/cli/prepare-x.mts': 'export default function run(): void {}\n',
-  'labs/objects/lens.ts': 'export const lens = 1;\n',
+  'labs/objects/dataset.ts': 'export const dataset = 1;\n',
   'site/Card.astro': '---\nconst title = 1;\n---\n<p>{title}</p>\n',
   'site/Page.astro': [
     '---',
     "import Card from './Card.astro';",
     "import run from '~prepare/prepare-x.mts';",
-    "import { lens } from '#prep/lens';",
+    "import { dataset } from '#prep/dataset';",
     "import { renderer } from '@x/renderer';",
     "import { camera } from '@x/renderer/navigation/camera.ts';",
     "type Orbit = typeof import('@x/renderer/platform/orbit');",
@@ -87,7 +87,7 @@ test('workspace imports resolve through exports and tsup entries, built or not, 
     const graph = await buildImportGraph(root, { details: true });
     assert.deepEqual(targets(graph, 'site/uses.mts'), ['packages/bake/src/volume/index.ts'], 'a built dist entry counts as its tsup source');
     assert.deepEqual(targets(graph, 'site/Page.astro'), [
-      'labs/objects/lens.ts', // package.json#imports
+      'labs/objects/dataset.ts', // package.json#imports
       'labs/prepare/cli/prepare-x.mts', // tsconfig path alias
       'packages/bake/src/volume/node/index.ts', // import('…').T, through a subpath entry with no src/index.ts
       'packages/renderer/src/index.ts', // unbuilt main entry

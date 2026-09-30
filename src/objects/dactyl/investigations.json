@@ -16,7 +16,7 @@
       "id": "galileo-surface",
       "subject": "Galileo resolved Dactyl observations",
       "status": "deferred",
-      "finding": "Earlier limb-only fits changed orientation with the sampled caps; the historical reports remain pinned. With the new published pole, Acmon, all 31 bright-limb crossings and 3887 km range, the unit-weight fit predicts Celmis within 0.53 native pixel. Paper-alignment variants move the pole by up to 2.52 pixels, and combined control-pick perturbations yield Celmis errors of 0.48–2.02 pixels. This improves the orientation constraint but does not qualify distributed map/model correspondence or surface visibility. No photographic lens is enabled.",
+      "finding": "Earlier limb-only fits changed orientation with the sampled caps; the historical reports remain pinned. With the new published pole, Acmon, all 31 bright-limb crossings and 3887 km range, the unit-weight fit predicts Celmis within 0.53 native pixel. Paper-alignment variants move the pole by up to 2.52 pixels, and combined control-pick perturbations yield Celmis errors of 0.48–2.02 pixels. This improves the orientation constraint but does not qualify distributed map/model correspondence or surface visibility. No photographic dataset is enabled.",
       "revisitWhen": "Actual SSI products and their camera/shape relation pass independent surface registration for the selected geometry.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dactyl/source/measurements.json",

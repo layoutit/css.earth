@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "pds-70-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -49,22 +49,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "pds-70-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield"
       ]
     },
     {
@@ -112,7 +96,7 @@
       "redistribution": "One archived spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -138,7 +122,7 @@
       "redistribution": "One archived spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -160,7 +144,7 @@
       "acquisition": "Authored method record: names the archived X-shooter spectra, how their two arms are joined and the colour computation applied",
       "redistribution": "checked authored source",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -176,7 +160,7 @@
       "acquisition": "VizieR ASU download in source/preparation/acquisition.json: the quadratic V-band coefficients (least-squares, ATLAS, solar metallicity, 2 km/s microturbulence) of the grid nodes at 3750 to 4000 K, log g 4.0 to 4.5, with the response's dated comment lines and blank lines removed so the bytes are stable.",
       "redistribution": "Table extract redistributed with attribution.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",

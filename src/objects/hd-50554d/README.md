@@ -8,7 +8,7 @@ It is one of 3 planets known around HD 50554. Its orbit and size follow Liu et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 28.06939485536 d Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive ps table (pl_refname LIU_ET_AL_2026): a/R* 34.4; Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive ps table (pl_refname LIU_ET_AL_2026): inclination derived from its impact parameter 0.5 with its a/R* 34.4 (Winn 2010, eq. 7) Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive ps table (pl_refname LIU_ET_AL_2026): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459508.008646 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 25 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-50554's measured colour (#fff3f0, the colour lens of hd-50554 (src/objects/hd-50554/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-50554's measured colour (#fff3f0, the colour dataset of hd-50554 (src/objects/hd-50554/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 50554's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (45, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

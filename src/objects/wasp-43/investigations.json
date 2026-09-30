@@ -74,7 +74,7 @@
       "id": "tess-limb-darkening",
       "subject": "Limb darkening measured from TESS transits",
       "status": "included",
-      "finding": "Patel & Espinoza (2022, AJ 163, 228; VizieR J/AJ/163/228 table 4) fitted a quadratic law to TESS transits of WASP-43b: u1 0.55 (+0.22 -0.31), u2 0.00 (+0.46 -0.30), so the limb is 45% as bright as the centre (about 25 to 80% within the uncertainty). The row is pinned and drawn as the colour lens's limb plate. TESS covers 600-1000 nm; no visible-light measurement exists. The JWST transits in the WASP-43b package also constrain limb darkening, but in the infrared, where it is weaker.",
+      "finding": "Patel & Espinoza (2022, AJ 163, 228; VizieR J/AJ/163/228 table 4) fitted a quadratic law to TESS transits of WASP-43b: u1 0.55 (+0.22 -0.31), u2 0.00 (+0.46 -0.30), so the limb is 45% as bright as the centre (about 25 to 80% within the uncertainty). The row is pinned and drawn as the colour dataset's limb plate. TESS covers 600-1000 nm; no visible-light measurement exists. The JWST transits in the WASP-43b package also constrain limb darkening, but in the infrared, where it is weaker.",
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ac5f55",
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/163/228"
@@ -84,7 +84,7 @@
       "id": "starspot-map",
       "subject": "Starspots on WASP-43",
       "status": "excluded",
-      "finding": "Esposito et al. (2017) find enhanced Ca II H and K emission, so the star is magnetically active and has spots, but no spot map exists or can be made with current data: the 0.07 mas disc cannot be imaged, the slow rotation rules out Doppler imaging, and a spot crossed during a transit is one strip at one moment while spots evolve over days. Recorded as a note on the lens, not drawn.",
+      "finding": "Esposito et al. (2017) find enhanced Ca II H and K emission, so the star is magnetically active and has spots, but no spot map exists or can be made with current data: the 0.07 mas disc cannot be imaged, the slow rotation rules out Doppler imaging, and a spot crossed during a transit is one strip at one moment while spots evolve over days. Recorded as a note on the dataset, not drawn.",
       "revisitWhen": "A published spot map or spot-crossing mapping of WASP-43.",
       "evidence": [
         "https://arxiv.org/abs/1702.03136"
@@ -94,7 +94,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for WASP-43",
       "status": "included",
-      "finding": "The marker is the colour lens as a disc with the measured TESS limb darkening, rendered from the pinned colour and limb-darkening records; it replaced the scaffold's flat disc.",
+      "finding": "The marker is the colour dataset as a disc with the measured TESS limb darkening, rendered from the pinned colour and limb-darkening records; it replaced the scaffold's flat disc.",
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ac5f55"
       ]

@@ -16,7 +16,7 @@
       "id": "earlier-stooke-mosaic",
       "subject": "Earlier Stooke 3600 by 1800 mosaic",
       "status": "excluded",
-      "finding": "Superseded by the selected higher-density version and does not form a duplicate lens.",
+      "finding": "Superseded by the selected higher-density version and does not form a duplicate dataset.",
       "revisitWhen": "A distinct release improves valid coverage or registration.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json",
@@ -48,7 +48,7 @@
       "id": "unmapped-spectra",
       "subject": "Thermal and spectral measurements",
       "status": "deferred",
-      "finding": "The survey found no qualified mapped product; disk spectra are not texture lenses.",
+      "finding": "The survey found no qualified mapped product; disk spectra are not texture datasets.",
       "revisitWhen": "A mapped product states its quantity, frame and coverage.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json",
@@ -59,7 +59,7 @@
       "id": "original-viking-mro",
       "subject": "Original Viking and MRO image route",
       "status": "included",
-      "finding": "The selected Stooke mosaic already integrates the identified useful HiRISE images. Those original mission observations are the underlying route, not an independent additional lens.",
+      "finding": "The selected Stooke mosaic already integrates the identified useful HiRISE images. Those original mission observations are the underlying route, not an independent additional dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json"
       ]

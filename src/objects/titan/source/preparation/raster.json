@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/titan/",
   "sourceWidth": 8192,
   "sourceHeight": 4096,
@@ -21,7 +21,7 @@
       "id": "normal",
       "resolutionScale": 0.25,
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "observations/titan-iss-2026.png",
       "falseColor": false,
       "science": {
@@ -41,7 +41,7 @@
     {
       "id": "vims-2um",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "vims/Titan_global_32ppd_2microns_v2.tif",
       "falseColor": false,
       "science": {
@@ -61,7 +61,7 @@
     {
       "id": "vims-5um",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "vims/Titan_global_32ppd_5microns_v2.tif",
       "falseColor": false,
       "science": {
@@ -81,7 +81,7 @@
     {
       "id": "vims-color-ratio",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "vims/Titan_global_32ppd_ColorRatio_v2.tif",
       "falseColor": true,
       "science": {
@@ -101,7 +101,7 @@
     {
       "id": "radar",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
       "falseColor": false,
       "science": {
@@ -126,7 +126,7 @@
     {
       "id": "topography",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
       "falseColor": true,
       "science": {
@@ -204,7 +204,7 @@
     {
       "id": "interpolated",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
       "falseColor": true,
       "science": {
@@ -282,7 +282,7 @@
     {
       "id": "coverage-distance",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
       "falseColor": true,
       "science": {
@@ -360,7 +360,7 @@
     {
       "id": "geology",
       "output": "titan-{id}{suffix}.webp",
-      "thumbnail": "titan-lens-{id}.webp",
+      "thumbnail": "titan-dataset-{id}.webp",
       "source": "geology/titan-geologic-units.tif",
       "falseColor": true,
       "science": {

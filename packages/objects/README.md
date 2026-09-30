@@ -9,7 +9,7 @@ Node file/image I/O and CSS projection are separate application adapters.
 
 `parseAuthoredObjectDescriptor()` is the authored-data boundary for migrated
 objects. It returns a typed `recipe` composed from declared source references,
-shape, surfaces and lenses, materials, frame banks, optional layers and motion,
+shape, surfaces and datasets, materials, frame banks, optional layers and motion,
 plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
 
@@ -53,7 +53,7 @@ files, which the bake writes, `setup:assets` restores and the build assembles (t
 `packages/objects/src/node/`). Nothing else in the package imports it. The manifests themselves stay beside each body.
 `@cssearth/objects/node/contract` is a second Node-only entry: the helpers tests use to
 check an object against its contract (its final prepared definition, read from
-`src/objects/<id>/prepared/object.json`, and fixture values required before a test
+`src/objects/<id>/prepared/runtime.json`, and fixture values required before a test
 inspects them).
 `@cssearth/objects/node/source-test` is the Node-only test helper for restored object source inputs.
 

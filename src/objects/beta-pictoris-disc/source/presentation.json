@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "beta-pictoris-disc",
   "name": "Beta Pictoris debris disc",
-  "defaultLens": "visible",
+  "defaultDataset": "visible",
   "bank": {
-    "path": "src/objects/beta-pictoris-disc/prepared/lenses.json"
+    "path": "src/objects/beta-pictoris-disc/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -22,7 +22,7 @@
   ],
   "sharedInputs": [],
   "inputEvidence": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "visible",
       "label": "HST/STIS · debris disc, visible light",

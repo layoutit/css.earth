@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/miranda/",
   "sourceWidth": 6400,
   "sourceHeight": 3200,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "miranda-{id}{suffix}.webp",
-      "thumbnail": "miranda-lens-{id}.webp",
+      "thumbnail": "miranda-dataset-{id}.webp",
       "source": "observations/mumap-cyl-180180.cub.gz",
       "falseColor": false,
       "science": {
@@ -60,7 +60,7 @@
     {
       "id": "elevation",
       "output": "miranda-{id}{suffix}.webp",
-      "thumbnail": "miranda-lens-{id}.webp",
+      "thumbnail": "miranda-dataset-{id}.webp",
       "source": "science/mudem-ZT-cyl.cub.gz",
       "falseColor": true,
       "science": {
@@ -120,7 +120,7 @@
     {
       "id": "geology",
       "output": "miranda-{id}{suffix}.webp",
-      "thumbnail": "miranda-lens-{id}.webp",
+      "thumbnail": "miranda-dataset-{id}.webp",
       "source": "science/geology-2026/categories.tif",
       "falseColor": true,
       "science": {
@@ -255,7 +255,7 @@
     {
       "id": "voyager-color",
       "output": "miranda-{id}{suffix}.webp",
-      "thumbnail": "miranda-lens-{id}.webp",
+      "thumbnail": "miranda-dataset-{id}.webp",
       "source": "observations/voyager-color/c2684411.equi.tif",
       "falseColor": true,
       "science": {

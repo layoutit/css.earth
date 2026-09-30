@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { RASTER_DECODE_LIMIT_PIXELS, RASTER_PAGE_PIXELS, packedRasterSize, rasterPageName, rasterPagePlan } from '@cssearth/bake/raster';
 
-const surfaces = (scales: readonly number[]) => scales.map((resolutionScale, index) => ({ id: `lens-${index}`, output: 'body-{id}{suffix}.webp', resolutionScale }));
+const surfaces = (scales: readonly number[]) => scales.map((resolutionScale, index) => ({ id: `dataset-${index}`, output: 'body-{id}{suffix}.webp', resolutionScale }));
 
 test('an atlas that decodes as one image is not paged', () => {
   // Callisto's recipe: a 51 MP packed atlas at 2x, under the 64 MP decode limit.
@@ -18,14 +18,14 @@ test('an atlas past the decode limit comes as pages of whole bands, each under t
   const plan = rasterPagePlan({ width: 7168, height: 3584, latitudeBands: 16, surfaces: surfaces([1, 1]) }, 2)!;
   assert.equal(plan.bandsPerPage, 1);
   assert.equal(plan.pageCount, 16);
-  assert.deepEqual(plan.surfaces[0], { name: 'body-lens-0@2x.webp', width: 14560, pageRows: 672 });
+  assert.deepEqual(plan.surfaces[0], { name: 'body-dataset-0@2x.webp', width: 14560, pageRows: 672 });
   assert.ok(14560 * 672 <= RASTER_PAGE_PIXELS && 14560 * 672 * 2 > RASTER_PAGE_PIXELS);
   // A level reduced by f keeps 2 texels per CSS pixel while the silhouette is at most 7168 / (π·f) pixels across.
   assert.deepEqual(plan.levelDiameters.map(value => Math.round(value)), [0, 285, 570, 1141]);
 });
 
-test('every lens of a paged body shares the band grouping, whatever its resolution', () => {
-  // Charon: four full-resolution lenses and two at 0.32 share pages of two bands.
+test('every dataset of a paged body shares the band grouping, whatever its resolution', () => {
+  // Charon: four full-resolution datasets and two at 0.32 share pages of two bands.
   const plan = rasterPagePlan({ width: 6400, height: 3200, latitudeBands: 16, surfaces: surfaces([1, 0.32]) }, 2)!;
   assert.equal(plan.bandsPerPage, 2);
   assert.deepEqual(plan.surfaces.map(({ width, pageRows }) => [width, pageRows]), [[13000, 1200], [4160, 384]]);

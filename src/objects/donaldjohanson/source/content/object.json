@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "donaldjohanson",
   "displayName": "Donaldjohanson",
@@ -87,9 +87,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "llorri",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "llorri",
     "controls": [
       {
         "id": "llorri",

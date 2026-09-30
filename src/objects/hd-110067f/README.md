@@ -10,7 +10,7 @@ A sphere with a radius of 2.601 Earth radii, lit by HD 110067. Neutral gray repr
 
 ## Evidence
 
-The focused hosted-orbit, source, package and rendered-scene checks passed; see the [system evidence](../hd-110067/evidence/README.md). Validation results and browser captures are recorded with the delivery change; no N-body dynamics are claimed.
+The focused hosted-orbit, source, package and rendered-scene checks passed; see the system evidence. Validation results and browser captures are recorded with the delivery change; no N-body dynamics are claimed.
 
 ## Known problems
 

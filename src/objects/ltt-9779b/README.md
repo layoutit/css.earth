@@ -8,7 +8,7 @@ It is the only planet known around LTT 9779. Its orbit and size follow Jenkins e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 0.7920645022 d Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): a/R* 3.877; Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): inclination 76.39 degrees Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460933.175839 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by ltt-9779's measured colour (#ffeade, the colour lens of ltt-9779 (src/objects/ltt-9779/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by ltt-9779's measured colour (#ffeade, the colour dataset of ltt-9779 (src/objects/ltt-9779/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of LTT 9779's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 96, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

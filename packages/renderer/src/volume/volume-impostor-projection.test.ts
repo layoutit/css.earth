@@ -90,11 +90,11 @@ test('a distant cloud beside or behind the camera is neither near nor visible', 
   expect(edge.visible).toBe(true);
 });
 
-test('a volume far behind the camera is out of view however large it would project, so its lenses are not fetched', () => {
+test('a volume far behind the camera is out of view however large it would project, so its datasets are not fetched', () => {
   const ahead = publication();
   // Camera at +10 looking down -z sees the origin; turned half a turn about y, it faces away.
   const behind = { ...ahead, world: { ...ahead.world, pose: { ...ahead.world.pose, orientationXyzw: [0, 1, 0, 0] as const } } };
-  // The lens fetch gate: big enough to resolve, and the bounding sphere reaches the viewport.
+  // The dataset fetch gate: big enough to resolve, and the bounding sphere reaches the viewport.
   const fetches = (p: VolumeCameraPublication) => projectedVolumeOpacity(p.world, p.viewport, frame, 1) > 0 && projectVolumeSphere(p.world, p.viewport, frame, 1).visible;
   expect(projectedVolumeOpacity(behind.world, behind.viewport, frame, 1)).toBe(projectedVolumeOpacity(ahead.world, ahead.viewport, frame, 1));
   expect(fetches(ahead)).toBe(true);
