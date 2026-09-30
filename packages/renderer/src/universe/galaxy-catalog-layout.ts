@@ -67,15 +67,26 @@ export function projectCatalogBounds(cornersM: readonly (readonly number[])[], w
     top: Math.min(...points.map(point => point!.y)), bottom: Math.max(...points.map(point => point!.y)) };
 }
 
+/** A prepared object's label priority is fixed by its record: each one is computed once and kept with it, never
+ * inside the per-frame sort. */
+const priorities = new WeakMap<PreparedCatalogObject, number>();
 function priority(object: PreparedCatalogObject): number {
-  if (object.status === 'candidate') return 0;
-  return labelImportance(isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? 'nebula' : 'galaxy', !isPreparedCluster(object) && Boolean(object.detailedObjectId));
+  let value = priorities.get(object);
+  if (value === undefined) {
+    value = object.status === 'candidate' ? 0
+      : labelImportance(isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? 'nebula' : 'galaxy', !isPreparedCluster(object) && Boolean(object.detailedObjectId));
+    priorities.set(object, value);
+  }
+  return value;
 }
 
 /** Foreground exclusions win; selection, major objects, then stable distance/id ties. */
 export function admitGalaxyLabels(candidates: readonly ProjectedGalaxy[], blockers: readonly LabelScreenRect[], selectedId: string | null,
   budget: LabelBudget = createLabelBudget(Infinity, Infinity, [], blockers)) {
-  const ranked = [...candidates].sort((a, b) => priority(b.object) - priority(a.object) || a.distanceM - b.distanceM || a.object.id.localeCompare(b.object.id));
+  // One priority read per candidate; the comparator reads numbers. The id comparison runs only on an exact distance tie.
+  const ranked = candidates.map(candidate => ({ candidate, priority: priority(candidate.object) }))
+    .sort((a, b) => b.priority - a.priority || a.candidate.distanceM - b.candidate.distanceM || a.candidate.object.id.localeCompare(b.candidate.object.id))
+    .map(({ candidate }) => candidate);
   const stable = ranked.map((candidate, index) => ({
     id: candidate.object.id, candidate, navigable: candidate.navigable ?? isNavigableCatalogObject(candidate.object),
     pinned: Number(candidate.object.id === selectedId), priority: ranked.length - index,

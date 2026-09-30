@@ -38,7 +38,8 @@ test('strokes share one svg per world context, name each group by its body and j
   b.publish([chord(0, 0, 1, 0, 1)]);
   const svgs = root.children.filter(child => child.tagName === 'svg');
   expect(svgs).toHaveLength(1);
-  expect(svgs[0]!.style.cssText).toContain('z-index:700');
+  // Its box is a world-context.css rule; only the stage's depth is inline.
+  expect(svgs[0]!.style).toEqual({ zIndex: '700' });
   const [groupA, groupB] = svgs[0]!.children;
   // No inline colour: the published swatch rule for [data-context-orbit] colours the group like its marker.
   expect(groupA!.style.color).toBeUndefined(); expect(groupA!.dataset.contextOrbit).toBe('mars');

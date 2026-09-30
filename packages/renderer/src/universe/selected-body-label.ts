@@ -69,8 +69,8 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
   const label = host.ownerDocument.createElement('span');
   label.className = 'prepared-context-label prepared-selected-body-label';
   label.ariaHidden = 'true';
-  // Its own small layer: it moves with the camera every frame and must not repaint the layer beneath it.
-  label.style.cssText = 'position:absolute;left:50%;top:50%;opacity:0;pointer-events:none;will-change:transform';
+  // Its own small layer (world-context.css): it moves with the camera every frame and must not repaint the layer beneath it.
+  label.style.opacity = '0';
   host.appendChild(label);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock);
   let preparedId = '', measuredId = '', width = 0, height = 0;

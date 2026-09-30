@@ -52,8 +52,8 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
   const document = host.ownerDocument, root = document.createElement('div');
   root.className = 'prepared-environment-labels';
   root.ariaHidden = Object.keys(links).length ? 'false' : 'true';
-  // Zero-size root at the stage centre, children placed from it: a full-screen box above the globe became a full-screen layer.
-  root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:0';
+  // Zero-size root at the stage centre, children placed from it (world-context.css): a full-screen box above the globe
+  // became a full-screen layer.
   const picking = screenPicking(pickingHost);
   const shellList = [...shells];
   const shellEntries = shellList.map(shell => createEntry(document, 'shell', shell.id, authoredName(names[shell.id]) ?? humanizeId(shell.id), shell.frame));
@@ -130,9 +130,8 @@ function createEntry(document: Document, kind: Entry['kind'], id: string, name: 
   element.className = 'prepared-context-label';
   element.dataset.environmentKind = kind;
   element.textContent = name;
-  element.style.cssText = 'position:absolute;left:0;top:0;visibility:hidden;opacity:0;pointer-events:none';
-  if (href) element.style.cursor = 'pointer';
-  element.style.visibility = 'hidden'; element.style.opacity = '0';
+  // Its place and inert pointer are world-context.css rules, a link's cursor too; the fade owns visibility and opacity.
+  element.style.cssText = 'visibility:hidden;opacity:0';
   return { kind, id, element, frame, pickRect: null, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null };
 }
 
@@ -221,7 +220,8 @@ function show(entry: Entry): void {
 function hideNow(entry: Entry, fader: ReturnType<typeof createOpacityFader>): void {
   if (entry.hideTimer !== null) clearTimeout(entry.hideTimer);
   entry.hideTimer = null;
-  if (entry.element.style.pointerEvents !== 'none') entry.element.style.pointerEvents = 'none';
+  // Only a link's fade writes pointer events (fadeTo); the stylesheet's inert default holds for the rest.
+  if (entry.element.style.pointerEvents === 'auto') entry.element.style.pointerEvents = 'none';
   if (entry.element.tabIndex !== -1) entry.element.tabIndex = -1;
   entry.targetOpacity = 0; fader.set(entry.element, 0);
   if (entry.element.style.visibility !== 'hidden') entry.element.style.visibility = 'hidden';

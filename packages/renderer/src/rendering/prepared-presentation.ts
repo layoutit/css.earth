@@ -7,7 +7,7 @@ import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterial
 import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
-import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
+import { createTextureTileWriter, selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter } from './prepared-leaf-box-direct.js';
 import { createSettlePacer } from './settle-pacer.js';
@@ -205,9 +205,13 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])]);
   // The same prepared groups let the camera bring a resolving mesh back in stages.
   const revealGroups = Object.freeze((definition.tree.activationGroups ?? []).map(group => Object.freeze(group.map(index => nodes[index]))));
-  // Disable CSS-owned motion before attachment. Prepared handles below own its
-  // clock, pause state and disposal without forcing live style discovery.
-  for (const plan of [...definition.motion ?? [], ...definition.animations]) nodes[plan.target].style.animation = 'none';
+  // Prepared handles below own motion: its clock, pause state and disposal, without forcing live style discovery.
+  // Delivered scene CSS carries no motion (site/build/prepared-motion-css.mts); only a server-rendered saved view poses
+  // a target with a paused CSS animation of its own (prepared-native-view.ts), which the handles replace.
+  for (const plan of [...definition.motion ?? [], ...definition.animations]) {
+    const style = nodes[plan.target].style;
+    if (style.animation) style.removeProperty('animation');
+  }
   const motion = (definition.motion ?? []).map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, iterations: Infinity, easing: 'linear', fill: 'both' });
     animation.id = plan.id;
@@ -232,7 +236,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       Math.max(0, Math.min(plan.duration, (controlPitch - plan.sourceMinimum) * plan.millisecondsPerDegree)));
   }, initialProjection, owned);
   let selectionPublications = 0, styleWrites = 0;
-  const tiledKeys = tiledTextureKeys(definition.textureLevels);
+  // Tiled page leaves take their final background placement with every image write (prepared-texture-levels.ts).
+  const textureTiles = createTextureTileWriter(definition.textureLevels, nodes, writeStyle);
   let selectedTextures = new Map<string, { target: number; name: string }>();
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const target = (index: number) => index === -1 ? stage : nodes[index];
@@ -251,16 +256,17 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
       const variant = selectedPreparedVariant(definition, selection);
       // Resolve the complete texture group before publishing any part of it.
-      const writes = variant.writes.flatMap(binding => {
+      type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
+      const writes = variant.writes.flatMap((binding): CommittedWrite[] => {
         if (binding.kind !== "texture") return [binding];
         const url = binding.resource === null ? null : resources.url(plan?.textureResources?.[binding.resource] ?? binding.resource);
         // A deferred (undrawn) mesh publishes no texture at all; the resolving
         // camera re-plans and commits the complete group before it is shown.
         if (binding.resource !== null && !url && !plan?.deferredTextures) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
         const image = { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})` };
-        // A page some level draws from a shared sheet carries its tile (or its own placement) with every image.
-        if (binding.resource === null || !tiledKeys.has(binding.resource)) return [image];
-        return [image, ...textureTileStyles(binding.name, plan?.textureTiles?.[binding.resource]).map(([name, value]) => ({ kind: "style" as const, target: binding.target, name, value }))];
+        // A page some level draws from a shared sheet places its leaves on its tile (or on the page itself) with every image.
+        if (binding.resource === null || !textureTiles.has(binding.target, binding.name)) return [image];
+        return [image, { kind: "tile" as const, target: binding.target, name: binding.name, tile: plan?.textureTiles?.[binding.resource] }];
       });
       // Texture references belong to the committed dataset. Retire references
       // absent from its successor in the same publication, without embedding
@@ -275,6 +281,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         const element = target(binding.target);
         if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
         else if (binding.kind === "class") { if (element.classList.contains(binding.name) !== binding.value) element.classList.toggle(binding.name, binding.value); }
+        else if (binding.kind === "tile") styleWrites += textureTiles.publish(binding.target, binding.name, binding.tile);
         else publishStyle(binding.target, binding.name, binding.value);
       };
       // Alternative radial meshes address different atlas layouts. Hide the

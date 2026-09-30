@@ -229,10 +229,14 @@ test('baked sparse sample shows dots before names without enabling unsupported n
   for (const id of galaxySample.ids) {
     expect(runtime.resolve(id)?.id).toBe(id);
     expect(runtime.inspect().labels[id]!.dataset.objectNavigate).toBeUndefined();
-    expect(runtime.inspect().labels[id]!.style.cursor).toBe('default');
+    // Without data-object-navigate the label keeps the stylesheet's default cursor (world-context.css), never an inline one.
+    expect(runtime.inspect().labels[id]!.style.cursor).toBeUndefined();
     runtime.inspect().labels[id]!.dispatchEvent(new Event('click'));
   }
   expect(onSelect).not.toHaveBeenCalled(); runtime.destroy();
+  const css = readFileSync(new URL('../styles/world-context.css', import.meta.url), 'utf8');
+  expect(css).toMatch(/\.prepared-galaxy-catalog \[data-galaxy-label\] \{\s*cursor: default;\s*\}/u);
+  expect(css).toMatch(/\.prepared-galaxy-catalog \[data-galaxy-label\]\[data-object-navigate\] \{\s*cursor: pointer;\s*\}/u);
 });
 
 test('a focused catalogue-only row outside the display sample does not fabricate a marker and caption', () => {

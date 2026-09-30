@@ -1,3 +1,63 @@
+/* The world's zero-size root at the stage centre: every child is placed from it (prepared-world-context.ts). */
+.prepared-world-context {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* Orbit roots only paint; the stage picker owns their hits. Bars draw inside a root that places and orders them. */
+.prepared-world-context .context-orbit {
+  pointer-events: none;
+}
+.prepared-world-context .context-orbit-bars {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  height: 0;
+}
+/* The shared orbit strokes' svg sits at the stage centre with visible overflow and composites once; its z-index, the
+   stage's depth base, is inline (prepared-orbit-lines.ts). */
+.prepared-world-context .context-orbit-strokes {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  overflow: visible;
+  pointer-events: none;
+  will-change: transform;
+}
+/* A body's retained leaves, cloned from one template (world-context-marker-paint.ts): a mover > a marker > its sprite and
+   caption, each a fixed 16 px box (BODY_INDICATOR_DIAMETER). Only what a body or a frame changes is inline: the mover's
+   transform, opacity, visibility and z-index, the marker's colour and visibility, the sprite's image, colour and scale.
+   As a fixed-size box with layout and size containment the mover is a relayout boundary: a marker's visibility or cue
+   change lays out its own boxes, not the document. */
+.prepared-world-context .context-mover,
+.prepared-world-context [data-context-body] > i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+.prepared-world-context .context-mover {
+  transform-origin: 0 0;
+  contain: layout size;
+}
+.prepared-world-context [data-context-body] {
+  position: absolute;
+  inset: 0;
+  width: 16px;
+  height: 16px;
+  transform-origin: 0 0;
+  text-decoration: none;
+  pointer-events: none;
+}
+.prepared-world-context [data-context-body] > i {
+  background-repeat: no-repeat;
+}
+
 /* Shared presentation for the retained, anonymous point and orbit leaves. */
 .prepared-world-context s:not([data-context-body]) {
   position: absolute;
@@ -29,8 +89,9 @@
 .prepared-world-context [data-context-body-visible="false"] > i {
   background: none !important;
 }
-/* A plain asteroid dot at half strength: at 1.5 px the belt then sums to the brightness its 2 px sprites had. */
+/* A plain asteroid dot is round, at half strength: at 1.5 px the belt then sums to the brightness its 2 px sprites had. */
 .prepared-world-context [data-context-plain-dot] > i {
+  border-radius: 50%;
   opacity: 0.5;
 }
 .prepared-world-context [data-context-body]::before,
@@ -40,8 +101,8 @@
   transform-origin: 0 0;
   translate: 8px 8px;
   /* The marker never scales (its sprite child does), so the ring and caption keep their size without a per-frame
-     counter-scale. The annotation scale is a device setting. */
-  scale: var(--context-annotation-scale, 1);
+     counter-scale. The annotation scale is a device setting, declared directly (phones: below). */
+  scale: 1;
   pointer-events: none;
 }
 .prepared-world-context [data-context-body]::before,
@@ -124,6 +185,70 @@
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-label-visible="true"] > .context-caption::after {
   opacity: 1;
 }
+/* The galaxy catalogue (prepared-galaxy-catalog.ts): a zero-size root at the stage centre whose dots, R500 apertures,
+   kind markers and labels are placed from it. Their fades own opacity and visibility, the camera their transforms, an
+   aperture's ellipse its size, and a label's pick state its pointer events; the rest is fixed here. */
+.prepared-galaxy-catalog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.prepared-galaxy-catalog [data-galaxy-dot],
+.prepared-galaxy-catalog [data-cluster-aperture],
+.prepared-galaxy-catalog [data-galaxy-label] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.prepared-galaxy-catalog [data-galaxy-dot] {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #c2ccd8;
+}
+.prepared-galaxy-catalog [data-cluster-aperture] {
+  box-sizing: border-box;
+  border: 1px solid #80a1cc;
+  border-radius: 50%;
+}
+.prepared-galaxy-catalog [data-galaxy-label] {
+  cursor: default;
+}
+.prepared-galaxy-catalog [data-galaxy-label][data-object-navigate] {
+  cursor: pointer;
+}
+/* Environment captions (environment-labels.ts): a zero-size root at the stage centre whose captions are placed from it.
+   A caption's fade owns its visibility and opacity, and a link's fade its pointer events. */
+.prepared-environment-labels {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.prepared-environment-labels [data-environment-label] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.prepared-environment-labels [data-environment-navigate] {
+  cursor: pointer;
+}
+.prepared-context-marker {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
 .prepared-context-label[tabindex="0"]:is(:hover, :focus-visible, [data-object-hovered="true"]) {
   /* The shared fader owns inline opacity; admitted hover takes precedence. */
   opacity: 1 !important;
@@ -175,10 +300,17 @@
   opacity: 1;
 }
 
-/* Phones draw circles and names a step smaller (12 px circle, 10.5 px name): at full size they crowd a 400 px scene.
-   The scale covers the circle, the name and its offset together; hit targets keep their full size. */
+/* The selected body's caption (selected-body-label.ts, and an image mesh's own in image-mesh.ts) is its own small layer
+   at the stage centre: it moves with the camera every frame and must not repaint the layer beneath it. Its opacity and
+   transform are inline. */
+.prepared-selected-body-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
 @media (max-width: 820px), (orientation: portrait) {
-  .prepared-world-context { --context-annotation-scale: .75; }
   /* Scale typography only: scaling this positioned element also scales its
      translation, pulling the caption back across the body's projected limb. */
   .prepared-selected-body-label { font-size: 10.5px; line-height: 13.5px; height: 13.5px; }
@@ -204,7 +336,7 @@
   inset: 0 auto auto 0;
   transform-origin: 0 0;
   translate: 8px 8px;
-  scale: var(--context-annotation-scale, 1);
+  scale: 1;
   width: 16px;
   height: 16px;
   overflow: visible;
@@ -235,6 +367,18 @@
 .prepared-world-context [data-context-label-case="upper"],
 .prepared-selected-body-label[data-label-case="upper"] {
   text-transform: uppercase;
+}
+
+/* Phones draw circles and names a step smaller (12 px circle, 10.5 px name): at full size they crowd a 400 px scene.
+   The scale covers the circle, the name and its offset together; hit targets keep their full size. It follows every
+   rule that declares the full-size scale, so it replaces them by order at equal specificity; no custom property
+   carries it. */
+@media (max-width: 820px), (orientation: portrait) {
+  .prepared-world-context [data-context-body]::before,
+  .prepared-world-context [data-context-body] > .context-caption,
+  .prepared-world-context [data-context-body] > .context-locator {
+    scale: .75;
+  }
 }
 
 /* Annotation strength by prepared level (contextAnnotationOpacity in marker-presentation.ts; its test holds every level

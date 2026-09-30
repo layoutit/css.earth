@@ -33,7 +33,8 @@ export function mountCatalogMarker(marker: HTMLElement, object: PreparedCatalogO
 export function mountCatalogMarkerKind(marker: HTMLElement, kind: CatalogMarkerKind): void {
   marker.dataset.catalogMarkerKind = kind;
   marker.className = 'prepared-context-marker';
-  marker.style.cssText = 'position:absolute;left:50%;top:50%;width:16px;height:16px;opacity:0;visibility:hidden;pointer-events:none';
+  // Its box is a world-context.css rule; the fade owns opacity and visibility.
+  marker.style.cssText = 'opacity:0;visibility:hidden';
   marker.setAttribute('aria-hidden', 'true');
   marker.innerHTML = '';
 }

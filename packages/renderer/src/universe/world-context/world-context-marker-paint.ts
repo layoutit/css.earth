@@ -22,6 +22,49 @@ interface MarkerFrame {
   readonly emphasis: number;
 }
 
+// Every marker's constant geometry is a world-context.css rule (.context-mover, [data-context-body], its sprite `> i`):
+// only what a body or a frame changes is written inline. A bare mover carries the per-frame transform, opacity and paint
+// order, and starts hidden: a publication clears its visibility to show it. The marker, with its ring pseudo-element,
+// caption and attribute rules, keeps a stable style, so motion restyles one plain leaf instead of three nodes. The
+// sprite scales alone: scaling the marker made its ring and caption counter-scale through an inherited custom property,
+// which re-resolved the marker and both annotations for every moving body on every frame.
+
+/** The retained leaves of one marker: mover > marker > (sprite, caption). */
+export interface WorldContextMarkerLeaves {
+  readonly mover: HTMLElement; readonly marker: HTMLElement; readonly spriteLeaf: HTMLElement; readonly caption: HTMLElement;
+}
+
+/** Every marker is a deep clone of one template per kind, so a world of thousands of bodies writes its constant
+ * attributes once per mount, not once per body. A plain dot's sprite leaf is round (its rule) and never takes an image;
+ * the caller sets its colour. */
+export function createWorldContextMarkerFactory(document: Document) {
+  const templates: { plain?: HTMLElement; sprite?: HTMLElement } = {};
+  const template = (plainDot: boolean) => {
+    const mover = document.createElement('b');
+    mover.className = 'context-mover';
+    mover.style.visibility = 'hidden';
+    const marker = document.createElement('s');
+    marker.dataset.contextIndicatorVisible = 'false';
+    marker.dataset.contextLabelVisible = 'false';
+    marker.dataset.contextAnnotationsAnimate = 'false';
+    if (plainDot) marker.dataset.contextPlainDot = '';
+    const spriteLeaf = document.createElement('i');
+    const caption = document.createElement('u');
+    caption.className = 'context-caption';
+    marker.appendChild(spriteLeaf);
+    marker.appendChild(caption);
+    mover.appendChild(marker);
+    return mover;
+  };
+  return (plainDot: boolean): WorldContextMarkerLeaves => {
+    const source = plainDot ? templates.plain ??= template(true) : templates.sprite ??= template(false);
+    const mover = source.cloneNode(true) as HTMLElement, marker = mover.firstChild as HTMLElement;
+    return { mover, marker, spriteLeaf: marker.firstChild as HTMLElement, caption: marker.lastChild as HTMLElement };
+  };
+}
+
+export type WorldContextMarkerPaint = ReturnType<typeof createWorldContextMarkerPaint>;
+
 /** Retained DOM and cached writes for one world-context marker. Presentation decisions stay with the publisher. */
 export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLElement, spriteLeaf: HTMLElement, caption: HTMLElement,
   body: { readonly color: string; readonly contextColor?: string; readonly dotColor?: string }, sprite: SpriteWithUrl | undefined, locator: SVGSVGElement) {

@@ -76,8 +76,9 @@ function sharedSvg(root: HTMLElement, depthBase: number): SVGSVGElement {
   if (!svg || !svg.isConnected) {
     svg = root.ownerDocument.createElementNS(SVG, 'svg');
     svg.setAttribute('class', 'context-orbit-strokes'); svg.setAttribute('width', '1'); svg.setAttribute('height', '1'); svg.setAttribute('aria-hidden', 'true');
-    // Composited once: every orbit paints into this one layer instead of earning its own by overlap.
-    svg.style.cssText = `position:absolute;left:50%;top:50%;overflow:visible;pointer-events:none;will-change:transform;z-index:${depthBase}`;
+    // Composited once: every orbit paints into this one layer instead of earning its own by overlap. Its box is a
+    // world-context.css rule; only the depth, the stage's own, is inline.
+    svg.style.zIndex = String(depthBase);
     root.appendChild(svg); sharedSvgs.set(root, svg);
   }
   return svg;

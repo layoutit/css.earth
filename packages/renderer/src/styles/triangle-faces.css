@@ -4,3 +4,8 @@
 @supports not ((corner-top-left-shape: bevel) and (corner-top-right-shape: bevel)) {
   .object-stage .polycss-mesh > u { border-radius: 0; }
 }
+
+/* A prepared face waiting for its activation batch draws no image, and a withheld one no box, whatever image and display
+   its selection has already written inline (prepared-texture-activation.ts). Activation removes the attribute. */
+[data-texture-pending] { background-image: none !important; }
+[data-texture-pending="withheld"] { display: none !important; }
