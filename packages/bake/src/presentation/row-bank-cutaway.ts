@@ -122,7 +122,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const startup = entries.filter(entry => entry.pool === "warm").map(entry => entry.key);
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun,
     assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
-      preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: Math.max(interiorKeys.length + 1, 2), concurrency: Math.max(interiorKeys.length + 1, 2) }),
+      // A switch holds both datasets' surface and poles until the new one commits; the cutaway holds its seven images and one more.
+      preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: Math.max(interiorKeys.length + 1, 4), concurrency: Math.max(interiorKeys.length + 1, 4) }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true }),
       preparedResourcePool("billboard", entries, { retention: "selection", decoding: "sync" })],
