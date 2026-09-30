@@ -51,12 +51,13 @@ function prepareLegend(objectId: string, legend: DatasetRecipe["legend"]) {
 }
 
 /** Stepped datasets form groups of at least two consecutive members with distinct step labels; a group is never a dataset id. */
-export function validateDatasetSteps(objectId: string, controls: readonly { id: string; step?: { group: string; label: string; autoplay?: boolean } }[]) {
+export function validateDatasetSteps(objectId: string, controls: readonly { id: string; step?: { group: string; label: string; autoplay?: boolean; opens?: string } }[]) {
   const seen = new Set<string>();
   controls.forEach((control, index) => {
     const step = control.step;
     if (step === undefined) return;
     if (step.autoplay !== undefined && typeof step.autoplay !== 'boolean') throw new TypeError(`${objectId}/${control.id}: step autoplay must be boolean`);
+    if (step.opens !== undefined && step.opens !== 'first' && step.opens !== 'last') throw new TypeError(`${objectId}/${control.id}: step opens must be "first" or "last", not ${JSON.stringify(step.opens)}`);
     if (typeof step.group !== "string" || !/^[a-z][a-z0-9-]*$/u.test(step.group) || typeof step.label !== "string" || !step.label.trim()) {
       throw new TypeError(`${objectId}/${control.id}: a dataset step needs a group id and a label`);
     }
@@ -70,6 +71,7 @@ export function validateDatasetSteps(objectId: string, controls: readonly { id: 
     const members = controls.filter(control => control.step?.group === group);
     if (members.length < 2) throw new TypeError(`${objectId}: step group ${group} needs at least two steps`);
     if (new Set(members.map(member => member.step!.autoplay ?? true)).size !== 1) throw new TypeError(`${objectId}: the steps of ${group} must agree on autoplay`);
+    if (new Set(members.map(member => member.step!.opens ?? 'first')).size !== 1) throw new TypeError(`${objectId}: the steps of ${group} must agree on the step it opens on`);
     if (new Set(members.map(member => member.step!.label)).size !== members.length) throw new TypeError(`${objectId}: the steps of ${group} need distinct labels`);
   }
 }
@@ -113,7 +115,8 @@ export function prepareDatasets(
         ...(legend ? { legend } : {}),
         ...(control.legendNote ? { legendNote: control.legendNote } : {}),
         ...(control.step ? { step: { group: control.step.group, label: control.step.label,
-          ...(control.step.autoplay === undefined ? {} : { autoplay: control.step.autoplay }) } } : {}),
+          ...(control.step.autoplay === undefined ? {} : { autoplay: control.step.autoplay }),
+          ...(control.step.opens === undefined ? {} : { opens: control.step.opens }) } } : {}),
         surfaceUrl: surface?.url ?? assetUrl(objectId, control.surface),
         surface2xUrl: surface?.url2x ?? assetUrl(objectId, control.surface?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
         polesUrl: surface?.polesUrl ?? assetUrl(objectId, control.poles),

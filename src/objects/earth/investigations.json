@@ -125,9 +125,9 @@
     },
     {
       "id": "mur-enso-imagery",
-      "subject": "NASA GIBS MUR v4.1 sea-surface temperature anomaly image, 7 September 2026",
+      "subject": "NASA GIBS MUR v4.1 sea-surface temperature anomaly images, the newest week of daily analyses",
       "status": "included",
-      "finding": "The ENSO view uses the 1 km GIBS imagery grid of 40,960 by 20,480 pixels, 3,200 tiles whose URL, bytes, hash and response date are pinned and which must attest the requested layer and date unless decoded alpha shows no observations, with the pinned NASA colour table supplying 0.1 degree bins and saturation below -3 and at +3 degrees; RGB is not inverted into continuous measurements, transparent land, ice and unavailable observations stay gray, and the map and its dated NOAA advisory are not live feeds.",
+      "finding": "The ENSO view steps through the newest seven daily analyses on the 1 km GIBS imagery grid of 40,960 by 20,480 pixels: 3,200 tiles per date that must attest the requested layer and date unless decoded alpha shows no observations, with the pinned NASA colour table supplying 0.1 degree bins and saturation below -3 and at +3 degrees. RGB is not inverted into continuous measurements; transparent land, ice and unavailable observations stay gray. The maps and the dated NOAA advisory are as current as the last refresh, not a live feed.",
       "evidence": [
         "https://doi.org/10.5067/GHGMR-4FJ04"
       ]
@@ -139,7 +139,7 @@
       "finding": "The earlier CoralTemp comparison used a different 1991-2020 baseline and display range, so it is not a resolution-only comparison with the selected MUR imagery.",
       "revisitWhen": "A sea-surface anomaly product on a comparable baseline and display range is compared.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L232"
+        "https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta_clim19912020.php"
       ]
     },
     {

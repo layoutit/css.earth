@@ -20,6 +20,10 @@ const optionalBoolean = (value: unknown, label: string) => {
   if (value !== undefined && typeof value !== 'boolean') throw new TypeError(`Prepared ${label} must be boolean.`);
   return value;
 };
+const stepOpens = (value: unknown) => {
+  if (value !== 'first' && value !== 'last') throw new TypeError(`Prepared dataset step opens must be "first" or "last", not ${JSON.stringify(value)}.`);
+  return value;
+};
 const array = (value: unknown, label: string): readonly unknown[] => {
   if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
   return value;
@@ -107,7 +111,8 @@ function datasetControl(value: unknown): DatasetControl {
   return { id: text(dataset.id, 'dataset id'), label, thumbnailUrl: text(dataset.thumbnailUrl, 'dataset thumbnail'),
     ...(noData === undefined ? {} : { noData }),
     ...(step === undefined ? {} : { step: { group: text(step.group, 'dataset step group'), label: text(step.label, 'dataset step label'),
-      ...(step.autoplay === undefined ? {} : { autoplay: optionalBoolean(step.autoplay, 'dataset step autoplay') }) } }),
+      ...(step.autoplay === undefined ? {} : { autoplay: optionalBoolean(step.autoplay, 'dataset step autoplay') }),
+      ...(step.opens === undefined ? {} : { opens: stepOpens(step.opens) }) } }),
     ...(volume === undefined ? {} : { volume: { objectId: text(volume.objectId, 'volume object'), datasetId: text(volume.datasetId, 'volume dataset'), surface: text(volume.surface, 'volume surface') } }),
     facts: dataset.facts === undefined ? undefined : facts(dataset.facts), legend: legend(dataset.legend, label) };
 }

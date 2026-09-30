@@ -1,10 +1,10 @@
 import type {KernelEnum, WebpOptions} from 'sharp';
 import type {AtmosphereConfiguration} from './atmosphere.ts';
 import type { PagedSceneProfile } from '../scene-contract.ts';
-import type { CoraltempRecipe, EnsoRecipe, ElevationRecipe, NightLightRecipe } from '../contracts.ts';
+import type { EnsoRecipe, ElevationRecipe, NightLightRecipe } from '../contracts.ts';
 import type { DeepOceanFillRecipe } from '../deep-ocean-fill.ts';
 export type ResizeKernel = keyof KernelEnum;
-export type ScientificSurfaceRecipe = (CoraltempRecipe & {kind: 'coraltemp-anomaly'}) | (EnsoRecipe & {kind: 'gibs-mur-imagery'}) |
+export type ScientificSurfaceRecipe = (EnsoRecipe & {kind: 'gibs-mur-imagery'}) |
   (ElevationRecipe & {kind: 'gebco-elevation'; legend: ElevationRecipe['legend'] & {image: string}}) |
   (NightLightRecipe & {kind: 'black-marble-radiance'; legend: {image: string}});
 // Opt in only for complete, cylindrical RGB photographs whose source grid is

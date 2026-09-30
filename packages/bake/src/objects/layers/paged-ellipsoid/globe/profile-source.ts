@@ -25,7 +25,6 @@ const fillTolerance: Guard<number> = (value): value is number => number(value) &
 const deepOceanFill = object({path: string, replacedColor: tuple(colorByte, colorByte, colorByte), tolerance: fillTolerance, blendSourcePixels: blendPixels});
 const scientific = union(
   object({kind: literal('gibs-mur-imagery'), ...enso}),
-  object({kind: literal('coraltemp-anomaly'), ...enso, filename: string, minimum: number, maximum: number, palette: array(array(number)), missingColor: array(number)}),
   object({kind: literal('gebco-elevation'), metadata: string, grid: object({width: number, height: number, firstIndex: number, stride: number, nativeCellDegrees: number}),
     palette: array(object({meters: number, color: string})), relief: optional(relief), blocks: optional(array(object({path: string, rowOffset: number, rows: number}))),
     legend: object({image: string, width: number, height: number, minimum: number, maximum: number})}),

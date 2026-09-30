@@ -1,0 +1,255 @@
+{
+  "schema": "cssearth-prepared-datasets@1",
+  "defaultDataset": "normal",
+  "runtimeFilters": false,
+  "runtimeRasterization": false,
+  "controls": [
+    {
+      "id": "normal",
+      "label": "Visible color",
+      "shortLabel": "RGB",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-normal.webp",
+      "surfaceUrl": "/scenes/earth/earth-surface.webp",
+      "polesUrl": "/scenes/earth/earth-surface-poles.webp",
+      "qualification": "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic. Deep ocean is shaded from depth, taken from NASA's bathymetry edition of the same month where the plain edition carries its arbitrary constant fill; shallow and coastal water stays observed.",
+      "surfacePagePrefix": "earth-surface",
+      "maximumZoom": 8
+    },
+    {
+      "id": "clouds",
+      "label": "Cloud coverage",
+      "shortLabel": "Clouds",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-clouds.webp",
+      "surfaceUrl": "/scenes/earth/earth-clouds.webp",
+      "polesUrl": "/scenes/earth/earth-clouds-poles.webp",
+      "qualification": "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather. Deep ocean is shaded from depth, taken from NASA's bathymetry edition of the same month where the plain edition carries its arbitrary constant fill.",
+      "surfacePagePrefix": "earth-clouds",
+      "maximumZoom": 8
+    },
+    {
+      "id": "topography",
+      "label": "Elevation",
+      "shortLabel": "TOPO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-topography.webp",
+      "surfaceUrl": "/scenes/earth/earth-topography.webp",
+      "polesUrl": "/scenes/earth/earth-topography-poles.webp",
+      "maximumZoom": 4,
+      "qualification": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
+      "surfacePagePrefix": "earth-topography"
+    },
+    {
+      "id": "night-lights",
+      "label": "Night lights",
+      "shortLabel": "VIIRS",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-night-lights.webp",
+      "surfaceUrl": "/scenes/earth/earth-night-lights.webp",
+      "polesUrl": "/scenes/earth/earth-night-lights-poles.webp",
+      "maximumZoom": 8,
+      "qualification": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
+      "surfacePagePrefix": "earth-night-lights"
+    },
+    {
+      "id": "enso-2026-09-22",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-22.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-22.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-22-poles.webp",
+      "maximumZoom": 8,
+      "surfacePagePrefix": "earth-enso-2026-09-22",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 22 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
+      "id": "enso-2026-09-23",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-23.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-23.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-23-poles.webp",
+      "maximumZoom": 8,
+      "surfacePagePrefix": "earth-enso-2026-09-23",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 23 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
+      "id": "enso-2026-09-24",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-24.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-24.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-24-poles.webp",
+      "maximumZoom": 8,
+      "surfacePagePrefix": "earth-enso-2026-09-24",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 24 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
+      "id": "enso-2026-09-25",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-25.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-25.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-25-poles.webp",
+      "maximumZoom": 8,
+      "surfacePagePrefix": "earth-enso-2026-09-25",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 25 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
+      "id": "enso-2026-09-26",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-26.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-26.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-26-poles.webp",
+      "maximumZoom": 8,
+      "surfacePagePrefix": "earth-enso-2026-09-26",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 26 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
+      "id": "enso-2026-09-27",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-27.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-27.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-27-poles.webp",
+      "maximumZoom": 8,
+      "surfacePagePrefix": "earth-enso-2026-09-27",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 27 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
+      "id": "enso-2026-09-28",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-28.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-28.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-28-poles.webp",
+      "maximumZoom": 8,
+      "surfacePagePrefix": "earth-enso-2026-09-28",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 28 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
+      "id": "cross-section",
+      "label": "Cross section",
+      "shortLabel": "CUT",
+      "thumbnailUrl": "/scenes/earth/earth-view-interior.webp",
+      "view": "interior",
+      "maximumZoom": 4,
+      "qualification": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
+      "focus": {
+        "longitude": 145,
+        "latitude": 20,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      }
+    },
+    {
+      "id": "mantle-tomography",
+      "label": "Mantle tomography",
+      "shortLabel": "VSV",
+      "thumbnailUrl": "/scenes/earth/earth-view-tomography.webp",
+      "view": "interior",
+      "maximumZoom": 4,
+      "qualification": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
+      "focus": {
+        "longitude": 145,
+        "latitude": 20,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "interiorSource": "mantle-tomography",
+      "interiorTextures": {
+        "/scenes/earth/earth-interior-section@2x.webp": "/scenes/earth/earth-tomography-section@2x.webp",
+        "/scenes/earth/earth-interior-mantle@2x.webp": "/scenes/earth/earth-tomography-mantle@2x.webp",
+        "/scenes/earth/earth-interior-mantle-poles@2x.webp": "/scenes/earth/earth-tomography-mantle-poles@2x.webp",
+        "/scenes/earth/earth-interior-outer-core@2x.webp": "/scenes/earth/earth-tomography-outer-core@2x.webp",
+        "/scenes/earth/earth-interior-outer-core-poles@2x.webp": "/scenes/earth/earth-tomography-outer-core-poles@2x.webp",
+        "/scenes/earth/earth-interior-inner-core@2x.webp": "/scenes/earth/earth-tomography-inner-core@2x.webp",
+        "/scenes/earth/earth-interior-inner-core-poles@2x.webp": "/scenes/earth/earth-tomography-inner-core-poles@2x.webp"
+      }
+    }
+  ],
+  "provenance": {
+    "normal": "NASA Blue Marble Next Generation July 2004",
+    "topography": "GEBCO_2026 terrain model: signed heights relative to mean sea level, with prepared hypsometric color and cartographic relief",
+    "nightLights": "NASA Black Marble VJ146A4 Collection 2 · 2025 AllAngle_Composite_Snow_Free radiance; public GeoTIFF mosaic by Jurij Stare, lightpollutionmap.info",
+    "interior": "NASA Science schematic layer geometry",
+    "mantleTomography": "Cui et al. (2024), GLAD-M35 r0.1 via EarthScope EMC",
+    "clouds": "NASA Blue Marble archival clouds over the July 2004 visible-color mosaic"
+  }
+}

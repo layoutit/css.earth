@@ -31,7 +31,8 @@ The Earth adapter's prepared HTML, CSS, modules, charts, textures, and scientifi
 ## ENSO sea-surface temperature anomaly
 
 NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS: MUR v4.1
-sea-surface temperature anomaly imagery for 7 September 2026, read from
+sea-surface temperature anomaly imagery for the week of daily analyses the
+source manifest lists, read from
 the GIBS `GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies` layer. NASA open
 Earth science imagery with attribution. cssEarth assembles the tiles into its
 own mosaic. The NOAA Climate Prediction Center ENSO advisory is cited for

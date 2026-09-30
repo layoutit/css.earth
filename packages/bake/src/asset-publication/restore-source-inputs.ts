@@ -146,16 +146,11 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
       console.log(`${id}: repository volume source inputs restored and verified`);
       continue;
     }
+    // Earth's ENSO mosaics are rebuilt from their dated tile archives, which the restore fetches from the source mirror;
+    // a date whose mosaic is present is left alone.
     if (id === "earth") {
-      const scienceDirectory = resolve(projectRoot, "src/objects/earth/source/science");
-      try {
-        await lstat(resolve(scienceDirectory, "mur-gibs.png"));
-      } catch (error) {
-        if (!hasErrorCode(error, "ENOENT")) throw error;
-        await run(process.execPath, [
-          resolve(projectRoot, "packages/bake/authoring/earth/mur-imagery.mts"), "restore", scienceDirectory,
-        ]);
-      }
+      await run(process.execPath, [resolve(projectRoot, "packages/bake/authoring/earth/mur-imagery.mts"), "restore",
+        resolve(projectRoot, "src/objects/earth/source/science"), assetOrigin]);
     }
     // The acquisition plan owns formats and URLs. Default acquisition restores
     // only missing pins and verifies existing inputs without refreshing them.
