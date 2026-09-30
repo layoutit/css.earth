@@ -1,7 +1,8 @@
 export interface OpacityWindow {
   requestAnimationFrame(callback: (time: number) => void): number;
   cancelAnimationFrame(id: number): void;
-  performance: { now(): number };
+  /** Absent in a test window: the clock then reads the wall clock. */
+  performance?: { now(): number };
 }
 type Publisher = (time: number, advance: boolean) => boolean;
 /** Input (pointer cadence, hover picking) resolves before the presentation that
@@ -29,12 +30,13 @@ function createFrameClock(window: OpacityWindow) {
   const dirty = new Set<Publisher>(), active = new Set<Publisher>();
   let next = 0, frame: number | null = null, depth = 0, presenting = false;
   let timestamp: number | null = null;
-  const now = () => timestamp ?? window.performance.now();
+  const now = () => timestamp ?? window.performance?.now() ?? Date.now();
   const schedule = () => {
     const needed = callbacks.size > 0 || dirty.size > 0 || active.size > 0;
     if (presenting) return;
-    if (needed) frame ??= window.requestAnimationFrame(tick);
-    else if (frame !== null) { window.cancelAnimationFrame(frame); frame = null; }
+    // A window that has lost its frames (a test torn down) schedules nothing rather than throwing.
+    if (needed) { if (frame === null && typeof window.requestAnimationFrame === 'function') frame = window.requestAnimationFrame(tick); }
+    else if (frame !== null) { if (typeof window.cancelAnimationFrame === 'function') window.cancelAnimationFrame(frame); frame = null; }
   };
   const flush = (advance = false) => {
     // A setter publishes dirty state only. Advancing unrelated active fades

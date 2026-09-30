@@ -65,8 +65,9 @@ function mountOrbitBars(host: HTMLElement, capacity: number): PreparedOrbitLines
 }
 
 const SVG = 'http://www.w3.org/2000/svg';
-/** Trail alpha is quantized onto this many retained strokes; a closed orbit uses one. */
-export const ORBIT_OPACITY_LEVELS = 16;
+/** Trail alpha is quantized onto this many retained strokes; a closed orbit uses one. Eight steps draw the same rested
+ * Solar System as sixteen (pixelmatch 0 on the iPad) and write a third fewer orbit points while the camera moves (2026-09-30). */
+export const ORBIT_OPACITY_LEVELS = 8;
 /** One `<svg>` per world context, at the stage centre with visible overflow: chord
  * coordinates are already centred screen pixels. A zero viewport would disable
  * SVG rendering, so it is 1×1. */
@@ -110,9 +111,13 @@ function mountOrbitStrokes(host: HTMLElement, root: HTMLElement, dashed: boolean
   // the level's alpha, written per polyline whenever either changes.
   // Written only when the value changes: a fade step rewrote every run of every level (166-231 writes a packet on the
   // iPad, 2026-09-29), and a run holding no points has nothing to fade.
+  // Compared with what was written, not read back: the browser normalizes the number, and a read-back compare rewrote
+  // the same value (511 times in a Mars stress run, 2026-09-30).
+  const writtenStroke = new WeakMap<SVGPolylineElement, string>();
   const strokeOpacity = (element: SVGPolylineElement, level: number) => {
     const next = formatLineNumber(groupOpacity * level / ORBIT_OPACITY_LEVELS);
-    if (element.style.strokeOpacity !== next) element.style.strokeOpacity = next;
+    if (writtenStroke.get(element) === next) return;
+    element.style.strokeOpacity = next; writtenStroke.set(element, next);
   };
   const polyline = (level: number, run: number) => {
     const pool = levels[level]!;

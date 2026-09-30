@@ -1,5 +1,5 @@
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
-import { opacityClockFor } from '../stars/opacity-clock.js';
+import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
 import type { CameraPlan, PerspectiveCameraPlan, Vector3, LevelOfDetailPlan, OrbitLineFade } from './types.js';
 import type { BodyProjection } from '../solar-system/types.js';
 import type { VisibleRect } from '../solar-system/types.js';
@@ -227,11 +227,9 @@ export function createPerspectiveDolly({
   // a fixed frame count gave Uranus 384 leaves per frame, whose style, layerize
   // and paint took 15 ms and dropped the frame. The proxy beneath carries the
   // body's colour.
-  const REVEAL_LEAVES_PER_FRAME = 128;
   const revealView = cameraElement.ownerDocument.defaultView;
-  const revealClock = revealView && opacityClockFor(revealView);
   const revealed = new Uint8Array(revealGroups.length).fill(1);
-  let revealCount = revealGroups.length, revealFrame: number | null = null;
+  let revealCount = revealGroups.length;
   // Flight activation writes the same nodes while the scene is hidden, so the
   // entry reset checks each node rather than the cached group state.
   const revealTo = (count: number, reset = false) => {
@@ -244,15 +242,16 @@ export function createPerspectiveDolly({
       for (const node of revealGroups[group]!) if (node.style.display !== display) node.style.display = display;
     }
   };
-  const continueReveal = () => {
-    revealFrame = null;
-    if (sceneElement.hidden || revealCount >= revealGroups.length) return;
+  // The document's pacer admits whole groups up to its frame budget, in leaves (settle-pacer.ts). The entry lands while
+  // the camera still moves: a zoom in shows the mesh it reaches.
+  const reveal = createSettlePacer(budget => {
+    if (sceneElement.hidden || revealCount >= revealGroups.length) return 0;
     let count = revealCount, leaves = 0;
     do leaves += revealGroups[count++]!.length;
-    while (count < revealGroups.length && leaves + revealGroups[count]!.length <= REVEAL_LEAVES_PER_FRAME);
+    while (count < revealGroups.length && leaves + revealGroups[count]!.length <= budget);
     revealTo(count);
-    if (revealCount < revealGroups.length) revealFrame = revealClock!.request(continueReveal);
-  };
+    return leaves;
+  }, { frame: revealView ? framePacerFor(revealView) : null, holdWhile: 'never' });
   function publishPresentation(snapshot: ReturnType<typeof camera.captureFrame> & { focal: number; viewportWidth: number; viewportHeight: number; principalOffset: readonly number[]; stageViewport: WorldCameraViewport }) {
       const { distance, rotation, focal, viewportWidth, viewportHeight,
         principalOffset, stageViewport, scenePresentation, world: publishedWorld } = snapshot;
@@ -299,10 +298,9 @@ export function createPerspectiveDolly({
         }
       }
       if (revealGroups.length && revealView && canStageReveal()) {
-        if (hidden && revealFrame !== null) { revealClock!.cancel(revealFrame); revealFrame = null; }
         if (!hidden && sceneElement.hidden) {
           revealTo(0, true);
-          revealFrame = revealClock!.request(continueReveal);
+          reveal.request();
         }
       }
       if (sceneElement.hidden !== hidden) sceneElement.hidden = hidden;

@@ -33,8 +33,21 @@ export function leafBoxStyles(leaf: PreparedLeafBox, step: number, outset: numbe
     ? ` translate(50%, 50%) scale(${format(1 + outset * leaf.seam[0])}, ${format(1 + outset * leaf.seam[1])}) translate(-50%, -50%)` : '');
   if (seamOnly) return leaf.seam ? [['transform', transform]] : [];
   const styles: [string, string][] = [];
-  if (leaf.backgroundPosition) styles.push(['backgroundPosition', leaf.backgroundPosition.map(part => component(part, factor)).join(' ')]);
-  if (leaf.backgroundSize) styles.push(['backgroundSize', leaf.backgroundSize.map(part => component(part, factor)).join(' ')]);
+  // The background as a share of the box: it scales with the box, so a step writes only the box and the transform (a
+  // stress run on Mars rewrote both backgrounds of every resized leaf, 2026-09-30). An axis a share cannot express (an
+  // image as wide as its box, or a size kept as written) keeps pixels scaled by the step.
+  const share = (axis: 0 | 1) => {
+    const size = leaf.backgroundSize?.[axis], box = leaf.box?.[axis], position = leaf.backgroundPosition?.[axis];
+    const sized = typeof size === 'number' && typeof box === 'number' && box > 0;
+    return {
+      size: size === undefined ? undefined : sized ? `${format(size / box * 100)}%` : component(size, factor),
+      position: position === undefined ? undefined
+        : typeof position === 'number' && sized && box !== size ? `${format(position / (box - size) * 100)}%` : component(position, factor),
+    };
+  };
+  const x = share(0), y = share(1);
+  if (leaf.backgroundPosition) styles.push(['backgroundPosition', `${x.position} ${y.position}`]);
+  if (leaf.backgroundSize) styles.push(['backgroundSize', `${x.size} ${y.size}`]);
   styles.push(['transform', transform]);
   if (leaf.box) styles.push(['width', `${format(leaf.box[0] * factor)}px`], ['height', `${format(leaf.box[1] * factor)}px`]);
   return styles;
@@ -65,6 +78,13 @@ export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], no
     }
   };
   for (const current of state.values()) publish(current, false, true);
+  const seamed = [...state.values()].filter(current => current.leaf.seam);
+  let seamCursor = seamed.length;
+  const outsetNumber = (value: string) => {
+    const number = Number(value);
+    if (!Number.isFinite(number)) throw new TypeError(`Prepared seam outset is not a number: ${value}`);
+    return number;
+  };
   return {
     /** Whether a write of `name` on node `index` is a leaf-box step or seam outset this writer owns. */
     owns(index: number, name: string) {
@@ -75,13 +95,27 @@ export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], no
       if (name === SEAM_OUTSET) return String(currentOutset);
       return String(state.get(index)?.step ?? step);
     },
+    /** Moves the seam outset to `value` a slice at a time: up to `budget` leaves take it, and the return is how many
+     * did. An outset change rewrites every seamed leaf's transform (448 on Saturn and Jupiter, 31–49 ms of script in one
+     * iPad frame at rest, 2026-09-30); the settle pacer spreads them as it spreads leaf-box steps. 0 once all show it. */
+    drainOutset(value: string, budget: number) {
+      const number = outsetNumber(value);
+      if (number !== currentOutset) { currentOutset = number; seamCursor = 0; }
+      let leaves = 0;
+      while (seamCursor < seamed.length && leaves < budget) {
+        const before = writes;
+        publish(seamed[seamCursor++]!, true);
+        if (writes > before) leaves++;
+      }
+      return leaves;
+    },
     set(index: number, name: string, value: string) {
       const number = Number(value);
       if (!Number.isFinite(number)) throw new TypeError(`Prepared node ${index} ${name} is not a number: ${value}`);
       const before = writes;
       if (name === SEAM_OUTSET) {
-        currentOutset = number;
-        for (const current of state.values()) if (current.leaf.seam) publish(current, true);
+        currentOutset = number; seamCursor = seamed.length;
+        for (const current of seamed) publish(current, true);
       } else {
         const current = state.get(index);
         if (!current || current.leaf.density === undefined) throw new TypeError(`Prepared node ${index} is not a leaf box.`);

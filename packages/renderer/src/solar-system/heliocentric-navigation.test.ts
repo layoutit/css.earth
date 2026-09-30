@@ -115,11 +115,30 @@ test('targets in a document share one press listener pair, removed with the last
   const own = markers.map(marker => { const listening: string[] = [], base = marker.addEventListener.bind(marker);
     marker.addEventListener = (type: string, listener: EventListenerOrEventListenerObject | null) => { listening.push(type); base(type, listener); }; return listening; });
   const bindings = markers.map(marker => bindObjectNavigationTarget(marker, new EventTarget()));
-  assert.deepEqual(added, ['pointerdown', 'mousedown']);
+  // One shared motion listener holds availability while the camera moves; it stays with the document.
+  assert.deepEqual(added, ['pointerdown', 'mousedown', 'objectmotionchange']);
   // No marker is a pointer target of its own: on iOS each would be a touch region recomputed every frame.
   for (const listening of own) assert.deepEqual(listening.filter(type => type.startsWith('pointer') || type === 'mousedown'), []);
   bindings[0]!.destroy(); bindings[1]!.destroy();
   assert.deepEqual(removed, []);
   bindings[2]!.destroy();
   assert.deepEqual(removed, ['pointerdown', 'mousedown']);
+});
+
+test('availability changes wait while the camera moves and land once it stops', () => {
+  const owner = new EventTarget(), marker = Object.assign(new Target(), { ownerDocument: owner });
+  const binding = bindObjectNavigationTarget(marker, new EventTarget());
+  const motion = (active: boolean) => owner.dispatchEvent(new CustomEvent('objectmotionchange', { detail: { active, coasting: false } }));
+  motion(true);
+  binding.update('mars', 'Mars'); binding.update('venus', 'Venus');
+  assert.equal(marker.dataset.objectNavigate, undefined);
+  assert.equal(marker.tabIndex, -1);
+  motion(false);
+  assert.equal(marker.dataset.objectNavigate, 'venus');
+  assert.equal(marker.tabIndex, 0);
+  // At rest a change lands at once, and a destroyed binding drops what it held.
+  binding.update(null);
+  assert.equal(marker.dataset.objectNavigate, undefined);
+  motion(true); binding.update('mars', 'Mars'); binding.destroy(); motion(false);
+  assert.equal(marker.dataset.objectNavigate, undefined);
 });

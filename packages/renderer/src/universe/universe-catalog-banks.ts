@@ -179,6 +179,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         }
         if (opacity !== bank.publishedOpacity) {
           bank.mounted.root.style.opacity = String(opacity);
+          if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.revealLarge();
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }

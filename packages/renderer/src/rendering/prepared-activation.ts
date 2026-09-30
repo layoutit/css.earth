@@ -1,9 +1,11 @@
 import { opacityClockFor } from '../stars/opacity-clock.js';
+import { createSettlePacer, framePacerFor, type FramePacer } from './settle-pacer.js';
 
 /** Connect one prepared leaf batch per rendering opportunity. The scene's
  * hierarchy, face order, styles and textures are unchanged; its caller keeps
  * the arrival billboard in place until activation and first paint complete. */
-export function prepareConnectedActivation(groups: readonly (readonly HTMLElement[])[], own: (cleanup: () => void) => unknown, resident: readonly HTMLElement[] = [], surfaceScenes?: readonly HTMLElement[]) {
+export function prepareConnectedActivation(groups: readonly (readonly HTMLElement[])[], own: (cleanup: () => void) => unknown, resident: readonly HTMLElement[] = [], surfaceScenes?: readonly HTMLElement[],
+  /** The document's pacer unless given (a test). */ pacer?: FramePacer) {
   const retained = new Set<Node>(resident);
   // Flat material/proxy overlays establish compositing before surface leaves join.
   // Attaching those overlays last can repaint the entire already-connected mesh.
@@ -44,35 +46,40 @@ export function prepareConnectedActivation(groups: readonly (readonly HTMLElemen
   }
   for (const [parent, { owner }] of attachments) owner.removeChild(parent);
   let frame: number | null = null, disposed = false, promise: Promise<void> | null = null;
-  let resolve: (() => void) | null = null;
+  let resolve: (() => void) | null = null, slices: ReturnType<typeof createSettlePacer> | null = null;
   own(() => {
     disposed = true;
     if (frame !== null) clock.cancel(frame);
+    slices?.destroy();
     frame = null; resolve?.();
   });
   return () => promise ??= new Promise<void>(done => {
     resolve = done;
+    if (disposed) { done(); return; }
     let index = 0;
-    function next() {
-      frame = null;
-      if (disposed) { done(); return; }
-      const batch = entries[index++];
-      for (const { node, parent } of batch) parent.insertBefore(node, anchors.get(node) ?? null);
-      for (const { parent } of batch) {
-        const attachment = attachments.get(parent);
-        if (!attachment) continue;
-        const { owner, following } = attachment;
-        // Batch order need not match sibling order. Find the next resident
-        // sibling so reconnecting a populated parent preserves prepared depth.
-        owner.insertBefore(parent, following.find(node => node.parentNode === owner) ?? null);
-        attachments.delete(parent);
-      }
+    // Whole batches join in slices of the document's pacer (settle-pacer.ts), a leaf a unit, during a flight too.
+    slices = createSettlePacer(budget => {
+      if (disposed || index === entries.length) return 0;
+      let leaves = 0;
+      do {
+        const batch = entries[index++]!;
+        for (const { node, parent } of batch) parent.insertBefore(node, anchors.get(node) ?? null);
+        for (const { parent } of batch) {
+          const attachment = attachments.get(parent);
+          if (!attachment) continue;
+          const { owner, following } = attachment;
+          // Batch order need not match sibling order. Find the next resident
+          // sibling so reconnecting a populated parent preserves prepared depth.
+          owner.insertBefore(parent, following.find(node => node.parentNode === owner) ?? null);
+          attachments.delete(parent);
+        }
+        leaves += batch.length;
+      } while (index < entries.length && leaves + entries[index]!.length <= budget);
       // Let the final connected batch render before readiness resumes the
       // router. The mounted scene also waits for its normal first-paint gate.
       if (index === entries.length) frame = clock.request(() => { frame = null; done(); });
-      else frame = clock.request(next);
-    }
-    if (disposed) done();
-    else frame = clock.request(next);
+      return leaves;
+    }, { frame: pacer ?? framePacerFor(window), holdWhile: 'never' });
+    slices.request();
   });
 }
