@@ -338,6 +338,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     },
     labelExclusionRects: interactions.labelExclusionRects,
     backgroundExclusionRects: interactions.backgroundExclusionRects,
+    bodyLabelRects: interactions.bodyLabelRects,
     setNavigationInFlight(active: boolean) {
       if (destroyed || active === navigationInFlight) return;
       invalidatePolicy();

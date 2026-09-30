@@ -193,7 +193,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           labelSuppressed: [...(!overview ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],
         });
         publishSuppressedLabels();
-        const bodyAnnotations = spatial.inspect();
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
         const environmentLabels = own(mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock,
           ...(stellarExtents[payload.id] === undefined ? {} : { extentRadiusM: stellarExtents[payload.id] }) }));
@@ -308,7 +307,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
                 ...coveredTopRects(viewport)];
               labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
-                bodyAnnotations.flatMap(body => body.labelRect ? [body.labelRect] : []), foregroundRects);
+                spatial.bodyLabelRects(), foregroundRects);
               const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);
               const environmentRects = environmentLabels.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
                 shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget });
