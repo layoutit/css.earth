@@ -103,8 +103,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const values={scene,sky,sun,runtime:definition,'material-datasets':presentationDatasets,views,layouts};
   for(const[name,value]of Object.entries(values))await writeJson(resolve(outputDirectory,`${name}.json`),value);
   await prepareLayeredConsumerManifest({id:descriptor.id,definition,content,stylesheet,publicDirectory,objectDirectory:write?objectRoot:outputDirectory});
-  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:definition});
-  await writeFile(resolve(outputDirectory,'object.json'),payload);
+  // The prepared/object.json transport is built from runtime.json when read (@cssearth/objects/node prepared-transport).
   if(write) {
     await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json'}},null,2)+'\n');
   }

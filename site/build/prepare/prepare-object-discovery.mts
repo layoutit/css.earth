@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { open, readFile } from 'node:fs/promises';
 import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { parseArrivalView, parseArrivalBillboard, type ObjectDiscovery } from '@cssearth/objects';
@@ -71,6 +71,31 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
     ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
 }
 
+/** A prepared runtime's `camera`, read from the start of the file. The bake writes `schema` then `camera` first, and
+ * discovery needs nothing else: parsing all 3,595 runtimes (1.18 GB) to read this object cost the catalogue step
+ * about 10 s. A runtime in any other shape is parsed whole. `null` when the body has no prepared runtime yet. */
+export async function preparedRuntimeCamera(path: string): Promise<unknown> {
+  let handle;
+  try { handle = await open(path); }
+  catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
+  try {
+    const { buffer, bytesRead } = await handle.read({ buffer: Buffer.alloc(65536), position: 0 });
+    const head = buffer.toString('utf8', 0, bytesRead), start = head.match(/^\{"schema":"[^"\\]*","camera":/u)?.[0].length;
+    if (start !== undefined && head[start] === '{') {
+      let depth = 0, inString = false;
+      for (let index = start; index < head.length; index++) {
+        const char = head[index];
+        if (inString) { if (char === '\\') index++; else if (char === '"') inString = false; continue; }
+        if (char === '"') inString = true;
+        else if (char === '{' || char === '[') depth++;
+        else if ((char === '}' || char === ']') && --depth === 0) return JSON.parse(head.slice(start, index + 1));
+      }
+    }
+    const whole: unknown = JSON.parse(await readFile(path, 'utf8'));
+    return isRecord(whole) ? whole.camera : undefined;
+  } finally { await handle.close(); }
+}
+
 export async function prepareObjectDiscovery(descriptor: unknown, objectDirectory: string) {
   if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.recipe) ||
       !Array.isArray(descriptor.properties.recipe.sources)) throw new TypeError('Missing discovery recipe sources.');
@@ -93,17 +118,17 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
   };
   const controls: unknown = await preparedJson('controls.json') ?? { datasets: { controls: [] } };
-  const runtime: unknown = await preparedJson('runtime.json');
-  const discovery = deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, isRecord(runtime) ? runtime.camera : undefined);
+  const camera = await preparedRuntimeCamera(resolve(objectDirectory, 'prepared', 'runtime.json'));
+  const discovery = deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, camera ?? undefined);
   const billboard = await preparedJson('arrival-billboard.json');
   if (billboard !== null) {
     const asset = parseArrivalBillboard(billboard);
-    if (!isRecord(runtime) || !isRecord(controls) || !isRecord(controls.datasets)) throw new TypeError('An arrival billboard requires its prepared runtime and datasets.');
+    if (camera === null || !isRecord(controls) || !isRecord(controls.datasets)) throw new TypeError('An arrival billboard requires its prepared runtime and datasets.');
     // Every body can have an arrival image. This does not turn a shape model,
     // measured colour or illustration into photographic evidence.
     const view = { defaultDataset: controls.datasets.defaultDataset,
       datasetIds: [...new Set([controls.datasets.defaultDataset, ...(discovery.arrival?.datasetIds ?? [])])],
-      rotation: preparedDefaultViewRotation(runtime.camera),
+      rotation: preparedDefaultViewRotation(camera),
       billboard: { ...asset, url: await resolveBuildSceneAddress(asset.url, resolve(objectDirectory, '../../..')) } };
     try { discovery.arrival = parseArrivalView(view); }
     catch (error) {

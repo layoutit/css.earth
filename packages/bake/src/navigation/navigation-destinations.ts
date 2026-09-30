@@ -40,17 +40,19 @@ export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: s
 export async function readPreparedFocusObjects(objectsDirectory: string, sceneHostId: string) {
   const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
   const objects: PreparedCatalogObject[] = [];
-  for (const directory of await readdir(objectsDirectory, { withFileTypes: true })) {
-    if (!directory.isDirectory()) continue;
-    for (const path of ['prepared/catalogue.json', 'source/nebula.json']) {
-      let value: unknown;
-      try { value = await read(resolve(objectsDirectory, directory.name, path)); }
-      catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
-      if (!isRecord(value)) throw new TypeError('Invalid spatial catalogue.');
-      if (value.schema === 'cssearth-galaxy-catalog@1') objects.push(...parsePreparedGalaxyCatalog(value).objects);
-      else if (value.schema === 'cssearth-cluster-catalog@1') objects.push(...parsePreparedClusterCatalog(value).objects);
-      else if (path === 'source/nebula.json') objects.push(...parsePreparedNebulaCatalog(value).objects);
-    }
+  // Every folder's two catalogue files, read in parallel and parsed below in folder order.
+  const names = (await readdir(objectsDirectory, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name);
+  const files = await Promise.all(names.flatMap(name => ['prepared/catalogue.json', 'source/nebula.json'].map(async path => {
+    try { return { path, value: await read(resolve(objectsDirectory, name, path)) }; }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
+  })));
+  for (const file of files) {
+    if (file === null) continue;
+    const { path, value } = file;
+    if (!isRecord(value)) throw new TypeError('Invalid spatial catalogue.');
+    if (value.schema === 'cssearth-galaxy-catalog@1') objects.push(...parsePreparedGalaxyCatalog(value).objects);
+    else if (value.schema === 'cssearth-cluster-catalog@1') objects.push(...parsePreparedClusterCatalog(value).objects);
+    else if (path === 'source/nebula.json') objects.push(...parsePreparedNebulaCatalog(value).objects);
   }
   // Only a subject the application can open has a page (isNavigableCatalogObject); the rest stay labels.
   const destinations = objects.filter(isNavigableCatalogObject).map(object => prepareFocusObject(object, sceneHostId)).sort((a, b) => a.id.localeCompare(b.id, 'en'));

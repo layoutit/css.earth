@@ -170,7 +170,6 @@ jobs:
           else
             node .github/scripts/ci/prepare-ci-inputs.mts universe
           fi
-          node packages/bake/cli/restore-object-json.mts
           node site/build/prepare/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node site/build/prepare/prepare-facilities.mts --catalog-only

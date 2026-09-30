@@ -22,8 +22,7 @@ src/objects/<id>/
   source/preparation/*.json            acquisition and capability inputs
   source/content/object.json          content and supported controls
   source/presentation/                title and applicable map inputs
-  prepared/                           generated runtime/content/controls/object JSON
-  prepared/page.json                  generated page assets and controls
+  prepared/                           generated runtime/content/controls JSON
   inventory.json                      generated inventory of every baked file and its hash
 
 public/scenes/<id>/                    prepared assets

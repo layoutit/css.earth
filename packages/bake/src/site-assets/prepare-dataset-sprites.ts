@@ -19,15 +19,14 @@ export async function prepareDatasetSprites(root = process.cwd()) {
   for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true }))
     .filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
     const id = sourceId(folder.name);
-    let page: unknown;
-    try { page = JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared/page.json'), 'utf8')); }
+    // The runtime's controls, as published beside it; a folder without them has no datasets to draw.
+    let controls: unknown;
+    try { controls = JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared/controls.json'), 'utf8')); }
     catch (error) {
       if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') continue;
       throw error;
     }
-    const record = sourceObject(page);
-    if (record.schema !== 'cssearth-object-page@1' || record.id !== id) throw new TypeError(`Invalid page data for ${id}`);
-    const datasets = sourceArray(sourceObject(sourceObject(record.controls).datasets).controls, sourceObject);
+    const datasets = sourceArray(sourceObject(sourceObject(controls).datasets).controls, sourceObject);
     if (datasets.length < 2) continue;
     const columns = Math.ceil(Math.sqrt(datasets.length));
     const parts = await Promise.all(datasets.map(async (dataset, index) => {

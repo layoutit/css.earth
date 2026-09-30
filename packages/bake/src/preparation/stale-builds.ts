@@ -34,6 +34,10 @@ export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
   { name: '@cssearth/renderer', command: 'pnpm build:renderer', sources: ['packages/renderer/src'], output: 'packages/renderer/dist/index.js', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
   // The bake's output is a declaration stub written after `tsc` emits its declarations, so a failed type build reads stale.
   { name: '@cssearth/bake', command: 'pnpm build:bake', sources: ['packages/bake/src'], output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
+  { name: '@cssearth/volume-viewer', command: 'pnpm --filter @cssearth/volume-viewer build', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
+  // The CLI bundles its workspace dependencies into one file, so any of their sources makes it stale.
+  { name: '@cssearth/telescope-cli', command: 'pnpm --filter @cssearth/telescope-cli build', output: 'packages/telescope-cli/dist/telescope.mjs',
+    sources: ['packages/telescope-cli/src', ...['telescope', 'core', 'bake', 'objects', 'fits', 'renderer', 'astronomy', 'spice'].map(name => `packages/${name}/src`)] },
 ]);
 
 const SOURCE = /\.(?:ts|mts|json)$/u, SKIP = new Set(['dist', 'node_modules']);

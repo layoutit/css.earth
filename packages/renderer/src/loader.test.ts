@@ -1,4 +1,6 @@
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { preparedObjectText } from '@cssearth/objects/node';
 import { expect, test, vi } from 'vitest';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject } from './loader.js';
@@ -7,7 +9,7 @@ const root = new URL('../../../', import.meta.url);
 async function fixture(id = 'venus') {
   const descriptor = parseObjectDescriptor(await readFile(new URL(`src/objects/${id}/object.json`, root), 'utf8'));
   if (!descriptor.prepared) throw new Error('Fixture requires its prepared reference.');
-  const bytes = new Uint8Array(await readFile(new URL(`src/objects/${descriptor.id}/${descriptor.prepared.url}`, root))).buffer;
+  const bytes = new TextEncoder().encode(await preparedObjectText(fileURLToPath(new URL(`src/objects/${descriptor.id}/`, root)), descriptor)).buffer;
   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
   if (!isRecord(payload)) throw new Error('Fixture envelope must be a record.');
   return { descriptor, reference: descriptor.prepared, bytes, payload };

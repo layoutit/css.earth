@@ -30,9 +30,8 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "tools", "verify-source-manifest.mjs"),
       resolve(root, "tools", "compact-production-assets.mjs"),
       ]),
-      // `prepared/page.json` is not listed: #510 made it a build output that
-      // `restore-object-json.mts` writes during `predev`/`prebuild`, so a checkout never
-      // holds one and requiring it here only asserts that a generated file was generated.
+      // `prepared/page.json` is not listed: it is a transport built from the restored runtime when
+      // read (prepared-transport), never a file in a checkout.
       resolve(projectRoot, 'site/pages/[id].astro'),
     ]),
     inventory: resolve(root, "inventory.json"),

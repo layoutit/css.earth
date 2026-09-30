@@ -1,6 +1,5 @@
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
-import { isDeepStrictEqual } from "node:util";
 import { createRequire } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -140,16 +139,11 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
     if (!record) throw new TypeError(`Authored source is not declared in the manifest: ${source.path}.`);
   }
   const preparedDirectory = resolve(directory, 'prepared');
-  const payloadPath = resolve(directory, reference.url);
-  if (reference.url !== 'prepared/object.json' || payloadPath !== resolve(preparedDirectory, 'object.json')) {
-    throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
-  }
-  const payloadBytes = await readText(payloadPath);
-  const payload = requireRecord(JSON.parse(payloadBytes), 'Prepared JSON payload');
-  const runtimePath = resolve(preparedDirectory, 'runtime.json');
+  // The transport is the runtime in its envelope, built when served (prepared-transport.ts): the runtime is what is checked.
+  if (reference.url !== 'prepared/object.json') throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
+  const runtimePath = resolve(preparedDirectory, 'runtime.json'), payloadPath = runtimePath;
   const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
   const scene: unknown = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
-  if (payload.id !== objectId || !isDeepStrictEqual(payload.data, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return { runtime, payloadPath, runtimePath };
