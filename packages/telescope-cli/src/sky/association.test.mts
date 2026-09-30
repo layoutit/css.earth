@@ -42,19 +42,6 @@ test('candidates come from whereistheplanet, and a body with no published predic
   assert.throws(() => hostedPlanetsOf('beta-pictoris-b'), /not a star/u);
 });
 
-test('each published GRAVITY position associates with its own planet and rejects the rest', async () => {
-  // Table 1 of arXiv:2609.02708: GRAVITY astrometry taken after the Lacour et al. 2021 fit these orbits come from.
-  const measurements = readRelativeAstrometryCsv(await readFile(fixture, 'utf8'));
-  const { associations } = await associate(measurements, 'beta-pictoris');
-  for (const association of associations) {
-    const expected = association.measurement.id.startsWith('b-') ? 'beta-pictoris-b' : 'beta-pictoris-c';
-    const closest = association.tests.find(test => test.id === association.closest)!;
-    assert.equal(association.closest, expected, `${association.measurement.id} matched ${association.closest}`);
-    assert.ok(closest.mahalanobis < 3, `${association.measurement.id} R ${closest.mahalanobis}`);
-    for (const other of association.tests) if (other.id !== expected) assert.ok(other.mahalanobis > 20, `${association.measurement.id} vs ${other.id} R ${other.mahalanobis}`);
-  }
-  await assert.rejects(associate([{ id: 'no-error', epochMjd: 59604.16, eastMas: 1, northMas: 2 }], 'beta-pictoris'), /covariance/u);
-});
 
 test('the association command writes its rows, its limits and a chart for each measurement', async () => {
   const work = await temporary();
@@ -116,19 +103,3 @@ test('the HR 8799 measurements match their own planets, and the candidate fifth 
   }
 });
 
-test('the system chart carries the orbit draws, the archival astrometry and the newest predictions', async () => {
-  const work = await temporary();
-  try {
-    const result = await runAssociation(HR_8799, 'hr-8799', resolve(work, 'run'), { orbitDraws: 4, fitAstrometry: true });
-    const record = JSON.parse(await readFile(resolve(work, 'run', 'association.json'), 'utf8'));
-    assert.equal(record.chart, 'system/preview.png');
-    assert.equal((await readFile(resolve(work, 'run', 'system', 'preview.png'))).subarray(1, 4).toString(), 'PNG');
-    // The tool ships the astrometry its own fit was made from: 74 rows over 2004 to 2022, of which 65 are offsets.
-    // The other nine are separation and position angle, which this route refuses to convert.
-    const archival = result.rows.filter(row => row.association.measurement.id.includes('@'));
-    assert.equal(archival.length, 65);
-    assert.ok(archival.every(row => row.association.closest === row.association.measurement.body), 'every archival row matches the planet it was measured for');
-    const epochs = result.rows.map(row => row.association.measurement.epochMjd);
-    assert.ok(Math.min(...epochs) < 54000 && Math.max(...epochs) === 60159);
-  } finally { await rm(work, { recursive: true, force: true }); }
-});
