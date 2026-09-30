@@ -84,7 +84,7 @@ and delivered inventory; documentation-only commits do not change that scope.
 The records below apply to their stated revisions, not to the new meshes or
 eleven-image selection.
 
-- **Label discovery, 2026-09-12:** the [whole-body discovery check](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/objects/unit/surface-feature-discovery.test.mts) (now [`packages/renderer/src/node/labels/surface-feature-discovery.test.mts`](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts)) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
 
 Recorded results for the southern coverage update:
 
@@ -108,7 +108,7 @@ The wider recorded runs include two missing Europa originals, three Earth fixtur
 failures and two registry-audit failures. The report
 separates those results from the comet checks. Earlier runs are retained below.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/osiris-geo.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/pds3/osiris-geo.py) (now [`packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.py)) reads the pinned geometry product `n20140805t194314611id50f22.IMG` and its quality companion with pvl and numpy, not with the pipeline. [`tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts) (now [`packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.oracle.test.mts)) requires the decoder to reproduce 48 sampled values from each of the nine geometry planes and from the quality planes exactly, the quality-flag histogram of all 4,194,304 pixels, and the count of finite sigma values.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/osiris-geo.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.py) reads the pinned geometry product `n20140805t194314611id50f22.IMG` and its quality companion with pvl and numpy, not with the pipeline. [`tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.oracle.test.mts) requires the decoder to reproduce 48 sampled values from each of the nine geometry planes and from the quality planes exactly, the quality-flag histogram of all 4,194,304 pixels, and the count of finite sigma values.
 
 ### Registration
 

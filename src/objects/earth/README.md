@@ -72,7 +72,7 @@ Default map labels ([features recipe](source/preparation/features.json)): only o
 
 The public feature transport keeps those default map labels in the first-interaction catalogue. Search-only names are deterministically sharded by feature id; selecting one verifies and loads only its bank, while the global search index retains the original prepared order.
 
-Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepare-authored.js earth --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) (707 s, every pinned Earth source present and verified) prepared 5,467 names: 258 countries, 3,000 populated places, 48 landmarks and the geographic regions, seas and river centrelines. 456 label the map by default (171 countries, 88 capitals, 129 cities, 48 landmarks, 7 continents, 5 oceans and 8 highlights); the rest are search-only. Of the 301 delivered Earth files only `earth-features.json` changed; the provenance basis stays `prepared`. `tests/objects/unit/earth/features.test.mts` checks the default classes, country label points, the city zoom floor and search-only names against the delivered catalogue. The three captures in `evidence/default-labels/` show the default view, one wheel step closer and the closest view at 1400 × 900 CSS px on the local dev server.
+Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepare-authored.js earth --write`](../../../site/build/prepare/prepare-authored.ts) (707 s, every pinned Earth source present and verified) prepared 5,467 names: 258 countries, 3,000 populated places, 48 landmarks and the geographic regions, seas and river centrelines. 456 label the map by default (171 countries, 88 capitals, 129 cities, 48 landmarks, 7 continents, 5 oceans and 8 highlights); the rest are search-only. Of the 301 delivered Earth files only `earth-features.json` changed; the provenance basis stays `prepared`. `tests/objects/unit/earth/features.test.mts` checks the default classes, country label points, the city zoom floor and search-only names against the delivered catalogue. The three captures in `evidence/default-labels/` show the default view, one wheel step closer and the closest view at 1400 × 900 CSS px on the local dev server.
 
 - Night-light coverage stops at 75° N and 65° S. The mirror lacks quality bands;
   aurora and transient lights cannot be filtered further.
@@ -195,7 +195,7 @@ source JPEGs remain unchanged. Dataset selection is manual at every zoom level.
 The two polar caps are rastered at their own 256-pixel cell size. They used to share the
 interior shells' four-times raster scale, so Safari backed each cap with a 1,024-pixel layer
 of 36 MB. On the iPhone 17 Pro simulator, during a four-drag Earth capture
-([`tools/performance/ios-capture.mts`](https://github.com/layoutit/css.earth/blob/62db411815/tools/performance/ios-capture.mts), now [`labs/performance/ios-capture.mts`](../../../labs/performance/ios-capture.mts), 2026-09-22), each cap layer is now 2.3 MB, and
+(`tools/performance/ios-capture.mts`, now [`labs/performance/ios-capture.mts`](../../../labs/performance/ios-capture.mts), 2026-09-22), each cap layer is now 2.3 MB, and
 composited layers total 153.2 MB, down from 220.7 MB. In the same session, applying the
 256-pixel caps to the live page left the rendered frame pixel-for-pixel identical.
 

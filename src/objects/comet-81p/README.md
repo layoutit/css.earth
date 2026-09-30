@@ -16,7 +16,7 @@
 
 - **Photometric trial, 2026-09-13:** a trial with the published Hapke parameters reduced accepted photographic area from 39.52% to 29.73%. Five of six overlap pairs improved, but the running application showed large new grid gaps in photographed depressions. The original photographs remain in use. Parameters, measurements and limitations record the trial; the original paper's H-function approximation remains unverified.
 
-- **Label discovery, 2026-09-12:** the [whole-body discovery check](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/objects/unit/surface-feature-discovery.test.mts) (now [`packages/renderer/src/node/labels/surface-feature-discovery.test.mts`](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts)) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
 
 - The radial projection preserves observed-versus-estimated classification at all 17,518 source plate centers; this finite check is not an exhaustive subpixel boundary proof.
 
@@ -28,7 +28,7 @@
 
 - The terrain-place browser record covers all three search flights at 1440 × 900 and 390 × 844 plus this change. Inspected desktop and mobile viewport captures show qualified captions on the photographs. Both matching datasets retain the labels; Shadows stay Off and all 992 leaves survive selection. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/fits/encounter.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/fits/encounter.py) (now [`packages/bake/src/objects/layers/terrestrial/missions/encounter.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/encounter.py)) reads the pinned NAVCAM product `n2075we02_rr.fit` with astropy. [`tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts) (now [`packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.oracle.test.mts)) requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, flagged and non-finite pixels to agree.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/fits/encounter.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/encounter.py) reads the pinned NAVCAM product `n2075we02_rr.fit` with astropy. [`tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.oracle.test.mts) requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, flagged and non-finite pixels to agree.
 
 ### Registration
 

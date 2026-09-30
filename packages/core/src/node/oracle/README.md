@@ -125,4 +125,4 @@ at the pinned commit, so it needs network access.
 - ISIS `photomet` on cubes, for normalization grids beyond the unit-test
   geometries. It needs an ISIS install through conda.
 
-T2c keeps historical fixture names and input records unchanged. The core reader and Python writer resolve moved records to bake-owned paths; the remaining FITS generators stay under [`tests/oracles/fits/`](https://github.com/layoutit/cssEarth/tree/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/oracles/fits/) (now `packages/bake/src/objects/cameras/fixtures/fits/`).
+T2c keeps historical fixture names and input records unchanged. The core reader and Python writer resolve moved records to bake-owned paths; the remaining FITS generators stay under `tests/oracles/fits/` (now `packages/bake/src/objects/cameras/fixtures/fits/`).

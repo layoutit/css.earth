@@ -29,7 +29,6 @@
       "finding": "The earlier radial approach was withheld because 729 original face centroids differ from the first surface on their ray by up to 400.124 m, despite an 8,192-direction scan finding no second intersections. The 13 September audit identified the existing closest-source-point path as unqualified for this body. The 14 September qualification now includes Elevation on the unchanged 800-face mesh. Independent full-source checks retain the outer patch at source facet 487421 at 942.724 m above the 2,405.325 m sphere, rather than the first-ray value 400.124 m lower. The 56 m transfer limit withholds 13,810 of 5,778,049 triangle-interior texels (0.239%), shown as gray grid patches; those counts are not observed area. Existing photographs remain byte-identical. Headless DPR 1/2, mobile, rotation and lighting checks pass. Stereo constrains about 40% of the source shape; reconstructed unseen terrain remains reconstructed. Fine triangle boundaries remain visible at close zoom.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/obj-shape.ts#L272",
-        "https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/source-surface.test.mts",
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/source-surface.test.mts"
       ]
     },

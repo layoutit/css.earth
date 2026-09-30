@@ -12,7 +12,7 @@
 
 ### Native SBMT comparison, 14 September 2026
 
-The [shared SBMT oracle](https://github.com/layoutit/cssEarth/blob/897b286a62cc2a4d325fe9177690339fdb71d2f1/tests/oracles/sbmt/README.md) (now [here](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)) independently
+The [shared SBMT oracle](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md) independently
 reads the full Gaskell ver128q shape, the 1024×1024 ST_2402987304 v-band FITS
 image and its [archived SUM pointing](source/observations/N2402987304.SUM).
 Pointing, sampled FITS values and visible surface intersections agree with the
@@ -22,7 +22,7 @@ result is retained as a difference in the oracle's report and regression test.
 It is consistent with SBMT's angular UV approximation differing from a pinhole
 camera; it is not a solved registration or a measured ground-truth error.
 
-The [fixture](https://github.com/layoutit/cssEarth/blob/897b286a62cc2a4d325fe9177690339fdb71d2f1/tests/oracles/sbmt/projection.json) (now [here](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)) pins the inputs,
+The [fixture](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json) pins the inputs,
 generator and native software. The existing AMICA mosaic continues to use its
 controlled DDR route described below. This test does not replace that route or
 change its published texture. The SUM download uses SBMT's published public
@@ -71,7 +71,7 @@ Pixelmatch diff ·
 Capture settings ·
 Source-transfer checks ·
 Preparation and restoration measurements, recorded with
-[`node tools/objects/refresh-surface-observations.mts itokawa amica`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/refresh-surface-observations.mts)
+`node tools/objects/refresh-surface-observations.mts itokawa amica`
 (now [`packages/bake/cli/refresh-surface-observations.mts`](../../../packages/bake/cli/refresh-surface-observations.mts)).
 
 The comparison swaps the previous eight-image bank and the new ten-image bank
@@ -179,7 +179,7 @@ The controlled-camera holdouts reached maximum residuals of 0.00000842/0.0000087
 
 Source test definitions.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/amica-ddr.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/pds3/amica-ddr.py) (now [`packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.py)) reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. [`tools/objects/terrestrial-layers/amica-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/amica-geo.oracle.test.mts) (now [`packages/bake/src/objects/layers/terrestrial/missions/amica-geo.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/amica-geo.oracle.test.mts)) requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/amica-ddr.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.py) reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. [`tools/objects/terrestrial-layers/amica-geo.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/amica-geo.oracle.test.mts) requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
 
 ### Registration
 

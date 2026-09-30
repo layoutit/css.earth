@@ -71,8 +71,8 @@
       "status": "unresolved",
       "finding": "The generic native SBMT oracle compares the full released mesh, ST_2402987304 v-band FITS and its SUM pointing. Sampled pointing, image values and visible intersections match. The UV stage reports a 1.0021-pixel maximum difference from pinhole projection, exceeding the fixed 0.25-pixel criterion. Keep this mismatch explicit; the existing controlled-DDR production route is unaffected.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/README.md (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)",
-        "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/projection.json (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)"
+        "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md",
+        "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json"
       ],
       "revisitWhen": "Before using this SUM/UV route in a photographic dataset, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."
     }

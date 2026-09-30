@@ -21,7 +21,7 @@ One **Shape approximation** dataset shows an ellipsoid at the published effectiv
 
 ## Evidence
 
-Run of 2026-09-16 (this version): [`node tools/objects/dist/prepare-authored.js comet-167p --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package from the ellipsoid parameters. `node --test packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts` passes for all twenty radius-model comets: the prepared 800-triangle surface is closed, matches the published radius and elongation in its own anchor table and in `packages/astronomy`, carries the missing-imagery grid with Shadows off, and the source manifest verifies. The earlier source, delivery and browser reports tested the retired Celestia mesh and were removed with it.
+Run of 2026-09-16 (this version): [`node tools/objects/dist/prepare-authored.js comet-167p --write`](../../../site/build/prepare/prepare-authored.ts) prepared the package from the ellipsoid parameters. `node --test packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts` passes for all twenty radius-model comets: the prepared 800-triangle surface is closed, matches the published radius and elongation in its own anchor table and in `packages/astronomy`, carries the missing-imagery grid with Shadows off, and the source manifest verifies. The earlier source, delivery and browser reports tested the retired Celestia mesh and were removed with it.
 
 ## Known problems
 

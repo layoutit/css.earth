@@ -131,9 +131,9 @@ does not establish their physical registration or certify a new surface dataset.
 
 ### Known problem: native regeneration is not bit-reproducible
 
-Two consecutive [`node tests/oracles/run.mts sbmt/projection`](https://github.com/layoutit/cssEarth/blob/beb2b9343efb112af8a6d6e4856d3ce6173a6985/tests/oracles/run.mts) (now `node packages/core/src/node/oracle/run.mts sbmt/projection`) runs against the same pinned
+Two consecutive `node tests/oracles/run.mts sbmt/projection` (now `node packages/core/src/node/oracle/run.mts sbmt/projection`) runs against the same pinned
 inputs and locked SBMT/Java bytes do not agree byte for byte: 1,643 of 34,777
-numeric leaves in [`tests/oracles/sbmt/projection.json`](https://github.com/layoutit/cssEarth/blob/beb2b9343efb112af8a6d6e4856d3ce6173a6985/tests/oracles/sbmt/projection.json) (now `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json`) differ between runs, with
+numeric leaves in `tests/oracles/sbmt/projection.json` (now `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json`) differ between runs, with
 a maximum absolute difference of about 1.6e-4 and a maximum relative difference
 of about 3.1e-4 (checked 2026-09-18, macOS ARM release above). The drift sits far
 under the 0.25-pixel UV comparison limit and the 5 cm mesh-distance limit above,

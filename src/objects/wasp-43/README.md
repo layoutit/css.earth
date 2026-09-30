@@ -22,7 +22,7 @@ WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](..
 
 ## Evidence
 
-Run of 2026-09-16 (this version): [`node tools/prepare/prepare-object.mts wasp-43`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package.
+Run of 2026-09-16 (this version): [`node tools/prepare/prepare-object.mts wasp-43`](../../../packages/bake/cli/prepare-object.mts) prepared the package.
 
 - [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) (now [`packages/bake/src/objects/stellar/stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts)) reads the archived Gaia row, checks the colour 255, 220, 184 and that the temperature percentiles move no channel by more than 1, and that a Planck colour runs blue-white to orange as it cools.
 - [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) (now [`packages/bake/src/objects/stellar/stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts)) also reads the pinned limb-darkening row and checks that the plate is transparent outside the disc, black, undimmed at the centre, and dims the displayed luminance by the law within one 8-bit step at several radii.
@@ -30,7 +30,7 @@ Run of 2026-09-16 (this version): [`node tools/prepare/prepare-object.mts wasp-4
 - `object-discovery.test.mts` checks that WASP-43 and WASP-43b stay on the map under every discovery setting while Antares and Polaris stay hidden.
 - `default-view.test.mts` derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, and the pole, identical to WASP-43b's orbit normal, up.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/wasp-43/` with the default camera, no console errors.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`src/objects/object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts)) checks that the catalogue colour #ffdcb8 is the colour dataset's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #ffdcb8 is the colour dataset's prepared colour.
 
 ## Known problems
 

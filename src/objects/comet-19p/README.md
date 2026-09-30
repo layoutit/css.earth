@@ -16,7 +16,7 @@ The panel's editorial credit is NASA's 19P/Borrelly overview: <https://science.n
 
 ## Evidence
 
-- **Label discovery, 2026-09-12:** the [whole-body discovery check](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/objects/unit/surface-feature-discovery.test.mts) (now [`packages/renderer/src/node/labels/surface-feature-discovery.test.mts`](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts)) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
 
 The 9 September 2026 browser record covers five datasets, lighting states, DPR 1/2 and a fresh asset installation. The qualification report links source-fit, registration and capture evidence. These are recorded results; they do not establish physical-mobile performance or a fresh unrestricted all-body preparation run.
 
@@ -24,7 +24,7 @@ Four terrain places follow [Britt et al. (2004), Figs. 1 and 4](https://doi.org/
 
 The terrain-place browser record covers all four search flights at 1440 × 900 and 390 × 844 plus this change. Inspected desktop and mobile viewport captures show the MICAS labels and qualified captions. Shadows stay Off, all 2,856 retained leaves survive the selections, and switching to DLR hides the labels. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/isis2/borrelly-micas.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/isis2/borrelly-micas.py) (now [`packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.py)) reads the four pinned MICAS cubes with pvl and numpy. [`tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts) (now [`packages/bake/src/objects/layers/terrestrial/missions/isis2-qube.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/isis2-qube.oracle.test.mts)) requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/isis2/borrelly-micas.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.py) reads the four pinned MICAS cubes with pvl and numpy. [`tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/isis2-qube.oracle.test.mts) requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
 
 ### Registration
 

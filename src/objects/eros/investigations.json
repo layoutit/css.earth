@@ -37,8 +37,8 @@
       "status": "included",
       "finding": "The generic native SBMT oracle compares the full released mesh, the MSI FITS exposure and both corrected SUM and SPICE INFO camera cases. Sampled pointing, image values and visible intersections match. Maximum in-image UV difference across the tested orientations/crop is 0.0817 pixel, within the fixed 0.25-pixel criterion. This is preparation test evidence, not qualification of a new surface dataset.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/README.md (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)",
-        "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/projection.json (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)"
+        "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md",
+        "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json"
       ]
     },
     {

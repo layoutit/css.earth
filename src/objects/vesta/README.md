@@ -32,7 +32,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 Ã
 Each atlas remains 2048 Ã— 6400 pixels, with 800 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 The LAMO qualification record, prepared with
-[`node tools/objects/dist/prepare-authored.js vesta --write`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/prepare-authored.ts)
+`node tools/objects/dist/prepare-authored.js vesta --write`
 (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)), tests:
 three Vesta source/package checks,
 six image-reader checks and strict preparation types pass. Headless desktop
