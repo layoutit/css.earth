@@ -38,7 +38,7 @@ test('a billboard waits for its shared atlas decode, then samples its cell and o
   const layer = mountDatasetBillboards({ host, before: null, atlasUrl: '/atlas.webp', atlas, prepareAtlas,
     entries: [{ id: 'nebula', frame, billboard: banks.get('nebula')!.billboard! }] });
   const leaf = nodes.find(node => node.dataset.datasetBillboard === 'nebula')!;
-  assert.ok(leaf.style.cssText.includes('background-size:200% 200%;background-position:100% 100%'));
+  assert.ok(leaf.style.cssText?.includes('background-size:200% 200%;background-position:100% 100%'));
   assert.equal(leaf.style.backgroundImage, undefined);
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 400, heightPixels: 300 };
   const world = (orientationXyzw: readonly [number, number, number, number]) =>
@@ -58,7 +58,7 @@ test('a billboard waits for its shared atlas decode, then samples its cell and o
   // A fixed 128 px box (two texels per CSS pixel of a 256 px cell) scaled to the 20 px it projects to: the camera
   // changes only its transform (motion-freezes-membership.md).
   assert.partialDeepStrictEqual(leaf.style, { display: 'block', opacity: '0.5', backgroundImage: 'url("/atlas.webp")' });
-  assert.ok(leaf.style.cssText.includes('width:128px;height:128px'));
+  assert.ok(leaf.style.cssText?.includes('width:128px;height:128px'));
   assert.ok(leaf.style.transform.includes(`scale(${20 / 128})`));
   // Seen off its prepared axis the one view still draws, turned toward the camera.
   layer.publish(0, 0.5, { ...world([0, 0, 0, 1]), pose: { positionM: [3, 0, 10] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport);

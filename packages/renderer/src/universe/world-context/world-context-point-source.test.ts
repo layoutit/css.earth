@@ -28,7 +28,7 @@ const viewport={focalPixels:400,widthPixels:800,heightPixels:600,principalOffset
 const world = (distanceM:number) => ({referenceFrame:'sun-icrf',epochJdTt:1,pose:{positionM:[0,0,distanceM] as const,orientationXyzw:[0,0,0,1] as const}});
 
 test('focus point schema is optional, exact, and rejects malformed photometry', () => {
-  assert.ok(Math.abs(plan.focus.pointSource?.absoluteMagnitude - (4.832125665882298)) < 10 ** -12 / 2, `${plan.focus.pointSource?.absoluteMagnitude} is not close to ${4.832125665882298}`);
+  assert.ok(Math.abs(plan.focus.pointSource!.absoluteMagnitude! - (4.832125665882298)) < 10 ** -12 / 2, `${plan.focus.pointSource?.absoluteMagnitude} is not close to ${4.832125665882298}`);
   const { pointSource: _pointSource, ...withoutPointSource } = plan.focus;
   assert.equal(parsePreparedWorldContext({ ...plan, focus: withoutPointSource }).focus.pointSource, undefined);
   assert.throws(() => parsePreparedWorldContext({ ...plan, focus:{ ...plan.focus, pointSource:{absoluteMagnitude:4.8,color:'yellow'} } }), /point color/);

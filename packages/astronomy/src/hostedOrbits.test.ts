@@ -38,7 +38,7 @@ describe('hosted orbits', () => {
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added: the first ones stay first.
     const compiled = HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))
     assert.deepEqual(compiled.slice(0, 11), ['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c'])
-    for (const id of [...trappist, ...hd110067, 'wasp-43b', 'hd-189733b', 'wd-1856-534b', 'hr-858b', 'hd-3167c']) assert.ok(EXOPLANET_IDS.includes(id))
+    for (const id of [...trappist, ...hd110067, 'wasp-43b', 'hd-189733b', 'wd-1856-534b', 'hr-858b', 'hd-3167c']) assert.ok((EXOPLANET_IDS as readonly string[]).includes(id))
     for (const id of hd110067) assert.equal(BODIES[id as keyof typeof BODIES].parent, 'hd-110067')
     assert.equal(BODIES['wd-1856-534b' as keyof typeof BODIES].parent, 'wd-1856-534')
     for (const id of trappist) assert.equal(BODIES[id as keyof typeof BODIES].parent, 'trappist-1')

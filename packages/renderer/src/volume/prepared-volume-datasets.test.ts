@@ -307,7 +307,7 @@ test('saved star visibility stays toggleable with retained points and committed 
   const f = dom(), prepared = createPreparedVolumeDatasets({ payload: { ...payload(), starsEnabled: false }, resolveResource: path => `/prepared/${path}` });
   const runtime = prepared.mount(f.options), root = runtime.root as unknown as FakeElement;
   const findStars = () => root.children.find(node => node.className === 'prepared-catalogue-points');
-  const notify = mock.fn(() => {}), unsubscribe = runtime.subscribe(notify);
+  const notify = mock.fn((_state: ReturnType<typeof runtime.state>) => {}), unsubscribe = runtime.subscribe(notify);
   assert.equal(runtime.state().defaultDataset, 'first');
   // Disabled points are not built at all; enabling them builds them once and they are retained from then on.
   runtime.publish(publication(4)); assert.equal(findStars(), undefined); assert.equal(runtime.state().starsVisible, false);

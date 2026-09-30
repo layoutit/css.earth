@@ -78,7 +78,7 @@ describe('the solar-system frame tree', () => {
     assert.deepEqual(tree.chainToRoot('moon'), ['moon', 'earth', 'earthBarycentre', SUN_FRAME_ID, SSB_FRAME_ID])
   })
 
-  it('declares maxOffsetInParent that really bounds the origin, sampled over full orbits', () => {
+  it('declares maxOffsetInParent that really bounds the origin, sampled over full orbits', { timeout: 30000 }, () => {
     // The invariant that only fires months later if it is wrong. Every frame is
     // sampled across the whole validity window AND across an integer-plus-a-bit
     // number of its own orbital periods, so the sampling cannot alias with the
@@ -120,7 +120,7 @@ describe('the solar-system frame tree', () => {
       assert.equal(Number.isFinite(frame.maxOffsetInParent), true)
       if (frame.maxOffsetInParent > 0) assert.ok(((worst + correctionAllowance) / frame.maxOffsetInParent) > 0.9)
     }
-  }, 30000)
+  })
 
   it('keeps every frame capturable from its own surface with real hysteresis', () => {
     // The literal 20, not the imported constant: asserting against
@@ -142,7 +142,7 @@ describe('the solar-system frame tree', () => {
     const unitOf = new Map(specs.map((spec) => [spec.frame.id, spec.frame.unitM]))
     for (const { frame } of specs) {
       assert.ok(FRAME_UNIT_LADDER_M.includes(frame.unitM))
-      if (frame.parent !== null) assert.ok(frame.unitM < unitOf.get(frame.parent) ?? Infinity)
+      if (frame.parent !== null) assert.ok(frame.unitM < (unitOf.get(frame.parent) ?? Infinity))
     }
     // The rule's own outputs, spelled out so that a change to it is visible in
     // the diff rather than only in a distant assertion.

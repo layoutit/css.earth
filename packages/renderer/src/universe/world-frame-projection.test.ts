@@ -47,7 +47,7 @@ test('a sphere wholly behind the eye plane hides nothing and sends no chord to t
   assert.equal(lone.hidden([0, 0, -200]), false);
 });
 
-test('shared occlusion preserves point visibility, clipped chords and saturated extents', () => {
+test('shared occlusion preserves point visibility, clipped chords and saturated extents', { timeout: 20000 }, () => {
   let seed = 987654321;
   const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 2 ** 32; };
   for (const scale of [1, 1e9, 1e16]) for (let view = 0; view < 60; view++) {
@@ -92,7 +92,7 @@ test('shared occlusion preserves point visibility, clipped chords and saturated 
       for (const saturation of [48, 128]) assert.equal(after.measureExtent(flat, trail, saturation), before.measureExtent(flat, trail, saturation));
     }
   }
-}, 20000);
+});
 
 test('a far disc sliding behind a near sphere is part covered before it is wholly covered, at every scale', () => {
   // A moon of radius 1 at depth 10 (5.7°) and a planet of radius 20 at depth 1000 (1.1°), as a Saturnian moon sees Saturn.

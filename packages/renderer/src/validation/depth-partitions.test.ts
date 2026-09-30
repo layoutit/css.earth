@@ -22,7 +22,7 @@ prepared.tree.activationGroups = prepareActivationGroups(prepared);
 test('the published package and explicit grouped carriers validate before DOM construction', () => {
   assert.equal(parsePreparedObjectRuntime(source), source);
   const plan = parsePreparedObjectRuntime(prepared);
-  assert.ok(plan.depthPartitions?.groups.length > 1);
+  assert.ok((plan.depthPartitions?.groups.length ?? 0) > 1);
   assert.equal(plan.tree.camera, source.tree.camera);
 });
 

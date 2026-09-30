@@ -3,10 +3,12 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { createPreparedObjectDecoder } from './prepared-object-worker-client.js';
 
+type MockWorker = Worker & { postMessage: ReturnType<typeof mock.fn>; terminate: ReturnType<typeof mock.fn> };
+
 function fixture() {
-  const workers: Array<Worker> = [];
+  const workers: MockWorker[] = [];
   const createWorker = mock.fn(() => {
-    const worker = { postMessage: mock.fn(() => {}), terminate: mock.fn(() => {}), onmessage: null, onerror: null, onmessageerror: null } as unknown as Worker;
+    const worker = { postMessage: mock.fn(() => {}), terminate: mock.fn(() => {}), onmessage: null, onerror: null, onmessageerror: null } as unknown as MockWorker;
     workers.push(worker); return worker;
   });
   const decoder = createPreparedObjectDecoder(createWorker);

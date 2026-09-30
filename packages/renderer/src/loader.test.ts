@@ -30,7 +30,7 @@ for (const id of ['mercury']) test(`${id} loads its actual prepared JSON through
   assert.equal(read.mock.callCount(), 1); assert.deepEqual(read.mock.calls[0]!.arguments, [f.reference.url]);
   assert.equal(definition.id, id);
   assert.ok(definition.tree.nodes.length > 100);
-  assert.ok(definition.controls.datasets?.controls.length > 1);
+  assert.ok((definition.controls.datasets?.controls.length ?? 0) > 1);
   assert.ok(definition.assets.startup.length > 0);
 });
 

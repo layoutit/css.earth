@@ -73,7 +73,7 @@ test('prepared presentation appends only its own roots and leaves the applicatio
     variants: [], materials: [], viewBindings: [], animations: [],
   });
   assert.ok(stage.children.includes(universe));
-  assert.ok(stage.children.includes(mounted.cameraElement));
+  assert.ok((stage.children as unknown[]).includes(mounted.cameraElement));
   for (const cleanup of cleanups) cleanup();
   assert.deepEqual(stage.children, [universe]);
 });

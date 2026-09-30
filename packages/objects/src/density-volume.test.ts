@@ -29,7 +29,7 @@ describe('density-volume object descriptor', () => {
     ['non-unit rotation', (value: ReturnType<typeof volume>) => { value.properties.volume.localToReferenceXyzw = [0, 0, 0, 2]; }],
     ['collapsed bounds', (value: ReturnType<typeof volume>) => { value.properties.volume.boundsUnits.max = [-10, 10, 1.25]; }],
     ['renderer field', (value: ReturnType<typeof volume>) => { (value.properties.volume as Record<string, unknown>).css = 'matrix3d()'; }],
-  ]) it(`rejects ${_name}`, () => {
+  ] as const) it(`rejects ${_name}`, () => {
     const input = volume();
     mutate(input);
     assert.throws(() => parseDensityVolumeObjectDescriptor(input));

@@ -11,7 +11,7 @@ import type { PresentationInputs } from './types.ts';
 const root = resolve(import.meta.dirname, '../../../..');
 const read = async (file: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, file), 'utf8'));
 
-for (const id of ['neptune']) it(`${id} Rings controls the prepared ring mesh`, async () => {
+for (const id of ['neptune']) it(`${id} Rings controls the prepared ring mesh`, { timeout: 30_000 }, async () => {
   const base = `src/objects/${id}/prepared`;
   const profile = parsePresentationProfile(await read(`src/objects/${id}/source/preparation/presentation.json`));
   const [scene, assets, datasets, sun, controls, solarSource] = await Promise.all([
@@ -27,4 +27,4 @@ for (const id of ['neptune']) it(`${id} Rings controls the prepared ring mesh`, 
       prepared.tree.nodes[write.target]?.className?.includes('rings'));
     assert.partialDeepStrictEqual(display, { value: index ? 'block' : 'none' });
   }
-}, 30_000);
+});

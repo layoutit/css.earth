@@ -53,7 +53,7 @@ test('preflight and native mount share one authenticated definition and transfer
     viewport: { focalPixels: 1000, principalOffsetPixels: [0, 0] },
   }) });
   assert.equal(bind.mock.callCount(), 0);
-  assert.ok(prepared.definition.tree.activationGroups?.length > 0);
+  assert.ok((prepared.definition.tree.activationGroups?.length ?? 0) > 0);
   const mount = factory({} as HTMLElement, { preparedResources: prepared.resources });
   await mount.ready;
   assert.equal(read.mock.callCount(), 1);
@@ -69,7 +69,7 @@ test('authenticated transport without prepared activation groups fails before na
   const tree: { activationGroups?: readonly (readonly number[])[] } = fixture.payload.data.tree;
   delete tree.activationGroups;
   const { descriptor, bytes } = await authenticateFixture(fixture);
-  const bind = mock.fn(() => {});
+  const bind = mock.fn<NonNullable<Parameters<typeof loadNavigableObject>[2]>>(() => { throw new Error('An unauthenticated tree must not bind.'); });
   await assert.rejects(loadNavigableObject(descriptor, { read: async () => bytes }, bind), /activation groups must be prepared/);
   assert.equal(bind.mock.callCount(), 0);
 });

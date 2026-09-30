@@ -757,7 +757,7 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
 });
 
 // Every malformed case parses the whole generated universe again, so the test's time grows with the number of bodies.
-test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
+test('accepts the generated Sun context and rejects detached or malformed prepared data', { timeout: 20000 }, async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
   // Each entry's distance as `prepare:catalog` placed it in the registry.
@@ -810,7 +810,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     assert.throws(() => parsePreparedWorldContext({ ...source,
       bodies: bodies.map(body => body === parent ? { ...body, systemView } : body) }));
   }
-}, 20000);
+});
 
 test('the Earth reference remains painted when its physical marker has faded at outer-system scale', async () => {
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
@@ -2657,7 +2657,7 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
   layer.destroy();
 });
 
-test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', async () => {
+test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 30_000 }, async () => {
   const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
@@ -2695,12 +2695,12 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   assert.throws(() => decodeWorldOrbitBank(summary, 'nowhere', earth), /summary says undefined/);
   assert.throws(() => decodeWorldOrbitBank({ ...summary, orbitBanks: { ...summary.orbitBanks, mars: earth.byteLength } }, 'mars', earth), /lacks its path/);
   // It parses the whole prepared world file (50 MB with exoplanet batch 1), which the default 5 s does not cover on CI.
-}, 30_000);
+});
 
 test('circle dots grow with radius from 1,000 km to the system star, and stop there', () => {
   const dot = (radiusM: number) => indicatorDotDiameter(radiusM, 1e9, 2.4);
   assert.deepEqual(([dot(5e5), dot(1e6)]), [2.4, 2.4]);
-  assert.ok(Math.abs(dot(Math.sqrt(1e6 * 1e9)) - ((2.4 + INDICATOR_DOT_MAX_DIAMETER) / 2)) < 10 ** -2 / 2, `${dot(Math.sqrt(1e6 * 1e9))} is not close to ${(2.4 + INDICATOR_DOT_MAX_DIAMETER) / 2}`);
+  assert.ok(Math.abs(dot(Math.sqrt(1e6 * 1e9))! - ((2.4 + INDICATOR_DOT_MAX_DIAMETER) / 2)) < 10 ** -2 / 2, `${dot(Math.sqrt(1e6 * 1e9))} is not close to ${(2.4 + INDICATOR_DOT_MAX_DIAMETER) / 2}`);
   assert.deepEqual(([dot(1e9), dot(1e11)]), [INDICATOR_DOT_MAX_DIAMETER, INDICATOR_DOT_MAX_DIAMETER]);
   assert.equal(dot(0), null);
   // Real radii: Saturn reads clearly larger than Earth, and the Sun larger than Jupiter.
@@ -2797,11 +2797,11 @@ test('a coast around Earth writes only transform and opacity, and the orbit stro
   layer.destroy();
 });
 
-test('a driven drag around Earth keeps revealing and retiring bodies', async () => {
+test('a driven drag around Earth keeps revealing and retiring bodies', { timeout: 15000 }, async () => {
   const { layer, writes } = await orbitEarth({ coast: false });
   assert.ok(writes.filter(write => / style\.visibility$/u.test(write)).length > 0);
   layer.destroy();
-}, 15000); // Full prepared catalogue, 90 driven views; CI runs this beside the other renderer suites.
+}); // Full prepared catalogue, 90 driven views; CI runs this beside the other renderer suites.
 
  test('activation measures only captions the planner can name and caches those bounds', () => {
   const root = mount(1), layer = mounted.get(root)!;

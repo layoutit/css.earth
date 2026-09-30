@@ -46,7 +46,7 @@ describe('S-star records from their publications', () => {
     assert.partialDeepStrictEqual(orbit('s2'), { periodDays: 5860.3205, semiMajorAxisStellarRadii: 5131.4168, argumentOfPeriapsisDegrees: 246.25, transitTimeBmjdTdb: 58257.3932, ascendingNodePositionAngleDegrees: 228.19 });
     assert.equal(orbit('s1').weaklyConstrained, undefined);
     assert.equal(orbit('s85').weaklyConstrained, true);
-    assert.match(orbit('s85').sources.constraint, /S2, S1, S55\. S85 is not among them/u);
+    assert.match(orbit('s85').sources.constraint ?? '', /S2, S1, S55\. S85 is not among them/u);
     const s1 = records.find(record => record.id === 's1') as { order: number; physical: { meanRadiusKm: number; gravitationalParameterKm3PerS2: number } };
     assert.equal(s1.order, 1255);
     assert.partialDeepStrictEqual(s1.physical, { meanRadiusKm: 3610683, gravitationalParameterKm3PerS2: 1645634256520 });

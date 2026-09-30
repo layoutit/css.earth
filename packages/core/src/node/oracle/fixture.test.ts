@@ -188,8 +188,8 @@ print(json.dumps({'cases': case_count, 'expressions': expression_count}))
   });
   assert.equal(result.status, 0, result.stderr);
   const evidence = requireRecord(JSON.parse(result.stdout));
-  assert.ok(evidence.cases > 0);
-  assert.ok(evidence.expressions > 0);
+  assert.ok(Number(evidence.cases) > 0);
+  assert.ok(Number(evidence.expressions) > 0);
 });
 
 it('relocated generators serialize paths through input_record rather than physical locations', async () => {

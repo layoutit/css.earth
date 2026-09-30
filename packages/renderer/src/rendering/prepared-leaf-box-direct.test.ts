@@ -39,7 +39,7 @@ test('a mounted leaf receives its values from the record and writes only what ch
   const writes: [number, string][] = [];
   const writer = createLeafBoxWriter(bindings, nodes, (element, name, value) => { writes.push([nodes.indexOf(element), name]); element.style.setProperty(name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`), value); });
   assert.equal(nodes[1]!.style.getPropertyValue('width'), '64px');
-  assert.doesNotMatch(nodes[1]!.getAttribute('style'), /var\(|calc\(|--/);
+  assert.doesNotMatch(nodes[1]!.getAttribute('style') ?? '', /var\(|calc\(|--/);
   writes.length = 0;
   writer.set(1, '--silhouette-step', '100');
   // A step resizes the box; the background, a share of it, is not written again.

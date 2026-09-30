@@ -31,7 +31,7 @@ describe('scaled focus frame', () => {
     assert.equal(containsScaledFocusPosition(frame, [11, 0, 0]), false);
   });
 
-  for (const invalid of [
+  for (const [invalid] of [
     [{ ...frame, metersPerUnit: 0 } as ScaledFocusFrame],
     [{ ...frame, boundsUnits: { min: [0, 0, 0], max: [0, 1, 1] } } as ScaledFocusFrame],
     [{ ...frame, localToReferenceXyzw: [0, 0, 0, 2] } as ScaledFocusFrame],

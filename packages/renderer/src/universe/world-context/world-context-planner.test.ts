@@ -296,7 +296,7 @@ test('a body too faint for this camera to name draws no ring beside the named on
   assert.ok(near.segments.length > 0);
 });
 
-test('turning the view preserves projected paths through caption admission changes', () => {
+test('turning the view preserves projected paths through caption admission changes', { timeout: 20000 }, () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.rotationActive = true;
   const points = [plan.focus, ...plan.bodies];
@@ -325,7 +325,7 @@ test('turning the view preserves projected paths through caption admission chang
   assert.ok(paths > 0, 'admitted bodies still draw their paths');
   assert.ok(uncaptionedPaths > 0, 'caption collisions do not retire on-screen paths');
   assert.ok(offScreenPaths > 0, 'paths keep crossing after their bodies leave the frame');
-}, 20000); // Plans every prepared orbit through a full turn; CI measured 4.4 s at 60 points.
+}); // Plans every prepared orbit through a full turn; CI measured 4.4 s at 60 points.
 
 test('an active camera drag preserves the committed inner-system annotations', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
@@ -365,7 +365,7 @@ test('an active camera drag preserves the committed inner-system annotations', (
   }
 });
 
-test('major planets remain identified through a full active-drag rotation', () => {
+test('major planets remain identified through a full active-drag rotation', { timeout: 20000 }, () => {
   const points = [plan.focus, ...plan.bodies], input = view();
   const majorIds = new Set(['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']);
   const priorities = Object.fromEntries(points.map(body => [body.id,
@@ -390,7 +390,7 @@ test('major planets remain identified through a full active-drag rotation', () =
         indicatorShown: body.indicatorShown });
     }
   }
-}, 20000); // Plans every prepared orbit through a full drag rotation; CI measured 4.0 s at 60 points.
+}); // Plans every prepared orbit through a full drag rotation; CI measured 4.0 s at 60 points.
 
 test('an off-screen body keeps an orbit path that crosses the viewport', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
@@ -599,7 +599,7 @@ test('inside its authored range a system draws every member orbit, named or not,
   // The application gives a recorded body the tier of a planet of its host's system.
   const calculate = createWorldContextPlanner(plan, Object.fromEntries(recorded.map(body => [body.id, labelImportance('planet')]))), input = view();
   const host = plan.bodies.find(body => body.id === 'sgr-a-star')!;
-  assert.ok(host.orbitsWithinM > 0);
+  assert.ok((host.orbitsWithinM ?? 0) > 0);
   const members = recorded.filter(body => body.orbit?.centerBodyId === host.id).map(body => [plan.focus, ...plan.bodies].indexOf(body));
   input.overview = false; input.selectedId = host.id;
   const at = (rangeShare: number) => {

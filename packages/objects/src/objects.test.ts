@@ -45,7 +45,7 @@ describe('object descriptor boundary', () => {
     ['unsafe source path', (value: ReturnType<typeof recipe>) => { value.sources[0]!.path = '../raster.json'; }],
     ['invalid frame budget', (value: ReturnType<typeof recipe>) => { value.frameBanks[0]!.residentRows = 33; }],
     ['unknown layer motion', (value: ReturnType<typeof recipe>) => { value.motion[1]!.target = 'atmosphere'; Reflect.set(value, 'atmosphere', undefined); }],
-  ]) it(`rejects ${_name} rather than passing malformed capabilities to a baker`, () => {
+  ] as const) it(`rejects ${_name} rather than passing malformed capabilities to a baker`, () => {
     const value = recipe();
     mutate(value);
     assert.throws(() => parseAuthoredRecipe(value));
@@ -119,7 +119,7 @@ describe('object descriptor boundary', () => {
     const parsed = parseObjectDescriptor({ ...descriptor(), properties: {
       radiusKm: 3, layers: [{ type: 'surface', source: 'surface-map' }, { type: 'paged-detail', levels: [1, 2] }],
     } });
-    assert.equal(parsed.properties.layers.length, 2);
+    assert.equal((parsed.properties.layers as readonly unknown[]).length, 2);
   });
 
   it('rejects a mismatched preparation before running its work', async () => {

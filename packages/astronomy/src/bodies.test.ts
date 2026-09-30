@@ -68,7 +68,7 @@ describe('the body table', () => {
       // Zero radius is an unmeasured one, allowed only for a hosted star or black hole. Such a star has no published mass either;
       // a hosted black hole's mass is what its orbit measures.
       if (data.meanRadiusKm === 0) {
-        assert.ok(HOSTED_STAR_IDS.includes(id), id)
+        assert.ok((HOSTED_STAR_IDS as readonly string[]).includes(id), id)
         if ((BLACK_HOLE_IDS as readonly string[]).includes(id)) assert.ok(data.gravitationalParameterKm3PerS2 > 0, id)
         else assert.equal(data.gravitationalParameterKm3PerS2, 0, id)
         continue
@@ -108,7 +108,7 @@ describe('the body table', () => {
       const brownDwarf = data.gravitationalParameterKm3PerS2 > 13 * bodyData('jupiter').gravitationalParameterKm3PerS2
       const giant = data.meanRadiusKm >= 0.5 * bodyData('jupiter').meanRadiusKm
       assert.ok(densityGramsPerCm3 > 0.1, id)
-      assert.ok(densityGramsPerCm3 < brownDwarf ? 150 : giant ? 20 : 8.5, id)
+      assert.ok(densityGramsPerCm3 < (brownDwarf ? 150 : giant ? 20 : 8.5), id)
     }
   })
 

@@ -15,7 +15,7 @@ import { initialObjectSelection } from '../runtime/object-contract.js';
 const root = new URL('../../../../', import.meta.url);
 // Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
 const restored = existsSync(new URL('src/objects/saturn/prepared/runtime.json', root));
-const test = (name: string, body: () => unknown) => nodeTest(name, { skip: !restored }, body);
+const test = (name: string, body: () => void | Promise<void>) => nodeTest(name, { skip: !restored }, body);
 async function fixture(id = 'saturn') {
   const descriptor = parseObjectDescriptor(await readFile(new URL(`src/objects/${id}/object.json`, root), 'utf8'));
   if (!descriptor.prepared) throw new Error('Fixture requires its prepared reference.');

@@ -18,7 +18,7 @@ test('a spatial point field reprojects through one retained SVG path per paint c
   field.publish({world,viewport});
   const path=field.root.querySelector('path')!,first=path.getAttribute('d');
   assert.equal(field.root.querySelectorAll('path').length, 1);assert.equal(path.getAttribute('stroke'), '#ffb38ad9');
-  assert.equal(field.root.querySelector('i'), null);assert.equal(field.stats().visiblePoints, 1);assert.match(first, /^M/);
+  assert.equal(field.root.querySelector('i'), null);assert.equal(field.stats().visiblePoints, 1);assert.match(first ?? '', /^M/);
   clock=100;
   field.publish({world:{...world,pose:{...world.pose,positionM:[1,0,0]}},viewport});
   assert.notEqual(path.getAttribute('d'), first);assert.equal(field.stats().visiblePoints, 1);assert.equal(host.children.length, 2);

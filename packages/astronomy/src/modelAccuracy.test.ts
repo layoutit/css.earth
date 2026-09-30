@@ -62,7 +62,7 @@ describe('frame position-model accuracy metadata', () => {
     const expectedKm = VSOP87A_TRUNCATION_BOUND_AU[key] * AU_KM + VSOP_THEORY_DISCREPANCY_KM[key]
 
     assert.equal(accuracy.kind, 'model-budget')
-    assert.ok(Math.abs(accuracy.estimateKm - (expectedKm)) < 10 ** -10 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
+    assert.ok(Math.abs(accuracy.estimateKm! - (expectedKm)) < 10 ** -10 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
     assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [
       VSOP87A_VALID_FROM_JD,
       VSOP87A_VALID_TO_JD,
@@ -72,7 +72,7 @@ describe('frame position-model accuracy metadata', () => {
   it('derives the lunar model budget from the shipped ELP truncation metadata', () => {
     const accuracy = frameModelAccuracy('moon')
     assert.equal(accuracy.kind, 'model-budget')
-    assert.ok(Math.abs(accuracy.estimateKm - (ELP2000_TRUNCATION_BOUND_KM + 2.668)) < 10 ** -12 / 2, `${accuracy.estimateKm} is not close to ${ELP2000_TRUNCATION_BOUND_KM + 2.668}`)
+    assert.ok(Math.abs(accuracy.estimateKm! - (ELP2000_TRUNCATION_BOUND_KM + 2.668)) < 10 ** -12 / 2, `${accuracy.estimateKm} is not close to ${ELP2000_TRUNCATION_BOUND_KM + 2.668}`)
     assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [
       ELP2000_VALID_FROM_JD,
       ELP2000_VALID_TO_JD,
@@ -135,7 +135,7 @@ describe('frame position-model accuracy metadata', () => {
       }
 
       assert.equal(accuracy.kind, planet === 'earth' ? 'model-budget' : 'fit-residual')
-      assert.ok(Math.abs(accuracy.estimateKm - (expectedKm)) < 10 ** -12 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
+      assert.ok(Math.abs(accuracy.estimateKm! - (expectedKm)) < 10 ** -12 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
       assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [validFromJdTt, validToJdTt])
     })
 
@@ -149,7 +149,7 @@ describe('frame position-model accuracy metadata', () => {
     }
     const accuracy = frameModelAccuracy('sun')
     assert.equal(accuracy.kind, 'fit-residual')
-    assert.ok(Math.abs(accuracy.estimateKm - (expectedKm)) < 10 ** -10 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
+    assert.ok(Math.abs(accuracy.estimateKm! - (expectedKm)) < 10 ** -10 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
     assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [
       VSOP87A_VALID_FROM_JD,
       VSOP87A_VALID_TO_JD,

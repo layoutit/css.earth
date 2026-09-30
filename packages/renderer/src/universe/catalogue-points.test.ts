@@ -102,8 +102,8 @@ test('a catalogue loads on its first publication and draws every point as the sa
   assert.equal(paths.length, 1);
   assert.equal(paths[0]!.getAttribute('stroke'), '#ffe2a8ff');
   assert.equal(paths[0]!.getAttribute('stroke-width'), '12', 'as wide as the dot, 1.5 px in eighths of a pixel');
-  assert.equal(paths[0]!.getAttribute('d')!.match(/M/g).length, 2);
-  assert.match(paths[0]!.getAttribute('d'), /^(M-?[\d.]+ -?[\d.]+h0){2}$/);
+  assert.equal(paths[0]!.getAttribute('d')!.match(/M/g)?.length, 2);
+  assert.match(paths[0]!.getAttribute('d') ?? '', /^(M-?[\d.]+ -?[\d.]+h0){2}$/);
   const retainedPath = paths[0];
   points.publish({ world: {...world, pose: {...world.pose, positionM: [1,0,0]}}, viewport });
   assert.equal(points.root.querySelector('path'), retainedPath);
