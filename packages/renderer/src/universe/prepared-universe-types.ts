@@ -60,7 +60,8 @@ export interface PreparedUniverseOptions {
   datasetBillboards?: { readonly plan: DatasetBillboards; readonly atlasUrl: string };
   /** Mount the prepared celestial sky cube. Phones leave it out: its faces cost tens of megabytes of layers. */
   sky?: boolean;
-  loadVolumeDataset?(id: string): Promise<Parameters<typeof createPreparedVolumeDatasets>[0]>;
+  /** A bank's payload, and any published catalogue points drawn with it (M87's globular clusters). */
+  loadVolumeDataset?(id: string): Promise<Parameters<typeof createPreparedVolumeDatasets>[0] & { cataloguePointUrls?: readonly string[] }>;
   /** Testable cap for hidden banks with no active navigation subscriber. */
   warmVolumeDatasetDomNodeBudget?: number;
   catalog?: PreparedCatalogBank;

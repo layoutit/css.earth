@@ -43,6 +43,11 @@ const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> 
   'ngc-300': ['dots'],
 };
 
+// Published catalogues drawn through a volume bank, with its opacity (src/objects/m87/README.md).
+const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
+  m87: ['dots'],
+};
+
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
   loadShells(): Promise<{ payload: Awaited<ReturnType<typeof loadPreparedCssSurfaceShell>>; resolveResource(path: string): string }[]>;
@@ -122,7 +127,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const loadVolumeDataset = createInFlightLoader(async (id: string) => {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
       const set = resourceSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
-      return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+      return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`),
+        cataloguePointUrls: (VOLUME_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.json`)) };
     });
     // The worker receives the validated summary and reads orbit paths on demand.
     // The bounded spatial-star sample is already inside pointAppearance;

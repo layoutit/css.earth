@@ -98,6 +98,16 @@ export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: Readonly
       ...(detail ? { detailedObjectId: detail.id } : {}),
       ...(detail?.focusRadiusM ? { presentation: { focusRadiusM: detail.focusRadiusM } } : {}) });
   }
+  // Galaxies beyond the pinned catalogue, each field cited in the recipe (M87 in the Virgo Cluster).
+  for (const [id, row] of Object.entries(recipe.citedRows ?? {})) {
+    if (seen.has(id)) throw new TypeError(`Cited row ${id} is also a catalogue row.`);
+    seen.add(id); kept.add(id);
+    const detail = recipe.detailObjects[id];
+    objects.push({ id: objectId(id), name: row.name, aliases: row.aliases.filter(alias => alias !== row.name),
+      positionM: galaxyPositionM(row.raDeg, row.decDeg, row.distance.valuePc), skyPosition: { raDeg: row.raDeg, decDeg: row.decDeg, sourceRef: row.positionRef },
+      distance: row.distance, membership: row.membership, status: 'confirmed',
+      ...(detail ? { detailedObjectId: detail.id } : {}), ...(detail?.focusRadiusM ? { presentation: { focusRadiusM: detail.focusRadiusM } } : {}) });
+  }
   for (const id of [...Object.keys(recipe.distanceOverrides), ...Object.keys(recipe.detailObjects)]) if (!seen.has(id)) throw new TypeError(`Authored override refers to an absent source row: ${id}`);
   objects.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
   exclusions.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);

@@ -1,0 +1,57 @@
+{
+  "id": "strader-2011-m87-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wide-field precision kinematics of the M87 globular cluster system",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2011ApJS..197...33S"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/197/33"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...33S",
+      "label": "2011ApJS..197...33S"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/197/33",
+      "label": "CDS J/ApJS/197/33"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/33/ReadMe",
+      "checkedOn": "2026-09-30",
+      "locator": "table9: 739 M87 globular clusters, ultra-compact dwarfs and transition objects with heliocentric radial velocities and J2000 positions."
+    }
+  ],
+  "creators": [
+    "J. Strader",
+    "A. J. Romanowsky",
+    "J. P. Brodie",
+    "L. R. Spitler",
+    "M. A. Beasley",
+    "J. A. Arnold",
+    "N. Tamura",
+    "R. M. Sharples",
+    "N. Arimoto"
+  ],
+  "publisher": "ApJS 197, 33",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Strader et al. (2011), ApJS 197, 33.",
+      "scope": "M87 globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/33/ReadMe"
+    }
+  ]
+}

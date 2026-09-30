@@ -8,7 +8,7 @@ export type OverviewScope = 'system' | OverviewObject['id'];
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';
-import type { OverviewDistance, OverviewObject } from '@cssearth/objects';
+import { overviewHolding, type OverviewDistance, type OverviewObject } from '@cssearth/objects';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
 
 const PARSEC_M = 3.085677581491367e16;
@@ -52,6 +52,15 @@ export function overviewsReachableFrom(centreM: readonly number[], plan = contex
   overviews: readonly OverviewObject[] = KNOWN_OVERVIEWS): readonly OverviewObject[] {
   const centreDistance = distance(centreM, plan.focus.positionM);
   return overviews.filter(overview => !overview.zoom.centreWithin || centreDistance < overviewDistanceM(overview.zoom.centreWithin, plan, orbitsWithinM));
+}
+
+/** The level that holds a subject of `classification` at `positionM`: its overview's `holds`, when a zoom centred there
+ * reaches that level; otherwise the nearest level out that it reaches (M87, a Virgo galaxy, is not the Local Group's). */
+export function overviewHoldingAt(classification: string, positionM: readonly number[], plan = context,
+  overviews: readonly OverviewObject[] = KNOWN_OVERVIEWS): OverviewObject | undefined {
+  const holder = overviewHolding(overviews, classification);
+  const reachable = new Set(overviewsReachableFrom(positionM, plan, undefined, overviews).map(overview => overview.id));
+  return !holder || reachable.has(holder.id) ? holder : overviews.find(overview => overview.order > holder.order && reachable.has(overview.id));
 }
 
 /** The scope the camera frames. UI scale thresholds, not physical boundaries or membership claims, each measured from the

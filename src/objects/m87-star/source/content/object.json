@@ -63,6 +63,11 @@
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/1906.11238"
         },
+        "volume": {
+          "objectId": "m87",
+          "datasetId": "eso-optical",
+          "surface": "shape"
+        },
         "falseColor": false,
         "notes": "The image is EHT M87 Paper IV's eht-imaging pipeline run once with its released fiducial parameters on the released data for 2017 April 11, made here. Its colours are eht-imaging's afmhot legend for brightness, not colour. The disc always faces the viewer."
       }

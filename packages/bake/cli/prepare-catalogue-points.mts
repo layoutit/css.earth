@@ -62,9 +62,12 @@ const table = recipe.table as { path: string; bytes: number; format: 'whitespace
    * the foreground stars a published criterion identifies; `source` and `basis` say whose list and radius they are. */
   exclude?: { path: string; raDegColumn: string; decDegColumn: string; withinArcsec: number; source: string; basis: string } };
 const discPlacement = (recipe.frame as { placement?: unknown } | undefined)?.placement === 'image-layer-disc';
-if ([table.columns.distance, table.distanceByFlag, table.distanceFirstOf].filter(value => value !== undefined).length !== (discPlacement ? 0 : 1) ||
-    (discPlacement ? table.distanceUnit !== undefined : table.distanceUnit === undefined)) {
-  throw new TypeError(`${at('table')} needs exactly one of columns.distance, distanceByFlag and distanceFirstOf with a distanceUnit, or none with frame.placement image-layer-disc.`);
+// A galaxy with no disc (M87): each ICRS row at a depth drawn from a published spheroid's density along its sight line.
+const spheroidPlacement = (recipe.frame as { placement?: unknown } | undefined)?.placement === 'spheroid';
+const skyPlacement = discPlacement || spheroidPlacement;
+if ([table.columns.distance, table.distanceByFlag, table.distanceFirstOf].filter(value => value !== undefined).length !== (skyPlacement ? 0 : 1) ||
+    (skyPlacement ? table.distanceUnit !== undefined : table.distanceUnit === undefined)) {
+  throw new TypeError(`${at('table')} needs exactly one of columns.distance, distanceByFlag and distanceFirstOf with a distanceUnit, or none with frame.placement image-layer-disc or spheroid.`);
 }
 const filters = (recipe.filters ?? []) as { column: Column; op: '==' | '!=' | '>' | '<'; value: string | number }[];
 const icrsInput = (recipe.frame as { input?: unknown } | undefined)?.input === 'icrs';
@@ -89,7 +92,7 @@ if (kinematicUncertainty && (typeof kinematicUncertainty.basis !== 'string' || !
     !(kinematicUncertainty.rotation.theta0KmS > 0) || !(kinematicUncertainty.rotation.sigmaVKmS > 0) || table.distanceUnit !== 'kpc')) {
   throw new TypeError(`${at('kinematicUncertainty')} needs a kinematic rule, the rotation curve, a basis and kpc distances.`);
 }
-const frame = recipe.frame as { input: string; output: string; epochJdTt: number; unit?: 'kpc' | 'Mpc'; placement?: 'image-layer-disc' };
+const frame = recipe.frame as { input: string; output: string; epochJdTt: number; unit?: 'kpc' | 'Mpc'; placement?: 'image-layer-disc' | 'spheroid' };
 type Spectrum = { path: string; bytes: number; wavelength: string; flux: string; wavelengthUnit: 'angstrom';
   /** A template that ends inside the visible range: no light is counted past its last sample, and `basis` says why that holds. */
   endsNm?: { value: number; basis: string } };
@@ -110,12 +113,12 @@ const appearance = recipe.appearance as { colorCss: string; radiusPx: number; op
    * to `step`: the colour its light arrives with. */
   colorBySpectrumAtRedshift?: { spectrum: Spectrum; step: number; basis: string } };
 if (!['whitespace', 'fixed-width', 'csv'].includes(table.format)) throw new TypeError(`${at('table.format')} must be whitespace, fixed-width or csv (with a header row).`);
-if (!discPlacement && !['pc', 'kpc', 'parallax-mas', 'distance-modulus', 'redshift-planck18'].includes(table.distanceUnit!)) {
+if (!skyPlacement && !['pc', 'kpc', 'parallax-mas', 'distance-modulus', 'redshift-planck18'].includes(table.distanceUnit!)) {
   throw new TypeError(`${at('table.distanceUnit')} must be pc, kpc, parallax-mas, distance-modulus or redshift-planck18.`);
 }
 if (frame.unit !== undefined && frame.unit !== 'kpc' && frame.unit !== 'Mpc') throw new TypeError(`${at('frame.unit')} must be kpc or Mpc.`);
 if (!['galactic', 'icrs'].includes(frame.input) || frame.output !== 'sun-icrf' || !Number.isFinite(frame.epochJdTt)) throw new TypeError(`${at('frame')} must convert galactic or icrs to sun-icrf at a finite epoch.`);
-if (discPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty)) throw new TypeError(`${at('frame.placement')} image-layer-disc places ICRS rows in kpc, without kinematic distances.`);
+if (skyPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty)) throw new TypeError(`${at('frame.placement')} ${String(frame.placement)} places ICRS rows in kpc, without kinematic distances.`);
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
 const hex = /^#[0-9a-f]{6}$/iu;
 if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex colour, a positive radius and an opacity in (0, 1].`);
@@ -128,7 +131,7 @@ if (colorByBv && (!Array.isArray(colorByBv.range) || !(colorByBv.range[0] < colo
     || colorByBv.steps < 2 || colorByBv.steps > 64 || typeof colorByBv.basis !== 'string' || !colorByBv.basis)) {
   throw new TypeError(`${at('appearance.colorByBv')} takes a rising [low, high] B-V range, 2-64 steps and a basis; got ${JSON.stringify(colorByBv)}.`);
 }
-if (discPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a disc placement has none.`);
+if (skyPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a ${String(frame.placement)} placement has none.`);
 if (colorBySpectrumAtRedshift && (table.distanceUnit !== 'redshift-planck18' || !colorBySpectrumAtRedshift.spectrum || !(colorBySpectrumAtRedshift.step > 0) ||
     typeof colorBySpectrumAtRedshift.basis !== 'string')) {
   throw new TypeError(`${at('appearance.colorBySpectrumAtRedshift')} needs a redshift-planck18 distance, a spectrum, a positive step and a basis.`);
@@ -276,7 +279,7 @@ const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env,
   input: JSON.stringify({ table: resolve(sourceDirectory, table.path), gzip: table.gzip === true, columns: table.columns, unit: table.distanceUnit ?? null,
     fromName: table.galacticFromName === true, byFlag: table.distanceByFlag ?? null, icrs: icrsInput, csv: table.format === 'csv', weight: kinematicUncertainty ?? null, firstOf: table.distanceFirstOf ?? null, onePerName: table.onePerName === true,
     exclude: table.exclude ? { ...table.exclude, path: resolve(sourceDirectory, table.exclude.path) } : null,
-    disc: discPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
+    disc: skyPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
     bands: colorByBands ? [colorByBands.red, colorByBands.green, colorByBands.blue] : null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
 const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; excluded: number; astropy: string; points: number[][]; colors: (number | null)[];
@@ -353,6 +356,41 @@ if (discPlacement) {
     const h = discThickness ? height(index, radiusKpc) : 0, position = ray.map((value, axis) => value * midplane + h * normal[axis]!);
     converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, Math.hypot(...position));
     return position.map(value => Math.round(value * 1e4) / 1e4);
+  });
+}
+
+/** A spheroid placement (`frame.spheroid`): the deprojected Sérsic density (Prugniel & Simien 1997) of a published fit, on
+ * an oblate spheroid whose axis lies in the plane of the sky at a position angle, ending at `cutoffHalfLightRadii`. Each row
+ * sits along its sight line at a depth drawn from that density, seeded like the disc heights. The depth is drawn, not
+ * measured; the same density spreads the galaxy's light in depth (its nebula-lab recipe's `shapePrior`). */
+if (spheroidPlacement) {
+  const sph = (recipe.frame as { spheroid?: Record<string, unknown> }).spheroid;
+  const num = (key: string) => { const value = sph?.[key]; if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at(`frame.spheroid.${key}`)} must be a finite number, got ${JSON.stringify(value)}.`); return value; };
+  if (!sph || typeof sph.source !== 'string' || !sph.source || typeof sph.basis !== 'string' || !sph.basis) throw new TypeError(`${at('frame.spheroid')} needs its fit's numbers, a source and a basis; got ${JSON.stringify(sph)}.`);
+  const [ra0, dec0, distanceKpc, re, n, q, pa, cutoff] = ['centerRaDeg', 'centerDecDeg', 'distancePc', 'halfLightRadiusKpc', 'sersicIndex', 'axisRatio', 'axisPositionAngleDeg', 'cutoffHalfLightRadii'].map(num) as number[];
+  const rad = Math.PI / 180, unit = (raDeg: number, decDeg: number) => [Math.cos(decDeg * rad) * Math.cos(raDeg * rad), Math.cos(decDeg * rad) * Math.sin(raDeg * rad), Math.sin(decDeg * rad)];
+  const target = unit(ra0!, dec0!), northPole = [0, 0, 1], dotv = (a: number[], b: number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
+  const northRaw = northPole.map((v, i) => v - dotv(northPole, target) * target[i]!), northLength = Math.hypot(...northRaw), north = northRaw.map(v => v / northLength);
+  const east = [north[1]! * target[2]! - north[2]! * target[1]!, north[2]! * target[0]! - north[0]! * target[2]!, north[0]! * target[1]! - north[1]! * target[0]!];
+  const axis = [0, 1, 2].map(i => Math.sin(pa! * rad) * east[i]! + Math.cos(pa! * rad) * north[i]!), dKpc = distanceKpc! / 1000;
+  const p = 1 - 0.6097 / n! + 0.05463 / (n! * n!), b = 1.9992 * n! - 0.3271;
+  const density = (point: number[]) => {
+    const offset = point.map((v, i) => v - target[i]! * dKpc), axial = dotv(offset, axis), radial = Math.sqrt(Math.max(0, dotv(offset, offset) - axial * axial));
+    const m = Math.hypot(radial, axial / q!) / re!;
+    return m >= cutoff! ? 0 : Math.max(m, .01) ** -p * Math.exp(-b * (Math.max(m, .01) ** (1 / n!) - 1));
+  };
+  const { createHash } = await import('node:crypto');
+  const draw = (index: number, salt: string) => (Number(createHash('sha256').update(`${id}:${index}${salt}`).digest().readBigUInt64BE(0) >> 11n) + 0.5) / 2 ** 53;
+  const reach = cutoff! * re!, samples = 400;
+  converted.points = converted.sky!.map(([ra, dec], index) => {
+    const ray = unit(ra, dec), weights: number[] = [];
+    for (let k = 0; k < samples; k++) { const t = dKpc - reach + (k + 0.5) / samples * 2 * reach; weights.push(density(ray.map(v => v * t))); }
+    const total = weights.reduce((a, c) => a + c, 0);
+    // A row whose sight line misses the spheroid stays at the galaxy's distance.
+    let distance = dKpc;
+    if (total > 0) { const want = draw(index, ':depth') * total; let k = 0, running = weights[0]!; while (running < want && k < samples - 1) running += weights[++k]!; distance = dKpc - reach + (k + 0.5) / samples * 2 * reach; }
+    converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, distance);
+    return ray.map(value => Math.round(value * distance * 1e4) / 1e4);
   });
 }
 
@@ -517,7 +555,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
     ...(table.exclude ? { excluded: converted.excluded } : {}), ...(bulgePlacement ? { bulge: bulgeMembers } : {}) },
   ...(bulgePlacement ? { bulge: { source: bulgePlacement.source, basis: bulgePlacement.basis } } : {}),
   ...(table.exclude ? { exclusion: { path: table.exclude.path, withinArcsec: table.exclude.withinArcsec, source: table.exclude.source, basis: table.exclude.basis } } : {}),
-  conversion: discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
+  conversion: spheroidPlacement ? 'Right ascension and declination at a depth drawn from the spheroid\'s density along the sight line (frame.spheroid), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.' : discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
     : `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),
