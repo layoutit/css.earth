@@ -174,7 +174,7 @@ its validators accept); the renderer never imports the bake.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
     files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes; JSON source values
     left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
-    directory is found on first use; the matcher that binds a manifest's recorded generator name to today's code; and the
+    directory is found on first use; and the
     idle-timeout stream relay pinned downloads go through.
   - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,
     reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style. It imports

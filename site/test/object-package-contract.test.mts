@@ -23,7 +23,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   const projectRoot = await mkdtemp(resolve(tmpdir(), "cssearth-provider-neutral-"));
   context.after(() => rm(projectRoot, { recursive: true, force: true }));
   const object = { id: "local-body", name: "LocalBody" };
-  const paths = objectPackagePaths(object, projectRoot, true);
+  const paths = objectPackagePaths(object, projectRoot);
   for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
