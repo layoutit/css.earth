@@ -37,7 +37,7 @@ const listed = (dataset: Control) => !dataset.step || stepMembers(dataset)[0]?.i
 const defaultControl = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
 const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.id : defaultControl?.id;
 ---
-<section id={`${objectId}-datasets`} class="object-datasets">
+<section id={`${objectId}-dataset-list`} class="object-datasets">
   <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} data-drawn-page={page} hidden>
     {['v', 'overview', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
   </form>
