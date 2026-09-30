@@ -35,6 +35,8 @@ jobs:
       run_universe: ${{ steps.classify.outputs.run_universe }}
       run_universe_preparation: ${{ steps.classify.outputs.run_universe_preparation }}
       run_nebula: ${{ steps.classify.outputs.run_nebula }}
+      test_packages: ${{ steps.affected.outputs.test_packages }}
+      test_site: ${{ steps.affected.outputs.test_site }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -49,6 +51,8 @@ jobs:
             /.github/scripts/**/*.mts
             /packages/core/src/validate.ts
             /.github/ci-areas.json
+            /package.json
+            /packages/*/package.json
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
@@ -63,6 +67,11 @@ jobs:
           else
             node .github/scripts/ci/ci-affected.mts push "${{ github.event.before }}"
           fi
+      - name: Choose the tests this change can break
+        # The packages it touched and every package that depends on one, and the site when it or a package it imports
+        # changed (.github/scripts/ci/affected-tests.mts). A push to main, or shared configuration, tests everything.
+        id: affected
+        run: node .github/scripts/ci/affected-tests.mts ${GITHUB_BASE_REF:+"origin/$GITHUB_BASE_REF"}
       - name: Check that every commit is one Conventional Commits line with no attribution
         # Required with the rest of this job. A local commit-msg hook gives the same answer earlier, but a hook can be
         # skipped; this reads the pull request's own commits (merge base to head), so the merge itself is never counted.
@@ -277,6 +286,9 @@ jobs:
         lane: [packages, site]
     env:
       CI_UNIVERSE_LANE: ${{ matrix.lane }}
+      CI_TEST_PACKAGES: ${{ needs.changes.outputs.test_packages }}
+      # A lane with nothing to test still reports, so the required check passes, but does no work.
+      CI_LANE_SKIP: ${{ (matrix.lane == 'packages' && needs.changes.outputs.test_packages == '') || (matrix.lane == 'site' && needs.changes.outputs.test_site != 'true') }}
     needs: changes
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true' }}
     runs-on: ubuntu-latest
@@ -300,7 +312,9 @@ jobs:
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: node-modules-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: |
+          if [ "$CI_LANE_SKIP" = true ]; then echo "This change can break no test in the $CI_UNIVERSE_LANE lane."; exit 0; fi
+          pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
         run: node .github/scripts/ci/ci-cache-key.mts
@@ -313,7 +327,9 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-        run: node .github/scripts/ci/build-ci.mts full
+        run: |
+          if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
+          node .github/scripts/ci/build-ci.mts full
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
@@ -330,6 +346,7 @@ jobs:
           CI_PACKAGE_CACHE_HIT: 'true'
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: |
+          if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
           if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
             pnpm setup:asset-data
           else
@@ -340,11 +357,17 @@ jobs:
           node .github/scripts/ci/build-ci.mts full
           node site/build/prepare/prepare-feature-index.mts
       - name: Test the selected folder lane
-        # `test:packages` runs every test under packages/; `test:site` runs site/, src/, integration/ and .github/.
-        # A test whose restored input this job leaves out skips through sourceTest() and names it.
+        # The packages lane tests the packages this change can break (all of them on a push); `test:site` runs site/, src/,
+        # integration/ and .github/. A test whose restored input this job leaves out skips through sourceTest() and names it.
         run: |
+          if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
           node site/build/prepare/prepare-facilities.mts --catalog-only
           pnpm exec playwright install --with-deps --only-shell chromium
+          if [ "$CI_UNIVERSE_LANE" = packages ] && [ "$CI_TEST_PACKAGES" != all ]; then
+            tests=(); for name in $CI_TEST_PACKAGES; do tests+=("packages/$name/**/*.test.{ts,mts}"); done
+            pnpm test:run "${tests[@]}"
+            exit 0
+          fi
           if [ "$CI_UNIVERSE_LANE" = packages ]; then
             # The volume packages' previews and compact inputs, as the nebula job keeps them, the tracked density sources
             # the volume tests decode (52 MB) and the tracked geology shapefiles.
