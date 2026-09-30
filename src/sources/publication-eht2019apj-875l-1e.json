@@ -1,0 +1,34 @@
+{
+  "id": "publication-eht2019apj-875l-1e",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "EHT2019ApJ...875L...1E"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1906.11238",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "locator": "/sources/9/references/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/9/references/1"
+    }
+  ]
+}

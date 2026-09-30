@@ -1,0 +1,43 @@
+{
+  "id": "kormendy-2009-virgo-ellipticals",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Structure and formation of elliptical and spheroidal galaxies",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2009ApJS..182..216K"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJS..182..216K",
+      "label": "2009ApJS..182..216K"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0810.1681",
+      "checkedOn": "2026-09-30",
+      "locator": "Table 3, NGC 4486 = M87 composite V-band surface photometry: radius along the major axis, surface brightness, ellipticity and position angle out to 2443.7 arcsec (the arXiv source's m87.tex). Sect. 7: a Sérsic fit to the whole profile gives n = 11.8 (+1.8, -1.2)."
+    }
+  ],
+  "creators": [
+    "J. Kormendy",
+    "D. B. Fisher",
+    "M. E. Cornell",
+    "R. Bender"
+  ],
+  "publisher": "ApJS 182, 216",
+  "publicationDate": "2009",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kormendy et al. (2009), ApJS 182, 216.",
+      "scope": "M87 surface photometry",
+      "evidence": "https://arxiv.org/abs/0810.1681"
+    }
+  ]
+}

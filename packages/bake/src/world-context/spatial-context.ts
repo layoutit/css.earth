@@ -206,7 +206,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     // A body drawn from its record may have no measured radius (0): it is drawn as its circle only.
     const sized = body.unpackaged === true ? Number.isFinite(fact?.radiusM) && fact!.radiusM >= 0 : fact !== undefined && positive(fact.radiusM, `${body.id} radius`);
     if (!fact || !state || !sized) throw new TypeError(`Missing physical facts for ${body.id}: radius ${String(fact?.radiusM)}.`);
-    validateState(state, body.id);
+    validateState(state, body.id, fact.orbitStyle === 'none');
     if (fact.boundTo) {
       const hostPositionM = fact.boundTo.hostId === source.focus.id ? source.frame.originM : states[fact.boundTo.hostId]?.positionM;
       const centre = fact.boundTo.centerM;
@@ -538,11 +538,13 @@ function parsePresentation(value: unknown): WorldContextCameraPresentation {
     levelOfDetail: freeze({ model: levelOfDetail.model, billboardFadeStartDiscPixels, billboardFullDiscPixels, markerFadeStartDiscPixels, markerFullDiscPixels }),
     orbitLineFade: freeze({ visibleBelowDiscHeightShare, hiddenAboveDiscHeightShare }), drag: freeze({ model: drag.model }) });
 }
-function validateState(state: OrbitalState, id: string): void {
+function validateState(state: OrbitalState, id: string, placed: boolean): void {
   identifier(state.centerBodyId, `${id} orbit parent`);
   [state.positionM, state.centerPositionM, state.normal, state.perihelionDirection].forEach((value, index) => { if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`${id} vector ${index} is invalid.`); });
   const axis = finite(state.semiMajorAxisM, `${id} semi-major axis`), eccentricity = state.eccentricity;
-  if (!(Number.isFinite(eccentricity) && eccentricity >= 0 && eccentricity !== 1 &&
+  // Eccentricity 1 is a placed source moving straight along its line of sight (prepare-solar-geometry.mts): placed by its
+  // position, never drawn as a path.
+  if (!(Number.isFinite(eccentricity) && eccentricity >= 0 && (eccentricity !== 1 || placed) &&
       (eccentricity < 1 ? axis > 0 : axis < 0)) || !Number.isFinite(state.trueAnomalyRadians) ||
       1 + eccentricity * Math.cos(state.trueAnomalyRadians) <= 0 || Math.abs(dot(state.normal, state.perihelionDirection)) > 1e-8) {
     throw new TypeError(`${id} orbit is invalid.`);

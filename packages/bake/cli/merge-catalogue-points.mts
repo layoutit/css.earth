@@ -105,11 +105,14 @@ const toned = (colour: string, tone: number) => tone === 1 ? colour
 const centreOnGalaxy = recipe.centreOnGalaxy === true;
 if (recipe.centreOnGalaxy !== undefined && (typeof recipe.centreOnGalaxy !== 'boolean' || cap)) fail('centreOnGalaxy is a boolean, for a bank without a density cap.');
 const needsCentre = centreOnGalaxy || cap?.mode === 'disc' || entries.some(value => value.withinPcOfCentre !== undefined);
-// A density-volume galaxy (prepared/volume.json) or one drawn as image layers (prepared/image-layers.json).
+// A density-volume galaxy (prepared/volume.json), a volume dataset bank or one drawn as image layers (prepared/image-layers.json).
+// A volume dataset bank (prepared/datasets.json, M87) keeps its frame on each dataset's volume.
 const galaxyFrameValue = async () => {
   const volume = await readFile(resolve(prepared, 'volume.json'), 'utf8').catch(() => null);
-  return volume === null ? (JSON.parse(await readFile(resolve(prepared, 'image-layers.json'), 'utf8')) as { frame?: unknown }).frame
-    : (JSON.parse(volume) as { data?: { frame?: unknown } }).data?.frame;
+  if (volume !== null) return (JSON.parse(volume) as { data?: { frame?: unknown } }).data?.frame;
+  const datasets = await readFile(resolve(prepared, 'datasets.json'), 'utf8').catch(() => null);
+  if (datasets !== null) return (JSON.parse(datasets) as { data?: { datasets?: { volume?: { frame?: unknown } }[] } }).data?.datasets?.[0]?.volume?.frame;
+  return (JSON.parse(await readFile(resolve(prepared, 'image-layers.json'), 'utf8')) as { frame?: unknown }).frame;
 };
 const galaxyFrame = needsCentre ? parseDensityVolumeFrame(await galaxyFrameValue()) : null;
 const centreKpc = galaxyFrame ? galaxyFrame.originM.map(value => value / KPC_M) : null;

@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m87-star",
+  "displayName": "M87*",
+  "panel": {
+    "facts": [
+      {
+        "id": "shadow",
+        "label": "Shadow diameter",
+        "value": "39.5 microarcseconds (663 au)",
+        "source": {
+          "catalogueId": "arxiv-1906-11238",
+          "url": "https://arxiv.org/abs/1906.11238",
+          "label": "EHT Collaboration 2019 (M87 Paper I)",
+          "checked": "2026-09-30",
+          "path": "source/measurements.json",
+          "locator": "angularDiameterMas; angularDiameterSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "6.5 billion solar masses",
+        "source": {
+          "catalogueId": "arxiv-1906-11238",
+          "url": "https://arxiv.org/abs/1906.11238",
+          "label": "EHT Collaboration 2019 (M87 Paper I)",
+          "checked": "2026-09-30",
+          "path": "source/measurements.json",
+          "locator": "massSolarMasses; massSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "16.8 million parsecs",
+        "source": {
+          "catalogueId": "arxiv-1906-11238",
+          "url": "https://arxiv.org/abs/1906.11238",
+          "label": "EHT Collaboration 2019 (M87 Paper I)",
+          "checked": "2026-09-30",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shadow",
+        "qualification": "A black disc the size of the shadow of the measured gravitational radius, with the EHT's 1.3 mm image of 2017 April 11 around it.",
+        "thumbnail": "m87-star-dataset-shape.webp",
+        "surface": "m87-star-surface-shape@2x.webp",
+        "poles": "m87-star-poles-shape@2x.webp",
+        "source": {
+          "id": "m87-star-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1906.11238"
+        },
+        "volume": {
+          "objectId": "m87",
+          "datasetId": "eso-optical",
+          "surface": "shape"
+        },
+        "falseColor": false,
+        "notes": "The image is EHT M87 Paper IV's eht-imaging pipeline run once with its released fiducial parameters on the released data for 2017 April 11, made here. Its colours are eht-imaging's afmhot legend for brightness, not colour. The disc always faces the viewer."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "EHT Collaboration (2019), ApJL 875, L1 (M87 Paper I)",
+      "href": "https://arxiv.org/abs/1906.11238"
+    },
+    {
+      "label": "Image",
+      "role": "facts",
+      "description": "EHT Collaboration (2019), ApJL 875, L4 (M87 Paper IV)",
+      "href": "https://arxiv.org/abs/1906.11241"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1906.11238",
+      "credit": "EHT Collaboration (2019), ApJL 875, L1 (M87 Paper I)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/m87-star.json",
+      "credit": "Shadow from the EHT-measured gravitational radius, mass and distance from EHT M87 Paper I; SIMBAD position; no spin axis drawn (display convention)"
+    }
+  }
+}

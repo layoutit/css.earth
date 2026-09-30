@@ -1,0 +1,164 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "m87-star-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/1906.11238",
+      "credit": "EHT Collaboration (2019), ApJL 875, L1 (M87 Paper I)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "m87-star-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the black shadow disc, and the EHT image on the off-limb plate",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "datasets"
+      ]
+    },
+    {
+      "id": "m87-star-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "m87-star-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "m87-star-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "m87-star-preparation-eht-fiducial",
+      "path": "preparation/eht-fiducial.json",
+      "origin": "Repository-authored recipe for the EHT fiducial image: the releases by commit and file path and the toolchain",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth; the data and pipeline are the Event Horizon Telescope Collaboration's releases 2019-D01-01 and 2019-D01-02",
+      "license": "Project-authored preparation record; referenced releases retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/1906.11238",
+      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-object-cli.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/new-object/new-object-cli.mts",
+        "inputs": [
+          "m87-star-observational-measurements"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/new-object/new-object-cli.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    },
+    {
+      "id": "m87-star-eht-2017-04-11-fiducial",
+      "path": "observations/eht-2017-04-11-fiducial.fits",
+      "origin": "https://github.com/eventhorizontelescope/2019-D01-01",
+      "title": "EHT M87 2017 April 11, 1.3 mm: the eht-imaging fiducial reconstruction, made here",
+      "credit": "Event Horizon Telescope Collaboration (2019), M87 Paper IV (ApJL 875, L4; arXiv:1906.11241): calibrated data release 2019-D01-01 and the eht-imaging pipeline of release 2019-D01-02 with its fiducial parameters; reconstructed here",
+      "displayCredit": "Event Horizon Telescope Collaboration",
+      "acquisition": "Made here: node packages/bake/authoring/eht/topset-mean.mts m87-star fetches the April 11 low- and high-band uvfits of the EHT data release 2019-D01-01 and the eht-imaging pipeline of release 2019-D01-02 at their release commits, and runs the pipeline once as released (preparation/eht-fiducial.json states the toolchain).",
+      "license": "EHT data releases are public; cite the Event Horizon Telescope Collaboration papers.",
+      "redistribution": "The image is cast on the off-limb plate and cited; the release data are not redistributed.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reconstructed here from the EHT data release with the EHT pipeline, by the tool and recipe named in acquisition."
+      },
+      "generator": "packages/bake/authoring/eht/topset-mean.mts m87-star"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    }
+  ]
+}

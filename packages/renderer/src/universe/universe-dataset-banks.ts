@@ -7,6 +7,7 @@ import { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
+import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
 import type { DatasetBankBillboard, DatasetBillboards } from './dataset-billboards.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
@@ -16,6 +17,8 @@ interface DatasetBank {
   readonly facts: DatasetBankBillboard;
   readonly billboardIndex: number;
   mounted: DatasetMount | null;
+  /** Catalogue points drawn inside the mounted bank, with its opacity. */
+  points: ReturnType<typeof mountCataloguePoints>[];
   textures: ReturnType<typeof createVolumeTextureReadiness> | null;
   loading: Promise<void> | null;
   generation: number;
@@ -47,7 +50,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   let billboardCount = 0, useClock = 0, coasting = false;
   const banks: DatasetBank[] = declarations.map((declared, index) => ({
     id: declared.id, facts: facts[index]!, billboardIndex: facts[index]!.billboard ? billboardCount++ : -1,
-    mounted: null, textures: null, loading: null, generation: 0, explicitEnabled: undefined,
+    mounted: null, points: [], textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     // A bank's own star points stay hidden unless a caller shows them.
     pendingSelection: undefined, pendingStarsVisible: false,
     framing: { frame: declared.frame, radiusUnits: volumeFramingRadiusUnits(declared.frame), visibility },
@@ -60,6 +63,8 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     const mounted = bank.mounted;
     bank.mounted = null;
     bank.loading = null;
+    for (const points of bank.points) points.destroy();
+    bank.points = [];
     mounted?.destroy();
     bank.textures?.destroy(); bank.textures = null;
   });
@@ -89,6 +94,8 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   }
   function evict(bank: DatasetBank) {
     if (!bank.mounted || bank.visible || bank.subscribers > 0) return false;
+    for (const points of bank.points) points.destroy();
+    bank.points = [];
     bank.mounted.destroy();
     bank.textures?.destroy(); bank.textures = null;
     bank.mounted = null;
@@ -133,6 +140,8 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       } catch (error) { mounted.destroy(); throw error; }
       if (lifetime.disposed || generation !== bank.generation) { mounted.destroy(); return; }
       bank.mounted = mounted;
+      const host = mounted.root;
+      bank.points = (options.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url, loadBank: target => fetchPreparedCatalogueBank(target) }));
       bank.textures = createVolumeTextureReadiness(() => { requestPublication?.(); });
       const pointVisibility = prepared.payload.pointVisibility!;
       bank.framing = { frame: loadedFrame, radiusUnits: prepared.payload.framingRadiusUnits, visibility: {
@@ -227,7 +236,8 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const presentationOpacity = bank.id === detailedObjectId ? 1
           : detailContextOpacity * (bank.facts.attached ? 1 : bodyContextOpacity);
         const contextOpacity = bank.facts.contextVisibility === 'independent' ? 1 : volumeOpacity;
-        const shown = bank.enabled ? presentationOpacity * contextOpacity : 0;
+        // An attached volume shows with its host's dataset, and always as the page's own focus (M87 on /m87/).
+        const shown = bank.enabled || bank.id === detailedObjectId ? presentationOpacity * contextOpacity : 0;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
         const incoming = bank.id === detailedObjectId;
         const ready = bank.mounted && bank.textures?.ready(shown > 0 && (requestedOpacity > 0 || incoming)
@@ -259,6 +269,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
           }
         }
         bank.mounted.publish({ world, viewport }, visible && Boolean(ready));
+        if (visible && ready) for (const points of bank.points) points.publish({ world, viewport });
       }
       if (residencyChanged) trimWarmResidency();
     },

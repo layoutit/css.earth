@@ -3,8 +3,7 @@ import { publishDatasetPreview, sectionElements, showSection } from '@cssearth/r
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { preparedFocusObjectId } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
-import { overviewHolding } from '@cssearth/objects';
-import { KNOWN_OVERVIEWS } from './object-directory.mts';
+import { overviewHoldingAt } from './overview-context.mts';
 import { wikipediaLearnMoreUrl } from './learn-more.mts';
 
 interface PreparedFocusCard {
@@ -108,8 +107,8 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       learnMore.hidden = fields.introduction.hidden;
     }
     if (aliasesRow) aliasesRow.hidden = !nebula || !aliases;
-    // The trail leads to the level that holds the focus's classification (its overview's `holds`).
-    const parent = overviewHolding(KNOWN_OVERVIEWS, catalogueClassification(record));
+    // The trail leads to the level that holds the focus's classification (its overview's `holds`) where it lies.
+    const parent = overviewHoldingAt(catalogueClassification(record), record.positionM);
     const parentScope = parent?.id;
     for (const trail of breadcrumbs) trail.hidden = trail.dataset.focusBreadcrumbScope !== parentScope;
     fields.status.hidden = nebula;

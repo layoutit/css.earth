@@ -4,8 +4,8 @@ export interface SourcePin { path: string; bytes: number }
 /** A pinned file, or a citation that only names the references a claim uses (a paper is cited, not retained). */
 export interface GalaxySource extends Partial<SourcePin> { id: string; url: string; citation: string; references?: SpatialCitation[] }
 export interface GalaxyMembership {
-  group: 'local-group' | 'local-volume' | 'uncertain';
-  subgroup: 'milky-way' | 'andromeda' | 'field' | 'unknown';
+  group: 'local-group' | 'local-volume' | 'galaxy-cluster' | 'uncertain';
+  subgroup: 'milky-way' | 'andromeda' | 'field' | 'virgo' | 'unknown';
   basis: string;
   sourceRef?: string;
 }
@@ -29,7 +29,14 @@ export interface GalaxyRecipe {
   membershipNames: Record<string, string>;
   detailObjects: Record<string, { id: string; focusRadiusM?: number }>;
   distanceOverrides: Record<string, GalaxyDistance>;
+  /** Galaxies beyond the pinned catalogue that an object package details (M87), each row cited field by field. */
+  citedRows?: Record<string, CitedGalaxy>;
   description: string;
+}
+/** A galaxy row written from its papers rather than read from the pinned catalogue: every field names its reference. */
+export interface CitedGalaxy {
+  name: string; aliases: string[]; raDeg: number; decDeg: number; positionRef: string;
+  distance: GalaxyDistance; membership: GalaxyMembership & { sourceRef: string };
 }
 export type CsvRow = Record<string, string>;
 export interface AuthorMetadata {

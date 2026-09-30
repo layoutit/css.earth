@@ -5,12 +5,23 @@ import type { InferenceGrid, IterationReport } from './solver.ts';
 import { projectEmission } from './solver.ts';
 
 export interface ShapeComponent {
-  kind: 'torus' | 'disk';
+  kind: 'torus' | 'disk' | 'sersic';
   axis: [number, number, number];
+  /** A torus's ring radius, a disk's flat radius, or a Sérsic spheroid's half-light radius (grid cells). */
   radius: number;
   radialSigma: number;
   axialSigma: number;
   weight: number;
+  /** A Sérsic spheroid's index and intrinsic axis ratio (its axial over its equatorial extent). */
+  sersicIndex?: number;
+  axisRatio?: number;
+}
+/** The deprojected Sérsic density (Prugniel & Simien 1997, with p from Lima Neto et al. 1999) at spheroidal radius m in
+ * half-light radii, one at the half-light radius; the core is held at a hundredth of the half-light radius. */
+function sersicDensity(m: number, n: number): number {
+  const p = 1 - 0.6097 / n + 0.05463 / (n * n), b = 1.9992 * n - 0.3271, r = Math.max(m, .01);
+  // Normalised to one at the half-light radius: at high n the bare exponential underflows the conditioner's cutoff.
+  return r ** -p * Math.exp(-b * (r ** (1 / n) - 1));
 }
 export interface ShapePrior { components: ShapeComponent[]; sigmaCutoff: number; }
 
@@ -22,8 +33,11 @@ export function geometricDepth(grid: InferenceGrid, center: readonly number[], p
   if ([grid.width, grid.height, grid.depth].some(v => !Number.isInteger(v) || v < 2) || count > 4_000_000)
     throw new TypeError('Invalid bounded geometric-prior grid.');
   const components = prior.components.map(component => {
-    if (!['torus', 'disk'].includes(component.kind) ||
-        [component.radius, component.radialSigma, component.axialSigma, component.weight].some(v => !Number.isFinite(v) || v <= 0) ||
+    const sersic = component.kind === 'sersic';
+    if (sersic && !(Number.isFinite(component.sersicIndex) && component.sersicIndex! > 0 && Number.isFinite(component.axisRatio) && component.axisRatio! > 0 && component.axisRatio! <= 1))
+      throw new TypeError('A Sérsic component needs a positive sersicIndex and an axisRatio in (0, 1].');
+    if (!['torus', 'disk', 'sersic'].includes(component.kind) ||
+        [component.radius, ...(sersic ? [] : [component.radialSigma, component.axialSigma]), component.weight].some(v => !Number.isFinite(v!) || v! <= 0) ||
         component.axis.length !== 3 || component.axis.some(v => !Number.isFinite(v)) || Math.hypot(...component.axis) < 1e-10)
       throw new TypeError('Invalid geometric component.');
     const norm = Math.hypot(...component.axis);
@@ -36,6 +50,9 @@ export function geometricDepth(grid: InferenceGrid, center: readonly number[], p
     for (const component of components) {
       const axial = dx * component.axis[0]! + dy * component.axis[1]! + dz * component.axis[2]!;
       const radial = Math.sqrt(Math.max(0, dx * dx + dy * dy + dz * dz - axial * axial));
+      // A Sérsic spheroid ends at sigmaCutoff half-light radii, a spheroidal edge inside the grid rather than the grid's box.
+      if (component.kind === 'sersic') { const m = Math.hypot(radial, axial / component.axisRatio!) / component.radius;
+        if (m < prior.sigmaCutoff) value += component.weight * sersicDensity(m, component.sersicIndex!); continue; }
       const dr = (component.kind === 'torus' ? radial - component.radius : Math.max(0, radial - component.radius)) / component.radialSigma;
       const da = axial / component.axialSigma, squared = dr * dr + da * da;
       if (squared < prior.sigmaCutoff ** 2) value += component.weight * Math.exp(-.5 * squared);

@@ -444,5 +444,21 @@
       "compilerPublished": ".local/nebula-lab/compiler-published/m1.json",
       "statusNote": "Released ejecta samples, separate pulsar wind and compact pulsar; spectral component strengths remain authored."
     }
+  },
+  {
+    "id": "m87-inferred",
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/m87-inferred"
+    },
+    "name": "M87 · inferred light",
+    "directory": ".local/nebula-lab/planetary/m87-inferred",
+    "imagePath": ".local/nebula-lab/planetary/m87-inferred/input.png",
+    "sourcePageUrl": "https://www.eso.org/public/images/eso1525a/",
+    "credit": "Chris Mihos (Case Western Reserve University)/ESO. Independent implementation of Wenger, Lorenz & Magnor (2013).",
+    "modelNote": "Experimental starlight distribution inferred from one image and axial symmetry about M87's minor axis in the sky plane. NOX star removal; catalogued neighbouring galaxies masked. Unmeasured depth.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "M87",
+    "workflow": "symmetry"
   }
 ]

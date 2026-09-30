@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m87-star",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M87*",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 49624960315.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/m87-star-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M87*",
+      "classification": "black-hole",
+      "color": "#9a9a9a",
+      "distanceAu": 3465248752020.4,
+      "description": "The black hole at the centre of the galaxy M87, 6.5 billion solar masses, whose shadow the EHT imaged in 2017.",
+      "systemName": "M87",
+      "order": 1296,
+      "context": {
+        "order": 1293,
+        "labelPlacement": "centre"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5.017457335350851e+23,
+        -6.789157133212104e+22,
+        1.1123902789140171e+23
+      ],
+      "presentationToReference": [
+        -0.9678852252918978,
+        -0.21264617174858877,
+        -0.134088762774223,
+        -0.13096523681673883,
+        -0.02877330443062396,
+        0.9909693253061258,
+        0.214584010138658,
+        -0.9767055352524692,
+        1.3139481058225535e-17
+      ],
+      "orbitUpReference": [
+        0.21264617174858877,
+        0.02877330443062396,
+        0.9767055352524692
+      ],
+      "metersPerUnit": 160080517145.48386,
+      "bodyRadiusM": 49624960315100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

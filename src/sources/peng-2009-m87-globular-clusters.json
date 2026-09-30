@@ -1,0 +1,57 @@
+{
+  "id": "peng-2009-m87-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The color-magnitude relation for metal-poor globular clusters in M87: confirmation from deep HST/ACS imaging",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2009ApJ...703...42P"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/703/42"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...703...42P",
+      "label": "2009ApJ...703...42P"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/703/42",
+      "label": "CDS J/ApJ/703/42"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/703/42/ReadMe",
+      "checkedOn": "2026-09-30",
+      "locator": "table1: 2,250 globular clusters in the HST/ACS field on M87 with J2000 positions and KINGPHOT photometry."
+    }
+  ],
+  "creators": [
+    "E. W. Peng",
+    "A. Jordán",
+    "J. P. Blakeslee",
+    "S. Mieske",
+    "P. Côté",
+    "L. Ferrarese",
+    "W. E. Harris",
+    "J. P. Madrid",
+    "G. R. Meurer"
+  ],
+  "publisher": "ApJ 703, 42",
+  "publicationDate": "2009",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Peng et al. (2009), ApJ 703, 42.",
+      "scope": "M87 globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/703/42/ReadMe"
+    }
+  ]
+}

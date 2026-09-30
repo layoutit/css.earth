@@ -76,7 +76,8 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
 
 /** The galaxies the Local Group catalogue draws (its recipe's detail objects), each at its frame origin with the focus
  * radius the recipe gives it: what the Local Group overview fits in view. The Milky Way has no focus radius there; the
- * overview reads its volume directly. */
+ * overview reads its volume directly. A galaxy beyond the Local Group level's reach (its zoom's `centreWithin`, M87 in
+ * Virgo) is drawn but not framed by it. */
 async function readLocalGroupGalaxies(projectRoot: string) {
   const recipePath = 'src/objects/local-group/source/catalogue.json';
   let text: string;
@@ -85,6 +86,10 @@ async function readLocalGroupGalaxies(projectRoot: string) {
   catch (error) { if (hasErrorCode(error, 'ENOENT')) return {}; throw error; }
   const recipe: unknown = JSON.parse(text);
   if (!isRecord(recipe) || !isRecord(recipe.detailObjects)) throw new TypeError(`${recipePath}: detailObjects is missing.`);
+  const level: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/object.json'), 'utf8'));
+  const within = isRecord(level) && isRecord(level.properties) && isRecord(level.properties.overview) && isRecord(level.properties.overview.zoom)
+    && isRecord(level.properties.overview.zoom.centreWithin) ? level.properties.overview.zoom.centreWithin.distancePc : undefined;
+  if (within !== undefined && !(typeof within === 'number' && within > 0)) throw new TypeError(`src/objects/local-group/object.json: zoom.centreWithin.distancePc is ${String(within)}, not a positive number.`);
   const galaxies: Record<string, { originM: unknown; radiusM: number }> = {};
   for (const [row, detail] of Object.entries(recipe.detailObjects)) {
     if (!isRecord(detail) || typeof detail.id !== 'string') throw new TypeError(`${recipePath}: detailObjects.${row} has no id.`);
@@ -94,7 +99,9 @@ async function readLocalGroupGalaxies(projectRoot: string) {
     if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
       throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.frame.`);
     }
-    galaxies[detail.id] = { originM: descriptor.properties.frame.originM, radiusM: detail.focusRadiusM };
+    const originM = descriptor.properties.frame.originM;
+    if (within !== undefined && Array.isArray(originM) && Math.hypot(...originM.map(Number)) > within * M_PER_PC) continue;
+    galaxies[detail.id] = { originM, radiusM: detail.focusRadiusM };
   }
   return galaxies;
 }

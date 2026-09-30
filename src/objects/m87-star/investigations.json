@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m87-star",
+  "entries": [
+    {
+      "id": "measurements",
+      "subject": "Measurements",
+      "status": "included",
+      "finding": "EHT Collaboration (2019), ApJL 875, L1 (M87 Paper I, Table 1: angular gravitational radius, mass, distance); EHT Collaboration (2022), Sgr A* Paper VI (the Schwarzschild shadow diameter 6 sqrt(3) theta_g). The 2019 M87 papers state no shadow diameter measured from the data alone, so the disc is the shadow of the measured theta_g.",
+      "evidence": [
+        "https://arxiv.org/abs/1906.11238",
+        "https://arxiv.org/abs/1906.11243",
+        "https://arxiv.org/abs/2311.09484"
+      ]
+    },
+    {
+      "id": "image",
+      "subject": "EHT image",
+      "status": "included",
+      "finding": "The 2017 calibrated data (2019-D01-01) and the three imaging pipelines (2019-D01-02) are public; the eht-imaging pipeline carries its fiducial parameters, and no Top Set parameter table was released for M87, so the image is the one fiducial run. The 2018 M87 data (2024-D01-01) are public too, with the pipelines of EHT Collaboration (2024, A&A 681, A79); the 2017 April 11 image is the one M87 Paper I shows, so it is the one drawn.",
+      "evidence": [
+        "https://github.com/eventhorizontelescope/2019-D01-01",
+        "https://github.com/eventhorizontelescope/2019-D01-02",
+        "https://github.com/eventhorizontelescope/2024-D01-01",
+        "https://arxiv.org/abs/1906.11241"
+      ]
+    },
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "SIMBAD, CDS Strasbourg (position of M 87, reference 2020A&A...644A.159C, ICRF3).",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M+87"
+      ]
+    }
+  ]
+}

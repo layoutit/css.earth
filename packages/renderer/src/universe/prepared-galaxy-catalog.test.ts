@@ -101,7 +101,8 @@ test('nebula label and its single-click target sit below the prepared cloud', ()
 
 test('one retained catalogue combines both classes; cluster fades and source-aware focus follow the same observer, and a cluster is named without a marker or outline', () => {
   const payload = read('local-group/prepared/catalogue.json'), clusters = read('galaxy-clusters/prepared/catalogue.json');
-  const galaxyCount = payload.objects.filter((row: { membership: { group: string }; detailedObjectId?: string }) => row.membership.group === 'local-group').length;
+  // Local Group members and every galaxy with an object of its own (M81, NGC 253, M87 are not members).
+  const galaxyCount = payload.objects.filter((row: { membership: { group: string }; detailedObjectId?: string }) => row.membership.group === 'local-group' || row.detailedObjectId).length;
   const document = new Document(), host = document.createElement(), before = document.createElement(), pickingHost = document.createElement(); host.append(before);
   const picking = screenPicking(pickingHost as unknown as HTMLElement);
   const onSelect = mock.fn(() => {});
@@ -186,7 +187,7 @@ test('catalogue-only rows remain dots without marker captions while saved catalo
   assert.notEqual(runtime.inspect().labels[unsupported.id], undefined);
   assert.deepEqual(runtime.resolve(supported.id), supported);
   assert.deepEqual(runtime.resolve(supported.detailedObjectId), supported);
-  assert.equal(runtime.inspect().count, payload.objects.filter((row: {membership:{group:string}}) => row.membership.group === 'local-group').length);
+  assert.equal(runtime.inspect().count, payload.objects.filter((row: {membership:{group:string};detailedObjectId?:string}) => row.membership.group === 'local-group' || row.detailedObjectId).length);
   const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
   const world = { ...payload.frame, pose: { positionM: [0,0,1e24] as const, orientationXyzw: [0,0,0,1] as const } };
   runtime.publish(world, viewport, 1); document.defaultView.advance(300);
@@ -220,7 +221,8 @@ test('baked sparse sample shows dots before names without enabling unsupported n
   const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement,
     payload, galaxySample, onSelect });
   assert.equal(galaxySample.ids.length, 48);
-  assert.equal(runtime.inspect().count, 52);
+  // The sample, and every galaxy with an object of its own.
+  assert.equal(runtime.inspect().count, 48 + payload.objects.filter((row: { detailedObjectId?: string }) => row.detailedObjectId).length);
   const world = { ...payload.frame, pose: { positionM: [0,0,1e24] as const, orientationXyzw: [0,0,0,1] as const } };
   const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
   runtime.publish(world, viewport, 0, [], 0, 1); document.defaultView.advance(300);
