@@ -203,7 +203,7 @@ provenance, Sources and Missions together without acquiring or rendering images.
 Run `pnpm test:node` for metadata, bindings and catalogue compilation. It covers
 malformed records, source conservation, reverse links and deterministic output.
 For changes to dataset selection or routing, also run the affected
-[selection](../../src/platform/object-selection-runtime.test.mts) and
+[selection](../../packages/renderer/test/node/object-selection-runtime.test.mts) and
 router tests for cancellation and history.
 
 For dataset navigation or card presentation changes, run the affected

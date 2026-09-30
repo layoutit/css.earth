@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { DATASET_ROUTES, datasetDestination, parseDatasetDestination } from './dataset-destination.mts';
+import { DATASET_ROUTES, datasetDestination, parseDatasetDestination } from '@cssearth/objects/provenance';
 import { compileContributions, parseContributionGraph } from '@cssearth/objects/provenance';
 import { compileSourceUsage, parseSourceUsage } from '@cssearth/objects/provenance';
 import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';

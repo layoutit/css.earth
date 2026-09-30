@@ -1,5 +1,5 @@
-import { sourceId, sourceText } from '@cssearth/objects/sources';
-import type { DatasetHost, DatasetRoutes } from '@cssearth/objects/provenance';
+import { sourceId, sourceText } from '../sources/index.js';
+import type { DatasetHost, DatasetRoutes } from './dataset-routes.js';
 
 /** The application route that shows the context objects (the Sun's scene); preparation records it for each context package. */
 export const CONTEXT_ROUTE = '/sun/';

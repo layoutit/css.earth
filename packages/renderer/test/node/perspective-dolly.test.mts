@@ -10,8 +10,8 @@ import {
   levelOfDetailFor,
   orbitLineOpacity,
   validatePerspectiveCameraPlan,
-} from "./perspective-dolly.mts";
-import PREPARED_MERCURY_SCENE from "../../src/objects/mercury/prepared/scene.json" with {type: "json"};
+} from "@cssearth/renderer/platform/perspective-dolly";
+import PREPARED_MERCURY_SCENE from "./fixtures/perspective-scene.json" with {type: "json"};
 
 const levelOfDetail = Object.freeze({
   model: "silhouette-diameter-crossfade",
@@ -68,7 +68,7 @@ test("the perspective contract rejects drifted plans", () => {
   }
 });
 
-test("the real Mercury camera plan carries no planetary system or Sun marker options", () => {
+test("the Mercury camera fixture carries no planetary system or Sun marker options", () => {
   const mercuryPlan = PREPARED_MERCURY_SCENE.camera;
   assert.equal(validatePerspectiveCameraPlan(mercuryPlan), mercuryPlan);
   for (const retired of ["planetarySystem", "sunMarker"]) assert.equal(retired in mercuryPlan, false, retired);
