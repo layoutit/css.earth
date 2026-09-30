@@ -1,5 +1,5 @@
 /** Compare the native monochrome sampler with independent ISIS-label byte reads.
- * node tests/oracles/reflectance-mosaics.mts <body-id> <report.json>
+ * node packages/bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts <body-id> <report.json>
  * The labels define coordinates and float32 byte offsets; no GeoTIFF decoder is
  * used by the reference. This checks decoding, display transfer and source gaps,
  * not the mission's calibration or the map's physical registration to a shape.

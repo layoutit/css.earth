@@ -80,6 +80,8 @@ function loadManifest(root: string): Manifest {
 // take. It never changes JavaScript ownership: test fixtures and capture
 // scripts still need an exact legacyAuthored entry until they migrate.
 function boundaryRoleFor(path: string): BoundaryRole | undefined {
+  // These oracle gates moved out of tests/oracles; retain their harness role, without exempting other CLIs.
+  if (path === 'packages/bake/cli/test-sbmt.mts' || path === '.github/scripts/checks/test-fits.mts') return 'evidence';
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
     || /^src\/(?:[^/]+\/)*test\//u.test(path)
     || path.startsWith('tests/') || /(?:^|\/)(?:__fixtures__|fixtures)(?:\/|$)/u.test(path)) return 'test';
@@ -91,7 +93,7 @@ function boundaryRoleFor(path: string): BoundaryRole | undefined {
     .replace(/^labs\/nebula\/packages\/reconstruction\/src\/evidence\//u, 'labs/nebula/packages/reconstruction/src/')
     .replace(/^labs\/nebula\/packages\/lab\/src\/(features|server\/workflows)\/evidence-fusion\//u, 'labs/nebula/packages/lab/src/$1/')
     .replace(/^labs\/nebula\/packages\/lab\/src\/server\/routes\/evidence-fusion\.ts$/u, 'labs/nebula/packages/lab/src/server/routes/fusion.ts');
-  // Audits produce evidence; they may use test harnesses. External-oracle comparisons live in tests/oracles/ (a test role above).
+  // Audits produce evidence; they may use test harnesses. External-oracle comparisons live beside their owner, in test suites and fixtures.
   if (path.startsWith('.github/scripts/audits/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(rolePath)) return 'evidence';
   return undefined;
 }

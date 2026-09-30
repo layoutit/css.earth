@@ -23,6 +23,7 @@
     ".github/scripts/ci/classify-changes.mts",
     ".github/scripts/ci/object-scope-gate.mts",
     "src/platform/**",
+    "integration/**",
     "src/sources/factsheet-sources.test.mts",
     "src/objects/object-package-consistency.test.mts",
     "site/objects.mts",
@@ -58,7 +59,7 @@
     { "id": "preparation", "patterns": ["packages/bake/cli/test-preparation.mts"], "jobs": ["typecheck", "universePreparation"] },
     { "id": "renderer", "patterns": ["packages/renderer/**", "src/renderers/**"], "jobs": ["typecheck", "universe", "universePreparation"] },
     { "id": "site", "patterns": ["site/**"], "jobs": ["typecheck", "universe"] },
-    { "id": "oracles", "patterns": ["packages/fits/**", "packages/objects/src/node/**", "packages/objects/src/provenance/**", "tests/fits/**", "tests/oracles/**", "packages/core/src/node/oracle/**", "packages/bake/src/objects/layers/terrestrial/fixtures/**", "packages/bake/src/objects/layers/terrestrial/missions/**", "packages/bake/src/objects/layers/terrestrial/registration/fixtures/comet-19p/**", "packages/bake/src/objects/raster/fixtures/**", "packages/bake/src/objects/raster/numpy/**", "packages/bake/src/objects/scene/fixtures/**", "packages/bake/src/photometry/fixtures/**"], "jobs": ["typecheck", "universe", "nebula"] },
+    { "id": "oracles", "patterns": ["packages/fits/**", "packages/objects/src/node/**", "packages/objects/src/provenance/**", "packages/core/src/node/oracle/**", "packages/bake/src/objects/layers/terrestrial/fixtures/**", "packages/bake/src/objects/layers/terrestrial/missions/**", "packages/bake/src/objects/layers/terrestrial/registration/fixtures/comet-19p/**", "packages/bake/src/objects/raster/fixtures/**", "packages/bake/src/objects/raster/numpy/**", "packages/bake/src/objects/scene/fixtures/**", "packages/bake/src/photometry/fixtures/**"], "jobs": ["typecheck", "universe", "nebula"] },
     { "id": "architecture", "patterns": [".github/scripts/architecture/**"], "jobs": ["typecheck"] },
     { "id": "nebula", "patterns": ["labs/nebula/**", "packages/volume-viewer/**"], "jobs": ["typecheck", "nebula"] }
   ]

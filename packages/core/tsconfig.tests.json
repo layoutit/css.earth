@@ -1,0 +1,31 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "**/*.test.ts",
+    "**/*.test.mts",
+    "**/*.spec.ts",
+    "**/*.spec.mts",
+    "src/node/register-vite-suffix.mts",
+    "src/node/vite-suffix-loader.mts",
+    "../../site/env.d.ts",
+    "../bake/src/delivery/fixtures/external-modules.d.mts"
+  ],
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "vitest": [
+        "../engine/node_modules/vitest"
+      ],
+      "/site/*": [
+        "../../site/*"
+      ],
+      "/src/*": [
+        "../../src/*"
+      ]
+    },
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-core-tests.tsbuildinfo"
+  }
+}

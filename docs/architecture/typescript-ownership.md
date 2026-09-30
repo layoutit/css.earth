@@ -4,7 +4,7 @@ Application, preparation, source-authoring, tests, executable fixture helpers an
 
 The [ownership inventory](../../.github/scripts/checks/typescript-ownership.json) has no remaining authored JavaScript backlog entries. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
 Evidence tooling lives under `.github/scripts/audits/` or in files named
-`capture`, `captures` or `evidence`, and the oracles under `tests/oracles/` are tests; both may import test harnesses,
+`capture`, `captures` or `evidence`; the FITS and SBMT oracle gates are explicitly named evidence runners in the guard. The oracles beside their owning code are tests; both may import test harnesses,
 while runtime owners may import neither test nor evidence modules.
 
 ## Where JavaScript belongs
@@ -53,7 +53,7 @@ surfaces. An `.mts` extension alone does not establish strict ownership. Missing
 local prepared assets or failures in that broader gate must be reported separately,
 not hidden by the focused oracle check.
 
-`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tests/tsconfig.json) with the configured TypeScript compiler; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
+`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tsconfig.tests.json) with the configured TypeScript compiler; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
 
 Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` execution; the TypeScript gates perform checking. Shell and native-tool configurations reject syntax requiring runtime transformation.
 
@@ -85,7 +85,7 @@ pnpm test:preparation
 ```
 
 `typecheck:tests` invokes the strict test compiler directly. The native suite uses
-`tests/register-vite-suffix.mts` for site imports; its source-dependent skips do not
+`packages/core/src/node/register-vite-suffix.mts` for site imports; its source-dependent skips do not
 establish qualification. Use a build and inspected browser output when behavior
 or rendering changes.
 

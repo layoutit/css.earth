@@ -6,19 +6,21 @@ import { fileURLToPath } from 'node:url';
 import { expect, it } from 'vitest';
 import { requireRecord, requireString } from '../../index.js';
 import { projectRoot } from '../project-root.js';
-import { assertPinnedInputs, pinnedOracleVersions, readOracleInput, readOracleFixture } from './fixture.mts';
+import { assertPinnedInputs, pinnedOracleVersions, readOracleInput, readOracleFixture, fitsArchiveInputs } from './fixture.mts';
 
 const root = projectRoot(import.meta.url);
 
 it('source and built readers find the same root and shipped pins from another working directory', async () => {
   const sourcePins = Object.fromEntries(await pinnedOracleVersions());
+  const archiveInputs = requireRecord(JSON.parse(await readFile(resolve(root, 'packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.json'), 'utf8'))).inputs;
+  expect(await fitsArchiveInputs()).toEqual(archiveInputs);
   for (const path of ['packages/core/src/node/oracle/fixture.mts', 'packages/core/dist/oracle/fixture.js']) {
     const url = new URL(path, `file://${root}/`).href;
     const result = spawnSync(process.execPath, ['--input-type=module', '-e',
-      `const m = await import(${JSON.stringify(url)}); console.log(JSON.stringify({root:m.ORACLE_ROOT,pins:Object.fromEntries(await m.pinnedOracleVersions()),fixture:(await m.readOracleFixture('fits/core.json')).generatedBy}));`],
+      `const m = await import(${JSON.stringify(url)}); console.log(JSON.stringify({root:m.ORACLE_ROOT,pins:Object.fromEntries(await m.pinnedOracleVersions()),archiveInputs:await m.fitsArchiveInputs(),fixture:(await m.readOracleFixture('fits/core.json')).generatedBy}));`],
     { cwd: tmpdir(), encoding: 'utf8' });
     expect(result.status, result.stderr).toBe(0);
-    expect(JSON.parse(result.stdout)).toEqual({ root, pins: sourcePins, fixture: (await readOracleFixture('fits/core.json')).generatedBy });
+    expect(JSON.parse(result.stdout)).toEqual({ root, pins: sourcePins, archiveInputs, fixture: (await readOracleFixture('fits/core.json')).generatedBy });
   }
   for (const name of ['fixture.py', 'requirements.txt']) {
     expect(await readFile(resolve(root, 'packages/core/dist/oracle', name))).toEqual(
@@ -90,4 +92,14 @@ it('the historical float32 input resolves after its global fixture copy is remov
   expect(input).toBeDefined();
   if (!input) throw new Error('Missing float32 oracle input.');
   expect(await readOracleInput(input)).toEqual(await readFile(resolve(root, 'packages/fits/src/node/fixtures/fits/float32.fits')));
+});
+
+it('source and built oracle runners discover domain cases after the root tests directory is retired', () => {
+  for (const path of ['packages/core/src/node/oracle/run.mts', 'packages/core/dist/oracle/run.js']) {
+    const result = spawnSync(process.execPath, [resolve(root, path), '__unknown__'], { cwd: tmpdir(), encoding: 'utf8' });
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('Unknown oracle __unknown__; known:');
+    expect(result.stderr).toContain('astronomy/hosted-eccentric');
+    expect(result.stderr).not.toContain('ENOENT');
+  }
 });

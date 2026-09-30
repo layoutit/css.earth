@@ -2,7 +2,7 @@
  * GeoTIFF's detached ISIS label. Coordinates and byte offsets come from the
  * label; native samples are read with DataView, without the production reader.
  *
- * node tests/oracles/isis-geotiff-grid.mts <recipe.json> <native.lbl> <grid.tif> <report.json>
+ * node packages/bake/src/objects/raster/fixtures/isis-geotiff-grid.mts <recipe.json> <native.lbl> <grid.tif> <report.json>
  *   [raster-recipe.json] [display-unit-scale, default 1] [calibration-override.json]
  */
 import {readFile, writeFile} from 'node:fs/promises';

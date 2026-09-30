@@ -113,12 +113,12 @@ lane's surface test also reads the observation dataset sampler from `src/objects
 in `src/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
 The node-tree, CSSOM, leaf-box, layout and activation tests are `node --test` suites in `src/presentation/`. The prepared-presentation, delivery,
 sources, navigation and preparation tests (with the solar-geometry generator's) are `node --test` suites in `src/prepared-presentation/`, `src/delivery/`,
-`src/sources/`, `src/navigation/`, `src/preparation/`, `src/prepare-object/` and `src/prepare-objects/` (the solar-geometry generator remains in `tests/preparation/`); the shared lighting-bank check is `src/raster/`. The scene suite
+`src/sources/`, `src/navigation/`, `src/preparation/`, `src/prepare-object/` and `src/prepare-objects/` (the solar-geometry generator remains in `src/platform/`); the shared lighting-bank check is `src/raster/`. The scene suite
 (`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies
 from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,
 shell, sky, density-volume, image-layer, catalogue and world-context bakes, which read restored sources.
-The object libraries' tests stay outside the package, beside the pipelines in `packages/bake/authoring/<body>/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
+The object libraries' tests live beside their modules in `packages/bake/src/objects/` or the pipelines in `packages/bake/authoring/<body>/` (`node --test`), since they read body sources, kernel
 banks and oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects` runs every test that imports an object entry.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `packages/bake/cli/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.

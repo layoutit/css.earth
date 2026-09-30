@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** Run the node tests of the shared object libraries in `@cssearth/bake/objects/<topic>`. Those tests stay beside the
- * authoring scripts under each package's authoring/ folder and the contracts in tests/, because they read body sources,
+ * authoring scripts under each package's authoring/ folder and the contracts beside their owners, because they read body sources,
  * kernel banks and oracle fixtures through the repository's test helpers, so the package's own Vitest run does not reach them.
  * The node tests that need none of those helpers sit beside their module in packages/bake/src/objects/, which Vitest skips.
  * Tests importing an object entry belong here, together with the explicitly listed relocated Node suites that do not.
@@ -32,7 +32,7 @@ const RELOCATED_NODE_TESTS: readonly string[] = [
   'packages/bake/src/surface-previews/surface-preview-rasters.test.mts',
 ];
 /** Tracked test files the Node selection may take, as `git ls-files` pathspecs. */
-export const BAKE_OBJECT_TEST_PATHS = ['site/test/restore-inputs.test.mts', 'packages/bake/src/objects/lineage/body-lineage.test.mts', 'src/objects/object-package-consistency.test.mts', 'src/platform/equirectangular-illustration.test.mts', 'src/platform/interpret-source-verification.test.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts', 'src/platform/astrometric-sky-registration.test.mts', 'src/platform/default-camera.test.mts', 'src/platform/dataset-facing.test.mts', 'src/platform/solar-presentation-frame.test.mts', 'src/platform/solar-view-direction.test.mts', 'site/test/lonlat-slice-table.test.mts', 'src/objects/europa/scientific-focus.test.mts', 'site/test/exoplanet-limb-coverage.test.mts', 'site/test/exoplanet-radius.test.mts', 'src/platform/solar-geometry.test.mts', 'src/sources/factsheet-sources.test.mts', 'tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts', 'packages/bake/src/objects/**/*.test.mts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts', ...RELOCATED_NODE_TESTS] as const;
+export const BAKE_OBJECT_TEST_PATHS = ['site/test/restore-inputs.test.mts', 'packages/bake/src/objects/lineage/body-lineage.test.mts', 'src/objects/object-package-consistency.test.mts', 'src/platform/equirectangular-illustration.test.mts', 'src/platform/interpret-source-verification.test.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts', 'src/platform/astrometric-sky-registration.test.mts', 'src/platform/default-camera.test.mts', 'src/platform/dataset-facing.test.mts', 'src/platform/solar-presentation-frame.test.mts', 'src/platform/solar-view-direction.test.mts', 'site/test/lonlat-slice-table.test.mts', 'src/objects/europa/scientific-focus.test.mts', 'site/test/exoplanet-limb-coverage.test.mts', 'site/test/exoplanet-radius.test.mts', 'src/platform/solar-geometry.test.mts', 'src/sources/factsheet-sources.test.mts', 'integration/**/*.test.mts', 'integration/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts', 'packages/bake/src/objects/**/*.test.mts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts', ...RELOCATED_NODE_TESTS] as const;
 const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
 /** Object-entry tests and relocated bake Node suites, sorted. */
 export function bakeObjectTests(files: readonly string[], read: (path: string) => string): string[] {
@@ -49,7 +49,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (!tests.length) throw new Error('No test imports an @cssearth/bake/objects entry; the selection is broken.');
   if (process.argv.includes('--list')) console.log(tests.join('\n'));
   else {
-    const run = spawnSync(process.execPath, ['--import', './tests/register-vite-suffix.mts', '--test', '--test-concurrency=4', '--test-timeout=180000', ...tests],
+    const run = spawnSync(process.execPath, ['--import', './packages/core/src/node/register-vite-suffix.mts', '--test', '--test-concurrency=4', '--test-timeout=180000', ...tests],
       { cwd: root, stdio: 'inherit' });
     process.exitCode = run.status ?? 1;
   }

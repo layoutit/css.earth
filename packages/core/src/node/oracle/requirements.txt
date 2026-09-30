@@ -1,4 +1,4 @@
-# Pinned oracle environment for tests/oracles/*/*.py, every package including
+# Pinned oracle environment for owner-local Python oracle scripts, every package including
 # transitive ones, created by `pnpm oracles:setup` under .local/oracles/venv.
 # Oracles verify preparation results against reference implementations; they
 # never produce pipeline inputs. Fixture tool versions must match these pins.
