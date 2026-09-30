@@ -10,6 +10,19 @@ import { assertPinnedInputs, pinnedOracleVersions, readOracleInput, readOracleFi
 
 const root = projectRoot(import.meta.url);
 
+async function relocationTables() {
+  const reader = await readFile(new URL('fixture.mts', import.meta.url), 'utf8');
+  const runner = await readFile(new URL('run.mts', import.meta.url), 'utf8');
+  const table = /const relocatedPaths:[^=]+ = (\{[\s\S]*?\n\});/u.exec(reader);
+  const generatorTable = /const relocated:[^=]+ = (\{[\s\S]*?\n\});/u.exec(runner);
+  if (!table || !generatorTable) throw new Error('Expected oracle relocation tables.');
+  const entries = [...table[1]!.matchAll(/"([^"]+)":\s*"([^"]+)"/gu)]
+    .map(match => [match[1]!, match[2]!] as const);
+  const generators = [...generatorTable[1]!.matchAll(/"([^"]+)":\s*"([^"]+)"/gu)]
+    .map(match => [match[1]!, match[2]!] as const).filter(([, path]) => path.endsWith('.py'));
+  return { entries, generators };
+}
+
 it('source and built readers find the same root and shipped pins from another working directory', async () => {
   const sourcePins = Object.fromEntries(await pinnedOracleVersions());
   const archiveInputs = requireRecord(JSON.parse(await readFile(resolve(root, 'packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.json'), 'utf8'))).inputs;
@@ -49,15 +62,7 @@ it('the Python writer finds the module-relative root in both source and distribu
 });
 
 it('every relocated generator resolves its logical output and preserves historical input identities without writing', async () => {
-  const reader = await readFile(new URL('fixture.mts', import.meta.url), 'utf8');
-  const runner = await readFile(new URL('run.mts', import.meta.url), 'utf8');
-  const table = /const relocatedPaths:[^=]+ = (\{[\s\S]*?\n\});/u.exec(reader);
-  const generatorTable = /const relocated:[^=]+ = (\{[\s\S]*?\n\});/u.exec(runner);
-  if (!table || !generatorTable) throw new Error('Expected oracle relocation tables.');
-  const entries = [...table[1]!.matchAll(/"([^"]+)":\s*"([^"]+)"/gu)]
-    .map(match => [match[1]!, match[2]!] as const);
-  const generators = [...generatorTable[1]!.matchAll(/"([^"]+)":\s*"([^"]+)"/gu)]
-    .map(match => [match[1]!, match[2]!] as const).filter(([, path]) => path.endsWith('.py'));
+  const { entries, generators } = await relocationTables();
   expect(generators.length).toBeGreaterThan(0);
   const inputs = entries.filter(([historical]) => historical.startsWith('tests/fixtures/'));
   const result = spawnSync('python3', ['-B', '-c', `
@@ -80,14 +85,6 @@ for logical, generator in request['generators']:
     for record in fixture['inputs']:
         if record['path'] in outputs:
             assert m['input_record'](root / outputs[record['path']]) == record, (generator, record)
-    if logical == 'fits/rice':
-        assignment = next(n for n in ast.walk(tree) if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Subscript) and isinstance(n.targets[0].value, ast.Name) and n.targets[0].value.id == 'cases' and isinstance(n.value, ast.Dict) and any(isinstance(key, ast.Constant) and key.value == 'path' for key in n.value.keys))
-        expression = next(value for key, value in zip(assignment.value.keys, assignment.value.values) if isinstance(key, ast.Constant) and key.value == 'path')
-        for case in fixture['cases'].values():
-            if 'path' not in case: continue
-            path = root / outputs[case['path']]
-            actual = eval(compile(ast.Expression(expression), generator, 'eval'), {'path': path, 'ROOT': root, 'input_record': m['input_record']})
-            assert actual == case['path'], (generator, actual)
 for historical, current in request['inputs']:
     assert m['input_record'](root / current)['path'] == historical, current
 print(json.dumps({'generators': len(request['generators']), 'inputs': len(request['inputs'])}))
@@ -134,4 +131,120 @@ it('source and built oracle runners discover domain cases after the root tests d
     expect(result.stderr).toContain('astronomy/hosted-eccentric');
     expect(result.stderr).not.toContain('ENOENT');
   }
+});
+
+it('relocated fixture case paths share historical input identities without generating files', async () => {
+  const { entries, generators } = await relocationTables();
+  const result = spawnSync('python3', ['-B', '-c', `
+import ast, json, runpy, sys, types
+sys.modules['numpy'] = types.ModuleType('numpy')
+m = runpy.run_path(sys.argv[1])
+root = m['ROOT']
+request = json.loads(sys.stdin.read())
+outputs = dict(request['entries'])
+case_count = expression_count = 0
+def case_paths(node):
+    if isinstance(node, dict):
+        if 'path' in node:
+            yield node['path']
+        for value in node.values():
+            yield from case_paths(value)
+    elif isinstance(node, list):
+        for value in node:
+            yield from case_paths(value)
+for historical, current in request['entries']:
+    if not historical.startswith('tests/oracles/') or not current.endswith('.json'): continue
+    fixture = json.loads((root / current).read_text())
+    if 'inputs' not in fixture: continue
+    inputs = {record['path'] for record in fixture['inputs']}
+    for path in case_paths(fixture['cases']):
+        assert path in inputs, (current, path, 'case path missing from inputs')
+        assert path not in outputs.values(), (current, path, 'case path is relocated, not historical')
+        # Body/archive inputs retain their original names and can be absent locally.
+        # Every moved input must have a historical name mapping to a resident file.
+        if path.startswith('tests/fixtures/'):
+            assert path in outputs and (root / outputs[path]).is_file(), (current, path)
+        case_count += 1
+for logical, generator in request['generators']:
+    tree = ast.parse((root / generator).read_text())
+    fixture = json.loads(m['fixture_path'](logical + '.json').read_text())
+    paths = list(case_paths(fixture['cases']))
+    expressions = [value for node in ast.walk(tree) if isinstance(node, ast.Dict)
+        for key, value in zip(node.keys, node.values)
+        if isinstance(key, ast.Constant) and key.value == 'path'
+        and any(isinstance(n, ast.Name) and n.id == 'path' for n in ast.walk(value))]
+    for expression in expressions:
+        for historical in paths:
+            if historical not in outputs: continue
+            actual = eval(compile(ast.Expression(expression), generator, 'eval'),
+                {'path': root / outputs[historical], 'ROOT': root, 'input_record': m['input_record']})
+            assert actual == historical, (generator, actual, historical)
+            expression_count += 1
+assert case_count > 0 and expression_count > 0
+print(json.dumps({'cases': case_count, 'expressions': expression_count}))
+`, resolve(root, 'packages/core/src/node/oracle/fixture.py')], {
+    cwd: tmpdir(), encoding: 'utf8', input: JSON.stringify({ entries, generators }),
+  });
+  expect(result.status, result.stderr).toBe(0);
+  const evidence = requireRecord(JSON.parse(result.stdout));
+  expect(evidence.cases).toBeGreaterThan(0);
+  expect(evidence.expressions).toBeGreaterThan(0);
+});
+
+it('relocated generators serialize paths through input_record rather than physical locations', async () => {
+  const { generators } = await relocationTables();
+  const result = spawnSync('python3', ['-B', '-c', `
+import ast, json, pathlib, sys
+request = json.loads(sys.stdin.read())
+for logical, generator in request['generators']:
+    tree = ast.parse((pathlib.Path(sys.argv[1]) / generator).read_text())
+    parents = {child: node for node in ast.walk(tree) for child in ast.iter_child_nodes(node)}
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call): continue
+        relative = isinstance(node.func, ast.Attribute) and node.func.attr == 'relative_to' and any(
+            isinstance(arg, ast.Name) and arg.id == 'ROOT' for arg in node.args)
+        physical = (isinstance(node.func, ast.Name) and node.func.id == 'str' and len(node.args) == 1
+            and isinstance(node.args[0], ast.Name) and node.args[0].id == 'path') or (
+            isinstance(node.func, ast.Attribute) and node.func.attr == 'as_posix')
+        if not (relative or physical): continue
+        cursor = node
+        protected = serialized = False
+        while cursor in parents:
+            parent = parents[cursor]
+            if isinstance(parent, ast.Call) and isinstance(parent.func, ast.Name) and parent.func.id == 'input_record':
+                protected = True
+            if isinstance(parent, ast.Dict):
+                serialized = serialized or cursor in parent.keys or any(
+                    isinstance(key, ast.Constant) and key.value == 'path' and value is cursor
+                    for key, value in zip(parent.keys, parent.values))
+            if isinstance(parent, ast.Subscript) and parent.slice is cursor:
+                serialized = True
+            cursor = parent
+        # ROOT-relative conversions are forbidden in generators; the shared writer owns the reverse map.
+        assert protected or not (relative or serialized), (generator, node.lineno, 'use input_record(path)["path"]')
+print(json.dumps({'generators': len(request['generators'])}))
+`, root], { cwd: tmpdir(), encoding: 'utf8', input: JSON.stringify({ generators }) });
+  expect(result.status, result.stderr).toBe(0);
+  expect(JSON.parse(result.stdout)).toEqual({ generators: generators.length });
+});
+
+it('fixture_path accepts known relocated Paths and explains the logical-name convention for other Paths', () => {
+  const result = spawnSync('python3', ['-B', '-c', `
+import pathlib, runpy, sys, types
+sys.modules['numpy'] = types.ModuleType('numpy')
+m = runpy.run_path(sys.argv[1])
+for logical, current in m['relocated'].items():
+    assert m['fixture_path'](m['ROOT'] / current) == m['fixture_path'](logical)
+assert m['fixture_path']('unmoved/example.json') == m['ROOT'] / 'tests/oracles/unmoved/example.json'
+for path in [m['ROOT'] / 'unknown.json', pathlib.Path('/tmp/unknown.json')]:
+    try:
+        m['fixture_path'](path)
+    except ValueError as error:
+        assert str(error) == "fixture_path expects a logical name such as 'fits/core.json' or a Path to a known relocated fixture."
+    else:
+        raise AssertionError(path)
+print('known Paths resolved; unknown Paths rejected; strings unchanged')
+`, resolve(root, 'packages/core/src/node/oracle/fixture.py')], { cwd: tmpdir(), encoding: 'utf8' });
+  expect(result.status, result.stderr).toBe(0);
+  expect(result.stdout.trim()).toBe('known Paths resolved; unknown Paths rejected; strings unchanged');
 });

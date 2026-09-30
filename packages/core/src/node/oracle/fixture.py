@@ -84,6 +84,12 @@ relocated = {
 
 def fixture_path(name):
     """Resolve the logical fixture name through the shared relocation table."""
+    if isinstance(name, Path):
+        current = name.resolve()
+        logical = next((key for key, value in relocated.items() if ROOT / value == current), None)
+        if logical is None:
+            raise ValueError("fixture_path expects a logical name such as 'fits/core.json' or a Path to a known relocated fixture.")
+        name = logical
     return ROOT / relocated.get(name, "tests/oracles/" + name)
 
 def write(name, oracle, generated_by, tool, inputs, cases, references=()):
