@@ -29,23 +29,6 @@ export interface PreparedPointFieldResource {
   readonly height: number;
 }
 
-export interface PreparedDirectStarPoint {
-  readonly sourceRow: number;
-  readonly positionUnits: PointFieldVector;
-  readonly absoluteMagnitude: number;
-  readonly colorIndex: number;
-  readonly coverageAnchor: boolean;
-}
-
-/** A bounded, source-derived display sample for the lightweight retained-dot renderer.
- * The complete catalogue remains in the binary bank for preparation and specialist consumers. */
-export interface PreparedDirectStarField {
-  readonly schema: 'cssearth-direct-star-field@1';
-  readonly catalogueCount: number;
-  readonly selection: string;
-  readonly points: readonly PreparedDirectStarPoint[];
-}
-
 export interface PreparedCssPointField {
   readonly schema: 'cssearth-css-point-field@1';
   readonly id: string;
@@ -84,7 +67,6 @@ export interface PreparedCssPointField {
     readonly fadeMs: number;
   };
   readonly diffuseSky?: readonly { readonly id: string; readonly path: string }[];
-  readonly directPoints?: PreparedDirectStarField;
   readonly resources: readonly PreparedPointFieldResource[];
 }
 
@@ -133,4 +115,4 @@ export interface PreparedCssPointFieldManifest extends Omit<PreparedCssPointFiel
 }
 
 /** Prepared optical appearance used by the Sun marker, without catalogue rows or hierarchy. */
-export type PreparedPointAppearance = Pick<PreparedCssPointField, 'id' | 'frame' | 'atlas' | 'photometry' | 'directPoints' | 'resources'>;
+export type PreparedPointAppearance = Pick<PreparedCssPointField, 'id' | 'frame' | 'atlas' | 'photometry' | 'resources'>;

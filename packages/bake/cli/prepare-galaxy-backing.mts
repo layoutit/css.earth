@@ -6,6 +6,11 @@
  * volume compiler as the galaxy's other planes. Writes `prepared/<id>.json` (`cssearth-galaxy-backing@1`, read by
  * packages/renderer/src/universe/galaxy-backing.ts) and `prepared/<id>/<id>.webp` through the lossy lane.
  *
+ * Close up the image's texels blow up and blur. `nearFade` dims the whole image to `nearOpacity` as the camera closes
+ * in from `fadeKpc[0]` to `fadeKpc[1]`; each of `sections` is the same image, transparent beyond a ring about the
+ * galaxy's centre (whole within `radiusKpc[0]`, gone by `radiusKpc[1]`), drawn over it in order with its own fade, so
+ * the centre can stay while the blurred outer disc steps back.
+ *
  * Usage: node packages/bake/cli/prepare-galaxy-backing.mts <object-directory> <id>
  */
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -30,7 +35,8 @@ const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
   schema?: unknown; id?: unknown; source?: unknown; meaning?: unknown; outputPx?: unknown;
   image?: { path?: unknown; bytes?: unknown; widthPx?: unknown; heightPx?: unknown };
   anchors?: { galacticCentrePx?: unknown; sunPx?: unknown; view?: unknown; galacticCentre?: unknown; longitude90?: unknown; basis?: unknown };
-  levels?: { black?: unknown; gamma?: unknown; white?: unknown; note?: unknown } };
+  levels?: { black?: unknown; gamma?: unknown; white?: unknown; note?: unknown };
+  nearFade?: unknown; sections?: unknown };
 const pair = (value: unknown): value is [number, number] => Array.isArray(value) && value.length === 2 && value.every(Number.isFinite);
 const { image, anchors, levels } = recipe;
 if (recipe.schema !== 'cssearth-galaxy-backing-source@1' || recipe.id !== id || typeof recipe.source !== 'string' || typeof recipe.meaning !== 'string' ||
@@ -41,6 +47,25 @@ if (recipe.schema !== 'cssearth-galaxy-backing-source@1' || recipe.id !== id || 
     !(levels.black >= 0 && levels.black < 255) || !(levels.white > 0 && levels.white <= 255) || typeof levels.note !== 'string') {
   throw new TypeError(`${recipePath}: needs schema cssearth-galaxy-backing-source@1, id ${id}, an image, north-pole anchors with centre up, levels and a source.`);
 }
+type NearFade = { nearOpacity: number; fadeKpc: [number, number] };
+const nearFade = (value: unknown, name: string): NearFade => {
+  const fade = value as { nearOpacity?: unknown; fadeKpc?: unknown } | null;
+  if (typeof fade?.nearOpacity !== 'number' || !(fade.nearOpacity >= 0 && fade.nearOpacity <= 1) || !pair(fade.fadeKpc) ||
+      !(fade.fadeKpc[0] > fade.fadeKpc[1] && fade.fadeKpc[1] > 0)) {
+    throw new TypeError(`${recipePath}: ${name} needs a nearOpacity in [0, 1] and fadeKpc [far, near], far above near, got ${JSON.stringify(value)}.`);
+  }
+  return { nearOpacity: fade.nearOpacity, fadeKpc: fade.fadeKpc };
+};
+const baseFade = recipe.nearFade === undefined ? undefined : nearFade(recipe.nearFade, 'nearFade');
+if (recipe.sections !== undefined && !Array.isArray(recipe.sections)) throw new TypeError(`${recipePath}: sections must be a list, got ${JSON.stringify(recipe.sections)}.`);
+const sections = ((recipe.sections ?? []) as unknown[]).map((raw, index) => {
+  const section = raw as { id?: unknown; radiusKpc?: unknown } | null;
+  if (typeof section?.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(section.id) || section.id === id || !pair(section.radiusKpc) ||
+      !(section.radiusKpc[1] > section.radiusKpc[0] && section.radiusKpc[0] > 0)) {
+    throw new TypeError(`${recipePath}: section ${index} needs an id and radiusKpc [whole within, gone by], got ${JSON.stringify(raw)}.`);
+  }
+  return { id: section.id, radiusKpc: section.radiusKpc, ...nearFade(raw, `section ${section.id}`) };
+});
 const bytes = await readFile(resolve(sourceDirectory, image.path));
 if (bytes.length !== image.bytes) throw new TypeError(`${recipePath}: image.bytes expects ${String(image.bytes)}; ${image.path} has ${bytes.length}.`);
 const { data, info } = await sharp(bytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -96,9 +121,30 @@ const compiled = compileCssVolume({ id, frame, recipe: { anchors: [] }, slices: 
   boundsUnits: { min: [...frame.boundsUnits.min] as Vector3, max: [...frame.boundsUnits.max] as Vector3 }, provenance: null, approximation: { method: '', radialEmission: 'None.', limitations: [], samplesPerSlab: 1, opticalWeight: 1,
     exposureGain: 1, sliceCounts: { x: 0, y: 0, z: 1 }, slabPitchUnits: { x: 0, y: 0, z: 0 } } } });
 const leaf = compiled.stacks.find(stack => stack.axis === 'z')!.leaves[0]!;
+// Each section: the graded, resized image with a smooth radial alpha about the galaxy's centre, as the plane's own texels.
+const rgb = await sharp(graded, { raw: { width: info.width, height: info.height, channels: 3 } })
+  .extract({ left, top, width: cropWidth, height: cropHeight }).resize(widthPx, heightPx).raw().toBuffer();
+const centreX = (centreU - left) * scale, centreY = (centreV - top) * scale, kpcPerTexel = kpcPerPx / scale;
+const bakedSections = [];
+for (const section of sections) {
+  const rgba = Buffer.alloc(widthPx * heightPx * 4);
+  for (let y = 0; y < heightPx; y++) for (let x = 0; x < widthPx; x++) {
+    const radiusKpc = Math.hypot(x + .5 - centreX, y + .5 - centreY) * kpcPerTexel;
+    const t = Math.max(0, Math.min(1, (section.radiusKpc[1] - radiusKpc) / (section.radiusKpc[1] - section.radiusKpc[0])));
+    const i = (y * widthPx + x) * 3, o = (y * widthPx + x) * 4;
+    rgba[o] = rgb[i]!; rgba[o + 1] = rgb[i + 1]!; rgba[o + 2] = rgb[i + 2]!; rgba[o + 3] = Math.round(255 * t * t * (3 - 2 * t));
+  }
+  const sectionWebp = await encodeLossyWebp(sharp(rgba, { raw: { width: widthPx, height: heightPx, channels: 4 } }), { alphaQuality: 100 });
+  const sectionPath = `${id}/${section.id}.webp`;
+  await writeFile(resolve(prepared, sectionPath), sectionWebp);
+  bakedSections.push({ texturePath: sectionPath, nearOpacity: section.nearOpacity, fadeM: section.fadeKpc.map(kpc => kpc * KPC_M) });
+  console.log(`Prepared section ${section.id}: whole within ${section.radiusKpc[0]} kpc, gone by ${section.radiusKpc[1]} kpc (${sectionWebp.length} bytes).`);
+}
 await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: 'cssearth-galaxy-backing@1', id, source: recipe.source, meaning: recipe.meaning,
   frame, leaf: { texturePath: leaf.texturePath, style: leaf.style }, placement: { kpcPerSourcePx: kpcPerPx, crop: { left, top, width: cropWidth, height: cropHeight } },
-  levelsNote: levels.note }) + '\n');
+  levelsNote: levels.note,
+  ...(baseFade ? { nearFade: { nearOpacity: baseFade.nearOpacity, fadeM: baseFade.fadeKpc.map(kpc => kpc * KPC_M) } } : {}),
+  ...(bakedSections.length ? { sections: bakedSections } : {}) }) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
 await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
 console.log(`Prepared a ${widthPx} x ${heightPx} backing (${webp.length} bytes) at ${(kpcPerPx / scale * 1000).toFixed(1)} pc per texel, ${(cropWidth * kpcPerPx).toFixed(1)} kpc across.`);

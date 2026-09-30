@@ -58,6 +58,7 @@ const relocatedPaths: Readonly<Record<string, string>> = {
   "tests/oracles/fits/sky-projection.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json",
   "tests/oracles/fits/synoptic.json": "packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json",
   "tests/oracles/fits/wise-atlas-projection.json": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json",
+  "tests/fixtures/fits/binary-table-columns.fits": "packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits",
   "tests/fixtures/fits/lupton-bands.fits": "packages/bake/src/objects/color/fixtures/lupton-bands.fits",
   "tests/fixtures/fits/rice-int16.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits",
   "tests/fixtures/fits/rice-int32.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits",
