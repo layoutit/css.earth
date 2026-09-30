@@ -1,0 +1,35 @@
+{
+  "id": "source-moon-lpi-apollo-11-panorama",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Moon · lpi apollo 11 panorama",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.lpi.usra.edu/resources/apollopanoramas/images/print/original/JSC2007e045375.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/65"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JSC",
+      "scope": "The lpi apollo 11 panorama input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA imagery, not subject to copyright; the composited panoramas are to be credited NASA/JSC",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

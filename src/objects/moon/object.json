@@ -57,6 +57,10 @@
         {
           "id": "features",
           "path": "source/preparation/features.json"
+        },
+        {
+          "id": "panoramas",
+          "path": "source/panoramas/panoramas.json"
         }
       ],
       "shape": {
@@ -207,6 +211,10 @@
       "features": {
         "source": "features",
         "maxEntries": 12000
+      },
+      "panoramas": {
+        "source": "panoramas",
+        "faceSize": 2048
       }
     },
     "worldFrame": {

@@ -1,0 +1,35 @@
+{
+  "id": "source-moon-apollo-14-lroc-shapefile",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Moon · apollo 14 lroc shapefile",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_14/APOLLO_14.ZIP",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/71"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/GSFC/Arizona State University (LROC)",
+      "scope": "The apollo 14 lroc shapefile input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

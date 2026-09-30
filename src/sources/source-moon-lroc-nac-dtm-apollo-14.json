@@ -1,0 +1,40 @@
+{
+  "id": "source-moon-lroc-nac-dtm-apollo-14",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Moon · lroc nac dtm apollo 14",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "NAC_DTM_APOLLO14_E034S3425"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-5-rdr/LROLRC_2001/DATA/SDP/NAC_DTM/APOLLO14/NAC_DTM_APOLLO14_E034S3425.IMG",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/70"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/GSFC/Arizona State University (LROC)",
+      "scope": "The lroc nac dtm apollo 14 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "PDS archive product (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

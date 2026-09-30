@@ -1,0 +1,177 @@
+{
+  "schema": "cssearth-surface-panoramas@2",
+  "source": "Apollo Surface Panoramas, Lunar and Planetary Institute",
+  "sourcePage": "https://www.lpi.usra.edu/resources/apollopanoramas/",
+  "retrievedAt": "2026-09-30",
+  "placement": {
+    "kind": "tie-points",
+    "cameraHeightM": 1.5,
+    "cameraHeightNote": "The Hasselblads were worn on the suit chest (LPI, About the Images); 1.5 m is a standing astronaut's chest height, not a recorded value. It moves only the nearest few metres of the terrain horizon."
+  },
+  "localization": {
+    "kind": "lroc-hasselblad",
+    "product": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/"
+  },
+  "panoramas": [
+    {
+      "id": "apollo-11",
+      "title": "Tranquility Base",
+      "when": "21 July 1969",
+      "camera": "Hasselblad 70 mm",
+      "image": "panoramas/JSC2007e045375.jpg",
+      "credit": "NASA/JSC",
+      "pageUrl": "https://www.lpi.usra.edu/resources/apollopanoramas/pans/?pan=JSC2007e045375",
+      "photos": {
+        "archive": "features/traverses/APOLLO_11.ZIP",
+        "layer": "APOLLO_11-1_HBLADS",
+        "equipment": "APOLLO_11_EQUIPMENT",
+        "magazine": "40",
+        "frame": "5881",
+        "rangeZero": {
+          "utc": "1969-07-16T13:32:00Z",
+          "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11info.html"
+        }
+      },
+      "terrain": "panoramas/terrain/NAC_DTM_APOLLO11_E008N0234.IMG",
+      "subsolar": {
+        "utc": "1969-07-21T04:03Z",
+        "longitudeDegEast": 98.82963,
+        "latitudeDeg": 1.292841,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27301%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40399%27&START_TIME=%271969-07-21+04%3A03%27&STOP_TIME=%271969-07-21+04%3A04%27&STEP_SIZE=%271m%27&QUANTITIES=%2715%27"
+      },
+      "ties": [
+        {
+          "column": 2785,
+          "kind": "antisun"
+        },
+        {
+          "column": 8130,
+          "kind": "equipment",
+          "equipment": "Flag"
+        },
+        {
+          "column": 8380,
+          "kind": "equipment",
+          "equipment": "SWC"
+        },
+        {
+          "column": 9995,
+          "kind": "equipment",
+          "equipment": "LM descent stage"
+        }
+      ]
+    },
+    {
+      "id": "apollo-12",
+      "title": "Apollo 12 landing site",
+      "when": "19 November 1969",
+      "camera": "Hasselblad 70 mm",
+      "image": "panoramas/JSC2007e045376.jpg",
+      "credit": "NASA/JSC",
+      "pageUrl": "https://www.lpi.usra.edu/resources/apollopanoramas/pans/?pan=JSC2007e045376",
+      "photos": {
+        "archive": "features/traverses/APOLLO_12.ZIP",
+        "layer": "APOLLO_12-1_HBLADS",
+        "equipment": "APOLLO_12_EQUIPMENT",
+        "magazine": "47",
+        "frame": "6982",
+        "rangeZero": {
+          "utc": "1969-11-14T16:22:00Z",
+          "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo12info.html"
+        },
+        "positionError": {
+          "metres": 2.5,
+          "source": "https://www.hou.usra.edu/meetings/lpsc2020/pdf/1578.pdf"
+        }
+      },
+      "terrain": "panoramas/terrain/NAC_DTM_APOLLO12_E030S3365.IMG",
+      "subsolar": {
+        "utc": "1969-11-19T14:54Z",
+        "longitudeDegEast": 57.452102,
+        "latitudeDeg": -1.452531,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27301%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40399%27&START_TIME=%271969-11-19+14%3A54%27&STOP_TIME=%271969-11-19+14%3A55%27&STEP_SIZE=%271m%27&QUANTITIES=%2715%27"
+      },
+      "ties": [
+        {
+          "column": 6550,
+          "kind": "sun"
+        },
+        {
+          "column": 11434,
+          "kind": "equipment",
+          "equipment": "LM descent stage"
+        },
+        {
+          "column": 12780,
+          "kind": "equipment",
+          "equipment": "S-Band antenna"
+        },
+        {
+          "column": 14450,
+          "kind": "antisun"
+        },
+        {
+          "column": 15330,
+          "kind": "equipment",
+          "equipment": "Flag"
+        }
+      ]
+    },
+    {
+      "id": "apollo-14",
+      "title": "Apollo 14 landing site",
+      "when": "5 February 1971",
+      "camera": "Hasselblad 70 mm",
+      "image": "panoramas/JSC2007e045377.jpg",
+      "credit": "NASA/JSC",
+      "pageUrl": "https://www.lpi.usra.edu/resources/apollopanoramas/pans/?pan=JSC2007e045377",
+      "photos": {
+        "archive": "features/traverses/APOLLO_14.ZIP",
+        "layer": "APOLLO_14-1_HBLADS",
+        "equipment": "APOLLO_14_EQUIPMENT",
+        "magazine": "66",
+        "frame": "9271",
+        "rangeZero": {
+          "utc": "1971-01-31T21:03:02Z",
+          "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo14info.html"
+        },
+        "positionError": {
+          "metres": 5,
+          "source": "https://www.hou.usra.edu/meetings/planetdata2021/pdf/7062.pdf"
+        }
+      },
+      "terrain": "panoramas/terrain/NAC_DTM_APOLLO14_E034S3425.IMG",
+      "subsolar": {
+        "utc": "1971-02-05T15:56Z",
+        "longitudeDegEast": 58.816124,
+        "latitudeDeg": -0.209837,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27301%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40399%27&START_TIME=%271971-02-05+15%3A56%27&STOP_TIME=%271971-02-05+15%3A57%27&STEP_SIZE=%271m%27&QUANTITIES=%2715%27"
+      },
+      "ties": [
+        {
+          "column": 910,
+          "kind": "antisun"
+        },
+        {
+          "column": 2085,
+          "kind": "equipment",
+          "equipment": "SWC"
+        },
+        {
+          "column": 4110,
+          "kind": "equipment",
+          "equipment": "Flag"
+        },
+        {
+          "column": 5070,
+          "kind": "equipment",
+          "equipment": "LM descent stage"
+        },
+        {
+          "column": 8805,
+          "kind": "sun"
+        }
+      ]
+    }
+  ]
+}

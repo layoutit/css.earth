@@ -3,6 +3,7 @@
 - Moon surface: LROC WAC Global Morphologic Map v1.3, NASA/GSFC/Arizona State University. PDS archive data are public domain under [LROC terms](https://lroc.im-ldi.com/about/terms). The app resamples the map and adjusts brightness; see README.md.
 - Moon navigation sprite: NASA SVS CGI Moon Kit, LRO/LROC and LOLA. NASA media usage guidelines.
 - Physical and orbital facts: NASA JPL Solar System Dynamics.
+- Apollo surface panoramas: NASA/JSC, composited by Warren Harold from scans of the original flight film, from the LPI's [Apollo Surface Panoramas](https://www.lpi.usra.edu/resources/apollopanoramas/about/). Placed with the LROC Apollo shapefiles and levelled on LROC NAC DTMs (NASA/GSFC/Arizona State University), citing Gonzales et al. (2019, 2020, 2021). The app resamples each panorama into cube faces; see README.md.
 - Elevation dataset: LRO LOLA LDEM16 numeric grid, David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node.
 - Maximum and noon temperature datasets: LRO Diviner Global Cumulative Products, LRO-L-DLRE-5-GCP-V1.0, J.-P. Williams and the UCLA Diviner team; reference Williams et al. (2017), doi:10.1016/j.icarus.2016.08.012; NASA PDS Geosciences Node. Publicly archived NASA mission data; retain producer and PDS citation.
 - Roughness dataset: LRO LOLA LDRM_16 surface roughness, David E. Smith and NASA GSFC LRO LOLA team; reference Zuber et al. (2012), doi:10.1038/nature11216; NASA PDS Geosciences Node. Publicly archived NASA mission data; retain producer and PDS citation.

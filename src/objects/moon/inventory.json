@@ -388,8 +388,8 @@
     {
       "location": "public",
       "filename": "moon-features.json",
-      "bytes": 9327756,
-      "sha256": "5410336fee2c92de88c1353c1cd3820c67e5ea5a3575c3eaf2a5e40569012216"
+      "bytes": 9330824,
+      "sha256": "92489d1578c1854775df5d0b2a4d0dc730bc86492fa3435d9deb6709df526408"
     },
     {
       "location": "public",
@@ -456,6 +456,132 @@
       "filename": "moon-orthopyroxene@2x.webp",
       "bytes": 1985444,
       "sha256": "7b2c2b0012b3f9edb7f7ae72835cba07a06a80ba82a0f74abf92ebef67014d5f"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-11-nx.webp",
+      "bytes": 229696,
+      "sha256": "312acb1836ef41ff31a77fd0cd9c69740573481c7b738122bca5fdcd03f7d88d"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-11-ny.webp",
+      "bytes": 203468,
+      "sha256": "704c9220e9cf251b0fda844472a715eecea5d1000b664392dda6cff9b6dc55bc"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-11-nz.webp",
+      "bytes": 7736,
+      "sha256": "e4c60144f21fdbb43d15f2493504cad70c046fb6f449d4ae8fb0d9e7b83edaef"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-11-px.webp",
+      "bytes": 188756,
+      "sha256": "4999acc0adbdc53ea1c7f679e188d888578a6375f2e19f45bbedae06724c1fc8"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-11-py.webp",
+      "bytes": 113828,
+      "sha256": "1f423be0de6698d7a5e9089f6f750bc197e126d1e68981e80426e53b594d23bc"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-11-pz.webp",
+      "bytes": 7736,
+      "sha256": "e4c60144f21fdbb43d15f2493504cad70c046fb6f449d4ae8fb0d9e7b83edaef"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-11-thumbnail.webp",
+      "bytes": 746,
+      "sha256": "0826a675fbf8ce07c3152fcf607a3d656cea1fb5846f4d369e8170b16f8393cd"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-12-nx.webp",
+      "bytes": 197852,
+      "sha256": "0d1e79b3b8e978c98744c2ad431076e7e9c294d38682ade613de43f3256c3a85"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-12-ny.webp",
+      "bytes": 87512,
+      "sha256": "d2f167a73e46b090f0df5178b44b543dc65681c449621d517f2108aa07813932"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-12-nz.webp",
+      "bytes": 7736,
+      "sha256": "e4c60144f21fdbb43d15f2493504cad70c046fb6f449d4ae8fb0d9e7b83edaef"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-12-px.webp",
+      "bytes": 199454,
+      "sha256": "00abaa9efca972137d9ef13603b51da60f04a676b117458cb5ec08d051bceb23"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-12-py.webp",
+      "bytes": 155452,
+      "sha256": "9cf3f0086b97be7171ce78b1755fd62f808a113dca5f23bebf9df526442f9644"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-12-pz.webp",
+      "bytes": 7736,
+      "sha256": "e4c60144f21fdbb43d15f2493504cad70c046fb6f449d4ae8fb0d9e7b83edaef"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-12-thumbnail.webp",
+      "bytes": 650,
+      "sha256": "8866c0c8afa9b480c04769af7549e5e5bf86c36eb7bdd18bb3cea57f6771e6f3"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-14-nx.webp",
+      "bytes": 138030,
+      "sha256": "c14e874b5af405a3e565dbef3508bec006624d36ca61dde2ff0abd13200da13b"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-14-ny.webp",
+      "bytes": 186216,
+      "sha256": "6668db2816bf52c6d1f5db064582e73cfa892e6b2900bcc96b5ad939521b41b4"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-14-nz.webp",
+      "bytes": 7736,
+      "sha256": "e4c60144f21fdbb43d15f2493504cad70c046fb6f449d4ae8fb0d9e7b83edaef"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-14-px.webp",
+      "bytes": 180582,
+      "sha256": "09c67b1b935b3bdabc8286d2c4753e9ad96180c7421406b3874f7353046026cd"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-14-py.webp",
+      "bytes": 54390,
+      "sha256": "d3052ce2db541b837815d724296275bd96dc636fc6104a42ee11eab572cea7ca"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-14-pz.webp",
+      "bytes": 7736,
+      "sha256": "e4c60144f21fdbb43d15f2493504cad70c046fb6f449d4ae8fb0d9e7b83edaef"
+    },
+    {
+      "location": "public",
+      "filename": "moon-panorama-apollo-14-thumbnail.webp",
+      "bytes": 1146,
+      "sha256": "644799b6440d40d02c0da71b509bc8e8ffb72ad5f484fc033267e2b14d72a0f6"
     },
     {
       "location": "public",
@@ -695,7 +821,7 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 3932,
-      "sha256": "5a44e03c17aaa21282d745285c67089618b7752e262a61f137b78195cce5a253"
+      "sha256": "9502360de71b5e6349b4305e61af5f145fe2bbdaa99dade9f533a84da0e14029"
     },
     {
       "location": "prepared",
@@ -712,14 +838,20 @@
     {
       "location": "prepared",
       "filename": "features.json",
-      "bytes": 769,
-      "sha256": "546088ff0c88063e3708467ad21ab967ee501b14fcc27a1372464a7510cc6d7a"
+      "bytes": 776,
+      "sha256": "7e47f2dfb9c8554917874c48a4cecb93ce57c33281fddf76794c73bed82f5021"
     },
     {
       "location": "prepared",
       "filename": "image-quality.json",
       "bytes": 6746,
       "sha256": "1b22c07f4cf64aac862afc3219b9ec4ee6255c278a074300128c15e97d32e597"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 72322,
+      "sha256": "02d798a954a9d7434b128304e34a874ed2f7c3f643a464cb4f5f1ad25d6a53c0"
     },
     {
       "location": "prepared",
@@ -885,9 +1017,21 @@
     },
     {
       "location": "prepared",
+      "filename": "panoramas.json",
+      "bytes": 1723,
+      "sha256": "8f78a800ee14acb8106306ed36c29d9fc715b4d7d10ef4a06237451e56d65192"
+    },
+    {
+      "location": "prepared",
+      "filename": "provenance.json",
+      "bytes": 310638,
+      "sha256": "4179d775dd63cec3df64f68c71b756876360cc88c77d1c5adba47d875b81a7a0"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 438119,
-      "sha256": "1893c7bc8aa5f33fc5c014dcfbf88078eab609ddc31b1cb48432ab4cb4c20328"
+      "bytes": 451130,
+      "sha256": "ce7773db9e66ebe29ee3a05cae2e9cc2e38aedf6149f6035ac54f40c367cdff7"
     },
     {
       "location": "prepared",

@@ -21,6 +21,7 @@ The navigation marker is a stylized identifier cropped from the existing source 
 | Maximum and noon temperature | [LRO Diviner Global Cumulative Products](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/), [Williams et al. (2017)](https://doi.org/10.1016/j.icarus.2016.08.012). See [Daytime temperature](#daytime-temperature). |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MOON/target), snapshot 2026-09-11, public domain |
 | Lighting | The Hapke model of [Sato et al. (2014)](https://doi.org/10.1002/2013JE004580) at 643 nm. See [Lighting law](#lighting-law). |
+| Surface panoramas | Three Apollo landing-site panoramas from the LPI's [Apollo Surface Panoramas](https://www.lpi.usra.edu/resources/apollopanoramas/) (NASA/JSC), placed and turned against LROC's Apollo shapefiles and levelled on LROC NAC DTMs. See [Surface panoramas](#surface-panoramas). |
 
 Landing sites: 80 landing, touchdown or impact sites and 2 traverse paths are labelled (`source/features/sites.json`), each quoting the NASA NSSDCA, PDS, LROC, agency or paper page it was read from. 1749 feature names carry the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), credited in the caption. Physical and orbital facts come from the NASA JPL [satellite physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html) and [mean elements](https://ssd.jpl.nasa.gov/sats/elem/sep.html).
 
@@ -52,6 +53,25 @@ Diviner's cumulative products, made by J.-P. Williams and the UCLA Diviner team,
 
 Thorium, potassium, FeO and TiO₂ come from the table [LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG](https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl), 2° equal-area pixels from 1998 spectra that blurred the surface over about 150 km. Its [data set description](https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat) gives the method. Nothing is interpolated, so pixel edges show as steps.
 
+### Surface panoramas
+
+The Imagery tab lists three panoramas that Warren Harold (NASA JSC) stitched from scans of the original Hasselblad flight film: Tranquility Base (AS11-40-5881 to 5891), Apollo 12 (AS12-47-6982 to 7006) and Apollo 14 (AS14-66-9271 to 9293). The [LPI publishes them](https://www.lpi.usra.edu/resources/apollopanoramas/about/). Their list and every measurement below are in [`source/panoramas/panoramas.json`](source/panoramas/panoramas.json).
+
+![The Moon with the Imagery tab open on the Apollo 14 landing site: the flag and the lunar module where LROC maps them](evidence/panoramas/imagery-apollo-14.webp)
+
+- **Placement.** Each panorama stands at the LROC Hasselblad point that lists its frames, from the Apollo shapefiles in LROC's RDR volume ([Gonzales et al. 2019](https://www.hou.usra.edu/meetings/lpsc2019/pdf/3089.pdf), [2020](https://www.hou.usra.edu/meetings/lpsc2020/pdf/1578.pdf), [2021](https://www.hou.usra.edu/meetings/planetdata2021/pdf/7062.pdf)).
+- **Turning.** No projection is published, so tie points turn each image. The Sun comes from the [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) sub-solar point at the photographs' time: the [NSSDC](https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11info.html) launch time plus the record's ground elapsed time. The photographer's shadow points away from the Sun, and hardware comes from LROC's equipment layer. At Apollo 12 and 14 the Sun and its shadow are both in frame, so they set the scale on their own and the hardware checks the standpoint. Apollo 11 shows only the shadow, so the flag, the solar-wind collector and the descent stage join the fit. Each image keeps one scale in both axes.
+- **Levelling.** An LROC NAC DTM gives the horizon seen from 1.5 m above the standpoint. The preparation lays it on the photograph's skyline, the first rows brighter than the black sky. A line through the closest 70% of about 900 columns gives the horizon row and the camera's tilt.
+- **Delivery.** Each panorama becomes six 2048-pixel sky-cube faces in the lossy lane, 0.6 to 0.7 MB each, loaded only when opened. JSC set the sky to zero, and the view shows it as unimaged black. The standpoints are also point features (`PN`).
+
+| Panorama | Scale | Left edge | Tie misses (hardware distance, allowed miss) | Skyline median miss | Sun disc |
+| --- | --- | --- | --- | --- | --- |
+| Tranquility Base | 42.20 px/° | 203.35° | shadow +0.50°, flag −0.21° (13 m), solar-wind collector −2.24° (15 m), descent stage +1.94° (15 m); no error published | 1.18° | not in frame |
+| Apollo 12 | 43.89 px/° | 301.75° | antenna −4.52° (6.5 m, 21°), descent stage −1.01° (14 m, 10°), flag +2.90° (11 m, 13°) | 0.82° | 1.55° above the levelled prediction |
+| Apollo 14 | 43.86 px/° | 248.58° | solar-wind collector −6.37° (10.5 m, 25°), flag +4.90° (18 m, 15°), descent stage +4.58° (13 m, 22°) | 0.51° | 0.22° above |
+
+The allowed miss is the angle the mappers' largest published point error (2.5 m for Apollo 12, 5 m for Apollo 14 EVA-1) makes at the hardware's distance. The Sun disc column is a tie, so its row is an independent check of the levelling.
+
 ### Roughness
 
 LDRM_16 gives the scatter of laser shots about a fitted plane over a 30 to 120 m baseline, per 1/16° pixel. Missing pixels (4.4% of the area) stay empty. The display spans 0.5 to 2 m.
@@ -81,6 +101,11 @@ The photograph replaced a 2K CGI texture; the same Copernicus camera before and 
 - The full text of Prettyman et al. (2006) could not be read, so no value was compared with its tables.
 - Roughness is not measured at a fixed baseline. The newer LDRM_32 products showed interpolation speckle at display size.
 - One set of lighting values covers the whole globe, and the limb beyond 30° emission follows no measurement.
+- Panorama tie columns and Sun disc rows were read by eye from the published images. Hardware points mark an object's mapped position, not the part seen, so hardware ties miss by several degrees.
+- The panoramas' 1.5 m camera height is a standing astronaut's chest height, not a recorded value. It moves only the nearest few metres of the terrain horizon.
+- JSC blended the frames by hand, so the scale can drift between ties by about the tie misses. At Apollo 12 the Sun disc sits 1.55° above the levelled horizon's prediction, inside its glare.
+- Tranquility Base's horizon runs close to the image's top edge, and a strip of JSC's white stitch fill shows there.
+- JSC's hand blends between frames leave brightness steps of a few levels, such as the one at 315° azimuth in the Apollo 14 panorama.
 
 GRAIL views are attributed to the GRAIL mission and LRO views to LRO ([catalogue contract](../../../docs/architecture/exploration-catalog.md)).
 
