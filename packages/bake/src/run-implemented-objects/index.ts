@@ -41,7 +41,7 @@ export async function discoverObjectTests(
   { projectRoot = process.cwd(), readDirectory = readdir }: {projectRoot?: string; readDirectory?: (directory: string) => Promise<string[]>} = {},
 ) {
   const directory = await authoredObject(id, projectRoot)
-    ? resolve(projectRoot, 'tests/objects/unit', id) : objectTestDirectory(id, projectRoot);
+    ? resolve(projectRoot, 'src/objects', id) : objectTestDirectory(id, projectRoot);
   const isTest = (filename: string) => /\.test\.m(?:j|t)s$/u.test(filename);
   let filenames: string[] = [];
   try {
@@ -52,7 +52,8 @@ export async function discoverObjectTests(
   const own = filenames.filter(isTest).sort().map((filename) => resolve(directory, filename));
   // Shared contract runners register one test per table entry; CSSEARTH_TEST_OBJECTS limits them to this body.
   const shared = sharedUnitTestDirectory(projectRoot);
-  const runners = (await readDirectory(shared)).filter(isTest).sort().map((filename) => resolve(shared, filename));
+  const sharedSuites = new Set(['exoplanet-limb-coverage.test.mts', 'exoplanet-radius.test.mts', 'lighting-frame.test.mts', 'runtime-package.test.mts']);
+  const runners = (await readDirectory(shared)).filter(filename => sharedSuites.has(filename)).sort().map((filename) => resolve(shared, filename));
   const tests = [...own, ...runners, resolve(projectRoot, 'packages/bake/src/raster/raster-pages.test.mts')];
   if (tests.length === 0) {
     throw new Error(`Implemented object ${id} has no tests.`);
@@ -61,7 +62,7 @@ export async function discoverObjectTests(
 }
 
 export function sharedUnitTestDirectory(projectRoot = process.cwd()) {
-  return resolve(projectRoot, 'tests/objects/unit');
+  return resolve(projectRoot, 'site/test');
 }
 
 export function objectAssembleScript(id: string, projectRoot = process.cwd()) {

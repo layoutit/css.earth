@@ -38,8 +38,8 @@ public/scenes/<id>/             installed/generated serving assets
 public/navigation/body-<id>*.webp   prepared navigation images
 public/navigation/<id>-context.webp  optional resolved context image
 packages/astronomy/data/bodies/<id>.json  physical data and orbit records
-tests/objects/unit/             shared runtime/package and scientific checks
-site/test/                     shell, route and rendered-page checks
+src/objects/<id>/*.test.mts      object-specific application checks
+site/test/                     shared runtime/package, shell, route and rendered-page checks
 site/pages/[id].astro           one shared route for all body ids
 ```
 
@@ -129,9 +129,9 @@ Read the current `package.json` and runner arguments before using commands:
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
 | Update the source/mission catalogues | `node site/build/prepare/prepare-facilities.mts --catalog-only` |
 | Bind new inputs to catalogue records | `node site/build/prepare/author-source-records.mts <id>` |
-| Check shared body runtime behavior | `node --test tests/objects/unit/runtime-package.test.mts`; run affected scientific tests in `tests/objects/unit/` too |
+| Check shared body runtime behavior | `node --test site/test/runtime-package.test.mts`; run affected scientific tests beside their owning modules too |
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
-| Check source identities and bindings | `node --test "src/platform/source-*.test.mts" "tests/sources/*.test.mts"`, or select the affected files |
+| Check source identities and bindings | `node --test "src/platform/source-*.test.mts" "src/sources/*.test.mts"`, or select the affected files |
 | Create the oracle environment and regenerate oracle fixtures | `node packages/core/src/node/oracle/setup.mts`, `node packages/core/src/node/oracle/run.mts`; see `packages/core/src/node/oracle/README.md` |
 | Run a preparation test | `node --test packages/bake/authoring/<body>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |

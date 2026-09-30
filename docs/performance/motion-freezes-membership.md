@@ -80,7 +80,6 @@ These change paint every frame on purpose, and each has a budget:
 | Batched star points (`universe/batched-spatial-points.ts`) | SVG circle paths for opaque catalogue palettes; `box-shadow` for translucent or distance-dependent stellar photometry | One retained path per prepared colour, or 8 shadow nodes | Camera motion changes paint, never DOM shape; catalogue dots avoid the native shadow renderer |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
-| Surface minimap viewport boxes (`site/minimap/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
 
 The footer readout (distance, coordinates, the scale ruler) holds its last reading while the camera moves, and reads
 once it stops. Texture levels and the body-wide seam step also wait for the camera to stop. Nothing about them has to
@@ -97,8 +96,8 @@ native listeners. This preserves native dispatch order and avoids rebuilding Saf
 The shell stylesheet owns touch handling and text selection on that surface. Standalone renderer mounts still clean
 up their own listeners and inline input styles.
 
-The shell also owns the minimap controller, surface reader and footer readout. During a replacement flight, its
-outgoing information card keeps its nodes and detail/overview layout. The destination fragment and styles prepare
+The shell also owns the surface reader and footer readout. Dataset minimaps are passive images; only time-series
+controls accept input. During a replacement flight, its outgoing information card keeps its nodes and detail/overview layout. The destination fragment and styles prepare
 during the flight, but the card publishes only after the old scene retires and before the new detail tree mounts.
 This avoids repainting the departing scene when WebKit removes the card's offscreen context rail. Cancellation keeps
 the original card; arrival binds the new card's maps once. Destination controls stay inert until navigation readiness

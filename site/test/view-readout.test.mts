@@ -5,7 +5,7 @@ import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-m
 import { required } from './navigation-test-values.mts';
 import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../minimap/view-format.mts';
 import { measurePreparedFocusView } from '../view-readout.mts';
-import { measureView } from '../minimap/surface-minimap-rectangle.mts';
+import { measureView, pickUnitSphere } from '../minimap/view-measure.mts';
 const test = sourceTest();
 
 const identity: WorldRotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
@@ -71,4 +71,21 @@ test('prepared focus uses its own depth plane for scale and never supplies plane
   assert.equal(value.coordinates, null);
   assert.equal(value.scaleTitle, 'Scale at the distance of Prepared galaxy');
   assert.equal(measurePreparedFocusView({ ...world, pose: { ...world.pose, orientationXyzw: [0,1,0,0] } }, focus, 1000).scale, null);
+});
+
+
+test('sphere picking keeps the front hit, tangent, surface and away cases', () => {
+  assert.deepEqual(pickUnitSphere([0, 0, 4], [0, 0, -2]), [0, 0, 1]);
+  assert.deepEqual(pickUnitSphere([1, 0, 2], [0, 0, -1]), [1, 0, 0]);
+  assert.deepEqual(pickUnitSphere([0, 0, 1], [0, 0, -1]), [0, 0, 1]);
+  assert.equal(pickUnitSphere([0, 0, 1], [0, 0, 1]), null);
+  assert.equal(pickUnitSphere([0, 0, 4], [0, 0, 1]), null);
+  assert.equal(pickUnitSphere([0, 0, 4], [1, 0, -1]), null);
+  assert.equal(pickUnitSphere([0, 0, 4], [0, 0, 0]), null);
+});
+
+test('surface longitude follows the prepared map edge across the seam', () => {
+  const value = measureView({ ...state, mapLeftEdgeLongitudeDeg: 179 });
+  assert.deepEqual(value.coordinates, { latitude: 0, longitude: 179 });
+  assert.deepEqual(measureView({ ...state, mapLeftEdgeLongitudeDeg: 181 }).coordinates, { latitude: 0, longitude: -179 });
 });

@@ -11,7 +11,6 @@ while runtime owners may import neither test nor evidence modules.
 
 Test directories and capture filenames do not exempt authored code. Data fixtures retain their native formats; executable fixture helpers and browser/oracle harnesses are TypeScript. Generated browser bundles and package distributions are ignored build products. The inventory names the remaining JavaScript exceptions individually:
 
-- Three preserved Cesium modules with their upstream provenance.
 - The telescope Node launcher, which selects a runtime before importing TypeScript.
 
 The shell title and icon data modules are ignored build products, like the

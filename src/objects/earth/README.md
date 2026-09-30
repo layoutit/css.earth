@@ -50,7 +50,7 @@ The linked reports identify their tested sources, prepared files and limitations
 - **Scientific maps:** numeric height checks, six independent tomography anchors and
   geographic registration. Elevation ·
   Tomography · Night-light interpretation ·
-  [MUR native pixel checks](../../../tests/objects/fixtures/earth-enso/mur-native-witnesses.json).
+  [MUR native pixel checks](../../../src/objects/earth/fixtures/mur-native-witnesses.json).
 - **Retired geographic release:** the September 5 report records 19,632 published objects and
   25,344,236,995 bytes verified for release `fef1519d5f243617`, with Chrome checks at
   device pixel ratios (DPR) 1 and 2. This is dated delivery evidence, not a live availability check or
@@ -138,9 +138,9 @@ cell and 31% of its pixels were fully transparent. The square pages leave 19% tr
 beside each slanted cell, and decode 1,225 MB when all are resident against 1,445. Modelled on the baked
 layouts (a page decodes whole when any of its cells faces the camera), a view showing a cap of 15°, 30°,
 60° or a hemisphere decodes 50, 123, 381 and 712 MB at the closest level, against 95, 197, 529 and 935.
-The two smallest levels draw every page of a view from one square sheet: each page is a tile, and the body
-publishes the tile's offset and the sheet's scale beside the image, so a level change is a few custom
-properties on the page carriers and no leaf changes. The first view loads one 1,176-pixel sheet of 162 KB
+The two smallest levels draw every page of a view from one square sheet: each page is a tile. The bake records
+each page leaf's tile placement per texture write (`textureLevels.tileLeaves`), and a level change writes the
+affected leaves' final background position and size from those records, with no custom property or `calc()`. The first view loads one 1,176-pixel sheet of 162 KB
 instead of 56 files of 271 KB. Measured on 2026-09-26 from the rebake. The paragraph below describes the
 block pages as first introduced on 2026-09-25. A browser
 decodes a whole image to draw any part of it and never draws a face turned away, so a view decodes

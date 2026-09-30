@@ -205,3 +205,13 @@ test('CLI validates mode, returns JSON and nonzero for a real scoped regression'
   assert.equal(regression.status, 1);
   assert.match(regression.stdout, /guide is not reachable/);
 });
+
+
+test('the three guide-owned telescope projection records are documentation evidence', t => {
+  const f = fixture(t);
+  f.write('docs/README.md', '# Documentation\n[Guide](guide.md)\n[Projection](virtual-telescopes.md)\n');
+  f.write('docs/virtual-telescopes.md', '# Projection\n[Navigation](fixtures/telescope-projection/europa-navigation.json)\n[Oracle](fixtures/telescope-projection/europa-oracle.json)\n[Registration](fixtures/telescope-projection/europa-registration.json)\n');
+  for (const name of ['navigation', 'oracle', 'registration'])
+    f.write(`docs/fixtures/telescope-projection/europa-${name}.json`, '{}');
+  assert.deepEqual(f.check().errors, []);
+});

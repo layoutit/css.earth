@@ -27,7 +27,7 @@ retained. `evidence/registration/inputs.json` pins these files and the previousl
 retained SSI instrument definition. The orientation overlays are measurement
 diagnostics on uncalibrated image DN, not additional observations or a qualified
 texture. The independent CSPICE numerical fixture is under
-`tests/objects/fixtures/dactyl/`. Paper values are cited numerical facts; no
+`src/objects/dactyl/fixtures/`. Paper values are cited numerical facts; no
 paper prose or figures are redistributed.
 
 The retained Celestia catalog and candidate orbit parameters derived from it retain GPL-2.0-or-later, with the full copyright header and license in source/reference/.

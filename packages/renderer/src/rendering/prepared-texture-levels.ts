@@ -21,6 +21,8 @@ export interface PreparedTextureLevels {
   /** A write whose faces are off screen or behind the body keeps the first level: sharper texels there are never seen,
    * and a browser decodes a whole image to draw any of it. */
   placements?: PreparedTexturePlacements;
+  /** The leaves that draw each tiled page, as records (packages/bake/src/presentation/texture-tile-records.ts). */
+  tileLeaves?: readonly PreparedTextureTileLeaves[];
 }
 
 /** Where a page sits in the sheet its level shares with the bank's other pages, in the page's own CSS atlas units: the
@@ -32,11 +34,62 @@ export function tiledTextureKeys(levels: PreparedTextureLevels | undefined): Set
   return new Set(levels?.levels.flatMap(level => Object.keys(level.tiles ?? {})) ?? []);
 }
 
-/** The custom properties a tiled page's leaves read beside its image (paged-ellipsoid scene.mts): the tile's offset and
- * scale, or the page's own (no offset, scale 1) when the level draws the page itself. */
-export function textureTileStyles(name: string, tile: PreparedTextureTile | undefined): readonly (readonly [string, string])[] {
-  // Unitless: the leaves multiply them by inline lengths, which preparation scales with the leaf's raster.
-  return [[`${name}-x`, String(tile?.x ?? 0)], [`${name}-y`, String(tile?.y ?? 0)], [`${name}-scale`, String(tile?.scale ?? 1)]];
+/** The leaves of one texture write that draw its page from wherever the level puts it: the page itself, or a tile of a
+ * sheet. Each leaf's background is `unit × tile offset − its own offset` and `width × tile scale` wide, so a level switch
+ * writes every leaf's final values; no custom property or `calc()` reaches the page. */
+export interface PreparedTextureTileLeaves {
+  target: number; name: string;
+  /** Px per tile offset unit (negative: the sheet moves left and up), and the page's width in px. */
+  unit: number; width: number;
+  /** The tile preparation wrote on the target, which the leaves' prepared values already resolve. */
+  initial?: PreparedTextureTile;
+  /** [node, x, y]: each leaf's own background offset in its page, in px. */
+  leaves: readonly (readonly [number, number, number])[];
+}
+
+const format = (value: number) => String(Math.round(value * 1e6) / 1e6);
+
+/** A tiled page leaf's final background position and size for a tile, or for the page itself when the level draws it. */
+export function textureTileLeafStyles(group: Pick<PreparedTextureTileLeaves, 'unit' | 'width'>, x: number, y: number,
+  tile: PreparedTextureTile | undefined): [[ 'backgroundPosition', string ], [ 'backgroundSize', string ]] {
+  const { x: tileX = 0, y: tileY = 0, scale = 1 } = tile ?? {};
+  return [['backgroundPosition', `${format(group.unit * tileX - x)}px ${format(group.unit * tileY - y)}px`],
+    ['backgroundSize', `${format(group.width * scale)}px auto`]];
+}
+
+/** The tile leaf groups by texture write (`target:name`). */
+export function textureTileGroups(levels: PreparedTextureLevels | undefined) {
+  return new Map((levels?.tileLeaves ?? []).map(group => [`${group.target}:${group.name}`, group] as const));
+}
+
+/** Owns the background placement of every tiled page leaf of one mounted tree. A texture write publishes its tile on its
+ * leaves; each leaf keeps what it last wrote, so an unchanged value is never written again. The first write compares
+ * with the leaf's inline style, which the prepared tree or server markup already set. */
+export function createTextureTileWriter(levels: PreparedTextureLevels | undefined, nodes: readonly HTMLElement[],
+  write: (element: HTMLElement, name: string, value: string) => void) {
+  const groups = textureTileGroups(levels);
+  const written = new Map<HTMLElement, Map<string, string>>();
+  const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+  return {
+    has: (target: number, name: string) => groups.has(`${target}:${name}`),
+    /** Writes the write's tile on its leaves; returns the number of style writes. */
+    publish(target: number, name: string, tile: PreparedTextureTile | undefined) {
+      const group = groups.get(`${target}:${name}`);
+      if (!group) return 0;
+      let writes = 0;
+      for (const [node, x, y] of group.leaves) {
+        const element = nodes[node];
+        if (!element) throw new TypeError(`Prepared texture tile leaf ${node} of ${name} on node ${target} is not in the tree.`);
+        let own = written.get(element);
+        if (!own) written.set(element, own = new Map());
+        for (const [property, value] of textureTileLeafStyles(group, x, y, tile)) {
+          if ((own.get(property) ?? element.style.getPropertyValue(cssName(property))) === value) { own.set(property, value); continue; }
+          write(element, property, value); own.set(property, value); writes++;
+        }
+      }
+      return writes;
+    },
+  };
 }
 
 /** Faces within this share of the larger viewport side beyond its edge, or this far past the horizon, count as seen,

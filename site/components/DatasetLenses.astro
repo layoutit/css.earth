@@ -104,14 +104,10 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
           {lens.texture && <div
               class="object-surface-minimap"
               data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}
-              role={lens.texture.minimap ? "group" : undefined}
-              tabindex={lens.texture.minimap ? 0 : undefined}
-              aria-label={lens.texture.minimap ? `${lens.label} surface map. Drag or use arrow keys to look around; scroll or use plus and minus to zoom.` : undefined}
             >
               <img
                 class="object-lens-texture"
                 src={lens.texture.url}
-                data-surface-preview-src={lens.texture.url}
                 width={lens.texture.width}
                 height={lens.texture.height}
                 alt={lens.title}
@@ -119,13 +115,6 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
                 decoding="async"
                 draggable="false"
               />
-              {lens.texture.minimap && <>
-                {[-1, 0, 1].map(() => <span
-                  class="object-minimap-viewport"
-                  aria-hidden="true"
-                  hidden
-                ></span>)}
-              </>}
               {lens.step && <SequencePlayer {objectId} {lens} members={stepMembers(lens)} {focus} />}
             </div>}
           {lens.step && !lens.texture && <SequencePlayer {objectId} {lens} members={stepMembers(lens)} {focus} />}

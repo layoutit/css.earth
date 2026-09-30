@@ -27,7 +27,7 @@ KELT-9b is the hottest known giant planet. It orbits the fast-spinning A star [K
 Run of 2026-09-23 (this version):
 
 - [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts)) integrates the map over the visible hemisphere at eight phases and gets the paper's light curve back to 1e-9. It holds the lens to the table above: amplitude, night side and hottest hemisphere within the paper's uncertainties, the day side exactly, and the peak within the lower bound of the paper's offset. It checks that every latitude is alike and the hottest longitude lies between 10° and 30° east.
-- [`exoplanet-radius.test.mts`](../../../tests/objects/unit/exoplanet-radius.test.mts) checks the radius in the astronomy record, the recipe and the world frame.
+- [`exoplanet-radius.test.mts`](../../../site/test/exoplanet-radius.test.mts) checks the radius in the astronomy record, the recipe and the world frame.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places KELT-9b in the KELT-9 system.
 - [`hot-jupiter-default-views.png`](evidence/hot-jupiter-default-views.png): the default views of KELT-9, KELT-9b, WASP-76 and WASP-76b on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready. Both planets open on their substellar point; KELT-9b's hot spot shows east of centre.
 

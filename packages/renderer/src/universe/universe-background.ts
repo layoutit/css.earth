@@ -26,15 +26,13 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
 }) {
   const document = root.ownerDocument;
   const volumeHost = document.createElement('div');
+  // The galaxy's opaque backdrop and its image layer fill the universe root (volume.css); the host's display and both
+  // opacities change inline.
   volumeHost.className = 'prepared-volume-context';
-  volumeHost.style.cssText = 'position:absolute;inset:0;pointer-events:none;display:none';
-  volumeHost.style.background = '#000';
-  volumeHost.style.transformStyle = 'flat';
+  volumeHost.style.display = 'none';
   root.insertBefore(volumeHost, end);
   const volumeImage = document.createElement('div');
   volumeImage.className = 'prepared-volume-image';
-  volumeImage.style.cssText = 'position:absolute;inset:0;pointer-events:none';
-  volumeImage.style.transformStyle = 'flat';
   volumeHost.appendChild(volumeImage);
   const volumeEnd = document.createElement('span'); volumeEnd.hidden = true; volumeImage.appendChild(volumeEnd);
   let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;

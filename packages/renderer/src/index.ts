@@ -65,6 +65,6 @@ export { requireControls } from './validation/camera-controls.js';
 
 export { PREPARED_INTERIOR_DISC_SIZE } from './rendering/prepared-interior-disc.js';
 export { publishDatasetSelection, publishDatasetPreview } from './rendering/object-control-binding.js';
-export { textureTileStyles, tiledTextureKeys, type PreparedTextureTile } from './rendering/prepared-texture-levels.js';
+export { textureTileLeafStyles, tiledTextureKeys, type PreparedTextureTile, type PreparedTextureTileLeaves } from './rendering/prepared-texture-levels.js';
 
 export { retainInputSurface, isSharedInputSurface, bindInputEvent } from './navigation/shared-input-surface.js';

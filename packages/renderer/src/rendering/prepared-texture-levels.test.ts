@@ -1,6 +1,8 @@
 import { expect, test } from 'vitest';
-import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys } from './prepared-texture-levels.js';
-import { resolvePreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
+import { parseHTML } from 'linkedom';
+import { createTextureTileWriter, selectPreparedTextureLevel, textureTileLeafStyles, tiledTextureKeys, type PreparedTextureTileLeaves } from './prepared-texture-levels.js';
+import { mountPreparedPresentation, resolvePreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
+import type { PreparedResources } from './prepared-residency.js';
 import { requireTextureLevels } from '../validation/presentation.js';
 
 const textureLevels = { hysteresis: 0.2, levels: [
@@ -104,8 +106,9 @@ test('a sheet level plans each page as a tile of one shared image; the page leve
   expect(refined.required).toEqual(['a', 'b']);
   expect(refined.textureTiles).toBeUndefined();
   expect([...tiledTextureKeys(sheet)]).toEqual(['a', 'b']);
-  expect(textureTileStyles('--page-1', sheet.levels[0]!.tiles!.b)).toEqual([['--page-1-x', '3'], ['--page-1-y', '0'], ['--page-1-scale', '2']]);
-  expect(textureTileStyles('--page-1', undefined)).toEqual([['--page-1-x', '0'], ['--page-1-y', '0'], ['--page-1-scale', '1']]);
+  // A leaf of page b, 0.25 px into it: on the sheet it moves by the tile's offset and draws the sheet twice the page's width.
+  expect(textureTileLeafStyles({ unit: -1, width: 168 }, 0.25, 84.0625, sheet.levels[0]!.tiles!.b)).toEqual([['backgroundPosition', '-3.25px -84.0625px'], ['backgroundSize', '336px auto']]);
+  expect(textureTileLeafStyles({ unit: -1, width: 168 }, 0.25, 84.0625, undefined)).toEqual([['backgroundPosition', '-0.25px -84.0625px'], ['backgroundSize', '168px auto']]);
   expect(() => requireTextureLevels(sheet, both, new Set(['a', 'b', 'sheet']))).not.toThrow();
   expect(() => requireTextureLevels({ ...sheet, levels: [{ ...sheet.levels[0], tiles: { a: { x: 0, y: 0, scale: 0.5 } } }, sheet.levels[1]] }, both, new Set(['a', 'b', 'sheet']))).toThrow(/tile a/);
 });
@@ -123,4 +126,67 @@ test('system-scale proxies require no detail images and acquire them on geometry
   const detail = resolvePreparedPresentation(definition, {selection: {lensId: 'a'}, view: at('geometry')});
   expect(detail.required).toEqual(['a-small']);
   expect(detail.deferredTextures).toBeUndefined();
+});
+
+// Two of Earth's page leaves (packages/bake/src/presentation/texture-tile-records.ts): page 0's first two leaves under the
+// body, node 1, whose image write is --page-0.
+const tileLeaves: PreparedTextureTileLeaves[] = [{ target: 1, name: '--page-0', unit: -1, width: 168, initial: { x: 168, y: 0, scale: 7 }, leaves: [[2, 0.25, 0.25], [3, 84.0625, 0.25]] }];
+const tiledLevels = { hysteresis: 0.2, tileLeaves, levels: [
+  { minimumDiameter: 0, resources: { page: 'sheet' }, tiles: { page: { x: 168, y: 0, scale: 7 } } },
+  { minimumDiameter: 230, resources: { page: 'page' } },
+] };
+const tiledVariants = [{ when: { lensId: 'a' }, required: ['page'], materials: [], writes: [{ kind: 'texture' as const, resource: 'page', target: 1, name: '--page-0', quoted: true }] }];
+
+test('a tiled page leaf takes its final placement directly and writes only what changes', () => {
+  const { document } = parseHTML('<html><body></body></html>');
+  const nodes = [0, 1, 2, 3].map(() => document.createElement('s'));
+  // The prepared literal values at the initial tile, as the tree or server markup sets them.
+  nodes[2]!.style.setProperty('background-position', '-168.25px -0.25px'); nodes[2]!.style.setProperty('background-size', '1176px auto');
+  const writes: [number, string, string][] = [];
+  const writer = createTextureTileWriter(tiledLevels, nodes, (element, name, value) => {
+    writes.push([nodes.indexOf(element), name, value]); element.style.setProperty(name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`), value);
+  });
+  expect(writer.has(1, '--page-0')).toBe(true);
+  // Node 2 already shows the sheet tile; node 3 has no prepared value yet.
+  expect(writer.publish(1, '--page-0', tiledLevels.levels[0]!.tiles!.page)).toBe(2);
+  expect(writes).toEqual([[3, 'backgroundPosition', '-252.0625px -0.25px'], [3, 'backgroundSize', '1176px auto']]);
+  expect(writer.publish(1, '--page-0', tiledLevels.levels[0]!.tiles!.page)).toBe(0);
+  writes.length = 0;
+  // The page level draws the page itself: offsets lose the tile's, the size is the page's.
+  expect(writer.publish(1, '--page-0', undefined)).toBe(4);
+  expect(writes.map(([node, name, value]) => `${node} ${name} ${value}`)).toEqual([
+    '2 backgroundPosition -0.25px -0.25px', '2 backgroundSize 168px auto', '3 backgroundPosition -84.0625px -0.25px', '3 backgroundSize 168px auto']);
+  for (const node of nodes) expect(node.getAttribute('style') ?? '').not.toMatch(/var\(|calc\(|--/);
+  expect(writer.publish(1, '--other', undefined)).toBe(0);
+});
+
+test('a level switch commits each tiled leaf with its image, and no tile variable on the target', () => {
+  const { document } = parseHTML('<html><body><main></main></body></html>');
+  const stage = document.querySelector('main')!;
+  const nodes = [0, 1, 2, 3].map(() => document.createElement('s'));
+  nodes[0]!.append(nodes[1]!); nodes[1]!.append(nodes[2]!, nodes[3]!);
+  const definition = { textureLevels: tiledLevels, variants: tiledVariants, materials: [], animations: [], viewBindings: [],
+    tree: { nodes: [], camera: 0, scene: 0, stageClasses: [], textureBindings: [{ target: 1, name: '--page-0', leaves: [2, 3] }] } } as unknown as PreparedPresentationDefinition;
+  const presentation = mountPreparedPresentation(stage as unknown as HTMLElement, { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
+    { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
+  const resources = { url: (key: string) => `/${key}.webp` } as unknown as PreparedResources;
+  const view = (silhouetteDiameter: number) => ({ sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } });
+  const small = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view: view(100) });
+  presentation.commitSelection({ selection: { lensId: 'a' }, resources, plan: small });
+  expect([nodes[3]!.style.backgroundImage, nodes[3]!.style.backgroundPosition, nodes[3]!.style.backgroundSize]).toEqual(['url("/sheet.webp")', '-252.0625px -0.25px', '1176px auto']);
+  const large = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view: view(900), previousPlan: small });
+  presentation.commitSelection({ selection: { lensId: 'a' }, resources, plan: large });
+  expect([nodes[3]!.style.backgroundImage, nodes[3]!.style.backgroundPosition, nodes[3]!.style.backgroundSize]).toEqual(['url("/page.webp")', '-84.0625px -0.25px', '168px auto']);
+  expect(nodes[1]!.getAttribute('style') ?? '').not.toMatch(/--page-0-/);
+});
+
+test('tile leaf records name one texture write each, with finite placements and each leaf once', () => {
+  const resources = new Set(['page', 'sheet']);
+  expect(() => requireTextureLevels(tiledLevels, tiledVariants, resources)).not.toThrow();
+  const broken = (group: Record<string, unknown>) => ({ ...tiledLevels, tileLeaves: [{ ...tileLeaves[0], ...group }] });
+  expect(() => requireTextureLevels(broken({ name: '--page-9' }), tiledVariants, resources)).toThrow(/1:--page-9 is not one texture write/);
+  expect(() => requireTextureLevels(broken({ width: 0 }), tiledVariants, resources)).toThrow(/width 0/);
+  expect(() => requireTextureLevels(broken({ leaves: [[2, 0, 0], [2, 1, 1]] }), tiledVariants, resources)).toThrow(/leaf \[2,1,1\]/);
+  expect(() => requireTextureLevels(broken({ leaves: [[2, 0]] }), tiledVariants, resources)).toThrow(/leaf/);
+  expect(() => requireTextureLevels(broken({ extra: 1 }), tiledVariants, resources)).toThrow(/unknown fields extra/);
 });

@@ -1,5 +1,5 @@
-import type { PreparedWorldContext } from '../../prepared-data/world-context.js';
-import { worldContextGeometry } from '../../prepared-data/world-context.js';
+import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
+import { parsePreparedWorldContextPlan, worldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldContextView } from './world-context-planner.js';
 import type { WorldContextFrame } from './world-context-frame.js';
 import { packWorldBodies } from './world-context-view-transport.js';
@@ -17,6 +17,15 @@ export interface WorldPlannerSource {
    * in the browser, read by the worker when a frame first needs that path. */
   readonly orbitBanksUrl: string;
 }
+
+/** The worker's first message. `validatedPlan` is never external data: it is the structured clone of a plan this
+ * client validated on its own thread, so the worker plans from it without validating it again (a clone loses the
+ * validated mark, and a second validation of the 2.3 MB summary cost the worker about 40 ms). A dedicated worker's
+ * port is reachable only through the Worker object the client holds, so no fetched file can author this envelope;
+ * external bytes the worker reads itself (orbit banks) are validated there. */
+export type WorldPlannerInitialise = { readonly annotationPriorities: Readonly<Record<string, number>>; readonly annotationLandmarks: readonly string[] } &
+  ({ readonly validatedPlan: PreparedWorldContextGeometry; readonly source?: undefined } |
+   { readonly validatedPlan: PreparedWorldContext; readonly source: WorldPlannerSource });
 
 /** The publication queue owns admission; this transport owns one persistent prepared bank.
  * With a `source`, the worker receives the main thread's validated summary and
@@ -49,8 +58,12 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
     const complete = pending; pending = null; complete.resolve(data.frame);
   };
   worker.onerror = event => destroy(new Error(event.message));
-  if (source) worker.postMessage({ source, plan, annotationPriorities, annotationLandmarks });
-  else worker.postMessage({ plan: worldContextGeometry(plan), annotationPriorities, annotationLandmarks });
+  // A plan validated on this thread returns at once (its mark); anything else is validated here, before it is vouched for.
+  const validatedPlan = parsePreparedWorldContextPlan(plan);
+  if (source && validatedPlan.schema !== 'cssearth-world-context-summary@1') throw new TypeError('Orbit banks complete the world context summary only.');
+  const initialise: WorldPlannerInitialise = source ? { source, validatedPlan, annotationPriorities, annotationLandmarks }
+    : { validatedPlan: worldContextGeometry(validatedPlan), annotationPriorities, annotationLandmarks };
+  worker.postMessage(initialise);
   return { async plan(view: WorldContextView): Promise<WorldContextFrame> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');

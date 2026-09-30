@@ -3,7 +3,7 @@ import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
-import { createWorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
+import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context/world-context-planner.js';
 import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
@@ -11,8 +11,6 @@ import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
-/** The largest dot a star is drawn as, whatever its radius. */
-const STAR_DOT_MAX_DIAMETER_PIXELS = 2;
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
@@ -22,14 +20,15 @@ import { createOpacityFader } from '../stars/opacity-fader.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import type { OpacityClock } from '../stars/opacity-clock.js';
 
-// A fixed leaf carries the prepared image and its two screen-sized pseudos.
-// Camera movement writes one transform; the inverse scale only compensates
-// those two pseudos when the projected image diameter changes.
-const BILLBOARD_SIZE = BODY_INDICATOR_DIAMETER;
 /** Bodies of other systems, seen from inside the focus star's system; hover restores them. They come up to full as the
  * stars around the system fill the view (starFieldFade), in sixteenths so a zoom restyles them a few times, not per frame. */
 const OTHER_SYSTEM_OPACITY = .3;
 const OTHER_SYSTEM_STEPS = 16;
+/** The largest dot a star is drawn as, whatever its radius. */
+const STAR_DOT_MAX_DIAMETER_PIXELS = 2;
+/** The stylesheet's base annotation strength (world-context.css); other prepared levels carry an attribute. */
+const DEFAULT_ANNOTATION_ALPHA: { readonly line: number; readonly label: number } = Object.freeze({ line: .65, label: .65 });
+const APPROXIMATE_NAME = ' (approx)', APPROXIMATE_TITLE = ' · Approximate orbital placement';
 // Per-body presentation flags set by id from outside: which parts hide, and which bodies stand out.
 const VISIBILITY_FLAGS = ['bodyHidden', 'orbitHidden', 'labelHidden', 'labelSuppressed', 'indicatorHidden', 'highlighted'] as const;
 /** Each list names the bodies that carry its flag; an omitted flag keeps its current bodies. */
@@ -81,7 +80,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
     return element;
   };
   const caption = leaf('context-flight-caption', 'contextFlightLabel'), circle = leaf('context-flight-circle', 'contextFlightCircle');
-  type Entry = { readonly body: { readonly id: string }; readonly marker: HTMLElement; readonly baseAlpha: { line: number; label: number } };
+  type Entry = { readonly body: { readonly id: string }; readonly marker: HTMLElement; readonly baseAlpha: { readonly line: number; readonly label: number } };
   return {
     /** Returns the destination whose caption is drawn, so its footprint joins the label exclusions. */
     publish(flightBody: ProjectedBody | undefined, entry: Entry | undefined, width: number, height: number): ProjectedBody | undefined {
@@ -139,9 +138,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
   const locator = createContextLocator(host.ownerDocument);
   root.className = 'prepared-world-context';
-  // A zero-size root at the stage centre, its children placed from it. WebKit stops inspecting a container after about twenty
-  // children and assumes it paints: the full-screen root held a 7.6 MB backing at 3x on every page and never drew a pixel.
-  root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
+  // A zero-size root at the stage centre, its children placed from it (world-context.css). WebKit stops inspecting a
+  // container after about twenty children and assumes it paints: the full-screen root held a 7.6 MB backing at 3x on every
+  // page and never drew a pixel.
   root.dataset.worldContext = plan.focus.id;
   presentationHost.insertBefore(root, before);
   const interactions = createWorldContextInteractions(host, root);
@@ -150,85 +149,71 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
   let previousHeader: { emphasizedId: string | null; selectionStrength: number; otherSystemOpacity: number; width: number; height: number } | null = null;
-  const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
   const selectionPolicy = createContextSelectionPolicy(plan);
   let publishCount = 0;
+  const createMarker = createWorldContextMarkerFactory(host.ownerDocument);
+  // Orbit roots clone one template too. Bars draw inside the root, which places and orders them (.context-orbit-bars in
+  // world-context.css). Strokes draw in the shared SVG; a positioned, transformed root would paint nothing yet become its
+  // own WebKit layer over the composited sky and globe.
+  const orbitTemplate = host.ownerDocument.createElement('div');
+  orbitTemplate.className = orbitRenderer === 'bars' ? 'context-orbit context-orbit-bars' : 'context-orbit';
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
     // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
     // name and orbit and is never a navigation target.
     const unpackaged = 'unpackaged' in body && body.unpackaged === true;
     const plainDot = plainDotIds.has(body.id);
     const sprite = plainDot ? undefined : sprites[body.id];
-    const marker = host.ownerDocument.createElement('s');
-    marker.dataset.contextGroup = body.id;
-    marker.dataset.contextBody = body.id;
-    marker.dataset.contextLabel = body.id;
-    marker.dataset.contextName = body.name;
-    marker.dataset.contextIndicatorVisible = 'false';
-    marker.dataset.contextLabelVisible = 'false';
-    marker.dataset.contextAnnotationsAnimate = 'false';
-    // Visibility and opacity belong to the mover; the marker and its pseudos inherit them.
-    marker.style.cssText = 'position:absolute;inset:0;pointer-events:none;text-decoration:none;transform-origin:0 0';
-    // The sprite scales alone. Scaling the marker made its ring and caption pseudos counter-scale through an inherited
-    // custom property, which re-resolved the marker and both pseudos for every moving body on every frame.
-    const spriteLeaf = host.ownerDocument.createElement('i');
-    spriteLeaf.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;background-repeat:no-repeat;transform-origin:50% 50%;pointer-events:none`;
-    // The body billboard is set only when resolved and visible. Unresolved bodies
-    // remain colour dots and never fetch an image.
-    if (plainDot) { spriteLeaf.style.backgroundColor = body.color; spriteLeaf.style.borderRadius = '50%'; marker.dataset.contextPlainDot = ''; }
-    marker.appendChild(spriteLeaf);
+    const approximate = 'placement' in body && body.placement === 'approximate';
+    // The body billboard is set only when resolved and visible. Unresolved bodies remain colour dots and never fetch an image.
+    const { mover, marker, spriteLeaf, caption } = createMarker(plainDot), data = marker.dataset;
+    data.contextGroup = data.contextBody = data.contextLabel = body.id;
+    data.contextName = caption.dataset.contextName = approximate ? `${body.name}${APPROXIMATE_NAME}` : body.name;
+    if (plainDot) spriteLeaf.style.backgroundColor = body.color;
     // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
     // body drawn from its record carries its own; without either the world's default applies. Capitals mark a star, black
     // hole or planet caption. No page carries a stylesheet rule per body.
     const colour = body.contextColor ?? (unpackaged ? body.color : undefined);
     if (colour) marker.style.color = colour;
-    if (body.labelCase === 'upper') marker.dataset.contextLabelCase = 'upper';
-    const approximate = 'placement' in body && body.placement === 'approximate';
+    if (body.labelCase === 'upper') data.contextLabelCase = 'upper';
     if (approximate) {
-      marker.dataset.contextPlacement = 'approximate';
-      marker.dataset.contextName = `${body.name} (approx)`;
-      marker.title = `${body.name} · Approximate orbital placement`;
+      data.contextPlacement = 'approximate';
+      marker.title = `${body.name}${APPROXIMATE_TITLE}`;
     }
-    marker.style.width = marker.style.height = `${BILLBOARD_SIZE}px`;
-    marker.style.margin = '0';
-    marker.style.marginLeft = marker.style.marginTop = '0';
-    const baseAlpha = annotationOpacities[body.id] ?? { line: .65, label: .65 };
-    marker.style.setProperty('--context-line-alpha', String(baseAlpha.line));
-    marker.style.setProperty('--context-label-alpha', String(baseAlpha.label));
-    // A bare mover carries the per-frame transform and paint order. The marker,
-    // with its ring and caption pseudo-elements and attribute rules, keeps a
-    // stable style, so motion restyles one plain leaf instead of three nodes.
-    const mover = host.ownerDocument.createElement('b');
-    // A fixed-size box with layout and size containment is a relayout boundary: a
-    // marker's visibility or cue change lays out these three boxes, not the document.
-    mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size;visibility:hidden`;
-    mover.appendChild(marker);
+    const baseAlpha = annotationOpacities[body.id] ?? DEFAULT_ANNOTATION_ALPHA;
+    // The body's annotation strength is a prepared level (contextAnnotationOpacity) whose final opacity the stylesheet
+    // holds (world-context.css): an attribute set once, never a variable the ring and caption would resolve. The default
+    // level is the stylesheet's base, so it needs no attribute.
+    if (baseAlpha.line !== DEFAULT_ANNOTATION_ALPHA.line) data.contextLineAlpha = String(baseAlpha.line);
+    if (baseAlpha.label !== DEFAULT_ANNOTATION_ALPHA.label) data.contextLabelAlpha = String(baseAlpha.label);
     // Retain the owner detached until the prepared view requests paint or label measurement.
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
-    const orbitRoot = host.ownerDocument.createElement('div');
-    orbitRoot.className = 'context-orbit';
-    orbitRoot.dataset.contextOrbit = body.id;
     // The orbit is an independent retained paint owner, beside the billboard.
-    // Bars draw inside the root, which places and orders them. Strokes draw in the shared SVG; a positioned,
-    // transformed root would paint nothing yet become its own WebKit layer over the composited sky and globe.
-    orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
+    const orbitRoot = orbitTemplate.cloneNode(false) as HTMLElement;
+    orbitRoot.dataset.contextOrbit = body.id;
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
-    if (body.contextColor) orbitRoot.style.color = body.contextColor;
-
+    // The orbit owner sets the body's colour on its root.
     const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, depthBase, strokeHost: root, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
       ...(colour ? { color: colour } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, orbit !== null);
-    const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, body, sprite, locator);
-    return { index, body, sprite, unpackaged, plainDot, marker, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, interaction,
+    const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, caption, body, sprite, locator);
+    // The dot a body's circle holds, sized by its radius. A placed star's is capped when drawn: sized by radius, every
+    // giant reached the largest dot and thousands buried the view.
+    const dotDiameter = sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null;
+    return { index, body, sprite, unpackaged, plainDot, marker, caption, mover, orbit, orbitRoot,
+      /** The parent's paint, when the parent is a body of this world (resolved below). */
+      parentPaint: undefined as WorldContextMarkerPaint | undefined, pieces, piecePool, interaction,
       paint,
       get markerShown() { return paint.markerShown; }, get markerDiameter() { return paint.markerDiameter; },
       get billboardShown() { return paint.billboardShown; }, get center() { return paint.center; },
       closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
-      dotDiameter: sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null,
+      dotDiameter,
+      drawnDotDiameter: dotDiameter !== null && orbit === null && body.id !== plan.focus.id ? Math.min(STAR_DOT_MAX_DIAMETER_PIXELS, dotDiameter) : dotDiameter,
+      pointSource: body.id === plan.focus.id && plan.focus.pointSource !== undefined,
+      alwaysNonNavigable: unpackaged || plainDot, distantNonNavigable: distantNonNavigableIds.has(body.id),
       orbitTransform: '',
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
       bodyHidden: false, orbitHidden: false, labelHidden: false, labelSuppressed: false, indicatorHidden: false,
@@ -238,6 +223,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
   });
   const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
+  for (const entry of bodies) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
   const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail, depthBase);
   const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
@@ -457,7 +443,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const entry = bodies[index];
         if (entry.labelSize.width !== 0) continue;
         if (!entry.mover.parentNode) { attachMarkers.add(entry); continue; }
-        const text = windowTarget.getComputedStyle(entry.marker, '::after');
+        const text = windowTarget.getComputedStyle(entry.caption, '::after');
         const width = Math.ceil(parseFloat(text.width)), height = Math.ceil(parseFloat(text.height));
         if (width > 0 && height > 0) { entry.labelSize = { width, height }; measured = true; }
       }
@@ -529,13 +515,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       for (const { projected, entry, mask } of projectedBodies) {
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
           orbitVisibility, segments, index } = projected;
-        const { body, marker } = entry;
-        const navigationSuppressed = entry.unpackaged || entry.plainDot || (distantNavigationActive && distantNonNavigableIds.has(body.id));
+        const { body } = entry;
         if (mask === 0) continue;
         const contextEmphasis = (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
           (!entry.hovered && !systemFade.inFocusSystem(entry.index) ? otherSystemOpacity : 1);
         const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) * contextEmphasis;
-        const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and
         // movement transform. The pseudos only own annotation visibility.
         const plannedShown = (visible || (annotationVisible && (entry.indicatorShown || entry.labelShown))) && markerOpacity > 0;
@@ -543,6 +527,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const billboardShown = coast ? entry.paint.billboardShown === true : plannedShown;
         if (!billboardShown && entry.paint.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
         bodyPublications++;
+        const navigationSuppressed = entry.alwaysNonNavigable || (distantNavigationActive && entry.distantNonNavigable);
+        const { pointSource } = entry;
         // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.
         // A plain dot is always its colour; the flat-dot swap is for bodies with a sprite.
@@ -550,17 +536,15 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           diameter < (entry.sprite.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS) ||
           entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter);
         // A body without its own circle inside its parent's dot is part of that dot, not a second dot within it.
-        const parentDot = entry.orbit ? entriesById.get(entry.orbit.centerBodyId) : undefined;
-        const insideParentDot = !entry.indicatorShown && parentDot?.paint.flatDot === true &&
-          Math.hypot(x - parentDot.paint.center[0], y - parentDot.paint.center[1]) < parentDot.paint.markerDiameter / 2;
+        const parentDot = entry.parentPaint;
+        const insideParentDot = !entry.indicatorShown && parentDot?.flatDot === true &&
+          Math.hypot(x - parentDot.center[0], y - parentDot.center[1]) < parentDot.markerDiameter / 2;
         const markerShown = coast && entry.paint.markerShown !== undefined ? entry.paint.markerShown
           : (visible || (pointSource && flatDot)) && markerOpacity > 0 && (!pointSource || flatDot) && !insideParentDot;
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        // A placed star's dot is capped: sized by radius, every giant reached the largest dot and thousands buried the view.
-        const dotDiameter = entry.dotDiameter === null ? null : entry.orbit === null && entry.body.id !== plan.focus.id ? Math.min(STAR_DOT_MAX_DIAMETER_PIXELS, entry.dotDiameter) : entry.dotDiameter;
-        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? dotDiameter ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS :
+        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? entry.drawnDotDiameter ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS :
           Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter)) * 20) / 20;
         const wasShown = entry.paint.billboardShown === true;
         const hoverChanged = entry.paint.indicatorHovered !== entry.hovered;
@@ -619,9 +603,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
         // Flights and rotations keep keyboard/accessibility targets; they catch up after.
         if (!navigationInFlight && !rotating && !coast) entry.interaction.updateNavigation();
-        // Pseudos and the sprite share the stage's precise retained hit shapes.
-        if (marker.style.pointerEvents !== 'none') marker.style.pointerEvents = 'none';
-
+        // Pseudos and the sprite share the stage's precise retained hit shapes: the marker declared pointer-events:none
+        // when it was cloned (world-context-marker-paint.ts), and nothing writes it again.
       }
       // Aggregate retained picking/exclusion state in the original body order.
       // No segment traversal or style publication is needed for unchanged owners.

@@ -120,7 +120,8 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     const root = scene.document.createElement('div');
     root.className = 'prepared-surface-features';
     root.dataset.surfaceFeatures = objectId;
-    root.style.cssText = 'position:absolute;inset:0;z-index:1;pointer-events:none';
+    // Only the selected caption, on a full-stage root (object-shell.css) until the label layer claims it.
+    root.dataset.featureCaptionOnly = '';
     const caption = surfaceFeatureCaption(root);
     caption.show(feature);
     caption.element.dataset.featureTooltipPinned = 'true';

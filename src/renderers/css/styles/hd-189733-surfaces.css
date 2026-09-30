@@ -58,8 +58,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(600px * var(--hd-189733-camera-zoom, 1))
-    calc(600px * var(--hd-189733-camera-zoom, 1));
+    600px
+    600px;
 }
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. The silhouette-fit transform
@@ -69,8 +69,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--hd-189733-camera-zoom, 1))
-    calc(496px * var(--hd-189733-camera-zoom, 1));
+    496px
+    496px;
 }
 
 .object-stage[data-object-id="hd-189733"] .polycss-camera {

@@ -10,7 +10,7 @@ const LEAF_STYLE = ['width', 'height', 'transform', 'backgroundSize', 'backgroun
 /** A sphere of patches is seen from outside: it fades in as the camera leaves it, from its radius to twice that. */
 const OUTSIDE_FADE_RADII = [1, 2] as const;
 /** The limb plate's box in CSS pixels before it is scaled to the outline; its image is smooth, so its size is only a raster budget. */
-const LIMB_BOX_PX = 1024;
+export const LIMB_BOX_PX = 1024;
 export interface PreparedImageMesh {
   readonly id: string; readonly name: string; readonly frame: DensityVolumeFrame; readonly radiusUnits: number; readonly texturePath: string;
   /** A camera-facing plate over the sphere that darkens toward its outline; the outline sits at `edge` of the plate's half-width. */
@@ -76,23 +76,25 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
 }) {
   const document = host.ownerDocument;
   const root = document.createElement('div'), camera = document.createElement('div'), scene = document.createElement('div');
+  // A transparent projection whose scene composites once; both are volume.css rules. Only its display, opacity and
+  // camera change inline.
   root.className = 'css-volume-projection'; root.dataset.imageMesh = 'loading';
-  Object.assign(root.style, { background: 'transparent', display: 'none' });
-  camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; scene.style.willChange = 'transform';
+  root.style.display = 'none';
+  camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene';
   camera.append(scene); root.append(camera); host.insertBefore(root, before);
   const interior = document.createElement('div'), interiorCamera = document.createElement('div'), interiorScene = document.createElement('div');
   interior.className = 'css-volume-projection'; interior.dataset.imageMeshInterior = '';
-  Object.assign(interior.style, { background: 'transparent', display: 'none' });
-  interiorCamera.className = 'css-volume-camera'; interiorScene.className = 'css-volume-scene'; interiorScene.style.willChange = 'transform';
+  interior.style.display = 'none';
+  interiorCamera.className = 'css-volume-camera'; interiorScene.className = 'css-volume-scene';
   interiorCamera.append(interiorScene); interior.append(interiorCamera);
   let cutaway = initialCutaway;
   const cutLeaves: HTMLElement[] = [];
+  // The limb plate's centred LIMB_BOX_PX box is a volume.css rule; its image, transform and display are inline.
   const limb = document.createElement('i');
-  limb.style.cssText = `position:absolute;left:50%;top:50%;width:${LIMB_BOX_PX}px;height:${LIMB_BOX_PX}px;margin:${-LIMB_BOX_PX / 2}px 0 0 ${-LIMB_BOX_PX / 2}px;` +
-    'background:center/100% 100% no-repeat;display:none;pointer-events:none;will-change:transform';
+  limb.style.display = 'none';
   const label = document.createElement('span');
   label.className = 'prepared-context-label prepared-selected-body-label'; label.ariaHidden = 'true';
-  label.style.cssText = 'position:absolute;left:50%;top:50%;opacity:0;pointer-events:none;will-change:transform';
+  label.style.opacity = '0';
   let labelSize: readonly [number, number] | null = null;
   const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(entries => {
     const box = entries.at(-1)?.contentRect;
@@ -164,12 +166,13 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
         const image = `url("${resolveResource(payload.texturePath).replace(/["\\\n\r]/gu, character => `\\${character}`)}")`;
         for (const leaf of payload.leaves) {
           const node = document.createElement('s');
-          Object.assign(node.style, { ...leaf.style, textDecoration: 'none', backgroundImage: image, backfaceVisibility: 'hidden' });
+          // A leaf's box and cell are its own; its texture is the mesh's, and outside faces hide their backs (volume.css).
+          Object.assign(node.style, { ...leaf.style, backgroundImage: image });
           mesh.append(node);
           if (leaf.cut) { cutLeaves.push(node); node.style.display = cutaway ? 'none' : ''; continue; }
           // The inside copy: the far wall is seen from within, so both faces are drawn (a face's back is its mirror image,
           // the sky as seen from inside the sphere).
-          if (payload.cutaway) { const copy = node.cloneNode() as HTMLElement; copy.style.backfaceVisibility = 'visible'; inner.append(copy); }
+          if (payload.cutaway) inner.append(node.cloneNode());
         }
         scene.append(mesh);
         if (payload.cutaway) { interiorScene.append(inner); host.insertBefore(interior, interiorBefore); }

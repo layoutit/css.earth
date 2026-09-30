@@ -1,0 +1,36 @@
+{
+  "testedRevision": "f0319840917506c1cabb689cefde85412a7684d7",
+  "capturedDate": "2026-09-30",
+  "browser": "HeadlessChrome/154.0.0.0 on macOS",
+  "viewport": { "width": 1280, "height": 720 },
+  "method": "Playwright CLI against the isolated Astro preview at http://127.0.0.1:4301. Inspected both captures. Dragged across each visible image and wheeled over it; compared the complete camera URL before and after.",
+  "earth": {
+    "route": "/earth/",
+    "image": "earth.png",
+    "dataset": "Blue Marble Next Generation",
+    "cameraUnchanged": true,
+    "minimapTabindex": null,
+    "minimapRole": null,
+    "imageOpacity": "1",
+    "sequenceControls": 0,
+    "viewportOverlays": 0,
+    "cesiumResourceRequests": 0,
+    "altitudeReadout": "44,647 km",
+    "scaleReadout": "2,000 km"
+  },
+  "jupiter": {
+    "route": "/jupiter/",
+    "image": "jupiter-sequence.png",
+    "dataset": "Hubble dates",
+    "playbackBefore": "visible-2015a",
+    "playbackAdvancedTo": "visible-2016a",
+    "pausedAriaPressed": "false",
+    "cameraUnchangedByMapGestures": true,
+    "minimapTabindex": null,
+    "minimapRole": null,
+    "imageOpacity": "1",
+    "viewportOverlays": 0,
+    "cesiumResourceRequests": 0
+  },
+  "limits": "Desktop evidence for the shared image and sequence behavior. Not an iPad capture or a cold-start performance comparison."
+}

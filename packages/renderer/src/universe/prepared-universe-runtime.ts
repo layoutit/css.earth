@@ -133,7 +133,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const previousDepth = stage.style.zIndex;
         stage.style.zIndex = String(depthBase);
         lifetime.onDispose(() => { stage.style.zIndex = previousDepth; });
-        root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
+        // The root fills the stage at the background's depth (volume.css).
         presentationHost.insertBefore(root, presentationHost.firstChild);
         // A bank whose every voxel lies between the observer and the body it surrounds composites over the
         // detail scene instead of behind it. Two flattened roots cannot interleave, so the payload declares
@@ -141,7 +141,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const frontRoot = document.createElement('div');
         lifetime.onDispose(() => frontRoot.remove());
         frontRoot.className = 'prepared-universe-front';
-        frontRoot.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${depthBase + 1}`;
+        // It fills the stage (volume.css) just above the body band.
+        frontRoot.style.zIndex = String(depthBase + 1);
         presentationHost.appendChild(frontRoot);
         const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
         const selectedLabel = own(mountSelectedBodyLabel(frontRoot, opacityClock, requestPublication));

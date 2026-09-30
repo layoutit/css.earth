@@ -534,10 +534,11 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
   const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
   // A member orbits its system's parent, or a named centre placed off it (a circumbinary planet's barycentre).
+  // Identities are unique (checked above), so one index answers each member in constant time.
+  const bodyById = new Map(bodies.map(body => [body.id, body] as const));
   for (const body of [focus, ...bodies]) for (const [index, id] of (body.systemView?.memberIds ?? []).entries()) {
-    const moon = bodies.find(moon => moon.id === id && moon.orbit !== undefined &&
-      (moon.orbit.centerBodyId === body.id || orbitCenters?.[moon.orbit.centerBodyId]?.centerBodyId === body.id));
-    if (!moon) {
+    const moon = bodyById.get(id), centre = moon?.orbit?.centerBodyId;
+    if (!moon || centre === undefined || (centre !== body.id && orbitCenters?.[centre]?.centerBodyId !== body.id)) {
       throw new TypeError(`System view member ${id} of ${body.id} must orbit ${body.id} or a centre placed off it.`);
     }
     if (moon.radiusM !== body.systemView!.memberRadiiM[index]) throw new TypeError('System view radii must match their prepared members.');

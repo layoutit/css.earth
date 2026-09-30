@@ -267,3 +267,17 @@ test('the telescope command is preparation like the tools folder it came from; a
     }
   } finally { f.cleanup(); }
 });
+
+test('relocated owner fixtures stay test-only while runtime imports check their closure', () => {
+  const f = fixture();
+  try {
+    for (const path of ['site/test/fixtures/helper.mts', 'src/platform/fixtures/helper.mts', 'src/objects/earth/fixtures/helper.mts']) {
+      f.write(path, "import '@cssearth/bake/public'; export const helper = 1;");
+      assert.deepEqual(f.check(), [], path);
+      f.write('site/plugin.mts', `import { helper } from '../${path}'; export { helper };`);
+      assert.ok(f.check().some(error => error.includes(`runtime closure forbids @cssearth/bake/public via ${path}`)), path);
+      f.write('site/plugin.mts', 'export {};');
+      f.write(path, 'export {};');
+    }
+  } finally { f.cleanup(); }
+});

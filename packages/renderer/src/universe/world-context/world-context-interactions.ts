@@ -54,8 +54,7 @@ export function createWorldContextBodyInteraction(marker: HTMLElement, orbitRoot
       if (!navigationInFlight && !rotating && !coast && orbitNavigable !== navigable) {
         orbitNavigable = navigable;
         orbitNavigation?.update(navigable ? body.id : null, body.name);
-        // The stage picker owns the clipped corridor; paint nodes stay inert.
-        if (orbitRoot.style.pointerEvents !== 'none') orbitRoot.style.pointerEvents = 'none';
+        // The stage picker owns the clipped corridor; paint nodes stay inert (.context-orbit in world-context.css).
         if (orbitRoot.tabIndex !== -1) orbitRoot.tabIndex = -1;
       }
       if (navigable) {

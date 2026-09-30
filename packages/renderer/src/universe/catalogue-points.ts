@@ -1,5 +1,5 @@
-import { MAX_CATALOGUE_POINTS, parseDensityVolumeFrame } from '@cssearth/objects';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import { MAX_CATALOGUE_POINTS, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
+import type { CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints } from './batched-spatial-points.js';
 
@@ -23,29 +23,10 @@ const MIN_DRAWN_POINTS = 300;
  * 8 px apart), so a far galaxy's dots never pile into a few pixels. */
 const PIXELS_PER_DOT = 64;
 
-/** A bank's shape as its points trace it around its origin: the axis they spread least along (a disc's normal) and the
- * 90th-percentile reach across that axis and along it, in bank units. */
-export interface PointSpread { readonly normal: VolumeVector; readonly across: number; readonly along: number }
-export function pointSpread(points: readonly { readonly positionUnits: VolumeVector }[]): PointSpread {
-  const c = [0, 0, 0, 0, 0, 0]; // xx, yy, zz, xy, xz, yz
-  for (const { positionUnits: [x, y, z] } of points) { c[0] += x * x; c[1] += y * y; c[2] += z * z; c[3] += x * y; c[4] += x * z; c[5] += y * z; }
-  const trace = c[0]! + c[1]! + c[2]!;
-  // The least-spread axis is the largest eigenvector of (trace I - C), found by power iteration.
-  let v = [1 / Math.sqrt(3), 1 / Math.sqrt(3.1), 1 / Math.sqrt(2.9)];
-  for (let i = 0; i < 64; i++) {
-    const w = [(trace - c[0]!) * v[0]! - c[3]! * v[1]! - c[4]! * v[2]!, -c[3]! * v[0]! + (trace - c[1]!) * v[1]! - c[5]! * v[2]!, -c[4]! * v[0]! - c[5]! * v[1]! + (trace - c[2]!) * v[2]!];
-    const length = Math.hypot(...w); if (!(length > 0)) break; v = w.map(value => value / length);
-  }
-  const alongs: number[] = [], acrosses: number[] = [];
-  for (const { positionUnits: p } of points) { const h = p[0] * v[0]! + p[1] * v[1]! + p[2] * v[2]!; alongs.push(Math.abs(h)); acrosses.push(Math.sqrt(Math.max(0, p[0] * p[0] + p[1] * p[1] + p[2] * p[2] - h * h))); }
-  const percentile = (values: number[]) => values.sort((a, b) => a - b)[Math.floor(0.9 * (values.length - 1))]!;
-  return Object.freeze({ normal: Object.freeze(v) as unknown as VolumeVector, across: percentile(acrosses), along: percentile(alongs) });
-}
-
 /** How many dots a bank's projected shape holds, seen from `cameraUnits` (the camera in the bank's frame): its disc as an
  * ellipse, `across` wide and foreshortened by the view's angle to the normal but never thinner than `along`. Within its
  * reach there is no such limit. */
-export function screenPointCount(spread: PointSpread, cameraUnits: VolumeVector, focalPixels: number, pixelsPerDot = PIXELS_PER_DOT): number {
+export function screenPointCount(spread: CataloguePointSpread, cameraUnits: VolumeVector, focalPixels: number, pixelsPerDot = PIXELS_PER_DOT): number {
   const distance = Math.hypot(...cameraUnits);
   if (!(distance > spread.across) || !(focalPixels > 0)) return Infinity;
   const cos = Math.abs(cameraUnits[0] * spread.normal[0] + cameraUnits[1] * spread.normal[1] + cameraUnits[2] * spread.normal[2]) / distance;
@@ -87,6 +68,8 @@ export interface PreparedCataloguePoints {
     readonly levels?: readonly CataloguePointLevel[] };
   /** Each point's position, and its palette colour when the bank has a palette. */
   readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string }[];
+  /** The bank's prepared shape around its origin, written by the bake that published it. */
+  readonly spread: CataloguePointSpread;
 }
 
 /** A prepared `cssearth-catalogue-points@1` bank: fixed 3D positions of a published catalogue and how to draw them. */
@@ -107,6 +90,7 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     throw new TypeError(`${data.id}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got ${Array.isArray(data.points) ? data.points.length : 'none'}.`);
   }
   const parsedLevels = levels === undefined ? undefined : parseLevels(levels, data.points.length, data.id);
+  const spread = parseCataloguePointSpread(data.spread, `${data.id} (${at})`);
   const width = palette ? 4 : 3;
   const points = data.points.map((point: unknown, index: number) => {
     if (!Array.isArray(point) || point.length !== width || !point.every(axis => typeof axis === 'number' && Number.isFinite(axis))) {
@@ -118,7 +102,7 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   });
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
     ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}) }),
-    points: Object.freeze(points) });
+    points: Object.freeze(points), spread });
 }
 
 function parseLevels(value: unknown, total: number, id: string): readonly CataloguePointLevel[] {
@@ -193,12 +177,11 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
         // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
         // bank's reach the share is also capped by how many dots its projected shape holds.
-        const spread = pointSpread(bank.points);
         runtime = mountBatchedSpatialPoints({ host: root, frame: bank.frame, points: bank.points,
           drawnCount: (distanceUnits, cameraUnits) => Math.min(bank.appearance.levels
             ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
             : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
-          screenPointCount(spread, cameraUnits, latest?.viewport.focalPixels ?? 0)),
+          screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0)),
           // A single SVG path unions overlapping subpaths. Preserve per-dot alpha
           // accumulation for translucent banks with the shadow painter.
           paintPalette: [...styles.values()].every(style => style.opacity === 1)

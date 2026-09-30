@@ -339,7 +339,6 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@cesium/engine": "26.3.0",
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*",

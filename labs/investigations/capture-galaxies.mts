@@ -7,7 +7,7 @@ import { chromium } from 'playwright';
 import sharp from 'sharp';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const directory = resolve(root, 'tests/galaxies');
+const directory = resolve(root, 'site/test/fixtures/galaxies');
 const base = process.argv[2] ?? 'http://127.0.0.1:4210';
 const view = 'QIZAIGJN0vGp_MBQYk3S8an8Q6NAziEHSnBBQsczQAAAAL-SHHY-Jtf4v8cBng4F6eS_uKhrxCWwLAABAAAAAAAAAAA';
 const ids = ['vista-infrared', 'horalek-widefield', 'wise-wide-infrared'];
