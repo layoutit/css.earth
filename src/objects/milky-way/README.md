@@ -29,7 +29,7 @@ From the repository root, with Node 24 (or 22.18+) and pnpm 10.33.0:
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:tools
 pnpm prepare:volume src/objects/milky-way
-pnpm test:preparation --universe
+pnpm test:packages
 ```
 
 Add `--acquire-source .local/volume-source-cache` to `prepare:volume` to reacquire the 512 MiB upstream raw file (about 1.3 GiB temporary space). App startup restores missing images with `pnpm prepare:environment-images`. See the [shared bake commands](../../../labs/nebula/docs/baking.md).

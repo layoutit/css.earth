@@ -1,4 +1,4 @@
-import { test } from 'vitest';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createEmissionMaterial } from './component-material.ts';
 import { createEmissionField, prepareEmissionComponent, samplePreparedEmissionComponent } from '../fields/emission.ts';

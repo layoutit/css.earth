@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "./sphere-drag.js";
 
 const metrics = { centerX: 704, centerY: 479.5, radius: 295.4867,

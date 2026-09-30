@@ -1,5 +1,7 @@
 import { keplerStateKm } from './kepler.js'
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { hostedBarycentreCompanion, hostedOrbitCentreStateKm, hostedPlanetStateAboutCentreKm, hostedKeplerElements, hostSkyFrame, hostedOrbit, hostedOrbitApoapsisKm, hostedOrbitPhase, hostedOrbitPhaseBmjdTdb, hostedOrbitStateRelativeBmjdTdb, hostedOrbitStateRelativeKm, hostedPlanetStateRelativeKm, HOSTED_PLANET_IDS, type HostedOrbit } from './hostedOrbits.js'
 import { directionFromRaDec, skyBasis, starAstrometry } from './stars.js'
 import { PARSEC_KM } from './index.js'
@@ -26,34 +28,34 @@ describe('hosted orbits', () => {
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
     // Every exoplanet once, in id order, each hosted by a star the universe places: the invariants a batch of hundreds must keep,
     // checked for every id rather than a hand-kept list of them.
-    expect(new Set(EXOPLANET_IDS).size).toBe(EXOPLANET_IDS.length)
-    expect([...EXOPLANET_IDS]).toEqual([...EXOPLANET_IDS].sort())
+    assert.equal(new Set(EXOPLANET_IDS).size, EXOPLANET_IDS.length)
+    assert.deepEqual(([...EXOPLANET_IDS]), [...EXOPLANET_IDS].sort())
     for (const id of EXOPLANET_IDS) {
       const parent = BODIES[id as keyof typeof BODIES].parent
-      expect(parent, `${id} has a host`).not.toBeNull()
-      expect(() => starAstrometry(parent as Parameters<typeof starAstrometry>[0]), `${id}'s host ${String(parent)} is a placed star`).not.toThrow()
+      assert.notEqual(parent, null, `${id} has a host`)
+      assert.doesNotThrow(() => starAstrometry(parent as Parameters<typeof starAstrometry>[0]), `${id}'s host ${String(parent)} is a placed star`)
     }
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added: the first ones stay first.
     const compiled = HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))
-    expect(compiled.slice(0, 11)).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c'])
-    for (const id of [...trappist, ...hd110067, 'wasp-43b', 'hd-189733b', 'wd-1856-534b', 'hr-858b', 'hd-3167c']) expect(EXOPLANET_IDS).toContain(id)
-    for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
-    expect(BODIES['wd-1856-534b' as keyof typeof BODIES].parent).toBe('wd-1856-534')
-    for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
-    expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
-    expect(BODIES['hd-189733b'].parent).toBe('hd-189733')
+    assert.deepEqual(compiled.slice(0, 11), ['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c'])
+    for (const id of [...trappist, ...hd110067, 'wasp-43b', 'hd-189733b', 'wd-1856-534b', 'hr-858b', 'hd-3167c']) assert.ok(EXOPLANET_IDS.includes(id))
+    for (const id of hd110067) assert.equal(BODIES[id as keyof typeof BODIES].parent, 'hd-110067')
+    assert.equal(BODIES['wd-1856-534b' as keyof typeof BODIES].parent, 'wd-1856-534')
+    for (const id of trappist) assert.equal(BODIES[id as keyof typeof BODIES].parent, 'trappist-1')
+    assert.equal(BODIES['wasp-43b'].parent, 'wasp-43')
+    assert.equal(BODIES['hd-189733b'].parent, 'hd-189733')
     // Rp/R* 0.15883 of WASP-43's 0.665 solar radii, 0.155313 of HD 189733 A's 0.752.
-    expect(BODIES['wasp-43b'].meanRadiusKm / hostRadiusKm).toBeCloseTo(0.15883, 6)
-    expect(BODIES['hd-189733b'].meanRadiusKm / BODIES['hd-189733'].meanRadiusKm).toBeCloseTo(0.155313, 6)
+    assert.ok(Math.abs((BODIES['wasp-43b'].meanRadiusKm / hostRadiusKm) - (0.15883)) < 10 ** -6 / 2, `${(BODIES['wasp-43b'].meanRadiusKm / hostRadiusKm)} is not close to ${0.15883}`)
+    assert.ok(Math.abs((BODIES['hd-189733b'].meanRadiusKm / BODIES['hd-189733'].meanRadiusKm) - (0.155313)) < 10 ** -6 / 2, `${(BODIES['hd-189733b'].meanRadiusKm / BODIES['hd-189733'].meanRadiusKm)} is not close to ${0.155313}`)
   })
   it('builds a right-handed observer frame with the node on the sky and +Z toward the observer', () => {
     const star = starAstrometry('wasp-43'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
     const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
     for (const angle of [0, 90, 213]) {
       const { x, y, z } = hostSkyFrame(star, angle)
-      for (let axis = 0; axis < 3; axis++) expect(cross(x, y)[axis]!).toBeCloseTo(z[axis]!, 12)
-      expect(dot(z, sight)).toBeCloseTo(-1, 12)
-      expect(Math.atan2(dot(x, east), dot(x, north)) * 180 / Math.PI).toBeCloseTo(angle > 180 ? angle - 360 : angle, 9)
+      for (let axis = 0; axis < 3; axis++) assert.ok(Math.abs((cross(x, y)[axis]!) - (z[axis]!)) < 10 ** -12 / 2, `${(cross(x, y)[axis]!)} is not close to ${z[axis]!}`)
+      assert.ok(Math.abs(dot(z, sight) - (-1)) < 10 ** -12 / 2, `${dot(z, sight)} is not close to ${-1}`)
+      assert.ok(Math.abs((Math.atan2(dot(x, east), dot(x, north)) * 180 / Math.PI) - (angle > 180 ? angle - 360 : angle)) < 10 ** -9 / 2, `${(Math.atan2(dot(x, east), dot(x, north)) * 180 / Math.PI)} is not close to ${angle > 180 ? angle - 360 : angle}`)
     }
   })
   it('puts the planet in front of the star at mid-transit, a cos i off centre, and behind it half an orbit later', () => {
@@ -62,13 +64,13 @@ describe('hosted orbits', () => {
     const transit = orbit.transitTimeBmjdTdb + 2400000.5 + 7000 * orbit.periodDays
     const inFront = hostedOrbitStateRelativeKm(orbit, star, hostRadiusKm, transit)
     const along = dot(inFront.positionKm, sight)
-    expect(along).toBeLessThan(0)
+    assert.ok(along < 0)
     const skySeparation = Math.hypot(...inFront.positionKm.map((v, axis) => v - along * sight[axis]!)) / hostRadiusKm
     // The impact parameter b = a cos i = 4.8767 cos 82.155 degrees = 0.6655 stellar radii.
-    expect(skySeparation).toBeCloseTo(orbit.semiMajorAxisStellarRadii * Math.cos(orbit.inclinationDegrees * Math.PI / 180), 6)
-    expect(skySeparation).toBeCloseTo(0.6655, 3)
+    assert.ok(Math.abs(skySeparation - (orbit.semiMajorAxisStellarRadii * Math.cos(orbit.inclinationDegrees * Math.PI / 180))) < 10 ** -6 / 2, `${skySeparation} is not close to ${orbit.semiMajorAxisStellarRadii * Math.cos(orbit.inclinationDegrees * Math.PI / 180)}`)
+    assert.ok(Math.abs(skySeparation - (0.6655)) < 10 ** -3 / 2, `${skySeparation} is not close to ${0.6655}`)
     const behind = hostedOrbitStateRelativeKm(orbit, star, hostRadiusKm, transit + orbit.periodDays / 2)
-    expect(dot(behind.positionKm, sight)).toBeGreaterThan(0)
+    assert.ok(dot(behind.positionKm, sight) > 0)
   })
   it('puts each TRAPPIST-1 planet in front of its star at mid-transit, a cos i off centre, and behind it half an orbit later', () => {
     const star = starAstrometry('trappist-1'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
@@ -76,34 +78,34 @@ describe('hosted orbits', () => {
     for (const id of ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h'] as const) {
       const orbit = hostedOrbit(id), transit = orbit.transitTimeBmjdTdb + 2400000.5 + 1000 * orbit.periodDays
       const inFront = hostedOrbitStateRelativeKm(orbit, star, radiusKm, transit), along = dot(inFront.positionKm, sight)
-      expect(along, id).toBeLessThan(0)
+      assert.ok(along < 0, id)
       const skySeparation = Math.hypot(...inFront.positionKm.map((v, axis) => v - along * sight[axis]!)) / radiusKm
-      expect(skySeparation, id).toBeCloseTo(orbit.semiMajorAxisStellarRadii * Math.cos(orbit.inclinationDegrees * Math.PI / 180), 6)
+      assert.ok(Math.abs(skySeparation - (orbit.semiMajorAxisStellarRadii * Math.cos(orbit.inclinationDegrees * Math.PI / 180))) < 10 ** -6 / 2, id)
       // Every planet transits: the impact parameter stays inside the stellar disc.
-      expect(skySeparation, id).toBeLessThan(1)
-      expect(dot(hostedOrbitStateRelativeKm(orbit, star, radiusKm, transit + orbit.periodDays / 2).positionKm, sight), id).toBeGreaterThan(0)
+      assert.ok(skySeparation < 1, id)
+      assert.ok(dot(hostedOrbitStateRelativeKm(orbit, star, radiusKm, transit + orbit.periodDays / 2).positionKm, sight) > 0, id)
     }
   })
   it('moves on a circle at the Keplerian speed with the orbit normal inclined i to the line of sight', () => {
     const orbit = hostedOrbit('wasp-43b'), state = hostedPlanetStateRelativeKm('wasp-43b', 2461286.5)
     const a = orbit.semiMajorAxisStellarRadii * hostRadiusKm
-    expect(state.hostId).toBe('wasp-43')
-    expect(Math.hypot(...state.positionKm) / a).toBeCloseTo(1, 12)
-    expect(Math.hypot(...state.velocityKmPerDay) / (2 * Math.PI * a / orbit.periodDays)).toBeCloseTo(1, 12)
-    expect(dot(state.positionKm, state.velocityKmPerDay) / a ** 2).toBeCloseTo(0, 9)
+    assert.equal(state.hostId, 'wasp-43')
+    assert.ok(Math.abs((Math.hypot(...state.positionKm) / a) - (1)) < 10 ** -12 / 2, `${(Math.hypot(...state.positionKm) / a)} is not close to ${1}`)
+    assert.ok(Math.abs((Math.hypot(...state.velocityKmPerDay) / (2 * Math.PI * a / orbit.periodDays)) - (1)) < 10 ** -12 / 2, `${(Math.hypot(...state.velocityKmPerDay) / (2 * Math.PI * a / orbit.periodDays))} is not close to ${1}`)
+    assert.ok(Math.abs((dot(state.positionKm, state.velocityKmPerDay) / a ** 2) - (0)) < 10 ** -9 / 2, `${(dot(state.positionKm, state.velocityKmPerDay) / a ** 2)} is not close to ${0}`)
     const star = starAstrometry('wasp-43'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
     const normal = cross(state.positionKm, state.velocityKmPerDay), length = Math.hypot(...normal)
     // Inclination is measured from the direction toward the observer, the conventional sense for a transiting planet.
-    expect(Math.acos(-dot(normal, sight) / length) * 180 / Math.PI).toBeCloseTo(orbit.inclinationDegrees, 9)
+    assert.ok(Math.abs((Math.acos(-dot(normal, sight) / length) * 180 / Math.PI) - (orbit.inclinationDegrees)) < 10 ** -9 / 2, `${(Math.acos(-dot(normal, sight) / length) * 180 / Math.PI)} is not close to ${orbit.inclinationDegrees}`)
     // A numerical derivative of the position agrees with the analytic velocity.
     const step = 1e-5, ahead = hostedPlanetStateRelativeKm('wasp-43b', 2461286.5 + step).positionKm, back = hostedPlanetStateRelativeKm('wasp-43b', 2461286.5 - step).positionKm
-    for (let axis = 0; axis < 3; axis++) expect((ahead[axis]! - back[axis]!) / (2 * step) / state.velocityKmPerDay[axis]!).toBeCloseTo(1, 4)
+    for (let axis = 0; axis < 3; axis++) assert.ok(Math.abs(((ahead[axis]! - back[axis]!) / (2 * step) / state.velocityKmPerDay[axis]!) - (1)) < 10 ** -4 / 2, `${((ahead[axis]! - back[axis]!) / (2 * step) / state.velocityKmPerDay[axis]!)} is not close to ${1}`)
   })
   it('counts phase from the transit time in orbits', () => {
     const orbit = hostedOrbit('wasp-43b')
-    expect(hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5)).toBeCloseTo(0, 6)
-    expect(hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5 + 2.5 * orbit.periodDays) / (2 * Math.PI)).toBeCloseTo(2.5, 9)
-    expect(hostedOrbitPhaseBmjdTdb(orbit, orbit.transitTimeBmjdTdb + 2.5 * orbit.periodDays) / (2 * Math.PI)).toBeCloseTo(2.5, 9)
+    assert.ok(Math.abs(hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5) - (0)) < 10 ** -6 / 2, `${hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5)} is not close to ${0}`)
+    assert.ok(Math.abs((hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5 + 2.5 * orbit.periodDays) / (2 * Math.PI)) - (2.5)) < 10 ** -9 / 2, `${(hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5 + 2.5 * orbit.periodDays) / (2 * Math.PI))} is not close to ${2.5}`)
+    assert.ok(Math.abs((hostedOrbitPhaseBmjdTdb(orbit, orbit.transitTimeBmjdTdb + 2.5 * orbit.periodDays) / (2 * Math.PI)) - (2.5)) < 10 ** -9 / 2, `${(hostedOrbitPhaseBmjdTdb(orbit, orbit.transitTimeBmjdTdb + 2.5 * orbit.periodDays) / (2 * Math.PI))} is not close to ${2.5}`)
   })
   it('reproduces the analytic circle to rounding on every circular hosted orbit, through the shared Kepler propagator', () => {
     for (const id of HOSTED_PLANET_IDS.filter(id => hostedOrbit(id).eccentricity === 0)) {
@@ -119,8 +121,8 @@ describe('hosted orbits', () => {
       const state = hostedOrbitStateRelativeKm(orbit, host, radiusKm, epochJdTt), position = toIcrf(local), velocity = toIcrf(localVelocity)
       const miss = (a: readonly number[], b: readonly number[]) => Math.hypot(...a.map((v, i) => v - b[i]!)) / Math.hypot(...b)
       // Measured 4e-13 to 1.4e-12 for the thirteen shipped planets: float rounding in a different order of operations.
-      expect(miss(state.positionKm, position), id).toBeLessThan(1e-11)
-      expect(miss(state.velocityKmPerDay, velocity), id).toBeLessThan(1e-11)
+      assert.ok(miss(state.positionKm, position) < 1e-11, id)
+      assert.ok(miss(state.velocityKmPerDay, velocity) < 1e-11, id)
     }
   })
   it('is an ordinary Kepler element set: keplerStateKm on hostedKeplerElements gives every hosted planet its state', () => {
@@ -131,10 +133,10 @@ describe('hosted orbits', () => {
       const viaKepler = keplerStateKm(elements, epochJdTt), hosted = hostedOrbitStateRelativeKm(orbit, host, radiusKm, epochJdTt)
       // The elements carry a Julian Date epoch; one rounding step of a 2.46-million-day JD times WASP-43b's 7.7 rad/day mean motion is
       // 1.35e-9 of its orbit, 3 mm. The state function keeps its epochs in BMJD and does not pay it.
-      expect(Math.hypot(...viaKepler.positionKm.map((v, i) => v - hosted.positionKm[i]!)) / Math.hypot(...hosted.positionKm), id).toBeLessThan(1e-8)
-      expect(elements.meanMotionRadPerDay, id).toBe(2 * Math.PI / orbit.periodDays)
-      expect(elements.semiMajorAxisKm, id).toBe(orbit.semiMajorAxisStellarRadii * radiusKm)
-      expect(elements.eccentricity, id).toBe(orbit.eccentricity)
+      assert.ok((Math.hypot(...viaKepler.positionKm.map((v, i) => v - hosted.positionKm[i]!)) / Math.hypot(...hosted.positionKm)) < 1e-8, id)
+      assert.equal(elements.meanMotionRadPerDay, 2 * Math.PI / orbit.periodDays, id)
+      assert.equal(elements.semiMajorAxisKm, orbit.semiMajorAxisStellarRadii * radiusKm, id)
+      assert.equal(elements.eccentricity, orbit.eccentricity, id)
     }
   })
   it('propagates an eccentric orbit periodically with variable radius and speed', () => {
@@ -146,17 +148,17 @@ describe('hosted orbits', () => {
     const periapsisBmjd = eccentricOrbit.transitTimeBmjdTdb - meanAnomaly0 * eccentricOrbit.periodDays / (2 * Math.PI)
     const periapsis = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, star, hostRadiusKm, periapsisBmjd)
     const apoapsis = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, star, hostRadiusKm, periapsisBmjd + eccentricOrbit.periodDays / 2)
-    expect(Math.hypot(...periapsis.positionKm)).toBeCloseTo(a * (1 - e), 8)
-    expect(Math.hypot(...apoapsis.positionKm)).toBeCloseTo(a * (1 + e), 8)
-    expect(Math.hypot(...periapsis.velocityKmPerDay) / Math.hypot(...apoapsis.velocityKmPerDay)).toBeCloseTo((1 + e) / (1 - e), 10)
-    expect(hostedOrbitApoapsisKm(eccentricOrbit, hostRadiusKm)).toBeCloseTo(Math.hypot(...apoapsis.positionKm), 8)
+    assert.ok(Math.abs(Math.hypot(...periapsis.positionKm) - (a * (1 - e))) < 10 ** -8 / 2, `${Math.hypot(...periapsis.positionKm)} is not close to ${a * (1 - e)}`)
+    assert.ok(Math.abs(Math.hypot(...apoapsis.positionKm) - (a * (1 + e))) < 10 ** -8 / 2, `${Math.hypot(...apoapsis.positionKm)} is not close to ${a * (1 + e)}`)
+    assert.ok(Math.abs((Math.hypot(...periapsis.velocityKmPerDay) / Math.hypot(...apoapsis.velocityKmPerDay)) - ((1 + e) / (1 - e))) < 10 ** -10 / 2, `${(Math.hypot(...periapsis.velocityKmPerDay) / Math.hypot(...apoapsis.velocityKmPerDay))} is not close to ${(1 + e) / (1 - e)}`)
+    assert.ok(Math.abs(hostedOrbitApoapsisKm(eccentricOrbit, hostRadiusKm) - (Math.hypot(...apoapsis.positionKm))) < 10 ** -8 / 2, `${hostedOrbitApoapsisKm(eccentricOrbit, hostRadiusKm)} is not close to ${Math.hypot(...apoapsis.positionKm)}`)
     const repeated = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, star, hostRadiusKm, periapsisBmjd + 7 * eccentricOrbit.periodDays)
-    for (let axis = 0; axis < 3; axis++) expect(repeated.positionKm[axis]!).toBeCloseTo(periapsis.positionKm[axis]!, 7)
+    for (let axis = 0; axis < 3; axis++) assert.ok(Math.abs((repeated.positionKm[axis]!) - (periapsis.positionKm[axis]!)) < 10 ** -7 / 2, `${(repeated.positionKm[axis]!)} is not close to ${periapsis.positionKm[axis]!}`)
   })
   it('uses inferior conjunction for the eccentric epoch and keeps sky orientation separate', () => {
     const star = starAstrometry('wasp-43'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
     const inFront = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, star, hostRadiusKm, eccentricOrbit.transitTimeBmjdTdb)
-    expect(dot(inFront.positionKm, sight)).toBeLessThan(0)
+    assert.ok(dot(inFront.positionKm, sight) < 0)
     const omega = eccentricOrbit.argumentOfPeriapsisDegrees! * Math.PI / 180, e = eccentricOrbit.eccentricity
     const beta = Math.sqrt(1 - e * e), fBehind = 3 * Math.PI / 2 - omega
     const eBehind = Math.atan2(beta * Math.sin(fBehind), e + Math.cos(fBehind))
@@ -166,10 +168,10 @@ describe('hosted orbits', () => {
     const mFront = eFront - e * Math.sin(eFront)
     const elapsedMean = ((mBehind - mFront) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI)
     const behindTime = eccentricOrbit.transitTimeBmjdTdb + elapsedMean * eccentricOrbit.periodDays / (2 * Math.PI)
-    expect(dot(hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, star, hostRadiusKm, behindTime).positionKm, sight)).toBeGreaterThan(0)
+    assert.ok(dot(hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, star, hostRadiusKm, behindTime).positionKm, sight) > 0)
     const rotated = hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, ascendingNodePositionAngleDegrees: 137 }, star, hostRadiusKm, eccentricOrbit.transitTimeBmjdTdb)
-    expect(Math.abs(Math.hypot(...rotated.positionKm) / Math.hypot(...inFront.positionKm) - 1)).toBeLessThan(1e-13)
-    expect(dot(rotated.positionKm, sight)).toBeCloseTo(dot(inFront.positionKm, sight), 8)
+    assert.ok(Math.abs(Math.hypot(...rotated.positionKm) / Math.hypot(...inFront.positionKm) - 1) < 1e-13)
+    assert.ok(Math.abs(dot(rotated.positionKm, sight) - (dot(inFront.positionKm, sight))) < 10 ** -8 / 2, `${dot(rotated.positionKm, sight)} is not close to ${dot(inFront.positionKm, sight)}`)
   })
   it('returns analytic eccentric velocity independent of host RA and Dec', () => {
     const epoch = eccentricOrbit.transitTimeBmjdTdb + 1.37
@@ -177,7 +179,7 @@ describe('hosted orbits', () => {
       const state = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, host, hostRadiusKm, epoch), step = 1e-5
       const ahead = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, host, hostRadiusKm, epoch + step).positionKm
       const back = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, host, hostRadiusKm, epoch - step).positionKm
-      for (let axis = 0; axis < 3; axis++) expect((ahead[axis]! - back[axis]!) / (2 * step) / state.velocityKmPerDay[axis]!).toBeCloseTo(1, 5)
+      for (let axis = 0; axis < 3; axis++) assert.ok(Math.abs(((ahead[axis]! - back[axis]!) / (2 * step) / state.velocityKmPerDay[axis]!) - (1)) < 10 ** -5 / 2, `${((ahead[axis]! - back[axis]!) / (2 * step) / state.velocityKmPerDay[axis]!)} is not close to ${1}`)
     }
   })
   it('places the imaged planets of Beta Pictoris where GRAVITY and the discovery astrometry measured them', () => {
@@ -199,7 +201,7 @@ describe('hosted orbits', () => {
       let sum = 0
       for (const [mjd, dra, ddec] of points) { const [x, y] = skyMas(id, mjd); sum += (x! - dra) ** 2 + (y! - ddec) ** 2 }
       // The medians of a posterior reproduce the fitted points to a few milliarcseconds, against orbits 140 to 510 mas across.
-      expect(Math.sqrt(sum / points.length), id).toBeLessThan(3)
+      assert.ok(Math.sqrt(sum / points.length) < 3, id)
     }
     const mjdOf = (iso: string) => Date.parse(`${iso}T00:00:00Z`) / 86400000 + 40587
     const d = [['2014-12-08', 375, 208.0, 20, 2.0], ['2019-03-11', 719, 209.6, 12, 1.0], ['2020-02-08', 784, 209.4, 15, 1.0], ['2023-03-18', 1012, 210.4, 20, 1.0], ['2025-03-22', 1104, 211.1, 20, 1.0], ['2025-12-03', 1126.9, 210.35, 3.9, 0.22]] as const
@@ -209,7 +211,7 @@ describe('hosted orbits', () => {
       chi2 += ((sep - separation) / sigmaSeparation) ** 2 + ((pa - positionAngle) / sigmaAngle) ** 2
     }
     // A circular display orbit at the published semi-major axis, node and inclination, phased to the six epochs: chi-squared 12.5 for 11 degrees of freedom.
-    expect(chi2).toBeLessThan(14)
+    assert.ok(chi2 < 14)
   })
   it('places ε Eridani b where Thompson et al. put it: at its greatest separation, south of the star, in December 2024', () => {
     // Thompson et al. (2025, AJ 170, 301; arXiv:2502.20561), section 4: the radial velocities alone put the planet on a ring of
@@ -226,12 +228,12 @@ describe('hosted orbits', () => {
       return { separation: Math.hypot(x!, y!), positionAngle: ((Math.atan2(x!, y!) * 180 / Math.PI) + 360) % 360 }
     }
     const opposition = sky('2024-12-07')
-    expect(Math.abs(opposition.separation - 1071)).toBeLessThan(58)
-    expect(Math.abs(opposition.positionAngle - 186)).toBeLessThan(9)
+    assert.ok(Math.abs(opposition.separation - 1071) < 58)
+    assert.ok(Math.abs(opposition.positionAngle - 186) < 9)
     // Counterclockwise: the position angle grows through 2025, and half a period later the planet is north of the star.
-    expect(sky('2025-07-01').positionAngle).toBeGreaterThan(sky('2025-01-01').positionAngle)
+    assert.ok(sky('2025-07-01').positionAngle > sky('2025-01-01').positionAngle)
     const later = sky('2028-08-01').positionAngle
-    expect(Math.min(later, 360 - later)).toBeLessThan(15)
+    assert.ok(Math.min(later, 360 - later) < 15)
   })
   it('places Luhman 16 B where Garcia et al. measured it from A, and moves it at their relative radial velocities', () => {
     // Garcia et al. (2017, ApJ 846, 97; arXiv:1708.02714), Table 3: GeMS orbital astrometry of B from A, (dRA, dDec) in mas at MJD, with
@@ -248,13 +250,13 @@ describe('hosted orbits', () => {
       sum += (x! - dra) ** 2 + (y! - ddec) ** 2
     }
     // Measured 2026-09-23: 2.6 mas rms against a separation of about 1,100 mas; the unmapped angles miss by 248 mas.
-    expect(Math.sqrt(sum / gems.length)).toBeLessThan(4)
+    assert.ok(Math.sqrt(sum / gems.length) < 4)
     for (const [mjd, deltaV] of [[56417.5, 2740], [56779.5, 1940], [56797.5, 1850]] as const) {
       // v_A - v_B is minus B's recession relative to A. Measured 2026-09-23: 2448, 1752 and 1707 m/s, within 1.5 sigma of each; the
       // mirror-image orbit that fits the positions as well gives the opposite sign.
       const v = hostedOrbitStateRelativeKm(hostedOrbit('luhman-16b'), star, radiusKm, mjd + 2400000.5).velocityKmPerDay
       const recession = dot(v, toward) / 86400 * 1000
-      expect(Math.abs(-recession - deltaV), `${mjd}`).toBeLessThan(1.5 * 200)
+      assert.ok(Math.abs(-recession - deltaV) < 1.5 * 200, `${mjd}`)
     }
   })
   it('places the four planets of HR 8799 where JWST measured them after the fit', () => {
@@ -271,10 +273,10 @@ describe('hosted orbits', () => {
       const miss = Math.hypot(x! - dra, y! - ddec)
       // Measured 2026-09-23: b 14.4, c 10.3, d 12.3, e 4.8 mas. c and d miss in declination by 2.5 to 3.4 of the paper's own
       // sigmas (3 and 5 mas, the scatter between filters); every planet misses by under 2% of its separation from the star.
-      expect(miss, id).toBeLessThan(15)
+      assert.ok(miss < 15, id)
       sum += miss ** 2
     }
-    expect(Math.sqrt(sum / 4)).toBeLessThan(12)
+    assert.ok(Math.sqrt(sum / 4) < 12)
   })
   it('places 51 Eridani b where JWST measured it, moving away from us as HiRISE measured', () => {
     // Balmer et al. (2025), Table 2: (dRA, dDec) = (286 +/- 10, -99 +/- 4) mas on MJD 60235.25. Denis et al. (2026), Table 1: the planet's
@@ -284,11 +286,11 @@ describe('hosted orbits', () => {
     const p = hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, 60235.25).positionKm, distanceKm = star.distanceParsecs * PARSEC_KM
     const [x, y] = [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000)
     // Measured 2026-09-23: (279, -107), 11 mas from the JWST position.
-    expect(Math.hypot(x! - 286, y! + 99)).toBeLessThan(15)
+    assert.ok(Math.hypot(x! - 286, y! + 99) < 15)
     const mjdOf = (iso: string) => Date.parse(`${iso}T00:00:00Z`) / 86400000 + 40587
     for (const [date, measured, sigma] of [['2023-11-21', 1.72, 1.99], ['2024-12-01', 4.24, 2.01], ['2025-02-03', 2.75, 2.9], ['2025-09-11', 4.12, 0.9]] as const) {
       const velocity = dot(hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, mjdOf(date)).velocityKmPerDay, sight) / 86400
-      expect(Math.abs(velocity - measured), date).toBeLessThan(2 * sigma)
+      assert.ok(Math.abs(velocity - measured) < 2 * sigma, date)
     }
   })
   it('places PDS 70 b and c where GRAVITY measured them, on orbits whose near side is the disc\'s', () => {
@@ -313,8 +315,8 @@ describe('hosted orbits', () => {
     // The posterior medians of the "Stable (incl. N-body)" column. Measured 2026-09-23: b 11.6 mas from its one GRAVITY epoch, c within 1.2 mas
     // of all seven, against orbits 370 and 600 mas across. Of the paper's three columns this one has the smallest summed miss over the eight
     // points (4.2 mas RMS; the coplanar and stable columns give 4.7, with b within 1.5 and 2.3 mas but c 5.4 and 5.2 mas off).
-    expect(misses['pds-70-b']).toBeLessThan(12)
-    expect(misses['pds-70-c']).toBeLessThan(2)
+    assert.ok(misses['pds-70-b'] < 12)
+    assert.ok(misses['pds-70-c'] < 2)
     // Keppler et al. (2018, A&A 617, A44), section 3.3: the disc's west side is its near side; the planets move clockwise, the disc's own
     // sense of rotation (their section 5). Astrometry alone cannot say which half of an orbit is nearer; the published orbits put it west too.
     for (const id of ['pds-70-b', 'pds-70-c'] as const) {
@@ -325,11 +327,11 @@ describe('hosted orbits', () => {
         const toward = -dot(p, sight)
         if (toward > nearest.toward) nearest = { toward, pa: ((Math.atan2(dot(p, east), dot(p, north)) * 180 / Math.PI) + 360) % 360 }
       }
-      expect(nearest.pa, `${id} near side`).toBeGreaterThan(180)
-      expect(nearest.pa, `${id} near side`).toBeLessThan(340)
+      assert.ok(nearest.pa > 180, `${id} near side`)
+      assert.ok(nearest.pa < 340, `${id} near side`)
       const [x0, y0] = skyMas(id, 59631.28), [x1, y1] = skyMas(id, 59631.28 + 365)
       // Clockwise on the sky is position angle decreasing, a positive cross product in (east, north).
-      expect(x0 * y1 - y0 * x1, `${id} clockwise`).toBeGreaterThan(0)
+      assert.ok((x0 * y1 - y0 * x1) > 0, `${id} clockwise`)
     }
   })
   /** Separation (mas) and position angle (degrees east of north) of a hosted body from its parent at an epoch in decimal Julian years. */
@@ -358,7 +360,7 @@ describe('hosted orbits', () => {
         worst = Math.max(worst, Math.abs(model.separation - separation!) / sigmaSeparation!, Math.abs(angleMiss(model.angle, angle!)) / sigmaAngle!)
       }
       // Measured 2026-09-23, the worst point in its own sigmas: VHS 1256-1257 B 2.1, ROXs 42B B 2.1 (posterior medians, not a fit here).
-      expect(worst, id).toBeLessThan(3)
+      assert.ok(worst < 3, id)
     }
   })
   it('places each young imaged planet where its latest paper measured it', () => {
@@ -385,20 +387,20 @@ describe('hosted orbits', () => {
         worst = Math.max(worst, Math.abs(d[0]! * unit[0]! + d[1]! * unit[1]!) / sigma!, Math.abs(d[0]! * unit[1]! - d[1]! * unit[0]!) / across!)
       }
       // Measured 2026-09-23: VHS 1256-1257 b 0.97, DH Tau b 1.60, ROXs 42B b 0.75, each the worst point in its own errors.
-      expect(worst, id).toBeLessThan(2)
+      assert.ok(worst < 2, id)
     }
     // GQ Lup b against the four VLTI/GRAVITY positions, whose errors (0.03 to 0.15 mas) are far below what the literature positions
     // allow: under 0.6 mas at worst, against a separation of 709 mas.
     for (const [year, east, north] of [[2023.2129, -698.969, 114.058], [2022.6814, -699.789, 112.615], [2022.6185, -699.876, 112.491], [2021.6572, -702.069, 110.363]] as const) {
       const model = offset('gq-lup-b', year)
-      expect(Math.hypot(model[0] - east, model[1] - north), `gq-lup-b ${year}`).toBeLessThan(0.6)
+      assert.ok(Math.hypot(model[0] - east, model[1] - north) < 0.6, `gq-lup-b ${year}`)
     }
     // The CRIRES+ radial velocity of the companion relative to the star, 2.03 +/- 0.04 km/s on MJD 60003 (Gonzalez Picos et al. 2025,
     // via Venkatesan et al. 2025, Table 4), was not in the fit. Measured 2026-09-23: 1.67 km/s, receding as measured; the 0.36 km/s gap is
     // the size of the star's own velocity jitter (0.4 km/s, Donati et al. 2012) that led Venkatesan et al. to fit the CRIRES value instead.
     const star = starAstrometry('gq-lup'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
     const velocity = dot(hostedOrbitStateRelativeBmjdTdb(hostedOrbit('gq-lup-b'), star, BODIES['gq-lup'].meanRadiusKm, 60003).velocityKmPerDay, sight) / 86400
-    expect(velocity).toBeGreaterThan(0)
+    assert.ok(velocity > 0)
   })
   it('places HIP 65426 b, AF Lep b and AB Pic b where their orbit papers measured them', () => {
     /** Offset of a planet from its star at an MJD, east and north in mas, at the star's Gaia distance. */
@@ -420,8 +422,8 @@ describe('hosted orbits', () => {
     }
     // Measured 2026-09-23 at the stars' Gaia distances: HIP 65426 b 0.09 mas, AF Lep b 0.32 mas at worst,
     // against separations of 820 and 323 mas.
-    expect(misses['hip-65426-b']).toBeLessThan(0.1)
-    expect(misses['af-lep-b']).toBeLessThan(0.35)
+    assert.ok(misses['hip-65426-b'] < 0.1)
+    assert.ok(misses['af-lep-b'] < 0.35)
     // AB Pic b: Palma-Bifani et al. (2023), Table 1, NaCo and SPHERE (MJD, separation mas, sigma, position angle deg, sigma).
     let worst = 0
     for (const [mjd, separation, sigmaSeparation, angle, sigmaAngle] of [[52717.7, 5460, 14, 175.33, 0.18], [53070.9, 5450, 16, 175.13, 0.21],
@@ -430,7 +432,7 @@ describe('hosted orbits', () => {
       worst = Math.max(worst, Math.abs(Math.hypot(x, y) - separation) / sigmaSeparation, Math.abs(angleMiss(modelAngle, angle)) / sigmaAngle)
     }
     // Measured 2026-09-23: 0.68 of its own sigmas at worst.
-    expect(worst).toBeLessThan(1)
+    assert.ok(worst < 1)
   })
   it('places Epsilon Indi Ab where JWST imaged it', () => {
     const star = starAstrometry('eps-indi-a'), radiusKm = BODIES['eps-indi-a'].meanRadiusKm, orbit = hostedOrbit('eps-indi-ab')
@@ -445,7 +447,7 @@ describe('hosted orbits', () => {
       worst = Math.max(worst, Math.abs(Math.hypot(x, y) - separation) / sigmaSeparation, Math.abs(angleMiss(modelAngle, angle)) / sigmaAngle)
     }
     // Measured 2026-09-23: 1.86 of its own sigmas at worst (the 2023 separation), against a separation of 3.6 arcseconds.
-    expect(worst).toBeLessThan(2)
+    assert.ok(worst < 2)
   })
   it('places Epsilon Indi Bb around Ba where VLT/NACO measured it', () => {
     // Chen et al. (2022), Table 3 [decimal year, separation mas, sigma, position angle deg, sigma], across the orbit including the
@@ -457,7 +459,7 @@ describe('hosted orbits', () => {
       worst = Math.max(worst, Math.abs(model.separation - separation) / sigmaSeparation, Math.abs(angleMiss(model.angle, angle)) / sigmaAngle)
     }
     // Measured 2026-09-23: 2.2 of its own sigmas at worst, with Ba at Epsilon Indi A's distance rather than the fit's parallax.
-    expect(worst).toBeLessThan(2.5)
+    assert.ok(worst < 2.5)
   })
   it('places HD 206893 B and c, HD 95086 b, GJ 504 b and HD 135344 Ab where their papers measured them', () => {
     /** Offset of a companion from its star at an MJD, east and north in mas, at the star's Gaia distance. */
@@ -479,10 +481,10 @@ describe('hosted orbits', () => {
       'hd-95086-b': worstMiss('hd-95086-b', [[58124, 351, -514], [58586, 368, -508]]),
     }
     // Measured 2026-09-23: B 1.03, c 0.52, Ab 0.30 and HD 95086 b 5.1 mas at worst.
-    expect(measuredMiss['hd-206893-b']).toBeLessThan(1.1)
-    expect(measuredMiss['hd-206893-c']).toBeLessThan(0.55)
-    expect(measuredMiss['hd-135344-ab']).toBeLessThan(0.35)
-    expect(measuredMiss['hd-95086-b']).toBeLessThan(5.5)
+    assert.ok(measuredMiss['hd-206893-b'] < 1.1)
+    assert.ok(measuredMiss['hd-206893-c'] < 0.55)
+    assert.ok(measuredMiss['hd-135344-ab'] < 0.35)
+    assert.ok(measuredMiss['hd-95086-b'] < 5.5)
     // GJ 504 b: Bonnefoy et al. (2018), Table 2, the SPHERE positions (MJD, separation mas, sigma, position angle deg, sigma).
     let worst = 0
     for (const [mjd, separation, sigmaSeparation, angle, sigmaAngle] of [[57147, 2491, 3, 323.46, 0.07], [57176, 2496, 3, 323.50, 0.07], [57478, 2495, 2, 322.48, 0.05], [57794, 2493, 3, 321.74, 0.08]] as const) {
@@ -490,7 +492,7 @@ describe('hosted orbits', () => {
       worst = Math.max(worst, Math.abs(Math.hypot(x, y) - separation) / sigmaSeparation, Math.abs(angleMiss(modelAngle, angle)) / sigmaAngle)
     }
     // Measured 2026-09-23: 2.35 of its own sigmas at worst.
-    expect(worst).toBeLessThan(2.5)
+    assert.ok(worst < 2.5)
   })
   it('places YSES 1 b where GRAVITY measured it, moving toward us as CRIRES+ measured', () => {
     const star = starAstrometry('yses-1'), radiusKm = BODIES['yses-1'].meanRadiusKm, orbit = hostedOrbit('yses-1-b')
@@ -504,20 +506,20 @@ describe('hosted orbits', () => {
       worst = Math.max(worst, Math.hypot(x - dra, y - ddec))
     }
     // Measured 2026-09-23: 0.32 mas at worst, against a separation of 1,700 mas.
-    expect(worst).toBeLessThan(0.35)
+    assert.ok(worst < 0.35)
     // Zhang et al. (2024), section 5.5: the planet moves -1.87 +/- 0.04 km/s relative to the star (MJD 60002.5, the midpoint of the two nights).
     const velocity = dot(hostedOrbitStateRelativeBmjdTdb(orbit, star, radiusKm, 60002.5).velocityKmPerDay, sight) / 86400
-    expect(Math.abs(velocity + 1.87)).toBeLessThan(0.04)
+    assert.ok(Math.abs(velocity + 1.87) < 0.04)
   })
   it('rejects incomplete or non-finite eccentric inputs', () => {
     const star = starAstrometry('wasp-43')
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: undefined }, star, hostRadiusKm, 60000)).toThrow(/requires argumentOfPeriapsis/)
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, epochDefinition: undefined }, star, hostRadiusKm, 60000)).toThrow(/epochDefinition/)
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, eccentricity: 1 }, star, hostRadiusKm, 60000)).toThrow(/eccentricity/)
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: Number.NaN }, star, hostRadiusKm, 60000)).toThrow(/argumentOfPeriapsis/)
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, inclinationDegrees: 181 }, star, hostRadiusKm, 60000)).toThrow(/inclination/)
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, ascendingNodePositionAngleDegrees: 360 }, star, hostRadiusKm, 60000)).toThrow(/ascendingNode/)
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: -1 }, star, hostRadiusKm, 60000)).toThrow(/argumentOfPeriapsis/)
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, semiMajorAxisStellarRadii: 1.5 }, star, hostRadiusKm, 60000)).toThrow(/stellar surface/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: undefined }, star, hostRadiusKm, 60000), /requires argumentOfPeriapsis/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, epochDefinition: undefined }, star, hostRadiusKm, 60000), /epochDefinition/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, eccentricity: 1 }, star, hostRadiusKm, 60000), /eccentricity/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: Number.NaN }, star, hostRadiusKm, 60000), /argumentOfPeriapsis/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, inclinationDegrees: 181 }, star, hostRadiusKm, 60000), /inclination/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, ascendingNodePositionAngleDegrees: 360 }, star, hostRadiusKm, 60000), /ascendingNode/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, argumentOfPeriapsisDegrees: -1 }, star, hostRadiusKm, 60000), /argumentOfPeriapsis/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, semiMajorAxisStellarRadii: 1.5 }, star, hostRadiusKm, 60000), /stellar surface/)
   })
 })

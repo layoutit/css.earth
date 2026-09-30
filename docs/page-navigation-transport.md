@@ -177,7 +177,7 @@ After building the packages and renderer, check page metadata with:
 
 ```sh
 node --test site/test/object-page-data.test.mts
-pnpm test:renderer   # includes rendering/prepared-scene-serialization.test.ts
+pnpm test:packages   # includes rendering/prepared-scene-serialization.test.ts
 node --test site/test/rendered-page.test.mts
 node --test site/test/search-response.test.mts
 node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts

@@ -148,37 +148,6 @@ jobs:
         # Parses every object and facility ledger and the shared records they quote (packages/bake/src/sources), through the
         # report the contract names, so an empty ledger, a check without its commit or a relative evidence path fails here.
         run: pnpm check:investigations
-      - name: Test the shared object libraries
-        # The node tests of @cssearth/bake/objects/<topic> sit beside the authoring scripts in packages/*/authoring/, or beside
-        # their module in packages/bake/src/objects/, which no other PR step runs; .github/scripts/checks/test-bake-objects.mts selects
-        # every test that imports an object entry, and unrestored downloads skip.
-        # They read the generated solar geometry built above and five tracked geology shapefiles (5.4 MB) the sparse tree leaves out.
-        run: |
-          git sparse-checkout add '/src/objects/**/*.shp'
-          pnpm test:bake-objects
-      - name: Test the telescope command
-        # Every node test of @cssearth/telescope-cli (query, sessions, families, archive leads, the process boundary), selected by
-        # location rather than by what it imports; a test whose toolchain or restored input is absent skips and names it.
-        run: pnpm test:telescope-cli
-      - name: Check independent body additions
-        run: node --test site/test/body-additions.test.mts
-      - name: Test the object generator
-        # new-object's decisions offline (ids, duplicates, refresh, colour, orbits); the heavy preparation lane also runs it, but
-        # only when preparation paths change.
-        run: node --test packages/telescope-cli/src/new-object/new-object.test.mts
-      - name: Test asset inventory, publish verification, closure and local CI tooling
-        # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
-        # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
-        # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
-        # path (site/test/setup-assets.test.mts — the only place it ran before was the non-CI test:platform), the prune
-        # dry-run report, the runner behind `pnpm check:pr`, and the test helper that decides which absent inputs skip (untracked
-        # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
-        # which this workflow does not run. Native filename families include newly added CI/asset checks.
-        run: |
-          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" site/test/restore-inputs.test.mts site/test/setup-assets.test.mts "packages/bake/src/asset-publication/*.test.mts" \
-            packages/bake/src/delivery/publish-verification.test.mts packages/bake/src/delivery/source-acquisition.test.mts packages/bake/src/delivery/asset-origin-scenes.test.mts packages/bake/src/preparation/stale-builds.test.mts \
-            packages/objects/src/node/provenance/dataset-destination.test.mts packages/objects/src/node/runtime-asset-closure.test.mts \
-            packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts
 
   typecheck:
     name: Typecheck
@@ -305,7 +274,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [runtime, shell, renderer]
+        lane: [packages, site]
     env:
       CI_UNIVERSE_LANE: ${{ matrix.lane }}
     needs: changes
@@ -344,12 +313,7 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-        run: |
-          if [ "$CI_UNIVERSE_LANE" = shell ]; then
-            node .github/scripts/ci/build-ci.mts full
-          else
-            node .github/scripts/ci/build-ci.mts full
-          fi
+        run: node .github/scripts/ci/build-ci.mts full
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
@@ -371,17 +335,18 @@ jobs:
           # Rebuild all three context files together from this checkout's catalogue before testing it.
           pnpm prepare:world-context
           node site/build/prepare/prepare-feature-index.mts
-      - name: Test the selected universe lane
-        # Each runner owns its writers and CPU budget. Native runner discovery is unchanged.
+      - name: Test the selected folder lane
+        # `test:packages` runs every test under packages/; `test:site` runs site/, src/, integration/ and .github/.
+        # A test whose restored input this job leaves out skips through sourceTest() and names it.
         run: |
-          case "$CI_UNIVERSE_LANE" in
-            runtime|shell|renderer)
-              node site/build/prepare/prepare-facilities.mts --catalog-only
-              pnpm "test:universe:$CI_UNIVERSE_LANE"
-              ;;
-            *) echo "Unknown universe lane" >&2; exit 1 ;;
-          esac
-
+          node site/build/prepare/prepare-facilities.mts --catalog-only
+          if [ "$CI_UNIVERSE_LANE" = packages ]; then
+            git sparse-checkout add '/src/objects/**/*.shp'
+            node packages/bake/cli/restore-source-inputs.mts --repository-volumes
+          else
+            pnpm typecheck:oracles
+          fi
+          pnpm "test:$CI_UNIVERSE_LANE"
   universe:
     name: Prepared universe and shared renderer
     needs: [changes, universe-checks]
@@ -454,8 +419,7 @@ jobs:
           case "$CI_PREPARATION_LANE" in
             publication)
               pnpm exec playwright install --with-deps --only-shell chromium
-              node --test --test-concurrency=1 packages/bake/src/delivery/publication.test.mts \
-                packages/bake/src/delivery/write-prepared-set.test.mts
+              pnpm test:run --test-concurrency=1 "packages/bake/src/delivery/*.test.{ts,mts}"
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
           esac
@@ -521,11 +485,6 @@ jobs:
         run: pnpm -r --filter "./packages/**" build
       - name: Restore repository volume inputs used by provenance closure
         run: node packages/bake/cli/restore-source-inputs.mts --repository-volumes
-      - name: Test the object registry, adapter and bake packages
-        # 802 tests, ~6 s local; never ran in CI before (output/TEST_AUDIT.md section 1.5). Needs only the build
-        # above, so it runs here rather than adding another checkout+install in Contract lint. It includes the
-        # @cssearth/bake volume tests that were lab tests; one replays m42's compact inputs, restored above.
-        run: pnpm test:packages
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps --only-shell chromium
       - name: Check all nebula packages and tests

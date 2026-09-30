@@ -1,5 +1,7 @@
 import { readFile } from 'node:fs/promises';
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parsePreparedObjectRuntime } from './index.js';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 
@@ -18,13 +20,13 @@ prepared.depthPartitions = { groups, order: { plane: [1, 0, 0, 0], back: { group
 prepared.tree.activationGroups = prepareActivationGroups(prepared);
 
 test('the published package and explicit grouped carriers validate before DOM construction', () => {
-  expect(parsePreparedObjectRuntime(source)).toBe(source);
+  assert.equal(parsePreparedObjectRuntime(source), source);
   const plan = parsePreparedObjectRuntime(prepared);
-  expect(plan.depthPartitions?.groups.length).toBeGreaterThan(1);
-  expect(plan.tree.camera).toBe(source.tree.camera);
+  assert.ok(plan.depthPartitions?.groups.length > 1);
+  assert.equal(plan.tree.camera, source.tree.camera);
 });
 
-test.each([
+for (const { mutate } of [
   { name: 'scene root used as depth owner', mutate: (plan: typeof prepared) => { plan.depthPartitions.groups[0].root = plan.tree.scene; } },
   { name: 'duplicated depth owner', mutate: (plan: typeof prepared) => { plan.depthPartitions.groups[1] = plan.depthPartitions.groups[0]; } },
   { name: 'group omitted from depth order', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { group: 0 }; } },
@@ -32,13 +34,13 @@ test.each([
   { name: 'duplicated group in depth sequence', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { sequence: [{ group: 0 }, { group: 0 }] }; } },
   { name: 'same group on both sides of separating plane', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { plane: [0,0,1,0], back: { group: 0 }, front: { group: 0 } }; } },
   { name: 'non-unit separating plane', mutate: (plan: typeof prepared) => { plan.depthPartitions.order.plane = [0,0,2,0]; } },
-])('transport rejects $name', ({ mutate }) => {
+]) test(`transport rejects $name`, () => {
   const plan = structuredClone(prepared); mutate(plan);
-  expect(() => parsePreparedObjectRuntime(plan)).toThrow(/depth/);
+  assert.throws(() => parsePreparedObjectRuntime(plan), /depth/);
 });
 
 test('fixed visibility sequences cover every retained carrier', () => {
   const plan = structuredClone(prepared);
   plan.depthPartitions.order = { sequence: plan.depthPartitions.groups.map((_: unknown, group: number) => ({ group })) };
-  expect(parsePreparedObjectRuntime(plan).depthPartitions?.groups.length).toBe(plan.depthPartitions.groups.length);
+  assert.equal(parsePreparedObjectRuntime(plan).depthPartitions?.groups.length, plan.depthPartitions.groups.length);
 });

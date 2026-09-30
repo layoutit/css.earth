@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createFramePacer, createSettlePacer, SETTLE_PACING } from './settle-pacer.js';
 import { cameraMotionSignalFor } from '../navigation/camera-motion-signal.js';
 
@@ -19,34 +21,34 @@ test('membership waits only for a coast; a driven camera keeps it live', () => {
   const { pacer, signal, frames, run, left } = harness('coasting', 5);
   signal.begin('drag');
   pacer.request();
-  expect(frames).toHaveLength(1);
+  assert.equal(frames.length, 1);
   run(0);
-  expect(left()).toBe(0);
+  assert.equal(left(), 0);
   const coast = harness('coasting', 5);
   coast.signal.begin('inertia');
   coast.pacer.request();
   // Coasting: no frame is requested until the coast stops.
-  expect(coast.frames).toHaveLength(0);
+  assert.equal(coast.frames.length, 0);
   coast.signal.end('inertia');
-  expect(coast.frames).toHaveLength(1);
+  assert.equal(coast.frames.length, 1);
   coast.run(0);
-  expect(coast.left()).toBe(0);
+  assert.equal(coast.left(), 0);
 });
 
 test('held work lands a paced slice per frame, halving after a slow frame', () => {
   const { pacer, signal, frames, slices, run, left } = harness('motion', 100);
   signal.begin('zoom');
   pacer.request();
-  expect(frames).toHaveLength(0);
+  assert.equal(frames.length, 0);
   signal.end('zoom');
   run(0);
-  expect(slices.at(-1)).toEqual([SETTLE_PACING.startUnits, false]);
+  assert.deepEqual(slices.at(-1), [SETTLE_PACING.startUnits, false]);
   // The frame that carried the first slice took 40 ms: the pacer waits a frame and halves.
   run(40);
   run(50);
-  expect(slices.at(-1)).toEqual([SETTLE_PACING.startUnits / 2, false]);
+  assert.deepEqual(slices.at(-1), [SETTLE_PACING.startUnits / 2, false]);
   while (frames.length) run(60 + slices.length * 10);
-  expect(left()).toBe(0);
+  assert.equal(left(), 0);
 });
 
 test('owners of one document share one frame budget and take turns', () => {
@@ -60,15 +62,15 @@ test('owners of one document share one frame budget and take turns', () => {
   };
   const a = owner('a', 40), b = owner('b', 40);
   a.request(); b.request();
-  expect(frames).toHaveLength(1);
+  assert.equal(frames.length, 1);
   frames.shift()!(0);
   // One budget for the frame: the first owner takes it all, the second waits.
-  expect(taken).toEqual([['a', SETTLE_PACING.startUnits]]);
+  assert.deepEqual(taken, [['a', SETTLE_PACING.startUnits]]);
   frames.shift()!(10);
   // The next frame starts with the other owner, from a budget grown after a quick frame.
-  expect(taken[1]).toEqual(['b', SETTLE_PACING.startUnits * 1.5]);
+  assert.deepEqual(taken[1], ['b', SETTLE_PACING.startUnits * 1.5]);
   while (frames.length) frames.shift()!(20 + taken.length * 10);
-  expect(taken.filter(([name]) => name === 'a').reduce((sum, [, wrote]) => sum + wrote, 0)).toBe(40);
-  expect(taken.filter(([name]) => name === 'b').reduce((sum, [, wrote]) => sum + wrote, 0)).toBe(40);
+  assert.equal(taken.filter(([name]) => name === 'a').reduce((sum, [, wrote]) => sum + wrote, 0), 40);
+  assert.equal(taken.filter(([name]) => name === 'b').reduce((sum, [, wrote]) => sum + wrote, 0), 40);
   a.destroy(); b.destroy();
 });

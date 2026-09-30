@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint } from './world-context-marker-paint.js';
 import type { createOpacityFader } from '../../stars/opacity-fader.js';
@@ -22,7 +24,7 @@ test('a marker moved by less than a thousandth of a pixel is not written again',
     policyChanged: false, emphasis: 1 });
   paint.publish(frame(567.5162251070), fader);
   paint.publish(frame(567.5162989), fader);
-  expect(writes).toEqual(['translate(567.516px,377.25px) translate(-50%,-50%)']);
+  assert.deepEqual(writes, ['translate(567.516px,377.25px) translate(-50%,-50%)']);
   paint.publish(frame(567.5171), fader);
-  expect(writes).toHaveLength(2);
+  assert.equal(writes.length, 2);
 });

@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 
@@ -7,18 +9,18 @@ test('a spatial point field reprojects through one retained SVG path per paint c
   const frame={referenceFrame:'sun-icrf',epochJdTt:2451545,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,
     metersPerUnit:1,boundsUnits:{min:[-20,-20,-20] as const,max:[20,20,20] as const}};
   const style={colorCss:'#ffb38a',opacity:.85,radiusPx:1};
-  expect(pointPaint(style)).toBe('#ffb38ad9');
+  assert.equal(pointPaint(style), '#ffb38ad9');
   const field=mountBatchedSpatialPoints({host,before,frame,points:[{positionUnits:[1,0,-10] as const}],className:'test-points',
     stylePoint:()=>style,paintPalette:[pointPaint(style)]});
   const viewport={focalPixels:100,principalOffsetPixels:[0,0] as const,widthPixels:1000,heightPixels:800};
   const world={referenceFrame:'sun-icrf',epochJdTt:2451545,pose:{positionM:[0,0,0] as const,orientationXyzw:[0,0,0,1] as const}};
   field.publish({world,viewport});
   const path=field.root.querySelector('path')!,first=path.getAttribute('d');
-  expect(field.root.querySelectorAll('path')).toHaveLength(1);expect(path.getAttribute('fill')).toBe('#ffb38ad9');
-  expect(field.root.querySelector('i')).toBeNull();expect(field.stats().visiblePoints).toBe(1);expect(first).toMatch(/^M/);
+  assert.equal(field.root.querySelectorAll('path').length, 1);assert.equal(path.getAttribute('fill'), '#ffb38ad9');
+  assert.equal(field.root.querySelector('i'), null);assert.equal(field.stats().visiblePoints, 1);assert.match(first, /^M/);
   field.publish({world:{...world,pose:{...world.pose,positionM:[1,0,0]}},viewport});
-  expect(path.getAttribute('d')).not.toBe(first);expect(field.stats().visiblePoints).toBe(1);expect(host.children).toHaveLength(2);
-  field.destroy();expect(host.children).toHaveLength(1);
+  assert.notEqual(path.getAttribute('d'), first);assert.equal(field.stats().visiblePoints, 1);assert.equal(host.children.length, 2);
+  field.destroy();assert.equal(host.children.length, 1);
 });
 
 
@@ -34,11 +36,11 @@ test('changing the kept share repaints even when the camera has not moved', () =
     pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } },
     viewport: { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 } };
   field.publish(publication);
-  expect(field.stats().visiblePoints).toBeLessThan(20);
-  expect(field.stats().candidates).toBe(20);
+  assert.ok(field.stats().visiblePoints < 20);
+  assert.equal(field.stats().candidates, 20);
   keep = 1;
   field.publish(publication);
-  expect(field.stats().visiblePoints).toBe(20);
+  assert.equal(field.stats().visiblePoints, 20);
   field.destroy();
 });
 
@@ -61,21 +63,21 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   const painted = centres(warped), before = warped.root.querySelector('path')!.getAttribute('d');
   warped.publish({ world: pose(2), viewport });
   // Only the warp was written: the paths keep the first paint.
-  expect(warped.root.querySelector('path')!.getAttribute('d')).toBe(before);
+  assert.equal(warped.root.querySelector('path')!.getAttribute('d'), before);
   const numbers = (warped.root.querySelector('svg')!.style.transform.match(/-?[\d.e+-]+/g) ?? []).slice(1).map(Number);
-  expect(numbers).toHaveLength(16);
+  assert.equal(numbers.length, 16);
   const [a, b, , c, d, e, , g, , , , , h, i, , j] = numbers;
   const moved = painted.map(([x, y]) => { const w = c! * x! + g! * y! + j!; return [(a! * x! + d! * y! + h!) / w, (b! * x! + e! * y! + i!) / w]; });
   exact.publish({ world: pose(2), viewport });
   const repainted = centres(exact);
   // The same dots, placed by the warp and by a repaint: every in-view dot of the repaint has its warped twin.
-  for (const [x, y] of repainted) expect(Math.min(...moved.map(([mx, my]) => Math.hypot(mx! - x!, my! - y!)))).toBeLessThan(2e-3);
+  for (const [x, y] of repainted) assert.ok(Math.min(...moved.map(([mx, my]) => Math.hypot(mx! - x!, my! - y!))) < 2e-3);
   // A pause brings back the exact paint.
   await new Promise(resolve => setTimeout(resolve, 200));
-  expect(warped.root.querySelector('svg')!.style.transform).toBe('');
-  expect(warped.root.querySelector('path')!.getAttribute('d')).toBe(exact.root.querySelector('path')!.getAttribute('d'));
+  assert.equal(warped.root.querySelector('svg')!.style.transform, '');
+  assert.equal(warped.root.querySelector('path')!.getAttribute('d'), exact.root.querySelector('path')!.getAttribute('d'));
   // A turn past the painted margin repaints at once.
   warped.publish({ world: pose(40), viewport });
-  expect(warped.root.querySelector('svg')!.style.transform).toBe('');
+  assert.equal(warped.root.querySelector('svg')!.style.transform, '');
   warped.destroy(); exact.destroy();
 });

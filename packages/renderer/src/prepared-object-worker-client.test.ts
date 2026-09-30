@@ -1,10 +1,12 @@
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createPreparedObjectDecoder } from './prepared-object-worker-client.js';
 
 function fixture() {
   const workers: Array<Worker> = [];
-  const createWorker = vi.fn(() => {
-    const worker = { postMessage: vi.fn(), terminate: vi.fn(), onmessage: null, onerror: null, onmessageerror: null } as unknown as Worker;
+  const createWorker = mock.fn(() => {
+    const worker = { postMessage: mock.fn(() => {}), terminate: mock.fn(() => {}), onmessage: null, onerror: null, onmessageerror: null } as unknown as Worker;
     workers.push(worker); return worker;
   });
   const decoder = createPreparedObjectDecoder(createWorker);
@@ -16,16 +18,16 @@ function fixture() {
 test('sequential and queued decoding reuse one worker and transfer each payload only when active', async () => {
   const f = fixture(), a = f.request(), b = f.request();
   const first = f.decoder.decode(a), second = f.decoder.decode(b);
-  expect(f.workers[0].postMessage).toHaveBeenCalledExactlyOnceWith(a, [a.bytes]);
+  assert.equal(f.workers[0].postMessage.mock.callCount(), 1); assert.deepEqual(f.workers[0].postMessage.mock.calls[0]!.arguments, [a, [a.bytes]]);
   f.reply({ ok: true, definition: { id: 'first' } });
-  expect(await first).toEqual({ id: 'first' });
-  expect(f.workers[0].postMessage).toHaveBeenLastCalledWith(b, [b.bytes]);
+  assert.deepEqual((await first), { id: 'first' });
+  assert.deepEqual(f.workers[0].postMessage.mock.calls.at(-1)?.arguments, [b, [b.bytes]]);
   f.reply({ ok: true, definition: { id: 'second' } }); await second;
   const third = f.decoder.decode(f.request());
   f.reply({ ok: true, definition: { id: 'third' } }); await third;
-  expect(f.createWorker).toHaveBeenCalledOnce();
-  expect(f.workers[0].terminate).not.toHaveBeenCalled();
-  f.decoder.dispose(); expect(f.workers[0].terminate).toHaveBeenCalledOnce();
+  assert.equal(f.createWorker.mock.callCount(), 1);
+  assert.equal(f.workers[0].terminate.mock.callCount(), 0);
+  f.decoder.dispose(); assert.equal(f.workers[0].terminate.mock.callCount(), 1);
 });
 
 test('aborting an active decode terminates wasted work and ignores stale results without losing the queued job', async () => {
@@ -33,11 +35,11 @@ test('aborting an active decode terminates wasted work and ignores stale results
   const first = f.decoder.decode(f.request(), { signal: abort.signal });
   const stale = f.workers[0].onmessage!;
   const second = f.decoder.decode(f.request());
-  abort.abort(); await expect(first).rejects.toMatchObject({ name: 'AbortError' });
-  expect(f.createWorker).toHaveBeenCalledTimes(2);
+  abort.abort(); await assert.rejects(first, { name: 'AbortError' });
+  assert.equal(f.createWorker.mock.callCount(), 2);
   stale.call(f.workers[0], { data: { ok: true, definition: { id: 'stale' } } } as MessageEvent);
   f.reply({ ok: true, definition: { id: 'second' } });
-  expect(await second).toEqual({ id: 'second' });
+  assert.deepEqual((await second), { id: 'second' });
   f.decoder.dispose();
 });
 
@@ -45,23 +47,23 @@ test('queued and pre-aborted jobs never transfer bytes or interrupt another acti
   const f = fixture(), abort = new AbortController();
   const first = f.decoder.decode(f.request());
   const second = f.decoder.decode(f.request(), { signal: abort.signal });
-  abort.abort(); await expect(second).rejects.toMatchObject({ name: 'AbortError' });
-  await expect(f.decoder.decode(f.request(), { signal: abort.signal })).rejects.toMatchObject({ name: 'AbortError' });
-  expect(f.workers[0].terminate).not.toHaveBeenCalled();
-  expect(f.workers[0].postMessage).toHaveBeenCalledOnce();
+  abort.abort(); await assert.rejects(second, { name: 'AbortError' });
+  await assert.rejects(f.decoder.decode(f.request(), { signal: abort.signal }), { name: 'AbortError' });
+  assert.equal(f.workers[0].terminate.mock.callCount(), 0);
+  assert.equal(f.workers[0].postMessage.mock.callCount(), 1);
   f.reply({ ok: true, definition: {} }); await first; f.decoder.dispose();
 });
 
 test('validation failures reuse the worker; crashes retire it; disposal rejects active and queued jobs', async () => {
   const f = fixture(), invalid = f.decoder.decode(f.request());
   f.reply({ ok: false, name: 'TypeError', message: 'invalid prepared camera' });
-  await expect(invalid).rejects.toThrow('invalid prepared camera');
+  await assert.rejects(invalid, /invalid prepared camera/);
   const crash = f.decoder.decode(f.request());
   f.workers[0].onerror!.call(f.workers[0], { message: 'worker unavailable' } as ErrorEvent);
-  await expect(crash).rejects.toThrow('worker unavailable');
+  await assert.rejects(crash, /worker unavailable/);
   const active = f.decoder.decode(f.request()), queued = f.decoder.decode(f.request());
-  expect(f.createWorker).toHaveBeenCalledTimes(2);
+  assert.equal(f.createWorker.mock.callCount(), 2);
   f.decoder.dispose();
-  await expect(active).rejects.toMatchObject({ name: 'AbortError' });
-  await expect(queued).rejects.toMatchObject({ name: 'AbortError' });
+  await assert.rejects(active, { name: 'AbortError' });
+  await assert.rejects(queued, { name: 'AbortError' });
 });

@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import type { PreparedViewBinding } from './prepared-presentation.js';
 import { createLeafBoxWriter, leafBoxStyles, type PreparedLeafBox } from './prepared-leaf-box-direct.js';
@@ -17,18 +19,18 @@ const bindings = [
 
 test('a leaf box record gives the final values at a step and seam outset', () => {
   // Step 362 × 0.003253 exceeds 1: the full box. Step 100 gives a factor of 0.3253.
-  expect(leafBoxStyles(boxes[0]!, 362, 0.00116133)).toEqual([
+  assert.deepEqual(leafBoxStyles(boxes[0]!, 362, 0.00116133), [
     // The background is a share of the box, the same at every step: 2016.96 / 64 and -14.5454 / (64 - 2016.96).
     ['backgroundPosition', '0.744787% 92.449002%'], ['backgroundSize', '3151.5% 2327.271875%'],
     ['transform', `${matrix} scale(1) translate(50%, 50%) scale(1.08945, 1.023078) translate(-50%, -50%)`],
     ['width', '64px'], ['height', '64px'],
   ]);
-  expect(Object.fromEntries(leafBoxStyles(boxes[0]!, 100, 0))).toMatchObject({
+  assert.partialDeepStrictEqual(Object.fromEntries(leafBoxStyles(boxes[0]!, 100, 0)), {
     backgroundSize: '3151.5% 2327.271875%', width: '20.8192px', height: '20.8192px',
     transform: `${matrix} scale(3.074085) translate(50%, 50%) scale(1, 1) translate(-50%, -50%)`,
   });
   // A component kept as written is not scaled; a leaf without seam coefficients has no seam term.
-  expect(Object.fromEntries(leafBoxStyles(boxes[1]!, 100, 0.002))).toMatchObject({ backgroundPosition: '0 92.449002%', transform: `${matrix} scale(3.095017)` });
+  assert.partialDeepStrictEqual(Object.fromEntries(leafBoxStyles(boxes[1]!, 100, 0.002)), { backgroundPosition: '0 92.449002%', transform: `${matrix} scale(3.095017)` });
 });
 
 test('a mounted leaf receives its values from the record and writes only what changes', () => {
@@ -36,22 +38,22 @@ test('a mounted leaf receives its values from the record and writes only what ch
   const nodes = [0, 1, 2].map(() => document.createElement('s'));
   const writes: [number, string][] = [];
   const writer = createLeafBoxWriter(bindings, nodes, (element, name, value) => { writes.push([nodes.indexOf(element), name]); element.style.setProperty(name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`), value); });
-  expect(nodes[1]!.style.getPropertyValue('width')).toBe('64px');
-  expect(nodes[1]!.getAttribute('style')).not.toMatch(/var\(|calc\(|--/);
+  assert.equal(nodes[1]!.style.getPropertyValue('width'), '64px');
+  assert.doesNotMatch(nodes[1]!.getAttribute('style'), /var\(|calc\(|--/);
   writes.length = 0;
   writer.set(1, '--silhouette-step', '100');
   // A step resizes the box; the background, a share of it, is not written again.
-  expect(writes).toEqual([[1, 'transform'], [1, 'width'], [1, 'height']]);
-  expect(writer.read(1, '--silhouette-step')).toBe('100');
-  expect(writer.read(2, '--silhouette-step')).toBe('362');
+  assert.deepEqual(writes, [[1, 'transform'], [1, 'width'], [1, 'height']]);
+  assert.equal(writer.read(1, '--silhouette-step'), '100');
+  assert.equal(writer.read(2, '--silhouette-step'), '362');
   writes.length = 0;
   writer.set(1, '--silhouette-step', '100');
-  expect(writes).toEqual([]);
+  assert.deepEqual(writes, []);
   // The seam outset rewrites only transforms, and only on leaves it reaches.
   writer.set(0, '--surface-seam-outset', '0.002');
-  expect(writes).toEqual([[1, 'transform']]);
-  expect(writer.owns(0, '--surface-seam-outset')).toBe(true);
-  expect(writer.owns(2, '--silhouette-step')).toBe(true);
+  assert.deepEqual(writes, [[1, 'transform']]);
+  assert.equal(writer.owns(0, '--surface-seam-outset'), true);
+  assert.equal(writer.owns(2, '--silhouette-step'), true);
 });
 
 test('a seam outset change lands a slice of leaves at a time', () => {
@@ -62,14 +64,14 @@ test('a seam outset change lands a slice of leaves at a time', () => {
   const written: number[] = [];
   const writer = createLeafBoxWriter(records, nodes, (element, name, value) => { written.push(nodes.indexOf(element)); element.style.setProperty(name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`), value); });
   written.length = 0;
-  expect(writer.drainOutset('0.002', 2)).toBe(2);
-  expect(written).toEqual([1, 2]);
-  expect(writer.read(0, '--surface-seam-outset')).toBe('0.002');
+  assert.equal(writer.drainOutset('0.002', 2), 2);
+  assert.deepEqual(written, [1, 2]);
+  assert.equal(writer.read(0, '--surface-seam-outset'), '0.002');
   // A new outset before the drain ends restarts it; each leaf still takes only what changed.
-  expect(writer.drainOutset('0.003', 2)).toBe(2);
-  expect(writer.drainOutset('0.003', 2)).toBe(2);
-  expect(writer.drainOutset('0.003', 2)).toBe(1);
-  expect(writer.drainOutset('0.003', 2)).toBe(0);
-  expect(written).toEqual([1, 2, 1, 2, 3, 4, 5]);
-  expect(nodes[5]!.style.getPropertyValue('transform')).toBe(leafBoxStyles(seamed[4]!, 362, 0.003).find(([name]) => name === 'transform')![1]);
+  assert.equal(writer.drainOutset('0.003', 2), 2);
+  assert.equal(writer.drainOutset('0.003', 2), 2);
+  assert.equal(writer.drainOutset('0.003', 2), 1);
+  assert.equal(writer.drainOutset('0.003', 2), 0);
+  assert.deepEqual(written, [1, 2, 1, 2, 3, 4, 5]);
+  assert.equal(nodes[5]!.style.getPropertyValue('transform'), leafBoxStyles(seamed[4]!, 362, 0.003).find(([name]) => name === 'transform')![1]);
 });

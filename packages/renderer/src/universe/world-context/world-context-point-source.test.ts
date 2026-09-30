@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import type { PreparedCssPointField } from '../../stars/types.js';
 import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
@@ -26,33 +28,33 @@ const viewport={focalPixels:400,widthPixels:800,heightPixels:600,principalOffset
 const world = (distanceM:number) => ({referenceFrame:'sun-icrf',epochJdTt:1,pose:{positionM:[0,0,distanceM] as const,orientationXyzw:[0,0,0,1] as const}});
 
 test('focus point schema is optional, exact, and rejects malformed photometry', () => {
-  expect(plan.focus.pointSource?.absoluteMagnitude).toBeCloseTo(4.832125665882298, 12);
+  assert.ok(Math.abs(plan.focus.pointSource?.absoluteMagnitude - (4.832125665882298)) < 10 ** -12 / 2, `${plan.focus.pointSource?.absoluteMagnitude} is not close to ${4.832125665882298}`);
   const { pointSource: _pointSource, ...withoutPointSource } = plan.focus;
-  expect(parsePreparedWorldContext({ ...plan, focus: withoutPointSource }).focus.pointSource).toBeUndefined();
-  expect(() => parsePreparedWorldContext({ ...plan, focus:{ ...plan.focus, pointSource:{absoluteMagnitude:4.8,color:'yellow'} } })).toThrow('point color');
-  expect(() => parsePreparedWorldContext({ ...plan, focus:{ ...plan.focus, pointSource:{...plan.focus.pointSource!,
-    proximityEnhancement:{fullDistanceM:1e14,fadeOutDistanceM:1e12,radiusMultiplier:.5,brightnessMultiplier:1} } } })).toThrow('proximity');
+  assert.equal(parsePreparedWorldContext({ ...plan, focus: withoutPointSource }).focus.pointSource, undefined);
+  assert.throws(() => parsePreparedWorldContext({ ...plan, focus:{ ...plan.focus, pointSource:{absoluteMagnitude:4.8,color:'yellow'} } }), /point color/);
+  assert.throws(() => parsePreparedWorldContext({ ...plan, focus:{ ...plan.focus, pointSource:{...plan.focus.pointSource!,
+    proximityEnhancement:{fullDistanceM:1e14,fadeOutDistanceM:1e12,radiusMultiplier:.5,brightnessMultiplier:1} } } }), /proximity/);
 });
 
 test('point source uses the prepared star photometry, nearest atlas color, and selected-detail handoff', () => {
-  expect(worldContextPointSourceFade(4.5,plan)).toBe(1); expect(worldContextPointSourceFade(20,plan)).toBe(0); expect(worldContextPointSourceFade(12.25,plan)).toBeCloseTo(.5,12);
-  expect(worldContextPointSourceGain(1e12,plan)).toEqual({radius:1.6,brightness:1.5});
-  expect(worldContextPointSourceGain(1e13,plan)).toEqual({radius:1.3,brightness:1.25});
-  expect(worldContextPointSourceGain(1e14,plan)).toEqual({radius:1,brightness:1});
+  assert.equal(worldContextPointSourceFade(4.5,plan), 1); assert.equal(worldContextPointSourceFade(20,plan), 0); assert.ok(Math.abs(worldContextPointSourceFade(12.25,plan) - (.5)) < 10 ** -12 / 2, `${worldContextPointSourceFade(12.25,plan)} is not close to ${.5}`);
+  assert.deepEqual(worldContextPointSourceGain(1e12,plan), {radius:1.6,brightness:1.5});
+  assert.deepEqual(worldContextPointSourceGain(1e13,plan), {radius:1.3,brightness:1.25});
+  assert.deepEqual(worldContextPointSourceGain(1e14,plan), {radius:1,brightness:1});
   const distanceForThirtyPixelDisc=10*Math.sqrt(1+(800/30)**2);
   const near=worldContextPointAppearance(plan,field,world(distanceForThirtyPixelDisc),viewport)!;
-  expect(near.diameterPx).toBeCloseTo(30,10);
-  expect(near.radiusPx * 2).toBeGreaterThanOrEqual(near.diameterPx);
-  expect(near.radiusPx * 2).toBeLessThan(near.diameterPx * 1.02);
+  assert.ok(Math.abs(near.diameterPx - (30)) < 10 ** -10 / 2, `${near.diameterPx} is not close to ${30}`);
+  assert.ok((near.radiusPx * 2) >= near.diameterPx);
+  assert.ok((near.radiusPx * 2) < near.diameterPx * 1.02);
   const widerHalo = worldContextPointAppearance(plan, { ...field, atlas: { ...field.atlas, haloRadii: 5 } }, world(distanceForThirtyPixelDisc), viewport)!;
-  expect(widerHalo.radiusPx).toBe(near.radiusPx);
+  assert.equal(widerHalo.radiusPx, near.radiusPx);
   const distant=worldContextPointAppearance(plan,field,world(10*parsec),viewport)!;
-  expect(distant.magnitude).toBeCloseTo(4.832125665882298,12); expect(distant.colorIndex).toBe(0); expect(distant.opacity).toBe(1);
+  assert.ok(Math.abs(distant.magnitude - (4.832125665882298)) < 10 ** -12 / 2, `${distant.magnitude} is not close to ${4.832125665882298}`); assert.equal(distant.colorIndex, 0); assert.equal(distant.opacity, 1);
   const distanceForMidpoint=10*Math.sqrt(1+(800/12.25)**2);
   const detailed=worldContextPointAppearance(plan,field,world(distanceForMidpoint),viewport,{selectedDetail:true})!;
   const undetailed=worldContextPointAppearance(plan,field,world(distanceForMidpoint),viewport,{selectedDetail:false})!;
-  expect(detailed.opacity).toBeCloseTo(.5,10); expect(undetailed.opacity).toBe(1);
-  expect(worldContextPointAppearance(plan,field,world(10*parsec),viewport,{occluder:{positionM:[0,0,5*parsec],radiusM:1}})).toBeNull();
+  assert.ok(Math.abs(detailed.opacity - (.5)) < 10 ** -10 / 2, `${detailed.opacity} is not close to ${.5}`); assert.equal(undetailed.opacity, 1);
+  assert.equal(worldContextPointAppearance(plan,field,world(10*parsec),viewport,{occluder:{positionM:[0,0,5*parsec],radiusM:1}}), null);
 });
 
 test('the prepared Sun landmark grows smoothly from the light-year handoff without changing its physical disc', async () => {
@@ -64,20 +66,20 @@ test('the prepared Sun landmark grows smoothly from the light-year handoff witho
     ...solarPlan.focus.pointSource!, proximityEnhancement: undefined,
   } } };
   const near = sample(5), plain = sample(5, unenhanced);
-  expect(near.diameterPx).toBe(plain.diameterPx);
-  expect(near.radiusPx).toBeGreaterThan(plain.radiusPx * 1.7);
-  expect(near.radiusPx * 2 * field.atlas.haloRadii).toBeLessThan(16);
+  assert.equal(near.diameterPx, plain.diameterPx);
+  assert.ok(near.radiusPx > plain.radiusPx * 1.7);
+  assert.ok((near.radiusPx * 2 * field.atlas.haloRadii) < 16);
   let previous = sample(1).radiusPx;
   for (const distanceAu of [2, 5, 10, 20, 50, 100, 300, 1000, 10_000, 30_000, lightYearM / au]) {
     const appearance = sample(distanceAu);
     // The authored glow shrinks smoothly until it reaches the navigation core floor.
-    if (previous > 1.2) expect(appearance.radiusPx).toBeLessThan(previous);
-    else expect(appearance.radiusPx).toBe(previous);
-    expect(sample(distanceAu * 1.001).radiusPx / appearance.radiusPx).toBeGreaterThan(.995);
+    if (previous > 1.2) assert.ok(appearance.radiusPx < previous);
+    else assert.equal(appearance.radiusPx, previous);
+    assert.ok((sample(distanceAu * 1.001).radiusPx / appearance.radiusPx) > .995);
     previous = appearance.radiusPx;
   }
-  expect(sample(30_000).radiusPx).toBe(1.2);
-  expect(sample(lightYearM / au).radiusPx).toBe(sample(lightYearM / au, unenhanced).radiusPx);
+  assert.equal(sample(30_000).radiusPx, 1.2);
+  assert.equal(sample(lightYearM / au).radiusPx, sample(lightYearM / au, unenhanced).radiusPx);
 });
 
 test('mount retains one PSF node, activates the actual point hit target, and removes it on destroy', () => {
@@ -85,14 +87,14 @@ test('mount retains one PSF node, activates the actual point hit target, and rem
   let selected = '';
   host.addEventListener('objectnavigate', event => { selected = (event as CustomEvent<{objectId:string}>).detail.objectId; });
   const layer=mountWorldContextPointSource({host:host as unknown as HTMLElement,before:before as unknown as globalThis.Element,plan,field,resolveResource:path=>`/prepared/${path}`});
-  expect(layer).not.toBeNull(); layer!.publish(world(10*parsec),viewport);
+  assert.notEqual(layer, null); layer!.publish(world(10*parsec),viewport);
   const element=layer!.element as unknown as Element;
-  expect(element.style.backgroundImage).toContain('points.png'); expect(element.style.visibility).toBe(''); expect(element.style.transform).toContain('scale(');
-  expect(element.dataset.objectNavigate).toBe('sun'); expect(element.style.pointerEvents).toBe('auto'); expect(element.style.cursor).toBe('pointer');
-  element.dispatchEvent(new Event('click',{cancelable:true})); expect(selected).toBe('sun');
+  assert.ok(element.style.backgroundImage.includes('points.png')); assert.equal(element.style.visibility, ''); assert.ok(element.style.transform.includes('scale('));
+  assert.equal(element.dataset.objectNavigate, 'sun'); assert.equal(element.style.pointerEvents, 'auto'); assert.equal(element.style.cursor, 'pointer');
+  element.dispatchEvent(new Event('click',{cancelable:true})); assert.equal(selected, 'sun');
   layer!.publish(world(10*parsec),viewport,{occluder:{positionM:[0,0,5*parsec],radiusM:1}});
-  expect(element.style.visibility).toBe('hidden'); expect(element.style.pointerEvents).toBe('none');
-  layer!.destroy(); expect(host.children).not.toContain(element);
+  assert.equal(element.style.visibility, 'hidden'); assert.equal(element.style.pointerEvents, 'none');
+  layer!.destroy(); assert.ok(!host.children.includes(element));
 });
 
 test('off-screen focus points leave keyboard navigation after the coast, using the measured viewport', () => {
@@ -104,20 +106,20 @@ test('off-screen focus points leave keyboard navigation after the coast, using t
   const outside = { ...visible, pose: { ...visible.pose, positionM: [1000 * parsec, 0, 10 * parsec] as const } };
   layer.publish(visible, viewport);
   const element = layer.element as unknown as Element;
-  expect(element.tabIndex).toBe(0);
+  assert.equal(element.tabIndex, 0);
   const attributes = new Map(element.attributes), data = { ...element.dataset };
   layer.setCoasting(true);
   layer.publish(outside, viewport);
-  expect(element.tabIndex).toBe(0);
-  expect(element.attributes).toEqual(attributes);
-  expect(element.dataset).toEqual(data);
+  assert.equal(element.tabIndex, 0);
+  assert.deepEqual(element.attributes, attributes);
+  assert.deepEqual(element.dataset, data);
   layer.setCoasting(false);
   layer.publish(outside, viewport);
-  expect(element.tabIndex).toBe(-1);
-  expect(element.attributes.has('role')).toBe(false);
+  assert.equal(element.tabIndex, -1);
+  assert.equal(element.attributes.has('role'), false);
   layer.publish(visible, viewport);
-  expect(element.tabIndex).toBe(0);
-  expect(element.attributes.get('aria-label')).toBe('Go to Sun');
+  assert.equal(element.tabIndex, 0);
+  assert.equal(element.attributes.get('aria-label'), 'Go to Sun');
   layer.destroy();
 });
 
@@ -127,12 +129,12 @@ test('the Sun landmark stays faintly visible beyond the physical photometry limi
   const layer = mountWorldContextPointSource({host: host as unknown as HTMLElement, before: before as unknown as globalThis.Element,
     plan, field, resolveResource: path => path})!;
   layer.publish(world(plan.camera.maximumDistanceM), viewport, {opacity: .55, selectedDetail: true});
-  expect(layer.element.style.visibility).toBe('');
-  expect(Number(layer.element.style.opacity)).toBeCloseTo(.3575);
-  expect(layer.element.dataset.objectNavigate).toBe('sun');
+  assert.equal(layer.element.style.visibility, '');
+  assert.ok(Math.abs(Number(layer.element.style.opacity) - (.3575)) < 10 ** -2 / 2, `${Number(layer.element.style.opacity)} is not close to ${.3575}`);
+  assert.equal(layer.element.dataset.objectNavigate, 'sun');
   layer.publish(world(plan.camera.maximumDistanceM), viewport, {opacity: .55, selectedDetail: true,
     occluder: {positionM: [0, 0, plan.camera.maximumDistanceM / 2], radiusM: 10}});
-  expect(layer.element.style.visibility).toBe('hidden');
+  assert.equal(layer.element.style.visibility, 'hidden');
   layer.destroy();
 });
 
@@ -141,10 +143,10 @@ test('an unresolved focus keeps a readable navigation core at stellar and maximu
     samples: field.photometry.samples.map(() => ({ radiusPx: 0, luminance: 0 })) } };
   for (const distance of [101.51 * 299792458 * 31557600, plan.camera.maximumDistanceM]) {
     const appearance = worldContextPointAppearance(plan, faint, world(distance), viewport, { selectedDetail: true })!;
-    expect(appearance.diameterPx).toBeLessThan(1);
+    assert.ok(appearance.diameterPx < 1);
     // Match the default body-marker diameter; a 1.2 px PSF core vanishes after downsampling.
-    expect(appearance.radiusPx * 2).toBeGreaterThanOrEqual(2.4);
-    expect(appearance.luminance).toBeGreaterThanOrEqual(.65);
-    expect(appearance.opacity).toBe(1);
+    assert.ok((appearance.radiusPx * 2) >= 2.4);
+    assert.ok(appearance.luminance >= .65);
+    assert.equal(appearance.opacity, 1);
   }
 });

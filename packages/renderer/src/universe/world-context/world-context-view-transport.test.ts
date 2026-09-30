@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
 import type { WorldBodyPresentation } from './world-context-planner.js';
 
@@ -11,11 +13,11 @@ test('packed body presentation round-trips exactly, including absent optional fl
       indicatorRadius: 10, orbitAppearance: { width: 1.5, opacity: 1e-12 } },
   ];
   const packed = packWorldBodies(bodies);
-  expect(packed.length).toBe(30);
-  expect(unpackWorldBodies(packed)).toEqual(bodies);
-  expect(Object.keys(unpackWorldBodies(packed)[0]!)).not.toContain('bodyHidden');
-  expect(Object.keys(unpackWorldBodies(packed)[0]!)).not.toContain('highlighted');
+  assert.equal(packed.length, 30);
+  assert.deepEqual(unpackWorldBodies(packed), bodies);
+  assert.ok(!Object.keys(unpackWorldBodies(packed)[0]!).includes('bodyHidden'));
+  assert.ok(!Object.keys(unpackWorldBodies(packed)[0]!).includes('highlighted'));
   bodies[1]!.highlighted = false;
-  expect(unpackWorldBodies(packWorldBodies(bodies))).toEqual(bodies);
-  expect(() => unpackWorldBodies(new Float64Array(13))).toThrow(/malformed/);
+  assert.deepEqual(unpackWorldBodies(packWorldBodies(bodies)), bodies);
+  assert.throws(() => unpackWorldBodies(new Float64Array(13)), /malformed/);
 });

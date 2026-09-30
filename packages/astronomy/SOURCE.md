@@ -14,7 +14,7 @@ record sections behind the same `ASTEROID_FIXTURES` export. Run
 the retained records without downloading or changing their source values.
 
 Consumers import the built @cssearth/astronomy workspace package. tsup produces
-ESM, CommonJS, and declarations. Vitest tests the numerical implementation.
+ESM, CommonJS, and declarations. `node --test` tests the numerical implementation.
 
 `asteroidElements` and `asteroidPositionKm` expose Vesta's heliocentric ICRF
 osculating ellipse from JPL Horizons solution JPL#36, at JD 2461286.5.

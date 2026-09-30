@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { distance, scaled } from './__fixtures__/compare.js'
 import { HORIZONS } from './__fixtures__/horizons.js'
 import {
@@ -54,14 +56,14 @@ const satelliteFixtureMaximumKm = (id: SatelliteId): number => {
 }
 
 describe('frame position-model accuracy metadata', () => {
-  it.each(PLANET_IDS)('derives the %s system-barycentre budget from shipped VSOP metadata', (planet) => {
+  for (const planet of PLANET_IDS) it(`derives the ${planet} system-barycentre budget from shipped VSOP metadata`, () => {
     const key = VSOP_KEY_BY_PLANET[planet]
     const accuracy = frameModelAccuracy(systemBarycentreFrameId(planet))
     const expectedKm = VSOP87A_TRUNCATION_BOUND_AU[key] * AU_KM + VSOP_THEORY_DISCREPANCY_KM[key]
 
-    expect(accuracy.kind).toBe('model-budget')
-    expect(accuracy.estimateKm).toBeCloseTo(expectedKm, 10)
-    expect([accuracy.validFromJdTt, accuracy.validToJdTt]).toEqual([
+    assert.equal(accuracy.kind, 'model-budget')
+    assert.ok(Math.abs(accuracy.estimateKm - (expectedKm)) < 10 ** -10 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
+    assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [
       VSOP87A_VALID_FROM_JD,
       VSOP87A_VALID_TO_JD,
     ])
@@ -69,22 +71,22 @@ describe('frame position-model accuracy metadata', () => {
 
   it('derives the lunar model budget from the shipped ELP truncation metadata', () => {
     const accuracy = frameModelAccuracy('moon')
-    expect(accuracy.kind).toBe('model-budget')
-    expect(accuracy.estimateKm).toBeCloseTo(ELP2000_TRUNCATION_BOUND_KM + 2.668, 12)
-    expect([accuracy.validFromJdTt, accuracy.validToJdTt]).toEqual([
+    assert.equal(accuracy.kind, 'model-budget')
+    assert.ok(Math.abs(accuracy.estimateKm - (ELP2000_TRUNCATION_BOUND_KM + 2.668)) < 10 ** -12 / 2, `${accuracy.estimateKm} is not close to ${ELP2000_TRUNCATION_BOUND_KM + 2.668}`)
+    assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [
       ELP2000_VALID_FROM_JD,
       ELP2000_VALID_TO_JD,
     ])
   })
 
-  it.each(SATELLITE_IDS)('reports %s as its actual sampled fixture maximum', (id) => {
+  for (const id of SATELLITE_IDS) it(`reports ${id} as its actual sampled fixture maximum`, () => {
     const accuracy = frameModelAccuracy(id)
     const expectedKm = satelliteFixtureMaximumKm(id)
     const toleranceKm = Math.max(1, expectedKm) * 1e-12
 
-    expect(accuracy.kind).toBe('fit-residual')
-    expect(Math.abs(accuracy.estimateKm! - expectedKm)).toBeLessThan(toleranceKm)
-    expect([accuracy.validFromJdTt, accuracy.validToJdTt]).toEqual([
+    assert.equal(accuracy.kind, 'fit-residual')
+    assert.ok(Math.abs(accuracy.estimateKm! - expectedKm) < toleranceKm)
+    assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [
       satelliteRecord(id).fitFromJdTdb,
       satelliteRecord(id).fitToJdTdb,
     ])
@@ -92,25 +94,23 @@ describe('frame position-model accuracy metadata', () => {
 
   it('preserves the short record-specific satellite windows', () => {
     for (const id of ['hyperion', 'janus', 'epimetheus', 'atlas', 'prometheus', 'pandora'] as const) {
-      expect([frameModelAccuracy(id).validFromJdTt, frameModelAccuracy(id).validToJdTt]).toEqual([
+      assert.deepEqual(([frameModelAccuracy(id).validFromJdTt, frameModelAccuracy(id).validToJdTt]), [
         2458849.5,
         2463232.5,
       ])
     }
-    expect([frameModelAccuracy('pan').validFromJdTt, frameModelAccuracy('pan').validToJdTt]).toEqual([
+    assert.deepEqual(([frameModelAccuracy('pan').validFromJdTt, frameModelAccuracy('pan').validToJdTt]), [
       2433282.5,
       2469807.5,
     ])
   })
 
-  it.each(PLANET_IDS)(
-    'conservatively propagates represented-moon errors onto the %s centre edge',
-    (planet) => {
+  for (const planet of PLANET_IDS) it(`conservatively propagates represented-moon errors onto the ${planet} centre edge`, () => {
       const moons = moonsOf(planet).filter(id => bodyData(id).gravitationalParameterKm3PerS2 > 0)
       const accuracy = frameModelAccuracy(planet)
       if (moons.length === 0) {
-        expect(accuracy.kind).toBe('exact-convention')
-        expect(accuracy.estimateKm).toBe(0)
+        assert.equal(accuracy.kind, 'exact-convention')
+        assert.equal(accuracy.estimateKm, 0)
         return
       }
 
@@ -134,11 +134,10 @@ describe('frame position-model accuracy metadata', () => {
         }
       }
 
-      expect(accuracy.kind).toBe(planet === 'earth' ? 'model-budget' : 'fit-residual')
-      expect(accuracy.estimateKm).toBeCloseTo(expectedKm, 12)
-      expect([accuracy.validFromJdTt, accuracy.validToJdTt]).toEqual([validFromJdTt, validToJdTt])
-    },
-  )
+      assert.equal(accuracy.kind, planet === 'earth' ? 'model-budget' : 'fit-residual')
+      assert.ok(Math.abs(accuracy.estimateKm - (expectedKm)) < 10 ** -12 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
+      assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [validFromJdTt, validToJdTt])
+    })
 
   it('reports the Sun correction as the actual sampled DE441 residual', () => {
     let expectedKm = 0
@@ -149,26 +148,26 @@ describe('frame position-model accuracy metadata', () => {
       )
     }
     const accuracy = frameModelAccuracy('sun')
-    expect(accuracy.kind).toBe('fit-residual')
-    expect(accuracy.estimateKm).toBeCloseTo(expectedKm, 10)
-    expect([accuracy.validFromJdTt, accuracy.validToJdTt]).toEqual([
+    assert.equal(accuracy.kind, 'fit-residual')
+    assert.ok(Math.abs(accuracy.estimateKm - (expectedKm)) < 10 ** -10 / 2, `${accuracy.estimateKm} is not close to ${expectedKm}`)
+    assert.deepEqual(([accuracy.validFromJdTt, accuracy.validToJdTt]), [
       VSOP87A_VALID_FROM_JD,
       VSOP87A_VALID_TO_JD,
     ])
   })
 
   it('keeps the SSB-to-sol zero separate from unknown outer placement', () => {
-    expect(frameModelAccuracy('ssb')).toMatchObject({ kind: 'exact-convention', estimateKm: 0 })
+    assert.partialDeepStrictEqual(frameModelAccuracy('ssb'), { kind: 'exact-convention', estimateKm: 0 })
     for (const id of ['cmb', 'mw', 'sol']) {
-      expect(frameModelAccuracy(id)).toMatchObject({ kind: 'unknown', estimateKm: null })
+      assert.partialDeepStrictEqual(frameModelAccuracy(id), { kind: 'unknown', estimateKm: null })
     }
   })
 
   it('does not turn unsupported or unregistered models into zero-error claims', () => {
     for (const id of DWARF_PLANET_IDS) {
-      expect(frameModelAccuracy(id)).toMatchObject({ frameId: id, kind: 'unknown', estimateKm: null })
+      assert.partialDeepStrictEqual(frameModelAccuracy(id), { frameId: id, kind: 'unknown', estimateKm: null })
     }
-    expect(frameModelAccuracy('not-a-frame')).toMatchObject({
+    assert.partialDeepStrictEqual(frameModelAccuracy('not-a-frame'), {
       frameId: 'not-a-frame',
       kind: 'unknown',
       estimateKm: null,
@@ -188,9 +187,9 @@ describe('frame position-model accuracy metadata', () => {
     ]
     for (const id of frameIds) {
       const accuracy = frameModelAccuracy(id)
-      expect(accuracy.sourceLabel.length).toBeGreaterThan(10)
-      expect(accuracy.sourceUrl).toMatch(/^https:\/\//)
-      expect(accuracy.explanation.length).toBeGreaterThan(40)
+      assert.ok(accuracy.sourceLabel.length > 10)
+      assert.match(accuracy.sourceUrl, /^https:\/\//)
+      assert.ok(accuracy.explanation.length > 40)
     }
   })
 })

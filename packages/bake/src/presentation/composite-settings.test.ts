@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { expect, it } from 'vitest';
+import { it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { prepareCssPresentation, parsePresentationProfile } from './css-presentation.ts';
 import { presentationHostAdapters } from '../objects/host-adapters/index.ts';
 import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
@@ -20,9 +22,9 @@ for (const id of ['neptune']) it(`${id} Rings controls the prepared ring mesh`, 
   const variants = [false, true].map(rings => prepared.variants.find(variant =>
     variant.when.datasetId === prepared.controls.datasets?.defaultDataset && variant.when.shadows === false && variant.when.rings === rings));
   for (const [index, variant] of variants.entries()) {
-    expect(variant).toBeDefined();
+    assert.notEqual(variant, undefined);
     const display = variant!.writes.find(write => write.kind === 'style' && write.name === 'display' &&
       prepared.tree.nodes[write.target]?.className?.includes('rings'));
-    expect(display).toMatchObject({ value: index ? 'block' : 'none' });
+    assert.partialDeepStrictEqual(display, { value: index ? 'block' : 'none' });
   }
 }, 30_000);

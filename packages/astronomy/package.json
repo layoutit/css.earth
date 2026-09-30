@@ -37,8 +37,6 @@
     "build": "node cli/body-records.mts && tsup",
     "typecheck": "node cli/body-records.mts && tsc --noEmit -p tsconfig.json && tsc -p cli/tsconfig.json",
     "typecheck:cli": "tsc -p cli/tsconfig.json",
-    "test": "node cli/body-records.mts && vitest run",
-    "test:coverage": "node cli/body-records.mts && vitest run --coverage",
     "prepublishOnly": "npm run build",
     "prepare:data": "node cli/body-records.mts"
   },
@@ -47,8 +45,6 @@
   },
   "devDependencies": {
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
-    "vitest": "^3.1.1",
-    "@vitest/coverage-v8": "^3.1.1"
+    "typescript": "^5.3.3"
   }
 }

@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { cometElements, cometPositionKm } from './comets.js'
 import { COMET_FIXTURES } from './__fixtures__/horizons.comets.js'
 import { COMET_IDS } from './bodies.js'
@@ -17,7 +19,7 @@ describe('comet positions against independent JPL Horizons vectors', () => {
       const epoch = cometElements(id).epochJdTt
       const row = COMET_FIXTURES[id].rows.find(row => row.jd === epoch)!
       const actual = cometPositionKm(id, epoch)
-      expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!)), id).toBeLessThan(roundedElementEpochGuardKm[id] ?? 0.001)
+      assert.ok(Math.hypot(...actual.map((v, i) => v - row.position[i]!)) < (roundedElementEpochGuardKm[id] ?? 0.001), id)
     }
   })
   // +/-30-day conics are only a placement approximation: 10,000 km accuracy budget.
@@ -41,8 +43,8 @@ describe('comet positions against independent JPL Horizons vectors', () => {
     for (const id of COMET_IDS) for (const row of [COMET_FIXTURES[id].rows[0], COMET_FIXTURES[id].rows[2]]) {
       const actual = cometPositionKm(id, row.jd)
       const errorKm = Math.hypot(...actual.map((v, i) => v - row.position[i]!))
-      expect(errorKm).toBeLessThan(10000)
-      expect(errorKm, id).toBeLessThan(regressionGuardKm[id])
+      assert.ok(errorKm < 10000)
+      assert.ok(errorKm < regressionGuardKm[id], id)
     }
   })
 })

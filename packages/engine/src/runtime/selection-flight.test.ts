@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { buildSelectionFlightCurve, selectionFlightProgress, createSelectionFlight, createSelectionFlightSample,
   sampleSelectionFlight, sampleSelectionFlightInto, cameraPoseToReferenceFrame, cameraPoseFromReferenceFrame } from './selection-flight.js';
 import type { PhysicalCameraPose, OrientationXyzw, PositionM } from './selection-flight.js';
@@ -8,8 +10,8 @@ const quarterTurn: OrientationXyzw = [0, Math.SQRT1_2, 0, Math.SQRT1_2];
 const pose = (positionM: PositionM, orientationXyzw = identity): PhysicalCameraPose => ({ positionM, orientationXyzw });
 const quaternionDot = (a: OrientationXyzw, b: OrientationXyzw) => a.reduce((sum, value, index) => sum + value * b[index], 0);
 const expectPose = (actual: PhysicalCameraPose, expected: PhysicalCameraPose) => {
-  actual.positionM.forEach((value, index) => expect(value).toBeCloseTo(expected.positionM[index], 4));
-  expect(Math.abs(quaternionDot(actual.orientationXyzw, expected.orientationXyzw))).toBeCloseTo(1, 12);
+  actual.positionM.forEach((value, index) => assert.ok(Math.abs(value - (expected.positionM[index])) < 10 ** -4 / 2, `${value} is not close to ${expected.positionM[index]}`));
+  assert.ok(Math.abs(Math.abs(quaternionDot(actual.orientationXyzw, expected.orientationXyzw)) - (1)) < 10 ** -12 / 2, `${Math.abs(quaternionDot(actual.orientationXyzw, expected.orientationXyzw))} is not close to ${1}`);
 };
 
 describe('universal selection flight', () => {
@@ -27,8 +29,8 @@ describe('universal selection flight', () => {
     const times = [0, .1, .25, .5, .75, .9, 1];
     for (const fixture of fixtures) {
       const curve = buildSelectionFlightCurve(fixture.start, fixture.end);
-      expect(curve.durationS).toBe(fixture.durationS);
-      times.forEach((time, index) => expect(selectionFlightProgress(curve, time)).toBeCloseTo(fixture.progress[index], 14));
+      assert.equal(curve.durationS, fixture.durationS);
+      times.forEach((time, index) => assert.ok(Math.abs(selectionFlightProgress(curve, time) - (fixture.progress[index])) < 10 ** -14 / 2, `${selectionFlightProgress(curve, time)} is not close to ${fixture.progress[index]}`));
     }
   });
 
@@ -39,27 +41,27 @@ describe('universal selection flight', () => {
     const flight = createSelectionFlight({ from, to, focusPositionM });
     expectPose(sampleSelectionFlight(flight, 0), from);
     expectPose(sampleSelectionFlight(flight, flight.durationS), to);
-    expect(sampleSelectionFlight(flight, flight.durationS).complete).toBe(true);
+    assert.equal(sampleSelectionFlight(flight, flight.durationS).complete, true);
     const middle = sampleSelectionFlight(flight, .5);
-    expect(middle.orientationXyzw[1]).toBeCloseTo(Math.sin(Math.PI / 4 * middle.progress), 12);
-    expect(flight.orientationDurationS).toBe(flight.positionDurationS);
-    expect(sampleSelectionFlight(flight, 1).complete).toBe(false);
+    assert.ok(Math.abs(middle.orientationXyzw[1] - (Math.sin(Math.PI / 4 * middle.progress))) < 10 ** -12 / 2, `${middle.orientationXyzw[1]} is not close to ${Math.sin(Math.PI / 4 * middle.progress)}`);
+    assert.equal(flight.orientationDurationS, flight.positionDurationS);
+    assert.equal(sampleSelectionFlight(flight, 1).complete, false);
   });
 
   it('keeps an anchored target centered through a short oblique zoom and completes the turn on arrival', () => {
     const from = pose([0, 0, 1e13]);
     const to = pose([1e7, 0, 0], quarterTurn);
     const flight = createSelectionFlight({ from, to, focusPositionM: [0, 0, 0], durationS: .35 });
-    expect(flight.durationS).toBe(.35);
+    assert.equal(flight.durationS, .35);
     for (let step = 0; step <= 60; step++) {
       const sample = sampleSelectionFlight(flight, flight.durationS * step / 60);
       const local = cameraPoseFromReferenceFrame(pose([0, 0, 0]), {
         originM: sample.positionM, localToReferenceXyzw: sample.orientationXyzw,
       });
       const range = Math.hypot(...local.positionM);
-      expect(Math.abs(local.positionM[0]) / range).toBeLessThan(1e-12);
-      expect(Math.abs(local.positionM[1]) / range).toBeLessThan(1e-12);
-      expect(local.positionM[2]).toBeLessThan(0);
+      assert.ok((Math.abs(local.positionM[0]) / range) < 1e-12);
+      assert.ok((Math.abs(local.positionM[1]) / range) < 1e-12);
+      assert.ok(local.positionM[2] < 0);
     }
     expectPose(sampleSelectionFlight(flight, .35), to);
   });
@@ -67,8 +69,8 @@ describe('universal selection flight', () => {
   it('uses range interpolation and the shortest great-circle approach in metres', () => {
     const flight = createSelectionFlight({ from: pose([100, 0, 0]), to: pose([0, 0, 100]), focusPositionM: [0, 0, 0] });
     const sample = sampleSelectionFlight(flight, flight.durationS / 2);
-    [100 * Math.SQRT1_2, 0, 100 * Math.SQRT1_2].forEach((value, index) => expect(sample.positionM[index]).toBeCloseTo(value, 12));
-    expect(Math.hypot(...sample.positionM)).toBeCloseTo(100, 12);
+    [100 * Math.SQRT1_2, 0, 100 * Math.SQRT1_2].forEach((value, index) => assert.ok(Math.abs(sample.positionM[index] - (value)) < 10 ** -12 / 2, `${sample.positionM[index]} is not close to ${value}`));
+    assert.ok(Math.abs(Math.hypot(...sample.positionM) - (100)) < 10 ** -12 / 2, `${Math.hypot(...sample.positionM)} is not close to ${100}`);
   });
 
   it('takes the nearest quaternion sign without a full spin or roll snap', () => {
@@ -78,24 +80,24 @@ describe('universal selection flight', () => {
     let previous = sampleSelectionFlight(flight, 0);
     for (let step = 1; step <= 100; step++) {
       const sample = sampleSelectionFlight(flight, step * flight.durationS / 100);
-      expect(quaternionDot(previous.orientationXyzw, sample.orientationXyzw)).toBeGreaterThan(.9999);
-      expect(Math.hypot(...sample.orientationXyzw)).toBeCloseTo(1, 12);
+      assert.ok(quaternionDot(previous.orientationXyzw, sample.orientationXyzw) > .9999);
+      assert.ok(Math.abs(Math.hypot(...sample.orientationXyzw) - (1)) < 10 ** -12 / 2, `${Math.hypot(...sample.orientationXyzw)} is not close to ${1}`);
       previous = sample;
     }
-    expect(Math.abs(quaternionDot(previous.orientationXyzw, toQ))).toBeCloseTo(1, 12);
+    assert.ok(Math.abs(Math.abs(quaternionDot(previous.orientationXyzw, toQ)) - (1)) < 10 ** -12 / 2, `${Math.abs(quaternionDot(previous.orientationXyzw, toQ))} is not close to ${1}`);
   });
 
   it('starts an interrupted flight at the last painted pose, independent of reused buffers', () => {
     const first = createSelectionFlight({ from: pose([1e11, 0, 0]), to: pose([0, 0, 2e7], quarterTurn), focusPositionM: [0, 0, 0] });
     const out = createSelectionFlightSample(), positionBuffer = out.positionM, orientationBuffer = out.orientationXyzw;
-    expect(sampleSelectionFlightInto(first, .4, out)).toBe(out);
+    assert.equal(sampleSelectionFlightInto(first, .4, out), out);
     const expected = structuredClone(out);
     const replacement = createSelectionFlight({ from: out, to: pose([2e11, 0, 1e7]), focusPositionM: [2e11, 0, 0] });
     sampleSelectionFlightInto(first, first.durationS, out);
     const restarted = sampleSelectionFlight(replacement, 0);
-    expect(restarted.positionM).toEqual(expected.positionM);
-    expect(restarted.orientationXyzw).toEqual(expected.orientationXyzw);
-    expect(out.positionM).toBe(positionBuffer); expect(out.orientationXyzw).toBe(orientationBuffer);
+    assert.deepEqual(restarted.positionM, expected.positionM);
+    assert.deepEqual(restarted.orientationXyzw, expected.orientationXyzw);
+    assert.equal(out.positionM, positionBuffer); assert.equal(out.orientationXyzw, orientationBuffer);
   });
 
   it('transports both position and roll between independently rotated focus frames', () => {
@@ -113,18 +115,18 @@ describe('universal selection flight', () => {
     let previous = sampleSelectionFlight(flight, 0);
     for (let step = 1; step <= 100; step++) {
       const sample = sampleSelectionFlight(flight, step * flight.durationS / 100);
-      expect(sample.positionM.every(Number.isFinite)).toBe(true);
-      expect(Math.hypot(...sample.positionM)).toBeCloseTo(100, 10);
-      expect(Math.hypot(...sample.positionM.map((value, index) => value - previous.positionM[index]))).toBeLessThan(5);
+      assert.equal(sample.positionM.every(Number.isFinite), true);
+      assert.ok(Math.abs(Math.hypot(...sample.positionM) - (100)) < 10 ** -10 / 2, `${Math.hypot(...sample.positionM)} is not close to ${100}`);
+      assert.ok(Math.hypot(...sample.positionM.map((value, index) => value - previous.positionM[index])) < 5);
       previous = sample;
     }
   });
 
   it('rejects invalid durations and nonphysical camera poses', () => {
     const input = { from: pose([100, 0, 0]), to: pose([0, 0, 100]), focusPositionM: [0, 0, 0] as const };
-    expect(() => createSelectionFlight({ ...input, durationS: 0 })).toThrow();
-    expect(() => createSelectionFlight({ ...input, from: pose([0, 0, 0]) })).toThrow();
-    expect(() => createSelectionFlight({ ...input, to: pose([100, 0, 0], [0, 0, 0, 0]) })).toThrow();
-    expect(() => sampleSelectionFlight(createSelectionFlight(input), NaN)).toThrow();
+    assert.throws(() => createSelectionFlight({ ...input, durationS: 0 }));
+    assert.throws(() => createSelectionFlight({ ...input, from: pose([0, 0, 0]) }));
+    assert.throws(() => createSelectionFlight({ ...input, to: pose([100, 0, 0], [0, 0, 0, 0]) }));
+    assert.throws(() => sampleSelectionFlight(createSelectionFlight(input), NaN));
   });
 });

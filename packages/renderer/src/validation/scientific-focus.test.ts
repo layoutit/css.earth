@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {test} from 'vitest';
+import { test } from 'node:test';
 import {requireVariants} from './presentation.js';
 import type {PreparedTree} from '../rendering/prepared-presentation.js';
 import type {ObjectControls} from '../runtime/object-contract.js';

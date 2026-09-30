@@ -1,7 +1,8 @@
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { afterAll, beforeAll, expect, it } from 'vitest';
+import { after as afterAll, before as beforeAll, it } from 'node:test';
+import assert from 'node:assert/strict';
 import { prepareStarsObject } from './stars/index.ts';
 import { prepareSurfaceShellObject } from './shell/index.ts';
 import { prepareDensityVolumeObject } from './density/index.ts';
@@ -16,12 +17,12 @@ afterAll(async () => { await rm(object, { recursive: true, force: true }); });
 
 for (const [name, bake] of Object.entries(bakes)) {
   it(`${name}: a bake into the object's prepared directory without the host inventory is refused before it reads anything`, async () => {
-    await expect(bake({ objectDirectory: object })).rejects.toThrow(guard);
-    await expect(bake({ objectDirectory: object, outputDirectory: join(object, 'prepared') })).rejects.toThrow(guard);
+    await assert.rejects(bake({ objectDirectory: object }), guard);
+    await assert.rejects(bake({ objectDirectory: object, outputDirectory: join(object, 'prepared') }), guard);
   });
   it(`${name}: with the inventory, or into a scratch directory, the bake proceeds past the guard`, async () => {
     const inventory = async () => { throw new Error('the inventory runs only after a complete bake'); };
-    await expect(bake({ objectDirectory: object, inventory })).rejects.toThrow(/ENOENT/u);
-    await expect(bake({ objectDirectory: object, outputDirectory: join(object, 'scratch') })).rejects.toThrow(/ENOENT/u);
+    await assert.rejects(bake({ objectDirectory: object, inventory }), /ENOENT/u);
+    await assert.rejects(bake({ objectDirectory: object, outputDirectory: join(object, 'scratch') }), /ENOENT/u);
   });
 }

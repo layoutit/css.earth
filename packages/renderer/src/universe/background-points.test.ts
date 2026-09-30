@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import { mountBackgroundPoints } from './background-points.js';
@@ -13,17 +15,17 @@ test('inside our galaxy the banks neither load nor show', async () => {
   const fetched: string[] = [];
   const field = mountBackgroundPoints(host, before, [{ url: '/a.json' }, { url: '/b.json' }], async url => { fetched.push(url); return new Promise(() => {}); });
   const roots = [...host.querySelectorAll<HTMLElement>('[data-catalogue-points]')];
-  expect(roots).toHaveLength(2);
+  assert.equal(roots.length, 2);
   field.publish(publication, 8_000 * pc, 0);
-  expect(fetched).toEqual([]);
-  expect(roots.map(root => root.style.display)).toEqual(['none', 'none']);
+  assert.deepEqual(fetched, []);
+  assert.deepEqual(roots.map(root => root.style.display), ['none', 'none']);
   field.publish(publication, 1e6 * pc, 1);
-  expect(fetched).toEqual(['/a.json', '/b.json']);
-  expect(roots.map(root => root.style.opacity)).toEqual(['1', '1']);
+  assert.deepEqual(fetched, ['/a.json', '/b.json']);
+  assert.deepEqual(roots.map(root => root.style.opacity), ['1', '1']);
   field.publish(publication, 8_000 * pc, 0);
-  expect(roots.map(root => root.style.display)).toEqual(['none', 'none']);
+  assert.deepEqual(roots.map(root => root.style.display), ['none', 'none']);
   field.destroy();
-  expect(host.querySelectorAll('[data-catalogue-points]')).toHaveLength(0);
+  assert.equal(host.querySelectorAll('[data-catalogue-points]').length, 0);
 });
 
 test('a far survey begins at its own distance: fetched there, whole one doubling later', async () => {
@@ -33,8 +35,8 @@ test('a far survey begins at its own distance: fetched there, whole one doubling
   const field = mountBackgroundPoints(host, before, [{ url: '/near.json' }, { url: '/far.json', fromDistanceM: 300e6 * pc }],
     async url => { fetched.push(url); return new Promise(() => {}); });
   field.publish(publication, 100e6 * pc, 1);
-  expect(fetched, 'the Nearby Universe loads only the near bank').toEqual(['/near.json']);
+  assert.deepEqual(fetched, ['/near.json'], 'the Nearby Universe loads only the near bank');
   field.publish(publication, 450e6 * pc, 1);
-  expect(fetched).toEqual(['/near.json', '/far.json']);
+  assert.deepEqual(fetched, ['/near.json', '/far.json']);
   field.destroy();
 });

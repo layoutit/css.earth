@@ -1,4 +1,4 @@
-import { test } from 'vitest';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createEmissionField, emissionComponentBounds, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from './emission.ts';
 import type { EmissionComponent, EmissionFieldModel } from '../contracts/emission.ts';

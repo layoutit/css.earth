@@ -1,10 +1,12 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createPreparedDepthPartitions, sceneEye } from './prepared-depth-partitions.js';
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 
 test('recovers the observer under rotation, translation and scene scale', () => {
   const p = physicalProjectionFromCamera([0, 0, 1, 0, 1, 0, -1, 0, 0], [-12, -8, 4], 2, { focalPixels: 600, principalOffsetPixels: [21, -7] });
-  expect(sceneEye(p)).toEqual([2, 4, 6]);
+  assert.deepEqual(sceneEye(p), [2, 4, 6]);
 });
 
 test('camera publication preserves carriers and changes prepared ordering only across a separating plane', () => {
@@ -21,15 +23,15 @@ test('camera publication preserves carriers and changes prepared ordering only a
     { focalPixels: 600, principalOffsetPixels: [41,-20] });
   nodes[0].style.transform = 'translate3d(41px,-20px,-100px) scale3d(1,1,1)';
   publish(projection(10));
-  expect(nodes[2].style.transform).toBe(nodes[0].style.transform);
-  expect(nodes[1].style.zIndex).toBe('0'); expect(nodes[3].style.zIndex).toBe('1');
+  assert.equal(nodes[2].style.transform, nodes[0].style.transform);
+  assert.equal(nodes[1].style.zIndex, '0'); assert.equal(nodes[3].style.zIndex, '1');
   writes.length = 0;
-  publish(projection(12)); expect(writes).toEqual([]);
-  publish(projection(-10)); expect(writes).toEqual(['3:zIndex:0', '1:zIndex:1']);
+  publish(projection(12)); assert.deepEqual(writes, []);
+  publish(projection(-10)); assert.deepEqual(writes, ['3:zIndex:0', '1:zIndex:1']);
   nodes[0].hidden = true; publish(projection(-10));
-  expect(nodes[2].hidden).toBe(true); expect(nodes[4].hidden).toBe(true);
+  assert.equal(nodes[2].hidden, true); assert.equal(nodes[4].hidden, true);
   nodes[0].hidden = false; publish(projection(10));
-  expect(nodes[2].hidden).toBe(false);
+  assert.equal(nodes[2].hidden, false);
 });
 
 test('fixed prepared priorities are applied once while camera transforms keep publishing', () => {
@@ -39,8 +41,8 @@ test('fixed prepared priorities are applied once while camera transforms keep pu
   const projection = physicalProjectionFromCamera([1,0,0,0,1,0,0,0,1], [0,0,-100], 1,
     { focalPixels: 600, principalOffsetPixels: [0,0] });
   nodes[0].style.transform = 'scale(1)'; publish(projection);
-  expect(nodes[1].style.zIndex).toBe('1'); expect(nodes[3].style.zIndex).toBe('0');
+  assert.equal(nodes[1].style.zIndex, '1'); assert.equal(nodes[3].style.zIndex, '0');
   Object.defineProperty(nodes[1].style, 'zIndex', { set() { throw new Error('Repeated fixed priority write'); } });
   nodes[0].style.transform = 'scale(2)'; publish(projection);
-  expect(nodes[2].style.transform).toBe('scale(2)'); expect(nodes[4].style.transform).toBe('scale(2)');
+  assert.equal(nodes[2].style.transform, 'scale(2)'); assert.equal(nodes[4].style.transform, 'scale(2)');
 });

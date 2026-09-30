@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createWorldFrameProjection } from './world-frame-projection.js';
 import { createPreparedRingProjector, createSphereChordTest } from '../solar-system/prepared-ring-projection.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
@@ -13,21 +15,21 @@ test('one view shares body eyes and parent shadow bounds without retaining anoth
   const first = createWorldFrameProjection(focus, focus, toEye, project);
   const common = first.occlusion(null), other = first.occlusion(parent);
   for (let index = 0; index < 100; index++) {
-    expect(first.occlusion(focus)).toBe(common);
-    expect(first.occlusion(parent)).toBe(other);
-    expect(first.eye(focus)).toBe(first.eye(focus));
+    assert.equal(first.occlusion(focus), common);
+    assert.equal(first.occlusion(parent), other);
+    assert.equal(first.eye(focus), first.eye(focus));
     first.eye(parent);
   }
-  expect(transforms).toBe(2);
-  expect(projections).toBe(8); // Four tangent directions of each unique occluder.
-  expect(common.hidden([0, 0, -110])).toBe(true);
-  expect(common.hidden([0, 0, -110], focus.id)).toBe(false);
+  assert.equal(transforms, 2);
+  assert.equal(projections, 8); // Four tangent directions of each unique occluder.
+  assert.equal(common.hidden([0, 0, -110]), true);
+  assert.equal(common.hidden([0, 0, -110], focus.id), false);
   const next = createWorldFrameProjection(focus, parent,
     point => [point[0] + 200, point[1], point[2]], project);
-  expect(next.eye(focus)).toEqual([200, 0, -100]);
-  expect(next.occlusion(null).hidden([0, 0, -110])).toBe(false);
-  expect(next.occlusion(parent)).toBe(next.occlusion(null));
-  expect(first.eye(focus)).toEqual([0, 0, -100]);
+  assert.deepEqual(next.eye(focus), [200, 0, -100]);
+  assert.equal(next.occlusion(null).hidden([0, 0, -110]), false);
+  assert.equal(next.occlusion(parent), next.occlusion(null));
+  assert.deepEqual(first.eye(focus), [0, 0, -100]);
 });
 
 test('a sphere wholly behind the eye plane hides nothing and sends no chord to the detailed split', () => {
@@ -37,15 +39,14 @@ test('a sphere wholly behind the eye plane hides nothing and sends no chord to t
   const frame = createWorldFrameProjection(behind, front, point => [...point] as Vector3, project);
   const occlusion = frame.occlusion(null);
   // The front sphere still hides what lies behind it; the one behind the eye hides nothing, exactly as the ray test says.
-  expect(occlusion.hidden([0, 0, -200])).toBe(true);
-  expect(occlusion.hidden([30, 0, -200])).toBe(false);
-  for (const target of [[30, 0, -200], [0, 5, -1e6], [-1, 1, -0.5]] as Vector3[]) expect(rayHitsSphereBefore(target, [0, 0, 50], 10)).toBe(false);
+  assert.equal(occlusion.hidden([0, 0, -200]), true);
+  assert.equal(occlusion.hidden([30, 0, -200]), false);
+  for (const target of [[30, 0, -200], [0, 5, -1e6], [-1, 1, -0.5]] as Vector3[]) assert.equal(rayHitsSphereBefore(target, [0, 0, 50], 10), false);
   const lone = createWorldFrameProjection(behind, behind, point => [...point] as Vector3, project).occlusion(null);
-  expect(lone.mayOcclude([-400, 0], [400, 0])).toBe(false);
-  expect(lone.hidden([0, 0, -200])).toBe(false);
+  assert.equal(lone.mayOcclude([-400, 0], [400, 0]), false);
+  assert.equal(lone.hidden([0, 0, -200]), false);
 });
 
-// 180 views x 3 scales of ring projection is CPU-heavy; measured 1-3.6s, close enough to vitest's 5s default to flake on a loaded runner.
 test('shared occlusion preserves point visibility, clipped chords and saturated extents', () => {
   let seed = 987654321;
   const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 2 ** 32; };
@@ -80,16 +81,15 @@ test('shared occlusion preserves point visibility, clipped chords and saturated 
         for (const exceptId of [undefined, focus.id, selected.id, 'child']) {
           // A body's own parent is never itself in the validated registry.
           if (exceptId === primary?.id) continue;
-          expect(shared.hidden(target, exceptId)).toBe(oldHidden(target, exceptId));
+          assert.equal(shared.hidden(target, exceptId), oldHidden(target, exceptId));
         }
       }
       const options = { toEye, project, near: .1 * scale, clipX: 500, clipY: 300 };
       const before = createPreparedRingProjector({ ...options, hidden: oldHidden, mayOcclude: oldMay });
       const after = createPreparedRingProjector({ ...options, hidden: shared.hidden, mayOcclude: shared.mayOcclude });
       const flat = Float64Array.from(vertices.flat());
-      expect(after(flat, trail)).toEqual(before(flat, trail));
-      for (const saturation of [48, 128]) expect(after.measureExtent(flat, trail, saturation))
-        .toBe(before.measureExtent(flat, trail, saturation));
+      assert.deepEqual(after(flat, trail), before(flat, trail));
+      for (const saturation of [48, 128]) assert.equal(after.measureExtent(flat, trail, saturation), before.measureExtent(flat, trail, saturation));
     }
   }
 }, 20000);
@@ -100,13 +100,13 @@ test('a far disc sliding behind a near sphere is part covered before it is wholl
     const moon = { id: 'moon', positionM: [0, 0, -10 * scale] as Vector3, radiusM: scale };
     const frame = createWorldFrameProjection(moon, moon, point => [...point] as Vector3, point => [point[0] / -point[2], point[1] / -point[2]]);
     const cover = (x: number) => frame.occlusion(null).cover([x * scale, 0, -1000 * scale], 20 * scale);
-    expect(cover(200)).toBeNull(); // 11.3° off the axis: clear.
-    expect(cover(100)).toBe('moon'); // The planet's centre is behind the limb, but most of its disc is not.
-    expect(cover(118)).toBe('moon'); // Only the planet's near edge is behind.
-    expect(cover(50)).toBe(true);
-    expect(cover(0)).toBe(true);
-    expect(frame.occlusion(null).cover([0, 0, -1000 * scale], 20 * scale, moon.id)).toBeNull();
+    assert.equal(cover(200), null); // 11.3° off the axis: clear.
+    assert.equal(cover(100), 'moon'); // The planet's centre is behind the limb, but most of its disc is not.
+    assert.equal(cover(118), 'moon'); // Only the planet's near edge is behind.
+    assert.equal(cover(50), true);
+    assert.equal(cover(0), true);
+    assert.equal(frame.occlusion(null).cover([0, 0, -1000 * scale], 20 * scale, moon.id), null);
     // Nothing nearer than the sphere is covered by it.
-    expect(frame.occlusion(null).cover([0, 0, -5 * scale], scale / 10)).toBeNull();
+    assert.equal(frame.occlusion(null).cover([0, 0, -5 * scale], scale / 10), null);
   }
 });

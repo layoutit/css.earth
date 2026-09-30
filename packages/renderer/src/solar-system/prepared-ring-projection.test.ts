@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createPreparedRingProjector, createRetainedRingProjection, createSphereChordTest, orbitBoundsMayContribute, orbitProjectionCapacity } from './prepared-ring-projection.js';
 import { rayHitsSphereBefore } from './heliocentric-geometry.js';
 import type { Vector3 } from './types.js';
@@ -27,14 +29,14 @@ test('the chord test bounds a sphere by its exact screen outline, inside the old
       // A zero-length chord at each surface point must overlap the bound.
       if (!test(point, point)) outside++;
     }
-    expect(outside).toBe(0);
+    assert.equal(outside, 0);
   }
   // A near sphere: points just beyond its outline but inside the cube's corner bound no longer count.
   const near: Vector3 = [0, 0, -12], test = createSphereChordTest(near, 10, project);
   const edge = project([Math.sin(Math.asin(10 / 12)), 0, -Math.cos(Math.asin(10 / 12))])[0]!;
-  expect(test([edge - 1, -40], [edge - 1, -40])).toBe(true);
-  expect(test([edge + 50, -40], [edge + 50, -40])).toBe(false);
-  expect(project([10, 0, -2])[0]! > edge + 50).toBe(true);
+  assert.equal(test([edge - 1, -40], [edge - 1, -40]), true);
+  assert.equal(test([edge + 50, -40], [edge + 50, -40]), false);
+  assert.equal((project([10, 0, -2])[0]! > edge + 50), true);
 });
 
 test('distance fade preserves nearby chords and clips a long distant continuation into bounded opacity bands', () => {
@@ -44,33 +46,33 @@ test('distance fade preserves nearby chords and clips a long distant continuatio
   const original = createProjector(options)(vertices, trail, undefined, true, undefined, false);
   const projector = createProjector({ ...options, depthFade: { start: 400, end: 1600 } });
   const faded = projector(vertices, trail, undefined, true, pool, false);
-  expect(faded[0]).toEqual(original[0]);
-  expect(faded.length).toBeGreaterThan(5);
-  expect(faded.length).toBeLessThan(20);
-  expect(faded.some(s => s[4] > 0 && s[4] < .2)).toBe(true);
-  expect(faded.every(s => s[4] > 0 && s[4] <= 1 && s.every(Number.isFinite))).toBe(true);
+  assert.deepEqual(faded[0], original[0]);
+  assert.ok(faded.length > 5);
+  assert.ok(faded.length < 20);
+  assert.equal(faded.some(s => s[4] > 0 && s[4] < .2), true);
+  assert.equal(faded.every(s => s[4] > 0 && s[4] <= 1 && s.every(Number.isFinite)), true);
   // The far endpoint no longer appears; intermediate points stay on the
   // original projected line, rather than inventing a different orbit curve.
   const end = project(vertices[2]);
-  expect(faded.every(s => Math.hypot(s[2] - end[0], s[3] - end[1]) > 1)).toBe(true);
+  assert.equal(faded.every(s => Math.hypot(s[2] - end[0], s[3] - end[1]) > 1), true);
   for (const s of faded.slice(1)) {
     const line = original[1], dx = line[2] - line[0], dy = line[3] - line[1];
-    expect(Math.abs((s[0] - line[0]) * dy - (s[1] - line[1]) * dx)).toBeLessThan(1e-7);
+    assert.ok(Math.abs((s[0] - line[0]) * dy - (s[1] - line[1]) * dx) < 1e-7);
   }
-  expect(projector(vertices, trail, undefined, true, pool, false)).toBe(faded);
+  assert.equal(projector(vertices, trail, undefined, true, pool, false), faded);
   const distant = createProjector({ ...options, depthFade: { start: 5000, end: 20000 } })(vertices, trail, undefined, true, undefined, false);
-  expect(distant).toEqual(original);
+  assert.deepEqual(distant, original);
 });
 
 test('fade clipping handles reversed chords, near-plane crossings and hidden trails', () => {
   const vertices: Vector3[] = [[50, 0, -4000], [10, 0, -100], [0, 0, 100]];
   const projector = createProjector({ ...limits, hidden: () => false, depthFade: { start: 400, end: 1600 } });
   const faded = projector(vertices, [1, 1], undefined, false, undefined, false);
-  expect(faded.length).toBeGreaterThan(10);
-  expect(faded.every(s => s.every(Number.isFinite))).toBe(true);
-  expect(faded[0][4]).toBeLessThan(faded.at(-1)![4]);
-  expect(projector(vertices, [0, 0], undefined, false, undefined, false)).toEqual([]);
-  expect(() => createProjector({ ...limits, hidden: () => false, depthFade: { start: 400, end: 300 } })).toThrow(/fade/);
+  assert.ok(faded.length > 10);
+  assert.equal(faded.every(s => s.every(Number.isFinite)), true);
+  assert.ok(faded[0][4] < faded.at(-1)![4]);
+  assert.deepEqual(projector(vertices, [0, 0], undefined, false, undefined, false), []);
+  assert.throws(() => createProjector({ ...limits, hidden: () => false, depthFade: { start: 400, end: 300 } }), /fade/);
 });
 
 test('a retained projection preserves clipped snapshots while reusing bounded slots through retirement and re-entry', () => {
@@ -87,14 +89,14 @@ test('a retained projection preserves clipped snapshots while reusing bounded sl
   for (offset of [150, 1000, -500, 0]) {
     const expected = projector(vertices, trail);
     const actual = projector(vertices, trail, undefined, false, retained);
-    expect(actual).toBe(first);
-    expect(actual).toEqual(expected);
-    for (let i = 0; i < Math.min(slots.length, actual.length); i++) expect(actual[i]).toBe(slots[i]);
+    assert.equal(actual, first);
+    assert.deepEqual(actual, expected);
+    for (let i = 0; i < Math.min(slots.length, actual.length); i++) assert.equal(actual[i], slots[i]);
   }
-  expect(snapshot).toEqual(first);
-  expect(Object.isFrozen(snapshot)).toBe(true);
-  expect(Object.isFrozen(snapshot[0])).toBe(true);
-  expect(() => projector(vertices, trail, undefined, false, createRetainedRingProjection(1))).toThrow(/capacity/);
+  assert.deepEqual(snapshot, first);
+  assert.equal(Object.isFrozen(snapshot), true);
+  assert.equal(Object.isFrozen(snapshot[0]), true);
+  assert.throws(() => projector(vertices, trail, undefined, false, createRetainedRingProjection(1)), /capacity/);
 });
 
 test('prepared orbit bounds reject only offscreen or fully faded chords across camera and physical scales', () => {
@@ -115,11 +117,11 @@ test('prepared orbit bounds reject only offscreen or fully faded chords across c
     const reference = createProjector({ ...limits, near, hidden: () => false })(vertices, vertices.map(() => 1));
     const xs = reference.flatMap(s => [s[0], s[2]]), ys = reference.flatMap(s => [s[1], s[3]]);
     const extent = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
-    expect(reference.length === 0 || extent <= 12).toBe(true);
+    assert.equal((reference.length === 0 || extent <= 12), true);
   }
-  expect(rejected).toBeGreaterThan(500); expect(retained).toBeGreaterThan(30);
-  expect(orbitBoundsMayContribute([0, 0, -.2], 1, 800, [130, -40], .1, 1000, 600, 12)).toBe(true);
-  expect(orbitBoundsMayContribute([0, 0, -1000], 1, 800, [130, -40], .1, 1000, 600, 12)).toBe(false);
+  assert.ok(rejected > 500); assert.ok(retained > 30);
+  assert.equal(orbitBoundsMayContribute([0, 0, -.2], 1, 800, [130, -40], .1, 1000, 600, 12), true);
+  assert.equal(orbitBoundsMayContribute([0, 0, -1000], 1, 800, [130, -40], .1, 1000, 600, 12), false);
 });
 
 test('off-shadow prepared chords bypass the detailed ray test without changing projection', () => {
@@ -128,9 +130,9 @@ test('off-shadow prepared chords bypass the detailed ray test without changing p
   const trail = [1, .8, .6, .4]; let calls = 0;
   const hidden = (p: Vector3) => { calls++; return rayHitsSphereBefore(p, center, radius); };
   const reference = createProjector({ ...limits, hidden })(vertices, trail);
-  expect(calls).toBeGreaterThan(60); calls = 0;
+  assert.ok(calls > 60); calls = 0;
   const result = createProjector({ ...limits, hidden, mayOcclude: createSphereChordTest(center, radius, project) })(vertices, trail);
-  expect(result).toEqual(reference); expect(calls).toBe(0);
+  assert.deepEqual(result, reference); assert.equal(calls, 0);
 });
 
 test('full orbit reveal includes zero-weight chords at uniform opacity and restores the trail afterwards', () => {
@@ -139,12 +141,12 @@ test('full orbit reveal includes zero-weight chords at uniform opacity and resto
   const projector = createProjector({ ...limits, hidden: () => false });
   const original = projector(vertices, trail, active);
   const revealed = projector(vertices, trail, active, true);
-  expect(original).toHaveLength(3);
-  expect(revealed).toHaveLength(4);
-  expect(revealed).toEqual(projector(vertices, [1, 1, 1, 1]));
-  expect(revealed.every(segment => segment[4] === 1)).toBe(true);
-  expect(projector(vertices, trail, active)).toEqual(original);
-  expect(trail).toEqual([0, .2, .6, 1]);
+  assert.equal(original.length, 3);
+  assert.equal(revealed.length, 4);
+  assert.deepEqual(revealed, projector(vertices, [1, 1, 1, 1]));
+  assert.equal(revealed.every(segment => segment[4] === 1), true);
+  assert.deepEqual(projector(vertices, trail, active), original);
+  assert.deepEqual(trail, [0, .2, .6, 1]);
 });
 
 test('full orbit reveal never adds a closing chord to an open trajectory', () => {
@@ -153,13 +155,13 @@ test('full orbit reveal never adds a closing chord to an open trajectory', () =>
   const projector = createProjector({ ...limits, hidden: () => false, mayOcclude: () => false });
   const original = projector(vertices, trail, active, false, undefined, false);
   const revealed = projector(vertices, trail, active, true, undefined, false);
-  expect(original).toHaveLength(2);
-  expect(revealed).toHaveLength(vertices.length - 1);
-  expect(revealed.every(segment => segment[4] === 1)).toBe(true);
-  expect(revealed).toEqual(projector(vertices, [1, 1, 1, 0]));
-  expect(projector(vertices, trail, active, true, retained, false)).toEqual(revealed);
-  expect(projector(vertices, trail, active, false, retained, false)).toEqual(original);
-  expect(projector(vertices, [1, 1, 1, 1], undefined, true), 'bound rings retain their closing chord').toHaveLength(4);
+  assert.equal(original.length, 2);
+  assert.equal(revealed.length, vertices.length - 1);
+  assert.equal(revealed.every(segment => segment[4] === 1), true);
+  assert.deepEqual(revealed, projector(vertices, [1, 1, 1, 0]));
+  assert.deepEqual(projector(vertices, trail, active, true, retained, false), revealed);
+  assert.deepEqual(projector(vertices, trail, active, false, retained, false), original);
+  assert.equal(projector(vertices, [1, 1, 1, 1], undefined, true).length, 4, 'bound rings retain their closing chord');
 });
 
 test('prepared active chord indices preserve clipping while avoiding zero-weight vertex transforms', () => {
@@ -173,8 +175,8 @@ test('prepared active chord indices preserve clipping while avoiding zero-weight
     const reference = createProjector(common)(vertices, trail);
     transformed = 0;
     const result = createProjector({ ...common, toEye: point => { transformed++; return point; } })(vertices, trail, active);
-    expect(result).toEqual(reference);
-    expect(transformed).toBeLessThan(vertices.length / 2);
+    assert.deepEqual(result, reference);
+    assert.ok(transformed < vertices.length / 2);
   }
 });
 
@@ -198,7 +200,7 @@ test('broad phase preserves detailed clipping at limbs, eye plane, near-plane cr
       ] as Vector3));
       for (const segment of segments) {
         const vertices = segment.map(p => p.map(v => v * scale) as unknown as Vector3);
-        expect(optimized(vertices, [1, 0])).toEqual(reference(vertices, [1, 0]));
+        assert.deepEqual(optimized(vertices, [1, 0]), reference(vertices, [1, 0]));
       }
     }
   }
@@ -226,8 +228,8 @@ test('measurement demand preserves the clipped extent up to its existing saturat
     const xs = segments.flatMap(s => [s[0], s[2]]), ys = segments.flatMap(s => [s[1], s[3]]);
     const extent = Math.max(1, Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
     for (const saturation of [48, 128]) {
-      expect(projector.measureExtent(vertices, trail, saturation, active)).toBe(Math.min(extent, saturation));
-      expect(projector.measureExtent(vertices, trail, saturation, scattered)).toBe(Math.min(extent, saturation));
+      assert.equal(projector.measureExtent(vertices, trail, saturation, active), Math.min(extent, saturation));
+      assert.equal(projector.measureExtent(vertices, trail, saturation, scattered), Math.min(extent, saturation));
     }
   }
 });
@@ -236,17 +238,17 @@ test('a saturated hidden orbit stops transforming chords while its visible path 
   const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => [100 * Math.cos(index * Math.PI / 64), 80 * Math.sin(index * Math.PI / 64), -200]);
   const trail = vertices.map(() => 1); let transforms = 0;
   const projector = createProjector({ ...limits, toEye: p => { transforms++; return p; }, hidden: () => false, mayOcclude: () => false });
-  expect(projector.measureExtent(vertices, trail, 128)).toBe(128);
-  expect(transforms).toBeLessThan(20);
+  assert.equal(projector.measureExtent(vertices, trail, 128), 128);
+  assert.ok(transforms < 20);
   const sequentialTransforms = transforms;
   transforms = 0;
   const separated = [0, 64, ...vertices.flatMap((_, index) => index === 0 || index === 64 ? [] : [index])];
-  expect(projector.measureExtent(vertices, trail, 128, separated)).toBe(128);
-  expect(transforms).toBeLessThan(sequentialTransforms);
+  assert.equal(projector.measureExtent(vertices, trail, 128, separated), 128);
+  assert.ok(transforms < sequentialTransforms);
   transforms = 0;
-  expect(projector(vertices, trail)).toHaveLength(128);
-  expect(transforms).toBe(128);
-  for (const invalid of [0, NaN, Infinity]) expect(() => projector.measureExtent(vertices, trail, invalid)).toThrow();
+  assert.equal(projector(vertices, trail).length, 128);
+  assert.equal(transforms, 128);
+  for (const invalid of [0, NaN, Infinity]) assert.throws(() => projector.measureExtent(vertices, trail, invalid));
 });
 
 
@@ -258,19 +260,19 @@ test('interior prepared chords share one camera projection per endpoint without 
   const projector = createProjector({ ...limits, hidden: () => { throw new Error('Unoccluded chord reached ray splitting'); },
     mayOcclude: () => false, project: p => { projections++; return [offset + 800 * p[0] / -p[2], 800 * p[1] / -p[2]]; } });
   const first = projector(vertices, trail);
-  expect(first).toHaveLength(128);
+  assert.equal(first.length, 128);
   // Previously every chord projected both endpoints before and after clipping:
   // 512 calls. A handful of endpoint rounding corrections may need a reproject.
-  expect(projections).toBeLessThan(150);
+  assert.ok(projections < 150);
   offset = 100; projections = 0;
   const second = projector(vertices, trail);
-  expect(second).toHaveLength(128);
-  expect(projections).toBeLessThan(150);
+  assert.equal(second.length, 128);
+  assert.ok(projections < 150);
   for (let i = 0; i < first.length; i++) {
-    expect(second[i]![0]).toBeCloseTo(first[i]![0] + 100, 10);
-    expect(second[i]![2]).toBeCloseTo(first[i]![2] + 100, 10);
-    expect(second[i]![1]).toBe(first[i]![1]);
-    expect(second[i]![3]).toBe(first[i]![3]);
-    expect(second[i]![4]).toBe(first[i]![4]);
+    assert.ok(Math.abs(second[i]![0] - (first[i]![0] + 100)) < 10 ** -10 / 2, `${second[i]![0]} is not close to ${first[i]![0] + 100}`);
+    assert.ok(Math.abs(second[i]![2] - (first[i]![2] + 100)) < 10 ** -10 / 2, `${second[i]![2]} is not close to ${first[i]![2] + 100}`);
+    assert.equal(second[i]![1], first[i]![1]);
+    assert.equal(second[i]![3], first[i]![3]);
+    assert.equal(second[i]![4], first[i]![4]);
   }
 });

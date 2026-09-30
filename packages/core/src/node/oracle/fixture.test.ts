@@ -3,7 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { expect, it } from 'vitest';
+import { it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { requireRecord, requireString } from '../../index.js';
 import { projectRoot } from '../project-root.js';
 import { assertPinnedInputs, pinnedOracleVersions, readOracleInput, readOracleFixture, fitsArchiveInputs } from './fixture.mts';
@@ -26,29 +28,28 @@ async function relocationTables() {
 it('source and built readers find the same root and shipped pins from another working directory', async () => {
   const sourcePins = Object.fromEntries(await pinnedOracleVersions());
   const archiveInputs = requireRecord(JSON.parse(await readFile(resolve(root, 'packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.json'), 'utf8'))).inputs;
-  expect(await fitsArchiveInputs()).toEqual(archiveInputs);
+  assert.deepEqual((await fitsArchiveInputs()), archiveInputs);
   for (const path of ['packages/core/src/node/oracle/fixture.mts', 'packages/core/dist/oracle/fixture.js']) {
     const url = new URL(path, `file://${root}/`).href;
     const result = spawnSync(process.execPath, ['--input-type=module', '-e',
       `const m = await import(${JSON.stringify(url)}); console.log(JSON.stringify({root:m.ORACLE_ROOT,pins:Object.fromEntries(await m.pinnedOracleVersions()),archiveInputs:await m.fitsArchiveInputs(),fixture:(await m.readOracleFixture('fits/core.json')).generatedBy}));`],
     { cwd: tmpdir(), encoding: 'utf8' });
-    expect(result.status, result.stderr).toBe(0);
-    expect(JSON.parse(result.stdout)).toEqual({ root, pins: sourcePins, archiveInputs, fixture: (await readOracleFixture('fits/core.json')).generatedBy });
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout), { root, pins: sourcePins, archiveInputs, fixture: (await readOracleFixture('fits/core.json')).generatedBy });
   }
   for (const name of ['fixture.py', 'requirements.txt']) {
-    expect(await readFile(resolve(root, 'packages/core/dist/oracle', name))).toEqual(
-      await readFile(new URL(name, import.meta.url)));
+    assert.deepEqual((await readFile(resolve(root, 'packages/core/dist/oracle', name))), await readFile(new URL(name, import.meta.url)));
   }
 });
 
 it('kernel inputs require their owner verifier and propagate its rejection', async () => {
   const inputs = [{ path: 'src/spice/new-horizons/lsk/naif0012.tls' }];
-  await expect(assertPinnedInputs(inputs)).rejects.toThrow('Kernel oracle inputs require the caller bank verifier.');
-  await expect(assertPinnedInputs(inputs, async (set, kernels) => {
-    expect(set).toBe('new-horizons');
-    expect(kernels).toEqual(['lsk/naif0012.tls']);
+  await assert.rejects(assertPinnedInputs(inputs), /Kernel oracle inputs require the caller bank verifier\./);
+  await assert.rejects(assertPinnedInputs(inputs, async (set, kernels) => {
+    assert.equal(set, 'new-horizons');
+    assert.deepEqual(kernels, ['lsk/naif0012.tls']);
     throw new Error('bank rejected');
-  })).rejects.toThrow('bank rejected');
+  }), /bank rejected/);
 });
 
 it('the Python writer finds the module-relative root in both source and distribution', () => {
@@ -56,14 +57,14 @@ it('the Python writer finds the module-relative root in both source and distribu
     const result = spawnSync('python3', ['-c',
       'import runpy, sys, types; sys.modules["numpy"] = types.ModuleType("numpy"); print(runpy.run_path(sys.argv[1])["ROOT"])',
       fileURLToPath(new URL(path, `file://${root}/`))], { cwd: tmpdir(), encoding: 'utf8' });
-    expect(result.status, result.stderr).toBe(0);
-    expect(result.stdout.trim()).toBe(root);
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(result.stdout.trim(), root);
   }
 });
 
 it('every relocated generator resolves its logical output and preserves historical input identities without writing', async () => {
   const { entries, generators } = await relocationTables();
-  expect(generators.length).toBeGreaterThan(0);
+  assert.ok(generators.length > 0);
   const inputs = entries.filter(([historical]) => historical.startsWith('tests/fixtures/'));
   const result = spawnSync('python3', ['-B', '-c', `
 import ast, json, runpy, sys, types
@@ -91,26 +92,26 @@ print(json.dumps({'generators': len(request['generators']), 'inputs': len(reques
 `, resolve(root, 'packages/core/src/node/oracle/fixture.py')], {
     cwd: tmpdir(), encoding: 'utf8', input: JSON.stringify({ outputs: entries, generators, inputs }),
   });
-  expect(result.status, result.stderr).toBe(0);
-  expect(JSON.parse(result.stdout)).toEqual({ generators: generators.length, inputs: inputs.length });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout), { generators: generators.length, inputs: inputs.length });
 });
 
 it('Python and TypeScript resolve relocated oracle fixtures to the same current files', async () => {
   const result = spawnSync('python3', ['-c',
     'import json, runpy, sys, types; sys.modules["numpy"] = types.ModuleType("numpy"); m = runpy.run_path(sys.argv[1]); print(json.dumps({k: str(m["fixture_path"](k)) for k in sorted(m["relocated"])}))',
     resolve(root, 'packages/core/src/node/oracle/fixture.py')], { cwd: tmpdir(), encoding: 'utf8' });
-  expect(result.status, result.stderr).toBe(0);
+  assert.equal(result.status, 0, result.stderr);
   const paths: unknown = JSON.parse(result.stdout);
-  expect(typeof paths).toBe('object');
+  assert.equal((typeof paths), 'object');
   if (!paths || typeof paths !== 'object') throw new TypeError('Expected oracle fixture paths.');
   for (const name of Object.keys(paths).sort()) {
     const path: unknown = Reflect.get(paths, name);
     if (typeof path !== 'string') throw new TypeError('Expected an oracle fixture path.');
     const { name: logicalName, ...logical } = await readOracleFixture(name);
     const { name: absoluteName, ...absolute } = await readOracleFixture(path);
-    expect(logicalName).toBe(name);
-    expect(absoluteName).toBe(path);
-    expect(logical, name).toEqual(absolute);
+    assert.equal(logicalName, name);
+    assert.equal(absoluteName, path);
+    assert.deepEqual(logical, absolute, name);
   }
 });
 
@@ -118,18 +119,18 @@ it('Python and TypeScript resolve relocated oracle fixtures to the same current 
 it('the historical float32 input resolves after its global fixture copy is removed', async () => {
   const fixture = await readOracleFixture('fits/core.json');
   const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/float32.fits');
-  expect(input).toBeDefined();
+  assert.notEqual(input, undefined);
   if (!input) throw new Error('Missing float32 oracle input.');
-  expect(await readOracleInput(input)).toEqual(await readFile(resolve(root, 'packages/fits/src/node/fixtures/fits/float32.fits')));
+  assert.deepEqual((await readOracleInput(input)), await readFile(resolve(root, 'packages/fits/src/node/fixtures/fits/float32.fits')));
 });
 
 it('source and built oracle runners discover domain cases after the root tests directory is retired', () => {
   for (const path of ['packages/core/src/node/oracle/run.mts', 'packages/core/dist/oracle/run.js']) {
     const result = spawnSync(process.execPath, [resolve(root, path), '__unknown__'], { cwd: tmpdir(), encoding: 'utf8' });
-    expect(result.status).toBe(1);
-    expect(result.stderr).toContain('Unknown oracle __unknown__; known:');
-    expect(result.stderr).toContain('astronomy/hosted-eccentric');
-    expect(result.stderr).not.toContain('ENOENT');
+    assert.equal(result.status, 1);
+    assert.ok(result.stderr.includes('Unknown oracle __unknown__; known:'));
+    assert.ok(result.stderr.includes('astronomy/hosted-eccentric'));
+    assert.ok(!result.stderr.includes('ENOENT'));
   }
 });
 
@@ -185,10 +186,10 @@ print(json.dumps({'cases': case_count, 'expressions': expression_count}))
 `, resolve(root, 'packages/core/src/node/oracle/fixture.py')], {
     cwd: tmpdir(), encoding: 'utf8', input: JSON.stringify({ entries, generators }),
   });
-  expect(result.status, result.stderr).toBe(0);
+  assert.equal(result.status, 0, result.stderr);
   const evidence = requireRecord(JSON.parse(result.stdout));
-  expect(evidence.cases).toBeGreaterThan(0);
-  expect(evidence.expressions).toBeGreaterThan(0);
+  assert.ok(evidence.cases > 0);
+  assert.ok(evidence.expressions > 0);
 });
 
 it('relocated generators serialize paths through input_record rather than physical locations', async () => {
@@ -224,8 +225,8 @@ for logical, generator in request['generators']:
         assert protected or not (relative or serialized), (generator, node.lineno, 'use input_record(path)["path"]')
 print(json.dumps({'generators': len(request['generators'])}))
 `, root], { cwd: tmpdir(), encoding: 'utf8', input: JSON.stringify({ generators }) });
-  expect(result.status, result.stderr).toBe(0);
-  expect(JSON.parse(result.stdout)).toEqual({ generators: generators.length });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout), { generators: generators.length });
 });
 
 it('fixture_path accepts known relocated Paths and explains the logical-name convention for other Paths', () => {
@@ -245,6 +246,6 @@ for path in [m['ROOT'] / 'unknown.json', pathlib.Path('/tmp/unknown.json')]:
         raise AssertionError(path)
 print('known Paths resolved; unknown Paths rejected; strings unchanged')
 `, resolve(root, 'packages/core/src/node/oracle/fixture.py')], { cwd: tmpdir(), encoding: 'utf8' });
-  expect(result.status, result.stderr).toBe(0);
-  expect(result.stdout.trim()).toBe('known Paths resolved; unknown Paths rejected; strings unchanged');
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(result.stdout.trim(), 'known Paths resolved; unknown Paths rejected; strings unchanged');
 });

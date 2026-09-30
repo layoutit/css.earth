@@ -1,5 +1,7 @@
 import { readFile } from 'node:fs/promises';
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
@@ -26,12 +28,12 @@ test('close Earth detail defers orbit banks until a system or targeted path need
   const planner = createWorldContextPlanner(summary), view = earthDetail();
   planner(view);
   const wanted = planner.takeWantedOrbits();
-  expect(wanted).toEqual([]);
+  assert.deepEqual(wanted, []);
 
   // An explicit hover makes that path relevant even while the Earth fills the view.
   view.bodies[points.findIndex(body => body.id === 'comet-67p')]!.hovered = true;
   planner(view);
-  expect(planner.takeWantedOrbits()).toContain('comet-67p');
+  assert.ok(planner.takeWantedOrbits().includes('comet-67p'));
 
   // Opening the host's system makes its satellite orbit readable and requests its bank.
   view.bodies[points.findIndex(body => body.id === 'comet-67p')]!.hovered = false;
@@ -39,11 +41,11 @@ test('close Earth detail defers orbit banks until a system or targeted path need
   view.world = { ...view.world, pose: { ...view.world.pose,
     positionM: [earth.positionM[0], earth.positionM[1], earth.positionM[2] + 5e9] } };
   planner(view);
-  expect(planner.takeWantedOrbits()).toContain('moon');
+  assert.ok(planner.takeWantedOrbits().includes('moon'));
 
   // The wider world resumes its normal orbit demand instead of dropping those paths permanently.
   view.selectedId = 'sun'; view.overview = true;
   view.world = { ...view.world, pose: { ...view.world.pose, positionM: [0, 0, 20 * 149_597_870_700] } };
   planner(view);
-  expect(planner.takeWantedOrbits()).toContain('earth');
+  assert.ok(planner.takeWantedOrbits().includes('earth'));
 });

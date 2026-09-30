@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { revealLayer } from './layer-reveal.js';
 
@@ -11,13 +13,13 @@ test('a layer with a large image waits hidden for its decode, then shows on a fr
   Object.assign(window, { requestAnimationFrame: (callback: FrameRequestCallback) => frames.push(callback), cancelAnimationFrame() {} });
   const [large, plain] = [...document.getElementById('host')!.children] as HTMLElement[];
   revealLayer(large!, '/detail.webp', decode); revealLayer(plain!);
-  expect([large!.style.visibility, plain!.style.visibility]).toEqual(['hidden', 'hidden']);
+  assert.deepEqual(([large!.style.visibility, plain!.style.visibility]), ['hidden', 'hidden']);
   // The plain layer shows first; the large one waits for its decode, then takes a later frame.
   frames.shift()!(0);
-  expect([large!.style.visibility, plain!.style.visibility]).toEqual(['hidden', '']);
+  assert.deepEqual(([large!.style.visibility, plain!.style.visibility]), ['hidden', '']);
   decoded(); await new Promise(resolve => setTimeout(resolve, 0));
   while (frames.length) frames.shift()!(16);
-  expect(large!.style.visibility).toBe('');
+  assert.equal(large!.style.visibility, '');
 });
 
 test('without animation frames a layer shows at once', () => {
@@ -25,5 +27,5 @@ test('without animation frames a layer shows at once', () => {
   const layer = document.querySelector('i') as unknown as HTMLElement;
   Object.defineProperty(layer.ownerDocument, 'defaultView', { value: null });
   revealLayer(layer, '/detail.webp');
-  expect(layer.style.visibility).toBe('');
+  assert.equal(layer.style.visibility, '');
 });
