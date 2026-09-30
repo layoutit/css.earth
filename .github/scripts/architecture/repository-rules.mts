@@ -1,6 +1,9 @@
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, posix, resolve } from 'node:path';
+import { declaredPackage, importedSpecifiers } from './declared-dependencies.mts';
 import { isTestPath } from './zones.mts';
 import { checkDeclaredDependencies } from './declared-dependencies.mts';
 import { checkNebulaBoundaries } from './nebula-packages.mts';
@@ -15,7 +18,7 @@ export interface RepositoryRule {
 }
 
 /** Folders that no longer exist: `tools/` held preparation code until it moved to its canonical homes
- * (`packages/bake`, `packages/telescope-cli`, `site/build`, `.github/scripts`, `labs`, `tests`, `evidence/`). A file under one means
+ * (`packages/bake`, `packages/telescope-cli`, `site/build`, `.github/scripts`, `labs`, `evidence/`). A file under one means
  * code went back to a retired location. */
 export const RETIRED_FOLDERS: readonly string[] = ['tools'];
 
@@ -37,10 +40,11 @@ export function objectCodeFiles(files: readonly string[]): string[] {
 }
 
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
+  { id: 'integration-owners', description: 'integration files import at least two owners with no transitive workspace dependency between them', check: checkIntegrationOwners },
   {
     id: 'retired-folders',
-    description: 'no file lives under a tools/ folder (RETIRED_FOLDERS in repository-rules.mts)',
-    check: (_root, files) => retiredFiles(files),
+    description: 'no file lives under a tools/ folder or root tests/ folder (RETIRED_FOLDERS in repository-rules.mts)',
+    check: (root, files) => [...retiredFiles(files), ...files.filter(file => file.startsWith('tests/')).map(file => `${file}: tests/ is retired; put tests beside their owner`), ...(existsSync(resolve(root, 'tests')) ? ['tests/: root tests/ directory is retired'] : [])],
   },
   {
     id: 'objects-hold-data',
@@ -73,4 +77,39 @@ export function repositoryFindings(root: string, files: readonly string[], rules
 /** A finding of any repository rule fails the check, whatever the baseline says. */
 export function isBroken(findings: ReadonlyMap<string, readonly string[]>): boolean {
   return [...findings.values()].some(items => items.length > 0);
+}
+
+/** Count static import owners and require an independent pair. All declared workspace dependencies count;
+ * nested lab packages belong to the labs owner, including their dependencies. */
+export function checkIntegrationOwners(root: string, files: readonly string[]): string[] {
+  const packages = files.filter(file => /^(?:packages\/[^/]+|labs\/[^/]+(?:\/packages\/[^/]+)?)\/package\.json$/u.test(file))
+    .map(file => declaredPackage(file, JSON.parse(readFileSync(resolve(root, file), 'utf8'))));
+  const owner = (path: string): string | undefined => {
+    const parts = path.split('/');
+    if (parts[0] === 'packages') return packages.find(pkg => path.startsWith(`${pkg.directory}/`))?.directory;
+    if (['site', 'src', 'labs'].includes(parts[0] ?? '')) return parts[0];
+    return path.startsWith('.github/scripts/') ? '.github/scripts' : undefined;
+  };
+  const reaches = (from: string, to: string, seen = new Set<string>()): boolean => {
+    if (from === to) return true;
+    if (seen.has(from)) return false;
+    seen.add(from);
+    const dependencies = packages.filter(item => owner(`${item.directory}/index.ts`) === from).flatMap(item => [...item.declared]);
+    return dependencies.some(name => {
+      const dependency = packages.find(item => item.name === name);
+      return dependency !== undefined && reaches(owner(`${dependency.directory}/index.ts`) ?? dependency.directory, to, seen);
+    });
+  };
+  return files.filter(file => file.startsWith('integration/')).flatMap(file => {
+    if (!existsSync(resolve(root, file))) return [`${file}: integration file is missing`];
+    const owners = new Set(importedSpecifiers(readFileSync(resolve(root, file), 'utf8'), file).flatMap(specifier => {
+      const pkg = packages.find(item => specifier === item.name || specifier.startsWith(`${item.name}/`));
+      const path = specifier.startsWith('.') ? posix.normalize(posix.join(dirname(file), specifier)) : specifier.replace(/^\//u, '');
+      const imported = pkg ? owner(`${pkg.directory}/index.ts`) : owner(path);
+      return imported ? [imported] : [];
+    }));
+    const list = [...owners];
+    const independent = list.some((left, i) => list.slice(i + 1).some(right => !reaches(left, right) && !reaches(right, left)));
+    return independent ? [] : [`${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
+  });
 }

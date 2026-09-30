@@ -2,7 +2,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ORACLE_ROOT } from '@cssearth/core/oracle';
-import { restoreInputs } from '../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/restore.mts';
+import { restoreInputs } from '../src/objects/layers/terrestrial/fixtures/sbmt/restore.mts';
 
 const flags=process.argv.slice(2);
 if(flags.some(f=>!['--unit','--restore'].includes(f))||flags.length>1)throw new Error('Usage: pnpm test:sbmt [--unit|--restore]');

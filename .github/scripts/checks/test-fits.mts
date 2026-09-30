@@ -4,8 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from '@cssearth/core/oracle';
-import { fitsArchiveInputs } from '../../packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.mts';
+import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT, fitsArchiveInputs } from '@cssearth/core/oracle';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const args = process.argv.slice(2);

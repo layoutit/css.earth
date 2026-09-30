@@ -43,10 +43,10 @@ Script paths in the table are repository-relative and live with their owning pac
 `packages/bake/src/photometry/fixtures/`. The source-surface test, fixture and Python
 verifier are in `packages/bake/src/objects/geometry/`.
 
-Only the two test runners and their tsconfig remain under `tests/oracles/`. Bake-owned FITS records and
+The FITS runner lives in `.github/scripts/checks/`; the SBMT runner lives in `packages/bake/cli/`, and this directory owns the oracle tsconfig. Bake-owned FITS records and
 eclipse-map cases live beside their comparing bake suites. SBMT lives in
 `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/`. Historical `generatedBy` strings
-keep the generator’s original path. `tests/oracles/tsconfig.json` includes the relocated scripts.
+keep the generator’s original path. `packages/core/src/node/oracle/tsconfig.json` includes the relocated scripts.
 
 The SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions only.
 The shared FITS reader is the
@@ -79,8 +79,8 @@ span `packages/bake/src/objects/cameras/`, `packages/bake/src/astronomy/fixtures
 
 SBMT is an opt-in native backend: `node packages/core/src/node/oracle/setup.mts sbmt`, then
 `node packages/core/src/node/oracle/run.mts sbmt/projection`. It uses the same fixture envelope with a
-pinned executable/software lock that names each file's path and size. `node tests/oracles/test-sbmt.mts --unit`
-runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
+pinned executable/software lock that names each file's path and size. `node packages/bake/cli/test-sbmt.mts --unit`
+runs offline in CI; `node packages/bake/cli/test-sbmt.mts --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md).
 The commands below operate on the Python backends.
 
