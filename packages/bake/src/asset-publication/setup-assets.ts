@@ -4,8 +4,8 @@ interface InstallProgress {completed: number; total: number; installed: number; 
 /** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */
 const TRANSIENT_RETRIES = 3, RETRY_BACKOFF_MS = 500;
 const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
-import { existsSync } from "node:fs";
-import { readFile } from "node:fs/promises";
+import { existsSync, statSync } from "node:fs";
+import { readFile, utimes } from "node:fs/promises";
 import { resolve } from "node:path";
 import { publishSourceBytes } from "../delivery/index.ts";
 import { PREPARED_CATALOGUE, readPreparedObjects } from "@cssearth/objects/node";
@@ -34,15 +34,26 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
   // A fresh checkout should learn about every missing or drifted file in one
   // run, so keep installing after a failure and report them together.
   const failures: string[] = [];
+  // A file written after its object's inventory was last checked out holds what that inventory pins, so a matching size
+  // is enough. One older than its inventory predates a checkout that may have changed the pin, and is hashed; a verified
+  // file is then touched so the next run trusts it. Hashing all 110,000 files cost every dev start 24 s. A same-size
+  // local edit to a prepared file is left for CI and publishing, which hash every asset (verifyInventory).
+  const inventoryTimes = new Map<string, Promise<number>>();
+  const inventoryTime = (path: string) => {
+    let time = inventoryTimes.get(path);
+    if (!time) inventoryTimes.set(path, time = Promise.resolve(statSync(path, { throwIfNoEntry: false })?.mtimeMs ?? Number.POSITIVE_INFINITY));
+    return time;
+  };
   await Promise.all(Array.from({ length: Math.min(concurrency, assets.length) }, async () => {
     while (next < assets.length) {
       const asset = assets[next++];
       try {
+        // Synchronous: 110,000 async stats queue on libuv's four threads and cost seconds of idle.
+        const info = statSync(asset.file, { throwIfNoEntry: false });
         let existing: Buffer | undefined;
-        try { existing = await readFile(asset.file); }
-        catch (error) { if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error; }
-        if (existing?.length === asset.bytes &&
-            sha256(existing) === asset.sha256) {
+        if (info?.size === asset.bytes && !(asset.inventory && info.mtimeMs > await inventoryTime(asset.inventory))) existing = await readFile(asset.file);
+        if (info?.size === asset.bytes && (existing === undefined || sha256(existing) === asset.sha256)) {
+          if (existing !== undefined) { const now = new Date(); await utimes(asset.file, now, now); }
           reused++;
         } else {
           // A dropped connection, a 5xx or a 429 is not a missing asset. Across 5,500+ files a single transient

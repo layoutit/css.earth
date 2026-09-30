@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, symlink, writeFile, utimes } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -37,6 +37,17 @@ test('objects are discovered by their inventory; each entry is located by its lo
   assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async url => { assert.ok(assets.some(asset => asset.url === String(url))); return new Response(bytes); } }), { installed: 1, reused: 1, skipped: 0 });
   assert.deepEqual(await readFile(resolve(root, 'public/scenes/context-fixture/datasets/preview.webp')), bytes);
   assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2, skipped: 0 });
+  // A same-size file older than its inventory predates a checkout that may have changed the pin: it is hashed and replaced.
+  // Once written after the inventory it is trusted by size alone.
+  const prepared = resolve(base, 'prepared/levels/catalogue.json'), stale = Buffer.from('X'.repeat(bytes.length));
+  await writeFile(prepared, stale);
+  await utimes(prepared, new Date(1000), new Date(1000));
+  await utimes(resolve(base, 'inventory.json'), new Date(2000), new Date(2000));
+  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => new Response(bytes) }), { installed: 1, reused: 1, skipped: 0 });
+  assert.deepEqual(await readFile(prepared), bytes);
+  await writeFile(prepared, stale);
+  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2, skipped: 0 },
+    'a file written after its inventory is trusted by size');
   // Existing symlinks must never redirect installation.
   await rm(resolve(base, 'prepared/levels'), { recursive: true });
   await symlink(resolve(root), resolve(base, 'prepared/levels'));

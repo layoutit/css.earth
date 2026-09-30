@@ -55,6 +55,16 @@ interface Options { root?: string; publish?: boolean | 'catalogues'; sourceTrans
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
+/** Runs `job` over `items` with up to `width` in flight, results in the items' order. */
+async function pipelined<T, R>(items: readonly T[], width: number, job: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = [];
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(width, items.length) }, async () => {
+    while (next < items.length) { const index = next++; results[index] = await job(items[index]!); }
+  }));
+  return results;
+}
+
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
 export async function prepareFacilities({ root = resolve(import.meta.dirname, '../../..'), publish = true, sourceTransport, mirrorOrigin = null,
   restoredOnly = false,
@@ -110,7 +120,10 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   }
   const objects: SourceUsageObject[] = [];
   const factsheets = { facts: 0 };
-  for (const object of SCENE_OBJECTS) {
+  // Each body reads only its own package, so the bodies are read 32 at a time and merged in registry order: one at a time,
+  // their six or seven awaited reads left this step idle for 10 of its 18 s.
+  const parts = await pipelined(SCENE_OBJECTS, 32, async object => {
+    const part = { metadata: [] as SourceUse[], inventory: [] as SourceInventoryEntry[], facts: 0, object: null as SourceUsageObject | null };
     const base = `src/objects/${object.id}`;
     const descriptor = explorationRecord(await json(`${base}/object.json`));
     const manifest = explorationRecord(await json(`${base}/source/manifest.json`));
@@ -131,15 +144,15 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     });
     // The published facts in prepared/content.json are written from this same panel by prepare:factsheets, which
     // prepare:object-json runs first.
-    metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
-    factsheets.facts += panel.facts.length + panel.moreFacts.length;
+    part.metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
+    part.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
     // `prepared/page.json` is derived from the restored runtime, so a checkout that deliberately
     // restores no body banks (the typecheck job) does not have one. Skipping there yields a partial
     // catalogue, which is all a compiler program needs; every publishing path leaves this off and
     // still fails loudly on a missing page.
     const pagePath = `${base}/prepared/page.json`;
-    if (restoredOnly && !existsSync(resolve(root, pagePath))) continue;
+    if (restoredOnly && !existsSync(resolve(root, pagePath))) return part;
     const page = explorationRecord(await json(pagePath));
     if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id) throw new Error(`Stale prepared controls for ${object.id}.`);
     const controls = explorationRecord(page.controls);
@@ -148,8 +161,13 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     });
     // The lineage is a view of this package's manifest and recipes, built here and never written.
     const lineage = await bodyLineage(objectDirectory);
-    inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(lineage.sources.map(source => source.path))));
-    objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, lineage });
+    part.inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(lineage.sources.map(source => source.path))));
+    part.object = { id: object.id, name: object.name, route: object.route, base, controls: lenses, lineage };
+    return part;
+  });
+  for (const part of parts) {
+    metadata.push(...part.metadata); inventory.push(...part.inventory); factsheets.facts += part.facts;
+    if (part.object) objects.push(part.object);
   }
   // Deploys consume the volume presentations restored from R2. Authoring preparation still rebuilds the previews from
   // their sources, but catalog-only publication must never invent a second package identity.
