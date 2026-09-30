@@ -32,16 +32,17 @@ export interface PreparationOptions {projectRoot?: string; objectIds?: readonly 
   residentBytes?: (pids: readonly number[]) => ReadonlyMap<number, number>;}
 interface ResolveOptions {projectRoot?: string; accessFile?: typeof access;}
 
-export function objectTestDirectory(id: string, projectRoot = process.cwd()) {
-  return resolve(projectRoot, "src", "objects", id, "test");
+/** Every scene object is authored: its object.json carries a recipe. Refuse any other before running a command for it. */
+async function requireAuthored(id: string, projectRoot: string) {
+  if (!await authoredObject(id, projectRoot))
+    throw new TypeError(`src/objects/${id}/object.json: scene object ${id} has no authored recipe (properties.recipe), so it has no preparation commands.`);
 }
 
 export async function discoverObjectTests(
   id: string,
   { projectRoot = process.cwd(), readDirectory = readdir }: {projectRoot?: string; readDirectory?: (directory: string) => Promise<string[]>} = {},
 ) {
-  const directory = await authoredObject(id, projectRoot)
-    ? resolve(projectRoot, 'src/objects', id) : objectTestDirectory(id, projectRoot);
+  const directory = resolve(projectRoot, 'src/objects', id);
   const isTest = (filename: string) => /\.test\.m(?:j|t)s$/u.test(filename);
   let filenames: string[] = [];
   try {
@@ -65,30 +66,8 @@ export function sharedUnitTestDirectory(projectRoot = process.cwd()) {
   return resolve(projectRoot, 'site/test');
 }
 
-export function objectAssembleScript(id: string, projectRoot = process.cwd()) {
-  return objectOwnedScript(id, "tools/compact-production-assets.mjs", projectRoot);
-}
-
-export function objectAcquireScript(id: string, projectRoot = process.cwd()) {
-  return objectOwnedScript(id, "tools/acquire.mjs", projectRoot);
-}
-
-export function objectPrepareScript(id: string, projectRoot = process.cwd()) {
-  return objectOwnedScript(id, "tools/prepare.mjs", projectRoot);
-}
-
-export async function resolveObjectAssembly(
-  id: string,
-  { projectRoot = process.cwd(), accessFile = access }: ResolveOptions = {},
-) {
-  const script = await authoredObject(id, projectRoot)
-    ? resolve(projectRoot, 'packages/bake/cli/object-operations.mts') : objectAssembleScript(id, projectRoot);
-  try {
-    await accessFile(script);
-  } catch (cause) {
-    throw new Error(`Implemented object ${id} assembly script is missing.`, { cause });
-  }
-  return script;
+export async function resolveObjectAssembly(id: string, { projectRoot = process.cwd(), accessFile = access }: ResolveOptions = {}) {
+  return resolveObjectCommand(id, 'assemble', { projectRoot, accessFile });
 }
 
 export async function resolveObjectCommand(
@@ -96,25 +75,20 @@ export async function resolveObjectCommand(
   mode: string,
   { projectRoot = process.cwd(), accessFile = access }: ResolveOptions = {},
 ) {
-  const resolvers: Readonly<Partial<Record<string, (id: string, root: string) => string>>> = Object.freeze({
-    acquire: objectAcquireScript,
-    prepare: objectPrepareScript,
-    browser: () => resolve(projectRoot, "site/test/dom-cleanliness-browser.mts"),
-    assemble: objectAssembleScript,
+  const scripts: Readonly<Partial<Record<string, string>>> = Object.freeze({
+    acquire: 'packages/bake/cli/object-operations.mts',
+    prepare: 'site/build/prepare/prepare-authored.ts',
+    browser: 'site/test/dom-cleanliness-browser.mts',
+    assemble: 'packages/bake/cli/object-operations.mts',
   });
-  const resolveScript = resolvers[mode];
-  if (!resolveScript) throw new TypeError(`Unknown planet command mode: ${mode}.`);
-  const authored = await authoredObject(id, projectRoot);
-  const script = authored
-    ? mode === 'browser' ? resolveScript(id, projectRoot)
-      : mode === 'prepare' ? resolve(projectRoot, 'site/build/prepare/prepare-authored.ts') : resolve(projectRoot, 'packages/bake/cli/object-operations.mts')
-    : resolveScript(id, projectRoot);
+  const relative = scripts[mode];
+  if (!relative) throw new TypeError(`Unknown planet command mode: ${mode}.`);
+  await requireAuthored(id, projectRoot);
+  const script = resolve(projectRoot, relative);
   try {
     await accessFile(script);
   } catch (cause) {
-    throw new Error(`Implemented object ${id} ${mode} script is missing.`, {
-      cause,
-    });
+    throw new Error(`Implemented object ${id} ${mode} script ${relative} is missing.`, { cause });
   }
   return script;
 }
@@ -204,7 +178,7 @@ export async function runPreparationObjects({
     id,
     command: process.execPath,
     argumentsList: [await resolveObjectCommand(id, "prepare", { projectRoot: cwd }),
-      ...(await authoredObject(id, cwd) ? [id, '--write'] : []), ...argumentsList],
+      id, '--write', ...argumentsList],
     cwd,
   })));
   const startedAt = new Date().toISOString(), start = performance.now();
@@ -333,7 +307,7 @@ export async function main(mode = process.argv[2]) {
   // start per body cost the deploy build about 110 ms each, four minutes over the catalogue.
   const runOperations = mode === "assemble" ? await loadOperations() : null;
   for (const { id } of SCENE_OBJECTS()) {
-    if (runOperations && await authoredObject(id)) {
+    if (runOperations) {
       await runOperations(mode, id, process.argv.slice(3)).catch((cause: unknown) => {
         throw new Error(`Implemented object ${id} failed to ${mode}.`, { cause });
       });
@@ -341,7 +315,7 @@ export async function main(mode = process.argv[2]) {
     }
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverObjectTests(id)]
-      : [await resolveObjectCommand(id, mode), ...(await authoredObject(id) && mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];
+      : [await resolveObjectCommand(id, mode), ...(mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];
     await run(process.execPath, argumentsList, mode === "test" ? { ...process.env, CSSEARTH_TEST_OBJECTS: id } : undefined);
   }
 }
@@ -352,10 +326,6 @@ async function loadOperations() {
   const runOperations = typeof module === "object" && module !== null && "runOperations" in module ? module.runOperations : null;
   if (typeof runOperations !== "function") throw new TypeError(`${specifier} exports no runOperations function; run pnpm build:packages.`);
   return runOperations as (mode: string, id: string, argumentsList: string[]) => Promise<unknown>;
-}
-
-function objectOwnedScript(id: string, path: string, projectRoot: string) {
-  return resolve(projectRoot, "src", "objects", id, ...path.split("/"));
 }
 
 function run(command: string, argumentsList: readonly string[], env?: NodeJS.ProcessEnv) {

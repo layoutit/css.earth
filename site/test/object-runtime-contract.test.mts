@@ -3,7 +3,6 @@ import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { SCENE_OBJECTS } from "../objects.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon'));
 const objectControls = moonDefinition.controls;
 import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from '@cssearth/renderer/testing';
@@ -13,9 +12,10 @@ function definition(overrides: Record<string, unknown> = {}) {
   return { ...moonDefinition, assets: structuredClone(moonDefinition.assets), ...overrides };
 }
 
-test("validates actions against real controls for every existing object", async () => {
-  for (const object of SCENE_OBJECTS) {
-    const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
+test("validates actions against the real controls of fixed bodies", async () => {
+  // The action code is the same for every object; each object's controls are checked when it is prepared.
+  for (const id of ["earth", "moon", "saturn"]) {
+    const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(id));
     for (const dataset of controls.datasets?.controls ?? []) {
       const action = requireObjectAction(controls, { kind: "dataset", id: dataset.id });
       assert.equal(action.kind, "dataset");

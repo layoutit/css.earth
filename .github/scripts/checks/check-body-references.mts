@@ -7,6 +7,8 @@
  *
  * - a declared file that is not committed, has no acquisition step for its path and is not a generated intermediate;
  * - an acquisition step for a path the manifest does not declare;
+ * - a `generator` that does not start with a script this repository tracks (a generator is that script's path, optionally
+ *   followed by the arguments it runs with);
  * - a pinned paper or archive document (a PDF, Word or TeX file, a BibTeX file, a readme, a PDS catalogue label or `.asc` document, a
  *   bundle description or anything in an archive `document/` folder; cite it by URL: docs/provenance/CONTRACT.md,
  *   "References and retained files"), a byte copy of a file that `src/references` holds, or any committed SPICE
@@ -37,8 +39,13 @@ const record = (value: unknown): Json => (value !== null && typeof value === 'ob
 const entries = (manifest: unknown, list: typeof LISTS[number]) => (Array.isArray(record(manifest)[list]) ? record(manifest)[list] as unknown[] : []).map(record);
 const text = (value: unknown) => (typeof value === 'string' ? value : undefined);
 
-/** One body's findings, from its manifest and acquisition plan as parsed JSON and the paths committed in its source folder. */
-export function bodySourceFindings(objectId: string, manifest: unknown, acquisition: unknown, committed: ReadonlySet<string>): Finding[] {
+/** The script a generator runs: its first word, a repository-relative path. */
+export const generatorScript = (generator: string) => generator.trim().split(/\s+/u)[0]!;
+
+/** One body's findings, from its manifest and acquisition plan as parsed JSON, the paths committed in its source folder
+ * and, when given, every path the repository tracks. */
+export function bodySourceFindings(objectId: string, manifest: unknown, acquisition: unknown, committed: ReadonlySet<string>,
+  tracked?: ReadonlySet<string>): Finding[] {
   const findings: Finding[] = [], manifestFile = `src/objects/${objectId}/source/manifest.json`;
   const acquisitionFile = `src/objects/${objectId}/source/preparation/acquisition.json`;
   const relative = (path: string) => path.replace(new RegExp(`^src/objects/${objectId}/source/`, 'u'), '');
@@ -53,6 +60,10 @@ export function bodySourceFindings(objectId: string, manifest: unknown, acquisit
       findings.push({ file: manifestFile, problem: `${list} pins ${path}; cite it by URL in the source record instead.` });
     else if (list !== 'generatedIntermediates' && !committed.has(relative(path)) && !restored.has(path))
       findings.push({ file: manifestFile, problem: `${list} declares ${path}, which is not committed and has no acquisition step; a fresh checkout cannot restore it.` });
+    if (tracked) for (const generator of [entry.generator, record(entry.recipe).generator].map(text)) {
+      if (generator !== undefined && !tracked.has(generatorScript(generator)))
+        findings.push({ file: manifestFile, problem: `${list} ${path} names generator "${generator}", whose script ${generatorScript(generator)} is not a file this repository tracks.` });
+    }
   }
   for (const operation of operations) {
     const path = text(operation.path);
@@ -87,7 +98,7 @@ async function git(root: string, args: string[]) {
 
 export async function checkBodyReferences(root = process.cwd()): Promise<Finding[]> {
   const lines = (await git(root, ['ls-files', '-s', '--', '.'])).split('\n').filter(Boolean);
-  const paths = lines.map(line => line.slice(line.indexOf('\t') + 1));
+  const paths = lines.map(line => line.slice(line.indexOf('\t') + 1)), tracked = new Set(paths);
   const findings = sharedCopyFindings(lines);
   const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
   const committed = new Map<string, Set<string>>();
@@ -104,7 +115,7 @@ export async function checkBodyReferences(root = process.cwd()): Promise<Finding
     // A volume package restores through its own repository-relative manifest (packages/bake/cli/restore-source-inputs.mts).
     if (record(manifest).schema !== 'cssearth-authoritative-sources@3') continue;
     const acquisition = files.has('preparation/acquisition.json') ? await json(`src/objects/${objectId}/source/preparation/acquisition.json`) : null;
-    findings.push(...bodySourceFindings(objectId, manifest, acquisition, files));
+    findings.push(...bodySourceFindings(objectId, manifest, acquisition, files, tracked));
   }
   return findings;
 }
@@ -113,7 +124,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const findings = await checkBodyReferences();
   for (const finding of findings) console.error(`${finding.file}: ${finding.problem}`);
   if (findings.length) {
-    console.error(`\n${findings.length} finding${findings.length === 1 ? '' : 's'}: a body must stay restorable from its declared sources, cite papers by URL, read shared tables from src/references, and restore SPICE kernels instead of committing them.`);
+    console.error(`\n${findings.length} finding${findings.length === 1 ? '' : 's'}: a body must stay restorable from its declared sources, name generators that exist, cite papers by URL, read shared tables from src/references, and restore SPICE kernels instead of committing them.`);
     process.exitCode = 1;
   } else console.log('Every body is restorable from its declared sources; no pinned papers, shared-reference copies or committed kernels.');
 }

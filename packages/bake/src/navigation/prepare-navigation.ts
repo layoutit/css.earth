@@ -2,7 +2,6 @@ import { constants } from "node:fs";
 import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 import type { ObjectEntry } from '@cssearth/objects';
@@ -602,15 +601,8 @@ export async function loadObjectMarkerDescriptor(objectId: string, projectRoot: 
 }
 
 async function loadObjectDescriptor(objectId: string, projectRoot: string): Promise<unknown> {
-  if (await authoredObject(objectId, projectRoot)) return loadObjectMarkerDescriptor(objectId, projectRoot);
-  const modulePath = resolve(
-    projectRoot,
-    "src/objects",
-    objectId,
-    "tools/navigation-marker.mjs",
-  );
-  const module: unknown = await import(pathToFileURL(modulePath).href);
-  if (!module || typeof module !== 'object' || !('default' in module)) throw new TypeError('Navigation marker module requires a default export.');
-  return module.default;
+  if (!await authoredObject(objectId, projectRoot))
+    throw new TypeError(`src/objects/${objectId}/object.json: scene object ${objectId} has no authored recipe (properties.recipe), so it has no marker descriptor.`);
+  return loadObjectMarkerDescriptor(objectId, projectRoot);
 }
 
