@@ -23,8 +23,9 @@ test('programmatic dataset navigation selects its desktop tab and opens its disc
   lifetime.destroy();
 });
 
-test('a tab in a detached section, whose inert document has no window, still selects', () => {
-  const page = parseHTML('<div class="object-information-panel"><input type="radio" name="information" data-information-tab="factsheet"></div>');
+test('a tab in a detached section, whose inert document has no window, still selects and mounts its panel', () => {
+  const page = parseHTML('<div class="object-information-panel"><input class="object-native-tab" type="radio" name="information" data-information-tab="factsheet" aria-controls="focus-factsheet">'
+    + '<template data-detached-section><div class="object-card-tabpanel" id="focus-factsheet"><p>Group distance</p></div></template></div>');
   const document = page.document;
   Object.defineProperty(document, 'defaultView', { value: null });
   // In a browser the global scope is the page's window, whose Event the inert document's elements accept.
@@ -40,6 +41,9 @@ test('a tab in a detached section, whose inert document has no window, still sel
     createTabsController(card, lifetime).show('factsheet');
     assert.equal(tab.checked, true);
     assert.equal(changes, 1);
+    // The card mounts the checked tab's panel itself: its change event never reaches the page's listener.
+    const panel = card.querySelector<HTMLElement>('#focus-factsheet');
+    assert.ok(panel && !panel.closest('template'), 'the factsheet panel is mounted in the card');
     lifetime.destroy();
   } finally {
     globalThis.Event = nodeEvent;
