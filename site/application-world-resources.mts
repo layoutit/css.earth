@@ -34,16 +34,6 @@ import { isOverviewPage, withOverviewScope } from './navigation/navigation-scope
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
 const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
-// Published catalogues placed on a galaxy's disc plane, drawn over its image layers (src/objects/m31/README.md,
-// src/objects/m33/README.md).
-const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
-  m31: ['stars', 'dots'],
-  m33: ['stars', 'dots'],
-  m81: ['dots'],
-  m83: ['dots'],
-  'ngc-253': ['dots'],
-  'ngc-300': ['dots'],
-};
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -102,13 +92,19 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const imageLayerDescriptors = parsedDescriptors.filter(descriptor => descriptor.type === 'image-layer-bank')
       .map(parseImageLayerBankDescriptor);
     const imageLayerIds = new Set(imageLayerDescriptors.map(descriptor => descriptor.id));
+    const imageLayerCataloguePoints = new Map(imageLayerDescriptors.map(descriptor => [descriptor.id, descriptor.cataloguePoints]));
     const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame }));
     const loadImageLayer = createInFlightLoader(async (id: string) => {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
       const set = resourceSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-        cataloguePointUrls: (IMAGE_LAYER_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.bin`)) };
+        cataloguePointUrls: imageLayerCataloguePoints.get(id)!.map(bank => set.resolve(`prepared/${bank}.bin`)) };
+    });
+    // Packages that are only catalogue dots (a galaxy cluster's members): drawn while their catalogue row is selected.
+    const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(descriptor => {
+      if (!descriptor.prepared) throw new TypeError(`src/objects/${descriptor.id}/object.json: a catalogue point bank names its prepared dots.`);
+      return { id: descriptor.id, url: resourceSet(descriptor.id).resolve(descriptor.prepared.url) };
     });
     const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
     const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,
@@ -144,7 +140,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyCataloguePoints: ['globular-clusters', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
-      imageLayerBanks, loadImageLayer, volumeDatasetBanks, loadVolumeDataset,
+      imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,
       backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the overview it bounds.
@@ -173,3 +169,4 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   })().catch(error => { universePromise = null; throw error; });
   return universePromise;
 }
+

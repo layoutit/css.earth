@@ -522,11 +522,18 @@ const photographLook = discPlacement && !colorByBv ? await (async () => {
   return { colours, tones, indices, reference: Number(reference.toFixed(1)) };
 })() : null;
 const magnitudes = converted.magnitudes.filter((value): value is number => value !== null && Number.isFinite(value)).sort((a, b) => a - b);
+// A bank without levels may be whole within a camera distance of its origin other than the renderer's 10 kpc: a galaxy
+// cluster's members, seen from across the Nearby Universe.
+const fullDetail = (appearance as { fullDetail?: { units?: unknown; basis?: unknown } }).fullDetail;
+if (fullDetail !== undefined && (typeof fullDetail.units !== 'number' || !(fullDetail.units > 0) || typeof fullDetail.basis !== 'string' || !fullDetail.basis)) {
+  throw new TypeError(`${at('appearance.fullDetail')} needs positive units and a basis, got ${JSON.stringify(fullDetail)}.`);
+}
 const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
   appearance: photographLook ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, palette: photographLook.colours, paletteTone: photographLook.tones }
     : { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
+      ...(fullDetail ? { fullDetailUnits: fullDetail.units, fullDetailBasis: fullDetail.basis } : {}),
       ...(toneBy ? { palette: tonedPalette, paletteTone } : colorByBands ? { palette: bandPalette } : colorBySpectrumAtRedshift ? { palette: redshiftPalette } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
   ...(colorBySpectrumAtRedshift ? { spectrumColour: { spectrum: colorBySpectrumAtRedshift.spectrum.path, step: colorBySpectrumAtRedshift.step, basis: colorBySpectrumAtRedshift.basis,
     colours: Object.fromEntries([...redshiftIndex].map(([z, index]) => [z, redshiftPalette[index]])) } } : {}),
