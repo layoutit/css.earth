@@ -28,6 +28,11 @@
     "cosmology": "planck18",
     "basis": "z* = 1089.80 ± 0.21, the redshift of last scattering in Planck 2018 VI, Table 2, TT,TE,EE+lowE+lensing+BAO (the parameters Astropy's Planck18 carries); its comoving distance is the sphere's radius."
   },
+  "holds": {
+    "redshift": 3.5,
+    "cosmology": "planck18",
+    "basis": "What the sphere holds reaches redshift 3.5, the upper cut of both quasar samples inside it (DESI DR1 QSO and Quaia, redshift 0.8 to 3.5, in the Nearby Universe package); its comoving distance is that reach. With the sphere hidden, its caption sits below it."
+  },
   "mesh": {
     "latitudeSegments": 16,
     "longitudeSegments": 32,
@@ -48,8 +53,17 @@
     "basis": "Presentation choice: the sphere opens its ICRS northern hemisphere so the galaxies and quasars inside it show. While it is open, the inside of the southern half is drawn at 55% opacity so it reads as the inside wall, and the outer shell at 85% so the inside stands out. Nothing is cut in the data."
   },
   "datasets": {
-    "default": "cutaway",
+    "default": "off",
     "datasets": [
+      {
+        "id": "off",
+        "view": "hidden",
+        "label": "Off",
+        "detail": "No sphere",
+        "title": "The galaxies and quasars, without the sphere",
+        "summary": "The galaxies and quasars inside the observable universe, with the cosmic microwave background left out of the view.",
+        "description": "DESI's galaxies and the quasars of DESI and Quaia, with the cosmic microwave background's sphere not drawn. Choose Cut open or Full sphere to show the oldest light at the edge."
+      },
       {
         "id": "cutaway",
         "view": "cutaway",

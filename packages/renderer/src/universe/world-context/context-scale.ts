@@ -67,16 +67,18 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   // Every system fades over the plan's distances, or its host's authored orbit range (systemFadeDistances).
   const ranges = roots.map(id => { const point = byId.get(id); return point && 'orbitsWithinM' in point ? point.orbitsWithinM : undefined; });
   const fades = ranges.map(range => systemFadeDistances(plan.system, range));
-  const fadeStarts = fades.map(fade => fade.fadeOutStartDistanceM);
-  const hiddenDistances = fades.map(fade => fade.hiddenDistanceM);
+  // logarithmicFade with each system's fixed logarithms taken once, not twice per system per frame.
+  const logStarts = Float64Array.from(fades, fade => Math.log(fade.fadeOutStartDistanceM));
+  const logSpans = Float64Array.from(fades, (fade, index) => Math.log(fade.hiddenDistanceM) - logStarts[index]!);
   return Object.freeze({
     /** The largest system opacity, after measuring every system from this camera position. */
     update(positionM: readonly number[]) {
       let maximum = 0;
       for (let index = 0; index < roots.length; index++) {
         const star = positions[index]!;
-        values[index] = 1 - logarithmicFade(Math.hypot(positionM[0]! - star[0], positionM[1]! - star[1], positionM[2]! - star[2]),
-          fadeStarts[index]!, hiddenDistances[index]!);
+        const distanceM = Math.hypot(positionM[0]! - star[0], positionM[1]! - star[1], positionM[2]! - star[2]);
+        const t = Math.max(0, Math.min(1, (Math.log(distanceM) - logStarts[index]!) / logSpans[index]!));
+        values[index] = 1 - t * t * (3 - 2 * t);
         maximum = Math.max(maximum, values[index]!);
       }
       return maximum;

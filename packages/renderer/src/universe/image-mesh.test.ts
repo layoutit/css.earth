@@ -62,3 +62,24 @@ test('a limb that cannot be resolved leaves the sphere and its caption, and anot
     mounted.destroy();
   } finally { console.error = original; }
 });
+
+test('a hidden sphere asks for no texture and draws only its caption, naming what it bounds, until it is shown', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const mounted = mountImageMesh({ host, before: null, url: '/sphere.json', fetchJson: async () => ({ ...mesh, limb: { path: 'sphere/limb.webp', edge: .98 } }),
+    resolveResource: path => `/${path}`, hidden: true, hiddenCaption: 'Observable Universe' });
+  mounted.publish(at(300), 1);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const leaves = () => [...mounted.root.querySelectorAll<HTMLElement>('s')];
+  expect(leaves().map(node => node.style.backgroundImage), 'no leaf names the texture').toEqual(['', '']);
+  expect(mounted.root.querySelector('i'), 'nor is the limb mounted').toBeNull();
+  expect(mounted.publish(at(300), 1), 'it covers nothing').toBe(0);
+  expect(mounted.root.style.display).toBe('none');
+  const label = host.querySelector<HTMLElement>('[data-image-mesh-label="sphere"]')!;
+  expect(label.textContent).toBe('Observable Universe');
+  mounted.setHidden(false);
+  expect(leaves().every(node => node.style.backgroundImage.includes('/sphere/sphere.webp')), 'shown, every leaf takes the texture').toBe(true);
+  expect(mounted.root.querySelector<HTMLElement>('i')!.style.backgroundImage).toContain('/sphere/limb.webp');
+  expect(label.textContent, 'and the caption its own name').toBe('Sphere');
+  expect(mounted.publish(at(300), 1)).toBe(1);
+  mounted.destroy();
+});

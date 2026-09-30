@@ -13,16 +13,21 @@ import { preparedVolumeOpacity } from '../../packages/renderer/src/universe/worl
 import { labelRectsOverlap } from '../../packages/renderer/src/labels/screen-label-layout.js';
 import { screenPicking } from '../../packages/renderer/src/navigation/screen-picking.js';
 import { createWorldContextFrameEncoder } from '../../packages/renderer/src/universe/world-context/world-context-frame.js';
+import { type PackedWorldContextView, unpackWorldBodies } from '../../packages/renderer/src/universe/world-context/world-context-view-transport.js';
 import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from '../../packages/renderer/src/universe/world-context/context-scale.js';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../system-framing.mts';
+import { unpackPreparedBinary } from '@cssearth/objects/node';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
 
 // The production publisher only accepts encoded frames. Tests run the actual
 // planner inline and supply that same protocol without starting a browser worker.
+/** The worker's view: the renderer ships body columns, the planner reads bodies. */
+const unpacked = ({ bodyColumns, ...view }: PackedWorldContextView) => ({ ...view, bodies: unpackWorldBodies(bodyColumns) });
+
 function mountTestContext({ annotationPriorities, annotationLandmarks, ...options }:
   Parameters<typeof mountPreparedWorldContext>[0] & { annotationPriorities?: Readonly<Record<string, number>>; annotationLandmarks?: readonly string[] }) {
   let latest: [WorldCameraPose, Parameters<ReturnType<typeof mountPreparedWorldContext>['publish']>[1]] | null = null;
@@ -37,7 +42,7 @@ function mountTestContext({ annotationPriorities, annotationLandmarks, ...option
     latest = [world, viewport];
     if (frame && 'updates' in frame) { layer.publish(world, viewport, frame); return; }
     const snapshot = layer.captureFrame(world, viewport);
-    const planned = frame ?? (planner ??= createWorldContextPlanner(worldContextGeometry(options.plan), annotationPriorities, annotationLandmarks))(snapshot.view);
+    const planned = frame ?? (planner ??= createWorldContextPlanner(worldContextGeometry(options.plan), annotationPriorities, annotationLandmarks))(unpacked(snapshot.view));
     // Explicit complete-frame cases use a fresh baseline; ordinary samples keep their acknowledged delta chain.
     layer.publish(world, viewport, encode(++sequence, frame ? 0 : snapshot.view.contextCommittedId ?? 0, planned));
   }
@@ -350,7 +355,7 @@ test('semantic changes invalidate worker snapshots without synchronously republi
     expect(request.mock.calls.length).toBe(calls + 1);
     expect(drawing()).toBe(before);
     const fresh = layer.captureFrame(world, viewport);
-    layer.publish(world, viewport, planner(fresh.view));
+    layer.publish(world, viewport, planner(unpacked(fresh.view)));
     clock.advance(1000);
   }
   // A hover decides which annotations show, not where bodies project: a plan in
@@ -362,7 +367,7 @@ test('semantic changes invalidate worker snapshots without synchronously republi
   clock.advance(16);
   expect(stale.current()).toBe(true);
   expect(drawing()).toBe(before);
-  expect(layer.captureFrame(world, viewport).view.bodies[1].hovered).toBe(true);
+  expect(unpacked(layer.captureFrame(world, viewport).view).bodies[1].hovered).toBe(true);
   layer.destroy();
 });
 
@@ -2438,10 +2443,10 @@ test('the main thread draws worker frames from the orbit summary exactly as from
   for (const distance of [1000, 500, 50]) {
     world.pose.positionM[2] = distance;
     for (const { layer, root } of layers) {
-      layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
+      layer.publish(world, viewport, structuredClone(calculate(unpacked(layer.captureFrame(world, viewport).view))));
       // Attach the requested captions, measure them, then consume the measured worker frame.
-      layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
-      layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
+      layer.publish(world, viewport, structuredClone(calculate(unpacked(layer.captureFrame(world, viewport).view))));
+      layer.publish(world, viewport, structuredClone(calculate(unpacked(layer.captureFrame(world, viewport).view))));
       root.ownerDocument.defaultView.advance(50);
     }
     expect(JSON.stringify(drawing(layers[1]!.root))).toBe(JSON.stringify(drawing(layers[0]!.root)));
@@ -2464,7 +2469,7 @@ test('delta publication matches full frames through navigation, hover, fades and
   let id = 0;
   const publish = () => {
     const a = full.captureFrame(world, viewport), b = incremental.captureFrame(world, viewport);
-    const frame = structuredClone(calculate(a.view));
+    const frame = structuredClone(calculate(unpacked(a.view)));
     full.publish(world, viewport, frame);
     incremental.publish(world, viewport, structuredClone(encode(++id, b.view.contextCommittedId ?? 0, frame)));
     root.ownerDocument.defaultView.advance(50); deltaRoot.ownerDocument.defaultView.advance(50);
@@ -2653,7 +2658,7 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-  const bankOf = async (id: string) => { const bytes = await readFile(new URL(`world-orbits/${id}.bin`, prepared)); return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength); };
+  const bankOf = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
   const decoded = decodeWorldOrbits(summary, banks);
   expect(decoded.bodies.map(body => body.id)).toEqual(full.bodies.map(body => body.id));

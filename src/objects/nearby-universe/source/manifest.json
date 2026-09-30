@@ -29,6 +29,30 @@
       "license": "Original catalogue terms apply; cite Tully et al. (2023), CDS/VizieR and HyperLEDA."
     },
     {
+      "id": "local-group-galaxies-sample",
+      "path": "src/objects/nearby-universe/source/local-group-galaxies/lvdb-sample.csv.gz",
+      "origin": "src/objects/local-group/prepared/catalogue.json",
+      "sourceUrl": "https://doi.org/10.33232/001c.144859",
+      "title": "LVDB v1.1.1 galaxies nearer than the Cosmicflows-4 field",
+      "credit": "Pace (2025), Local Volume Database v1.1.1 (CC0)",
+      "acquisition": "The generator keeps the prepared Local Group catalogue's galaxies nearer than the field's nearest Cosmicflows-4 galaxy, without a detailed object of their own, with LVDB's apparent V magnitude joined by key. Written 2026-09-30.",
+      "generator": "packages/bake/authoring/nearby-universe/local-group-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lvdb-v1-1-1",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/local-group-galaxies/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "galaxies-table"
+      ],
+      "license": "LVDB is CC0; cite Pace (2025) and its input papers."
+    },
+    {
       "id": "kc96-elliptical",
       "path": "src/objects/nearby-universe/source/galaxies/kc96/elliptical_template.fits",
       "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/elliptical_template.fits",
@@ -174,6 +198,30 @@
       },
       "dependencies": [],
       "license": "DESI data are public; cite DESI Collaboration (2025)."
+    },
+    {
+      "id": "quaia-quasars-sample",
+      "path": "src/objects/nearby-universe/source/quaia-quasars/quaia-sample.csv.gz",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=1000000&QUERY=SELECT+GaiaDR3,RA_ICRS,DE_ICRS,zQuaia+FROM+%22J/ApJ/964/69/quaiag200%22+WHERE+zQuaia+BETWEEN+0.8+AND+3.5+ORDER+BY+GaiaDR3",
+      "sourceUrl": "https://doi.org/10.3847/1538-4357/ad1328",
+      "title": "Quaia G < 20.0 quasars outside DESI's footprint, one row in 9",
+      "credit": "Storey-Fisher et al. (2024), ApJ 964, 69, distributed by CDS/VizieR",
+      "acquisition": "The origin query (CDS TAP, 619,961 quasars between redshift 0.8 and 3.5), run 2026-09-30; the generator keeps the rows outside DESI's footprint, one in 9 in source id order.",
+      "generator": "packages/bake/authoring/nearby-universe/quaia-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "quaia-2024",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/quaia-quasars/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "desi-quasars-sample"
+      ],
+      "license": "Original catalogue terms apply; cite Storey-Fisher et al. (2024) and CDS/VizieR."
     },
     {
       "id": "quasar-template",
