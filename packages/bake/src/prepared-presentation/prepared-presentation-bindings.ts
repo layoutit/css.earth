@@ -14,8 +14,8 @@ import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { chromium, type Browser } from 'playwright';
 import { prepareActivationGroups, LEAF_BOX_FACTOR, withLeafBoxes, withLeafBoxRecords, withoutLeafBoxRecords } from '../presentation/index.ts';
-import { withTextureTileRecords, withoutTextureTileRecords } from '../presentation/texture-tile-records.ts';
-import { withCleanLeaves, withoutCleanLeaves } from '../presentation/clean-leaves.ts';
+import { withTextureTileRecords, withoutTextureTileRecords } from '../presentation/index.ts';
+import { withCleanLeaves, withoutCleanLeaves } from '../presentation/index.ts';
 import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.ts';
 import { verifyDepthStyles } from './prepared-depth-styles.ts';
 

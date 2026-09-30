@@ -23,7 +23,7 @@ import { PREPARED_PRESENTATION_SCHEMA } from "../../../presentation/index.ts";
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../scene/index.ts";
 import { tiledTextureKeys } from "@cssearth/renderer/rendering/prepared-texture-levels.ts";
-import { textureTileVariables } from "../../../presentation/texture-tile-records.ts";
+import { textureTileVariables } from "../../../presentation/index.ts";
 import { prepareMaterialTracks } from "../../../presentation/index.ts";
 import { surfaceBankInventory } from "./surface-banks.ts";
 

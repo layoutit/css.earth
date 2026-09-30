@@ -8,7 +8,7 @@
 // values from it (packages/renderer/src/rendering/prepared-leaf-box-direct.ts); no variable, `calc()` or parse reaches
 // the page. A later bindings run expands the records back to the variable form first, so it measures what it always did.
 import { LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY } from './leaf-box.ts';
-import { SURFACE_SEAM_OUTSET_PROPERTY } from '../scene/seam-outset.ts';
+import { SURFACE_SEAM_OUTSET_PROPERTY } from '../scene/index.ts';
 
 /** A length the box factor scales (px), or a component kept as written. */
 export type LeafBoxComponent = number | string;
