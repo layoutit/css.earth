@@ -10,15 +10,16 @@ const capabilities = (values: readonly string[], latest: string) => `<Capabiliti
 <TileWidth>512</TileWidth><TileHeight>512</TileHeight><MatrixWidth>80</MatrixWidth><MatrixHeight>40</MatrixHeight></TileMatrix></TileMatrixSet>
 </Capabilities>`;
 
-test('the week is the newest seven published analyses, and a day NASA never processed stays a gap', () => {
-  const { date, dates } = parseMurCapabilities(capabilities(['2026-09-01/2026-09-20/P1D', '2026-09-22/2026-09-28/P1D'], '2026-09-28'), '2026-09-30');
+test('the steps are the newest analysis and the same weekday one and two weeks back; a day NASA never processed is left out', () => {
+  const { date, dates } = parseMurCapabilities(capabilities(['2026-09-01/2026-09-28/P1D'], '2026-09-28'), '2026-09-30');
   assert.equal(date, '2026-09-28');
-  assert.deepEqual(murWindow(dates, 7), ['2026-09-22', '2026-09-23', '2026-09-24', '2026-09-25', '2026-09-26', '2026-09-27', '2026-09-28']);
-  assert.deepEqual(murWindow(dates, 8)[0], '2026-09-20', 'the gap on 21 September is skipped, not filled');
+  assert.deepEqual(murWindow(dates, { count: 3, spacingDays: 7 }), ['2026-09-14', '2026-09-21', '2026-09-28']);
+  const gap = parseMurCapabilities(capabilities(['2026-09-01/2026-09-20/P1D', '2026-09-22/2026-09-28/P1D'], '2026-09-28'), '2026-09-30').dates;
+  assert.deepEqual(murWindow(gap, { count: 3, spacingDays: 7 }), ['2026-09-14', '2026-09-28'], 'the missing 21 September is skipped, not filled');
 });
 
 test('the capabilities must end their published range on the default date, and never in the future', () => {
   assert.throws(() => parseMurCapabilities(capabilities(['2026-09-01/2026-09-27/P1D'], '2026-09-28'), '2026-09-30'), /does not end on the default date/);
   assert.throws(() => parseMurCapabilities(capabilities(['2026-09-01/2026-10-02/P1D'], '2026-10-02'), '2026-09-30'), /future latest date/);
-  assert.throws(() => murWindow(['2026-09-28'], 7), /too few published dates/);
+  assert.throws(() => murWindow(['2026-09-28'], { count: 3, spacingDays: 7 }), /too few published dates/);
 });

@@ -1,5 +1,6 @@
-// Entry script: node packages/bake/authoring/earth/refresh-earth-enso.mts [--days=<n>]. Moves Earth's ENSO sequence to the
-// newest NASA MUR anomaly analyses GIBS has published: it acquires each date in the window it does not hold yet, drops the
+// Entry script: node packages/bake/authoring/earth/refresh-earth-enso.mts. Moves Earth's ENSO sequence to the newest NASA MUR
+// anomaly analysis GIBS has published and the same weekday one and two weeks before it: it acquires each date it does not
+// hold yet, drops the
 // dates that left it, re-reads the NOAA advisory and rewrites every declaration the datasets are made from. Preparation then
 // bakes the declared dates offline (pnpm prepare:objects --object=earth), and the new tile archives go to the source mirror
 // (packages/bake/cli/publish-source-cache.mts --object=earth).
@@ -12,8 +13,8 @@ import { pathToFileURL } from 'node:url';
 import { acquireMurDate, acquireMurShared, restoreMurDate, murCapabilitiesUrl, murDatasetId, murDateDirectory, murEnsoContent, murEnsoText,
   murTileUrl, murWindow, parseMurCapabilities } from './mur-imagery.mts';
 
-/** One week of daily analyses: the newest and the six before it. */
-export const ENSO_DAYS = 7;
+/** The newest analysis and the same weekday one and two weeks before it. */
+export const ENSO_WINDOW = { count: 3, spacingDays: 7 };
 const advisoryUrl = 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml';
 const credit = 'NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS';
 const license = 'NASA open Earth science imagery with attribution';
@@ -32,12 +33,12 @@ function spliceEnso<T>(list: T[], isMember: (entry: T) => boolean, members: read
   list.splice(0, list.length, ...kept);
 }
 
-export async function refreshEarthEnso(root = process.cwd(), { days = ENSO_DAYS, now = new Date() } = {}) {
+export async function refreshEarthEnso(root = process.cwd(), { window: shape = ENSO_WINDOW, now = new Date() } = {}) {
   const object = resolve(root, 'src/objects/earth'), source = join(object, 'source'), science = join(source, 'science');
   const response = await fetch(murCapabilitiesUrl, { signal: AbortSignal.timeout(120000) });
   if (!response.ok) throw new Error(`GIBS capabilities HTTP ${response.status}`);
   const capabilities = Buffer.from(await response.arrayBuffer());
-  const window = murWindow(parseMurCapabilities(capabilities.toString(), now.toISOString().slice(0, 10)).dates, days);
+  const window = murWindow(parseMurCapabilities(capabilities.toString(), now.toISOString().slice(0, 10)).dates, shape);
   const advisoryResponse = await fetch(advisoryUrl, { signal: AbortSignal.timeout(30000) });
   if (!advisoryResponse.ok) throw new Error(`NOAA advisory HTTP ${advisoryResponse.status}`);
   const advisory = parseEnsoAdvisory(await advisoryResponse.text());
@@ -110,33 +111,33 @@ export async function refreshEarthEnso(root = process.cwd(), { days = ENSO_DAYS,
   text.datasets = Object.fromEntries([...Object.entries(textDatasets).filter(([id]) => !isEnso(id)),
     ...recipes.map(recipe => [murDatasetId(recipe.date), murEnsoText(recipe)] as const)]);
 
-  // Each date's tile archive is a download (restored from the source mirror), its receipt the record of that download,
-  // and its mosaic an intermediate rebuilt from the archive.
+  // Each date's receipt is the record of its download. Its tile archive is assembled here from 3,200 GIBS downloads, so
+  // it is a generated intermediate the source mirror holds, and its mosaic is rebuilt from that archive.
   const manifestPath = join(source, 'manifest.json'), manifest = await readRecord(manifestPath);
   const dated = (id: unknown) => typeof id === 'string' && /^nasa-mur-gibs-(tiles|receipt|mosaic)(-\d{4}-\d{2}-\d{2})?$/.test(id);
   const inputs = requireArray(manifest.inputs, 'manifest inputs').map(entry => requireRecord(entry));
   const acquisition = (checked: string, date: string) => `Anonymous imagery acquisition ${checked}; every tile with observations attested ${date} and the v4.1 analysis.`;
   const catalogued = (date: string) => ({ kind: 'catalogued', references: [{ catalogueId: 'gibs-mur-sst-anomalies', role: 'material',
     evidence: `GIBS imagery for ${date}; ${murDateDirectory(date)}/receipt.json records the layer, grid and each tile's bytes.` }] });
-  const perDate = receipts.flatMap(receipt => [
-    { id: `nasa-mur-gibs-tiles-${receipt.date}`, path: `${murDateDirectory(receipt.date)}/tiles.tar.gz`,
-      origin: murTileUrl(receipt.date, 0, 0).replace('/6/0/0.png', '/6/{row}/{col}.png'), credit, license, licenseEvidence,
-      acquisition: acquisition(receipt.checked, receipt.date), redistribution: 'Original NASA PNG tiles, archived on the project source mirror with attribution',
-      consumers: [murDatasetId(receipt.date)], sourceBinding: catalogued(receipt.date) },
-    { id: `nasa-mur-gibs-receipt-${receipt.date}`, path: `${murDateDirectory(receipt.date)}/receipt.json`, origin: murCapabilitiesUrl,
-      credit, license, licenseEvidence, acquisition: acquisition(receipt.checked, receipt.date), redistribution: 'Project acquisition record',
-      consumers: [murDatasetId(receipt.date)], sourceBinding: { kind: 'local', reason: 'Project acquisition record: the GIBS layer, requested date, grid and each tile\'s bytes.' } }]);
+  const generator = 'packages/bake/authoring/earth/refresh-earth-enso.mts';
+  const receiptsDeclared = receipts.map(receipt => ({ id: `nasa-mur-gibs-receipt-${receipt.date}`, path: `${murDateDirectory(receipt.date)}/receipt.json`,
+    origin: murCapabilitiesUrl, credit, license, licenseEvidence, acquisition: acquisition(receipt.checked, receipt.date), redistribution: 'Project acquisition record',
+    consumers: [murDatasetId(receipt.date)], sourceBinding: { kind: 'local', reason: 'Project acquisition record: the GIBS layer, requested date, grid and each tile\'s bytes.' } }));
   const shared = inputs.filter(entry => typeof entry.id === 'string' && /^nasa-mur-gibs-(layer|colormap|description)$/.test(entry.id));
   for (const entry of shared) Object.assign(entry, { acquisition: `Checked ${now.toISOString()} with the dated tiles it describes.`,
     consumers: contents.map(content => content.id) });
-  spliceEnso(inputs, entry => dated(entry.id), perDate, 'manifest inputs');
+  spliceEnso(inputs, entry => dated(entry.id), receiptsDeclared, 'manifest inputs');
   manifest.inputs = inputs;
   const intermediates = requireArray(manifest.generatedIntermediates, 'manifest intermediates').map(entry => requireRecord(entry));
-  spliceEnso(intermediates, entry => dated(entry.id), receipts.map(receipt => ({
-    id: `nasa-mur-gibs-mosaic-${receipt.date}`, path: `${murDateDirectory(receipt.date)}/mosaic.png`, origin: 'packages/bake/authoring/earth/mur-imagery.mts',
-    generator: 'packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science',
-    description: 'Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.',
-    consumers: [murDatasetId(receipt.date)], credit: `${credit}; mosaic preparation by cssEarth contributors`, sourceBinding: catalogued(receipt.date) })),
+  spliceEnso(intermediates, entry => dated(entry.id), receipts.flatMap(receipt => [
+    { id: `nasa-mur-gibs-tiles-${receipt.date}`, path: `${murDateDirectory(receipt.date)}/tiles.tar.gz`,
+      origin: murTileUrl(receipt.date, 0, 0).replace('/6/0/0.png', '/6/{row}/{col}.png'), generator,
+      description: `The 3,200 original NASA PNG tiles of ${receipt.date}, archived as downloaded; the source mirror holds it.`,
+      consumers: [murDatasetId(receipt.date)], credit, sourceBinding: catalogued(receipt.date) },
+    { id: `nasa-mur-gibs-mosaic-${receipt.date}`, path: `${murDateDirectory(receipt.date)}/mosaic.png`, origin: 'packages/bake/authoring/earth/mur-imagery.mts',
+      generator: 'packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science',
+      description: 'Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.',
+      consumers: [murDatasetId(receipt.date)], credit: `${credit}; mosaic preparation by cssEarth contributors`, sourceBinding: catalogued(receipt.date) }]),
   'manifest intermediates');
   manifest.generatedIntermediates = intermediates;
 
@@ -145,7 +146,4 @@ export async function refreshEarthEnso(root = process.cwd(), { days = ENSO_DAYS,
   return { window: [window[0], window.at(-1)], acquired: acquired.sort(), mirrored: mirrored.sort(), dropped, advisory };
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const days = process.argv.find(arg => arg.startsWith('--days='))?.slice('--days='.length);
-  console.log(json(await refreshEarthEnso(process.cwd(), days === undefined ? {} : { days: Number(days) })));
-}
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) console.log(json(await refreshEarthEnso(process.cwd())));

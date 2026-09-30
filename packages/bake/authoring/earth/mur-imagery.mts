@@ -49,10 +49,18 @@ export function parseMurCapabilities(xml: string, today = new Date().toISOString
   return { date, dates: dates.filter(value => value <= today), layerXml: layer, gridXml: grid };
 }
 
-/** The newest `count` published analyses, oldest first. */
-export function murWindow(dates: readonly string[], count: number) {
-  demand(Number.isInteger(count) && count > 1 && dates.length >= count, 'too few published dates for the window');
-  return [...dates].sort().slice(-count);
+/** The newest published analysis and the same weekday `spacingDays` apart before it, `count` steps in all, oldest first.
+ * A step NASA never published is left out, never replaced by a neighbouring day. */
+export function murWindow(dates: readonly string[], { count, spacingDays }: { count: number; spacingDays: number }) {
+  demand(Number.isInteger(count) && count > 1 && Number.isInteger(spacingDays) && spacingDays > 0, 'invalid window');
+  const published = new Set(dates), newest = [...dates].sort().at(-1);
+  demand(newest, 'no published dates');
+  const steps = Array.from({ length: count }, (_, step) => {
+    const at = day(newest); at.setUTCDate(at.getUTCDate() - step * spacingDays);
+    return at.toISOString().slice(0, 10);
+  }).filter(date => published.has(date)).reverse();
+  demand(steps.length > 1, 'too few published dates for the window');
+  return steps;
 }
 
 export function verifyMurTile(actualTime: string | null, actualLayer: string | null, date: string, empty = false) {

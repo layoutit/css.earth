@@ -49,14 +49,14 @@
       "surfacePagePrefix": "earth-night-lights"
     },
     {
-      "id": "enso-2026-09-22",
+      "id": "enso-2026-09-14",
       "label": "ENSO",
       "shortLabel": "ENSO",
-      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-22.webp",
-      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-22.webp",
-      "polesUrl": "/scenes/earth/earth-enso-2026-09-22-poles.webp",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-14.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-14.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-14-poles.webp",
       "maximumZoom": 8,
-      "surfacePagePrefix": "earth-enso-2026-09-22",
+      "surfacePagePrefix": "earth-enso-2026-09-14",
       "focus": {
         "longitude": -110,
         "latitude": 0,
@@ -67,17 +67,17 @@
           "preserveZoom": true
         }
       },
-      "qualification": "NASA MUR · 1 km source imagery · 22 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      "qualification": "NASA MUR · 1 km source imagery · 14 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
     },
     {
-      "id": "enso-2026-09-23",
+      "id": "enso-2026-09-21",
       "label": "ENSO",
       "shortLabel": "ENSO",
-      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-23.webp",
-      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-23.webp",
-      "polesUrl": "/scenes/earth/earth-enso-2026-09-23-poles.webp",
+      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-21.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-21.webp",
+      "polesUrl": "/scenes/earth/earth-enso-2026-09-21-poles.webp",
       "maximumZoom": 8,
-      "surfacePagePrefix": "earth-enso-2026-09-23",
+      "surfacePagePrefix": "earth-enso-2026-09-21",
       "focus": {
         "longitude": -110,
         "latitude": 0,
@@ -88,91 +88,7 @@
           "preserveZoom": true
         }
       },
-      "qualification": "NASA MUR · 1 km source imagery · 23 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
-    },
-    {
-      "id": "enso-2026-09-24",
-      "label": "ENSO",
-      "shortLabel": "ENSO",
-      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-24.webp",
-      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-24.webp",
-      "polesUrl": "/scenes/earth/earth-enso-2026-09-24-poles.webp",
-      "maximumZoom": 8,
-      "surfacePagePrefix": "earth-enso-2026-09-24",
-      "focus": {
-        "longitude": -110,
-        "latitude": 0,
-        "zoom": 1.1,
-        "northUp": true,
-        "transition": {
-          "durationMilliseconds": 650,
-          "preserveZoom": true
-        }
-      },
-      "qualification": "NASA MUR · 1 km source imagery · 24 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
-    },
-    {
-      "id": "enso-2026-09-25",
-      "label": "ENSO",
-      "shortLabel": "ENSO",
-      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-25.webp",
-      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-25.webp",
-      "polesUrl": "/scenes/earth/earth-enso-2026-09-25-poles.webp",
-      "maximumZoom": 8,
-      "surfacePagePrefix": "earth-enso-2026-09-25",
-      "focus": {
-        "longitude": -110,
-        "latitude": 0,
-        "zoom": 1.1,
-        "northUp": true,
-        "transition": {
-          "durationMilliseconds": 650,
-          "preserveZoom": true
-        }
-      },
-      "qualification": "NASA MUR · 1 km source imagery · 25 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
-    },
-    {
-      "id": "enso-2026-09-26",
-      "label": "ENSO",
-      "shortLabel": "ENSO",
-      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-26.webp",
-      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-26.webp",
-      "polesUrl": "/scenes/earth/earth-enso-2026-09-26-poles.webp",
-      "maximumZoom": 8,
-      "surfacePagePrefix": "earth-enso-2026-09-26",
-      "focus": {
-        "longitude": -110,
-        "latitude": 0,
-        "zoom": 1.1,
-        "northUp": true,
-        "transition": {
-          "durationMilliseconds": 650,
-          "preserveZoom": true
-        }
-      },
-      "qualification": "NASA MUR · 1 km source imagery · 26 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
-    },
-    {
-      "id": "enso-2026-09-27",
-      "label": "ENSO",
-      "shortLabel": "ENSO",
-      "thumbnailUrl": "/scenes/earth/earth-dataset-enso-2026-09-27.webp",
-      "surfaceUrl": "/scenes/earth/earth-enso-2026-09-27.webp",
-      "polesUrl": "/scenes/earth/earth-enso-2026-09-27-poles.webp",
-      "maximumZoom": 8,
-      "surfacePagePrefix": "earth-enso-2026-09-27",
-      "focus": {
-        "longitude": -110,
-        "latitude": 0,
-        "zoom": 1.1,
-        "northUp": true,
-        "transition": {
-          "durationMilliseconds": 650,
-          "preserveZoom": true
-        }
-      },
-      "qualification": "NASA MUR · 1 km source imagery · 27 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      "qualification": "NASA MUR · 1 km source imagery · 21 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
     },
     {
       "id": "enso-2026-09-28",

@@ -406,14 +406,14 @@
         }
       },
       {
-        "path": "science/mur/2026-09-22/mosaic.png",
-        "name": "earth-enso-2026-09-22",
-        "thumbnail": "earth-dataset-enso-2026-09-22.webp",
+        "path": "science/mur/2026-09-14/mosaic.png",
+        "name": "earth-enso-2026-09-14",
+        "thumbnail": "earth-dataset-enso-2026-09-14.webp",
         "scientific": {
           "kind": "gibs-mur-imagery",
-          "date": "2026-09-22",
+          "date": "2026-09-14",
           "baseline": "2003–2014",
-          "checked": "2026-09-30T05:28:22.546Z",
+          "checked": "2026-09-30T06:47:54.611Z",
           "advisory": {
             "date": "10 September 2026",
             "status": "El Niño Advisory",
@@ -426,94 +426,14 @@
         }
       },
       {
-        "path": "science/mur/2026-09-23/mosaic.png",
-        "name": "earth-enso-2026-09-23",
-        "thumbnail": "earth-dataset-enso-2026-09-23.webp",
+        "path": "science/mur/2026-09-21/mosaic.png",
+        "name": "earth-enso-2026-09-21",
+        "thumbnail": "earth-dataset-enso-2026-09-21.webp",
         "scientific": {
           "kind": "gibs-mur-imagery",
-          "date": "2026-09-23",
+          "date": "2026-09-21",
           "baseline": "2003–2014",
-          "checked": "2026-09-30T05:28:22.566Z",
-          "advisory": {
-            "date": "10 September 2026",
-            "status": "El Niño Advisory",
-            "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
-          }
-        },
-        "webp": {
-          "quality": 60,
-          "effort": 6
-        }
-      },
-      {
-        "path": "science/mur/2026-09-24/mosaic.png",
-        "name": "earth-enso-2026-09-24",
-        "thumbnail": "earth-dataset-enso-2026-09-24.webp",
-        "scientific": {
-          "kind": "gibs-mur-imagery",
-          "date": "2026-09-24",
-          "baseline": "2003–2014",
-          "checked": "2026-09-30T05:28:21.462Z",
-          "advisory": {
-            "date": "10 September 2026",
-            "status": "El Niño Advisory",
-            "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
-          }
-        },
-        "webp": {
-          "quality": 60,
-          "effort": 6
-        }
-      },
-      {
-        "path": "science/mur/2026-09-25/mosaic.png",
-        "name": "earth-enso-2026-09-25",
-        "thumbnail": "earth-dataset-enso-2026-09-25.webp",
-        "scientific": {
-          "kind": "gibs-mur-imagery",
-          "date": "2026-09-25",
-          "baseline": "2003–2014",
-          "checked": "2026-09-30T05:30:30.734Z",
-          "advisory": {
-            "date": "10 September 2026",
-            "status": "El Niño Advisory",
-            "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
-          }
-        },
-        "webp": {
-          "quality": 60,
-          "effort": 6
-        }
-      },
-      {
-        "path": "science/mur/2026-09-26/mosaic.png",
-        "name": "earth-enso-2026-09-26",
-        "thumbnail": "earth-dataset-enso-2026-09-26.webp",
-        "scientific": {
-          "kind": "gibs-mur-imagery",
-          "date": "2026-09-26",
-          "baseline": "2003–2014",
-          "checked": "2026-09-30T05:30:31.753Z",
-          "advisory": {
-            "date": "10 September 2026",
-            "status": "El Niño Advisory",
-            "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
-          }
-        },
-        "webp": {
-          "quality": 60,
-          "effort": 6
-        }
-      },
-      {
-        "path": "science/mur/2026-09-27/mosaic.png",
-        "name": "earth-enso-2026-09-27",
-        "thumbnail": "earth-dataset-enso-2026-09-27.webp",
-        "scientific": {
-          "kind": "gibs-mur-imagery",
-          "date": "2026-09-27",
-          "baseline": "2003–2014",
-          "checked": "2026-09-30T05:30:31.424Z",
+          "checked": "2026-09-30T06:47:54.633Z",
           "advisory": {
             "date": "10 September 2026",
             "status": "El Niño Advisory",
