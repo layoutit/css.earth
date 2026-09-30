@@ -1,0 +1,41 @@
+{
+  "id": "eso-eso1525a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The Halo of Galaxy Messier 87",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso1525a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1525a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/eso1525a.jpg",
+      "label": "Large JPEG"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1525a/",
+      "checkedOn": "2026-09-30",
+      "locator": "4001 x 4000 px; 96.66 x 96.63 arcmin; centre 12 30 49.27 +12 23 27.89; north 0.0 deg right of vertical; one band, V, from the CWRU Burrell Schmidt telescope. 28 Gaia stars of G < 12.5 fall within 1 px of their catalogued positions at this registration."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Chris Mihos (Case Western Reserve University)/ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso1525a/"
+    }
+  ]
+}

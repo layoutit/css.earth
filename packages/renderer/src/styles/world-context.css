@@ -309,9 +309,10 @@
      translation, pulling the caption back across the body's projected limb. */
   .prepared-selected-body-label { font-size: 10.5px; line-height: 13.5px; height: 13.5px; }
 }
-/* The Galactic-centre landmark sits over the bright Milky Way bulge. */
-.prepared-world-context [data-context-body="sgr-a-star"]::before,
-.prepared-world-context [data-context-body="sgr-a-star"] > .context-caption::after {
+/* Seen from outside the galaxy, the Galactic-centre landmark sits over the bright Milky Way bulge; from inside it is
+   named like every other body. */
+.prepared-world-context[data-galaxy-view="outside"] [data-context-body="sgr-a-star"]::before,
+.prepared-world-context[data-galaxy-view="outside"] [data-context-body="sgr-a-star"] > .context-caption::after {
   color: #000;
 }
 .prepared-world-context [data-context-body="sgr-a-star"] > .context-caption::after {

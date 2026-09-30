@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { readOracleFixture, readOracleInput, ORACLE_ROOT } from '@cssearth/core/oracle';
 
 export async function restoreInputs() {
-  const fixture=await readOracleFixture('sbmt/projection.json');
+  const fixture=await readOracleFixture('packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json');
   for(const input of fixture.inputs){
     try{await readOracleInput(input);continue;}
     catch(error){

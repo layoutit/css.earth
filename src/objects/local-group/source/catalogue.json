@@ -18,7 +18,7 @@
   },
   "provenance": {
     "path": "provenance.json",
-    "bytes": 6329
+    "bytes": 7490
   },
   "catalogueSourceId": "lvdb-v1.1.1",
   "membershipSourceId": "mcconnachie-table1-2019",
@@ -221,6 +221,10 @@
     "ngc_0300": {
       "id": "ngc-300",
       "focusRadiusM": 2.900536926601885e+20
+    },
+    "m87": {
+      "id": "m87",
+      "focusRadiusM": 6.140498387167821e+21
     }
   },
   "distanceOverrides": {
@@ -231,6 +235,32 @@
       "uncertainty": {
         "statisticalPc": 470,
         "systematicPc": 810
+      }
+    }
+  },
+  "citedRows": {
+    "m87": {
+      "name": "M87",
+      "aliases": [
+        "NGC 4486",
+        "Virgo A",
+        "VCC 1316"
+      ],
+      "raDeg": 187.70593076725,
+      "decDeg": 12.391123246083334,
+      "positionRef": "Charlot2020A&A...644A.159C",
+      "distance": {
+        "valuePc": 16800000,
+        "minusPc": 800000,
+        "plusPc": 800000,
+        "method": "adopted",
+        "sourceRef": "EHT2019ApJ...875L...1E"
+      },
+      "membership": {
+        "group": "galaxy-cluster",
+        "subgroup": "virgo",
+        "basis": "The Virgo Cluster Catalog classes VCC 1316 (NGC 4486) a member; it is the central giant elliptical of the cluster.",
+        "sourceRef": "Binggeli1985AJ.....90.1681B"
       }
     }
   },

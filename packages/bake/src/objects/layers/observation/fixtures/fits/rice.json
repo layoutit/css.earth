@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "astropy",
- "generatedBy": "tools/oracles/fits/rice.py",
+ "generatedBy": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.py",
  "tool": {
   "astropy": "8.0.1",
   "python": "3.12.14",
@@ -9,15 +9,15 @@
  },
  "inputs": [
   {
-   "path": "tests/fixtures/fits/rice-int16.fits",
+   "path": "packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits",
    "bytes": 8640
   },
   {
-   "path": "tests/fixtures/fits/rice-uint8.fits",
+   "path": "packages/bake/src/objects/layers/observation/fixtures/rice-uint8.fits",
    "bytes": 8640
   },
   {
-   "path": "tests/fixtures/fits/rice-int32.fits",
+   "path": "packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits",
    "bytes": 8640
   },
   {
@@ -27,7 +27,7 @@
  ],
  "cases": {
   "rice-int16": {
-   "path": "tests/fixtures/fits/rice-int16.fits",
+   "path": "packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits",
    "width": 97,
    "height": 4,
    "raw": [
@@ -817,7 +817,7 @@
    "zcmptype": "RICE_1"
   },
   "rice-uint8": {
-   "path": "tests/fixtures/fits/rice-uint8.fits",
+   "path": "packages/bake/src/objects/layers/observation/fixtures/rice-uint8.fits",
    "width": 97,
    "height": 4,
    "raw": [
@@ -1607,7 +1607,7 @@
    "zcmptype": "RICE_1"
   },
   "rice-int32": {
-   "path": "tests/fixtures/fits/rice-int32.fits",
+   "path": "packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits",
    "width": 97,
    "height": 4,
    "raw": [

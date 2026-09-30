@@ -4,7 +4,7 @@
   "obsid": 18676,
   "target": "Jupiter",
   "instrument": "HRC/HRC-I",
-  "toolchain": "tools/objects/chandra/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/chandra/toolchain.json",
   "reprocessedWith": {
     "ciao": "CIAO 4.18.0 Monday, December 08, 2025",
     "caldb": "4.12.4"

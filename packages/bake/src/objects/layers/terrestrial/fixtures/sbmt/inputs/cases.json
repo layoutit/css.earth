@@ -34,10 +34,10 @@
   },
   {
     "id": "concave-boundaries",
-    "shape": "tests/fixtures/sbmt/concave.tab",
-    "pointing": "tests/fixtures/sbmt/concave.sum",
+    "shape": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.tab",
+    "pointing": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum",
     "format": "sum",
-    "image": "tests/fixtures/fits/byte.fits",
+    "image": "packages/fits/src/node/fixtures/fits/byte.fits",
     "width": 2,
     "height": 2,
     "vertices": 12,

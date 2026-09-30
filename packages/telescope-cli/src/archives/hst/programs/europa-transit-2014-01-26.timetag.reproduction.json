@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-hst-timetag-frame-reproduction@1",
  "stack": "europa-transit-2014-01-26",
- "definition": "tools/objects/hst/programs/europa-transit-2014-01-26.timetag.json",
+ "definition": "packages/telescope-cli/src/archives/hst/programs/europa-transit-2014-01-26.timetag.json",
  "target": "Europa",
  "instrument": "STIS/FUV-MAMA",
  "opticalElement": "MIRFUV",

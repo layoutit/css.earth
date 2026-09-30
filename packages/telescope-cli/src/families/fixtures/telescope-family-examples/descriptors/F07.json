@@ -6,7 +6,7 @@
       "kind": "archive",
       "identity": "https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf"
     },
-    "producingRecord": "tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
+    "producingRecord": "packages/telescope-cli/src/families/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
     "sourceClassifications": [
       {
         "term": "dynamic spectrum",

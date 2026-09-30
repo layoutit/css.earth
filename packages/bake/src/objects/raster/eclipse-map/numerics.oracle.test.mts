@@ -5,7 +5,7 @@ import { readOracleFixture } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { bandBrightnessTemperature, brightnessTemperature, fitEigenmap, planckRadiance, sampleEigenmap, harmonicOrder, realSphericalHarmonics } from '@cssearth/bake/objects/raster';
 
-const fixture = await readOracleFixture('eclipse-map/numerics.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json');
 const numbers = (value: unknown) => requireArray(value).map(entry => requireFiniteNumber(entry));
 function close(actual: number, expected: number, label: string, relative = 2e-10) {
   const error = Math.abs(actual - expected), tolerance = relative * Math.max(1, Math.abs(expected));

@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "astropy",
- "generatedBy": "tools/oracles/fits/synoptic.py",
+ "generatedBy": "packages/bake/src/objects/cameras/fixtures/fits/synoptic.py",
  "tool": {
   "astropy": "8.0.1",
   "python": "3.12.14",

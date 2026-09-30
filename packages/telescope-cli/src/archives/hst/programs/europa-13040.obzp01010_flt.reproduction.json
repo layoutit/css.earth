@@ -5,7 +5,7 @@
   "product": "obzp01010_flt",
   "instrument": "STIS/FUV-MAMA",
   "opticalElement": "G140L",
-  "toolchain": "tools/objects/hst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/hst/toolchain.json",
   "crdsContext": "hst_1358.pmap",
   "mast": {
     "name": "obzp01010_flt.fits",

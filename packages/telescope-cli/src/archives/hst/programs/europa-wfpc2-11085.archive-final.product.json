@@ -176,7 +176,7 @@
   "evidence": [
     {
       "kind": "archive-origin",
-      "receipt": "tools/objects/hst/programs/europa-wfpc2-11085.archive-final.product.json",
+      "receipt": "packages/telescope-cli/src/archives/hst/programs/europa-wfpc2-11085.archive-final.product.json",
       "product": "u9xe010cm_c0m.fits",
       "establishes": "u9xe010cm_c0m.fits is the archive's own final calibrated product for u9xe010cm, retrieved from MAST and pinned at 10307520 bytes. It establishes origin: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive."
     }

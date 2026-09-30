@@ -66,8 +66,6 @@ export function parseFileList(text: string): IhwObservation[] {
 
 export async function archiveFinalQualified(focus: IhwLedgerFocus): Promise<boolean> {
   const { program: id, observation, product } = focus.archiveFinal, receipt = IHW_PROGRAMS.file(receiptName(id));
-  // A receipt written before the programs moved keeps the path it recorded for itself.
-  const recorded = new Set(IHW_PROGRAMS.recorded(receiptName(id)));
   const programPath = resolve(ROOT, IHW_PROGRAMS.file(`${id}.archive-final.json`));
   const program = requireRecord(JSON.parse(await readFile(programPath, 'utf8')) as unknown, 'IHW archive-final program');
   const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
@@ -80,7 +78,7 @@ export async function archiveFinalQualified(focus: IhwLedgerFocus): Promise<bool
       const role = requireString(file.role, 'file role'), name = requireString(file.name, 'file name'), uri = requireString(file.uri, 'file uri');
       return record.inputs.some(input => input.role === role && input.identity === uri)
         && record.outputs.some(output => output.path === name);
-    }) && record.evidence.length === 1 && record.evidence[0]?.kind === 'archive-origin' && recorded.has(record.evidence[0].receipt)
+    }) && record.evidence.length === 1 && record.evidence[0]?.kind === 'archive-origin' && record.evidence[0].receipt === receipt
     && record.evidence[0].product === product;
 }
 

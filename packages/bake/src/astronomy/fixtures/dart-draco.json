@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "spiceypy",
- "generatedBy": "tools/oracles/spice/dart-draco.py",
+ "generatedBy": "packages/bake/src/objects/cameras/fixtures/dart-draco.py",
  "tool": {
   "spiceypy": "8.2.0",
   "cspice": "CSPICE_N0067",

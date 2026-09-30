@@ -16,7 +16,7 @@
         "charon-pds-nh_charon_color_mosaic"
       ],
       "receipts": [
-        "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
+        "packages/telescope-cli/src/archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
       ]
     },
     {
@@ -29,7 +29,7 @@
         "hydra-pds-cube_h_color_best"
       ],
       "receipts": [
-        "tools/objects/pds/programs/hydra-pds-cube_h_color_best.archive-final.product.json"
+        "packages/telescope-cli/src/archives/pds/programs/hydra-pds-cube_h_color_best.archive-final.product.json"
       ]
     },
     {
@@ -42,7 +42,7 @@
         "didymos-pds-lmi-20201217-0048"
       ],
       "receipts": [
-        "tools/objects/pds/programs/didymos-pds-lmi-20201217-0048.archive-final.product.json"
+        "packages/telescope-cli/src/archives/pds/programs/didymos-pds-lmi-20201217-0048.archive-final.product.json"
       ]
     }
   ],

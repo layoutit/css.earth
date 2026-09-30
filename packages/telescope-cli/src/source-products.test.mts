@@ -46,8 +46,8 @@ test('a new telescope and target need no query registry change: actions, exact q
     const report = resolve(f.root, 'output/telescopes/test-body/frame-1/decoded.json'); await writeFile(report, '{}');
     assert.equal((await loadSourceProducts(f.root, 'test-body'))[0]!.qualified, false);
     assert.equal((await qualifySourceProduct(f.root, f.product)).reused, false);
-    // Inputs are checked before a reuse shortcut.
-    await writeFile(resolve(f.source, 'image.fits'), Buffer.alloc(f.bytes.length));
+    // Inputs are checked before a reuse shortcut: a replaced input of another size is not the recorded one.
+    await writeFile(resolve(f.source, 'image.fits'), Buffer.alloc(f.bytes.length + 2880));
     assert.equal((await loadSourceProducts(f.root, 'test-body'))[0]!.qualified, false);
     await assert.rejects(qualifySourceProduct(f.root, f.product), /Invalid FITS header/u);
   } finally { await rm(f.root, { recursive: true, force: true }); }

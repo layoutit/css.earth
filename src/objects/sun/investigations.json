@@ -6,7 +6,7 @@
       "id": "hmi-continuum-strip-mosaic",
       "subject": "SDO/HMI continuum browse images across Carrington Rotation 2311",
       "status": "excluded",
-      "finding": "The browse-JPEG strip mosaic sampled each day's disc on the wrong side of its central meridian between frames (tools/objects/observation/solar-synoptic.mts centerX + sin(delta)): 76% of its sunspot pixels lay within 1 degree of strong field in JSOC's hmi.mrsynop_small_720s[2311] map, 100% once the sign was reversed, and blended frames showed doubled, half-strength spots. Its disc detection, radial normalization and approximate B0 are replaced by the JSOC science frames and their recorded geometry.",
+      "finding": "The browse-JPEG strip mosaic sampled each day's disc on the wrong side of its central meridian between frames (packages/bake/src/objects/layers/observation/solar-synoptic.ts centerX + sin(delta)): 76% of its sunspot pixels lay within 1 degree of strong field in JSOC's hmi.mrsynop_small_720s[2311] map, 100% once the sign was reversed, and blended frames showed doubled, half-strength spots. Its disc detection, radial normalization and approximate B0 are replaced by the JSOC science frames and their recorded geometry.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/layers/observation/solar-synoptic.ts#L95",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/source/preparation/raster.json",

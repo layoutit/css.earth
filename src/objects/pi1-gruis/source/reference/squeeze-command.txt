@@ -13,5 +13,4 @@ Command:  squeeze PI_GRU_forImage.fits -s 0.4 -w 128 -not3amp -i uniform-disc-12
           a fixed default, so the same inputs, build and thread count reproduce the same image; the output is the file's
           primary HDU, 128 x 128 x 1 double precision, CDELT1 = -0.4 mas (east left), CDELT2 = +0.4 mas (north up).
 Result:   reduced chi-squared 2.45 on squared visibilities and 1.06 on closure phases, printed by the run (1.89 combined).
-          Recomputed independently by tests/objects/unit/pi1-gruis/reconstruction.test.mts from the pinned image and
-          visibilities, without SQUEEZE.
+          Recomputed independently from the pinned image and visibilities, without SQUEEZE.

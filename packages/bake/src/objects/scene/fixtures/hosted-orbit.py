@@ -120,9 +120,9 @@ with urllib.request.urlopen(REFERENCE_URL, timeout=30) as response:
     reference = external_record(REFERENCE_URL, response.read())
 
 write(
-    'astronomy/hosted-orbit.json',
+    'packages/bake/src/objects/scene/fixtures/hosted-orbit.json',
     'Astropy ICRS sky geometry and NumPy circular-orbit states',
-    'tests/oracles/astronomy/hosted-orbit.py',
+    'packages/bake/src/objects/scene/fixtures/hosted-orbit.py',
     {'astropy': astropy.__version__, 'methods': 'SkyCoord.directional_offset_by and NumPy vectors'},
     [],
     {'frames': frame_cases(), 'orbits': orbit_cases()},

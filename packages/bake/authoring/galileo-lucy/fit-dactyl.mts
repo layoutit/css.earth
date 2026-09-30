@@ -23,9 +23,9 @@ if (input.objectId !== 'dactyl' || input.schema !== 'cssearth-dactyl-registratio
 const pinned = new Map<string, Buffer>();
 for (const item of requireArray(input.files)) {
   const file = requireRecord(item), path = requireString(file.path);
-  if ((!path.startsWith('src/objects/') && !path.startsWith('tests/objects/fixtures/dactyl/')) || path.split('/').includes('..')) throw new Error('Invalid source path.');
+  if (!path.startsWith('src/objects/') || path.split('/').includes('..')) throw new Error('Invalid source path.');
   // Kernels are not committed; a missing one is restored from its declared origin.
-  const bytes = file.url === undefined ? await readFile(path === 'tests/objects/fixtures/dactyl/galileo-pointing.json' ? 'src/objects/dactyl/fixtures/galileo-pointing.json' : path) : await readDeclaredFile(path, requireString(file.url));
+  const bytes = file.url === undefined ? await readFile(path) : await readDeclaredFile(path, requireString(file.url));
   pinned.set(requireString(file.id), bytes);
 }
 function bytes(id: string) {

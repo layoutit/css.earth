@@ -27,3 +27,13 @@ test('groups take a shell first, the richest first; a large group is whole; the 
   // Without groupsFirst the shell keeps its first three in order.
   assert.deepEqual(selectByShell(order, 10, () => 3).map(p => p.reference[0]), [1, 2, 3]);
 });
+
+test('sky bands split each shell\'s room evenly over the sky, so a densely covered direction keeps only its share', () => {
+  // One shell with room for 4, split over 2 cells (one band: east and west of the x axis): 6 points east, 1 west.
+  const east = Array.from({ length: 6 }, (_, index) => ({ reference: [1, 0.1 * (index + 1), 0] }));
+  const west = [{ reference: [1, -0.5, 0] }];
+  const kept = selectByShell([...east, ...west], 10, () => 4, undefined, 1);
+  assert.equal(kept.filter(point => point.reference[1]! > 0).length, 2);
+  assert.equal(kept.filter(point => point.reference[1]! < 0).length, 1);
+  assert.throws(() => selectByShell(east, 10, () => 4, undefined, 0), /skyBands/);
+});

@@ -23,4 +23,4 @@ for pin in record['inputs']:
         cases[pin['path']] = {'shape': list(hdu.data.shape), 'hduCount': len(hdus),
             'hierarchyCount': len(hierarchy),
             'nonfinite': int((~np.isfinite(hdu.data)).sum())}
-write('fits/pallas.json', 'astropy', 'tests/oracles/fits/pallas.py', {'astropy': astropy.__version__}, inputs, cases)
+write('packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json', 'astropy', 'packages/bake/src/objects/cameras/fixtures/fits/pallas.py', {'astropy': astropy.__version__}, inputs, cases)

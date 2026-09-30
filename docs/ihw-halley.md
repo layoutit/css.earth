@@ -20,9 +20,7 @@ observation; the image is 396 by 597 pixels at 0.36 arcsec per pixel, and the la
 The program and its receipt are in
 [`packages/telescope-cli/src/archives/ihw/programs/`](../packages/telescope-cli/src/archives/ihw/programs/). The body the
 dataset observes, the archive's name for it and the qualified program are data beside them in
-[`ledger-focus.json`](../packages/telescope-cli/src/archives/ihw/ledger-focus.json). The receipt and the committed ledger
-were written when the programs were in `tools/objects/ihw/programs/` and keep that path; the ledger builder and the query
-find it at the current location.
+[`ledger-focus.json`](../packages/telescope-cli/src/archives/ihw/ledger-focus.json).
 
 This is an archive-final relative-intensity image. It has no uncertainty plane, celestial WCS or comet-surface registration,
 and no local calibration ran. Its product record therefore carries `archive-origin`, never `archive-agreement`, and the query

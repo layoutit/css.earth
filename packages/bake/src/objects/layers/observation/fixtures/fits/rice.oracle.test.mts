@@ -8,7 +8,7 @@ import { hmiPixel, hmiRecordGeometry } from '@cssearth/bake/objects/layers/obser
 import { ORACLE_ROOT, readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-const fixture = await readOracleFixture('fits/rice.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/observation/fixtures/fits/rice.json');
 const numbers = (value: unknown) => requireArray(value).map(v => v === null ? NaN : requireFiniteNumber(v));
 
 for (const name of ['rice-int16', 'rice-uint8', 'rice-int32']) test(`Astropy RICE_1 conformance: ${name}`, async () => {

@@ -2,7 +2,6 @@ import type { PreparedTriangle, RadialSamplingProfile, RadialFaces, TerrainGrid 
 import type { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadVtkShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '../../../geometry/index.ts';
 import { isArray, requireRecord, requireArray, requireFiniteNumber, dotN as dot } from '@cssearth/core';
-import { matchesPreparationGenerator } from '../../../sources/index.ts';
 import { parseRadialSource } from '../records/radial-source.ts';
 import { loadEllipsoidParameters } from '../ellipsoid-parameters.ts';
 import { loadContactEllipsoids } from '../contact-ellipsoids.ts';
@@ -53,7 +52,7 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     grid = orientObservedSurface(requireTerrainMesh(grid));
   }
   for (const entry of source.manifest.inputs.filter(entry =>
-    matchesPreparationGenerator(requireRecord(entry).generator, 'tools/objects/terrestrial-layers/pds-constraint-map.mts'))) {
+    requireRecord(entry).generator === 'packages/bake/src/objects/layers/terrestrial/pds-constraint-map.ts')) {
     await preparePdsConstraintMap(grid, requireRecord(entry).recipe);
   }
   const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
@@ -118,8 +117,7 @@ function textureQuantum(config: {raster?: unknown}) {
  * nominal density even for a thin, sheared face; the base is the edge that needs the fewest texels. The packed atlas, gaps included,
  * holds at most the body's budget of texels per face. */
 /** Seam repair as PolyCSS prepares a solid mesh: an edge shared with a neighbouring face overlaps it by the default seam bleed, and a
- * face with no shared edge by the solid-triangle bleed, both in CSS pixels; interior slices fill whatever cracks remain
- * (tools/prepared-interior-slices.mts). */
+ * face with no shared edge by the solid-triangle bleed, both in CSS pixels. */
 /** Measured on Alphonsina, Ida, Itokawa, Mathilde, Achlys, Amalthea and comet 1P (DPR 2, five poses, both zooms): twelve CSS pixels
  * closes the cracks at every zoom, leaving at most 24 open crack pixels at maximum zoom against 16,708 without it, and costs no
  * surface detail (Itokawa's mean surface detail 1.572 without overlap, 1.669 with it). */

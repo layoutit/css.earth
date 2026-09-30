@@ -16,6 +16,9 @@
           "fade": "galaxy",
           "at": "start"
         },
+        "centreWithin": {
+          "distancePc": 5000000
+        },
         "frame": {
           "fit": "drawn-galaxies"
         }

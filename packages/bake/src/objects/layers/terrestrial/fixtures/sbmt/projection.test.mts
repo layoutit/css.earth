@@ -12,7 +12,7 @@ import { nativeArray, call, construct } from './java.mts';
 
 const definitions=await cases();
 test('native fixture compares complete source, pointing, image and visibility stages',async()=>{
-  const selected=process.env.SBMT_TEST_UNIT==='1'?definitions.filter(c=>c.shape.startsWith('tests/fixtures/')).map(c=>c.id):undefined;
+  const selected=process.env.SBMT_TEST_UNIT==='1'?definitions.filter(c=>c.shape.startsWith(import.meta.dirname.slice(ORACLE_ROOT.length+1))).map(c=>c.id):undefined;
   const report=await compare(selected);
   assert.equal(report.cases.length,selected?.length??definitions.length);
   for(const c of report.cases){
@@ -56,7 +56,7 @@ test('pointing binding rejects malformed SUM/INFO and unsupported camera correct
 });
 
 test('source tampering, unsafe software pins and invalid native values fail before comparison',async()=>{
-  const fixture=await readOracleFixture('sbmt/projection.json'), p=fixture.inputs.find(p=>p.path.endsWith('.SUM'))!;
+  const fixture=await readOracleFixture('packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json'), p=fixture.inputs.find(p=>p.path.endsWith('.SUM'))!;
   const bytes=await readFile(resolve(ORACLE_ROOT,p.path)), bad=Buffer.from(bytes);bad[0]^=1;
   assert.throws(()=>pin({path:'../escape',bytes:1}),/Unsafe/);
   assert.throws(()=>pin({path:'native/x',bytes:-1}),/Invalid/);

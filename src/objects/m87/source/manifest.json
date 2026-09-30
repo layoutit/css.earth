@@ -1,0 +1,175 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "eso-optical",
+      "path": ".local/nebula-lab/planetary/m87-inferred-original.jpg",
+      "origin": "https://www.eso.org/public/images/eso1525a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1525a/",
+      "title": "The Halo of Galaxy Messier 87",
+      "credit": "Chris Mihos (Case Western Reserve University)/ESO",
+      "displayCredit": "Chris Mihos/ESO",
+      "acquisition": "The publisher Large JPEG (4001 x 4000 px), downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/m87/experiment.json) into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1525a",
+            "role": "material",
+            "evidence": "https://www.eso.org/public/images/eso1525a/"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "eso-optical",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Burrell Schmidt V",
+            "evidence": "https://www.eso.org/public/images/eso1525a/",
+            "reason": "The publisher's one-band image, tinted; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "strader-gc-table",
+      "path": "src/objects/m87/source/strader-gc/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJS%2F197%2F33%2Ftable9%22",
+      "title": "Wide-field precision kinematics of the M87 globular cluster system, table.csv",
+      "credit": "J. Strader, A. J. Romanowsky, J. P. Brodie et al.; ApJS 197, 33",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through strader-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "strader-2011-m87-globular-clusters",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJS%2F197%2F33%2Ftable9%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "peng-gc-table",
+      "path": "src/objects/m87/source/peng-gc/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BPJB2009%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F703%2F42%2Ftable1%22",
+      "title": "The color-magnitude relation for metal-poor globular clusters in M87, table.csv",
+      "credit": "E. W. Peng, A. Jordán, J. P. Blakeslee et al.; ApJ 703, 42",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through peng-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "peng-2009-m87-globular-clusters",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BPJB2009%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F703%2F42%2Ftable1%22"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m87/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m87/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m87/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m87/source/bake-inputs/references/00-experiment.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-5",
+      "path": "src/objects/m87/source/strader-gc/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-6",
+      "path": "src/objects/m87/source/peng-gc/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-7",
+      "path": "src/objects/m87/source/dots/merge.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-8",
+      "path": "src/objects/m87/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "compact-compact-emission-0-f32-gz",
+      "path": "src/objects/m87/source/compact/emission-0.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-1-f32-gz",
+      "path": "src/objects/m87/source/compact/emission-1.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-2-f32-gz",
+      "path": "src/objects/m87/source/compact/emission-2.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-model-json",
+      "path": "src/objects/m87/source/compact/model.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    }
+  ]
+}

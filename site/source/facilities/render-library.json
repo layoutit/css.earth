@@ -103,7 +103,7 @@
       "rollDegrees": 0
     },
     "orientation": {
-      "poses": "tools/facility-renders/poses.mts",
+      "poses": "packages/bake/src/facility-renders/poses.ts",
       "inwardDirection": [
         -0.8,
         -0.45,
@@ -732,7 +732,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
+        "recipe": "packages/bake/src/facility-renders/render.ts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 7364,
         "omissions": [],
@@ -827,7 +827,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
+        "recipe": "packages/bake/src/facility-renders/render.ts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 6194,
         "omissions": [],

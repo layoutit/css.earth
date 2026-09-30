@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "NumPy linear algebra and Astropy blackbody numerics",
- "generatedBy": "tools/oracles/eclipse-map/numerics.py",
+ "generatedBy": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py",
  "tool": {
   "astropy": "8.0.1",
   "methods": "Legendre derivatives, numpy.linalg, astropy BlackBody",

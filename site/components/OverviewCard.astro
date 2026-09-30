@@ -7,7 +7,7 @@ import ObjectCardHeader from './ObjectCardHeader.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
 import ObjectResult from './ObjectResult.astro';
-import { overviewDistanceM } from '../overview-context.mts';
+import { overviewDistanceM, overviewsReachableFrom } from '../overview-context.mts';
 import { objectResultMarkup } from '../server/object-result-markup.mts';
 import { overviewResult } from '../server/overview-result.mts';
 import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts';
@@ -47,7 +47,8 @@ const members = (classifications: readonly string[]): Member[] => OBJECTS.filter
   }
   if (!classifications.includes(object.classification) || !object.worldFrame) return [];
   return [{ id: object.id, name: object.name, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false }];
-}).sort((a, b) => a.distancePc - b.distancePc);
+  // A level lists only the subjects whose own zoom reaches it (M87 is in Virgo, not the Local Group).
+}).filter(member => overviewsReachableFrom(member.positionM).some(level => level.id === overview.id)).sort((a, b) => a.distancePc - b.distancePc);
 const lists = overview.holds.flatMap(group => {
   if (!group.list) return [];
   return [{ id: slug(group.list), label: group.list, members: members(group.classifications) }];

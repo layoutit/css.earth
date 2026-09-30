@@ -62,7 +62,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         !galaxySample.ids.every(id => typeof id === 'string' && catalog.objects.some(row => row.id === id && row.membership.group === 'local-group'))) throw new TypeError('Invalid baked galaxy sample.');
     sampleIds = new Set(galaxySample.ids);
   }
-  const objects: readonly PreparedCatalogObject[] = [...catalog.objects.filter(object => object.membership.group === 'local-group' && (object.detailedObjectId || !sampleIds || sampleIds.has(object.id))), ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].filter(object => !isPreparedNebula(object) ||
+  // Every galaxy with an object of its own is named (M81, NGC 253, M87 are not Local Group members); of the rest, the Local
+  // Group's sampled members.
+  const objects: readonly PreparedCatalogObject[] = [...catalog.objects.filter(object => object.detailedObjectId || object.membership.group === 'local-group' && (!sampleIds || sampleIds.has(object.id))), ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].filter(object => !isPreparedNebula(object) ||
     Boolean(object.detailedObjectId && (!renderedObjectIds || renderedObjectIds.has(object.detailedObjectId))));
   if (new Set(objects.map(object => object.id)).size !== objects.length) throw new TypeError('Prepared catalogue focus identifiers must be unique.');
   const root = document.createElement('div');

@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "isis3",
- "generatedBy": "tools/oracles/isis/photometric-truth.py",
+ "generatedBy": "packages/bake/src/photometry/fixtures/photometric-truth.py",
  "tool": {
   "isis": "10.0.0_LTS",
   "python": "3.12.14",

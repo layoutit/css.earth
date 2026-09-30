@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "pds4_tools",
- "generatedBy": "tools/oracles/pds/dart-draco-cube.py",
+ "generatedBy": "packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.py",
  "tool": {
   "pds4_tools": "1.4",
   "python": "3.12.14",

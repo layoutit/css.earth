@@ -2659,7 +2659,7 @@ async function composePlanetTextures({
           "single-background-position-on-published-input-frame",
       }),
       lightingModel:
-        "published photometric models of the map relative to the flood-lit disc centre (tools/photometry/limb.mts), documented in the body README",
+        "published photometric models of the map relative to the flood-lit disc centre (packages/bake/src/photometry/limb.ts), documented in the body README",
       illuminationDirectionAuthority: "declared scene Sun direction",
       solarEffectiveTemperatureKelvin: SOLAR_EFFECTIVE_TEMPERATURE_KELVIN,
       rendererAlbedoMultiplier: OBJECT_SOLAR_ALBEDO_MULTIPLIER,

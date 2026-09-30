@@ -7,37 +7,7 @@ ROOT = next(parent for parent in Path(__file__).resolve().parents if (parent / "
 
 def input_record(path):
     path = Path(path)
-    recorded = {
-        'packages/fits/src/node/fixtures/fits/byte.fits': 'tests/fixtures/fits/byte.fits',
-        'packages/fits/src/node/fixtures/fits/cube.fits': 'tests/fixtures/fits/cube.fits',
-        'packages/fits/src/node/fixtures/fits/eso-hierarchy.fits': 'tests/fixtures/fits/eso-hierarchy.fits',
-        'packages/fits/src/node/fixtures/fits/extensions.fits': 'tests/fixtures/fits/extensions.fits',
-        'packages/fits/src/node/fixtures/fits/float32.fits': 'tests/fixtures/fits/float32.fits',
-        'packages/fits/src/node/fixtures/fits/float64.fits': 'tests/fixtures/fits/float64.fits',
-        'packages/fits/src/node/fixtures/fits/long-string.fits': 'tests/fixtures/fits/long-string.fits',
-        'packages/fits/src/node/fixtures/fits/scaled-blank.fits': 'tests/fixtures/fits/scaled-blank.fits',
-        'packages/fits/src/node/fixtures/fits/signed-int32.fits': 'tests/fixtures/fits/signed-int32.fits',
-        'packages/fits/src/node/fixtures/fits/sky-orientation.fits': 'tests/fixtures/fits/sky-orientation.fits',
-        'packages/fits/src/node/fixtures/fits/sky-projection.fits': 'tests/fixtures/fits/sky-projection.fits',
-        'packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/manifest.json': 'tests/fixtures/hosted-orbits/trappist-1f-agol2021/manifest.json',
-        'packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/qualification.json': 'tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json',
-        'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/SOURCE.json': 'tests/fixtures/telescope-families/f04-europa-stis/SOURCE.json',
-        'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits': 'tests/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits',
-        'packages/fits/src/node/fixtures/telescope-families/family-sources.json': 'tests/fixtures/telescope-families/family-sources.json',
-        'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum': 'tests/fixtures/sbmt/concave.sum',
-        'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json': 'tests/fixtures/sbmt/cases.json',
-        'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.tab': 'tests/fixtures/sbmt/concave.tab',
-        'packages/bake/src/objects/color/fixtures/lupton-bands.fits': 'tests/fixtures/fits/lupton-bands.fits',
-        'packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits': 'tests/fixtures/fits/rice-int16.fits',
-        'packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits': 'tests/fixtures/fits/rice-int32.fits',
-        'packages/bake/src/objects/layers/observation/fixtures/rice-uint8.fits': 'tests/fixtures/fits/rice-uint8.fits',
-        'packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-centre.fits': 'tests/fixtures/fits/wise-atlas-lmc-centre.fits',
-        'packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-far-corner.fits': 'tests/fixtures/fits/wise-atlas-lmc-far-corner.fits',
-        'packages/bake/src/objects/raster/fixtures/wise-atlas-pleiades-tile.fits': 'tests/fixtures/fits/wise-atlas-pleiades-tile.fits',
-        'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits': 'tests/fixtures/fits/binary-table-columns.fits',
-    }
-    current = str(path.resolve().relative_to(ROOT))
-    return {'path': recorded.get(current, current), 'bytes': path.stat().st_size}
+    return {'path': str(path.resolve().relative_to(ROOT)), 'bytes': path.stat().st_size}
 
 def samples(array, seed, count=48, valid=None):
     """Deterministic sample of flat indices and values; `valid` masks which pixels count as data."""
@@ -52,52 +22,13 @@ def external_record(url, data):
     """A reference outside the repository, named by a commit in its URL and by its size."""
     return {'url': url, 'bytes': len(data)}
 
-relocated = {
-    "physical-units/spectral.json": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.json",
-    "sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
-    "spice/dart-draco.json": "packages/bake/src/astronomy/fixtures/dart-draco.json",
-    "spice/new-horizons-approach.json": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json",
-    "eclipse-map/numerics.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json",
-    "eclipse-map/theresa-eigenbasis.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json",
-    "fits/binary-table.json": "packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json",
-    "fits/charon-leisa.json": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json",
-    "fits/core.json": "packages/bake/src/objects/layers/observation/fixtures/fits/core.json",
-    "fits/encounter.json": "packages/bake/src/objects/layers/terrestrial/missions/encounter.json",
-    "fits/llorri.json": "packages/bake/src/objects/layers/terrestrial/missions/llorri.json",
-    "fits/lupton-asinh.json": "packages/bake/src/objects/color/fixtures/lupton-asinh.json",
-    "fits/pallas.json": "packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json",
-    "fits/rice.json": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.json",
-    "fits/sky-orientation.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json",
-    "fits/sky-projection.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json",
-    "fits/synoptic.json": "packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json",
-    "fits/wise-atlas-projection.json": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json",
-    "astronomy/hosted-eccentric.json": "packages/bake/src/astronomy/fixtures/hosted-eccentric.json",
-    "astronomy/hosted-orbit.json": "packages/bake/src/objects/scene/fixtures/hosted-orbit.json",
-    "isis/photometric-truth.json": "packages/bake/src/photometry/fixtures/photometric-truth.json",
-    "isis2/borrelly-micas.json": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json",
-    "npy/psyche-alma.json": "packages/bake/src/objects/raster/numpy/psyche-alma.json",
-    "pds/dart-draco-cube.json": "packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json",
-    "pds3/amica-ddr.json": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.json",
-    "pds3/osiris-geo.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.json",
-    "pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json"
-}
-
-def fixture_path(name):
-    """Resolve the logical fixture name through the shared relocation table."""
-    if isinstance(name, Path):
-        current = name.resolve()
-        logical = next((key for key, value in relocated.items() if ROOT / value == current), None)
-        if logical is None:
-            raise ValueError("fixture_path expects a logical name such as 'fits/core.json' or a Path to a known relocated fixture.")
-        name = logical
-    return ROOT / relocated.get(name, "tests/oracles/" + name)
-
-def write(name, oracle, generated_by, tool, inputs, cases, references=()):
+def write(path, oracle, generated_by, tool, inputs, cases, references=()):
+    """Write the fixture at its repository-relative path."""
     fixture = {'schema': 'cssearth-oracle-fixture@1', 'oracle': oracle, 'generatedBy': generated_by,
                'tool': {**tool, 'python': platform.python_version(), 'numpy': np.__version__},
                'inputs': [input_record(p) for p in inputs], **({'references': list(references)} if references else {}), 'cases': cases}
 
-    out = fixture_path(name)
+    out = ROOT / path
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(fixture, indent=1) + '\n')
     print(json.dumps({'written': str(out.relative_to(ROOT)), 'cases': {k: (len(v) if hasattr(v, '__len__') else v) for k, v in cases.items()}}))

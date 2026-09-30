@@ -80,7 +80,7 @@ function loadManifest(root: string): Manifest {
 // take. It never changes JavaScript ownership: test fixtures and capture
 // scripts still need an exact legacyAuthored entry until they migrate.
 function boundaryRoleFor(path: string): BoundaryRole | undefined {
-  // These oracle gates moved out of tests/oracles; retain their harness role, without exempting other CLIs.
+  // The FITS and SBMT oracle gates are evidence harnesses; other CLIs are not exempt.
   if (path === 'packages/bake/cli/test-sbmt.mts' || path === '.github/scripts/checks/test-fits.mts') return 'evidence';
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
     || /^src\/(?:[^/]+\/)*test\//u.test(path)

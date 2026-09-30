@@ -5,7 +5,7 @@ import { hostSkyFrame, hostedOrbitStateRelativeBmjdTdb, type HostedOrbit } from 
 import { readOracleFixture } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dotN as dot } from '@cssearth/core';
 
-const fixture = await readOracleFixture('astronomy/hosted-eccentric.json');
+const fixture = await readOracleFixture('packages/bake/src/astronomy/fixtures/hosted-eccentric.json');
 const numbers = (value: unknown) => requireArray(value).map(entry => requireFiniteNumber(entry));
 function compare(actual: readonly number[], expected: readonly number[], label: string, scale: number) {
   assert.equal(actual.length, expected.length, `${label} length`);

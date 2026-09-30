@@ -1,0 +1,34 @@
+{
+  "id": "arxiv-1906-11238",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1906.11238"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1906.11238",
+      "label": "EHT Collaboration 2019 (M87 Paper I)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m87-star/text.json",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "The Event Horizon Telescope Collaboration: K. Akiyama, A. Alberdi, W. Alef et al.",
+      "scope": "citation",
+      "evidence": "src/objects/m87-star/text.json#/card/sources/0"
+    }
+  ]
+}

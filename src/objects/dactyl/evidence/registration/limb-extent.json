@@ -3,25 +3,25 @@
   "qualifiedSurface": false,
   "dependencies": [
     {
-      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts"
+      "path": "packages/bake/src/objects/geometry/shape-camera-mosaic.ts"
     },
     {
-      "path": "tools/objects/observation/fits.mts"
+      "path": "packages/bake/src/objects/layers/observation/fits-map.ts"
     },
     {
-      "path": "tools/spice/ck.mts"
+      "path": "packages/spice/src/ck.ts"
     },
     {
-      "path": "tools/spice/daf.mts"
+      "path": "packages/spice/src/daf.ts"
     },
     {
-      "path": "tools/spice/sclk.mts"
+      "path": "packages/spice/src/sclk.ts"
     },
     {
-      "path": "tools/spice/lsk.mts"
+      "path": "packages/spice/src/lsk.ts"
     },
     {
-      "path": "tools/spice/text-kernel.mts"
+      "path": "packages/spice/src/text-kernel.ts"
     }
   ],
   "thresholdDN": 10,
