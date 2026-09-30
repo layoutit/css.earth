@@ -65,7 +65,6 @@ export async function installColorDataset(files: PackageFiles, id: string, color
   const plan = read(`${s}/preparation/acquisition.json`);
   plan.operations = [...plan.operations, ...color.acquisition, ...limb.acquisitions ?? []];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
-  files.set(`${o}/.gitignore`, '# Archive downloads, restored by source/preparation/acquisition.json.\n/source/photometry/*.dat\n/source/photometry/*.gz\n');
   return { hex: colorHex, words, color: loaded.color };
 }
 

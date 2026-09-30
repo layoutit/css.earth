@@ -85,8 +85,6 @@ else {
 const acquisition = await read(`${s}/preparation/acquisition.json`);
 acquisition.operations.push({ kind: 'download', groups: ['restore', 'refresh'], path: sourcePath, url: kind.origin });
 await write(`${s}/preparation/acquisition.json`, acquisition);
-const ignore = await readFile(resolve(root, o, '.gitignore'), 'utf8').catch(() => '');
-await writeFile(resolve(root, o, '.gitignore'), `${ignore}${ignore && !ignore.endsWith('\n') ? '\n' : ''}# NASA's artist's ${model ? 'model' : 'concept map'} is restored by source/preparation/acquisition.json.\n/source/${sourcePath}\n`);
 
 const raster = await read(`${s}/preparation/raster.json`), first = raster.surfaces[0];
 raster.surfaces.push({ id: DATASET, output: first.output, thumbnail: first.thumbnail, source: sourcePath, falseColor: false, science: kind.science });

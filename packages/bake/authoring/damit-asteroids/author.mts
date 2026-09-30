@@ -293,7 +293,6 @@ async function authorBody(body: Body) {
   await write(resolve(src, 'preparation/acquisition.json'), json({ schema: 'cssearth-acquisition-plan@1', operations }));
   const navigation = requireRecord(JSON.parse(await readFile(resolve(template, 'source/preparation/navigation.json'), 'utf8')));
   await write(resolve(src, 'preparation/navigation.json'), json({ ...navigation, objectId: id }));
-  await write(resolve(pkg, '.gitignore'), await readFile(resolve(template, '.gitignore')));
   const css = (await readFile(resolve('src/renderers/css/styles', `${TEMPLATE}-surfaces.css`), 'utf8')).replaceAll(TEMPLATE, id);
   await write(resolve('src/renderers/css/styles', `${id}-surfaces.css`), css);
 
