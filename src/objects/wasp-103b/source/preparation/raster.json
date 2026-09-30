@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-103b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature-p0",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
       "source": "science/kreidberg-2018/pressure-temperature.dat",
       "falseColor": true,
       "science": {
@@ -70,7 +70,7 @@
     {
       "id": "temperature-p1",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
       "source": "science/kreidberg-2018/pressure-temperature.dat",
       "falseColor": true,
       "science": {
@@ -119,7 +119,7 @@
     {
       "id": "temperature-p2",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
       "source": "science/kreidberg-2018/pressure-temperature.dat",
       "falseColor": true,
       "science": {
@@ -168,7 +168,7 @@
     {
       "id": "temperature-p3",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
       "source": "science/kreidberg-2018/pressure-temperature.dat",
       "falseColor": true,
       "science": {
@@ -217,7 +217,7 @@
     {
       "id": "temperature-p4",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
       "source": "science/kreidberg-2018/pressure-temperature.dat",
       "falseColor": true,
       "science": {
@@ -266,7 +266,7 @@
     {
       "id": "temperature-p5",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
       "source": "science/kreidberg-2018/pressure-temperature.dat",
       "falseColor": true,
       "science": {
@@ -315,7 +315,7 @@
     {
       "id": "temperature-p6",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
       "source": "science/kreidberg-2018/pressure-temperature.dat",
       "falseColor": true,
       "science": {

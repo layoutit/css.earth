@@ -8,7 +8,7 @@ It is one of 4 planets known around K2-285. Its orbit and size follow Palle et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.4715644 d Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): a/R* 10.43; Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): inclination 86.846 degrees Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459468.742204 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-285's measured colour (#ffe6cf, the colour lens of k2-285 (src/objects/k2-285/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-285's measured colour (#ffe6cf, the colour dataset of k2-285 (src/objects/k2-285/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-285's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 70, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 

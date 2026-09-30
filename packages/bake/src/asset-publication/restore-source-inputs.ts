@@ -36,8 +36,8 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
         throw error;
       });
       if (!manifest || !presentation) continue;
-      if (sourceObject(JSON.parse(manifest.toString('utf8'))).schema === 'cssearth-volume-source-manifest@1' &&
-          sourceObject(JSON.parse(presentation.toString('utf8'))).schema === 'cssearth-volume-presentation-source@1') ids.push(entry.name);
+      if (sourceObject(JSON.parse(manifest.toString('utf8'))).schema === 'cssearth-volume-source-manifest@2' &&
+          sourceObject(JSON.parse(presentation.toString('utf8'))).schema === 'cssearth-volume-presentation-source@2') ids.push(entry.name);
     }
     return ids.sort((left, right) => left.localeCompare(right));
   }
@@ -45,7 +45,7 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
   async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Promise<boolean> {
     const manifestBytes = await readFile(resolve(sourceRoot, 'manifest.json'));
     const manifest = sourceObject(JSON.parse(manifestBytes.toString('utf8')));
-    if (manifest.schema !== 'cssearth-volume-source-manifest@1') return false;
+    if (manifest.schema !== 'cssearth-volume-source-manifest@2') return false;
     if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${id}.`);
     const entries = (['inputs', 'documents', 'generatedIntermediates'] as const).flatMap(section =>
       sourceArray(manifest[section] ?? [], sourceObject).map(raw => ({ raw, section })));

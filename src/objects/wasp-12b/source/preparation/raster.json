@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-12b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "thermal",
       "output": "wasp-12b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-12b-lens-{id}.webp",
+      "thumbnail": "wasp-12b-dataset-{id}.webp",
       "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
@@ -32,7 +32,7 @@
     {
       "id": "temperature-2010",
       "output": "wasp-12b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-12b-lens-{id}.webp",
+      "thumbnail": "wasp-12b-dataset-{id}.webp",
       "source": "science/bell-2019/phase-curve-2010.json",
       "falseColor": true,
       "science": {
@@ -68,7 +68,7 @@
     {
       "id": "temperature-2013",
       "output": "wasp-12b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-12b-lens-{id}.webp",
+      "thumbnail": "wasp-12b-dataset-{id}.webp",
       "source": "science/bell-2019/phase-curve-2013.json",
       "falseColor": true,
       "science": {

@@ -7,7 +7,7 @@
  * label's extent keywords give cell centres or cell edges; the label must then agree. A missing value comes from the
  * label's MISSING_CONSTANT, or, when the label declares none, from the recipe with the producer's evidence. An optional
  * mask image of the same grid withholds cells the producer flags (TES thermal inertia marks its interpolated cells).
- * A detached label names its image alone or with the record the image starts at, as Dawn's gravity maps do. A lens may
+ * A detached label names its image alone or with the record the image starts at, as Dawn's gravity maps do. A dataset may
  * withhold cells poleward of a latitude the producer states its map is valid within (`latitudeLimit`, with that evidence).
  */
 import { readFile } from 'node:fs/promises';
@@ -127,14 +127,14 @@ function attachedLabel(bytes: Buffer, where: string) {
   return head.slice(start, start + end) + 'END\n';
 }
 
-/** Parse the lens and decode its band (and mask), for preparation and for tests. */
+/** Parse the dataset and decode its band (and mask), for preparation and for tests. */
 export async function loadPds3Grid(root: string, value: unknown) {
-  const lens = requireRecord(value, 'pds3-grid lens');
+  const dataset = requireRecord(value, 'pds3-grid dataset');
   // The scientific block has no id of its own; its file (and band) names it in every error.
-  const path = requireString(lens.path, 'pds3-grid lens path'), band = requireRecord(lens.grid, `${path} grid`).band;
+  const path = requireString(dataset.path, 'pds3-grid dataset path'), band = requireRecord(dataset.grid, `${path} grid`).band;
   const id = band === undefined ? path : `${path} band ${String(band)}`;
-  const policy = gridPolicy(lens.grid, id);
-  if (lens.sampling !== undefined && lens.sampling !== 'nearest') throw new TypeError(`${id}: pds3-grid cells require nearest sampling.`);
+  const policy = gridPolicy(dataset.grid, id);
+  if (dataset.sampling !== undefined && dataset.sampling !== 'nearest') throw new TypeError(`${id}: pds3-grid cells require nearest sampling.`);
   const readGrid = async (path: string, labelPath: unknown, gridValue: GridPolicy, where: string) => {
     const bytes = await readFile(resolve(root, path));
     const detached = labelPath === undefined ? null : basename(path);
@@ -142,11 +142,11 @@ export async function loadPds3Grid(root: string, value: unknown) {
       : await readFile(resolve(root, requireString(labelPath, `${where}.labelPath`)), 'latin1');
     return decodePds3Grid(bytes, labelText, detached, gridValue, where);
   };
-  const grid = await readGrid(path, lens.labelPath, policy, id);
+  const grid = await readGrid(path, dataset.labelPath, policy, id);
   let withheld = 0;
-  if (lens.mask !== undefined) {
+  if (dataset.mask !== undefined) {
     // The mask shares the value grid; its own sample type and missing value come from its label.
-    const mask = requireRecord(lens.mask, `${id}.mask`);
+    const mask = requireRecord(dataset.mask, `${id}.mask`);
     const flagged = mask.withholdWhere;
     if (!Array.isArray(flagged) || !flagged.length || !flagged.every(Number.isFinite)) throw new TypeError(`${id}.mask.withholdWhere must list mask values.`);
     requireString(mask.evidence, `${id}.mask.evidence`);
@@ -158,10 +158,10 @@ export async function loadPds3Grid(root: string, value: unknown) {
   }
   const { width, height, values } = grid, ppd = policy.pixelsPerDegree;
   let withheldByLatitude = 0;
-  if (lens.latitudeLimit !== undefined) {
+  if (dataset.latitudeLimit !== undefined) {
     // A producer that states where its map is valid (a spherical-harmonic geoid diverges near the poles) has the cells
     // beyond that latitude withheld, never filled.
-    const limit = requireRecord(lens.latitudeLimit, `${id}.latitudeLimit`);
+    const limit = requireRecord(dataset.latitudeLimit, `${id}.latitudeLimit`);
     const maximum = requireFiniteNumber(limit.maximumAbsolute, `${id}.latitudeLimit.maximumAbsolute`);
     if (!(maximum > 0 && maximum < 90)) throw new TypeError(`${id}.latitudeLimit.maximumAbsolute must lie between 0 and 90.`);
     requireString(limit.evidence, `${id}.latitudeLimit.evidence`);
@@ -175,7 +175,7 @@ export async function loadPds3Grid(root: string, value: unknown) {
   for (const v of values) if (Number.isFinite(v)) { mapped += 1; if (v < lowest) lowest = v; if (v > highest) highest = v; }
   return {
     report: { format: 'pds3-grid', width, height, band: policy.band, mappedCells: mapped, missingCells: values.length - mapped,
-      withheldByMask: withheld, ...(lens.latitudeLimit === undefined ? {} : { withheldByLatitude }), valueRange: mapped ? [lowest, highest] : null, sampling: 'nearest-cell' },
+      withheldByMask: withheld, ...(dataset.latitudeLimit === undefined ? {} : { withheldByLatitude }), valueRange: mapped ? [lowest, highest] : null, sampling: 'nearest-cell' },
     sample(longitude: number, latitude: number) {
       if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
       let x = Math.round((longitude - policy.firstCentreLongitude) * ppd);
@@ -184,15 +184,15 @@ export async function loadPds3Grid(root: string, value: unknown) {
       if (x < 0 || x >= width || y < 0 || y >= height) return null;
       const v = values[y * width + x]!;
       if (!Number.isFinite(v)) return null;
-      const transform = lens.valueTransform === undefined ? null : requireRecord(lens.valueTransform, `${id}.valueTransform`);
+      const transform = dataset.valueTransform === undefined ? null : requireRecord(dataset.valueTransform, `${id}.valueTransform`);
       return transform ? v * requireFiniteNumber(transform.scale, `${id}.valueTransform.scale`) + requireFiniteNumber(transform.offset, `${id}.valueTransform.offset`) : v;
     },
   };
 }
 
-/** Files the lens reads besides its image, so preparation can require each to be declared in the manifest. */
+/** Files the dataset reads besides its image, so preparation can require each to be declared in the manifest. */
 export function pds3GridDependencies(value: unknown) {
-  const lens = requireRecord(value);
-  const mask = lens.mask === undefined ? null : requireRecord(lens.mask);
-  return [lens.labelPath, mask?.path, mask?.labelPath].filter((path): path is string => typeof path === 'string');
+  const dataset = requireRecord(value);
+  const mask = dataset.mask === undefined ? null : requireRecord(dataset.mask);
+  return [dataset.labelPath, mask?.path, mask?.labelPath].filter((path): path is string => typeof path === 'string');
 }

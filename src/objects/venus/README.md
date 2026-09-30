@@ -18,11 +18,11 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 
 ## Evidence
 
-The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. For PR #828, every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. That record applies to the #828 versions; the later numeric upgrade below rebakes emissivity and elevation. [emissivity](evidence/showcase/emissivity.png).
+The 26 September 2026 browser and delivery record identifies the tested revision and inventory. For PR #828, every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. That record applies to the #828 versions; the later numeric upgrade below rebakes emissivity and elevation. emissivity.
 
 ### Magellan microwave emissivity (26 September 2026)
 
-[USGS Magellan Global Microwave Emissivity, 4,641 m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) was introduced in PR #828 and retains its single `emissivity` lens and
+[USGS Magellan Global Microwave Emissivity, 4,641 m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) was introduced in PR #828 and retains its single `emissivity` dataset and
 `magellan-global-emissivity` source identity. The numeric upgrade samples the
 same native product into the compact grid before the existing science reader. Its signed 16-bit DN converts to dimensionless emissivity as `(DN − 1) / 10,000`; −32,768 is missing. The original 8,193 × 4,097 grid has 1,334,015 missing samples, and valid values range from 0.2926 to 0.9986. The displayed scale remains 0.29–1.00 with the original palette. The new numeric display uses lossless WebP; the #828 asset used lossy WebP. The compact grid contains 2,015,139 valid cells, spanning
 0.2926–0.9984, and 82,013 missing cells. No gap filling is applied.
@@ -30,7 +30,7 @@ same native product into the compact grid before the existing science reader. It
 The output now starts at −180° east longitude, matching the body's surface-map
 frame (180° is the same meridian). The previous recipe omitted this setting and
 used the science painter's 0° default, placing the data half a turn from that
-frame. The [comparison record](evidence/usgs-numeric/emissivity-upgrade.json)
+frame. The comparison record
 identifies both recipes and assets. Both display 2,048 × 1,024 cells; the lossless
 packed asset grows from 182,456 to 1,142,498 bytes.
 
@@ -57,7 +57,7 @@ Feature notes: 112 of the labelled names carry a caption note, the lead summary 
 
 - Radar brightness is not visible colour. About 7.7% of the area between 80° S and 84° N is missing from the left-looking mosaic and shows the gray grid; the poles beyond it are missing too.
 - The halo is a PSG model, not a measurement. PSG computes it with single scattering only and with the Sun one degree above the tangent point's horizon, so the real halo, especially the low haze just above the cloud top, may be brighter (see the `limb-halo` and `measured-limb-halo` ledger entries). Rotation is accelerated.
-- The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation lenses, which share it.
+- The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation datasets, which share it.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
 - The camera and background sky do not represent an observer at a stated epoch.
 
@@ -114,12 +114,12 @@ does not copy Saturn's ring-and-moon-specific prepared matrix transport.
 
 ## Cloud view
 
-Two lenses show the cloud deck: an **Ultraviolet** photograph taken by a
+Two datasets show the cloud deck: an **Ultraviolet** photograph taken by a
 spacecraft, and the default **Clouds** illustration.
 
 ### Ultraviolet: one Akatsuki UVI exposure
 
-The Ultraviolet lens is a single 365 nm exposure from the Ultraviolet Imager on
+The Ultraviolet dataset is a single 365 nm exposure from the Ultraviolet Imager on
 JAXA's Akatsuki (Venus Climate Orbiter), product `uvi_20230830_100446_365_l3b_v21`
 from orbit 257, exposed for 0.046 s with its middle at 2023-08-30T10:04:46.033 UTC.
 It comes from the Level 3b collection of volume `vcouvi_7011` in
@@ -141,7 +141,7 @@ Ogohara et al. (2012, [doi:10.1016/j.icarus.2011.05.017](https://doi.org/10.1016
 and Kouyama et al. (2013, [doi:10.1016/j.pss.2013.06.027](https://doi.org/10.1016/j.pss.2013.06.027)),
 the three papers the file names in its own `references` attribute.
 
-**Why this exposure.** One exposure sees one hemisphere, so the lens is chosen
+**Why this exposure.** One exposure sees one hemisphere, so the dataset is chosen
 for how much of the globe it lights. Thirty-four 365 nm exposures were measured:
 nineteen spread across orbits 10 to 276, then fifteen more across orbits 256 to
 260 once that neighbourhood looked best. For each, preparation measured the
@@ -189,9 +189,9 @@ treatment every mapped body in this repository gives a data gap. Nothing is
 interpolated, extrapolated, mirrored or filled from another exposure.
 
 **Limits.** This is one instant, not a global map: Venus's ultraviolet markings
-move with a four-day super-rotation, so the two hemispheres of this lens are not
+move with a four-day super-rotation, so the two hemispheres of this dataset are not
 the same scene at different longitudes, they are one scene and one absence. The
-lens is mounted on the shared lit cloud material, so the app's own limb and
+dataset is mounted on the shared lit cloud material, so the app's own limb and
 terminator fall across an image that already carries the Sun where it was: the
 illumination is counted twice near the limb. The 365 nm band is monochrome and
 shown as grey; the companion 283 nm filter is not prepared. Level 3b pointing
@@ -213,7 +213,7 @@ bilinear sampling, exact spherical latitude projection, center averaging, and
 antialiased coverage. The source is listed with its exact hash in `source/manifest.json`.
 
 The fixed Venus material is a 32-frame prepared camera-pitch bank. Every frame
-holds the cloud-top law on the disc in one retained alpha material; the false-colour lenses use a copy of it, and a lighting-only bank
+holds the cloud-top law on the disc in one retained alpha material; the false-colour datasets use a copy of it, and a lighting-only bank
 keeps the disc law when the user turns the atmosphere off. Runtime selects the nearest prepared frame and changes the
 retained material address; it performs no lighting, scattering, geometry or
 raster math.
@@ -297,7 +297,7 @@ See the [numeric acquisition method](../../../docs/usgs-numeric-surfaces.md).
 
 ### Radar: the FMAP left-look mosaic (27 September 2026)
 
-The Radar lens shows the USGS
+The Radar dataset shows the USGS
 [Magellan SAR FMAP left-look global mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m):
 Magellan's full-resolution radar strips (F-BIDRs, about 75 m per pixel) from
 mapping cycles 1 and 3, when the radar looked left, mosaicked by USGS. The native
@@ -319,7 +319,7 @@ law in decibels, clipped at −20 and +30 dB; so 0.2 × DN − 20.2 dB. The lege
 from −20 to +30 dB. The observed median is DN 103, +0.4 dB: the average surface
 matches the Muhleman law, as it should. Observed values run from DN 15 to 203.
 Trek averages DN values, so a pixel is the mean of decibels, not of power. There is
-no exposure curve, sharpening or colour; the previous lens applied all three.
+no exposure curve, sharpening or colour; the previous dataset applied all three.
 
 **Gaps.** Trek marks no-data as transparent. A partly transparent pixel carries the
 DN averaged with zeros: its gray falls in proportion to its alpha. Preparation
@@ -331,18 +331,18 @@ then stays within 1 DN) and marks the rest missing. 7.75% of the area between
 gravity maps put them, and on the same 2048-wide grid the mosaic's brightness
 correlates with the old C3-MDIR map at r = 0.81 at zero offset.
 
-**Bytes.** The lens uses `resolutionScale` 4, so the 8192-wide map reaches the
+**Bytes.** The dataset uses `resolutionScale` 4, so the 8192-wide map reaches the
 atlas without another resize: 8320 × 6144 pixels, 2,629,358 bytes in the lossy
 lane (quality 80), plus 98,866 bytes of lossless poles. The previous 2048-wide
 synthetic-colour atlas was 1,012,746 bytes with 445,994 bytes of poles. At scale 2
-the atlas would be 705,862 bytes. Radar is not the default lens, so the cost is
+the atlas would be 705,862 bytes. Radar is not the default dataset, so the cost is
 paid only when a reader picks it. The atlas stays under the raster lane's
 64-megapixel single-image limit, so it needs no pages or texture levels.
 
 **Synthetic colour removed.** USGS made the colourised C3-MDIR mosaic to simulate
 the surface. Colour predicted from brightness alone leaves a 5.2 DN RMS residual
 against a 31.2 DN brightness spread: it is one colour ramp over the same radar
-brightness. It is not kept as a separate lens (ledger entry
+brightness. It is not kept as a separate dataset (ledger entry
 `magellan-c3-mdir-synthetic-colour`). What is lost is coverage: C3-MDIR fills the
 poles and left-look gaps from other cycles.
 
@@ -427,34 +427,34 @@ See the [contributor guide](../README.md) for acquisition and preparation comman
 
 ## Numeric-map qualification
 
-The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+The retained numeric checks bind
 the compact input digests and tested processing files, count coverage, and
 compare native byte samples at hemispheres, seams, extrema and gaps. Their
 calibration check runs before the display coverage masks; it does not validate
 the original instrument or scientific model.
-The [failed label-only roughness comparison](evidence/usgs-numeric/roughness-label-conflict.json)
+The failed label-only roughness comparison
 is retained alongside the passing comparison using the cited PDS calibration.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+The fresh-install receipt verifies 1,500
 runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
-The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+The browser evidence records the earlier
 map descriptions, legends and retained scene. It includes screenshots; the
-[validation record](evidence/usgs-numeric/validation.json) names the checks
+validation record names the checks
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+The current-main integration check records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.
 
-The later [gallery removal check](evidence/usgs-numeric/gallery-removal.json)
+The later gallery removal check
 confirms that Surface photographs is absent on desktop, mobile and the built
 page. The four panorama files are absent from the delivery inventory.
 
-The [final dataset UI check](../moon/evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
+The final dataset UI check confirms that Dataset details
 and Surface photographs are absent from all 1,453 generated pages. Browser
 checks cover the Moon, Venus and WASP-12b; the final screenshots show the
 short description, legend and source link.

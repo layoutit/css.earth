@@ -6,7 +6,7 @@ Reflection nebula, star formation and obscuring dust.
 
 This first comparison batch pins the official ESO **Publication TIFF 4K** variants, downloaded unchanged on 2026-09-12. These retain each master image’s full footprint; no local resizing or cropping was used. Native star removal runs on the selected TIFF’s actual pixel grid. Larger publisher masters remain available for a later quality comparison.
 
-| Lens | Processing grid | Angular field | Publisher |
+| Dataset | Processing grid | Angular field | Publisher |
 |---|---|---|---|
 | ESO · optical | 4000 × 3876 | 34.43′ × 33.36′ | [Source](https://www.eso.org/public/images/eso1105a/) |
 | ESO VISTA · infrared | 4000 × 2968 | 72.79′ × 54.02′ | [Source](https://www.eso.org/public/images/eso1635a/) |

@@ -7,10 +7,10 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 | Concept | Meaning and owner |
 | --- | --- |
 | Scene destination | A body package with a route, prepared world frame and scene loader. |
-| Prepared-focus destination | A catalogue subject the map can open: a galaxy cluster, or a subject an object package details. Its page, `/<id>/`, is its host scene’s page with the subject selected; `?dataset=` selects its lens, as on every page. Other catalogue rows are labels with no page. |
+| Prepared-focus destination | A catalogue subject the map can open: a galaxy cluster, or a subject an object package details. Its page, `/<id>/`, is its host scene’s page with the subject selected; `?dataset=` selects its dataset, as on every page. Other catalogue rows are labels with no page. |
 | Overview | The Milky Way, the Local Group, the Nearby and the Observable Universe: registry entries of kind `overview`, authored under `properties.overview` in their packages: name, description, order, the zoom thresholds and framing of their level, the classifications they hold and the packages they draw. The zoom ladder, the cards, the breadcrumbs and the sidebar tree's sections are built from these entries. Its page, `/<id>/`, is the world host's scene page with the overview selected. |
 | Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
-| Dataset view | A selectable `(objectId, lensId)` presentation, which may combine several products and published sources. |
+| Dataset view | A selectable `(objectId, datasetId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
 
 Every page is `/<id>/`, one URL system for all three kinds of page:

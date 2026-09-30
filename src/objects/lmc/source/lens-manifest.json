@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-lens-manifest@1",
+  "schema": "cssearth-volume-dataset-manifest@1",
   "outputs": {
     "prepared/horalek-widefield/slices/x/14.webp": {
       "bytes": 100
@@ -732,9 +732,6 @@
     },
     "source/lenses/horalek-widefield/provenance.json": {
       "bytes": 160114
-    },
-    "source/lenses/horalek-widefield/catalogue-stars.json": {
-      "bytes": 554354
     },
     "source/lenses/horalek-widefield/selection.json": {
       "bytes": 12097
@@ -1471,9 +1468,6 @@
     "source/lenses/vista-infrared/provenance.json": {
       "bytes": 159406
     },
-    "source/lenses/vista-infrared/catalogue-stars.json": {
-      "bytes": 554354
-    },
     "source/lenses/vista-infrared/selection.json": {
       "bytes": 12070
     },
@@ -2209,16 +2203,13 @@
     "source/lenses/wise-wide-infrared/provenance.json": {
       "bytes": 156507
     },
-    "source/lenses/wise-wide-infrared/catalogue-stars.json": {
-      "bytes": 554354
-    },
     "source/lenses/wise-wide-infrared/selection.json": {
       "bytes": 12092
     },
     "source/lenses.json": {
       "bytes": 2756
     },
-    "prepared/lenses.json": {
+    "prepared/datasets.json": {
       "bytes": 2785661
     },
     "object.json": {

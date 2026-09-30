@@ -4,7 +4,7 @@
   "entries": [
     {
       "id": "gaia-xp-sampled",
-      "subject": "A sampled Gaia spectrum for the colour lens",
+      "subject": "A sampled Gaia spectrum for the colour dataset",
       "status": "included",
       "finding": "Gaia DR3 releases externally calibrated sampled spectra only for the brighter sources; TRAPPIST-1 at G = 15.62 carries only the continuous basis-function coefficients (has_xp_sampled false, has_xp_continuous true). The coefficients are pinned and sampled here with GaiaXPy onto the archive's own grid, which is the same calibration the sampled product uses.",
       "evidence": [
@@ -26,7 +26,7 @@
       "id": "surface-imagery",
       "subject": "Imagery of the photosphere",
       "status": "excluded",
-      "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.09 milliarcseconds across, far below any interferometer's reach. The colour lens is its own measured spectrum.",
+      "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.09 milliarcseconds across, far below any interferometer's reach. The colour dataset is its own measured spectrum.",
       "evidence": [
         "https://gea.esac.esa.int/archive/"
       ],

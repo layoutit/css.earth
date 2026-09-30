@@ -18,7 +18,7 @@ export interface PreparedSurfaceFeaturePlan {
   readonly catalog: SurfaceFeatureCatalogDescriptor;
   readonly selection?: SurfaceFeatureSelectionPlan;
   /** Mesh radius in the target node's raw coordinates; anchors sit on this sphere. */
-  readonly target: number; readonly lensIds: readonly string[]; readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
+  readonly target: number; readonly datasetIds: readonly string[]; readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
   /** Shape-model bodies: the radius band of the prepared picking mesh that every anchor and outline point lies within. */
   readonly surfaceRadiusUnits?: { readonly minimum: number; readonly maximum: number };
   /** Ellipsoidal bodies: the reference semi-axes in mesh units, the polar axis, and the normalised-radius band
@@ -65,7 +65,7 @@ export interface SurfaceFeatureLayerStats {
 }
 /** The shell-facing surface: the loaded catalogue and selection by feature id (pin, caption, outline, flight). */
 export interface SurfaceFeatureNavigationRuntime {
-  readonly lensIds: readonly string[];
+  readonly datasetIds: readonly string[];
   catalog(): PreparedSurfaceFeatureCatalog | null;
   loaded(): Promise<PreparedSurfaceFeatureCatalog>;
   select(id: string, options?: { signal?: AbortSignal }): Promise<{ completed: boolean }>;
@@ -78,7 +78,7 @@ export interface SurfaceFeatureNavigationRuntime {
 export interface SurfaceFeatureLayerRuntime extends SurfaceFeatureNavigationRuntime {
   readonly root: HTMLElement;
   publish(view: Pick<import('../rendering/prepared-presentation.js').PreparedView, 'projection' | 'levelOfDetail' | 'zoom'>): void;
-  setLens(selection: { readonly id: string | null }): void;
+  setDataset(selection: { readonly id: string | null }): void;
   setPlaying(value: boolean): void;
   stats(): SurfaceFeatureLayerStats;
   inspect(): { readonly labels: Readonly<Record<string, HTMLElement>>; readonly tooltip: HTMLElement; readonly outline: readonly HTMLElement[]; readonly rects: ReadonlyMap<string, LabelScreenRect> };

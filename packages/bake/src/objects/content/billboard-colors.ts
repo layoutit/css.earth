@@ -1,15 +1,15 @@
-// The billboard colour of each lens control: plain imports, so the full preparer and the observation refresh share one computation.
+// The billboard colour of each dataset control: plain imports, so the full preparer and the observation refresh share one computation.
 import { access } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 
-/** The mean colour of each lens control's surface image, the colour a sub-pixel body shows; an interior view shows its default lens. */
-export async function lensBillboardColors(
+/** The mean colour of each dataset control's surface image, the colour a sub-pixel body shows; an interior view shows its default dataset. */
+export async function datasetBillboardColors(
   controls: readonly Record<string, unknown>[],
-  defaultLens: string,
+  defaultDataset: string,
   publicDirectory: string,
 ): Promise<Map<string, string>> {
   const sharp = (await import("sharp")).default;
-  const defaultControl = controls.find((control) => control.id === defaultLens);
+  const defaultControl = controls.find((control) => control.id === defaultDataset);
   const colors = new Map<string, string>();
   for (const control of controls) {
     const controlId = typeof control.id === "string" ? control.id : "";

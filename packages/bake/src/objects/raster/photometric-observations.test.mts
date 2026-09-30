@@ -80,7 +80,7 @@ test('pooled level matching gives every observation one gain from all boundary s
   const separate = matchObservedColorLevels(perObservation, base, { width, height, boundaryPixels: 1, luminance: [0.2126, 0.7152, 0.0722] });
   assert.ok(separate[0]!.gain < 0.21, 'per observation, the outlier clamps the fine footprint to a fifth of the requested gain');
   const pooled = matchObservedColorLevels(result, base, { width, height, boundaryPixels: 1, luminance: [0.2126, 0.7152, 0.0722], pooled: true });
-  assert.equal(new Set(pooled.map(level => level.gain)).size, 1, 'one gain for the lens');
+  assert.equal(new Set(pooled.map(level => level.gain)).size, 1, 'one gain for the dataset');
   assert.ok(pooled[0]!.gain > 1.9 && pooled[0]!.gain < 2.3, `the pooled gain follows the boundary median, ${pooled[0]!.gain}`);
   assert.ok(pooled.every(level => level.pooled && level.clippedPixels! >= 1 && level.clippedPixels! < 5), 'only the outlier clips');
 });

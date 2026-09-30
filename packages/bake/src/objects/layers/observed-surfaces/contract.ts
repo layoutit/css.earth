@@ -28,8 +28,8 @@ const polarProjection = obj({tileSize: n, poles: arr(s.literal('north', 'south')
 export type PolarProjection = s.Infer<typeof polarProjection>;
 const productCommon = {filename: str, encoding: webpEncoding, transforms: opt(arr(transform)), removeAlpha: opt(s.boolean)};
 const product = s.union(obj({...productCommon, kind: s.literal('surface'), packing: obj({bandCount: n, gutter: n, overscan: opt(n)})}), obj({...productCommon, kind: s.literal('poles'), projection: polarProjection}), obj({...productCommon, kind: s.literal('thumbnail')}));
-const lens = obj({id: str, source: str, decode, products: arr(product), transforms: opt(arr(transform)), coverage: opt(coverage), calibration: opt(calibration), atmosphereColor: opt(brightTail), planetographicAxisRatio: opt(n)});
-export const observedRecipe = obj({schema: s.literal('cssearth-observed-surfaces@1'), sources: arr(sourcePin), lenses: arr(lens), baselines: opt(arr(baseline))});
+const dataset = obj({id: str, source: str, decode, products: arr(product), transforms: opt(arr(transform)), coverage: opt(coverage), calibration: opt(calibration), atmosphereColor: opt(brightTail), planetographicAxisRatio: opt(n)});
+export const observedRecipe = obj({schema: s.literal('cssearth-observed-surfaces@2'), sources: arr(sourcePin), datasets: arr(dataset), baselines: opt(arr(baseline))});
 export type ObservedSurfaceRecipe = s.Infer<typeof observedRecipe>;
 export interface RasterMap {data: Buffer; width: number; height: number; channels: 1 | 2 | 3 | 4; missing?: Uint8Array; atmosphereColor?: number[]; calibration?: unknown; coverage?: {baselineColor: readonly number[]}; stretch?: number[]}
 export interface Baseline {color: readonly number[]; provenance: BaselineProvenance}

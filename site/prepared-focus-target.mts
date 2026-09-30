@@ -1,6 +1,6 @@
 import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
 import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
-import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusLens } from './prepared-focus.mts';
+import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusDataset } from './prepared-focus.mts';
 import type { PreparedFocusPolicy } from './prepared-focus.mts';
 
 export interface PreparedFocusSource {
@@ -38,10 +38,10 @@ export function acquirePreparedFocusTarget(id: string, { layer, policy, sources,
         if (!released && !bank.state()) throw new TypeError(`Prepared focus bank did not become ready: ${bank.objectId}`);
       });
     },
-    resolveLens(requested: string | null) {
-      if (!released) return resolvePreparedFocusLens(requested, bank?.state() ?? null, unavailable);
+    resolveDataset(requested: string | null) {
+      if (!released) return resolvePreparedFocusDataset(requested, bank?.state() ?? null, unavailable);
     },
-    selectLens(lens: string) { if (!released) bank?.selectLens(lens); },
+    selectDataset(dataset: string) { if (!released) bank?.selectDataset(dataset); },
     release() { if (!released) { released = true; unsubscribe?.(); } },
   };
 }

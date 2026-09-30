@@ -87,7 +87,7 @@ the shared focus card. The deploy build renders each focus page through the same
 function once (`site/build/prerender-focus-pages.mts`), so the static page opens
 on its card with or without JavaScript. Catalogue transport is separate pinned JSON, shared by the response and
 browser. Construction-order identities let the live volume publisher adopt
-the response's elements and selected lens. Responsive CSS lengths retain the
+the response's elements and selected dataset. Responsive CSS lengths retain the
 prepared camera's projection until the browser resolves its viewport. A flight
 to a prepared focus arrives on the line of sight from the Sun with celestial
 north up, as its datasets were observed, whichever way the previous view faced;
@@ -221,7 +221,7 @@ failed startup cases verify that settings, choices and scene elements survive.
 
 ![A native Titan search in the existing Saturn scene with JavaScript disabled](images/native-search.png)
 
-The earlier [continuous Saturn capture](../site/test/evidence/progressive-enhancement.mp4)
+The earlier continuous Saturn capture
 was recorded, before native dataset submits were added.
 At 1280×900, application scripts are held for the first ten seconds,
 while the existing information tabs work by click and keyboard. Script startup

@@ -26,7 +26,7 @@ The asteroid validation report records the earlier source, preparation and brows
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2298.1 m error; the authored stopping threshold is 2400 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1208.7 m and maximum 3217.3 m.
 
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
+Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
 ### SPHERE photograph
 
@@ -50,13 +50,13 @@ Overlaps are scale-free. Read each against the same-shape column, which is what 
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `zimpol` | 30 | 5 | 3.29° | 2.15° | 2.48° | its other 30 frames | 0 of 30 | — | 23 of 30, 2.50° | — | ×1.21 | registered |
 
 `zimpol` ships on its paper’s comparison, [Figure B.3](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ## Known problems
@@ -78,7 +78,7 @@ The SPHERE photograph is photographed illumination from the survey's deconvolved
 
 - [Original ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj): radius 127.337488 km. The SPHERE photograph rides it, because the release's rotation record describes this reconstruction; the Shape and Elevation views keep the MPCD refinement, which uses resolved SPHERE detail (survey section 3 and Appendix B).
 
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/3Juno/): individual, illuminated, resolved telescope images. The deconvolved camera-1 frames are the SPHERE photograph lens, placed by computed cameras and checked against the survey's Figure B.3; the reduced `Red/` products are not used. This is photographed illumination, not a registered global reflectance mosaic, and the frames remain the observational constraints behind the selected reconstruction.
+- [Released SPHERE images](https://observations.lam.fr/astero/Data/3Juno/): individual, illuminated, resolved telescope images. The deconvolved camera-1 frames are the SPHERE photograph dataset, placed by computed cameras and checked against the survey's Figure B.3; the reduced `Red/` products are not used. This is photographed illumination, not a registered global reflectance mosaic, and the frames remain the observational constraints behind the selected reconstruction.
 
 - [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
 

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gaia-dr3-6363141971994511360",
   "displayName": "Gaia DR3 6363141971994511360",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "gaia-dr3-6363141971994511360-lens-color.webp",
+        "thumbnail": "gaia-dr3-6363141971994511360-dataset-color.webp",
         "surface": "gaia-dr3-6363141971994511360-surface-color@2x.webp",
         "poles": "gaia-dr3-6363141971994511360-poles-color@2x.webp",
         "source": {

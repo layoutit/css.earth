@@ -29,29 +29,29 @@ async function readBody(projectRoot: string, object: { id: string; name: string 
   const directory = resolve(projectRoot, 'src/objects', object.id);
   const bytes = await readFile(resolve(directory, 'text.json'));
   const page = requireRecord(await readJson(resolve(directory, 'prepared/page.json')));
-  const lenses = requireRecord(page.controls).lenses;
+  const datasets = requireRecord(page.controls).datasets;
   const lineage = await bodyLineage(directory);
   return {
     id: object.id, directory,
     text: parseObjectText(JSON.parse(bytes.toString('utf8')), object.id),
     context: {
       name: object.name, catalogue,
-      lenses: lenses === null || lenses === undefined ? [] : requireArray(requireRecord(lenses).controls).map(value => {
+      datasets: datasets === null || datasets === undefined ? [] : requireArray(requireRecord(datasets).controls).map(value => {
         const control = requireRecord(value);
         return { id: requireString(control.id), label: requireString(control.label) };
       }),
-      evidencedDatasets: new Set(lineage.products.flatMap(product => product.inputs.length ? [product.id, ...product.lensIds] : [])),
+      evidencedDatasets: new Set(lineage.products.flatMap(product => product.inputs.length ? [product.id, ...product.datasetIds] : [])),
     },
   };
 }
 
 /** The introduction, one dataset summary and the credits shown beside it; the shell shows one dataset at a time. */
 function compositionGroups(body: BodyText, exploration: ReturnType<typeof parsePreparedExploration>) {
-  return body.context.lenses.map(lens => {
-    const { missions, facilities, notes } = datasetContributors(body.id, lens.id, exploration.graph, exploration.catalog);
+  return body.context.datasets.map(dataset => {
+    const { missions, facilities, notes } = datasetContributors(body.id, dataset.id, exploration.graph, exploration.catalog);
     return [
       { source: 'introduction', text: body.text.introduction.text },
-      { source: `datasets.${lens.id}.summary`, text: body.text.datasets[lens.id]?.summary ?? '' },
+      { source: `datasets.${dataset.id}.summary`, text: body.text.datasets[dataset.id]?.summary ?? '' },
       ...missions.map(mission => ({ source: `mission:${mission.id}`, text: mission.description.value })),
       ...notes.map(note => ({ source: `note:${note.label}`, text: note.reason })),
       ...facilities.map(facility => ({ source: `facility:${facility.id}`, text: facility.description.value })),
@@ -60,7 +60,7 @@ function compositionGroups(body: BodyText, exploration: ReturnType<typeof parseP
 }
 
 function outputs(body: BodyText, descriptor: Record<string, unknown>): [string, string][] {
-  const datasets = Object.fromEntries(body.context.lenses.map(lens => [lens.id, body.text.datasets[lens.id]]));
+  const datasets = Object.fromEntries(body.context.datasets.map(dataset => [dataset.id, body.text.datasets[dataset.id]]));
   const prepared = { schema: PREPARED_TEXT_SCHEMA, objectId: body.id,
     card: body.text.card, introduction: body.text.introduction, datasets };
   const properties = requireRecord(descriptor.properties), catalog = requireRecord(properties.catalog);

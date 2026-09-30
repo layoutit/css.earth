@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "hd-181327-disc",
   "name": "HD 181327 debris ring",
-  "defaultLens": "reflectance",
+  "defaultDataset": "reflectance",
   "bank": {
-    "path": "src/objects/hd-181327-disc/prepared/lenses.json"
+    "path": "src/objects/hd-181327-disc/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -14,7 +14,7 @@
   ],
   "sharedInputs": [],
   "inputEvidence": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "reflectance",
       "label": "JWST/NIRCam · debris ring, reflectance colour",

@@ -50,7 +50,7 @@ async function observedLongitudes(root: string, groupsPath: string) {
 }
 
 export async function loadEigenspectraTemperature(root: string, value: unknown) {
-  const lens = requireRecord(value, 'Eigenspectra temperature lens'), path = requireString(lens.path, 'path'), groups = requireString(lens.observedFrom, 'observedFrom');
+  const dataset = requireRecord(value, 'Eigenspectra temperature dataset'), path = requireString(dataset.path, 'path'), groups = requireString(dataset.observedFrom, 'observedFrom');
   const archive = await readArchive(root, path);
   const wavelength = npzArray(archive, 'arr_0', path), maps = npzArray(archive, 'arr_3', path);
   const grid = nodeGrid(npzArray(archive, 'arr_1', path), npzArray(archive, 'arr_2', path), path);
@@ -58,7 +58,7 @@ export async function loadEigenspectraTemperature(root: string, value: unknown) 
   if (maps.shape.join() !== [3, grid.rows, grid.columns].join()) throw new TypeError(`${path}: arr_3 holds the lower, best and upper maps on the grid.`);
   if (grid.latitudes[0] !== -90 || grid.latitudes.at(-1) !== 90 || grid.longitudes[0] !== -180 || grid.longitudes.at(-1) !== 180) throw new TypeError(`${path}: the grid does not span the whole sphere node to node.`);
   const [west, east] = await observedLongitudes(root, groups);
-  const regions = lens.boundaries === true ? await loadEigenspectraGroups(root, { path: groups }) : null;
+  const regions = dataset.boundaries === true ? await loadEigenspectraGroups(root, { path: groups }) : null;
   const best = maps.values.subarray(grid.rows * grid.columns, 2 * grid.rows * grid.columns);
   const latStep = 180 / (grid.rows - 1), lonStep = 360 / (grid.columns - 1);
   const node = (row: number, column: number) => best[row * grid.columns + column]!;
@@ -90,7 +90,7 @@ export async function loadEigenspectraTemperature(root: string, value: unknown) 
 }
 
 export async function loadEigenspectraGroups(root: string, value: unknown) {
-  const lens = requireRecord(value, 'Eigenspectra group map'), path = requireString(lens.path, 'path');
+  const dataset = requireRecord(value, 'Eigenspectra group map'), path = requireString(dataset.path, 'path');
   const archive = await readArchive(root, path), groups = npzArray(archive, 'arr_2', path);
   const grid = nodeGrid(npzArray(archive, 'arr_3', path), npzArray(archive, 'arr_4', path), path);
   if (groups.shape.join() !== [grid.rows, grid.columns].join()) throw new TypeError(`${path}: arr_2 is the group of every node.`);

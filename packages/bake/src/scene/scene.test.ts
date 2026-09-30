@@ -20,7 +20,7 @@ import type { PresentationInputs } from '../presentation/types.ts';
 const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
 /** The widths the raster lane publishes, from its recipe: surfaces.ts packs each surface, poles are two tiles per surface
- * per lens, interior.ts writes the outer shell at the map's size and the core, poles and section at theirs. */
+ * per dataset, interior.ts writes the outer shell at the map's size and the core, poles and section at theirs. */
 function publishedWidths(raster:RasterRecipe):LeafImagePixels{
  const url=(template:string,id?:string)=>raster.publicBase+outputName(template,RASTER_DENSITY,id),widths=new Map<string,number>();
  for(const surface of raster.surfaces){
@@ -156,20 +156,20 @@ test('a plain cap whose image holds fewer than two texels per CSS pixel shrinks 
   }
  });
 });
-test('leaf image candidates cover every lens, page, level and cutaway image a leaf can show',async()=>{
+test('leaf image candidates cover every dataset, page, level and cutaway image a leaf can show',async()=>{
  const venus=parseGeometryProfile(await readJson('src/objects/venus/source/preparation/geometry.json')),venusRaster=parseRasterRecipe(await readJson('src/objects/venus/source/preparation/raster.json'));
- const lens=(id:string,extra:Record<string,unknown>={})=>({id,surfaceUrl:`/scenes/venus/venus-${id}@2x.webp`,surface2xUrl:`/scenes/venus/venus-${id}@2x.webp`,
+ const dataset=(id:string,extra:Record<string,unknown>={})=>({id,surfaceUrl:`/scenes/venus/venus-${id}@2x.webp`,surface2xUrl:`/scenes/venus/venus-${id}@2x.webp`,
   polesUrl:`/scenes/venus/venus-poles-${id}@2x.webp`,poles2xUrl:`/scenes/venus/venus-poles-${id}@2x.webp`,...extra});
- // An interior lens draws the cutaway, and a dataset that borrows another lens's surface draws that lens's: neither adds images.
- const candidates=leafImageCandidates({objectId:'venus',profile:venus,raster:venusRaster,lenses:{controls:[lens('clouds'),lens('radar'),
-  lens('section',{view:'interior'}),{id:'disc',volume:{surface:'clouds'}}]}});
+ // An interior dataset draws the cutaway, and a dataset that borrows another dataset's surface draws that dataset's: neither adds images.
+ const candidates=leafImageCandidates({objectId:'venus',profile:venus,raster:venusRaster,datasets:{controls:[dataset('clouds'),dataset('radar'),
+  dataset('section',{view:'interior'}),{id:'disc',volume:{surface:'clouds'}}]}});
  assert.deepEqual([...candidates.keys()],[venus.surface.surface.url,venus.surface.poles.url]);
  assert.deepEqual(candidates.get(venus.surface.surface.url),['/scenes/venus/venus-clouds@2x.webp','/scenes/venus/venus-radar@2x.webp']);
  assert.deepEqual(candidates.get(venus.surface.poles.url),['/scenes/venus/venus-poles-clouds@2x.webp','/scenes/venus/venus-poles-radar@2x.webp']);
- assert.throws(()=>leafImageCandidates({objectId:'venus',profile:venus,raster:venusRaster,lenses:{controls:[lens('clouds',{surfaceUrl:'venus-clouds.webp'})]}}),/venus: lens clouds\.surfaceUrl must be a \/scenes\/ url, not "venus-clouds\.webp"/);
+ assert.throws(()=>leafImageCandidates({objectId:'venus',profile:venus,raster:venusRaster,datasets:{controls:[dataset('clouds',{surfaceUrl:'venus-clouds.webp'})]}}),/venus: dataset clouds\.surfaceUrl must be a \/scenes\/ url, not "venus-clouds\.webp"/);
  // A paged surface publishes no whole atlas: every page at every level instead.
  const triton=parseGeometryProfile(await readJson('src/objects/triton/source/preparation/geometry.json')),tritonRaster=parseRasterRecipe(await readJson('src/objects/triton/source/preparation/raster.json'));
- const paged=leafImageCandidates({objectId:'triton',profile:triton,raster:tritonRaster,lenses:{controls:[{id:'normal',surfaceUrl:triton.surface.surface.url,surface2xUrl:triton.surface.surface.url}]}});
+ const paged=leafImageCandidates({objectId:'triton',profile:triton,raster:tritonRaster,datasets:{controls:[{id:'normal',surfaceUrl:triton.surface.surface.url,surface2xUrl:triton.surface.surface.url}]}});
  const pages=paged.get(triton.surface.surface.url)!,full=packedRasterSize(tritonRaster,RASTER_DENSITY).width;
  assert.equal(pages.length,16*4);
  assert.ok(!pages.includes(triton.surface.surface.url));
@@ -177,12 +177,12 @@ test('leaf image candidates cover every lens, page, level and cutaway image a le
  // The cutaway draws the band leaves again over its outer shell, lit or unlit, and names its own poles, core and section.
  const mercury=parseGeometryProfile(await readJson('src/objects/mercury/source/preparation/geometry.json')),mercuryRaster=parseRasterRecipe(await readJson('src/objects/mercury/source/preparation/raster.json'));
  const interior=Object.fromEntries(['outerSurface','outerSurfaceUnlit','outerPoles','outerPolesUnlit','core','corePoles','section'].map(name=>[`${name}Url`,`/scenes/mercury/${name}.webp`]));
- const cutaway=leafImageCandidates({objectId:'mercury',profile:mercury,raster:mercuryRaster,interior,lenses:{controls:[{id:'normal',surfaceUrl:mercury.surface.surface.url,polesUrl:mercury.surface.poles.url}]}});
+ const cutaway=leafImageCandidates({objectId:'mercury',profile:mercury,raster:mercuryRaster,interior,datasets:{controls:[{id:'normal',surfaceUrl:mercury.surface.surface.url,polesUrl:mercury.surface.poles.url}]}});
  assert.deepEqual(cutaway.get(mercury.surface.surface.url),[mercury.surface.surface.url,'/scenes/mercury/outerSurface.webp','/scenes/mercury/outerSurfaceUnlit.webp']);
  assert.deepEqual(cutaway.get('/scenes/mercury/outerPoles.webp'),['/scenes/mercury/outerPoles.webp','/scenes/mercury/outerPolesUnlit.webp']);
  assert.deepEqual(['core','corePoles','section'].map(name=>cutaway.get(`/scenes/mercury/${name}.webp`)),['core','corePoles','section'].map(name=>[`/scenes/mercury/${name}.webp`]));
  const {coreUrl:_core,...coreless}=interior;
- assert.throws(()=>leafImageCandidates({objectId:'mercury',profile:mercury,raster:mercuryRaster,interior:coreless,lenses:{controls:[{id:'normal'}]}}),/mercury: prepared interior\.coreUrl is missing/);
+ assert.throws(()=>leafImageCandidates({objectId:'mercury',profile:mercury,raster:mercuryRaster,interior:coreless,datasets:{controls:[{id:'normal'}]}}),/mercury: prepared interior\.coreUrl is missing/);
 });
 test('the widest candidate answers for a leaf, and a leaf naming an unmeasured image is refused',async()=>{
  const widths=new Map([['/scenes/a/one.webp',1024],['/scenes/a/two.webp',2048],['/scenes/a/poles.webp',512]]);
@@ -191,30 +191,30 @@ test('the widest candidate answers for a leaf, and a leaf naming an unmeasured i
  assert.throws(()=>pixels('/scenes/a/two.webp'),/a: a leaf names \/scenes\/a\/two\.webp, which is none of the measured leaf textures/);
  await assert.rejects(widestLeafImages('a',new Map([['/scenes/a/one.webp',['/scenes/a/one.webp']]]),async()=>0),/a: leaf image \/scenes\/a\/one\.webp measures 0 px wide/);
 });
-test('every lens reaches the leaves: a leaf binds its lens texture and each composite variant writes its own lens',async()=>{
- // Uranus's leaves once inlined the profile's 1x normal map, and its variants wrote no surface: every lens drew that map.
+test('every dataset reaches the leaves: a leaf binds its dataset texture and each composite variant writes its own dataset',async()=>{
+ // Uranus's leaves once inlined the profile's 1x normal map, and its variants wrote no surface: every dataset drew that map.
  const result=await prepareAuthored('uranus',[1,0,0],profile=>profile,{},profileWidths);
  assert.ok(!('bodyLeaves' in result));
  const bands=result.body.leaves.filter(leaf=>!leaf.polarCap),caps=result.body.leaves.filter(leaf=>leaf.polarCap);
  assert.ok(bands.length>0&&bands.every(leaf=>styleOf(leaf.style).get('background-image')==='var(--uranus-surface-image)'));
  assert.ok(caps.length===2&&caps.every(leaf=>styleOf(leaf.style).get('background-image')==='var(--uranus-poles-image)'));
- const base='src/objects/uranus/prepared',[published,assets,lenses,sun,controls,solarSource]=await Promise.all([
-  ...['scene','assets','lenses','sun','controls'].map(file=>readJson(`${base}/${file}.json`)),readJson('src/objects/uranus/source/presentation/solar-system.json')]);
+ const base='src/objects/uranus/prepared',[published,assets,datasets,sun,controls,solarSource]=await Promise.all([
+  ...['scene','assets','datasets','sun','controls'].map(file=>readJson(`${base}/${file}.json`)),readJson('src/objects/uranus/source/presentation/solar-system.json')]);
  const scene={...published as {body:object},body:{...(published as {body:object}).body,leaves:result.body.leaves}};
  // No browser here: the CSSOM reads only rescale leaf addresses, which this test does not read.
  const adapters={...presentationAdapters(presentationHostAdapters(solarGeometry)),prepareCssomDeclarationReads:async()=>new Map()};
- const draft=await prepareComposite({namespace:'uranus',mode:'composite',scene,assets,lenses,sun,controls,solarSource} as unknown as PresentationInputs,adapters);
- const body=draft.tree.nodes.findIndex(node=>node.className==='polycss-mesh uranus-body'),defaultLens=(lenses as {defaultLens:string}).defaultLens;
- const lensIds=[...new Set(draft.variants.map(variant=>variant.when.lensId))];
- assert.ok(lensIds.length===3&&lensIds.includes('methane'));
+ const draft=await prepareComposite({namespace:'uranus',mode:'composite',scene,assets,datasets,sun,controls,solarSource} as unknown as PresentationInputs,adapters);
+ const body=draft.tree.nodes.findIndex(node=>node.className==='polycss-mesh uranus-body'),defaultDataset=(datasets as {defaultDataset:string}).defaultDataset;
+ const datasetIds=[...new Set(draft.variants.map(variant=>variant.when.datasetId))];
+ assert.ok(datasetIds.length===3&&datasetIds.includes('methane'));
  for(const variant of draft.variants){
   const textures=variant.writes.filter(write=>write.kind==='texture');
-  assert.deepEqual(textures,[{kind:'texture',target:body,name:'--uranus-surface-image',resource:`surface:${variant.when.lensId}`,quoted:true},
-   {kind:'texture',target:body,name:'--uranus-poles-image',resource:`poles:${variant.when.lensId}`,quoted:true}],`variant ${JSON.stringify(variant.when)}`);
+  assert.deepEqual(textures,[{kind:'texture',target:body,name:'--uranus-surface-image',resource:`surface:${variant.when.datasetId}`,quoted:true},
+   {kind:'texture',target:body,name:'--uranus-poles-image',resource:`poles:${variant.when.datasetId}`,quoted:true}],`variant ${JSON.stringify(variant.when)}`);
   for(const write of textures)assert.ok(write.kind==='texture'&&write.resource&&variant.required.includes(write.resource));
  }
- // A lens other than the default draws its own map: methane's surface resource is the methane file, not the normal one.
- const methane=draft.variants.find(variant=>variant.when.lensId==='methane'&&variant.when.lensId!==defaultLens)!;
+ // A dataset other than the default draws its own map: methane's surface resource is the methane file, not the normal one.
+ const methane=draft.variants.find(variant=>variant.when.datasetId==='methane'&&variant.when.datasetId!==defaultDataset)!;
  const surface=methane.writes.find(write=>write.kind==='texture'&&write.name==='--uranus-surface-image');
  assert.ok(surface?.kind==='texture');
  assert.equal(draft.assets.entries.find(entry=>entry.key===surface.resource)?.url,'/scenes/uranus/uranus-surface-methane@2x.webp');

@@ -8,7 +8,7 @@ It is the only planet known around WASP-105. Its orbit and size follow Anderson 
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 7.87289166 d Anderson et al. 2017 (2017A&A...604A.110A), via the NASA Exoplanet Archive ps table (pl_refname ANDERSON_ET_AL__2017): a/R* 17.9; Anderson et al. 2017 (2017A&A...604A.110A), via the NASA Exoplanet Archive ps table (pl_refname ANDERSON_ET_AL__2017): inclination 89.7 degrees Anderson et al. 2017 (2017A&A...604A.110A), via the NASA Exoplanet Archive ps table (pl_refname ANDERSON_ET_AL__2017): e 0 Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457607.807454 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-105's measured colour (#ffe4d0, the colour lens of wasp-105 (src/objects/wasp-105/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-105's measured colour (#ffe4d0, the colour dataset of wasp-105 (src/objects/wasp-105/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of WASP-105's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (104, 105, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

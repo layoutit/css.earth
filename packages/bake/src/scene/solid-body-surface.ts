@@ -3,7 +3,7 @@ import type { RasterRect } from "./projective-surface-raster.ts";
 interface SurfaceRasterOptions { width: number; height: number; latitudeSegments?: number; longitudeSegments?: number; seamOverlap?: number; sampling?: "bilinear" | "nearest"; }
 interface PoleRasterOptions extends SurfaceRasterOptions { tileSize?: number; radius?: number; polarRadius?: number; }
 interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: number; secondaryRadius?: number; mapUrl: string; polesUrl: string; latitudeSegments?: number; longitudeSegments?: number; sourceWidth?: number; sourceHeight?: number; poleTileSize?: number; seamOverlap?: number; gutter?: number;
-  /** Pixel widths of the widest surface and pole images any lens binds to these leaves, measured from the published files:
+  /** Pixel widths of the widest surface and pole images any dataset binds to these leaves, measured from the published files:
    * each leaf holds its image at TEXELS_PER_CSS_PIXEL (leafRasterScale). */
   mapPixelWidth: number; polesPixelWidth: number; }
 type SurfacePolygon = Polygon & { latitudeIndex: number; longitudeIndex?: number; polar?: "north" | "south"; inner?: boolean; className?: string; textureImageSource: { url: string; width: number; height: number; sourceRect: RasterRect } };

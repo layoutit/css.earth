@@ -29,7 +29,7 @@ Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene byt
 
 Both photographic views were inspected with Shadows on and off in Chromium at
 DPR 1, with no script errors or missing image requests.
-The [enhanced-color capture](evidence/native-source-enhanced.png) shows the
+The enhanced-color capture shows the
 published color differences and fine crater texture on the retained geometry.
 This is a display check; independent map-to-shape registration remains separate.
 
@@ -43,7 +43,7 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 Feature notes: 2 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
-Different control networks, photographed shadows, seams and coarse inserts remain. No inpainting, synthetic color, polar repetition or patch correction is applied. The shared curvature overlay and optional directional Shadows operate on both lenses.
+Different control networks, photographed shadows, seams and coarse inserts remain. No inpainting, synthetic color, polar repetition or patch correction is applied. The shared curvature overlay and optional directional Shadows operate on both datasets.
 
 Model spacing is about 1.58 km. The producer’s one-to-two-grid-spacing accuracy estimate derives from simulation experience, not independent per-cell Dione uncertainty. Increasing texture dimensions adds no terrain detail. This release includes roughly 1040 additional images compared with the previous archived model, through June 2017.
 
@@ -58,7 +58,7 @@ SPC sigma measures internal maplet agreement, not absolute height uncertainty. D
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="dione-sources-and-preparation"></a>
-<a id="photographic-lenses"></a>
+<a id="photographic-datasets"></a>
 <a id="elevation"></a>
 <a id="geometry-and-delivery"></a>
 <a id="b2-source-shape-and-relative-albedo"></a>
@@ -86,7 +86,7 @@ Pinned URLs, source bytes and hashes are in `source/manifest.json`. The shared a
 
 The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 5,614 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 4851.62 m, 95th percentile 2463.15 m and RMS 1298.41 m. These samples do not establish a full Hausdorff bound.
 
-The Shape lens uses the shared neutral gray over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 6.32 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
+The Shape dataset uses the shared neutral gray over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 6.32 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
 
 - [USGS Cassini–Voyager global mosaic](https://astrogeology.usgs.gov/search/map/dione_cassini_voyager_global_mosaic_154m): 2010 edition, 23040 × 11520, about 154 m per source pixel on a 563 km cartographic sphere. Its equirectangular GeoTIFF has center longitude 0° and eastward raster x. Preparation rolls the 180° E left edge by half a width; it does not mirror the image. Exactly zero is documented no-data and receives the shared gray grid. Other values remain observed terrain, including shadows. Source resolution varies; Voyager images fill some Cassini gaps.
 - [NASA/JPL enhanced-color map PIA18434](https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/): 2014, 14134 × 7067, about 250 m per source pixel. Ultraviolet and infrared extend the colors beyond human vision. Paul Schenk calibrated, registered and photometrically corrected the contributing images. The north-up map starts at 0° E and is not rolled. There is no separate validity mask: all published pixels are preserved. Hemisphere differences reflect surface alteration and E-ring dust as well as residual photographed shading; they are not removed as shadows.
@@ -103,4 +103,4 @@ New relative albedo uses the published 2025 GeoTIFFs and their original equatori
 
 Photographic normal/enhanced and elevation/albedo display atlases use quarter dimensions. Infrared and ice-absorption scales retain their existing values. The closed mesh culls its back faces.
 
-This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. Device evidence records the published bytes, decoded size estimates, trace results and remaining stalls.

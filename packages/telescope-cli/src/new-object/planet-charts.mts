@@ -13,7 +13,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
-import { bindInputs, json, type PackageFiles } from './lens.mts';
+import { bindInputs, json, type PackageFiles } from './dataset.mts';
 import { archiveRows, bestEphemeris, decodeEntities, ephemerisSigmaDays, NASA_TAP } from './orbit.mts';
 import { installTransitChart, liveTessArchive, type Fold, type TessArchive } from './transit-chart.mts';
 
@@ -157,7 +157,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
   manifest.documents = [...(manifest.documents ?? []).filter((document: { path: string }) => document.path !== 'content/charts.json'),
     { path: 'content/charts.json', sourceBinding: { kind: 'local', reason: 'Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths.' } }];
   files.set(`${s}/manifest.json`, json(manifest));
-  // The archive rows are bound to their own catalogue record, as a planet's emission-table rows are (lens.mts).
+  // The archive rows are bound to their own catalogue record, as a planet's emission-table rows are (dataset.mts).
   bindInputs(files, id);
   const plan = read(`${s}/preparation/acquisition.json`);
   plan.operations = [...plan.operations.filter((operation: { path?: string }) => !/^(science\/archive-spectra|photometry\/tess)\//u.test(String(operation.path ?? ''))), ...operations];

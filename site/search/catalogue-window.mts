@@ -77,11 +77,11 @@ function createRow(documentTarget: Document): RowView {
   const anchor = documentTarget.createElement('a');
   anchor.className = 'object-link object-observation-control object-thumbnail-leading';
   const icon = documentTarget.createElement('span');
-  icon.className = 'object-lens-icon';
+  icon.className = 'object-dataset-icon';
   const name = documentTarget.createElement('span');
-  name.className = 'object-name object-lens-label';
+  name.className = 'object-name object-dataset-label';
   const detail = documentTarget.createElement('span');
-  detail.className = 'object-distance object-lens-detail';
+  detail.className = 'object-distance object-dataset-detail';
   anchor.append(icon, name, detail);
   item.append(anchor);
   const kind = documentTarget.createElement('span');

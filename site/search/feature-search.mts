@@ -9,7 +9,7 @@ export interface IndexedFeature { readonly objectId: string; readonly id: string
 export const PLACE_FEATURE_PREFIX = 'city-';
 /** A body's places catalogue (Earth's GeoNames cities): the search function reads it, no browser does. */
 export interface PlacePin { readonly objectId: string; readonly type: string; readonly url: string; readonly assetUrl: string; readonly count: number; readonly duplicates: readonly (readonly [string, string])[]; }
-export interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number; readonly lensIds?: readonly string[] }[]; readonly features: readonly IndexedFeature[]; readonly places: readonly PlacePin[]; }
+export interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number; readonly datasetIds?: readonly string[] }[]; readonly features: readonly IndexedFeature[]; readonly places: readonly PlacePin[]; }
 export interface FeatureIndexPin { readonly url: string; readonly count: number; }
 
 export const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
@@ -32,7 +32,7 @@ export function parseFeatureIndex(value: unknown, pin: FeatureIndexPin): Feature
   }
   for (const object of value.objects as unknown[]) {
     if (!isRecord(object) || ['id', 'name', 'route'].some(key => typeof object[key] !== 'string')) throw new TypeError('Feature index object is invalid.');
-    if (object.lensIds !== undefined && (!Array.isArray(object.lensIds) || !object.lensIds.length || !object.lensIds.every(id => typeof id === 'string' && id.length > 0))) throw new TypeError('Feature index datasets are invalid.');
+    if (object.datasetIds !== undefined && (!Array.isArray(object.datasetIds) || !object.datasetIds.length || !object.datasetIds.every(id => typeof id === 'string' && id.length > 0))) throw new TypeError('Feature index datasets are invalid.');
   }
   return value as unknown as FeatureIndex;
 }

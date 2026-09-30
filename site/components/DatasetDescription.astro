@@ -1,12 +1,12 @@
 ---
 import type { Props as ShellProps } from '../object-shell-types';
-interface Props { lens: NonNullable<ShellProps['lenses']>['controls'][number]; }
+interface Props { dataset: NonNullable<ShellProps['datasets']>['controls'][number]; }
 import { validateDatasetText } from "../dataset-content.mts";
 import SelectedContent from "./SelectedContent.astro";
-const { lens } = Astro.props;
-const { title } = validateDatasetText(lens);
+const { dataset } = Astro.props;
+const { title } = validateDatasetText(dataset);
 ---
-<SelectedContent {title} description={lens.summary}>
+<SelectedContent {title} description={dataset.summary}>
   <slot />
 </SelectedContent>
-{lens.sourceUrl && <a class="object-dataset-source-link" href={lens.sourceUrl} target="_blank" rel="noopener noreferrer">View source ↗</a>}
+{dataset.sourceUrl && <a class="object-dataset-source-link" href={dataset.sourceUrl} target="_blank" rel="noopener noreferrer">View source ↗</a>}

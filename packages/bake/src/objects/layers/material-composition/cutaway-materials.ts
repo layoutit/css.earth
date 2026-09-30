@@ -1,7 +1,7 @@
 import {parse} from '@cssearth/core/schema';
 import { cutawayRecipe, interiorSource, type InteriorSource } from '../cutaway/index.ts';
 import type {ReadonlyVector3, Vector3} from '../../geometry/index.ts';
-interface InteriorLensPlan {id:string;model:string;qualification:string;palette:InteriorSource['palette'];sectionResponse:{innerFloor:number;startRadius:number;exponent:number};shellGain:{metallic:number;core:number};filter?:string;wavelength?:string}
+interface InteriorDatasetPlan {id:string;model:string;qualification:string;palette:InteriorSource['palette'];sectionResponse:{innerFloor:number;startRadius:number;exponent:number};shellGain:{metallic:number;core:number};filter?:string;wavelength?:string}
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -40,7 +40,7 @@ const INTERIOR_OBJECT_LIGHT_DIRECTION = objectLightDirection;
 const manifest = parse(JSON.parse(await readFile(resolve(sourceDirectory,config.source),'utf8')),interiorSource,'interior source');
 validateManifest(manifest);
 
-const interiorLensPlans:readonly InteriorLensPlan[] = Object.freeze([
+const interiorDatasetPlans:readonly InteriorDatasetPlan[] = Object.freeze([
   Object.freeze({
     id: "normal",
     model: "prepared-schematic-composition-depth-map",
@@ -54,21 +54,21 @@ const interiorLensPlans:readonly InteriorLensPlan[] = Object.freeze([
     shellGain: Object.freeze({ metallic: 1, core: 1 }),
   }),
 ]);
-const interiorLensAssets = Object.freeze(Object.fromEntries(await Promise.all(
-  interiorLensPlans.map(async (plan) => [
+const interiorDatasetAssets = Object.freeze(Object.fromEntries(await Promise.all(
+  interiorDatasetPlans.map(async (plan) => [
     plan.id,
-    await prepareInteriorLensAssets(plan),
+    await prepareInteriorDatasetAssets(plan),
   ] as const),
 )));
 const assets = Object.freeze({
-  ...interiorLensAssets.normal,
+  ...interiorDatasetAssets.normal,
   outerPoles: Object.freeze(Object.fromEntries(await Promise.all(
-    Object.entries(OUTER_POLE_SOURCES).map(async ([lens, sourceUrl]) => [
-      lens,
+    Object.entries(OUTER_POLE_SOURCES).map(async ([dataset, sourceUrl]) => [
+      dataset,
       await writePreparedOuterPoleRaster({
         sourceUrl,
-        url: `${config.publicPrefix}${config.namespace}-interior-outer-poles-${lens}.webp`,
-        url2x: `${config.publicPrefix}${config.namespace}-interior-outer-poles-${lens}@2x.webp`,
+        url: `${config.publicPrefix}${config.namespace}-interior-outer-poles-${dataset}.webp`,
+        url2x: `${config.publicPrefix}${config.namespace}-interior-outer-poles-${dataset}@2x.webp`,
         cutaway: manifest.cutaway,
       }),
     ] as const),
@@ -84,7 +84,7 @@ const thumbnailBytes = await readFile(publicPath(THUMBNAIL_URL));
 
 const prepared = Object.freeze({
   schema: config.outputSchema,
-  presentation: "cross-section-lens",
+  presentation: "cross-section-dataset",
   runtimeGeometry: false,
   runtimeRasterization: false,
   cutaway: Object.freeze({ ...manifest.cutaway }),
@@ -96,7 +96,7 @@ const prepared = Object.freeze({
     sectionFaceCount: 2,
     runtimeLighting: false,
   }),
-  interiorLenses: Object.freeze(Object.fromEntries(interiorLensPlans.map(
+  interiorDatasets: Object.freeze(Object.fromEntries(interiorDatasetPlans.map(
     (plan) => [plan.id, Object.freeze({
       id: plan.id,
       model: plan.model,
@@ -105,7 +105,7 @@ const prepared = Object.freeze({
       ...(plan.wavelength ? { wavelength: plan.wavelength } : {}),
       sectionResponse: plan.sectionResponse,
       shellGain: plan.shellGain,
-      assets: interiorLensAssets[plan.id],
+      assets: interiorDatasetAssets[plan.id],
       runtimeFiltering: false,
       runtimeRasterization: false,
     })] as const,
@@ -167,7 +167,7 @@ function validateManifest(value:InteriorSource) {
   }
 }
 
-async function prepareInteriorLensAssets(plan:InteriorLensPlan) {
+async function prepareInteriorDatasetAssets(plan:InteriorDatasetPlan) {
   const urls = (kind:string) => interiorAssetUrls(kind, plan.id);
   return Object.freeze({
     section: await writePreparedRaster({
@@ -232,8 +232,8 @@ async function prepareInteriorLensAssets(plan:InteriorLensPlan) {
   });
 }
 
-function interiorAssetUrls(kind:string, lensId:string) {
-  const suffix = lensId === "normal" ? "" : `-${lensId}`;
+function interiorAssetUrls(kind:string, datasetId:string) {
+  const suffix = datasetId === "normal" ? "" : `-${datasetId}`;
   return Object.freeze({
     url: `${config.publicPrefix}${config.namespace}-interior-${kind}${suffix}.webp`,
     url2x: `${config.publicPrefix}${config.namespace}-interior-${kind}${suffix}@2x.webp`,
@@ -329,7 +329,7 @@ async function writePreparedOuterPoleRaster({
   });
 }
 
-function renderSectionAtlas(width:number, height:number, manifest:InteriorSource, lensPlan:InteriorLensPlan) {
+function renderSectionAtlas(width:number, height:number, manifest:InteriorSource, datasetPlan:InteriorDatasetPlan) {
   if (width % 2 !== 0) {
     throw new RangeError("Cutaway interior section atlas width must be even.");
   }
@@ -345,7 +345,7 @@ function renderSectionAtlas(width:number, height:number, manifest:InteriorSource
       height,
       faceLongitudeDegrees: longitudes[faceIndex],
       manifest,
-      lensPlan,
+      datasetPlan,
     });
   }
   return output;
@@ -359,9 +359,9 @@ function renderSectionFace({
   height,
   faceLongitudeDegrees,
   manifest: { cutaway },
-  lensPlan,
-}: {output:Buffer;atlasWidth:number;faceLeft:number;width:number;height:number;faceLongitudeDegrees:number;manifest:InteriorSource;lensPlan:InteriorLensPlan}) {
-  const { palette, sectionResponse } = lensPlan;
+  datasetPlan,
+}: {output:Buffer;atlasWidth:number;faceLeft:number;width:number;height:number;faceLongitudeDegrees:number;manifest:InteriorSource;datasetPlan:InteriorDatasetPlan}) {
+  const { palette, sectionResponse } = datasetPlan;
   const edge = config.section.edgePixels / Math.min(width, height);
   const longitude = faceLongitudeDegrees * Math.PI / 180;
   const faceNormal:Vector3 = [-Math.sin(longitude), Math.cos(longitude), 0];
@@ -420,7 +420,7 @@ function renderSectionFace({
   }
 }
 
-function renderShell(width:number, height:number, color:readonly number[], kind:'metallic'|'core', lensPlan:InteriorLensPlan) {
+function renderShell(width:number, height:number, color:readonly number[], kind:'metallic'|'core', datasetPlan:InteriorDatasetPlan) {
   const shell=config.shells[kind];
   const output = Buffer.alloc(width * height * 4);
   for (let row = 0; row < height; row += 1) {
@@ -442,7 +442,7 @@ function renderShell(width:number, height:number, color:readonly number[], kind:
       ));
       const light = shell.ambient +
         lambert * shell.directional;
-      const spectralGain = lensPlan.shellGain[kind];
+      const spectralGain = datasetPlan.shellGain[kind];
       const detail = bands * 5 + grains * shell.grainGain;
       output[offset] = clampByte(color[0] * light * spectralGain + detail);
       output[offset + 1] = clampByte(
@@ -463,7 +463,7 @@ function renderPoleAtlas(
   color:readonly number[],
   cutaway:InteriorSource['cutaway'],
   removeWedge:boolean,
-  lensPlan:InteriorLensPlan,
+  datasetPlan:InteriorDatasetPlan,
   kind:'metallic'|'core',
 ) {
   const output = Buffer.alloc(width * height * 4);
@@ -492,7 +492,7 @@ function renderPoleAtlas(
           INTERIOR_OBJECT_LIGHT_DIRECTION,
         ));
         const light = 0.68 + lambert * 0.32;
-        const spectralGain = lensPlan.shellGain[kind];
+        const spectralGain = datasetPlan.shellGain[kind];
         output[offset] = clampByte(
           color[0] * light * spectralGain + grains * 11,
         );

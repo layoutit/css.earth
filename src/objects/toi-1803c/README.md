@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1803. Its orbit and size follow Zingales
 
 **Orbit.** Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): P 12.885779 d Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): a/R* 29.3; Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): inclination 88.48 degrees Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): e 0 Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): transit mid-time 2458911.6747 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1803's measured colour (#ffd9bf, the colour lens of toi-1803 (src/objects/toi-1803/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1803's measured colour (#ffd9bf, the colour dataset of toi-1803 (src/objects/toi-1803/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1803's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (22, 49), folded onto its orbit. Upper limits and rows without an error are left out.
 

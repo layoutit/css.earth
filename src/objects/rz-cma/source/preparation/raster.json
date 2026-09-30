@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/rz-cma/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "rz-cma-surface-{id}{suffix}.webp",
-      "thumbnail": "rz-cma-lens-{id}.webp",
+      "thumbnail": "rz-cma-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

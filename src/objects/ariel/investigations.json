@@ -15,7 +15,7 @@
       "id": "schenk-lpi-2020-merged-numeric-dem",
       "subject": "Schenk/LPI 2020 merged numeric DEM",
       "status": "included",
-      "finding": "Selected as the conceptually distinct Elevation lens, with its own validity and ellipsoid datum.",
+      "finding": "Selected as the conceptually distinct Elevation dataset, with its own validity and ellipsoid datum.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/manifest.json"
       ]
@@ -46,7 +46,7 @@
       "id": "beddingfield-et-al-2025-medial-groove-geology-work-f",
       "subject": "Beddingfield et al. 2025 medial-groove/geology work, followed by Tonoian et al. structural mapping",
       "status": "unresolved",
-      "finding": "Unresolved complementary interpretive candidate. The examined releases describe geological figures and continued structural mapping, but did not establish a downloadable georeferenced unit raster/vector closure suitable for this renderer. No geological lens is claimed.",
+      "finding": "Unresolved complementary interpretive candidate. The examined releases describe geological figures and continued structural mapping, but did not establish a downloadable georeferenced unit raster/vector closure suitable for this renderer. No geological dataset is claimed.",
       "revisitWhen": "A Ariel source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/manifest.json",
@@ -57,7 +57,7 @@
       "id": "usgs-voyager-control-network",
       "subject": "USGS Ariel Voyager control networks",
       "status": "included",
-      "finding": "The inspected release republishes RAND and Jigsaw control solutions and is retained as registration support. It is not an additional image or measured-scalar lens.",
+      "finding": "The inspected release republishes RAND and Jigsaw control solutions and is retained as registration support. It is not an additional image or measured-scalar dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/README.md"
       ]
@@ -75,7 +75,7 @@
       "id": "voyager-iss-color-2026",
       "subject": "Voyager 2 ISS green/violet/ultraviolet colour frames",
       "status": "included",
-      "finding": "9 GEOMED frames in 3 complete sets (1.3 to 19.8 km per pixel) placed by limb fit and mosaic registration supply the Voyager color lens. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.0, 1.05); the archive calibration gives 0.873 and 0.972. No phase normalisation; the north stays unavailable.",
+      "finding": "9 GEOMED frames in 3 complete sets (1.3 to 19.8 km per pixel) placed by limb fit and mosaic registration supply the Voyager color dataset. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.0, 1.05); the archive calibration gives 0.873 and 0.972. No phase normalisation; the north stays unavailable.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/reference/voyager-color-placement.json",
         "https://ui.adsabs.harvard.edu/abs/1991LPSC...21..473B"

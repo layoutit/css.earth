@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kepler-452b",
   "displayName": "Kepler-452 b",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by Kepler-452; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "kepler-452b-lens-shape.webp",
+        "thumbnail": "kepler-452b-dataset-shape.webp",
         "surface": "kepler-452b-surface-shape@2x.webp",
         "poles": "kepler-452b-poles-shape@2x.webp",
         "source": {
@@ -51,13 +51,13 @@
           "url": "https://arxiv.org/abs/1507.06723"
         },
         "falseColor": false,
-        "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit. Its reality as a planet is disputed: Mullally et al. (2018) and Burke et al. (2019) find it cannot be statistically validated; Robnik & Seljak (2025) support its validation. The gray takes the colour of kepler-452's light, as its colour lens measures it."
+        "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit. Its reality as a planet is disputed: Mullally et al. (2018) and Burke et al. (2019) find it cannot be statistically validated; Robnik & Seljak (2025) support its validation. The gray takes the colour of kepler-452's light, as its colour dataset measures it."
       },
       {
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of Kepler-452 b, from Eyes on Exoplanets; not an observation.",
-        "thumbnail": "kepler-452b-lens-illustration.webp",
+        "thumbnail": "kepler-452b-dataset-illustration.webp",
         "surface": "kepler-452b-surface-illustration@2x.webp",
         "poles": "kepler-452b-poles-illustration@2x.webp",
         "source": {

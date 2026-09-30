@@ -4,7 +4,7 @@
   "entries": [
     {
       "id": "galileo-c0368603500",
-      "subject": "Galileo SSI frame C0368603500 in the Monochrome lens",
+      "subject": "Galileo SSI frame C0368603500 in the Monochrome dataset",
       "status": "excluded",
       "finding": "Amalthea is a 156-pixel lit crescent at 8.3 km per pixel, and its only overlap sets a level two to four times off the lit brightness of the four other frames.",
       "revisitWhen": "A closer frame overlaps it, or a registration shows that the crescent's level is not biased by its blur.",
@@ -54,7 +54,7 @@
       "id": "pia01626-composite",
       "subject": "NASA PIA01626 color comparison",
       "status": "excluded",
-      "finding": "The display composite is useful color context but lacks sufficient camera-band calibration and registration provenance for a mapped photographic lens.",
+      "finding": "The display composite is useful color context but lacks sufficient camera-band calibration and registration provenance for a mapped photographic dataset.",
       "revisitWhen": "A primary release supplies original bands, calibration and body-fixed camera geometry for controlled reconstruction.",
       "evidence": [
         "https://www.jpl.nasa.gov/images/pia01626-comparison-of-amalthea-to-io/"
@@ -85,7 +85,7 @@
       "subject": "Juno detections and complementary mapped products",
       "status": "unresolved",
       "finding": "The inspected Juno detections add context without improving Galileo surface detail. No registered composition, thermal or local-altimetry dataset was qualified in the reviewed releases.",
-      "revisitWhen": "A cited release supplies resolved Amalthea measurements with sufficient body-fixed coverage for a distinct lens.",
+      "revisitWhen": "A cited release supplies resolved Amalthea measurements with sufficient body-fixed coverage for a distinct dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/amalthea/README.md"
       ]

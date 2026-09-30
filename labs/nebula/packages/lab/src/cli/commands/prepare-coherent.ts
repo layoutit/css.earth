@@ -119,7 +119,7 @@ for (const variant of selected) {
   await json(resolve(sourceDirectory, 'provenance.json'), provenance);
   await json(resolve(sourceDirectory, 'validation.json'), validation);
   await writeFile(resolve(variant.directory, 'prepared/volume.json'), bytes);
-  await json(resolve(variant.directory, 'object.json'), { schema: 'cssearth-object@1', id: variant.id, type: 'density-volume',
+  await json(resolve(variant.directory, 'object.json'), { schema: 'cssearth-object@2', id: variant.id, type: 'density-volume',
     properties: { volume: frame, preparation: { source: 'source/experiment.json' } },
     prepared: { format: prepared.format, url: 'prepared/volume.json' } });
   console.log(`COHERENT_PREPARED ${variant.id}: ${data.resources.length} images, ` +

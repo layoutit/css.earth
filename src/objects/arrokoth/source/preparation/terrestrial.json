@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "arrokoth",
   "displayName": "Arrokoth",
@@ -182,6 +182,6 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
   },
   "presentation": {
-    "defaultLens": "lorri"
+    "defaultDataset": "lorri"
   }
 }

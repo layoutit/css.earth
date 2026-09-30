@@ -4,8 +4,8 @@
 #
 # packages/telescope-cli/src/archives/interferometry/surface-reconstruction.mts writes the arguments and documents each one. This script only runs
 # the pinned code and writes what it computed: ROTIR's surface map (its own FITS), the same map on a grid of ROTIR's own
-# coordinates, the star as ROTIR projects it on the sky, and a key=value summary. packages/telescope-cli/src/archives/interferometry/surface-lens.mts
-# turns the grid into a lens map; its test checks that conversion against the sky projection.
+# coordinates, the star as ROTIR projects it on the sky, and a key=value summary. packages/telescope-cli/src/archives/interferometry/surface-dataset.mts
+# turns the grid into a dataset map; its test checks that conversion against the sky projection.
 #
 # ROTIR's coordinates, measured on this commit: colatitude from the rotation pole, longitude right-handed about it. The sky
 # frame is x toward celestial West, y toward North, z toward the observer. Inclination 90 with position angle 0 puts the pole

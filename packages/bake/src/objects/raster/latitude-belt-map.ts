@@ -38,12 +38,12 @@ export function parseLatitudeBelts(text: string, path: string, column: number) {
 }
 
 export async function loadLatitudeBeltMap(root: string, value: unknown) {
-  const lens = requireRecord(value, 'latitude-belt map lens'), path = requireString(lens.path, 'path');
-  const column = requireFiniteNumber(lens.column, 'column');
+  const dataset = requireRecord(value, 'latitude-belt map dataset'), path = requireString(dataset.path, 'path');
+  const column = requireFiniteNumber(dataset.column, 'column');
   if (path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError(`${path}: a belt map must be inside the source directory.`);
   if (!Number.isInteger(column) || column < 3) throw new TypeError(`${path}: column ${column} is not a value column (columns 1 and 2 are latitude and longitude).`);
-  const scale = lens.valueTransform === undefined ? 1 : requireFiniteNumber(requireRecord(lens.valueTransform, 'valueTransform').scale, 'valueTransform.scale');
-  const outlines = lens.outlineLatitudes === undefined ? [] : requireArray(lens.outlineLatitudes, 'outlineLatitudes').map(v => requireFiniteNumber(v, 'outline latitude'));
+  const scale = dataset.valueTransform === undefined ? 1 : requireFiniteNumber(requireRecord(dataset.valueTransform, 'valueTransform').scale, 'valueTransform.scale');
+  const outlines = dataset.outlineLatitudes === undefined ? [] : requireArray(dataset.outlineLatitudes, 'outlineLatitudes').map(v => requireFiniteNumber(v, 'outline latitude'));
   const belts = parseLatitudeBelts(await readFile(resolve(root, path), 'utf8'), path, column);
   const around = (belt: { values: number[] }, longitude: number) => {
     const n = belt.values.length, x = ((((longitude % 360) + 360) % 360) * n / 360 - 0.5 + n) % n;

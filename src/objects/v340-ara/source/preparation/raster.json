@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/v340-ara/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "v340-ara-surface-{id}{suffix}.webp",
-      "thumbnail": "v340-ara-lens-{id}.webp",
+      "thumbnail": "v340-ara-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

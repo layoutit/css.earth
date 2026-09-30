@@ -16,6 +16,6 @@ The reviewed sources do not establish a qualified shape; no standalone scene is 
 The [NASA Webb 2025 release](https://science.nasa.gov/blogs/webb/2025/08/19/new-moon-discovered-orbiting-uranus-using-nasas-webb-telescope/)
 shows Cupid as a point of light; it does not supply a resolved outline or surface map.
 No qualified shape was found in the reviewed releases. Neither a spherical scene
-nor a photographic surface lens is included. Target NAIF 727, parent Uranus.
+nor a photographic surface dataset is included. Target NAIF 727, parent Uranus.
 
 <a id="cupid-source-qualification"></a>

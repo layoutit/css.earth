@@ -23,8 +23,8 @@ test('geographic science preserves native degree cells, signed values and missin
       })));
     const grid = {width:4,height:2,noData:-9999,coordinates:'degrees',referenceRadiusMeters:448,
       centerLongitude:0,origin:[0,90],resolution:[90,-90]};
-    const lens = {path:'map.tif',format:'geotiff',grid,sampling:'nearest'};
-    const source = await loadScienceSurface(root, lens);
+    const dataset = {path:'map.tif',format:'geotiff',grid,sampling:'nearest'};
+    const source = await loadScienceSurface(root, dataset);
     assert.equal(source.sample(45,45),0, 'Zero is a measured value');
     assert.ok(Math.abs(source.sample(135,45)! + .148) < 1e-8);
     assert.equal(source.sample(315,45),null);
@@ -34,9 +34,9 @@ test('geographic science preserves native degree cells, signed values and missin
     assert.equal(source.sample(45,-90),null);
     for (const changed of [{coordinates:'radians'},{coordinates:'meters'},{centerLongitude:180},
       {referenceRadiusMeters:449},{origin:[-180,90]},{resolution:[1,-1]},{projection:'polar-stereographic'}]) {
-      await assert.rejects(loadScienceSurface(root,{...lens,grid:{...grid,...changed}}));
+      await assert.rejects(loadScienceSurface(root,{...dataset,grid:{...grid,...changed}}));
     }
-    const masked = await loadScienceSurface(root,{...lens,qualityMasks:[{...lens,minimum:0,maximum:300}]});
+    const masked = await loadScienceSurface(root,{...dataset,qualityMasks:[{...dataset,minimum:0,maximum:300}]});
     assert.equal(masked.sample(135,45),null);
     assert.equal(masked.sample(45,45),0);
     assert.equal(masked.sample(315,-45),null);

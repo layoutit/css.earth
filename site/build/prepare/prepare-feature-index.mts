@@ -57,7 +57,7 @@ function text(value: unknown, at: string): string { if (typeof value !== 'string
 function finite(value: unknown, at: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be finite.`); return value; }
 
 export async function prepareFeatureIndex({ root = process.cwd() }: { root?: string } = {}) {
-  const objects: { id: string; name: string; route: string; count: number; lensIds?: string[] }[] = [];
+  const objects: { id: string; name: string; route: string; count: number; datasetIds?: string[] }[] = [];
   const features: IndexedFeature[] = [], places: PlacePin[] = [];
   for (const object of SCENE_OBJECTS) {
     const descriptor: unknown = await readFile(resolve(root, 'src/objects', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
@@ -97,18 +97,18 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     }
     // Mission places can belong to one of several shape models. Carry their prepared
     // dataset selection so search never moves to a point on an incompatible model.
-    let lensIds: string[] | undefined;
+    let datasetIds: string[] | undefined;
     if (catalog.landmarks !== undefined) {
       const runtime: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8'));
-      if (!isRecord(runtime) || !isRecord(runtime.features) || !Array.isArray(runtime.features.lensIds) || !runtime.features.lensIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
-      lensIds = runtime.features.lensIds.map(id => text(id, 'landmark dataset'));
+      if (!isRecord(runtime) || !isRecord(runtime.features) || !Array.isArray(runtime.features.datasetIds) || !runtime.features.datasetIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
+      datasetIds = runtime.features.datasetIds.map(id => text(id, 'landmark dataset'));
     }
     // Named features that are settlements: search leaves the same places out.
     const settlements = values.filter((value): value is Record<string, unknown> => isRecord(value) && (value.type === 'Capital' || value.type === 'City'))
       .map(value => ({ id: text(value.id, 'feature id'), name: normalizeDestinationQuery(text(value.name, 'feature name')), latitudeDeg: finite(value.latitudeDeg, 'feature latitude'), longitudeDeg: finite(value.longitudeDeg, 'feature longitude') }));
     const placePin = await preparedPlaces(root, object.id, settlements, object.worldFrame?.bodyRadiusM ?? null);
     if (placePin) places.push(placePin);
-    objects.push({ id: object.id, name: object.name, route: object.route, count: values.length, ...(lensIds ? { lensIds } : {}) });
+    objects.push({ id: object.id, name: object.name, route: object.route, count: values.length, ...(datasetIds ? { datasetIds } : {}) });
   }
   const index = { schema: FEATURE_INDEX_SCHEMA, objects, features, places };
   const encoded = Buffer.from(`${JSON.stringify(index)}\n`);

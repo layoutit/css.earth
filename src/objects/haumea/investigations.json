@@ -22,7 +22,7 @@
       ]
     },
     {
-      "id": "neutral-gray-shape-lens",
+      "id": "neutral-gray-shape-dataset",
       "subject": "Shared neutral gray for the unresolved surface",
       "status": "excluded",
       "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published rotation-corrected colour indices and an occultation-based V geometric albedo now give Haumea a measured uniform colour (sRGB 188, 189, 191).",
@@ -57,7 +57,7 @@
       "id": "alma-archive-project",
       "subject": "Public ALMA project 2022.1.01753.S on Haumea",
       "status": "included",
-      "finding": "Shown as a picture in the sidebar, not as a lens. Project 2022.1.01753.S (PI T. Müller, First direct imaging of a dwarf planet's ring system, band 7, public since 2025-02-27) ran five sessions between 6 and 23 July 2023; its QA2 status is semipass, with noise 15% above tolerance. The pipeline's aggregate continuum image (restoring beam 22.6 x 16.3 mas) shows Haumea at 0.248 mJy/beam, 18 times the noise measured here, about three beams long. Four sessions ran two hours, as long as the outline of the spinning ellipsoid takes to repeat (1.96 hours), so the image averages over rotation, nothing in it belongs to one side of the body, and it cannot be cast onto the surface. The ring is not visible in it and no ring analysis was tried here. An earlier version of this entry named four observations on one date, a 15.4 mas resolution and C. Kalup as principal author: those were the four spectral windows, the archive's nominal figure and the first author of the linked ring-model paper (Kalup, Molnár and Kiss 2024, PASP 136, 124401), which reports no result from these data.",
+      "finding": "Shown as a picture in the sidebar, not as a dataset. Project 2022.1.01753.S (PI T. Müller, First direct imaging of a dwarf planet's ring system, band 7, public since 2025-02-27) ran five sessions between 6 and 23 July 2023; its QA2 status is semipass, with noise 15% above tolerance. The pipeline's aggregate continuum image (restoring beam 22.6 x 16.3 mas) shows Haumea at 0.248 mJy/beam, 18 times the noise measured here, about three beams long. Four sessions ran two hours, as long as the outline of the spinning ellipsoid takes to repeat (1.96 hours), so the image averages over rotation, nothing in it belongs to one side of the body, and it cannot be cast onto the surface. The ring is not visible in it and no ring analysis was tried here. An earlier version of this entry named four observations on one date, a 15.4 mas resolution and C. Kalup as principal author: those were the four spectral windows, the archive's nominal figure and the first author of the linked ring-model paper (Kalup, Molnár and Kiss 2024, PASP 136, 124401), which reports no result from these data.",
       "evidence": [
         "https://almascience.eso.org/tap/sync",
         "https://almascience.eso.org/aq/?projectCode=2022.1.01753.S",
@@ -116,7 +116,7 @@
       "id": "rabinowitz-2006-colours",
       "subject": "Rabinowitz et al. (2006) rotation-corrected BVRI colours",
       "status": "included",
-      "finding": "The weighted average of three nights (2005 January 25-27) after subtracting the rotational light curve, B-V 0.626 +/-0.025, V-R 0.343 +/-0.020, V-I 0.683 +/-0.020 (section 3.4, Table 3), gives the Color lens with the Ortiz et al. (2017) albedo through the disc-integrated-color method: linear sRGB 0.504, 0.511, 0.522, sRGB 188, 189, 191. Each colour uncertainty moves a channel by at most 2 of 255.",
+      "finding": "The weighted average of three nights (2005 January 25-27) after subtracting the rotational light curve, B-V 0.626 +/-0.025, V-R 0.343 +/-0.020, V-I 0.683 +/-0.020 (section 3.4, Table 3), gives the Color dataset with the Ortiz et al. (2017) albedo through the disc-integrated-color method: linear sRGB 0.504, 0.511, 0.522, sRGB 188, 189, 191. Each colour uncertainty moves a channel by at most 2 of 255.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0509401",
         "https://doi.org/10.1086/499575",
@@ -127,7 +127,7 @@
       "id": "ortiz-2017-geometric-albedo",
       "subject": "Ortiz et al. (2017) V geometric albedo of the main body",
       "status": "included",
-      "finding": "p_V 0.51 +/-0.02 from the occultation projected area and the main body's absolute magnitude sets the brightness of the Color lens. Its uncertainty moves every sRGB channel by 3 of 255.",
+      "finding": "p_V 0.51 +/-0.02 from the occultation projected area and the main body's absolute magnitude sets the brightness of the Color dataset. Its uncertainty moves every sRGB channel by 3 of 255.",
       "evidence": [
         "https://arxiv.org/abs/2006.03113",
         "https://doi.org/10.1038/nature24051",
@@ -205,9 +205,9 @@
     },
     {
       "id": "nasa-vtad-illustration",
-      "subject": "NASA VTAD Haumea 3D model texture as an illustration lens",
+      "subject": "NASA VTAD Haumea 3D model texture as an illustration dataset",
       "status": "included",
-      "finding": "Shown as the non-default Illustration lens, never as imagery: NASA's artist texture carried through the model's own UVs, unrepainted, with arbitrary longitudes. No image resolves Haumea, so nothing in it was observed. Removed in #238 when the neutral gray replaced it; restored beside the measured Color lens, which stays the default.",
+      "finding": "Shown as the non-default Illustration dataset, never as imagery: NASA's artist texture carried through the model's own UVs, unrepainted, with arbitrary longitudes. No image resolves Haumea, so nothing in it was observed. Removed in #238 when the neutral gray replaced it; restored beside the measured Color dataset, which stays the default.",
       "evidence": [
         "https://science.nasa.gov/resource/haumea-3d-model/",
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"

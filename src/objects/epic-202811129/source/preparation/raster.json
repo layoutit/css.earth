@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/epic-202811129/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "epic-202811129-surface-{id}{suffix}.webp",
-      "thumbnail": "epic-202811129-lens-{id}.webp",
+      "thumbnail": "epic-202811129-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

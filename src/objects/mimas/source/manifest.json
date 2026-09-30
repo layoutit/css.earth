@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "cassini-iss-2017-mimas",
@@ -16,7 +16,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 5760,
@@ -73,7 +73,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "Enhanced color",
       "falseColor": true,
       "width": 6356,
@@ -131,7 +131,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "width": 2222,
@@ -302,7 +302,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "relative-albedo",
+      "datasetId": "relative-albedo",
       "label": "Relative brightness",
       "falseColor": true,
       "width": 2222,
@@ -430,7 +430,7 @@
         "latitudeDegrees": 0,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/toi-778/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "toi-778-surface-{id}{suffix}.webp",
-      "thumbnail": "toi-778-lens-{id}.webp",
+      "thumbnail": "toi-778-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

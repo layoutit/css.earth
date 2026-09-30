@@ -49,7 +49,7 @@ moves halfway from its kind's colour to the photograph's colour there.
 
 ## Evidence
 
-- [In the app](evidence/2026-09-29/dots-from-photograph.jpg): the default view (left) and tilted (right), with the dots.
+- In the app: the default view (left) and tilted (right), with the dots.
   Captured on this branch on 2026-09-29.
 - The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
 

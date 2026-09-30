@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "venus",
   "displayName": "Venus",
@@ -113,14 +113,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "clouds",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "clouds",
     "controls": [
       {
         "id": "clouds",
         "label": "Clouds",
-        "thumbnail": "venus-lens-clouds.webp",
+        "thumbnail": "venus-dataset-clouds.webp",
         "surface": "venus-clouds@2x.webp",
         "source": {
           "id": "openspace-clouds",
@@ -136,7 +136,7 @@
       {
         "id": "radar",
         "label": "Radar",
-        "thumbnail": "venus-lens-radar.webp",
+        "thumbnail": "venus-dataset-radar.webp",
         "surface": "venus-radar@2x.webp",
         "source": {
           "id": "usgs-magellan-fmap-left-look-global-mosaic-75m",
@@ -210,7 +210,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "thumbnail": "venus-lens-elevation.webp",
+        "thumbnail": "venus-dataset-elevation.webp",
         "surface": "venus-elevation@2x.webp",
         "poles": "venus-poles-elevation@2x.webp",
         "source": {
@@ -278,7 +278,7 @@
       {
         "id": "ultraviolet",
         "label": "Ultraviolet",
-        "thumbnail": "venus-lens-ultraviolet.webp",
+        "thumbnail": "venus-dataset-ultraviolet.webp",
         "surface": "venus-ultraviolet@2x.webp",
         "source": {
           "id": "akatsuki-uvi",
@@ -294,7 +294,7 @@
       {
         "id": "emissivity",
         "label": "Microwave emission",
-        "thumbnail": "venus-lens-emissivity.webp",
+        "thumbnail": "venus-dataset-emissivity.webp",
         "surface": "venus-emissivity@2x.webp",
         "poles": "venus-poles-emissivity@2x.webp",
         "source": {
@@ -381,7 +381,7 @@
       {
         "id": "reflectivity",
         "label": "Radar reflectivity",
-        "thumbnail": "venus-lens-reflectivity.webp",
+        "thumbnail": "venus-dataset-reflectivity.webp",
         "surface": "venus-reflectivity@2x.webp",
         "poles": "venus-poles-reflectivity@2x.webp",
         "source": {
@@ -449,7 +449,7 @@
       {
         "id": "roughness",
         "label": "Surface roughness",
-        "thumbnail": "venus-lens-roughness.webp",
+        "thumbnail": "venus-dataset-roughness.webp",
         "surface": "venus-roughness@2x.webp",
         "poles": "venus-poles-roughness@2x.webp",
         "source": {
@@ -517,7 +517,7 @@
       {
         "id": "gravity",
         "label": "Gravity",
-        "thumbnail": "venus-lens-gravity.webp",
+        "thumbnail": "venus-dataset-gravity.webp",
         "surface": "venus-gravity@2x.webp",
         "poles": "venus-poles-gravity@2x.webp",
         "source": {
@@ -610,7 +610,7 @@
       {
         "id": "gravity-uncertainty",
         "label": "Gravity uncertainty",
-        "thumbnail": "venus-lens-gravity-uncertainty.webp",
+        "thumbnail": "venus-dataset-gravity-uncertainty.webp",
         "surface": "venus-gravity-uncertainty@2x.webp",
         "poles": "venus-poles-gravity-uncertainty@2x.webp",
         "source": {
@@ -691,7 +691,7 @@
       {
         "id": "bouguer",
         "label": "Bouguer gravity",
-        "thumbnail": "venus-lens-bouguer.webp",
+        "thumbnail": "venus-dataset-bouguer.webp",
         "surface": "venus-bouguer@2x.webp",
         "poles": "venus-poles-bouguer@2x.webp",
         "source": {
@@ -784,7 +784,7 @@
       {
         "id": "geoid",
         "label": "Geoid",
-        "thumbnail": "venus-lens-geoid.webp",
+        "thumbnail": "venus-dataset-geoid.webp",
         "surface": "venus-geoid@2x.webp",
         "poles": "venus-poles-geoid@2x.webp",
         "source": {
@@ -959,7 +959,7 @@
     {
       "label": "USGS",
       "role": "terrain",
-      "description": "Radar and elevation lenses",
+      "description": "Radar and elevation datasets",
       "href": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
     },
     {

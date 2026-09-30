@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ngc-6362-v41-a/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "ngc-6362-v41-a-surface-{id}{suffix}.webp",
-      "thumbnail": "ngc-6362-v41-a-lens-{id}.webp",
+      "thumbnail": "ngc-6362-v41-a-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

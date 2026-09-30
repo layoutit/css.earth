@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hat-p-17b",
   "displayName": "HAT-P-17 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by HAT-P-17; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hat-p-17b-lens-shape.webp",
+        "thumbnail": "hat-p-17b-dataset-shape.webp",
         "surface": "hat-p-17b-surface-shape@2x.webp",
         "poles": "hat-p-17b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of HAT-P-17 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hat-p-17's light, as its colour lens measures it."
+        "notes": "No image or colour of HAT-P-17 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hat-p-17's light, as its colour dataset measures it."
       }
     ]
   },

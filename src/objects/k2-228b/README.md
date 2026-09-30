@@ -8,7 +8,7 @@ It is the only planet known around K2-228. Its orbit and size follow Livingston 
 
 **Orbit.** Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): P 2.698368 d Livingston et al. 2018 (2018AJ....156...78L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2018): a/R* 12.2; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 87.465 degrees No archive row states an eccentricity; the orbit is taken as circular Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): transit mid-time 2457583.19285 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 236 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-228's measured colour (#ffd3b7, the colour lens of k2-228 (src/objects/k2-228/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-228's measured colour (#ffd3b7, the colour dataset of k2-228 (src/objects/k2-228/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-228's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (46, 91), folded onto its orbit. Upper limits and rows without an error are left out.
 

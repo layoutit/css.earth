@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-sampled-nebula@1",
+  "schema": "cssearth-sampled-nebula@2",
   "id": "m1",
   "centerIcrsDegrees": [
     83.6334511837,
@@ -148,7 +148,7 @@
       "presentation-support"
     ]
   },
-  "lensComponents": {
+  "datasetComponents": {
     "hubble-optical": {
       "ejecta": 1,
       "pwn": 0.08

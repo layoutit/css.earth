@@ -68,8 +68,8 @@ export function findObjects(entries: readonly CatalogueIndexEntry[], query: stri
 export async function findResults(pin: FeatureIndexPin, query: string, objectId: string, read: ReadPrepared = readPublicFile): Promise<FindResult[]> {
   const data = await findData(pin, read);
   return matchFeatures(data.index, query.slice(0, FIND_QUERY_LIMIT), objectId).map(feature => {
-    const lensIds = feature.id.startsWith(PLACE_FEATURE_PREFIX) ? undefined : data.index.objects.find(object => object.id === feature.objectId)?.lensIds;
-    return { objectId: feature.objectId, id: feature.id, ...featureResult(feature, data.index, objectId), ...(lensIds ? { lensIds } : {}) };
+    const datasetIds = feature.id.startsWith(PLACE_FEATURE_PREFIX) ? undefined : data.index.objects.find(object => object.id === feature.objectId)?.datasetIds;
+    return { objectId: feature.objectId, id: feature.id, ...featureResult(feature, data.index, objectId), ...(datasetIds ? { datasetIds } : {}) };
   });
 }
 

@@ -9,7 +9,7 @@ changing a prepared dataset preview. Run it with `--check` to reproduce every
 thumbnail in memory and compare its bytes with the committed files.
 
 The preparer reads each object's `prepared/presentation.json`, checks that each
-lens names its preview `datasets/<lens id>.webp`, and fits the complete image inside 16 and 32 px squares.
+dataset names its preview `datasets/<dataset id>.webp`, and fits the complete image inside 16 and 32 px squares.
 It preserves the image's aspect ratio and published display colors, with transparent
 padding. The Milky Way icon composites the existing prepared z slabs face-on,
 including their offsets and alpha; it is a view of the OpenSpace-derived model.

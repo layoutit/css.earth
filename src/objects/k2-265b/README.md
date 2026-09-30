@@ -8,7 +8,7 @@ It is the only planet known around K2-265. Its orbit and size follow Thygesen et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.36916512782 d Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): a/R* 7.86; Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): inclination 87.01 degrees Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): e 0.16 Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): omega -57 degrees, stored as 303 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459090.174433 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 17 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-265's measured colour (#ffebdf, the colour lens of k2-265 (src/objects/k2-265/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-265's measured colour (#ffebdf, the colour dataset of k2-265 (src/objects/k2-265/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-265's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 70, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 

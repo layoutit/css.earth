@@ -10,8 +10,7 @@
       "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
-        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.img",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.img"
       ]
     },
     {
@@ -22,8 +21,7 @@
       "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
-        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01838.img",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01838.img"
       ]
     },
     {
@@ -34,8 +32,7 @@
       "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
-        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01848.img",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01848.img"
       ]
     },
     {
@@ -46,8 +43,7 @@
       "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
-        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01856.img",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01856.img"
       ]
     },
     {
@@ -58,8 +54,7 @@
       "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
-        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01860.img",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01860.img"
       ]
     },
     {
@@ -70,8 +65,7 @@
       "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
-        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01869.img",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01869.img"
       ]
     },
     {
@@ -82,8 +76,7 @@
       "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
-        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01881.img",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01881.img"
       ]
     },
     {
@@ -129,7 +122,7 @@
       "id": "vega2-t11190-t11194",
       "subject": "Processed Vega 2 T11190 and T11194",
       "status": "included",
-      "finding": "The two processed images extend the existing Giotto + Vega lens while preserving all previously accepted Giotto map pixels. The relative Vega display gain passes held-out overlap checks; cross-filter brightness is not recovered albedo.",
+      "finding": "The two processed images extend the existing Giotto + Vega dataset while preserving all previously accepted Giotto map pixels. The relative Vega display gain passes held-out overlap checks; cross-filter brightness is not recovered albedo.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/encounter-registration.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/encounter-projection-report.json"
@@ -143,8 +136,7 @@
       "revisitWhen": "Independent surface features with a verified model frame validate the photographic placement within stated source uncertainty.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/encounter-registration.json",
-        "https://articles.adsabs.harvard.edu/pdf/1991A%26A...248..656S",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json"
+        "https://articles.adsabs.harvard.edu/pdf/1991A%26A...248..656S"
       ]
     },
     {
@@ -214,7 +206,6 @@
       "status": "included",
       "finding": "The diagnostic consumes all 68 sensor-C CLEAR multi-detector frames and checks their dimensions, timing and superpixel factors against the native indexes. All rasters were visually inspected with independent percentile stretches. This is diagnostic inclusion only: no new photographic surface is qualified.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/giotto-intake.json",
         "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/"
       ]
     },
@@ -225,7 +216,6 @@
       "finding": "On 3,830 common interior points, area-weighted mean absolute display-byte error falls from 0.406 at width 512 to 0.194 at width 2048. This small resampling gain does not establish recovered surface detail. Seams, missing regions, final atlas rendering and registration accuracy are outside the measurement; the delivered map remains unchanged.",
       "revisitWhen": "A matched measurement demonstrates useful detail or seam improvement in the final rendered atlas under a qualified registration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/resampling.json",
         "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
       ]
     },
@@ -236,7 +226,6 @@
       "finding": "Figure 8a in Ksanfomality (2017) was inspected from the publisher PDF. It is a new processing of Giotto imagery; the paper warns of possible artifacts in its smallest details. It supplies no numerical camera-to-shape registration or standalone calibrated raster. Reference 19 points to a Venera processing study whose full text was unavailable. No new texture is qualified.",
       "revisitWhen": "A reproducible Halley input and processing record, usable raster and reuse terms, and independent surface registration establish the added information.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/literature-search.json",
         "https://ufn.ru/ufn17/ufn17_3/ufn173d.pdf",
         "https://doi.org/10.1134/S0010952516030035"
       ]
@@ -248,7 +237,6 @@
       "finding": "Our OpenAlex query returned the paper and its abstract, including a potential alternative rotation and shape-model route. The publisher and ADS PDFs returned HTTP 403. The original numerical solution and its compatibility with the selected PDS shape were not examined; lack of access does not exclude the model.",
       "revisitWhen": "The primary full text and numerical model can be read and matched to the observation and shape frames.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/literature-search.json",
         "https://doi.org/10.1051/0004-6361:20010331"
       ]
     },
@@ -259,7 +247,6 @@
       "finding": "Marschall et al. (2020), section 3, identifies a Halley shape derived from Giotto and Vega observations in Crifo et al. (2002), Challenging a paradigm. The original numerical coefficients, model frame and primary 2002 full text were not recovered. This is a candidate model route, not evidence of a better released mesh.",
       "revisitWhen": "The original numerical shape and frame are recovered and tested against held-out imagery with their stated uncertainty.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/literature-search.json",
         "https://doi.org/10.1007/s11214-020-00744-0"
       ]
     },
@@ -270,7 +257,6 @@
       "finding": "The abstract and sections 1–3.3 provide additional time-dependent constraints on complex rotation; section 1 describes a nucleus model as subsequent work. These results can constrain a future orientation fit, but no camera-to-selected-shape solution was established in this inspection.",
       "revisitWhen": "A released orientation solution or an independently checked fit uses these lightcurves to establish the exact model phase and observation cameras.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/literature-search.json",
         "https://arxiv.org/pdf/1506.05392"
       ]
     },
@@ -281,7 +267,6 @@
       "finding": "The proposed 2061-return mission motivates new shape and rotation measurements. It does not supply a newly observed nucleus surface release and cannot replace current source imagery.",
       "revisitWhen": "A mission releases actual observations or a reproducible numerical model useful to the nucleus dataset.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/literature-search.json",
         "https://arxiv.org/html/2502.12816v1"
       ]
     },
@@ -292,7 +277,6 @@
       "finding": "At a representative observer distance of 35 AU, a 15 km nucleus spans about 0.00059 arcsec, far below NIRCam FWHM of approximately 0.07 arcsec at 2 micrometres. The paper API query failed with a rate limit and fallback timeout; actual JWST observations were not established or ruled out. Unresolved photometry and spectroscopy cannot provide this surface texture.",
       "revisitWhen": "An observation resolves the nucleus with enough spatial sampling and geometry to test a surface product.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/evidence/dataset-audit/literature-search.json",
         "https://jwst-docs.stsci.edu/jwst-near-infrared-camera"
       ]
     }

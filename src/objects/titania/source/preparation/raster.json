@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/titania/",
   "sourceWidth": 6400,
   "sourceHeight": 3200,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "titania-{id}{suffix}.webp",
-      "thumbnail": "titania-lens-{id}.webp",
+      "thumbnail": "titania-dataset-{id}.webp",
       "source": "observations/tumap-cyl-180180.cub.gz",
       "falseColor": false,
       "science": {
@@ -60,7 +60,7 @@
     {
       "id": "elevation",
       "output": "titania-{id}{suffix}.webp",
-      "thumbnail": "titania-lens-{id}.webp",
+      "thumbnail": "titania-dataset-{id}.webp",
       "source": "science/tudem-ZL-180180.cub.gz",
       "falseColor": true,
       "science": {
@@ -120,7 +120,7 @@
     {
       "id": "geology",
       "output": "titania-{id}{suffix}.webp",
-      "thumbnail": "titania-lens-{id}.webp",
+      "thumbnail": "titania-dataset-{id}.webp",
       "source": "science/geology-2026/categories.tif",
       "falseColor": true,
       "science": {
@@ -215,7 +215,7 @@
     {
       "id": "voyager-color",
       "output": "titania-{id}{suffix}.webp",
-      "thumbnail": "titania-lens-{id}.webp",
+      "thumbnail": "titania-dataset-{id}.webp",
       "source": "observations/voyager-color/c2682506.equi.tif",
       "falseColor": true,
       "science": {

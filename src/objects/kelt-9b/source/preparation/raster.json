@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/kelt-9b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature",
       "output": "kelt-9b-surface-{id}{suffix}.webp",
-      "thumbnail": "kelt-9b-lens-{id}.webp",
+      "thumbnail": "kelt-9b-dataset-{id}.webp",
       "source": "science/mansfield-2020/phase-curve.json",
       "falseColor": true,
       "science": {

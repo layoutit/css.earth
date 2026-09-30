@@ -1,6 +1,6 @@
 # HD 209458 b
 
-HD 209458 b was the first planet seen crossing its star. It is a gas giant 1.36 times as wide as Jupiter. It opens on its thermal colour; a second lens maps its heat by longitude from a published Spitzer phase curve.
+HD 209458 b was the first planet seen crossing its star. It is a gas giant 1.36 times as wide as Jupiter. It opens on its thermal colour; a second dataset maps its heat by longitude from a published Spitzer phase curve.
 
 ## Sources
 
@@ -8,9 +8,9 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Measured, from Torres et al. 2008, ApJ 677, 1324 (2008), arXiv:0801.1841: radius 1.359 +0.016 −0.019 Jupiter radii (at 71492 km per Jupiter radius), period 3.524746 days, inclination 86.71 degrees, transit time (T0 = BJD_TDB 2459893.75120 ± 0.00005, MEASURED here from the JWST NIRCam F322W2 grism white-light curve of programme 1274 observation 2 (MAST product jw01274-o002_t002_nircam_f322w2-grismr-subgrism64_whtlt.ecsv), by a trapezoid fit with a linear baseline; the paper gives no transit time). Scaled distance a/R* = 8.76. The orbit is drawn circular. The position angle of the orbit on the sky is not measured; the ascending node at celestial north is a display convention.
 
-**Thermal colour (default lens).** The colour of a black body at the 1,499 K the NASA Exoplanet Archive lists for the day side (Zellem et al. 2014, the maximum of their 4.5 µm phase curve), uniform over the disc and lit by the star ([thermal-color.json](source/photometry/thermal-color.json)).
+**Thermal colour (default dataset).** The colour of a black body at the 1,499 K the NASA Exoplanet Archive lists for the day side (Zellem et al. 2014, the maximum of their 4.5 µm phase curve), uniform over the disc and lit by the star ([thermal-color.json](source/photometry/thermal-color.json)).
 
-**The map.** Zellem et al. (2014, [ApJ 790, 53](https://doi.org/10.1088/0004-637X/790/1/53); [arXiv:1405.5923](https://arxiv.org/abs/1405.5923)) observed a full orbit with Spitzer at 4.5 µm on 2010 January 17 to 21 (program 60021). They fitted the planet's light with one sinusoid, c1 cos(2πt/P) + c2 sin(2πt/P) (section 2.3; the second-order terms did not improve the fit). Their table is transcribed cell by cell in [phase-curve.json](source/science/zellem-2014/phase-curve.json). The paper does not say where t = 0 falls. Counted from mid-transit, their c1 = −0.0410% and c2 = 0.0354% put the curve's peak 40.8° before eclipse and its trough 40.8° before transit, as their Table 2 gives both (40.9 ± 6.0°); no other origin does. The Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232), equation 5) inversion turns that curve into its one map of longitude, through the [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format. A phase curve carries no north–south information, so every latitude is drawn alike. The palette runs from 850 to 1,600 K in false colour. The map is drawn under the star's light like the colour lens; with shadows on, the night half is dark.
+**The map.** Zellem et al. (2014, [ApJ 790, 53](https://doi.org/10.1088/0004-637X/790/1/53); [arXiv:1405.5923](https://arxiv.org/abs/1405.5923)) observed a full orbit with Spitzer at 4.5 µm on 2010 January 17 to 21 (program 60021). They fitted the planet's light with one sinusoid, c1 cos(2πt/P) + c2 sin(2πt/P) (section 2.3; the second-order terms did not improve the fit). Their table is transcribed cell by cell in [phase-curve.json](source/science/zellem-2014/phase-curve.json). The paper does not say where t = 0 falls. Counted from mid-transit, their c1 = −0.0410% and c2 = 0.0354% put the curve's peak 40.8° before eclipse and its trough 40.8° before transit, as their Table 2 gives both (40.9 ± 6.0°); no other origin does. The Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232), equation 5) inversion turns that curve into its one map of longitude, through the [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format. A phase curve carries no north–south information, so every latitude is drawn alike. The palette runs from 850 to 1,600 K in false colour. The map is drawn under the star's light like the colour dataset; with shadows on, the night half is dark.
 
 | Quantity | This map | Zellem et al. (2014) |
 | --- | --- | --- |
@@ -34,9 +34,9 @@ Measured and not shown: mass, 0.685 (+0.015/−0.014) Jupiter masses (Torres et 
 
 Run of 2026-09-25 (this version):
 
-- [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts)) integrates the map over the visible hemisphere and gets the Fourier curve back to 1e-9. It holds the lens to the table above: the curve's maximum and minimum within Table 2's uncertainties, the peak and trough 40.81° before eclipse and transit, the Table 3 temperatures within theirs, and the hottest longitude at 40.8° east with every latitude alike.
+- [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts)) integrates the map over the visible hemisphere and gets the Fourier curve back to 1e-9. It holds the dataset to the table above: the curve's maximum and minimum within Table 2's uncertainties, the peak and trough 40.81° before eclipse and transit, the Table 3 temperatures within theirs, and the hottest longitude at 40.8° east with every latitude alike.
 
-[2026-09-22 exoplanet radius and route check](../../../site/test/evidence/exoplanets/2026-09-22/README.md): the 97,158 km source radius agrees with the scene and world frame; the prepared runtime contract passed. That run predates the map lens; the radius and frame have not changed since.
+2026-09-22 exoplanet radius and route check: the 97,158 km source radius agrees with the scene and world frame; the prepared runtime contract passed. That run predates the map dataset; the radius and frame have not changed since.
 
 ## Known problems
 
@@ -44,7 +44,7 @@ Run of 2026-09-25 (this version):
 - **Only the largest pattern is real.** The fit has one sinusoid. Nothing finer than a hemisphere is measured.
 - **Brightness temperature, not temperature.** Each value is the temperature of a black body with the observed 4.5 µm brightness, against a star temperature the paper's own numbers imply.
 - **Residual systematics.** The paper notes bumps in its light curve before the first eclipse and near phase 0.2, likely instrumental. The fit does not model them.
-- **The colour lens is not the map.** The thermal colour is one temperature, 1,499 K, over the whole disc; the map shows how that heat is spread.
+- **The colour dataset is not the map.** The thermal colour is one temperature, 1,499 K, over the whole disc; the map shows how that heat is spread.
 - **Assumptions of the frame.** Tidal locking and a pole on the orbit normal are assumed. The transit time is our own measurement from one JWST visit. The planet is a sphere.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

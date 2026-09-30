@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kepler-16ab-b",
   "displayName": "Kepler-16 (AB) b",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by Kepler-16; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "kepler-16ab-b-lens-shape.webp",
+        "thumbnail": "kepler-16ab-b-dataset-shape.webp",
         "surface": "kepler-16ab-b-surface-shape@2x.webp",
         "poles": "kepler-16ab-b-poles-shape@2x.webp",
         "source": {
@@ -51,7 +51,7 @@
           "url": "https://arxiv.org/abs/1109.3432"
         },
         "falseColor": false,
-        "notes": "No image or colour of this planet exists: it is known from its transits across both stars and from the timing of the stars' eclipses (see the investigation ledger). The gray marks an unresolved surface; the lighting is star A's, at the measured orbit. Star B, 1.5% as bright in Kepler's band, is not added to the lighting. The gray takes the colour of kepler-16-a's light, as its colour lens measures it."
+        "notes": "No image or colour of this planet exists: it is known from its transits across both stars and from the timing of the stars' eclipses (see the investigation ledger). The gray marks an unresolved surface; the lighting is star A's, at the measured orbit. Star B, 1.5% as bright in Kepler's band, is not added to the lighting. The gray takes the colour of kepler-16-a's light, as its colour dataset measures it."
       }
     ]
   },

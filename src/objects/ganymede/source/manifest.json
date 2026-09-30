@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "usgs-voyager-galileo-mono",
@@ -16,7 +16,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 16539,
@@ -82,7 +82,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "False color",
       "falseColor": true,
       "width": 11520,
@@ -143,7 +143,7 @@
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
-        "lenses",
+        "datasets",
         "presentation",
         "features"
       ],
@@ -219,7 +219,7 @@
         "geology-surfaces"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp",
-      "lensId": "geology",
+      "datasetId": "geology",
       "label": "Geology",
       "falseColor": true,
       "projection": {
@@ -381,7 +381,7 @@
       "consumers": [
         "oxygen-signature"
       ],
-      "lensId": "oxygen-signature",
+      "datasetId": "oxygen-signature",
       "label": "Oxygen signature",
       "falseColor": true,
       "width": 180,
@@ -437,7 +437,7 @@
       "consumers": [
         "oxygen-signature"
       ],
-      "lensId": "oxygen-signature",
+      "datasetId": "oxygen-signature",
       "label": "Oxygen signature",
       "falseColor": true,
       "width": 180,
@@ -493,7 +493,7 @@
       "consumers": [
         "oxygen-signature"
       ],
-      "lensId": "oxygen-signature",
+      "datasetId": "oxygen-signature",
       "label": "Oxygen signature",
       "falseColor": true,
       "width": 180,
@@ -613,7 +613,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -635,24 +635,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored CSS geometry, UV sampling and seam settings."
-      }
-    },
-    {
-      "id": "ganymede-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Ganymede celestial recipe",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside the inputs.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
       }
     },
     {
@@ -697,7 +679,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -714,7 +696,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -863,7 +845,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "dlr-juno",
+      "datasetId": "dlr-juno",
       "label": "DLR mosaic",
       "falseColor": false,
       "width": 46080,
@@ -1118,7 +1100,7 @@
       "consumers": [
         "geology-validation"
       ],
-      "purpose": "Unit values, names, symbols and published GIS colors of the Geology lens; the recipe categories must equal them."
+      "purpose": "Unit values, names, symbols and published GIS colors of the Geology dataset; the recipe categories must equal them."
     },
     {
       "id": "sim3237-registration-anchors",

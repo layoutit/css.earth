@@ -8,7 +8,7 @@ It is the only planet known around TOI-5803. Its orbit and size follow Mistry et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.3829728 d Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): a/R* 28.596; Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): inclination 89.3 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460550.945001 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5803's measured colour (#ffe4d4, the colour lens of toi-5803 (src/objects/toi-5803/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5803's measured colour (#ffe4d4, the colour dataset of toi-5803 (src/objects/toi-5803/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-5803's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (55, 82), folded onto its orbit. Upper limits and rows without an error are left out.
 

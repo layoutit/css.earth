@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "pds-70-b-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -49,22 +49,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "pds-70-b-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration for the hosted planet, no directional light",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield"
       ]
     },
     {

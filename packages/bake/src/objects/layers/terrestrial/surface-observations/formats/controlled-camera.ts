@@ -20,7 +20,7 @@ import { bandSetFrame } from '../composite.ts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.ts';
 import { deriveLimits } from '../limits.ts';
 import { MAXIMUM_LEVEL_FRAMES } from '../levels.ts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.ts';
+import { DATASET_KEYS, MOSAIC_KEYS, OPTIONAL_DATASET_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.ts';
 
 const CONTEXT = 'controlled camera recipe';
 /** The camera a control network states for one photograph. A frame that names an image catalog takes these from the catalog instead. */
@@ -30,8 +30,8 @@ const BANDS = ['red', 'green', 'blue'] as const;
 type Band = typeof BANDS[number];
 // Raw detector frames through different filters and exposures need wide levels: Amalthea's Galileo frames measure 10.3 from their reference.
 // A survey night repeats the same view minutes apart, and those repeats are what set the registration stage's noise floor, so they
-// are not redundant frames to be thinned: Themis contributes 30 over six nights, and a lens that casts several apparitions more.
-/** The most frames one controlled-camera lens may cast: as many as one level fit compares. */
+// are not redundant frames to be thinned: Themis contributes 30 over six nights, and a dataset that casts several apparitions more.
+/** The most frames one controlled-camera dataset may cast: as many as one level fit compares. */
 export const CONTROLLED_CAMERA_MAXIMUM_FRAMES = MAXIMUM_LEVEL_FRAMES;
 const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission', 'edge-weighted-average'], maximumFrames: CONTROLLED_CAMERA_MAXIMUM_FRAMES, maximumLevelGain: 16, samplesPerTriangle: 'optional' };
 
@@ -56,18 +56,18 @@ export function observingSeasons(startTimes: readonly string[], gapDays = DECONV
 
 const diskBlock = shape({ model: text, weight: optional(number), referenceIncidenceDegrees: number, referenceEmissionDegrees: number,
   maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number });
-const lens = { id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }), transfer: surfaceTransfer,
+const dataset = { id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }), transfer: surfaceTransfer,
   photometry: publishedOr(diskBlock), selection: optional(text), levelMatching: optional(parseLevelMatching), display: parseDisplay };
-export const parseControlledCameraLens = shape({ ...lens, frames: array(parseCameraFrame) });
-export const parseControlledColorLens = shape({ ...lens, bands: array(shape({ channel: text, filter: text })),
+export const parseControlledCameraDataset = shape({ ...dataset, frames: array(parseCameraFrame) });
+export const parseControlledColorDataset = shape({ ...dataset, bands: array(shape({ channel: text, filter: text })),
   frames: array(shape({ id: text, red: parseCameraFrame, green: parseCameraFrame, blue: parseCameraFrame })),
   bandAlignment: optional(shape({ references: array(parseCameraFrame), checks: array(shape({ reference: text, targets: array(text) })) })) });
-type CameraLens = ReturnType<typeof parseControlledCameraLens>;
-type ColorLens = ReturnType<typeof parseControlledColorLens>;
-type CameraFrameRecipe = CameraLens['frames'][number];
+type CameraDataset = ReturnType<typeof parseControlledCameraDataset>;
+type ColorDataset = ReturnType<typeof parseControlledColorDataset>;
+type CameraFrameRecipe = CameraDataset['frames'][number];
 
 const cameraPaths = (frames: readonly CameraFrameRecipe[]) => [...new Set(frames.flatMap(framePaths))];
-const colorPaths = (recipe: ColorLens) => cameraPaths([...recipe.frames.flatMap(set => BANDS.map(band => set[band])), ...(recipe.bandAlignment?.references ?? [])]);
+const colorPaths = (recipe: ColorDataset) => cameraPaths([...recipe.frames.flatMap(set => BANDS.map(band => set[band])), ...(recipe.bandAlignment?.references ?? [])]);
 
 /** Encodings whose archive ships no detached label: the frame's own header states its identity. */
 const SELF_DESCRIBING = ['fits-zimpol-intensity', 'fits-oi-reconstruction'];
@@ -86,7 +86,7 @@ function checkFrame(frame: unknown, context: string) {
 }
 
 /** A published model record, the Lunar-Lambert disk function within its limits, or the acquisition illumination. */
-function validatePhotometry(photometry: CameraLens['photometry'], value: unknown, emission: number, color: boolean) {
+function validatePhotometry(photometry: CameraDataset['photometry'], value: unknown, emission: number, color: boolean) {
   if ('referenceDegrees' in photometry) {
     // A published model is fitted to one filter; three filters shown together keep their observed brightness instead.
     if (color || !validPublishedPhotometryShape(photometry, emission)) throw new TypeError(`Invalid source-bound ${CONTEXT} photometry.`);
@@ -101,10 +101,10 @@ function validatePhotometry(photometry: CameraLens['photometry'], value: unknown
       !positive(photometry.maximumEmissionDegrees) || photometry.maximumEmissionDegrees > emission) throw new TypeError(`Invalid source-bound ${CONTEXT} photometry.`);
 }
 
-function validateCameraLens(value: unknown, sourceGeometry: unknown) {
-  checkKeys(value, [...LENS_KEYS], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS], CONTEXT);
+function validateCameraDataset(value: unknown, sourceGeometry: unknown) {
+  checkKeys(value, [...DATASET_KEYS], [...MOSAIC_KEYS, ...OPTIONAL_DATASET_KEYS], CONTEXT);
   for (const frame of requireArray(requireRecord(value).frames)) checkFrame(frame, `${CONTEXT} frame`);
-  const recipe = decodeProfile(parseControlledCameraLens, value, `Invalid source-bound ${CONTEXT}.`);
+  const recipe = decodeProfile(parseControlledCameraDataset, value, `Invalid source-bound ${CONTEXT}.`);
   if (recipe.format !== 'controlled-shape-camera') throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
   validateEnvelope(recipe, cameraPaths(recipe.frames), { ...RULES, displays: ['percentiles', 'displayRange'], palette: true }, CONTEXT);
   // A uniformly bright body has no dark samples, so an authored range starts at zero instead of stretching between its own extremes.
@@ -113,10 +113,10 @@ function validateCameraLens(value: unknown, sourceGeometry: unknown) {
   validatePhotometry(recipe.photometry, requireRecord(value).photometry, recipe.transfer.maximumEmissionDegrees, false);
 }
 
-function validateColorLens(value: unknown, sourceGeometry: unknown) {
+function validateColorDataset(value: unknown, sourceGeometry: unknown) {
   const record = requireRecord(value), context = `${CONTEXT} for filter colour`;
-  if (requireRecord(record.display).palette !== undefined) throw new TypeError(`Invalid source-bound ${context}: a palette belongs to a monochrome lens.`);
-  checkKeys(value, [...LENS_KEYS, 'bands'], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, 'bandAlignment'], context);
+  if (requireRecord(record.display).palette !== undefined) throw new TypeError(`Invalid source-bound ${context}: a palette belongs to a monochrome dataset.`);
+  checkKeys(value, [...DATASET_KEYS, 'bands'], [...MOSAIC_KEYS, ...OPTIONAL_DATASET_KEYS, 'bandAlignment'], context);
   for (const set of requireArray(record.frames)) {
     checkKeys(set, ['id', ...BANDS], [], `${context} band set`);
     for (const band of BANDS) checkFrame(requireRecord(set)[band], `${context} frame`);
@@ -125,7 +125,7 @@ function validateColorLens(value: unknown, sourceGeometry: unknown) {
     checkKeys(record.bandAlignment, ['references', 'checks'], [], `${context} bandAlignment`);
     for (const frame of requireArray(requireRecord(record.bandAlignment).references)) checkFrame(frame, `${context} bandAlignment reference`);
   }
-  const recipe = decodeProfile(parseControlledColorLens, value, `Invalid source-bound ${context}.`), filters = recipe.bands.map(band => band.filter);
+  const recipe = decodeProfile(parseControlledColorDataset, value, `Invalid source-bound ${context}.`), filters = recipe.bands.map(band => band.filter);
   if (recipe.format !== 'controlled-shape-color' || recipe.bands.length !== 3 || recipe.bands.some((band, i) => band.channel !== BANDS[i] || !band.filter) ||
       new Set(filters).size !== 3 || recipe.metadata.falseColor !== true || recipe.display.displayRange?.[0] !== 0) {
     throw new TypeError('Filter colour names three distinct filters in red, green and blue order, is false colour, and shows every band on one display range from 0.');
@@ -186,7 +186,7 @@ export function litShapeOnSky(geometry: PixelGeometry, sky: Uint8Array | undefin
   return { litPixels, onSkyPixels, share: litPixels ? onSkyPixels / litPixels : 0, maximumShare: MAXIMUM_LIT_SHAPE_ON_SKY };
 }
 
-async function loadControlledFrame(frame: CameraFrameRecipe, photometry: ObservationPhotometry, limits: CameraLens['transfer'], maximumIncidenceDegrees: number, { sourceDirectory, radial, entries }: LoadContext) {
+async function loadControlledFrame(frame: CameraFrameRecipe, photometry: ObservationPhotometry, limits: CameraDataset['transfer'], maximumIncidenceDegrees: number, { sourceDirectory, radial, entries }: LoadContext) {
   const [resolved, { label, startTime, filter }, image] = await Promise.all([resolveCatalogCamera(sourceDirectory, frame), frameIdentity(sourceDirectory, frame), loadShapeCameraImage(sourceDirectory, frame)]);
   const entry = requireRecord(entries.find(input => input.path === frame.path) ?? {});
   if (entry.width !== image.width || entry.height !== image.height) throw new Error(`Camera dimensions differ from pinned metadata: ${frame.id}`);
@@ -211,10 +211,10 @@ async function loadControlledFrame(frame: CameraFrameRecipe, photometry: Observa
   return { frame: built, label };
 }
 
-const lensPhotometry = (block: CameraLens['photometry'], { sourceDirectory, source }: LoadContext): Promise<ObservationPhotometry> =>
+const datasetPhotometry = (block: CameraDataset['photometry'], { sourceDirectory, source }: LoadContext): Promise<ObservationPhotometry> =>
   'referenceDegrees' in block ? publishedPhotometry(sourceDirectory, source.manifest, block) : Promise.resolve(diskPhotometry(block));
 
-function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly ObservationFrame[], photometry: ObservationPhotometry, context: LoadContext, units: string, colorDisplay?: BandColorDisplay) {
+function datasetPolicy(recipe: CameraDataset | ColorDataset, frames: readonly ObservationFrame[], photometry: ObservationPhotometry, context: LoadContext, units: string, colorDisplay?: BandColorDisplay) {
   const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
   const range = recipe.display.displayRange;
   const policy: SurfacePolicy = { format: recipe.format,
@@ -226,21 +226,21 @@ function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly Observation
   return { frames: [...frames], policy, exceeded };
 }
 
-const retained = (block: CameraLens['photometry']) => !('referenceDegrees' in block) && block.model === 'retained-observation';
-const incidenceLimit = (block: CameraLens['photometry']) => 'referenceDegrees' in block ? block.limits.maximumIncidenceDegrees : block.maximumIncidenceDegrees;
+const retained = (block: CameraDataset['photometry']) => !('referenceDegrees' in block) && block.model === 'retained-observation';
+const incidenceLimit = (block: CameraDataset['photometry']) => 'referenceDegrees' in block ? block.limits.maximumIncidenceDegrees : block.maximumIncidenceDegrees;
 
 export const controlledCameraFormat: SurfaceObservationFormat = {
-  validate: validateCameraLens,
-  paths: value => cameraPaths(parseControlledCameraLens(value).frames),
+  validate: validateCameraDataset,
+  paths: value => cameraPaths(parseControlledCameraDataset(value).frames),
   async load(value, context) {
-    const recipe = parseControlledCameraLens(value), photometry = await lensPhotometry(recipe.photometry, context), frames: ObservationFrame[] = [];
+    const recipe = parseControlledCameraDataset(value), photometry = await datasetPhotometry(recipe.photometry, context), frames: ObservationFrame[] = [];
     for (const frame of recipe.frames) frames.push((await loadControlledFrame(frame, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context)).frame);
     const quantity = recipe.frames.some(frame => frame.encoding === 'vicar-byte-dn') ? 'detector brightness, DN / 255'
       : recipe.frames.some(frame => frame.encoding === DECONVOLVED) ? 'deconvolved intensity'
       : recipe.frames.some(frame => frame.encoding === 'fits-oi-reconstruction') ? 'reconstructed intensity'
       : 'I/F';
     const units = photometry.units ?? `relative ${retained(recipe.photometry) ? `${quantity} with original illumination` : `disk-normalized ${quantity}`}; linear ${recipe.display.palette ? 'palette' : 'grayscale'} display`;
-    const result = lensPolicy(recipe, frames, photometry, context, units);
+    const result = datasetPolicy(recipe, frames, photometry, context, units);
     // Deconvolved frames carry no calibrated level, so their level fit is told each frame's season.
     return frames.length > 1 && recipe.frames.every(frame => frame.encoding === DECONVOLVED)
       ? { ...result, policy: { ...result.policy, levelSeasons: observingSeasons(frames.map(frame => frame.startTime)) } } : result;
@@ -248,10 +248,10 @@ export const controlledCameraFormat: SurfaceObservationFormat = {
 };
 
 export const controlledColorFormat: SurfaceObservationFormat = {
-  validate: validateColorLens,
-  paths: value => colorPaths(parseControlledColorLens(value)),
+  validate: validateColorDataset,
+  paths: value => colorPaths(parseControlledColorDataset(value)),
   async load(value, context) {
-    const recipe = parseControlledColorLens(value), photometry = await lensPhotometry(recipe.photometry, context);
+    const recipe = parseControlledColorDataset(value), photometry = await datasetPhotometry(recipe.photometry, context);
     // Registered cameras are measured again against their reference images before any pixel is sampled.
     const bandAlignment = recipe.bandAlignment ? await checkBandAlignment(context.sourceDirectory,
       recipe.bands.map(band => ({ channel: band.channel, filter: band.filter, frames: recipe.frames.map(set => set[band.channel as Band]) })), recipe.bandAlignment, context.radial.grid) : undefined;
@@ -269,7 +269,7 @@ export const controlledColorFormat: SurfaceObservationFormat = {
       frames.push(bandSetFrame(set.id, bands));
     }
     const units = `relative I/F in each filter${retained(recipe.photometry) ? ', with original illumination' : ', disk-normalized'}; false colour`;
-    const result = lensPolicy(recipe, frames, photometry, context, units, bandColorDisplay(recipe.bands.map(band => band.filter), 'radiance-factor', recipe.display.displayRange));
+    const result = datasetPolicy(recipe, frames, photometry, context, units, bandColorDisplay(recipe.bands.map(band => band.filter), 'radiance-factor', recipe.display.displayRange));
     return bandAlignment ? { ...result, policy: { ...result.policy, bandAlignment } } : result;
   },
 };

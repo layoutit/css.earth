@@ -16,7 +16,7 @@
       "id": "dlr-fc-140m-native-cube",
       "subject": "Native DLR/USGS Dawn FC 140 m global mosaic cube (Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub, the product behind NASA Trek's 59 ppd layer) instead of the WMS render",
       "status": "excluded",
-      "finding": "Not adopted. The Monochrome lens already shows this mosaic, rendered by the USGS WMS at the full 4096 x 2048 prepared size, so the cube adds no resolution. Reduced by pixel-area mean to the same frame, it keeps the same tone (median transfer is identity) and registration (best shift 0, 0). Pixelmatch at threshold 0.1 flags 7.2% of the map, 7.8% after the WebP q80 lane on both and 1.4% at half resolution. Between 34 N and 11 S only 0.1-0.4% change; toward the poles 16-19% change, where the WMS render shows resampling jaggies the area mean does not. Switching needs a reader for tiled ISIS3 byte cubes that the shared reducer lacks, and the cube stores the south-polar gap as value 1, the same value as clipped shadow (11% of its pixels), so the gap cannot be told from terrain by value.",
+      "finding": "Not adopted. The Monochrome dataset already shows this mosaic, rendered by the USGS WMS at the full 4096 x 2048 prepared size, so the cube adds no resolution. Reduced by pixel-area mean to the same frame, it keeps the same tone (median transfer is identity) and registration (best shift 0, 0). Pixelmatch at threshold 0.1 flags 7.2% of the map, 7.8% after the WebP q80 lane on both and 1.4% at half resolution. Between 34 N and 11 S only 0.1-0.4% change; toward the poles 16-19% change, where the WMS render shows resampling jaggies the area mean does not. Switching needs a reader for tiled ISIS3 byte cubes that the shared reducer lacks, and the cube stores the south-polar gap as value 1, the same value as clipped shadow (11% of its pixels), so the gap cannot be told from terrain by value.",
       "revisitWhen": "A shared reader for tiled ISIS3 byte cubes exists and DLR or USGS documents the cube's fill value, or the high-latitude crops are judged worth the change.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m",
@@ -56,7 +56,7 @@
       "id": "elevation-polar-caps",
       "subject": "Elevation coverage in permanently shadowed polar areas",
       "status": "unresolved",
-      "finding": "The publisher describes approximately 98 percent coverage with interpolation in permanently shadowed polar areas but supplies no validity mask separating interpolation from stereo samples, so the lens withholds both caps at latitudes of 60 degrees or more as a conservative display boundary.",
+      "finding": "The publisher describes approximately 98 percent coverage with interpolation in permanently shadowed polar areas but supplies no validity mask separating interpolation from stereo samples, so the dataset withholds both caps at latitudes of 60 degrees or more as a conservative display boundary.",
       "revisitWhen": "A validity mask separating interpolated from stereo samples is published.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L66"
@@ -126,7 +126,7 @@
       "id": "dawn-vir-band-depth-mosaics",
       "subject": "Dawn VIR global band-depth mosaics, 2.7 µm and 3.1 µm (DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0)",
       "status": "included",
-      "finding": "The archived CMT_MOSAIC-BI_DEPTH and CMT_MOSAIC-BII_DEPTH maps supply the Clay band and Ammonium band lenses, each colored over its own 2nd to 98th percentile (0.229 to 0.283; 0.047 to 0.089) with the rainbow core of Frigeri et al. (2019), Figure 7. On the paper's own ranges most of Ceres sat in the bar's dark ends: the archive (Survey spectra, Ammannito et al. 2016 continuum, no artifact removal) differs from the paper (Survey and HAMO, Carrozzo et al. 2016 correction). A one-cube HAMO reduction with Frigeri's continuum and the public calibration gives a 2.7 um median of 0.272, near the archive's 0.255.",
+      "finding": "The archived CMT_MOSAIC-BI_DEPTH and CMT_MOSAIC-BII_DEPTH maps supply the Clay band and Ammonium band datasets, each colored over its own 2nd to 98th percentile (0.229 to 0.283; 0.047 to 0.089) with the rainbow core of Frigeri et al. (2019), Figure 7. On the paper's own ranges most of Ceres sat in the bar's dark ends: the archive (Survey spectra, Ammannito et al. 2016 continuum, no artifact removal) differs from the paper (Survey and HAMO, Carrozzo et al. 2016 correction). A one-cube HAMO reduction with Frigeri's continuum and the public calibration gives a 2.7 um median of 0.272, near the archive's 0.255.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
         "https://doi.org/10.1016/j.icarus.2018.04.019"
@@ -140,8 +140,7 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/",
         "https://doi.org/10.1016/j.icarus.2018.04.019",
-        "https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/evidence/band-centres/measurements.json"
+        "https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf"
       ]
     },
     {
@@ -202,7 +201,7 @@
       "id": "dawn-gravity-ceres18d-maps",
       "subject": "Dawn radio-science gravity maps of Ceres: radial gravity, its error, Bouguer anomaly and geoid",
       "status": "included",
-      "finding": "The PDS4 bundle urn:nasa:pds:dawn-rss-der-ceres 1.0 (doi:10.17189/c2eg-7x61, migrated from PDS3 DAWN-A-RSS-5-CEGR-V4.0, volume DWNCGRS_2 version 4) archives gridded maps only for the degree-18 model CERES18D: JGDWN_CER18D_ACCEL_0018 (radial gravity, degrees 2 to 18 without the hydrostatic J2 and J4, on a 482.0 x 445.9 km ellipsoid), ACCERR_0018 (its one-sigma error from the covariance), BOU_0018 (Bouguer, same degrees), GEOID_0018 and GEOIDERR_0018 (metres above an ellipsoid of a = 482.0 km, f = 0.074896). Each is 181 x 360 little-endian float64, cell centres at whole degrees from 0 E and from 90 N to 90 S; the image bytes are identical in both archives (the MD5 in the PDS4 labels and the PDS3 checksum file agree). The PDS4 labels' value-added corners put the first column's edge at 0 E, half a cell from the producer's PDS3 labels; the PDS3 placement is used and the 360 cells of each pole row are equal, which fixes the rows. Values: radial gravity -272.2 to 212.5 mGal, error 17.6 to 79.0, Bouguer -319.1 to 405.9, geoid -1066.6 to 1454.1 m. Checks against papers: the gravity low and Bouguer high fall on Urvara; Kerwan reads +348 mGal Bouguer (100th percentile), as Bland et al. (2018) infer; Yalode +180; Hanami Planum -225 (4th percentile), the compensated-topography pattern of Park et al. (2016, 2017); Ahuna Mons +153 mGal free-air (99th percentile), where Ruesch et al. (2019) find about 100 mGal at degrees 5 to 14. Ruesch et al. quote about 10 mGal accuracy at the equator for CERES18C; the archived error map gives 17.6 mGal there. Resolution: about 82 km at the equator (degree 18), accurate globally to degree 14, about 105 km. No degree-strength map is archived. Shown as the gravity, gravity-uncertainty, bouguer and geoid lenses through the pds3-grid reader, which needs to accept the detached pointer (\"FILE\",1).",
+      "finding": "The PDS4 bundle urn:nasa:pds:dawn-rss-der-ceres 1.0 (doi:10.17189/c2eg-7x61, migrated from PDS3 DAWN-A-RSS-5-CEGR-V4.0, volume DWNCGRS_2 version 4) archives gridded maps only for the degree-18 model CERES18D: JGDWN_CER18D_ACCEL_0018 (radial gravity, degrees 2 to 18 without the hydrostatic J2 and J4, on a 482.0 x 445.9 km ellipsoid), ACCERR_0018 (its one-sigma error from the covariance), BOU_0018 (Bouguer, same degrees), GEOID_0018 and GEOIDERR_0018 (metres above an ellipsoid of a = 482.0 km, f = 0.074896). Each is 181 x 360 little-endian float64, cell centres at whole degrees from 0 E and from 90 N to 90 S; the image bytes are identical in both archives (the MD5 in the PDS4 labels and the PDS3 checksum file agree). The PDS4 labels' value-added corners put the first column's edge at 0 E, half a cell from the producer's PDS3 labels; the PDS3 placement is used and the 360 cells of each pole row are equal, which fixes the rows. Values: radial gravity -272.2 to 212.5 mGal, error 17.6 to 79.0, Bouguer -319.1 to 405.9, geoid -1066.6 to 1454.1 m. Checks against papers: the gravity low and Bouguer high fall on Urvara; Kerwan reads +348 mGal Bouguer (100th percentile), as Bland et al. (2018) infer; Yalode +180; Hanami Planum -225 (4th percentile), the compensated-topography pattern of Park et al. (2016, 2017); Ahuna Mons +153 mGal free-air (99th percentile), where Ruesch et al. (2019) find about 100 mGal at degrees 5 to 14. Ruesch et al. quote about 10 mGal accuracy at the equator for CERES18C; the archived error map gives 17.6 mGal there. Resolution: about 82 km at the equator (degree 18), accurate globally to degree 14, about 105 km. No degree-strength map is archived. Shown as the gravity, gravity-uncertainty, bouguer and geoid datasets through the pds3-grid reader, which needs to accept the detached pointer (\"FILE\",1).",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/document/dawn-rss-der-ceres-bundle-desc.txt",
         "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNCGRS_2_v4/DATA/RSDMAP/",
@@ -229,7 +228,7 @@
       "id": "dawn-gravity-ceres18d-geoid-error",
       "subject": "CERES18D geoid error map (JGDWN_CER18D_GEOIDERR_0018)",
       "status": "excluded",
-      "finding": "Archived and decoded (22.0 to 27.4 m, one sigma, nearly uniform) but not shown: it is under 3% of the geoid range and the radial gravity error lens already shows where the model is weak, as Venus shows only its gravity error.",
+      "finding": "Archived and decoded (22.0 to 27.4 m, one sigma, nearly uniform) but not shown: it is under 3% of the geoid range and the radial gravity error dataset already shows where the model is weak, as Venus shows only its gravity error.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
       ],
@@ -239,7 +238,7 @@
       "id": "dawn-grand-ceres-maps",
       "subject": "Dawn GRaND Ceres derived maps: hydrogen, iron and thermal plus epithermal neutron counts (DAWN GRaND Ceres Bundle 1.0, doi:10.26033/hf9h-pt31)",
       "status": "included",
-      "finding": "GRD_HYDROGEN_MAP (wt.% water-equivalent hydrogen, 16.46 to 28.58, sigma about 0.82, a lower bound per the archive), GRD_IRON_MAP (wt.% iron, 13.17 to 17.42, statistical sigma about 0.40) and GRD_TPE_NEUTRON_COUNTS_MAP (counts/s, 2.670 to 3.696, sigma of the mean about 0.02, 276 to 2,885 samples per pixel) are shown as the hydrogen, iron and neutron-counts lenses, grouped with Vesta's as Surface elements. Each table has 110 twenty-degree quasi-equal-area pixels in 10 latitude bands (1, 8, 12, 16, 18, 18, 16, 12, 8, 1 pixels) that tile the sphere exactly; the archive gives a spatial resolution of about 600 km FWHM from LAMO at about 385 km, 2015-12-16 to 2016-05-11. The shared pds-equal-area-table reader samples the containing pixel with no interpolation; the PDS3 labels (DWNCGRD_2) describe their columns inline, which the reader needed to accept. Table bytes match the MD5 in the PDS4 labels. Hydrogen rises from 16.5 at the equator to 28.6 at the north pole while neutron counts fall toward both poles; iron peaks within 20 degrees of the equator. Scales span every value; viridis as on Vesta.",
+      "finding": "GRD_HYDROGEN_MAP (wt.% water-equivalent hydrogen, 16.46 to 28.58, sigma about 0.82, a lower bound per the archive), GRD_IRON_MAP (wt.% iron, 13.17 to 17.42, statistical sigma about 0.40) and GRD_TPE_NEUTRON_COUNTS_MAP (counts/s, 2.670 to 3.696, sigma of the mean about 0.02, 276 to 2,885 samples per pixel) are shown as the hydrogen, iron and neutron-counts datasets, grouped with Vesta's as Surface elements. Each table has 110 twenty-degree quasi-equal-area pixels in 10 latitude bands (1, 8, 12, 16, 18, 18, 16, 12, 8, 1 pixels) that tile the sphere exactly; the archive gives a spatial resolution of about 600 km FWHM from LAMO at about 385 km, 2015-12-16 to 2016-05-11. The shared pds-equal-area-table reader samples the containing pixel with no interpolation; the PDS3 labels (DWNCGRD_2) describe their columns inline, which the reader needed to accept. Table bytes match the MD5 in the PDS4 labels. Hydrogen rises from 16.5 at the equator to 28.6 at the north pole while neutron counts fall toward both poles; iron peaks within 20 degrees of the equator. Scales span every value; viridis as on Vesta.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
         "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/CATALOG/",
@@ -261,7 +260,7 @@
       "id": "dawn-grand-ceres-iron-gamma-counts",
       "subject": "GRD_IRON_GAMMA_COUNTS_MAP, the 7.6 MeV gamma-ray counting rate",
       "status": "excluded",
-      "finding": "This is the counting rate the iron map was computed from (5.45 to 7.89 counts/min); the iron lens shows the same information in weight percent. Its PDS3 label names the value columns TPE_COUNTING_RATE and SIG_TPE_COUNTING_RATE, although their descriptions and the PDS4 label call them the Fe 7.6 MeV rate.",
+      "finding": "This is the counting rate the iron map was computed from (5.45 to 7.89 counts/min); the iron dataset shows the same information in weight percent. Its PDS3 label names the value columns TPE_COUNTING_RATE and SIG_TPE_COUNTING_RATE, although their descriptions and the PDS4 label call them the Fe 7.6 MeV rate.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/IRON/GRD_IRON_GAMMA_COUNTS_MAP.LBL",
         "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_IRON_GAMMA_COUNTS_MAP.xml"
@@ -293,7 +292,7 @@
       "id": "monochrome-atlas-density",
       "subject": "Texel size of the shipped Monochrome atlas",
       "status": "unresolved",
-      "finding": "The Monochrome lens is prepared at 4096 texels around the equator (ceres-normal@2x.webp, 4160 x 3072 with gutters, 3,887,406 bytes), 720 m per texel, from a 4096 x 2048 WMS render of the 140 m mosaic. At maximum zoom the camera shows 77 to 173 m per texel depending on the viewport, so the lens is magnified about 5 to 9 times there. A 16,384-texel atlas (180 m) would be about 62 MB of full-resolution pages and 32,768 (90 m) about 250 MB, if bytes grow with texel count as now, plus about a third more for the reduced levels; first views load only the level the silhouette needs.",
+      "finding": "The Monochrome dataset is prepared at 4096 texels around the equator (ceres-normal@2x.webp, 4160 x 3072 with gutters, 3,887,406 bytes), 720 m per texel, from a 4096 x 2048 WMS render of the 140 m mosaic. At maximum zoom the camera shows 77 to 173 m per texel depending on the viewport, so the dataset is magnified about 5 to 9 times there. A 16,384-texel atlas (180 m) would be about 62 MB of full-resolution pages and 32,768 (90 m) about 250 MB, if bytes grow with texel count as now, plus about a third more for the reduced levels; first views load only the level the silhouette needs.",
       "evidence": [
         "evidence/max-zoom/texels.json",
         "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m"
@@ -304,7 +303,7 @@
       "id": "urvara-c2e-mosaics",
       "subject": "Ceres Urvara Dawn FC C2E mosaics V1.0 (urn:nasa:pds:dwarf_planet-ceres.dawn-fc.urvara-mosaics)",
       "status": "excluded",
-      "finding": "Controlled clear-filter mosaics of Urvara (128 to 93 W, 59 to 35 S) from 1,583 C2E images at 5 m/pixel, polar stereographic 8-bit GeoTIFF, 2.32 GB for the main mosaic, photometrically corrected with Schroeder et al. (2017, 2018). The repository has a regional route (the Europa normal lens's detailMosaic inserts controlled GeoTIFFs into the global lens), but inserted pixels take the global atlas's density, and on Ceres the finest texel the camera ever shows is 77 to 85 m, so 5 m detail cannot appear; resampled that far it holds nothing the LAMO or 140 m mosaics lack. No route lets the camera come closer over one region.",
+      "finding": "Controlled clear-filter mosaics of Urvara (128 to 93 W, 59 to 35 S) from 1,583 C2E images at 5 m/pixel, polar stereographic 8-bit GeoTIFF, 2.32 GB for the main mosaic, photometrically corrected with Schroeder et al. (2017, 2018). The repository has a regional route (the Europa normal dataset's detailMosaic inserts controlled GeoTIFFs into the global dataset), but inserted pixels take the global atlas's density, and on Ceres the finest texel the camera ever shows is 77 to 85 m, so 5 m detail cannot appear; resampled that far it holds nothing the LAMO or 140 m mosaics lack. No route lets the camera come closer over one region.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/dawn/dwarf_planet-ceres.dawn-fc.urvara-mosaics/document/productdescription.txt",
         "evidence/max-zoom/texels.json"
@@ -327,8 +326,8 @@
       "id": "photojournal-pia21914-faculae-map",
       "subject": "NASA PIA21914 Map of Ceres' Bright Spots (Dawn framing camera)",
       "status": "excluded",
-      "finding": "Global simple-cylindrical picture (2000 x 989 px) with no printed grid. Three gazetteer landmarks (Occator floor, Haulani, Ahuna Mons markers) fit 5.47 px per degree with the left edge near 177.5 E, residuals up to 3.7 px. The markers are not crater centres, so this is only a rough frame check. The content is coloured dots in four classes (floor faculae, rim/wall faculae, bright ejecta, Ahuna Mons) over a camera mosaic. That is a categorical point overlay, not a mapped quantity with a scale and units. As a lens it would burn dots into a photograph; as features it would need each spot's coordinates, which the figure gives only as digitised dot positions.",
-      "revisitWhen": "The faculae catalogue behind the figure (coordinates and class for each of the 300+ spots) is found in a published table or archive product, for use as feature content rather than a lens.",
+      "finding": "Global simple-cylindrical picture (2000 x 989 px) with no printed grid. Three gazetteer landmarks (Occator floor, Haulani, Ahuna Mons markers) fit 5.47 px per degree with the left edge near 177.5 E, residuals up to 3.7 px. The markers are not crater centres, so this is only a rough frame check. The content is coloured dots in four classes (floor faculae, rim/wall faculae, bright ejecta, Ahuna Mons) over a camera mosaic. That is a categorical point overlay, not a mapped quantity with a scale and units. As a dataset it would burn dots into a photograph; as features it would need each spot's coordinates, which the figure gives only as digitised dot positions.",
+      "revisitWhen": "The faculae catalogue behind the figure (coordinates and class for each of the 300+ spots) is found in a published table or archive product, for use as feature content rather than a dataset.",
       "evidence": [
         "https://science.nasa.gov/photojournal/map-of-ceres-bright-spots/",
         "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21914/PIA21914.tif"
@@ -336,7 +335,7 @@
     },
     {
       "id": "alma-265ghz-thermal-images",
-      "subject": "ALMA Ceres Imaging and Spectrum V1.0 (urn:nasa:pds:gbo.ast-ceres.alma.images-spectra::1.0): 265 GHz thermal images as a surface lens",
+      "subject": "ALMA Ceres Imaging and Spectrum V1.0 (urn:nasa:pds:gbo.ast-ceres.alma.images-spectra::1.0): 265 GHz thermal images as a surface dataset",
       "status": "excluded",
       "finding": "All 86 calibrated 12-m images (3 epochs: 40 in Oct-Nov 2015, 31 in Sep 2017, 15 in Oct 2017) and the three imaging_parameters tables were read. From the tabulated beam axes and geocentric range, the beam at Ceres is 77-111 km x 63-86 km in 2015, 51-98 x 40-60 km in Sep 2017 and 47-78 x 31-41 km in Oct 2017 (geometric mean 38-96 km). Against the 939.4 km diameter this is 10-25 beams across the disc, about 67-430 beams per disc by area, matching the 10-20 beams the data description states. The app's Dawn 140 m map is 270-690 times finer. Each epoch covers a full rotation (largest sub-Earth longitude gap 55, 62 and 123 degrees; 31 degrees for all epochs combined), but sub-Earth latitude stays between +6.4 and -1.0 degrees, so the poles are only seen at the limb. The disc is dominated by a smooth limb-darkening and diurnal pattern that changes with local time, not location: it spans a median 51%, 31% and 23% of mean disc brightness per epoch. After removing a degree-4 smooth fit inside 0.85 R, the leftover structure is 2.9%, 1.2% and 1.6% RMS (median). The off-disc RMS is 5.4%, 1.1% and 1.5%, and the data description gives 3%, 1% and 2% as imaging artifacts. Surface-fixed test: residual maps rotated to Ceres north and compared between independent epochs looking at the same longitude (within 8 degrees) correlate at median r = 0.04 (n = 101; 0.05 for Sep vs Oct 2017 alone, n = 17). Pairs looking at opposite sides give r = 0.06 (n = 1178). Within one epoch r = 0.61, so the leftover pattern belongs to each epoch's imaging, not to the ground. A surface-fixed thermal map would show about 40-100 km blobs at the artifact level, with no feature that repeats between epochs. Li et al. (2020), the bundle's own paper, reports disc-integrated properties only. The lightcurves and spectrum are disc-integrated and have no surface to map onto. Nothing readable is added to Ceres' surface.",
       "evidence": [

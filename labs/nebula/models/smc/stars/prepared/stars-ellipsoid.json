@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-catalogue-stars@1",
+  "schema": "cssearth-catalogue-stars@2",
   "id": "smc-stars",
   "starIdPrefix": "Bonanos2010:",
   "frame": {
@@ -36195,8 +36195,8 @@
         ]
       },
       "subjectId": "smc-constrained",
-      "lensRecipe": {
-        "path": "labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
+      "datasetRecipe": {
+        "path": "labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
       },
       "method": "Conditional depth PDF proportional to maxRGB(finite components + simulation envelope, sampled as the model bake samples physical space, zero outside the baked box) times decoded simulation density times (1+z/D)^2. 1536 intervals span the baked depth range; a fixed SHA-256 source-ID quantile inverts its piecewise-linear CDF. Chosen points must have strictly positive emission and density, with an explicit zero-support gap guard.",
       "coordinates": "Measured ray -> model tangent plane (rayToOverlayPlane in the model frame); (x,y,z)=(x0*(1+z/D),y0*(1+z/D),z) kpc in the model frame.",

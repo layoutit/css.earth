@@ -1,6 +1,6 @@
 # BE Ceti
 
-**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 ## Sources
 
@@ -26,7 +26,7 @@ Each map uses its paper figure's colour bar: the field linear from minus to plus
 
 ## Evidence
 
-Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 Run of 2026-09-23 (this version):
 

@@ -6,25 +6,25 @@ import { reconstructionProcessingCapability } from './reconstruction-capabilitie
 import type { PreparedReconstruction } from './reconstruction-types.ts';
 
 const saved = (resultId: string, method: string) => ({ resultId, processing: reconstructionProcessingCapability(method) }) as unknown as PreparedReconstruction;
-const lens = saved('test-model-first-lens', 'simulation-guided-finite-material@1'), repaint = saved('test-subject-first-lens', 'alignment-density-material-v1');
-const finite = { finiteModel: { modelResultId: 'test-model', bundle: 'bundle.json' }, candidates: [{ prepared: lens }, {}] };
+const dataset = saved('test-model-first-dataset', 'simulation-guided-finite-material@1'), repaint = saved('test-subject-first-dataset', 'alignment-density-material-v1');
+const finite = { finiteModel: { modelResultId: 'test-model', bundle: 'bundle.json' }, candidates: [{ prepared: dataset }, {}] };
 const density = { candidates: [{ prepared: repaint }, {}] };
 
 test('Preview follows the selected image and its owning finite model, not the displayed result', () => {
   assert.equal(selectedPreviewAllowed(finite, finite.candidates[0]), false);
-  // "Unpainted density" may still be on screen after a failed lens mount; the selected image still has no repaint.
+  // "Unpainted density" may still be on screen after a failed dataset mount; the selected image still has no repaint.
   assert.equal(selectedPreviewAllowed(finite, finite.candidates[1]), false);
   assert.match(selectedProcessing(finite, finite.candidates[1])?.reason ?? '', /offline recipe/);
   assert.equal(selectedPreviewAllowed(density, density.candidates[0]), true);
   assert.equal(selectedPreviewAllowed(density, density.candidates[1]), true);
-  assert.equal(selectedPreviewAllowed(density, { prepared: { resultId: 'test-subject-second-lens' } as unknown as PreparedReconstruction }), false);
+  assert.equal(selectedPreviewAllowed(density, { prepared: { resultId: 'test-subject-second-dataset' } as unknown as PreparedReconstruction }), false);
 });
 
 test('a linked or remembered result is ignored unless the current finite model baked it', () => {
-  assert.equal(acceptsSavedResult(finite, lens.resultId), true);
+  assert.equal(acceptsSavedResult(finite, dataset.resultId), true);
   assert.equal(acceptsSavedResult(finite, repaint.resultId), false);
-  assert.equal(acceptsSavedResult(finite, 'test-subject-third-lens'), false);
-  assert.equal(acceptsSavedResult(density, 'test-subject-third-lens'), true);
+  assert.equal(acceptsSavedResult(finite, 'test-subject-third-dataset'), false);
+  assert.equal(acceptsSavedResult(density, 'test-subject-third-dataset'), true);
 });
 
 test('the controls use these rules for links, restored display and every Preview gate', () => {

@@ -8,7 +8,7 @@ It is the only planet known around Kepler-1651. Its orbit and size follow Mann e
 
 **Orbit.** Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): P 9.87863917 d Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): a/R* derived by Kepler's third law from its period 9.87863917 d, stellar mass 0.522 and radius 0.503 solar units; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): inclination 85.94 degrees Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): e 0 Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): transit mid-time 2454961.53395 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by kepler-1651's measured colour (#ffc085, the colour lens of kepler-1651 (src/objects/kepler-1651/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by kepler-1651's measured colour (#ffc085, the colour dataset of kepler-1651 (src/objects/kepler-1651/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of Kepler-1651's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (80, 81, 82), folded onto its orbit. Upper limits and rows without an error are left out.
 

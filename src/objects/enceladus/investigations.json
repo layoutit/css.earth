@@ -41,7 +41,7 @@
       "id": "atmosphere-and-plume",
       "subject": "Atmosphere, plume and interior presentation alternatives",
       "status": "excluded",
-      "finding": "No selected observed surface map supports a visible atmosphere, invented plume animation or interior lens.",
+      "finding": "No selected observed surface map supports a visible atmosphere, invented plume animation or interior dataset.",
       "revisitWhen": "A source-backed mapped product supports the claimed visible quantity.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
@@ -68,8 +68,7 @@
       "evidence": [
         "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/",
         "https://doi.org/10.1016/j.icarus.2020.113848",
-        "https://doi.org/10.1029/2018EA000399",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/evidence/infrared-mosaic/published-grid.jpg"
+        "https://doi.org/10.1029/2018EA000399"
       ]
     },
     {
@@ -119,7 +118,7 @@
       "id": "crow-willard-2015-linework",
       "subject": "Geologic map line features (ridges, troughs, scarps, contacts)",
       "status": "excluded",
-      "finding": "The companion Trek layer Cassini_ISS_GeologicMapFeatures_Global holds 13 polyline records in 13 symbol classes. Geology lenses on other bodies show polygon units only; drawing line symbols would need a renderer feature.",
+      "finding": "The companion Trek layer Cassini_ISS_GeologicMapFeatures_Global holds 13 polyline records in 13 symbol classes. Geology datasets on other bodies show polygon units only; drawing line symbols would need a renderer feature.",
       "revisitWhen": "A shared route for published line symbols exists.",
       "evidence": [
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapFeatures_Global/MapServer/0?f=json"
@@ -135,7 +134,7 @@
         "https://trek.nasa.gov/enceladus/TrekServices/ws/index/eq/searchItems?start=0&rows=200&facetKeys=productCat2&facetValues=DEM&proj=urn:ogc:def:crs:IAU2000::60200",
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_DEM_375m_Global/ImageServer?f=json",
         "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
-        "Measured 2026-09-28 against the current Schenk 200 m grid with the Elevation lens palette and relief."
+        "Measured 2026-09-28 against the current Schenk 200 m grid with the Elevation dataset palette and relief."
       ]
     },
     {

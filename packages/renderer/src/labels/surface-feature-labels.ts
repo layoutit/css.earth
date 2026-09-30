@@ -433,9 +433,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     if (root.isConnected) root.remove();
   }
   return Object.freeze({
-    root, lensIds: plan.lensIds,
+    root, datasetIds: plan.datasetIds,
     publish(next: Parameters<SurfaceFeatureLayerRuntime['publish']>[0]) { if (destroyed) return; view = next; schedule(); },
-    setLens({ id }: { readonly id: string | null }) { if (destroyed) return; enabled = id !== null && plan.lensIds.includes(id); schedule(); },
+    setDataset({ id }: { readonly id: string | null }) { if (destroyed) return; enabled = id !== null && plan.datasetIds.includes(id); schedule(); },
     setPlaying(value: boolean) {
       if (destroyed || playing === value) return;
       playing = value;

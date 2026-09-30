@@ -9,7 +9,7 @@ import type { PreparedResourceEntry } from '@cssearth/renderer/rendering/prepare
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
-  const { namespace: ns, scene: plan, assets, lenses, sun, solarSource: solarSystemSource } = input;
+  const { namespace: ns, scene: plan, assets, datasets, sun, solarSource: solarSystemSource } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
 
   const material=plan.material;
@@ -27,9 +27,9 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const billboardAtlas=atmospheric?[]:[{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"billboard"}];
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
   // A surface too large to decode as one image comes as pages, each at every level (preparation/raster/pages.ts).
-  const paged=pagedSurface(plan.body.surfacePages,lenses);
-  const entries=[...warm,...lenses.controls.flatMap(lens=>layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>({key:`${layer}:${lens.id}`,
-    url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...(paged?.entries??[]),...lightingRows,...billboardAtlas,
+  const paged=pagedSurface(plan.body.surfacePages,datasets);
+  const entries=[...warm,...datasets.controls.flatMap(dataset=>layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>({key:`${layer}:${dataset.id}`,
+    url:canonicalPreparedAsset(dataset[`${layer}Url`],dataset[`${layer}2xUrl`]),pool:"material"}))),...(paged?.entries??[]),...lightingRows,...billboardAtlas,
     ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"warm"}))];
   const required=(id: string)=>[...(paged?.keys(id)??[]),...layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>`${layer}:${id}`),
     ...(atmospheric?[]:["shadowless",SHADOWLESS_BILLBOARD_KEY])];
@@ -84,14 +84,14 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const atmospheres: (boolean|null)[]=atmospheric?[false,true]:[null];
   const ringNode = planeNodes.get('rings');
   const ringStates: (boolean|null)[] = ringNode ? [false,true] : [null];
-  for(const lens of lenses.controls)for(const atmosphere of atmospheres)for(const shadows of [false,true])for(const rings of ringStates){
-    const focus=input.lensFocus?.[lens.id];
-    variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),shadows,...(rings===null?{}:{rings})},required:required(lens.id),writes:[
-      {kind:"attribute",target:-1,name:"data-lens",value:lens.id},{kind:"attribute",target:-1,name:"data-view",value:null},
-      // Each lens's own images reach the leaves through these textures (scene/projector.ts binds every leaf to them).
-      ...(paged?paged.keys(lens.id).map((resource,page)=>({kind:"texture",target:index(body),name:`--${ns}-surface-page-${page}`,resource,quoted:true} as PreparedWrite))
-        :[{kind:"texture",target:index(body),name:`--${ns}-surface-image`,resource:`surface:${lens.id}`,quoted:true} as PreparedWrite]),
-      {kind:"texture",target:index(body),name:`--${ns}-poles-image`,resource:`poles:${lens.id}`,quoted:true} as PreparedWrite,
+  for(const dataset of datasets.controls)for(const atmosphere of atmospheres)for(const shadows of [false,true])for(const rings of ringStates){
+    const focus=input.datasetFocus?.[dataset.id];
+    variants.push({...(focus?{navigation:adapters.prepareDatasetNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{datasetId:dataset.id,...(atmosphere===null?{}:{atmosphere}),shadows,...(rings===null?{}:{rings})},required:required(dataset.id),writes:[
+      {kind:"attribute",target:-1,name:"data-dataset",value:dataset.id},{kind:"attribute",target:-1,name:"data-view",value:null},
+      // Each dataset's own images reach the leaves through these textures (scene/projector.ts binds every leaf to them).
+      ...(paged?paged.keys(dataset.id).map((resource,page)=>({kind:"texture",target:index(body),name:`--${ns}-surface-page-${page}`,resource,quoted:true} as PreparedWrite))
+        :[{kind:"texture",target:index(body),name:`--${ns}-surface-image`,resource:`surface:${dataset.id}`,quoted:true} as PreparedWrite]),
+      {kind:"texture",target:index(body),name:`--${ns}-poles-image`,resource:`poles:${dataset.id}`,quoted:true} as PreparedWrite,
       ...(atmosphere===null?[]:[{kind:"class",target:-1,name:`${ns}-hide-atmosphere`,value:!atmosphere} as PreparedWrite]),
       ...(atmospheric?[]:[{kind:"class",target:-1,name:`${ns}-hide-shadows`,value:!shadows} as PreparedWrite]),
       ...(ringNode && rings!==null?[{kind:"style",target:index(ringNode),name:"display",value:rings?"block":"none"} as PreparedWrite]:[]),
@@ -114,7 +114,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
         preparedResourcePool("billboard",entries,{retention:"selection",decoding:"sync"})])],
       // A paged surface starts at its first level, the one the first selection chooses. Lighting rows are not startup
       // assets: shadows start off, which shows the one shadowless frame, and the rows load when shadows are turned on.
-      startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens).map(key=>paged?.textureLevels.levels[0]!.resources[key]??key)])]},
+      startup:[...new Set([...warm.map(entry=>entry.key),...required(datasets.defaultDataset).map(key=>paged?.textureLevels.levels[0]!.resources[key]??key)])]},
     tree,variants,...(atmospheric?{}:{resourceOrder:"materials-first" as const}),materials:[track],
     viewBindings:[{kind:"silhouette-fit",target:index(composite),minimumRadius:POINT_MIN_RADIUS_PX,
       unitScale:2/plan.camera.logicalBodyDiameter},
@@ -126,19 +126,19 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   };
 }
 
-/** Page resources of every lens at every level: `surface:<lens>:<page>` is the full page, and each smaller level maps it
- * to `surface:<lens>:<page>:level:<width>`, the page's `-level-<width>` file (preparation/raster/pages.ts). */
-function pagedSurface(pages: RasterPagePlan | undefined, lenses: PresentationInputs['lenses']) {
+/** Page resources of every dataset at every level: `surface:<dataset>:<page>` is the full page, and each smaller level maps it
+ * to `surface:<dataset>:<page>:level:<width>`, the page's `-level-<width>` file (preparation/raster/pages.ts). */
+function pagedSurface(pages: RasterPagePlan | undefined, datasets: PresentationInputs['datasets']) {
   if (!pages) return null;
   const last = RASTER_LEVEL_FACTORS.length - 1, entries: PreparedResourceEntry[] = [];
   const levels = pages.levelDiameters.map(minimumDiameter => ({ minimumDiameter, resources: {} as Record<string, string> }));
   const keys = (id: string) => Array.from({ length: pages.pageCount }, (_, page) => `surface:${id}:${page}`);
   let largest = 0;
-  for (const lens of lenses.controls) {
-    const url = canonicalPreparedAsset(lens.surfaceUrl, lens.surface2xUrl), cut = url.lastIndexOf('/') + 1, name = url.slice(cut);
+  for (const dataset of datasets.controls) {
+    const url = canonicalPreparedAsset(dataset.surfaceUrl, dataset.surface2xUrl), cut = url.lastIndexOf('/') + 1, name = url.slice(cut);
     const surface = pages.surfaces.find(entry => entry.name === name);
-    if (!surface) throw new TypeError(`Lens ${lens.id} shows ${name}, which is not a paged surface of this body (${pages.surfaces.map(entry => entry.name).join(', ')}).`);
-    for (const [page, key] of keys(lens.id).entries()) RASTER_LEVEL_FACTORS.forEach((factor, level) => {
+    if (!surface) throw new TypeError(`Dataset ${dataset.id} shows ${name}, which is not a paged surface of this body (${pages.surfaces.map(entry => entry.name).join(', ')}).`);
+    for (const [page, key] of keys(dataset.id).entries()) RASTER_LEVEL_FACTORS.forEach((factor, level) => {
       const width = surface.width / factor, resource = level === last ? key : `${key}:level:${width}`;
       entries.push({ key: resource, url: url.slice(0, cut) + rasterPageName(name, page, level === last ? undefined : width),
         pool: 'pages', decodedBytes: width * surface.pageRows / factor * 4 });
@@ -146,7 +146,7 @@ function pagedSurface(pages: RasterPagePlan | undefined, lenses: PresentationInp
     });
     largest = Math.max(largest, surface.width * surface.pageRows * 4 * pages.pageCount);
   }
-  // Two complete lenses at full resolution can coexist during a lens switch, as Earth's pages allow.
+  // Two complete datasets at full resolution can coexist during a dataset switch, as Earth's pages allow.
   return { entries, keys, pageCount: pages.pageCount, maximumDecodedBytes: 2 * largest,
     textureLevels: { hysteresis: RASTER_LEVEL_HYSTERESIS, levels } };
 }

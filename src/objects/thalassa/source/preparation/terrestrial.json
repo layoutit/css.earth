@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "thalassa",
   "displayName": "Thalassa",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka2003 measured ellipsoid dimensions."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

@@ -8,7 +8,7 @@ It is the only planet known around K2-338. Its orbit and size follow de Leon et 
 
 **Orbit.** de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): P 3.850614 d de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): a/R* 15.13; de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): inclination derived from its impact parameter 0.42 with its a/R* 15.13 (Winn 2010, eq. 7) No archive row states an eccentricity; the orbit is taken as circular de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): transit mid-time 2457141.526349 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 18 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-338's measured colour (#ffceb2, the colour lens of k2-338 (src/objects/k2-338/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-338's measured colour (#ffceb2, the colour dataset of k2-338 (src/objects/k2-338/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-338's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (46, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

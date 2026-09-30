@@ -158,7 +158,7 @@ test('raster atlas: each face gets its own rectangle at one texel density, and i
   assert.ok(plans.reduce((sum, { rect }) => sum + rect.width * rect.height, 0) <= 4096 * faces.length, 'the budget holds');
   assert.ok(width <= 16383 && height <= 16383);
   for (const [i, { rect, geometry, matrix: m }] of plans.entries()) {
-    for (const n of [rect.x, rect.y, rect.width, rect.height]) assert.equal(n % 8, 0, 'every lens scale addresses whole pixels');
+    for (const n of [rect.x, rect.y, rect.width, rect.height]) assert.equal(n % 8, 0, 'every dataset scale addresses whole pixels');
     assert.ok(rect.x + rect.width <= width && rect.y + rect.height <= height);
     for (const other of plans.slice(i + 1)) assert.ok(rect.x + rect.width <= other.rect.x || other.rect.x + other.rect.width <= rect.x ||
       rect.y + rect.height <= other.rect.y || other.rect.y + other.rect.height <= rect.y, 'rectangles never overlap');

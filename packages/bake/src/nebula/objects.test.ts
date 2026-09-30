@@ -10,19 +10,19 @@ import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject,
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
-import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 
 // Run from the repository root with Node's test runner and the tsx loader.
 const root = projectRoot(import.meta.url);
 
 test('sanitizeVolumeProvenance replaces the process-pid staging directory with a stable placeholder', () => {
-  const volume = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-59471/compact/hubble-optical/lenses/hubble-optical/volume.json' } } };
+  const volume = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-59471/compact/hubble-optical/datasets/hubble-optical/volume.json' } } };
   const sanitized = sanitizeVolumeProvenance(volume);
   assert.equal(sanitized.provenance.sourceVolume.path,
-    'src/objects/m1/.prepared-compact/compact/hubble-optical/lenses/hubble-optical/volume.json');
+    'src/objects/m1/.prepared-compact/compact/hubble-optical/datasets/hubble-optical/volume.json');
   assert.doesNotMatch(sanitized.provenance.sourceVolume.path, /\.prepared-\d+/);
   // A different process's bake must record the identical, pid-independent path.
-  const otherPid = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-1/compact/hubble-optical/lenses/hubble-optical/volume.json' } } };
+  const otherPid = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-1/compact/hubble-optical/datasets/hubble-optical/volume.json' } } };
   assert.deepEqual(sanitizeVolumeProvenance(otherPid), sanitized);
 });
 
@@ -58,8 +58,8 @@ test('every volume the nebula delivery validates is sanitized, and an explicit b
   assert.match(source, /installed\(directory, /);
 });
 
-test('a prepared m1 lens bank, if baked locally, records no process-pid staging directory', async () => {
-  const path = resolve(root, 'src/objects/m1/prepared/lenses.json');
+test('a prepared m1 dataset bank, if baked locally, records no process-pid staging directory', async () => {
+  const path = resolve(root, 'src/objects/m1/prepared/datasets.json');
   let bytes: string;
   try { bytes = await readFile(path, 'utf8'); }
   catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return; throw error; }
@@ -101,14 +101,14 @@ test('the real installer rejects post-compiler field stars before replacing the 
       retainIds: [], limitingMagnitude: 20, fadeMagnitude: 1, referenceMagnitude: 10, referenceDiameterPx: 1, referenceFocalPixels: 100 },
     stars: [{ sourceId: '1234567890123', raDeg: 0, decDeg: 0, distancePc: 1, distanceLowerPc: .9, distanceUpperPc: 1.1,
       pmRaMasYr: null, pmDecMasYr: null, photGMeanMag: 10, bpRp: 1, parallaxMas: 1000, parallaxErrorMas: 1, ruwe: 1 }] });
-  await save('source/delivery.json', { schema: 'cssearth-nebula-delivery@1', id: 'budget-fixture', method: 'compiler',
+  await save('source/delivery.json', { schema: 'cssearth-nebula-delivery@2', id: 'budget-fixture', method: 'compiler',
     request, inputPins: [], sky: { centerIcrsDegrees: [0, 0], distancePc: 1, imageRotationDegrees: 0, arcsecPerUnit: 1 },
-    sourceUrl: 'https://example.org/fixture', description: 'Synthetic installer regression', defaultLens: 'first',
+    sourceUrl: 'https://example.org/fixture', description: 'Synthetic installer regression', defaultDataset: 'first',
     framingRadiusUnits: 1, acceptedLabResult: 'fixture', attachedTo: 'sun', fieldStars });
-  const scene: CompilerBakeResult = { schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity: 'fixture', frame,
+  const scene: CompilerBakeResult = { schema: 'cssearth-compiler-bake@2', id: 'fixture', fieldIdentity: 'fixture', frame,
     boundsArcsec: { min: [-1, -1, -1], max: [1, 1, 1] }, skyBoundsArcsec: { min: [-1, -1], max: [1, 1] }, spanArcsec: 2, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: [0, 0, 0], earthView: 'observer-at-negative-z-looking-away' },
-    neutral: volumePin, lenses: [{ id: 'first', label: 'First', volume: volumePin,
+    neutral: volumePin, datasets: [{ id: 'first', label: 'First', volume: volumePin,
       coverage: { positiveAlphaTexels: 3, recoloredTexels: 3, outsideImageTexels: 0 } }], stars: [],
     sampling: { imageWidth: 512, samplesPerSlab: 4, sliceCounts: { x: 1, y: 1, z: 1 },
       renderBudget: createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, 0, 3) } };
@@ -117,20 +117,20 @@ test('the real installer rejects post-compiler field stars before replacing the 
     async symmetry() { throw new Error('Compiler installer must not call symmetry.'); },
   };
   await writeFile(resolve(directory, 'object.json'), 'existing-descriptor\n');
-  await writeFile(resolve(directory, 'prepared/lenses.json'), 'existing-bank\n');
+  await writeFile(resolve(directory, 'prepared/datasets.json'), 'existing-bank\n');
   await assert.rejects(prepareNebulaObject(root, directory, false, backend), /star reservation/);
   assert.equal(await readFile(resolve(directory, 'object.json'), 'utf8'), 'existing-descriptor\n');
-  assert.equal(await readFile(resolve(directory, 'prepared/lenses.json'), 'utf8'), 'existing-bank\n');
+  assert.equal(await readFile(resolve(directory, 'prepared/datasets.json'), 'utf8'), 'existing-bank\n');
   // Reserving the actual final field count admits the same prepared geometry and real packaging operations.
   scene.sampling.renderBudget = createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, 1, 3);
   const result = await prepareNebulaObject(root, directory, false, backend);
   assert.equal(result.status, 'prepared');
-  const parsed: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/lenses.json'), 'utf8'));
+  const parsed: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/datasets.json'), 'utf8'));
   assert.ok(parsed && typeof parsed === 'object' && 'data' in parsed);
-  const data = validatePreparedVolumeLenses(parsed.data);
-  assert.equal(data.lenses[0]!.stars.points.length, 1);
-  assert.equal(data.lenses[0]!.volume.impostors?.views.length, 26);
-  assert.ok(data.lenses[0]!.volume.stacks.every(stack => stack.leaves[0]!.texturePath.includes('/atlases/')));
+  const data = validatePreparedVolumeDatasets(parsed.data);
+  assert.equal(data.datasets[0]!.stars.points.length, 1);
+  assert.equal(data.datasets[0]!.volume.impostors?.views.length, 26);
+  assert.ok(data.datasets[0]!.volume.stacks.every(stack => stack.leaves[0]!.texturePath.includes('/atlases/')));
   assert.equal(assertCompilerDeliveryElementBudget(scene.sampling, data)?.totalElements, 56);
   const receipt: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/delivery.json'), 'utf8'));
   assert.ok(receipt && typeof receipt === 'object' && 'renderElements' in receipt);
@@ -143,9 +143,9 @@ test('the real installer rejects post-compiler field stars before replacing the 
 });
 
 test('application preparation dispatches only delivery schemas owned by the nebula pipeline', () => {
-  assert.equal(applicationDeliveryKind('delivery.json', { schema: 'cssearth-nebula-delivery@1' }), 'nebula');
+  assert.equal(applicationDeliveryKind('delivery.json', { schema: 'cssearth-nebula-delivery@2' }), 'nebula');
   assert.equal(applicationDeliveryKind('compact-delivery.json', { schema: 'cssearth-compact-density-delivery@1' }), 'compact-density');
-  assert.equal(applicationDeliveryKind('delivery.json', { schema: 'cssearth-density-volume-lens-bank-source@1' }), null);
+  assert.equal(applicationDeliveryKind('delivery.json', { schema: 'cssearth-density-volume-dataset-bank-source@1' }), null);
   assert.equal(applicationDeliveryKind('delivery.json', {}), null);
   assert.throws(() => applicationDeliveryKind('compact-delivery.json', { schema: 'foreign@1' }), /Unsupported compact density delivery schema/);
 });

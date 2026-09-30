@@ -8,7 +8,7 @@ It is the only planet known around HATS-71. Its orbit and size follow Bakos et a
 
 **Orbit.** Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): P 3.7955195 d Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2020): a/R* 16.84; Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2020): inclination 88.82 degrees Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2020): e 0 Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): transit mid-time 2459111.32287 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hats-71's measured colour (#ffc486, the colour lens of hats-71 (src/objects/hats-71/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hats-71's measured colour (#ffc486, the colour dataset of hats-71 (src/objects/hats-71/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HATS-71's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (96, 103, 104), folded onto its orbit. Upper limits and rows without an error are left out.
 

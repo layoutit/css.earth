@@ -8,7 +8,7 @@ It is the only planet known around TOI-2969. Its orbit and size follow Frensch e
 
 **Orbit.** Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): P 1.8237146 d Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): a/R* derived from its semi-major axis 0.0261 au and stellar radius 0.7 solar radii; Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): inclination 84.9 degrees Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): e 0 Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): transit mid-time 2459303.30015 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2969's measured colour (#ffcfb0, the colour lens of toi-2969 (src/objects/toi-2969/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2969's measured colour (#ffcfb0, the colour dataset of toi-2969 (src/objects/toi-2969/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2969's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (89, 90, 99), folded onto its orbit. Upper limits and rows without an error are left out.
 

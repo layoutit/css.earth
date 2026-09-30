@@ -8,7 +8,7 @@ It is the only planet known around K2-152. Its orbit and size follow Livingston 
 
 **Orbit.** Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): P 32.6527 d Livingston et al. 2018 (2018AJ....156...78L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2018): a/R* 58.8; Livingston et al. 2018 (2018AJ....156...78L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2018): inclination derived from its impact parameter 0.25 with its a/R* 58.8 (Winn 2010, eq. 7) No archive row states an eccentricity; the orbit is taken as circular Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): transit mid-time 2457575.96234 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 534 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-152's measured colour (#ffbe8e, the colour lens of k2-152 (src/objects/k2-152/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-152's measured colour (#ffbe8e, the colour dataset of k2-152 (src/objects/k2-152/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-152's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (46, 91), folded onto its orbit. Upper limits and rows without an error are left out.
 

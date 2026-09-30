@@ -74,7 +74,7 @@ this color repair does not promote its unresolved registration cases:
   Each band set names its red, green and blue photographs, and native labels
   must agree with the selected filters and calibrated reflectance units. A point
   is colored only where all three bands qualify, and it keeps the one band set
-  the lens selects. Level matching scales the three bands by one gain, so their
+  the dataset selects. Level matching scales the three bands by one gain, so their
   measured ratios stay. The bands remain floating through the shared footprint,
   photometry and surface transfer; the same encoder finishes them.
 - `terrestrial-observed-color`: Europa's Galileo I/F bands and the Voyager
@@ -90,7 +90,7 @@ this color repair does not promote its unresolved registration cases:
   ratios where their corrected footprints overlap, solved by weighted least
   squares over every overlapping pair on a coarse grid, and records the pairs
   and gains in the photometry report; the brightness match to the base is
-  then one pooled gain for the lens, clamped so 99.9 % of texels encode
+  then one pooled gain for the dataset, clamped so 99.9 % of texels encode
   without clipping, instead of one gain per observation. The reference is chosen from evidence
   recorded in the body README, never by preference for a look. `bandRatios` ties the
   composed footprint's whole-disc band ratios to a published whole-disc colour
@@ -137,7 +137,7 @@ eight times the 3.6 and 4.5 µm values. With one common range, the image is red
 everywhere and shows no structure in the shorter bands. Each sky band is
 therefore divided by its own range: from its background percentile to its peak
 percentile. This is the usual practice for survey false color. It is still a
-visualization, and the lens description must say that hue shows each band's
+visualization, and the dataset description must say that hue shows each band's
 relative brightness, not physical band ratios.
 
 Dividing by the band's own range cancels its calibration factor, so the MJy/sr
@@ -173,7 +173,7 @@ Two routes extend this. Two bands display as red and blue, with their mean as gr
 JWST bands come either from MAST's level-3 mosaics or from the pipeline's level-3 stage re-run onto the recipe grid; both are
 already MJy/sr, so the route applies no factor. [JWST imaging](jwst-imaging.md) describes both routes, the reproduction check
 against MAST and what they cost. A recipe may set `pointSources: "mask"` to report stars found on each band as no coverage
-([point-sources.ts](../packages/bake/src/objects/layers/observation/point-sources.ts)), which a lens that places the image in depth needs.
+([point-sources.ts](../packages/bake/src/objects/layers/observation/point-sources.ts)), which a dataset that places the image in depth needs.
 
 ## Star photospheres
 
@@ -191,18 +191,18 @@ Library, Gaia DR3 XP (from the ARI Heidelberg mirror when ESA's DataLink is down
 part 2. With none, the colour is a Planck spectrum at the cited temperature.
 
 A planet nobody has imaged takes its colour from what is measured
-([new-object/planet-lenses.mts](../packages/telescope-cli/src/new-object/planet-lenses.mts)). Where the NASA Exoplanet Archive's
+([new-object/planet-datasets.mts](../packages/telescope-cli/src/new-object/planet-datasets.mts)). Where the NASA Exoplanet Archive's
 emission-spectroscopy table holds a measured dayside brightness temperature from a secondary eclipse, the planet gets the
-"Thermal glow" lens: a black body at that temperature over the disc, lit by the sphere lighting so the day side faces its
+"Thermal glow" dataset: a black body at that temperature over the disc, lit by the sphere lighting so the day side faces its
 star, with reflected starlight left out because nothing measured says how much there is. The row is chosen by rule, the
 smallest relative uncertainty and the longest wavelength on a tie, every row is kept in the package, and the choice is
 stated in the record. Below about 1,800 K a black body lies outside sRGB and is shown mixed with the least white that brings
-it inside, hue kept, which the lens says. A planet with nothing measured keeps the neutral gray, lit by its host's measured
-colour instead of a white lamp: the gray's brightness with the host colour lens's chromaticity (`hostLitGray` in
+it inside, hue kept, which the dataset says. A planet with nothing measured keeps the neutral gray, lit by its host's measured
+colour instead of a white lamp: the gray's brightness with the host colour dataset's chromaticity (`hostLitGray` in
 [color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>...`
 and `--host-light <id>...` (that entry only) give them to planets already in the tree.
 
-![Lens thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
+![Dataset thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
 
 ![Before and after on the page: TRAPPIST-1 e, Kepler-186 f and HD 219134 b under their stars' light, HD 209458 b at its measured dayside heat; the flat gray discs on main had no stylesheet sizing their lighting frame](images/planet-colour-before-after.png)
 
@@ -212,7 +212,7 @@ spectrum keeps the star field's temperature fit at a cited effective temperature
 ([star-catalogue-color.ts](../packages/bake/src/objects/color/star-catalogue-color.ts)).
 
 **Cross-checks.** A colour record may name a second spectrum from a different instrument. Preparation records its colour
-beside the lens colour, and [object-package-consistency.test.mts](../src/objects/object-package-consistency.test.mts) fails when
+beside the dataset colour, and [object-package-consistency.test.mts](../src/objects/object-package-consistency.test.mts) fails when
 the two differ by more than 12 levels in any channel unless the record states the disagreement.
 
 **Limb darkening**, in this order of preference:
@@ -221,7 +221,7 @@ the two differ by more than 12 levels in any channel unless the record states th
 2. The Claret & Bloemen (2011) V-band model grid (ATLAS, 3,500 K and hotter) at the star's cited temperature and gravity,
    labelled as a model. Cooler stars and brown dwarfs use the Claret (2017) PHOENIX grid instead (down to 2,300 K). Both
    are read bilinearly between the four surrounding grid nodes.
-3. None, when the star lies outside both grids or falls in a hole in them. The value is not extrapolated, and the lens
+3. None, when the star lies outside both grids or falls in a hole in them. The value is not extrapolated, and the dataset
    says why it stays flat.
 
 ![Stars drawn with a limb law from a model grid or, for Luhman 16 B, a fit of its own light](images/star-limbs.png)
@@ -233,7 +233,7 @@ fit (ω, β, the polar temperature, the radii and the pole's orientation), [grav
 rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's
 equatorial radius and temperature to come back within their errors. The measured flattening is drawn as an ellipsoid.
 
-![The placed stars' colour lenses, each from a measured spectrum](images/star-colours.png)
+![The placed stars' colour datasets, each from a measured spectrum](images/star-colours.png)
 
 **Pulsation.** A Cepheid's brightness follows Gaia DR3's published harmonic model through each period; [light-curve.ts](../packages/bake/src/photometry/light-curve.ts)
 reads it as published and checks it against the same row's amplitude and epoch of maximum.

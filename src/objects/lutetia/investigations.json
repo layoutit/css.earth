@@ -53,7 +53,7 @@
       "id": "recorded-survey-6",
       "subject": "ESA geological history map",
       "status": "excluded",
-      "finding": "[ESA geological history map](https://www.esa.int/ESA_Multimedia/Images/2013/07/The_history_of_different_regions_on_Lutetia_s_surface) — Published regional geologic interpretation based on Massironi/Thomas et al. — Excluded as a global lens: perspective illustration with colored regions and no verified registered global raster or vector release. Regions are not painted onto the model.",
+      "finding": "[ESA geological history map](https://www.esa.int/ESA_Multimedia/Images/2013/07/The_history_of_different_regions_on_Lutetia_s_surface) — Published regional geologic interpretation based on Massironi/Thomas et al. — Excluded as a global dataset: perspective illustration with colored regions and no verified registered global raster or vector release. Regions are not painted onto the model.",
       "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lutetia/README.md"

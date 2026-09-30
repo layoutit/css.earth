@@ -11,7 +11,7 @@
       "id": "jwst-miri-15um-dayside",
       "subject": "Temperature at 15 um from the same ten JWST MIRI visits",
       "status": "included",
-      "finding": "The lens, as a labelled model. c's dayside is measured and its day-night pattern is not: its eclipse depth in the joint fit is 318 to 389 ppm (Bell's shape, a symmetric sinusoid, a free one), a 15 um brightness temperature of 353 to 379 K; its four eclipse visits alone give 331 to 463 ppm. The phase curve does not constrain c (freed, the sinusoid runs to its bound; held symmetric, its amplitude fits to zero), so no map is fitted. The lens draws a bare rock (T cos(z)^(1/4), nothing at night; Cowan & Agol 2011, eq. 3), the model b's light curve supports, set to show the middle of the depth range: 407 K under the star, 392 to 421 K across it, below the 480 K of a black rock. A dark night is the model's assumption. A phase curve that constrains c's day-night contrast, or a published map of c, would replace the model with a fit.",
+      "finding": "The dataset, as a labelled model. c's dayside is measured and its day-night pattern is not: its eclipse depth in the joint fit is 318 to 389 ppm (Bell's shape, a symmetric sinusoid, a free one), a 15 um brightness temperature of 353 to 379 K; its four eclipse visits alone give 331 to 463 ppm. The phase curve does not constrain c (freed, the sinusoid runs to its bound; held symmetric, its amplitude fits to zero), so no map is fitted. The dataset draws a bare rock (T cos(z)^(1/4), nothing at night; Cowan & Agol 2011, eq. 3), the model b's light curve supports, set to show the middle of the depth range: 407 K under the star, 392 to 421 K across it, below the 480 K of a black rock. A dark night is the model's assumption. A phase curve that constrains c's day-night contrast, or a published map of c, would replace the model with a fit.",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304",
         "https://zenodo.org/records/17710453"
@@ -19,9 +19,9 @@
     },
     {
       "id": "nasa-eyes-illustration",
-      "subject": "NASA Eyes on Exoplanets artist's concept map as an illustration lens",
+      "subject": "NASA Eyes on Exoplanets artist's concept map as an illustration dataset",
       "status": "included",
-      "finding": "Shown as the non-default Illustration lens, never as imagery: the map NASA's Eyes on Exoplanets app lists for TRAPPIST-1c (TRAPPIST-1_c.jpg), resized unchanged onto the sphere with its left edge at 0° longitude, so its longitudes are arbitrary. No image resolves this planet; nothing in the map was observed. NASA credits the app NASA/JPL-Caltech and calls each planet's look an artist's concept; the file itself carries no credit or date.",
+      "finding": "Shown as the non-default Illustration dataset, never as imagery: the map NASA's Eyes on Exoplanets app lists for TRAPPIST-1c (TRAPPIST-1_c.jpg), resized unchanged onto the sphere with its left edge at 0° longitude, so its longitudes are arbitrary. No image resolves this planet; nothing in the map was observed. NASA credits the app NASA/JPL-Caltech and calls each planet's look an artist's concept; the file itself carries no credit or date.",
       "evidence": [
         "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_c.jpg",
         "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"

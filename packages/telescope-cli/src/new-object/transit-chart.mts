@@ -6,7 +6,7 @@
  * whole transit, or a dip TESS does not resolve gets no chart, and the report says which. */
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
-import type { PackageFiles } from './lens.mts';
+import type { PackageFiles } from './dataset.mts';
 import { NASA_TAP } from './orbit.mts';
 
 /** At most this many sectors, newest first: enough transits to stack for a short-period planet, a few MB per planet. */

@@ -2,6 +2,7 @@ import { prepareTextureBindings } from './prepared-texture-bindings.ts';
 import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.ts';
 import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../raster/index.ts';
 import { isRecord } from '@cssearth/core';
+import { objectPageCss } from '@cssearth/objects';
 import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.ts';
@@ -49,7 +50,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
   const ratios = shape?.kind === 'ellipsoid' && typeof shape.radiusKm === 'number'
     ? [1, typeof shape.secondaryRadiusKm === 'number' ? shape.secondaryRadiusKm / shape.radiusKm : 1,
       typeof shape.polarRadiusKm === 'number' ? shape.polarRadiusKm / shape.radiusKm : 1] : [1, 1, 1];
-  const styles = await Promise.all(pageStyles(descriptor).map(path => readFile(resolve(root, path), 'utf8')));
+  const styles = await Promise.all(pageStyles(descriptor).map(async path => objectPageCss(await readFile(resolve(root, path), 'utf8'), definition.id)));
   const browser = suppliedBrowser ?? await chromium.launch({ headless: true });
   const page = await browser.newPage();
   try {

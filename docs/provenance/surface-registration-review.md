@@ -3,7 +3,7 @@
 **Review date:** 2026-09-11
 **Purpose:** one faithfulness PR covering every registered object without changing the renderer, retained-DOM contract, geometry topology, shell, or navigation.
 
-This is a catalog review, not a claim that every body has a photograph. The audit starts at every package and then separates source maps, source-camera observations, scientific fields, inferred/model surfaces, and packages with no surface input. A surface is eligible for a photographic lens only when the producer supplied a body-fixed map or a measured camera/body-shape relationship. A limb or terminator fit, a generic sphere, a visual match, or an approximate attitude is pointing evidence; it is not image-to-shape registration.
+This is a catalog review, not a claim that every body has a photograph. The audit starts at every package and then separates source maps, source-camera observations, scientific fields, inferred/model surfaces, and packages with no surface input. A surface is eligible for a photographic dataset only when the producer supplied a body-fixed map or a measured camera/body-shape relationship. A limb or terminator fit, a generic sphere, a visual match, or an approximate attitude is pointing evidence; it is not image-to-shape registration.
 
 ## Inventory
 
@@ -26,7 +26,7 @@ of the package's inputs.
 
 ## Disposition matrix
 
-### Controlled source registration — keep the existing lens
+### Controlled source registration — keep the existing dataset
 
 These packages have a source-controlled body map, a released camera/body-frame relationship, or both. Coverage limits, source shadows, photometric limits, and inferred unseen terrain remain part of each body README; they do not justify inventing pixels for the missing area.
 
@@ -36,7 +36,7 @@ The controlled-camera subset is `atlas calypso daphnis donaldjohanson epimetheus
 
 ### Source material kept, shape transfer or absolute registration still pending
 
-These bodies have useful source maps or fields and must remain visible, but their current shape/map histories do not yet prove the strict transfer needed for a fully faithful photographic lens. Keep the maps and their gaps; repair the transfer in a later focused record rather than deleting the body or replacing it with an unmarked projection.
+These bodies have useful source maps or fields and must remain visible, but their current shape/map histories do not yet prove the strict transfer needed for a fully faithful photographic dataset. Keep the maps and their gaps; repair the transfer in a later focused record rather than deleting the body or replacing it with an unmarked projection.
 
 | Object | Current boundary |
 | --- | --- |
@@ -49,14 +49,14 @@ These bodies have useful source maps or fields and must remain visible, but thei
 | Rhea | Photographic maps are retained, but absolute VIMS registration and shape transfer remain unresolved. |
 | Tethys | Source maps are retained; no resolved Odysseus-centre or absolute VIMS registration is claimed. |
 
-### Insufficient image-to-shape control — defer only the photographic lens
+### Insufficient image-to-shape control — defer only the photographic dataset
 
-The body, measured or inferred shape, and any honest model/elevation lens stay in the catalog. The photographic observation is not promoted until an independently controlled surface correspondence exists.
+The body, measured or inferred shape, and any honest model/elevation dataset stay in the catalog. The photographic observation is not promoted until an independently controlled surface correspondence exists.
 
-| Object/lens | Evidence and action |
+| Object/dataset | Evidence and action |
 | --- | --- |
 | Amalthea | Existing camera fit is explicitly approximate and not a new photogrammetric solution; keep it as coarse/pointing evidence. |
-| 1P/Halley · Giotto | Four-percent projected footprint and held-out silhouette check constrain an approximate encounter projection, not feature registration to the later shape; defer the photographic Giotto lens and retain the historical/model lens with the approximation labeled. |
+| 1P/Halley · Giotto | Four-percent projected footprint and held-out silhouette check constrain an approximate encounter projection, not feature registration to the later shape; defer the photographic Giotto dataset and retain the historical/model dataset with the approximation labeled. |
 | Larissa | Limb-only camera fit is not modern photogrammetric control; do not call its texture registered. |
 | Methone | Ellipsoid limb/terminator fit has no independent surface landmark control. |
 | Metis | Coarse ellipsoid limits registration; no surface landmarks establish the camera transform. |
@@ -152,7 +152,7 @@ The following 400 packages are shape, elevation, constraint, or inferred-body sc
 
 ## README-only stubs
 
-`cupid`, `hippocamp`, `mab`, and `perdita` have no `object.json` scene. Their READMEs correctly describe unresolved detections or photometric size estimates and do not promise a shape, map, or photographic lens. They remain deferred until a source-backed shape and a supported scene package exist.
+`cupid`, `hippocamp`, `mab`, and `perdita` have no `object.json` scene. Their READMEs correctly describe unresolved detections or photometric size estimates and do not promise a shape, map, or photographic dataset. They remain deferred until a source-backed shape and a supported scene package exist.
 
 ## PR acceptance
 
@@ -162,7 +162,7 @@ This review is complete when the faithfulness PR:
 2. preserves all 473 registered packages and the four explicit stubs;
 3. leaves controlled maps/cameras in place with their source gaps visible;
 4. records pending transfer work instead of silently draping a map onto a different shape;
-5. defers only the eleven unsupported photographic lenses above, while retaining each body's honest model/elevation view; and
+5. defers only the eleven unsupported photographic datasets above, while retaining each body's honest model/elevation view; and
 6. keeps scientific and fitted products labeled by what they measure.
 
 The reusable rule is maintained in [the celestial skill](../../.agents/skills/celestial-skill/SKILL.md) and the detailed camera checks are in [registered-photographic-mosaics.md](../../.agents/skills/celestial-skill/references/registered-photographic-mosaics.md).

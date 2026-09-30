@@ -9,7 +9,6 @@
       "finding": "The diagnostic trial reduces accepted photographed area from 32.58% to 24.48%; only 11 of 28 common-point overlap pairs improve. Retain the Deep Impact photographs. The original H-function approximation and final fitting phase range remain unverified; the tabulated 550 nm model is applied to a clear filter.",
       "revisitWhen": "A verified formulation and matching filter calibration improve both retained terrain coverage and independent overlaps.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/evidence/photometry/trial.json",
         "https://arxiv.org/abs/1310.4165",
         "https://doi.org/10.1016/j.icarus.2012.02.011",
         "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"
@@ -22,7 +21,6 @@
       "finding": "The diagnostic trial reduces accepted photographed area from 56.43% to 34.28%; only 4 of 15 common-point overlap pairs improve. Retain the NExT photographs. The original H-function approximation and final fitting phase range remain unverified; the tabulated 550 nm model is applied to a clear filter.",
       "revisitWhen": "A verified formulation and matching filter calibration improve both retained terrain coverage and independent overlaps.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/evidence/photometry/trial.json",
         "https://arxiv.org/abs/1310.4165",
         "https://doi.org/10.1016/j.icarus.2012.02.011",
         "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"
@@ -104,8 +102,7 @@
       "finding": "Frames 9000632, 9000639, 9000644, 9000654, 9000673, 9000675, 9000680 and 9000688 form the existing 2005 mosaic. The three cropped close-ups use relative terrain-overlap registration; they improve detail inside an existing footprint and do not establish metre-accurate absolute terrain.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/source/reference/encounter-photography.md",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/source/preparation/closeups.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/evidence/closeups/README.md"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/source/preparation/closeups.json"
       ]
     },
     {
@@ -213,7 +210,6 @@
       "finding": "During this work, preparation of 9000675 fails the source-scale registration budget with both the unchanged main matcher and the unit-corrected matcher. Their regenerated control records are identical before the gate. Existing shipped photographs remain unchanged; earlier recorded reproduction passes do not establish a current pass.",
       "revisitWhen": "The replay discrepancy is traced to its source, camera or software input and both partitions meet the existing budget.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/evidence/registration/closeup-replay.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/source/preparation/closeups.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-9p/source/reference/encounter-photography.md"
       ]

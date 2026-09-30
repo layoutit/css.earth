@@ -6,13 +6,13 @@ import { objectCycleStates } from '../runtime/object-contract.js';
 
 export function requireControls(value: unknown): asserts value is ObjectControls {
   const controls = record(value, 'controls');
-  if (controls.lenses !== null) {
-    const lenses = record(controls.lenses, 'lenses');
-    const ids = array(lenses.controls, 'lens controls').map(input => {
-      const lens = record(input, 'lens'); text(lens.label, 'lens label'); return text(lens.id, 'lens id');
+  if (controls.datasets !== null) {
+    const datasets = record(controls.datasets, 'datasets');
+    const ids = array(datasets.controls, 'dataset controls').map(input => {
+      const dataset = record(input, 'dataset'); text(dataset.label, 'dataset label'); return text(dataset.id, 'dataset id');
     });
-    unique(ids, 'lenses');
-    if (!ids.includes(text(lenses.defaultLens, 'default lens'))) fail('default lens must be declared');
+    unique(ids, 'datasets');
+    if (!ids.includes(text(datasets.defaultDataset, 'default dataset'))) fail('default dataset must be declared');
   }
   if (controls.settings !== null) {
     const settings = record(controls.settings, 'settings'), names: string[] = [];

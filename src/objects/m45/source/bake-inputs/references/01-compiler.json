@@ -13,7 +13,7 @@
     "depth": 1
   },
   "maximumStars": 450,
-  "interpretation": "Authored warped finite display-emission surface inspired by localized scattering/absorption topology. Multiple overlapping dust layers, grain scattering, illumination, extinction and true stellar distances are unsupported. No physical diagnostic or calibrated luminosity is fitted; all four lenses share geometry/alpha/stars.",
+  "interpretation": "Authored warped finite display-emission surface inspired by localized scattering/absorption topology. Multiple overlapping dust layers, grain scattering, illumination, extinction and true stellar distances are unsupported. No physical diagnostic or calibrated luminosity is fitted; all four datasets share geometry/alpha/stars.",
   "depthRecipe": "labs/nebula/models/m45/depth-model.json",
   "observedStars": {
     "path": "labs/nebula/models/m45/stellar-catalogue.json"

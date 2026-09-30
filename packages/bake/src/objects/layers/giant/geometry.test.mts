@@ -80,9 +80,9 @@ test('surface faces take the raster scale that shows their widest image at two t
 });
 
 test('a leaf image the preparation did not publish is refused by name', () => {
-  const observations = { schema: 'cssearth-observed-polar-surfaces@1' as const, lenses: [
-    { files: { surface: 'surface.webp', surface2x: 'surface@2x.webp' } }, { files: { surface: 'lens.webp', surface2x: 'lens@2x.webp' } }] };
-  const assets = [{ filename: 'surface.webp', width: 2080 }, { filename: 'surface@2x.webp', width: 4160 }, { filename: 'lens.webp', width: 2080 }, { filename: 'lens@2x.webp', width: 4160 }, { filename: 'rings@2x.webp', width: 2048 }];
+  const observations = { schema: 'cssearth-observed-polar-surfaces@2' as const, datasets: [
+    { files: { surface: 'surface.webp', surface2x: 'surface@2x.webp' } }, { files: { surface: 'dataset.webp', surface2x: 'dataset@2x.webp' } }] };
+  const assets = [{ filename: 'surface.webp', width: 2080 }, { filename: 'surface@2x.webp', width: 4160 }, { filename: 'dataset.webp', width: 2080 }, { filename: 'dataset@2x.webp', width: 4160 }, { filename: 'rings@2x.webp', width: 2048 }];
   const published = publishedLeafImages('hypothetical', observations, assets);
   assert.equal(published.surface, 4160);
   assert.equal(published.image(ringUrl), 2048);

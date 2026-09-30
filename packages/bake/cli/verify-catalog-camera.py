@@ -36,7 +36,7 @@ for rectangle in profile['checkRectangles']:
  checks.append(dict(rectangle=rectangle,offsetPixels=offset,correlation=correlation,residualPixels=residual))
 maximum=max(c['residualPixels'] for c in checks);rms=float(np.sqrt(np.mean([c['residualPixels']**2 for c in checks])))
 paths=[frame['path'],frame['labelPath'],frame['quality']['rawPath'],frame['quality']['rawLabelPath'],frame['quality']['badDataPath'],frame['quality']['badDataLabelPath'],frame['cameraCatalog']['path'],frame['cameraCatalog']['labelPath'],frame['cameraCatalog']['instrumentPath'],config['geometry']['radialTerrain']['path'],'preparation/terrestrial.json',a.profile]
-manifest=json.loads((a.source/'manifest.json').read_text());paths.append(next(i['path'] for i in manifest['inputs'] if i.get('lensId')=='normal'))
+manifest=json.loads((a.source/'manifest.json').read_text());paths.append(next(i['path'] for i in manifest['inputs'] if i.get('datasetId')=='normal'))
 report=dict(method='Archived Thomas camera, no local fitting; DoG and bounded zero-mean normalized cross-correlation against the published Thomas mosaic.',interpretation='Checks of the archived image-to-shape registration; the mosaic shares these Galileo observations and is not independent absolute ground truth.',fitCount=0,checkCount=len(checks),rmsResidualPixels=rms,maximumResidualPixels=maximum,limits=profile,checks=checks,provenance=[dict(path=str(path)) for path in paths])
 (a.output/'registration.json').write_text(json.dumps(report,indent=2)+'\n')
 canvas=Image.new('RGB',(1600,800));canvas.paste(Image.fromarray((np.clip(np.nan_to_num(original,nan=0)/.12,0,1)*255).astype('uint8')),(0,0));canvas.paste(Image.fromarray(np.clip(r,0,255).astype('uint8')),(800,0));draw=ImageDraw.Draw(canvas)

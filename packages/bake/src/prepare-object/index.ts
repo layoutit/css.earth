@@ -48,9 +48,9 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async ids =>
     (await Promise.all(ids.map(id => exists(resolve('packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('packages/bake/cli/prepare-solar-geometry.mts')] : [] },
-  { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
+  { name: 'prepare', purpose: 'prepare datasets, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
     [node('site/build/prepare/prepare-authored.ts', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
-  { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
+  { name: 'discovery', purpose: 'recompute discovery now that prepared datasets exist', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
   { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('site/build/prepare/author-source-records.mts', id!)] },
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-object-json.mts', ...ids)] },
   { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-text.mts', ...ids)] },

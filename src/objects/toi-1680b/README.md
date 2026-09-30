@@ -8,7 +8,7 @@ It is the only planet known around TOI-1680. Its orbit and size follow Ghachoui 
 
 **Orbit.** Ghachoui et al. 2023 (2023A&A...677A..31G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL_2023): P 4.8026345 d Ghachoui et al. 2023 (2023A&A...677A..31G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL_2023): a/R* 32.04; Ghachoui et al. 2023 (2023A&A...677A..31G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL_2023): inclination 89.58 degrees No archive row states an eccentricity; the orbit is taken as circular Ghachoui et al. 2023 (2023A&A...677A..31G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL_2023): transit mid-time 2459013.84254 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1680's measured colour (#ffc879, the colour lens of toi-1680 (src/objects/toi-1680/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1680's measured colour (#ffc879, the colour dataset of toi-1680 (src/objects/toi-1680/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1680's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

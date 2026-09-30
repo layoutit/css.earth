@@ -14,7 +14,7 @@ if (invoked) {
   const [objectId, flag] = process.argv.slice(2);
   if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node packages/bake/cli/report-registration.mts <object-id> [--write]'); process.exit(2); }
   const directory = resolve(import.meta.dirname, '../../../src/objects', objectId), block = await registrationBlockFor(directory);
-  if (block === null) { console.log(`${objectId}: no lens carries a registration stage.`); process.exit(0); }
+  if (block === null) { console.log(`${objectId}: no dataset carries a registration stage.`); process.exit(0); }
   console.log(block);
   if (flag === '--write') {
     const path = resolve(directory, 'README.md'), { readme, replaced } = withRegistrationBlock(await readFile(path, 'utf8'), block);

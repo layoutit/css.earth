@@ -8,7 +8,7 @@ It is the only planet known around TOI-4559. Its orbit and size follow Mistry et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.96490526655 d Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): a/R* 19.71; Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): inclination 88.64 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458597.872164 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-4559's measured colour (#ffc88e, the colour lens of toi-4559 (src/objects/toi-4559/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-4559's measured colour (#ffc88e, the colour dataset of toi-4559 (src/objects/toi-4559/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-4559's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (38, 64, 102), folded onto its orbit. Upper limits and rows without an error are left out.
 

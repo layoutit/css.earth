@@ -3,8 +3,8 @@
   "objectId": "m1",
   "entries": [
     {
-      "id": "lens-hubble-optical",
-      "subject": "hubble-optical shipped image lens",
+      "id": "dataset-hubble-optical",
+      "subject": "hubble-optical shipped image dataset",
       "status": "included",
       "finding": "Default WFPC2 optical-line display, 3864² pixels and 6.41 arcmin square; the 1999–2002 mosaic supplies registered color, not calibrated gas density. Native NOX accounting is a processing check.",
       "evidence": [
@@ -14,8 +14,8 @@
       ]
     },
     {
-      "id": "lens-webb-infrared",
-      "subject": "webb-infrared shipped image lens",
+      "id": "dataset-webb-infrared",
+      "subject": "webb-infrared shipped image dataset",
       "status": "included",
       "finding": "NIRCam/MIRI display from 2022–2023; 52 direct stellar identities and 18 held-out checks give 0.135 arcsec relative RMS. Unequal PSFs and mixed bands prevent treating RGB as a calibrated spectral cube.",
       "evidence": [
@@ -25,8 +25,8 @@
       ]
     },
     {
-      "id": "lens-webb-components",
-      "subject": "webb-components shipped image lens",
+      "id": "dataset-webb-components",
+      "subject": "webb-components shipped image dataset",
       "status": "included",
       "finding": "Derived synchrotron/sulfur/dust display shares the Webb exposures. Seventy inspected stellar identities support an explicit +2.67 percent scale correction; 24 held-out checks give 0.152 arcsec RMS. The corrected field is approximately 5.47 by 4.75 arcmin; compact component emission is preserved.",
       "evidence": [
@@ -36,8 +36,8 @@
       ]
     },
     {
-      "id": "lens-spitzer-infrared",
-      "subject": "spitzer-infrared shipped image lens",
+      "id": "dataset-spitzer-infrared",
+      "subject": "spitzer-infrared shipped image dataset",
       "status": "included",
       "finding": "MIPS 24 micrometre attribution is from the linked CXC companion metadata. The 5290² outreach raster inherits the 2017 Hubble bridge grid with no independent stellar matches; exposure date and final PSF are unspecified, native compact emission is preserved.",
       "evidence": [
@@ -47,8 +47,8 @@
       ]
     },
     {
-      "id": "lens-vla-radio",
-      "subject": "vla-radio shipped image lens",
+      "id": "dataset-vla-radio",
+      "subject": "vla-radio shipped image dataset",
       "status": "included",
       "finding": "Approximately 3 GHz VLA display; the parent map combines 2012 observations and an older large-scale template. Its 5290² publisher grid inherits the Hubble bridge. Radio knots are not optical field stars and no calibrated flux is recovered.",
       "evidence": [
@@ -58,8 +58,8 @@
       ]
     },
     {
-      "id": "lens-chandra-xray",
-      "subject": "chandra-xray shipped image lens",
+      "id": "dataset-chandra-xray",
+      "subject": "chandra-xray shipped image dataset",
       "status": "included",
       "finding": "ACIS false-color display on the same publisher grid; the companion release spans 2000–2013 but exact stack and passband are unspecified. Torus/jet emission is preserved and separately weighted on the conditional wind model; no independent X-ray field-star registration.",
       "evidence": [
@@ -72,7 +72,7 @@
       "id": "gaia-surroundings",
       "subject": "Gaia DR3 astrometry/photometry and Bailer-Jones EDR3 geometric distances",
       "status": "included",
-      "finding": "280 Gaia sources in an authored 50 pc sphere, G < 16; one explicitly retained Crab pulsar gives 281 points. The pulsar keeps its separate conditional depth and lens-dependent appearance. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
+      "finding": "280 Gaia sources in an authored 50 pc sphere, G < 16; one explicitly retained Crab pulsar gives 281 points. The pulsar keeps its separate conditional depth and dataset-dependent appearance. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m1/source/stellar-field.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m1/source/delivery.json",
@@ -97,7 +97,7 @@
       "id": "hubble-2017-bridge",
       "subject": "Auxiliary 2017 optical registration bridge",
       "status": "included",
-      "finding": "129 inspected bridge stars with 43 held-out checks give 0.146 arcsec relative RMS. Its common publisher grid transfers to Spitzer, VLA and Chandra; this is an auxiliary input, not a seventh lens or independent registration in those bands.",
+      "finding": "129 inspected bridge stars with 43 held-out checks give 0.146 arcsec relative RMS. Its common publisher grid transfers to Spitzer, VLA and Chandra; this is an auxiliary input, not a seventh dataset or independent registration in those bands.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/observations.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/source-dossier.json"

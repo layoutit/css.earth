@@ -94,7 +94,7 @@ intended component when a descriptor contains several. Use `--verbose` to displa
 implementation owner.
 With `--json` or redirected input/output, inspection never prompts or starts an operation. The same
 inspection is returned as structured data with `--json`. Supported inputs are telescope delivery
-JSON, telescope product records, and prepared point-field, density-volume or volume-lens-bank `object.json` packages.
+JSON, telescope product records, and prepared point-field, density-volume or volume-dataset-bank `object.json` packages.
 A raw FITS or PDS file alone has no admitted provenance or qualification and is refused with that
 boundary explained.
 
@@ -128,7 +128,7 @@ The installed command and the checkout it runs remain separate versioned compone
 | Qualified native delivery | image, spectrum, band image, aperture spectrum or feature map when `outputs` offers it | Explicit selectors reported by `outputs` |
 | Exported 2D measurement | projected body map | Pinned navigation geometry |
 | Projected body map | standalone interactive sphere | Complete embeddable standard body package |
-| Existing prepared point field, density volume or volume lens bank | portable renderer handoff | None |
+| Existing prepared point field, density volume or volume dataset bank | portable renderer handoff | None |
 
 These are supported transitions, not claims that every archive product supports every row.
 Discovery covers the configured archive routes and bounded service profiles; an empty name
@@ -162,7 +162,7 @@ For a constrained scientific question, save a `query` with explicit kind, time a
 
 `export --output body-map` projects a verified 2D image with explicit navigation, but its generated observation has no ledger mode or program and its resolution is sampling-only. It is not directly a scientifically published layer: [`body-map-publication.mts`](src/body-map-publication.mts) checks an author-produced map, its selected observation identity, measurement definition and evidence separately. `export --output sphere` packages the projected map with an existing standard sphere as **standalone HTML**, not a dataset in the normal site scene.
 
-To add a site lens, use that body's [source manifest and package guide](../../src/objects/README.md) and its existing [surface preparation owner](../../docs/surface-preparation.md). Record the selected source, interpretation, coverage and limits; prepare and inspect the body-owned assets and controls. [Ceres's clay-band recipe](../../src/objects/ceres/source/preparation/raster.json) is an example of an existing source-backed site lens, independent of the CLI sphere export. There is no general telescope command that promotes an arbitrary delivery into every body's renderer.
+To add a site dataset, use that body's [source manifest and package guide](../../src/objects/README.md) and its existing [surface preparation owner](../../docs/surface-preparation.md). Record the selected source, interpretation, coverage and limits; prepare and inspect the body-owned assets and controls. [Ceres's clay-band recipe](../../src/objects/ceres/source/preparation/raster.json) is an example of an existing source-backed site dataset, independent of the CLI sphere export. There is no general telescope command that promotes an arbitrary delivery into every body's renderer.
 
 ## Archive products
 
@@ -280,12 +280,12 @@ physical scale. CSS and base64 images are embedded; no JavaScript executes. The 
 is recorded separately. Projection preserves
 unknown beam resolution and does not qualify scientific publication. See the
 [navigation contract and oracle](../../docs/virtual-telescopes.md#projection-and-sphere).
-Physical 3D handoffs use an existing `point-field`, `density-volume` or `volume-lens-bank` object package:
+Physical 3D handoffs use an existing `point-field`, `density-volume` or `volume-dataset-bank` object package:
 
 ```sh
 telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars
 telescope export src/objects/milky-way/object.json --output volume --out galaxy
-telescope export src/objects/lmc/object.json --output volume-lens-bank --out lmc-lenses
+telescope export src/objects/lmc/object.json --output volume-dataset-bank --out lmc-datasets
 ```
 
 These copy the prepared renderer files and credits, validate them with the exact

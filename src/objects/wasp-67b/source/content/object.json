@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-67b",
   "displayName": "WASP-67 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 1,015 K. The disc itself is unresolved.",
-        "thumbnail": "wasp-67b-lens-thermal.webp",
+        "thumbnail": "wasp-67b-dataset-thermal.webp",
         "surface": "wasp-67b-surface-thermal@2x.webp",
         "poles": "wasp-67b-poles-thermal@2x.webp",
         "source": {

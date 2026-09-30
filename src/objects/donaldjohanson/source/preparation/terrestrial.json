@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "donaldjohanson",
   "displayName": "Donaldjohanson",
@@ -168,6 +168,6 @@
     "sunSource": "Pinned JPL Horizons elements and a fixed illustrative source-model frame; no tumbling attitude propagation"
   },
   "presentation": {
-    "defaultLens": "llorri"
+    "defaultDataset": "llorri"
   }
 }

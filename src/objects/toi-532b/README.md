@@ -8,7 +8,7 @@ It is the only planet known around TOI-532. Its orbit and size follow Kanodia et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.32663999021 d Kanodia et al. 2021 (2021AJ....162..135K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2021): a/R* 10.49; Kanodia et al. 2021 (2021AJ....162..135K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2021): inclination 88.08 degrees Kanodia et al. 2021 (2021AJ....162..135K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2021): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458470.580837 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-532's measured colour (#ffbe8a, the colour lens of toi-532 (src/objects/toi-532/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-532's measured colour (#ffbe8a, the colour dataset of toi-532 (src/objects/toi-532/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-532's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (71, 72, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

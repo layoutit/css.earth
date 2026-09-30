@@ -3,8 +3,8 @@
   "objectId": "hydra",
   "entries": [
     {
-      "id": "lorri-lens",
-      "subject": "LORRI photograph as a photographic lens",
+      "id": "lorri-dataset",
+      "subject": "LORRI photograph as a photographic dataset",
       "status": "deferred",
       "finding": "A draft fitted only two detector translations, [−12.875, −1.5] pixels, with the PDS camera, PCK pose and released mesh fixed. A nearby exposure repeats closely, but a 22.995° view change gave held raw correlations of 0.720 and 0.650 that fall to −0.136 and 0.372 once regional brightness planes are removed, so it does not independently confirm the registration.",
       "revisitWhen": "A meaningfully different view confirms the registration with interior holdouts and the mesh-to-kernel frame binding is verified.",
@@ -14,7 +14,7 @@
     },
     {
       "id": "mvic-colour",
-      "subject": "MVIC colour sequence as a colour lens",
+      "subject": "MVIC colour sequence as a colour dataset",
       "status": "unresolved",
       "finding": "The MVIC colour sequence is not used as colour: it has no qualified cross-band and image-to-mesh registration.",
       "revisitWhen": "Cross-band and image-to-mesh registration qualify for this mesh.",

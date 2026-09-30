@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "stooke-mosaic",
@@ -32,7 +32,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "coverage": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
@@ -74,7 +74,7 @@
         "scientific-surfaces",
         "facet-science"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "projection": {
@@ -206,7 +206,7 @@
       "consumers": [
         "crater-catalogue"
       ],
-      "lensId": "craters",
+      "datasetId": "craters",
       "label": "Crater catalogue",
       "falseColor": true,
       "width": 2880,
@@ -421,7 +421,7 @@
         "latitudeDegrees": 10,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

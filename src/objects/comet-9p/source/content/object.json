@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "comet-9p",
   "displayName": "Tempel 1",
@@ -46,9 +46,9 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "constraints",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "constraints",
     "labels": {
       "model": "Shape model",
       "constraints": "Source constraints",

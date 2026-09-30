@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "cassini-mosaic",
@@ -135,7 +135,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Relative albedo",
       "falseColor": true,
       "width": 2222,
@@ -188,7 +188,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Radial height",
       "falseColor": true,
       "width": 2222,
@@ -241,7 +241,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "maplet-resolution",
+      "datasetId": "maplet-resolution",
       "label": "Maplet resolution",
       "falseColor": true,
       "width": 360,
@@ -294,7 +294,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "image-count",
+      "datasetId": "image-count",
       "label": "Image count",
       "falseColor": true,
       "width": 360,
@@ -428,7 +428,7 @@
       "consumers": [
         "ice-absorption"
       ],
-      "lensId": "ice-absorption",
+      "datasetId": "ice-absorption",
       "label": "Ice absorption",
       "falseColor": true,
       "width": 1440,
@@ -478,7 +478,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Infrared",
       "falseColor": true,
       "width": 1440,
@@ -680,7 +680,7 @@
         "latitudeDegrees": -20,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal",
+        "datasetId": "normal",
         "displaySampling": "nearest"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"

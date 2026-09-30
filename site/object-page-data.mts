@@ -34,7 +34,7 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   }
   requireAssets(object.assets);
   requireControls(object.controls);
-  // `DatasetLenses.astro` and its sibling result/overview components read lens thumbnail and
+  // `DatasetList.astro` and its sibling result/overview components read dataset thumbnail and
   // dataset-preview addresses straight off this data, outside the runtime `resources.url()`
   // chokepoint (`prepared-residency.ts`) and outside `PreparedObjectHead`'s preload list.
   return { descriptor, assets: await resolveSceneAddressesDeep(object.assets, root), controls: await resolveSceneAddressesDeep(object.controls, root) };

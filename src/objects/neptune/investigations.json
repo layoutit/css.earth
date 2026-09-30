@@ -6,7 +6,7 @@
       "id": "opal-cycle32-colour-map",
       "subject": "Hubble OPAL Cycle 32 2025 colour global map",
       "status": "included",
-      "finding": "The visible-detail globe uses the OPAL team's WFC3/UVIS F467M, F547M and F657N global map; the OPAL readme declares the TIFF arbitrarily scaled and contrast enhanced, so the normal lens does not publish those display values as literal true colour.",
+      "finding": "The visible-detail globe uses the OPAL team's WFC3/UVIS F467M, F547M and F657N global map; the OPAL readme declares the TIFF arbitrarily scaled and contrast enhanced, so the normal dataset does not publish those display values as literal true colour.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
       ]
@@ -24,7 +24,7 @@
       "id": "opal-fq619n-methane",
       "subject": "OPAL FQ619N methane-band global map",
       "status": "included",
-      "finding": "The methane lens uses the matching FQ619N global map, converted during preparation to fixed runtime rasters; the browser parses no FITS or TIFF.",
+      "finding": "The methane dataset uses the matching FQ619N global map, converted during preparation to fixed runtime rasters; the browser parses no FITS or TIFF.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
       ]
@@ -33,7 +33,7 @@
       "id": "opal-f845m-near-infrared",
       "subject": "OPAL F845M near-infrared global map",
       "status": "included",
-      "finding": "The near-infrared lens uses the F845M global map from the same OPAL release, prepared to fixed runtime rasters.",
+      "finding": "The near-infrared dataset uses the F845M global map from the same OPAL release, prepared to fixed runtime rasters.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
       ]

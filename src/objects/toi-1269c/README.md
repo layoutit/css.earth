@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1269. Its orbit and size follow Lafarga 
 
 **Orbit.** Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): P 9.23786144195 d Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): a/R* 23.005496; Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): inclination 88.74605 degrees No archive row states an eccentricity; the orbit is taken as circular Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): transit mid-time 2459711.38309896 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1269's measured colour (#ffede4, the colour lens of toi-1269 (src/objects/toi-1269/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1269's measured colour (#ffede4, the colour dataset of toi-1269 (src/objects/toi-1269/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1269's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

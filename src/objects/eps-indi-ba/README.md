@@ -14,13 +14,13 @@ Epsilon Indi Ba is a brown dwarf 1,460 au from Epsilon Indi A. With Bb, a second
 
 ## Evidence
 
-Run of 2026-09-23 (this version): [the four bodies in the app](../eps-indi-a/evidence/epsilon-indi.png), headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places Bb around Ba against Chen et al.'s NACO positions, and [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places both in the Epsilon Indi system.
+Run of 2026-09-23 (this version): the four bodies in the app, headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places Bb around Ba against Chen et al.'s NACO positions, and [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places both in the Epsilon Indi system.
 
 ## Known problems
 
 - **Ba is drawn at the pair's light centre.** It is off by up to 1.1 au, less than half the pair's separation.
 - **Borrowed distance and radial velocity.** Both are Epsilon Indi A's; the depth between A and B is not measured.
-- **No surface.** The sphere is neutral gray. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's colour, so none is used, and with no colour lens there is no limb to draw ([ledger](investigations.json)).
+- **No surface.** The sphere is neutral gray. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's colour, so none is used, and with no colour dataset there is no limb to draw ([ledger](investigations.json)).
 - **The spin axis is a display convention.**
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

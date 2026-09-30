@@ -213,7 +213,7 @@ recorded as it is rather than worked around.
 - The ledger matches an observer's target name to a shipped object by dropping time stamps from the end of the name and
   nothing else. It never matches by prefix, and a name carrying a minor-planet number matches only an id carrying the same
   number, so 52 Europa is never Jupiter's moon. A name this rule cannot read is not counted, so every count is a lower bound.
-- Nothing here is drawn. No Keck observation has been turned into a lens or an object dataset.
+- Nothing here is drawn. No Keck observation has been turned into a dataset or an object dataset.
 
 ## Re-running
 

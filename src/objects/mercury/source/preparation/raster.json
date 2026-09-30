@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "sourceWidth": 4096,
   "sourceHeight": 2048,
   "width": 2048,
@@ -29,35 +29,35 @@
       "source": "maps/native/bdr.png",
       "falseColor": false,
       "output": "mercury-surface-{id}{suffix}.webp",
-      "thumbnail": "mercury-lens-{id}.webp"
+      "thumbnail": "mercury-dataset-{id}.webp"
     },
     {
       "id": "loi",
       "source": "maps/native/loi.png",
       "falseColor": false,
       "output": "mercury-surface-{id}{suffix}.webp",
-      "thumbnail": "mercury-lens-{id}.webp"
+      "thumbnail": "mercury-dataset-{id}.webp"
     },
     {
       "id": "color",
       "source": "maps/native/md3.png",
       "falseColor": true,
       "output": "mercury-surface-{id}{suffix}.webp",
-      "thumbnail": "mercury-lens-{id}.webp"
+      "thumbnail": "mercury-dataset-{id}.webp"
     },
     {
       "id": "enhanced",
       "source": "maps/native/enhanced.png",
       "falseColor": true,
       "output": "mercury-surface-{id}{suffix}.webp",
-      "thumbnail": "mercury-lens-{id}.webp"
+      "thumbnail": "mercury-dataset-{id}.webp"
     },
     {
       "id": "topography",
       "source": "science/usgs/elevation.tif",
       "falseColor": true,
       "output": "mercury-surface-{id}{suffix}.webp",
-      "thumbnail": "mercury-lens-{id}.webp",
+      "thumbnail": "mercury-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -104,7 +104,7 @@
       "source": "science/gravity/anomaly-hgm008.tif",
       "falseColor": true,
       "output": "mercury-surface-{id}{suffix}.webp",
-      "thumbnail": "mercury-lens-{id}.webp",
+      "thumbnail": "mercury-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -149,7 +149,7 @@
       "source": "science/gravity/crustal-thickness-hgm008.tif",
       "falseColor": true,
       "output": "mercury-surface-{id}{suffix}.webp",
-      "thumbnail": "mercury-lens-{id}.webp",
+      "thumbnail": "mercury-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -253,7 +253,7 @@
     "coreOutput": "mercury-interior-core{suffix}.webp",
     "corePolesOutput": "mercury-interior-core-poles{suffix}.webp",
     "sectionOutput": "mercury-interior-section{suffix}.webp",
-    "thumbnail": "mercury-lens-interior.webp",
+    "thumbnail": "mercury-dataset-interior.webp",
     "metadata": {
       "schema": "cssmercury-prepared-interior-assets@2"
     },

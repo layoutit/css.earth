@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-geology-registration-audit@1",
   "pointSource": "science/geology-sim3237/GeologyUnitPoints",
-  "comparison": "Independent released point labels (TERRAIN, which keeps the p1/p2/pu palimpsest split) compared with the final polygon UNITNAME attribute that the Geology lens colors. The separate point and polygon classifications are not identical. Mismatches are retained as source discrepancies; point labels do not replace polygon categories. Crater ejecta points have no polygon unit and are ignored.",
+  "comparison": "Independent released point labels (TERRAIN, which keeps the p1/p2/pu palimpsest split) compared with the final polygon UNITNAME attribute that the Geology dataset colors. The separate point and polygon classifications are not identical. Mismatches are retained as source discrepancies; point labels do not replace polygon categories. Crater ejecta points have no polygon unit and are ignored.",
   "matches": 2913,
   "mismatch": 129,
   "ignored": 870,

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "iota-horologii",
   "displayName": "ι Horologii",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "iota-horologii-lens-color.webp",
+        "thumbnail": "iota-horologii-dataset-color.webp",
         "surface": "iota-horologii-surface-color@2x.webp",
         "poles": "iota-horologii-poles-color@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "radial-field-01",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2015",
-        "thumbnail": "iota-horologii-lens-radial-field-01.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-01.webp",
         "surface": "iota-horologii-surface-radial-field-01@2x.webp",
         "poles": "iota-horologii-poles-radial-field-01@2x.webp",
         "source": {
@@ -135,7 +135,7 @@
         "id": "radial-field-02",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2015",
-        "thumbnail": "iota-horologii-lens-radial-field-02.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-02.webp",
         "surface": "iota-horologii-surface-radial-field-02@2x.webp",
         "poles": "iota-horologii-poles-radial-field-02@2x.webp",
         "source": {
@@ -200,7 +200,7 @@
         "id": "radial-field-03",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2016",
-        "thumbnail": "iota-horologii-lens-radial-field-03.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-03.webp",
         "surface": "iota-horologii-surface-radial-field-03@2x.webp",
         "poles": "iota-horologii-poles-radial-field-03@2x.webp",
         "source": {
@@ -265,7 +265,7 @@
         "id": "radial-field-04",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2016",
-        "thumbnail": "iota-horologii-lens-radial-field-04.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-04.webp",
         "surface": "iota-horologii-surface-radial-field-04@2x.webp",
         "poles": "iota-horologii-poles-radial-field-04@2x.webp",
         "source": {
@@ -330,7 +330,7 @@
         "id": "radial-field-05",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2016",
-        "thumbnail": "iota-horologii-lens-radial-field-05.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-05.webp",
         "surface": "iota-horologii-surface-radial-field-05@2x.webp",
         "poles": "iota-horologii-poles-radial-field-05@2x.webp",
         "source": {
@@ -395,7 +395,7 @@
         "id": "radial-field-06",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2016",
-        "thumbnail": "iota-horologii-lens-radial-field-06.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-06.webp",
         "surface": "iota-horologii-surface-radial-field-06@2x.webp",
         "poles": "iota-horologii-poles-radial-field-06@2x.webp",
         "source": {
@@ -460,7 +460,7 @@
         "id": "radial-field-07",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2016",
-        "thumbnail": "iota-horologii-lens-radial-field-07.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-07.webp",
         "surface": "iota-horologii-surface-radial-field-07@2x.webp",
         "poles": "iota-horologii-poles-radial-field-07@2x.webp",
         "source": {
@@ -525,7 +525,7 @@
         "id": "radial-field-08",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2016",
-        "thumbnail": "iota-horologii-lens-radial-field-08.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-08.webp",
         "surface": "iota-horologii-surface-radial-field-08@2x.webp",
         "poles": "iota-horologii-poles-radial-field-08@2x.webp",
         "source": {
@@ -590,7 +590,7 @@
         "id": "radial-field-09",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2017",
-        "thumbnail": "iota-horologii-lens-radial-field-09.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-09.webp",
         "surface": "iota-horologii-surface-radial-field-09@2x.webp",
         "poles": "iota-horologii-poles-radial-field-09@2x.webp",
         "source": {
@@ -655,7 +655,7 @@
         "id": "radial-field-10",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jul 2017",
-        "thumbnail": "iota-horologii-lens-radial-field-10.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-10.webp",
         "surface": "iota-horologii-surface-radial-field-10@2x.webp",
         "poles": "iota-horologii-poles-radial-field-10@2x.webp",
         "source": {
@@ -720,7 +720,7 @@
         "id": "radial-field-11",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2017",
-        "thumbnail": "iota-horologii-lens-radial-field-11.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-11.webp",
         "surface": "iota-horologii-surface-radial-field-11@2x.webp",
         "poles": "iota-horologii-poles-radial-field-11@2x.webp",
         "source": {
@@ -785,7 +785,7 @@
         "id": "radial-field-12",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2017",
-        "thumbnail": "iota-horologii-lens-radial-field-12.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-12.webp",
         "surface": "iota-horologii-surface-radial-field-12@2x.webp",
         "poles": "iota-horologii-poles-radial-field-12@2x.webp",
         "source": {
@@ -850,7 +850,7 @@
         "id": "radial-field-13",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Nov 2017",
-        "thumbnail": "iota-horologii-lens-radial-field-13.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-13.webp",
         "surface": "iota-horologii-surface-radial-field-13@2x.webp",
         "poles": "iota-horologii-poles-radial-field-13@2x.webp",
         "source": {
@@ -915,7 +915,7 @@
         "id": "radial-field-14",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "iota-horologii-lens-radial-field-14.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-14.webp",
         "surface": "iota-horologii-surface-radial-field-14@2x.webp",
         "poles": "iota-horologii-poles-radial-field-14@2x.webp",
         "source": {
@@ -980,7 +980,7 @@
         "id": "radial-field-15",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2018",
-        "thumbnail": "iota-horologii-lens-radial-field-15.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-15.webp",
         "surface": "iota-horologii-surface-radial-field-15@2x.webp",
         "poles": "iota-horologii-poles-radial-field-15@2x.webp",
         "source": {
@@ -1045,7 +1045,7 @@
         "id": "radial-field-16",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2018",
-        "thumbnail": "iota-horologii-lens-radial-field-16.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-16.webp",
         "surface": "iota-horologii-surface-radial-field-16@2x.webp",
         "poles": "iota-horologii-poles-radial-field-16@2x.webp",
         "source": {
@@ -1110,7 +1110,7 @@
         "id": "radial-field-17",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2018",
-        "thumbnail": "iota-horologii-lens-radial-field-17.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-17.webp",
         "surface": "iota-horologii-surface-radial-field-17@2x.webp",
         "poles": "iota-horologii-poles-radial-field-17@2x.webp",
         "source": {
@@ -1175,7 +1175,7 @@
         "id": "radial-field-18",
         "label": "Radial field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2018",
-        "thumbnail": "iota-horologii-lens-radial-field-18.webp",
+        "thumbnail": "iota-horologii-dataset-radial-field-18.webp",
         "surface": "iota-horologii-surface-radial-field-18@2x.webp",
         "poles": "iota-horologii-poles-radial-field-18@2x.webp",
         "source": {
@@ -1240,7 +1240,7 @@
         "id": "azimuthal-field-01",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2015",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-01.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-01.webp",
         "surface": "iota-horologii-surface-azimuthal-field-01@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-01@2x.webp",
         "source": {
@@ -1305,7 +1305,7 @@
         "id": "azimuthal-field-02",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2015",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-02.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-02.webp",
         "surface": "iota-horologii-surface-azimuthal-field-02@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-02@2x.webp",
         "source": {
@@ -1370,7 +1370,7 @@
         "id": "azimuthal-field-03",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2016",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-03.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-03.webp",
         "surface": "iota-horologii-surface-azimuthal-field-03@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-03@2x.webp",
         "source": {
@@ -1435,7 +1435,7 @@
         "id": "azimuthal-field-04",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2016",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-04.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-04.webp",
         "surface": "iota-horologii-surface-azimuthal-field-04@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-04@2x.webp",
         "source": {
@@ -1500,7 +1500,7 @@
         "id": "azimuthal-field-05",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2016",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-05.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-05.webp",
         "surface": "iota-horologii-surface-azimuthal-field-05@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-05@2x.webp",
         "source": {
@@ -1565,7 +1565,7 @@
         "id": "azimuthal-field-06",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2016",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-06.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-06.webp",
         "surface": "iota-horologii-surface-azimuthal-field-06@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-06@2x.webp",
         "source": {
@@ -1630,7 +1630,7 @@
         "id": "azimuthal-field-07",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Oct 2016",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-07.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-07.webp",
         "surface": "iota-horologii-surface-azimuthal-field-07@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-07@2x.webp",
         "source": {
@@ -1695,7 +1695,7 @@
         "id": "azimuthal-field-08",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2016",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-08.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-08.webp",
         "surface": "iota-horologii-surface-azimuthal-field-08@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-08@2x.webp",
         "source": {
@@ -1760,7 +1760,7 @@
         "id": "azimuthal-field-09",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2017",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-09.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-09.webp",
         "surface": "iota-horologii-surface-azimuthal-field-09@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-09@2x.webp",
         "source": {
@@ -1825,7 +1825,7 @@
         "id": "azimuthal-field-10",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jul 2017",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-10.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-10.webp",
         "surface": "iota-horologii-surface-azimuthal-field-10@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-10@2x.webp",
         "source": {
@@ -1890,7 +1890,7 @@
         "id": "azimuthal-field-11",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2017",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-11.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-11.webp",
         "surface": "iota-horologii-surface-azimuthal-field-11@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-11@2x.webp",
         "source": {
@@ -1955,7 +1955,7 @@
         "id": "azimuthal-field-12",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2017",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-12.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-12.webp",
         "surface": "iota-horologii-surface-azimuthal-field-12@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-12@2x.webp",
         "source": {
@@ -2020,7 +2020,7 @@
         "id": "azimuthal-field-13",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Nov 2017",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-13.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-13.webp",
         "surface": "iota-horologii-surface-azimuthal-field-13@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-13@2x.webp",
         "source": {
@@ -2085,7 +2085,7 @@
         "id": "azimuthal-field-14",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-14.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-14.webp",
         "surface": "iota-horologii-surface-azimuthal-field-14@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-14@2x.webp",
         "source": {
@@ -2150,7 +2150,7 @@
         "id": "azimuthal-field-15",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Feb 2018",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-15.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-15.webp",
         "surface": "iota-horologii-surface-azimuthal-field-15@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-15@2x.webp",
         "source": {
@@ -2215,7 +2215,7 @@
         "id": "azimuthal-field-16",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Jun 2018",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-16.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-16.webp",
         "surface": "iota-horologii-surface-azimuthal-field-16@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-16@2x.webp",
         "source": {
@@ -2280,7 +2280,7 @@
         "id": "azimuthal-field-17",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Aug 2018",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-17.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-17.webp",
         "surface": "iota-horologii-surface-azimuthal-field-17@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-17@2x.webp",
         "source": {
@@ -2345,7 +2345,7 @@
         "id": "azimuthal-field-18",
         "label": "Azimuthal field",
         "qualification": "Published map · Alvarado-Gómez et al. 2025 · HARPSpol ZDI, Sep 2018",
-        "thumbnail": "iota-horologii-lens-azimuthal-field-18.webp",
+        "thumbnail": "iota-horologii-dataset-azimuthal-field-18.webp",
         "surface": "iota-horologii-surface-azimuthal-field-18@2x.webp",
         "poles": "iota-horologii-poles-azimuthal-field-18@2x.webp",
         "source": {

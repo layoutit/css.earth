@@ -1,6 +1,6 @@
-import type { LensVolume } from '@cssearth/renderer/runtime/object-contract.ts';
+import type { DatasetVolume } from '@cssearth/renderer/runtime/object-contract.ts';
 
-export interface LensLegendRecipe {
+export interface DatasetLegendRecipe {
   kind: "scale" | "categories" | "ranges";
   ranges?: Array<{ label: string; color: string; low: number }>;
   title: string;
@@ -21,13 +21,13 @@ export interface LensLegendRecipe {
   };
 }
 
-export interface LensSource {
+export interface DatasetSource {
   id: string;
   path?: string;
   url?: string;
 }
 
-export interface LensRecipe {
+export interface DatasetRecipe {
   id: string;
   label: string;
   /** The observation covers the host system rather than just its body. */
@@ -46,24 +46,24 @@ export interface LensRecipe {
   surface?: string;
   poles?: string;
   material?: string;
-  legend?: LensLegendRecipe;
+  legend?: DatasetLegendRecipe;
   legendNote?: string;
   /**
    * A dataset may name a cloud that accompanies the body. It borrows the named surface's prepared
-   * plates for the body itself, and the shell asks the cloud's bank for the lens while it is selected.
+   * plates for the body itself, and the shell asks the cloud's bank for the dataset while it is selected.
    */
-  volume?: LensVolume;
+  volume?: DatasetVolume;
   /**
-   * One step of a dataset shown as a sequence, such as a map at each of 25 wavelengths. Every step is an ordinary lens with
+   * One step of a dataset shown as a sequence, such as a map at each of 25 wavelengths. Every step is an ordinary dataset with
    * its own prepared surface; the steps of a group sit together in the controls, the panel lists the group once and steps
    * through its members in order.
    */
-  step?: LensStep;
-  source: LensSource;
+  step?: DatasetStep;
+  source: DatasetSource;
 }
 
-export interface LensStep {
-  /** The group this lens is one step of; members are consecutive in the controls. */
+export interface DatasetStep {
+  /** The group this dataset is one step of; members are consecutive in the controls. */
   group: string;
   /** What distinguishes this step, such as "1.45 µm". */
   label: string;
@@ -79,7 +79,7 @@ export interface ChartRecipe {
   width: number;
   height: number;
   alt: string;
-  source: LensSource;
+  source: DatasetSource;
 }
 
 export interface GalleryRecipe {
@@ -100,7 +100,7 @@ export interface GalleryRecipe {
 }
 
 export interface ObjectContentSource {
-  schema: "cssearth-object-content@1";
+  schema: "cssearth-object-content@2";
   version: 1;
   id: string;
   displayName: string;
@@ -108,11 +108,11 @@ export interface ObjectContentSource {
     facts: Fact[];
     moreFacts?: Fact[];
   };
-  lenses: {
-    titleKey: "lenses";
-    defaultLens: string;
+  datasets: {
+    titleKey: "datasets";
+    defaultDataset: string;
     labels?: Record<string, string>;
-    controls: LensRecipe[];
+    controls: DatasetRecipe[];
   };
   settings: {
     titleKey: "settings";
@@ -142,10 +142,10 @@ export interface PreparedObjectContent {
   title: { label: string };
   facts: ObjectContentSource["panel"]["facts"];
   moreFacts: NonNullable<ObjectContentSource["panel"]["moreFacts"]>;
-  lenses: {
+  datasets: {
     title: { label: string; src: string; width: number; height: number };
-    defaultLens: string;
-    controls: Array<Record<string, unknown> & Pick<LensRecipe, "facts">>;
+    defaultDataset: string;
+    controls: Array<Record<string, unknown> & Pick<DatasetRecipe, "facts">>;
   };
   settings: {
     title: { label: string; src: string; width: number; height: number };
@@ -179,16 +179,16 @@ export interface ContentPreparationContext {
 export interface PreparedObjectContentAssets {
   id: string;
   content: PreparedObjectContentDocument;
-  lenses: PreparedObjectContent["lenses"];
+  datasets: PreparedObjectContent["datasets"];
   controls: {
-    lenses: PreparedObjectContent["lenses"] | null;
+    datasets: PreparedObjectContent["datasets"] | null;
     settings: PreparedObjectContent["settings"];
   };
   files: readonly string[];
 }
 
 export interface PreparedObjectContentDocument {
-  schema: "cssearth-prepared-content@1";
+  schema: "cssearth-prepared-content@2";
   objectId: string;
   title: PreparedObjectContent["title"];
   facts: PreparedObjectContent["facts"];

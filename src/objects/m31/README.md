@@ -107,9 +107,9 @@ al. (77° ± 0.5°), Chemin et al. (74.3°, 37.7°) and Dorman et al. (PA 44.4°
 
 ## Evidence
 
-- [Before and after](evidence/2026-09-29/before-after.jpg): the app close to Earth's angle and tilted, and a top-down
+- Before and after: the app close to Earth's angle and tilted, and a top-down
   composite of the z bank, before (DSS2, 77.5°, dots along sight lines) and after. Captured on this branch on 2026-09-29.
-- [Dots from the photograph](evidence/2026-09-29/dots-from-photograph.jpg): the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
+- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
 - [Composite report](evidence/2026-09-29/optical-composite.json): pixels from each input and the histogram-matching curve.
 - The prepared bank's `approximation.limitations` records the foreground, companion, colour-tie and saturation counts
   quoted above.

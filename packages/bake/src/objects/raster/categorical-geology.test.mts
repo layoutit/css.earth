@@ -1,6 +1,6 @@
 import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import { requireArray, requireString } from '@cssearth/core';
-import { parseGeologyLens, loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile, decodeGeologyAttributes, decodeGeologyPolygons } from '@cssearth/bake/objects/raster';
+import { parseGeologyDataset, loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile, decodeGeologyAttributes, decodeGeologyPolygons } from '@cssearth/bake/objects/raster';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -15,8 +15,8 @@ const body = async (id: string) => {
   const recipe = JSON.parse(await readFile(`${source}/preparation/raster.json`, 'utf8'));
   const surface = fixtureRecord(required(requireArray(recipe.surfaces).find(value => fixtureRecord(value).id === 'geology')));
   const {kind: _kind, ...science} = fixtureRecord(surface.science);
-  const lens = parseGeologyLens({id: surface.id, ...science});
-  return {source, lens, surface: await loadGeologySurface(source, lens)};
+  const dataset = parseGeologyDataset({id: surface.id, ...science});
+  return {source, dataset, surface: await loadGeologySurface(source, dataset)};
 };
 
 test('polygon sampling preserves holes, seam-split regions and categorical overlaps', () => {
@@ -39,15 +39,15 @@ test('polygon sampling preserves holes, seam-split regions and categorical overl
 });
 
 test('discrete colors reject fractional and unknown category indices', () => {
-  const lens = {categories: [{color: '#123456'}, {color: '#abcdef'}]};
-  assert.deepEqual(categoryColorForValue(0, lens), [18, 52, 86]);
-  assert.throws(() => categoryColorForValue(0.5, lens), /Invalid/);
-  assert.throws(() => categoryColorForValue(2, lens), /Invalid/);
+  const dataset = {categories: [{color: '#123456'}, {color: '#abcdef'}]};
+  assert.deepEqual(categoryColorForValue(0, dataset), [18, 52, 86]);
+  assert.throws(() => categoryColorForValue(0.5, dataset), /Invalid/);
+  assert.throws(() => categoryColorForValue(2, dataset), /Invalid/);
 });
 
 for (const id of ['io', 'ganymede']) test(`${id} archived geography, attribute identity and source pins remain intact`, async () => {
-  const {source, lens, surface} = await body(id);
-  const directory = lens.path.slice(0, lens.path.lastIndexOf('/'));
+  const {source, dataset, surface} = await body(id);
+  const directory = dataset.path.slice(0, dataset.path.lastIndexOf('/'));
   const receipts = JSON.parse(await readFile(`${source}/${directory}/intake-downloads.json`, 'utf8'));
   for (const receipt of receipts) {
     const bytes = await readFile(`${source}/${receipt.path}`);
@@ -59,16 +59,16 @@ for (const id of ['io', 'ganymede']) test(`${id} archived geography, attribute i
   assert.equal(surface.sample(0, 90), null);
   assert.equal(surface.sample(0, id === 'io' ? -89.5 : 89.9), null, 'Source polar gaps are preserved');
   for (const delta of [{sampling: 'bilinear'}, {relief: {referenceRadiusMeters: 1}}, {valueTransform: {scale: 1, offset: 0}}]) {
-    assert.throws(() => validateGeologyProfile({...lens, ...delta}), /Invalid/);
+    assert.throws(() => validateGeologyProfile({...dataset, ...delta}), /Invalid/);
   }
-  const drifted = structuredClone(lens); drifted.grid.coordinateSystem = 'GCS_Other_2000';
+  const drifted = structuredClone(dataset); drifted.grid.coordinateSystem = 'GCS_Other_2000';
   await assert.rejects(loadGeologySurface(source, drifted), /projection differs/);
-  const incomplete = structuredClone(lens); incomplete.categories.pop();
+  const incomplete = structuredClone(dataset); incomplete.categories.pop();
   await assert.rejects(loadGeologySurface(source, incomplete), /Unmapped geology symbol/);
 });
 
 test('Io label-point longitude is west while the same archived SHP coordinate is east', async () => {
-  const {source, lens, surface} = await body('io');
+  const {source, dataset, surface} = await body('io');
   const stem = `${source}/science/geology-sim3168/Io_GeoUnitsPoints`;
   const points = await readFile(`${stem}.shp`), {rows} = decodeGeologyAttributes(await readFile(`${stem}.dbf`));
   let offset = 100;
@@ -81,17 +81,17 @@ test('Io label-point longitude is west while the same archived SHP coordinate is
     }
     offset += 8 + points.readInt32BE(offset + 4) * 2;
   }
-  assert.equal(lens.categories[required(surface.sample(-97.14483174681664, -88.55184526182711))].value, 'Mu');
-  assert.equal(lens.categories[required(surface.sample(27.976930180564523, -83.46270116232336))].value, 'Fb');
+  assert.equal(dataset.categories[required(surface.sample(-97.14483174681664, -88.55184526182711))].value, 'Mu');
+  assert.equal(dataset.categories[required(surface.sample(27.976930180564523, -83.46270116232336))].value, 'Fb');
 });
 
 test('Ganymede excludes only the declared zero-area ring, retaining its valid multipart polygon', async () => {
-  const {source, lens} = await body('ganymede'), bytes = await readFile(`${source}/${lens.path}`);
-  const polygons = decodeGeologyPolygons(bytes, lens.grid);
+  const {source, dataset} = await body('ganymede'), bytes = await readFile(`${source}/${dataset.path}`);
+  const polygons = decodeGeologyPolygons(bytes, dataset.grid);
   assert.equal(required(polygons[3022]).rings.length, 90);
-  assert.throws(() => decodeGeologyPolygons(bytes, {...lens.grid, withheldDegenerateRings: []}), /Unclosed/);
-  assert.throws(() => decodeGeologyPolygons(bytes, {...lens.grid, expectedRecords: 3045}), /population/);
-  assert.throws(() => decodeGeologyPolygons(bytes.subarray(0, bytes.length - 1), lens.grid), /header/);
-  const invalid = structuredClone(lens.grid); invalid.withheldDegenerateRings[0].point[0] += 0.1;
+  assert.throws(() => decodeGeologyPolygons(bytes, {...dataset.grid, withheldDegenerateRings: []}), /Unclosed/);
+  assert.throws(() => decodeGeologyPolygons(bytes, {...dataset.grid, expectedRecords: 3045}), /population/);
+  assert.throws(() => decodeGeologyPolygons(bytes.subarray(0, bytes.length - 1), dataset.grid), /header/);
+  const invalid = structuredClone(dataset.grid); invalid.withheldDegenerateRings[0].point[0] += 0.1;
   assert.throws(() => decodeGeologyPolygons(bytes, invalid), /degenerate geology ring changed/);
 });

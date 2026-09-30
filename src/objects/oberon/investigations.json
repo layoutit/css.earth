@@ -15,7 +15,7 @@
       "id": "schenk-lpi-2020-oumapzlimb-cub",
       "subject": "Schenk/LPI 2020 oumapZlimb.cub",
       "status": "excluded",
-      "finding": "Excluded as an Elevation lens. These are sparse digitized limb profiles, not extended surface elevation coverage. The author warns that their older control network may displace them by several degrees. They must not be expanded into neighboring terrain or treated as a registered full-surface DEM.",
+      "finding": "Excluded as an Elevation dataset. These are sparse digitized limb profiles, not extended surface elevation coverage. The author warns that their older control network may displace them by several degrees. They must not be expanded into neighboring terrain or treated as a registered full-surface DEM.",
       "revisitWhen": "A released Oberon topographic reconstruction provides extended measured coverage registered to the selected mosaic; sparse limb values alone cannot fill that gap.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/oberon/source/manifest.json",
@@ -26,7 +26,7 @@
       "id": "schenk-and-moore-2023-topography-overview-and-2020-s",
       "subject": "Schenk and Moore 2023 topography overview and 2020 source paper",
       "status": "included",
-      "finding": "Supporting scientific context. The authors explicitly describe the lack of extended topography on Oberon and Umbriel, confirming why this package has no Elevation lens. Paper figures are not substitutes for measured raster coverage.",
+      "finding": "Supporting scientific context. The authors explicitly describe the lack of extended topography on Oberon and Umbriel, confirming why this package has no Elevation dataset. Paper figures are not substitutes for measured raster coverage.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/oberon/source/manifest.json",
         "https://www.hou.usra.edu/meetings/uranusflagship2023/pdf/8140.pdf"
@@ -36,7 +36,7 @@
       "id": "jpl-simulator-oberon-texture-1440-720-4-pixels-degre",
       "subject": "JPL simulator Oberon texture, 1440 × 720, 4 pixels/degree",
       "status": "excluded",
-      "finding": "Superseded as a display source. It derives from USGS/Voyager grayscale imagery, but does not provide the selected release's revised control metadata and floating-point source values. Its nominal pixel count is not evidence of more native detail. No duplicate lens is added.",
+      "finding": "Superseded as a display source. It derives from USGS/Voyager grayscale imagery, but does not provide the selected release's revised control metadata and floating-point source values. Its nominal pixel count is not evidence of more native detail. No duplicate dataset is added.",
       "revisitWhen": "A better controlled JPL release provides observed detail or coverage beyond the selected Schenk mosaic.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/oberon/source/manifest.json",
@@ -58,7 +58,7 @@
       "id": "voyager-filter-color-trial",
       "subject": "Voyager C2683625 / C2683627 / C2683629 color reconstruction",
       "status": "excluded",
-      "finding": "The 2026-09-07 trial used calibrated GEOMED CLEAR C2683625, VIOLET C2683627 and GREEN C2683629 (about 5 km/pixel, roughly 300-pixel disc), following the Helfenstein photometry route. Final image-space RMS was 0.55, 0.86 and 1.07 pixels respectively. Despite bounded Lunar-Lambert correction and missing unstable limb samples, mounted color views were softer than Monochrome, with chromatic fringes and a visible coverage transition. This trial did not qualify a second lens.",
+      "finding": "The 2026-09-07 trial used calibrated GEOMED CLEAR C2683625, VIOLET C2683627 and GREEN C2683629 (about 5 km/pixel, roughly 300-pixel disc), following the Helfenstein photometry route. Final image-space RMS was 0.55, 0.86 and 1.07 pixels respectively. Despite bounded Lunar-Lambert correction and missing unstable limb samples, mounted color views were softer than Monochrome, with chromatic fringes and a visible coverage transition. This trial did not qualify a second dataset.",
       "revisitWhen": "A sharper reconstruction with independently validated inter-band registration removes the chromatic fringes and visible coverage transition without borrowing monochrome detail.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/oberon/source/manifest.json",
@@ -69,7 +69,7 @@
       "id": "jpl-pia00034-color-disc",
       "subject": "JPL PIA00034 color disc",
       "status": "excluded",
-      "finding": "Excluded from mapped lenses. The published disc reconstructs color from violet, clear and green filters; the press image alone does not supply a calibrated, registered surface product or new coverage.",
+      "finding": "Excluded from mapped datasets. The published disc reconstructs color from violet, clear and green filters; the press image alone does not supply a calibrated, registered surface product or new coverage.",
       "revisitWhen": "A Oberon observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/oberon/source/manifest.json",
@@ -91,7 +91,7 @@
       "id": "voyager-iss-color-2026",
       "subject": "Voyager 2 ISS green/violet/ultraviolet colour frames",
       "status": "included",
-      "finding": "3 GEOMED frames in 1 complete sets (21.7 km per pixel) placed by limb fit and mosaic registration supply the Voyager color lens. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (0.935, 0.915); the archive calibration gives 0.870 and 0.921. No phase normalisation; the north stays unavailable.",
+      "finding": "3 GEOMED frames in 1 complete sets (21.7 km per pixel) placed by limb fit and mosaic registration supply the Voyager color dataset. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (0.935, 0.915); the archive calibration gives 0.870 and 0.921. No phase normalisation; the north stays unavailable.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/oberon/source/reference/voyager-color-placement.json",
         "https://ui.adsabs.harvard.edu/abs/1991LPSC...21..473B"

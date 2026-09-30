@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-121b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature-nrs1",
       "output": "wasp-121b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-121b-lens-{id}.webp",
+      "thumbnail": "wasp-121b-dataset-{id}.webp",
       "source": "science/evans-soma-2025/phase-curve-nrs1.json",
       "falseColor": true,
       "science": {
@@ -57,7 +57,7 @@
     {
       "id": "temperature-nrs2",
       "output": "wasp-121b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-121b-lens-{id}.webp",
+      "thumbnail": "wasp-121b-dataset-{id}.webp",
       "source": "science/evans-soma-2025/phase-curve-nrs2.json",
       "falseColor": true,
       "science": {

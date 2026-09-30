@@ -1,8 +1,8 @@
-/** `@cssearth/bake/refresh-shape-materials` (Node only): repaint existing shape lenses using retained geometry and the
+/** `@cssearth/bake/refresh-shape-materials` (Node only): repaint existing shape datasets using retained geometry and the
  * shared material preparer. `packages/bake/cli/refresh-shape-materials.mts <object-id>... | --all [--resume]
  * [--descriptions-only] [--source-root=<path>] [--shard=<index>/<count>]` is its command. The generated solar geometry is
  * written after the packages build, so the host passes it in (`SolarGeometry`). */
-import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
+import { retainedShapeAtlas, alternativeForDataset, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
 import type { RadialMaterialSurface } from '../objects/layers/terrestrial/index.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readAuthoredSources } from '../objects/sources/index.ts';
@@ -41,16 +41,16 @@ function describeNeutralMaterial(text: string): string {
 export async function refreshShapeMaterialDescriptions(id: string) {
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const recipe = await json(resolve(sourceDirectory, 'preparation/terrestrial.json'));
-  const lensIds = records(requireRecord(recipe.raster).shapeViews ?? []).map(view => requireString(view.id));
-  if (!lensIds.length) return;
+  const datasetIds = records(requireRecord(recipe.raster).shapeViews ?? []).map(view => requireString(view.id));
+  if (!datasetIds.length) return;
   const contentPath = resolve(sourceDirectory, 'content/object.json'), content = await json(contentPath);
   let edited = false;
-  for (const lens of records(requireRecord(content.lenses).controls)) if (lensIds.includes(requireString(lens.id))) {
-    const before = requireString(lens.notes ?? '');
+  for (const dataset of records(requireRecord(content.datasets).controls)) if (datasetIds.includes(requireString(dataset.id))) {
+    const before = requireString(dataset.notes ?? '');
     let notes = describeNeutralMaterial(before);
     const qualification = 'Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.';
     if (!notes.includes(qualification)) notes = `${notes}${notes ? ' ' : ''}${qualification}`;
-    if (notes !== before) { lens.notes = notes; edited = true; }
+    if (notes !== before) { dataset.notes = notes; edited = true; }
   }
   if (edited) {
     await pretty(contentPath, content);
@@ -71,7 +71,7 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   const publicDirectory = resolve('public/scenes', id), stage = resolve('output/shape-material-refresh', id);
   const recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json'), recipeBytes = await readFile(recipePath);
   const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8'))), views = config.raster.shapeViews ?? [];
-  if (!views.length) throw new Error(`${id} has no shape-only lens.`);
+  if (!views.length) throw new Error(`${id} has no shape-only dataset.`);
   await readAuthoredSources(objectDirectory);
   const originals = new Map<string, Buffer>();
   for (const name of ['scene.json', 'surfaces.json', 'material.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
@@ -85,8 +85,8 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   const emit = createRasterEmitter(stage, config.publicBase), surfaces: RadialMaterialSurface[] = [];
   for (const view of views) {
     const old = oldSurfaces.find(surface => surface.id === view.id);
-    if (!old) throw new Error('Refresh cannot add a lens.');
-    const alternate = alternativeForLens(config.geometry.radialTerrainAlternatives ?? [], view.id);
+    if (!old) throw new Error('Refresh cannot add a dataset.');
+    const alternate = alternativeForDataset(config.geometry.radialTerrainAlternatives ?? [], view.id);
     const terrain = requireRecord(alternate ?? config.geometry.radialTerrain), radial = retainedShapeAtlas(scene, view.id);
     const sourceEntry = source.manifest.inputs.find(entry => entry.path === terrain.path && entry.consumers.includes(view.consumer));
     if (!sourceEntry) throw new Error('Retained shape source binding changed.');
@@ -134,15 +134,15 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   }
   const nextInventory = { ...inventory, assets: assets.map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) };
   await writeFile(resolve(objectDirectory, 'inventory.json'), JSON.stringify(nextInventory, null, 2) + '\n');
-  const lensIds = views.map(view => view.id);
+  const datasetIds = views.map(view => view.id);
   // Context images and tiny navigation icons use the same material and retained mesh.
   const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);
   const navigation = await json(resolve(sourceDirectory, 'preparation/navigation.json'));
   let contextRecord: Record<string, unknown> | null = null;
   for (const entry of records(manifest.generatedIntermediates ?? [])) {
     const recipe = entry.recipe === undefined ? null : requireRecord(entry.recipe);
-    if (!recipe || !lensIds.includes(requireString(recipe.lensId ?? '')) || !String(entry.generator).includes('radial-snapshot.')) continue;
-    const surface = surfaces.find(surface => surface.id === recipe.lensId)!;
+    if (!recipe || !datasetIds.includes(requireString(recipe.datasetId ?? '')) || !String(entry.generator).includes('radial-snapshot.')) continue;
+    const surface = surfaces.find(surface => surface.id === recipe.datasetId)!;
     const png = await renderRadialSnapshot({ ...parseRadialSnapshot(recipe), faces: retainedShapeAtlas(scene, surface.id).faces,
       map: resolve(stage, basename(surface.map.url)) });
     const contextPath = resolve(sourceDirectory, requireString(entry.path));
@@ -172,10 +172,10 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
     await prepareSearchThumbnails();
   }
   await pretty(manifestPath, manifest);
-  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds, solarGeometry });
-  await refreshObservationControls(id, lensIds, new Map(lensIds.map(lensId => [lensId, SHAPE_MATERIAL.color])));
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: datasetIds, solarGeometry });
+  await refreshObservationControls(id, datasetIds, new Map(datasetIds.map(datasetId => [datasetId, SHAPE_MATERIAL.color])));
   await refreshShapeMaterialDescriptions(id);
-  const report = { id, lensIds, seconds: (performance.now() - started) / 1000,
+  const report = { id, datasetIds, seconds: (performance.now() - started) / 1000,
     material: SHAPE_MATERIAL,
     changedAssets: [...changed.values()].map(({ filename, bytes }) => ({ filename, bytes })), retainedAssets: assets.length - changed.size,
     geometryBasis: 'Existing prepared scene; original source mesh additionally verified for source-cast lighting.' };

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "stooke-halley",
@@ -190,7 +190,7 @@
       "consumers": [
         "giotto-reference"
       ],
-      "lensId": "giotto",
+      "datasetId": "giotto",
       "width": 512,
       "height": 256,
       "label": "Giotto",
@@ -433,7 +433,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "giotto",
+      "datasetId": "giotto",
       "width": 512,
       "height": 256,
       "label": "Giotto + Vega",
@@ -482,7 +482,7 @@
         "latitudeDegrees": 15,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "model"
+        "datasetId": "model"
       }
     }
   ],

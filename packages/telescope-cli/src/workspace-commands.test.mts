@@ -64,7 +64,7 @@ test('the F16 volume bake refuses an invalid descriptor with the class and messa
   try {
     const object = resolve(fixture.directory, 'object');
     await mkdir(object);
-    await writeFile(resolve(object, 'object.json'), JSON.stringify({ schema: 'cssearth-object@1', id: 'x', type: 'density-volume', properties: { volume: {}, preparation: { source: 'source/volume.json' } } }));
+    await writeFile(resolve(object, 'object.json'), JSON.stringify({ schema: 'cssearth-object@2', id: 'x', type: 'density-volume', properties: { volume: {}, preparation: { source: 'source/volume.json' } } }));
     const [{ prepareDensityVolumeObject }, { inventoryPreparedAssets }] = await Promise.all([import('@cssearth/bake/density'), import('@cssearth/objects/node')]);
     const direct = await prepareDensityVolumeObject({ objectDirectory: object, inventory: inventoryPreparedAssets }).then(() => undefined, (error: unknown) => error);
     assert.ok(direct instanceof TypeError);

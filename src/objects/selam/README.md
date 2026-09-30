@@ -42,7 +42,7 @@ The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographs-remain-unqu
 records the inspected archives and the L'LORRI geometric-header timing issue.
 No surface texture, inferred neck terrain, or new landmark placement was prepared.
 
-The [14 September source check](evidence/registration/source-check.json)
+The 14 September source check
 retrieved the later Bierhaus paper and checked its Selam-specific methods.
 Section 3.1 explicitly measures Selam in the **unprojected** image
 `lor_0752129590_03608` because it has no shape model. The archived
@@ -59,15 +59,15 @@ targeted source check, not an exhaustive claim that no such release can exist.
 
 ## Evidence
 
-The [browser conformance report](evidence/selam-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/selam-dpr-1.webm) and [DPR 2 video](evidence/selam-dpr-2.webm) retain the input sequences. These were captured; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer. The production check below repeats the navigation and presentation affected by later changes.
+The browser conformance report passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its DPR 1 video and DPR 2 video retain the input sequences. These were captured; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer. The production check below repeats the navigation and presentation affected by later changes.
 
 ![Selam with Shadows off](evidence/selam-shadows-false.png)
 
-The [Shadows-on view](evidence/selam-shadows-true.png) was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer and browser-review. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
+The Shadows-on view was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer and browser-review. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
 
 ![Selam’s approximate orbit around Dinkinesh](evidence/selam-approximate-orbit.png)
 
-The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-review.json) verifies visible **(approx)** labels, dashed paths, the standard **1 px** circle/orbit stroke, and selection of Dinkinesh with one mounted scene. Alternating existing retained segments carry the dashes; approximate circles omit the ordinary selected-body thickening. [Integrated checks and their limits](../dinkinesh/README.md#integrated-validation) cover the combined catalog.
+The production navigation check verifies visible **(approx)** labels, dashed paths, the standard **1 px** circle/orbit stroke, and selection of Dinkinesh with one mounted scene. Alternating existing retained segments carry the dashes; approximate circles omit the ordinary selected-body thickening. [Integrated checks and their limits](../dinkinesh/README.md#integrated-validation) cover the combined catalog.
 
 ## Preparation
 
@@ -75,4 +75,4 @@ The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-
 
 The shared presentation compiler groups these faces in a fixed visibility order before packing them into retained paint contexts. Selam uses 13 contexts; two inseparable groups of 396 and 72 faces retain native 3D depth. Rotation changes their transforms without changing their paint-order ranks. This changes rendering preparation only; the source shape and texture bytes are unchanged.
 
-[Fixed-order preparation checks](evidence/fixed-depth-order.json) record unchanged geometry and textures, independent ray-order checks, and the iPad drag comparison.
+Fixed-order preparation checks record unchanged geometry and textures, independent ray-order checks, and the iPad drag comparison.

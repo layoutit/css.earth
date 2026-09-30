@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-compact-finite-emission@1",
+  "schema": "cssearth-compact-finite-emission@2",
   "method": "simulation-guided-finite-material@1",
   "bankId": "lmc",
-  "defaultLens": "horalek-widefield",
+  "defaultDataset": "horalek-widefield",
   "framingRadiusUnits": 5,
   "frame": {
     "referenceFrame": "sun-icrf",
@@ -113,7 +113,7 @@
     "path": "src/objects/lmc/source/compact/stars.json.gz",
     "bytes": 98673
   },
-  "lenses": [
+  "datasets": [
     {
       "imageId": "horalek-widefield",
       "tangentBoundsKpc": {
@@ -151,7 +151,7 @@
         "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/"
       },
       "toneCurve": {
-        "schema": "cssearth-lens-tone-curve@1",
+        "schema": "cssearth-dataset-tone-curve@1",
         "knots": [
           0,
           8,
@@ -344,7 +344,7 @@
         "sourceUrl": "https://www.eso.org/public/images/eso1914a/"
       },
       "toneCurve": {
-        "schema": "cssearth-lens-tone-curve@1",
+        "schema": "cssearth-dataset-tone-curve@1",
         "knots": [
           0,
           8,
@@ -537,7 +537,7 @@
         "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
       },
       "toneCurve": {
-        "schema": "cssearth-lens-tone-curve@1",
+        "schema": "cssearth-dataset-tone-curve@1",
         "knots": [
           0,
           8,

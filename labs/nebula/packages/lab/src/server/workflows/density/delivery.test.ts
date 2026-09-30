@@ -11,7 +11,7 @@ test(`app preparation rebuilds missing ${texture} and rejects changed textures o
   const root = await mkdtemp(join(tmpdir(), 'nebula-delivery-'));
   try {
     const metadata = 'object.json';
-    const manifest = JSON.stringify({ schema: 'cssearth-volume-lens-manifest@1', outputs: {
+    const manifest = JSON.stringify({ schema: 'cssearth-volume-dataset-manifest@1', outputs: {
       [texture]: { bytes: 6 }, [metadata]: { bytes: 2 },
     } });
     const delivery = { directory: 'object', manifest: { path: 'manifest.json' } };

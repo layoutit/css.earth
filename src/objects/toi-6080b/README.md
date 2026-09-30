@@ -8,7 +8,7 @@ It is the only planet known around TOI-6080. Its orbit and size follow Lafarga e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.05557162699 d Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): a/R* 15.14393; Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): inclination 88.0835 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459397.070061 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 32 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-6080's measured colour (#ffefe8, the colour lens of toi-6080 (src/objects/toi-6080/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-6080's measured colour (#ffefe8, the colour dataset of toi-6080 (src/objects/toi-6080/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-6080's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (53, 79, 80), folded onto its orbit. Upper limits and rows without an error are left out.
 

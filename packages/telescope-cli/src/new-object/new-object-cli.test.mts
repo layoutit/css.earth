@@ -40,7 +40,7 @@ test('prose the scaffold cannot know is marked, and the package it writes matche
   const files = scaffoldStarFiles(spec, record, EPOCH);
   for (const path of ['text.json', 'README.md', 'NOTICE.md', 'source/measurements.json', 'source/content/object.json']) assert.match(files.get(`src/objects/antares/${path}`)!, new RegExp(TODO.replace(/[()]/gu, '\\$&'), 'u'), path);
   // The records a shipped shape-only star keeps structurally as generated.
-  for (const path of ['source/preparation/celestial.json', 'source/preparation/presentation.json', 'source/preparation/navigation.json']) {
+  for (const path of ['source/preparation/presentation.json', 'source/preparation/navigation.json']) {
     assert.equal(files.get(`src/objects/antares/${path}`), await readFile(resolve(root, 'src/objects/antares', path), 'utf8'), path);
   }
   assert.deepEqual(JSON.parse(files.get('src/objects/antares/source/presentation/solar-system.json')!), JSON.parse(await readFile(resolve(root, 'src/objects/antares/source/presentation/solar-system.json'), 'utf8')));

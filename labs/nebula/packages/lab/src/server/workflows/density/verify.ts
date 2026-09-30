@@ -89,7 +89,7 @@ export async function verifyNebulaBake(root: string, recipePath = 'labs/nebula/m
     else sharedStars = stars.stars;
     console.log(`VERIFIED ${accepted.imageId}: native removal, ${painted.quads.length} slices, ${stars.stars.length} shared stars`);
   }
-  assert.ok(receipt.output, 'The bake did not assemble a lens bank.');
+  assert.ok(receipt.output, 'The bake did not assemble a dataset bank.');
   const bank = await json(localPath(root, `${receipt.output}/source/lens-manifest.json`));
   await verifyArtifacts(root, receipt.output, bank.outputs);
   if (recipe.delivery) assert.ok(await deliveryReady(root, recipe.delivery), 'Application textures are missing; run the bake.');

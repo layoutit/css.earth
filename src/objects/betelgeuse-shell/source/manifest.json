@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-source-manifest@1",
+  "schema": "cssearth-volume-source-manifest@2",
   "pathBase": "repository",
   "inputs": [
     {
@@ -45,7 +45,7 @@
       "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
       "acquisition": "Cut out of the archive's own pipeline cube member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits through its SODA service, on the circle about the observation's phase centre that the origin URL requests. packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts keeps the channels within 32 km/s of 8 km/s LSRK in a box 300 mas either way of the phase centre, and subtracts from each pixel the median of the 1738 channels more than 120 km/s from the line. The pipeline removes the continuum before imaging, so that median is only its residual. The archive product is 72 GB; this is the part of it that carries the line around this star.",
       "license": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line.",
-      "lensId": "sio-2023"
+      "datasetId": "sio-2023"
     },
     {
       "id": "matisse-2020-02-continuum-4mas",
@@ -68,7 +68,7 @@
       "displayCredit": "ESO/VLTI/MATISSE; reconstruction by this repository",
       "acquisition": "The same bytes Betelgeuse’s own package ships, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star’s drawn sphere.",
       "license": "Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.",
-      "lensId": "emission-2020"
+      "datasetId": "emission-2020"
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-n-i-dolp",
@@ -133,9 +133,9 @@
       "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.656",
       "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
       "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
-      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.656. V-band degree of linear polarisation; the quantity the 2024 lens carries.",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.656. V-band degree of linear polarisation; the quantity the 2024 dataset carries.",
       "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
-      "lensId": "zimpol-v"
+      "datasetId": "zimpol-v"
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-v-phase3",
@@ -224,7 +224,7 @@
       "displayCredit": "Montargès et al. (2021)",
       "acquisition": "The published December 2019 clump geometry, density, composition and grain size, transcribed from the paper with its coordinate convention. This record identifies the transcription; the paper is the source.",
       "license": "Published numbers cited under normal scholarly citation; the paper is not redistributed here.",
-      "lensId": "veil-2019-12"
+      "datasetId": "veil-2019-12"
     }
   ],
   "documents": [

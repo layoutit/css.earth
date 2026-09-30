@@ -75,7 +75,7 @@ export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonl
 export interface SurfaceFeatureSelectionPlan { readonly count: number; readonly banks: readonly SurfaceFeatureCatalogDescriptor[]; }
 
 export interface PreparedSurfaceFeaturePlan {
-  readonly catalog: SurfaceFeatureCatalogDescriptor; readonly selection?: SurfaceFeatureSelectionPlan; readonly target: number; readonly lensIds: readonly string[];
+  readonly catalog: SurfaceFeatureCatalogDescriptor; readonly selection?: SurfaceFeatureSelectionPlan; readonly target: number; readonly datasetIds: readonly string[];
   /** Mesh radius in raw prepared scene coordinates (before the camera's scene scale). */
   readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
   /** Shape-model bodies: the radius band of the picking mesh, inside which every anchor and outline point lies. */

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "ariel",
   "displayName": "Ariel",
@@ -74,9 +74,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome",
       "elevation": "Elevation"
@@ -85,7 +85,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "ariel-lens-normal.webp",
+        "thumbnail": "ariel-dataset-normal.webp",
         "surface": "ariel-normal@2x.webp",
         "poles": "ariel-poles-normal@2x.webp",
         "source": {
@@ -99,7 +99,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "thumbnail": "ariel-lens-elevation.webp",
+        "thumbnail": "ariel-dataset-elevation.webp",
         "surface": "ariel-elevation@2x.webp",
         "poles": "ariel-poles-elevation@2x.webp",
         "source": {
@@ -148,7 +148,7 @@
       {
         "id": "voyager-color",
         "label": "Voyager color",
-        "thumbnail": "ariel-lens-voyager-color.webp",
+        "thumbnail": "ariel-dataset-voyager-color.webp",
         "surface": "ariel-voyager-color@2x.webp",
         "poles": "ariel-poles-voyager-color@2x.webp",
         "source": {

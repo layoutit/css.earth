@@ -66,18 +66,18 @@ function appearance(star: ObservedStar, catalogueColor:CatalogueColor) {
 }
 
 /**
- * Optical reference lights belong to the observed sky catalogue, independently of every image lens.
+ * Optical reference lights belong to the observed sky catalogue, independently of every image dataset.
  * Conditional depths are illustrative; measured membership or stellar distances are not supplied here.
  */
 export function prepareCatalogueStars(value: unknown, model: EmissionFieldModel,
-  centerIcrsDegrees: [number, number], maximum: number, lensIds: string[], catalogueColor:CatalogueColor) {
+  centerIcrsDegrees: [number, number], maximum: number, datasetIds: string[], catalogueColor:CatalogueColor) {
   if (!record(value) || value.schema !== 'cssearth-observed-stellar-catalogue@1' || !text(value.id) || value.frame !== 'ICRS' ||
       value.coordinateEpochJulianYear !== 2000 || !Array.isArray(value.stars) || value.stars.length > 200000)
     throw new TypeError('Observed stellar catalogue requires ICRS positions at epoch 2000.');
   if (!Array.isArray(centerIcrsDegrees) || centerIcrsDegrees.length !== 2 || !coordinate(centerIcrsDegrees[0], centerIcrsDegrees[1]) ||
-      !Number.isInteger(maximum) || maximum < 0 || maximum > 5000 || !Array.isArray(lensIds) || lensIds.length < 1 || lensIds.length > 8 ||
-      lensIds.some(id => typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(id)) || new Set(lensIds).size !== lensIds.length)
-    throw new TypeError('Invalid catalogue star frame, maximum or lens identities.');
+      !Number.isInteger(maximum) || maximum < 0 || maximum > 5000 || !Array.isArray(datasetIds) || datasetIds.length < 1 || datasetIds.length > 8 ||
+      datasetIds.some(id => typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(id)) || new Set(datasetIds).size !== datasetIds.length)
+    throw new TypeError('Invalid catalogue star frame, maximum or dataset identities.');
   if (!model.bounds || !Array.isArray(model.bounds.min) || !Array.isArray(model.bounds.max) || model.bounds.min.length !== 3 ||
       model.bounds.max.length !== 3 || model.bounds.min.some((n, axis) => !finite(n) || !finite(model.bounds.max[axis]) || n >= model.bounds.max[axis]!))
     throw new TypeError('Invalid catalogue star model bounds.');
@@ -96,7 +96,7 @@ export function prepareCatalogueStars(value: unknown, model: EmissionFieldModel,
     const conditionalDepth = depth(star.id, xy[0], xy[1]), light = appearance(star,catalogueColor);
     const positionArcsec: [number, number, number] = [xy[0], xy[1], conditionalDepth ?? 0];
     const materials: Record<string, CompilerStarMaterial> = {};
-    for (const id of lensIds) materials[id] = { ...light.material, rgb: [...light.material.rgb] };
+    for (const id of datasetIds) materials[id] = { ...light.material, rgb: [...light.material.rgb] };
     stars.push({ id: star.id, positionArcsec, ...light.material, materials });
     return { ...star, positionArcsec, depthAssignment: conditionalDepth === null ? 'authored-reference-plane' : 'conditional-emission-column',
       colorAssignment: star.colorIndexBV === null ? 'unknown-neutral-white' : 'catalogue-bv-display-fit',
@@ -109,10 +109,10 @@ export function prepareCatalogueStars(value: unknown, model: EmissionFieldModel,
     excludedOutsideFrameCount: sourceStars.length - inFrame.length, excludedByBudgetCount: Math.max(0, inFrame.length - maximum),
     unknownColorCount: selected.filter(s => s.colorIndexBV === null).length,
     referencePlaneCount: selected.filter(s => s.depthAssignment === 'authored-reference-plane').length,
-    displayClippedCount: selected.filter(s => s.displayClipped).length, lensIds: [...lensIds],
+    displayClippedCount: selected.filter(s => s.displayClipped).length, datasetIds: [...datasetIds],
     presentation: { referenceMagnitudeV, referenceDiameterArcsec, minimumDiameterArcsec, maximumDiameterArcsec,
       rule: 'diameter² × alpha × encoded RGB luminance / referenceDiameter² = 10^(-0.4 × (V-referenceV)), until the bright display limit',
       interpretation: 'Authored angular light disks, not stellar angular diameters or calibrated display radiance. No faint opacity floor; unknown colors are neutral white. B−V uses the shared temperature/display-color approximation, not exact spectra.' },
-    interpretation: 'All image lenses share these optical V/B−V reference lights; these are not infrared stellar photometry. Catalogue epoch 2000 is preserved without snapping to a photograph or compensating for its epoch. Photographic epoch/registration offsets require separate diagnostics. Dust support never selects stars or establishes membership; supported depths are deterministic emission-conditioned illustration, unsupported stars retain an explicit authored z=0 reference plane, neither is measured distance.',
+    interpretation: 'All image datasets share these optical V/B−V reference lights; these are not infrared stellar photometry. Catalogue epoch 2000 is preserved without snapping to a photograph or compensating for its epoch. Photographic epoch/registration offsets require separate diagnostics. Dust support never selects stars or establishes membership; supported depths are deterministic emission-conditioned illustration, unsupported stars retain an explicit authored z=0 reference plane, neither is measured distance.',
     selected } };
 }

@@ -85,7 +85,7 @@ test('a small historical compiler replay keeps unreflected source geometry, samp
     boundsArcsec: { min: [10, 20, 30], max: [12, 22, 32] }, skyBoundsArcsec: { min: [10, 20], max: [12, 22] },
     sampling, historicalReplay: true, preparedPhysical: false, samplePlanningEmission() { throw new Error('Saved replay must skip the optimizer.'); },
     sampleEmission(_x, _y, _z, out) { out[0] = out[1] = out[2] = .2; },
-    lenses: [{ id: 'color', label: 'Color', sampleMaterial(_x, _y, z, out) {
+    datasets: [{ id: 'color', label: 'Color', sampleMaterial(_x, _y, z, out) {
       out[0] = z < 31 ? 255 : 0; out[1] = 0; out[2] = z < 31 ? 0 : 255; return true;
     } }], progress() {},
   }, { compileVolume({ frame, slices }) {

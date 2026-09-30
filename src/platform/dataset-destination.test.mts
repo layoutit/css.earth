@@ -21,7 +21,7 @@ const lineage = (objectId: string): ObjectLineage => ({
     sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'observation', role: 'material', evidence: 'Native image identity' }] },
     capture: { attributions: [{ kind: 'unresolved', label: 'Observatory', reason: 'Individual telescope not identified.', evidence: 'Native image credit.' }] },
   }],
-  products: [{ observationAttribution: 'source-lineage', id: 'volume', label: 'Optical volume', inputs: ['image'], parents: [], lensIds: ['optical'] }],
+  products: [{ observationAttribution: 'source-lineage', id: 'volume', label: 'Optical volume', inputs: ['image'], parents: [], datasetIds: ['optical'] }],
 });
 const object = (id: string, route: string, base: string) => ({ id, name: id, route, base,
   controls: [{ id: 'optical', label: 'Optical' }], lineage: lineage(id) });
@@ -55,10 +55,10 @@ test('the graph compilers and parsers format and read dataset URLs only through 
   const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/m42/', 'src/objects/m42')];
   const formatted: string[] = [], parsed: string[] = [];
   const routes = {
-    destination: (objectId: string, route: string, lensId: string) => { formatted.push(`${objectId} ${route} ${lensId}`); return `/datasets/${objectId}/${lensId}`; },
-    parse: (value: unknown, ownerId: string, ownerLensId: string) => {
-      parsed.push(`${ownerId}/${ownerLensId}`);
-      if (value !== `/datasets/${ownerId}/${ownerLensId}`) throw new TypeError('Invalid dataset destination URL.');
+    destination: (objectId: string, route: string, datasetId: string) => { formatted.push(`${objectId} ${route} ${datasetId}`); return `/datasets/${objectId}/${datasetId}`; },
+    parse: (value: unknown, ownerId: string, ownerDatasetId: string) => {
+      parsed.push(`${ownerId}/${ownerDatasetId}`);
+      if (value !== `/datasets/${ownerId}/${ownerDatasetId}`) throw new TypeError('Invalid dataset destination URL.');
       return value;
     },
   };
@@ -75,7 +75,7 @@ test('the graph compilers and parsers format and read dataset URLs only through 
   assert.throws(() => parseSourceUsage(compileSourceUsage(objects, sources, DATASET_ROUTES), sources, routes), /Invalid dataset/);
 });
 
-test('dataset destinations reject external URLs, cross-object or cross-lens selections and ambiguous query state', () => {
+test('dataset destinations reject external URLs, cross-object or cross-dataset selections and ambiguous query state', () => {
   const volume = object('m42', '/m42/', 'src/objects/m42');
   const usage = compileSourceUsage([volume], sources, DATASET_ROUTES), contributions = compileContributions([volume], catalog, DATASET_ROUTES);
   const invalid = [
@@ -83,7 +83,7 @@ test('dataset destinations reject external URLs, cross-object or cross-lens sele
     '/helix/?dataset=optical', '/m42/?dataset=infrared', '/m42/?dataset=optical&dataset=optical',
     '/m42/?dataset=optical&v=other', '/m42/?dataset=optical#dataset=optical',
     '/m42/#dataset=optical', '/helix/#dataset=optical', '/m%34%32/?dataset=optical', '/m42/?dataset=%6fptical',
-    '/sun/?focus=m42&focusLens=optical', '/m42/?focusLens=optical',
+    '/sun/?focus=m42&focusDataset=optical', '/m42/?focusDataset=optical',
   ];
   for (const href of invalid) {
     assert.throws(() => parseDatasetDestination(href, 'm42', 'optical'), /Invalid dataset/);

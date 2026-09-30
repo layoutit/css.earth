@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { parseTerrestrialProfile } from '@cssearth/bake/objects/layers/terrestrial';
-import { alternativeForLens, radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
+import { alternativeForDataset, radialModelForDataset } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{
@@ -28,8 +28,8 @@ test('a shape display requires a source mesh and consumer for the shared neutral
  const profile=await read('ida');
  profile.raster.observations=[];profile.raster.scientific=[];profile.raster.surfaceObservations=[];
  profile.raster.shapeViews=[{id:'shape',label:'Shape',consumer:'geometry'}];
- profile.presentation.defaultLens='shape';
- assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'presentation').defaultLens,'shape');
+ profile.presentation.defaultDataset='shape';
+ assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'presentation').defaultDataset,'shape');
  assert.throws(()=>parseTerrestrialProfile({...profile,geometry:{...profile.geometry,radialTerrain:undefined}}),/pinned mesh/);
  profile.raster.shapeViews[0].consumer='';
  assert.throws(()=>parseTerrestrialProfile(profile),/source consumer/);
@@ -49,17 +49,17 @@ test('georeferenced photographs bind quality, physical distances and bounded dis
 
 test('an alternative model owns its observation mesh and sampler state', async () => {
   const profile = await read('comet-67p');
-  const alternative = fixtureRecord(alternativeForLens(profile.geometry.radialTerrainAlternatives, 'osiris'));
+  const alternative = fixtureRecord(alternativeForDataset(profile.geometry.radialTerrainAlternatives, 'osiris'));
   assert.notEqual(alternative.path, profile.geometry.radialTerrain.path, 'the observation uses a distinct source mesh');
   assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS samples its declared alternative mesh');
-  // The OSIRIS lens validates against its own model, which must preserve the source mesh like the default.
+  // The OSIRIS dataset validates against its own model, which must preserve the source mesh like the default.
   delete fixtureRecord(alternative, 'simplification').method;
   assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh must preserve its source');
 
   const observation = { samplePoint() { return null; } };
   const base: {observationSurfaces?: Map<string, typeof observation>} = {};
   const alternativeRadial: {observationSurfaces?: Map<string, typeof observation>} = {};
-  const selected = radialModelForLens([{ lensIds: ['model'], radial: base }, { lensIds: ['osiris'], radial: alternativeRadial }], 'osiris');
+  const selected = radialModelForDataset([{ datasetIds: ['model'], radial: base }, { datasetIds: ['osiris'], radial: alternativeRadial }], 'osiris');
   selected.radial.observationSurfaces ??= new Map();
   selected.radial.observationSurfaces.set('osiris', observation);
   assert.equal(selected.radial, alternativeRadial);

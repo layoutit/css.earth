@@ -8,7 +8,7 @@ It is one of 3 planets known around LP 791-18. Its orbit and size follow Peterso
 
 **Orbit.** Greklek-McKeon et al. 2025 (2025AJ....170...65G), via the NASA Exoplanet Archive ps table (pl_refname GREKLEK_MCKEON_ET_AL_2025): P 4.98991 d Greklek-McKeon et al. 2025 (2025AJ....170...65G), via the NASA Exoplanet Archive ps table (pl_refname GREKLEK_MCKEON_ET_AL_2025): a/R* 37.05; Greklek-McKeon et al. 2025 (2025AJ....170...65G), via the NASA Exoplanet Archive ps table (pl_refname GREKLEK_MCKEON_ET_AL_2025): inclination 89.94 degrees Crossfield et al. 2019 (2019ApJ...883L..16C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL__2019): e 0 Greklek-McKeon et al. 2025 (2025AJ....170...65G), via the NASA Exoplanet Archive ps table (pl_refname GREKLEK_MCKEON_ET_AL_2025): transit mid-time 2458546.50923 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by lp-791-18's measured colour (#ffb66b, the colour lens of lp-791-18 (src/objects/lp-791-18/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by lp-791-18's measured colour (#ffb66b, the colour dataset of lp-791-18 (src/objects/lp-791-18/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of LP 791-18's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (63, 90, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

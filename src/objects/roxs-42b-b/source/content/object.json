@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "roxs-42b-b",
   "displayName": "ROXs 42B b",
@@ -61,15 +61,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "infrared",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "infrared",
     "controls": [
       {
         "id": "infrared",
         "label": "Infrared colour",
         "qualification": "False colour from its measured flux in three infrared bands (Kraus et al. (2014a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
-        "thumbnail": "roxs-42b-b-lens-infrared.webp",
+        "thumbnail": "roxs-42b-b-dataset-infrared.webp",
         "surface": "roxs-42b-b-surface-infrared@2x.webp",
         "poles": "roxs-42b-b-poles-infrared@2x.webp",
         "source": {

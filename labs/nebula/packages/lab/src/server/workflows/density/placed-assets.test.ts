@@ -19,7 +19,7 @@ test('compact model placement reuses exact density/alpha bytes and restores miss
     await save('model/source/volume.json', { grid: { path: 'density.ktx2' } });
     const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2460000, originM: [0, 0, 60 * 3.085677581491367e19],
       localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 3.085677581491367e19, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
-    await save('model/object.json', { schema: 'cssearth-object@1', id: 'canonical', type: 'density-volume',
+    await save('model/object.json', { schema: 'cssearth-object@2', id: 'canonical', type: 'density-volume',
       properties: { volume: frame, preparation: { source: 'source/volume.json' } } });
     const slices: VolumeSlices = { boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] }, provenance: {},
       approximation: { method: 'test', radialEmission: '', limitations: [], samplesPerSlab: 1, opticalWeight: 1, exposureGain: 1,

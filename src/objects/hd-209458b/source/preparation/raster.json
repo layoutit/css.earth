@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-209458b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "thermal",
       "output": "hd-209458b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-209458b-lens-{id}.webp",
+      "thumbnail": "hd-209458b-dataset-{id}.webp",
       "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
@@ -32,7 +32,7 @@
     {
       "id": "temperature",
       "output": "hd-209458b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-209458b-lens-{id}.webp",
+      "thumbnail": "hd-209458b-dataset-{id}.webp",
       "source": "science/zellem-2014/phase-curve.json",
       "falseColor": true,
       "science": {

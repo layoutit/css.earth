@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "regulus",
   "displayName": "Regulus",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law.",
-        "thumbnail": "regulus-lens-color.webp",
+        "thumbnail": "regulus-dataset-color.webp",
         "surface": "regulus-surface-color@2x.webp",
         "poles": "regulus-poles-color@2x.webp",
         "source": {

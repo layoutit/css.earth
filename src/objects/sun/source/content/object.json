@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "sun",
   "displayName": "Sun",
@@ -48,15 +48,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "photosphere",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "photosphere",
     "controls": [
       {
         "id": "photosphere",
         "label": "Visible surface",
         "shortLabel": "Continuum",
-        "thumbnail": "sun-lens-photosphere.webp",
+        "thumbnail": "sun-dataset-photosphere.webp",
         "surface": "sun-surface-photosphere@2x.webp",
         "poles": "sun-poles-photosphere@2x.webp",
         "source": {
@@ -119,7 +119,7 @@
         "id": "magnetic",
         "label": "Magnetic field",
         "shortLabel": "HMI Bᵣ",
-        "thumbnail": "sun-lens-magnetic.webp",
+        "thumbnail": "sun-dataset-magnetic.webp",
         "surface": "sun-surface-magnetic@2x.webp",
         "poles": "sun-poles-magnetic@2x.webp",
         "source": {
@@ -169,7 +169,7 @@
         "id": "chromosphere",
         "label": "Lower atmosphere",
         "shortLabel": "304 Å",
-        "thumbnail": "sun-lens-chromosphere.webp",
+        "thumbnail": "sun-dataset-chromosphere.webp",
         "surface": "sun-surface-chromosphere@2x.webp",
         "poles": "sun-poles-chromosphere@2x.webp",
         "source": {
@@ -218,7 +218,7 @@
         "id": "corona",
         "label": "Corona",
         "shortLabel": "171 Å",
-        "thumbnail": "sun-lens-corona.webp",
+        "thumbnail": "sun-dataset-corona.webp",
         "surface": "sun-surface-corona@2x.webp",
         "poles": "sun-poles-corona@2x.webp",
         "source": {
@@ -272,7 +272,7 @@
         "id": "corona-193",
         "label": "Corona",
         "shortLabel": "193 Å",
-        "thumbnail": "sun-lens-corona-193.webp",
+        "thumbnail": "sun-dataset-corona-193.webp",
         "surface": "sun-surface-corona-193@2x.webp",
         "poles": "sun-poles-corona-193@2x.webp",
         "source": {
@@ -326,12 +326,12 @@
         "id": "cor1-density",
         "label": "COR1-B density · μ=10",
         "shortLabel": "COR1-B μ=10",
-        "thumbnail": "sun-lens-corona.webp",
+        "thumbnail": "sun-dataset-corona.webp",
         "falseColor": true,
         "qualification": "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=10 regularization, resampled to a Cartesian display volume",
         "volume": {
           "objectId": "sun-cor1-density",
-          "lensId": "electron-density",
+          "datasetId": "electron-density",
           "surface": "photosphere"
         },
         "legend": {
@@ -400,7 +400,7 @@
     },
     {
       "label": "JSOC HMI",
-      "description": "Magnetic surface lens",
+      "description": "Magnetic surface dataset",
       "href": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html",
       "role": "magnetism"
     }
@@ -423,7 +423,7 @@
       "credit": "NASA/SDO and the AIA, EVE and HMI science teams; JSOC hmi.mrsynop_small_720s[2311]",
       "license": "NASA media usage guidelines and SDO data use policy"
     },
-    "lenses": {
+    "datasets": {
       "photosphere": "NASA SDO/HMI continuum science frames (JSOC hmi.Ic_noLimbDark_720s, 28 records) across Carrington Rotation 2311",
       "magnetic": "NASA SDO/HMI and JSOC hmi.mrsynop_small_720s Carrington Rotation 2311",
       "chromosphere": "NASA SDO AIA 304 angstrom Carrington Rotation 2311",

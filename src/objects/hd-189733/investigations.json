@@ -96,7 +96,7 @@
       "id": "starspot-map",
       "subject": "A map of HD 189733 A's starspots",
       "status": "excluded",
-      "finding": "Haris, Tuomi & Hackman (2025) report TESS transit-chord candidates, one reconstructed in the spot-2021 lens. Narrett, Rackham & de Wit (2024) provide hypothetical spot arrangements consistent with HST/TESS activity estimates; one is shown as a labelled model. Neither source measures a global stellar brightness map.",
+      "finding": "Haris, Tuomi & Hackman (2025) report TESS transit-chord candidates, one reconstructed in the spot-2021 dataset. Narrett, Rackham & de Wit (2024) provide hypothetical spot arrangements consistent with HST/TESS activity estimates; one is shown as a labelled model. Neither source measures a global stellar brightness map.",
       "revisitWhen": "A Doppler or light-curve inversion brightness map of HD 189733 A is published as data.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202452633",
@@ -107,7 +107,7 @@
       "id": "narrett-2024-spot-band-model",
       "subject": "Hypothetical dense spot bands for HD 189733 A",
       "status": "included",
-      "finding": "Narrett, Rackham & de Wit (2024) infer 42 ± 4% mean spot coverage with a two-component HST spectral model, derive a TESS-band spot/photosphere intensity ratio of 0.099, and show a hypothetical dense latitudinal spot-band arrangement in Figure 7 left consistent with about 40% coverage and 1.4% variability. The activity-model lens extracts its illustrated dark regions onto the fixed limb plate. Figure 7 is an example, not a measured map.",
+      "finding": "Narrett, Rackham & de Wit (2024) infer 42 ± 4% mean spot coverage with a two-component HST spectral model, derive a TESS-band spot/photosphere intensity ratio of 0.099, and show a hypothetical dense latitudinal spot-band arrangement in Figure 7 left consistent with about 40% coverage and 1.4% variability. The activity-model dataset extracts its illustrated dark regions onto the fixed limb plate. Figure 7 is an example, not a measured map.",
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ad1f6c",
         "https://www.astroexplorer.org/details/ajad1f6cf7"
@@ -117,7 +117,7 @@
       "id": "starspot-2021-transit",
       "subject": "2021 TESS dark-region occultation in HD 189733b transit 2165",
       "status": "included",
-      "finding": "Haris, Tuomi & Hackman (2025), Table 3 report a candidate dark-region occultation with event midpoint +1890 s, minimum angular radius 5.0 degrees and TESS-band contrast 0.076. The spot-2021 lens displays one static minimum circular cap on the transit chord. The cap shape, sky orientation and achromatic display contrast are explicit model choices.",
+      "finding": "Haris, Tuomi & Hackman (2025), Table 3 report a candidate dark-region occultation with event midpoint +1890 s, minimum angular radius 5.0 degrees and TESS-band contrast 0.076. The spot-2021 dataset displays one static minimum circular cap on the transit chord. The cap shape, sky orientation and achromatic display contrast are explicit model choices.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202452633",
         "https://arxiv.org/html/2502.18129v1"

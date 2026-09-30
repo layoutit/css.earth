@@ -19,7 +19,7 @@ async function ready() {
 async function material(id: string, mode = 'textured') {
   await page.waitForFunction(({ id, mode }) => {
     if (document.querySelector('.compiler-stage [role="alert"]')) return true;
-    const root = document.querySelector('[data-compiler-root]'); return root?.getAttribute('data-material') === mode && (mode === 'neutral' || root?.getAttribute('data-lens') === id);
+    const root = document.querySelector('[data-compiler-root]'); return root?.getAttribute('data-material') === mode && (mode === 'neutral' || root?.getAttribute('data-dataset') === id);
   }, { id, mode }, { timeout: 60000 });
   assert.equal(await page.locator('.compiler-stage [role="alert"]').count(), 0, 'Prepared material failed to load.');
 }
@@ -27,15 +27,15 @@ try {
   await page.goto(`${base}/reconstruction?subject=helix-model-prior&inspection=compiler`);
   await page.getByRole('button', { name: 'Compile nebula', exact: true }).click(); await ready();
   const initialId = await page.locator('.compiler-controls').getAttribute('data-result-id'); assert.ok(initialId);
-  const initialLens = await page.locator('#compiler-lens').inputValue(); await material(initialLens); await snapshot('earth');
+  const initialDataset = await page.locator('#compiler-dataset').inputValue(); await material(initialDataset); await snapshot('earth');
   const requestCount = posts.length, nodeCount = await page.locator('div[data-compiler-stars] s').count(); assert.ok(nodeCount > 20);
   const host = page.locator('.compiler-stage .shape-cloud-viewport'), rect = await host.boundingBox(); assert.ok(rect);
   await page.getByRole('button', { name: 'Orbit', exact: true }).click();
   await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
   await page.mouse.move(rect.x + rect.width / 2 + 170, rect.y + rect.height / 2 - 100, { steps: 12 }); await page.mouse.up();
   const pose = await page.locator('.compiler-stage').getAttribute('data-compiler-pose'); assert.notEqual(pose, '0,0'); await snapshot('oblique');
-  for (const lens of await page.locator('#compiler-lens option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value))) {
-    await page.locator('#compiler-lens').selectOption(lens); await material(lens); assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose); await snapshot(lens);
+  for (const dataset of await page.locator('#compiler-dataset option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value))) {
+    await page.locator('#compiler-dataset').selectOption(dataset); await material(dataset); assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose); await snapshot(dataset);
   }
   await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral'); await snapshot('neutral');
   await page.getByRole('checkbox', { name: 'Stars', exact: true }).uncheck(); assert.equal(await page.locator('div[data-compiler-stars]').evaluate(node => getComputedStyle(node).display), 'none');
@@ -44,7 +44,7 @@ try {
   await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
   await page.mouse.move(rect.x + rect.width / 2 + 90 / .35, rect.y + rect.height / 2, { steps: 12 }); await page.mouse.up();
   await snapshot('neutral-side');
-  await page.getByRole('button', { name: 'Textured', exact: true }).click(); await material(await page.locator('#compiler-lens').inputValue()); await snapshot('side');
+  await page.getByRole('button', { name: 'Textured', exact: true }).click(); await material(await page.locator('#compiler-dataset').inputValue()); await snapshot('side');
   await page.getByRole('button', { name: 'Earth view', exact: true }).click();
   await page.getByRole('button', { name: 'Orbit', exact: true }).click();
   await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
@@ -76,7 +76,7 @@ try {
   assert.equal(await page.locator('.compiler-controls').getAttribute('data-result-id'), compiledId, 'Cancellation discarded the last completed cloud.');
   assert.deepEqual(errors, []);
   await writeFile(`${directory}/result.json`, JSON.stringify({ status: 'passed', initialId, compiledId, stars: nodeCount, browser: browser.version(),
-    viewports: [[1600, 1050], [1100, 850]], dpr: 1, realPipeline: true, threeLenses: true, retainedPose: true, completedRefresh: true, activeRefresh: true,
+    viewports: [[1600, 1050], [1100, 850]], dpr: 1, realPipeline: true, threeDatasets: true, retainedPose: true, completedRefresh: true, activeRefresh: true,
     delayedMetadataRefresh: true, cancelledRefresh: true, browserErrors: errors }, null, 2));
-  console.log('PASS compiler: real processing, three lenses, display controls, rotation, automatic depth refit, delayed/completed/running/cancelled refresh, compact viewport.');
+  console.log('PASS compiler: real processing, three datasets, display controls, rotation, automatic depth refit, delayed/completed/running/cancelled refresh, compact viewport.');
 } catch (error) { await snapshot('failure'); throw error; } finally { await browser.close(); }

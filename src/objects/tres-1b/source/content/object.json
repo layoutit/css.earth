@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "tres-1b",
   "displayName": "TrES-1 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 1,010 K. The disc itself is unresolved.",
-        "thumbnail": "tres-1b-lens-thermal.webp",
+        "thumbnail": "tres-1b-dataset-thermal.webp",
         "surface": "tres-1b-surface-thermal@2x.webp",
         "poles": "tres-1b-poles-thermal@2x.webp",
         "source": {

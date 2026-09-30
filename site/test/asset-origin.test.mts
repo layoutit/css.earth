@@ -41,7 +41,7 @@ test('a page embeds the hashes its first view reads and groups the rest by deman
     assets: { startup: ['page:normal:0:level:512', 'page:normal:1:level:512'], entries: [
       entry('page:normal:0:level:512', 'page-level-256.webp'), entry('page:normal:1:level:512', 'page-1-level-256.webp'),
       entry('page:normal:0:level:2048', 'page-level-1024.webp'), entry('page:normal:1:level:2048', 'page-1-level-1024.webp'),
-      entry('lens:clouds', 'clouds.webp')] } } };
+      entry('dataset:clouds', 'clouds.webp')] } } };
   await writeFile(join(root, 'src/objects/globe/prepared/object.json'), JSON.stringify(prepared));
   const split = await assetHashSplit('globe', root);
   assert.deepEqual(split.embedded, { 'marker.webp': hash('a'), 'page-level-256.webp': hash('b'), 'page-1-level-256.webp': hash('c') });

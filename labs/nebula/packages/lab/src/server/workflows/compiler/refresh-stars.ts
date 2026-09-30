@@ -35,7 +35,7 @@ export async function refreshCompilerStars(root: string, recipePath: string, pre
   const depthSign = base.scene.frame.referenceFrame === COMPILER_PHYSICAL_REFERENCE ? -1 : 1;
   const prepared = sourceBytes ? prepareCatalogueStars(JSON.parse(sourceBytes.toString()), model, observations.frame.centerIcrsDegrees, recipe.maximumStars, base.sources.map(source => source.id)) :
     { stars: base.scene.stars.map(({ positionUnits, ...star }) => ({ ...star, positionArcsec: [positionUnits[0] + origin[0], positionUnits[1] + origin[1], positionUnits[2] * depthSign + origin[2]] as [number, number, number] })),
-      receipt: { method: 'retained-stellar-photometry@1', selectedCount: base.scene.stars.length, interpretation: 'Existing residual-derived positions and per-lens light retained exactly; only the prepared point profile changes. Not a newly measured catalogue.' } };
+      receipt: { method: 'retained-stellar-photometry@1', selectedCount: base.scene.stars.length, interpretation: 'Existing residual-derived positions and per-dataset light retained exactly; only the prepared point profile changes. Not a newly measured catalogue.' } };
   // The refreshed cloud is the compiler recipe's stellar stage; a new refresh replaces it.
   const id = `${recipe.id}-stars`;
   const directory = `.local/nebula-lab/compiler/${id}`;

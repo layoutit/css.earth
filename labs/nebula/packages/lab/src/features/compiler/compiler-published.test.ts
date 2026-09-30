@@ -67,10 +67,10 @@ function completedFixture(options: { depth?: boolean; photometric?: boolean; dep
     metrics: { components: 1, unconstrainedComponents: 1, stars: 0, fitRmse: 0, baselineRmse: 1, missingSignalFraction: 0, excessSignalFraction: 0 },
     sources: [{ id: 'optical', label: 'Optical', credit: 'Test source', page: 'https://example.com/image', original: blob, starless: blob, width: 512, height: 512, boundsArcsec: sky }],
     model: blob, method, target: blob, projection: blob, residual: blob, interpretation: 'Conditional display emission.',
-    scene: { schema: 'cssearth-compiler-bake@1', id, fieldIdentity: id, boundsArcsec: bounds, skyBoundsArcsec: sky, spanArcsec: 2,
+    scene: { schema: 'cssearth-compiler-bake@2', id, fieldIdentity: id, boundsArcsec: bounds, skyBoundsArcsec: sky, spanArcsec: 2,
       frame: { referenceFrame: 'lab-sky-angular', epochJdTt: 2451545, metersPerUnit: 1, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], boundsUnits: bounds },
       sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: [0, 0, 0], earthView: 'observer-at-negative-z-looking-away' },
-      neutral: blob, lenses: [{ id: 'optical', label: 'Optical', volume: blob, coverage: { positiveAlphaTexels: 1, recoloredTexels: 1, outsideImageTexels: 0 } }],
+      neutral: blob, datasets: [{ id: 'optical', label: 'Optical', volume: blob, coverage: { positiveAlphaTexels: 1, recoloredTexels: 1, outsideImageTexels: 0 } }],
       stars: [], sampling: { sliceCounts: { x: 1, y: 1, z: 1 }, imageWidth: 512, samplesPerSlab: 4 } } };
   const receipt = { ...publication, inputs: inputPaths.map(path => ({ path })), result: put(`${directory}/result.json`, result) };
   const fetchLocal = async (path: string) => path === pointer ? Response.json(receipt) : data.has(path) ? new Response(data.get(path)!) : new Response(null, { status: 404 });

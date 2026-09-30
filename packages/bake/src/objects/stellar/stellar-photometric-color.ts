@@ -173,7 +173,7 @@ export function xpSampledColor(flux: readonly number[], colorMatching: Map<numbe
   return spectrumColor(wavelengths, sample, colorMatching, 'The XP spectrum colour');
 }
 
-/** An independent second spectrum of the same star, read the same way: its colour is reported beside the lens colour so a reader
+/** An independent second spectrum of the same star, read the same way: its colour is reported beside the dataset colour so a reader
  * sees whether two instruments agree. `disagreement` states why, when they differ by more than the agreement threshold. */
 export const CROSS_CHECK_AGREEMENT = 12;
 export interface StellarColorCrossCheck { readonly source: string; readonly record: MeasuredSpectrumRecord; readonly disagreement?: string }

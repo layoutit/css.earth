@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "deimos",
   "displayName": "Deimos",
@@ -74,9 +74,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome",
       "elevation": "Elevation",

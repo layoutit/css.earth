@@ -1,4 +1,4 @@
-/** One owner for every write to the retained bank's texture slots: material toggles, lens swaps and density cutoffs. */
+/** One owner for every write to the retained bank's texture slots: material toggles, dataset swaps and density cutoffs. */
 import type { CloudDensityFilter } from '@cssearth/bake/volume';
 
 export type MaterialMode = 'neutral' | 'textured';

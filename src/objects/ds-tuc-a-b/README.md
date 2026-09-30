@@ -8,7 +8,7 @@ It is the only planet known around DS Tuc A. Its orbit and size follow Newton et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.13822304107 d Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive ps table (pl_refname NEWTON_ET_AL__2019): a/R* 20.35; Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive ps table (pl_refname NEWTON_ET_AL__2019): inclination 89.5 degrees Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive ps table (pl_refname NEWTON_ET_AL__2019): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460903.986925 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by ds-tuc-a's measured colour (#ffefeb, the colour lens of ds-tuc-a (src/objects/ds-tuc-a/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by ds-tuc-a's measured colour (#ffefeb, the colour dataset of ds-tuc-a (src/objects/ds-tuc-a/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of DS Tuc A's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (102, 103, 104), folded onto its orbit. Upper limits and rows without an error are left out.
 

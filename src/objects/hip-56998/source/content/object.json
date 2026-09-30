@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hip-56998",
   "displayName": "HIP 56998",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "hip-56998-lens-color.webp",
+        "thumbnail": "hip-56998-dataset-color.webp",
         "surface": "hip-56998-surface-color@2x.webp",
         "poles": "hip-56998-poles-color@2x.webp",
         "source": {

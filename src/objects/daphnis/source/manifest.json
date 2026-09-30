@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "n1656997950_1",
@@ -255,7 +255,7 @@
         "shape",
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "projection": {
@@ -548,7 +548,7 @@
         "latitudeDegrees": 13.81,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

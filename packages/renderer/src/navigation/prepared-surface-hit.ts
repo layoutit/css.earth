@@ -2,8 +2,8 @@ import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 export type SurfacePoint = readonly [number, number, number];
 export type SurfaceTriangle = readonly [SurfacePoint, SurfacePoint, SurfacePoint];
 export type SurfaceFrontFace = 'clockwise' | 'counter-clockwise';
-export interface PreparedSurfaceRange { readonly lensId: string; readonly start: number; readonly count: number; }
-export interface PreparedSurfaceHit { readonly target: number; readonly triangles: readonly SurfaceTriangle[]; readonly frontFace?: SurfaceFrontFace; readonly lensRanges?: readonly PreparedSurfaceRange[]; }
+export interface PreparedSurfaceRange { readonly datasetId: string; readonly start: number; readonly count: number; }
+export interface PreparedSurfaceHit { readonly target: number; readonly triangles: readonly SurfaceTriangle[]; readonly frontFace?: SurfaceFrontFace; readonly datasetRanges?: readonly PreparedSurfaceRange[]; }
 const sub = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 /** Intersect source-prepared triangles. Runtime never creates or resamples a mesh. */
 export function rayHitsPreparedTriangles(origin: SurfacePoint, direction: SurfacePoint, triangles: readonly SurfaceTriangle[], frontFace?: SurfaceFrontFace,
@@ -23,18 +23,18 @@ export function rayHitsPreparedTriangles(origin: SurfacePoint, direction: Surfac
 }
 
 export function bindPreparedSurfaceHit(plan: PreparedSurfaceHit, target: HTMLElement, scene: HTMLElement,
-  camera: HTMLElement, selectedLens?: () => string | undefined): (clientX: number, clientY: number) => boolean {
+  camera: HTMLElement, selectedDataset?: () => string | undefined): (clientX: number, clientY: number) => boolean {
   if (!target || !scene.contains(target) || !Number.isSafeInteger(plan.target) || !Array.isArray(plan.triangles) ||
       (plan.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(plan.frontFace)) ||
       plan.triangles.length === 0 || plan.triangles.length > 10000 || plan.triangles.some(triangle =>
         !Array.isArray(triangle) || triangle.length !== 3 || triangle.some(point =>
           !Array.isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n))))) throw new TypeError('Invalid prepared surface hit mesh.');
-  if (plan.lensRanges && (!selectedLens || !plan.lensRanges.length || plan.lensRanges.some(range =>
+  if (plan.datasetRanges && (!selectedDataset || !plan.datasetRanges.length || plan.datasetRanges.some(range =>
     !Number.isSafeInteger(range.start) || range.start < 0 || !Number.isSafeInteger(range.count) || range.count < 1 ||
-    range.start + range.count > plan.triangles.length))) throw new TypeError('Invalid prepared surface lens ranges.');
+    range.start + range.count > plan.triangles.length))) throw new TypeError('Invalid prepared surface dataset ranges.');
   return (clientX, clientY) => {
-    const range = plan.lensRanges?.find(range => range.lensId === selectedLens?.());
-    if (plan.lensRanges && !range) return false;
+    const range = plan.datasetRanges?.find(range => range.datasetId === selectedDataset?.());
+    if (plan.datasetRanges && !range) return false;
     const bounds = camera.getBoundingClientRect(), style = getComputedStyle(camera), focal = parseFloat(style.perspective);
     // The camera root's optical framing is a uniform 2D scale. Its bounds are
     // scaled client pixels; CSS perspective and mesh matrices use local pixels.

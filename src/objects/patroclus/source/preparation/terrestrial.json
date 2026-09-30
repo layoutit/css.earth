@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "patroclus",
   "displayName": "Patroclus",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

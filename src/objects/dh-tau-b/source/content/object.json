@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "dh-tau-b",
   "displayName": "DH Tau b",
@@ -61,15 +61,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "infrared",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "infrared",
     "controls": [
       {
         "id": "infrared",
         "label": "Infrared colour",
         "qualification": "False colour from its measured flux in three infrared bands (Itoh et al. (2005), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
-        "thumbnail": "dh-tau-b-lens-infrared.webp",
+        "thumbnail": "dh-tau-b-dataset-infrared.webp",
         "surface": "dh-tau-b-surface-infrared@2x.webp",
         "poles": "dh-tau-b-poles-infrared@2x.webp",
         "source": {

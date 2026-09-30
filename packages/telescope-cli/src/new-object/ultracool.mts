@@ -1,6 +1,6 @@
 /** Band photometry for directly imaged planets, drafted from the UltracoolSheet (Best, Liu, Magnier & Dupuy 2024, v2.1 on Zenodo):
  * each planet's MKO K, H and J magnitudes, converted to flux densities with the zero points the SVO Filter Profile Service publishes
- * for the MKO filters (Rodrigo et al. 2012, 2020), become the red, green and blue of the band-colour lens (planet-lenses.mts,
+ * for the MKO filters (Rodrigo et al. 2012, 2020), become the red, green and blue of the band-colour dataset (planet-datasets.mts,
  * `--photometry`). A planet takes its own display range, zero to its brightest band, so the colour shows its band ratios; brightness
  * across planets at different distances is not compared. Each value is cited to the paper that measured it, through the sheet's
  * reference codes. A planet missing any of the three bands is left out and named. */

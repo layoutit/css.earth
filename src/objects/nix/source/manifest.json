@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "porter-nix-shape",
@@ -67,7 +67,7 @@
       },
       "width": 64,
       "height": 32,
-      "lensId": "model",
+      "datasetId": "model",
       "label": "Shape model",
       "falseColor": false,
       "sourceBinding": {
@@ -402,7 +402,7 @@
         "latitudeDegrees": -35.6,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "monochrome"
+        "datasetId": "monochrome"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

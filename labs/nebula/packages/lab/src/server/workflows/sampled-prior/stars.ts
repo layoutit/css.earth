@@ -1,4 +1,4 @@
-import { createCompilerStarPhotometer, compilerStarLensPoints, detectCompilerStarCandidates } from '@cssearth/nebula-reconstruction/stars/compiler';
+import { createCompilerStarPhotometer, compilerStarDatasetPoints, detectCompilerStarCandidates } from '@cssearth/nebula-reconstruction/stars/compiler';
 import type { CompilerImage } from '../compiler/images.ts';
 import type { CompilerStarInput } from '../compiler/bake.ts';
 import type { CompilerStarMaterial, SpatialField } from '@cssearth/bake/volume';
@@ -8,7 +8,7 @@ export async function sampledStars(reference: CompilerImage, images: CompilerIma
   pulsar: SampledRecipe['pulsar']): Promise<CompilerStarInput[]> {
   const detected = await detectCompilerStarCandidates(reference);
   const points = detected.map(s => s.point), photometers = images.map(image => ({ id: image.id,
-    measure: createCompilerStarPhotometer(image, compilerStarLensPoints(reference, image, points)).measure }));
+    measure: createCompilerStarPhotometer(image, compilerStarDatasetPoints(reference, image, points)).measure }));
   const meter = photometers.find(m => m.id === reference.id)!;
   const candidates = detected.flatMap((star, index) => {
     const light = meter.measure(index); return light ? [{ star, index, light, energy: Math.max(...light.measurement.residualDisplayEnergyRgb) }] : [];

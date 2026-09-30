@@ -173,7 +173,7 @@ test('Betelgeuse from the pinned calibrated files merges identically and is not 
   const merged = await readFile(resolve(repository, 'output/stars/betelgeuse-author-files/season.fits'));
   assert.ok(merged.equals(await readFile(resolve(repository, 'src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits'))));
   const result = JSON.parse(await readFile(verdictPath, 'utf8')) as { verdict: { cast: boolean; reasons: string[] }; spots: { ratio: number; twins: { scale: number; ratio: number }[] }; halves: { correlation: number } };
-  // Measured 1.24 to 2.02 across the five twins; the lens is kept with a label (src/objects/betelgeuse/README.md).
+  // Measured 1.24 to 2.02 across the five twins; the dataset is kept with a label (src/objects/betelgeuse/README.md).
   assert.equal(result.verdict.cast, false);
   assert.deepEqual(result.verdict.reasons.map(reason => /spotless/u.test(reason)), [true]);
   assert.equal(result.spots.twins.length, 5);

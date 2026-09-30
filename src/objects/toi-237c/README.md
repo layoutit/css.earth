@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-237. Its orbit and size follow Timmerman
 
 **Orbit.** Timmermans et al. 2026 (2026MNRAS.549ag710T), via the NASA Exoplanet Archive ps table (pl_refname TIMMERMANS_ET_AL_2026): P 1.74486147 d Timmermans et al. 2026 (2026MNRAS.549ag710T), via the NASA Exoplanet Archive ps table (pl_refname TIMMERMANS_ET_AL_2026): a/R* derived from its semi-major axis 0.016 au and stellar radius 0.2056 solar radii; Timmermans et al. 2026 (2026MNRAS.549ag710T), via the NASA Exoplanet Archive ps table (pl_refname TIMMERMANS_ET_AL_2026): inclination 89.14 degrees No archive row states an eccentricity; the orbit is taken as circular Timmermans et al. 2026 (2026MNRAS.549ag710T), via the NASA Exoplanet Archive ps table (pl_refname TIMMERMANS_ET_AL_2026): transit mid-time 2459540.35059 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-237's measured colour (#ffca79, the colour lens of toi-237 (src/objects/toi-237/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-237's measured colour (#ffca79, the colour dataset of toi-237 (src/objects/toi-237/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-237's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 96, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

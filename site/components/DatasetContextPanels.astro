@@ -2,17 +2,17 @@
 import type { Props as ShellProps } from '../object-shell-types';
 interface Props {
   objectId: string;
-  lenses?: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
-  directSourceIdsByLens?: Readonly<Record<string, readonly string[]>>;
+  datasets?: Pick<NonNullable<ShellProps['datasets']>, 'controls' | 'defaultDataset'>;
+  directSourceIdsByDataset?: Readonly<Record<string, readonly string[]>>;
 }
 import { datasetContributors } from '../dataset-context.mts';
 import { EXPLORATION } from '../exploration-catalog.mts';
 import ObjectCard from './ObjectCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
-const { objectId, lenses, directSourceIdsByLens } = Astro.props;
-const contexts = (lenses?.controls ?? []).map(lens => ({ lens,
-  ...datasetContributors(objectId, lens.id, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByLens?.[lens.id]),
+const { objectId, datasets, directSourceIdsByDataset } = Astro.props;
+const contexts = (datasets?.controls ?? []).map(dataset => ({ dataset,
+  ...datasetContributors(objectId, dataset.id, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByDataset?.[dataset.id]),
 }));
 const span = (from?: { value: string }, to?: { value: string }) =>
   from ? `${from.value}${to ? `–${to.value}` : ''}` : null;
@@ -57,17 +57,17 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
     const credited = contributors(context);
     const tabbed = credited.length > 1, byBand = distinctBands(credited);
     const groups = credited.length ? [credited] : [];
-    return <div data-dataset-context={context.lens.id} hidden={context.lens.id !== lenses?.defaultLens}>
+    return <div data-dataset-context={context.dataset.id} hidden={context.dataset.id !== datasets?.defaultDataset}>
       {groups.map(group => <ObjectCard class="object-dataset-context-card" role="region"
         aria-label={tabbed ? 'Credited machines' : group[0].title}>
-        {tabbed && <InformationTabs idPrefix={`${objectId}-${context.lens.id}`}
-          group={`context-${objectId}-${context.lens.id}`} label="Credited machines" panelSuffix="panel"
+        {tabbed && <InformationTabs idPrefix={`${objectId}-${context.dataset.id}`}
+          group={`context-${objectId}-${context.dataset.id}`} label="Credited machines" panelSuffix="panel"
           tabs={group.map(entry => ({ id: entry.id, label: byBand ? entry.band! : entry.title }))} />}
         {group.map(entry => {
           const publishedBackdrop = entry.image?.kind.startsWith('published-') ?? false;
           return <div class="object-card-tabpanel"
-          id={tabbed ? `${objectId}-${context.lens.id}-${entry.id}-panel` : undefined}
-          data-information-group={tabbed ? `context-${objectId}-${context.lens.id}` : undefined}
+          id={tabbed ? `${objectId}-${context.dataset.id}-${entry.id}-panel` : undefined}
+          data-information-group={tabbed ? `context-${objectId}-${context.dataset.id}` : undefined}
           data-information-panel={tabbed ? entry.id : undefined}
           role={tabbed ? 'region' : undefined}
           aria-label={tabbed ? (byBand ? entry.band : entry.title) : undefined}
@@ -77,7 +77,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
               <div slot="header" class:list={{ 'object-facility-preview': Boolean(entry.image || entry.emblem),
                 'object-facility-preview-overlay': Boolean(entry.image || entry.emblem) }}>
                 <div class:list={['object-facility-heading', publishedBackdrop && 'object-facility-heading-backdrop']}>
-                  <h3 class="object-lens-details-title">{entry.title}</h3>
+                  <h3 class="object-dataset-details-title">{entry.title}</h3>
                   {entry.dates && <span class="object-selected-content-meta">{entry.dates}</span>}
                 </div>
                 {entry.image && <a class:list={['object-facility-image-link', entry.image.subject && 'object-facility-image-crop']}

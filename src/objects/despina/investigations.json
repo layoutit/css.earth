@@ -47,8 +47,8 @@
       "id": "keck-near-infrared-photometry-hubble-and-jwst-nircam",
       "subject": "Keck near-infrared photometry, Hubble and JWST NIRCam spectral study",
       "status": "excluded",
-      "finding": "Disk-integrated measurements are relevant to surface composition and brightness, but are not spatial texture maps. No fabricated color/composition lens is added. The source survey does not claim these observations do not exist.",
-      "revisitWhen": "A spatially resolved Despina measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "finding": "Disk-integrated measurements are relevant to surface composition and brightness, but are not spatial texture maps. No fabricated color/composition dataset is added. The source survey does not claim these observations do not exist.",
+      "revisitWhen": "A spatially resolved Despina measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/despina/source/manifest.json",
         "https://www.sciencedirect.com/science/article/am/pii/S0019103524000629"

@@ -9,17 +9,17 @@ import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
 
-export type SpatialKind='points'|'volume'|'volume-lens-bank';
+export type SpatialKind='points'|'volume'|'volume-dataset-bank';
 type SpatialPayload =
   | {kind:'points';payload:Awaited<ReturnType<typeof import('@cssearth/renderer/stars/loader.ts').loadPreparedCssPointField>>}
   | {kind:'volume';payload:Awaited<ReturnType<typeof import('@cssearth/renderer/volume/loader.ts').loadPreparedCssVolume>>}
-  | {kind:'volume-lens-bank';payload:Awaited<ReturnType<typeof import('@cssearth/renderer/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses>>};
+  | {kind:'volume-dataset-bank';payload:Awaited<ReturnType<typeof import('@cssearth/renderer/volume/prepared-volume-datasets.ts').loadPreparedVolumeDatasets>>};
 const workspaceRoot=WORKSPACE;
 
 async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
   const source=resolve(objectPath),root=dirname(source),bytes=await readFile(source),descriptor=requireRecord(JSON.parse(bytes.toString()));
-  if(descriptor.schema!=='cssearth-object@1'||!['point-field','density-volume','volume-lens-bank'].includes(String(descriptor.type)))throw new Error('Physical handoff requires an existing point-field, density-volume or volume-lens-bank object.json; a spectral cube does not establish depth');
-  const kind:SpatialKind=descriptor.type==='point-field'?'points':descriptor.type==='density-volume'?'volume':'volume-lens-bank';
+  if(descriptor.schema!=='cssearth-object@2'||!['point-field','density-volume','volume-dataset-bank'].includes(String(descriptor.type)))throw new Error('Physical handoff requires an existing point-field, density-volume or volume-dataset-bank object.json; a spectral cube does not establish depth');
+  const kind:SpatialKind=descriptor.type==='point-field'?'points':descriptor.type==='density-volume'?'volume':'volume-dataset-bank';
   if(expected&&expected!==kind)throw new Error(`${expected} requires a matching prepared physical object package; a spectral cube does not establish depth`);
   const prepared=requireRecord(descriptor.prepared),properties=requireRecord(descriptor.properties),preparation=requireRecord(properties.preparation);
   const checked=new Map<string,{bytes:Buffer;pin:ProductInput}>();
@@ -38,22 +38,22 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
     const pin=requireRecord(recipe[key]),path=relative(root,resolve(root,dirname(recipePath),requireString(pin.path)));
     await read(path);
   }
-  if(kind==='volume-lens-bank')for(const path of ['README.md','source/manifest.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
+  if(kind==='volume-dataset-bank')for(const path of ['README.md','source/manifest.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}
   }
-  const entry=new URL(kind==='points'?'../../../packages/renderer/src/stars/loader.ts':kind==='volume'?'../../../packages/renderer/src/volume/loader.ts':'../../../packages/renderer/src/volume/prepared-volume-lenses.ts',import.meta.url);
+  const entry=new URL(kind==='points'?'../../../packages/renderer/src/stars/loader.ts':kind==='volume'?'../../../packages/renderer/src/volume/loader.ts':'../../../packages/renderer/src/volume/prepared-volume-datasets.ts',import.meta.url);
   // Use the application's exact loader, including physical-frame and binary-bank validation.
   const compiled=await build({entryPoints:[entry.pathname],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true});
   await mkdir(resolve(workspaceRoot,'work'),{recursive:true});const scratch=await mkdtemp(resolve(workspaceRoot,'work/telescope-spatial-loader-'));
   const moduleFile=resolve(scratch,'loader.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   try{
-    const loader: {loadPreparedCssPointField?:typeof import('@cssearth/renderer/stars/loader.ts').loadPreparedCssPointField;loadPreparedCssVolume?:typeof import('@cssearth/renderer/volume/loader.ts').loadPreparedCssVolume;loadPreparedVolumeLenses?:typeof import('@cssearth/renderer/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
+    const loader: {loadPreparedCssPointField?:typeof import('@cssearth/renderer/stars/loader.ts').loadPreparedCssPointField;loadPreparedCssVolume?:typeof import('@cssearth/renderer/volume/loader.ts').loadPreparedCssVolume;loadPreparedVolumeDatasets?:typeof import('@cssearth/renderer/volume/prepared-volume-datasets.ts').loadPreparedVolumeDatasets}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
     const transport={read:async(path:string)=>Uint8Array.from(await read(path)).buffer};
     const value:SpatialPayload=kind==='points'?{kind,payload:await loader.loadPreparedCssPointField!(descriptor,transport)}
       :kind==='volume'?{kind,payload:await loader.loadPreparedCssVolume!(descriptor,transport)}
-      :{kind,payload:await loader.loadPreparedVolumeLenses!(descriptor,transport)};
+      :{kind,payload:await loader.loadPreparedVolumeDatasets!(descriptor,transport)};
     const manifestPath=requireString(prepared.url);
-    const resources=value.kind==='volume-lens-bank'?value.payload.lenses.flatMap(lens=>lens.volume.resources):value.payload.resources;
+    const resources=value.kind==='volume-dataset-bank'?value.payload.datasets.flatMap(dataset=>dataset.volume.resources):value.payload.resources;
     for(const resource of resources){const path=relative(root,resolve(root,dirname(manifestPath),resource.path)),content=await read(path);if(content.length!==resource.bytes)throw new Error(`Spatial resource ${resource.path} is ${content.length} bytes; ${manifestPath} lists ${resource.bytes}.`);}
     // A point field publishes its baked provenance beside its manifest (prepared/stars-provenance.json); the others carry it.
     const provenance:unknown=value.kind==='points'?requireRecord(JSON.parse((await read(relative(root,resolve(root,dirname(manifestPath),'stars-provenance.json')))).toString())).provenance:value.payload.provenance;
@@ -63,9 +63,9 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
 
 export async function inspectSpatialObject(objectPath:string){
   const value=await validateSpatialObject(objectPath,undefined);
-  if(value.kind==='volume-lens-bank')return {kind:value.kind,target:value.descriptor.id,
+  if(value.kind==='volume-dataset-bank')return {kind:value.kind,target:value.descriptor.id,
     frame:requireRecord(requireRecord(value.descriptor.properties).frame,'physical frame'),provenance:value.provenance,inputs:value.checked.size+1,
-    attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)};
+    attachedTo:value.payload.attachedTo??null,defaultDataset:value.payload.defaultDataset,datasets:value.payload.datasets.map(dataset=>dataset.id)};
   return {kind:value.kind,target:value.descriptor.id,frame:value.payload.frame,provenance:value.provenance,inputs:value.checked.size+1};
 }
 
@@ -79,8 +79,8 @@ export async function exportSpatialObject(objectPath:string,kind:SpatialKind,out
     for(const [path,item] of checked){const file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await writeFile(file,item.bytes);outputs.push({path,file});}
     for(const item of checked.values())if((await readFile(item.pin.identity)).length!==item.pin.bytes)throw new Error('Spatial source changed during export');
     if(!(await readFile(source)).equals(bytes))throw new Error(`Spatial descriptor ${source} changed during export`);
-    const frame=value.kind==='volume-lens-bank'?requireRecord(requireRecord(descriptor.properties).frame,'physical frame'):value.payload.frame;
-    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance,...(value.kind==='volume-lens-bank'?{attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:VERSION}]},outputs);
+    const frame=value.kind==='volume-dataset-bank'?requireRecord(requireRecord(descriptor.properties).frame,'physical frame'):value.payload.frame;
+    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance,...(value.kind==='volume-dataset-bank'?{attachedTo:value.payload.attachedTo??null,defaultDataset:value.payload.defaultDataset,datasets:value.payload.datasets.map(dataset=>dataset.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:VERSION}]},outputs);
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,object:resolve(destination,'object.json'),receipt:resolve(destination,'output.product.json'),kind};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}

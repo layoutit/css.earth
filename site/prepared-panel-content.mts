@@ -1,7 +1,7 @@
 import { requireControls } from '@cssearth/renderer';
 import { isRecord } from '@cssearth/core';
 import { sourceUrl } from '@cssearth/objects/sources';
-import type { Props, ObjectTitle, PreparedTitle, Fact, Chart, Gallery, Lens, LensControl, DatasetReaderText } from './object-shell-types.js';
+import type { Props, ObjectTitle, PreparedTitle, Fact, Chart, Gallery, Dataset, DatasetControl, DatasetReaderText } from './object-shell-types.js';
 
 const object = (value: unknown, label: string): Record<string, unknown> => {
   if (!isRecord(value)) throw new TypeError(`Prepared ${label} must be an object.`);
@@ -29,20 +29,20 @@ export function authoredDatasetMetadata(input: unknown, objectId: string): {
   sourceUrls: ReadonlyMap<string, string>; systemDatasetIds: ReadonlySet<string>;
 } {
   const content = object(input, 'object content source');
-  if (content.schema !== 'cssearth-object-content@1' || content.id !== objectId) throw new TypeError(`${objectId}: dataset metadata owner differs.`);
-  const lenses = object(content.lenses, 'object content lenses');
+  if (content.schema !== 'cssearth-object-content@2' || content.id !== objectId) throw new TypeError(`${objectId}: dataset metadata owner differs.`);
+  const datasets = object(content.datasets, 'object content datasets');
   const sourceUrls = new Map<string, string>();
   const systemDatasetIds = new Set<string>();
   const ids = new Set<string>();
-  for (const value of array(lenses.controls, 'object content lens controls')) {
-    const control = object(value, 'object content lens');
-    const id = text(control.id, 'object content lens id');
+  for (const value of array(datasets.controls, 'object content dataset controls')) {
+    const control = object(value, 'object content dataset');
+    const id = text(control.id, 'object content dataset id');
     if (ids.has(id)) throw new TypeError(`${objectId}: duplicate dataset ${id}.`);
     ids.add(id);
     if (control.scope !== undefined && control.scope !== 'system') throw new TypeError(`${objectId}: invalid dataset scope for ${id}.`);
     if (control.scope === 'system') systemDatasetIds.add(id);
     if (control.source !== undefined) {
-      const source = object(control.source, 'object content lens source');
+      const source = object(control.source, 'object content dataset source');
       if (source.url !== undefined) sourceUrls.set(id, sourceUrl(source.url));
     }
   }
@@ -73,7 +73,7 @@ function gallery(value: unknown): Gallery {
         alt: text(item.alt, 'image alt'), caption: text(item.caption, 'image caption'), sourceUrl: text(item.sourceUrl, 'image source') };
     }) };
 }
-function legend(value: unknown, label: string): Lens['legend'] {
+function legend(value: unknown, label: string): Dataset['legend'] {
   if (value === undefined) return undefined;
   const legend = Array.isArray(value) ? { kind: 'categories', title: label, items: value } : object(value, 'legend');
   if (legend.kind !== 'scale' && legend.kind !== 'categories') throw new TypeError('Prepared legend kind is invalid.');
@@ -84,53 +84,53 @@ function legend(value: unknown, label: string): Lens['legend'] {
     items: legend.items === undefined ? undefined : array(legend.items, 'legend categories').map(value => { const item = object(value, 'legend category');
       return { label: text(item.label, 'legend category label'), description: optionalText(item.description, 'legend category description') ?? '', color: text(item.color, 'legend category color') }; }) };
 }
-/** Volume presentations publish their own reader text with each lens; body controls carry none and join prepared text instead. */
-export function parseDatasetLens(value: unknown): Lens {
-  const lens = object(value, 'lens'), label = text(lens.label, 'lens label');
-  const texture = lens.texture === undefined ? undefined : object(lens.texture, 'lens texture');
+/** Volume presentations publish their own reader text with each dataset; body controls carry none and join prepared text instead. */
+export function parseDatasetControl(value: unknown): Dataset {
+  const dataset = object(value, 'dataset'), label = text(dataset.label, 'dataset label');
+  const texture = dataset.texture === undefined ? undefined : object(dataset.texture, 'dataset texture');
   const attribution = texture?.attribution === undefined ? undefined : object(texture.attribution, 'texture attribution');
-  return { id: text(lens.id, 'lens id'), label, title: text(lens.title, 'lens title'), summary: text(lens.summary, 'lens summary'), description: optionalText(lens.description, 'lens description'),
-    detail: optionalText(lens.detail, 'lens detail'), thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
+  return { id: text(dataset.id, 'dataset id'), label, title: text(dataset.title, 'dataset title'), summary: text(dataset.summary, 'dataset summary'), description: optionalText(dataset.description, 'dataset description'),
+    detail: optionalText(dataset.detail, 'dataset detail'), thumbnailUrl: text(dataset.thumbnailUrl, 'dataset thumbnail'),
     texture: texture && { url: text(texture.url, 'texture URL'), width: number(texture.width, 'texture width'), height: number(texture.height, 'texture height'),
       minimap: texture.minimap, attribution: attribution && { label: text(attribution.label, 'texture attribution'), url: optionalText(attribution.url, 'texture source') } },
-    facts: lens.facts === undefined ? undefined : facts(lens.facts), legend: legend(lens.legend, label) };
+    facts: dataset.facts === undefined ? undefined : facts(dataset.facts), legend: legend(dataset.legend, label) };
 }
-function lensControl(value: unknown): LensControl {
-  const lens = object(value, 'lens'), label = text(lens.label, 'lens label');
-  const prose = ['title', 'detail', 'summary', 'description'].filter(key => Object.hasOwn(lens, key));
-  if (prose.length) throw new TypeError(`Prepared lens controls carry reader text (${prose.join(', ')}); it belongs in prepared content.`);
-  const noData = optionalBoolean(lens.noData, 'lens no-data grid');
+function datasetControl(value: unknown): DatasetControl {
+  const dataset = object(value, 'dataset'), label = text(dataset.label, 'dataset label');
+  const prose = ['title', 'detail', 'summary', 'description'].filter(key => Object.hasOwn(dataset, key));
+  if (prose.length) throw new TypeError(`Prepared dataset controls carry reader text (${prose.join(', ')}); it belongs in prepared content.`);
+  const noData = optionalBoolean(dataset.noData, 'dataset no-data grid');
   // A dataset that draws a companion cloud borrows another dataset's prepared surface for the body. The panel needs
   // the marker to publish that dataset's legend beside this one's; without it the body is drawn in an unexplained scale.
-  const volume = lens.volume === undefined ? undefined : object(lens.volume, 'lens volume');
-  const step = lens.step === undefined ? undefined : object(lens.step, 'lens step');
-  return { id: text(lens.id, 'lens id'), label, thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
+  const volume = dataset.volume === undefined ? undefined : object(dataset.volume, 'dataset volume');
+  const step = dataset.step === undefined ? undefined : object(dataset.step, 'dataset step');
+  return { id: text(dataset.id, 'dataset id'), label, thumbnailUrl: text(dataset.thumbnailUrl, 'dataset thumbnail'),
     ...(noData === undefined ? {} : { noData }),
-    ...(step === undefined ? {} : { step: { group: text(step.group, 'lens step group'), label: text(step.label, 'lens step label'),
-      ...(step.autoplay === undefined ? {} : { autoplay: optionalBoolean(step.autoplay, 'lens step autoplay') }) } }),
-    ...(volume === undefined ? {} : { volume: { objectId: text(volume.objectId, 'volume object'), lensId: text(volume.lensId, 'volume lens'), surface: text(volume.surface, 'volume surface') } }),
-    facts: lens.facts === undefined ? undefined : facts(lens.facts), legend: legend(lens.legend, label) };
+    ...(step === undefined ? {} : { step: { group: text(step.group, 'dataset step group'), label: text(step.label, 'dataset step label'),
+      ...(step.autoplay === undefined ? {} : { autoplay: optionalBoolean(step.autoplay, 'dataset step autoplay') }) } }),
+    ...(volume === undefined ? {} : { volume: { objectId: text(volume.objectId, 'volume object'), datasetId: text(volume.datasetId, 'volume dataset'), surface: text(volume.surface, 'volume surface') } }),
+    facts: dataset.facts === undefined ? undefined : facts(dataset.facts), legend: legend(dataset.legend, label) };
 }
 
 export interface PanelControls {
-  lenses?: Omit<NonNullable<Props['lenses']>, 'controls'> & { controls: LensControl[] };
+  datasets?: Omit<NonNullable<Props['datasets']>, 'controls'> & { controls: DatasetControl[] };
   settings: Props['settings'];
 }
 
 /** Join each dataset control to its published reader text; a control without text is an incomplete package. */
-export function withDatasetText(lenses: PanelControls['lenses'], datasets: Readonly<Record<string, DatasetReaderText>>): Props['lenses'] {
-  if (!lenses) return undefined;
-  return { ...lenses, controls: lenses.controls.map((control): Lens => {
-    const dataset = datasets[control.id];
-    if (!dataset) throw new TypeError(`Dataset ${control.id} has no published reader text.`);
-    return { ...control, title: dataset.title, ...(dataset.detail === undefined ? {} : { detail: dataset.detail }), summary: dataset.summary };
+export function withDatasetText(datasets: PanelControls['datasets'], readerTexts: Readonly<Record<string, DatasetReaderText>>): Props['datasets'] {
+  if (!datasets) return undefined;
+  return { ...datasets, controls: datasets.controls.map((control): Dataset => {
+    const readerText = readerTexts[control.id];
+    if (!readerText) throw new TypeError(`Dataset ${control.id} has no published reader text.`);
+    return { ...control, title: readerText.title, ...(readerText.detail === undefined ? {} : { detail: readerText.detail }), summary: readerText.summary };
   }) };
 }
 
 /** Validate the fields the shared Astro panel renders, before assigning display types. */
 export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId' | 'title' | 'facts' | 'moreFacts' | 'charts' | 'galleries' | 'destinations' | 'features'> {
   const content = object(value, 'panel content');
-  if (content.schema !== 'cssearth-prepared-content@1') throw new TypeError('Prepared panel content schema is incompatible.');
+  if (content.schema !== 'cssearth-prepared-content@2') throw new TypeError('Prepared panel content schema is incompatible.');
   const destinations = content.destinations === undefined ? undefined : object(content.destinations, 'destinations');
   const features = content.features === undefined ? undefined : object(content.features, 'features');
   return { objectId: text(content.objectId, 'object id'), title: objectTitle(content.title),
@@ -142,6 +142,6 @@ export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId
 export function parsePanelControls(input: unknown): PanelControls {
   requireControls(input);
   const controls = input;
-  return { lenses: controls.lenses ? { title: rasterTitle(controls.lenses.title), defaultLens: controls.lenses.defaultLens, controls: controls.lenses.controls.map(lensControl) } : undefined,
+  return { datasets: controls.datasets ? { title: rasterTitle(controls.datasets.title), defaultDataset: controls.datasets.defaultDataset, controls: controls.datasets.controls.map(datasetControl) } : undefined,
     settings: controls.settings ? { title: rasterTitle(controls.settings.title), controls: [...controls.settings.controls] } : undefined };
 }

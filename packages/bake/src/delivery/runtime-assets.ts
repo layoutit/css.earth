@@ -94,7 +94,7 @@ export async function volumeMetadataObjectIds(root: string): Promise<string[]> {
     const text = await readFile(resolve(root, 'src/objects', id, 'source/presentation.json'), 'utf8').catch(() => null);
     if (text === null) continue;
     const presentation = JSON.parse(text) as { schema?: unknown; objectId?: unknown };
-    if (presentation.schema !== 'cssearth-volume-presentation-source@1') continue;
+    if (presentation.schema !== 'cssearth-volume-presentation-source@2') continue;
     if (presentation.objectId !== id) throw new TypeError(`Mismatched volume presentation object: ${id}.`);
     ids.push(id);
   }

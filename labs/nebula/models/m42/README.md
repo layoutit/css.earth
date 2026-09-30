@@ -11,7 +11,7 @@ Asymmetric H II region and star-forming nebula.
 
 This first comparison batch pins the official ESO **Publication TIFF 4K** variants, downloaded unchanged on 2026-09-12. These retain each master image’s full footprint; no local resizing or cropping was used. Native star removal runs on the selected TIFF’s actual pixel grid. Larger publisher masters remain available for a later quality comparison.
 
-| Lens | Processing grid | Angular field | Publisher |
+| Dataset | Processing grid | Angular field | Publisher |
 |---|---|---|---|
 | ESO · optical | 4000 × 3106 | 59.95′ × 46.56′ | [Source](https://www.eso.org/public/images/eso1723a/) |
 | ESO VISTA · infrared | 3252 × 4000 | 71.84′ × 88.35′ | [Source](https://www.eso.org/public/images/eso1006a/) |
@@ -54,13 +54,13 @@ The [Nebula Compiler Process Guidelines](../../docs/nebula-compiler-guidelines.m
 
 ## Star photometry correction · 12 September 2026
 
-Compact lights now use local background-subtracted NOX residual aperture light, source color and an equivalent angular disk area. There is no faint-star opacity floor, whitening or brightest-star normalization. Each lens supplies its own appearance at the same 650 reference-catalogue positions and modeled depths. Stars absent from the reference catalogue are not added; missing light/coverage in another lens produces zero light. These are encoded RGB display measurements, not calibrated stellar flux.
+Compact lights now use local background-subtracted NOX residual aperture light, source color and an equivalent angular disk area. There is no faint-star opacity floor, whitening or brightest-star normalization. Each dataset supplies its own appearance at the same 650 reference-catalogue positions and modeled depths. Stars absent from the reference catalogue are not added; missing light/coverage in another dataset produces zero light. These are encoded RGB display measurements, not calibrated stellar flux.
 
 The previous optical markers emitted 21.78 times the measured residual aperture display energy at the 1024px reference framing. The revised prepared disks preserve 99.70% for optical and 99.86% for VISTA; peak intensity never exceeds the corresponding original aperture peak. Browser alpha compositing and pixel sampling are separate from this preparation-space accounting.
 
 The exact saved request (Detail 100%, Faint 35%, Depth 1×) was rebuilt as `m42-detail-100`. Against its prior result `m42-before-detail-100`, the volume field, neutral alpha, 650 IDs and XYZ positions are unchanged. The default 65% Detail publication is `m42`.
 
-Validation: strict lab TypeScript, lab build and 300 passing tests (two skipped). Restoring the old opacity floor makes the photometry regression fail. Real Chromium inspection of both M42 lenses verified fixed star centers, lens-specific appearance, angular sizing during zoom, rotation, star visibility, original overlay and refresh. Front/oblique images were inspected: excessive star amplification is corrected; diffuse side geometry and optical coverage boundaries remain visible and unresolved.
+Validation: strict lab TypeScript, lab build and 300 passing tests (two skipped). Restoring the old opacity floor makes the photometry regression fail. Real Chromium inspection of both M42 datasets verified fixed star centers, dataset-specific appearance, angular sizing during zoom, rotation, star visibility, original overlay and refresh. Front/oblique images were inspected: excessive star amplification is corrected; diffuse side geometry and optical coverage boundaries remain visible and unresolved.
 
 See [the completed batch assessment and current failures](../inference-candidates/README.md#first-processing-result--2026-09-12), [the compiler method](../../docs/emission-compiler.md) and [workflow](../../docs/workflows.md).
 
@@ -68,9 +68,9 @@ See [the completed batch assessment and current failures](../inference-candidate
 
 Default result: `m42-coherent-front` (Detail 65%, Faint 35%, Depth 1×). Its method record snapshots the runnable recipe and evidence ledger. The fit contains 355 supports and 650 compact lights; observer RMSE is 0.030138, missing relative signal 8.05% and excess relative signal 9.86%. These compare against the combined display target, not calibrated flux.
 
-The XYZ bake uses 321/512/127 slabs, 512px in-plane width and four samples per slab. Material color is emission-weighted within each slab. Both source lenses preserve the neutral bank's alpha exactly. The final geometry/material bake took 38.6 seconds with alignment and NOX reused; source acquisition and initial separation are excluded.
+The XYZ bake uses 321/512/127 slabs, 512px in-plane width and four samples per slab. Material color is emission-weighted within each slab. Both source datasets preserve the neutral bank's alpha exactly. The final geometry/material bake took 38.6 seconds with alignment and NOX reused; source acquisition and initial separation are excluded.
 
-Real Chromium inspection passed source switching, stable star positions across lenses, star visibility, original overlay, refresh, observer/oblique and 90° west/89° north views. No inspection action started processing. The rotating shape has localized thickness rather than the previous uniform deep columns.
+Real Chromium inspection passed source switching, stable star positions across datasets, star visibility, original overlay, refresh, observer/oblique and 90° west/89° north views. No inspection action started processing. The rotating shape has localized thickness rather than the previous uniform deep columns.
 
 The earlier default observer RMSE was 0.039561; the current fit reduces it by 23.8%. This gain also reflects narrower XY supports and a larger usable basis budget, not just changing depth. The saved 100% Detail request and original image transforms were separately completed as `m42-detail-100-original-transforms`. User settings and historical receipts were not overwritten.
 

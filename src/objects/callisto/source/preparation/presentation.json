@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-css-presentation-profile@1",
+  "schema": "cssearth-css-presentation-profile@2",
   "namespace": "callisto",
   "mode": "composite",
-  "lensFocus": {
+  "datasetFocus": {
     "enhanced": {
       "longitudeDegrees": 145.2,
       "latitudeDegrees": -0.15,

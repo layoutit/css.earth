@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "asteroid-1998-ml14",
   "displayName": "1998 ML14",
@@ -110,6 +110,6 @@
     "sunQualification": "The archived 1998 radar reconstruction has no determined inertial spin pole. Use the existing fixed arbitrary display frame; optional directional lighting is illustrative. The historical modeling period and newer photometric period are recorded as information only, and neither is propagated into a current attitude."
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

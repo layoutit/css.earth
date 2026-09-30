@@ -138,14 +138,14 @@ test('capability selection and validity policy are independent of body names', a
   variant.geometry.radius = 231; assert.throws(() => parseTerrestrialProfile(variant), /Invalid terrestrial/);
 });
 
-test('a measured elevation lens can be the only surface capability', async () => {
+test('a measured elevation dataset can be the only surface capability', async () => {
   const config = JSON.parse(await readFile(new URL('../../../../../src/objects/itokawa/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   // Keep this fixture elevation-only as the real body gains observed views.
   config.raster.surfaceObservations = [];
-  config.presentation.defaultLens = 'elevation';
+  config.presentation.defaultDataset = 'elevation';
   const parsed = parseTerrestrialProfile(config);
   assert.ok('presentation' in parsed);
-  assert.equal(parsed.presentation.defaultLens, 'elevation');
+  assert.equal(parsed.presentation.defaultDataset, 'elevation');
   assert.throws(() => parseTerrestrialProfile({...config, raster: {...config.raster, scientific: []}}), /Invalid terrestrial/);
   const excessive=structuredClone(config);excessive.raster.scientific[0].surfaceSampling.maximumDistanceMeters=1e6;
   assert.throws(()=>parseTerrestrialProfile(excessive),/simplification-distance bound/);
@@ -158,24 +158,24 @@ test('a measured elevation lens can be the only surface capability', async () =>
 test('a declared output meridian shifts presentation without changing source coordinates', async () => {
   const {paintScienceSurface} = await import('@cssearth/bake/objects/raster');
   const seen: [number, number][] = [], source = {sample(lon: number, lat: number) {seen.push([lon,lat]);return lon;}};
-  const lens = {minimum:-180,maximum:360,colors:['#000000','#ffffff']};
-  paintScienceSurface(source,lens,4,2);
+  const dataset = {minimum:-180,maximum:360,colors:['#000000','#ffffff']};
+  paintScienceSurface(source,dataset,4,2);
   assert.deepEqual(seen.slice(0,4).map(p=>p[0]),[45,135,225,315]);
-  seen.length=0;paintScienceSurface(source,{...lens,outputLongitudeOrigin:-180},4,2);
+  seen.length=0;paintScienceSurface(source,{...dataset,outputLongitudeOrigin:-180},4,2);
   assert.deepEqual(seen.slice(0,4).map(p=>p[0]),[-135,-45,45,135]);
   assert.deepEqual(seen.filter((_,i)=>i%4===0).map(p=>p[1]),[45,-45]);
-  assert.throws(()=>paintScienceSurface(source,{...lens,outputLongitudeOrigin:NaN},4,2),TypeError);
+  assert.throws(()=>paintScienceSurface(source,{...dataset,outputLongitudeOrigin:NaN},4,2),TypeError);
 });
 
 test('a nearest-sampled numeric palette resolves through 256 steps, a lossy one through 1024: monotonic, bounded, ends exact', () => {
   for (const [displaySampling, steps] of [['nearest', LOSSLESS_PALETTE_STEPS], [undefined, LOSSY_PALETTE_STEPS]] as const) {
-    const lens = { minimum: -1, maximum: 1, colors: ['#000000', '#ff0000', '#ffffff'], ...(displaySampling ? { displaySampling } : {}) } as never;
-    const lookup = paletteLookup(lens), seen = new Set<string>();
+    const dataset = { minimum: -1, maximum: 1, colors: ['#000000', '#ff0000', '#ffffff'], ...(displaySampling ? { displaySampling } : {}) } as never;
+    const lookup = paletteLookup(dataset), seen = new Set<string>();
     let previous = -1;
     for (let i = 0; i <= 8000; i++) { const c = lookup(-1 + 2 * i / 8000); seen.add(c.join(',')); const rank = c[0]! * 2 + c[1]!; assert.ok(rank >= previous, 'colour never runs backwards'); previous = rank; }
     assert.ok(seen.size <= steps, `${seen.size} colours for ${steps} steps`);
     assert.ok(displaySampling ? seen.size <= LOSSLESS_PALETTE_STEPS : seen.size > LOSSLESS_PALETTE_STEPS, 'the lossy ramp keeps its finer steps');
     assert.deepEqual(lookup(-5), [0, 0, 0]); assert.deepEqual(lookup(5), [255, 255, 255]);
-    for (const [c, exact] of lookup(0).map((v, i) => [v, colorForValue(0, lens)[i]!] as const)) assert.ok(Math.abs(c - exact) <= 2, 'a step lands within two of the exact colour');
+    for (const [c, exact] of lookup(0).map((v, i) => [v, colorForValue(0, dataset)[i]!] as const)) assert.ok(Math.abs(c - exact) <= 2, 'a step lands within two of the exact colour');
   }
 });

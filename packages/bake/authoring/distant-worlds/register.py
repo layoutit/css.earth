@@ -17,7 +17,7 @@ for body in bodies:
     name = body['name'] + {'mani': ' (2002 MS4)', 'achlys': ' (2003 AZ84)'}.get(identifier, '')
     descriptor['properties'].setdefault('catalog', dict(name=name, classification=body['classification'],
         color='#aaaaaa', distanceAu=body['distanceAu'], description=body.get('card', body['introduction']), systemName='Solar System', context={},
-        illustrationLenses=['model']))
+        illustrationDatasets=['model']))
     write(path, descriptor)
     path = ROOT / f'packages/astronomy/data/bodies/{identifier}.json'
     if not path.exists():

@@ -1,6 +1,6 @@
 # Shape-only material
 
-Every terrestrial `shapeViews` lens uses the same neutral gray: **#808080 in
+Every terrestrial `shapeViews` dataset uses the same neutral gray: **#808080 in
 sRGB**. This is a cssEarth display convention, not measured color, physical
 albedo, or any external standard. The model supplies the shape; the material
 adds no craters, mottling, grid lines, or other invented surface detail.
@@ -15,18 +15,18 @@ wavelengths; a piecewise-linear spectrum through them is integrated with the CIE
 is uniform: it is one measured mean, not a map. Makemake and Eris use it on the raster
 route; Haumea uses the same method through the shape-model route's `surfaces` list.
 All three also carry NASA's illustrative model texture as a second, non-default
-lens (`glb-base-color`); it is listed in the package's illustration lenses and is
+dataset (`glb-base-color`); it is listed in the package's illustration datasets and is
 not an observation. Ten exoplanets (HD 189733 b, GJ 504 b, Kepler-452 b and TRAPPIST-1 b–h)
 carry the artist's concept map NASA's Eyes on Exoplanets wraps around them the same way,
 through the `equirectangular-illustration` kind.
 
-![The Illustration lens of the ten exoplanets, in the app](images/eyes-on-exoplanets-illustrations.webp)
+![The Illustration dataset of the ten exoplanets, in the app](images/eyes-on-exoplanets-illustrations.webp)
 
 Kepler-22 b, HAT-P-11 b and Kepler-7 b carry their Eyes maps the same way, and 55 Cancri e carries the texture of NASA's
 55 Cancri e 3D model through `glb-base-color`. NASA's WASP-12b model is egg-shaped, so its texture cannot be placed on
 the published sphere and is not used ([ledger](../src/objects/wasp-12b/investigations.json)).
 
-![The Illustration lens of 55 Cancri e, Kepler-22 b, HAT-P-11 b and Kepler-7 b, in the app](images/illustrated-exoplanets-new-systems.webp)
+![The Illustration dataset of 55 Cancri e, Kepler-22 b, HAT-P-11 b and Kepler-7 b, in the app](images/illustrated-exoplanets-new-systems.webp)
 
 An unresolved body measured only in the infrared has no visible colour to reconstruct. When a paper
 publishes its flux densities in three bands, the raster `disc-integrated-band-color` science kind
@@ -51,9 +51,9 @@ from a published table (WASP-43) or fitted to pinned TESS light curves
 HD 189733 A). A star with such a colour stays on the map even without imagery
 (discovery `sourceColor`).
 
-Photographic, observed-color, and scientific lenses retain their own pixels.
+Photographic, observed-color, and scientific datasets retain their own pixels.
 Their missing-data grid continues to mark rejected or unavailable samples.
-A shape-only lens still records that surface imagery is absent.
+A shape-only dataset still records that surface imagery is absent.
 
 ## Lighting
 
@@ -117,7 +117,7 @@ node packages/bake/cli/refresh-shape-materials.mts --all --resume
 node site/build/prepare/prepare-facilities.mts
 ```
 
-The refresh retains each lens's triangles, atlas addresses, camera, and other
+The refresh retains each dataset's triangles, atlas addresses, camera, and other
 datasets. It regenerates surfaces, shadows, thumbnails, minimaps, and model
 context images, then updates their pins and provenance. The second command
 rebuilds the sources catalogue from those updated pins; run it after the batch,

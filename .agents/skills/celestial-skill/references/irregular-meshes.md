@@ -69,7 +69,7 @@ geometry. Inspect native coverage and texels across shared edges at close zoom.
 Preserve source texture detail while reducing faces; fewer faces do not by
 themselves require lower-resolution source maps.
 
-Inspect each lens with its supported lighting states. Keep the light attached to
+Inspect each dataset with its supported lighting states. Keep the light attached to
 the source body frame during camera rotation and document fixed-epoch or diffuse
 approximations. Reuse unchanged normalized maps only after checking their pins;
 regenerate geometry-dependent atlases, lighting, targeting data and companion

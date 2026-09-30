@@ -89,7 +89,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
     const mount = runtimeFactory(definition, {
       createLifetime() { lifetime = createSceneLifetime(); return lifetime; },
       createPlayback() { playback = createPreparedPlayback(); return playback; },
-      createControls() { return { publish(state) { if (state?.committed) events.push("controls"); }, setReady() { events.push("ready"); }, stats() { return { ready: true, destroyed: false, actions: 0, listenerCount: 0, lensIds: [], settings: [], state: null }; }, destroy() {} }; },
+      createControls() { return { publish(state) { if (state?.committed) events.push("controls"); }, setReady() { events.push("ready"); }, stats() { return { ready: true, destroyed: false, actions: 0, listenerCount: 0, datasetIds: [], settings: [], state: null }; }, destroy() {} }; },
       createSelection(options) { coordinator = createObjectSelectionRuntime(options); return coordinator; },
       createResources(resourceConfiguration) {
         resourceOptions = resourceConfiguration;

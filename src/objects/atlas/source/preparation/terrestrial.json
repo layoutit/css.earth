@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "atlas",
   "displayName": "Atlas",
@@ -335,6 +335,6 @@
     "sunSource": "Vendored JPL satellite orbit and a source-owned approximate IAU pole/spin presentation; source images use the independent PDS model camera geometry."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

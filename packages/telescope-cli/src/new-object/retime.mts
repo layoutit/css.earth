@@ -4,12 +4,12 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retime <host id>...
  *
  * Each archive planet's rows are read again and its orbit assembled as a draft would; only the period, the transit time and their
- * two source lines are written back, to the astronomy record, the measurements, the Year fact and the README. The shape, lenses and
+ * two source lines are written back, to the astronomy record, the measurements, the Year fact and the README. The shape, datasets and
  * every other file stay as they are. Nothing is baked here. */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
-import { json } from './lens.mts';
+import { json } from './dataset.mts';
 import { archiveRows, assembleArchiveOrbit, compositeMass } from './orbit.mts';
 
 /** The Year fact as hosted.mts writes it. */

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-209p",
   "displayName": "LINEAR",
@@ -105,6 +105,6 @@
     "qualification": "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

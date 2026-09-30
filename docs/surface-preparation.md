@@ -48,7 +48,7 @@ which can also run independently of source loading.
 [Material preparation](../packages/bake/src/objects/layers/terrestrial/radial/radial-materials.ts)
 consumes that prepared layout and writes textures through the shared
 [raster emitter](../packages/bake/src/objects/layers/terrestrial/raster-output.ts).
-[Lens selection](../packages/bake/src/objects/layers/terrestrial/alternative-lenses.ts)
+[Dataset selection](../packages/bake/src/objects/layers/terrestrial/alternative-datasets.ts)
 only selects a model or terrain entry; it does not import their preparers.
 
 The [implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
@@ -59,7 +59,7 @@ page off screen or behind the globe keeps the first level, because a browser
 decodes a whole image to draw any of it. Preparation measures where each page's
 faces sit at rest; while the globe spins, every page takes the selected level. A map whose source
 holds less detail than the finest level stops earlier (`maximumTextureWidth` in the paged recipe): its
-finer levels read that level's files, and its lens keeps the matching camera limit. The camera's
+finer levels read that level's files, and its dataset keeps the matching camera limit. The camera's
 closest approach follows the atlas density, so a denser atlas also lets the camera come closer. These texture levels are separate from its retired geographic paging.
 The texture-level implementation and measurements
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
@@ -126,9 +126,9 @@ thumbnails were unavailable in the local checkout; this was not a full catalogue
 delivery or browser-conformance pass. [Earth's close-zoom limitation](../src/objects/earth/README.md#known-problems)
 occurred with both the previous and new photographic bytes.
 
-The [Enceladus comparison](../src/objects/enceladus/evidence/native-source-sampling.png)
+The Enceladus comparison
 separates source sampling from WebP quality at an identical camera position.
-[Dione's enhanced-color capture](../src/objects/dione/evidence/native-source-enhanced.png)
+Dione's enhanced-color capture
 shows a complete product view. These examples demonstrate the prepared result;
 they do not establish new observational resolution or remove the sources' seams.
 The [Enceladus Pixelmatch evidence](../src/objects/enceladus/README.md#evidence)
@@ -232,7 +232,7 @@ other than ICRS or FK5 and is checked against Astropy in both directions.
 | ESO headers | HIERARCH keywords keep their namespace (`ESO DET NAME`, MATISSE's `PRO DISP COEF0`). Raw primaries reach 2,480 cards, so a header may span 256 records. Lower-case exponents are read as Astropy reads them. The archive's header service text is read one card per line. |
 | Sky images | A celestial image states RA along columns and Dec along rows, unprojected (SQUEEZE) or with one zenithal projection, through `CDELT`, `CD`, `PC` or `CROTA2`. The display raster puts north on the first row and east on the first column. Rotated, skewed or axis-swapped images, other projections, a `LONPOLE` other than 180 and a reference point on a pole are refused, since a flip cannot display them. |
 | Nebula Lab transport | Uses the shared image reader, then reverses rows once for top-down arrays. Missing/nonfinite pixels and float32 overflow are rejected; metadata cannot override structural fields. |
-| Pallas SPHERE metadata | ESO `HIERARCH` names and scalar values are decoded without stripping cards. The four released LAM Deconv frames have exact Astropy comparisons for all 777 extended keywords and all 65,536 pixels per frame. Decoding alone does not qualify a camera or a registration; Kleopatra's `zimpol` lens adds that separately, by computing the camera from the release's own spin record and an ephemeris rather than from the frames' inherited world-coordinate solution, which describes an uncropped frame and not the product. |
+| Pallas SPHERE metadata | ESO `HIERARCH` names and scalar values are decoded without stripping cards. The four released LAM Deconv frames have exact Astropy comparisons for all 777 extended keywords and all 65,536 pixels per frame. Decoding alone does not qualify a camera or a registration; Kleopatra's `zimpol` dataset adds that separately, by computing the camera from the release's own spin record and an ephemeris rather than from the frames' inherited world-coordinate solution, which describes an uncropped frame and not the product. |
 | MUSE acquisition | The existing [Python converter](../packages/bake/src/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
 
 Value cards support quoted strings (including slashes and doubled quotes),
@@ -335,8 +335,8 @@ left edge shows. The world frame, the status-bar longitude and the feature ancho
 other even when it is wrong; only the imagery disagrees. It must equal the edge the decoder wrote. The raster lane's
 photograph decoders (GeoTIFF, image and ISIS3 sources) write their maps from 0° E, whatever the source's centre longitude.
 
-The authored preparation measures it for every lens with native photographic sampling
-(`assertMapsStartAtSurfaceMapEdge` in `site/build/prepare/prepare-authored.ts`). It reads the lens's pinned source through
+The authored preparation measures it for every dataset with native photographic sampling
+(`assertMapsStartAtSurfaceMapEdge` in `site/build/prepare/prepare-authored.ts`). It reads the dataset's pinned source through
 its georeferenced sampler at true east longitudes, correlates that with the prepared minimap read from every candidate
 edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
 declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
@@ -353,7 +353,7 @@ lane. Their surface maps now declare 0° E, and each README records the correcti
 Headless Chromium on the dev server, each capture after `window.__cssEarth.ready`, "fly to" one named feature per body.
 Before, Umbriel's Wunda and Triton's Xuuch land on the no-data grid and Oberon's Hamlet and Titania's Gertrude on smeared
 edges; after, each lands on its feature. The before row's Iapetus tile already has its fix; its own before and after are in
-its [evidence note](../src/objects/iapetus/evidence/map-edge-2026-09-28.md).
+its evidence note.
 
 ![Gaspra detector image beside a reprojected mosaic, with four matching patches marked](images/gaspra-registration.png)
 
@@ -370,7 +370,7 @@ A radial surface supplies one radius per direction. `source-meshoptimizer`
 reduces source triangles instead; it can retain surfaces that a single radius
 cannot describe. Face budgets, open boundaries and error limits are checked by
 that path. Every radial display mesh has a ceiling of 2,000 faces, including
-source-preserving meshoptimizer reduction. Alternative lens meshes are checked
+source-preserving meshoptimizer reduction. Alternative dataset meshes are checked
 individually; their combined transport count is not the active face count.
 The simplifier's error estimate and the measured source-transfer
 distance are separate quantities.
@@ -394,17 +394,17 @@ faces held 486 MB of layer memory on a DPR 3 iPhone, and 173 MB at two. Every
 textured leaf follows the same rule, `TEXELS_PER_CSS_PIXEL` and `leafRasterScale`
 in [projective-surface-raster.ts](../packages/bake/src/scene/projective-surface-raster.ts):
 faces, polar caps, band leaves, ring tiles, volume slices and image layers hold
-their widest image, over every lens, level and page, at two texels per CSS
+their widest image, over every dataset, level and page, at two texels per CSS
 pixel, with the recipe's raster scale as a ceiling. On the iPhone 17 simulator
 Jupiter's page went from 2,823 to 133 MB of layers and Saturn's from 703 to 374 MB,
 with at most 4 of 3.16 million pixels changed at rest. A leaf names no image of its
-own: each lens's variant writes the surface and pole textures every leaf reads
+own: each dataset's variant writes the surface and pole textures every leaf reads
 (`scene/projector.ts`, `presentation/composite.ts`), which is what made Uranus's
-and Neptune's lenses draw their own maps. On a body with a dense map the texture
+and Neptune's datasets draw their own maps. On a body with a dense map the texture
 is drawn at half the resolution at maximum zoom and softens there (Ceres, Mars,
 Mercury).
 
-![Before and after the rule: Jupiter and Saturn at rest, Neptune's methane lens on main and after, Ceres at maximum zoom](images/leaf-texel-rule.webp)
+![Before and after the rule: Jupiter and Saturn at rest, Neptune's methane dataset on main and after, Ceres at maximum zoom](images/leaf-texel-rule.webp)
 
 At rest on Itokawa, 739 of 3.16 million screen pixels change; at maximum zoom each face is drawn
 at half the resolution, so a seam can show as a faint light line ([seam repair](#seam-repair-and-the-globe-interior-disc)).
@@ -483,7 +483,7 @@ and `triangle-faces.css` then drops the leaf's rounded corners. A browser with
 
 Same pose before and after the change (main, raster atlas, pixelmatch at threshold 0.1). Every face gets
 texels at one density, but where the source map is smoother than the old texels the screen does not
-change: the largest difference across all lenses of these three bodies was 0.45%, along a coverage edge.
+change: the largest difference across all datasets of these three bodies was 0.45%, along a coverage edge.
 Ordinary mapped imagery is sampled from the lossless surface map at this step.
 For banded surfaces, [projective-surface-raster.ts](../packages/bake/src/scene/projective-surface-raster.ts)
 packs latitude bands and gutters; poles have separate prepared tiles.
@@ -550,7 +550,7 @@ measured the same way on 2026-09-25 against the lossless files they replaced:
 | Image | Pixels | Lossless | q80 | Flagged |
 |---|---|---|---|---|
 | Body-marker pages (three) | 8192×32, 8192×32, 6080×32 | 482 KB | 284 KB | 13, 6, 6 |
-| Lens-billboard atlas | 1024×1024 | 247 KB | 98.5 KB | 4 |
+| Dataset-billboard atlas | 1024×1024 | 247 KB | 98.5 KB | 4 |
 | Star point atlas | 1024×32 | 14.0 KB | 0.7 KB | 0 |
 
 The per-body marker tiles the pages are packed from stay lossless.
@@ -579,7 +579,7 @@ These still set their own encoding:
 - Decorative images take quality 40
   ([`DECORATIVE_WEBP`](../packages/bake/src/raster/lossy-lane.ts)): the sidebar
   dataset maps (`prepared/minimaps/`) and the volume dataset previews
-  (`datasets/<lens id>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
+  (`datasets/<dataset id>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
   against the quality 90 maps they replaced: 15.8 MB became 4.8 MB with 0.074 %
   of pixels flagged; quality 30 flagged 0.119 %. A nearest-sampled category map
   keeps lossless when that is smaller, as it is for 11 noisy geology and region
@@ -799,7 +799,7 @@ camera-root offsets; browser GPU residency still requires visual inspection.
 
 ## Refresh photographs without rebuilding geometry
 
-Existing single-model spacecraft observation lenses can refresh through the same
+Existing single-model spacecraft observation datasets can refresh through the same
 surface-observation and triangle-atlas preparers used by a full preparation:
 
 ```sh
@@ -808,11 +808,11 @@ node packages/bake/cli/refresh-surface-observations.mts lutetia osiris
 ```
 
 Update the recipe and declare its source inputs first. This command checks the retained atlas's
-layout and transform matrices, prepares only the selected lenses, and updates
+layout and transform matrices, prepares only the selected datasets, and updates
 their photographs, thumbnails, minimaps, source indices and delivery pins.
-It records each refreshed surface's billboard colour and the lens catalogue's
+It records each refreshed surface's billboard colour and the dataset catalogue's
 control colour with the same steps as a full preparation.
-Geometry and other lenses remain retained. Provenance uses the
+Geometry and other datasets remain retained. Provenance uses the
 existing `recovered` basis because this is a partial refresh. The run's timings,
 source recipe hash and changed asset list are kept in ignored
 `output/surface-observation-refresh/<body>/refresh.json`. Alternative models or
@@ -855,7 +855,7 @@ source pixel footprints before applying display gain/gamma. Source special value
 are masked before sampling; observed black is retained. It reads one row strip
 at a time and supplies the same interpretation to the globe and sidebar map.
 
-A scientific lens with format `pds3-float-map` (for example Titan's heights and
+A scientific dataset with format `pds3-float-map` (for example Titan's heights and
 Ceres's Dawn VIR band depths) reads 32-bit float maps through
 [pds-float-map.ts](../packages/bake/src/objects/raster/pds/pds-float-map.ts). The
 label may be attached or detached (`labelPath`); byte order, west- or

@@ -20,7 +20,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - This is one model orientation, not a uniquely measured pole or current landmark phase.
 
-- Photographed illumination and sampling dominate; their pole/landmark registration is unqualified. No photographic lens is included.
+- Photographed illumination and sampling dominate; their pole/landmark registration is unqualified. No photographic dataset is included.
 
 - Extrapolation outside that interval is not qualified.
 
@@ -54,7 +54,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 The source-survey dispositions and evidence are recorded in the [investigation ledger](investigations.json).
 ## Included model and shared behavior
 
-The Shape model dataset shows the **approximate ellipsoid** above, with its model origin and non-unique shape/pole visible beside the active lens. The entire surface uses the ordinary shared missing-data grid. No terrain, albedo, rings or atmosphere are invented. Thermal roughness does not supply crater locations, so none are synthesized.
+The Shape model dataset shows the **approximate ellipsoid** above, with its model origin and non-unique shape/pole visible beside the active dataset. The entire surface uses the ordinary shared missing-data grid. No terrain, albedo, rings or atmosphere are invented. Thermal roughness does not supply crater locations, so none are synthesized.
 
 The 5° radius table follows `r(lon,lat)=1/sqrt((cos(lat)cos(lon)/a)²+(cos(lat)sin(lon)/b)²+(sin(lat)/c)²)`. Its exact axes, family and scaling formula are in `source/measurements.json`. The shared meshoptimizer recipe targets 480 native triangle leaves with a 2,000-leaf maximum. Simplification tolerance is separate from physical model uncertainty. Shared Flood lighting is the default; directional Shadows remains available. Minimap, thumbnail and context billboard must be regenerated from this same approximation.
 

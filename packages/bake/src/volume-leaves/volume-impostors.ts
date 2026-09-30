@@ -3,7 +3,7 @@ import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import sharp from 'sharp';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import type { PreparedCssVolume, PreparedVolumeImpostors, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '@cssearth/renderer/volume/types.ts';
-import type { PreparedVolumeLensBrightness } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import type { PreparedVolumeDatasetBrightness } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 
 const SIZE = 256;
 const AXES = ['x', 'y', 'z'] as const;
@@ -27,7 +27,7 @@ interface Plane {
 /** Saves exactly 26 orthographic PNGs, centered on physical local origin. */
 export async function prepareVolumeImpostors(options: {
   volume: PreparedCssVolume;
-  brightness: PreparedVolumeLensBrightness;
+  brightness: PreparedVolumeDatasetBrightness;
   readResource: (path: string) => Promise<Uint8Array>;
   writeResource: (path: string, bytes: Uint8Array) => Promise<void>;
   prefix: string;
@@ -35,7 +35,7 @@ export async function prepareVolumeImpostors(options: {
   const volume = validatePreparedCssVolume(options.volume);
   const { brightness, readResource, writeResource } = options;
   if (!brightness || !['overall', ...AXES].every(key => {
-    const value = brightness[key as keyof PreparedVolumeLensBrightness];
+    const value = brightness[key as keyof PreparedVolumeDatasetBrightness];
     return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1;
   })) throw new TypeError('Impostor brightness requires overall/x/y/z attenuation between zero and one.');
   const prefix = options.prefix.replace(/\/+$/u, '');
@@ -133,7 +133,7 @@ function plane(leaf: PreparedVolumeLeaf, axis: VolumeAxis): Plane {
 }
 
 function render(view: View, stacks: readonly { axis: VolumeAxis; planes: readonly Plane[] }[], textures: ReadonlyMap<string, Pixels>,
-  radius: number, brightness: PreparedVolumeLensBrightness): Buffer {
+  radius: number, brightness: PreparedVolumeDatasetBrightness): Buffer {
   const image = new Float64Array(SIZE * SIZE * 4);
   const strengths = view.back.map(Math.abs), maximum = Math.max(...strengths);
   let cumulativeWeight = 0, brightnessSum = 0;
@@ -155,7 +155,7 @@ function render(view: View, stacks: readonly { axis: VolumeAxis; planes: readonl
       image[p + 3] = alpha + image[p + 3] * remaining;
     }
   }
-  // The lens runtime attenuates the completed cloud, never individual slabs.
+  // The dataset runtime attenuates the completed cloud, never individual slabs.
   const attenuation = brightness.overall * brightnessSum / cumulativeWeight;
   const rgba = Buffer.alloc(image.length);
   for (let p = 0; p < image.length; p += 4) {

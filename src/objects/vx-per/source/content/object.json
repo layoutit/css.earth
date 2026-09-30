@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "vx-per",
   "displayName": "VX Per",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "vx-per-lens-color.webp",
+        "thumbnail": "vx-per-dataset-color.webp",
         "surface": "vx-per-surface-color@2x.webp",
         "poles": "vx-per-poles-color@2x.webp",
         "source": {

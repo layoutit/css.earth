@@ -6,7 +6,7 @@ export interface PreparedAssetReference {
   readonly url: string;
 }
 export interface ObjectDescriptor {
-  readonly schema: 'cssearth-object@1';
+  readonly schema: 'cssearth-object@2';
   readonly id: string;
   readonly type: string;
   /** Parameters interpreted by the registered reusable object type. */

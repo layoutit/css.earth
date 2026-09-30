@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "credit": "NASA/JPL/Space Science Institute",
@@ -17,7 +17,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 11520,
@@ -78,7 +78,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "Enhanced color",
       "falseColor": true,
       "width": 12015,
@@ -126,7 +126,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "width": 2222,
@@ -214,7 +214,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "relative-albedo",
+      "datasetId": "relative-albedo",
       "label": "Relative albedo",
       "falseColor": true,
       "width": 2222,
@@ -507,7 +507,7 @@
         "referenceRadiusMeters": 764000
       },
       "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Infrared",
       "falseColor": true,
       "sourceBinding": {

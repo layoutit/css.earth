@@ -9,7 +9,7 @@ Node file/image I/O and CSS projection are separate application adapters.
 
 `parseAuthoredObjectDescriptor()` is the authored-data boundary for migrated
 objects. It returns a typed `recipe` composed from declared source references,
-shape, surfaces and lenses, materials, frame banks, optional layers and motion,
+shape, surfaces and datasets, materials, frame banks, optional layers and motion,
 plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
 

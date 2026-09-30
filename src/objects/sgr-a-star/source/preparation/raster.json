@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/sgr-a-star/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "shape",
       "output": "sgr-a-star-surface-{id}{suffix}.webp",
-      "thumbnail": "sgr-a-star-lens-{id}.webp",
+      "thumbnail": "sgr-a-star-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {

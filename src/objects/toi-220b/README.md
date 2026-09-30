@@ -8,7 +8,7 @@ It is the only planet known around TOI-220. Its orbit and size follow Hoyer et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 10.69530651172 d Hoyer et al. 2021 (2021MNRAS.505.3361H), via the NASA Exoplanet Archive ps table (pl_refname HOYER_ET_AL__2021): a/R* 22.33; Hoyer et al. 2021 (2021MNRAS.505.3361H), via the NASA Exoplanet Archive ps table (pl_refname HOYER_ET_AL__2021): inclination 87.88 degrees Hoyer et al. 2021 (2021MNRAS.505.3361H), via the NASA Exoplanet Archive ps table (pl_refname HOYER_ET_AL__2021): e 0.032 Hoyer et al. 2021 (2021MNRAS.505.3361H), via the NASA Exoplanet Archive ps table (pl_refname HOYER_ET_AL__2021): omega 248 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460966.946848 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-220's measured colour (#ffebe1, the colour lens of toi-220 (src/objects/toi-220/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-220's measured colour (#ffebe1, the colour dataset of toi-220 (src/objects/toi-220/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-220's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (96, 97, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

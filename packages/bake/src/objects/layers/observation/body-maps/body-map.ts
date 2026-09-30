@@ -3,7 +3,7 @@
  * A cube of a resolved Solar System body is a small picture of its disc, north up, a few pixels across. Where each pixel lies
  * on the body follows from three things: when the cube was exposed (its own header), where JWST and the Sun were (JPL Horizons,
  * observer 500@-170), and how the body was turned (the IAU rotation model in a text PCK). `@cssearth/bake/objects/cameras` turns those into
- * the controlled camera every photograph lens uses, and controlledShapeCamera projects the body's surface into it. The one thing
+ * the controlled camera every photograph dataset uses, and controlledShapeCamera projects the body's surface into it. The one thing
  * the header cannot give is the disc's centre to a fraction of a pixel (JWST points to about 0.1″, one pixel), so it is fitted:
  * a disc of the body's known angular radius, blurred by a Gaussian, against the continuum image.
  *
@@ -75,7 +75,7 @@ export interface BodyMap { readonly width: number; readonly height: number; read
  * bilinearly from the cube. A cell is kept when the body faced JWST within the emission limit there and the cube has a depth. */
 export function projectBandMap(map: BandDepthMap, camera: ObserverCamera, radiusKm: number, grid: { width: number; height: number }, maximumEmissionDegrees: number): BodyMap {
   const { width, height } = map, depthRows = topRowFirst(map.depth, width, height), errorRows = topRowFirst(map.error, width, height);
-  const lens = controlledShapeCamera(camera), cells = grid.width * grid.height, depth = new Float32Array(cells).fill(NaN), error = new Float32Array(cells).fill(NaN), seenFacing = new Float32Array(cells);
+  const dataset = controlledShapeCamera(camera), cells = grid.width * grid.height, depth = new Float32Array(cells).fill(NaN), error = new Float32Array(cells).fill(NaN), seenFacing = new Float32Array(cells);
   const bilinear = (rows: Float64Array, x: number, y: number) => {
     const x0 = Math.floor(x), y0 = Math.floor(y), fx = x - x0, fy = y - y0;
     if (x0 < 0 || y0 < 0 || x0 + 1 >= width || y0 + 1 >= height) return NaN;
@@ -87,9 +87,9 @@ export function projectBandMap(map: BandDepthMap, camera: ObserverCamera, radius
     for (let column = 0; column < grid.width; column++) {
       total += weight;
       const east = (column + 0.5) * 360 / grid.width, normal = [Math.cos(latitude * DEGREE) * Math.cos(east * DEGREE), Math.cos(latitude * DEGREE) * Math.sin(east * DEGREE), Math.sin(latitude * DEGREE)];
-      const facing = normal[0]! * lens.observer[0]! + normal[1]! * lens.observer[1]! + normal[2]! * lens.observer[2]!;
+      const facing = normal[0]! * dataset.observer[0]! + normal[1]! * dataset.observer[1]! + normal[2]! * dataset.observer[2]!;
       if (facing < Math.cos(maximumEmissionDegrees * DEGREE)) continue;
-      const pixel = lens.project(normal.map(value => value * radiusKm * 1000));
+      const pixel = dataset.project(normal.map(value => value * radiusKm * 1000));
       if (!pixel) continue;
       const value = bilinear(depthRows, pixel[0]!, pixel[1]!), sigma = bilinear(errorRows, pixel[0]!, pixel[1]!);
       if (!Number.isFinite(value) || !Number.isFinite(sigma)) continue;

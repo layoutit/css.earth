@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "toutatis",
   "displayName": "Toutatis",
@@ -112,6 +112,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements; fixed arbitrary display orientation because Toutatis has non-principal-axis tumbling; directional lighting is illustrative"
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

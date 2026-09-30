@@ -8,7 +8,7 @@ It is the only planet known around TOI-257. Its orbit and size follow Addison et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 18.38770808538 d Addison et al. 2021 (2021MNRAS.502.3704A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2021): a/R* 17.6; Addison et al. 2021 (2021MNRAS.502.3704A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2021): inclination 87.91 degrees Addison et al. 2021 (2021MNRAS.502.3704A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2021): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459121.270086 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-257's measured colour (#fff8ff, the colour lens of toi-257 (src/objects/toi-257/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-257's measured colour (#fff8ff, the colour dataset of toi-257 (src/objects/toi-257/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-257's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (4, 30, 97), folded onto its orbit. Upper limits and rows without an error are left out.
 

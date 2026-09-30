@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-62",
   "displayName": "WASP-62",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "wasp-62-lens-color.webp",
+        "thumbnail": "wasp-62-dataset-color.webp",
         "surface": "wasp-62-surface-color@2x.webp",
         "poles": "wasp-62-poles-color@2x.webp",
         "source": {

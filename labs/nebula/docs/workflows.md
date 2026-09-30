@@ -40,7 +40,7 @@ The object configuration selects the available depth evidence; it never selects 
 
 **For Helix, open `/reconstruction?subject=helix-model-prior&inspection=compiler`.** The default **Nebula** view keeps the final cloud in the workspace. Press **Compile nebula** once; this authorizes source restoration, registration/star separation, structure preparation, the optional velocity scaffold, emission fitting and baking. Missing prepared files do not disable Compile. The configured current sources are already authorized; there are no intermediate acceptance clicks.
 
-After the first successful compile, **Detail**, **Faint emission** and **Depth** update automatically. Only the latest pending settings follow the active job; the previous cloud remains visible until the replacement decodes. Progress, **Cancel** and **Retry compile** are explicit. Refresh reconnects to the server-owned job and restores saved settings and camera. Cancellation does not restart work on refresh. Lens, **Neutral/Textured**, **Stars**, **Original**, **Earth view** and **Orbit** change prepared display state without baking.
+After the first successful compile, **Detail**, **Faint emission** and **Depth** update automatically. Only the latest pending settings follow the active job; the previous cloud remains visible until the replacement decodes. Progress, **Cancel** and **Retry compile** are explicit. Refresh reconnects to the server-owned job and restores saved settings and camera. Cancellation does not restart work on refresh. Dataset, **Neutral/Textured**, **Stars**, **Original**, **Earth view** and **Orbit** change prepared display state without baking.
 
 **Alignment** remains available at `/alignment?subject=helix-model-prior`. Its north-up angular frame registers ESO WFI optical, the wider ESO field and VISTA infrared. One image is visible at a time; switching preserves the camera and sky scale. Original / Without stars / Residual use the same native-pixel transform, and manual nudges remain separate from measured registration. Infrared and optical emission may differ after their stars align. Browsing a source or layer starts no processing.
 
@@ -79,13 +79,13 @@ Current processing repaints the Alignment density cloud’s exact 144 prepared q
 | Native NOX outputs | `.local/nebula-lab/star-removal-nox-applied/`; diffuse, residual, mask and receipts |
 | Running/saved job records | Separate star-removal and reconstruction job directories in the local cache |
 | Completed reconstruction banks | `.local/nebula-lab/reconstructions/`; descriptors, XYZ textures, provenance and manifest |
-| Compiler jobs and results | `.local/nebula-lab/compiler-jobs/` and `.local/nebula-lab/compiler/<result-id>/`; field, method, comparison images and shared lens banks |
-| Explicit lens-settings handoff | **Save lens settings** in Reconstruction writes `.local/nebula-lab/lens-settings/latest.json` and an immutable timestamped receipt |
+| Compiler jobs and results | `.local/nebula-lab/compiler-jobs/` and `.local/nebula-lab/compiler/<result-id>/`; field, method, comparison images and shared dataset banks |
+| Explicit dataset-settings handoff | **Save dataset settings** in Reconstruction writes `.local/nebula-lab/dataset-settings/latest.json` and an immutable timestamped receipt |
 | Versioned recipes/evidence | `models/lmc/`, `models/smc/`, shared recipe files and `sources/` |
 
 An image-to-density placement change requires **Preview** again to produce a matching bank. Browsing a result does not rewrite it. Promotion into a checked-in model or production object is a separate explicit task, with source credits and replay instructions retained.
 
-For a handoff, click **Save lens settings** once in the browser where you adjusted the lenses; one click exports every image's stored settings, so repeating it for all sources is unnecessary. It captures stored settings for every image, current result identity, cloud selection/axis brightness, stars and the active density draft separately from the applied filter. Wait for **✓ Lens settings saved**. It does not process or promote anything. Unvisited images have no personal settings to export; never substitute another browser's test bakes for the user's choices.
+For a handoff, click **Save dataset settings** once in the browser where you adjusted the datasets; one click exports every image's stored settings, so repeating it for all sources is unnecessary. It captures stored settings for every image, current result identity, cloud selection/axis brightness, stars and the active density draft separately from the applied filter. Wait for **✓ Dataset settings saved**. It does not process or promote anything. Unvisited images have no personal settings to export; never substitute another browser's test bakes for the user's choices.
 
 ## Development checks
 

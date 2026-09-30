@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/toi-1669c/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "toi-1669c-surface-{id}{suffix}.webp",
-      "thumbnail": "toi-1669c-lens-{id}.webp",
+      "thumbnail": "toi-1669c-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffede4, the colour lens of toi-1669 (src/objects/toi-1669/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffede4, the colour dataset of toi-1669 (src/objects/toi-1669/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "toi-1669",
           "srgb": "#ffede4",
-          "source": "the colour lens of toi-1669 (src/objects/toi-1669/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of toi-1669 (src/objects/toi-1669/source/photometry/stellar-color.json)"
         }
       }
     }

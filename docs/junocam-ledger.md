@@ -14,7 +14,7 @@ The finest pixel is the lowest label altitude times the camera's 675.4 microradi
 | --- | ---: | ---: | --- | ---: | ---: | --- | --- |
 | jupiter | 41,339 | 16,420 | 81 orbits, 0 to 80 | 3,210 km | 2.17 km | not measured | No program of this target is pinned. |
 | io | 255 | 247 | 37 orbits, 8 to 76 | 1,506 km | 1.02 km | not measured | No program of this target is pinned. |
-| europa | 52 | 52 | 17, 18, 26, 37, 40, 45 | 1,515 km | 1.02 km | measured | 4 image(s) registered within 1.5 px in europa-pj45; no package lens yet. |
+| europa | 52 | 52 | 17, 18, 26, 37, 40, 45 | 1,515 km | 1.02 km | measured | 4 image(s) registered within 1.5 px in europa-pj45; no package dataset yet. |
 | ganymede | 34 | 34 | 1, 24, 29, 34, 35 | 1,311 km | 0.89 km | not measured | No program of this target is pinned. |
 | earth | 18 | 6 | 0 | 677 km | 0.46 km | not measured | No program of this target is pinned. |
 | thebe | 9 | 9 | 68, 70, 72, 76 | 32,904 km | 22.22 km | not measured | No program of this target is pinned. |

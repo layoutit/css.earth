@@ -16,7 +16,7 @@ The display is a **0.4 km sphere** (800 m across): an estimate inside the publis
 ## Evidence
 
 - The prepared sphere has 480 native `u` raster triangles.
-- The [default view](evidence/default-view.webp) was captured in headless Chromium 148.0.7778.96 at 1440 × 900 with no page errors or failed requests.
+- The default view was captured in headless Chromium 148.0.7778.96 at 1440 × 900 with no page errors or failed requests.
 - The two-body path differs from the retained Horizons vectors by **527.71 km** and **521.57 km** 30 days either side of the scene epoch; `packages/astronomy/src/asteroids.test.ts` bounds it at 607 km.
 
 ## Known problems

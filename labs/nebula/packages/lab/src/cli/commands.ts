@@ -1,8 +1,8 @@
 /** Explicit compatibility commands; no basename search or hidden discovery. */
 export const labCommands: Record<string, string> = {
   "export-compact-finite-emission": "labs/nebula/packages/lab/src/cli/commands/export-compact-finite-emission.ts",
-  "bake-finite-lenses": "labs/nebula/packages/lab/src/cli/commands/bake-finite-lenses.ts",
-  "lens-tone-fit": "labs/nebula/packages/lab/src/cli/commands/lens-tone-fit.ts",
+  "bake-finite-datasets": "labs/nebula/packages/lab/src/cli/commands/bake-finite-datasets.ts",
+  "dataset-tone-fit": "labs/nebula/packages/lab/src/cli/commands/dataset-tone-fit.ts",
   "simulation-guided-reconstruction": "labs/nebula/packages/lab/src/cli/commands/simulation-guided-reconstruction.ts",
   "finite-density-material": "labs/nebula/packages/lab/src/cli/commands/finite-density-material.ts",
   "fit-tracer-density": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts",
@@ -57,7 +57,7 @@ export const labCommands: Record<string, string> = {
   "verify-nebula": "labs/nebula/packages/lab/src/cli/commands/verify-nebula.ts",
   "process-density-candidates": "labs/nebula/packages/lab/src/cli/commands/process-density-candidates.ts",
   "bake-nebula": "labs/nebula/packages/lab/src/cli/commands/bake-nebula.ts",
-  "promote-volume-lenses": "labs/nebula/packages/lab/src/cli/commands/promote-volume-lenses.ts",
+  "promote-volume-datasets": "labs/nebula/packages/lab/src/cli/commands/promote-volume-datasets.ts",
   "browser-removal-strength": "labs/nebula/packages/lab/browser/browser-removal-strength.ts",
   "prepare-overlay-variants": "labs/nebula/packages/lab/src/cli/commands/prepare-overlay-variants.ts",
   "browser-overlay-variants": "labs/nebula/packages/lab/browser/browser-overlay-variants.ts",
@@ -87,7 +87,7 @@ export const labCommands: Record<string, string> = {
   "browser-reconstruction-stability": "labs/nebula/packages/lab/browser/browser-reconstruction-stability.ts",
   "browser-reconstruction-reference": "labs/nebula/packages/lab/browser/browser-reconstruction-reference.ts",
   "browser-reconstruction-tabs": "labs/nebula/packages/lab/browser/browser-reconstruction-tabs.ts",
-  "browser-lens-levels": "labs/nebula/packages/lab/browser/browser-lens-levels.ts",
+  "browser-dataset-levels": "labs/nebula/packages/lab/browser/browser-dataset-levels.ts",
   "browser-difference-map": "labs/nebula/packages/lab/browser/browser-difference-map.ts",
-  "browser-lens-radial": "labs/nebula/packages/lab/browser/browser-lens-radial.ts"
+  "browser-dataset-radial": "labs/nebula/packages/lab/browser/browser-dataset-radial.ts"
 };

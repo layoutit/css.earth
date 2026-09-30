@@ -23,7 +23,7 @@ The asteroid validation report records the earlier source, preparation and brows
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1040.3 m error; the authored stopping threshold is 1100 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 483.3 m and maximum 1037.9 m.
 
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
+Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
 ## Known problems
 

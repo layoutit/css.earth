@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/refresh-terrain-photographs.mts <object-id> <lensId>... [--apply-staged]. The
+// Entry script: node packages/bake/cli/refresh-terrain-photographs.mts <object-id> <datasetId>... [--apply-staged]. The
 // work is in @cssearth/bake/refresh-terrain-photographs, with the generated solar geometry this entry loads from the
 // checkout.
 import { resolve } from 'node:path';

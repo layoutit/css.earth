@@ -8,8 +8,8 @@ import { bindDatasetPicker } from '../dataset-picker.mts';
 const test = sourceTest();
 
 test('the native dataset select activates its matching retained control', () => {
-  const { document, window } = parseHTML(`<div data-lens-picker>
-    <select data-lens-native-select><option value="normal">Visible color</option><option value="clouds">Cloud coverage</option></select>
+  const { document, window } = parseHTML(`<div data-dataset-picker>
+    <select data-dataset-native-select><option value="normal">Visible color</option><option value="clouds">Cloud coverage</option></select>
     <button class="object-observation-control" value="normal"></button>
     <button class="object-observation-control" value="clouds"></button>
   </div>`);

@@ -142,7 +142,7 @@ and assembly of 406 object packages.
 
 The broader shell suite is not green: 306 of 312 tests passed. Failures include
 canonical-density/loader audit findings, missing Earth retained-interaction
-evidence, missing Itokawa lens-race inputs, and an explicitly terminated atlas
+evidence, missing Itokawa dataset-race inputs, and an explicitly terminated atlas
 rebuild test. These are recorded separately from the passing runtime checks;
 this document does not establish merge readiness or assert that every broad
 failure predates this change.

@@ -24,9 +24,9 @@ export function contextObjectModule(contexts: readonly { id: string }[], assets:
     `export const CONTEXT_OBJECT_ASSET_URLS: Record<string, unknown> = ${JSON.stringify(assets)};\n`;
 }
 
-/** The prepared files the site reads while it builds pages (the focus-lens fragment and the dataset cards), and the source
+/** The prepared files the site reads while it builds pages (the focus-dataset fragment and the dataset cards), and the source
  * records a focus dataset credits (its manifest inputs). */
-export const CONTEXT_OBJECT_PREPARED_FILES = ['datasets', 'lenses', 'presentation'] as const;
+export const CONTEXT_OBJECT_PREPARED_FILES = ['datasets', 'datasets', 'presentation'] as const;
 
 /** A build-only module: a catalogue's points are fetched by URL when drawn, never imported. Importing a bank as a
  * module turns it into an array literal Safari cannot compile, and dev would load every bank on every page. */
@@ -53,14 +53,14 @@ export async function contextObjectAssetUrls(contexts: readonly { id: string }[]
   return Object.fromEntries(entries.sort(([left], [right]) => left.localeCompare(right, 'en')));
 }
 
-/** The frame of every volume a body shows through one of its lenses, so an opening camera can fit it. */
-async function readLensVolumes(entries: readonly CatalogEntry[], projectRoot: string) {
+/** The frame of every volume a body shows through one of its datasets, so an opening camera can fit it. */
+async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot: string) {
   const volumes: Record<string, unknown> = {};
   for (const { id } of entries) {
     let content: unknown;
     try { content = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'source/content/object.json'), 'utf8')); }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
-    const controls = isRecord(content) && isRecord(content.lenses) && Array.isArray(content.lenses.controls) ? content.lenses.controls : [];
+    const controls = isRecord(content) && isRecord(content.datasets) && Array.isArray(content.datasets.controls) ? content.datasets.controls : [];
     for (const control of controls) {
       const volumeId = isRecord(control) && isRecord(control.volume) ? control.volume.objectId : undefined;
       if (typeof volumeId !== 'string' || volumes[volumeId]) continue;
@@ -153,7 +153,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries),
     preparedCatalogueModule(entries.map(({ id, distance }, index) => ({ id, distance, discovery: discoveries[index]! })), focuses));
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
+  await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);
   await writeGenerated(resolve(projectRoot, 'site/prepared-stellar-extents.json'), JSON.stringify(await readStellarExtents([...entries, ...contexts], projectRoot)) + '\n');

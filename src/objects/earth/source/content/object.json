@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "earth",
   "displayName": "Earth",
@@ -100,14 +100,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Visible color",
-        "thumbnail": "/scenes/earth/earth-lens-normal.webp",
+        "thumbnail": "/scenes/earth/earth-dataset-normal.webp",
         "source": {
           "id": "nasa-blue-marble-july",
           "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
@@ -117,7 +117,7 @@
       {
         "id": "clouds",
         "label": "Cloud coverage",
-        "thumbnail": "/scenes/earth/earth-lens-clouds.webp",
+        "thumbnail": "/scenes/earth/earth-dataset-clouds.webp",
         "source": {
           "id": "nasa-blue-marble-clouds",
           "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif"
@@ -127,7 +127,7 @@
       {
         "id": "topography",
         "label": "Elevation",
-        "thumbnail": "/scenes/earth/earth-lens-topography.webp",
+        "thumbnail": "/scenes/earth/earth-dataset-topography.webp",
         "source": {
           "id": "gebco-2026-elevation",
           "url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
@@ -152,7 +152,7 @@
       {
         "id": "night-lights",
         "label": "Night lights",
-        "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
+        "thumbnail": "/scenes/earth/earth-dataset-night-lights.webp",
         "source": {
           "id": "nasa-black-marble-2025-public-radiance",
           "url": "https://www.lightpollutionmap.info/help.html"
@@ -176,7 +176,7 @@
       {
         "id": "enso",
         "label": "ENSO",
-        "thumbnail": "/scenes/earth/earth-lens-enso.webp",
+        "thumbnail": "/scenes/earth/earth-dataset-enso.webp",
         "falseColor": true,
         "source": {
           "id": "nasa-mur-gibs-tiles",

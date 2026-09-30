@@ -82,7 +82,7 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     if (request) {
       if (!requests.advance(request, 'committing')) return false;
       // Saved history and explicit focus publish before flight. Their native
-      // focus/lens result may already have updated the committed URL.
+      // focus/dataset result may already have updated the committed URL.
       if (request.scene === 'replace' || (request.camera.kind !== 'restore' && request.camera.kind !== 'focus')) {
         if (!commit(request, session)) return false;
       }

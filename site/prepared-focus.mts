@@ -6,7 +6,7 @@ import type { PreparedFocusDatasets } from '@cssearth/renderer/universe/prepared
 export interface PreparedFocusPolicy {
   metersPerParsec: number; defaultFocusRadiusM: number; minimumDistanceRadii: number; maximumDistanceM: number;
 }
-export type PreparedFocusPresentation = PreparedFocusDatasets & { selectLens(lensId: string): void };
+export type PreparedFocusPresentation = PreparedFocusDatasets & { selectDataset(datasetId: string): void };
 
 /** The catalogue names the detailed package, independently of whether its bank is resident. */
 export function preparedFocusObjectId(record: PreparedCatalogObject): string | undefined {
@@ -33,14 +33,14 @@ export function preparedFocusCitations(record: PreparedCatalogObject, sources: r
 }
 
 /** An unavailable package still opens its catalogue facts, including from an older dataset link. */
-export function resolvePreparedFocusLens(requested: string | null,
-  datasets: Pick<PreparedFocusDatasets, 'defaultLens' | 'lenses'> | null, unavailable = false): string | undefined {
+export function resolvePreparedFocusDataset(requested: string | null,
+  datasets: Pick<PreparedFocusDatasets, 'defaultDataset' | 'datasets'> | null, unavailable = false): string | undefined {
   if (unavailable) return;
   if (!datasets) {
     if (requested !== null) throw new RangeError('Prepared focus datasets are unavailable.');
     return;
   }
-  const lens = requested ?? datasets.defaultLens;
-  if (!datasets.lenses.some(candidate => candidate.id === lens)) throw new RangeError(`Unknown prepared focus lens: ${lens}`);
-  return lens;
+  const dataset = requested ?? datasets.defaultDataset;
+  if (!datasets.datasets.some(candidate => candidate.id === dataset)) throw new RangeError(`Unknown prepared focus dataset: ${dataset}`);
+  return dataset;
 }

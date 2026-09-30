@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "usgs-cassini-iss-2026-938nm",
@@ -17,7 +17,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Near-infrared",
       "falseColor": false,
       "width": 23048,
@@ -179,7 +179,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "interpolated",
+      "datasetId": "interpolated",
       "label": "Interpolated height",
       "falseColor": true,
       "width": 1440,
@@ -228,7 +228,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "interpolated",
+      "datasetId": "interpolated",
       "label": "Interpolated height",
       "falseColor": true,
       "width": 1440,
@@ -277,7 +277,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "coverage-distance",
+      "datasetId": "coverage-distance",
       "label": "Distance to data",
       "falseColor": true,
       "width": 1440,
@@ -326,7 +326,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "coverage-distance",
+      "datasetId": "coverage-distance",
       "label": "Distance to data",
       "falseColor": true,
       "width": 1440,
@@ -375,7 +375,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "topography",
+      "datasetId": "topography",
       "label": "Measured height",
       "falseColor": true,
       "width": 1440,
@@ -424,7 +424,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "topography",
+      "datasetId": "topography",
       "label": "Measured height",
       "falseColor": true,
       "width": 1440,
@@ -1681,7 +1681,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -1703,24 +1703,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored CSS geometry, UV sampling and seam settings."
-      }
-    },
-    {
-      "id": "titan-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Titan celestial recipe",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside the inputs.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
       }
     },
     {
@@ -1765,7 +1747,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -1782,7 +1764,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -1804,7 +1786,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "vims-2um",
+      "datasetId": "vims-2um",
       "label": "VIMS infrared",
       "falseColor": false,
       "width": 11520,
@@ -1868,7 +1850,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "vims-5um",
+      "datasetId": "vims-5um",
       "label": "VIMS infrared",
       "falseColor": false,
       "width": 11520,
@@ -1932,7 +1914,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "vims-color-ratio",
+      "datasetId": "vims-color-ratio",
       "label": "Infrared band ratios",
       "falseColor": true,
       "width": 11520,

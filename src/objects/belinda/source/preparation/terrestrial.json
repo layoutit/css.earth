@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "belinda",
   "displayName": "Belinda",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Uranus-system ephemeris and IAU/WGCCRE BODY714 rotation. Small periodic orientation terms are frozen at the stated preparation epoch."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

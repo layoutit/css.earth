@@ -32,19 +32,19 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 
 ## Evidence
 
-- **Photometric trials, 2026-09-13:** trials with the published Hapke parameters reduced accepted photographic area from 32.58% to 24.48% for Deep Impact and from 56.43% to 34.28% for NExT. Overlap differences improved in only 11 of 28 and four of 15 pairs, respectively. Both original photograph mosaics remain in use. [Parameters, measurements and limitations](evidence/photometry/trial.json) record these diagnostic trials, including the unverified original H-function approximation and the filter mismatch.
+- **Photometric trials, 2026-09-13:** trials with the published Hapke parameters reduced accepted photographic area from 32.58% to 24.48% for Deep Impact and from 56.43% to 34.28% for NExT. Overlap differences improved in only 11 of 28 and four of 15 pairs, respectively. Both original photograph mosaics remain in use. Parameters, measurements and limitations record these diagnostic trials, including the unverified original H-function approximation and the filter mismatch.
 
 - **Recipe update, 2026-09-13:** a full preparation after merging main's observation recipes ( plus this infrared change) preserves all 49 delivered images byte-for-byte. Runtime values are unchanged, so the earlier browser captures still apply to the comet views. The photographic display fields, source pins and navigation receipts use the new shared recipe; source/package and numerical-frame checks pass.
 
-- **Infrared browser checks, 2026-09-13:** [temperature](evidence/infrared/temperature.png) and [continuum slope](evidence/infrared/spectral-slope.png) in the running application, plus this infrared addition. Both datasets render with correct legends, grid gaps, and Shadows off. Selecting either dataset turns to its measured region. Dataset switching, rotation and zoom were exercised; the shared mobile information sheet was checked at 390 × 844. The desktop captures are 1280 × 720 and show new views, not a before/after pixel comparison.
+- **Infrared browser checks, 2026-09-13:** temperature and continuum slope in the running application, plus this infrared addition. Both datasets render with correct legends, grid gaps, and Shadows off. Selecting either dataset turns to its measured region. Dataset switching, rotation and zoom were exercised; the shared mobile information sheet was checked at 390 × 844. The desktop captures are 1280 × 720 and show new views, not a before/after pixel comparison.
 - **Reproduction and closure:** both declared field tables and preparation records reproduce byte-for-byte through the acquisition operator from isolated native input copies. All 36 focused acquisition, spectrum, camera and facet tests, six affected body source/package checks, and four mesh/landmark checks passed. Preparation build and typecheck passed. This is focused validation, not an all-body suite result.
 
 - **Infrared numerical checks, 2026-09-13:** [six native-row fixtures](../../../packages/bake/src/objects/layers/terrestrial/missions/fixtures/comets/hrii-native-reference.json), calculated independently with Astropy BlackBody and SciPy optimization, agree with the TypeScript fitter within 0.05 K and 0.01 percentage points per 100 nm. Synthetic spectra also verify units, reflected-light subtraction, masking, and free thermal amplitude. These check decoding/fitting, not absolute temperature accuracy or global coverage.
 - The [scan recipe](source/science/hrii/scan.json) pins the original exposures, solar spectrum, source mesh, context image and terrain controls. Its [reproduced preparation record](source/science/hrii/preparation.json) gives coverage, fit residuals and withheld-pixel counts. The native facet table is paired with this exact source shape before bounded transfer to the existing 1000-triangle display.
 
-- **Label discovery, 2026-09-12:** the [whole-body discovery check](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/objects/unit/surface-feature-discovery.test.mts) (now [`packages/renderer/src/node/labels/surface-feature-discovery.test.mts`](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts)) verifies earlier eligibility for the broad surface places. The 68 catalog and terrain checks passed, after merging main's photographic updates. The [browser capture](evidence/terrain-places/whole-body-2c24ca749.jpg), taken in the in-app browser at 1280 × 720, shows S2 and the Deep Impact site without a selected place at whole-body framing on the NExT lens. Rotating at the same distance also revealed S1. The label change preserves coordinates, captions, mesh, imagery and screen-size admission.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/objects/unit/surface-feature-discovery.test.mts) (now [`packages/renderer/src/node/labels/surface-feature-discovery.test.mts`](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts)) verifies earlier eligibility for the broad surface places. The 68 catalog and terrain checks passed, after merging main's photographic updates. The browser capture, taken in the in-app browser at 1280 × 720, shows S2 and the Deep Impact site without a selected place at whole-body framing on the NExT dataset. Rotating at the same distance also revealed S1. The label change preserves coordinates, captions, mesh, imagery and screen-size admission.
 
-- The [close-up comparison and browser record](evidence/closeups/README.md) show the eight-image result at the same camera and at DPR 1 and 2.
+- The close-up comparison and browser record show the eight-image result at the same camera and at DPR 1 and 2.
 
 - The constraint-grid qualification records checks and captured views.
 
@@ -53,7 +53,7 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 - **Surface place, 2026-09-12:** preparation and the runtime parser accepted the
   Deep Impact site; three focused unit tests passed. With this
   addition, searching for the site and switching to the 2005 photographs showed
-  its qualified caption. [Browser capture](evidence/surface-places.png).
+  its qualified caption. Browser capture.
   The published catalog passed a fresh byte-count check.
 
 - **S1–S4 terrain places, 2026-09-12:** three focused checks reproduce the map
@@ -72,17 +72,17 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `deep-impact` | 8 | 0 | — | — | — | its other 8 frames | 7 of 8 | 0.00° | 2 of 8 | — | ×1.02 | registered |
 | `next` | 6 | 0 | — | — | — | its other 6 frames | 0 of 6 | — | 0 of 6 | — | ×1.06 | no verdict |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ## Known problems
 
-- **Close-up replay, 2026-09-13:** regenerating the first cropped ITS camera fails its existing registration budget with both main's matcher and the radiance-unit fix. The regenerated control records are identical. The [replay comparison](evidence/registration/closeup-replay.json) preserves input identities and the failure; earlier successful reproduction reports do not establish a current pass. The shipped camera records and photographs remain unchanged.
+- **Close-up replay, 2026-09-13:** regenerating the first cropped ITS camera fails its existing registration budget with both main's matcher and the radiance-unit fix. The regenerated control records are identical. The replay comparison preserves input identities and the failure; earlier successful reproduction reports do not establish a current pass. The shipped camera records and photographs remain unchanged.
 - Infrared placement is coarse. Terrain residuals test alignment relative to the existing photographic/body frame; they do not establish an independent absolute position. That frame inherits source shape and earlier photographic-anchor uncertainty. Temperature and slope pixels must not be used to locate small surface features.
 - These are new fits to PDS version 3 spectra, not a reproduction of the 2013 paper’s published maps. That paper used earlier calibration and different meshes. Its quoted temperature errors cannot simply be assigned to these views. Calibration, unresolved temperature mixtures, scattered light and geometric uncertainty remain.
 
@@ -92,7 +92,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - S1–S4 are broad interpreted units. Their captions preserve the authors' qualified flow interpretation; no separate scarp point is claimed because the paper does not publish one in this frame.
 
-- The default Source constraints lens uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The grid means poorly constrained by those methods, not necessarily wholly unobserved. Neither view claims observed albedo.
+- The default Source constraints dataset uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The grid means poorly constrained by those methods, not necessarily wholly unobserved. Neither view claims observed albedo.
 
 - Flag counts are vertex counts, not surface-area percentages. Weak regions are the original authors' estimates, not additional cssEarth terrain.
 
@@ -117,7 +117,7 @@ The published equivalent-volume radius 2.83 km supplies scale only; it does not 
 
 Meshoptimizer retains original source vertices and closed, consistently wound connectivity, reduced to 1000 triangles. Estimated simplification error 25.353675842285156 m is neither a measurement uncertainty nor a Hausdorff bound. Original-mesh normals and cast shadows are baked into fixed atlases; no geometry, maps or illumination are computed at runtime.
 
-The source grid is selected by categorical flags before raster filtering and lighting. Both atlases per lens, their thumbnails, the constraint minimap, and the model-view context image/navigation marker use the same preparation. Geometry, native triangle leaves, camera and lighting recipes are unchanged.
+The source grid is selected by categorical flags before raster filtering and lighting. Both atlases per dataset, their thumbnails, the constraint minimap, and the model-view context image/navigation marker use the same preparation. Geometry, native triangle leaves, camera and lighting recipes are unchanged.
 
 </details>
 

@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
+import { loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { lineageSource } from '@cssearth/objects/provenance';
 import type { ContextAvailability } from '@cssearth/objects/provenance';
 import { sourceArray, sourceObject } from '@cssearth/objects/sources';
@@ -19,7 +19,7 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
   publicAssets?: PublicAssetAvailability;
 } = {}): Promise<ContextAvailability> {
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
-  const entries = await Promise.all(contexts.filter(object => object.type === 'volume-lens-bank').map(async ({ id }) => {
+  const entries = await Promise.all(contexts.filter(object => object.type === 'volume-dataset-bank').map(async ({ id }) => {
     const directory = resolve(projectRoot, 'src/objects', id);
     const read = async (base: string, path: string) => {
       const file = resolve(base, path), local = relative(base, file);
@@ -40,15 +40,15 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
     };
     try {
       const descriptor = parseObjectDescriptor(JSON.parse((await read(directory, 'object.json')).toString()));
-      const bank = await loadPreparedVolumeLenses(descriptor, { read: async path => new Uint8Array(await read(directory, path)).buffer });
+      const bank = await loadPreparedVolumeDatasets(descriptor, { read: async path => new Uint8Array(await read(directory, path)).buffer });
       const sources = sourceArray(sourceObject(JSON.parse((await read(directory, 'source/manifest.json')).toString())).inputs, raw => lineageSource(raw));
       const presentation = parsePreparedVolumePresentation(JSON.parse((await read(directory, 'prepared/presentation.json')).toString()), bank, sources);
-      for (const lens of bank.lenses) for (const resource of lens.volume.resources)
+      for (const dataset of bank.datasets) for (const resource of dataset.volume.resources)
         await verify(resolve(directory, 'prepared'), resource.path);
       const published = publicAssets === 'manifest'
         ? requireInventory(id, JSON.parse((await read(directory, 'inventory.json')).toString()))
         : null;
-      for (const lens of presentation.controls) for (const url of new Set([lens.thumbnailUrl, lens.texture?.url])) {
+      for (const dataset of presentation.controls) for (const url of new Set([dataset.thumbnailUrl, dataset.texture?.url])) {
         if (!url?.startsWith(`/scenes/${id}/`)) throw new TypeError(`Invalid dataset preview URL: ${url}.`);
         if (published) {
           const filename = url.slice(`/scenes/${id}/`.length);

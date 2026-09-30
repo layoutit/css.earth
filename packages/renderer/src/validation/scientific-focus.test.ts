@@ -20,14 +20,14 @@ const tree:PreparedTree = {nodes:[
   {parent:-1,tag:'div',className:'polycss-camera',style:'',properties:[],attributes:{}},
   {parent:0,tag:'div',className:'polycss-scene',style:'',properties:[],attributes:{}},
 ], properties:[], camera:0, scene:1, stageClasses:[]};
-const controls:ObjectControls = {lenses:{defaultLens:'elevation',controls:[{id:'elevation',label:'Elevation'}]}, settings:{controls:[
+const controls:ObjectControls = {datasets:{defaultDataset:'elevation',controls:[{id:'elevation',label:'Elevation'}]}, settings:{controls:[
   {name:'shadows',kind:'toggle',label:'Shadows',checked:true},
   {name:'orbit',kind:'toggle',label:'Orbit',checked:true},
 ]}};
 function variants() {
   const navigation = prepareScientificNavigation(solarGeometry, 'europa', focus, scene.camera);
   return [false,true].flatMap(shadows => [false,true].map(orbit => ({
-    when:{lensId:'elevation',shadows,orbit}, required:[], writes:[
+    when:{datasetId:'elevation',shadows,orbit}, required:[], writes:[
       {kind:'class',target:-1,name:'focus-shadows',value:shadows},
       {kind:'class',target:-1,name:'focus-orbit',value:orbit},
     ], materials:[], navigation,
@@ -35,7 +35,7 @@ function variants() {
 }
 const validate = (value:unknown) => requireVariants(value, tree, new Set(), [], controls, scene.camera);
 
-test('scientific focus emits the complete navigation contract for every lens toggle variant', () => {
+test('scientific focus emits the complete navigation contract for every dataset toggle variant', () => {
   const value = variants();
   assert.doesNotThrow(() => validate(value));
   for (const variant of value) {
@@ -52,7 +52,7 @@ test('scientific focus emits the complete navigation contract for every lens tog
 });
 
 test('a displayed toggle must select a distinct prepared effect', () => {
-  const unbound = [{...structuredClone(variants()[0]),when:{lensId:'elevation'}}];
+  const unbound = [{...structuredClone(variants()[0]),when:{datasetId:'elevation'}}];
   assert.throws(() => validate(unbound), /setting shadows has no prepared variant/);
   const inert = variants().map(variant => ({...variant,writes:[]}));
   assert.throws(() => validate(inert), /setting shadows has no prepared effect/);

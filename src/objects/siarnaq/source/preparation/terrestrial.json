@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "siarnaq",
   "displayName": "Siarnaq",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Saturn-system ephemeris. Published approximate spin pole converted from ecliptic J2000 to ICRF; arbitrary initial meridian. This is not a known current surface phase."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

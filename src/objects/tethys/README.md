@@ -38,11 +38,11 @@ The Tethys visual review covers six serial captures of the normal, infrared and 
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `iss` | 1 | 0 | — | — | — | the `normal` map | 1 of 1 | — | 1 of 1 | — | — | no verdict |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ## Known problems
@@ -61,7 +61,7 @@ Feature notes: 6 of the labelled names carry a caption note, the lead summary of
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="tethys-sources-and-preparation"></a>
-<a id="photographic-lenses"></a>
+<a id="photographic-datasets"></a>
 <a id="elevation"></a>
 <a id="geometry-delivery-and-scope"></a>
 <a id="b2-source-shape-and-relative-albedo"></a>
@@ -69,7 +69,7 @@ Feature notes: 6 of the labelled names carry a caption note, the lead summary of
 <details>
 <summary>Methods and source notes</summary>
 
-**Photographic lenses**
+**Photographic datasets**
 
 Odysseus lies near 30° N, 230° E; [Ithaca Chasma](https://planetarynames.wr.usgs.gov/Feature/2751) is centered near 14° S, 353.9° E. These provide independent checks of orientation and longitude registration. These photographic landmarks do not independently register the VIMS maps.
 
@@ -93,14 +93,14 @@ Pinned files, URLs and hashes are in `source/manifest.json`; acquisition and pre
 
 The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 5,310 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 3974.44 m, 95th percentile 2023.05 m and RMS 1036.86 m. These samples do not establish a full Hausdorff bound or qualify geographic registration, silhouette or individual features. The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
 
-The Shape lens uses the shared neutral gray over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 5.96 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
+The Shape dataset uses the shared neutral gray over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 5.96 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
 
 - [USGS / Cassini 2012 monochrome mosaic](https://astrogeology.usgs.gov/search/map/tethys_cassini_global_mosaic_293m): 11520 × 5760, about 293 m per pixel on a 536.3 km reference sphere. The GeoTIFF is north-up, equirectangular with center longitude 0°. Preparation rolls its 180° E left edge by half a width into the shared 0–360° E map. GeoTIFF no-data is exactly zero; missing observations use the shared gray grid. All nonzero values are retained.
 - [NASA/JPL 2014 enhanced-color map, PIA18439](https://www.jpl.nasa.gov/images/pia18439-color-maps-of-tethys-2014/): the full 13467 × 6734 JPEG, approximately 250 m per source pixel. Infrared, green and ultraviolet observations make this enhanced color, beyond human vision. The producer calibrated, registered and photometrically corrected the observations. The map starts at 0° E, north-up, and is not rolled. The published display mosaic has no separate validity mask: dark terrain is not classified as missing coverage.
 
 [Weirich, Gaskell, Palmer and Domingue (2025), Tethys SPC Shape Models and Assessment Products V1.0](https://sbn.psi.edu/pds/resource/weirichtethysshape.html), NASA PDS, DOI [10.26033/hpv0-eh61](https://doi.org/10.26033/hpv0-eh61). The original product description and XML labels are retained alongside the numeric GeoTIFFs.
 
-Global values are center-relative radius in meters, unlike the archive's regional height products. The displayed quantity is `radius * 0.001 - 531`, height in kilometers above the source's 531 km reference sphere. Color spans −12.5 to +12.5 km. Brightness shows northwest cartographic relief at true height scale. The shared curvature overlay and optional directional Shadows remain active on this lens too.
+Global values are center-relative radius in meters, unlike the archive's regional height products. The displayed quantity is `radius * 0.001 - 531`, height in kilometers above the source's 531 km reference sphere. Color spans −12.5 to +12.5 km. Brightness shows northwest cartographic relief at true height scale. The shared curvature overlay and optional directional Shadows remain active on this dataset too.
 
 New relative albedo uses the published 2025 GeoTIFFs and their original equatorial/polar projections. Values are dimensionless and normalized around 1; the archive gives a nominal 0–2 domain. The visible 0.5–1.5 scale saturates above 1.5. No height conversion or relief shading is applied to this quantity. It is a secondary SPC brightness product, less validated than topography, and is neither geometric albedo nor calibrated reflectance. Tethys used uncalibrated ISS inputs; Dione and Rhea used calibrated frames. Source sigma is internal maplet agreement, not absolute height uncertainty.
 
@@ -127,7 +127,7 @@ The [body registration record](source/cassini-ice/evidence/registration.md), [pr
 
 ## Cassini ISS photograph
 
-The lens projects one Cassini ISS narrow-angle frame onto the SPC shape model. The archive ships the calibrated image without geometry, so the camera comes from SPICE kernels. The spacecraft clock, frame, instrument, ephemeris and pointing kernels are pinned once in the [Cassini kernel bank](../../spice/cassini/manifest.json) for every Saturnian body; restore them with `node packages/bake/cli/kernel-bank.mts acquire cassini`. The camera is evaluated at mid-exposure, halfway between the start and stop clock counts in the PDS3 label.
+The dataset projects one Cassini ISS narrow-angle frame onto the SPC shape model. The archive ships the calibrated image without geometry, so the camera comes from SPICE kernels. The spacecraft clock, frame, instrument, ephemeris and pointing kernels are pinned once in the [Cassini kernel bank](../../spice/cassini/manifest.json) for every Saturnian body; restore them with `node packages/bake/cli/kernel-bank.mts acquire cassini`. The camera is evaluated at mid-exposure, halfway between the start and stop clock counts in the PDS3 label.
 
 | Check | Result |
 | --- | --- |
@@ -141,18 +141,18 @@ A texel keeps the photograph only when four conditions hold. Its four image cont
 
 Preparing Tethys again on 14 September 2026 refined the same frame differently. The limb fit used 152 fit and 147 holdout edges instead of 89 and 93, and its rotation fell from 0.012° to 0.0061°. The limb refinement module had not changed since before the previous images were committed, and two preparation runs on 14 September produced identical images. Why the fit found a different edge set is not identified.
 
-A [Pixelmatch comparison](evidence/iss-re-preparation/comparison.webp) renders both image sets in one page with Chrome 153.0.8010.37, 1440 × 1000, DPR 2 and an unchanged 1480 × 1560 crop. The previous capture swaps in the three earlier ISS images; every other file is unchanged. [Capture settings and byte pins](evidence/iss-re-preparation/capture.json) identify both image sets. Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks. Differences follow the limb and the edge of the photograph.
+A Pixelmatch comparison renders both image sets in one page with Chrome 153.0.8010.37, 1440 × 1000, DPR 2 and an unchanged 1480 × 1560 crop. The previous capture swaps in the three earlier ISS images; every other file is unchanged. Capture settings and byte pins identify both image sets. Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks. Differences follow the limb and the edge of the photograph.
 
 | Comparison | Mismatched pixels / 2,308,800 |
 | --- | ---: |
-| Repeat capture of the re-prepared lens, both views | 0; identical bytes |
-| [Previous → re-prepared, facing the photograph](evidence/iss-re-preparation/pose-1-change.json) | 141,030 |
-| [Previous → re-prepared, photograph edge at the limb](evidence/iss-re-preparation/pose-2-change.json) | 215,631 |
+| Repeat capture of the re-prepared dataset, both views | 0; identical bytes |
+| Previous → re-prepared, facing the photograph | 141,030 |
+| Previous → re-prepared, photograph edge at the limb | 215,631 |
 
-[In the images themselves](evidence/iss-re-preparation/assets.json), 8.0% of the surface texture's 32,768,000 pixels differ, as do 0.12% of the shadow texture, 2 of the thumbnail's 4,608 pixels and 3.4% of the [minimap](evidence/iss-re-preparation/minimap.webp).
+In the images themselves, 8.0% of the surface texture's 32,768,000 pixels differ, as do 0.12% of the shadow texture, 2 of the thumbnail's 4,608 pixels and 3.4% of the minimap.
 
 ## iPad atlas footprint
 
 Photographic normal/enhanced and elevation/albedo display atlases use quarter dimensions. Infrared and ice-absorption scales retain their existing values. The closed mesh culls its back faces.
 
-This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. Device evidence records the published bytes, decoded size estimates, trace results and remaining stalls.

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-nebula-delivery@1",
+  "schema": "cssearth-nebula-delivery@2",
   "id": "m42",
   "method": "compiler",
   "request": {
@@ -33,7 +33,7 @@
   },
   "sourceUrl": "https://www.eso.org/public/images/eso1723a/",
   "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. The surrounding stellar field uses Gaia astrometry and parallax-informed distance estimates, independently of the image footprint.",
-  "defaultLens": "eso-optical",
+  "defaultDataset": "eso-optical",
   "framingRadiusUnits": 2400,
   "acceptedLabResult": "m42-compiler",
   "fieldStars": {

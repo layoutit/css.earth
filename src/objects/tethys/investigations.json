@@ -26,7 +26,7 @@
       "id": "n1807429484-iss",
       "subject": "Cassini ISS NAC N1807429484 calibrated frame",
       "status": "included",
-      "finding": "The 2015-04-11 clear-filter I/F frame supplies the ISS photograph lens. Its SPICE camera is limb-refined and empirical Lommel-Seeliger correction is not measured albedo.",
+      "finding": "The 2015-04-11 clear-filter I/F frame supplies the ISS photograph dataset. Its SPICE camera is limb-refined and empirical Lommel-Seeliger correction is not measured albedo.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/tethys/source/manifest.json",
         "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484"

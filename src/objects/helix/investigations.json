@@ -3,8 +3,8 @@
   "objectId": "helix",
   "entries": [
     {
-      "id": "lens-eso-wfi",
-      "subject": "eso-wfi shipped image lens",
+      "id": "dataset-eso-wfi",
+      "subject": "eso-wfi shipped image dataset",
       "status": "included",
       "finding": "Default B/V/R photograph, 7059 by 6535 pixels over 28.02 by 25.94 arcmin; source-relative astrometric anchor. Its finite footprint misses some bright outer halos and cannot alone provide all compact image anchors.",
       "evidence": [
@@ -14,8 +14,8 @@
       ]
     },
     {
-      "id": "lens-eso-vista",
-      "subject": "eso-vista shipped image lens",
+      "id": "dataset-eso-vista",
+      "subject": "eso-vista shipped image dataset",
       "status": "included",
       "finding": "Y/J/K photograph, 6592² pixels over 37.51 arcmin square; 794 held-out stars give 0.34 arcsec RMS relative to WFI. Outer color and five retained compact cores extend beyond WFI; overlap astrometry is not absolute calibration or membership.",
       "evidence": [
@@ -25,8 +25,8 @@
       ]
     },
     {
-      "id": "lens-eso-wide",
-      "subject": "eso-wide shipped image lens",
+      "id": "dataset-eso-wide",
+      "subject": "eso-wide shipped image dataset",
       "status": "included",
       "finding": "Wider ESO 3.6 m photograph, 6850 by 4759 pixels over 48.82 by 33.92 arcmin; filters unspecified. The 229 held-out stars give 1.10 arcsec RMS relative to WFI. Softer structure/artifacts remain; one retained compact core comes from this source.",
       "evidence": [
@@ -73,7 +73,7 @@
       "id": "retained-image-cores",
       "subject": "34 source-proven compact image anchors",
       "status": "included",
-      "finding": "28 WFI, five VISTA and one wider-ESO core restore visual anchors, including the central star. Canonical source photometry remains visible outside an individual lens footprint. Angular Gaia matches and component offsets are separately recorded; depths stay conditional, and one VISTA edge core has no Gaia match.",
+      "finding": "28 WFI, five VISTA and one wider-ESO core restore visual anchors, including the central star. Canonical source photometry remains visible outside an individual dataset footprint. Angular Gaia matches and component offsets are separately recorded; depths stay conditional, and one VISTA edge core has no Gaia match.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/helix/source/stellar-field.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/helix/compiler.json"
@@ -94,7 +94,7 @@
       "id": "hubble-ctio-source",
       "subject": "Historical Hubble/CTIO photograph",
       "status": "excluded",
-      "finding": "The 4731 by 3129, 20.96 by 13.86 arcmin composite clips outer emission. It remains the source for historical central-detail trials, not the current three-lens compiler.",
+      "finding": "The 4731 by 3129, 20.96 by 13.86 arcmin composite clips outer emission. It remains the source for historical central-detail trials, not the current three-dataset compiler.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/helix/README.md",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/helix/source-candidates.json",

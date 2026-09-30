@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ds-tuc-a/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "ds-tuc-a-surface-{id}{suffix}.webp",
-      "thumbnail": "ds-tuc-a-lens-{id}.webp",
+      "thumbnail": "ds-tuc-a-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

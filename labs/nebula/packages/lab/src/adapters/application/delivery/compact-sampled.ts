@@ -88,10 +88,10 @@ export async function exportCompactSampled(
     JSON.parse((await pinned(root, result.model)).toString()),
   );
   const materials = array(object(method.materials).receipts),
-    lenses = [];
+    datasets = [];
   for (const image of images.images) {
     const colors =
-        recipe.lensComponents[image.id]!.ejecta > 0
+        recipe.datasetComponents[image.id]!.ejecta > 0
           ? sampledPointColors(values, recipe, image)
           : new Float64Array(recipe.source.height * 4),
       bytes = Buffer.alloc(colors.length * 8);
@@ -115,7 +115,7 @@ export async function exportCompactSampled(
           (await pinned(root, pin(object(fitPin).receipt))).toString(),
         ) as unknown)
       : undefined;
-    lenses.push({
+    datasets.push({
       id: image.id,
       label: image.label,
       credit: image.credit,
@@ -128,11 +128,11 @@ export async function exportCompactSampled(
   const bytes = Buffer.from(
     JSON.stringify(
       {
-        schema: "cssearth-compact-sampled@1",
+        schema: "cssearth-compact-sampled@2",
         sourceResult,
         recipe,
         particles,
-        lenses,
+        datasets,
         scene: result.scene,
         provenance: {
           model: result.model,
@@ -140,7 +140,7 @@ export async function exportCompactSampled(
           interpretation: result.interpretation,
         },
         interpretation:
-          "Original measured XYZ/flux particles; one retained chromaticity per finite emitter and lens; finite diffuse atoms, fitted strengths and materials. No image planes or atlases.",
+          "Original measured XYZ/flux particles; one retained chromaticity per finite emitter and dataset; finite diffuse atoms, fitted strengths and materials. No image planes or atlases.",
       },
       null,
       2,

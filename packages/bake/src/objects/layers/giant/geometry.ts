@@ -9,7 +9,7 @@ interface GeometryPolygon extends Omit<Parameters<typeof computeTextureAtlasPlan
 type TextureLeafOptions = {seamEdges?: Set<number>; seamBleed?:number; fitSurface?:boolean; leafSize?:number; imagePixels?:number};
 /** Pixel widths of the published images the leaves show, measured from what the preparation run wrote. */
 export interface BandedImagePixels {
-  /** The widest image a surface face can show, over every lens. */
+  /** The widest image a surface face can show, over every dataset. */
   surface: number;
   /** The width of the image at a URL; a tiled plane shows its own. */
   image: (url: string) => number;
@@ -116,7 +116,7 @@ function textureLeaf(config:BandedGeometryRecipe,polygon:GeometryPolygon,index:n
   let fitted=leafSize?fitTextureGeometry(geometry,leafSize,leafSize):geometry;if(fitSurface)fitted=fitProjectiveTextureGeometryToStableLayout(fitted);
   const address=fitSurface?createProjectiveSurfaceRasterPresentation({sourceWidth:config.surface.width,sourceHeight:config.surface.height,sourceRect:polygon.textureImageSource.sourceRect,addressSourceWidth:polygon.textureImageSource.width,addressSourceHeight:polygon.textureImageSource.height,addressSourceRect:polygon.textureImageSource.sourceRect,backgroundPosition:fitted.backgroundPosition,backgroundSize:fitted.backgroundSize,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,...(config.latitudeBoundsDegrees?{bands:latitudeRasterBands(config.latitudeBoundsDegrees,config.surface.height)}:{bandCount:config.latitudeSegments}),gutter:config.surface.gutter,overscan:config.surface.overscan}):fitted;
   // Only a surface face is a raster layer. It holds its widest image at TEXELS_PER_CSS_PIXEL, the recipe's scale as the ceiling:
-  // at scale 4 Jupiter's 4,160 px lenses sat at one texel per CSS pixel, 768 faces estimated at 257 MB of layers at DPR 3, 64 at two.
+  // at scale 4 Jupiter's 4,160 px datasets sat at one texel per CSS pixel, 768 faces estimated at 257 MB of layers at DPR 3, 64 at two.
   const projectiveLayer=()=>{
     if(imagePixels===undefined)throw new TypeError(`Surface leaf ${index} (${polygon.texture}): the width of the widest image it shows is missing.`);
     return{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,leafRasterScale(imagePixels,address.backgroundSize[0],config.surface.rasterScale))};

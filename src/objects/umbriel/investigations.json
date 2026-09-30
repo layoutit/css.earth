@@ -35,7 +35,7 @@
       "id": "jpl-legacy-map-catalog",
       "subject": "JPL legacy map catalog",
       "status": "excluded",
-      "finding": "Older display texture; no additional scientific meaning over the corrected original. Replaced rather than a duplicate lens.",
+      "finding": "Older display texture; no additional scientific meaning over the corrected original. Replaced rather than a duplicate dataset.",
       "revisitWhen": "A controlled replacement provides useful observed detail or coverage beyond the selected corrected mosaic.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/umbriel/source/manifest.json",
@@ -57,8 +57,8 @@
       "id": "carbon-oxide-spectroscopy",
       "subject": "Carbon oxide spectroscopy",
       "status": "deferred",
-      "finding": "Hemispheric spectra are scientifically useful but do not provide a qualified spatial composition raster for this lens system.",
-      "revisitWhen": "A spatially resolved Umbriel measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "finding": "Hemispheric spectra are scientifically useful but do not provide a qualified spatial composition raster for this dataset system.",
+      "revisitWhen": "A spatially resolved Umbriel measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/umbriel/source/manifest.json",
         "https://arxiv.org/abs/2607.05600"
@@ -68,7 +68,7 @@
       "id": "nasa-press-photographs-and-interior-models",
       "subject": "NASA press photographs and interior models",
       "status": "excluded",
-      "finding": "Disc photographs are not longitude/latitude maps; inferred interiors are not observed surface data. No fabricated color or interior lens.",
+      "finding": "Disc photographs are not longitude/latitude maps; inferred interiors are not observed surface data. No fabricated color or interior dataset.",
       "revisitWhen": "A Umbriel observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/umbriel/source/manifest.json"
@@ -87,7 +87,7 @@
       "id": "voyager-iss-color-2026",
       "subject": "Voyager 2 ISS green/violet/ultraviolet colour frames",
       "status": "included",
-      "finding": "3 GEOMED frames in 1 complete sets (16.9 km per pixel) placed by limb fit and mosaic registration supply the Voyager color lens. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.0, 1.03); the archive calibration gives 0.948 and 1.010. No phase normalisation; the north stays unavailable.",
+      "finding": "3 GEOMED frames in 1 complete sets (16.9 km per pixel) placed by limb fit and mosaic registration supply the Voyager color dataset. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.0, 1.03); the archive calibration gives 0.948 and 1.010. No phase normalisation; the north stays unavailable.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/umbriel/source/reference/voyager-color-placement.json",
         "https://ui.adsabs.harvard.edu/abs/1991LPSC...21..473B"

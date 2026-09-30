@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
@@ -13,7 +13,7 @@
         "terrain",
         "elevation"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "projection": {
         "kind": "planetocentric-radial-grid",
         "longitudeDirection": "west",
@@ -54,7 +54,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 720,
@@ -113,7 +113,7 @@
       ],
       "width": 800,
       "height": 800,
-      "lensId": "calibrated",
+      "datasetId": "calibrated",
       "label": "Calibrated image",
       "sourceBinding": {
         "kind": "catalogued",
@@ -484,7 +484,7 @@
         "latitudeDegrees": 35,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

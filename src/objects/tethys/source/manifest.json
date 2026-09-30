@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "credit": "NASA/JPL-Caltech/Space Science Institute",
@@ -17,7 +17,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 11520,
@@ -66,7 +66,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "Enhanced color",
       "falseColor": true,
       "width": 13467,
@@ -115,7 +115,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "width": 2222,
@@ -299,7 +299,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "relative-albedo",
+      "datasetId": "relative-albedo",
       "label": "Relative albedo",
       "falseColor": true,
       "width": 2222,
@@ -342,7 +342,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "relative-albedo",
+      "datasetId": "relative-albedo",
       "label": "Relative albedo",
       "falseColor": true,
       "width": 444,
@@ -385,7 +385,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "relative-albedo",
+      "datasetId": "relative-albedo",
       "label": "Relative albedo",
       "falseColor": true,
       "width": 444,
@@ -1148,7 +1148,7 @@
       "consumers": [
         "ice-absorption"
       ],
-      "lensId": "ice-absorption",
+      "datasetId": "ice-absorption",
       "label": "Ice absorption",
       "falseColor": true,
       "width": 1024,
@@ -1198,7 +1198,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Infrared",
       "falseColor": true,
       "width": 1024,

@@ -17,8 +17,8 @@ const format = PREPARED_CSS_OBJECT_FORMAT;
 
 export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {
   const descriptor=requireRecord(descriptorValue),definition=requireRecord(definitionValue);
-  if (descriptor.schema !== 'cssearth-object@1' || typeof descriptor.type !== 'string' ||
-      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') {
+  if (descriptor.schema !== 'cssearth-object@2' || typeof descriptor.type !== 'string' ||
+      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@5') {
     throw new TypeError('Prepared object identity does not match its descriptor.');
   }
   return JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id,

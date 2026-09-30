@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "kerberos",
   "displayName": "Kerberos",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Pluto-system ephemeris; Weaver et al. (2016) flyby rotation as an approximate display orientation. The 2025 shape fit has no converged pole solution."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

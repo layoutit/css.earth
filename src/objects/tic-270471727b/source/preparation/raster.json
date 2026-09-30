@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/tic-270471727b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "tic-270471727b-surface-{id}{suffix}.webp",
-      "thumbnail": "tic-270471727b-lens-{id}.webp",
+      "thumbnail": "tic-270471727b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffebdf, the colour lens of tic-270471727 (src/objects/tic-270471727/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffebdf, the colour dataset of tic-270471727 (src/objects/tic-270471727/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "tic-270471727",
           "srgb": "#ffebdf",
-          "source": "the colour lens of tic-270471727 (src/objects/tic-270471727/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of tic-270471727 (src/objects/tic-270471727/source/photometry/stellar-color.json)"
         }
       }
     }

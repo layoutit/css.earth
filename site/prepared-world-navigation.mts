@@ -29,7 +29,7 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, LENS_VOLUMES, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera, overviewFrameDistanceM } from './overview-context.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
@@ -65,12 +65,12 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       bodyRadiusM: systemRadius ?? frame.bodyRadiusM,
     }, optics) : selectionTarget(from, frame, optics, objectId);
   }
-  function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {
+  function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, dataset?: string | null) {
     const framed = createWorldSelectionTarget(from, frame, optics), arrival = arrivals.get(id);
-    if (!arrival || !arrival.lensIds.includes(lens ?? arrival.defaultLens)) return framed;
+    if (!arrival || !arrival.datasetIds.includes(dataset ?? arrival.defaultDataset)) return framed;
     const distanceUnits = presentWorldCamera(framed, frame, optics).distanceUnits;
     const oriented = worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits }, frame, optics);
-    return arrival.billboard && (lens ?? arrival.defaultLens) === arrival.defaultLens
+    return arrival.billboard && (dataset ?? arrival.defaultDataset) === arrival.defaultDataset
       ? frameArrivalBillboard(arrival, oriented, frame, optics) : oriented;
   }
   let lastCamera: WorldCamera | null = null, lastOptics: Optics | null = null;
@@ -105,7 +105,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, current = owner?.optics() ?? lastOptics;
       if (!from || !current) return null;
-      // An overview is framed through the normal lens, not a close-up's magnification, so its page looks the same however
+      // An overview is framed through the normal dataset, not a close-up's magnification, so its page looks the same however
       // it is reached (a cold load has no close-up to inherit).
       const optics = worldCameraViewport({ projectionScale: 1 }, current);
       // Its `zoom.frame` (object.json): fit what it draws, or a distance from the centre, looking the way the camera looks.
@@ -117,10 +117,10 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: distanceM / frame.metersPerUnit },
         frame, optics), focusPositionM: frame.originM };
     },
-    /** Fit a volume the body shows through its lens, when the view does not already hold it. Null when the view is
+    /** Fit a volume the body shows through its dataset, when the view does not already hold it. Null when the view is
      * already as far out as the fit, or the volume is unknown. */
-    lensVolumeTarget({ objectId, volumeId, mount }: { objectId: string; volumeId: string; mount?: ShellCamera | null }) {
-      const volume = LENS_VOLUMES.get(volumeId), frame = frames.get(objectId), owner = mount?.navigation;
+    datasetVolumeTarget({ objectId, volumeId, mount }: { objectId: string; volumeId: string; mount?: ShellCamera | null }) {
+      const volume = DATASET_VOLUMES.get(volumeId), frame = frames.get(objectId), owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!volume || !frame || !from || !optics) return null;
       const target = volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);

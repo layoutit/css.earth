@@ -46,12 +46,12 @@
  *
  * `text` ({ card, introduction, locator }) is drafted reader text cited to the paper, as `--from-archive` writes it; without it the
  * card and introduction stay marked for a person. `notes` are sentences for the README's "Not shown" list. A planet may carry
- * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" lens) or
- * `photometry` (three-band flux densities for the band-colour lens); planet-lenses.mts. `phaseCurves` adds a heat-map lens per
- * published phase-curve fit beside the colour lens (phase-curve-lens.mts). */
+ * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" dataset) or
+ * `photometry` (three-band flux densities for the band-colour dataset); planet-datasets.mts. `phaseCurves` adds a heat-map dataset per
+ * published phase-curve fit beside the colour dataset (phase-curve-dataset.mts). */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
-import { phaseCurveEntry, type PhaseCurveEntry } from './phase-curve-lens.mts';
+import { phaseCurveEntry, type PhaseCurveEntry } from './phase-curve-dataset.mts';
 
 export interface Cited { readonly value: number; readonly source: string; readonly url: string; readonly uncertainty?: number }
 export type ColorRoute = 'stis-ngsl' | 'gaia-xp' | 'pulkovo' | 'kiehling' | 'kharitonov' | 'burnashev';
@@ -80,7 +80,7 @@ export interface StarSpec {
 export interface DraftQuotes { readonly url: string; readonly title: string; readonly revision: string; readonly card?: string; readonly introduction?: string }
 export interface DraftText { readonly card: string; readonly introduction: string; readonly locator: string; readonly quotes?: DraftQuotes }
 function photometrySpec(value: unknown, label: string): PhotometrySpec {
-  // The lens's own parser refuses anything the record cannot carry; the spec's object id is filled in at generation.
+  // The dataset's own parser refuses anything the record cannot carry; the spec's object id is filled in at generation.
   const input = requireRecord(value, label), record = parseDiscBandColorRecord({ schema: DISC_BAND_COLOR_SCHEMA, objectId: 'spec', ...input }, label);
   return { unit: record.unit, source: record.source, bands: record.bands, displayRange: record.displayRange, displayRangeSource: record.displayRangeSource };
 }
@@ -112,9 +112,9 @@ export type OrbitSpec =
   | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string; readonly measured?: true }
   | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: HostedEpoch; readonly source: string; readonly url: string }
   | { readonly record: true; readonly source: string; readonly url: string };
-/** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" lens (planet-lenses.mts). */
+/** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" dataset (planet-datasets.mts). */
 export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
-/** Published flux densities in three infrared bands for the band-colour lens of an imaged planet (planet-lenses.mts): red, green,
+/** Published flux densities in three infrared bands for the band-colour dataset of an imaged planet (planet-datasets.mts): red, green,
  * blue from the longest wavelength, on one display range shared with the bodies it names. */
 export interface PhotometrySpec {
   readonly unit: string; readonly source: { readonly citation: string; readonly url: string; readonly locator: string };
@@ -126,7 +126,7 @@ export interface HostedSpec {
   readonly kind: 'planet' | 'companion'; readonly id: string; readonly name: string; readonly description: string; readonly order?: number;
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec; readonly text?: DraftText; readonly thermal?: ThermalSpec; readonly photometry?: PhotometrySpec;
-  /** Heat maps from published phase-curve fits, added beside the colour lens (phase-curve-lens.mts). */
+  /** Heat maps from published phase-curve fits, added beside the colour dataset (phase-curve-dataset.mts). */
   readonly phaseCurves?: readonly PhaseCurveEntry[];
   /** A companion that is a black hole: an astronomy record only (spec header). */
   readonly blackHole?: true;
@@ -168,9 +168,9 @@ function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): Ho
   if (unknown.length) throw new TypeError(`${id}: unknown fields ${unknown.join(', ')}.`);
   const paper = requireRecord(input.paper, at('paper')), orbit = orbitSpec(input.orbit, at('orbit'));
   const thermal = input.thermal === undefined ? undefined : thermalSpec(input.thermal, at('thermal'));
-  if (thermal && kind !== 'planet') throw new TypeError(`${id}: a thermal lens is a planet's; a companion star has its temperature.`);
+  if (thermal && kind !== 'planet') throw new TypeError(`${id}: a thermal dataset is a planet's; a companion star has its temperature.`);
   const photometry = input.photometry === undefined ? undefined : photometrySpec(input.photometry, at('photometry'));
-  if (photometry && (kind !== 'planet' || thermal)) throw new TypeError(`${id}: band photometry is a planet's one colour lens; not with a companion star or a thermal lens.`);
+  if (photometry && (kind !== 'planet' || thermal)) throw new TypeError(`${id}: band photometry is a planet's one colour dataset; not with a companion star or a thermal dataset.`);
   const phaseCurves = input.phaseCurves === undefined ? undefined : requireArray(input.phaseCurves, at('phaseCurves')).map((entry, i) => phaseCurveEntry(entry, at(`phaseCurves[${i}]`)));
   if (phaseCurves && kind !== 'planet') throw new TypeError(`${id}: a phase-curve map is a planet's.`);
   if (input.blackHole !== undefined && input.blackHole !== true) throw new TypeError(`${id}.blackHole is true or absent, not ${JSON.stringify(input.blackHole)}.`);

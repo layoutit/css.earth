@@ -24,7 +24,7 @@ its validators accept); the renderer never imports the bake.
   cutaway, composite and emissive presentations; and the prepared-presentation contract with its schemas, and the cubic-sky
   and directional-Sun contracts and preparers it validates, and the material-track source planning (frame lookups and banks)
   the layer presentations build on. It imports `scene` and `raster`. The host passes material
-  tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
+  tracks and dataset navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
   tests are `node --test` suites in `src/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
   slice stacks into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
@@ -36,7 +36,7 @@ its validators accept); the renderer never imports the bake.
 - `src/sky/` is published as `@cssearth/bake/sky` (Node only): the cubic sky bake (recipes, EXR source, baked faces,
   near-star sprites) and its CSS compiler. It imports `volume-leaves` and `volume`.
 - `src/density/` is published as `@cssearth/bake/density` (Node only): the density-volume object bake (acquisition,
-  column depth, fixed discs, slice atlases and retirement, lens-bank promotion). It imports `sky`, `volume-leaves` and
+  column depth, fixed discs, slice atlases and retirement, dataset-bank promotion). It imports `sky`, `volume-leaves` and
   `volume`.
 - `src/image-layers/` is published as `@cssearth/bake/image-layers` (Node only): the extruded image-layer bake and its
   resampler. It imports `volume-leaves`.
@@ -123,7 +123,7 @@ its validators accept); the renderer never imports the bake.
   `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,scientific-charts}.mts`; its tests are in `src/site-assets/` and `site/test/`.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
   minimap or preview raster is drawn from, read and checked; the sidebar minimaps and preview rasters themselves, with the
-  coverage direction of each lens's map, which the world-navigation stage turns a partial lens toward. It imports the topics
+  coverage direction of each dataset's map, which the world-navigation stage turns a partial dataset toward. It imports the topics
   `LOWER_TOPICS` declares for it (`raster`, `scene`, `objects/scene`, `objects/default-view`, `objects/interpretation` and
   three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the esbuild plugin (`bundle-renderer.ts`)
@@ -178,9 +178,9 @@ its validators accept); the renderer never imports the bake.
     no topic. The recipe dispatcher is site-owned preparation in
     `site/build/charts/`; the spectrum reader and compact spectrum are in `site/overview/`, because
     `site/prepare-body-overview.mts` uses them and the runtime may not import the bake.
-  - `objects/content`: the object-content contract (facts, labels, lens, legend and gallery recipes, the prepared shell
-    payload), the shared lens vocabulary, lens steps and prepared legends, each lens control's billboard colour, and the legend
-    labels a palette lens derives from the stretch its report states. It
+  - `objects/content`: the object-content contract (facts, labels, dataset, legend and gallery recipes, the prepared shell
+    payload), the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard colour, and the legend
+    labels a palette dataset derives from the stretch its report states. It
     imports no topic. The content preparer that reads factsheets and writes the payload is site-owned preparation in `site/build/content/`
     (it reads the prepared shell titles).
   - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
@@ -188,7 +188,7 @@ its validators accept); the renderer never imports the bake.
     fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
     commands), and attaching the banks to a prepared globe (`attach.ts`). It imports `objects/geometry`, `objects/raster`,
     `objects/scene`, `objects/layers/paged-ellipsoid` and `objects/layers/terrestrial`.
-  - `objects/stellar`: a star's colour lens from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
+  - `objects/stellar`: a star's colour dataset from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
     from a published figure or occultation, and Roche-von Zeipel gravity darkening, with the GaiaXPy script that samples a
     continuous Gaia XP spectrum (`xp-continuous-sample.py`) the body READMEs name. It imports `objects/color`,
     `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
@@ -201,10 +201,10 @@ its validators accept); the renderer never imports the bake.
     source records (`body-lineage.ts`) by each preparation family's recipe bindings (`lineage-recipes.ts`). The facilities
     and sources catalogues read it; nothing writes it. It imports `objects/layers/terrestrial`.
   - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
-    solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; the default
-    lens's data coverage, read from its prepared minimap, that the default camera turns toward; and the turn toward a partial
-    lens's data when a reader picks it (`lens-facing.ts`), from the coverage direction the minimap step records for each lens,
-    which the world-navigation stage applies to every lens whose recipe authors no focus. It imports `objects/scene` and
+    solar geometry the host passes in, with the check that a photograph dataset's default camera faces the dataset; the default
+    dataset's data coverage, read from its prepared minimap, that the default camera turns toward; and the turn toward a partial
+    dataset's data when a reader picks it (`dataset-facing.ts`), from the coverage direction the minimap step records for each dataset,
+    which the world-navigation stage applies to every dataset whose recipe authors no focus. It imports `objects/scene` and
     `raster`.
   - `objects/celestial`: an object's sky orientation and directional Sun, prepared into renderer-neutral JSON from its
     celestial profile and the solar geometry the host passes in. It imports `objects/scene` and `presentation`.
@@ -218,10 +218,10 @@ its validators accept); the renderer never imports the bake.
     body's acquisition plan and restores its missing pinned sources. It imports `raster` and `objects/sources`, and loads
     `objects/layers/terrestrial` and `objects/layers/observation` for the plan steps that need them. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
     coverage comparison stays in `packages/bake/authoring/ganymede/` for per-body authoring.
-  - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
-    downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It
-    sets up a body's lens (`survey-setup.ts`, with the survey figure table `vernazza-2021-figures.json` read through the
-    package's name), installs it into the body's package (`survey-install.ts`) and measures a lens against its paper's comparison
+  - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph datasets: the LAM release's listings and
+    downloads, apparitions and series of frames, which apparitions a dataset can join, and the survey figure's printed labels. It
+    sets up a body's dataset (`survey-setup.ts`, with the survey figure table `vernazza-2021-figures.json` read through the
+    package's name), installs it into the body's package (`survey-install.ts`) and measures a dataset against its paper's comparison
     figure (`published-comparison.ts`). It imports `objects/cameras`, `objects/geometry`, `objects/layers/terrestrial` and
     `sources`. Its commands are `packages/bake/cli/sphere-survey-{setup,install,apparitions}.mts` and `published-comparison.mts`,
     which resolve their checkout from their own location and pass it in; its tests are in `src/objects/sphere-survey/`.

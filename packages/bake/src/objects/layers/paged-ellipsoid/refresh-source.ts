@@ -7,7 +7,7 @@ type Mutable<T> = T extends readonly (infer Item)[] ? Mutable<Item>[] : T extend
 function mutable<T>(value: T): Mutable<T> { return structuredClone(value) as Mutable<T>; }
 const maps = object({surface: object({maps: array(object({name: string, path: string, scientific: optional(record)}))})});
 export const readMapConfiguration = async (path: string) => mutable(parse(await readJsonSource(path), maps, 'map configuration'));
-const content = object({lenses: object({controls: array(object({id: string}))}), resources: array(object({href: string}))});
+const content = object({datasets: object({controls: array(object({id: string}))}), resources: array(object({href: string}))});
 export const readRefreshContent = async (path: string) => mutable(parse(await readJsonSource(path), content, 'ENSO content'));
 const bindings = object({controls: array(object({id: string, qualification: optional(string)}))});
 export const readRefreshBindings = async (path: string) => mutable(parse(await readJsonSource(path), bindings, 'ENSO bindings'));

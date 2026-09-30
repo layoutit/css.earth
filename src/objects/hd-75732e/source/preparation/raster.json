@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-75732e/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "thermal",
       "output": "hd-75732e-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-75732e-lens-{id}.webp",
+      "thumbnail": "hd-75732e-dataset-{id}.webp",
       "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
@@ -32,7 +32,7 @@
     {
       "id": "illustration",
       "output": "hd-75732e-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-75732e-lens-{id}.webp",
+      "thumbnail": "hd-75732e-dataset-{id}.webp",
       "source": "illustration/55_Cancri_e_1_24364.glb",
       "falseColor": false,
       "science": {

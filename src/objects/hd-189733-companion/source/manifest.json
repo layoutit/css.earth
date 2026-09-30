@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "hd-189733-companion-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -49,22 +49,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "hd-189733-companion-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield"
       ]
     },
     {
@@ -137,7 +121,7 @@
       "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -160,7 +144,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -216,7 +200,7 @@
       "redistribution": "Catalogue rows retained unchanged with their citation.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -252,7 +236,7 @@
       "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
+        "reason": "The colour dataset rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],

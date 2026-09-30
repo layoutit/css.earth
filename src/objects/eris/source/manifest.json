@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "path": "measurements.json",
@@ -38,7 +38,7 @@
       "redistribution": "NASA media; an illustrative model, not photographed terrain or a measured map",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -61,7 +61,7 @@
       "redistribution": "Factual parameter transcription only; no article text or figures",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -102,7 +102,7 @@
       "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -144,7 +144,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -166,24 +166,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored CSS geometry, UV sampling and seam settings."
-      }
-    },
-    {
-      "id": "eris-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Eris celestial recipe",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside the inputs.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
       }
     },
     {
@@ -228,7 +210,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -261,7 +243,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -281,7 +263,7 @@
       "path": "reference/rendered-default-view.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: the branch's dev server at /eris/ with the default camera and Color lens, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+        "reason": "Evidence capture: the branch's dev server at /eris/ with the default camera and Color dataset, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
       }
     },
     {

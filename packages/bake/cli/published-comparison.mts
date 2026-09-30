@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/published-comparison.mts <object-id> [--write]. Measures a ground-based lens against its
+// Entry script: node packages/bake/cli/published-comparison.mts <object-id> [--write]. Measures a ground-based dataset against its
 // paper's comparison figure through the pipeline's own cameras (`measurePublishedComparison` in
 // @cssearth/bake/objects/sphere-survey); `--write` records the evidence and the README's comparison block.
 import { readFile, writeFile } from 'node:fs/promises';

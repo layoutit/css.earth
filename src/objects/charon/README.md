@@ -19,19 +19,19 @@ Charon combines New Horizons photographs, elevation, modeled Bond albedo and two
 
 ## Evidence
 
-The [LEISA capture record](evidence/leisa-ice/capture.json) binds the tested inputs, prepared assets and browser views.
+The LEISA capture record binds the tested inputs, prepared assets and browser views.
 Its `completeBodyPreparation` check recorded [`node tools/objects/dist/prepare-authored.js charon --write`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/prepare-authored.ts)
 (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). It checks both datasets at DPR 1 and 2, the mobile selector, dragging, Shadows off/on/off, and the Organa search result. The browser verifies the downloaded texture hashes and keeps the same 450 surface leaves while switching datasets.
 
-[Water ice](evidence/leisa-ice/water-ice.png) · [Ammonia](evidence/leisa-ice/ammonia.png) · [Organa](evidence/leisa-ice/organa.png) · [DPR 2](evidence/leisa-ice/ammonia-dpr2.png) · [Mobile](evidence/leisa-ice/mobile.png)
+Water ice · Ammonia · Organa · DPR 2 · Mobile
 
 The current raster textures start at 0° east. Features and minimaps now use that same frame; the retired 180° feature offset put labels on the opposite hemisphere. The Organa regression checks its published coordinate against the sphere axes, and the browser checks the minimap centre after flying there. Original photographs, elevation, albedo, geometry and lighting assets are byte-identical to the main baseline.
 
-The [source restoration check](evidence/leisa-ice/restoration.json) downloaded the original observations into an empty source directory and reproduced the two numeric maps and processing record. The only bootstrap was the checked-in band recipe. Node could not verify the SwRI PDF certificate chain in this environment, so that exact method PDF was retrieved with system curl and normal certificate validation. The [delivery check](evidence/leisa-ice/delivery.json) independently installed and hashed every Charon runtime asset from its immutable URL.
+The source restoration check downloaded the original observations into an empty source directory and reproduced the two numeric maps and processing record. The only bootstrap was the checked-in band recipe. Node could not verify the SwRI PDF certificate chain in this environment, so that exact method PDF was retrieved with system curl and normal certificate validation. The delivery check independently installed and hashed every Charon runtime asset from its immutable URL.
 
 Browser scope: installed Chrome on application, with the final Charon runtime and texture bytes. The subsequent main merges changed other bodies and preparation, not the application runtime used in these captures. Two preview-only filters omit unavailable Helix/Cat’s Eye volume banks; their local restoration requires a missing NOX model. This is Charon interaction evidence, not an unmodified whole-application build pass. The capture record lists the exact preview differences and the unrelated baseline test failures.
 
-Earlier [color-encoding evidence](evidence/color-encoding/capture.json) still applies to the unchanged photographic bytes. Its [delivery record](evidence/color-encoding/delivery.json), [color method](../../../docs/color-preparation.md) and [independent source inspection](source/validation/color-source-inspection.json) retain the earlier decoding and display qualifications. The older captures do not verify the corrected feature frame.
+Earlier color-encoding evidence still applies to the unchanged photographic bytes. Its delivery record, [color method](../../../docs/color-preparation.md) and [independent source inspection](source/validation/color-source-inspection.json) retain the earlier decoding and display qualifications. The older captures do not verify the corrected feature frame.
 
 ## Lighting law
 
@@ -41,7 +41,7 @@ The globe is lit with the lunar-Lambert law of [Buratti et al. (2017)](https://d
 - With the Sun behind the viewer the law darkens the limb to 0.56 of the centre at 86.5° emission.
 - The paper computes the surface phase function f(α) from the disc-integrated phase curve and prints no values, so the frames with Shadows on carry no phase term: only the disk function changes with the Sun.
 - The PDS colour mosaic was normalized with its own lunar-Lambert value (see below); this law is the paper's global fit to the LORRI approach images.
-- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js charon --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.027 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.184 at 0.98. The redraw also rebuilt `runtime.json` with texture placements that differ by rounding (0.01 to 0.05 units); it was restored to the published bytes, so only the lighting changed.
+- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js charon --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each dataset writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.027 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.184 at 0.98. The redraw also rebuilt `runtime.json` with texture placements that differ by rounding (0.01 to 0.05 units); it was restored to the published bytes, so only the lighting changed.
 
 ## Known problems
 
@@ -112,7 +112,7 @@ No atmosphere shell is supplied: New Horizons found no detectable atmosphere.
 
 ## New Horizons MVIC enhanced color
 
-The additional Enhanced color lens uses the PDS product
+The additional Enhanced color dataset uses the PDS product
 [nh_charon_color_mosaic::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx),
 retained as the original 116,006,912-byte four-band float32 array.
 The bands are CH4 895 nm, NIR 870 nm, red 625 nm and blue 475 nm;
@@ -184,7 +184,7 @@ The Bond-albedo view uses [New Horizons derived PDS4 product nh_charon_bond](htt
 LIDVID `urn:nasa:pds:nh_derived:plutosystem_geophysics:nh_charon_bond::1.0`.
 It is a modeled approximation to Bond albedo from LORRI photometry and scattering
 assumptions, not a direct bolometric measurement. The wrapper retains every
-original byte without resampling. The lens applies the label's scale
+original byte without resampling. The dataset applies the label's scale
 0.00392156862745; DN zero remains missing. The 1518×700 map uses a 606 km sphere,
 east-positive planetocentric coordinates and 2508.307177965 m pixels. Coverage
 ends before the south pole and retains unobserved sectors. Values run

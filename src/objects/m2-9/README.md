@@ -1,6 +1,6 @@
 # Twin Jet Nebula (M2–9)
 
-One Hubble optical lens displays an axially symmetric, image-conditioned emission model. **Depth and inclination are not measured.** The adopted physical scale remains substantially uncertain.
+One Hubble optical dataset displays an axially symmetric, image-conditioned emission model. **Depth and inclination are not measured.** The adopted physical scale remains substantially uncertain.
 
 ## Sources
 

@@ -22,7 +22,7 @@ export const PREPARED_PROJECTIVE_TEXTURE_LAYER_SCHEMA =
 export const TEXELS_PER_CSS_PIXEL = 2;
 
 /** The raster scale that shows a leaf's widest image at TEXELS_PER_CSS_PIXEL. `imagePixels` is the pixel width of the widest
- * image the leaf can show, over every lens, texture level and page; `backgroundWidth` is its background-size width in CSS
+ * image the leaf can show, over every dataset, texture level and page; `backgroundWidth` is its background-size width in CSS
  * pixels at scale 1. The ceiling keeps a leaf that already holds more texels than that at its box: the recipe's raster
  * scale for a projective leaf, 1 for a plain leaf whose box only ever shrinks. */
 export function leafRasterScale(imagePixels: number, backgroundWidth: number, ceiling: number): number {

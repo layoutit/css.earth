@@ -4,14 +4,11 @@
   "entries": [
     {
       "id": "lucy-photographs",
-      "subject": "Lucy L’LORRI photographs as a photographic lens",
+      "subject": "Lucy L’LORRI photographs as a photographic dataset",
       "status": "unresolved",
-      "finding": "PR #182 already includes the recovered TEMPEST numerical shape. PRs #189 and #190 supply the shared photograph pipeline and correct L’LORRI target binding. Six native Dinkinesh frames decode, but full-image, regional and additional-view registration trials remain unqualified; no photographic lens has been baked. The latest independent native-overlap check has 16 holdouts, 2.0284 px RMS and 4.7434 px maximum under the existing 1 px RMS limit.",
+      "finding": "PR #182 already includes the recovered TEMPEST numerical shape. PRs #189 and #190 supply the shared photograph pipeline and correct L’LORRI target binding. Six native Dinkinesh frames decode, but full-image, regional and additional-view registration trials remain unqualified; no photographic dataset has been baked. The latest independent native-overlap check has 16 holdouts, 2.0284 px RMS and 4.7434 px maximum under the existing 1 px RMS limit.",
       "revisitWhen": "New mesh-frame or camera/control-network evidence, a finer compatible source mesh, or a specifically demonstrated defect in the existing projection/matching code. Import support alone is now verified and does not justify repeating unchanged registration trials.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/study.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/llorri-native-overlap-probe.json"
-      ]
+      "evidence": []
     },
     {
       "id": "tempest-numerical-shape",
@@ -84,7 +81,6 @@
       "finding": "Frames 9545, 9587, 9602, 9617, 9632 and 9722 decode through the shared reader at PR #190, each with 1,046,433 accepted and 2,143 rejected detector pixels. Wrong-target binding is rejected. Values are relative DN per second, not I/F. The retained report proves decoding and target binding only; photographic registration remains unresolved.",
       "revisitWhen": "A qualified source-mesh camera solution. Recheck decoding only when the native product, decoder or declared target changes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/native-reader-check.json",
         "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/dataset.shtml"
       ]
     },
@@ -95,7 +91,6 @@
       "finding": "The corrected reconstruction SPK agrees with CSPICE through SpiceyPy at three tested observation midpoints. It corrects the trajectory problem documented in the archive timing note, while neither it nor TAN-SIP headers establishes the recovered mesh’s prime meridian or phase.",
       "revisitWhen": "A matching body-frame registration or evidence of a specific timing/aberration interpretation error.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/study.json",
         "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/NOTES/liens.txt"
       ]
     },
@@ -115,7 +110,7 @@
       "subject": "Outline-based orientation and pointing trials",
       "status": "deferred",
       "finding": "Pinhole and distortion-aware limb trials did not establish internal terrain alignment. A prior apparent pass sampled only part of the outline; fixing that defect changed its holdout RMS from 2.161 to 5.506 px. The historical report preserves the failed multi-view checks and the correction.",
-      "revisitWhen": "New independent terrain/frame evidence. An outline fit alone cannot reopen the photographic lens.",
+      "revisitWhen": "New independent terrain/frame evidence. An outline fit alone cannot reopen the photographic dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/README.md#known-problems"
       ]
@@ -124,12 +119,9 @@
       "id": "native-region-registration",
       "subject": "Frozen central region and native-image controls",
       "status": "deferred",
-      "finding": "The earlier crop altered pixels before convolution and its apparent improvement is superseded. Selecting the same region after full-image convolution leaves 14 independent-view holdouts with 1.1861 px RMS. A rigid regional trial also fails the additional view. The region does not qualify a photographic lens.",
+      "finding": "The earlier crop altered pixels before convolution and its apparent improvement is superseded. Selecting the same region after full-image convolution leaves 14 independent-view holdouts with 1.1861 px RMS. A rigid regional trial also fails the additional view. The region does not qualify a photographic dataset.",
       "revisitWhen": "A specific upstream registration fix or compatible finer shape; do not trim failing holdouts or change the frozen region to obtain a pass.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/study.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/stereo-native-region-9587.json"
-      ]
+      "evidence": []
     },
     {
       "id": "stereo-depth-diagnostic",
@@ -138,8 +130,6 @@
       "finding": "The two surrounding views provide 56 shared feature pairs: conditional median absolute mesh-depth difference 6.47 m and median paired-depth disagreement 1.43 m. The correlation supports a coarse-shape limitation hypothesis; inferred cameras prevent an absolute mesh-accuracy claim.",
       "revisitWhen": "A finer source mesh, independent camera/control solution or counterevidence that separates camera bias from missing shape detail.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/depth-audit.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/joint-rigid-probe.json",
         "https://doi.org/10.5194/epsc-dps2025-546"
       ]
     },

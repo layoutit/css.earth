@@ -50,10 +50,10 @@ export async function objectSourceCacheCandidates(id: string): Promise<readonly 
   const candidates: Candidate[] = [];
 
   const presentation = await readJson(`src/objects/${id}/source/presentation.json`).catch(() => null);
-  if (presentation && typeof presentation === 'object' && (presentation as Record<string, unknown>).schema === 'cssearth-volume-presentation-source@1') {
-    const lenses = (presentation as Record<string, unknown>).lenses;
-    if (Array.isArray(lenses)) for (const lens of lenses) {
-      const preview = (lens as Record<string, unknown>).preview as Record<string, unknown> | undefined;
+  if (presentation && typeof presentation === 'object' && (presentation as Record<string, unknown>).schema === 'cssearth-volume-presentation-source@2') {
+    const datasets = (presentation as Record<string, unknown>).datasets;
+    if (Array.isArray(datasets)) for (const dataset of datasets) {
+      const preview = (dataset as Record<string, unknown>).preview as Record<string, unknown> | undefined;
       // A sky-band composite has no publisher URL: it is composed here from survey tiles, so mirroring it is what
       // keeps a fresh checkout off the survey archive.
       const addressable = typeof preview?.url === 'string' || (typeof preview?.skyBands === 'object' && preview.skyBands !== null);

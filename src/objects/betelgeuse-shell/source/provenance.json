@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-provenance@1",
+  "schema": "cssearth-volume-provenance@2",
   "title": "Betelgeuse circumstellar material: polarised dust, the 4 micrometre light outside the disc, silicon monoxide around the star and the published Great Dimming clump",
   "kind": "observed-sky-maps-line-cube-and-published-radiative-transfer-model",
   "authors": [
@@ -195,7 +195,7 @@
     "The 2019 clump is a model fitted to images, not an image. Its January and March 2020 epochs are recorded by its own authors as unoptimised best guesses and are not shipped.",
     "Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.",
     "Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.",
-    "The four lenses span 2019 to 2024 and measure different things. None is a picture of another.",
+    "The four datasets span 2019 to 2024 and measure different things. None is a picture of another.",
     "The 4 micrometre light is one reconstruction of one epoch. Its depth is the envelope that best projects to its radial profile, an inference like the 2024 map’s, drawn symmetric in depth. Within one beam of the published disc that light is the star’s own edge smeared by the beam, so it is drawn only from 1.19 stellar radii out.",
     "The SiO depths assume every parcel moves straight out from the star at one speed, the blue edge of its absorption against the star. The same absorption shows gas falling back, and the inner wind of a red supergiant is turbulent, so a velocity is not a unique depth: the depths are this model’s, not measured ones.",
     "Inside the star’s continuum footprint the SiO line absorbs against the star and emission there is not drawn, so the envelope has an empty cylinder along the line of sight through the star.",

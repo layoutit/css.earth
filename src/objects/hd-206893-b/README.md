@@ -12,7 +12,7 @@ HD 206893 B is a dusty brown dwarf 11 au from its star. Small wobbles in its mot
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
 
 **Rotation.** No rotation period or spin axis of HD 206893 B on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

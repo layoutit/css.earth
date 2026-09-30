@@ -34,10 +34,10 @@ export function retainedPhotographicAtlas(scene:Record<string,unknown>):Photogra
 }
 
 /** Select an existing model without changing a triangle, camera, or atlas address. */
-export function retainedShapeAtlas(scene: Record<string, unknown>, lensId: string) {
-  const ranges = scene.surfaceLensRanges === undefined ? [] : records(scene.surfaceLensRanges);
-  const range = ranges.find(range => range.lensId === lensId);
-  if (ranges.length && !range) throw new Error(`Shape lens has no retained geometry: ${lensId}.`);
+export function retainedShapeAtlas(scene: Record<string, unknown>, datasetId: string) {
+  const ranges = scene.surfaceDatasetRanges === undefined ? [] : records(scene.surfaceDatasetRanges);
+  const range = ranges.find(range => range.datasetId === datasetId);
+  if (ranges.length && !range) throw new Error(`Shape dataset has no retained geometry: ${datasetId}.`);
   const triangles = requireArray(scene.surfaceTriangles), leaves = requireArray(scene.bodyLeaves);
   const start = range ? requireFiniteNumber(range.start) : 0, count = range ? requireFiniteNumber(range.count) : triangles.length;
   if (![start, count].every(Number.isSafeInteger) || start < 0 || count < 1 || start + count > triangles.length || leaves.length !== triangles.length)

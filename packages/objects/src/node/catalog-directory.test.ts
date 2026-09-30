@@ -11,7 +11,7 @@ async function objects(packages: Record<string, unknown>) {
   onTestFinished(() => rm(root, { force: true, recursive: true }));
   for (const [id, overview] of Object.entries(packages)) {
     await mkdir(join(root, id), { recursive: true });
-    await writeFile(join(root, id, 'object.json'), JSON.stringify({ schema: 'cssearth-object@1', id, type: 'x', properties: overview === null ? {} : { overview } }));
+    await writeFile(join(root, id, 'object.json'), JSON.stringify({ schema: 'cssearth-object@2', id, type: 'x', properties: overview === null ? {} : { overview } }));
   }
   return root;
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "measured-ellipsoid",
@@ -54,7 +54,7 @@
         "coordinates": "survey/camera.json",
         "referenceRadiusMeters": 1525.973578806757
       },
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "capture": {
@@ -194,7 +194,7 @@
         "latitudeDegrees": -0.51,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/v1358-orionis/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
@@ -51,7 +51,7 @@
     {
       "id": "radial-field-2013",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358or2.dat",
       "falseColor": true,
       "science": {
@@ -94,7 +94,7 @@
     {
       "id": "radial-field-2017",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358ori.dat",
       "falseColor": true,
       "science": {
@@ -137,7 +137,7 @@
     {
       "id": "meridional-field-2013",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358or2.dat",
       "falseColor": true,
       "science": {
@@ -180,7 +180,7 @@
     {
       "id": "meridional-field-2017",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358ori.dat",
       "falseColor": true,
       "science": {
@@ -223,7 +223,7 @@
     {
       "id": "azimuthal-field-2013",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358or2.dat",
       "falseColor": true,
       "science": {
@@ -266,7 +266,7 @@
     {
       "id": "azimuthal-field-2017",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358ori.dat",
       "falseColor": true,
       "science": {
@@ -309,7 +309,7 @@
     {
       "id": "brightness-2013",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358or2.dat",
       "falseColor": true,
       "science": {
@@ -353,7 +353,7 @@
     {
       "id": "brightness-2017",
       "output": "v1358-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "v1358-orionis-lens-{id}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/v1358ori.dat",
       "falseColor": true,
       "science": {

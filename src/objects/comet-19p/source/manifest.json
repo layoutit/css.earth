@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "usgs-dem",
@@ -191,7 +191,7 @@
       },
       "width": 64,
       "height": 32,
-      "lensId": "usgs",
+      "datasetId": "usgs",
       "label": "USGS",
       "falseColor": false,
       "sourceBinding": {
@@ -221,7 +221,7 @@
       },
       "width": 64,
       "height": 32,
-      "lensId": "dlr",
+      "datasetId": "dlr",
       "label": "DLR",
       "falseColor": false,
       "sourceBinding": {
@@ -373,7 +373,7 @@
         "latitudeDegrees": 80,
         "ambient": 1,
         "diffuse": 0,
-        "lensId": "micas"
+        "datasetId": "micas"
       }
     }
   ],

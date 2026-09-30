@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "freia",
   "displayName": "Freia",
@@ -111,6 +111,6 @@
     "sunSource": "DAMIT model 442 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

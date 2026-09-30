@@ -153,7 +153,7 @@ async function main() {
     schema: 'cssearth-halley-giotto-intake-report@1', manifest: { path: 'src/objects/comet-1p/source/reference/giotto-hmc-intake.json' },
     archiveSurvey: survey?.report, shape: { ...manifest.shape, bytes: shapeBytes.length },
     dataset: manifest.dataset, guide: manifest.guide, frames,
-    result: { status: 'UNQUALIFIED_SURFACE_LENS', projectedSurfacePixels: null,
+    result: { status: 'UNQUALIFIED_SURFACE_DATASET', projectedSurfacePixels: null,
       missingEvidence: ['Source-controlled mapping from Stooke body coordinates to the encounter camera.',
         'Validated surface coverage excluding foreground dust and unresolved limb/terminator pixels.',
         'Registration residuals and validation in an independent frame.'],

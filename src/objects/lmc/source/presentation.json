@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "lmc",
   "name": "Large Magellanic Cloud",
-  "defaultLens": "horalek-widefield",
+  "defaultDataset": "horalek-widefield",
   "bank": {
-    "path": "src/objects/lmc/prepared/lenses.json"
+    "path": "src/objects/lmc/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -37,7 +37,7 @@
     "catalogue-stars",
     "sky-registration"
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "horalek-widefield",
       "label": "Horálek optical",
@@ -72,7 +72,7 @@
       "id": "vista-infrared",
       "label": "ESO VISTA",
       "title": "LMC in near infrared",
-      "description": "Near-infrared colours from ESO's VISTA survey are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All lenses share one opacity, so this lens renders brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "description": "Near-infrared colours from ESO's VISTA survey are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All datasets share one opacity, so this dataset renders brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
       "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
       "detail": "8954 × 10000 px",
       "facts": [
@@ -102,7 +102,7 @@
       "id": "wise-wide-infrared",
       "label": "NASA AllWISE",
       "title": "LMC in WISE infrared",
-      "description": "Infrared colours from the NASA/IPAC AllWISE mosaic are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All lenses share one opacity, so this lens renders much brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "description": "Infrared colours from the NASA/IPAC AllWISE mosaic are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All datasets share one opacity, so this dataset renders much brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
       "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
       "detail": "6000 × 6000 px",
       "facts": [

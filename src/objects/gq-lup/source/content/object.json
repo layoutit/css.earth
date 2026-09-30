@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gq-lup",
   "displayName": "GQ Lup",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
-        "thumbnail": "gq-lup-lens-color.webp",
+        "thumbnail": "gq-lup-dataset-color.webp",
         "surface": "gq-lup-surface-color@2x.webp",
         "poles": "gq-lup-poles-color@2x.webp",
         "source": {

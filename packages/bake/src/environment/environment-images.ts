@@ -51,7 +51,7 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
   const descriptor: Descriptor = descriptorInput ?? JSON.parse(await readFile(join(objectDirectory, 'object.json'), 'utf8'));
   // These resources have their own preparation steps later in the build. A scene body's runtime lists no environment
   // resources: parsing all 3,587 of them (1.2 GB) to find that out cost every dev start about 8 s.
-  if (descriptor.type === 'volume-lens-bank' || descriptor.type === 'galaxy-point-field' || descriptor.type === 'layered-body') return;
+  if (descriptor.type === 'volume-dataset-bank' || descriptor.type === 'galaxy-point-field' || descriptor.type === 'layered-body') return;
   const preparedBytes = await readFile(containedPath(objectDirectory, descriptor.prepared.url));
   const expected = JSON.parse(preparedBytes.toString());
   const data = expected.data ?? expected;

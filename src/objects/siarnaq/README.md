@@ -20,7 +20,7 @@
 
 - Equating that effective diameter with a volume diameter is a display convention, not a measured volume or three measured axes. This construction does not reproduce the exact inversion model or its lightcurves.
 
-- No registered photographic surface product was qualified, so they do not become a texture lens. The ordinary shared missing-data grid covers the entire shape.
+- No registered photographic surface product was qualified, so they do not become a texture dataset. The ordinary shared missing-data grid covers the entire shape.
 
 - This constrains the approximate spin axis, not a current prime-meridian or landmark phase; the initial meridian is arbitrary.
 

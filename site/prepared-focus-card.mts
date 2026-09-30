@@ -36,16 +36,16 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   type Bank = { root: HTMLElement; buttons: HTMLButtonElement[]; details: HTMLElement[]; contexts: HTMLElement[] };
   const banks: Bank[] = [];
   const adopt = () => {
-    for (const element of root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')) {
+    for (const element of root.querySelectorAll<HTMLElement>('[data-focus-dataset-bank], [data-focus-facts-bank]')) {
       if (banks.some(bank => bank.root === element)) continue;
       const bank = { root: element,
-        buttons: [...element.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
-        details: [...element.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
+        buttons: [...element.querySelectorAll<HTMLButtonElement>('[data-focus-dataset]')],
+        details: [...element.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')],
         contexts: [...element.querySelectorAll<HTMLElement>('[data-dataset-context]')],
       };
       for (const button of bank.buttons) button.addEventListener('click', event => {
-        if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
-          event.preventDefault(); currentPresentation.selectLens(button.getAttribute('value') ?? '');
+        if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusDatasetBank) {
+          event.preventDefault(); currentPresentation.selectDataset(button.getAttribute('value') ?? '');
         }
       }, { signal: events.signal });
       banks.push(bank);
@@ -61,20 +61,20 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       showTab(currentPresentation ? 'dataset' : 'factsheet');
     currentRecordId = record?.id;
     for (const bank of banks) {
-      const active = currentPresentation?.objectId === (bank.root.dataset.focusLensBank ?? bank.root.dataset.focusFactsBank);
+      const active = currentPresentation?.objectId === (bank.root.dataset.focusDatasetBank ?? bank.root.dataset.focusFactsBank);
       bank.root.hidden = !active;
       if (!active || !currentPresentation) continue;
-      const available = new Set(currentPresentation.lenses.map(lens => lens.id));
+      const available = new Set(currentPresentation.datasets.map(dataset => dataset.id));
       for (const button of bank.buttons) {
         // Read the prepared attribute in both the server DOM and the live browser.
-        const lens = button.getAttribute('value') ?? '';
-        button.disabled = !available.has(lens);
-        const pressed = String(lens === currentPresentation.selectedLens);
+        const dataset = button.getAttribute('value') ?? '';
+        button.disabled = !available.has(dataset);
+        const pressed = String(dataset === currentPresentation.selectedDataset);
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       publishDatasetPreview(bank.root, bank.buttons);
-      for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
-      for (const context of bank.contexts) context.hidden = context.dataset.datasetContext !== currentPresentation.selectedLens;
+      for (const detail of bank.details) detail.hidden = detail.dataset.focusDatasetDetails !== currentPresentation.selectedDataset;
+      for (const context of bank.contexts) context.hidden = context.dataset.datasetContext !== currentPresentation.selectedDataset;
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };

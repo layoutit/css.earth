@@ -4,4 +4,4 @@ Radius, period, transit time and inclination: J. M. Jenkins et al., "Discovery a
 
 Numerical extraction and sphere: cssEarth, MIT. The neutral gray is a display convention, not an observed colour.
 
-Illustration lens: NASA's artist's concept map of Kepler-452 b from Eyes on Exoplanets, NASA/JPL-Caltech (https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/Kepler-452_b.jpg), used unchanged under NASA's media guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/). An artist's concept, not an observation.
+Illustration dataset: NASA's artist's concept map of Kepler-452 b from Eyes on Exoplanets, NASA/JPL-Caltech (https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/Kepler-452_b.jpg), used unchanged under NASA's media guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/). An artist's concept, not an observation.

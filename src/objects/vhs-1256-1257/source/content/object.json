@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "vhs-1256-1257",
   "displayName": "VHS 1256-1257 A",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
-        "thumbnail": "vhs-1256-1257-lens-color.webp",
+        "thumbnail": "vhs-1256-1257-dataset-color.webp",
         "surface": "vhs-1256-1257-surface-color@2x.webp",
         "poles": "vhs-1256-1257-poles-color@2x.webp",
         "source": {

@@ -8,7 +8,7 @@ It is the only planet known around TOI-1648. Its orbit and size follow Carleo et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.3315684 d Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): a/R* 26.4; Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): inclination 88.29 degrees Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): e 0.178 Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): omega 286 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460467.880926 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1648's measured colour (#ffdbc2, the colour lens of toi-1648 (src/objects/toi-1648/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1648's measured colour (#ffdbc2, the colour dataset of toi-1648 (src/objects/toi-1648/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1648's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (59, 79, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

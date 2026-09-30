@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "vesta",
   "displayName": "Vesta",
@@ -597,6 +597,6 @@
     "sunSource": "JPL Horizons osculating Kepler elements and the DLR Dawn Claudia rotation model"
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

@@ -18,26 +18,26 @@ const fixed = (value: number,digits: number) => Number(value.toFixed(digits));
 
 export function parseObservedSurfaceRecipe(input: unknown) {
   const config = parse(input, observedRecipe, 'observed surface recipe');
-  if(config?.schema!=='cssearth-observed-surfaces@1'||!isArray(config.sources)||!isArray(config.lenses)||!config.lenses.length)throw new TypeError('Invalid observed-surface recipe.');
+  if(config?.schema!=='cssearth-observed-surfaces@2'||!isArray(config.sources)||!isArray(config.datasets)||!config.datasets.length)throw new TypeError('Invalid observed-surface recipe.');
   const sourcePaths=new Set(config.sources.map(source=>source.path)),ids=new Set(),outputs=new Set();
   const positive=(value: number)=>Number.isFinite(value)&&value>0;
   const fraction=(value: number)=>Number.isFinite(value)&&value>=0&&value<=1;
   const dimensions=(width: number,height: number)=>Number.isSafeInteger(width)&&Number.isSafeInteger(height)&&width>0&&height>0&&width*height<=67108864;
   const operations=(items: readonly ObservationTransform[] | undefined)=>{for(const op of items??[]){if(!['flip','crop','resize','sharpen'].includes(op.kind))throw new TypeError('Unsupported observation transform.');if(op.kind==='resize'&&!dimensions(op.width,op.height))throw new TypeError('Invalid resize dimensions.');if(op.kind==='crop'&&(!op.region||!dimensions(op.region.width,op.region.height)||![op.region.left,op.region.top].every(v=>Number.isSafeInteger(v)&&v>=0)))throw new TypeError('Invalid crop dimensions.');if(op.kind==='sharpen'&&!positive(op.options?.sigma))throw new TypeError('Invalid sharpening radius.');}};
-  for(const lens of config.lenses){
-    if(!/^[a-z][a-z0-9-]*$/u.test(lens.id)||ids.has(lens.id)||!sourcePaths.has(lens.source)||!lens.decode)throw new TypeError('Invalid observation identity.');ids.add(lens.id);
-    if(!['raster','fits'].includes(lens.decode.kind))throw new TypeError('Unsupported observation decoder.');
-    if(lens.decode.kind==='raster'&&![3,4].includes(lens.decode.channels))throw new TypeError('Invalid raster channels.');
-    if(lens.decode.kind==='fits'){
-      const color=lens.decode.color;
-      if(lens.decode.bitpix!==-32||!dimensions(lens.decode.width,lens.decode.height)||!color||![3,4].includes(color.channels)||!isArray(color.palette)||color.palette.length!==3||color.palette.some(rgb=>!isArray(rgb)||rgb.length!==3||rgb.some(c=>!Number.isSafeInteger(c)||c<0||c>255))||!isArray(color.percentiles)||color.percentiles.length!==2||!color.percentiles.every(fraction)||color.percentiles[0]>=color.percentiles[1]||color.percentiles[1]===1||!['sqrt','power'].includes(color.transfer)||!positive(color.exponent)||!fraction(color.minimumCoverage))throw new TypeError('Invalid scientific colour mapping.');
+  for(const dataset of config.datasets){
+    if(!/^[a-z][a-z0-9-]*$/u.test(dataset.id)||ids.has(dataset.id)||!sourcePaths.has(dataset.source)||!dataset.decode)throw new TypeError('Invalid observation identity.');ids.add(dataset.id);
+    if(!['raster','fits'].includes(dataset.decode.kind))throw new TypeError('Unsupported observation decoder.');
+    if(dataset.decode.kind==='raster'&&![3,4].includes(dataset.decode.channels))throw new TypeError('Invalid raster channels.');
+    if(dataset.decode.kind==='fits'){
+      const color=dataset.decode.color;
+      if(dataset.decode.bitpix!==-32||!dimensions(dataset.decode.width,dataset.decode.height)||!color||![3,4].includes(color.channels)||!isArray(color.palette)||color.palette.length!==3||color.palette.some(rgb=>!isArray(rgb)||rgb.length!==3||rgb.some(c=>!Number.isSafeInteger(c)||c<0||c>255))||!isArray(color.percentiles)||color.percentiles.length!==2||!color.percentiles.every(fraction)||color.percentiles[0]>=color.percentiles[1]||color.percentiles[1]===1||!['sqrt','power'].includes(color.transfer)||!positive(color.exponent)||!fraction(color.minimumCoverage))throw new TypeError('Invalid scientific colour mapping.');
     }
-    if(lens.coverage?.kind==='component-fits'&&(lens.decode.kind!=='raster'||lens.decode.crop||lens.calibration||lens.coverage.sources.some(path=>!sourcePaths.has(path))))throw new TypeError('Component coverage requires an uncropped RGB map and declared FITS sources.');
-    for(const continuation of[lens.decode.continuation,lens.coverage?.kind==='boundary-mean'?lens.coverage:null])if(continuation&&(!positive(continuation.exponent)||!positive(continuation.boundaryFraction)||continuation.boundaryFraction>=1||!Number.isFinite(continuation.minimumBoundarySum ?? 0)))throw new TypeError('Invalid boundary continuation.');
-    if(lens.calibration&&(!sourcePaths.has(lens.calibration.source)||(lens.decode.kind !== 'raster' || lens.decode.channels!==3)))throw new TypeError('Invalid true-colour calibration input.');
-    operations(lens.transforms);
-    if(!isArray(lens.products)||!lens.products.length)throw new TypeError('Observation has no products.');
-    for(const product of lens.products){
+    if(dataset.coverage?.kind==='component-fits'&&(dataset.decode.kind!=='raster'||dataset.decode.crop||dataset.calibration||dataset.coverage.sources.some(path=>!sourcePaths.has(path))))throw new TypeError('Component coverage requires an uncropped RGB map and declared FITS sources.');
+    for(const continuation of[dataset.decode.continuation,dataset.coverage?.kind==='boundary-mean'?dataset.coverage:null])if(continuation&&(!positive(continuation.exponent)||!positive(continuation.boundaryFraction)||continuation.boundaryFraction>=1||!Number.isFinite(continuation.minimumBoundarySum ?? 0)))throw new TypeError('Invalid boundary continuation.');
+    if(dataset.calibration&&(!sourcePaths.has(dataset.calibration.source)||(dataset.decode.kind !== 'raster' || dataset.decode.channels!==3)))throw new TypeError('Invalid true-colour calibration input.');
+    operations(dataset.transforms);
+    if(!isArray(dataset.products)||!dataset.products.length)throw new TypeError('Observation has no products.');
+    for(const product of dataset.products){
       if(!/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(product.filename)||outputs.has(product.filename)||!['surface','poles','thumbnail'].includes(product.kind)||!product.encoding)throw new TypeError('Invalid observation product.');outputs.add(product.filename);operations(product.transforms);
       if(product.kind==='surface'&&(!Number.isSafeInteger(product.packing?.bandCount)||product.packing.bandCount<1||!Number.isFinite(product.packing.gutter)||product.packing.gutter<0))throw new TypeError('Invalid surface packing.');
       if(product.kind==='poles'){const p=product.projection;if(!p||!dimensions(p.tileSize,p.tileSize)||!isArray(p.poles)||!p.poles.length||p.poles.some(value=>!['north','south'].includes(value))||!positive(p.latitudeSegments)||!['nearest-closed','bilinear-wrapped'].includes(p.sampling)||!['direct-segment','boundary-difference','orthographic'].includes(p.angularMode))throw new TypeError('Invalid polar projection.');}
@@ -210,7 +210,7 @@ async function decodeRaster(bytes: Buffer | undefined,config: {channels: 3 | 4; 
 /** Intersect the three measured filters before resampling the publisher's RGB image.
  * The recipe names whether the longitude endpoint repeats. Reversal and the
  * declared offset put releases with different origins in the same body frame. */
-function componentCoverage(map: RasterMap, config: Extract<NonNullable<ReturnType<typeof parseObservedSurfaceRecipe>['lenses'][number]['coverage']>,{kind:'component-fits'}>, inputs: Map<string,Buffer>) : RasterMap {
+function componentCoverage(map: RasterMap, config: Extract<NonNullable<ReturnType<typeof parseObservedSurfaceRecipe>['datasets'][number]['coverage']>,{kind:'component-fits'}>, inputs: Map<string,Buffer>) : RasterMap {
   const masks=config.sources.map(path=>{
     const bytes=inputs.get(path);if(!bytes)throw new Error(`Missing component coverage ${path}`);
     const scalar=readFitsPrimary(bytes);
@@ -256,44 +256,44 @@ function retainsNativePoleCoordinates(map: RasterMap,operations?: readonly Obser
     &&operation.width*map.height===operation.height*map.width);
 }
 
-export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,config: input,write=false,lensIds,productKinds}: {sourceDirectory: string; publicDirectory?: string; config: unknown; write?: boolean;lensIds?:readonly string[];productKinds?:readonly ('surface'|'poles'|'thumbnail')[]}) {
+export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,config: input,write=false,datasetIds,productKinds}: {sourceDirectory: string; publicDirectory?: string; config: unknown; write?: boolean;datasetIds?:readonly string[];productKinds?:readonly ('surface'|'poles'|'thumbnail')[]}) {
   const config = parseObservedSurfaceRecipe(input);
-  if(lensIds&&(!lensIds.length||new Set(lensIds).size!==lensIds.length))throw new TypeError('Observed surface selection requires distinct lens ids.');
+  if(datasetIds&&(!datasetIds.length||new Set(datasetIds).size!==datasetIds.length))throw new TypeError('Observed surface selection requires distinct dataset ids.');
   if(productKinds&&(!productKinds.length||new Set(productKinds).size!==productKinds.length))throw new TypeError('Observed surface selection requires distinct product kinds.');
-  const lenses=lensIds?config.lenses.filter(lens=>lensIds.includes(lens.id)):config.lenses;
-  if(lensIds&&lenses.length!==lensIds.length)throw new Error('Observed surface selection requested an unknown lens.');
-  const baselineIds=new Set(lenses.flatMap(lens=>lens.coverage?.kind==='uniform-baseline'&&lens.coverage.baseline?[lens.coverage.baseline]:[])),baselinesToPrepare=(config.baselines??[]).filter(recipe=>baselineIds.has(recipe.id));
+  const datasets=datasetIds?config.datasets.filter(dataset=>datasetIds.includes(dataset.id)):config.datasets;
+  if(datasetIds&&datasets.length!==datasetIds.length)throw new Error('Observed surface selection requested an unknown dataset.');
+  const baselineIds=new Set(datasets.flatMap(dataset=>dataset.coverage?.kind==='uniform-baseline'&&dataset.coverage.baseline?[dataset.coverage.baseline]:[])),baselinesToPrepare=(config.baselines??[]).filter(recipe=>baselineIds.has(recipe.id));
   if(baselineIds.size!==baselinesToPrepare.length)throw new Error('Observed surface selection requested an unknown baseline.');
-  const sourcePaths=new Set([...lenses.flatMap(lens=>[lens.source,...(lens.calibration?[lens.calibration.source]:[]),...(lens.coverage?.kind==='component-fits'?lens.coverage.sources:[])]),...baselinesToPrepare.map(recipe=>recipe.source)]);
-  const inputs=await verifyObservationSources(sourceDirectory,lensIds?config.sources.filter(source=>sourcePaths.has(source.path)):config.sources),baselines=new Map<string, Baseline>(),maps=new Map<string, RasterMap>(),assets=[];
+  const sourcePaths=new Set([...datasets.flatMap(dataset=>[dataset.source,...(dataset.calibration?[dataset.calibration.source]:[]),...(dataset.coverage?.kind==='component-fits'?dataset.coverage.sources:[])]),...baselinesToPrepare.map(recipe=>recipe.source)]);
+  const inputs=await verifyObservationSources(sourceDirectory,datasetIds?config.sources.filter(source=>sourcePaths.has(source.path)):config.sources),baselines=new Map<string, Baseline>(),maps=new Map<string, RasterMap>(),assets=[];
   for(const recipe of baselinesToPrepare){const map=await decodeRaster(inputs.get(recipe.source),{channels:3});baselines.set(recipe.id,centralDiscBaseline(map,recipe));}
-  for(const lens of lenses){
-    if(!inputs.has(lens.source))throw new TypeError('Observation has no verified source.');
+  for(const dataset of datasets){
+    if(!inputs.has(dataset.source))throw new TypeError('Observation has no verified source.');
     let map: RasterMap;
-    if(lens.decode.kind==='raster')map=await decodeRaster(inputs.get(lens.source),lens.decode);
-    else if(lens.decode.kind==='fits'){
-      const fits=readFitsPrimary(inputs.get(lens.source));if(fits.bitpix!==lens.decode.bitpix||fits.width!==lens.decode.width||fits.height!==lens.decode.height)throw new Error('Observed FITS geometry drifted.');
-      let values=new Float32Array(fits.values);if(lens.decode.continuation)values=continueBoundaryMean(values,{width:fits.width,height:fits.height,channels:1,...lens.decode.continuation});
-      map=percentileFalseColor(values,fits.width,fits.height,lens.decode.color);
+    if(dataset.decode.kind==='raster')map=await decodeRaster(inputs.get(dataset.source),dataset.decode);
+    else if(dataset.decode.kind==='fits'){
+      const fits=readFitsPrimary(inputs.get(dataset.source));if(fits.bitpix!==dataset.decode.bitpix||fits.width!==dataset.decode.width||fits.height!==dataset.decode.height)throw new Error('Observed FITS geometry drifted.');
+      let values=new Float32Array(fits.values);if(dataset.decode.continuation)values=continueBoundaryMean(values,{width:fits.width,height:fits.height,channels:1,...dataset.decode.continuation});
+      map=percentileFalseColor(values,fits.width,fits.height,dataset.decode.color);
     }else throw new TypeError('Unsupported observation decoder.');
-    if(lens.coverage?.kind==='component-fits')map=componentCoverage(map,lens.coverage,inputs);
+    if(dataset.coverage?.kind==='component-fits')map=componentCoverage(map,dataset.coverage,inputs);
     let calibration;
-    if(lens.calibration){const target=await decodeRaster(inputs.get(lens.calibration.source),{crop:lens.calibration.targetSample,channels:3});calibration=affineColorCalibration(map,target,lens.calibration);}
-    if(lens.coverage?.kind==='boundary-mean')map={...map,data:continueBoundaryMean(map.data,{...map,...lens.coverage})};
-    if(lens.coverage?.kind==='uniform-baseline'){
-      if (!lens.coverage.baseline && !lens.coverage.baselineProvenance) throw new TypeError('Observation baseline provenance is missing.');
-      const baseline=lens.coverage.baseline?baselines.get(lens.coverage.baseline):{color:observedMean(map,lens.coverage),provenance:lens.coverage.baselineProvenance};
-      if(!baseline || !baseline.provenance)throw new TypeError('Observation baseline is undefined.');map=completeUniformCoverage(map,{color:baseline.color,provenance:baseline.provenance},lens.coverage);
+    if(dataset.calibration){const target=await decodeRaster(inputs.get(dataset.calibration.source),{crop:dataset.calibration.targetSample,channels:3});calibration=affineColorCalibration(map,target,dataset.calibration);}
+    if(dataset.coverage?.kind==='boundary-mean')map={...map,data:continueBoundaryMean(map.data,{...map,...dataset.coverage})};
+    if(dataset.coverage?.kind==='uniform-baseline'){
+      if (!dataset.coverage.baseline && !dataset.coverage.baselineProvenance) throw new TypeError('Observation baseline provenance is missing.');
+      const baseline=dataset.coverage.baseline?baselines.get(dataset.coverage.baseline):{color:observedMean(map,dataset.coverage),provenance:dataset.coverage.baselineProvenance};
+      if(!baseline || !baseline.provenance)throw new TypeError('Observation baseline is undefined.');map=completeUniformCoverage(map,{color:baseline.color,provenance:baseline.provenance},dataset.coverage);
     }
     if(calibration){const data=Buffer.allocUnsafe(map.data.length);for(let offset=0;offset<data.length;offset+=3)for(let c=0;c<3;c++)data[offset+c]=Math.round(clamp(map.data[offset+c]*calibration.scale[c]+calibration.offset[c],0,255));map={...map,data,calibration};}
     // Maps indexed by planetographic latitude move to the parametric rows of the drawn ellipsoid.
-    if(lens.planetographicAxisRatio!==undefined)map={...map,data:planetographicRowsToMeshLatitude(map.data,map.width,map.height,map.channels,lens.planetographicAxisRatio)};
+    if(dataset.planetographicAxisRatio!==undefined)map={...map,data:planetographicRowsToMeshLatitude(map.data,map.width,map.height,map.channels,dataset.planetographicAxisRatio)};
     if(map.missing)map.missing=Uint8Array.from({length:map.width*map.height},(_,i)=>map.data[i*4+3]===255?0:1);
-    const nativePoleMap=map,transformedMap=await transformMap(map,lens.transforms);
-    if(lens.atmosphereColor)transformedMap.atmosphereColor=brightTailColor(transformedMap.data,lens.atmosphereColor);maps.set(lens.id,transformedMap);
-    for(const product of productKinds?lens.products.filter(product=>productKinds.includes(product.kind)):lens.products){
+    const nativePoleMap=map,transformedMap=await transformMap(map,dataset.transforms);
+    if(dataset.atmosphereColor)transformedMap.atmosphereColor=brightTailColor(transformedMap.data,dataset.atmosphereColor);maps.set(dataset.id,transformedMap);
+    for(const product of productKinds?dataset.products.filter(product=>productKinds.includes(product.kind)):dataset.products){
       if(!/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(product.filename))throw new TypeError('Invalid observation output name.');
-      const productMap=product.kind==='poles'&&retainsNativePoleCoordinates(nativePoleMap,lens.transforms)?nativePoleMap:transformedMap;
+      const productMap=product.kind==='poles'&&retainsNativePoleCoordinates(nativePoleMap,dataset.transforms)?nativePoleMap:transformedMap;
       let raster=await transformMap(productMap,product.transforms);
       if(product.kind==='surface'){const packed=packProjectiveSurfaceRaster(raster.data,{width:raster.width,height:raster.height,channels:raster.channels,...product.packing});raster={data:packed.data,width:packed.packedWidth,height:packed.packedHeight,channels:raster.channels};}
       else if(product.kind==='poles')raster=polarDiscAtlas(raster,product.projection);

@@ -8,4 +8,4 @@ Placement: the host star's Gaia DR3 astrometry, with this planet's transit-fitte
 
 The sphere's neutral gray is a display convention of this project, not a measurement.
 
-Illustration lens: NASA's artist's concept map of TRAPPIST-1e from Eyes on Exoplanets, NASA/JPL-Caltech (https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_e.jpg), used unchanged under NASA's media guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/). An artist's concept, not an observation.
+Illustration dataset: NASA's artist's concept map of TRAPPIST-1e from Eyes on Exoplanets, NASA/JPL-Caltech (https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_e.jpg), used unchanged under NASA's media guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/). An artist's concept, not an observation.

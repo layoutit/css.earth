@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-76b",
   "displayName": "WASP-76b",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "temperature",
         "label": "Spitzer",
         "qualification": "Published fit · May et al. 2021 · Spitzer 4.5 µm, 2017",
-        "thumbnail": "wasp-76b-lens-temperature.webp",
+        "thumbnail": "wasp-76b-dataset-temperature.webp",
         "surface": "wasp-76b-surface-temperature@2x.webp",
         "poles": "wasp-76b-poles-temperature@2x.webp",
         "source": {

@@ -41,7 +41,7 @@
       "subject": "HST photometry, ground-based near-infrared studies and mapped-product searches",
       "status": "unresolved",
       "finding": "Integrated flux and adopted sizes do not provide spatial color texels. No qualified registered color, elevation, geological or compositional map was located. The source survey establishes this bounded disposition, not the absence of all other observations.",
-      "revisitWhen": "A spatially resolved Cordelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Cordelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/cordelia/source/manifest.json"
       ]

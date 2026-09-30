@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kelt-24b",
   "displayName": "KELT-24 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by KELT-24; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "kelt-24b-lens-shape.webp",
+        "thumbnail": "kelt-24b-dataset-shape.webp",
         "surface": "kelt-24b-surface-shape@2x.webp",
         "poles": "kelt-24b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of KELT-24 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kelt-24's light, as its colour lens measures it."
+        "notes": "No image or colour of KELT-24 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kelt-24's light, as its colour dataset measures it."
       }
     ]
   },
