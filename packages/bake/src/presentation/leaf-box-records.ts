@@ -14,8 +14,8 @@ import { SURFACE_SEAM_OUTSET_PROPERTY } from '../scene/seam-outset.ts';
 export type LeafBoxComponent = number | string;
 export interface PreparedLeafBox {
   node: number;
-  /** The leaf's factor per step: min(1, step × density). */
-  density: number;
+  /** The leaf's factor per step: min(1, step × density). Absent on a seam-only leaf, whose box factor is always 1. */
+  density?: number;
   /** Full box width and height (px). `atlas` when the stylesheet reads them as --polycss-atlas-width/-height. */
   box?: readonly [number, number]; atlas?: true;
   backgroundSize?: readonly [LeafBoxComponent, LeafBoxComponent];
@@ -116,8 +116,8 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
     // reaches it: its values are constants, written as such.
     const style = staticSizes(node.style);
     if (!node.properties.some(id => /var\(--(?:leaf-box|surface-seam-outset)\b/.test(tree.properties[id]!.value))) return style === node.style ? node : { ...node, style };
-    if (seam && node.properties.some(id => tree.properties[id]!.value.includes(`var(${SURFACE_SEAM_OUTSET_PROPERTY}`)))
-      throw new TypeError(`${definition.id}: prepared node ${index} reads the seam outset without a leaf box.`);
+    // A leaf the seam outset reaches but no step does (a body without measured leaf boxes): its record, box factor 1.
+    if (seam && node.properties.some(id => tree.properties[id]!.value.includes(`var(${SURFACE_SEAM_OUTSET_PROPERTY}`))) return leafRecord(node, index, undefined, seamBoxes);
     const ids = node.properties.map(id => {
       const property = tree.properties[id]!;
       if (!/var\(--(?:leaf-box|surface-seam-outset)\b/.test(property.value)) return id;
@@ -129,13 +129,10 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
     });
     return { ...node, style, properties: ids };
   };
-  const nodes = tree.nodes.map((node, index) => {
-    const factor = valueOn(index, LEAF_BOX_FACTOR);
-    if (factor === undefined) return constant(node, index);
+  const seamBoxes: PreparedLeafBox[] = [];
+  function leafRecord(node: TreeNode, index: number, density: number | undefined, into: PreparedLeafBox[]): TreeNode {
     const where = (name: string) => () => `${definition.id}: prepared node ${index} ${name}`;
-    const density = FACTOR.exec(factor)?.[1];
-    if (density === undefined) throw new TypeError(`${where(LEAF_BOX_FACTOR)()}: unexpected factor: ${factor}`);
-    const box: Partial<PreparedLeafBox> & { node: number; density: number } = { node: index, density: Number(density) };
+    const box: Partial<PreparedLeafBox> & { node: number } = { node: index };
     let width: number | undefined, height: number | undefined, atlas = false, matrix: string | undefined;
     const kept: number[] = [];
     for (const id of node.properties) {
@@ -160,55 +157,68 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
     }
     if (matrix === undefined) throw new TypeError(`${where('transform')()}: a leaf box has no transform.`);
     if ((width === undefined) !== (height === undefined)) throw new TypeError(`${where('box')()}: a leaf box needs both lengths.`);
-    boxes.push({ node: index, density: box.density, ...width !== undefined ? { box: [width, height!] as const } : {}, ...atlas ? { atlas: true as const } : {},
+    into.push({ node: index, ...density === undefined ? {} : { density }, ...width !== undefined ? { box: [width, height!] as const } : {}, ...atlas ? { atlas: true as const } : {},
       ...box.backgroundSize ? { backgroundSize: box.backgroundSize } : {}, ...box.backgroundPosition ? { backgroundPosition: box.backgroundPosition } : {},
       matrix, ...box.seam ? { seam: box.seam } : {} });
     return { ...node, style: withoutDeclarations(node.style, OWNED), properties: kept };
+  }
+  const nodes = tree.nodes.map((node, index) => {
+    const factor = valueOn(index, LEAF_BOX_FACTOR);
+    if (factor === undefined) return constant(node, index);
+    const density = FACTOR.exec(factor)?.[1];
+    if (density === undefined) throw new TypeError(`${definition.id}: prepared node ${index} ${LEAF_BOX_FACTOR}: unexpected factor: ${factor}`);
+    return leafRecord(node, index, Number(density), boxes);
   });
-  if (!boxes.length) return nodes.every((node, index) => node === tree.nodes[index]) ? definition : { ...definition, tree: interned({ ...tree, properties }, nodes) };
-  if (!binding) throw new TypeError(`${definition.id}: leaf boxes have no ${LEAF_BOX_PROPERTY} binding.`);
-  const initial = valueOn(binding.target, LEAF_BOX_PROPERTY);
-  if (initial === undefined) throw new TypeError(`${definition.id}: the ${LEAF_BOX_PROPERTY} binding target ${binding.target} carries no initial step.`);
+  if (!boxes.length && !seamBoxes.length) return nodes.every((node, index) => node === tree.nodes[index]) ? definition : { ...definition, tree: interned({ ...tree, properties }, nodes) };
+  if (boxes.length && !binding) throw new TypeError(`${definition.id}: leaf boxes have no ${LEAF_BOX_PROPERTY} binding.`);
+  const initial = binding ? valueOn(binding.target, LEAF_BOX_PROPERTY) : undefined;
+  if (boxes.length && initial === undefined) throw new TypeError(`${definition.id}: the ${LEAF_BOX_PROPERTY} binding target ${binding!.target} carries no initial step.`);
   const seamInitial = seam ? valueOn(seam.target, SURFACE_SEAM_OUTSET_PROPERTY) : undefined;
   if (seam && seamInitial === undefined) throw new TypeError(`${definition.id}: the seam outset binding target ${seam.target} carries no initial outset.`);
   // The steps' initial values move from their targets onto the bindings.
-  const stripped = nodes.map((node, index) => index === binding.target || index === seam?.target
+  const stripped = nodes.map((node, index) => index === binding?.target || index === seam?.target
     ? { ...node, properties: node.properties.filter(id => ![LEAF_BOX_PROPERTY, SURFACE_SEAM_OUTSET_PROPERTY].includes(tree.properties[id]!.name)) } : node);
-  const bindings = definition.viewBindings.map(entry => entry === binding ? { ...binding, initial, boxes }
-    : entry === seam ? { ...seam, initial: seamInitial } : entry);
+  const bindings = definition.viewBindings.map(entry => entry === binding && boxes.length ? { ...binding, initial, boxes }
+    : entry === seam ? { ...seam, initial: seamInitial, ...seamBoxes.length ? { boxes: seamBoxes } : {} } : entry);
   return { ...definition, tree: interned({ ...tree, properties }, stripped), viewBindings: bindings };
 }
 
 /** The records expanded back to the variable form the bindings measure (the inverse of withLeafBoxRecords). */
 export function withoutLeafBoxRecords<D extends Definition>(definition: D): D {
   const binding = definition.viewBindings.find(leafBoxBinding);
-  if (!binding?.boxes) return definition;
   const seam = definition.viewBindings.find(seamBinding);
+  if (!binding?.boxes && !seam?.boxes) return definition;
   const properties = [...definition.tree.properties];
   const add = (property: Property) => { properties.push(property); return properties.length - 1; };
   const scaled = (component: LeafBoxComponent) => typeof component === 'number' ? `calc(${component}px * var(${LEAF_BOX_FACTOR}, 1))` : component;
   const extra = new Map<number, number[]>();
-  for (const box of binding.boxes) {
+  for (const box of [...binding?.boxes ?? [], ...seam?.boxes ?? []]) {
     const ids: number[] = [];
     if (box.backgroundPosition) ids.push(add({ name: 'backgroundPosition', value: box.backgroundPosition.map(scaled).join(' '), custom: false }));
     if (box.backgroundSize) ids.push(add({ name: 'backgroundSize', value: box.backgroundSize.map(scaled).join(' '), custom: false }));
     ids.push(add({ name: 'transform', value: `${box.matrix}${UNSCALE}${box.seam ? ` translate(50%, 50%) scale(${seamTerm(String(box.seam[0]))}, ${seamTerm(String(box.seam[1]))}) translate(-50%, -50%)` : ''}`, custom: false }));
     if (box.box) for (const [at, name] of [[0, 'width'], [1, 'height']] as const)
       ids.push(add({ name: box.atlas ? `--polycss-atlas-${name}` : name, value: scaled(box.box[at]), custom: Boolean(box.atlas) }));
-    ids.push(add({ name: LEAF_BOX_FACTOR, value: `min(1, var(${LEAF_BOX_PROPERTY}, 1e6) * ${box.density})`, custom: true }));
+    if (box.density !== undefined) ids.push(add({ name: LEAF_BOX_FACTOR, value: `min(1, var(${LEAF_BOX_PROPERTY}, 1e6) * ${box.density})`, custom: true }));
     extra.set(box.node, ids);
   }
   const initials = new Map<number, number[]>();
   const push = (node: number, id: number) => initials.set(node, [...initials.get(node) ?? [], id]);
-  push(binding.target, add({ name: LEAF_BOX_PROPERTY, value: String(binding.initial), custom: true }));
+  if (binding?.boxes) push(binding.target, add({ name: LEAF_BOX_PROPERTY, value: String(binding.initial), custom: true }));
   if (seam?.initial !== undefined) push(seam.target, add({ name: SURFACE_SEAM_OUTSET_PROPERTY, value: seam.initial, custom: true }));
   const nodes = definition.tree.nodes.map((node, index) => extra.has(index) || initials.has(index)
     ? { ...node, properties: [...initials.get(index) ?? [], ...node.properties, ...extra.get(index) ?? []] } : node);
   const bindings = definition.viewBindings.map(entry => {
-    if (entry === binding) { const { boxes: _boxes, initial: _initial, ...rest } = binding; return rest; }
-    if (entry === seam) { const { initial: _initial, ...rest } = seam; return rest; }
+    if (binding && entry === binding && binding.boxes) { const { boxes: _boxes, initial: _initial, ...rest } = binding; return rest; }
+    if (seam && entry === seam) { const { initial: _initial, boxes: _boxes, ...rest } = seam; return rest; }
     return entry;
   });
   return { ...definition, tree: interned({ ...definition.tree, properties }, nodes), viewBindings: bindings };
 }
 
+/** withoutLeafBoxRecords for a value read from disk: checks the shape it reads before expanding, so a reader needs no cast. */
+export function expandLeafBoxRecords(value: unknown): unknown {
+  if (!isRecord(value) || typeof value.id !== 'string' || !Array.isArray(value.viewBindings) || !isRecord(value.tree) ||
+      !Array.isArray(value.tree.nodes) || !Array.isArray(value.tree.properties)) return value;
+  return withoutLeafBoxRecords(value as unknown as Definition);
+}

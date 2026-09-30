@@ -14,7 +14,8 @@ export const SEAM_OUTSET = '--surface-seam-outset';
 
 export type LeafBoxComponent = number | string;
 export interface PreparedLeafBox {
-  readonly node: number; readonly density: number;
+  /** Absent on a seam-only leaf, whose box factor is always 1. */
+  readonly node: number; readonly density?: number;
   readonly box?: readonly [number, number]; readonly atlas?: true;
   readonly backgroundSize?: readonly [LeafBoxComponent, LeafBoxComponent];
   readonly backgroundPosition?: readonly [LeafBoxComponent, LeafBoxComponent];
@@ -27,7 +28,7 @@ const component = (value: LeafBoxComponent, factor: number) => typeof value === 
 
 /** A leaf's final style values at a step and seam outset. */
 export function leafBoxStyles(leaf: PreparedLeafBox, step: number, outset: number, seamOnly = false): [string, string][] {
-  const factor = Math.min(1, step * leaf.density);
+  const factor = leaf.density === undefined ? 1 : Math.min(1, step * leaf.density);
   const transform = `${leaf.matrix} scale(${format(1 / factor)})` + (leaf.seam
     ? ` translate(50%, 50%) scale(${format(1 + outset * leaf.seam[0])}, ${format(1 + outset * leaf.seam[1])}) translate(-50%, -50%)` : '');
   if (seamOnly) return leaf.seam ? [['transform', transform]] : [];
@@ -43,7 +44,7 @@ export function leafBoxStyles(leaf: PreparedLeafBox, step: number, outset: numbe
 export function leafBoxBindings(bindings: readonly PreparedViewBinding[]) {
   const steps = bindings.find((binding): binding is StepBinding => binding.kind === 'silhouette-step-property' && binding.property === LEAF_BOX_STEP);
   const seam = bindings.find((binding): binding is StepBinding => binding.kind === 'silhouette-step-property' && binding.property === SEAM_OUTSET);
-  return { steps, seam, boxes: steps?.boxes ?? [], step: Number(steps?.initial ?? 1e6), outset: Number(seam?.initial ?? 0) };
+  return { steps, seam, boxes: [...steps?.boxes ?? [], ...seam?.boxes ?? []], step: Number(steps?.initial ?? 1e6), outset: Number(seam?.initial ?? 0) };
 }
 
 /** Owns the leaf-box leaves of one mounted tree: a step written on a leaf is that leaf's own; a seam outset written on
@@ -83,7 +84,7 @@ export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], no
         for (const current of state.values()) if (current.leaf.seam) publish(current, true);
       } else {
         const current = state.get(index);
-        if (!current) throw new TypeError(`Prepared node ${index} is not a leaf box.`);
+        if (!current || current.leaf.density === undefined) throw new TypeError(`Prepared node ${index} is not a leaf box.`);
         current.step = number; publish(current);
       }
       return writes - before;
