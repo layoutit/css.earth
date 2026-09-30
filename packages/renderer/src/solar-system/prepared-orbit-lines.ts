@@ -65,8 +65,9 @@ function mountOrbitBars(host: HTMLElement, capacity: number): PreparedOrbitLines
 }
 
 const SVG = 'http://www.w3.org/2000/svg';
-/** Trail alpha is quantized onto this many retained strokes; a closed orbit uses one. */
-export const ORBIT_OPACITY_LEVELS = 16;
+/** Trail alpha is quantized onto this many retained strokes; a closed orbit uses one. Eight steps draw the same rested
+ * Solar System as sixteen (pixelmatch 0 on the iPad) and write a third fewer orbit points while the camera moves (2026-09-30). */
+export const ORBIT_OPACITY_LEVELS = 8;
 /** One `<svg>` per world context, at the stage centre with visible overflow: chord
  * coordinates are already centred screen pixels. A zero viewport would disable
  * SVG rendering, so it is 1×1. */
