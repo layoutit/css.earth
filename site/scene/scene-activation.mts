@@ -9,6 +9,7 @@ import { selectSceneDataset } from './scene-datasets.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
 import { loadSystemView } from '../system-framing.mts';
+import { navigationHref } from '../navigation/navigation-history.mts';
 
 /** Arrival restores prepared state before the session becomes ready; every binding belongs to that session. */
 export function createSceneActivation({ windowTarget, navigation, view, isCurrent, getReducedMotion }: {
@@ -51,7 +52,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         // its flight without retiring that scene or restoring the endpoint.
         interrupted = true;
         const drawnUrl = view.capture(request.url);
-        if (drawnUrl) request.url = session.url = new URL(drawnUrl, windowTarget.location.href).href;
+        if (drawnUrl) request.url = session.url = new URL(drawnUrl, navigationHref(windowTarget)).href;
       }
     }
     const datasetSignal = request ? AbortSignal.any([request.signal, session.signal]) : session.signal;

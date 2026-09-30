@@ -9,6 +9,7 @@ import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
+import { navigationHref } from '../navigation/navigation-history.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
@@ -54,7 +55,7 @@ export async function focusExistingScene({ session, request, selectionTransition
     fly = () => view.focus(session, request);
   } else {
     if (camera.kind === 'restore') {
-      if (request.history.history === 'pop' || request.url !== windowTarget.location.href) view.commit(request, session);
+      if (request.history.history === 'pop' || request.url !== navigationHref(windowTarget)) view.commit(request, session);
       else session.url = request.url;
     }
     // Saved history can fly to its endpoint before exact restoration at arrival.
