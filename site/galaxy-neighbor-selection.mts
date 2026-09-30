@@ -25,6 +25,7 @@ export function selectGalaxyNeighbor(card: HTMLElement, selectedId: string): voi
       const number = label.querySelector('.object-distance-value'), unit = label.querySelector('.object-distance-unit');
       if (number) number.textContent = '≈' + new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor);
       if (unit) unit.textContent = divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly';
+      label.setAttribute('aria-label', `${number?.textContent ?? ''} ${unit?.textContent ?? ''}. ${label.title}`);
     }
     parent.append(row);
   }

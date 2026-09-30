@@ -698,7 +698,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* The peek is a shared layout stop, independent of card length and destination.
        Cap it to the available sheet height on short viewports. */
     --sheet-tucked: calc(20px + var(--explorer-safe-bottom));
-    --sheet-peek: min(var(--sheet-height), calc(320px + var(--explorer-safe-bottom)));
+    --sheet-peek: min(var(--sheet-height), calc(280px + var(--explorer-safe-bottom)));
     --sheet-half: max(50dvh, var(--sheet-peek));
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
@@ -870,6 +870,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 @media (orientation: portrait) and (min-width: 700px) {
   body[data-object-shell] {
     --tablet-search-width: min(360px, 40vw);
+    /* Between the former 176 px stop and the oversized 320 px stop; two columns need less height. */
+    --sheet-peek: min(var(--sheet-height), calc(248px + var(--explorer-safe-bottom)));
   }
   .explorer-shell-header { column-gap: 20px; }
 

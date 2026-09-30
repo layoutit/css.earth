@@ -8,7 +8,9 @@ import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
 import ObjectResult from './ObjectResult.astro';
 import { overviewDistanceM } from '../overview-context.mts';
-import ContextNavigationMarker from './ContextNavigationMarker.astro';
+import { objectResultMarkup } from '../server/object-result-markup.mts';
+import { overviewResult } from '../server/overview-result.mts';
+import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts';
 import ObjectFactsheet from './ObjectFactsheet.astro';
 import DatasetList from './DatasetList.astro';
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
@@ -29,22 +31,22 @@ const distance = (pc: number) => {
   return { value: new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor), unit: divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly' };
 };
 const slug = (label: string) => label.toLocaleLowerCase('en').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
-type Member = { id: string; name: string; href: string; focusId?: string; positionM: readonly number[]; distancePc: number; holdsStars: boolean };
+type Member = { id: string; name: string; positionM: readonly number[]; distancePc: number; holdsStars: boolean };
 const members = (classifications: readonly string[]): Member[] => OBJECTS.filter(object => object.id !== overview.id).flatMap((object): Member[] => {
   if (object.kind === 'prepared-focus') {
     if (!classifications.includes(object.classification)) return [];
     const record = catalogue.get(object.id);
     if (!record) throw new Error(`${overview.id} lists ${object.id}, which no prepared catalogue places.`);
-    return [{ id: object.id, name: object.name, href: object.route, focusId: object.id, positionM: record.positionM, distancePc: record.distance.valuePc, holdsStars: false }];
+    return [{ id: object.id, name: object.name, positionM: record.positionM, distancePc: record.distance.valuePc, holdsStars: false }];
   }
   if (object.kind === 'overview') {
     if (!object.classification || !classifications.includes(object.classification)) return [];
     if (!object.originM) throw new Error(`${overview.id} lists ${object.id}, whose package has no volume origin to place it.`);
-    return [{ id: object.id, name: object.name, href: object.route, positionM: object.originM, distancePc: Math.hypot(...object.originM) / PARSEC_M,
+    return [{ id: object.id, name: object.name, positionM: object.originM, distancePc: Math.hypot(...object.originM) / PARSEC_M,
       holdsStars: object.holds.some(group => group.classifications.includes('star')) }];
   }
   if (!classifications.includes(object.classification) || !object.worldFrame) return [];
-  return [{ id: object.id, name: object.name, href: object.route, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false }];
+  return [{ id: object.id, name: object.name, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false }];
 }).sort((a, b) => a.distancePc - b.distancePc);
 const lists = overview.holds.flatMap(group => {
   if (!group.list) return [];
@@ -59,10 +61,20 @@ const sceneMembers = SCENE_OBJECTS.filter(object => classifications.includes(obj
   && (object.id === overview.sceneHostId || object.discovery.featured)
   && (!overview.zoom.centreWithin || object.distance.meters < overviewDistanceM(overview.zoom.centreWithin)))
   .sort((a, b) => Number(b.id === overview.sceneHostId) - Number(a.id === overview.sceneHostId) || a.distance.meters - b.distance.meters);
+const resultRows = new Map(PREPARED_CATALOGUE_INDEX.entries.filter(row => row.kind !== 'system').map(row => [row.id, row]));
+const memberMarkup = (member: Member) => {
+  const object = OBJECTS.find(object => object.id === member.id);
+  const row = object?.kind === 'overview' ? overviewResult(object) : resultRows.get(member.id);
+  if (!row) throw new Error(`Missing search row for ${overview.id} member ${member.id}.`);
+  const { value, unit } = distance(member.distancePc);
+  const text = `≈${value} ${unit}`, title = 'Published catalogue distance from the Solar System';
+  return objectResultMarkup({ ...row, detail: { text, value: `≈${value}`, unit, title, ariaLabel: `${text}. ${title}` } });
+};
+const datasets = pageDatasetList(overview.id);
 const tabs = [...(sceneMembers.length ? [{ id: 'bodies', label: 'Celestial bodies' }] : []),
   ...lists.map((list, index) => ({ id: list.id, label: index === 0 ? 'Celestial bodies' : list.label, count: list.members.length })),
+  ...(datasets ? [{ id: 'datasets', label: 'Datasets' }] : []),
   ...(facts ? [{ id: 'factsheet', label: 'Factsheet' }] : [])];
-const datasets = pageDatasetList(overview.id);
 // A card's distances are measured from the member that holds the stars, where it lists one (the Milky Way in the Local
 // Group: the view from home); otherwise from the observer, as the catalogues publish them.
 const home = lists.flatMap(list => list.members).find(member => member.holdsStars)?.id ?? 'observer';
@@ -71,28 +83,22 @@ const home = lists.flatMap(list => list.members).find(member => member.holdsStar
   <ObjectCardHeader heading={false} title={{ label: overview.name }} introduction={overview.description}>
     <ObjectBreadcrumbs scope={overview.id} />
   </ObjectCardHeader>
-  {datasets && <div class="object-dataset-content" data-page-datasets={overview.id} data-default-dataset={datasets.defaultDataset}
+  {tabs.length > 0 && <InformationTabs idPrefix={overview.id} group={overview.id} label={`${overview.name} information`} {tabs} />}
+  {datasets && <div class="object-results-scroll object-card-tabpanel object-dataset-content" id={`${overview.id}-datasets-content`}
+    role="region" aria-label="Datasets" data-page-datasets={overview.id} data-default-dataset={datasets.defaultDataset}
     data-dataset-views={JSON.stringify(datasets.views)}>
     <DatasetList objectId={`page-${overview.id}`} thumbnailObjectId={overview.id} page={overview.id} route={overview.route}
       datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} focus />
   </div>}
-  {tabs.length > 0 && <InformationTabs idPrefix={overview.id} group={overview.id} label={`${overview.name} information`} {tabs} />}
   {sceneMembers.length > 0 && <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-bodies-content`} role="region" aria-label="Celestial bodies">
     <ul class="object-list">{sceneMembers.map(object => <ObjectResult {object} />)}</ul>
   </div>}
   {lists.map(list => <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-${list.id}-content`} role="region" aria-label={list.label}>
     <ul class="object-list">
-      {list.members.map(member => <li data-neighbor-id={member.id}
+      {list.members.map(member => <li class="object-item" data-neighbor-id={member.id}
         data-neighbor-distances={JSON.stringify({ observer: member.distancePc, ...Object.fromEntries(list.members.map(origin => [origin.id,
           Math.hypot(...member.positionM.map((value, axis) => value - origin.positionM[axis]!)) / PARSEC_M])) })}>
-        <a class="object-link object-observation-control object-thumbnail-leading" href={member.href} data-prepared-focus-id={member.focusId}>
-          <span class="object-dataset-icon"><ContextNavigationMarker objectId={member.id} /></span>
-          <span class="object-name object-dataset-label">{member.name}</span>
-          <span class="object-distance object-dataset-detail" title="Published catalogue distance from the Solar System">
-            <span class="object-distance-value">≈{distance(member.distancePc).value}</span>{" "}
-            <span class="object-distance-unit">{distance(member.distancePc).unit}</span>
-          </span>
-        </a>
+        <Fragment set:html={memberMarkup(member)} />
       </li>)}
     </ul>
   </div>)}

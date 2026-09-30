@@ -1,6 +1,7 @@
 ---
 import type { Props as ShellProps } from '../object-shell-types';
 import DatasetLegend from './DatasetLegend.astro';
+import DatasetThumbnail from './DatasetThumbnail.astro';
 import DatasetDescription from './DatasetDescription.astro';
 import SequencePlayer from './SequencePlayer.astro';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
@@ -47,7 +48,7 @@ const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultContro
         <span class="object-dataset-picker-current">
           {datasets.controls.filter(listed).map(dataset => <span class="object-dataset-picker-selection"
             data-dataset-selected={dataset.id} hidden={dataset.id !== defaultListedId}>
-            <span class="object-dataset-picker-preview"><img src={previewUrl(dataset)} width="40" height="40" alt="" loading="lazy" decoding="async" /></span>
+            <DatasetThumbnail class="object-dataset-picker-preview" src={previewUrl(dataset)} />
             <span class="object-dataset-picker-text"><span class="object-dataset-picker-label">{dataset.label}</span>
               {dataset.detail && <span class="object-dataset-picker-detail">{dataset.detail}</span>}</span>
           </span>)}
@@ -75,9 +76,7 @@ const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultContro
             aria-controls={`${objectId}-${dataset.id}-details`}
             title={dataset.title}
           >
-            <span class="object-dataset-icon object-dataset-round-preview" aria-hidden="true">
-              <img class="object-search-preview" src={previewUrl(dataset)} width="40" height="40" alt="" loading="lazy" decoding="async" />
-            </span>
+            <DatasetThumbnail class="object-dataset-icon" src={previewUrl(dataset)} />
             <span class="object-dataset-label">{dataset.label}</span>
             {dataset.detail && <span class="object-dataset-detail">{dataset.detail}</span>}
           </button>

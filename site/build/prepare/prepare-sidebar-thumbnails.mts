@@ -1,7 +1,6 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { OverlayOptions } from 'sharp';
 import { parseDatasetControl } from '../../prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
@@ -25,11 +24,11 @@ const output = async (path: string, bytes: Uint8Array | string) => {
 
 interface Thumbnail { url2x: string; inputs: string[]; credit: string; sourceUrl: string; }
 const images: Record<string, Thumbnail> = {}, defaults: Record<string, string> = {};
-// 2x only: every screen reads the 32 px tile for its 16 CSS px slot (no 1x rasters).
+// 2x only: every screen reads the 80 px tile for the shared 40 CSS px result slot (no 1x rasters).
 const makeThumbnail = async (id: string, dataset: string, bytes: Buffer, evidence: Pick<Thumbnail, 'inputs' | 'credit' | 'sourceUrl'>) => {
   // Preserve the complete prepared image and its display color. Only resample;
   // transparent padding keeps rectangular photographs at their native aspect.
-  const tile = await sharp(bytes).resize(32, 32, { fit: 'contain', background: '#00000000', kernel: 'lanczos3' })
+  const tile = await sharp(bytes).resize(80, 80, { fit: 'contain', background: '#00000000', kernel: 'lanczos3' })
     .webp({ lossless: true, effort: 6 }).toBuffer();
   const url2x = `/navigation/focus-${id}-${dataset}@2x.webp`;
   await output(`public${url2x}`, tile);
@@ -59,40 +58,23 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   defaults[id] = `${id}/${defaultDataset}`;
 }
 
-// A density volume (the Milky Way) has a prepared simulation rather than a publisher photograph. Composite its existing z
-// slabs face-on, preserving their positions and alpha.
-const vector = (value: unknown) => {
-  if (!Array.isArray(value) || value.length !== 3 || !value.every(n => typeof n === 'number' && Number.isFinite(n))) throw new TypeError('Invalid prepared slab position');
-  return value.map(Number);
-};
+// A galaxy volume's navigation image is its published face-on backing. The old slab textures are no longer
+// delivered; using the same backing as the map preserves its existing artwork qualification and source record.
 for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
-  const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', folder.name, 'object.json'), 'utf8').catch((error: unknown) => {
-    if (hasErrorCode(error, 'ENOENT')) return 'null'; throw error;
-  }));
-  if (!descriptor || typeof descriptor !== 'object' || (descriptor as { type?: unknown }).type !== 'density-volume') continue;
-  const id = folder.name, volumePath = `src/objects/${id}/prepared/volume-slices.json`;
-  const volume = sourceObject(await json(volumePath));
-  const bounds = sourceObject(volume.boundsUnits), min = vector(bounds.min), max = vector(bounds.max);
-  const size = 256, layers: OverlayOptions[] = [], slabInputs = [volumePath];
-  for (const raw of sourceArray(volume.quads, sourceObject)) {
-    if (raw.axis !== 'z' || raw.alphaCoverage === 0) continue;
-    const vertices = sourceArray(raw.vertices, vector), upperLeft = vertices[0], lowerRight = vertices[2];
-    if (!upperLeft || !lowerRight) throw new TypeError(`${volumePath}: incomplete prepared slab`);
-    const x = (value: number) => Math.round((value - min[0]) / (max[0] - min[0]) * size);
-    const y = (value: number) => Math.round((max[1] - value) / (max[1] - min[1]) * size);
-    const left = x(upperLeft[0]), top = y(upperLeft[1]);
-    const width = x(lowerRight[0]) - left, height = y(lowerRight[1]) - top;
-    if (width <= 0 || height <= 0) continue;
-    const path = `src/objects/${id}/prepared/${sourcePath(raw.texturePath)}`;
-    const bytes = await read(path); slabInputs.push(path);
-    layers.push({ input: await sharp(bytes).resize(width, height).png().toBuffer(), left, top });
-  }
-  const image = await sharp({ create: { width: size, height: size, channels: 4, background: '#00000000' } })
-    .composite(layers).png().toBuffer();
-  const creditPath = `src/objects/${id}/source/provenance.json`;
-  const provenance = sourceObject(await json(creditPath));
-  await makeThumbnail(id, 'volume', image, { inputs: [...slabInputs, creditPath], credit: sourceText(provenance.title),
-    sourceUrl: sourceText(sourceObject(provenance.license).dataLicenseDeclaration) });
+  const descriptorPath = `src/objects/${folder.name}/object.json`;
+  let descriptor: unknown;
+  try { descriptor = JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8')); }
+  catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+  if (sourceObject(descriptor).type !== 'density-volume') continue;
+  await read(descriptorPath);
+  const id = folder.name, backingPath = `src/objects/${id}/prepared/backing.json`;
+  const backing = sourceObject(await json(backingPath));
+  if (backing.schema !== 'cssearth-galaxy-backing@1') throw new TypeError(`${backingPath}: invalid galaxy backing.`);
+  const texturePath = `src/objects/${id}/prepared/${sourcePath(sourceObject(backing.leaf).texturePath)}`;
+  const recipePath = `src/objects/${id}/source/backing/recipe.json`, recipe = sourceObject(await json(recipePath));
+  if (sourceText(backing.source) !== sourceText(recipe.source)) throw new TypeError(`${backingPath}: source differs from its recipe.`);
+  await makeThumbnail(id, 'volume', await read(texturePath), { inputs: [descriptorPath, backingPath, texturePath, recipePath],
+    credit: sourceText(recipe.meaning), sourceUrl: sourceText(sourceObject(recipe.image).origin) });
   defaults[id] = `${id}/volume`;
 }
 
@@ -103,7 +85,7 @@ for (const object of sourceArray(catalogue.objects, sourceObject)) {
   if (typeof object.detailedObjectId === 'string' && defaults[object.detailedObjectId])
     defaults[sourceText(object.id)] = defaults[object.detailedObjectId];
 }
-const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 32 px for 16 CSS px; Milky Way is a face-on composite of prepared z slabs.',
+const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications.',
   inputs: [...inputs.values()], images, defaults };
 await output('public/navigation/sidebar-thumbnails.json', JSON.stringify(manifest, null, 2) + '\n');
-console.log(`${check ? 'Verified' : 'Prepared'} ${Object.keys(images).length} sidebar images at 32 px.`);
+console.log(`${check ? 'Verified' : 'Prepared'} ${Object.keys(images).length} sidebar images at 80 px.`);
