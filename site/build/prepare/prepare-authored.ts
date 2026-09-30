@@ -324,7 +324,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (Boolean(terrestrial.rings) !== Boolean(descriptor.recipe.rings)) throw new TypeError('Prepared terrestrial rings must match the authored capability.');
     const { prepareTerrestrialLayers } = await import('@cssearth/bake/objects/layers/terrestrial');
     const terrestrialPrepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
-      config: terrestrial, prepareContent: prepareObjectContentAssets, replaceReviewedImages, solarGeometry: await solarGeometry() });
+      config: terrestrial, prepareContent: prepareObjectContentAssets, replaceReviewedImages, shape: descriptor.recipe.shape, solarGeometry: await solarGeometry() });
     const terrestrialAttached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: terrestrialPrepared.definition as unknown as Record<string, unknown> });
     if (terrestrialAttached.features) await writeFeatureContent(outputDirectory, terrestrialAttached.features);
     // Triangle faces also publish atlases masked to their triangles, for browsers without corner-shape.

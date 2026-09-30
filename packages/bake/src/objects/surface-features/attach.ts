@@ -45,10 +45,15 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   const surface = paged && descriptor.recipe.shape.kind === 'ellipsoid'
     ? await pagedEllipsoidSurface({ descriptor, paged, recipe: parseSurfaceFeaturesConfig(config.value), sourceDirectory, outputDirectory, meshRadiusUnits }) : undefined;
   if (hitMesh && surface) throw new TypeError('Surface features anchor on one surface model: a hit mesh or an ellipsoid.');
+  // A triaxial recipe drawn without a mesh: the long axis is the mesh radius and the others keep their ratios (solid-scene.ts).
+  const shape = descriptor.recipe.shape;
+  const triaxial = !hitMesh && !surface && shape.kind === 'ellipsoid' && shape.secondaryRadiusKm !== undefined
+    ? [meshRadiusUnits, meshRadiusUnits * shape.secondaryRadiusKm / shape.radiusKm, meshRadiusUnits * (shape.polarRadiusKm ?? shape.radiusKm) / shape.radiusKm] as const : undefined;
   const context: SurfaceFeaturePreparationContext & { readonly surface?: ReturnType<typeof ellipsoidSurfaceCast> } = { objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
     config: config.value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
     tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}), ...(surface ? { surface: surface.cast } : {}),
     ...(descriptor.recipe.shape.kind === 'sphere' ? { referenceSphere: true as const } : {}),
+    ...(triaxial ? { triaxial } : {}),
     declaredDatasetIds: descriptor.recipe.surfaces.flatMap(surface => surface.datasets.map(dataset => dataset.id)) };
   const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },

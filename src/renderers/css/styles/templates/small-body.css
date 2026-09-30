@@ -12,6 +12,12 @@
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--__object__-surface-image); background-repeat: no-repeat;
 }
+/* A body without a shape model is a banded sphere: its latitude bands and polar caps are rectangles. */
+:where(.object-stage[data-object-id="__object__"]) .__object__-body > s {
+  position: absolute; display: block; margin: 0; padding: 0; line-height: 0; text-decoration: none;
+  transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
+  background-image: var(--__object__-surface-image); background-repeat: no-repeat;
+}
 :where(.object-stage[data-object-id="__object__"]) .__object__-body > .__object__-polar { background-image: var(--__object__-poles-image); }
 :where(.object-stage[data-object-id="__object__"]) .__object__-material-root { z-index: 3; --__object__-billboard-opacity: 0; }
 :where(.object-stage[data-object-id="__object__"]) .__object__-material, :where(.object-stage[data-object-id="__object__"]) .__object__-billboard {

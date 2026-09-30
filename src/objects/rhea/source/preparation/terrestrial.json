@@ -209,14 +209,7 @@
         }
       }
     ],
-    "observedColors": [],
-    "shapeViews": [
-      {
-        "id": "shape",
-        "label": "Shape",
-        "consumer": "shape"
-      }
-    ]
+    "observedColors": []
   },
   "lighting": {
     "frameSize": 512,
@@ -233,25 +226,7 @@
     "radius": 230,
     "radiusKm": 763.5,
     "mapUrl": "/scenes/rhea/rhea-normal-surface@2x.webp",
-    "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp",
-    "radialTerrain": {
-      "path": "science/b2-intake/rhea_128_o.obj",
-      "format": "wavefront-obj",
-      "grid": {
-        "metersPerUnit": 1000,
-        "expectedVertices": 98306,
-        "expectedFaces": 196608
-      },
-      "faceBudget": 2000,
-      "texelsPerFace": 16384,
-      "primitive": "u",
-      "simplification": {
-        "method": "source-meshoptimizer",
-        "targetFaces": 2000,
-        "maximumErrorMeters": 7635,
-        "regularize": false
-      }
-    }
+    "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp"
   },
   "celestial": {
     "sunSource": "JPL Rhea orbit plus VSOP87 Saturn position and IAU/WGCCRE Rhea rotation"
