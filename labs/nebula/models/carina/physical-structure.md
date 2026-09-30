@@ -6,7 +6,7 @@ Intake: 12 September 2026. The [evidence ledger](physical-evidence.json) now sup
 
 [Damiani et al. 2016](https://arxiv.org/html/1604.01208) identifies several distorted, locally expanding regions near Trumpler 14, Eta Car and WR25, with obscuring lanes and locally preferred directions. Approximate five-arcminute shell scales belong to these regions, not the entire complex. Their Figure 34 uses an assumed velocity-to-distance factor; it is a model hypothesis, not a measured 3D point cloud. Broad Halpha wings can include reflected Eta Car emission, so not every high velocity belongs to local emitting gas.
 
-Our existing lenses cover roughly 33′ × 33′ optically and 88′ × 72′ in VISTA. The present solver supports only **one smooth height surface with finite thickness**: a broad unconstrained warp plus three localized deformations near independently checked cluster/star anchors. Published topology motivates their placement, but every depth, curvature, width and blend strength is authored. It does not reconstruct separate overlapping shells, a molecular-cloud network, foreground dust or true empty cavities. Do not inflate a single stellar ejecta model to fill either photograph.
+Our existing datasets cover roughly 33′ × 33′ optically and 88′ × 72′ in VISTA. The present solver supports only **one smooth height surface with finite thickness**: a broad unconstrained warp plus three localized deformations near independently checked cluster/star anchors. Published topology motivates their placement, but every depth, curvature, width and blend strength is authored. It does not reconstruct separate overlapping shells, a molecular-cloud network, foreground dust or true empty cavities. Do not inflate a single stellar ejecta model to fill either photograph.
 
 ## Data and research packet
 
@@ -22,7 +22,7 @@ The [source manifest](physical-sources.json) pins the downloaded table and ReadM
 
 ## Configured comparison and remaining work
 
-The recipe uses the same ICRS origin as `observations.json` and the compiler's west/north/away axes. Anchor offsets follow the existing small-angle west/north helper; the ledger retains the original ICRS coordinates and their catalogue epoch/quality. The roughly five-arcminute trial windows are not measured boundaries. Smooth local blending selects one depth per sightline, and all lenses paint that same support. The ledger hash is part of the runnable recipe.
+The recipe uses the same ICRS origin as `observations.json` and the compiler's west/north/away axes. Anchor offsets follow the existing small-angle west/north helper; the ledger retains the original ICRS coordinates and their catalogue epoch/quality. The roughly five-arcminute trial windows are not measured boundaries. Smooth local blending selects one depth per sightline, and all datasets paint that same support. The ledger hash is part of the runnable recipe.
 
 1. Register the line-catalogue positions on the existing image frame and show their actual coverage. Start with qualified sky-fibre components; keep stellar-fibre contamination and failed fits visible.
 2. Compile the configured single-front trial. Treat its local deformations as a coarse appearance hypothesis, not a recovery of the paper's multiple physical regions. Every unmeasured depth and thickness is declared authored in the recipe and ledger.

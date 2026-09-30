@@ -10,7 +10,7 @@ import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { compilerFrame } from './bake.ts';
 import { readCompilerBakeResult } from '@cssearth/bake/volume';
-import { assertCompilerLensGeometry } from './bank-validation.ts';
+import { assertCompilerDatasetGeometry } from './bank-validation.ts';
 import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from './retained-material-bank.ts';
 
 async function fixture(t: TestContext, variable = false) {
@@ -34,16 +34,16 @@ async function fixture(t: TestContext, variable = false) {
     await writeFile(join(root, path), JSON.stringify(value) + '\n'); return { path };
   }
   const neutral = await pin('neutral/volume.json', compileCssVolume({ id: 'compiler-fixture', frame, slices, recipe: { anchors: [] } }));
-  const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity, frame, boundsArcsec,
+  const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@2', id: 'fixture', fieldIdentity, frame, boundsArcsec,
     skyBoundsArcsec: { min: [10, 20], max: [12, 22] }, spanArcsec: 2, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' },
-    neutral, lenses: [{ id: 'original', label: 'Original', volume: neutral,
+    neutral, datasets: [{ id: 'original', label: 'Original', volume: neutral,
       coverage: { positiveAlphaTexels: 0, recoloredTexels: 0, outsideImageTexels: 0 } }], stars: [],
     sampling: { sliceCounts: { x: 2, y: 2, z: 2 }, imageWidth: 512, samplesPerSlab: 4, ...(layerPlan ? { layerPlan } : {}) } });
   const options: RetainedMaterialBankOptions = { root, outputDirectory: 'painted', scene,
     neutralSlicesPin: await pin('neutral/volume-slices.json', slices),
     sampleEmission(x, y, z, out) { out[0] = out[1] = out[2] = Math.hypot(x - origin[0], y - origin[1], z - origin[2]) < .9 ? .2 : 0; },
-    lens: { id: 'new-material', label: 'New material', sampleMaterial(x, y, z, out) {
+    dataset: { id: 'new-material', label: 'New material', sampleMaterial(x, y, z, out) {
       assert.ok(x >= 10 && x <= 12 && y >= 20 && y <= 22 && z >= 30 && z <= 32, 'Sampler receives absolute XYZ.');
       out[0] = z < 31 ? 255 : 30; out[1] = 40; out[2] = z < 31 ? 20 : 255; return true;
     } } };
@@ -52,13 +52,13 @@ async function fixture(t: TestContext, variable = false) {
 
 test('retained material prepares RGB through the existing slab/compiler path with exact geometry and alpha', async t => {
   const { options, slices } = await fixture(t), neutralBytes = await readFile(join(options.root, options.scene.neutral.path));
-  const lens = await prepareRetainedMaterialBank(options);
+  const dataset = await prepareRetainedMaterialBank(options);
   const neutral = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, options.scene.neutral)).toString()));
-  const painted = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, lens.volume)).toString()));
-  assertCompilerLensGeometry(neutral, painted, options.scene);
+  const painted = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, dataset.volume)).toString()));
+  assertCompilerDatasetGeometry(neutral, painted, options.scene);
   assert.ok((await readFile(join(options.root, options.scene.neutral.path))).equals(neutralBytes), 'The neutral bank is left untouched.');
-  assert.ok(lens.coverage.recoloredTexels > 0);
-  assert.deepEqual(painted.provenance && Object.getOwnPropertyDescriptor(painted.provenance, 'materialLensId')?.value, lens.id);
+  assert.ok(dataset.coverage.recoloredTexels > 0);
+  assert.deepEqual(painted.provenance && Object.getOwnPropertyDescriptor(painted.provenance, 'materialDatasetId')?.value, dataset.id);
   for (const q of slices.quads) {
     const original = await sharp(join(options.root, 'neutral', q.texturePath)).ensureAlpha().raw().toBuffer();
     const colored = await sharp(join(options.root, 'painted', q.texturePath)).ensureAlpha().raw().toBuffer();
@@ -68,8 +68,8 @@ test('retained material prepares RGB through the existing slab/compiler path wit
 
 test('retained nonuniform material preserves intervals and rejects missing replay metadata', async t => {
   const { options, slices, pin } = await fixture(t, true);
-  const lens = await prepareRetainedMaterialBank(options);
-  assert.ok(lens.coverage.recoloredTexels > 0);
+  const dataset = await prepareRetainedMaterialBank(options);
+  assert.ok(dataset.coverage.recoloredTexels > 0);
   const painted = JSON.parse(await readFile(join(options.root, 'painted/volume-slices.json'), 'utf8'));
   assert.deepEqual(painted.approximation.layerPlan, options.scene.sampling.layerPlan);
   assert.deepEqual(painted.quads.map((q: { slab: unknown }) => q.slab), slices.quads.map(q => q.slab));
@@ -100,7 +100,7 @@ test('retained material rejects changed positions and slab metadata', async t =>
 test('retained material rejects missing XYZ and nonfinite sampler results', async t => {
   const { options } = await fixture(t);
   // @ts-expect-error The historical projected-image API must fail at the actual default boundary.
-  await assert.rejects(prepareRetainedMaterialBank({ ...options, lens: { id: 'xy', label: 'XY', sampleRgb() { return true; } } }), /3D material sampler/);
+  await assert.rejects(prepareRetainedMaterialBank({ ...options, dataset: { id: 'xy', label: 'XY', sampleRgb() { return true; } } }), /3D material sampler/);
   await assert.rejects(prepareRetainedMaterialBank({ ...options, sampleEmission(_x, _y, _z, out) { out.fill(NaN); } }), /finite nonnegative/);
-  await assert.rejects(prepareRetainedMaterialBank({ ...options, lens: { ...options.lens, sampleMaterial(_x, _y, _z, out) { out.fill(Infinity); return true; } } }), /finite RGB/);
+  await assert.rejects(prepareRetainedMaterialBank({ ...options, dataset: { ...options.dataset, sampleMaterial(_x, _y, _z, out) { out.fill(Infinity); return true; } } }), /finite RGB/);
 });

@@ -1,4 +1,4 @@
-import type { SurfaceBankPlan, SurfaceBankLenses } from './contracts.ts';
+import type { SurfaceBankPlan, SurfaceBankDatasets } from './contracts.ts';
 /** `maximumWidth`: the largest level the runtime may choose. Wider levels are still prepared (smaller levels are reduced
  * from the canonical page) but never offered, so no view downloads them. */
 export interface TextureLevelConfiguration {widths:readonly number[];fixedWidth?:number;maximumWidth?:number;hysteresis:number;texelsPerCssPixel:number}
@@ -49,7 +49,7 @@ export function packTextureSheet(sides: readonly number[]): { side: number; posi
 
 /** Downsample the canonical prepared atlas offline. Padding before reduction
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
-export async function prepareTextureLevels({ config, plan, lenses, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;lenses?:SurfaceBankLenses;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
+export async function prepareTextureLevels({ config, plan, datasets, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;datasets?:SurfaceBankDatasets;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
   const { widths, fixedWidth, maximumWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
   const canonicalWidth = config.atlas.pageSize;
@@ -60,7 +60,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
     !(hysteresis >= 0 && hysteresis < 1) || !(texelsPerCssPixel >= 1)) throw new TypeError('Invalid prepared atlas levels.');
   const banks = selectedBanks
     ? selectedBanks.map(bank=>({id:bank.id,urls:requireSurfacePages(bank.urls,`Texture level ${bank.id}`,config.publicBase)}))
-    : plan&&lenses ? surfaceBankInventory(plan,lenses,config.publicBase) : (()=>{throw new TypeError('Texture levels require prepared surface banks.');})();
+    : plan&&datasets ? surfaceBankInventory(plan,datasets,config.publicBase) : (()=>{throw new TypeError('Texture levels require prepared surface banks.');})();
   if(!banks.length||new Set(banks.map(bank=>bank.id)).size!==banks.length)throw new TypeError('Texture level banks must be distinct.');
   type Level = {minimumDiameter:number;resources:Record<string,string>;tiles?:Record<string,{x:number;y:number;scale:number}>};
   const entries: (TextureLevelAsset & {key:string;pool:string})[] = [], receipts: TextureLevelReceipt[] = [], levels: Level[] = widths.map((width, i) => ({
@@ -151,9 +151,9 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
   for (let i = entries.length - 1; i >= 0; i--) if (replaced.has(entries[i]!.url)) entries.splice(i, 1);
   for (let i = receipts.length - 1; i >= 0; i--) if (replaced.has(receipts[i]!.url)) receipts.splice(i, 1);
   for (const url of replaced) await rm(resolve(publicDirectory, url.slice(config.publicBase.length)), { force: true });
-  // A surface lens's pole atlas has its pages' texel density, so each level scales it by the pages' ratio; the first
+  // A surface dataset's pole atlas has its pages' texel density, so each level scales it by the pages' ratio; the first
   // view then loads its poles at the same level as its pages instead of at full resolution.
-  for (const lens of lenses?.controls ?? []) if (lens.view !== 'interior' && lens.polesUrl) await prepare(`poles:${lens.id}`, lens.polesUrl, 'mounted');
+  for (const dataset of datasets?.controls ?? []) if (dataset.view !== 'interior' && dataset.polesUrl) await prepare(`poles:${dataset.id}`, dataset.polesUrl, 'mounted');
   // Two complete largest banks can coexist during an atomic dataset switch.
   // Smaller completed levels share this same byte budget rather than multiply it.
   const maximumDecodedBytes = 2 * Math.max(...banks.map(bank => entries.filter(entry =>
@@ -165,11 +165,11 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
     if (cap === undefined) continue;
     const capIndex = widths.indexOf(cap);
     if (capIndex < 0) throw new TypeError(`${map.name}: maximumTextureWidth ${cap} is not one of the texture level widths ${widths.join(', ')}.`);
-    const lensIds = new Set(banks.filter(bank => basename(bank.urls[0]!, '.webp').replace(/@2x$/u, '') === map.name).map(bank => bank.id));
-    if (!lensIds.size) throw new TypeError(`${map.name}: maximumTextureWidth names a map no surface bank reads.`);
+    const datasetIds = new Set(banks.filter(bank => basename(bank.urls[0]!, '.webp').replace(/@2x$/u, '') === map.name).map(bank => bank.id));
+    if (!datasetIds.size) throw new TypeError(`${map.name}: maximumTextureWidth names a map no surface bank reads.`);
     for (const level of levels.slice(capIndex + 1)) for (const key of Object.keys(level.resources)) {
-      const lens = /^(?:page|poles):([^:]+)/u.exec(key)?.[1];
-      if (!lens || !lensIds.has(lens)) continue;
+      const dataset = /^(?:page|poles):([^:]+)/u.exec(key)?.[1];
+      if (!dataset || !datasetIds.has(dataset)) continue;
       level.resources[key] = levels[capIndex]!.resources[key]!;
       const tile = levels[capIndex]!.tiles?.[key];
       // A copy: the presentation contract refuses an object shared between two places as cyclic.

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "toi-5806b",
   "displayName": "TOI-5806 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by TOI-5806; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "toi-5806b-lens-shape.webp",
+        "thumbnail": "toi-5806b-dataset-shape.webp",
         "surface": "toi-5806b-surface-shape@2x.webp",
         "poles": "toi-5806b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of TOI-5806 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-5806's light, as its colour lens measures it."
+        "notes": "No image or colour of TOI-5806 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-5806's light, as its colour dataset measures it."
       }
     ]
   },

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-43b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature",
       "output": "wasp-43b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-43b-lens-{id}.webp",
+      "thumbnail": "wasp-43b-dataset-{id}.webp",
       "source": "science/challener-2024/wasp-43b.tar",
       "falseColor": true,
       "science": {
@@ -70,7 +70,7 @@
     {
       "id": "miri",
       "output": "wasp-43b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-43b-lens-{id}.webp",
+      "thumbnail": "wasp-43b-dataset-{id}.webp",
       "source": "science/jwst-1366-miri/white-5.0-10.5um.csv",
       "falseColor": true,
       "science": {

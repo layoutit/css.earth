@@ -48,8 +48,8 @@
       "id": "hst-photometry-recovery-and-observer-account",
       "subject": "HST photometry/recovery and observer account",
       "status": "deferred",
-      "finding": "Recover position and integrated brightness, not resolved surface texels. No Color lens qualified.",
-      "revisitWhen": "A spatially resolved Ophelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "finding": "Recover position and integrated brightness, not resolved surface texels. No Color dataset qualified.",
+      "revisitWhen": "A spatially resolved Ophelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ophelia/source/manifest.json",
         "https://doi.org/10.1006/icar.2001.6596"

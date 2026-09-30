@@ -1,18 +1,18 @@
 /**
- * Which apparitions a survey lens can cast, and what each would add.
+ * Which apparitions a survey dataset can cast, and what each would add.
  *
- *   node packages/bake/cli/sphere-survey-apparitions.mts [object-id …]   audit every shipped survey lens, or the ones named
+ *   node packages/bake/cli/sphere-survey-apparitions.mts [object-id …]   audit every shipped survey dataset, or the ones named
  *
  * Deconvolved frames carry no calibrated level, so the level fit places an apparition only through surface it shares with
  * another at moderate angles (`observingSeasons` in the controlled-camera format). Whether it can is decided here from
- * geometry, before any pixel is read: each released frame's view of the lens mesh, from the release's rotation record and
+ * geometry, before any pixel is read: each released frame's view of the dataset mesh, from the release's rotation record and
  * JPL Horizons at the start its file name states, and for frames of different apparitions the surface both see within the
- * fit's angle limit, counted in the display samples the fit compares. An apparition joins the lens when one of its frames
- * shares at least the fit's minimum pair count with a frame the lens already casts; the fit then decides from the pixels.
+ * fit's angle limit, counted in the display samples the fit compares. An apparition joins the dataset when one of its frames
+ * shares at least the fit's minimum pair count with a frame the dataset already casts; the fit then decides from the pixels.
  *
- * The audit runs the same geometry for the lenses in the repository with the Sun limits the lens photometry states, and
+ * The audit runs the same geometry for the datasets in the repository with the Sun limits the dataset photometry states, and
  * reports each apparition's share of the surface and what it adds. A face counts when its centre faces the camera and the
- * Sun within the limits and nothing hides it from the camera; the prepared lens's measured coverage is printed beside the
+ * Sun within the limits and nothing hides it from the camera; the prepared dataset's measured coverage is printed beside the
  * model's for the frames it casts, as the model's check.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -35,7 +35,7 @@ export interface FrameView { observer: Vector; sun: Vector; latitude: number; ra
 export const bodyDirection = (latitude: number, westLongitude: number): Vector =>
   [Math.cos(latitude * DEGREE) * Math.cos(-westLongitude * DEGREE), Math.cos(latitude * DEGREE) * Math.sin(-westLongitude * DEGREE), Math.sin(latitude * DEGREE)];
 
-/** Every face of the lens mesh with its area, centre and surface normal there, and whether the mesh constrains it. */
+/** Every face of the dataset mesh with its area, centre and surface normal there, and whether the mesh constrains it. */
 export function meshFaces(mesh: Mesh) {
   const normalAt = shadingNormal(mesh);
   return mesh.indices.map((face, id) => {

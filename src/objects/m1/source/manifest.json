@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-source-manifest@1",
+  "schema": "cssearth-volume-source-manifest@2",
   "pathBase": "repository",
   "inputs": [
     {
@@ -22,7 +22,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "hubble-optical",
+      "datasetId": "hubble-optical",
       "license": "Provider terms: https://esahubble.org/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [
@@ -54,7 +54,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "webb-infrared",
+      "datasetId": "webb-infrared",
       "license": "Provider terms: https://esawebb.org/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [
@@ -86,7 +86,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "webb-components",
+      "datasetId": "webb-components",
       "license": "Provider terms: https://esawebb.org/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [
@@ -118,7 +118,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "spitzer-infrared",
+      "datasetId": "spitzer-infrared",
       "license": "Provider terms: https://esahubble.org/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [
@@ -150,7 +150,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "vla-radio",
+      "datasetId": "vla-radio",
       "license": "Provider terms: https://esahubble.org/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [
@@ -182,7 +182,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "chandra-xray",
+      "datasetId": "chandra-xray",
       "license": "Provider terms: https://esahubble.org/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [

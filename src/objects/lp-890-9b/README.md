@@ -8,7 +8,7 @@ It is one of 2 planets known around LP 890-9. Its orbit and size follow Delrez e
 
 **Orbit.** Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): P 2.7299025 d Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): a/R* 26.32; Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): inclination 89.67 degrees No archive row states an eccentricity; the orbit is taken as circular Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): transit mid-time 2459447.82637 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by lp-890-9's measured colour (#ffb263, the colour lens of lp-890-9 (src/objects/lp-890-9/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by lp-890-9's measured colour (#ffb263, the colour dataset of lp-890-9 (src/objects/lp-890-9/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of LP 890-9's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (31, 32, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -244,7 +244,7 @@ function cityFixture(browser: NonNullable<ReturnType<typeof createDestinationBro
   const signal = new AbortController().signal;
   const session = { objectId: 'earth', signal, shell: { presentDestination: browser.present }, mount: {
     datasets: { ids: ['normal'], defaultId: 'normal', current: () => 'normal', select: async () => true },
-    destinations: { lensId: 'normal', select: async (place: unknown) => ({ status: 'Earth overview at this location.', arrival: fly(place) }) },
+    destinations: { datasetId: 'normal', select: async (place: unknown) => ({ status: 'Earth overview at this location.', arrival: fly(place) }) },
   } } as unknown as SceneSession;
   const request = { feature: 'city-1691490', url: 'https://site.test/earth/?feature=city-1691490', signal } as NavigationRequest;
   return { session, request };

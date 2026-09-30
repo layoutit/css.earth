@@ -22,7 +22,7 @@
           "id": "body",
           "source": "terrestrial",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "shape",
               "source": "content",
@@ -50,7 +50,7 @@
         "kind": "radial-terrain",
         "radiusKm": 0.365
       },
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "materials": [
         {
           "id": "lighting",
@@ -118,7 +118,7 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/didymos-surfaces.css"
+        "src/renderers/css/styles/templates/small-body.css"
       ],
       "metadata": {
         "url": "prepared/page.json"
@@ -137,7 +137,7 @@
       }
     }
   },
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "type": "layered-body",
   "prepared": {
     "format": "cssearth-css-object@5",

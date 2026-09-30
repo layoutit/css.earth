@@ -113,7 +113,7 @@ The Arecibo model independently follows the same source-mesh route with a 75 m
 error allowance and its own geometry, lighting banks and thumbnail. Both sets
 of 1,000 leaves are prepared and retained in one scene; only the selected set is
 displayed. Prepared triangle ranges make surface picking follow the committed
-dataset. A lens change does not generate geometry, mount another object or move
+dataset. A dataset change does not generate geometry, mount another object or move
 the shared camera.
 
 A uniform #b8b6b2 material makes the geometry readable. It is an illustration,

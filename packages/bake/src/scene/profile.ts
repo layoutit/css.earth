@@ -51,7 +51,7 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
   numbers(projection, ['tileSize', 'layerElevation', 'seamBleed', 'interiorSeamBleed', 'overlap', 'rasterScale', 'rasterGutter', 'rasterOverscan', 'ambientIntensity'], 'projection');
   if (typeof projection.lightColor !== 'string') throw new TypeError('Projection needs a light colour.');
   for (const name of ['fitToSource', 'projectivePoles']) if (typeof projection[name] !== 'boolean') throw new TypeError(`projection.${name} must be boolean.`);
-  // Every leaf writes its texture address inline; a lens reaches it through the texture its variant writes on the body.
+  // Every leaf writes its texture address inline; a dataset reaches it through the texture its variant writes on the body.
   if (projection.positionVariables !== undefined) throw new TypeError('projection.positionVariables is gone: remove it.');
   if (projection.seamOutset !== undefined) {
     numbers(object(projection.seamOutset, 'projection.seamOutset'), ['targetPixels', 'stepRatio', 'hysteresis', 'firstDiameter', 'lastDiameter'], 'projection.seamOutset');

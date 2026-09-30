@@ -12,11 +12,11 @@ describe('retained presentation compiler compatibility', () => {
   for (const id of ['mercury', 'venus']) it(`${id} preserves its prepared tree, resources, settings and navigation`, async () => {
     const base = `src/objects/${id}/prepared`;
     const profile = parsePresentationProfile(await read(`src/objects/${id}/source/preparation/presentation.json`));
-    const [scene, assets, lenses, sun, markers, controls, expected, solarSource] = await Promise.all([
-      ...['scene', 'assets', 'lenses', 'sun', 'markers', 'controls', 'runtime'].map(file => read(`${base}/${file}.json`)),
+    const [scene, assets, datasets, sun, markers, controls, expected, solarSource] = await Promise.all([
+      ...['scene', 'assets', 'datasets', 'sun', 'markers', 'controls', 'runtime'].map(file => read(`${base}/${file}.json`)),
       read(`src/objects/${id}/source/presentation/solar-system.json`),
     ]);
-    const input = { ...profile, scene, assets, lenses, sun, markers, controls, solarSource } as PresentationInputs;
+    const input = { ...profile, scene, assets, datasets, sun, markers, controls, solarSource } as PresentationInputs;
     const prepared = await prepareCssPresentation(input, presentationHostAdapters(solarGeometry));
     // Runtime finalization adds motion/facing and can update marker/warm-bank
     // metadata. Compare the compiler-owned structure with the accepted runtime.
@@ -33,7 +33,7 @@ describe('retained presentation compiler compatibility', () => {
     }
   }, 30_000);
   it('rejects surface texture levels: raster surfaces have one prepared density', () => {
-    const profile = { schema: 'cssearth-css-presentation-profile@1', namespace: 'mercury', mode: 'row-bank-cutaway', textureLevels: { hysteresis: 0.2, texelsPerCssPixel: 2 } };
+    const profile = { schema: 'cssearth-css-presentation-profile@2', namespace: 'mercury', mode: 'row-bank-cutaway', textureLevels: { hysteresis: 0.2, texelsPerCssPixel: 2 } };
     expect(() => parsePresentationProfile(profile)).toThrow(/one prepared density/);
   });
 });

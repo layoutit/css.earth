@@ -1,4 +1,4 @@
-/** Neutral source-independent smooth finite field; all image lenses use this exact geometry. */
+/** Neutral source-independent smooth finite field; all image datasets use this exact geometry. */
 import type { EmissionBounds, EmissionComponent, EmissionFieldModel, EmissionVector3 } from '../contracts/emission.ts';
 import { createEmissionWindowSampler } from './emission-window.ts';
 

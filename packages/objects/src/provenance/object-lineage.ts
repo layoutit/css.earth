@@ -9,13 +9,13 @@ export interface LineageSource {
   readonly id: string; readonly path: string; readonly credit: string;
   readonly license?: string; readonly redistribution?: string;
   /** Set when the input is a dataset's own source rather than a file supporting it. */
-  readonly lensId?: string;
+  readonly datasetId?: string;
   readonly capture?: Capture; readonly sourceBinding?: SourceBinding;
   readonly dependencies: readonly string[];
 }
 /** One prepared product (usually a dataset) and the manifest sources its recipe reads. */
 export interface LineageProduct {
-  readonly id: string; readonly label: string; readonly lensIds: readonly string[];
+  readonly id: string; readonly label: string; readonly datasetIds: readonly string[];
   readonly inputs: readonly string[]; readonly parents: readonly string[];
   readonly inputEvidence?: readonly ProductInputEvidence[];
   /** Whether source capture lineage may credit a displayed view; never an observation-quality claim. */
@@ -38,17 +38,17 @@ export function lineageSource(raw: unknown, defaults: { id?: string; credit?: st
   const text = (key: string) => value[key] === undefined ? undefined : sourceText(value[key]);
   const id = text('id') ?? defaults.id, credit = text('credit') ?? defaults.credit;
   if (id === undefined || credit === undefined) throw new TypeError(`Source record needs an id and a credit: ${String(value.path)}.`);
-  const license = text('license'), redistribution = text('redistribution'), lensId = text('lensId');
+  const license = text('license'), redistribution = text('redistribution'), datasetId = text('datasetId');
   return Object.freeze({ id, path: sourcePath(value.path), credit,
     dependencies: Object.freeze([...(defaults.dependencies ?? sourceArray(value.dependencies ?? [], sourceText))]),
     ...(license === undefined ? {} : { license }), ...(redistribution === undefined ? {} : { redistribution }),
-    ...(lensId === undefined ? {} : { lensId }),
+    ...(datasetId === undefined ? {} : { datasetId }),
     ...(value.capture === undefined ? {} : { capture: parseCapture(value.capture) }),
     ...(value.sourceBinding === undefined ? {} : { sourceBinding: parseSourceBinding(value.sourceBinding) }) });
 }
 
 /** Check that every product and dependency names a known source, product and dataset, without cycles. */
-export function checkLineage(lineage: ObjectLineage, lensIds?: ReadonlySet<string>): ObjectLineage {
+export function checkLineage(lineage: ObjectLineage, datasetIds?: ReadonlySet<string>): ObjectLineage {
   const unique = (values: readonly string[], label: string) => {
     if (new Set(values).size !== values.length) throw new TypeError(`Duplicate ${label} in ${lineage.objectId}.`);
   };
@@ -60,7 +60,7 @@ export function checkLineage(lineage: ObjectLineage, lensIds?: ReadonlySet<strin
   for (const product of lineage.products) {
     for (const id of product.inputs) if (!sources.has(id)) throw new TypeError(`Unknown product input: ${lineage.objectId}/${product.id} -> ${id}.`);
     for (const id of product.parents) if (!products.has(id)) throw new TypeError(`Unknown product parent: ${lineage.objectId}/${product.id} -> ${id}.`);
-    for (const id of product.lensIds) if (lensIds && !lensIds.has(id)) throw new TypeError(`Unknown prepared dataset: ${lineage.objectId}/${id}.`);
+    for (const id of product.datasetIds) if (datasetIds && !datasetIds.has(id)) throw new TypeError(`Unknown prepared dataset: ${lineage.objectId}/${id}.`);
     for (const evidence of product.inputEvidence ?? []) if (!product.inputs.includes(evidence.sourceId))
       throw new TypeError(`Input evidence names an unread source: ${lineage.objectId}/${product.id}/${evidence.sourceId}.`);
   }
@@ -79,7 +79,7 @@ export function checkLineage(lineage: ObjectLineage, lensIds?: ReadonlySet<strin
   return lineage;
 }
 
-/** A source can reach a product through other prepared products (e.g. a companion volume's borrowed lens). */
+/** A source can reach a product through other prepared products (e.g. a companion volume's borrowed dataset). */
 export function productSourceIds(lineage: ObjectLineage, productId: string, acceptProduct: (product: LineageProduct) => boolean = () => true): string[] {
   const products = new Map(lineage.products.map(product => [product.id, product]));
   const sources = new Map(lineage.sources.map(source => [source.id, source]));

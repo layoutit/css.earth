@@ -46,15 +46,15 @@ export async function loadSurfaceObservation({ sourceDirectory, source, recipe, 
   // A limit looser than the frames' measured footprint and the mesh error allow would admit pixels across a limb or a neck.
   if (exceeded.length) throw new Error(`Surface observation ${String(requireRecord(recipe).id)} states ${exceeded.join(' and ')} beyond what its frames support: ${JSON.stringify(requireRecord(policy.limits).derived)}.`);
   // Every camera route is measured the same way after it loads.
-  const lens = requireRecord(recipe);
-  let measured = frames, stage = await registrationStage(frames, lens, context), refinement: Record<string, unknown> | undefined;
-  // A refinement names a reference and may turn every camera of the lens by that reference's decisive median, once, when no other
-  // reference disagrees; the turned lens is measured again. A route's own limb fit is `limbRefinement`, which the format applies.
-  if (lens.refinement !== undefined) {
-    const wanted = parseRefinement(lens.refinement);
+  const dataset = requireRecord(recipe);
+  let measured = frames, stage = await registrationStage(frames, dataset, context), refinement: Record<string, unknown> | undefined;
+  // A refinement names a reference and may turn every camera of the dataset by that reference's decisive median, once, when no other
+  // reference disagrees; the turned dataset is measured again. A route's own limb fit is `limbRefinement`, which the format applies.
+  if (dataset.refinement !== undefined) {
+    const wanted = parseRefinement(dataset.refinement);
     if (!stage) throw new Error('A refinement needs frames that carry cameras.');
     // The turn about the pole comes from the named sweep, the tilt about the line of sight from the silhouette; both are
-    // decided on the untouched measurement, applied once, and the corrected lens is measured again.
+    // decided on the untouched measurement, applied once, and the corrected dataset is measured again.
     const turn = wanted.by ? refinementDecision(stage, wanted) : undefined, tilt = wanted.tilt ? tiltDecision(stage) : undefined;
     refinement = { ...(turn ? { turn } : {}), ...(tilt ? { tilt } : {}), rule: { minimumFrames: stage.reference.rule.minimumFrames, minimumScored: TILT.minimumScored, agreementDegrees: wanted.agreementDegrees } };
     let turnBy = turn?.applied && turn.turnDegrees ? turn.turnDegrees : 0, tiltBy = tilt?.applied && tilt.tiltDegrees ? tilt.tiltDegrees : 0;
@@ -69,7 +69,7 @@ export async function loadSurfaceObservation({ sourceDirectory, source, recipe, 
     if (turnBy || tiltBy) {
       const before = stage;
       // A correction is kept only if the second measurement improves what it came from; one that does not is reverted and the rest measured again.
-      const measure = async (turnDegrees: number, tiltDegrees: number) => { const report = await registrationStage(corrected(turnDegrees, tiltDegrees), lens, context); if (!report) throw new Error('The corrected lens lost its cameras.'); return report; };
+      const measure = async (turnDegrees: number, tiltDegrees: number) => { const report = await registrationStage(corrected(turnDegrees, tiltDegrees), dataset, context); if (!report) throw new Error('The corrected dataset lost its cameras.'); return report; };
       let attempt = await measure(turnBy, tiltBy), kept = refinementKept(before, attempt, turnBy ? wanted.by : undefined, tiltBy !== 0);
       refinement.before = summary(before);
       if ((kept.turn && !kept.turn.kept) || (kept.tilt && !kept.tilt.kept)) {

@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-6109. Its orbit and size follow Dattilo 
 
 **Orbit.** Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): P 5.690476 d Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): a/R* 12.6318; Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): inclination 85.6909 degrees No archive row states an eccentricity; the orbit is taken as circular Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): transit mid-time 2458791.0538 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-6109's measured colour (#ffefe9, the colour lens of toi-6109 (src/objects/toi-6109/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-6109's measured colour (#ffefe9, the colour dataset of toi-6109 (src/objects/toi-6109/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-6109's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (18, 58, 85), folded onto its orbit. Upper limits and rows without an error are left out.
 

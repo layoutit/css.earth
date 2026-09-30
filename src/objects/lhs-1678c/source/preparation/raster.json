@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/lhs-1678c/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "lhs-1678c-surface-{id}{suffix}.webp",
-      "thumbnail": "lhs-1678c-lens-{id}.webp",
+      "thumbnail": "lhs-1678c-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc282, the colour lens of lhs-1678 (src/objects/lhs-1678/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc282, the colour dataset of lhs-1678 (src/objects/lhs-1678/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "lhs-1678",
           "srgb": "#ffc282",
-          "source": "the colour lens of lhs-1678 (src/objects/lhs-1678/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of lhs-1678 (src/objects/lhs-1678/source/photometry/stellar-color.json)"
         }
       }
     }

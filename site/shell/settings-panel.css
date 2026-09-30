@@ -1,4 +1,4 @@
-/* The settings panel and the lens-bank switches. These rules lived in explorer-rail.css, which was deleted with the
+/* The settings panel and the dataset-bank switches. These rules lived in explorer-rail.css, which was deleted with the
    unreachable rail although the settings panel still carries .explorer-settings-panel. */
 
 .explorer-settings-panel h2 {
@@ -55,7 +55,7 @@
   font: 400 14px/1.3 var(--shell-ui-font);
 }
 
-:is(.explorer-settings-panel, [data-focus-lens-bank]) .object-setting-switch {
+:is(.explorer-settings-panel, [data-focus-dataset-bank]) .object-setting-switch {
   display: block;
   position: relative;
   grid-column: 3;
@@ -68,7 +68,7 @@
   background: var(--explorer-header-control-selected);
 }
 
-:is(.explorer-settings-panel, [data-focus-lens-bank]) .object-setting-switch::before {
+:is(.explorer-settings-panel, [data-focus-dataset-bank]) .object-setting-switch::before {
   position: absolute;
   top: 3px;
   left: 3px;
@@ -79,20 +79,20 @@
   content: "";
 }
 
-:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:checked ~ .object-setting-switch {
+:is(.explorer-settings-panel, [data-focus-dataset-bank]) input[type="checkbox"]:checked ~ .object-setting-switch {
   background: var(--shell-text);
 }
 
-:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:checked ~ .object-setting-switch::before {
+:is(.explorer-settings-panel, [data-focus-dataset-bank]) input[type="checkbox"]:checked ~ .object-setting-switch::before {
   background: var(--explorer-panel-background);
   transform: translateX(16px);
 }
 
-:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:indeterminate ~ .object-setting-switch::before {
+:is(.explorer-settings-panel, [data-focus-dataset-bank]) input[type="checkbox"]:indeterminate ~ .object-setting-switch::before {
   transform: translateX(8px);
 }
 
-:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:focus-visible ~ .object-setting-switch {
+:is(.explorer-settings-panel, [data-focus-dataset-bank]) input[type="checkbox"]:focus-visible ~ .object-setting-switch {
   outline: 2px solid var(--shell-focus);
   outline-offset: 2px;
 }

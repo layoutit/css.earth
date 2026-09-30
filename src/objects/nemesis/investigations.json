@@ -61,7 +61,7 @@
     },
     {
       "id": "sphere-cross-frame-registration",
-      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph dataset",
       "status": "unresolved",
       "finding": "Measured on all 25 deconvolved frames with the release's rotation record, cast onto the released ADAM mesh: not one frame scores. The projected outline is round at every rotational phase, elongation 1.09 against the rule's 1.20 threshold, so the outline cannot define a position angle and the route has nothing to place this body with. Its record also states a period of 77.86 h where the survey publishes 38.93, exactly twice, which is a separate question but does not affect a round outline. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
       "revisitWhen": "A registration reference independent of this body's outline: a spacecraft map, or frames resolving surface markings.",

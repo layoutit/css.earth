@@ -137,7 +137,7 @@ try {
     const reconstructed = await project(page, '[data-reconstruction-original-leaf]', landmarks.map(point => point.pixel));
     const screenshot = screenshotName(row.imageId, 'reconstruction'); await page.screenshot({ path: screenshot });
     for (const entry of aligned) {
-      assert.equal(reconstructed.focal, entry.projection.focal, `${row.imageId}/${entry.route}: Earth lens changed across tabs.`);
+      assert.equal(reconstructed.focal, entry.projection.focal, `${row.imageId}/${entry.route}: Earth dataset changed across tabs.`);
       assert.equal(reconstructed.distance, entry.projection.distance, `${row.imageId}/${entry.route}: Earth observer distance changed.`);
       assert.equal(reconstructed.framingRadius, entry.projection.framingRadius, `${row.imageId}/${entry.route}: Earth framing changed.`);
       assert.ok(reconstructed.cameraMatrix.every((value, index) => Math.abs(value - entry.projection.cameraMatrix[index]) <= 1e-8),

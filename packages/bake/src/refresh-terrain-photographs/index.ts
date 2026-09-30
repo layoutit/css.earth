@@ -1,5 +1,5 @@
-/** `@cssearth/bake/refresh-terrain-photographs` (Node only): refresh selected native cylindrical photographic lenses,
- * staged then applied. `packages/bake/cli/refresh-terrain-photographs.mts <object-id> <lensId>... [--apply-staged]` is
+/** `@cssearth/bake/refresh-terrain-photographs` (Node only): refresh selected native cylindrical photographic datasets,
+ * staged then applied. `packages/bake/cli/refresh-terrain-photographs.mts <object-id> <datasetId>... [--apply-staged]` is
  * its command. The generated solar geometry is written after the packages build, so the host passes it in
  * (`SolarGeometry`). */
 import { retainedPhotographicAtlas, parseNativePhotographicSampling, prepareNativePhotographicAtlas } from '../objects/layers/terrestrial/index.ts';
@@ -27,11 +27,11 @@ async function refreshContext(id:string,ids:readonly string[]) {
   if(terrain.sourceLighting || geometry.radialModels || geometry.radialTerrainAlternatives)throw new Error('This refresh requires the existing single-model cylindrical photographic lane.');
   const nativeRecipes=records(raster.observations),surfacesDocument=await json(resolve(outputDirectory,'surfaces.json')),
     surfaces=records(surfacesDocument.surfaces),assetsDocument=await json(resolve(outputDirectory,'assets.json'));
-  const inputs=records(source.inputs),selected=ids.map(lensId=>{
-    const observation=nativeRecipes.find(record=>record.id===lensId),surface=surfaces.find(record=>record.id===lensId);
-    const input=inputs.find(record=>record.lensId===lensId && requireArray(record.consumers).includes('surfaces'));
-    if(!observation || !surface || !input || observation.textureScale || observation.monochromeBase)throw new Error(`Unsupported photographic selection ${id}/${lensId}.`);
-    return {lensId,observation,surface,input};
+  const inputs=records(source.inputs),selected=ids.map(datasetId=>{
+    const observation=nativeRecipes.find(record=>record.id===datasetId),surface=surfaces.find(record=>record.id===datasetId);
+    const input=inputs.find(record=>record.datasetId===datasetId && requireArray(record.consumers).includes('surfaces'));
+    if(!observation || !surface || !input || observation.textureScale || observation.monochromeBase)throw new Error(`Unsupported photographic selection ${id}/${datasetId}.`);
+    return {datasetId,observation,surface,input};
   });
   return {id,ids,objectDirectory,sourceDirectory,outputDirectory,stage,publicDirectory,descriptor,recipe,source,sceneBytes,radial,raster,surfacesDocument,surfaces,assetsDocument,selected};
 }
@@ -46,14 +46,14 @@ async function anyChangedAfter(paths:readonly string[],time:number) {
 function bindings(context:Awaited<ReturnType<typeof refreshContext>>) {
   return {files:[resolve(context.outputDirectory,'scene.json'),resolve(context.sourceDirectory,'preparation/terrestrial.json'),
     resolve(context.sourceDirectory,'manifest.json'),resolve(context.objectDirectory,'object.json')],
-    inputs:context.selected.map(({lensId,input})=>({lensId,path:requireString(input.path)}))};
+    inputs:context.selected.map(({datasetId,input})=>({datasetId,path:requireString(input.path)}))};
 }
 
 function stableAssets(context:Awaited<ReturnType<typeof refreshContext>>, results:Map<string,Record<string,unknown>>) {
   const groups=requireRecord(context.assetsDocument.surfaces);
-  for(const {lensId} of context.selected) {
-    const assets=requireRecord(groups[lensId]),result=requireRecord(results.get(lensId)),surface=requireRecord(result.surface),url=requireString(surface.url);
-    for(const key of ['url','url2x','polesUrl','polesUrl2x'])if(assets[key]!==url)throw new Error(`Prepared assets have unstable URL ${context.id}/${lensId}/${key}.`);
+  for(const {datasetId} of context.selected) {
+    const assets=requireRecord(groups[datasetId]),result=requireRecord(results.get(datasetId)),surface=requireRecord(result.surface),url=requireString(surface.url);
+    for(const key of ['url','url2x','polesUrl','polesUrl2x'])if(assets[key]!==url)throw new Error(`Prepared assets have unstable URL ${context.id}/${datasetId}/${key}.`);
   }
 }
 
@@ -70,25 +70,25 @@ async function stagedAsset(stage:string,asset:unknown) {
 async function saveReceipt(context:Awaited<ReturnType<typeof refreshContext>>, results:Map<string,Record<string,unknown>>, status:'fresh') {
   stableAssets(context,results);
   const entries=[];
-  for(const {lensId} of context.selected) {
-    const result=requireRecord(results.get(lensId)),surface=await stagedAsset(context.stage,result.surface),shadowSurface=await stagedAsset(context.stage,result.shadowSurface);
-    entries.push({lensId,result,surface,shadowSurface});
+  for(const {datasetId} of context.selected) {
+    const result=requireRecord(results.get(datasetId)),surface=await stagedAsset(context.stage,result.surface),shadowSurface=await stagedAsset(context.stage,result.shadowSurface);
+    entries.push({datasetId,result,surface,shadowSurface});
   }
-  const receipt={schema:'cssEarth-native-photograph-stage@2',status,id:context.id,lensIds:context.ids,inputs:bindings(context).inputs,entries};
+  const receipt={schema:'cssEarth-native-photograph-stage@2',status,id:context.id,datasetIds:context.ids,inputs:bindings(context).inputs,entries};
   await mkdir(context.stage,{recursive:true});await save(resolve(context.stage,receiptName),receipt);
   return receipt;
 }
 
 async function loadReceipt(context:Awaited<ReturnType<typeof refreshContext>>) {
   const receiptPath=resolve(context.stage,receiptName),receipt=await json(receiptPath),current=bindings(context);
-  if(receipt.schema!=='cssEarth-native-photograph-stage@2' || receipt.id!==context.id || JSON.stringify(receipt.lensIds)!==JSON.stringify(context.ids) ||
+  if(receipt.schema!=='cssEarth-native-photograph-stage@2' || receipt.id!==context.id || JSON.stringify(receipt.datasetIds)!==JSON.stringify(context.ids) ||
       JSON.stringify(receipt.inputs)!==JSON.stringify(current.inputs) || await anyChangedAfter(current.files,(await stat(receiptPath)).mtimeMs))
     throw new Error(`${context.id}: staged photographic receipt ${receiptPath} is older than the current scene, recipe, source or descriptor.`);
   const entries=records(receipt.entries),results=new Map<string,Record<string,unknown>>();
-  if(entries.length!==context.ids.length)throw new Error('Staged photographic receipt has an unexpected lens count.');
+  if(entries.length!==context.ids.length)throw new Error('Staged photographic receipt has an unexpected dataset count.');
   for(const entry of entries) {
-    const lensId=requireString(entry.lensId);if(!context.ids.includes(lensId) || results.has(lensId))throw new Error('Staged photographic receipt lens identity changed.');
-    const result=requireRecord(entry.result);await stagedAsset(context.stage,result.surface);await stagedAsset(context.stage,result.shadowSurface);results.set(lensId,result);
+    const datasetId=requireString(entry.datasetId);if(!context.ids.includes(datasetId) || results.has(datasetId))throw new Error('Staged photographic receipt dataset identity changed.');
+    const result=requireRecord(entry.result);await stagedAsset(context.stage,result.surface);await stagedAsset(context.stage,result.shadowSurface);results.set(datasetId,result);
   }
   stableAssets(context,results);return results;
 }
@@ -97,15 +97,15 @@ export async function refreshTerrainPhotographs(id:string,ids:readonly string[],
   sharp.concurrency(1);sharp.cache(false);
   const context=await refreshContext(id,ids);await mkdir(context.stage,{recursive:true});
   const sunDirection=solarGeometry.requireBodyFixedSunDirection(id),results=new Map<string,Awaited<ReturnType<typeof prepareNativePhotographicAtlas>>>();
-  for(const {lensId,observation,surface,input} of context.selected) {
+  for(const {datasetId,observation,surface,input} of context.selected) {
     const result=await prepareNativePhotographicAtlas({radial:context.radial,sourceDirectory:context.sourceDirectory,source:input,validity:observation.validity,
       sampling:parseNativePhotographicSampling(observation.nativePhotographicSampling),publicDirectory:context.stage,
-      publicBase:`/scenes/${id}/`,id:`${id}-${lensId}`,sunDirection,mapWidth:requireFiniteNumber(context.raster.width)});
+      publicBase:`/scenes/${id}/`,id:`${id}-${datasetId}`,sunDirection,mapWidth:requireFiniteNumber(context.raster.width)});
     for(const key of ['surface','shadowSurface'] as const) {
       if(requireRecord(surface[key]).url!==result[key].url)throw new Error('Photographic refresh cannot change resource names.');
     }
-    results.set(lensId,result);
-    console.log(JSON.stringify({id,lensId,...result.nativeSampling,bytes:result.surface.bytes+result.shadowSurface.bytes,decodedRgbaMiB:context.radial.width*context.radial.height*4/1048576,peakRssMiB:process.resourceUsage().maxRSS/1024}));
+    results.set(datasetId,result);
+    console.log(JSON.stringify({id,datasetId,...result.nativeSampling,bytes:result.surface.bytes+result.shadowSurface.bytes,decodedRgbaMiB:context.radial.width*context.radial.height*4/1048576,peakRssMiB:process.resourceUsage().maxRSS/1024}));
   }
   await saveReceipt(context,results,'fresh');return results;
 }

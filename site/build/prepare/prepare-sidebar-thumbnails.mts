@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { OverlayOptions } from 'sharp';
-import { parseDatasetLens } from '../../prepared-panel-content.mts';
+import { parseDatasetControl } from '../../prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
 
@@ -26,14 +26,14 @@ const output = async (path: string, bytes: Uint8Array | string) => {
 interface Thumbnail { url2x: string; inputs: string[]; credit: string; sourceUrl: string; }
 const images: Record<string, Thumbnail> = {}, defaults: Record<string, string> = {};
 // 2x only: every screen reads the 32 px tile for its 16 CSS px slot (no 1x rasters).
-const makeThumbnail = async (id: string, lens: string, bytes: Buffer, evidence: Pick<Thumbnail, 'inputs' | 'credit' | 'sourceUrl'>) => {
+const makeThumbnail = async (id: string, dataset: string, bytes: Buffer, evidence: Pick<Thumbnail, 'inputs' | 'credit' | 'sourceUrl'>) => {
   // Preserve the complete prepared image and its display color. Only resample;
   // transparent padding keeps rectangular photographs at their native aspect.
   const tile = await sharp(bytes).resize(32, 32, { fit: 'contain', background: '#00000000', kernel: 'lanczos3' })
     .webp({ lossless: true, effort: 6 }).toBuffer();
-  const url2x = `/navigation/focus-${id}-${lens}@2x.webp`;
+  const url2x = `/navigation/focus-${id}-${dataset}@2x.webp`;
   await output(`public${url2x}`, tile);
-  images[`${id}/${lens}`] = { url2x, ...evidence };
+  images[`${id}/${dataset}`] = { url2x, ...evidence };
 };
 
 if (!check) await mkdir(resolve(root, 'public/navigation'), { recursive: true });
@@ -43,20 +43,20 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   try { raw = JSON.parse(await readFile(resolve(root, path), 'utf8')); }
   catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
   const presentation = sourceObject(raw);
-  if (presentation.schema !== 'cssearth-volume-presentation@1') continue;
+  if (presentation.schema !== 'cssearth-volume-presentation@2') continue;
   await read(path);
-  const id = sourceId(presentation.objectId), defaultLens = sourceId(presentation.defaultLens);
+  const id = sourceId(presentation.objectId), defaultDataset = sourceId(presentation.defaultDataset);
   if (id !== folder.name) throw new Error(`Mismatched sidebar image owner: ${id}`);
-  for (const lens of sourceArray(presentation.controls, parseDatasetLens)) {
-    const expected = `/scenes/${id}/datasets/${lens.id}.webp`;
-    if (!lens.texture || lens.texture.url !== expected)
-      throw new Error(`${path}: lens ${lens.id} texture.url is ${JSON.stringify(lens.texture?.url ?? null)}; expected ${expected}.`);
-    const previewPath = `public${lens.texture.url}`;
-    await makeThumbnail(id, lens.id, await read(previewPath), { inputs: [path, previewPath],
-      credit: lens.texture.attribution?.label ?? '', sourceUrl: lens.texture.attribution?.url ?? '' });
+  for (const dataset of sourceArray(presentation.controls, parseDatasetControl)) {
+    const expected = `/scenes/${id}/datasets/${dataset.id}.webp`;
+    if (!dataset.texture || dataset.texture.url !== expected)
+      throw new Error(`${path}: dataset ${dataset.id} texture.url is ${JSON.stringify(dataset.texture?.url ?? null)}; expected ${expected}.`);
+    const previewPath = `public${dataset.texture.url}`;
+    await makeThumbnail(id, dataset.id, await read(previewPath), { inputs: [path, previewPath],
+      credit: dataset.texture.attribution?.label ?? '', sourceUrl: dataset.texture.attribution?.url ?? '' });
   }
-  if (!images[`${id}/${defaultLens}`]) throw new Error(`Missing default sidebar image: ${id}`);
-  defaults[id] = `${id}/${defaultLens}`;
+  if (!images[`${id}/${defaultDataset}`]) throw new Error(`Missing default sidebar image: ${id}`);
+  defaults[id] = `${id}/${defaultDataset}`;
 }
 
 // A density volume (the Milky Way) has a prepared simulation rather than a publisher photograph. Composite its existing z

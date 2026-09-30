@@ -122,7 +122,7 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
       type: 'density-volume' as const, format: 'cssearth-density-volume@1' as const, data };
     const preparedBytes = Buffer.from(JSON.stringify(envelope) + '\n');
     await writeFile(resolve(outputDirectory, 'volume.json'), preparedBytes);
-    await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@1', id: target.id,
+    await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@2', id: target.id,
       type: 'density-volume', properties: { volume: frame,
         preparation: { source: 'source/volume.json' } },
       prepared: { format: envelope.format, url: 'prepared/volume.json' } });

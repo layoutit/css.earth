@@ -6,7 +6,7 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
-import { mountLensBillboards } from './lens-billboards.js';
+import { mountDatasetBillboards } from './dataset-billboards.js';
 import { mountCataloguePoints } from './catalogue-points.js';
 import type { PreparedCatalogBank, PreparedImageLayerBank, PreparedUniverseOptions } from './prepared-universe-types.js';
 
@@ -42,7 +42,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   /** Published stellar extents in metres by object id (PreparedUniverseOptions.stellarExtents). */
   stellarExtents?: Readonly<Record<string, number>>;
   /** The prepared billboards: a galaxy with one shows its Sun-facing view from afar, before and without its slices. */
-  billboards?: PreparedUniverseOptions['lensBillboards'];
+  billboards?: PreparedUniverseOptions['datasetBillboards'];
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
@@ -59,7 +59,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     return billboard ? [{ id: bank.id, frame: bank.frame, billboard }] : [];
   });
   // Mounted with the bank declarations, after the opaque galaxy backdrop: the atlas itself loads when one first shows.
-  const billboards = billboardEntries.length ? mountLensBillboards({ host: root, before: end, atlasUrl: prepared!.atlasUrl,
+  const billboards = billboardEntries.length ? mountDatasetBillboards({ host: root, before: end, atlasUrl: prepared!.atlasUrl,
     atlas: prepared!.plan.atlas, entries: billboardEntries, prepareAtlas: prepareBillboardAtlas }) : null;
   if (billboards) lifetime.onDispose(() => billboards.destroy());
   lifetime.onDispose(() => {
@@ -90,10 +90,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     if (catalog || lifetime.disposed) return;
     catalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: bank.payload, galaxySample: bank.galaxySample,
       clusters: bank.clusters?.payload, nebulae: bank.nebulae,
-      renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(lens => lens.id)]),
+      renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(dataset => dataset.id)]),
       billboardedObjectIds: new Set([...prepared?.plan.banks.values() ?? []].filter(bank => bank.billboard).map(bank => bank.id)),
       galaxyCaptions: galaxyCaptions(),
-      nebulaFrames: new Map(volumeDeclarations.map(lens => [lens.id, lens.frame])), onSelect, pickingHost: stage });
+      nebulaFrames: new Map(volumeDeclarations.map(dataset => [dataset.id, dataset.frame])), onSelect, pickingHost: stage });
     publishResidency();
   }
   /** Every bank with a published stellar extent: its caption hangs under its authored framing sphere (else its

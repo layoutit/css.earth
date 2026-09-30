@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { compilerStars, compilerStarLensPoints, createCompilerStarPhotometer, detectCompilerStarCandidates } from '@cssearth/nebula-reconstruction/stars/compiler';
+import { compilerStars, compilerStarDatasetPoints, createCompilerStarPhotometer, detectCompilerStarCandidates } from '@cssearth/nebula-reconstruction/stars/compiler';
 import { compilerStarAppearance, validCompilerStarMaterials, validCompilerStarSize, type PreparedCompilerStar, type EmissionFieldModel } from '@cssearth/bake/volume';
 import type { CompilerImage } from './images.ts';
 import sharp from 'sharp';
@@ -82,7 +82,7 @@ test('registered infrared photometry changes appearance while the reference cata
   const infrared: CompilerImage = { ...rotated, id: 'infrared', pixelToSky: (x, y) => [33 - y, -x],
     sampleOriginal: (x, y, out) => originalSample(-y, x - 33, out) };
   const missing: CompilerImage = { ...infrared, id: 'unobserved', pixelToSky: (x, y) => [1000 + x, 1000 - y] };
-  assert.deepEqual(compilerStarLensPoints(reference, infrared, [[10.5, 16.5]]), [[16.5, 22.5]]);
+  assert.deepEqual(compilerStarDatasetPoints(reference, infrared, [[10.5, 16.5]]), [[16.5, 22.5]]);
   const field: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: 'fixture', controls: { detail: 1, faint: 1, depth: 1 },
     bounds: { min: [-100, -100, -100], max: [100, 100, 100] }, skyBounds: { min: [-100, -100], max: [100, 100] }, scaffold: null,
     components: [{ id: 'cloud', basisId: 'cloud', center: [10.5, -16.5, 0], sigma: [20, 20, 20], angleRadians: 0,
@@ -104,7 +104,7 @@ test('registered infrared photometry changes appearance while the reference cata
   }
 });
 
-test('lens materials require complete known coverage and cannot carry geometry; historical stars remain readable', () => {
+test('dataset materials require complete known coverage and cannot carry geometry; historical stars remain readable', () => {
   const ids = new Set(['optical', 'infrared']), appearance = { rgb: [255, 100, 30], alpha: .2, diameterUnits: 10 };
   assert.equal(validCompilerStarMaterials(undefined, ids), true);
   assert.equal(validCompilerStarMaterials({ optical: appearance, infrared: { ...appearance, alpha: 0 } }, ids), true);

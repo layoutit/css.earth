@@ -97,7 +97,7 @@ const preparedBytes = Buffer.from(JSON.stringify({ schema: 'cssearth-prepared-ob
   type: 'density-volume', format: 'cssearth-density-volume@1', data }) + '\n');
 await writeFile(resolve(preparedDirectory, 'volume.json'), preparedBytes);
 await writeFile(resolve(staging, 'experiment.json'), recipeText);
-const descriptor = { schema: 'cssearth-object@1', id: recipe.id, type: 'density-volume',
+const descriptor = { schema: 'cssearth-object@2', id: recipe.id, type: 'density-volume',
   properties: { volume: frame, preparation: { source: 'experiment.json' } },
   prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } };
 parseDensityVolumeObjectDescriptor(descriptor);

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "toi-6008",
   "displayName": "TOI-6008",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star. The disc itself is unresolved; darkening toward the edge from a model atmosphere; darkening toward the edge from a model atmosphere.",
-        "thumbnail": "toi-6008-lens-color.webp",
+        "thumbnail": "toi-6008-dataset-color.webp",
         "surface": "toi-6008-surface-color@2x.webp",
         "poles": "toi-6008-poles-color@2x.webp",
         "source": {

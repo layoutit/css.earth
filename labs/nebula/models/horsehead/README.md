@@ -6,7 +6,7 @@ Dark nebula / photodissociation region, IC434 emission and the Flame star-formin
 
 This first comparison batch pins the official ESO **Publication TIFF 4K** variants, downloaded unchanged on 2026-09-12. These retain each master image’s full footprint; no local resizing or cropping was used. Native star removal runs on the selected TIFF’s actual pixel grid. Larger publisher masters remain available for a later quality comparison.
 
-| Lens | Processing grid | Angular field | Publisher |
+| Dataset | Processing grid | Angular field | Publisher |
 |---|---|---|---|
 | ESO · optical | 4000 × 3655 | 179.14′ × 163.75′ | [Source](https://www.eso.org/public/images/eso0949k/) |
 | ESO VISTA · infrared | 3288 × 4000 | 71.50′ × 86.97′ | [Source](https://www.eso.org/public/images/eso0949n/) |

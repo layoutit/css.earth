@@ -21,7 +21,7 @@ The quoted ± value is the formal catalog error. The paper excludes additional s
 
 ## Evidence
 
-The [prepared texture consumer check](evidence/prepared-texture-consumers.json) records the September 29 iPad comparison with Bamberga. Refreshing the shared presentation metadata enables direct, paced image activation without changing geometry, camera or texture pixels. The normal handoff task fell from 35.4 to 30.1 ms for Badenia in one paired run; first-image painting remains measurable.
+The prepared texture consumer check records the September 29 iPad comparison with Bamberga. Refreshing the shared presentation metadata enables direct, paced image activation without changing geometry, camera or texture pixels. The normal handoff task fell from 35.4 to 30.1 ms for Badenia in one paired run; first-image painting remains measurable.
 
 The badenia validation record contains source, scale, atlas, installation and browser results for its recorded files and revision.
 

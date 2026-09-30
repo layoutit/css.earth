@@ -130,7 +130,7 @@ export async function preparePhotoMaster(recipePath: string) {
       format: 'cssearth-density-volume@1', data };
     const bytes = Buffer.from(JSON.stringify(prepared) + '\n');
     await writeFile(resolve(directory, 'prepared/volume.json'), bytes);
-    await json(resolve(directory, 'object.json'), { schema: 'cssearth-object@1', id: bank.id,
+    await json(resolve(directory, 'object.json'), { schema: 'cssearth-object@2', id: bank.id,
       type: 'density-volume', properties: { volume: frame,
         preparation: { source: 'source/master.json' } },
       prepared: { format: prepared.format, url: 'prepared/volume.json' } });

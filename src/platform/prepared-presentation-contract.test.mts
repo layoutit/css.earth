@@ -18,7 +18,7 @@ export function presentationFixture(definition: ObjectRuntimeDefinition) {
       { parent: 1, tag: "div", className: "polycss-mesh", style: "", properties: [], attributes: {} as Record<string, string> },
       { parent: 1, tag: "s", className: "", style: "", properties: [], attributes: {} as Record<string, string> },
     ],  stageClasses: [] },
-    variants: (controls.lenses?.controls ?? [{ id: null }]).map((lens): FixtureVariant => ({ when: controls.lenses ? { lensId: lens.id } : {}, required: [], writes: [], materials: [] })),
+    variants: (controls.datasets?.controls ?? [{ id: null }]).map((dataset): FixtureVariant => ({ when: controls.datasets ? { datasetId: dataset.id } : {}, required: [], writes: [], materials: [] })),
     materials: [], viewBindings: new Array<unknown>(), animations: [] };
 }
 const moon = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon'));
@@ -38,7 +38,7 @@ test("prepared data rejects callbacks, getters, nonfinite values and cycles with
   assert.throws(() => requirePreparedData(getter), /executable/); assert.equal(calls, 0);
   const cycle: { self?: object } = {}; cycle.self = cycle; assert.throws(() => requirePreparedData(cycle), /JSON/);
 });
-test("selection is an exhaustive exclusive-lens table, never an independent interior flag", () => {
+test("selection is an exhaustive exclusive-dataset table, never an independent interior flag", () => {
   const plan = fixture();
   plan.variants[0].when.interior = true;
   assert.throws(() => requirePreparedPresentation(plan, { controls: moon.controls }), /unsupported selection key/);

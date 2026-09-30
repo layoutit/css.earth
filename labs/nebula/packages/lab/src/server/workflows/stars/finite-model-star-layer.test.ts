@@ -11,15 +11,15 @@ import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane, overla
 import { loadFiniteModelStarContext, finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';
 import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, finiteModelStarsIndex, finiteModelSubjectId,
   MAGNITUDE_LIMIT } from './finite-model-star-layer.ts';
-import { finiteModelStarsPath } from '../../services/finite-lens-bundles.ts';
+import { finiteModelStarsPath } from '../../services/finite-dataset-bundles.ts';
 import { readBonanos2009Row, prepareLmcFiniteCatalogue, preparedStarsPath as lmcLayerPath, lmcStarDirectory,
-  STAR_ID_PREFIX as LMC_PREFIX, INPUT_ROWS as LMC_INPUT_ROWS, DEFAULT_LENS_RECIPE } from '../../../cli/commands/prepare-lmc-finite-stars.ts';
+  STAR_ID_PREFIX as LMC_PREFIX, INPUT_ROWS as LMC_INPUT_ROWS, DEFAULT_DATASET_RECIPE } from '../../../cli/commands/prepare-lmc-finite-stars.ts';
 import { readBonanos2010Row, prepareSmcCatalogue, preparedStarsPath as smcLayerPath, smcStarDirectory,
   STAR_ID_PREFIX as SMC_PREFIX } from '../../../cli/commands/prepare-smc-stars.ts';
 
 const root = process.cwd();
 const KPC_M = 3.085677581491367e19, rad = Math.PI / 180;
-const prepared = lmcLayerPath(DEFAULT_LENS_RECIPE);
+const prepared = lmcLayerPath(DEFAULT_DATASET_RECIPE);
 const table = await readFile(`${lmcStarDirectory}/source/table3.dat`, 'utf8');
 const load = async (path = prepared) => JSON.parse(await readFile(path, 'utf8')) as PreparedLmcStars;
 const modelOf = (payload: PreparedLmcStars) => (payload.provenance as { finiteModel: { modelResultId: string } }).finiteModel.modelResultId;
@@ -49,8 +49,8 @@ test('the shared placement replays the prepared LMC envelope layer deterministic
   assert.equal(first.inputRows, LMC_INPUT_ROWS);
   parsePreparedLmcStars(payload, context.frame);
   assert.ok(Math.abs(payload.frame.metersPerUnit / KPC_M - 1) < 1e-12);
-  const lensFrame = JSON.parse(await readFile(`${finiteModelDirectory(context.modelResultId)}/object.json`, 'utf8')).properties.volume;
-  assert.deepEqual(payload.frame, lensFrame, 'The layer frame is the frame the lens viewer loads.');
+  const datasetFrame = JSON.parse(await readFile(`${finiteModelDirectory(context.modelResultId)}/object.json`, 'utf8')).properties.volume;
+  assert.deepEqual(payload.frame, datasetFrame, 'The layer frame is the frame the dataset viewer loads.');
   // The published sky ray survives the placement exactly; only the depth along it is modeled.
   for (const s of payload.stars) {
     const p = referenceRay(s.positionUnits, payload.frame), r = Math.hypot(...p);
@@ -131,7 +131,7 @@ test('the joint CDF guards reject rays without emission or density and never bri
     /Invalid catalogue star id prefix/);
 });
 
-test('the model-owned index is what lens discovery attaches, and it names this layer and this subject', { skip }, async () => {
+test('the model-owned index is what dataset discovery attaches, and it names this layer and this subject', { skip }, async () => {
   const context = (await contextPromise)!;
   const subjectId = await finiteModelSubjectId(root, context.modelResultId);
   const indexPath = finiteModelStarsIndex(context.modelResultId);
@@ -141,7 +141,7 @@ test('the model-owned index is what lens discovery attaches, and it names this l
   assert.equal(index.subjectId, subjectId);
   assert.equal(index.stars.path, prepared);
   assert.deepEqual(index.stars, { path: prepared });
-  // The real discovery path: the lab attaches this layer to every lens of the model.
+  // The real discovery path: the lab attaches this layer to every dataset of the model.
   assert.equal(await finiteModelStarsPath(root, subjectId, context.modelResultId), prepared);
   // Mutation proof: the index belongs to one subject and one model; a foreign owner is refused, never attached.
   await assert.rejects(() => finiteModelStarsPath(root, 'smc-clouds', context.modelResultId), /differs from its model and subject/);
@@ -158,15 +158,15 @@ test('one owner serves both bodies, and each body keeps its own catalogue column
   // The SMC row reader on the LMC table selects nothing valid: the columns are catalogue-specific, not shared.
   const crossed = placeCatalogueStarsInFiniteModel(table, context, { starIdPrefix: SMC_PREFIX, readRow: readBonanos2010Row });
   assert.ok(crossed.stars.length < shared.stars.length / 4, `Crossed columns placed ${crossed.stars.length} stars.`);
-  // Layer paths: one file per lens recipe per body, and the LMC finite layers never overwrite its historical one.
-  assert.equal(smcLayerPath('labs/nebula/models/smc/constrained/finite-lenses.json'), `${smcStarDirectory}/prepared/stars.json`);
-  assert.equal(smcLayerPath('labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json'), `${smcStarDirectory}/prepared/stars-ellipsoid.json`);
-  assert.equal(lmcLayerPath(DEFAULT_LENS_RECIPE), `${lmcStarDirectory}/prepared/stars-envelope.json`);
-  assert.notEqual(lmcLayerPath(DEFAULT_LENS_RECIPE), `${lmcStarDirectory}/prepared/stars.json`);
-  assert.equal(lmcLayerPath('labs/nebula/models/lmc/envelope/finite-lenses-halo.json'), `${lmcStarDirectory}/prepared/stars-envelope-halo.json`);
-  for (const bad of ['labs/nebula/models/lmc/envelope/emission-envelope.json', 'finite-lenses.txt', 'finite-lenses-Halo.json'])
+  // Layer paths: one file per dataset recipe per body, and the LMC finite layers never overwrite its historical one.
+  assert.equal(smcLayerPath('labs/nebula/models/smc/constrained/finite-datasets.json'), `${smcStarDirectory}/prepared/stars.json`);
+  assert.equal(smcLayerPath('labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json'), `${smcStarDirectory}/prepared/stars-ellipsoid.json`);
+  assert.equal(lmcLayerPath(DEFAULT_DATASET_RECIPE), `${lmcStarDirectory}/prepared/stars-envelope.json`);
+  assert.notEqual(lmcLayerPath(DEFAULT_DATASET_RECIPE), `${lmcStarDirectory}/prepared/stars.json`);
+  assert.equal(lmcLayerPath('labs/nebula/models/lmc/envelope/finite-datasets-halo.json'), `${lmcStarDirectory}/prepared/stars-envelope-halo.json`);
+  for (const bad of ['labs/nebula/models/lmc/envelope/emission-envelope.json', 'finite-datasets.txt', 'finite-datasets-Halo.json'])
     assert.throws(() => preparedStarsLayerPath(lmcStarDirectory, bad), /does not identify a star layer/);
-  assert.throws(() => preparedStarsLayerPath(lmcStarDirectory, DEFAULT_LENS_RECIPE, 'Stars Envelope'), /Invalid prepared star layer name/);
+  assert.throws(() => preparedStarsLayerPath(lmcStarDirectory, DEFAULT_DATASET_RECIPE, 'Stars Envelope'), /Invalid prepared star layer name/);
   // The SMC layer is the same method on the same owner: it still replays its own checked-in file unchanged.
   const smc = await load(`${smcStarDirectory}/prepared/stars.json`).catch(() => null);
   if (!smc) return;
@@ -179,7 +179,7 @@ test('one owner serves both bodies, and each body keeps its own catalogue column
 /**
  * Registration, the way the SMC round proved it: the catalogue stars and the model's own registered
  * image go through ONE camera, and the model's placement of that image is compared against the
- * star-matched homography its lens recipe pins. The geometric comparison is resolution-independent;
+ * star-matched homography its dataset recipe pins. The geometric comparison is resolution-independent;
  * the pixel-offset numbers (with a mirrored control) are reported beside it.
  */
 /**
@@ -203,14 +203,14 @@ const quadCentre = (q: number[][]) => [(q[0]![0]! + q[2]![0]!) / 2, (q[0]![1]! +
 
 /** The model's placement of its baseline image against the star-matched registration, in its own frame. */
 async function placementAgainstRegistration(payload: PreparedLmcStars) {
-  const finite = payload.provenance as { finiteModel: { modelResultId: string; lensRecipe: { path: string } } };
+  const finite = payload.provenance as { finiteModel: { modelResultId: string; datasetRecipe: { path: string } } };
   const directory = finiteModelDirectory(finite.finiteModel.modelResultId);
   const provenance = JSON.parse(await readFile(`${directory}/source/provenance.json`, 'utf8'));
   const result = JSON.parse(await readFile(`${directory}/result.json`, 'utf8'));
-  const recipe = JSON.parse(await readFile(finite.finiteModel.lensRecipe.path, 'utf8'));
+  const recipe = JSON.parse(await readFile(finite.finiteModel.datasetRecipe.path, 'utf8'));
   const report = JSON.parse(await readFile(recipe.alignmentReport.path, 'utf8'));
   const source = report.sources.find((item: { id: string }) => item.id === result.imageId);
-  assert.ok(source, `The lens recipe's alignment report has no registration for ${result.imageId}.`);
+  assert.ok(source, `The dataset recipe's alignment report has no registration for ${result.imageId}.`);
   const image = await sharp(provenance.original.path).metadata();
   const [W, H] = [image.width!, image.height!];
   const bounds = provenance.geometry.tangentBoundsKpc, D = provenance.geometry.observerDistanceKpc;

@@ -8,7 +8,7 @@ It is one of 3 planets known around TOI-1260. Its orbit and size follow Lam et a
 
 **Orbit.** Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): P 3.127463 d Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): a/R* 11.73; Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): inclination 89.03 degrees Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): e 0 Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): transit mid-time 2459065.564269 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1260's measured colour (#ffc49d, the colour lens of toi-1260 (src/objects/toi-1260/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1260's measured colour (#ffc49d, the colour dataset of toi-1260 (src/objects/toi-1260/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1260's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (48, 74, 75), folded onto its orbit. Upper limits and rows without an error are left out.
 

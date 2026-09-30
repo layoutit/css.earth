@@ -1,7 +1,7 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "lmc",
-  "type": "volume-lens-bank",
+  "type": "volume-dataset-bank",
   "properties": {
     "frame": {
       "referenceFrame": "sun-icrf",
@@ -36,7 +36,7 @@
     }
   },
   "prepared": {
-    "format": "cssearth-volume-lenses@1",
-    "url": "prepared/lenses.json"
+    "format": "cssearth-volume-datasets@1",
+    "url": "prepared/datasets.json"
   }
 }

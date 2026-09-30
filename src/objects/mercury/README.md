@@ -69,7 +69,7 @@ still the interior illustration's outer surface.
 
 ## Evidence
 
-The [native-byte checks](evidence/native-maps) compare representative compact
+The native-byte checks compare representative compact
 pixels with independently read original bytes, using the publisher's detached
 PDS3 labels for offsets and coordinates. The checker performs explicit pixel
 area sums without the production GeoTIFF decoder. Conversion receipts identify
@@ -78,17 +78,17 @@ footprints. These are checks of data handling, not instrument accuracy.
 
 The Color map (27 September 2026, on `ccbf483de8`) went through the same reducer
 and an independent check: 25 of 25 footprints match the original bytes, 15 of them
-observed and 10 in the polar gray grid ([check](evidence/native-maps/md3-check.json),
-[conversion receipt](evidence/native-maps/md3-conversion.json)). The original file
+observed and 10 in the polar gray grid (check,
+conversion receipt). The original file
 is 796,539,539 bytes; the reducer read it in row windows of at most 0.55 MB. Its
 256,870 missing and 17,555 partial display pixels are the same count as the
-enhanced map's. The [comparison](evidence/native-maps/md3-vs-enhanced.json) shows
+enhanced map's. The comparison shows
 the two are different products: 26.5% of pixels differ at pixelmatch threshold 0.1,
 and the Color map's blue mean is 97 against the enhanced map's 134
-([both maps](evidence/native-maps/md3-vs-enhanced.webp)). The Color lens has not
+(both maps). The Color dataset has not
 been baked or inspected in a browser yet.
 
-The [qualification record](evidence/native-maps/qualification.json) records the
+The qualification record records the
 tested inputs, unchanged geometry, inspected browser views, delivery and focused
 checks: 75 independent native footprints agree, and all 76 runtime files installed from the published asset host into an empty directory. The normal and enhanced surface maps are 2.48 MB and 3.55 MB; the new LOI map adds 2.93 MB. No cold-load timing was measured. Earlier JPEG timings and resampling comparisons apply only to the
 [previous Trek-based preparation](README.md#evidence),
@@ -106,20 +106,20 @@ Color and Enhanced color have the same missing polar coverage, beyond about 84°
 
 <a id="mercury-sources"></a>
 
-- The color, enhanced-colour and topography lenses share the 750 nm lighting bank ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
+- The color, enhanced-colour and topography datasets share the 750 nm lighting bank ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
 
 <details>
 <summary>Methods and source notes</summary>
 
 - Default surface: native USGS MESSENGER MDIS BDR, edition 1. The higher-Sun LOI mosaic is in the same Monochrome selector; see the source and reduction notes above.
-- Enhanced lens: native USGS RGB GeoTIFF, edition 1, with observed coverage retained. The former modeled polar completion and qualitative terrain-color legend are retired.
-- Topography lens: USGS MESSENGER 665 m numeric DEM v2 (2016). The detached ISIS label defines 0.5 m per native integer and a 2,439.4 km reference sphere. The map is rolled from its 180° central meridian into the common −180° display domain. Its generated legend uses the same −6,000 to 6,000 m palette as the numeric surface.
+- Enhanced dataset: native USGS RGB GeoTIFF, edition 1, with observed coverage retained. The former modeled polar completion and qualitative terrain-color legend are retired.
+- Topography dataset: USGS MESSENGER 665 m numeric DEM v2 (2016). The detached ISIS label defines 0.5 m per native integer and a 2,439.4 km reference sphere. The map is rolled from its 180° central meridian into the common −180° display domain. Its generated legend uses the same −6,000 to 6,000 m palette as the numeric surface.
 - Navigation marker: NASA/JHU APL/Carnegie MESSENGER global view, PIA15162.
 - Physical facts and retained 3D cutaway: NASA Science's Mercury facts record, retrieved 2026-08-30. The only radial boundary claimed is the 0.85-radius metallic core; mantle and crust remain one combined outer shell. The rendered 366 km shell is the arithmetic difference between NASA's published 2,440 km planet radius and 2,074 km core radius, while the source's separate “about 400 km” statement is retained as an approximate published value. Interior colors and fine texture are explicitly declared illustrative presentation choices, and the optional Interior legend is marked schematic while using the exact prepared presentation palette. Preparation applies source-qualified depth/contact shading to the section faces, prepared object-space lighting to the retained core and outer cutaway, and a dedicated high-resolution default exterior light frame. None is represented as a direct observation or as sunlight inside Mercury.
-- Cutaway preparation follows the accepted Saturn presentation schema: the same wedge is removed from the exterior and the 8-by-32 retained metallic-core sphere, including their lossless polar assets, ahead of runtime. The two radial section faces occupy separate halves of a lossless 2048-by-2048 logical atlas, stored at 4096 by 4096. A prepared presentation-only pitch assist begins above 55 degrees of camera control so the meridional section remains readable in the pole-on lens; it does not change Mercury's physical axial-tilt claim. These are prepared presentation mechanics, not additional claims about Mercury's measured internal boundaries.
+- Cutaway preparation follows the accepted Saturn presentation schema: the same wedge is removed from the exterior and the 8-by-32 retained metallic-core sphere, including their lossless polar assets, ahead of runtime. The two radial section faces occupy separate halves of a lossless 2048-by-2048 logical atlas, stored at 4096 by 4096. A prepared presentation-only pitch assist begins above 55 degrees of camera control so the meridional section remains readable in the pole-on dataset; it does not change Mercury's physical axial-tilt claim. These are prepared presentation mechanics, not additional claims about Mercury's measured internal boundaries.
 - Surface spectrum: a 326-point, 350–1000 nm global area-weighted mean prepared from M. D'Amore's DLR/Zenodo MESSENGER MASCS one-degree spectral cube (DOI `10.5281/zenodo.7433033`, CC-BY-4.0). The committed snapshot records the exact 197,099,868-byte archive identity, aggregation rule, parsed counts, and the archive/record count discrepancy.
 - Atmospheric context: a pinned NASA GSFC Planetary Spectrum Generator configuration explicitly reports `ATMOSPHERE-STRUCTURE` as `None`. Mercury's thin exosphere is described separately, so the object package deliberately publishes no temperature-pressure chart.
-- Surface density: the [raster recipe](source/preparation/raster.json) prepares every image once, at the canonical density. The lens maps are 4160 by 3072 pixels (4096 texels around the equator); mount and startup decode them directly. The earlier 1x maps and the silhouette texture levels that switched between them were retired with every raster-lane 1x file.
+- Surface density: the [raster recipe](source/preparation/raster.json) prepares every image once, at the canonical density. The dataset maps are 4160 by 3072 pixels (4096 texels around the equator); mount and startup decode them directly. The earlier 1x maps and the silhouette texture levels that switched between them were retired with every raster-lane 1x file.
 - Surface map format: the four photographic maps use the shared WebP encoder; elevation uses lossless WebP. Each packed map remains 4,160 × 3,072 pixels, with 4,096 equatorial texels. No runtime texture levels or new geometry are introduced.
 - Prepared lighting: the Kaasalainen–Shkuratov KS3 model that MESSENGER's map products were corrected with ([Domingue et al. 2016](https://doi.org/10.1016/j.icarus.2015.11.040), eq. 43 and Table 9 at 748.7 nm: c_l 0.6424, phase slope 0.5628 per radian), recorded in `source/photometry/domingue-2016-ks3-749nm.json`. Each frame is the model relative to the flood-lit disc centre, so the default shadowless view shows the 750 nm map as published at the centre and keeps 68% of that brightness near the limb, at 84° emission; the old Lambert frame with its 0.35 floor and 0.05 ambient term is gone. Mercury left the shared `sphere` bank for its own 256-frame bank. The camera transforms the same fixed direction used by the baked cube Sun, selects the nearest prepared phase from view-space light Z, and rotates that retained overlay to the same view-space azimuth; no lighting pixels are calculated at runtime. The model's fitted phases run from 23° to 87°; the shadowless frame at 0° is an extrapolation, and the exponential phase term has no opposition surge. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
 - Feature traces: version 2 of Klimczak, Byrne and Crane’s “A Global Tectonic Map of Mercury” (Mendeley Data, DOI `10.17632/p43b9wttpj.2`, CC BY 4.0), whose `Combined_Tectonic_Map` shapefile holds 18,451 polylines in Plate Carrée metres on a 2,440,000 m sphere with a `Fault_Type` of contractional landform, extensional landform or trough. Preparation verifies the pinned archive, decodes the polylines and attributes, converts metres to east longitude and latitude, and for each Gazetteer rupes, dorsum or fossae selects the traces of the matching class whose vertices lie 90% inside the published extent padded by 0.3°, keeps the up-to-six longest that are at least a quarter of the leader, and decimates them to 240 vertices on the mesh sphere. The 300 m datum difference is below the label precision.
@@ -133,7 +133,7 @@ Feature notes: 486 of the labelled names carry a caption note, the lead summary 
 
 ## Gravity and crust
 
-Both lenses come from the MESSENGER gravity model HgM008, produced by
+Both datasets come from the MESSENGER gravity model HgM008, produced by
 A. Genova at NASA Goddard from radio tracking of MESSENGER through the end of
 the mission (April 30, 2015). The PDS Geosciences Node archives only the
 model's spherical-harmonic coefficients, with the
@@ -146,7 +146,7 @@ from its Trek download archive unchanged. The citation is
 [Genova et al. (2019), Geophysical Research Letters 46, 3625–3633](https://doi.org/10.1029/2018GL081135)
 ([open manuscript](https://pmc.ncbi.nlm.nih.gov/articles/PMC6662718/)).
 
-| Lens | Trek product | Grid | Display |
+| Dataset | Trek product | Grid | Display |
 | --- | --- | --- | --- |
 | Gravity | `Anomaly_Map_HgM008_Lmax90_16ppd` | 3,600 × 1,800 float64, 0.1° cells, mGal | −150 to +150 mGal, blue to red; 0.14% of the surface lies beyond and takes the endpoint colors |
 | Crust | `CrustalThickness_Map_HgM008_16ppd` | 5,760 × 2,880 float32, 0.0625° cells, km | 0 to 70 km, purple to yellow |
@@ -171,18 +171,18 @@ density contrast of 400 kg/m³ and an average thickness of 35 km, and used
 degrees 2–60 of gravity and topography with finite-amplitude corrections.
 Different assumptions give a different map. Other published crustal models (for
 example [Beuthe et al. 2020](https://doi.org/10.1029/2020GL087261)) were not
-examined for this lens.
+examined for this dataset.
 
 **Resolution.** Trek's degree-strength map for HgM008 gives the highest
 spherical-harmonic degree the tracking data resolve. It falls from 45.6–73.0
 north of 60° N to 10.9–15.1 south of 30° S, because MESSENGER flew low only over
 the north. By the usual half-wavelength rule (π × 2,440 km ÷ degree), features
 about 105–125 km across are resolved near the north pole but only about
-500–700 km across in the south. Southern patterns in both lenses are broad for
+500–700 km across in the south. Southern patterns in both datasets are broad for
 that reason, not because the crust is smooth there. The map is used as a stated
-limit, not as its own lens.
+limit, not as its own dataset.
 
-The [gravity checks](evidence/gravity/checks.json) record ranges, coverage,
+The gravity checks record ranges, coverage,
 spot values at Gazetteer centres, the coefficient comparison and the
 degree-strength bands. They check decoding, units and placement, not the
 gravity solution or the crustal model. No browser view has been inspected yet.
@@ -199,7 +199,7 @@ gravity solution or the crustal model. No browser view has been inspected yet.
   global geographic grids.
 - The crust GeoTIFF declares NaN as its no-data value. The shared scientific
   GeoTIFF reader compares that declaration with the recipe's number and
-  refuses the file, so the Crust lens needs a reader change before it can be
+  refuses the file, so the Crust dataset needs a reader change before it can be
   prepared.
 
 ## Numeric USGS grid
@@ -212,23 +212,23 @@ No new terrain displacement is introduced.
 
 ## Numeric-map qualification
 
-The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+The retained numeric checks bind
 the compact input digests and tested processing files, count coverage, and
 compare native byte samples at hemispheres, seams, extrema and gaps. Their
 calibration check runs before the display coverage masks; it does not validate
 the original instrument or scientific model.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+The fresh-install receipt verifies 1,500
 runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
-The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+The browser evidence records the earlier
 map descriptions, legends and retained scene. It includes screenshots; the
-[validation record](evidence/usgs-numeric/validation.json) names the checks
+validation record names the checks
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+The current-main integration check records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.

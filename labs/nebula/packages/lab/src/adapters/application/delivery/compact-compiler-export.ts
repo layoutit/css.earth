@@ -19,16 +19,16 @@ export async function exportCompactCompiler(root: string, objectId: string) {
   if (!record(method) || !Array.isArray(method.materials)) throw new TypeError('Historical projected-image material is not a compact component material.');
   const receipts: unknown[] = [...method.materials];
   if (record(method.opticalComposite)) receipts.push(method.opticalComposite.material);
-  const materials = result.scene.lenses.map(lens => {
-    const material = receipts.find(m => record(m) && m.sourceId === lens.id);
+  const materials = result.scene.datasets.map(dataset => {
+    const material = receipts.find(m => record(m) && m.sourceId === dataset.id);
     if (!record(material) || material.schema !== 'cssearth-component-bound-material@1' || material.fieldIdentity !== result.scene.fieldIdentity || !Array.isArray(material.components))
-      throw new TypeError(`Missing accepted component colors for ${lens.id}.`);
-    return { sourceId: lens.id, ...(material.envelopeColors === undefined ? {} : { envelopeColors: material.envelopeColors }), components: material.components.map((color: unknown) => {
+      throw new TypeError(`Missing accepted component colors for ${dataset.id}.`);
+    return { sourceId: dataset.id, ...(material.envelopeColors === undefined ? {} : { envelopeColors: material.envelopeColors }), components: material.components.map((color: unknown) => {
       if (!record(color)) throw new TypeError('Invalid retained component.');
       return { id: color.id, rgb: color.rgb, covered: color.covered };
     }) };
   });
-  const banks = [{ id: 'neutral', volume: result.scene.neutral }, ...result.scene.lenses];
+  const banks = [{ id: 'neutral', volume: result.scene.neutral }, ...result.scene.datasets];
   let minimumFeatureScaleArcsec: unknown;
   const expected = [];
   for (const bank of banks) {
@@ -40,8 +40,8 @@ export async function exportCompactCompiler(root: string, objectId: string) {
     provenance: { resultPath,
       interpretation: 'Accepted fitted emission components, any retained photometric envelope with coarse source chromaticity, per-component colors, stars and sampling. Derived field inputs, not measured volumetric gas density. Full source acquisition remains available in the research recipes.' },
     field: JSON.parse(modelBytes.toString()), scene: result.scene, materials,
-    sources: result.scene.lenses.map(lens => { const source = result.sources.find(source => source.id === lens.id)!;
-      return { id: lens.id, label: lens.label, credit: source.credit, page: source.page }; }),
+    sources: result.scene.datasets.map(dataset => { const source = result.sources.find(source => source.id === dataset.id)!;
+      return { id: dataset.id, label: dataset.label, credit: source.credit, page: source.page }; }),
     minimumFeatureScaleArcsec, expected };
   readCompactCompiler(input);
   const raw = Buffer.from(JSON.stringify(input)), bytes = gzipSync(raw, { level: 9 });

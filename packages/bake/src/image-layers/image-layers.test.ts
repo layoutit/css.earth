@@ -14,7 +14,7 @@ test('environment restoration leaves dedicated preparation owners to restore the
   const { writeFile } = await import('node:fs/promises');
   const root = await mkdtemp(join(tmpdir(), 'dedicated-environment-'));
   try {
-    for (const type of ['volume-lens-bank', 'galaxy-point-field']) {
+    for (const type of ['volume-dataset-bank', 'galaxy-point-field']) {
       const descriptor = JSON.stringify({ id: 'fixture', type,
         prepared: { url: 'prepared/missing.json' } });
       await writeFile(join(root, 'object.json'), descriptor);

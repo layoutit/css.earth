@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-observed-surfaces@1",
+  "schema": "cssearth-observed-surfaces@2",
   "sources": [
     {
       "id": "opal-2018a-rgb",
@@ -258,7 +258,7 @@
       "license": "CC BY 4.0"
     }
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "visible-2018a",
       "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n-f502n-f631n_v1_globalmap.tif",
@@ -335,7 +335,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2018a.webp",
+          "filename": "saturn-dataset-visible-2018a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -445,7 +445,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2019a.webp",
+          "filename": "saturn-dataset-visible-2019a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -555,7 +555,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2020a.webp",
+          "filename": "saturn-dataset-visible-2020a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -669,7 +669,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2021a.webp",
+          "filename": "saturn-dataset-visible-2021a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -783,7 +783,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2022a.webp",
+          "filename": "saturn-dataset-visible-2022a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -909,7 +909,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2023a.webp",
+          "filename": "saturn-dataset-visible-2023a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1023,7 +1023,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2024a.webp",
+          "filename": "saturn-dataset-visible-2024a.webp",
           "transforms": [
             {
               "kind": "resize",
@@ -1141,7 +1141,7 @@
         },
         {
           "kind": "thumbnail",
-          "filename": "saturn-lens-visible-2025a.webp",
+          "filename": "saturn-dataset-visible-2025a.webp",
           "transforms": [
             {
               "kind": "resize",

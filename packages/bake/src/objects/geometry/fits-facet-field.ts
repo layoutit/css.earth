@@ -103,6 +103,6 @@ export function decodeFitsFacetField(bytes: Buffer, mesh: SourceMesh, value: unk
 }
 
 export async function loadFitsFacetField(root: string, mesh: SourceMesh, value: unknown) {
-  const lens=shape({path:text,facetField:parseFacetField})(value);
-  return decodeFitsFacetField(await readFile(resolve(root, lens.facetField.path)), mesh, lens.facetField, lens.path);
+  const dataset=shape({path:text,facetField:parseFacetField})(value);
+  return decodeFitsFacetField(await readFile(resolve(root, dataset.facetField.path)), mesh, dataset.facetField, dataset.path);
 }

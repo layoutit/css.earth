@@ -8,7 +8,7 @@ It is the only planet known around HD 219666. Its orbit and size follow Murphy e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.03446338952 d Murphy et al. 2025 (2025AJ....169..286M), via the NASA Exoplanet Archive ps table (pl_refname MURPHY_ET_AL__2025): a/R* 13.25; Murphy et al. 2025 (2025AJ....169..286M), via the NASA Exoplanet Archive ps table (pl_refname MURPHY_ET_AL__2025): inclination 86.42 degrees Murphy et al. 2025 (2025AJ....169..286M), via the NASA Exoplanet Archive ps table (pl_refname MURPHY_ET_AL__2025): e 0.05 Murphy et al. 2025 (2025AJ....169..286M), via the NASA Exoplanet Archive ps table (pl_refname MURPHY_ET_AL__2025): omega 0 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460899.883842 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-219666's measured colour (#ffefe8, the colour lens of hd-219666 (src/objects/hd-219666/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-219666's measured colour (#ffefe8, the colour dataset of hd-219666 (src/objects/hd-219666/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 219666's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (103, 104, 105), folded onto its orbit. Upper limits and rows without an error are left out.
 

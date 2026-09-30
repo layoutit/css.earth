@@ -16,7 +16,7 @@ type Pole='north'|'south';
 interface LayeredPolygon extends Polygon {textureImageSource:PolyTextureImageSource;latitudeIndex?:number;longitudeIndex?:number;lightingFaceIndex?:number;polarCap?:Pole;polarRole?:string;}
 interface SurfaceAsset {url:string;url2x:string;width:number;height:number;asset2x:{width:number};}
 interface ShellOptions {radiusScale:number;surface:SurfaceAsset;poles:SurfaceAsset;cutaway:boolean;}
-/** The pixel widths of the widest images the lens-swapped leaf families can show, over every lens. */
+/** The pixel widths of the widest images the dataset-swapped leaf families can show, over every dataset. */
 interface LeafImagePixels {surface:number;poles:number;rings:number;}
 interface RingRaster {ringData:Uint8Array|null;foregroundRingData:Uint8Array|null;ringTextureWidth:number;maximumLightingFactor:number;}
 interface FixedMaterialOptions extends RingRaster {objectLight:ReadonlyVector3;objectView:ReadonlyVector3;scenePitchDegrees:number;systemObliquityDegrees:number;
@@ -33,7 +33,7 @@ import type {prepareCutawayMaterials} from './cutaway-materials.ts';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
 interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
   ringGroups:PointGroup[];
-  lenses?:Awaited<ReturnType<typeof prepareSpectralMaterialVariants>>;
+  datasets?:Awaited<ReturnType<typeof prepareSpectralMaterialVariants>>;
   views?:Awaited<ReturnType<typeof prepareCutawayMaterials>>;
 }
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
@@ -119,7 +119,7 @@ export async function prepareSurfaceColour({ sourcePath, unobservedRows, width, 
 /** Source-configured oblate surface, projected material banks and retained cutaway. */
 export async function createLayeredOblatePreparation({ sourceDirectory, publicDirectory, stagingDirectory, config:input, preparedInputs }: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown;preparedInputs:LayeredInputs}) {
   const config=parse(input,layeredRecipe,'layered oblate recipe');
-  validateMaterialRecipe(config, 'cssearth-layered-oblate-preparation@1');
+  validateMaterialRecipe(config, 'cssearth-layered-oblate-preparation@2');
   // The recipe names its inputs by path (sources); git and the source cache hold their bytes, so nothing else is pinned.
   await verifyObservationSources(sourceDirectory, Object.values(config.sources).map(path => ({ path })));
   const readSourceJson = async (path:string): Promise<unknown> => JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8'));
@@ -135,15 +135,15 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   const COLOUR_TIE = config.colourTie === undefined ? undefined : displayBandRatios(await loadWholeDiscColour(sourceDirectory, config.colourTie), floodDiscMean(LIMB_LAW));
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(stagingDirectory,{recursive:true})]);
 
-const DEFAULT_LENS_ID = config.parameters.defaultLensId;
+const DEFAULT_DATASET_ID = config.parameters.defaultDatasetId;
 const PROJECTIVE_TEXTURE_RASTER_SCALE = config.parameters.projectiveTextureRasterScale;
 const MATERIAL_MODES = config.parameters.materialModes;
-const materialVariantId = (lensId:string, mode:string) =>
-  mode === "full" ? lensId : `${lensId}-${mode}`;
+const materialVariantId = (datasetId:string, mode:string) =>
+  mode === "full" ? datasetId : `${datasetId}-${mode}`;
 const INTERIOR_SOURCE = parse(await readSourceJson(config.sources.interior),interiorSource,'interior source');
 const INTERIOR_CUTAWAY = Object.freeze(INTERIOR_SOURCE.cutaway);
 
-const requireLenses = () => {if(!preparedInputs.lenses)throw new Error('Layered composition requires prepared lenses.');return preparedInputs.lenses;};
+const requireDatasets = () => {if(!preparedInputs.datasets)throw new Error('Layered composition requires prepared datasets.');return preparedInputs.datasets;};
 const requireViews = () => {if(!preparedInputs.views)throw new Error('Layered composition requires prepared cutaway views.');return preparedInputs.views;};
 
 const LATITUDE_SEGMENTS = config.parameters.latitudeSegments;
@@ -169,7 +169,7 @@ const PLANET_ORBIT_MATERIAL_TEXTURE_URL =
 const PLANET_ORBIT_MATERIAL_DEFAULT_TEXTURE_URL =
   config.parameters.planetOrbitMaterialDefaultTextureUrl;
 const orbitMaterialVariantTextureUrl = (variantId:string) =>
-  variantId === DEFAULT_LENS_ID
+  variantId === DEFAULT_DATASET_ID
     ? PLANET_ORBIT_MATERIAL_TEXTURE_URL
     : `${config.publicPrefix}${config.namespace}-orbit-material-${variantId}.webp`;
 const orbitMaterialVariantTexturePath = (variantId:string) =>
@@ -181,7 +181,7 @@ const orbitMaterialPreparationPath = (variantId:string) => resolve(
 const INTERIOR_ATMOSPHERE_TEXTURE_URL =
   config.parameters.interiorAtmosphereTextureUrl;
 const interiorMaterialVariantTextureUrl = (variantId:string) =>
-  variantId === DEFAULT_LENS_ID
+  variantId === DEFAULT_DATASET_ID
     ? INTERIOR_ATMOSPHERE_TEXTURE_URL
     : `${config.publicPrefix}${config.namespace}-interior-atmosphere-${variantId}.webp`;
 const interiorMaterialPreparationPath = (variantId:string) => resolve(
@@ -361,13 +361,13 @@ const PLANET_ORBIT_MATERIAL_TEXTURE_PATH = resolve(stagingDirectory, config.file
 const orbitMaterialRowTextureUrl = (rowIndex:number) =>
   `${config.publicPrefix}${config.namespace}-orbit-material-row-${String(rowIndex).padStart(2, "0")}.webp`;
 const orbitMaterialVariantDefaultTextureUrl = (variantId:string) =>
-  variantId === DEFAULT_LENS_ID
+  variantId === DEFAULT_DATASET_ID
     ? PLANET_ORBIT_MATERIAL_DEFAULT_TEXTURE_URL
     : `${config.publicPrefix}${config.namespace}-orbit-material-${variantId}-default.webp`;
 const orbitMaterialVariantDefaultTexturePath = (variantId:string) =>
   publicTexturePath(orbitMaterialVariantDefaultTextureUrl(variantId));
 const orbitMaterialVariantRowTextureUrl = (variantId:string, rowIndex:number) =>
-  variantId === DEFAULT_LENS_ID
+  variantId === DEFAULT_DATASET_ID
     ? orbitMaterialRowTextureUrl(rowIndex)
     : `${config.publicPrefix}${config.namespace}-orbit-material-${variantId}-row-${
       String(rowIndex).padStart(2, "0")}.webp`;
@@ -557,7 +557,7 @@ function preparedAtlasDimensions(width:number, height:number) {
       `;--polycss-atlas-height:${formatCssLength(height)}`);
 }
 
-/** `imagePixels`: the pixel width of the widest image the leaf can show over every lens, across the polygon's whole texture
+/** `imagePixels`: the pixel width of the widest image the leaf can show over every dataset, across the polygon's whole texture
  * (a cropped plate ships part of it at the same density, so it counts at its uncropped width). */
 function textureStyle(polygon:LayeredPolygon, index:number, imagePixels:number, seamEdges?:ComputeTextureAtlasPlanOptions['seamEdges']|null, seamBleed = SEAM_BLEED) {
   const plan = computeTextureAtlasPlanPublic(polygon, index, {
@@ -1013,7 +1013,7 @@ function createCutawayOuterPolarCapPolygon(pole:Pole, asset:SurfaceAsset) {
 
 function prepareCutawayOuterPolarLeaves() {
   const asset = requireViews().assets.outerPoles.normal;
-  // Each lens swaps in its own outer-pole atlas.
+  // Each dataset swaps in its own outer-pole atlas.
   const imagePixels = Math.max(...Object.values(requireViews().assets.outerPoles).map(poles => poles.asset2x.width));
   return Object.freeze((["south", "north"] as const).map((pole, index) => ({
     latitudeIndex: pole === "north" ? LATITUDE_SEGMENTS - 1 : 0,
@@ -1812,17 +1812,17 @@ function publicTexturePath(textureUrl:string) {
   return resolve(publicDirectory, filename);
 }
 
-/** The widest image each lens-swapped leaf family can show, read from the files this preparation published: the default
- * body surface, poles and @2x rings, and each false-colour lens's own. */
+/** The widest image each dataset-swapped leaf family can show, read from the files this preparation published: the default
+ * body surface, poles and @2x rings, and each false-colour dataset's own. */
 async function publishedLeafImagePixels():Promise<LeafImagePixels> {
-  const lenses = requireLenses().controls
-    .filter((lens): lens is Extract<typeof lens,{falseColor:boolean}> => 'falseColor' in lens && lens.falseColor);
+  const datasets = requireDatasets().controls
+    .filter((dataset): dataset is Extract<typeof dataset,{falseColor:boolean}> => 'falseColor' in dataset && dataset.falseColor);
   const widest = (family:string, urls:readonly string[]) =>
     widestPublishedImage(urls.map(publicTexturePath), `${config.namespace} ${family} leaves`);
   return {
-    surface: await widest("surface", [PLANET_BODY_SURFACE_TEXTURE_URL, ...lenses.map((lens) => lens.surface2xUrl)]),
-    poles: await widest("polar cap", [PLANET_POLAR_TEXTURE_URL, ...lenses.map((lens) => lens.polesUrl)]),
-    rings: await widest("ring plane", [RING_TEXTURE_2X_URL, ...lenses.map((lens) => lens.ring2xUrl)]),
+    surface: await widest("surface", [PLANET_BODY_SURFACE_TEXTURE_URL, ...datasets.map((dataset) => dataset.surface2xUrl)]),
+    poles: await widest("polar cap", [PLANET_POLAR_TEXTURE_URL, ...datasets.map((dataset) => dataset.polesUrl)]),
+    rings: await widest("ring plane", [RING_TEXTURE_2X_URL, ...datasets.map((dataset) => dataset.ring2xUrl)]),
   };
 }
 
@@ -2051,7 +2051,7 @@ async function prepareNormalMaterialMasters() {
       .webp({ quality: 95, alphaQuality: 100, smartSubsample: true, effort: 6 })
       .toFile(INTERIOR_ATMOSPHERE_TEXTURE_PATH),
     ...MATERIAL_MODES.filter((mode) => mode !== "full").flatMap((mode) => {
-      const variantId = materialVariantId(DEFAULT_LENS_ID, mode);
+      const variantId = materialVariantId(DEFAULT_DATASET_ID, mode);
       const prepared = preparedMaterialModes[mode];
       return [
         sharp(prepared.orbitAtlas.output, {
@@ -2097,7 +2097,7 @@ async function prepareNormalMaterialMasters() {
 }
 
 // The numerical generator owns normal masters once; composition only transports
-// their verified metadata and combines the already prepared lens rasters.
+// their verified metadata and combines the already prepared dataset rasters.
 
 function materialMetadata<T extends {output:Uint8Array}>({ output, ...metadata }:T):Omit<T,'output'> {
   return metadata;
@@ -2109,23 +2109,23 @@ async function composePlanetTextures({
   defaultInteriorMaterial,
   approvedReferenceMatchesDefault, orbitMaterialAtlas,
 }:Awaited<ReturnType<typeof prepareNormalMaterialMasters>>) {
-  const interiorLensMaterialAtlases = Object.freeze(Object.fromEntries(
-    requireLenses().controls
-      .filter((lens): lens is Extract<typeof lens,{falseColor:boolean}> => 'falseColor' in lens && lens.falseColor)
+  const interiorDatasetMaterialAtlases = Object.freeze(Object.fromEntries(
+    requireDatasets().controls
+      .filter((dataset): dataset is Extract<typeof dataset,{falseColor:boolean}> => 'falseColor' in dataset && dataset.falseColor)
       .map(({ id, interiorMaterialPreparationFile }) => [id, Object.freeze({
         id,
         url: `${config.publicPrefix}${config.namespace}-interior-atmosphere-${id}.webp`,
         path: resolve(stagingDirectory, interiorMaterialPreparationFile),
       })]),
   ));
-  const materialLensIds = Object.freeze([
-    DEFAULT_LENS_ID,
-    ...requireLenses().controls
-      .filter((lens): lens is Extract<typeof lens,{falseColor:boolean}> => 'falseColor' in lens && lens.falseColor)
+  const materialDatasetIds = Object.freeze([
+    DEFAULT_DATASET_ID,
+    ...requireDatasets().controls
+      .filter((dataset): dataset is Extract<typeof dataset,{falseColor:boolean}> => 'falseColor' in dataset && dataset.falseColor)
       .map(({ id }) => id),
   ]);
-  const materialVariantIds = Object.freeze(materialLensIds.flatMap((lensId) =>
-    MATERIAL_MODES.map((mode) => materialVariantId(lensId, mode))));
+  const materialVariantIds = Object.freeze(materialDatasetIds.flatMap((datasetId) =>
+    MATERIAL_MODES.map((mode) => materialVariantId(datasetId, mode))));
   const orbitMaterialRuntimeVariants = Object.freeze(Object.fromEntries(
     await Promise.all(materialVariantIds.map(async (variantId:string) => [
       variantId,
@@ -2136,7 +2136,7 @@ async function composePlanetTextures({
     ] as const)),
   ));
   const orbitMaterialRuntimeShards =
-    orbitMaterialRuntimeVariants[DEFAULT_LENS_ID];
+    orbitMaterialRuntimeVariants[DEFAULT_DATASET_ID];
   const interiorAtmosphereRuntimeShards = Object.freeze(Object.fromEntries(
     await Promise.all(materialVariantIds.map(async (variantId:string) => [
       variantId,
@@ -2162,8 +2162,8 @@ async function composePlanetTextures({
     readFile(publicTexturePath(PLANET_ORBIT_MATERIAL_TEXTURE_URL)),
     readFile(publicTexturePath(INTERIOR_ATMOSPHERE_TEXTURE_URL)),
     ]);
-  const interiorAtmosphereLensAssets = Object.freeze(Object.fromEntries(
-    await Promise.all(Object.values(interiorLensMaterialAtlases).map(
+  const interiorAtmosphereDatasetAssets = Object.freeze(Object.fromEntries(
+    await Promise.all(Object.values(interiorDatasetMaterialAtlases).map(
       async (atlas) => {
         const bytes = await readFile(publicTexturePath(atlas.url));
         return [atlas.id, Object.freeze({
@@ -2255,7 +2255,7 @@ async function composePlanetTextures({
     }),
   ));
   const orbitMaterialRuntimePresentations =
-    orbitMaterialRuntimeVariantPlans[DEFAULT_LENS_ID].presentations;
+    orbitMaterialRuntimeVariantPlans[DEFAULT_DATASET_ID].presentations;
   const interiorAtmospherePresentationScale =
     PLANET_FIXED_MATERIAL_SIZE / INTERIOR_ATMOSPHERE_SIZE;
   const interiorAtmosphereDefaultFrame = Math.round(
@@ -2493,16 +2493,16 @@ async function composePlanetTextures({
         model: "prepared-cutaway-full-exterior-material-oblate-texels",
         assetUrl: INTERIOR_ATMOSPHERE_TEXTURE_URL,
         assetBytes: interiorAtmosphereAsset.byteLength,
-        lensAssets: Object.freeze({
+        datasetAssets: Object.freeze({
           normal: Object.freeze({
             url: INTERIOR_ATMOSPHERE_TEXTURE_URL,
             bytes: interiorAtmosphereAsset.byteLength,
           }),
-          ...interiorAtmosphereLensAssets,
+          ...interiorAtmosphereDatasetAssets,
         }),
         runtimeShards: Object.freeze({
           model: "prepared-variant-single-atlas",
-          defaultVariant: DEFAULT_LENS_ID,
+          defaultVariant: DEFAULT_DATASET_ID,
           defaultPreparedFrame: interiorAtmosphereDefaultFrame,
           defaultPreparedRow: interiorAtmosphereDefaultPreparedRow,
           initialWarmRows: interiorAtmosphereInitialWarmRows,
@@ -2615,7 +2615,7 @@ async function composePlanetTextures({
         )),
         runtimeShards: Object.freeze({
           model: "prepared-variant-single-atlas",
-          defaultVariant: DEFAULT_LENS_ID,
+          defaultVariant: DEFAULT_DATASET_ID,
           variants: orbitMaterialRuntimeVariantPlans,
           sourceAssetUrl: PLANET_ORBIT_MATERIAL_TEXTURE_URL,
           alphaExactDecodedCropVerification:

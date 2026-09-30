@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "m45",
   "name": "Pleiades",
-  "defaultLens": "optical-composite",
+  "defaultDataset": "optical-composite",
   "sharedInputs": [
     "noirlab-optical",
     "spitzer-irac",
@@ -14,12 +14,12 @@
     "distance",
     "stellar-field"
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "optical-composite",
       "label": "Optical composite · NOIRLab + Niittee",
       "title": "Pleiades optical cloud with wider image coverage",
-      "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. This lens fuses Niittee's wide optical color with central NOIRLab luminance detail; its reference preview shows Niittee's original photograph before fusion. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. This dataset fuses Niittee's wide optical color with central NOIRLab luminance detail; its reference preview shows Niittee's original photograph before fusion. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Wide optical photograph with central detail from NOIRLab; cloud depth is inferred and fine filaments are softened.",
       "detail": "8000 × 5199 px · wide optical source",
       "facts": [
@@ -167,7 +167,7 @@
     }
   ],
   "bank": {
-    "path": "src/objects/m45/prepared/lenses.json"
+    "path": "src/objects/m45/prepared/datasets.json"
   },
   "recipes": [
     {

@@ -10,9 +10,9 @@ Radius 0.6489 solar radii, mass 0.6897 solar masses and effective temperature 44
 
 Star B has no page of its own. It is drawn from its astronomy record, [kepler-16-b.json](../../../packages/astronomy/data/bodies/kepler-16-b.json), on its measured 41-day orbit around A: the mean orbit Triaud et al. (2022, MNRAS 511, 3561) fitted to radial velocities, with the size and tilt of Doyle et al.'s. No temperature of B is measured, so it is drawn in the shared neutral gray.
 
-The shape lens is a gray sphere of the published radius. No image of the star exists: at 0.08 milliarcseconds it is far below what any interferometer resolves. The display axis is celestial north, a convention (see [rotation.json](source/preparation/rotation.json)).
+The shape dataset is a gray sphere of the published radius. No image of the star exists: at 0.08 milliarcseconds it is far below what any interferometer resolves. The display axis is celestial north, a convention (see [rotation.json](source/preparation/rotation.json)).
 
-**Colour lens.** Gaia DR3 XP spectrum, source 2133476355197071616, through the CIE 1931 2° observer: #ffc195. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Colour dataset.** Gaia DR3 XP spectrum, source 2133476355197071616, through the CIE 1931 2° observer: #ffc195. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,450 K and log g 4.65 (u1 0.765, u2 0.028): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/kepler-16-a.json: 4.652.
 

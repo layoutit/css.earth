@@ -128,7 +128,7 @@ it("smallest-three encoding covers every omitted component and exact rounded-mat
   assert.deepEqual(parseSharedView(query), input);
 });
 
-it('view links retain optical framing and reject invalid lens scales', () => {
+it('view links retain optical framing and reject invalid dataset scales', () => {
   const input = parseSharedView(formatSharedView(physical()))!;
   input.camera.pose.scene = identity;
   input.camera.projectionScale = 3.25;

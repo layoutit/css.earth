@@ -6,12 +6,12 @@ import { type EmissionVector3, analyticEmission, mapSample, prepareSampledField 
 import { readSampledRecipe, verifySampledEvidence, type SampledRecipe, type SampleTerm } from '../../../features/sampled-prior/model.ts';
 
 const fixture = {
-  schema: 'cssearth-sampled-nebula@1', id: 'qualified-example', centerIcrsDegrees: [80, 22],
+  schema: 'cssearth-sampled-nebula@2', id: 'qualified-example', centerIcrsDegrees: [80, 22],
   evidence: { path: 'labs/nebula/models/example/physical-evidence.json' },
   source: { path: '.local/nebula-lab/physical/example/points.fits', url: 'https://example.org/points.fits', width: 4, height: 2, columns: [0, 1, 2, 3] },
   rawToArcsec: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
   grid: { longestAxis: 32, blurSigmaCells: .5, weightExponent: .5, peakOpticalDepth: 1.5 },
-  terms: [], lensComponents: { optical: { ejecta: 1, pwn: 0 }, xray: { ejecta: 0, pwn: 1 } },
+  terms: [], datasetComponents: { optical: { ejecta: 1, pwn: 0 }, xray: { ejecta: 0, pwn: 1 } },
 };
 const term: SampleTerm = { kind: 'ellipsoid', id: 'wind', centerArcsec: [0, 0, 0], sigmaArcsec: [2, 3, 4], weight: 1, evidenceIds: ['authored-wind'] };
 function recipe(overrides: Partial<SampledRecipe> = {}) { return readSampledRecipe({ ...fixture, ...overrides }); }
@@ -37,7 +37,7 @@ test('source and evidence byte pins, dimensions and physical term identities are
   for (const invalid of [{ ...term, evidenceIds: [] }, { ...term, weight: -1 }, { ...term, sigmaArcsec: [2, -3, 4] }])
     assert.throws(() => readSampledRecipe({ ...fixture, terms: [invalid] }));
   assert.throws(() => recipe({ terms: [term, term] }), /Duplicate/);
-  assert.throws(() => recipe({ lensComponents: { optical: { ejecta: 0, pwn: 0 } } }), /empty/);
+  assert.throws(() => recipe({ datasetComponents: { optical: { ejecta: 0, pwn: 0 } } }), /empty/);
 });
 
 test('analytic terms and the named pulsar must reference evidence for this object', () => {
@@ -127,7 +127,7 @@ test('independent wind terms never alter the ejecta array and spectral mixtures 
   wind.field({ ejecta: 1, pwn: 0 }).sampleEmission(0, 0, 0, out); assert.equal(out[0], 0);
   wind.field({ ejecta: 0, pwn: 1 }).sampleEmission(0, 0, 0, out); const center = out[0]; assert.ok(center > 0);
   wind.field({ ejecta: .2, pwn: .3 }).sampleEmission(0, 0, 0, out); close(out[0], center * .3);
-  const swapped = prepareSampledField(points, recipe({ terms: [term], lensComponents: { optical: { ejecta: 0, pwn: 1 }, xray: { ejecta: 1, pwn: 0 } } }));
+  const swapped = prepareSampledField(points, recipe({ terms: [term], datasetComponents: { optical: { ejecta: 0, pwn: 1 }, xray: { ejecta: 1, pwn: 0 } } }));
   assert.deepEqual(swapped.ejecta, wind.ejecta); assert.deepEqual(swapped.pwn, wind.pwn);
 });
 

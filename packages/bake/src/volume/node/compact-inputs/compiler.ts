@@ -49,10 +49,10 @@ export function readCompactCompiler(value: unknown) {
     if (new Set(resources.map(r => r.path)).size !== resources.length) throw new TypeError('Duplicate expected resource.');
     return { id: bank.id, resources };
   });
-  const lensIds = scene.lenses.map(lens => lens.id);
-  assert.deepEqual(materials.map(m => m.sourceId), lensIds, 'Compact materials differ from scene lenses.');
-  assert.deepEqual(sources.map(s => s.id), lensIds, 'Compact sources differ from scene lenses.');
-  assert.deepEqual(expected.map(b => b.id), ['neutral', ...lensIds], 'Compact expected banks differ.');
+  const datasetIds = scene.datasets.map(dataset => dataset.id);
+  assert.deepEqual(materials.map(m => m.sourceId), datasetIds, 'Compact materials differ from scene datasets.');
+  assert.deepEqual(sources.map(s => s.id), datasetIds, 'Compact sources differ from scene datasets.');
+  assert.deepEqual(expected.map(b => b.id), ['neutral', ...datasetIds], 'Compact expected banks differ.');
   const minimumFeatureScaleArcsec = value.minimumFeatureScaleArcsec;
   if (minimumFeatureScaleArcsec !== undefined && (typeof minimumFeatureScaleArcsec !== 'number' || !Number.isFinite(minimumFeatureScaleArcsec) || minimumFeatureScaleArcsec <= 0))
     throw new TypeError('Invalid compact feature scale.');
@@ -71,7 +71,7 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
   const scene = await bakeCompiler({ root, outputDirectory, id: old.volumeId ?? old.id, fieldIdentity: old.fieldIdentity,
     sampling: old.sampling, preparedPhysical, historicalReplay: old.sampling.renderBudget === undefined,
     boundsArcsec: old.boundsArcsec, skyBoundsArcsec: old.skyBoundsArcsec, minimumFeatureScaleArcsec: input.minimumFeatureScaleArcsec,
-    sampleEmission: field.sampleEmission, lenses: input.materials.map((material, index) => ({ id: material.sourceId,
+    sampleEmission: field.sampleEmission, datasets: input.materials.map((material, index) => ({ id: material.sourceId,
       label: input.sources[index]!.label, sampleMaterial: field.createMaterialSampler(material.components, material.envelopeColors) })),
     stars: old.stars.map(star => ({ ...star, positionArcsec: [star.positionUnits[0] + origin[0], star.positionUnits[1] + origin[1],
       (preparedPhysical ? -star.positionUnits[2] : star.positionUnits[2]) + origin[2]] })), progress }, backend);
@@ -79,7 +79,7 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
   // Output locations change with every bake; the sprite content may not.
   const spriteContent = (sprites: typeof scene.starSprites) => sprites && { ...sprites, atlas: undefined, profile: undefined };
   assert.deepEqual(spriteContent(scene.starSprites), spriteContent(old.starSprites), 'Compact replay changed stellar sprites.');
-  const banks = [{ id: 'neutral', volume: scene.neutral }, ...scene.lenses];
+  const banks = [{ id: 'neutral', volume: scene.neutral }, ...scene.datasets];
   for (const [index, bank] of banks.entries()) {
     const volume = backend.readVolume(JSON.parse((await pinned(root, bank.volume)).toString()));
     assert.deepEqual(volume.resources, input.expected[index]!.resources, `Compact replay changed ${bank.id} texture sizes or dimensions.`);

@@ -44,13 +44,13 @@ Overlaps are scale-free. Read each against the same-shape column, which is what 
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `zimpol` | 30 | 0 | — | — | — | its other 30 frames | 0 of 30 | — | 27 of 30, 2.00° | — | ×1.03 | no verdict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.2](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ### Shape
@@ -59,19 +59,19 @@ The asteroid validation report records the earlier source, preparation and brows
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 4391.2 m error; the authored stopping threshold is 4500 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 2436.2 m and maximum 4617.6 m.
 
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
+Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
-Photographic placement remains unqualified. The [initial native-frame trial](evidence/photographic-projection.json)
-checked four SPHERE views and their source models; the [crater-control replay](evidence/projected-controls.json)
+Photographic placement remains unqualified. The initial native-frame trial
+checked four SPHERE views and their source models; the crater-control replay
 retains discrepancies against tentative identifications, not verified ground truth.
-The [full-sequence investigation](evidence/sequence-orientation.json) inspected all
+The full-sequence investigation inspected all
 ten October 11 images and identified 05:08:49 Camera 2 as the closest match to
 Vernazza et al. (2021), Figure B.2 (withheld image correlation 0.9986).
 That identifies the published photograph; it does not establish 3D placement.
 The earlier tentative crater picks and 1.44–2.41° raster pole-marker differences
 remain unresolved. The image panels and full measurements remain in those records.
 
-The [camera-transfer investigation](evidence/camera-transfer.json) tests native
+The camera-transfer investigation tests native
 photographs directly, including simultaneous exposures and a later view after
 43° of rotation. The selected MPCD results are:
 
@@ -123,7 +123,7 @@ The new image received only the existing limb adjustment, with no interior fit.
 Its eight held-out matches differed by **5.29 pixels RMS, maximum 8.18 pixels**.
 All fourteen accepted matches in that image were evaluation data; the six in the
 matcher's usual fit partition were not fitted either. The
-[retained joint-fit result](evidence/camera-transfer.json) includes the frozen
+retained joint-fit result includes the frozen
 cameras, objective, input pins, matched pixels and numerical replay checks.
 
 ![Unused Pallas photograph, frozen prediction and measured feature discrepancies](evidence/joint-fit.png)
@@ -151,7 +151,7 @@ The SPHERE photograph is photographed illumination from the survey's deconvolved
 <details>
 <summary>Selected data</summary>
 
-- [Original ADAM comparison](https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj): radius 256.359287 km. Excluded as a second lens: it is an alternative reconstruction of the same shape. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
+- [Original ADAM comparison](https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj): radius 256.359287 km. Excluded as a second dataset: it is an alternative reconstruction of the same shape. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
 
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/2Pallas/): individual, illuminated, resolved telescope images. They constrain the selected reconstruction. A photographic surface remains under investigation; the native-frame trial and remaining registration checks are recorded in the ledger.
 
@@ -195,7 +195,7 @@ Source pins live in [source/manifest.json](source/manifest.json); source/prepara
 <details>
 <summary>Reproduce the native crater comparison</summary>
 
-The [diagnostic recipe](evidence/photographic-controls.json) pins the exact FITS
+The diagnostic recipe pins the exact FITS
 image, ADAM and MPCD meshes, frozen cameras, published coordinates and tentative
 native picks. It uses the shared preparation tool
 [check-projected-controls.mts](../../../packages/bake/cli/check-projected-controls.mts).

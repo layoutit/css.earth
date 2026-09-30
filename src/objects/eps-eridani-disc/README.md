@@ -22,7 +22,7 @@ One volume unit is one astronomical unit at the star's Gaia DR3 distance (3.22 p
 Run of 2026-09-27 (this version):
 
 - The author's preview of the image as drawn, north up, at Booth et al.'s resolution, in their colour scale and with the fade ([previews/dust.png](source/previews/dust.png)), to compare with their [Figure 1](https://arxiv.org/abs/2303.13584).
-- The ring rendered in the application around the star, captured headless at 1440 × 900 once the application reported ready, 261 au from the star ([eps-eridani-disc-rendered.png](evidence/eps-eridani-disc-rendered.png)).
+- The ring rendered in the application around the star, captured headless at 1440 × 900 once the application reported ready, 261 au from the star (eps-eridani-disc-rendered.png).
 - [`disc-envelope.test.mts`](../../../packages/telescope-cli/authoring/circumstellar/disc-envelope.test.mts): a point source at its published position and peak is removed to nothing; smoothing to a larger beam keeps a point source's peak and scales an even field by the ratio of the beam areas; a published ring width is used as stated.
 - `node packages/telescope-cli/authoring/circumstellar/author.mts eps-eridani-disc --check` reproduces every authored file. The same author reproduces the PDS 70 and HD 181327 rings unchanged.
 

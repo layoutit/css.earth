@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-137p",
   "displayName": "Shoemaker–Levy 2",
@@ -105,6 +105,6 @@
     "qualification": "A smooth approximation of the published proportions. Two pole orientations fit the lightcurves; this uses Model 1. The grid marks missing surface imagery. Rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

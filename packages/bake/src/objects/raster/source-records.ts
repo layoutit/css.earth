@@ -8,7 +8,7 @@ export const parseFloatMapGrid = shape({...dimensions,productId:text,dataSetId:t
   centerLongitudeEastDegrees:optional(number),longitudeRangeEast:optional(array(number)),
   missingBits:optional(text),missingValue:optional(number),sampleType:optional(text),coordinateSystem:optional(text),
   latitudeRange:optional(array(number))});
-export const parseFloatMapLens = shape({path:text,labelPath:optional(text),grid:parseFloatMapGrid,sampling:optional(text),valueTransform:optional(parseTransform)});
+export const parseFloatMapDataset = shape({path:text,labelPath:optional(text),grid:parseFloatMapGrid,sampling:optional(text),valueTransform:optional(parseTransform)});
 export const parseBytePolicy = shape({noData:optional(number),connectedEdge:optional(text)});
 export const parseImageEntry = shape({...dimensions,id:optional(text),path:text,projection:shape({referenceRadiusMeters:number})});
 export const parsePdsImagePolicy = shape({schema:text,format:text,sampling:text,datasetId:text,productId:text,productVersion:text,
@@ -61,26 +61,26 @@ export const parseFacetFitsTable = shape({...facetTableFields,target:text,meshFi
   productName:optional(text),labelRecords:optional(number),headerMeshFile:optional(text),missingValue:optional(number)});
 const facetProfileFields = {meshPath:text,table:parseFacetTable,surfaceSampling:parseSurfaceSampling,sampling:text,additionalGrids:optional(array(requireRecord)),valueTransform:optional(parseTransform)};
 export const parseFacetProfile = shape(facetProfileFields);
-export const parseFacetLens = shape({path:text,minimum:number,maximum:number,...facetProfileFields});
+export const parseFacetDataset = shape({path:text,minimum:number,maximum:number,...facetProfileFields});
 export const parseFacetSampler = shape({surfaceSampling:shape({maximumDistanceMeters:number}),valueTransform:optional(parseTransform)});
 export const parseTransferTerrain = shape({path:text,grid:shape({expectedFaces:number}),simplification:shape({method:text,maximumErrorMeters:number})});
 export const parseScalarMapGrid = shape({...dimensions,stepDegrees:number,noData:number,latitudeFirst:number,latitudeStep:number,frame:text});
 export const parseAmbiguitySampling = shape({method:text,maximumDistanceMeters:number,ambiguityReference:shape({path:text,format:text,grid:parseMeshProfile})});
-export const parseScalarMapLens = shape({path:text,labelPath:text,datasetId:text,productId:text,grid:parseScalarMapGrid,sampling:text,
+export const parseScalarMapDataset = shape({path:text,labelPath:text,datasetId:text,productId:text,grid:parseScalarMapGrid,sampling:text,
   sourceValidRange:optional(array(number)),surfaceSampling:parseAmbiguitySampling,valueTransform:optional(parseTransform),minimum:number,maximum:number,
   sourceUnits:optional(text),displayUnits:optional(text)});
 export const parseCategory = shape({value:text,label:text,color:text});
 export const parseSymbols = shape({paths:text,locations:text,shapeModel:text,expectedPaths:number,expectedLocations:number,
   lineWidthMeters:number,locationDiameterMeters:number,maximumSegmentMeters:number,maximumRegistrationDistanceMeters:number,colorCategories:dictionary(number)});
 export const parseVtkGrid = shape({...meshDimensions,field:text});
-export const parseVtkLens = shape({format:text,path:text,grid:parseVtkGrid,categories:array(parseCategory),cellCategories:array(nullable(number)),
+export const parseVtkDataset = shape({format:text,path:text,grid:parseVtkGrid,categories:array(parseCategory),cellCategories:array(nullable(number)),
   sampling:text,displaySampling:text,relief:optional(requireRecord),valueTransform:optional(parseTransform),symbols:optional(parseSymbols),
   surfaceSampling:shape({method:text,renderedMeshPath:text,maximumDistanceMeters:number,maximumRegistrationDistanceMeters:number})});
 export const polygonGridFields = {expectedBounds:array(number),expectedRecords:number,withheldDegenerateRings:array(shape({record:number,ring:number,point:array(number)}))};
 export const parsePolygonGrid = shape(polygonGridFields);
 export const parseGeologyGrid = shape({...polygonGridFields,attributePath:text,projectionPath:text,coordinateSystem:text,referenceRadiusMeters:number,
   longitudeDirection:text,latitudeType:text,longitudeDomain:array(number),field:text,unknownValues:array(text)});
-export const parseGeologyLens = shape({format:text,path:text,grid:parseGeologyGrid,overlapPolicy:text,sampling:text,categories:array(parseCategory),
+export const parseGeologyDataset = shape({format:text,path:text,grid:parseGeologyGrid,overlapPolicy:text,sampling:text,categories:array(parseCategory),
   relief:optional(requireRecord),valueTransform:optional(parseTransform)});
 export const parseScientificFocus = shape({longitudeDegrees:number,latitudeDegrees:number,zoom:number});
 export const scientificCameraFields = {minimumZoom:number,maximumZoom:number,initialScenePitchDegrees:number,maximumControlPitchDegrees:number,defaultControlPitchDegrees:number,maximumScenePitchDegrees:number};

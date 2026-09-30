@@ -8,9 +8,9 @@ const { moons } = Astro.props;
   {moons.map(moon => moon.object ? <ObjectResult object={moon.object} /> :
     <li class="object-item" data-moon-id={moon.id}>
       <span class="object-link object-observation-control object-thumbnail-leading" role="link" aria-disabled="true" title="Not available yet">
-        <span class="object-lens-icon" aria-hidden="true"><span class="object-moon-placeholder"></span></span>
-        <span class="object-name object-lens-label">{moon.name}</span>
-        <span class="object-lens-detail">Not available</span>
+        <span class="object-dataset-icon" aria-hidden="true"><span class="object-moon-placeholder"></span></span>
+        <span class="object-name object-dataset-label">{moon.name}</span>
+        <span class="object-dataset-detail">Not available</span>
       </span>
     </li>)}
 </ul> : <p class="object-empty">No moons in the catalogue</p>}

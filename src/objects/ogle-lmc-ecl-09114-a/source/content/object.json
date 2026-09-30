@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "ogle-lmc-ecl-09114-a",
   "displayName": "OGLE-LMC-ECL-09114 A",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "ogle-lmc-ecl-09114-a-lens-color.webp",
+        "thumbnail": "ogle-lmc-ecl-09114-a-dataset-color.webp",
         "surface": "ogle-lmc-ecl-09114-a-surface-color@2x.webp",
         "poles": "ogle-lmc-ecl-09114-a-poles-color@2x.webp",
         "source": {

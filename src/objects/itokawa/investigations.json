@@ -9,8 +9,7 @@
       "finding": "Ten v-band frames now form the AMICA mosaic, using recipe-order to preserve the existing brightness reference and prefer October close-ups over distant September observations. Added 2492225173 and 2493031594 pass exact detector/DDR identity, disjoint backplane camera holdouts and sampled XYZ-to-ver128q checks under unchanged limits. The earlier eight-frame identity review is retained in the prior checked revisions. Current-pipeline sampled display-mesh coverage is 83.24% before and 84.26% after; this is neither exact planetary area nor an absolute albedo map.",
       "evidence": [
         "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/itokawa/source/observations/st_2402987304_v_ddr.lbl",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/itokawa/evidence/close-up-priority/source-transfer.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/itokawa/source/observations/st_2402987304_v_ddr.lbl"
       ]
     },
     {
@@ -75,7 +74,7 @@
         "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/README.md (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)",
         "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/projection.json (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)"
       ],
-      "revisitWhen": "Before using this SUM/UV route in a photographic lens, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."
+      "revisitWhen": "Before using this SUM/UV route in a photographic dataset, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."
     }
   ]
 }

@@ -3,14 +3,14 @@ import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-
 
 /** Prepared source links select their focused object directly on the shared camera of scene `sceneId`. */
 export function isFocusDatasetUrl(url: URL, sceneId: string): boolean {
-  const objectId = preparedFocusFromUrl(url, sceneId), lensId = url.searchParams.get('dataset');
-  if (!objectId || !lensId) return false;
-  try { parseDatasetDestination(`${url.pathname}${url.search}${url.hash}`, objectId, lensId); return true; }
+  const objectId = preparedFocusFromUrl(url, sceneId), datasetId = url.searchParams.get('dataset');
+  if (!objectId || !datasetId) return false;
+  try { parseDatasetDestination(`${url.pathname}${url.search}${url.hash}`, objectId, datasetId); return true; }
   catch { return false; }
 }
 
 /** The mounted scene's own dataset. On the page of a subject the scene draws (a catalogue focus, an overview) the scene
- * reads none: that page's `dataset` is its subject's own lens (a focus's, or an overview's, page-datasets.mts). */
+ * reads none: that page's `dataset` is its subject's own dataset (a focus's, or an overview's, page-datasets.mts). */
 export function readSceneDatasetUrl(url: URL, sceneId: string): { requested: boolean; id: string | null } {
   return drawnPageFromUrl(url, sceneId) === null ? readDatasetUrl(url) : { requested: false, id: null };
 }
@@ -37,6 +37,6 @@ export function withDataset(url: URL, id: string | null): URL {
   return next;
 }
 
-export function datasetHref(route: string, lensId: string): string {
-  return `${route}?dataset=${encodeURIComponent(lensId)}`;
+export function datasetHref(route: string, datasetId: string): string {
+  return `${route}?dataset=${encodeURIComponent(datasetId)}`;
 }

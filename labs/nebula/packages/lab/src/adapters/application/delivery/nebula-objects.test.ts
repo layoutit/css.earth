@@ -5,16 +5,16 @@ import { dirname, join, resolve } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
 import type { PreparedCssVolume, VolumeAxis } from '@cssearth/renderer/volume/types.ts';
-import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.ts';
 
 test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {
   const recipe: unknown = JSON.parse(await readFile('src/objects/m45/source/delivery.json', 'utf8'));
   const parsed = readNebulaDelivery(recipe);
-  assert.equal(parsed.defaultLens, 'optical-composite');
+  assert.equal(parsed.defaultDataset, 'optical-composite');
   assert.equal(parsed.compositeRecipe?.path, 'labs/nebula/models/m45/optical-composite.json');
   assert.ok(parsed.compositeRecipe);
-  assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@1', method: 'axial-symmetry' }), /requires compiler/);
+  assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@2', method: 'axial-symmetry' }), /requires compiler/);
   const ordinary = readNebulaDelivery(JSON.parse(await readFile('src/objects/m8/source/delivery.json', 'utf8')));
   assert.equal(ordinary.compositeRecipe, undefined);
 });
@@ -70,18 +70,18 @@ test('delivery restores missing impostors with their exact bytes',async()=>{
   try {
     const {directory,pixels} = await fixture(root);
     assert.equal((await prepareNebulaObject(root,directory,true,true)).status,'prepared');
-    const envelope = JSON.parse(await readFile(join(directory,'prepared/lenses.json'),'utf8'));
-    const data = validatePreparedVolumeLenses(envelope.data), lens = data.lenses[0]!;
-    assert.equal(lens.stars?.points.length,7,'The isolated delivery must include its pinned catalogue field.');
-    assert.ok(lens.volume.impostors,'Delivery must retain the generated impostor descriptor.');
-    const proxies = lens.volume.resources.filter(resource=>resource.path.includes('/impostors/'));
+    const envelope = JSON.parse(await readFile(join(directory,'prepared/datasets.json'),'utf8'));
+    const data = validatePreparedVolumeDatasets(envelope.data), dataset = data.datasets[0]!;
+    assert.equal(dataset.stars?.points.length,7,'The isolated delivery must include its pinned catalogue field.');
+    assert.ok(dataset.volume.impostors,'Delivery must retain the generated impostor descriptor.');
+    const proxies = dataset.volume.resources.filter(resource=>resource.path.includes('/impostors/'));
     assert.ok(proxies.length>0,'Generated views must join the fixed resource inventory.');
-    for (const resource of lens.volume.resources) {
+    for (const resource of dataset.volume.resources) {
       const bytes = await readFile(join(directory,'prepared',resource.path));
       assert.equal(bytes.length,resource.bytes);
     }
-    assert.equal(lens.volume.resources.filter(resource=>resource.path.includes('/atlases/')).length,3);
-    assert.ok(lens.volume.stacks.every(stack=>stack.leaves.every(leaf=>leaf.texturePath === `hst-optical/atlases/${stack.axis}.webp`)));
+    assert.equal(dataset.volume.resources.filter(resource=>resource.path.includes('/atlases/')).length,3);
+    assert.ok(dataset.volume.stacks.every(stack=>stack.leaves.every(leaf=>leaf.texturePath === `hst-optical/atlases/${stack.axis}.webp`)));
     await assert.rejects(readFile(join(directory,'prepared/hst-optical/slice.png')),/ENOENT/);
     assert.equal((await prepareNebulaObject(root,directory,true,true)).status,'verified');
 

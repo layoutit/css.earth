@@ -168,11 +168,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   }
 }
 
-/** The dated ENSO lens recipe; its reader text is murEnsoText's and its notes restate the product and date. */
+/** The dated ENSO dataset recipe; its reader text is murEnsoText's and its notes restate the product and date. */
 export function murEnsoContent(recipe: EnsoRecipe) {
   const date = new Date(`${recipe.date}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
   return { id: 'enso', label: 'ENSO',
-    thumbnail: '/scenes/earth/earth-lens-enso.webp', falseColor: true,
+    thumbnail: '/scenes/earth/earth-dataset-enso.webp', falseColor: true,
     source: { id: 'nasa-mur-gibs-tiles', url: murProductUrl },
     facts: [{ id: 'enso-status', label: 'NOAA status', value: recipe.advisory.status },
       { id: 'enso-advisory-date', label: 'Advisory issued', value: recipe.advisory.date },

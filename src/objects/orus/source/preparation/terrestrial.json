@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "orus",
   "displayName": "Orus",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

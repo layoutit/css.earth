@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/pluto/",
   "sourceWidth": 5926,
   "sourceHeight": 2963,
@@ -22,7 +22,7 @@
       "source": "surface/pluto-color-mosaic.jpg",
       "falseColor": true,
       "output": "pluto-{id}{suffix}.webp",
-      "thumbnail": "pluto-lens-{id}.webp",
+      "thumbnail": "pluto-dataset-{id}.webp",
       "science": {
         "coverage": {
           "kind": "black-fill",
@@ -36,7 +36,7 @@
       "source": "lenses/pluto-dem.tif",
       "falseColor": true,
       "output": "pluto-{id}{suffix}.webp",
-      "thumbnail": "pluto-lens-{id}.webp",
+      "thumbnail": "pluto-dataset-{id}.webp",
       "science": {
         "elevation": {
           "noData": -32768,
@@ -75,7 +75,7 @@
       "source": "lenses/pluto-monochrome.tif",
       "falseColor": false,
       "output": "pluto-{id}{suffix}.webp",
-      "thumbnail": "pluto-lens-{id}.webp",
+      "thumbnail": "pluto-dataset-{id}.webp",
       "science": {
         "coverage": {
           "kind": "black-fill",
@@ -89,7 +89,7 @@
       "source": "science/leisa/params_ls.fits",
       "falseColor": true,
       "output": "pluto-{id}{suffix}.webp",
-      "thumbnail": "pluto-lens-{id}.webp",
+      "thumbnail": "pluto-dataset-{id}.webp",
       "science": {
         "kind": "terrestrial-scientific",
         "id": "methane-ice",
@@ -220,7 +220,7 @@
       "source": "science/leisa/params_ls.fits",
       "falseColor": true,
       "output": "pluto-{id}{suffix}.webp",
-      "thumbnail": "pluto-lens-{id}.webp",
+      "thumbnail": "pluto-dataset-{id}.webp",
       "science": {
         "kind": "terrestrial-scientific",
         "id": "nitrogen-ice",
@@ -351,7 +351,7 @@
       "source": "science/leisa/params_ls.fits",
       "falseColor": true,
       "output": "pluto-{id}{suffix}.webp",
-      "thumbnail": "pluto-lens-{id}.webp",
+      "thumbnail": "pluto-dataset-{id}.webp",
       "science": {
         "kind": "terrestrial-scientific",
         "id": "water-ice",

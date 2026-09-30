@@ -95,7 +95,7 @@ The centroid inside the disc is 1.07″ from the frame centre in the object-cent
 - The object-centred check is a counts measurement on one observation. Jupiter in 9.3 ks of HRC-I gives about 30 net counts inside its disc, so it shows the frame works and could not measure a small error in it.
 - The blank-sky background event files (`acis_bkg_evt`, `hrc_bkg_evt`, 3.5 GB together) are not installed, because `chandra_repro` does not read them.
 - The ledger's object match is a box, not a field of view: a pointing 0.24° from M31's centre counts for M31 whether or not the detector covered it.
-- Nothing here is drawn. No Chandra observation has been turned into a lens or an object dataset.
+- Nothing here is drawn. No Chandra observation has been turned into a dataset or an object dataset.
 - `download_chandra_obsid`, the CXC's own retrieval script, is not used: the toolkit pins files by URL, bytes and digest so a receipt names exactly what it read.
 
 ## Re-running

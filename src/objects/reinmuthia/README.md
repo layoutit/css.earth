@@ -35,7 +35,7 @@ The thermal measurement is an effective spherical diameter at its observing geom
 
 A scale uncertainty changes every linear model dimension by the same proportion.
 
-The Shape lens uses cssEarth's existing shared grid to identify unavailable imagery. Any Elevation lens is **source-shape radius minus the chosen reference sphere**, a model-derived geometric quantity whose absolute scale inherits the thermal-size uncertainty. It is not independent terrain surveying or gravitational elevation.
+The Shape dataset uses cssEarth's existing shared grid to identify unavailable imagery. Any Elevation dataset is **source-shape radius minus the chosen reference sphere**, a model-derived geometric quantity whose absolute scale inherits the thermal-size uncertainty. It is not independent terrain surveying or gravitational elevation.
 
 Optional directional Shadows are illustrative lighting on that mesh, separate from the grid; Shadows default to off.
 

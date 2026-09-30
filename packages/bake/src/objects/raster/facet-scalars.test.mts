@@ -68,11 +68,11 @@ test('PDS FITS joins by explicit zero-based facet IDs, verifies label/geometry a
 
 test('facet recipe binds its source mesh and transfer distance to the actual retained simplification', () => {
   const terrain={path:'shape/source.obj',grid:{expectedFaces:2},simplification:{method:'source-meshoptimizer',maximumErrorMeters:2}};
-  const lens={meshPath:terrain.path,table:{...profile,format:'sbmt-csv-zip',member:'values.csv'},
+  const dataset={meshPath:terrain.path,table:{...profile,format:'sbmt-csv-zip',member:'values.csv'},
     surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:2},sampling:'nearest'};
-  assert.doesNotThrow(()=>validateFacetScalarProfile(lens,terrain));
-  assert.throws(()=>validateFacetScalarProfile({...lens,meshPath:'other.obj'},terrain),/exact source mesh/);
-  assert.throws(()=>validateFacetScalarProfile({...lens,surfaceSampling:{...lens.surfaceSampling,maximumDistanceMeters:3}},terrain),/bounded/);
+  assert.doesNotThrow(()=>validateFacetScalarProfile(dataset,terrain));
+  assert.throws(()=>validateFacetScalarProfile({...dataset,meshPath:'other.obj'},terrain),/exact source mesh/);
+  assert.throws(()=>validateFacetScalarProfile({...dataset,surfaceSampling:{...dataset.surfaceSampling,maximumDistanceMeters:3}},terrain),/bounded/);
 });
 
 test('explicit centroid bijection reconciles exporter order and retains the original scalar row index', () => {
@@ -94,12 +94,12 @@ test('derived gzip facet tables retain their NaN gaps and exact mesh binding', a
   const root=await mkdtemp(join(tmpdir(),'hrii-facets-'));
   try{
     await writeFile(join(root,'fields.csv.gz'),gzipSync(csv));
-    const lens={sampling:'nearest',path:'fields.csv.gz',meshPath:'shape.obj',table:{...profile,format:'facet-csv-gzip',validityField:'Albedo'},surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:.2},minimum:0,maximum:30};
-    const sampler=await loadFacetScalarSurface(root,lens,mesh);
+    const dataset={sampling:'nearest',path:'fields.csv.gz',meshPath:'shape.obj',table:{...profile,format:'facet-csv-gzip',validityField:'Albedo'},surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:.2},minimum:0,maximum:30};
+    const sampler=await loadFacetScalarSurface(root,dataset,mesh);
     assert.equal(sampler.samplePoint([1,1,1]),null);
     assert.equal(required(sampler.samplePoint([5.1,1,1])).value,30);
     await writeFile(join(root,'fields.csv.gz'),gzipSync(csv.replace('0.005,0.001','0.006,0.001')));
-    await assert.rejects(()=>loadFacetScalarSurface(root,lens,mesh),/does not match source geometry/);
+    await assert.rejects(()=>loadFacetScalarSurface(root,dataset,mesh),/does not match source geometry/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

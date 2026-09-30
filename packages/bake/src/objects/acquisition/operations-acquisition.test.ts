@@ -12,7 +12,7 @@ import { convertMappedComposition, parseMappedCompositionRecipe } from '@csseart
 const test = sourceTest();
 
 const rawSource = (_bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img'});
-const rawManifest = (bytes: Uint8Array): SourceManifest => ({schema:'cssearth-authoritative-sources@2',
+const rawManifest = (bytes: Uint8Array): SourceManifest => ({schema:'cssearth-authoritative-sources@3',
   inputs:[rawSource(bytes)],generatedIntermediates:[],documents:[]});
 const rawPlan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{
   kind:'download',path:'source.img',url:'https://example.test/source.img',groups:['refresh'],headers:{'X-Source':'fixture'},
@@ -56,7 +56,7 @@ test('mapped composition acquisition restores the pinned map and report through 
   const converted=convertMappedComposition(original,recipe),report=Buffer.from(JSON.stringify(converted.report,null,2)+'\n');
   await writeFile(join(directory,'native.json.gz'),original);
   await writeFile(join(directory,'recipe.json'),JSON.stringify(recipe));
-  const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[],documents:[],generatedIntermediates:
+  const manifest:SourceManifest={schema:'cssearth-authoritative-sources@3',inputs:[],documents:[],generatedIntermediates:
     [['ice.tif',converted.products.ice],['report.json',report]].map(([path,bytes])=>{
       assert.ok(typeof path==='string');assert.ok(bytes instanceof Uint8Array);
       return {path,generator:'fixture spectral-band converter'};
@@ -250,7 +250,7 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
     const archive = await readFile(join(directory, 'archive.zip'));
     const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip', member:'transit spectrum/source.bin', groups:['restore']};
     const plan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1', operations:[step]});
-    const manifest = {schema:'cssearth-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin'}], generatedIntermediates:[],documents:[]};
+    const manifest = {schema:'cssearth-authoritative-sources@3', inputs:[{id:'fixture',path:'restored.bin'}], generatedIntermediates:[],documents:[]};
     await executeAcquisition({sourceRoot:directory,manifest,plan,group:'restore',
       transport:{fetch:async()=>new Response(archive)}});
     assert.deepEqual(await readFile(join(directory,'restored.bin')), content);
@@ -270,7 +270,7 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
 // A pinned slice of an archive member too large to keep whole: the request must be honoured as 206 Partial Content,
 // and a server that answers with the whole body is refused instead of downloaded.
 const slice=Buffer.from('exactly the pinned slice of a very large archive member');
-const rangedManifest=(range={offset:13096944000,length:slice.length}): SourceManifest=>({schema:'cssearth-authoritative-sources@2',
+const rangedManifest=(range={offset:13096944000,length:slice.length}): SourceManifest=>({schema:'cssearth-authoritative-sources@3',
   inputs:[{...rawSource(slice),range}],generatedIntermediates:[],documents:[]});
 const rangedResponse=(body:Uint8Array<ArrayBuffer>,{status=206,contentRange=`bytes 13096944000-${13096944000+slice.length-1}/26173440000`,contentLength=String(body.length)}={})=>
   new Response(body,{status,headers:{'content-range':contentRange,'content-length':contentLength}});

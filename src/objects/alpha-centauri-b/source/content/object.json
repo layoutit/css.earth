@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "alpha-centauri-b",
   "displayName": "Alpha Centauri B",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (Kiehling 1987, relative calibration). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
-        "thumbnail": "alpha-centauri-b-lens-color.webp",
+        "thumbnail": "alpha-centauri-b-dataset-color.webp",
         "surface": "alpha-centauri-b-surface-color@2x.webp",
         "poles": "alpha-centauri-b-poles-color@2x.webp",
         "source": {

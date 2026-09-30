@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-18599b",
   "displayName": "HD 18599 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by HD 18599; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hd-18599b-lens-shape.webp",
+        "thumbnail": "hd-18599b-dataset-shape.webp",
         "surface": "hd-18599b-surface-shape@2x.webp",
         "poles": "hd-18599b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of HD 18599 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-18599's light, as its colour lens measures it."
+        "notes": "No image or colour of HD 18599 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-18599's light, as its colour dataset measures it."
       }
     ]
   },

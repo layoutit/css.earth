@@ -8,7 +8,7 @@ It is the only planet known around TOI-1448. Its orbit and size follow Hori et a
 
 **Orbit.** Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): P 8.112245 d Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): a/R* 32.1; Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): inclination 89.62 degrees No archive row states an eccentricity; the orbit is taken as circular Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): transit mid-time 2458713.3375 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1448's measured colour (#ffc985, the colour lens of toi-1448 (src/objects/toi-1448/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1448's measured colour (#ffc985, the colour dataset of toi-1448 (src/objects/toi-1448/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1448's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (77, 82, 84), folded onto its orbit. Upper limits and rows without an error are left out.
 

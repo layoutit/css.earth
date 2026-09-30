@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-143p",
   "displayName": "Kowal–Mrkos",
@@ -105,6 +105,6 @@
     "qualification": "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

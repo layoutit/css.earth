@@ -1,7 +1,7 @@
 import type { JsonRecord, JsonValue, ObjectDescriptor, PreparedAssetReference } from './descriptor.js';
 
 const identifier = /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/;
-const schema = 'cssearth-object@1';
+const schema = 'cssearth-object@2';
 
 function record(value: unknown, location: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value) ||

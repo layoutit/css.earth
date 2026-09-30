@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "dejopeja-shape",
@@ -14,7 +14,7 @@
         "shape",
         "elevation"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "projection": {
         "kind": "body-fixed-cartesian-triangular-mesh",
         "longitudeDirection": "east",
@@ -56,7 +56,7 @@
         "latitudeDegrees": 35,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "shape"
+        "datasetId": "shape"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

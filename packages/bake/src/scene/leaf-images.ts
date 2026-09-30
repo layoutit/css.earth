@@ -5,8 +5,8 @@ import type { LeafImagePixels } from './projector.ts';
 
 export interface LeafImageSources {
   objectId: string; profile: GeometryProfile; raster: RasterRecipe;
-  /** The prepared lens controls (`@cssearth/bake/objects/content`, lenses.ts): every lens names its surface and pole images. */
-  lenses: unknown;
+  /** The prepared dataset controls (`@cssearth/bake/objects/content`, datasets.ts): every dataset names its surface and pole images. */
+  datasets: unknown;
   /** The prepared cutaway images (preparation/raster/interior.ts); required with a cutaway. */
   interior?: unknown;
 }
@@ -28,13 +28,13 @@ function urls(objectId: string, source: Record<string, unknown>, fields: readonl
 }
 
 /** Every published image a leaf can show, keyed by the url the leaf's patch names (the geometry profile's surface and pole
- * images, the cutaway's outer poles, core and section). A band leaf shows each lens's surface, and a paged surface publishes
+ * images, the cutaway's outer poles, core and section). A band leaf shows each dataset's surface, and a paged surface publishes
  * no whole atlas but each page at every texture level (composite.ts reads the same files); the cutaway draws the same band
- * leaves over its outer shell, lit or unlit (row-bank-cutaway.ts). A cap shows each lens's pole image. An interior lens
- * draws the cutaway, and a dataset that borrows another lens's surface draws that lens's. */
-export function leafImageCandidates({ objectId, profile, raster, lenses, interior }: LeafImageSources): ReadonlyMap<string, readonly string[]> {
-  const controls = record(objectId, lenses, 'prepared lenses').controls;
-  if (!Array.isArray(controls) || !controls.length) throw new TypeError(`${objectId}: prepared lenses.controls must list the lenses.`);
+ * leaves over its outer shell, lit or unlit (row-bank-cutaway.ts). A cap shows each dataset's pole image. An interior dataset
+ * draws the cutaway, and a dataset that borrows another dataset's surface draws that dataset's. */
+export function leafImageCandidates({ objectId, profile, raster, datasets, interior }: LeafImageSources): ReadonlyMap<string, readonly string[]> {
+  const controls = record(objectId, datasets, 'prepared datasets').controls;
+  if (!Array.isArray(controls) || !controls.length) throw new TypeError(`${objectId}: prepared datasets.controls must list the datasets.`);
   const pages = rasterPagePlan(raster, RASTER_DENSITY), last = RASTER_LEVEL_FACTORS.length - 1;
   const surfaceFiles = (url: string) => {
     if (!pages) return [url];
@@ -48,16 +48,16 @@ export function leafImageCandidates({ objectId, profile, raster, lenses, interio
     const set = candidates.get(key) ?? candidates.set(key, new Set()).get(key)!;
     for (const image of images) set.add(image);
   };
-  // The profile's own images only locate the leaves: a leaf draws its lens's texture, never the profile's url (projector.ts).
+  // The profile's own images only locate the leaves: a leaf draws its dataset's texture, never the profile's url (projector.ts).
   add(profile.surface.surface.url, []);
   add(profile.surface.poles.url, []);
   controls.forEach((value, index) => {
-    const lens = record(objectId, value, `prepared lenses.controls[${index}]`), at = `lens ${String(lens.id)}`;
-    if (typeof lens.id !== 'string') throw new TypeError(`${objectId}: prepared lenses.controls[${index}].id must be a string, not ${JSON.stringify(lens.id)}.`);
-    const volume = lens.volume === undefined ? undefined : record(objectId, lens.volume, `${at}.volume`);
-    if (lens.view === 'interior' || (volume && volume.surface !== lens.id)) return;
-    add(profile.surface.surface.url, urls(objectId, lens, ['surfaceUrl', 'surface2xUrl'], at).flatMap(surfaceFiles));
-    add(profile.surface.poles.url, urls(objectId, lens, ['polesUrl', 'poles2xUrl'], at));
+    const dataset = record(objectId, value, `prepared datasets.controls[${index}]`), at = `dataset ${String(dataset.id)}`;
+    if (typeof dataset.id !== 'string') throw new TypeError(`${objectId}: prepared datasets.controls[${index}].id must be a string, not ${JSON.stringify(dataset.id)}.`);
+    const volume = dataset.volume === undefined ? undefined : record(objectId, dataset.volume, `${at}.volume`);
+    if (dataset.view === 'interior' || (volume && volume.surface !== dataset.id)) return;
+    add(profile.surface.surface.url, urls(objectId, dataset, ['surfaceUrl', 'surface2xUrl'], at).flatMap(surfaceFiles));
+    add(profile.surface.poles.url, urls(objectId, dataset, ['polesUrl', 'poles2xUrl'], at));
   });
   if (profile.cutaway) {
     const images = record(objectId, interior, 'prepared interior');

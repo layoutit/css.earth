@@ -8,7 +8,7 @@ It is the only planet known around TOI-2068. Its orbit and size follow Mistry et
 
 **Orbit.** Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): P 7.768915 d Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): a/R* 26.11; Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): inclination 89.01 degrees No archive row states an eccentricity; the orbit is taken as circular Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): transit mid-time 2458683.4258 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2068's measured colour (#ffc088, the colour lens of toi-2068 (src/objects/toi-2068/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2068's measured colour (#ffc088, the colour dataset of toi-2068 (src/objects/toi-2068/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2068's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (41, 48, 75), folded onto its orbit. Upper limits and rows without an error are left out.
 

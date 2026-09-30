@@ -8,7 +8,7 @@ It is the only planet known around TOI-1201. Its orbit and size follow Kossakows
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.4919726 d Kossakowski et al. 2021 (2021A&A...656A.124K), via the NASA Exoplanet Archive ps table (pl_refname KOSSAKOWSKI_ET_AL__2021): a/R* 12.23; Kossakowski et al. 2021 (2021A&A...656A.124K), via the NASA Exoplanet Archive ps table (pl_refname KOSSAKOWSKI_ET_AL__2021): inclination 88.11 degrees Kossakowski et al. 2021 (2021A&A...656A.124K), via the NASA Exoplanet Archive ps table (pl_refname KOSSAKOWSKI_ET_AL__2021): e 0 Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458822.84776 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1201's measured colour (#ffc88c, the colour lens of toi-1201 (src/objects/toi-1201/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1201's measured colour (#ffc88c, the colour dataset of toi-1201 (src/objects/toi-1201/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1201's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (4, 31), folded onto its orbit. Upper limits and rows without an error are left out.
 

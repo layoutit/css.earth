@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "styx",
   "displayName": "Styx",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Pluto-system ephemeris; historical Weaver2016 spin pole used as a static display orientation, since the 2025 study finds no unique pole solution."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

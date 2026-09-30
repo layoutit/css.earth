@@ -53,18 +53,18 @@ test('equal-area table reads its columns at the format file bytes and tiles the 
   assert.throws(()=>parsePdsEqualAreaTable(label,structure,'test.fmt',table.slice(0,-2),policy,'test'),/bytes/);
 });
 
-test('equal-area lens samples the containing pixel, scales units and reports the propagated uncertainty',async()=>{
+test('equal-area dataset samples the containing pixel, scales units and reports the propagated uncertainty',async()=>{
   const root=await mkdtemp(join(tmpdir(),'pds-equal-area-'));
   try{
     await writeFile(join(root,'t.lbl'),label);await writeFile(join(root,'test.fmt'),structure);await writeFile(join(root,'t.tab'),table);
-    const lens={path:'t.tab',labelPath:'t.lbl',structurePath:'test.fmt',...policy,sampling:'nearest',valueTransform:{scale:2,offset:0}};
-    const surface=await loadPdsEqualAreaTable(root,lens);
+    const dataset={path:'t.tab',labelPath:'t.lbl',structurePath:'test.fmt',...policy,sampling:'nearest',valueTransform:{scale:2,offset:0}};
+    const surface=await loadPdsEqualAreaTable(root,dataset);
     assert.equal(surface.sample(-90,10),5);assert.equal(surface.sample(90,10),0);assert.equal(surface.sample(0,60),22.5);
     assert.equal(surface.sample(0,91),null);
     assert.equal(surface.report.medianSigma,0.4);assert.deepEqual(surface.report.valueRange,[0,22.5]);
-    await assert.rejects(loadPdsEqualAreaTable(root,{...lens,structurePath:'../test.fmt'}),/escapes/);
-    await assert.rejects(loadPdsEqualAreaTable(root,{...lens,sampling:'bilinear'}),/nearest/);
-    await assert.rejects(loadPdsEqualAreaTable(root,{...lens,noData:0}),/noDataEvidence/);
+    await assert.rejects(loadPdsEqualAreaTable(root,{...dataset,structurePath:'../test.fmt'}),/escapes/);
+    await assert.rejects(loadPdsEqualAreaTable(root,{...dataset,sampling:'bilinear'}),/nearest/);
+    await assert.rejects(loadPdsEqualAreaTable(root,{...dataset,noData:0}),/noDataEvidence/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

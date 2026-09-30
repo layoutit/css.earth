@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wd-1856-534",
   "displayName": "WD 1856+534",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Colour",
         "qualification": "Gaia DR3 spectrum colour on a uniform disc; darkening toward the edge from a published law.",
-        "thumbnail": "wd-1856-534-lens-color.webp",
+        "thumbnail": "wd-1856-534-dataset-color.webp",
         "surface": "wd-1856-534-surface-color@2x.webp",
         "poles": "wd-1856-534-poles-color@2x.webp",
         "source": {

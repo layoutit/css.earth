@@ -12,14 +12,14 @@ Radius: Stellar radius 0.939 ± 0.019 ± 0.011 solar radii from Mancini et al. 2
 
 Rotation: no spin axis or rotation period is adopted. The display axis is celestial north at the star, a convention.
 
-Colour lens: The colour of Gaia DR3's measured spectrum of WASP-39. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffebdf**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic law Kirk et al. (2019, AJ 158, 144, Table 1) fitted to WHT/ACAM transits of WASP-39b at 400-900 nm: u1 = 0.49 ± 0.06 measured, with u2 = 0.08 held at a model atmosphere value in their fit, so the law is half measured ([kirk-2019-limb-darkening.json](source/photometry/kirk-2019-limb-darkening.json)). The edge is 43% as bright as the centre. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. A second spectrum exists but is not yet used: two HST STIS exposures (programme 12473) that would have to be joined at 560 nm.
+Colour dataset: The colour of Gaia DR3's measured spectrum of WASP-39. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffebdf**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic law Kirk et al. (2019, AJ 158, 144, Table 1) fitted to WHT/ACAM transits of WASP-39b at 400-900 nm: u1 = 0.49 ± 0.06 measured, with u2 = 0.08 held at a model atmosphere value in their fit, so the law is half measured ([kirk-2019-limb-darkening.json](source/photometry/kirk-2019-limb-darkening.json)). The edge is 43% as bright as the centre. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. A second spectrum exists but is not yet used: two HST STIS exposures (programme 12473) that would have to be joined at 560 nm.
 
 
 ## Evidence
 
 Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #ffebdf is the colour lens's prepared colour; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
+- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #ffebdf is the colour dataset's prepared colour; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

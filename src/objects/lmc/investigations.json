@@ -3,42 +3,39 @@
   "objectId": "lmc",
   "entries": [
     {
-      "id": "lens-vista-infrared",
-      "subject": "vista-infrared shipped image lens",
+      "id": "dataset-vista-infrared",
+      "subject": "vista-infrared shipped image dataset",
       "status": "included",
-      "finding": "Shipped lens, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-vista-infrared). Registration unchanged: 5340 held-out matches qualify it inside its matched hull; exterior placement is extrapolated. After the tone fit its analytic render is still 16.6% brighter than its own image (hue error 5.70°), because every lens shares the one opacity fitted to Horálek; a per-lens opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): Default ESO Y/J/Ks display, 8954 by 10000 pixels, repaints the existing simulated density without changing geometry or alpha. The 5340 held-out matches qualify relative registration inside its matched hull; exterior placement is extrapolated.",
+      "finding": "Shipped dataset, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-vista-infrared). Registration unchanged: 5340 held-out matches qualify it inside its matched hull; exterior placement is extrapolated. After the tone fit its analytic render is still 16.6% brighter than its own image (hue error 5.70°), because every dataset shares the one opacity fitted to Horálek; a per-dataset opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): Default ESO Y/J/Ks display, 8954 by 10000 pixels, repaints the existing simulated density without changing geometry or alpha. The 5340 held-out matches qualify relative registration inside its matched hull; exterior placement is extrapolated.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/vista-infrared/provenance.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
     {
-      "id": "lens-horalek-widefield",
-      "subject": "horalek-widefield shipped image lens",
+      "id": "dataset-horalek-widefield",
+      "subject": "horalek-widefield shipped image dataset",
       "status": "included",
-      "finding": "Default lens and the image the finite-emission model lmc-clouds-emission-envelope was fitted to (result lmc-clouds-emission-envelope-horalek-widefield, tone-fitted). Registration unchanged: 198 held-out matches over a 60.2 percent hull; extended placement is extrapolated. After the tone fit its analytic render is 1.8% brighter than its own image with a 3.76° hue error. Earlier finding (2026-09-14, repaint delivery): Horálek visible-light photograph, 6582 by 4388 pixels, with acquisition instrument/bands unresolved. The 198 held-out matches qualify relative registration over a 60.2 percent hull. Exact density/alpha and the shared catalogue remain fixed; extended placement is extrapolated.",
+      "finding": "Default dataset and the image the finite-emission model lmc-clouds-emission-envelope was fitted to (result lmc-clouds-emission-envelope-horalek-widefield, tone-fitted). Registration unchanged: 198 held-out matches over a 60.2 percent hull; extended placement is extrapolated. After the tone fit its analytic render is 1.8% brighter than its own image with a 3.76° hue error. Earlier finding (2026-09-14, repaint delivery): Horálek visible-light photograph, 6582 by 4388 pixels, with acquisition instrument/bands unresolved. The 198 held-out matches qualify relative registration over a 60.2 percent hull. Exact density/alpha and the shared catalogue remain fixed; extended placement is extrapolated.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/horalek-widefield/provenance.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
     {
-      "id": "lens-wise-wide-infrared",
-      "subject": "wise-wide-infrared shipped image lens",
+      "id": "dataset-wise-wide-infrared",
+      "subject": "wise-wide-infrared shipped image dataset",
       "status": "included",
-      "finding": "Shipped lens, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-wise-wide-infrared). Its fixed WCS check is unchanged. After the tone fit its analytic render is still 264% brighter than its own image (hue error 8.14°): its composite spans about 19 grey levels inside its footprint and the curve is pinned at its floor under the shared opacity, so a per-lens opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): NASA/IPAC AllWISE W4/W2/W1 color HiPS mosaic, 6000² pixels across 24 degrees. Its fixed WCS passed 34,811 independently retrieved AllWISE W1 matches without fitting a transform. This validates W1 geometry, not diffuse photometry, visible seams or simulated gas depth.",
+      "finding": "Shipped dataset, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-wise-wide-infrared). Its fixed WCS check is unchanged. After the tone fit its analytic render is still 264% brighter than its own image (hue error 8.14°): its composite spans about 19 grey levels inside its footprint and the curve is pinned at its floor under the shared opacity, so a per-dataset opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): NASA/IPAC AllWISE W4/W2/W1 color HiPS mosaic, 6000² pixels across 24 degrees. Its fixed WCS passed 34,811 independently retrieved AllWISE W1 matches without fitting a transform. This validates W1 geometry, not diffuse photometry, visible seams or simulated gas depth.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/wise-wide-infrared/provenance.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
     {
@@ -61,15 +58,14 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/stars/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses.json",
-        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/horalek-widefield/catalogue-stars.json"
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003"
       ]
     },
     {
       "id": "smash-registration-reference",
       "subject": "SMASH noirlab2030a sky frame",
       "status": "included",
-      "finding": "The original SMASH publisher frame remains the image-registration and stellar-selection reference. The former photo-colored lens and parametric source recipe are historical; their retained source.jpg is a publisher AstroPix derivative, not a local observation.",
+      "finding": "The original SMASH publisher frame remains the image-registration and stellar-selection reference. The former photo-colored dataset and parametric source recipe are historical; their retained source.jpg is a publisher AstroPix derivative, not a local observation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/provenance.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
@@ -88,9 +84,9 @@
     },
     {
       "id": "saved-appearance",
-      "subject": "Three-lens 2026-09-09 handoff",
+      "subject": "Three-dataset 2026-09-09 handoff",
       "status": "included",
-      "finding": "Superseded by the finite-emission promotion: the three lenses ship with identity appearance controls, and each lens's correction is its fitted tone curve inside the result identity; the new receipt pins the three result ids. Earlier finding (2026-09-14): The saved browser handoff pins VISTA, Horálek and WISE result identities and authored appearance controls. Existing delivery byte targets make restoration reviewable; this 2026-09-14 documentation audit is not a new cold-cache replay or material acceptance.",
+      "finding": "Superseded by the finite-emission promotion: the three datasets ship with identity appearance controls, and each dataset's correction is its fitted tone curve inside the result identity; the new receipt pins the three result ids. Earlier finding (2026-09-14): The saved browser handoff pins VISTA, Horálek and WISE result identities and authored appearance controls. Existing delivery byte targets make restoration reviewable; this 2026-09-14 documentation audit is not a new cold-cache replay or material acceptance.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lens-settings-evidence.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses.json",
@@ -197,8 +193,7 @@
       "finding": "The repaint banks whose handoff failed are retired. The finite-emission bank paints all three axes from one fitted neutral alpha and fades faint texels to neutral below alpha 11, and the app inspection shows no bank banding at Earth, oblique or either 90° side view, but the dedicated XYZ handoff comparison has not been run on this bank. Earlier finding (2026-09-14): Current source-colored density uses shared geometry and alpha, but six historical dedicated handoff comparisons remained failed. Those numerical measurements belong to their recorded banks; successful later interaction checks do not establish rotation stability.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/docs/slice-stability.md",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/RESEARCH.md",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/RESEARCH.md"
       ],
       "revisitWhen": "Run the unchanged same-camera bank-isolation gate on the actual candidate and fix the common material/compositing cause while preserving stars and local texture continuity."
     },
@@ -217,7 +212,7 @@
       "id": "retired-repaint-delivery",
       "subject": "Superseded alignment-density-material-v1 delivery",
       "status": "excluded",
-      "finding": "The previous LMC bank repainted one fixed simulated density with each registered image (144 slices per lens, 943 stars, VISTA default), constrained from the Earth-facing view only and placed on a hand-authored 3x display fit. Its 432 slices and 9 atlases leave the prepared inventory, its compact bake inputs and atlas mapping are removed, and the laboratory bake recipe no longer delivers to the application. Its source record, recipe and retained evidence stay as documents; its README at the last delivering revision keeps its account.",
+      "finding": "The previous LMC bank repainted one fixed simulated density with each registered image (144 slices per dataset, 943 stars, VISTA default), constrained from the Earth-facing view only and placed on a hand-authored 3x display fit. Its 432 slices and 9 atlases leave the prepared inventory, its compact bake inputs and atlas mapping are removed, and the laboratory bake recipe no longer delivers to the application. Its source record, recipe and retained evidence stay as documents; its README at the last delivering revision keeps its account.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/compact-delivery.json",
         "https://noirlab.edu/public/images/noirlab2030a/"
@@ -228,7 +223,7 @@
       "id": "delivery-reproducibility",
       "subject": "Regenerating the delivered bank from checked-in inputs",
       "status": "included",
-      "finding": "6.6 MB of compact replay inputs regenerate the bank through prepare:nebulae. With the laboratory caches moved aside and prepared/ removed, all 726 regenerated slice textures are byte-identical to the promotion output, and the bank, its 9 atlases and the delivery receipt are byte-identical to the first restore; the lab-isolated application gate reproduces them too. The 13 prepared files are published to R2 and restore byte-identically through setup:prepared. The replay applies each lens tone curve; dropping it turns lmc-volume-lenses.test.mts red.",
+      "finding": "6.6 MB of compact replay inputs regenerate the bank through prepare:nebulae. With the laboratory caches moved aside and prepared/ removed, all 726 regenerated slice textures are byte-identical to the promotion output, and the bank, its 9 atlases and the delivery receipt are byte-identical to the first restore; the lab-isolated application gate reproduces them too. The 13 prepared files are published to R2 and restore byte-identically through setup:prepared. The replay applies each dataset tone curve; dropping it turns lmc-volume-datasets.test.mts red.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/compact/inputs.json",
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/volume/node/compact-inputs/finite-emission.ts",
@@ -240,21 +235,19 @@
       "id": "app-acceptance",
       "subject": "Application acceptance of the finite-emission bank",
       "status": "included",
-      "finding": "In the running application, reached by label fly-to: each lens decodes one texture at the Earth framing, a lens switch leaves the world camera unchanged, all 1,042 stars mount, render visible and toggle off, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views were inspected; the side views show line-of-sight extent rather than a sheet.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
-      ]
+      "finding": "In the running application, reached by label fly-to: each dataset decodes one texture at the Earth framing, a dataset switch leaves the world camera unchanged, all 1,042 stars mount, render visible and toggle off, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views were inspected; the side views show line-of-sight extent rather than a sheet.",
+      "evidence": []
     },
     {
-      "id": "per-lens-opacity",
-      "subject": "Per-lens opacity for VISTA and AllWISE",
+      "id": "per-dataset-opacity",
+      "subject": "Per-dataset opacity for VISTA and AllWISE",
       "status": "deferred",
-      "finding": "Every lens recolours one shared opacity fitted to Horálek, so a tone curve can only dim or recolour inside it. After fitting, VISTA stays 16.6% and AllWISE 264% brighter than their own images. Matching them needs a per-lens opacity scale, which gives up part of the one-geometry lens contract; not attempted here.",
+      "finding": "Every dataset recolours one shared opacity fitted to Horálek, so a tone curve can only dim or recolour inside it. After fitting, VISTA stays 16.6% and AllWISE 264% brighter than their own images. Matching them needs a per-dataset opacity scale, which gives up part of the one-geometry dataset contract; not attempted here.",
       "evidence": [
         "https://www.eso.org/public/images/eso1914a/",
         "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
       ],
-      "revisitWhen": "The lens contract admits a per-lens opacity scale, or a re-acquired AllWISE composite with a real stretch is registered."
+      "revisitWhen": "The dataset contract admits a per-dataset opacity scale, or a re-acquired AllWISE composite with a real stretch is registered."
     }
   ]
 }

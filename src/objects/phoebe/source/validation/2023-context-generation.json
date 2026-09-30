@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-phoebe-2023-context-generation@1",
+  "schema": "cssearth-phoebe-2023-context-generation@2",
   "recipe": {
     "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
     "inputs": [
@@ -13,7 +13,7 @@
     "latitudeDegrees": -20,
     "ambient": 0.45,
     "diffuse": 0.55,
-    "lensId": "normal",
+    "datasetId": "normal",
     "displaySampling": "nearest"
   },
   "normalizedMapRgb": {

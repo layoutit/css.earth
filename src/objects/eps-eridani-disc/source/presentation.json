@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "eps-eridani-disc",
   "name": "ε Eridani dust ring",
-  "defaultLens": "dust",
+  "defaultDataset": "dust",
   "bank": {
-    "path": "src/objects/eps-eridani-disc/prepared/lenses.json"
+    "path": "src/objects/eps-eridani-disc/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -14,7 +14,7 @@
   ],
   "sharedInputs": [],
   "inputEvidence": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "dust",
       "label": "ALMA · dust ring, 1.3 mm",

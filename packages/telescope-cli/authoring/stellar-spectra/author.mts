@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Placed stars whose colour lens is a measured spectrum (the `measured` spectrum of stellar-photometric-color.mts): the navigation
+/** Placed stars whose colour dataset is a measured spectrum (the `measured` spectrum of stellar-photometric-color.mts): the navigation
  * marker is that colour as a uniform disc, and the catalogue and surface colours are its hex. All three are deterministic
  * functions of the pinned spectrum, its record and the CIE observer.
  *
@@ -14,10 +14,10 @@ import { MARKER_PATH, starMarker } from '../../src/source-authoring/context-mark
 import { requireArray, requireRecord, requireString, isRecord } from '@cssearth/core';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
-/** Stars whose default lens is the measured-spectrum colour: marker, catalogue and surface colours. */
+/** Stars whose default dataset is the measured-spectrum colour: marker, catalogue and surface colours. */
 export const SPECTRUM_STARS = ['sirius', 'vega', 'hd-209458', 'arcturus', 'altair', 'deneb', 'fomalhaut', 'rigel', 'alpha-centauri-a', 'alpha-centauri-b',
   'aldebaran', 'kepler-186', 'kepler-452', 'wasp-39', 'polaris', 'proxima-centauri', 'k2-18', 'regulus', 'alderamin', 'rasalhague', 'caph', 'beta-pictoris', 'wd-1856-534', 'pds-70'] as const;
-/** Stars with an image lens and a measured-spectrum colour lens beside it: the catalogue and surface colours follow the spectrum, and
+/** Stars with an image dataset and a measured-spectrum colour dataset beside it: the catalogue and surface colours follow the spectrum, and
  * the marker stays the image. */
 export const IMAGE_STARS = ['pi1-gruis', 'betelgeuse', 'r-doradus', 'ce-tauri'] as const;
 
@@ -27,7 +27,7 @@ export async function spectrumColor(id: string) {
   const source = resolve(objects, id, 'source');
   const raster = requireRecord(JSON.parse(await readFile(resolve(source, 'preparation/raster.json'), 'utf8')) as unknown);
   const surface = requireArray(raster.surfaces).map(value => requireRecord(value)).find(value => isRecord(value.science) && value.science.kind === 'stellar-photometric-color');
-  if (!surface) throw new TypeError(`${id} has no colour lens.`);
+  if (!surface) throw new TypeError(`${id} has no colour dataset.`);
   const { color } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), requireRecord(surface.science), requireString(surface.source));
   return hex(color.srgb);
 }

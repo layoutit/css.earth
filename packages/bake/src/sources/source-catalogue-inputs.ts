@@ -11,7 +11,7 @@ export function factsheetCitations(panel: { facts: readonly Fact[]; moreFacts: r
       consumerId: `${object.id}/${fact.id}`, consumerLabel: `${fact.label}: ${fact.value}`,
       objectId: object.id, ownerPath, locator: `/panel/${group}/${index}/source`, citationUrl: citation.url,
       evidence: `Checked ${citation.checked}${citation.path ? ` · ${citation.path}` : ''}${citation.locator ? ` · ${citation.locator}` : ''}`,
-      lensIds: [], limitations: [],
+      datasetIds: [], limitations: [],
     }];
   }));
 }
@@ -31,7 +31,7 @@ export function sourceInventory(manifest: unknown, ownerPath: string, sources: S
   }
   return entries;
 }
-/** Read claim-local citations recursively; metadata never supplies lens or observation edges. */
+/** Read claim-local citations recursively; metadata never supplies dataset or observation edges. */
 export function metadataCitations(raw: unknown, ownerPath: string, sources: SourceResolver): SourceUse[] {
   const edges: SourceUse[] = [], catalog = sourceObject(raw);
   for (const [collection,consumerKind] of [['missions','mission'],['facilities','facility']] as const) {
@@ -44,7 +44,7 @@ export function metadataCitations(raw: unknown, ownerPath: string, sources: Sour
           if (key === 'citations') for (const citation of sourceArray(field,sourceObject)) {
             const id = sourceText(citation.catalogueId); if (!sources[id]) throw new TypeError('Unknown metadata source.');
             edges.push({catalogueId:sources[id].id,kind:'citation',consumerKind,consumerId,consumerLabel,ownerPath,locator:`${locator}/citations`,
-              evidence:`Checked ${sourceText(citation.checkedOn)}${citation.locator ? ` · ${sourceText(citation.locator)}` : ''}${citation.evidence ? ` · ${sourceText(citation.evidence)}` : ''}`,lensIds:[],limitations:[]});
+              evidence:`Checked ${sourceText(citation.checkedOn)}${citation.locator ? ` · ${sourceText(citation.locator)}` : ''}${citation.evidence ? ` · ${sourceText(citation.evidence)}` : ''}`,datasetIds:[],limitations:[]});
           } else walk(field,`${locator}/${key}`);
         }
       };

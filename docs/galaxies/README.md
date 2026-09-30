@@ -4,11 +4,11 @@ The shared world contains **776 sourced galaxy/candidate positions**, seven near
 
 ## LMC: three images, one cloud
 
-Actual app captures at the **same camera**, with catalogue stars enabled and each lens's saved appearance. These are PolyCSS visualizations, not telescope photographs or recovered 3D gas maps. Click an image to inspect it at full size.
+Actual app captures at the **same camera**, with catalogue stars enabled and each dataset's saved appearance. These are PolyCSS visualizations, not telescope photographs or recovered 3D gas maps. Click an image to inspect it at full size.
 
 | ESO VISTA · near infrared | Horálek · optical | NASA WISE · infrared |
 | --- | --- | --- |
-| [![LMC rendered with the ESO VISTA lens](../images/galaxies/lmc-vista-infrared.webp)](../images/galaxies/lmc-vista-infrared.webp) | [![LMC rendered with the Horálek optical lens](../images/galaxies/lmc-horalek-widefield.webp)](../images/galaxies/lmc-horalek-widefield.webp) | [![LMC rendered with the NASA WISE lens](../images/galaxies/lmc-wise-wide-infrared.webp)](../images/galaxies/lmc-wise-wide-infrared.webp) |
+| [![LMC rendered with the ESO VISTA dataset](../images/galaxies/lmc-vista-infrared.webp)](../images/galaxies/lmc-vista-infrared.webp) | [![LMC rendered with the Horálek optical dataset](../images/galaxies/lmc-horalek-widefield.webp)](../images/galaxies/lmc-horalek-widefield.webp) | [![LMC rendered with the NASA WISE dataset](../images/galaxies/lmc-wise-wide-infrared.webp)](../images/galaxies/lmc-wise-wide-infrared.webp) |
 | [ESO original](https://www.eso.org/public/images/eso1914a/) · ESO/VMC Survey | [NOIRLab original](https://noirlab.edu/public/images/iotw2547a/) · NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava) | [WISE data](https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html) · IPAC/NASA; color HiPS by CDS (CNRS/Unistra) |
 
 | Color input actually used | Resolution and field | Registration and interpretation |
@@ -24,10 +24,10 @@ The [source recipe](../../labs/nebula/models/image-candidates.json) retains the 
 | Component | Scientific input | What we prepare |
 | --- | --- | --- |
 | Cloud support and depth | Garver, Nidever, Debattista & Deg (2026), [Dryad simulation](https://datadryad.org/dataset/doi%3A10.5061/dryad.1vhhmgr82); [associated paper](https://doi.org/10.1093/mnras/stag1287) | The 2.2 Gyr snapshot, 1,620,000 LMC stellar particles, deposited into a 266 × 259 × 116 density grid. All selected particles are retained. This is a stellar-mass prior; the snapshot contains no gas particles. |
-| Point stars | [Bonanos et al. (2009)](https://arxiv.org/abs/0905.1328), [CDS J/AJ/138/1003](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | The retained 943-star sample supplies measured sky positions and photometry. Reconstruction assigns deterministic depths using one density/sky reference. All three lenses use identical positions; apparent point size/opacity comes from the magnitude display model. |
-| Surface color | The three registered observations above | Native star removal, then color sampling onto the fixed density. Each lens preserves the same 144 quads and every alpha byte. Uncovered density keeps neutral color. |
+| Point stars | [Bonanos et al. (2009)](https://arxiv.org/abs/0905.1328), [CDS J/AJ/138/1003](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | The retained 943-star sample supplies measured sky positions and photometry. Reconstruction assigns deterministic depths using one density/sky reference. All three datasets use identical positions; apparent point size/opacity comes from the magnitude display model. |
+| Surface color | The three registered observations above | Native star removal, then color sampling onto the fixed density. Each dataset preserves the same 144 quads and every alpha byte. Uncovered density keeps neutral color. |
 
-The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image placement, saturation, detail, brightness and gamma. The [app settings](../../src/objects/lmc/README.md#evidence) retain cloud selection, axis brightness, cutoff and stellar exposure/size. Switching lenses changes the material while retaining the cloud, stars and camera.
+The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image placement, saturation, detail, brightness and gamma. The [app settings](../../src/objects/lmc/README.md#evidence) retain cloud selection, axis brightness, cutoff and stellar exposure/size. Switching datasets changes the material while retaining the cloud, stars and camera.
 
 ## Extragalactic datasets
 
@@ -80,6 +80,6 @@ Image restoration compares geometric coordinates at a fixed relative tolerance o
 
 This independently written TypeScript implementation uses the numerical methods documented in libvips 8.18.3's [reduction and kernel tables](https://github.com/libvips/libvips/blob/v8.18.3/libvips/resample/reduceh.cpp), [Lanczos coefficients](https://github.com/libvips/libvips/blob/v8.18.3/libvips/resample/templates.h) and [alpha conversion](https://github.com/libvips/libvips/blob/v8.18.3/libvips/conversion/premultiply.c), plus Sharp 0.35.3's [byte casts](https://github.com/lovell/sharp/blob/v0.35.3/src/pipeline.cc) and [centered crop](https://github.com/lovell/sharp/blob/v0.35.3/src/common.cc). No third-party source text is incorporated. These method references retain their upstream LGPL-2.1-or-later (libvips) and Apache-2.0 (Sharp) licenses.
 
-[captures.json](../../site/test/fixtures/galaxies/captures.json) preserves historical image paths at its recorded revision, together with the rendering commit, camera URLs, viewport, selected lenses, image hashes and successful checks. [capture-galaxies.mts](../../labs/investigations/capture-galaxies.mts) uses an isolated browser context and the real app, verifies all 943 stars and unchanged camera, and reports script/HTTP errors. No image processing jobs or user browser settings are changed. The screenshots are compressed WebPs with no cropping, resizing or color adjustment.
+[captures.json](../../site/test/fixtures/galaxies/captures.json) preserves historical image paths at its recorded revision, together with the rendering commit, camera URLs, viewport, selected datasets, image hashes and successful checks. [capture-galaxies.mts](../../labs/investigations/capture-galaxies.mts) uses an isolated browser context and the real app, verifies all 943 stars and unchanged camera, and reports script/HTTP errors. No image processing jobs or user browser settings are changed. The screenshots are compressed WebPs with no cropping, resizing or color adjustment.
 
 **Open visual limits:** simulation/observation registration still has an approximately 2.8 kpc model offset; oblique whitening, slice banding and the transition from the interior panorama remain research work. These captures document the current implementation, not a claim that those issues are solved. Continue with the lab's [method](../../labs/nebula/METHOD.md), [research](../../labs/nebula/RESEARCH.md), [next steps](../../labs/nebula/NEXTSTEPS.md) and [slice-stability evidence](../../labs/nebula/docs/slice-stability.md).

@@ -6,7 +6,7 @@
  */
 // The staged bake directory embeds this process's pid so two concurrent bakes
 // never collide on disk; that name must never leak into recorded provenance,
-// or every bake of the same object would write different `lenses.json`
+// or every bake of the same object would write different `datasets.json`
 // bytes. Recorded paths substitute a fixed, reproducible placeholder instead.
 // Anchored to a whole path segment, so a name such as `data.prepared-7/` is left alone.
 const STAGING_DIRECTORY_NAME = /(^|[\\/])\.prepared-\d+(?=[\\/])/;

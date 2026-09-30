@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-css-presentation-profile@1",
+  "schema": "cssearth-css-presentation-profile@2",
   "namespace": "iapetus",
   "mode": "composite",
-  "lensFocus": {
+  "datasetFocus": {
     "infrared": {
       "longitudeDegrees": 123.92578,
       "latitudeDegrees": -5.44922,

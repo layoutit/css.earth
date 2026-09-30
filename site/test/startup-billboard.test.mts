@@ -11,7 +11,7 @@ import { requireSceneObject } from '../objects.mts';
 import { usesDefaultStartupView, readStartupSavedView } from '../startup-billboard.mts';
 import { canUseArrivalBillboard } from '../arrival-billboard.mts';
 
-test('default startup never overwrites a saved camera, lens or context', () => {
+test('default startup never overwrites a saved camera, dataset or context', () => {
   assert.equal(usesDefaultStartupView('https://css.earth/earth/', 'earth'), true);
   assert.equal(usesDefaultStartupView('https://css.earth/', 'earth'), true);
   assert.equal(usesDefaultStartupView('https://css.earth/earth/?embed', 'earth'), true);
@@ -40,7 +40,7 @@ test('startup uses the baked perspective and viewport texture demand before moun
   }
 });
 
- test('saved startup prepares the saved camera and lens instead of default arrival demand', async () => {
+ test('saved startup prepares the saved camera and dataset instead of default arrival demand', async () => {
   const object = requireSceneObject('earth');
   const { descriptor, bytes } = await readPreparedObjectBytes('earth');
   const definition = await loadPreparedCssObject(descriptor, { async read() { return Uint8Array.from(bytes).buffer; } });

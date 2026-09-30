@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "makemake",
   "displayName": "Makemake",
@@ -87,15 +87,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
-        "thumbnail": "makemake-lens-color.webp",
+        "thumbnail": "makemake-dataset-color.webp",
         "surface": "makemake-color@2x.webp",
         "poles": "makemake-poles-color@2x.webp",
         "source": {
@@ -109,7 +109,7 @@
         "id": "illustration",
         "label": "Illustration",
         "qualification": "An artist's surface from NASA's Makemake 3D model; not an observation.",
-        "thumbnail": "makemake-lens-illustration.webp",
+        "thumbnail": "makemake-dataset-illustration.webp",
         "surface": "makemake-illustration@2x.webp",
         "poles": "makemake-poles-illustration@2x.webp",
         "source": {

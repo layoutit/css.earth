@@ -6,7 +6,7 @@ as unresolved; a failed source lookup is not proof of a defect or of fidelity.
 
 ## Trace a view from source to screen
 
-For each affected lens, identify the pinned source product, physical quantity,
+For each affected dataset, identify the pinned source product, physical quantity,
 units/datum, wavelength, acquisition date or date range, valid coverage, spatial
 resolution and transformations. Read the executing recipe, not just its label or
 README. Check that legends, thumbnails, minimaps, pole tiles and world markers
@@ -41,7 +41,7 @@ models and illustrations. In particular:
   as resolved topography or calibrated albedo. Pixel size is not resolving power.
 
 Keep a view's essential qualification in its visible description. Verify the
-actual expanded lens panel, including lenses that have a minimap: a template
+actual expanded dataset panel, including datasets that have a minimap: a template
 conditional can leave accurate descriptions present only in alt text/tooltips.
 
 For spectral cubes, retain the observation, wavelength and geometry companions
@@ -60,8 +60,8 @@ existing scientific-raster interpreter. A surface's fractional `resolutionScale`
 can keep coarse science out of photograph-sized atlases when the scaled packing
 dimensions remain integral. This changes image preparation, not the mesh.
 Check actual leaf backgrounds after selection: a changed sidebar, minimap or
-`data-lens` alone does not prove that the body changed its texture.
-Use concise, body-owned wording rather than a generic disclaimer on every lens.
+`data-dataset` alone does not prove that the body changed its texture.
+Use concise, body-owned wording rather than a generic disclaimer on every dataset.
 
 For released longitude/latitude composition grids, the `mapped-composition`
 acquisition operator converts pinned King et al. SPHERE JSON releases into the

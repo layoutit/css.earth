@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-136352b",
   "displayName": "HD 136352 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by HD 136352; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hd-136352b-lens-shape.webp",
+        "thumbnail": "hd-136352b-dataset-shape.webp",
         "surface": "hd-136352b-surface-shape@2x.webp",
         "poles": "hd-136352b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of HD 136352 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-136352's light, as its colour lens measures it."
+        "notes": "No image or colour of HD 136352 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-136352's light, as its colour dataset measures it."
       }
     ]
   },

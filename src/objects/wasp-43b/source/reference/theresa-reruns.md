@@ -1,6 +1,6 @@
 # ThERESA reruns of the WASP-43b eclipse map
 
-These runs test the Temperature lens against the method that made it. They reran the authors' public mapping code, ThERESA, on the light curve in the Zenodo deposit. Scratch runs, 2026-09-16; the lens shows the deposited map unchanged. The [README](../../README.md) says what the results mean for the lens.
+These runs test the Temperature dataset against the method that made it. They reran the authors' public mapping code, ThERESA, on the light curve in the Zenodo deposit. Scratch runs, 2026-09-16; the dataset shows the deposited map unchanged. The [README](../../README.md) says what the results mean for the dataset.
 
 ## What was run
 

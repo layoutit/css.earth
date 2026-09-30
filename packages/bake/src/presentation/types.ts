@@ -2,7 +2,7 @@ import type { PreparedLeaf, PreparedSeamOutset } from '../scene/index.ts';
 import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 import type { CubicSkyPlan } from '@cssearth/renderer/solar-system/cubic-sky-plan.ts';
 import type { DirectionalSunPlan } from '@cssearth/renderer/solar-system/directional-sun-coordinate.ts';
-import type { LensVolume, ObjectControls } from '@cssearth/renderer/runtime/object-contract.ts';
+import type { DatasetVolume, ObjectControls } from '@cssearth/renderer/runtime/object-contract.ts';
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedAssets } from '@cssearth/renderer/rendering/prepared-residency.ts';
 import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '@cssearth/renderer/rendering/prepared-presentation.ts';
@@ -11,16 +11,16 @@ import type { PreparedTextureLevels } from '@cssearth/renderer/rendering/prepare
 import type { RasterPagePlan } from '../raster/index.ts';
 type SeamRepair = { outset?: PreparedSeamOutset };
 
-export interface Lens {
+export interface Dataset {
   id: string; view?: string; billboardColor: string;
-  /** A dataset that names a companion cloud borrows another lens's plates instead of owning any. */
-  volume?: LensVolume;
+  /** A dataset that names a companion cloud borrows another dataset's plates instead of owning any. */
+  volume?: DatasetVolume;
   surfaceUrl: string; surface2xUrl?: string; polesUrl: string; poles2xUrl?: string;
   materialUrl: string; material2xUrl?: string;
-  /** Emissive bodies: the stationary off-limb context and the limb plate of this lens. */
+  /** Emissive bodies: the stationary off-limb context and the limb plate of this dataset. */
   coronaUrl?: string; corona2xUrl?: string; limbUrl?: string; limb2xUrl?: string;
 }
-export interface Lenses { defaultLens: string; controls: Lens[]; }
+export interface Datasets { defaultDataset: string; controls: Dataset[]; }
 export interface AtlasAddress { frameIndex: number; rowIndex: number; url: string; backgroundPosition: string; backgroundSize: string; }
 export interface Billboard { schema: string; url: string; columns: number; rowCount: number; frameCount: number; presentations: AtlasAddress[]; shadowless: ShadowlessFrame; }
 /** The last lighting frame alone: what a body shows with shadows off. */
@@ -67,10 +67,10 @@ export interface PresentationDraft {
 }
 export interface PresentationInputs {
   namespace: string; mode: 'row-bank-cutaway' | 'composite' | 'emissive';
-  scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan | null;
+  scene: Scene; assets: RasterAssets; datasets: Datasets; sun: DirectionalSunPlan | null;
   solarSource: SolarSource; controls: ObjectControls;
-  /** Authored surface targets (positive-east degrees) a lens selects; composite only. */
-  lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
+  /** Authored surface targets (positive-east degrees) a dataset selects; composite only. */
+  datasetFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
   /** A pulsating star's published light curve as veil opacity over one period (the photometry topic prepares it); emissive only. */
   lightCurve?: { readonly durationMs: number; readonly keyframes: readonly { readonly offset: number; readonly opacity: string }[] };
 }

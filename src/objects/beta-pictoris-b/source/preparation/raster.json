@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/beta-pictoris-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "infrared",
       "output": "beta-pictoris-b-surface-{id}{suffix}.webp",
-      "thumbnail": "beta-pictoris-b-lens-{id}.webp",
+      "thumbnail": "beta-pictoris-b-dataset-{id}.webp",
       "source": "photometry/band-color.json",
       "falseColor": true,
       "science": {

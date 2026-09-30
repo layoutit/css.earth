@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
 import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, MINIMUM_COVERED_SHARE, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
-import { readDefaultLensCoverage, coverageDirection, coveredShare, visibleCoverageShare, faceLensData, readLensCoverages, authoredFocusLenses, bodyFixedCoverage } from '@cssearth/bake/objects/default-view';
+import { readDefaultDatasetCoverage, coverageDirection, coveredShare, visibleCoverageShare, faceDatasetData, readDatasetCoverages, authoredFocusDatasets, bodyFixedCoverage } from '@cssearth/bake/objects/default-view';
 
 type Input = Record<string, any>;
 export interface WorldNavigationOptions { readonly objectDirectory: string; readonly definition: Input; readonly projectRoot?: string; }
@@ -17,7 +17,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const bound = await readAuthoredSources(objectDirectory), descriptor = bound.descriptor;
   // The receipt names the manifest pins each source had, so a later reader can tell which inputs this frame came from.
   const sources = new Map<string, Input>([...bound.sources].map(([id, entry]) => [id, entry.value as Input]));
-  if (definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') throw new TypeError('Physical navigation runtime identity differs.');
+  if (definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@5') throw new TypeError('Physical navigation runtime identity differs.');
   const contextSource = sources.get('world-context');
   if (contextSource) {
     const context = parseWorldContextSource(contextSource);
@@ -73,16 +73,16 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
   // A lit body without photograph frames opens on the side of its default map that has data.
   // A map with next to no data (a shape-only body's empty model map) has no side to face.
-  const read = !observation?.length && light === 'sun' ? await readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
+  const read = !observation?.length && light === 'sun' ? await readDefaultDatasetCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
   const coverage = read && coveredShare(read) >= MINIMUM_COVERED_SHARE ? read : undefined;
-  // The minimap step records the default lens's coverage from its exact mask; a minimap from before that record is read back.
-  const lensCoverages = await readLensCoverages(objectDirectory), recorded = coverage && lensCoverages.get(coverage.lens);
+  // The minimap step records the default dataset's coverage from its exact mask; a minimap from before that record is read back.
+  const datasetCoverages = await readDatasetCoverages(objectDirectory), recorded = coverage && datasetCoverages.get(coverage.dataset);
   const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light,
     coverage: recorded ? bodyFixedCoverage(recorded, placement.mapLeftEdgeLongitudeDeg) : coverage && coverageDirection(coverage) });
   if (coverage && !recorded) {
     const shown = visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, angles));
     const design = visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, LIT_DEFAULT_VIEW));
-    if (shown < design) throw new Error(`${descriptor.id}: the default camera (yaw ${angles.defaultControlYawDegrees.toFixed(1)}) shows ${(shown * 100).toFixed(1)}% of the ${coverage.lens} map's data, less than the design pose's ${(design * 100).toFixed(1)}%.`);
+    if (shown < design) throw new Error(`${descriptor.id}: the default camera (yaw ${angles.defaultControlYawDegrees.toFixed(1)}) shows ${(shown * 100).toFixed(1)}% of the ${coverage.dataset} map's data, less than the design pose's ${(design * 100).toFixed(1)}%.`);
   }
   // Only a solved lane takes the derived pose; a typed lane keeps the camera its own bakes were made for.
   const posed = solved ? poseDefaultCamera(oriented, physical, angles) : null;
@@ -101,10 +101,10 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const tracked = preparePhysicalMaterialTracks({ definition: { ...(posed?.definition ?? oriented), camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
   // A partial map turns the camera toward its data when a reader picks it, by the rule the default camera follows; like the
-  // default pose, only a solved lane takes it. A paged globe's lens cameras are its recipe's own (Earth's cross-sections).
-  const prepared = solved && !sources.has('paged-ellipsoid') ? faceLensData(tracked, { geometry, bodyId: descriptor.id,
-    mapLeftEdgeLongitudeDeg: placement.mapLeftEdgeLongitudeDeg, camera, coverages: lensCoverages,
-    authored: authoredFocusLenses(sources.get('terrestrial'), sources.get('presentation')) }) : tracked;
+  // default pose, only a solved lane takes it. A paged globe's dataset cameras are its recipe's own (Earth's cross-sections).
+  const prepared = solved && !sources.has('paged-ellipsoid') ? faceDatasetData(tracked, { geometry, bodyId: descriptor.id,
+    mapLeftEdgeLongitudeDeg: placement.mapLeftEdgeLongitudeDeg, camera, coverages: datasetCoverages,
+    authored: authoredFocusDatasets(sources.get('terrestrial'), sources.get('presentation')) }) : tracked;
   return { definition: prepared, frame, systemTransform: solved, defaultCamera: posed ? { angles, transform: posed.transform } : null,
     receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
       frame, bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
@@ -154,7 +154,7 @@ function poseSceneDocument(scene: Input, camera: Input, sun: Input | null, pose:
   return document;
 }
 
-/** A lens raster that states where its longitudes start must start where the surface map places them, or it draws turned. */
+/** A dataset raster that states where its longitudes start must start where the surface map places them, or it draws turned. */
 function assertAtlasOrigins(id: string, raster: Input | undefined, placement: SurfaceMapPlacement) {
   const visit = (value: unknown, path: string): void => {
     if (Array.isArray(value)) { value.forEach((entry, index) => visit(entry, `${path}[${index}]`)); return; }
@@ -171,7 +171,7 @@ function assertAtlasOrigins(id: string, raster: Input | undefined, placement: Su
 
 /** Lanes whose system node carries the ecliptic presentation frame directly. */
 function eclipticLane(sources: ReadonlyMap<string, Input>): boolean {
-  return sources.get('shape-model')?.schema === 'cssearth-shape-model@1' || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
+  return sources.get('shape-model')?.schema === 'cssearth-shape-model@2' || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body' || sources.get('paged-ellipsoid')?.schema === 'cssearth-paged-ellipsoid@1';
 }
 

@@ -1,11 +1,11 @@
 {
-  "schema": "cssearth-volume-source-manifest@1",
+  "schema": "cssearth-volume-source-manifest@2",
   "pathBase": "repository",
   "inputs": [
     {
       "id": "stereo-cor1b-n3d-cr2053p1-m10",
       "dependencies": [],
-      "lensId": "electron-density",
+      "datasetId": "electron-density",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

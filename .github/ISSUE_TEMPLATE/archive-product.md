@@ -6,7 +6,7 @@ title: "archive: <mission> <instrument> <product type>"
 
 **Product:** a link to one real product and its label.
 
-**Body and lens:** the body and the view that needs it.
+**Body and dataset:** the body and the view that needs it.
 
 **What fails:** the route you tried and the error, or the capability that is missing.
 

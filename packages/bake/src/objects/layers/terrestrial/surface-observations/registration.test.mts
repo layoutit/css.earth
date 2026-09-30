@@ -96,7 +96,7 @@ test('the body\'s other frames stand in for a map and decide the turn', async ()
   assert.equal(alone.reason, 'one frame and no reference observation');
 });
 
-test('a lens without cameras is left to its own report', async () => {
+test('a dataset without cameras is left to its own report', async () => {
   const frame = { ...photograph('x', J2000 + 3.1, upright, upright), detector: undefined };
   const report = await referenceRegistration([frame], {} as LoadContext);
   assert.equal(report.kind, 'none');
@@ -129,7 +129,7 @@ test('a refinement applies the named reference\'s median only when it is decisiv
   assert.throws(() => parseRefinement({ by: 'relief', agreementDegrees: 45 }), /under thirty/);
 });
 
-test('the silhouette tilts a lens whose stated pole is wrong, and the tilted lens scores like the right one', () => {
+test('the silhouette tilts a dataset whose stated pole is wrong, and the tilted dataset scores like the right one', () => {
   const view = (id: string, epochJd: number) => photograph(id, epochJd, upright, tilted, 256, 'deconvolved');
   const frames = [view('a', J2000 + 3.1), view('b', J2000 + 3.1 + 2 / 1440), view('c', J2000 + 3.6), view('d', J2000 + 3.6 + 2 / 1440)];
   const before = silhouetteRegistration(frames);

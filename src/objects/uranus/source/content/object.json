@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "uranus",
   "displayName": "Uranus",
@@ -113,14 +113,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Visible color",
-        "thumbnail": "/scenes/uranus/uranus-lens-normal.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-normal.webp",
         "surface": "/scenes/uranus/uranus-surface-normal.webp",
         "poles": "/scenes/uranus/uranus-poles-normal.webp",
         "falseColor": false,
@@ -133,7 +133,7 @@
       {
         "id": "methane",
         "label": "Methane",
-        "thumbnail": "/scenes/uranus/uranus-lens-methane.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-methane.webp",
         "surface": "/scenes/uranus/uranus-surface-methane.webp",
         "poles": "/scenes/uranus/uranus-poles-methane.webp",
         "falseColor": true,
@@ -175,7 +175,7 @@
       {
         "id": "near-infrared",
         "label": "Near infrared",
-        "thumbnail": "/scenes/uranus/uranus-lens-near-infrared.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-near-infrared.webp",
         "surface": "/scenes/uranus/uranus-surface-near-infrared.webp",
         "poles": "/scenes/uranus/uranus-poles-near-infrared.webp",
         "falseColor": true,
@@ -222,7 +222,7 @@
           "group": "opal-visible",
           "label": "2014-11-08"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2014a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2014a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2014a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2014a@2x.webp",
         "falseColor": false,
@@ -243,7 +243,7 @@
           "group": "opal-visible",
           "label": "2015-09-12"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2015a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2015a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2015a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2015a@2x.webp",
         "falseColor": false,
@@ -264,7 +264,7 @@
           "group": "opal-visible",
           "label": "2016-09-29"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2016a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2016a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2016a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2016a@2x.webp",
         "falseColor": false,
@@ -285,7 +285,7 @@
           "group": "opal-visible",
           "label": "2017-10-25"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2017a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2017a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2017a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2017a@2x.webp",
         "falseColor": false,
@@ -306,7 +306,7 @@
           "group": "opal-visible",
           "label": "2018-11-16"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2018a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2018a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2018a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2018a@2x.webp",
         "falseColor": false,
@@ -327,7 +327,7 @@
           "group": "opal-visible",
           "label": "2019-11-18"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2019a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2019a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2019a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2019a@2x.webp",
         "falseColor": false,
@@ -348,7 +348,7 @@
           "group": "opal-visible",
           "label": "2020-10-08"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2020a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2020a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2020a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2020a@2x.webp",
         "falseColor": false,
@@ -369,7 +369,7 @@
           "group": "opal-visible",
           "label": "2021-12-08"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2021a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2021a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2021a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2021a@2x.webp",
         "falseColor": false,
@@ -390,7 +390,7 @@
           "group": "opal-visible",
           "label": "2022-11-09"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2022a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2022a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2022a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2022a@2x.webp",
         "falseColor": false,
@@ -411,7 +411,7 @@
           "group": "opal-visible",
           "label": "2023-09-17"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2023a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2023a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2023a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2023a@2x.webp",
         "falseColor": false,
@@ -432,7 +432,7 @@
           "group": "opal-visible",
           "label": "2024-11-09"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2024a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2024a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2024a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2024a@2x.webp",
         "falseColor": false,
@@ -453,7 +453,7 @@
           "group": "opal-visible",
           "label": "2025-10-23"
         },
-        "thumbnail": "/scenes/uranus/uranus-lens-visible-2025a.webp",
+        "thumbnail": "/scenes/uranus/uranus-dataset-visible-2025a.webp",
         "surface": "/scenes/uranus/uranus-surface-visible-2025a@2x.webp",
         "poles": "/scenes/uranus/uranus-poles-visible-2025a@2x.webp",
         "falseColor": false,
@@ -539,7 +539,7 @@
     {
       "label": "Hubble OPAL",
       "role": "imagery",
-      "description": "Texture & lenses",
+      "description": "Texture & datasets",
       "href": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
     },
     {

@@ -4,11 +4,11 @@
  *
  *   node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar <object id>
  *
- * The inputs are exactly what the circumstellar author displays for each edge-on lens (packages/telescope-cli/authoring/circumstellar/author.mts
+ * The inputs are exactly what the circumstellar author displays for each edge-on dataset (packages/telescope-cli/authoring/circumstellar/author.mts
  * edgeOnSolveInputs): the stretched, tapered channels on the recipe's grid and the measured midplane. Pixels with no data (the
  * coronagraph's inner edge, beyond an image's footprint) are given no weight, and a voxel only they see takes its symmetry
- * group's emission. The command writes, into the object's source/, the density grid `density-<lens>.ktx2` in the encoding the
- * baker reads and the receipt `reconstruction-<lens>.json`: the channel digest it was solved from, the method settings, the
+ * group's emission. The command writes, into the object's source/, the density grid `density-<dataset>.ktx2` in the encoding the
+ * baker reads and the receipt `reconstruction-<dataset>.json`: the channel digest it was solved from, the method settings, the
  * projection error per channel and a depth check against extrusion. The author then uses that grid only while the digest
  * still matches the channels it displays. */
 import { readFile, writeFile } from 'node:fs/promises';
@@ -26,9 +26,9 @@ const root = process.cwd(), sourceDirectory = resolve(root, 'src/objects', id, '
 // paths they resolve from their own location stay the repository's.
 const { edgeOnSolveInputs, exposureAndOpacity, reconstructionPath } = await circumstellarAuthor(root);
 const { encodeDensityKtx2 } = await densityEncoder(root);
-const raw = JSON.parse(await readFile(resolve(sourceDirectory, 'circumstellar.json'), 'utf8')) as { lenses: { id: string; reconstruction?: { tau?: unknown; iterations?: unknown } }[] };
-const { recipe, lenses } = await edgeOnSolveInputs(id);
-if (!lenses.length) throw new Error(`${id} has no edge-on lens to reconstruct.`);
+const raw = JSON.parse(await readFile(resolve(sourceDirectory, 'circumstellar.json'), 'utf8')) as { datasets: { id: string; reconstruction?: { tau?: unknown; iterations?: unknown } }[] };
+const { recipe, datasets } = await edgeOnSolveInputs(id);
+if (!datasets.length) throw new Error(`${id} has no edge-on dataset to reconstruct.`);
 
 /** How much of a midplane column's emission lies where the disc radius is within `width` of the column's projected distance,
  * the tangent point an edge-on disc concentrates light at, against the share a column spread evenly along the grid (an
@@ -54,10 +54,10 @@ function tangentShare(volume: Float32Array, inputs: EdgeOnSolveInputs, size: num
   return { projectedUnits, widthUnits: width, reconstructed: mean(results), extrusion: mean(uniform) };
 }
 
-for (const inputs of lenses) {
-  const { lens, shown, sky } = inputs, size = recipe.grid.size, step = 2 * recipe.grid.halfUnits / size, pixels = size * size;
-  if (sky.size !== size) throw new Error(`${lens.id}: the sky plane is ${sky.size} samples, the grid ${size}.`);
-  const settings = raw.lenses.find(entry => entry.id === lens.id)?.reconstruction ?? {};
+for (const inputs of datasets) {
+  const { dataset, shown, sky } = inputs, size = recipe.grid.size, step = 2 * recipe.grid.halfUnits / size, pixels = size * size;
+  if (sky.size !== size) throw new Error(`${dataset.id}: the sky plane is ${sky.size} samples, the grid ${size}.`);
+  const settings = raw.datasets.find(entry => entry.id === dataset.id)?.reconstruction ?? {};
   const tau = typeof settings.tau === 'number' ? settings.tau : 0.001, iterations = typeof settings.iterations === 'number' ? settings.iterations : 200;
   const grid: InferenceGrid = { width: size, height: size, depth: size };
   // The star is the grid's centre; the axis is the disc normal in the grid's own axes (x column, y row, z toward the observer).
@@ -74,13 +74,13 @@ for (const inputs of lenses) {
   const solvedImages: Buffer[] = [];
   for (const [c, channel] of shown.entries()) {
     const image = Float32Array.from(channel, (v, p) => weights[p]! > 0 ? Math.max(0, v) : 0), pixels = Buffer.from(image.buffer);
-    // A lens that feeds one band to every channel is solved once.
+    // A dataset that feeds one band to every channel is solved once.
     const again = solvedImages.findIndex(previous => previous.equals(pixels));
     if (again >= 0) { volumes.push(volumes[again]!); reports.push(reports[again]!); fills.push(fills[again]!); solvedImages.push(pixels); continue; }
     const started = Date.now();
     const result = inferEmission({ grid, image, weights, fillable, prior, tau, iterations,
-      onIteration: report => { if (report.iteration % 25 === 0) console.log(`${lens.id} channel ${c}: iteration ${report.iteration}, projection error ${report.relativeProjectionError.toFixed(4)}`); } });
-    console.log(`${lens.id} channel ${c}: ${((Date.now() - started) / 1000).toFixed(0)} s, projection error ${result.report.relativeProjectionError.toFixed(4)}, ${result.fill.filledVoxels} voxels filled from their groups`);
+      onIteration: report => { if (report.iteration % 25 === 0) console.log(`${dataset.id} channel ${c}: iteration ${report.iteration}, projection error ${report.relativeProjectionError.toFixed(4)}`); } });
+    console.log(`${dataset.id} channel ${c}: ${((Date.now() - started) / 1000).toFixed(0)} s, projection error ${result.report.relativeProjectionError.toFixed(4)}, ${result.fill.filledVoxels} voxels filled from their groups`);
     solvedImages.push(pixels); volumes.push(result.volume); reports.push(result.report); fills.push(result.fill);
   }
   // Solver units reproject as the column sum over the square root of the depth; per unit length that is v / (sqrt(depth) step),
@@ -88,7 +88,7 @@ for (const inputs of lenses) {
   const perLength = 1 / (Math.sqrt(size) * step);
   let peak = 0;
   for (const volume of volumes) for (const v of volume) peak = Math.max(peak, v * perLength);
-  if (!(peak > 0)) throw new Error(`${lens.id}: the reconstruction is empty.`);
+  if (!(peak > 0)) throw new Error(`${dataset.id}: the reconstruction is empty.`);
   const rgba = new Uint8Array(pixels * size * 4), integral = volumes.map(() => new Float64Array(pixels));
   let filledVoxels = 0;
   for (let voxel = 0; voxel < pixels * size; voxel++) {
@@ -101,11 +101,11 @@ for (const inputs of lenses) {
     }
     if (any) filledVoxels++;
   }
-  const ktx2 = encodeDensityKtx2({ width: size, height: size, depth: size, encodedRgba: rgba }, 9), file = `density-${lens.id}.ktx2`;
-  const { exposureGain, opacity } = exposureAndOpacity(lens.topAlpha, peak, integral);
+  const ktx2 = encodeDensityKtx2({ width: size, height: size, depth: size, encodedRgba: rgba }, 9), file = `density-${dataset.id}.ktx2`;
+  const { exposureGain, opacity } = exposureAndOpacity(dataset.topAlpha, peak, integral);
   const mean = volumes[0]!.map((_, i) => volumes.reduce((total, volume) => total + volume[i]!, 0) / volumes.length);
   const record: EdgeOnReconstruction = {
-    schema: 'cssearth-circumstellar-reconstruction@1', objectId: id, lensId: lens.id,
+    schema: 'cssearth-circumstellar-reconstruction@2', objectId: id, datasetId: dataset.id,
     grid: { size, halfUnits: recipe.grid.halfUnits },
     method: { name: 'axial-symmetry emission inference', paper: 'Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216',
       implementation: 'labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts', command: `node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar ${id}`,
@@ -120,6 +120,6 @@ for (const inputs of lenses) {
     },
   };
   await writeFile(resolve(sourceDirectory, file), ktx2);
-  await writeFile(resolve(sourceDirectory, reconstructionPath(lens)), `${JSON.stringify(record, null, 2)}\n`);
-  console.log(`RECONSTRUCTED ${id}/${lens.id}: ${JSON.stringify(record.checks)}`);
+  await writeFile(resolve(sourceDirectory, reconstructionPath(dataset)), `${JSON.stringify(record, null, 2)}\n`);
+  console.log(`RECONSTRUCTED ${id}/${dataset.id}: ${JSON.stringify(record.checks)}`);
 }

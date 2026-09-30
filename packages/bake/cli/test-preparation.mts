@@ -88,7 +88,7 @@ function run(args: string[]) {
 }
 // `.mts` entries load natively; esbuild refuses to mark an entry point itself external.
 const native = ['site/test/prepare-spatial-context.test.mts',
-  ...(universeOnly ? [] : ['site/test/folded-transit.test.mts', 'src/platform/equirectangular-illustration.test.mts', 'src/platform/interpret-source-verification.test.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts', 'src/platform/astrometric-sky-registration.test.mts', 'src/platform/default-camera.test.mts', 'src/platform/lens-facing.test.mts', 'src/platform/solar-presentation-frame.test.mts', 'src/platform/solar-view-direction.test.mts', 'site/test/lonlat-slice-table.test.mts', 'src/objects/europa/scientific-focus.test.mts']),
+  ...(universeOnly ? [] : ['site/test/folded-transit.test.mts', 'src/platform/equirectangular-illustration.test.mts', 'src/platform/interpret-source-verification.test.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts', 'src/platform/astrometric-sky-registration.test.mts', 'src/platform/default-camera.test.mts', 'src/platform/dataset-facing.test.mts', 'src/platform/solar-presentation-frame.test.mts', 'src/platform/solar-view-direction.test.mts', 'site/test/lonlat-slice-table.test.mts', 'src/objects/europa/scientific-focus.test.mts']),
   ...(universeOnly ? [] : ['packages/bake/src/astronomy/hosted-eccentric.oracle.test.mts',
     'packages/bake/src/astronomy/hosted-orbit-source.test.mts', 'packages/bake/src/photometry/picaso-limb.test.mts']),
   ...(universeOnly ? [] : ['packages/bake/src/presentation/emissive-plates.test.mts', 'packages/bake/src/raster/raster-pages.test.mts',

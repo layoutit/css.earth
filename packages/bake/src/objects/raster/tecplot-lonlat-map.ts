@@ -33,9 +33,9 @@ export function parseTecplotLonLat(text: string, path: string) {
 }
 
 export async function loadTecplotLonLatMap(root: string, value: unknown) {
-  const lens = requireRecord(value, 'Tecplot map lens'), path = requireString(lens.path, 'path'), variable = requireString(lens.variable, 'variable');
+  const dataset = requireRecord(value, 'Tecplot map dataset'), path = requireString(dataset.path, 'path'), variable = requireString(dataset.variable, 'variable');
   if (path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError(`${path}: a Tecplot map must be inside the source directory.`);
-  const outlines = lens.outlineLatitudes === undefined ? [] : requireArray(lens.outlineLatitudes, 'outlineLatitudes').map(v => requireFiniteNumber(v, 'outline latitude'));
+  const outlines = dataset.outlineLatitudes === undefined ? [] : requireArray(dataset.outlineLatitudes, 'outlineLatitudes').map(v => requireFiniteNumber(v, 'outline latitude'));
   const table = parseTecplotLonLat(await readFile(resolve(root, path), 'utf8'), path);
   const column = table.variables.indexOf(variable);
   if (column < 2) throw new TypeError(`${path}: no map variable "${variable}"; it has ${table.variables.slice(2).map(v => `"${v}"`).join(', ')}.`);

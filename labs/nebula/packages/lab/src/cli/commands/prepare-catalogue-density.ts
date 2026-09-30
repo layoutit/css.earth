@@ -106,7 +106,7 @@ export async function prepareCatalogueDensity(configPath: string) {
     const envelope = { schema: 'cssearth-prepared-object@1', id: config.id, type: 'density-volume', format: 'cssearth-density-volume@1', data };
     const preparedBytes = Buffer.from(JSON.stringify(envelope) + '\n');
     await writeFile(resolve(prepared, 'volume.json'), preparedBytes);
-    await json(resolve(output, 'object.json'), { schema: 'cssearth-object@1', id: config.id, type: 'density-volume',
+    await json(resolve(output, 'object.json'), { schema: 'cssearth-object@2', id: config.id, type: 'density-volume',
         properties: { volume: frame, preparation: { source: 'source/volume.json' } },
         prepared: { format: envelope.format, url: 'prepared/volume.json' } });
     await json(resolve(output, 'receipt.json'), { ...provenance, prepared: { path: 'prepared/volume.json', leaves: data.resources.length,

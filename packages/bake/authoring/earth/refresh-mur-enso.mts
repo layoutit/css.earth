@@ -31,17 +31,17 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   const recipe = { kind: 'gibs-mur-imagery', date: receipt.date, baseline: receipt.baseline, checked: receipt.checked, advisory };
   map.scientific = recipe;
   const content = await readRefreshContent(join(source, 'content/object.json'));
-  const lens = murEnsoContent(recipe);
-  const lensIndex = content.lenses.controls.findIndex(lens => lens.id === 'enso');
-  if (lensIndex < 0) throw new Error('ENSO content is missing.');
-  content.lenses.controls[lensIndex] = lens;
-  const bindings = await readRefreshBindings(join(source, 'content/lens-bindings.json'));
-  const binding = bindings.controls.find(lens => lens.id === 'enso');
+  const dataset = murEnsoContent(recipe);
+  const datasetIndex = content.datasets.controls.findIndex(dataset => dataset.id === 'enso');
+  if (datasetIndex < 0) throw new Error('ENSO content is missing.');
+  content.datasets.controls[datasetIndex] = dataset;
+  const bindings = await readRefreshBindings(join(source, 'content/dataset-bindings.json'));
+  const binding = bindings.controls.find(dataset => dataset.id === 'enso');
   if (!binding) throw new Error('ENSO presentation binding is missing.');
-  binding.qualification = lens.notes;
+  binding.qualification = dataset.notes;
   updates.set('preparation/paged-ellipsoid.json', Buffer.from(json(config)));
   updates.set('content/object.json', Buffer.from(json(content)));
-  updates.set('content/lens-bindings.json', Buffer.from(json(bindings)));
+  updates.set('content/dataset-bindings.json', Buffer.from(json(bindings)));
   const manifest = await readRefreshManifest(join(source, 'manifest.json'));
   const origins = {
     'mur-gibs-tiles.tar.gz': `https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/${murLayer}/default/${receipt.date}/1km/6/{row}/{col}.png`,

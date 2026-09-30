@@ -35,15 +35,15 @@ The spectral source has 102,934 samples at −1 and 5,281 at +1. The TIFF does n
 
 ### Checks for this change
 
-Prepared plus this branch’s Ryugu recipes and geographic-reader change. Source verification passed for all 37 pinned entries. The package check passed with six lenses and 790 native PolyCSS `u` raster faces. Camera, runtime tree and surface-hit data match the base exactly. All 38 existing non-feature runtime assets match their base inventory entries; the daily USGS feature export was refreshed because the old ZIP pin no longer downloads, retaining 14 displayed places. The 35 KB native export is now checked in so a later upstream refresh cannot break this snapshot.
+Prepared plus this branch’s Ryugu recipes and geographic-reader change. Source verification passed for all 37 pinned entries. The package check passed with six datasets and 790 native PolyCSS `u` raster faces. Camera, runtime tree and surface-hit data match the base exactly. All 38 existing non-feature runtime assets match their base inventory entries; the daily USGS feature export was refreshed because the old ZIP pin no longer downloads, retaining 14 displayed places. The 35 KB native export is now checked in so a later upstream refresh cannot break this snapshot.
 
-All 50 runtime assets were published through the existing content-addressed asset publisher and installed into an empty temporary destination: 29,095,665 bytes, 50 downloads, zero reused files. The three added lenses contribute 12.45 MB of prepared files. This is scene-asset installation evidence; it excludes shared shell assets and browser network traffic. The temporary install was removed after verification.
+All 50 runtime assets were published through the existing content-addressed asset publisher and installed into an empty temporary destination: 29,095,665 bytes, 50 downloads, zero reused files. The three added datasets contribute 12.45 MB of prepared files. This is scene-asset installation evidence; it excludes shared shell assets and browser network traffic. The temporary install was removed after verification.
 
 The new geographic-reader fixture checks north/south and east/west cell order, negative values, real zero, NoData, bounds, masks and rejection of changed units/georeferences. Independent Python `struct` reads of native TIFF strips checked thermal cells (column,row) (300,900)=280, (900,450)=−9999, (1800,900)=230 and (2700,1350)=200. Spectral cells at those same indices are −0.03278164193, 0.04955266789, 0.04545980319 and 0.01099606510; ONC cell (1800,900) is I/F 0.01780111507. These checks validate numeric decoding and map orientation, not the scientific model’s uncertainty.
 
 `pnpm typecheck:preparation` passed. Source/catalogue checks: 68 passed, one unrelated Moon prepared-factsheet mismatch failed, and one unrelated missing-reference test was skipped. The raster checks passed except the existing Ceres test’s missing preparation recipe. The focused Ryugu package and geographic-reader checks passed.
 
-**Browser qualification is pending.** The existing server at port 4278 returns HTTP 500 because main requires missing Helix prepared lenses. No nebula reconstruction, extra server or headed browser was started. Earlier Ryugu browser evidence below applies only to the older three views. Close zoom, polar/coverage boundaries, all lighting states and mobile interaction still need inspection for the new lenses before this PR is ready to merge.
+**Browser qualification is pending.** The existing server at port 4278 returns HTTP 500 because main requires missing Helix prepared datasets. No nebula reconstruction, extra server or headed browser was started. Earlier Ryugu browser evidence below applies only to the older three views. Close zoom, polar/coverage boundaries, all lighting states and mobile interaction still need inspection for the new datasets before this PR is ready to merge.
 
 ### Earlier evidence
 
@@ -58,7 +58,7 @@ Each atlas remains 2048 × 6400 pixels, with 790 retained faces. The scene bytes
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 2.775 / 7.243 / 19.166 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 
-The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
+The earlier source notes report Headless Chrome 152 checks of the then-selected datasets with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
 ## Known problems
 
@@ -68,7 +68,7 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 Landing sites: 1 spacecraft landing, touchdown or impact sites are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
 
-Earlier named-features run of 2026-09-12: the catalogue labels 13 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Urashima from the sidebar search with no console errors or failed requests.
+Earlier named-features run of 2026-09-12: the catalogue labels 13 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every dataset and pinned Urashima from the sidebar search with no console errors or failed requests.
 
 Fine triangle-edge artifacts remain visible in smooth areas, particularly Itokawa elevation. They persisted in a flat-color diagnostic and existing PolyCSS overlap variants; they are a rendering limitation, not source terrain.
 

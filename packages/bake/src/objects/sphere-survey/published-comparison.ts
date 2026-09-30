@@ -1,11 +1,11 @@
 /**
- * Measure how a ground-based photograph lens reproduces the comparison figure of the paper that published its frames.
+ * Measure how a ground-based photograph dataset reproduces the comparison figure of the paper that published its frames.
  *
  *   node packages/bake/cli/published-comparison.mts <object-id>          report the measurements
  *   node packages/bake/cli/published-comparison.mts <object-id> --write  also write evidence/published-comparison.json and its image
  *
  * The body's `source/preparation/published-comparison.json` names the figure: the paper's address, the figure's image
- * object and size, which rows hold photographs and the model the lens rides, and which lens frame each column shows, in
+ * object and size, which rows hold photographs and the model the dataset rides, and which dataset frame each column shows, in
  * which dark band. Everything is measured through the pipeline's own cameras, derived from the body's observer-cameras record.
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
@@ -14,7 +14,7 @@ import sharp from 'sharp';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { readPdfImage } from '../../sources/index.ts';
 import { lamBytes } from './lam.ts';
-import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForLens, observerCaster, turnedOrientation, type TurnableCaster } from '../layers/terrestrial/index.ts';
+import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForDataset, observerCaster, turnedOrientation, type TurnableCaster } from '../layers/terrestrial/index.ts';
 import { decodeCalibratedCamera, loadCameraShape } from '../geometry/index.ts';
 import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from '../layers/terrestrial/index.ts';
 
@@ -28,8 +28,8 @@ export async function measurePublishedComparison(objectId: string, { root, adopt
   const specPath = resolve(sourceDirectory, COMPARISON_SPEC_FILE);
   const stated = JSON.parse(await readFile(specPath, 'utf8')), spec = parseComparisonSpec(stated);
   const { record, recipe, frames } = await loadObserverCameraInputs(sourceDirectory);
-  if (spec.lensId !== record.lensId) throw new TypeError(`The comparison names lens ${spec.lensId}; the observer cameras derive ${record.lensId}.`);
-  const mesh = await loadCameraShape(sourceDirectory, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], record.lensId));
+  if (spec.datasetId !== record.datasetId) throw new TypeError(`The comparison names dataset ${spec.datasetId}; the observer cameras derive ${record.datasetId}.`);
+  const mesh = await loadCameraShape(sourceDirectory, radialTerrainForDataset(recipe as unknown as Parameters<typeof radialTerrainForDataset>[0], record.datasetId));
 
   // The paper, read from its address (a cited paper is not kept in the repository), then the figure, by its object number.
   const paper = await lamBytes(spec.document.url);
@@ -59,7 +59,7 @@ export async function measurePublishedComparison(objectId: string, { root, adopt
   for (const [index, column] of spec.columns.entries()) {
     if (column.frame === null) continue;
     const camera = atZero.find(entry => entry.id === column.frame);
-    if (!camera) throw new TypeError(`Figure column ${column.label} names ${column.frame}, which is not a frame of lens ${spec.lensId}.`);
+    if (!camera) throw new TypeError(`Figure column ${column.label} names ${column.frame}, which is not a frame of dataset ${spec.datasetId}.`);
     // The survey figures label each column with its frame's exposure start to the second.
     if (!(Math.abs(Date.parse(`${column.label}Z`) - Date.parse(`${camera.exposure.start}Z`)) < 1000))
       throw new TypeError(`Figure column ${column.label} names ${column.frame}, whose exposure starts at ${camera.exposure.start}.`);
@@ -85,7 +85,7 @@ export async function measurePublishedComparison(objectId: string, { root, adopt
     visuals.push({ label: column.label, model, photograph, ours: drawn.mask, cellModel: spec.rows.model, cellImage: spec.rows.image, column: index });
   }
   const evidence = {
-    schema: COMPARISON_EVIDENCE_SCHEMA, objectId, lensId: spec.lensId, source: spec.source, figure: spec.figure,
+    schema: COMPARISON_EVIDENCE_SCHEMA, objectId, datasetId: spec.datasetId, source: spec.source, figure: spec.figure,
     document: { url: spec.document.url, object: spec.document.object, width: image.width, height: image.height },
     rotation: { path: record.rotation.path, columnOrder: record.rotation.columnOrder ?? null },
     columns,

@@ -60,7 +60,7 @@ test('compilation retains every original leaf and remaps selection, facing and a
     nodes: [node(-1, 'polycss-camera'), node(0, 'polycss-scene source-scene'), node(1, 'body'),
       ...triangles.map((_, i) => node(2, null, `transform:translateZ(${i}px)`)), node(-1, 'overlay')] },
     surfaceHit: { target: 2, triangles },
-    variants: [{ when: { lensId: null }, required: [], writes: [{ target: 2, kind: 'texture', name: '--texture', resource: 'map', quoted: true }], materials: [] }],
+    variants: [{ when: { datasetId: null }, required: [], writes: [{ target: 2, kind: 'texture', name: '--texture', resource: 'map', quoted: true }], materials: [] }],
     materials: [], viewBindings: [{ target: 131, kind: 'silhouette-fit', minimumRadius: 0, unitScale: 1 }], animations: [] } satisfies PreparedPresentationDefinition;
   const original = JSON.stringify(source);
   const result = prepareDepthPartitions(source, { target: 2, leaves: triangles.map((_, i) => i + 3),

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/toi-2257b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "toi-2257b-surface-{id}{suffix}.webp",
-      "thumbnail": "toi-2257b-lens-{id}.webp",
+      "thumbnail": "toi-2257b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc683, the colour lens of toi-2257 (src/objects/toi-2257/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc683, the colour dataset of toi-2257 (src/objects/toi-2257/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "toi-2257",
           "srgb": "#ffc683",
-          "source": "the colour lens of toi-2257 (src/objects/toi-2257/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of toi-2257 (src/objects/toi-2257/source/photometry/stellar-color.json)"
         }
       }
     }

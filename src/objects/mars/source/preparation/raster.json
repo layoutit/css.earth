@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/mars/",
   "sourceWidth": 4096,
   "sourceHeight": 2048,
@@ -22,7 +22,7 @@
       "source": "surface/mars-viking-mdim21-color-1km.jpg",
       "falseColor": false,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "nativeSourcePoles": true
     },
     {
@@ -30,7 +30,7 @@
       "source": "science/usgs/elevation.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -77,14 +77,14 @@
       "source": "lenses/themis-ir-day-z3.png",
       "falseColor": false,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp"
+      "thumbnail": "mars-dataset-{id}.webp"
     },
     {
       "id": "water-equivalent",
       "source": "grs/h2o_5x5.tab",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "resolutionScale": 0.25,
       "science": {
         "kind": "terrestrial-scientific",
@@ -124,7 +124,7 @@
       "source": "grs/cl_5x5.tab",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "resolutionScale": 0.25,
       "science": {
         "kind": "terrestrial-scientific",
@@ -164,7 +164,7 @@
       "source": "grs/fe_5x5.tab",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "resolutionScale": 0.25,
       "science": {
         "kind": "terrestrial-scientific",
@@ -204,7 +204,7 @@
       "source": "grs/si_5x5.tab",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "resolutionScale": 0.25,
       "science": {
         "kind": "terrestrial-scientific",
@@ -244,7 +244,7 @@
       "source": "grs/k_5x5.tab",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "resolutionScale": 0.25,
       "science": {
         "kind": "terrestrial-scientific",
@@ -284,7 +284,7 @@
       "source": "grs/th_5x5.tab",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "resolutionScale": 0.25,
       "science": {
         "kind": "terrestrial-scientific",
@@ -324,7 +324,7 @@
       "source": "geology/SIM3292_Global_Geology.shp",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "science": {
         "kind": "terrestrial-scientific",
         "id": "geology",
@@ -588,7 +588,7 @@
       "source": "magnetic/radial-field.dat",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "science": {
         "kind": "terrestrial-scientific",
         "id": "magnetic",
@@ -621,7 +621,7 @@
       "source": "crust/thickness.dat",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "science": {
         "kind": "terrestrial-scientific",
         "id": "crust",
@@ -658,7 +658,7 @@
       "source": "science/usgs/tes-albedo.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -722,7 +722,7 @@
       "source": "science/tes/global_ti_night_2007.img",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "pds3-grid",
@@ -770,7 +770,7 @@
       "source": "science/tes/dci.vicar",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "vicar-grid",
@@ -808,7 +808,7 @@
       "source": "catalogues/dune-fields/mars-dune-fields.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -869,7 +869,7 @@
       "source": "catalogues/valley-networks/mars-valley-networks.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -920,7 +920,7 @@
       "source": "catalogues/alluvial-fans/mars-alluvial-fans.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -971,7 +971,7 @@
       "source": "catalogues/gullies/mars-gullies.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -1042,7 +1042,7 @@
       "source": "catalogues/glacier-like-forms/mars-glacier-like-forms.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -1093,7 +1093,7 @@
       "source": "catalogues/recessional-glfs/mars-recessional-glfs.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -1144,7 +1144,7 @@
       "source": "catalogues/glacial-valleys/mars-glacial-valleys.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -1195,7 +1195,7 @@
       "source": "catalogues/recent-activity/mars-recent-activity.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -1266,7 +1266,7 @@
       "source": "catalogues/hydrous-minerals/mars-hydrous-minerals.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -1327,7 +1327,7 @@
       "source": "catalogues/aqueous-minerals/mars-aqueous-classes.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,
@@ -1403,7 +1403,7 @@
       "source": "catalogues/chloride/mars-chloride-deposits.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
       "underlay": {
         "surface": "normal",
         "brightness": 0.35,

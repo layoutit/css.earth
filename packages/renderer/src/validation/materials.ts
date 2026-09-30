@@ -19,7 +19,7 @@ export function requireMaterials(value: unknown, tree: PreparedTree, resources: 
     if (!banks.length) fail('material banks are empty'); unique(banks.map(bank => bank.id), 'material banks');
     for (const bank of banks) {
       text(bank.id, 'bank id'); const frames = array(bank.frames, 'frame addresses');
-      // A fixed-only bank (a lens's one shadowless frame) carries its fixed address and no frames.
+      // A fixed-only bank (a dataset's one shadowless frame) carries its fixed address and no frames.
       if (frames.length !== count && !(frames.length === 0 && bank.fixed !== null && bank.rows === undefined)) fail('every material frame requires an address');
       frames.forEach((input, index) => { address(input, resources); if (record(input, 'address').frame !== index) fail('frame addresses must be ordered'); });
       if (bank.default !== null) address(bank.default, resources);

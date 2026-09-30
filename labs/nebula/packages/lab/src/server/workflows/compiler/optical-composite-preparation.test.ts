@@ -11,7 +11,7 @@ import { readGeometryPin } from '../geometry/registered-source.ts';
 import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
 import { compilerFrame } from './bake.ts';
-import { assertCompilerLensGeometry } from './bank-validation.ts';
+import { assertCompilerDatasetGeometry } from './bank-validation.ts';
 import { readCompilerRecipe, defaultCompilerControls } from '../../../features/compiler/model.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { readRetainedEmissionField, createEmissionField } from '@cssearth/bake/volume';
@@ -86,10 +86,10 @@ async function fixture(t: TestContext) {
     target: source, projection: source, residual: source,
     sources: [{ id: image.id, label: image.label, credit: image.source.credit, page: image.source.page,
       original: source, starless: image.layers.diffuse, width: 32, height: 32, boundsArcsec: bounds }],
-    scene: { schema: 'cssearth-compiler-bake@1', id, fieldIdentity, frame, boundsArcsec: model.bounds, skyBoundsArcsec: bounds,
+    scene: { schema: 'cssearth-compiler-bake@2', id, fieldIdentity, frame, boundsArcsec: model.bounds, skyBoundsArcsec: bounds,
       spanArcsec: 60, sourceImage: { width: 512, height: 512 }, neutral,
       coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' },
-      lenses: [{ id: image.id, label: image.label, volume: neutral, coverage: { positiveAlphaTexels: 0, recoloredTexels: 0, outsideImageTexels: 0 } }],
+      datasets: [{ id: image.id, label: image.label, volume: neutral, coverage: { positiveAlphaTexels: 0, recoloredTexels: 0, outsideImageTexels: 0 } }],
       stars: [{ id: 'retained-star', positionUnits: [1, 2, 3], ...starMaterial, materials: { [image.id]: starMaterial } }],
       sampling: { sliceCounts: { x: 2, y: 2, z: 2 }, imageWidth: 512, samplesPerSlab: 4 } } });
   return { root, recipePath, recipe, result, neutralSlices, slices, save, catalogue };
@@ -101,15 +101,15 @@ test('delivery composites a supplied result with no historical caches and retain
   const before = JSON.stringify(f.result), output = await prepareOpticalCompositeForResult(f.root, f.recipePath, f.result);
   assert.equal(JSON.stringify(f.result), before);
   assert.equal(output.scene.neutral.path, f.result.scene.neutral.path);
-  assert.equal(output.scene.volumeId, f.result.id); assert.equal(output.scene.lenses.length, 2);
+  assert.equal(output.scene.volumeId, f.result.id); assert.equal(output.scene.datasets.length, 2);
   assert.deepEqual(output.scene.stars[0], { ...f.result.scene.stars[0], materials: { ...f.result.scene.stars[0]!.materials,
     [f.recipe.id]: f.result.scene.stars[0]!.materials![f.recipe.detailSourceId] } });
-  const lens = output.scene.lenses[1]!;
-  assertCompilerLensGeometry(validatePreparedCssVolume(JSON.parse((await readGeometryPin(f.root, output.scene.neutral)).toString())),
-    validatePreparedCssVolume(JSON.parse((await readGeometryPin(f.root, lens.volume)).toString())), output.scene);
+  const dataset = output.scene.datasets[1]!;
+  assertCompilerDatasetGeometry(validatePreparedCssVolume(JSON.parse((await readGeometryPin(f.root, output.scene.neutral)).toString())),
+    validatePreparedCssVolume(JSON.parse((await readGeometryPin(f.root, dataset.volume)).toString())), output.scene);
   for (const slice of f.slices.quads) {
     const alpha = async (path: string) => (await sharp(join(f.root, path, slice.texturePath)).ensureAlpha().raw().toBuffer()).filter((_v, i) => i % 4 === 3);
-    assert.deepEqual(await alpha(dirname(lens.volume.path)), await alpha(dirname(output.scene.neutral.path)));
+    assert.deepEqual(await alpha(dirname(dataset.volume.path)), await alpha(dirname(output.scene.neutral.path)));
   }
   const method: unknown = JSON.parse((await readGeometryPin(f.root, output.method)).toString());
   assert.ok(jointRecord(method) && jointRecord(method.opticalComposite));

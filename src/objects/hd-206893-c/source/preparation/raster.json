@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-206893-c/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "shape",
       "output": "hd-206893-c-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-206893-c-lens-{id}.webp",
+      "thumbnail": "hd-206893-c-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {

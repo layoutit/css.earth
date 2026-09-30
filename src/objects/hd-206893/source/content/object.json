@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-206893",
   "displayName": "HD 206893",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of Gaia's spectrum of the star. The disc itself is unresolved.",
-        "thumbnail": "hd-206893-lens-color.webp",
+        "thumbnail": "hd-206893-dataset-color.webp",
         "surface": "hd-206893-surface-color@2x.webp",
         "poles": "hd-206893-poles-color@2x.webp",
         "source": {

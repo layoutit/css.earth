@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "m4-v66-a",
   "displayName": "M4 V66 A",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "m4-v66-a-lens-color.webp",
+        "thumbnail": "m4-v66-a-dataset-color.webp",
         "surface": "m4-v66-a-surface-color@2x.webp",
         "poles": "m4-v66-a-poles-color@2x.webp",
         "source": {

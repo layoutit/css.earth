@@ -8,7 +8,7 @@ It is the only planet known around TOI-1431. Its orbit and size follow Addison e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.650232 d Addison et al. 2021 (2021AJ....162..292A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2021): a/R* 5.15; Addison et al. 2021 (2021AJ....162..292A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2021): inclination 80.13 degrees Addison et al. 2021 (2021AJ....162..292A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2021): e 0.0022 Addison et al. 2021 (2021AJ....162..292A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2021): omega 108 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460554.58625 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1431's measured colour (#d2dbff, the colour lens of toi-1431 (src/objects/toi-1431/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1431's measured colour (#d2dbff, the colour dataset of toi-1431 (src/objects/toi-1431/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1431's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (77, 83, 84), folded onto its orbit. Upper limits and rows without an error are left out.
 

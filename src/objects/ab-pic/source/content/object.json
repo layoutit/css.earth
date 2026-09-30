@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "ab-pic",
   "displayName": "AB Pic",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of Gaia's spectrum of the star. The disc itself is unresolved.",
-        "thumbnail": "ab-pic-lens-color.webp",
+        "thumbnail": "ab-pic-dataset-color.webp",
         "surface": "ab-pic-surface-color@2x.webp",
         "poles": "ab-pic-poles-color@2x.webp",
         "source": {

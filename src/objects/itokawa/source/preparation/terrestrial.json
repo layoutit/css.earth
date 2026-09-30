@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "itokawa",
   "displayName": "Itokawa",
@@ -213,6 +213,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
   },
   "presentation": {
-    "defaultLens": "amica"
+    "defaultDataset": "amica"
   }
 }

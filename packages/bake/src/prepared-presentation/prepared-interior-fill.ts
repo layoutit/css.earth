@@ -50,7 +50,7 @@ export async function withPreparedInteriorFill<T extends PreparedPresentationDef
   for (const variant of presentation.variants) {
     const interior = variant.writes.some(write => write.kind === 'attribute' && write.name === 'data-view' && write.value === 'interior');
     const surfaceKeys = variant.required.filter(key => key.startsWith('surface:') || key.startsWith('page:') || key.startsWith('shadow:') || key === 'surface');
-    if (!interior && !surfaceKeys.length) throw new Error(`Missing prepared surface for ${variant.when.lensId}.`);
+    if (!interior && !surfaceKeys.length) throw new Error(`Missing prepared surface for ${variant.when.datasetId}.`);
     const key = surfaceKeys.join(',');
     if (!interior && !colors.has(key)) {
       const paths = surfaceKeys.map(key => {

@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 109833. Its orbit and size follow Wood et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 9.188506 d Wood et al. 2023 (2023AJ....165...85W), via the NASA Exoplanet Archive ps table (pl_refname WOOD_ET_AL_2023): a/R* 19.9; Wood et al. 2023 (2023AJ....165...85W), via the NASA Exoplanet Archive ps table (pl_refname WOOD_ET_AL_2023): inclination 88.13 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459376.410518 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-109833's measured colour (#fff5f7, the colour lens of hd-109833 (src/objects/hd-109833/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-109833's measured colour (#fff5f7, the colour dataset of hd-109833 (src/objects/hd-109833/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 109833's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (38, 39, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

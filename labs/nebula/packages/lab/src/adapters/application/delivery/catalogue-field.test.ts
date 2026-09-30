@@ -165,7 +165,7 @@ test('the acquired Crab catalogue prepares a nonempty physical volume with pinne
   assert.ok(result.points.slice(1).every(p => Math.hypot(...p.positionUnits) * target.metersPerUnit / METERS_PER_PARSEC < 50.001));
 });
 
-test('the checked-in Helix selection retains wide-image cores and its central star across the budget and lenses', async () => {
+test('the checked-in Helix selection retains wide-image cores and its central star across the budget and datasets', async () => {
   const path = 'src/objects/helix/source/stellar-field.json', bytes = await readFile(path);
   const source: unknown = JSON.parse(bytes.toString());
   assert.ok(source && typeof source === 'object' && 'selection' in source && 'provenance' in source);

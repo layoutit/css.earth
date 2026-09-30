@@ -44,7 +44,7 @@ async function fixture(panel: unknown, files: Record<string, string>) {
   await mkdir(join(root, 'source/editorial'), { recursive: true });
   for (const [path, text] of Object.entries(files)) await writeFile(join(root, 'source', path), text);
   await writeFile(join(root, 'source/manifest.json'), JSON.stringify({ inputs: [], documents: Object.keys(files).map(path => ({ path })) }));
-  await writeFile(join(root, 'source/content/object.json'), JSON.stringify({ schema: 'cssearth-object-content@1', panel }));
+  await writeFile(join(root, 'source/content/object.json'), JSON.stringify({ schema: 'cssearth-object-content@2', panel }));
   return root;
 }
 const facts = async (root: string) => JSON.parse(await readFile(join(root, 'source/content/object.json'), 'utf8')).panel;

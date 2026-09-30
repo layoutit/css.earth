@@ -6,7 +6,7 @@
       "id": "cassini-iss-and-shape-release",
       "subject": "Cassini ISS archive and PDS shape release",
       "status": "included",
-      "finding": "The [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) supplies the observation lens and the [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) supplies geometry and radial-height visualization.",
+      "finding": "The [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) supplies the observation dataset and the [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) supplies geometry and radial-height visualization.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
         "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
@@ -34,7 +34,7 @@
     },
     {
       "id": "cassini-n1860792100",
-      "subject": "Cassini ISS frame N1860792100_1 in the Monochrome lens",
+      "subject": "Cassini ISS frame N1860792100_1 in the Monochrome dataset",
       "status": "excluded",
       "finding": "Its published camera places 99.9% of the lit source shape on the photograph's sky while the body lies elsewhere in the frame, so preparation refuses it; no camera correction is invented.",
       "revisitWhen": "A corrected camera or pointing solution for the frame registers it with interior holdouts.",

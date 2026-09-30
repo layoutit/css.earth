@@ -14,7 +14,7 @@ const blocks = {
 const document = (overrides: Record<string, unknown> = {}) =>
   parseObjectText({ schema: OBJECT_TEXT_SCHEMA, objectId: 'saturn', ...blocks, ...overrides }, 'saturn');
 const context = {
-  name: 'Saturn', lenses: [{ id: 'normal', label: 'Visible color' }],
+  name: 'Saturn', datasets: [{ id: 'normal', label: 'Visible color' }],
   catalogue: new Set([source.catalogueId]), evidencedDatasets: new Set(['normal']),
 };
 const rules = (findings: readonly { rule: string }[]) => findings.map(finding => finding.rule);
@@ -23,18 +23,18 @@ test('publishable text covers every dataset, stays within budget and cites catal
   assert.deepEqual(readerTextErrors(document(), context), []);
   assert.deepEqual(rules(readerTextErrors(document({ card: { text: `${'A long card line '.repeat(8)}.`, sources: [source] } }), context)), ['length']);
   assert.deepEqual(rules(readerTextErrors(document({ card: { text: 'Two sentences here. And another.', sources: [source] } }), context)), ['sentences']);
-  assert.deepEqual(rules(readerTextErrors(document(), { ...context, lenses: [...context.lenses, { id: 'radar', label: 'Radar' }] })), ['coverage']);
+  assert.deepEqual(rules(readerTextErrors(document(), { ...context, datasets: [...context.datasets, { id: 'radar', label: 'Radar' }] })), ['coverage']);
   assert.deepEqual(rules(readerTextErrors(document({ card: { text: blocks.card.text, sources: [{ ...source, catalogueId: 'uncatalogued-page' }] } }), context)), ['citation']);
   assert.deepEqual(rules(readerTextErrors(document(), { ...context, evidencedDatasets: new Set() })), ['citation']);
-  // The page refuses a dataset title that repeats its lens label (dataset-content.mts); the text step refuses it first.
+  // The page refuses a dataset title that repeats its dataset label (dataset-content.mts); the text step refuses it first.
   assert.deepEqual(rules(readerTextErrors(document({ datasets: { normal: { title: 'Visible color', summary: blocks.datasets.normal.summary } } }), context)), ['identity']);
   assert.throws(() => document({ card: { text: blocks.card.text, sources: [] } }), /needs at least one source/u);
 });
 
-test('filler and display words are warnings for a reviewer; a title repeating its lens label is what the page refuses', () => {
+test('filler and display words are warnings for a reviewer; a title repeating its dataset label is what the page refuses', () => {
   const filler = document({ card: { text: 'Explore Saturn in 3D with cssEarth.', sources: [source] },
     datasets: { normal: { title: 'Visible color', summary: blocks.datasets.normal.summary } } });
-  // A title that repeats the lens label is what the page refuses to render (dataset-content.mts): an error, beside the reviewer's warning.
+  // A title that repeats the dataset label is what the page refuses to render (dataset-content.mts): an error, beside the reviewer's warning.
   assert.deepEqual(rules(readerTextErrors(filler, context)), ['identity']);
   assert.deepEqual(rules(readerTextWarnings(filler, context)), ['phrasing', 'phrasing', 'phrasing', 'specific-title']);
 });

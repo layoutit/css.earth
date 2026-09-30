@@ -6,7 +6,7 @@
       "id": "challener-2024-nirspec-eclipse-map",
       "subject": "Challener et al. (2024) JWST NIRSpec white-light eclipse map",
       "status": "included",
-      "finding": "The deposited white-light brightness-temperature map (48 x 96 cells, 709.8 to 1975.7 K, hottest cell at +5.625, -13.125 degrees) is the NIRSpec lens (id temperature), shown as deposited. Turned by this package's orbit and synchronous rotation it fits the deposited white-light light curve at reduced chi-squared 2.120 over 4202 samples outside transit; the east-west mirror fits at 16.34 and a uniform planet at 92.75.",
+      "finding": "The deposited white-light brightness-temperature map (48 x 96 cells, 709.8 to 1975.7 K, hottest cell at +5.625, -13.125 degrees) is the NIRSpec dataset (id temperature), shown as deposited. Turned by this package's orbit and synchronous rotation it fits the deposited white-light light curve at reduced chi-squared 2.120 over 4202 samples outside transit; the east-west mirror fits at 16.34 and a uniform planet at 92.75.",
       "evidence": [
         "https://zenodo.org/records/12627524",
         "https://arxiv.org/abs/2406.10207"
@@ -16,7 +16,7 @@
       "id": "hammond-2024-miri-eclipse-map",
       "subject": "Hammond et al. (2024) JWST MIRI/LRS eclipse map",
       "status": "excluded",
-      "finding": "A second-degree spherical-harmonic dayside map from the MIRI phase curve of the Transiting Exoplanet ERS program 1366. The arXiv HTML names no data deposit or repository for the map, so there is no grid to cast. Its longitudinal offset, 7.5 +/- 0.5 degrees east (eigenmapping; 7.75 +/- 0.36 with starry), differs from this package's MIRI lens (6.2 degrees, with light time and the transit time measured in the curve) because the light curve admits two systematics solutions: a fast ramp (0.10 d) with a steep trend and a slow ramp (0.27 d) with a gentle trend. Their Table 1 (ramp 3.7 +/- 0.3 per day and 1319 +/- 66 ppm, trend -240 +/- 60 ppm/day) is the slow solution. On the curve they mapped (Bell et al.'s Eureka! v1 white light, pinned in this package), this repository's fit with their time constant returns ramp 1275 ppm, trend -279 ppm/day, position 0.0120, width -0.0423 and offset 7.45 degrees; the fast ramp gives 5.45 degrees and trend -926 ppm/day, and fits better by chi-squared 14.2 (about 9.5 after their 1.2225 error scaling). This project's reduction shows the same pair, 6.1 and 7.95 degrees. Timing is not the cause: their t0 with Bell et al.'s fitted period (0.81347406 d; the paper prints 0.813474) and starry's barycentric light delay (7.4 s) places the transit 20.6 s before the package ephemeris, where both curves show it (20.5 and 19.5 s). Why their fit chose the slow ramp is not recoverable from the paper; every degree 2 and 3 eigencurve model and a Gaussian stand-in for their pixel prior still prefer the fast ramp here.",
+      "finding": "A second-degree spherical-harmonic dayside map from the MIRI phase curve of the Transiting Exoplanet ERS program 1366. The arXiv HTML names no data deposit or repository for the map, so there is no grid to cast. Its longitudinal offset, 7.5 +/- 0.5 degrees east (eigenmapping; 7.75 +/- 0.36 with starry), differs from this package's MIRI dataset (6.2 degrees, with light time and the transit time measured in the curve) because the light curve admits two systematics solutions: a fast ramp (0.10 d) with a steep trend and a slow ramp (0.27 d) with a gentle trend. Their Table 1 (ramp 3.7 +/- 0.3 per day and 1319 +/- 66 ppm, trend -240 +/- 60 ppm/day) is the slow solution. On the curve they mapped (Bell et al.'s Eureka! v1 white light, pinned in this package), this repository's fit with their time constant returns ramp 1275 ppm, trend -279 ppm/day, position 0.0120, width -0.0423 and offset 7.45 degrees; the fast ramp gives 5.45 degrees and trend -926 ppm/day, and fits better by chi-squared 14.2 (about 9.5 after their 1.2225 error scaling). This project's reduction shows the same pair, 6.1 and 7.95 degrees. Timing is not the cause: their t0 with Bell et al.'s fitted period (0.81347406 d; the paper prints 0.813474) and starry's barycentric light delay (7.4 s) places the transit 20.6 s before the package ephemeris, where both curves show it (20.5 and 19.5 s). Why their fit chose the slow ramp is not recoverable from the paper; every degree 2 and 3 eigencurve model and a Gaussian stand-in for their pixel prior still prefer the fast ramp here.",
       "revisitWhen": "The map grid is deposited as data, or Hammond et al.'s fitting code or priors are published.",
       "evidence": [
         "https://arxiv.org/abs/2404.16488",
@@ -27,7 +27,7 @@
       "id": "bell-2024-miri-products",
       "subject": "Bell et al. (2024) MIRI phase-curve products and models",
       "status": "excluded",
-      "finding": "Zenodo 10.5281/zenodo.10525170 (CC BY 4.0, 11.5 MB) holds reduction configurations, light curves, planetary spectra, general circulation model outputs and retrieval posteriors. No two-dimensional observed map; the circulation models are simulations, not observations. A trial fit of the deposited Eureka! v1 white-light curve (5-10.5 micrometres, first 780 integrations and the transit dropped) with this repository's eigencurve fit and the same systematics terms (linear trend, exponential ramp, spatial position and width) prefers degree 2 with 6 eigencurves by BIC. It puts the meridionally averaged hotspot 5.0 degrees east (4.5 to 5.25), against Hammond et al. (2024)'s 7.5 +/- 0.5; changing the systematics model moves it between 3.1 and 5.3. The difference is not resolved, and the trial is not a published map. This repository's raw reduction of the same 30 MIRI segments (tools/objects/jwst/reduce-tso.mts, their settings in Eureka! 1.4) reproduces the deposited white light curve at correlation 0.990 over 9,194 integrations, 172 ppm apart once a 2,221 ppm per day drift is removed, with lower scatter (342 against 373 ppm). The MIRI lenses now come from this project's own reduction of the raw exposures with Bell et al.'s settings (see raw-miri-reduction-lenses); the deposited curve remains the comparison for that reduction.",
+      "finding": "Zenodo 10.5281/zenodo.10525170 (CC BY 4.0, 11.5 MB) holds reduction configurations, light curves, planetary spectra, general circulation model outputs and retrieval posteriors. No two-dimensional observed map; the circulation models are simulations, not observations. A trial fit of the deposited Eureka! v1 white-light curve (5-10.5 micrometres, first 780 integrations and the transit dropped) with this repository's eigencurve fit and the same systematics terms (linear trend, exponential ramp, spatial position and width) prefers degree 2 with 6 eigencurves by BIC. It puts the meridionally averaged hotspot 5.0 degrees east (4.5 to 5.25), against Hammond et al. (2024)'s 7.5 +/- 0.5; changing the systematics model moves it between 3.1 and 5.3. The difference is not resolved, and the trial is not a published map. This repository's raw reduction of the same 30 MIRI segments (tools/objects/jwst/reduce-tso.mts, their settings in Eureka! 1.4) reproduces the deposited white light curve at correlation 0.990 over 9,194 integrations, 172 ppm apart once a 2,221 ppm per day drift is removed, with lower scatter (342 against 373 ppm). The MIRI datasets now come from this project's own reduction of the raw exposures with Bell et al.'s settings (see raw-miri-reduction-datasets); the deposited curve remains the comparison for that reduction.",
       "revisitWhen": "A longitude-latitude map fitted to these light curves is published as data.",
       "evidence": [
         "https://zenodo.org/records/10525170",
@@ -110,18 +110,18 @@
       ]
     },
     {
-      "id": "nirspec-refit-lens",
-      "subject": "NIRSpec refit as a lens: this project's fit of the deposited white-light curve",
+      "id": "nirspec-refit-dataset",
+      "subject": "NIRSpec refit as a dataset: this project's fit of the deposited white-light curve",
       "status": "excluded",
-      "finding": "This project's fit of Challener et al.'s white-light curve (degree 3, 6 eigencurves, spin axis on the orbit normal, light time and the measured transit) gave chi-squared 8813.9 over 4202 samples, hot spot -2.34, +7.16 degrees, dayside 1580 K and nightside 875 K. It was a lens from 2026-09-17 and was removed the same day: it reads the same data as the NIRSpec lens, and its differences (spin axis, stellar spectrum, timing) are analysis choices recorded in the README and in theresa-rerun-hotspot-latitude rather than a new measurement. The fit stays checked by eigenmap-fit.test.mts.",
+      "finding": "This project's fit of Challener et al.'s white-light curve (degree 3, 6 eigencurves, spin axis on the orbit normal, light time and the measured transit) gave chi-squared 8813.9 over 4202 samples, hot spot -2.34, +7.16 degrees, dayside 1580 K and nightside 875 K. It was a dataset from 2026-09-17 and was removed the same day: it reads the same data as the NIRSpec dataset, and its differences (spin axis, stellar spectrum, timing) are analysis choices recorded in the README and in theresa-rerun-hotspot-latitude rather than a new measurement. The fit stays checked by eigenmap-fit.test.mts.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/wasp-43b/README.md"
       ],
-      "revisitWhen": "A published NIRSpec map made with the spin axis on the orbit normal, or a decision to show analysis variants as lenses."
+      "revisitWhen": "A published NIRSpec map made with the spin axis on the orbit normal, or a decision to show analysis variants as datasets."
     },
     {
-      "id": "raw-miri-reduction-lenses",
-      "subject": "MIRI lens from this project's reduction of the raw program 1366 exposures",
+      "id": "raw-miri-reduction-datasets",
+      "subject": "MIRI dataset from this project's reduction of the raw program 1366 exposures",
       "status": "included",
       "finding": "The 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366 (1-2 December 2022), reduced by tools/objects/jwst/reduce-tso.mts with Bell et al. (2024)'s settings, give the pinned light curves; the tool's white-light export is byte-identical to the pinned file, and bell-2024-miri-products records its agreement with the deposited curve. Fitted at preparation time with BIC model choice: 5-10.5 micrometres degree 2 with 6 eigencurves, ramp 0.105 d, transit 19.5 s before the package ephemeris, dayside 1527 K and nightside 840 K against Bell et al.'s 1524 +/- 35 and 863 +/- 23 K (5-12 micrometres); longitudinal offset 6.2 degrees east (see hammond-2024-miri-eclipse-map: the difference from Hammond et al.'s 7.5 is their slow-ramp systematics solution). Band weights are the star's own median extracted counts per detector column. The first release stopped the ramp time constant at its 0.08 d grid value and reported the hottest point, 5.3 degrees, as the comparison with Hammond et al. From every fit models light time across the orbit (15 s at eclipse) and takes the transit time from its own light curve.",
       "evidence": [
@@ -133,9 +133,9 @@
     },
     {
       "id": "miri-wavelength-slices",
-      "subject": "MIRI wavelength slices (5-6.5, 6.5-8.5, 8.5-10.5 micrometres) as lenses",
+      "subject": "MIRI wavelength slices (5-6.5, 6.5-8.5, 8.5-10.5 micrometres) as datasets",
       "status": "excluded",
-      "finding": "Three maps fitted to Stage 4 light curves of the same MIRI observation in wide wavelength bins were lenses from 2026-09-17 and were removed the same day. BIC chose degree 2 with 4 eigencurves in each; dayside 1539, 1493 and 1565 K, nightside 835, 837 and 914 K, offsets 3.55, 7.8 and 8.6 degrees east. On a 700-2000 K display these differences are not visible, the offset spread is within what the ramp choice alone moves (about 2 degrees), and at 4 eigencurves every slice put the hottest latitude near +10 degrees, a property of the basis. Wavelength dependence is better described by Bell et al. (2024)'s published dayside and nightside spectra than by near-identical maps.",
+      "finding": "Three maps fitted to Stage 4 light curves of the same MIRI observation in wide wavelength bins were datasets from 2026-09-17 and were removed the same day. BIC chose degree 2 with 4 eigencurves in each; dayside 1539, 1493 and 1565 K, nightside 835, 837 and 914 K, offsets 3.55, 7.8 and 8.6 degrees east. On a 700-2000 K display these differences are not visible, the offset spread is within what the ramp choice alone moves (about 2 degrees), and at 4 eigencurves every slice put the hottest latitude near +10 degrees, a property of the basis. Wavelength dependence is better described by Bell et al. (2024)'s published dayside and nightside spectra than by near-identical maps.",
       "revisitWhen": "A published wavelength-resolved map, or slices that differ by more than the analysis uncertainty.",
       "evidence": [
         "https://arxiv.org/abs/2401.13027",
@@ -146,7 +146,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for WASP-43b",
       "status": "included",
-      "finding": "The marker is the Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; it replaced the scaffold's flat disc in the palette colour of the dayside mean. It is one fixed image, so it shows the dayside at every orbital phase.",
+      "finding": "The marker is the Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the dataset palette; it replaced the scaffold's flat disc in the palette colour of the dayside mean. It is one fixed image, so it shows the dayside at every orbital phase.",
       "evidence": [
         "https://zenodo.org/records/12627524"
       ]

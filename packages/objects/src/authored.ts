@@ -7,17 +7,17 @@ export interface SourceReference { readonly id: string; readonly path: string; }
 export interface ShapeRecipe { readonly kind: ShapeKind; readonly radiusKm: number; readonly polarRadiusKm?: number; readonly secondaryRadiusKm?: number; }
 export interface MaterialRecipe { readonly id: string; readonly source: string; readonly model: 'lit' | 'unlit' | 'emissive'; readonly frameBank?: string; }
 export interface FrameBankRecipe { readonly id: string; readonly source: string; readonly frames: number; readonly rows: number; readonly residentRows: number; }
-export interface LensRecipe { readonly id: string; readonly source: string; readonly material?: string; readonly frameBank?: string; }
-export interface SurfaceRecipe { readonly id: string; readonly source: string; readonly projection: 'equirectangular' | 'cubemap'; readonly lenses: readonly LensRecipe[]; }
+export interface DatasetRecipe { readonly id: string; readonly source: string; readonly material?: string; readonly frameBank?: string; }
+export interface SurfaceRecipe { readonly id: string; readonly source: string; readonly projection: 'equirectangular' | 'cubemap'; readonly datasets: readonly DatasetRecipe[]; }
 export interface LayerRecipe { readonly source: string; readonly material?: string; readonly frameBank?: string; }
-export interface CutawayRecipe extends LayerRecipe { readonly surface: string; readonly lens: string; }
+export interface CutawayRecipe extends LayerRecipe { readonly surface: string; readonly dataset: string; }
 export interface MotionRecipe { readonly id: string; readonly source: string; readonly target: 'body' | 'cutaway' | 'rings' | 'atmosphere' | 'emission'; readonly durationMs: number; }
 export interface DestinationsRecipe { readonly source: string; readonly maxEntries: number; }
 /** A prepared named-feature catalogue anchored to the body surface (nomenclature labels). */
 export interface FeaturesRecipe { readonly source: string; readonly maxEntries: number; }
 export interface WorldFrameRecipe { readonly referenceFrame: string; readonly epochJdTt: number; readonly originM: readonly [number, number, number]; readonly presentationToReference: readonly [number, number, number, number, number, number, number, number, number]; readonly orbitUpReference: readonly [number, number, number]; readonly metersPerUnit: number; readonly bodyRadiusM: number; }
 export interface AuthoredRecipe {
-  readonly schema: 'cssearth-authored-object@1';
+  readonly schema: 'cssearth-authored-object@2';
   readonly sources: readonly SourceReference[];
   readonly shape: ShapeRecipe;
   readonly surfaces: readonly SurfaceRecipe[];
@@ -117,18 +117,18 @@ function parseMaterials(value: unknown, sourceIds: ReadonlySet<string>, frameIds
 function parseSurfaces(value: unknown, sourceIds: ReadonlySet<string>, materialIds: ReadonlySet<string>, frameIds: ReadonlySet<string>): readonly SurfaceRecipe[] {
   if (!Array.isArray(value) || !value.length) throw new TypeError('recipe.surfaces must be a nonempty array.');
   const output = value.map((item, index) => {
-    const at = `recipe.surfaces[${index}]`, input = record(item, at); keys(input, ['id', 'source', 'projection', 'lenses'], at);
+    const at = `recipe.surfaces[${index}]`, input = record(item, at); keys(input, ['id', 'source', 'projection', 'datasets'], at);
     if (input.projection !== 'equirectangular' && input.projection !== 'cubemap') throw new TypeError(`${at}.projection is not supported.`);
-    if (!Array.isArray(input.lenses)) throw new TypeError(`${at}.lenses must be an array.`);
-    const lenses = input.lenses.map((item, lensIndex) => {
-      const lensAt = `${at}.lenses[${lensIndex}]`, lens = record(item, lensAt); keys(lens, ['id', 'source', 'material', 'frameBank'], lensAt);
-      return freeze({ id: id(lens.id, `${lensAt}.id`), source: sourceRef(lens.source, sourceIds, `${lensAt}.source`),
-        ...(lens.material === undefined ? {} : { material: optionalRef(lens.material, materialIds, `${lensAt}.material`)! }),
-        ...(lens.frameBank === undefined ? {} : { frameBank: optionalRef(lens.frameBank, frameIds, `${lensAt}.frameBank`)! }), });
+    if (!Array.isArray(input.datasets)) throw new TypeError(`${at}.datasets must be an array.`);
+    const datasets = input.datasets.map((item, datasetIndex) => {
+      const datasetAt = `${at}.datasets[${datasetIndex}]`, dataset = record(item, datasetAt); keys(dataset, ['id', 'source', 'material', 'frameBank'], datasetAt);
+      return freeze({ id: id(dataset.id, `${datasetAt}.id`), source: sourceRef(dataset.source, sourceIds, `${datasetAt}.source`),
+        ...(dataset.material === undefined ? {} : { material: optionalRef(dataset.material, materialIds, `${datasetAt}.material`)! }),
+        ...(dataset.frameBank === undefined ? {} : { frameBank: optionalRef(dataset.frameBank, frameIds, `${datasetAt}.frameBank`)! }), });
     });
-    unique(lenses.map(lens => lens.id), `${at}.lenses`);
+    unique(datasets.map(dataset => dataset.id), `${at}.datasets`);
     const projection = input.projection as SurfaceRecipe['projection'];
-    return freeze({ id: id(input.id, `${at}.id`), source: sourceRef(input.source, sourceIds, `${at}.source`), projection, lenses: freeze(lenses) });
+    return freeze({ id: id(input.id, `${at}.id`), source: sourceRef(input.source, sourceIds, `${at}.source`), projection, datasets: freeze(datasets) });
   });
   unique(output.map(item => item.id), 'recipe.surfaces'); return freeze(output);
 }
@@ -149,7 +149,7 @@ function parseWorldFrame(value: unknown): WorldFrameRecipe | undefined {
 export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   const input = record(value, 'recipe');
   keys(input, ['schema', 'sources', 'shape', 'surfaces', 'materials', 'frameBanks', 'cutaway', 'atmosphere', 'rings', 'emission', 'motion', 'destinations', 'features', 'worldFrame'], 'recipe');
-  if (input.schema !== 'cssearth-authored-object@1') throw new TypeError('Unsupported authored recipe schema.');
+  if (input.schema !== 'cssearth-authored-object@2') throw new TypeError('Unsupported authored recipe schema.');
   const parsedSources = sources(input.sources), sourceIds = new Set(parsedSources.map(item => item.id));
   const shapeInput = record(input.shape, 'recipe.shape'); keys(shapeInput, ['kind', 'radiusKm', 'polarRadiusKm', 'secondaryRadiusKm'], 'recipe.shape');
   if (shapeInput.kind !== 'sphere' && shapeInput.kind !== 'ellipsoid' && shapeInput.kind !== 'radial-terrain') throw new TypeError('recipe.shape.kind is not supported.');
@@ -161,7 +161,7 @@ export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   const frameBanks = parseFrameBanks(input.frameBanks, sourceIds), frameIds = new Set(frameBanks?.map(item => item.id));
   const materials = parseMaterials(input.materials, sourceIds, frameIds), materialIds = new Set(materials?.map(item => item.id));
   const parsedSurfaces = parseSurfaces(input.surfaces, sourceIds, materialIds, frameIds), surfaceIds = new Set(parsedSurfaces.map(item => item.id));
-  const cutaway = input.cutaway === undefined ? undefined : (() => { const at = 'recipe.cutaway', item = record(input.cutaway, at); keys(item, ['source', 'material', 'frameBank', 'surface', 'lens'], at); const shared = layer({ source: item.source, material: item.material, frameBank: item.frameBank }, sourceIds, materialIds, frameIds, at), surface = optionalRef(item.surface, surfaceIds, `${at}.surface`)!; const lenses = new Set(parsedSurfaces.find(value => value.id === surface)!.lenses.map(value => value.id)); return freeze({ ...shared, surface, lens: optionalRef(item.lens, lenses, `${at}.lens`)! }); })();
+  const cutaway = input.cutaway === undefined ? undefined : (() => { const at = 'recipe.cutaway', item = record(input.cutaway, at); keys(item, ['source', 'material', 'frameBank', 'surface', 'dataset'], at); const shared = layer({ source: item.source, material: item.material, frameBank: item.frameBank }, sourceIds, materialIds, frameIds, at), surface = optionalRef(item.surface, surfaceIds, `${at}.surface`)!; const datasets = new Set(parsedSurfaces.find(value => value.id === surface)!.datasets.map(value => value.id)); return freeze({ ...shared, surface, dataset: optionalRef(item.dataset, datasets, `${at}.dataset`)! }); })();
   const atmosphere = input.atmosphere === undefined ? undefined : layer(input.atmosphere, sourceIds, materialIds, frameIds, 'recipe.atmosphere');
   const rings = input.rings === undefined ? undefined : layer(input.rings, sourceIds, materialIds, frameIds, 'recipe.rings');
   const emission = input.emission === undefined ? undefined : layer(input.emission, sourceIds, materialIds, frameIds, 'recipe.emission');
@@ -169,7 +169,7 @@ export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   const destinations = input.destinations === undefined ? undefined : (() => { const at = 'recipe.destinations', item = record(input.destinations, at); keys(item, ['source', 'maxEntries'], at); return freeze({ source: sourceRef(item.source, sourceIds, `${at}.source`), maxEntries: positive(item.maxEntries, `${at}.maxEntries`, true) }); })();
   const features = input.features === undefined ? undefined : (() => { const at = 'recipe.features', item = record(input.features, at); keys(item, ['source', 'maxEntries'], at); return freeze({ source: sourceRef(item.source, sourceIds, `${at}.source`), maxEntries: positive(item.maxEntries, `${at}.maxEntries`, true) }); })();
   const worldFrame = parseWorldFrame(input.worldFrame);
-  return freeze({ schema: 'cssearth-authored-object@1', sources: parsedSources, shape: freeze({ kind: shapeInput.kind, radiusKm, ...(secondaryRadiusKm === undefined ? {} : { secondaryRadiusKm }), ...(polarRadiusKm === undefined ? {} : { polarRadiusKm }) }), surfaces: parsedSurfaces, ...(materials === undefined ? {} : { materials }), ...(frameBanks === undefined ? {} : { frameBanks }), ...(cutaway === undefined ? {} : { cutaway }), ...(atmosphere === undefined ? {} : { atmosphere }), ...(rings === undefined ? {} : { rings }), ...(emission === undefined ? {} : { emission }), ...(motion === undefined ? {} : { motion }), ...(destinations === undefined ? {} : { destinations }), ...(features === undefined ? {} : { features }), ...(worldFrame === undefined ? {} : { worldFrame }) });
+  return freeze({ schema: 'cssearth-authored-object@2', sources: parsedSources, shape: freeze({ kind: shapeInput.kind, radiusKm, ...(secondaryRadiusKm === undefined ? {} : { secondaryRadiusKm }), ...(polarRadiusKm === undefined ? {} : { polarRadiusKm }) }), surfaces: parsedSurfaces, ...(materials === undefined ? {} : { materials }), ...(frameBanks === undefined ? {} : { frameBanks }), ...(cutaway === undefined ? {} : { cutaway }), ...(atmosphere === undefined ? {} : { atmosphere }), ...(rings === undefined ? {} : { rings }), ...(emission === undefined ? {} : { emission }), ...(motion === undefined ? {} : { motion }), ...(destinations === undefined ? {} : { destinations }), ...(features === undefined ? {} : { features }), ...(worldFrame === undefined ? {} : { worldFrame }) });
 }
 
 /** Keeps the legacy envelope compatible while making authored capability data typed. */

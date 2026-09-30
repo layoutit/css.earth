@@ -1,7 +1,7 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedVolumeLensState } from '../volume/prepared-volume-lenses.js';
+import type { PreparedVolumeDatasetState } from '../volume/prepared-volume-datasets.js';
 
-export type PreparedFocusDatasets = PreparedVolumeLensState;
+export type PreparedFocusDatasets = PreparedVolumeDatasetState;
 
 /** Navigation reads authored framing and datasets without knowing the bank's renderer. */
 export interface PreparedFocusBank {
@@ -9,14 +9,14 @@ export interface PreparedFocusBank {
   framingRadiusM(): number;
   state(): PreparedFocusDatasets | null;
   load(): Promise<void>;
-  selectLens(id: string): void;
+  selectDataset(id: string): void;
   /** Keep the bank resident until the focus releases it. */
   subscribe(listener: () => void): () => void;
 }
 
 export function imageFocusDatasets(objectId: string): PreparedFocusDatasets {
-  return { objectId, id: 'optical', defaultLens: 'optical', selectedLens: 'optical', starsVisible: false,
-    lenses: [{ id: 'optical', label: 'Optical', title: 'Visible-light observation', description: 'Prepared image layers', sourceUrl: '' }] };
+  return { objectId, id: 'optical', defaultDataset: 'optical', selectedDataset: 'optical', starsVisible: false,
+    datasets: [{ id: 'optical', label: 'Optical', title: 'Visible-light observation', description: 'Prepared image layers', sourceUrl: '' }] };
 }
 
 export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame, load: () => Promise<void>): PreparedFocusBank {
@@ -25,7 +25,7 @@ export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame
   const radiusM = Math.max(...frame.boundsUnits.max.map((value, axis) => Math.abs(value - frame.boundsUnits.min[axis]!) / 2)) * frame.metersPerUnit;
   return {
     objectId, framingRadiusM: () => radiusM, state: () => state, load,
-    selectLens(id) { if (id !== 'optical') throw new TypeError('Unknown image-layer dataset.'); },
+    selectDataset(id) { if (id !== 'optical') throw new TypeError('Unknown image-layer dataset.'); },
     subscribe: () => () => {},
   };
 }

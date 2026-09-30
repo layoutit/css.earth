@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "alphonsina",
   "displayName": "Alphonsina",
@@ -107,6 +107,6 @@
     "sunSource": "Pinned JPL Horizons elements and DAMIT model 301 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

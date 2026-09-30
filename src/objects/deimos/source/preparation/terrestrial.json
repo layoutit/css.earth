@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "deimos",
   "displayName": "Deimos",
@@ -199,6 +199,6 @@
     "sunSource": "Vendored JPL Horizons Mars satellite elements and IAU/NAIF rotation at the shared epoch."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

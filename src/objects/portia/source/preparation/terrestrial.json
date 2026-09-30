@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "portia",
   "displayName": "Portia",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU/WGCCRE Portia pole and prime meridian from PCK712."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

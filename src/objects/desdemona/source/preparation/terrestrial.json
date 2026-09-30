@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "desdemona",
   "displayName": "Desdemona",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU Desdemona BODY710 pole and meridian from PCK00011, with periodic terms frozen at the prepared epoch."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

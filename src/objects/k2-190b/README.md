@@ -8,7 +8,7 @@ It is one of 2 planets known around K2-190. Its orbit and size follow Mayo et al
 
 **Orbit.** Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): P 10.098858 d Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): a/R* 17.225461; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 88.35712 degrees No archive row states an eccentricity; the orbit is taken as circular Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): transit mid-time 2457224.76792 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 337 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-190's measured colour (#fff0e9, the colour lens of k2-190 (src/objects/k2-190/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-190's measured colour (#fff0e9, the colour dataset of k2-190 (src/objects/k2-190/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-190's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (91), folded onto its orbit. Upper limits and rows without an error are left out.
 

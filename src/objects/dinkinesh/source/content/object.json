@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "dinkinesh",
   "displayName": "Dinkinesh",
@@ -21,9 +21,9 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "tempest-shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "tempest-shape",
     "labels": {
       "shape": "Celestia model",
       "tempest-shape": "TEMPEST shape"

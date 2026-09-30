@@ -38,7 +38,7 @@
       "subject": "Cassini N1355869401 native-frame inspection",
       "status": "deferred",
       "finding": "The OPUS survey returned 93 matches and retained the first 12. The finest-distance calibrated native N1355869401 (CL1/CB3, 8.2-second exposure, about 26.60 km/pixel) was inspected but does not establish a securely registered disc. Exact raster hash and original label are retained.",
-      "revisitWhen": "A registered mapped release supports a defined lens.",
+      "revisitWhen": "A registered mapped release supports a defined dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/himalia/source/survey/opus.json"
       ]

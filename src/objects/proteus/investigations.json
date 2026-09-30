@@ -16,17 +16,16 @@
       "id": "voyager-filter-color",
       "subject": "Voyager violet C1137328, blue C1137339 and green C1137350",
       "status": "included",
-      "finding": "The three calibrated GEOMED frames supply a separate coarse filter-color lens after per-frame geometry, limb and held-out-sector checks. The roughly 60-pixel discs, long exposures and common-interior mask prohibit clear-frame detail transfer, white balance or pan-sharpening.",
+      "finding": "The three calibrated GEOMED frames supply a separate coarse filter-color dataset after per-frame geometry, limb and held-out-sector checks. The roughly 60-pixel discs, long exposures and common-interior mask prohibit clear-frame detail transfer, white balance or pan-sharpening.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/proteus/source/geometry/color-registration.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/proteus/evidence/filter-color/capture.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/proteus/source/geometry/color-registration.json"
       ]
     },
     {
       "id": "stooke-proteus-radius-grid",
       "subject": "Stooke n8proteus.tab global radius grid",
       "status": "included",
-      "finding": "The PDS 5-degree west-positive radius grid supplies the shape and radius-relative Elevation lens above 208 km. It represents broad Voyager-derived shape; modeled unseen terrain, possible facet/depression exaggeration and lack of geoid or local altimetry remain explicit.",
+      "finding": "The PDS 5-degree west-positive radius grid supplies the shape and radius-relative Elevation dataset above 208 km. It represents broad Voyager-derived shape; modeled unseen terrain, possible facet/depression exaggeration and lack of geoid or local altimetry remain explicit.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/proteus/source/manifest.json",
         "https://sbn.psi.edu/pds/resource/stkshape.html"
@@ -47,7 +46,7 @@
       "subject": "Stooke shaded-relief drawings",
       "status": "excluded",
       "finding": "The radius grid is used for shape/Elevation, but its interpretive shaded-relief drawings are not treated as photographic imagery.",
-      "revisitWhen": "A separately documented measured scalar product with its own grid, units and coverage supports a distinct Proteus lens.",
+      "revisitWhen": "A separately documented measured scalar product with its own grid, units and coverage supports a distinct Proteus dataset.",
       "evidence": [
         "https://sbn.psi.edu/pds/resource/stkshape.html"
       ]

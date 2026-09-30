@@ -25,7 +25,7 @@
     "accuracy": "Producer estimates typical global DTM uncertainty at 2.15–4.3 km.",
     "processing": "Honor actual GeoTIFF bounds; bilinear interpolation inside source cells and northwest relief at true height scale. No edge extrapolation.",
     "sourceImages": "2719 Cassini images, through 2015-02-15.",
-    "notSelected": "The secondary relative-albedo model is coarser than the observations and its producer documents topography and shadow leakage; not added as a redundant lens."
+    "notSelected": "The secondary relative-albedo model is coarser than the observations and its producer documents topography and shadow leakage; not added as a redundant dataset."
   },
   "shape": {
     "nasaMeanRadiusKm": 764,

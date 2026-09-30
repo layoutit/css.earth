@@ -102,7 +102,7 @@ export interface SkyBandComposite {
   readonly display: AsinhBandDisplay;
   /** How the composite reports pixels no band observed: as black bytes, or as an alpha channel a consumer can read. */
   readonly coverage: 'black' | 'alpha';
-  /** 'mask' reports stars found on each band as no coverage (point-sources.mts), for lenses that place the image in depth. */
+  /** 'mask' reports stars found on each band as no coverage (point-sources.mts), for datasets that place the image in depth. */
   readonly pointSources?: 'mask';
 }
 

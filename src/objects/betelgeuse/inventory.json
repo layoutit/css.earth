@@ -9,25 +9,25 @@
     },
     {
       "location": "public",
-      "filename": "betelgeuse-lens-color.webp",
+      "filename": "betelgeuse-dataset-color.webp",
       "bytes": 44,
       "sha256": "17430313f949072e8dfbdf575297839d80b4eeed87054219e2901cbc2b14aece"
     },
     {
       "location": "public",
-      "filename": "betelgeuse-lens-matisse-2018-12.webp",
+      "filename": "betelgeuse-dataset-matisse-2018-12.webp",
       "bytes": 1108,
       "sha256": "e37affabf6a6e2f585ebbf33ed7bb653e97eac16f58077b713ee84a8d9bf62f1"
     },
     {
       "location": "public",
-      "filename": "betelgeuse-lens-matisse-2020-12.webp",
+      "filename": "betelgeuse-dataset-matisse-2020-12.webp",
       "bytes": 1042,
       "sha256": "39bd4bed4392125b7443e63c4988befaca4e1865a5182859a791e01477d1fc9e"
     },
     {
       "location": "public",
-      "filename": "betelgeuse-lens-matisse.webp",
+      "filename": "betelgeuse-dataset-matisse.webp",
       "bytes": 470,
       "sha256": "9526c77a77e3183ad375bc1a4ddb1691fc6ee07504bad3046ea950af64a3b62a"
     },
@@ -88,14 +88,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 385,
-      "sha256": "859dc1cd331c8138f74bc89709683eeb18273b73459c4900c8ff6d3d74a13ff0"
+      "bytes": 388,
+      "sha256": "12897340319ba68b06eee9f6387ce599b28dd1e5c307a9f4a16485af608f1bab"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18082,
-      "sha256": "0a2c77d307e5bd18619e8f497c8b87c5a084d431adaf03302e5f2e1f240bceb4"
+      "bytes": 18094,
+      "sha256": "05e96bf3f74995c04f4c60666455ed8c61fad1bd312d282d58115a5e6159fc73"
     },
     {
       "location": "prepared",
@@ -107,19 +107,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2275,
-      "sha256": "8f3789e72b1d021dec36403021a93ce26695836eaebe9e0cc7f4a5241b332534"
+      "sha256": "7944b93b729d43cb41e0a9a3691ac78d65201fb727c698a61a89e3d19bfa6b8a"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 8414,
-      "sha256": "67261bddaaf35ffbd16313990afab94f24cf444129e39a35662d7c617f43acb7"
+      "bytes": 8458,
+      "sha256": "46ee72abc56202b35f01eaf61bcba320b6bbdd50d03c35a97b3708c97a7b63d0"
     },
     {
       "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 10410,
-      "sha256": "e14c391ac13b0fb9291faca6d7d031b527f1d4cbbcdc17180c87d97cd29719e1"
+      "filename": "datasets.json",
+      "bytes": 10454,
+      "sha256": "1d3490e493b47d0f790bb57faa1a0269e1ad686b8ad065435246f557782a9d57"
     },
     {
       "location": "prepared",
@@ -154,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 285483,
-      "sha256": "afa919bfc00f9c84b0806a38ce63684db5837554893b44bd6430cba55a53570e"
+      "bytes": 285569,
+      "sha256": "d8419ed9eb46306391b058b42825fb0ad556e877b05003a2ce17862cbb998892"
     },
     {
       "location": "prepared",

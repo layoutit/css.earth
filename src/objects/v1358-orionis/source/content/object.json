@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "v1358-orionis",
   "displayName": "V1358 Orionis",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "v1358-orionis-lens-color.webp",
+        "thumbnail": "v1358-orionis-dataset-color.webp",
         "surface": "v1358-orionis-surface-color@2x.webp",
         "poles": "v1358-orionis-poles-color@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "radial-field-2013",
         "label": "Radial field",
         "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
-        "thumbnail": "v1358-orionis-lens-radial-field-2013.webp",
+        "thumbnail": "v1358-orionis-dataset-radial-field-2013.webp",
         "surface": "v1358-orionis-surface-radial-field-2013@2x.webp",
         "poles": "v1358-orionis-poles-radial-field-2013@2x.webp",
         "source": {
@@ -125,7 +125,7 @@
         "id": "radial-field-2017",
         "label": "Radial field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "v1358-orionis-lens-radial-field-2017.webp",
+        "thumbnail": "v1358-orionis-dataset-radial-field-2017.webp",
         "surface": "v1358-orionis-surface-radial-field-2017@2x.webp",
         "poles": "v1358-orionis-poles-radial-field-2017@2x.webp",
         "source": {
@@ -180,7 +180,7 @@
         "id": "meridional-field-2013",
         "label": "Meridional field",
         "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
-        "thumbnail": "v1358-orionis-lens-meridional-field-2013.webp",
+        "thumbnail": "v1358-orionis-dataset-meridional-field-2013.webp",
         "surface": "v1358-orionis-surface-meridional-field-2013@2x.webp",
         "poles": "v1358-orionis-poles-meridional-field-2013@2x.webp",
         "source": {
@@ -235,7 +235,7 @@
         "id": "meridional-field-2017",
         "label": "Meridional field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "v1358-orionis-lens-meridional-field-2017.webp",
+        "thumbnail": "v1358-orionis-dataset-meridional-field-2017.webp",
         "surface": "v1358-orionis-surface-meridional-field-2017@2x.webp",
         "poles": "v1358-orionis-poles-meridional-field-2017@2x.webp",
         "source": {
@@ -290,7 +290,7 @@
         "id": "azimuthal-field-2013",
         "label": "Azimuthal field",
         "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
-        "thumbnail": "v1358-orionis-lens-azimuthal-field-2013.webp",
+        "thumbnail": "v1358-orionis-dataset-azimuthal-field-2013.webp",
         "surface": "v1358-orionis-surface-azimuthal-field-2013@2x.webp",
         "poles": "v1358-orionis-poles-azimuthal-field-2013@2x.webp",
         "source": {
@@ -345,7 +345,7 @@
         "id": "azimuthal-field-2017",
         "label": "Azimuthal field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "v1358-orionis-lens-azimuthal-field-2017.webp",
+        "thumbnail": "v1358-orionis-dataset-azimuthal-field-2017.webp",
         "surface": "v1358-orionis-surface-azimuthal-field-2017@2x.webp",
         "poles": "v1358-orionis-poles-azimuthal-field-2017@2x.webp",
         "source": {
@@ -400,7 +400,7 @@
         "id": "brightness-2013",
         "label": "Brightness",
         "qualification": "Published map · Willamo et al. 2022 · ZDI of Hackman et al. (2016) data, Sep 2013",
-        "thumbnail": "v1358-orionis-lens-brightness-2013.webp",
+        "thumbnail": "v1358-orionis-dataset-brightness-2013.webp",
         "surface": "v1358-orionis-surface-brightness-2013@2x.webp",
         "poles": "v1358-orionis-poles-brightness-2013@2x.webp",
         "source": {
@@ -483,7 +483,7 @@
         "id": "brightness-2017",
         "label": "Brightness",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "v1358-orionis-lens-brightness-2017.webp",
+        "thumbnail": "v1358-orionis-dataset-brightness-2017.webp",
         "surface": "v1358-orionis-surface-brightness-2017@2x.webp",
         "poles": "v1358-orionis-poles-brightness-2017@2x.webp",
         "source": {

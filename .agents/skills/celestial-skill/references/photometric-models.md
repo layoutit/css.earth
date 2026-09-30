@@ -27,8 +27,8 @@ citing papers; confirm them in the source first.
 | Body | Values | Source | Read | Route noted at the survey date |
 | --- | --- | --- | --- | --- |
 | 67P | Hapke (2002): w 0.042, g −0.37, B0SH 2.5, hs 0.079, θ̄ 15°, B0CB 0.188, hCB 0.017; fitted at 1.3–53.9° phase, incidence and emission below 70° | [Fornasier et al. 2015](https://doi.org/10.1051/0004-6361/201525901), Table 4 | Full text ([arXiv 1505.06888](https://arxiv.org/abs/1505.06888)) | Record and recipe switch on the observation seam; 67P prepares again |
-| Ryugu | Hapke with shadow hiding per ONC-T band; v band w 0.044, g −0.388, B0 0.98, h 0.075, θ̄ 28° | [Tatsumi et al. 2020](https://doi.org/10.1051/0004-6361/201937096) | Hayabusa2 ONC data-product document; it flips the sign of g relative to the paper, so check the sign | No photograph lens yet; the archive's L2e images are already corrected to 30° incidence, 0° emission and 30° phase |
-| Eros | Hapke: w 0.33, g −0.25, θ̄ 28° at 550 nm; B0 1.4, h 0.01 | [Li et al. 2004](https://doi.org/10.1016/j.icarus.2004.07.024); Hasselmann 2016 Table 7 | Compilation; abstract summary only | Read the paper; no photograph lens yet |
+| Ryugu | Hapke with shadow hiding per ONC-T band; v band w 0.044, g −0.388, B0 0.98, h 0.075, θ̄ 28° | [Tatsumi et al. 2020](https://doi.org/10.1051/0004-6361/201937096) | Hayabusa2 ONC data-product document; it flips the sign of g relative to the paper, so check the sign | No photograph dataset yet; the archive's L2e images are already corrected to 30° incidence, 0° emission and 30° phase |
+| Eros | Hapke: w 0.33, g −0.25, θ̄ 28° at 550 nm; B0 1.4, h 0.01 | [Li et al. 2004](https://doi.org/10.1016/j.icarus.2004.07.024); Hasselmann 2016 Table 7 | Compilation; abstract summary only | Read the paper; no photograph dataset yet |
 
 ## Open questions at the survey date
 

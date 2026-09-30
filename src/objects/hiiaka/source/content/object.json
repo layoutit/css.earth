@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hiiaka",
   "displayName": "Hiʻiaka",
@@ -47,9 +47,9 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "model",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "model",
     "labels": {
       "model": "Shape model"
     },

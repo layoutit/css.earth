@@ -1,4 +1,4 @@
-/** Restore a delivered finite-emission lens bank from its checked-in compact inputs; no lab, no research services. */
+/** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
@@ -7,7 +7,7 @@ import { restoreCompactFiniteEmission, localPath, pinned, type Pin, writeAtomic 
 import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, parsePreparedLmcStars } from '../volume/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { prepareVolumeAtlases } from '../density/index.ts';
-import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 
 const record = (value: unknown, at: string): Record<string, unknown> => {
   assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Expected an object: ${at}`);
@@ -27,9 +27,9 @@ async function deliveredBankVerified(directory: string, installed: string): Prom
   try {
     const descriptor = record(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'descriptor');
     record(descriptor.prepared, 'descriptor delivery');
-    const bytes = await readFile(resolve(installed, 'lenses.json'));
-    const data = validatePreparedVolumeLenses(record(json(bytes, false), 'installed bank').data);
-    for (const lens of data.lenses) for (const resource of lens.volume.resources) {
+    const bytes = await readFile(resolve(installed, 'datasets.json'));
+    const data = validatePreparedVolumeDatasets(record(json(bytes, false), 'installed bank').data);
+    for (const dataset of data.datasets) for (const resource of dataset.volume.resources) {
       const texture = await readFile(resolve(installed, resource.path));
       if (texture.length !== resource.bytes) return false;
     }
@@ -46,12 +46,12 @@ function parseDensityFilter(value: unknown, at: string): CloudDensityFilter {
 }
 
 /**
- * Regenerate `prepared/lenses.json`, its axis atlases and the descriptor from delivered inputs alone.
- * Slice textures are an intermediate: the delivery ships three atlases per lens, as the other nebulae do.
+ * Regenerate `prepared/datasets.json`, its axis atlases and the descriptor from delivered inputs alone.
+ * Slice textures are an intermediate: the delivery ships three atlases per dataset, as the other nebulae do.
  */
 export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: Pin, ifMissing: boolean, allowMissing = false) {
   const inputs = record(await read(root, compactInputs), 'compact inputs');
-  const bankId = text(inputs.bankId, 'bank id'), defaultLens = text(inputs.defaultLens, 'default lens');
+  const bankId = text(inputs.bankId, 'bank id'), defaultDataset = text(inputs.defaultDataset, 'default dataset');
   const framingRadiusUnits = inputs.framingRadiusUnits;
   assert.ok(typeof framingRadiusUnits === 'number' && framingRadiusUnits > 0, 'A delivered bank needs a framing radius.');
   const frame = record(inputs.frame, 'delivered frame');
@@ -72,31 +72,31 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
   await mkdir(staging, { recursive: true });
   try {
     const restored = await restoreCompactFiniteEmission(root, compactInputs, staging);
-    const delivered = Array.isArray(inputs.lenses) ? inputs.lenses.map(value => record(value, 'delivered lens')) : [];
-    assert.equal(restored.length, delivered.length, 'Every delivered lens must be restored.');
-    const lenses = [], receipts = [];
-    for (const lens of restored) {
-      const spec = delivered.find(entry => entry.imageId === lens.imageId);
-      assert.ok(spec, `Delivered inputs do not describe ${lens.imageId}`);
-      const filter = validateCloudDensityFilter(parseDensityFilter(spec.densityFilter, `${lens.imageId} density filter`));
-      const starOptions = record(spec.stars, `${lens.imageId} star presentation`);
+    const delivered = Array.isArray(inputs.datasets) ? inputs.datasets.map(value => record(value, 'delivered dataset')) : [];
+    assert.equal(restored.length, delivered.length, 'Every delivered dataset must be restored.');
+    const datasets = [], receipts = [];
+    for (const dataset of restored) {
+      const spec = delivered.find(entry => entry.imageId === dataset.imageId);
+      assert.ok(spec, `Delivered inputs do not describe ${dataset.imageId}`);
+      const filter = validateCloudDensityFilter(parseDensityFilter(spec.densityFilter, `${dataset.imageId} density filter`));
+      const starOptions = record(spec.stars, `${dataset.imageId} star presentation`);
       const size = starOptions.size, brightness = starOptions.brightness;
       assert.ok(typeof size === 'number' && typeof brightness === 'number', 'Delivered star presentation must be numeric.');
       const enabledIds = Array.isArray(spec.enabledIds) ? spec.enabledIds.map(value => text(value, 'enabled part')) : [];
-      assert.ok(enabledIds.length > 0, `${lens.imageId} names no enabled cloud part.`);
+      assert.ok(enabledIds.length > 0, `${dataset.imageId} names no enabled cloud part.`);
 
-      // The accepted bank embeds this lens's own provenance, so the replay attaches the same pinned record.
-      const provenance = await read(root, parsePin(spec.provenance, `${lens.imageId} provenance`));
-      const compiled = compileCssVolume({ id: `${bankId}-${lens.imageId}`, frame: frame as never,
-        slices: { ...lens.slices, provenance } as never, recipe: { anchors: [] } });
-      // Delivered resources live under the lens id, exactly as the accepted delivery laid them out.
+      // The accepted bank embeds this dataset's own provenance, so the replay attaches the same pinned record.
+      const provenance = await read(root, parsePin(spec.provenance, `${dataset.imageId} provenance`));
+      const compiled = compileCssVolume({ id: `${bankId}-${dataset.imageId}`, frame: frame as never,
+        slices: { ...dataset.slices, provenance } as never, recipe: { anchors: [] } });
+      // Delivered resources live under the dataset id, exactly as the accepted delivery laid them out.
       const prefixed = { ...compiled,
-        resources: compiled.resources.map(resource => ({ ...resource, path: `${lens.imageId}/${resource.path}` })),
+        resources: compiled.resources.map(resource => ({ ...resource, path: `${dataset.imageId}/${resource.path}` })),
         stacks: compiled.stacks.map(stack => ({ ...stack,
-          leaves: stack.leaves.map(leaf => ({ ...leaf, texturePath: `${lens.imageId}/${leaf.texturePath}` })) })) };
-      receipts.push({ id: lens.imageId,
+          leaves: stack.leaves.map(leaf => ({ ...leaf, texturePath: `${dataset.imageId}/${leaf.texturePath}` })) })) };
+      receipts.push({ id: dataset.imageId,
         textures: prefixed.resources.map(resource => ({ path: resource.path, bytes: resource.bytes })),
-        coverage: lens.coverage });
+        coverage: dataset.coverage });
 
       const points = starsPayload.stars.map(star => {
         const weight = cloudDensityWeight(star.cloudSignal, filter);
@@ -104,11 +104,11 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
         return { id: star.id, positionUnits: star.positionUnits, colorCss: star.colorCss,
           sizePx: star.sizePx * size, opacity: star.opacity * support * brightness };
       });
-      const presentation = record(spec.presentation, `${lens.imageId} presentation`);
-      const lensBrightness = record(spec.brightness, `${lens.imageId} brightness`);
+      const presentation = record(spec.presentation, `${dataset.imageId} presentation`);
+      const datasetBrightness = record(spec.brightness, `${dataset.imageId} brightness`);
       const attenuation = (key: string) => {
-        const value = lensBrightness[key];
-        assert.ok(typeof value === 'number' && Number.isFinite(value), `${lens.imageId} brightness ${key} must be a number.`);
+        const value = datasetBrightness[key];
+        assert.ok(typeof value === 'number' && Number.isFinite(value), `${dataset.imageId} brightness ${key} must be a number.`);
         return value;
       };
       // Render the impostor views before the slices are packed, so a galaxy that covers a few pixels is drawn as one
@@ -117,36 +117,36 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
       // away. The atlas packer rewrites slice textures only, so these views pass through it unchanged.
       const projected = await prepareVolumeImpostors({ volume: prefixed,
         brightness: { overall: attenuation('overall'), x: attenuation('x'), y: attenuation('y'), z: attenuation('z') },
-        prefix: `${lens.imageId}/impostors`,
+        prefix: `${dataset.imageId}/impostors`,
         readResource: path => readFile(localPath(staging, path)),
         writeResource: async (path: string, bytes: Uint8Array) => writeAtomic(localPath(staging, `atlases-out/${path}`), Buffer.from(bytes)) });
-      // Pack the axis atlases from the restored slices; three requests per lens instead of one per slab.
-      const baked = await prepareVolumeAtlases({ volume: projected, prefix: `${lens.imageId}/atlases`,
+      // Pack the axis atlases from the restored slices; three requests per dataset instead of one per slab.
+      const baked = await prepareVolumeAtlases({ volume: projected, prefix: `${dataset.imageId}/atlases`,
         readResource: path => readFile(localPath(staging, path)),
         writeResource: async (path: string, bytes: Uint8Array) => writeAtomic(localPath(staging, `atlases-out/${path}`), Buffer.from(bytes)) });
-      lenses.push({ id: lens.imageId, label: text(presentation.label, 'lens label'), title: text(presentation.label, 'lens title'),
-        description: text(presentation.description, 'lens description'), sourceUrl: presentation.sourceUrl,
-        volume: baked, brightness: lensBrightness, stars: { frame: starsPayload.frame, points } });
+      datasets.push({ id: dataset.imageId, label: text(presentation.label, 'dataset label'), title: text(presentation.label, 'dataset title'),
+        description: text(presentation.description, 'dataset description'), sourceUrl: presentation.sourceUrl,
+        volume: baked, brightness: datasetBrightness, stars: { frame: starsPayload.frame, points } });
     }
-    const first = delivered.find(entry => entry.imageId === defaultLens);
-    assert.ok(first, 'The delivered default lens is missing.');
-    const data = validatePreparedVolumeLenses({ schema: 'cssearth-volume-lenses@1', id: bankId, defaultLens, framingRadiusUnits,
-      starsEnabled: Boolean(record(first.stars, 'default star presentation').enabled), lenses });
-    const envelope = stringify({ schema: 'cssearth-prepared-object@1', id: bankId, type: 'volume-lens-bank', format: 'cssearth-volume-lenses@1', data });
+    const first = delivered.find(entry => entry.imageId === defaultDataset);
+    assert.ok(first, 'The delivered default dataset is missing.');
+    const data = validatePreparedVolumeDatasets({ schema: 'cssearth-volume-datasets@1', id: bankId, defaultDataset, framingRadiusUnits,
+      starsEnabled: Boolean(record(first.stars, 'default star presentation').enabled), datasets });
+    const envelope = stringify({ schema: 'cssearth-prepared-object@1', id: bankId, type: 'volume-dataset-bank', format: 'cssearth-volume-datasets@1', data });
 
     await mkdir(installed, { recursive: true });
-    // Replace each installed lens directory; a rename onto a populated one fails, and a re-prepare is normal.
+    // Replace each installed dataset directory; a rename onto a populated one fails, and a re-prepare is normal.
     for (const entry of await readdir(resolve(staging, 'atlases-out'))) {
       await rm(resolve(installed, entry), { recursive: true, force: true });
       await rename(resolve(staging, 'atlases-out', entry), resolve(installed, entry));
     }
-    await writeAtomic(resolve(installed, 'lenses.json'), envelope);
-    await writeAtomic(resolve(installed, 'delivery.json'), stringify({ schema: 'cssearth-finite-emission-delivery-receipt@1',
-      compactInputs, lenses: receipts }));
-    await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: 'cssearth-object@1', id: bankId, type: 'volume-lens-bank',
+    await writeAtomic(resolve(installed, 'datasets.json'), envelope);
+    await writeAtomic(resolve(installed, 'delivery.json'), stringify({ schema: 'cssearth-finite-emission-delivery-receipt@2',
+      compactInputs, datasets: receipts }));
+    await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: 'cssearth-object@2', id: bankId, type: 'volume-dataset-bank',
       properties: { frame, preparation: { source: 'source/compact-delivery.json' } },
-      prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json' } }));
-    console.log(`DELIVERY_READY ${directory}: ${lenses.length} lenses, ${lenses.reduce((sum, lens) => sum + lens.volume.resources.length, 0)} atlases`);
+      prepared: { format: 'cssearth-volume-datasets@1', url: 'prepared/datasets.json' } }));
+    console.log(`DELIVERY_READY ${directory}: ${datasets.length} datasets, ${datasets.reduce((sum, dataset) => sum + dataset.volume.resources.length, 0)} atlases`);
     return { id: bankId, status: 'prepared' };
   } finally { await rm(staging, { recursive: true, force: true }); }
 }

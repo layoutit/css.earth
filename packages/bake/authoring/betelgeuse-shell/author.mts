@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one lens bank.
+/** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one dataset bank.
  *
  *   node packages/bake/authoring/betelgeuse-shell/author.mts [--check]
  *
@@ -290,7 +290,7 @@ function volumeRecipe(grid: string, material: Record<string, unknown>) {
   };
 }
 
-export async function author(defaultLens = 'zimpol-v') {
+export async function author(defaultDataset = 'zimpol-v') {
   const scene = JSON.parse(await readFile(starScene, 'utf8')) as { worldFrame: { originM: [number, number, number]; bodyRadiusM: number; referenceFrame: string; epochJdTt: number } };
   const origin = scene.worldFrame.originM, radiusM = scene.worldFrame.bodyRadiusM, distanceM = Math.hypot(...origin);
   const raDeg = (Math.atan2(origin[1], origin[0]) * 180 / Math.PI + 360) % 360, decDeg = Math.asin(origin[2] / distanceM) * 180 / Math.PI;
@@ -298,7 +298,7 @@ export async function author(defaultLens = 'zimpol-v') {
   const auPerUnit = radiusM / METRES_PER_AU, paperAuPerUnit = radiusArcsec * VEIL_2019_12.adoptedDistancePc;
   const { size, halfUnits } = GRID, step = 2 * halfUnits / size;
 
-  // --- the measured lens: the 2024 polarisation map, spread along the line of sight by scattering angle ---
+  // --- the measured dataset: the 2024 polarisation map, spread along the line of sight by scattering angle ---
   const intensity = await declaredFits(PRODUCTS.intensity), dolp = await declaredFits(PRODUCTS.dolp);
   if (intensity.width !== dolp.width || intensity.height !== dolp.height) throw new Error('Intensity and polarisation grids differ.');
   const { width, height } = intensity, I = intensity.values, P = dolp.values;
@@ -390,7 +390,7 @@ export async function author(defaultLens = 'zimpol-v') {
   // channel of the last stop.
   const zimpolGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...COLOUR_MAP.stops.at(-1)!);
 
-  // --- the third measured lens: the 4 micrometre light outside the photosphere, given the same treatment ---
+  // --- the third measured dataset: the 4 micrometre light outside the photosphere, given the same treatment ---
   // The reconstruction that paints the star's own sphere also carries a fifth of its flux outside the disc. On the
   // sphere that light is a flat plate behind the body; here it is asked for a shape, exactly as the polarisation was.
   const emissionFits = await declaredFits(EMISSION_2020);
@@ -470,7 +470,7 @@ export async function author(defaultLens = 'zimpol-v') {
   const emissionPreview = await sharp(previewPixels, { raw: { width: previewSize, height: previewSize, channels: 3 } })
     .png({ compressionLevel: 9 }).toBuffer();
 
-  // --- the measured lens: silicon monoxide about the star, placed in depth by its own velocities ---
+  // --- the measured dataset: silicon monoxide about the star, placed in depth by its own velocities ---
   // Every other dataset here is a sky image given a shape. This one is a cube: two sky axes measured, and the third from
   // the Doppler shift of every channel under a stated outflow, the first reading of an expanding circumstellar envelope.
   const sioBytes = await declaredDownload(ALMA_SIO), sioContinuumBytes = await declaredDownload(ALMA_SIO.continuum);
@@ -681,7 +681,7 @@ export async function author(defaultLens = 'zimpol-v') {
   }
   const sioPreview = await sharp(sioPixels, { raw: { width: sioPreviewSize, height: sioPreviewSize, channels: 3 } })
     .png({ compressionLevel: 9 }).toBuffer();
-  // --- the published lens: the December 2019 RADMC-3D clump, drawn as scattered starlight ---
+  // --- the published dataset: the December 2019 RADMC-3D clump, drawn as scattered starlight ---
   // Their axes are x along right ascension (east), y along declination (north), z positive toward Earth. This grid's are
   // west, north and away, so east and toward-Earth both change sign.
   const [xRa, yDec, zEarth] = VEIL_2019_12.centreRaDecEarthAu;
@@ -719,7 +719,7 @@ export async function author(defaultLens = 'zimpol-v') {
   const veilGain = -Math.log(1 - VEIL_2019_12.scatteredSurfaceBrightness) / (veilBrightestColumn * Math.exp(-veilOpticalDepth / 2));
 
   const provenance = {
-    schema: 'cssearth-volume-provenance@1',
+    schema: 'cssearth-volume-provenance@2',
     title: 'Betelgeuse circumstellar material: polarised dust, the 4 micrometre light outside the disc, silicon monoxide around the star and the published Great Dimming clump',
     kind: 'observed-sky-maps-line-cube-and-published-radiative-transfer-model',
     authors: ['M. Montargès', 'E. Cannon', 'A. de Koter', 'P. Kervella', 'E. Lagadec', 'L. Decin', 'A. Boccaletti', 'O. Flasseur', 'J. Milli', 'S. Ridgway', 'A. K. Dupree'],
@@ -764,7 +764,7 @@ export async function author(defaultLens = 'zimpol-v') {
       'The 2019 clump is a model fitted to images, not an image. Its January and March 2020 epochs are recorded by its own authors as unoptimised best guesses and are not shipped.',
       'Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.',
       'Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.',
-      'The four lenses span 2019 to 2024 and measure different things. None is a picture of another.',
+      'The four datasets span 2019 to 2024 and measure different things. None is a picture of another.',
       `The 4 micrometre light is one reconstruction of one epoch. Its depth is the envelope that best projects to its radial profile, an inference like the 2024 map\u2019s, drawn symmetric in depth. Within one beam of the published disc that light is the star\u2019s own edge smeared by the beam, so it is drawn only from ${emissionInnerUnits.toFixed(2)} stellar radii out.`,
       'The SiO depths assume every parcel moves straight out from the star at one speed, the blue edge of its absorption against the star. The same absorption shows gas falling back, and the inner wind of a red supergiant is turbulent, so a velocity is not a unique depth: the depths are this model\u2019s, not measured ones.',
       'Inside the star\u2019s continuum footprint the SiO line absorbs against the star and emission there is not drawn, so the envelope has an empty cylinder along the line of sight through the star.',
@@ -814,19 +814,19 @@ export async function author(defaultLens = 'zimpol-v') {
       ...('occultingCentreUnits' in grid ? { occultingCentreUnits: grid.occultingCentreUnits } : {}) });
   }
   const delivery = {
-    schema: 'cssearth-nebula-delivery@1', id: 'betelgeuse-shell', method: 'density-grid',
-    request: deliveryGrids.find(grid => grid.id === defaultLens)!.recipe,
+    schema: 'cssearth-nebula-delivery@2', id: 'betelgeuse-shell', method: 'density-grid',
+    request: deliveryGrids.find(grid => grid.id === defaultDataset)!.recipe,
     inputPins: [{ path: 'src/objects/betelgeuse-shell/source/provenance.json' },
       ...grids.map(grid => ({ path: `src/objects/betelgeuse-shell/source/${grid.file}` }))],
     sky: { centerIcrsDegrees: [raDeg, decDeg], distancePc: distanceM / METERS_PER_PARSEC, imageRotationDegrees: 0, arcsecPerUnit: radiusArcsec },
     sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
     description: 'Dust around Betelgeuse in two datasets that share one frame: the degree of linear polarisation measured by VLT/SPHERE-ZIMPOL on 3 December 2024, and the dust clump Montargès et al. fitted to the Great Dimming of December 2019. One unit is one stellar radius; the depth of each is a stated model, not a measurement.',
-    defaultLens, framingRadiusUnits: GRID.halfUnits,
+    defaultDataset, framingRadiusUnits: GRID.halfUnits,
     // This cloud belongs to Betelgeuse. It is not a place of its own, so it has no catalogue entry and never appears
     // as a marker, a search result or a destination; its datasets are listed by the star.
     attachedTo: 'betelgeuse',
     acceptedLabResult: 'betelgeuse-shell-four-grids',
-    compactInputs: deliveryGrids.find(grid => grid.id === defaultLens)!.recipe, compactMethod: 'density-grid',
+    compactInputs: deliveryGrids.find(grid => grid.id === defaultDataset)!.recipe, compactMethod: 'density-grid',
     grids: deliveryGrids,
   };
   outputs.push(['delivery.json', Buffer.from(JSON.stringify(delivery, null, 2) + '\n')]);
@@ -856,13 +856,13 @@ export async function author(defaultLens = 'zimpol-v') {
        { id: 'extinction', label: 'Optical depth', value: `ln ${VEIL_2019_12.dimmingFactor} through the centre, the ${VEIL_2019_12.dimmingFactor}-times dimming the paper reports` },
        { id: 'epoch', label: 'Epoch', value: 'December 2019, the only optimised solution the paper reports' }];
   const presentation = {
-    schema: 'cssearth-volume-presentation-source@1', objectId: 'betelgeuse-shell', name: 'Betelgeuse dust shell',
-    defaultLens,
-    bank: { path: 'src/objects/betelgeuse-shell/prepared/lenses.json' },
+    schema: 'cssearth-volume-presentation-source@2', objectId: 'betelgeuse-shell', name: 'Betelgeuse dust shell',
+    defaultDataset,
+    bank: { path: 'src/objects/betelgeuse-shell/prepared/datasets.json' },
     recipes: deliveryGrids.map(grid => ({ id: grid.id, path: grid.recipe.path })),
     sharedInputs: [],
     inputEvidence: [],
-    lenses: grids.map(grid => ({
+    datasets: grids.map(grid => ({
       id: grid.id, label: grid.label,
       title: grid.id === 'sio-2023' ? 'Silicon monoxide around Betelgeuse, placed by its own velocities'
         : grid.id === 'emission-2020' ? 'The light outside Betelgeuse\u2019s disc at 4 micrometres'
@@ -895,7 +895,7 @@ export async function author(defaultLens = 'zimpol-v') {
     })),
   };
   outputs.push(['veil-2019-12-parameters.json', Buffer.from(JSON.stringify({
-    schema: 'cssearth-published-model-parameters@1', objectId: 'betelgeuse-shell', lensId: 'veil-2019-12',
+    schema: 'cssearth-published-model-parameters@2', objectId: 'betelgeuse-shell', datasetId: 'veil-2019-12',
     citation: 'Montarg\u00e8s, M., Cannon, E., Lagadec, E., de Koter, A., Kervella, P., Sanchez-Bermudez, J., Paladini, C., Cannon, E., et al. 2021, "A dusty veil shading Betelgeuse during its Great Dimming", Nature 594, 365',
     doi: '10.1038/s41586-021-03546-8', preprint: 'https://arxiv.org/abs/2201.10551',
     locator: 'Extended Data Table 3, column "December 2019"; axes defined by Extended Data Figure 6',
@@ -923,7 +923,7 @@ export async function author(defaultLens = 'zimpol-v') {
   const pathOf = (entry: { name: string; downloaded: boolean }) => `${entry.downloaded ? DOWNLOADS_BASE : packageBase}/${entry.name}`;
   const observations: Record<string, { dpId: string; role: string }> = {
     'observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_phase3.fits': { dpId: PRODUCTS.intensity.dpId, role: 'V-band pipeline intensity; the star centre and the intensity floor are measured on it' },
-    'observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits': { dpId: PRODUCTS.dolp.dpId, role: 'V-band degree of linear polarisation; the quantity the 2024 lens carries' },
+    'observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits': { dpId: PRODUCTS.dolp.dpId, role: 'V-band degree of linear polarisation; the quantity the 2024 dataset carries' },
     'observations/SPHERE_ZIMPOL_Betelgeuse_P1_N_I_phase3.fits': { dpId: 'ADP.2026-08-19T13:19:07.647', role: 'N_I pipeline intensity, retained for comparison and not drawn' },
     'observations/SPHERE_ZIMPOL_Betelgeuse_P1_N_I_DOLP.fits': { dpId: 'ADP.2026-08-19T13:19:07.648', role: 'N_I degree of linear polarisation, retained for comparison and not drawn' },
   };
@@ -953,7 +953,7 @@ export async function author(defaultLens = 'zimpol-v') {
         title: `ESO Phase 3 BETELGEUSE-B \u00b7 ${observation.dpId}`, credit: 'ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montarg\u00e8s et al. 2026, A&A 711, L12',
         displayCredit: 'ESO/VLT/SPHERE-ZIMPOL', acquisition: `Downloaded unchanged from the ESO archive by its DataLink identifier ${observation.dpId}. ${observation.role}.`,
         license: 'CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.',
-        ...(id === 'sphere-zimpol-betelgeuse-p1-v-dolp' ? { lensId: 'zimpol-v' } : {}) });
+        ...(id === 'sphere-zimpol-betelgeuse-p1-v-dolp' ? { datasetId: 'zimpol-v' } : {}) });
     } else if (preview) {
       inputs.push({ id: `preview-${preview.id}`, ...binding(`preview-${preview.id}`), path, origin: preview.origin, sourceUrl: preview.origin, title: preview.title,
         credit: preview.credit, displayCredit: preview.credit,
@@ -968,7 +968,7 @@ export async function author(defaultLens = 'zimpol-v') {
         displayCredit: 'ALMA (ESO/NAOJ/NRAO)',
         acquisition: `Cut out of the archive's own pipeline cube ${ALMA_SIO.product} through its SODA service, on the circle about the observation's phase centre that the origin URL requests. packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts keeps the channels within ${ALMA_SIO.windowKmS} km/s of ${ALMA_SIO.windowCentreKmS} km/s LSRK in a box ${ALMA_SIO.boxHalfMas} mas either way of the phase centre, and subtracts from each pixel the median of the ${sio.number('CONTCHAN')} channels more than ${ALMA_SIO.lineFreeBeyondKmS} km/s from the line. The pipeline removes the continuum before imaging, so that median is only its residual. The archive product is 72 GB; this is the part of it that carries the line around this star.`,
         license: 'ALMA data are public under the ALMA data access policy; retain the ALMA credit line.',
-        lensId: 'sio-2023' });
+        datasetId: 'sio-2023' });
     } else if (name === ALMA_SIO.continuum.path) {
       inputs.push({ id: 'alma-continuum-2023-08', ...binding('alma-continuum-2023-08'), path,
         origin: ALMA_SIO.continuum.url,
@@ -987,7 +987,7 @@ export async function author(defaultLens = 'zimpol-v') {
         displayCredit: 'ESO/VLTI/MATISSE; reconstruction by this repository',
         acquisition: 'The same bytes Betelgeuse\u2019s own package ships, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star\u2019s drawn sphere.',
         license: 'Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.',
-        lensId: 'emission-2020' });
+        datasetId: 'emission-2020' });
     } else if (name === 'veil-2019-12-parameters.json') {
       inputs.push({ id: 'veil-2019-12-parameters', ...binding('veil-2019-12-parameters'), path,
         origin: 'https://doi.org/10.1038/s41586-021-03546-8', sourceUrl: 'https://arxiv.org/abs/2201.10551',
@@ -996,7 +996,7 @@ export async function author(defaultLens = 'zimpol-v') {
         displayCredit: 'Montarg\u00e8s et al. (2021)',
         acquisition: 'The published December 2019 clump geometry, density, composition and grain size, transcribed from the paper with its coordinate convention. This record identifies the transcription; the paper is the source.',
         license: 'Published numbers cited under normal scholarly citation; the paper is not redistributed here.',
-        lensId: 'veil-2019-12' });
+        datasetId: 'veil-2019-12' });
     } else if (name.endsWith('.pdf')) {
       documents.push({ id: 'release-description', path,
         sourceBinding: { kind: 'local', reason: 'The ESO Phase 3 release description of the collection, retained beside the products it describes.' } });
@@ -1008,7 +1008,7 @@ export async function author(defaultLens = 'zimpol-v') {
         sourceBinding: { kind: 'local', reason: 'Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above.' } });
     }
   }
-  outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository',
+  outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository',
     inputs, documents, generatedIntermediates: intermediates }, null, 2) + '\n')]);
   return { outputs, measured: provenance.measured, grids: grids.map(g => ({ id: g.id, peak: g.built.peak, voxels: g.built.filled })) };
 }

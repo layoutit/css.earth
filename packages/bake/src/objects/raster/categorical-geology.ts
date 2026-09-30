@@ -1,5 +1,5 @@
 import type {GeologyPolygon} from './contracts.ts';
-import {parseGeologyLens,parsePolygonGrid} from './source-records.ts';
+import {parseGeologyDataset,parsePolygonGrid} from './source-records.ts';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 
@@ -7,9 +7,9 @@ const localPath = (path: unknown): path is string => typeof path === 'string' &&
 
 /** The recipe binds archival symbols, not an ordinal or interpolated scale. */
 export function validateGeologyProfile(value: unknown) {
-  const lens=parseGeologyLens(value);
-  const grid = lens.grid;
-  if (lens.format !== 'geologic-shapefile' || !localPath(lens.path) || !grid ||
+  const dataset=parseGeologyDataset(value);
+  const grid = dataset.grid;
+  if (dataset.format !== 'geologic-shapefile' || !localPath(dataset.path) || !grid ||
       !localPath(grid.attributePath) || !localPath(grid.projectionPath) ||
       typeof grid.coordinateSystem !== 'string' || !grid.coordinateSystem.startsWith('GCS_') ||
       !(grid.referenceRadiusMeters > 0) || grid.longitudeDirection !== 'east-positive' ||
@@ -22,14 +22,14 @@ export function validateGeologyProfile(value: unknown) {
       !Array.isArray(grid.expectedBounds) || grid.expectedBounds.length !== 4 || !grid.expectedBounds.every(Number.isFinite) ||
       typeof grid.field !== 'string' || !Array.isArray(grid.unknownValues) ||
       grid.unknownValues.some(value => typeof value !== 'string') ||
-      lens.overlapPolicy !== 'withhold-conflicts' || lens.relief || lens.valueTransform ||
-      lens.sampling !== 'nearest' || !Array.isArray(lens.categories) || lens.categories.length < 2 ||
-      lens.categories.some(entry => typeof entry.value !== 'string' || !entry.value ||
+      dataset.overlapPolicy !== 'withhold-conflicts' || dataset.relief || dataset.valueTransform ||
+      dataset.sampling !== 'nearest' || !Array.isArray(dataset.categories) || dataset.categories.length < 2 ||
+      dataset.categories.some(entry => typeof entry.value !== 'string' || !entry.value ||
         typeof entry.label !== 'string' || !entry.label || !/^#[0-9a-f]{6}$/i.test(entry.color)) ||
-      new Set([...lens.categories.map(entry => entry.value), ...grid.unknownValues]).size !== lens.categories.length + grid.unknownValues.length) {
+      new Set([...dataset.categories.map(entry => entry.value), ...grid.unknownValues]).size !== dataset.categories.length + grid.unknownValues.length) {
     throw new TypeError('Invalid categorical geology profile.');
   }
-  return lens;
+  return dataset;
 }
 
 /** dBASE character attributes retain record order, including deleted records. */
@@ -148,16 +148,16 @@ export function createGeologySampler(polygons: readonly (GeologyPolygon|null)[])
 }
 
 export async function loadGeologySurface(root: string, value: unknown) {
-  const lens=validateGeologyProfile(value);
-  const {grid} = lens;
-  const [shape, dbf, projection] = await Promise.all([readFile(resolve(root, lens.path)), readFile(resolve(root, grid.attributePath)), readFile(resolve(root, grid.projectionPath), 'utf8')]);
+  const dataset=validateGeologyProfile(value);
+  const {grid} = dataset;
+  const [shape, dbf, projection] = await Promise.all([readFile(resolve(root, dataset.path)), readFile(resolve(root, grid.attributePath)), readFile(resolve(root, grid.projectionPath), 'utf8')]);
   const projectionName = projection.match(/^GEOGCS\["([^"]+)"/u)?.[1];
   const sphere = projection.match(/SPHEROID\["[^"]+",([\d.]+),([\d.]+)\]/u);
   if (projectionName !== grid.coordinateSystem || Number(sphere?.[1]) !== grid.referenceRadiusMeters ||
       Number(sphere?.[2]) !== 0 || !projection.includes('PRIMEM["Reference_Meridian",0.0]') || !projection.includes('UNIT["Degree",0.0174532925199433]')) throw new Error('Geology projection differs.');
   const {rows, fields} = decodeGeologyAttributes(dbf), polygons = decodeGeologyPolygons(shape, grid);
   if (rows.length !== polygons.length || fields.find(field => field.name === grid.field)?.type !== 'C') throw new Error('Geology attribute join differs.');
-  const values = new Map(lens.categories.map((category, index) => [category.value, index])), counts: Record<string,number> = {};
+  const values = new Map(dataset.categories.map((category, index) => [category.value, index])), counts: Record<string,number> = {};
   rows.forEach((row, i) => {
     if (!row || !polygons[i]) {polygons[i] = null; return;}
     const value = row[grid.field];
@@ -169,8 +169,8 @@ export async function loadGeologySurface(root: string, value: unknown) {
     interpretation: 'Archived interpreted geologic units; category colors mark units, not measured color or elevation.'}};
 }
 
-export function categoryColorForValue(value: number, lens: {categories: readonly {color:string}[]}) {
-  if (!Number.isSafeInteger(value) || !lens.categories[value]) throw new Error('Invalid geology category sample.');
-  const hex = lens.categories[value].color;
+export function categoryColorForValue(value: number, dataset: {categories: readonly {color:string}[]}) {
+  if (!Number.isSafeInteger(value) || !dataset.categories[value]) throw new Error('Invalid geology category sample.');
+  const hex = dataset.categories[value].color;
   return [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
 }

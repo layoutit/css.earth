@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-149026b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "thermal",
       "output": "hd-149026b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-149026b-lens-{id}.webp",
+      "thumbnail": "hd-149026b-dataset-{id}.webp",
       "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {

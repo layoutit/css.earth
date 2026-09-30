@@ -313,13 +313,13 @@ bulge is one in 16 of its RR Lyrae stars.
 
 ## Evidence
 
-Four [browser captures](evidence/2026-09-29/capture.json) of this version zoom
-out from the Sun along one line of sight. [Near the Sun](evidence/2026-09-29/near-sun.jpg)
+Four browser captures of this version zoom
+out from the Sun along one line of sight. Near the Sun
 the census dots are mostly dim red dwarfs; in the
-[Sun's neighbourhood](evidence/2026-09-29/sun-neighbourhood.jpg) and
-[2,100 light-years out](evidence/2026-09-29/disc-2100ly.jpg) the disc's hot
+Sun's neighbourhood and
+2,100 light-years out the disc's hot
 stars gather toward its far side, as the Milky Way does in our sky; from
-[39,500 light-years](evidence/2026-09-29/galaxy-39500ly.jpg) the tracers and
+39,500 light-years the tracers and
 the RR Lyrae bulge sit on the backing around Sgr A*. No level's edge is on
 screen in any of them. They check the displayed composition, not frame rate.
 

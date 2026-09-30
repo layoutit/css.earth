@@ -12,13 +12,13 @@ Epsilon Indi A is one of the nearest Sun-like stars, 3.6 parsecs away. JWST has 
 
 **Radial velocity.** Gaia DR3's -40.43 ± 0.13 km/s. Also HD 209100 and HIP 108870.
 
-**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
+**Colour dataset.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,700 K and log g 4.63 (u1 0.736, u2 0.053): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/eps-indi-a.json: 4.625.
 
 ## Evidence
 
-Run of 2026-09-23 (this version): [the four bodies in the app](evidence/epsilon-indi.png), headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. see the planet's README for its placement against the measured positions.
+Run of 2026-09-23 (this version): the four bodies in the app, headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. see the planet's README for its placement against the measured positions.
 
 ## Known problems
 

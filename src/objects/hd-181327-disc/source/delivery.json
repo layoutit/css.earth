@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-nebula-delivery@1",
+  "schema": "cssearth-nebula-delivery@2",
   "id": "hd-181327-disc",
   "method": "density-grid",
   "request": {
@@ -24,7 +24,7 @@
   },
   "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
   "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it in six filters from 1.8 to 4.4 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), in the reflectance colour of its dust as Gáspár et al. (2026) show it: each filter divided by the star's own brightness. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the images, not a measurement.",
-  "defaultLens": "reflectance",
+  "defaultDataset": "reflectance",
   "framingRadiusUnits": 300,
   "attachedTo": "hd-181327",
   "acceptedLabResult": "hd-181327-disc-density-grids",

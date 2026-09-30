@@ -12,7 +12,7 @@ test('frames group into apparitions months apart and series minutes apart', () =
   assert.deepEqual(series(frames).map(group => group.length), [5, 5, 5]);
 });
 
-test('a lens is anchored on the apparition the figure shows most, then the larger, then the earlier', () => {
+test('a dataset is anchored on the apparition the figure shows most, then the larger, then the earlier', () => {
   const frames = epochs('2017-10-10T03:56:00', '2017-10-11T04:40:00', '2019-02-25T04:00:00', '2019-03-15T03:00:00', '2019-03-20T03:00:00');
   assert.equal(anchorApparition(frames, [frames[4], frames[7]]).anchor, 0, 'two shown columns in 2017 outweigh fifteen unshown frames in 2019');
   assert.equal(anchorApparition(frames, [frames[4], frames[12]]).anchor, 1, 'one shown column each: the larger apparition');
@@ -20,7 +20,7 @@ test('a lens is anchored on the apparition the figure shows most, then the large
   assert.equal(anchorApparition(epochs('2017-10-10T03:56:00', '2019-02-25T04:00:00'), []).anchor, 0, 'equal apparitions: the earlier');
 });
 
-test('every frame of the apparitions a lens casts is kept while they fit the bound', () => {
+test('every frame of the apparitions a dataset casts is kept while they fit the bound', () => {
   const frames = epochs('2019-02-25T04:00:00', '2017-10-10T03:56:00', '2017-10-11T04:40:00');
   const kept = selectFrames(frames, [frames[0]]);
   assert.equal(kept.length, 15);

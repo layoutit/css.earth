@@ -8,7 +8,7 @@ It is one of 3 planets known around TOI-270. Its orbit and size follow Kaye et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.37969912166 d Kaye et al. 2022 (2022MNRAS.510.5464K), via the NASA Exoplanet Archive ps table (pl_refname KAYE_ET_AL__2022): a/R* 41.744; Mikal-Evans et al. 2023 (2023AJ....165...84M), via the NASA Exoplanet Archive ps table (pl_refname MIKAL_EVANS_ET_AL__2023): inclination 89.68 degrees Mikal-Evans et al. 2023 (2023AJ....165...84M), via the NASA Exoplanet Archive ps table (pl_refname MIKAL_EVANS_ET_AL__2023): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460984.247091 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-270's measured colour (#ffc384, the colour lens of toi-270 (src/objects/toi-270/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-270's measured colour (#ffc384, the colour dataset of toi-270 (src/objects/toi-270/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-270's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (32, 97, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

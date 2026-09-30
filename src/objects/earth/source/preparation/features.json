@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-surface-features@1",
+  "schema": "cssearth-surface-features@2",
   "directory": "features",
   "archive": null,
   "members": null,
@@ -11,7 +11,7 @@
     "className": "earth-body",
     "withoutClassName": "earth-body-polar"
   },
-  "lensIds": [
+  "datasetIds": [
     "normal",
     "clouds",
     "topography",

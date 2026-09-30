@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-76b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature",
       "output": "wasp-76b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-76b-lens-{id}.webp",
+      "thumbnail": "wasp-76b-dataset-{id}.webp",
       "source": "science/may-2021/phase-curve.json",
       "falseColor": true,
       "science": {

@@ -11,7 +11,7 @@ import { mountImagePlane } from '@cssearth/volume-viewer/scene/image-plane';
 
 /**
  * The saved result's registered original-image plane, validated against the mounted Earth frame. Any other
- * image prepared in the same lens frame (the difference map) reuses this plane's registration unchanged.
+ * image prepared in the same dataset frame (the difference map) reuses this plane's registration unchanged.
  */
 export async function loadRegisteredOverlay(manifestPath: string, url: (path: string) => string,
   expected: { frame: DensityVolumeFrame; distanceUnits: number | undefined }) {

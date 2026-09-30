@@ -12,30 +12,30 @@ const key = (label: string,name: string) => {
 /** Narrow authored policy: zero-offset, single-band, full-longitude PDS3 rasters.
  * Nearest-cell sampling preserves measured/modelled values and missing cells. */
 export function validatePdsImagePolicy(value: unknown) {
-  const lens=(() => { try { return parsePdsImagePolicy(value); } catch (cause) { throw new TypeError("Unsupported PDS image policy.", {cause}); } })();
-  const g=lens?.grid, pair=(v: unknown)=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite)&&v[0]<v[1];
-  if(lens?.schema!=='cssearth-pds-int16-cylindrical@1'||lens.format!=='pds-image'||lens.sampling!=='nearest'||
-    !(['datasetId','productId','productVersion','target','path','labelPath','sourceUnit'] as const).every(k=>typeof lens[k]==='string'&&lens[k].length>0)||
+  const dataset=(() => { try { return parsePdsImagePolicy(value); } catch (cause) { throw new TypeError("Unsupported PDS image policy.", {cause}); } })();
+  const g=dataset?.grid, pair=(v: unknown)=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite)&&v[0]<v[1];
+  if(dataset?.schema!=='cssearth-pds-int16-cylindrical@1'||dataset.format!=='pds-image'||dataset.sampling!=='nearest'||
+    !(['datasetId','productId','productVersion','target','path','labelPath','sourceUnit'] as const).every(k=>typeof dataset[k]==='string'&&dataset[k].length>0)||
     !g||!Number.isSafeInteger(g.width)||!Number.isSafeInteger(g.height)||g.width<=0||g.height<=0||
     !Number.isSafeInteger(g.width*g.height*2)||!pair(g.latitudeRange)||!pair(g.longitudeRange)||
     g.longitudeRange[0]!==0||g.longitudeRange[1]!==360||g.latitudeRange[0]!==-g.latitudeRange[1]||
     g.latitudeRange[1]>90||!Number.isFinite(g.pixelsPerDegree)||g.pixelsPerDegree<=0||
     !Number.isFinite(g.referenceRadiusMeters)||g.referenceRadiusMeters<=0||typeof g.frame!=='string'||!g.frame||
-    ![g.scalingFactor,g.offset,lens.valueTransform?.scale,lens.valueTransform?.offset].every(Number.isFinite)||
+    ![g.scalingFactor,g.offset,dataset.valueTransform?.scale,dataset.valueTransform?.offset].every(Number.isFinite)||
     !(g.noData===null||(Number.isInteger(g.noData)&&g.noData>=-32768&&g.noData<=32767))||
-    (lens.validRange!==undefined&&!pair(lens.validRange)))throw new Error('Unsupported PDS image policy.');
-  return lens;
+    (dataset.validRange!==undefined&&!pair(dataset.validRange)))throw new Error('Unsupported PDS image policy.');
+  return dataset;
 }
 
 /** Original PDS3 signed-int16 cylindrical rasters, with no image-library
  * luminance conversion. Authored transforms explicitly select radius/height
  * or display units; the label's scale and reference offset are independently checked. */
 export function parsePdsImage(bytes: Buffer,label: string,value: unknown) {
-  const lens=validatePdsImagePolicy(value);
-  const g=lens.grid;
-  const expected={PDS_VERSION_ID:'PDS3',DATA_SET_ID:lens.datasetId,PRODUCT_ID:lens.productId,
-    PRODUCT_VERSION_ID:lens.productVersion,UNIT:lens.sourceUnit,
-    TARGET_NAME:lens.target,'^IMAGE':basename(lens.path).toUpperCase(),SAMPLE_TYPE:'LSB_INTEGER',SAMPLE_BITS:'16',
+  const dataset=validatePdsImagePolicy(value);
+  const g=dataset.grid;
+  const expected={PDS_VERSION_ID:'PDS3',DATA_SET_ID:dataset.datasetId,PRODUCT_ID:dataset.productId,
+    PRODUCT_VERSION_ID:dataset.productVersion,UNIT:dataset.sourceUnit,
+    TARGET_NAME:dataset.target,'^IMAGE':basename(dataset.path).toUpperCase(),SAMPLE_TYPE:'LSB_INTEGER',SAMPLE_BITS:'16',
     LINES:String(g.height),LINE_SAMPLES:String(g.width),SCALING_FACTOR:String(g.scalingFactor),
     OFFSET:String(g.offset),CENTER_LATITUDE:'0',CENTER_LONGITUDE:'180',MAP_PROJECTION_ROTATION:'0',
     MAP_PROJECTION_TYPE:'SIMPLE CYLINDRICAL',POSITIVE_LONGITUDE_DIRECTION:'EAST',
@@ -54,21 +54,21 @@ export function parsePdsImage(bytes: Buffer,label: string,value: unknown) {
   if(g.noData!==null && Number(key(label,'MISSING_CONSTANT'))!==g.noData)throw new Error('PDS missing-data constant changed.');
   if(g.noData===null && /^\s*MISSING_CONSTANT\s*=/m.test(label.replace(/\/\*[\s\S]*?\*\//g,'')))throw new Error('Unexpected PDS missing-data definition.');
   if(bytes.length!==g.width*g.height*2 || g.width!==(g.longitudeRange[1]-g.longitudeRange[0])*g.pixelsPerDegree ||
-    g.height!==(g.latitudeRange[1]-g.latitudeRange[0])*g.pixelsPerDegree || ![lens.valueTransform?.scale,lens.valueTransform?.offset].every(Number.isFinite)) {
+    g.height!==(g.latitudeRange[1]-g.latitudeRange[0])*g.pixelsPerDegree || ![dataset.valueTransform?.scale,dataset.valueTransform?.offset].every(Number.isFinite)) {
     throw new Error('PDS image dimensions or explicit display transform changed.');
   }
   const report: {sourcePixels:number;validPixels:number;missingPixels:number;rejectedRangePixels:number;zeroPixels:number;minimum:number|null;maximum:number|null}={sourcePixels:g.width*g.height,validPixels:0,missingPixels:0,rejectedRangePixels:0,zeroPixels:0,minimum:Infinity,maximum:-Infinity};
   const valueAt=(x: number,y: number)=>{
     const raw=bytes.readInt16LE((y*g.width+x)*2);
     if(g.noData!==null && raw===g.noData)return null;
-    const value=raw*lens.valueTransform.scale+lens.valueTransform.offset;
-    return lens.validRange && (value<lens.validRange[0]||value>lens.validRange[1])?null:value;
+    const value=raw*dataset.valueTransform.scale+dataset.valueTransform.offset;
+    return dataset.validRange && (value<dataset.validRange[0]||value>dataset.validRange[1])?null:value;
   };
   for(let i=0;i<report.sourcePixels;i++){
     const raw=bytes.readInt16LE(i*2);
     if(g.noData!==null&&raw===g.noData){report.missingPixels++;continue;}
-    const value=raw*lens.valueTransform.scale+lens.valueTransform.offset;
-    if(lens.validRange&&(value<lens.validRange[0]||value>lens.validRange[1])){report.rejectedRangePixels++;continue;}
+    const value=raw*dataset.valueTransform.scale+dataset.valueTransform.offset;
+    if(dataset.validRange&&(value<dataset.validRange[0]||value>dataset.validRange[1])){report.rejectedRangePixels++;continue;}
     report.validPixels++;if(value===0)report.zeroPixels++;
     report.minimum=Math.min(report.minimum!,value);report.maximum=Math.max(report.maximum!,value);
   }
@@ -82,7 +82,7 @@ export function parsePdsImage(bytes: Buffer,label: string,value: unknown) {
   }};
 }
 export async function loadPdsImage(root: string,value: unknown){
-  const lens=validatePdsImagePolicy(value);
-  const [bytes,label]=await Promise.all([readFile(resolve(root,lens.path)),readFile(resolve(root,lens.labelPath),'utf8')]);
-  return parsePdsImage(bytes,label,lens);
+  const dataset=validatePdsImagePolicy(value);
+  const [bytes,label]=await Promise.all([readFile(resolve(root,dataset.path)),readFile(resolve(root,dataset.labelPath),'utf8')]);
+  return parsePdsImage(bytes,label,dataset);
 }

@@ -46,8 +46,8 @@ test('pinned Bonanos (2010) rows replay deterministically into the prepared SMC 
   assert.deepEqual(index.stars, { path: prepared });
   // Frame units: kpc, and the payload frame is exactly the finite model frame the viewer loads.
   assert.ok(Math.abs(payload.frame.metersPerUnit / KPC_M - 1) < 1e-12);
-  const lensFrame = JSON.parse(await readFile(`${finiteModelDirectory(context.modelResultId)}/object.json`, 'utf8')).properties.volume;
-  assert.deepEqual(payload.frame, lensFrame);
+  const datasetFrame = JSON.parse(await readFile(`${finiteModelDirectory(context.modelResultId)}/object.json`, 'utf8')).properties.volume;
+  assert.deepEqual(payload.frame, datasetFrame);
   const rad = Math.PI / 180;
   for (const s of payload.stars) {
     const p = referenceRay(s.positionUnits, payload.frame), r = Math.hypot(...p);
@@ -119,7 +119,7 @@ test('the joint CDF guards reject rays without emission or density and never bri
   assert.deepEqual(prepareSmcCatalogue(line, context).stars, [brightest]);
 });
 
-test('bright catalogue stars coincide with point sources in the registered original of the model and of every lens', { skip }, async () => {
+test('bright catalogue stars coincide with point sources in the registered original of the model and of every dataset', { skip }, async () => {
   const context = (await contextPromise)!, payload = await load(), D = context.mapping.distanceUnits;
   async function registration(directory: string, bounds: { min: number[]; max: number[] }) {
     const image = await sharp(await readFile(`${directory}/source/original-image.png`)).raw().toBuffer({ resolveWithObject: true });
@@ -148,12 +148,12 @@ test('bright catalogue stars coincide with point sources in the registered origi
   const model = await registration(finiteModelDirectory(context.modelResultId), context.mapping.boundsUnits);
   const results: Record<string, unknown> = { model };
   assert.ok(model.stars >= 30 && model.median < 2 && model.within1px > model.mirroredWithin1px * 2, JSON.stringify(model));
-  const bundle = await readFile(`.local/nebula-lab/finite-lenses-${context.modelResultId}.json`, 'utf8').then(text => JSON.parse(text) as { lenses: { imageId: string; resultId: string }[] }, () => null);
-  for (const lens of bundle?.lenses ?? []) {
-    const directory = finiteModelDirectory(lens.resultId);
+  const bundle = await readFile(`.local/nebula-lab/finite-datasets-${context.modelResultId}.json`, 'utf8').then(text => JSON.parse(text) as { datasets: { imageId: string; resultId: string }[] }, () => null);
+  for (const dataset of bundle?.datasets ?? []) {
+    const directory = finiteModelDirectory(dataset.resultId);
     const provenance = JSON.parse(await readFile(`${directory}/source/provenance.json`, 'utf8'));
     const result = await registration(directory, provenance.sourceRegistration.tangentBoundsKpc);
-    results[lens.imageId] = result;
+    results[dataset.imageId] = result;
   }
   console.log(JSON.stringify(results));
 });
@@ -163,12 +163,12 @@ test('each prepared layer belongs to its own model and uses the depth density th
   for (const path of layers) {
     const payload = await load(path).catch(() => null);
     if (!payload) continue;
-    const finite = payload.provenance as { finiteModel: { modelResultId: string; lensRecipe: { path: string }; depthDensity: { path: string } } };
+    const finite = payload.provenance as { finiteModel: { modelResultId: string; datasetRecipe: { path: string }; depthDensity: { path: string } } };
     const model = finite.finiteModel.modelResultId;
     assert.equal(seen.get(model), undefined, 'Two layers must not claim one model.');
     seen.set(model, path);
-    assert.equal(preparedStarsPath(finite.finiteModel.lensRecipe.path), path, 'The layer path follows its lens recipe.');
-    const recipe = JSON.parse(await readFile(finite.finiteModel.lensRecipe.path, 'utf8'));
+    assert.equal(preparedStarsPath(finite.finiteModel.datasetRecipe.path), path, 'The layer path follows its dataset recipe.');
+    const recipe = JSON.parse(await readFile(finite.finiteModel.datasetRecipe.path, 'utf8'));
     assert.equal(recipe.modelResultId, model, 'The checked-in recipe still names this model.');
     const index = JSON.parse(await readFile(finiteModelStarsIndex(model), 'utf8'));
     assert.equal(index.stars.path, path);

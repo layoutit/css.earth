@@ -9,5 +9,5 @@
   "sampledRecipe": "labs/nebula/models/m1/sampled.json",
   "defaultSourceId": "hubble-optical",
   "maximumStars": 350,
-  "interpretation": "Published SITELLE emission samples provide ejecta topology with depths conditional on a 2 kpc, homologous expansion model. Independent analytic inner/outer torus and jet terms represent the published Chandra pulsar wind interpretation; a compact light marks the observed pulsar sky position. Six spectral lenses weight fixed ejecta and pulsar-wind components separately. RGB, opacity, smoothing, finite jet extents, and pulsar depth/size are authored display choices. This is not measured gas or dust density, extinction, a recovered dynamical history, or a calibrated radiative-transfer solution."
+  "interpretation": "Published SITELLE emission samples provide ejecta topology with depths conditional on a 2 kpc, homologous expansion model. Independent analytic inner/outer torus and jet terms represent the published Chandra pulsar wind interpretation; a compact light marks the observed pulsar sky position. Six spectral datasets weight fixed ejecta and pulsar-wind components separately. RGB, opacity, smoothing, finite jet extents, and pulsar depth/size are authored display choices. This is not measured gas or dust density, extinction, a recovered dynamical history, or a calibrated radiative-transfer solution."
 }

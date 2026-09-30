@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "altair",
   "displayName": "Altair",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law, not a measurement.",
-        "thumbnail": "altair-lens-color.webp",
+        "thumbnail": "altair-dataset-color.webp",
         "surface": "altair-surface-color@2x.webp",
         "poles": "altair-poles-color@2x.webp",
         "source": {

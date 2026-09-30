@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/gaia-dr3-2383221281752929280/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "gaia-dr3-2383221281752929280-surface-{id}{suffix}.webp",
-      "thumbnail": "gaia-dr3-2383221281752929280-lens-{id}.webp",
+      "thumbnail": "gaia-dr3-2383221281752929280-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

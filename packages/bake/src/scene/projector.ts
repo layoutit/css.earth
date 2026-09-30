@@ -18,7 +18,7 @@ export const rendererPolygon = (patch: SurfacePatch): Polygon => ({ ...patch,
 export interface LeafPages { bandsPerPage: number; pageCount: number }
 
 /** The pixel width of the widest published image that can stand in a leaf's texture, by the url the leaf's patch names:
- * every lens, texture level and page (leaf-images.ts measures them). */
+ * every dataset, texture level and page (leaf-images.ts measures them). */
 export type LeafImagePixels = (url: string) => number;
 
 interface LeafGeometry { matrix: string; leafWidth: number; leafHeight: number; backgroundPosition: readonly number[]; backgroundSize: readonly number[] }
@@ -80,9 +80,9 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       const position = address.backgroundPosition.map(value => value === 0 ? '0px' : formatCssLength(value)).join(' ');
       // formatCssLength's second argument is its decimals: never hand it Array.map's index.
       const size = address.backgroundSize.map(value => formatCssLength(value)).join(' ');
-      // A leaf names no image of its own. Every lens reaches it through the texture that lens's variant writes on the body
-      // (composite.ts, emissive.ts): a band draws the lens's surface, or its page of a paged surface, and a cap its poles.
-      // Leaves that inlined the profile's image drew it under every lens: Uranus's and Neptune's lenses never changed them.
+      // A leaf names no image of its own. Every dataset reaches it through the texture that dataset's variant writes on the body
+      // (composite.ts, emissive.ts): a band draws the dataset's surface, or its page of a paged surface, and a cap its poles.
+      // Leaves that inlined the profile's image drew it under every dataset: Uranus's and Neptune's datasets never changed them.
       const image = `var(--${ns}-${patch.pole ? 'poles-image' : page === null ? 'surface-image' : `surface-page-${page}`})`;
       // Every lane's caps follow one rule (polar-cap.ts): a disc, facing out, culled when it turns away.
       if (patch.pole) requireOutwardCap(ns, patch.pole, fitted.matrix, patch.inner);

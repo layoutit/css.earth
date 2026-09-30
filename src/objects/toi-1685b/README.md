@@ -8,7 +8,7 @@ It is the only planet known around TOI-1685. Its orbit and size follow Egger et 
 
 **Orbit.** Fisher et al. 2026 (2026MNRAS.545f2187F), via the NASA Exoplanet Archive ps table (pl_refname FISHER_ET_AL_2026): P 0.66913856 d Egger et al. 2025 (2025A&A...696A..28E), via the NASA Exoplanet Archive ps table (pl_refname EGGER_ET_AL__2025): a/R* 5.41; Luque et al. 2025 (2025AJ....170...49L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2025): inclination 86.62 degrees Luque et al. 2025 (2025AJ....170...49L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2025): e 0 Fisher et al. 2026 (2026MNRAS.545f2187F), via the NASA Exoplanet Archive ps table (pl_refname FISHER_ET_AL_2026): transit mid-time 2459593.76594 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1685's measured colour (#ffc98b, the colour lens of toi-1685 (src/objects/toi-1685/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1685's measured colour (#ffc98b, the colour dataset of toi-1685 (src/objects/toi-1685/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1685's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (19, 59, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

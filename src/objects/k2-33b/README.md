@@ -8,7 +8,7 @@ It is the only planet known around K2-33. Its orbit and size follow Mann et al. 
 
 **Orbit.** Mann et al. 2016 (2016AJ....152...61M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2016): P 5.424865 d Mann et al. 2016 (2016AJ....152...61M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2016): a/R* 10.4; Mann et al. 2016 (2016AJ....152...61M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2016): inclination 89.1 degrees Mann et al. 2016 (2016AJ....152...61M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2016): e 0 Mann et al. 2016 (2016AJ....152...61M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2016): transit mid-time 2456898.69288 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 39 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-33's measured colour (#ffc88d, the colour lens of k2-33 (src/objects/k2-33/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-33's measured colour (#ffc88d, the colour dataset of k2-33 (src/objects/k2-33/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-33's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (91), folded onto its orbit. Upper limits and rows without an error are left out.
 

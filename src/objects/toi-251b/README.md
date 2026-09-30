@@ -8,7 +8,7 @@ It is the only planet known around TOI-251. Its orbit and size follow Zhou et al
 
 **Orbit.** Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): P 4.9377254 d Zhou et al. 2021 (2021AJ....161....2Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2021): a/R* 14.02; Zhou et al. 2021 (2021AJ....161....2Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2021): inclination 87.52 degrees Zhou et al. 2021 (2021AJ....161....2Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2021): e 0 Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): transit mid-time 2459107.8391 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-251's measured colour (#fff3f3, the colour lens of toi-251 (src/objects/toi-251/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-251's measured colour (#fff3f3, the colour dataset of toi-251 (src/objects/toi-251/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-251's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 96, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

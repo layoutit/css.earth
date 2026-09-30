@@ -36,7 +36,7 @@ ice-abundance or crystallinity scale. Camera texture is finer than the infrared
 measurements. The release does not supply a validity mask or the numeric
 spectral channels behind its stretched colors.
 
-The [published coordinate grid](evidence/infrared-mosaic/published-grid.jpg)
+The published coordinate grid
 places 0° at the image center, 90°W at one quarter, 90°E at three quarters,
 and ±180° at the edges. North is up; the equator is halfway down. Its spherical
 equirectangular projection has radius 252.1 km, so latitude maps directly to
@@ -44,7 +44,7 @@ our planetocentric surface directions. We checked those distributed grid
 positions and both poles rather than using the mislabeled longitudes in the
 original paper's Figures 9 and 11; see the
 [corrigendum](https://doi.org/10.1016/j.icarus.2020.113954).
-The [native-pixel check](evidence/infrared-mosaic/source-sampling.json) compares
+The native-pixel check compares
 nine geographic samples, including all four image corners, against direct RGB
 reads from the original TIFF; all agree exactly. This checks texture addressing,
 not spacecraft pointing. The shared reader rolls the zero-centered image into
@@ -76,9 +76,9 @@ recorded in the investigation ledger.
 
 The 2026-09-27 checks used
 plus this PR's Enceladus source, recipe, reader text and inventory changes.
-[Desktop](evidence/infrared-mosaic/globe.png) and
-[south-polar](evidence/infrared-mosaic/south-pole.png) captures show the delivered
-composite; the [browser record](evidence/infrared-mosaic/browser-checks.json)
+Desktop and
+south-polar captures show the delivered
+composite; the browser record
 records Chrome 153.0.8010.54, camera and settings. Desktop at 1440 × 900
 (DPR 1 and 2) and the mobile panel at 390 × 844 (DPR 2) had no page errors or
 failed HTTP responses. Shadows and globe rotation were inspected separately.
@@ -87,7 +87,7 @@ with Shadows enabled.
 
 The full Enceladus bake passed. All 19 affected source-reader and source-binding
 tests and all three Enceladus runtime-package tests passed; the latter exercise
-every lens and setting through the shared retained selection owner. Source-file
+every dataset and setting through the shared retained selection owner. Source-file
 coverage, body-reference checks and the reader-text publisher/check passed.
 The parsed scene is exactly equal to the published baseline, and existing globe
 texture bytes are unchanged. The full bake also regenerated the normal and
@@ -95,7 +95,7 @@ elevation minimaps through the current shared preparation; those small previews
 were inspected, not claimed byte-identical. The unchanged arrival image is retained.
 
 All 56 runtime assets were published and
-[freshly restored](evidence/infrared-mosaic/restoration.json) from R2 with the
+freshly restored from R2 with the
 standard installer's byte-count checks: 32,151,471 bytes for the
 whole Enceladus package. The final browser captures use those restored files.
 Each cold browser case fetched the same 1,928,874-byte infrared surface texture;
@@ -181,12 +181,12 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 16098 × 8049 | 8.31 → 12.18 MB |
 
-The photographic atlases now use prepared `textureScale: 0.25`: 1410 × 1452 pixels, or 7.8 MiB decoded RGBA per image, while retaining the 2000 faces and canonical atlas coordinates. Both monochrome and infrared views use the shared lossy WebP lane. This reduces display detail relative to the full-size atlas; original source files and the numeric datasets are unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply. Historical full-size pixel comparisons below describe the earlier bake, not this reduced display texture. The [iPad arrival record](evidence/ipad-atlas-footprint.json) preserves the measured footprint, repeat arrivals and remaining departure limitation.
+The photographic atlases now use prepared `textureScale: 0.25`: 1410 × 1452 pixels, or 7.8 MiB decoded RGBA per image, while retaining the 2000 faces and canonical atlas coordinates. Both monochrome and infrared views use the shared lossy WebP lane. This reduces display detail relative to the full-size atlas; original source files and the numeric datasets are unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply. Historical full-size pixel comparisons below describe the earlier bake, not this reduced display texture. The iPad arrival record preserves the measured footprint, repeat arrivals and remaining departure limitation.
 
 The closed Enceladus surface has 2000 outward-facing triangles and 3000 edges, each shared by two faces. Back-face culling removes unseen rear faces; the existing offline depth compiler places the unchanged front faces into 32 retained groups. Its matrix checks accept the shared shell's identity translation, but still reject actual unsupported offsets.
 
 
-The [browser comparison](evidence/native-source-sampling.png) uses identical camera
+The browser comparison uses identical camera
 coordinates at 4× zoom, Shadows off, Chromium at DPR 1.
 It separates the previous quality-90 image, the same intermediate-map sampling
 encoded at quality 95, and native-grid sampling at quality 95. The native result
@@ -194,19 +194,19 @@ retains finer fracture detail; some improvement also comes from encoding quality
 The selected view was also inspected with Shadows on. This checks visible output,
 not scientific registration accuracy or full browser conformance.
 
-A fresh [Pixelmatch comparison](evidence/native-pixelmatch/comparison.png) uses
+A fresh Pixelmatch comparison uses
 Chrome 153.0.8010.12, 1280 × 720, DPR 1 and an unchanged 520 × 480 crop. It runs
 on the merge, whose renderer and scene are
-retained. [Capture settings and byte pins](evidence/native-pixelmatch/capture.json)
+retained. Capture settings and byte pins
 identify the exact previous-main atlas and the encoding-only control.
 
 Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks.
 
 | Comparison | Mismatched pixels / 249,600 |
 | --- | ---: |
-| [Independent unchanged repeat](evidence/native-pixelmatch/repeat.json) | 0 |
-| [Previous atlas → native sampling](evidence/native-pixelmatch/change.json) | 20 |
-| [Quality-95 control → native sampling](evidence/native-pixelmatch/sampling.json) | 19 |
+| Independent unchanged repeat | 0 |
+| Previous atlas → native sampling | 20 |
+| Quality-95 control → native sampling | 19 |
 
 The repeat has zero mismatches after waiting for label fades. Only a few pixels
 exceed the threshold; most photographic changes are subtle. Inspection shows
@@ -259,7 +259,7 @@ The exact PDS missing constant is -3.40282265508890445e38. No-data, non-finite v
 
 The archive has metadata inconsistencies: PDS prose interchanges the image/DEM descriptions, and catalog observation dates precede Cassini's Saturn arrival. The product-specific raster dimensions, pixel mapping and missing constants agree between TIFF and labels. We do not reuse the inconsistent dates/descriptions.
 
-[Paper: Schenk and McKinnon, Icarus 408, 115827](https://doi.org/10.1016/j.icarus.2023.115827). [NASA facts](https://science.nasa.gov/saturn/moons/enceladus/) describe the icy surface, global ocean, south-polar jets and 32.9-hour synchronous orbit. No visible atmosphere, invented plume animation, or interior lens is supplied.
+[Paper: Schenk and McKinnon, Icarus 408, 115827](https://doi.org/10.1016/j.icarus.2023.115827). [NASA facts](https://science.nasa.gov/saturn/moons/enceladus/) describe the icy surface, global ocean, south-polar jets and 32.9-hour synchronous orbit. No visible atmosphere, invented plume animation, or interior dataset is supplied.
 
 ## Orientation and sky
 

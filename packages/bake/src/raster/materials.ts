@@ -8,7 +8,7 @@ import type { PreparedLimb } from './lighting.ts';
  * the halo from its PSG limb profile when the recipe names one, from the visible edge outward, lit where the tangent point faces the Sun
  * (../photometry). Three atlases share the frames:
  * - material: disc law and halo, drawn over the visible map;
- * - observation: the same, drawn over the false-colour lenses. The disc law of Venus and Mars is grey or nearly so
+ * - observation: the same, drawn over the false-colour datasets. The disc law of Venus and Mars is grey or nearly so
  *   (packages/bake/src/photometry/limb.ts), so it does not tint their false colours;
  * - lighting: the disc law alone.
  * The last frame is the shadowless flood frame (light along the view).

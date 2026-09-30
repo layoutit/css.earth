@@ -76,16 +76,16 @@ overview reads from 1 Gpc out.
   drawn whole within 6,600 Mpc.
 ## Tests and evidence
 
-On the experimental cosmic-web branch, another [capture](evidence/2026-09-29/capture.json)
+On the experimental cosmic-web branch, another capture
 shows, 7.6 billion light-years out
 (captured at 40 Gpc plus three notches, before the opening distance moved),
-[DESI's two cones](evidence/2026-09-29/desi-cones.jpg) of bright galaxies either
+DESI's two cones of bright galaxies either
 side of the Milky Way's plane, with the Cosmicflows-4 field between them. It was
 taken before overviews had their own pages; the view opens now at
 `/observable-universe/`.
 
-A [browser capture](evidence/2026-09-29/capture.json) of this version shows
-[the whole field](evidence/2026-09-29/field.jpg) from 200 Mpc: sharp dots in
+A browser capture of this version shows
+the whole field from 200 Mpc: sharp dots in
 their type colours and brightness tones, even across the view.
 
 The renderer's catalogue point tests parse the prepared bank and check that a

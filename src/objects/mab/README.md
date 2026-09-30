@@ -17,6 +17,6 @@ The reviewed sources do not establish a qualified shape; no standalone scene is 
 [Hedman et al. (2025)](https://arxiv.org/html/2506.18650v2) adds JWST evidence for
 an unusually blue infrared spectrum, but no resolved shape or spatial composition
 map. These are useful physical constraints, not terrain or a measured sphere.
-No standalone scene or mapped lens is included. Target NAIF 726, parent Uranus.
+No standalone scene or mapped dataset is included. Target NAIF 726, parent Uranus.
 
 <a id="mab-source-qualification"></a>

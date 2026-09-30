@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "eros-shape",
@@ -14,7 +14,7 @@
         "elevation",
         "ponds"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "projection": {
         "kind": "body-fixed-triangle-mesh",
         "longitudeDirection": "east",
@@ -55,7 +55,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 10682,
@@ -101,7 +101,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Near infrared",
       "falseColor": false,
       "width": 10682,
@@ -217,7 +217,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "blue",
+      "datasetId": "blue",
       "label": "Blue · 450 nm",
       "falseColor": false,
       "width": 10682,
@@ -263,7 +263,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "near-infrared-760",
+      "datasetId": "near-infrared-760",
       "label": "Near infrared · 760 nm",
       "falseColor": false,
       "width": 10682,
@@ -309,7 +309,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "near-infrared-900",
+      "datasetId": "near-infrared-900",
       "label": "Near infrared · 900 nm",
       "falseColor": false,
       "width": 10682,
@@ -355,7 +355,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "near-infrared-1000",
+      "datasetId": "near-infrared-1000",
       "label": "Near infrared · 1000 nm",
       "falseColor": false,
       "width": 10682,
@@ -400,7 +400,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "near-infrared-1050",
+      "datasetId": "near-infrared-1050",
       "label": "Near infrared · 1050 nm",
       "falseColor": false,
       "width": 10682,
@@ -446,7 +446,7 @@
       "consumers": [
         "ponds"
       ],
-      "lensId": "ponds",
+      "datasetId": "ponds",
       "label": "Ponds",
       "falseColor": true,
       "title": "Roberts Eros Ponds Catalog V1.1: pond centres and diameters",
@@ -503,7 +503,7 @@
         "latitudeDegrees": 20,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
@@ -760,7 +760,7 @@
           {
             "catalogueId": "roberts-eros-ponds-catalog-v1-1",
             "role": "reference",
-            "evidence": "PDS4 label of the ponds table: record count, delimiters and field units the lens recipe checks."
+            "evidence": "PDS4 label of the ponds table: record count, delimiters and field units the dataset recipe checks."
           }
         ]
       }

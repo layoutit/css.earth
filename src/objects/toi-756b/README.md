@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-756. Its orbit and size follow Parc et a
 
 **Orbit.** Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): P 1.2392495 d Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): a/R* derived from its semi-major axis 0.018 au and stellar radius 0.505 solar radii; Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): inclination 85.53 degrees Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): e 0 Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): transit mid-time 2458570.65234 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-756's measured colour (#ffc68a, the colour lens of toi-756 (src/objects/toi-756/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-756's measured colour (#ffc68a, the colour dataset of toi-756 (src/objects/toi-756/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-756's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (37, 64, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

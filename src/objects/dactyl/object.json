@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "dactyl",
   "type": "layered-body",
   "properties": {
@@ -19,7 +19,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "terrestrial",
@@ -55,7 +55,7 @@
           "id": "body",
           "source": "terrestrial",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "shape",
               "source": "content",
@@ -78,7 +78,7 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/dactyl-surfaces.css"
+        "src/renderers/css/styles/templates/small-body.css"
       ],
       "metadata": {
         "url": "prepared/page.json"
@@ -112,7 +112,7 @@
       "bodyRadiusM": 695.2053289772899
     },
     "catalog": {
-      "illustrationLenses": [
+      "illustrationDatasets": [
         "shape"
       ],
       "name": "Dactyl",

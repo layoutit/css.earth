@@ -36,7 +36,7 @@ test('irregular surfaces do not require an ellipsoid or unpack triangle atlases'
   try {
     await mkdir(join(directory, 'source/preparation'), { recursive: true });
     await writeFile(join(directory, 'source/preparation/terrestrial.json'), JSON.stringify({
-      schema: 'cssearth-terrestrial-preparation@1', geometry: { radialTerrain: { path: 'shape.txt' } },
+      schema: 'cssearth-terrestrial-preparation@2', geometry: { radialTerrain: { path: 'shape.txt' } },
     }));
     const images = [];
     for await (const image of recipeSurfacePreviews({ objectDirectory: directory,
@@ -128,7 +128,7 @@ test('solid scientific recipes do not enter the affine-only preview fallback', a
   try {
     await mkdir(join(directory, 'source/preparation'), { recursive: true });
     await writeFile(join(directory, 'source/preparation/terrestrial.json'), JSON.stringify({
-      schema: 'cssearth-terrestrial-preparation@1', kind: 'solid-observation-body',
+      schema: 'cssearth-terrestrial-preparation@2', kind: 'solid-observation-body',
       raster: { width: 640, height: 320 },
     }));
     const images = [];

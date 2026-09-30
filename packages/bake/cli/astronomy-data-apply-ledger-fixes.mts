@@ -56,7 +56,7 @@ try {
         decision, reason, proposalIds: [], ...(e.target ? {} : { targetNote: "The Photojournal tags this entry with no target." }) }));
     counts.photojournalAdded++;
   }
-  const enceladus = "Enceladus's Infrared color lens is this mosaic since PR #857 (https://github.com/layoutit/css.earth/pull/857); src/objects/enceladus/README.md records its seam and fill caveats.";
+  const enceladus = "Enceladus's Infrared color dataset is this mosaic since PR #857 (https://github.com/layoutit/css.earth/pull/857); src/objects/enceladus/README.md records its seam and fill caveats.";
   db.prepare("UPDATE datasets SET decision='existing-reference', reason=? WHERE source='photojournal' AND id='PIA24027'").run(enceladus);
   setDetails("photojournal", "PIA24027", { ...details("photojournal", "PIA24027"), decision: "existing-reference", reason: enceladus });
 

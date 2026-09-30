@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-189733b",
   "displayName": "HD 189733b",
@@ -74,15 +74,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "temperature",
         "label": "MIRI",
         "qualification": "Published map · Lally et al. 2025 · JWST MIRI 8 µm eclipses, 2022–2023, with Spitzer",
-        "thumbnail": "hd-189733b-lens-temperature.webp",
+        "thumbnail": "hd-189733b-dataset-temperature.webp",
         "surface": "hd-189733b-surface-temperature@2x.webp",
         "poles": "hd-189733b-poles-temperature@2x.webp",
         "source": {
@@ -142,7 +142,7 @@
         "id": "uncertainty",
         "label": "Uncertainty",
         "qualification": "Published map uncertainty · Lally et al. 2025 · standard deviation within the chosen fit",
-        "thumbnail": "hd-189733b-lens-uncertainty.webp",
+        "thumbnail": "hd-189733b-dataset-uncertainty.webp",
         "surface": "hd-189733b-surface-uncertainty@2x.webp",
         "poles": "hd-189733b-poles-uncertainty@2x.webp",
         "source": {
@@ -202,7 +202,7 @@
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of HD 189733b, from Eyes on Exoplanets; not an observation.",
-        "thumbnail": "hd-189733b-lens-illustration.webp",
+        "thumbnail": "hd-189733b-dataset-illustration.webp",
         "surface": "hd-189733b-surface-illustration@2x.webp",
         "poles": "hd-189733b-poles-illustration@2x.webp",
         "source": {

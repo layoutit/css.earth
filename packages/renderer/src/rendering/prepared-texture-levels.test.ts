@@ -9,17 +9,17 @@ const textureLevels = { hysteresis: 0.2, levels: [
   { minimumDiameter: 0, resources: { a: 'a-small', b: 'b-small' } },
   { minimumDiameter: 230, resources: { a: 'a', b: 'b' } },
 ] };
-const variants = ['a', 'b'].map(lensId => ({ when: { lensId }, required: [lensId], materials: [],
-  writes: [{ kind: 'texture' as const, resource: lensId, target: 2, name: 'backgroundImage', quoted: true }] }));
+const variants = ['a', 'b'].map(datasetId => ({ when: { datasetId }, required: [datasetId], materials: [],
+  writes: [{ kind: 'texture' as const, resource: datasetId, target: 2, name: 'backgroundImage', quoted: true }] }));
 const definition = { textureLevels, variants, materials: [] } as unknown as PreparedPresentationDefinition;
 
 test('startup demands the camera texture level and only the selected dataset', () => {
   const view = { sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter: 900, billboardOpacity: 0, markerOpacity: 0 } };
-  const initial = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view });
+  const initial = resolvePreparedPresentation(definition, { selection: { datasetId: 'a' }, view });
   expect(initial.required).toEqual(['a']);
-  const refined = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view, previousPlan: initial });
+  const refined = resolvePreparedPresentation(definition, { selection: { datasetId: 'a' }, view, previousPlan: initial });
   expect(refined.required).toEqual(['a']);
-  expect(resolvePreparedPresentation(definition, { selection: { lensId: 'b' }, view }).required).toEqual(['b']);
+  expect(resolvePreparedPresentation(definition, { selection: { datasetId: 'b' }, view }).required).toEqual(['b']);
 });
 
 test('zoom hysteresis retains detail at a boundary and downgrades outside it', () => {
@@ -65,7 +65,7 @@ test('a texture whose faces are behind the body or off screen keeps the first le
     '--page-front': page([0, 0, 100], [0, 0, 1]), '--page-back': page([0, 0, -100], [0, 0, -1]), '--page-aside': page([100, 0, 0], [1, 0, 0]),
   } } };
   const written = ['front', 'back', 'aside'];
-  const placedDefinition = { textureLevels: placed, materials: [], variants: [{ when: { lensId: 'a' }, required: written, materials: [],
+  const placedDefinition = { textureLevels: placed, materials: [], variants: [{ when: { datasetId: 'a' }, required: written, materials: [],
     writes: written.map((resource, target) => ({ kind: 'texture' as const, resource, target, name: `--page-${resource}`, quoted: true })) }] } as unknown as PreparedPresentationDefinition;
   expect(() => requireTextureLevels(placed, placedDefinition.variants, new Set([...written, ...written.map(key => `${key}-small`)]))).not.toThrow();
   // The eye sits 500 px in front of the body centre on +z, looking at it.
@@ -73,7 +73,7 @@ test('a texture whose faces are behind the body or off screen keeps the first le
   const view = (motionAtRest: boolean, width = 800, height = 600) => ({ sceneMatrix: '', sunViewDirection: null, motionAtRest, viewportWidth: width, viewportHeight: height,
     projection: { focalPixels: 1000, principalOffsetPixels: [0, 0] as [number, number], eyeFromScene },
     levelOfDetail: { stage: 'geometry', silhouetteDiameter: 900, billboardOpacity: 0, markerOpacity: 0 } });
-  const plan = (at: ReturnType<typeof view>) => resolvePreparedPresentation(placedDefinition, { selection: { lensId: 'a' }, view: at, previousPlan: { textureLevel: 1 } as never }).required;
+  const plan = (at: ReturnType<typeof view>) => resolvePreparedPresentation(placedDefinition, { selection: { datasetId: 'a' }, view: at, previousPlan: { textureLevel: 1 } as never }).required;
   // The far side is behind the body; the side page is on screen at the limb.
   expect(plan(view(true))).toEqual(['front', 'back-small', 'aside']);
   // A small screen, with its quarter-screen margin, leaves the side page (projected 200 px off centre) out of view.
@@ -94,15 +94,15 @@ test('a sheet level plans each page as a tile of one shared image; the page leve
     { minimumDiameter: 0, resources: { a: 'sheet', b: 'sheet' }, tiles: { a: { x: 0, y: 0, scale: 2 }, b: { x: 3, y: 0, scale: 2 } } },
     { minimumDiameter: 230, resources: { a: 'a', b: 'b' } },
   ] };
-  const both = [{ when: { lensId: 'a' }, required: ['a', 'b'], materials: [], writes: ['a', 'b'].map((resource, i) =>
+  const both = [{ when: { datasetId: 'a' }, required: ['a', 'b'], materials: [], writes: ['a', 'b'].map((resource, i) =>
     ({ kind: 'texture' as const, resource, target: i, name: `--page-${i}`, quoted: true })) }];
   const paged = { textureLevels: sheet, variants: both, materials: [] } as unknown as PreparedPresentationDefinition;
   const view = { sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter: 900, billboardOpacity: 0, markerOpacity: 0 } };
-  const initial = resolvePreparedPresentation(paged, { selection: { lensId: 'a' }, view: { ...view, levelOfDetail: { ...view.levelOfDetail, silhouetteDiameter: 100 } } });
+  const initial = resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view: { ...view, levelOfDetail: { ...view.levelOfDetail, silhouetteDiameter: 100 } } });
   // One decode for both pages.
   expect(initial.required).toEqual(['sheet']);
   expect(initial.textureTiles).toEqual(sheet.levels[0]!.tiles);
-  const refined = resolvePreparedPresentation(paged, { selection: { lensId: 'a' }, view, previousPlan: initial });
+  const refined = resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view, previousPlan: initial });
   expect(refined.required).toEqual(['a', 'b']);
   expect(refined.textureTiles).toBeUndefined();
   expect([...tiledTextureKeys(sheet)]).toEqual(['a', 'b']);
@@ -118,12 +118,12 @@ test('system-scale proxies require no detail images and acquire them on geometry
   const at = (stage: string) => ({sceneMatrix: '', sunViewDirection: null,
     levelOfDetail: {stage, silhouetteDiameter: 13, billboardOpacity: 1, markerOpacity: 0}});
   for (const stage of ['marker', 'billboard']) {
-    const plan = resolvePreparedPresentation(definition, {selection: {lensId: 'a'}, view: at(stage)});
+    const plan = resolvePreparedPresentation(definition, {selection: {datasetId: 'a'}, view: at(stage)});
     expect(plan.deferredTextures).toBe(true);
     expect(plan.required).toEqual([]);
     expect(plan.prewarm).toEqual([]);
   }
-  const detail = resolvePreparedPresentation(definition, {selection: {lensId: 'a'}, view: at('geometry')});
+  const detail = resolvePreparedPresentation(definition, {selection: {datasetId: 'a'}, view: at('geometry')});
   expect(detail.required).toEqual(['a-small']);
   expect(detail.deferredTextures).toBeUndefined();
 });
@@ -135,7 +135,7 @@ const tiledLevels = { hysteresis: 0.2, tileLeaves, levels: [
   { minimumDiameter: 0, resources: { page: 'sheet' }, tiles: { page: { x: 168, y: 0, scale: 7 } } },
   { minimumDiameter: 230, resources: { page: 'page' } },
 ] };
-const tiledVariants = [{ when: { lensId: 'a' }, required: ['page'], materials: [], writes: [{ kind: 'texture' as const, resource: 'page', target: 1, name: '--page-0', quoted: true }] }];
+const tiledVariants = [{ when: { datasetId: 'a' }, required: ['page'], materials: [], writes: [{ kind: 'texture' as const, resource: 'page', target: 1, name: '--page-0', quoted: true }] }];
 
 test('a tiled page leaf takes its final placement directly and writes only what changes', () => {
   const { document } = parseHTML('<html><body></body></html>');
@@ -171,11 +171,11 @@ test('a level switch commits each tiled leaf with its image, and no tile variabl
     { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
   const resources = { url: (key: string) => `/${key}.webp` } as unknown as PreparedResources;
   const view = (silhouetteDiameter: number) => ({ sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } });
-  const small = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view: view(100) });
-  presentation.commitSelection({ selection: { lensId: 'a' }, resources, plan: small });
+  const small = resolvePreparedPresentation(definition, { selection: { datasetId: 'a' }, view: view(100) });
+  presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: small });
   expect([nodes[3]!.style.backgroundImage, nodes[3]!.style.backgroundPosition, nodes[3]!.style.backgroundSize]).toEqual(['url("/sheet.webp")', '-252.0625px -0.25px', '1176px auto']);
-  const large = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view: view(900), previousPlan: small });
-  presentation.commitSelection({ selection: { lensId: 'a' }, resources, plan: large });
+  const large = resolvePreparedPresentation(definition, { selection: { datasetId: 'a' }, view: view(900), previousPlan: small });
+  presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: large });
   expect([nodes[3]!.style.backgroundImage, nodes[3]!.style.backgroundPosition, nodes[3]!.style.backgroundSize]).toEqual(['url("/page.webp")', '-84.0625px -0.25px', '168px auto']);
   expect(nodes[1]!.getAttribute('style') ?? '').not.toMatch(/--page-0-/);
 });

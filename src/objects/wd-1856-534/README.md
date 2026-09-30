@@ -1,6 +1,6 @@
 # WD 1856+534
 
-A cool white dwarf 24.76 parsecs away, about 1.3 times Earth's size, with a giant planet nearly eight times wider than itself. The default lens shows its measured Gaia colour on a uniform disc.
+A cool white dwarf 24.76 parsecs away, about 1.3 times Earth's size, with a giant planet nearly eight times wider than itself. The default dataset shows its measured Gaia colour on a uniform disc.
 
 ## Sources
 
@@ -14,7 +14,7 @@ Gaia DR3 publishes only the continuous BP/RP coefficients for this star. They ar
 
 ## Evidence
 
-See the [system evidence](evidence/README.md).
+See the system evidence.
 
 ## Known problems
 

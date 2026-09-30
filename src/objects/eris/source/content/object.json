@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "eris",
   "displayName": "Eris",
@@ -48,15 +48,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
-        "thumbnail": "eris-lens-color.webp",
+        "thumbnail": "eris-dataset-color.webp",
         "surface": "eris-color@2x.webp",
         "poles": "eris-poles-color@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "illustration",
         "label": "Illustration",
         "qualification": "An artist's surface from NASA's Eris 3D model; not an observation.",
-        "thumbnail": "eris-lens-illustration.webp",
+        "thumbnail": "eris-dataset-illustration.webp",
         "surface": "eris-illustration@2x.webp",
         "poles": "eris-poles-illustration@2x.webp",
         "source": {

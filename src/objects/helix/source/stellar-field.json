@@ -99479,7 +99479,7 @@
     "brightestMagnitude": 5.0129914,
     "faintestMagnitude": 15.999634,
     "selection": "Authored spherical neighbourhood with radial taper. RUWE<1.4 and parallax/error>5; physical sphere filtered before brightness-ordered TOP 8000. Distance medians and 16/84 percentiles retained; no cluster membership inferred.",
-    "retainedSources": "Thirty-four observed stellar image cores (28 WFI, five VISTA, one wider optical), including the central star, anchor residual halos. Canonical source-image photometry remains visible across lenses. Their compiler emission-column depths remain conditional visual placements, not matched Gaia distances. The surrounding Gaia catalogue retains its independent Bailer-Jones medians.",
+    "retainedSources": "Thirty-four observed stellar image cores (28 WFI, five VISTA, one wider optical), including the central star, anchor residual halos. Canonical source-image photometry remains visible across datasets. Their compiler emission-column depths remain conditional visual placements, not matched Gaia distances. The surrounding Gaia catalogue retains its independent Bailer-Jones medians.",
     "imageAnchors": {
       "schema": "cssearth-nebula-image-anchor-receipt@1",
       "inputSourceResult": {
@@ -100207,7 +100207,7 @@
         "Matched Bailer-Jones medians and lower/upper quantiles are recorded for comparison only. The visual anchors keep the compiler emission-column depth prior so their cores remain with existing stellar residual halos while orbiting; these are not the stars’ measured 3D positions.",
         "The central reference peak eso-wfi-1508 matches Gaia 6628874205642084224 at 0.134 arcsec. Its G=13.458613 was excluded by the broad-field brightness budget despite being inside the source sphere. No adopted nebula distance or gas geometry is changed.",
         "The six coverage-extension points are selected by observed compact-source evidence. The broad component109 is not treated as a star: its separate VISTA residual peak eso-vista-10069 supplies the anchor, with no close Gaia identity claimed. The component6 Gaia counterpart is a close/blended pair; one source-image core is retained.",
-        "Canonical source-image colors and aperture light are carried across lenses for retained visual anchors. An anchor visible with the WFI lens outside WFI coverage is explicitly sourced to VISTA or the wider optical image, not measured WFI light."
+        "Canonical source-image colors and aperture light are carried across datasets for retained visual anchors. An anchor visible with the WFI dataset outside WFI coverage is explicitly sourced to VISTA or the wider optical image, not measured WFI light."
       ],
       "coverageExtension": {
         "method": "registered-residual-union@1",
@@ -100286,7 +100286,7 @@
             ]
           }
         ],
-        "interpretation": "Core coordinates come from independently detected source residual peaks, never arbitrary fitted-component centers. Their conditional depths use the existing emission-column sampler. Canonical anchor appearance remains visible across image lenses, including absent WFI coverage; it is not a WFI measurement."
+        "interpretation": "Core coordinates come from independently detected source residual peaks, never arbitrary fitted-component centers. Their conditional depths use the existing emission-column sampler. Canonical anchor appearance remains visible across image datasets, including absent WFI coverage; it is not a WFI measurement."
       }
     }
   }

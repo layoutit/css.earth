@@ -7,7 +7,7 @@ below do not qualify later deliveries.
 
 ## Wider optical composite · 13 September 2026
 
-Reconstruction now has an additional **Optical composite · NOIRLab + Niittee** research lens. Niittee's registered optical footprint covers 99.84% of the current model's projected emission, compared with 60.14% for NOIRLab alone. Native NOX and an image composite are prepared; the old cloud and catalogue stars are retained. [Method, exact result, source credits, rejected trials and replay limits](optical-composite-notes.md).
+Reconstruction now has an additional **Optical composite · NOIRLab + Niittee** research dataset. Niittee's registered optical footprint covers 99.84% of the current model's projected emission, compared with 60.14% for NOIRLab alone. Native NOX and an image composite are prepared; the old cloud and catalogue stars are retained. [Method, exact result, source credits, rejected trials and replay limits](optical-composite-notes.md).
 
 The composed image preserves the wide surrounding dust and adds central NOIRLab luminance detail without a broad rectangular seam. The existing 3D material averages colour per component, so it cannot retain all that fine image detail. Its softness and thin edge-on appearance remain unresolved. The shared app now has a reproducible delivery recipe for this comparison; mounting it does not establish a recovered dust-density model or remove those visual limits. [App source record](../../../../src/objects/m45/README.md). Earlier Alignment-only status below is historical and is superseded by this section.
 
@@ -15,13 +15,13 @@ The composed image preserves the wide surrounding dust and adds central NOIRLab 
 
 The current local stellar update is `m45-stars`. It retains every cloud bank, alpha byte, geometry and fitting input from `m45`. It does not replace the cloud material with the rejected material experiments.
 
-The checked-in [stellar catalogue](stellar-catalogue.json) contains 2,105 Hipparcos/Tycho-2 records. The 450 brightest in-frame entries replace residual-only detections, using apparent Johnson V, measured/approximately transformed B−V and exact TAN sky projection. These optical reference lights stay the same across infrared lenses. Their line-of-sight placement remains illustrative; no membership or physical distance is invented. The [source receipt](stellar-sources.json) pins bounded CDS cones and the reproducible strict TypeScript acquisition owner; a cold download reproduced the catalogue exactly. [Stellar evidence](stellar-evidence.json) records the retained-cloud and native-centroid checks.
+The checked-in [stellar catalogue](stellar-catalogue.json) contains 2,105 Hipparcos/Tycho-2 records. The 450 brightest in-frame entries replace residual-only detections, using apparent Johnson V, measured/approximately transformed B−V and exact TAN sky projection. These optical reference lights stay the same across infrared datasets. Their line-of-sight placement remains illustrative; no membership or physical distance is invented. The [source receipt](stellar-sources.json) pins bounded CDS cones and the reproducible strict TypeScript acquisition owner; a cold download reproduced the catalogue exactly. [Stellar evidence](stellar-evidence.json) records the retained-cloud and native-centroid checks.
 
 All seven large optical cores lacked corresponding previous points: nearest old lights were 87–230 native pixels away. Six catalogue directions meet their broad-core centroids within 0.39–2.22 pixels; Alcyone differs by 6.22 pixels within a large asymmetric saturated footprint. **The old cloud still contains unremoved bright cores/halos.** Catalogue placement does not repair native separation or establish exact stellar colors from clipped RGB.
 
-Stellar presentation reuses the main application's prepared soft core/halo profile. Offline integration of its decoded alpha compensates sprite extent, retaining each point's relative RGB light. These are display profiles, not physical stellar radii. Chromium verified all four lenses, unchanged reference lights across lenses, orbit, toggles and reload without processing requests or JavaScript errors. The affected 39 tests and strict lab TypeScript check passed.
+Stellar presentation reuses the main application's prepared soft core/halo profile. Offline integration of its decoded alpha compensates sprite extent, retaining each point's relative RGB light. These are display profiles, not physical stellar radii. Chromium verified all four datasets, unchanged reference lights across datasets, orbit, toggles and reload without processing requests or JavaScript errors. The affected 39 tests and strict lab TypeScript check passed.
 
-The new Tõrva/Niittee optical candidate is selectable in Alignment, covering 4.41° × 2.87°. Its 295 matches include 99 held-out stars at 0.450″ RMS. It has not been star-removed or baked; the NOIRLab lens in Reconstruction still has its original short footprint. Earlier current-result sections below describe the retained cloud and historical star preparations.
+The new Tõrva/Niittee optical candidate is selectable in Alignment, covering 4.41° × 2.87°. Its 295 matches include 99 held-out stars at 0.450″ RMS. It has not been star-removed or baked; the NOIRLab dataset in Reconstruction still has its original short footprint. Earlier current-result sections below describe the retained cloud and historical star preparations.
 
 
 Current Alignment selection: **NOIRLab optical, both Spitzer composites, WISE, and three wider optical comparisons**. The original four sources and the new Niittee optical field pass relative-star registration; Usama and Andreo remain provisional. 2MASS and IRIS are hidden because they offer little usable nebular structure here. All nine original records remain preserved.
@@ -172,11 +172,11 @@ artifacts, with no production promotion or hosting.
 Current local result: `m45`.
 [Compiler defaults](compiler.json) pin Detail 100%, Faint 35%, Depth 1× and
 equal source weights. It contains 472 supports, 450 shared compact lights and
-four RGB lenses. Native separation and structure extraction were reused;
+four RGB datasets. Native separation and structure extraction were reused;
 the inspected trial's geometry/material bake took 36.8 seconds, total compile 39.0 seconds.
 
 The earlier integration replay changed the implementation identity after shared
-per-lens alpha validation was added. [Processing evidence](processing-evidence.json)
+per-dataset alpha validation was added. [Processing evidence](processing-evidence.json)
 compares result `m45-integration-replay`
 with inspected result `m45-before-integration-replay`:
 all 4,105 bank resources (12,571,204 bytes), the numerical field, geometry,
@@ -202,7 +202,7 @@ two trials; only detail selection and its supporting recipe-default plumbing
 changed. The 14.2% lower residual measures better display-image agreement,
 not improved physical depth. Zero-emission baseline RMSE is 0.179623 for both.
 
-All result/resource hashes validate. The four lenses preserve exact neutral
+All result/resource hashes validate. The four datasets preserve exact neutral
 frame and slab geometry, and every decoded alpha byte.
 XYZ banks use 512px in-plane sampling and four samples per slab.
 
@@ -226,7 +226,7 @@ but does not recover narrow native dust fibers. Large optical stellar glows
 remain in the diffuse 3D material. The single warped layer becomes a narrow
 ribbon from the side and retains fine slice/color traces. Optical and Spitzer
 footprints have hard color transitions to the explicitly neutral wider cloud;
-WISE is the most useful full-field lens. No missing color was invented and no
+WISE is the most useful full-field dataset. No missing color was invented and no
 geometry was discarded to hide those boundaries.
 
 The bounded comparison stopped after two bakes. Remaining source contamination

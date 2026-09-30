@@ -10,7 +10,7 @@ export type PreparedLabelEdge = (world: WorldCameraPose, viewport: WorldCameraVi
  * image reads or additional assets; the same edge follows arrival and rotation. */
 export function preparedLabelEdge(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame): PreparedLabelEdge | undefined {
   const hit = definition.surfaceHit;
-  if (!hit || hit.lensRanges || !hit.triangles.length || typeof DOMMatrix === 'undefined') return undefined;
+  if (!hit || hit.datasetRanges || !hit.triangles.length || typeof DOMMatrix === 'undefined') return undefined;
   let local = new DOMMatrix();
   for (let index = hit.target; index !== definition.tree.scene;) {
     const node = definition.tree.nodes[index];

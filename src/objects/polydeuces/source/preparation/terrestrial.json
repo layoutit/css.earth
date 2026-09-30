@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "polydeuces",
   "displayName": "Polydeuces",
@@ -107,6 +107,6 @@
     "sunSource": "JPL Saturn-system ephemeris. Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

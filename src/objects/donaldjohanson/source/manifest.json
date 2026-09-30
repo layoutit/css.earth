@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "donaldjohanson-shape",
@@ -298,7 +298,7 @@
         "latitudeDegrees": 33.7,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "llorri"
+        "datasetId": "llorri"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

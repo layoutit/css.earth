@@ -8,7 +8,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 - **Monochrome photographic inserts** use 332 CLEAR-filter photographs from the [USGS controlled individual-image release](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/), described by [Bland et al. (2021)](https://doi.org/10.1029/2021EA001935). These calibrated observations use the published control network and replace regional pixels within the existing global Monochrome view. The global mosaic remains underneath.
 
-- The **False color** lens uses the [USGS controlled Galileo observations](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/) (CC0), by Bland, Weller and colleagues. The three sequences are G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01 (1997-12-16), and 14ESGLOCOL01 (1998-03-29).
+- The **False color** dataset uses the [USGS controlled Galileo observations](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/) (CC0), by Bland, Weller and colleagues. The three sequences are G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01 (1997-12-16), and 14ESGLOCOL01 (1998-03-29).
 
 - The Elevation view adds the released [USGS controlled Agenor DTM](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/).
 
@@ -22,7 +22,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [carbon dioxide](evidence/showcase/carbon-dioxide.png).
+The 26 September 2026 browser and delivery record identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. carbon dioxide.
 
 ### Recovered observation views (26 September 2026)
 
@@ -42,19 +42,19 @@ The [JWST recipe](source/preparation/jwst-band-maps.json) is run by `packages/te
 
 The 14 September 2026 **Monochrome** update inserts 301 equirectangular products and 31 products whose inspected STAC records list only polar GeoTIFFs. The shipped 8,192 × 4,096 geographic preparation, the one image density, receives controlled photographs over **15.224% of the sphere**, with 330 contributing images (asset record (`prepared/assets.json`)). Outside those footprints, the published global mosaic stays visible. The update did not change the other datasets.
 
-[Before and after in the running app](evidence/galileo/browser.json) · [Surface and delivery checks](evidence/galileo/delivery.json) · [Two-product fresh restoration](evidence/galileo/restoration.json). All 332 original GeoTIFFs contribute to the source lineage; the asset record retains the selected area and fitted display gain for each image at each level.
+Before and after in the running app · Surface and delivery checks · Two-product fresh restoration. All 332 original GeoTIFFs contribute to the source lineage; the asset record retains the selected area and fitted display gain for each image at each level.
 
-[Regional before](evidence/galileo/regional-before.png) · [Regional after](evidence/galileo/regional.png) · [Southern before](evidence/galileo/southern-before.png) · [Southern after](evidence/galileo/southern-regions.png). These matched views show where photographic inserts change the surface, including remaining brightness boundaries. [Focused validation](evidence/galileo/checks.json) separates the passing checks from four existing shared failures reproduced on main. Strict preparation/tool TypeScript passes. Five replacement images are published and verified against their immutable URLs; the other 130 Europa image files retain their bytes. Renderer, geometry, runtime definition, atlas dimensions and the seven independent views are unchanged. Full application/conformance checks were not run.
+Regional before · Regional after · Southern before · Southern after. These matched views show where photographic inserts change the surface, including remaining brightness boundaries. Focused validation separates the passing checks from four existing shared failures reproduced on main. Strict preparation/tool TypeScript passes. Five replacement images are published and verified against their immutable URLs; the other 130 Europa image files retain their bytes. Renderer, geometry, runtime definition, atlas dimensions and the seven independent views are unchanged. Full application/conformance checks were not run.
 
-The 14 September 2026 composition preparation added **Ice signature**, **Fine ice**, and **Coarse ice** as a local preview. They are now withheld from publication until reuse terms are explicit; the evidence below records that preview. [Reflectance evidence](evidence/composition/reflectance-values.json) and [model evidence](evidence/composition/model-values.json) compare all 64,800 geographic nodes in each of five converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. [Fresh restoration](evidence/composition/restoration.json) downloads both original archives into an empty source root and reproduces all eleven composition manifest entries.
+The 14 September 2026 composition preparation added **Ice signature**, **Fine ice**, and **Coarse ice** as a local preview. They are now withheld from publication until reuse terms are explicit; the evidence below records that preview. Reflectance evidence and model evidence compare all 64,800 geographic nodes in each of five converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. Fresh restoration downloads both original archives into an empty source root and reproduces all eleven composition manifest entries.
 
-[Ice signature](evidence/composition/ice-signature.png) · [Fine ice](evidence/composition/fine-ice.png) · [Coarse ice](evidence/composition/coarse-ice.png) · [DPR 2](evidence/composition/ice-signature-dpr2.png) · [Mobile](evidence/composition/coarse-ice-mobile.png). The [browser receipt](evidence/composition/browser.json) pins the tested files above, viewport, camera, selected textures and inspected captures. Dataset switching retains 450 surface leaves; minimap rotation and keyboard zoom work. [Delivery evidence](evidence/composition/delivery.json) verifies the unchanged scene and prior assets; fifteen added image files total 222,678 bytes.
+Ice signature · Fine ice · Coarse ice · DPR 2 · Mobile. The browser receipt pins the tested files above, viewport, camera, selected textures and inspected captures. Dataset switching retains 450 surface leaves; minimap rotation and keyboard zoom work. Delivery evidence verifies the unchanged scene and prior assets; fifteen added image files total 222,678 bytes.
 
 Focused checks pass: numeric conversion/acquisition (15), body behavior and content (14 across both moons), source/provenance (30), source-usage conservation (1), and strict preparation/tool TypeScript. Eight shared startup-fixture/import-closure failures across the two bodies were reproduced; these remain outside this surface change. Full application checks and public asset installation are not qualified. The local preview omits six unavailable unrelated nebula context banks. Mobile keeps the texture without horizontal overflow, but shared orbit/label clutter and the open information sheet limit visual review. The texture bake receipt retains its original source hashes; later content and provenance refreshes do not claim another full bake.
 
-The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 color-encoding capture checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. Image delivery verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
-[Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The capture faces the measured color region (control pitch 20°, yaw 180°); the application’s initial viewpoint is unchanged. Its polar assets are byte-identical because this color footprint does not reach the caps.
+Displayed surface · DPR 2 · Shadows · Mobile. The capture faces the measured color region (control pitch 20°, yaw 180°); the application’s initial viewpoint is unchanged. Its polar assets are byte-identical because this color footprint does not reach the caps.
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; the 8K latitude-band images from #151, geometry and lighting are retained. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
@@ -73,24 +73,24 @@ the crater or filling missing observations.
 | --- | --- |
 | ![Pwyll before finer sampling](evidence/photographic-detail/before.png) | ![Pwyll with finer sampling](evidence/photographic-detail/after.png) |
 
-[The controlled-color view](evidence/photographic-detail/controlled-color.png)
+The controlled-color view
 shows the retained three-band footprints near Falga Regio. Both photographic
 views were inspected with Shadows on/off and at DPR 1 and 2. Preparation
 build/type checks, source-record generation and unchanged scene/geometry checks
 pass. The ten photographic files total 18.95 MB, previously 6.95 MB; the largest
 decoded atlas is 195 MiB. Three unrelated scientific thumbnails were unavailable
 locally, and the cross-body search preview covered only these three moons;
-this is not aggregate browser or scientific-lens qualification.
+this is not aggregate browser or scientific-dataset qualification.
 
 Earlier shared-lane migration qualified the sphere, lighting,
 source interpretation and feature placement. This photographic refresh retains
 those source files, coordinate transforms, masks, geometry and scene structure.
 Its new evidence concerns finer sampling of the photographs; it does not repeat
-the scientific-lens review.
+the scientific-dataset review.
 
 Earlier run (12 September 2026): [`node tools/objects/dist/prepare-authored.js europa --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/europa/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, elevation, geology, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 4878).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, enhanced, elevation, geology, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 4878).
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
@@ -123,9 +123,9 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 
 - **Infrared:** The blue channels differ slightly (0.732919 and 0.740634 µm); this is a spectral color display, not a uniform quantitative abundance map.
 
-- **Composition lenses:** Native coordinates are latitude north-positive and longitude east-positive; source-paper labels in west longitude must therefore be converted before comparison with this body. The 1° release grid is resampling, not independent detail: SPHERE sampling is about 25 km/px but diffraction limits resolved features to about 150 km. Ice signature is a reflectance-ratio proxy, not an abundance. Fine and coarse ice are MCMC component estimates with 16th/84th-percentile bounds; they are not a total-ice posterior, so no component medians or percentile bounds are summed. Individual salt fits remain degenerate.
+- **Composition datasets:** Native coordinates are latitude north-positive and longitude east-positive; source-paper labels in west longitude must therefore be converted before comparison with this body. The 1° release grid is resampling, not independent detail: SPHERE sampling is about 25 km/px but diffraction limits resolved features to about 150 km. Ice signature is a reflectance-ratio proxy, not an abundance. Fine and coarse ice are MCMC component estimates with 16th/84th-percentile bounds; they are not a total-ice posterior, so no component medians or percentile bounds are summed. Individual salt fits remain degenerate.
 
-- **Reuse:** The Zenodo record is open/`other-open`, but neither the tagged source nor the located record metadata provides explicit terms for reusing the numerical release. Article or preprint licensing does not settle those data rights. The three composition views are therefore withheld: they have no lens, surface recipe or dataset text, and no composition asset is published. The pinned sources, conversion records and evidence stay so the views can return once explicit reuse terms exist.
+- **Reuse:** The Zenodo record is open/`other-open`, but neither the tagged source nor the located record metadata provides explicit terms for reusing the numerical release. Article or preprint licensing does not settle those data rights. The three composition views are therefore withheld: they have no dataset, surface recipe or dataset text, and no composition asset is published. The pinned sources, conversion records and evidence stay so the views can return once explicit reuse terms exist.
 
 [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
@@ -177,7 +177,7 @@ Exact image dates, band identities, coordinates, source URLs and hashes are pinn
 
 These are calibrated 32-bit I/F images with corrected camera pointing, on an east-positive cylindrical grid centred at 180°, radius 1,560,800 m. They have not been photometrically corrected by USGS. Native grids range from 1.375 to 1.570 km per pixel. Higher-density observations take priority. Color appears only where all three bands from the same sequence have valid interpolation footprints; zero no-data, ISIS special pixels, and incomplete boundaries are withheld. Preparation records its surface percentage per observation. Values stay linear floating-point I/F through interpolation, photometric correction and level matching. One common range, I/F 0 to 1, then maps each band to a linear display channel, and the [shared IEC sRGB transfer](../../../docs/color-preparation.md) and 8-bit rounding are applied once, at output (`packages/bake/src/objects/color/color-transfer.ts`). Bright corrected values are not clipped before matching; each observation's gain is capped so its brightest value stays within the range. No monochrome detail is transferred into color. The newer controlled dataset and the older monochrome mosaic have different positional accuracy.
 
-The 28ESGLOCOL01 sequence (2000-05-22) was removed from this lens: its 13.832 km-per-pixel imagery covered sharper monochrome with a visibly blurred insert. The lens now uses the monochrome base there, with no invented color. Preparation applies one spherical [Lunar–Lambert disk normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html) to every color image, with weights selected by observation:
+The 28ESGLOCOL01 sequence (2000-05-22) was removed from this dataset: its 13.832 km-per-pixel imagery covered sharper monochrome with a visibly blurred insert. The dataset now uses the monochrome base there, with no invented color. Preparation applies one spherical [Lunar–Lambert disk normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html) to every color image, with weights selected by observation:
 
 | Observation | Disk weight L |
 | --- | --- |
@@ -191,7 +191,7 @@ All three bands must have incidence and emission at most 75°; otherwise the obs
 
 `source/photometry/` binds all 20 controlled ISIS labels, including each exact capture ET and body-orientation coefficients, to pinned [JPL Horizons](https://ssd-api.jpl.nasa.gov/doc/horizons.html) geometric Sun and Galileo vectors relative to Europa (ICRF, km, JDTDB). The raw API responses and request URLs are checked in; labels are restored by the existing source acquisition command. Preparation transforms the vectors using the label's adjusted prime meridian (W0 = 36.054°) and [NAIF PCK orientation equations](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html), including nutation/precession. It does not use the older PDS label's west longitudes. Horizons uses its archived Galileo trajectory and current planetary ephemerides, rather than reproducing the original USGS SPICE kernel set exactly. Preparation is offline and reproducible from these pinned inputs.
 
-Both lenses retain the shared Shadows control and prepared globe lighting. Residual photographed shadows and seams can remain; added globe lighting is approximate.
+Both datasets retain the shared Shadows control and prepared globe lighting. Residual photographed shadows and seams can remain; added globe lighting is approximate.
 
 To soften brightness steps against monochrome, preparation fits one display brightness multiplier per color sequence. The fit is the median ratio of monochrome to composite display luminance (weights 0.2126, 0.7152, 0.0722), after decoding the existing monochrome display bytes into linear display values, using co-located valid pixels within a four-texel strip inside each color footprint. It applies the same multiplier to all three floating channels before encoding, capped by the brightest channel in the entire sequence so highlights cannot clip. This preserves ratios in the chosen linear display channels before final 8-bit rounding; those channels are assigned spectral bands, not measured human-visible primaries. No monochrome detail is transferred, no missing data enters the fit, and no feathering or blending is used. This is presentation matching against the contrast-adjusted monochrome mosaic, not additional physical calibration; source I/F files are unchanged. Remaining differences in color, lighting, resolution and positional accuracy can still reveal the boundaries.
 
@@ -211,7 +211,7 @@ The exact Float32 COG is 642×133, with 39,032 finite non-special samples. Its p
 
 The genuine height no-data value and complete bilinear footprints control coverage. The released `FOM` and `ClrConf` files are byte-identical: the retained processing log translates the FOM VRT into both outputs and cubic-resamples the categorical FOM codes. Neither is used as a confidence or quality mask. Exact ignored source TIFFs have acquisition recipes; the CC0 release and source authors retain attribution.
 
-The body-owned lens focus is 142°E, 43.7°S at supported zoom 4. The False color lens covers about a tenth of the map, so it opens on that coverage: 143.5°E, 2.3°N at zoom 1.1, the centre of the pixels that carry colour in its prepared minimap. The same measurement on the elevation minimap lands on the authored 142°E, 43.7°S strip. Shared preparation converts it through the actual solid mesh axes and system matrix to existing camera navigation. The X/Y swap in solid PolyCSS leaf coordinates is included; no source interpretation occurs in runtime. The Yelland trial and its broken quality products are retained only for the intake audit. Useful regional framing, source-versus-display visuals, and Chrome conformance remain separate B2 gates.
+The body-owned dataset focus is 142°E, 43.7°S at supported zoom 4. The False color dataset covers about a tenth of the map, so it opens on that coverage: 143.5°E, 2.3°N at zoom 1.1, the centre of the pixels that carry colour in its prepared minimap. The same measurement on the elevation minimap lands on the authored 142°E, 43.7°S strip. Shared preparation converts it through the actual solid mesh axes and system matrix to existing camera navigation. The X/Y swap in solid PolyCSS leaf coordinates is included; no source interpretation occurs in runtime. The Yelland trial and its broken quality products are retained only for the intake audit. Useful regional framing, source-versus-display visuals, and Chrome conformance remain separate B2 gates.
 
 ## B6 mapped science
 

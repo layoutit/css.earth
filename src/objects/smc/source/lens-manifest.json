@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-lens-manifest@1",
+  "schema": "cssearth-volume-dataset-manifest@1",
   "outputs": {
     "prepared/smc-horalek-wide/slices/x/09.webp": {
       "bytes": 82
@@ -822,9 +822,6 @@
     },
     "source/lenses/smc-horalek-wide/provenance.json": {
       "bytes": 153282
-    },
-    "source/lenses/smc-horalek-wide/catalogue-stars.json": {
-      "bytes": 944942
     },
     "source/lenses/smc-horalek-wide/selection.json": {
       "bytes": 13385
@@ -1651,9 +1648,6 @@
     "source/lenses/smc-vista/provenance.json": {
       "bytes": 151870
     },
-    "source/lenses/smc-vista/catalogue-stars.json": {
-      "bytes": 944942
-    },
     "source/lenses/smc-vista/selection.json": {
       "bytes": 13354
     },
@@ -2478,9 +2472,6 @@
     },
     "source/lenses/smc-smash/provenance.json": {
       "bytes": 152120
-    },
-    "source/lenses/smc-smash/catalogue-stars.json": {
-      "bytes": 944942
     },
     "source/lenses/smc-smash/selection.json": {
       "bytes": 13366
@@ -3307,9 +3298,6 @@
     "source/lenses/smc-dss2/provenance.json": {
       "bytes": 150564
     },
-    "source/lenses/smc-dss2/catalogue-stars.json": {
-      "bytes": 944942
-    },
     "source/lenses/smc-dss2/selection.json": {
       "bytes": 13371
     },
@@ -4135,16 +4123,13 @@
     "source/lenses/smc-allwise-wide/provenance.json": {
       "bytes": 152589
     },
-    "source/lenses/smc-allwise-wide/catalogue-stars.json": {
-      "bytes": 944942
-    },
     "source/lenses/smc-allwise-wide/selection.json": {
       "bytes": 13379
     },
     "source/lenses.json": {
       "bytes": 4033
     },
-    "prepared/lenses.json": {
+    "prepared/datasets.json": {
       "bytes": 6166081
     },
     "object.json": {

@@ -13,7 +13,7 @@
     "sourceIds": ["eso-optical", "eso-vista"],
     "mergeRadiusArcsec": 3
   },
-  "interpretation": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses and image-detected compact lights retain one geometry; no gas velocity is converted to depth.",
+  "interpretation": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB datasets and image-detected compact lights retain one geometry; no gas velocity is converted to depth.",
   "depthRecipe": "labs/nebula/models/m8/depth-model.json",
   "defaultControls": {
     "detail": 0.9,

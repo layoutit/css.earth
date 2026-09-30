@@ -1,30 +1,30 @@
 /**
- * The comparison a ground-based photograph lens ships on: our cameras against the paper that published the frames.
+ * The comparison a ground-based photograph dataset ships on: our cameras against the paper that published the frames.
  *
  * The survey papers register a shape model by fitting it to the frames and show the result as a figure: the photographs
  * in one row and the model rendered at each epoch in the rows below, with the spin axis drawn. That figure is the
  * field's evidence, and reproducing it is ours. This module reads such a figure from the pinned paper, finds its panels,
- * and measures how our cameras, which place the lens, reproduce it: the model's outline at each epoch over a full turn of
+ * and measures how our cameras, which place the dataset, reproduce it: the model's outline at each epoch over a full turn of
  * rotational phase, the spin axis on the sky, and the photographs' own outlines in native pixels over a phase sweep.
- * Every number is reported; none of them is a gate. The lens's observer-cameras record names the result.
+ * Every number is reported; none of them is a gate. The dataset's observer-cameras record names the result.
  */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-export const COMPARISON_SPEC_SCHEMA = 'cssearth-published-comparison@1';
+export const COMPARISON_SPEC_SCHEMA = 'cssearth-published-comparison@2';
 export const COMPARISON_EVIDENCE_SCHEMA = 'cssearth-published-comparison-evidence@1';
 export const COMPARISON_SPEC_FILE = 'preparation/published-comparison.json';
 
-/** A figure column: its printed label, the lens frame it shows or null, and the dark band it sits in, counted from the top (0 when the figure has one). */
+/** A figure column: its printed label, the dataset frame it shows or null, and the dark band it sits in, counted from the top (0 when the figure has one). */
 export interface ComparisonColumn { label: string; frame: string | null; band: number }
 export interface ComparisonSpec {
-  schema: string; lensId: string; source: string; figure: string;
+  schema: string; datasetId: string; source: string; figure: string;
   /** The figure as an image object of the paper: the paper's address, the object number and the figure's size. The paper is
    * cited, not retained; the measurement reads it from this address. */
   document: { url: string; object: number; width: number; height: number };
-  /** The rows of photographs and of the model the lens rides, counted from the top of the figure's dark band, how many image rows the
+  /** The rows of photographs and of the model the dataset rides, counted from the top of the figure's dark band, how many image rows the
    * band holds, and how many lines of text each photograph panel prints at its top, which the body's outline leaves out. */
   rows: { image: number; model: number; count: number; labelLines: number };
-  /** One entry per figure column, band by band and left to right within a band: its printed label and the lens frame it shows, or null for an epoch the lens does not use. A figure with more epochs than fit one band continues them in a second band below. */
+  /** One entry per figure column, band by band and left to right within a band: its printed label and the dataset frame it shows, or null for an epoch the dataset does not use. A figure with more epochs than fit one band continues them in a second band below. */
   columns: ComparisonColumn[];
 }
 
@@ -42,7 +42,7 @@ export function parseComparisonSpec(value: unknown): ComparisonSpec {
   const document = requireRecord(record.document, 'document'), rows = requireRecord(record.rows, 'rows');
   const integer = (value: unknown, at: string) => { const n = requireFiniteNumber(value, at); if (!Number.isSafeInteger(n) || n < 0) throw new TypeError(`${at} is a whole number.`); return n; };
   const spec: ComparisonSpec = {
-    schema: COMPARISON_SPEC_SCHEMA, lensId: requireString(record.lensId, 'lensId'), source, figure: requireString(record.figure, 'figure'),
+    schema: COMPARISON_SPEC_SCHEMA, datasetId: requireString(record.datasetId, 'datasetId'), source, figure: requireString(record.figure, 'figure'),
     document: { url: paperUrl(document.url), object: integer(document.object, 'document object'), width: integer(document.width, 'figure width'), height: integer(document.height, 'figure height') },
     rows: { image: integer(rows.image, 'image row'), model: integer(rows.model, 'model row'), count: integer(rows.count, 'row count'),
       labelLines: rows.labelLines === undefined ? 0 : integer(rows.labelLines, 'label lines') },
@@ -53,7 +53,7 @@ export function parseComparisonSpec(value: unknown): ComparisonSpec {
     }),
   };
   if (spec.rows.image >= spec.rows.count || spec.rows.model >= spec.rows.count || spec.rows.image === spec.rows.model) throw new TypeError('The photograph and model rows are distinct rows of the figure.');
-  if (!spec.columns.some(column => column.frame !== null)) throw new TypeError('At least one figure column shows a lens frame.');
+  if (!spec.columns.some(column => column.frame !== null)) throw new TypeError('At least one figure column shows a dataset frame.');
   if (spec.columns.some((column, index) => index > 0 && column.band < spec.columns[index - 1].band)) throw new TypeError('Figure columns are listed band by band, top band first.');
   return spec;
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-2p",
   "displayName": "Encke",
@@ -105,6 +105,6 @@
     "qualification": "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. The grid marks absent surface photographs; the orientation is illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

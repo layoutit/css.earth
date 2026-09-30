@@ -36,7 +36,7 @@ display path, not the source positions or orbital model. Seen from its centre,
 a chord of an N-vertex circle strays (π/N)²/2 of the radius. On a 1,440 px
 view with the 60° field, that is 1.7 px at 60 vertices and 0.8 px at 90, so a
 moon's orbit seen from its planet no longer shows corners
-([60 against 90](evidence/orbit-points-20260928/moon-and-ganymede.png): the
+(60 against 90: the
 Moon's orbit from 1.1 million km and Ganymede's from 1.9 million km). A host detail view
 defers its satellites' paths until the satellite system is opened or a
 satellite is targeted.
@@ -44,9 +44,9 @@ satellite is targeted.
 ## Evidence
 
 Checked on 27 September 2026.
-The [check record](evidence/aia-cr2311-20260927/checks.json) records the native-source restoration,
+The check record records the native-source restoration,
 FITS and preparation tests, and desktop/mobile arrow checks. Both arrows retain the mounted
-scene and camera. The [mobile capture](evidence/aia-cr2311-20260927/corona-193-mobile.png)
+scene and camera. The mobile capture
 shows the same dataset at 390 × 844, DPR 2. These are display checks, not a new scientific review.
 
 ![The 193 Å corona view, with its source map and wavelength arrows](evidence/aia-cr2311-20260927/corona-193-desktop.png)
@@ -84,11 +84,11 @@ Photosphere and longitude review (measured on `main`; unchanged continuum and ma
   `CRLN-CEA`, CDELT1 −0.5, pixel 1 at Carrington longitude 0.3°) and the AIA
   synoptic maps run Carrington longitude up to the right. Carrington longitude
   grows in the direction of rotation, which is the renderer's east-positive
-  sense (`packages/telescope-cli/src/archives/interferometry/surface-lens.mts`: east longitude grows
+  sense (`packages/telescope-cli/src/archives/interferometry/surface-dataset.mts`: east longitude grows
   from 0 at the left edge), so the maps are used as stored. The earlier review
   reversed all of them and the HMI photosphere projection laid its columns out
   from 360° down to 0°. Both are fixed; the runtime-contract test checks that
-  the magnetic lens colours negative field at the left of a test map.
+  the magnetic dataset colours negative field at the left of a test map.
 - The photosphere now reads 28 JSOC `hmi.Ic_noLimbDark_720s` frames (daily at
   00:00 TAI from 13 May to 9 June, plus 26 May 12:00 for the missing midnight,
   all QUALITY 0). Each frame is placed by its pinned DRMS record: CRPIX,
@@ -111,9 +111,9 @@ Photosphere and longitude review (measured on `main`; unchanged continuum and ma
   committed fixture.
 - Unit tests and the
   shared browser conformance harness
-  define the package checks. The [four-lens render](source/reference/rendered-lenses.png)
+  define the package checks. The [four-dataset render](source/reference/rendered-lenses.png)
   of this version was inspected after the scene reported ready: active regions
-  sit in the same places in every lens.
+  sit in the same places in every dataset.
 
 ## Known problems
 
@@ -122,7 +122,7 @@ Photosphere and longitude review (measured on `main`; unchanged continuum and ma
   seen from the equator the disc is about 1.9% of R (≈ 6 CSS px at the default
   310 px radius) short at each pole. The retired lane hid this behind 32 band
   leaves up to 89° plus a centre cap; the limb plate's rim alpha (≤ 0.68 for
-  the FITS lenses, ≤ 0.36 for the continuum) does not cover it. A polar band
+  the FITS datasets, ≤ 0.36 for the continuum) does not cover it. A polar band
   extension of the shared geometry would remove it.
 - The visible-surface and magnetic-field maps still continue unobserved polar values. These filled areas are display approximations. The ultraviolet maps instead mark their missing samples with the shared gray grid.
 - Ultraviolet colors are display scales for detector counts, not temperature or calibrated radiance. Brightness should not be compared numerically between wavelength bands.
@@ -197,7 +197,7 @@ The visible-surface and magnetic-field maps use Fourier continuation inside one 
 band of each pole before packing. This is a display treatment, not another pole observation.
 The three ultraviolet maps retain their source samples and mark missing coverage instead.
 
-Each lens also has one source-derived, antialiased 512-pixel limb asset. It covers only the
+Each dataset also has one source-derived, antialiased 512-pixel limb asset. It covers only the
 outer edge to smooth the visible corners of the surface elements; its transparent center does
 not replace the globe material. The emissive presentation has no lighting track: no Shadows
 toggle, no directional Sun, no terminator. At device DPR 1 and 2, the scene uses the same

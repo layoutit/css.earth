@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ogle-lmc-ecl-09114-a/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "ogle-lmc-ecl-09114-a-surface-{id}{suffix}.webp",
-      "thumbnail": "ogle-lmc-ecl-09114-a-lens-{id}.webp",
+      "thumbnail": "ogle-lmc-ecl-09114-a-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "aemilia",
   "displayName": "Aemilia",
@@ -109,6 +109,6 @@
     "sunSource": "ISAM/SAGE102 original pole and sidereal period; fixed-epoch JPL Horizons orbit. Absolute phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

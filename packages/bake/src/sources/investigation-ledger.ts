@@ -1,4 +1,4 @@
-/** An object's investigation ledger: every source, route, lens or frame examined for it, what was decided, the evidence and what
+/** An object's investigation ledger: every source, route, dataset or frame examined for it, what was decided, the evidence and what
  * would reopen the decision. It lives beside the body README, outside `source/`, so recording an investigation never changes
  * preparation inputs.
  *

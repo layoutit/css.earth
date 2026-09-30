@@ -50,7 +50,7 @@ export function assertImageLayerReplay(actual: unknown, expected: unknown): void
 export async function restoreEnvironmentObject(objectDirectory: string, verifyReplay = false) {
   const descriptor: Descriptor = JSON.parse(await readFile(join(objectDirectory, 'object.json'), 'utf8'));
   // These resources have their own preparation steps later in the build.
-  if (descriptor.type === 'volume-lens-bank' || descriptor.type === 'galaxy-point-field') return;
+  if (descriptor.type === 'volume-dataset-bank' || descriptor.type === 'galaxy-point-field') return;
   const preparedBytes = await readFile(containedPath(objectDirectory, descriptor.prepared.url));
   const expected = JSON.parse(preparedBytes.toString());
   const data = expected.data ?? expected;

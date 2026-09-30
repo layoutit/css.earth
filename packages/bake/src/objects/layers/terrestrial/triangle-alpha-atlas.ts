@@ -23,7 +23,7 @@ const pixels = (style: string, pattern: RegExp, label: string) => {
   return match.slice(1).map(Number);
 };
 
-/** The atlas slices of the faces each texture resource paints. Every lens can carry its own mesh, shown by its display
+/** The atlas slices of the faces each texture resource paints. Every dataset can carry its own mesh, shown by its display
  * variable and packed into its own atlas at its own size, and polar faces read the poles image, so a resource's mask is
  * the union of just the faces that read it in some variant. */
 export function triangleSlices(definition: Definition, namespace: string): Map<string, Slice[]> {
@@ -127,7 +127,7 @@ export async function prepareTriangleAlphaAtlases<T extends Definition>(definiti
     entries.push({ ...entry, key: `${key}:alpha`, url });
     resources[key] = `${key}:alpha`;
   }
-  // A key that names a masked atlas's file without a face reading it (poles:<lens> often names surface:<lens>'s atlas)
+  // A key that names a masked atlas's file without a face reading it (poles:<dataset> often names surface:<dataset>'s atlas)
   // swaps with it: a pool counts files, and two keys that shared one must not become two.
   for (const entry of definition.assets.entries) {
     const url = written.get(entry.url);

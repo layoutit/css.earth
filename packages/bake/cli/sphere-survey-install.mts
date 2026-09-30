@@ -1,5 +1,5 @@
 // Entry script: node packages/bake/cli/sphere-survey-install.mts <object-id> [--replace] [--leave-out=<frame-id>,…] [--leave-out-apparition=<first night>,…] [--because=<why>].
-// Installs a set-up survey lens into the body's package (`installSetup` in @cssearth/bake/objects/sphere-survey), in the checkout this command belongs to.
+// Installs a set-up survey dataset into the body's package (`installSetup` in @cssearth/bake/objects/sphere-survey), in the checkout this command belongs to.
 import { resolve } from 'node:path';
 import { installSetup, leaveOutArguments } from '@cssearth/bake/objects/sphere-survey';
 

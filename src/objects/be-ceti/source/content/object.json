@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "be-ceti",
   "displayName": "BE Ceti",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "be-ceti-lens-color.webp",
+        "thumbnail": "be-ceti-dataset-color.webp",
         "surface": "be-ceti-surface-color@2x.webp",
         "poles": "be-ceti-poles-color@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "radial-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "be-ceti-lens-radial-field.webp",
+        "thumbnail": "be-ceti-dataset-radial-field.webp",
         "surface": "be-ceti-surface-radial-field@2x.webp",
         "poles": "be-ceti-poles-radial-field@2x.webp",
         "source": {
@@ -125,7 +125,7 @@
         "id": "meridional-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "be-ceti-lens-meridional-field.webp",
+        "thumbnail": "be-ceti-dataset-meridional-field.webp",
         "surface": "be-ceti-surface-meridional-field@2x.webp",
         "poles": "be-ceti-poles-meridional-field@2x.webp",
         "source": {
@@ -180,7 +180,7 @@
         "id": "azimuthal-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "be-ceti-lens-azimuthal-field.webp",
+        "thumbnail": "be-ceti-dataset-azimuthal-field.webp",
         "surface": "be-ceti-surface-azimuthal-field@2x.webp",
         "poles": "be-ceti-poles-azimuthal-field@2x.webp",
         "source": {

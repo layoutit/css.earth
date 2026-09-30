@@ -26,7 +26,7 @@ export interface WorldCameraPose {
   /** Camera-to-reference orientation of right-handed camera axes (+x right, +y up, +z toward the eye): the CSS camera axes with y
    * reversed, since CSS 3D space is left-handed and a quaternion carries only proper rotations. */
   readonly pose: PhysicalCameraPose;
-  /** Optical framing relative to the prepared viewport lens; 1 keeps its original field of view. */
+  /** Optical framing relative to the prepared viewport dataset; 1 keeps its original field of view. */
   readonly projectionScale?: number;
 }
 

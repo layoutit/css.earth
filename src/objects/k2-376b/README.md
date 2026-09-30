@@ -8,7 +8,7 @@ It is the only planet known around K2-376. Its orbit and size follow Christianse
 
 **Orbit.** Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): P 5.776475 d Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): a/R* 11.58; Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): inclination derived from its impact parameter 0.854 with its a/R* 11.58 (Winn 2010, eq. 7) No archive row states an eccentricity; the orbit is taken as circular Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): transit mid-time 2458096.7426 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 192 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-376's measured colour (#fff6f9, the colour lens of k2-376 (src/objects/k2-376/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-376's measured colour (#fff6f9, the colour dataset of k2-376 (src/objects/k2-376/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-376's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (45, 46, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

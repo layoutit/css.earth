@@ -9,6 +9,12 @@
     },
     {
       "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 101472,
+      "sha256": "33973030440e740b892ae3fe41afa3ce1b1f949a46fae56d87a78428107fe8ce"
+    },
+    {
+      "location": "prepared",
       "filename": "electron-density/slices/x/02.png",
       "bytes": 181,
       "sha256": "6c91a3ef42262f94ae247e3b2fb3a9c4f465438209b462d4f245450a4506fc92"
@@ -441,15 +447,9 @@
     },
     {
       "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 101460,
-      "sha256": "33d9a59496f91bfd52814396e68fd6f283b31d78df71b0bea64ff8ab2c58fb68"
-    },
-    {
-      "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 2536,
-      "sha256": "9c4dfa81328bac4ea06b7efe97607d010fae551ee5b37b8571b14ac424c89304"
+      "bytes": 2539,
+      "sha256": "95177dead497a616b6cc834fdcab95378fc90f9dba142eb0cb05fef250aa47ba"
     }
   ]
 }

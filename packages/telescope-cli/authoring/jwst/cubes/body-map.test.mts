@@ -31,7 +31,7 @@ test('a spot north-east of the disc centre on the sky lands north and at a large
   // A prograde body's surface moves toward the sky's west, and east longitude grows the way it turns: a spot east of the
   // centre has yet to reach the sub-observer meridian, so its west longitude is over 90°. A mirrored map would give 45°.
   assert.ok(west > 100 && west < 140, `west longitude ${west}`);
-  // The same point through the camera the photograph lenses use.
+  // The same point through the camera the photograph datasets use.
   const pixel = controlledShapeCamera(camera).project([Math.cos(latitude * Math.PI / 180) * Math.cos(-west * Math.PI / 180), Math.cos(latitude * Math.PI / 180) * Math.sin(-west * Math.PI / 180), Math.sin(latitude * Math.PI / 180)].map(v => v * RADIUS_KM * 1000))!;
   assert.ok(Math.abs(pixel[0]! - 17) < 1 && Math.abs(pixel[1]! - (size - 1 - 23)) < 1, `pixel ${pixel}`);
   assert.ok(radiusPixels > 5 && map.areaShare > 0.3 && map.areaShare < 0.5);

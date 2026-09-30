@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-12b",
   "displayName": "WASP-12 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 3,028 K. The disc itself is unresolved.",
-        "thumbnail": "wasp-12b-lens-thermal.webp",
+        "thumbnail": "wasp-12b-dataset-thermal.webp",
         "surface": "wasp-12b-surface-thermal@2x.webp",
         "poles": "wasp-12b-poles-thermal@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "temperature-2010",
         "label": "Temperature maps",
         "qualification": "Published fit · Bell et al. 2019 · Spitzer 3.6 µm, 2010 · longitude only · the 2013 visit disagrees",
-        "thumbnail": "wasp-12b-lens-temperature-2010.webp",
+        "thumbnail": "wasp-12b-dataset-temperature-2010.webp",
         "surface": "wasp-12b-surface-temperature-2010@2x.webp",
         "poles": "wasp-12b-poles-temperature-2010@2x.webp",
         "source": {
@@ -124,7 +124,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1906.04742"
         },
-        "notes": "Brightness temperature at 3.6 µm from Bell et al. (2019)'s fit to a Spitzer phase curve of 2010. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail. Here the hottest longitude is 33° east of noon. Three years later the same camera saw it 14° west (the 2013 lens): the two visits disagree, and the paper counts it as 6.4σ evidence that the offset changes. The false colour runs from 1,000 to 3,100 K. With shadows on, the star's light darkens the night half.",
+        "notes": "Brightness temperature at 3.6 µm from Bell et al. (2019)'s fit to a Spitzer phase curve of 2010. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail. Here the hottest longitude is 33° east of noon. Three years later the same camera saw it 14° west (the 2013 dataset): the two visits disagree, and the paper counts it as 6.4σ evidence that the offset changes. The false colour runs from 1,000 to 3,100 K. With shadows on, the star's light darkens the night half.",
         "step": {
           "group": "spitzer-dates",
           "label": "2010"
@@ -134,7 +134,7 @@
         "id": "temperature-2013",
         "label": "Temperature maps",
         "qualification": "Published fit · Bell et al. 2019 · Spitzer 3.6 µm, 2013 · longitude only · the 2010 visit disagrees",
-        "thumbnail": "wasp-12b-lens-temperature-2013.webp",
+        "thumbnail": "wasp-12b-dataset-temperature-2013.webp",
         "surface": "wasp-12b-surface-temperature-2013@2x.webp",
         "poles": "wasp-12b-poles-temperature-2013@2x.webp",
         "source": {
@@ -188,7 +188,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1906.04742"
         },
-        "notes": "Brightness temperature at 3.6 µm from Bell et al. (2019)'s fit to a Spitzer phase curve of 2013. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail. Here the hottest longitude is 14° west of noon. Three years earlier the same camera saw it 33° east (the 2010 lens): the two visits disagree, and the paper counts it as 6.4σ evidence that the offset changes. The false colour runs from 1,000 to 3,100 K. With shadows on, the star's light darkens the night half.",
+        "notes": "Brightness temperature at 3.6 µm from Bell et al. (2019)'s fit to a Spitzer phase curve of 2013. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail. Here the hottest longitude is 14° west of noon. Three years earlier the same camera saw it 33° east (the 2010 dataset): the two visits disagree, and the paper counts it as 6.4σ evidence that the offset changes. The false colour runs from 1,000 to 3,100 K. With shadows on, the star's light darkens the night half.",
         "step": {
           "group": "spitzer-dates",
           "label": "2013"

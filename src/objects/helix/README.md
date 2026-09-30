@@ -1,10 +1,10 @@
 # Helix Nebula
 
-Three ESO lenses share a conditional emission field. **ESO WFI optical is the default.** Molecular velocities constrain a coarse scaffold; unmeasured front/back allocation and outer-halo depth remain assumptions.
+Three ESO datasets share a conditional emission field. **ESO WFI optical is the default.** Molecular velocities constrain a coarse scaffold; unmeasured front/back allocation and outer-halo depth remain assumptions.
 
 ## Sources
 
-| Source / lens | Selected image and coverage |
+| Source / dataset | Selected image and coverage |
 | --- | --- |
 | [ESO WFI, eso0907a](https://www.eso.org/public/images/eso0907a/) | B/V/R display; 7059 × 6535 pixels, 28.02′ × 25.94′. |
 | [ESO VISTA, eso1205a](https://www.eso.org/public/images/eso1205a/) | Y/J/K display; 6592² pixels, 37.51′ square. |
@@ -13,13 +13,13 @@ Three ESO lenses share a conditional emission field. **ESO WFI optical is the de
 
 All three photographs are display composites with unequal footprints and band responses. The adopted central-star scale is **216 −12/+14 pc**, from [Benedict et al. (2009), abstract, NGC 7293 distance](https://arxiv.org/abs/0909.4281).
 
-The [stellar field](source/stellar-field.json) contains 6627 Gaia candidates in an authored 50 pc sphere, G < 16. The delivery uses 1466 parallax-informed points plus **34 compact image anchors**: 28 WFI, five VISTA and one wider-ESO core, including the central star. These anchors deliberately retain conditional cloud depths and original source appearance across lenses; catalogue matches do **not** convert those depths into measured distances. One VISTA edge core has image evidence but no Gaia association.
+The [stellar field](source/stellar-field.json) contains 6627 Gaia candidates in an authored 50 pc sphere, G < 16. The delivery uses 1466 parallax-informed points plus **34 compact image anchors**: 28 WFI, five VISTA and one wider-ESO core, including the central star. These anchors deliberately retain conditional cloud depths and original source appearance across datasets; catalogue matches do **not** convert those depths into measured distances. One VISTA edge core has image evidence but no Gaia association.
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
 ## Evidence
 
-- [Final app inspection](../../../site/test/evidence/nebulae/2026-09-14/final-helix-m8.json) records front/oblique views across all three lenses after restoring the wider-image cores. [Report context](../../../site/test/evidence/nebulae/2026-09-14/README.md) documents incomplete historical capture metadata.
+- Final app inspection records front/oblique views across all three datasets after restoring the wider-image cores. Report context documents incomplete historical capture metadata.
 - The final app report identifies cloud result `2794e4cc5c3a…`, and the [object descriptor](object.json) pins its installed bank; the field’s image-anchor receipt separates compact-source evidence, image-component offsets and Gaia angular associations.
 - [Historical registration](../../../labs/nebula/models/helix/README.md#aligned-observations-and-native-star-removal) records held-out RMS of 0.34″ for VISTA and 1.10″ for the wider ESO field relative to WFI. This verifies overlap registration, not absolute astrometry or stellar membership. No new cold replay or material acceptance is claimed.
 

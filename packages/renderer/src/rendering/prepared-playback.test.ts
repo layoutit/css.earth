@@ -22,12 +22,12 @@ test("pre-ready permission, zero speed and late handles all use the router's las
 });
 test("prepared role conditions and rates do not create a second permission authority", () => {
   const owner = createPreparedPlayback(), body = animation(), atmosphere = animation();
-  owner.register(body); owner.register(atmosphere, { rate: 0.5, enabledWhen: { atmosphere: true, lensId: ["surface", "topography"] } });
-  owner.setSelection({ speed: 2, atmosphere: true, lensId: "surface" }); owner.setReady(); owner.setAllowed(true);
+  owner.register(body); owner.register(atmosphere, { rate: 0.5, enabledWhen: { atmosphere: true, datasetId: ["surface", "topography"] } });
+  owner.setSelection({ speed: 2, atmosphere: true, datasetId: "surface" }); owner.setReady(); owner.setAllowed(true);
   assert.equal(atmosphere.playbackRate, 1); assert.equal(atmosphere.playState, "running");
-  owner.setSelection({ speed: 2, atmosphere: true, lensId: "night-lights" });
+  owner.setSelection({ speed: 2, atmosphere: true, datasetId: "night-lights" });
   assert.equal(body.playState, "running"); assert.equal(atmosphere.playState, "paused");
-  owner.setAllowed(false); owner.setSelection({ speed: 1, atmosphere: true, lensId: "surface" });
+  owner.setAllowed(false); owner.setSelection({ speed: 1, atmosphere: true, datasetId: "surface" });
   assert.equal(atmosphere.playState, "paused"); owner.destroy();
 });
 test("camera-addressed native poses retain prepared time and never acquire motion playback", () => {

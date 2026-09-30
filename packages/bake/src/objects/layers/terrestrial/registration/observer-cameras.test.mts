@@ -7,7 +7,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
 import { readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { deriveObserverCameras, limbSettled, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
+import { deriveObserverCameras, limbSettled, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, radialTerrainForDataset } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadCameraShape } from '@cssearth/bake/objects/geometry';
 const test = sourceTest();
 
@@ -21,7 +21,7 @@ test('the SPHERE photograph bodies record their derivation', () => {
 for (const id of bodies) test(`${id}: the recipe states the cameras its pinned inputs derive`, async () => {
   const sourceDirectory = resolve(OBJECTS, id, 'source');
   const { record, recipe, frames } = await loadObserverCameraInputs(sourceDirectory);
-  const mesh = await loadCameraShape(sourceDirectory, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], record.lensId));
+  const mesh = await loadCameraShape(sourceDirectory, radialTerrainForDataset(recipe as unknown as Parameters<typeof radialTerrainForDataset>[0], record.datasetId));
   const derived = await deriveObserverCameras(sourceDirectory, record, frames, mesh, ROOT);
   assert.equal(derived.length, frames.length);
   for (const [index, camera] of derived.entries()) {
@@ -37,7 +37,7 @@ for (const id of bodies) test(`${id}: the recipe states the cameras its pinned i
 });
 
 test('the record refuses a rotation model it cannot evaluate', () => {
-  const base = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: 'zimpol', ephemeris: { observer: 'a', heliocentric: 'b' }, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
+  const base = { schema: OBSERVER_CAMERAS_SCHEMA, datasetId: 'zimpol', ephemeris: { observer: 'a', heliocentric: 'b' }, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
   assert.doesNotThrow(() => parseObserverCameras({ ...base, rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first' } }));
   assert.doesNotThrow(() => parseObserverCameras({ ...base, rotation: { kind: 'iau-pck', path: 'p', body: 2000004 } }));
   assert.throws(() => parseObserverCameras({ ...base, rotation: { kind: 'spin-record', path: 'p' } }), /column order/);
@@ -53,7 +53,7 @@ test('the record refuses a rotation model it cannot evaluate', () => {
 });
 
 test('a published comparison names only the ledger entry that decides it', () => {
-  const base = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: 'zimpol', rotation: { kind: 'spin-record', path: 'p', columnOrder: 'longitude-first' },
+  const base = { schema: OBSERVER_CAMERAS_SCHEMA, datasetId: 'zimpol', rotation: { kind: 'spin-record', path: 'p', columnOrder: 'longitude-first' },
     ephemeris: { observer: 'a', heliocentric: 'b' }, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
   assert.deepEqual(parseObserverCameras({ ...base, publishedComparison: { ledgerEntry: 'zimpol-published-comparison' } }).publishedComparison, { ledgerEntry: 'zimpol-published-comparison' });
   assert.equal(parseObserverCameras(base).publishedComparison, undefined, 'the block is optional');

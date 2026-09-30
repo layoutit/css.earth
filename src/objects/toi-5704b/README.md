@@ -8,7 +8,7 @@ It is the only planet known around TOI-5704. Its orbit and size follow Mistry et
 
 **Orbit.** Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): P 3.771116 d Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): a/R* 11.695; Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): inclination 88.94 degrees No archive row states an eccentricity; the orbit is taken as circular Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): transit mid-time 2459610.7568 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5704's measured colour (#ffd2b4, the colour lens of toi-5704 (src/objects/toi-5704/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5704's measured colour (#ffd2b4, the colour dataset of toi-5704 (src/objects/toi-5704/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-5704's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (22, 48, 75), folded onto its orbit. Upper limits and rows without an error are left out.
 

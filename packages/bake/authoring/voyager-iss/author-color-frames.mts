@@ -1,5 +1,5 @@
 /**
- * Author a body's Voyager colour frames as the per-frame products the observed-colour lens reads: an equirectangular float32
+ * Author a body's Voyager colour frames as the per-frame products the observed-colour dataset reads: an equirectangular float32
  * GeoTIFF of calibrated I/F and a geometry label (exposure epoch and body rotation) for each frame.
  *
  *   node packages/bake/authoring/voyager-iss/author-color-frames.mts <object> [--write]

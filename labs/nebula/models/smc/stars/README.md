@@ -6,7 +6,7 @@ The publication compiles 5,324 massive SMC stars with literature spectral types.
 
 ## Depth
 
-J2000 angular positions stay fixed at the lab epoch, and individual distances are unmeasured. The star layer belongs to the **finite model**, not to any image. A checked-in lens recipe names the model: `constrained/finite-lenses.json` (Garver simulation envelope, `smc-constrained-emission-envelope`, `prepared/stars.json`) or `constrained/finite-lenses-ellipsoid.json` (VMC-constrained ellipsoid envelope, `smc-constrained-emission-envelope-ellipsoid`, `prepared/stars-ellipsoid.json`). The command takes the recipe path as its only argument and falls back to the manifest default, so no result id is hard-coded and both layers coexist. Each measured ray is placed on the model's tangent plane in the model frame (kpc, observer at `D = 62.44` kpc). A proposed depth maps to `(x,y,z)=(x0*(1+z/D),y0*(1+z/D),z)`.
+J2000 angular positions stay fixed at the lab epoch, and individual distances are unmeasured. The star layer belongs to the **finite model**, not to any image. A checked-in dataset recipe names the model: `constrained/finite-datasets.json` (Garver simulation envelope, `smc-constrained-emission-envelope`, `prepared/stars.json`) or `constrained/finite-datasets-ellipsoid.json` (VMC-constrained ellipsoid envelope, `smc-constrained-emission-envelope-ellipsoid`, `prepared/stars-ellipsoid.json`). The command takes the recipe path as its only argument and falls back to the manifest default, so no result id is hard-coded and both layers coexist. Each measured ray is placed on the model's tangent plane in the model frame (kpc, observer at `D = 62.44` kpc). A proposed depth maps to `(x,y,z)=(x0*(1+z/D),y0*(1+z/D),z)`.
 
 The conditional depth weight is `maxRGB(model emission) × decoded density × (1+z/D)^2`. The density is the cloud that model's own `source/envelope.json` pins (`priorCloud`): the Garver simulation volume for `smc-constrained-emission-envelope`, the VMC-constrained ellipsoid volume for `smc-constrained-emission-envelope-ellipsoid`. Records that pin no cloud of their own fall back to the model request's cloud, and the envelope's `priorIdentity` must match either way. Model emission is sampled exactly as the bake samples it: finite components plus the envelope, times the arcsec-per-kpc path factor, and zero outside the baked box. The same SHA-256 source-ID quantile and 1,536-interval piecewise-linear CDF as the LMC layer select the depth. Each chosen point must have positive emission and density, and the CDF must not bridge a zero-support gap. A ray without joint support would be listed in `provenance.excludedNoJointSupport` and never relocated. There is no plane, jitter or fallback point. This is a **model-contained display realization**, not a recovered stellar distance or evidence of membership in a particular structure.
 
@@ -14,7 +14,7 @@ The conditional depth weight is `maxRGB(model emission) × decoded density × (1
 
 ## Wiring
 
-`prepare-smc-stars [recipe]` writes the recipe's layer (`finite-lenses.json` → `stars.json`, `finite-lenses-<name>.json` → `stars-<name>.json`) and the model-owned index `.local/nebula-lab/finite-stars-<modelResultId>.json`. That index sits beside the lens bundle and names the model, subject and `stars.path` only. Lens discovery attaches the same `stars` path to every baked lens of that model. A missing stars file, another model, a different frame or a different subject rejects the bundle rather than showing unverified stars. After a re-fit, update the recipe and re-run the command for it; other models' layers and indexes are untouched. No result id is hard-coded.
+`prepare-smc-stars [recipe]` writes the recipe's layer (`finite-datasets.json` → `stars.json`, `finite-datasets-<name>.json` → `stars-<name>.json`) and the model-owned index `.local/nebula-lab/finite-stars-<modelResultId>.json`. That index sits beside the dataset bundle and names the model, subject and `stars.path` only. Dataset discovery attaches the same `stars` path to every baked dataset of that model. A missing stars file, another model, a different frame or a different subject rejects the bundle rather than showing unverified stars. After a re-fit, update the recipe and re-run the command for it; other models' layers and indexes are untouched. No result id is hard-coded.
 
 ## Evidence (models `smc-constrained-emission-envelope` and `smc-constrained-emission-envelope-ellipsoid`, 2026-09-17)
 
@@ -37,13 +37,13 @@ The conditional depth weight is `maxRGB(model emission) × decoded density × (1
   | AllWISE | 14 | 3.84 px |
   | SMASH | 9 | 5.26 px |
 
-- Browser (shared viewer, Earth view, Horálek and VISTA lenses of each model): every rendered star lies within 0.011 CSS px of the rendered original-overlay texel on its ray, with no console error but the favicon. Captures are in ignored `output/smc-vmc/stars/` (`smc-constrained-emission-envelope`, 5 lenses) and `output/smc-vmc/stars-ellipsoid/` (`smc-constrained-emission-envelope-ellipsoid`, 9 lenses).
+- Browser (shared viewer, Earth view, Horálek and VISTA datasets of each model): every rendered star lies within 0.011 CSS px of the rendered original-overlay texel on its ray, with no console error but the favicon. Captures are in ignored `output/smc-vmc/stars/` (`smc-constrained-emission-envelope`, 5 datasets) and `output/smc-vmc/stars-ellipsoid/` (`smc-constrained-emission-envelope-ellipsoid`, 9 datasets).
 - The two models place the same measured rays at different depths: median |Δz| 0.48 kpc. Tangent positions, and so every registration number above, are identical by construction.
 
 ## Known limitations
 
 - Depths inherit the simulation envelope's shape hypothesis.
-- The footprint is the Horálek fit's. Stars outside a narrower lens image still display, because stars are image-independent.
+- The footprint is the Horálek fit's. Stars outside a narrower dataset image still display, because stars are image-independent.
 - `prepared/stars.json` requires the local finite model to replay.
 
 From the repository root:
@@ -51,7 +51,7 @@ From the repository root:
 ```sh
 python3 labs/nebula/packages/lab/src/server/workflows/stars/acquire-smc-stars.py
 node --experimental-strip-types labs/nebula/run.mts prepare-smc-stars
-node --experimental-strip-types labs/nebula/run.mts prepare-smc-stars labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json
-node --experimental-strip-types labs/nebula/run.mts test smc-stars finite-lens-bundles
+node --experimental-strip-types labs/nebula/run.mts prepare-smc-stars labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json
+node --experimental-strip-types labs/nebula/run.mts test smc-stars finite-dataset-bundles
 SMC_STAR_LAYER=labs/nebula/models/smc/stars/prepared/stars-ellipsoid.json node --experimental-strip-types labs/nebula/run.mts test smc-stars
 ```

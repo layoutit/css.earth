@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/io/",
   "sourceWidth": 4096,
   "sourceHeight": 2048,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "io-{id}{suffix}.webp",
-      "thumbnail": "io-lens-{id}.webp",
+      "thumbnail": "io-dataset-{id}.webp",
       "source": "io-global-1km.tif",
       "falseColor": false,
       "science": {
@@ -53,7 +53,7 @@
     {
       "id": "enhanced",
       "output": "io-{id}{suffix}.webp",
-      "thumbnail": "io-lens-{id}.webp",
+      "thumbnail": "io-dataset-{id}.webp",
       "source": "io-color-1km.tif",
       "falseColor": true,
       "science": {
@@ -92,7 +92,7 @@
     {
       "id": "geology",
       "output": "io-{id}{suffix}.webp",
-      "thumbnail": "io-lens-{id}.webp",
+      "thumbnail": "io-dataset-{id}.webp",
       "source": "science/geology-sim3168/Io_GeoUnits.shp",
       "falseColor": true,
       "science": {
@@ -208,7 +208,7 @@
     {
       "id": "elevation",
       "output": "io-{id}{suffix}.webp",
-      "thumbnail": "io-lens-{id}.webp",
+      "thumbnail": "io-dataset-{id}.webp",
       "source": "science/stereo-dem/IoDEM.tif",
       "falseColor": true,
       "science": {
@@ -271,7 +271,7 @@
     {
       "id": "spectral-slope",
       "output": "io-{id}{suffix}.webp",
-      "thumbnail": "io-lens-{id}.webp",
+      "thumbnail": "io-dataset-{id}.webp",
       "source": "muse/io/485nm_slope-night-1.tif",
       "falseColor": true,
       "science": {
@@ -362,7 +362,7 @@
     {
       "id": "visible-absorption",
       "output": "io-{id}{suffix}.webp",
-      "thumbnail": "io-lens-{id}.webp",
+      "thumbnail": "io-dataset-{id}.webp",
       "source": "muse/io/560nm_band-night-1.tif",
       "falseColor": true,
       "science": {
@@ -453,7 +453,7 @@
     {
       "id": "volcanic-heat",
       "output": "io-{id}{suffix}.webp",
-      "thumbnail": "io-lens-{id}.webp",
+      "thumbnail": "io-dataset-{id}.webp",
       "source": "science/jiram/io-jiram-perry-2017-2023.IMG",
       "falseColor": true,
       "science": {

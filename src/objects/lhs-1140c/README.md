@@ -8,7 +8,7 @@ It is one of 2 planets known around LHS 1140. Its orbit and size follow Cadieux 
 
 **Orbit.** Cadieux et al. 2024 (2024ApJ...960L...3C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL__2024): P 3.77794 d Cadieux et al. 2024 (2024ApJ...960L...3C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL__2024): a/R* derived from its semi-major axis 0.027 au and stellar radius 0.2159 solar radii; Cadieux et al. 2024 (2024ApJ...960L...3C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL__2024): inclination 89.8 degrees No archive row states an eccentricity; the orbit is taken as circular Cadieux et al. 2024 (2024ApJ...960L...3C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL__2024): transit mid-time 2458389.2939 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by lhs-1140's measured colour (#ffcf80, the colour lens of lhs-1140 (src/objects/lhs-1140/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by lhs-1140's measured colour (#ffcf80, the colour dataset of lhs-1140 (src/objects/lhs-1140/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of LHS 1140's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (3, 30), folded onto its orbit. Upper limits and rows without an error are left out.
 

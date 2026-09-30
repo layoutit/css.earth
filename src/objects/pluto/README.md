@@ -1,6 +1,6 @@
 # Pluto
 
-**Surface ices.** The dataset selector groups Methane, Nitrogen, Water under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Surface ices.** The dataset selector groups Methane, Nitrogen, Water under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 ## Sources
 
@@ -29,7 +29,7 @@ identify the exact source files and oracle versions. These checks establish
 decoding, source sampling and the declared mask; they do not validate the
 authors' spectral inversion.
 
-The [LEISA validation record](evidence/leisa/validation.json) identifies the
+The LEISA validation record identifies the
 tested inputs and code. All six views passed dataset interaction checks at
 DPR 1 and 2. A the shared browser conformance harness
 verifies the actual latitude and pole texture bindings on desktop and mobile,
@@ -63,7 +63,7 @@ The globe is lit with the lunar-Lambert law of [Buratti et al. (2017)](https://d
 - With the Sun behind the viewer the law darkens the limb to 0.56 of the centre at 86.8° emission.
 - The paper computes the surface phase function f(α) from the disc-integrated phase curve and prints no values, so the frames with Shadows on carry no phase term: only the disk function changes with the Sun.
 - One law lights the whole body. The authors say it under-corrects the brightest regions and over-corrects the darkest. It was fitted at low phase with the haze included; it does not describe the haze-lit limb at high phase, which the paper left out because of atmospheric contamination.
-- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js pluto --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.031 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.188 at 0.98. The redraw also rebuilt `scene.json` and `runtime.json` with Pluto's system transform turned 180 degrees, which would show the far side at opening; those two files were restored to the published bytes, so only the lighting changed.
+- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js pluto --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each dataset writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.031 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.188 at 0.98. The redraw also rebuilt `scene.json` and `runtime.json` with Pluto's system transform turned 180 degrees, which would show the far side at opening; those two files were restored to the published bytes, so only the lighting changed.
 
 ## Known problems
 
@@ -179,7 +179,7 @@ The provider pages and labels are checked in alongside the data.
 **Observation limits and authored choices**
 
 The full 2:1 maps use north-to-south latitude rows and a common 0–360° longitude
-domain. The shared raster lane paints each lens at 2,048 × 1,024 (DPR 1) and
+domain. The shared raster lane paints each dataset at 2,048 × 1,024 (DPR 1) and
 4,096 × 2,048 (DPR 2), packs 16 latitude bands with a 16-texel gutter and
 prepares 256-pixel orthographic polar tiles; the retained faces are the shared
 projective sphere leaves used by Mercury, Venus and Mars. The retired lane's

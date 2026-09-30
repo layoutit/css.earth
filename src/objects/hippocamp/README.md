@@ -18,6 +18,6 @@ The same work surveys candidate Voyager exposures and finds no usable detection.
 The Hubble processing follows orbital motion to recover a point source; it is not
 a surface reprojection. The [ESA release](https://esahubble.org/news/heic1904/)
 and associated detection images do not provide a resolved three-dimensional shape.
-No sphere, invented axes, or mapped lens is included. Target Neptune XIV, parent Neptune.
+No sphere, invented axes, or mapped dataset is included. Target Neptune XIV, parent Neptune.
 
 <a id="hippocamp-source-qualification"></a>

@@ -117,7 +117,7 @@
 }
 .object-sidebar .maps-object-results .object-navigation-marker { justify-self: center; }
 .object-sidebar .maps-object-results .object-name { overflow: hidden; font: var(--shell-font-content); text-overflow: ellipsis; white-space: nowrap; }
-.object-sidebar .maps-object-results .object-distance:not(.object-lens-detail) { color: var(--shell-text-muted); font: var(--shell-font-value); white-space: nowrap; }
+.object-sidebar .maps-object-results .object-distance:not(.object-dataset-detail) { color: var(--shell-text-muted); font: var(--shell-font-value); white-space: nowrap; }
 .object-sidebar .maps-object-results .object-distance-unit { font-size: 13px; }
 .object-sidebar .maps-object-results .object-link[aria-disabled="true"] {
   opacity: 0.5;
@@ -239,7 +239,7 @@
 .object-destination-name { margin: 20px 0 3px; font: 500 26px/1.15 var(--shell-ui-font); }
 .object-destination-context { margin: 0 0 18px; color: var(--shell-text-muted); }
 .object-destination-status { margin: 0; color: var(--shell-text-secondary); }
-.object-destination-panel:not([hidden]) + .object-information-panel > :not(.object-lenses) { display: none; }
+.object-destination-panel:not([hidden]) + .object-information-panel > :not(.object-datasets) { display: none; }
 .object-destination-back {
   padding: 7px 0;
   border: 0;
@@ -425,7 +425,7 @@
 /* Search results are big rows: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
    positions rows on a 56 px pitch (48 px row, 8 px gap; `site/search/catalogue-window.mts`). */
 #object-category-results .object-observation-control.object-thumbnail-leading,
-#object-category-results .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
+#object-category-results .object-observation-control.object-thumbnail-leading:has(.object-dataset-detail) {
   grid-template-columns: 40px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
@@ -444,7 +444,7 @@
   width: 100%;
   padding-inline: var(--explorer-card-padding-inline-start, 16px) var(--explorer-card-padding-inline-end, 16px);
 }
-#object-category-results .object-thumbnail-leading > .object-lens-icon {
+#object-category-results .object-thumbnail-leading > .object-dataset-icon {
   grid-column: 1;
   grid-row: 1 / span 2;
   display: grid;
@@ -452,7 +452,7 @@
   width: 40px;
   height: 40px;
 }
-#object-category-results .object-thumbnail-leading > .object-lens-label {
+#object-category-results .object-thumbnail-leading > .object-dataset-label {
   grid-column: 2;
   grid-row: 1;
   overflow: hidden;
@@ -460,7 +460,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#object-category-results .object-thumbnail-leading > .object-lens-detail {
+#object-category-results .object-thumbnail-leading > .object-dataset-detail {
   grid-column: 2;
   grid-row: 2;
   justify-self: start;
@@ -520,19 +520,19 @@
   gap: 10px;
   min-height: 30px;
 }
-.object-information-panel [data-satellite-system] .object-lens-icon {
+.object-information-panel [data-satellite-system] .object-dataset-icon {
   grid-column: 1;
   width: 24px;
   height: 24px;
 }
-.object-information-panel [data-satellite-system] .object-lens-icon > .object-search-preview {
+.object-information-panel [data-satellite-system] .object-dataset-icon > .object-search-preview {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-.object-information-panel [data-satellite-system] .object-lens-label { grid-column: 2; }
-.object-information-panel [data-satellite-system] .object-lens-detail,
+.object-information-panel [data-satellite-system] .object-dataset-label { grid-column: 2; }
+.object-information-panel [data-satellite-system] .object-dataset-detail,
 .object-information-panel [data-satellite-system] .object-observation-control::after { display: none; }
 .object-results-scroll .object-link[aria-disabled="true"] {
   color: var(--shell-text-muted);
@@ -562,7 +562,7 @@
   top: 0;
   pointer-events: none;
 }
-.object-sidebar .object-link .object-lens-icon { opacity: 1; }
+.object-sidebar .object-link .object-dataset-icon { opacity: 1; }
 .object-results-scroll:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
 .object-sidebar .object-results-scroll .object-link:focus-visible .object-name {
   text-decoration: underline;
@@ -709,28 +709,28 @@
   aspect-ratio: 2 / 1;
   background: #000;
 }
-.object-card-tabpanel .object-lens-texture {
+.object-card-tabpanel .object-dataset-texture {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 .object-card-tabpanel .object-facts { margin-top: 0; }
-:is(.object-card-tabpanel, .object-results-scroll) :is(.object-observation-control, .object-lens-label, .object-facts, .object-lens-details-title, .object-lens-details-copy) {
+:is(.object-card-tabpanel, .object-results-scroll) :is(.object-observation-control, .object-dataset-label, .object-facts, .object-dataset-details-title, .object-dataset-details-copy) {
   font: var(--shell-font-content);
 }
-.object-card-tabpanel :is(.object-lens-legend-labels, .object-lens-legend-categories) {
+.object-card-tabpanel :is(.object-dataset-legend-labels, .object-dataset-legend-categories) {
   font: var(--shell-font-caption);
 }
 .object-card-tabpanel > .object-factsheet-section,
-.object-card-tabpanel > .object-lenses {
+.object-card-tabpanel > .object-datasets {
   margin-top: 0;
   padding-top: 0;
 }
 /* Dataset sections are no longer accordions; own their spacing explicitly. */
-.object-dataset-content > .object-lenses { padding-bottom: 0; }
+.object-dataset-content > .object-datasets { padding-bottom: 0; }
 .object-card-tabpanel .object-observation-controls { padding-bottom: 0; }
-.object-dataset-content > .object-lens-details {
+.object-dataset-content > .object-dataset-details {
   position: relative;
   width: auto;
   margin-top: 8px;
@@ -738,7 +738,7 @@
   padding: 13px 0 0;
   border: 0;
 }
-.object-dataset-content > .object-lens-details::before {
+.object-dataset-content > .object-dataset-details::before {
   content: '';
   position: absolute;
   top: 0;
@@ -746,8 +746,8 @@
   left: calc(-1 * var(--explorer-card-padding-inline-start));
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
-.object-card-tabpanel :is(.object-surface-minimap, .object-lens-legend-panel, .object-facility-preview) + .object-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
-.object-card-tabpanel .object-lens-legend-panel { width: 100%; min-height: 28px; }
+.object-card-tabpanel :is(.object-surface-minimap, .object-dataset-legend-panel, .object-facility-preview) + .object-dataset-details-copy { margin-top: 12px; margin-inline-end: 0; }
+.object-card-tabpanel .object-dataset-legend-panel { width: 100%; min-height: 28px; }
 /* A sequence plays over the bottom of its map like a short video: segments above, play and step label below. */
 .object-card-tabpanel .object-sequence-player { display: grid; margin: 6px 0 8px; color: var(--shell-text); }
 .object-card-tabpanel .object-surface-minimap > .object-sequence-player {
@@ -768,41 +768,41 @@
 }
 @keyframes object-sequence-fill { from { transform: scaleX(0); } to { transform: none; } }
 .object-card-tabpanel .object-sequence-row { display: flex; align-items: center; gap: 4px; height: 26px; padding-inline: 2px 8px; }
-.object-card-tabpanel .object-lens-play {
+.object-card-tabpanel .object-dataset-play {
   display: grid; place-items: center; flex-shrink: 0; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 4px;
   background: transparent; color: inherit; cursor: pointer;
 }
-.object-card-tabpanel .object-lens-play .material-symbol { display: block; width: 18px; height: 18px; fill: currentColor; }
-.object-card-tabpanel .object-lens-play[aria-pressed="true"] .is-play,
-.object-card-tabpanel .object-lens-play:not([aria-pressed="true"]) .is-pause { display: none; }
-.object-card-tabpanel .object-lens-play:disabled { opacity: 0.4; cursor: default; }
-.object-card-tabpanel .object-lens-play:not(:disabled):hover { background: rgb(255 255 255 / 0.12); }
-.object-card-tabpanel :is(.object-lens-play, .object-sequence-segment):focus-visible { outline: 0; box-shadow: 0 0 0 1px var(--shell-focus); }
+.object-card-tabpanel .object-dataset-play .material-symbol { display: block; width: 18px; height: 18px; fill: currentColor; }
+.object-card-tabpanel .object-dataset-play[aria-pressed="true"] .is-play,
+.object-card-tabpanel .object-dataset-play:not([aria-pressed="true"]) .is-pause { display: none; }
+.object-card-tabpanel .object-dataset-play:disabled { opacity: 0.4; cursor: default; }
+.object-card-tabpanel .object-dataset-play:not(:disabled):hover { background: rgb(255 255 255 / 0.12); }
+.object-card-tabpanel :is(.object-dataset-play, .object-sequence-segment):focus-visible { outline: 0; box-shadow: 0 0 0 1px var(--shell-focus); }
 .object-card-tabpanel .object-sequence-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--shell-font-caption); }
 .object-card-tabpanel .object-sequence-count { flex-shrink: 0; color: var(--shell-text-secondary); font: var(--shell-font-caption); font-variant-numeric: tabular-nums; }
-.object-card-tabpanel .object-lens-legend-labels {
+.object-card-tabpanel .object-dataset-legend-labels {
   display: grid;
   grid-template-columns: repeat(var(--legend-label-count), minmax(0, 1fr));
   min-height: 16px;
   align-items: start;
   white-space: normal;
 }
-.object-card-tabpanel .object-lens-legend-labels > span { overflow-wrap: anywhere; text-align: center; }
-.object-card-tabpanel .object-lens-legend-labels > span:first-child { text-align: left; }
-.object-card-tabpanel .object-lens-legend-labels > span:last-child:not(:first-child) { text-align: right; }
-.object-card-tabpanel .object-lens-legend-meta { margin: 2px 0 0; color: var(--shell-text-muted); font: var(--shell-font-caption); }
-.object-card-tabpanel .object-lens-legend-panel:first-child { margin-top: 0; }
-.object-card-tabpanel .object-lens-details-title {
+.object-card-tabpanel .object-dataset-legend-labels > span { overflow-wrap: anywhere; text-align: center; }
+.object-card-tabpanel .object-dataset-legend-labels > span:first-child { text-align: left; }
+.object-card-tabpanel .object-dataset-legend-labels > span:last-child:not(:first-child) { text-align: right; }
+.object-card-tabpanel .object-dataset-legend-meta { margin: 2px 0 0; color: var(--shell-text-muted); font: var(--shell-font-caption); }
+.object-card-tabpanel .object-dataset-legend-panel:first-child { margin-top: 0; }
+.object-card-tabpanel .object-dataset-details-title {
   margin: 0 0 8px;
   color: var(--shell-text);
 }
-.object-card-tabpanel .object-lens-details-body .object-lens-details-title { margin-bottom: 6px; }
+.object-card-tabpanel .object-dataset-details-body .object-dataset-details-title { margin-bottom: 6px; }
 .object-selected-content-meta { color: var(--shell-text-muted); font: var(--shell-font-caption); white-space: nowrap; }
-.object-card-tabpanel .object-lens-details-copy {
+.object-card-tabpanel .object-dataset-details-copy {
   min-height: 60px;
   text-wrap: wrap;
 }
-.object-dataset-content .object-lens-details-copy { min-height: 0; }
+.object-dataset-content .object-dataset-details-copy { min-height: 0; }
 .object-dataset-source-link {
   display: inline-block;
   margin-top: 6px;
@@ -812,8 +812,8 @@
   text-underline-offset: 2px;
 }
 .object-dataset-source-link:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 2px; }
-.object-card-tabpanel .object-lens-search-field { flex-basis: 100%; margin: 0; }
-.object-card-tabpanel .object-lens-search { text-align: left; }
+.object-card-tabpanel .object-dataset-search-field { flex-basis: 100%; margin: 0; }
+.object-card-tabpanel .object-dataset-search { text-align: left; }
 .object-card-tabpanel:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
 
 .object-facility { margin: 0; }
@@ -831,7 +831,7 @@
   pointer-events: none;
 }
 .object-facility-preview:has(> .object-facility-emblem) > .object-facility-heading { right: 44px; }
-.object-facility-heading .object-lens-details-title { margin-bottom: 0; }
+.object-facility-heading .object-dataset-details-title { margin-bottom: 0; }
 /* Published photographs need a light wash behind the title. */
 .object-facility-heading-backdrop { background: rgb(0 0 0 / .35); }
 /* Over artwork the date reads with the title, not as muted sidebar metadata. */

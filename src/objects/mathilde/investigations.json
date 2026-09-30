@@ -42,7 +42,7 @@
       "id": "recorded-survey-5",
       "subject": "Stooke four 25 m/pixel morphographic quadrangles",
       "status": "excluded",
-      "finding": "Stooke four 25 m/pixel morphographic quadrangles — Excluded as a separate lens — Same photomosaic in a different projection; 4 of 14 possible sheets reflect partial coverage. They add no independent scientific view and do not repair source resolution or missing terrain.",
+      "finding": "Stooke four 25 m/pixel morphographic quadrangles — Excluded as a separate dataset — Same photomosaic in a different projection; 4 of 14 possible sheets reflect partial coverage. They add no independent scientific view and do not repair source resolution or missing terrain.",
       "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mathilde/README.md"
@@ -52,7 +52,7 @@
       "id": "recorded-survey-6",
       "subject": "Stooke shaded-relief drawings",
       "status": "excluded",
-      "finding": "Stooke shaded-relief drawings — Excluded — Drawn visualization, not measured elevation. The valid Thomas numerical radii support a better-defined scientific lens.",
+      "finding": "Stooke shaded-relief drawings — Excluded — Drawn visualization, not measured elevation. The valid Thomas numerical radii support a better-defined scientific dataset.",
       "revisitWhen": "New source evidence resolves the specific limitation recorded here; reuse the pinned prior finding rather than repeat the unchanged survey.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mathilde/README.md"

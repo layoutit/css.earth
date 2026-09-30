@@ -108,7 +108,7 @@
         "path": "blue-marble-july.jpg",
         "name": "earth-surface",
         "compositeClouds": false,
-        "thumbnail": "earth-lens-normal.webp",
+        "thumbnail": "earth-dataset-normal.webp",
         "displayGamma": 1.25,
         "nativePhotographicSampling": true,
         "deepOceanFill": {
@@ -126,7 +126,7 @@
         "path": "blue-marble-july.jpg",
         "name": "earth-clouds",
         "compositeClouds": true,
-        "thumbnail": "earth-lens-clouds.webp",
+        "thumbnail": "earth-dataset-clouds.webp",
         "thumbnailRegion": {
           "longitude": -145,
           "latitude": -40,
@@ -150,7 +150,7 @@
         "path": "science/gebco-2026/latitude-00.dods.gz",
         "name": "earth-topography",
         "maximumTextureWidth": 4096,
-        "thumbnail": "earth-lens-topography.webp",
+        "thumbnail": "earth-dataset-topography.webp",
         "scientific": {
           "kind": "gebco-elevation",
           "metadata": "science/gebco-2026.das",
@@ -352,7 +352,7 @@
       {
         "path": "science/night-lights-2025/radiance.zip",
         "name": "earth-night-lights",
-        "thumbnail": "earth-lens-night-lights.webp",
+        "thumbnail": "earth-dataset-night-lights.webp",
         "webp": {
           "quality": 90,
           "effort": 6
@@ -408,7 +408,7 @@
       {
         "path": "science/mur-gibs.png",
         "name": "earth-enso",
-        "thumbnail": "earth-lens-enso.webp",
+        "thumbnail": "earth-dataset-enso.webp",
         "scientific": {
           "kind": "gibs-mur-imagery",
           "date": "2026-09-07",

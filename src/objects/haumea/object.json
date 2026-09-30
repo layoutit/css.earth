@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "haumea",
   "type": "layered-body",
   "prepared": {
@@ -22,7 +22,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "shape": {
         "kind": "ellipsoid",
         "radiusKm": 1161,
@@ -56,7 +56,7 @@
           "id": "body",
           "source": "shape-model",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "color",
               "source": "content",
@@ -117,7 +117,7 @@
       }
     },
     "catalog": {
-      "illustrationLenses": [
+      "illustrationDatasets": [
         "illustration"
       ],
       "name": "Haumea",

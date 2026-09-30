@@ -37,7 +37,7 @@ test("compact sampled replay rejects changed measured particles before any recon
   }
 });
 
-test('sampled planning preserves features unique to any lens without changing its emission', () => {
+test('sampled planning preserves features unique to any dataset without changing its emission', () => {
   const reference = (x: number, _y: number, _z: number, out: [number, number, number]) => { out.fill(x < 0 ? 3 : 0); };
   const secondary = (x: number, _y: number, _z: number, out: [number, number, number]) => { out.fill(x > 0 ? 7 : 1); };
   const planning = maximumPlanningEmission([reference, secondary]), reverse = maximumPlanningEmission([secondary, reference]);

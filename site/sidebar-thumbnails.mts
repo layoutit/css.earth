@@ -11,7 +11,7 @@ const images = new Map(Object.entries(sourceObject(data.images)).map(([id, raw])
 }));
 
 /** Prepared image metadata only; the catalogue continues to own object identity. */
-export function sidebarThumbnail(objectId: string, lensId?: string) {
-  const key = lensId ? `${objectId}/${lensId}` : defaults[objectId];
+export function sidebarThumbnail(objectId: string, datasetId?: string) {
+  const key = datasetId ? `${objectId}/${datasetId}` : defaults[objectId];
   return typeof key === 'string' ? images.get(key) : undefined;
 }

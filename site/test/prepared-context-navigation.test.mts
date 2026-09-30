@@ -12,14 +12,14 @@ import type { PreparedFocusPresentation } from '../prepared-focus.mts';
 import type { PreparedCatalogObject, PreparedGalaxyRecord, PreparedClusterRecord, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
-import type { PreparedVolumeLensState } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import type { PreparedVolumeDatasetState } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 type ContextLayer = Parameters<typeof createPreparedContextNavigation>[0]['layer'];
 type Content = { record: PreparedCatalogObject | null; references: readonly SpatialCitation[]; presentation: PreparedFocusPresentation | null };
 type FixtureOptions = { object?: Partial<PreparedGalaxyRecord> & Partial<Pick<PreparedClusterRecord, 'kind' | 'classification'>>;
-  unavailableObjectIds?: readonly string[]; bankReady?: Promise<PreparedVolumeLensState>; loadedFramingRadiusUnits?: number;
-  imageLayerFrames?: Readonly<Record<string, DensityVolumeFrame>>; volumeLensFrames?: Readonly<Record<string, { frame: DensityVolumeFrame; framingRadiusUnits: number }>>; volumeBank?: PreparedVolumeLensState | null;
-  deferredVolumeBank?: PreparedVolumeLensState | null;
+  unavailableObjectIds?: readonly string[]; bankReady?: Promise<PreparedVolumeDatasetState>; loadedFramingRadiusUnits?: number;
+  imageLayerFrames?: Readonly<Record<string, DensityVolumeFrame>>; volumeDatasetFrames?: Readonly<Record<string, { frame: DensityVolumeFrame; framingRadiusUnits: number }>>; volumeBank?: PreparedVolumeDatasetState | null;
+  deferredVolumeBank?: PreparedVolumeDatasetState | null;
   cameraPositionM?: readonly [number, number, number] };
 const baseFrame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0,0,0], localToReferenceXyzw: [0,0,0,1],
   metersPerUnit: 1e18, boundsUnits: { min: [-500,-500,-500], max: [500,500,500] } };
@@ -27,7 +27,7 @@ function required<T>(value: T | null | undefined): T { assert.ok(value !== null 
 function last<T>(values: T[]): T { return required(values.at(-1)); }
 
 
-function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null, deferredVolumeBank = null,
+function fixture({ object = {}, imageLayerFrames = {}, volumeDatasetFrames = {}, volumeBank = null, deferredVolumeBank = null,
   unavailableObjectIds = [], bankReady, loadedFramingRadiusUnits, cameraPositionM = [1e20, 0, 1e19] }: FixtureOptions = {}) {
   let current: PreparedNavigationFocus | null = null, signal: AbortSignal | undefined;
   const flights: {id:string; reducedMotion?:boolean}[] = [], flightFocuses: PreparedNavigationFocus[] = [];
@@ -48,37 +48,37 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
       flights.push({id:focus.id,reducedMotion:options.reducedMotion}); flightFocuses.push(focus);
       if (options.reducedMotion) return Promise.resolve({completed:true});
       return new Promise<{ completed: boolean }>(resolve => required(signal).addEventListener('abort', () => resolve({ completed: false }), { once: true })); } };
-  // The real `subscribeVolumeLens` hands the listener the bank state, so a deferred bank can replay a
+  // The real `subscribeVolumeDataset` hands the listener the bank state, so a deferred bank can replay a
   // notification once its payload arrives; a no-argument listener no longer satisfies that signature.
-  const lensCallbacks = new Set<(state: PreparedVolumeLensState) => void>(), lensWrites: string[] = [];
-  let bankState = volumeBank, currentVolumeLensFrames = volumeLensFrames;
+  const datasetCallbacks = new Set<(state: PreparedVolumeDatasetState) => void>(), datasetWrites: string[] = [];
+  let bankState = volumeBank, currentVolumeDatasetFrames = volumeDatasetFrames;
   // A deferred bank is released through the same load the runtime awaits, so a declared-but-absent
   // bank stays a pending load rather than an unknown focus.
   let releaseDeferredBank: (() => void) | null = null;
   const readyBank = bankReady ?? (deferredVolumeBank
-    ? new Promise<PreparedVolumeLensState>(resolve => { releaseDeferredBank = () => resolve(deferredVolumeBank); })
+    ? new Promise<PreparedVolumeDatasetState>(resolve => { releaseDeferredBank = () => resolve(deferredVolumeBank); })
     : undefined);
-  const applyBank = (change: Partial<PreparedVolumeLensState>) => { bankState = { ...required(bankState), ...change }; for (const callback of lensCallbacks) callback(required(bankState)); };
+  const applyBank = (change: Partial<PreparedVolumeDatasetState>) => { bankState = { ...required(bankState), ...change }; for (const callback of datasetCallbacks) callback(required(bankState)); };
   // Only the one declared bank may be addressed, whether its payload is resident, deferred, or still loading.
-  const declaredBankId = () => bankState?.objectId ?? deferredVolumeBank?.objectId ?? Object.keys(currentVolumeLensFrames)[0];
-  const layer = { imageLayerFrames, get volumeLensFrames() { return currentVolumeLensFrames; },
-    async ensureVolumeLens(objectId: string) {
+  const declaredBankId = () => bankState?.objectId ?? deferredVolumeBank?.objectId ?? Object.keys(currentVolumeDatasetFrames)[0];
+  const layer = { imageLayerFrames, get volumeDatasetFrames() { return currentVolumeDatasetFrames; },
+    async ensureVolumeDataset(objectId: string) {
       if (!readyBank) return;
       bankState = await readyBank;
       assert.equal(bankState.objectId, objectId);
-      if (loadedFramingRadiusUnits !== undefined) currentVolumeLensFrames = { ...currentVolumeLensFrames, [objectId]: { ...required(currentVolumeLensFrames[objectId]), framingRadiusUnits: loadedFramingRadiusUnits } };
-      for (const callback of lensCallbacks) callback(bankState);
+      if (loadedFramingRadiusUnits !== undefined) currentVolumeDatasetFrames = { ...currentVolumeDatasetFrames, [objectId]: { ...required(currentVolumeDatasetFrames[objectId]), framingRadiusUnits: loadedFramingRadiusUnits } };
+      for (const callback of datasetCallbacks) callback(bankState);
     },
-    volumeLensState: (objectId: string) => objectId === bankState?.objectId ? bankState : null,
-    selectVolumeLens(objectId: string, id: string) {
+    volumeDatasetState: (objectId: string) => objectId === bankState?.objectId ? bankState : null,
+    selectVolumeDataset(objectId: string, id: string) {
       assert.equal(objectId, declaredBankId());
-      lensWrites.push(id);
+      datasetWrites.push(id);
       if (!bankState) return;
-      assert.ok(bankState.lenses.some(lens => lens.id === id)); applyBank({ id, selectedLens: id });
+      assert.ok(bankState.datasets.some(dataset => dataset.id === id)); applyBank({ id, selectedDataset: id });
     },
-    subscribeVolumeLens(objectId: string, listener: (state: PreparedVolumeLensState) => void) {
+    subscribeVolumeDataset(objectId: string, listener: (state: PreparedVolumeDatasetState) => void) {
       assert.equal(objectId, declaredBankId());
-      lensCallbacks.add(listener); return () => { lensCallbacks.delete(listener); };
+      datasetCallbacks.add(listener); return () => { datasetCallbacks.delete(listener); };
     },
     selectGalaxy: (id: string | null, focus?: PreparedNavigationFocus | null) => { selections.push(id); presentationFocuses.push(focus); },
     resolveGalaxy: (id: string): PreparedCatalogObject | null => {
@@ -95,11 +95,11 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
   const focusLayer: ContextLayer = { ensureGalaxyCatalog: async () => {}, selectGalaxy: layer.selectGalaxy, resolveGalaxy: layer.resolveGalaxy,
     focusBank(id) {
       if (imageLayerFrames[id]) return createImageFocusBank(id, imageLayerFrames[id], () => Promise.resolve());
-      if (!currentVolumeLensFrames[id]) return null;
+      if (!currentVolumeDatasetFrames[id]) return null;
       return { objectId: id,
-        framingRadiusM: () => { const framing = required(currentVolumeLensFrames[id]); return framing.framingRadiusUnits * framing.frame.metersPerUnit; },
-        state: () => layer.volumeLensState(id), load: () => layer.ensureVolumeLens(id),
-        selectLens: lens => layer.selectVolumeLens(id, lens), subscribe: listener => layer.subscribeVolumeLens(id, listener) };
+        framingRadiusM: () => { const framing = required(currentVolumeDatasetFrames[id]); return framing.framingRadiusUnits * framing.frame.metersPerUnit; },
+        state: () => layer.volumeDatasetState(id), load: () => layer.ensureVolumeDataset(id),
+        selectDataset: dataset => layer.selectVolumeDataset(id, dataset), subscribe: listener => layer.subscribeVolumeDataset(id, listener) };
     },
   };
   const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', bytes: 1, citation: 'Published positions', references: [{ id: 'PublishedBibliographicKey', url: 'https://example.test/paper', citation: 'Distance paper' }] },
@@ -142,18 +142,18 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
     suspend() { available = false; requests.cancel(); },
     destroy() { available = false; requests.cancel(); executor.destroy(); },
   };
-  return { controller, disconnect, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, presentationFocuses, writes, callbacks, content, flights, flightFocuses, signal: () => signal,
+  return { controller, disconnect, owner, layer, datasetCallbacks, datasetWrites, windowTarget, errors, selections, presentationFocuses, writes, callbacks, content, flights, flightFocuses, signal: () => signal,
     resolveDeferredVolumeBank() { required(releaseDeferredBank)(); } };
 }
 
-test('a saved lens link to an unavailable package still opens its actual catalogue record', () => {
+test('a saved dataset link to an unavailable package still opens its actual catalogue record', () => {
   const f = fixture({ object: { detailedObjectId: 'helix' }, unavailableObjectIds: ['helix'] });
   f.windowTarget.location.searchParams.set('dataset', 'eso-vista');
   f.controller.restore(f.windowTarget.location.href);
   assert.deepEqual(f.errors, []);
   assert.equal(last(f.content).record?.id, 'catalogue-a');
   assert.equal(last(f.content).presentation, null);
-  assert.deepEqual(f.lensWrites, []);
+  assert.deepEqual(f.datasetWrites, []);
   f.controller.destroy();
 });
 
@@ -277,13 +277,13 @@ test('a cluster focus uses its prepared aperture framing and source without pret
   f.controller.destroy();
 });
 
-const volumeBank = (): PreparedVolumeLensState => ({ objectId: 'detailed', id: 'first', defaultLens: 'first', selectedLens: 'first', starsVisible: true,
-  lenses: ['first', 'second', 'third'].map(id => ({ id, label: id, title: `${id} dataset`, description: 'Prepared observation', sourceUrl: 'https://example.test/source' })) });
-const volumeLensFrames = { detailed: { framingRadiusUnits: 2, frame: baseFrame } };
+const volumeBank = (): PreparedVolumeDatasetState => ({ objectId: 'detailed', id: 'first', defaultDataset: 'first', selectedDataset: 'first', starsVisible: true,
+  datasets: ['first', 'second', 'third'].map(id => ({ id, label: id, title: `${id} dataset`, description: 'Prepared observation', sourceUrl: 'https://example.test/source' })) });
+const volumeDatasetFrames = { detailed: { framingRadiusUnits: 2, frame: baseFrame } };
 
 test('volume focus uses its authored framing radius before transparent bounds and retains an explicit catalogue override', () => {
   for (const focusRadiusM of [undefined, 3e18]) {
-    const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed',
+    const f = fixture({ volumeDatasetFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed',
       ...(focusRadiusM ? { presentation: { focusRadiusM } } : {}) } });
     f.controller.restore(f.windowTarget.location.href);
     assert.equal(required(f.owner.preparedFocus()).framingRadiusM, focusRadiusM ?? 2e18);
@@ -292,91 +292,91 @@ test('volume focus uses its authored framing radius before transparent bounds an
   }
 });
 
-test('focused lens selection follows applied runtime state while URL restore keeps the same camera owner', () => {
-  const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
+test('focused dataset selection follows applied runtime state while URL restore keeps the same camera owner', () => {
+  const f = fixture({ volumeDatasetFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
   f.windowTarget.location.searchParams.set('dataset', 'second');
   const incoming = f.windowTarget.location.href;
   f.controller.restore(incoming);
-  assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'second');
-  assert.equal(required(last(f.content).presentation).selectedLens, 'second');
+  assert.equal(required(f.layer.volumeDatasetState('detailed')).selectedDataset, 'second');
+  assert.equal(required(last(f.content).presentation).selectedDataset, 'second');
   assert.equal(f.windowTarget.location.href, incoming);
-  assert.equal(f.lensCallbacks.size, 1);
+  assert.equal(f.datasetCallbacks.size, 1);
   const focus = f.owner.preparedFocus(), controls = required(last(f.content).presentation);
-  controls.selectLens('third');
-  assert.equal(f.owner.preparedFocus(), focus, 'Changing lens does not replace or move the camera focus');
-  assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'third');
-  assert.equal(required(last(f.content).presentation).selectedLens, 'third');
+  controls.selectDataset('third');
+  assert.equal(f.owner.preparedFocus(), focus, 'Changing dataset does not replace or move the camera focus');
+  assert.equal(required(f.layer.volumeDatasetState('detailed')).selectedDataset, 'third');
+  assert.equal(required(last(f.content).presentation).selectedDataset, 'third');
   assert.equal(f.windowTarget.location.searchParams.get('dataset'), 'third');
   assert.equal(f.windowTarget.location.searchParams.get('v'), 'saved');
   f.controller.suspend();
-  controls.selectLens('first');
-  assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'third');
+  controls.selectDataset('first');
+  assert.equal(required(f.layer.volumeDatasetState('detailed')).selectedDataset, 'third');
   f.windowTarget.location = new URL(incoming);
   f.controller.restore(incoming);
-  assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'second');
+  assert.equal(required(f.layer.volumeDatasetState('detailed')).selectedDataset, 'second');
   f.windowTarget.location.searchParams.delete('dataset');
   f.controller.restore(f.windowTarget.location.href);
-  assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'first', 'A plain focus restores its authored default');
+  assert.equal(required(f.layer.volumeDatasetState('detailed')).selectedDataset, 'first', 'A plain focus restores its authored default');
   assert.equal(f.windowTarget.location.searchParams.get('dataset'), 'first');
   f.owner.setPreparedFocus(null);
   assert.equal(last(f.content).presentation, null);
   assert.equal(f.windowTarget.location.pathname, '/mercury/', 'Clearing the focus returns to the scene page');
   assert.equal(f.windowTarget.location.searchParams.has('dataset'), false);
-  assert.equal(f.lensCallbacks.size, 0);
-  controls.selectLens('third');
-  assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'first', 'Stale controls cannot mutate a departed focus');
+  assert.equal(f.datasetCallbacks.size, 0);
+  controls.selectDataset('third');
+  assert.equal(required(f.layer.volumeDatasetState('detailed')).selectedDataset, 'first', 'Stale controls cannot mutate a departed focus');
   assert.deepEqual(f.errors, []);
   f.controller.destroy();
 });
 
-test('a saved lens waits for its lazy bank instead of rejecting the focus as unknown', async () => {
+test('a saved dataset waits for its lazy bank instead of rejecting the focus as unknown', async () => {
   const bank = volumeBank();
-  const f = fixture({ volumeLensFrames, deferredVolumeBank: bank, object: { detailedObjectId: bank.objectId } });
+  const f = fixture({ volumeDatasetFrames, deferredVolumeBank: bank, object: { detailedObjectId: bank.objectId } });
   f.windowTarget.location.searchParams.set('dataset', 'second');
   const incoming = f.windowTarget.location.href;
   const restoring = f.controller.restore(incoming);
-  assert.deepEqual(f.errors, [], 'A bank that is still loading is not an unknown focus lens');
+  assert.deepEqual(f.errors, [], 'A bank that is still loading is not an unknown focus dataset');
   assert.equal(f.owner.preparedFocus(), null, 'The focus waits for its declared bank rather than being rejected');
-  assert.deepEqual(f.lensWrites, []);
+  assert.deepEqual(f.datasetWrites, []);
   f.resolveDeferredVolumeBank(); await restoring;
   assert.deepEqual(f.errors, []);
   assert.equal(f.owner.preparedFocus()?.id, 'catalogue-a');
-  assert.deepEqual(f.lensWrites, ['second']);
+  assert.deepEqual(f.datasetWrites, ['second']);
   assert.equal(last(f.content).record?.id, 'catalogue-a');
-  assert.equal(required(last(f.content).presentation).selectedLens, 'second');
-  assert.equal(f.windowTarget.location.href, incoming, 'The saved lens link is preserved exactly');
+  assert.equal(required(last(f.content).presentation).selectedDataset, 'second');
+  assert.equal(f.windowTarget.location.href, incoming, 'The saved dataset link is preserved exactly');
   f.controller.destroy();
 });
 
-test('invalid focused lenses retain their diagnostic URL and never apply an arbitrary bank', () => {
+test('invalid focused datasets retain their diagnostic URL and never apply an arbitrary bank', () => {
   for (const query of ['dataset=unknown', 'dataset=second&dataset=third']) {
-    const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
+    const f = fixture({ volumeDatasetFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
     const incoming = `https://example.test/catalogue-a/?${query}`;
     f.windowTarget.location = new URL(incoming);
     f.controller.restore(incoming);
     assert.equal(f.errors.length, 1);
-    assert.match(f.errors[0].message, /focus lens/);
+    assert.match(f.errors[0].message, /focus dataset/);
     assert.equal(f.windowTarget.location.href, incoming);
     assert.equal(f.owner.preparedFocus(), null);
-    assert.deepEqual(f.lensWrites, []);
+    assert.deepEqual(f.datasetWrites, []);
     f.controller.destroy();
   }
 });
 
-test("a scene page's dataset is the scene's own, never a focus lens, and focused bank subscriptions are released on destruction", () => {
-  const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
+test("a scene page's dataset is the scene's own, never a focus dataset, and focused bank subscriptions are released on destruction", () => {
+  const f = fixture({ volumeDatasetFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
   f.controller.restore(f.windowTarget.location.href);
-  assert.equal(f.lensCallbacks.size, 1);
+  assert.equal(f.datasetCallbacks.size, 1);
   f.windowTarget.location = new URL('https://example.test/mercury/?dataset=third&v=saved');
   f.controller.restore(f.windowTarget.location.href);
   assert.equal(f.windowTarget.location.searchParams.get('dataset'), 'third');
   assert.equal(f.windowTarget.location.searchParams.get('v'), 'saved');
-  assert.equal(f.lensCallbacks.size, 0);
+  assert.equal(f.datasetCallbacks.size, 0);
   f.windowTarget.location = new URL('https://example.test/catalogue-a/?v=saved');
   f.controller.restore(f.windowTarget.location.href);
-  assert.equal(f.lensCallbacks.size, 1);
+  assert.equal(f.datasetCallbacks.size, 1);
   f.controller.destroy();
-  assert.equal(f.lensCallbacks.size, 0);
+  assert.equal(f.datasetCallbacks.size, 0);
 });
 
 
@@ -385,21 +385,21 @@ test('an image-layer focus exposes its single optical dataset without volume-onl
   f.controller.restore('https://example.test/catalogue-a/?dataset=optical');
   assert.deepEqual(f.errors, []);
   const controls = required(last(f.content).presentation);
-  assert.equal(controls.selectedLens, 'optical');
-  controls.selectLens('optical');
-  assert.deepEqual(f.lensWrites, []);
+  assert.equal(controls.selectedDataset, 'optical');
+  controls.selectDataset('optical');
+  assert.deepEqual(f.datasetWrites, []);
   f.controller.destroy();
 });
 
 function deferredBank() {
-  let accept!: (bank: PreparedVolumeLensState) => void, reject!: (error: Error) => void;
-  const promise = new Promise<PreparedVolumeLensState>((resolve, fail) => { accept = resolve; reject = fail; });
+  let accept!: (bank: PreparedVolumeDatasetState) => void, reject!: (error: Error) => void;
+  const promise = new Promise<PreparedVolumeDatasetState>((resolve, fail) => { accept = resolve; reject = fail; });
   return { promise, accept, reject };
 }
 function coldVolumeFixture() {
   const load = deferredBank();
   const f = fixture({ object: { detailedObjectId: 'detailed' },
-    volumeLensFrames: { detailed: { frame: baseFrame, framingRadiusUnits: 5268.814 } },
+    volumeDatasetFrames: { detailed: { frame: baseFrame, framingRadiusUnits: 5268.814 } },
     bankReady: load.promise, loadedFramingRadiusUnits: 1650 });
   return { ...f, load };
 }
@@ -432,13 +432,13 @@ test('ordinary cold selection waits for the same authored framing and cancellati
   assert.deepEqual(cancelled.errors, []); cancelled.controller.destroy();
 });
 
-test('cold saved camera keeps its pose while waiting for an explicitly selected lens', async () => {
+test('cold saved camera keeps its pose while waiting for an explicitly selected dataset', async () => {
   const f = coldVolumeFixture();
   const restoring = f.controller.restore('https://example.test/catalogue-a/?dataset=second&v=exact-saved-pose');
   assert.deepEqual(f.errors, []); assert.deepEqual(f.flights, []);
   f.load.accept(volumeBank()); await restoring;
   assert.deepEqual(f.flights, []); assert.equal(f.owner.preparedFocus()?.framingRadiusM,1650 * baseFrame.metersPerUnit);
-  assert.deepEqual(f.lensWrites, ['second']); assert.deepEqual(f.errors, []); f.controller.destroy();
+  assert.deepEqual(f.datasetWrites, ['second']); assert.deepEqual(f.errors, []); f.controller.destroy();
 });
 
 test('a failed bank load reports its actual error and never falls back to an inaccurate destination', async () => {
@@ -487,7 +487,7 @@ test('shared context receives the exact authoritative focus on restore, switch a
 
 test('a focus waiting for its lazy bank still owns the URL, and resolves to one state', async () => {
   const bank = volumeBank();
-  const f = fixture({ volumeLensFrames, deferredVolumeBank: bank, object: { detailedObjectId: bank.objectId } });
+  const f = fixture({ volumeDatasetFrames, deferredVolumeBank: bank, object: { detailedObjectId: bank.objectId } });
   f.windowTarget.location = new URL('https://example.test/catalogue-a/?overview=system');
   const restoring = f.controller.restore(f.windowTarget.location.href);
   // The runtime cannot report this focus yet, but the URL names it, so nothing

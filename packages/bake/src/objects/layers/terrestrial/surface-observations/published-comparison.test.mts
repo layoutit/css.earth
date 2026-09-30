@@ -119,7 +119,7 @@ test('the image turn that best lays one outline on another is found in half degr
 test('the comparison record names its paper, figure pixels, rows and frames', async () => {
   const iris = JSON.parse(await readFile(resolve(ROOT, 'src/objects/iris/source', COMPARISON_SPEC_FILE), 'utf8'));
   const spec = parseComparisonSpec(iris);
-  assert.equal(spec.lensId, 'zimpol'); assert.equal(spec.columns.filter(column => column.frame).length, 4);
+  assert.equal(spec.datasetId, 'zimpol'); assert.equal(spec.columns.filter(column => column.frame).length, 4);
   for (const [change, message] of [
     [{ schema: 'other' }, /schema/], [{ source: 'https://example.org/paper' }, /DOI/],
     [{ rows: { image: 1, model: 1, count: 3 } }, /distinct rows/],

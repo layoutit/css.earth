@@ -8,7 +8,7 @@ import { sourceDocumentation } from '../source-documentation.mts';
   <a class="object-link object-observation-control object-thumbnail-leading" href={overview.route}
     data-source-subject={`overview:${overview.id}`} data-source-document={sourceDocumentation(overview.id, overview.name).href}
     data-source-label={sourceDocumentation(overview.id, overview.name).label}>
-    <span class="object-lens-icon"><ContextNavigationMarker objectId={overview.id} /></span>
-    <span class="object-name object-lens-label">{overview.name}</span>
+    <span class="object-dataset-icon"><ContextNavigationMarker objectId={overview.id} /></span>
+    <span class="object-name object-dataset-label">{overview.name}</span>
   </a>
 </li>)}

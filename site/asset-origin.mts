@@ -145,8 +145,8 @@ export async function resolveBuildSceneAddress(address: string, root = process.c
 const SCENE_ADDRESS = /^\/scenes\/[a-z][a-z0-9-]*\/.+$/u;
 
 /** Deep-rewrites every `/scenes/<id>/<file>` string found anywhere in a prepared-page JSON
- * value (`page.json`'s `controls`/`content`: lens thumbnails, dataset preview textures, and
- * anything else shaped like a bare scene address) — the same values `DatasetLenses.astro` and
+ * value (`page.json`'s `controls`/`content`: dataset thumbnails, dataset preview textures, and
+ * anything else shaped like a bare scene address) — the same values `DatasetList.astro` and
  * friends read directly, outside the runtime `resources.url()` chokepoint. No-op when unset. */
 export async function resolveSceneAddressesDeep<T>(value: T, root = process.cwd()): Promise<T> {
   if (!assetOrigin()) return value;

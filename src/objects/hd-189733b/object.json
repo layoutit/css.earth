@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "hd-189733b",
   "type": "layered-body",
   "properties": {
@@ -11,7 +11,7 @@
         "assets",
         "charts",
         "panel-content",
-        "lenses",
+        "datasets",
         "starfield",
         "scene",
         "controls",
@@ -20,13 +20,13 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "surfaces": [
         {
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "temperature",
               "source": "content",
@@ -64,10 +64,6 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json"
-        },
-        {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json"
         },
         {
           "id": "presentation",
@@ -113,7 +109,7 @@
       }
     },
     "catalog": {
-      "illustrationLenses": [
+      "illustrationDatasets": [
         "illustration"
       ],
       "name": "HD 189733b",

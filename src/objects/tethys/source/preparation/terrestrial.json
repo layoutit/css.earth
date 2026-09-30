@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "tethys",
   "displayName": "Tethys",
@@ -484,6 +484,6 @@
     "sunSource": "JPL Tethys orbit plus VSOP87 Saturn position and IAU/WGCCRE Tethys rotation"
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

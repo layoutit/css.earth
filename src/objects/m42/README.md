@@ -1,10 +1,10 @@
 # Orion Nebula (M42)
 
-Two ESO lenses color a coherent, authored ionization-front hypothesis; **optical is the default**. Local literature constraints do not measure the depth of the entire wide field.
+Two ESO datasets color a coherent, authored ionization-front hypothesis; **optical is the default**. Local literature constraints do not measure the depth of the entire wide field.
 
 ## Sources
 
-| Source / lens | Selected image and coverage |
+| Source / dataset | Selected image and coverage |
 | --- | --- |
 | [ESO optical, eso1723a](https://www.eso.org/public/images/eso1723a/) | i/Hα/r/G display; 4000 × 3106 pixels, 59.95′ × 46.56′. |
 | [ESO VISTA, eso1006a](https://www.eso.org/public/images/eso1006a/) | K/J/Z near-IR display; 3252 × 4000 pixels, 71.84′ × 88.35′. |
@@ -19,7 +19,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 ## Evidence
 
 - The [object descriptor](object.json) pins the installed bank; [delivery inputs](source/delivery.json) record saved controls and catalogue preparation. The source manifest distinguishes those inputs from generated delivery bytes.
-- The [fixed lab processing account](../../../labs/nebula/models/m42/README.md) records both-lens browser checks, native stellar-light accounting and coherent-front projection comparisons. Its older result identities are historical, not a fresh acceptance of the current delivery.
+- The [fixed lab processing account](../../../labs/nebula/models/m42/README.md) records both-dataset browser checks, native stellar-light accounting and coherent-front projection comparisons. Its older result identities are historical, not a fresh acceptance of the current delivery.
 - This documentation review checks provenance and interpretation; it does not establish a cold replay, independent gas-depth validation or material acceptance.
 
 ## Known problems

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "dlr-hamo-natural-color",
@@ -12,7 +12,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Natural color",
       "falseColor": false,
       "width": 26704,
@@ -68,7 +68,7 @@
         "units": "meters from body center"
       },
       "coverage": "Stereo-derived model with publisher-interpolated polar regions. No mask separates interpolated areas.",
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "capture": {
         "attributions": [
           {
@@ -101,7 +101,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "ratios",
+      "datasetId": "ratios",
       "label": "Spectral ratios",
       "falseColor": true,
       "width": 26703,
@@ -215,7 +215,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "hamo",
+      "datasetId": "hamo",
       "label": "HAMO clear-filter mosaic",
       "falseColor": false,
       "width": 26703,
@@ -260,7 +260,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "surface",
+      "datasetId": "surface",
       "label": "Clear-filter photography",
       "falseColor": false,
       "width": 80112,
@@ -1559,7 +1559,7 @@
       "consumers": [
         "hydrogen"
       ],
-      "lensId": "hydrogen",
+      "datasetId": "hydrogen",
       "label": "Hydrogen",
       "falseColor": true,
       "width": 180,
@@ -1604,7 +1604,7 @@
       "consumers": [
         "iron"
       ],
-      "lensId": "iron",
+      "datasetId": "iron",
       "label": "Iron gamma rays",
       "falseColor": true,
       "width": 720,
@@ -1841,7 +1841,7 @@
       "consumers": [
         "fast-neutrons"
       ],
-      "lensId": "fast-neutrons",
+      "datasetId": "fast-neutrons",
       "label": "Fast neutrons",
       "falseColor": true,
       "width": 240,
@@ -1887,7 +1887,7 @@
       "consumers": [
         "hegr"
       ],
-      "lensId": "hegr",
+      "datasetId": "hegr",
       "label": "High-energy gamma rays",
       "falseColor": true,
       "width": 360,
@@ -1933,7 +1933,7 @@
       "consumers": [
         "neutron-absorption"
       ],
-      "lensId": "neutron-absorption",
+      "datasetId": "neutron-absorption",
       "label": "Neutron absorption",
       "falseColor": true,
       "width": 360,
@@ -2067,7 +2067,7 @@
       "consumers": [
         "geology"
       ],
-      "lensId": "geology",
+      "datasetId": "geology",
       "label": "Geology",
       "falseColor": true,
       "width": 2048,
@@ -2107,7 +2107,7 @@
       "consumers": [
         "gravity"
       ],
-      "lensId": "gravity",
+      "datasetId": "gravity",
       "label": "Radial gravity without J2",
       "falseColor": true,
       "width": 360,
@@ -2197,7 +2197,7 @@
       "consumers": [
         "gravity-uncertainty"
       ],
-      "lensId": "gravity-uncertainty",
+      "datasetId": "gravity-uncertainty",
       "label": "Gravity uncertainty",
       "falseColor": true,
       "width": 360,
@@ -2287,7 +2287,7 @@
       "consumers": [
         "bouguer"
       ],
-      "lensId": "bouguer",
+      "datasetId": "bouguer",
       "label": "Bouguer anomaly",
       "falseColor": true,
       "width": 360,
@@ -2377,7 +2377,7 @@
       "consumers": [
         "geoid"
       ],
-      "lensId": "geoid",
+      "datasetId": "geoid",
       "label": "Geoid height",
       "falseColor": true,
       "width": 360,
@@ -2474,7 +2474,7 @@
         "latitudeDegrees": -25,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

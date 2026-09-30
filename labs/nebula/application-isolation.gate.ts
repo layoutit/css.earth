@@ -35,7 +35,7 @@ for (const path of inputs) {
 for (const path of ['packages/renderer/src/volume/types.ts', 'packages/renderer/src/navigation/world-camera-math.ts',
   'packages/renderer/src/stars/prepared-catalogue-points.ts', 'src/objects/m42/object.json',
   'src/objects/m42/source', 'src/objects/m2-9/object.json', 'src/objects/m2-9/source',
-  'src/objects/lmc/object.json', 'src/objects/lmc/prepared/lenses.json', 'src/objects/lmc/source', 'src/objects/stellar-neighbourhood/source/stars.json']) {
+  'src/objects/lmc/object.json', 'src/objects/lmc/prepared/datasets.json', 'src/objects/lmc/source', 'src/objects/stellar-neighbourhood/source/stars.json']) {
   const destination = resolve(sandbox, path); await mkdir(dirname(destination), { recursive: true });
   await cp(resolve(root, path), destination, { recursive: true });
 }
@@ -63,9 +63,9 @@ for (const id of ['m42', 'm2-9', 'lmc']) {
   const descriptor = JSON.parse(await readFile(join(directory, 'object.json'), 'utf8'));
   const bytes = await readFile(join(directory, descriptor.prepared.url));
   const bank = JSON.parse(bytes.toString()).data; let resources = 0;
-  for (const lens of bank.lenses) for (const resource of lens.volume.resources) {
+  for (const dataset of bank.datasets) for (const resource of dataset.volume.resources) {
     assert.equal((await readFile(join(directory, 'prepared', resource.path))).length, resource.bytes, resource.path); resources++;
   }
   assert.ok(resources > 0);
-  console.log(`APPLICATION_ISOLATION_PASS ${id} lenses=${bank.lenses.length} resources=${resources} reuse=verified`);
+  console.log(`APPLICATION_ISOLATION_PASS ${id} datasets=${bank.datasets.length} resources=${resources} reuse=verified`);
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "despina",
   "displayName": "Despina",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka (2003) measured ellipsoid axes, not the spherical PCK mean-radius entry."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

@@ -4,7 +4,7 @@
  * `/__nebula/reconstruction-difference`; nothing is measured or coloured here.
  */
 import { useEffect, useState } from 'react';
-import type { LensDifference } from '../../server/services/lens-difference.ts';
+import type { DatasetDifference } from '../../server/services/dataset-difference.ts';
 import type { DifferenceOverlayState } from '../legacy-viewer/difference-plane';
 import type { WorkspaceToggleTool } from '../workspace/workspace-tools';
 import './difference-map.css';
@@ -17,14 +17,14 @@ const DifferenceIcon = () => <svg viewBox="0 0 18 18" aria-hidden="true">
   <circle cx="9" cy="9" r="6.5" /><path d="M9 2.5v13" /><path d="M9 2.5a6.5 6.5 0 0 0 0 13z" fill="currentColor" stroke="none" />
 </svg>;
 
-type Legend = { status: 'loading' } | { status: 'ready'; value: LensDifference } | { status: 'error'; error: string };
-function parse(value: unknown, resultId: string): LensDifference {
-  const summary = value as Partial<LensDifference> | null;
-  if (!summary || summary.schema !== 'cssearth-nebula-lens-difference@1' || summary.resultId !== resultId ||
+type Legend = { status: 'loading' } | { status: 'ready'; value: DatasetDifference } | { status: 'error'; error: string };
+function parse(value: unknown, resultId: string): DatasetDifference {
+  const summary = value as Partial<DatasetDifference> | null;
+  if (!summary || summary.schema !== 'cssearth-nebula-dataset-difference@1' || summary.resultId !== resultId ||
       !Number.isFinite(summary.rangeLevels) || !Number.isFinite(summary.toleranceLevels) || !Array.isArray(summary.swatches) ||
       !summary.swatches.every(item => Number.isFinite(item?.levels) && typeof item?.rgba === 'string' && /^rgba\([\d.,]+\)$/.test(item.rgba)))
     throw new TypeError('Invalid difference map legend.');
-  return summary as LensDifference;
+  return summary as DatasetDifference;
 }
 
 function DifferenceLegend({ resultId, state, onOpacity }: { resultId: string; state: DifferenceOverlayState; onOpacity(value: number): void }) {
@@ -64,7 +64,7 @@ function DifferenceLegend({ resultId, state, onOpacity }: { resultId: string; st
   </div>;
 }
 
-/** The tool entry, or none when there is no baked lens to compare (the unpainted density, or an unbaked image). */
+/** The tool entry, or none when there is no baked dataset to compare (the unpainted density, or an unbaked image). */
 export function differenceTool(resultId: string | undefined, state: DifferenceOverlayState | undefined,
   onChange: ((enabled: boolean, opacity: number) => void) | undefined): WorkspaceToggleTool[] {
   if (!resultId || !state?.available || !onChange) return [];

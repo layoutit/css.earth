@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-css-presentation-profile@1",
+  "schema": "cssearth-css-presentation-profile@2",
   "namespace": "europa",
   "mode": "composite",
-  "lensFocus": {
+  "datasetFocus": {
     "elevation": {
       "longitudeDegrees": 142,
       "latitudeDegrees": -43.7,

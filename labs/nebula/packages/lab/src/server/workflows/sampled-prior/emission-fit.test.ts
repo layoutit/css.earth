@@ -11,7 +11,7 @@ const fit: SampledEmissionFit = {
   regularization: .001, maximumCoefficient: 3, maximumEjectaGain: 3,
 };
 const fixture = {
-  schema: 'cssearth-sampled-nebula@1', id: 'emission-example', centerIcrsDegrees: [80, 22],
+  schema: 'cssearth-sampled-nebula@2', id: 'emission-example', centerIcrsDegrees: [80, 22],
   evidence: { path: 'labs/nebula/models/example/physical-evidence.json' },
   source: { path: '.local/nebula-lab/physical/example/points.fits',
     url: 'https://example.org/points.fits', width: 4, height: 3, columns: [0, 1, 2, 3] },
@@ -19,7 +19,7 @@ const fixture = {
   grid: { longestAxis: 64, blurSigmaCells: .5, weightExponent: .5, peakOpticalDepth: .3 },
   terms: [{ kind: 'ellipsoid', id: 'wind', centerArcsec: [-4, 0, 0], sigmaArcsec: [1, 1, 1],
     weight: .08, evidenceIds: ['authored-wind'] }],
-  lensComponents: { optical: { ejecta: 1, pwn: 1 }, xray: { ejecta: 0, pwn: 1 } }, emissionFit: fit,
+  datasetComponents: { optical: { ejecta: 1, pwn: 1 }, xray: { ejecta: 0, pwn: 1 } }, emissionFit: fit,
 };
 const sky: SkyBounds = { min: [-12, -12], max: [12, 12] };
 const source = new Float32Array([-20, -20, -20, 1, 20, 20, 20, 1, 3, 0, -2, 1]);
@@ -125,7 +125,7 @@ test('image fitting improves withheld and independently sampled pixels without m
 test('sampled recipe rejects malformed fitting controls and unowned source/evidence identities', () => {
   assert.deepEqual(readSampledRecipe(fixture).emissionFit, fit);
   const invalid: unknown[] = [null, {}, { ...fit, sourceIds: [] }, { ...fit, sourceIds: ['optical', 'optical'] },
-    { ...fit, sourceIds: ['missing-lens'] }, { ...fit, evidenceIds: [] }, { ...fit, evidenceIds: ['wrong id'] },
+    { ...fit, sourceIds: ['missing-dataset'] }, { ...fit, evidenceIds: [] }, { ...fit, evidenceIds: ['wrong id'] },
     { ...fit, axis: [0, 0, 0] }, { ...fit, axis: [0, 0, 2] }, { ...fit, axis: [0, NaN, 1] },
     { ...fit, radiiArcsec: [9, 0, 6] }, { ...fit, centerArcsec: [0, 0, Infinity] },
     { ...fit, sigmaArcsec: 0 }, { ...fit, spacingArcsec: -1 }, { ...fit, imageWidth: 32.5 },

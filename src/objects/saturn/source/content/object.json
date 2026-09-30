@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "saturn",
   "displayName": "Saturn",
@@ -113,14 +113,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Visible color",
-        "thumbnail": "/scenes/saturn/saturn-lens-normal.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-normal.webp",
         "surface": "/scenes/saturn/saturn-surface-body.jpg",
         "poles": "/scenes/saturn/saturn-poles.webp",
         "material": "/scenes/saturn/saturn-orbit-material.webp",
@@ -133,7 +133,7 @@
       {
         "id": "ultraviolet",
         "label": "Ultraviolet",
-        "thumbnail": "/scenes/saturn/saturn-lens-ultraviolet.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-ultraviolet.webp",
         "surface": "/scenes/saturn/saturn-surface-ultraviolet.webp",
         "poles": "/scenes/saturn/saturn-poles-ultraviolet.webp",
         "falseColor": true,
@@ -175,7 +175,7 @@
       {
         "id": "methane",
         "label": "Methane",
-        "thumbnail": "/scenes/saturn/saturn-lens-methane.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-methane.webp",
         "surface": "/scenes/saturn/saturn-surface-methane.webp",
         "poles": "/scenes/saturn/saturn-poles-methane.webp",
         "falseColor": true,
@@ -217,7 +217,7 @@
       {
         "id": "thermal",
         "label": "Thermal illustration",
-        "thumbnail": "/scenes/saturn/saturn-lens-thermal.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-thermal.webp",
         "surface": "/scenes/saturn/saturn-surface-thermal.webp",
         "poles": "/scenes/saturn/saturn-poles-thermal.webp",
         "falseColor": true,
@@ -318,7 +318,7 @@
           "group": "opal-visible",
           "label": "2018-06-06"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2018a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2018a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2018a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2018a.webp",
         "falseColor": false,
@@ -339,7 +339,7 @@
           "group": "opal-visible",
           "label": "2019-06-19"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2019a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2019a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2019a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2019a.webp",
         "falseColor": false,
@@ -360,7 +360,7 @@
           "group": "opal-visible",
           "label": "2020-07-04"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2020a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2020a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2020a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2020a.webp",
         "falseColor": false,
@@ -381,7 +381,7 @@
           "group": "opal-visible",
           "label": "2021-09-12"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2021a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2021a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2021a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2021a.webp",
         "falseColor": false,
@@ -402,7 +402,7 @@
           "group": "opal-visible",
           "label": "2022-09-21"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2022a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2022a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2022a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2022a.webp",
         "falseColor": false,
@@ -423,7 +423,7 @@
           "group": "opal-visible",
           "label": "2023-10-22"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2023a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2023a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2023a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2023a.webp",
         "falseColor": false,
@@ -444,7 +444,7 @@
           "group": "opal-visible",
           "label": "2024-08-22"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2024a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2024a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2024a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2024a.webp",
         "falseColor": false,
@@ -465,7 +465,7 @@
           "group": "opal-visible",
           "label": "2025-08-29"
         },
-        "thumbnail": "/scenes/saturn/saturn-lens-visible-2025a.webp",
+        "thumbnail": "/scenes/saturn/saturn-dataset-visible-2025a.webp",
         "surface": "/scenes/saturn/saturn-surface-visible-2025a@2x.webp",
         "poles": "/scenes/saturn/saturn-poles-visible-2025a.webp",
         "falseColor": false,
@@ -551,7 +551,7 @@
     {
       "label": "NASA",
       "role": "imagery",
-      "description": "Thermal lens & hexagon",
+      "description": "Thermal dataset & hexagon",
       "href": "https://science.nasa.gov/saturn/"
     },
     {
@@ -568,8 +568,8 @@
     },
     {
       "label": "Hubble OPAL",
-      "role": "lenses",
-      "description": "UV & methane lenses",
+      "role": "datasets",
+      "description": "UV & methane datasets",
       "href": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
     },
     {

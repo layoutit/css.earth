@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-circumstellar-volume@1",
+  "schema": "cssearth-circumstellar-volume@2",
   "id": "eps-eridani-disc",
   "host": "eps-eridani",
   "name": "ε Eridani dust ring",
@@ -16,8 +16,8 @@
     "halfUnits": 105,
     "slabs": 100
   },
-  "defaultLens": "dust",
-  "lenses": [
+  "defaultDataset": "dust",
+  "datasets": [
     {
       "id": "dust",
       "label": "ALMA · dust ring, 1.3 mm",

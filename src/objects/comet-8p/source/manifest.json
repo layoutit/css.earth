@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "contact-model",
@@ -49,7 +49,7 @@
       },
       "width": 64,
       "height": 32,
-      "lensId": "model",
+      "datasetId": "model",
       "label": "Hubble · Spitzer",
       "falseColor": false,
       "sourceBinding": {
@@ -105,7 +105,7 @@
       },
       "width": 64,
       "height": 32,
-      "lensId": "arecibo",
+      "datasetId": "arecibo",
       "label": "Arecibo",
       "falseColor": false,
       "sourceBinding": {
@@ -212,7 +212,7 @@
         "latitudeDegrees": 15,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "model"
+        "datasetId": "model"
       }
     }
   ],

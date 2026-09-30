@@ -12,7 +12,7 @@ AB Pic b orbits about 190 au out, on an orbit seen edge-on. It spins in about tw
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
 
 **Rotation.** AB Pic b spins in about 2.1 hours (Palma-Bifani et al. 2023, Abstract), and its true obliquity is about 45 or 135 degrees, but the direction of its axis on the sky is not measured; no spin is propagated. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

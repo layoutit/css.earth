@@ -17,7 +17,7 @@ const contained = (root: string, path: string) => {
 
 /**
  * Which of a layered body's manifest sources each of its prepared products reads, from its source records alone: the
- * manifest, the recipes its descriptor names, its acquisition record and its prepared lens controls. The catalogues build
+ * manifest, the recipes its descriptor names, its acquisition record and its prepared dataset controls. The catalogues build
  * it in memory; nothing writes it.
  */
 export async function bodyLineage(objectDirectory: string): Promise<ObjectLineage> {
@@ -42,12 +42,12 @@ export async function bodyLineage(objectDirectory: string): Promise<ObjectLineag
     const directory = requireString(requireRecord(noiseRecipe).directory), pin = await json(contained(sourceDirectory, `${directory}/manifest.json`));
     return { id: requireString(pin.id), directory, file: requireString(pin.file) };
   })();
-  const lenses = await optionalJson(resolve(objectDirectory, 'prepared/lenses.json'));
+  const datasets = await optionalJson(resolve(objectDirectory, 'prepared/datasets.json'));
   const acquisition = await optionalJson(resolve(sourceDirectory, 'preparation/acquisition.json'));
   const operations = requireArray(acquisition?.operations ?? []).map(item => requireRecord(item));
-  const products = lineageProducts({ id, recipes, paths: new Set(byPath.keys()), controls: requireArray(lenses?.controls ?? []), noise,
+  const products = lineageProducts({ id, recipes, paths: new Set(byPath.keys()), controls: requireArray(datasets?.controls ?? []), noise,
     inputs: inputs.map(({ raw }) => ({ path: requireString(raw.path), consumers: texts(raw.consumers),
-      ...(raw.lensId === undefined ? {} : { lensId: requireString(raw.lensId) }) })) });
+      ...(raw.datasetId === undefined ? {} : { datasetId: requireString(raw.datasetId) }) })) });
   const sources = new Map<string, LineageSource>(), idByPath = new Map<string, string>();
   const bind = async (path: string, visiting = new Set<string>()): Promise<string> => {
     const entry = byPath.get(path);

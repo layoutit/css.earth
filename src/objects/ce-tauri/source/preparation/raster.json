@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ce-tauri/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -24,7 +24,7 @@
       "source": "observations/nov_avg.fit",
       "falseColor": true,
       "output": "ce-tauri-surface-{id}{suffix}.webp",
-      "thumbnail": "ce-tauri-lens-{id}.webp",
+      "thumbnail": "ce-tauri-dataset-{id}.webp",
       "science": {
         "kind": "surface-observation",
         "shape": {
@@ -42,7 +42,7 @@
           "columns": 72,
           "flatFaceErrorMeters": 960000000
         },
-        "lens": {
+        "dataset": {
           "format": "controlled-shape-camera",
           "metadata": {
             "label": "PIONIER image, November 2016",
@@ -112,7 +112,7 @@
       "source": "observations/dec_avg.fit",
       "falseColor": true,
       "output": "ce-tauri-surface-{id}{suffix}.webp",
-      "thumbnail": "ce-tauri-lens-{id}.webp",
+      "thumbnail": "ce-tauri-dataset-{id}.webp",
       "science": {
         "kind": "surface-observation",
         "shape": {
@@ -130,7 +130,7 @@
           "columns": 72,
           "flatFaceErrorMeters": 960000000
         },
-        "lens": {
+        "dataset": {
           "format": "controlled-shape-camera",
           "metadata": {
             "label": "PIONIER image, December 2016",
@@ -198,7 +198,7 @@
     {
       "id": "color",
       "output": "ce-tauri-surface-{id}{suffix}.webp",
-      "thumbnail": "ce-tauri-lens-{id}.webp",
+      "thumbnail": "ce-tauri-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
@@ -235,7 +235,7 @@
       "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
       "offLimbContext": {
         "logicalSize": 780,
-        "source": "the same published image: its light outside the 10.18 mas disc on the lens palette and stretch with alpha fading to the background; the plate spans the 16 mas field",
+        "source": "the same published image: its light outside the 10.18 mas disc on the dataset palette and stretch with alpha fading to the background; the plate spans the 16 mas field",
         "composition": "sky-plane image registered to the disc (496 px = 10.18 mas), mirrored and turned to the scene's handedness so its north meets the rendered display axis at the default camera",
         "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
         "runtimeAlphaProcessing": false

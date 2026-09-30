@@ -45,8 +45,8 @@
 }
 
 /* Desktop shows the rows; mobile keeps their selected image and text under a native select. */
-.object-lens-picker { min-width: 0; }
-.object-lens-picker-display {
+.object-dataset-picker { min-width: 0; }
+.object-dataset-picker-display {
   position: relative;
   display: none;
   align-items: center;
@@ -60,7 +60,7 @@
   background: transparent;
   cursor: pointer;
 }
-.object-lens-native-select {
+.object-dataset-native-select {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -70,10 +70,10 @@
   cursor: pointer;
   outline: 0;
 }
-.object-lens-picker-current { flex: 1; min-width: 0; }
-.object-lens-picker-selection { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.object-lens-picker-selection[hidden] { display: none; }
-.object-lens-picker-preview {
+.object-dataset-picker-current { flex: 1; min-width: 0; }
+.object-dataset-picker-selection { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.object-dataset-picker-selection[hidden] { display: none; }
+.object-dataset-picker-preview {
   display: grid;
   flex: 0 0 40px;
   place-items: center;
@@ -83,12 +83,12 @@
   border-radius: 3px;
   background: #080808;
 }
-.object-lens-picker-preview > img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
-.object-lens-picker-text { display: flex; flex-direction: column; min-width: 0; }
-.object-lens-picker-label, .object-lens-picker-detail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.object-lens-picker-label { font: var(--shell-font-content); }
-.object-lens-picker-detail { color: var(--shell-text-muted); font: var(--shell-font-value); }
-.object-lens-picker-chevron {
+.object-dataset-picker-preview > img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.object-dataset-picker-text { display: flex; flex-direction: column; min-width: 0; }
+.object-dataset-picker-label, .object-dataset-picker-detail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.object-dataset-picker-label { font: var(--shell-font-content); }
+.object-dataset-picker-detail { color: var(--shell-text-muted); font: var(--shell-font-value); }
+.object-dataset-picker-chevron {
   flex: 0 0 7px;
   width: 7px;
   height: 7px;
@@ -97,7 +97,7 @@
   border-bottom: 1.5px solid currentColor;
   transform: rotate(45deg);
 }
-.object-lens-picker > .object-observation-controls {
+.object-dataset-picker > .object-observation-controls {
   --dataset-scroll-offset: calc(var(--explorer-card-padding-inline-end) / 2);
   box-sizing: border-box;
   gap: 0;
@@ -112,18 +112,18 @@
   border-radius: 8px;
   background: transparent;
 }
-.object-lens-picker .object-observation-control { min-height: 30px; padding: 3px 0; opacity: 0.78; }
-.object-lens-picker .object-observation-control:is([aria-pressed="true"], :hover, :focus-visible) { opacity: 1; }
-.object-lens-picker .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
+.object-dataset-picker .object-observation-control { min-height: 30px; padding: 3px 0; opacity: 0.78; }
+.object-dataset-picker .object-observation-control:is([aria-pressed="true"], :hover, :focus-visible) { opacity: 1; }
+.object-dataset-picker .object-observation-control.object-thumbnail-leading:has(.object-dataset-detail) {
   grid-template-columns: 14px minmax(0, max-content) minmax(16px, 1fr) max-content;
 }
-.object-lens-picker .object-thumbnail-leading > .object-lens-detail { grid-column: 4; }
-.object-lens-picker .object-observation-control:has(.object-lens-detail)::after {
+.object-dataset-picker .object-thumbnail-leading > .object-dataset-detail { grid-column: 4; }
+.object-dataset-picker .object-observation-control:has(.object-dataset-detail)::after {
   grid-column: 3;
 }
 @media (max-width: 820px), (orientation: portrait) {
-  .object-lens-picker-display { display: flex; }
-  .object-lens-picker > .object-observation-controls { display: none; }
+  .object-dataset-picker-display { display: flex; }
+  .object-dataset-picker > .object-observation-controls { display: none; }
 }
 
 .object-sheet-handle {
@@ -154,18 +154,18 @@
   pointer-events: auto;
 }
 
-.object-lens-details-body {
+.object-dataset-details-body {
   user-select: text;
 }
 
-.object-lens-details-copy {
+.object-dataset-details-copy {
   margin: 0;
   color: var(--shell-text-secondary);
   font: var(--shell-font-small);
   overflow-wrap: anywhere;
 }
 
-.object-surface-minimap + .object-lens-details-copy {
+.object-surface-minimap + .object-dataset-details-copy {
   margin-top: 10px;
   margin-inline-end: 4px;
 }
@@ -177,7 +177,7 @@
   font: 400 0.75rem/18px var(--shell-ui-font);
 }
 
-.object-lens-texture {
+.object-dataset-texture {
   display: block;
   width: 100%;
   height: auto;
@@ -191,7 +191,7 @@
   border-radius: 0;
 }
 
-.object-lens-legend-panel {
+.object-dataset-legend-panel {
   box-sizing: border-box;
   display: block;
   flex: 0 0 auto;
@@ -206,18 +206,18 @@
   user-select: none;
 }
 
-.object-lens-legend-panel[hidden] {
+.object-dataset-legend-panel[hidden] {
   display: none;
 }
 
-.object-lens-legend-scale-row {
+.object-dataset-legend-scale-row {
   display: flex;
   align-items: center;
   width: 100%;
   height: 12px;
 }
 
-.object-lens-legend-scale {
+.object-dataset-legend-scale {
   display: block;
   width: 100%;
   height: 7px;
@@ -227,18 +227,18 @@
   object-fit: fill;
 }
 
-.object-lens-legend-segments {
+.object-dataset-legend-segments {
   display: flex;
   overflow: hidden;
 }
 
-.object-lens-legend-segment {
+.object-dataset-legend-segment {
   flex: 1 1 0;
   min-width: 0;
-  background: var(--object-lens-legend-color);
+  background: var(--object-dataset-legend-color);
 }
 
-.object-lens-legend-labels {
+.object-dataset-legend-labels {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -249,7 +249,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-.object-lens-legend-categories {
+.object-dataset-legend-categories {
   display: grid;
   gap: 0;
   width: 100%;
@@ -258,7 +258,7 @@
   list-style: none;
 }
 
-.object-lens-legend-categories li {
+.object-dataset-legend-categories li {
   display: grid;
   grid-template-columns: 8px max-content minmax(8px, 0.25fr) minmax(0, 1fr);
   align-items: center;
@@ -270,7 +270,7 @@
   font: var(--shell-font-metadata);
 }
 
-.object-lens-legend-categories li::before {
+.object-dataset-legend-categories li::before {
   align-self: center;
   grid-column: 3;
   grid-row: 1;
@@ -279,25 +279,25 @@
   transform: translateY(0.3em);
 }
 
-.object-lens-legend-swatch {
+.object-dataset-legend-swatch {
   align-self: center;
   grid-column: 1;
   grid-row: 1;
   width: 8px;
   height: 8px;
   border-radius: 0;
-  background: var(--object-lens-legend-color);
+  background: var(--object-dataset-legend-color);
   opacity: 0.75;
 }
 
-.object-lens-legend-category-label {
+.object-dataset-legend-category-label {
   grid-column: 2;
   grid-row: 1;
   color: var(--shell-text);
 }
 
 /* One key for the shared no-data grid, drawn with the grid's own colors. */
-.object-lens-legend-no-data {
+.object-dataset-legend-no-data {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -306,17 +306,17 @@
   font: var(--shell-font-metadata);
 }
 
-.object-lens-legend-panel > * + .object-lens-legend-no-data {
+.object-dataset-legend-panel > * + .object-dataset-legend-no-data {
   margin-top: 4px;
 }
 
-.object-lens-legend-no-data-swatch {
+.object-dataset-legend-no-data-swatch {
   flex: 0 0 auto;
   width: 12px;
   height: 12px;
 }
 
-.object-lens-legend-category-description {
+.object-dataset-legend-category-description {
   min-width: 0;
   overflow-wrap: anywhere;
   grid-column: 4;
@@ -364,8 +364,8 @@
   .object-gallery-panel,
   .object-system-galleries,
   .object-chart-switcher,
-  .object-lenses,
-  .object-lens-details,
+  .object-datasets,
+  .object-dataset-details,
   .object-accordion,
   .object-settings-panel
 ) {
@@ -391,16 +391,16 @@
   .object-factsheet-section,
   .object-gallery-panel,
   .object-chart-switcher,
-  .object-lenses,
-  .object-lens-details,
+  .object-datasets,
+  .object-dataset-details,
   .object-accordion,
   .object-settings-panel
 ):has(~ :is(
   .object-factsheet-section,
   .object-gallery-panel,
   .object-chart-switcher,
-  .object-lenses,
-  .object-lens-details,
+  .object-datasets,
+  .object-dataset-details,
   .object-accordion,
   .object-settings-panel
 )) {
@@ -423,8 +423,8 @@
 :is(
   .object-gallery-panel,
   .object-chart-switcher,
-  .object-lenses,
-  .object-lens-details,
+  .object-datasets,
+  .object-dataset-details,
   .object-accordion,
   .object-settings-panel
 ):not([open]) {
@@ -637,10 +637,10 @@ details:not([open]) > .object-panel-summary .object-panel-icon {
 .object-breadcrumbs [aria-current="page"] { color: var(--shell-text-secondary); }
 /* Mission headings overlay their artwork without taking input; keep the trail usable. */
 /* Missions titled by a short name open their description with the full name. */
-.object-lens-details-lead { color: var(--shell-text); font-weight: 500; }
+.object-dataset-details-lead { color: var(--shell-text); font-weight: 500; }
 /* Mission and spacecraft names title their cards at the shell's panel heading size,
    outranking the shared tab-panel text scale. */
-.object-card-tabpanel .object-facility .object-lens-details-title { font: var(--shell-font-panel-heading); }
+.object-card-tabpanel .object-facility .object-dataset-details-title { font: var(--shell-font-panel-heading); }
 
 .object-introduction {
   width: 100%;
@@ -876,8 +876,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   user-select: none;
 }
 
-.object-lenses,
-.object-lens-details {
+.object-datasets,
+.object-dataset-details {
   display: block;
   width: 100%;
   margin: 8px 0 0;
@@ -892,7 +892,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   user-select: none;
 }
 
-.object-lens-browser-header {
+.object-dataset-browser-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -903,7 +903,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   color: var(--shell-text);
 }
 
-.object-lens-search-field {
+.object-dataset-search-field {
   position: relative;
   display: block;
   flex: 0 0 92px;
@@ -913,7 +913,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   color: var(--shell-text-muted);
 }
 
-.object-lens-search {
+.object-dataset-search {
   appearance: none;
   display: block;
   width: 100%;
@@ -928,11 +928,11 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   outline: 0;
 }
 
-.object-lens-search::-webkit-search-cancel-button {
+.object-dataset-search::-webkit-search-cancel-button {
   display: none;
 }
 
-.object-lens-search-icon {
+.object-dataset-search-icon {
   position: absolute;
   top: 50%;
   right: 0;
@@ -943,7 +943,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   translate: 0 -50%;
 }
 
-.object-lens-search-icon .search-icon {
+.object-dataset-search-icon .search-icon {
   display: block;
   width: 100%;
   height: 100%;
@@ -953,7 +953,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   stroke-width: 1.7;
 }
 
-.object-lens-search-field:focus-within {
+.object-dataset-search-field:focus-within {
   color: var(--shell-text-secondary);
 }
 
@@ -1218,7 +1218,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   color: var(--shell-text-muted);
 }
 
-.object-lens-icon {
+.object-dataset-icon {
   display: block;
   grid-column: -2 / -1;
   grid-row: 1;
@@ -1230,21 +1230,21 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   transition: opacity 120ms ease;
 }
 
-.object-observation-control:hover .object-lens-icon,
-.object-observation-control:focus-visible .object-lens-icon {
+.object-observation-control:hover .object-dataset-icon,
+.object-observation-control:focus-visible .object-dataset-icon {
   opacity: 0.86;
 }
 
-.object-observation-control:is([aria-pressed="true"], [aria-current="page"]) .object-lens-icon {
+.object-observation-control:is([aria-pressed="true"], [aria-current="page"]) .object-dataset-icon {
   opacity: 1;
 }
 
-.object-lens-icon > .object-navigation-marker {
+.object-dataset-icon > .object-navigation-marker {
   width: 100%;
   height: 100%;
 }
 
-.object-lens-label {
+.object-dataset-label {
   display: block;
   grid-column: 1;
   grid-row: 1;
@@ -1258,11 +1258,11 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   white-space: nowrap;
 }
 
-.object-observation-control:has(.object-lens-detail) {
+.object-observation-control:has(.object-dataset-detail) {
   grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) max-content 14px;
 }
 
-.object-observation-control:has(.object-lens-detail)::after,
+.object-observation-control:has(.object-dataset-detail)::after,
 .object-factsheet-section .object-facts li::before {
   align-self: center;
   margin-top: 0;
@@ -1273,19 +1273,19 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   transform: translateY(0.3em);
 }
 
-.object-lens-picker .object-observation-control:has(.object-lens-detail)::after,
+.object-dataset-picker .object-observation-control:has(.object-dataset-detail)::after,
 .object-factsheet-section .object-facts li::before {
   border-bottom-color: rgb(255 255 255 / 28%);
 }
 
-.object-lens-detail {
+.object-dataset-detail {
   grid-column: 3;
   grid-row: 1;
   text-align: right;
   white-space: nowrap;
 }
 
-.object-lens-detail,
+.object-dataset-detail,
 .object-facts .object-fact-value {
   font: var(--shell-font-value);
 }
@@ -1293,21 +1293,21 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 .object-observation-control.object-thumbnail-leading {
   grid-template-columns: 14px minmax(0, 1fr);
 }
-.object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
+.object-observation-control.object-thumbnail-leading:has(.object-dataset-detail) {
   grid-template-columns: 14px minmax(0, max-content) minmax(8px, 1fr) max-content;
 }
-.object-thumbnail-leading > .object-lens-icon { grid-column: 1; }
-.object-thumbnail-leading > .object-lens-label { grid-column: 2; }
-.object-thumbnail-leading > .object-lens-detail { grid-column: 4; }
-.object-observation-control.object-thumbnail-leading:has(.object-lens-detail)::after { grid-column: 3; }
+.object-thumbnail-leading > .object-dataset-icon { grid-column: 1; }
+.object-thumbnail-leading > .object-dataset-label { grid-column: 2; }
+.object-thumbnail-leading > .object-dataset-detail { grid-column: 4; }
+.object-observation-control.object-thumbnail-leading:has(.object-dataset-detail)::after { grid-column: 3; }
 
-.object-lens-empty {
+.object-dataset-empty {
   margin: 2px 0 4px;
   color: var(--shell-text-muted);
   font: 400 0.8125rem/28px var(--shell-ui-font);
 }
 
-.object-lens-empty[hidden] {
+.object-dataset-empty[hidden] {
   display: none;
 }
 
@@ -1337,8 +1337,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   ) {
@@ -1350,8 +1350,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   ):not([open]) {
@@ -1362,19 +1362,19 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   )[open] {
     padding-bottom: 12px;
   }
 
-  .object-lenses[open] {
+  .object-datasets[open] {
     padding-bottom: 8px;
   }
 
-  .object-lens-details[open] {
+  .object-dataset-details[open] {
     padding-bottom: 16px;
   }
 
@@ -1568,8 +1568,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
     .object-selected-panel,
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   ) {
@@ -1577,15 +1577,15 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
     border: 0;
   }
 
-  :is(.object-lenses, .object-lens-details, .object-accordion, .object-settings-panel) {
+  :is(.object-datasets, .object-dataset-details, .object-accordion, .object-settings-panel) {
     color: var(--shell-text-secondary);
   }
 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   ) {
@@ -1595,8 +1595,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   ):not([open]),
@@ -1701,8 +1701,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   ) {
@@ -1714,8 +1714,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   ):not([open]) {
@@ -1725,15 +1725,15 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   :is(
     .object-gallery-panel,
     .object-chart-switcher,
-    .object-lenses,
-    .object-lens-details,
+    .object-datasets,
+    .object-dataset-details,
     .object-accordion,
     .object-settings-panel
   )[open] {
     padding-bottom: 12px;
   }
 
-  .object-lenses[open] {
+  .object-datasets[open] {
     padding-bottom: 8px;
   }
 
@@ -1980,7 +1980,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
 }
 
 /* A moon's catalogue thumbnail fills its 14px marker slot instead of spilling over the rows. */
-.object-information-panel > [data-information-panel="moons"] .object-lens-icon > .object-search-preview {
+.object-information-panel > [data-information-panel="moons"] .object-dataset-icon > .object-search-preview {
   display: block;
   width: 100%;
   height: 100%;
@@ -2001,7 +2001,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   :is(.object-information-panel, .object-prepared-information-panel) > .object-native-tabs { display: none; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not([hidden]) { display: block; }
   /* Section headings: the label each tab used to carry, in the sheet's panel-heading type. */
-  .object-information-panel > .object-dataset-content:not(.atlas-tree-disclosure):has(> .object-lenses)::before,
+  .object-information-panel > .object-dataset-content:not(.atlas-tree-disclosure):has(> .object-datasets)::before,
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content, .object-charts-content, .atlas-tree-disclosure)::before {
     content: attr(aria-label);
     display: flex;
@@ -2018,7 +2018,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   /* Two columns: the title and its factsheet on the left; the dataset list, the chosen dataset and its
      spacecraft on the right. A grid whose second row is flexible, so the factsheet starts right under
      the intro however tall the dataset column is, and the spacecraft follow the dataset map. */
-  .object-information-panel:not([hidden], [data-card-view="overview"]):has(> .object-dataset-content > .object-lens-details) {
+  .object-information-panel:not([hidden], [data-card-view="overview"]):has(> .object-dataset-content > .object-dataset-details) {
     display: grid;
     grid-template-columns: var(--tablet-left-column) minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
@@ -2043,7 +2043,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     padding: 12px 0 20px;
   }
   /* The chosen dataset follows its list, under the list's own rule. */
-  .object-information-panel > .object-dataset-content > .object-lens-details { margin-top: 12px; }
+  .object-information-panel > .object-dataset-content > .object-dataset-details { margin-top: 12px; }
 
   /* The focus card's datasets are one panel: it takes the right, and the factsheet rises beside it. */
   .object-prepared-information-panel > .object-selected-panel,
@@ -2065,7 +2065,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   :is(.object-information-panel, .object-prepared-information-panel).object-card > .object-selected-panel:has(+ .object-native-tabs)::after { content: none; }
 
   /* A panel with nothing on the right (no datasets) keeps its sections full width. */
-  :is(.object-information-panel, .object-prepared-information-panel):not(:has(> .object-dataset-content > .object-lens-details, > [data-information-panel="dataset"])) > * {
+  :is(.object-information-panel, .object-prepared-information-panel):not(:has(> .object-dataset-content > .object-dataset-details, > [data-information-panel="dataset"])) > * {
     float: none;
     width: auto;
   }

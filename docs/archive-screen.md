@@ -26,7 +26,7 @@ LOFAR and IRAM need an account or written approval, so they were not queried; th
 
 ## Bodies that could gain a surface
 
-A body qualifies when it carries no photographic lens today and an archive instrument could resolve its disc.
+A body qualifies when it carries no photographic dataset today and an archive instrument could resolve its disc.
 Apparent size is the body's mean diameter at its closest approach to Earth, taken as its semi-major axis minus
 one astronomical unit; the beam count divides that by the instrument's diffraction limit. Both are order-of-
 magnitude estimates for ranking, not measurements of any single observation: a real check reads the frame's own
@@ -98,7 +98,7 @@ epoch and distance.
   included. Keck's and IRTF's largest counts are guider and spectrograph rows.
 - **Resolving a disc is not imaging a surface.** Two beams across a body shows an ellipse, not terrain. The
   spotless-disc gate in [interferometric imaging](interferometric-imaging.md) exists because coverage alone
-  invents structure; an equivalent check is needed before any of these becomes a lens.
+  invents structure; an equivalent check is needed before any of these becomes a dataset.
 - **Spectroscopy dominates the totals.** Most matched frames are spectra, which constrain composition rather
   than appearance.
 - **Unverified proprietary state.** The screen counts rows the archives exposed to an anonymous query, which

@@ -25,6 +25,6 @@ The checked measurements are in `lmc-scale-audit.json`. Scripts, raw same-camera
 
 1. Define an explicit observation-to-model display registration. Preserve the original simulation and physical units; distinguish its centre/orientation residual from catalogue astrometry. Choose observed centre, orientation and angular landmarks as constraints.
 2. Reconcile cloud and stellar mapping together. Preserve catalogue IDs and measured sky coordinates; do not independently drag stars, image skins and cloud until screenshots happen to agree. Review the authored scale-3 fits after the world registration is established.
-3. Fit a common source-view display profile: bright core, outer-light falloff and visible extent. A mass-density inspection stretch is not calibrated surface brightness. Keep infrared and optical lens treatments explicit.
+3. Fit a common source-view display profile: bright core, outer-light falloff and visible extent. A mass-density inspection stretch is not calibrated surface brightness. Keep infrared and optical dataset treatments explicit.
 4. Give the LMC a matched sky/cloud transition, accounting for its own distance. Keep the Milky Way sky shell approximation from imposing the wrong parallax on a distant galaxy.
 5. Accept only after fixed-camera landmark/extent comparison and continuous departure/approach show no position, orientation, apparent-size or brightness jump. Recheck oblique views separately; this does not solve the existing slice-stability limits.

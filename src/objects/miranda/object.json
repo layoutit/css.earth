@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "miranda",
   "type": "layered-body",
   "properties": {
@@ -11,7 +11,7 @@
         "assets",
         "features",
         "panel-content",
-        "lenses",
+        "datasets",
         "starfield",
         "sky-sun",
         "system-markers",
@@ -22,7 +22,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "raster",
@@ -31,10 +31,6 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json"
-        },
-        {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json"
         },
         {
           "id": "presentation",
@@ -70,7 +66,7 @@
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "normal",
               "source": "content",

@@ -44,8 +44,8 @@ test('every registered exoplanet bakes the source-radius silhouette through a li
       const inventory = requireRecord(await readJsonSource(resolve(directory, 'inventory.json')), `${id} inventory`);
       const assets = requireArray(inventory.assets, `${id} assets`).map(asset => requireRecord(asset, 'asset'));
       for (const surface of requireArray(raster.surfaces, `${id} surfaces`)) {
-        const lens = requireRecord(surface, 'surface');
-        const name = requireString(lens.id, `${id} lens`);
+        const dataset = requireRecord(surface, 'surface');
+        const name = requireString(dataset.id, `${id} dataset`);
         // The plate is wholly transparent, and the raster lane publishes no plate without a visible pixel.
         assert.ok(!assets.some(asset => typeof asset.filename === 'string' && asset.filename.includes(`-limb-${name}@2x.webp`)), `${id}/${name} publishes no empty plate`);
       }

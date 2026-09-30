@@ -3,7 +3,7 @@
  * The orbit's default scene matrix is CSS rotateX(scene pitch) · rotateY(yaw), the same product the runtime builds
  * (`navigation/prepared-camera-basis.ts`); `worldCameraFromPresentation` turns it into the world pose the app reports
  * through `captureWorldCamera`. From the pose: the sub-camera point on the body, and where the body's pole and the
- * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the lens's
+ * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the dataset's
  * sub-observer point; a test pins the numbers the browser was measured to show. */
 import { preparedScenePitch } from '@cssearth/engine';
 import { worldCameraFromPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
@@ -60,10 +60,10 @@ export const angularSeparationDegrees = (a: { longitudeDegrees: number; latitude
   const [u, v] = [p(a), p(b)]; return Math.acos(Math.max(-1, Math.min(1, u[0] * v[0] + u[1] * v[1] + u[2] * v[2]))) / DEGREE;
 };
 
-/** A surface-observation lens names the body point its frame looks at; the default camera must look at it too. */
-export function assertDefaultViewFacesLens(geometry: Pick<SolarGeometry, 'requireBodyFixedToIcrf'>, bodyId: string, camera: DefaultViewCamera, frame: DefaultViewFrame, subObserver: { longitudeDegrees: number; latitudeDegrees: number }, maximumDegrees = 25) {
+/** A surface-observation dataset names the body point its frame looks at; the default camera must look at it too. */
+export function assertDefaultViewFacesDataset(geometry: Pick<SolarGeometry, 'requireBodyFixedToIcrf'>, bodyId: string, camera: DefaultViewCamera, frame: DefaultViewFrame, subObserver: { longitudeDegrees: number; latitudeDegrees: number }, maximumDegrees = 25) {
   const view = defaultViewGeometry(geometry, bodyId, camera, frame);
   const separation = angularSeparationDegrees(view.subCamera, subObserver);
-  if (!(separation <= maximumDegrees)) throw new Error(`${bodyId}: the default camera looks at longitude ${view.subCamera.longitudeDegrees.toFixed(1)}, latitude ${view.subCamera.latitudeDegrees.toFixed(1)}, ${separation.toFixed(1)} degrees from the lens's sub-observer point (${subObserver.longitudeDegrees}, ${subObserver.latitudeDegrees}); the limit is ${maximumDegrees}.`);
+  if (!(separation <= maximumDegrees)) throw new Error(`${bodyId}: the default camera looks at longitude ${view.subCamera.longitudeDegrees.toFixed(1)}, latitude ${view.subCamera.latitudeDegrees.toFixed(1)}, ${separation.toFixed(1)} degrees from the dataset's sub-observer point (${subObserver.longitudeDegrees}, ${subObserver.latitudeDegrees}); the limit is ${maximumDegrees}.`);
   return { view, separation };
 }

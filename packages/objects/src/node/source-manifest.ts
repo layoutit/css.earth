@@ -24,7 +24,7 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot }:
     objectId,
     JSON.parse(await readFile(resolve(sourceRoot, "manifest.json"), "utf8")),
   );
-  // A lens may read an acquired input or a file this repository generates from one, such as a spectrum sampled here from the
+  // A dataset may read an acquired input or a file this repository generates from one, such as a spectrum sampled here from the
   // archive's coefficients. Both are declared the same way, and both must be present before they are read.
   const inputsByPath = new Map<string, SourceEntry>([
     ...manifest.documents.map((entry) => [entry.path, entry] as const),
@@ -70,7 +70,7 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot }:
 }
 
 /** Every source manifest, of an object or of a shared kernel bank, has this one format name. */
-export const SOURCE_MANIFEST_SCHEMA = "cssearth-authoritative-sources@2";
+export const SOURCE_MANIFEST_SCHEMA = "cssearth-authoritative-sources@3";
 
 export function validateSourceManifest(objectId: string, input: unknown): Readonly<SourceManifest> {
   const value = input as SourceManifest;

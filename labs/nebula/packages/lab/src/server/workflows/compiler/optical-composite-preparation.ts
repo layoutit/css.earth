@@ -124,8 +124,8 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
   const fieldModel = readRetainedEmissionField(JSON.parse((await readGeometryPin(root, base.model)).toString()));
   if (fieldModel.identity !== base.scene.fieldIdentity) throw new TypeError('Retained cloud field identity differs.');
   const field = createEmissionField(fieldModel), material = createEmissionMaterial(fieldModel, image, field);
-  const lens = await prepareRetainedMaterialBank({ root, outputDirectory: `${directory}/optical-composite`, scene: base.scene,
-    neutralSlicesPin: neutralSlices, sampleEmission: field.sampleEmission, lens: { id: recipe.id, label: recipe.label, sampleMaterial: material.sampleMaterial },
+  const dataset = await prepareRetainedMaterialBank({ root, outputDirectory: `${directory}/optical-composite`, scene: base.scene,
+    neutralSlicesPin: neutralSlices, sampleEmission: field.sampleEmission, dataset: { id: recipe.id, label: recipe.label, sampleMaterial: material.sampleMaterial },
     onProgress: value => { supplied?.signal.throwIfAborted(); if (value.completed % 100 === 0 || value.completed === value.total) progress(`Optical material: ${value.completed}/${value.total} retained slabs`); } });
   const physicalDepth = { ...depth, recipe: await save('depth-recipe.json', await readGeometryPin(root, sourcePin(depth.recipe))),
     evidence: await save('physical-evidence.json', await readGeometryPin(root, sourcePin(depth.evidence))) };
@@ -144,7 +144,7 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
   const result = readCompilerResult({ ...base, id, method,
     pipeline: [...base.pipeline, { id: 'optical-composite', label: 'Blend optical sources · retain cloud', state: 'complete', seconds: (performance.now() - started) / 1000 }],
     scene: { ...base.scene, id, volumeId: base.scene.volumeId ?? base.id,
-    lenses: [...base.scene.lenses, lens], stars }, sources: [...base.sources, { id: recipe.id, label: recipe.label, credit: image.credit,
+    datasets: [...base.scene.datasets, dataset], stars }, sources: [...base.sources, { id: recipe.id, label: recipe.label, credit: image.credit,
       page: wide.page, width: original.width, height: original.height, boundsArcsec: base.scene.skyBoundsArcsec, original: originalPin, starless: starlessPin }] });
   await validateCompilerResult(root, result);
   await save('request.json', Buffer.from(JSON.stringify(identity)));

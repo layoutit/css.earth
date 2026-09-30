@@ -4,11 +4,11 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { FOCUS_FRAGMENT_URL, fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focus-fragment.mts';
 
-const FRAGMENT = '<!DOCTYPE html><style>.x{}</style><div data-focus-banks="lenses"><div data-focus-lens-bank="m42" hidden>'
-  + '<button data-focus-lens value="optical"></button></div><div data-focus-lens-bank="m1" hidden></div></div>'
+const FRAGMENT = '<!DOCTYPE html><style>.x{}</style><div data-focus-banks="datasets"><div data-focus-dataset-bank="m42" hidden>'
+  + '<button data-focus-dataset value="optical"></button></div><div data-focus-dataset-bank="m1" hidden></div></div>'
   + '<div data-focus-banks="facts"><div data-focus-facts-bank="m42" hidden></div></div>';
 const card = () => parseHTML('<html><body><div data-prepared-focus-card><p data-focus-name></p>'
-  + '<div data-focus-banks-slot="lenses" hidden></div><div><div data-focus-banks-slot="facts" hidden></div></div></div></body></html>')
+  + '<div data-focus-banks-slot="datasets" hidden></div><div><div data-focus-banks-slot="facts" hidden></div></div></div></body></html>')
   .document.querySelector<HTMLElement>('[data-prepared-focus-card]')!;
 
 test('the fragment is fetched from its one path, and a failed response names it', async () => {
@@ -25,9 +25,9 @@ test('splicing replaces each placeholder with its bank group and keeps the retai
   spliceFocusBanks(root, parseHTML(FRAGMENT).document);
   assert.equal(focusBanksPending(root), false);
   assert.equal(root.querySelector('[data-focus-name]'), name);
-  assert.deepEqual([...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank]')].map(bank => bank.dataset.focusLensBank), ['m42', 'm1']);
+  assert.deepEqual([...root.querySelectorAll<HTMLElement>('[data-focus-dataset-bank]')].map(bank => bank.dataset.focusDatasetBank), ['m42', 'm1']);
   // The facts group lands where its placeholder was, inside the factsheet wrapper.
   assert.equal(root.querySelector('[data-focus-facts-bank="m42"]')?.parentElement?.parentElement, root);
   assert.equal(root.querySelector('style'), null);
-  assert.throws(() => spliceFocusBanks(card(), parseHTML('<div data-focus-banks="lenses"></div>').document), /no "facts" bank group/u);
+  assert.throws(() => spliceFocusBanks(card(), parseHTML('<div data-focus-banks="datasets"></div>').document), /no "facts" bank group/u);
 });

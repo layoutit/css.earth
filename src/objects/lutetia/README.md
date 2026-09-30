@@ -12,12 +12,12 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Evidence
 
-The final expansion is also qualified through main's shared surface-observation pipeline. [Current browser comparison and evidence](evidence/photographic-expansion/evidence.json) preserve the same camera, tree and hit mesh. The observation-only refresh took 228.4 s, compared with 417 s for the previous full preparation; it replaced three runtime files and retained 36. Photographic coverage remains 29.66% at the same 64 area-weighted samples per triangle. The older capture record below describes the initial bake; its source-camera checks remain applicable because those inputs and solutions are unchanged.
+The final expansion is also qualified through main's shared surface-observation pipeline. Current browser comparison and evidence preserve the same camera, tree and hit mesh. The observation-only refresh took 228.4 s, compared with 417 s for the previous full preparation; it replaced three runtime files and retained 36. Photographic coverage remains 29.66% at the same 64 area-weighted samples per triangle. The older capture record below describes the initial bake; its source-camera checks remain applicable because those inputs and solutions are unchanged.
 
-[Before](evidence/photographic-coverage/before.webp) ·
-[After](evidence/photographic-coverage/after.webp) ·
-[Pixelmatch diff](evidence/photographic-coverage/diff.webp) ·
-[Measured evidence](evidence/photographic-coverage/evidence.json)
+Before ·
+After ·
+Pixelmatch diff ·
+Measured evidence
 
 The matched Chrome 152 captures use 1440×1000, DPR 1, OSIRIS, motion paused
 and Shadows off. Before is the base; after is the base plus this change,
@@ -35,9 +35,9 @@ also reproduces its original hash after the helper-path repair. Headless checks
 cover four poses, DPR 1/2, mobile, lighting and retained-DOM dragging; Shadows
 defaults off. Strict TypeScript checking of the changed capture/test roots
 passes. Full repository suites were not run. Inspected screenshots include
-[DPR 2](evidence/photographic-coverage/dpr2.webp),
-[mobile](evidence/photographic-coverage/mobile.webp) and
-[directional lighting](evidence/photographic-coverage/shadows.webp).
+DPR 2,
+mobile and
+directional lighting.
 
 The September 2026 expansion adds `N20100710T154241240ID4DF22`. It supplies
 the selected photograph over **8.19% of the display mesh**, mainly replacing
@@ -75,11 +75,11 @@ The broader preparation suite was not green (1,666/1,957 passed); global platfor
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `osiris` | 3 | 0 | — | — | — | its other 3 frames | 0 of 3 | — | 3 of 3, 0.00° | — | ×1.00 | registered |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ## Known problems

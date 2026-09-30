@@ -24,14 +24,14 @@ import { cameraFrame } from '../footprint.ts';
 import { bandSetFrame, stripFrame, type Strip } from '../composite.ts';
 import { diskPhotometry } from '../photometry.ts';
 import { deriveLimits } from '../limits.ts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer } from '../recipe.ts';
+import { DATASET_KEYS, MOSAIC_KEYS, OPTIONAL_DATASET_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer } from '../recipe.ts';
 
 const CONTEXT = 'JunoCam observation recipe';
 /** The bands of the colour photograph, in display order. */
 const BANDS = ['RED', 'GREEN', 'BLUE'] as const;
 const MAXIMUM_FRAMES = 8;
 
-const parseJunocamLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
+const parseJunocamDataset = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
   frames: array(shape({ id: text, path: text, labelPath: text, startTime: text })),
   spice: shape({ kernelSet: text, kernels: array(text), observer: number, target: number, targetName: text, bodyFrame: text, aberration: text }),
   epochRefinement: shape({ method: text, maximumPointingSeconds: number, maximumEphemerisSeconds: number, maximumResidualPixels: number, minimumControls: number,
@@ -39,16 +39,16 @@ const parseJunocamLens = shape({ id: text, format: text, consumer: text, metadat
   selection: optional(text), levelMatching: optional(parseLevelMatching), transfer: surfaceTransfer,
   photometry: shape({ model: text, weight: optional(number), referenceIncidenceDegrees: number, referenceEmissionDegrees: number, maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number }),
   display: parseDisplay });
-type JunocamLens = ReturnType<typeof parseJunocamLens>;
+type JunocamDataset = ReturnType<typeof parseJunocamDataset>;
 
-const framePaths = (recipe: JunocamLens) => recipe.frames.flatMap(frame => [frame.path, frame.labelPath]);
+const framePaths = (recipe: JunocamDataset) => recipe.frames.flatMap(frame => [frame.path, frame.labelPath]);
 
-function validateJunocamLens(value: unknown, sourceGeometry: unknown) {
+function validateJunocamDataset(value: unknown, sourceGeometry: unknown) {
   const record = requireRecord(value);
-  checkKeys(record, [...LENS_KEYS, 'spice', 'epochRefinement'], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS], CONTEXT);
+  checkKeys(record, [...DATASET_KEYS, 'spice', 'epochRefinement'], [...MOSAIC_KEYS, ...OPTIONAL_DATASET_KEYS], CONTEXT);
   for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'labelPath', 'startTime'], [], `${CONTEXT} frame`);
   checkKeys(record.spice, ['kernelSet', 'kernels', 'observer', 'target', 'targetName', 'bodyFrame', 'aberration'], [], `${CONTEXT} spice block`);
-  const recipe = decodeProfile(parseJunocamLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
+  const recipe = decodeProfile(parseJunocamDataset, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   if (recipe.format !== JUNOCAM_FORMAT) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
   validateEnvelope(recipe, framePaths(recipe), { selections: ['lowest-emission', 'recipe-order', 'finest-resolution'], displays: ['displayRange'], maximumFrames: MAXIMUM_FRAMES, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
@@ -67,7 +67,7 @@ function validateJunocamLens(value: unknown, sourceGeometry: unknown) {
     throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
 }
 
-async function loadJunocamImage(recipe: JunocamLens, frame: JunocamLens['frames'][number], set: KernelSet, photometry: ObservationPhotometry, { sourceDirectory, radial }: LoadContext): Promise<ObservationFrame> {
+async function loadJunocamImage(recipe: JunocamDataset, frame: JunocamDataset['frames'][number], set: KernelSet, photometry: ObservationPhotometry, { sourceDirectory, radial }: LoadContext): Promise<ObservationFrame> {
   const image = decodeJunocam(await readFile(resolve(sourceDirectory, frame.path)), await readFile(resolve(sourceDirectory, frame.labelPath), 'latin1')), { label } = image;
   if (label.startTime !== frame.startTime || label.target !== recipe.spice.targetName || BANDS.some(band => !label.filters.includes(band)))
     throw new Error(`JunoCam image ${frame.id} is ${label.target} at ${label.startTime} through ${label.filters.join(', ')}; the recipe states ${recipe.spice.targetName} at ${frame.startTime} through ${BANDS.join(', ')}.`);
@@ -97,10 +97,10 @@ async function loadJunocamImage(recipe: JunocamLens, frame: JunocamLens['frames'
 }
 
 export const junocamFormat: SurfaceObservationFormat = {
-  validate: validateJunocamLens,
-  paths: value => framePaths(parseJunocamLens(value)),
+  validate: validateJunocamDataset,
+  paths: value => framePaths(parseJunocamDataset(value)),
   async load(value, context) {
-    const recipe = parseJunocamLens(value), photometry = diskPhotometry(recipe.photometry);
+    const recipe = parseJunocamDataset(value), photometry = diskPhotometry(recipe.photometry);
     const set = await loadKernelSet(await kernelBankPaths(recipe.spice.kernelSet, recipe.spice.kernels));
     const frames: ObservationFrame[] = [];
     for (const frame of recipe.frames) frames.push(await loadJunocamImage(recipe, frame, set, photometry, context));

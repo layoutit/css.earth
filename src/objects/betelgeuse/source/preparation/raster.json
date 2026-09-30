@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/betelgeuse/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -24,7 +24,7 @@
       "source": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
       "falseColor": true,
       "output": "betelgeuse-surface-{id}{suffix}.webp",
-      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "thumbnail": "betelgeuse-dataset-{id}.webp",
       "science": {
         "kind": "surface-observation",
         "shape": {
@@ -42,7 +42,7 @@
           "columns": 72,
           "flatFaceErrorMeters": 1020000000
         },
-        "lens": {
+        "dataset": {
           "format": "controlled-shape-camera",
           "metadata": {
             "label": "MATISSE reconstruction",
@@ -111,7 +111,7 @@
       "source": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
       "falseColor": true,
       "output": "betelgeuse-surface-{id}{suffix}.webp",
-      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "thumbnail": "betelgeuse-dataset-{id}.webp",
       "science": {
         "kind": "surface-observation",
         "shape": {
@@ -129,7 +129,7 @@
           "columns": 72,
           "flatFaceErrorMeters": 1020000000
         },
-        "lens": {
+        "dataset": {
           "format": "controlled-shape-camera",
           "metadata": {
             "label": "MATISSE December 2018",
@@ -198,7 +198,7 @@
       "source": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
       "falseColor": true,
       "output": "betelgeuse-surface-{id}{suffix}.webp",
-      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "thumbnail": "betelgeuse-dataset-{id}.webp",
       "science": {
         "kind": "surface-observation",
         "shape": {
@@ -216,7 +216,7 @@
           "columns": 72,
           "flatFaceErrorMeters": 1020000000
         },
-        "lens": {
+        "dataset": {
           "format": "controlled-shape-camera",
           "metadata": {
             "label": "MATISSE December 2020",
@@ -283,7 +283,7 @@
     {
       "id": "color",
       "output": "betelgeuse-surface-{id}{suffix}.webp",
-      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "thumbnail": "betelgeuse-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/eps-indi-ab/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "shape",
       "output": "eps-indi-ab-surface-{id}{suffix}.webp",
-      "thumbnail": "eps-indi-ab-lens-{id}.webp",
+      "thumbnail": "eps-indi-ab-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {

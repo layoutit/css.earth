@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "adrastea",
   "displayName": "Adrastea",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; sourced PCK ellipsoid axes."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

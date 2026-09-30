@@ -1,26 +1,26 @@
-import { parseDatasetLens } from './prepared-panel-content.mts';
+import { parseDatasetControl } from './prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
-import type { PreparedVolumeLensBank } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import type { PreparedVolumeDatasetBank } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 import type { LineageSource } from '@cssearth/objects/provenance';
 
-/** The shell consumes the same lens shape for surfaces and prepared volumes. */
+/** The shell consumes the same dataset shape for surfaces and prepared volumes. */
 export function parsePreparedVolumePresentation(input: unknown,
-  bank: Pick<PreparedVolumeLensBank, 'id' | 'defaultLens'> & { lenses: readonly { id: string }[] },
-  sources: readonly Pick<LineageSource, 'lensId'>[]) {
-  const value = sourceObject(input, ['schema', 'objectId', 'controls', 'defaultLens']);
-  if (value.schema !== 'cssearth-volume-presentation@1' || value.objectId !== bank.id)
+  bank: Pick<PreparedVolumeDatasetBank, 'id' | 'defaultDataset'> & { datasets: readonly { id: string }[] },
+  sources: readonly Pick<LineageSource, 'datasetId'>[]) {
+  const value = sourceObject(input, ['schema', 'objectId', 'controls', 'defaultDataset']);
+  if (value.schema !== 'cssearth-volume-presentation@2' || value.objectId !== bank.id)
     throw new TypeError('Prepared volume presentation has a different owner.');
-  const controls = sourceArray(value.controls, parseDatasetLens);
-  const defaultLens = sourceId(value.defaultLens);
-  sourceUnique(controls.map(lens => lens.id), 'volume presentation lens');
-  if (defaultLens !== bank.defaultLens || controls.length !== bank.lenses.length
-    || controls.some(lens => !bank.lenses.some(prepared => prepared.id === lens.id)))
-    throw new TypeError('Prepared volume presentation does not match its rendered lenses.');
-  for (const lens of controls) {
-    if (!sources.some(source => source.lensId === lens.id))
-      throw new TypeError(`Missing dataset sources: ${bank.id}/${lens.id}.`);
-    if (!lens.thumbnailUrl || !lens.texture || lens.texture.width <= 0 || lens.texture.height <= 0)
-      throw new TypeError(`Missing dataset preview: ${bank.id}/${lens.id}.`);
+  const controls = sourceArray(value.controls, parseDatasetControl);
+  const defaultDataset = sourceId(value.defaultDataset);
+  sourceUnique(controls.map(dataset => dataset.id), 'volume presentation dataset');
+  if (defaultDataset !== bank.defaultDataset || controls.length !== bank.datasets.length
+    || controls.some(dataset => !bank.datasets.some(prepared => prepared.id === dataset.id)))
+    throw new TypeError('Prepared volume presentation does not match its rendered datasets.');
+  for (const dataset of controls) {
+    if (!sources.some(source => source.datasetId === dataset.id))
+      throw new TypeError(`Missing dataset sources: ${bank.id}/${dataset.id}.`);
+    if (!dataset.thumbnailUrl || !dataset.texture || dataset.texture.width <= 0 || dataset.texture.height <= 0)
+      throw new TypeError(`Missing dataset preview: ${bank.id}/${dataset.id}.`);
   }
-  return { objectId: bank.id, controls: [...controls], defaultLens };
+  return { objectId: bank.id, controls: [...controls], defaultDataset };
 }

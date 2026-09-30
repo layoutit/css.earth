@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "betelgeuse-matisse-2020-02-continuum",
@@ -32,7 +32,7 @@
       "coverage": "Posterior-mean maximum-entropy image convolved to the 4 milliarcsecond beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 8 and 19 February 2020. The interferometric beam is 4 milliarcseconds. Reduced chi-squared 0.35 on squared visibilities and 1.12 on closure phases.",
       "width": 128,
       "height": 128,
-      "lensId": "matisse",
+      "datasetId": "matisse",
       "label": "MATISSE reconstruction",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1053,7 +1053,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -1071,22 +1071,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "betelgeuse-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield"
       ]
     },
     {
@@ -1134,7 +1118,7 @@
       "redistribution": "One archived spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -1157,7 +1141,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -1188,7 +1172,7 @@
       "redistribution": "One archived spectrum or catalogue file, with citation",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -6479,7 +6463,7 @@
       "coverage": "Posterior-mean maximum-entropy image convolved to the 3 mas beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 3 to 15 December 2018. Reduced chi-squared 1.62 on squared visibilities and 3.03 on closure phases.",
       "width": 128,
       "height": 128,
-      "lensId": "matisse-2018-12",
+      "datasetId": "matisse-2018-12",
       "label": "MATISSE December 2018",
       "sourceBinding": {
         "kind": "catalogued",
@@ -6523,7 +6507,7 @@
       "coverage": "Posterior-mean maximum-entropy image convolved to the 3.1 mas beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 14, 18 and 27 December 2020. Reduced chi-squared 0.53 on squared visibilities and 1.77 on closure phases.",
       "width": 128,
       "height": 128,
-      "lensId": "matisse-2020-12",
+      "datasetId": "matisse-2020-12",
       "label": "MATISSE December 2020",
       "sourceBinding": {
         "kind": "catalogued",
@@ -6549,7 +6533,7 @@
       "redistribution": "Catalogue rows retained unchanged with their citation.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -6647,7 +6631,7 @@
       "generator": "packages/bake/authoring/betelgeuse/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the lens's palette and percentile stretch."
+        "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the dataset's palette and percentile stretch."
       }
     },
     {

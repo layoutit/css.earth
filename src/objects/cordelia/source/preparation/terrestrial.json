@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "cordelia",
   "displayName": "Cordelia",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU/WGCCRE Cordelia pole and prime meridian from PCK706."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

@@ -10,13 +10,13 @@ WASP-76 is a metal-rich F7 star, 1.46 solar masses, 189 parsecs away. Its giant 
 - **Limb:** the quadratic law Claret (2017, A&A 600, A30) computes from PHOENIX models for the TESS band, read at the paper's 6,329 K and log g 4.196: u1 0.329, u2 0.222. The table gives only solar metallicity for those models; the star is at [Fe/H] +0.37. A model, stated as one.
 - **Rotation:** only the angle between the spin axis and the orbit on the sky is measured, 61.28°. The display axis is celestial north in the plane of the sky (`source/preparation/rotation.json`).
 
-Catalogue colour: #f8f3ff, this lens's prepared colour.
+Catalogue colour: #f8f3ff, this dataset's prepared colour.
 
 ## Evidence
 
 Run of 2026-09-23 (this version):
 
-- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour lens's prepared colour.
+- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour dataset's prepared colour.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places WASP-76 and WASP-76b in one system.
 
 ## Known problems

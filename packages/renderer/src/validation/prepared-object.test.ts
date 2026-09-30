@@ -23,16 +23,16 @@ test('external transport cannot silently omit prepared activation ownership', ()
 test('Tuttle transport preserves selection ranges and rejects incomplete or invalid picking banks', async () => {
   const original = JSON.parse(await readFile(new URL('../../../../src/objects/comet-8p/prepared/runtime.json', import.meta.url), 'utf8'));
   const parsed = parsePreparedObjectRuntime(original);
-  assert.deepEqual(parsed.surfaceHit?.lensRanges, [
-    {lensId: 'model', start: 0, count: 1000}, {lensId: 'arecibo', start: 1000, count: 1000},
+  assert.deepEqual(parsed.surfaceHit?.datasetRanges, [
+    {datasetId: 'model', start: 0, count: 1000}, {datasetId: 'arecibo', start: 1000, count: 1000},
   ]);
   for (const mutate of [
-    (ranges: {lensId: string; start: number; count: number}[]) => ranges.pop(),
-    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[1]!.lensId = 'model'; },
-    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[1]!.count = 1001; },
-    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[0]!.start = -1; },
+    (ranges: {datasetId: string; start: number; count: number}[]) => ranges.pop(),
+    (ranges: {datasetId: string; start: number; count: number}[]) => { ranges[1]!.datasetId = 'model'; },
+    (ranges: {datasetId: string; start: number; count: number}[]) => { ranges[1]!.count = 1001; },
+    (ranges: {datasetId: string; start: number; count: number}[]) => { ranges[0]!.start = -1; },
   ]) {
-    const input = structuredClone(original); mutate(input.surfaceHit.lensRanges);
+    const input = structuredClone(original); mutate(input.surfaceHit.datasetRanges);
     assert.throws(() => parsePreparedObjectRuntime(input), /surface|duplicate/);
   }
 });
@@ -41,10 +41,10 @@ test('actual prepared Mercury and Venus documents preserve every JSON value and 
   for (const original of originals) {
     const parsed = parsePreparedObjectRuntime(original);
     assert.equal(parsed, original);
-    assert.equal(parsed.schema, 'cssearth-object-runtime@4');
+    assert.equal(parsed.schema, 'cssearth-object-runtime@5');
   }
   assert.equal('heliocentricView' in record(originals[0], 'Mercury runtime'), false, 'the shared universe draws the solar system');
-  assert.equal(parsePreparedObjectRuntime(originals[1]).controls.lenses?.defaultLens, 'clouds');
+  assert.equal(parsePreparedObjectRuntime(originals[1]).controls.datasets?.defaultDataset, 'clouds');
 });
 
 test('node parents, scene ancestry, property references and retained targets are validated', () => {
@@ -119,17 +119,17 @@ test('executable values, symbols, nonfinite numbers and cycles are rejected with
   }
 });
 
-test('a body without lenses validates both fixed and toggle-selected presentations', async () => {
+test('a body without datasets validates both fixed and toggle-selected presentations', async () => {
   const original = JSON.parse(await readFile(new URL('../../../../src/objects/haumea/prepared/runtime.json', import.meta.url), 'utf8'));
   parsePreparedObjectRuntime(original);
   const input = structuredClone(original);
-  // Exercise an absent capability independently of the body's current lenses.
-  input.controls.lenses = null;
+  // Exercise an absent capability independently of the body's current datasets.
+  input.controls.datasets = null;
   input.variants = [{ ...input.variants[0], when: {} }];
-  assert.equal(parsePreparedObjectRuntime(input).controls.lenses, null);
-  input.variants[0].when.lensId = 'model';
-  assert.throws(() => parsePreparedObjectRuntime(input), /declared lens capability/);
-  delete input.variants[0].when.lensId;
+  assert.equal(parsePreparedObjectRuntime(input).controls.datasets, null);
+  input.variants[0].when.datasetId = 'model';
+  assert.throws(() => parsePreparedObjectRuntime(input), /declared dataset capability/);
+  delete input.variants[0].when.datasetId;
   input.controls.settings.controls = [{ kind: 'toggle', name: 'shadows', label: 'Shadows', checked: true }];
   input.variants = [false, true].map(shadows => ({ ...structuredClone(original.variants[0]), when: { shadows },
     writes: [...original.variants[0].writes, { kind: 'class', target: -1, name: 'test-shadows', value: shadows }] }));
@@ -156,7 +156,7 @@ test('prepared destination roll is optional and rejects non-finite or nonnumeric
 });
 
 
-test('prepared lens transitions require bounded duration and an explicit zoom policy', () => {
+test('prepared dataset transitions require bounded duration and an explicit zoom policy', () => {
   const input = copy(), camera = child(input, 'camera');
   const destination = { controlPitch: camera.defaultControlPitchDegrees,
     controlYaw: camera.defaultControlYawDegrees, zoom: camera.defaultZoom,

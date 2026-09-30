@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 63935. Its orbit and size follow MacDouga
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 9.0588209 d Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): a/R* derived from its semi-major axis 0.083 au and stellar radius 0.9598 solar radii; Scarsdale et al. 2021 (2021AJ....162..215S), via the NASA Exoplanet Archive ps table (pl_refname SCARSDALE_ET_AL__2021): inclination 88.49 degrees Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460269.974997 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-63935's measured colour (#ffefe8, the colour lens of hd-63935 (src/objects/hd-63935/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-63935's measured colour (#ffefe8, the colour dataset of hd-63935 (src/objects/hd-63935/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 63935's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (71, 72, 88), folded onto its orbit. Upper limits and rows without an error are left out.
 
