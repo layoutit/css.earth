@@ -2,8 +2,8 @@ import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from './source-test.ts';
-import { readPreparedObjects } from './index.ts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
+import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 const test = sourceTest();
 

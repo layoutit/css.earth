@@ -16,7 +16,7 @@
 
 - **Photometric trial, 2026-09-13:** a trial with the published Hapke parameters reduced accepted photographic area from 39.52% to 29.73%. Five of six overlap pairs improved, but the running application showed large new grid gaps in photographed depressions. The original photographs remain in use. [Parameters, measurements and limitations](evidence/photometry/trial.json) record the trial; the original paper's H-function approximation remains unverified.
 
-- **Label discovery, 2026-09-12:** the [whole-body discovery check](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/objects/unit/surface-feature-discovery.test.mts) (now [`packages/renderer/src/labels/surface-feature-discovery.test.mts`](../../../packages/renderer/src/labels/surface-feature-discovery.test.mts)) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/objects/unit/surface-feature-discovery.test.mts) (now [`packages/renderer/src/node/labels/surface-feature-discovery.test.mts`](../../../packages/renderer/src/node/labels/surface-feature-discovery.test.mts)) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
 
 - The radial projection preserves observed-versus-estimated classification at all 17,518 source plate centers; this finite check is not an exhaustive subpixel boundary proof.
 
