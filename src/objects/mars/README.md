@@ -47,6 +47,8 @@ The disc is lit by Vincendon's mean surface law (Hapke with w 0.85 and 17° roug
 
 The Imagery tab lists five Mastcam-Z panoramas: Octavia E. Butler Landing (sols 3–11), Van Zyl Overlook (53–64), Three Forks sample depot (690–692), Belva crater (789–791) and Bright Angel (1178). Their list is [`source/panoramas/panoramas.json`](source/panoramas/panoramas.json); the images are manifest inputs restored from their ASU links.
 
+![Mars with the Imagery tab open on Van Zyl Overlook, its row pressed and its credit below the list](evidence/panoramas/imagery-van-zyl-overlook.webp)
+
 - **Projection.** ASU states that most images are "a simple cylindrical projection, with 0° azimuth (due north …) in the center" and "typically" +10° at the top. The preparation reads each image with one scale in both axes, the width spanning 360°, north in the middle and +10° at the top row. The measured spans are 77° to 100° of elevation, whole degrees, as one scale predicts.
 - **Placement.** Each panorama stands where the rover's last localised drive on or before its first sol left it (PLACES `m2020_best_tactical.csv`); before the first drive, at the origin of that drive's site frame. A drive during the panorama's sols stops the preparation.
 - **Delivery.** Each image is resampled bilinearly into the six 2048-pixel faces of a sky cube (about 23 pixels a degree) in the lossy lane, 1.2 to 2 MB a panorama, loaded only when opened. The standpoints are also point features (`PN`) in the feature catalogue.
