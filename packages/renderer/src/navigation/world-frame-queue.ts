@@ -1,3 +1,4 @@
+import { opacityClockFor, type OpacityClock, type OpacityWindow } from '../stars/opacity-clock.js';
 import type { WorldFrameRequest } from './world-frame-presenter.js';
 
 export interface PreparedWorldFrame {
@@ -9,7 +10,8 @@ export interface QueuedRequest extends WorldFrameRequest { cancelled?(): void; p
 /** Complete views cross the worker boundary together. New input replaces only
  * the pending request; normal motion never starves an already planned frame. */
 export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => Promise<PreparedWorldFrame>,
-  clock = { request: (callback: FrameRequestCallback) => requestAnimationFrame(callback), cancel: (id: number) => cancelAnimationFrame(id) }) {
+  /** The document's one frame clock (opacity-clock.ts) by default. */
+  clock: Pick<OpacityClock, 'request' | 'cancel'> = opacityClockFor(globalThis as unknown as OpacityWindow)) {
   let destroyed = false;
   let running: QueuedRequest | null = null;
   let latest: QueuedRequest | null = null;

@@ -15,7 +15,7 @@ import { STYLE_WRITES_LOGGER } from './ios-capture.mts';
 const ALLOWED = [
   / \{ (transform|opacity) \}$/u,
   / \[points\]$/u, / \{ stroke-opacity \}$/u, / <\+polyline>$/u, // orbit strokes
-  / \{ box-shadow \}$/u, // batched star points
+  / \[d\]$/u, // batched star points: one SVG path per colour
   /^div\.object-input-surface \{ cursor \}$/u, // the release itself sets the grab cursor, once
 ];
 

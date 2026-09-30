@@ -137,7 +137,9 @@ test('a screen budget draws an even, stable share of the visible dots and refuse
   const drawn = () => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
   field.publish(at(0)); await new Promise(resolve => setTimeout(resolve, 0));
   field.publish(at(0.001)); field.publish(at(0.002));
-  expect(drawn(), 'the first frame counts, the next ones keep a quarter').toBeGreaterThan(200);
+  // The share is detail: while the camera moves the paint is warped, and the pause repaints with the share.
+  await new Promise(resolve => setTimeout(resolve, 200));
+  expect(drawn(), 'the first frame counts, the pause keeps a quarter').toBeGreaterThan(200);
   expect(drawn()).toBeLessThan(300);
   const kept = drawn();
   field.publish(at(0.003));
@@ -158,14 +160,36 @@ test('zooming out draws a shrinking prefix of the catalogue', async () => {
   expect(drawnPointCount(165, 1000 * kpc), 'a sparse catalogue keeps every point').toBe(165);
 });
 
-test('translucent catalogues preserve per-dot alpha accumulation', async () => {
+test('a translucent catalogue draws its dots as paths with their alpha', async () => {
   const {document} = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = mountCataloguePoints({host, url:'/translucent.json', fetchJson:async()=>bank});
   points.publish({world:{referenceFrame:'sun-icrf',epochJdTt:2451545,
     pose:{positionM:[0,0,0],orientationXyzw:[0,0,0,1]}},
     viewport:{focalPixels:100,principalOffsetPixels:[0,0],widthPixels:1000,heightPixels:800}});
   await new Promise(resolve=>setTimeout(resolve,0));
-  expect(points.root.querySelectorAll('path')).toHaveLength(0);
-  expect([...points.root.querySelectorAll('i')].some(node=>node.style.boxShadow.includes('#ffe2a8b3'))).toBe(true);
+  expect(points.root.querySelector('i')).toBeNull();
+  expect([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('fill')==='#ffe2a8b3'&&path.getAttribute('d'))).toBe(true);
   points.destroy();
+});
+
+test('dot layers switching on show one a frame, so their first paints never share a frame', async () => {
+  const { document, window } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const frames: FrameRequestCallback[] = [];
+  Object.assign(window, { requestAnimationFrame: (callback: FrameRequestCallback) => frames.push(callback), cancelAnimationFrame() {}, performance: { now: () => 0 } });
+  const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
+  const stacked = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, levels: [
+    { points: 1, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1, appearUnits: [10, 1] }, { points: 1, appearUnits: [1, .01] }] } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => stacked });
+  const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  field.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 1] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const layers = [...field.root.children] as HTMLElement[];
+  expect(layers).toHaveLength(2);
+  const hidden = () => layers.filter(layer => layer.style.visibility === 'hidden').length;
+  expect(hidden()).toBe(2);
+  frames.shift()!(0);
+  expect(hidden()).toBe(1);
+  frames.shift()!(16);
+  expect(hidden()).toBe(0);
+  field.destroy();
 });

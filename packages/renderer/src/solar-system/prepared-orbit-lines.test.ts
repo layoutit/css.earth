@@ -46,16 +46,17 @@ test('strokes share one svg per world context, name each group by its body and j
   expect(groupB!.dataset.contextPlacement).toBe('approximate');
   expect(a.presentation.dataset).toBe(groupA!.dataset); expect(b.presentation.dataset).toBe(groupB!.dataset);
   a.publish([chord(0, 0, 10, 0, 1), chord(10, 0, 10, 10, 1), chord(20, 20, 30, 20, .5), chord(30, 20, 30, 30, .3)]);
-  // Polylines are created in ascending opacity level: 0.3 → 5/16, 0.5 → 8/16, 1 → 16/16.
+  // Polylines are created in ascending opacity level: a weight takes the level at or above it.
+  const level = (weight: number) => Math.ceil(weight * ORBIT_OPACITY_LEVELS) / ORBIT_OPACITY_LEVELS;
   const lines = groupA!.children;
   expect(lines.map(line => line.tagName)).toEqual(['polyline', 'polyline', 'polyline']);
   expect(lines.map(line => line.getAttribute('points'))).toEqual(['30,20 30,30', '20,20 30,20', '0,0 10,0 10,10']);
-  expect(lines.map(line => Number(line.style.strokeOpacity))).toEqual([5 / ORBIT_OPACITY_LEVELS, 8 / ORBIT_OPACITY_LEVELS, 1]);
+  expect(lines.map(line => Number(line.style.strokeOpacity))).toEqual([level(.3), level(.5), 1]);
   expect(lines.every(line => line.style.opacity === undefined)).toBe(true);
   // Group opacity reaches the compositor as stroke opacity on every run, never as an effect.
   a.presentation.style.opacity = '0.5';
   expect(a.presentation.style.opacity).toBe('0.5');
-  expect(lines.map(line => Number(line.style.strokeOpacity))).toEqual([2.5 / ORBIT_OPACITY_LEVELS, 4 / ORBIT_OPACITY_LEVELS, .5]);
+  expect(lines.map(line => Number(line.style.strokeOpacity))).toEqual([level(.3) / 2, level(.5) / 2, .5]);
   expect(groupA!.style.opacity).toBeUndefined();
   a.presentation.style.opacity = '1';
   expect(groupA!.style.display).toBe('');

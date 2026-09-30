@@ -17,6 +17,7 @@ import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { readPageDatasets, selectedPageDataset } from './page-datasets.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
+import { navigationHref } from './navigation/navigation-history.mts';
 
 /** The view the page `page` shows its image mesh in: its selected dataset's (page-datasets.mts), read from the address. The
  * shell presents the cards (object-shell-client.mts); a page without datasets shows its mesh cut open. */
@@ -25,7 +26,7 @@ let cards: ReturnType<typeof readPageDatasets> | null = null;
 const pageDatasets = () => cards ??= readPageDatasets(document);
 function meshView(page: string): string {
   const datasets = pageDatasets().find(candidate => candidate.page === page);
-  return datasets ? datasets.views.get(selectedPageDataset(location.href, datasets))! : 'cutaway';
+  return datasets ? datasets.views.get(selectedPageDataset(navigationHref(window), datasets))! : 'cutaway';
 }
 import { isOverviewPage, withOverviewScope } from './navigation/navigation-scope.mts';
 

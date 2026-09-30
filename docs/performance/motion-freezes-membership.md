@@ -45,10 +45,11 @@ gesture.
 - **Signal:** `src/renderers/css/navigation/camera-motion-signal.ts` tells whether the camera moves and whether it
   coasts. It is announced as `objectmotionchange` `{ active, coasting }` on the input surface. The drag controls report
   `drag`, `inertia` and `fly-to`; the wheel zoom reports `zoom` and `glide`.
-- **Pacer:** `src/renderers/css/rendering/settle-pacer.ts` holds deferred work, either while the camera moves or only
-  while it coasts. It then runs the work a slice per frame. A slice starts at 16 units and can grow to 64; after a frame
-  over 25 ms the pacer waits a frame and halves the slice. Leaf-box steps use it and hold during any motion, because a
-  resized leaf repaints.
+- **Pacer:** a document has one pacer (`packages/renderer/src/rendering/settle-pacer.ts`), on its one frame clock
+  (`packages/renderer/src/stars/opacity-clock.ts`), and one budget a frame that every owner shares in turn. A frame
+  starts at 16 units and can grow to 64; after a frame over 25 ms the pacer waits a frame and halves it. Each owner says
+  what holds its work: any motion (leaf-box steps and the seam outset, because a resized leaf repaints), only a coast, or
+  nothing (a mesh's reveal, a mount's activation and a body's feature names, which land during a zoom or a flight).
 
 ## Mesh detail survives input reversals
 
@@ -77,7 +78,7 @@ These change paint every frame on purpose, and each has a budget:
 | Exception | What changes | Budget | Why it stays |
 | --- | --- | --- | --- |
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
-| Batched star points (`universe/batched-spatial-points.ts`) | SVG circle paths for opaque catalogue palettes; `box-shadow` for translucent or distance-dependent stellar photometry | One retained path per prepared colour, or 8 shadow nodes | Camera motion changes paint, never DOM shape; catalogue dots avoid the native shadow renderer |
+| Batched star points (`universe/batched-spatial-points.ts`) | SVG circle paths, one per prepared paint colour with its alpha byte | One retained path per colour | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 

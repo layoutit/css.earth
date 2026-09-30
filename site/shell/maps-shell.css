@@ -437,8 +437,8 @@
 .object-result-row > .object-distance { color: var(--shell-text-secondary); }
 /* Object results share one row component in search and system cards: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
    positions rows on a 56 px pitch (48 px row, 8 px gap; `site/search/catalogue-window.mts`). */
-.object-result-row.object-thumbnail-leading,
-.object-result-row.object-thumbnail-leading:has(.object-dataset-detail) {
+.object-observation-control.object-result-row.object-thumbnail-leading,
+.object-observation-control.object-result-row.object-thumbnail-leading:has(.object-dataset-detail) {
   grid-template-columns: 40px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
@@ -446,7 +446,7 @@
   row-gap: 2px;
   height: 48px;
 }
-.object-result-row.object-thumbnail-leading::after { display: none; }
+.object-observation-control.object-result-row.object-thumbnail-leading::after { display: none; }
 /* A flat result list: no tree connector running down beside the previews. */
 #object-category-results .object-list::before { content: none; }
 /* The results fill the drawer's width with the card's inline padding; a phone's column drawer otherwise shrinks them to
@@ -458,7 +458,7 @@
   min-height: min(224px, 55dvh);
   padding-inline: var(--explorer-card-padding-inline-start, 16px) var(--explorer-card-padding-inline-end, 16px);
 }
-.object-result-row.object-thumbnail-leading > .object-dataset-icon {
+.object-observation-control.object-result-row.object-thumbnail-leading > .object-dataset-icon {
   grid-column: 1;
   grid-row: 1 / span 2;
   display: grid;
@@ -466,7 +466,7 @@
   width: 40px;
   height: 40px;
 }
-.object-result-row.object-thumbnail-leading > .object-dataset-label {
+.object-observation-control.object-result-row.object-thumbnail-leading > .object-dataset-label {
   grid-column: 2;
   grid-row: 1;
   overflow: hidden;
@@ -474,7 +474,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.object-result-row.object-thumbnail-leading > .object-dataset-detail {
+.object-observation-control.object-result-row.object-thumbnail-leading > .object-dataset-detail {
   grid-column: 2;
   grid-row: 2;
   justify-self: start;

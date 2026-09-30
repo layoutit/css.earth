@@ -9,7 +9,7 @@ import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
 import { createTextureTileWriter, selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
-import { createLeafBoxWriter } from './prepared-leaf-box-direct.js';
+import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
 import { createSettlePacer } from './settle-pacer.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
@@ -345,16 +345,19 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
     ? [[binding as PreparedViewBinding, createLeafBoxBlocks({ ...binding, groups: binding.groups },
       name => readStep(binding.groups![name]![0]!, binding.property) || readStep(binding.target, binding.property),
       (name, value) => { for (const leaf of binding.groups![name]!) writeStep(leaf, binding.property, value); })] as const] : []));
-  // A body-wide step property (the surface seam outset) sits on an ancestor of every leaf, so a change restyles the whole
-  // mesh: like the leaf-box steps it switches only once the camera has stopped (motion-freezes-membership.md). The first
-  // value is written at once.
+  // A body-wide step property (the surface seam outset) reaches every leaf, so a change restyles the whole mesh: like the
+  // leaf-box steps it switches only once the camera has stopped (motion-freezes-membership.md), and the seam outset of
+  // leaf boxes lands a slice of leaves per frame. The first value is written at once.
   const bodySteps = new Map(definition.viewBindings.flatMap(binding => binding.kind === "silhouette-step-property" && !binding.groups
     ? [[binding as PreparedViewBinding, (() => {
       let wanted: string | null = null;
-      const pacer = createSettlePacer((_budget, moving) => {
-        if (moving || wanted === null || readStep(binding.target, binding.property) === wanted) return 0;
+      const paced = leafBoxes.owns(binding.target, binding.property) && binding.property === SEAM_OUTSET;
+      const pacer = createSettlePacer((budget, moving) => {
+        if (moving || wanted === null) return 0;
+        if (paced) { const leaves = leafBoxes.drainOutset(wanted, budget); styleWrites += leaves; return leaves; }
+        if (readStep(binding.target, binding.property) === wanted) return 0;
         writeStep(binding.target, binding.property, wanted); return 1;
-      }, { frame: globalThis.requestAnimationFrame?.bind(globalThis) ?? null });
+      });
       return (value: string, detached: boolean) => {
         if (detached) {
           wanted = value;

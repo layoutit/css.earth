@@ -958,9 +958,15 @@ export const STYLE_WRITES_LOGGER = `(() => {
       const name = record.attributeName;
       if (name === 'style') {
         const before = parse(record.oldValue), after = parse(element.getAttribute('style'));
-        for (const [property, value] of after) if (before.get(property) !== value) bump(who + ' { ' + property + ' }', value, at, inMotion);
-        for (const property of before.keys()) if (!after.has(property)) bump(who + ' { ' + property + ' } removed', '', at, inMotion);
-      } else if (record.oldValue !== element.getAttribute(name)) {
+        let changed = false;
+        for (const [property, value] of after) if (before.get(property) !== value) { changed = true; bump(who + ' { ' + property + ' }', value, at, inMotion); }
+        for (const property of before.keys()) if (!after.has(property)) { changed = true; bump(who + ' { ' + property + ' } removed', '', at, inMotion); }
+        // A style write that changed nothing: a missing dedup (WebKit queues no record for a same-value CSSOM write).
+        if (!changed) bump(who + ' { same value }', '', at, inMotion);
+      } else if (record.oldValue === element.getAttribute(name)) {
+        // An attribute set to the value it had: a missing dedup, still a mutation and a style invalidation.
+        bump(who + ' [' + name + '] same value', record.oldValue, at, inMotion);
+      } else {
         const value = element.getAttribute(name);
         bump(who + ' [' + name + ']', value, at, inMotion);
         // Preserve the order of state changes: aggregated first/last times hide an intermediate
