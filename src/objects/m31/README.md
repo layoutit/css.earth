@@ -115,7 +115,7 @@ al. (77° ± 0.5°), Chemin et al. (74.3°, 37.7°) and Dorman et al. (PA 44.4°
   quoted above.
 - Bytes: 170 layer images, 3.09 MB (3.56 MB before). The midplane texture uses WebP alpha quality 60: re-encoded at 60, it
   shows no pixel differences under pixelmatch at threshold 0.1 against lossless alpha, at half the bytes.
-- Tests: `tests/image-layers/disc.test.mts`, `foreground.test.mts` and `bulge.test.mts` pin the placement, the star and
+- Tests: `packages/bake/src/image-layers/disc.test.mts`, `foreground.test.mts` and `bulge.test.mts` pin the placement, the star and
   companion removal and the bulge model.
 
 ## Known problems

@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { expect, it } from 'vitest';
 import { requireRecord, requireString } from '../../index.js';
 import { projectRoot } from '../project-root.js';
-import { assertPinnedInputs, pinnedOracleVersions, readOracleFixture } from './fixture.mts';
+import { assertPinnedInputs, pinnedOracleVersions, readOracleInput, readOracleFixture } from './fixture.mts';
 
 const root = projectRoot(import.meta.url);
 
@@ -81,4 +81,13 @@ it('Python and TypeScript resolve relocated oracle fixtures to the same current 
     expect(absoluteName).toBe(path);
     expect(logical, name).toEqual(absolute);
   }
+});
+
+
+it('the historical float32 input resolves after its global fixture copy is removed', async () => {
+  const fixture = await readOracleFixture('fits/core.json');
+  const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/float32.fits');
+  expect(input).toBeDefined();
+  if (!input) throw new Error('Missing float32 oracle input.');
+  expect(await readOracleInput(input)).toEqual(await readFile(resolve(root, 'packages/fits/src/node/fixtures/fits/float32.fits')));
 });

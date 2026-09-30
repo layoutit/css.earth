@@ -16,7 +16,7 @@ Catalogue colour: #f1efff, this lens's prepared colour.
 
 Run of 2026-09-23 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour lens's prepared colour.
+- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour lens's prepared colour.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places WASP-121 and WASP-121b in one system.
 
 ## Known problems

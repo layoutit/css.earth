@@ -56,7 +56,7 @@ approximate.
 - [Dots from the photograph](evidence/2026-09-29/dots-from-photograph.jpg): the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
 - The prepared bank's `approximation.limitations` records the foreground, colour-tie and saturation counts quoted above.
 - Bytes: 150 layer images, 1.47 MB.
-- Tests: `tests/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
+- Tests: `packages/bake/src/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
 
 ## Known problems
 

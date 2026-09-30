@@ -193,7 +193,10 @@ function audit(snapshot: Snapshot): Audit {
   const docs = [...known].filter(path => path.startsWith('docs/')).sort();
   const guides = new Set(docs.filter(path => path.endsWith('.md')));
   const illustrations = new Set(docs.filter(path => path.startsWith('docs/images/') && /\.(png|jpg|jpeg|webp|avif|gif|svg)$/i.test(path)));
-  for (const file of docs) if (!guides.has(file) && !illustrations.has(file)) errors.push({file, reason: 'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner'});
+  // Owner-designated documentation evidence beside the virtual telescope guide (Wave T).
+  const projectionEvidence = new Set(['docs/fixtures/telescope-projection/europa-navigation.json',
+    'docs/fixtures/telescope-projection/europa-oracle.json', 'docs/fixtures/telescope-projection/europa-registration.json']);
+  for (const file of docs) if (!guides.has(file) && !illustrations.has(file) && !projectionEvidence.has(file)) errors.push({file, reason: 'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner'});
   const index = 'docs/README.md';
   if (!guides.has(index)) errors.push({file: index, reason: 'missing documentation index'});
   const pending = guides.has(index) ? [index] : [];

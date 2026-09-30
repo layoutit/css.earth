@@ -35,7 +35,8 @@ function files(directory: string): string[] {
 }
 function policy(path: string): Policy {
   // `tests/` holds test fixtures and helpers only; a runtime module that imports one is still checked through its own closure.
-  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('tests/')) return 'test';
+  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('tests/') || path.startsWith('site/test/fixtures/') ||
+      path.startsWith('src/platform/fixtures/') || path.startsWith('src/objects/earth/fixtures/')) return 'test';
   // `@cssearth/telescope-cli` is the telescope command, preparation tooling that came out of the retired `tools/` folder before it
   // became a package: it imports the bake by design, as that folder did.
   // `.github/scripts` holds the CI and repository checks: tooling, as `tools/` was. `site/build/` is site-owned preparation (build

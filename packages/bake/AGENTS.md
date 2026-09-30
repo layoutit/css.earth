@@ -102,7 +102,7 @@ its validators accept); the renderer never imports the bake.
 - `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
   package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
   It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;
-  its test is `tests/preparation/solar-geometry.test.mts`.
+  its test is `src/platform/solar-geometry.test.mts`.
 - `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the prepared focus objects and scene distances
   the catalogue and search destinations are built from, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites, and the navigation preparation (`prepare-navigation.ts`, with the Sun, black-hole,
@@ -234,7 +234,7 @@ its validators accept); the renderer never imports the bake.
     Akatsuki UVI Level 3b grid), with the solar geometry the host passes in. It imports `raster`, `objects/color`,
     `objects/geometry`, `objects/raster`, `objects/scene`, `objects/sources`, `objects/stellar` and the observation,
     shape-model and terrestrial layers. It is a topic of its own, outside `objects/layers/observation`, whose code the nebula
-    lab's compiler identity reaches. Its moved tests are in `src/objects/interpretation/`; deferred suites remain in `tests/objects/interpretation/`.
+    lab's compiler identity reaches. Its moved tests are in `src/objects/interpretation/`; the solar-geometry adapter suites are in `../../src/platform/{equirectangular-illustration,interpret-source-verification}.test.mts`.
   - `objects/host-adapters`: what the authored preparation passes the scene and presentation compilers
     (`loadGeometryAdapters`, `presentationHostAdapters`), each bound to the solar geometry the host passes in. It imports
     `presentation`, `scene`, `objects/scene` and `objects/layers/terrestrial`.
