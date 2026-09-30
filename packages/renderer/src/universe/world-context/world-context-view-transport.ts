@@ -1,4 +1,8 @@
-import type { WorldBodyPresentation } from './world-context-planner.js';
+import type { WorldBodyPresentation, WorldContextView } from './world-context-planner.js';
+
+/** A view whose bodies are already columns (packWorldBodies): the retained world context packs its bodies straight from
+ * their own state, so a frame builds no object per body. */
+export type PackedWorldContextView = Omit<WorldContextView, 'bodies'> & { readonly bodyColumns: Float64Array };
 
 /** Per-body presentation crosses the worker boundary as one transferred column
  * block instead of hundreds of structured-cloned objects every frame. Optional

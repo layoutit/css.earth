@@ -4,7 +4,8 @@ import { ContextChange, createWorldContextFrameReceiver } from './world-context/
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
-import type { PlannedWorldContext, WorldContextView } from './world-context/world-context-planner.js';
+import type { PlannedWorldContext } from './world-context/world-context-planner.js';
+import { packWorldBodies, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -293,7 +294,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (!destroyed) refresh();
     });
   };
-  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []): WorldContextView => {
+  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []): PackedWorldContextView => {
       if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt) {
         throw new TypeError('Context and camera reference frames differ.');
       }
@@ -323,9 +324,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         preserveCommittedAnnotations: rotationPhase === 'released',
         labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
-        bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
-          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
-          labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
+        // Each body's presentation, packed straight from its entry for the planner's worker.
+        bodyColumns: packWorldBodies(bodies) };
   };
   const layer = Object.freeze({ root,
     /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */
