@@ -5,6 +5,7 @@
 export * from './projective-layout.ts';
 export * from './leaf-box.ts';
 export * from './leaf-box-records.ts';
+export * from './clean-leaves.ts';
 export * from './prepared-node-tree.ts';
 export * from './prepared-cssom.ts';
 export * from './prepared-activation-groups.ts';
