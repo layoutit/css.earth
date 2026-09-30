@@ -172,7 +172,7 @@ lanes are folders: `test:packages` runs `packages/`, and `test:site` runs `site/
 A test that needs an input CI does not restore skips through `sourceTest()`.
 Tests stay beside their owners.
 
-The required universe matrix runs the site lane and the packages lane in two shards (`TEST_SHARD`); all must pass. The preparation gate checks publication. Source
+The required universe matrix runs the two lanes; both must pass. The preparation gate checks publication. Source
 catalogue reconciliation and broad bake reproduction run in the separate advisory
 audit. Native tests needing unavailable sources, prepared outputs or toolchains
 can skip through `@cssearth/objects/node/source-test`; a pass with skips does not prove
