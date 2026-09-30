@@ -15,16 +15,22 @@ export function parseAtmosphereResponse(value: unknown) {
   parse(value, json, 'atmosphere response data');
   return parse(value, response, 'atmosphere response');
 }
-const murTile = object({row: number, col: number, url: string, actualTime: union(string, nil), actualLayer: union(string, nil), empty: boolean, bytes: number});
-const murReceipt = object({schema: literal('cssearth-mur-gibs@1'), date: string, complete: boolean, grid: object({level: number}), tiles: array(murTile),
-  checked: string, baseline: string, sourceBytes: number, archiveBytes: number,
+/** The native 1 km grid of one MUR analysis date: 80 × 40 tiles of 512 pixels. */
+export const murTileCount = 3200;
+// One analysis date's acquisition. Each tile's URL follows from the date and its row and column; each tile with
+// observations attested that date and analysis in its response headers when it was acquired.
+const murReceipt = object({schema: literal('cssearth-mur-gibs@2'), date: string, grid: object({level: number}),
+  tiles: object({bytes: array(number), empty: array(number)}), checked: string, baseline: string, sourceBytes: number, archiveBytes: number,
   mosaic: object({width: number, height: number, sourceWidth: number, sourceHeight: number, sampling: string, covered: number, missing: number})});
-export const parseMurReceipt = (value: unknown) => parse(value, murReceipt, 'MUR receipt');
+export function parseMurReceipt(value: unknown) {
+  const receipt = parse(value, murReceipt, 'MUR receipt');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(receipt.date) || receipt.tiles.bytes.length !== murTileCount || !receipt.tiles.bytes.every(bytes => Number.isInteger(bytes) && bytes > 0)
+    || !receipt.tiles.empty.every((index, at, all) => Number.isInteger(index) && index >= 0 && index < murTileCount && (at === 0 || index > all[at - 1]!)))
+    throw new TypeError(`MUR receipt ${receipt.date}: needs one positive byte count per tile of the ${murTileCount}-tile grid and ascending empty tile indices.`);
+  return receipt;
+}
 
 const advisory = object({status: string, date: string});
-const coraltemp = object({kind: literal('coraltemp-anomaly'), date: string, baseline: string, checked: string, advisory, filename: string,
-  minimum: number, maximum: number, palette: array(array(number)), missingColor: array(number)});
-export const parseCoraltempRecipe = (value: unknown) => parse(value, coraltemp, 'CoralTemp recipe');
 
 const interiorSource = object({schema: string, qualification: string, sourceUrl: string, sourceId: number, tomographyPath: optional(string),
   layers: array(object({id: string, label: string, outerRadiusKm: number, innerRadiusKm: number, color: string})),

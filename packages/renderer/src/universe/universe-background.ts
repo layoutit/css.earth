@@ -46,6 +46,9 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   backingHost.className = 'prepared-galaxy-backing';
   backingHost.style.cssText = 'position:absolute;inset:0;pointer-events:none';
   const backingEnd = document.createElement('span'); backingEnd.hidden = true; backingHost.appendChild(backingEnd);
+  // Right over the galaxy's own layer and under everything added after it: the image's black square must never hide the
+  // galaxies, clouds or dots drawn later.
+  root.insertBefore(backingHost, end);
   let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
   let volumeLayer: ReturnType<typeof mountPreparedVolumeLod> | null = null;
   const cataloguePoints: ReturnType<typeof mountCataloguePoints>[] = [];
@@ -84,7 +87,6 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // The galaxy is its bulge slices and one flat disc plane at every distance; it has no impostor views.
       volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource }, () => 1);
       lifetime.onDispose(() => volumeLayer?.destroy());
-      root.insertBefore(backingHost, end);
       // Their own layer over the galaxy's: the dots show from just past the Solar System, where the galaxy volume is still clear.
       for (const url of cataloguePointUrls) {
         const points = mountCataloguePoints({ host: root, before: end, url, fetchJson: fetchPreparedJson });

@@ -15,7 +15,7 @@ import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssea
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
-import { DATASET_ROUTES } from '../../../src/platform/dataset-destination.mts';
+import { DATASET_ROUTES } from '@cssearth/objects/provenance';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 

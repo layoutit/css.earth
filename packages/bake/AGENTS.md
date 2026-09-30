@@ -116,8 +116,8 @@ its validators accept); the renderer never imports the bake.
   suites in `src/navigation/`, with the navigation preparation's in `site/test/`.
 - `src/facility-renders/` is published as `@cssearth/bake/facility-renders` (Node only): the illustrative poses of the rendered
   facility models, and the types of the three.js renderer (`render.ts`) that `packages/bake/cli/prepare-facility-renders.mts`
-  bundles from its source into a browser page. The command loads the application's dataset routes from the checkout and passes
-  them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
+  bundles from its source into a browser page. The command imports the canonical dataset routes from
+  `@cssearth/objects/provenance` and passes them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
   not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
   photometric phase charts. It imports `raster`, `runtime-source`, `objects/raster` and `objects/charts`. Its commands are
@@ -252,7 +252,7 @@ its validators accept); the renderer never imports the bake.
     from `site/build/prepare/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
     asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
-    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `packages/bake/authoring/earth/`
+    `objects/content`, as lower topics. Earth's MUR acquisition commands stay in `packages/bake/authoring/earth/`
     for its per-body authoring and read the MUR colour table through `globe/mur-image.ts`; the mantle-tomography extraction script
     (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,

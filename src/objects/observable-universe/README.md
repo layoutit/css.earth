@@ -75,7 +75,7 @@ the page draws it from the same map, limb law and opacities
   the whole sphere from outside seamless across its 450 patches.
 - The registry tests check that the four overviews are `OBJECTS` entries and that zooming out from the Sun walks them in
   their order (`site/test/navigation-ontology.test.mts`, `site/test/overview-context.test.mts`).
-- The [context lineage test](../../../src/platform/context-lineage.test.mts) checks that its products read only its source records.
+- The [context lineage test](../../../site/test/context-lineage.test.mts) checks that its products read only its source records.
 
 ## Known problems
 

@@ -1,7 +1,7 @@
 import { readJsonSource } from '../../../sources/index.ts';
 import { requireString } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import sharp from 'sharp';
 import { parseMurReceipt } from '../source-contract.ts';
 import type { EnsoRecipe } from '../contracts.ts';
@@ -23,11 +23,12 @@ export function parseMurColors(xml: string) {
   return { entries, bins, under: valid[0], over: valid[valid.length - 1] };
 }
 
-export async function verifyPreparedMurImage(sourceDirectory: string, recipe: Pick<EnsoRecipe, "date" | "baseline">) {
-  const receipt = parseMurReceipt(await readJsonSource(join(sourceDirectory, 'science/mur-gibs-receipt.json')));
+/** One date's mosaic, `path` in the source directory, checked against the receipt beside it. */
+export async function verifyPreparedMurImage(sourceDirectory: string, path: string, recipe: Pick<EnsoRecipe, "date" | "baseline">) {
+  const receipt = parseMurReceipt(await readJsonSource(join(sourceDirectory, dirname(path), 'receipt.json')));
   demand(recipe.date === receipt.date && recipe.baseline === '2003–2014' && receipt.baseline === recipe.baseline, 'date or baseline differs');
-  demand(receipt.complete && receipt.tiles.length === 3200 && receipt.grid.level === 6, 'incomplete source grid');
-  const input = await readFile(join(sourceDirectory, 'science/mur-gibs.png'));
+  demand(receipt.grid.level === 6, 'incomplete source grid');
+  const input = await readFile(join(sourceDirectory, path));
   const info = await sharp(input).metadata();
   demand(info.width === 16384 && info.height === 8192, 'prepared source dimensions changed');
   return input;

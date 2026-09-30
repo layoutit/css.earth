@@ -9,7 +9,7 @@ import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
 import { factsheetCitations } from '@cssearth/bake/sources';
 import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
 import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes } from '@cssearth/objects/provenance';
-import { DATASET_ROUTES } from '../platform/dataset-destination.mts';
+import { DATASET_ROUTES } from '@cssearth/objects/provenance';
 
 const citation = { catalogueId: 'radius-table', url: 'https://example.invalid/radii', label: 'Radius table',
   checked: '2026-09-10', path: 'source/review.json', locator: '/references/0' };

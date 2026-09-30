@@ -18,8 +18,6 @@ interface Props {
 const { objectId, datasets, focus = false, page, route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
 const previewUrl = (dataset: NonNullable<ShellProps['datasets']>['controls'][number]) =>
   sidebarThumbnail(thumbnailObjectId, dataset.id)?.url2x ?? dataset.thumbnailUrl;
-const sprite = !focus && datasets.controls.length > 1;
-const spriteColumns = Math.ceil(Math.sqrt(datasets.controls.length));
 // A dataset that names a companion cloud keeps the plates of another dataset, so the body on screen is drawn in that
 // one's scale. Its legend is published beside the cloud's own, or the reader is left with a body nothing explains.
 const borrowedLegend = (dataset: NonNullable<ShellProps['datasets']>['controls'][number]) => {
@@ -30,12 +28,14 @@ const borrowedLegend = (dataset: NonNullable<ShellProps['datasets']>['controls']
   // A dataset that carries the very scale it borrows publishes it once, not twice.
   return JSON.stringify(lender.legend) === JSON.stringify(dataset.legend) ? undefined : lender;
 };
-// A dataset shown as a sequence lists its group once, as its first step; every step's details step to its neighbours.
+// A dataset shown as a sequence lists its group once, as the step it opens on (its first, or its last for a record whose
+// newest date leads); every step's details step to its neighbours.
 type Control = NonNullable<ShellProps['datasets']>['controls'][number];
 const stepMembers = (dataset: Control) => dataset.step ? datasets.controls.filter(candidate => candidate.step?.group === dataset.step!.group) : [];
-const listed = (dataset: Control) => !dataset.step || stepMembers(dataset)[0]?.id === dataset.id;
+const opening = (members: Control[]) => members[0]?.step?.opens === 'last' ? members.at(-1) : members[0];
+const listed = (dataset: Control) => !dataset.step || opening(stepMembers(dataset))?.id === dataset.id;
 const defaultControl = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
-const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.id : defaultControl?.id;
+const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultControl))?.id : defaultControl?.id;
 ---
 <section id={`${objectId}-dataset-list`} class="object-datasets">
   <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} data-drawn-page={page} hidden>
@@ -60,12 +60,12 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
         </select>
       </div>
     <nav class="object-observation-controls" aria-label="Datasets">
-      {datasets.controls.map((dataset, index) => (
+      {datasets.controls.map((dataset) => (
         <div id={`${objectId}-${dataset.id}-option`} class="object-observation-option" data-dataset-option data-system-dataset={dataset.systemDataset ? dataset.id : undefined}
           data-step-group={dataset.step?.group} data-step-autoplay={dataset.step?.autoplay === false ? 'false' : undefined}
           data-step-listed={dataset.step ? String(listed(dataset)) : undefined} hidden={!listed(dataset) || undefined}>
           <button
-            class="object-observation-control object-thumbnail-leading"
+            class="object-observation-control object-thumbnail-leading object-result-row"
             type="submit"
             form={`${objectId}-datasets`}
             name="dataset"
@@ -75,9 +75,9 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
             aria-controls={`${objectId}-${dataset.id}-details`}
             title={dataset.title}
           >
-            {sprite
-              ? <span class="object-dataset-icon" aria-hidden="true" style={`background-image:url(/navigation/dataset-sprites/${objectId}.webp);background-position:-${index % spriteColumns * 14}px -${Math.floor(index / spriteColumns) * 14}px;background-size:${spriteColumns * 14}px ${spriteColumns * 14}px`}></span>
-              : <img class="object-dataset-icon" src={sidebarThumbnail(thumbnailObjectId, dataset.id)?.url2x ?? dataset.thumbnailUrl} width="14" height="14" alt="" loading="lazy" decoding="async" />}
+            <span class="object-dataset-icon object-dataset-round-preview" aria-hidden="true">
+              <img class="object-search-preview" src={previewUrl(dataset)} width="40" height="40" alt="" loading="lazy" decoding="async" />
+            </span>
             <span class="object-dataset-label">{dataset.label}</span>
             {dataset.detail && <span class="object-dataset-detail">{dataset.detail}</span>}
           </button>

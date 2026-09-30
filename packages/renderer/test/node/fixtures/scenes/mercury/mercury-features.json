@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-prepared-surface-features@1",
+  "objectId": "mercury",
+  "features": [
+    {
+      "id": "16386",
+      "name": "Serp Facula",
+      "kind": "point",
+      "type": "Facula",
+      "code": "FA",
+      "diameterKm": 78,
+      "longitudeDeg": 50.94,
+      "latitudeDeg": 3.9,
+      "anchorUnits": [
+        -8908.916,
+        -7229.759,
+        782.176
+      ],
+      "normal": [
+        -0.774688,
+        -0.628675,
+        0.068015
+      ],
+      "radiusUnits": 183.8341,
+      "outline": {
+        "kind": "circle",
+        "center": [
+          -8907.778,
+          -7228.835,
+          782.076
+        ],
+        "east": [
+          115.835,
+          -142.739,
+          0
+        ],
+        "north": [
+          9.708,
+          7.879,
+          183.401
+        ]
+      },
+      "searchNames": [
+        "serp facula"
+      ],
+      "searchContext": "facula",
+      "origin": "Word for snake in Catalan.",
+      "approved": "2025-02-05",
+      "quad": "H-10",
+      "link": "https://planetarynames.wr.usgs.gov/Feature/16386",
+      "credit": "IAU name, 2025",
+      "minimumZoomShare": 0.928
+    }
+  ],
+  "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Mercury centre points",
+  "snapshotDate": "2026-09-11",
+  "sourcePage": "https://planetarynames.wr.usgs.gov/Page/MERCURY/target",
+  "license": "Public domain (United States Government work)",
+  "qualification": "IAU-adopted feature names with Gazetteer centre coordinates and diameters in the Mercury 2000 datum, positive-east longitudes 0\u2013360\u00b0. Centre points only: feature outlines are not included, and the 32 telescopic albedo features carry no diameter."
+}

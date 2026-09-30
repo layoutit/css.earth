@@ -69,6 +69,8 @@ export interface DatasetStep {
   label: string;
   /** Start this group's loop automatically; false keeps depth or other manual selections still. */
   autoplay?: boolean;
+  /** The step the panel lists the group as, and opens: its first by default, or its last (the newest date of a record). */
+  opens?: 'first' | 'last';
 }
 
 export interface ChartRecipe {

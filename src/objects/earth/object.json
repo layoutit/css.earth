@@ -33,7 +33,7 @@
         },
         {
           "id": "dataset-bindings",
-          "path": "source/content/lens-bindings.json"
+          "path": "source/content/dataset-bindings.json"
         },
         {
           "id": "charts",
@@ -91,7 +91,17 @@
               "source": "content"
             },
             {
-              "id": "enso",
+              "id": "enso-2026-09-14",
+              "source": "content",
+              "material": "atmosphere"
+            },
+            {
+              "id": "enso-2026-09-21",
+              "source": "content",
+              "material": "atmosphere"
+            },
+            {
+              "id": "enso-2026-09-28",
               "source": "content",
               "material": "atmosphere"
             },
