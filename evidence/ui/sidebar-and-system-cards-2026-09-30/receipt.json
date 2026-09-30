@@ -24,7 +24,9 @@
         "earthMarkerOpacity": 1,
         "saturnMarkerOpacity": 1,
         "jupiterMarkerOpacity": 1,
-        "labelsAndCirclesVisible": true
+        "labelsAndCirclesVisible": true,
+        "headerDividerWidthPx": 2,
+        "tabBorderWidthPx": 0
       }
     },
     {
