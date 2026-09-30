@@ -77,7 +77,8 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
           depths[index] = -(vx * positions[offset]! + vy * positions[offset + 1]! + vz * positions[offset + 2]!);
         }
         if (order.length !== count || !insertionSort()) {
-          order = members.map((_, index) => index).sort((a, b) => before(a, b) ? -1 : before(b, a) ? 1 : 0);
+          // Deeper first, then member order: for finite depths this is exactly `before`, with one subtraction per comparison.
+          order = members.map((_, index) => index).sort((a, b) => depths[b]! - depths[a]! || a - b);
         }
         // Only members whose place changed get a new rank.
         for (let index = 0; index < count; index++) if (ranked[index] !== order[index]) ranks.set(members[order[index]!]!, index * 4);
