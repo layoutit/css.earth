@@ -1,18 +1,24 @@
 # Metis
 
+Metis, a small inner moon of Jupiter, is shown as Galileo photographs projected onto a smooth reference ellipsoid. The soft appearance is the information in the original photographs; no crater detail or colour is added.
+
 ## Sources
 
 - **Monochrome** combines original Galileo SSI clear-filter frames C0532890500, C0420681401, C0420685801, C0394682801 and C0401751800.
-
 - The surface is a **smooth reference ellipsoid**, with semi-axes 30 × 20 × 17 km from `BODY516_RADII` in NAIF `pck00011.tpc`.
+- Denk et al., *Io and the Minor Jovian Moons – Prospects for JUICE*, Figure 10 and Table 3, guided the image survey; no paper artwork is used as a texture.
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Imagery is pinned in [source/manifest.json](source/manifest.json) and restored through [source/preparation/acquisition.json](source/preparation/acquisition.json). Source selections and trials are in the [investigation ledger](investigations.json).
+
+## Processing
+
+The eight-bit SSI data are decoded from their VICAR layout; the original files and labels are kept unchanged. Observer and Sun latitude, longitude and range come from OPUS, checked against recorded phase and pixel scale. Several early PDS labels have inconsistent Sun and range values, so those fields are not used. `NORTH_AZIMUTH` is read under the [PDS definition](https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html), which puts north approximately down in the January 2000 image. Image-centre translation is refined against the illuminated ellipsoid. Geometry records are in `source/geometry/`.
+
+A measured empty-sky median is removed, then the shared bounded lunar-Lambert approximation (weight 0.5, maximum gain 1.5, incidence and emission below 70 degrees) reduces photographed illumination. The 1.5 cap withholds 5,057 of C0394682801's 5,445 samples and lowers area coverage from 60.4% to 53.9%. Overlap level matching needs gains up to 1.75 (C0394682801).
+
+`source/shape/model.json` records the ellipsoid formula, and `metis-ellipsoid.tab` samples it every 5 degrees; these are not radius measurements. Meshoptimizer simplifies its 5,040 triangles to 480 within a 500 m allowance, a preparation setting rather than an uncertainty.
 
 ## Evidence
-
-- OPUS owns observer and Sun planetocentric latitude, west-positive longitude and range, checked against recorded phase and image pixel scale.
-
-- Original imagery is pinned in [source/manifest.json](source/manifest.json) and restored through [source/preparation/acquisition.json](source/preparation/acquisition.json).
 
 ### Registration
 
@@ -28,45 +34,9 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ## Known problems
 
-- The finest sampling is 2.97 km/pixel, only about 14 pixels across the projected illuminated body; complementary views are 5.78–8.74 km/pixel. It describes measured overall dimensions, not Metis's detailed irregular outline. No Elevation dataset is exposed because the ellipsoid contains no resolved terrain measurements.
-
-- **Photometry:** They are relative detector counts, **not calibrated I/F**. These are empirical display corrections, not recovery of calibrated albedo.
-
-- **Faithfulness status:** The Monochrome dataset is a coarse ellipsoid projection with no independent surface landmarks. It remains available as an observation of the broad outline, not a feature-registered photographic surface.
-
-- Unreliable source samples and cast shadows remain missing; no geometry, hidden texture or false neutral colour is inferred from them. Gaps use the shared neutral grid.
+- The finest sampling is 2.97 km/pixel, only about 14 pixels across the illuminated body; other views are 5.78–8.74 km/pixel. The ellipsoid gives overall dimensions, not Metis's irregular outline, and its dimension uncertainties are roughly kilometres. No Elevation dataset is shown because there is no resolved terrain.
+- Values are relative detector counts, **not calibrated I/F**. The corrections are empirical display choices, not calibrated albedo.
+- Monochrome is a coarse ellipsoid projection with no independent surface landmarks. It shows the broad outline, not a feature-registered surface.
+- Unreliable samples and cast shadows stay missing and use the shared neutral grid.
 
 [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
-
-## Methods and source notes
-
-<details>
-<summary>Detailed source survey, assumptions and preparation</summary>
-
-<a id="metis-sources"></a>
-
-## Selected view and limitations
-
-The soft appearance is the information in the original photographs. No invented crater detail or colour is added.
-
-The prepared surface uses 480 native raster triangles and shared flood and directional lighting.
-
-## Geometry and photographic preparation
-
-Original eight-bit reconstructed SSI data are decoded from their attached VICAR layout, preserving line prefixes and binary-header offsets. The original files and detached labels are preserved unchanged.
-
-Several early raw PDS labels contain inconsistent Sun/range values, so those fields are not used. `NORTH_AZIMUTH` is clockwise from image right under the [PDS definition](https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html); adding 90 degrees supplies the shared camera's clockwise angle from image up. In particular, north is approximately down in the January 2000 raw image. The OPUS image-center and pole-clock values disagree with that image and are not used. Image-center translation is refined against the illuminated ellipsoid while holding its dimensions, camera scale and source directions fixed. Coordinates and the original metadata are recorded in `source/geometry/`.
-
-A measured empty-sky median is removed, then the shared bounded lunar-Lambert approximation (weight 0.5, maximum gain 1.5, incidence/emission below 70 degrees) reduces photographed illumination. At a cap of 2, 739 of the 766 saturated display samples had been normalized by more than 1.5, in thin slivers at the edge of C0532890500 and C0394682801; the 1.5 cap withholds 5,057 of C0394682801's 5,445 samples and lowers area coverage from 60.4% to 53.9%. Overlap level matching is fitted where both frames see the surface within 70° of incidence and emission and needs gains up to 1.75 (C0394682801). The coarse ellipsoid limits registration.
-
-`source/shape/model.json` records the analytic ellipsoid sampling formula. `metis-ellipsoid.tab` is a checked-in 5-degree sampling of that formula, not independent radius measurements. Its sampling is verified against the original PCK dimensions in the numerical source test. Shared meshoptimizer preparation simplifies its 5,040 triangles to 480 within a 500 m library error allowance; that allowance is a preparation setting, not a measurement uncertainty. Original dimension uncertainties are roughly kilometres.
-
-Surface, pole atlas, minimap and navigation portrait use the same interpreted map. The context portrait preserves the complete measured silhouette; shared lighting stays available instead of hiding source shadows by disabling application controls.
-
-## Source restoration
-
-The small measured ellipsoid, geometry records and prepared context portrait are checked in.
-
-Useful source review: Denk et al., *Io and the Minor Jovian Moons – Prospects for JUICE*, Figure 10 and Table 3. Its image identifications guided the survey; no extracted paper artwork is used as a texture.
-
-</details>

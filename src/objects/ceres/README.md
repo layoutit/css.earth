@@ -1,8 +1,8 @@
 # Ceres
 
-**Mineral signatures.** The dataset selector groups Clay · 2.7 µm, Ammonium · 3.1 µm under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
+Ceres is shown with Dawn's maps: a visible-light mosaic, enhanced color, elevation, mineral band depths and band centres, gravity and surface elements. The dataset selector groups Clay · 2.7 µm, Ammonium · 3.1 µm under one entry, **Mineral signatures**; see [dataset groups](../../../docs/reader-text.md#dataset-groups).
 
-The navigation marker uses its existing source map as a stylized identifier. The [marker recipe](source/preparation/navigation.json) crops and resizes it, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). It is not an observer projection or a view at the scene epoch.
+The navigation marker uses the source map as a stylized identifier, prepared by the [marker recipe](source/preparation/navigation.json). It is not a view at the scene epoch.
 
 ## Sources
 
@@ -10,279 +10,55 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 | Input | Source and use |
 | --- | --- |
-| Monochrome | [USGS Dawn FC global mosaic, 140 m/pixel](https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m), sampled through WMS at 4096 × 2048 over 0–360° east, 90°N–90°S. Visible-light grayscale, not an unlit albedo map. |
-| Enhanced color | [NASA PIA19977](https://science.nasa.gov/resource/hints-at-ceres-composition-from-color/), 3078 × 1537. False color from 920, 750, and 440 nm filters. South-polar gaps use a neutral gray cartographic grid. |
-| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/CERES/target) Ceres centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
-| Lighting | The Hapke model of [Li et al. (2019)](https://doi.org/10.1016/j.icarus.2018.12.038), Table 1, Dawn FC F3 filter at 749 nm, recorded in [`source/photometry/li-2019-hapke-749nm.json`](source/photometry/li-2019-hapke-749nm.json). See [Lighting](#lighting-law). |
+| Monochrome | [USGS Dawn FC global mosaic, 140 m/pixel](https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m), sampled through WMS at 4096 × 2048. Visible-light grayscale, not an unlit albedo map. |
+| Enhanced color | [NASA PIA19977](https://science.nasa.gov/resource/hints-at-ceres-composition-from-color/), 3078 × 1537. False color from 920, 750, and 440 nm filters. |
+| Elevation | [DLR/USGS Dawn HAMO DTM](https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m), 21,600 × 10,800 signed 16-bit samples at 60 pixels/degree. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/CERES/target) Ceres centre-point export, snapshot 2026-09-11, public domain. |
+| Feature notes | 31 names carry the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), recorded with the article link and revision in `source/features/notes.json`. The caption credits Wikipedia. |
+| Lighting | The Hapke model of [Li et al. (2019)](https://doi.org/10.1016/j.icarus.2018.12.038), Table 1, recorded in [`source/photometry/li-2019-hapke-749nm.json`](source/photometry/li-2019-hapke-749nm.json). See [Lighting](#lighting-law). |
+| Facts | [NASA Ceres facts](https://science.nasa.gov/dwarf-planets/ceres/facts/), summarized in [text.json](text.json). |
 
-- The [DLR/USGS Dawn HAMO DTM](https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m) contains 21,600 × 10,800 signed 16-bit samples at 60 pixels/degree.
-
-- **Clay band:** the Dawn VIR band-depth map `CMT_MOSAIC-BI_DEPTH` (2.7 µm, OH in Mg-rich clays) from the PDS3 data set [DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0](https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/) (De Sanctis, Capria, Ammannito et al., 2018; volume `DWNCVIR_2`): 4102 × 1367 big-endian 32-bit floats at 11.39 pixels/degree (0.72 km), planetocentric, east-positive, 60°S to 60°N. Band depth is 1 − Rc/Rb (Clark et al. 1984), measured on Survey-phase spectra (the data set catalog).
-- **Ammonium band:** our own reduction of Dawn VIR calibrated infrared cubes ([DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0](https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/): 195 Survey and 477 HAMO, with 875 LAMO and 110 Approach to fill gaps), following [Frigeri et al. (2019), Icarus 318, 14–21](https://doi.org/10.1016/j.icarus.2018.04.019), Section 3.1: the 3.1 µm band depth between the reflectance maxima in 2.91–3.01 µm and 3.19–3.24 µm. `packages/bake/authoring/dawn/vir-mosaic.mts` builds each line's camera from the Dawn SPICE kernels (spacecraft and scan-mirror CKs, the kernels the VIR team's metakernels name), converts radiance to I/F with the archive's solar spectrum, removes the detector's column stripes and single-pixel spikes, brings each cube to 30° phase with a band-depth-per-degree slope fitted to the cube-to-cube overlaps, sets aside cubes that disagree with all their neighbours (modified z-score over 3.5, Iglewicz and Hoaglin 1993), maps each pixel's footprint (a quad wider than one pixel step plus that step foreshortened at the 70° emission limit bridges a gap and is skipped), averages overlaps and blends seams as ISIS3's `noseam` does (the averaged mosaic's box mean over 89 cells, half the median HAMO swath width, plus each cube's own detail below that scale), at 16 pixels/degree (0.5 km), 60°S to 60°N. Survey and HAMO, the phases Frigeri et al. used, set every cell they saw and alone fix the stripe gains, phase slope and rejection limits. Gaps are filled in order: LAMO cubes, then Approach cubes no coarser than the coarsest Survey cube (4.9 km per pixel step), then the set-aside cubes shifted by their measured offset, each only where nothing before it saw the cell. The map is 98.7% covered. [The phase fit and rejections](source/science/vir-reduction/photometry.json) are recorded. Incidence and emission are kept below 70°, the limit of Ciarniello et al. (2017). [The recipe](source/science/vir-reduction/recipe.json) lists every cube and kernel; [the receipt](source/science/vir-reduction/receipt.json) names each cube by archive path and byte count.
-- **Gravity:** the four maps of JPL's degree-18 gravity model CERES18D in the [Dawn Ceres Gravity Science Derived Data Bundle](https://doi.org/10.17189/c2eg-7x61) 1.0 (Park, Konopliv, Asmar and Buccino 2025; PDS3 `DAWN-A-RSS-5-CEGR-V4.0`): radial gravity, its one-sigma error, the Bouguer anomaly and the geoid, 1° cells. See [Gravity from Dawn radio science](#gravity-from-dawn-radio-science-28-september-2026).
-- **Surface elements:** three maps from the [DAWN GRaND Ceres Bundle 1.0](https://doi.org/10.26033/hf9h-pt31) (Prettyman and Yamashita 2021), made by the Dawn gamma-ray and neutron detector (GRaND) from the low mapping orbit, December 2015 to May 2016: hydrogen (`GRD_HYDROGEN_MAP`), iron (`GRD_IRON_MAP`) and thermal plus epithermal neutron counts (`GRD_TPE_NEUTRON_COUNTS_MAP`). Each is a table of 110 pixels 20° across. The maps are very coarse: each value blends about 600 km of surface. See [Surface elements from Dawn GRaND](#surface-elements-from-dawn-grand-28-september-2026).
-- **Color scales for those two datasets** span each map's own 2nd to 98th percentile: 0.229 to 0.283 for the 2.7 µm band and 0.106 to 0.151 for the 3.1 µm band. The palette is the rainbow core of the bars in Frigeri et al. (2019), Figure 7: the sampled colors from blue through cyan, green and yellow to red, stops 45 to 56 of the 2.7 µm bar (#0001e3 to #e30001) and 19 to 38 of the 3.1 µm bar (#0101e0 to #e30001), whose rainbow is wider. The full bars spend four fifths of their length on flat dark blue and dark red, which fits the paper's narrow histograms but left most of these maps in the two dark ends. How the palette was sampled is under [Band-depth datasets](#band-depth-datasets).
-
-## Evidence
-
-### Surface elements from Dawn GRaND (28 September 2026)
-
-Three datasets, grouped with Vesta's as **Surface elements**, show the archived GRaND maps unchanged, one colour per archived pixel.
-
-| Dataset | Archived product | Values (110 pixels) | One-sigma uncertainty |
-| --- | --- | --- | --- |
-| Hydrogen | `GRD_HYDROGEN_MAP`, wt.% water-equivalent hydrogen (divide by 9 for hydrogen) | 16.5 at the equator to 28.6 at the north pole | about 0.8, from the composition models |
-| Iron | `GRD_IRON_MAP`, wt.% iron | 13.2 to 17.4, highest within 20° of the equator | about 0.4, counting statistics only |
-| Neutron counts | `GRD_TPE_NEUTRON_COUNTS_MAP`, counts/s | 2.67 at the north pole to 3.70 | about 0.02 |
-
-- **Resolution.** The pixels are 20° tall, about 164 km; one pixel covers each polar cap above 80°. The labels give a spatial resolution of about 600 km full width at half maximum, a fifth of the way around Ceres. Nothing smaller than a few hundred kilometres is resolved at any zoom: no crater or facula shows.
-- **Meaning.** Hydrogen and iron are for the top few decimetres of regolith. The archive calls the hydrogen map a lower bound. The neutron counts are the measurement the hydrogen map is derived from; Prettyman et al. ([2017](https://doi.org/10.1126/science.aah6765)) show that map as their Figure 1. Counts are lowest at the poles, where hydrogen is highest.
-- **Decoding.** The shared `pds-equal-area-table` reader reads each table through its producer's PDS3 label from volume `DWNCGRD_2`, checking the data set, product, row layout and value-column description against the recipe. The 110 pixels form 10 latitude bands of 1, 8, 12, 16, 18, 18, 16, 12, 8 and 1 pixels that meet edge to edge; a point takes the value of the pixel containing it, with no interpolation. Table bytes match the MD5 in the PDS4 labels. The colour scales (hydrogen 16 to 29, iron 13 to 18, counts 2.6 to 3.8) span every value; the palette is viridis, as on Vesta.
-- **Previews.** Flat 720 × 360 maps painted by the shared scientific painter from the recipe were inspected before the bake: 0 missing cells; Occator's pixel reads 17.4 wt.% hydrogen, 16.1 wt.% iron and 3.59 counts/s.
-- **Not shown.** The smoothed 2° hydrogen map is the same data smoothed with spherical harmonics, and the iron gamma-ray counts are the input to the iron map; see the [ledger](investigations.json).
-
-### Finest detail at maximum zoom (28 September 2026)
-
-The camera stops 1.2 radii from Ceres' centre (94 km above the surface) or at maximum zoom, whichever is farther. One CSS pixel below the camera then covers at least 155 to 169 m of surface, on viewports about 640 to 710 CSS px wide; at two texels per CSS pixel the finest texel ever drawn is 77 to 85 m. On a 390 px phone it is 139 m, on a 1440 px desktop 129 to 150 m (measurement).
-
-- The Dawn FC LAMO clear-filter mosaic (35 m) is therefore not used: its texels are never drawn. The regional Urvara (5 m) and Occator (about 3 m) mosaics are excluded for the same reason; no route brings the camera closer over one region.
-- The Monochrome atlas is 4096 texels around the equator, 720 m each, so at maximum zoom it is magnified 5 to 9 times. Raising it toward the 140 m mosaic's own detail is an open decision in the [ledger](investigations.json).
-
-### Gravity from Dawn radio science (28 September 2026)
-
-Four datasets, grouped as **Gravity**, show the gridded maps JPL archived for CERES18D, a degree-18 fit to Dawn's Deep Space Network tracking and optical landmarks from February 2015 to September 2016. The bundle holds no map of the later degree-70 model CERES70E, only its coefficients, so it is not shown; we do not sum coefficients ourselves.
-
-| Dataset | Archived product | Values | Scale |
-| --- | --- | --- | --- |
-| Gravity anomaly | `JGDWN_CER18D_ACCEL_0018`: radial gravity, degrees 2 to 18 without the hydrostatic J2 and J4, on a 482.0 × 445.9 km ellipsoid | −272.2 to 212.5 mGal | ±250 mGal; 0.08% of the area, Urvara's floor, takes the end colour |
-| Uncertainty | `ACCERR_0018`: one-sigma error from the model covariance | 17.6 to 79.0 mGal | 0 to 80 |
-| Bouguer anomaly | `BOU_0018`: radial gravity minus the pull of the shape at uniform density | −319.1 to 405.9 mGal | ±400 mGal; four cells in Urvara |
-| Geoid | `GEOID_0018`: metres above an ellipsoid of a = 482.0 km, flattening 0.074896 | −1066.6 to 1454.1 m | ±1500 m |
-
-- **Decoding.** Each map is 181 lines of 360 little-endian 64-bit values. The shared `pds3-grid` reader reads them unchanged, one colour per cell, with the producer's PDS3 labels from volume `DWNCGRS_2` (version 4): cell centres at whole degrees from 0° E, first line at 90° N. The image bytes in the PDS4 bundle and the PDS3 volume are the same file (their MD5 values agree). All 360 cells of each pole row are equal, which confirms that the first and last lines sit on the poles. The PDS4 labels' added corner coordinates put the first column's edge, not its centre, at 0° E; that half-cell disagreement is recorded and the PDS3 placement is used.
-- **Placement and values against the papers** (values). The deepest gravity low (−272 mGal) and the highest Bouguer value (406 mGal) both fall on Urvara. Kerwan reads +348 mGal Bouguer, the highest percentile, the mass excess [Bland et al. (2018)](https://doi.org/10.1002/2017GL075526) infer beneath it; Yalode reads +180, the second of the two basin mascons of [Ermakov et al. (2017)](https://doi.org/10.1002/2017JE005302). The high plateau Hanami Planum reads −225 mGal: high ground has low Bouguer gravity, the compensation [Park et al. (2016)](https://doi.org/10.1038/nature18955) report. Ahuna Mons reads +153 mGal free-air; [Ruesch et al. (2019)](https://doi.org/10.1038/s41561-019-0378-7) find about 100 mGal there with only degrees 5 to 14.
-- **Resolution.** Degree 18 corresponds to about 82 km at the equator; the field is accurate globally only to degree 14, about 105 km (Ruesch et al. 2019, Methods; [Park et al. 2017](https://meetingorganizer.copernicus.org/EGU2017/EGU2017-3380.pdf)). The 1° cells, 8.2 km at the equator, are sampling, not detail. No degree-strength map is archived.
-- **Uncertainty.** The error map grows from 17.6 mGal near the equator to 79 mGal at the south pole. Ruesch et al. quote about 10 mGal at the equator for CERES18C; the archived CERES18D error is 17.6 mGal there. We do not know why they differ.
-- **Reader text.** The dataset text gives Ceres's mean surface gravity as about 28,400 mGal: CERES18D's GM, 62.629 km³/s², over the 469.7 km mean radius squared.
-- **Previews.** Flat maps painted by the shared scientific painter from these grids were inspected before the bake; the painted pixels match the dataset recipe exactly. The geoid error map (22 to 27 m) is decoded but not shown ([ledger](investigations.json)).
-
-### Native 140 m cube against the WMS render (27 September 2026)
-
-The Monochrome dataset already shows the 140 m mosaic (NASA Trek's "59 ppd" layer)
-at the full 4096 × 2048 prepared size, rendered by the USGS map server. We tested
-whether the original DLR cube, [`Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub`](https://planetarymaps.usgs.gov/mosaic/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub)
-(21,093 × 10,546 bytes, 58.59 pixels per degree), would show more. Reduced by
-pixel-area mean to the same frame on `ccbf483de8`, it has the same tone and
-registration. Pixelmatch at threshold 0.1 flags 7.2% of the map, 7.8% after the
-WebP lane on both and 1.4% at half resolution. Between 34° N and 11° S only
-0.1–0.4% of pixels change; toward the south pole 16–19% change, where the server
-render shows resampling jaggies that the area mean does not
-(crops,
-measurements). No resolution is gained,
-so the dataset keeps the WMS render. Switching would need a reader for tiled ISIS3
-byte cubes, and the cube stores the south-polar gap as 1, the same value as
-clipped shadow. See the [investigation ledger](investigations.json).
-
-### Band-centre maps (27 September 2026)
-
-**Clay band centre** and **Ammonium band centre** use the native
-`CMT_MOSAIC-BI_CENTER` and `CMT_MOSAIC-BII_CENTER` products in Dawn VIR global
-mosaics V1.0. They measure the wavelength of the absorption minimum, in µm,
-through the same detached-label reader as the existing Clay band. Source samples
-are unchanged: nearest sampling, no stripe correction or invented polar fill.
-
-The ranges, **2.71–2.75 µm** and **3.02–3.08 µm**, come from
-[Ammannito et al. (2016), LPSC 3020, Figure 2](https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf).
-The black-to-white heat palette is an authored display choice; values outside
-the range use its end colors. It is not a percentile stretch. The paper finds
-nearly constant band positions, not changing clay composition. Band centre
-does not measure abundance. The archive preserves stripes and checkerboard
-artifacts that must not be interpreted as deposits.
-
-The numeric inspection validates both
-4102 × 1367 big-endian float rasters against their native labels and records
-coordinate samples, missing values and clipping counts. Median positions are
-2.7320 and 3.0614 µm; 98.84% and 98.88% of cells inside the roughly ±60° source
-band are valid. Poles remain missing. The 2.7 µm median is 0.005 µm above the
-conference paper's reported mean. The archived product was released in 2018;
-the cause of this offset is unverified, and this is not a pixel reproduction
-of the 2016 figure.
-The archive's record-count and acquisition-date inconsistencies described below
-also occur in the centre labels.
-
-The clay and
-ammonium browser views were inspected
-on 27 September in Chromium at 1440 × 900, DPR 2, saved at 1440 pixels wide,
-with Shadows off. Switching datasets loaded each map's own title, units and image
-without page errors or failed requests; a 390 × 844, DPR 2 phone view also passed.
-The recipes and numeric checks are;
-later changes retain main's Mineral signatures group and shorten these two
-selector subtitles to “Dawn VIR”. The shared focused checks and fresh delivery
-verification are recorded in [Io's qualification](../io/README.md#registered-volcanic-heat-27-september-2026).
-
-Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
-
-| View | Both prepared levels, before → current |
-| --- | --- |
-| enhanced | 684.8 → 671.3 kB |
-| normal | 365.2 → 357.9 kB |
-
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
-
-Lane change (this PR): the terrestrial solid-observation lane was retired for Ceres; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 2048 × 1024 (DPR 1) and 4096 × 2048 (DPR 2) — retired 4096 × 2048 atlas. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
-
-Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js ceres --write`](../../../site/build/prepare/prepare-authored.ts) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/ceres/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
-
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, enhanced, elevation) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 15341).
-
-Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
-
-- [source/manifest.json](source/manifest.json) pins acquisition URLs, byte counts, checksums, credits, and consumers.
-
-- Focused checks are defined in the unit tests and the shared browser conformance harness.
-
-### Ammonium band from our VIR reduction (21 September 2026)
-
-- **Checked against Frigeri et al.'s own map.** Their Figure 7 was read back into band-depth ranks through its printed colour bar (hue only, since shaded relief changes brightness; labels, outlines and no-data pixels skipped), with latitude from its 45° ticks and longitude from each row's map edges, and compared on 2° × 2° cells by Spearman rank correlation. Each processing step was read once:
-
-  | 3.1 µm (2.7 µm) against Frigeri et al. | Spearman |
-  | --- | --- |
-  | Archived VIR mosaic | 0.76 (0.75) |
-  | Our reduction, averaged overlaps | 0.84 (0.48) |
-  | with one offset per cube (as ISIS3 `equalizer`) | 0.77 (0.45), dropped |
-  | with a phase correction to 30° instead | 0.85 (0.65) |
-  | and 17 outlier cubes left out, plus despiking | 0.85 (0.64) |
-  | and seams blended as ISIS3 `noseam` does | 0.85 (0.65) |
-  | LAMO averaged into every cell | 0.83 (0.72), dropped |
-  | gaps filled by LAMO, Approach and levelled cubes only | 0.89 (0.65) |
-
-  The Clay band keeps the archived map, which scores higher at 2.7 µm. Rejecting outliers and despiking do not change these 2° scores; they remove straight-edged blocks and single-pixel streaks, as around Occator; noseam softens the remaining cube edges (before and after). Filling closed the gaps from 9.3% to 1.3% of the map (before and after); Approach cells are coarser than their neighbours, and a few levelled cubes show banding.
-- **Why ours is used for 3.1 µm only.** Frigeri et al. applied the Carrozzo et al. (2016) artifact and response correction, which was never released and acts on the 2.5–3.5 µm response. The 3.1 µm band is anchored at 2.9–3.24 µm, the 2.7 µm band at 2.63 µm, where that correction matters most.
-- **Phase angle.** Each cube's offset against its overlapping neighbours correlates with its phase angle (r = 0.51 for 3.1 µm): band depth grows by 0.00041 per degree, about 0.02 over the 13° to 84° range of the cubes. The correction removes that slope only, so regional differences stay; a flat per-cube offset removed them too and lowered the score.
-- **Geometry.** For the first HAMO cube (`VIR_IR_1B_1_493158996`) the computed footprint spans 9 to 27°N and 42 to 84°E, around the label's centre of 21.3°N, 60.4°E; the median incidence is 31.6° against the label's 30.8°.
-- **Byte order.** The spectral cubes are big-endian and the wavelength cubes little-endian, although both labels say `IEEE_REAL`; each was checked by its values (radiance falling from 0.88 at 1.02 µm; wavelengths 1.02 to 5.10 µm).
-
-### Clay band, and the archived maps (September 2026)
-
-- **Decoding.** `packages/bake/src/objects/raster/pds/pds-float-map.ts` reads both maps through their detached labels and checks every layout and projection field against the recipe. Six values per map at the label's pixel centres match an independent Python read of the archive bytes, and the painted colors match the scale (unit tests).
-- **Handedness and registration.** Frigeri et al. (2019) note that Haulani crater has a low 2.7 µm band depth; the archived map also dips at Cerealia Facula in Occator. Within 3° of their [IAU Gazetteer](https://planetarynames.wr.usgs.gov/Page/CERES/target) centres (10.77°E 5.80°N; 239.6°E 19.7°N) the median 2.7 µm band depth is 0.232 and 0.235, against 0.259 and 0.255 at the mirrored longitudes. The lowest 1% of pixels near Cerealia sit at 240.5°E 19.4°N, 0.9° from the Gazetteer centre. Dantu, high in the 3.1 µm band in the paper's figure, has its highest 1% at 138.3°E 26.1°N (Gazetteer 138.2°E 24.3°N).
-- **Values against the paper.** The archived 2.7 µm map has median 0.255 (1st to 99th percentile 0.2245 to 0.2859); the paper's histogram peaks near 0.20. The archived 3.1 µm map has median 0.064 (0.0432 to 0.0925); the paper peaks near 0.087. On the paper's scales most of Ceres was red in the Clay band dataset and blue in the Ammonium band dataset, so each scale now spans its map's own 2nd to 98th percentile.
-- **Why the values differ from the paper.** The archive's catalog says it follows Ammannito et al. (2016): Survey spectra only, a continuum between the two local maxima in 2.58–3.00 µm (OH) and 2.85–3.30 µm (NH4), and no artifact removal. Frigeri et al. (2019, Section 3.1) used Survey and HAMO spectra, other continuum points, and the artifact correction of Carrozzo et al. (2016), which includes "a new instrument response function" tied to ground-based telescope spectra of Ceres. That correction was never released: the PDS calibrated cubes still carry the 2016 V2 response. We reduced one HAMO cube (`VIR_IR_1B_1_493158996`, 18 August 2015) ourselves with Frigeri's continuum and the public calibration: after a three-channel boxcar for the odd/even detector pattern, its 2.7 µm band depth has median 0.272, near the archive's 0.255 and above the paper's 0.20. Thermal emission cannot close the gap: at 235 K it adds about 1.5% of the signal at 3.0 µm.
-- **In the browser.** Clay band and Ammonium band at the default camera, headless Chromium, 1440 × 900 at DPR 2, saved at 1440 pixels wide, Shadows off; the page loaded each dataset's own surface and pole images with no console errors. Surface rules for both datasets are in `src/renderers/css/styles/body-surfaces.css`.
-
-## Registration and coverage
-
-The Dawn FC2 global mosaic is an orthorectified, body-fixed product. The
-[PDS dataset record](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DAWN-A-FC2-5-CERESMOSAIC-V1.0)
-records that its bundle-block adjustment uses the Dawn orbit and
-attitude, the high-resolution Ceres shape model for ray intersections, and the
-same Kait-anchored longitude system used by the Dawn shape/topography work.
-The selected 140 m mosaic therefore has a documented image-to-Ceres frame; it
-does not depend on a visual crater match performed by cssEarth. The DTM is a
-separate derived product and is described as elevation, not as photographic
-texture. The false-color PIA19977 image is retained as a distinct map
-interpretation rather than being presented as calibrated monochrome.
-
-This closes the registration finding for the normal Dawn FC2 mosaic. PIA19977
-retains its published equirectangular map frame, but this review does not assert
-a pixel-for-pixel pairing with the DTM; it remains a separate false-color
-interpretation.
-It does not imply complete coverage: the PDS release states that the extreme
-south pole was not illuminated and that the mosaics contain gaps. The existing
-gray-grid treatment remains the explicit missing-coverage signal. Published
-shadows and mosaic seams remain visible.
-
-## Known problems
-
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ceres (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, which here coincides with the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
-
-Feature notes: 31 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
-
-- Coverage decision: both pinned rasters have three color channels and no alpha or accompanying validity mask. Southern-edge-connected exact black is used as a conservative indication of fill in each of these map images. This is a heuristic, not a surveyed coverage boundary.
-
-- **Elevation:** The publisher describes approximately 98% surface coverage and interpolation in permanently shadowed polar areas, but supplies no validity mask separating interpolation from stereo samples. To avoid showing that fill as observed terrain, the dataset withholds both caps at |latitude| ≥60°. This is our conservative display boundary, not the source's observation boundary.
-
-- **Clay band is not the paper's map.** The archived map is a different processing from Frigeri et al. (2019), Figure 7. The data set catalog says the artifact-removal procedure "was not applied to these data", so scan stripes and checkerboard patterns show, and the values are offset from the paper's histograms (see Evidence). The paper's figure also lays shaded relief under the colors; these datasets show the band depth alone.
-- **Ammonium band values are deeper than the paper's** (median 0.120 against its peak near 0.09): the public calibration lacks the Carrozzo et al. (2016) response correction, and no thermal-emission removal or photometric correction is applied (Raponi et al. and Ciarniello et al. 2017 give no reusable per-wavelength values). The pattern agrees with the paper (above); the absolute level does not. Faint single-pixel streaks remain along some swaths.
-- **Band-depth coverage.** The maps stop at 60°S and 60°N, as in the paper; the poles and pixels VIR did not measure (value −1.0E+32) show the gray grid. In the Clay band, Occator's centre (239.3°E 19.8°N) is one of them. In the Ammonium band, 11% of cells come from gap-filling data that is coarser (Approach) or needed a level shift (set-aside cubes).
-- **Band-depth label errors.** The `CMT_MOSAIC-BII_DEPTH.LBL` description reads "band I (3.1 micron) center"; its product id and the data set catalog identify it as the 3.1 µm (band II) depth. Both labels give `FILE_RECORDS = 1368` while the image files hold 1367 lines of 16,408 bytes; the reader checks the byte count against `LINES` × `LINE_SAMPLES`. The catalog calls the projection simple cylindrical and gives 2015-04-25 to 2015-06-27, while the labels say equirectangular (the same projection at 0° standard parallel) and 2015-06-05 to 2015-10-21.
-- **Gravity datasets:** the maps are a degree-18 model, accurate globally to degree 14: nothing smaller than about 80 to 100 km is resolved, whatever the zoom. Radial gravity and Bouguer leave out the J2 and J4 terms the archive calls hydrostatic; the archive does not state the density of its Bouguer correction. The error map's 17.6 mGal at the equator is higher than the 10 mGal Ruesch et al. (2019) quote.
-- **Surface elements:** 20° pixels and about 600 km resolution; the maps show only pole-to-equator and regional trends. The hydrogen map is a lower bound. The labels give east longitude from −180° to 180° but do not name the Ceres longitude system; the tables are placed on the map's east longitudes as printed. The PDS3 label of the neutron-count table gives `MD5_CHECKSUM = -1`; the PDS4 label's checksum matches the table.
-- **Monochrome detail:** the atlas has 720 m texels, coarser than the 140 m mosaic it comes from and than the 77 to 173 m the camera can show at maximum zoom.
-- **Lighting:** Both modes follow the published Hapke law described under [Lighting](#lighting-law). Neither mode reconstructs unlit albedo or relights the photographed crater shadows.
-- The last two columns of the PIA19977 enhanced-color source map are brighter than their neighbours (mean brightness 173 and 193 against about 135). A thin light line can show along 0° at close zoom.
+- **Clay band:** the Dawn VIR band-depth map `CMT_MOSAIC-BI_DEPTH` (2.7 µm, OH in Mg-rich clays) from [DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0](https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/) (De Sanctis, Capria, Ammannito et al., 2018), 11.39 pixels/degree (0.72 km), 60°S to 60°N. The band-centre maps `CMT_MOSAIC-BI_CENTER` and `CMT_MOSAIC-BII_CENTER` come from the same data set.
+- **Ammonium band:** our own reduction of Dawn VIR calibrated infrared cubes ([DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0](https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/)), following [Frigeri et al. (2019), Icarus 318, 14–21](https://doi.org/10.1016/j.icarus.2018.04.019), Section 3.1.
+- **Gravity:** the four maps of JPL's degree-18 gravity model CERES18D in the [Dawn Ceres Gravity Science Derived Data Bundle](https://doi.org/10.17189/c2eg-7x61) 1.0 (Park, Konopliv, Asmar and Buccino 2025): radial gravity, its one-sigma error, the Bouguer anomaly and the geoid, 1° cells.
+- **Surface elements:** hydrogen, iron and neutron counts from the [DAWN GRaND Ceres Bundle 1.0](https://doi.org/10.26033/hf9h-pt31) (Prettyman and Yamashita 2021), low mapping orbit, December 2015 to May 2016. Each is a table of 110 pixels 20° across.
 
 [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
-## Methods and source notes
+## Processing
 
-<details>
-<summary>Detailed source survey, assumptions and preparation</summary>
+The mesh is a sphere of 469.7 km with no resolved shape model. The maps share a global equirectangular grid. Exactly black pixels connected to the southern border are marked with a neutral gray grid; no terrain is inferred. The Dawn FC2 mosaic is orthorectified in the body-fixed frame by its producers ([PDS record](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DAWN-A-FC2-5-CERESMOSAIC-V1.0)); its registration does not depend on a crater match by cssEarth.
 
-<a id="ceres-sources"></a>
+The Ammonium band is the 3.1 µm band depth between the reflectance maxima in 2.91–3.01 µm and 3.19–3.24 µm. `packages/bake/authoring/dawn/vir-mosaic.mts` builds each line's camera from the Dawn SPICE kernels, converts radiance to I/F, removes stripes and spikes, brings each cube to 30° phase, sets aside cubes that disagree with all their neighbours, and blends seams as ISIS3's `noseam` does, at 16 pixels/degree (0.5 km). Survey and HAMO set every cell they saw; LAMO, Approach and set-aside cubes fill gaps. The map is 98.7% covered. The [phase fit and rejections](source/science/vir-reduction/photometry.json), [recipe](source/science/vir-reduction/recipe.json) and [receipt](source/science/vir-reduction/receipt.json) are recorded.
 
-Originals are acquired from their publishers, not other objects.
+Band maps sample each archived pixel as it is. The band-depth scales span each map's own 2nd to 98th percentile: 0.229 to 0.283 at 2.7 µm and 0.106 to 0.151 at 3.1 µm, on the rainbow core of the bars in Frigeri et al. (2019), Figure 7 ([raster recipe](source/preparation/raster.json)). The band-centre ranges, 2.71–2.75 µm and 3.02–3.08 µm, come from [Ammannito et al. (2016), LPSC 3020, Figure 2](https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf). Gravity and GRaND maps are read unchanged through their producers' PDS3 labels, one colour per cell.
 
-| Input | Source and use |
-| --- | --- |
-| Physical/orbit data | Vendored `@cssearth/astronomy` JPL body data, Kepler state vectors and IAU rotation. Mean radius 469.7 km; fixed geometry epoch 2026-09-03T00:00:00 TT. |
-| Facts | [NASA Ceres facts](https://science.nasa.gov/dwarf-planets/ceres/facts/), summarized in [text.json](text.json): asteroid-belt location, Dawn observations, about nine hours per rotation, no moons. |
-
-The maps share a global equirectangular grid. As with Pluto, exactly black pixels connected to the southern source border are identified before interpolation. The shared preparation helper marks those gaps with a neutral gray grid; it does not infer terrain. Enclosed black terrain and nonzero JPEG edge pixels remain untouched, so a dark edge fringe can remain.
-
-In particular, JPEG compression can make fill pixels nonzero. We preserve those uncertain pixels instead of raising a brightness threshold that could erase observed dark terrain. The shared grid defines the presentation, not scientific validity for every dataset.
-
-Preparation creates 452 retained surface leaves, polar textures and a lighting atlas. The mesh uses a spherical mean radius; no resolved Ceres shape or elevation model is claimed. The runtime only loads prepared assets and publishes shared view state.
-
-Surface bands are reprojected for their projective trapezoids before packing; linear image latitude cannot be stretched directly over projective UVs. Polar textures use the cap geometry and hemisphere-specific longitude direction. Both use bilinear source sampling and lossless encoding. Original source files remain unchanged. Prepared maps mark only the identified gaps; the runtime lighting is a separate prepared overlay. The shared perspective camera converts PolyCSS geometry to world units without an extra zoom multiplier. Lighting fits that same projected radius, and its prepared disc stays within the atlas frame. The low-polygon surface still has small geometric facets; the overlay does not represent an atmosphere.
-
-Lighting decision: retain the published Dawn observations, including their original crater shadows. This limitation is explained in both dataset descriptions.
+Elevation is meters above a 470 km sphere on a fixed −30 to +20 km color scale, with terrain shading from fixed northwest light and no height exaggeration.
 
 ## Lighting law
 
-The globe is lit with the Hapke model that [Li et al. (2019)](https://doi.org/10.1016/j.icarus.2018.12.038) fitted to Dawn Framing Camera colour images, in the F3 filter at 749 nm. Table 1 gives w 0.139, b 0.364, c 0.048 and roughness 19.2°, with B0 1.6 and h 0.06 held fixed. Their fit used incidence and emission up to 80° and phase angles from about 7° to about 95°. Each lighting frame is this law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. Toward the limb the law is held at 80° emission. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+The globe is lit with the Hapke model that [Li et al. (2019)](https://doi.org/10.1016/j.icarus.2018.12.038) fitted to Dawn Framing Camera images in the F3 filter at 749 nm: w 0.139, b 0.364, c 0.048 and roughness 19.2°, with B0 1.6 and h 0.06 held fixed. Each lighting frame is this law relative to the flood-lit disc centre, held at 80° emission toward the limb. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws). With the Sun behind the viewer the limb is 0.994 of the centre. The clear-filter model of [Schröder et al. (2017)](https://doi.org/10.1016/j.icarus.2017.01.026) gives about twice the geometric albedo at the centre, and its authors say its opposition values are not physical, so it is not used.
 
-- The default Monochrome map was taken through the clear filter. Li et al. fitted only the colour filters, and F3 is the one closest to the clear filter's 730 nm centre. The Enhanced dataset (920, 750 and 440 nm) uses the same 749 nm law.
-- With the Sun behind the viewer this law hardly darkens the limb: 0.994 of the centre at 80° emission. The shared bank it replaces (Lambert with a 0.35 floor) darkened it much more.
-- The default view, at 0° phase, lies outside the fitted phases. Its opposition surge comes from B0 and h, which Li et al. held at the values Helfenstein and Veverka (1989) measured from the ground at 1° to 21° phase. The law gives a radiance factor of 0.089 at the flood-lit centre, the same as Li et al.'s 0.089 geometric albedo at 749 nm.
-- [Schröder et al. (2017)](https://doi.org/10.1016/j.icarus.2017.01.026) fitted a clear-filter Hapke model (w 0.113, B_S0 4.0, h_S 0.02). The authors say its opposition values are not physical. At the flood-lit centre it gives 0.161, about twice the geometric albedo, so every Shadows frame would come out about half as bright as with Li et al.'s law. It is not used.
-- Not checked: the photometric model USGS and DLR used for the FC mosaic itself.
-- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js ceres --write --reuse-images --accept-changed=raster`](../../../site/build/prepare/prepare-authored.ts). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each dataset writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.000 at half the radius, 0.353 then 0.000 at 0.9 and 0.490 then 0.004 at 0.98.
+## Evidence
 
-## Elevation dataset
+**Gravity.** The deepest gravity low (−272 mGal) and the highest Bouguer value (406 mGal) both fall on Urvara. Kerwan reads +348 mGal Bouguer, the mass excess [Bland et al. (2018)](https://doi.org/10.1002/2017GL075526) infer; Yalode reads +180, a basin mascon of [Ermakov et al. (2017)](https://doi.org/10.1002/2017JE005302). Hanami Planum reads −225 mGal, the compensation [Park et al. (2016)](https://doi.org/10.1038/nature18955) report. Ahuna Mons reads +153 mGal free-air; [Ruesch et al. (2019)](https://doi.org/10.1038/s41561-019-0378-7) find about 100 mGal with only degrees 5 to 14.
 
-Values are meters above a 470 km sphere, including the body's overall shape; they are not heights above a fitted ellipsoid. The GeoTIFF is centered on 180°E and its left edge is 0°E. No-data is −32768. Preparation samples the published model without filling missing values and maps heights to a fixed −30 to +20 km color scale.
+**Surface elements.** Hydrogen runs from 16.5 wt.% water-equivalent at the equator to 28.6 at the north pole, and iron from 13.2 to 17.4 wt.%. Neutron counts are lowest at the poles, where hydrogen is highest, as in Prettyman et al. ([2017](https://doi.org/10.1126/science.aah6765)), Figure 1.
 
-The shared gray grid marks withheld or missing samples; no terrain is invented.
+**Mineral bands.** Frigeri et al.'s Figure 7 was read back into ranks and compared on 2° × 2° cells. At 3.1 µm the archived mosaic scores 0.76 Spearman and our reduction 0.89; at 2.7 µm the archived map scores higher, so the Clay band keeps it. Near Haulani and Cerealia Facula the median 2.7 µm band depth is 0.232 and 0.235, against 0.259 and 0.255 at the mirrored longitudes, which fixes the handedness. Band-centre medians are 2.7320 and 3.0614 µm.
 
-Preparation also derives terrain shading from neighboring model heights at the delivered 4096 × 2048 grid spacing. Central differences account for Ceres's 470 km radius and longitude spacing at each latitude. Fixed northwest light at 45° altitude and 25% ambient light reveal slopes without height exaggeration. Level terrain retains its base color; shading changes brightness, so the legend shows the unshaded height scale. Samples beside missing or withheld neighbors keep their base color; neither heights nor coverage are interpolated to shade gaps.
+**Monochrome detail.** The original DLR cube, [`Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub`](https://planetarymaps.usgs.gov/mosaic/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub), reduced to the same frame, gains no resolution, so the dataset keeps the WMS render. At maximum zoom the finest texel drawn is 77 to 85 m, so the LAMO (35 m) and regional mosaics are not used.
 
-The map and its numeric legend are prepared together. The surface uses the existing Ceres band/pole projection. Generic prepared material selection keeps the same globe curvature shading on every dataset. Shadows switches it to approximate directional illumination; it does not change the fixed terrain light direction. No runtime controller or runtime scientific-data parser is added.
+## Known problems
 
-Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. Lighting stays lossless.
-
-Preparing elevation requires the original 466.6 MB DTM. The runtime asset installer downloads prepared maps only and does not require that source file. Raw binaries and prepared images are excluded from Git; runtime assets use the existing publisher.
-
-See [NOTICE.md](NOTICE.md) for credits.
-
-</details>
-
-<details>
-<summary>Band-depth datasets</summary>
-
-<a id="band-depth-datasets"></a>
-
-Preparation samples each archived pixel as it is (nearest pixel, no smoothing or filling) and colors it on the dataset's scale. Values outside the scale take its end colors. Missing pixels keep the shared gray grid.
-
-The datasets use the rainbow stops named above out of 101 colors evenly spaced along each bar, sampled from Figure 7 of Frigeri et al. (2019) on journal page 19 (PDF page 6), rendered at 6× (432 dpi) with macOS PDFKit. For each color we averaged 17 rows through the middle of the printed bar. The bar's ends are the plot frame at the 0.10 and 0.30 (or 0.05 and 0.20) ticks, 985.5 rendered pixels apart; the intermediate ticks fall at even spacing, 49.3 pixels per 0.01. Colors within 5 pixels of the frame, where the frame line blends into the bar, take the nearest clean column. The same palette drives the map and the legend. The paper's PDF is not redistributed; the sampled colors are in [the raster recipe](source/preparation/raster.json).
-
-The archive's labels are checked field by field before any pixel is read: product and data set ids, target, 32-bit `IEEE_REAL`, planetocentric east-positive equirectangular projection, the 470 km sphere, 11.393121506074 pixels/degree, the projection offsets, the latitude extent and the `-1.0E+32` missing constant. The first column starts exactly at 0°E and the first and last rows at the label's latitude limits.
-
-</details>
-
-<details>
-<summary>Shape, rotation and camera on the shared raster lane</summary>
-
-The recipe declares a sphere of 469.7 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 0.3781-day prograde rotation (JPL/NASA 9.074 h rotation (factsheet-review)) and a 4.04° tilt to its orbit. The tilt is computed here, not transcribed: the angle between the Dawn pole the astronomy package uses (RA 291.418°, Dec 66.764°, NAIF `dawn_ceres_v05.tpc`) and the normal of the pinned JPL Horizons ICRF orbit at JD 2461041.5 (i = 0.4745853864 rad, node = 0.4074666524 rad). Both serve the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). 
-
-</details>
+- **Coverage.** Southern-edge-connected exact black is a heuristic for fill, not a surveyed boundary, and a dark edge fringe can remain. The extreme south pole was not illuminated; published shadows and mosaic seams remain visible.
+- **Elevation.** The publisher interpolates permanently shadowed polar areas without a mask, so the dataset withholds both caps at |latitude| ≥60°. This is our display boundary, not the source's.
+- **Clay band is not the paper's map.** The catalog says artifact removal "was not applied to these data", so scan stripes and checkerboard patterns show, and the median, 0.255, is above the paper's peak near 0.20.
+- **Ammonium band values are deeper than the paper's** (median 0.120 against its peak near 0.09): the public calibration lacks the Carrozzo et al. (2016) response correction, which was never released. Faint single-pixel streaks remain along some swaths.
+- **Band maps** stop at 60°S and 60°N, and Occator's centre is missing in the Clay band. In the Ammonium band, 11% of cells come from coarser or level-shifted gap-filling data. The archive's labels misname the 3.1 µm depth product and miscount its records. Band centre does not measure abundance.
+- **Gravity.** A degree-18 model, accurate globally to degree 14: nothing smaller than about 80 to 100 km is resolved. The error map's 17.6 mGal at the equator is higher than the 10 mGal Ruesch et al. (2019) quote; we do not know why.
+- **Surface elements.** About 600 km resolution shows only regional trends. The archive calls the hydrogen map a lower bound.
+- **Monochrome detail.** The atlas has 720 m texels, so at maximum zoom it is magnified 5 to 9 times; raising it is open in the [ledger](investigations.json).
+- **Lighting.** Neither mode relights the photographed crater shadows. The default view, at 0° phase, lies outside the fitted phases.
+- **Named features.** Outlines are not published nomenclature boundaries.
+- The last two columns of the PIA19977 map are brighter than their neighbours; a thin light line can show along 0° at close zoom.

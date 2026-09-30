@@ -14,11 +14,9 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/19_Fortuna_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.16](https://doi.org/10.1051/0004-6361/202141781) |
 
-Fortuna is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape.
+Fortuna is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape. [Vernazza et al. (2021)](https://doi.org/10.1051/0004-6361/202141781), Tables 1 and A.1, give the volume-equivalent diameter 211 km, ecliptic J2000 pole (103°, 60°) and sidereal period 7.443224 h.
 
-- [Vernazza et al. (2021), final VLT/SPHERE survey](https://doi.org/10.1051/0004-6361/202141781), Table 1 and Table A.1: volume-equivalent diameter 211 km, ecliptic J2000 pole (103°, 60°), sidereal period 7.443224 h. The original article is pinned and restorable.
-
-- [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/19_Fortuna_mpcd.obj): 4642 vertices, 9280 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 105.264481 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 250.615 × 206.345 × 200.065 km; these are not best-fit ellipsoid axes.
+The [original MPCD mesh](https://observations.lam.fr/astero/3Dshape/19_Fortuna_mpcd.obj) has 4642 vertices and 9280 triangles, in unmodified Cartesian kilometres. Its measured volume-equivalent radius is 105.264481 km. The survey's diameter averages ADAM and MPCD; the coordinates are not rescaled to that average. Maximum Cartesian extents are 250.615 × 206.345 × 200.065 km; these are not best-fit ellipsoid axes. The [alternative ADAM mesh](https://observations.lam.fr/astero/3Dshape/19_Fortuna_adam.obj) (radius 105.653623 km) is excluded as a second dataset: the MPCD refinement uses resolved SPHERE detail (survey section 3 and Appendix B).
 
 ## Evidence
 
@@ -58,17 +56,13 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
-
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1793.5 m error; the authored stopping threshold is 1800 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1004.2 m and maximum 1907.5 m.
-
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1793.5 m error; the authored stopping threshold is 1800 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1004.2 m and maximum 1907.5 m. No source face centroid or sphere direction has a repeated radial intersection, which supports the radial-height dataset. Reduction softens small features.
 
 ## Known problems
 
 Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 105.5 km reference sphere, with a -20 to 30 km legend. This includes global shape, not height above a gravitational equipotential.
 
-Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
+Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
@@ -78,46 +72,17 @@ The SPHERE photograph is photographed illumination from the survey's deconvolved
 
 ## Methods and source notes
 
-<details>
-<summary>Selected data</summary>
-
-- [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/19_Fortuna_adam.obj): radius 105.653623 km. The ADAM model is an alternative reconstruction of the same shape. Excluded as a second dataset. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
-
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/19Fortuna/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
-
-- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
-
-</details>
-
 <a id="shape-elevation-and-lighting"></a>
-
-<details>
-<summary>Shape, elevation and lighting</summary>
-
-The original connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 800 native PolyCSS u triangles. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime.
-
-No radial substitute, runtime triangulation, fabricated texture or additional renderer is used.
-
-</details>
-
 <a id="frame-and-ephemeris"></a>
-
-<details>
-<summary>Frame and ephemeris</summary>
-
-The original Cartesian frame is retained with +Z north and east-positive longitude. The published ecliptic pole is converted to equatorial J2000 with obliquity 23.439291111°. The release’s unlabeled parameter file is preserved as evidence and is not read as an IAU W model.
-
-Original JPL Horizons elements and independent vectors are pinned at JD 2461286.5 (2026-09-03). Heliocentric ICRF conics serve the existing fixed-date context, not long-term perturbation ephemerides. The independent vectors at ±30 days have measured regression guards in the astronomy package.
-
-TDB is approximated as TT within 2 ms.
-
-</details>
-
 <a id="reproduction"></a>
 
 <details>
-<summary>Reproduction</summary>
+<summary>Shape, frame and reproduction</summary>
 
-Source pins live in [source/manifest.json](source/manifest.json); source/preparation/acquisition.json restores the ignored OBJ. LAM's ordinary public-site cookie is explicitly recorded. Generated context.png is force-tracked as a pinned intermediate and regenerated/verified by the existing radial snapshot recipe.  Title provenance remains in its source directory.
+The connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 800 native PolyCSS triangles. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime. The scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade.
+
+The original Cartesian frame is retained with +Z north and east-positive longitude. The published ecliptic pole is converted to equatorial J2000 with obliquity 23.439291111°. The release's unlabeled parameter file is preserved as evidence and is not read as an IAU W model. JPL Horizons elements and independent vectors are taken at JD 2461286.5 (2026-09-03). Heliocentric ICRF conics serve the fixed-date context, not long-term perturbation ephemerides. TDB is approximated as TT within 2 ms.
+
+Source records live in [source/manifest.json](source/manifest.json); source/preparation/acquisition.json restores the ignored OBJ. LAM's ordinary public-site cookie is explicitly recorded. [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf) gives complementary interpretation and model/image comparisons.
 
 </details>

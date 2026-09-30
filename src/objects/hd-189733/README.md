@@ -1,54 +1,87 @@
 # HD 189733 A
 
+HD 189733 A is a K2 dwarf in Vulpecula, 19.8 parsecs away. It hosts the hot Jupiter
+[HD 189733b](../hd-189733b/README.md), and the red dwarf [HD 189733 B](../hd-189733-companion/README.md) moves with it
+through space. No image of the star's surface exists. The package draws it as a sphere of the size its planet's map
+assumes, in the colour of its measured spectrum, darkened toward its edge as the planet's transits show, and turning
+on the spin axis measured against the planet's orbit. The default dataset overlays a published spot-band illustration.
+
 ## Sources
 
-HD 189733 A is a K2 dwarf in Vulpecula, 19.8 parsecs away. It hosts the hot Jupiter [HD 189733b](../hd-189733b/README.md), and the red dwarf [HD 189733 B](../hd-189733-companion/README.md) moves with it through space. No image of the star's surface exists. The package draws it as a sphere of the size its planet's map assumes, in the colour of its measured spectrum, darkened toward its edge as the planet's transits show, and turning on the spin axis measured against the planet's orbit.
+- **Placement.** Gaia DR3 source 1827242816201846144, archived in `photometry/gaia-dr3-source.csv` (its
+  [acquisition record](../../sources/gaia-dr3-hd-189733.json), epoch J2016.0). The distance is 1000 / 50.567 mas =
+  19.776 pc, with no parallax zero-point correction.
+- **Radius and mass.** 0.752 solar radii and 0.807 solar masses, from Lally et al. (2025,
+  [arXiv:2503.20895](https://arxiv.org/abs/2503.20895), Table 1), whose eclipse map of HD 189733b is fitted in units of
+  this radius.
+- **Colour.** The Gaia DR3 BP/RP spectrum (Montegriffo et al. 2023), 336 to 1020 nm every 2 nm, pinned as
+  `photometry/gaia-dr3-xp-sampled.csv`.
+- **Limb darkening.** Three TESS SPOC 2-minute light curves, sectors 41, 54 and 81, restored from MAST.
+- **Spot bands.** [Narrett, Rackham & de Wit (2024)](https://doi.org/10.3847/1538-3881/ad1f6c), their
+  [Figure 7, left](https://www.astroexplorer.org/details/ajad1f6cf7).
+- **2021 spot.** [Haris, Tuomi & Hackman (2025)](https://doi.org/10.1051/0004-6361/202452633), Table 3.
+- **Axis.** Cristo et al. (2024, [A&A 682, A28](https://doi.org/10.1051/0004-6361/202346366)), Table 4, model M1.
 
-**Placement.** Position, parallax, proper motion and radial velocity are the Gaia DR3 values for source 1827242816201846144, archived as one row in `photometry/gaia-dr3-source.csv` (its [acquisition record](../../sources/gaia-dr3-hd-189733.json), epoch J2016.0). The distance is 1000 / 50.567 mas = 19.776 pc, with no parallax zero-point correction.
+## Processing
 
-**Radius and mass.** 0.752 solar radii and 0.807 solar masses, the stellar values Lally et al. (2025, [arXiv:2503.20895](https://arxiv.org/abs/2503.20895), Table 1) fix for their eclipse map of HD 189733b. The planet's orbit and size are fitted in units of this radius, so the sphere keeps it. CHARA interferometry measured a limb-darkened diameter of 0.3848 ± 0.0055 mas in the H band (Boyajian et al. 2015, MNRAS 447, 846; the JMDC catalogue lists it with ± 0.0046), which gives 0.818 solar radii at the Gaia distance, 9% larger; see the [investigation ledger](investigations.json).
+**Colour.** [stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)
+weights the spectrum from 380 to 780 nm by the CIE 1931 2° observer and converts to sRGB with its D65 white, scaled so
+the brightest channel is full: 255, 226, 207 (#ffe2cf). The method record is
+[`stellar-color.json`](source/photometry/stellar-color.json). This is the star's own measured light, not a blackbody.
 
-**Colour dataset.** Gaia DR3 published a low-resolution BP/RP spectrum of this star, calibrated to absolute flux and sampled every 2 nm from 336 to 1020 nm (Montegriffo et al. 2023). The sampled spectrum is pinned unchanged as `photometry/gaia-dr3-xp-sampled.csv` (same [acquisition record](../../sources/gaia-dr3-hd-189733.json)). [stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts) weights its samples from 380 to 780 nm by the CIE 1931 2° observer and converts the result to sRGB with its D65 white, scaled so the brightest channel is full: **255, 226, 207 (#ffe2cf)**. Moving every sample one standard error down or up changes the blue channel by at most 2. The method record is [`stellar-color.json`](source/photometry/stellar-color.json). This is the star's own measured light, not a blackbody.
+**Limb darkening.** No published fit to TESS transits covers this star, so the package fits one.
+[transit-limb-darkening.ts](../../../packages/bake/src/objects/raster/eclipse-map/transit-limb-darkening.ts) keeps
+good-quality PDCSAP samples, normalizes each of the 30 complete transits and folds them onto the planet's orbit.
+[transit-timing.ts](../../../packages/bake/src/objects/raster/eclipse-map/transit-timing.ts) uses batman and SciPy for
+the fit. The result is u₁ = 0.216, u₂ = 0.440: the edge is 34% as bright as the centre.
 
-**Limb darkening.** A transit is the planet scanning the star's disc: the depth at each point along its path is the star's brightness there. No published limb-darkening fit to TESS transits covers this star, so the package fits one. [transit-limb-darkening.ts](../../../packages/bake/src/objects/raster/eclipse-map/transit-limb-darkening.ts) reads three TESS SPOC 2-minute light curves (sectors 41, 54 and 81; 2021, 2022 and 2024; pinned in the manifest and restored from MAST). It keeps good-quality PDCSAP samples, divides each of the 30 complete transits by a straight line fitted outside it, and folds them onto HD 189733b's orbit. [transit-timing.ts](../../../packages/bake/src/objects/raster/eclipse-map/transit-timing.ts) delegates the exposure-integrated quadratic transit to batman and the bounded fit to SciPy. All three sectors together give **u₁ = 0.216, u₂ = 0.440**: the edge is 34% as bright as the centre. Fitted one at a time, the sectors give u₁ from 0.13 to 0.28 and u₂ from 0.37 to 0.54, while their sum stays between 0.65 and 0.67, so the edge brightness is steady. The fitted radius ratio, 0.1556, matches the map's 0.1553, and the transit comes 6.4 ± 0.9 s before the map's ephemeris. The limb plate is drawn as for WASP-43: a black overlay fitted edge to edge to the sphere's outline, dithered so the 8-bit alpha does not band.
+**Spot-band model (default).** Narrett et al. infer 42 ± 4% mean spot coverage and a 0.099 spot-to-photosphere
+intensity ratio in the TESS band. Their Figure 7 is a hypothetical example of dense latitudinal bands. The
+`activity-model` dataset extracts the figure's dark pattern with the
+[extraction record](source/photometry/narrett-2024-band-model.json), removes the dotted transit guides and bakes it into
+the limb plate. Spots keep about 10% of the nearby photospheric light, applied achromatically over the Gaia colour. The
+`color` dataset shows the star without spots.
 
-**Spot-band model, the default dataset.** [Narrett, Rackham & de Wit (2024)](https://doi.org/10.3847/1538-3881/ad1f6c) infer **42 ± 4% mean spot coverage** from a two-component fit to three HST spectra. They derive a **0.099 spot-to-photosphere intensity ratio in the TESS band** from their fitted temperatures, 3222 K for the spotted component and 5295 K for the unspotted component. Their [Figure 7, left](https://www.astroexplorer.org/details/ajad1f6cf7), is a **hypothetical example** of dense latitudinal spot bands with about 40% coverage and 1.4% rotational variability. The default `activity-model` dataset downloads the AAS figure at the size and hash in the [source manifest](source/manifest.json), extracts its dark pattern with the [extraction record](source/photometry/narrett-2024-band-model.json), removes the dotted transit guides, and bakes the darkness into the same stationary limb plate. This is the paper's *illustration*, not a measured map of HD 189733 A. Dark pixels extracted from the schematic cover about half the displayed disc; that pixel fraction is not a new measurement of stellar spot coverage. The spot plate is translucent: it converts the paper's TESS brightness ratio through the sRGB transfer curve so modeled spots retain about 10% of the nearby photospheric light, rather than just 10% of its encoded screen colour. The ratio is applied achromatically over Gaia's observed whole-star colour, so the dataset shows the pattern rather than a calibrated visible-light spectrum or absolute flux. The picker thumbnail is prepared from the same limb plate. The `color` dataset shows the Gaia colour and fitted limb without spots.
+**2021 spot.** Haris et al. report a dark-region occultation during transit 2165 (BJD−2450000 9435.46), with minimum
+angular radius 5.0 (+1.0/−0.8)° and TESS-band contrast 0.076 (+0.041/−0.025). The `spot-2021` dataset places a
+spherical cap of that radius along the observed transit chord. Its circular shape and position across the chord are
+display choices.
 
-**2021 spot dataset.** [Haris, Tuomi & Hackman (2025)](https://doi.org/10.1051/0004-6361/202452633), Table 3, report a dark-region occultation candidate during HD 189733b transit 2165 (BJD−2450000 9435.46). Its midpoint is 1890 (+65/−82) seconds after conjunction; their inferred **minimum angular radius is 5.0 (+1.0/−0.8)°** and its **TESS-band contrast is 0.076 (+0.041/−0.025)**, meaning the transited region is 7.6% dimmer than the local photosphere in that band at the central estimate. The `spot-2021` dataset uses the hosted planet's circular orbit to place the region along the observed transit chord and paints a spherical cap of that minimum radius on the stationary limb plate. The cap's circular shape and location perpendicular to the chord are display choices: one occultation cannot establish the full shape or a global spot map. The orbit's sky position angle and direction across the display are conventions. TESS-band contrast is applied achromatically over the Gaia-colour disc, so the visible-light appearance is a labelled approximation. The spot plate does not rotate or evolve with time.
+**Axis.** Cristo et al. modelled the Rossiter–McLaughlin effect in ESPRESSO spectra with differential rotation, which
+gives the tilt of the axis toward us as well as its angle on the sky: λ = −1.00 +0.22/−0.23°, i★ = 71.87 +5.55/−6.91°,
+equatorial period 11.454 +0.092/−0.088 days. The rotation record ([rotation.json](source/preparation/rotation.json),
+read by [authored-rotation.ts](../../../packages/bake/src/objects/scene/authored-rotation.ts)) builds the axis in the
+planet's sky frame.
 
-**Axis: measured in three dimensions.** Cristo et al. (2024, [A&A 682, A28](https://doi.org/10.1051/0004-6361/202346366)) modelled the Rossiter–McLaughlin effect of HD 189733b in ESPRESSO spectra. As the planet crosses the rotating star it blocks first the side turning toward us, then the side turning away, which distorts the star's spectral lines. Their model includes differential rotation: the equator turns faster than the poles, so the distortion depends on the latitude the planet crosses. That gives the tilt of the axis toward us as well as its angle on the sky. Table 4 (model M1): projected obliquity λ = −1.00 +0.22/−0.23°, stellar inclination i★ = 71.87 +5.55/−6.91°, equatorial period 11.454 +0.092/−0.088 days. The rotation record, `cssearth-measured-obliquity-pole@1` ([rotation.json](source/preparation/rotation.json), read by [authored-rotation.ts](../../../packages/bake/src/objects/scene/authored-rotation.ts)), builds the axis in the planet's sky frame. The planet's orbit normal is (0, sin i, cos i) with +Z toward us; the spin axis is (sin i★ sin λ, sin i★ cos λ, cos i★). The star turns once every equatorial period. The record checks the published true obliquity: λ, i★ and the orbit's 85.71° inclination give ψ = 13.9°, inside the paper's 13.6 ± 6.9°. Longitude 0 faces the Sun at the scene epoch.
-
-**Navigation marker.** The distant marker is the same disc: the spectrum's colour dimmed toward the limb by the same law, rendered by [author.mts](../../../packages/telescope-cli/authoring/hd-189733/author.mts) (`--check` recomputes it).
-
-**On the map.** The star has no surface image, but a planet with imagery orbits it (`hostsImagery`) and its colour comes from its own spectrum (`sourceColor`, [prepare-object-discovery.mts](../../../site/build/prepare/prepare-object-discovery.mts)), so it stays on the map.
-
-**Its system.** The HD 189733 system holds the planet, on its measured orbit, and the companion B, which is measured to be bound to this star but has no measured orbit, so none is drawn (see [B's README](../hd-189733-companion/README.md)). The system view frames the planet's orbit, 7,000 times smaller than the companion's separation; once the camera is farther out than the two stars are apart, it turns onto the pair's centre of mass instead of this star.
-
-**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this dataset's prepared colour, #ffe2cf.
+**System.** Companion B is bound to this star but has no measured orbit, so none is drawn. The navigation marker is
+rendered by [author.mts](../../../packages/telescope-cli/authoring/hd-189733/author.mts) (`--check` recomputes it).
 
 ## Evidence
 
-The initial package was prepared on 2026-09-17 with [`node tools/prepare/prepare-object.mts hd-189733`](../../../packages/bake/cli/prepare-object.mts).
-
-- [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) (now [`packages/bake/src/objects/stellar/stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts)) reads the pinned XP spectra of both HD 189733 stars and checks their colours, 255, 226, 207 and 255, 201, 123, and that the spectrum's errors move no channel by more than 3.
-- `source.test.mts` verifies the pins and acquisitions, that radius and GM are the map paper's stellar values, that placement is the archived Gaia row, and that the TESS fit returns the coefficients above from 30 transits with the map's radius ratio within 0.001.
-- [`authored-rotation.test.mts`](../../../packages/bake/src/objects/scene/authored-rotation.test.mts) checks that λ −1.00° and i★ 71.87° with Cristo et al.'s own orbit inclination (85.508°) give ψ 13.68°, and that an aligned axis falls on the orbit normal. The source test checks that the prepared pole is 13.9° from HD 189733b's orbit normal.
-- `object-discovery.test.mts` checks that the three HD 189733 bodies stay on the map under every discovery setting while Antares and Polaris stay hidden.
-- [`rendered-system-view.png`](source/reference/rendered-system-view.png) shows the planet's orbit around the star from the earlier 2026-09-17 browser capture.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #ffe2cf is the colour dataset's prepared colour.
-- Run of 2026-09-23: [`stellar-spot-occultation.test.mts`](../../../packages/bake/src/objects/stellar/stellar-spot-occultation.test.mts) (now [`packages/bake/src/objects/stellar/stellar-spot-occultation.test.mts`](../../../packages/bake/src/objects/stellar/stellar-spot-occultation.test.mts)) checks Table 3's transcribed event, independent transit-chord projection and local alpha composition. [`stellar-spot-figure.test.mts`](../../../packages/bake/src/objects/stellar/stellar-spot-figure.test.mts) (now [`packages/bake/src/objects/stellar/stellar-spot-figure.test.mts`](../../../packages/bake/src/objects/stellar/stellar-spot-figure.test.mts)) checks the pinned AAS panel, paper parameters, broad extracted bands, removed guide line, linear-light contrast after sRGB composition, and untouched silhouette.
-- Run of 2026-09-23: [`rendered-default-view.png`](source/reference/rendered-default-view.png) and [`rendered-spot-2021-view.png`](source/reference/rendered-spot-2021-view.png) show the default Figure 7 band model and the separate dated transit dataset at 1440 × 900 in headless Chromium. The bands appear on the star, the picker and the card preview; the figure is labelled as a published illustration in the panel. The earlier 1.25× background-size multiplier made the plate larger than the sphere, so it was removed from this star's CSS.
+- Moving every spectrum sample one standard error changes the blue channel by at most 2.
+- Fitted one at a time, the TESS sectors give u₁ from 0.13 to 0.28 and u₂ from 0.37 to 0.54, while their sum stays
+  between 0.65 and 0.67, so the edge brightness is steady. The fitted radius ratio, 0.1556, matches the map's 0.1553.
+  The transit comes 6.4 ± 0.9 s before the map's ephemeris.
+- λ, i★ and the orbit's 85.71° inclination give a true obliquity ψ = 13.9°, inside the paper's 13.6 ± 6.9°.
+- [`rendered-default-view.png`](source/reference/rendered-default-view.png) and
+  [`rendered-spot-2021-view.png`](source/reference/rendered-spot-2021-view.png) show the two spot datasets;
+  [`rendered-system-view.png`](source/reference/rendered-system-view.png) shows the planet's orbit around the star.
 
 ## Known problems
 
-**No image of the surface.** At 19.8 pc the disc is 0.38 mas across. That is too small for any telescope, and the public interferometry of this star measures its size, not its surface.
-
-**The axis's tilt toward us rests on a tentative detection.** Cristo et al. detect differential rotation at 93.4% confidence; without it only the angle on the sky, 1°, is measured. The axis's position angle on the sky is not measured either: it is placed relative to the planet's orbit, whose orientation on the sky is a display convention. The sign convention of λ is not checked against the paper's; at 1° it moves the pole by 1°. The underlying surface map is uniform, so its rotation does not move either camera-facing spot plate; differential rotation is not drawn.
-
-**The radius is the map's, not the measured one.** The sphere is 9% smaller than the interferometric diameter, because the planet's orbit and size are fitted in units of 0.752 solar radii.
-
-**The limb darkening is measured in red light, by this project.** TESS observes 600–1000 nm; in visible light a K dwarf darkens more. The folded transits scatter about 1.8 times their pipeline errors (reduced χ² 3.4), from starspots and stellar noise the model leaves out. The local 0.9-second timing uncertainty describes the fitted model near its optimum; it does not include those model inadequacies.
-
-**Spot patterns are stationary models.** A transit constrains a dark region along one chord, not unobserved latitudes or the entire photosphere. The selected 2021 candidate cannot be carried to another date through rotation without a tracked location and evolution model. The Figure 7 bands illustrate one arrangement consistent with activity estimates, not a measured surface. Both spot plates remain fixed while the underlying uniform sphere turns. Rotating spots require a later, explicit model.
+- **No image of the surface.** At 19.8 pc the disc is 0.38 mas across, too small for any telescope. The public
+  interferometry of this star measures its size, not its surface.
+- **The radius is the map's, not the measured one.** CHARA measured a limb-darkened diameter of 0.3848 ± 0.0055 mas in
+  the H band (Boyajian et al. 2015, MNRAS 447, 846), which gives 0.818 solar radii at the Gaia distance. The sphere is
+  9% smaller; see the [investigation ledger](investigations.json).
+- **The axis's tilt toward us rests on a tentative detection.** Cristo et al. detect differential rotation at 93.4%
+  confidence. The axis's position angle on the sky is not measured; it follows the planet's orbit, whose sky orientation
+  is a display convention. The sign convention of λ is not checked against the paper's; at 1° it moves the pole by 1°.
+- **The limb darkening is measured in red light.** TESS observes 600–1000 nm; in visible light a K dwarf darkens more.
+  The folded transits scatter about 1.8 times their pipeline errors (reduced χ² 3.4), from starspots and stellar noise.
+- **Spot patterns are stationary models.** A transit constrains one chord, not the whole photosphere. The Figure 7
+  bands illustrate one arrangement consistent with activity estimates, not a measured surface; their dark pixels cover
+  about half the disc, which is not a new measurement of spot coverage. Both spot plates stay fixed while the sphere
+  turns, and spot contrast is applied achromatically.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
