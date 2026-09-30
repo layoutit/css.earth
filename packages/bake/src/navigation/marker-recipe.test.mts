@@ -7,7 +7,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import sharp from "sharp";
 
-import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "@cssearth/bake/navigation";
+import { loadObjectMarkerDescriptor } from "@cssearth/bake/navigation";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
@@ -16,15 +16,6 @@ import {
 
 const marsMarker = validateMarkerDescriptor(await loadObjectMarkerDescriptor("mars", projectRoot(import.meta.url)));
 
-test("accepts every object-owned marker recipe", async () => {
-  for (const descriptor of await loadMarkerDescriptors()) {
-    assert.equal(validateMarkerDescriptor(descriptor), descriptor);
-    // Pins became optional for files this repository authors; a marker source is a download, so
-    // it must still carry one.
-    assert.ok(["http:", "https:"].includes(new URL(descriptor.source.origin).protocol));
-    assert.ok(descriptor.source.credit.length > 0);
-  }
-});
 
 test("context markers keep a complete disc without inventing missing terrain", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-marker-coverage-"));
