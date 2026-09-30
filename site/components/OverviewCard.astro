@@ -77,23 +77,26 @@ const tabs = [...(sceneMembers.length ? [{ id: 'bodies', label: 'Celestial bodie
   ...(facts ? [{ id: 'factsheet', label: 'Factsheet' }] : [])];
 // A card's distances are measured from the member that holds the stars, where it lists one (the Milky Way in the Local
 // Group: the view from home); otherwise from the observer, as the catalogues publish them.
+// The first tab opens the card; the other tabs' panels wait in templates until chosen (tab-panels.mts).
+const opening = tabs[0]?.id;
 const home = lists.flatMap(list => list.members).find(member => member.holdsStars)?.id ?? 'observer';
+import Detached from './Detached.astro';
 ---
-<ObjectCard class="object-overview-card" data-large-scale-overview={overview.id} data-large-scale-name={overview.name} data-neighbor-home={home} hidden>
+<Detached detached><ObjectCard class="object-overview-card" data-large-scale-overview={overview.id} data-large-scale-name={overview.name} data-neighbor-home={home} hidden>
   <ObjectCardHeader heading={false} title={{ label: overview.name }} introduction={overview.description}>
     <ObjectBreadcrumbs scope={overview.id} />
   </ObjectCardHeader>
   {tabs.length > 0 && <InformationTabs idPrefix={overview.id} group={overview.id} label={`${overview.name} information`} {tabs} />}
-  {datasets && <div class="object-results-scroll object-card-tabpanel object-dataset-content" id={`${overview.id}-datasets-content`}
+  {datasets && <Detached detached={opening !== 'datasets'}><div class="object-results-scroll object-card-tabpanel object-dataset-content" id={`${overview.id}-datasets-content`}
     role="region" aria-label="Datasets" data-page-datasets={overview.id} data-default-dataset={datasets.defaultDataset}
     data-dataset-views={JSON.stringify(datasets.views)}>
     <DatasetList objectId={`page-${overview.id}`} thumbnailObjectId={overview.id} page={overview.id} route={overview.route}
       datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} focus />
-  </div>}
-  {sceneMembers.length > 0 && <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-bodies-content`} role="region" aria-label="Celestial bodies">
+  </div></Detached>}
+  {sceneMembers.length > 0 && <Detached detached={opening !== 'bodies'}><div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-bodies-content`} role="region" aria-label="Celestial bodies">
     <ul class="object-list">{sceneMembers.map(object => <ObjectResult {object} />)}</ul>
-  </div>}
-  {lists.map(list => <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-${list.id}-content`} role="region" aria-label={list.label}>
+  </div></Detached>}
+  {lists.map(list => <Detached detached={opening !== list.id}><div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-${list.id}-content`} role="region" aria-label={list.label}>
     <ul class="object-list">
       {list.members.map(member => <li class="object-item" data-neighbor-id={member.id}
         data-neighbor-distances={JSON.stringify({ observer: member.distancePc, ...Object.fromEntries(list.members.map(origin => [origin.id,
@@ -101,8 +104,8 @@ const home = lists.flatMap(list => list.members).find(member => member.holdsStar
         <Fragment set:html={memberMarkup(member)} />
       </li>)}
     </ul>
-  </div>)}
-  {facts && <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-factsheet-content`} role="region" aria-label="Factsheet">
+  </div></Detached>)}
+  {facts && <Detached detached={opening !== 'factsheet'}><div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-factsheet-content`} role="region" aria-label="Factsheet">
     <ObjectFactsheet id={overview.id} facts={facts.facts} embedded />
-  </div>}
-</ObjectCard>
+  </div></Detached>}
+</ObjectCard></Detached>

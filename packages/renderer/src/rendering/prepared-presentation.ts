@@ -10,7 +10,7 @@ import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./styl
 import { createTextureTileWriter, selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
-import { meshProfile, omittedPreparedNodes } from './prepared-omitted-nodes.js';
+import { hiddenSubtreeRoots, meshProfile, omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { createSettlePacer } from './settle-pacer.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
@@ -168,25 +168,32 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage, definition.assetOrigin,
       new Set(definition.variants.flatMap(variant => [...omittedPreparedNodes(definition.tree, variant)])));
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
-  // A body with several shape models mounts only the mesh its dataset draws on (prepared-omitted-nodes.ts): the
-  // others' leaves stay built but unattached, and a selection swaps them.
-  const meshLeaves = new Map<string, { parent: HTMLElement; leaves: HTMLElement[] }>();
+  // What a selection hides is not mounted (prepared-omitted-nodes.ts): a body with several shape models mounts only the
+  // mesh its dataset draws on, and a hidden subtree (Earth's and Saturn's cutaways) only while a dataset shows it. Their
+  // nodes stay built but unattached, and a selection swaps them.
+  const detachable = new Map<string, { parent: HTMLElement; leaves: HTMLElement[] }>();
   definition.tree.nodes.forEach((record, index) => {
     const profile = meshProfile(record.style) ?? meshProfile(nodes[index].getAttribute("style"));
     if (!profile) return;
-    const mesh = meshLeaves.get(profile);
-    if (mesh) mesh.leaves.push(nodes[index]); else meshLeaves.set(profile, { parent: nodes[record.parent], leaves: [nodes[index]] });
+    const mesh = detachable.get(profile);
+    if (mesh) mesh.leaves.push(nodes[index]); else detachable.set(profile, { parent: nodes[record.parent], leaves: [nodes[index]] });
   });
   const meshTargets = new Map(definition.variants.flatMap(variant => variant.writes.flatMap(write =>
-    write.kind === "style" && meshLeaves.has(write.name) ? [[write.name, write.target] as const] : [])));
-  const mountMesh = (profile: string, on: boolean) => {
-    const mesh = meshLeaves.get(profile);
-    if (!mesh) return;
-    if (!on) { for (const leaf of mesh.leaves) leaf.remove(); return; }
-    const detached = mesh.leaves.filter(leaf => !leaf.parentNode);
-    if (detached.length) mesh.parent.append(...detached);
+    write.kind === "style" && detachable.has(write.name) ? [[write.name, write.target] as const] : [])));
+  const hiddenRoots = new Set(definition.variants.flatMap(variant => [...hiddenSubtreeRoots(variant)]));
+  const subtreeKey = (root: number) => `subtree:${root}`;
+  for (const root of hiddenRoots) detachable.set(subtreeKey(root), { parent: nodes[root],
+    leaves: definition.tree.nodes.flatMap((record, index) => record.parent === root ? [nodes[index]] : []) });
+  const mountDetachable = (key: string, on: boolean) => {
+    const group = detachable.get(key);
+    if (!group) return;
+    if (!on) { for (const leaf of group.leaves) leaf.remove(); return; }
+    const detached = group.leaves.filter(leaf => !leaf.parentNode);
+    if (detached.length) group.parent.append(...detached);
   };
-  for (const [profile, index] of meshTargets) if (nodes[index]?.style.getPropertyValue(profile) !== "block") mountMesh(profile, false);
+  for (const [profile, index] of meshTargets) if (nodes[index]?.style.getPropertyValue(profile) !== "block") mountDetachable(profile, false);
+  // A subtree the server rendered is the one its selection shows; one built here waits for a selection that shows it.
+  for (const root of hiddenRoots) if (!detachable.get(subtreeKey(root))!.leaves.some(leaf => leaf.dataset.preparedNode !== undefined)) mountDetachable(subtreeKey(root), false);
   const owned = () => roots.some(root => root.parentNode === stage);
   const stageBindings = new Map<string, PreparedWrite>();
   for (const variant of definition.variants) for (const binding of variant.writes) {
@@ -309,12 +316,15 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // incoming profile only after the complete dataset has been published.
       // If publication is interrupted, the body fails closed instead of
       // rendering one mesh with another mesh's texel addresses.
-      for (const binding of hiddenProfiles) { publish(binding); if (binding.kind === "style") mountMesh(binding.name, false); }
+      for (const binding of hiddenProfiles) { publish(binding); if (binding.kind === "style") mountDetachable(binding.name, false); }
+      const hiddenNow = hiddenSubtreeRoots(variant);
+      for (const root of hiddenRoots) if (hiddenNow.has(root)) mountDetachable(subtreeKey(root), false);
       for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
         publishStyle(binding.target, binding.name, "none");
       }
       for (const binding of contentWrites) publish(binding);
-      for (const binding of shownProfiles) { if (binding.kind === "style") mountMesh(binding.name, true); publish(binding); }
+      for (const root of hiddenRoots) if (!hiddenNow.has(root)) mountDetachable(subtreeKey(root), true);
+      for (const binding of shownProfiles) { if (binding.kind === "style") mountDetachable(binding.name, true); publish(binding); }
       selectedTextures = new Map(variant.writes.filter(binding => binding.kind === "texture").map(binding => [styleKey(binding), binding]));
       for (const entry of motion) {
         const duration = entry.plan.timings.find(timing => Object.entries(timing.when).every(([name, value]) => selection[name] === value))?.duration ?? entry.plan.duration;

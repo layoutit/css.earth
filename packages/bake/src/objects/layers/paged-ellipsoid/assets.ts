@@ -16,7 +16,9 @@ import {readJsonSource} from '../../sources/index.ts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 type Tomography = Awaited<ReturnType<typeof readMantleTomography>>;
-interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway; nativePhotographicClouds?: NativePhotographicCloudComposite; nativePhotographicSampling?: boolean; nativePhotographicDisplayGamma?: number; nativeDeepOceanFill?: NativeDeepOceanFill;}
+interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway; nativePhotographicClouds?: NativePhotographicCloudComposite; nativePhotographicSampling?: boolean; nativePhotographicDisplayGamma?: number; nativeDeepOceanFill?: NativeDeepOceanFill;
+  /** Also writes these poles cut open by the interior cutaway, as `<name>-poles.webp`: the cutaway shell's caps. */
+  cutawayPoles?: {name: string; cutaway: Cutaway};}
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
@@ -51,7 +53,7 @@ const produced = new Set<string>();
 const output = (path: string) => { produced.add(`${config.publicBase}${path}`); return resolve(publicDirectory,path); };
 await mkdir(publicDirectory,{recursive:true});
 if (mode === 'interior') {
-  await prepareInteriorAssets({ exterior: false });
+  await prepareInteriorAssets();
   return { assets: [...produced].sort() };
 }
 if (mode !== 'materials') {
@@ -78,9 +80,11 @@ if (mode !== 'materials') {
       } else throw new TypeError("Unknown scientific surface source");
     }
     inputs.set(map.name, input);
-    if (mode !== 'thumbnails' && mode !== 'extras') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,deepOceanFill:map.deepOceanFill,kernel:map.scientific?"nearest":undefined,webp:map.webp});
+    // The cutaway shell is the default surface: its pages are shared, and only its caps are cut open (the wedge).
+    const cutawayPoles = map === config.surface.maps[0] && config.geometry.interiorCutaway ? { name: `${config.namespace}-interior-outer`, cutaway: config.geometry.interiorCutaway } : undefined;
+    if (mode !== 'thumbnails' && mode !== 'extras') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,deepOceanFill:map.deepOceanFill,kernel:map.scientific?"nearest":undefined,webp:map.webp,cutawayPoles});
   }
-  if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
+  if (mode === 'thumbnails') await prepareInteriorAssets({ thumbnailsOnly: true });
   else if (mode !== 'maps') await prepareInteriorAssets();
   if (mode !== 'maps') for (const map of surfaceMaps) {
     let input = inputs.get(map.name);
@@ -96,8 +100,8 @@ if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps' && mode !== 
 clearDeepOceanFillCache();
 return { assets: [...produced].sort() };
 async function prepareMap(input: string | Buffer, name: string, {
-  compositeClouds = false, displayGamma, nativePhotographicSampling = false, deepOceanFill, kernel = "lanczos3", webp = {},
-}: {compositeClouds?: boolean; displayGamma?: number; nativePhotographicSampling?: boolean; deepOceanFill?: SurfaceMapInput['deepOceanFill']; kernel?: ResizeKernel; webp?: WebpOptions} = {}) {
+  compositeClouds = false, displayGamma, nativePhotographicSampling = false, deepOceanFill, kernel = "lanczos3", webp = {}, cutawayPoles,
+}: {compositeClouds?: boolean; displayGamma?: number; nativePhotographicSampling?: boolean; deepOceanFill?: SurfaceMapInput['deepOceanFill']; kernel?: ResizeKernel; webp?: WebpOptions; cutawayPoles?: SphereAssetInput['cutawayPoles']} = {}) {
   const prepared = await preparePagedSurfaceMap({
     config, sourceDirectory, map: { path: input, compositeClouds, displayGamma, nativePhotographicSampling, deepOceanFill }, kernel,
   });
@@ -126,6 +130,7 @@ async function prepareMap(input: string | Buffer, name: string, {
     nativeDeepOceanFill,
     nativePhotographicDisplayGamma: displayGamma,
     webp: { quality: surfaceQuality, smartSubsample: true, ...webp },
+    cutawayPoles,
   });
 }
 
@@ -134,7 +139,7 @@ async function writeSphereAssets({ data, width, height, channels, density,
   canonical = false, outputRoot = PUBLIC_ROOT, name, bandCount,
   polarCapBandSpan = 1, projectiveSurface = false,
   longitudeOffsetDegrees, webp, cutaway, nativePhotographicClouds, nativeDeepOceanFill,
-  nativePhotographicSampling = false, nativePhotographicDisplayGamma = 1 }: SphereAssetInput) {
+  nativePhotographicSampling = false, nativePhotographicDisplayGamma = 1, cutawayPoles }: SphereAssetInput) {
   const suffix = canonical ? "" : density === 2 ? "@2x" : "";
   let surfaceData = data;
   let surfaceWidth = width;
@@ -183,6 +188,12 @@ async function writeSphereAssets({ data, width, height, channels, density,
     } })
       .webp(cutaway ? { lossless: true } : { ...webp, alphaQuality: 100 })
       .toFile(output(`${name}-poles${suffix}.webp`));
+  if (cutawayPoles) {
+    const cut = Buffer.from(poles);
+    cutInteriorPoles(cut, polarTileSize, cutawayPoles.cutaway);
+    await sharp(cut, { raw: { width: polarTileSize * 2, height: polarTileSize, channels: 4 } })
+      .webp({ ...webp, alphaQuality: 100 }).toFile(output(`${cutawayPoles.name}-poles${suffix}.webp`));
+  }
 }
 
 function orientLatitudeBands(data: Buffer, { width, height, channels }: RasterInfo, bandCount: number) {
@@ -405,14 +416,13 @@ function normalizeVector(vector: readonly number[]) {
   return vector.map((component) => component / length);
 }
 
-async function prepareInteriorAssets({ exterior = true, thumbnailsOnly = false } = {}) {
+async function prepareInteriorAssets({ thumbnailsOnly = false } = {}) {
   const interior = validateInteriorSource(await readJsonSource(source(config.interiorPath)));
   const tomography = await readMantleTomography(sourceDirectory, interior, config);
   if (tomography && !thumbnailsOnly) {
     const legend = tomographyLegend(tomography.recipe);
     await sharp(legend.data, { raw: legend }).png().toFile(output(tomography.recipe.legend.image));
   }
-  if (exterior) await prepareInteriorOuterPoles();
   for (const bank of [{ name: 'interior', tomography: null }, ...(tomography ? [{ name: 'tomography', tomography }] : [])]) {
   const tomography = bank.tomography;
   if (!thumbnailsOnly) {
@@ -454,76 +464,6 @@ async function prepareInteriorAssets({ exterior = true, thumbnailsOnly = false }
     output(`${config.namespace}-view-${bank.name}.webp`),
   );
   }
-}
-
-async function prepareInteriorOuterPoles() {
-  for (const density of [1, 2]) {
-    const width = 2048 * density;
-    const height = 1024 * density;
-    const { data: base, info } = await sharp(
-      source(config.surface.maps[0].path),
-    ).resize(width, height, { fit: "fill" })
-      .removeAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    applyDisplayGamma(base, config.surface.maps[0].displayGamma);
-    const oceanFill = config.surface.maps[0].deepOceanFill;
-    if (oceanFill) {
-      const fill = await readDeepOceanFill(sourceDirectory, oceanFill, config.surface.maps[0].path);
-      applyDeepOceanFill(base, await resizeDeepOceanFill(fill, width, height), { width, height, channels: info.channels });
-    }
-    const clouded = await prepareCloudComposite(base, {
-      width,
-      height,
-      channels: info.channels,
-      config,
-      sourceDirectory,
-    });
-    const lit = prepareObjectLightingMap({
-      data: clouded,
-      width,
-      height,
-      channels: info.channels,
-    });
-    for (const [suffix, data] of [["", clouded], ["-lit", lit]] as const) await writeSphereAssets({
-      data,
-      width,
-      height,
-      channels: info.channels,
-      density,
-      name: `${config.namespace}-interior-outer${suffix}`,
-      projectiveSurface: true,
-      bandCount: 16,
-      longitudeOffsetDegrees: 0,
-      webp: { quality: 88, smartSubsample: true },
-      cutaway: config.geometry.interiorCutaway,
-    });
-  }
-}
-
-function prepareObjectLightingMap({ data, width, height, channels }: RasterInfo & {data: Buffer}) {
-  const output = Buffer.from(data);
-  const radians = Math.PI / 180;
-  const objectLight = normalizeVector(requireMaterialPreparation().attitude.objectLight);
-  for (let y = 0; y < height; y += 1) {
-    const latitude = Math.PI / 2 - (y + 0.5) / height * Math.PI;
-    const latitudeRadius = Math.cos(latitude);
-    for (let x = 0; x < width; x += 1) {
-      const longitude = (x + 0.5) / width * Math.PI * 2;
-      const normal = [
-        latitudeRadius * Math.cos(longitude),
-        latitudeRadius * Math.sin(longitude),
-        Math.sin(latitude),
-      ];
-      const lambert = Math.max(0, dotVector(normal, objectLight));
-      const factor = 0.12 + 0.88 * lambert * smoothstep(0, 0.1, lambert);
-      const offset = (y * width + x) * channels;
-      for (let channel = 0; channel < 3; channel += 1) {
-        output[offset + channel] = applyLinearTint(data[offset + channel], factor);
-      }
-    }
-  }
-  return output;
 }
 
 function validateInteriorSource(input: unknown) {

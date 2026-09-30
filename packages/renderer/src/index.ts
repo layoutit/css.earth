@@ -38,6 +38,8 @@ export { parsePreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureCatalog, 
 export { surfaceFeatureCaption } from './labels/surface-feature-caption.js';
 export { serializePreparedScene } from './rendering/prepared-scene-serialization.js';
 export { omittedPreparedNodes } from './rendering/prepared-omitted-nodes.js';
+export { selectedPreparedVariant } from './rendering/prepared-presentation.js';
+export { sectionElements, sectionPlaceholder, showSection } from './rendering/detached-sections.js';
 export type { PreparedSceneMarkup, SerializedPreparedScene, PreparedTextureResolver } from './rendering/prepared-scene-serialization.js';
 export { publishPreparedNativeView } from './rendering/prepared-native-view.js';
 export type { PreparedSurfaceFeaturePlan, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeature, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';

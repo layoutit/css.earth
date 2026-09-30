@@ -51,21 +51,22 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
   const bands = credited.map(entry => entry.band);
   return bands.every(Boolean) && new Set(bands).size === bands.length;
 };
+import Detached from './Detached.astro';
 ---
 <aside class="object-dataset-context-rail" data-dataset-context-owner={objectId} aria-label="Selected dataset context">
   {contexts.map(context => {
     const credited = contributors(context);
     const tabbed = credited.length > 1, byBand = distinctBands(credited);
     const groups = credited.length ? [credited] : [];
-    return <div data-dataset-context={context.dataset.id} hidden={context.dataset.id !== datasets?.defaultDataset}>
+    return <Detached detached={context.dataset.id !== datasets?.defaultDataset}><div data-dataset-context={context.dataset.id} hidden={context.dataset.id !== datasets?.defaultDataset}>
       {groups.map(group => <ObjectCard class="object-dataset-context-card" role="region"
         aria-label={tabbed ? 'Credited machines' : group[0].title}>
         {tabbed && <InformationTabs idPrefix={`${objectId}-${context.dataset.id}`}
           group={`context-${objectId}-${context.dataset.id}`} label="Credited machines" panelSuffix="panel"
           tabs={group.map(entry => ({ id: entry.id, label: byBand ? entry.band! : entry.title }))} />}
-        {group.map(entry => {
+        {group.map((entry, index) => {
           const publishedBackdrop = entry.image?.kind.startsWith('published-') ?? false;
-          return <div class="object-card-tabpanel"
+          return <Detached detached={tabbed && index > 0}><div class="object-card-tabpanel"
           id={tabbed ? `${objectId}-${context.dataset.id}-${entry.id}-panel` : undefined}
           data-information-group={tabbed ? `context-${objectId}-${context.dataset.id}` : undefined}
           data-information-panel={tabbed ? entry.id : undefined}
@@ -91,8 +92,8 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
               </div>
             </SelectedContent>
           </article>
-        </div>; })}
+        </div></Detached>; })}
       </ObjectCard>)}
-    </div>;
+    </div></Detached>;
   })}
 </aside>

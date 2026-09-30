@@ -62,3 +62,21 @@ test('a small level draws every page of a bank from one sheet; the finest level 
   assert.deepEqual([...data.subarray((16 + 4) * info.channels, (16 + 4) * info.channels + 3)], [0, 0, 255]);
   assert.equal(levels!.entries.some(entry => entry.key.startsWith('page:normal:') && entry.key.includes(':level:')), false);
 });
+
+test('a bank prepared at lower density places its pages on the same CSS offsets as the full bank', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'texture-sheet-density-'));
+  const page = (size: number, colour: string) => sharp({ create: { width: size, height: size, channels: 4, background: colour } }).webp({ lossless: true }).toBuffer();
+  await writeFile(join(directory, 'test-surface.webp'), await page(32, '#ff0000'));
+  await writeFile(join(directory, 'test-surface-page-1.webp'), await page(32, '#0000ff'));
+  await writeFile(join(directory, 'test-outer.webp'), await page(16, '#00ff00'));
+  await writeFile(join(directory, 'test-outer-page-1.webp'), await page(16, '#ffff00'));
+  const levels = await prepareTextureLevels({ publicDirectory: directory,
+    config: { textureLevels: { widths: [16, 32], hysteresis: 0.2, texelsPerCssPixel: 2 }, atlas: { pageSize: 32, density: 16 },
+      camera: { logicalBodyDiameter: 460 }, publicBase: '/scenes/test/' },
+    banks: [{ id: 'normal', urls: ['/scenes/test/test-surface.webp', '/scenes/test/test-surface-page-1.webp'] },
+      { id: 'outer', urls: ['/scenes/test/test-outer.webp', '/scenes/test/test-outer-page-1.webp'] }] });
+  const [coarse] = levels!.textureLevels.levels;
+  // Earth's cutaway shell: its pages are a quarter of the surface's width, but tile the same CSS pages.
+  assert.deepEqual(coarse!.tiles?.['page:outer:1'], { ...coarse!.tiles?.['page:normal:1'], scale: coarse!.tiles?.['page:outer:1']?.scale });
+  assert.equal(coarse!.tiles?.['page:outer:1']?.x, coarse!.tiles?.['page:normal:1']?.x);
+});

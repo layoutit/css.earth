@@ -3,6 +3,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
+import { initialObjectSelection, loadPreparedCssObject, omittedPreparedNodes, selectedPreparedVariant } from '@cssearth/renderer';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
 import { renderDatasetResponse } from '../dataset-response.mts';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
@@ -33,7 +34,10 @@ test('native selection replaces only the existing prepared presentation and sele
     const result = await renderDatasetResponse(html, new URL(`/saturn/?dataset=${id}`, origin), 'saturn', read);
     const document = parseHTML(result).document;
     assert.equal(document.querySelectorAll('.polycss-scene').length, 1);
-    assert.equal(document.querySelectorAll('[data-prepared-node]').length, scene.nodes);
+    // The markup carries the nodes this dataset shows: what it hides stays out (prepared-omitted-nodes.ts).
+    const definition = await loadPreparedCssObject(prepared.descriptor, { async read() { return Uint8Array.from(prepared.bytes).buffer; } });
+    const variant = selectedPreparedVariant(definition, initialObjectSelection(definition.controls, id));
+    assert.equal(document.querySelectorAll('[data-prepared-node]').length, scene.nodes - omittedPreparedNodes(definition.tree, variant).size);
     assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-dataset'), id);
     assert.equal(document.querySelector('button[aria-pressed="true"]')?.getAttribute('value'), id);
     assert.equal(document.querySelector('[data-dataset-details]:not([hidden])')?.getAttribute('data-dataset-details'), id);

@@ -38,11 +38,12 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
   const defaultDataset=datasets.controls.find(dataset=>dataset.id===datasets.defaultDataset);
   if (!defaultDataset) throw new TypeError('Paged presentation requires its declared default dataset.');
   const banks=surfaceBankInventory(plan,datasets,config.publicBase);
-  const bankId=(dataset: PagedDataset,shadows=false)=>dataset.view==="interior"&&shadows?`${dataset.id}-lit`:dataset.surfaceBankId??dataset.id;
-  const pageKeys=(dataset: PagedDataset,shadows=false)=>{
-    const bank=banks.find(bank=>bank.id===bankId(dataset,shadows));
-    if (!bank) throw new TypeError(`Missing prepared surface bank: ${bankId(dataset,shadows)}`);
-    return bank.urls.map((_,i)=>`page:${bankId(dataset,shadows)}:${i}`);
+  // The cutaway shell is the surface: an interior dataset reads the default dataset's pages and poles.
+  const bankId=(dataset: PagedDataset): string=>dataset.view==="interior"?bankId(defaultDataset):dataset.surfaceBankId??dataset.id;
+  const pageKeys=(dataset: PagedDataset)=>{
+    const bank=banks.find(bank=>bank.id===bankId(dataset));
+    if (!bank) throw new TypeError(`Missing prepared surface bank: ${bankId(dataset)}`);
+    return bank.urls.map((_,i)=>`page:${bankId(dataset)}:${i}`);
   };
   const interiorUrls=[...new Set([
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
@@ -57,10 +58,10 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
   }));
   const levelled=new Set(textureLevels?.entries.map(entry=>entry.key));
   const entries=[...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
-    ...datasets.controls.filter(dataset=>!levelled.has(`poles:${dataset.id}`)).flatMap(dataset=>dataset.view==="interior"?
-      [{key:`poles:${dataset.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
-        {key:`poles:${dataset.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
-      [{key:`poles:${dataset.id}`,url:canonicalPreparedAsset(requireString(dataset.polesUrl, `Pole texture for ${dataset.id}`)),pool:"mounted"}]),
+    ...datasets.controls.filter(dataset=>dataset.view!=="interior"&&!levelled.has(`poles:${dataset.id}`)).map(dataset=>
+      ({key:`poles:${dataset.id}`,url:canonicalPreparedAsset(requireString(dataset.polesUrl, `Pole texture for ${dataset.id}`)),pool:"mounted"})),
+    // The cutaway shell's caps: the default surface's poles with the wedge cut out (assets.ts).
+    ...(datasets.controls.some(dataset=>dataset.view==="interior")?[{key:"poles:cutaway",url:`${config.publicBase}${config.namespace}-interior-outer-poles.webp`,pool:"mounted"}]:[]),
     ...[...interiorBanks.values()].flat(),
     ...materialIds.flatMap(id=>[
       {key:`default:${id}`,url:canonicalPreparedAsset(plan.material[id].defaultAssets),pool:"default-materials"},
@@ -147,15 +148,15 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
       frameAttribute:null,modeAttribute:null,quoted:true};
   });
   const variants=datasets.controls.flatMap(dataset=>[false,true].map(shadows=>{
-    const isInterior=dataset.view==="interior",keys=pageKeys(dataset,shadows),texture=(node: PreparedNode,name: string,resource: string | null)=>({kind:"texture",target:index(node),name,resource,quoted:true});
+    const isInterior=dataset.view==="interior",keys=pageKeys(dataset),texture=(node: PreparedNode,name: string,resource: string | null)=>({kind:"texture",target:index(node),name,resource,quoted:true});
     const interiorBank=interiorBanks.get(dataset.id);
     if (isInterior && !interiorBank) throw new TypeError(`Missing prepared interior bank: ${dataset.id}`);
     const pageWrites=(carriers: readonly PreparedNode[],active: boolean)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
     // Outside the interior view the cutaway is not shown (earth-surfaces.css), so page markup leaves its 500-odd nodes out.
-    return {when:{datasetId:dataset.id,shadows},...(isInterior?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:dataset.maximumZoom,camera:dataset.camera??null},required:[...keys,`poles:${bankId(dataset,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
+    return {when:{datasetId:dataset.id,shadows},...(isInterior?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:dataset.maximumZoom,camera:dataset.camera??null},required:[...keys,isInterior?"poles:cutaway":`poles:${bankId(dataset)}`,...(interiorBank?.map(entry=>entry.key)??[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
         ...(isInterior?interiorTextureNodes.map(({node,url})=>texture(node,'background-image',requireInteriorResource(interiorBank, interiorUrls.indexOf(url)))):[]),
-        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(dataset,shadows)}`)),
+        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,isInterior?"poles:cutaway":`poles:${bankId(dataset)}`)),
         ...pageWrites(isInterior?body.surface:interior.surface,false),
         {kind:"attribute",target:-1,name:"data-view",value:isInterior?"interior":null},
         {kind:"attribute",target:-1,name:"data-dataset",value:dataset.id}],

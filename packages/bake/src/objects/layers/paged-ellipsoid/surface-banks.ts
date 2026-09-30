@@ -10,21 +10,15 @@ export function requireSurfacePages(urls: unknown, label: string, assetPath: str
   return Object.freeze(urls.map((url: unknown) => { if (typeof url !== "string") throw new TypeError("Invalid surface page URL."); return url; }));
 }
 
+/** One bank per dataset with its own pages. A dataset that names another's bank, or shows the interior (the cutaway
+ * shell is the surface itself), reads the default dataset's pages: no second copy of the surface is prepared. */
 export function surfaceBankInventory(plan: SurfaceBankPlan, datasets: SurfaceBankDatasets, assetPath: string) {
   const body = plan.body.assets.surface;
   const bodyPages = requireSurfacePages(body.urls, "Default surface", assetPath);
-  const outer = plan.interior.outerAssets.surface;
-  const outerOne = requireSurfacePages(outer.oneUrls, "Interior source surface", assetPath);
-  const outerTwo = requireSurfacePages(outer.twoUrls, "Canonical interior surface", assetPath);
-  if (outer.one !== outerOne[0] || outer.two !== outerTwo[0] ||
-      outerOne.length !== bodyPages.length || outerTwo.length !== bodyPages.length ||
-      body.url !== bodyPages[0]) {
-    throw new TypeError("Earth prepared surface page metadata is inconsistent.");
-  }
-  const banks = datasets.controls.filter(dataset => !dataset.surfaceBankId).map((dataset) => {
-    const urls = dataset.view === "interior" ? outerTwo
-      : requireSurfacePages(dataset.surfaceUrls, `${dataset.id} surface`, assetPath);
-    if (urls.length !== bodyPages.length || dataset.view !== "interior" && dataset.surfaceUrl !== urls[0]) {
+  if (body.url !== bodyPages[0]) throw new TypeError("Earth prepared surface page metadata is inconsistent.");
+  const banks = datasets.controls.filter(dataset => !dataset.surfaceBankId && dataset.view !== "interior").map((dataset) => {
+    const urls = requireSurfacePages(dataset.surfaceUrls, `${dataset.id} surface`, assetPath);
+    if (urls.length !== bodyPages.length || dataset.surfaceUrl !== urls[0]) {
       throw new TypeError("Earth dataset surface page metadata is inconsistent.");
     }
     if (dataset.id === datasets.defaultDataset &&
@@ -33,10 +27,5 @@ export function surfaceBankInventory(plan: SurfaceBankPlan, datasets: SurfaceBan
     }
     return Object.freeze({ id: dataset.id, urls });
   });
-  for (const dataset of datasets.controls.filter(dataset => dataset.view === "interior")) {
-    const urls = requireSurfacePages(plan.interior.outerAssets.litSurface.urls, "Lit interior surface", assetPath);
-    if (urls.length !== bodyPages.length) throw new TypeError("Lit interior surface page count differs.");
-    banks.push(Object.freeze({ id: `${dataset.id}-lit`, urls }));
-  }
   return Object.freeze(banks);
 }

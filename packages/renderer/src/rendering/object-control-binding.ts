@@ -1,3 +1,4 @@
+import { sectionElements, showSection } from './detached-sections.js';
 import type { ObjectControls, ObjectSelection, ObjectAction } from "../runtime/object-contract.js";
 import type { ObjectSelectionState } from "./object-selection-runtime.js";
 import { SHELL_SETTING_NAMES } from '../runtime/shell-settings.js';
@@ -61,11 +62,9 @@ export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], d
     const option = button.closest<HTMLElement>('[data-step-group]');
     if (option?.dataset.stepListed === 'true') setAttribute(button, 'aria-pressed', String(groups.get(option.dataset.stepGroup!) === true));
   }
-  for (const { id, panel } of details) if (panel.hidden !== (id !== active)) panel.hidden = id !== active;
-  for (const context of contexts) {
-    const hidden = context.dataset.datasetContext !== active;
-    if (context.hidden !== hidden) context.hidden = hidden;
-  }
+  // Only the active dataset's details and context are mounted (detached-sections.ts).
+  for (const { id, panel } of details) showSection(panel, id === active);
+  for (const context of contexts) showSection(context, context.dataset.datasetContext === active);
   publishDatasetPreview(previewRoot, buttons);
 }
 
@@ -95,16 +94,17 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !SHELL_SETTING_NAMES.has(input.name));
+  const panels = new Map(sectionElements(document, '[data-dataset-details], [data-focus-dataset-details]').map(panel => [panel.id, panel]));
   const details = datasetInputs.map(input => {
     const id = input.getAttribute('aria-controls');
-    const panel = id ? document.getElementById(id) : null;
+    const panel = id ? panels.get(id) ?? document.getElementById(id) : null;
     if (!panel) throw new Error(`Rendered dataset details are missing: ${input.value}.`);
     return { id: input.value, panel };
   });
   // The shell can move a dataset's details outside the form's original root.
   const playInputs = details.flatMap(({ panel }) => [...panel.querySelectorAll<HTMLButtonElement>('[data-dataset-play]')]);
   for (const input of playInputs) input.closest<HTMLElement>('[data-sequence-player]')?.style.setProperty('--sequence-hold', `${SEQUENCE_HOLD_MS}ms`);
-  const contexts = [...(information?.querySelectorAll<HTMLElement>('[data-dataset-context]') ?? [])];
+  const contexts = information ? sectionElements(information, '[data-dataset-context]') : [];
   const busyRoots = new Set([datasetRoot, settingsRoot].filter((root): root is Element => !!root));
   const datasets = new Map(datasetInputs.map(input => [input.value, input]));
   const settings = new Map(settingsInputs.map(input => [input.name, input]));
@@ -202,9 +202,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     publishDatasetSelection(datasetInputs, details, contexts, pressed, datasetRoot);
     publishPlayback(next);
     // Each date owns its details panel; carry keyboard focus to its matching Pause button when it changes.
-    if (focusedPlay?.closest<HTMLElement>('[data-dataset-details]')?.hidden) {
+    if (focusedPlay && !focusedPlay.isConnected) {
       playInputs.find(input => input.dataset.datasetPlay === focusedPlay.dataset.datasetPlay &&
-        !input.closest<HTMLElement>('[data-dataset-details]')?.hidden)?.focus();
+        input.isConnected)?.focus();
     }
     for (const control of settingPlans) {
       const input = settingInput(control.name);

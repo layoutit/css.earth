@@ -115,3 +115,25 @@ test('a body with several shape models mounts only the mesh its dataset draws on
   expect(mounted()).toEqual([true, true, false]);
   expect([...nodes[2]!.children]).toEqual([nodes[3], nodes[4]]);
 });
+
+test('a hidden subtree such as a cutaway is mounted only while a dataset shows it', async () => {
+  const { parseHTML } = await import('linkedom');
+  const { document } = parseHTML('<html><body><main></main></body></html>');
+  const stage = document.querySelector('main') as unknown as HTMLElement;
+  const record = (parent: number) => ({ parent, tag: 'div', className: null, style: '', properties: [], attributes: {} });
+  const records = [record(-1), record(0), record(1), record(2), record(2)];
+  const nodes = records.map(item => document.createElement(item.tag));
+  records.forEach((item, index) => { if (item.parent !== -1) nodes[item.parent]!.appendChild(nodes[index]!); });
+  const definition = { tree: { nodes: records, properties: [], camera: 0, scene: 1, stageClasses: [] }, materials: [], animations: [], viewBindings: [],
+    variants: [{ when: { datasetId: 'surface' }, writes: [], hiddenSubtrees: [2] }, { when: { datasetId: 'cut' }, writes: [] }],
+  } as unknown as PreparedPresentationDefinition;
+  const presentation = mountPreparedPresentation(stage, { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
+    { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
+  const mounted = () => [nodes[3], nodes[4]].map(node => node!.parentNode !== null);
+  expect(mounted()).toEqual([false, false]);
+  const resources: PreparedResources = { has: () => true, read: () => null, url: () => null, readyKeys: () => [] };
+  presentation.commitSelection({ selection: { datasetId: 'cut' }, resources });
+  expect(mounted()).toEqual([true, true]);
+  presentation.commitSelection({ selection: { datasetId: 'surface' }, resources });
+  expect(mounted()).toEqual([false, false]);
+});

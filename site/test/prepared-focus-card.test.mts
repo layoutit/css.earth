@@ -8,7 +8,13 @@ import type { PreparedFocusPresentation } from '../prepared-focus.mts';
 class Element extends EventTarget {
   dataset: Record<string, string> = {}; selectors = new Map<string, Element | Element[]>(); attributes = new Map<string, string>(); hidden = false; checked = false; disabled = false; textContent = '';
   querySelector(selector: string) { const value = this.selectors.get(selector); return value instanceof Element ? value : null; }
-  querySelectorAll(selector: string) { const value = this.selectors.get(selector); return Array.isArray(value) ? value : []; }
+  // A selector list answers each of its parts, as the card's detached-section lookups ask (detached-sections.ts).
+  querySelectorAll(selector: string): Element[] {
+    const own = selector.replace(', template[data-detached-section]', ''), whole = this.selectors.get(own);
+    if (whole !== undefined) return Array.isArray(whole) ? whole : [whole];
+    return own.split(', ').flatMap(part => { const value = this.selectors.get(part); return Array.isArray(value) ? value : value instanceof Element ? [value] : []; });
+  }
+  matches() { return true; }
   setAttribute(name: string, value: string) { this.attributes.set(name, value); }
   getAttribute(name: string) { return this.attributes.get(name) ?? null; }
   removeAttribute(name: string) { this.attributes.delete(name); }

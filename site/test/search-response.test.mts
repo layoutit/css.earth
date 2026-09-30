@@ -110,7 +110,8 @@ test('features are pinned, rendered into existing rows and have ordinary destina
 test('typed search shows a flat result list, including queries that name an overview', async () => {
   for (const query of ['t', 'Milky Way']) {
     const document = await render(`/saturn/?q=${encodeURIComponent(query)}`);
-    assert.equal(document.querySelector<HTMLElement>('[data-large-scale-overview="milky-way"]')?.hidden, true);
+    // A card no selection shows is not mounted (detached-sections.ts).
+    assert.equal(document.querySelector<HTMLElement>('[data-large-scale-overview="milky-way"]'), null);
     assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
     assert.equal(document.querySelectorAll('[data-object-tab]').length, 0);
     assert.equal(document.querySelector('.object-browser')?.getAttribute('aria-label'), 'Search results');
@@ -135,8 +136,8 @@ test('a focus page that also names an overview resolves to the focus alone', asy
   for (const query of ['/m42/?overview=system', '/m42/?overview=system&q=']) {
     const both = await card(query);
     assert.equal(both.querySelector<HTMLElement>('[data-prepared-focus-card]')?.hidden, false, query);
-    assert.equal(both.querySelector<HTMLElement>('.object-context [data-system-results]')?.hidden, true, query);
-    assert.equal(both.querySelector<HTMLElement>('.object-context [data-large-scale-overview="milky-way"]')?.hidden, true, query);
+    assert.equal(both.querySelector<HTMLElement>('.object-context [data-system-results]'), null, query);
+    assert.equal(both.querySelector<HTMLElement>('.object-context [data-large-scale-overview="milky-way"]'), null, query);
     // Clearing a search keeps the view context, normalized the same way.
     const clear = new URL(both.querySelector('.object-sidebar-search-clear')?.getAttribute('href') ?? '/', origin);
     assert.equal(clear.pathname, '/m42/', query);
@@ -166,9 +167,10 @@ test('native and live selections share card visibility, inertness, labels and sy
     present.present({ kind: 'overview', overview: { scope: 'system', systemId: 'sun' } });
     present.present(subject);
     assert.deepEqual(state(native), state(live), query || 'body');
-    const context = native.querySelector<HTMLElement>('.object-context')!;
-    assert.equal(context.hidden, subject.kind === 'object');
-    assert.equal(context.hasAttribute('inert'), subject.kind === 'object');
+    // The context is mounted only while an overview or a focus is the subject.
+    const context = native.querySelector<HTMLElement>('.object-context');
+    assert.equal(context === null, subject.kind === 'object');
+    if (context) assert.equal(context.hidden || context.hasAttribute('inert'), false);
     if (objectId === 'trappist-1') {
       assert.equal(native.querySelector('[data-system-current]')?.getAttribute('data-system-header'), 'trappist-1');
       assert.equal(native.querySelector<HTMLElement>('[data-solar-system-facts]')?.hidden, true);
