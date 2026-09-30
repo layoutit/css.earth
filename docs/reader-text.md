@@ -47,6 +47,14 @@ publishes the text in `site/prepared-world-presentation.json`. `pnpm prepare:wor
 refreshes it during development and builds. The shared card header renders it with
 the body's introduction typography.
 
+## Overview navigation
+
+Each system lists its prepared orbit members under **Celestial bodies**, using
+the same rows as search. The Solar System puts its planets first. Large-scale
+overviews use their registry-held groups for navigation: the Milky Way starts
+with the Sun and featured stars within its existing galactic range; the Local
+Group and Nearby Universe list their held galaxies and clusters.
+
 ## Dataset groups
 
 Use the existing arrow selector for related maps that readers will compare:

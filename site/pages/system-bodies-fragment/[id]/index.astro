@@ -1,0 +1,11 @@
+---
+import SystemBodies from '../../../components/SystemBodies.astro';
+import { SCENE_OBJECTS } from '../../../objects.mts';
+import { allPlanetarySystems } from '../../../object-systems.mts';
+export function getStaticPaths() {
+  return allPlanetarySystems(SCENE_OBJECTS).map(system => ({ params: { id: system.id } }));
+}
+const systemId = Astro.params.id;
+if (!systemId) throw new TypeError('System bodies need a planetary system identity.');
+---
+<SystemBodies {systemId} />

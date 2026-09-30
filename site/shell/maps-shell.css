@@ -356,16 +356,15 @@
 .object-overview-card > .object-selected-panel,
 [data-card-view="overview"] > .object-selected-panel,
 :is(.object-tabs, .object-card-tabs) { flex: 0 0 auto; }
-.object-overview-card > .object-selected-panel { padding-bottom: 8px; }
+.object-overview-card > .object-selected-panel { padding-bottom: 16px; }
 :is(.object-tabs, .object-card-tabs) {
   display: flex;
   flex-wrap: nowrap;
   column-gap: 12px;
   justify-content: flex-start;
   row-gap: 2px;
-  padding: 0 var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
+  padding: 8px var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
 }
-.object-card-tabs[data-satellite-system] { padding-top: 8px; }
 .object-tabs {
   min-width: 0;
   overflow-x: auto;
