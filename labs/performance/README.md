@@ -98,7 +98,7 @@ always did. The load takes 3.3 s with 263 requests instead of 2,335.
 
 ### Repeatable journeys on the connected iPad
 
-`pnpm ipad:run` opens the start route in visible Safari, attaches Web Inspector, and runs ordered actions while WebKit tracing and native iPad screen grabs are active. It needs a built preview from this checkout on the Mac LAN, and builds in performance mode when its build marker is absent or stale:
+`pnpm ipad:run` opens the start route in visible Safari, attaches Web Inspector, and runs ordered actions while WebKit tracing and native iPad screen grabs are active. It targets this checkout's dev server on the Mac LAN (port 4210, launch.json `ipad-root`) and starts it when none listens, so a code change is one reload away. `--built` targets a performance build instead (port 4212, rebuilt when stale, about 4 minutes): use it for load and byte questions, not frames. Safari needs Remote Automation (Settings → Apps → Safari → Advanced):
 
 ```sh
 pnpm ipad:run --start mars --fly moon --name mars-to-moon
