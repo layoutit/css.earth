@@ -14,7 +14,7 @@ test('a spatial point field reprojects through one retained SVG path per paint c
   const world={referenceFrame:'sun-icrf',epochJdTt:2451545,pose:{positionM:[0,0,0] as const,orientationXyzw:[0,0,0,1] as const}};
   field.publish({world,viewport});
   const path=field.root.querySelector('path')!,first=path.getAttribute('d');
-  expect(field.root.querySelectorAll('path')).toHaveLength(1);expect(path.getAttribute('fill')).toBe('#ffb38ad9');
+  expect(field.root.querySelectorAll('path')).toHaveLength(1);expect(path.getAttribute('stroke')).toBe('#ffb38ad9');
   expect(field.root.querySelector('i')).toBeNull();expect(field.stats().visiblePoints).toBe(1);expect(first).toMatch(/^M/);
   field.publish({world:{...world,pose:{...world.pose,positionM:[1,0,0]}},viewport});
   expect(path.getAttribute('d')).not.toBe(first);expect(field.stats().visiblePoints).toBe(1);expect(host.children).toHaveLength(2);
@@ -54,8 +54,8 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   const mount = () => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'] }); };
-  const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)a([\d.]+)/g)]
-    .map(match => [Number(match[1]) + Number(match[3]) + 500, Number(match[2]) + 400]);
+  const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)h0/g)]
+    .map(match => [Number(match[1]) + 500, Number(match[2]) + 400]);
   const warped = mount(), exact = mount();
   warped.publish({ world: pose(0), viewport });
   const painted = centres(warped), before = warped.root.querySelector('path')!.getAttribute('d');

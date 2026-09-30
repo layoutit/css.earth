@@ -88,9 +88,10 @@ test('a catalogue loads on its first publication and draws every point as the sa
   expect(points.root.dataset.cataloguePoints).toBe('test-stars');
   const paths = [...points.root.querySelectorAll('path')];
   expect(paths).toHaveLength(1);
-  expect(paths[0]!.getAttribute('fill')).toBe('#ffe2a8ff');
+  expect(paths[0]!.getAttribute('stroke')).toBe('#ffe2a8ff');
+  expect(paths[0]!.getAttribute('stroke-width'), 'as wide as the dot').toBe('1.5');
   expect(paths[0]!.getAttribute('d')!.match(/M/g)).toHaveLength(2);
-  expect(paths[0]!.getAttribute('d')).toContain('a0.750 0.750');
+  expect(paths[0]!.getAttribute('d')).toMatch(/^(M-?[\d.]+ -?[\d.]+h0){2}$/);
   const retainedPath = paths[0];
   points.publish({ world: {...world, pose: {...world.pose, positionM: [1,0,0]}}, viewport });
   expect(points.root.querySelector('path')).toBe(retainedPath);
@@ -168,7 +169,7 @@ test('a translucent catalogue draws its dots as paths with their alpha', async (
     viewport:{focalPixels:100,principalOffsetPixels:[0,0],widthPixels:1000,heightPixels:800}});
   await new Promise(resolve=>setTimeout(resolve,0));
   expect(points.root.querySelector('i')).toBeNull();
-  expect([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('fill')==='#ffe2a8b3'&&path.getAttribute('d'))).toBe(true);
+  expect([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('stroke')==='#ffe2a8b3'&&path.getAttribute('d'))).toBe(true);
   points.destroy();
 });
 
