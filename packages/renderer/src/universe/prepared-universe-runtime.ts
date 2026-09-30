@@ -148,7 +148,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const selectedLabel = own(mountSelectedBodyLabel(frontRoot, opacityClock, requestPublication));
         const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
         // The galaxy backdrop is opaque black: it mounts first, so the dataset banks' billboards, which mount at once, paint over it.
-        const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
+        const background = createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
           prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
           ...(galaxyBacking ? { backingUrl: galaxyBacking } : {}) });
         // Both billboard layers sample one atlas. Keep one demand-driven decode lease
@@ -233,11 +233,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           focusBank(id: string) { return datasets.focusBank(id) ?? catalogBanks.focusBank(id); },
           setVolumeDatasetEnabled: datasets.setEnabled,
           selectVolumeDataset: datasets.select,
-          setStellarPointsEnabled(enabled: boolean) {
-            if (!background.setStellarPointsEnabled(enabled)) return;
-            datasets.setStarsVisible(enabled === true);
-            background.publishStellarPoints();
-          },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             // The context's labels keep clear of the selected body's caption, placed for the same camera.
             const rect = selectedLabel.rect(world, viewport, caption(), captionFlags());

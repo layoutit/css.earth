@@ -13,7 +13,7 @@ vi.mock('../volume/prepared-volume-datasets.js', () => ({
     mount: ({ host, before, frontHost, frontBefore }: { host: HTMLElement; before: Element; frontHost: HTMLElement; frontBefore: Element }) => {
       const root = host.ownerDocument.createElement('div'), frontRoot = host.ownerDocument.createElement('div');
       host.insertBefore(root, before); frontHost.insertBefore(frontRoot, frontBefore);
-      return { root, frontRoot, textureUrls: () => ['/slice.webp'], publish() {}, destroy() { root.remove(); frontRoot.remove(); } };
+      return { root, frontRoot, textureUrls: () => ['/slice.webp'], publish() {}, setStarsVisible() {}, destroy() { root.remove(); frontRoot.remove(); } };
     },
   }),
 }));

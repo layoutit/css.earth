@@ -1,7 +1,6 @@
 interface WorldPreferencesTarget {
   setHeliosphereEnabled?(enabled: boolean): void;
   setIllustrationModelsEnabled?(enabled: boolean): void;
-  setThreeDStarsEnabled?(enabled: boolean): void;
   setHighlightedClassification?(classification: string | null): void;
 }
 
@@ -12,7 +11,6 @@ export interface WorldPreferencesState {
   heliosphereEnabled: boolean;
   illustrationModelsEnabled: boolean;
   surfaceLabelsEnabled: boolean;
-  threeDStarsEnabled: boolean;
   highlightedClassification: string | null;
 }
 export interface WorldPreferences {
@@ -28,7 +26,7 @@ export function createWorldPreferences({ getWorld, onMotionChange }: {
 }) {
   let state: Readonly<WorldPreferencesState> = Object.freeze({
     motionEnabled: false, lightCurvesEnabled: true, heliosphereEnabled: false, illustrationModelsEnabled: false,
-    surfaceLabelsEnabled: false, threeDStarsEnabled: false,
+    surfaceLabelsEnabled: false,
     highlightedClassification: null,
   });
   const listeners = new Set<(key: keyof WorldPreferencesState) => void>();
@@ -38,7 +36,6 @@ export function createWorldPreferences({ getWorld, onMotionChange }: {
     heliosphereEnabled: (world, value) => world.setHeliosphereEnabled?.(value),
     illustrationModelsEnabled: (world, value) => world.setIllustrationModelsEnabled?.(value),
     surfaceLabelsEnabled: () => {},
-    threeDStarsEnabled: (world, value) => world.setThreeDStarsEnabled?.(value),
     highlightedClassification: (world, value) => world.setHighlightedClassification?.(value),
   };
   function set<K extends keyof WorldPreferencesState>(key: K, value: WorldPreferencesState[K]) {

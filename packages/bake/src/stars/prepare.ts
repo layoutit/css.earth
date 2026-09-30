@@ -42,10 +42,9 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   const encoded = encodePointFieldBank({path:'stars.bin',idPrefix:recipe.catalogue.idPrefix,frame,colorCount:colors.length,
     stars:hierarchy.stars,nodes:hierarchy.nodes,photometry,atlas:recipe.atlas});
   await writeFile(resolve(outputDirectory,encoded.bank.path),encoded.bytes);
-  const directPoints = prepareDirectPoints(hierarchy.stars, recipe.policy.activeSlots, recipe.catalogue.count);
   const data: PreparedCssPointFieldManifest = { schema:'cssearth-css-point-field-bank@1',id,frame,bank:encoded.bank,
     atlas:{path:atlasPath,columns:colors.length,tileSize:recipe.atlas.tileSize,colors,haloRadii:recipe.atlas.haloRadii},
-    photometry,policy:recipe.policy,labels:recipe.labels,directPoints,
+    photometry,policy:recipe.policy,labels:recipe.labels,
     ...(recipe.diffuseSky ? {diffuseSky:diffuse.diffuseSky} : {}),
     resources:[{path:atlasPath,bytes:atlas.length,width:colors.length*recipe.atlas.tileSize,height:recipe.atlas.tileSize},...diffuse.resources], };
   // The baked provenance is published beside the manifest, not inside it: the page never reads it.
@@ -61,28 +60,4 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   const magnitude = encoded.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   console.log(`PREPARED ${id}: ${encoded.bank.starCount} catalogue rows; ${encoded.bank.nodeCount} hierarchy nodes; ${bytes.length} manifest bytes; ${encoded.bytes.length} bank bytes; ${atlas.length} atlas bytes; magnitude error ${magnitude.measured} <= ${magnitude.bound} mag (pixel alpha <= ${magnitude.displayAlphaChange})`);
   return envelope;
-}
-
-function prepareDirectPoints(stars: readonly import('./types.ts').PreparedStar[], limit: number, catalogueCount: number) {
-  const sourceRow = (id: string) => {
-    const value = Number(id.slice(id.lastIndexOf(':') + 1));
-    if (!Number.isSafeInteger(value) || value < 0) throw new TypeError(`Star ${id} has no source row.`);
-    return value;
-  };
-  const ranked = stars.map(star => ({ star, sourceRow: sourceRow(star.id),
-    apparentMagnitude: star.absoluteMagnitude + 5 * Math.log10(Math.hypot(...star.positionUnits)) - 5 }));
-  ranked.sort((left, right) => Number(right.star.coverageAnchor) - Number(left.star.coverageAnchor) ||
-    left.apparentMagnitude - right.apparentMagnitude || left.sourceRow - right.sourceRow);
-  const selected = ranked.slice(0, limit).sort((left, right) => left.sourceRow - right.sourceRow);
-  return Object.freeze({ schema:'cssearth-direct-star-field@1' as const, catalogueCount,
-    selection:`All ${stars.filter(star => star.coverageAnchor).length} prepared all-sky coverage anchors, then the brightest apparent HYG rows at the Sun, bounded by the ${limit}-slot authored display budget.`,
-    points:Object.freeze(selected.map(({ star, sourceRow: row }) => Object.freeze({ sourceRow:row, positionUnits:star.positionUnits.map(float32Text) as unknown as typeof star.positionUnits,
-      absoluteMagnitude:float32Text(star.absoluteMagnitude),colorIndex:star.colorIndex,coverageAnchor:star.coverageAnchor }))) });
-}
-/** A float32 value with the fewest significant digits that read back to the same float32: its JSON text then carries the
- * value's own precision, not seventeen digits of the double it widens to (0.663, not 0.6629999876022339). */
-export function float32Text(value: number): number {
-  const exact = Math.fround(value);
-  for (let digits = 1; digits <= 9; digits++) { const short = Number(exact.toPrecision(digits)); if (Math.fround(short) === exact) return short; }
-  return exact;
 }
