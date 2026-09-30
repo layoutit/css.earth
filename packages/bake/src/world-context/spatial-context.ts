@@ -64,6 +64,9 @@ export interface WorldContextSource {
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number; readonly presentation: WorldContextCameraPresentation };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
+    /** The galaxy disc's half-height: how far from the body it looks at the camera is still inside it (the Milky Way README
+     * cites the value). */
+    readonly discHalfHeightM?: number;
     readonly opacityProfile?: VolumeOpacityProfile };
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
 }
@@ -156,12 +159,13 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   if (segments < 8 || solidTurns + fadeTurns >= 1) throw new TypeError('World context orbit trail is invalid.');
   const camera = parseCamera(input.camera), volume = record(input.volume, 'World context volume');
   const system = parseSystem(input.system);
-  keys(volume, ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile'], 'World context volume');
+  keys(volume, ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'discHalfHeightM', 'opacityProfile'], 'World context volume');
   const fadeStartDistanceM = positive(volume.fadeStartDistanceM, 'Volume fade start'), fullDistanceM = positive(volume.fullDistanceM, 'Volume full distance');
   if (!(fadeStartDistanceM < fullDistanceM && fullDistanceM <= camera.maximumDistanceM)) throw new TypeError('Volume distance range is invalid.');
   const stars = parseStars(input.stars, fadeStartDistanceM);
   return freeze({ schema: input.schema, sky: parseSkyBaseline(input.sky), frame, focus, bodies: freeze(bodies), ...(fromCatalog ? { bodySelection: 'catalog' as const } : {}), orbit: freeze({ segments, trail: freeze({ solidTurns, fadeTurns }) }), camera, system, stars,
     volume: freeze({ objectId: identifier(volume.objectId, 'Volume object id'), fadeStartDistanceM, fullDistanceM,
+      ...(volume.discHalfHeightM === undefined ? {} : { discHalfHeightM: positive(volume.discHalfHeightM, 'Volume disc half-height') }),
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }) }) });
 }
 

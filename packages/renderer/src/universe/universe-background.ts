@@ -3,13 +3,13 @@ import type { PreparedCssVolume, VolumeCameraPublication } from '../volume/types
 import type { PreparedPointAppearance } from '../stars/types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedVolumeLod } from '../volume/prepared-volume-lod.js';
-import { projectedVolumeOpacity, volumeFramingRadiusUnits, volumeOutsideFade } from '../volume/projected-volume-visibility.js';
+import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
 import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountGalaxyBacking, parseGalaxyBacking } from './galaxy-backing.js';
-import { logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
+import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
 /** Retained sky, stellar sample and galaxy share one exposure-aware handoff. */
@@ -92,7 +92,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       // The galaxy's nebulae and catalogue images keep their own distance fade; it is what this returns.
       const volumeOpacity = preparedVolumeOpacity(volumeDistanceM, plan.volume.opacityProfile);
       // Inside the galaxy the NASA band is the sky; outside it the galaxy is its slices and face-on image.
-      const outside = volumeOutsideFade(world, payload.frame);
+      const outside = galaxyOutsideFade(volumeDistanceM, plan.volume.discHalfHeightM);
       const volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
       const volumeVisible = outside * detailContextOpacity > 0;
       if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }

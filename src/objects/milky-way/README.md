@@ -140,10 +140,12 @@ stars of its own: the stars around the Sun are the catalogue dots described belo
 
 One rule chooses between the two pictures: inside the galaxy the NASA map is
 the sky; outside it the galaxy is its slices and face-on image, and the galaxies
-beyond it appear. "Inside" is the volume's prepared box, 20 × 20 × 2.5 units of
-1,944 pc about the galactic centre. The NASA map is whole while the camera is in
-the box, and gone once the camera is twice as far out on the box's most exceeded
-axis; between, the two share one weight (`volumeOutsideFade` in the renderer).
+beyond it appear. "Inside" is by zoom: the camera is inside while it is nearer the
+body it looks at than the thin disc's scale height, 300 pc (Bland-Hawthorn &
+Gerhard 2016, [ARA&A 54, 529](https://arxiv.org/abs/1602.07702)), and outside
+from twice that; between, the two share one weight (`galaxyOutsideFade` in the
+renderer, `discHalfHeightM` in the Sun's `source/navigation/universe.json`).
+Orbiting at one distance never switches between them.
 The NASA map is an angular observation from the Sun, so it shifts slightly as
 the camera leaves the Sun. This is display presentation, not photometric calibration.
 
@@ -250,6 +252,11 @@ stars by 2MASS Ks (full at M_Ks −2.5, 45% at 0) and the census stars by Gaia G
 (full at M_G 4, about the Sun's, 25% at 16, so most of these red dwarfs are
 dim). Other layers take their recipe's fixed tone. These are presentation
 choices, recorded in each recipe.
+
+**Near the Sun.** The galaxy-wide and 3 kpc levels dim to half as the sky level
+fills the view (`nearOpacity` in [`source/dots/stack.json`](source/dots/stack.json)):
+from beside the Sun those distant stars would look faint, and the NASA band behind
+them is the Milky Way there. Half keeps the disc's shape; chosen by eye.
 
 **An even density at every zoom.** Every catalogue is complete only out to some
 distance from the Sun, so together they pile up around it. [`merge-catalogue-points.mts`](../../../packages/bake/cli/merge-catalogue-points.mts)

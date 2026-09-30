@@ -20,15 +20,6 @@ export function volumeFramingRadiusUnits(frame: DensityVolumeFrame): number {
   return Math.hypot(...min.map((value, axis) => Math.max(Math.abs(value), Math.abs(max[axis]!))));
 }
 
-/** How far the camera is outside a volume's prepared box: 0 inside it, 1 once it is twice as far out on its most exceeded
- * axis, smooth (logarithmic) between. */
-export function volumeOutsideFade(world: WorldCameraPose, frame: DensityVolumeFrame): number {
-  const { positionUnits } = presentPhysicalPoseInVolume(world.pose, frame), { min, max } = frame.boundsUnits;
-  const reach = Math.max(...positionUnits.map((value, axis) => value >= 0 ? value / max[axis]! : value / min[axis]!));
-  const t = Math.max(0, Math.min(1, Math.log2(Math.max(reach, 1))));
-  return t * t * (3 - 2 * t);
-}
-
 /** Opacity from a framing radius projected at the camera: none below the lower threshold, full above the upper. */
 export function projectedVolumeOpacity(world: WorldCameraPose, viewport: WorldCameraViewport, frame: DensityVolumeFrame,
   framingRadiusUnits: number, visibility: PreparedPointVisibility = DEFAULT_POINT_VISIBILITY): number {

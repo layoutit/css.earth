@@ -5,7 +5,7 @@ import { fetchPreparedJson } from './catalogue-points.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
-import { logarithmicFade } from './world-context/context-scale.js';
+import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scale.js';
 import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
 import { parsePreparedWorldContextPlan } from '../prepared-data/world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -18,7 +18,7 @@ import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog
 import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
-import { DEFAULT_POINT_VISIBILITY, volumeOutsideFade } from '../volume/projected-volume-visibility.js';
+import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
 import { coveredTopRects, createLabelBudget } from '../labels/universe-label-policy.js';
@@ -292,7 +292,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
-              additionalPoints.publish({world, viewport}, distanceM, volumeOutsideFade(world, payload.frame));
+              additionalPoints.publish({world, viewport}, distanceM, galaxyOutsideFade(
+                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM));
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
               const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);

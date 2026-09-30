@@ -255,12 +255,14 @@ test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NA
   if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(stellarRoot));
   else expect(skyRoot).toBeUndefined();
   expect(root.children.indexOf(stellarRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
-  // The camera on the galaxy's own vertical axis at `reach` times the box's half-height from its centre.
-  const { frame } = volume, [qx, qy, qz, qw] = frame.localToReferenceXyzw;
-  const up = [2 * (qx * qz + qw * qy), 2 * (qy * qz - qw * qx), 1 - 2 * (qx * qx + qy * qy)];
-  const at = (reach: number): WorldCameraPose => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
-    pose: { positionM: frame.originM.map((n, axis) => n + up[axis]! * reach * frame.boundsUnits.max[2]! * frame.metersPerUnit) as [number, number, number], orientationXyzw: [0, 0, 0, 1] } });
-  for (const [reach, outside] of [[0, 0], [.5, 0], [1, 0], [Math.SQRT2, .5], [2, 1], [4, 1]] as const) {
+  // The camera `reach` disc half-heights from the body it looks at, in any direction: orbiting never changes the answer.
+  const at = (reach: number, axis = 2): WorldCameraPose => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+    pose: { positionM: context.focus.positionM.map((n: number, index: number) => n + (index === axis ? reach * context.volume.discHalfHeightM : 0)) as [number, number, number], orientationXyzw: [0, 0, 0, 1] } });
+  for (const [reach, outside] of [[.01, 0], [.5, 0], [1, 0], [Math.SQRT2, .5], [2, 1], [4, 1]] as const) {
+    for (const axis of [0, 1]) {
+      mounted.publish(at(reach, axis), viewport, spatialFrame);
+      expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(outside, 12);
+    }
     const camera = at(reach);
     mounted.publish(camera, viewport, spatialFrame);
     expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(outside, 12);
@@ -277,7 +279,7 @@ test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NA
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport, spatialFrame);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(outside, 12);
   }
-  mounted.publish(at(0), viewport, spatialFrame);
+  mounted.publish(at(.01), viewport, spatialFrame);
   expect(stellarRoot.style.display).toBe('block');
   mounted.setStellarPointsEnabled(false);
   expect(stellarRoot.style.display).toBe('none');
@@ -570,10 +572,10 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  context.volume.opacityProfile = { model: 'logarithmic-distance', fadeStartDistanceM: 1e20, fullDistanceM: 1e22, nearOpacity: 0, fullOpacity: 1 };
+  context.volume.opacityProfile = { model: 'logarithmic-distance', fadeStartDistanceM: 1e19, fullDistanceM: 1e21, nearOpacity: 0, fullOpacity: 1 };
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
-    originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 8000 * parsecM],
+    originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 450 * parsecM],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
   const small: PreparedCssVolume = { schema: 'cssearth-css-volume@1', id: 'small', frame, anchors: [],
     stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],

@@ -20,7 +20,7 @@ if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeErro
 const objectDirectory = resolve(objectArgument), prepared = resolve(objectDirectory, 'prepared');
 const recipePath = resolve(objectDirectory, 'source', id, 'stack.json');
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { schema?: unknown; id?: unknown; meaning?: unknown; basis?: unknown;
-  levels?: { bank?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown }[] };
+  levels?: { bank?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown; nearOpacity?: unknown }[] };
 const fail = (message: string): never => { throw new TypeError(`${recipePath}: ${message}`); };
 if (recipe.schema !== 'cssearth-catalogue-points-stack@1' || recipe.id !== id || typeof recipe.meaning !== 'string' || typeof recipe.basis !== 'string') {
   fail(`needs schema cssearth-catalogue-points-stack@1, id ${id}, its meaning and the basis of its windows.`);
@@ -41,6 +41,10 @@ for (const level of inner) {
   previousTo = (window as number[])[1]!;
 }
 
+// A level may dim to `nearOpacity` as the innermost level fills the view (catalogue-points.ts).
+for (const level of levels!) if (level.nearOpacity !== undefined && !(typeof level.nearOpacity === 'number' && level.nearOpacity > 0 && level.nearOpacity <= 1)) {
+  fail(`${String(level.bank)}: nearOpacity must be in (0, 1], got ${JSON.stringify(level.nearOpacity)}.`);
+}
 const palette: string[] = [], points: number[][] = [], counts: number[] = [];
 let frame: unknown = null, metersPerUnit = 0;
 for (const [index, level] of levels!.entries()) {
@@ -68,7 +72,8 @@ for (const [index, level] of levels!.entries()) {
 const output = { schema: 'cssearth-catalogue-points@1', id, source: 'stack', meaning: recipe.meaning, frame,
   appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette,
     levels: levels!.map((level, index) => ({ bank: level.bank, points: counts[index],
-      ...(index === 0 ? { fullDetailUnits: level.fullDetailUnits } : { appearUnits: level.appearUnits }) })) },
+      ...(index === 0 ? { fullDetailUnits: level.fullDetailUnits } : { appearUnits: level.appearUnits }),
+      ...(level.nearOpacity === undefined ? {} : { nearOpacity: level.nearOpacity }) })) },
   basis: recipe.basis, counts: { points: points.length }, points };
 await writeCatalogueBank({ objectDirectory, id, bank: output, published: recipePublished(recipe, recipePath) });
 console.log(`Stacked ${points.length} dots in ${levels!.length} levels: ${counts.join(', ')}.`);
