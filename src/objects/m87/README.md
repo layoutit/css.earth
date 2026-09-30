@@ -43,6 +43,10 @@ smooth light it left concentric rings in every view along the axis.
 
 ## Evidence
 
+![M87 in the app](evidence/2026-09-30/views.jpg)
+
+Top: the M87 page, front and two turns. Bottom: the M87\* page from 720,000 light-years, M87\* at the centre, the globular clusters as dots. Captured on this branch on 2026-09-30.
+
 - The volume reproduces the cleaned photograph along every sight line it covers (the method conditions on it); 3–4% of
   the light lies outside the 195 kpc spheroid and is not drawn.
 - The photograph's registration matches Gaia: 28 stars of G < 12.5 fall within about 1 px (1.5″) of their positions.
