@@ -50,7 +50,9 @@ test('the fit recovers a disc it is given, including where the disc sits', () =>
   const truth = { flux: 0.5312, limbDarkening: 0.34, offsetRaMas: 12.5, offsetDecMas: -7.25 };
   const cells: GriddedVisibility[] = [];
   // ALMA's C36-7 configuration reaches from about 200 to 3900 kilo-wavelengths at this frequency.
-  for (let u = -3_800_000; u <= 3_800_000; u += 190_000) for (let v = -3_800_000; v <= 3_800_000; v += 190_000) {
+  // Every 380 kilo-wavelengths: 332 cells over the same baselines. Each fit step visits every cell, and at the 190 used
+  // before (about 1,300 cells) this one noiseless test took 95 s of every CI run.
+  for (let u = -3_800_000; u <= 3_800_000; u += 380_000) for (let v = -3_800_000; v <= 3_800_000; v += 380_000) {
     const baseline = Math.hypot(u, v);
     if (baseline < 200_000 || baseline > 3_900_000) continue;
     const amplitude = truth.flux * limbDarkenedDiscVisibility(baseline, diameter, truth.limbDarkening);
@@ -59,7 +61,7 @@ test('the fit recovers a disc it is given, including where the disc sits', () =>
     const phase = 2 * Math.PI * (u * truth.offsetRaMas + v * truth.offsetDecMas) * RADIANS_PER_MAS;
     cells.push({ u, v, real: amplitude * Math.cos(phase), imaginary: amplitude * Math.sin(phase), weight: 1 });
   }
-  assert.ok(cells.length > 400, `the simulated grid has ${cells.length} cells`);
+  assert.ok(cells.length > 300, `the simulated grid has ${cells.length} cells`);
   const fit = fitLimbDarkenedDisc(cells, diameter);
   close(fit.totalFluxJy, truth.flux, 1e-4, 'the fitted total flux density');
   close(fit.limbDarkening, truth.limbDarkening, 5e-3, 'the fitted limb darkening');
