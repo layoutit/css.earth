@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its mean radius, 45.8 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,327 parsecs away. It is also HD 169315, HIP 90241. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
+Its mean radius, 45.8 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,327 parsecs away. It is also HD 169315, HIP 90241. The introduction is generated from Groenewegen (2013), A&A 550, A70's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4096979650282842112, distance 1,327 pc from Groenewegen (2013), A&A 550, A70, table10, XX Sgr: Baade-Wesselink distance (pc) 1327.3 +/- 77.2 (Monte-Carlo); Gaia DR3's parallax, 0.687 ± 0.027 mas (25.4 standard errors), is not used. Radius 45.8 +/- 2.7 solar radii from Groenewegen (2013), A&A 550, A70, table10, XX Sgr: Baade-Wesselink mean radius (solar radii) 45.8 +/- 2.7 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,625 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 276, Name='XX Sgr', columns Teff, e_Teff (K): Teff 5625 +/- 367 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 1.3 from 2023A&A...678A.195D ("Oxygen, sulfur, and iron radial abundance gradients of classical Cepheids across the Galactic thin disk.").
 
@@ -14,13 +14,11 @@ Its mean radius, 45.8 solar radii, comes from comparing how fast its surface mov
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

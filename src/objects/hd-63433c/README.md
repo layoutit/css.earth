@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around HD 63433. Its orbit and size follow Mallorquín et al. 2023's fit, the archive's default. This account was drafted from Mallorqu&iacute;n et al. 2023's values; the sections below are the data's own.
+It is one of 3 planets known around HD 63433. Its orbit and size follow Mallorquín et al. 2023's fit, the archive's default. The introduction is generated from Mallorqu&iacute;n et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.24 Jupiter radii from Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract): 17,158.1 km at 71,492 km per Jupiter radius. GM from the mass 0.04889116 Jupiter masses (Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It is one of 3 planets known around HD 63433. Its orbit and size follow Mallorqu
 ## Evidence
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-63433c.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It has 2.85 solar masses and 23.8 solar radii; its partner has 2.72 and 17.7, measured from the eclipses and the stars' motions. This account was drafted from Graczyk et al. (2020ApJ...904...13G)'s values; the sections below are the data's own.
+It has 2.85 solar masses and 23.8 solar radii; its partner has 2.72 and 17.7, measured from the eclipses and the stars' motions. The introduction is generated from Graczyk et al. (2020ApJ...904...13G)'s published values; the sections below are the data's own.
 
 **Size and mass.** Radius 23.8 +/- 0.2 solar radii from Secondary radius (solar radii) 23.8 +/- 0.2, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G): 16,557,660 km at 695,700 km per solar radius. GM from the mass 2.85 +/- 0.02 solar masses (Secondary mass (solar masses) 2.85 +/- 0.02, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G), https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G) times the JPL solar GM. Temperature 5023 +/- 93 K from Secondary log Teff 3.701 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G): 5023 K (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G). A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It has 2.85 solar masses and 23.8 solar radii; its partner has 2.72 and 17.7, me
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ogle-smc-ecl-1421-b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around KELT-10. Its orbit and size follow Kuhn et al. 2016's fit, the archive's default. This account was drafted from Kuhn et al. 2016's values; the sections below are the data's own.
+It is the only planet known around KELT-10. Its orbit and size follow Kuhn et al. 2016's fit, the archive's default. The introduction is generated from Kuhn et al. 2016's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.399 Jupiter radii from Kuhn et al. 2016 (2016MNRAS.459.4281K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract): 100,017.3 km at 71,492 km per Jupiter radius. GM from the mass 0.679 Jupiter masses (Kuhn et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.459.4281K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around KELT-10. Its orbit and size follow Kuhn et al
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/kelt-10b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

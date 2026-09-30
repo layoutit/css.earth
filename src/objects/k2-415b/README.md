@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around K2-415. Its orbit and size follow Hirano et al. 2023's fit, the archive's default. This account was drafted from Hirano et al. 2023's values; the sections below are the data's own.
+It is the only planet known around K2-415. Its orbit and size follow Hirano et al. 2023's fit, the archive's default. The introduction is generated from Hirano et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.09055239 Jupiter radii from Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract): 6,473.8 km at 71,492 km per Jupiter radius. No mass is measured: Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract) gives only an upper limit of 0.02359764 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around K2-415. Its orbit and size follow Hirano et a
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-415b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

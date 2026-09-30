@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around Qatar-2. Its orbit and size follow Mancini et al. 2014's fit, the archive's default. This account was drafted from Mancini et al. 2014's values; the sections below are the data's own.
+It is the only planet known around Qatar-2. Its orbit and size follow Mancini et al. 2014's fit, the archive's default. The introduction is generated from Mancini et al. 2014's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.254 Jupiter radii from Mancini et al. 2014 (2014MNRAS.443.2391M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract): 89,651 km at 71,492 km per Jupiter radius. GM from the mass 2.494 Jupiter masses (Mancini et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014MNRAS.443.2391M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around Qatar-2. Its orbit and size follow Mancini et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/qatar-2b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

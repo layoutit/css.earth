@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-1860. Its orbit and size follow Giacalone et al. 2022's fit, the archive's default. This account was drafted from Giacalone et al. 2022's values; the sections below are the data's own.
+It is the only planet known around TOI-1860. Its orbit and size follow Giacalone et al. 2022's fit, the archive's default. The introduction is generated from Giacalone et al. 2022's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.11687057 Jupiter radii from Giacalone et al. 2022 (2022AJ....163...99G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract): 8,355.3 km at 71,492 km per Jupiter radius. GM from the mass 0.00714 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-1860. Its orbit and size follow Giacalone
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1860b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

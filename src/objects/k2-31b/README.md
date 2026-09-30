@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around K2-31. Its orbit and size follow Grziwa et al. 2016's fit, the archive's default. This account was drafted from Grziwa et al. 2016's values; the sections below are the data's own.
+It is the only planet known around K2-31. Its orbit and size follow Grziwa et al. 2016's fit, the archive's default. The introduction is generated from Grziwa et al. 2016's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.06 Jupiter radii from Grziwa et al. 2016 (2016AJ....152..132G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract): 75,781.5 km at 71,492 km per Jupiter radius. GM from the mass 1.774 Jupiter masses (Grziwa et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016AJ....152..132G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around K2-31. Its orbit and size follow Grziwa et al
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-31b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

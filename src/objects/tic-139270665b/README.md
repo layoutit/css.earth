@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TIC 139270665. Its orbit and size follow Peluso et al. 2024's fit, the archive's default. This account was drafted from Peluso et al. 2024's values; the sections below are the data's own.
+It is one of 2 planets known around TIC 139270665. Its orbit and size follow Peluso et al. 2024's fit, the archive's default. The introduction is generated from Peluso et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.645 Jupiter radii from Peluso et al. 2024 (2024AJ....167..170P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract): 46,112.3 km at 71,492 km per Jupiter radius. GM from the mass 0.463 Jupiter masses (Peluso et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....167..170P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 2 planets known around TIC 139270665. Its orbit and size follow Pel
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/tic-139270665b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -62 degrees is taken as Peluso et al. 2024 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.105) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

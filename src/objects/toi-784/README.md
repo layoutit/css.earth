@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Hua et al. 2023. It is also HD 307842. This account was drafted from Hua et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow Hua et al. 2023. It is also HD 307842. The introduction is generated from Hua et al. 2023's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 5251941573573934080, parallax 15.483 ± 0.011 mas (64.59 pc). Radius 0.907 +/- 0.017 solar radii from Hua et al. 2023, the stellar radius of the default parameter set of TOI-784 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...32H/abstract). Mass 0.91 +/- 0.1 solar masses from Hua et al. 2023, the stellar mass of the default parameter set of TOI-784 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...32H/abstract). Temperature 5,558 K from Hua et al. 2023, the stellar temperature of the default parameter set of TOI-784 b in the NASA Exoplanet Archive. log g 4.48 from the mass and radius.
 
@@ -14,11 +14,9 @@ Its radius and temperature follow Hua et al. 2023. It is also HD 307842. This ac
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-1883. Its orbit and size follow Fukuda et al. 2026's fit, the archive's default. This account was drafted from Fukuda et al. 2026's values; the sections below are the data's own.
+It is the only planet known around TOI-1883. Its orbit and size follow Fukuda et al. 2026's fit, the archive's default. The introduction is generated from Fukuda et al. 2026's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.50406011 Jupiter radii from Fukuda et al. 2026 (2026PASJ...78.1602F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract): 36,036.3 km at 71,492 km per Jupiter radius. GM from the mass 0.04310502 Jupiter masses (Fukuda et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026PASJ...78.1602F), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-1883. Its orbit and size follow Fukuda et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1883b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

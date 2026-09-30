@@ -1,10 +1,10 @@
 # 52 Europa
 
-Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+52 Europa is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. It is shown on its published reconstruction, which combines resolved telescope images with an ADAM starting shape, with a SPHERE photograph and an Elevation view.
+
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets keep the missing-data grid.
 
 ## Sources
-
-<a id="selected-data"></a>
 
 | Input | Selected source |
 | --- | --- |
@@ -14,11 +14,15 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/52_Europa_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.27](https://doi.org/10.1051/0004-6361/202141781) |
 
-52 Europa is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape.
+Vernazza et al. (2021) give a volume-equivalent diameter of 319 km, ecliptic J2000 pole (255°, 40°) and sidereal period 5.629954 h. The [original MPCD mesh](https://observations.lam.fr/astero/3Dshape/52_Europa_mpcd.obj) has 3666 vertices and 7328 triangles in kilometers. Its measured volume-equivalent radius is 159.129728 km; the coordinates are not rescaled to the survey's averaged diameter.
 
-- [Vernazza et al. (2021), final VLT/SPHERE survey](https://doi.org/10.1051/0004-6361/202141781), Table 1 and Table A.1: volume-equivalent diameter 319 km, ecliptic J2000 pole (255°, 40°), sidereal period 5.629954 h. The original article is pinned and restorable.
+## Processing
 
-- [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/52_Europa_mpcd.obj): 3666 vertices, 7328 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 159.129728 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 345.567 × 373.805 × 258.352 km; these are not best-fit ellipsoid axes.
+The mesh is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS triangles, each a 128 × 128 px raster leaf. Geometry and lighting are prepared ahead of runtime. The original frame is kept with +Z north and east-positive longitude. Rotation has an arbitrary display meridian, not an absolute rotational phase.
+
+Elevation samples the original mesh radius minus a 159.5 km reference sphere, with a -50 to 40 km legend. It includes global shape, not height above a gravitational equipotential.
+
+The SPHERE photograph shows photographed illumination from the deconvolved frames, with matched relative frame levels. Each apparition is placed through the surface it shares with another; frames are averaged where they overlap, each fading out toward its disc edge.
 
 ## Evidence
 
@@ -61,66 +65,12 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
-
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2678.0 m error; the authored stopping threshold is 2700 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1583.9 m and maximum 3227.6 m.
-
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
+Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1583.9 m and maximum 3227.6 m between source and display mesh. No repeated radial intersection was found, which supports the radial-height dataset. Reduction softens small features.
 
 ## Known problems
 
-Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 159.5 km reference sphere, with a -50 to 40 km legend. This includes global shape, not height above a gravitational equipotential.
-
-Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
-
-Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
-
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Europa from 38° south to 25° north, so surface the survey did not see keeps the missing-imagery grid.
+- Shape uses the neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition.
+- Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
+- The SPHERE photograph is not albedo or colour. The frames see Europa from 38° south to 25° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
-
-## Methods and source notes
-
-<details>
-<summary>Selected data</summary>
-
-- [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/52_Europa_adam.obj): radius 159.436618 km. The ADAM model is an alternative reconstruction of the same shape. Excluded as a second dataset. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
-
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/52Europa/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
-
-- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
-
-</details>
-
-<a id="shape-elevation-and-lighting"></a>
-
-<details>
-<summary>Shape, elevation and lighting</summary>
-
-The original connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 800 native PolyCSS u triangles. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime.
-
-No radial substitute, runtime triangulation, fabricated texture or additional renderer is used.
-
-</details>
-
-<a id="frame-and-ephemeris"></a>
-
-<details>
-<summary>Frame and ephemeris</summary>
-
-The original Cartesian frame is retained with +Z north and east-positive longitude. The published ecliptic pole is converted to equatorial J2000 with obliquity 23.439291111°. The release’s unlabeled parameter file is preserved as evidence and is not read as an IAU W model.
-
-Original JPL Horizons elements and independent vectors are pinned at JD 2461286.5 (2026-09-03). Heliocentric ICRF conics serve the existing fixed-date context, not long-term perturbation ephemerides. The independent vectors at ±30 days have measured regression guards in the astronomy package.
-
-TDB is approximated as TT within 2 ms.
-
-</details>
-
-<a id="reproduction"></a>
-
-<details>
-<summary>Reproduction</summary>
-
-Source pins live in [source/manifest.json](source/manifest.json); source/preparation/acquisition.json restores the ignored OBJ. LAM's ordinary public-site cookie is explicitly recorded. Generated context.png is force-tracked as a pinned intermediate and regenerated/verified by the existing radial snapshot recipe.  Title provenance remains in its source directory.
-
-</details>

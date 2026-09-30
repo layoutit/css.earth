@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Bonomo et al. 2026. It is also HD 191785, HIP 99452. This account was drafted from Bonomo et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Bonomo et al. 2026. It is also HD 191785, HIP 99452. The introduction is generated from Bonomo et al. 2026's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1809360187275432832, parallax 48.926 ± 0.023 mas (20.44 pc). Radius 0.833 +/- 0.023 solar radii from Bonomo et al. 2026, the stellar radius of the default parameter set of TOI-5789 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract). Mass 0.821 +/- 0.032 solar masses from Bonomo et al. 2026, the stellar mass of the default parameter set of TOI-5789 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract). Temperature 5,185 K from Bonomo et al. 2026, the stellar temperature of the default parameter set of TOI-5789 c in the NASA Exoplanet Archive. log g 4.51 from the mass and radius.
 
@@ -14,7 +14,6 @@ Its radius and temperature follow Bonomo et al. 2026. It is also HD 191785, HIP 
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
@@ -22,6 +21,5 @@ Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** TOI-5789 b: found by radial velocity, not a transit fit.
 - **Not shown.** TOI-5789 d: found by radial velocity, not a transit fit.
 - **Not shown.** TOI-5789 e: found by radial velocity, not a transit fit.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

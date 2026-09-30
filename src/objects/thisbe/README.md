@@ -1,10 +1,8 @@
 # Thisbe
 
-Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+Thisbe is a main-belt asteroid shown as a calibrated DAMIT shape model, with an elevation view and a photograph built from ESO/VLT/SPHERE survey frames. Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
 
 ## Sources
-
-<a id="selected-model"></a>
 
 | Input | Selected source |
 | --- | --- |
@@ -13,11 +11,13 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/88_Thisbe_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.30](https://doi.org/10.1051/0004-6361/202141781) |
 
-[Original DAMIT model 5926](https://damit.cuni.cz/projects/damit/asteroid_models/view/5926), version 2021-11-12, is a calibrated nonconvex reconstruction. The model page explicitly marks calibrated size = yes; DAMIT documentation defines these coordinates in kilometers. The original model page, metadata, referenced bibliographic records, frame documentation and available IAUspin file are checked in and pinned.
+[Original DAMIT model 5926](https://damit.cuni.cz/projects/damit/asteroid_models/view/5926), version 2021-11-12, is a calibrated nonconvex reconstruction in kilometers. Its [original triangle table](https://damit.cuni.cz/projects/damit/stored_files/open/64864/shape.txt) has 578 vertices and 1152 triangles. The record gives diameter 218 km, period 6.041319 h and ecliptic J2000 pole (74°, 63°). The mesh's volume-equivalent radius is 108.972342 km; the original coordinates are not rescaled. [Model fields and mesh measurements](source/reference/damit-model.json).
 
-The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
+GM is G times the measured mass in [Vernazza et al. (2021), Table 1](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A%2BA/654/A56) (11.60 ± 2.20 × 10^18 kg). The survey publication is [Vernazza et al. (2021), VLT/SPHERE imaging survey of the largest main-belt asteroids: Final results and synthesis](https://ui.adsabs.harvard.edu/abs/2021A&A...654A..56V).
 
-[Model fields and mesh measurements](source/reference/damit-model.json).
+## Processing
+
+The existing PDS plate-table reader reads the DAMIT table unchanged, and meshoptimizer 1.2.0 reduces it to 800 PolyCSS triangles, each a 128 × 128 px raster leaf. Elevation shows the radius of the original model minus a 109 km sphere, on a -20 to 20 km legend. The SPHERE photograph combines the deconvolved frames with matched relative levels, averages overlapping frames and fades each toward its disc edge. The ecliptic pole is converted to equatorial J2000; orbital context uses JPL Horizons elements at JD 2461286.5.
 
 ## Evidence
 
@@ -54,65 +54,15 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
-
-Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 863.932 m, maximum 1920.115 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
-
-Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
+Meshoptimizer reports 2008.8 m estimated error, below the authored 2100 m threshold. Independent nearest-triangle sampling measured p95 863.932 m and maximum 1920.115 m. No second radial intersection was found.
 
 ## Known problems
 
-Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not source surface maps; no albedo, photographic color, regolith or composition is inferred. Elevation shows the radius of the original model minus a 109 km sphere, on a -20 to 20 km legend.
-
-This is a second display of the same reconstruction, not an independent measurement or height above a gravitational equipotential. A 4096 × 2048 display map does not add observational detail. The existing scientific recipe samples 721 × 361 directions, then applies its documented cartographic relief.
-
-Prime-meridian display phase is explicitly arbitrary; the available IAUspin file is preserved but no absolute rotational ephemeris is claimed.
-
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Thisbe from 16° north, so surface the survey did not see keeps the missing-imagery grid.
+- DAMIT's viewer illustrations are not source surface maps; no albedo, photographic color, regolith or composition is inferred. Elevation is a second display of the same reconstruction, not an independent measurement or height above a gravitational equipotential.
+- The 4096 × 2048 display map does not add observational detail.
+- Prime-meridian display phase is arbitrary; no absolute rotational ephemeris is claimed.
+- The separate MPCD survey table reports an impossible latitude for Thisbe, so it is not used to orient this mesh.
+- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Thisbe from 16° north, so unseen surface keeps the missing-imagery grid.
+- Registration reports a conflict for `zimpol`; the dataset ships on the paper's comparison figure.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
-
-## Methods and source notes
-
-<details>
-<summary>Selected model</summary>
-
-[Original counted triangle table](https://damit.cuni.cz/projects/damit/stored_files/open/64864/shape.txt) has 578 vertices and 1152 triangles. It is consumed without conversion by the existing PDS plate-table reader because its count/XYZ/one-based-triangle layout is identical. This is a DAMIT dataset, not a PDS release.
-
-Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z is the spin pole and positive X defines the meridian.
-
-The record gives diameter 218 km, period 6.041319 h and ecliptic J2000 pole (74°, 63°). The original mesh has measured volume-equivalent radius 108.972342 km and Cartesian extents 250.704 × 231.328 × 197.684 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
-
-The selected paired DAMIT model record provides a valid pole. The separate MPCD survey table reports an impossible latitude for Thisbe, so that table is not used to orient this mesh. No value is wrapped or reinterpreted to repair that source.
-
-- [Vernazza et al. (2021), VLT/SPHERE imaging survey of the largest main-belt asteroids: Final results and synthesis](https://ui.adsabs.harvard.edu/abs/2021A&A...654A..56V) — selected model publication.
-
-</details>
-
-<a id="appearance-and-preparation"></a>
-
-<details>
-<summary>Appearance and preparation</summary>
-
-The existing source-meshoptimizer recipe reduces the original connected surface to 800 triangles. Meshoptimizer 1.2.0 reports 2008.8 m estimated error, below the authored 2100 m stopping threshold; this estimate is not a Hausdorff bound. All models use 800 native PolyCSS u raster leaves, 128 × 128 px per leaf in a 2048 × 6400 atlas, with lighting and texels prepared ahead of runtime.
-
-The surface remains one closed component with Euler characteristic 2.
-
-</details>
-
-<a id="frame-source-closure-and-delivery"></a>
-
-<details>
-<summary>Frame, source closure and delivery</summary>
-
-The source ecliptic J2000 pole is converted with obliquity 23.439291111° for the existing observed-pole recipe.
-
-Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 days supply heliocentric ICRF context. The conic is a fixed-epoch display approximation, not a long-term perturbation ephemeris. TDB is approximated as TT within 2 ms.
-
-GM is G times the measured mass in [Vernazza et al. (2021), Table 1](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A%2BA/654/A56) (11.60 ± 2.20 × 10^18 kg), with G = 6.6743 × 10^-20 km³ kg⁻¹ s⁻²; it is not inferred from an assumed density.
-
-[source/manifest.json](source/manifest.json) pins every consumed file. The original mesh is checked in and also restorable through source/preparation/acquisition.json. Original model-record snapshots and supporting documents remain checked in because server-generated HTML contains changing timestamps.
-
-The pinned context PNG is reproduced by the existing radial snapshot recipe.
-
-</details>

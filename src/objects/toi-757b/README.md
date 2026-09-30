@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-757. Its orbit and size follow Alqasim et al. 2024's fit, the archive's default. This account was drafted from Alqasim et al. 2024's values; the sections below are the data's own.
+It is the only planet known around TOI-757. Its orbit and size follow Alqasim et al. 2024's fit, the archive's default. The introduction is generated from Alqasim et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.22303545 Jupiter radii from Alqasim et al. 2024 (2024MNRAS.533....1A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract): 15,945.3 km at 71,492 km per Jupiter radius. GM from the mass 0.03303669 Jupiter masses (Alqasim et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.533....1A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around TOI-757. Its orbit and size follow Alqasim et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-757b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -36 degrees is taken as Alqasim et al. 2024 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.39) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

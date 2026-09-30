@@ -31,7 +31,7 @@ Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 Run of 2026-09-23 (this version):
 
-- [`latitude-belt-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/latitude-belt-map.test.mts) (now [`packages/bake/src/objects/raster/latitude-belt-map.test.mts`](../../../packages/bake/src/objects/raster/latitude-belt-map.test.mts)) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: hd29615.dat: paper 329 G and 80 G, read 328.7 G and 80.1 G. So the files are the maps the paper measured.
+- [`latitude-belt-map.test.mts`](../../../packages/bake/src/objects/raster/latitude-belt-map.test.mts) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: hd29615.dat: paper 329 G and 80 G, read 328.7 G and 80.1 G. So the files are the maps the paper measured.
 - The paper's Table 3 also gives the correlation of brightness with the strength of each field component. Over the deposited cells: hd29615.dat: paper (0.21, 0.03, 0.34), read (-0.08, 0.0, -0.41) (radial, meridional, azimuthal). For HD 29615 the values do not agree, and the paper does not say how it computed them (on the cells, on a figure grid, or on its alternative map with differential rotation); it is recorded here, not resolved.
 - The reader's own tests check that a cell centre keeps its value, that the interpolation wraps at longitude 0, and that a table with a misplaced cell or belts out of order is refused.
 

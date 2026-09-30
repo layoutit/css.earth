@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around L 168-9. Its orbit and size follow Hobson et al. 2024's fit, the archive's default. This account was drafted from Hobson et al. 2024's values; the sections below are the data's own.
+It is the only planet known around L 168-9. Its orbit and size follow Hobson et al. 2024's fit, the archive's default. The introduction is generated from Hobson et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.14541911 Jupiter radii from Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract): 10,396.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01280565 Jupiter masses (Hobson et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...688A.216H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around L 168-9. Its orbit and size follow Hobson et 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/l-168-9b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

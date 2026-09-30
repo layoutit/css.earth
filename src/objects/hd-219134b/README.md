@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 6 planets known around HD 219134. Its orbit and size follow Gillon et al. 2017's fit, the archive's default. This account was drafted from Gillon et al. 2017's values; the sections below are the data's own.
+It is one of 6 planets known around HD 219134. Its orbit and size follow Gillon et al. 2017's fit, the archive's default. The introduction is generated from Gillon et al. 2017's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.14292087 Jupiter radii from Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract): 10,217.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01491363 Jupiter masses (Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It is one of 6 planets known around HD 219134. Its orbit and size follow Gillon 
 ## Evidence
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-219134b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

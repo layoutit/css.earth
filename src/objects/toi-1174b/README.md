@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-1174. Its orbit and size follow Crossfield et al. 2025's fit, the archive's default. This account was drafted from Crossfield et al. 2025's values; the sections below are the data's own.
+It is the only planet known around TOI-1174. Its orbit and size follow Crossfield et al. 2025's fit, the archive's default. The introduction is generated from Crossfield et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.22856672 Jupiter radii from Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract): 16,340.7 km at 71,492 km per Jupiter radius. No mass is measured: Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) gives only an upper limit of 0.10068326 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-1174. Its orbit and size follow Crossfiel
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1174b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

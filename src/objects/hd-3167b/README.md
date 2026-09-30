@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al. 2026's fit, the archive's default. This account was drafted from Coy et al. 2026's values; the sections below are the data's own.
+It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al. 2026's fit, the archive's default. The introduction is generated from Coy et al. 2026's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.1428319 Jupiter radii from Coy et al. 2026 (2026ApJ..1005L..77C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract): 10,211.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01524093 Jupiter masses (Coy et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026ApJ..1005L..77C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,8 @@ It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-3167b.json).
 
-
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "HD 3167 b" (revision 1375950422), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "HD 3167 b" (revision 1375950422) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

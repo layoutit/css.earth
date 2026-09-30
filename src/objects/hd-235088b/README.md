@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HD 235088. Its orbit and size follow Nardiello et al. 2025's fit, the archive's default. This account was drafted from Nardiello et al. 2025's values; the sections below are the data's own.
+It is the only planet known around HD 235088. Its orbit and size follow Nardiello et al. 2025's fit, the archive's default. The introduction is generated from Nardiello et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.1768225 Jupiter radii from Nardiello et al. 2025 (2025A&A...693A..32N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract): 12,641.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01305736 Jupiter masses (Nardiello et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...693A..32N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around HD 235088. Its orbit and size follow Nardiell
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-235088b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

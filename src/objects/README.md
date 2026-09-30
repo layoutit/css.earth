@@ -10,12 +10,8 @@ Read [AGENTS.md](../../AGENTS.md), the
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) before body work.
 The skill explains source selection and preparation. The shared
 [image and surface guide](../../docs/surface-preparation.md) explains the tools,
-UV mapping and texture atlases. The contract explains
-source notes, credits, test reports and where to save them. Its
-[standards mapping](../../docs/provenance/CONTRACT.md#standards-basis) combines
-PDS4 1.26.0 provenance guidance with ISO 24495-1:2023 plain-language principles,
-using the existing files.
-For a telescope-derived view, start with the [telescope command guide](../../packages/telescope-cli/README.md#using-a-result-in-a-body-scene). Its qualified delivery and standalone sphere export do not automatically create a normal scene dataset.
+UV mapping and texture atlases. The contract explains source notes, credits,
+test reports and where to save them. For a telescope-derived view, start with the [telescope command guide](../../packages/telescope-cli/README.md#using-a-result-in-a-body-scene). Its qualified delivery and standalone sphere export do not automatically create a normal scene dataset.
 
 ## Package layout
 
@@ -42,55 +38,48 @@ site/test/                     shared runtime/package, shell, route and rendered
 site/pages/[id].astro           one shared route for all body ids
 ```
 
-Use the current authored branch of `site/build/object-package-contract.mts` for
-required files; the source manifest's coverage check owns source ownership.
-The latter requires data-only body packages. Acquisition/preparation code lives
-in shared `packages/bake/src/objects/` topics and per-body `packages/bake/authoring/<body>/` (or
-`packages/telescope-cli/authoring/<body>/`) scripts; runtime and presentation behavior live in
-the shared renderer and shell. Do not copy private `runtime/`, `site/` or
-`tools/` directories from old documentation or historical packages.
+`site/build/object-package-contract.mts` defines the required files; the source
+manifest's coverage check owns source ownership. Body packages are data-only.
+Acquisition and preparation code lives in shared `packages/bake/src/objects/`
+topics and per-body `packages/bake/authoring/<body>/` (or
+`packages/telescope-cli/authoring/<body>/`) scripts; runtime and presentation
+behavior live in the shared renderer and shell. Do not copy private `runtime/`,
+`site/` or `tools/` directories from old documentation or historical packages.
 
 Scientific inputs determine geometry, appearance, supported views and physical
 facts. Reuse existing preparation code with the new body's own source parameters.
 A new recipe operation needs shared code, records of its inputs and outputs,
-and tests of its behavior. Keep source interpretation and static processing out of
-runtime. Preserve original input bytes and reproducible preparation; record versions and
-acquisition routes in their source records.
+and tests of its behavior. Keep source interpretation and static processing out
+of runtime.
 
 ## Register a body without editing shared lists
 
 Put the search name, classification, color, distance in AU, description and
 system name in `object.json` under `properties.catalog`. A folder without this
 entry stays unpublished. Add `context: {}` there to include a Solar System body
-in the shared Sun view; an optional context name or color overrides its search
-presentation. Existing `order` values preserve earlier catalogue ordering.
-New entries can omit them; equal priorities sort by ID. Do not renumber other bodies.
+in the shared Sun view. New entries can omit `order`; equal priorities sort by
+ID. Do not renumber other bodies.
 
-The astronomy package keeps each body's physical values, retained orbit records,
+The astronomy package keeps each body's physical values, orbit records,
 independent vector samples and acquisition choices in `data/bodies/<id>.json`.
-Those are scientific library inputs, separate from the application's catalogue
-entry. Keep provider URLs, epochs, units and limitations with the values.
-Acquisition tools accept `--object=<id>` for asteroid, comet and moon updates.
-They update that body's records; building the library needs no downloads.
+Keep provider URLs, epochs, units and limitations with the values. Acquisition
+tools accept `--object=<id>` for asteroid, comet and moon updates.
 
 After authoring the sources and records, run `pnpm prepare:catalog` and
 `pnpm build:astronomy`, then `node packages/bake/cli/prepare-navigation.mts <id>` and the selected-body
 preparation command below. If this is a parent's first moon, also prepare the
 parent's navigation image. Commit the new body's files and navigation images.
-Adding a capability or changing a parent's physical data can still require
-shared code or related-body changes; explain that dependency in the PR.
 
 Builds assemble `OBJECTS`, astronomy exports, solar geometry, Sun context,
 navigation metadata and the minimap. These combined outputs are ignored. Do not
 edit or force-add them, or append entries to shared TypeScript tables or the
 Sun's source list. The runtime reads markers from packed pages
-(`public/navigation/body-markers-NN@2x.webp`, in catalogue order); each body's
-`body-<id>@2x.webp` stays their source. Adding a body redraws its page and moves
-the tiles after it, so commit the redrawn pages. `node packages/bake/cli/prepare-navigation.mts <id>...`
-redraws them (the `markers` step of `prepare-object.mts`). After merging main into a
-branch that adds bodies, run it, and `prepare-object.mts <id>... --from world` for
-the Sun's world files, before `pnpm install` or `build:tools`, which refuse a page
-whose width does not match its members.
+(`public/navigation/body-markers-NN@2x.webp`, in catalogue order). Adding a body
+redraws its page and moves the tiles after it, so commit the redrawn pages.
+After merging main into a branch that adds bodies, run
+`node packages/bake/cli/prepare-navigation.mts <id>...` and
+`prepare-object.mts <id>... --from world` before `pnpm install` or
+`build:tools`, which refuse a page whose width does not match its members.
 
 ## Sources and delivery
 
@@ -100,22 +89,17 @@ are restored by path from their origin or source cache; runtime inventories
 separately verify the published outputs by byte count and SHA-256.
 Follow [Sources authoring](../../docs/sources-catalogue.md#add-or-update-a-source)
 for canonical identities and `sourceBinding` on each input. Reuse an existing
-published source across bodies; local files keep their own identities.
-Necessary source files must be checked in or restored by the existing acquisition
-recipe. The manifest also lists documents and generated intermediate files.
-Every new source note inside `source/` needs its own manifest entry.
+published source across bodies. Every new source note inside `source/` needs
+its own manifest entry.
 
 The catalogues read which sources each dataset uses from these records; see
-[object provenance](../../docs/object-provenance.md). No provenance file is generated. That
-lineage is not proof of fresh acquisition. Runtime inventories describe prepared delivery;
-source restoration and runtime installation are separate checks.
+[object provenance](../../docs/object-provenance.md). No provenance file is generated.
 
 A new star, planet or companion starts from `pnpm telescope new-object SPEC.json`
 (`packages/telescope-cli/src/new-object/spec.mts` documents the spec): it writes the whole package
 from Gaia DR3, SIMBAD, the spectrophotometric archives and the NASA Exoplanet Archive,
 leaves only prose marked `TODO(new-object)`, and `--bake` runs the preparation chain.
-`--from-archive HOST...` drafts the spec for transiting systems. See the
-[celestial skill](../../.agents/skills/celestial-skill/SKILL.md) for the full workflow.
+`--from-archive HOST...` drafts the spec for transiting systems.
 
 Installation and common controls belong in the [root README](../../README.md).
 Read the current `package.json` and runner arguments before using commands:
@@ -137,27 +121,24 @@ Read the current `package.json` and runner arguments before using commands:
 | Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |
 
 Run a `packages/*/cli/` command by its entry in `packages/<pkg>/cli/`; the library of the same name under
-`packages/<pkg>/src/` is what other code imports (nothing imports the entry itself). A site-owned preparer (one that
+`packages/<pkg>/src/` is what other code imports. A site-owned preparer (one that
 reads a site module) runs directly from `site/build/prepare/`.
 Select checks using the [PR rules](../../docs/provenance/CONTRACT.md#pull-requests);
 this table lists available commands, not a checklist for every body addition.
-The retired per-body test folders and browser-profile registry are not required
-for a new object. Shared tests discover body packages; add a scientific regression
-where its calculation or preparation behavior is owned. `pnpm test:node` includes
-the broad native test tree with its Vite import loader. Input-dependent tests may
-skip on a bare checkout. Record those skips, install the needed inputs for a
+Shared tests discover body packages; add a scientific regression where its
+calculation or preparation behavior is owned. Input-dependent tests may skip on
+a bare checkout. Record those skips, install the needed inputs for a
 qualification claim, and inspect real browser output for changed visuals or
 interactions. Built-HTML assertions alone do not establish browser behavior.
 
 ## Update documentation with the change
 
 Use the [body README examples](../../docs/provenance/CONTRACT.md#examples).
-The README explains the body’s sources, processing, evidence and known problems.
+The README explains the body's sources, processing, evidence and known problems.
 Link detailed source notes, exact manifests, credits and original reports from
 that explanation. Record what you examined in the object's investigation ledger,
-including failed trials, and link the ledger from the README. Keep shared commands and usage here instead of repeating them
-for each body.
-Keep earlier test results and their limits. Do not replace original failure
-reports with summaries or claim a visual check without inspecting the images.
-The [evidence rules](../../docs/provenance/CONTRACT.md#save-enough-evidence-to-check-the-result)
+including failed trials, and link the ledger from the README. Keep shared
+commands and usage here instead of repeating them for each body. Do not claim a
+visual check without inspecting the images. The
+[evidence rules](../../docs/provenance/CONTRACT.md#save-enough-evidence-to-check-the-result)
 explain where new reports go and when to update older records.

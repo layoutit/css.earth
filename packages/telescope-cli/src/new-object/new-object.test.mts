@@ -459,7 +459,7 @@ test('ids follow one rule, and a body the universe holds is found whatever its i
 test('a refresh regenerates what the tool wrote and keeps what a person wrote', async () => {
   const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises'), { tmpdir } = await import('node:os');
   const { mergeRefresh, refreshSpec, STORED_SPEC, storedHostedSpec } = await import('./refresh.mts');
-  const drafted = 'X b crosses its star every 3 days. This account was drafted from A et al.\'s values; the sections below are the data\'s own.';
+  const drafted = 'X b crosses its star every 3 days. The introduction is generated from A et al.\'s published values; the sections below are the data\'s own.';
   const readme = (opening: string, extra = '') => `# X b\n\n## Sources\n\n${opening}\n\n**Orbit.** P 3 d.\n\n## Evidence\n\nGenerated 2026-09-24 by new-object.\n${extra}\n## Known problems\n\n- **Drafted text.** The card was drafted.\n\n[Investigation ledger](investigations.json) · [Credits](NOTICE.md)\n`;
   const regenerated = readme(drafted.replace('3 days', '3.1 days')).replace('P 3 d', 'P 3.1 d');
   const dir = await mkdtemp(resolve(tmpdir(), 'cssearth-refresh-'));

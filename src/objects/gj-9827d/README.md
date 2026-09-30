@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around GJ 9827. Its orbit and size follow Piaulet-Ghorayeb et al. 2024's fit, the archive's default. This account was drafted from Piaulet-Ghorayeb et al. 2024's values; the sections below are the data's own.
+It is one of 3 planets known around GJ 9827. Its orbit and size follow Piaulet-Ghorayeb et al. 2024's fit, the archive's default. The introduction is generated from Piaulet-Ghorayeb et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.17664407 Jupiter radii from Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..10P/abstract): 12,628.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00950198 Jupiter masses (Piaulet-Ghorayeb et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...974L..10P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..10P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 3 planets known around GJ 9827. Its orbit and size follow Piaulet-G
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-9827d.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

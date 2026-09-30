@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-1836. Its orbit and size follow Heidari et al. 2025's fit, the archive's default. This account was drafted from Heidari et al. 2025's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-1836. Its orbit and size follow Heidari et al. 2025's fit, the archive's default. The introduction is generated from Heidari et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.714 Jupiter radii from Heidari et al. 2025 (2025A&A...694A..36H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract): 51,045.3 km at 71,492 km per Jupiter radius. GM from the mass 0.121 Jupiter masses (Heidari et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...694A..36H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 2 planets known around TOI-1836. Its orbit and size follow Heidari 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1836b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

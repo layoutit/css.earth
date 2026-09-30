@@ -4,7 +4,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-12. Its orbit and size follow Leonardi et al. 2024's fit, the archive's default. This account was drafted from Leonardi et al. 2024's values; the sections below are the data's own.
+It is the only planet known around WASP-12. Its orbit and size follow Leonardi et al. 2024's fit, the archive's default. The introduction is generated from Leonardi et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.965 Jupiter radii from Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract): 140,481.8 km at 71,492 km per Jupiter radius. GM from the mass 1.47 Jupiter masses (Collins et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...78C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -34,10 +34,9 @@ It is the only planet known around WASP-12. Its orbit and size follow Leonardi e
 
 ## Evidence
 
-Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts)) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
+Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-12b.json).
-
 
 ## Known problems
 
@@ -45,6 +44,6 @@ Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Longitude only, largest pattern only.** A first-order phase curve cannot see north and south, and nothing finer than a hemisphere is measured.
 - **Brightness temperature, not temperature.** Each value is a black body with the observed 3.6 µm brightness, against a star temperature the paper's own row implies.
 - **Shape.** The paper expects the planet to be stretched by its star; the maps are drawn on the package's sphere.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "WASP-12b" (revision 1374242282), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "WASP-12b" (revision 1374242282) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

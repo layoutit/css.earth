@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its oscillations, recorded in K2 campaign 3, give 0.84 solar masses and 10.0 solar radii; APOGEE spectra give 4,924 K at its surface. This account was drafted from Khan et al. (2023), A&A 677, A21's values; the sections below are the data's own.
+Its oscillations, recorded in K2 campaign 3, give 0.84 solar masses and 10.0 solar radii; APOGEE spectra give 4,924 K at its surface. The introduction is generated from Khan et al. (2023), A&A 677, A21's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2613712831996966784, distance 2,847 pc from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 206122917 (K2 campaign 3): PARAM asteroseismic distance (pc) 2846.953125 (16th-84th percentiles 2798.320312-2904.257812), MA09 pipeline with APOGEE DR17; Gaia DR3's parallax, 0.389 ± 0.019 mas (20.0 standard errors), is not used. Radius 10.0371 +/- 0.256 solar radii from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 206122917 (K2 campaign 3): PARAM radius (solar radii) 10.037089 (16th-84th percentiles 9.828209-10.34017), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). Mass 0.8364 +/- 0.0469 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 206122917 (K2 campaign 3): PARAM mass (solar masses) 0.83641 (16th-84th percentiles 0.797943-0.891755), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). Temperature 4,924 K from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 206122917: APOGEE DR17 effective temperature 4923.9785 +/- 50 K (the catalogue's final uncertainty). log g 2.36 from the mass and radius.
 
@@ -14,11 +14,9 @@ Its oscillations, recorded in K2 campaign 3, give 0.84 solar masses and 10.0 sol
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

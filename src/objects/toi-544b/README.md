@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-544. Its orbit and size follow Osborne et al. 2024's fit, the archive's default. This account was drafted from Osborne et al. 2024's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-544. Its orbit and size follow Osborne et al. 2024's fit, the archive's default. The introduction is generated from Osborne et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.18003421 Jupiter radii from Osborne et al. 2024 (2024MNRAS.52711138O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract): 12,871 km at 71,492 km per Jupiter radius. GM from the mass 0.00909296 Jupiter masses (Osborne et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.52711138O), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 2 planets known around TOI-544. Its orbit and size follow Osborne e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-544b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

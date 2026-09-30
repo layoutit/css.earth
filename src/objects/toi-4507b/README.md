@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-4507. Its orbit and size follow Espinoza-Retamal et al. 2026's fit, the archive's default. This account was drafted from Espinoza-Retamal et al. 2026's values; the sections below are the data's own.
+It is the only planet known around TOI-4507. Its orbit and size follow Espinoza-Retamal et al. 2026's fit, the archive's default. The introduction is generated from Espinoza-Retamal et al. 2026's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.73155626 Jupiter radii from Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract): 52,300.4 km at 71,492 km per Jupiter radius. No mass is measured: Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract) gives only an upper limit of 0.06292704 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,10 +16,9 @@ It is the only planet known around TOI-4507. Its orbit and size follow Espinoza-
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-4507b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -123 degrees is taken as Espinoza-Retamal et al. 2026 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.09) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "TOI-4507 b" (revision 1374091145), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "TOI-4507 b" (revision 1374091145) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

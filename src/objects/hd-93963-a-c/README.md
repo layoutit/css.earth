@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around HD 93963 A. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default. This account was drafted from Polanski et al. 2024's values; the sections below are the data's own.
+It is one of 2 planets known around HD 93963 A. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default. The introduction is generated from Polanski et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.27832688 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 19,898.1 km at 71,492 km per Jupiter radius. GM from the mass 0.05789287 Jupiter masses (Polanski et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 2 planets known around HD 93963 A. Its orbit and size follow MacDou
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-93963-a-c.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

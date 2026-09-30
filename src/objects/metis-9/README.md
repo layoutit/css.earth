@@ -1,6 +1,6 @@
 # 9 Metis
 
-Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+9 Metis is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape, and a SPHERE photograph is mapped onto the survey's model. Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
 
 ## Sources
 
@@ -14,23 +14,23 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/9_Metis_param), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.8](https://doi.org/10.1051/0004-6361/202141781) |
 
-9 Metis is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape.
+- Vernazza et al. (2021) give a volume-equivalent diameter of 173 km, ecliptic J2000 pole (181°, 22°) and sidereal period 5.079176 h.
+- The MPCD mesh has 2962 vertices and 5920 triangles in kilometres, not rescaled. Its volume-equivalent radius is 85.910665 km; the ADAM mesh's is 86.604374 km. The survey's diameter averages the two.
+- The ZIMPOL frames are 256 × 256 px at 3.63 mas/px in the N_R filter, 234.8 s each. The disc spans 42 to 44 px. They are the survey's own deconvolutions, without radiometric calibration.
+- The parameter record gives pole latitude 22.7124°, pole longitude 181.3819°, period 5.07917676 h, phase epoch JD 2434419.0 and phase 0°. It is read latitude-first because 181.3819° cannot be a latitude.
+- The [released SPHERE images](https://observations.lam.fr/astero/Data/9Metis/) and the [survey paper](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf) give the image comparisons behind the model. The LAM downloads need the public-site cookie recorded in the manifest.
 
-- [Vernazza et al. (2021), final VLT/SPHERE survey](https://doi.org/10.1051/0004-6361/202141781), Table 1 and Table A.1: volume-equivalent diameter 173 km, ecliptic J2000 pole (181°, 22°), sidereal period 5.079176 h. The original article is pinned and restorable.
+## Processing
 
-- [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/9_Metis_mpcd.obj): 2962 vertices, 5920 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 85.910665 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 212.146 × 190.170 × 137.418 km; these are not best-fit ellipsoid axes.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS u triangles, each a 128 × 128 px leaf, with a 1700 m stopping threshold. Elevation samples the original mesh radius minus an 86.5 km reference sphere, with a -30 to 30 km legend.
 
-- [Deconvolved ZIMPOL frames](https://observations.lam.fr/astero/Data/9Metis/Deconv/): 30 camera-1 intensity frames over four nights, 2018-06-08 to 2018-07-10, each 256 × 256 px at 3.63 mas/px in the N_R filter with a 234.8 s exposure. Horizons puts the disc between 0.1520″ and 0.1580″ across those nights, so it spans 42 to 44 px. They are the survey's own deconvolutions; no radiometric calibration accompanies them.
+The SPHERE photograph rides the ADAM mesh, because the rotation record describes that reconstruction; Shape and Elevation keep the MPCD refinement. The frames are combined with matched relative levels, averaged where they overlap, each fading toward its disc edge. The photograph takes its absolute phase from the parameter record, while the other views use an arbitrary display meridian.
 
-- [Released parameter record](https://observations.lam.fr/astero/3Dshape/9_Metis_param): pole latitude 22.7124°, pole longitude 181.3819°, sidereal period 5.07917676 h, then phase epoch JD 2434419.0 and phase 0°. The survey's files do not agree on column order; this one is read latitude-first because 181.3819° cannot be a latitude. The release names this file without an extension.
+The published ecliptic pole is converted to equatorial J2000. Horizons elements are pinned at JD 2461286.5 (2026-09-03).
 
 ## Evidence
 
-The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
-
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1603.8 m error; the authored stopping threshold is 1700 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 880.4 m and maximum 1824.4 m.
-
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
+Source and output are each one closed component with Euler characteristic 2. Independent nearest-triangle sampling (8192 samples each way) measured p95 880.4 m and maximum 1824.4 m. No repeated radial intersection was found, which supports the radial-height dataset.
 
 ### SPHERE photograph
 
@@ -65,58 +65,9 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ## Known problems
 
-Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 86.5 km reference sphere, with a -30 to 30 km legend. This includes global shape, not height above a gravitational equipotential.
-
-Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
-
-Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase. The photograph does not use it: that dataset takes the absolute phase from the pinned parameter record, so where its frames land on the body is set by the record and not by the display meridian.
-
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Metis from 3° to 9° south, so surface the survey did not see keeps the missing-imagery grid. Nothing registers the frames against surface markings, because the two tests that would do so find nothing to lock onto here; the dataset ships on the survey's own comparison figure, reproduced above, and the mesh, the rotation record and that figure all come from this same survey's images.
+- Shape uses the shared neutral-gray material, not photographed color or composition. Elevation includes global shape, not height above a gravitational equipotential.
+- Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. Reduction softens small features.
+- Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase, except for the photograph.
+- The SPHERE photograph shows photographed illumination, not albedo or colour. The frames see Metis from 3° to 9° south, so unseen surface keeps the missing-imagery grid. Nothing registers the frames against surface markings, because the two tests that would do so find nothing to lock onto. The dataset ships on the survey's own comparison figure, and the mesh, the rotation record and that figure all come from the same survey's images.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
-
-## Methods and source notes
-
-<details>
-<summary>Selected data</summary>
-
-- [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/9_Metis_adam.obj): radius 86.604374 km. The SPHERE photograph rides it, because the release's rotation record describes this reconstruction; the Shape and Elevation views keep the MPCD refinement, which uses resolved SPHERE detail (survey section 3 and Appendix B). An earlier version of the dataset rode the MPCD, which the registration stage's limb rule put slightly closer to the record (2.30° against 2.72°); the dataset now rides the model the record describes and is checked against the survey's Figure B.8.
-
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/9Metis/): individual, illuminated, resolved telescope images. The deconvolved camera-1 frames are cast onto the ADAM mesh as the SPHERE photograph dataset, checked against the survey's Figure B.8; the reduced `Red/` products are not used. This is photographed illumination, not a radiometrically calibrated global reflectance mosaic, and it remains the observational constraint behind the selected reconstruction.
-
-- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
-
-</details>
-
-<a id="shape-elevation-and-lighting"></a>
-
-<details>
-<summary>Shape, elevation and lighting</summary>
-
-The original connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 800 native PolyCSS u triangles. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime.
-
-No radial substitute, runtime triangulation, fabricated texture or additional renderer is used.
-
-</details>
-
-<a id="frame-and-ephemeris"></a>
-
-<details>
-<summary>Frame and ephemeris</summary>
-
-The original Cartesian frame is retained with +Z north and east-positive longitude. The published ecliptic pole is converted to equatorial J2000 with obliquity 23.439291111°. The release’s parameter file is read as a light-curve inversion spin record for the photograph's cameras, latitude-first, and not as an IAU W model; the display meridian stays arbitrary.
-
-Original JPL Horizons elements and independent vectors are pinned at JD 2461286.5 (2026-09-03). Heliocentric ICRF conics serve the existing fixed-date context, not long-term perturbation ephemerides. The independent vectors at ±30 days have measured regression guards in the astronomy package.
-
-TDB is approximated as TT within 2 ms.
-
-</details>
-
-<a id="reproduction"></a>
-
-<details>
-<summary>Reproduction</summary>
-
-Source pins live in [source/manifest.json](source/manifest.json); source/preparation/acquisition.json restores the ignored OBJ. LAM's ordinary public-site cookie is explicitly recorded. Generated context.png is force-tracked as a pinned intermediate and regenerated/verified by the existing radial snapshot recipe.  Title provenance remains in its source directory.
-
-</details>

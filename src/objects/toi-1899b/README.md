@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-1899. Its orbit and size follow Lin et al. 2023's fit, the archive's default. This account was drafted from Lin et al. 2023's values; the sections below are the data's own.
+It is the only planet known around TOI-1899. Its orbit and size follow Lin et al. 2023's fit, the archive's default. The introduction is generated from Lin et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.99 Jupiter radii from Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract): 70,777.1 km at 71,492 km per Jupiter radius. GM from the mass 0.67 Jupiter masses (Lin et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166...90L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around TOI-1899. Its orbit and size follow Lin et al
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1899b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -53 degrees is taken as Lin et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.044) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

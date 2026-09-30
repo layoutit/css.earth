@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around K2-141. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default. This account was drafted from Bonomo et al. 2023's values; the sections below are the data's own.
+It is one of 2 planets known around K2-141. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default. The introduction is generated from Bonomo et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.13471341 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 9,630.9 km at 71,492 km per Jupiter radius. GM from the mass 0.01563737 Jupiter masses (Bonomo et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...677A..33B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,8 @@ It is one of 2 planets known around K2-141. Its orbit and size follow Bonomo et 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-141b.json).
 
-
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "K2-141b" (revision 1374249200), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "K2-141b" (revision 1374249200) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

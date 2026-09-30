@@ -67,7 +67,7 @@ The Shadows-on view was also inspected. These production captures use Chrome 152
 
 ![Selam’s approximate orbit around Dinkinesh](evidence/selam-approximate-orbit.png)
 
-The production navigation check verifies visible **(approx)** labels, dashed paths, the standard **1 px** circle/orbit stroke, and selection of Dinkinesh with one mounted scene. Alternating existing retained segments carry the dashes; approximate circles omit the ordinary selected-body thickening. [Integrated checks and their limits](../dinkinesh/README.md#integrated-validation) cover the combined catalog.
+The production navigation check verifies visible **(approx)** labels, dashed paths, the standard **1 px** circle/orbit stroke, and selection of Dinkinesh with one mounted scene. Alternating existing retained segments carry the dashes; approximate circles omit the ordinary selected-body thickening. [Integrated checks and their limits](../dinkinesh/README.md) cover the combined catalog.
 
 ## Preparation
 

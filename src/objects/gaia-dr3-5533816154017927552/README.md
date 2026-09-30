@@ -2,7 +2,7 @@
 
 ## Sources
 
-Gaia's parallax, brightness and spectrum give it 79.8 solar radii and 7.20 solar masses (FLAME) and 4,625 K at its surface (GSP-Phot). This account was drafted from Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)'s values; the sections below are the data's own.
+Gaia's parallax, brightness and spectrum give it 79.8 solar radii and 7.20 solar masses (FLAME) and 4,625 K at its surface (GSP-Phot). The introduction is generated from Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)'s published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 5533816154017927552, parallax 0.069 ± 0.010 mas (14505.52 pc). Radius 79.776 (72.606 to 86.369) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Mass 7.198 (6.606 to 7.238) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 4,625 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5533816154017927552: teff_gspphot 4625.371 K (16th-84th percentiles 4608.2505-4655.6973), the temperature FLAME used. log g 1.49 from the mass and radius.
 
@@ -14,11 +14,9 @@ Gaia's parallax, brightness and spectrum give it 79.8 solar radii and 7.20 solar
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

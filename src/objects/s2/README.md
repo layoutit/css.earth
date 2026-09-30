@@ -2,7 +2,7 @@
 
 ## Sources
 
-S2 is a hot young star on a 16-year orbit around Sagittarius A*, the black hole at the centre of the Milky Way. At its closest, in 2018, it passed 120 au from Sagittarius A*, four times Neptune's distance from the Sun. It is one of the S-stars described in the [Sagittarius A* README](../sgr-a-star/README.md#the-s-stars), and the first of them with a page of its own. This account was drafted from GRAVITY Collaboration (2022), A&A 657, L12's values; the sections below are the data's own.
+S2 is a hot young star on a 16-year orbit around Sagittarius A*, the black hole at the centre of the Milky Way. At its closest, in 2018, it passed 120 au from Sagittarius A*, four times Neptune's distance from the Sun. It is one of the S-stars described in the [Sagittarius A* README](../sgr-a-star/README.md#the-s-stars), and the first of them with a page of its own. The introduction is generated from GRAVITY Collaboration (2022), A&A 657, L12's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 5.53 (+1.77/-0.79) solar radii and mass 13.60 (+2.2/-1.8) solar masses from Habibi et al. (2017, ApJ 847, 120; arXiv:1708.06353), Table 3, model-atmosphere fit to SINFONI spectra (Teff 28513 K, B0-B3), at 695,700 km per solar radius and the JPL solar GM.
 
@@ -15,7 +15,6 @@ S2 is a hot young star on a 16-year orbit around Sagittarius A*, the black hole 
 The rendered page (dev server, 900 × 900 headless Chromium, 2026-09-27): the disc at its Planck colour, dimmed toward the edge by the ATLAS limb law, with its neighbouring S-stars labelled.
 
 Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/s2.json).
-
 
 ## Known problems
 

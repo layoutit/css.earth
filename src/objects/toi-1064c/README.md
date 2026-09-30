@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-1064. Its orbit and size follow Wilson et al. 2022's fit, the archive's default. This account was drafted from Wilson et al. 2022's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-1064. Its orbit and size follow Wilson et al. 2022's fit, the archive's default. The introduction is generated from Wilson et al. 2022's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.23650679 Jupiter radii from Wilson et al. 2022 (2022MNRAS.511.1043W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract): 16,908.3 km at 71,492 km per Jupiter radius. GM from the mass 0.00786588 Jupiter masses (Wilson et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.511.1043W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 2 planets known around TOI-1064. Its orbit and size follow Wilson e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1064c.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 25 degrees is taken as Wilson et al. 2022 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.088) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

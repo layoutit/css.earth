@@ -2,7 +2,7 @@
 
 ## Sources
 
-It has 0.728 solar masses and 0.7307 solar radii; its partner has 0.8215 and 1.0739, measured from the eclipses and the stars' motions. This account was drafted from Kaluzny et al. (2015AJ....150..155K)'s values; the sections below are the data's own.
+It has 0.728 solar masses and 0.7307 solar radii; its partner has 0.8215 and 1.0739, measured from the eclipses and the stars' motions. The introduction is generated from Kaluzny et al. (2015AJ....150..155K)'s published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.7307 +/- 0.0046 solar radii from Secondary radius (solar radii) 0.7307 +/- 0.0046, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K): 508,348 km at 695,700 km per solar radius. GM from the mass 0.728 +/- 0.0047 solar masses (Secondary mass (solar masses) 0.728 +/- 0.0047, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K), https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K) times the JPL solar GM. Temperature 5741 +/- 119 K from Secondary log Teff 3.759 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 5741 K (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K). A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It has 0.728 solar masses and 0.7307 solar radii; its partner has 0.8215 and 1.0
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ngc-6362-v41-b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around LTT 9779. Its orbit and size follow Jenkins et al. 2020's fit, the archive's default. This account was drafted from Jenkins et al. 2020's values; the sections below are the data's own.
+It is the only planet known around LTT 9779. Its orbit and size follow Jenkins et al. 2020's fit, the archive's default. The introduction is generated from Jenkins et al. 2020's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.4210902 Jupiter radii from Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract): 30,104.6 km at 71,492 km per Jupiter radius. GM from the mass 0.09225057 Jupiter masses (Jenkins et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020NatAs...4.1148J), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,8 @@ It is the only planet known around LTT 9779. Its orbit and size follow Jenkins e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ltt-9779b.json).
 
-
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "LTT 9779 b" (revision 1375644436), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "LTT 9779 b" (revision 1375644436) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

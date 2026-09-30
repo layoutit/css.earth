@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-140. Its orbit and size follow Alexoudi 2022's fit, the archive's default. This account was drafted from Alexoudi 2022's values; the sections below are the data's own.
+It is the only planet known around WASP-140. Its orbit and size follow Alexoudi 2022's fit, the archive's default. The introduction is generated from Alexoudi 2022's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.27 Jupiter radii from Alexoudi 2022 (2022AN....34324012A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract): 90,794.8 km at 71,492 km per Jupiter radius. GM from the mass 2.44 Jupiter masses (Hellier et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017MNRAS.465.3693H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around WASP-140. Its orbit and size follow Alexoudi 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-140b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 356 degrees is taken as Kokori et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.047) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

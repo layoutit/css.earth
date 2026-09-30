@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Bourrier et al. 2018. It is also HD 75732, HR 3522, HIP 43587. This account was drafted from Bourrier et al. 2018's values; the sections below are the data's own.
+Its radius and temperature follow Bourrier et al. 2018. It is also HD 75732, HR 3522, HIP 43587. The introduction is generated from Bourrier et al. 2018's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 704967037090946688, parallax 79.448 ± 0.043 mas (12.59 pc). Radius 0.943 +/- 0.01 solar radii from Bourrier et al. 2018, the stellar radius of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract). Mass 0.905 +/- 0.015 solar masses from Bourrier et al. 2018, the stellar mass of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract). Temperature 5,172 K from Bourrier et al. 2018, the stellar temperature of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive. log g 4.45 from the mass and radius.
 
@@ -14,7 +14,6 @@ Its radius and temperature follow Bourrier et al. 2018. It is also HD 75732, HR 
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
@@ -23,6 +22,6 @@ Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** 55 Cnc c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
 - **Not shown.** 55 Cnc d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
 - **Not shown.** 55 Cnc f: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "55 Cancri" (revision 1374922684), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "55 Cancri" (revision 1374922684) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

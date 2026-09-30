@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its oscillations give 1.86 solar masses and 9.8 solar radii; APOGEE spectra give 4,902 K at its surface. This account was drafted from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3)'s values; the sections below are the data's own.
+Its oscillations give 1.86 solar masses and 9.8 solar radii; APOGEE spectra give 4,902 K at its surface. The introduction is generated from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3)'s published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2073829361222498176, parallax 0.897 ± 0.010 mas (1115.39 pc). Radius 9.7642 +/- 0.181 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): Radius (Mosser scale, solar radii) 9.7642 +/- 0.181 (https://arxiv.org/abs/2410.00102). Mass 1.8625 +/- 0.0764 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): Mass (Mosser scale, solar masses) 1.8625 +/- 0.0764 (https://arxiv.org/abs/2410.00102). Temperature 4,902 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): APOGEE effective temperature (K) 4902.303 +/- 46.5204. log g 2.7316 from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): Asteroseismic log g 2.7316 +/- 0.0041.
 
@@ -14,11 +14,9 @@ Its oscillations give 1.86 solar masses and 9.8 solar radii; APOGEE spectra give
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

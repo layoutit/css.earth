@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-942. Its orbit and size follow Wirth et al. 2021's fit, the archive's default. This account was drafted from Wirth et al. 2021's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-942. Its orbit and size follow Wirth et al. 2021's fit, the archive's default. The introduction is generated from Wirth et al. 2021's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.41663021 Jupiter radii from Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W/abstract): 29,785.7 km at 71,492 km per Jupiter radius. No mass is measured: Carleo et al. 2021 (2021A&A...645A..71C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...645A..71C/abstract) gives only an upper limit of 0.11641444 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 2 planets known around TOI-942. Its orbit and size follow Wirth et 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-942c.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 20 degrees is taken as Wirth et al. 2021 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.32) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -23,7 +23,7 @@ header, header.hd, nav, .hd nav, .not-footer > header { background: #141414 !imp
 .page-header, h1.page-header, .page-header h1 { border-left-color: #444 !important; }
 .dashboard-card, .dashboard-grid > div, .card, [class*="dashboard"] { background: #0a0a0a !important; border-color: rgb(255 255 255 / 12%) !important; color: #dfdfdf !important; }
 .metric, .metric * { color: #dfdfdf !important; }
-/* The SQL editor is for Claude's terminal, not the page. */
+/* The SQL editor is for the terminal, not the page. */
 form.sql, a[href*="?sql="], a[href*="&sql="], .show-hide-sql, a[href$="/-/dashboards/overview?sql"], .dashboard-card a[href*="sql"] { display: none !important; }
 /* global_maps gallery */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px 16px; margin: 16px 0 40px; }

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around G 9-40. Its orbit and size follow Luque et al. 2022's fit, the archive's default. This account was drafted from Luque et al. 2022's values; the sections below are the data's own.
+It is the only planet known around G 9-40. Its orbit and size follow Luque et al. 2022's fit, the archive's default. The introduction is generated from Luque et al. 2022's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.16950694 Jupiter radii from Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract): 12,118.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01258541 Jupiter masses (Luque et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...666A.154L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,8 @@ It is the only planet known around G 9-40. Its orbit and size follow Luque et al
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/g-9-40b.json).
 
-
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "G 9-40 b" (revision 1374088475), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "G 9-40 b" (revision 1374088475) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

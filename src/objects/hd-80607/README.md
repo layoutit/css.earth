@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 80607 shares its motion through space with HD 80606, 1,355 AU away, so the two are a bound pair. Both are placed where Gaia measures them. It is also HIP 45983. This account was drafted from El-Badry, Rix & Heintz (2021), MNRAS 506, 2269's values; the sections below are the data's own.
+HD 80607 shares its motion through space with HD 80606, 1,355 AU away, so the two are a bound pair. Both are placed where Gaia measures them. It is also HIP 45983. The introduction is generated from El-Badry, Rix & Heintz (2021), MNRAS 506, 2269's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1019003329101872896, parallax 15.148 ± 0.016 mas (66.01 pc). Radius 1.016 +/- 0.059 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 457134361 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Mass 0.97 +/- 0.13 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 457134361 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Temperature 5,538.3 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 457134361 (VizieR IV/39/tic82). log g 4.41 from the mass and radius.
 
@@ -21,6 +21,5 @@ Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** HD 80607's orbit around HD 80606 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

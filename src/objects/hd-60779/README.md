@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow DiTomasso et al. 2026. It is also HD 60779, HIP 36976. This account was drafted from DiTomasso et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow DiTomasso et al. 2026. It is also HD 60779, HIP 36976. The introduction is generated from DiTomasso et al. 2026's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3060787930730737920, parallax 28.221 ± 0.019 mas (35.43 pc). Radius 1.129 +/- 0.013 solar radii from DiTomasso et al. 2026, the stellar radius of the default parameter set of HD 60779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract). Mass 1.05 +/- 0.044 solar masses from DiTomasso et al. 2026, the stellar mass of the default parameter set of HD 60779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract). Temperature 6,081 K from DiTomasso et al. 2026, the stellar temperature of the default parameter set of HD 60779 b in the NASA Exoplanet Archive. log g 4.35 from the mass and radius.
 
@@ -14,12 +14,10 @@ Its radius and temperature follow DiTomasso et al. 2026. It is also HD 60779, HI
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** HD 60779 c: found by radial velocity, not a transit fit.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

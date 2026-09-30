@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 4 planets known around XO-2 N. Its orbit and size follow Ruggieri et al. 2024's fit, the archive's default. This account was drafted from Ruggieri et al. 2024's values; the sections below are the data's own.
+It is one of 4 planets known around XO-2 N. Its orbit and size follow Ruggieri et al. 2024's fit, the archive's default. The introduction is generated from Ruggieri et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.019 Jupiter radii from Bonomo et al. 2017 (2017A&A...602A.107B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract): 72,850.3 km at 71,492 km per Jupiter radius. GM from the mass 0.629 Jupiter masses (Knutson et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014ApJ...785..126K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014ApJ...785..126K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 4 planets known around XO-2 N. Its orbit and size follow Ruggieri e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/xo-2-n-b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

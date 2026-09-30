@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-33. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default. This account was drafted from Chakrabarty & Sengupta 2019's values; the sections below are the data's own.
+It is the only planet known around WASP-33. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default. The introduction is generated from Chakrabarty & Sengupta 2019's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.593 Jupiter radii from Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract): 113,886.8 km at 71,492 km per Jupiter radius. GM from the mass 2.093 Jupiter masses (Chakrabarty & Sengupta 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158...39C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,8 @@ It is the only planet known around WASP-33. Its orbit and size follow Chakrabart
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-33b.json).
 
-
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "WASP-33b" (revision 1374243508), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "WASP-33b" (revision 1374243508) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -23,7 +23,7 @@ Catalogue colour: #fcf6ff, the colour dataset's prepared colour.
 
 Run of 2026-09-23 (this version):
 
-- [`tecplot-lonlat-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/tecplot-lonlat-map.test.mts) (now [`packages/bake/src/objects/raster/tecplot-lonlat-map.test.mts`](../../../packages/bake/src/objects/raster/tecplot-lonlat-map.test.mts)) averages B² over each deposited map by area. At all 18 epochs the paper's Table 3 value is 2π times that mean, 0.02 % to 2.9 % above it and never below. So the files are the maps the paper measured; the paper does not state its normalisation.
+- [`tecplot-lonlat-map.test.mts`](../../../packages/bake/src/objects/raster/tecplot-lonlat-map.test.mts) averages B² over each deposited map by area. At all 18 epochs the paper's Table 3 value is 2π times that mean, 0.02 % to 2.9 % above it and never below. So the files are the maps the paper measured; the paper does not state its normalisation.
 - The reader was compared with the paper's Fig. 1 epoch-1 radial panel, decoded through its colour bar: correlation 0.945 over 43,412 figure pixels, median difference 0.4 G. Mirrored in longitude the correlation is −0.50; mirrored in latitude, 0.59. The figure is not redistributed, so this was a one-off check.
 - The longitude direction was read from the same figure's phase ticks against the epoch-1 Stokes V fits, as described above.
 - `iota-horologii-views.png`: ι Horologii's Colour (its default), Radial field October 2015 and Azimuthal field December 2015, and Luhman 16 B's interpolated Brightness, on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready.

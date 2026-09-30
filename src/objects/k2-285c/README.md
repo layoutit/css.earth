@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 4 planets known around K2-285. Its orbit and size follow Palle et al. 2019's fit, the archive's default. This account was drafted from Palle et al. 2019's values; the sections below are the data's own.
+It is one of 4 planets known around K2-285. Its orbit and size follow Palle et al. 2019's fit, the archive's default. The introduction is generated from Palle et al. 2019's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.31492551 Jupiter radii from Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract): 22,514.7 km at 71,492 km per Jupiter radius. GM from the mass 0.04933455 Jupiter masses (Palle et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A..41P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 4 planets known around K2-285. Its orbit and size follow Palle et a
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-285c.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

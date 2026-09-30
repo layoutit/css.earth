@@ -1,7 +1,6 @@
 # Performance captures
 
-Tools that record and read performance evidence from the running application: iOS Simulator and
-iPad WebKit captures, and Chrome traces from `navigation-capture.mts`. Processing is local.
+Tools that record and read performance evidence from the running application: iOS Simulator and iPad WebKit captures, and Chrome traces from `navigation-capture.mts`. Processing is local. Run the tooling checks with `node --test "labs/performance/*.test.mts"`.
 
 ## iOS Simulator
 
@@ -12,109 +11,64 @@ node labs/performance/ios-capture.mts --name typing --open http://127.0.0.1:4261
 node labs/performance/ios-capture.mts --name by-hand --seconds 15
 ```
 
-It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe/axe`). Steps are a JSON list of
-`{ "tap": [x, y] }`, `{ "type": "text" }`, `{ "drag": { "from": [x, y], "to": [x, y], "seconds": 1.5 } }`,
-`{ "wait": seconds }`, `{ "screenshot": "name" }`, `{ "viewport": "name" }` and `{ "probe": "name" }` (records the scene router's state, the route
-and the page's element count in the report), in simulator points, sent as real touch input. Safari keeps its cache
-as a visitor's would; `--no-cache` measures a cold load. `--open` loads the
-page in the visible tab first and waits until the app reports its body ready, then `--settle` seconds more, so each
-capture starts from a fresh, loaded page. A `screenshot` is the full device screen (or simulator screen); a `viewport`
-is only the Web Inspector page image. Their files end in `.screen.png` and `.viewport.png`, and each has a source, size
-and page URL in `report.json`. A device screenshot fails if the native screen service is unavailable; it never falls back
-to the page image. Check the screenshots before reading any numbers: a tap that lands on the
-wrong control records the wrong moment.
+It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe/axe`). Steps are a JSON list of `{ "tap": [x, y] }`, `{ "type": "text" }`, `{ "drag": { "from": [x, y], "to": [x, y], "seconds": 1.5 } }`, `{ "wait": seconds }`, `{ "screenshot": "name" }`, `{ "viewport": "name" }` and `{ "probe": "name" }` (records the scene router's state, the route and the page's element count), in simulator points, sent as real touch input.
 
-`--compare <capture dir>` pixelmatches each screenshot against the one with the same name in an earlier capture and
-writes `<name>.diff.png`; a change that should not show must report 0 differing pixels. Antialiased pixels count, and
-the status-bar clock is pinned to 9:41 during every capture so it never differs. Take a screenshot only once the view
-has settled: one taken mid-flight differs with the flight's timing.
+- `--open` loads the page in the visible tab, waits until the app reports its body ready, then `--settle` seconds more. It waits for a changed document clock and the requested route, so an outgoing page cannot satisfy it.
+- `--no-cache` requests a cold load; otherwise Safari keeps its cache as a visitor's would.
+- A `screenshot` is the full device or simulator screen (`.screen.png`); a `viewport` is only the Web Inspector page image (`.viewport.png`). A device screenshot fails if the native screen service is unavailable; it never falls back to the page image. Check the screenshots before reading any numbers: a tap on the wrong control records the wrong moment.
+- `--native page` (the default) traces only the web content process holding the page. `--native all` records every process on the Mac, for compositor and GPU questions; its trace is several times larger. `--native off` skips it. A recording that fails to stop within 30 s is killed and the report says so.
 
-The native trace records only the simulator's web content process holding the page (`--native page`, the default).
-`--native all` records every process on the Mac, for compositor and GPU questions; its trace is several times larger and
-its export alone takes about 14 s. `--native off` skips it. A recording that fails to stop within 30 s is killed and
-the report says so.
-
-For JavaScript names, build with source maps: `CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm build:renderer`, then
-`astro build --mode performance`, and pass that output as `--dist`. Output goes to
-`output/performance/ios-captures/<name>-<time>/`: `report.json`, a `README.md` summary, `native.trace` (open it in
-Instruments) and the screenshots. The report holds JavaScript samples for the page and each worker, timeline time by
-record type and rendering frames, CPU per thread, memory by category after collection before and after, console
-messages, network requests, and the Time Profiler summary for Safari's web content process.
+For JavaScript names, build with source maps: `CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm build:renderer`, then `astro build --mode performance`, and pass that output as `--dist`. Output goes to `output/performance/ios-captures/<name>-<time>/`: `report.json`, a `README.md` summary, `native.trace` (open it in Instruments) and the screenshots.
 
 The simulator runs on the Mac's CPU and GPU, so absolute times are not a phone's. Compare builds with the same steps.
 
-### Before and after in one command
+### Comparing builds
 
-`--compare` also takes a capture name: every earlier capture called `<name>-<time>` is a baseline. The command then prints
-a before/after table of means and writes it to `comparison.md` in its last run. The table covers frames, work and
-compositing per frame, frames over 16.7 and 50 ms, style and paint time, layer memory and layer count, and on a device
-its frame rate and Safari's memory. `--runs <n>` repeats the capture; the numbers of one run vary, so compare three
-against three:
+`--compare <capture dir>` pixelmatches each screenshot against the one with the same name in an earlier capture and writes `<name>.diff.png`; a change that should not show must report 0 differing pixels. The status-bar clock is pinned to 9:41. Take a screenshot only once the view has settled.
+
+`--compare <name>` treats every earlier capture called `<name>-<time>` as a baseline and writes a before/after table of means to `comparison.md`. `--runs <n>` repeats the capture; one run varies, so compare three against three:
 
 ```sh
 node labs/performance/ios-capture.mts --name drag-before --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json
 node labs/performance/ios-capture.mts --name drag-after --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json --compare drag-before
 ```
 
-The dev server must be idle while it measures: a server busy with a bake or a file-watch storm times out and serves an
-error page, and every number from that run is wrong. Look at the screenshots.
+The dev server must be idle while it measures: a server busy with a bake or a file-watch storm serves an error page, and every number from that run is wrong.
 
 ### Recording a hand and playing it back
 
-Every capture writes `input.json`: each pointer event the page received and the camera state on every frame. `--replay
-<capture dir>` plays that input back in place of steps, so two builds see the same hand. Compare a replay with another
-replay of the same input, not with the recording, whose steps and waits differ. On the simulator the replay dispatches
-the recorded pointer events in the page at their recorded times: AXe's batch touch steps take about 190 ms each, too
-slow for a path, and the app's own input handling runs as it does for a finger.
+Every capture writes `input.json`: each pointer event the page received and the camera state on every frame. `--replay <capture dir>` plays that input back in place of steps, so two builds see the same hand. Compare a replay with another replay of the same input, not with the recording. On the simulator the replay dispatches the recorded pointer events in the page at their recorded times.
 
-### A real iPhone or iPad over USB
+### Recording initial scene mounting
 
-For a local iPad preview, open Safari on the unlocked device and enable Settings > Apps > Safari > Advanced > Web
-Inspector. From this checkout, run `pnpm ipad` (or `pnpm ipad --route /jupiter/`). It prepares and starts the dev server
-on the Mac's LAN, navigates the existing Safari tab, and confirms the tab's URL. It reuses a server on port 4210 only if
-that server belongs to this checkout. `--open-only` uses an already running server; `--port` and `--address` override the
-defaults. This path uses Web Inspector and does not require Safari's Remote Automation setting. Keep its terminal open
-when it starts a new server. This is a dev preview: first visits may spend time loading transformed modules.
+`ios-capture.mts --device --cold-load --open <same-origin URL> --steps <steps.json> --screens --name <name>` starts Timeline, Network and native frames before a WebKit `Page.reload(ignoreCache: true)`, then waits for the new document and scene readiness. It needs an already-visible tab on the same origin and rejects debug and replay hooks. Keep normal resource sharing enabled: adding `--no-cache` can refetch the same CSS texture separately for hundreds of faces. Cache bypass is a request, not proof of a cold load: check `Network.responseReceived.response.source` in the raw recording, where `memory-cache` means bytes were reused.
 
-`--device [udid]` records a device instead of the simulator. Turn on Settings > Apps > Safari > Advanced > Web Inspector,
-trust this Mac, keep the device unlocked (Auto-Lock off while plugged in) with the page open in Safari, and start the dev
-server on the network (`pnpm exec astro dev --host 0.0.0.0 --port 4210`). An `--open` path that starts with `/` loads from
-this Mac's address (`--origin` overrides it):
+## A real iPhone or iPad over USB
+
+For a local iPad preview, open Safari on the unlocked device and enable Settings > Apps > Safari > Advanced > Web Inspector. Run `pnpm ipad` (or `pnpm ipad --route /jupiter/`). It starts the dev server on the Mac's LAN, navigates the existing Safari tab and confirms its URL. It reuses a server on port 4210 only if that server belongs to this checkout. `--open-only` uses an already running server; `--port` and `--address` override the defaults.
+
+`--device [udid]` records a device instead of the simulator. Trust this Mac, keep the device unlocked (Auto-Lock off while plugged in) with the page open in Safari, and start the dev server on the network (`pnpm exec astro dev --host 0.0.0.0 --port 4210`). An `--open` path that starts with `/` loads from this Mac's address (`--origin` overrides it):
 
 ```sh
 node labs/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
 node labs/performance/ios-capture.mts --device --name ipad-replay --open /jupiter/ --replay output/performance/ios-captures/ipad-drag-<time> --compare ipad-drag-before
 ```
 
-A `--seconds` recording plays a sound on the Mac when it starts and when it stops: use the device between the two.
-Touch steps need the simulator; on a device, script steps move the camera. For an iPad visual failure, first inspect the
-existing recording and its images without touching Safari:
+Touch steps need the simulator; on a device, script steps move the camera. For an iPad visual failure, first inspect the existing recording and its images without touching Safari:
 
 ```sh
 pnpm ipad:inspect output/performance/ios-captures/<capture-directory>
 ```
 
-This lists the trace URL, checkout and each image's source. Older captures without an image receipt say `source
-unrecorded`; inspect those images directly before drawing a conclusion. To make a new full-screen still during a trace,
-put `{ "screenshot": "after-flight" }` in its steps. Use `{ "viewport": "after-flight" }` only when the Safari toolbar
-is deliberately excluded. A device screenshot step needs `--open <url>` or `--expect-url <url>`; the capture checks the
-visible Safari page's origin and path before recording. The report records the capture tool's checkout path, Git revision
-and tracked-change state; the URL identifies the preview being captured.
-Trace receipts record the page URL when recording starts and ends, including flights that change routes.
-For a fast still without starting a trace or changing the page:
+Captures without an image receipt say `source unrecorded`; inspect those images directly. A device screenshot step needs `--open <url>` or `--expect-url <url>`; the capture checks the visible Safari page's origin and path first. For a fast still without starting a trace:
 
 ```sh
 pnpm ipad:screen after-flight --device --expect-url http://192.168.0.8:4212/lutetia/
 ```
 
-This writes a full device PNG and a source receipt under `output/performance/ios-stills/`. A different port or route
-fails before the grab. `--inspect` works on this still directory too. A single grab can take seconds; for a moving
-flight, use the native `--screens` filmstrip and inspect its frame times instead of treating a still as an exact
-mid-flight frame.
+This writes a full device PNG and a source receipt under `output/performance/ios-stills/`. A single grab can take seconds; for a moving flight, use the native `--screens` filmstrip. `--screens` perturbs frame timing, so leave it off for performance comparisons. Capture one origin at a time: loading another origin moves Safari's page to a new process and drops the inspector session.
 
-`--screens` records a native device-screen filmstrip for DevTools, but continuous grabbing perturbs frame timing; use it
-for visual analysis and leave it off for performance comparisons. Capture one origin at a time: loading another
-origin moves Safari's page to a new process and drops the inspector session.
+[pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install pymobiledevice3`, then `--pymobiledevice3 <path>` or `PYMOBILEDEVICE3`; Developer Mode on the device). During a device recording it samples Core Animation's frames per second and the memory of Safari's web content processes into `device-graphics.jsonl` and `device-webcontent.jsonl`. A device `--replay` plays the recorded path as real touch through its CoreDevice HID service (`device-touch.py`), after three calibration taps.
 
 #### Where a device capture's time goes
 
@@ -144,12 +98,7 @@ always did. The load takes 3.3 s with 263 requests instead of 2,335.
 
 ### Repeatable journeys on the connected iPad
 
-`pnpm ipad:run` opens the start route in **visible Safari** through one retained pymobiledevice3 library session, uses
-that session for native screen frames, and closes it afterward. It attaches Web Inspector to the visible page; it never drives a hidden
-Automation page. It requires a built preview from this checkout listening on the Mac LAN. The command builds in
-performance mode when its build marker is absent or stale (`pnpm exec astro build --mode performance`), then actions
-run in order while WebKit tracing
-and native iPad screen grabs are active:
+`pnpm ipad:run` opens the start route in visible Safari, attaches Web Inspector, and runs ordered actions while WebKit tracing and native iPad screen grabs are active. It needs a built preview from this checkout on the Mac LAN, and builds in performance mode when its build marker is absent or stale:
 
 ```sh
 pnpm ipad:run --start mars --fly moon --name mars-to-moon
@@ -158,102 +107,31 @@ pnpm ipad:run --start earth --fly lutetia --heap-snapshot --name earth-to-luteti
 pnpm ipad:run --live --start earth --fly lutetia --name live-earth-to-lutetia
 ```
 
-`--live` targets `https://css.earth` (or an explicit HTTPS `--origin`) without building locally. Flights use the same
-`objectnavigationquery` and `objectnavigate` events as the app's selectable world markers, then verify the destination
-is ready and visible. The flight receipt records the displayed release version. Native frames and WebKit tracing
-remain enabled; internal scene diagnostics may be absent in production, and local source maps are not applied to it.
-Add `--debug` to harvest the DOM-to-compositor chain on the real iPad. It is diagnostic instrumentation; use a normal run for frame-time comparisons.
+- Actions: `--tap '[x,y]'`, `--drag '{"from":[x,y],"to":[x,y],"seconds":1}'`, `--type text`, `--zoom <pixel-delta>` (negative zooms in), `--fly <object>`, `--wait <seconds>` and `--screenshot <name>`. Coordinates are Safari viewport CSS pixels. `--tail <seconds>` (default 2) lets the last handoff finish.
+- `--scenario journey.json` runs a longer sequence: `{"start":"ceres","actions":[{"zoom":-200},{"fly":"venus"},{"wait":2},{"screenshot":"after-venus"}]}`.
+- `--live` targets `https://css.earth` (or an explicit HTTPS `--origin`) without building. `--origin http://<Mac-LAN-IP>:<port>` sets a different preview port.
+- `--heap-snapshot` writes `heap.before.json` and `heap.after.json` around the journey. A zero resource-owner count alone does not prove every allocation was freed.
+- `--style-writes` records DOM writes to `style-writes.json`, aligned with the `cssEarth:capture:style-writes-start` trace marker. It adds overhead. When styles spike without a DOM write, inspect listener lifetimes: adding or removing a document wheel listener can invalidate the whole scene.
+
+Flights use the app's own `objectnavigationquery` and `objectnavigate` events and verify the destination is ready and visible. Tap, drag, type and zoom are page-dispatched through the app's input handlers, not native touch: this iPad's iOS 26.6 refuses CoreDevice HID remote touch. `screens/*.jpg` and `filmstrip.png` come from the actual iPad screen. Each journey records WebKit memory categories over time and `residency.json` snapshots of scene resources before and after each action. These are WebKit's accounting categories, not total process memory.
+
+### Debug exports
+
+`pnpm ipad:run --debug ...` records the DOM-to-compositor chain. It is diagnostic; use a normal run for frame-time comparisons.
 
 ```sh
 pnpm ipad:run --debug --start earth --fly lutetia --screenshot arrived --name lutetia-mount-debug
 ```
 
-The export automatically includes:
+It writes `causes.json` (DOM, style and listener calls with stacks and node IDs), `layers.jsonl` (native layer snapshots), `compositor-checkpoints.json` (computed styles and boxes at arrival and at the end) and `analysis.json` with a paint and image-decode lane. Layer IDs and Inspector node IDs must never be joined by array position; the page-side retained node identity provides that link. Native snapshots are asynchronous observations, not proof that pixels reached the screen.
 
-- `causes.json`: synchronous DOM/style/listener calls, caller stacks, before/after child counts, stable node and parent IDs, inserted node IDs, and observer frame numbers.
-- `layers.jsonl`: event-driven native layer snapshots, bounds, backing bytes, paint counts, structural compositing reasons, and DOM identity mappings. Parents without layers are included. Samples are written during recording so a failed run retains them.
-- `compositor-checkpoints.json`: computed styles and bounding boxes at route arrival and the end of recording, including explicit omitted-node counts.
-- `analysis.json` and every DevTools slice: attachment operations joined to each leaf parent's observed layer presence. Separate diagnostic lanes preserve exact timestamp markers and include overhead.
-
-Debug exports also include `analysis.json.paint` and a **Diagnostic mesh / atlas / decode evidence** lane in the full trace and its slices:
-
-- Connected subtree membership, leaf counts, inline image references, and later image writes grouped by observer frame. Joins use retained node IDs.
-- The app's existing `HTMLImageElement.decode()` calls, URL, completion/rejection, intrinsic dimensions and explicitly paired WebKit timestamps. The probe never starts a decode; completion does not establish GPU upload or continued decoded-image residency. Decodes before installation remain unobserved.
-- Native layer-node descriptions from Inspector's DOM tree, and a count of paints exposing native node IDs. Paints without IDs stay unmapped; clip rectangles do not prove face identity.
-- Each connection's first subsequent paint, explicitly a temporal observation rather than an inferred mutation-to-paint causal edge. Attachment inspection is limited to 30,000 nodes, with omissions reported.
-
-Use `pnpm ipad:run --debug --native page ...` to request the existing Instruments Time Profiler capture in the same journey. On a physical device it records all processes and filters exported samples to the identified WebContent process. Native export resolves addresses against installed Xcode device binaries only after UUID verification, preserving ASLR load addresses; `native-symbols.json` records coverage and unresolved binaries. The Instruments clock origin is retained in `native-toc.xml` for offline rebuilds; a missing clock or empty selected-process samples is an explicit export error. Expensive paint summaries include the sampled native stacks within their intervals. `ios-capture.mts --rebuild <capture>` can reprocess existing native recordings with these symbols. Inspect native export errors and sample coverage before drawing native-stack conclusions; a successful WebKit capture does not prove Instruments produced samples. Normal runs leave these hooks and native profiling off.
-
-For commit stalls, use `--debug --native all` on the same journey. Native tracks retain process names and original PIDs; identically named threads in WebContent and the GPU process stay separate. `native-samples.json.gz` preserves all symbolicated samples, including processes filtered out of the displayed page-only trace. `analysis.json.paint.expensiveCommits` includes native stacks grouped by process and thread, with the approximate-clock limitation attached. Samples establish execution paths; their weights do not partition elapsed commit time. Keep the normal trace as the timing baseline.
-
-`--open` waits for a changed document clock and the requested route before accepting app readiness. An outgoing ready page cannot satisfy this check; no recording starts on it. Cold-load captures intentionally begin before navigation, so their first device frames may show the previous page.
-
-On a physical iPad, native profiling holds a `pymobiledevice3 remote start-tunnel --native` connection for the recording lifetime and releases it after finalization, including error cleanup. `native-tunnel.log` and `native-recorder.log` preserve both connection and Instruments output. A saved Instruments file whose end reason reports a disconnect or failure is rejected as native coverage; the WebKit trace may still be valid. This fixes the September 28 recordings that ended after about 0.6 seconds despite Web Inspector remaining connected. A standalone 10-second recording and a 13.5-second cold departure capture completed with the held tunnel.
-
-Native image-lifecycle samples surface encoded-buffer replacement and live/dead resource pruning in the diagnostic lane, preserving the native call chain without inventing an image URL or a complete call count. Native stack summaries separate threads and retain decoder/shareable-bitmap paths during decode calls and mesh activation. Their host-wall-clock alignment with WebKit is approximate: overlapping samples do not identify a particular image or supply exact per-paint CPU percentages. Inspect the native stack itself to establish the execution path.
-
-Native snapshots are asynchronous observations, not atomic transactions or proof that pixels reached the screen. Reports retain coalesced event counts, errors, unmapped nodes and unpaired clocks. GPU tile eviction reasons are not exposed by this Inspector protocol. Layer IDs and Inspector node IDs must never be joined by array position or across remappings; the page-side retained node identity provides that link.
-
-Add `--style-writes` for the existing DOM-write diagnostic; it adds overhead and is for locating changes rather than comparing timing.
-`style-writes.json` includes bounded, timestamped class/data/hidden state changes as well as aggregate writes. Align its
-relative times with the `cssEarth:capture:style-writes-start` trace marker; device and host wall clocks can differ.
-Also inspect listener lifetimes when styles spike without a DOM write: WebKit tracks wheel listeners in event-region
-styles. Adding/removing a document wheel listener between flight segments can invalidate the whole scene.
-
-Use `--origin http://<Mac-LAN-IP>:<port>` when the preview uses a different port. A JSON scenario can express a longer
-sequence: `pnpm ipad:run --scenario journey.json --name long-journey`. Its shape is
-`{"start":"ceres","actions":[{"zoom":-200},{"fly":"venus"},{"wait":2},{"screenshot":"after-venus"}]}`.
-`--tap '[x,y]'`, `--drag '{"from":[x,y],"to":[x,y],"seconds":1}'`, `--type text`, `--zoom <pixel-delta>`,
-`--fly <object>`, `--wait <seconds>`, and `--screenshot <name>` are ordered actions. Coordinates are Safari viewport CSS
-pixels. Negative zoom delta zooms in; positive zoom delta zooms out. An optional `--tail <seconds>` (default 2) lets the
-last handoff finish before capture stops.
-
-Each journey includes memory category samples over time, a residency snapshot before and after each ordered action,
-and before/after resource counters for scene teardown. `residency.json` records the active scene, decoded image owners,
-pending resources, navigation fragment counts, billboard state, and orbit SVG groups, HTML hosts and retained strokes
-as separate counts. Values are copied; the recorder does not retain scene objects. Release events are bounded to 256
-and report dropped entries. `trace.json` puts these events and `WebKit memory MiB` counters on the recording clock;
-`trace.devtools.json` preserves counters and exposes residency/release snapshots as timestamps beside native frames.
-Use Perfetto to plot all memory categories. These are WebKit's accounting categories, not total process physical memory.
-
-`--heap-snapshot` additionally writes `heap.before.json` and `heap.after.json` around the journey, after collection.
-The snapshots pause JavaScript outside the interaction recording. Read their retainers when counters disagree with
-cleanup; a zero resource-owner count alone does not prove that every JavaScript or browser allocation was freed.
-
-The command validates body names against the object registry, uses the performance router bridge for preview flights, verifies
-ready destination routes, and fails if an action cannot complete. Direct `tap`, `drag`, `type`, and `zoom` actions are
-`page-dispatched`: Web Inspector sends pointer and wheel events through the app's input handlers. This iPad's iOS 26.6 refuses CoreDevice HID remote touch
-(`Remote control requires iOS 27.0 or later`), and WebInspector Automation's `touch()` emits no events on it. The report
-never labels these actions as native touch. `screens/*.jpg` and `filmstrip.png` come from the actual iPad screen, and
-`trace.devtools.json` embeds those frames beside the WebKit trace. Native screen grabbing can affect timing, so use this
-mode for interaction and visual diagnosis. This journey command omits the separate device FPS and memory samplers to
-reduce startup time; the underlying `ios-capture.mts` command can still collect them for a dedicated performance run.
-
-[pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install
-pymobiledevice3`, then `--pymobiledevice3 <path>` or `PYMOBILEDEVICE3`; Developer Mode on the device; it uses macOS's
-own device tunnel, no root). During a device recording it samples Core Animation's frames per second and the memory of
-Safari's web content processes into `device-graphics.jsonl` and `device-webcontent.jsonl`. A device `--replay` plays the
-recorded path as real touch through its CoreDevice HID service (`device-touch.py`, run with pymobiledevice3's own
-Python): first three calibration taps on a transparent shield map page coordinates to the display, then the path plays
-as one finger at its recorded times.
+`--debug --native page` adds the Instruments Time Profiler, filtered to the WebContent process; `--debug --native all` keeps every process, for commit stalls. `ios-capture.mts --rebuild <capture>` reprocesses existing native recordings with symbols. On a physical iPad, native profiling holds a `pymobiledevice3 remote start-tunnel --native` connection for the recording. A saved Instruments file whose end reason reports a disconnect is rejected as native coverage. Inspect native export errors and sample coverage before drawing native-stack conclusions; sample weights do not partition elapsed commit time.
 
 ## Chrome traces
 
-For internal measurements, `navigation-capture.mts` records a Chrome trace and
-recorder metadata without screencasting or video encoding. Use the same saved
-`CSSEARTH_CAPTURE_ROUTE` and `CSSEARTH_CAPTURE_SCENARIO=drag-zoom` for a bounded,
-repeatable drag/zoom comparison. Compare builds sequentially. Opt into video
-only when needed with `CSSEARTH_CAPTURE_VIDEO=1`. Node invalidation tracking and
-DOM snapshots are optional diagnostic captures, separate from timing comparisons.
+`navigation-capture.mts` records a Chrome trace and recorder metadata. Use the same saved `CSSEARTH_CAPTURE_ROUTE` and `CSSEARTH_CAPTURE_SCENARIO=drag-zoom` for a repeatable drag/zoom comparison, and compare builds one after another. `CSSEARTH_CAPTURE_VIDEO=1` adds video.
 
-Run the focused tooling checks with `node --test "labs/performance/*.test.mts"`.
-
-## Capturing node-level style evidence
-
-The existing capture tool always records metadata, Chrome trace and video.
-For a bounded invalidation investigation, add DOM snapshots outside the measured
-window and keep the gesture short; stacks for thousands of leaves can fill
-Chrome's trace buffer in a few seconds.
+For an invalidation investigation, add node tracking and DOM snapshots and keep the gesture short; stacks for thousands of leaves can fill Chrome's trace buffer in a few seconds:
 
 ```sh
 CSSEARTH_CAPTURE_ORIGIN=http://127.0.0.1:4246 \
@@ -266,20 +144,4 @@ CSSEARTH_TRACE_DOM=1 \
 node labs/performance/navigation-capture.mts unique-capture-name
 ```
 
-`CSSEARTH_CAPTURE_ROUTE` can supply a saved view URL path. For a frozen baseline,
-set `CSSEARTH_CAPTURE_DIST` to the directory its server actually serves, so source
-hashes come from that build. The tool exits unsuccessfully if synchronization,
-source-file collection, retained ownership or trace completeness fails. Do not
-compare frame rates from an invalidation-heavy capture with an ordinary trace;
-use node evidence to locate work, then qualify timings separately.
-
-
-### Record initial scene mounting
-
-`ios-capture.mts --device --cold-load --open <same-origin URL> --steps <steps.json> --screens --name <name>`
-starts Timeline, Network and native frames before a WebKit `Page.reload(ignoreCache: true)`, then waits for the new document and scene readiness. Keep normal resource sharing enabled: adding `--no-cache` can refetch the same CSS texture separately for hundreds of faces.
-`--no-cache` requests Safari resource-cache bypass; it does not clear existing decoded images or operating-system caches, or restart Safari. The report's
-`coldLoad` receipt gives navigation and ready times, the requested URL and the Navigation Timing URL. A mismatch fails the capture; the app may add a saved-view token after that initial navigation. This mode requires an already-visible tab on the same origin and
-rejects debug/replay hooks, which do not survive document replacement. Input/camera logging is not reinstalled after reload: adding wheel listeners to the mounted scene invalidates WebKit event regions and contaminates startup timing. Native Timeline frames, network events and device screenshots remain active. Normal `--open` still settles before recording. Its input logger is installed during setup, followed by two animation-frame boundaries before Timeline and native recording start. This keeps the recorder's wheel-listener event-region rebuild out of app timing; it does not suppress work during the recorded journey. Timeline and native profiling stop before those listeners are removed, so observer teardown is excluded too.
-
-Cache bypass is a request, not proof of a cold load. Check `Network.responseReceived.response.source` in the raw recording; a `memory-cache` response means those asset bytes were reused.
+For a frozen baseline, set `CSSEARTH_CAPTURE_DIST` to the directory its server actually serves. The tool exits unsuccessfully if synchronization, source-file collection, retained ownership or trace completeness fails. Do not compare frame rates from an invalidation-heavy capture with an ordinary trace.

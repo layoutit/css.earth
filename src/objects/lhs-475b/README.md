@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around LHS 475. Its orbit and size follow Lustig-Yaeger et al. 2023's fit, the archive's default. This account was drafted from Lustig-Yaeger et al. 2023's values; the sections below are the data's own.
+It is the only planet known around LHS 475. Its orbit and size follow Lustig-Yaeger et al. 2023's fit, the archive's default. The introduction is generated from Lustig-Yaeger et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.08841125 Jupiter radii from Lustig-Yaeger et al. 2023 (2023NatAs...7.1317L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract): 6,320.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00296 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,8 @@ It is the only planet known around LHS 475. Its orbit and size follow Lustig-Yae
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/lhs-475b.json).
 
-
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "LHS 475 b" (revision 1374383729), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "LHS 475 b" (revision 1374383729) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

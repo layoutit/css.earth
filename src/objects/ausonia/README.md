@@ -1,6 +1,6 @@
 # (63) Ausonia
 
-Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+Ausonia is shown as a nonconvex shape model constrained by resolved imaging, an elevation map and a photograph built from SPHERE frames. Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
 
 ## Sources
 
@@ -14,9 +14,13 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/63_Ausonia_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.28](https://doi.org/10.1051/0004-6361/202141781) |
 
-Checked 2026-09-09. Selected DAMIT model **5924**, version **2021-11-12**. DAMIT, Astronomical Institute of Charles University; Vernazza et al. (2021); model 5924, version 2021-11-12.
+Selected DAMIT model 5924, version 2021-11-12. Credit: DAMIT, Astronomical Institute of Charles University; Vernazza et al. (2021). The [investigation ledger](investigations.json) records the source survey and alternative models.
 
-Nonconvex model constrained by resolved imaging, 93 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
+
+## Processing
+
+The source has 578 vertices and 1152 triangles. One uniform scale of 0.9984408632995786 km per source unit gives the archive record's 93 km volume-equivalent diameter. Meshoptimizer reduces it to at most 800 PolyCSS triangles, within a 930 m error allowance. Elevation is radius above a 46.5 km sphere, a shape-derived scalar, not gravitational height or measured geology. The source pole is ecliptic J2000 (121°, -27°), with sidereal period 9.29759 h.
 
 ## Evidence
 
@@ -53,46 +57,14 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-The ausonia results record a maximum sampled source-to-display distance of **569.97 m**. This is a sampled comparison, not an exhaustive error bound.
-
-The report includes 2 browser cases tied to recorded body assets. It does not identify the tested code revision.
+The maximum sampled source-to-display distance is 569.97 m. This is a sampled comparison, not an exhaustive error bound.
 
 ## Known problems
 
-The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.
+The original mesh is uniformly scaled to the selected archive record's declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. No albedo, craters or regolith are inferred.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 140, pole ['120', '-15'], [Model 140](https://damit.cuni.cz/projects/damit/asteroid_models/view/140)
+An alternative archive solution, [Model 140](https://damit.cuni.cz/projects/damit/asteroid_models/view/140), has pole 120, -15.
 
 The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Ausonia from 15° to 16° north, so surface the survey did not see keeps the missing-imagery grid.
-
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
-
-## Methods and source notes
-
-<details>
-<summary>Shape, scale and orientation</summary>
-
-The unmodified source has 578 vertices and 1152 triangles. Its signed tetrahedral volume is 423136.43878432951 source units³; an independent triangle-centroid divergence sum gives 423136.43878432951. The existing recipe applies one uniform scale of 0.9984408632995786 km per source unit so its volume-equivalent diameter is 93 km.
-
-No unit-volume assumption is made. Radius above a 46.5 km sphere is a shape-derived scalar, not gravitational height or measured geology.
-
-The original +Z spin axis and +X reference meridian are retained. The source pole is ecliptic J2000 (121°, -27°), with sidereal period 9.29759 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Position uses JPL Horizons heliocentric ICRF elements at 2026-09-03 TT (TDB approximated as TT, under 2 ms).
-
-</details>
-
-<a id="source-survey"></a>
-
-The [investigation ledger](investigations.json) records the source survey and alternative models.
-
-<a id="preparation-and-qualification"></a>
-
-<details>
-<summary>Preparation and qualification</summary>
-
-The established source-meshoptimizer path starts from the source connectivity, reduces to at most 800 faces, and emits native PolyCSS `u` triangles with 128 px raster cells. This model disables the existing optional RegularizeLight flag: regularization exceeded the source-transfer allowance in one sampled patch, whereas the position-error reduction preserves 800 faces within the sampled allowance.
-
-The error allowance is 930 m; sampled source-fit error is qualified separately from source accuracy. Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default.
-
-</details>

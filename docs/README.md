@@ -15,34 +15,34 @@ For a body's sources, processing, evidence and known problems, read its
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
 | Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
-| Compact numeric maps from USGS products for the Moon, Venus, Mercury and Mars, and how they are read | [Numeric USGS surface maps](usgs-numeric-surfaces.md) |
-| Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
-| What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
-| Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
-| Telescope CLI setup, saved queries and outputs, and the boundary to a normal body scene | [Telescope command guide](../packages/telescope-cli/README.md) |
-| Pinning an observation, re-running the observatory's own software, and what each kind of check establishes | [Virtual telescopes](virtual-telescopes.md) |
-| Querying VO archives, selecting bounded science products and retaining acquisition evidence | [VO observation access](vo-observation-access.md) |
-| Which upstream packages own a mechanical boundary here, and which contracts stay ours | [Astronomy package ownership](astronomy-package-ownership.md) |
-| One example picture per telescope, each made from a product that telescope's toolkit produced here | [Telescope examples](telescope-examples.md) |
-| Pinned sources, public commands and retained outputs for the 18 telescope data families | [Telescope family examples](telescope-family-examples/README.md) |
-| Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
-| JWST images to sky band composites: MAST programs, the re-run level-3 stage, its oracle and depth from a model | [JWST imaging](jwst-imaging.md) |
-| What JWST's public archive holds by observing mode, what this project can already reduce, and which shipped objects JWST has observed | [JWST ledger](jwst-ledger.md) |
-| Hubble observations re-calibrated from raw on the instrument's own pipeline, and checked against the archive's own product | [Hubble](hubble.md) |
-| What Hubble's public archive holds by instrument, how much of it this project can re-calibrate, and which shipped objects Hubble has observed | [Hubble ledger](hubble-ledger.md) |
-| VLT/NACO raw frames re-reduced on ESO's own pipeline, and why its check can only be internal | [VLT/NACO](naco.md) |
-| What the NACO archive holds for this project's bodies, and which modes are reduced | [NACO archive ledger](naco-ledger.md) |
-| Chandra observations reprocessed from level 1 on the observatory's own software, and checked event by event against the archive's own product | [Chandra](chandra.md) |
-| What the Chandra archive holds, which of our objects it observed, and how far the toolkit is proved | [Chandra archive ledger](chandra-ledger.md) |
-| Spitzer/IRAC mosaics re-made from the archive's own level-1 frames, why the observatory's MOPEX would not run here, and how close an open re-mosaic gets | [Spitzer](spitzer.md) |
-| What the Spitzer archive holds for our objects by observing mode, and which of them this toolkit has checked | [Spitzer archive ledger](spitzer-ledger.md) |
-| The complete IHW/PDS near-nucleus Halley index and one qualified archive-final image | [IHW/PDS Halley](ihw-halley.md) |
-| JunoCam's push-frame images cast strip by strip from the Juno kernels, the limb fit of their two epochs, and what the four Europa images measured | [JunoCam](junocam.md) |
-| What the JunoCam archive holds, which of our objects it photographed, and which images are measured or cast | [JunoCam archive ledger](junocam-ledger.md) |
-| Keck observations pinned from KOA, re-reduced on the archive's own pipeline, and checked against the archive's own cube | [Keck](keck.md) |
-| What the Keck archive holds by instrument for this project's objects, and what can be re-reduced here | [What Keck holds](keck-ledger.md) |
-| Gemini raw frames re-reduced on DRAGONS: the CADC route, the archive's own calibration association, and what agrees | [Gemini Observatory](gemini.md) |
-| What the Gemini archive holds for our bodies, by instrument, and what this toolkit has proven | [Gemini ledger](gemini-ledger.md) |
+| Compact numeric USGS maps for the Moon, Venus, Mercury and Mars | [Numeric USGS surface maps](usgs-numeric-surfaces.md) |
+| Interferometric data to star surfaces | [Interferometric imaging](interferometric-imaging.md) |
+| What the open archives hold for our catalogued bodies, by name | [Archive screen](archive-screen.md) |
+| Drawing an opaque body inside a prepared volume | [A body inside a volume](mesh-in-volume.md) |
+| Telescope CLI setup, saved queries and outputs | [Telescope command guide](../packages/telescope-cli/README.md) |
+| Pinning an observation and re-running the observatory's own software | [Virtual telescopes](virtual-telescopes.md) |
+| Querying VO archives and selecting science products | [VO observation access](vo-observation-access.md) |
+| Which upstream packages own a mechanical boundary here | [Astronomy package ownership](astronomy-package-ownership.md) |
+| One example picture per telescope | [Telescope examples](telescope-examples.md) |
+| Pinned sources, commands and outputs for the 18 telescope data families | [Telescope family examples](telescope-family-examples/README.md) |
+| Exoplanet light curves to maps | [Eclipse mapping](eclipse-mapping.md) |
+| JWST images to sky band composites | [JWST imaging](jwst-imaging.md) |
+| What JWST's public archive holds and what this project can reduce | [JWST ledger](jwst-ledger.md) |
+| Hubble observations re-calibrated from raw and checked against the archive | [Hubble](hubble.md) |
+| What Hubble's public archive holds and what this project can re-calibrate | [Hubble ledger](hubble-ledger.md) |
+| VLT/NACO raw frames re-reduced on ESO's own pipeline | [VLT/NACO](naco.md) |
+| What the NACO archive holds for this project's bodies | [NACO archive ledger](naco-ledger.md) |
+| Chandra observations reprocessed from level 1 and checked against the archive | [Chandra](chandra.md) |
+| What the Chandra archive holds for our objects | [Chandra archive ledger](chandra-ledger.md) |
+| Spitzer/IRAC mosaics re-made from level-1 frames | [Spitzer](spitzer.md) |
+| What the Spitzer archive holds for our objects | [Spitzer archive ledger](spitzer-ledger.md) |
+| The IHW/PDS near-nucleus Halley index | [IHW/PDS Halley](ihw-halley.md) |
+| JunoCam push-frame images cast from the Juno kernels | [JunoCam](junocam.md) |
+| What the JunoCam archive holds for our objects | [JunoCam archive ledger](junocam-ledger.md) |
+| Keck observations re-reduced on the archive's own pipeline | [Keck](keck.md) |
+| What the Keck archive holds for this project's objects | [What Keck holds](keck-ledger.md) |
+| Gemini raw frames re-reduced on DRAGONS | [Gemini Observatory](gemini.md) |
+| What the Gemini archive holds for our bodies | [Gemini ledger](gemini-ledger.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |
@@ -53,7 +53,6 @@ For a body's sources, processing, evidence and known problems, read its
 | Measured renderer and navigation performance work | [Performance notes](performance/README.md) |
 | TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
-| What the open archives hold for our catalogued bodies | [Archive screen](archive-screen.md) |
 | Facility thumbnails: NASA artwork, photographs and model renders | [Facility thumbnails](facility-thumbnails.md) |
 | Moon sidebar listing, labels and orbit registration | [Moon catalogues](moon-catalogues.md) |
 | Explicit system cards for bodies with prepared moons | [Satellite-system navigation](satellite-system-navigation.md) |
@@ -66,7 +65,7 @@ For a body's sources, processing, evidence and known problems, read its
 For contribution steps, use the [body contributor guide](../src/objects/README.md).
 [AGENTS.md](../AGENTS.md) sets application rules; the
 [celestial skill](../.agents/skills/celestial-skill/SKILL.md) points agents to the
-same workflow and implementation.
+same workflow.
 
 ## Where work belongs
 
@@ -79,16 +78,13 @@ Plans, superseded proposals and raw run output do not need a permanent copy in
 the current tree.
 
 Update the affected guide or body README in the same PR as the change. Use the
-[PR template](../.github/pull_request_template.md) for the result and checks;
-do not add a separate completion report to `docs/`.
+[PR template](../.github/pull_request_template.md) for the result and checks; do not add a completion report to `docs/`.
 
-CI checks local Markdown, reference and HTML links, heading anchors, file placement
-and links from this index.
-It also rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts.
-Run the same check with
+CI checks local Markdown, reference and HTML links, heading anchors, file placement and links from this index. It also
+rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts. Run the same check with
 `node .github/scripts/audits/check-documentation-links.mts --all`.
 
-For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
-run `python3 .github/scripts/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
-This reads committed files; add `--index` to include the staged change. It does
-not acquire sources or qualify scientific claims.
+For a Git snapshot inventory of body records, retained HTML and duplicate bytes, run
+`python3 .github/scripts/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
+It reads committed files; add `--index` to include the staged change. It does not acquire sources or qualify scientific
+claims.

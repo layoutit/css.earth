@@ -2,7 +2,7 @@
 
 ## Sources
 
-ε Eridani b was found by radial velocity. Thompson et al. (2025) measured the size, tilt and orientation of its orbit from its star's motion. This account was drafted from Thompson et al. (2025), AJ 170, 301's values; the sections below are the data's own.
+ε Eridani b was found by radial velocity. Thompson et al. (2025) measured the size, tilt and orientation of its orbit from its star's motion. The introduction is generated from Thompson et al. (2025), AJ 170, 301's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.23 Jupiter radii from NASA Exoplanet Archive calculated radius from the mass, the Chen & Kipping (2017) relation: a model, not a measurement, since ε Eridani b does not transit (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 87,935.2 km at 71,492 km per Jupiter radius. GM from the mass 1 +/- 0.1 Jupiter masses (Thompson et al. (2025), AJ 170, 301, Table 3, the model with every data set: 1.00 +/- 0.10 Jupiter masses, https://arxiv.org/abs/2502.20561) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -17,9 +17,8 @@ Generated 2026-09-26 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks the drawn orbit against what Thompson et al. (2025) state rather than against its own elements: on 2024-12-07 the planet is 1,096 mas from the star (their radial velocities alone: 1,071 ± 58 mas) at position angle 186° (their node, 186 +8/−9°, south of the star), its position angle grows through 2025 (counterclockwise), and in August 2028 it is north of the star.
 - Rendered with the star and the system view in the star's evidence image.
 
-
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "Epsilon Eridani b" (revision 1375454261), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "Epsilon Eridani b" (revision 1375454261) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
