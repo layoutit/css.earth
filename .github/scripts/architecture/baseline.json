@@ -20,12 +20,17 @@
       {"from":"site/navigation","to":"site/scene","imports":1}
     ]
   },
+  "packageCycles": [
+    {"nodes":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
+    {"nodes":["@cssearth/bake","@cssearth/renderer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
+    {"nodes":["@cssearth/bake","@cssearth/telescope-cli","@cssearth/renderer","@cssearth/volume-viewer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
+    {"nodes":["@cssearth/bake","@cssearth/telescope-cli","@cssearth/renderer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
+    {"nodes":["@cssearth/bake","@cssearth/telescope-cli"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]}
+  ],
   "rules": {
     "authoring-is-leaf": [],
     "bake-nebula-and-objects-independent": [],
-    "nothing-imports-applications": [],
     "nothing-imports-cli-entries": [],
-    "packages-import-only-packages": [],
     "runtime-imports-no-preparation": [],
     "runtime-imports-no-site-build": [],
     "telescope-imports-no-bake": []
