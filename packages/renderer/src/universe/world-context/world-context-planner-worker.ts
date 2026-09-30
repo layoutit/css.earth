@@ -1,15 +1,13 @@
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context-planner.js';
-import { decodeWorldOrbitBank, parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
+import { decodeWorldOrbitBank } from '../../prepared-data/world-context.js';
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
-import type { WorldPlannerSource } from './world-context-planner-client.js';
+import type { WorldPlannerInitialise, WorldPlannerSource } from './world-context-planner-client.js';
 import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-context-frame.js';
 import { unpackWorldBodies } from './world-context-view-transport.js';
 
-type Initialise = { annotationPriorities?: Readonly<Record<string, number>>; annotationLandmarks?: readonly string[] } &
-  ({ plan: PreparedWorldContextGeometry } | { plan: PreparedWorldContext; source: WorldPlannerSource });
 const scope = globalThis as unknown as {
-  onmessage: (event: MessageEvent<Initialise | { id: number; view: Omit<WorldContextView, 'bodies'>; bodies: Float64Array }>) => void;
+  onmessage: (event: MessageEvent<WorldPlannerInitialise | { id: number; view: Omit<WorldContextView, 'bodies'>; bodies: Float64Array }>) => void;
   postMessage(value: unknown, transfer?: Transferable[]): void;
 };
 let calculate: ReturnType<typeof createWorldContextPlanner>;
@@ -48,15 +46,12 @@ function initialise(plan: PreparedWorldContext | PreparedWorldContextGeometry, a
 }
 scope.onmessage = ({ data }) => {
   try {
-    if ('source' in data) {
-      const source = data.source;
-      const plan = parsePreparedWorldContextSummary(data.plan);
-      banks = { plan, source, requested: new Set(),
-        bankOf: new Map(plan.bodies.flatMap(body => body.orbit ? [[body.id, body.id] as const] : [])) };
+    // The owning client validated this plan on its thread (WorldPlannerInitialise); only the orbit banks read below are external here.
+    if ('validatedPlan' in data) {
+      const { validatedPlan: plan, source } = data;
+      banks = source ? { plan, source, requested: new Set(),
+        bankOf: new Map(plan.bodies.flatMap(body => body.orbit ? [[body.id, body.id] as const] : [])) } : null;
       initialise(plan, data.annotationPriorities, data.annotationLandmarks);
-    } else if ('plan' in data) {
-      banks = null;
-      initialise(data.plan, data.annotationPriorities, data.annotationLandmarks);
     } else {
       const view: WorldContextView = { ...data.view, bodies: unpackWorldBodies(data.bodies) };
       const frame: PlannedWorldContext = calculate(view);
