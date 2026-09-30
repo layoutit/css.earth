@@ -245,3 +245,15 @@ test('an owner that asks for it gets elements hidden while their opacity is 0, a
   expect(plain.style.visibility).toBeUndefined();
   fader.destroy();other.destroy();
 });
+
+test('an opacity that rounds to 0 in 8-bit colour is written once, as 0', () => {
+  const clock=new Clock(),element=new Element(),writes:string[]=[],fader=createOpacityFader(clock);
+  const style=new Proxy(element.style,{set(target,key,value){if(key==='opacity')writes.push(String(value));target[key as string]=value;return true;}});
+  const tracked={style} as unknown as HTMLElement;
+  fader.set(tracked,1);clock.frame(16);writes.length=0;
+  for(const faint of [.0019,.0015,.0011,.0004]){fader.set(tracked,faint);clock.frame(16);}
+  expect(writes).toEqual(['0']);
+  fader.set(tracked,.002);clock.frame(16);
+  expect(writes).toEqual(['0','0.002']);
+  fader.destroy();
+});
