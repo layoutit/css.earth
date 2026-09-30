@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "NumPy SVD following ThERESA 74a8fec signed-harmonic convention",
- "generatedBy": "tools/oracles/eclipse-map/theresa-eigenbasis.py",
+ "generatedBy": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.py",
  "tool": {
   "method": "numpy.linalg.svd",
   "python": "3.12.14",

@@ -14,7 +14,7 @@ import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '@cssearth/co
  * fixture names the toolkit version and the path and size of every kernel.
  */
 const loaded = await sourceLoad(async () => {
-  const fixture = await readOracleFixture('spice/dart-draco.json');
+  const fixture = await readOracleFixture('packages/bake/src/astronomy/fixtures/dart-draco.json');
   const cases = fixture.cases;
   // The kernels in load order; the cube and label that supplied the intercepts follow them.
   const kernels = fixture.inputs.filter(entry => entry.path.includes('/source/spice/'));

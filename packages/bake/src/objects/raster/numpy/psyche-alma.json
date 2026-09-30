@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "numpy",
- "generatedBy": "tools/oracles/npy/psyche-alma.py",
+ "generatedBy": "packages/bake/src/objects/raster/numpy/psyche-alma.py",
  "tool": {
   "python": "3.12.14",
   "numpy": "2.5.3"

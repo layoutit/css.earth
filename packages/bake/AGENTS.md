@@ -257,9 +257,8 @@ its validators accept); the renderer never imports the bake.
     (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,
     with the band-alignment, camera-reference and L'LORRI overlap commands and the archived-camera Python that runs the
-    camera reference beside it. A source manifest's `generator` records
-    what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
-    old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
+    camera reference beside it. A source manifest's `generator` names the
+    code that makes an intermediate, such as the radial snapshot and PDS constraint map in this topic.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
     `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`, its evidence in

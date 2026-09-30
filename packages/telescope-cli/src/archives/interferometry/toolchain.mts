@@ -19,7 +19,6 @@ import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
-import { currentArchivePath } from '../programs.mts';
 
 const DESCRIPTOR = resolve(import.meta.dirname, 'toolchains.json');
 export const TOOLCHAIN_ROOT = resolve(WORKSPACE, 'output/toolchains');
@@ -35,10 +34,9 @@ export async function toolchainDescriptor(id: string): Promise<ToolchainPins> {
   return { id, file: `packages/telescope-cli/src/archives/interferometry/toolchains.json (${id})`, descriptor: JSON.stringify(entry), lock: null, entry };
 }
 
-/** The Julia environment a toolchain entry names, found in this checkout: the entry keeps the repository path it was written with,
- * because an installed toolchain keeps the entry's text, and `currentArchivePath` finds that path where it is now. */
+/** The Julia environment a toolchain entry names by its repository path. */
 export function toolchainEnvironment(entry: Readonly<Record<string, unknown>>) {
-  return resolve(WORKSPACE, currentArchivePath(requireString(entry.environment, 'environment')));
+  return resolve(WORKSPACE, requireString(entry.environment, 'environment'));
 }
 
 function run(command: string, args: readonly string[], options: { cwd: string; env?: NodeJS.ProcessEnv; answers?: string }) {

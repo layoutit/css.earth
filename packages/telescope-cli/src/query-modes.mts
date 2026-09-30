@@ -5,7 +5,6 @@ import { matchingProduct, type QualifiedObservation } from './qualified-observat
 import { assessInput, assessRequest } from './request-satisfaction.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { JWST_CUBE_COVERAGE } from './archives/jwst/imaging/bands.mts';
-import { archivePrograms } from './archives/programs.mts';
 import { sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';
 import { qualificationActionsFor } from './qualification-routes.mts';
 import type { TargetAssociation } from '@cssearth/telescope/node';
@@ -269,7 +268,7 @@ function spitzerModes(value: unknown, target: string): TargetMode[] {
     if (records.length !== expected) throw new Error(`Spitzer ${target} ${mode} counts ${expected} observations but retains ${records.length} records.`);
     const programs = entry ? stringList(entry.programs, `${mode} programs`) : [], checked = entry ? stringList(entry.checked, `${mode} checked programs`) : [];
     const targetPrograms = programs.filter(program => program === target || program.startsWith(`${target}-`));
-    const receipts = entry ? stringList(entry.receipts, `${mode} receipts`).map(archivePrograms('spitzer').current).filter(path => targetPrograms.some(program => path.includes(`/${program}.`))) : [];
+    const receipts = entry ? stringList(entry.receipts, `${mode} receipts`).filter(path => targetPrograms.some(program => path.includes(`/${program}.`))) : [];
     return { telescope: 'Spitzer', mode, archiveDate, observations: { count: expected, scope: 'this-mode' as const,
       records: records.map(({ mode: _mode, ...record }) => record) }, programmes: [...new Set(records.map(record => record.programme))].sort(),
       dates: records.map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })), datesComplete: true,
@@ -336,7 +335,7 @@ function ihwModes(value: unknown, target: string): TargetMode[] {
     const mode = requireRecord(raw, 'IHW mode'), name = requireString(mode.mode, 'mode'), archive = requireRecord(mode.archiveFinal, 'archiveFinal');
     return { telescope: 'IHW/PDS', mode: name, archiveDate, observations: { count: observations.length, scope: 'this-mode' as const, records: observations },
       programmes: [requireString(requireRecord(ledger.dataset, 'dataset').id, 'dataset id')], dates: observations.map(row => ({ id: row.id, startIso: row.startIso, endIso: row.endIso })), datesComplete: true,
-      toolkit: { programs: stringList(mode.programs, `${name} programs`), checked: stringList(mode.checked, `${name} checked`), receipts: stringList(mode.receipts, `${name} receipts`).map(archivePrograms('ihw').current),
+      toolkit: { programs: stringList(mode.programs, `${name} programs`), checked: stringList(mode.checked, `${name} checked`), receipts: stringList(mode.receipts, `${name} receipts`),
         archiveFinal: { programs: stringList(archive.programs, `${name} archive-final programs`), qualified: stringList(archive.qualified, `${name} archive-final qualified`) } } };
   });
 }
@@ -376,7 +375,7 @@ function pdsModes(value: unknown, target: string): TargetMode[] {
       datesComplete: records.every(record => !record.startIso.startsWith('1965-') && !record.endIso?.startsWith('3000-')),
       toolkit: { tool: declared.tool === undefined ? 'pds.peppi + pdr' : requireString(declared.tool, 'PDS tool'), programs, checked: [],
         targetPrograms: [...new Set(records.map(record => record.programme).filter(program => programs.includes(program)))], targetChecked: [],
-        receipts: stringList(declared.receipts, 'PDS receipts').map(archivePrograms('pds').current), archiveFinal: { programs, qualified } } }]; });
+        receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }]; });
 }
 
 export function sourceModes(products: readonly LoadedSourceProduct[], request: CapabilityRequest): TargetMode[] {

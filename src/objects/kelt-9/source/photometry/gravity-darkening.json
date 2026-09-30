@@ -40,5 +40,5 @@
       "cell": "'its local surface brightness to vary by ~38% between its hot poles and cooler equator' (abstract); 'varies in effective temperature by ~800 K' (Figure 2 caption); 'nearly 1000 K' (section 2)"
     }
   },
-  "note": "The paper fits its own gravity-darkening model (Ahlers et al. 2016: surface gravity to second order with a centrifugal term; oblateness from the Darwin-Radau relation) and does not publish ω or an equatorial temperature. Here the Roche-von Zeipel model of the other rapid rotators takes the paper's radius ratio and β: its ω is the Roche surface with that ratio, and the equator comes out about 500 K cooler than the pole, less than the 800 to 1000 K the paper's text states (tools/objects/observation/gravity-darkening.test.mts)."
+  "note": "The paper fits its own gravity-darkening model (Ahlers et al. 2016: surface gravity to second order with a centrifugal term; oblateness from the Darwin-Radau relation) and does not publish ω or an equatorial temperature. Here the Roche-von Zeipel model of the other rapid rotators takes the paper's radius ratio and β: its ω is the Roche surface with that ratio, and the equator comes out about 500 K cooler than the pole, less than the 800 to 1000 K the paper's text states (packages/bake/src/objects/stellar/gravity-darkening.test.mts)."
 }

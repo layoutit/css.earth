@@ -1736,7 +1736,7 @@
       "origin": "https://doi.org/10.1029/2021JE007055",
       "credit": "Connerney et al. (2022); Wilson et al. (2023), PSH community code",
       "license": "Published scientific model; coefficients and computed values retained with author credit",
-      "acquisition": "node tools/objects/prepare-magnetic-map.mts src/objects/jupiter/source/preparation/magnetic.json --python=<pinned interpreter>; restore the derived grid from source-cache.",
+      "acquisition": "node packages/bake/cli/prepare-magnetic-map.mts src/objects/jupiter/source/preparation/magnetic.json --python=<pinned interpreter>; restore the derived grid from source-cache.",
       "redistribution": "Scientific data with author and agency credit",
       "consumers": [
         "magnetic"

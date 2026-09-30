@@ -154,39 +154,21 @@ export default [
     rules: { 'no-restricted-imports': ['error', { patterns: [{ group: ['@wwtelescope/*'], message: noCanvas }] }] },
   },
   {
-    // Moved unchanged from src/renderers/css, which had no line limit; splitting them is separate work. The site bundle's
-    // bytes were held identical across the move, so the runtime module is not split here.
-    files: ['packages/renderer/src/universe/prepared-world-context.ts', 'site/test/prepared-world-context.test.ts',
-      'packages/renderer/src/universe/world-context/world-context-planner.test.ts', 'packages/renderer/src/sky/prepared-sky-runtime.test.ts'],
-    rules: { 'max-lines': 'off' },
-  },
-  {
-    // Moved unchanged from tools/objects/interferometry, where the limit only warned; splitting it is separate work.
-    files: ['packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts'],
-    rules: { 'max-lines': 'off' },
-  },
-  {
-    // Moved unchanged from tools/objects/new-object, where the limit only warned; splitting it is separate work.
-    files: ['packages/telescope-cli/src/new-object/new-object.test.mts'],
-    rules: { 'max-lines': 'off' },
-  },
-  {
-    // Moved unchanged from tools/objects/source-authoring, where the limit only warned; splitting it is separate work.
-    files: ['packages/bake/authoring/betelgeuse-shell/author.mts'],
-    rules: { 'max-lines': 'off' },
-  },
-  {
-    // Moved unchanged from tools/objects/circumstellar, where the limit only warned; splitting it is separate work.
-    files: ['packages/telescope-cli/authoring/circumstellar/author.mts'],
-    rules: { 'max-lines': 'off' },
-  },
-  {
-    // Moved unchanged from tools/objects, which warns instead of failing on the line limit; splitting them is separate work.
-    // The layered-oblate and cutaway bakes were held byte-identical across the move, so neither module is split here. The navigation
-    // preparation moved with only its imports, checkout root and a lazy registry read changed; its outputs stayed byte-identical.
-    // The paged-ellipsoid assets moved with only their imports changed, and Earth's bake stayed byte-identical.
-    files: ['packages/bake/src/objects/layers/material-composition/layered-oblate.ts', 'packages/bake/src/objects/layers/material-composition/cutaway-materials.ts',
-      'packages/bake/src/navigation/prepare-navigation.ts', 'packages/bake/src/objects/layers/paged-ellipsoid/assets.ts'],
+    // Modules over the line limit that are not split yet.
+    files: [
+      'packages/renderer/src/universe/prepared-world-context.ts',
+      'site/test/prepared-world-context.test.ts',
+      'packages/renderer/src/universe/world-context/world-context-planner.test.ts',
+      'packages/renderer/src/sky/prepared-sky-runtime.test.ts',
+      'packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts',
+      'packages/telescope-cli/src/new-object/new-object.test.mts',
+      'packages/bake/authoring/betelgeuse-shell/author.mts',
+      'packages/telescope-cli/authoring/circumstellar/author.mts',
+      'packages/bake/src/objects/layers/material-composition/layered-oblate.ts',
+      'packages/bake/src/objects/layers/material-composition/cutaway-materials.ts',
+      'packages/bake/src/navigation/prepare-navigation.ts',
+      'packages/bake/src/objects/layers/paged-ellipsoid/assets.ts',
+    ],
     rules: { 'max-lines': 'off' },
   },
   {

@@ -187,7 +187,7 @@ test('a stacked set’s record pins the frames that went into that set, and what
   assert.deepEqual([made.parameters.line, made.parameters.subset, made.parameters.handedness, made.parameters.gridPixels],
     ['oi1356', 'all', definition.handedness, definition.grid.pixels]);
   // There is no installed toolchain: the version is the telescope command's.
-  assert.deepEqual(made.software, [{ name: 'cssearth tools/objects/hst/line-stack.mts', version: VERSION }]);
+  assert.deepEqual(made.software, [{ name: 'cssearth packages/telescope-cli/src/archives/hst/line-stack.mts', version: VERSION }]);
   await assert.rejects(stackRun(definition, line, 'all', ['o8k901010_x1d.fits'], await lineStackSoftware()), /not a frame the definition pins/u);
 });
 

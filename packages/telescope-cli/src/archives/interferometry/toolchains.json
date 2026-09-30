@@ -30,7 +30,7 @@
         "General",
         "https://github.com/emmt/EmmtRegistry"
       ],
-      "environment": "tools/objects/interferometry/rotir",
+      "environment": "packages/telescope-cli/src/archives/interferometry/rotir",
       "packages": {
         "ROTIR": {
           "url": "https://github.com/fabienbaron/ROTIR.jl",

@@ -28,7 +28,7 @@ export function count(value: unknown): number {
 }
 function sourcePath(value: unknown) {
   const path = requireString(value);
-  if (!/^(src\/objects\/[a-z0-9-]+\/source\/|tests\/fixtures\/(sbmt|fits)\/)/.test(path) || path.includes('..') || path.includes('\\')) throw new Error('Invalid oracle source path');
+  if (!/^(src\/objects\/[a-z0-9-]+\/source\/|packages\/bake\/src\/objects\/layers\/terrestrial\/fixtures\/sbmt\/inputs\/|packages\/fits\/src\/node\/fixtures\/fits\/)/.test(path) || path.includes('..') || path.includes('\\')) throw new Error('Invalid oracle source path');
   return path;
 }
 export function parseCase(value: unknown) {
@@ -49,7 +49,4 @@ export async function cases() {
 }
 export type Case = ReturnType<typeof parseCase>;
 
-/** Resolve preserved evidence identities without rewriting the recorded inputs. */
-export const sourceFile = (path: string) => path.startsWith('tests/fixtures/sbmt/')
-  ? resolve(import.meta.dirname, 'inputs', path.slice('tests/fixtures/sbmt/'.length))
-  : resolve(ORACLE_ROOT, path === 'tests/fixtures/fits/byte.fits' ? 'packages/fits/src/node/fixtures/fits/byte.fits' : path);
+export const sourceFile = (path: string) => resolve(ORACLE_ROOT, path);

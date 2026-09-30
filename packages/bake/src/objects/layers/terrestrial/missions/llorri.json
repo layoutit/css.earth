@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "astropy",
- "generatedBy": "tools/oracles/fits/llorri.py",
+ "generatedBy": "packages/bake/src/objects/layers/terrestrial/missions/llorri.py",
  "tool": {
   "astropy": "8.0.1",
   "python": "3.12.14",

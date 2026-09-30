@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-oracle-fixture@1",
   "oracle": "SBMT",
-  "generatedBy": "tools/oracles/sbmt/projection.mts",
+  "generatedBy": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.mts",
   "tool": {
     "sbmt": "0.9.2.1",
     "release": "2026.09.10",
@@ -38,19 +38,19 @@
       "bytes": 16897935
     },
     {
-      "path": "tests/fixtures/fits/byte.fits",
+      "path": "packages/fits/src/node/fixtures/fits/byte.fits",
       "bytes": 5760
     },
     {
-      "path": "tests/fixtures/sbmt/cases.json",
-      "bytes": 1332
+      "path": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json",
+      "bytes": 1441
     },
     {
-      "path": "tests/fixtures/sbmt/concave.sum",
+      "path": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum",
       "bytes": 192
     },
     {
-      "path": "tests/fixtures/sbmt/concave.tab",
+      "path": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.tab",
       "bytes": 306
     }
   ],
@@ -53285,9 +53285,9 @@
     "concave-boundaries": {
       "definition": {
         "id": "concave-boundaries",
-        "shape": "tests/fixtures/sbmt/concave.tab",
-        "pointing": "tests/fixtures/sbmt/concave.sum",
-        "image": "tests/fixtures/fits/byte.fits",
+        "shape": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.tab",
+        "pointing": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum",
+        "image": "packages/fits/src/node/fixtures/fits/byte.fits",
         "format": "sum",
         "width": 2,
         "height": 2,

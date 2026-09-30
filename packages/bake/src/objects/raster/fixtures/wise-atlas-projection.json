@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "astropy",
- "generatedBy": "tools/oracles/fits/wise-atlas-projection.py",
+ "generatedBy": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.py",
  "tool": {
   "astropy": "8.0.1",
   "python": "3.12.14",
@@ -9,21 +9,21 @@
  },
  "inputs": [
   {
-   "path": "tests/fixtures/fits/wise-atlas-pleiades-tile.fits",
+   "path": "packages/bake/src/objects/raster/fixtures/wise-atlas-pleiades-tile.fits",
    "bytes": 11520
   },
   {
-   "path": "tests/fixtures/fits/wise-atlas-lmc-far-corner.fits",
+   "path": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-far-corner.fits",
    "bytes": 11520
   },
   {
-   "path": "tests/fixtures/fits/wise-atlas-lmc-centre.fits",
+   "path": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-centre.fits",
    "bytes": 11520
   }
  ],
  "cases": {
   "pleiades-tile": {
-   "path": "tests/fixtures/fits/wise-atlas-pleiades-tile.fits",
+   "path": "packages/bake/src/objects/raster/fixtures/wise-atlas-pleiades-tile.fits",
    "tile": [
     54.495406,
     24.231111
@@ -169,7 +169,7 @@
    ]
   },
   "lmc-far-corner": {
-   "path": "tests/fixtures/fits/wise-atlas-lmc-far-corner.fits",
+   "path": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-far-corner.fits",
    "tile": [
     120.5,
     -78.9
@@ -315,7 +315,7 @@
    ]
   },
   "lmc-centre": {
-   "path": "tests/fixtures/fits/wise-atlas-lmc-centre.fits",
+   "path": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-centre.fits",
    "tile": [
     79.1,
     -69.4

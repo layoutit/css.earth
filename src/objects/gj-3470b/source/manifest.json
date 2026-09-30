@@ -214,19 +214,19 @@
       "id": "dataset-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract",
-      "credit": "The default dataset's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "gj-3470b-observational-measurements",
           "gj-3470b-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."

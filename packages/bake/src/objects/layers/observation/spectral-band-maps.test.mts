@@ -39,7 +39,7 @@ test('surface footprints paint only covered cell centres, including a footprint 
 });
 
 test('native planes and Organa cell spectra agree with the independent astropy fixture; maps reproduce their declared products and evidence', async () => {
-  const fixture = await readOracleFixture('fits/charon-leisa.json');
+  const fixture = await readOracleFixture('packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json');
   await assertPinnedInputs(fixture.inputs);
   for (const input of fixture.inputs) await readOracleInput(input);
   const products = requireArray(fixture.cases.products).map(value => requireRecord(value));

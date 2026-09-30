@@ -1618,7 +1618,7 @@
         "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
         "https://www.wikidata.org/wiki/Wikidata:Licensing"
       ],
-      "acquisition": "node tools/prepare-feature-notes.mts io: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "acquisition": "node packages/bake/cli/prepare-feature-notes.mts io: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
       "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
       "consumers": [
         "features"
@@ -1631,12 +1631,12 @@
     {
       "path": "science/davies-2024/psjad4346t10_mrt.txt",
       "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
-      "purpose": "Davies et al. (2024) Table A1 hot-spot positions (CC BY 4.0), kept byte for byte. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks that bright spots in the JIRAM map fall on these independently catalogued sources."
+      "purpose": "Davies et al. (2024) Table A1 hot-spot positions (CC BY 4.0), kept byte for byte. Not drawn: the README's hot-spot comparison matches bright spots in the JIRAM map against these independently catalogued sources."
     },
     {
       "path": "science/mura-2024/table3-m-band.json",
       "origin": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1369472/full",
-      "purpose": "Mura et al. (2024) Table 3 M-band hot-spot outputs with Table 2 positions (CC BY 4.0), transcribed from the article. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks the Volcanic heat map against them."
+      "purpose": "Mura et al. (2024) Table 3 M-band hot-spot outputs with Table 2 positions (CC BY 4.0), transcribed from the article. Not drawn: kept to compare the Volcanic heat map against them."
     }
   ]
 }

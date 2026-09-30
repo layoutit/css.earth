@@ -9,8 +9,8 @@ import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-const fixture = await readOracleFixture('fits/sky-projection.json');
-const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/sky-projection.fits');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json');
+const input = fixture.inputs.find(entry => entry.path === 'packages/fits/src/node/fixtures/fits/sky-projection.fits');
 assert.ok(input);
 const bytes = await readOracleInput(input);
 // Read the WCS cards the oracle wrote, not copies of them.

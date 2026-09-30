@@ -6,7 +6,7 @@ import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { atlasToGridPixel, gridWcs } from '@cssearth/bake/objects/raster';
 
-const fixture = await readOracleFixture('fits/wise-atlas-projection.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json');
 for (const [name, raw] of Object.entries(fixture.cases)) test(`Astropy SIN tile -> TAN grid pixels: ${name}`, async () => {
   const entry = requireRecord(raw), path = requireString(entry.path), input = fixture.inputs.find(item => item.path === path);
   assert.ok(input);

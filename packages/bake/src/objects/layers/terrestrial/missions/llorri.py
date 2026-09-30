@@ -28,4 +28,4 @@ sip = {'crpix': [float(v) for v in w.wcs.crpix], 'aOrder': int(header['A_ORDER']
        'a': {k: float(header[k]) for k in header if k.startswith('A_') and k != 'A_ORDER'}, 'b': {k: float(header[k]) for k in header if k.startswith('B_') and k != 'B_ORDER'},
        'pixelOrigin': 0, 'focalRelativeTo': 'CRPIX', 'pixels': [[float(x), float(y)] for x, y in pixels], 'focal': [[float(x), float(y)] for x, y in foc]}
 cards = {k: (float(header[k]) if isinstance(header[k], (int, float)) else str(header[k])) for k in ['EXPTIME', 'STARTUTC', 'CTYPE1', 'CTYPE2', 'CRPIX1', 'CRPIX2', 'TRGFOV1', 'TRGFOVN', 'BIASCORR', 'SMEARCOR', 'FLATCORR', 'AVSCORR']}
-write('fits/llorri.json', 'astropy', 'tests/oracles/fits/llorri.py', {'astropy': astropy.__version__}, [path], {'cards': cards, 'planes': planes, 'sip': sip})
+write('packages/bake/src/objects/layers/terrestrial/missions/llorri.json', 'astropy', 'packages/bake/src/objects/layers/terrestrial/missions/llorri.py', {'astropy': astropy.__version__}, [path], {'cards': cards, 'planes': planes, 'sip': sip})

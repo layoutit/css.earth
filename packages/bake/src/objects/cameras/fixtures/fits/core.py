@@ -62,4 +62,4 @@ inputs.append(path)
 with fits.open(path, memmap=False) as hdus:
     cases['extensions'] = {'path': input_record(path)['path'], 'dimensions': [2, 2],
                            'values': [int(v) for v in hdus[1].data.reshape(-1)], 'extension': 1}
-write('fits/core.json', 'astropy', 'tests/oracles/fits/core.py', {'astropy': astropy.__version__}, inputs, cases)
+write('packages/bake/src/objects/layers/observation/fixtures/fits/core.json', 'astropy', 'packages/bake/src/objects/cameras/fixtures/fits/core.py', {'astropy': astropy.__version__}, inputs, cases)

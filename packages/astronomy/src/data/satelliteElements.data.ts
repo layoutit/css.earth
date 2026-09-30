@@ -2,9 +2,9 @@
 // GENERATED FILE — do not edit by hand.
 //
 // Source:    JPL Horizons osculating elements, ICRF frame, sampled at the body-specific fit ranges and cadences recorded below, reduced to mean elements in each moon's own Laplace plane
-// Generator: packages/astronomy/tools/generate-satellites.mjs
+// Generator: packages/astronomy/cli/generate-satellites.mts
 //
-// Regenerate with `node tools/generate-satellites.mjs` from packages/astronomy. The
+// Regenerate with `node cli/generate-satellites.mts` from packages/astronomy. The
 // generator re-downloads the source series, re-derives the truncation, and
 // prints the error budget it certifies; the numbers in README.md come from it.
 
@@ -40,7 +40,7 @@ export interface SatelliteRecord {
 
 /**
  * Mean elements for the selected moons, derived from Horizons as described in
- * `tools/generate-satellites.mjs`. These are a FIT, not a satellite theory:
+ * `packages/astronomy/cli/generate-satellites.mts`. These are a FIT, not a satellite theory:
  * see that file and README.md for the residual each one leaves.
  */
 import { SATELLITE_ELEMENTS } from './generated/satellite.js'

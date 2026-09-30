@@ -1,4 +1,3 @@
-import { matchesPreparationGenerator } from '../../../sources/index.ts';
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from '../solid/solid-contract.ts';
 import type { SciencePalette } from '../../../raster/index.ts';
 import type { PreparedTriangle, SourceSurfaceSample } from '../../../geometry/index.ts';
@@ -357,7 +356,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   }
   if (lighting) await writeFile(resolve(outputDirectory, `source-lighting${suffix}.json`), JSON.stringify({ ...lighting.report, reusedLightingSamples, recipe: lightingRecipe }) + '\n');
   for (const entry of snapshotEntries.filter(entry =>
-    matchesPreparationGenerator(entry.generator, 'tools/objects/terrestrial-layers/radial-snapshot.mts'))) {
+    entry.generator === 'packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts')) {
     const surface = surfaces.find(surface => surface.id === requireRecord(requireRecord(entry).recipe).datasetId);
     if (!surface) throw new TypeError('Radial snapshot requires a prepared source dataset.');
     const science = radial.scientificSurfaces?.get(surface.id);

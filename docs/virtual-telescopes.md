@@ -1254,17 +1254,10 @@ Chromium's scrollbar/resizer styling and CSS view timelines. Firefox and real
 mobile hardware are not qualified. Unsupported prepared camera bindings are
 refused instead of producing an incomplete view.
 
-The following browser check is historical. Its helper remains in git history
-and is absent from this checkout. [Original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/sphere-browser.mts) (now retired; surviving code is in `labs/experiments/native-scroll/`):
-
-```sh
-node tests/experiments/native-scroll/sphere-browser.mts europa-sphere/sphere.html mercury-sphere/sphere.html
-```
-
-The browser check compares the CSS rotation with native DOMMatrix arithmetic,
-checks repeated drags, release and independent zoom, and rejects script elements
-or external resource requests. It retains screenshots and a numerical report
-under `output/playwright/telescope-no-js/`.
+A browser check, since removed, compared the CSS rotation with native DOMMatrix
+arithmetic, checked repeated drags, release and independent zoom, and rejected
+script elements or external resource requests. The image below is one of its
+screenshots.
 
 ![Europa after native drag and zoom, with JavaScript disabled](images/telescopes/europa-sphere-no-js.png)
 

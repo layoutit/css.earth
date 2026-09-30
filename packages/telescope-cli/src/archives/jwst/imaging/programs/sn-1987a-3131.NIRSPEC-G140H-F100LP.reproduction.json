@@ -3,7 +3,7 @@
   "program": "sn-1987a-3131",
   "band": "NIRSPEC-G140H-F100LP",
   "observation": "jw03131-o001_t001_nirspec_g140h-f100lp",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw03131-o001_t001_nirspec_g140h-f100lp_s3d.fits",

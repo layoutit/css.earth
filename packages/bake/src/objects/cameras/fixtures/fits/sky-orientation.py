@@ -96,4 +96,4 @@ for name, source, cards in CASES:
         entry.update({'eastRight': bool(east_x > 0), 'northUp': bool(north_y > 0), 'scale': [abs(east_x), abs(north_y)],
                       'values': [float(v) for v in values.reshape(-1)], 'display': [float(v) for v in display.reshape(-1)]})
     cases[name] = entry
-write('fits/sky-orientation.json', 'astropy', 'tests/oracles/fits/sky-orientation.py', {'astropy': astropy.__version__}, [path], cases)
+write('packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json', 'astropy', 'packages/bake/src/objects/cameras/fixtures/fits/sky-orientation.py', {'astropy': astropy.__version__}, [path], cases)

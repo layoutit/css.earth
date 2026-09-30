@@ -96,4 +96,4 @@ for scan in recipe['scans']:
         index = (sums[0]+sums[2])/(counts[0]+counts[2])/(sums[1]/counts[1])
         regions.append({'innerRadiusDegrees':inner,'outerRadiusDegrees':outer,'sourcePixels':int(accepted.sum()),'continuumRatio':index})
     products.append({'id':scan['id'],'raw':raw,'maps':maps,'organaApertures':regions})
-write('fits/charon-leisa.json','astropy','tests/oracles/fits/charon-leisa.py',{'astropy':astropy.__version__},inputs,{'products':products})
+write('packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json','astropy','packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.py',{'astropy':astropy.__version__},inputs,{'products':products})

@@ -3,7 +3,7 @@
   "program": "io-jw01373-o024_t007_nirspec_g395h-f290lp",
   "band": "NIRSPEC-G395H-F290LP",
   "observation": "jw01373-o024_t007_nirspec_g395h-f290lp",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw01373-o024_t007_nirspec_g395h-f290lp_s3d.fits",

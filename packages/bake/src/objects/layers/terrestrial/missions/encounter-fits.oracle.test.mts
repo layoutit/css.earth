@@ -8,7 +8,7 @@ import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORA
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /** astropy as the oracle for the encounter FITS reader, one product per instrument layout: Deep Impact ITS, Stardust NAVCAM and MRI. */
-const fixture = await readOracleFixture('fits/encounter.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/terrestrial/missions/encounter.json');
 const products = requireRecord(fixture.cases.products);
 
 test('the fixture is bound to one pinned product per encounter instrument', async () => {

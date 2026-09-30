@@ -13,7 +13,7 @@
     "toJdTdb": 2463229.5,
     "stepDays": 5,
     "residualMethod": "128-term bounded cosine series per ICRF axis",
-    "generator": "packages/astronomy/tools/generate-satellites.mjs"
+    "generator": "packages/astronomy/cli/generate-satellites.mts"
   },
   "runs": [
     {

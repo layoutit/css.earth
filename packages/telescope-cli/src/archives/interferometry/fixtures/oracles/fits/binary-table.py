@@ -60,4 +60,4 @@ with fits.open(path, memmap=False, mask_and_scale=False) as hdus:
     cases = {'oi-test': {'extname': 'OI_TEST', 'rows': rows, 'rowBytes': int(header['NAXIS1']),
                          'columns': [{'name': c.name, 'format': c.format} for c in hdu.columns], 'scaled': ['SCALED'],
                          'hierarch': {'ESO PRO CATG': header['HIERARCH ESO PRO CATG']}, 'insname': header['INSNAME'], 'cells': cells}}
-write('fits/binary-table.json', 'astropy', 'tests/oracles/fits/binary-table.py', {'astropy': astropy.__version__}, [path], cases)
+write('packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json', 'astropy', 'packages/telescope-cli/src/archives/interferometry/fixtures/oracles/fits/binary-table.py', {'astropy': astropy.__version__}, [path], cases)

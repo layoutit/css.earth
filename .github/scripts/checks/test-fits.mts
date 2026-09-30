@@ -38,7 +38,7 @@ run(['labs/nebula/run.mts', 'test', 'getsf', 'sampled-prior', 'ownership', 'sour
 if (args.includes('--unit')) process.exit(0);
 
 const inputs = new Map<string, { path: string; bytes?: number }>();
-for (const name of ['fits/encounter.json', 'fits/llorri.json', 'fits/charon-leisa.json', 'fits/synoptic.json', 'fits/pallas.json', '../../packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json'])
+for (const name of ['packages/bake/src/objects/layers/terrestrial/missions/encounter.json', 'packages/bake/src/objects/layers/terrestrial/missions/llorri.json', 'packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json', 'packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json', 'packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json', 'packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json'])
   for (const input of (await readOracleFixture(name)).inputs) inputs.set(input.path, input);
 for (const id of ['didymos', 'dimorphos', 'arrokoth', 'pluto']) {
   const source = resolve(ORACLE_ROOT, 'src/objects', id, 'source');

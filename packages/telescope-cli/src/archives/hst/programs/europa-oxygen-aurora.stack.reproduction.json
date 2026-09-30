@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-hst-line-stack-reproduction@1",
  "stack": "europa-oxygen-aurora",
- "definition": "tools/objects/hst/programs/europa-oxygen-aurora.stack.json",
+ "definition": "packages/telescope-cli/src/archives/hst/programs/europa-oxygen-aurora.stack.json",
  "target": "Europa",
  "instrument": "STIS/FUV-MAMA",
  "opticalElement": "G140L",

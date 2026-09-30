@@ -29,8 +29,7 @@ const universeEntries = [
   'packages/bake/src/shell/shell.test.ts',
   'packages/bake/src/shell/mesh-subdivision.test.ts',
 ];
-// Relocated contracts and oracles retain their original Node/audit lanes. Moving them beside an object module
-// must not also admit them to preparation discovery, which previously only reached tests/objects/.
+// Contracts and oracles beside an object module run in their own Node or audit lanes, not in preparation discovery.
 const NON_PREPARATION_TESTS: readonly string[] = [
   'packages/bake/src/objects/lineage/body-lineage.test.mts',
   'packages/bake/src/objects/cameras/core.oracle.test.mts',

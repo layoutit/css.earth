@@ -5,7 +5,7 @@
   "product": "od9l12010_x2d",
   "instrument": "STIS/CCD",
   "opticalElement": "G430L",
-  "toolchain": "tools/objects/hst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/hst/toolchain.json",
   "crdsContext": "hst_1358.pmap",
   "mast": {
     "name": "od9l12010_x2d.fits",

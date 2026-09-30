@@ -37,4 +37,4 @@ for name, minimum, stretch, q, planes in [
     cases[name] = {'minimum': minimum, 'stretch': stretch, 'softening': q, 'monochrome': name == 'monochrome',
                    'missing': [int(i) for i in np.flatnonzero(~valid)],
                    'bytes': [int(v) for v in np.where(valid[..., None], rgb, 0).reshape(-1)]}
-write('fits/lupton-asinh.json', 'astropy', 'tests/oracles/fits/lupton-asinh.py', {'astropy': astropy.__version__}, [path], cases)
+write('packages/bake/src/objects/color/fixtures/lupton-asinh.json', 'astropy', 'packages/bake/src/objects/color/fixtures/lupton-asinh.py', {'astropy': astropy.__version__}, [path], cases)

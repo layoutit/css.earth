@@ -37,7 +37,7 @@ import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 /** The FITS ORIGIN of a cutout. A FITS string value holds at most 68 characters, so this keeps the short label it was written with. */
-export const CUTOUT_ORIGIN = 'cssEarth tools/objects/interferometry/alma-disc-selfcal.mts';
+export const CUTOUT_ORIGIN = 'cssEarth packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts';
 const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;
 
 export interface ThermalCutout { readonly size: number; readonly arcsecPerPixel: number; readonly midJd: number; readonly rmsKelvin: number; readonly kelvin: Float64Array }

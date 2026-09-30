@@ -6,8 +6,8 @@ import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { asinhBandDisplay, encodeAsinhBands } from '@cssearth/bake/objects/color';
 
-const fixture = await readOracleFixture('fits/lupton-asinh.json');
-const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/lupton-bands.fits');
+const fixture = await readOracleFixture('packages/bake/src/objects/color/fixtures/lupton-asinh.json');
+const input = fixture.inputs.find(entry => entry.path === 'packages/bake/src/objects/color/fixtures/lupton-bands.fits');
 assert.ok(input);
 const cube = await readOracleInput(input);
 const planes = [1, 2, 3].map(plane => readFitsImage(cube, { plane }).values);

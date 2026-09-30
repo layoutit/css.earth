@@ -41,10 +41,8 @@ from astropy.wcs import WCS
 from reproject import reproject_exact
 from reproject.mosaicking import find_optimal_celestial_wcs
 
-# The FITS ORIGIN card this stage has always serialized, from when this module lived at
-# tools/objects/spitzer/mosaic.py. Changing it changes every output's hash, so it is pinned rather than derived from the
-# module's current path.
-HISTORICAL_ORIGIN = "cssEarth tools/objects/spitzer"
+# The FITS ORIGIN card this stage writes.
+FITS_ORIGIN = "cssEarth packages/telescope-cli/src/archives/spitzer"
 
 
 def _finite(name: str, value: float) -> float:
@@ -117,7 +115,7 @@ def main(job_path: str) -> None:
     out_header["FOOTTHRS"] = (threshold, "least fractional overlap a frame may contribute")
     out_header["BGMATCH"] = (passes, "zero-mean additive background matching passes")
     out_header["IMSKFATL"] = (int(job["fatalImaskBits"]), "imask bits that reject a pixel")
-    out_header["ORIGIN"] = HISTORICAL_ORIGIN
+    out_header["ORIGIN"] = FITS_ORIGIN
     out_header["PIPELINE"] = ("open re-mosaic", "NOT the Spitzer Science Center pipeline")
     fits.PrimaryHDU(combined.astype(np.float32), header=out_header).writeto(job["output"], overwrite=True)
 

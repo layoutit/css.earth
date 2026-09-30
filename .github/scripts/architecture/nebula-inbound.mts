@@ -37,11 +37,10 @@ function policy(path: string): Policy {
   // Tests hold fixtures and helpers beside their owners; a runtime module that imports one is still checked through its own closure.
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('site/test/fixtures/') || path.startsWith('packages/renderer/test/node/fixtures/') ||
       path.startsWith('src/platform/fixtures/') || path.startsWith('src/objects/earth/fixtures/')) return 'test';
-  // `@cssearth/telescope-cli` is the telescope command, preparation tooling that came out of the retired `tools/` folder before it
-  // became a package: it imports the bake by design, as that folder did.
-  // `.github/scripts` holds the CI and repository checks: tooling, as `tools/` was. `site/build/` is site-owned preparation (build
+  // `@cssearth/telescope-cli` is the telescope command, preparation tooling that imports the bake by design.
+  // `.github/scripts` holds the CI and repository checks. `site/build/` is site-owned preparation (build
   // plugins and the preparers that read site modules); runtime code that reaches it is still checked through its own closure.
-  if (path.startsWith('tools/') || path.startsWith('site/build/') || path.startsWith('.github/scripts/') || path.startsWith('packages/bake/') || path.startsWith('packages/telescope-cli/') ||
+  if (path.startsWith('site/build/') || path.startsWith('.github/scripts/') || path.startsWith('packages/bake/') || path.startsWith('packages/telescope-cli/') ||
       /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';
 }
@@ -169,7 +168,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
     if (direct) for (const candidate of [direct, ...['.ts', '.mts', '.tsx', '.js', '/index.ts'].map(ext => direct + ext)]) if (isFile(candidate)) return canonical(candidate);
     return direct;
   }
-  const sourceFiles = [...['src', 'site', 'tools', '.github/scripts', 'packages'].flatMap(path => files(resolve(root, path))),
+  const sourceFiles = [...['src', 'site', '.github/scripts', 'packages'].flatMap(path => files(resolve(root, path))),
     ...readdirSync(root).filter(path => sourcePattern.test(path) && isFile(resolve(root, path))).map(path => resolve(root, path))];
   type Node = { label: string; imports: Import[]; accesses: { path: string; line: number }[]; unchecked: boolean; uncheckedBake: boolean; edges: { file: string; erased: boolean }[]; packages: { name: PackageName; erased: boolean; specifier: string }[] };
   const graph = new Map<string, Node>();

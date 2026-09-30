@@ -85,7 +85,7 @@ for point in cube_points:
 
 sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import write
-write('spice/dart-draco.json', 'spiceypy', 'tests/oracles/spice/dart-draco.py',
+write('packages/bake/src/astronomy/fixtures/dart-draco.json', 'spiceypy', 'packages/bake/src/objects/cameras/fixtures/dart-draco.py',
       {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT'), 'pds4_tools': pds4_tools.__version__},
       [source / path for path in kernels] + [source / 'observations/dart_0401930040_12262_01_geo.fits', cube_label],
       {'exposure': {'sclk': exposure_sclk, 'et': et0, 'utc': utc0}, 'times': times, 'states': states, 'frames': frames, 'surface': surface})

@@ -19,7 +19,7 @@ function stage(name: string, tolerance: number) {
   } };
 }
 export async function compare(selectedIds?: readonly string[]) {
-  const fixture=await readOracleFixture('sbmt/projection.json'), definitions=await cases();
+  const fixture=await readOracleFixture('packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json'), definitions=await cases();
   const expectedIds=definitions.map(c=>c.id).sort(), actualIds=Object.keys(fixture.cases).sort();
   if(JSON.stringify(expectedIds)!==JSON.stringify(actualIds))throw new Error('Missing or unexpected SBMT cases');
   if(selectedIds&&(!selectedIds.length||new Set(selectedIds).size!==selectedIds.length||selectedIds.some(id=>!expectedIds.includes(id))))throw new Error('Unknown or duplicate comparison case selection');
@@ -28,7 +28,7 @@ export async function compare(selectedIds?: readonly string[]) {
     if(!pin)throw new Error(`Unpinned SBMT comparison input: ${path}`);
     return readOracleInput(pin);
   };
-  await input('tests/fixtures/sbmt/cases.json');
+  await input('packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json');
   const reports=[];
   // Group by shape and release each body before loading the next. No native
   // process, browser, download or prepared output is needed for comparisons.

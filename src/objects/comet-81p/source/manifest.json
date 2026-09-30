@@ -77,7 +77,7 @@
       "datasetId": "model",
       "label": "Completed shape model",
       "falseColor": false,
-      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mts",
+      "generator": "packages/bake/src/objects/layers/terrestrial/pds-constraint-map.ts",
       "recipe": {
         "kind": "plate-coverage",
         "width": 512,
@@ -596,7 +596,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "pds-shape",
           "model-surface"
@@ -608,7 +608,7 @@
         "diffuse": 0.55,
         "datasetId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ],
   "documents": [

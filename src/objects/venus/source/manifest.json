@@ -733,7 +733,7 @@
         "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
         "https://www.wikidata.org/wiki/Wikidata:Licensing"
       ],
-      "acquisition": "node tools/prepare-feature-notes.mts venus: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "acquisition": "node packages/bake/cli/prepare-feature-notes.mts venus: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
       "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
       "consumers": [
         "features"
@@ -820,7 +820,7 @@
       },
       "origin": "https://hub.docker.com/r/nasapsg/psg",
       "credit": "NASA GSFC Planetary Spectrum Generator (Villanueva et al. 2018, 2022); computed by cssEarth with a local nasapsg/psg container.",
-      "acquisition": "Generated on 2026-09-25 by `node tools/photometry/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`; the answers are cached in output/psg-limb/venus.jsonl."
+      "acquisition": "Generated on 2026-09-25 by `node packages/bake/cli/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`; the answers are cached in output/psg-limb/venus.jsonl."
     },
     {
       "path": "atmosphere/psg-limb.cfg",
@@ -838,7 +838,7 @@
       },
       "origin": "https://hub.docker.com/r/nasapsg/psg",
       "credit": "NASA GSFC Planetary Spectrum Generator; configuration written by cssEarth from PSG's own template.",
-      "acquisition": "Written by `node tools/photometry/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`."
+      "acquisition": "Written by `node packages/bake/cli/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`."
     },
     {
       "path": "atmosphere/psg-nadir.cfg",
@@ -856,7 +856,7 @@
       },
       "origin": "https://hub.docker.com/r/nasapsg/psg",
       "credit": "NASA GSFC Planetary Spectrum Generator; configuration written by cssEarth from PSG's own template.",
-      "acquisition": "Written by `node tools/photometry/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`."
+      "acquisition": "Written by `node packages/bake/cli/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`."
     },
     {
       "path": "science/usgs/elevation.json",

@@ -53,13 +53,13 @@ export async function buildPdsLedger() {
       mode = requireString(program.mode, 'program mode'), files = requireArray(program.files, 'program files').map(entry => requireRecord(entry, 'program file')),
       observation = requireRecord(program.observation, 'program observation'), discovery = requireRecord(program.discovery, 'program discovery');
     harvestDates.push(requireString(discovery.harvestIso, 'registry harvest').slice(0, 10));
-    const receipt = PDS_PROGRAMS_LOCATION.file(pdsReceiptName(id)), recorded = new Set(PDS_PROGRAMS_LOCATION.recorded(pdsReceiptName(id)));
+    const receipt = PDS_PROGRAMS_LOCATION.file(pdsReceiptName(id));
     const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
     const selection = requireRecord(record.parameters.selection, 'PDS selection'), science = files.find(file => file.role === 'science');
     const qualified = record.telescope === telescope && record.stage === 'archive-final' && selection.program === id && selection.target === target && selection.lidvid === program.lidvid
       && files.every(file => record.inputs.some(input => input.identity === file.uri && input.bytes === file.bytes)
         && record.outputs.some(output => output.path === file.name && output.bytes === file.bytes))
-      && Boolean(science && record.evidence.some(evidence => evidence.kind === 'archive-origin' && recorded.has(evidence.receipt) && evidence.product === science.name));
+      && Boolean(science && record.evidence.some(evidence => evidence.kind === 'archive-origin' && evidence.receipt === receipt && evidence.product === science.name));
     const key = `${telescope} :: ${mode}`, modeEntry = modes.get(key) ?? { telescope, mode, programs: [], qualified: [], receipts: [] };
     if (!modeEntry.programs.includes(id)) modeEntry.programs.push(id); if (!modeEntry.receipts.includes(receipt)) modeEntry.receipts.push(receipt);
     if (qualified && !modeEntry.qualified.includes(id)) modeEntry.qualified.push(id); modes.set(key, modeEntry);
