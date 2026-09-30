@@ -1974,8 +1974,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(768px * var(--sun-camera-zoom, 1))
-    calc(768px * var(--sun-camera-zoom, 1));
+    768px
+    768px;
 }
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
@@ -1984,8 +1984,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--sun-camera-zoom, 1))
-    calc(496px * var(--sun-camera-zoom, 1));
+    496px
+    496px;
 }
 
 /* Spin origin carried from the retired sun-surfaces.css (Carrington longitude 0 faces the default yaw). */
