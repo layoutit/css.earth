@@ -5,7 +5,6 @@ import { createSystemFade } from './context-scale.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
-import { createContextSelectionPolicy } from '../context-presentation-policy.js';
 import { FEATURED_STAR_TIER, labelImportance } from '../../labels/universe-label-policy.js';
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
@@ -513,26 +512,6 @@ test('planet views label their own moon family, with a bounded total', () => {
   expect(names.some(body => body.id === 'saturn')).toBe(true);
   expect(names.filter(body => 'orbit' in body && body.orbit && body.orbit.centerBodyId !== plan.focus.id)
     .every(body => 'orbit' in body && body.orbit?.centerBodyId === 'saturn')).toBe(true);
-});
-
-test.each(['ryugu', 'saturn'])('%s selection dimming relaxes at system scale, independently of camera angle', id => {
-  const policy = createContextSelectionPolicy(plan), selected = plan.bodies.find(body => body.id === id)!;
-  const scale = selected.orbit!.lod!.bounds.radiusM;
-  for (const axis of [0, 1, 2]) {
-    const values = [.25, .5, 1, 2, 4].map(factor => {
-      const position: [number, number, number] = [...selected.positionM];
-      position[axis] += scale * factor;
-      const strength = policy.strengthAt(id, position);
-      expect(policy.opacity(id, id, false, strength)).toBe(1);
-      expect(policy.opacity('earth', id, true, strength)).toBe(1);
-      if (id === 'saturn') {
-        expect(policy.strengthAt('titan', position)).toBe(strength);
-        expect(policy.opacity('titan', id, false, strength)).toBe(1);
-      }
-      return policy.opacity('earth', id, false, strength);
-    });
-    expect(values).toEqual([.25, .25, .625, 1, 1]);
-  }
 });
 
 test.each(['saturn', 'jupiter', 'uranus'])('%s: close detail retires its own and unrelated solar orbits', id => {

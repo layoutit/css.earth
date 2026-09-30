@@ -42,7 +42,7 @@ export interface WorldContextView {
   viewport: WorldCameraViewport;
   selectedId: string;
   overview: boolean;
-  /** A selected system retains its host locator and family emphasis while using overview orbit framing. */
+  /** A selected system retains its host locator while using overview orbit framing. */
   overviewSelection?: boolean;
   selectionPreview?: string | null;
   navigationInFlight: boolean;

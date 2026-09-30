@@ -16,13 +16,15 @@
       "claims": [
         "Shared search-style rows and cited system introduction",
         "Selected Jupiter square marker",
-        "Unrelated orbits retain full opacity; body markers remain dimmed"
+        "Unrelated labels and circles retain opacity 1 with Jupiter selected",
+        "MOONS tab and separator"
       ],
       "measurements": {
-        "earthOrbitStrokeOpacity": 0.65,
-        "saturnOrbitStrokeOpacity": 0.65,
-        "jupiterOrbitStrokeOpacity": 0.65,
-        "cameraDistanceAu": 24.41
+        "sunMarkerOpacity": 1,
+        "earthMarkerOpacity": 1,
+        "saturnMarkerOpacity": 1,
+        "jupiterMarkerOpacity": 1,
+        "labelsAndCirclesVisible": true
       }
     },
     {
@@ -31,6 +33,14 @@
         "Body detail card replaces obsolete portrait overview",
         "Datasets first; uppercase 14px tabs",
         "Wikipedia Learn more link"
+      ]
+    },
+    {
+      "file": "saturn-system.png",
+      "claims": [
+        "MOONS (293) tab at 14px",
+        "Separator between intro and moon list",
+        "No obsolete portrait overview"
       ]
     }
   ],
