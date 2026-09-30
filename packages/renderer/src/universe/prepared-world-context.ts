@@ -50,8 +50,11 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
       if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
         orientation = [...orientationXyzw];
         const view = cssViewFromOrientation(orientationXyzw);
-        const depth = (entry: Entry) => -(view[6]! * entry.body.positionM[0] + view[7]! * entry.body.positionM[1] + view[8]! * entry.body.positionM[2]);
-        ranks = new Map([...members].sort((a, b) => depth(b) - depth(a)).map((entry, index) => [entry, index * 4]));
+        // Each depth is taken once, not once per comparison; the stable sort keeps equal depths in member order.
+        const depths = Float64Array.from(members, ({ body: { positionM } }) => -(view[6]! * positionM[0]! + view[7]! * positionM[1]! + view[8]! * positionM[2]!));
+        const order = Array.from(members, (_, index) => index).sort((a, b) => depths[b]! - depths[a]!);
+        ranks = new Map();
+        for (let index = 0; index < order.length; index++) ranks.set(members[order[index]!]!, index * 4);
         selection = null; ranksChanged = true;
       }
       const changed = ranksChanged || selection !== selected;

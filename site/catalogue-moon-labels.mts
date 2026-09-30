@@ -29,6 +29,14 @@ export function parseMoonLabels(input: unknown): readonly Moon[] {
   return entries;
 }
 
+// The caption order is fixed for a moon list: sort it once, not with localeCompare on every frame.
+const moonOrders = new WeakMap<readonly Moon[], readonly (readonly [number, Moon])[]>();
+function moonOrder(moons: readonly Moon[]) {
+  let ordered = moonOrders.get(moons);
+  if (!ordered) moonOrders.set(moons, ordered = [...moons.entries()].sort(([, a], [, b]) => a.parentDistanceM - b.parentDistanceM || a.id.localeCompare(b.id)));
+  return ordered;
+}
+
 /** Only project prepared points. These captions never join the object registry,
  * create a body, generate an orbit, or register a picking/navigation target. */
 export function projectMoonLabels(moons: readonly Moon[], widths: readonly number[], parents: ReadonlyMap<string, Point>,
@@ -42,7 +50,7 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
   const halfWidth = (viewport.widthPixels ?? 1000) / 2, halfHeight = (viewport.heightPixels ?? 800) / 2;
   const placements: { index: number; x: number; y: number; opacity: number }[] = [];
   const candidates: Parameters<typeof admitStableLabels>[0][number][] = [];
-  const ordered = [...moons.entries()].sort(([, a], [, b]) => a.parentDistanceM - b.parentDistanceM || a.id.localeCompare(b.id));
+  const ordered = moonOrder(moons);
   for (const [index, moon] of ordered) {
     if (moon.parentId !== selected.id && moon.parentId !== selected.orbit?.centerBodyId) continue;
     const parent = parents.get(moon.parentId), parentEye = parentEyes.get(moon.parentId);

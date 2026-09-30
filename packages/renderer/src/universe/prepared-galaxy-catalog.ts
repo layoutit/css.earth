@@ -32,6 +32,8 @@ interface Entry {
   labelY: number;
   /** Last published label interactivity; null until the first publication. */
   interactive: boolean | null;
+  /** The marker's and dot's last written transform, so an unmoved marker writes nothing. */
+  transform: string;
 }
 
 export interface GalaxyCaptionSource { readonly frame: DensityVolumeFrame; readonly drawnRadiusUnits: number; readonly extentRadiusUnits: number }
@@ -113,7 +115,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
     const caption = !isPreparedCluster(object) && object.detailedObjectId !== undefined ? galaxyCaptions?.get(object.detailedObjectId) ?? null : null;
     const entry: Entry = { object, marker, dot, navigable, label, aperture, activate, cornersM: frame && !caption ? catalogVolumeCorners(frame) : null, caption,
-      placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
+      placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null, transform: '' };
     return entry;
   };
   const entries: Entry[] = objects.filter(object => labelEligible({ named: Boolean(object.name), notable: isPreparedCluster(object) || Boolean(object.detailedObjectId) })).map(createEntry);
@@ -190,8 +192,13 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         const reach = anchor ? anchor.y - anchor.centreY : 4, centre = anchor ? { x: anchor.x, y: anchor.centreY } : point;
         if (Math.abs(centre.x) > width / 2 + reach || Math.abs(centre.y) > height / 2 + reach) continue;
         visible.add(entry.object.id);
-        entry.marker.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
-        if (entry.dot) entry.dot.style.transform = entry.marker.style.transform;
+        // Written to both from one string, never read back from the style (a read serialises it).
+        const transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
+        if (transform !== entry.transform) {
+          entry.marker.style.transform = transform;
+          if (entry.dot) entry.dot.style.transform = transform;
+          entry.transform = transform;
+        }
         const bounds = anchor ? { left: anchor.x - reach, right: anchor.x + reach, top: anchor.centreY - reach, bottom: anchor.y }
           : entry.cornersM ? projectCatalogBounds(entry.cornersM, world, viewport) : null;
         if (entry.cornersM && !bounds) continue;
