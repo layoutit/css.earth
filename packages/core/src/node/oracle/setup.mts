@@ -2,7 +2,7 @@
 /**
  * Create the pinned Python oracle environment: `.local/oracles/venv` with the
  * exact versions in packages/core/src/node/oracle/requirements.txt. Oracle scripts run through
- * that interpreter and write fixtures under tests/oracles/; the fixtures name
+ * that interpreter and write fixtures beside their owning packages; the fixtures name
  * the tool versions and the path and size of every input they read.
  */
 import { spawnSync } from 'node:child_process';

@@ -101,6 +101,8 @@ Neither changes the measured Chromium path's selection or rendering behavior.
 
 The camera check imports source modules and therefore runs from a bundle:
 
+Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/camera-browser.mts) (now retired; this helper has no current replacement).
+
 ```sh
 node --input-type=module <<'JS'
 import { build } from 'esbuild';
@@ -195,6 +197,8 @@ CSS property for a resize hit target.
 
 ## Local evidence and limits
 
+Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/browser.mts) (now retired; this helper has no current replacement).
+
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/browser.mts
 pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
@@ -230,6 +234,8 @@ publication per animation frame. `?contain=size` adds size containment to the
 resized element; `?contain=strict` also isolates the fixed frame with strict
 containment and adds layout/style containment to the resized element.
 
+Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/compare-browser.mts) (now retired; this helper has no current replacement).
+
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/compare-browser.mts
 ```
@@ -260,6 +266,8 @@ Saturn, rings, sky, materials, labels and depth in every case. The native sensor
 transports inline dimensions to the existing input callbacks with a
 MutationObserver. Renderer JavaScript remains active: this test isolates sensor
 cost on the actual scene, rather than qualifying a finished CSS-only camera.
+
+Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/saturn-browser.mts) (now retired; this helper has no current replacement).
 
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/saturn-browser.mts

@@ -7,7 +7,6 @@
     "**/*.spec.mts",
     "cli/test-sbmt.mts",
     "../../site/env.d.ts",
-    "../../site/cesium-module-types.d.ts",
     "src/delivery/fixtures/external-modules.d.mts"
   ],
   "exclude": [

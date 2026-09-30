@@ -4,9 +4,6 @@
     "test/**/*.ts",
     "test/**/*.mts",
     "env.d.ts",
-    "cesium-module-types.d.ts",
-    "env.d.ts",
-    "cesium-module-types.d.ts",
     "../packages/bake/src/delivery/fixtures/external-modules.d.mts"
   ],
   "exclude": [

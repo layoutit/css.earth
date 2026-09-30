@@ -6,7 +6,6 @@
     "**/*.spec.ts",
     "**/*.spec.mts",
     "../../site/env.d.ts",
-    "../../site/cesium-module-types.d.ts",
     "../bake/src/delivery/fixtures/external-modules.d.mts"
   ],
   "exclude": [

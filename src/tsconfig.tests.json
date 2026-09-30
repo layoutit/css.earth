@@ -10,7 +10,6 @@
     "**/*-test-fixture.mts",
     "**/*-browser.mts",
     "../site/env.d.ts",
-    "../site/cesium-module-types.d.ts",
     "../packages/bake/src/delivery/fixtures/external-modules.d.mts"
   ],
   "exclude": [

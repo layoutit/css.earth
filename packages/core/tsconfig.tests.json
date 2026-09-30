@@ -8,7 +8,6 @@
     "src/node/register-vite-suffix.mts",
     "src/node/vite-suffix-loader.mts",
     "../../site/env.d.ts",
-    "../../site/cesium-module-types.d.ts",
     "../bake/src/delivery/fixtures/external-modules.d.mts"
   ],
   "exclude": [

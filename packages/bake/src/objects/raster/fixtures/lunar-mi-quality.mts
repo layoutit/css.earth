@@ -1,4 +1,4 @@
-/** Audit the prepared 2016 Kaguya MI grids: node tests/oracles/lunar-mi-quality.mts <report.json>.
+/** Audit the prepared 2016 Kaguya MI grids: node packages/bake/src/objects/raster/fixtures/lunar-mi-quality.mts <report.json>.
  * Native-byte fidelity is checked separately by isis-geotiff-grid.mts. This checks every compact cell's
  * display validity and calibration, plus independent mineral closure and discrete model classes. */
 import {fromFile} from 'geotiff';
