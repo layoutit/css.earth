@@ -52,12 +52,11 @@
       {
         "id": "galaxies-200mpc",
         "label": "Galaxy dots, 200 Mpc level",
-        "process": "Every Cosmicflows-4 galaxy and every LVDB galaxy inside its inner edge.",
+        "process": "Keep galaxies, in a fixed shuffle, while the ones within the kernel stay under the level's even density; nested levels add only galaxies the enclosing levels do not draw.",
         "recipe": "source/galaxies-200mpc/merge.json",
         "selector": "",
         "inputs": [
-          "galaxies-table",
-          "local-group-galaxies-sample"
+          "galaxies-table"
         ],
         "outputs": [
           "prepared/galaxies-200mpc.json"
@@ -131,9 +130,29 @@
         ]
       },
       {
+        "id": "galaxies-3mpc",
+        "label": "Galaxy dots, Local Volume level",
+        "process": "Every LVDB galaxy nearer than Cosmicflows-4's nearest galaxy (3.03 Mpc), unthinned: the innermost level.",
+        "recipe": "source/galaxies-3mpc/merge.json",
+        "selector": "",
+        "inputs": [
+          "local-group-galaxies-sample"
+        ],
+        "outputs": [
+          "prepared/galaxies-3mpc.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "An even density is a presentation choice: real concentrations above it are thinned; sparser regions, as the zone the Milky Way's disc hides, are the catalogue's gaps, not voids."
+        ]
+      },
+      {
         "id": "dots",
         "label": "Galaxy dots at every zoom",
-        "process": "One level, every galaxy, drawn whole within 100 Mpc; at most 25,000 at once.",
+        "process": "Join the five levels, outermost first, into one bank the app draws as a growing prefix: the field whole within 100 Mpc, each inner level's galaxies one at a time as the view narrows past its radius, the Local Volume galaxies last.",
         "recipe": "source/dots/stack.json",
         "selector": "",
         "inputs": [

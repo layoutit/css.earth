@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "galaxies-3mpc",
+  "meaning": "The innermost level: every Local Volume Database galaxy nearer than Cosmicflows-4's nearest (3.03 Mpc), unthinned. Each dot is one galaxy at its adopted distance, in the tone of its apparent V magnitude.",
+  "banks": [
+    "local-group-galaxies"
+  ],
+  "within": [
+    "galaxies-200mpc",
+    "galaxies-60mpc",
+    "galaxies-20mpc",
+    "galaxies-10mpc"
+  ]
+}

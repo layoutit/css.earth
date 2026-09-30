@@ -1,4 +1,5 @@
-import { mkdtemp, rm } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { expect, test } from 'vitest';
@@ -13,9 +14,12 @@ test('a bake input goes to output/, a published bank to prepared/ with its inven
   const inventory = async ({ objectId }: { objectId: string }) => { inventoried.push(objectId); };
   expect(await writeCatalogueBank({ objectDirectory, id: 'raw', bank: bank(3), published: false, repositoryRoot: root, inventory }))
     .toBe(resolve(root, 'output/catalogue-points/galaxy/raw.json'));
+  await mkdir(resolve(objectDirectory, 'prepared'), { recursive: true });
+  await writeFile(resolve(objectDirectory, 'prepared/dots.json'), '{}');
   expect(await writeCatalogueBank({ objectDirectory, id: 'dots', bank: bank(2), published: true, repositoryRoot: root, inventory }))
     .toBe(resolve(objectDirectory, 'prepared/dots.bin'));
   expect(inventoried).toEqual(['galaxy']);
+  expect(existsSync(resolve(objectDirectory, 'prepared/dots.json')), 'the JSON form the bank replaced is removed').toBe(false);
   const raw = await readCatalogueBank(objectDirectory, 'raw', root) as { points: unknown[]; spread?: unknown; cells?: unknown };
   const dots = await readCatalogueBank(objectDirectory, 'dots', root) as { points: number[][]; spread?: unknown; cells?: unknown };
   expect(raw.points).toHaveLength(3);

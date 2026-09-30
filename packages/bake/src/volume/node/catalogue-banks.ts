@@ -2,7 +2,7 @@
 // `prepared/` as a packed binary (`<id>.bin`, @cssearth/renderer prepared-data/catalogue-bank-binary.ts) and its inventory, and must fit
 // what the app draws. Every other bank is a bake input for a later merge or
 // stack and stays in the repository's ignored `output/`, out of the inventory, R2 and the site's module graph.
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/renderer/prepared-data/catalogue-bank-binary.ts';
@@ -53,6 +53,8 @@ export async function writeCatalogueBank({ objectDirectory, id, bank, published,
   if (published) {
     const { bytes, regions } = encodeCatalogueBankBinary({ ...bank, spread: cataloguePointSpread(rows), cells: catalogueCells(rows, levels) }, `${objectId}: bank ${id}`);
     await writeFile(path, packPreparedBinary(bytes, regions, `${objectId}: bank ${id}`));
+    // The same bank's JSON form, which the `.bin` replaced, must not stay beside it: the inventory counts every baked file.
+    await rm(resolve(dirname(path), `${id}.json`), { force: true });
   } else await writeFile(path, JSON.stringify(bank) + '\n');
   if (published) await inventory({ objectId, objectDirectory });
   return path;

@@ -1,6 +1,6 @@
 # Nearby Universe galaxy field
 
-Every galaxy of Cosmicflows-4 between 3 and 200 Mpc, and every Local Volume Database galaxy nearer than that, drawn as one sharp dot at its measured distance, in the colour of its morphological type. Nothing is thinned, so clusters and filaments keep the contrast the catalogues measured. No brightness, glow or cloud is drawn.
+Every galaxy of Cosmicflows-4 between 3 and 200 Mpc, and every Local Volume Database galaxy nearer than that, drawn as one sharp dot at its measured distance, in the colour of its morphological type. The Cosmicflows-4 dots are thinned to an even density at every zoom, so the field never piles up around the Milky Way and never empties as you zoom in. No brightness, glow or cloud is drawn.
 
 ## Sources
 
@@ -22,7 +22,8 @@ The [galaxy recipe](source/galaxies/points.json) records both queries and the jo
 1. `packages/bake/cli/prepare-catalogue-points.mts` places each galaxy at 10^(DM/5 + 1) pc in its J2000 direction, in the Sun-centred frame, in Mpc.
 2. It colours each galaxy by its type class: the template spectrum of that class through the CIE 1931 observer into sRGB, the route the app uses for star colours. The colours are E #ffdec0, S0 #ffdfc1, Sa #ffdcc7, Sb #ffe1cb and Sc #d9d7ff. The 1,400 galaxies HyperLEDA gives no type are white. Each colour is then darkened by the galaxy's absolute B magnitude: full at M_B −21.5, 30% at −17.5. The 967 galaxies without btc take the darkest tone.
 3. [`local-group-sample.mts`](../../../packages/bake/authoring/nearby-universe/local-group-sample.mts) takes the Local Group catalogue's galaxies nearer than the field's nearest galaxy, leaving out those drawn as their own objects (M31, M33, the Magellanic Clouds). The same route places them and tones them by absolute V magnitude, LVDB having no B; nearly all are dwarfs and take the faintest tone. LVDB gives no type, so they are white.
-4. `packages/bake/cli/merge-catalogue-points.mts` joins both into one level and `stack-catalogue-points.mts` into [one bank](source/dots/stack.json) of 27,477 dots, drawn whole within 100 Mpc. At most 25,000 are drawn at once: past that the app keeps a fixed share, so zooming never swaps one dot for another. The quasar and bright-galaxy banks have the same budget.
+4. `packages/bake/cli/merge-catalogue-points.mts` thins the Cosmicflows-4 galaxies into four nested levels. The field holds 0.18 galaxies per 1,000 Mpc³ out to 200 Mpc, half what CF4 still holds at its edge. Around the Milky Way, levels out to 60, 20 and 10 Mpc bring that up to 5, 25 and 90. A fifth level holds the 200 Local Volume Database galaxies, unthinned.
+5. `packages/bake/cli/stack-catalogue-points.mts` joins the levels into [one bank](source/dots/stack.json) of 7,277 dots (5,023, 1,858, 156, 40 and 200). The app draws a growing share of it as you zoom in, so a level's edge is never on screen and a dot you have seen stays; the Local Volume galaxies appear as the view narrows from 3 to 1 Mpc across.
 
 ## Beyond the Cosmicflows-4 field
 
