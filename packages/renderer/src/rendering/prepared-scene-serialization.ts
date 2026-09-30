@@ -1,6 +1,7 @@
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
-import { textureTileStyles, tiledTextureKeys } from './prepared-texture-levels.js';
+import { textureTileGroups, textureTileLeafStyles } from './prepared-texture-levels.js';
+import { leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; }
@@ -69,8 +70,12 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
     }
     if (node.parent === -1) roots.push(index); else elements[node.parent].children.push(index);
   }
+  // Leaf boxes ship their final values at the prepared initial step, from their records (prepared-leaf-box-direct.ts);
+  // the mounted writer continues from the same values.
+  const leafBoxes = leafBoxBindings(definition.viewBindings);
+  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset)) write(leaf.node, name, value);
   // The base view uses the same initial prepared texture level as an interactive mount.
-  const textureResources = definition.textureLevels?.levels[0]?.resources, tiledKeys = tiledTextureKeys(definition.textureLevels);
+  const textureResources = definition.textureLevels?.levels[0]?.resources, tileGroups = textureTileGroups(definition.textureLevels);
   for (const binding of variant.writes) {
     const element = target(binding.target);
     if (binding.kind === 'attribute') {
@@ -80,9 +85,13 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
     } else {
       write(binding.target, binding.name, binding.kind === 'texture'
         ? texture(binding.resource === null ? null : textureResources?.[binding.resource] ?? binding.resource) : binding.value);
-      // A page the first level draws from a sheet reads its tile beside the image (prepared-presentation.ts commits the same).
-      if (binding.kind === 'texture' && binding.resource !== null && tiledKeys.has(binding.resource))
-        for (const [name, value] of textureTileStyles(binding.name, definition.textureLevels?.levels[0]?.tiles?.[binding.resource])) write(binding.target, name, value);
+      // A page the first level draws from a sheet places its leaves on its tile, as literal values (prepared-presentation.ts
+      // commits the same through its tile writer).
+      const group = binding.kind === 'texture' ? tileGroups.get(`${binding.target}:${binding.name}`) : undefined;
+      if (group && binding.kind === 'texture' && binding.resource !== null) {
+        const tile = definition.textureLevels?.levels[0]?.tiles?.[binding.resource];
+        for (const [node, x, y] of group.leaves) for (const [name, value] of textureTileLeafStyles(group, x, y, tile)) write(node, name, value);
+      }
     }
   }
   for (const selected of variant.materials) {
@@ -97,8 +106,8 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
       write(track.target, 'backgroundSize', address.backgroundSize);
     }
   }
-  // Keep the exact prepared orientation while the application clock is absent.
-  for (const animation of [...definition.motion ?? [], ...definition.animations]) write(animation.target, 'animation', 'none');
+  // The exact prepared orientation holds while the application clock is absent: delivered scene CSS carries no motion
+  // (site/build/prepared-motion-css.mts), so a motion target needs no declaration of its own.
   // A subtree this selection hides stays out of the markup; the runtime builds it when it adopts the tree.
   const hidden = new Set(variant.hiddenSubtrees ?? []);
   const serialize = (index: number): string => {

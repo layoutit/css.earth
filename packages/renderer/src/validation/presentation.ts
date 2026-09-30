@@ -84,7 +84,7 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
 }
 export function requireViewBindings(value: unknown, tree: PreparedTree, camera: CameraPlan): asserts value is readonly PreparedViewBinding[] {
   for (const input of array(value, 'view bindings')) {
-    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'placements', 'groups', 'groupSizes', 'sceneFromBody', 'radii', 'inset']);
+    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'placements', 'groups', 'groupSizes', 'initial', 'boxes', 'sceneFromBody', 'radii', 'inset']);
     const kind = choice(binding.kind, ['counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property', 'interior-disc'], 'view binding');
     const target = nodeReference(binding.target, tree, kind === 'view-attribute' || kind === 'view-property');
     if ([tree.camera, tree.scene].includes(target) && kind !== 'view-attribute') fail('view binding cannot duplicate camera publisher');
@@ -118,6 +118,32 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
         if (binding.groupSizes !== undefined) for (const [name, size] of Object.entries(record(binding.groupSizes, 'leaf box group sizes'))) {
           const [area, density] = array(size, `leaf box group size ${name}`);
           if (!(name in groups) || !(positive(area, `leaf box group area ${name}`) > 0) || !(positive(density, `leaf box group density ${name}`) > 0)) fail(`leaf box group size ${name} is invalid`);
+        }
+      }
+      // The step or outset before the camera publishes one, and the leaf boxes as records (prepared-leaf-box-direct.ts).
+      if (binding.initial !== undefined && !Number.isFinite(Number(text(binding.initial, 'silhouette step initial value')))) fail('silhouette step initial value must be a number');
+      if (binding.boxes !== undefined) {
+        if (binding.initial === undefined) fail('leaf box records need the initial step');
+        // Leaf-box records sit in the step's groups; seam-only records (box factor 1) belong to the seam binding.
+        const seamOnly = binding.groups === undefined;
+        const inGroups = new Set(seamOnly ? [] : Object.values(record(binding.groups, 'leaf box groups')).flatMap(leaves => array(leaves, 'leaf box group')));
+        const seen = new Set<number>();
+        const pair = (value: unknown, name: string) => {
+          const parts = array(value, name);
+          if (parts.length !== 2 || parts.some(part => typeof part !== 'number' ? typeof part !== 'string' || /var\(|calc\(/.test(part) : !Number.isFinite(part))) fail(`${name} must be two lengths or plain components`);
+        };
+        for (const input of array(binding.boxes, 'leaf box records')) {
+          const box = record(input, 'leaf box record', ['node', 'density', 'box', 'atlas', 'backgroundSize', 'backgroundPosition', 'matrix', 'seam']);
+          const node = nodeReference(box.node, tree);
+          if (seen.has(node) || (!seamOnly && !inGroups.has(node))) fail(`leaf box record ${node} is repeated or in no group`);
+          seen.add(node);
+          if (seamOnly ? box.density !== undefined || box.seam === undefined : !(positive(box.density, `leaf box ${node} density`) > 0)) fail(`leaf box ${node} density or seam does not fit its binding`);
+          if (box.box !== undefined) { const [width, height] = array(box.box, `leaf box ${node} box`); positive(width, `leaf box ${node} width`); positive(height, `leaf box ${node} height`); }
+          if (box.atlas !== undefined && box.atlas !== true) fail(`leaf box ${node} atlas flag must be true`);
+          if (box.backgroundSize !== undefined) pair(box.backgroundSize, `leaf box ${node} background size`);
+          if (box.backgroundPosition !== undefined) pair(box.backgroundPosition, `leaf box ${node} background position`);
+          if (!/^matrix3d\([^()]*\)$/.test(text(box.matrix, `leaf box ${node} matrix`))) fail(`leaf box ${node} matrix must be one matrix3d`);
+          if (box.seam !== undefined) { const seam = array(box.seam, `leaf box ${node} seam`); if (seam.length !== 2) fail(`leaf box ${node} seam needs two coefficients`); seam.forEach(value => finite(value, `leaf box ${node} seam`)); }
         }
       }
       const hysteresis = finite(binding.hysteresis, 'silhouette step hysteresis');

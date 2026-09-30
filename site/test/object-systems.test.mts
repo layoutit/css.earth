@@ -4,6 +4,10 @@ const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, systemOfObject } from '../object-systems.mts';
+import { planetarySystemMembers } from '../planetary-system-members.mts';
+import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
+import { SYSTEM_FRAMING_RADII } from '../system-framing.mts';
+import { APPLICATION_WORLD_CONTEXT } from '../world-context-plan.mts';
 
 test('planetary systems follow prepared orbit chains to their stars', () => {
   const systems = allPlanetarySystems(SCENE_OBJECTS);
@@ -50,6 +54,28 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   assert.equal(systemById(SCENE_OBJECTS, 'eps-indi-ba'), null);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'vhs-1256-1257')!.memberIds, ['vhs-1256-1257-companion', 'vhs-1256-1257-b']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'roxs-42b')!.memberIds, ['roxs-42b-companion', 'roxs-42b-b']);
+});
+
+test('the prepared system members are the orbit graph read at runtime', () => {
+  // The browser reads each system's members from site/prepared-world-presentation.json instead of walking every body's orbit
+  // chain once per star. The same rule, run here on the real world context, must give the same table and the same systems.
+  assert.deepEqual(PREPARED_WORLD_PRESENTATION.planetarySystems, planetarySystemMembers(APPLICATION_WORLD_CONTEXT));
+  for (const objects of [SCENE_OBJECTS, WORLD_OBJECTS]) {
+    const derived = planetarySystems(objects, APPLICATION_WORLD_CONTEXT, SYSTEM_FRAMING_RADII, planetarySystemMembers(APPLICATION_WORLD_CONTEXT));
+    assert.deepEqual(allPlanetarySystems(objects), derived);
+    for (const { id } of objects) {
+      assert.deepEqual(systemOfObject(objects, id), derived.find(system => system.id === id || system.memberIds.includes(id)) ?? null, id);
+      assert.deepEqual(systemById(objects, id), derived.find(system => system.id === id) ?? null, id);
+    }
+  }
+});
+
+test('a plan without prepared members reads them from its own orbit graph', () => {
+  const plan = { ...APPLICATION_WORLD_CONTEXT, bodies: APPLICATION_WORLD_CONTEXT.bodies.filter(body => body.id !== 'wasp-43b') };
+  assert.deepEqual(planetarySystems(SCENE_OBJECTS, plan, SYSTEM_FRAMING_RADII).find(system => system.id === 'wasp-43')?.memberIds, []);
+  // The Sun made to orbit the Earth closes every Solar System chain into a loop.
+  const cyclic = { ...APPLICATION_WORLD_CONTEXT, orbitCenters: { ...APPLICATION_WORLD_CONTEXT.orbitCenters, sun: { positionM: [0, 0, 0] as const, centerBodyId: 'earth' } } };
+  assert.throws(() => planetarySystemMembers(cyclic), /has a cyclic orbit chain/);
 });
 
 test("a system's exit distance scales the Sun's 100 AU by the prepared framing radius", () => {

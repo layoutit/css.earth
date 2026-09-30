@@ -58,8 +58,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(600px * var(--beta-pictoris-camera-zoom, 1))
-    calc(600px * var(--beta-pictoris-camera-zoom, 1));
+    600px
+    600px;
 }
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, the size the sphere is drawn at, so the
@@ -69,8 +69,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--beta-pictoris-camera-zoom, 1))
-    calc(496px * var(--beta-pictoris-camera-zoom, 1));
+    496px
+    496px;
 }
 
 .object-stage[data-object-id="beta-pictoris"] .polycss-camera {

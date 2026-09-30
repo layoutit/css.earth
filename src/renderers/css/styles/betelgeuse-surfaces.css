@@ -57,8 +57,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(1168px * var(--betelgeuse-camera-zoom, 1))
-    calc(1168px * var(--betelgeuse-camera-zoom, 1));
+    1168px
+    1168px;
 }
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
@@ -67,8 +67,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--betelgeuse-camera-zoom, 1))
-    calc(496px * var(--betelgeuse-camera-zoom, 1));
+    496px
+    496px;
 }
 
 .object-stage[data-object-id="betelgeuse"] .polycss-camera {

@@ -7,6 +7,7 @@ export interface PreparedNode { tag: string; className: string | null; style: Pr
 
 import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scalePreparedPixelLengths } from "./projective-layout.ts";
 import { leafBoxLengths, LEAF_BOX_UNSCALE } from "./leaf-box.ts";
+import { cleanPreparedTree } from "./clean-leaves.ts";
 
 const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 // Preparation only: these inputs are the checked-in CSS declaration records,
@@ -94,7 +95,9 @@ export function createPreparedNodeTree({ cssomReads = new Map() }: { cssomReads?
     for (const root of roots) visit(root, -1);
     if (nodes.length !== created.size) throw new TypeError("Prepared tree contains unattached nodes.");
     const index = (node: PreparedNode) => { if (!indices.has(node)) throw new TypeError("Undeclared prepared node reference."); return indices.get(node)!; };
-    return { index, tree: { nodes, properties, camera: index(camera), scene: index(scene), stageClasses } };
+    // The builder works inline; the tree ships clean: each declaration once, and the shared leaf markers and declarations
+    // as the shell's class (clean-leaves.ts).
+    return { index, tree: cleanPreparedTree({ nodes, properties, camera: index(camera), scene: index(scene), stageClasses }) };
   }
   return { element, mesh: (className: string, style = "", attributes: Readonly<Record<string, string>> = {}) => element("div", `polycss-mesh ${className}`, style, attributes), append, leaf, finish };
 }

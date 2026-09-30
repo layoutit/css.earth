@@ -138,9 +138,9 @@ cell and 31% of its pixels were fully transparent. The square pages leave 19% tr
 beside each slanted cell, and decode 1,225 MB when all are resident against 1,445. Modelled on the baked
 layouts (a page decodes whole when any of its cells faces the camera), a view showing a cap of 15°, 30°,
 60° or a hemisphere decodes 50, 123, 381 and 712 MB at the closest level, against 95, 197, 529 and 935.
-The two smallest levels draw every page of a view from one square sheet: each page is a tile, and the body
-publishes the tile's offset and the sheet's scale beside the image, so a level change is a few custom
-properties on the page carriers and no leaf changes. The first view loads one 1,176-pixel sheet of 162 KB
+The two smallest levels draw every page of a view from one square sheet: each page is a tile. The bake records
+each page leaf's tile placement per texture write (`textureLevels.tileLeaves`), and a level change writes the
+affected leaves' final background position and size from those records, with no custom property or `calc()`. The first view loads one 1,176-pixel sheet of 162 KB
 instead of 56 files of 271 KB. Measured on 2026-09-26 from the rebake. The paragraph below describes the
 block pages as first introduced on 2026-09-25. A browser
 decodes a whole image to draw any part of it and never draws a face turned away, so a view decodes

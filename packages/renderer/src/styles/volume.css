@@ -37,3 +37,66 @@
   background-repeat: no-repeat;
   pointer-events: none;
 }
+
+/* The prepared universe (prepared-universe-runtime.ts) fills the stage: its root at the background's depth, its front
+   root just above the body band (that depth, the stage's, is inline). The galaxy's opaque backdrop, its image layer and
+   each image-layer bank fill the root; their display and opacities change inline. */
+.prepared-universe,
+.prepared-universe-front,
+.prepared-volume-context,
+.prepared-volume-image,
+.prepared-image-layer-bank {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.prepared-universe { z-index: 1; }
+.prepared-volume-context { background: #000; }
+
+/* Image-layer banks and image meshes are transparent projections whose camera-driven scene composites once, so slice
+   and patch rasters keep their scale through rotation. */
+.css-volume-projection:is([data-image-mesh], [data-image-mesh-interior], [data-image-layer-axis]) {
+  background: transparent;
+}
+.css-volume-projection:is([data-image-mesh], [data-image-mesh-interior], [data-image-layer-axis]) > .css-volume-camera > .css-volume-scene {
+  will-change: transform;
+}
+/* An image mesh's patches (image-mesh.ts) carry their own box, cell and the mesh's texture inline. Seen from outside a
+   patch hides its back; the cut-open interior copy draws both faces, the sky as seen from inside the sphere. */
+.css-volume-projection:is([data-image-mesh], [data-image-mesh-interior]) .css-volume-mesh s {
+  text-decoration: none;
+}
+.css-volume-projection[data-image-mesh] .css-volume-mesh s {
+  backface-visibility: hidden;
+}
+/* The mesh's limb plate: a LIMB_BOX_PX (1024 px) box centred on the stage, scaled to the outline by its inline transform. */
+.css-volume-projection[data-image-mesh] > i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1024px;
+  height: 1024px;
+  margin: -512px 0 0 -512px;
+  background: center / 100% 100% no-repeat;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Lens billboards (lens-billboards.ts): a zero-size root at the stage centre; each leaf's atlas-sized box, atlas cell,
+   display, transform and opacity are inline. */
+.prepared-lens-billboards {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.prepared-lens-billboards > [data-lens-billboard] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  transform-origin: 0 0;
+  background-repeat: no-repeat;
+}

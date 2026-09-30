@@ -3,6 +3,10 @@
  * from omitting an initially empty preserve-3d parent from its layer tree. */
 :where(.object-stage) .polycss-mesh { translate: 0px 0px 0px; }
 
+/* Every prepared projective leaf: one raster plane that is never a hit target. The bake writes these once here instead of
+ * on each leaf (packages/bake/src/presentation/clean-leaves.ts, PREPARED_LEAF_RULE); a leaf's inline style still wins. */
+.prepared-leaf { transform-style: preserve-3d; background-repeat: no-repeat; pointer-events: none; }
+
 .object-cubic-sky {
   --object-cubic-sky-zoom: 1;
   --object-cubic-sky-camera-distance: max(
@@ -1860,8 +1864,38 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 }
 
 /* Prepared nomenclature labels. The renderer positions each retained span and
-   the shared tooltip; typography and the card belong to the shell. */
+   the shared tooltip; typography and the card belong to the shell. The layer is a
+   zero-size root at the stage centre whose labels, outline chords and tooltip are
+   placed from it by their inline transforms; their fades own visibility and opacity.
+   A server-rendered selected caption (dataset-response.mts) sits on a full-stage
+   root until the label layer claims it. */
+.prepared-surface-features {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.prepared-surface-features[data-feature-caption-only] {
+  inset: 0;
+  width: auto;
+  height: auto;
+}
+.prepared-surface-features :is([data-feature-label], [data-feature-outline-piece], [data-feature-tooltip]) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.prepared-surface-features [data-feature-outline-piece] {
+  width: 1px;
+  transform-origin: 0 50%;
+}
+
 .prepared-surface-features [data-feature-label] {
+  white-space: nowrap;
   color: var(--shell-text);
   font: 500 12px/14px var(--shell-ui-font);
   letter-spacing: 0.01em;

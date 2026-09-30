@@ -12,11 +12,13 @@ export function stellarPointsOpacity(starsHandoff: number, completedVolumeContri
 
 export function mountStellarPoints({host,before,field}:{host:HTMLElement;before:Element;field:PreparedPointAppearance}) {
   if (!field.directPoints) return null;
+  // The prepared palette is formatted once per mount, not once per visible point per camera frame.
+  const palette=field.atlas.colors.map(colorCss);
   const runtime=mountBatchedSpatialPoints({host,before,frame:field.frame,points:field.directPoints.points,className:'stellar-direct-points',
     stylePoint(point,distanceUnits){
       const presentation=pointPhotometry(field,point.absoluteMagnitude,distanceUnits,point.coverageAnchor);
       if(!pointLuminanceVisible(presentation.luminance,point.coverageAnchor))return null;
-      return {colorCss:colorCss(field.atlas.colors[point.colorIndex]!),opacity:presentation.luminance,radiusPx:presentation.radiusPx};
+      return {colorCss:palette[point.colorIndex]!,opacity:presentation.luminance,radiusPx:presentation.radiusPx};
     }});
   runtime.root.dataset.catalogueCount=String(field.directPoints.catalogueCount);
   runtime.root.dataset.pointCount=String(field.directPoints.points.length);

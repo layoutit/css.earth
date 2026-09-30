@@ -3,7 +3,7 @@
 // stack and stays in the repository's ignored `output/`, out of the inventory, R2 and the site's module graph.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, cataloguePointSpread } from '@cssearth/objects';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 /** A bake input: `output/catalogue-points/<object>/<id>.json` under the repository root. */
@@ -29,7 +29,8 @@ export async function readCatalogueBank(objectDirectory: string, id: string, rep
   throw new Error(`${basename(objectDirectory)}: catalogue bank ${id} has not been prepared (looked for ${paths.join(' and ')}); run its recipe first.`);
 }
 
-/** Write a bank where its recipe says it belongs. A published bank is inventoried and never exceeds MAX_CATALOGUE_POINTS. */
+/** Write a bank where its recipe says it belongs. A published bank is inventoried, never exceeds MAX_CATALOGUE_POINTS and
+ * carries its `spread` (the shape its points trace, which the app reads instead of deriving it on every mount). */
 export async function writeCatalogueBank({ objectDirectory, id, bank, published, repositoryRoot, inventory = inventoryPreparedAssets }: {
   objectDirectory: string; id: string; bank: { readonly schema: unknown; readonly points: readonly unknown[] }; published: boolean;
   repositoryRoot?: string; inventory?: (object: { objectId: string; objectDirectory: string }) => Promise<unknown>;
@@ -42,9 +43,18 @@ export async function writeCatalogueBank({ objectDirectory, id, bank, published,
   }
   const path = published ? publishedCatalogueBankPath(objectDirectory, id) : catalogueBankInputPath(objectDirectory, id, repositoryRoot);
   await mkdir(dirname(path), { recursive: true });
-  await writeFile(path, JSON.stringify(bank) + '\n');
+  await writeFile(path, JSON.stringify(published ? { ...bank, spread: cataloguePointSpread(pointRows(objectId, id, bank.points)) } : bank) + '\n');
   if (published) await inventory({ objectId, objectDirectory });
   return path;
+}
+
+function pointRows(objectId: string, id: string, points: readonly unknown[]): readonly (readonly number[])[] {
+  return points.map((point, index) => {
+    if (!Array.isArray(point) || point.length < 3 || !point.every(value => typeof value === 'number' && Number.isFinite(value))) {
+      throw new TypeError(`${objectId}: bank ${id} point ${index} must be finite numbers starting with x, y, z, got ${JSON.stringify(point)}.`);
+    }
+    return point as readonly number[];
+  });
 }
 
 /** `published` in a points, merge or stack recipe: true for a bank the app fetches, absent or false for a bake input. */

@@ -380,12 +380,17 @@ test('detached first publication selects leaf boxes before connection, without a
   const publication = { selection: initialObjectSelection(definition.controls), resources: f.resources,
     view: { ...f.view, projection: projection(radius * 100), motionAtRest: true, levelOfDetail: { ...f.view.levelOfDetail, silhouetteDiameter: 20 } } };
   presentation.publishFrame(publication);
-  const leaf = created[leaves[0]], first = leaf.style.getPropertyValue(binding.property);
-  assert.ok(Number(first) <= 32 && Number(first) >= 16, 'The first small-system view must not inherit close-up backing sizes');
+  // Leaf boxes ship as records and write final lengths (prepared-leaf-box-direct.ts): the step a leaf shows is its width
+  // over its full box, over its density.
+  const record = binding.boxes?.find(box => box.node === leaves[0]);
+  assert.ok(record?.box && record.density, 'Neptune leaf boxes ship as records');
+  const leaf = created[leaves[0]], first = leaf.style.width;
+  const step = parseFloat(first) / record.box[0] / record.density;
+  assert.ok(step <= 32.001 && step >= 15.999, `The first small-system view must not inherit close-up backing sizes (step ${step})`);
   assert.equal(frames.length, 0, 'Detached preparation must finish before connection');
   presentation.connect();
   assert.ok(f.stage.children.length > 0);
   presentation.publishFrame({ ...publication, view: { ...publication.view, projection: projection(radius * 3),
     levelOfDetail: { ...publication.view.levelOfDetail, silhouetteDiameter: 1000 } } });
-  assert.equal(leaf.style.getPropertyValue(binding.property), first, 'Mounted boxes stay frozen until motion settles');
+  assert.equal(leaf.style.width, first, 'Mounted boxes stay frozen until motion settles');
 });

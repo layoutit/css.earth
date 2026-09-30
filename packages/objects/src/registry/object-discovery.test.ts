@@ -22,3 +22,17 @@ test('an extreme trans-Neptunian object stays on the map as a named dot while it
   assert.deepEqual(hiddenBodies, ['quaoar'], 'an ordinary illustration waits for the illustration setting');
   assert.deepEqual(hiddenLabels, ['quaoar'], 'the orbit feature keeps its name');
 });
+
+test('a page computes each setting combination once and reuses it', () => {
+  const illustration = { id: 'quaoar', classification: 'trans-neptunian', discovery: { featured: false, imagery: false, illustration: true } };
+  const objects = [illustration, { id: 'ceres', classification: 'asteroid', discovery: { featured: false, imagery: true, illustration: false } }];
+  const defaultFeatures = new Set<string>();
+  const hidden = discoveryVisibility(objects, { illustrations: false, defaultFeatures });
+  assert.equal(discoveryVisibility(objects, { illustrations: false, defaultFeatures, highlighted: null }), hidden, 'the same combination is the same frozen result');
+  assert.ok(Object.isFrozen(hidden.hiddenBodies));
+  const shown = discoveryVisibility(objects, { illustrations: true, defaultFeatures });
+  assert.deepEqual([hidden.hiddenBodies, shown.hiddenBodies], [['quaoar'], []], 'another combination is computed for itself');
+  assert.deepEqual(discoveryVisibility(objects, { illustrations: false, defaultFeatures, compact: true }).hiddenBodies, ['quaoar', 'ceres']);
+  assert.deepEqual(discoveryVisibility(objects, { illustrations: false, defaultFeatures: new Set(['ceres']), compact: true }).hiddenBodies, ['quaoar'],
+    'other feature sets are other inputs');
+});

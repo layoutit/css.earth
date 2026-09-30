@@ -2,11 +2,13 @@ import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints, parseCataloguePoints } from './catalogue-points.js';
+import { cataloguePointSpread } from '@cssearth/objects';
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } };
 const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-stars', frame,
-  appearance: { colorCss: '#ffe2a8', radiusPx: .75, opacity: .7 }, points: [[1, 0, -10], [-1, 0, -10]] };
+  appearance: { colorCss: '#ffe2a8', radiusPx: .75, opacity: .7 }, points: [[1, 0, -10], [-1, 0, -10]],
+  spread: cataloguePointSpread([[1, 0, -10], [-1, 0, -10]]) };
 
 test('the prepared catalogues the app draws are valid banks of every selected row with a distance', () => {
   // The published banks: what each recipe marks `published: true` and the app fetches. Their inputs (a survey's stars,
@@ -17,6 +19,7 @@ test('the prepared catalogues the app draws are valid banks of every selected ro
     const parsed = parseCataloguePoints(prepared);
     expect(parsed.id).toBe(id);
     expect(parsed.points).toHaveLength(prepared.counts.points);
+    expect(parsed.spread, `${object}/${id}: the bake's spread is the one its points trace`).toEqual(cataloguePointSpread(prepared.points));
     // A merged or stacked bank (packages/bake/cli/merge-catalogue-points.mts, stack.mts) counts only its points; a prepared one also its rows.
     if (prepared.source !== 'merge' && prepared.source !== 'stack') expect(prepared.counts.points + prepared.counts.missingDistance).toBe(prepared.counts.selected);
   }
@@ -43,10 +46,10 @@ test('a stacked bank adds its inner levels\' dots as the view narrows, only once
 });
 
 test('seen from outside, a bank draws only as many dots as its projected shape holds', async () => {
-  const { pointSpread, screenPointCount } = await import('./catalogue-points.js');
+  const { screenPointCount } = await import('./catalogue-points.js');
   // A flat disc of radius 10 in the x-y plane.
-  const disc = Array.from({ length: 2000 }, (_, i) => ({ positionUnits: [10 * Math.sqrt((i + .5) / 2000) * Math.cos(i * 2.4), 10 * Math.sqrt((i + .5) / 2000) * Math.sin(i * 2.4), 0] as const }));
-  const spread = pointSpread(disc);
+  const disc = Array.from({ length: 2000 }, (_, i) => [10 * Math.sqrt((i + .5) / 2000) * Math.cos(i * 2.4), 10 * Math.sqrt((i + .5) / 2000) * Math.sin(i * 2.4), 0]);
+  const spread = cataloguePointSpread(disc);
   expect(Math.abs(spread.normal[2])).toBeCloseTo(1, 6);
   expect(spread.across).toBeGreaterThan(9); expect(spread.along).toBeCloseTo(0, 6);
   expect(screenPointCount(spread, [0, 0, 5], 1000), 'within its reach there is no limit').toBe(Infinity);
@@ -66,6 +69,10 @@ test('catalogue point banks refuse malformed points and appearances, naming the 
   expect(() => parseCataloguePoints({ ...bank, points: [[1, 0]] })).toThrow(/test-stars: point 0/);
   expect(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, colorCss: 'gold' } })).toThrow(/test-stars: catalogue point appearance/);
   expect(() => parseCataloguePoints({ ...bank, points: [] })).toThrow(/test-stars: a catalogue point bank holds/);
+  const { spread: _spread, ...unspread } = bank;
+  expect(() => parseCataloguePoints(unspread)).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread must be .* got undefined/);
+  expect(() => parseCataloguePoints({ ...bank, spread: { normal: [1, 1, 0], across: 1, along: 0 } })).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread/);
+  expect(() => parseCataloguePoints({ ...bank, spread: { ...bank.spread, across: -1 } })).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread/);
 });
 
 test('a catalogue loads on its first publication and draws every point as the same small dot', async () => {

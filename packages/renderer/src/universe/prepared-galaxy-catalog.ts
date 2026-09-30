@@ -65,8 +65,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   if (new Set(objects.map(object => object.id)).size !== objects.length) throw new TypeError('Prepared catalogue focus identifiers must be unique.');
   const root = document.createElement('div');
   root.className = 'prepared-galaxy-catalog';
-  // Zero-size root at the stage centre, children placed from it: a full-screen box above the globe became a full-screen layer.
-  root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
+  // Zero-size root at the stage centre, children placed from it (world-context.css): a full-screen box above the globe
+  // became a full-screen layer. Dots, apertures and labels keep their fixed look there too; only their place, size, fade
+  // and pointer state are inline.
   host.insertBefore(root, before);
   const picking = screenPicking(pickingHost);
   const fader = createOpacityFader(document.defaultView!, undefined, { hideAtZero: true });
@@ -78,13 +79,13 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     const dot = !isPreparedCluster(object) && !isPreparedNebula(object) ? document.createElement('span') : null;
     if (dot) {
       dot.dataset.galaxyDot = object.id;
-      dot.style.cssText = 'position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:#c2ccd8;opacity:0;visibility:hidden;pointer-events:none';
+      dot.style.cssText = 'opacity:0;visibility:hidden';
       root.append(dot);
     }
     const aperture = isPreparedCluster(object) ? document.createElement('span') : null;
     if (aperture) {
       aperture.dataset.clusterAperture = object.id;
-      aperture.style.cssText = 'position:absolute;left:0;top:0;box-sizing:border-box;border:1px solid #80a1cc;border-radius:50%;opacity:0;visibility:hidden;pointer-events:none';
+      aperture.style.cssText = 'opacity:0;visibility:hidden';
       aperture.title = 'R500 overdensity aperture; not the cluster boundary';
       root.append(aperture);
     }
@@ -96,15 +97,15 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
     label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
-    label.style.cssText = 'position:absolute;left:0;top:0;opacity:0;visibility:hidden;pointer-events:none;cursor:pointer';
+    label.style.cssText = 'opacity:0;visibility:hidden';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
       event.preventDefault(); event.stopPropagation(); onSelect(entry.object);
     };
     label.addEventListener(label.dataset.objectNavigateActivation, activate);
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
+    // A navigable label's pointer cursor follows its data-object-navigate attribute (world-context.css).
     if (navigable) label.setAttribute('role', 'button');
-    label.style.cursor = navigable ? 'pointer' : 'default';
     label.tabIndex = -1;
     // Catalogue-only rows have no prepared scene. Keep their dots, but do not
     // mount inert marker/caption nodes that can resemble a destination.

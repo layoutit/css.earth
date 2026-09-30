@@ -73,8 +73,8 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries, pr
   const document = host.ownerDocument;
   const layer = document.createElement('div');
   layer.className = 'prepared-lens-billboards';
-  // Zero-size root at the stage centre, children placed from it: a full-screen box above the globe became a full-screen layer.
-  layer.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
+  // Zero-size root at the stage centre, children placed from it (volume.css): a full-screen box above the globe became a
+  // full-screen layer.
   host.insertBefore(layer, before);
   // A fixed box, sized once, scaled by its transform: camera motion changes only transform and opacity
   // (docs/performance/motion-freezes-membership.md). Two atlas texels per CSS pixel, the texture rule of
@@ -86,7 +86,8 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries, pr
     node.dataset.lensBillboard = entry.id;
     const column = entry.billboard.cell % atlas.columns, row = Math.floor(entry.billboard.cell / atlas.columns);
     const percent = (index: number, cells: number) => cells > 1 ? `${index / (cells - 1) * 100}%` : '0%';
-    node.style.cssText = `position:absolute;left:0;top:0;width:${box}px;height:${box}px;display:none;pointer-events:none;transform-origin:0 0;background-repeat:no-repeat;` +
+    // The leaf's fixed placement is a volume.css rule; its atlas cell and the atlas-sized box are inline.
+    node.style.cssText = `width:${box}px;height:${box}px;display:none;` +
       `background-size:${atlas.columns * 100}% ${atlas.rows * 100}%;background-position:${percent(column, atlas.columns)} ${percent(row, atlas.rows)}`;
     layer.append(node);
     const bank = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: entry.billboard.radiusUnits,

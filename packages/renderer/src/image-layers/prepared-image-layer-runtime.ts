@@ -10,17 +10,15 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
 }) {
   const document = host.ownerDocument, root = document.createElement('div');
   root.className = 'prepared-image-layer-bank'; root.dataset.imageLayerObject = payload.id;
-  root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+  // The bank fills the universe root; its projections are transparent and their scenes composite once (volume.css).
   const banks = payload.stacks.map(stack => {
     const projection = document.createElement('div'), camera = document.createElement('div');
     const scene = document.createElement('div'), mesh = document.createElement('div');
     projection.className = 'css-volume-projection';
     projection.dataset.imageLayerAxis = stack.axis;
-    projection.style.background = 'transparent';
     projection.style.opacity = '0'; projection.style.visibility = 'hidden';
     camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; mesh.className = 'css-volume-mesh';
-    // Same camera-driven scene as a volume: keep slice raster scales through rotation.
-    scene.style.willChange = 'transform';
+    // Same camera-driven scene as a volume: its will-change keeps slice raster scales through rotation.
     const textures: { element: HTMLElement; path: string }[] = [];
     for (const leaf of stack.leaves) {
       const element = document.createElement('s');
