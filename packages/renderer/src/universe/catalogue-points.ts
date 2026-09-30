@@ -67,7 +67,9 @@ export interface PreparedCataloguePoints {
   readonly id: string;
   readonly frame: DensityVolumeFrame;
   readonly appearance: { readonly colorCss: string; readonly radiusPx: number; readonly opacity: number; readonly palette?: readonly string[];
-    readonly levels?: readonly CataloguePointLevel[] };
+    readonly levels?: readonly CataloguePointLevel[];
+    /** The most of its dots a bank shows on screen at once: past it, an even, stable share of them is drawn. */
+    readonly screenBudget?: number };
   /** Each point's position, and its palette colour when the bank has a palette. */
   readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string }[];
   /** The bank's prepared shape around its origin, written by the bake that published it. */
@@ -82,6 +84,10 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   const frame = parseDensityVolumeFrame(data.frame);
   const appearance = data.appearance as Record<string, unknown> | undefined;
   const colorCss = appearance?.colorCss, radiusPx = appearance?.radiusPx, opacity = appearance?.opacity, palette = appearance?.palette, levels = appearance?.levels;
+  const screenBudget = appearance?.screenBudget;
+  if (screenBudget !== undefined && !(Number.isSafeInteger(screenBudget) && (screenBudget as number) > 0)) {
+    throw new TypeError(`${String(data.id)}: catalogue point screenBudget must be a positive whole number, got ${JSON.stringify(screenBudget)}.`);
+  }
   const hex = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}$/iu.test(value);
   if (!hex(colorCss) || typeof radiusPx !== 'number' || !(radiusPx > 0) ||
       typeof opacity !== 'number' || !(opacity > 0 && opacity <= 1)) throw new TypeError(`${data.id}: catalogue point appearance needs a hex colour, a positive radius and an opacity in (0, 1].`);
@@ -103,7 +109,8 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour });
   });
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
-    ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}) }),
+    ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
+    ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }) }),
     points: Object.freeze(points), spread });
 }
 
@@ -187,8 +194,12 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
           ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
           : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
           screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0));
+        // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count.
+        let share = 1;
+        const budget = bank.appearance.screenBudget;
         const mount = (points: typeof bank.points, count: (total: number) => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
           drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
+          ...(budget === undefined ? {} : { keepFraction: () => share }),
           // A single SVG path unions overlapping subpaths. Preserve per-dot alpha
           // accumulation for translucent banks with the shadow painter.
           paintPalette: [...styles.values()].every(style => style.opacity === 1)
@@ -201,8 +212,11 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
           if (last && last.nearOpacity === nearOpacity) last.points += level.points;
           else parts.push({ start: last ? last.start + last.points : 0, points: level.points, nearOpacity });
         }
-        if (parts.length < 2) runtime = mount(bank.points, total => total);
-        else {
+        const rebudget = (candidates: number) => { if (budget !== undefined) share = candidates > budget ? budget / candidates : 1; };
+        if (parts.length < 2) {
+          const single = mount(bank.points, total => total);
+          runtime = { publish(publication) { single.publish(publication); rebudget(single.stats().candidates); }, destroy: single.destroy };
+        } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
           const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points),
             total => Math.max(0, Math.min(part.points, total - part.start))) }));
@@ -215,6 +229,7 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
               if (part.runtime.root.style.opacity !== opacity) part.runtime.root.style.opacity = opacity;
               part.runtime.publish(publication);
             }
+            rebudget(mounted.reduce((sum, part) => sum + part.runtime.stats().candidates, 0));
           }, destroy() { for (const part of mounted) part.runtime.destroy(); } };
         }
         root.dataset.cataloguePoints = bank.id;

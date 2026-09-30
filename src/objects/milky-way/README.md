@@ -273,9 +273,14 @@ System a sky of stars.
 [`stack-catalogue-points.mts`](../../../packages/bake/cli/stack-catalogue-points.mts) joins them into
 [one bank](source/dots/stack.json) of 32,829 dots. The app draws a growing
 share of it as you zoom in: the galaxy level whole within 10 kpc, then each
-level's dots one at a time as the view narrows past the level's radius. A
-level's edge is never on screen, and a dot you have seen stays while you zoom
-in.
+level's dots one at a time as the view narrows from three times the level's
+radius, so a level's tapered ball of stars fills in as you approach it rather
+than only once you are inside. At most 4,000 of the bank's dots show at once
+(`screenBudget`): past that an even share of the visible dots is drawn, the same
+dots every frame. Along one zoom path from 26,000 ly to 0.7 ly the count on
+screen stayed between 3,100 and 3,800 (a 3,800 budget), where it had swung from
+2,900 to 5,200; closer than about 2,000 ly it stays under the budget, because
+that is all the catalogues hold in view.
 
 **The backing.** An ESA artist's impression of the Milky Way seen from above
 ([recipe](source/backing/recipe.json)) is drawn under the dots as one image

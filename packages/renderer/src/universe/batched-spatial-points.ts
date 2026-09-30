@@ -12,12 +12,15 @@ export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly 
  * Camera motion changes paint but never DOM shape.
  * `drawnCount`, given the camera's distance from the frame origin and its position in the frame, draws only the first
  * points of the list. */
-export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host, before, frame, points, className, stylePoint, drawnCount, paintPalette }: {
+export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host, before, frame, points, className, stylePoint, drawnCount, paintPalette, keepFraction }: {
   host: HTMLElement; before?: Element; frame: DensityVolumeFrame; points: readonly T[]; className: string;
   stylePoint(point: T, distanceUnits: number): BatchedSpatialPointStyle | null;
   drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
   /** Fixed prepared colours use retained circular SVG paths instead of box shadows. */
   paintPalette?: readonly string[];
+  /** The share of visible points to draw: each point keeps its own fixed rank, so a smaller share drops the same points
+   * every frame and nothing flickers. `stats().candidates` counts the visible points before it applies. */
+  keepFraction?(): number;
 }) {
   const root = host.ownerDocument.createElement('div'); root.className = className; root.ariaHidden = 'true';
   Object.assign(root.style,{position:'absolute',inset:'0',overflow:'hidden',pointerEvents:'none'});
@@ -29,7 +32,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
   let previousCamera: number[] = [], destroyed = false;
   const residentElements = 1 + (pathPaint ? pathPaint.residentElements : nodes.length);
   const publishedShadows = nodes.map(() => '');
-  let last={visiblePoints:0,residentElements,publishMs:0};
+  let last={visiblePoints:0,candidates:0,residentElements,publishMs:0};
   const publish = ({world,viewport}: VolumeCameraPublication) => {
     if (destroyed) return;
     const started=performance.now();
@@ -38,7 +41,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     const camera=[...local.positionUnits,...local.orientationXyzw,viewport.focalPixels,...viewport.principalOffsetPixels,viewport.widthPixels??0,viewport.heightPixels??0];
     if(camera.length===previousCamera.length && camera.every((value,i)=>value===previousCamera[i]))return;
     previousCamera=camera;
-    let visible = 0;
+    let visible = 0, candidates = 0;
+    const keep = keepFraction ? Math.max(0, Math.min(1, keepFraction())) : 1;
     const shadows: string[][]=nodes.map(()=>[]);
     pathPaint?.begin(viewport);
     const count = drawnCount ? Math.max(0, Math.min(points.length, Math.round(drawnCount(Math.hypot(...local.positionUnits), local.positionUnits)))) : points.length;
@@ -52,6 +56,9 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
       if(!style || !(style.opacity>0) || !(style.radiusPx>0))return;
       const margin=Math.max(2,style.radiusPx);
       if(Math.abs(sx)>(viewport.widthPixels??Infinity)/2+margin || Math.abs(sy)>(viewport.heightPixels??Infinity)/2+margin)return;
+      candidates++;
+      // A fixed low-discrepancy rank per point: the kept share is spread evenly and stable from frame to frame.
+      if(keep<1 && (index*0.6180339887498949)%1>=keep)return;
       const opacity=Math.max(0,Math.min(255,Math.round(style.opacity*255))).toString(16).padStart(2,'0');
       const spread=Math.max(0,style.radiusPx-.5);
       if (pathPaint) pathPaint.point(sx, sy, Math.max(.5, style.radiusPx), `${style.colorCss}${opacity}`);
@@ -62,7 +69,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     nodes.forEach((node,index)=>{const shadow=shadows[index]!.join(',')||'none';
       if(publishedShadows[index]!==shadow){node.style.boxShadow=shadow;publishedShadows[index]=shadow;}});
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
-    last={visiblePoints:visible,residentElements,publishMs:performance.now()-started};
+    last={visiblePoints:visible,candidates,residentElements,publishMs:performance.now()-started};
   };
   return Object.freeze({root,nodes:Object.freeze(nodes),publish,stats:()=>Object.freeze({...last}),destroy(){if(destroyed)return;destroyed=true;root.remove();}});
 }

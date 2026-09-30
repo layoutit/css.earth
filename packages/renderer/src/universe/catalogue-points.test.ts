@@ -125,6 +125,30 @@ test('a level with a near opacity draws as its own part and dims to it as the in
   }
 });
 
+test('a screen budget draws an even, stable share of the visible dots and refuses a bad budget', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  // 1,000 dots spread in front of the camera, all on screen; the budget keeps about 250 of them.
+  const points = Array.from({ length: 1000 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
+  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250 } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (x: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
+    pose: { positionM: [x, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const drawn = () => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
+  field.publish(at(0)); await new Promise(resolve => setTimeout(resolve, 0));
+  field.publish(at(0.001)); field.publish(at(0.002));
+  expect(drawn(), 'the first frame counts, the next ones keep a quarter').toBeGreaterThan(200);
+  expect(drawn()).toBeLessThan(300);
+  const kept = drawn();
+  field.publish(at(0.003));
+  expect(drawn(), 'the same dots stay as the camera moves').toBe(kept);
+  field.destroy();
+  for (const screenBudget of [0, 1.5, -3]) {
+    expect(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget } }))
+      .toThrow(`test-stars: catalogue point screenBudget must be a positive whole number, got ${screenBudget}.`);
+  }
+});
+
 test('zooming out draws a shrinking prefix of the catalogue', async () => {
   const { drawnPointCount } = await import('./catalogue-points.js');
   const kpc = 3.0856775814913673e19;
