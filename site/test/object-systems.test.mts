@@ -74,7 +74,7 @@ test('a plan without prepared members reads them from its own orbit graph', () =
   const plan = { ...APPLICATION_WORLD_CONTEXT, bodies: APPLICATION_WORLD_CONTEXT.bodies.filter(body => body.id !== 'wasp-43b') };
   assert.deepEqual(planetarySystems(SCENE_OBJECTS, plan, SYSTEM_FRAMING_RADII).find(system => system.id === 'wasp-43')?.memberIds, []);
   // The Sun made to orbit the Earth closes every Solar System chain into a loop.
-  const cyclic = { ...APPLICATION_WORLD_CONTEXT, orbitCenters: { ...APPLICATION_WORLD_CONTEXT.orbitCenters, sun: { centerBodyId: 'earth' } } } as typeof APPLICATION_WORLD_CONTEXT;
+  const cyclic = { ...APPLICATION_WORLD_CONTEXT, orbitCenters: { ...APPLICATION_WORLD_CONTEXT.orbitCenters, sun: { positionM: [0, 0, 0] as const, centerBodyId: 'earth' } } };
   assert.throws(() => planetarySystemMembers(cyclic), /has a cyclic orbit chain/);
 });
 

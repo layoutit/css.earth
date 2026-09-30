@@ -154,7 +154,8 @@ function matchesSelector(element: FakeElement | null, steps: readonly SelectorSt
   return false;
 }
 /** The value `property` (camelCase) takes on `element`: inline first, then world-context.css by specificity and order. */
-function declared(element: FakeElement, property: string): string {
+function declared(element: FakeElement | HTMLElement, property: string): string {
+  if (!(element instanceof FakeElement)) throw new TypeError(`declared() reads the test's fake elements, not ${String(element)}.`);
   const inline = element.style[property];
   if (typeof inline === 'string' && inline !== '') return inline;
   const winner = worldContextRules.filter(rule => property in rule.declarations && matchesSelector(element, rule.steps))
@@ -1104,8 +1105,8 @@ test('camera updates retain fixed stroke styles and only publish changed orbit p
   const root = mount(1), layer = mounted.get(root)!;
   const orbit = find(root, 'contextOrbit', 'mercury');
   const indicator = find(root, 'contextBody', 'mercury');
-  const orbitWrites = vi.spyOn(orbit.style, 'setProperty');
-  const indicatorWrites = vi.spyOn(indicator.style, 'setProperty');
+  const orbitWrites = vi.spyOn(orbit.style as unknown as CSSStyleDeclaration, 'setProperty');
+  const indicatorWrites = vi.spyOn(indicator.style as unknown as CSSStyleDeclaration, 'setProperty');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20] });

@@ -162,6 +162,9 @@ export interface PreparedPresentationAuditOptions {
   readText?: RuntimeSourceReader;
   readControls?: (path: string) => Promise<unknown>;
 }
+// Leaf box records are per-leaf data (1.35 M across the catalogue); the report counts them.
+const reportedBindings = (bindings: readonly object[]) => bindings.map(binding =>
+  "boxes" in binding && Array.isArray(binding.boxes) ? { ...binding, boxes: binding.boxes.length } : binding);
 export async function auditPreparedPresentations({ root = process.cwd(), objects = preparedPresentationSceneObjects(), strict = true,
   readText = path => readFile(path, "utf8"), readControls = async path => (await import(pathToFileURL(path).href)).objectControls } : PreparedPresentationAuditOptions = {}) {
   const entries = [];
@@ -188,7 +191,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           cameraNodes: definition.tree.nodes.filter(node => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className ?? "")).length,
           sceneNodes: definition.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
           camera: definition.camera,
-          viewBindings: definition.viewBindings, animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
+          viewBindings: reportedBindings(definition.viewBindings), animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
           destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null,
           features: definition.features ? { target: definition.features.target, lensIds: definition.features.lensIds, catalog: definition.features.catalog } : null });
         continue;
@@ -217,7 +220,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
         cameraNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className ?? "")).length,
         sceneNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
         camera: plan.camera,
-        viewBindings: plan.viewBindings, animations: plan.animations.map(({ id, mode, target }) => ({ id, mode, target })),
+        viewBindings: reportedBindings(plan.viewBindings), animations: plan.animations.map(({ id, mode, target }) => ({ id, mode, target })),
         destinations: plan.destinations ? { defaultLens: plan.destinations.defaultLens, catalog: plan.destinations.catalog } : null });
     } catch (error) { entries.push({ id: object.id, complete: false, error: error instanceof Error ? error.message : String(error) }); }
   }

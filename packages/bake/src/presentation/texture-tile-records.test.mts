@@ -40,7 +40,7 @@ const value = (tree: { nodes: readonly { properties: readonly number[] }[]; prop
 
 test('tiled page leaves ship literal values at their initial tile, with one record per texture write', () => {
   const recorded = withTextureTileRecords(variable());
-  assert.deepEqual(recorded.textureLevels.tileLeaves, [
+  assert.deepEqual(Reflect.get(recorded.textureLevels, 'tileLeaves'), [
     { target: 1, name: '--page-0', unit: -1, width: 168, initial: { x: 168, y: 0, scale: 7 }, leaves: [[2, 0.25, 0.25], [5, 0.25, 42]] },
     { target: 3, name: '--page-0', unit: -1, width: 168, leaves: [[4, 84.0625, 0.25]] },
   ]);
@@ -61,7 +61,7 @@ test('the inverse restores the variable form the bindings measure, and records a
   const recorded = withTextureTileRecords(variable());
   const restored = withoutTextureTileRecords(recorded);
   const original = variable().tree;
-  assert.equal(restored.textureLevels.tileLeaves, undefined);
+  assert.equal(Reflect.get(restored.textureLevels, 'tileLeaves'), undefined);
   for (const node of [2, 4, 5]) for (const name of ['backgroundPosition', 'backgroundSize'])
     assert.equal(value(restored.tree, node, name), value(original, node, name), `node ${node} ${name}`);
   for (const [name, expected] of textureTileVariables('--page-0', { x: 168, y: 0, scale: 7 })) assert.equal(value(restored.tree, 1, name), expected);
