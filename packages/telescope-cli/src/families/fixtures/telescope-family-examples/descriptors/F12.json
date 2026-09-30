@@ -5,7 +5,7 @@
     "target": "betelgeuse",
     "acquisition": {
       "kind": "repository",
-      "identity": "../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits"
+      "identity": "../../../../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits"
     },
     "producingRecord": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
     "sourceClassifications": [
@@ -29,7 +29,7 @@
   "members": [
     {
       "id": "oifits",
-      "path": "../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+      "path": "../../../../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
       "role": "science",
       "mediaType": "application/fits"
     }
