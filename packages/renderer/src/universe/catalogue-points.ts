@@ -213,7 +213,8 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
           screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0));
         // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count. An inner
         // level with its own budget moves the bank's to it as the level appears, evenly in the logarithm of the half-width.
-        let share = 1;
+        // The levels spend it in order, outermost first: an arriving level takes what the ones already on screen leave, so
+        // zooming in never thins the dots the view is already steered by.
         const budget = bank.appearance.screenBudget;
         const budgetAt = (distanceUnits: number) => {
           let value = budget!;
@@ -228,31 +229,33 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
         };
         const distanceOf = (publication: VolumeCameraPublication) =>
           Math.hypot(...publication.world.pose.positionM.map((value, axis) => value - bank.frame.originM[axis]!)) / bank.frame.metersPerUnit;
-        const mount = (points: typeof bank.points, count: (total: number) => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
+        const mount = (points: typeof bank.points, count: (total: number) => number, share: () => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
           drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
-          ...(budget === undefined ? {} : { keepFraction: () => share }),
-          // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up.
-          paintPalette: [...styles.values()].map(pointPaint),
+          ...(budget === undefined ? {} : { keepFraction: share }),
+          // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
+          // keeps a path only for the colours its own dots use.
+          paintPalette: [...new Set(points.map(point => point.colorCss))].map(colour => pointPaint(styles.get(colour)!)),
           className: `catalogue-points-${bank.id}`, stylePoint: point => styles.get(point.colorCss)! });
-        // Consecutive levels that share a near opacity draw as one part, so a part can dim as the innermost level fills.
-        const levels = bank.appearance.levels ?? [], parts: { start: number; points: number; nearOpacity: number }[] = [];
-        for (const level of levels) {
-          const nearOpacity = level.nearOpacity ?? 1, last = parts[parts.length - 1];
-          if (last && last.nearOpacity === nearOpacity) last.points += level.points;
-          else parts.push({ start: last ? last.start + last.points : 0, points: level.points, nearOpacity });
-        }
-        const rebudget = (candidates: number, distanceUnits: number) => {
+        // Each level draws as its own part: it dims to its near opacity as the innermost level fills, and takes its share
+        // of the budget after the levels outside it.
+        const levels = bank.appearance.levels ?? [];
+        let start = 0;
+        const parts = levels.map(level => { const part = { start, points: level.points, nearOpacity: level.nearOpacity ?? 1, share: 1 }; start += level.points; return part; });
+        const rebudget = (candidates: readonly number[], distanceUnits: number, shares: { share: number }[]) => {
           if (budget === undefined) return;
-          const limit = budgetAt(distanceUnits);
-          share = candidates > limit ? limit / candidates : 1;
+          let left = budgetAt(distanceUnits);
+          candidates.forEach((count, index) => {
+            shares[index]!.share = count > left ? Math.max(0, left) / count : 1;
+            left -= count * shares[index]!.share;
+          });
         };
         if (parts.length < 2) {
-          const single = mount(bank.points, total => total);
-          runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget(single.stats().candidates, distanceOf(publication)); }, destroy: single.destroy };
+          const whole = { share: 1 }, single = mount(bank.points, total => total, () => whole.share);
+          runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
           const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points),
-            total => Math.max(0, Math.min(part.points, total - part.start))) }));
+            total => Math.max(0, Math.min(part.points, total - part.start)), () => part.share) }));
           runtime = { layers: mounted.map(part => part.runtime.root), publish(publication) {
             const distanceUnits = distanceOf(publication);
             const [from, to] = innermost.appearUnits ?? [1, 1];
@@ -262,7 +265,7 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
               if (part.runtime.root.style.opacity !== opacity) part.runtime.root.style.opacity = opacity;
               part.runtime.publish(publication);
             }
-            rebudget(mounted.reduce((sum, part) => sum + part.runtime.stats().candidates, 0), distanceUnits);
+            rebudget(mounted.map(part => part.runtime.stats().candidates), distanceUnits, parts);
           }, destroy() { for (const part of mounted) part.runtime.destroy(); } };
         }
         root.dataset.cataloguePoints = bank.id;

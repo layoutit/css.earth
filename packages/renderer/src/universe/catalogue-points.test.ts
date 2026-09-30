@@ -111,13 +111,13 @@ test('a level with a near opacity draws as its own part and dims to it as the in
     pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   field.publish(at(1)); await new Promise(resolve => setTimeout(resolve, 0)); field.publish(at(1));
   const parts = [...field.root.children] as HTMLElement[];
-  expect(parts, 'the dimmed level and the two that share full opacity').toHaveLength(2);
+  expect(parts, 'one part per level').toHaveLength(3);
   expect(parts[0]!.style.opacity, 'before the innermost level appears').toBe('1');
   const halfWidthPerDistance = Math.hypot(1000, 800) / 200;
   field.publish(at(Math.sqrt(.01) / halfWidthPerDistance));
   expect(Number(parts[0]!.style.opacity), 'halfway through its window in the logarithm').toBeCloseTo(.75, 12);
   field.publish(at(.001));
-  expect(parts[0]!.style.opacity).toBe('0.5'); expect(parts[1]!.style.opacity).toBe('1');
+  expect(parts.map(part => part.style.opacity)).toEqual(['0.5', '1', '1']);
   field.destroy();
   for (const nearOpacity of [0, 1.5]) {
     expect(() => parseCataloguePoints({ ...stacked, appearance: { ...stacked.appearance, levels: [{ ...stacked.appearance.levels[0], nearOpacity }, ...stacked.appearance.levels.slice(1)] } }))
@@ -184,12 +184,14 @@ test('dot layers switching on show one a frame, so their first paints never shar
   field.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 1] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   await new Promise(resolve => setTimeout(resolve, 0));
   const layers = [...field.root.children] as HTMLElement[];
-  expect(layers).toHaveLength(2);
+  expect(layers).toHaveLength(3);
   const hidden = () => layers.filter(layer => layer.style.visibility === 'hidden').length;
-  expect(hidden()).toBe(2);
+  expect(hidden()).toBe(3);
   frames.shift()!(0);
-  expect(hidden()).toBe(1);
+  expect(hidden()).toBe(2);
   frames.shift()!(16);
+  expect(hidden()).toBe(1);
+  frames.shift()!(32);
   expect(hidden()).toBe(0);
   field.destroy();
 });
@@ -218,4 +220,24 @@ test('an inner level with its own screen budget moves the bank\'s to it as the l
     .toThrow('test-stars: a level\'s screenBudget moves the bank\'s, so the bank needs a screenBudget too.');
   expect(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, levels: [{ ...levels[0], screenBudget: 10 }, levels[1]] } }))
     .toThrow('test-stars: level 0 screenBudget must be a positive whole number on an inner level, got 10.');
+});
+
+test('an arriving level spends what the budget leaves, never thinning the levels already on screen', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  // 200 outer dots and 1,000 inner ones, all on screen; a budget of 500 keeps every outer dot and 300 inner ones.
+  const points = Array.from({ length: 1200 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
+  const levels = [{ points: 200, fullDetailUnits: 100 }, { points: 1000, appearUnits: [0.64, 0.064] }];
+  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 500, levels } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
+    pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const drawn = (part: Element) => [...part.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
+  field.publish(at(0.05)); await new Promise(resolve => setTimeout(resolve, 0));
+  field.publish(at(0.05)); field.publish(at(0.050005)); await new Promise(resolve => setTimeout(resolve, 200));
+  const [outer, inner] = [...field.root.children];
+  expect(drawn(outer!), 'every outer dot').toBe(200);
+  expect(drawn(inner!)).toBeGreaterThan(240);
+  expect(drawn(inner!)).toBeLessThan(360);
+  field.destroy();
 });
