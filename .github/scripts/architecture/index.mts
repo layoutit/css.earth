@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /** Layer rules and the folder dependency map. CI runs the check in the Contract lint job, so `pnpm check:pr` (alias `pnpm check:ci`) runs it too.
  *
- *   pnpm check:architecture                     fail if a change adds a folder cycle edge or a forbidden import, or breaks a
+ *   pnpm check:architecture                     fail if a change adds a folder/package cycle or a forbidden import, or breaks a
  *                                               repository rule (repository-rules.mts; `pnpm check:nebula-boundaries` is an alias)
  *   pnpm check:architecture --update-baseline   record the current state as .github/scripts/architecture/baseline.json
  *   pnpm arch:map                               write the JSON views to output/architecture/
  *
+ * Package-only and application-entry layers have no baseline: every finding fails.
  * The check is a ratchet: existing debt is recorded in the baseline, so it is visible without blocking
  * work, and a change may only keep or reduce it. See CONTRIBUTING.md, "Check your change". */
 import { existsSync } from 'node:fs';
