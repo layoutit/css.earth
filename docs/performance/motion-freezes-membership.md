@@ -77,7 +77,7 @@ These change paint every frame on purpose, and each has a budget:
 | Exception | What changes | Budget | Why it stays |
 | --- | --- | --- | --- |
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
-| Batched star points (`universe/batched-spatial-points.ts`) | SVG circle paths for opaque catalogue palettes; `box-shadow` for translucent or distance-dependent stellar photometry | One retained path per prepared colour, or 8 shadow nodes | Camera motion changes paint, never DOM shape; catalogue dots avoid the native shadow renderer |
+| Batched star points (`universe/batched-spatial-points.ts`) | SVG circle paths, one per prepared paint colour with its alpha byte | One retained path per colour | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 
