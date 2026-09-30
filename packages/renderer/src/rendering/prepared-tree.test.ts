@@ -155,11 +155,12 @@ test('adoption builds a hidden subtree the server omitted, and refuses a partial
     return { stage, nodes };
   };
   const whole = initial(3);
-  const adopted = adoptPreparedTree(tree, whole.stage as unknown as HTMLElement, () => {}, new Set([2]));
+  // Node 2's subtree is hidden: its descendants are the omitted nodes.
+  const adopted = adoptPreparedTree(tree, whole.stage as unknown as HTMLElement, () => {}, new Set([3, 4]));
   expect(adopted?.nodes.slice(0, 3)).toEqual(whole.nodes);
   expect(whole.nodes[2].children).toEqual([adopted?.nodes[3]]);
   expect(adopted?.nodes[3].children).toEqual([adopted?.nodes[4]]);
   // Without the hidden declaration, or with the subtree cut part-way, the initial scene stays unclaimed.
   expect(() => adoptPreparedTree(tree, initial(3).stage as unknown as HTMLElement, () => {})).toThrow('Initial prepared tree');
-  expect(() => adoptPreparedTree(tree, initial(4).stage as unknown as HTMLElement, () => {}, new Set([2]))).toThrow('Initial prepared tree');
+  expect(() => adoptPreparedTree(tree, initial(4).stage as unknown as HTMLElement, () => {}, new Set([3, 4]))).toThrow('Initial prepared tree');
 });
