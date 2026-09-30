@@ -193,3 +193,29 @@ test('dot layers switching on show one a frame, so their first paints never shar
   expect(hidden()).toBe(0);
   field.destroy();
 });
+
+test('an inner level with its own screen budget moves the bank\'s to it as the level appears', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  // 1,000 dots in the outer level and one in the inner level, all on screen; 250 at most from far, 750 once inside.
+  const points = Array.from({ length: 1001 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
+  const levels = [{ points: 1000, fullDetailUnits: 100 }, { points: 1, appearUnits: [0.64, 0.064], screenBudget: 750 }];
+  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250, levels } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
+  // The view's half-width at the origin is 0.64 times the camera's distance.
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
+    pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const drawn = () => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
+  const settle = async (z: number) => { field.publish(at(z)); field.publish(at(z * 1.0001)); await new Promise(resolve => setTimeout(resolve, 200)); return drawn(); };
+  field.publish(at(5)); await new Promise(resolve => setTimeout(resolve, 0));
+  const far = await settle(5), inside = await settle(0.05);
+  expect(far, 'the bank\'s budget before the level appears').toBeGreaterThan(200);
+  expect(far).toBeLessThan(300);
+  expect(inside, 'the level\'s once it is whole').toBeGreaterThan(650);
+  expect(inside).toBeLessThan(850);
+  field.destroy();
+  expect(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget: undefined } }))
+    .toThrow('test-stars: a level\'s screenBudget moves the bank\'s, so the bank needs a screenBudget too.');
+  expect(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, levels: [{ ...levels[0], screenBudget: 10 }, levels[1]] } }))
+    .toThrow('test-stars: level 0 screenBudget must be a positive whole number on an inner level, got 10.');
+});
