@@ -34,8 +34,9 @@ function createFrameClock(window: OpacityWindow) {
   const schedule = () => {
     const needed = callbacks.size > 0 || dirty.size > 0 || active.size > 0;
     if (presenting) return;
-    if (needed) frame ??= window.requestAnimationFrame(tick);
-    else if (frame !== null) { window.cancelAnimationFrame(frame); frame = null; }
+    // A window that has lost its frames (a test torn down) schedules nothing rather than throwing.
+    if (needed) { if (frame === null && typeof window.requestAnimationFrame === 'function') frame = window.requestAnimationFrame(tick); }
+    else if (frame !== null) { if (typeof window.cancelAnimationFrame === 'function') window.cancelAnimationFrame(frame); frame = null; }
   };
   const flush = (advance = false) => {
     // A setter publishes dirty state only. Advancing unrelated active fades
