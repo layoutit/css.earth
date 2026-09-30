@@ -1,0 +1,65 @@
+{
+  "id": "bilicki-2016-wisescos",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WISE x SuperCOSMOS photometric redshift catalog (WISExSCOSPZ)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/0067-0049/225/1/5"
+    },
+    {
+      "type": "arxiv",
+      "value": "1607.01182"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0067-0049/225/1/5",
+      "label": "Bilicki et al. (2016), ApJS 225, 5"
+    },
+    {
+      "role": "archive",
+      "url": "http://ssa.roe.ac.uk/WISExSCOS.html",
+      "label": "SuperCOSMOS Science Archive, WFAU"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "http://ssa.roe.ac.uk/WISExSCOS.html",
+      "checkedOn": "2026-09-30",
+      "locator": "wiseScosPhotoz160708.csv.gz (1,709,149,603 bytes, last modified 2026-02-24): about 18.5 million galaxies with wiseID, ra, dec, extinction-corrected R (rCalCorr) and bias-corrected photometric redshift (zPhoto_Corr); sigma_z/(1+z) = 0.033."
+    }
+  ],
+  "creators": [
+    "Maciej Bilicki",
+    "John A. Peacock",
+    "Thomas H. Jarrett",
+    "Michelle E. Cluver",
+    "Natasha Maddox",
+    "Michael J. I. Brown",
+    "Edward N. Taylor",
+    "Nigel C. Hambly",
+    "Aurelio Solarz",
+    "Benne W. Holwerda",
+    "Ivan Baldry",
+    "Jon Loveday",
+    "Amanda Moffett",
+    "Andrew M. Hopkins",
+    "Simon P. Driver",
+    "Mehmet Alpaslan",
+    "Joss Bland-Hawthorn"
+  ],
+  "publisher": "ApJS 225, 5; Wide Field Astronomy Unit, University of Edinburgh",
+  "publicationDate": "2016",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Bilicki et al. (2016), ApJS 225, 5, and acknowledge the Wide Field Astronomy Unit (WFAU).",
+      "scope": "WISE x SuperCOSMOS galaxies",
+      "evidence": "http://ssa.roe.ac.uk/WISExSCOS.html"
+    }
+  ]
+}

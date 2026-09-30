@@ -1,9 +1,10 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "galaxies-20mpc",
-  "meaning": "A nested level of galaxies around the Milky Way, out to 20 Mpc: the galaxies it adds to the levels around it bring it to its own even density, so zooming in never empties the view. Each dot is one galaxy at its measured distance, in the colour of its morphological type.",
+  "meaning": "A nested level of Cosmicflows-4 and 2MRS galaxies around the Milky Way, out to 20 Mpc: the galaxies it adds to the levels around it bring it to its own even density, so zooming in never empties the view. Each dot is one galaxy at its measured distance, in the colour of its morphological type.",
   "banks": [
-    "galaxies"
+    "galaxies",
+    "galaxies-2mrs"
   ],
   "densityCap": {
     "perMpc3": 0.025,
@@ -11,7 +12,7 @@
       10,
       20
     ],
-    "basis": "Presentation choice: 25 per 1,000 Mpc\u00b3, under the 27 CF4 holds from 10 to 20 Mpc. It is counted in shells 1 Mpc wide around the Sun, so only the catalogue's fall-off with distance is evened and a cluster keeps its contrast with the space around it.",
+    "basis": "Presentation choice: 25 per 1,000 Mpc³, under the 27 CF4 holds from 10 to 20 Mpc. It is counted in shells 1 Mpc wide around the Sun, so only the catalogue's fall-off with distance is evened and a cluster keeps its contrast with the space around it.",
     "shellMpc": 1,
     "groupsFirst": {
       "background": 1,
