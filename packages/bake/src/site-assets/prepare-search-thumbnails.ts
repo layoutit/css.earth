@@ -2,8 +2,9 @@
 // `public/navigation/search/<id>@2x.webp`: 40 CSS px at the one prepared density. Every scene object whose navigation
 // marker has a context sprite (`public/navigation/<id>-context.webp`, up to about 1400 px) previews from that sprite; a
 // sprite photographed on black sky is cut out along the body's outline. A search list decodes dozens of these; the full
-// images would cost megabytes each. The previews are committed beside their sprites: `prepare-navigation` and the
-// shape-material refresh remake them after drawing a sprite, so no build or deploy decodes a sprite.
+// images would cost megabytes each. Featured stars reuse their published arrival images, including prepared limb shading.
+// The previews are committed beside their sprites: `prepare-navigation` and the shape-material refresh remake them
+// after drawing a sprite, so no build or deploy decodes a sprite.
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { availableParallelism } from 'node:os';
@@ -11,6 +12,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { isRecord } from '@cssearth/core';
+import { parseObjectDiscovery } from '@cssearth/objects';
 
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
 const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
@@ -72,7 +74,30 @@ async function cutOut(image: Buffer) {
   return sharp(rgba, { raw: { width: full.width!, height: full.height!, channels: 4 } }).extract(region);
 }
 
+/** Featured stars already publish an arrival image with their prepared photospheric colour and limb law.
+ * Reuse those pixels for the sidebar and search, rather than the flat catalogue context disc. */
+async function featuredStarPreviews(projectRoot: string): Promise<ReadonlyMap<string, string>> {
+  const module: unknown = await import(pathToFileURL(resolve(projectRoot, 'site/prepared-catalogue.mjs')).href);
+  if (!isRecord(module) || !Array.isArray(module.CATALOGUE_ENTRIES)) throw new TypeError('Invalid prepared catalogue.');
+  const previews = new Map<string, string>();
+  for (const entry of module.CATALOGUE_ENTRIES) {
+    if (!isRecord(entry)) throw new TypeError('Invalid prepared catalogue entry.');
+    if (entry.kind !== 'scene') continue;
+    if (!isRecord(entry.descriptor) || !isRecord(entry.descriptor.properties) || !isRecord(entry.descriptor.properties.catalog))
+      throw new TypeError('Invalid scene catalogue descriptor.');
+    if (entry.descriptor.properties.catalog.classification !== 'star') continue;
+    const discovery = parseObjectDiscovery(entry.discovery), arrival = discovery.arrival?.billboard;
+    if (!discovery.featured || !arrival) continue;
+    const id = entry.descriptor.id;
+    if (typeof id !== 'string' || !/^[a-z0-9-]+$/u.test(id) || !arrival.url.startsWith(`/scenes/${id}/`))
+      throw new TypeError('Invalid local stellar arrival image.');
+    previews.set(id, arrival.url);
+  }
+  return previews;
+}
+
 export async function prepareSearchThumbnails(projectRoot = root) {
+  const stellarPreviews = await featuredStarPreviews(projectRoot);
   const { PREPARED_NAVIGATION_MARKERS } = await import(pathToFileURL(resolve(projectRoot, 'site/prepared-navigation-markers.mjs')).href) as
     { PREPARED_NAVIGATION_MARKERS: Record<string, { context?: { url: string } }> };
   const output = resolve(projectRoot, 'public/navigation/search');
@@ -84,10 +109,12 @@ export async function prepareSearchThumbnails(projectRoot = root) {
     const [id, marker] = markers[next++]!;
     if (!marker.context) continue;
     if (!/^\/navigation\/[a-z0-9-]+-context\.webp$/u.test(marker.context.url)) throw new TypeError(`${id}: unexpected context sprite ${marker.context.url}`);
-    const spritePath = resolve(projectRoot, 'public', marker.context.url.slice(1)), path = resolve(output, `${id}@2x.webp`);
-    // A preview older than its sprite is rebuilt; one newer than it is current, so a run decodes only the sprites that were redrawn.
+    const stellarPreview = stellarPreviews.get(id);
+    const spritePath = resolve(projectRoot, 'public', (stellarPreview ?? marker.context.url).slice(1)), path = resolve(output, `${id}@2x.webp`);
+    // Context previews newer than their sprite are current. The small featured-star set compares arrival-derived bytes
+    // each time, so an older restored arrival can replace a newer flat-disc preview without a stale cache hit.
     const [spriteStat, previewStat] = await Promise.all([stat(spritePath), stat(path).catch(() => null)]);
-    if (previewStat && previewStat.mtimeMs >= spriteStat.mtimeMs) { current++; continue; }
+    if (!stellarPreview && previewStat && previewStat.mtimeMs >= spriteStat.mtimeMs) { current++; continue; }
     const sprite = await readFile(spritePath);
     const { data: corner } = await sharp(sprite).ensureAlpha().extract({ left: 0, top: 0, width: 1, height: 1 }).raw().toBuffer({ resolveWithObject: true });
     const source = corner[3] === 255 ? await cutOut(sprite) : sharp(sprite);

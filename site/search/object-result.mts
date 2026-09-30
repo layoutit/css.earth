@@ -6,11 +6,15 @@ const PREVIEW_PIXELS = 40;
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS)
   .map(({ presentation }) => presentation.size));
 
-export type ObjectResultSelection = Readonly<{ kind: CatalogueRow['kind']; id: string }> | null;
+/** Inline overview rows have no observer distance; every row uses the same retained view. */
+export type ObjectResultEntry = Omit<CatalogueRow, 'kind' | 'detail'> & {
+  readonly kind: CatalogueRow['kind'] | 'overview'; readonly detail?: CatalogueRow['detail'];
+};
+export type ObjectResultSelection = Readonly<{ kind: ObjectResultEntry['kind']; id: string }> | null;
 
 /** One retained row component for search results and server-rendered system members. */
 export interface ObjectResultView {
-  readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; entry: CatalogueRow | null;
+  readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; entry: ObjectResultEntry | null;
   readonly icon: HTMLSpanElement; readonly name: HTMLSpanElement; readonly detail: HTMLSpanElement;
   readonly kind: HTMLSpanElement; readonly value: HTMLSpanElement; readonly unit: HTMLSpanElement;
 }
@@ -20,7 +24,7 @@ export function searchPreviewUrl(objectId: string): string | null {
   return PREPARED_NAVIGATION_MARKERS[objectId]?.context ? `/navigation/search/${objectId}@2x.webp` : null;
 }
 
-function renderMarker(documentTarget: Document, entry: CatalogueRow) {
+function renderMarker(documentTarget: Document, entry: ObjectResultEntry) {
   const preview = entry.marker.kind === 'scene' ? searchPreviewUrl(entry.marker.id) : null;
   if (preview) {
     const image = documentTarget.createElement('img');
@@ -90,7 +94,7 @@ export function createObjectResultView(documentTarget: Document): ObjectResultVi
   return { item, anchor, index: -1, entry: null, icon, name, detail, kind, value, unit };
 }
 
-export function bindObjectResultView(documentTarget: Document, view: ObjectResultView, entry: CatalogueRow, selection: ObjectResultSelection) {
+export function bindObjectResultView(documentTarget: Document, view: ObjectResultView, entry: ObjectResultEntry, selection: ObjectResultSelection) {
   const { anchor, icon, name, detail } = view;
   anchor.href = entry.route;
   anchor.dataset.sourceSubject = entry.source.subject;
@@ -108,16 +112,21 @@ export function bindObjectResultView(documentTarget: Document, view: ObjectResul
   view.entry = entry;
   icon.replaceChildren(renderMarker(documentTarget, entry));
   name.textContent = entry.name;
-  detail.title = entry.detail.title;
-  detail.setAttribute('aria-label', entry.detail.ariaLabel);
+  if (entry.detail) {
+    detail.title = entry.detail.title;
+    detail.setAttribute('aria-label', entry.detail.ariaLabel);
+  } else {
+    detail.removeAttribute('title');
+    detail.removeAttribute('aria-label');
+  }
   // The subtitle: what the object is, then how far it is.
   const { kind, value, unit } = view;
-  kind.textContent = `${entry.classificationName.charAt(0).toLocaleUpperCase('en')}${entry.classificationName.slice(1)} · `;
-  if (entry.detail.value && entry.detail.unit) {
+  kind.textContent = `${entry.classificationName.charAt(0).toLocaleUpperCase('en')}${entry.classificationName.slice(1)}${entry.detail ? ' · ' : ''}`;
+  if (entry.detail?.value && entry.detail.unit) {
     value.textContent = entry.detail.value;
     unit.textContent = entry.detail.unit;
     detail.replaceChildren(kind, value, ' ', unit);
   } else {
-    detail.replaceChildren(kind, entry.detail.text);
+    detail.replaceChildren(kind, entry.detail?.text ?? '');
   }
 }
