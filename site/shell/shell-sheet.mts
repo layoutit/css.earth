@@ -233,10 +233,12 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     settle(states[Math.max(0, Math.min(states.length - 1, states.indexOf(state) + step))] ?? state);
   }, { signal });
 
-  const openSearch = () => {
-    if (!mobile.matches || state === "full") return;
-    searchReturn = state;
-    settle("full");
+  // Typed results take the whole sheet over the keyboard. A pill's results open halfway, so the map above still shows the
+  // category the camera flies to and marks.
+  const openSearch = (height: "full" | "half") => {
+    if (!mobile.matches || state === "full" || state === height) return;
+    searchReturn ??= state;
+    settle(height);
   };
   const leaveSearch = () => {
     if (searchReturn === null) return;
@@ -281,8 +283,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       searchReturn = null;
       settle("peek");
     },
-    followSearch(open: boolean) {
-      if (open) openSearch();
+    followSearch(open: boolean, browsing = false) {
+      if (open) openSearch(browsing ? "half" : "full");
       else leaveSearch();
     },
     destroy() {

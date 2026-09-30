@@ -248,3 +248,14 @@ test('passive maps allow sheet scrolling while sequence controls retain their ge
     controller.destroy();
   }
 });
+
+test('a pill opens its results halfway so the map it frames stays in view; typing then takes the whole sheet', () => {
+  const { document, controller } = mountSheet();
+  assert.equal(document.body.dataset.sheet, 'peek');
+  controller.followSearch(true, true);
+  assert.equal(document.body.dataset.sheet, 'half');
+  controller.followSearch(true);
+  assert.equal(document.body.dataset.sheet, 'full');
+  controller.followSearch(false);
+  assert.equal(document.body.dataset.sheet, 'peek', 'closing returns to where the pill found the sheet');
+});

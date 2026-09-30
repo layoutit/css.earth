@@ -19,8 +19,8 @@ export interface ObjectBrowserOptions {
   onResetDestination?(): void;
   /** A pill was pressed: the scene frames every member of its classification. */
   onFrameCategory?(classification: string): void;
-  /** Search results opened or closed. The mobile sheet follows this state, not the input's own events. */
-  onSearchChange?(open: boolean): void;
+  /** Search results opened or closed, and whether a pill opened them. The mobile sheet follows this state, not the input's own events. */
+  onSearchChange?(open: boolean, browsing: boolean): void;
 }
 
 interface ShownSearch {
@@ -155,6 +155,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     void results.search(query, readIllustrationModels());
     presentEmpty();
   };
+  // Set while a pill opens its results: the mobile sheet then leaves the map in view.
+  let pillPress = false;
   const setOpen = (next: boolean) => {
     if (open === next) return;
     resetResultsScroll();
@@ -172,7 +174,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       shown.query = null;
       markCategory();
     }
-    if (!lifetime.disposed) onSearchChange(next);
+    if (!lifetime.disposed) onSearchChange(next, pillPress);
   };
   // Results open only for a query; an empty one closes them.
   const showResults = () => {
@@ -207,7 +209,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         return;
       }
       search.value = button.dataset.searchQuery ?? "";
-      showResults();
+      pillPress = true;
+      try { showResults(); } finally { pillPress = false; }
       requiredElement(documentTarget, '.object-sidebar').scrollTop = 0;
       const classification = button.dataset.searchClassification;
       if (classification) onFrameCategory(classification);

@@ -143,7 +143,7 @@ export function mountObjectShell({
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId,
       onCategoryChange: value => preferences.set('highlightedClassification', value),
       onResetDestination, onFrameCategory, readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
-      onSearchChange: open => sheet.followSearch(open) }));
+      onSearchChange: (open, browsing) => sheet.followSearch(open, browsing) }));
     lifetime.onDispose(preferences.subscribe(key => {
       if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();
     }));
