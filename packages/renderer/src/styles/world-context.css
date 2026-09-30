@@ -70,7 +70,7 @@
   width: 16px;
   height: 16px;
   transform: scale(1) translate(-50%, -50%);
-  opacity: var(--context-line-alpha, .65);
+  opacity: .65;
 }
 .prepared-world-context [data-context-annotations-animate="true"]::before {
   transition: transform 120ms ease, opacity 120ms ease;
@@ -94,7 +94,7 @@
 }
 .prepared-world-context [data-context-body] > .context-caption::after {
   content: attr(data-context-name);
-  opacity: var(--context-label-alpha, .65);
+  opacity: .65;
 }
 .prepared-world-context .context-flight-caption {
   position: absolute;
@@ -209,7 +209,7 @@
   height: 16px;
   overflow: visible;
   transform: scale(1) translate(-50%, -50%);
-  opacity: var(--context-line-alpha, .65);
+  opacity: .65;
   pointer-events: none;
   visibility: hidden;
 }
@@ -236,3 +236,11 @@
 .prepared-selected-body-label[data-label-case="upper"] {
   text-transform: uppercase;
 }
+
+/* Annotation strength by prepared level (contextAnnotationOpacity in marker-presentation.ts; its test holds every level
+   it returns to a rule here). Last, so they replace the base .65; hover and highlight rules outrank them by specificity. */
+.prepared-world-context [data-context-line-alpha="0.2"]::before,
+.prepared-world-context [data-context-line-alpha="0.2"] > .context-locator { opacity: .2; }
+.prepared-world-context [data-context-line-alpha="0.5"]::before,
+.prepared-world-context [data-context-line-alpha="0.5"] > .context-locator { opacity: .5; }
+.prepared-world-context [data-context-label-alpha="0.5"] > .context-caption::after { opacity: .5; }

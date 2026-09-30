@@ -197,8 +197,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     marker.style.margin = '0';
     marker.style.marginLeft = marker.style.marginTop = '0';
     const baseAlpha = annotationOpacities[body.id] ?? { line: .65, label: .65 };
-    marker.style.setProperty('--context-line-alpha', String(baseAlpha.line));
-    marker.style.setProperty('--context-label-alpha', String(baseAlpha.label));
+    // The body's annotation strength is a prepared level (contextAnnotationOpacity) whose final opacity the stylesheet
+    // holds (world-context.css): an attribute set once, never a variable the ring and caption would resolve.
+    marker.dataset.contextLineAlpha = String(baseAlpha.line);
+    marker.dataset.contextLabelAlpha = String(baseAlpha.label);
     // A bare mover carries the per-frame transform and paint order. The marker,
     // with its ring and caption pseudo-elements and attribute rules, keeps a
     // stable style, so motion restyles one plain leaf instead of three nodes.

@@ -54,7 +54,11 @@ export type PreparedViewBinding = { target: number } & (
   ({ kind: "interior-disc" } & PreparedInteriorDisc) |
   ({ kind: "silhouette-step-property"; property: string; placements?: PreparedTexturePlacements;
     /** Leaf boxes (prepared-leaf-box-blocks.ts): the leaves that share each published step, by block or `property`. */
-    groups?: Readonly<Record<string, readonly number[]>>; groupSizes?: Readonly<Record<string, readonly number[]>> } & PreparedSilhouetteSteps) |
+    groups?: Readonly<Record<string, readonly number[]>>; groupSizes?: Readonly<Record<string, readonly number[]>>;
+    /** The step or outset in force before the camera publishes one. */
+    initial?: string;
+    /** Leaf boxes as prepared records (prepared-leaf-box-direct.ts). */
+    boxes?: readonly import('./prepared-leaf-box-direct.js').PreparedLeafBox[] } & PreparedSilhouetteSteps) |
   { kind: "counter-rotation"; systemTransform: string | null }
 );
 export interface PreparedPresentationDefinition {
@@ -324,7 +328,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   // A leaf box group's step is written on its own leaves; until then they inherit the binding target's initial step.
   // Leaf boxes receive final values, never their prepared variables (prepared-leaf-box-direct.ts); other step
   // properties keep their plain write.
-  const leafBoxes = createLeafBoxWriter(definition.tree, stage?.dataset?.objectId ?? sceneElement.className, nodes, writeStyle);
+  const leafBoxes = createLeafBoxWriter(definition.viewBindings, nodes, writeStyle);
   const readStep = (index: number, property: string) => leafBoxes.owns(index, property) ? leafBoxes.read(index, property) : styleValue(target(index), property);
   const writeStep = (index: number, property: string, value: string) => {
     if (leafBoxes.owns(index, property)) styleWrites += leafBoxes.set(index, property, value);
