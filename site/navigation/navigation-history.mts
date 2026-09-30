@@ -32,9 +32,10 @@ export function navigationHref(windowTarget: Window) {
 }
 
 // On the iPad every URL change through the History API costs 20–35 ms of main-thread time: Safari dispatches a navigate
-// event and re-runs Reader detection over the page (2026-09-30). Every write is held and applied once, after the camera
-// has rested for this long: a handoff in a pinch, a view change in a drag and the writes of one arrival become one.
-const REST_WRITE_MS = 150;
+// event and re-runs Reader detection over the page (2026-09-30). Every write is held and applied once the user has paused
+// for this long: a handoff in a pinch, a view change in a drag and the writes of one arrival become one, and the cost
+// lands in a pause instead of beside the next gesture (150 ms landed between stress gestures on the iPad).
+const REST_WRITE_MS = 1000;
 
 /** Standalone scenes replace the current URL without creating application history entries. */
 export function replaceNavigationUrl(windowTarget: Window, url: string) {

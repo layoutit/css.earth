@@ -128,7 +128,7 @@ test('history written while the camera moves is held and applied once at rest; t
   history.commit('/solar-system/?v=b', { history: 'replace' });
   assert.deepEqual(writes, []);
   assert.equal(navigationHref(windowTarget), 'https://css.earth/solar-system/?v=b', 'the app reads the held URL');
-  motion(false); advance(149);
+  motion(false); advance(999);
   assert.deepEqual(writes, []);
   advance(1);
   assert.deepEqual(writes, [{ kind: 'push', url: '/solar-system/?v=b' }], 'one push for the handoff, with the final view');
@@ -136,7 +136,7 @@ test('history written while the camera moves is held and applied once at rest; t
   // At rest a write still waits the quiet period, in its own task.
   history.commit('/solar-system/?v=c', { history: 'replace' });
   assert.equal(writes.length, 1);
-  advance(150);
+  advance(1000);
   assert.deepEqual(writes.at(-1), { kind: 'replace', url: '/solar-system/?v=c' });
   history.destroy();
 });
