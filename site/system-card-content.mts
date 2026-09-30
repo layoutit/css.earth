@@ -1,3 +1,4 @@
+import { sectionElements, sectionPlaceholder } from '@cssearth/renderer';
 /** Keep one copy of body content while presenting it on the system card, including native responses. */
 export function createSystemCardContent(documentTarget: Document) {
   const groups = [
@@ -8,7 +9,9 @@ export function createSystemCardContent(documentTarget: Document) {
   const entries = groups.flatMap(({ source, target }) => {
     const destination = documentTarget.querySelector<HTMLElement>(target);
     if (!destination) return [];
-    return [...documentTarget.querySelectorAll<HTMLElement>(`.object-information-panel ${source}, ${target} ${source}`)].map(node => {
+    // A detached dataset's details (detached-sections.ts) travel as their template placeholder.
+    const nodes = new Set([...documentTarget.querySelectorAll<HTMLElement>(`.object-information-panel, ${target}`)].flatMap(root => sectionElements(root, source)));
+    return [...nodes].map(node => {
       // Homes survive server serialization, so hydration can return already-moved content in authored order.
       let home = [...documentTarget.querySelectorAll<HTMLElement>('[data-system-content-home]')]
         .find(candidate => candidate.dataset.systemContentHome === node.id);
@@ -16,15 +19,16 @@ export function createSystemCardContent(documentTarget: Document) {
         home = documentTarget.createElement('span'); home.hidden = true;
         home.dataset.systemContentHome = node.id;
         home.toggleAttribute('data-system-content-open', node.hasAttribute('open'));
-        node.before(home);
+        sectionPlaceholder(node).before(home);
       }
       return { node, home, destination };
     });
   });
   const show = (onSystem: boolean) => {
     for (const { node, home, destination } of entries) {
-      if (onSystem) { if (node.parentElement !== destination) destination.append(node); }
-      else if (node.previousElementSibling !== home) home.after(node);
+      const placed = sectionPlaceholder(node);
+      if (onSystem) { if (placed.parentElement !== destination) destination.append(placed); }
+      else if (placed.previousElementSibling !== home) home.after(placed);
       const open = onSystem || home.hasAttribute('data-system-content-open');
       if (node.tagName === 'DETAILS' && node.hasAttribute('open') !== open) node.toggleAttribute('open', open);
     }

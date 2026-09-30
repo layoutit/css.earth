@@ -19,7 +19,7 @@ const job: PagedAssetJob = { mode,
   ...(slice ? { materialSlice: { index: Number(slice.index), count: Number(slice.count) } } : {}) };
 if (job.materialSlice && !(Number.isInteger(job.materialSlice.index) && Number.isInteger(job.materialSlice.count) && job.materialSlice.index >= 0 && job.materialSlice.index < job.materialSlice.count))
   throw new TypeError(`Invalid material slice: ${JSON.stringify(slice)}.`);
-const { config, sourceDirectory, atmosphere, atmosphereModel, raster, attitude, surfaceRasterPlan } = await readPagedEllipsoid(solarGeometry, requireString(data.objectDirectory, 'object directory'));
+const { descriptor, config, sourceDirectory, atmosphere, atmosphereModel, raster, attitude, surfaceRasterPlan } = await readPagedEllipsoid(solarGeometry, requireString(data.objectDirectory, 'object directory'));
 const { assets } = await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory: requireString(data.publicDirectory, 'public directory'),
-  surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude, ...job });
+  surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude, cutaway: Boolean(descriptor.recipe.cutaway), ...job });
 parentPort?.postMessage(assets);

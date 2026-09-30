@@ -26,6 +26,7 @@ const tabs = [{ id: 'bodies', label: 'Celestial bodies' }, ...(solar ? [{ id: 'f
 const rules = informationTabStyle(`${prefix}-information`, tabs.map(tab => ({
   id: `${prefix}-${tab.id}-tab`, panelId: `${prefix}-${tab.id}-content`,
 }))).css;
+import Detached from './Detached.astro';
 ---
 <div data-system-bodies={systemId}>
   <style is:inline set:html={rules} />
@@ -33,8 +34,8 @@ const rules = informationTabStyle(`${prefix}-information`, tabs.map(tab => ({
   <div class="object-results-scroll object-card-tabpanel" id={`${prefix}-bodies-content`} role="region" aria-label={`${system.name} celestial bodies`}>
     <ul class="object-list">{bodies.map(object => <ObjectResult {object} />)}</ul>
   </div>
-  {solar && <div class="object-results-scroll object-card-tabpanel" id={`${prefix}-factsheet-content`} data-solar-system-facts
+  {solar && <Detached detached><div class="object-results-scroll object-card-tabpanel" id={`${prefix}-factsheet-content`} data-solar-system-facts
     data-information-panel="factsheet" data-information-group="solar-system" role="region" aria-label="Factsheet">
     <ObjectFactsheet id={prefix} facts={overviewFacts['solar-system'].facts} embedded />
-  </div>}
+  </div></Detached>}
 </div>

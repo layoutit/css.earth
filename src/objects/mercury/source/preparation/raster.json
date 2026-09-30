@@ -232,32 +232,5 @@
         "photometry/domingue-2016-ks3-749nm.json"
       ]
     }
-  },
-  "interior": {
-    "source": "interior/mercury-structure.json",
-    "surface": "maps/mercury-bdr-global.png",
-    "worldLightDirection": [
-      0.883835,
-      -0.385595,
-      0.264864
-    ],
-    "ambientIntensity": 0.05,
-    "coreNoiseSeed": 71,
-    "width": 1024,
-    "height": 512,
-    "poleTile": 256,
-    "sectionWidth": 2048,
-    "sectionHeight": 2048,
-    "outerOutput": "mercury-interior-outer{suffix}.webp",
-    "outerPolesOutput": "mercury-interior-outer-poles{suffix}.webp",
-    "coreOutput": "mercury-interior-core{suffix}.webp",
-    "corePolesOutput": "mercury-interior-core-poles{suffix}.webp",
-    "sectionOutput": "mercury-interior-section{suffix}.webp",
-    "thumbnail": "mercury-dataset-interior.webp",
-    "metadata": {
-      "schema": "cssmercury-prepared-interior-assets@2"
-    },
-    "outerUnlitOutput": "mercury-interior-outer-unlit{suffix}.webp",
-    "outerUnlitPolesOutput": "mercury-interior-outer-unlit-poles{suffix}.webp"
   }
 }

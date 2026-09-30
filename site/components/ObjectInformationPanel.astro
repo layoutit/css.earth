@@ -21,7 +21,7 @@ const articleUrl = await readObjectArticleUrl(objectId);
 
 <ObjectCard class="object-information-panel" data-card-subject={satelliteSystemFromUrl(Astro.url) ? 'satellite-system' : 'body'}
   data-card-view={satelliteSystemFromUrl(Astro.url) ? 'overview' : undefined}>
-  <SatelliteSystemCard hostId={objectId} />
+  <SatelliteSystemCard hostId={objectId} detached={!satelliteSystemFromUrl(Astro.url)} />
       <ObjectCardHeader {objectId} {title} {introduction} {articleUrl}>
           <ObjectBreadcrumbs {objectId} />
       </ObjectCardHeader>

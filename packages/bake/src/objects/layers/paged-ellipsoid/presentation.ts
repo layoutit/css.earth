@@ -44,7 +44,9 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
     if (!bank) throw new TypeError(`Missing prepared surface bank: ${bankId(dataset,shadows)}`);
     return bank.urls.map((_,i)=>`page:${bankId(dataset,shadows)}:${i}`);
   };
-  const interiorUrls=[...new Set([
+  // The cutaway is parked (no interior dataset): the scene then carries no cutaway nodes or interior textures.
+  const cutawayShown=datasets.controls.some(dataset=>dataset.view==='interior');
+  const interiorUrls=!cutawayShown?[]:[...new Set([
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
     ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(pair=>canonicalPreparedAsset(pair)))];
   const interiorBanks=new Map(datasets.controls.filter(dataset=>dataset.view==='interior').map(dataset=>{
@@ -66,8 +68,8 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
       {key:`default:${id}`,url:canonicalPreparedAsset(plan.material[id].defaultAssets),pool:"default-materials"},
       ...(plan.material[id].floodAssets?[{key:`${id}:flood`,url:canonicalPreparedAsset(plan.material[id].floodAssets),pool:id}]:[]),
       ...plan.material[id].preparedRows.map(row=>({key:`${id}:${row.rowIndex}`,url:canonicalPreparedAsset(row.assets),pool:id}))])];
-  const allLeaves=[...plan.body.bands.flatMap(band=>band.leaves),...plan.interior.outerBodyBands.flatMap(band=>band.leaves),
-    ...plan.interior.shells.flatMap(shell=>shell.leaves),...plan.interior.sectionLeaves,
+  const allLeaves=[...plan.body.bands.flatMap(band=>band.leaves),...!cutawayShown?[]:[...plan.interior.outerBodyBands.flatMap(band=>band.leaves),
+    ...plan.interior.shells.flatMap(shell=>shell.leaves),...plan.interior.sectionLeaves],
     plan.material.atmosphere.leaf];
   const b=createPreparedNodeTree({cssomReads:await prepareCssomDeclarationReads(allLeaves.map(leaf=>leaf.style))});
   const camera=b.element("div","polycss-camera object-render-root",plan.camera.style);
@@ -108,18 +110,18 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
     return resource.url;
   });
   const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,initialUrls,canonicalPreparedAsset(plan.body.assets.poles));
-  const cutaway=b.mesh(`${config.namespace}-cutaway`);
-  b.append(system,cutaway);
+  const cutaway=cutawayShown?b.mesh(`${config.namespace}-cutaway`):null;
+  if(cutaway)b.append(system,cutaway);
   // Inactive datasets own no browser image references. Selection publishes
   // their prepared URLs only after the complete resource demand is decoded.
-  const interior=bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],null);
+  const interior=cutaway?bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],null):{surface:[],polar:[]};
   const interiorTextureNodes: {node: PreparedNode; url: string}[]=[];
-  for(const shell of plan.interior.shells) {
+  if(cutaway)for(const shell of plan.interior.shells) {
     const mesh=b.mesh(`${config.namespace}-interior-shell ${shell.className}`,meshTransform);b.append(cutaway,mesh);
     for(const leaf of shell.leaves) {const node=b.leaf(leaf),url=canonicalPreparedAsset(leaf.asset);node.style.backgroundImage="none";b.append(mesh,node);interiorTextureNodes.push({node,url});}
   }
-  const sections=b.mesh(`${config.namespace}-interior-sections`,meshTransform);b.append(cutaway,sections);
-  for(const leaf of plan.interior.sectionLeaves) {
+  const sections=cutaway?b.mesh(`${config.namespace}-interior-sections`,meshTransform):null;if(cutaway&&sections)b.append(cutaway,sections);
+  if(sections)for(const leaf of plan.interior.sectionLeaves) {
     const node=b.leaf(leaf);node.style.backgroundImage="none";
     if(leaf.backfaceVisible)node.style.backfaceVisibility="visible";b.append(sections,node);
     interiorTextureNodes.push({node,url:canonicalPreparedAsset(leaf.asset)});
@@ -152,7 +154,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
     if (isInterior && !interiorBank) throw new TypeError(`Missing prepared interior bank: ${dataset.id}`);
     const pageWrites=(carriers: readonly PreparedNode[],active: boolean)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
     // Outside the interior view the cutaway is not shown (earth-surfaces.css), so page markup leaves its 500-odd nodes out.
-    return {when:{datasetId:dataset.id,shadows},...(isInterior?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:dataset.maximumZoom,camera:dataset.camera??null},required:[...keys,`poles:${bankId(dataset,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
+    return {when:{datasetId:dataset.id,shadows},...(isInterior||!cutaway?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:dataset.maximumZoom,camera:dataset.camera??null},required:[...keys,`poles:${bankId(dataset,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
         ...(isInterior?interiorTextureNodes.map(({node,url})=>texture(node,'background-image',requireInteriorResource(interiorBank, interiorUrls.indexOf(url)))):[]),
         ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(dataset,shadows)}`)),

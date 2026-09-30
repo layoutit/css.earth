@@ -1,6 +1,6 @@
 import { PREPARED_SURFACE_FEATURES_SCHEMA, featureDiscoveryZoomShare, normalizeSearchText } from './catalog.ts';
 import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan, Vector3 } from './catalog.ts';
-import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand } from './geometry.ts';
+import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand, triaxialSurfacePoint } from './geometry.ts';
 import { unzipMember } from './archive.ts';
 import { surfaceFeatureBankIndex } from '@cssearth/renderer/labels/surface-feature-banks.ts';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
@@ -194,6 +194,10 @@ export interface SurfaceFeaturePreparationContext {
   readonly hitMesh?: { readonly target: number; readonly triangles: readonly (readonly (readonly number[])[])[] };
   /** An ellipsoidal body: map directions are cast onto its rendered surface instead of the reference sphere (ellipsoid.ts). */
   readonly surface?: { readonly onSurface: (direction: Vector3) => Vector3; readonly plan: () => NonNullable<PreparedSurfaceFeaturePlan['surfaceEllipsoidUnits']> };
+  /** A triaxial body drawn without a mesh: its semi-axes in mesh units along the map's prime, east and north axes, the
+   * ones its leaves are built on (`solid-body-surface.ts`). Anchors are cast onto it, and the Gazetteer sphere is compared
+   * with its volume-equivalent radius. */
+  readonly triaxial?: readonly [number, number, number];
 }
 /** A shape-model body anchors on the node its picking mesh names; that node must still carry the configured class. */
 function hitTarget(context: SurfaceFeaturePreparationContext, target: SurfaceFeaturesConfig['target']): number {
@@ -337,7 +341,8 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   // Irregular bodies carry a conventional Gazetteer reference sphere that can sit well off the authored mean radius;
   // their anchors are cast onto the shape model, so the datum only scales outline sizes and is recorded, not enforced.
   const datumTolerance = context.hitMesh ? 0.15 : 0.01;
-  if (Math.abs(radiusM - context.radiusKm * 1000) > datumTolerance * context.radiusKm * 1000) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${context.radiusKm} km body.`);
+  const referenceKm = context.triaxial ? context.radiusKm * Math.cbrt(context.triaxial[0] * context.triaxial[1] * context.triaxial[2]) / context.triaxial[0] : context.radiusKm;
+  if (Math.abs(radiusM - referenceKm * 1000) > datumTolerance * referenceKm * 1000) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${referenceKm} km body.`);
   const notes: FeatureNotes | null = config.notes === undefined ? null : parseFeatureNotes(JSON.parse(await readFile(resolve(directory, config.notes), 'utf8')));
   const noteById = new Map((notes?.entries ?? []).map(entry => [entry.id, entry]));
   if (metadata !== null && !/<useconst>\s*Public domain\.?\s*<\/useconst>/iu.test(metadata)) throw new TypeError('Gazetteer metadata no longer declares public-domain use constraints.');
@@ -373,12 +378,13 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   // On a shape model every surface point is cast through the hit mesh; a miss (a hole in the coarse mesh) keeps the reference radius.
   const onSurface = (direction: Vector3): Vector3 => {
     if (context.surface) return context.surface.onSurface(direction);
+    if (context.triaxial) return triaxialSurfacePoint(direction, axes, context.triaxial);
     if (!context.hitMesh) return scaled(direction, context.meshRadiusUnits);
     const distance = projectRadial(context.hitMesh.triangles, direction);
     if (distance === null) { meshMisses++; return scaled(direction, context.meshRadiusUnits); }
     return scaled(direction, distance);
   };
-  const cast = context.hitMesh !== undefined || context.surface !== undefined;
+  const cast = context.hitMesh !== undefined || context.surface !== undefined || context.triaxial !== undefined;
   const skip = (key: string, reason: string) => { skipped[key] = { count: (skipped[key]?.count ?? 0) + 1, reason }; };
   const excluded: Record<string, { count: number; reason: string }> = {};
   if (!(context.meshRadiusUnits > 0) || !Number.isFinite(context.meshRadiusUnits)) throw new TypeError('Surface features need the prepared mesh radius.');

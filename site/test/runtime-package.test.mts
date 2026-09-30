@@ -13,6 +13,12 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { selectedObjectIds } from './fixtures/anchor-table.mts';
 import { projectRoot } from './fixtures/objects.mts';
 
+/** Whether two node lists hold the same nodes in the same order. A plain boolean: a failed deep comparison of thousands
+ * of fixture nodes formats them all into its message and runs the process out of memory. */
+function sameNodes(actual: ArrayLike<unknown>, expected: ArrayLike<unknown>) {
+  return actual.length === expected.length && Array.prototype.every.call(actual, (node, index) => node === expected[index]);
+}
+
 async function preparedRuntime(id: string): Promise<unknown> {
   const text = await readFile(resolve(projectRoot, 'src/objects', id, 'prepared/runtime.json'), 'utf8').catch((error: unknown) => {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
@@ -47,7 +53,7 @@ for (const id of selectedObjectIds(SCENE_OBJECTS.map(object => object.id))) {
       }
       assert.equal(f.inputs.get('stars'), undefined, 'the shared universe owns the sky');
       assert.equal(f.inputs.get('orbit'), undefined, 'no object publishes its own orbit toggle');
-      assert.deepEqual(f.stage.querySelectorAll('*'), nodes);
+      assert.ok(sameNodes(f.stage.querySelectorAll('*'), nodes), 'toggles keep the retained tree');
       assert.deepEqual(f.errors, []);
       f.lifetime.destroy();
       assert.equal(f.listenerCount(), 0);
@@ -55,17 +61,20 @@ for (const id of selectedObjectIds(SCENE_OBJECTS.map(object => object.id))) {
   });
 
   const ids = datasetIds(definition);
-  if (ids.length > 1) test(`${id}: dataset selection keeps the retained tree and commits every published dataset`, async () => {
+  // A dataset may swap which prepared mesh or cutaway is mounted (prepared-omitted-nodes.ts); it never makes new nodes, and
+  // the first dataset's tree comes back whole.
+  if (ids.length > 1) test(`${id}: dataset selection reuses the prepared nodes and commits every published dataset`, async () => {
     const f = await preparedSelectionFixture(definition);
     try {
-      const records = f.stage.querySelectorAll('*');
+      const records = f.stage.querySelectorAll('*'), made = f.document.created;
       for (const dataset of [...ids.slice(1), ids[0]]) {
         const request = f.selection.dispatch({ kind: 'dataset', id: dataset });
         await f.settle();
         assert.equal(await request, true, dataset);
         assert.equal(required(f.selection.state().committed).datasetId, dataset);
-        assert.deepEqual(f.stage.querySelectorAll('*'), records);
       }
+      assert.ok(sameNodes(f.stage.querySelectorAll('*'), records), 'the first dataset gets its tree back');
+      assert.equal(f.document.created, made, 'no dataset makes new nodes');
       assert.deepEqual(f.errors, []);
     } finally { f.restore(); }
   });

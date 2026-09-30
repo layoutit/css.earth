@@ -1,6 +1,6 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection } from '@cssearth/renderer';
+import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '@cssearth/renderer/navigation';
 import { renderNativeFocus } from './focus-response.mts';
 import { requiredElement } from './browser/browser-types.mts';
@@ -129,8 +129,8 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     stage.append(root);
   }
   publishDatasetSelection(buttons,
-    [...shell.document.querySelectorAll<HTMLElement>('[data-dataset-details]')].map(panel => ({ id: panel.dataset.datasetDetails!, panel })),
-    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')], new Set([activeDataset ?? null]),
+    sectionElements(shell.document, '[data-dataset-details]').map(panel => ({ id: panel.dataset.datasetDetails!, panel })),
+    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel')].flatMap(panel => sectionElements(panel, '[data-dataset-context]')), new Set([activeDataset ?? null]),
     shell.document.querySelector('.object-information-panel .object-datasets'));
   if (dataset.requested || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
   for (const input of shell.document.querySelectorAll<HTMLInputElement>('.object-settings input[name]')) {

@@ -33,28 +33,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "science/b2-intake/rhea_128_o.obj",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_128_o.obj",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "science/b2-intake/rhea_128_o.xml",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_128_o.xml",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "science/b2-intake/rhea_512_o.xml",
       "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_512_o.xml",
       "headers": {

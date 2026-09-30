@@ -121,6 +121,8 @@ class FixtureDocument {
     readonly animations: FixtureAnimation[] = [];
     failAtElement: number | null = null;
     private count = 0;
+    /** How many elements the runtime has asked for. */
+    get created(): number { return this.count; }
     querySelector: (selector: string) => FixtureElement | null = () => null;
     // The runtime resolves form-linked settings inputs through the document; the fixture mounts none.
     querySelectorAll: (selector: string) => FixtureElement[] = () => [];

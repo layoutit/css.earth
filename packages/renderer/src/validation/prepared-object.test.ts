@@ -97,7 +97,8 @@ test('prepared material ordering, variant coverage and animation ownership remai
   ]) {
     const input = copy(); mutate(input); assert.throws(() => parsePreparedObjectRuntime(input), /phase|frame|bank|selection table/);
   }
-  const input = copy(0); item(input.animations).target = child(input, 'tree').scene;
+  // No body ships a native animation now (Mercury's cutaway pose is parked), so the test adds one aimed at the scene.
+  const input = copy(0); input.animations = [{ target: child(input, 'tree').scene, id: 'pose', keyframes: [], duration: 1, mode: 'pose', sourceMinimum: 0, millisecondsPerDegree: 1 }];
   assert.throws(() => parsePreparedObjectRuntime(input), /animation cannot target/);
 });
 

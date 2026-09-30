@@ -218,16 +218,6 @@
         "ring2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
         "materialUrl": "/scenes/saturn/saturn-orbit-material.webp",
         "qualification": "Visible presentation: Hubble OPAL 2025A body and Cassini UVIS 2006 ring opacity; unobserved polar and ring-occluded OPAL rows are filled by linear interpolation."
-      },
-      {
-        "id": "cross-section",
-        "label": "Cross section",
-        "shortLabel": "CUT",
-        "thumbnailUrl": "/scenes/saturn/saturn-view-interior.webp",
-        "view": "interior",
-        "materialDataset": "normal",
-        "interiorMaterialUrl": "/scenes/saturn/saturn-interior-atmosphere.webp",
-        "qualification": "schematic source-backed interior using the normal visible-color material"
       }
     ],
     "provenance": {
@@ -250,8 +240,7 @@
     "normal",
     "ultraviolet",
     "methane",
-    "thermal",
-    "cross-section"
+    "thermal"
   ],
   "files": {
     "surface": "saturn-surface.jpg",

@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseDbf } from '@cssearth/bake/objects/surface-features';
 import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from '@cssearth/bake/objects/surface-features';
-import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection } from '@cssearth/bake/objects/surface-features';
+import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection, triaxialSurfacePoint } from '@cssearth/bake/objects/surface-features';
 import { parseShpPolylines } from '@cssearth/bake/objects/surface-features';
 import { dot3 as dot } from '@cssearth/core';
 const test = sourceTest();
@@ -36,6 +36,16 @@ test('surface directions wrap east from the declared map edge with the minimap a
   assert.deepEqual(pole.map(n => Math.round(n * 1e9) / 1e9 + 0), [0, 0, 1]);
   const wrapped = surfaceDirection(10, 20, axes, 180), same = surfaceDirection(370, 20, axes, 180);
   assert.deepEqual(wrapped, same);
+});
+
+test('triaxial anchors land on the ellipsoid, each axis along its map direction', () => {
+  const semiAxes = [300, 200, 100] as const;
+  // prime is +y, east +x, north +z in this frame (see `axes` above).
+  assert.deepEqual(triaxialSurfacePoint([0, 1, 0], axes, semiAxes), [0, 300, 0]);
+  assert.deepEqual(triaxialSurfacePoint([2, 0, 0], axes, semiAxes), [200, 0, 0]);
+  assert.deepEqual(triaxialSurfacePoint([0, 0, -1], axes, semiAxes), [0, 0, -100]);
+  const point = triaxialSurfacePoint(surfaceDirection(40, 25, axes, 0), axes, semiAxes);
+  assert.ok(Math.abs((point[1] / 300) ** 2 + (point[0] / 200) ** 2 + (point[2] / 100) ** 2 - 1) < 1e-4);
 });
 
 test('rim vectors trace the published diameter as a small circle of the sphere', () => {

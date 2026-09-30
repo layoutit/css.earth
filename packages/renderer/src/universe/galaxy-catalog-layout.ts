@@ -70,6 +70,8 @@ export function projectCatalogBounds(cornersM: readonly (readonly number[])[], w
 /** A prepared object's label priority is fixed by its record: each one is computed once and kept with it, never
  * inside the per-frame sort. */
 const priorities = new WeakMap<PreparedCatalogObject, number>();
+/** Above every catalogue tier (labelImportance tops out at the orientation references, single digits). */
+const HIGHLIGHT_PRIORITY = 1000;
 function priority(object: PreparedCatalogObject): number {
   let value = priorities.get(object);
   if (value === undefined) {
@@ -82,9 +84,10 @@ function priority(object: PreparedCatalogObject): number {
 
 /** Foreground exclusions win; selection, major objects, then stable distance/id ties. */
 export function admitGalaxyLabels(candidates: readonly ProjectedGalaxy[], blockers: readonly LabelScreenRect[], selectedId: string | null,
-  budget: LabelBudget = createLabelBudget(Infinity, Infinity, [], blockers)) {
+  budget: LabelBudget = createLabelBudget(Infinity, Infinity, [], blockers), highlighted: ReadonlySet<string> = new Set()) {
   // One priority read per candidate; the comparator reads numbers. The id comparison runs only on an exact distance tie.
-  const ranked = candidates.map(candidate => ({ candidate, priority: priority(candidate.object) }))
+  // A highlighted category (its header pill) ranks ahead of every other label.
+  const ranked = candidates.map(candidate => ({ candidate, priority: priority(candidate.object) + (highlighted.has(candidate.object.id) ? HIGHLIGHT_PRIORITY : 0) }))
     .sort((a, b) => b.priority - a.priority || a.candidate.distanceM - b.candidate.distanceM || a.candidate.object.id.localeCompare(b.candidate.object.id))
     .map(({ candidate }) => candidate);
   const stable = ranked.map((candidate, index) => ({

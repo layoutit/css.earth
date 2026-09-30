@@ -256,61 +256,6 @@
         "notes": "Schematic illustration from visible-light morphology and authored patterns. Colors do not measure infrared brightness or temperature; this is not a Cassini observation."
       },
       {
-        "id": "cross-section",
-        "label": "Cross section",
-        "thumbnail": "/scenes/saturn/saturn-view-interior.webp",
-        "view": "interior",
-        "legend": {
-          "kind": "categories",
-          "title": "Structure",
-          "meta": "Schematic",
-          "sourceUrl": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/",
-          "items": [
-            {
-              "label": "Molecular envelope",
-              "description": "Outer atmosphere",
-              "color": [
-                187,
-                147,
-                103
-              ]
-            },
-            {
-              "label": "Metallic hydrogen",
-              "description": "Conductive layer",
-              "color": [
-                119,
-                132,
-                145
-              ]
-            },
-            {
-              "label": "Diffuse core",
-              "description": "Rock and ice mixture",
-              "color": [
-                196,
-                121,
-                79
-              ]
-            },
-            {
-              "label": "Deep core",
-              "description": "Central region",
-              "color": [
-                224,
-                159,
-                101
-              ]
-            }
-          ]
-        },
-        "source": {
-          "id": "cross-section",
-          "url": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/"
-        },
-        "notes": "Schematic interior layers based on models of Saturn. Boundaries, colors and exposed structure illustrate inferred composition; they are not photographs or a measured interior map."
-      },
-      {
         "id": "visible-2018a",
         "label": "Hubble dates",
         "shortLabel": "Hubble",

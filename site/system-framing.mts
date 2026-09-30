@@ -19,6 +19,7 @@ import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRA
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { readApplicationSystemView } from './world-system-views.mts';
+import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 
 /** Camera framing consumes the prepared orbit bounds, never orbit vertices. */
 export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>) {
@@ -103,10 +104,27 @@ const DRAWN_GALAXIES_BOX = (() => {
     cameraToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1] } };
 })();
 
+/** Fit a box in reference axes at the current viewing angle, centred on it. */
+function boxZoomTarget(from: WorldCameraPose, box: { centre: PositionM; candidate: FramingCandidate }, optics: Optics, rect: MapViewport) {
+  const frame = { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt, originM: box.centre, bodyRadiusM: 0 };
+  return { world: systemViewTarget(from, frame, optics, { candidates: [box.candidate] }, rect), focusPositionM: box.centre };
+}
+
 /** Fit the drawn galaxies (the Milky Way's volume and the Local Group catalogue's galaxies) at the current viewing angle, centred on them: an overview's `zoom.frame` {fit: drawn-galaxies}. */
 export function drawnGalaxiesZoomTarget(from: WorldCameraPose, optics: Optics, rect: MapViewport) {
-  const frame = { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt, originM: DRAWN_GALAXIES_BOX.centre, bodyRadiusM: 0 };
-  return { world: systemViewTarget(from, frame, optics, { candidates: [DRAWN_GALAXIES_BOX.candidate] }, rect), focusPositionM: DRAWN_GALAXIES_BOX.centre };
+  return boxZoomTarget(from, DRAWN_GALAXIES_BOX, optics, rect);
+}
+
+/** Each classification's prepared box (site/build/prepare/prepare-world-presentation.mts prepareCategoryFrames), in the world's
+ * Sun-centred reference axes: what its header pill frames. */
+export const CATEGORY_FRAMES: ReadonlyMap<string, { centre: PositionM; candidate: FramingCandidate }> = new Map([...PREPARED_WORLD_PRESENTATION.categoryFrames]
+  .map(([classification, frame]) => [classification, { centre: [...frame.centreM], candidate: { minimumM: [...frame.minimumM], maximumM: [...frame.maximumM],
+    cameraToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1] } }]));
+
+/** Fit one classification's members at the current viewing angle, centred on them; null when it has no prepared box. */
+export function categoryZoomTarget(classification: string, from: WorldCameraPose, optics: Optics, rect: MapViewport) {
+  const box = CATEGORY_FRAMES.get(classification);
+  return box ? boxZoomTarget(from, box, optics, rect) : null;
 }
 
 /** Fit the volume along the current viewing ray, keeping its anchor and orientation. */
@@ -140,7 +158,9 @@ export function systemFramingRect(optics: Optics, documentTarget?: Document) {
   if (stage && documentTarget) {
     const cx = stage.left + stage.width / 2, cy = stage.top + stage.height / 2;
     // Read once on selection, never in the animation loop.
-    for (const selector of ['.object-sidebar', '.explorer-shell-header', '.object-footer']) {
+    // On tablets the pill row rides the sheet's top edge, level with the search, over the scene. (The search box itself sits
+    // left of centre there, where this reading would take it for a sidebar.)
+    for (const selector of ['.object-sidebar', '.explorer-shell-header', '.object-footer', '.object-search-categories']) {
       const box = documentTarget.querySelector(selector)?.getBoundingClientRect();
       if (!box || !box.width || !box.height) continue;
       if (box.right < cx) rect.left = Math.max(rect.left, box.right - cx);
