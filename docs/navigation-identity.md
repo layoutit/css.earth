@@ -74,8 +74,7 @@ Each system has the same overview, `?overview=system` on its star's route:
   fades the Milky Way by the distance from the Sun). A star past the Milky Way's
   own boundary, in the Magellanic Clouds, goes from its system to the Local
   Group.
-- Breadcrumbs, the overview card, its results and the Milky Way's Systems list
-  name the object's own system. The Milky Way, Local Group and Nearby Universe
+- Breadcrumbs, the overview card and its results name the object's own system. The Milky Way, Local Group and Nearby Universe
   are pages of the Sun's scene, `/milky-way/` and so on, measured from the Sun
   there.
   Another star's scene zoomed out that far keeps its route, `?overview=system`,
