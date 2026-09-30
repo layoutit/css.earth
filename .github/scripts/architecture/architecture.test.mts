@@ -138,7 +138,7 @@ test('strongly connected folders, the greedy layer order and the edges that clos
   assert.deepEqual(cycleClosingEdges(folders.edges, folderCycles(folders), order).map(edge => `${edge.from}>${edge.to}`), ['src/c>src/a']);
 });
 
-test('layer rules name each forbidden file import once, and tests are exempt except in packages', () => {
+test('layer rules name each forbidden file import once, and tests are exempt except in packages and for application imports', () => {
   const violations = evaluateRules(graph(
     ['packages/p/src/a.ts', 'src/platform/x.mts'], ['packages/p/src/a.test.ts', 'labs/helper.mts'],
     ['src/renderers/css/x.ts', 'labs/prepared/y.mts'], ['src/renderers/css/x.ts', 'labs/prepared/y.mts'],
@@ -157,7 +157,7 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
   assert.deepEqual(pairs('packages-import-only-packages'), ['packages/bake/src/g.ts>site/build/prepare/p.mts', 'packages/p/src/a.test.ts>labs/helper.mts',
     'packages/p/src/a.ts>src/platform/x.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts'], 'no package reaches site/build, not even the bake or a renderer type');
   assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>labs/ci/z.mts', 'labs/ci/x.mts>.github/scripts/ci/y.mts', 'labs/objects/o.mts>site/objects.mts', 'packages/bake/src/g.ts>site/build/prepare/p.mts',
-    'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'src/renderers/css/x.ts>labs/prepared/y.mts'], 'CI scripts in .github/ are an application tree too');
+    'packages/p/src/a.test.ts>labs/helper.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'src/renderers/css/x.ts>labs/prepared/y.mts'], 'CI scripts in .github/ are an application tree too');
   assert.deepEqual(pairs('runtime-imports-no-preparation'), [
     'packages/renderer/src/sky/d.ts>packages/telescope-cli/src/archives/programs.mts', 'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts',
     'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>packages/bake/src/prepared/y.mts', 'site/c.mts>packages/telescope-cli/src/query.mts',
@@ -393,6 +393,20 @@ test('package-only and application-entry layers fail without a baseline, includi
     const mutation = measure(graph(['packages/core/src/x.ts', 'site/x.mts']), [{ ...rule, noBaseline: false }]);
     assert.equal(isWorse(compare(createBaseline(mutation), mutation)), false, 'disabling no-baseline lets the mutation bless the violation');
   }
+});
+
+test('nothing-imports-applications covers tests and every non-application tree, with one named exception', () => {
+  const rule = LAYER_RULES.find(item => item.id === 'nothing-imports-applications')!;
+  const found = (...pairs: readonly (readonly [string, string])[]) => measure(graph(...pairs), [rule]).rules.get(rule.id)!.length;
+  for (const from of ['src/platform/x.mts', 'src/platform/x.test.mts', 'integration/x.test.mts', 'packages/core/src/x.test.ts', 'labs/other/x.test.mts'])
+    assert.equal(found([from, 'site/runtime-policy.mts']), 1, `${from} -> site/ fails`);
+  assert.equal(found(['src/platform/x.mts', 'labs/nebula/y.mts']), 1, 'src -> labs fails');
+  assert.equal(found(['src/platform/x.mts', '.github/scripts/y.mts']), 1, 'src -> .github fails');
+  assert.equal(found(['labs/performance/source-maps.test.mts', 'site/build/source-maps.mts']), 0, 'the named exception passes');
+  assert.equal(found(['labs/performance/other.test.mts', 'site/build/source-maps.mts']), 1, 'a sibling test does not inherit it');
+  assert.equal(found(['labs/performance/source-maps.test.mts', 'site/build/other.mts']), 1, 'the exception is one file pair');
+  const mutation = measure(graph(['src/platform/x.test.mts', 'site/a.mts']), [{ ...rule, includeTests: false }]);
+  assert.equal(mutation.rules.get(rule.id)!.length, 0, 'dropping includeTests hides a test import, so the test above is what guards it');
 });
 
 test('recorded cycle-closing folder edges pass but every new closing edge fails', () => {

@@ -36,6 +36,11 @@ export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[c
 
 export const APPLICATION_TREES = ['site', 'labs', '.github'] as const;
 
+/** The one existing test that reaches into an application tree from outside it: the performance lab's source-map test
+ * builds with the site's `performanceSourceMaps` plugin. Named exactly (`from\nto`) rather than baselined, so any other
+ * import, in a test or not, still fails; the smell is recorded in untangle/ABSTRACTIONS.md. */
+export const APPLICATION_IMPORT_EXCEPTIONS: ReadonlySet<string> = new Set(['labs/performance/source-maps.test.mts\nsite/build/source-maps.mts']);
+
 const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
 
 /** Per-body and per-mission authoring folders: `authoring-is-leaf` forbids importing into them from outside. */
@@ -55,9 +60,10 @@ export const LAYER_RULES: readonly LayerRule[] = [
   {
     id: 'nothing-imports-applications',
     noBaseline: true,
-    description: 'site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
+    description: 'site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue and APPLICATION_IMPORT_EXCEPTIONS excepted (tests and type-only imports count)',
     forbids: (from, to) => APPLICATION_TREES.some(tree => topLevel(to) === tree && topLevel(from) !== tree)
-      && !ENTRY_GLUE.some(pattern => pattern.test(from)),
+      && !ENTRY_GLUE.some(pattern => pattern.test(from)) && !APPLICATION_IMPORT_EXCEPTIONS.has(`${from}\n${to}`),
+    includeTests: true,
   },
   {
     id: 'runtime-imports-no-preparation',
