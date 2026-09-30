@@ -43,7 +43,7 @@ import { mkdir, readFile, writeFile, readdir, realpath, rm } from 'node:fs/promi
 import { resolve, relative, isAbsolute } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { gunzipSync, gzipSync } from 'node:zlib';
+import { gunzipSync, gzip, gzipSync } from 'node:zlib';
 import pixelmatch from 'pixelmatch';
 import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
@@ -53,7 +53,7 @@ import { startLayerSampler } from './ipad-layer-sampler.mts';
 import { INSTALL_TRACE_CAUSES, STOP_TRACE_CAUSES } from './ipad-trace-causes.mts';
 import { INSTALL_RESIDENCY_PROBE, READ_RESIDENCY_PROBE, STOP_RESIDENCY_PROBE } from './ipad-residency.mts';
 
-const run = promisify(execFile);
+const run = promisify(execFile), gzipAsync = promisify(gzip);
 const root = resolve(import.meta.dirname, '../..');
 const wait = (ms: number) => new Promise(done => setTimeout(done, ms));
 
@@ -224,7 +224,8 @@ async function connectedDevice(udid: string | null) {
 /** What the report says about a device: its name, model and system, read over USB. */
 async function deviceInfo(udid: string) {
   const key = async (name: string) => (await run('ideviceinfo', ['-u', udid, '-k', name]).catch(() => ({ stdout: '' }))).stdout.trim() || null;
-  return { name: await key('DeviceName'), model: await key('ProductType'), system: await key('ProductVersion') };
+  const [name, model, system] = await Promise.all([key('DeviceName'), key('ProductType'), key('ProductVersion')]);
+  return { name, model, system };
 }
 
 /** This Mac's address on the local network, for a device to reach the dev server. */
@@ -294,8 +295,9 @@ async function connectProxy(port: number, target: Target, expectedUrl?: string |
   }
   const proxy = spawn('ios_webkit_debug_proxy', target.kind === 'device' ? ['-c', `${target.udid}:${port}`]
     : ['-s', `unix:${await inspectorSocket(target.udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
-  for (let attempt = 0; attempt < 20; attempt++) {
-    await wait(500);
+  // Checked at once, then every 250 ms within the same 10 s budget.
+  for (let attempt = 0; attempt < 40; attempt++) {
+    if (attempt) await wait(250);
     const pages = await inspectorPages(port).catch(() => []);
     if (pages.length) return { page: await visiblePage(pages, expectedUrl), proxy };
   }
@@ -380,7 +382,7 @@ async function waitForApp(session: ReturnType<typeof inspector>, url: string, pr
   while (Date.now() < deadline) {
     const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true }).catch(() => null);
     if (reply && isRecord(reply.result) && isRecord(reply.result.result) && navigatedAppReady(reply.result.result.value, url, previousOrigin)) return;
-    await wait(500);
+    await wait(200);
   }
   throw new Error(`The new document at ${url} did not report ready within ${timeoutMs / 1000} s.`);
 }
@@ -396,12 +398,52 @@ async function snapshotViewport(session: ReturnType<typeof inspector>, file: str
   await writeFile(file, Buffer.from(url.slice('data:image/png;base64,'.length), 'base64'));
 }
 
+/** Resolves once `events` has grown by an event `accept`s, or after `capMs`: the events an Inspector command emits before its
+ * reply are already here when the reply is; only a sampler on its own thread makes the capture wait. */
+async function awaitEvent(events: readonly Message[], from: number, accept: (event: Message) => boolean, capMs: number) {
+  const deadline = Date.now() + capMs;
+  for (let seen = from; ; await wait(20)) {
+    const grown = events.length;
+    if (events.slice(seen, grown).some(accept)) return true;
+    seen = grown;
+    if (Date.now() >= deadline) return false;
+  }
+}
+
+/** WebKit's memory categories after a full collection. Heap.gc collects before it answers, and Memory.startTracking's
+ * first update is the sample (ResourceUsageThread reports at once, then every 500 ms), so nothing here sleeps a fixed
+ * time: the two endpoints cost 0.2-0.5 s each instead of 2.4 s. */
 async function memorySample(session: ReturnType<typeof inspector>, events: Message[]) {
-  await session.send('Heap.gc'); await wait(1000);
+  await session.send('Heap.gc');
   const before = events.length;
-  await session.send('Memory.startTracking'); await wait(1200); await session.send('Memory.stopTracking'); await wait(200);
+  await session.send('Memory.startTracking');
+  await awaitEvent(events, before, event => event.method === 'Memory.trackingUpdate', 1200);
+  await session.send('Memory.stopTracking');
   const update = events.slice(before).reverse().find(event => event.method === 'Memory.trackingUpdate');
   return update && isRecord(update.params) ? memoryCategories(update.params.event) : null;
+}
+
+/** Resolves once no event has arrived for `quietMs`, or after `capMs`. */
+async function awaitQuiet(events: readonly Message[], quietMs: number, capMs: number) {
+  const deadline = Date.now() + capMs;
+  let seen = events.length, quietSince = Date.now();
+  while (Date.now() < deadline) {
+    if (events.length !== seen) { seen = events.length; quietSince = Date.now(); }
+    else if (Date.now() - quietSince >= quietMs) return true;
+    await wait(20);
+  }
+  return false;
+}
+
+/** Runs `job` over `items` with up to `width` Inspector commands in flight, results in the items' order: a serial round
+ * trip per composited layer costs the USB latency 300 times over at the end of every capture. */
+async function pipelined<T, R>(items: readonly T[], width: number, job: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = [];
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(width, items.length) }, async () => {
+    while (next < items.length) { const index = next++; results[index] = await job(items[index]!); }
+  }));
+  return results;
 }
 const memoryCategories = (event: unknown) => Object.fromEntries(requireArray(requireRecord(event, 'memory event').categories, 'memory categories')
   .map(category => requireRecord(category, 'memory category')).map(category => [requireString(category.type, 'type'), Math.round(requireFiniteNumber(category.size, 'size') / 1048576)]));
@@ -564,8 +606,7 @@ async function layerTree(session: ReturnType<typeof inspector>, options: { byMem
   const largest = [...byMemory, ...byPaints];
   // Reasons for a sample of layers across the list, so the count by reason describes the whole tree.
   const sample = options.reasons === false ? [] : layers.filter((_, index) => index % Math.max(1, Math.ceil(layers.length / 300)) === 0);
-  for (const layer of sample) {
-    const why = await session.send('LayerTree.reasonsForCompositingLayer', { layerId: layer.layerId });
+  for (const why of await pipelined(sample, 16, layer => session.send('LayerTree.reasonsForCompositingLayer', { layerId: layer.layerId }))) {
     const flags = isRecord(why.result) && isRecord(why.result.compositingReasons) ? why.result.compositingReasons : {};
     for (const [reason, on] of Object.entries(flags)) if (on === true) bump(reasons, reason);
   }
@@ -586,8 +627,7 @@ async function layerTree(session: ReturnType<typeof inspector>, options: { byMem
       return isRecord(call.result) && isRecord(call.result.result) ? call.result.result.value ?? null : null;
     } finally { await session.send('Runtime.releaseObject', { objectId }); }
   };
-  const described = [];
-  for (const layer of largest) described.push({ layer, element: await describe(layer.nodeId) });
+  const described = await pipelined(largest, 8, async layer => ({ layer, element: await describe(layer.nodeId) }));
   await session.send('LayerTree.disable');
   return { count: layers.length, memoryMb: Math.round(layers.reduce((sum, layer) => sum + memory(layer), 0) / 1048576 * 10) / 10,
     paints: layers.reduce((sum, layer) => sum + (typeof layer.paintCount === 'number' ? layer.paintCount : 0), 0),
@@ -1457,7 +1497,8 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   let stopwatchEpochMs = Date.now();
   const enableDomains = async () => {
     stopwatchEpochMs = Date.now();
-    for (const domain of ['Page', 'Console', 'Network', 'Timeline', 'Worker']) await session.send(`${domain}.enable`);
+    // Sent together: the page handles them in this order, and one round trip replaces five.
+    await Promise.all(['Page', 'Console', 'Network', 'Timeline', 'Worker'].map(domain => session.send(`${domain}.enable`)));
     // Request cache bypass explicitly; response sources still determine whether a load was cold.
     {
       const cacheReply = await session.send('Network.setResourceCachingDisabled', { disabled: option.noCache });
@@ -1482,9 +1523,11 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     const previousOrigin = requireFiniteNumber(isRecord(before.result) && isRecord(before.result.result) ? before.result.result.value : null, 'document clock before navigation');
     await session.send('Runtime.evaluate', { expression: `location.assign(${JSON.stringify(open)})` });
     await waitForApp(session, open, previousOrigin);
+    stage('page navigated and ready');
     // A new process starts with every domain off (and its own stopwatch): enable them again before recording.
     if (session.swaps() !== swapsBefore) await enableDomains();
     await wait(option.settle * 1000);
+    stage('settled');
   }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
   let url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
@@ -1494,7 +1537,6 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     throw new Error(`Safari is on ${url}; expected ${expected}. No recording or screen grab started.`);
   }
   await mkdir(out, { recursive: true });
-  await wait(500);
   // WebKit's Runtime.evaluate cannot wait for a promise; Runtime.awaitPromise can. Every expression is wrapped in one, so a
   // script that returns a promise (a replay, a scripted camera move) finishes before the capture goes on.
   const evaluate = async (expression: string) => {
@@ -1551,6 +1593,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay!)), ...replay }, null, 2) + '\n');
   }
   const memoryBefore = await memorySample(session, events);
+  stage('memory baseline sampled');
   const heapSnapshot = async (phase: 'before' | 'after') => {
     if (!args.includes('--heap-snapshot')) return;
     const heap = await session.send('Heap.snapshot');
@@ -1717,6 +1760,9 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const durationMs = Date.now() - started;
   await activeLayers?.stop(); activeLayers = null;
   stage('actions complete');
+  // The checkout's identity is read while the page is probed; it is the same checkout either way.
+  const checkout = { revision: run('git', ['-C', root, 'rev-parse', 'HEAD']).catch(() => ({ stdout: '' })).then(result => result.stdout.trim() || null),
+    trackedChanges: run('git', ['-C', root, 'status', '--porcelain', '--untracked-files=no']).then(result => result.stdout.trim().length > 0, () => null) };
   const { samples: deviceSamples = null, ...deviceSummary } = (monitors ? await monitors.stop() : null) ?? {};
   activeMonitors = null;
   const filmstripCount = screens ? await screens.stop() : 0;
@@ -1726,13 +1772,11 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   // The capture goes on without a sampler, but says so here rather than only in the report.
   for (const [sampler, result] of Object.entries(deviceSummary)) if (isRecord(result) && typeof result.error === 'string')
     console.error(`No device ${sampler} samples (${result.error.trim().split('\n').at(-1)}). ${DEVELOPER_SERVICES}`);
-  const endUrl = await evaluate('location.href').catch(() => null);
-  const viewport = await evaluate('[innerWidth, innerHeight]').catch(() => null);
+  stage('final Inspector probes started');
+  const [endUrl, viewport] = await Promise.all([evaluate('location.href').catch(() => null), evaluate('[innerWidth, innerHeight]').catch(() => null)]);
   await session.send('Timeline.stop');
-  await session.send('Memory.stopTracking');
-  await session.send('CPUProfiler.stopTracking');
-  await session.send('ScriptProfiler.stopTracking');
-  for (const worker of workers.keys()) await session.send('ScriptProfiler.stopTracking', {}, worker);
+  await Promise.all([session.send('Memory.stopTracking'), session.send('CPUProfiler.stopTracking'), session.send('ScriptProfiler.stopTracking'),
+    ...[...workers.keys()].map(worker => session.send('ScriptProfiler.stopTracking', {}, worker))]);
   const recorded = xctrace ? await stopRecording(xctrace) : false;
   // Removing global listeners invalidates event regions too. End both recorders
   // before dismantling their observers, keeping teardown outside app timing.
@@ -1743,10 +1787,16 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   // The export runs while the page side is read.
   const nativeExport: Promise<Awaited<ReturnType<typeof exportTimeProfile>> | { error: string }> = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
     : recorded ? exportTimeProfile(native, pagePid) : Promise.resolve({ error: 'xctrace did not finish its recording within 120 s.' });
-  await wait(1500);
+  stage('trackers stopped');
+  // Each stop emits its trackingComplete (the samples, for ScriptProfiler) before it answers, so they are here already;
+  // wait only for the socket to go quiet for a moment, within the 1.5 s the capture used to sleep.
+  await awaitQuiet(events, 100, 1500);
+  stage('tracker events drained');
   const moment = events.slice(recordingStart).filter(event => !String(event.method).startsWith('DOM.'));
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+  stage('layer tree read');
   const memoryAfter = await memorySample(session, events);
+  stage('memory endpoint sampled');
   await residencyCheckpoint(steps.length);
   if (debugInstalled) { const causes = await evaluate(STOP_TRACE_CAUSES); debugInstalled = false; await writeFile(resolve(out, 'causes.json'), JSON.stringify(causes) + '\n'); }
   const retired = await evaluate(STOP_RESIDENCY_PROBE);
@@ -1754,6 +1804,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     droppedReleases: isRecord(retired) ? retired.dropped : null };
   await writeFile(resolve(out, 'residency.json'), JSON.stringify(residency, null, 2) + '\n');
   await heapSnapshot('after');
+  stage('final Inspector probes complete');
   session.close(); proxy?.kill();
 
   // Page side.
@@ -1809,13 +1860,16 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const nativeSummary = 'summary' in nativeResult ? nativeResult.summary : nativeResult;
   const nativeSamples = 'samples' in nativeResult && nativeResult.startMs !== null ? { samples: nativeResult.samples, offsetUs: (nativeResult.startMs - stopwatchEpochMs) * 1000 } : null;
   // Everything trace.json is made from, so --rebuild can remake it (a failed export, a new track) without a new take.
-  await writeFile(resolve(out, 'raw.json.gz'), gzipSync(JSON.stringify({ schema: 'cssearth-ios-capture-raw@1', moment, stopwatchEpochMs, deviceSamples,
-    workers: [...workers], pagePid, evidence, metadata: { url, endUrl, target: target.kind, ...(device ? { device } : {}) } })));
+  // The raw take compresses on the thread pool while the main thread builds trace.json from the same records.
+  const rawSaved = gzipAsync(JSON.stringify({ schema: 'cssearth-ios-capture-raw@1', moment, stopwatchEpochMs, deviceSamples,
+    workers: [...workers], pagePid, evidence, metadata: { url, endUrl, target: target.kind, ...(device ? { device } : {}) } }))
+    .then(buffer => writeFile(resolve(out, 'raw.json.gz'), buffer));
   await writeFile(resolve(out, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, { url, endUrl, target: target.kind, ...(device ? { device } : {}) }, { updates: cpuUpdates, workers }, nativeSamples, evidence)) + '\n');
+  await rawSaved;
+  stage('raw and trace saved');
 
   const pixels = option.compare ? await compareScreenshots(out, (await baselineCaptures(option.compare))[0]!, steps) : null;
-  const revision = (await run('git', ['-C', root, 'rev-parse', 'HEAD']).catch(() => ({ stdout: '' }))).stdout.trim() || null;
-  const trackedChanges = await run('git', ['-C', root, 'status', '--porcelain']).then(result => result.stdout.trim().length > 0, () => null);
+  const revision = await checkout.revision, trackedChanges = await checkout.trackedChanges;
   const report = {
     schema: 'cssearth-ios-capture@1', name: option.name, url, endUrl, coldLoad, checkout: root, checkoutRole: 'capture-tool', revision, trackedChanges, udid, target: target.kind,
     ...(device ? { device, deviceMetrics: deviceSummary } : {}), durationMs, steps: marks,
@@ -1830,6 +1884,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   };
   await writeFile(resolve(out, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   await writeFile(resolve(out, 'README.md'), readme(report));
+  stage('report written');
   if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
   return { out, report };
   } catch (error) {
@@ -1942,7 +1997,7 @@ export async function captureDeviceStill(args: readonly string[]): Promise<strin
     }
     const size = await sharp(resolve(out, file)).metadata();
     const revision = (await run('git', ['-C', root, 'rev-parse', 'HEAD']).catch(() => ({ stdout: '' }))).stdout.trim() || null;
-    const trackedChanges = await run('git', ['-C', root, 'status', '--porcelain']).then(result => result.stdout.trim().length > 0, () => null);
+    const trackedChanges = await run('git', ['-C', root, 'status', '--porcelain', '--untracked-files=no']).then(result => result.stdout.trim().length > 0, () => null);
     const receipt = { schema: 'cssearth-ios-still@1', name, url, checkout: root, checkoutRole: 'capture-tool', revision, trackedChanges, udid, target: 'device',
       screenshots: [{ file, source: 'device-screen', width: size.width, height: size.height, pageUrl: pageState.url,
         capturedAt: new Date().toISOString() }] };
