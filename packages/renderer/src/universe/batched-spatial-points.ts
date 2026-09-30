@@ -74,18 +74,20 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     if(world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Point camera frame mismatch');
     const local = presentPhysicalPoseInVolume(world.pose,frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
     const keep = keepFraction ? Math.max(0, Math.min(1, keepFraction())) : 1;
-    // The kept share is part of the paint: a new share repaints even where no point moved.
-    const rest=[...local.orientationXyzw,viewport.focalPixels,...viewport.principalOffsetPixels,viewport.widthPixels??0,viewport.heightPixels??0,keep];
+    // The camera's turn and lens; the kept share is part of the paint too (`same` below): a new share repaints at rest.
+    const rest=[...local.orientationXyzw,viewport.focalPixels,...viewport.principalOffsetPixels,viewport.widthPixels??0,viewport.heightPixels??0];
     const count = drawnCount ? Math.max(0, Math.min(points.length, Math.round(drawnCount(Math.hypot(...local.positionUnits), local.positionUnits)))) : points.length;
     const width = viewport.widthPixels ?? 0, height = viewport.heightPixels ?? 0;
     const cx = width / 2 + viewport.principalOffsetPixels[0], cy = height / 2 + viewport.principalOffsetPixels[1];
-    if (painted && painted.count === count) {
+    if (painted) {
       const shift = Math.hypot(...local.positionUnits.map((value, axis) => value - painted!.position[axis]!));
       const still = shift === 0 || parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) < MAX_PARALLAX_PIXELS;
-      if (still && rest.every((value, i) => value === painted!.rest[i])) { setWarp(''); return; }
+      const same = painted.count === count && painted.keep === keep, turned = !rest.every((value, i) => value === painted!.rest[i]);
+      if (still && same && !turned) { setWarp(''); return; }
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
-      // what it painted still covers the view; its set of points, share and size must be the same.
-      if (still && !exact && painted.keep === keep && painted.width === width && painted.height === height && width > 0 && height > 0) {
+      // what it painted still covers the view. Which points it draws (the levels and share a zoom changes) is detail: like
+      // every level swap it waits for the pause (blur while moving), so a zoom warps too, and the pause's repaint brings it.
+      if (still && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
         const next = axesMatrix(r), turn = multiply(next, transpose(painted.axes));
         const forward = multiply(project(viewport.focalPixels, cx, cy), multiply(turn, unproject(painted.focal, painted.cx, painted.cy)));
         const back = multiply(project(painted.focal, painted.cx, painted.cy), multiply(transpose(turn), unproject(viewport.focalPixels, cx, cy)));

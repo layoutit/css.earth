@@ -137,7 +137,9 @@ test('a screen budget draws an even, stable share of the visible dots and refuse
   const drawn = () => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
   field.publish(at(0)); await new Promise(resolve => setTimeout(resolve, 0));
   field.publish(at(0.001)); field.publish(at(0.002));
-  expect(drawn(), 'the first frame counts, the next ones keep a quarter').toBeGreaterThan(200);
+  // The share is detail: while the camera moves the paint is warped, and the pause repaints with the share.
+  await new Promise(resolve => setTimeout(resolve, 200));
+  expect(drawn(), 'the first frame counts, the pause keeps a quarter').toBeGreaterThan(200);
   expect(drawn()).toBeLessThan(300);
   const kept = drawn();
   field.publish(at(0.003));
