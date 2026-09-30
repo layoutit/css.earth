@@ -1,5 +1,6 @@
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
+import { showSection } from '../rendering/detached-sections.js';
 import type { CameraPlan, PerspectiveCameraPlan, Vector3, LevelOfDetailPlan, OrbitLineFade } from './types.js';
 import type { BodyProjection } from '../solar-system/types.js';
 import type { VisibleRect } from '../solar-system/types.js';
@@ -303,7 +304,8 @@ export function createPerspectiveDolly({
           reveal.request();
         }
       }
-      if (sceneElement.hidden !== hidden) sceneElement.hidden = hidden;
+      // A body too far or too small to draw leaves the page; it comes back whole when the camera nears it.
+      if (sceneElement.hidden !== hidden) showSection(sceneElement, !hidden);
       presentedDetail = !hidden;
       // Raw prepared scene coordinates to the physical eye. Overlay and page
       // consumers compose their own retained body transforms after this matrix.

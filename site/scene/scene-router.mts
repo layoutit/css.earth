@@ -552,9 +552,11 @@ export function createSceneRouter({
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }
   }
   function followSelectionCamera(session: Session, frame: WorldCameraPose) {
-    if (requests.current) return;
+    // Until the arrival is ready the camera still shows the mounted object's default view, not the page's: following it
+    // selected the Solar System for a moment on every overview page (and fetched its body list for nobody).
+    if (requests.current || scenes.state.kind !== 'ready') return;
     const selection = context?.selection;
-    if (selection?.followCamera(frame) && scenes.state.kind === 'ready') {
+    if (selection?.followCamera(frame)) {
       view.replace(session, selection.url(session.url ?? navigationHref(windowTarget)));
       // An overview's page carries no scene dataset; the scene's page gets its dataset back on the way in.
       view.syncDataset(session);

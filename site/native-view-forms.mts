@@ -1,3 +1,4 @@
+import { sectionElements } from '@cssearth/renderer';
 /** Keep native submits usable after camera movement or an enhancement failure. */
 export function bindNativeViewForms(documentTarget: Document, windowTarget: Pick<Window, 'location'>) {
   const context = ['v', 'view', 'overview', 'dataset', 'feature'];
@@ -18,7 +19,8 @@ export function bindNativeViewForms(documentTarget: Document, windowTarget: Pick
       form.append(input);
     };
     add('settings', '1');
-    for (const input of documentTarget.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')) {
+    // A closed settings panel waits off the page; its values still travel with the form.
+    for (const input of sectionElements(documentTarget, '.object-settings').flatMap(root => [...root.querySelectorAll<HTMLInputElement>('input[form][name]')])) {
       if (input.type === 'checkbox') { if (input.checked) add(input.name, 'on'); }
       else if (!input.disabled) add(input.name, input.value);
     }

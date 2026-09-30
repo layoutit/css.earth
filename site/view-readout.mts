@@ -4,6 +4,7 @@ import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser/browser-types.mts';
 import { requiredElement } from './browser/browser-types.mts';
+import { sectionElements } from '@cssearth/renderer';
 import type { SurfaceMapReader } from './minimap/surface-map-context.mts';
 import { parseSurfaceMapConfig } from './minimap/surface-map-context.mts';
 import type { OverviewScope } from './overview-context.mts';
@@ -23,7 +24,8 @@ export function measurePreparedFocusView(world: WorldCameraPose, focus: Prepared
 }
 
 export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; surfaceReader?: SurfaceMapReader }): ViewReadout {
-  const root = documentTarget.querySelector<HTMLElement>('.object-view-readout');
+  // The footer holding the readout waits off the page on narrow layouts (layout-sections.mts); the readout keeps it current.
+  const root = sectionElements(documentTarget, '.object-view-readout')[0];
   if (!root) return { bindObject() {}, setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
   const dateGroup = requiredElement(root, '.object-view-date'), date = requiredElement(root, '[data-view-date]');
   const coordinates = requiredElement(root, '.object-view-coordinates');
@@ -59,7 +61,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     if (events.signal.aborted || documentTarget.hidden) return;
     lastRender = windowTarget.performance.now();
     const navigation = camera?.navigation;
-    const scene = documentTarget.querySelector<HTMLElement>('.polycss-scene');
+    // A far body's scene waits off the page (perspective-dolly.ts); the readout still reads its frame.
+    const scene = sectionElements(documentTarget, '.polycss-scene')[0];
     if (!navigation || !scene) { clearReading({ date: true }); return; }
     const map = maps.find(map => !map.closest<HTMLElement>('[data-dataset-details]')?.hidden) ?? maps[0];
     const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)

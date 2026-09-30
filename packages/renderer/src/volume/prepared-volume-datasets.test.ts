@@ -26,6 +26,11 @@ class FakeElement {
     Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } });
   }
   getAttributeNames(): string[] { return []; }
+  setAttribute(_name: string, _value: string): void {}
+  // What detached-sections.ts uses to take a section off the page: an attribute, a template's content and a swap in place.
+  #content: FakeElement | null = null;
+  get content(): FakeElement { return this.#content ??= new FakeElement(this.ownerDocument, 'fragment'); }
+  replaceWith(next: FakeElement): void { const parent = this.parentNode; if (!parent) return; parent.insertBefore(next, this); this.remove(); }
   append(child: FakeElement): void { this.insertBefore(child, null); }
   insertBefore(child: FakeElement, before: FakeElement | null): void {
     if (before && before.parentNode !== this) throw new TypeError('Invalid insertion point');

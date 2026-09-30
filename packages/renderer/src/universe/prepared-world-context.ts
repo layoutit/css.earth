@@ -41,20 +41,52 @@ type ProjectedBody = PlannedWorldContext['projectedBodies'][number];
  * re-sorts once on release: re-ranking every frame rewrote dozens of z-indices as one body changed place. */
 function createDepthOrder<Entry extends { readonly body: { readonly positionM: readonly number[] } }>(members: readonly Entry[], base: number) {
   let orientation: readonly number[] | null = null, selection: Entry | null = null, selectedRank = 0;
-  let ranks = new Map<Entry, number>();
+  const ranks = new Map<Entry, number>();
+  // The last order, as member indices, and each member's depth. Deepest first, then member order: the one order the stable
+  // sort by depth gives. Between two sorts it barely changes, so an insertion pass from the last order does the same work in
+  // about n steps; a first sort, or one that would move too much, sorts from scratch.
+  let order: number[] = [], ranked: number[] = [], depths = new Float64Array(0), positions = new Float64Array(0), insertion = true;
+  const before = (a: number, b: number) => depths[a]! > depths[b]! || (depths[a] === depths[b] && a < b);
+  // Past about 12n moves a full sort of n (about n log n comparisons for the few thousand bodies) is the cheaper one.
+  const insertionSort = () => {
+    let moves = 0;
+    for (let i = 1; i < order.length; i++) {
+      const member = order[i]!; let j = i - 1;
+      while (j >= 0 && before(member, order[j]!)) { order[j + 1] = order[j]!; j--; if (++moves > order.length * 12) return false; }
+      order[j + 1] = member;
+    }
+    return true;
+  };
   return {
     /** Hidden bodies leave the order; the next update re-sorts. */
-    setMembers(next: readonly Entry[]) { members = next; orientation = null; },
+    setMembers(next: readonly Entry[]) { members = next; orientation = null; order = []; ranked = []; positions = new Float64Array(0); ranks.clear(); },
     update(orientationXyzw: OrientationXyzw, rotating: boolean, selected: Entry) {
       let ranksChanged = false;
       if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
         orientation = [...orientationXyzw];
         const view = cssViewFromOrientation(orientationXyzw);
-        // Each depth is taken once, not once per comparison; the stable sort keeps equal depths in member order.
-        const depths = Float64Array.from(members, ({ body: { positionM } }) => -(view[6]! * positionM[0]! + view[7]! * positionM[1]! + view[8]! * positionM[2]!));
-        const order = Array.from(members, (_, index) => index).sort((a, b) => depths[b]! - depths[a]!);
-        ranks = new Map();
-        for (let index = 0; index < order.length; index++) ranks.set(members[order[index]!]!, index * 4);
+        const count = members.length;
+        if (depths.length !== count) depths = new Float64Array(count);
+        // Positions are fixed for a member list: copied once, then each depth is three multiplies over a flat array.
+        if (positions.length !== count * 3) {
+          positions = new Float64Array(count * 3);
+          members.forEach((entry, index) => positions.set(entry.body.positionM.slice(0, 3), index * 3));
+        }
+        const vx = view[6]!, vy = view[7]!, vz = view[8]!;
+        for (let index = 0, offset = 0; index < count; index++, offset += 3) {
+          depths[index] = -(vx * positions[offset]! + vy * positions[offset + 1]! + vz * positions[offset + 2]!);
+        }
+        // After a pass that gave up, sort from scratch directly; once the order holds still again, insertion resumes.
+        if (!(order.length === count && insertion && insertionSort())) {
+          // The stable sort keeps equal depths in member order, exactly `before`.
+          const previous = order;
+          order = Array.from(members, (_, index) => index).sort((a, b) => depths[b]! - depths[a]!);
+          let moved = 0; for (let index = 0; index < count; index++) if (previous[index] !== order[index]) moved++;
+          insertion = previous.length !== count || moved < count / 4;
+        }
+        // Only members whose place changed get a new rank.
+        for (let index = 0; index < count; index++) if (ranked[index] !== order[index]) ranks.set(members[order[index]!]!, index * 4);
+        ranked = order.slice();
         selection = null; ranksChanged = true;
       }
       const changed = ranksChanged || selection !== selected;
