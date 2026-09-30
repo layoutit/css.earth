@@ -5,7 +5,7 @@ Each case is a WCS header for a 3 x 2 image. Astropy's pixel-to-world transform 
 declination run along columns and rows; the expected display raster puts the northern row first and the eastern column first.
 A case whose RA changes along rows, or Dec along columns, is rotated and must be refused. Headers marked `from` copy the WCS cards
 of that input verbatim; the rest are written for this oracle. Every case is a header-only IMAGE extension of
-tests/fixtures/fits/sky-orientation.fits, and the expectations come from the headers read back from that file.
+packages/fits/src/node/fixtures/fits/sky-orientation.fits, and the expectations come from the headers read back from that file.
 """
 import math, sys, warnings
 from pathlib import Path
@@ -13,7 +13,7 @@ import astropy
 from astropy.io import fits
 from astropy.wcs import WCS, FITSFixedWarning
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import ROOT, write
 
 WIDTH, HEIGHT = 3, 2
@@ -52,7 +52,7 @@ def angle(a, b):
     """Degrees from a to b, wrapped to (-180, 180]."""
     return (b - a + 180.0) % 360.0 - 180.0
 
-path = ROOT / 'tests/fixtures/fits/sky-orientation.fits'
+path = ROOT / 'packages/fits/src/node/fixtures/fits/sky-orientation.fits'
 extensions = []
 for name, source, cards in CASES:
     written = fits.Header()

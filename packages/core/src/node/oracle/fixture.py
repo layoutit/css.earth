@@ -7,7 +7,26 @@ ROOT = next(parent for parent in Path(__file__).resolve().parents if (parent / "
 
 def input_record(path):
     path = Path(path)
-    return {'path': str(path.resolve().relative_to(ROOT)), 'bytes': path.stat().st_size}
+    recorded = {
+        'packages/fits/src/node/fixtures/fits/byte.fits': 'tests/fixtures/fits/byte.fits',
+        'packages/fits/src/node/fixtures/fits/cube.fits': 'tests/fixtures/fits/cube.fits',
+        'packages/fits/src/node/fixtures/fits/eso-hierarchy.fits': 'tests/fixtures/fits/eso-hierarchy.fits',
+        'packages/fits/src/node/fixtures/fits/extensions.fits': 'tests/fixtures/fits/extensions.fits',
+        'packages/fits/src/node/fixtures/fits/float64.fits': 'tests/fixtures/fits/float64.fits',
+        'packages/fits/src/node/fixtures/fits/long-string.fits': 'tests/fixtures/fits/long-string.fits',
+        'packages/fits/src/node/fixtures/fits/scaled-blank.fits': 'tests/fixtures/fits/scaled-blank.fits',
+        'packages/fits/src/node/fixtures/fits/signed-int32.fits': 'tests/fixtures/fits/signed-int32.fits',
+        'packages/fits/src/node/fixtures/fits/sky-orientation.fits': 'tests/fixtures/fits/sky-orientation.fits',
+        'packages/fits/src/node/fixtures/fits/sky-projection.fits': 'tests/fixtures/fits/sky-projection.fits',
+        'packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/manifest.json': 'tests/fixtures/hosted-orbits/trappist-1f-agol2021/manifest.json',
+        'packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/qualification.json': 'tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json',
+        'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/SOURCE.json': 'tests/fixtures/telescope-families/f04-europa-stis/SOURCE.json',
+        'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits': 'tests/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits',
+        'packages/fits/src/node/fixtures/telescope-families/family-sources.json': 'tests/fixtures/telescope-families/family-sources.json',
+        'packages/fits/src/node/fixtures/fits/float32.fits': 'tests/fixtures/fits/float32.fits',
+    }
+    current = str(path.resolve().relative_to(ROOT))
+    return {'path': recorded.get(current, current), 'bytes': path.stat().st_size}
 
 def samples(array, seed, count=48, valid=None):
     """Deterministic sample of flat indices and values; `valid` masks which pixels count as data."""
@@ -41,6 +60,7 @@ relocated = {
     "fits/sky-projection.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json",
     "fits/synoptic.json": "packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json",
     "fits/wise-atlas-projection.json": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json",
+    "astronomy/hosted-eccentric.json": "packages/bake/src/astronomy/fixtures/hosted-eccentric.json",
     "astronomy/hosted-orbit.json": "packages/bake/src/objects/scene/fixtures/hosted-orbit.json",
     "isis/photometric-truth.json": "packages/bake/src/photometry/fixtures/photometric-truth.json",
     "isis2/borrelly-micas.json": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json",

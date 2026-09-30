@@ -1,14 +1,15 @@
+import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
-import { readHostedOrbitRecord } from '../../../packages/astronomy/cli/lib/generator-records.mts';
+import { readHostedOrbitRecord } from '../../../astronomy/cli/lib/generator-records.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-const root = resolve(import.meta.dirname, '../../..');
-const source = resolve(root, 'tests/fixtures/hosted-orbits/trappist-1f-agol2021');
+const root = findProjectRoot(import.meta.url);
+const source = resolve(root, 'packages/bake/src/astronomy/fixtures/trappist-1f-agol2021');
 const manifest = requireRecord(JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')));
 const qualification = requireRecord(JSON.parse(await readFile(resolve(source, 'qualification.json'), 'utf8')));
 const published = requireRecord(qualification.published), conversion = requireRecord(qualification.conversion);

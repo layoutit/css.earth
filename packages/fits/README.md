@@ -30,8 +30,8 @@ allocations are bounded (512 MiB by default), and headers are scanned for at mos
 ```text
 packages/fits/
 ├── src/           fits.ts (cards, headers, HDUs, images), rice.ts, sky.ts, transport.ts, sample-statistics.ts and tests
-│   ├── node/      file.ts (file access), transport.ts (encodeFits): the Node-only entry
-│   └── test-support/  authored FITS bytes for the tests; not built
+│   └── node/      file.ts (file access), transport.ts (encodeFits): the Node-only entry
+│       └── fixtures/  authored and independent FITS bytes for the tests; not built
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -39,7 +39,7 @@ packages/fits/
 ## Evidence
 
 The package's tests are self-contained. The comparisons with Astropy live beside the scripts that write their fixtures
-in [`tests/oracles/fits/`](../../packages/core/src/node/oracle/README.md). `node tests/oracles/test-fits.mts --unit` runs all of them
+in [`packages/bake/src/objects/cameras/`](../bake/src/objects/cameras/). `node tests/oracles/test-fits.mts --unit` runs all of them
 offline.
 
 ESM, CommonJS and declarations are built with tsup, like the other packages. From the repository root:

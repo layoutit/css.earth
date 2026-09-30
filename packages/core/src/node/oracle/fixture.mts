@@ -19,6 +19,22 @@ const relocatedPaths: Readonly<Record<string, string>> = {
   "tests/oracles/pds3/amica-ddr.json": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.json",
   "tests/oracles/pds3/osiris-geo.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.json",
   "tests/oracles/pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json",
+  "tests/fixtures/fits/byte.fits": "packages/fits/src/node/fixtures/fits/byte.fits",
+  "tests/fixtures/fits/cube.fits": "packages/fits/src/node/fixtures/fits/cube.fits",
+  "tests/fixtures/fits/eso-hierarchy.fits": "packages/fits/src/node/fixtures/fits/eso-hierarchy.fits",
+  "tests/fixtures/fits/extensions.fits": "packages/fits/src/node/fixtures/fits/extensions.fits",
+  "tests/fixtures/fits/float64.fits": "packages/fits/src/node/fixtures/fits/float64.fits",
+  "tests/fixtures/fits/long-string.fits": "packages/fits/src/node/fixtures/fits/long-string.fits",
+  "tests/fixtures/fits/scaled-blank.fits": "packages/fits/src/node/fixtures/fits/scaled-blank.fits",
+  "tests/fixtures/fits/signed-int32.fits": "packages/fits/src/node/fixtures/fits/signed-int32.fits",
+  "tests/fixtures/fits/sky-orientation.fits": "packages/fits/src/node/fixtures/fits/sky-orientation.fits",
+  "tests/fixtures/fits/sky-projection.fits": "packages/fits/src/node/fixtures/fits/sky-projection.fits",
+  "tests/fixtures/hosted-orbits/trappist-1f-agol2021/manifest.json": "packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/manifest.json",
+  "tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json": "packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/qualification.json",
+  "tests/fixtures/telescope-families/f04-europa-stis/SOURCE.json": "packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/SOURCE.json",
+  "tests/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits": "packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits",
+  "tests/fixtures/telescope-families/family-sources.json": "packages/fits/src/node/fixtures/telescope-families/family-sources.json",
+  "tests/oracles/astronomy/hosted-eccentric.json": "packages/bake/src/astronomy/fixtures/hosted-eccentric.json",
   "tests/oracles/sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
   "tests/fixtures/sbmt/concave.sum": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum",
   "tests/fixtures/sbmt/cases.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json",
@@ -135,7 +151,7 @@ export function assertPinnedReferences(references: readonly { url: string; bytes
 }
 
 async function fitsArchiveInputs() {
-  const record = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'tests/fixtures/fits/archive-inputs.json'), 'utf8')));
+  const record = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'packages/fits/src/node/fixtures/fits/archive-inputs.json'), 'utf8')));
   if (record.schema !== 'cssearth-fits-reference-inputs@1') throw new Error('Invalid FITS reference input record.');
   const inputs = requireArray(record.inputs).map(raw => {
     const entry = requireRecord(raw), path = requireString(entry.path), url = requireString(entry.url);

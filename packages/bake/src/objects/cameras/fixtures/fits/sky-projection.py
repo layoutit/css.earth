@@ -4,7 +4,7 @@ Run with the pinned oracle environment; never imports the TypeScript helper.
 Each case is a TAN or plain SIN header, rotated or not. For deterministic sky points near the reference, Astropy's all_world2pix (origin 0)
 gives the expected zero-based pixels, and all_pix2world the expected directions of deterministic pixels. Headers marked `from`
 copy the WCS cards of that product verbatim; the rest are written for this oracle. Cases with distortion, a slant SIN or another projection
-are refused by the helper and only recorded. Every case is an IMAGE extension of tests/fixtures/fits/sky-projection.fits; the
+are refused by the helper and only recorded. Every case is an IMAGE extension of packages/fits/src/node/fixtures/fits/sky-projection.fits; the
 `sci` extension also carries a small float32 image whose region values the file reader must return.
 """
 import sys
@@ -13,7 +13,7 @@ import astropy
 from astropy.io import fits
 from astropy.wcs import WCS
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import ROOT, write
 
 JWST_F187N = ('JWST NIRCam F187N level-3 mosaic of NGC 3132, programme 2733 (jw02733-o001_t001_nircam_clear-f187n_i2d.fits, SCI extension)',
@@ -45,7 +45,7 @@ REFUSED = [
 SCI_WIDTH, SCI_HEIGHT = 7, 5
 REGION = {'x0': 2, 'y0': 1, 'width': 4, 'height': 3}
 
-path = ROOT / 'tests/fixtures/fits/sky-projection.fits'
+path = ROOT / 'packages/fits/src/node/fixtures/fits/sky-projection.fits'
 extensions = []
 for name, source, cards in CASES + [(n, None, c) for n, c in REFUSED]:
     header = fits.Header()

@@ -91,7 +91,7 @@ may clip. The prepared map is in evidence.
 Tests. `node --test tools/objects/voyager-iss/*.test.mts packages/bake/src/objects/raster/photometric-observations.test.mts` (then [`tests/objects/terrestrial/photometric-observations.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/photometric-observations.test.mts); now [`packages/bake/src/objects/raster/photometric-observations.test.mts`](../../../packages/bake/src/objects/raster/photometric-observations.test.mts)) (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer's ground floor, and the composer's withheld, band-level,
 band-ratio and non-positive-sample rules on synthetic frames;
-`node --test tests/objects/unit/uranian-moons/voyager-color.test.mts` reads this moon's reports and
+`node --test packages/objects/src/node/voyager-color.test.mts` reads this moon's reports and
 checks the placement, registration and oracle numbers above, that every tile of a complete set is
 pinned with its geometry label, and that the prepared report carries the measured and published
 ratios; `node --test tests/objects/unit/oberon/*.test.mts` covers the runtime package with the new dataset.

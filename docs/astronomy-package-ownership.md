@@ -37,13 +37,13 @@ the lock. Observatory data keep their own attribution and reuse terms in each pr
 
 **SPICE.** Retain the preparation evaluator ([`@cssearth/spice`](../packages/spice/README.md)) for now. [The tracked-kernel oracle](https://github.com/layoutit/cssEarth/blob/2af5c9c167ecfd6cf7317cf681240fe7b1fe6885/tests/oracles/spice/small-kernel.oracle.test.mts) (now [`packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts`](../packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts))
 checks UTC-to-ET and a body frame against [SpiceyPy](https://spiceypy.readthedocs.io/en/main/) 8.2.0 / CSPICE_N0067 with
-a checked-in LSK and PCK. [The full DART oracle](../tests/oracles/spice/dart-draco.oracle.test.mts) (now [`tests/oracles/spice/dart-draco.oracle.test.mts`](../tests/oracles/spice/dart-draco.oracle.test.mts)) checks spacecraft states, light-time
+a checked-in LSK and PCK. [The full DART oracle](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/oracles/spice/dart-draco.oracle.test.mts) (now [`packages/bake/src/objects/cameras/dart-draco.oracle.test.mts`](../packages/bake/src/objects/cameras/dart-draco.oracle.test.mts)) checks spacecraft states, light-time
 corrections, camera geometry and more frame classes when its pinned, ignored kernel bank is installed. The small test alone
 does not qualify spacecraft geometry. Telescope's PlanetMapper route already uses SpiceyPy without mixing evaluators in one
 result. Before deleting a custom path, migrate one complete preparation consumer with its pinned kernels and output receipt,
 then compare positions, frames, light time and final pixels.
 
-**FITS.** Retain the on-disk subregion reader used by repeated preparation reads. [The tracked STIS region oracle](../tests/oracles/fits/file-region.oracle.test.mts) (now [`tests/oracles/fits/file-region.oracle.test.mts`](../tests/oracles/fits/file-region.oracle.test.mts))
+**FITS.** Retain the on-disk subregion reader used by repeated preparation reads. [The tracked STIS region oracle](https://github.com/layoutit/cssEarth/blob/a2a7f5376d90db90bf79ecf2e95070fd474faf48/tests/oracles/fits/file-region.oracle.test.mts) (now [`packages/fits/src/node/file-region.oracle.test.mts`](../packages/fits/src/node/file-region.oracle.test.mts))
 hashes a 512 × 120 SCI rectangle after conversion to float64 and matches [Astropy](https://docs.astropy.org/en/stable/io/fits/)
 8.0.1 `fits.open(..., memmap=True).section[...]` byte for byte. The reader can reuse an open file handle; Astropy already owns
 Telescope's scientific FITS metadata checks. This one 3.1 MB file proves value parity, not large-file memory or speed. Before
