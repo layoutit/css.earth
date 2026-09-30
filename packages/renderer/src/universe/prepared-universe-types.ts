@@ -21,7 +21,7 @@ export interface PreparedUniverseOptions {
   backgroundCataloguePoints?: readonly BackgroundPointBank[];
   /** Closed image meshes around the Sun seen from outside (the cosmic microwave background; image-mesh.ts). */
   /** `cutaway` answers, on each publication, whether a mesh with a cutaway is shown cut open (image-mesh.ts); open by default. */
-  imageMeshes?: readonly { url: string; resolveResource(path: string): string; cutaway?(): boolean }[];
+  imageMeshes?: readonly { url: string; resolveResource(path: string): string; cutaway?(): boolean; hidden?(): boolean; hiddenCaption?: string }[];
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
   plannerSource?: WorldPlannerSource;

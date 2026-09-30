@@ -4,14 +4,5 @@
   "meaning": "The galaxies of Cosmicflows-4 out to 200 Mpc, even across the field: Each dot is one galaxy at its measured distance, in the colour of its morphological type.",
   "banks": [
     "galaxies"
-  ],
-  "densityCap": {
-    "perMpc3": 0.00018,
-    "kernelMpc": 20,
-    "taperMpc": [
-      150,
-      200
-    ],
-    "basis": "Presentation choice: 0.18 per 1,000 Mpc\u00b3, half the 0.37 CF4 still holds between 150 and 200 Mpc, so the field is even out to its edge; the taper softens the edge where the catalogue ends. The kernel holds about five galaxies at the cap. Real concentrations above the cap are thinned to it; sparser regions, as the zone the Milky Way's disc hides, stay as they are."
-  }
+  ]
 }

@@ -170,6 +170,27 @@
         ]
       },
       {
+        "id": "quaia-quasars",
+        "label": "Quaia quasars",
+        "process": "Place each quasar at its comoving distance in the Planck 2018 cosmology; colour it by the composite quasar spectrum stretched to its redshift.",
+        "recipe": "source/quaia-quasars/points.json",
+        "inputs": [
+          "quaia-quasars-sample",
+          "quasar-template"
+        ],
+        "outputs": [
+          "prepared/quaia-quasars.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
         "id": "bright-galaxies",
         "label": "Bright-galaxy dots",
         "process": "Every row of the tracked sample, in catalogue order.",
@@ -192,10 +213,11 @@
       {
         "id": "quasars",
         "label": "Quasar dots",
-        "process": "One in 3 of the tracked sample, in catalogue order.",
+        "process": "One in 2 of each of the DESI and Quaia samples, in catalogue order.",
         "recipe": "source/quasars/merge.json",
         "inputs": [
-          "desi-quasars-sample"
+          "desi-quasars-sample",
+          "quaia-quasars-sample"
         ],
         "outputs": [
           "prepared/quasars.json"
@@ -235,7 +257,8 @@
         "process": "One level, drawn whole within 6,600 Mpc.",
         "recipe": "source/quasar-dots/stack.json",
         "inputs": [
-          "desi-quasars-sample"
+          "desi-quasars-sample",
+          "quaia-quasars-sample"
         ],
         "outputs": [
           "prepared/quasar-dots.json"

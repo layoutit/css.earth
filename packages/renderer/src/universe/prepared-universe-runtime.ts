@@ -162,9 +162,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, fetchPreparedJson));
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
-        const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true,
+        const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,
-            fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true })) }));
+            fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true,
+            hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeDatasetBanks,
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
@@ -296,8 +297,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
               const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);
-              // The cutaway is the mesh's page's dataset: a one-off change when it is chosen, a no-op on every other frame.
+              // The cutaway and hiding are the mesh's page's dataset: a one-off change when it is chosen, a no-op on every other frame.
               for (const mesh of meshes) mesh.runtime.setCutaway(mesh.cutaway());
+              for (const mesh of meshes) mesh.runtime.setHidden(mesh.hidden());
               const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
