@@ -27,7 +27,6 @@ src/objects/<id>/
   source/content/              body-owned facts, dataset recipes and controls
   source/                      original inputs, labels and necessary source notes
   prepared/                    generated content, geometry and lineage records
-  prepared/page.json           generated page assets and controls
   inventory.json               generated inventory of the baked files (public textures and prepared/*)
 
 public/scenes/<id>/             installed/generated serving assets

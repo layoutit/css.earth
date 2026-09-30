@@ -33,3 +33,20 @@ test('a runtime owner may not import a test helper, whether the specifier is quo
     ], 'a computed specifier is out of reach of the static guard');
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
+
+test('relocated oracle gates retain their evidence role while ordinary CLI and check scripts cannot import fixtures', () => {
+  const root = fixture({
+    'packages/bake/src/fixtures/pin.mts': 'export const pin = 1;\n',
+    'packages/bake/cli/test-sbmt.mts': "import '../src/fixtures/pin.mts';\n",
+    'packages/bake/cli/prepare.mts': "import '../src/fixtures/pin.mts';\n",
+    '.github/scripts/checks/fixtures/pin.mts': 'export const pin = 1;\n',
+    '.github/scripts/checks/test-fits.mts': "import './fixtures/pin.mts';\n",
+    '.github/scripts/checks/plain.mts': "import './fixtures/pin.mts';\n",
+  });
+  try {
+    assert.deepEqual(auditOwnership(root).violations, [
+      '.github/scripts/checks/plain.mts: source imports test module .github/scripts/checks/fixtures/pin.mts; move shared behavior into an authored owner.',
+      'packages/bake/cli/prepare.mts: source imports test module packages/bake/src/fixtures/pin.mts; move shared behavior into an authored owner.',
+    ]);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

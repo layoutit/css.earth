@@ -44,9 +44,9 @@ it read, and comparisons recheck source bytes before decoding them.
 Ordinary regression checks need neither Java nor SBMT:
 
 ```sh
-node tests/oracles/test-sbmt.mts --unit     # checked-in synthetic case, identity and rejection tests; also runs in CI
-node tests/oracles/test-sbmt.mts --restore  # restore only missing selected archive inputs, then test every case
-node tests/oracles/test-sbmt.mts           # every case, offline after restoration
+node packages/bake/cli/test-sbmt.mts --unit     # checked-in synthetic case, identity and rejection tests; also runs in CI
+node packages/bake/cli/test-sbmt.mts --restore  # restore only missing selected archive inputs, then test every case
+node packages/bake/cli/test-sbmt.mts           # every case, offline after restoration
 node --max-old-space-size=512 packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/check.mts
 ```
 

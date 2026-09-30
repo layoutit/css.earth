@@ -35,13 +35,24 @@ pipeline's result is right.
 | numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `packages/bake/src/objects/raster/numpy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
 | USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `packages/bake/src/photometry/fixtures/photometric-truth.py` | `packages/bake/src/photometry/isis.oracle.test.mts` |
 
-Script paths in the table are repository-relative and live with their owning
-packages; each fixture follows its comparing test. The shared FITS reader is the
-`@cssearth/fits` package and the SPICE reader is `@cssearth/spice`. Their own
-tests stay self-contained, so their comparing tests sit beside the oracle
-scripts in `packages/bake/src/`. Only the two test runners and their tsconfig
-remain under `tests/oracles/`. Historical `generatedBy` strings keep the
-generator’s original path.
+Script paths in the table are repository-relative and live with their owning packages. The moved mission scripts and comparing tests are in
+`packages/bake/src/objects/layers/terrestrial/missions/`; NumPy surface cases are in
+`packages/bake/src/objects/raster/numpy/`, circular hosted-orbit fixtures in
+`packages/bake/src/objects/scene/fixtures/`, and ISIS photometric fixtures in
+`packages/bake/src/photometry/fixtures/`. The source-surface test, fixture and Python
+verifier are in `packages/bake/src/objects/geometry/`.
+
+The FITS runner lives in `.github/scripts/checks/`; the SBMT runner lives in `packages/bake/cli/`, and this directory owns the oracle tsconfig. Bake-owned FITS records and
+eclipse-map cases live beside their comparing bake suites. SBMT lives in
+`packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/`. Historical `generatedBy` strings
+keep the generator’s original path. `packages/core/src/node/oracle/tsconfig.json` includes the relocated scripts.
+
+The SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions only.
+The shared FITS reader is the
+`@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
+their scripts in `packages/bake/src/objects/cameras/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
+span `packages/bake/src/objects/cameras/`, `packages/bake/src/astronomy/fixtures/` and
+`packages/bake/src/objects/default-view/fixtures/`; the fixtures follow their comparing tests.
 
 ## Rules
 
@@ -67,8 +78,8 @@ generator’s original path.
 
 SBMT is an opt-in native backend: `node packages/core/src/node/oracle/setup.mts sbmt`, then
 `node packages/core/src/node/oracle/run.mts sbmt/projection`. It uses the same fixture envelope with a
-pinned executable/software lock that names each file's path and size. `node tests/oracles/test-sbmt.mts --unit`
-runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
+pinned executable/software lock that names each file's path and size. `node packages/bake/cli/test-sbmt.mts --unit`
+runs offline in CI; `node packages/bake/cli/test-sbmt.mts --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md).
 The commands below operate on the Python backends.
 

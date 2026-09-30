@@ -96,7 +96,7 @@ files must run without editing a workflow list. Keep test cases at their current
 paths; do not move them into a bespoke wrapper to make CI faster.
 
 Node owns the native suites; Vitest owns package/renderer discovery. `test:node`
-loads `tests/register-vite-suffix.mts` for the site's Vite imports. The lab CLI
+loads `packages/core/src/node/register-vite-suffix.mts` for the site's Vite imports. The lab CLI
 owns lab-test discovery; `pnpm test:lab` also runs its assets stage first.
 Some preparation suites keep explicit selections. Preserve setup-sensitive
 exceptions and distinguish source-dependent skips from executed checks.

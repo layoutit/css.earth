@@ -155,10 +155,12 @@ export async function prepareDatasetBillboards(projectRoot = process.cwd()) {
   const drawn = banks.filter(bank => bank.image);
   const columns = Math.max(1, Math.ceil(Math.sqrt(drawn.length))), rows = Math.max(1, Math.ceil(drawn.length / columns));
   // Photographic billboards go through the lossy lane with exact alpha: lossless was 247 KB, lossy 98 KB, and pixelmatch
-  // (threshold 0.1) flags 4 of the atlas's 1,048,576 pixels (2026-09-25).
+  // (threshold 0.1) flags 4 of the atlas's 1,048,576 pixels (2026-09-25). Effort 4, not 6: every dev start encodes this
+  // atlas; 6 took 4.7 s and 4 takes 0.3 s for 6.7 KB more (220,384 against 227,078 bytes), and pixelmatch (threshold
+  // 0.1) finds 0 of the 1,310,720 pixels differ between the two atlases (2026-09-30).
   const atlas = await encodeLossyWebp(sharp({ create: { width: columns * CELL_PX, height: rows * CELL_PX, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
     .composite(drawn.map((bank, index) => ({ input: bank.image!, left: (index % columns) * CELL_PX, top: Math.floor(index / columns) * CELL_PX }))),
-    { alphaQuality: 100, effort: 6 });
+    { alphaQuality: 100, effort: 4 });
   const metadata = { schema: 'cssearth-dataset-billboards@1', atlas: { columns, rows, cellPx: CELL_PX },
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(bank.framingRadiusUnits === undefined ? {} : { framingRadiusUnits: bank.framingRadiusUnits }),

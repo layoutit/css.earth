@@ -1,6 +1,6 @@
 /** Independent byte check for the compact display maps. The detached PDS3 label
  * supplies native offsets and coordinates; the production TIFF reader is not used.
- * Usage: node tests/oracles/geotiff-image.mts <body-source-root> <name> <native.tif> <report.json> */
+ * Usage: node packages/bake/src/objects/raster/fixtures/geotiff-image.mts <body-source-root> <name> <native.tif> <report.json> */
 import {open, readFile, writeFile} from 'node:fs/promises';
 import sharp from 'sharp';
 const [root,id,native,output]=process.argv.slice(2);

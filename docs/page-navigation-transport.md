@@ -7,9 +7,11 @@ an Earth alias. Object packages declare their authored stylesheet order in
 CSS, followed by the shared object shell CSS. The offline presentation compiler
 consumes the same list. There is no page-source regex or second object registry.
 
-`packages/bake/cli/restore-object-json.mts` writes `prepared/object.json` and
-`prepared/page.json` from the installed runtime. The descriptor names the
-transport's format and URL; neither it nor the page metadata carries a digest.
+`prepared/object.json` and `prepared/page.json` are built from the installed
+`prepared/runtime.json` when read ([prepared transport](../packages/objects/src/node/prepared-transport.ts)):
+the object transport is the runtime in its `cssearth-prepared-object@1` envelope, and the page data is the runtime's
+asset table with its published `prepared/controls.json`. Neither is a file. The descriptor names the transport's format
+and URL; neither it nor the page metadata carries a digest.
 The first-load build serializes the decoded prepared tree into
 `.object-stage`. Navigation fragments use page metadata without including another
 scene. `/objects/<id>/object.json` serves the transport with

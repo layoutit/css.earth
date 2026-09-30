@@ -39,7 +39,7 @@ packages/fits/
 ## Evidence
 
 The package's tests are self-contained. The comparisons with Astropy live beside the scripts that write their fixtures
-in [`packages/bake/src/objects/cameras/`](../bake/src/objects/cameras/). `node tests/oracles/test-fits.mts --unit` runs all of them
+in [`packages/bake/src/objects/cameras/`](../bake/src/objects/cameras/). `node .github/scripts/checks/test-fits.mts --unit` runs all of them
 offline.
 
 ESM, CommonJS and declarations are built with tsup, like the other packages. From the repository root:

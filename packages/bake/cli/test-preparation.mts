@@ -61,7 +61,7 @@ async function discover(directory: string, suffix: string): Promise<string[]> {
 }
 const entries = universeOnly ? universeEntries : [...new Set([
   'packages/bake/src/scene/scene.test.ts', 'site/test/charts.test.ts', ...universeEntries,
-  ...await discover('tests/objects', '.test.ts'), ...await discover('packages/bake/src/objects', '.test.ts'),
+  ...await discover('integration', '.test.ts'), ...await discover('packages/bake/src/objects', '.test.ts'),
   'packages/bake/src/delivery/operations-assemble.test.ts', 'packages/bake/src/delivery/public-runtime-assets.test.ts',
   'packages/bake/src/scene/leaf-raster-scale.test.ts',
   ...await discover('packages/bake/authoring', '.test.ts'), ...await discover('packages/telescope-cli/authoring', '.test.ts'),
@@ -93,7 +93,7 @@ const native = ['site/test/prepare-spatial-context.test.mts',
     'packages/bake/src/astronomy/hosted-orbit-source.test.mts', 'packages/bake/src/photometry/picaso-limb.test.mts']),
   ...(universeOnly ? [] : ['packages/bake/src/presentation/emissive-plates.test.mts', 'packages/bake/src/raster/raster-pages.test.mts',
     'packages/bake/src/delivery/publication.test.mts', 'packages/bake/src/delivery/publication-inventory.test.mts']),
-  ...(universeOnly ? [] : [...await discover('tests/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mts'), ...await discover('packages/bake/src/objects', '.test.mts'), ...await discover('packages/bake/authoring', '.test.mjs'), ...await discover('packages/bake/authoring', '.test.mts'), ...await discover('packages/telescope-cli/authoring', '.test.mjs'), ...await discover('packages/telescope-cli/authoring', '.test.mts')])];
+  ...(universeOnly ? [] : [...await discover('integration', '.test.mjs'), ...await discover('integration', '.test.mts'), ...await discover('packages/bake/src/objects', '.test.mts'), ...await discover('packages/bake/authoring', '.test.mjs'), ...await discover('packages/bake/authoring', '.test.mts'), ...await discover('packages/telescope-cli/authoring', '.test.mjs'), ...await discover('packages/telescope-cli/authoring', '.test.mts')])];
 // Individual suites decode large pinned imagery/terrain. Keep file-level work
 // bounded as the registry grows; this does not omit any preparation cases.
 run(['--test', '--test-concurrency=1', ...compiled, ...native]);

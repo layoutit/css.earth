@@ -53,7 +53,7 @@ files, which the bake writes, `setup:assets` restores and the build assembles (t
 `packages/objects/src/node/`). Nothing else in the package imports it. The manifests themselves stay beside each body.
 `@cssearth/objects/node/contract` is a second Node-only entry: the helpers tests use to
 check an object against its contract (its final prepared definition, read from
-`src/objects/<id>/prepared/object.json`, and fixture values required before a test
+`src/objects/<id>/prepared/runtime.json`, and fixture values required before a test
 inspects them).
 `@cssearth/objects/node/source-test` is the Node-only test helper for restored object source inputs.
 

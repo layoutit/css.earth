@@ -170,16 +170,17 @@ jobs:
           else
             node .github/scripts/ci/prepare-ci-inputs.mts universe
           fi
-          node packages/bake/cli/restore-object-json.mts
           node site/build/prepare/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node site/build/prepare/prepare-facilities.mts --catalog-only
+          # Keep the original lane: the retired tests/ surface-observations glob matched no files.
+          # Those owner-local suites remain in the shared bake lane.
           if [ "${GITHUB_EVENT_NAME:-}" != pull_request ]; then
             # Authoring replays the volume presentations from their FITS sources.
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
-            CSSEARTH_SOURCE_CHECK_MODE=author node --test packages/objects/src/node/provenance/exploration-catalog.test.mts src/sources/factsheet-sources.test.mts "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=author node --test packages/objects/src/node/provenance/exploration-catalog.test.mts src/sources/factsheet-sources.test.mts "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts"
           else
-            CSSEARTH_SOURCE_CHECK_MODE=published node --test packages/objects/src/node/provenance/exploration-catalog.test.mts src/sources/factsheet-sources.test.mts "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=published node --test packages/objects/src/node/provenance/exploration-catalog.test.mts src/sources/factsheet-sources.test.mts "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts"
           fi
       - name: Reproduce the prepared bank from its pinned inputs
         if: ${{ !cancelled() }}

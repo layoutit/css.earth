@@ -89,7 +89,8 @@ its validators accept); the renderer never imports the bake.
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command,
   run over every object by `pnpm test:universe:runtime`. `prepared-object-pin.ts` pins a prepared object to its
-  transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
+  transport (the descriptor's `prepared` pin and page reference, and the inventory; the transports themselves are built from
+  the runtime when read); the world-navigation
   and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `src/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
@@ -265,7 +266,7 @@ its validators accept); the renderer never imports the bake.
     `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Body pipeline tests stay in `packages/bake/authoring/<body>/`; domain tests also live under
-  `tests/objects/<topic>/` pending later moves. The moved terrestrial Node suites live in
+  `packages/bake/src/objects/<topic>/`. The moved terrestrial Node suites live in
   `packages/bake/src/objects/{cameras,geometry,raster,layers/terrestrial}/`. The source-surface
   test and independent Python verifier are in `packages/bake/src/objects/geometry/`, with the
   source-surface fixture in its `fixtures/` directory. Tests read body sources, kernel banks and

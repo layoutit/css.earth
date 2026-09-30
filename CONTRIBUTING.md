@@ -13,16 +13,17 @@ pnpm dev
 ```
 
 `pnpm install` builds the shared packages, the renderer and the preparation
-tools. `pnpm dev` restores every object's baked `prepared/` output and the
+tools. It rebuilds only the packages whose sources changed since their last
+build (`check-stale-builds --run`) and prepares no site data, which `pnpm dev`
+and `pnpm build` prepare themselves, so a repeat install takes about 6 s;
+`pnpm build:packages` forces a full rebuild. `pnpm dev` restores every object's baked `prepared/` output and the
 prepared browser images from R2 (nothing under `prepared/` is tracked; only
-files that are missing or changed are downloaded), derives the prepared JSON
-transport beside each body, and serves the site on port 4210. A warm start
-takes about 17 s; `pnpm setup:assets` runs the restore on its own. For a
+files that are missing or changed are downloaded) and serves the site on port 4210. Each body's
+`prepared/object.json` and `page.json` transports are built from its runtime when served; nothing copies them to disk. A warm start
+takes about 42 s (measured 2026-09-30); `pnpm setup:assets` runs the restore on its own. For a
 single body, use `pnpm setup:assets --object=<id>` and open `/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the
 `prepared/*` entries (skipping the public texture download) — useful when
-only the JSON changed. Either restore also derives the files R2 never holds
-(`prepared/object.json` and `page.json`)
-for restored bodies that lack them. For a production build, run `pnpm build`, then `pnpm
+only the JSON changed. For a production build, run `pnpm build`, then `pnpm
 preview`; the build first runs `setup:assets` itself, which only downloads
 files that are missing or changed.
 
@@ -235,7 +236,7 @@ script a workflow job runs before it installs dependencies imports, with everyth
 built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`). Not yet enforced:
 unused files in library folders (untangle item K).
 
-Reference implementations live under `tests/oracles/` and their owning `packages/bake/src/` topics with a pinned
+Reference implementations live beside their owning package code; the shared harness lives in `packages/core/src/node/oracle/` with a pinned
 Python environment (`node packages/core/src/node/oracle/setup.mts`); the fixtures beside them
 are committed evidence, and the comparing tests run without Python. See
 [packages/core/src/node/oracle/README.md](packages/core/src/node/oracle/README.md) before adding or regenerating

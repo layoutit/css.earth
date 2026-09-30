@@ -1,4 +1,6 @@
 import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { preparedObjectText } from '@cssearth/objects/node';
 import { readFile } from 'node:fs/promises';
 import { expect, test as vitestTest } from 'vitest';
 import { parseObjectDescriptor } from '@cssearth/objects';
@@ -7,12 +9,12 @@ import { serializePreparedScene } from './prepared-scene-serialization.js';
 
 const root = new URL('../../../../', import.meta.url);
 // Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
-const restored = existsSync(new URL('src/objects/saturn/prepared/object.json', root));
+const restored = existsSync(new URL('src/objects/saturn/prepared/runtime.json', root));
 const test = vitestTest.skipIf(!restored);
 async function fixture(id = 'saturn') {
   const descriptor = parseObjectDescriptor(await readFile(new URL(`src/objects/${id}/object.json`, root), 'utf8'));
   if (!descriptor.prepared) throw new Error('Fixture requires its prepared reference.');
-  const bytes = new Uint8Array(await readFile(new URL(`src/objects/${id}/${descriptor.prepared.url}`, root))).buffer;
+  const bytes = new TextEncoder().encode(await preparedObjectText(fileURLToPath(new URL(`src/objects/${id}/`, root)), descriptor)).buffer;
   return { descriptor, bytes };
 }
 const { descriptor, bytes } = restored ? await fixture() : ({} as Awaited<ReturnType<typeof fixture>>);

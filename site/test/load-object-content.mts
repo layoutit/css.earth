@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import { fileURLToPath } from "node:url";
+import { parseObjectDescriptor } from "@cssearth/objects";
+import { preparedObjectText } from "@cssearth/objects/node";
 import { readFile } from "node:fs/promises";
 import { requireArray, requireRecord, requireString } from "@cssearth/core";
 
@@ -34,7 +37,7 @@ export async function loadObjectContent(id: string): Promise<LoadedObjectContent
     return requireRecord(JSON.parse(bytes.toString("utf8")), `${id}: ${name} source`);
   }
   return { descriptor, source, prepared: requireRecord(await readJson("prepared/content.json"), `${id}: prepared content`),
-    object: requireRecord(await readJson("prepared/object.json"), `${id}: prepared object`) };
+    object: requireRecord(JSON.parse(await preparedObjectText(fileURLToPath(root), parseObjectDescriptor(await readJson("object.json")))), `${id}: prepared object`) };
 }
 
 function requireDescriptor(value: unknown, label: string): ObjectDescriptor {

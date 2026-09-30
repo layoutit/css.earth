@@ -70,6 +70,32 @@ This writes a full device PNG and a source receipt under `output/performance/ios
 
 [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install pymobiledevice3`, then `--pymobiledevice3 <path>` or `PYMOBILEDEVICE3`; Developer Mode on the device). During a device recording it samples Core Animation's frames per second and the memory of Safari's web content processes into `device-graphics.jsonl` and `device-webcontent.jsonl`. A device `--replay` plays the recorded path as real touch through its CoreDevice HID service (`device-touch.py`), after three calibration taps.
 
+#### Where a device capture's time goes
+
+`--stage-timing` prints each stage of a capture. A one-second capture of Venus from the dev server, measured on
+2026-09-30:
+
+| Stage | With `--open` | Page already open |
+|---|---|---|
+| Venus reloads until the app reports ready | 5.5 s | none |
+| `--settle 3` (it applies only after `--open`) | 3 s | none |
+| The steps (`[{"wait": 1}]`) | 1 s | 1 s |
+| Recorder setup, final probes and report | about 1 s | about 1 s |
+| **Total** | **about 11 s** | **about 2 s** |
+
+To iterate on one view, open the page once and leave out `--open`. Use `--open` only when a fresh load is the subject:
+startup, or two servers compared behind the same URL. After switching servers, Safari can run the previous build's
+cached modules on the first load. Check a probe that tells the builds apart, and discard that run.
+
+The recorder waits for events rather than fixed times. Memory endpoints wait for WebKit's first tracking update. The
+tracker drain waits for 100 ms of socket quiet. Layer-tree lookups are pipelined. The checkout's `git status` skips
+untracked files. Before these changes it spent about 9 s of every capture on sleeps and serial round trips.
+
+A cold dev load of Venus used to take 7.3 s on the iPad. Every page imported all 2,071 prepared files of the 29 context
+objects as one `?url` module each. Safari needed about 4 s to resolve them, and no frame rendered until it had.
+`site/prepared-context-objects.mts` now lists those files from each object's inventory, as the asset-origin build
+always did. The load takes 3.3 s with 263 requests instead of 2,335.
+
 ### Repeatable journeys on the connected iPad
 
 `pnpm ipad:run` opens the start route in visible Safari, attaches Web Inspector, and runs ordered actions while WebKit tracing and native iPad screen grabs are active. It needs a built preview from this checkout on the Mac LAN, and builds in performance mode when its build marker is absent or stale:
