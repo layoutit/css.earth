@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createNavigationHistory } from '../navigation/navigation-history.mts';
+import { createNavigationHistory, navigationHref } from '../navigation/navigation-history.mts';
 import { ROOT_OBJECT_ID } from '../root-object.mts';
 
 test('Back to the front page returns to the body it shows, not nowhere', () => {
@@ -95,5 +95,41 @@ test('settled view checkpoints skip native history writes without losing real en
   history.checkpoint(); // The same URL with stale saved state still needs repair.
   assert.equal(writes.length, 5);
   assert.equal(state.cssEarthView, captured);
+  history.destroy();
+});
+
+test('history written while the camera moves is held and applied once at rest; the app reads the held URL meanwhile', () => {
+  const writes: { kind: string; url: string }[] = [];
+  let href = 'https://css.earth/venus/?v=a', state: Record<string, unknown> = {}, now = 0, id = 0;
+  const timers = new Map<number, { at: number; callback: () => void }>();
+  const documentTarget = new EventTarget();
+  const windowTarget = {
+    document: documentTarget,
+    get location() { return { href }; },
+    history: { get state() { return state; },
+      replaceState(value: Record<string, unknown>, _: string, url: string) { writes.push({ kind: 'replace', url }); state = value; href = new URL(url, href).href; },
+      pushState(value: Record<string, unknown>, _: string, url: string) { writes.push({ kind: 'push', url }); state = value; href = new URL(url, href).href; } },
+    addEventListener() {}, removeEventListener() {},
+    setTimeout(callback: () => void, delay: number) { timers.set(++id, { at: now + delay, callback }); return id; },
+    clearTimeout(timer: number) { timers.delete(timer); },
+  } as unknown as Window;
+  const advance = (ms: number) => { now += ms; for (const [key, timer] of [...timers]) if (timer.at <= now) { timers.delete(key); timer.callback(); } };
+  const motion = (active: boolean) => documentTarget.dispatchEvent(new CustomEvent('objectmotionchange', { detail: { active, coasting: false } }));
+  const history = createNavigationHistory({ windowTarget, capture: () => '/venus/?v=a', navigate: () => {} });
+  writes.length = 0;
+  motion(true);
+  // A pinch hands Venus over to the Solar System overview, then the view keeps changing: nothing reaches the History API.
+  history.commit('/solar-system/');
+  history.commit('/solar-system/?v=b', { history: 'replace' });
+  assert.deepEqual(writes, []);
+  assert.equal(navigationHref(windowTarget), 'https://css.earth/solar-system/?v=b', 'the app reads the held URL');
+  motion(false); advance(149);
+  assert.deepEqual(writes, []);
+  advance(1);
+  assert.deepEqual(writes, [{ kind: 'push', url: '/solar-system/?v=b' }], 'one push for the handoff, with the final view');
+  assert.equal(navigationHref(windowTarget), href);
+  // At rest a write goes straight through.
+  history.commit('/solar-system/?v=c', { history: 'replace' });
+  assert.deepEqual(writes.at(-1), { kind: 'replace', url: '/solar-system/?v=c' });
   history.destroy();
 });

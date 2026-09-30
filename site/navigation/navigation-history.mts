@@ -23,6 +23,19 @@ function drawnPageDataset(target: EventTarget | null): { page: string; dataset: 
 const navigationId = (event: Event): unknown => 'detail' in event && isRecord(event.detail) ? event.detail.objectId : undefined;
 const navigationFeature = (event: Event): string | undefined => 'detail' in event && isRecord(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
 
+/** The history owner of each window, so scene code reads the URL a deferred write will publish (`navigationHref`). */
+const owners = new WeakMap<Window, { href(): string }>();
+
+/** The page's URL as the app knows it: a history write deferred while the camera moves is already this URL. */
+export function navigationHref(windowTarget: Window) {
+  return owners.get(windowTarget)?.href() ?? windowTarget.location.href;
+}
+
+// On the iPad every URL change through the History API costs 20–35 ms of main-thread time: Safari dispatches a navigate
+// event and re-runs Reader detection over the page (2026-09-30). A write made while the camera moves (a handoff in a
+// pinch, a view change in a drag) is held and applied once, after the camera has rested for this long.
+const REST_WRITE_MS = 150;
+
 /** Standalone scenes replace the current URL without creating application history entries. */
 export function replaceNavigationUrl(windowTarget: Window, url: string) {
   windowTarget.history.replaceState(windowTarget.history.state, '', url);
@@ -37,6 +50,24 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
   const prefix = Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('');
   let serial = 0, entry = `${prefix}-${++serial}`, disposed = false;
   const state = () => ({ ...(windowTarget.history.state ?? {}), cssEarthEntry: entry });
+  // A write held while the camera moves: whether any held write pushed an entry, and the latest path.
+  let moving = false, pending: { push: boolean; path: string } | null = null, restTimer: number | null = null;
+  const apply = (push: boolean, path: string) => {
+    pending = null;
+    windowTarget.history[push ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
+  };
+  const write = (push: boolean, path: string) => {
+    if (moving || restTimer !== null) { pending = { push: push || (pending?.push ?? false), path }; return; }
+    apply(push, path);
+  };
+  const applyPending = () => { restTimer = null; if (pending && !disposed) apply(pending.push, pending.path); };
+  const onMotion = (event: Event) => {
+    const active = isRecord((event as CustomEvent).detail) && (event as CustomEvent<{ active?: unknown }>).detail.active === true;
+    if (active === moving) return;
+    moving = active;
+    if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
+    if (!moving && pending) restTimer = windowTarget.setTimeout(applyPending, REST_WRITE_MS);
+  };
   function remember() {
     const url = capture();
     if (url) snapshots.set(entry, url);
@@ -53,10 +84,13 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     const url = remember();
     // A settled drag already published this entry. Replacing it again fires Safari's
     // native navigation work even with identical state and URL.
-    if (url && !isCurrentView(url)) windowTarget.history.replaceState({ ...state(), cssEarthView: url }, '', url);
+    if (url && (pending || !isCurrentView(url))) write(false, url);
   }
   const onPopState = (event: PopStateEvent) => {
     if (disposed) return;
+    // The browser moved to another entry: a write held for the one it left no longer applies.
+    pending = null;
+    if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
     // location already names the incoming entry. Capture the old scene without
     // replacing that URL; the router retires its continuous URL writer next.
     remember();
@@ -81,7 +115,10 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
   };
   checkpoint();
   windowTarget.addEventListener('popstate', onPopState);
-  return Object.freeze({
+  windowTarget.document?.addEventListener('objectmotionchange', onMotion, { capture: true });
+  const owner = Object.freeze({
+    /** The URL this owner has published or holds to publish at rest. */
+    href() { return pending ? new URL(pending.path, windowTarget.location.href).href : windowTarget.location.href; },
     checkpoint, remember,
     commit(url: string, action: NavigationHistory = { history: 'push' }) {
       const { history } = action, targetEntry = action.history === 'pop' ? action.entry : undefined;
@@ -90,14 +127,25 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
       const from = entry;
       entry = history === 'pop' ? targetEntry! : history === 'push' ? `${prefix}-${++serial}` : entry;
       if (history === 'push' && !embedded) previous.set(entry, from);
-      const value = new URL(url, windowTarget.location.href), path = value.pathname + value.search + value.hash;
+      const value = new URL(url, navigationHref(windowTarget)), path = value.pathname + value.search + value.hash;
       snapshots.set(entry, path);
       // An embedded scene shares the host page's session history, so it never adds entries of its own.
       const push = history === 'push' && !embedded;
-      if (push || !isCurrentView(path)) windowTarget.history[push ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
+      // A pop is the browser's own move and is never held; it drops any held write (onPopState).
+      if (history === 'pop') { if (!isCurrentView(path)) apply(false, path); return; }
+      if (push || pending || !isCurrentView(path)) write(push, path);
     },
-    destroy() { if (!disposed) { disposed = true; windowTarget.removeEventListener('popstate', onPopState); } },
+    destroy() {
+      if (disposed) return;
+      if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
+      if (pending) apply(pending.push, pending.path);
+      disposed = true; windowTarget.removeEventListener('popstate', onPopState);
+      windowTarget.document?.removeEventListener('objectmotionchange', onMotion, { capture: true });
+      if (owners.get(windowTarget) === owner) owners.delete(windowTarget);
+    },
   });
+  owners.set(windowTarget, owner);
+  return owner;
 }
 
 export function bindNavigationLinks({ documentTarget, windowTarget, navigable, navigate, onError = () => {} }: { documentTarget: Document; windowTarget: BrowserWindow; navigable(id: string): boolean; navigate: Navigate; onError?(error: unknown): void }) {

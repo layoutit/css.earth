@@ -2,7 +2,7 @@ import { formatSharedView, parseSharedView } from '@cssearth/renderer/navigation
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { withSceneDataset } from '../dataset-url.mts';
 import type { createNavigationHistory } from '../navigation/navigation-history.mts';
-import { replaceNavigationUrl } from '../navigation/navigation-history.mts';
+import { replaceNavigationUrl, navigationHref } from '../navigation/navigation-history.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { SceneSession, SceneSessions } from './scene-session.mts';
 import type { WorldContextMount } from './scene-world.mts';
@@ -25,7 +25,7 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
   getMotion, setMotion, onError }: SceneViewOptions) {
   function capture(href?: string) {
     if (!windowTarget.location?.href) return null;
-    const url = new URL(href ?? scenes.current?.url ?? windowTarget.location.href, windowTarget.location.href);
+    const url = new URL(href ?? scenes.current?.url ?? navigationHref(windowTarget), navigationHref(windowTarget));
     const session = scenes.current;
     const saved = session?.viewUrl ? null : session?.mount?.sharedView?.capture(getMotion());
     const token = session?.viewUrl?.capture() ?? (saved ? new URLSearchParams(formatSharedView(saved)).get('v') : null);
@@ -56,7 +56,7 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     if (!datasets || !session.url || !scenes.isCurrent(session)) return;
     const id = datasets.current();
     if (id === null) return;
-    const url = withSceneDataset(new URL(capture() ?? session.url, windowTarget.location.href), session.objectId, id === datasets.defaultId ? null : id);
+    const url = withSceneDataset(new URL(capture() ?? session.url, navigationHref(windowTarget)), session.objectId, id === datasets.defaultId ? null : id);
     replace(session, url.href);
     session.shell?.setDatasetNotice?.(null);
   }
@@ -91,7 +91,7 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     if (!href || !windowTarget.location?.href) return true;
     // A failed history restoration keeps its incoming URL for diagnosis.
     // The departed scene must not install a writer for that other route.
-    if (new URL(href).pathname !== windowTarget.location.pathname) return true;
+    if (new URL(href).pathname !== new URL(navigationHref(windowTarget)).pathname) return true;
     const shared = session.mount?.sharedView;
     const restore = !interrupted && (!request || request.scene === 'replace' || request.camera.kind === 'restore');
     const owner = shared ? bindViewUrl({ windowTarget, view: shared, getMotion,

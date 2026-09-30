@@ -1,5 +1,6 @@
 import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';
 import { formatSharedView } from "@cssearth/renderer/navigation";
+import { navigationHref } from './navigation/navigation-history.mts';
 
 // One URL owner in the shared shell. The URL is written once per interaction, when the camera has come to rest and stayed
 // there for a quiet period: a drag after its release and any throw, a run of wheel notches or a pinch after its glide, a
@@ -18,7 +19,7 @@ export function bindViewUrl({ windowTarget, view, getMotion, replace, onError = 
   let restored: { incoming: string; captured: string | null } | null = null;
   const clear = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; };
   function writeToken(token: string) {
-    const url = new URL(windowTarget.location.href);
+    const url = new URL(navigationHref(windowTarget));
     if (url.searchParams.get("v") === token) return;
     url.searchParams.set("v", token);
     replace(url.href);
@@ -74,12 +75,12 @@ export function bindViewUrl({ windowTarget, view, getMotion, replace, onError = 
   function start(incoming: string | null = null) {
     if (destroyed || started) return;
     try {
-      if (incoming && new URL(windowTarget.location.href).searchParams.get('v') === incoming) {
+      if (incoming && new URL(navigationHref(windowTarget)).searchParams.get('v') === incoming) {
         restored = { incoming, captured: captureToken() };
       }
     } catch (error) { onError(error); }
     started = true;
-    if (!new URL(windowTarget.location.href).searchParams.has('v')) schedule();
+    if (!new URL(navigationHref(windowTarget)).searchParams.has('v')) schedule();
   }
   const unsubscribe = view.subscribe(viewChanged);
   windowTarget.document.addEventListener('objectmotionchange', motionChanged, { capture: true });

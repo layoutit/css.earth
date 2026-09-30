@@ -18,7 +18,7 @@ import type { ObjectShell, ShellNavigationTransition } from '../shell/object-she
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import { objectAdapter } from "../object-adapter.mts";
 import { createNavigationContent } from '../navigation/navigation-content.mts';
-import { createNavigationHistory, bindNavigationLinks } from '../navigation/navigation-history.mts';
+import { createNavigationHistory, bindNavigationLinks, navigationHref } from '../navigation/navigation-history.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldViewport } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
@@ -123,10 +123,10 @@ export function createSceneRouter({
       if (!selection) return;
       selection.focus(focus.record, focus.sources, focus.presentation);
       if (focus.url === 'preserve') return;
-      const url = new URL(windowTarget.location.href);
+      const url = new URL(navigationHref(windowTarget));
       if (focus.url === 'reframe') url.searchParams.delete('v');
       const selected = selection.url(url);
-      if (selected !== windowTarget.location.href) view.replace(session, selected);
+      if (selected !== navigationHref(windowTarget)) view.replace(session, selected);
     },
     onCameraChange: followSelectionCamera,
     onError: report,
@@ -155,7 +155,7 @@ export function createSceneRouter({
       if (documentTarget.visibilityState !== 'visible') throw new Error('The app is not the visible Safari tab.');
       if (typeof id !== 'string' || !/^[a-z0-9-]+$/u.test(id)) throw new TypeError('Invalid destination object id.');
       if (await navigate(id) !== true) throw new Error(`Navigation to ${id} did not complete.`);
-      return { source: 'scene-router' as const, action: 'fly' as const, objectId: id, url: windowTarget.location.href };
+      return { source: 'scene-router' as const, action: 'fly' as const, objectId: id, url: navigationHref(windowTarget) };
     },
   }) : null;
   if (control) windowTarget.__cssEarthControl = control;
@@ -222,7 +222,7 @@ export function createSceneRouter({
       const viewport = world.viewport;
       const factory = await (replacement?.factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId), session.signal));
       if (!scenes.isCurrent(session)) return;
-      const startup = !replacement ? await prepareStartupBillboard(stage, factory, viewport, session.url ?? windowTarget.location.href, session.objectId, session.signal) : null;
+      const startup = !replacement ? await prepareStartupBillboard(stage, factory, viewport, session.url ?? navigationHref(windowTarget), session.objectId, session.signal) : null;
       handoff ??= startup ?? undefined;
       publication.publish();
       if (!scenes.isCurrent(session)) return;
@@ -369,7 +369,7 @@ export function createSceneRouter({
     if (!object) return false;
     const source = scenes.current;
     const resolved = resolveNavigation(intent, { object, objects, navigation: routes, current: {
-      objectId, href: intent.kind === 'focus' ? source?.url ?? windowTarget.location.href : windowTarget.location.href, subject: current.current,
+      objectId, href: intent.kind === 'focus' ? source?.url ?? navigationHref(windowTarget) : navigationHref(windowTarget), subject: current.current,
       centeredObjectId, hasPresented, reuseScene: !!source && objectId === id && scenes.state.kind === 'ready',
       mount: source?.mount ?? null, pending: requests.current,
     } });
@@ -451,16 +451,16 @@ export function createSceneRouter({
         // A failed focus load leaves the previous native target in place. Recover
         // its identity with the drawn camera instead of retrying the failed URL.
         const captured = snapshot && request.camera.kind === 'focus'
-          ? selection.url(new URL(snapshot, windowTarget.location.href)) : snapshot;
+          ? selection.url(new URL(snapshot, navigationHref(windowTarget))) : snapshot;
         if (captured && interruptedSelection) {
-          const selected = new URL(captured, windowTarget.location.href).href;
+          const selected = new URL(captured, navigationHref(windowTarget)).href;
           source.url = selected;
           historyOwner?.commit(selected, request.history);
           commitSelection(ready, request);
         } else if (captured) {
           // The source still owns the last drawn camera when destination loading
           // fails. Rebinding its URL writer must not replay the departure pose.
-          view.replace(source, new URL(captured, windowTarget.location.href).href);
+          view.replace(source, new URL(captured, navigationHref(windowTarget)).href);
         }
         await view.arrive(source, { interrupted: true });
         source.viewUrl?.flush(); syncPlayback();
@@ -530,7 +530,7 @@ export function createSceneRouter({
 
   /** A focus or overview arrival is placed by the world, so it cannot start before the world has loaded. */
   function worldOwnsArrival() {
-    const url = new URL(windowTarget.location.href);
+    const url = new URL(navigationHref(windowTarget));
     return drawnPageFromUrl(url, objectId) !== null || ['overview', 'view'].some(name => url.searchParams.has(name));
   }
   function report(error: unknown) {
@@ -540,7 +540,7 @@ export function createSceneRouter({
     if (requests.current) return;
     const selection = context?.selection;
     if (selection?.followCamera(frame) && scenes.state.kind === 'ready') {
-      view.replace(session, selection.url(session.url ?? windowTarget.location.href));
+      view.replace(session, selection.url(session.url ?? navigationHref(windowTarget)));
       // An overview's page carries no scene dataset; the scene's page gets its dataset back on the way in.
       view.syncDataset(session);
     }
@@ -601,7 +601,7 @@ export function createSceneRouter({
           current.commit(next.overview ? { kind: 'overview', overview: { scope: 'system', systemId: objectId } }
             : { kind: 'object', objectId }, objectId);
           if (next.overview) aimAtSystemCenter(ready);
-          view.replace(session, current.url(windowTarget.location.href));
+          view.replace(session, current.url(navigationHref(windowTarget)));
           view.syncDataset(session);
           session.viewUrl?.flush();
           return;
@@ -626,7 +626,7 @@ export function createSceneRouter({
           return;
         }
         current.commit(next, objectId);
-        view.replace(session, current.url(windowTarget.location.href));
+        view.replace(session, current.url(navigationHref(windowTarget)));
         session.viewUrl?.flush();
       },
     }));
