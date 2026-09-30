@@ -1,8 +1,11 @@
 /**
  * Merge prepared catalogue point banks into one bank of dots, drawn by the app like its other stars: projected every
  * frame, sharp at any zoom. `source/<id>/merge.json` lists the banks; each keeps its catalogue colour, and its opacity
- * darkens that colour, so every dot is opaque and only its colour carries its tone. An entry may be `{ bank, withinPcOfCentre, keepEvery, basis }`: only points within that
- * distance of the galaxy's centre (its volume or image-layer frame origin), and one in `keepEvery` of those in catalogue order.
+ * darkens that colour, so every dot is opaque and only its colour carries its tone. An entry may be `{ bank, withinPcOfCentre, keepEvery, uncapped, basis }`: only points within that
+ * distance of the galaxy's centre (its volume or image-layer frame origin), and one in `keepEvery` of those in catalogue order; with
+ * `uncapped`, the bank's points pass the density cap and take none of its room, so another bank's count does not change; with
+ * `fadePcFromSun: [from, to]`, a point is kept whole within `from` parsecs of the Sun and with a chance falling linearly to none
+ * at `to` (by a fixed hash of its order in the bank), so a census's edge fades into the level around it instead of ending.
  * A kinematic distance whose uncertainty (prepare-catalogue-points.mts `kinematicUncertainty`) exceeds `maxKinematicSigmaKpc` is left
  * out: those are the sources the rotation curve cannot place, and they pile onto a circle through the Sun and the
  * centre. `colourTowardWhite` mixes each colour that fraction of the way to white first (presentation: the catalogue
@@ -50,13 +53,16 @@ const positive = (value: unknown) => typeof value === 'number' && value > 0;
 const text = (value: unknown) => typeof value === 'string' && value.length > 0;
 const pair = (value: unknown): value is [number, number] => Array.isArray(value) && value.length === 2 && value[0] >= 0 && value[1] > value[0];
 
-type Entry = { bank: string; withinPcOfCentre?: number; keepEvery?: number; basis?: string };
+type Entry = { bank: string; withinPcOfCentre?: number; keepEvery?: number; uncapped?: boolean; fadePcFromSun?: [number, number]; basis?: string };
 const bankId = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*$/u.test(value);
 const entry = (value: unknown): value is string | Entry => bankId(value) || (typeof value === 'object' && value !== null && bankId((value as Entry).bank) &&
   text((value as Entry).basis) && ((value as Entry).withinPcOfCentre === undefined || positive((value as Entry).withinPcOfCentre)) &&
-  ((value as Entry).keepEvery === undefined || (Number.isInteger((value as Entry).keepEvery) && (value as Entry).keepEvery! >= 1)));
+  ((value as Entry).keepEvery === undefined || (Number.isInteger((value as Entry).keepEvery) && (value as Entry).keepEvery! >= 1)) &&
+  ((value as Entry).uncapped === undefined || (value as Entry).uncapped === true) &&
+  ((value as Entry).fadePcFromSun === undefined || (Array.isArray((value as Entry).fadePcFromSun) && (value as Entry).fadePcFromSun!.length === 2 &&
+    positive((value as Entry).fadePcFromSun![0]) && positive((value as Entry).fadePcFromSun![1]) && (value as Entry).fadePcFromSun![1] > (value as Entry).fadePcFromSun![0])));
 if (recipe.schema !== 'cssearth-catalogue-points-merge@1' || recipe.id !== id) fail(`needs schema cssearth-catalogue-points-merge@1 and id ${id}.`);
-if (!Array.isArray(recipe.banks) || !recipe.banks.length || !recipe.banks.every(entry)) fail('banks lists bank ids or { bank, withinPcOfCentre?, keepEvery?, basis } entries.');
+if (!Array.isArray(recipe.banks) || !recipe.banks.length || !recipe.banks.every(entry)) fail('banks lists bank ids or { bank, withinPcOfCentre?, keepEvery?, uncapped?: true, fadePcFromSun?: [from, to], basis } entries.');
 if (!text(recipe.meaning)) fail('needs its meaning.');
 if ((recipe.maxKinematicSigmaKpc !== undefined || recipe.maxKinematicSigmaBasis !== undefined) && (!positive(recipe.maxKinematicSigmaKpc) || !text(recipe.maxKinematicSigmaBasis))) {
   fail('maxKinematicSigmaKpc is a positive number with its basis.');
@@ -126,7 +132,7 @@ const hex = (value: unknown): value is string => typeof value === 'string' && /^
 const unplaced: Record<string, number> = {}, kept: Record<string, number> = {};
 const merged: { reference: number[]; colour: string; bank: string; group?: string }[] = [];
 let bankFrame: ReturnType<typeof parseDensityVolumeFrame> | null = null, rawFrame: unknown = null;
-for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
+for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun } of entries) {
   const bank = await readCatalogueBank(objectDirectory, bankIdValue) as { schema?: unknown; frame?: unknown; source?: unknown;
     appearance?: { colorCss?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown; groups?: unknown };
   const parsedFrame = parseDensityVolumeFrame(bank?.frame), appearance = bank?.appearance;
@@ -165,6 +171,12 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
     const position = point.slice(0, 3) as number[];
     if (withinPcOfCentre !== undefined && Math.hypot(...position.map((value, axis) => value - centreKpc![axis]!)) * 1000 > withinPcOfCentre) return;
     if (near++ % keepEvery) return;
+    if (fadePcFromSun) {
+      // Sun-centred positions, in the bank's unit.
+      const fromSunPc = Math.hypot(...position) * unit / 3.0856775814913673e16;
+      const kept = Math.max(0, Math.min(1, (fadePcFromSun[1] - fromSunPc) / (fadePcFromSun[1] - fadePcFromSun[0])));
+      if (((Math.imul(index + 1, 2654435761) >>> 0) / 2 ** 32) >= kept) return;
+    }
     const colour = palette ? palette[point[3] as number] : appearance.colorCss;
     if (!hex(colour)) throw new TypeError(`${bankIdValue}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
     const tone = (tones ? (tones as number[])[point[3] as number]! : 1) * layerTone;
@@ -225,7 +237,9 @@ if (cap?.mode === 'volume' && cap.shell !== undefined) {
     const position = place(point), key = cellOf(position).join(','), list = cells.get(key);
     if (list) list.push(position); else cells.set(key, [position]);
   }
+  const uncapped = new Set(entries.filter(value => value.uncapped).map(value => value.bank));
   ordered = ordered.filter(point => {
+    if (uncapped.has(point.bank)) return true;
     const position = place(point.reference), fromSun = Math.hypot(...position);
     const taper = cap.taper ? Math.max(0, Math.min(1, (cap.taper[1] - fromSun) / (cap.taper[1] - cap.taper[0]))) : 1;
     const allowed = law(position) * kernelMeasure * taper, home = cellOf(position);

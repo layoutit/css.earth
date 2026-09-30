@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "old-stars",
+  "meaning": "The Milky Way's bulge in old stars: the RR Lyrae stars within 3 kpc of the Galactic centre from OGLE-IV (Prudil et al. 2025), and beyond it Gaia DR3's (Li et al. 2023), thinned outward on the disc's scale length, each at its measured distance: the galaxy's height above the thin disc its arm tracers draw, fading into the disc.",
+  "banks": [
+    {
+      "bank": "bulge-rr-lyrae",
+      "withinPcOfCentre": 3000,
+      "keepEvery": 8,
+      "basis": "Presentation choices, not paper values: stars within 3 kpc of the Galactic centre show the bulge and leave out the disc and halo stars along OGLE's sightlines, which Gaia's sample draws beyond it; one star in 8, in catalogue order, so the bulge reads as the densest part of the galaxy, as it is."
+    },
+    {
+      "bank": "gaia-rr-lyrae",
+      "keepEvery": 8,
+      "basis": "Presentation choice: one in 8, the share of the OGLE stars inside 3 kpc, so the bulge's density runs on across the two samples."
+    }
+  ]
+}

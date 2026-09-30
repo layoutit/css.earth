@@ -1,0 +1,53 @@
+{
+  "id": "li-2023-gaia-rr-lyrae",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Photometric metallicity and distance estimates for ~136,000 RR Lyrae stars from Gaia Data Release 3",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2023ApJ...944...88L"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/944/88"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944...88L",
+      "label": "2023ApJ...944...88L"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/88",
+      "label": "CDS J/ApJ/944/88"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/88/ReadMe",
+      "checkedOn": "2026-09-30",
+      "locator": "table5: 135,873 Gaia DR3 RR Lyrae stars with ICRS positions, photometric metallicity, absolute G magnitude, adopted E(B-V) and photometric distance with its uncertainty (kpc)."
+    }
+  ],
+  "creators": [
+    "X.-Y. Li",
+    "Y. Huang",
+    "G.-C. Liu",
+    "T. C. Beers",
+    "H.-W. Zhang"
+  ],
+  "publisher": "ApJ 944, 88",
+  "publicationDate": "2023",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Li et al. (2023), ApJ 944, 88, distributed by CDS/VizieR.",
+      "scope": "Milky Way RR Lyrae stars beyond the bulge",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/88/ReadMe"
+    }
+  ]
+}

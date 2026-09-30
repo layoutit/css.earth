@@ -88,7 +88,10 @@ export interface PreparedCataloguePoints {
      * thinned with the distance beyond it. */
     readonly fullDetailUnits?: number;
     /** The most of its dots a bank shows on screen at once: past it, an even, stable share of them is drawn. */
-    readonly screenBudget?: number };
+    readonly screenBudget?: number;
+    /** The whole bank fades out as the view's half-width at its origin shrinks from the first to the second, evenly in its
+     * logarithm, and draws nothing below it: a bank that shapes a galaxy from outside, too busy from within. */
+    readonly fadeOutUnits?: readonly [number, number] };
   /** Each point's position, and its palette colour when the bank has a palette. */
   readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string }[];
   /** The bank's prepared shape around its origin, written by the bake that published it. */
@@ -105,7 +108,11 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   const frame = parseDensityVolumeFrame(data.frame);
   const appearance = data.appearance as Record<string, unknown> | undefined;
   const colorCss = appearance?.colorCss, radiusPx = appearance?.radiusPx, opacity = appearance?.opacity, palette = appearance?.palette, levels = appearance?.levels;
-  const screenBudget = appearance?.screenBudget, fullDetailUnits = appearance?.fullDetailUnits;
+  const screenBudget = appearance?.screenBudget, fullDetailUnits = appearance?.fullDetailUnits, fadeOutUnits = appearance?.fadeOutUnits;
+  if (fadeOutUnits !== undefined && !(Array.isArray(fadeOutUnits) && fadeOutUnits.length === 2 && fadeOutUnits.every(value => typeof value === 'number' && Number.isFinite(value))
+      && fadeOutUnits[0] > fadeOutUnits[1] && fadeOutUnits[1] > 0)) {
+    throw new TypeError(`${String(data.id)}: fadeOutUnits is [from, to], from above to above 0, got ${JSON.stringify(fadeOutUnits)}.`);
+  }
   if (fullDetailUnits !== undefined && (levels !== undefined || typeof fullDetailUnits !== 'number' || !(fullDetailUnits > 0 && Number.isFinite(fullDetailUnits)))) {
     throw new TypeError(`${String(data.id)}: fullDetailUnits is a positive distance on a bank without levels, got ${JSON.stringify(fullDetailUnits)}.`);
   }
@@ -139,7 +146,8 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
     ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
     ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }),
-    ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }) }),
+    ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }),
+    ...(fadeOutUnits === undefined ? {} : { fadeOutUnits: Object.freeze([...fadeOutUnits as number[]]) as unknown as readonly [number, number] }) }),
     points: Object.freeze(points), spread, cells });
 }
 
@@ -188,6 +196,8 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
   if (before) host.insertBefore(root, before); else host.append(root);
   let runtime: { readonly layers: readonly HTMLElement[]; publish(publication: VolumeCameraPublication): void; destroy(): void } | null = null, loading = false, destroyed = false;
   let latest: VolumeCameraPublication | null = null, extent: { originM: readonly number[]; radiusM: number } | null = null;
+  // The loaded bank's fade as the view narrows at its origin (its appearance's fadeOutUnits, in its units), in metres.
+  let fadeOutM: readonly [number, number] | null = null;
   // The view's half-width at the bank's origin per unit of camera distance: a stacked bank's inner levels fill in by it.
   let halfWidthPerDistance = 1;
   return Object.freeze({ root,
@@ -200,6 +210,13 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         const pixels = distanceM > extent.radiusM ? publication.viewport.focalPixels * extent.radiusM / distanceM : Infinity;
         const t = Math.max(0, Math.min(1, (pixels - EXTENT_FADE_PIXELS[0]) / (EXTENT_FADE_PIXELS[1] - EXTENT_FADE_PIXELS[0])));
         alpha *= t * t * (3 - 2 * t);
+        if (fadeOutM) {
+          // The whole bank fades out as the view's half-width at its origin narrows, evenly in its logarithm; faded out it
+          // neither draws nor projects.
+          const { widthPixels, heightPixels, focalPixels } = publication.viewport;
+          const halfWidthM = distanceM * (widthPixels && heightPixels && focalPixels > 0 ? Math.hypot(widthPixels, heightPixels) / 2 / focalPixels : halfWidthPerDistance);
+          alpha *= Math.max(0, Math.min(1, Math.log(halfWidthM / fadeOutM[1]) / Math.log(fadeOutM[0] / fadeOutM[1])));
+        }
       }
       const display = alpha > 0 ? '' : 'none';
       if (root.style.opacity !== String(alpha)) root.style.opacity = String(alpha);
@@ -218,6 +235,8 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         if (destroyed) return;
         const bank = parseCataloguePoints(value, url);
         extent = { originM: bank.frame.originM, radiusM: Math.max(...bank.points.map(point => Math.hypot(...point.positionUnits))) * bank.frame.metersPerUnit };
+        const fadeOut = bank.appearance.fadeOutUnits;
+        fadeOutM = fadeOut ? [fadeOut[0] * bank.frame.metersPerUnit, fadeOut[1] * bank.frame.metersPerUnit] : null;
         // One style object per palette entry: the projection asks for a style per point on every frame. An entry's alpha
         // byte scales the bank's opacity.
         const styles = new Map([...new Set(bank.points.map(point => point.colorCss))].map(colour =>

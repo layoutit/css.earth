@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-catalogue-points-stack@1",
+  "id": "old-star-dots",
+  "published": true,
+  "meaning": "The Milky Way's bulge and bar in old stars, drawn whole from anywhere in the Local Group, beside the arm tracers and nested levels of its dots.",
+  "levels": [
+    {
+      "bank": "old-stars",
+      "fullDetailUnits": 100
+    }
+  ],
+  "screenBudget": 3500,
+  "basis": "Presentation choices, 2026-09-30: every old star is drawn within 100 kpc of the Sun, so the bulge keeps its shape from outside the galaxy; at most 3,500 show at once (screenBudget), an even, stable share past that. From within the galaxy they would cover the view, so the bank fades out as the view's half-width at the Sun narrows from 9 kpc to 3 kpc (fadeOutUnits), as the 3 kpc neighbourhood level fills in, and draws nothing below it.",
+  "fadeOutUnits": [
+    9,
+    3
+  ]
+}

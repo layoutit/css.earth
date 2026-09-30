@@ -19,7 +19,7 @@ const [objectArgument, id] = process.argv.slice(2);
 if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: stack-catalogue-points.mts <object-directory> <id>');
 const objectDirectory = resolve(objectArgument), prepared = resolve(objectDirectory, 'prepared');
 const recipePath = resolve(objectDirectory, 'source', id, 'stack.json');
-const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { schema?: unknown; id?: unknown; meaning?: unknown; basis?: unknown; screenBudget?: unknown;
+const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { schema?: unknown; id?: unknown; meaning?: unknown; basis?: unknown; screenBudget?: unknown; fadeOutUnits?: unknown;
   levels?: { bank?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown; nearOpacity?: unknown; screenBudget?: unknown }[] };
 const fail = (message: string): never => { throw new TypeError(`${recipePath}: ${message}`); };
 if (recipe.schema !== 'cssearth-catalogue-points-stack@1' || recipe.id !== id || typeof recipe.meaning !== 'string' || typeof recipe.basis !== 'string') {
@@ -47,6 +47,11 @@ for (const level of levels!) if (level.nearOpacity !== undefined && !(typeof lev
 }
 if (recipe.screenBudget !== undefined && !(Number.isSafeInteger(recipe.screenBudget) && (recipe.screenBudget as number) > 0)) {
   fail(`screenBudget must be a positive whole number, got ${JSON.stringify(recipe.screenBudget)}.`);
+}
+// The whole bank may fade out as the view narrows at its origin (catalogue-points.ts): [from, to], from above to above 0.
+const fadeOut = recipe.fadeOutUnits;
+if (fadeOut !== undefined && !(Array.isArray(fadeOut) && fadeOut.length === 2 && fadeOut.every(value => typeof value === 'number') && fadeOut[0] > fadeOut[1] && fadeOut[1] > 0)) {
+  fail(`fadeOutUnits is [from, to], from above to above 0, got ${JSON.stringify(fadeOut)}.`);
 }
 // An inner level may raise or lower the bank's budget: it moves to the level's as the level appears (catalogue-points.ts).
 for (const [index, level] of levels!.entries()) if (level.screenBudget !== undefined && (index === 0 || recipe.screenBudget === undefined
@@ -83,7 +88,8 @@ const output = { schema: 'cssearth-catalogue-points@1', id, source: 'stack', mea
       ...(index === 0 ? { fullDetailUnits: level.fullDetailUnits } : { appearUnits: level.appearUnits }),
       ...(level.nearOpacity === undefined ? {} : { nearOpacity: level.nearOpacity }),
       ...(level.screenBudget === undefined ? {} : { screenBudget: level.screenBudget }) })),
-    ...(recipe.screenBudget === undefined ? {} : { screenBudget: recipe.screenBudget }) },
+    ...(recipe.screenBudget === undefined ? {} : { screenBudget: recipe.screenBudget }),
+    ...(fadeOut === undefined ? {} : { fadeOutUnits: fadeOut }) },
   basis: recipe.basis, counts: { points: points.length }, points };
 await writeCatalogueBank({ objectDirectory, id, bank: output, published: recipePublished(recipe, recipePath) });
 console.log(`Stacked ${points.length} dots in ${levels!.length} levels: ${counts.join(', ')}.`);

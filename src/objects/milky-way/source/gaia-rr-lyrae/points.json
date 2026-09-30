@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "gaia-rr-lyrae",
+  "table": {
+    "path": "sample.csv.gz",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/88/table5.dat.gz",
+    "generator": "packages/bake/authoring/milky-way/gaia-rr-lyrae-sample.mts",
+    "bytes": 363984,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "kpc"
+  },
+  "sample": "The tracked file keeps 16,897 of the table's 135,873 stars (gaia-rr-lyrae-sample.mts): those beyond 3 kpc of the Galactic centre (the Milky Way's volume frame origin) and within 30 kpc, with a distance uncertainty at most a quarter of the distance, outside the Magellanic Clouds and the Sagittarius dwarf's core, each kept with a chance falling exponentially past 3 kpc on the disc's 2.6 kpc scale length, drawn by Gaia DR3 id; with GaiaDR3, RA, DEC and the photometric distance in kpc.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "li-2023-gaia-rr-lyrae",
+  "meaning": "RR Lyrae stars of Gaia DR3 beyond 3 kpc of the Galactic centre, thinning outward on the disc's scale length, each at the photometric distance Li et al. (2023) derive from its metallicity-dependent absolute magnitude: the old stars of the outer bulge and bar, fading into the disc, which give the drawing its height above the thin disc.",
+  "appearance": {
+    "colorCss": "#ffefd2",
+    "radiusPx": 0.5,
+    "opacity": 0.7,
+    "note": "Presentation only: the warm white of these A- and F-type giants."
+  }
+}
