@@ -2,13 +2,14 @@ import { parseArgs } from "node:util";
 import { pathToFileURL } from "node:url";
 import { preview } from "vite";
 import { searchServer } from './search-server.mts';
+import { preparedFiles } from './prepared-files.mts';
 
 // Astro static preview discards user Vite plugins. Use Vite's static preview
 // directly so the same prepared-pack middleware works in dev and preview.
 export function previewSite({ root = new URL("../../", import.meta.url).pathname,
   outDir = "dist", host = "127.0.0.1", port = 4210}: {root?: string; outDir?: string; host?: string; port?: number} = {}) {
   return preview({ root, configFile: false, appType: "mpa", publicDir: false,
-    build: { outDir }, plugins: [searchServer()],
+    build: { outDir }, plugins: [searchServer(), preparedFiles(root)],
     preview: { host, port, strictPort: true } });
 }
 

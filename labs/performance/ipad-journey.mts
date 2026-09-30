@@ -118,8 +118,11 @@ function flightScript(id: string, flightSource: FlightSource): string {
 
 function gestureScript(action: 'tap' | 'drag', from: Point, to: Point = from, seconds = 0): string {
   return pageScript(`  return (async () => {
+    // A touch keeps the target it went down on (implicit pointer capture), so only pointerdown hit-tests: a hit test a
+    // move, 3D scene and all, was a fifth of a Mars drag's script on the iPad (2026-09-30), and no real finger pays it.
+    let target = null;
     const eventAt = (type, x, y, buttons) => {
-      const target = document.elementFromPoint(x, y);
+      if (type === 'pointerdown') target = document.elementFromPoint(x, y);
       if (!(target instanceof Element) || target.closest('[hidden]')) throw new Error('Journey ${action}: no visible target at ' + x + ', ' + y + '.');
       target.dispatchEvent(new PointerEvent(type, { bubbles: true, cancelable: true, composed: true, pointerId: 1, pointerType: 'touch', isPrimary: true, button: 0, buttons, clientX: x, clientY: y }));
     };

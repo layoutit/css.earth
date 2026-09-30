@@ -66,7 +66,9 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
             if (!owner) throw new Error('The destination camera is unavailable.');
             hooks.beforePublish?.(mount);
             const publication = owner.apply(getView().world, { signal: ownership.signal });
-            if (publication && !(await publication)) throw new DOMException('Arrival publication was cancelled.', 'AbortError');
+            // A publication that settles false either lost its ownership (the arrival is cancelled) or was replaced by a newer
+            // view: the reader's drag or zoom (world-frame-queue.ts). That view owns the camera now, and the arrival reveals under it.
+            if (publication && !(await publication)) ownership.signal.throwIfAborted();
             cover?.publish(owner.capture(), owner.optics());
             // Preserve the proven fly-to boundary in both modes: activation has
             // completed, the destination camera is acknowledged, then reveal.
