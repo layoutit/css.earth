@@ -6,7 +6,7 @@
       "id": "alma-band7-continuum",
       "status": "included",
       "subject": "ALMA band 7 continuum image of the photosphere",
-      "finding": "ALMA project 2022.1.01071.S serves a pipeline continuum image of R Doradus taken on 18 July 2023, public since August 2024, with a 20.7 by 16.8 milliarcsecond beam across a 60 milliarcsecond disc: 10.4 beam areas over the face at a signal-to-noise ratio of 199. Fitting a smooth disc through the image's own beam leaves a residual 7.0 times the image noise against 3.0 times for the session's check quasar, so the mottling is 2.32 times the pipeline's artefact floor, above the threshold of 2. It is this object's lens.",
+      "finding": "ALMA project 2022.1.01071.S serves a pipeline continuum image of R Doradus taken on 18 July 2023, public since August 2024, with a 20.7 by 16.8 milliarcsecond beam across a 60 milliarcsecond disc: 10.4 beam areas over the face at a signal-to-noise ratio of 199. Fitting a smooth disc through the image's own beam leaves a residual 7.0 times the image noise against 3.0 times for the session's check quasar, so the mottling is 2.32 times the pipeline's artefact floor, above the threshold of 2. It is this object's dataset.",
       "evidence": [
         "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea",
         "https://doi.org/10.1038/s41586-024-07836-9"
@@ -27,7 +27,7 @@
       "id": "convective-cell-size",
       "status": "unresolved",
       "subject": "Whether individual convective cells can be shown",
-      "finding": "The authors measure a dominant structure size of 13.1 +/- 0.6 milliarcseconds, 0.72 +/- 0.05 astronomical units, which is smaller than this image's restoring beam. The lens therefore shows convection smoothed to the resolution and no single cell is resolved. Their own higher-resolution weighting reaches about 14.9 milliarcseconds, still not below the cell size.",
+      "finding": "The authors measure a dominant structure size of 13.1 +/- 0.6 milliarcseconds, 0.72 +/- 0.05 astronomical units, which is smaller than this image's restoring beam. The dataset therefore shows convection smoothed to the resolution and no single cell is resolved. Their own higher-resolution weighting reaches about 14.9 milliarcseconds, still not below the cell size.",
       "revisitWhen": "An ALMA epoch with a beam well under 13 milliarcseconds on this star is released.",
       "evidence": [
         "https://arxiv.org/abs/2409.06785",
@@ -49,7 +49,7 @@
       "id": "matisse-raw-season",
       "status": "deferred",
       "subject": "The 2019-2020 VLTI/MATISSE raw season",
-      "finding": "The ESO archive holds 949 raw MATISSE frames of R Doradus between 16 December 2019 and 7 February 2020, which this repository's pipeline could calibrate end to end as it does for Betelgeuse. It is not needed for a lens now that the ALMA image is cast, and a second season would be a second epoch rather than a better one.",
+      "finding": "The ESO archive holds 949 raw MATISSE frames of R Doradus between 16 December 2019 and 7 February 2020, which this repository's pipeline could calibrate end to end as it does for Betelgeuse. It is not needed for a dataset now that the ALMA image is cast, and a second season would be a second epoch rather than a better one.",
       "revisitWhen": "A second epoch is wanted, or the MATISSE pipeline gains something the ALMA image cannot show, such as the infrared photosphere below the 338 GHz layer.",
       "evidence": [
         "https://archive.eso.org/tap_obs/capabilities",

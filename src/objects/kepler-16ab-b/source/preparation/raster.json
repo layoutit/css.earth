@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/kepler-16ab-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "kepler-16ab-b-surface-{id}{suffix}.webp",
-      "thumbnail": "kepler-16ab-b-lens-{id}.webp",
+      "thumbnail": "kepler-16ab-b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc195, the colour lens of kepler-16-a (src/objects/kepler-16-a/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc195, the colour dataset of kepler-16-a (src/objects/kepler-16-a/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "kepler-16-a",
           "srgb": "#ffc195",
-          "source": "the colour lens of kepler-16-a (src/objects/kepler-16-a/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of kepler-16-a (src/objects/kepler-16-a/source/photometry/stellar-color.json)"
         }
       }
     }

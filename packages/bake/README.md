@@ -33,7 +33,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/stars` | point-field recipes, catalogue sources, palette, magnitude hierarchy and precision, point atlas and photometry, diffuse sky, the encoded point bank | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/shell` | surface-shell recipes, meshes and atlas, and the CSS shell compiler | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/sky` | cubic sky recipes, the EXR source and its acquisition, baked faces with near-star sprites, the CSS sky compiler | Node only (`node:*`, `sharp`) |
-| `@cssearth/bake/density` | density-volume acquisition and KTX2 encoding, column-depth spreading, fixed discs, slice atlases and their retirement, the density-volume preparation, lens-bank promotion | Node only (`node:*`, `sharp`) |
+| `@cssearth/bake/density` | density-volume acquisition and KTX2 encoding, column-depth spreading, fixed discs, slice atlases and their retirement, the density-volume preparation, dataset-bank promotion | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/image-layers` | image-layer recipes, the diffuse Lanczos3 resampler, retained image layers as PolyCSS volume leaves | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/galaxy-catalog` | galaxy catalogue recipes, CSV and archive sources, bibliography, galaxy positions and memberships, the display sample, the object preparation | Node only (`node:*`, `yaml`) |
 | `@cssearth/bake/cluster-catalog` | the galaxy-cluster catalogue, placed with the galaxy positions | Node only |
@@ -60,22 +60,22 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology and symbols, eclipse and phase-curve maps, observed colour rasters and their photometric composition, their source records, the WISE atlas mosaic grid, FITS binary tables, TESS transit limb darkening | Node only (`node:*`, `sharp`, `geotiff`) |
 | `@cssearth/bake/objects/sources` | authored source references read through the source manifest, pinned source files with their bindings, byte ranges and atomic publication, JSON source values, the shared reference banks (CIE 1931), the recorded-generator matcher, the idle-timeout download relay | Node only |
 | `@cssearth/bake/objects/charts` | chart renderers and readers (measured spectra, retrieved profiles, reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style | Node only |
-| `@cssearth/bake/objects/content` | the object-content contract, lens vocabulary, lens steps and prepared legends, lens billboard colours, palette legend labels derived from the reported stretch | Node only |
+| `@cssearth/bake/objects/content` | the object-content contract, dataset vocabulary, dataset steps and prepared legends, dataset billboard colours, palette legend labels derived from the reported stretch | Node only |
 | `@cssearth/bake/objects/surface-features` | surface-feature banks (IAU nomenclature, Natural Earth, landing sites, shape-model landmarks, ellipsoid projection), feature notes, image-control fits for encounter and orthophoto landmarks, the projected-control check, attaching the banks to a prepared globe | Node only |
-| `@cssearth/bake/objects/stellar` | a star's colour lens from its measured, Gaia XP or Planck spectrum, limb darkening, starspots from a published figure or occultation, Roche-von Zeipel gravity darkening | Node only |
+| `@cssearth/bake/objects/stellar` | a star's colour dataset from its measured, Gaia XP or Planck spectrum, limb darkening, starspots from a published figure or occultation, Roche-von Zeipel gravity darkening | Node only |
 | `@cssearth/bake/objects/lineage` | which manifest sources each prepared product of a layered body reads, built in memory from its source records by the recipe bindings of each preparation family | Node only |
 | `@cssearth/bake/objects/candidates` | read-only public-archive searches (ALMA, ESO, MAST, DataCite, JMMC diameters), imagery candidates from OPUS, resolved-star candidates from SIMBAD, OiDB and VizieR | Node only (network) |
-| `@cssearth/bake/objects/default-view` | what a prepared object's default camera looks at, the check that a photograph lens's default camera faces it, the default lens's data coverage the default camera turns toward, and the turn toward a partial lens's data | Node only (`node:*`, `sharp`) |
+| `@cssearth/bake/objects/default-view` | what a prepared object's default camera looks at, the check that a photograph dataset's default camera faces it, the default dataset's data coverage the default camera turns toward, and the turn toward a partial dataset's data | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/objects/interpretation` | the observation interpreter the raster lane packs surfaces through: each surface's decoder (solar synoptic, terrestrial, shape-model, stellar, static observations, the Akatsuki UVI Level 3b grid), with the solar geometry the host passes in | Node only (`node:*`, `sharp`, `h5wasm`) |
-| `@cssearth/bake/objects/host-adapters` | the scene and presentation compilers' host adapters (physical scene, directional Sun, material tracks, lens navigation), bound to the solar geometry the host passes in | Node only |
+| `@cssearth/bake/objects/host-adapters` | the scene and presentation compilers' host adapters (physical scene, directional Sun, material tracks, dataset navigation), bound to the solar geometry the host passes in | Node only |
 | `@cssearth/bake/objects/celestial` | an object's sky orientation and directional Sun from its celestial profile and the solar geometry the host passes in | Node only (`node:*`) |
 | `@cssearth/bake/objects/acquisition` | the converters an acquisition plan runs to restore a derived source: SPICE DSK to a welded mesh archive (through the Python converter beside it), GeoTIFF numeric grids and images read by byte range, mapped-composition fits, the JPL satellite catalogue; the Python converters body manifests name as reproduction routes | Node only (`node:*`, `sharp`, `geotiff`, Python for DSK) |
-| `@cssearth/bake/objects/sphere-survey` | the VLT/SPHERE asteroid survey release (LAM listings and downloads), apparitions and series of frames, the apparitions a lens can join, the survey figure's printed labels | Node only (network) |
+| `@cssearth/bake/objects/sphere-survey` | the VLT/SPHERE asteroid survey release (LAM listings and downloads), apparitions and series of frames, the apparitions a dataset can join, the survey figure's printed labels | Node only (network) |
 | `@cssearth/bake/objects/layers/<kind>` | the libraries each layer pipeline shares: terrestrial (the pipeline entry and solid scene, with the solar geometry passed in; mission decoders and cameras, registration with its Horizons tables and README report, native photographs, solid and radial sources and the solid replay scene, atlases, ring sources, radial terrain and materials, solid rasters, the surface-observation pipeline), giant (ring and disc geometry, photometric contracts, the normalized-disc presentation, polar continuation and dome, the material atlas, ellipsoid materials, layered presentation, observed polar surfaces and the layered giant object), paged-ellipsoid (the assets and the paged object, with the solar geometry and asset worker passed in; the MUR image and legend, texture levels, surface banks, Earth rasters, the globe's profile, attitude, atmosphere, asset contract, recipe context and scene, refresh sources, mantle tomography, the presentation, geographic pages, places and locations), material-composition (recipes, rasters, radial motion, spectral variants, the layered-oblate preparation and presentation, cutaway materials), observation (science rasters and elevation, FITS maps, controlled and synoptic mosaics, band colours, plates and point sources, OIFITS observables and image fits, body maps with their meaning, spectral-cube band depths and resolution evidence), shape-model (the pipeline entry, with the solar geometry passed in; source records, GLB surfaces, shape lighting, ring leaves, surface rasters), cutaway and observed-surfaces contracts | Node only |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
-for example `Compact sampled replay changed accepted <lens> volume`.
+for example `Compact sampled replay changed accepted <dataset> volume`.
 
 ```text
 packages/bake/
@@ -109,7 +109,7 @@ another topic.
 
 `pnpm --filter @cssearth/bake build` writes `dist/`; `pnpm --filter @cssearth/bake test` runs the package's tests
 (Vitest) from the repository checkout, since two of them replay tracked compact inputs under `src/objects/`. The raster
-lane's surface test also reads the observation lens sampler from `src/objects/layers/observation/`. The photometry tests live
+lane's surface test also reads the observation dataset sampler from `src/objects/layers/observation/`. The photometry tests live
 in `src/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
 The node-tree, CSSOM, leaf-box, layout and activation tests are `node --test` suites in `src/presentation/`. The prepared-presentation, delivery,
 sources, navigation and preparation tests (with the solar-geometry generator's) are `node --test` suites in `src/prepared-presentation/`, `src/delivery/`,
@@ -149,7 +149,7 @@ to `prepared/<id>.json`, inventoried and published to R2, and it holds at most `
 stack and is written to the ignored `output/catalogue-points/<object>/`: never inventoried, never published, and
 never imported as a module (`packages/bake/src/volume/node/catalogue-banks.ts`). Vite serves an imported JSON file as an
 array literal, which Safari cannot compile past about a hundred thousand elements, and the site's build reads only
-`datasets`, `lenses` and `presentation` from a context object's `prepared/`, plus its source manifest (`site/prepared-context-json.mts`).
+`datasets`, `datasets` and `presentation` from a context object's `prepared/`, plus its source manifest (`site/prepared-context-json.mts`).
 
 ## Evidence
 

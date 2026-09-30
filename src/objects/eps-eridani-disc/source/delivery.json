@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-nebula-delivery@1",
+  "schema": "cssearth-nebula-delivery@2",
   "id": "eps-eridani-disc",
   "method": "density-grid",
   "request": {
@@ -24,7 +24,7 @@
   },
   "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S",
   "description": "The belt of dust 70 au from ε Eridani in its own glow at 1.3 millimetres, as ALMA imaged it in December 2019 (project 2019.1.00696.S), in the colour map Booth et al. (2023) show it in. Planet b orbits far inside it, at 3.5 au. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, and its thickness is the one Wolff et al. (2025) model, not a measurement.",
-  "defaultLens": "dust",
+  "defaultDataset": "dust",
   "framingRadiusUnits": 105,
   "attachedTo": "eps-eridani",
   "acceptedLabResult": "eps-eridani-disc-density-grids",

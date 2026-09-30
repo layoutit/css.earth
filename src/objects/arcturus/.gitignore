@@ -1,4 +1,4 @@
-# The archived spectrum behind the colour lens is restored from its archive by pinned URL and digest
+# The archived spectrum behind the colour dataset is restored from its archive by pinned URL and digest
 # (source/preparation/acquisition.json), so it is not committed.
 /source/photometry/*.dat
 /source/photometry/*.gz

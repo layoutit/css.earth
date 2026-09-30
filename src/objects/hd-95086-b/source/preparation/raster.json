@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-95086-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "shape",
       "output": "hd-95086-b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-95086-b-lens-{id}.webp",
+      "thumbnail": "hd-95086-b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {

@@ -16,7 +16,7 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
     const statuses = object(plan.statuses, 'destination statuses');
     if (typeof catalog.url !== 'string' || !catalog.url.startsWith('/scenes/') ||
         !integer(catalog.bytes, 1) || !integer(catalog.count, 1) ||
-        typeof plan.defaultLens !== 'string' || typeof statuses.detail !== 'string' || typeof statuses.overview !== 'string') {
+        typeof plan.defaultDataset !== 'string' || typeof statuses.detail !== 'string' || typeof statuses.overview !== 'string') {
       throw new TypeError('Invalid prepared destination plan.');
     }
     // The catalogue itself never reaches the page: the site's search function searches it and returns one place's record
@@ -24,7 +24,7 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
     const assertLive = () => { if (lifetime.disposed) throw new Error('Object was unmounted.'); };
     const detailStatus = statuses.detail, overviewStatus = statuses.overview;
     return Object.freeze<PreparedDestinationRuntime>({
-      lensId: plan.defaultLens,
+      datasetId: plan.defaultDataset,
       async select(input, options = {}) {
         const place = object(input, 'destination');
         await ready; assertLive();

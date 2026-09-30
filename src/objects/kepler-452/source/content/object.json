@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kepler-452",
   "displayName": "Kepler-452",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
-        "thumbnail": "kepler-452-lens-color.webp",
+        "thumbnail": "kepler-452-dataset-color.webp",
         "surface": "kepler-452-surface-color@2x.webp",
         "poles": "kepler-452-poles-color@2x.webp",
         "source": {

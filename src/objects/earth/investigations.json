@@ -49,7 +49,7 @@
       "subject": "Recent daily VIIRS imagery",
       "status": "unresolved",
       "finding": "Recent daily VIIRS imagery remains an unqualified candidate because of polar gaps and daily mosaic incompleteness.",
-      "revisitWhen": "A daily or composite VIIRS product provides gap-free global coverage suitable for the surface lens.",
+      "revisitWhen": "A daily or composite VIIRS product provides gap-free global coverage suitable for the surface dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L124"
       ]
@@ -241,8 +241,8 @@
       "id": "buenos-aires-noise",
       "subject": "Buenos Aires APrA 2025 daytime noise estimates",
       "status": "excluded",
-      "finding": "The retired noise lens used the CC BY 2.5 Argentina annual estimated noise map, not live sensor readings; its pinned GeoJSON and rasterized 30-95 dBA tiles remain for provenance while the lens is off.",
-      "revisitWhen": "A noise lens is re-enabled, or a global noise dataset is adopted.",
+      "finding": "The retired noise dataset used the CC BY 2.5 Argentina annual estimated noise map, not live sensor readings; its pinned GeoJSON and rasterized 30-95 dBA tiles remain for provenance while the dataset is off.",
+      "revisitWhen": "A noise dataset is re-enabled, or a global noise dataset is adopted.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L414",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L421"

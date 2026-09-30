@@ -12,7 +12,7 @@ import type { CompilerBakeResult, CompilerPin } from '@cssearth/bake/volume';
 type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity'>;
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 
-/** The neutral bank and every lens belong to the scene's volume, frame and fitted field. */
+/** The neutral bank and every dataset belong to the scene's volume, frame and fitted field. */
 export function assertCompilerBankIdentity(payload: PreparedCssVolume, result: BankIdentity) {
   const provenance = payload.provenance;
   if (payload.id !== `compiler-${result.volumeId ?? result.id}` || JSON.stringify(payload.frame) !== JSON.stringify(result.frame) ||
@@ -21,7 +21,7 @@ export function assertCompilerBankIdentity(payload: PreparedCssVolume, result: B
 }
 
 /** A qualified component mixture can carry different alpha without changing its spatial frame or slabs. */
-export function assertCompilerLensGeometry(neutral: PreparedCssVolume, textured: PreparedCssVolume, result: BankIdentity) {
+export function assertCompilerDatasetGeometry(neutral: PreparedCssVolume, textured: PreparedCssVolume, result: BankIdentity) {
   assertCompilerBankIdentity(textured, result);
   for (const axis of ['x', 'y', 'z'] as const) {
     const first = neutral.stacks.find(stack => stack.axis === axis)!, second = textured.stacks.find(stack => stack.axis === axis)!;
@@ -76,8 +76,8 @@ export async function validateCompilerResult(root: string, value: unknown) {
   }
   const neutral = await readBank(result.scene.neutral);
   assertCompilerBankIdentity(neutral, result.scene);
-  for (const lens of result.scene.lenses) {
-    assertCompilerLensGeometry(neutral, await readBank(lens.volume), result.scene);
+  for (const dataset of result.scene.datasets) {
+    assertCompilerDatasetGeometry(neutral, await readBank(dataset.volume), result.scene);
   }
   return result;
 }

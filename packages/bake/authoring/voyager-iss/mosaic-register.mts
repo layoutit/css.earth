@@ -9,7 +9,7 @@ import { loadIsis3Raster, sampleScienceGrid, scienceMapPoint, parseScienceGrid }
 import type { PlacedFrame } from './place.mts';
 
 export interface MosaicReference { reference: 'mosaic'; path: string; grid: unknown }
-/** A controlled cylindrical mosaic (an ISIS cube pinned as a lens) as a sampler of positive values by east longitude and latitude. */
+/** A controlled cylindrical mosaic (an ISIS cube pinned as a dataset) as a sampler of positive values by east longitude and latitude. */
 export async function mosaicSampler(sourceDirectory: string, reference: MosaicReference) {
   const grid = parseScienceGrid(reference.grid), raster = await loadIsis3Raster(resolve(sourceDirectory, reference.path), reference.grid);
   const scalar = { width: grid.width, height: grid.height, noData: null, specialValueMagnitude: grid.specialValueMagnitude };

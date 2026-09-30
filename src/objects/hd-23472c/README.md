@@ -8,7 +8,7 @@ It is one of 5 planets known around HD 23472. Its orbit and size follow Barros e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 29.79753862878 d Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): a/R* 50.2; Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): inclination 89.095 degrees Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): e 0.063 Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): omega 2 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460932.688545 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-23472's measured colour (#ffd6bf, the colour lens of hd-23472 (src/objects/hd-23472/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-23472's measured colour (#ffd6bf, the colour dataset of hd-23472 (src/objects/hd-23472/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 23472's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (95, 96, 97), folded onto its orbit. Upper limits and rows without an error are left out.
 

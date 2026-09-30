@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "hd-189733b-lally-2025-map",
@@ -68,7 +68,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -149,7 +149,7 @@
       "redistribution": "NASA media; an artist's concept, not an observation",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -284,7 +284,7 @@
       "id": "eclipse-map-context-marker",
       "path": "presentation/context.png",
       "origin": "https://zenodo.org/records/15103479",
-      "credit": "Lally et al. (2025)'s deposited MIRI temperature map seen from the host star, in the lens's palette; rendered by packages/telescope-cli/authoring/hd-189733/author.mts",
+      "credit": "Lally et al. (2025)'s deposited MIRI temperature map seen from the host star, in the dataset's palette; rendered by packages/telescope-cli/authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative of CC BY 4.0 data.",
       "consumers": [
         "navigation"
@@ -299,7 +299,7 @@
       "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The default lens map rendered as a dayside disc; `author.mts --check` recomputes it."
+        "reason": "The default dataset map rendered as a dayside disc; `author.mts --check` recomputes it."
       }
     }
   ],

@@ -87,7 +87,7 @@ export interface WorldContextBodyFact { readonly radiusM: number; readonly orbit
 /** A source-backed coordinate origin with no rendered body, surface or marker. */
 export interface WorldContextOrbitCenter { readonly positionM: Vector3; readonly centerBodyId: string; }
 export interface PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@1';
+  readonly schema: 'cssearth-world-context@2';
   readonly orbitCenters?: Readonly<Record<string, WorldContextOrbitCenter>>;
   readonly sky: { readonly sceneRegistration: string };
   readonly frame: PreparedWorldCameraFrame;
@@ -278,7 +278,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       { ...systemViewPolicy, minimumRadiusShare: 0 });
     return view ? [[classification, view] as const] : [];
   }));
-  return freeze({ schema: 'cssearth-world-context@1',
+  return freeze({ schema: 'cssearth-world-context@2',
     ...(Object.keys(orbitCenters).length ? { orbitCenters: freeze(Object.fromEntries(Object.entries(orbitCenters).map(([id, center]) =>
       [id, freeze({ positionM: copy(center.positionM), centerBodyId: center.centerBodyId })]))) } : {}),
     sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...focus, ...(focusView ? { systemView: focusView } : {}) }),

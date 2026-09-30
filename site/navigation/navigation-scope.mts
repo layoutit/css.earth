@@ -43,22 +43,22 @@ function withPage(url: URL, sceneId: string, id: string | null): URL {
   return url;
 }
 
-/** Selects dataset `lens` of drawn page `page` (an overview's, page-datasets.mts) from any URL: that page, keeping the
+/** Selects dataset `dataset` of drawn page `page` (an overview's, page-datasets.mts) from any URL: that page, keeping the
  * camera (`v`); a page reached from elsewhere carries none of the previous page's selections. */
-export function withPageDataset(url: URL, page: string, lens: string): URL {
+export function withPageDataset(url: URL, page: string, dataset: string): URL {
   withPage(url, page, page);
   url.searchParams.delete('overview'); url.searchParams.delete('view');
-  url.searchParams.set('dataset', lens);
+  url.searchParams.set('dataset', dataset);
   return url;
 }
 
-/** Parse a selection at either entry point: the focus its page names, and the lens its `dataset` selects, as on any page. */
-export function readPreparedFocusSelection(url: URL, sceneId: string): { id: string; lens: string | null } | null {
+/** Parse a selection at either entry point: the focus its page names, and the dataset its `dataset` selects, as on any page. */
+export function readPreparedFocusSelection(url: URL, sceneId: string): { id: string; dataset: string | null } | null {
   const id = preparedFocusFromUrl(url, sceneId);
   if (id === null) return null;
-  const lenses = url.searchParams.getAll('dataset');
-  if (lenses.length > 1) throw new RangeError('A saved view may have only one prepared focus lens.');
-  return { id, lens: lenses[0] ?? null };
+  const datasets = url.searchParams.getAll('dataset');
+  if (datasets.length > 1) throw new RangeError('A saved view may have only one prepared focus dataset.');
+  return { id, dataset: datasets[0] ?? null };
 }
 
 /** The overview a URL names: its page's, or on a scene's page `overview=system`. A catalogue focus's page has none. */
@@ -83,14 +83,14 @@ export function withSatelliteSystemView(url: URL, selected: boolean): URL {
   return url;
 }
 
-/** Selects the named catalogue focus and its lens on the page of scene `sceneId`, or clears it back to that scene's
- * page, replacing any overview it supersedes. A focus's page selects its lens with `dataset`, like every page, so the
+/** Selects the named catalogue focus and its dataset on the page of scene `sceneId`, or clears it back to that scene's
+ * page, replacing any overview it supersedes. A focus's page selects its dataset with `dataset`, like every page, so the
  * scene's own dataset never crosses into it or back. */
-export function withPreparedFocus(url: URL, sceneId: string, id: string | null, lens: string | null): URL {
+export function withPreparedFocus(url: URL, sceneId: string, id: string | null, dataset: string | null): URL {
   const focused = preparedFocusFromUrl(url, sceneId) !== null;
   // Clearing a focus leaves an overview's page to withOverviewScope, which keeps it or returns to the scene.
   if (id !== null || !isOverviewPage(objectIdAtPath(url.pathname))) withPage(url, sceneId, id);
-  if (id !== null && lens) url.searchParams.set('dataset', lens);
+  if (id !== null && dataset) url.searchParams.set('dataset', dataset);
   else if (id !== null || focused) url.searchParams.delete('dataset');
   if (id) { url.searchParams.delete('overview'); url.searchParams.delete('view'); }
   return url;

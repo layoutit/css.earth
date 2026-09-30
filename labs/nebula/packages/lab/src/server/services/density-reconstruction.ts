@@ -12,17 +12,17 @@ import { createStarRemovalJobs, starRemovalJobsHandler } from '../jobs/operation
 import type { RemovalProgress } from '../../features/star-removal/star-removal-types.ts';
 import type { LabSubjectRecord } from '../../features/legacy-viewer/controller';
 import type { ReconstructionRequest, ReconstructionCatalogue, PreparedReconstruction, ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
-import { lensSettingsHandler } from '../routes/lens-settings.ts';
-import { discoverFiniteLensBundle, finiteModelStarsPath } from './finite-lens-bundles.ts';
-import { lensLevels } from './lens-levels.ts';
-import { lensDifferenceHandler } from './lens-difference.ts';
-import { lensRadialHandler } from './lens-radial.ts';
+import { datasetSettingsHandler } from '../routes/dataset-settings.ts';
+import { discoverFiniteDatasetBundle, finiteModelStarsPath } from './finite-dataset-bundles.ts';
+import { datasetLevels } from './dataset-levels.ts';
+import { datasetDifferenceHandler } from './dataset-difference.ts';
+import { datasetRadialHandler } from './dataset-radial.ts';
 
 import { isResultName } from '../../features/result-name.ts';
 const cache = '.local/nebula-lab/reconstructions';
 const removalCache = '.local/nebula-lab/star-removal-nox-applied';
 const record = (value: unknown): value is Record<string, any> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
-/** A reconstruction is named by what it was made from: `<subject>-<image>`, or a model or lens name built the same way. */
+/** A reconstruction is named by what it was made from: `<subject>-<image>`, or a model or dataset name built the same way. */
 const token = isResultName;
 /** The saved request of a result directory equals `expected`, compared structurally. */
 async function sameRequest(root: string, directory: string, expected: unknown) {
@@ -70,11 +70,11 @@ export async function readPreparedReconstruction(root: string, resultId: string)
   if (!record(finite) || !token(finite.modelResultId) || !token(finite.sourceResultId) ||
       !record(provenance.finiteMaterial) || provenance.finiteMaterial.modelResultId !== finite.modelResultId || provenance.finiteMaterial.sourceResultId !== finite.sourceResultId)
     throw new TypeError('Saved finite material differs from its pinned provenance.');
-  // A model's catalogue layer belongs to the model, so a lens opened by its own result id carries it too.
+  // A model's catalogue layer belongs to the model, so a dataset opened by its own result id carries it too.
   const sourceSubjectId = result.subject.sourceSubjectId;
   const stars = typeof sourceSubjectId === 'string'
     ? await finiteModelStarsPath(root, sourceSubjectId, finite.modelResultId) : undefined;
-  // Every lens of one finite model shares its geometry; the viewer still verifies each retained leaf before swapping.
+  // Every dataset of one finite model shares its geometry; the viewer still verifies each retained leaf before swapping.
   return { ...result, processing, finiteMaterial: { modelResultId: finite.modelResultId, sourceResultId: finite.sourceResultId },
     subject: { ...result.subject, materialGeometry: finite.modelResultId, ...(stars ? { stars } : {}) } };
 }
@@ -125,7 +125,7 @@ export async function reconstructionCatalogue(root: string, subjectId: string): 
       modified: (await stat(resolve(root, cache, id, 'result.json'))).mtimeMs }); } catch { /* A failed bake is not a completed choice. */ }
   }
   completed.sort((a, b) => b.modified - a.modified);
-  const finite = await discoverFiniteLensBundle(root, subjectId, readPreparedReconstruction);
+  const finite = await discoverFiniteDatasetBundle(root, subjectId, readPreparedReconstruction);
   const candidates = [], remover = createStarRemover(root);
   for (const image of target.images) {
     if (subject.density?.candidateImageIds && !subject.density.candidateImageIds.includes(image.id)) continue;
@@ -139,14 +139,14 @@ export async function reconstructionCatalogue(root: string, subjectId: string): 
       if (resultId) removal = { imageId: image.id, resultId, modified: 0 };
     }
     if (!removal) reason ??= 'Remove stars in Alignment first.';
-    // A finite model owns the Model view: only its baked lenses are displayable, never an older density repaint.
-    const prepared = finite ? finite.lenses.find(lens => lens.imageId === image.id)?.result :
+    // A finite model owns the Model view: only its baked datasets are displayable, never an older density repaint.
+    const prepared = finite ? finite.datasets.find(dataset => dataset.imageId === image.id)?.result :
       completed.find(({ result }) => result.imageId === image.id && result.removalResultId === removal?.resultId)?.result;
     candidates.push({ imageId: image.id, label: image.label, sourcePageUrl: image.sourcePageUrl, credit: image.credit,
       removalResultId: removal?.resultId,
       placement: overlay.initialPlacement ?? defaultOverlayPlacement(), placementBasis: overlay.style.transform,
       ready: !reason, ...(reason ? { reason } : {}), ...(prepared ? { prepared } : {}),
-      ...(finite && !prepared ? { unavailable: 'No finite lens is baked for this image on the current model.' } : {}) });
+      ...(finite && !prepared ? { unavailable: 'No finite dataset is baked for this image on the current model.' } : {}) });
   }
   return { subjectId, overlayCatalogue: subject.density!.overlays!, candidates,
     ...(finite ? { finiteModel: { modelResultId: finite.modelResultId, bundle: finite.bundle, ...(finite.skipped.length ? { skipped: finite.skipped } : {}) } } : {}) };
@@ -270,23 +270,23 @@ export function reconstructionPlugin(root: string): Plugin {
       await readPreparedReconstruction(root, value.resultId);
     } });
 
-    server.middlewares.use('/__nebula/lens-settings', lensSettingsHandler(root));
+    server.middlewares.use('/__nebula/dataset-settings', datasetSettingsHandler(root));
     server.middlewares.use('/__nebula/reconstruction-jobs', starRemovalJobsHandler(jobs, '/__nebula/reconstruction-jobs'));
     server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
-    // Read-only per-channel levels for one saved lens, measured from that lens's own pinned rasters.
+    // Read-only per-channel levels for one saved dataset, measured from that dataset's own pinned rasters.
     server.middlewares.use('/__nebula/reconstruction-levels', async (request, response) => {
       try {
-        if (request.method !== 'GET') throw new TypeError('Lens levels are read-only.');
+        if (request.method !== 'GET') throw new TypeError('Dataset levels are read-only.');
         const url = new URL(request.url ?? '/', 'http://localhost'), id = url.searchParams.get('resultId') ?? '';
         if (!token(id)) throw new TypeError('Invalid reconstruction identity.');
-        const value = await lensLevels(root, await readPreparedReconstruction(root, id));
+        const value = await datasetLevels(root, await readPreparedReconstruction(root, id));
         response.setHeader('Content-Type', 'application/json'); response.setHeader('Cache-Control', 'no-store'); response.end(JSON.stringify(value));
       } catch (error) { response.statusCode = 400; response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify({ error: (error as Error).message })); }
     });
-    // Read-only difference map for one saved lens: `format=png` is the overlay image, otherwise its legend JSON.
-    server.middlewares.use('/__nebula/reconstruction-difference', lensDifferenceHandler(root, id => readPreparedReconstruction(root, id)));
-    // Read-only azimuthal radial profile for one saved lens: does brightness fall off with radius like the source?
-    server.middlewares.use('/__nebula/reconstruction-radial', lensRadialHandler(root, id => readPreparedReconstruction(root, id)));
+    // Read-only difference map for one saved dataset: `format=png` is the overlay image, otherwise its legend JSON.
+    server.middlewares.use('/__nebula/reconstruction-difference', datasetDifferenceHandler(root, id => readPreparedReconstruction(root, id)));
+    // Read-only azimuthal radial profile for one saved dataset: does brightness fall off with radius like the source?
+    server.middlewares.use('/__nebula/reconstruction-radial', datasetRadialHandler(root, id => readPreparedReconstruction(root, id)));
     server.middlewares.use('/__nebula/reconstruction', async (request, response) => {
       try {
         if (request.method !== 'GET') throw new TypeError('Use Preview to start a reconstruction.');

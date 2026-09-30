@@ -27,7 +27,7 @@ Lane change (this PR): the terrestrial solid-observation lane was retired for Ti
 
 Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js titania --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/titania/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, elevation, geology) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2150).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, elevation, geology) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2150).
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
@@ -35,9 +35,9 @@ Map edge correction (2026-09-28): the raster lane's photograph decoder writes th
 
 The [retained source inspection](source/observations/source-inspection.json) provides independent NumPy coordinate and value samples. Geology registration uses held-out crater checks. These address numeric registration and coverage; no dated browser acceptance is cited.
 
-### Voyager color lens (run of 2026-09-22, this version)
+### Voyager color dataset (run of 2026-09-22, this version)
 
-Sources. The lens uses Voyager 2 ISS narrow-angle GEOMED frames from the PDS Ring-Moon Systems Node
+Sources. The dataset uses Voyager 2 ISS narrow-angle GEOMED frames from the PDS Ring-Moon Systems Node
 (volumes VGISS_7201–7207, inventoried through the OPUS API): every complete green/violet/ultraviolet
 set of Titania that the archive holds, 30 frames in 10 sets, listed in
 [the frame recipe](source/preparation/voyager-color-frames.json). The camera comes from the pinned
@@ -63,7 +63,7 @@ Oracle. `node tools/objects/voyager-iss/oracle.mts titania --write` ([then](http
 its high-passed detail against the mosaic in the frame plane
 ([report](source/reference/voyager-color-oracle.json)): 17 frames compared, mean
 correlation 0.45, mean residual 11.7 km. The mosaic is the same control the
-Monochrome lens uses, so the colour lands on the ground the reader already sees.
+Monochrome dataset uses, so the colour lands on the ground the reader already sees.
 
 Colour. Each set is composed as a complete green/violet/ultraviolet triplet, corrected with the same
 Lunar-Lambert disk function as the monochrome mosaic to incidence 30°, emission 0°, used within 60°
@@ -81,7 +81,7 @@ cosine-weighted means over the coloured footprint meet them; spatial colour diff
 Voyager's own. The ordering agrees with independent measurements: Karkoschka (2001, *Icarus* 151,
 51) finds the moons grey with a slightly red slope and Miranda slightly bluish, and DeColibus et al.
 (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)) measure
-V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole lens then takes one brightness gain
+V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole dataset then takes one brightness gain
 against the monochrome base (the median over every footprint boundary); the brightest 0.1 % of texels
 may clip. The prepared map is in [evidence](evidence/voyager-color/map.png).
 
@@ -91,11 +91,11 @@ band-ratio and non-positive-sample rules on synthetic frames;
 `node --test tests/objects/unit/uranian-moons/voyager-color.test.mts` reads this moon's reports and
 checks the placement, registration and oracle numbers above, that every tile of a complete set is
 pinned with its geometry label, and that the prepared report carries the measured and published
-ratios; `node --test tests/objects/unit/titania/*.test.mts` covers the runtime package with the new lens.
+ratios; `node --test tests/objects/unit/titania/*.test.mts` covers the runtime package with the new dataset.
 
 ## Known problems
 
-- The Voyager color lens is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. Its whole-disc band ratios are tied to Bell and McCord (1991) read from a figure at ±0.02, and their ultraviolet calibration carries a stated ±10 % uncertainty; the archive's own ratios are in the prepared report.
+- The Voyager color dataset is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. Its whole-disc band ratios are tied to Bell and McCord (1991) read from a figure at ±0.02, and their ultraviolet calibration carries a stated ±10 % uncertainty; the archive's own ratios are in the prepared report.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Titania (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge is measured against the georeferenced source at every preparation (see the map edge correction above).
 
@@ -165,7 +165,7 @@ Elevation is a scientific color-and-relief view, not displaced geometry. A fixed
 6400 × 3200 sampling atlas, 64-pixel gutters, and 1024-pixel pole tiles support
 projective texture registration on the retained mesh; the oversized sampling
 grid adds no source detail. The same canonical assets are selected independent
-of DPR. All three lenses retain shared flood curvature and optional directional
+of DPR. All three datasets retain shared flood curvature and optional directional
 Shadows. Their minimaps and thumbnails use the same prepared interpretation.
 The navigation/context marker is an observed terrain crop with prepared
 full-phase curvature, not a new full-disc observation.
@@ -181,7 +181,7 @@ full-phase curvature, not a new full-disc observation.
 
 The archive stores page-sized XY coordinates under an incompatible Earth WGS84 orthographic CRS. Preparation does not apply that declaration as moon geography. The independently reviewed `registration.json` maps positive-east, normalized south-polar stereographic coordinates into the original GIS page. Titania uses six identified crater centroids for fitting and four separate named craters for validation. Miranda uses six publisher-graticule intersections for fitting and six interleaved intersections for validation, followed by three independently identified crater checks. The checked Titania landmark differences are 0.33–0.83° (approximately 4.5–11.4 km); these are not uncertainty bounds for every unit boundary.
 
-The lens includes 10 nonempty styled polygon categories with their original unit names and colors. Source Z coordinates are not heights. Structural linework and annotation are not turned into terrain or extra polygon units. Publisher-preview overlap evidence establishes only a partial layer order; combinations with no unique supported winner remain missing. Original polygon holes are preserved. The nearest-neighbor categorical conversion uses a 1440 × 720 display grid, with no interpolation between classes, relief or artificial boundary detail. Valid black material is distinct from no-data code 65535. Its sampled, cosine-weighted reference-sphere coverage is approximately 35.3%; unmapped northern terrain remains unknown.
+The dataset includes 10 nonempty styled polygon categories with their original unit names and colors. Source Z coordinates are not heights. Structural linework and annotation are not turned into terrain or extra polygon units. Publisher-preview overlap evidence establishes only a partial layer order; combinations with no unique supported winner remain missing. Original polygon holes are preserved. The nearest-neighbor categorical conversion uses a 1440 × 720 display grid, with no interpolation between classes, relief or artificial boundary detail. Valid black material is distinct from no-data code 65535. Its sampled, cosine-weighted reference-sphere coverage is approximately 35.3%; unmapped northern terrain remains unknown.
 
 Reproduce the categorical input with `python packages/bake/src/objects/acquisition/prepare-geologic-categories.py src/objects/titania/source/preparation/geology-conversion.json`, using the dependency versions in the converter's header. The recipe pins the archive and registration, checks feature populations and archived CRS identity, and records ambiguous overlaps and the exact output hash in `categories.receipt.json`. Original release MD5 receipts remain alongside the sources. Shared preparation then consumes the checked-in categorical input through the existing scientific GeoTIFF path. The runtime receives prepared images only.
 
@@ -194,7 +194,7 @@ Reproduce the categorical input with `python packages/bake/src/objects/acquisiti
 
 The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
-No complete mapped color or composition lens is claimed. The historical Geology view retains its own mapped coverage and registration limits; it does not turn the newer deblurring study into a registered observation product.
+No complete mapped color or composition dataset is claimed. The historical Geology view retains its own mapped coverage and registration limits; it does not turn the newer deblurring study into a registered observation product.
 
 </details>
 

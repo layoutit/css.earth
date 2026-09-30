@@ -16,7 +16,7 @@ Beta Pictoris b is a super-Jupiter about 10 au from [Beta Pictoris](../beta-pict
 
 **Radio.** Ortiz Ceballos, Berger and Cendes (2026, [arXiv:2609.16720](https://arxiv.org/abs/2609.16720)): rapid, recurring bursts 40–70% circularly polarised, and persistent emission, at 0.856 to 3.5 GHz over four MeerKAT epochs (15 February and 31 May 2025, 20 February and 2 May 2026); brightest burst 307 µJy, quiescent S-band 48 µJy. The source coincides with planet b against nine Gaia quasars and a VLBI calibrator and is 4.4σ from the star. As electron cyclotron maser emission, the highest frequency implies a field of at least 1.25 kG. The radio source is unresolved: these are facts in the panel, not a picture on the sphere.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray, self-luminous (1,742 K, GRAVITY Collaboration 2020): no image or visible colour of the planet exists.
+**Shape dataset.** A sphere of the model radius in the shared neutral gray, self-luminous (1,742 K, GRAVITY Collaboration 2020): no image or visible colour of the planet exists.
 
 ## Evidence
 
@@ -24,7 +24,7 @@ Run of 2026-09-22 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) reproduces the GRAVITY astrometry of b and c and the discovery astrometry of d (above).
 - [`node tools/prepare/prepare-object.mts beta-pictoris-b`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package through its world step.
-- The JWST disc lens places the star by this orbit: planet b is found 79 and 93 mas from where the mosaics' pointing predicts, and the orbit, not the pointing, is trusted ([disc README](../beta-pictoris-disc/README.md)).
+- The JWST disc dataset places the star by this orbit: planet b is found 79 and 93 mas from where the mosaics' pointing predicts, and the orbit, not the pointing, is trusted ([disc README](../beta-pictoris-disc/README.md)).
 - Dev server `/beta-pictoris-b/` renders the sphere and its reader text with no console errors.
 
 ## Known problems

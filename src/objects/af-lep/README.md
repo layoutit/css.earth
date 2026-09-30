@@ -12,7 +12,7 @@ AF Lep is a young star in the beta Pictoris moving group, 24 million years old. 
 
 **Radial velocity.** Gaia DR3's 21.10 ± 0.37 km/s.
 
-**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,076 K (the record) and log g 4.32 (from the record's mass and radius (packages/astronomy/data/bodies/af-lep.json)): a model, since no fit of this star's limb exists.
+**Colour dataset.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,076 K (the record) and log g 4.32 (from the record's mass and radius (packages/astronomy/data/bodies/af-lep.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 

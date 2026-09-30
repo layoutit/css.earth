@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-206893-c",
   "displayName": "HD 206893 c",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hd-206893-c-lens-shape.webp",
+        "thumbnail": "hd-206893-c-dataset-shape.webp",
         "surface": "hd-206893-c-surface-shape@2x.webp",
         "poles": "hd-206893-c-poles-shape@2x.webp",
         "source": {

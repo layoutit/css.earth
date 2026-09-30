@@ -1,6 +1,6 @@
 import { cross3 as cross, dot3 as dot, isArray } from '@cssearth/core';
 import type {SourceMesh,SourceFace,FaceTree,ClosestSurfacePoint,MeshDimensions} from './contracts.ts';
-import {parseMeshProfile,parseRadiusProfile,parsePlateProfile,parseShapeLens,parseSurfaceLens} from './shape-records.ts';
+import {parseMeshProfile,parseRadiusProfile,parsePlateProfile,parseShapeDataset,parseSurfaceDataset} from './shape-records.ts';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve } from 'node:path';
@@ -103,7 +103,7 @@ export function parseVrmlShape(text: string, value: unknown) {
 
 /** Preserve the published comet plate model, including its confidence codes.
  * Weakly constrained regions are source estimates and are labelled in the
- * prepared constraint lens; the loader does not invent replacement geometry. */
+ * prepared constraint dataset; the loader does not invent replacement geometry. */
 export async function loadPdsPlanetocentricShape(path: string, profile: unknown) {
   return parsePdsPlanetocentricShape(await readFile(path, 'utf8'), profile);
 }
@@ -232,16 +232,16 @@ export function parsePdsVertexFacetShape(text: string, value: unknown) {
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
 export async function loadShapeScalarGrid(root: string, value: unknown, sourceMesh?: SourceMesh | null) {
-  const lens=parseShapeLens(value);
-  const load = lens.format === 'stl' ? loadStlShape : lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
-  const mesh = sourceMesh ?? await load(resolve(root, lens.path), lens.grid);
-  const field = lens.facetField ? await (await import('./fits-facet-field.ts')).loadFitsFacetField(root, mesh, lens) : null;
-  const { width = 721, height = 361 } = lens.sampleGrid ?? {};
+  const dataset=parseShapeDataset(value);
+  const load = dataset.format === 'stl' ? loadStlShape : dataset.format === 'pds-radius-table' ? loadPdsRadiusTable : dataset.format === 'vrml-mesh' ? loadVrmlShape : dataset.format === 'pds-plate-model' ? loadPdsPlateShape : dataset.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
+  const mesh = sourceMesh ?? await load(resolve(root, dataset.path), dataset.grid);
+  const field = dataset.facetField ? await (await import('./fits-facet-field.ts')).loadFitsFacetField(root, mesh, dataset) : null;
+  const { width = 721, height = 361 } = dataset.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');
   let validity;
-  if (lens.coverage) {
-    const {stdout} = await exec('unzip',['-p',resolve(root,lens.coverage.path),lens.coverage.member],{maxBuffer:128*1024*1024});
-    const rows=stdout.trim().split(/\r?\n/),field=rows[0].split(',').indexOf(lens.coverage.field);
+  if (dataset.coverage) {
+    const {stdout} = await exec('unzip',['-p',resolve(root,dataset.coverage.path),dataset.coverage.member],{maxBuffer:128*1024*1024});
+    const rows=stdout.trim().split(/\r?\n/),field=rows[0].split(',').indexOf(dataset.coverage.field);
     if(field<0 || rows.length-2!==mesh.faces)throw new Error('Shape facet attributes differ from the pinned mesh.');
     validity=Uint8Array.from(rows.slice(2),row=>Number.isFinite(Number(row.split(',')[field]))?1:0);
   }
@@ -250,11 +250,11 @@ export async function loadShapeScalarGrid(root: string, value: unknown, sourceMe
     // A flat longitude/latitude map cannot identify more than one surface on
     // a center ray. Withhold ambiguous preview cells; the triangle atlas below
     // samples the actual source surface instead of painting this map on it.
-    const h=mesh.hit(x/(width-1)*360,90-y/(height-1)*180, !!lens.surfaceSampling);
+    const h=mesh.hit(x/(width-1)*360,90-y/(height-1)*180, !!dataset.surfaceSampling);
     if(h && (!validity || validity[h.faceId])) data[y*width+x]=field ? field.values[h.faceId] : h.radius;
   }
   return { ...(field ? { fieldReport: field.report } : {}),
-    ...(lens.surfaceSampling ? createShapeSurfaceSampler(mesh, lens, validity, field?.values) : {}), sample(longitude: number,latitude: number){
+    ...(dataset.surfaceSampling ? createShapeSurfaceSampler(mesh, dataset, validity, field?.values) : {}), sample(longitude: number,latitude: number){
     if(!Number.isFinite(longitude)||!Number.isFinite(latitude)||Math.abs(latitude)>90)return null;
     const x=((longitude%360+360)%360)/360*(width-1),y=(90-latitude)/180*(height-1);
     const x0=Math.floor(x),x1=Math.min(width-1,x0+1),y0=Math.floor(y),y1=Math.min(height-1,y0+1);
@@ -262,15 +262,15 @@ export async function loadShapeScalarGrid(root: string, value: unknown, sourceMe
     if(v.some(n=>!Number.isFinite(n)))return null;
     const u=x-x0,t=y-y0;
     const radius=(v[0]*(1-u)+v[1]*u)*(1-t)+(v[2]*(1-u)+v[3]*u)*t;
-    return radius*(lens.valueTransform?.scale??1)+(lens.valueTransform?.offset??0);
+    return radius*(dataset.valueTransform?.scale??1)+(dataset.valueTransform?.offset??0);
   }};
 }
 
 /** Radius belongs to the full source surface point, not its longitude/latitude
  * ray. The distance bound is authored in metres alongside simplification. */
 export function createShapeSurfaceSampler(mesh: SourceMesh, value: unknown, validity?: ArrayLike<number>, values?: ArrayLike<number>) {
-  const lens=parseSurfaceLens(value);
-  const policy = lens.surfaceSampling;
+  const dataset=parseSurfaceDataset(value);
+  const policy = dataset.surfaceSampling;
   if (policy?.method !== 'closest-source-point' || !(policy.maximumDistanceMeters > 0) ||
       !Number.isFinite(policy.maximumDistanceMeters) || typeof mesh.closestPoint !== 'function') {
     throw new TypeError('Source surface sampling requires a mesh and a finite distance bound.');
@@ -278,7 +278,7 @@ export function createShapeSurfaceSampler(mesh: SourceMesh, value: unknown, vali
   return { samplePoint(point: readonly number[]) {
     const hit = mesh.closestPoint(point, policy.maximumDistanceMeters);
     if (!hit || (validity && !validity[hit.faceId]) || (values && !Number.isFinite(values[hit.faceId]))) return null;
-    return { ...hit, value: (values ? values[hit.faceId] : hit.radius) * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0) };
+    return { ...hit, value: (values ? values[hit.faceId] : hit.radius) * (dataset.valueTransform?.scale ?? 1) + (dataset.valueTransform?.offset ?? 0) };
   } };
 }
 

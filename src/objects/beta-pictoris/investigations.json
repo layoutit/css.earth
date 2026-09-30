@@ -28,7 +28,7 @@
       "id": "limb-darkening-model",
       "subject": "Limb darkening of the sphere",
       "status": "included",
-      "finding": "No image measures this star's limb, so the sphere is darkened by the quadratic V-band law Claret and Bloemen (2011) compute from ATLAS model atmospheres, interpolated to 8090 K and log g 4.30 between the grid nodes at 8000 and 8250 K, 4.0 and 4.5: a model, labelled as one in the lens text.",
+      "finding": "No image measures this star's limb, so the sphere is darkened by the quadratic V-band law Claret and Bloemen (2011) compute from ATLAS model atmospheres, interpolated to 8090 K and log g 4.30 between the grid nodes at 8000 and 8250 K, 4.0 and 4.5: a model, labelled as one in the dataset text.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/201116451"
       ]
@@ -48,7 +48,7 @@
       "id": "debris-disc-volume",
       "subject": "The debris disc: HST/STIS in visible light (Ren et al. 2023 deposit) and JWST/NIRCam MASK335R at 2.1 and 4.1 micrometres (programme 4758)",
       "status": "included",
-      "finding": "Drawn as the attached volume beta-pictoris-disc with two lenses: the Hubble image from 16 to 82 au, where planet d orbits, and the JWST images from 49 to 126 au. JWST programme 1411's F182M image behind the smaller MASK210R coronagraph was checked for the inner disc and not used: MAST's automatic subtraction leaves speckle out to about 1.5 arcseconds and planet b stands only 2.7 times above the scatter around it. See that package's ledger and README.",
+      "finding": "Drawn as the attached volume beta-pictoris-disc with two datasets: the Hubble image from 16 to 82 au, where planet d orbits, and the JWST images from 49 to 126 au. JWST programme 1411's F182M image behind the smaller MASK210R coronagraph was checked for the inner disc and not used: MAST's automatic subtraction leaves speckle out to about 1.5 arcseconds and planet b stands only 2.7 times above the scatter around it. See that package's ledger and README.",
       "evidence": [
         "https://arxiv.org/abs/2607.13133",
         "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html"

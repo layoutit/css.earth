@@ -129,8 +129,8 @@
       "id": "thermal-roughness-ovirs-ti-and-temperature-maps",
       "subject": "Thermal roughness, OVIRS-based inertia and predicted temperatures",
       "status": "deferred",
-      "finding": "The same collection holds OTES and OVIRS roughness, the OVIRS-based inertia (offset +20 in the paper) and predicted perihelion and aphelion temperature maps on the same SPO v34 mesh. They are further lenses on an existing mesh, not selected for this change.",
-      "revisitWhen": "A lens for surface roughness or predicted temperature is requested.",
+      "finding": "The same collection holds OTES and OVIRS roughness, the OVIRS-based inertia (offset +20 in the paper) and predicted perihelion and aphelion temperature maps on the same SPO v34 mesh. They are further datasets on an existing mesh, not selected for this change.",
+      "revisitWhen": "A dataset for surface roughness or predicted temperature is requested.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/"
       ]
@@ -151,7 +151,7 @@
       "subject": "Other OVIRS and OTES global maps",
       "status": "deferred",
       "finding": "The EQ3 set also has 550 nm reflectance, 920 nm pyroxene ratio and two spectral slopes on SPC v20, and OTES band depths at 350 and 440 cm-1 and a spectral slope on SPC v20 at 6.31 m. Not selected; the OTES maps would need a fifth mesh.",
-      "revisitWhen": "A lens for these indices is requested.",
+      "revisitWhen": "A dataset for these indices is requested.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/",
         "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_tir_maps/detailed_survey/"
@@ -161,8 +161,8 @@
       "id": "derived-products-on-other-meshes",
       "subject": "Placing derived tables on the display mesh",
       "status": "excluded",
-      "finding": "None of the selected tables sits on the display PTM mesh, and facet science requires the table's own mesh. Each lens is therefore drawn on the archived mesh its table was computed on (radialTerrainAlternatives), with no cross-mesh transfer. The four meshes share the Bennu body-fixed frame; their equivalent radii (244.7-245.2 m) and centres of figure agree within 0.5 m.",
-      "revisitWhen": "A lens needs to be shown on the display mesh itself.",
+      "finding": "None of the selected tables sits on the display PTM mesh, and facet science requires the table's own mesh. Each dataset is therefore drawn on the archived mesh its table was computed on (radialTerrainAlternatives), with no cross-mesh transfer. The four meshes share the Bennu body-fixed frame; their equivalent radii (244.7-245.2 m) and centres of figure agree within 0.5 m.",
+      "revisitWhen": "A dataset needs to be shown on the display mesh itself.",
       "evidence": [
         "Volumes of the four archived OBJ files: SPC v42 0.06167, OLA v20 1.68 m 0.06135, SPO v34 0.06175, SPC v20 0.06156 km3",
         "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/"

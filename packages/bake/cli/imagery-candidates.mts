@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Before wiring or re-registering a photograph lens, find whether a public archive holds finer frames than the body ships.
+/** Before wiring or re-registering a photograph dataset, find whether a public archive holds finer frames than the body ships.
  * The searches and verdicts are `imageryCandidates` and `archiveCandidates` in `@cssearth/bake/objects/candidates`.
  *
  *   node packages/bake/cli/imagery-candidates.mts [<object-id> ...] [--minimum-pixels 50] [--json]
@@ -29,7 +29,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const km = (value: number | null | undefined) => value === null || value === undefined ? '—' : value < 1 ? `${(value * 1000).toFixed(0)} m` : `${value.toFixed(2)} km`;
   for (const result of results) {
     const shipped = result.verdict === 'shipped-unknown' ? 'unknown (no surfaces report, or imagery without a stated scale)'
-      : result.shipped?.meters ? `${km(result.shipped.meters / 1000)} (${result.shipped.kind} ${result.shipped.lens})` : 'no imagery lens';
+      : result.shipped?.meters ? `${km(result.shipped.meters / 1000)} (${result.shipped.kind} ${result.shipped.dataset})` : 'no imagery dataset';
     const best = result.opusBest ? `${km(result.opusBest.centerKmPerPixel)} ${result.opusBest.instrument} ${result.opusBest.opusId}${result.opusBest.phaseDegrees === null ? '' : ` at ${result.opusBest.phaseDegrees.toFixed(0)}°`}` : '—';
     console.log(`${result.verdict.padEnd(12)} ${result.id.padEnd(12)} shipped ${shipped}; OPUS best ${best}; ${result.pixelsAcross === null ? '' : `diameter ${result.pixelsAcross.toFixed(0)} px; `}${result.factor === null ? '' : `${result.factor.toFixed(1)}× finer; `}${result.opusImages} images`);
   }

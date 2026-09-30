@@ -7,7 +7,7 @@ import { parseSourceManifest } from '@cssearth/bake/objects/sources';
 // package's validator on what a document and a generated intermediate need.
 test('document descriptions are optional without weakening generator identity, in both manifest parsers', () => {
   const base = {
-    schema: 'cssearth-authoritative-sources@2',
+    schema: 'cssearth-authoritative-sources@3',
     inputs: [{ id: 'source', path: 'input/source.txt', origin: 'https://example.test/source.txt', credit: 'Fixture authority',
       license: 'Fixture license', acquisition: 'Fixture acquisition', redistribution: 'Fixture redistribution',
       sourceBinding: { kind: 'local' as const, reason: 'Authored test fixture' }, consumers: ['fixture'] }],

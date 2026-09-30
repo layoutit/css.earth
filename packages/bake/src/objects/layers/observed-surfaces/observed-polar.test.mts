@@ -60,14 +60,14 @@ test('dated RGB maps intersect all component footprints and preserve the shared 
    if(band===1)values[16]=NaN;
    await writeFile(join(root,band+'.fits'),imageFixture(-32,values));
   }
-  const config=structuredClone(recipe), lens=structuredClone(config.lenses.find((entry:{operation:string})=>entry.operation==='rgb-observed-gaps'));
-  lens.source='rgb.tif';lens.coverageSources=['0.fits','1.fits','2.fits'];lens.planetographicAxisRatio=1;
-  config.lenses=[lens];config.dimensions={width:32,height:16,polarTileSize:16};
+  const config=structuredClone(recipe), dataset=structuredClone(config.datasets.find((entry:{operation:string})=>entry.operation==='rgb-observed-gaps'));
+  dataset.source='rgb.tif';dataset.coverageSources=['0.fits','1.fits','2.fits'];dataset.planetographicAxisRatio=1;
+  config.datasets=[dataset];config.dimensions={width:32,height:16,polarTileSize:16};
   config.packing={latitudeBoundsDegrees:[-80,-40,0,40,80],gutter:2};
   const result=await prepareObservedPolarSurfaces({sourceDirectory:root,publicDirectory:root,config});
-  assert.equal(result.coverage[lens.id].sourceMissingPixels,5);
-  assert.equal(result.coverage[lens.id].firstMeasuredRow,1);assert.equal(result.coverage[lens.id].lastMeasuredRow,14);
-  assert.deepEqual(result.lenses.controls[0].step,lens.control.step);
+  assert.equal(result.coverage[dataset.id].sourceMissingPixels,5);
+  assert.equal(result.coverage[dataset.id].firstMeasuredRow,1);assert.equal(result.coverage[dataset.id].lastMeasuredRow,14);
+  assert.deepEqual(result.datasets.controls[0].step,dataset.control.step);
   assert.equal(result.assets.length,5);
  }finally{await rm(root,{recursive:true,force:true});}
 });

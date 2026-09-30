@@ -53,12 +53,12 @@ Paper reading and recipe assistance can use bounded specialist agents when autho
 
 Shared TypeScript readers must reject unknown methods, dangling evidence/source IDs, nonfinite parameters, invalid units/frames and unsupported operations before processing. Changing an evidence ledger or recipe must invalidate the affected cached fit. Derived textures/maps remain ignored; retain enough source records and configuration to reproduce them.
 
-All image lenses share geometry and alpha. Compact lights preserve the same observed sky coordinates and declared depth assignment. Runtime only decodes prepared results. Keep ingestion, geometric reasoning, image material and renderer concerns independently owned.
+All image datasets share geometry and alpha. Compact lights preserve the same observed sky coordinates and declared depth assignment. Runtime only decodes prepared results. Keep ingestion, geometric reasoning, image material and renderer concerns independently owned.
 
 Thin surfaces need an explicit rendering check: choose physical slab spacing from the supported feature scale, within the prepared-bank limit. Weight each slab's material color by the same emission sub-samples used for its neutral geometry. Sampling the image only at an empty slab midpoint can create false color bands. This correction changes material preparation, never the cloud support or alpha. Keep finite resolution and source coverage visible in the receipt.
 
 ## Bounded acceptance
 
-For the first trial, define the baseline, fixed cameras and a concrete expected improvement. Use targeted checks and at most three fix rounds. A front-image match alone cannot validate depth; compare neutral connectivity, side thickness, feature duplication and lens consistency. Quantitative physical fitting additionally needs qualified inputs, a corresponding forward observable, uncertainty handling and withheld spatial regions or complete pointings.
+For the first trial, define the baseline, fixed cameras and a concrete expected improvement. Use targeted checks and at most three fix rounds. A front-image match alone cannot validate depth; compare neutral connectivity, side thickness, feature duplication and dataset consistency. Quantitative physical fitting additionally needs qualified inputs, a corresponding forward observable, uncertainty handling and withheld spatial regions or complete pointings.
 
 If the required evidence or forward model is absent, the result remains an authored visualization. Record that limitation and continue with a useful bounded comparison; do not fabricate data or loosen scientific gates to make the result appear accepted. A compiled file, a coherent rotating cloud and a physically validated reconstruction are three distinct outcomes.

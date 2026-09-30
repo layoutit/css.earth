@@ -43,7 +43,7 @@ catalogue pin changes in the runtime definition. The ten photographic files
 total 5.22 MB, previously 2.30 MB; the largest decoded atlas is 195 MiB.
 Three unrelated scientific thumbnails were unavailable locally, and cross-body
 search used a preview index of these three moons. This does not qualify all
-scientific lenses or the aggregate application.
+scientific datasets or the aggregate application.
 
 This photographic refresh preserves the source maps, masks, geometry and scene
 structure. It increased photograph sampling to 4096 × 2048 and 8192 × 4096; only the 8192 × 4096 map ships now.
@@ -54,7 +54,7 @@ at 18.71° S, 104.72° E, consistent with the [Gazetteer](https://planetarynames
 
 Earlier run (12 September 2026): [`node tools/objects/dist/prepare-authored.js io --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/io/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, geology, spectral-slope, visible-absorption) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 3459).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, enhanced, geology, spectral-slope, visible-absorption) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 3459).
 
 The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF edge with the decoded output edge. The current check uses the decoder coordinates and the mounted photographic deposit.
 
@@ -64,7 +64,7 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 
 ### Stereo elevation (28 September 2026)
 
-The Elevation lens colors the Trek GeoTIFF's heights from −2 km (blue) to 6 km (dark red) and adds fixed northwest relief lighting. The shared GeoTIFF sampler reads the original Float32 values; nothing is filled or smoothed. The map is prepared lossless.
+The Elevation dataset colors the Trek GeoTIFF's heights from −2 km (blue) to 6 km (dark red) and adds fixed northwest relief lighting. The shared GeoTIFF sampler reads the original Float32 values; nothing is filled or smoothed. The map is prepared lossless.
 
 What the file is. 11,500 × 5,750 Float32 samples in geographic degrees on the `GCS_Io_2015` sphere (radius 1,821,490 m), east-positive, starting at 180° W and 90° N, 0.0313° per sample (about 1 km). No-data is −3.4 × 10³⁸. Neither the file, the [Trek record](https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM) nor its [FGDC metadata](https://trek.nasa.gov/io/TrekWS/rest/cat/metadata/fgdc/html?label=IoDEM) states the height unit or datum.
 
@@ -74,7 +74,7 @@ Units and datum. The heights are metres relative to Io's limb-profile ellipsoid,
 - Our measurement agrees: 85.3% of all samples lie within ±1,000 m. Equatorial 20° boxes at the sub-Jovian and leading points average +219 m and +378 m. Heights above a sphere would differ there by 10 km, the difference between the IAU ellipsoid's 1,829.4 and 1,819.4 km axes.
 - The journal article returned HTTP 403, so its own datum statement was not read. The [ledger](investigations.json) keeps this open.
 
-Frame check. The Gazetteer centres share the Voyager/Galileo mosaic frame of the Monochrome lens, so named mountains test the registration independently of the DEM:
+Frame check. The Gazetteer centres share the Voyager/Galileo mosaic frame of the Monochrome dataset, so named mountains test the registration independently of the DEM:
 
 - 24 of 30 covered mountains, mesas, plana and tholi stand above a ring twice their radius (mean +813 m). With longitudes mirrored, 13 of 29 do (mean +40 m).
 - Shifting all centres, the score peaks at 0 to −0.5° in longitude and 0 to +1° in latitude. Features hundreds of kilometres wide limit this check to about a degree (30 km).
@@ -306,7 +306,7 @@ Exact source byte lengths, credits and direct restoration URLs are in `source/ma
 
 Both GeoTIFFs contain 11445 × 5723 samples on a 1000 m grid. Actual monochrome detail varies from approximately 1–10 km per pixel. Color detail varies from 1.3–21 km per pixel; the published false-color product combines Galileo near-infrared, green and violet color ratios with Voyager/Galileo monochrome detail. This is an existing USGS derived observation product, not a new detail transfer in cssEarth.
 
-USGS reports calibration, geometric control, Lunar–Lambert limb-darkening correction with coefficient 0.7, and seam matching in production of these products. We preserve the published display values, with no second photometric correction or brightness fit. Photographed terrain shadows remain possible. Our existing **Shadows** control remains active for both lenses; its globe lighting is approximate and cannot infer relief hidden in a photographed shadow.
+USGS reports calibration, geometric control, Lunar–Lambert limb-darkening correction with coefficient 0.7, and seam matching in production of these products. We preserve the published display values, with no second photometric correction or brightness fit. Photographed terrain shadows remain possible. Our existing **Shadows** control remains active for both datasets; its globe lighting is approximate and cannot infer relief hidden in a photographed shadow.
 
 ## Coordinates and validity
 

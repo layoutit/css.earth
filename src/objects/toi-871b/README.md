@@ -8,7 +8,7 @@ It is the only planet known around TOI-871. Its orbit and size follow Mistry et 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 14.36273803273 d Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): a/R* 26.3; Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): inclination 89.26 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458417.051084 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 18 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-871's measured colour (#ffdeca, the colour lens of toi-871 (src/objects/toi-871/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-871's measured colour (#ffdeca, the colour dataset of toi-871 (src/objects/toi-871/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-871's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (32, 97, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

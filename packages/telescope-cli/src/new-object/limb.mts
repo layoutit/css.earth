@@ -1,5 +1,5 @@
 /** A star's limb darkening: the law a model-atmosphere grid gives at the star's own temperature, gravity and (for spherical models)
- * mass, read by the colour lens's own interpolator (@cssearth/bake/objects/stellar, limb-laws.ts). The grids are tried in this order,
+ * mass, read by the colour dataset's own interpolator (@cssearth/bake/objects/stellar, limb-laws.ts). The grids are tried in this order,
  * the first that holds a complete set of nodes around the star winning; every existing star keeps the grid it was read from.
  *
  * 1. Claret & Bloemen (2011), ATLAS models, Johnson V (VizieR J/A+A/529/A75, table-af): the visible band the colour is drawn in.
@@ -60,7 +60,7 @@ export interface LimbChoice {
   /** The source files the law is read from, their acquisition steps and manifest inputs. */
   readonly files?: readonly { readonly path: string; readonly text: string }[];
   readonly acquisitions?: readonly Record<string, unknown>[]; readonly inputs?: readonly Record<string, unknown>[]; readonly coefficients?: QuadraticLimbDarkening;
-  /** The sentence the lens qualification, README and NOTICE use. */
+  /** The sentence the dataset qualification, README and NOTICE use. */
   readonly sentence: string; readonly credit?: string; readonly grid?: Grid['key'] | 'howarth' | 'picaso';
 }
 
@@ -90,7 +90,7 @@ async function fromGrid(id: string, grid: Grid, teffK: number, logg: number, mas
     acquisitions: [{ kind: 'request-download', groups: ['restore', 'refresh'], path: grid.file, url: VIZIER_ASU, form, requiredText: [grid.columns.mass ? 'Teff\tlogg' : 'logg\tTeff'], replacements: [...REPLACEMENTS, ...grid.rewrite ?? []] }],
     inputs: [{ id: `${id}-${grid.inputId}`, path: grid.file, origin: VIZIER_ASU, credit: `${grid.cite} (VizieR ${grid.vizier})`, ...LICENSE,
       acquisition: `VizieR request in source/preparation/acquisition.json: the quadratic ${grid.band} coefficients of ${grid.rewrite ? `the whole grid (the nodes used are ${range(teffs)} K, log g ${range(loggs)}), its model names rewritten into Teff and logg columns` : `the grid nodes at ${range(teffs)} K, log g ${range(loggs)}${masses.length ? `, ${range(masses)} solar masses` : ''}`}, solar metallicity.`,
-      redistribution: grid.rewrite ? 'Catalogue rows retained with their citation, each model name rewritten into its Teff and logg.' : 'Catalogue rows retained unchanged with their citation.', consumers: ['assets', 'lenses'] }],
+      redistribution: grid.rewrite ? 'Catalogue rows retained with their citation, each model name rewritten into its Teff and logg.' : 'Catalogue rows retained unchanged with their citation.', consumers: ['assets', 'datasets'] }],
     sentence: `dimmed toward the limb by ${law} (u1 ${coefficients.u1.toFixed(3)}, u2 ${coefficients.u2.toFixed(3)})${edgeNote(coefficients)}: a model, because no fit of this star's limb is used`,
     credit: `Limb darkening: ${grid.cite}, via VizieR ${grid.vizier}.`,
   } satisfies LimbChoice;
@@ -115,7 +115,7 @@ async function fromHowarth(id: string, teffK: number, logg: number, archive: Arc
     acquisitions: files.map(file => ({ kind: 'download', groups: ['restore', 'refresh'], path: file.path, url: file.url })),
     inputs: files.map(file => ({ id: `${id}-howarth-2011-${file.path.split('/').at(-1)!.replace(/\.ucE$/u, '')}`, path: file.path, origin: file.url, credit: `${HOWARTH.cite} (VizieR ${HOWARTH.vizier})`, ...LICENSE,
       acquisition: `Download of the ${HOWARTH.grid} model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.`,
-      redistribution: 'Catalogue file retained unchanged with its citation.', consumers: ['assets', 'lenses'] })),
+      redistribution: 'Catalogue file retained unchanged with its citation.', consumers: ['assets', 'datasets'] })),
     sentence: `dimmed toward the limb by the quadratic law ${HOWARTH.cite} computes from ATLAS9 model atmospheres for the Bessell V band at ${teffK.toLocaleString('en-US')} K and log g ${logg}, read between the models ${chosen.map(model => model.file.split('/').at(-1)).join(', ')} (u1 ${coefficients.u1.toFixed(3)}, u2 ${coefficients.u2.toFixed(3)}): a model, because no fit of this star's limb is used`,
     credit: `Limb darkening: ${HOWARTH.cite}, CDS J/MNRAS/413/1515.`,
   } satisfies LimbChoice;

@@ -11,7 +11,7 @@ import { requireTexturePlacements } from './prepared-texture-levels.js';
 
 export function requireVariants(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>, tracks: readonly PreparedMaterialTrack[], controls: ObjectControls, camera: CameraPlan): asserts value is readonly PreparedVariant[] {
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
-  const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [], settings = new Map(controls.settings?.controls.map(setting => [setting.name, setting]) ?? []);
+  const datasetIds = controls.datasets?.controls.map(dataset => dataset.id) ?? [], settings = new Map(controls.settings?.controls.map(setting => [setting.name, setting]) ?? []);
   const keys: Record<string, unknown>[] = [];
   const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
   for (const input of variants) {
@@ -26,9 +26,9 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
         hidden.add(root);
       }
     }
-    const when = record(variant.when, 'selection key', ['lensId', ...settings.keys()]); keys.push(when);
-    if (lensIds.length ? !lensIds.includes(text(when.lensId, 'variant lens')) : Object.hasOwn(when, 'lensId')) fail('variant must match the declared lens capability');
-    for (const [key, value] of Object.entries(when)) if (key !== 'lensId') {
+    const when = record(variant.when, 'selection key', ['datasetId', ...settings.keys()]); keys.push(when);
+    if (datasetIds.length ? !datasetIds.includes(text(when.datasetId, 'variant dataset')) : Object.hasOwn(when, 'datasetId')) fail('variant must match the declared dataset capability');
+    for (const [key, value] of Object.entries(when)) if (key !== 'datasetId') {
       if (settings.get(key)?.kind !== 'toggle') fail('variants may only bind discrete toggle settings'); boolean(value, 'variant toggle');
     }
     resourceList(variant.required, resources, 'selection resources');
@@ -57,18 +57,18 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
       }
     }
   }
-  const toggles = [...new Set(keys.flatMap(when => Object.keys(when).filter(key => key !== 'lensId')))];
+  const toggles = [...new Set(keys.flatMap(when => Object.keys(when).filter(key => key !== 'datasetId')))];
   const declaredToggles = [...settings.values()].filter(setting => setting.kind === 'toggle').map(setting => setting.name);
   for (const name of declaredToggles) if (!toggles.includes(name)) fail(`setting ${name} has no prepared variant`);
   if (toggles.length > 12) fail('selection table exceeds bounded toggle combinations');
-  // A toggle may apply only to compatible lenses, but it must change at least one prepared selection.
+  // A toggle may apply only to compatible datasets, but it must change at least one prepared selection.
   const effective = new Set<string>();
   const effect = (variant: PreparedVariant) => JSON.stringify({ required: variant.required, writes: variant.writes,
     materials: variant.materials, navigation: variant.navigation });
-  for (const lensId of lensIds.length ? lensIds : [null]) {
+  for (const datasetId of datasetIds.length ? datasetIds : [null]) {
     const resolved: PreparedVariant[] = [];
     for (let bits = 0; bits < 2 ** toggles.length; bits++) {
-      const state: Record<string, string | boolean | null> = {lensId, ...Object.fromEntries(toggles.map((name, bit) => [name, !!(bits & 2 ** bit)]))};
+      const state: Record<string, string | boolean | null> = {datasetId, ...Object.fromEntries(toggles.map((name, bit) => [name, !!(bits & 2 ** bit)]))};
       const matching = variants.filter((variant, index) => Object.entries(keys[index]!).every(([key, value]) => state[key] === value));
       if (matching.length !== 1) fail('selection table must cover each combination exactly once');
       resolved.push(matching[0] as PreparedVariant);
@@ -171,21 +171,21 @@ export function requireAnimations(value: unknown, tree: PreparedTree, motion = f
   }
 }
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {
-  const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
+  const datasetIds = controls.datasets?.controls.map(dataset => dataset.id) ?? [];
   if (plan.surfaceHit !== undefined) {
-    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'frontFace', 'lensRanges']);
+    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'frontFace', 'datasetRanges']);
     if (hit.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(hit.frontFace as string)) fail('invalid surface front face');
     if (!ancestor(nodeReference(hit.target, tree), tree.scene, tree)) fail('surface hit target must belong to scene');
     const triangles = array(hit.triangles, 'surface hit triangles');
     if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
-    if (hit.lensRanges !== undefined) {
-      const ranges = array(hit.lensRanges, 'surface lens ranges');
-      if (ranges.length !== lensIds.length) fail('surface ranges must cover every lens');
-      unique(ranges.map(value => record(value, 'surface lens range').lensId), 'surface lens ranges');
+    if (hit.datasetRanges !== undefined) {
+      const ranges = array(hit.datasetRanges, 'surface dataset ranges');
+      if (ranges.length !== datasetIds.length) fail('surface ranges must cover every dataset');
+      unique(ranges.map(value => record(value, 'surface dataset range').datasetId), 'surface dataset ranges');
       for (const value of ranges) {
-        const range = record(value, 'surface lens range', ['lensId', 'start', 'count']);
-        if (!lensIds.includes(text(range.lensId, 'surface lens')) || !Number.isSafeInteger(range.start) || Number(range.start) < 0 ||
-            !Number.isSafeInteger(range.count) || Number(range.count) < 1 || Number(range.start) + Number(range.count) > triangles.length) fail('invalid surface lens range');
+        const range = record(value, 'surface dataset range', ['datasetId', 'start', 'count']);
+        if (!datasetIds.includes(text(range.datasetId, 'surface dataset')) || !Number.isSafeInteger(range.start) || Number(range.start) < 0 ||
+            !Number.isSafeInteger(range.count) || Number(range.count) < 1 || Number(range.start) + Number(range.count) > triangles.length) fail('invalid surface dataset range');
       }
     }
     for (const input of triangles) {
@@ -203,18 +203,18 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
     for (const value of frame) if (!ancestor(nodeReference(value, tree), tree.scene, tree)) fail('motion frame must belong to scene');
   }
   if (plan.destinations !== undefined) {
-    const destinations = record(plan.destinations, 'destinations', ['catalog', 'defaultLens', 'statuses']);
+    const destinations = record(plan.destinations, 'destinations', ['catalog', 'defaultDataset', 'statuses']);
     const catalog = record(destinations.catalog, 'destination catalog', ['url', 'bytes', 'count', 'sourcePage', 'license', 'snapshotDate']);
-    if (!text(catalog.url, 'catalog URL').startsWith('/scenes/') || !lensIds.includes(text(destinations.defaultLens, 'destination lens'))) fail('destinations require a /scenes/ catalog and a declared lens');
+    if (!text(catalog.url, 'catalog URL').startsWith('/scenes/') || !datasetIds.includes(text(destinations.defaultDataset, 'destination dataset'))) fail('destinations require a /scenes/ catalog and a declared dataset');
     integer(catalog.bytes, 'catalog bytes', 1); integer(catalog.count, 'catalog count', 1);
     const statuses = record(destinations.statuses, 'destination statuses', ['detail', 'overview']); text(statuses.detail, 'detail status'); text(statuses.overview, 'overview status');
   }
-  if (plan.features !== undefined) requireSurfaceFeatures(plan.features, tree, lensIds);
+  if (plan.features !== undefined) requireSurfaceFeatures(plan.features, tree, datasetIds);
 }
 
-/** Prepared nomenclature labels: a prepared catalogue anchored to one scene mesh, shown for declared lenses. */
-export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensIds: readonly string[]): void {
-  const features = record(value, 'surface features', ['catalog', 'selection', 'target', 'lensIds', 'meshRadiusUnits', 'policy', 'outline', 'surfaceRadiusUnits', 'surfaceEllipsoidUnits']);
+/** Prepared nomenclature labels: a prepared catalogue anchored to one scene mesh, shown for declared datasets. */
+export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, datasetIds: readonly string[]): void {
+  const features = record(value, 'surface features', ['catalog', 'selection', 'target', 'datasetIds', 'meshRadiusUnits', 'policy', 'outline', 'surfaceRadiusUnits', 'surfaceEllipsoidUnits']);
   const catalog = record(features.catalog, 'surface feature catalog', ['url', 'bytes', 'count']);
   if (!text(catalog.url, 'feature catalog URL').startsWith('/scenes/')) fail(`surface feature catalog ${String(catalog.url)} must be a /scenes/ address`);
   integer(catalog.bytes, 'feature catalog bytes', 1); integer(catalog.count, 'feature catalog count', 1);
@@ -235,9 +235,9 @@ export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensI
     if (found !== count) fail('surface feature selection bank counts drifted');
   }
   if (!ancestor(nodeReference(features.target, tree), tree.scene, tree)) fail('surface feature target must belong to scene');
-  const lenses = array(features.lensIds, 'surface feature lenses').map(id => text(id, 'surface feature lens'));
-  unique(lenses, 'surface feature lenses');
-  if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail('surface features require declared lenses');
+  const datasets = array(features.datasetIds, 'surface feature datasets').map(id => text(id, 'surface feature dataset'));
+  unique(datasets, 'surface feature datasets');
+  if (!datasets.length || datasets.some(id => !datasetIds.includes(id))) fail('surface features require declared datasets');
   positive(features.meshRadiusUnits, 'surface feature mesh radius');
   if (features.surfaceRadiusUnits !== undefined) {
     const band = record(features.surfaceRadiusUnits, 'surface feature radius band', ['minimum', 'maximum']);

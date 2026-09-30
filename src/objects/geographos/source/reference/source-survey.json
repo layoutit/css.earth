@@ -29,7 +29,7 @@
     {
       "url": "https://sbn.psi.edu/pds/resource/geograph.html",
       "adds": "1994 Goldstone delay-Doppler observations75–151m",
-      "status": "excluded from surface lens",
+      "status": "excluded from surface dataset",
       "reason": "Radar delay-Doppler pixels mix surface locations; cannot be treated as a registered optical/albedo texture."
     }
   ]

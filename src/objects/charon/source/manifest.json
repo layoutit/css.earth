@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; USGS Astrogeology",
@@ -32,7 +32,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "coverage": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
@@ -98,7 +98,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced-color",
+      "datasetId": "enhanced-color",
       "label": "Enhanced color",
       "falseColor": true,
       "coverage": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map. Pan-sharpened mosaic, 1 km grid spacing; approximately 60% of source surface area has all selected bands. Values are no longer strictly I/F.",
@@ -143,7 +143,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "coverage": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
@@ -326,7 +326,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -410,7 +410,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -427,7 +427,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",

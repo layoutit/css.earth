@@ -29,7 +29,7 @@ on the right. This image is review evidence, not an input to the runtime view.
 
 The focused no-weather regression passes against the prepared scene, runtime
 inventory and provenance document. The independent radial-preparation test
-also reproduces all four canonical ring lenses, confirming that removal of the
+also reproduces all four canonical ring datasets, confirming that removal of the
 weather path did not alter the Cassini UVIS ring recipe.
 
 ## Known problems
@@ -198,7 +198,7 @@ no measured cloud detail inside the missing rows.
 <details>
 <summary>Ultraviolet, methane and thermal interpretation</summary>
 
-### Observation lenses
+### Observation datasets
 
 The optional ultraviolet and methane views use
 [Hubble OPAL Cycle 32 Saturn global maps](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32)
@@ -236,7 +236,7 @@ rather than being claimed nonexistent.
 
 The broad ring response is cross-checked against the same Hubble WFC3 program
 17843 sequence from 2025-08-29: `ifcu37ccq` in F225W, `ifcu37cdq` in F631N,
-and `ifcu37ceq` in FQ889N. The prepared lens textures modify broad ring-band
+and `ifcu37ceq` in FQ889N. The prepared dataset textures modify broad ring-band
 color and luminance while retaining the UVIS occultation alpha profile,
 narrow gaps, ringlets, and DPR-specific readability floors. Hubble does not
 resolve a complete replacement profile for the D, G, and E rings in these
@@ -246,7 +246,7 @@ frames, so those details remain qualified visible-light morphology.
 - F631N ring frame `ifcu37cdq_drz.fits`
 - FQ889N ring frame `ifcu37ceq_drz.fits`
 
-Every lens has prepared body, polar, ring, exterior material, atmospheric
+Every dataset has prepared body, polar, ring, exterior material, atmospheric
 cutaway material and thumbnail assets.
 
 </details>
@@ -280,7 +280,7 @@ rim light. The curved shells use prepared Lambert shading. All use the same
 object-space light direction as the exterior scene. This treatment improves
 legibility; it does not claim that exposed material inside Saturn receives
 direct sunlight. The structural section, metallic-hydrogen, and diffuse-core
-textures are one shared schematic bank because none of the observation lenses
+textures are one shared schematic bank because none of the observation datasets
 measures below Saturn's atmosphere. Normal, F225W ultraviolet, FQ889N methane,
 and the schematic thermal illustration each have prepared outer-polar and atmospheric
 cutaway materials; those declared false-color responses do not recolor the
@@ -399,7 +399,7 @@ colour and alpha, exact for the prepared surface's mean colour (measured at
 bake). The 5,188 x 4,160 `saturn-orbit-material.webp` RGBA preparation master packs
 256 prepared camera-elevation material fields in a 16 x 16 grid. Each field has
 a 256-pixel tile and a two-pixel gutter. Runtime export retains one active
-variant atlas and one generated high-resolution default frame. The four lenses
+variant atlas and one generated high-resolution default frame. The four datasets
 each have full, no-shadow, and ringless exterior and cutaway masters, so the
 controls remove only the requested phenomena without removing Saturn's
 lighting. The browser selects one prepared address only when camera input

@@ -129,7 +129,7 @@
       "id": "vega2-t11190-t11194",
       "subject": "Processed Vega 2 T11190 and T11194",
       "status": "included",
-      "finding": "The two processed images extend the existing Giotto + Vega lens while preserving all previously accepted Giotto map pixels. The relative Vega display gain passes held-out overlap checks; cross-filter brightness is not recovered albedo.",
+      "finding": "The two processed images extend the existing Giotto + Vega dataset while preserving all previously accepted Giotto map pixels. The relative Vega display gain passes held-out overlap checks; cross-filter brightness is not recovered albedo.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/encounter-registration.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-1p/source/reference/encounter-projection-report.json"

@@ -11,25 +11,25 @@ import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 
-type EmissiveLens = PresentationInputs['lenses']['controls'][number];
-/** The texture resources an emissive body publishes: each lens's surface and poles, and a plate only when the raster lane
- * published one. A plate with no visible pixel is not published (preparation/raster/index.ts): its lens draws no image
+type EmissiveDataset = PresentationInputs['datasets']['controls'][number];
+/** The texture resources an emissive body publishes: each dataset's surface and poles, and a plate only when the raster lane
+ * published one. A plate with no visible pixel is not published (preparation/raster/index.ts): its dataset draws no image
  * there, loads nothing, and its layer paints nothing, so WebKit gives it no backing. */
-export function emissiveEntries(surfaces: readonly EmissiveLens[]) {
-  const published = (lens: EmissiveLens, layer: typeof LAYERS[number]) => layer === 'surface' || layer === 'poles' || lens[`${layer}Url`] !== undefined;
-  return surfaces.flatMap(lens => LAYERS.filter(layer => published(lens, layer)).map(layer => ({ key: `${layer}:${lens.id}`,
-    url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
+export function emissiveEntries(surfaces: readonly EmissiveDataset[]) {
+  const published = (dataset: EmissiveDataset, layer: typeof LAYERS[number]) => layer === 'surface' || layer === 'poles' || dataset[`${layer}Url`] !== undefined;
+  return surfaces.flatMap(dataset => LAYERS.filter(layer => published(dataset, layer)).map(layer => ({ key: `${layer}:${dataset.id}`,
+    url: canonicalPreparedAsset(dataset[`${layer}Url` as 'surfaceUrl'], dataset[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
 }
 
 export async function prepareEmissive(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
-  const { namespace: ns, scene: plan, assets, lenses } = input;
+  const { namespace: ns, scene: plan, assets, datasets } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
   const material = plan.material as unknown as { model?: string; offLimbContext?: { logicalSize: number }; limbMaterial?: { logicalSize: number } };
   if (material.model !== 'emissive' || !assets.emission) throw new TypeError('Emissive presentation needs the prepared emission material and plates.');
   if (input.sun !== null && input.sun !== undefined) throw new TypeError('An emissive body carries no directional Sun.');
-  // A dataset that names a companion cloud borrows another lens's prepared surface, so it owns no plates and needs
+  // A dataset that names a companion cloud borrows another dataset's prepared surface, so it owns no plates and needs
   // no variant of its own; the selection resolves it to the surface it borrows before this definition is read.
-  const surfaces = lenses.controls.filter(lens => lens.volume === undefined || lens.volume.surface === lens.id);
+  const surfaces = datasets.controls.filter(dataset => dataset.volume === undefined || dataset.volume.surface === dataset.id);
   const entries = emissiveEntries(surfaces), keys = new Set(entries.map(entry => entry.key));
   const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`).filter(key => keys.has(key));
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
@@ -58,19 +58,19 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const targets = [body, body, corona, limb];
   // Every dataset gets a variant. One that names a companion cloud draws the plates of the surface it borrows, so the
   // table stays complete and nothing at runtime has to know that this dataset is not a surface of its own.
-  const variants: PreparedVariant[] = lenses.controls.map(lens => {
-    const surfaceId = lens.volume?.surface ?? lens.id;
-    return { when: { lensId: lens.id }, required: required(surfaceId), writes: [
+  const variants: PreparedVariant[] = datasets.controls.map(dataset => {
+    const surfaceId = dataset.volume?.surface ?? dataset.id;
+    return { when: { datasetId: dataset.id }, required: required(surfaceId), writes: [
       ...LAYERS.map((layer, i) => ({ kind: 'texture' as const, target: index(targets[i]!), name: `--${ns}-${layer}-image`,
         resource: keys.has(`${layer}:${surfaceId}`) ? `${layer}:${surfaceId}` : null, quoted: true })),
-      { kind: 'attribute', target: -1, name: 'data-lens', value: lens.id }, { kind: 'attribute', target: -1, name: 'data-view', value: null },
+      { kind: 'attribute', target: -1, name: 'data-dataset', value: dataset.id }, { kind: 'attribute', target: -1, name: 'data-view', value: null },
     ], materials: [] };
   });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun: null,
     assets: { entries, pools: [preparedResourcePool('material', entries, { retention: 'selection', capacity: 8, concurrency: 8 })],
       // The default dataset may be a companion volume, a disc around this star: it borrows a surface, and startup loads that
       // one, the same resolution every variant makes. Asking for a surface named after the volume would find nothing.
-      startup: required(lenses.controls.find(lens => lens.id === lenses.defaultLens)?.volume?.surface ?? lenses.defaultLens) },
+      startup: required(datasets.controls.find(dataset => dataset.id === datasets.defaultDataset)?.volume?.surface ?? datasets.defaultDataset) },
     tree, variants, materials: [],
     viewBindings: [
       ...[corona, limb].map(node => ({ kind: 'silhouette-fit' as const, target: index(node), minimumRadius: POINT_MIN_RADIUS_PX, unitScale: 2 / plan.camera.logicalBodyDiameter })),

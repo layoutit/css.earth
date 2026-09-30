@@ -25,16 +25,16 @@ const authoredDatasets = authoredSource === undefined
   : authoredDatasetMetadata(authoredSource, content.objectId);
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
-const lenses = withDatasetText(controls.lenses && {
-  ...controls.lenses,
-  controls: await Promise.all(controls.lenses.controls.map(async (lens) => {
-    const sourceUrl = authoredDatasets.sourceUrls.get(lens.id);
-    const systemDataset = authoredDatasets.systemDatasetIds.has(lens.id);
+const datasets = withDatasetText(controls.datasets && {
+  ...controls.datasets,
+  controls: await Promise.all(controls.datasets.controls.map(async (dataset) => {
+    const sourceUrl = authoredDatasets.sourceUrls.get(dataset.id);
+    const systemDataset = authoredDatasets.systemDatasetIds.has(dataset.id);
     const metadata = { ...(sourceUrl ? { sourceUrl } : {}), ...(systemDataset ? { systemDataset } : {}) };
-    const preview = previews?.images.find(image => image.id === lens.id);
-    if (!preview) return { ...lens, ...metadata };
+    const preview = previews?.images.find(image => image.id === dataset.id);
+    if (!preview) return { ...dataset, ...metadata };
     const url = await imageFiles[`${objectRoot}/prepared/${preview.path}`]();
-    return { ...lens, ...metadata, texture: { url, width: preview.width, height: preview.height, minimap, attribution: preview.attribution } };
+    return { ...dataset, ...metadata, texture: { url, width: preview.width, height: preview.height, minimap, attribution: preview.attribution } };
   })),
 }, text.datasets);
 ---
@@ -48,7 +48,7 @@ const lenses = withDatasetText(controls.lenses && {
   moreFacts={content.moreFacts}
   charts={content.charts}
   galleries={content.galleries}
-  lenses={lenses}
+  datasets={datasets}
   settings={controls.settings}
   destinations={content.destinations}
   features={content.features}

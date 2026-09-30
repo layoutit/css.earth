@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "rosalind",
   "displayName": "Rosalind",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU Rosalind BODY713 pole and meridian from PCK00011, with periodic terms frozen at the prepared epoch."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

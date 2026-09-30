@@ -3,10 +3,10 @@
   "objectId": "m45",
   "entries": [
     {
-      "id": "lens-optical-composite",
-      "subject": "optical-composite shipped image lens",
+      "id": "dataset-optical-composite",
+      "subject": "optical-composite shipped image dataset",
       "status": "included",
-      "finding": "Default lens fuses registered Niittee wide optical color with central NOIRLab luminance detail on the same authored cloud. The app recipe accepts the freshly supplied compiler result; the older standalone composite is historical and its failed oblique material assessment is not reclassified.",
+      "finding": "Default dataset fuses registered Niittee wide optical color with central NOIRLab luminance detail on the same authored cloud. The app recipe accepts the freshly supplied compiler result; the older standalone composite is historical and its failed oblique material assessment is not reclassified.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/compiler.json",
@@ -17,8 +17,8 @@
       ]
     },
     {
-      "id": "lens-noirlab-optical",
-      "subject": "noirlab-optical shipped image lens",
+      "id": "dataset-noirlab-optical",
+      "subject": "noirlab-optical shipped image dataset",
       "status": "included",
       "finding": "Selected full-footprint 4000 by 2920 publication TIFF, B/V/I, 68.68 by 50.13 arcmin. Publisher AVM anchors the frame; saturated cores, halos and display stretch remain. The 9700 by 7080 master is a separately identified, initially unacquired source.",
       "evidence": [
@@ -28,8 +28,8 @@
       ]
     },
     {
-      "id": "lens-spitzer-irac",
-      "subject": "spitzer-irac shipped image lens",
+      "id": "dataset-spitzer-irac",
+      "subject": "spitzer-irac shipped image dataset",
       "status": "included",
       "finding": "IRAC 3.6/4.5/5.8/8 micrometre false-color display, 2855² pixels and 58.07 arcmin square. Original decoded RGB equality and native separation accounting are recorded; these are not calibrated band flux or depth measurements.",
       "evidence": [
@@ -39,8 +39,8 @@
       ]
     },
     {
-      "id": "lens-spitzer-irac-mips",
-      "subject": "spitzer-irac-mips shipped image lens",
+      "id": "dataset-spitzer-irac-mips",
+      "subject": "spitzer-irac-mips shipped image dataset",
       "status": "included",
       "finding": "IRAC 4.5/8 plus MIPS 24 micrometre false color on the same 2855² publisher field. Different beams and display mapping remain explicit; a 24 micrometre resampled pixel does not inherit IRAC resolution.",
       "evidence": [
@@ -50,8 +50,8 @@
       ]
     },
     {
-      "id": "lens-wise-four-band",
-      "subject": "wise-four-band shipped image lens",
+      "id": "dataset-wise-four-band",
+      "subject": "wise-four-band shipped image dataset",
       "status": "included",
       "finding": "Four-band 3.4/4.6/12/22 micrometre display, 4007 by 3061 pixels over 182.99 by 139.79 arcmin. The publisher SIN projection is retained; stellar artifacts and emission beyond the mosaic remain.",
       "evidence": [
@@ -135,7 +135,7 @@
       "id": "usama-widefield",
       "subject": "IAU OAE / Mohamed Usama wide optical comparison",
       "status": "deferred",
-      "finding": "The CC BY 4.0 image has wider coverage but only a preliminary bright-star placement; independent faint-star and full-field distortion qualification has not passed. It remains a comparison, not a delivered lens.",
+      "finding": "The CC BY 4.0 image has wider coverage but only a preliminary bright-star placement; independent faint-star and full-field distortion qualification has not passed. It remains a comparison, not a delivered dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
         "https://iauarchive.eso.org/public/images/detail/ann22042ab/"

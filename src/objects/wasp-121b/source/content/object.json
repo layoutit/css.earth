@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-121b",
   "displayName": "WASP-121b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature-nrs1",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature-nrs1",
     "controls": [
       {
         "id": "temperature-nrs1",
         "label": "Temperature",
         "qualification": "Published map · Evans-Soma et al. 2025 · JWST NIRSpec 2.7–3.7 µm",
-        "thumbnail": "wasp-121b-lens-temperature-nrs1.webp",
+        "thumbnail": "wasp-121b-dataset-temperature-nrs1.webp",
         "surface": "wasp-121b-surface-temperature-nrs1@2x.webp",
         "poles": "wasp-121b-poles-temperature-nrs1@2x.webp",
         "source": {
@@ -121,7 +121,7 @@
         "id": "temperature-nrs2",
         "label": "Temperature",
         "qualification": "Published map · Evans-Soma et al. 2025 · JWST NIRSpec 3.8–5.2 µm",
-        "thumbnail": "wasp-121b-lens-temperature-nrs2.webp",
+        "thumbnail": "wasp-121b-dataset-temperature-nrs2.webp",
         "surface": "wasp-121b-surface-temperature-nrs2@2x.webp",
         "poles": "wasp-121b-poles-temperature-nrs2@2x.webp",
         "source": {

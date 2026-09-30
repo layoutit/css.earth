@@ -41,7 +41,7 @@ In a terminal, outputs asks which available operation to run, then asks only for
 reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
 starts. With --json or redirected input/output it never prompts; the listed command templates remain.
 New-object turns a star spec into a complete object package: SIMBAD (through the same resolver as explore) names it and gives
-its Gaia DR3 source; the colour lens comes from the best archived spectrum (STIS NGSL, Gaia XP, then the ground catalogues),
+its Gaia DR3 source; the colour dataset comes from the best archived spectrum (STIS NGSL, Gaia XP, then the ground catalogues),
 cross-checked against the next; a model limb law from Claret's grids; manifest, acquisition plan, source records and credits.
 Only prose is left marked TODO(new-object), unless the spec carries drafted text. --from-archive writes a spec for planet hosts from the
 NASA Exoplanet Archive's default parameter sets (their transiting planets, with drafted text); --from-debcat drafts both stars of
@@ -93,7 +93,7 @@ Explicit scientific request:
   telescope export RESULT_JSON --output feature-map --hdu N --band LO,HI --continuum L0,L1,R0,R1 --out DIRECTORY
 
 Physical object handoff (existing measured/modelled depth):
-  telescope export OBJECT_JSON --output points|volume|volume-lens-bank --out DIRECTORY
+  telescope export OBJECT_JSON --output points|volume|volume-dataset-bank --out DIRECTORY
   Reuses the existing physical-object loaders; copies pinned renderer resources and credits.
 
 Surface outputs:
@@ -157,7 +157,7 @@ and concrete commands after checking the prerequisites shared with export. Suppo
 existing telescope deliveries, product records and prepared physical object packages; raw
 FITS/PDS files are not admitted without their qualification evidence. The v1
 transitions are native delivery -> scientific output; 2D measurement + navigation -> body map;
-body map + embeddable standard body -> sphere; prepared point/volume/volume-lens-bank object -> renderer handoff.
+body map + embeddable standard body -> sphere; prepared point/volume/volume-dataset-bank object -> renderer handoff.
 Configured, bounded archive searches and a declared product kind do not promise universal
 archive coverage, decoding or export. Qualified FITS images, spectra, band images and feature maps
 use zero-based HDU, plane and pixel indices. Cubes require an explicit plane for image export.

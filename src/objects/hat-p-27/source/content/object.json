@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hat-p-27",
   "displayName": "HAT-P-27",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "hat-p-27-lens-color.webp",
+        "thumbnail": "hat-p-27-dataset-color.webp",
         "surface": "hat-p-27-surface-color@2x.webp",
         "poles": "hat-p-27-poles-color@2x.webp",
         "source": {

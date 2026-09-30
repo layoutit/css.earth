@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "wasp-43b-challener-2024-deposit",
@@ -16,7 +16,7 @@
         "https://zenodo.org/records/12627524",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Original Zenodo tar, unchanged; members are read in place (maps.npy for the NIRSpec lens, the white-light light curve for the geometry and fit tests). MD5 bb6e7e7b86475ed9f309bb1d7fa278a9.",
+      "acquisition": "Original Zenodo tar, unchanged; members are read in place (maps.npy for the NIRSpec dataset, the white-light light curve for the geometry and fit tests). MD5 bb6e7e7b86475ed9f309bb1d7fa278a9.",
       "redistribution": "CC BY 4.0 with attribution.",
       "consumers": [
         "challener-2024-eclipse-map"
@@ -128,7 +128,7 @@
       "licenseEvidence": [
         "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
       ],
-      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 4500 K, log g 4.5, [M/H] 0 (Challener et al. 2024's stellar parameters), for the MIRI lens's temperature conversion, unchanged VOTable.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 4500 K, log g 4.5, [M/H] 0 (Challener et al. 2024's stellar parameters), for the MIRI dataset's temperature conversion, unchanged VOTable.",
       "redistribution": "Not redistributed in git; restored from the SVO.",
       "consumers": [
         "wasp-43b-miri-maps"
@@ -168,7 +168,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -242,7 +242,7 @@
       "id": "nirspec-map-context-marker",
       "path": "presentation/context.png",
       "origin": "https://zenodo.org/records/12627524",
-      "credit": "The Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by packages/telescope-cli/authoring/wasp-43/author.mts",
+      "credit": "The Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the dataset palette; rendered by packages/telescope-cli/authoring/wasp-43/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -257,7 +257,7 @@
       "generator": "packages/telescope-cli/authoring/wasp-43/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The default lens rendered as the dayside disc; `author.mts --check` recomputes it."
+        "reason": "The default dataset rendered as the dayside disc; `author.mts --check` recomputes it."
       }
     }
   ],
@@ -282,7 +282,7 @@
       "path": "reference/lens-comparison.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence image: the six prepared lens previews (prepared/minimaps) side by side with sharp, labelled, 2026-09-17 after preparation."
+        "reason": "Evidence image: the six prepared dataset previews (prepared/minimaps) side by side with sharp, labelled, 2026-09-17 after preparation."
       }
     },
     {

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-nebula-delivery@1",
+  "schema": "cssearth-nebula-delivery@2",
   "id": "betelgeuse-shell",
   "method": "density-grid",
   "request": {
@@ -33,7 +33,7 @@
   },
   "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
   "description": "Dust around Betelgeuse in two datasets that share one frame: the degree of linear polarisation measured by VLT/SPHERE-ZIMPOL on 3 December 2024, and the dust clump Montargès et al. fitted to the Great Dimming of December 2019. One unit is one stellar radius; the depth of each is a stated model, not a measurement.",
-  "defaultLens": "zimpol-v",
+  "defaultDataset": "zimpol-v",
   "framingRadiusUnits": 6,
   "attachedTo": "betelgeuse",
   "acceptedLabResult": "betelgeuse-shell-four-grids",

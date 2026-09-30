@@ -1,7 +1,7 @@
 /**
- * Which released frames a survey lens casts.
+ * Which released frames a survey dataset casts.
  *
- * A lens is anchored on one apparition: the one whose frames the paper's comparison figure shows most, then the one with
+ * A dataset is anchored on one apparition: the one whose frames the paper's comparison figure shows most, then the one with
  * more frames, then the earlier. It also casts every other apparition its level fit can reach, which `apparitions.mts`
  * decides from the surface they share. Within those apparitions the survey took short series of exposures a minute or a
  * few apart at each epoch; every camera-1 frame is kept while they fit the controlled-camera bound. More frames keep every
@@ -31,7 +31,7 @@ function groups<T extends TimedFrame>(frames: readonly T[], gapMilliseconds: num
 export const apparitions = <T extends TimedFrame>(frames: readonly T[]) => groups(frames, APPARITION_GAP_DAYS * 86_400_000);
 export const series = <T extends TimedFrame>(frames: readonly T[]) => groups(frames, SERIES_GAP_MINUTES * 60_000);
 
-/** The apparitions in time order, and the index of the one a lens is anchored on. `shown` are the frames the figure prints. */
+/** The apparitions in time order, and the index of the one a dataset is anchored on. `shown` are the frames the figure prints. */
 export function anchorApparition<T extends TimedFrame>(frames: readonly T[], shown: readonly T[]) {
   if (!frames.length) throw new Error('No released frames to select from.');
   const all = apparitions(frames);
@@ -40,7 +40,7 @@ export function anchorApparition<T extends TimedFrame>(frames: readonly T[], sho
   return { apparitions: all, anchor: ranked[0].order };
 }
 
-/** The frames a lens keeps from the apparitions it casts, in time order. `shown` are the frames the figure prints. */
+/** The frames a dataset keeps from the apparitions it casts, in time order. `shown` are the frames the figure prints. */
 export function selectFrames<T extends TimedFrame>(frames: readonly T[], shown: readonly T[], maximum = CONTROLLED_CAMERA_MAXIMUM_FRAMES): T[] {
   if (!frames.length) throw new Error('No released frames to select from.');
   const chosen = [...frames].sort((a, b) => time(a) - time(b));

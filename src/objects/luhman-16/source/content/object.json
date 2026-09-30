@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "luhman-16",
   "displayName": "Luhman 16 A",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from its measured optical spectrum. The disc itself is unresolved; darkening toward the edge from a published law; darkening toward the edge from a published law; darkening toward the edge from a published law.",
-        "thumbnail": "luhman-16-lens-color.webp",
+        "thumbnail": "luhman-16-dataset-color.webp",
         "surface": "luhman-16-surface-color@2x.webp",
         "poles": "luhman-16-poles-color@2x.webp",
         "source": {

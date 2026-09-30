@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-189733b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature",
       "output": "hd-189733b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-189733b-lens-{id}.webp",
+      "thumbnail": "hd-189733b-dataset-{id}.webp",
       "source": "science/lally-2025/output_E.npy",
       "falseColor": true,
       "science": {
@@ -67,7 +67,7 @@
     {
       "id": "uncertainty",
       "output": "hd-189733b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-189733b-lens-{id}.webp",
+      "thumbnail": "hd-189733b-dataset-{id}.webp",
       "source": "science/lally-2025/output_E.npy",
       "falseColor": true,
       "science": {
@@ -113,7 +113,7 @@
     {
       "id": "illustration",
       "output": "hd-189733b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-189733b-lens-{id}.webp",
+      "thumbnail": "hd-189733b-dataset-{id}.webp",
       "source": "illustration/HD_189733_b.jpg",
       "falseColor": false,
       "science": {

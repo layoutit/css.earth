@@ -9,7 +9,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>... --out entries.json
  *
- * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
+ * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour dataset from the best archived
  * spectrum with its cross-check, the model limb law, the catalogue colour, marker, manifest, acquisition plan, source records and
  * credits (new-object/generate.mts). Only prose is left marked. The shape-only scaffold below stays for a star with no temperature
  * and for a black hole:
@@ -21,7 +21,7 @@
  * Requires packages/astronomy/data/bodies/<id>.json with a `star` block and `physical.meanRadiusKm`. Every number here is
  * derived from that record: the world-frame origin, the catalogue distance, the radius facts and the sky-north display axis
  * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
- * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape lens and stays off the map until a surface image is added.
+ * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape dataset and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
  * tests/contract/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
 import { resolve } from 'node:path';
@@ -65,21 +65,21 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const lines = await retextHosts(process.cwd(), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} package(s) considered. Bake the changed ones from the text step: node packages/bake/cli/prepare-object.mts <id>... --from catalogue\n`);
   } else if (option('phase-curve') !== undefined && !specPath) {
-    // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/phase-curve-lens.mts).
-    const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./phase-curve-lens.mts'), { relensExisting } = await import('./planet-lenses.mts'), { liveArchive } = await import('./archives.mts');
+    // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/phase-curve-dataset.mts).
+    const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./phase-curve-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
     const entries = parsePhaseCurveEntries(JSON.parse(await readFile(option('phase-curve')!, 'utf8')));
-    const lines = await relensExisting(process.cwd(), [...entries.keys()], 'phase-curve', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), entries);
-    process.stdout.write(`${lines.length} lens(es) added. Bake the changed planets: node packages/bake/cli/prepare-object.mts <id>...\n`);
+    const lines = await rebuildExistingDatasets(process.cwd(), [...entries.keys()], 'phase-curve', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), entries);
+    process.stdout.write(`${lines.length} dataset(es) added. Bake the changed planets: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).
-    const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./spec.mts'), { relensExisting } = await import('./planet-lenses.mts'), { liveArchive } = await import('./archives.mts');
+    const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
     const entries = parsePhotometryEntries(JSON.parse(await readFile(option('photometry')!, 'utf8')));
-    const lines = await relensExisting(process.cwd(), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
+    const lines = await rebuildExistingDatasets(process.cwd(), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if ((args.includes('--thermal') || args.includes('--host-light')) && !specPath) {
-    // Colour for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-lenses.mts).
-    const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { relensExisting } = await import('./planet-lenses.mts'), { liveArchive } = await import('./archives.mts');
-    const lines = await relensExisting(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
+    // Colour for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-datasets.mts).
+    const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
+    const lines = await rebuildExistingDatasets(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--star-limb') && !specPath) {
     // Limb darkening for stars already in the tree, hand-made packages included: `--star-limb ID... [--bake]` (new-object/star-limb.mts).

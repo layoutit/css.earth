@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "hd-189733-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -137,7 +137,7 @@
       "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -160,7 +160,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -195,7 +195,7 @@
       "redistribution": "Not redistributed in git; restored from MAST.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -225,7 +225,7 @@
       "redistribution": "Not redistributed in git; restored from MAST.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -255,7 +255,7 @@
       "redistribution": "Not redistributed in git; restored from MAST.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -278,7 +278,7 @@
       "redistribution": "Factual parameter transcription only; no paper figures",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -305,7 +305,7 @@
       "redistribution": "Original Figure 7 with article and author attribution under CC BY 4.0",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -328,7 +328,7 @@
       "redistribution": "Project-authored method and factual parameter transcription",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -367,7 +367,7 @@
       "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour lens rendered as a disc with its fitted limb darkening; `author.mts --check` recomputes it."
+        "reason": "The colour dataset rendered as a disc with its fitted limb darkening; `author.mts --check` recomputes it."
       }
     }
   ],
@@ -392,7 +392,7 @@
       "path": "reference/rendered-default-view.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: this branch's dev server at /hd-189733/ with the default Spot model lens and camera, headless Chromium via Playwright at 1440 by 900 on 2026-09-23. It shows the published hypothetical Figure 7 left-panel pattern, its picker and card preview, and the fitted limb plate."
+        "reason": "Evidence capture: this branch's dev server at /hd-189733/ with the default Spot model dataset and camera, headless Chromium via Playwright at 1440 by 900 on 2026-09-23. It shows the published hypothetical Figure 7 left-panel pattern, its picker and card preview, and the fitted limb plate."
       }
     },
     {

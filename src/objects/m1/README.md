@@ -1,10 +1,10 @@
 # Crab Nebula (M1)
 
-Six spectral lenses share expansion-inferred ejecta and an authored pulsar-wind model. **Hubble optical is the default.** Display color and opacity do not measure gas or dust density.
+Six spectral datasets share expansion-inferred ejecta and an authored pulsar-wind model. **Hubble optical is the default.** Display color and opacity do not measure gas or dust density.
 
 ## Sources
 
-| Source / lens | Selected observation and scope |
+| Source / dataset | Selected observation and scope |
 | --- | --- |
 | [Hubble optical](https://esahubble.org/images/heic0515a/) | WFPC2 optical-line mosaic, 1999–2002; 3864² pixels, 6.41′ square. |
 | [Webb infrared](https://esawebb.org/images/weic2326a/) | NIRCam/MIRI, 2022–2023; 4000 × 3483 pixels, 5.47′ × 4.76′. |

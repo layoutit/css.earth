@@ -1,5 +1,5 @@
 /* WASP-103 b: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   body-surfaces.css base rules. Synchronous spin from the shared hosted-orbit record. Both plates are transparent. This lens shows model temperature on the GCM reference sphere. */
+   body-surfaces.css base rules. Synchronous spin from the shared hosted-orbit record. Both plates are transparent. This dataset shows model temperature on the GCM reference sphere. */
 .object-stage[data-object-id="wasp-103b"] > :is(.polycss-camera, .wasp-103b-corona-layer, .wasp-103b-limb-layer) {
   --wasp-103b-scene-side-padding: 16px;
   --wasp-103b-reference-width: 1920px;

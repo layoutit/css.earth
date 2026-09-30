@@ -124,7 +124,7 @@ export function requirePreparedControlSource(source: string): string[] {
 async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {root: string; objectId: string; descriptor: Record<string, unknown>; readText: RuntimeSourceReader}) {
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe, 'Authored recipe');
   const reference = requireRecord(descriptor.prepared, 'Prepared reference');
-  if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@1' || !isArray(recipe.sources) ||
+  if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@2' || !isArray(recipe.sources) ||
       !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || typeof reference.url !== 'string') {
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
@@ -172,7 +172,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
       let descriptor = null;
       try { descriptor = requireRecord(JSON.parse(await readText(descriptorPath)), 'Object descriptor'); }
       catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
-      if (descriptor && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && descriptor.properties.recipe.schema === 'cssearth-authored-object@1') {
+      if (descriptor && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && descriptor.properties.recipe.schema === 'cssearth-authored-object@2') {
         const prepared = await readAuthoredRuntime({ root, objectId: object.id, descriptor, readText });
         const definition = prepared.runtime;
         requireObjectRuntimeDefinition(definition, { objectId: object.id });
@@ -180,7 +180,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           source: { runtime: relative(root, prepared.payloadPath), authoredRuntime: relative(root, prepared.runtimePath) },
           nodes: definition.tree.nodes.length, roots: definition.tree.nodes.filter(node => node.parent === -1).length,
           variants: definition.variants.length,
-          controls: { lenses: definition.controls.lenses?.controls.map(lens => lens.id) ?? [],
+          controls: { datasets: definition.controls.datasets?.controls.map(dataset => dataset.id) ?? [],
             settings: definition.controls.settings?.controls.map(({ name, kind }) => ({ name, kind })) ?? [] },
           materialTracks: definition.materials.map(track => ({ id: track.id, frame: track.frame,
             phaseFrames: track.frame.indices.length, rotation: track.rotation?.kind ?? null, banks: track.banks.length })),
@@ -189,8 +189,8 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           sceneNodes: definition.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
           camera: definition.camera,
           viewBindings: definition.viewBindings, animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
-          destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null,
-          features: definition.features ? { target: definition.features.target, lensIds: definition.features.lensIds, catalog: definition.features.catalog } : null });
+          destinations: definition.destinations ? { defaultDataset: definition.destinations.defaultDataset, catalog: definition.destinations.catalog } : null,
+          features: definition.features ? { target: definition.features.target, datasetIds: definition.features.datasetIds, catalog: definition.features.catalog } : null });
         continue;
       }
       const definitionSource = await readText(`${prefix}/runtime/definition.mjs`);
@@ -209,7 +209,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           controls: relative(root, `${prefix}/site/control-content.mjs`) },
         nodes: plan.tree.nodes.length, roots: plan.tree.nodes.filter(node => node.parent === -1).length,
         variants: plan.variants.length,
-        controls: { lenses: objectControls.lenses?.controls.map(lens => lens.id) ?? [],
+        controls: { datasets: objectControls.datasets?.controls.map(dataset => dataset.id) ?? [],
           settings: objectControls.settings?.controls.map(({ name, kind }) => ({ name, kind })) ?? [] },
         materialTracks: plan.materials.map(track => ({ id: track.id, frame: track.frame,
           phaseFrames: track.frame.indices.length, rotation: track.rotation?.kind ?? null, banks: track.banks.length })),
@@ -218,7 +218,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
         sceneNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
         camera: plan.camera,
         viewBindings: plan.viewBindings, animations: plan.animations.map(({ id, mode, target }) => ({ id, mode, target })),
-        destinations: plan.destinations ? { defaultLens: plan.destinations.defaultLens, catalog: plan.destinations.catalog } : null });
+        destinations: plan.destinations ? { defaultDataset: plan.destinations.defaultDataset, catalog: plan.destinations.catalog } : null });
     } catch (error) { entries.push({ id: object.id, complete: false, error: error instanceof Error ? error.message : String(error) }); }
   }
   const report = { schema: "cssearth-prepared-presentation-audit@1", complete: entries.every(entry => entry.complete), entries };

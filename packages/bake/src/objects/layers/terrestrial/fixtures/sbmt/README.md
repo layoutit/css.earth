@@ -127,7 +127,7 @@ SBMT also clamps or mirrors off-image queries into its texture domain. Those
 UVs are retained in the fixture for inspection, but unsupported photographic
 pixels and points behind the camera must be withheld. Display UVs are not a
 coverage mask. A source image, pointing file and shape being loadable together
-does not establish their physical registration or certify a new surface lens.
+does not establish their physical registration or certify a new surface dataset.
 
 ### Known problem: native regeneration is not bit-reproducible
 

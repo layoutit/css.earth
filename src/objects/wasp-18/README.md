@@ -10,13 +10,13 @@ WASP-18 (HD 10069) is an F6 star in Phoenix, 123 parsecs away. Its planet [WASP-
 - **Limb:** the quadratic law Claret (2017, A&A 600, A30) computes from PHOENIX models for the TESS band, read at Cortés-Zuleta et al.'s 6,432 K and log g 4.310: u1 0.318, u2 0.225. The table gives solar metallicity only; the star is at [Fe/H] +0.11. A model, stated as one.
 - **Rotation:** unmeasured here. The display axis is celestial north in the plane of the sky (`source/preparation/rotation.json`).
 
-Catalogue colour: #f3f0ff, this lens's prepared colour.
+Catalogue colour: #f3f0ff, this dataset's prepared colour.
 
 ## Evidence
 
 Run of 2026-09-23 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour lens's prepared colour.
+- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour dataset's prepared colour.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places WASP-18 and WASP-18b in one system.
 
 ## Known problems

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "cds-nov-avg",
@@ -35,7 +35,7 @@
           }
         ]
       },
-      "lensId": "pionier-2016-11",
+      "datasetId": "pionier-2016-11",
       "label": "PIONIER image, November 2016"
     },
     {
@@ -72,7 +72,7 @@
           }
         ]
       },
-      "lensId": "pionier-2016-12",
+      "datasetId": "pionier-2016-12",
       "label": "PIONIER image, December 2016"
     },
     {
@@ -724,7 +724,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -805,7 +805,7 @@
       "redistribution": "One archived spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -828,7 +828,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -859,7 +859,7 @@
       "redistribution": "One archived spectrum or catalogue file, with citation",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -885,7 +885,7 @@
       "redistribution": "Catalogue rows retained unchanged with their citation.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -904,7 +904,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/614/A12",
-      "credit": "Montargès et al. (2018) December 2016 image through the lens palette; marker written by this repository",
+      "credit": "Montargès et al. (2018) December 2016 image through the dataset palette; marker written by this repository",
       "license": "Published research data; the marker is an attributed display derivative.",
       "consumers": [
         "navigation"
@@ -919,7 +919,7 @@
       "generator": "packages/bake/authoring/ce-tauri/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Rendered by author.mts from the published December image as observed (north up, east left) through the lens's palette and percentile stretch."
+        "reason": "Rendered by author.mts from the published December image as observed (north up, east left) through the dataset's palette and percentile stretch."
       }
     }
   ],

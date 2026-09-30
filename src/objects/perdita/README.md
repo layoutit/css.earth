@@ -17,6 +17,6 @@ The reviewed sources do not establish a qualified shape; no standalone scene is 
 [NASA](https://science.nasa.gov/uranus/moons/perdita/) describes the shape as unknown.
 No measured axes or qualified reconstruction was found in the reviewed sources.
 An assumed equilibrium sphere is not an observed shape. No standalone scene or
-mapped lens is included. Target NAIF 725, parent Uranus.
+mapped dataset is included. Target NAIF 725, parent Uranus.
 
 <a id="perdita-source-qualification"></a>

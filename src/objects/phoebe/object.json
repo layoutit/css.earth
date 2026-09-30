@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "phoebe",
   "type": "layered-body",
   "properties": {
@@ -19,7 +19,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "terrestrial",
@@ -55,7 +55,7 @@
           "id": "body",
           "source": "terrestrial",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "normal",
               "source": "content",

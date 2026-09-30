@@ -1,4 +1,4 @@
-/** Offline lens/axis WebP delivery. Geometry and non-slice resources remain unchanged. */
+/** Offline dataset/axis WebP delivery. Geometry and non-slice resources remain unchanged. */
 import sharp from 'sharp';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import type { PreparedCssVolume, PreparedVolumeLeaf, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';

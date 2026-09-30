@@ -24,7 +24,7 @@
       ]
     },
     {
-      "id": "neutral-gray-shape-lens",
+      "id": "neutral-gray-shape-dataset",
       "subject": "Shared neutral gray for the unresolved surface",
       "status": "excluded",
       "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Makemake a measured uniform colour, which the shape-only convention does not supersede.",
@@ -48,7 +48,7 @@
       "id": "hromakina-2019-colours",
       "subject": "Hromakina et al. (2019) BVRI colours and V geometric albedo",
       "status": "included",
-      "finding": "B-V 0.91 +/-0.03, V-R 0.41 +/-0.02, V-I 0.65 +/-0.03 (section 3.4, no colour variation detected) and p_V 0.82 +/-0.02 (section 4) give the uniform Color lens through the disc-integrated-color method.",
+      "finding": "B-V 0.91 +/-0.03, V-R 0.41 +/-0.02, V-I 0.65 +/-0.03 (section 3.4, no colour variation detected) and p_V 0.82 +/-0.02 (section 4) give the uniform Color dataset through the disc-integrated-color method.",
       "evidence": [
         "https://arxiv.org/abs/1904.03679",
         "https://doi.org/10.26093/cds/vizier.36250046",
@@ -97,9 +97,9 @@
     },
     {
       "id": "nasa-vtad-illustration",
-      "subject": "NASA VTAD Makemake 3D model texture as an illustration lens",
+      "subject": "NASA VTAD Makemake 3D model texture as an illustration dataset",
       "status": "included",
-      "finding": "Shown as the non-default Illustration lens, never as imagery: NASA's artist texture carried through the model's own UVs, unrepainted, with arbitrary longitudes. No image resolves Makemake, so nothing in it was observed. Removed in #238 when the neutral gray replaced it; restored beside the measured Color lens, which stays the default.",
+      "finding": "Shown as the non-default Illustration dataset, never as imagery: NASA's artist texture carried through the model's own UVs, unrepainted, with arbitrary longitudes. No image resolves Makemake, so nothing in it was observed. Removed in #238 when the neutral gray replaced it; restored beside the measured Color dataset, which stays the default.",
       "evidence": [
         "https://science.nasa.gov/resource/makemake-3d-model/",
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"

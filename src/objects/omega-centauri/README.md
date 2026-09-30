@@ -2,13 +2,13 @@
 
 **493 total retained app elements; visual acceptance remains blocked.** Omega now
 uses 149 XYZ slabs, zero separate stars and one shared geometry bank for both
-optical lenses. Stellar light is baked into the slabs. The new allocation fits
+optical datasets. Stellar light is baked into the slabs. The new allocation fits
 the inclusive 500-element limit, but still fails the fixed axis-handoff image
 gate and changes delivered brightness. It remains an integration candidate.
 
 ## Sources
 
-| Lens | Native image and coverage |
+| Dataset | Native image and coverage |
 | --- | --- |
 | [VST/OmegaCAM, eso1119b](https://www.eso.org/public/images/eso1119b/) | G/R/I display composite; 14540 × 14540 pixels; 50.88′ square. Selected geometry/light reference. |
 | [MPG/ESO 2.2-m WFI, eso0844a](https://www.eso.org/public/images/eso0844a/) | B/V/I display composite; 8040 × 7560 pixels; 31.88′ × 29.99′. Same model geometry, different image material. Two mosaic gaps contain publisher-supplied DSS data. |
@@ -36,7 +36,7 @@ Its [delivery recipe](source/delivery.json) records the failed visual qualificat
   allocating XYZ slabs. It planned 151 slabs and removed two fully transparent
   slabs, retaining **X 48, Y 45, Z 56**. All hidden nodes count. The app retains
   **447 slab elements + 26 impostors + 20 wrappers = 493**, down from 1,423.
-  RGB lens switches reuse the same topology. The actual Lab retains 462 elements.
+  RGB dataset switches reuse the same topology. The actual Lab retains 462 elements.
   [Bake and validation record](evidence/2026-09-21/element-budget/validation.json).
 - **Preserved light:** all 4,085 fitted emission features, the photometric
   envelope, registration and optical materials are unchanged. Zero separate
@@ -48,11 +48,11 @@ Its [delivery recipe](source/delivery.json) records the failed visual qualificat
   delivery texture/bank files exactly. The current final receipt admits 493
   elements. [Cold replay](evidence/2026-09-21/element-budget/cold-replay.json).
 - **Lab behavior:** the real Reconstruction route loads this result, keeps 462
-  elements through both lenses, orbit and zoom, and restores the same result and
+  elements through both datasets, orbit and zoom, and restores the same result and
   camera after refresh. No processing requests or browser errors occurred.
   [Actual Lab check](evidence/2026-09-21/element-budget/lab-browser.json).
 - **App behavior and delivery:** actual native arrival, orbit, close zoom,
-  galaxy-context return and both lens switches each retain exactly 493 elements.
+  galaxy-context return and both dataset switches each retain exactly 493 elements.
   Cold and warm framing remain 204.5516 pixels; one scene/camera and no browser
   errors are recorded. [Native check](evidence/2026-09-21/element-budget/native-focus.json)
   and [seven controlled views](evidence/2026-09-21/element-budget/app-inspection.json).
@@ -64,7 +64,7 @@ Its [delivery recipe](source/delivery.json) records the failed visual qualificat
   bank. The [matched comparison](evidence/2026-09-21/element-budget/pixelmatch.json)
   retains equal-size inputs and Pixelmatch diffs at threshold 0.1.
 - **Visual blocker:** neutral X/Z and Y/Z handoff L1 is **0.131881 / 0.125192**,
-  above the unchanged **0.04** limit. All nine tested lens/axis pairs fail that
+  above the unchanged **0.04** limit. All nine tested dataset/axis pairs fail that
   image-stability limit; brightness disagreement between axes stays below 5%.
   [Fixed-camera handoffs](evidence/2026-09-21/element-budget/handoffs.json).
 
@@ -93,13 +93,13 @@ cover total accounting and rejection before package replacement.
   1,377 expected raw resource identities across neutral and two optical banks,
   then matched all 60 prepared delivery files in 218.60 seconds. It started
   without the local cache, Omega prepared files or staging outputs.
-- That earlier delivery had 459 retained slabs per optical lens, 29 packed
+- That earlier delivery had 459 retained slabs per optical dataset, 29 packed
   resources and zero separate stars, plus two separate dataset previews.
   These file checks do not qualify the rendered appearance.
 - The generic application discovery functions admit one destination at
   `/sun/?focus=omega-centauri` (its page is now `/omega-centauri/`), classified as a Galactic globular cluster.
   [Controlled-camera browser automation](evidence/2026-09-20/app-inspection.json)
-  captured both lenses, front/oblique and both side axes, with seven captures, no
+  captured both datasets, front/oblique and both side axes, with seven captures, no
   page errors or failed requests, one mounted scene/camera and no canvas. It applies
   inspection camera poses after mounting; those captures alone do not prove native
   arrival or pass the visual handoff gate.
@@ -137,7 +137,7 @@ cover total accounting and rejection before package replacement.
   from the passing native-navigation and context regressions.
 - [Retained Lab measurements and views](../../../labs/nebula/models/omega-centauri/evidence/2026-09-20/README.md)
   identify the tested candidate. Its neutral X/Z and Y/Z normalized L1 values are
-  **0.124987 and 0.114655**, above the fixed 0.04 limit. Both optical lenses also
+  **0.124987 and 0.114655**, above the fixed 0.04 limit. Both optical datasets also
   fail that image-stability gate. Neutral X/Y additionally exceeds the 0.05
   brightness limit. The optimizer's coarse target result is not a visual certificate.
 
@@ -188,8 +188,8 @@ and performance measurements above remain the explicitly dated earlier evidence.
 ## Method and earlier trials
 
 A smooth oblate MGE envelope carries broad integrated starlight; finite positive
-image residuals receive conditional depths and lens-specific materials. Both
-optical lenses use the same geometry. The
+image residuals receive conditional depths and dataset-specific materials. Both
+optical datasets use the same geometry. The
 [method account](../../../labs/nebula/models/omega-centauri/README.md) explains the
 numerical choices and retains earlier trials: bake 1 was rejected for bright
 clumps, bake 2 stopped during material painting, and bake 3 completed after the

@@ -66,7 +66,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   const useTarget = (id: string | null) => {
     if (id === (target?.id ?? null)) return target;
     const next = id ? acquirePreparedFocusTarget(id, { layer, policy: presentation, sources: currentSources, unavailableObjectIds,
-      onChange: () => { if (target?.id === id) publishLens(); }, onError }) : null;
+      onChange: () => { if (target?.id === id) publishDataset(); }, onError }) : null;
     const previous = target;
     target = next;
     previous?.release();
@@ -80,11 +80,11 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   const publishContent = (url: FocusPublication['url'] = 'selection') => {
     const active = target, state = active?.datasets;
     const controls = active && state ? { ...state,
-      selectLens(lens: string) { if (target === active && owns(active)) active.selectLens(lens); },
+      selectDataset(dataset: string) { if (target === active && owns(active)) active.selectDataset(dataset); },
     } : null;
     connection?.onFocusChange({ record: active?.record ?? null, sources: active?.citations ?? [], presentation: controls, url });
   };
-  const publishLens = () => { if (target && owns(target)) publishContent(); };
+  const publishDataset = () => { if (target && owns(target)) publishContent(); };
   const publishSelection = (force = false) => {
     const current = connection;
     if (!current) return;
@@ -120,9 +120,9 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
       const focus = target?.focus ?? null;
       if (!operation.frame) {
         const id = selection?.id ?? null, state = target?.datasets;
-        const lens = target?.resolveLens(selection?.lens ?? null);
+        const dataset = target?.resolveDataset(selection?.dataset ?? null);
         owner.setPreparedFocus(focus);
-        if (lens !== undefined) target!.selectLens(lens);
+        if (dataset !== undefined) target!.selectDataset(dataset);
         layer.selectGalaxy(id, focus);
         // Preserve an incoming composition while it still contains its named focus.
         const reframe = focus !== null && !(query.has('v') && savedCameraShowsFocus(owner, focus));

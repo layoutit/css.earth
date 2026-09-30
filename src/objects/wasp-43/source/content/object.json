@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-43",
   "displayName": "WASP-43",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's photometric temperature; darkening toward the edge measured from TESS transits of WASP-43b. The disc itself is unresolved.",
-        "thumbnail": "wasp-43-lens-color.webp",
+        "thumbnail": "wasp-43-dataset-color.webp",
         "surface": "wasp-43-surface-color@2x.webp",
         "poles": "wasp-43-poles-color@2x.webp",
         "source": {

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "amalthea",
   "displayName": "Amalthea",
@@ -222,6 +222,6 @@
     "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; the PDS Stooke body origin and west-positive longitude are preserved."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

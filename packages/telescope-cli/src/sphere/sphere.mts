@@ -1,4 +1,4 @@
-/** Package a measurement lens on the target's existing css.earth standard sphere. */
+/** Package a measurement dataset on the target's existing css.earth standard sphere. */
 import { readFile, writeFile, mkdir, mkdtemp, rm, rmdir, rename } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "oberon",
   "displayName": "Oberon",
@@ -74,9 +74,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome"
     },
@@ -84,7 +84,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "oberon-lens-normal.webp",
+        "thumbnail": "oberon-dataset-normal.webp",
         "surface": "oberon-normal@2x.webp",
         "poles": "oberon-poles-normal@2x.webp",
         "source": {
@@ -98,7 +98,7 @@
       {
         "id": "voyager-color",
         "label": "Voyager color",
-        "thumbnail": "oberon-lens-voyager-color.webp",
+        "thumbnail": "oberon-dataset-voyager-color.webp",
         "surface": "oberon-voyager-color@2x.webp",
         "poles": "oberon-poles-voyager-color@2x.webp",
         "source": {

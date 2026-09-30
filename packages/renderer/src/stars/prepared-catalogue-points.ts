@@ -41,7 +41,7 @@ export function validatePreparedCataloguePoints(input: unknown): PreparedCatalog
   return Object.freeze({ frame, points: Object.freeze(points) });
 }
 
-/** Bounds describe coverage; the physical embedding and point identities must not change with a lens. */
+/** Bounds describe coverage; the physical embedding and point identities must not change with a dataset. */
 export function samePreparedCatalogueGeometry(left: PreparedCataloguePoints, right: PreparedCataloguePoints): boolean {
   if (!samePreparedPhysicalFrame(left.frame, right.frame) || left.points.length !== right.points.length) return false;
   const points = new Map(right.points.map(point => [point.id, point]));
@@ -129,7 +129,7 @@ export function mountPreparedCataloguePoints({ host, before, payload, createElem
     setPresentation(next: PreparedCataloguePoints) {
       if (destroyed) return;
       const parsed = validatePreparedCataloguePoints(next);
-      if (!samePreparedCatalogueGeometry(data, parsed)) throw new TypeError('A catalogue lens must retain the same prepared point geometry.');
+      if (!samePreparedCatalogueGeometry(data, parsed)) throw new TypeError('A catalogue dataset must retain the same prepared point geometry.');
       presentation = parsed; applyPresentation();
       if (latest) publish(latest);
     },

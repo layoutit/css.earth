@@ -14,10 +14,10 @@ test('page metadata is emitted from the runtime without needing scene bytes',asy
  t.after(()=>rm(root,{recursive:true,force:true}));
  const directory=resolve(root,'src/objects/body');await mkdir(resolve(directory,'prepared'),{recursive:true});
  const data={id:'body',assets:{entries:[{key:'surface',url:'/scenes/body/surface.webp',pool:'body'}],pools:[{id:'body',capacity:1,concurrency:1,retention:'mount',reuse:false}],startup:['surface']},
-  controls:{lenses:{defaultLens:'shape',controls:[{id:'shape',label:'Shape'}]},settings:{controls:[{kind:'toggle',name:'shadows',label:'Shadows',checked:false}]}},tree:{nodes:[{tag:'u'}]}};
+  controls:{datasets:{defaultDataset:'shape',controls:[{id:'shape',label:'Shape'}]},settings:{controls:[{kind:'toggle',name:'shadows',label:'Shadows',checked:false}]}},tree:{nodes:[{tag:'u'}]}};
  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:'body',data});
  const page=preparePageMetadata('body',data);
- const descriptor={schema:'cssearth-object@1',id:'body',type:'layered-body',properties:{page:{metadata:page.reference}},prepared:{format:'cssearth-css-object@5',url:'prepared/object.json'}};
+ const descriptor={schema:'cssearth-object@2',id:'body',type:'layered-body',properties:{page:{metadata:page.reference}},prepared:{format:'cssearth-css-object@5',url:'prepared/object.json'}};
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
  await writeFile(resolve(directory,'prepared/page.json'),page.text);
  assert.deepEqual(await loadObjectPageData('body',root),{descriptor,assets:data.assets,controls:data.controls});

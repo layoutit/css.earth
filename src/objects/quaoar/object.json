@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "quaoar",
   "type": "layered-body",
   "properties": {
@@ -18,7 +18,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "terrestrial",
@@ -50,7 +50,7 @@
           "id": "body",
           "source": "terrestrial",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "model",
               "source": "content",
@@ -106,7 +106,7 @@
       "bodyRadiusM": 547174.3344090937
     },
     "catalog": {
-      "illustrationLenses": [
+      "illustrationDatasets": [
         "model"
       ],
       "name": "Quaoar",

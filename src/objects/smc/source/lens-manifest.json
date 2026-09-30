@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-lens-manifest@1",
+  "schema": "cssearth-volume-dataset-manifest@1",
   "outputs": {
     "prepared/smc-horalek-wide/slices/x/09.webp": {
       "bytes": 82
@@ -4144,7 +4144,7 @@
     "source/lenses.json": {
       "bytes": 4033
     },
-    "prepared/lenses.json": {
+    "prepared/datasets.json": {
       "bytes": 6166081
     },
     "object.json": {

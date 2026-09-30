@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "charon",
   "displayName": "Charon",
@@ -87,9 +87,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome",
       "elevation": "Elevation",
@@ -102,7 +102,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "charon-lens-normal.webp",
+        "thumbnail": "charon-dataset-normal.webp",
         "surface": "charon-normal@2x.webp",
         "poles": "charon-poles-normal@2x.webp",
         "source": {
@@ -115,7 +115,7 @@
       {
         "id": "enhanced-color",
         "label": "False color",
-        "thumbnail": "charon-lens-enhanced-color.webp",
+        "thumbnail": "charon-dataset-enhanced-color.webp",
         "surface": "charon-enhanced-color@2x.webp",
         "poles": "charon-poles-enhanced-color@2x.webp",
         "source": {
@@ -130,7 +130,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "thumbnail": "charon-lens-elevation.webp",
+        "thumbnail": "charon-dataset-elevation.webp",
         "surface": "charon-elevation@2x.webp",
         "poles": "charon-poles-elevation@2x.webp",
         "source": {
@@ -179,7 +179,7 @@
       {
         "id": "albedo",
         "label": "Bond albedo",
-        "thumbnail": "charon-lens-albedo.webp",
+        "thumbnail": "charon-dataset-albedo.webp",
         "surface": "charon-albedo@2x.webp",
         "poles": "charon-poles-albedo@2x.webp",
         "source": {
@@ -234,7 +234,7 @@
       {
         "id": "water-ice",
         "label": "Water ice",
-        "thumbnail": "charon-lens-water-ice.webp",
+        "thumbnail": "charon-dataset-water-ice.webp",
         "surface": "charon-water-ice@2x.webp",
         "poles": "charon-poles-water-ice@2x.webp",
         "source": {
@@ -289,7 +289,7 @@
       {
         "id": "ammonia",
         "label": "Ammonia",
-        "thumbnail": "charon-lens-ammonia.webp",
+        "thumbnail": "charon-dataset-ammonia.webp",
         "surface": "charon-ammonia@2x.webp",
         "poles": "charon-poles-ammonia@2x.webp",
         "source": {

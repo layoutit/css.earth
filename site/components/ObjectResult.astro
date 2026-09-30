@@ -27,12 +27,12 @@ const classification = objectTypeLabel(object);
     <a class="object-link object-observation-control object-thumbnail-leading"
       href={object.route} data-object-id={object.id}
       data-source-subject={`object:${object.id}`} data-source-document={source.href} data-source-label={source.label}>
-      <span class="object-lens-icon">
+      <span class="object-dataset-icon">
         {preview ? <img class="object-search-preview" src={preview} width="40" height="40" alt="" loading="lazy" decoding="async" />
           : <ObjectNavigationMarker objectId={object.id} color={object.color} scale={thumbnailScale} />}
       </span>
-      <span class="object-name object-lens-label">{object.name}</span>
-      <span class="object-distance object-lens-detail" title={distanceDescription(object.distance)} aria-label={`${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
+      <span class="object-name object-dataset-label">{object.name}</span>
+      <span class="object-distance object-dataset-detail" title={distanceDescription(object.distance)} aria-label={`${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
         <span class="object-kind">{classification.charAt(0).toLocaleUpperCase('en') + classification.slice(1)} · </span>
         <span class="object-distance-value">{Number(object.distance.value.toFixed(3))}</span>{" "}
         <span class="object-distance-unit">{object.distance.unit}</span>

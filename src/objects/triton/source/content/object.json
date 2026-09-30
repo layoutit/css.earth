@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "triton",
   "displayName": "Triton",
@@ -87,9 +87,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome",
       "enhanced": "Enhanced color"
@@ -98,7 +98,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "triton-lens-normal.webp",
+        "thumbnail": "triton-dataset-normal.webp",
         "surface": "triton-normal@2x.webp",
         "poles": "triton-poles-normal@2x.webp",
         "source": {
@@ -111,7 +111,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "thumbnail": "triton-lens-enhanced.webp",
+        "thumbnail": "triton-dataset-enhanced.webp",
         "surface": "triton-enhanced@2x.webp",
         "poles": "triton-poles-enhanced@2x.webp",
         "source": {
@@ -124,7 +124,7 @@
       {
         "id": "ultraviolet",
         "label": "Ultraviolet color",
-        "thumbnail": "triton-lens-ultraviolet.webp",
+        "thumbnail": "triton-dataset-ultraviolet.webp",
         "surface": "triton-ultraviolet@2x.webp",
         "poles": "triton-poles-ultraviolet@2x.webp",
         "source": {
@@ -138,7 +138,7 @@
       {
         "id": "voyager-color",
         "label": "Voyager color",
-        "thumbnail": "triton-lens-voyager-color.webp",
+        "thumbnail": "triton-dataset-voyager-color.webp",
         "surface": "triton-voyager-color@2x.webp",
         "poles": "triton-poles-voyager-color@2x.webp",
         "source": {

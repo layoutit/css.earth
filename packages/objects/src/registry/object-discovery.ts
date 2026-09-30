@@ -7,7 +7,7 @@ export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustra
   hostsImagery?: true;
   /** A numerical simulation, qualified separately from an artistic illustration. */
   simulation?: true;
-  /** A star without imagery whose colour lens comes from its own measurements (a spectrum or a catalogued temperature): on the map. */
+  /** A star without imagery whose colour dataset comes from its own measurements (a spectrum or a catalogued temperature): on the map. */
   sourceColor?: true; }
 
 export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> {

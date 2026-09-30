@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/toi-500b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "toi-500b-surface-{id}{suffix}.webp",
-      "thumbnail": "toi-500b-lens-{id}.webp",
+      "thumbnail": "toi-500b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffcbab, the colour lens of toi-500 (src/objects/toi-500/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffcbab, the colour dataset of toi-500 (src/objects/toi-500/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "toi-500",
           "srgb": "#ffcbab",
-          "source": "the colour lens of toi-500 (src/objects/toi-500/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of toi-500 (src/objects/toi-500/source/photometry/stellar-color.json)"
         }
       }
     }

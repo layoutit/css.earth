@@ -4,9 +4,9 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 ## Sources
 
-- The **Monochrome** lens uses the public-domain USGS [Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/callisto_galileo_voyager_global_mosaic_1km).
+- The **Monochrome** dataset uses the public-domain USGS [Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/callisto_galileo_voyager_global_mosaic_1km).
 
-- The **Galileo color** lens uses the official USGS RGBA copy of NASA/JPL/DLR [PIA03456](https://science.nasa.gov/photojournal/global-callisto-in-color/), recorded in May 2001 and released on August 22, 2001.
+- The **Galileo color** dataset uses the official USGS RGBA copy of NASA/JPL/DLR [PIA03456](https://science.nasa.gov/photojournal/global-callisto-in-color/), recorded in May 2001 and released on August 22, 2001.
 
 - The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sq6-x165), observations G8CNADLIND01A and G8CNGLOBAL02A, Minnaert-corrected CIOF products.
 
@@ -27,7 +27,7 @@ Lane change (this PR): the terrestrial solid-observation lane was retired for Ca
 
 Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js callisto --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/callisto/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 6284).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, enhanced, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 6284).
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
@@ -72,7 +72,7 @@ The [USGS release](https://www.usgs.gov/media/images/callisto-galileo-ssi-color-
 
 A frozen perspective camera registers the published plate to the independent controlled USGS monochrome mosaic. Eight Gazetteer landmarks, including Vili, Valfodr, Alfr, Bran and Loni, match the same visible impact structures. The original diagnostic scripts retain their working paths for audit history; only the pinned conversion recipe is the reproduction entry point.
 
-The derived 1,440 × 720 PixelIsArea RGBA GeoTIFF uses 0–360° east longitude, north-to-south rows, center longitude 180° and a 2,410,300 m sphere. That camera radius is deliberately distinct from the reference mosaic’s 2,409,300.0488 m cartographic radius. The converter samples only the original plate, bilinearly in display-byte space, requiring every nonzero-weight contributor to have alpha 255. It never reads reference-map texture while generating colors. Output no-data is all-zero RGBA, with `GDAL_NODATA=0`; a valid all-zero RGB collision causes conversion to fail. Valid dark terrain and pixels with only one zero color channel are retained. The shared observation pipeline then resamples by the actual source georeference and withholds any missing native contributor before painting the gray grid. There is no globally filled color map. The 8,192-pixel runtime atlas adds display sampling, not source resolution. Selecting this lens faces the observed hemisphere.
+The derived 1,440 × 720 PixelIsArea RGBA GeoTIFF uses 0–360° east longitude, north-to-south rows, center longitude 180° and a 2,410,300 m sphere. That camera radius is deliberately distinct from the reference mosaic’s 2,409,300.0488 m cartographic radius. The converter samples only the original plate, bilinearly in display-byte space, requiring every nonzero-weight contributor to have alpha 255. It never reads reference-map texture while generating colors. Output no-data is all-zero RGBA, with `GDAL_NODATA=0`; a valid all-zero RGB collision causes conversion to fail. Valid dark terrain and pixels with only one zero color channel are retained. The shared observation pipeline then resamples by the actual source georeference and withholds any missing native contributor before painting the gray grid. There is no globally filled color map. The 8,192-pixel runtime atlas adds display sampling, not source resolution. Selecting this dataset faces the observed hemisphere.
 
 Reproduce the small checked-in source derivative with Python 3, numpy, Pillow and rasterio:
 

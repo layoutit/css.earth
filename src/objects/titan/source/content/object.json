@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "titan",
   "displayName": "Titan",
@@ -61,14 +61,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Near-infrared",
-        "thumbnail": "titan-lens-normal.webp",
+        "thumbnail": "titan-dataset-normal.webp",
         "surface": "titan-normal@2x.webp",
         "poles": "titan-poles-normal@2x.webp",
         "source": {
@@ -81,7 +81,7 @@
       {
         "id": "vims-2um",
         "label": "VIMS infrared",
-        "thumbnail": "titan-lens-vims-2um.webp",
+        "thumbnail": "titan-dataset-vims-2um.webp",
         "surface": "titan-vims-2um@2x.webp",
         "poles": "titan-poles-vims-2um@2x.webp",
         "source": {
@@ -99,7 +99,7 @@
       {
         "id": "vims-5um",
         "label": "VIMS infrared",
-        "thumbnail": "titan-lens-vims-5um.webp",
+        "thumbnail": "titan-dataset-vims-5um.webp",
         "surface": "titan-vims-5um@2x.webp",
         "poles": "titan-poles-vims-5um@2x.webp",
         "source": {
@@ -117,7 +117,7 @@
       {
         "id": "vims-color-ratio",
         "label": "Infrared band ratios",
-        "thumbnail": "titan-lens-vims-color-ratio.webp",
+        "thumbnail": "titan-dataset-vims-color-ratio.webp",
         "surface": "titan-vims-color-ratio@2x.webp",
         "poles": "titan-poles-vims-color-ratio@2x.webp",
         "source": {
@@ -132,7 +132,7 @@
       {
         "id": "radar",
         "label": "Radar",
-        "thumbnail": "titan-lens-radar.webp",
+        "thumbnail": "titan-dataset-radar.webp",
         "surface": "titan-radar@2x.webp",
         "poles": "titan-poles-radar@2x.webp",
         "source": {
@@ -145,7 +145,7 @@
       {
         "id": "topography",
         "label": "Measured height",
-        "thumbnail": "titan-lens-topography.webp",
+        "thumbnail": "titan-dataset-topography.webp",
         "surface": "titan-topography@2x.webp",
         "poles": "titan-poles-topography@2x.webp",
         "source": {
@@ -203,7 +203,7 @@
       {
         "id": "interpolated",
         "label": "Interpolated height",
-        "thumbnail": "titan-lens-interpolated.webp",
+        "thumbnail": "titan-dataset-interpolated.webp",
         "surface": "titan-interpolated@2x.webp",
         "poles": "titan-poles-interpolated@2x.webp",
         "source": {
@@ -260,7 +260,7 @@
       {
         "id": "coverage-distance",
         "label": "Distance to data",
-        "thumbnail": "titan-lens-coverage-distance.webp",
+        "thumbnail": "titan-dataset-coverage-distance.webp",
         "surface": "titan-coverage-distance@2x.webp",
         "poles": "titan-poles-coverage-distance@2x.webp",
         "source": {
@@ -317,7 +317,7 @@
       {
         "id": "geology",
         "label": "Geology",
-        "thumbnail": "titan-lens-geology.webp",
+        "thumbnail": "titan-dataset-geology.webp",
         "surface": "titan-geology@2x.webp",
         "poles": "titan-poles-geology@2x.webp",
         "source": {

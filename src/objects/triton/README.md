@@ -24,12 +24,12 @@ enhanced contrast. Color resolution varies across observations.
 
 Paul Schenk / LPI's [2021 orange/blue/ultraviolet global mosaic](https://repository.hou.usra.edu/items/bcb44bc8-5140-48eb-b561-12326d7bb6e7)
 (Schenk et al. 2021, *Remote Sensing* 13:3476), `tnmap-cyl-KH-obu.jpg`, 14,165 × 7,083,
-is the Ultraviolet color lens: orange, blue and ultraviolet filters shown as red,
+is the Ultraviolet color dataset: orange, blue and ultraviolet filters shown as red,
 green and blue, declared false colour. The LPI repository answers scripted
 requests with a browser challenge, so the JPEG is mirrored byte for byte on R2
 and restored from there; credit Paul Schenk / LPI / USRA and NASA/JPL Voyager 2.
 
-The Voyager color lens is built here from Voyager 2 ISS frames, not from a
+The Voyager color dataset is built here from Voyager 2 ISS frames, not from a
 published map. Two frame sets feed it:
 
 - Twelve green, violet and ultraviolet frames near closest approach
@@ -69,7 +69,7 @@ Lane change (this PR): the terrestrial solid-observation lane was retired for Tr
 
 Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js triton --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/triton/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 16356).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, enhanced) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 16356).
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
@@ -77,7 +77,7 @@ Map edge correction (2026-09-28): the raster lane's photograph decoder writes th
 
 No dated test report is cited in the existing source notes.
 
-### Voyager color lens (run of 2026-09-22, this version)
+### Voyager color dataset (run of 2026-09-22, this version)
 
 Placement. `node tools/objects/voyager-iss/author-color-frames.mts triton --write` ([then](https://github.com/layoutit/css.earth/blob/40d2789252/tools/objects/voyager-iss/author-color-frames.mts), now `packages/bake/authoring/voyager-iss/author-color-frames.mts`)
 placed every frame and wrote [the placement report](source/reference/voyager-color-placement.json).
@@ -102,7 +102,7 @@ own absolute alignment as about one degree, so the offset is within their
 uncertainty. The recipe applies `datumShiftDegrees` 0.78°, −0.80°, the value
 measured when the frames were authored; this run's mean differs from it by
 under 1 km, below the 2.4 km tile cell, so the tiles were not re-authored.
-With it, limb-placed frames land on the controlled grid the Monochrome lens
+With it, limb-placed frames land on the controlled grid the Monochrome dataset
 already uses.
 
 Colour. Each observation is composed as a complete green/violet/ultraviolet
@@ -122,7 +122,7 @@ their own footprint beyond 60° emission; the recipe's `withheld:
 next-observation` lets the 4.7 km triplet, which views that ground more
 squarely, own those texels instead of leaving them grey. Both policies are
 documented in [the colour preparation guide](../../../docs/color-preparation.md#current-routes-and-scope-of-the-repair).
-The whole lens then takes one brightness gain against the monochrome base, the median over every footprint boundary (a per-observation match would re-open the seams, and the two coarsest sets never border the base); the brightest 0.1 % of texels may clip.
+The whole dataset then takes one brightness gain against the monochrome base, the median over every footprint boundary (a per-observation match would re-open the seams, and the two coarsest sets never border the base); the brightest 0.1 % of texels may clip.
 
 Tests. `node --test tools/objects/voyager-iss/*.test.mts packages/bake/src/objects/raster/photometric-observations.test.mts` (then [`tests/objects/terrestrial/photometric-observations.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/photometric-observations.test.mts); now [`packages/bake/src/objects/raster/photometric-observations.test.mts`](../../../packages/bake/src/objects/raster/photometric-observations.test.mts)) (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer and both composer policies on synthetic
@@ -131,7 +131,7 @@ report, the manifest pins, the solved gains and the withheld counts of this run.
 
 ## Known problems
 
-- The Voyager color lens is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles, 39°–62° for the Bland set and wider for the approach frames; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. The limb-placed frames carry the controlled release's roughly one-degree absolute alignment plus the 2–4 km scatter of our fit; Schenk et al. (2021) place the same frames by bundle adjustment but released only their mosaic. The oracle's raw GEOMED frames of the Bland colour set are not pinned in the manifest; the report names them and their PDS volume.
+- The Voyager color dataset is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles, 39°–62° for the Bland set and wider for the approach frames; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. The limb-placed frames carry the controlled release's roughly one-degree absolute alignment plus the 2–4 km scatter of our fit; Schenk et al. (2021) place the same frames by bundle adjustment but released only their mosaic. The oracle's raw GEOMED frames of the Bland colour set are not pinned in the manifest; the report names them and their PDS volume.
 - The Gazetteer shapefile export for Triton publishes a diameter for only 4 of its 63 adopted names (the four craters); the other 59 rows carry neither a diameter nor a usable extent in the export, so preparation tallies them as skipped (`prepared/features.json`) and only the four craters are labelled until the export carries sizes.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Triton (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge is measured against the georeferenced source at every preparation (see the map edge correction above).
@@ -146,7 +146,7 @@ valid. The USGS `GlobalFill` derivative is not used: it interpolates over map gr
 lines. Neither color nor Monochrome silently fills the other's gaps.
 
 Triton has a thin nitrogen atmosphere. These observations do not justify a
-visible atmospheric halo or an elevation lens inferred from brightness.
+visible atmospheric halo or an elevation dataset inferred from brightness.
 
 No phase, atmosphere-scattering or terrain-shadow inversion is
 claimed. Incidence/emission above 80° and amplification above 6 are withheld

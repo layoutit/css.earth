@@ -8,7 +8,7 @@ export interface PreparedLmcStar {
 }
 export interface PreparedLmcStars {
   /** The historical LMC schema fixes its id and 'Bonanos2009:' star prefix; the generic schema declares both. */
-  schema: 'cssearth-lmc-stars@1' | 'cssearth-catalogue-stars@1'; id: string; frame: DensityVolumeFrame;
+  schema: 'cssearth-lmc-stars@1' | 'cssearth-catalogue-stars@2'; id: string; frame: DensityVolumeFrame;
   magnitudeBand: 'V'; stars: PreparedLmcStar[]; sourceUrl: string; credit: string; depthAssumption: string; provenance: unknown;
   starIdPrefix?: string;
 }
@@ -20,7 +20,7 @@ export function parsePreparedLmcStars(value: unknown, expectedFrame: DensityVolu
   const historical = payload?.schema === 'cssearth-lmc-stars@1';
   const prefix = historical ? 'Bonanos2009:' : payload?.starIdPrefix;
   if (!payload || (historical ? payload.id !== 'lmc-stars' || payload.starIdPrefix !== undefined :
-        payload.schema !== 'cssearth-catalogue-stars@1' || typeof payload.id !== 'string' || !/^[a-z0-9-]{1,64}$/.test(payload.id)) ||
+        payload.schema !== 'cssearth-catalogue-stars@2' || typeof payload.id !== 'string' || !/^[a-z0-9-]{1,64}$/.test(payload.id)) ||
       typeof prefix !== 'string' || !/^[A-Za-z0-9]{1,32}:$/.test(prefix) ||
       payload.magnitudeBand !== 'V' || !payload.frame || !Array.isArray(payload.stars) || payload.stars.length < 1 || payload.stars.length > 2000 ||
       typeof payload.sourceUrl !== 'string' || !payload.sourceUrl.startsWith('https://') ||

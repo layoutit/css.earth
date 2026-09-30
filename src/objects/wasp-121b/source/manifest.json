@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "wasp-121b-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -461,7 +461,7 @@
       "id": "map-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2506.01771",
-      "credit": "The Evans-Soma et al. (2025) NRS1 brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The Evans-Soma et al. (2025) NRS1 brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the dataset palette; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -481,7 +481,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The default lens rendered as the dayside disc; `context-markers.mts --check` recomputes it."
+        "reason": "The default dataset rendered as the dayside disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

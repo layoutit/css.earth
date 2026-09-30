@@ -89,7 +89,7 @@
       "subject": "NASA PIA07006 Iapetus Temperature Variation Map",
       "status": "excluded",
       "finding": "Despite its title this is a plot, not a map: surface temperature (40-140 K) against time of day, with CIRS points and a thermal-inertia model curve. It has no latitude or longitude axis, so there is nothing to register to the surface.",
-      "revisitWhen": "A chart lens is wanted and the plotted CIRS points are available as numbers from the team or an archive product.",
+      "revisitWhen": "A chart dataset is wanted and the plotted CIRS points are available as numbers from the team or an archive product.",
       "evidence": [
         "https://science.nasa.gov/photojournal/iapetus-temperature-variation-map/",
         "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07006/PIA07006.tif"

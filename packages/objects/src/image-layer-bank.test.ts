@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { parseImageLayerBankDescriptor } from './image-layer-bank.js';
 
 function descriptor() {
-  return { schema: 'cssearth-object@1', id: 'cloud', type: 'image-layer-bank', properties: {
+  return { schema: 'cssearth-object@2', id: 'cloud', type: 'image-layer-bank', properties: {
     frame: { referenceFrame: 'icrf', epochJdTt: 1, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
       metersPerUnit: 100, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
     preparation: { source: 'source/recipe.json' } } };

@@ -12,7 +12,7 @@
 
 ## Evidence
 
-The **NEAR close-ups** lens uses the shared observation pipeline and an 800-face
+The **NEAR close-ups** dataset uses the shared observation pipeline and an 800-face
 simplification of the Stooke shape in its native frame. Its two 537 × 244 detector
 frames qualify over an estimated **14.2% of that display mesh’s area**, sampled at
 16 points per triangle. This is selected close-up coverage, not a coverage increase
@@ -32,7 +32,7 @@ invalid samples while retaining finite negative radiance.
 [Capture identity and interaction results](evidence/near-msi/capture.json).
 Headless Chrome on the existing server verified drag, lighting, mobile framing
 and DPR 2 with retained triangle identity and Shadows off by default. The three
-lenses and both closed 800-face model banks pass the focused package checks;
+datasets and both closed 800-face model banks pass the focused package checks;
 all 39 runtime files match their local inventory. Preparation TypeScript passes.
 The shared recipe and profile checks pass after integrating the observation
 recipe migration (#175), which also fixes the previously recorded
@@ -40,10 +40,10 @@ Dimorphos cube/SPICE test failures. Full application and aggregate browser suite
 were not run.
 
 The full Mathilde preparation was replayed after that migration. All 39 runtime
-assets (9,361,957 bytes), both native camera files, surface reports, lens controls
+assets (9,361,957 bytes), both native camera files, surface reports, dataset controls
 and prepared scene match the previous PR outputs exactly. The existing captures
 therefore remain evidence for those pixels and geometry. A fresh browser run is
-not claimed: the local application is missing the Helix prepared lens bank newly
+not claimed: the local application is missing the Helix prepared dataset bank newly
 required by `main`.
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
@@ -55,7 +55,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 The existing Monochrome and Elevation atlases remain 2048 × 6400 pixels on their
 800-face display mesh. Their geometry and photographic sampling are retained
 from the previous main version.
-The new lens adds a second prepared model; only the selected model is visible.
+The new dataset adds a second prepared model; only the selected model is visible.
 Sampling details and output hashes are in the surface metadata (`prepared/surfaces.json`).
 
 The retained notes report a successful 35-asset bake, eight downloads restored, a verified 35-file source closure and three focused source tests. Original report paths are `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json`; those reports are not checked in. The generic body test, browser checks, fresh runtime installation and aggregate checks were still pending in that record.
@@ -67,11 +67,11 @@ Source test definitions.
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `near-msi` | 2 | 0 | — | — | — | its other 2 frames | 0 of 2 | — | 0 of 2 | — | ×1.00 | no verdict |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
 ## Known problems
@@ -128,7 +128,7 @@ diagnostic image and its overlay together.
 
 `node packages/bake/authoring/near-msi/prepare-cameras.mts` reproduces the camera inputs.
 It uses the shared PDS4 label reader for the native filename and acquisition time.
-The lens follows the common surface-observation recipe with `display.percentiles`;
+The dataset follows the common surface-observation recipe with `display.percentiles`;
 the format requires raw companions and camera refinement, retains the photograph's
 illumination and rejects compressed frames in its decoder.
 `node packages/bake/authoring/near-msi/capture-registration.mts` reproduces the source
@@ -161,6 +161,6 @@ The Stooke JPEG supplies no authoritative alpha or numeric missing-data mask. It
 
 Thomas selected mapping axes parallel to J2000, an equator parallel to Earth's, and an arbitrary prime meridian because the spin pole was not solved. `source/preparation/rotation.json` uses the existing **display-orientation** contract, has no measured spin rate, and makes no phase claim. The source geometry table gives the encounter Sun at latitude −1.03°, west longitude 176.52°, but the mosaic retains that photographed illumination. The shared Shadows control adds **illustrative** directional lighting, not an accurately timed Mathilde Sun solution. Flood lighting remains available. Camera rotation never changes the source geometry or selected asset bank.
 
-The historical two-lens bake completed successfully. Its runtime inventory contained 35 raster assets totaling 8,409,146 bytes, excluding JSON and common shell transfer. Each native triangle atlas is 2,048 × 6,400 pixels (800 cells of 128 × 128 px); uncompressed RGBA storage is 52,428,800 bytes per atlas, a calculation rather than measured GPU residency. Package file/runtime-asset/source closure passes. All eight authored downloads (five input assets plus three ignored reference companions) were restored into an empty input tree and the complete 35-file source closure verified; package documents and the generated context were supplied as checked-in companions. Three focused numerical/rotation source tests pass. The generic body test awaits integrated Sun/world-context finalization, and browser, fresh runtime installation, aggregate gates and remote persistence remain not established by these source checks. See `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json` for evidence.
+The historical two-dataset bake completed successfully. Its runtime inventory contained 35 raster assets totaling 8,409,146 bytes, excluding JSON and common shell transfer. Each native triangle atlas is 2,048 × 6,400 pixels (800 cells of 128 × 128 px); uncompressed RGBA storage is 52,428,800 bytes per atlas, a calculation rather than measured GPU residency. Package file/runtime-asset/source closure passes. All eight authored downloads (five input assets plus three ignored reference companions) were restored into an empty input tree and the complete 35-file source closure verified; package documents and the generated context were supplied as checked-in companions. Three focused numerical/rotation source tests pass. The generic body test awaits integrated Sun/world-context finalization, and browser, fresh runtime installation, aggregate gates and remote persistence remain not established by these source checks. See `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json` for evidence.
 
 </details>

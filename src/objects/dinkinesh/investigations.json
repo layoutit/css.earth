@@ -4,9 +4,9 @@
   "entries": [
     {
       "id": "lucy-photographs",
-      "subject": "Lucy L’LORRI photographs as a photographic lens",
+      "subject": "Lucy L’LORRI photographs as a photographic dataset",
       "status": "unresolved",
-      "finding": "PR #182 already includes the recovered TEMPEST numerical shape. PRs #189 and #190 supply the shared photograph pipeline and correct L’LORRI target binding. Six native Dinkinesh frames decode, but full-image, regional and additional-view registration trials remain unqualified; no photographic lens has been baked. The latest independent native-overlap check has 16 holdouts, 2.0284 px RMS and 4.7434 px maximum under the existing 1 px RMS limit.",
+      "finding": "PR #182 already includes the recovered TEMPEST numerical shape. PRs #189 and #190 supply the shared photograph pipeline and correct L’LORRI target binding. Six native Dinkinesh frames decode, but full-image, regional and additional-view registration trials remain unqualified; no photographic dataset has been baked. The latest independent native-overlap check has 16 holdouts, 2.0284 px RMS and 4.7434 px maximum under the existing 1 px RMS limit.",
       "revisitWhen": "New mesh-frame or camera/control-network evidence, a finer compatible source mesh, or a specifically demonstrated defect in the existing projection/matching code. Import support alone is now verified and does not justify repeating unchanged registration trials.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/study.json",
@@ -115,7 +115,7 @@
       "subject": "Outline-based orientation and pointing trials",
       "status": "deferred",
       "finding": "Pinhole and distortion-aware limb trials did not establish internal terrain alignment. A prior apparent pass sampled only part of the outline; fixing that defect changed its holdout RMS from 2.161 to 5.506 px. The historical report preserves the failed multi-view checks and the correction.",
-      "revisitWhen": "New independent terrain/frame evidence. An outline fit alone cannot reopen the photographic lens.",
+      "revisitWhen": "New independent terrain/frame evidence. An outline fit alone cannot reopen the photographic dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/README.md#known-problems"
       ]
@@ -124,7 +124,7 @@
       "id": "native-region-registration",
       "subject": "Frozen central region and native-image controls",
       "status": "deferred",
-      "finding": "The earlier crop altered pixels before convolution and its apparent improvement is superseded. Selecting the same region after full-image convolution leaves 14 independent-view holdouts with 1.1861 px RMS. A rigid regional trial also fails the additional view. The region does not qualify a photographic lens.",
+      "finding": "The earlier crop altered pixels before convolution and its apparent improvement is superseded. Selecting the same region after full-image convolution leaves 14 independent-view holdouts with 1.1861 px RMS. A rigid regional trial also fails the additional view. The region does not qualify a photographic dataset.",
       "revisitWhen": "A specific upstream registration fix or compatible finer shape; do not trim failing holdouts or change the frozen region to obtain a pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dinkinesh/evidence/lucy-registration/study.json",

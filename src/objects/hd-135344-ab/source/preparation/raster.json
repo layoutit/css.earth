@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-135344-ab/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "shape",
       "output": "hd-135344-ab-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-135344-ab-lens-{id}.webp",
+      "thumbnail": "hd-135344-ab-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {

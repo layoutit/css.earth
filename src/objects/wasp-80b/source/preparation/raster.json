@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-80b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "wasp-80b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-80b-lens-{id}.webp",
+      "thumbnail": "wasp-80b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffbe8d, the colour lens of wasp-80 (src/objects/wasp-80/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffbe8d, the colour dataset of wasp-80 (src/objects/wasp-80/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "wasp-80",
           "srgb": "#ffbe8d",
-          "source": "the colour lens of wasp-80 (src/objects/wasp-80/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of wasp-80 (src/objects/wasp-80/source/photometry/stellar-color.json)"
         }
       }
     }

@@ -1,0 +1,138 @@
+---
+import type { Props as ShellProps } from '../object-shell-types';
+import DatasetLegend from './DatasetLegend.astro';
+import DatasetDescription from './DatasetDescription.astro';
+import SequencePlayer from './SequencePlayer.astro';
+import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
+interface Props {
+  objectId: string;
+  datasets: Pick<NonNullable<ShellProps['datasets']>, 'controls' | 'defaultDataset'>;
+  /** The datasets of something the scene draws (a catalogue focus, an overview), rather than of the scene's own object. */
+  focus?: boolean;
+  /** The drawn page these datasets belong to (an overview's id): their buttons select its dataset on its page (page-datasets.mts). */
+  page?: string;
+  /** Null leaves the form without an action, so it submits to the page it is spliced into. */
+  route?: string | null;
+  thumbnailObjectId?: string;
+}
+const { objectId, datasets, focus = false, page, route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
+const previewUrl = (dataset: NonNullable<ShellProps['datasets']>['controls'][number]) =>
+  sidebarThumbnail(thumbnailObjectId, dataset.id)?.url2x ?? dataset.thumbnailUrl;
+const sprite = !focus && datasets.controls.length > 1;
+const spriteColumns = Math.ceil(Math.sqrt(datasets.controls.length));
+// A dataset that names a companion cloud keeps the plates of another dataset, so the body on screen is drawn in that
+// one's scale. Its legend is published beside the cloud's own, or the reader is left with a body nothing explains.
+const borrowedLegend = (dataset: NonNullable<ShellProps['datasets']>['controls'][number]) => {
+  const surface = dataset.volume?.surface;
+  if (surface === undefined) return undefined;
+  const lender = datasets.controls.find(candidate => candidate.id === surface);
+  if (!lender?.legend) return undefined;
+  // A dataset that carries the very scale it borrows publishes it once, not twice.
+  return JSON.stringify(lender.legend) === JSON.stringify(dataset.legend) ? undefined : lender;
+};
+// A dataset shown as a sequence lists its group once, as its first step; every step's details step to its neighbours.
+type Control = NonNullable<ShellProps['datasets']>['controls'][number];
+const stepMembers = (dataset: Control) => dataset.step ? datasets.controls.filter(candidate => candidate.step?.group === dataset.step!.group) : [];
+const listed = (dataset: Control) => !dataset.step || stepMembers(dataset)[0]?.id === dataset.id;
+const defaultControl = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
+const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.id : defaultControl?.id;
+---
+<section id={`${objectId}-datasets`} class="object-datasets">
+  <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} data-drawn-page={page} hidden>
+    {['v', 'overview', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+  </form>
+  <div id={`${objectId}-layers-menu`} class="object-layers-menu">
+    <div class="object-dataset-picker" data-dataset-picker>
+      <div class="object-dataset-picker-display">
+        <span class="object-dataset-picker-current">
+          {datasets.controls.filter(listed).map(dataset => <span class="object-dataset-picker-selection"
+            data-dataset-selected={dataset.id} hidden={dataset.id !== defaultListedId}>
+            <span class="object-dataset-picker-preview"><img src={previewUrl(dataset)} width="40" height="40" alt="" loading="lazy" decoding="async" /></span>
+            <span class="object-dataset-picker-text"><span class="object-dataset-picker-label">{dataset.label}</span>
+              {dataset.detail && <span class="object-dataset-picker-detail">{dataset.detail}</span>}</span>
+          </span>)}
+        </span>
+        <span class="object-dataset-picker-chevron" aria-hidden="true"></span>
+        <select class="object-dataset-native-select" data-dataset-native-select aria-label={focus ? 'Focus dataset' : 'Dataset'}>
+          {datasets.controls.filter(listed).map(dataset => <option value={dataset.id} selected={dataset.id === defaultListedId}>
+            {dataset.label}{dataset.detail ? ` — ${dataset.detail}` : ''}
+          </option>)}
+        </select>
+      </div>
+    <nav class="object-observation-controls" aria-label="Datasets">
+      {datasets.controls.map((dataset, index) => (
+        <div id={`${objectId}-${dataset.id}-option`} class="object-observation-option" data-dataset-option data-system-dataset={dataset.systemDataset ? dataset.id : undefined}
+          data-step-group={dataset.step?.group} data-step-autoplay={dataset.step?.autoplay === false ? 'false' : undefined}
+          data-step-listed={dataset.step ? String(listed(dataset)) : undefined} hidden={!listed(dataset) || undefined}>
+          <button
+            class="object-observation-control object-thumbnail-leading"
+            type="submit"
+            form={`${objectId}-datasets`}
+            name="dataset"
+            data-focus-dataset={focus ? true : undefined}
+            value={dataset.id}
+            aria-pressed={dataset.id === datasets.defaultDataset ? "true" : "false"}
+            aria-controls={`${objectId}-${dataset.id}-details`}
+            title={dataset.title}
+          >
+            {sprite
+              ? <span class="object-dataset-icon" aria-hidden="true" style={`background-image:url(/navigation/dataset-sprites/${objectId}.webp);background-position:-${index % spriteColumns * 14}px -${Math.floor(index / spriteColumns) * 14}px;background-size:${spriteColumns * 14}px ${spriteColumns * 14}px`}></span>
+              : <img class="object-dataset-icon" src={sidebarThumbnail(thumbnailObjectId, dataset.id)?.url2x ?? dataset.thumbnailUrl} width="14" height="14" alt="" loading="lazy" decoding="async" />}
+            <span class="object-dataset-label">{dataset.label}</span>
+            {dataset.detail && <span class="object-dataset-detail">{dataset.detail}</span>}
+          </button>
+        </div>
+      ))}
+    </nav>
+    </div>
+  </div>
+</section>
+<section
+  id={`${objectId}-surface-dataset`}
+  class="object-dataset-details"
+>
+  <div class="object-dataset-details-body" aria-live="polite" aria-atomic="true">
+    {datasets.controls.map((dataset) => (
+      <div
+        id={`${objectId}-${dataset.id}-details`}
+        data-dataset-details={focus ? undefined : dataset.id}
+        data-system-dataset-details={!focus && dataset.systemDataset ? dataset.id : undefined}
+        data-focus-dataset-details={focus ? dataset.id : undefined}
+        hidden={dataset.id !== datasets.defaultDataset}
+      >
+        <DatasetDescription {dataset}>
+          {dataset.texture && <div
+              class="object-surface-minimap"
+              data-surface-minimap={dataset.texture.minimap ? JSON.stringify(dataset.texture.minimap) : undefined}
+              role={dataset.texture.minimap ? "group" : undefined}
+              tabindex={dataset.texture.minimap ? 0 : undefined}
+              aria-label={dataset.texture.minimap ? `${dataset.label} surface map. Drag or use arrow keys to look around; scroll or use plus and minus to zoom.` : undefined}
+            >
+              <img
+                class="object-dataset-texture"
+                src={dataset.texture.url}
+                data-surface-preview-src={dataset.texture.url}
+                width={dataset.texture.width}
+                height={dataset.texture.height}
+                alt={dataset.title}
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              />
+              {dataset.texture.minimap && <>
+                {[-1, 0, 1].map(() => <span
+                  class="object-minimap-viewport"
+                  aria-hidden="true"
+                  hidden
+                ></span>)}
+              </>}
+              {dataset.step && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} {focus} />}
+            </div>}
+          {dataset.step && !dataset.texture && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} {focus} />}
+          {borrowedLegend(dataset) && <DatasetLegend {objectId} dataset={borrowedLegend(dataset)!} owner={dataset.id} />}
+          <DatasetLegend {objectId} {dataset} />
+        </DatasetDescription>
+      </div>
+    ))}
+  </div>
+</section>

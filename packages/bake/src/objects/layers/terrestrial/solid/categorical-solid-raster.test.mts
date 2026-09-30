@@ -60,13 +60,13 @@ test('actual category pack, encoded atlases, poles, legend and thumbnail retain 
   try {
     const {shp,dbf,prj}=fixture();
     await Promise.all([writeFile(join(root,'units.shp'),shp),writeFile(join(root,'units.dbf'),dbf),writeFile(join(root,'units.prj'),prj)]);
-    const lens={id:'geology',label:'Geology',consumer:'geology',format:'geologic-shapefile',path:'units.shp',sampling:'nearest',overlapPolicy:'withhold-conflicts',
+    const dataset={id:'geology',label:'Geology',consumer:'geology',format:'geologic-shapefile',path:'units.shp',sampling:'nearest',overlapPolicy:'withhold-conflicts',
       categories:colors.map((color,i)=>({value:i?'B':'A',label:i?'B':'A',color})),
       grid:{attributePath:'units.dbf',projectionPath:'units.prj',coordinateSystem:'GCS_Fixture',referenceRadiusMeters:1,longitudeDirection:'east-positive',latitudeType:'planetocentric',longitudeDomain:[-180,180],expectedRecords:2,expectedBounds:[-180,-90,180,90],field:'Unit',unknownValues:[],withheldDegenerateRings:[]}};
     const entries=['units.shp','units.dbf','units.prj'].map(path=>({path,id:path,consumers:['geology']}));
     const pinned = await fixtureSource(root, entries);
     const source = {...pinned, async validateGroup(consumer: string) { assert.equal(consumer, 'geology'); return pinned.validateGroup(consumer); }};
-    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[lens]},
+    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[dataset]},
       lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});
@@ -81,7 +81,7 @@ test('actual category pack, encoded atlases, poles, legend and thumbnail retain 
 test('explicit nearest numeric display preserves missing-cell colors through encoded globe and poles',async()=>{
   const root=await mkdtemp(join(tmpdir(),'cssearth-numeric-footprint-'));
   try {
-    const lens={id:'height',label:'Relative height',consumer:'science',schema:'cssearth-pds-int16-cylindrical@1',format:'pds-image',sampling:'nearest',displaySampling:'nearest',
+    const dataset={id:'height',label:'Relative height',consumer:'science',schema:'cssearth-pds-int16-cylindrical@1',format:'pds-image',sampling:'nearest',displaySampling:'nearest',
       datasetId:'FIXTURE',productId:'GRID.IMG',productVersion:'V1.0',target:'MOON',path:'grid.img',labelPath:'grid.lbl',sourceUnit:'METER',
       grid:{width:4,height:2,pixelsPerDegree:1/90,latitudeRange:[-90,90],longitudeRange:[0,360],referenceRadiusMeters:1000,frame:'FIXTURE',scalingFactor:1,offset:0,noData:-32768},
       valueTransform:{scale:1,offset:0},minimum:0,maximum:2,colors:['#ff0000','#ff0000']};
@@ -95,7 +95,7 @@ test('explicit nearest numeric display preserves missing-cell colors through enc
     await Promise.all([writeFile(join(root,'grid.img'),bytes),writeFile(join(root,'grid.lbl'),label)]);
     const entries=['grid.img','grid.lbl'].map(path=>({path,id:path,consumers:['science']}));
     const source = await fixtureSource(root, entries);
-    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[lens]},
+    const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[dataset]},
       lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});

@@ -8,7 +8,7 @@ It is the only planet known around TOI-3486. Its orbit and size follow Yee et al
 
 **Orbit.** Yee et al. 2025 (2025ApJS..280...30Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): P 2.21778105 d Yee et al. 2025 (2025ApJS..280...30Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): a/R* 8.57; Yee et al. 2025 (2025ApJS..280...30Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): inclination 85.2 degrees No archive row states an eccentricity; the orbit is taken as circular Yee et al. 2025 (2025ApJS..280...30Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): transit mid-time 2459797.24218 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-3486's measured colour (#ffd9bd, the colour lens of toi-3486 (src/objects/toi-3486/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-3486's measured colour (#ffd9bd, the colour dataset of toi-3486 (src/objects/toi-3486/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-3486's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (100, 102, 103), folded onto its orbit. Upper limits and rows without an error are left out.
 

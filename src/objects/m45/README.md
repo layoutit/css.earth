@@ -1,10 +1,10 @@
 # Pleiades (M45)
 
-Five image lenses share one authored reflection-nebula depth surface. **The default optical composite combines Taavi Niittee’s wide photograph with central NOIRLab detail.** Dust depth, illumination and scattering are not recovered. The catalogue explicitly identifies the Pleiades stellar cluster as the subject of the adopted distance; the nebula uses it for placement. The NOIRLab source carries its published image identity and B/V/I bands, with unknown exposure date and instrument left explicit in that record.
+Five image datasets share one authored reflection-nebula depth surface. **The default optical composite combines Taavi Niittee’s wide photograph with central NOIRLab detail.** Dust depth, illumination and scattering are not recovered. The catalogue explicitly identifies the Pleiades stellar cluster as the subject of the adopted distance; the nebula uses it for placement. The NOIRLab source carries its published image identity and B/V/I bands, with unknown exposure date and instrument left explicit in that record.
 
 ## Sources
 
-| Source / lens | Selected image and coverage |
+| Source / dataset | Selected image and coverage |
 | --- | --- |
 | [Niittee wide optical](https://commons.wikimedia.org/wiki/File:Plejades.jpg) + [NOIRLab](https://noirlab.edu/public/images/noao-m45/) | Default composite: 8000 × 5199-pixel photograph, 264.79′ × 172.08′, observed 2024-01-04; central detail from the separate NOIRLab image. |
 | [NOIRLab optical](https://noirlab.edu/public/images/noao-m45/) | B/V/I display, 4000 × 2920 pixels, 68.68′ × 50.13′; exposure dates unspecified. |
@@ -14,7 +14,7 @@ Five image lenses share one authored reflection-nebula depth surface. **The defa
 
 Niittee’s processed color-camera image uses an L-Pro filter; its delivered pixel count exceeds the sensor grid and does not establish angular resolution. The infrared composites have distinct beams and nonlinear stretches. The cluster scale is **136.2 ± 1.2 pc** from [Melis et al. (2014), main text and Table 1](https://doi.org/10.1126/science.1256101), not a distance for every dust filament.
 
-The [stellar field](source/stellar-field.json) contains 414 Gaia candidates within an authored 20 pc sphere, G < 12. After angular deduplication, 412 use Bailer-Jones distance estimates and eight named Hipparcos stars retain conditional model depths: 420 points shared by all lenses. Neither population establishes dust membership.
+The [stellar field](source/stellar-field.json) contains 414 Gaia candidates within an authored 20 pc sphere, G < 12. After angular deduplication, 412 use Bailer-Jones distance estimates and eight named Hipparcos stars retain conditional model depths: 420 points shared by all datasets. Neither population establishes dust membership.
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 

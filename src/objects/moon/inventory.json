@@ -237,6 +237,156 @@
     },
     {
       "location": "public",
+      "filename": "moon-dataset-bouguer-gravity.webp",
+      "bytes": 3462,
+      "sha256": "ff38da55d2050447bed51c52895593bcf4e949c49af5fbfc386c465b43f146eb"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-clinopyroxene.webp",
+      "bytes": 3888,
+      "sha256": "71c707011dd3227d02bee1c6f5dfbb2914e51c5e8d05d86f6d7a8768a9337bf4"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-crust.webp",
+      "bytes": 2110,
+      "sha256": "f0fa8617cc08bc89d00c91fa377e7165b930b62cb5b4e4dc619a2bbdbdc73857"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-geology.webp",
+      "bytes": 1706,
+      "sha256": "203431b8cdb722cf166e2be0009d2869b671ee9c5ee2c00f8359a190af10caa4"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-gravity.webp",
+      "bytes": 3844,
+      "sha256": "4975ce4bc908795e346fb7968065f9fc6f22da38e1bac128feda4d2c38910332"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-heat-anomalies.webp",
+      "bytes": 3266,
+      "sha256": "75124782f456b6bffaeb7e8604cee928cdc26b250ae640f2c099f1e169cae7fa"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-iron-gamma.webp",
+      "bytes": 2456,
+      "sha256": "03537f136d5191b56dc8a2e77384bd31956984aabe8fe73f15755bda149423cd"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-iron-oxide.webp",
+      "bytes": 3726,
+      "sha256": "4cdd91144cdc20004b3e19a1b95268925fb3bed01842689d128f7fc025e6b4c3"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-maximum-temperature.webp",
+      "bytes": 2536,
+      "sha256": "5bd2275a704cbd4a106d530d0548da1ee3003740a5106326c741d99a5c5890a6"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-midnight-temperature.webp",
+      "bytes": 2886,
+      "sha256": "d5e0ebb6708c40b868128a18e05f2fb0209631f1120ca7e3526de5e3cd7ec30a"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-noon-temperature.webp",
+      "bytes": 2764,
+      "sha256": "aa2e0e4fcd02f14abba0faad9eba711d74f1449277a4fb3faeb2398b7f3b3b21"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-olivine.webp",
+      "bytes": 3196,
+      "sha256": "e96e45af618abd101f19050985a21d6e8f8652563931f5dcd31dce8753e63bec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-optical-maturity.webp",
+      "bytes": 3176,
+      "sha256": "f3a562155cdc0c1a966c3559b0c12e7dbf0edfe719ed97921692692c51d8afd0"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-orthopyroxene.webp",
+      "bytes": 3808,
+      "sha256": "c39dda5a67b40bb025e11e4cf4bbb4d54c3ebb5928dc47ddf4f18bb82da4c04b"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-plagioclase-grain-size.webp",
+      "bytes": 264,
+      "sha256": "094e88bd3a5fa0ba4f76ce8f4c1d30cc69b5230804b62329ddccd3d0a3085c00"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-plagioclase.webp",
+      "bytes": 3072,
+      "sha256": "70794abf02572da167c18133bb54fb18118c3e3d47a5814d86105719154105c0"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-potassium.webp",
+      "bytes": 2426,
+      "sha256": "e7acf7c0ae5d117e757df67cb609d82d42402a166376a5fd3f701c0e195895a8"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-rock-abundance.webp",
+      "bytes": 3508,
+      "sha256": "2e06999183fb80a791ccd6df4520678317f44f898db948ff0fb2d69c930f839e"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-roughness.webp",
+      "bytes": 3998,
+      "sha256": "67631f535eb50a782d0b96ee28f8699152c1dc4b76b9096e3cd64737c1dc6091"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-silicate-signature.webp",
+      "bytes": 3406,
+      "sha256": "4bd18a1fdde955e121fb8e9de8f78dd7289ddb01371fd862bb2e5c466e17e2d2"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-submicroscopic-iron.webp",
+      "bytes": 1010,
+      "sha256": "551092ad4b58e53a1bacc0f2f316fa58ba8b12d6685dce58b3a68cfc0efc19c7"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-surface.webp",
+      "bytes": 402,
+      "sha256": "d2826fdcc71c63d80b455eb0971037f6d889161a3009939a12b84853c933d02d"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-thorium.webp",
+      "bytes": 2336,
+      "sha256": "6fbbab448fa44270bdb0c3abf424b7633ef61a8754b2d0202ba3e82a0413d389"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-titanium.webp",
+      "bytes": 2472,
+      "sha256": "ecef90c37e2d5dae9528e085cf1c71b9242d0cde3d19ad344da4a22cdc9a1d29"
+    },
+    {
+      "location": "public",
+      "filename": "moon-dataset-topography.webp",
+      "bytes": 2740,
+      "sha256": "f035691fb6209eafea43dea948001c78b4a4537626d4ef4ec1baae894b3b309f"
+    },
+    {
+      "location": "public",
       "filename": "moon-features.json",
       "bytes": 9327756,
       "sha256": "5410336fee2c92de88c1353c1cd3820c67e5ea5a3575c3eaf2a5e40569012216"
@@ -270,156 +420,6 @@
       "filename": "moon-iron-oxide@2x.webp",
       "bytes": 2589932,
       "sha256": "0306a345ffc526ae8cba6cb30f73009d508fc8dee22045466e49c65940f906fd"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-bouguer-gravity.webp",
-      "bytes": 3462,
-      "sha256": "ff38da55d2050447bed51c52895593bcf4e949c49af5fbfc386c465b43f146eb"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-clinopyroxene.webp",
-      "bytes": 3888,
-      "sha256": "71c707011dd3227d02bee1c6f5dfbb2914e51c5e8d05d86f6d7a8768a9337bf4"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-crust.webp",
-      "bytes": 2110,
-      "sha256": "f0fa8617cc08bc89d00c91fa377e7165b930b62cb5b4e4dc619a2bbdbdc73857"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-geology.webp",
-      "bytes": 1706,
-      "sha256": "203431b8cdb722cf166e2be0009d2869b671ee9c5ee2c00f8359a190af10caa4"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-gravity.webp",
-      "bytes": 3844,
-      "sha256": "4975ce4bc908795e346fb7968065f9fc6f22da38e1bac128feda4d2c38910332"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-heat-anomalies.webp",
-      "bytes": 3266,
-      "sha256": "75124782f456b6bffaeb7e8604cee928cdc26b250ae640f2c099f1e169cae7fa"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-iron-gamma.webp",
-      "bytes": 2456,
-      "sha256": "03537f136d5191b56dc8a2e77384bd31956984aabe8fe73f15755bda149423cd"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-iron-oxide.webp",
-      "bytes": 3726,
-      "sha256": "4cdd91144cdc20004b3e19a1b95268925fb3bed01842689d128f7fc025e6b4c3"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-maximum-temperature.webp",
-      "bytes": 2536,
-      "sha256": "5bd2275a704cbd4a106d530d0548da1ee3003740a5106326c741d99a5c5890a6"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-midnight-temperature.webp",
-      "bytes": 2886,
-      "sha256": "d5e0ebb6708c40b868128a18e05f2fb0209631f1120ca7e3526de5e3cd7ec30a"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-noon-temperature.webp",
-      "bytes": 2764,
-      "sha256": "aa2e0e4fcd02f14abba0faad9eba711d74f1449277a4fb3faeb2398b7f3b3b21"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-olivine.webp",
-      "bytes": 3196,
-      "sha256": "e96e45af618abd101f19050985a21d6e8f8652563931f5dcd31dce8753e63bec"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-optical-maturity.webp",
-      "bytes": 3176,
-      "sha256": "f3a562155cdc0c1a966c3559b0c12e7dbf0edfe719ed97921692692c51d8afd0"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-orthopyroxene.webp",
-      "bytes": 3808,
-      "sha256": "c39dda5a67b40bb025e11e4cf4bbb4d54c3ebb5928dc47ddf4f18bb82da4c04b"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-plagioclase-grain-size.webp",
-      "bytes": 264,
-      "sha256": "094e88bd3a5fa0ba4f76ce8f4c1d30cc69b5230804b62329ddccd3d0a3085c00"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-plagioclase.webp",
-      "bytes": 3072,
-      "sha256": "70794abf02572da167c18133bb54fb18118c3e3d47a5814d86105719154105c0"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-potassium.webp",
-      "bytes": 2426,
-      "sha256": "e7acf7c0ae5d117e757df67cb609d82d42402a166376a5fd3f701c0e195895a8"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-rock-abundance.webp",
-      "bytes": 3508,
-      "sha256": "2e06999183fb80a791ccd6df4520678317f44f898db948ff0fb2d69c930f839e"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-roughness.webp",
-      "bytes": 3998,
-      "sha256": "67631f535eb50a782d0b96ee28f8699152c1dc4b76b9096e3cd64737c1dc6091"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-silicate-signature.webp",
-      "bytes": 3406,
-      "sha256": "4bd18a1fdde955e121fb8e9de8f78dd7289ddb01371fd862bb2e5c466e17e2d2"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-submicroscopic-iron.webp",
-      "bytes": 1010,
-      "sha256": "551092ad4b58e53a1bacc0f2f316fa58ba8b12d6685dce58b3a68cfc0efc19c7"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-surface.webp",
-      "bytes": 402,
-      "sha256": "d2826fdcc71c63d80b455eb0971037f6d889161a3009939a12b84853c933d02d"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-thorium.webp",
-      "bytes": 2336,
-      "sha256": "6fbbab448fa44270bdb0c3abf424b7633ef61a8754b2d0202ba3e82a0413d389"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-titanium.webp",
-      "bytes": 2472,
-      "sha256": "ecef90c37e2d5dae9528e085cf1c71b9242d0cde3d19ad344da4a22cdc9a1d29"
-    },
-    {
-      "location": "public",
-      "filename": "moon-lens-topography.webp",
-      "bytes": 2740,
-      "sha256": "f035691fb6209eafea43dea948001c78b4a4537626d4ef4ec1baae894b3b309f"
     },
     {
       "location": "public",
@@ -676,14 +676,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 297,
-      "sha256": "309b18c22d237a23549cc256a19bea88aee0e11705009ff093aaab2f66e57356"
+      "bytes": 300,
+      "sha256": "ded25d81d8cf4e4a714496e52a6bf4bf895d0520c61106e17b0a738671904001"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 89322,
-      "sha256": "008184f485878015ea8c31d4d56030f262a6d3cff3e59d4efb390c9befb8ef86"
+      "bytes": 89397,
+      "sha256": "b3121f8f00c018f907c89665bfd48ec706cad5a9c4c1b46ad3a73cbe904eec13"
     },
     {
       "location": "prepared",
@@ -695,13 +695,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 3932,
-      "sha256": "a929b12dffc3dc73281a8d35cbb0e79beb90082bea9ca2776ac744b4edd70ffa"
+      "sha256": "5a44e03c17aaa21282d745285c67089618b7752e262a61f137b78195cce5a253"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 53532,
-      "sha256": "46a9b25e474ca60b0a58293ac68a8df0f77333521444bf84f1b269e054232dc2"
+      "bytes": 53618,
+      "sha256": "c269442c2194fb107aa09a59fedd1da7ed432d51a9e270cd7eb45a69f771d5ad"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 72408,
+      "sha256": "7aa661d424f8ca41a0f7c34ef93cf7b05c18c9f3dbecf3882c1e2e93ef10484c"
     },
     {
       "location": "prepared",
@@ -712,14 +718,8 @@
     {
       "location": "prepared",
       "filename": "image-quality.json",
-      "bytes": 6740,
-      "sha256": "06ad8261a4c155e53f836293543051267158a734304bd1e62fd425183f6c6ffd"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 72322,
-      "sha256": "02d798a954a9d7434b128304e34a874ed2f7c3f643a464cb4f5f1ad25d6a53c0"
+      "bytes": 6746,
+      "sha256": "1b22c07f4cf64aac862afc3219b9ec4ee6255c278a074300128c15e97d32e597"
     },
     {
       "location": "prepared",
@@ -886,8 +886,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 677816,
-      "sha256": "02838336cdda5145269899e8aa6345999f71508c904cbe27c74f231eaf10c007"
+      "bytes": 678205,
+      "sha256": "1da5be9159238c23921bf7904bb299a5e7f63dc616478ae90d2170ac71867b9e"
     },
     {
       "location": "prepared",

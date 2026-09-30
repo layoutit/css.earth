@@ -25,8 +25,8 @@ export interface SurfaceRasterRecipe {
     exposure?: number[];
     /** Opt in to sampling the pinned source image directly for pole sprites. The delivered latitude bands stay unchanged. */
     nativeSourcePoles?: boolean;
-    /** Centre of this lens's picker thumbnail, overriding the recipe's and in the same frame: degrees east of the
-     * map's left edge, not of the prime meridian. A lens that observed one hemisphere would otherwise crop its
+    /** Centre of this dataset's picker thumbnail, overriding the recipe's and in the same frame: degrees east of the
+     * map's left edge, not of the prime meridian. A dataset that observed one hemisphere would otherwise crop its
      * thumbnail out of the data gap and offer the reader a blank tile. */
     thumbnailCenterLongitudeDegrees?: number;
     coverage?: {
@@ -37,13 +37,13 @@ export interface SurfaceRasterRecipe {
     /** Scientific interpretation before packing (numeric grids, colour ramps, categorical palettes, tonal presentation,
      * missing-coverage grid): the static lane's observation fields, applied by an injected adapter. */
     science?: Record<string, unknown>;
-    /** Draw this science lens over an earlier surface: every cell its interpretation leaves empty takes that surface's
+    /** Draw this science dataset over an earlier surface: every cell its interpretation leaves empty takes that surface's
      * pixel scaled by `brightness`, so ground with no catalogued feature shows terrain instead of the missing-data grid.
-     * The scale is a presentation choice the lens states in its notes. `grayscale` draws the terrain as Rec. 709 luma and
+     * The scale is a presentation choice the dataset states in its notes. `grayscale` draws the terrain as Rec. 709 luma and
      * `bits` keeps that many high bits per channel: the underlay is context, so it may cost fewer lossless bytes. */
     underlay?: { surface: string; brightness: number; grayscale?: boolean; bits?: number };
 }
-/** An unlit body: per-lens off-limb context and limb plates written by the interpretation instead of a lighting bank. */
+/** An unlit body: per-dataset off-limb context and limb plates written by the interpretation instead of a lighting bank. */
 export interface EmissionRecipe { offLimbSize: number; limbSize: number; bodyDiameter: number; offLimbOutput: string; limbOutput: string; metadata: Record<string, unknown>; }
 /** The authored sphere law of the shared bank: a floor, an ambient term and a terminator ramp, with no published source. */
 type AuthoredSphereLaw = 'shadowlessFloodLimbFloor' | 'ambientIntensity' | 'terminator' | 'maximumAlpha';
@@ -132,7 +132,7 @@ export interface StructureSource {
 /** Every raster-lane image is prepared once, at the canonical density; there is no 1x output. */
 export { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 export interface RasterRecipe {
-    schema: 'cssearth-raster-recipe@1';
+    schema: 'cssearth-raster-recipe@2';
     publicBase: string;
     sourceWidth: number;
     sourceHeight: number;

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "mercury",
   "displayName": "Mercury",
@@ -113,14 +113,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "mercury-lens-normal.webp",
+        "thumbnail": "mercury-dataset-normal.webp",
         "surface": "mercury-surface-normal@2x.webp",
         "source": {
           "id": "usgs-messenger-bdr-native",
@@ -140,7 +140,7 @@
       {
         "id": "loi",
         "label": "Monochrome",
-        "thumbnail": "mercury-lens-loi.webp",
+        "thumbnail": "mercury-dataset-loi.webp",
         "surface": "mercury-surface-loi@2x.webp",
         "source": {
           "id": "usgs-messenger-loi-native",
@@ -160,7 +160,7 @@
       {
         "id": "color",
         "label": "Color",
-        "thumbnail": "mercury-lens-color.webp",
+        "thumbnail": "mercury-dataset-color.webp",
         "surface": "mercury-surface-color@2x.webp",
         "source": {
           "id": "usgs-messenger-md3-native",
@@ -176,7 +176,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced",
-        "thumbnail": "mercury-lens-enhanced.webp",
+        "thumbnail": "mercury-dataset-enhanced.webp",
         "surface": "mercury-surface-enhanced@2x.webp",
         "source": {
           "id": "usgs-messenger-enhanced-native",
@@ -192,7 +192,7 @@
       {
         "id": "topography",
         "label": "Elevation",
-        "thumbnail": "mercury-lens-topography.webp",
+        "thumbnail": "mercury-dataset-topography.webp",
         "surface": "mercury-surface-topography@2x.webp",
         "poles": "mercury-poles-topography@2x.webp",
         "source": {
@@ -260,7 +260,7 @@
       {
         "id": "gravity",
         "label": "Gravity",
-        "thumbnail": "mercury-lens-gravity.webp",
+        "thumbnail": "mercury-dataset-gravity.webp",
         "surface": "mercury-surface-gravity@2x.webp",
         "poles": "mercury-poles-gravity@2x.webp",
         "source": {
@@ -324,7 +324,7 @@
       {
         "id": "crust",
         "label": "Crust",
-        "thumbnail": "mercury-lens-crust.webp",
+        "thumbnail": "mercury-dataset-crust.webp",
         "surface": "mercury-surface-crust@2x.webp",
         "poles": "mercury-poles-crust@2x.webp",
         "source": {
@@ -386,7 +386,7 @@
       {
         "id": "interior",
         "label": "Interior",
-        "thumbnail": "mercury-lens-interior.webp",
+        "thumbnail": "mercury-dataset-interior.webp",
         "surface": "mercury-interior-section@2x.webp",
         "source": {
           "id": "mercury-structure",
@@ -493,7 +493,7 @@
     {
       "label": "USGS",
       "role": "terrain",
-      "description": "Surface & terrain lenses",
+      "description": "Surface & terrain datasets",
       "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
     },
     {

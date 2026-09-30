@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "wd-1856-534-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -137,7 +137,7 @@
       "redistribution": "One spectrum's basis-function coefficients, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -160,7 +160,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -183,7 +183,7 @@
       "redistribution": "Factual parameter transcription only; no paper figures",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -214,7 +214,7 @@
       "generator": "packages/telescope-cli/authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
+        "reason": "The colour dataset rendered as a disc; `author.mts --check` recomputes it."
       }
     },
     {
@@ -225,7 +225,7 @@
       "license": "Project-generated from the archived Gaia spectrum; Gaia acknowledgement retained.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "recipe": {
         "generator": "tools/objects/observation/xp-continuous-sample.py",

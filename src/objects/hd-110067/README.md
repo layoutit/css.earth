@@ -1,6 +1,6 @@
 # HD 110067
 
-The host of six transiting sub-Neptunes. The default lens shows its measured ESPRESSO colour with a modeled darker edge.
+The host of six transiting sub-Neptunes. The default dataset shows its measured ESPRESSO colour with a modeled darker edge.
 
 ## Sources
 

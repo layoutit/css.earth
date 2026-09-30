@@ -19,7 +19,7 @@ not attribute the subsequent style pass to that setter alone.
   stars and orbit segments likewise retain published transform values.
   Moving projected leaves still legitimately require browser style updates;
   this architecture does not promise zero style recalculation.
-- The Surface Lens reader caches the body axes and sleeps while collapsed.
+- The Surface Dataset reader caches the body axes and sleeps while collapsed.
   The fixed readout and space minimap have separate publication paths; their
   costs must be measured rather than charged to the first camera setter.
 

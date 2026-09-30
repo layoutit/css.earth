@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-191939c",
   "displayName": "HD 191939 c",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by HD 191939; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hd-191939c-lens-shape.webp",
+        "thumbnail": "hd-191939c-dataset-shape.webp",
         "surface": "hd-191939c-surface-shape@2x.webp",
         "poles": "hd-191939c-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of HD 191939 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-191939's light, as its colour lens measures it."
+        "notes": "No image or colour of HD 191939 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-191939's light, as its colour dataset measures it."
       }
     ]
   },

@@ -88,8 +88,8 @@ test('real prepared surface anchors and flat overlays remain resident while surf
     const activate = prepareConnectedActivation(definition.tree.activationGroups.map((group: number[]) => group.map(index => nodes[index])), () => {}, resident, surfaceScenes);
     definition.tree.nodes.forEach((record: { parent: number }, index: number) => { if (record.parent === -1) document.body.append(nodes[index]); });
     if (definition.surfaceHit) expect(() => bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], nodes[definition.tree.scene], nodes[definition.tree.camera],
-      // A body whose lenses use different meshes (Bennu) hit-tests the selected lens's range, as the stage does.
-      definition.surfaceHit.lensRanges ? () => definition.surfaceHit.lensRanges[0].lensId : undefined)).not.toThrow();
+      // A body whose datasets use different meshes (Bennu) hit-tests the selected dataset's range, as the stage does.
+      definition.surfaceHit.datasetRanges ? () => definition.surfaceHit.datasetRanges[0].datasetId : undefined)).not.toThrow();
     expect(resident.every(node => node.isConnected)).toBe(true);
     overlayCount += overlays.length;
     expect(overlays.every((node: HTMLElement) => node.isConnected)).toBe(true);

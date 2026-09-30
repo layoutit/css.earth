@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gj-504-b",
   "displayName": "GJ 504 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "infrared",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "infrared",
     "controls": [
       {
         "id": "infrared",
         "label": "Infrared colour",
         "qualification": "False colour from its measured flux in three infrared bands (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
-        "thumbnail": "gj-504-b-lens-infrared.webp",
+        "thumbnail": "gj-504-b-dataset-infrared.webp",
         "surface": "gj-504-b-surface-infrared@2x.webp",
         "poles": "gj-504-b-poles-infrared@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of GJ 504 b, from Eyes on Exoplanets; not an observation.",
-        "thumbnail": "gj-504-b-lens-illustration.webp",
+        "thumbnail": "gj-504-b-dataset-illustration.webp",
         "surface": "gj-504-b-surface-illustration@2x.webp",
         "poles": "gj-504-b-poles-illustration@2x.webp",
         "source": {

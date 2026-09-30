@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "toi-4641",
   "type": "layered-body",
   "properties": {
@@ -10,7 +10,7 @@
         "verify-sources",
         "assets",
         "panel-content",
-        "lenses",
+        "datasets",
         "starfield",
         "scene",
         "controls",
@@ -19,13 +19,13 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "surfaces": [
         {
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "color",
               "source": "content",

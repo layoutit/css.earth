@@ -19,7 +19,7 @@
     "reference": "picaso.data.get_reference, the reference folder of the installed release (config.json version 4.1)",
     "profiles": { "url": "https://zenodo.org/records/5063476/files/structures_m+0.0.tar.gz", "doi": "10.5281/zenodo.5063476", "note": "Sonora Bobcat (Marley et al. 2021, ApJ 920, 85) cloud-free, solar-metallicity structures, one per temperature and gravity (tTTTTgGGGnc_m0.0.dat, gravity in m/s^2): the release of the paper." },
     "opacities": { "url": "https://zenodo.org/records/18636725/files/sonora_2121grid.zip", "doi": "10.5281/zenodo.18636725", "table": "sonora_2121grid_feh0.0_co0.46.hdf5", "note": "PICASO 4.0 pre-weighted correlated-k tables, 196 spectral windows, the archive with TiO and VO that its authors recommend. The table read is solar metallicity and the solar C/O PICASO itself uses (solar_cto = 0.458 in picaso/justdoit.py), the composition of the Bobcat profiles; the archive's other 67 tables are not unpacked." },
-    "passband": { "url": "http://svo2.cab.inta-csic.es/theory/fps/getdata.php?format=ascii&id=Generic/Bessell.V", "note": "SVO Filter Profile Service, Generic/Bessell.V: the band Howarth (2011) and the colour lens's other V-band laws are computed in." }
+    "passband": { "url": "http://svo2.cab.inta-csic.es/theory/fps/getdata.php?format=ascii&id=Generic/Bessell.V", "note": "SVO Filter Profile Service, Generic/Bessell.V: the band Howarth (2011) and the colour dataset's other V-band laws are computed in." }
   },
   "why": "No published limb-darkening table reaches a brown dwarf below 1,500 K. PICASO computes the emergent intensity of the published cloud-free Sonora Bobcat atmospheres at Gauss angles, from which the law is fitted as the table authors fit theirs."
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-provenance@1",
+  "schema": "cssearth-volume-provenance@2",
   "title": "PDS 70 dust ring: ALMA continuum imaging given the depth of the fitted ring",
   "kind": "observed-sky-image-on-fitted-envelope",
   "authors": [],
@@ -22,7 +22,7 @@
   ],
   "paper": [
     {
-      "lens": "dust",
+      "dataset": "dust",
       "citation": "Keppler et al. (2019), A&A 625, A118, arXiv:1902.07639",
       "url": "https://arxiv.org/abs/1902.07639"
     }
@@ -39,7 +39,7 @@
       "halfUnits": 150,
       "slabs": 100
     },
-    "lenses": {
+    "datasets": {
       "dust": {
         "bands": [
           {

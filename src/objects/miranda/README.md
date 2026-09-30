@@ -26,7 +26,7 @@ Lane change (this PR): the terrestrial solid-observation lane was retired for Mi
 
 Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js miranda --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/miranda/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, elevation, geology) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2704).
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every dataset (normal, elevation, geology) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2704).
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
@@ -34,9 +34,9 @@ Map edge correction (2026-09-28): the raster lane's photograph decoder writes th
 
 The checked Miranda landmark differences are 1.3–3.3° (approximately 5–14 km); these are not uncertainty bounds for every unit boundary.
 
-### Voyager color lens (run of 2026-09-22, this version)
+### Voyager color dataset (run of 2026-09-22, this version)
 
-Sources. The lens uses Voyager 2 ISS narrow-angle GEOMED frames from the PDS Ring-Moon Systems Node
+Sources. The dataset uses Voyager 2 ISS narrow-angle GEOMED frames from the PDS Ring-Moon Systems Node
 (volumes VGISS_7201–7207, inventoried through the OPUS API): every complete green/violet/ultraviolet
 set of Miranda that the archive holds, 12 frames in 4 sets, listed in
 [the frame recipe](source/preparation/voyager-color-frames.json). The camera comes from the pinned
@@ -62,7 +62,7 @@ Oracle. `node tools/objects/voyager-iss/oracle.mts miranda --write` ([then](http
 its high-passed detail against the mosaic in the frame plane
 ([report](source/reference/voyager-color-oracle.json)): 3 frames compared, mean
 correlation 0.36, mean residual 9.4 km. The mosaic is the same control the
-Monochrome lens uses, so the colour lands on the ground the reader already sees.
+Monochrome dataset uses, so the colour lands on the ground the reader already sees.
 
 Colour. Each set is composed as a complete green/violet/ultraviolet triplet, corrected with the same
 Lunar-Lambert disk function as the monochrome mosaic to incidence 30°, emission 0°, used within 60°
@@ -80,7 +80,7 @@ cosine-weighted means over the coloured footprint meet them; spatial colour diff
 Voyager's own. The ordering agrees with independent measurements: Karkoschka (2001, *Icarus* 151,
 51) finds the moons grey with a slightly red slope and Miranda slightly bluish, and DeColibus et al.
 (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)) measure
-V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole lens then takes one brightness gain
+V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole dataset then takes one brightness gain
 against the monochrome base (the median over every footprint boundary); the brightest 0.1 % of texels
 may clip. The prepared map is in [evidence](evidence/voyager-color/map.png).
 
@@ -90,11 +90,11 @@ band-ratio and non-positive-sample rules on synthetic frames;
 `node --test tests/objects/unit/uranian-moons/voyager-color.test.mts` reads this moon's reports and
 checks the placement, registration and oracle numbers above, that every tile of a complete set is
 pinned with its geometry label, and that the prepared report carries the measured and published
-ratios; `node --test tests/objects/unit/miranda/*.test.mts` covers the runtime package with the new lens.
+ratios; `node --test tests/objects/unit/miranda/*.test.mts` covers the runtime package with the new dataset.
 
 ## Known problems
 
-- The Voyager color lens is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. Its whole-disc band ratios are tied to Bell and McCord (1991) read from a figure at ±0.02, and their ultraviolet calibration carries a stated ±10 % uncertainty; the archive's own ratios are in the prepared report.
+- The Voyager color dataset is false colour (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles; no phase normalisation is applied, so a colour seam at a footprint edge is a real difference in viewing geometry. Its whole-disc band ratios are tied to Bell and McCord (1991) read from a figure at ±0.02, and their ultraviolet calibration carries a stated ±10 % uncertainty; the archive's own ratios are in the prepared report.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Miranda (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge is measured against the georeferenced source at every preparation (see the map edge correction above).
 
@@ -117,7 +117,7 @@ Geology’s sampled, cosine-weighted reference-sphere coverage is approximately 
 
 The cube labels declare a 240400 m equatorial mapping radius, 232900 m polar radius, planetocentric latitude and positive-east longitude. Their longitude origins differ: the mosaic covers −180…180° with x origin −1510560 m, while the DEM covers 0…360° with x origin −755280 m; both retain projection center 180°, y origin 377760 m and 240 m pixels. Shared preparation decodes ISIS3 tiles and registers both into the application's 0…360° map. Independent numeric checks use the original cubes at [USGS Gazetteer](https://planetarynames.wr.usgs.gov/SearchResults?Target=98_Miranda) centres: Elsinore (257.1° E, 24.8° S), Arden (73.7° E, 29.1° S), and Inverness (325.7° E, 66.9° S).
 
-All three lenses use a 6400 × 3200 prepared sampling grid, projective atlas gutters and 1024-pixel pole tiles. The shared 450-face sphere retains the vendored mean radius of 235.7 km; elevation is a lens, not exaggerated geometry. Shared flood curvature and optional directional Shadows apply to all three lenses. The default camera faces observed southern terrain (315° E, 60° S).
+All three datasets use a 6400 × 3200 prepared sampling grid, projective atlas gutters and 1024-pixel pole tiles. The shared 450-face sphere retains the vendored mean radius of 235.7 km; elevation is a dataset, not exaggerated geometry. Shared flood curvature and optional directional Shadows apply to all three datasets. The default camera faces observed southern terrain (315° E, 60° S).
 
 The minimaps and thumbnails come from these same prepared maps. The navigation/context marker samples observed terrain from the corrected mosaic and adds shared full-phase curvature. It is an illustrative terrain crop, not a newly observed full disc. Native source cubes are preserved byte-for-byte inside gzip, with original and compressed hashes in the manifest. A content-addressed source mirror avoids the release server's browser challenge during automated restoration. Large source binaries are excluded from Git and runtime installation.
 
@@ -125,7 +125,7 @@ The minimaps and thumbnails come from these same prepared maps. The navigation/c
 
 The archive stores page-sized XY coordinates under an incompatible Earth WGS84 orthographic CRS. Preparation does not apply that declaration as moon geography. The independently reviewed `registration.json` maps positive-east, normalized south-polar stereographic coordinates into the original GIS page. Titania uses six identified crater centroids for fitting and four separate named craters for validation. Miranda uses six publisher-graticule intersections for fitting and six interleaved intersections for validation, followed by three independently identified crater checks.
 
-The lens includes 18 nonempty styled polygon categories with their original unit names and colors. Source Z coordinates are not heights. Structural linework and annotation are not turned into terrain or extra polygon units. Publisher-preview overlap evidence establishes only a partial layer order; combinations with no unique supported winner remain missing. Original polygon holes are preserved. The nearest-neighbor categorical conversion uses a 1440 × 720 display grid, with no interpolation between classes, relief or artificial boundary detail. Valid black material is distinct from no-data code 65535.
+The dataset includes 18 nonempty styled polygon categories with their original unit names and colors. Source Z coordinates are not heights. Structural linework and annotation are not turned into terrain or extra polygon units. Publisher-preview overlap evidence establishes only a partial layer order; combinations with no unique supported winner remain missing. Original polygon holes are preserved. The nearest-neighbor categorical conversion uses a 1440 × 720 display grid, with no interpolation between classes, relief or artificial boundary detail. Valid black material is distinct from no-data code 65535.
 
 Reproduce the categorical input with `python packages/bake/src/objects/acquisition/prepare-geologic-categories.py src/objects/miranda/source/preparation/geology-conversion.json`, using the dependency versions in the converter's header. The recipe pins the archive and registration, checks feature populations and archived CRS identity, and records ambiguous overlaps and the exact output hash in `categories.receipt.json`. Original release MD5 receipts remain alongside the sources. Shared preparation then consumes the checked-in categorical input through the existing scientific GeoTIFF path. The runtime receives prepared images only.
 

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "methone",
   "displayName": "Methone",
@@ -112,6 +112,6 @@
     "sunSource": "JPL Saturn-system ephemeris. Source camera uses observation-time OPUS geometry independently of the display orientation."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

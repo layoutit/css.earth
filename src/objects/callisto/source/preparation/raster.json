@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/callisto/",
   "sourceWidth": 8192,
   "sourceHeight": 4096,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "callisto-{id}{suffix}.webp",
-      "thumbnail": "callisto-lens-{id}.webp",
+      "thumbnail": "callisto-dataset-{id}.webp",
       "source": "callisto-global-1km.tif",
       "falseColor": false,
       "science": {
@@ -40,7 +40,7 @@
     {
       "id": "enhanced",
       "output": "callisto-{id}{suffix}.webp",
-      "thumbnail": "callisto-lens-{id}.webp",
+      "thumbnail": "callisto-dataset-{id}.webp",
       "source": "observations/PIA03456-registered-rgba.tif",
       "falseColor": true,
       "science": {
@@ -64,7 +64,7 @@
     {
       "id": "infrared",
       "output": "callisto-{id}{suffix}.webp",
-      "thumbnail": "callisto-lens-{id}.webp",
+      "thumbnail": "callisto-dataset-{id}.webp",
       "source": "nims/callisto-nims-composite.tif",
       "falseColor": true,
       "science": {

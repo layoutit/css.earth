@@ -125,7 +125,7 @@ at the pinned commit, so it needs network access.
 
 - USGS ALE and usgscsm for instrument pixel models and distortion: ALE builds only
   inside conda and has no DART driver, so it arrives with the first Cassini ISS
-  lens and a pinned conda environment file.
+  dataset and a pinned conda environment file.
 - ISIS `photomet` on cubes, for normalization grids beyond the unit-test
   geometries. It needs an ISIS install through conda.
 

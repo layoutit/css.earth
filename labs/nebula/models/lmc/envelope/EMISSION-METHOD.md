@@ -1,9 +1,9 @@
 # Two-scale envelope LMC emission experiment
 
 This is a new inferred-emission model for the LMC. It does not repaint the unchanged stellar-density
-volume. Model `lmc-clouds-emission-envelope` and its three lenses are promoted to the application by
-[`app-lenses.json`](app-lenses.json); [the object's README](../../../../../src/objects/lmc/README.md)
-is the delivered account, and the `alignment-density-material-v1` lenses it replaced remain a historical
+volume. Model `lmc-clouds-emission-envelope` and its three datasets are promoted to the application by
+[`app-datasets.json`](app-datasets.json); [the object's README](../../../../../src/objects/lmc/README.md)
+is the delivered account, and the `alignment-density-material-v1` datasets it replaced remain a historical
 reference.
 
 The method is the SMC's, unchanged. [The SMC method note](../../smc/constrained/EMISSION-METHOD.md)
@@ -17,7 +17,7 @@ approaches; this note records only what is specific to the LMC.
 | Primary registered, star-removed image | Horálek NOIRLab wide field, reconstruction `lmc-clouds-horalek-widefield` (`iotw2547a.jpg`, NOX star removal) |
 | Depth prior | `labs/nebula/models/lmc/full-density/source/volume.json`, the Garver et al. (2026) stellar simulation, through the baseline request |
 | Registration gate | `labs/nebula/models/lmc/candidates/source/alignment-report.json`; all three images pass unchanged |
-| Lens images | the same three registered baselines the application ships: `lmc-clouds-vista-infrared` VISTA, `lmc-clouds-horalek-widefield` Horálek, `lmc-clouds-wise-wide-infrared` AllWISE |
+| Dataset images | the same three registered baselines the application ships: `lmc-clouds-vista-infrared` VISTA, `lmc-clouds-horalek-widefield` Horálek, `lmc-clouds-wise-wide-infrared` AllWISE |
 
 Horálek is the primary because it is the brightest and most structured of the three registered images;
 VISTA is faint and low-contrast at this scale, and the AllWISE frame spans 24° with the galaxy in a
@@ -52,17 +52,17 @@ Recipe `emission-envelope.json`; model `lmc-clouds-emission-envelope`.
   all 301 material textures reproduce the newly fitted neutral alpha exactly, and the recolouring reports
   1,411,300 positive-alpha texels with none outside the image and none black.
 
-## Lenses
+## Datasets
 
-`finite-lenses.json` bakes the application's three images onto this one geometry, with no exclusions:
+`finite-datasets.json` bakes the application's three images onto this one geometry, with no exclusions:
 
-| Lens | Result |
+| Dataset | Result |
 | --- | --- |
 | `vista-infrared` | `lmc-clouds-emission-envelope-vista-infrared` |
 | `horalek-widefield` | `lmc-clouds-emission-envelope-horalek-widefield` |
 | `wise-wide-infrared` | `lmc-clouds-emission-envelope-wise-wide-infrared` |
 
-`.local/nebula-lab/finite-lenses-lmc-clouds-emission-envelope.json` indexes them. Each recolours the same neutral alpha with
+`.local/nebula-lab/finite-datasets-lmc-clouds-emission-envelope.json` indexes them. Each recolours the same neutral alpha with
 its own component and envelope chromaticity; the geometry never changes between them.
 
 ## Inspection against the shipped repaint
@@ -88,10 +88,10 @@ layer suppressed on both so only the volume material shows.
 
 ## Known problems
 
-- A violet-blue patch sits on the western footprint edge in every lens, where the envelope's smoothed
+- A violet-blue patch sits on the western footprint edge in every dataset, where the envelope's smoothed
   chromaticity is extrapolated from very few covered pixels. A small detached knot group above the body
   appears at the oblique and side poses.
-- The AllWISE lens is noisy: its registered frame covers 24° and the galaxy occupies a small, faint part of
+- The AllWISE dataset is noisy: its registered frame covers 24° and the galaxy occupies a small, faint part of
   it, so its chromaticity is far less reliable than the other two.
 - Detail is bounded by the 384-pixel fit and the 0.305 kpc slab pitch, which is twice the SMC's because the
   LMC's fitted box is about twice as wide.
@@ -100,10 +100,10 @@ layer suppressed on both so only the volume material shows.
 - No star layer is prepared for this model, so the comparison suppressed the star layer on both sides.
 
 The result remains reviewable research, not qualified application material. The full original prior and the
-shipped repaint lenses are preserved separately and unchanged.
+shipped repaint datasets are preserved separately and unchanged.
 
 ## Evidence captures
 
 - [Registration before and after](evidence/registration-before-after.jpg): top, model `13cf532e` on the hand-authored `scale 3` placement; below, model `9dfd48a6` on the measured registration (1.0000× sky scale), with and without the 1,042-star layer.
-- [Difference map, old vs fitted Horálek lens](evidence/difference-map-old-vs-fitted.jpg): render − image on luminance at the Earth view, blue too dark and red too bright. Old lens `95495a7d` (left) shows the red mid-tone ring; the tone-fitted lens `60b47e10` (right) breaks it up (too-bright share 33% → 12%). The bar reads blue on both: the core plateau the exposure solve then lifted.
-- [Levels panel](evidence/levels-panel-horalek.jpg): the Reconstruction tab's per-channel histograms, delta and transfer curves for the Horálek lens.
+- [Difference map, old vs fitted Horálek dataset](evidence/difference-map-old-vs-fitted.jpg): render − image on luminance at the Earth view, blue too dark and red too bright. Old dataset `95495a7d` (left) shows the red mid-tone ring; the tone-fitted dataset `60b47e10` (right) breaks it up (too-bright share 33% → 12%). The bar reads blue on both: the core plateau the exposure solve then lifted.
+- [Levels panel](evidence/levels-panel-horalek.jpg): the Reconstruction tab's per-channel histograms, delta and transfer curves for the Horálek dataset.

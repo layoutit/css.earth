@@ -41,7 +41,7 @@ The globe is lit with the lunar-Lambert law of [Buratti et al. (2017)](https://d
 - With the Sun behind the viewer the law darkens the limb to 0.56 of the centre at 86.5° emission.
 - The paper computes the surface phase function f(α) from the disc-integrated phase curve and prints no values, so the frames with Shadows on carry no phase term: only the disk function changes with the Sun.
 - The PDS colour mosaic was normalized with its own lunar-Lambert value (see below); this law is the paper's global fit to the LORRI approach images.
-- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js charon --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.027 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.184 at 0.98. The redraw also rebuilt `runtime.json` with texture placements that differ by rounding (0.01 to 0.05 units); it was restored to the published bytes, so only the lighting changed.
+- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js charon --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each dataset writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.027 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.184 at 0.98. The redraw also rebuilt `runtime.json` with texture placements that differ by rounding (0.01 to 0.05 units); it was restored to the published bytes, so only the lighting changed.
 
 ## Known problems
 
@@ -112,7 +112,7 @@ No atmosphere shell is supplied: New Horizons found no detectable atmosphere.
 
 ## New Horizons MVIC enhanced color
 
-The additional Enhanced color lens uses the PDS product
+The additional Enhanced color dataset uses the PDS product
 [nh_charon_color_mosaic::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx),
 retained as the original 116,006,912-byte four-band float32 array.
 The bands are CH4 895 nm, NIR 870 nm, red 625 nm and blue 475 nm;
@@ -184,7 +184,7 @@ The Bond-albedo view uses [New Horizons derived PDS4 product nh_charon_bond](htt
 LIDVID `urn:nasa:pds:nh_derived:plutosystem_geophysics:nh_charon_bond::1.0`.
 It is a modeled approximation to Bond albedo from LORRI photometry and scattering
 assumptions, not a direct bolometric measurement. The wrapper retains every
-original byte without resampling. The lens applies the label's scale
+original byte without resampling. The dataset applies the label's scale
 0.00392156862745; DN zero remains missing. The 1518×700 map uses a 606 km sphere,
 east-positive planetocentric coordinates and 2508.307177965 m pixels. Coverage
 ends before the south pole and retains unobserved sectors. Values run

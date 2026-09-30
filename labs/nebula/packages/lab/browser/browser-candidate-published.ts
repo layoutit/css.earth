@@ -28,7 +28,7 @@ async function ready() {
 async function material(id: string, mode = 'textured') {
   await page.waitForFunction(({ id, mode }) => {
     const root = document.querySelector('[data-compiler-root]');
-    return root?.getAttribute('data-material') === mode && (mode === 'neutral' || root?.getAttribute('data-lens') === id);
+    return root?.getAttribute('data-material') === mode && (mode === 'neutral' || root?.getAttribute('data-dataset') === id);
   }, { id, mode }, { timeout: 60000 });
 }
 async function snapshot(name: string) { await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))); await page.screenshot({ path: `${output}/${name}.png` }); }
@@ -40,7 +40,7 @@ async function starPresentation() {
       alpha: node.style.opacity, visible: getComputedStyle(node).visibility !== 'hidden' };
   }));
 }
-const receipts: { id: string; result: string; lenses: string[]; stars: number;
+const receipts: { id: string; result: string; datasets: string[]; stars: number;
   retainedNodes: true; savedPresentation: Awaited<ReturnType<typeof compilerPresentation>>; lateDecode: string; sourceRace: string }[] = [];
 try {
   for (const id of candidates) {
@@ -48,21 +48,21 @@ try {
     await page.goto(`${base}/reconstruction?subject=${id}&inspection=compiler`); await ready();
     const result = await page.locator('.compiler-controls').getAttribute('data-result-id'); assert.ok(result);
     const prepared = readCompilerResult(JSON.parse(await readFile(`.local/nebula-lab/compiler/${result}/result.json`, 'utf8')));
-    const lenses = await page.locator('#compiler-lens option').evaluateAll(items => items.map(item => (item as HTMLOptionElement).value));
-    assert.ok(lenses.length > 0);
+    const datasets = await page.locator('#compiler-dataset option').evaluateAll(items => items.map(item => (item as HTMLOptionElement).value));
+    assert.ok(datasets.length > 0);
     const stars = await page.locator('div[data-compiler-stars] s').count(); assert.ok(stars > 0);
-    await material(await page.locator('#compiler-lens').inputValue());
+    await material(await page.locator('#compiler-dataset').inputValue());
     const retained = await retainCompilerScene(page);
     let previousStars: Awaited<ReturnType<typeof starPresentation>> | undefined;
-    for (const lens of lenses) {
-      await page.locator('#compiler-lens').selectOption(lens); await material(lens); await snapshot(`${id}-${lens}-earth`);
-      await assertCompilerSceneRetained(page, retained, `${id}/${lens}/Earth lens`);
+    for (const dataset of datasets) {
+      await page.locator('#compiler-dataset').selectOption(dataset); await material(dataset); await snapshot(`${id}-${dataset}-earth`);
+      await assertCompilerSceneRetained(page, retained, `${id}/${dataset}/Earth dataset`);
       const currentStars = await starPresentation();
       assert.equal(currentStars.length, stars, 'Changing image recreated the stellar catalogue.');
       if (prepared.scene.starSprites) assert.ok(currentStars.every(star => star.atlas.startsWith('url("blob:') && star.color === 'transparent'),
         'Prepared core/halo atlas was replaced with flat stellar disks.');
       if (previousStars && id === 'm45') assert.deepEqual(currentStars, previousStars,
-        'An image lens changed the shared optical reference catalogue.');
+        'An image dataset changed the shared optical reference catalogue.');
       if (previousStars && id === 'm42') {
         let compared = 0;
         currentStars.forEach((star, i) => {
@@ -71,9 +71,9 @@ try {
           compared++;
           assert.ok(Math.hypot(star.x - previous.x, star.y - previous.y) < .05, 'Photometry changed a star sky position.');
         });
-        assert.ok(compared > 100, 'Not enough shared stars remained visible for the lens-switch check.');
+        assert.ok(compared > 100, 'Not enough shared stars remained visible for the dataset-switch check.');
         assert.ok(currentStars.some((star, i) => star.color !== previousStars![i]!.color || star.tile !== previousStars![i]!.tile || star.alpha !== previousStars![i]!.alpha),
-          'The infrared lens retained optical star photometry.');
+          'The infrared dataset retained optical star photometry.');
       }
       previousStars = currentStars;
     }
@@ -82,10 +82,10 @@ try {
     await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
     await page.mouse.move(rect.x + rect.width / 2 + 170, rect.y + rect.height / 2 - 100, { steps: 12 }); await page.mouse.up();
     const pose = await page.locator('.compiler-stage').getAttribute('data-compiler-pose'); assert.notEqual(pose, '0,0');
-    for (const lens of lenses) {
-      await page.locator('#compiler-lens').selectOption(lens); await material(lens); await snapshot(`${id}-${lens}-oblique`);
+    for (const dataset of datasets) {
+      await page.locator('#compiler-dataset').selectOption(dataset); await material(dataset); await snapshot(`${id}-${dataset}-oblique`);
       assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose);
-      await assertCompilerSceneRetained(page, retained, `${id}/${lens}/orbit lens`);
+      await assertCompilerSceneRetained(page, retained, `${id}/${dataset}/orbit dataset`);
     }
     await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral'); await snapshot(`${id}-neutral-oblique`);
     await assertCompilerSceneRetained(page, retained, `${id}/neutral`);
@@ -100,8 +100,8 @@ try {
         assert.ok(Math.abs(angles[axis === 'west' ? 0 : 1]! - (axis === 'west' ? 90 : 89)) < .5, 'Side inspection did not reach its intended camera.');
         await snapshot(`${id}-neutral-${axis}-side`);
         await page.getByRole('button', { name: 'Textured', exact: true }).click();
-        for (const lens of lenses) {
-          await page.locator('#compiler-lens').selectOption(lens); await material(lens); await snapshot(`${id}-${lens}-${axis}-side`);
+        for (const dataset of datasets) {
+          await page.locator('#compiler-dataset').selectOption(dataset); await material(dataset); await snapshot(`${id}-${dataset}-${axis}-side`);
         }
         await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral');
       }
@@ -126,28 +126,28 @@ try {
     await page.getByRole('checkbox', { name: 'Original', exact: true }).check();
     await page.waitForFunction(() => { const image = document.querySelector<HTMLImageElement>('[data-compiler-original-source]'); return image?.complete && image.naturalWidth > 0; });
     await assertCompilerSceneRetained(page, retained, `${id}/camera and toggles`);
-    let lateDecode = 'not exercised: only one lens';
-    if (lenses.length > 1) {
-      const previousLens = await page.locator('#compiler-lens').inputValue();
-      await page.getByRole('button', { name: 'Textured', exact: true }).click(); await material(previousLens);
-      const nextLens = lenses.find(lens => lens !== previousLens)!;
+    let lateDecode = 'not exercised: only one dataset';
+    if (datasets.length > 1) {
+      const previousDataset = await page.locator('#compiler-dataset').inputValue();
+      await page.getByRole('button', { name: 'Textured', exact: true }).click(); await material(previousDataset);
+      const nextDataset = datasets.find(dataset => dataset !== previousDataset)!;
       const beforeLoad = await compilerPresentation(page), delayed = await delayNextBitmap(page);
       try {
-        await page.locator('#compiler-lens').selectOption(nextLens); await delayed.held();
-        assert.equal(await page.locator('[data-compiler-root]').getAttribute('data-lens'), previousLens,
-          'Pending material decode discarded the previous lens.');
+        await page.locator('#compiler-dataset').selectOption(nextDataset); await delayed.held();
+        assert.equal(await page.locator('[data-compiler-root]').getAttribute('data-dataset'), previousDataset,
+          'Pending material decode discarded the previous dataset.');
         await assertCompilerSceneRetained(page, retained, `${id}/pending decode`);
         await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral');
         await delayed.release(); await delayed.settled();
         const afterLoad = await compilerPresentation(page);
         assert.equal(afterLoad.material, 'neutral', 'A late material decode overwrote the newer Neutral choice.');
-        assert.equal(await page.locator('[data-compiler-root]').getAttribute('data-lens'), '');
+        assert.equal(await page.locator('[data-compiler-root]').getAttribute('data-dataset'), '');
         assert.equal(afterLoad.pose, beforeLoad.pose); assert.equal(afterLoad.framing, beforeLoad.framing);
         await assertCompilerSceneRetained(page, retained, `${id}/late decode`);
-        lateDecode = 'passed: prior lens retained while decoding; superseded bitmap cannot override Neutral';
+        lateDecode = 'passed: prior dataset retained while decoding; superseded bitmap cannot override Neutral';
       } finally { await delayed.restore(); }
     }
-    // Persist deliberate non-default camera, lens, material and toggles through a real reload.
+    // Persist deliberate non-default camera, dataset, material and toggles through a real reload.
     await page.getByRole('button', { name: 'Earth view', exact: true }).click();
     await page.getByRole('button', { name: 'Orbit', exact: true }).click();
     const x = rect.x + rect.width / 2, y = rect.y + rect.height / 2;
@@ -157,7 +157,7 @@ try {
     await page.mouse.move(x + 31, y + 19, { steps: 5 }); await page.mouse.up(); await page.keyboard.up('Shift');
     await page.mouse.wheel(0, -170);
     await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral');
-    await page.locator('#compiler-lens').selectOption(lenses.at(-1)!);
+    await page.locator('#compiler-dataset').selectOption(datasets.at(-1)!);
     await snapshot(`${id}-original`);
     const savedPresentation = await compilerPresentation(page);
     assert.notEqual(savedPresentation.pose, '0,0');
@@ -165,18 +165,18 @@ try {
     assert.ok(!savedPresentation.framing.includes('"panX":0') && !savedPresentation.framing.includes('"panY":0'));
     assert.equal(savedPresentation.stars, false); assert.equal(savedPresentation.original, true);
     assert.equal(savedPresentation.orbit, 'true'); assert.equal(savedPresentation.material, 'neutral');
-    if (lenses.length > 1) assert.notEqual(savedPresentation.lens, lenses[0], 'Refresh must exercise a non-default lens.');
+    if (datasets.length > 1) assert.notEqual(savedPresentation.dataset, datasets[0], 'Refresh must exercise a non-default dataset.');
     await assertCompilerSceneRetained(page, retained, `${id}/saved controls`); await retained.dispose();
     await page.reload(); await ready(); await material('', 'neutral');
     assert.equal(await page.locator('.compiler-controls').getAttribute('data-result-id'), result);
     assert.deepEqual(await compilerPresentation(page), savedPresentation, 'Reload changed the saved compiler presentation.');
-    let sourceRace = 'not exercised: requires two candidates and two lenses';
+    let sourceRace = 'not exercised: requires two candidates and two datasets';
     const nextSubject = candidates[candidates.indexOf(id) + 1];
-    if (nextSubject && lenses.length > 1) {
-      await page.getByRole('button', { name: 'Textured', exact: true }).click(); await material(savedPresentation.lens);
+    if (nextSubject && datasets.length > 1) {
+      await page.getByRole('button', { name: 'Textured', exact: true }).click(); await material(savedPresentation.dataset);
       const delayed = await delayNextBitmap(page);
       try {
-        await page.locator('#compiler-lens').selectOption(lenses.find(lens => lens !== savedPresentation.lens)!); await delayed.held();
+        await page.locator('#compiler-dataset').selectOption(datasets.find(dataset => dataset !== savedPresentation.dataset)!); await delayed.held();
         await page.locator('#subject').fill(nextSubject);
         await page.locator(`#object-results [data-object-id="${nextSubject}"]`).click();
         await page.waitForFunction(previous => {
@@ -194,7 +194,7 @@ try {
         sourceRace = `passed: late ${id} bitmap cannot overwrite ${nextSubject}`;
       } finally { await delayed.restore(); }
     }
-    receipts.push({ id, result, lenses, stars, retainedNodes: true, savedPresentation, lateDecode, sourceRace });
+    receipts.push({ id, result, datasets, stars, retainedNodes: true, savedPresentation, lateDecode, sourceRace });
     console.log(`PREPARED_CANDIDATE_CHECKED ${id} retained nodes, delayed decode and saved presentation`);
   }
   assert.deepEqual(errors, []); assert.deepEqual(posts, [], 'Inspecting a CLI-prepared cloud started processing.');
@@ -215,7 +215,7 @@ try {
     directLoad: true, sourceSwitch: true, orbit: true, stars: true, originalOverlay: true, refresh: true,
     visualComparison: 'Screenshots recorded; appearance requires manual inspection.',
     blockedWrites: writeGuard.blocked, cancelledRefitRefresh: checkCancellation, errors, posts, failedRequests }, null, 2));
-  console.log(`PASS prepared candidate inspection: ${receipts.map(item => `${item.id} (${item.lenses.length} lenses, ${item.stars} stars)`).join(', ')}.`);
+  console.log(`PASS prepared candidate inspection: ${receipts.map(item => `${item.id} (${item.datasets.length} datasets, ${item.stars} stars)`).join(', ')}.`);
 } catch (error) {
   await writeFile(`${output}/result.json`, JSON.stringify({ status: 'failed', candidates: receipts,
     error: error instanceof Error ? error.stack : String(error), errors, posts, failedRequests, blockedWrites: writeGuard.blocked }, null, 2));

@@ -1,4 +1,4 @@
-import {parseSaturnScene,parseSaturnViews,parseSaturnLenses,parseSaturnLayouts} from './fixtures/saturn-prepared.mts';
+import {parseSaturnScene,parseSaturnViews,parseSaturnDatasets,parseSaturnLayouts} from './fixtures/saturn-prepared.mts';
 import {parseTitle,parsePanel,parseContent} from './fixtures/prepared-schemas.mts';
 import {parsePreparedObjectRuntime} from '@cssearth/renderer';
 import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
@@ -12,7 +12,7 @@ function checkedRuntime(value:unknown){const checked=requireObjectRuntimeDefinit
 /** Tests consume the same JSON preparation products as the shared renderer. */
 export async function readPreparedFixture(id:'saturn',artifact:'scene'):Promise<ReturnType<typeof parseSaturnScene>>;
 export async function readPreparedFixture(id:'saturn',artifact:'views'):Promise<ReturnType<typeof parseSaturnViews>>;
-export async function readPreparedFixture(id:'saturn',artifact:'material-lenses'):Promise<ReturnType<typeof parseSaturnLenses>>;
+export async function readPreparedFixture(id:'saturn',artifact:'material-datasets'):Promise<ReturnType<typeof parseSaturnDatasets>>;
 export async function readPreparedFixture(id:'saturn',artifact:'layouts'):Promise<ReturnType<typeof parseSaturnLayouts>>;
 export async function readPreparedFixture(id:string,artifact:'title'):Promise<ReturnType<typeof parseTitle>>;
 export async function readPreparedFixture(id:string,artifact:'panel'):Promise<ReturnType<typeof parsePanel>>;
@@ -35,7 +35,7 @@ export async function readPreparedFixture(id: string, artifact: string): Promise
   if(artifact==='content')return parseContent(value);
   if(artifact==='scene'&&id==='saturn')return parseSaturnScene(value);
   if(artifact==='views'&&id==='saturn')return parseSaturnViews(value);
-  if(artifact==='material-lenses'&&id==='saturn')return parseSaturnLenses(value);
+  if(artifact==='material-datasets'&&id==='saturn')return parseSaturnDatasets(value);
   if(artifact==='layouts'&&id==='saturn')return parseSaturnLayouts(value);
   return value;
 }

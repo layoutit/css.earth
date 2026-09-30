@@ -26,7 +26,7 @@
       "id": "thomson-baynham-2026-geology",
       "subject": "Thomson and Baynham 2026 digitized historical map",
       "status": "included",
-      "finding": "The CC BY 4.0 GIS release supplies the historical Geology lens after its incompatible page CRS was reconstructed with six Miranda graticule fit intersections, six withheld intersections and three crater checks. It represents Voyager-era unit interpretation, not composition or terrain; coverage is about 44.2% and degree-scale registration limits remain.",
+      "finding": "The CC BY 4.0 GIS release supplies the historical Geology dataset after its incompatible page CRS was reconstructed with six Miranda graticule fit intersections, six withheld intersections and three crater checks. It represents Voyager-era unit interpretation, not composition or terrain; coverage is about 44.2% and degree-scale registration limits remain.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/miranda/source/science/geology-2026/registration.json",
         "https://zenodo.org/records/20817533"
@@ -36,7 +36,7 @@
       "id": "jpl-ura5vuu2-display-map",
       "subject": "JPL ura5vuu2.tif simulator map",
       "status": "excluded",
-      "finding": "The 1440 × 720 simulator display map is superseded by the denser Schenk mosaic and is not retained as a duplicate Monochrome lens.",
+      "finding": "The 1440 × 720 simulator display map is superseded by the denser Schenk mosaic and is not retained as a duplicate Monochrome dataset.",
       "revisitWhen": "A JPL release supplies a higher-detail, source-controlled Miranda map with documented projection and processing that improves on the selected Schenk mosaic.",
       "evidence": [
         "https://space.jpl.nasa.gov/tmaps/uranus.html"
@@ -56,7 +56,7 @@
       "id": "usgs-voyager-control-network",
       "subject": "USGS Miranda Voyager control network",
       "status": "included",
-      "finding": "The USGS control network is retained as registration support for the selected sources, not as a separate image or measured-scalar lens.",
+      "finding": "The USGS control network is retained as registration support for the selected sources, not as a separate image or measured-scalar dataset.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/miranda_voyager_image_control_network"
       ]
@@ -75,7 +75,7 @@
       "id": "voyager-iss-color-2026",
       "subject": "Voyager 2 ISS green/violet/ultraviolet colour frames",
       "status": "included",
-      "finding": "3 GEOMED frames in 1 complete sets (1.1 km per pixel) placed by limb fit and mosaic registration supply the Voyager color lens. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.03, 1.06); the archive calibration gives 0.927 and 1.056. No phase normalisation; the north stays unavailable.",
+      "finding": "3 GEOMED frames in 1 complete sets (1.1 km per pixel) placed by limb fit and mosaic registration supply the Voyager color dataset. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.03, 1.06); the archive calibration gives 0.927 and 1.056. No phase normalisation; the north stays unavailable.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/miranda/source/reference/voyager-color-placement.json",
         "https://ui.adsabs.harvard.edu/abs/1991LPSC...21..473B"

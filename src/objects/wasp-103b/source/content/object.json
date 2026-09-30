@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-103b",
   "displayName": "WASP-103 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature-p3",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature-p3",
     "controls": [
       {
         "id": "temperature-p0",
         "label": "Temperature",
         "qualification": "Climate simulation · 0.000111 bar · False color",
-        "thumbnail": "wasp-103b-lens-temperature-p0.webp",
+        "thumbnail": "wasp-103b-dataset-temperature-p0.webp",
         "surface": "wasp-103b-surface-temperature-p0@2x.webp",
         "poles": "wasp-103b-poles-temperature-p0@2x.webp",
         "source": {
@@ -122,7 +122,7 @@
         "id": "temperature-p1",
         "label": "Temperature",
         "qualification": "Climate simulation · 0.000889 bar · False color",
-        "thumbnail": "wasp-103b-lens-temperature-p1.webp",
+        "thumbnail": "wasp-103b-dataset-temperature-p1.webp",
         "surface": "wasp-103b-surface-temperature-p1@2x.webp",
         "poles": "wasp-103b-poles-temperature-p1@2x.webp",
         "source": {
@@ -189,7 +189,7 @@
         "id": "temperature-p2",
         "label": "Temperature",
         "qualification": "Climate simulation · 0.0101 bar · False color",
-        "thumbnail": "wasp-103b-lens-temperature-p2.webp",
+        "thumbnail": "wasp-103b-dataset-temperature-p2.webp",
         "surface": "wasp-103b-surface-temperature-p2@2x.webp",
         "poles": "wasp-103b-poles-temperature-p2@2x.webp",
         "source": {
@@ -256,7 +256,7 @@
         "id": "temperature-p3",
         "label": "Temperature",
         "qualification": "Climate simulation · 0.115 bar · False color",
-        "thumbnail": "wasp-103b-lens-temperature-p3.webp",
+        "thumbnail": "wasp-103b-dataset-temperature-p3.webp",
         "surface": "wasp-103b-surface-temperature-p3@2x.webp",
         "poles": "wasp-103b-poles-temperature-p3@2x.webp",
         "source": {
@@ -323,7 +323,7 @@
         "id": "temperature-p4",
         "label": "Temperature",
         "qualification": "Climate simulation · 0.929 bar · False color",
-        "thumbnail": "wasp-103b-lens-temperature-p4.webp",
+        "thumbnail": "wasp-103b-dataset-temperature-p4.webp",
         "surface": "wasp-103b-surface-temperature-p4@2x.webp",
         "poles": "wasp-103b-poles-temperature-p4@2x.webp",
         "source": {
@@ -390,7 +390,7 @@
         "id": "temperature-p5",
         "label": "Temperature",
         "qualification": "Climate simulation · 10.6 bar · False color",
-        "thumbnail": "wasp-103b-lens-temperature-p5.webp",
+        "thumbnail": "wasp-103b-dataset-temperature-p5.webp",
         "surface": "wasp-103b-surface-temperature-p5@2x.webp",
         "poles": "wasp-103b-poles-temperature-p5@2x.webp",
         "source": {
@@ -457,7 +457,7 @@
         "id": "temperature-p6",
         "label": "Temperature",
         "qualification": "Climate simulation · 85.2 bar · False color",
-        "thumbnail": "wasp-103b-lens-temperature-p6.webp",
+        "thumbnail": "wasp-103b-dataset-temperature-p6.webp",
         "surface": "wasp-103b-surface-temperature-p6@2x.webp",
         "poles": "wasp-103b-poles-temperature-p6@2x.webp",
         "source": {

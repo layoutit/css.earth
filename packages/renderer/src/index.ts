@@ -5,7 +5,7 @@ export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, Ob
 export type { ObjectRuntimeServices } from './runtime/object-runtime.js';
 export { OBJECT_RUNTIME_SCHEMA, initialObjectSelection, requireObjectControls, requireObjectAction,
   requireObjectRuntimeDefinition, objectCycleStates, reduceObjectSelection } from './runtime/object-contract.js';
-export type { ObjectControls, ObjectAction, ObjectSelection, LensControl, SettingControl } from './runtime/object-contract.js';
+export type { ObjectControls, ObjectAction, ObjectSelection, DatasetControl, SettingControl } from './runtime/object-contract.js';
 export type { RuntimePolicy } from './navigation/runtime-policy.js';
 export type { CameraPlan, CameraPose } from './navigation/types.js';
 export type { PerspectiveWorldContext } from './navigation/perspective-dolly.js';
@@ -58,7 +58,7 @@ export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLe
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';
-export { parseLensBillboards } from './universe/lens-billboards.js';
+export { parseDatasetBillboards } from './universe/dataset-billboards.js';
 
 export { requireAssets } from './validation/resources-tree.js';
 export { requireControls } from './validation/camera-controls.js';

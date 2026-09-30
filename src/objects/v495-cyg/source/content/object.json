@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "v495-cyg",
   "displayName": "V495 Cyg",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "v495-cyg-lens-color.webp",
+        "thumbnail": "v495-cyg-dataset-color.webp",
         "surface": "v495-cyg-surface-color@2x.webp",
         "poles": "v495-cyg-poles-color@2x.webp",
         "source": {

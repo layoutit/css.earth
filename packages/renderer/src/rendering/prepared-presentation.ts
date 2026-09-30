@@ -70,7 +70,7 @@ export interface PreparedPresentationDefinition {
   surfaceHit?: PreparedSurfaceHit;
   assetOrigin?: PreparedAssetOrigin;
 }
-export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>; textureTiles?: Readonly<Record<string, PreparedTextureTile>>;
+export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedDatasets: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>; textureTiles?: Readonly<Record<string, PreparedTextureTile>>;
   /** The mesh is not drawn at this level of detail: its textures only warm. */
   deferredTextures?: boolean; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
@@ -117,7 +117,7 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     materials[track.id] = state;
   }
   if (definition.resourceOrder === "materials-first" && !deferredTextures) for (const key of content) required.add(key);
-  return { required: [...required], prewarm: [...prewarm].filter(key => !required.has(key)), materials, pressedLenses: [selection.lensId],
+  return { required: [...required], prewarm: [...prewarm].filter(key => !required.has(key)), materials, pressedDatasets: [selection.datasetId],
     ...(deferredTextures ? { deferredTextures } : {}),
     ...(textureLevel === undefined ? {} : { textureLevel }), ...(textureResources === undefined ? {} : { textureResources }),
     ...(textureTiles && Object.keys(textureTiles).length ? { textureTiles } : {}),
@@ -240,7 +240,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     } else if (!samePreparedStyle(styleValue(target(index), name), name, value)) { writeStyle(target(index), name, value); styleWrites++; }
   }
   return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
-    ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
+    ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.dataset) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.features ? { featureTarget: nodes[definition.features.target] } : {}),
     commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {

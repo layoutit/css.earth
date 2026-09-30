@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-circumstellar-volume@1",
+  "schema": "cssearth-circumstellar-volume@2",
   "id": "pds-70-disc",
   "host": "pds-70",
   "name": "PDS 70 dust ring",
@@ -16,8 +16,8 @@
     "halfUnits": 150,
     "slabs": 100
   },
-  "defaultLens": "dust",
-  "lenses": [
+  "defaultDataset": "dust",
+  "datasets": [
     {
       "id": "dust",
       "label": "ALMA · dust ring, 0.87 mm",

@@ -43,7 +43,7 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
   }
   if (!changed.size) throw new Error(`${id}: no neutral shape views.`);
   // Verify the entire existing asset bank against its inventory before publication; the inventory rows become the
-  // baseline showing that Shadows-on and all other lenses stay untouched.
+  // baseline showing that Shadows-on and all other datasets stay untouched.
   for (const asset of records(inventory.assets)) {
     const bytes = await readFile(resolve('public/scenes', id, requireString(asset.filename)));
     if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`${id}: stale asset ${asset.filename}.`);
@@ -55,7 +55,7 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
   await save(resolve(stage, 'inventory.json'), { ...inventory,
     assets: records(inventory.assets).map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) });
   await save(resolve(stage, 'receipt.json'), { id, baselineAssets: inventory.assets,
-    lensIds: views.map(view => view.id), changedAssets: [...changed.values()] });
+    datasetIds: views.map(view => view.id), changedAssets: [...changed.values()] });
 }
 
 export async function validateStage(id: string) {

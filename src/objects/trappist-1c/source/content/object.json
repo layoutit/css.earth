@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "trappist-1c",
   "displayName": "TRAPPIST-1c",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "temperature",
         "label": "Rock model",
         "qualification": "A model set by one measurement: the 15 µm eclipse depth this project measured in raw JWST MIRI visits, 2022–2023",
-        "thumbnail": "trappist-1c-lens-temperature.webp",
+        "thumbnail": "trappist-1c-dataset-temperature.webp",
         "surface": "trappist-1c-surface-temperature@2x.webp",
         "poles": "trappist-1c-poles-temperature@2x.webp",
         "source": {
@@ -128,7 +128,7 @@
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of TRAPPIST-1c, from Eyes on Exoplanets; not an observation.",
-        "thumbnail": "trappist-1c-lens-illustration.webp",
+        "thumbnail": "trappist-1c-dataset-illustration.webp",
         "surface": "trappist-1c-surface-illustration@2x.webp",
         "poles": "trappist-1c-poles-illustration@2x.webp",
         "source": {

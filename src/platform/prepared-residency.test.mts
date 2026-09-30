@@ -171,11 +171,11 @@ test("Earth complete page groups retain the committed bank with only two pending
   const pageEntries=definitions.earth.assets.entries.filter(entry=>entry.pool==='pages'&&entry.key.startsWith('page:')&&!entry.key.includes(':level:')),groups=new Map<string, string[]>();
   for(const entry of pageEntries){const id=entry.key.split(':')[1];if(!groups.has(id))groups.set(id,[]);groups.get(id)?.push(entry.url);}
   const banks=[...groups.values()].map(surfaceUrls=>({surfaceUrls}));
-  const urls = banks.flatMap(lens => lens.surfaceUrls);
-  // Page arrays are the prepared lens data; fail if their schema changes.
+  const urls = banks.flatMap(dataset => dataset.surfaceUrls);
+  // Page arrays are the prepared dataset data; fail if their schema changes.
   assert.ok(urls.length >= 6, "Use the actual prepared surface page banks");
   const width = banks[0].surfaceUrls.length;
-  assert.ok(banks.every(lens => lens.surfaceUrls.length === width));
+  assert.ok(banks.every(dataset => dataset.surfaceUrls.length === width));
   const { manager, jobs, complete, commit } = harness(catalog(urls, { capacity: width * 2, concurrency: 2, reuse: false }));
   const bank = (offset: number) => Array.from({ length: width }, (_, i) => String(offset + i));
   await commit(bank(0));
@@ -194,31 +194,31 @@ test("Earth complete page groups retain the committed bank with only two pending
 });
 
 test("Saturn surface, ring and material groups transfer together and failed requests preserve the active group", async () => {
-  const definition=definitions.saturn; assert.ok(definition.controls.lenses);
-  const lenses=definition.controls.lenses.controls.slice(0,3);
+  const definition=definitions.saturn; assert.ok(definition.controls.datasets);
+  const datasets=definition.controls.datasets.controls.slice(0,3);
   const assets: MutableAssets = { entries: [], pools: [], startup: [] };
   for (const field of ["surface", "rings"]) {
     assets.pools.push({ id: field, capacity: 2, concurrency: 2, retention: "selection", reuse: false });
-    for (const lens of lenses) assets.entries.push({ key: `${lens.id}/${field}`, url: assetUrl(definition,`${field}:${lens.id}`), pool: field });
+    for (const dataset of datasets) assets.entries.push({ key: `${dataset.id}/${field}`, url: assetUrl(definition,`${field}:${dataset.id}`), pool: field });
   }
   for (const category of ['exterior']) {
     assets.pools.push({ id: category, capacity: 2, concurrency: 2, retention: "selection", reuse: false });
-    for (const lens of lenses) {
+    for (const dataset of datasets) {
       const track=definition.materials.find(track=>track.id===category); assert.ok(track);
-      const bank=track.banks.find(bank=>bank.id===lens.id);assert.ok(bank);
-      assets.entries.push({ key: `${lens.id}/${category}`, url: assetUrl(definition,bank.frames[0].resource), pool: category });
+      const bank=track.banks.find(bank=>bank.id===dataset.id);assert.ok(bank);
+      assets.entries.push({ key: `${dataset.id}/${category}`, url: assetUrl(definition,bank.frames[0].resource), pool: category });
     }
   }
-  const keys = (lens: {id: string}) => assets.entries.filter(entry => entry.key.startsWith(lens.id + "/")).map(entry => entry.key);
+  const keys = (dataset: {id: string}) => assets.entries.filter(entry => entry.key.startsWith(dataset.id + "/")).map(entry => entry.key);
   const { manager, commit, jobs, complete } = harness(assets);
-  await commit(keys(lenses[0]));
-  const failed = manager.request({ required: keys(lenses[1]) });
+  await commit(keys(datasets[0]));
+  const failed = manager.request({ required: keys(datasets[1]) });
   const failJob = jobs.at(-1); assert.ok(failJob); failJob.done = true; failJob.reject(new Error("rings unavailable"));
   await assert.rejects(failed.ready, /decode/); await flush();
-  assert.deepEqual(manager.stats().committed, keys(lenses[0]));
-  const replacement = manager.request({ required: keys(lenses[2]) });
+  assert.deepEqual(manager.stats().committed, keys(datasets[0]));
+  const replacement = manager.request({ required: keys(datasets[2]) });
   await complete(); await replacement.ready; manager.commit(replacement);
-  assert.deepEqual(manager.stats().committed, keys(lenses[2]));
+  assert.deepEqual(manager.stats().committed, keys(datasets[2]));
   assert.ok(manager.stats().pools.every(pool => pool.resident === 1));
   manager.destroy();
 });

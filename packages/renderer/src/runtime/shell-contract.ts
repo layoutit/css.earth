@@ -1,4 +1,4 @@
-import type { LensControl, SettingControl } from './object-contract.js';
+import type { DatasetControl, SettingControl } from './object-contract.js';
 import type { ObjectSceneLifecycle } from './object-scene.js';
 // A `.ts` sibling, so Node tools can load this module from its source subpath without a bundler.
 import { SHELL_SETTING_NAMES } from './shell-settings.ts';
@@ -9,15 +9,15 @@ export type SceneLifecycle = Pick<ObjectSceneLifecycle, "pause" | "resume" | "de
   readonly ready: PromiseLike<unknown>;
 };
 
-// Shell content validation checks IDs and live control values. Lens labels,
+// Shell content validation checks IDs and live control values. Dataset labels,
 // presentation fields and cycle-state tables belong to their owning validators.
 type ShellSettingControl = Extract<SettingControl, { kind: "toggle" }>
   | Omit<Extract<SettingControl, { kind: "cycle" }>, "states">;
 
 export interface ShellObjectControls {
-  readonly lenses: {
-    readonly defaultLens?: unknown;
-    readonly controls: readonly Pick<LensControl, "id">[];
+  readonly datasets: {
+    readonly defaultDataset?: unknown;
+    readonly controls: readonly Pick<DatasetControl, "id">[];
   } | null | undefined;
   readonly settings: {
     readonly controls: readonly ShellSettingControl[];
@@ -45,7 +45,7 @@ export function requireSceneLifecycle(mount: unknown, objectId = "unknown"): Sce
   return mount as SceneLifecycle;
 }
 
-function controls(value: unknown, name: "lenses" | "settings", objectId: string): readonly unknown[] {
+function controls(value: unknown, name: "datasets" | "settings", objectId: string): readonly unknown[] {
   if (value == null) return [];
   if (!objectLike(value) || !Array.isArray(value.controls)) {
     throw new TypeError(`Object ${objectId} ${name} controls must be an array.`);
@@ -58,18 +58,18 @@ function controls(value: unknown, name: "lenses" | "settings", objectId: string)
 // properties have passed the corresponding runtime checks.
 export function requireObjectControls(content: unknown, objectId = "unknown"): ShellObjectControls {
   if (!content || typeof content !== "object" ||
-      !Object.hasOwn(content, "lenses") || !Object.hasOwn(content, "settings")) {
-    throw new TypeError(`Object ${objectId} must export its lenses and settings content.`);
+      !Object.hasOwn(content, "datasets") || !Object.hasOwn(content, "settings")) {
+    throw new TypeError(`Object ${objectId} must export its datasets and settings content.`);
   }
   const record = content as Record<string, unknown>;
-  const lenses = controls(record.lenses, "lenses", objectId);
+  const datasets = controls(record.datasets, "datasets", objectId);
   const settings = controls(record.settings, "settings", objectId);
-  const lensIds = lenses.map((lens) => objectLike(lens) ? lens.id : undefined);
-  const defaultLens = objectLike(record.lenses) ? record.lenses.defaultLens : undefined;
-  if (lensIds.some((id) => typeof id !== "string" || !id) ||
-      new Set(lensIds).size !== lensIds.length ||
-      (lenses.length && !lensIds.includes(defaultLens))) {
-    throw new TypeError(`Object ${objectId} lens IDs/default are invalid.`);
+  const datasetIds = datasets.map((dataset) => objectLike(dataset) ? dataset.id : undefined);
+  const defaultDataset = objectLike(record.datasets) ? record.datasets.defaultDataset : undefined;
+  if (datasetIds.some((id) => typeof id !== "string" || !id) ||
+      new Set(datasetIds).size !== datasetIds.length ||
+      (datasets.length && !datasetIds.includes(defaultDataset))) {
+    throw new TypeError(`Object ${objectId} dataset IDs/default are invalid.`);
   }
   const names = settings.map((setting) => objectLike(setting) ? setting.name : undefined);
   if (names.some((name) => typeof name !== "string" || !name ||

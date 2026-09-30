@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "rasalhague",
   "displayName": "Rasalhague",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law.",
-        "thumbnail": "rasalhague-lens-color.webp",
+        "thumbnail": "rasalhague-dataset-color.webp",
         "surface": "rasalhague-surface-color@2x.webp",
         "poles": "rasalhague-poles-color@2x.webp",
         "source": {

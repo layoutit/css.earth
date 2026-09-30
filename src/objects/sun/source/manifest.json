@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "sdo-hmi-continuum-cr2311-20260513",
@@ -49,7 +49,7 @@
       "acquisition": "Exact JSOC jsoc_info rs_list response: record keywords and segment paths of the 28 hmi.Ic_noLimbDark_720s frames",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -84,7 +84,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.13_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -119,7 +119,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.14_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -154,7 +154,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.15_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -189,7 +189,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.16_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -224,7 +224,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.17_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -259,7 +259,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.18_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -294,7 +294,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.19_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -329,7 +329,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.20_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -364,7 +364,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.21_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -399,7 +399,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.22_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -434,7 +434,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.23_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -469,7 +469,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.24_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -504,7 +504,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.25_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -539,7 +539,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.26_12:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -574,7 +574,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.27_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -609,7 +609,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.28_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -644,7 +644,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.29_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -679,7 +679,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.30_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -714,7 +714,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.31_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -749,7 +749,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.01_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -784,7 +784,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.02_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -819,7 +819,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.03_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -854,7 +854,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.04_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -889,7 +889,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.05_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -924,7 +924,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.06_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -959,7 +959,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.07_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -994,7 +994,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.08_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1029,7 +1029,7 @@
       "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.09_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1064,7 +1064,7 @@
       "acquisition": "Exact JSOC jsoc_info rs_list response for hmi.Ic_720s[2026.05.13_00:00:00_TAI]",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1099,7 +1099,7 @@
       "acquisition": "Exact hmi.Ic_720s[2026.05.13_00:00:00_TAI] continuum segment (Rice tile-compressed FITS), the limb-darkened twin of the first mosaic frame",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1135,7 +1135,7 @@
       "acquisition": "Exact hmi.mrsynop_small_720s[2311] synopMr FITS record",
       "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1243,7 +1243,7 @@
       "acquisition": "Exact pinned AIA 304 Carrington Rotation 2311 synoptic FITS map",
       "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1279,7 +1279,7 @@
       "acquisition": "Exact pinned AIA 171 Carrington Rotation 2311 synoptic FITS map",
       "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1373,7 +1373,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -1458,7 +1458,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -1540,7 +1540,7 @@
       "acquisition": "NASA SDO AIA 193 Å Carrington Rotation 2311 synoptic FITS map, downloaded unchanged",
       "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1591,7 +1591,7 @@
       "path": "reference/rendered-lenses.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: the branch's dev server at /sun/?embed with each of the four lenses, Chrome via Playwright at 1000 by 800 (DPR 2) after the scene reported ready, cropped to the disc and tiled, taken 2026-09-18 after preparation."
+        "reason": "Evidence capture: the branch's dev server at /sun/?embed with each of the four datasets, Chrome via Playwright at 1000 by 800 (DPR 2) after the scene reported ready, cropped to the disc and tiled, taken 2026-09-18 after preparation."
       }
     },
     {

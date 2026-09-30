@@ -492,7 +492,7 @@ jobs:
         # Source manifests own the package list; retain their previews and compact inputs without planetary binaries.
         run: |
           if [ "${GITHUB_ACTIONS:-}" = true ]; then
-            git grep -l 'cssearth-volume-source-manifest@1' -- 'src/objects/*/source/manifest.json' |
+            git grep -l 'cssearth-volume-source-manifest@2' -- 'src/objects/*/source/manifest.json' |
               while IFS= read -r manifest; do
                 printf '/%s/**\n' "${manifest%/source/manifest.json}"
               done | git sparse-checkout add --stdin
@@ -553,7 +553,7 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
-          build lens-levels lens-difference lens-radial lens-radial-panel
+          build dataset-levels dataset-difference dataset-radial dataset-radial-panel
           registration photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published
 
   ci-guard:

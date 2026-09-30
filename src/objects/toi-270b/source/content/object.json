@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "toi-270b",
   "displayName": "TOI-270 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by TOI-270; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "toi-270b-lens-shape.webp",
+        "thumbnail": "toi-270b-dataset-shape.webp",
         "surface": "toi-270b-surface-shape@2x.webp",
         "poles": "toi-270b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of TOI-270 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-270's light, as its colour lens measures it."
+        "notes": "No image or colour of TOI-270 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-270's light, as its colour dataset measures it."
       }
     ]
   },

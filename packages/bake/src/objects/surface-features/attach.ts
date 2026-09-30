@@ -27,7 +27,7 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   const authored = authoredPresentationBasis(parsed, [1, 0, 0, 0, 1, 0, 0, 0, 1]);
   const meshRadiusUnits = authored.sourceRadiusUnits * authored.tilePixels;
   if (!(meshRadiusUnits > 0)) throw new TypeError('Surface features need a positive mesh radius from the authored lane.');
-  const hit = definition.surfaceHit as { target?: number; triangles?: readonly (readonly (readonly number[])[])[]; lensRanges?: readonly { lensId: string; start: number; count: number }[] } | undefined;
+  const hit = definition.surfaceHit as { target?: number; triangles?: readonly (readonly (readonly number[])[])[]; datasetRanges?: readonly { datasetId: string; start: number; count: number }[] } | undefined;
   const radialTerrain = descriptor.recipe.shape.kind === 'radial-terrain';
   if (hit?.triangles?.length && !radialTerrain) {
     const vertexRadius = Math.max(...hit.triangles.flat().map(point => Math.hypot(point[0]!, point[1]!, point[2]!)));
@@ -36,8 +36,8 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   // Shape-model bodies anchor on their picking mesh: the sampler's body-fixed frame is the tool's 0° edge with the shared axes.
   if (radialTerrain && !(hit?.triangles?.length && typeof hit.target === 'number')) throw new TypeError('Shape-model surface features need the prepared hit mesh.');
   const featureConfig = parseSurfaceFeaturesConfig(config.value);
-  const range = featureConfig.landmarks && hit?.lensRanges?.length
-    ? selectFeatureMeshRange(featureConfig.lensIds, hit.lensRanges, hit.triangles?.length ?? 0) : undefined;
+  const range = featureConfig.landmarks && hit?.datasetRanges?.length
+    ? selectFeatureMeshRange(featureConfig.datasetIds, hit.datasetRanges, hit.triangles?.length ?? 0) : undefined;
   const hitMesh = radialTerrain && hit?.triangles && typeof hit.target === 'number' ? { target: hit.target, triangles: range ? hit.triangles.slice(range.start, range.start + range.count) : hit.triangles } : undefined;
   // The paged ellipsoid lane renders an oblate flat-leaf globe whose equatorial radius is the mesh radius: geodetic
   // catalogue positions anchor where its leaf frames draw them, checked against the authored reference ellipsoid.
@@ -49,7 +49,7 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
     config: config.value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
     tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}), ...(surface ? { surface: surface.cast } : {}),
     ...(descriptor.recipe.shape.kind === 'sphere' ? { referenceSphere: true as const } : {}),
-    declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) };
+    declaredDatasetIds: descriptor.recipe.surfaces.flatMap(surface => surface.datasets.map(dataset => dataset.id)) };
   const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },
     features: { searchLabel: 'Named features', description: featureConfig.naturalEarth
@@ -60,9 +60,9 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
 }
 
 /** Several datasets can share one mesh, but a landmark catalogue cannot cross mesh ranges. */
-export function selectFeatureMeshRange(lensIds: readonly string[], ranges: readonly { lensId: string; start: number; count: number }[], triangleCount: number) {
-  const selected = ranges.filter(range => lensIds.includes(range.lensId)), first = selected[0];
-  if (!first || selected.length !== lensIds.length || new Set(selected.map(range => range.lensId)).size !== lensIds.length ||
+export function selectFeatureMeshRange(datasetIds: readonly string[], ranges: readonly { datasetId: string; start: number; count: number }[], triangleCount: number) {
+  const selected = ranges.filter(range => datasetIds.includes(range.datasetId)), first = selected[0];
+  if (!first || selected.length !== datasetIds.length || new Set(selected.map(range => range.datasetId)).size !== datasetIds.length ||
       selected.some(range => range.start !== first.start || range.count !== first.count))
     throw new TypeError('Features on alternative shapes must select datasets sharing one matching mesh range.');
   if (!Number.isSafeInteger(first.start) || !Number.isSafeInteger(first.count) || first.start < 0 || first.count < 1 || first.start + first.count > triangleCount)

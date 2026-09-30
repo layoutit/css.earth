@@ -18,18 +18,18 @@ import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 import './compiler.css';
 
 export interface CompilerPanelProps { recipePath: string; cataloguePath: string; observationManifest?: string; publishedPath?: string }
-interface Presentation { view: CloudView; mode: 'neutral' | 'textured'; lensId: string | null; stars: boolean; original: boolean }
+interface Presentation { view: CloudView; mode: 'neutral' | 'textured'; datasetId: string | null; stars: boolean; original: boolean }
 const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
 function savedPresentation(key: string): Presentation {
-  const fallback: Presentation = { view: { ...earthCloudView }, mode: 'textured', lensId: null, stars: true, original: false };
+  const fallback: Presentation = { view: { ...earthCloudView }, mode: 'textured', datasetId: null, stars: true, original: false };
   try {
     const saved: unknown = JSON.parse(localStorage.getItem(key) ?? 'null');
     if (!object(saved) || !object(saved.view)) return fallback;
     const v = saved.view;
     if (!finite(v.zoom) || v.zoom < .15 || v.zoom > 12 || !finite(v.panX) || !finite(v.panY) || !finite(v.yaw) || !finite(v.pitch) || Math.abs(v.pitch) > 89 || typeof v.locked !== 'boolean') return fallback;
     return { view: { zoom: v.zoom, panX: v.panX, panY: v.panY, yaw: v.yaw, pitch: v.pitch, locked: v.locked },
-      mode: saved.mode === 'neutral' ? 'neutral' : 'textured', lensId: typeof saved.lensId === 'string' ? saved.lensId : null,
+      mode: saved.mode === 'neutral' ? 'neutral' : 'textured', datasetId: typeof saved.datasetId === 'string' ? saved.datasetId : null,
       stars: saved.stars !== false, original: saved.original === true };
   } catch { return fallback; }
 }
@@ -126,7 +126,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
   const state = useCompiler(request, storageKey, inputsReady, hasInspectionEdits ? undefined : publishedPath), { result } = state;
   const inspectionFrame: CompilerInspectionFrame | undefined = result?.inspectionBoundsArcsec
     ? { boundsArcsec: result.inspectionBoundsArcsec, paddingPixels: 18 } : liveInspectionFrame;
-  const source = result?.sources.find(item => item.id === (presentation.lensId ?? result.defaultSourceId)) ?? result?.sources[0];
+  const source = result?.sources.find(item => item.id === (presentation.datasetId ?? result.defaultSourceId)) ?? result?.sources[0];
   const message = recipeError || state.error || state.storageError || storageError || state.status;
   function updateControls(value: CompilerControls) {
     if (fixedGeometry !== false) return;
@@ -148,8 +148,8 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
     <legend>Processing</legend>
     <WorkspaceImagePicker>
       <ImageAppearancePanel image={<>
-      <label className="visually-hidden" htmlFor="compiler-lens">Image</label>
-      <select id="compiler-lens" value={source?.id ?? ''} disabled={!result} onChange={event => updatePresentation({ ...presentation, lensId: event.target.value })}>
+      <label className="visually-hidden" htmlFor="compiler-dataset">Image</label>
+      <select id="compiler-dataset" value={source?.id ?? ''} disabled={!result} onChange={event => updatePresentation({ ...presentation, datasetId: event.target.value })}>
         {!result && <option value="">Available after compilation</option>}
         {result?.sources.map(item => <option value={item.id} key={item.id}>{item.label}</option>)}
       </select>
@@ -188,7 +188,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
     {fixedGeometry && <p className="compiler-auto-note" title="Depth and component weights are fixed by the qualified model. Detail, faint-emission and depth refits are unavailable.">Fixed reconstructed geometry</p>}
       </CameraModelPanel>, host)}
     {host && createPortal(<section className="compiler-workspace" aria-label="Compiled nebula" data-result-id={result?.id ?? ''}>
-      <CompilerStage result={result} lensId={source?.id ?? null} mode={presentation.mode} stars={presentation.stars}
+      <CompilerStage result={result} datasetId={source?.id ?? null} mode={presentation.mode} stars={presentation.stars}
         showOriginal={presentation.original} view={presentation.view} onView={onView} inspectionFrame={inspectionFrame} />
       {!result && !state.busy && <div className="compiler-empty"><span>Compile the registered observations into one nebula.</span></div>}
       <div className="compiler-view-hint">{presentation.view.locked ? 'Earth view · drag to pan · scroll to zoom' : 'Orbit · drag to rotate · Shift-drag to pan · scroll to zoom'}</div>

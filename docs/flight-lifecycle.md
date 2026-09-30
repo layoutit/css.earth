@@ -69,7 +69,7 @@ including 72 ms of Paint.
 
 ## Prepared arrival perspective
 
-For the default lens, an arrival billboard covers one flight to the final
+For the default dataset, an arrival billboard covers one flight to the final
 framing. Its preparation metadata supplies the exact camera distance and
 orientation. Responsive fitting chooses the apparent size and derives an
 optical framing scale at that same distance. Cross-object selection reads the
@@ -235,7 +235,7 @@ A newly mounted world receives the latest settings. Playback permission remains
 governed by the shared runtime policy.
 
 `site/scene/scene-selection.mts` owns the committed subject and projects its URL.
-Prepared-focus navigation owns the acquired target and executes camera/lens
+Prepared-focus navigation owns the acquired target and executes camera/dataset
 commands. It publishes one result to the selection owner, including whether a
 saved camera must be discarded. It neither mirrors the selected ID nor formats
 another selection URL. Native camera focus remains the geometric pivot.

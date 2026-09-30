@@ -1,4 +1,4 @@
-import type { LensVolume } from '@cssearth/renderer/runtime/object-contract.ts';
+import type { DatasetVolume } from '@cssearth/renderer/runtime/object-contract.ts';
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import type { SceneSession } from './scene-session.mts';
@@ -7,18 +7,18 @@ import { readSceneDatasetUrl } from '../dataset-url.mts';
 
 interface CompanionClouds {
   focusBank(objectId: string): PreparedFocusBank | null;
-  selectVolumeLens?(objectId: string, lensId: string): void;
-  setVolumeLensEnabled?(objectId: string, enabled: boolean): void;
+  selectVolumeDataset?(objectId: string, datasetId: string): void;
+  setVolumeDatasetEnabled?(objectId: string, enabled: boolean): void;
 }
 
 /** Companion readiness and visibility belong to the same selection as the body material. A cold page mounts its body
- * before the world, so a lens that shows a volume waits for the world instead of failing without it. */
+ * before the world, so a dataset that shows a volume waits for the world instead of failing without it. */
 export function createDatasetEffects(session: SceneSession, getWorld: () => CompanionClouds | null,
   ensureWorld: () => Promise<CompanionClouds>): NonNullable<ObjectMountOptions['datasetEffects']> {
-  let active: { volume: LensVolume; release(): void } | null = null;
-  let prepared: { volume: LensVolume; signal: AbortSignal; release(): void } | null = null;
+  let active: { volume: DatasetVolume; release(): void } | null = null;
+  let prepared: { volume: DatasetVolume; signal: AbortSignal; release(): void } | null = null;
   session.own(() => {
-    if (active) { getWorld()?.setVolumeLensEnabled?.(active.volume.objectId, false); active.release(); }
+    if (active) { getWorld()?.setVolumeDatasetEnabled?.(active.volume.objectId, false); active.release(); }
     prepared?.release(); active = null; prepared = null;
   });
   return {
@@ -41,18 +41,18 @@ export function createDatasetEffects(session: SceneSession, getWorld: () => Comp
       if (ownership.aborted) { pin.release(); return; }
       await bank.load();
       if (ownership.aborted) return;
-      if (!bank.state()?.lenses.some(lens => lens.id === volume.lensId)) {
-        throw new RangeError(`Dataset cloud lens “${volume.lensId}” is unavailable.`);
+      if (!bank.state()?.datasets.some(dataset => dataset.id === volume.datasetId)) {
+        throw new RangeError(`Dataset cloud dataset “${volume.datasetId}” is unavailable.`);
       }
     },
     commit(volume) {
       if (session.signal.aborted) return;
       const pin = prepared;
       if (volume && (!pin || pin.volume !== volume)) throw new Error('Dataset companion was not prepared.');
-      if (active && active.volume.objectId !== volume?.objectId) getWorld()?.setVolumeLensEnabled?.(active.volume.objectId, false);
+      if (active && active.volume.objectId !== volume?.objectId) getWorld()?.setVolumeDatasetEnabled?.(active.volume.objectId, false);
       if (volume) {
-        getWorld()?.selectVolumeLens?.(volume.objectId, volume.lensId);
-        getWorld()?.setVolumeLensEnabled?.(volume.objectId, true);
+        getWorld()?.selectVolumeDataset?.(volume.objectId, volume.datasetId);
+        getWorld()?.setVolumeDatasetEnabled?.(volume.objectId, true);
       }
       active?.release();
       if (pin) pin.signal.removeEventListener('abort', pin.release);

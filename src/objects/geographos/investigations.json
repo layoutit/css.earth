@@ -61,9 +61,9 @@
     },
     {
       "id": "recorded-survey-5",
-      "subject": "1994 Goldstone delay-Doppler observations 75–151 m: excluded from surface lens",
+      "subject": "1994 Goldstone delay-Doppler observations 75–151 m: excluded from surface dataset",
       "status": "excluded",
-      "finding": "- [1994 Goldstone delay-Doppler observations 75–151 m](https://sbn.psi.edu/pds/resource/geograph.html): **excluded from surface lens**. Radar delay-Doppler pixels mix surface locations; cannot be treated as a registered optical/albedo texture.",
+      "finding": "- [1994 Goldstone delay-Doppler observations 75–151 m](https://sbn.psi.edu/pds/resource/geograph.html): **excluded from surface dataset**. Radar delay-Doppler pixels mix surface locations; cannot be treated as a registered optical/albedo texture.",
       "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/geographos/README.md"

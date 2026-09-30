@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-density-volume-lens-bank-source@1",
+  "schema": "cssearth-density-volume-dataset-bank-source@1",
   "attachedTo": "sun",
   "source": {
-    "lensId": "electron-density",
+    "datasetId": "electron-density",
     "id": "sun-cor1b-cr2053p1-mu10",
     "descriptor": {
       "path": "object.json"
@@ -422,8 +422,8 @@
   },
   "promotion": {
     "id": "sun-cor1-density",
-    "defaultLens": "electron-density",
-    "lensIds": [
+    "defaultDataset": "electron-density",
+    "datasetIds": [
       "electron-density"
     ],
     "framingRadiusUnits": 4,

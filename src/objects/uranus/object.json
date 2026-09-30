@@ -55,7 +55,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "content",
@@ -116,7 +116,7 @@
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "normal",
               "source": "observations",
@@ -254,6 +254,6 @@
       }
     }
   },
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "type": "layered-body"
 }

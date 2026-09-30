@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 86226. Its orbit and size follow Teske et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.9846589 d Teske et al. 2020 (2020AJ....160...96T), via the NASA Exoplanet Archive ps table (pl_refname TESKE_ET_AL__2020): a/R* 10.11; Teske et al. 2020 (2020AJ....160...96T), via the NASA Exoplanet Archive ps table (pl_refname TESKE_ET_AL__2020): inclination 86.45 degrees Teske et al. 2020 (2020AJ....160...96T), via the NASA Exoplanet Archive ps table (pl_refname TESKE_ET_AL__2020): e 0.075 Teske et al. 2020 (2020AJ....160...96T), via the NASA Exoplanet Archive ps table (pl_refname TESKE_ET_AL__2020): omega 196 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460013.591733 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-86226's measured colour (#fff6fa, the colour lens of hd-86226 (src/objects/hd-86226/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-86226's measured colour (#fff6fa, the colour dataset of hd-86226 (src/objects/hd-86226/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 86226's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (89, 99, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

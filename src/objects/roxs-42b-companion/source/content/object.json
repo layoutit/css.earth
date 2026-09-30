@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "roxs-42b-companion",
   "displayName": "ROXs 42B B",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
-        "thumbnail": "roxs-42b-companion-lens-color.webp",
+        "thumbnail": "roxs-42b-companion-dataset-color.webp",
         "surface": "roxs-42b-companion-surface-color@2x.webp",
         "poles": "roxs-42b-companion-poles-color@2x.webp",
         "source": {

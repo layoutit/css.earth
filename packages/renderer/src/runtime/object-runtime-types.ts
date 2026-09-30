@@ -1,4 +1,4 @@
-import type { ObjectControls, ObjectSelection, LensVolume } from "./object-contract.js";
+import type { ObjectControls, ObjectSelection, DatasetVolume } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
 import type { PerspectiveCameraPlan } from "../navigation/types.js";
 import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
@@ -36,7 +36,7 @@ export interface PreparedDestination {
   readonly coverage: string;
 }
 export interface PreparedDestinationRuntime {
-  readonly lensId: string;
+  readonly datasetId: string;
   select(place: PreparedDestination, options?: { signal?: AbortSignal }): Promise<{
     status: string; arrival: Promise<{ completed: boolean }>;
   }>;
@@ -55,8 +55,8 @@ export interface ObjectMountOptions {
   onFeatureSelect?(id: string): void;
   /** The application owns the world companions required by a body dataset. */
   datasetEffects?: {
-    prepare(volume: LensVolume | null, signal: AbortSignal): void | Promise<void>;
-    commit(volume: LensVolume | null): void;
+    prepare(volume: DatasetVolume | null, signal: AbortSignal): void | Promise<void>;
+    commit(volume: DatasetVolume | null): void;
     error(error: unknown): void;
   };
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy;

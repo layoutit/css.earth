@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hr-8799-c",
   "displayName": "HR 8799 c",
@@ -74,15 +74,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "NIRCam",
         "qualification": "Infrared false colour of the whole disc from published JWST photometry; not a natural colour and not a map.",
-        "thumbnail": "hr-8799-c-lens-color.webp",
+        "thumbnail": "hr-8799-c-dataset-color.webp",
         "surface": "hr-8799-c-surface-color@2x.webp",
         "poles": "hr-8799-c-poles-color@2x.webp",
         "source": {

@@ -25,7 +25,7 @@ for body in INPUTS['bodies']:
     if not path.exists():
         raise ValueError(f'Author source identities and bindings in {path} before extracting a new body.')
     manifest = json.loads(path.read_text())
-    if manifest.get('schema') != 'cssearth-authoritative-sources@2':
+    if manifest.get('schema') != 'cssearth-authoritative-sources@3':
         raise ValueError(f'Update {path} to the current Sources contract before extraction.')
     expected_ids = [entry['id'] for entry in manifest['inputs']]
     expected_ids += ['published-shape', 'model-surface']
@@ -48,7 +48,7 @@ for body in INPUTS['bodies']:
     config['raster']['observations'][0]['metadata']['coverage'] = description
     config['celestial']['sunSource'] = 'JPL Horizons fixed 2026-09-03 epoch. ' + body['orientationMeaning']
     manifest = current('source/manifest.json', body)
-    manifest['schema'] = 'cssearth-authoritative-sources@2'
+    manifest['schema'] = 'cssearth-authoritative-sources@3'
     manifest['documents'] = reviewed[ident]['documents']
     manifest['generatedIntermediates'] = reviewed[ident]['generatedIntermediates']
     manifest['inputs'] = [entry for entry in manifest['inputs'] if entry['id'] not in ['published-shape', 'model-surface']]
@@ -77,9 +77,9 @@ for body in INPUTS['bodies']:
     if body.get('rotationFact'):
         content['panel']['facts'].append(dict(id='rotation',label='Rotation',value=body['periodText'],source=fact_source('/periodText')))
     content['panel']['moreFacts'] = []
-    lens = content['lenses']['controls'][0]
-    for key in ('description', 'title', 'detail', 'summary'): lens.pop(key, None)
-    lens['source'].update(id='published-shape',url=body['source'])
+    dataset = content['datasets']['controls'][0]
+    for key in ('description', 'title', 'detail', 'summary'): dataset.pop(key, None)
+    dataset['source'].update(id='published-shape',url=body['source'])
     for control in content['settings']['controls']:
         if control['name'] == 'shadows': control['checked'] = False
     content['resources'] = [dict(label='Shape source',role='surface',description=body['credit'],href=body['source'])] + [dict(label='Scientific source',role='facts',description='Published observations and interpretation',href=url) for url in body['papers']] + [content['resources'][-1]]
@@ -94,7 +94,7 @@ for body in INPUTS['bodies']:
     write(package/'text.json', dict(schema='cssearth-object-text@1', objectId=ident,
         card=dict(text=body.get('card', body['introduction']), sources=text_sources),
         introduction=dict(text=body['introduction'], sources=text_sources),
-        datasets={lens['id']: dict(title=body['shapeLabel'], detail='Inferred shape', summary=body.get('datasetSummary', body['shapeMeaning']), sources=[citation])}))
+        datasets={dataset['id']: dict(title=body['shapeLabel'], detail='Inferred shape', summary=body.get('datasetSummary', body['shapeMeaning']), sources=[citation])}))
     write(source/'preparation/terrestrial.json',config)
     write(source/'preparation/rotation.json',dict(schema='cssearth-display-orientation@1',rightAscensionDegrees=body['poleIcrfDegrees'][0],declinationDegrees=body['poleIcrfDegrees'][1],displayMeridianDegrees=0,phase='arbitrary-display-phase',source=body.get('poleSource',body['source']),qualification=body['orientationMeaning']))
     write(source/'measurements.json',dict(schema='cssearth-distant-world-model@1',checkedOn=INPUTS['checkedOn'],**body))
@@ -122,7 +122,7 @@ for body in INPUTS['bodies']:
             if not available.exists(): raise FileNotFoundError(f'Restore common input: {available}')
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(available,target)
-    manifest['inputs'].append(dict(id='model-surface',path='material/neutral.png',origin='https://github.com/layoutit/cssEarth',credit='cssEarth missing-coverage grid',license='MIT',consumers=['surfaces'],width=64,height=32,lensId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
+    manifest['inputs'].append(dict(id='model-surface',path='material/neutral.png',origin='https://github.com/layoutit/cssEarth',credit='cssEarth missing-coverage grid',license='MIT',consumers=['surfaces'],width=64,height=32,datasetId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
     for entry in manifest['inputs']:
         entry.setdefault('acquisition',INPUTS.get('acquisitionNote','Restore pinned originals through acquisition; reproduce authored numbers with packages/bake/authoring/distant-worlds/author.py.'))
         entry.setdefault('redistribution','Retain source attribution and model qualifications; upstream papers are not relicensed.')

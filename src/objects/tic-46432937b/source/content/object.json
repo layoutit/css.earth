@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "tic-46432937b",
   "displayName": "TIC 46432937 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by TIC 46432937; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "tic-46432937b-lens-shape.webp",
+        "thumbnail": "tic-46432937b-dataset-shape.webp",
         "surface": "tic-46432937b-surface-shape@2x.webp",
         "poles": "tic-46432937b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of TIC 46432937 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of tic-46432937's light, as its colour lens measures it."
+        "notes": "No image or colour of TIC 46432937 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of tic-46432937's light, as its colour dataset measures it."
       }
     ]
   },

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "usgs-enhanced-global-1km",
@@ -15,7 +15,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "False color",
       "falseColor": true,
       "width": 11445,
@@ -83,7 +83,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 11445,
@@ -145,7 +145,7 @@
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
-        "lenses",
+        "datasets",
         "presentation",
         "features"
       ],
@@ -221,7 +221,7 @@
         "geology-surfaces"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp",
-      "lensId": "geology",
+      "datasetId": "geology",
       "label": "Geology",
       "falseColor": true,
       "projection": {
@@ -491,7 +491,7 @@
       "consumers": [
         "spectral-slope"
       ],
-      "lensId": "spectral-slope",
+      "datasetId": "spectral-slope",
       "label": "Spectral slope",
       "falseColor": true,
       "width": 180,
@@ -547,7 +547,7 @@
       "consumers": [
         "spectral-slope"
       ],
-      "lensId": "spectral-slope",
+      "datasetId": "spectral-slope",
       "label": "Spectral slope",
       "falseColor": true,
       "width": 180,
@@ -603,7 +603,7 @@
       "consumers": [
         "spectral-slope"
       ],
-      "lensId": "spectral-slope",
+      "datasetId": "spectral-slope",
       "label": "Spectral slope",
       "falseColor": true,
       "width": 180,
@@ -659,7 +659,7 @@
       "consumers": [
         "visible-absorption"
       ],
-      "lensId": "visible-absorption",
+      "datasetId": "visible-absorption",
       "label": "Visible absorption",
       "falseColor": true,
       "width": 180,
@@ -715,7 +715,7 @@
       "consumers": [
         "visible-absorption"
       ],
-      "lensId": "visible-absorption",
+      "datasetId": "visible-absorption",
       "label": "Visible absorption",
       "falseColor": true,
       "width": 180,
@@ -771,7 +771,7 @@
       "consumers": [
         "visible-absorption"
       ],
-      "lensId": "visible-absorption",
+      "datasetId": "visible-absorption",
       "label": "Visible absorption",
       "falseColor": true,
       "width": 180,
@@ -891,7 +891,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -975,7 +975,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -992,7 +992,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -1063,7 +1063,7 @@
       "consumers": [
         "elevation"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "width": 11500,
@@ -1081,7 +1081,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 1821490,
         "centerLongitude": 0,
-        "frameEvidence": "GeoTIFF keys: geographic degrees, prime meridian 0, east-positive columns from -180. Independent check against the USGS Gazetteer, whose centres share the Voyager/Galileo mosaic frame used by the Monochrome lens: 24 of 30 covered mountains, mesas, plana and tholi stand above their surroundings (mean +813 m); with longitudes mirrored 13 of 29 (mean +40 m). The best longitude shift is 0 to -0.5 degrees and the best latitude shift 0 to +1 degree. The highest sample, 16,942 m at 88.83 E, 9.88 S, lies inside the Gazetteer extent of Boosaule Montes (README, Elevation)."
+        "frameEvidence": "GeoTIFF keys: geographic degrees, prime meridian 0, east-positive columns from -180. Independent check against the USGS Gazetteer, whose centres share the Voyager/Galileo mosaic frame used by the Monochrome dataset: 24 of 30 covered mountains, mesas, plana and tholi stand above their surroundings (mean +813 m); with longitudes mirrored 13 of 29 (mean +40 m). The best longitude shift is 0 to -0.5 degrees and the best latitude shift 0 to +1 degree. The highest sample, 16,942 m at 88.83 E, 9.88 S, lies inside the Gazetteer extent of Boosaule Montes (README, Elevation)."
       },
       "coverage": "Stereo heights in metres over 53.8% of the sphere by area (45.5% of grid cells), from 90 S to 66.8 N; the Trek description states about 75%. Heights follow the limb-profile ellipsoid, not the 1821.49 km header sphere: sub-Jovian and leading equatorial plains differ by 0.16 km, not the 10 km of the IAU ellipsoid. No-data marks masked noise or missing stereo; plains were smoothed after mosaicking.",
       "capture": {

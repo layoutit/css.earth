@@ -1,4 +1,4 @@
-/** Capture the installed LMC lenses at one saved world camera. No processing or user storage changes. */
+/** Capture the installed LMC datasets at one saved world camera. No processing or user storage changes. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -16,7 +16,7 @@ type Capture = { imageId: string; path: string; bytes: number; route: string; st
 const images: Capture[] = [];
 const errors: string[] = [];
 // Evaluated in Chromium: validate the published runtime diagnostics before use.
-function readWorldDiagnostics(lens?: string) {
+function readWorldDiagnostics(dataset?: string) {
   const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object';
   const app: unknown = Reflect.get(window, '__cssEarth');
   const sun: unknown = Reflect.get(window, '__sun');
@@ -25,7 +25,7 @@ function readWorldDiagnostics(lens?: string) {
   if (typeof camera.state !== 'function' || typeof camera.publication !== 'function') return false;
   const publication: unknown = camera.publication();
   if (!record(publication) || publication.requestedRevision !== publication.presentedRevision) return false;
-  if (lens && document.querySelector<HTMLElement>('[data-volume-lens-object="lmc"]')?.dataset.selectedLens !== lens) return false;
+  if (dataset && document.querySelector<HTMLElement>('[data-volume-dataset-object="lmc"]')?.dataset.selectedDataset !== dataset) return false;
   const state: unknown = camera.state();
   return { state };
 }
@@ -45,16 +45,16 @@ try {
   page.on('response', response => { if (response.status() >= 400) receipt.errors.push(`${response.status()} ${response.url()}`); });
   await page.goto(`${base}/lmc/?dataset=vista-infrared&v=${view}`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(readWorldDiagnostics, undefined, { timeout: 60000 });
-  const cloud = page.locator('[data-volume-lens-object="lmc"]');
+  const cloud = page.locator('[data-volume-dataset-object="lmc"]');
   await cloud.waitFor({ state: 'attached' });
   assert.equal(await page.locator('[data-focus-stars]').isChecked(), true);
   assert.equal(await cloud.locator('.prepared-catalogue-points s').count(), 943);
   const camera = await page.evaluate(readWorldDiagnostics, undefined);
   for (const id of ids) {
-    await page.locator(`[data-focus-lens][value="${id}"]`).click();
+    await page.locator(`[data-focus-dataset][value="${id}"]`).click();
     await page.waitForFunction(readWorldDiagnostics, id);
     await page.evaluate(() => document.fonts.ready);
-    await page.evaluate(() => Promise.all([...document.querySelectorAll('[data-volume-lens-object="lmc"] s')]
+    await page.evaluate(() => Promise.all([...document.querySelectorAll('[data-volume-dataset-object="lmc"] s')]
       .map(node => getComputedStyle(node).backgroundImage).filter(value => value.startsWith('url('))
       .map(value => { const image = new Image(); image.src = value.slice(5, -2); return image.decode(); })));
     await page.evaluate(() => new Promise<void>(done => requestAnimationFrame(() => requestAnimationFrame(() => done()))));

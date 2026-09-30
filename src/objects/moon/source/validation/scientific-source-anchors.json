@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-lunar-numeric-source-anchors@1",
+  "schema": "cssearth-lunar-numeric-source-anchors@2",
   "method": "Independent NumPy little-endian signed-int16 source reads; row=floor((north-latitude)*pixelsPerDegree), column=floor(wrapped-east-longitude*pixelsPerDegree). Full-grid source statistics were computed independently of the JavaScript decoder. Values are raw DN times the explicit display scale, with missing and physical-range exclusions first. Percentiles use 1,50,95,99 percent and are descriptive only.",
   "products": {
     "ldem_16": {
@@ -243,13 +243,13 @@
       ]
     }
   },
-  "crossLensRegistration": {
+  "crossDatasetRegistration": {
     "reference": "NASA SVS CGI Moon Kit explicitly centers both the 2019 and 2025 color maps on 0 degrees longitude. Retained surface and crust textures therefore use -180 degrees at the left edge.",
     "referenceUrl": "https://svs.gsfc.nasa.gov/4720/",
     "outputLongitudeOrigin": -180,
     "outputWidth": 1024,
     "outputHeight": 512,
-    "coordinateQualification": "USGS/IAU centers are rounded to0.01degrees and locate named landforms for cross-lens alignment; they are not independent subpixel survey-control accuracy estimates. Planetographic and planetocentric latitude coincide on this source reference sphere.",
+    "coordinateQualification": "USGS/IAU centers are rounded to0.01degrees and locate named landforms for cross-dataset alignment; they are not independent subpixel survey-control accuracy estimates. Planetographic and planetocentric latitude coincide on this source reference sphere.",
     "method": "At each named center, independently select its output cell, compute that cell center longitude/latitude and read the original numeric source DN with NumPy. Color-output tests use these fixed source values. The input PDS grid remains east-positive0..360.",
     "features": [
       {

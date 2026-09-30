@@ -219,45 +219,45 @@
     },
     {
       "location": "public",
-      "filename": "pluto-features.json",
-      "bytes": 453080,
-      "sha256": "d9badd8fdb2e01b3847a0ef6190e2bb40376dcab842a5327b2088dbad971b088"
-    },
-    {
-      "location": "public",
-      "filename": "pluto-lens-methane-ice.webp",
+      "filename": "pluto-dataset-methane-ice.webp",
       "bytes": 2566,
       "sha256": "ece12a4b24eb6cd6ed591a10d3189658325f1519bab86155091341dab74a0527"
     },
     {
       "location": "public",
-      "filename": "pluto-lens-monochrome.webp",
+      "filename": "pluto-dataset-monochrome.webp",
       "bytes": 984,
       "sha256": "c2146c747b3da0d1911edb5a7ef941a18191191c9aae0351783c10809a5e82e5"
     },
     {
       "location": "public",
-      "filename": "pluto-lens-nitrogen-ice.webp",
+      "filename": "pluto-dataset-nitrogen-ice.webp",
       "bytes": 2612,
       "sha256": "687ac8cf67ef68833dd000f7d95ffe32a71a19acbf9bfd4663dac08c107f99bb"
     },
     {
       "location": "public",
-      "filename": "pluto-lens-surface.webp",
+      "filename": "pluto-dataset-surface.webp",
       "bytes": 900,
       "sha256": "b46c4166f6a88f0ae305be8a98b79298ea35d64723fcbeb379e542b9c725f777"
     },
     {
       "location": "public",
-      "filename": "pluto-lens-topography.webp",
+      "filename": "pluto-dataset-topography.webp",
       "bytes": 594,
       "sha256": "8a8e87d329b1bb42d5484a143de31c83932208dbd9c61fd9687a3edb1ad1beca"
     },
     {
       "location": "public",
-      "filename": "pluto-lens-water-ice.webp",
+      "filename": "pluto-dataset-water-ice.webp",
       "bytes": 2098,
       "sha256": "4fd3c2d60fc6d82e05d69dbb7c630e4ebd797af0b8a7fd5976535c1b5d40eab8"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-features.json",
+      "bytes": 453080,
+      "sha256": "d9badd8fdb2e01b3847a0ef6190e2bb40376dcab842a5327b2088dbad971b088"
     },
     {
       "location": "public",
@@ -334,14 +334,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 372,
-      "sha256": "2ff46d5511521556bc86082251ea695c2c96b47c175cfce6f0b98eb0b276c584"
+      "bytes": 375,
+      "sha256": "591cd7cda34a4ed34e6ced08c1da83fd30c2f887caf6ef78537588a992f61cc5"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84255,
-      "sha256": "ad1636f71602f71b93c929993c44d41e279bcb88789ab22a437604dd77c1ab7c"
+      "bytes": 84273,
+      "sha256": "d74765a4104eb696d77ee4c3d0ca2d44fe4bf6c29f7ed94f54eb0d0ac79f3961"
     },
     {
       "location": "prepared",
@@ -353,25 +353,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 3668,
-      "sha256": "0ad0e80f8e846fd4339c04a029e46b0fadcdc35669e3b53228d9a92dc611debc"
+      "sha256": "f08bc4db57c9fb6f9e571b02996e7568707cbe2cdcf5fb697d90d745169ada45"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 6442,
-      "sha256": "1dcc59c32615e06845488c1d5a21061f565051b9f3acd433d83ad91197423ca6"
+      "bytes": 6471,
+      "sha256": "82b14e20185a39dffd5ac916a397f0390d1643b28fba2f58e84403f3bc0326a2"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 9308,
+      "sha256": "57945f3b27d4a937bfb7fa368d1b708029141015de17f8278a32c76fde09d498"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 578,
       "sha256": "7bd67e6dda5bf73858a3cc554190b409dd23f430cbb9f12a29d9ff7c9310c2a4"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 9275,
-      "sha256": "a9d110b9f49c856b86100b1683061aaf610d71f10e3a0301a75ec9c9a4877dbb"
     },
     {
       "location": "prepared",
@@ -424,8 +424,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 607134,
-      "sha256": "ba6fead5aebeea5da98e4a7e316312dfede148d8e7a0b9f90f18bc261bfd14c4"
+      "bytes": 607238,
+      "sha256": "e7f0d2bd07ee08d5bd45522cca8c0758804025244216111483f1bf1a70ee3774"
     },
     {
       "location": "prepared",

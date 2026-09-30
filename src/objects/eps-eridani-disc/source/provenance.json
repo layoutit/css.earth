@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-provenance@1",
+  "schema": "cssearth-volume-provenance@2",
   "title": "ε Eridani dust ring: ALMA continuum imaging given the depth of the fitted ring",
   "kind": "observed-sky-image-on-fitted-envelope",
   "authors": [],
@@ -29,7 +29,7 @@
   ],
   "paper": [
     {
-      "lens": "dust",
+      "dataset": "dust",
       "citation": "Booth et al. (2023), MNRAS 521, 6180, Table 3, arXiv:2303.13584",
       "url": "https://arxiv.org/abs/2303.13584"
     }
@@ -46,7 +46,7 @@
       "halfUnits": 105,
       "slabs": 100
     },
-    "lenses": {
+    "datasets": {
       "dust": {
         "bands": [
           {

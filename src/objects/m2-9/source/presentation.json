@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "m2-9",
   "name": "Twin Jet Nebula",
-  "defaultLens": "hst-optical",
+  "defaultDataset": "hst-optical",
   "bank": {
-    "path": "src/objects/m2-9/prepared/lenses.json"
+    "path": "src/objects/m2-9/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -20,7 +20,7 @@
     "image-frame",
     "stellar-field"
   ],
-  "lenses": [
+  "datasets": [
     {
       "id": "hst-optical",
       "label": "Hubble · optical",

@@ -8,7 +8,7 @@ It is the only planet known around WASP-99. Its orbit and size follow Stassun et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.75258038116 d Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): a/R* 8.77; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): inclination 88.8 degrees Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460988.126499 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-99's measured colour (#fff7fc, the colour lens of wasp-99 (src/objects/wasp-99/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-99's measured colour (#fff7fc, the colour dataset of wasp-99 (src/objects/wasp-99/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of WASP-99's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 97, 105), folded onto its orbit. Upper limits and rows without an error are left out.
 

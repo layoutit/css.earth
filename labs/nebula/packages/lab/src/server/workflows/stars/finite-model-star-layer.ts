@@ -17,7 +17,7 @@ import { finiteModelDirectory, type FiniteModelStarContext } from './finite-mode
 
 /** Published Johnson V limit of every finite-model star layer. */
 export const MAGNITUDE_LIMIT = 16;
-/** Model-owned external index beside the lens bundle; discovery reads exactly this path. */
+/** Model-owned external index beside the dataset bundle; discovery reads exactly this path. */
 export const finiteModelStarsIndex = (modelResultId: string) => `.local/nebula-lab/finite-stars-${modelResultId}.json`;
 const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
 
@@ -84,22 +84,22 @@ export function placeCatalogueStarsInFiniteModel(table: string, context: FiniteM
 }
 
 /**
- * One prepared layer per lens recipe of one body: finite-lenses.json -> <base>.json,
- * finite-lenses-<name>.json -> <base>-<name>.json. The base name lets a body whose historical
+ * One prepared layer per dataset recipe of one body: finite-datasets.json -> <base>.json,
+ * finite-datasets-<name>.json -> <base>-<name>.json. The base name lets a body whose historical
  * layer already owns prepared/stars.json keep both without either overwriting the other.
  */
-export function preparedStarsLayerPath(starDirectory: string, finiteLensRecipe: string, layerBaseName = 'stars') {
-  const name = basename(finiteLensRecipe), match = /^finite-lenses(?:-([a-z0-9-]+))?\.json$/.exec(name);
-  if (!match) throw new TypeError(`Lens recipe name does not identify a star layer: ${name}`);
+export function preparedStarsLayerPath(starDirectory: string, finiteDatasetRecipe: string, layerBaseName = 'stars') {
+  const name = basename(finiteDatasetRecipe), match = /^finite-datasets(?:-([a-z0-9-]+))?\.json$/.exec(name);
+  if (!match) throw new TypeError(`Dataset recipe name does not identify a star layer: ${name}`);
   if (!/^[a-z0-9-]+$/.test(layerBaseName)) throw new TypeError(`Invalid prepared star layer name: ${layerBaseName}`);
   return `${starDirectory}/prepared/${layerBaseName}${match[1] ? `-${match[1]}` : ''}.json`;
 }
 
-/** The checked-in lens recipe names the current model; a re-fit updates it and the star command follows. */
-export async function readFiniteLensRecipe(root: string, path: string) {
+/** The checked-in dataset recipe names the current model; a re-fit updates it and the star command follows. */
+export async function readFiniteDatasetRecipe(root: string, path: string) {
   const recipe: unknown = parseLabModelJson(await readFile(resolve(root, path), 'utf8'));
-  if (!record(recipe) || recipe.schema !== 'cssearth-finite-lens-recipe@1' || typeof recipe.modelResultId !== 'string' ||
-      !/^[a-z0-9][a-z0-9-]*$/.test(recipe.modelResultId)) throw new TypeError(`Finite lens recipe ${path} names no model reconstruction.`);
+  if (!record(recipe) || recipe.schema !== 'cssearth-finite-dataset-recipe@1' || typeof recipe.modelResultId !== 'string' ||
+      !/^[a-z0-9][a-z0-9-]*$/.test(recipe.modelResultId)) throw new TypeError(`Finite dataset recipe ${path} names no model reconstruction.`);
   return { modelResultId: recipe.modelResultId };
 }
 
@@ -119,15 +119,15 @@ export async function readPinnedCatalogueFiles(root: string, sourceDirectory: st
 
 /** The shared finite-model block of a layer's provenance: the model's own files plus the placement method. */
 export async function finiteModelStarProvenance(_root: string, options: {
-  context: FiniteModelStarContext; subjectId: string; lensRecipe: { path: string }; command: string;
+  context: FiniteModelStarContext; subjectId: string; datasetRecipe: { path: string }; command: string;
 }) {
-  return { ...options.context.provenance, subjectId: options.subjectId, lensRecipe: options.lensRecipe, command: options.command,
+  return { ...options.context.provenance, subjectId: options.subjectId, datasetRecipe: options.datasetRecipe, command: options.command,
     method: FINITE_STAR_METHOD, coordinates: FINITE_STAR_COORDINATES, support: FINITE_STAR_SUPPORT };
 }
 
 /**
  * Validate the layer against the model frame, write it, and write the model-owned star index beside the
- * lens bundle. Every lens of the model then references this one image-independent prepared file.
+ * dataset bundle. Every dataset of the model then references this one image-independent prepared file.
  */
 export async function writeFiniteModelStarLayer(root: string, options: {
   context: FiniteModelStarContext; subjectId: string; output: string; payload: PreparedLmcStars;

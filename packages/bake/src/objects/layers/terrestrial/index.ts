@@ -1,6 +1,6 @@
 // `@cssearth/bake/objects/layers/terrestrial` (Node only): the terrestrial layer pipeline (`prepareTerrestrialLayers`), its solid
 // scene and shared libraries. The host passes the generated solar geometry in.
-export * from './alternative-lenses.ts';
+export * from './alternative-datasets.ts';
 export * from './contact-ellipsoids.ts';
 export * from './contracts.ts';
 export * from './ellipsoid-parameters.ts';

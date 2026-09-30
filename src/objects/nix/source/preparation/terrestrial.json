@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "nix",
   "displayName": "Nix",
@@ -111,6 +111,6 @@
     "sunSource": "JPL Pluto-system ephemeris; rapid nonsynchronous Nix spin. Mesh prime-meridian registration is unresolved and its orientation is a stated display convention."
   },
   "presentation": {
-    "defaultLens": "monochrome"
+    "defaultDataset": "monochrome"
   }
 }

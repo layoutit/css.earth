@@ -2,45 +2,45 @@ import { publishDatasetPreview } from '@cssearth/renderer';
 import { objectIdAtPath } from './root-object.mts';
 import { knownObject } from './object-directory.mts';
 
-/** The datasets of a page the world draws around the mounted scene (an overview): its package's lenses, shown with the
+/** The datasets of a page the world draws around the mounted scene (an overview): its package's datasets, shown with the
  * shared dataset card inside its card and chosen, as on every page, by `?dataset=` on its own page. The card carries each
- * lens's view and the default (`data-page-datasets`), so the page, its runtime and the server read them from the document
+ * dataset's view and the default (`data-page-datasets`), so the page, its runtime and the server read them from the document
  * (ExtragalacticOverviews.astro, from the package's prepared `datasets.json`). */
-export interface PageDatasets { readonly page: string; readonly root: HTMLElement; readonly defaultLens: string; readonly views: ReadonlyMap<string, string> }
+export interface PageDatasets { readonly page: string; readonly root: HTMLElement; readonly defaultDataset: string; readonly views: ReadonlyMap<string, string> }
 
 export function readPageDatasets(document: ParentNode): PageDatasets[] {
   return [...document.querySelectorAll<HTMLElement>('[data-page-datasets]')].map(root => {
-    const page = root.dataset.pageDatasets ?? '', defaultLens = root.dataset.defaultLens ?? '';
-    const views = new Map(Object.entries(JSON.parse(root.dataset.lensViews ?? '{}') as Record<string, unknown>)
+    const page = root.dataset.pageDatasets ?? '', defaultDataset = root.dataset.defaultDataset ?? '';
+    const views = new Map(Object.entries(JSON.parse(root.dataset.datasetViews ?? '{}') as Record<string, unknown>)
       .filter((entry): entry is [string, string] => typeof entry[1] === 'string'));
-    if (!page || !views.has(defaultLens)) throw new TypeError(`Invalid page datasets: ${page || 'unnamed'} needs its lenses' views and default.`);
-    return { page, root, defaultLens, views };
+    if (!page || !views.has(defaultDataset)) throw new TypeError(`Invalid page datasets: ${page || 'unnamed'} needs its datasets' views and default.`);
+    return { page, root, defaultDataset, views };
   });
 }
 
-/** The lens a URL selects on a page: its `dataset` while the URL is that page, or the default. */
-export function selectedPageLens(url: string | URL, datasets: Pick<PageDatasets, 'page' | 'defaultLens' | 'views'>): string {
+/** The dataset a URL selects on a page: its `dataset` while the URL is that page, or the default. */
+export function selectedPageDataset(url: string | URL, datasets: Pick<PageDatasets, 'page' | 'defaultDataset' | 'views'>): string {
   const location = new URL(url);
   const requested = objectIdAtPath(location.pathname) === datasets.page ? location.searchParams.get('dataset') : null;
-  return requested !== null && datasets.views.has(requested) ? requested : datasets.defaultLens;
+  return requested !== null && datasets.views.has(requested) ? requested : datasets.defaultDataset;
 }
 
-/** Mark each page's selected lens in its card, in the server's document or the live page. A page's datasets show only on
+/** Mark each page's selected dataset in its card, in the server's document or the live page. A page's datasets show only on
  * the scene that hosts it (`sceneId`): another star zoomed out to the same level shows the level's card without them,
  * since choosing one would mean leaving that star for the page. */
 export function presentPageDatasets(document: ParentNode, url: string | URL, sceneId: string) {
   for (const datasets of readPageDatasets(document)) {
     const page = knownObject(datasets.page), hosted = page?.kind === 'overview' && page.sceneHostId === sceneId;
     if (datasets.root.hidden !== !hosted) datasets.root.hidden = !hosted;
-    const lens = selectedPageLens(url, datasets);
+    const dataset = selectedPageDataset(url, datasets);
     const buttons = [...datasets.root.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')];
     for (const button of buttons) {
-      const pressed = String(button.getAttribute('value') === lens);
+      const pressed = String(button.getAttribute('value') === dataset);
       if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
     }
     publishDatasetPreview(datasets.root, buttons);
-    for (const detail of datasets.root.querySelectorAll<HTMLElement>('[data-focus-lens-details]')) {
-      const hidden = detail.dataset.focusLensDetails !== lens;
+    for (const detail of datasets.root.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')) {
+      const hidden = detail.dataset.focusDatasetDetails !== dataset;
       if (detail.hidden !== hidden) detail.hidden = hidden;
     }
   }

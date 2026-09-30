@@ -116,7 +116,7 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
-test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings', async () => {
+test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and dataset bindings', async () => {
   const { refreshSolidSceneEpoch } = await import('@cssearth/bake/objects/layers/terrestrial');
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const { prepareEclipticPresentationFrame } = await import('@cssearth/bake/objects/scene');

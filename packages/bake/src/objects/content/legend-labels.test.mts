@@ -17,12 +17,12 @@ test('labels are the stretch as a fraction of its top, at the low end, midpoint 
 test('a stale label is found and rewritten in both the legend and its recipe; current labels are left alone', () => {
   const raster = { surfaces: { a: { interpretation: { 1: { display: { low: 1, high: 4 } }, 2: { display: { low: 1, high: 4 } } } }, b: { interpretation: { 1: { display: { low: 1, high: 2 } } } } } };
   const legend = (labels: string[]) => ({ labels, recipe: { palette: [[0, 0, 0], [255, 255, 255]], labels } });
-  const content = { lenses: { controls: [{ id: 'a', legend: legend(['0.37', '0.62', '1.00']) }, { id: 'b', legend: legend(['0.50', '0.75', '1.00']) }, { id: 'c' }] } };
+  const content = { datasets: { controls: [{ id: 'a', legend: legend(['0.37', '0.62', '1.00']) }, { id: 'b', legend: legend(['0.50', '0.75', '1.00']) }, { id: 'c' }] } };
   const changes = legendLabelChanges(content, raster);
-  assert.deepEqual(changes, [{ lensId: 'a', authored: ['0.37', '0.62', '1.00'], derived: ['0.25', '0.63', '1.00'] }]);
+  assert.deepEqual(changes, [{ datasetId: 'a', authored: ['0.37', '0.62', '1.00'], derived: ['0.25', '0.63', '1.00'] }]);
   const refreshed = withDerivedLegendLabels(content, changes) as typeof content;
-  assert.deepEqual(refreshed.lenses.controls[0]!.legend, legend(['0.25', '0.63', '1.00']));
-  assert.deepEqual(refreshed.lenses.controls[1], content.lenses.controls[1]);
+  assert.deepEqual(refreshed.datasets.controls[0]!.legend, legend(['0.25', '0.63', '1.00']));
+  assert.deepEqual(refreshed.datasets.controls[1], content.datasets.controls[1]);
   assert.deepEqual(legendLabelChanges(refreshed, raster), []);
 });
 

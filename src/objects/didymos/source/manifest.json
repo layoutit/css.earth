@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "didymos-shape",
@@ -15,7 +15,7 @@
         "elevation",
         "albedo"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "projection": {
         "kind": "body-fixed-cartesian-triangular-mesh",
         "longitudeDirection": "east",
@@ -46,7 +46,7 @@
       "consumers": [
         "albedo"
       ],
-      "lensId": "albedo",
+      "datasetId": "albedo",
       "projection": {
         "kind": "source-triangle-facet-field",
         "units": "relative albedo",
@@ -230,7 +230,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -289,7 +289,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -348,7 +348,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -407,7 +407,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -466,7 +466,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -525,7 +525,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -584,7 +584,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -643,7 +643,7 @@
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
       "width": 2048,
       "height": 1088,
-      "lensId": "luke",
+      "datasetId": "luke",
       "label": "Calibrated LUKE frame",
       "sourceBinding": {
         "kind": "catalogued",
@@ -709,7 +709,7 @@
         "latitudeDegrees": 35,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "shape"
+        "datasetId": "shape"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

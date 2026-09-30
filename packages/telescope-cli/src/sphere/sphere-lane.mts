@@ -1,4 +1,4 @@
-/** A measurement lens for an existing standard sphere. No geometry or camera is authored here. */
+/** A measurement dataset for an existing standard sphere. No geometry or camera is authored here. */
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -33,11 +33,11 @@ export async function inspectMeasurementSphere(root:string,target:string){
   const original = parsePreparedObjectRuntime(await json(resolve(object, 'prepared/runtime.json')));
   if (original.id !== id || original.destinations)
     throw new Error('This sphere requires application capabilities that cannot be exported');
-  const lensId = original.controls.lenses?.defaultLens;
-  const surface = recipe.surfaces.find(item => item.id === lensId);
-  if (!lensId || !surface) throw new Error('Standard sphere has no matching prepared surface lens');
-  const replacementKeys=new Set([`surface:${lensId}`,`poles:${lensId}`,'poles']);
-  const variant = original.variants.find(item => item.when.lensId === lensId && item.when.shadows !== true && item.when.atmosphere !== true);
+  const datasetId = original.controls.datasets?.defaultDataset;
+  const surface = recipe.surfaces.find(item => item.id === datasetId);
+  if (!datasetId || !surface) throw new Error('Standard sphere has no matching prepared surface dataset');
+  const replacementKeys=new Set([`surface:${datasetId}`,`poles:${datasetId}`,'poles']);
+  const variant = original.variants.find(item => item.when.datasetId === datasetId && item.when.shadows !== true && item.when.atmosphere !== true);
   if (!variant) throw new Error('Standard sphere has no unshadowed surface variant');
   const required = variant.required.filter(key => replacementKeys.has(key));
   if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
@@ -47,7 +47,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
   const descriptor = requireRecord(await json(resolve(object, 'object.json'))),properties = requireRecord(descriptor.properties),worldFrame = properties.worldFrame;
   if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');
   const context = parsePreparedWorldContext(await json(resolve(root, 'src/objects/sun/prepared/world-context.json')));
-  return {id,object,inputs,pinned,recipe,original,lensId,surface,variant,required,styles,worldFrame,context};
+  return {id,object,inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context};
 }
 
 export async function measurementSphere(root: string, target: string, texture: string, output: string,
@@ -56,7 +56,7 @@ export async function measurementSphere(root: string, target: string, texture: s
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
   const assetsToInstall = await inventoryAssets(root, [id], { location: 'prepared' });
   await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json'));
-  const {inputs,pinned,recipe,original,lensId,surface,variant,required,styles,worldFrame,context}=await inspectMeasurementSphere(root,target);
+  const {inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context}=await inspectMeasurementSphere(root,target);
   // Keep the original packing, gutters, pole atlas and density. The standard raster lane
   // receives already projected colours and uses nearest/lossless handling for measurements.
   const rasterDirectory = resolve(output, 'raster');
@@ -84,19 +84,19 @@ export async function measurementSphere(root: string, target: string, texture: s
       channels: 4, nearest: true,
     }),
   });
-  const selected = assets.surfaces[lensId];
-  const poles = recipe.polesOutput.replaceAll('{id}', lensId).replaceAll('{suffix}', '@2x').replaceAll('{density}', '2');
-  const surfaceFile = resolve(rasterDirectory, surfaces.find(item => item.id === lensId)!.output.replaceAll('{id}', lensId).replaceAll('{suffix}', '@2x').replaceAll('{density}', '2'));
+  const selected = assets.surfaces[datasetId];
+  const poles = recipe.polesOutput.replaceAll('{id}', datasetId).replaceAll('{suffix}', '@2x').replaceAll('{density}', '2');
+  const surfaceFile = resolve(rasterDirectory, surfaces.find(item => item.id === datasetId)!.output.replaceAll('{id}', datasetId).replaceAll('{suffix}', '@2x').replaceAll('{density}', '2'));
   const dataUrl = async (file: string) => 'data:image/webp;base64,' + (await pinned(file)).toString('base64');
   const replacement = new Map([
-    [`surface:${lensId}`, await dataUrl(surfaceFile)],
-    [`poles:${lensId}`, await dataUrl(resolve(rasterDirectory, poles))],
-    // Mercury's row-bank presentation shares a combined pole atlas across lenses.
+    [`surface:${datasetId}`, await dataUrl(surfaceFile)],
+    [`poles:${datasetId}`, await dataUrl(resolve(rasterDirectory, poles))],
+    // Mercury's row-bank presentation shares a combined pole atlas across datasets.
     ['poles', await dataUrl(resolve(rasterDirectory, poles))],
   ]);
   // Preserve the exact prepared tree, facing/depth bindings and camera. Quantitative colour
   // must not be multiplied by the photographic lighting plane, even at full phase.
-  // Inactive lenses retain image-valued custom properties in the shared tree.
+  // Inactive datasets retain image-valued custom properties in the shared tree.
   // Clear only bindings to excluded assets; node identity and geometry stay intact.
   const excluded = original.assets.entries.filter(entry => !required.includes(entry.key));
   const { properties: portableProperties, inactiveImageProperties } = clearInactiveImageBindings(original.tree.properties, excluded);
@@ -105,24 +105,24 @@ export async function measurementSphere(root: string, target: string, texture: s
   // Apply the measurement view immediately, keeping the viewport's fitted zoom.
   const { features: _features, ...portable } = original;
   const definition = parsePreparedObjectRuntime({ ...portable, tree,
-    controls: { lenses: { defaultLens: lensId, controls: [{ id: lensId, label: 'Measurement' }] }, settings: null },
+    controls: { datasets: { defaultDataset: datasetId, controls: [{ id: datasetId, label: 'Measurement' }] }, settings: null },
     materials: [], motion: [], animations: [],
-    variants: [{ ...variant, when: { lensId }, required, materials: [],
+    variants: [{ ...variant, when: { datasetId }, required, materials: [],
       navigation: { ...navigation, camera: { ...navigation.camera, transition: { durationMilliseconds: 0, preserveZoom: true } } },
       writes: [...variant.writes, ...original.materials.map(track => ({ kind: 'style', target: track.target, name: 'visibility', value: 'hidden' }))] }],
     assets: { ...original.assets, entries: original.assets.entries.filter(entry => required.includes(entry.key)), startup: required },
   });
   // Prepared properties may address the old surface URL directly. Replace only the
-  // selected lens's URLs; the geometry, dimensions and texture coordinates remain exact.
+  // selected dataset's URLs; the geometry, dimensions and texture coordinates remain exact.
   const oldToNew = new Map(original.assets.entries.filter(entry => replacement.has(entry.key)).map(entry => [entry.url, replacement.get(entry.key)!]));
   let css = styles.map(bytes => bytes.toString()).join('\n');
-  // Shared styles also contain other bodies/lenses. None is reachable in this
-  // one-lens document, and none may trigger a network request from the export.
+  // Shared styles also contain other bodies/datasets. None is reachable in this
+  // one-dataset document, and none may trigger a network request from the export.
   css = css.replace(/url\(\s*(["']?)([^"')]+)\1\s*\)/g, (_match, _quote, url: string) => {
     const embedded = oldToNew.get(url.trim());
     return embedded ? `url("${embedded}")` : 'none';
   });
-  // Only the selected lens is reachable. Reject an asset dependency instead of allowing
+  // Only the selected dataset is reachable. Reject an asset dependency instead of allowing
   // the supposedly portable HTML to quietly fetch a different scientific image.
   const serialized = JSON.stringify(definition);
   for (const entry of original.assets.entries) {

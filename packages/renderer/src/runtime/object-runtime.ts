@@ -26,7 +26,7 @@ import { createPreparedPlayback } from "../rendering/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
-import { requireObjectRuntimeDefinition, selectedLensVolume } from "./object-contract.js";
+import { requireObjectRuntimeDefinition, selectedDatasetVolume } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
@@ -53,7 +53,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       initialWorldCamera ??= savedWorldCamera(saved, worldFrame, { focalPixels: 1, principalOffsetPixels: [0, 0] });
       delete stage.dataset.preparedView;
     }
-    const { initialLens, initialSettings, selection: initialSelection } = initialStageSelection(definition.controls, stage);
+    const { initialDataset, initialSettings, selection: initialSelection } = initialStageSelection(definition.controls, stage);
     if (stage.dataset.preparedDataset !== undefined) delete stage.dataset.preparedDataset;
     if (stage.dataset.preparedSettings !== undefined) delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
@@ -71,7 +71,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arriving;
-    let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
+    let allowed = false, navigatedDataset: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
     let revision = 0, selection: ReturnType<typeof createObjectSelectionRuntime> | null = null, controls: ReturnType<typeof createObjectControlBinding> | null = null;
@@ -194,15 +194,15 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         return worldPublication.subscribe(listener);
       },
     });
-    const datasets: ObjectDatasets | undefined = definition.controls.lenses && definition.controls.lenses.controls.length ? Object.freeze({
-      ids: Object.freeze(definition.controls.lenses.controls.map(item => item.id)),
-      defaultId: definition.controls.lenses.defaultLens,
-      volumes: Object.freeze(definition.controls.lenses.controls.flatMap(item => item.volume ? [item.volume] : [])),
-      volumeOf: (id: string) => selectedLensVolume(definition.controls, id),
-      current: () => lifetime.disposed ? null : selection?.state().committed?.lensId ?? null,
+    const datasets: ObjectDatasets | undefined = definition.controls.datasets && definition.controls.datasets.controls.length ? Object.freeze({
+      ids: Object.freeze(definition.controls.datasets.controls.map(item => item.id)),
+      defaultId: definition.controls.datasets.defaultDataset,
+      volumes: Object.freeze(definition.controls.datasets.controls.flatMap(item => item.volume ? [item.volume] : [])),
+      volumeOf: (id: string) => selectedDatasetVolume(definition.controls, id),
+      current: () => lifetime.disposed ? null : selection?.state().committed?.datasetId ?? null,
       async select(id: string, options: { signal?: AbortSignal } = {}) {
         if (!live() || options.signal?.aborted) return false;
-        return getSelection().dispatch({ kind: 'lens', id }, { ...options, frameCamera: false });
+        return getSelection().dispatch({ kind: 'dataset', id }, { ...options, frameCamera: false });
       },
       subscribe(listener: (id: string) => void) {
         if (!lifetime.disposed) datasetListeners.add(listener);
@@ -212,7 +212,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const features: import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime | undefined = definition.features ? Object.freeze<import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime>({
       catalog: () => surfaceFeatures?.catalog() ?? null,
       loaded: () => ready.then(() => { if (!surfaceFeatures) throw new Error('Surface features are not mounted.'); return surfaceFeatures.loaded(); }),
-      lensIds: definition.features.lensIds,
+      datasetIds: definition.features.datasetIds,
       select: (id, options) => ready.then(() => surfaceFeatures?.select(id, options) ?? { completed: false }),
       selected: () => surfaceFeatures?.selected() ?? null,
       clear: () => surfaceFeatures?.clear(),
@@ -270,14 +270,14 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     function publishSelection(state: Readonly<ObjectSelectionState>) {
       controls?.publish(state);
       if (state.committed && !state.pending) notifyView();
-      if (!state.committed || state.pending || !orbit || state.committed.lensId === navigatedLens) return;
-      navigatedLens = state.committed.lensId;
-      if (phase === 'ready' && navigatedLens !== null) for (const listener of datasetListeners) listener(navigatedLens);
+      if (!state.committed || state.pending || !orbit || state.committed.datasetId === navigatedDataset) return;
+      navigatedDataset = state.committed.datasetId;
+      if (phase === 'ready' && navigatedDataset !== null) for (const listener of datasetListeners) listener(navigatedDataset);
       const navigation = state.plan?.navigation;
       if (!navigation) return;
       maximumZoom = navigation.maximumZoom;
       // Camera intent belongs to the committed request, not concurrent dataset IDs. A handoff or saved view supplies
-      // the startup camera: committing its initial lens must not replace that camera or cancel the shared flight.
+      // the startup camera: committing its initial dataset must not replace that camera or cancel the shared flight.
       const intent = state.committedBy;
       if (!intent?.frameCamera || (intent.kind === 'initial' && initialWorldCamera)) return;
       if (navigation.camera) { stopMotion(); alignMotionFrame(); }
@@ -324,11 +324,11 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, committedBy: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
         onAction: async action => {
-          const before = selection?.state().committed?.lensId;
+          const before = selection?.state().committed?.datasetId;
           const committed = await (selection?.dispatch(action) ?? false);
-          // Re-selecting the committed lens is still an explicit valid choice,
+          // Re-selecting the committed dataset is still an explicit valid choice,
           // including when it replaces an invalid dataset URL.
-          if (committed && action.kind === 'lens' && action.id === before && !lifetime.disposed) {
+          if (committed && action.kind === 'dataset' && action.id === before && !lifetime.disposed) {
             for (const listener of datasetListeners) listener(action.id);
           }
           return committed;
@@ -345,13 +345,13 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       syncPagePlayback();
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
-      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, initialLens, initialSettings,
+      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, initialDataset, initialSettings,
         motion: inputSurface ? cameraMotionSignalFor(inputSurface) : null,
-        prepareSelection: datasetEffects && ((next, signal) => datasetEffects.prepare(selectedLensVolume(definition.controls, next.lensId), signal)),
+        prepareSelection: datasetEffects && ((next, signal) => datasetEffects.prepare(selectedDatasetVolume(definition.controls, next.datasetId), signal)),
         onCommit: (next, _plan, intent) => {
-          if (intent.kind === 'selection') datasetEffects?.commit(selectedLensVolume(definition.controls, next.lensId));
+          if (intent.kind === 'selection') datasetEffects?.commit(selectedDatasetVolume(definition.controls, next.datasetId));
           playback.setSelection(next);
-          surfaceFeatures?.setLens({ id: next.lensId }); syncPagePlayback(next.speed ?? 1); republishMotion();
+          surfaceFeatures?.setDataset({ id: next.datasetId }); syncPagePlayback(next.speed ?? 1); republishMotion();
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
@@ -404,7 +404,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
         context.own(() => surfaceFeatures?.destroy());
         if (featuresInFlight) surfaceFeatures.setNavigationInFlight?.(true);
-        surfaceFeatures.setLens({ id: initialSelection.lensId });
+        surfaceFeatures.setDataset({ id: initialSelection.datasetId });
       }
       if (currentView) surfaceFeatures?.publish(currentView);
       if (navigation) onNavigationReady?.(navigation);

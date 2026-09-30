@@ -45,7 +45,7 @@ different dates, wavelength bands, mineral amounts, or components of one field.
 Similar colors alone are not a reason to group maps. A photograph, a height map
 and an interior model answer different questions and keep separate entries.
 
-In the body's `source/content/object.json`, give consecutive lens controls the
+In the body's `source/content/object.json`, give consecutive dataset controls the
 same `label` and `step.group`, with a distinct `step.label` for each member.
 The chooser lists the group once. The selected member supplies its description,
 source and legend; the arrows select its neighbors. Each member keeps

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "nasa-lro-moon-color",
@@ -50,7 +50,7 @@
       "acquisition": "checked NASA SVS cylindrical GRAIL crustal-thickness map",
       "redistribution": "NASA image with mission credit and no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -111,7 +111,7 @@
       "acquisition": "Exact public PDS binary download; original numeric samples, not a rendered press image",
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -147,7 +147,7 @@
       "acquisition": "Exact public PDS binary download; original numeric samples, not a rendered press image",
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -173,7 +173,7 @@
       "acquisition": "Checked-in compact numeric grid. Reproduce using packages/bake/src/objects/acquisition/coordinate-tiff-grid.py and science/prepare-cf-map.json from the three pinned original TIFFs.",
       "redistribution": "Adapted under CC-BY-4.0; coordinate sampling and authored palette identified.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "width": 2048,
       "height": 1024,
@@ -201,7 +201,7 @@
       "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the pinned source shapefile using geology/prepare-grid.json.",
       "redistribution": "Retain authors, scale and interpretation; palette colors are not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "width": 2048,
       "height": 1024,
@@ -372,7 +372,7 @@
       "consumers": [
         "ghrm-source"
       ],
-      "lensId": "midnight-temperature",
+      "datasetId": "midnight-temperature",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -396,9 +396,9 @@
       "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_m.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "midnight-temperature",
+      "datasetId": "midnight-temperature",
       "sourcePins": [
         "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.img",
         "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml",
@@ -429,7 +429,7 @@
       "consumers": [
         "ghrm-source"
       ],
-      "lensId": "heat-anomalies",
+      "datasetId": "heat-anomalies",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -453,9 +453,9 @@
       "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_anom.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "heat-anomalies",
+      "datasetId": "heat-anomalies",
       "sourcePins": [
         "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.img",
         "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.xml",
@@ -486,7 +486,7 @@
       "consumers": [
         "ghrm-source"
       ],
-      "lensId": "rock-abundance",
+      "datasetId": "rock-abundance",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -510,9 +510,9 @@
       "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-ra_sam.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "rock-abundance",
+      "datasetId": "rock-abundance",
       "sourcePins": [
         "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.img",
         "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
@@ -628,7 +628,7 @@
       "redistribution": "Prepared raster assets.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -712,7 +712,7 @@
       "redistribution": "Preparation provenance and reproducibility.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -722,14 +722,14 @@
     {
       "id": "moon-object-content",
       "path": "content/object.json",
-      "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
+      "origin": "Repository-authored Moon panel, dataset, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside the inputs.",
       "redistribution": "Prepared shell content with source provenance.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -796,7 +796,7 @@
       ],
       "width": 11520,
       "height": 5760,
-      "lensId": "surface",
+      "datasetId": "surface",
       "label": "Monochrome",
       "falseColor": false,
       "projection": {
@@ -899,9 +899,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "submicroscopic-iron",
+      "datasetId": "submicroscopic-iron",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -927,7 +927,7 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -954,9 +954,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "plagioclase-grain-size",
+      "datasetId": "plagioclase-grain-size",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -982,9 +982,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "plagioclase",
+      "datasetId": "plagioclase",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1010,9 +1010,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "iron-oxide",
+      "datasetId": "iron-oxide",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1038,9 +1038,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "olivine",
+      "datasetId": "olivine",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1066,9 +1066,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "orthopyroxene",
+      "datasetId": "orthopyroxene",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1094,9 +1094,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "clinopyroxene",
+      "datasetId": "clinopyroxene",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1122,9 +1122,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "optical-maturity",
+      "datasetId": "optical-maturity",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1149,7 +1149,7 @@
       "acquisition": "Exact public PDS GRAIL_1001 EXTRAS GeoTIFF download of the gravity anomaly map; the volume's extrinfo.txt states it holds the same data as RSDMAP GGGRX_1200A_ANOM_L660.IMG. Original float32 mGal samples, not a rendered press image",
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1184,7 +1184,7 @@
       "acquisition": "Exact public PDS GRAIL_1001 EXTRAS GeoTIFF download of the Bouguer disturbance map; the volume's extrinfo.txt states it holds the same data as RSDMAP GGGRX_1200A_BOUG_L660.IMG. Original float32 mGal samples, not a rendered press image",
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1219,7 +1219,7 @@
       "acquisition": "Exact public PDS ASCII table LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG of LP-L-GRS-5-ELEM-ABUNDANCE-V1.0 (volume LP_9001): weight fractions of FeO and TiO2, K and Th in ppm, with the error matrix, on 2 degree equal-area pixels. Original numeric values, not a rendered map",
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -1245,7 +1245,7 @@
       "acquisition": "Exact public PDS binary download of LDRM_16 (LRO-L-LOLA-4-GDR-V1.0, product version V2.0): per-pixel mean of the residual standard deviation of altitudes after a plane fit, 16 pixels/degree, signed 16-bit millimetres. Original numeric samples, not a rendered image",
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -2473,7 +2473,7 @@
     {
       "path": "science/grail/gggrx_1200a_anom_l660.lbl",
       "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl",
-      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the lens reads.",
+      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the dataset reads.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2488,7 +2488,7 @@
     {
       "path": "science/grail/gggrx_1200a_boug_l660.lbl",
       "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl",
-      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the lens reads.",
+      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the dataset reads.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2515,7 +2515,7 @@
           {
             "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
             "role": "material",
-            "evidence": "Detached PDS3 label of the table the surface-element lenses read."
+            "evidence": "Detached PDS3 label of the table the surface-element datasets read."
           }
         ]
       }
@@ -2530,7 +2530,7 @@
           {
             "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
             "role": "material",
-            "evidence": "Format file of the table the surface-element lenses read."
+            "evidence": "Format file of the table the surface-element datasets read."
           }
         ]
       }

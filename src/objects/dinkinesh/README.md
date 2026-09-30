@@ -70,7 +70,7 @@ Complete conformance remains unqualified: the shared wheel-distance check does
 not include main's new inertia, the generic feature test assumes labels on the
 default dataset, and a separate two-finger trial did not zoom. The browser-profile
 unit file passes six tests but its all-object inventory fails on unchanged Ryugu
-lens coverage. These limits and the exact observed results are retained in the
+dataset coverage. These limits and the exact observed results are retained in the
 report. The older browser evidence below covers the Celestia dataset only.
 
 
@@ -97,7 +97,7 @@ produced **2.03 px RMS and 4.74 px maximum over 16 withheld controls** in an
 additional viewing direction. It fails the existing one-pixel RMS requirement.
 A regional fit also failed its additional-view check. Earlier results that
 cropped pixels before convolution are superseded by the retained native-image
-region check. No photographic surface or regional lens has been accepted.
+region check. No photographic surface or regional dataset has been accepted.
 
 ![Native photograph, projection through the recovered mesh, and absolute brightness difference](evidence/lucy-registration/native-registration-comparison.png)
 
@@ -117,7 +117,7 @@ calculation; it does not establish the mesh orientation.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dinkinesh (snapshot refreshed 2026-09-13 after the missing prior archive had changed upstream, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. Names the Gazetteer has not positioned (centre 0°, 0° with an empty extent) are not placed and are tallied in the prepared descriptor.
 
-Earlier named features run of 2026-09-12 (Celestia model): the catalogue labels 4 IAU names on the hit mesh (1 DO without a published centre); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Bella Dorsum from the sidebar search with no console errors or failed requests.
+Earlier named features run of 2026-09-12 (Celestia model): the catalogue labels 4 IAU names on the hit mesh (1 DO without a published centre); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every dataset and pinned Bella Dorsum from the sidebar search with no console errors or failed requests.
 
 ## Integrated validation
 

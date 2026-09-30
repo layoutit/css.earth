@@ -75,7 +75,7 @@
         "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/README.md (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)",
         "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/projection.json (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)"
       ],
-      "revisitWhen": "Before using this SUM/UV route in a photographic lens, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."
+      "revisitWhen": "Before using this SUM/UV route in a photographic dataset, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "r-doradus",
   "displayName": "R Doradus",
@@ -47,14 +47,14 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "alma",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "alma",
     "controls": [
       {
         "id": "alma",
         "label": "ALMA continuum",
-        "thumbnail": "r-doradus-lens-alma.webp",
+        "thumbnail": "r-doradus-dataset-alma.webp",
         "surface": "r-doradus-surface-alma@2x.webp",
         "poles": "r-doradus-poles-alma@2x.webp",
         "source": {
@@ -118,7 +118,7 @@
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "r-doradus-lens-shape.webp",
+        "thumbnail": "r-doradus-dataset-shape.webp",
         "surface": "r-doradus-surface-shape@2x.webp",
         "poles": "r-doradus-poles-shape@2x.webp",
         "source": {
@@ -127,13 +127,13 @@
           "url": "https://doi.org/10.1038/s41586-024-07836-9"
         },
         "falseColor": false,
-        "notes": "A sphere of the published radius with no image cast on it, for comparison with the ALMA lens. Neutral gray is a display convention, not a measured colour; the display axis is celestial north at the star, also a convention."
+        "notes": "A sphere of the published radius with no image cast on it, for comparison with the ALMA dataset. Neutral gray is a display convention, not a measured colour; the display axis is celestial north at the star, also a convention."
       },
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a published law.",
-        "thumbnail": "r-doradus-lens-color.webp",
+        "thumbnail": "r-doradus-dataset-color.webp",
         "surface": "r-doradus-surface-color@2x.webp",
         "poles": "r-doradus-poles-color@2x.webp",
         "source": {

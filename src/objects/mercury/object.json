@@ -14,7 +14,7 @@
         "assets",
         "starfield",
         "sky-sun",
-        "lenses",
+        "datasets",
         "charts",
         "features",
         "system-markers",
@@ -52,7 +52,7 @@
       "bodyRadiusM": 2439700
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "raster",
@@ -104,7 +104,7 @@
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "normal",
               "source": "content",
@@ -158,7 +158,7 @@
       "cutaway": {
         "source": "geometry",
         "surface": "body",
-        "lens": "interior",
+        "dataset": "interior",
         "material": "lighting"
       },
       "features": {
@@ -187,6 +187,6 @@
       }
     }
   },
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "type": "layered-body"
 }

@@ -34,7 +34,7 @@ export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
   materials: readonly PreparedContractTrack[]; variants: readonly PreparedContractVariant[];
   animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
-  destinations?: { catalog: { url: string; bytes: number; count: number; sourcePage?: string; license?: string; snapshotDate?: string }; defaultLens: string; statuses: { detail: string; overview: string } };
+  destinations?: { catalog: { url: string; bytes: number; count: number; sourcePage?: string; license?: string; snapshotDate?: string }; defaultDataset: string; statuses: { detail: string; overview: string } };
 };
 import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.ts";
@@ -211,7 +211,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     }
     for (const bank of track.banks) {
       record(bank, "bank", ["id", "frames", "default", "fixed", "rows"]); string(bank.id, "bank id");
-      // A fixed-only bank (a lens's one shadowless frame) carries its fixed address and no frames.
+      // A fixed-only bank (a dataset's one shadowless frame) carries its fixed address and no frames.
       const frameCount = array(bank.frames, "frame addresses").length;
       if (frameCount !== track.frame.count && !(frameCount === 0 && bank.fixed !== null && bank.rows === undefined)) fail("every material frame requires a prepared address");
       bank.frames.forEach((value, index) => { address(value); if (value.frame !== index) fail("frame addresses must be ordered"); });
@@ -285,20 +285,20 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       if(!(xx>0)||!(xx*yy-xy*xy>0))fail("texture ellipse covariance must be positive definite");
     }
   }
-  const lensIds = (controls.lenses?.controls ?? []).map(lens => lens.id);
+  const datasetIds = (controls.datasets?.controls ?? []).map(dataset => dataset.id);
   const settings = new Map((controls.settings?.controls ?? []).map(control => [control.name, control]));
   if (plan.destinations !== undefined) {
-    record(plan.destinations, "destinations", ["catalog", "defaultLens", "statuses"]);
-    const {catalog,defaultLens,statuses}=plan.destinations;
+    record(plan.destinations, "destinations", ["catalog", "defaultDataset", "statuses"]);
+    const {catalog,defaultDataset,statuses}=plan.destinations;
     record(catalog, "destinations catalog", ["url", "bytes", "count", "sourcePage", "license", "snapshotDate"]);
     if (!catalog.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
         !Number.isSafeInteger(catalog.count) || catalog.count < 1 ||
-        !lensIds.includes(defaultLens)) fail("destinations require a catalogue and declared lens");
+        !datasetIds.includes(defaultDataset)) fail("destinations require a catalogue and declared dataset");
     record(statuses,"destination statuses",["detail","overview"]); string(statuses.detail,"detail status");string(statuses.overview,"overview status");
   }
   if (plan.features !== undefined) {
     const features = plan.features;
-    record(features, "surface features", ["catalog", "selection", "target", "lensIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits", "surfaceEllipsoidUnits"]);
+    record(features, "surface features", ["catalog", "selection", "target", "datasetIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits", "surfaceEllipsoidUnits"]);
     record(features.catalog, "surface feature catalog", ["url", "bytes", "count"]);
     if (!features.catalog.url?.startsWith("/scenes/")) fail("surface features require a catalogue under /scenes/");
     integer(features.catalog.bytes, "feature catalog bytes", 1); integer(features.catalog.count, "feature catalog count", 1);
@@ -319,8 +319,8 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       if (found !== count) fail("surface feature selection bank counts drifted");
     }
     node(features.target); if (!ancestor(features.target, tree.scene)) fail("surface feature target must belong to scene");
-    const lenses = array(features.lensIds, "surface feature lenses"); unique(lenses, "surface feature lenses");
-    if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail("surface features require declared lenses");
+    const datasets = array(features.datasetIds, "surface feature datasets"); unique(datasets, "surface feature datasets");
+    if (!datasets.length || datasets.some(id => !datasetIds.includes(id))) fail("surface features require declared datasets");
     finite(features.meshRadiusUnits, "surface feature mesh radius"); if (!(features.meshRadiusUnits > 0)) fail("surface feature mesh radius must be positive");
     if (features.surfaceRadiusUnits !== undefined) {
       record(features.surfaceRadiusUnits, "surface feature radius band", ["minimum", "maximum"]);
@@ -353,18 +353,18 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   }
   if (plan.surfaceHit !== undefined) {
     const hit = plan.surfaceHit;
-    record(hit, 'surface hit', ['target', 'triangles', 'frontFace', 'lensRanges']); node(hit.target);
+    record(hit, 'surface hit', ['target', 'triangles', 'frontFace', 'datasetRanges']); node(hit.target);
     if (hit.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(hit.frontFace)) fail('invalid surface front face');
     if (!ancestor(hit.target, tree.scene)) fail('surface hit target must belong to scene');
     const triangles = array(hit.triangles, 'surface hit triangles');
     if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
-    if (hit.lensRanges !== undefined) {
-      const ranges = array(hit.lensRanges, 'surface lens ranges');
-      if (ranges.length !== lensIds.length || new Set(ranges.map(range => range.lensId)).size !== ranges.length) fail('surface ranges must cover every lens once');
+    if (hit.datasetRanges !== undefined) {
+      const ranges = array(hit.datasetRanges, 'surface dataset ranges');
+      if (ranges.length !== datasetIds.length || new Set(ranges.map(range => range.datasetId)).size !== ranges.length) fail('surface ranges must cover every dataset once');
       for (const range of ranges) {
-        record(range, 'surface lens range', ['lensId', 'start', 'count']);
-        if (!lensIds.includes(range.lensId) || !Number.isSafeInteger(range.start) || range.start < 0 ||
-            !Number.isSafeInteger(range.count) || range.count < 1 || range.start + range.count > triangles.length) fail('invalid surface lens range');
+        record(range, 'surface dataset range', ['datasetId', 'start', 'count']);
+        if (!datasetIds.includes(range.datasetId) || !Number.isSafeInteger(range.start) || range.start < 0 ||
+            !Number.isSafeInteger(range.count) || range.count < 1 || range.start + range.count > triangles.length) fail('invalid surface dataset range');
       }
     }
     for (const triangle of triangles) {
@@ -398,9 +398,9 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
         if(![camera.controlPitch,camera.controlYaw,camera.zoom].every(Number.isFinite)||camera.zoom<plan.camera.minimumZoom||camera.zoom>maximumZoom)fail("navigation camera must be bounded");
       }
     }
-    record(variant.when, "selection key", ["lensId", ...settings.keys()]);
-    if (lensIds.length ? !lensIds.includes(String(variant.when.lensId)) : Object.hasOwn(variant.when, "lensId")) fail("variant must match the declared lens capability");
-    for (const [key, value] of Object.entries(variant.when)) if (key !== "lensId") {
+    record(variant.when, "selection key", ["datasetId", ...settings.keys()]);
+    if (datasetIds.length ? !datasetIds.includes(String(variant.when.datasetId)) : Object.hasOwn(variant.when, "datasetId")) fail("variant must match the declared dataset capability");
+    for (const [key, value] of Object.entries(variant.when)) if (key !== "datasetId") {
       const control = settings.get(key);
       if (!control || control.kind !== "toggle" || typeof value !== "boolean") fail("presentation variants may only bind discrete toggle settings");
     }
@@ -432,10 +432,10 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       if (selected.mode !== "fixed" && !bank!.frames.length) fail("a fixed-only bank is selected only in fixed mode");
     }
   }
-  const toggleNames = [...new Set(variants.flatMap(variant => Object.keys(variant.when).filter(key => key !== "lensId")))];
+  const toggleNames = [...new Set(variants.flatMap(variant => Object.keys(variant.when).filter(key => key !== "datasetId")))];
   if (toggleNames.length > 12) fail("selection table exceeds bounded toggle combinations");
-  for (const lensId of lensIds.length ? lensIds : [null]) for (let index = 0; index < 2 ** toggleNames.length; index++) {
-    const state: Record<string, string | boolean | null> = { lensId, ...Object.fromEntries(toggleNames.map((name, bit) => [name, !!(index & 2 ** bit)])) };
+  for (const datasetId of datasetIds.length ? datasetIds : [null]) for (let index = 0; index < 2 ** toggleNames.length; index++) {
+    const state: Record<string, string | boolean | null> = { datasetId, ...Object.fromEntries(toggleNames.map((name, bit) => [name, !!(index & 2 ** bit)])) };
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {

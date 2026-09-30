@@ -26,7 +26,7 @@ for (const id of ['mercury', 'venus']) test(`${id} loads its actual prepared JSO
   expect(read).toHaveBeenCalledExactlyOnceWith(f.reference.url);
   expect(definition.id).toBe(id);
   expect(definition.tree.nodes.length).toBeGreaterThan(100);
-  expect(definition.controls.lenses?.controls.length).toBeGreaterThan(1);
+  expect(definition.controls.datasets?.controls.length).toBeGreaterThan(1);
   expect(definition.assets.startup.length).toBeGreaterThan(0);
 });
 

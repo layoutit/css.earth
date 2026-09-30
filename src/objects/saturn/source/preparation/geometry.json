@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-layered-oblate-preparation@1",
+  "schema": "cssearth-layered-oblate-preparation@2",
   "namespace": "saturn",
   "publicPrefix": "/scenes/saturn/",
   "sources": {
@@ -25,7 +25,7 @@
     "rings": "saturn-rings.webp"
   },
   "parameters": {
-    "defaultLensId": "normal",
+    "defaultDatasetId": "normal",
     "projectiveTextureRasterScale": 2,
     "materialModes": [
       "full",

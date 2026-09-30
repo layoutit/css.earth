@@ -58,7 +58,7 @@ cover the probes and software/input pins in the
 The new observation records support preparation tests. The production surface
 continues to use the controlled Golish maps listed above. The comparison does
 not qualify this individual frame's physical registration or a new photographic
-lens. SBMT's archive uses the public access pair published by its client
+dataset. SBMT's archive uses the public access pair published by its client
 (`public` / `wide-open`); the acquisition plan records that public authorization
 header and verifies each downloaded file's bytes.
 
@@ -73,7 +73,7 @@ Current atlases are 3503 × 3720 pixels, with 796 retained faces. The [delivery 
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 52.033 / 132.260 / 275.739 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 
-The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
+The earlier source notes report Headless Chrome 152 checks of the then-selected datasets with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
 The [native-value check](evidence/spectral-bands/native-values.json) compares all seven production samplers with independent float32 byte reads and coordinates from the original ISIS labels, including fractional footprints, source extrema and gaps. It verifies decoding and display transfer; it does not revalidate the mission’s calibration or physical registration.
 

@@ -6,7 +6,7 @@
       "id": "cassini-iss-and-shape-release",
       "subject": "Cassini ISS archive and PDS shape release",
       "status": "included",
-      "finding": "The [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) supplies the observation lens and the [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) supplies geometry and radial-height visualization.",
+      "finding": "The [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) supplies the observation dataset and the [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) supplies geometry and radial-height visualization.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
         "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"

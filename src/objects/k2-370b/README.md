@@ -8,7 +8,7 @@ It is the only planet known around K2-370. Its orbit and size follow Sozzetti et
 
 **Orbit.** Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): P 2.1408093 d Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): a/R* derived from its semi-major axis 0.0321 au and stellar radius 0.945 solar radii; Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): inclination 84.44 degrees Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): e 0 Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): transit mid-time 2457860.71859 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-370's measured colour (#ffebde, the colour lens of k2-370 (src/objects/k2-370/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-370's measured colour (#ffebde, the colour dataset of k2-370 (src/objects/k2-370/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-370's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (44, 70, 71), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "usgs-dawn-fc-global-140m",
@@ -16,7 +16,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 4096,
@@ -70,7 +70,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "Enhanced color",
       "falseColor": true,
       "width": 3078,
@@ -123,7 +123,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "format": "geotiff",
       "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
       "capture": {
@@ -156,7 +156,7 @@
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
-        "lenses",
+        "datasets",
         "presentation",
         "features"
       ],
@@ -254,7 +254,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -338,7 +338,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -355,7 +355,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -377,7 +377,7 @@
       "consumers": [
         "clay-band"
       ],
-      "lensId": "clay-band",
+      "datasetId": "clay-band",
       "label": "Clay band",
       "falseColor": true,
       "format": "pds3-float-map",
@@ -432,7 +432,7 @@
       "consumers": [
         "clay-band"
       ],
-      "purpose": "Detached PDS3 label: identity, 32-bit big-endian IEEE_REAL layout, planetocentric east-positive equirectangular projection, latitude extent and missing constant, all checked against the lens recipe.",
+      "purpose": "Detached PDS3 label: identity, 32-bit big-endian IEEE_REAL layout, planetocentric east-positive equirectangular projection, latitude extent and missing constant, all checked against the dataset recipe.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -459,7 +459,7 @@
       "consumers": [
         "ammonium-band"
       ],
-      "lensId": "ammonium-band",
+      "datasetId": "ammonium-band",
       "label": "Ammonium band",
       "falseColor": true,
       "format": "pds3-float-map",
@@ -559,7 +559,7 @@
       "consumers": [
         "clay-centre"
       ],
-      "lensId": "clay-centre",
+      "datasetId": "clay-centre",
       "label": "Clay band centre",
       "falseColor": true,
       "format": "pds3-float-map",
@@ -614,7 +614,7 @@
       "consumers": [
         "clay-centre"
       ],
-      "lensId": "clay-centre",
+      "datasetId": "clay-centre",
       "label": "Clay band centre",
       "falseColor": true,
       "format": "pds3-float-map",
@@ -669,7 +669,7 @@
       "consumers": [
         "ammonium-centre"
       ],
-      "lensId": "ammonium-centre",
+      "datasetId": "ammonium-centre",
       "label": "Ammonium band centre",
       "falseColor": true,
       "format": "pds3-float-map",
@@ -724,7 +724,7 @@
       "consumers": [
         "ammonium-centre"
       ],
-      "lensId": "ammonium-centre",
+      "datasetId": "ammonium-centre",
       "label": "Ammonium band centre",
       "falseColor": true,
       "format": "pds3-float-map",
@@ -779,7 +779,7 @@
       "consumers": [
         "gravity"
       ],
-      "lensId": "gravity",
+      "datasetId": "gravity",
       "label": "Radial gravity anomaly",
       "falseColor": true,
       "format": "pds3-grid",
@@ -841,7 +841,7 @@
       "consumers": [
         "gravity"
       ],
-      "lensId": "gravity",
+      "datasetId": "gravity",
       "label": "Radial gravity anomaly",
       "falseColor": true,
       "format": "pds3-grid",
@@ -903,7 +903,7 @@
       "consumers": [
         "gravity-uncertainty"
       ],
-      "lensId": "gravity-uncertainty",
+      "datasetId": "gravity-uncertainty",
       "label": "Gravity uncertainty",
       "falseColor": true,
       "format": "pds3-grid",
@@ -965,7 +965,7 @@
       "consumers": [
         "gravity-uncertainty"
       ],
-      "lensId": "gravity-uncertainty",
+      "datasetId": "gravity-uncertainty",
       "label": "Gravity uncertainty",
       "falseColor": true,
       "format": "pds3-grid",
@@ -1027,7 +1027,7 @@
       "consumers": [
         "bouguer"
       ],
-      "lensId": "bouguer",
+      "datasetId": "bouguer",
       "label": "Bouguer anomaly",
       "falseColor": true,
       "format": "pds3-grid",
@@ -1089,7 +1089,7 @@
       "consumers": [
         "bouguer"
       ],
-      "lensId": "bouguer",
+      "datasetId": "bouguer",
       "label": "Bouguer anomaly",
       "falseColor": true,
       "format": "pds3-grid",
@@ -1151,7 +1151,7 @@
       "consumers": [
         "geoid"
       ],
-      "lensId": "geoid",
+      "datasetId": "geoid",
       "label": "Geoid height",
       "falseColor": true,
       "format": "pds3-grid",
@@ -1213,7 +1213,7 @@
       "consumers": [
         "geoid"
       ],
-      "lensId": "geoid",
+      "datasetId": "geoid",
       "label": "Geoid height",
       "falseColor": true,
       "format": "pds3-grid",
@@ -1275,7 +1275,7 @@
       "consumers": [
         "hydrogen"
       ],
-      "lensId": "hydrogen",
+      "datasetId": "hydrogen",
       "label": "Hydrogen",
       "falseColor": true,
       "format": "pds-equal-area-table",
@@ -1325,12 +1325,12 @@
         "https://pds.nasa.gov/datastandards/documents/policy/",
         "https://doi.org/10.26033/hf9h-pt31"
       ],
-      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the lens recipe.",
+      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the dataset recipe.",
       "redistribution": "Small native PDS3 label retained in Git byte for byte.",
       "consumers": [
         "hydrogen"
       ],
-      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the lens recipe.",
+      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the dataset recipe.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1357,7 +1357,7 @@
       "consumers": [
         "iron"
       ],
-      "lensId": "iron",
+      "datasetId": "iron",
       "label": "Iron",
       "falseColor": true,
       "format": "pds-equal-area-table",
@@ -1407,12 +1407,12 @@
         "https://pds.nasa.gov/datastandards/documents/policy/",
         "https://doi.org/10.26033/hf9h-pt31"
       ],
-      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the lens recipe.",
+      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the dataset recipe.",
       "redistribution": "Small native PDS3 label retained in Git byte for byte.",
       "consumers": [
         "iron"
       ],
-      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the lens recipe.",
+      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the dataset recipe.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1439,7 +1439,7 @@
       "consumers": [
         "neutron-counts"
       ],
-      "lensId": "neutron-counts",
+      "datasetId": "neutron-counts",
       "label": "Neutron counts",
       "falseColor": true,
       "format": "pds-equal-area-table",
@@ -1489,12 +1489,12 @@
         "https://pds.nasa.gov/datastandards/documents/policy/",
         "https://doi.org/10.26033/hf9h-pt31"
       ],
-      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the lens recipe.",
+      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the dataset recipe.",
       "redistribution": "Small native PDS3 label retained in Git byte for byte.",
       "consumers": [
         "neutron-counts"
       ],
-      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the lens recipe.",
+      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the dataset recipe.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

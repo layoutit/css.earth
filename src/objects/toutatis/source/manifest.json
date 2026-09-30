@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "toutatis-shape",
@@ -30,7 +30,7 @@
         "shape",
         "elevation"
       ],
-      "lensId": "shape",
+      "datasetId": "shape",
       "projection": {
         "kind": "body-fixed-cartesian-triangular-mesh",
         "longitudeDirection": "east",
@@ -71,7 +71,7 @@
         "latitudeDegrees": 15,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "shape"
+        "datasetId": "shape"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

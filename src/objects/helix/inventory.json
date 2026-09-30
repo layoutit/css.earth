@@ -21,9 +21,15 @@
     },
     {
       "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 2953399,
+      "sha256": "bf83548d8261f4d80b2ced0d1e9be5a025b77270307b8bd6699c78ead6f012e5"
+    },
+    {
+      "location": "prepared",
       "filename": "delivery.json",
-      "bytes": 6547,
-      "sha256": "72c5904f0cf471c5f47b07392416b0749e405fe4b5c8f092f4c1f91cd8ca0bd6"
+      "bytes": 6555,
+      "sha256": "d925d74593aa18ea8f7877ae51f35951fd217738dfffa19a5f082ede8e002065"
     },
     {
       "location": "prepared",
@@ -549,15 +555,15 @@
     },
     {
       "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 2953378,
-      "sha256": "89c7226044993a7122d53e7366cdfc78a73d0ac4a932635c010fe3c1b1967f28"
+      "filename": "presentation.json",
+      "bytes": 4697,
+      "sha256": "d4f967f9339c194813355584c5006ebdb747f4c63c3dafbdb917a417ea84c4e8"
     },
     {
       "location": "prepared",
-      "filename": "presentation.json",
-      "bytes": 4694,
-      "sha256": "af4922c79a82e8f7ca9511e39bc73108130cace61c3b852e4bf6274979aa4143"
+      "filename": "provenance.json",
+      "bytes": 42534,
+      "sha256": "2982ea7f10b00f548edf4ccdae1992ea41aec0973b00d96f819e9c5700c456e3"
     }
   ]
 }

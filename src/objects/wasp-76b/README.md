@@ -2,7 +2,7 @@
 
 ## Sources
 
-WASP-76b is an ultra-hot giant planet that orbits the F star [WASP-76](../wasp-76/README.md) every 43.4 hours. ESPRESSO spectra of two transits show iron vapour on its evening edge and none on its morning edge: iron condenses somewhere on the night side (Ehrenreich et al. 2020, [Nature 580, 597](https://doi.org/10.1038/s41586-020-2107-1)). That is a measurement at the planet's edges, not a map, so it is told in the text. The one lens is a brightness-temperature map from a published phase-curve fit.
+WASP-76b is an ultra-hot giant planet that orbits the F star [WASP-76](../wasp-76/README.md) every 43.4 hours. ESPRESSO spectra of two transits show iron vapour on its evening edge and none on its morning edge: iron condenses somewhere on the night side (Ehrenreich et al. 2020, [Nature 580, 597](https://doi.org/10.1038/s41586-020-2107-1)). That is a measurement at the planet's edges, not a map, so it is told in the text. The one dataset is a brightness-temperature map from a published phase-curve fit.
 
 **The map.** May et al. (2021, [AJ 162, 158](https://doi.org/10.3847/1538-3881/ac0e30); [arXiv:2107.03349](https://arxiv.org/abs/2107.03349)) observed a full orbit with Spitzer at 4.5 µm in April 2017 (program 13038). They fitted the planet with SPIDERMAN (Louden & Kreidberg 2018), a code that models a planet's brightness with spherical harmonics. Their best 4.5 µm model is a dipole centred on the substellar point: two coefficients, Y₀⁰ = 0.00063 and Y₁¹ = 0.00039, and a 0.67° offset (Table 4). The table is transcribed in [phase-curve.json](source/science/may-2021/phase-curve.json). The [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format hands those numbers to SPIDERMAN 1.0.3 itself, pinned in its own environment ([spiderman.ts](../../../packages/telescope/src/node/spiderman.ts)). SPIDERMAN evaluates the map on a 1° grid and integrates its light curve. The palette runs from 600 to 3,000 K in false colour.
 
@@ -19,7 +19,7 @@ WASP-76b is an ultra-hot giant planet that orbits the F star [WASP-76](../wasp-7
 
 **Orbit and rotation.** Ehrenreich et al. (2020, Extended Data Table 1) give the period, 1.80988198 days, a/R* 4.08, the 89.623° inclination and the transit time. That is 58080.626165 in BJD − 2,400,000, which lands 122 orbits after May et al.'s Spitzer transit to within 76 s. The radius ratio is 0.10852, which is 1.854 Jupiter radii; the mass is 0.894 Jupiter masses. The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked. The planet is drawn emissive.
 
-**Catalogue colour.** #f4c731, the lens palette at the paper's 2,699 K day side, the rule WASP-43b's colour follows.
+**Catalogue colour.** #f4c731, the dataset palette at the paper's 2,699 K day side, the rule WASP-43b's colour follows.
 
 ## Evidence
 

@@ -35,12 +35,12 @@ export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;
   geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera?:{framingScale?:number}};
   raster:SolidRasterGrid & Partial<Record<'observations'|'scientific'|'observedColors'|'surfaceObservations',readonly {id:string;focus?:unknown}[]>>;
-  presentation:{defaultLens:string};
+  presentation:{defaultDataset:string};
 }
 type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
 type SolidScene=ReturnType<typeof import('./solid/prepared-replay-source.ts').parseSolidReplayScene>;
 
-/** The terrestrial lane's default camera: the shared rule over the default lens's photograph frames. */
+/** The terrestrial lane's default camera: the shared rule over the default dataset's photograph frames. */
 export function solidCameraAngles(solarGeometry: SolarGeometry, config: Pick<SolidSceneConfig, 'namespace' | 'raster' | 'presentation'>, surfacesReport: unknown) {
   return prepareDefaultCameraAngles(solarGeometry, config.namespace, { observation: photographDirections(config.namespace, config, surfacesReport) });
 }
@@ -77,14 +77,14 @@ async function prepareSolidEpochFrame({ config, celestial, surfacesReport, frami
     systemTransform: frame.cssTransform };
 }
 
-/** The widest surface and pole images any lens binds to the banded leaves: the lane's assets.json names them, and their
+/** The widest surface and pole images any dataset binds to the banded leaves: the lane's assets.json names them, and their
  * files give the widths, so each leaf holds the widest at two texels per CSS pixel. */
-async function publishedLensImageWidths({ config, outputDirectory, publicDirectory }:{config:SolidSceneConfig;outputDirectory:string;publicDirectory:string}) {
+async function publishedDatasetImageWidths({ config, outputDirectory, publicDirectory }:{config:SolidSceneConfig;outputDirectory:string;publicDirectory:string}) {
   const path = resolve(outputDirectory, 'assets.json');
   const surfaces = Object.entries(requireRecord(requireRecord(JSON.parse(await readFile(path, 'utf8')), path).surfaces, `${path} surfaces`));
-  if (!surfaces.length) throw new TypeError(`${config.namespace}: ${path} lists no lens surfaces.`);
-  const widest = async (fields: readonly string[]) => Math.max(...await Promise.all(surfaces.flatMap(([lens, value]) => fields.map(async field =>
-    (await publishedImageSize({ publicDirectory, publicBase: config.publicBase }, requireString(requireRecord(value, `${path} ${lens}`)[field], `${path} ${lens}.${field}`), config.namespace)).width))));
+  if (!surfaces.length) throw new TypeError(`${config.namespace}: ${path} lists no dataset surfaces.`);
+  const widest = async (fields: readonly string[]) => Math.max(...await Promise.all(surfaces.flatMap(([dataset, value]) => fields.map(async field =>
+    (await publishedImageSize({ publicDirectory, publicBase: config.publicBase }, requireString(requireRecord(value, `${path} ${dataset}`)[field], `${path} ${dataset}.${field}`), config.namespace)).width))));
   return { mapPixelWidth: await widest(['url', 'url2x']), polesPixelWidth: await widest(['polesUrl', 'polesUrl2x']) };
 }
 
@@ -95,12 +95,12 @@ export async function prepareSolidScene({ config, celestial, outputDirectory, pu
   const bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[]=radial?.leaves ?? prepareSolidBodySurface({ id, radius: geometry.radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
       sourceWidth: config.raster.width, sourceHeight: config.raster.height,
       latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
-      poleTileSize: config.raster.poleSize, ...await publishedLensImageWidths({ config, outputDirectory, publicDirectory }) });
+      poleTileSize: config.raster.poleSize, ...await publishedDatasetImageWidths({ config, outputDirectory, publicDirectory }) });
   const rings = await prepareTerrestrialRings({ config, publicDirectory });
   const scene = { camera: epoch.camera, sky: epoch.sky, sun: epoch.sun,
     ...(rings ? { rings } : {}),
     ...(radial ? { surfaceTriangles: radial.faces.map(face => face.vertices.map(v => [v[1] * BASE_TILE, v[0] * BASE_TILE, v[2] * BASE_TILE])) } : {}),
-    ...(radial?.lensRanges ? { surfaceLensRanges: radial.lensRanges } : {}),
+    ...(radial?.datasetRanges ? { surfaceDatasetRanges: radial.datasetRanges } : {}),
     systemTransform: epoch.systemTransform,
     bodyLeaves };
   await writeFile(resolve(outputDirectory, 'scene.json'), `${JSON.stringify(scene)}\n`);
@@ -134,12 +134,12 @@ export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan
     throw new TypeError('Epoch refresh cannot bind a carrier that differs from its prepared source scene.');
   }
   const nextScene = { ...scene, ...epoch };
-  // Lens destinations are camera angles in the same frame, so they follow the refreshed camera.
+  // Dataset destinations are camera angles in the same frame, so they follow the refreshed camera.
   const focus = new Map((['observations','scientific','observedColors','surfaceObservations'] as const).flatMap(kind =>
-    (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus] as const)));
+    (config.raster[kind]??[]).filter(dataset=>dataset.focus).map(dataset=>[dataset.id,dataset.focus] as const)));
   const variants = focus.size === 0 ? definition.variants : definition.variants.map(variant => {
-    const lensId = (variant.when as {lensId?:string}|undefined)?.lensId;
-    return lensId !== undefined && focus.has(lensId) ? { ...variant, navigation: prepareScientificNavigation(solarGeometry, id, focus.get(lensId), epoch.camera) } : variant;
+    const datasetId = (variant.when as {datasetId?:string}|undefined)?.datasetId;
+    return datasetId !== undefined && focus.has(datasetId) ? { ...variant, navigation: prepareScientificNavigation(solarGeometry, id, focus.get(datasetId), epoch.camera) } : variant;
   });
   const nextDefinition = { ...definition, variants, camera: { ...definition.camera, ...epoch.camera }, sky: epoch.sky, sun: epoch.sun,
     tree: { ...definition.tree, nodes: nodes.map((node, index) => index === carriers[0] ? { ...node, style: `transform:${epoch.systemTransform}` } : node) } };
@@ -152,9 +152,9 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     ...(plan.rings ? [plan.rings.resource] : []),
     ...(lighting ? [{ key: 'lighting', url: lighting.url, pool: 'mounted' }] : []),
     ...surfaces.flatMap(s => [
-      { key: `surface:${s.id}`, url: s.surface.url, pool: s.id === config.presentation.defaultLens ? 'mounted' : 'lenses' },
-      { key: `poles:${s.id}`, url: requireString(s.polesUrl), pool: s.id === config.presentation.defaultLens ? 'mounted' : 'lenses' },
-      ...(s.shadowSurface ? [{ key: `shadow:${s.id}`, url: s.shadowSurface.url, pool: 'lenses' }] : []),
+      { key: `surface:${s.id}`, url: s.surface.url, pool: s.id === config.presentation.defaultDataset ? 'mounted' : 'datasets' },
+      { key: `poles:${s.id}`, url: requireString(s.polesUrl), pool: s.id === config.presentation.defaultDataset ? 'mounted' : 'datasets' },
+      ...(s.shadowSurface ? [{ key: `shadow:${s.id}`, url: s.shadowSurface.url, pool: 'datasets' }] : []),
     ]),
   ];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.bodyLeaves, ...(plan.rings?.leaves ?? [])].map(leaf => leaf.style)) });
@@ -188,10 +188,10 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     rotation: { kind: 'angle', source: 'view-sun', reference: 'prepared', baseDegrees: 0,
       zeroAtPole: false, property: `--${id}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
   const focus = new Map((['observations','scientific','observedColors','surfaceObservations'] as const).flatMap(kind =>
-    (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus] as const)));
+    (config.raster[kind]??[]).filter(dataset=>dataset.focus).map(dataset=>[dataset.id,dataset.focus] as const)));
   const variants = surfaces.flatMap(s => [false, true].map((shadows):PreparedVariant => ({
     ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(solarGeometry, id, focus.get(s.id), plan.camera)} : {}),
-    when: { lensId: s.id, shadows }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, ...(lighting ? ['lighting'] : []), ...(rings ? ['rings'] : [])],
+    when: { datasetId: s.id, shadows }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, ...(lighting ? ['lighting'] : []), ...(rings ? ['rings'] : [])],
     writes: [
       ...(rings ? [{ kind: 'texture' as const, target: index(rings), name: `--${id}-ring-image`, resource: 'rings', quoted: true }] : []),
       { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, quoted: true },
@@ -201,24 +201,24 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         value: surfaceModel(s.id) === model ? 'block' : 'none',
       })),
       { kind: 'style', target: index(materialRoot), name: `--${id}-billboard-color`, value: requireString(s.billboardColor) },
-      { kind: 'attribute', target: -1, name: 'data-lens', value: s.id },
+      { kind: 'attribute', target: -1, name: 'data-dataset', value: s.id },
     ],
     materials: !track ? [] : [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
       rotationEnabled: shadows, frameOverride: null, clearWhenHidden: true, fixedMode: 'full-phase-curvature' }],
   })));
-  function surfaceModel(lensId:string) {
-    const range=plan.surfaceLensRanges?.find(range=>range.lensId===lensId);
-    if(!range)throw new TypeError('Prepared surface model lacks its lens range.');
+  function surfaceModel(datasetId:string) {
+    const range=plan.surfaceDatasetRanges?.find(range=>range.datasetId===datasetId);
+    if(!range)throw new TypeError('Prepared surface model lacks its dataset range.');
     return plan.bodyLeaves[range.start].attributes?.['data-surface-model'];
   }
   const presentation = { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.sky, sun: plan.sun,
     assets: { entries, pools: [preparedResourcePool('mounted', entries),
-      ...(entries.some(entry => entry.pool === 'lenses')
-        ? [preparedResourcePool('lenses', entries, { retention: 'selection', capacity: 4, concurrency: 2 })] : [])],
+      ...(entries.some(entry => entry.pool === 'datasets')
+        ? [preparedResourcePool('datasets', entries, { retention: 'selection', capacity: 4, concurrency: 2 })] : [])],
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
     tree, variants, materials: track ? [track] : [], animations: [],
     ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles,
-      ...(plan.surfaceLensRanges ? { lensRanges: plan.surfaceLensRanges } : {}),
+      ...(plan.surfaceDatasetRanges ? { datasetRanges: plan.surfaceDatasetRanges } : {}),
       // XYZ source coordinates swap X/Y for CSS: outward faces are clockwise.
       ...(config.geometry.radialTerrain?.sourceTopology === 'open' ? { frontFace: 'clockwise' } : {}) } } : {}),
     viewBindings: [
@@ -230,5 +230,5 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const prepared = { ...presentation, materials: prepareMaterialTracks(presentation) };
   const validated=requirePreparedPresentation(prepared, { controls });
   requirePreparedResourceCatalog(prepared.assets);
-  return { ...validated, schema: 'cssearth-object-runtime@4', id, controls:requireObjectControls(controls) };
+  return { ...validated, schema: 'cssearth-object-runtime@5', id, controls:requireObjectControls(controls) };
 }

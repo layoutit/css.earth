@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-nebula-delivery@1",
+  "schema": "cssearth-nebula-delivery@2",
   "id": "omega-centauri",
   "method": "compiler",
   "request": {
@@ -32,8 +32,8 @@
     "arcsecPerUnit": 1
   },
   "sourceUrl": "https://www.eso.org/public/images/eso1119b/",
-  "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map.",
-  "defaultLens": "eso1119b",
+  "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical datasets share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map.",
+  "defaultDataset": "eso1119b",
   "framingRadiusUnits": 1650,
   "acceptedLabResult": "omega-centauri",
   "compactMethod": "compiler",

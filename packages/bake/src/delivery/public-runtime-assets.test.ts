@@ -4,7 +4,7 @@ import { collectRuntimeAssetUrls, stylesheetTexts } from '@cssearth/bake/deliver
 
 test('a body ships the images its stylesheet references, not only its prepared data', async () => {
   // A stylesheet image is a runtime asset: bakes that inventoried only prepared data dropped Europa's composition images,
-  // and the deploy stopped (No published asset hash). Those lenses are now withheld and their rules are gone; Saturn's
+  // and the deploy stopped (No published asset hash). Those datasets are now withheld and their rules are gone; Saturn's
   // stylesheet still draws scene images.
   const urls = collectRuntimeAssetUrls('saturn', ...await stylesheetTexts());
   assert.ok(urls.length > 0);

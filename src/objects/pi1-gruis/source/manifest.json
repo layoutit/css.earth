@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "pi1-gruis-pionier-2014-09",
@@ -25,7 +25,7 @@
       "coverage": "Posterior-mean maximum-entropy image convolved to the 2.1 milliarcsecond beam, 128 x 128 pixels of 0.4 milliarcseconds, of π¹ Gruis in the H band from four nights of September 2014. Reduced chi-squared 2.45 on squared visibilities and 1.06 on closure phases.",
       "width": 128,
       "height": 128,
-      "lensId": "pionier",
+      "datasetId": "pionier",
       "label": "PIONIER reconstruction",
       "sourceBinding": {
         "kind": "catalogued",
@@ -123,7 +123,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -204,7 +204,7 @@
       "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -227,7 +227,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -255,7 +255,7 @@
       "redistribution": "A fitted parameter with its method; no paper figures",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -283,7 +283,7 @@
       "generator": "packages/bake/authoring/pi1-gruis/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the lens's palette and percentile stretch."
+        "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the dataset's palette and percentile stretch."
       }
     }
   ],

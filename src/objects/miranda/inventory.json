@@ -219,6 +219,30 @@
     },
     {
       "location": "public",
+      "filename": "miranda-dataset-elevation.webp",
+      "bytes": 486,
+      "sha256": "4599701fe7bfb209a6829b1fabd4b65d06cdf6ef551a577e21c82eb1e72edb81"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-dataset-geology.webp",
+      "bytes": 284,
+      "sha256": "c46cbd670a7aa15c3fda60c5d034bdc1730a7cdce0c69a16b1f1e635bbbf5edd"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-dataset-normal.webp",
+      "bytes": 666,
+      "sha256": "8e89245c103ca523d7269b1f7f5f5919190c6c618947514c84c41f8ea03b3a1d"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-dataset-voyager-color.webp",
+      "bytes": 638,
+      "sha256": "9da8da4fb7b72a41f9ad8d449efc2ed121f3deb918a5c50116ea794f58275df1"
+    },
+    {
+      "location": "public",
       "filename": "miranda-elevation@2x.webp",
       "bytes": 1152836,
       "sha256": "d790d4f4429ba77feb4c18e5e55b197c852e37f2529499c8cb9cb8c0106841d1"
@@ -234,30 +258,6 @@
       "filename": "miranda-geology@2x.webp",
       "bytes": 64004,
       "sha256": "cd87961f4c7a1ce34f976ac7dfe95e06ca53a18375fdb936774efef99611a07d"
-    },
-    {
-      "location": "public",
-      "filename": "miranda-lens-elevation.webp",
-      "bytes": 486,
-      "sha256": "4599701fe7bfb209a6829b1fabd4b65d06cdf6ef551a577e21c82eb1e72edb81"
-    },
-    {
-      "location": "public",
-      "filename": "miranda-lens-geology.webp",
-      "bytes": 284,
-      "sha256": "c46cbd670a7aa15c3fda60c5d034bdc1730a7cdce0c69a16b1f1e635bbbf5edd"
-    },
-    {
-      "location": "public",
-      "filename": "miranda-lens-normal.webp",
-      "bytes": 666,
-      "sha256": "8e89245c103ca523d7269b1f7f5f5919190c6c618947514c84c41f8ea03b3a1d"
-    },
-    {
-      "location": "public",
-      "filename": "miranda-lens-voyager-color.webp",
-      "bytes": 638,
-      "sha256": "9da8da4fb7b72a41f9ad8d449efc2ed121f3deb918a5c50116ea794f58275df1"
     },
     {
       "location": "public",
@@ -298,14 +298,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 373,
-      "sha256": "be5aa277804b0cb37a874de0fdbaa35f8884c6cd45a7d56782168022c76c32a8"
+      "bytes": 376,
+      "sha256": "469eab95003337ac4c4088651b6b0ab80224c8cb4844d926afb1c2fd21c952c6"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 86093,
-      "sha256": "18c1a60aabb6a6cc5fbf6d7754bfc8793187a49e48b61883642d16eae4a5a577"
+      "bytes": 86105,
+      "sha256": "38c552057a902d727da37cb314b6ba2136fd9fe7b32c60010944093ee718460d"
     },
     {
       "location": "prepared",
@@ -317,25 +317,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2470,
-      "sha256": "371133630f78a6786097fb00da7346c9e72c72c2e9615c7dd1f8ec74853345f3"
+      "sha256": "a18de4c921b608babfa0606fecca48770da9df16e19f99b5dadcc70229868680"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 4019,
-      "sha256": "a3ce214a1675990bd2935da585d90329c82581d41243fefda90d57559348073d"
+      "bytes": 4042,
+      "sha256": "f587e216c95d67086e3ef8580c7a280c809442be760866740555462645746044"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 5508,
+      "sha256": "18e16b2cc25ce1aa28b0905b0c5e4b62ffd4f29b5f0e7ce9667fa294261dfa34"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 587,
       "sha256": "dd8fc6999113a96cdcb302d7b9cd8554f68bc4017dd0cd15120abc479fa54c96"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 5485,
-      "sha256": "5116fb48379b53d0751b8e98b8bfe6c40fa8ac345d8930a22ef54a4d8d83c916"
     },
     {
       "location": "prepared",
@@ -376,8 +376,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 610191,
-      "sha256": "b11c3638dd745b26d268d9892d32ece7a7a931b8675655937ddbb23985c3c536"
+      "bytes": 610265,
+      "sha256": "316c3bbd37ba73b2e3f910036fafaa6de87f4b9833c2c3901f93d15cacf16a86"
     },
     {
       "location": "prepared",

@@ -77,7 +77,7 @@ SOURCE summary, EVIDENCE index or body USAGE guide.
 ### Investigation ledger
 
 `investigations.json`, beside the README, is the object's notebook: every source,
-route, lens or frame examined, including trials that failed. Each entry has an
+route, dataset or frame examined, including trials that failed. Each entry has an
 `id`, a `status` (`included`, `excluded`, `unresolved` or `deferred`) and a
 `finding`; `subject`, `evidence` and `revisitWhen` (what would reopen it) are
 optional notes. Git holds its history; entries carry no commits or check dates.
@@ -221,7 +221,7 @@ lighting before making comparison claims.
 what visual content should agree, and what defect a difference could reveal.
 Pixelmatch is conditional on that comparison; it is not a required deliverable
 for every visual PR. For example, checking that an existing Monochrome view is
-unchanged after adding a lens is meaningful. Comparing Monochrome with false
+unchanged after adding a dataset is meaningful. Comparing Monochrome with false
 color, two different filters, or a photograph with an elevation map is not a
 fidelity check: those datasets are supposed to look different. Do not run such
 comparisons merely to produce a mismatch count.

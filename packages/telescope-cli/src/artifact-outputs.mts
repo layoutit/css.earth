@@ -61,15 +61,15 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const next=await listArtifactOutputs(resolve(artifact,'..',relativePath));
     return {...next,artifact:'physical-grid-volume',via:artifact};
   }
-  if(raw.schema==='cssearth-object@1'){
+  if(raw.schema==='cssearth-object@2'){
     const type=raw.type,target=typeof raw.id==='string'?raw.id:'physical object';
-    if(type!=='point-field'&&type!=='density-volume'&&type!=='volume-lens-bank')throw new TypeError('Object is not a supported physical point field, density volume or volume lens bank');
-    const kind=type==='point-field'?'points':type==='density-volume'?'volume':'volume-lens-bank';let issue:string|undefined;
+    if(type!=='point-field'&&type!=='density-volume'&&type!=='volume-dataset-bank')throw new TypeError('Object is not a supported physical point field, density volume or volume dataset bank');
+    const kind=type==='point-field'?'points':type==='density-volume'?'volume':'volume-dataset-bank';let issue:string|undefined;
     try{await inspectSpatialObject(artifact);}catch(error){issue=error instanceof Error?error.message:String(error);}
     return {artifact:'physical-object',target,source:artifact,outputs:[
       kind==='points'?(issue?unavailable('points',`Physical point-field prerequisites are unavailable: ${issue}`):available('points','The existing prepared physical point field, renderer resources, frame, provenance and licence were verified.')):unavailable('points','This object is not a point field.'),
       kind==='volume'?(issue?unavailable('volume',`Physical density-volume prerequisites are unavailable: ${issue}`):available('volume','The existing prepared physical density volume, renderer resources, frame, provenance and licence were verified.')):unavailable('volume','This object is not a density volume.'),
-      kind==='volume-lens-bank'?(issue?unavailable('volume-lens-bank',`Physical volume-lens-bank prerequisites are unavailable: ${issue}`):available('volume-lens-bank','The existing prepared physical volume lens bank, selectable grids, body attachment, renderer resources, frame and provenance were verified.')):unavailable('volume-lens-bank','This object is not a volume lens bank.')
+      kind==='volume-dataset-bank'?(issue?unavailable('volume-dataset-bank',`Physical volume-dataset-bank prerequisites are unavailable: ${issue}`):available('volume-dataset-bank','The existing prepared physical volume dataset bank, selectable grids, body attachment, renderer resources, frame and provenance were verified.')):unavailable('volume-dataset-bank','This object is not a volume dataset bank.')
     ]};
   }
   if(raw.schema!==PRODUCT_RECORD_SCHEMA)throw new TypeError('Expected a telescope delivery, product record, or supported physical object.json');

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "rigel",
   "displayName": "Rigel",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere; darkening toward the edge from a model atmosphere.",
-        "thumbnail": "rigel-lens-color.webp",
+        "thumbnail": "rigel-dataset-color.webp",
         "surface": "rigel-surface-color@2x.webp",
         "poles": "rigel-poles-color@2x.webp",
         "source": {

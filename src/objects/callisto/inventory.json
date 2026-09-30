@@ -9,6 +9,24 @@
     },
     {
       "location": "public",
+      "filename": "callisto-dataset-enhanced.webp",
+      "bytes": 1410,
+      "sha256": "df2588e5d850855d13163b2a1f6f43cbcb859a9b67d3cacf56425ca079ba9edc"
+    },
+    {
+      "location": "public",
+      "filename": "callisto-dataset-infrared.webp",
+      "bytes": 112,
+      "sha256": "c9db4918ac7bdf66bc9b24b421dc29181120de07c90905653320b5bf00cd8acc"
+    },
+    {
+      "location": "public",
+      "filename": "callisto-dataset-normal.webp",
+      "bytes": 734,
+      "sha256": "78f4d878e659c7b9b0fce8169fe1d094b8da1ce2500b12fcd26c14c6e0836d17"
+    },
+    {
+      "location": "public",
       "filename": "callisto-enhanced@2x.webp",
       "bytes": 568884,
       "sha256": "4010d2334042d485a9d2f723f6727ca9e72de10432b3a62ee376985e8aac5a21"
@@ -24,24 +42,6 @@
       "filename": "callisto-infrared@2x.webp",
       "bytes": 236610,
       "sha256": "c7b4e636dd0444c96a2ac1737061d46ef37fbdd3874e841e7c9730d6383fe79a"
-    },
-    {
-      "location": "public",
-      "filename": "callisto-lens-enhanced.webp",
-      "bytes": 1410,
-      "sha256": "df2588e5d850855d13163b2a1f6f43cbcb859a9b67d3cacf56425ca079ba9edc"
-    },
-    {
-      "location": "public",
-      "filename": "callisto-lens-infrared.webp",
-      "bytes": 112,
-      "sha256": "c9db4918ac7bdf66bc9b24b421dc29181120de07c90905653320b5bf00cd8acc"
-    },
-    {
-      "location": "public",
-      "filename": "callisto-lens-normal.webp",
-      "bytes": 734,
-      "sha256": "78f4d878e659c7b9b0fce8169fe1d094b8da1ce2500b12fcd26c14c6e0836d17"
     },
     {
       "location": "public",
@@ -280,14 +280,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 304,
-      "sha256": "4f363379df34e58c1d59973c7ceb1ca873e2d1167b4e0f6ee1ece4a0b0c7dec6"
+      "bytes": 307,
+      "sha256": "3c551fb63b41ce9486276fdd45b0a382c4f339e0620c61c2dd367974510c5455"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84713,
-      "sha256": "bb4925ed5444e4a09f216e29d17e2857421b9bc5010a8d11c69bf64f21d4463d"
+      "bytes": 84722,
+      "sha256": "11459e521fcca3e73ce2a249296906c2403b8f2b36beee6330b5528c7251df30"
     },
     {
       "location": "prepared",
@@ -299,25 +299,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2315,
-      "sha256": "d7f5f2b34c72ebfe69ba5b27f17a25e4faaf8dd6358e798a7562c7a37e2a5242"
+      "sha256": "5518299b36c95efef65e9335f1ea17ad8ff0f1f4e23d0b5904ebc747a13e2c8b"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1376,
-      "sha256": "e66d2a9447653732ac6e1e33fecda1f6c869bfae9e206b7b3769eba791d61432"
+      "bytes": 1396,
+      "sha256": "7aede687c1c76f5f1d8afc6f82dc6bd4063adb91eb0eed8e30934bca87ff6252"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 2378,
+      "sha256": "e3adf602466e2d96783d5cd2986c6f2b7eaa2e40947fa862ae4f67f612528279"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 594,
       "sha256": "33f91dd8368f6962914cf98f20aeb22e5bc9537f01af22f761e09bf0dc5ed9bc"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 2358,
-      "sha256": "acefbc1b421f7cb3bf0d7f44dc1da9ac9544711f957a4a11a6cf937211ad901a"
     },
     {
       "location": "prepared",
@@ -352,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 576350,
-      "sha256": "9a75cdb81eef7a747a0b6e993124191eeadeab8fea1baf7947f50dffba008324"
+      "bytes": 576409,
+      "sha256": "18e47c1f7e7f06a9ad85bdfa1aee54b248b43e49e784f1f55efd81cc6e8dc1e3"
     },
     {
       "location": "prepared",

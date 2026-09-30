@@ -28,35 +28,35 @@ TRAPPIST-1c is measured. Longitude 0 faces the star.
 depth of 318 to 389 ppm depending on the phase-curve shape the fit assumes, a brightness temperature of 353 to 379 K through the
 F1500W response and a model of the star. Its four eclipse visits alone give 331 to 463 ppm.
 
-**The lens is a model.** The day-night pattern of c is not measured: with its offset free the phase-curve fit runs to the edge of
+**The dataset is a model.** The day-night pattern of c is not measured: with its offset free the phase-curve fit runs to the edge of
 what it allows, and held symmetric its day-night amplitude fits to zero, so no map is fitted ([ledger](investigations.json)). The
-lens instead draws the simplest surface the one measurement allows: a bare rock with no atmosphere, whose ground re-radiates the
+dataset instead draws the simplest surface the one measurement allows: a bare rock with no atmosphere, whose ground re-radiates the
 starlight it absorbs, T cos(z)^(1/4) at an angle z from the point under the star and nothing at night (the equilibrium temperature of
 [Cowan & Agol 2011](https://doi.org/10.1088/0004-637X/726/2/82), eq. 3), the model TRAPPIST-1b's light curve supports. Its one
 number is set so the rock shows c's eclipse depth
 ([`c-dayside-15um.json`](source/science/jwst-trappist-1/c-dayside-15um.json)) through the F1500W response and a BT-Settl model of the
 star, with [`bare-rock.ts`](../../../packages/bake/src/objects/raster/eclipse-map/bare-rock.ts): 392 to 421 K under the star for 318 to 389 ppm, drawn
 at 407 K for the middle of the range. A perfectly black rock at c's distance would reach 480 K (Agol's 2566 K star at 28.549 stellar
-radii), so the measured day side is dimmer than a black rock's. The lens is labelled a model on the page.
+radii), so the measured day side is dimmer than a black rock's. The dataset is labelled a model on the page.
 
-**Illustration lens.** NASA's artist's concept of TRAPPIST-1c: the map its [Eyes on Exoplanets](https://eyes.nasa.gov/apps/exo/) app wraps around the planet ([`TRAPPIST-1_c.jpg`](https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_c.jpg), 2,048 × 1,024, named in the app's texture table), credited NASA/JPL-Caltech. NASA says each planet in the app shows "an artist's concept of what it might look like" ([tutorial](https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/)); the file carries no credit or date of its own, and NASA does not say how it was made. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in the map was observed. Preparation resizes it unchanged onto the sphere with its left edge at 0° longitude ([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)), so its longitudes are arbitrary. It is a second lens: Rock model stays the default. It is listed in the package's illustration lenses, so it never counts as imagery. The planet is drawn self-luminous, so the map is shown evenly bright, without its star's shading, as the Rock model lens is. An earlier TRAPPIST-1 set, NASA/JPL-Caltech maps made for NOAA's [Science On a Sphere](https://sos.noaa.gov/catalog/datasets/exoplanet-trappist-1c/) in March 2017, is different artwork and is not used; this package uses the map NASA's app shows today. NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+**Illustration dataset.** NASA's artist's concept of TRAPPIST-1c: the map its [Eyes on Exoplanets](https://eyes.nasa.gov/apps/exo/) app wraps around the planet ([`TRAPPIST-1_c.jpg`](https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_c.jpg), 2,048 × 1,024, named in the app's texture table), credited NASA/JPL-Caltech. NASA says each planet in the app shows "an artist's concept of what it might look like" ([tutorial](https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/)); the file carries no credit or date of its own, and NASA does not say how it was made. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in the map was observed. Preparation resizes it unchanged onto the sphere with its left edge at 0° longitude ([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)), so its longitudes are arbitrary. It is a second dataset: Rock model stays the default. It is listed in the package's illustration datasets, so it never counts as imagery. The planet is drawn self-luminous, so the map is shown evenly bright, without its star's shading, as the Rock model dataset is. An earlier TRAPPIST-1 set, NASA/JPL-Caltech maps made for NOAA's [Science On a Sphere](https://sos.noaa.gov/catalog/datasets/exoplanet-trappist-1c/) in March 2017, is different artwork and is not used; this package uses the map NASA's app shows today. NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
 
 ## Evidence
 
-- Run of 2026-09-24: [`node tools/prepare/prepare-object.mts`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) added the Illustration lens; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../tests/objects/interpretation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the lens opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
+- Run of 2026-09-24: [`node tools/prepare/prepare-object.mts`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) added the Illustration dataset; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../tests/objects/interpretation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the dataset opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
 
 - `source.test.mts` checks the pins, and that the planet turns synchronously
   with longitude 0 on its star and orbits it;
   [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
-- `lens-fits.test.mts` runs the shipped recipe and checks that the
+- `dataset-fits.test.mts` runs the shipped recipe and checks that the
   drawn rock shows the middle of the measured eclipse depth and is dark at night.
 - Driven in a real browser: the seven orbits and labels draw around the star in the system view. The rendered
-  [day side](source/reference/rendered-model-day.png) and [terminator](source/reference/rendered-model-terminator.png) show the model lens.
+  [day side](source/reference/rendered-model-day.png) and [terminator](source/reference/rendered-model-terminator.png) show the model dataset.
 
 ## Known problems
 
-**The lens is a model, not an observation.** Size, mass, orbit and the dayside brightness above are measured; the surface and its
+**The dataset is a model, not an observation.** Size, mass, orbit and the dayside brightness above are measured; the surface and its
 day-night pattern are not. A dark night is the rock's assumption: a thin atmosphere carrying some heat round would also fit the one
 depth, and would draw a cooler day and a warmer night. The depth's range comes from the phase-curve shapes the joint fit can assume,
 whose separate values were not kept.
@@ -64,6 +64,6 @@ whose separate values were not kept.
 **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations the masses come
 from are not drawn.
 
-**The Illustration lens is art, not data.** Its colours, clouds and terrain are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.
+**The Illustration dataset is art, not data.** Its colours, clouds and terrain are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

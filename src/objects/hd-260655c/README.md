@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 260655. Its orbit and size follow Luque e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.7060868 d Luque et al. 2022 (2022A&A...664A.199L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL_2022): a/R* 23.37; Luque et al. 2022 (2022A&A...664A.199L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL_2022): inclination 87.79 degrees Luque et al. 2022 (2022A&A...664A.199L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL_2022): e 0.038 Luque et al. 2022 (2022A&A...664A.199L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL_2022): omega -25 degrees, stored as 335 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460277.804123 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-260655's measured colour (#ffbd87, the colour lens of hd-260655 (src/objects/hd-260655/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by hd-260655's measured colour (#ffbd87, the colour dataset of hd-260655 (src/objects/hd-260655/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 260655's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (45, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

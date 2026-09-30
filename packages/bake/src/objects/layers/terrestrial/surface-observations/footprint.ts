@@ -100,14 +100,14 @@ export function cameraFrame(options: CameraFrameOptions): ObservationFrame {
   }
   nadir.sort((a, b) => a - b);
   const footprint = { pixelAngleMicroradians: angle * 1e6, nadirMedianMeters: nadir[Math.floor(nadir.length / 2)] ?? NaN, nadirMinimumMeters: nadir[0] ?? NaN, sampledPixels: nadir.length };
-  // A contributor on a continuous surface lies within one pixel diagonal of the sampled point; the diagonal stretches with emission up to the lens's limit.
+  // A contributor on a continuous surface lies within one pixel diagonal of the sampled point; the diagonal stretches with emission up to the dataset's limit.
   const emissionLimit = limits.maximumEmissionDegrees * Math.PI / 180;
   const diagonal = (i: number) => geometry.rangeMeters(i) * angle * Math.sqrt(1 + 1 / Math.cos(Math.min(geometry.emission(i), emissionLimit)) ** 2);
   const { maximumSeparationMeters, maximumSeparationFootprints } = limits;
   const separation: number | FootprintSeparation = maximumSeparationFootprints === undefined ? maximumSeparationMeters ?? NaN : { footprints: maximumSeparationFootprints, diagonal };
   const eye = camera.positionMeters, tolerance = limits.visibilityToleranceMeters;
   // The usable disc is what the footprint accepts from a pixel on its own: a surface point, the archive's verdict, the emission limit
-  // and a photometric gain. Measured once, on first use, for a lens that weights its frames by it.
+  // and a photometric gain. Measured once, on first use, for a dataset that weights its frames by it.
   let contour: ContourDistances | undefined;
   const usable = (i: number) => geometry.reject(i) === null && image.reject(i) === null && geometry.emission(i) <= emissionLimit &&
     photometry.gain(geometry.incidence(i), geometry.emission(i), geometry.phase(i)) !== null;

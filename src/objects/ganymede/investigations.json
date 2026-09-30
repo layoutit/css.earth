@@ -150,7 +150,7 @@
       "id": "sim3237-map-sheet-colors",
       "subject": "Printed SIM 3237 map sheet unit colors",
       "status": "unresolved",
-      "finding": "The map sheet PDF fills units with CMYK process colors; its unit boxes were not matched one by one against the GIS colors. The lens uses the GIS project's RGB colors.",
+      "finding": "The map sheet PDF fills units with CMYK process colors; its unit boxes were not matched one by one against the GIS colors. The dataset uses the GIS project's RGB colors.",
       "revisitWhen": "The sheet's Description of Map Units boxes are decoded and compared unit by unit with the GIS colors.",
       "evidence": [
         "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf"

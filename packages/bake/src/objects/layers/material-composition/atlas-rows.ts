@@ -28,7 +28,7 @@ async function atlasGrid(variant: AtlasRowVariant, publicDirectory: string) {
   return { sourceUrl, sourcePath, width, height, pixels, frames, scaleX, scaleY, strideX, rowHeight, rowWidth };
 }
 
-/** One frame alone, for a bank that only ever shows that frame (a lens with shadows off, flood lit): its whole cell,
+/** One frame alone, for a bank that only ever shows that frame (a dataset with shadows off, flood lit): its whole cell,
  * gutter included, so the frame samples the same pixels it did inside its row. */
 export async function prepareAtlasStill({ variant, resource, publicDirectory, frame, native = false }: {variant: AtlasRowVariant; resource: string; publicDirectory: string; frame: number; native?: boolean}) {
   const grid = await atlasGrid(variant, publicDirectory), { sourceUrl, sourcePath, width, height, pixels, frames, strideX, rowHeight } = grid;

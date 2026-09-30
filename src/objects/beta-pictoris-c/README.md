@@ -12,7 +12,7 @@ Beta Pictoris c is a giant planet 2.7 au from [Beta Pictoris](../beta-pictoris/R
 
 **Rotation.** Not measured; the display axis is the orbit normal and nothing turns.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray, self-luminous.
+**Shape dataset.** A sphere of the model radius in the shared neutral gray, self-luminous.
 
 ## Evidence
 

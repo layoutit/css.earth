@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "ce-tauri",
   "displayName": "CE Tauri",
@@ -47,14 +47,14 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "pionier-2016-12",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "pionier-2016-12",
     "controls": [
       {
         "id": "pionier-2016-11",
         "label": "Surface images",
-        "thumbnail": "ce-tauri-lens-pionier-2016-11.webp",
+        "thumbnail": "ce-tauri-dataset-pionier-2016-11.webp",
         "surface": "ce-tauri-surface-pionier-2016-11@2x.webp",
         "poles": "ce-tauri-poles-pionier-2016-11@2x.webp",
         "source": {
@@ -122,7 +122,7 @@
       {
         "id": "pionier-2016-12",
         "label": "Surface images",
-        "thumbnail": "ce-tauri-lens-pionier-2016-12.webp",
+        "thumbnail": "ce-tauri-dataset-pionier-2016-12.webp",
         "surface": "ce-tauri-surface-pionier-2016-12@2x.webp",
         "poles": "ce-tauri-poles-pionier-2016-12@2x.webp",
         "source": {
@@ -191,7 +191,7 @@
         "id": "color",
         "label": "Color",
         "qualification": "Colour from a measured spectrum of the star (Crimean photoelectric). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere.",
-        "thumbnail": "ce-tauri-lens-color.webp",
+        "thumbnail": "ce-tauri-dataset-color.webp",
         "surface": "ce-tauri-surface-color@2x.webp",
         "poles": "ce-tauri-poles-color@2x.webp",
         "source": {

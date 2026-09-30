@@ -56,7 +56,7 @@ Current manifests and presentation recipes use object-owned source evidence. His
 
 ### Isolated application delivery proof
 
-This bounded gate bundles the actual application preparation entrypoint, copies declared object inputs, relocates only `@cssearth/bake`, and provides no lab tree. A filesystem guard blocks lab reads and `fetch` is disabled. It bakes M42 (compiler), M2–9 (symmetry) and LMC (density), verifies resource hashes, then repeats each with `--if-missing`. LMC retains its manifest-pinned lens metadata; no prepared images are supplied. Each invocation has a three-minute deadline. This proves these three delivery paths, not every scientific reconstruction.
+This bounded gate bundles the actual application preparation entrypoint, copies declared object inputs, relocates only `@cssearth/bake`, and provides no lab tree. A filesystem guard blocks lab reads and `fetch` is disabled. It bakes M42 (compiler), M2–9 (symmetry) and LMC (density), verifies resource hashes, then repeats each with `--if-missing`. LMC retains its manifest-pinned dataset metadata; no prepared images are supplied. Each invocation has a three-minute deadline. This proves these three delivery paths, not every scientific reconstruction.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -85,13 +85,13 @@ The local runner reads the workflow; it does not maintain a second unit-test sel
 
 The complete lab suite includes real density geometry, prepared imagery, source registrations and saved native caches. `pnpm test:lab` restores the assets stage first. Some tests additionally require the specific completed research fixtures named in their source; missing fixtures must be reported rather than replaced with fabricated results.
 
-The saved-output `browser-candidate-published` command checks real M42/M45 lens switching, actual retained scene nodes, delayed bitmap decoding, source races and camera/lens/toggle settings after refresh. It installs its write guard before navigation and uses a fresh browser context. Screenshots are evidence for inspection, not an automatic visual-acceptance assertion. Other browser commands may deliberately process data; inspect their prerequisites and authorization before running them.
+The saved-output `browser-candidate-published` command checks real M42/M45 dataset switching, actual retained scene nodes, delayed bitmap decoding, source races and camera/dataset/toggle settings after refresh. It installs its write guard before navigation and uses a fresh browser context. Screenshots are evidence for inspection, not an automatic visual-acceptance assertion. Other browser commands may deliberately process data; inspect their prerequisites and authorization before running them.
 
 The historical multi-part LMC control gate requires a compatible multi-part saved result. A neutral LMC controls check or a single-part reconstruction does not satisfy that material/solo-control gate. Keep that fixture gap explicit.
 
 ## Explicit cold replay
 
-The bounded cold gate is deliberately outside routine unit-test discovery. It runs selected compiler/sampled deliveries in isolated temporary roots with declared compact inputs and a per-object deadline, then checks fields, stars, frames, lenses and output bytes. Its current object set is M42, Helix, M45, M8 and M1; it is not an all-seven-delivery claim. LMC and M2–9 use their separate density/symmetry replay paths and checks.
+The bounded cold gate is deliberately outside routine unit-test discovery. It runs selected compiler/sampled deliveries in isolated temporary roots with declared compact inputs and a per-object deadline, then checks fields, stars, frames, datasets and output bytes. Its current object set is M42, Helix, M45, M8 and M1; it is not an all-seven-delivery claim. LMC and M2–9 use their separate density/symmetry replay paths and checks.
 
 From a clean source checkout with the tracked compact delivery inputs:
 

@@ -14,7 +14,7 @@
     },
     {
       "id": "cassini-n1831469816",
-      "subject": "Cassini ISS frame N1831469816_1 in the Monochrome lens",
+      "subject": "Cassini ISS frame N1831469816_1 in the Monochrome dataset",
       "status": "excluded",
       "finding": "It sees Telesto as a 147° phase crescent with every sample at 79–80° incidence; its median value is 0.151 against 0.54–0.74 in the other frames, and no overlap reaches it.",
       "revisitWhen": "An overlapping frame can set its level, or photometry corrects values at that incidence.",
@@ -82,7 +82,7 @@
       "id": "pia07697-composite",
       "subject": "NASA PIA07697 color composite",
       "status": "excluded",
-      "finding": "The retained survey identifies this as a perspective illustration. The selected false-color lens uses original calibrated bands and their individual released cameras instead.",
+      "finding": "The retained survey identifies this as a perspective illustration. The selected false-color dataset uses original calibrated bands and their individual released cameras instead.",
       "revisitWhen": "The composited pixels have a documented camera/projection and independent coverage that supports a mapped source.",
       "evidence": [
         "https://science.nasa.gov/resource/a-closer-look-at-telesto-false-color/"

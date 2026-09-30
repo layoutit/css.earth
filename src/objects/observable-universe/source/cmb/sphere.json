@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-map-sphere-source@1",
+  "schema": "cssearth-map-sphere-source@2",
   "id": "cmb",
   "name": "Cosmic microwave background",
   "source": "planck-2018-smica-cmb",
@@ -49,7 +49,7 @@
   },
   "datasets": {
     "default": "cutaway",
-    "lenses": [
+    "datasets": [
       {
         "id": "cutaway",
         "view": "cutaway",

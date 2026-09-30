@@ -21,9 +21,9 @@ The [26 September 2026 browser and delivery record](evidence/showcase/browser.js
 
 The [OPAL release](https://archive.stsci.edu/hlsp/opal) supplies eleven RGB maps here: 19 January 2015, 9 February 2016, 3 April 2017, 17 April 2018, 26 June 2019, 24 August 2020, 4 September 2021, 12 November 2022, 5 January 2024, 19 November 2024 and 11 December 2025. Dates come from each release's `DATE-OBS`. There is no 2023 release in this sequence; two observations belong to 2024. The existing dataset stepper presents those dates.
 
-Each provider RGB image keeps the intersection of its three component FITS footprints. Polar-connected zero fill and non-finite values are gaps; isolated dark measured pixels remain observations. Planetographic rows are mapped onto the existing oblate mesh before packing. F395N, F502N and F631N provide the channels, except January 2024 uses F658N for red. Provider colour processing also varies, so this is a morphological comparison, not a calibrated colour trend or a measurement of the Great Red Spot's shrinkage. The original colour lens remains the opening view.
+Each provider RGB image keeps the intersection of its three component FITS footprints. Polar-connected zero fill and non-finite values are gaps; isolated dark measured pixels remain observations. Planetographic rows are mapped onto the existing oblate mesh before packing. F395N, F502N and F631N provide the channels, except January 2024 uses F658N for red. Provider colour processing also varies, so this is a morphological comparison, not a calibrated colour trend or a measurement of the Great Red Spot's shrinkage. The original colour dataset remains the opening view.
 
-The magnetic lens is [JRM33](https://doi.org/10.1029/2021JE007055) through degree/order 13, evaluated with the unchanged [PSH community implementation](https://github.com/rjwilson-LASP/PSH) at the 1-bar ellipsoid (71,492 × 66,854 km). The field is radial in spherical coordinates, at System III east longitudes. The 720 × 360 grid follows the mesh's parametric latitude, not planetographic latitude. Its range is −13.94 to 21.68 gauss; the fixed −25 to 25 scale is linear, blue inward, red outward and neutral at zero. Zero is valid even at a pole. This inferred internal field excludes external currents.
+The magnetic dataset is [JRM33](https://doi.org/10.1029/2021JE007055) through degree/order 13, evaluated with the unchanged [PSH community implementation](https://github.com/rjwilson-LASP/PSH) at the 1-bar ellipsoid (71,492 × 66,854 km). The field is radial in spherical coordinates, at System III east longitudes. The 720 × 360 grid follows the mesh's parametric latitude, not planetographic latitude. Its range is −13.94 to 21.68 gauss; the fixed −25 to 25 scale is linear, blue inward, red outward and neutral at zero. Zero is valid even at a pole. This inferred internal field excludes external currents.
 
 The [model recipe](source/preparation/magnetic.json) and [pinned upstream tool](../../../packages/telescope/toolchains/magnetic-toolchain.json) reproduce the numeric input. [Observed-map checks](../../../packages/bake/src/objects/layers/observed-surfaces/observed-polar.test.mts) exercise the RGB intersection, retained date control, valid zero field and neutral palette midpoint. Magnetic textures are lossless. Both models and observations are prepared before mounting; the shared runtime only selects their files.
 
@@ -130,13 +130,13 @@ not an input to this shared runtime.
 <details>
 <summary>Surface observations and polar reconstruction</summary>
 
-## Surface lenses
+## Surface datasets
 
 The Hubble OPAL Cycle 32 high-level science products observed on 11 December
 2025 provide two single-band global maps:
 
-- `F275W` at 275 nm for the ultraviolet lens.
-- `FQ889N` at 889 nm for the methane-band lens.
+- `F275W` at 275 nm for the ultraviolet dataset.
+- `FQ889N` at 889 nm for the methane-band dataset.
 
 Both FITS products are single-band measurements from 11 December 2025.
 Preparation preserves the measured values, including dark and finite negative
@@ -210,7 +210,7 @@ minimum presentation width. The model preserves every measured radial boundary
 as prepared data, their mapped order, and the optical-depth ordering, but it is
 explicitly a visibility presentation rather than a claim that the rings would
 appear this bright to a nearby unaided observer. The body-specific ultraviolet
-and methane surface lenses do not recolor the ring measurements.
+and methane surface datasets do not recolor the ring measurements.
 The single prepared composite prevents source-thickness presentation from
 multiplying a component's opacity while retaining the measured component
 boundaries and relative brightness model.

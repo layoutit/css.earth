@@ -15,7 +15,7 @@ of any star in this application. Gaia publishes no radial velocity for it — th
 **Radius and mass.** 0.1192 solar radii (82,927 km) and 0.0898 +/- 0.0023 solar masses, from Agol et al. (2021, PSJ 2, 1), who
 derive the radius from the photodynamic stellar density and the mass from the Mann et al. (2019) relation.
 
-**Colour lens.** Gaia measured this star's BP/RP spectrum, but publishes the *sampled* product only for brighter sources; at G =
+**Colour dataset.** Gaia measured this star's BP/RP spectrum, but publishes the *sampled* product only for brighter sources; at G =
 15.62 only the basis-function coefficients are released. They are pinned as
 `source/photometry/gaia-dr3-xp-continuous.csv` and sampled here onto the archive's own
 336-1020 nm grid with GaiaXPy, the archive's library, by
@@ -46,7 +46,7 @@ the shallow eclipse of b and c together, the star's own flares, and the detector
 the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](../trappist-1b/README.md)'s temperature map and
 [TRAPPIST-1c](../trappist-1c/README.md)'s measured dayside come from the same data.
 
-**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this lens's prepared colour, #ffcd6a.
+**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this dataset's prepared colour, #ffcd6a.
 
 ## Evidence
 
@@ -58,7 +58,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 - Driven in a real browser: the system view draws the seven orbits, markers and labels around the star. The orbits are inclined
   89.7 to 89.9 degrees with the node at celestial north, so from the default angle they project onto a single line — the geometry
   that makes these planets transit.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`tests/contract/object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts)) checks that the catalogue colour #ffcd6a is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`tests/contract/object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts)) checks that the catalogue colour #ffcd6a is the colour dataset's prepared colour.
 
 ## Known problems
 

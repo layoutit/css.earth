@@ -10,13 +10,13 @@ WASP-121 (TOI-495, IAU name Dilmun) is an F6 star in Puppis, 263 parsecs away. I
 - **Limb:** the quadratic law Claret (2017, A&A 600, A30) computes from PHOENIX models for the TESS band, read at Evans-Soma et al.'s 6,481 K and log g 4.23: u1 0.319, u2 0.223. The table gives solar metallicity only; the star is at [Fe/H] +0.11. A model, stated as one.
 - **Rotation:** Bourrier et al. (2020, A&A 635, A205) measure the star's inclination (8.1 +3.0/−2.6°, if its north pole is the visible one) and the planet's nearly polar 3D obliquity (88.1 ± 0.25°). The orbit's position angle on the sky is unmeasured, so the axis has no sky direction here; the display axis is celestial north in the plane of the sky (`source/preparation/rotation.json`).
 
-Catalogue colour: #f1efff, this lens's prepared colour.
+Catalogue colour: #f1efff, this dataset's prepared colour.
 
 ## Evidence
 
 Run of 2026-09-23 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour lens's prepared colour.
+- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue colour is the colour dataset's prepared colour.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places WASP-121 and WASP-121b in one system.
 
 ## Known problems

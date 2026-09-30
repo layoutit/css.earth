@@ -3,7 +3,7 @@ import test from 'node:test';
 import { type CompilerBakeResult, createRenderElementBudget } from '../../volume/index.js';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import type { PreparedCssVolume, VolumeVector } from '@cssearth/renderer/volume/types.ts';
-import type { PreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import type { PreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 import { assertCompilerDeliveryElementBudget } from '../index.js';
 
 const axes = ['x', 'y', 'z'] as const;
@@ -29,16 +29,16 @@ function volume(id: string, counts: Record<typeof axes[number], number>, imposto
       fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32, views } } : {}),
   };
 }
-function bank(counts = { x: 50, y: 50, z: 50 }, stars = 3, impostors = 26): PreparedVolumeLenses {
-  return { schema: 'cssearth-volume-lenses@1', id: 'fixture', defaultLens: 'first', framingRadiusUnits: 1, starsEnabled: false,
-    lenses: ['first', 'second'].map(id => ({ id, label: id, title: id, description: 'Test delivery', sourceUrl: 'https://example.org/source',
+function bank(counts = { x: 50, y: 50, z: 50 }, stars = 3, impostors = 26): PreparedVolumeDatasets {
+  return { schema: 'cssearth-volume-datasets@1', id: 'fixture', defaultDataset: 'first', framingRadiusUnits: 1, starsEnabled: false,
+    datasets: ['first', 'second'].map(id => ({ id, label: id, title: id, description: 'Test delivery', sourceUrl: 'https://example.org/source',
       volume: volume(id, counts, impostors), brightness: { overall: 1, x: 1, y: 1, z: 1 },
       stars: { frame, points: Array.from({ length: stars }, (_, index) => ({ id: `star-${index}`,
         positionUnits: [0, 0, 0], sizePx: 1, opacity: 0, colorCss: '#ffffff' })) },
     })) };
 }
 
-test('final delivery counts all retained XYZ copies and hidden stars once across shared lenses', () => {
+test('final delivery counts all retained XYZ copies and hidden stars once across shared datasets', () => {
   assert.deepEqual(assertCompilerDeliveryElementBudget(sampling(), bank()),
     { starCount: 3, slabCount: 150, impostorCount: 26, totalElements: 499 });
 });
@@ -57,17 +57,17 @@ test('delivery cannot move or add leaves outside its admitted XYZ count profile'
   assert.throws(() => assertCompilerDeliveryElementBudget(sampling(), bank({ x: 51, y: 49, z: 50 })), /planned XYZ/);
   assert.throws(() => assertCompilerDeliveryElementBudget(sampling(), bank({ x: 51, y: 50, z: 50 })), /planned XYZ/);
 });
-test('a second retained topology is rejected even when each lens independently fits the cap', () => {
-  const data = bank({ x: 1, y: 1, z: 1 }, 0), second = data.lenses[1]!;
+test('a second retained topology is rejected even when each dataset independently fits the cap', () => {
+  const data = bank({ x: 1, y: 1, z: 1 }, 0), second = data.datasets[1]!;
   const altered = { ...second, volume: { ...second.volume, stacks: second.volume.stacks.map(stack => ({ ...stack,
     leaves: stack.leaves.map(leaf => ({ ...leaf, centerUnits: [0, 0, .1] as VolumeVector })) })) } };
   assert.throws(() => assertCompilerDeliveryElementBudget(sampling({ x: 1, y: 1, z: 1 }, 0),
-    { ...data, lenses: [data.lenses[0]!, altered] }), /one retained topology/);
+    { ...data, datasets: [data.datasets[0]!, altered] }), /one retained topology/);
 });
 test('separate occulting roots and excess impostors are outside the tested CSS cost profile', () => {
   const data = bank();
   assert.throws(() => assertCompilerDeliveryElementBudget(sampling(), { ...data,
-    lenses: data.lenses.map(lens => ({ ...lens, occultingCentreUnits: [0, 0, 0] })) }), /occulting/);
+    datasets: data.datasets.map(dataset => ({ ...dataset, occultingCentreUnits: [0, 0, 0] })) }), /occulting/);
   assert.throws(() => assertCompilerDeliveryElementBudget(sampling(), bank(undefined, 3, 27)), /26 impostors/);
 });
 test('saved counters and host profile cannot conceal an over-budget or unrelated receipt', () => {

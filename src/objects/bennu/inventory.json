@@ -478,8 +478,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 294,
-      "sha256": "5a14eae2e2b7cfe4ceaa22bb30704de3af4b505e54193dacbc81d9a5e1e9dd42"
+      "bytes": 297,
+      "sha256": "0ebaed45bd8ba46e679a8deeb41cd29a5e931919af8310f9a8dee34115954c5f"
     },
     {
       "location": "prepared",
@@ -491,25 +491,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2345,
-      "sha256": "5542eab6c2f508ef36a324e9be0f5219820bf46680218e0425a3264faea34d69"
+      "sha256": "558686b265cdc1f74a038bc7f4e71380b01b26212aa5079969b3ee1c4b3c1b20"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3945,
-      "sha256": "448e6a13c31d887a3ee3a3a9b154dddca93e043650ac6147508bf08244c209ec"
+      "bytes": 3956,
+      "sha256": "53091a1497c478988aa9a12ccd105da5b7629be39088f9f4f93c1ccd499e62eb"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 8933,
+      "sha256": "d2c73408e25ad9d7e7a251eb6b8930ece81410d7642ac637c7c72bc37a2d681d"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 583,
       "sha256": "98d8738b981674a0766639ef393790d77268d625a56b05acccb3f3022c5ed7d1"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 8922,
-      "sha256": "a0dae06ff2ace90231b4f68deda21395e28be3019a7c6777ac044569b3a98073"
     },
     {
       "location": "prepared",
@@ -610,14 +610,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 3406219,
-      "sha256": "80f7f167ee7a6b0ee538dd14254a8cfa69f560e4fa081578eedb2ee155912a2e"
+      "bytes": 3406608,
+      "sha256": "6a9d251170902184b8685c6f294554cd629bf6a9a7a027c1dbf8c24b804d5e25"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 3271923,
-      "sha256": "f0d2ddb741fc5d70b88ebf59cbac9c9742d7db68e08e5e07c96ea5380c62076f"
+      "bytes": 3271968,
+      "sha256": "2bfa0e372f43d54e2825657e446f0c40124f871930f313dbdd3ea7f819e845f0"
     },
     {
       "location": "prepared",

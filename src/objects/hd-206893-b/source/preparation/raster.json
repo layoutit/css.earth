@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-206893-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "infrared",
       "output": "hd-206893-b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-206893-b-lens-{id}.webp",
+      "thumbnail": "hd-206893-b-dataset-{id}.webp",
       "source": "photometry/band-color.json",
       "falseColor": true,
       "science": {

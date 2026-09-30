@@ -14,7 +14,7 @@
 
 ## Known problems
 
-- A sphere represents this uncertain size estimate; it is not a measured shape. The Shape model lens uses the normal shared grid throughout: there are no mapped surface texels.
+- A sphere represents this uncertain size estimate; it is not a measured shape. The Shape model dataset uses the normal shared grid throughout: there are no mapped surface texels.
 
 - Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed. This is distinct from the orbital position, which uses JPL Horizons samples over 2020–2032 and the shared fitted ellipse plus prepared slow-longitude libration terms. Independent fractional-day reference epochs measure fit residuals, not a universal accuracy bound; extrapolation outside the fitted interval is not qualified.
 

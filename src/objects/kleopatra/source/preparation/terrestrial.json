@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "kleopatra",
   "displayName": "Kleopatra",
@@ -29,7 +29,7 @@
         "metadata": {
           "label": "SPHERE photograph",
           "falseColor": false,
-          "coverage": "55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 10 nights in 2 apparitions from 2017-07-14 to 2019-01-14, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.37. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+          "coverage": "55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 10 nights in 2 apparitions from 2017-07-14 to 2019-01-14, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the dataset mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.37. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
         },
         "selection": "edge-weighted-average",
         "levelMatching": {
@@ -985,7 +985,7 @@
     },
     "radialTerrainAlternatives": [
       {
-        "lensId": "zimpol",
+        "datasetId": "zimpol",
         "path": "shape/216_Kleopatra_adam.obj",
         "format": "wavefront-obj",
         "grid": {
@@ -1011,6 +1011,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements with the observed 2021 MPCD pole and an explicitly arbitrary display phase; not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

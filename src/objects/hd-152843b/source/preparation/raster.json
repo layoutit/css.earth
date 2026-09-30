@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-152843b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "hd-152843b-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-152843b-lens-{id}.webp",
+      "thumbnail": "hd-152843b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#f6f2ff, the colour lens of hd-152843 (src/objects/hd-152843/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#f6f2ff, the colour dataset of hd-152843 (src/objects/hd-152843/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "hd-152843",
           "srgb": "#f6f2ff",
-          "source": "the colour lens of hd-152843 (src/objects/hd-152843/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of hd-152843 (src/objects/hd-152843/source/photometry/stellar-color.json)"
         }
       }
     }

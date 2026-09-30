@@ -1,6 +1,6 @@
 /** The limb law of a brown dwarf colder than every published table: PICASO (Batalha et al. 2019) computes the V-band intensity
  * that the cloud-free Sonora Bobcat atmospheres (Marley et al. 2021) around the dwarf's temperature and gravity emit at eight
- * viewing angles, the quadratic law is fitted to each, and the colour lens reads between those nodes as it reads any grid. The
+ * viewing angles, the quadratic law is fitted to each, and the colour dataset reads between those nodes as it reads any grid. The
  * nodes are written as a small grid file beside the star, with each node's intensities, so the law can be checked without the
  * toolchain; `--star-limb` recomputes it (packages/telescope/toolchains/picaso-toolchain.json pins what runs). */
 import { bobcatNodes, picasoLimbNodes } from '@cssearth/telescope/node';
@@ -36,7 +36,7 @@ export function fromPicaso(id: string, teffK: number, starLogg: number): LimbCho
     inputs: [{ id: `${id}-picaso-bobcat-limb-darkening`, path: PICASO.file, origin: PICASO.profiles, credit: `${PICASO.cite} on ${PICASO.models} profiles`,
       license: 'Project-computed model values; the Sonora Bobcat profiles and PICASO correlated-k tables are CC BY 4.0, PICASO is GPL-3.0',
       acquisition: `Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb ${id} (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the Bobcat nodes ${chosen.map(profile).join(', ')}.`,
-      redistribution: 'Model coefficients and the intensities they are fitted to, with the model and tool cited.', consumers: ['assets', 'lenses'],
+      redistribution: 'Model coefficients and the intensities they are fitted to, with the model and tool cited.', consumers: ['assets', 'datasets'],
       sourceBinding: { kind: 'local', reason: 'Computed with the pinned PICASO toolchain; --star-limb recomputes it.' } }],
     sentence: `dimmed toward the limb by the quadratic law fitted to the Bessell V intensity ${PICASO.cite} computes from ${PICASO.models} model atmospheres at ${teffK.toLocaleString('en-US')} K and log g ${starLogg}, read between the models ${chosen.map(profile).join(', ')} (u1 ${coefficients.u1.toFixed(3)}, u2 ${coefficients.u2.toFixed(3)}; the law fits each model's eight angles within ${(worst * 100).toFixed(2)}% of the centre): a cloud-free model, because no table reaches a dwarf this cold and no fit of this star's limb is used`,
     credit: `Limb darkening: computed with ${PICASO.cite} on ${PICASO.models} profiles (${PICASO.profiles}) and the PICASO 4.0 correlated-k tables (${PICASO.opacities}).`,

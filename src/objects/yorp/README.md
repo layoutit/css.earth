@@ -22,7 +22,7 @@ Source test definitions.
 
 The pole is within 10° of ecliptic J2000 (180°, −85°). The cited initial spin rate is 42582.41 ± 0.02 degrees/day at 2001-07-27 00:00 UT, giving period 360 × 24 / 42582.41 = 0.20290068129070193 h (displayed as 12.17 minutes). The study measured acceleration (2.0 ± 0.2) × 10⁻⁴ degrees/day². The application holds the reference rate fixed with arbitrary display phase: it does not integrate that acceleration into 2026 or claim a current rotational attitude.
 
-The supplement states that about 25% of the surface was unobserved or seen above 60° radar incidence. The spin-axis extent is less constrained because relative optical photometry cannot fix projected area. The model’s grid denotes unavailable optical imagery; it is not a map of this radar coverage. Alternative smoother models affect theoretical YORP torque predictions but do not supply additional measured surface lenses.
+The supplement states that about 25% of the surface was unobserved or seen above 60° radar incidence. The spin-axis extent is less constrained because relative optical photometry cannot fix projected area. The model’s grid denotes unavailable optical imagery; it is not a map of this radar coverage. Alternative smoother models affect theoretical YORP torque predictions but do not supply additional measured surface datasets.
 
 The bounded JPL/PDS/paper survey found no calibrated registered optical mosaic, independent elevation measurement or composition map for this package. Failed archive requests do not establish dataset absence.
 

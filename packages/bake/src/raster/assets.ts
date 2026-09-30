@@ -53,7 +53,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
 
 /**
  * Load a body's published models and the overlay's reference colour: the mean observed colour of the named source image,
- * or of the first prepared surface (the default lens) when the block names none.
+ * or of the first prepared surface (the default dataset) when the block names none.
  */
 export async function prepareLimb(block: LimbBlock, sourceDirectory: string, publicDirectory: string, config: RasterRecipe, where: string, polarToEquatorial: number): Promise<PreparedLimb> {
     if (!(polarToEquatorial > 0 && polarToEquatorial <= 1)) throw new TypeError(`${where}: the polar-to-equatorial radius ratio must lie in (0, 1], got ${polarToEquatorial}.`);

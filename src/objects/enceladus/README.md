@@ -87,7 +87,7 @@ with Shadows enabled.
 
 The full Enceladus bake passed. All 19 affected source-reader and source-binding
 tests and all three Enceladus runtime-package tests passed; the latter exercise
-every lens and setting through the shared retained selection owner. Source-file
+every dataset and setting through the shared retained selection owner. Source-file
 coverage, body-reference checks and the reader-text publisher/check passed.
 The parsed scene is exactly equal to the published baseline, and existing globe
 texture bytes are unchanged. The full bake also regenerated the normal and
@@ -259,7 +259,7 @@ The exact PDS missing constant is -3.40282265508890445e38. No-data, non-finite v
 
 The archive has metadata inconsistencies: PDS prose interchanges the image/DEM descriptions, and catalog observation dates precede Cassini's Saturn arrival. The product-specific raster dimensions, pixel mapping and missing constants agree between TIFF and labels. We do not reuse the inconsistent dates/descriptions.
 
-[Paper: Schenk and McKinnon, Icarus 408, 115827](https://doi.org/10.1016/j.icarus.2023.115827). [NASA facts](https://science.nasa.gov/saturn/moons/enceladus/) describe the icy surface, global ocean, south-polar jets and 32.9-hour synchronous orbit. No visible atmosphere, invented plume animation, or interior lens is supplied.
+[Paper: Schenk and McKinnon, Icarus 408, 115827](https://doi.org/10.1016/j.icarus.2023.115827). [NASA facts](https://science.nasa.gov/saturn/moons/enceladus/) describe the icy surface, global ocean, south-polar jets and 32.9-hour synchronous orbit. No visible atmosphere, invented plume animation, or interior dataset is supplied.
 
 ## Orientation and sky
 

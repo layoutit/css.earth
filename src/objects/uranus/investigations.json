@@ -12,10 +12,10 @@
       ]
     },
     {
-      "id": "opal-single-filter-lenses",
-      "subject": "OPAL FQ727N and F845M maps as false-colour lenses",
+      "id": "opal-single-filter-datasets",
+      "subject": "OPAL FQ727N and F845M maps as false-colour datasets",
       "status": "included",
-      "finding": "The FQ727N and F845M FITS maps supply two separately prepared false-colour observation lenses whose palettes and percentile stretches are declared in the observation recipe; no browser filtering is used.",
+      "finding": "The FQ727N and F845M FITS maps supply two separately prepared false-colour observation datasets whose palettes and percentile stretches are declared in the observation recipe; no browser filtering is used.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits"
       ]

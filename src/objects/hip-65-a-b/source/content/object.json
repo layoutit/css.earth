@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hip-65-a-b",
   "displayName": "HIP 65 A b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by HIP 65; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "hip-65-a-b-lens-shape.webp",
+        "thumbnail": "hip-65-a-b-dataset-shape.webp",
         "surface": "hip-65-a-b-surface-shape@2x.webp",
         "poles": "hip-65-a-b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of HIP 65 A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hip-65-a's light, as its colour lens measures it."
+        "notes": "No image or colour of HIP 65 A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hip-65-a's light, as its colour dataset measures it."
       }
     ]
   },

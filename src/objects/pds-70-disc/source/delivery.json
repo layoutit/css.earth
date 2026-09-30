@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-nebula-delivery@1",
+  "schema": "cssearth-nebula-delivery@2",
   "id": "pds-70-disc",
   "method": "density-grid",
   "request": {
@@ -24,7 +24,7 @@
   },
   "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S",
   "description": "The ring of dust around PDS 70 in its own glow at 0.87 millimetres, as ALMA imaged it on 27 July 2019 (project 2018.A.00030.S), in the colour map Benisty et al. (2021) show it in. The planets b and c orbit inside the gap it encloses. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, not a measurement.",
-  "defaultLens": "dust",
+  "defaultDataset": "dust",
   "framingRadiusUnits": 150,
   "attachedTo": "pds-70",
   "acceptedLabResult": "pds-70-disc-density-grids",

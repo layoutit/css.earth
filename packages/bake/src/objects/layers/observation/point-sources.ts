@@ -1,4 +1,4 @@
-/** Stars in a sky band are not the extended object: a lens that places a sky image in depth would draw each one as a rod
+/** Stars in a sky band are not the extended object: a dataset that places a sky image in depth would draw each one as a rod
  * along the line of sight. They are found on the band itself and reported as no coverage, like saturated plate stars
  * (plate-saturation.mts): neither light nor zero.
  *

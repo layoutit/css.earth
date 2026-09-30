@@ -61,7 +61,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     const navigation = camera?.navigation;
     const scene = documentTarget.querySelector<HTMLElement>('.polycss-scene');
     if (!navigation || !scene) { clearReading({ date: true }); return; }
-    const map = maps.find(map => !map.closest<HTMLElement>('[data-lens-details]')?.hidden) ?? maps[0];
+    const map = maps.find(map => !map.closest<HTMLElement>('[data-dataset-details]')?.hidden) ?? maps[0];
     const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)
       : surfaceMapContext(map ? configs.get(map) : undefined, camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();

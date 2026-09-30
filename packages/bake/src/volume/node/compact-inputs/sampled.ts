@@ -48,7 +48,7 @@ function colors(v: unknown): SampledColor[] {
   });
 }
 type EmissionSampler = BakeCompilerOptions['sampleEmission'];
-/** Planning-only envelope: a feature unique to any lens remains represented without summing its brightness into the baked field. */
+/** Planning-only envelope: a feature unique to any dataset remains represented without summing its brightness into the baked field. */
 export function maximumPlanningEmission(samplers: readonly EmissionSampler[]): EmissionSampler {
   if (!samplers.length || samplers.some(sample => typeof sample !== 'function')) throw new TypeError('Planning requires at least one emission sampler.');
   const inputs = [...samplers], value: [number, number, number] = [0, 0, 0];
@@ -78,7 +78,7 @@ export async function prepareCompactSampledInputs(
       }).toString(),
     ),
   );
-  if (m.schema !== "cssearth-compact-sampled@1")
+  if (m.schema !== "cssearth-compact-sampled@2")
     throw new Error("Invalid compact sampled model");
   const recipe = readSampledRecipe(m.recipe),
     original = readCompilerBakeResult(m.scene),
@@ -89,15 +89,15 @@ export async function prepareCompactSampledInputs(
     }),
     values = backend.decodeFits(fits).values;
   const prepared = prepareSampledField(values, recipe, signal),
-    lensInputs = array(m.lenses).map(object);
-  const lensIds = lensInputs.map(lens => text(lens.id));
-  if (new Set(lensIds).size !== lensIds.length || lensIds.length !== original.lenses.length ||
-      original.lenses.some(lens => !lensIds.includes(lens.id))) throw new TypeError('Compact lenses differ from the retained scene.');
+    datasetInputs = array(m.datasets).map(object);
+  const datasetIds = datasetInputs.map(dataset => text(dataset.id));
+  if (new Set(datasetIds).size !== datasetIds.length || datasetIds.length !== original.datasets.length ||
+      original.datasets.some(dataset => !datasetIds.includes(dataset.id))) throw new TypeError('Compact datasets differ from the retained scene.');
   if (Object.hasOwn(m, 'expected')) throw new TypeError(`Compact sampled inputs for ${id} carry the removed volume digest field expected.`);
   const load = async (l: Record<string, unknown>) => {
     const sourceId = text(l.id),
-      weights = recipe.lensComponents[sourceId];
-    if (!weights) throw new Error("Unknown compact lens");
+      weights = recipe.datasetComponents[sourceId];
+    if (!weights) throw new Error("Unknown compact dataset");
     const material = object(l.material),
       fit = l.fit === undefined ? undefined : object(l.fit);
     const atoms: DiffuseAtom[] = fit
@@ -163,9 +163,9 @@ export async function prepareCompactSampledInputs(
       prepareMaterial,
     };
   };
-  const referenceId = original.lenses[0]!.id,
-    reference = lensInputs.find((l) => l.id === referenceId);
-  if (!reference) throw new Error("Missing reference lens");
+  const referenceId = original.datasets[0]!.id,
+    reference = datasetInputs.find((l) => l.id === referenceId);
+  if (!reference) throw new Error("Missing reference dataset");
   const referenceFit =
     reference.fit === undefined ? undefined : object(reference.fit);
   const ref = await load(reference);
@@ -183,11 +183,11 @@ export async function prepareCompactSampledInputs(
         ),
       )
     : prepared.field({ ejecta: 1, pwn: 1 });
-  const lenses = [];
-  for (const input of lensInputs) lenses.push(input === reference ? ref : await load(input));
-  const sources = lensInputs.map(l => ({ id: text(l.id), label: text(l.label), credit: text(l.credit), page: text(l.page) }));
-  return { id, original, recipe, neutralField, lenses, sources,
-    samplePlanningEmission: maximumPlanningEmission([neutralField.sampleEmission, ...lenses.map(lens => lens.field.sampleEmission)]) };
+  const datasets = [];
+  for (const input of datasetInputs) datasets.push(input === reference ? ref : await load(input));
+  const sources = datasetInputs.map(l => ({ id: text(l.id), label: text(l.label), credit: text(l.credit), page: text(l.page) }));
+  return { id, original, recipe, neutralField, datasets, sources,
+    samplePlanningEmission: maximumPlanningEmission([neutralField.sampleEmission, ...datasets.map(dataset => dataset.field.sampleEmission)]) };
 }
 
 export async function replayCompactSampled(root: string, inputPin: CompilerPin, outputDirectory: string, backend: SampledReplayBackend) {
@@ -211,7 +211,7 @@ export async function replayCompactSampled(root: string, inputPin: CompilerPin, 
     ...base,
     outputDirectory: `${outputDirectory}/neutral`,
     sampleEmission: neutralField.sampleEmission,
-    lenses: [
+    datasets: [
       {
         id: "neutral-material",
         label: "Neutral components",
@@ -222,15 +222,15 @@ export async function replayCompactSampled(root: string, inputPin: CompilerPin, 
       },
     ],
   });
-  const lenses = [];
-  for (const l of input.lenses) {
+  const datasets = [];
+  for (const l of input.datasets) {
     signal.throwIfAborted();
     const painter = l.prepareMaterial();
     const bank = await bakeCompiler({
       ...base,
       outputDirectory: `${outputDirectory}/${l.sourceId}`,
       sampleEmission: l.field.sampleEmission,
-      lenses: [
+      datasets: [
         {
           id: l.sourceId,
           label: l.label,
@@ -238,13 +238,13 @@ export async function replayCompactSampled(root: string, inputPin: CompilerPin, 
         },
       ],
     });
-    lenses.push(...bank.lenses);
+    datasets.push(...bank.datasets);
   }
   const registered = await register(
     root,
     `${outputDirectory}/registered`,
     neutral,
-    lenses,
+    datasets,
     signal,
     pin => pinned(root, pin),
     backend,

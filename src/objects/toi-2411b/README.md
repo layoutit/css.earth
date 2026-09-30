@@ -8,7 +8,7 @@ It is the only planet known around TOI-2411. Its orbit and size follow Giacalone
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 0.78270745503 d Giacalone et al. 2022 (2022AJ....163...99G), via the NASA Exoplanet Archive ps table (pl_refname GIACALONE_ET_AL__2022): a/R* derived from its semi-major axis 0.0144 au and stellar radius 0.68 solar radii; Giacalone et al. 2022 (2022AJ....163...99G), via the NASA Exoplanet Archive ps table (pl_refname GIACALONE_ET_AL__2022): inclination derived from its impact parameter 0.39 with its a/R* 4.5536 (Winn 2010, eq. 7) No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460987.464436 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2411's measured colour (#ffc197, the colour lens of toi-2411 (src/objects/toi-2411/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2411's measured colour (#ffc197, the colour dataset of toi-2411 (src/objects/toi-2411/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2411's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (30, 97), folded onto its orbit. Upper limits and rows without an error are left out.
 

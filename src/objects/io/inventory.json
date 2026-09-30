@@ -9,6 +9,48 @@
     },
     {
       "location": "public",
+      "filename": "io-dataset-elevation.webp",
+      "bytes": 6266,
+      "sha256": "7207216fca45cf217c577c3133f6c47871aafb9d5028a38b3a105755ec64843f"
+    },
+    {
+      "location": "public",
+      "filename": "io-dataset-enhanced.webp",
+      "bytes": 1016,
+      "sha256": "751026461628ecd1324ef426486a92b38d4e5fa764211078b0dfee6f19862baa"
+    },
+    {
+      "location": "public",
+      "filename": "io-dataset-geology.webp",
+      "bytes": 1038,
+      "sha256": "2e90be97d004e83dbcbfa2fbda362add374ed387428d673a5041677e1f1e5dd3"
+    },
+    {
+      "location": "public",
+      "filename": "io-dataset-normal.webp",
+      "bytes": 622,
+      "sha256": "984b20f0824c007ea9d5c458ed995eabf5be75674f425233ace37244fcf8631d"
+    },
+    {
+      "location": "public",
+      "filename": "io-dataset-spectral-slope.webp",
+      "bytes": 440,
+      "sha256": "5367d416636a17c28108bf8b05e860586266f999aa1a2a5a398a46a525277099"
+    },
+    {
+      "location": "public",
+      "filename": "io-dataset-visible-absorption.webp",
+      "bytes": 434,
+      "sha256": "59f9cc5290d36c213eb3cb63773848b40c61b1380c1378b60f00dfd4f97093da"
+    },
+    {
+      "location": "public",
+      "filename": "io-dataset-volcanic-heat.webp",
+      "bytes": 1148,
+      "sha256": "09990557c1514c62b26e73d530565cf1a7186a41a8ca2d7f9ebd16e999e3a8d6"
+    },
+    {
+      "location": "public",
       "filename": "io-elevation@2x.webp",
       "bytes": 2482530,
       "sha256": "71689a9b373caa0fac4a4ac85cfe86f20b49890761013a865065d7aa2be35bea"
@@ -30,48 +72,6 @@
       "filename": "io-geology@2x.webp",
       "bytes": 200696,
       "sha256": "1bfc6c35f2e1322770fcccd37365c7105572800160e89ccf336aef39f357332b"
-    },
-    {
-      "location": "public",
-      "filename": "io-lens-elevation.webp",
-      "bytes": 6266,
-      "sha256": "7207216fca45cf217c577c3133f6c47871aafb9d5028a38b3a105755ec64843f"
-    },
-    {
-      "location": "public",
-      "filename": "io-lens-enhanced.webp",
-      "bytes": 1016,
-      "sha256": "751026461628ecd1324ef426486a92b38d4e5fa764211078b0dfee6f19862baa"
-    },
-    {
-      "location": "public",
-      "filename": "io-lens-geology.webp",
-      "bytes": 1038,
-      "sha256": "2e90be97d004e83dbcbfa2fbda362add374ed387428d673a5041677e1f1e5dd3"
-    },
-    {
-      "location": "public",
-      "filename": "io-lens-normal.webp",
-      "bytes": 622,
-      "sha256": "984b20f0824c007ea9d5c458ed995eabf5be75674f425233ace37244fcf8631d"
-    },
-    {
-      "location": "public",
-      "filename": "io-lens-spectral-slope.webp",
-      "bytes": 440,
-      "sha256": "5367d416636a17c28108bf8b05e860586266f999aa1a2a5a398a46a525277099"
-    },
-    {
-      "location": "public",
-      "filename": "io-lens-visible-absorption.webp",
-      "bytes": 434,
-      "sha256": "59f9cc5290d36c213eb3cb63773848b40c61b1380c1378b60f00dfd4f97093da"
-    },
-    {
-      "location": "public",
-      "filename": "io-lens-volcanic-heat.webp",
-      "bytes": 1148,
-      "sha256": "09990557c1514c62b26e73d530565cf1a7186a41a8ca2d7f9ebd16e999e3a8d6"
     },
     {
       "location": "public",
@@ -352,14 +352,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 292,
-      "sha256": "36db942db509cd88aba2486bc0df002bfc93b1a1b9ff2ec20203ab522d441019"
+      "bytes": 295,
+      "sha256": "97769cbc4c28cd625807ec3e9b93c49f6c0e15f50d014d25f9778a051c36f665"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 82504,
-      "sha256": "198f731cd64cc070667d4a6641d08a6401e4010b9451b705d00bf30adb954a4a"
+      "bytes": 82525,
+      "sha256": "3d328853a2357b69d170c548d2bd5fb51b9a9a1b29823fc32a8aa38b30ed962b"
     },
     {
       "location": "prepared",
@@ -371,25 +371,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 3073,
-      "sha256": "fe5be9f82645d846e2fdea065a61dabf0335782817c17cdbd7a5ebde6c73c784"
+      "sha256": "77211038119b582bd8ddbc6426762db93ac82896d3baf6ab4fad64f1450756ba"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 8631,
-      "sha256": "2a2c855a30775db665102e9a5e637fbe164853b10563e8021444f4eeb447c2db"
+      "bytes": 8663,
+      "sha256": "8ef39f0b26392601f4806ad293bde8bd65df6b9a8dd225ff2ac5512577ce57fd"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 10986,
+      "sha256": "3262825657f6ab18443241b75ef6e42f78950f3b1e0661afe483947bd8687b53"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 570,
       "sha256": "86a9f5821f02dc5005538b49b2b6ae2409f6672219cea7f88c7cdc7aada24a06"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 10954,
-      "sha256": "10fbdb5724fd55b9ff5b0a84bafe6bf9b212b7e8e9b238d99d14f35354d07b2b"
     },
     {
       "location": "prepared",
@@ -448,8 +448,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 589692,
-      "sha256": "b551aebfb039cfffc9b28e395d7fdcfec1bd15872f4a92aa5956999baca454bf"
+      "bytes": 589811,
+      "sha256": "d8b7871576b15931fdf8e98901c97da5d4dad14fb61ef61e6e2361de31989a06"
     },
     {
       "location": "prepared",

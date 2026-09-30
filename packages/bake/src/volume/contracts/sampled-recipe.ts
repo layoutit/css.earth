@@ -12,11 +12,11 @@ export type SampleTerm = TermBase & (
   { kind: 'ellipsoid'; centerArcsec: EmissionVector3; sigmaArcsec: EmissionVector3 });
 export interface ComponentWeights { ejecta: number; pwn: number }
 export interface SampledRecipe {
-  schema: 'cssearth-sampled-nebula@1'; id: string; centerIcrsDegrees: [number, number]; evidence: SamplePin;
+  schema: 'cssearth-sampled-nebula@2'; id: string; centerIcrsDegrees: [number, number]; evidence: SamplePin;
   source: SamplePin & { url: string; width: number; height: number; columns: [number, number, number, number] };
   rawToArcsec: number[];
   grid: { longestAxis: number; blurSigmaCells: number; weightExponent: number; peakOpticalDepth: number };
-  terms: SampleTerm[]; lensComponents: Record<string, ComponentWeights>;
+  terms: SampleTerm[]; datasetComponents: Record<string, ComponentWeights>;
   emissionFit?: SampledEmissionFit;
   pulsar?: { id: string; positionArcsec: EmissionVector3; rgb: [number, number, number]; diameterArcsec: number; alpha: number; evidenceIds: string[] };
 }
@@ -37,10 +37,10 @@ function pin(v: unknown, allowedSourcePath: (path: string) => boolean): SamplePi
   return { path: v.path };
 }
 export function readSampledRecipe(v: unknown, allowedSourcePath: (path: string) => boolean = () => true): SampledRecipe {
-  if (!jointRecord(v) || v.schema !== 'cssearth-sampled-nebula@1' || !jointRecord(v.source) || !jointRecord(v.grid) ||
+  if (!jointRecord(v) || v.schema !== 'cssearth-sampled-nebula@2' || !jointRecord(v.source) || !jointRecord(v.grid) ||
       !Array.isArray(v.rawToArcsec) || v.rawToArcsec.length !== 12 || !v.rawToArcsec.every(finite) ||
       !Array.isArray(v.centerIcrsDegrees) || v.centerIcrsDegrees.length !== 2 || !Array.isArray(v.terms) || v.terms.length > 32 ||
-      !jointRecord(v.lensComponents)) throw new TypeError('Invalid sampled nebula recipe.');
+      !jointRecord(v.datasetComponents)) throw new TypeError('Invalid sampled nebula recipe.');
   const m = v.rawToArcsec;
   const determinant = m[0] * (m[5] * m[10] - m[6] * m[9]) - m[1] * (m[4] * m[10] - m[6] * m[8]) + m[2] * (m[4] * m[9] - m[5] * m[8]);
   if (!Number.isFinite(determinant) || Math.abs(determinant) < 1e-12) throw new TypeError('Sampled coordinate mapping is degenerate.');
@@ -69,13 +69,13 @@ export function readSampledRecipe(v: unknown, allowedSourcePath: (path: string) 
     throw new TypeError('Unsupported sampled analytic term.');
   });
   if (new Set(terms.map(t => t.id)).size !== terms.length) throw new TypeError('Duplicate sampled terms.');
-  const lensComponents: Record<string, ComponentWeights> = {};
-  for (const [key, weights] of Object.entries(v.lensComponents)) {
+  const datasetComponents: Record<string, ComponentWeights> = {};
+  for (const [key, weights] of Object.entries(v.datasetComponents)) {
     id(key); if (!jointRecord(weights)) throw new TypeError('Invalid component mixture.');
     const value = { ejecta: number(weights.ejecta, 0, 1), pwn: number(weights.pwn, 0, 1) };
-    if (value.ejecta + value.pwn <= 0) throw new TypeError('An empty spectral component mixture cannot render.'); lensComponents[key] = value;
+    if (value.ejecta + value.pwn <= 0) throw new TypeError('An empty spectral component mixture cannot render.'); datasetComponents[key] = value;
   }
-  if (!Object.keys(lensComponents).length || Object.keys(lensComponents).length > 8) throw new TypeError('Invalid sampled lens count.');
+  if (!Object.keys(datasetComponents).length || Object.keys(datasetComponents).length > 8) throw new TypeError('Invalid sampled dataset count.');
   let pulsar: SampledRecipe['pulsar'];
   if (v.pulsar !== undefined) {
     if (!jointRecord(v.pulsar)) throw new TypeError('Invalid compact central source.');
@@ -84,11 +84,11 @@ export function readSampledRecipe(v: unknown, allowedSourcePath: (path: string) 
     pulsar = { id: id(p.id), positionArcsec: vector(p.positionArcsec), rgb, diameterArcsec: number(p.diameterArcsec, .001, 1e3), alpha: number(p.alpha, 0, 1), evidenceIds: evidenceIds(p.evidenceIds) };
   }
   const emissionFit = v.emissionFit === undefined ? undefined : readSampledEmissionFit(v.emissionFit);
-  if (emissionFit?.sourceIds.some(id => !lensComponents[id])) throw new TypeError('Emission fit references an unknown spectral lens.');
+  if (emissionFit?.sourceIds.some(id => !datasetComponents[id])) throw new TypeError('Emission fit references an unknown spectral dataset.');
   return { schema: v.schema, id: id(v.id), centerIcrsDegrees: [number(v.centerIcrsDegrees[0], 0, 359.999999), number(v.centerIcrsDegrees[1], -90, 90)],
     evidence: pin(v.evidence, allowedSourcePath), source: { ...pin(s, allowedSourcePath), url: s.url, width, height, columns: [s.columns[0], s.columns[1], s.columns[2], s.columns[3]] },
     rawToArcsec: [...m], grid: { longestAxis, blurSigmaCells: number(v.grid.blurSigmaCells, .35, 4), weightExponent: number(v.grid.weightExponent, .1, 1),
-      peakOpticalDepth: v.grid.peakOpticalDepth === undefined ? 1.5 : number(v.grid.peakOpticalDepth, .01, 10) }, terms, lensComponents,
+      peakOpticalDepth: v.grid.peakOpticalDepth === undefined ? 1.5 : number(v.grid.peakOpticalDepth, .01, 10) }, terms, datasetComponents,
     ...(emissionFit ? { emissionFit } : {}), ...(pulsar ? { pulsar } : {}) };
 }
 export function verifySampledEvidence(recipe: SampledRecipe, value: unknown) {

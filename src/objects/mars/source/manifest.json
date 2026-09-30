@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "mars-physical-solar-system-recipe",
@@ -58,7 +58,7 @@
       "redistribution": "checked government data product without logos",
       "consumers": [
         "assets",
-        "lenses",
+        "datasets",
         "scene"
       ],
       "capture": {
@@ -92,7 +92,7 @@
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
         "assets",
-        "lenses",
+        "datasets",
         "scene"
       ],
       "title": "MOLA global color shaded relief",
@@ -128,7 +128,7 @@
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
         "assets",
-        "lenses",
+        "datasets",
         "scene"
       ],
       "title": "THEMIS daytime infrared mosaic",
@@ -202,14 +202,14 @@
     {
       "id": "mars-object-content",
       "path": "content/object.json",
-      "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
+      "origin": "Repository-authored Mars panel, dataset, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside Mars inputs.",
       "redistribution": "Prepared shell content with source provenance.",
       "consumers": [
         "panel",
-        "lenses",
+        "datasets",
         "charts"
       ],
       "sourceBinding": {
@@ -244,7 +244,7 @@
       "consumers": [
         "assets",
         "charts",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -328,7 +328,7 @@
       "redistribution": "Prepared raster assets.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -398,7 +398,7 @@
       "acquisition": "Authored from the shared mesh convention.",
       "redistribution": "Repository-authored parameters; no imagery",
       "consumers": [
-        "lenses",
+        "datasets",
         "presentation",
         "features"
       ],
@@ -1107,9 +1107,9 @@
       "redistribution": "Compact numeric derivative with credit; native metadata labels retained beside the recipe.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "capture": {
         "attributions": [
           {
@@ -1145,9 +1145,9 @@
       "redistribution": "Native numeric product with credit; publisher labels retained beside it.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "albedo",
+      "datasetId": "albedo",
       "capture": {
         "attributions": [
           {
@@ -1179,9 +1179,9 @@
       "redistribution": "Native numeric product with credit",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "thermal-inertia",
+      "datasetId": "thermal-inertia",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1203,9 +1203,9 @@
       "redistribution": "Native numeric product with credit",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "thermal-inertia",
+      "datasetId": "thermal-inertia",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1227,9 +1227,9 @@
       "redistribution": "Native numeric product with credit",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "thermal-inertia",
+      "datasetId": "thermal-inertia",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1251,9 +1251,9 @@
       "redistribution": "Native numeric product with credit",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "thermal-inertia",
+      "datasetId": "thermal-inertia",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1275,9 +1275,9 @@
       "redistribution": "Native numeric product with credit",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
-      "lensId": "dust-cover",
+      "datasetId": "dust-cover",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1303,9 +1303,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/dune-fields/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the Trek layer's fill symbol, not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "dune-fields",
+      "datasetId": "dune-fields",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -1375,9 +1375,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/valley-networks/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the Trek layer's line symbol, not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "valley-networks",
+      "datasetId": "valley-networks",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -1690,9 +1690,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/alluvial-fans/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "alluvial-fans",
+      "datasetId": "alluvial-fans",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -1762,9 +1762,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/gullies/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), which follows the orientation class, not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "gullies",
+      "datasetId": "gullies",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -1942,9 +1942,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/glacier-like-forms/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "glacier-like-forms",
+      "datasetId": "glacier-like-forms",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -2041,9 +2041,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/recessional-glfs/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "recessional-glfs",
+      "datasetId": "recessional-glfs",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -2113,9 +2113,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/glacial-valleys/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "glacial-valleys",
+      "datasetId": "glacial-valleys",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -2185,9 +2185,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/recent-activity/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from our categorical palette, validated for all-pair separation (Trek draws every type in #d3ffbe and tells them apart by symbol shape), not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "recent-activity",
+      "datasetId": "recent-activity",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -2257,9 +2257,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/hydrous-minerals/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), by instrument, not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "hydrous-minerals",
+      "datasetId": "hydrous-minerals",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -2356,9 +2356,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/aqueous-minerals/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), by class, not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "aqueous-classes",
+      "datasetId": "aqueous-classes",
       "width": 4096,
       "height": 2048,
       "projection": {
@@ -2536,9 +2536,9 @@
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/chloride/prepare-grid.json.",
       "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr); Trek draws outlines only, not observations.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
-      "lensId": "chloride-deposits",
+      "datasetId": "chloride-deposits",
       "width": 4096,
       "height": 2048,
       "projection": {

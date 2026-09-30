@@ -29,14 +29,14 @@ const observedColor = shape({id:text,consumer:text,monochromeBase:text,
 /** Decode consumed fields; the profile validator owns their scientific relationships. */
 export function parseSolidPreparationSource(input:unknown) {
   const source=requireRecord(input), base=parseSolidRasterConfig(input);
-  const extra=shape({schema:choice('cssearth-terrestrial-preparation@1'),kind:choice('solid-observation-body'),
+  const extra=shape({schema:choice('cssearth-terrestrial-preparation@2'),kind:choice('solid-observation-body'),
     namespace:text,displayName:text,publicBase:text,rings:optional(value=>value),
     geometry:shape({radius:number,radiusKm:number,mapUrl:text,polesUrl:text,radialModels:optional(value=>value),
-      radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({lensId:text,additionalLensIds:optional(array(text))})(value)))),
+      radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({datasetId:text,additionalDatasetIds:optional(array(text))})(value)))),
       camera:optional(value=>{const camera=shape({framingScale:optional(number)})(value);refuseAuthoredCameraAngles(camera);return camera;})}),
     lighting:shape({frameSize:number,frameCount:number,columns:number,logicalSize:number,terminatorWidth:number,
       directionalAmbient:number,fullPhaseAmbient:number,fullPhaseDiffuse:number,maximumOpacity:number}),
-    presentation:shape({defaultLens:text}),
+    presentation:shape({defaultDataset:text}),
     celestial:shape({sunSource:text,sunQualification:optional(text),qualification:optional(text)})})(source);
   const raster=requireRecord(source.raster);
   return {...source,...base,...extra,raster:{...base.raster,

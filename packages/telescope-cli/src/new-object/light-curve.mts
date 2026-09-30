@@ -6,7 +6,7 @@ import { checkGaiaCepheidModel, gaiaCepheidQuery, GAIA_TIME_OFFSET_JD, parseGaia
 import type { SolarEpoch } from './solar-epoch.mts';
 import { GAIA_TAP } from './archives.mts';
 import { CHECKED } from './color.mts';
-import { bindInputs, json, type PackageFiles } from './lens.mts';
+import { bindInputs, json, type PackageFiles } from './dataset.mts';
 
 export const LIGHT_CURVE_MODEL = 'photometry/gaia-dr3-vari-cepheid.csv';
 const PAPER = 'Ripepi et al. (2023), A&A 674, A17';

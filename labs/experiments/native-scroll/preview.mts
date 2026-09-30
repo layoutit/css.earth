@@ -102,13 +102,13 @@ createServer((request, response) => {
       }
       const stage = document.querySelector<HTMLElement>('.object-stage');
       if (!stage || stage.dataset.objectId !== descriptor.id) throw new Error('The retained scene identity is missing.');
-      const lensId = url.searchParams.get('dataset') ?? undefined;
-      const markup = serializePreparedScene(definition, lensId);
+      const datasetId = url.searchParams.get('dataset') ?? undefined;
+      const markup = serializePreparedScene(definition, datasetId);
       stage.className = ['object-stage', ...markup.classes].join(' ');
       stage.setAttribute('style', markup.style);
       for (const [name, value] of Object.entries(markup.attributes)) stage.setAttribute(name, value);
       stage.innerHTML = markup.html;
-      const selection = initialObjectSelection(definition.controls, lensId);
+      const selection = initialObjectSelection(definition.controls, datasetId);
       const publication = publishPreparedNativeView(definition, selection, stage, frame, saved);
       stage.dataset.preparedView = formatSharedView(saved).slice(2);
       const surface = document.querySelector('.object-input-surface');

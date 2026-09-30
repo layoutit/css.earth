@@ -28,7 +28,7 @@ test('write-mode preparation reads the surface mean from staged scene assets, no
     type Fill = typeof withPreparedInteriorFill;
     const presentation = {
       id: 'body', tree: { scene: 0, nodes: [{ parent: null, tag: 'div', className: 'scene', properties: [], attributes: {}, style: '' }] },
-      viewBindings: [], variants: [{ when: { lensId: 'surface' }, required: ['surface'], writes: [] }],
+      viewBindings: [], variants: [{ when: { datasetId: 'surface' }, required: ['surface'], writes: [] }],
       assets: { entries: [{ key: 'surface', url: '/scenes/body/body-surface@2x.webp' }] },
     } as unknown as Parameters<Fill>[0];
     const disc = { center: [0, 0], radius: 1 } as unknown as Parameters<Fill>[1];

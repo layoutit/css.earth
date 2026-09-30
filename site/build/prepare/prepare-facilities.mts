@@ -77,7 +77,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     if (binding.kind !== 'catalogued') throw new TypeError('Shared context needs a canonical source.');
     for (const ref of binding.references) metadata.push({catalogueId:sources[ref.catalogueId].id,kind:'shared-context',consumerKind:'shared-context',
       consumerId:explorationText(display.feature),consumerLabel:explorationText(display.label),ownerPath:path,locator:'/sourceBinding',evidence:ref.evidence,
-      lensIds:[],limitations:[explorationText(display.description)],credit:explorationText(display.credit)});
+      datasetIds:[],limitations:[explorationText(display.description)],credit:explorationText(display.credit)});
   }
   async function artwork(file: string, emblem: boolean) {
     const library = explorationRecord(await json(file));
@@ -88,7 +88,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       inventory.push({ownerPath:file,localId:id,binding,used:true});
       if (binding.kind !== 'catalogued') throw new TypeError('Artwork needs a canonical source.');
       for (const ref of binding.references) metadata.push({catalogueId:sources[ref.catalogueId].id,kind:'artwork',consumerKind:'artwork',consumerId:`${emblem ? 'emblem' : 'render'}/${id}`,
-        consumerLabel:`${id} ${emblem ? 'emblem' : 'artwork'}`,ownerPath:file,locator:`/entries/${index}/sourceBinding`,evidence:ref.evidence,lensIds:[],limitations:[],credit:explorationText(source.credit)});
+        consumerLabel:`${id} ${emblem ? 'emblem' : 'artwork'}`,ownerPath:file,locator:`/entries/${index}/sourceBinding`,evidence:ref.evidence,datasetIds:[],limitations:[],credit:explorationText(source.credit)});
       return parseExplorationImage({ id: image.id, src: emblem ? image.src : image.url,
         width: image.width, height: image.height, bytes: image.bytes,
         kind: emblem ? 'emblem' : source.kind, sourceUrl: emblem ? source.sourceUrl : source.sourcePage, credit: source.credit,
@@ -143,13 +143,13 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     const page = explorationRecord(await json(pagePath));
     if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id) throw new Error(`Stale prepared controls for ${object.id}.`);
     const controls = explorationRecord(page.controls);
-    const lenses = controls.lenses === null ? [] : explorationArray(explorationRecord(controls.lenses).controls, raw => {
+    const datasets = controls.datasets === null ? [] : explorationArray(explorationRecord(controls.datasets).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };
     });
     // The lineage is a view of this package's manifest and recipes, built here and never written.
     const lineage = await bodyLineage(objectDirectory);
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(lineage.sources.map(source => source.path))));
-    objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, lineage });
+    objects.push({ id: object.id, name: object.name, route: object.route, base, controls: datasets, lineage });
   }
   // Deploys consume the volume presentations restored from R2. Authoring preparation still rebuilds the previews from
   // their sources, but catalog-only publication must never invent a second package identity.

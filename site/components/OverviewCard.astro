@@ -10,10 +10,10 @@ import InformationTabs from './InformationTabs.astro';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import ObjectNavigationMarker from './ObjectNavigationMarker.astro';
 import ObjectFactsheet from './ObjectFactsheet.astro';
-import DatasetLenses from './DatasetLenses.astro';
+import DatasetList from './DatasetList.astro';
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
 import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
-import { pageDatasetLenses } from '../page-datasets-content.mts';
+import { pageDatasetList } from '../page-datasets-content.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
@@ -65,7 +65,7 @@ if (factsEntry !== undefined && !(isRecord(factsEntry) && Array.isArray(factsEnt
 const facts = isRecord(factsEntry) ? { facts: factsEntry.facts as ObjectProps['facts'] } : undefined;
 const tabs = [...lists.map(list => ({ id: list.id, label: list.label, count: list.stars ? 1 + hostedSystems.length + unavailableSystems.length : list.members.length })),
   ...(facts ? [{ id: 'factsheet', label: 'Factsheet' }] : [])];
-const datasets = pageDatasetLenses(overview.id);
+const datasets = pageDatasetList(overview.id);
 // A card's distances are measured from the member that holds the stars, where it lists one (the Milky Way in the Local
 // Group: the view from home); otherwise from the observer, as the catalogues publish them.
 const home = lists.flatMap(list => list.members).find(member => member.holdsStars)?.id ?? 'observer';
@@ -74,10 +74,10 @@ const home = lists.flatMap(list => list.members).find(member => member.holdsStar
   <ObjectCardHeader heading={false} title={{ label: overview.name }} introduction={overview.description}>
     <ObjectBreadcrumbs scope={overview.id} />
   </ObjectCardHeader>
-  {datasets && <div class="object-dataset-content" data-page-datasets={overview.id} data-default-lens={datasets.defaultLens}
-    data-lens-views={JSON.stringify(datasets.views)}>
-    <DatasetLenses objectId={`page-${overview.id}`} thumbnailObjectId={overview.id} page={overview.id} route={overview.route}
-      lenses={{ controls: datasets.controls, defaultLens: datasets.defaultLens }} focus />
+  {datasets && <div class="object-dataset-content" data-page-datasets={overview.id} data-default-dataset={datasets.defaultDataset}
+    data-dataset-views={JSON.stringify(datasets.views)}>
+    <DatasetList objectId={`page-${overview.id}`} thumbnailObjectId={overview.id} page={overview.id} route={overview.route}
+      datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} focus />
   </div>}
   {tabs.length > 0 && <InformationTabs idPrefix={overview.id} group={overview.id} label={`${overview.name} information`} hidden {tabs} />}
   {lists.map(list => <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-${list.id}-content`} hidden role="region" aria-label={list.label}>
@@ -85,31 +85,31 @@ const home = lists.flatMap(list => list.members).find(member => member.holdsStar
       {list.stars ? <>
         <li>
           <a class="object-link object-observation-control object-thumbnail-leading" href={`${systemStar.route}?overview=system`} aria-label="Browse Solar System">
-            <span class="object-lens-icon"><ObjectNavigationMarker objectId={systemStar.id} color={systemStar.color} /></span>
-            <span class="object-name object-lens-label">Solar System</span>
+            <span class="object-dataset-icon"><ObjectNavigationMarker objectId={systemStar.id} color={systemStar.color} /></span>
+            <span class="object-name object-dataset-label">Solar System</span>
           </a>
         </li>
         {hostedSystems.map(({ system, star, distanceLy }) => <li>
           <a class="object-link object-observation-control object-thumbnail-leading" href={`${system.route}?overview=system`} aria-label={`Browse ${system.name}`}>
-            <span class="object-lens-icon"><ObjectNavigationMarker objectId={star.id} color={star.color} /></span>
-            <span class="object-name object-lens-label">{star.name}</span>
-            <span class="object-distance object-lens-detail"><span class="object-distance-value">≈{distanceLy}</span>{" "}<span class="object-distance-unit">ly</span></span>
+            <span class="object-dataset-icon"><ObjectNavigationMarker objectId={star.id} color={star.color} /></span>
+            <span class="object-name object-dataset-label">{star.name}</span>
+            <span class="object-distance object-dataset-detail"><span class="object-distance-value">≈{distanceLy}</span>{" "}<span class="object-distance-unit">ly</span></span>
           </a>
         </li>)}
         {unavailableSystems.map(system => <li>
           <span class="object-link object-observation-control object-thumbnail-leading" role="link" aria-disabled="true" title="Not available yet">
-            <span class="object-lens-icon"><ObjectNavigationMarker objectId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} /></span>
-            <span class="object-name object-lens-label">{system.name}</span>
-            <span class="object-distance object-lens-detail"><span class="object-distance-value">≈{system.distanceLy}</span>{" "}<span class="object-distance-unit">ly</span></span>
+            <span class="object-dataset-icon"><ObjectNavigationMarker objectId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} /></span>
+            <span class="object-name object-dataset-label">{system.name}</span>
+            <span class="object-distance object-dataset-detail"><span class="object-distance-value">≈{system.distanceLy}</span>{" "}<span class="object-distance-unit">ly</span></span>
           </span>
         </li>)}
       </> : list.members.map(member => <li data-neighbor-id={member.id}
         data-neighbor-distances={JSON.stringify({ observer: member.distancePc, ...Object.fromEntries(list.members.map(origin => [origin.id,
           Math.hypot(...member.positionM.map((value, axis) => value - origin.positionM[axis]!)) / PARSEC_M])) })}>
         <a class="object-link object-observation-control object-thumbnail-leading" href={member.href} data-prepared-focus-id={member.focusId}>
-          <span class="object-lens-icon"><ContextNavigationMarker objectId={member.id} /></span>
-          <span class="object-name object-lens-label">{member.name}</span>
-          <span class="object-distance object-lens-detail" title="Published catalogue distance from the Solar System">
+          <span class="object-dataset-icon"><ContextNavigationMarker objectId={member.id} /></span>
+          <span class="object-name object-dataset-label">{member.name}</span>
+          <span class="object-distance object-dataset-detail" title="Published catalogue distance from the Solar System">
             <span class="object-distance-value">≈{distance(member.distancePc).value}</span>{" "}
             <span class="object-distance-unit">{distance(member.distancePc).unit}</span>
           </span>

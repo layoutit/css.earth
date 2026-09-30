@@ -37,7 +37,7 @@ For multiple photographs projected onto a surface, also read
 [registered photographic mosaics](registered-photographic-mosaics.md) for camera
 validation, surface correspondence, observation selection and coverage evidence.
 
-For an existing single-model observation lens with unchanged geometry, use the
+For an existing single-model observation dataset with unchanged geometry, use the
 [observation refresh command](../../../../docs/surface-preparation.md#refresh-photographs-without-rebuilding-geometry)
 to prepare only the selected imagery and its delivery records. It checks the
 retained atlas against the source recipe and reuses the full preparer's owners.
@@ -79,7 +79,7 @@ lighting controls, and inspect the result with Shadows on and off.
 Color and monochrome may have different useful coverage and resolution. If the
 chosen view composes them, preserve observed monochrome where color is absent;
 mark gaps where neither supplies data. Do not infer neutral color, copy grayscale
-detail into color bands, or silently change independent lenses into a composite.
+detail into color bands, or silently change independent datasets into a composite.
 
 ## Scientific maps
 
@@ -89,11 +89,11 @@ Read the native GeoKeys, origin, pixel area convention and NoData before choosin
 reference sphere and prime meridian. Do not multiply an already angular grid by
 the radius. A declared NoData value may never occur in the raster; inspect the
 actual value distribution and producer legend before treating extrema as gaps.
-Keep any conservative exclusion explicit in the recipe and the lens notes.
+Keep any conservative exclusion explicit in the recipe and the dataset notes.
 
-Choose labels by meaning through the shared lens vocabulary: Elevation,
+Choose labels by meaning through the shared dataset vocabulary: Elevation,
 Enhanced color, Thermal infrared, Cross section where those concepts apply.
-Instrument, wavelength, datum, enhancement and caveats belong in the lens notes;
+Instrument, wavelength, datum, enhancement and caveats belong in the dataset notes;
 the caveats a viewer needs also belong in the dataset summary in `text.json`.
 
 For multi-extension FITS scalar maps, select and check the named quantity,
@@ -173,7 +173,7 @@ adds the stronger prepared directional and source-cast lighting. See the shared
 [shape-only material policy](../../../../docs/shape-only-material.md).
 Keep the missing-data grid for unqualified texels within photographic or scientific
 datasets. Neither material validates the underlying geometry. Do not invent
-surface detail or claim an observational lens. Respect the user's geometry budget
+surface detail or claim an observational dataset. Respect the user's geometry budget
 and distinguish simplification from scientific certainty.
 
 For irregular geometry, read [irregular meshes](irregular-meshes.md) before
@@ -220,6 +220,6 @@ and reuse its browser views in the [final checks](qualification.md).
 
 ### Dense scientific materials on fixed bands
 
-For an existing oriented-band scene, a scientific lens may set an integer `rasterScale` in its preparation recipe. This increases only its prepared surface atlas; polar dimensions, geometry and the runtime canonical-density policy remain fixed. Generate its bounded minimap through the same authored scale. Compare ordinary framing and close zoom before choosing the scale, and report compressed bytes separately from decoded pixels.
+For an existing oriented-band scene, a scientific dataset may set an integer `rasterScale` in its preparation recipe. This increases only its prepared surface atlas; polar dimensions, geometry and the runtime canonical-density policy remain fixed. Generate its bounded minimap through the same authored scale. Compare ordinary framing and close zoom before choosing the scale, and report compressed bytes separately from decoded pixels.
 
 Large raw numeric archives use the streaming pinned source downloader and verifier. Keep float validity and units explicit, scan the source before sampling, and reproduce the compact grid into an empty output directory. A hash identifies exact bytes, while the provider label identifies the product and version.

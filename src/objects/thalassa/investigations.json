@@ -16,7 +16,7 @@
       "id": "pds-voyager-iss-opus-c1133759-and-c1133806",
       "subject": "PDS Voyager ISS / OPUS, C1133759 and C1133806",
       "status": "excluded",
-      "finding": "Downloaded and decoded original calibrated GEOMED products; inspected both. Narrow-angle clear images have about 24.07 and 24.05 km/native pixel and 61.44-second exposures. Thalassa’s major axis spans at most 4.5 native pixels before projection; visible features are motion trails. No usable registered surface appearance, so excluded as a photographic lens.",
+      "finding": "Downloaded and decoded original calibrated GEOMED products; inspected both. Narrow-angle clear images have about 24.07 and 24.05 km/native pixel and 61.44-second exposures. Thalassa’s major axis spans at most 4.5 native pixels before projection; visible features are motion trails. No usable registered surface appearance, so excluded as a photographic dataset.",
       "revisitWhen": "A Thalassa observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/thalassa/source/manifest.json",
@@ -27,7 +27,7 @@
       "id": "opus-c1138527-and-adjacent-wide-angle-sequence",
       "subject": "OPUS C1138527 and adjacent wide-angle sequence",
       "status": "excluded",
-      "finding": "Nominal best sampling is 20.19 km/native pixel, only about five pixels across the longest axis, with only 210 × 89 usable image samples recorded. Inspected original GEOMED; no resolved terrain. Excluded as a photographic lens.",
+      "finding": "Nominal best sampling is 20.19 km/native pixel, only about five pixels across the longest axis, with only 210 × 89 usable image samples recorded. Inspected original GEOMED; no resolved terrain. Excluded as a photographic dataset.",
       "revisitWhen": "A Thalassa observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/thalassa/source/manifest.json"
@@ -60,7 +60,7 @@
       "subject": "HST astrometry and size study",
       "status": "unresolved",
       "finding": "Unresolved moon detections constrain orbit and brightness, not registered surface texels. The paper identifies the synchronous long-axis/short-axis convention used here.",
-      "revisitWhen": "A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/thalassa/source/manifest.json",
         "https://www.nature.com/articles/s41586-019-0909-9"
@@ -70,8 +70,8 @@
       "id": "jwst-inner-moon-spectroscopy",
       "subject": "JWST inner-moon spectroscopy",
       "status": "deferred",
-      "finding": "A relevant recent composition candidate, but disk-integrated spectroscopy is not a geographically resolved Thalassa surface lens. Not included as surface imagery. No claim that Thalassa has no spectral observations.",
-      "revisitWhen": "A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "finding": "A relevant recent composition candidate, but disk-integrated spectroscopy is not a geographically resolved Thalassa surface dataset. Not included as surface imagery. No claim that Thalassa has no spectral observations.",
+      "revisitWhen": "A spatially resolved Thalassa measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/thalassa/source/manifest.json",
         "https://pmc.ncbi.nlm.nih.gov/articles/PMC13418922/"

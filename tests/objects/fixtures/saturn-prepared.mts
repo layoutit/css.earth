@@ -27,21 +27,21 @@ export const parseSaturnScene=shape({schema:text,systemTransform:text,meshTransf
 export const parseSaturnViews=shape({schema:text,presentation:text,runtimeGeometry:boolean,runtimeRasterization:boolean,
   defaultView:optional(text),controls:optional(array(requireRecord)),
   lighting:shape({model:text,authority:text,objectLightDirection:array(number),sectionFaceLongitudesDegrees:array(number),sectionFaceCount:number,runtimeLighting:boolean}),
-  cutaway:requireRecord,interiorLenses:dictionary(shape({id:text,model:text,qualification:text,sectionResponse:requireRecord,shellGain:dictionary(number),
+  cutaway:requireRecord,interiorDatasets:dictionary(shape({id:text,model:text,qualification:text,sectionResponse:requireRecord,shellGain:dictionary(number),
     assets:dictionary(pair),runtimeFiltering:boolean,runtimeRasterization:boolean})),
   assets:shape({section:pair,metallic:pair,core:pair,metallicPoles:pair,corePoles:pair,outerPoles:dictionary(pair),thumbnail:asset}),provenance:requireRecord});
-const lensBase={id:text,materialLens:text,label:text,shortLabel:text,thumbnailUrl:text,qualification:text};
-const exteriorFields={...lensBase,surfaceUrl:text,surface2xUrl:optional(text),polesUrl:text,ringUrl:text,ring2xUrl:text,materialUrl:optional(text)};
+const datasetBase={id:text,materialDataset:text,label:text,shortLabel:text,thumbnailUrl:text,qualification:text};
+const exteriorFields={...datasetBase,surfaceUrl:text,surface2xUrl:optional(text),polesUrl:text,ringUrl:text,ring2xUrl:text,materialUrl:optional(text)};
 const colorFields={...exteriorFields,surface2xUrl:text,materialVariant:text,materialPreparationFile:text,filter:text,
   falseColorPalette:array(array(number)),materialGain:number,sourceModel:text,detailPreparation:text,detailCarrierUrl:text,
   maximumDetailScale:number,sourceFiles:array(text),sourceUrls:array(text)};
-function lens(value:unknown) {
+function dataset(value:unknown) {
  const record=requireRecord(value);
- if(record.view==='interior')return {...shape({...lensBase,interiorMaterialUrl:text})(value),view:'interior' as const,
+ if(record.view==='interior')return {...shape({...datasetBase,interiorMaterialUrl:text})(value),view:'interior' as const,
   falseColor:undefined,surface2xUrl:undefined,surfaceUrl:undefined,polesUrl:undefined,ringUrl:undefined,ring2xUrl:undefined,materialUrl:undefined};
  if(record.falseColor===true)return {...shape(colorFields)(value),falseColor:true as const,view:undefined,interiorMaterialUrl:undefined};
  return {...shape(exteriorFields)(value),falseColor:undefined,view:undefined,interiorMaterialUrl:undefined};
 }
-export const parseSaturnLenses=shape({schema:text,defaultLens:text,runtimeFilters:boolean,runtimeRasterization:boolean,
-  controls:array(lens),provenance:requireRecord});
+export const parseSaturnDatasets=shape({schema:text,defaultDataset:text,runtimeFilters:boolean,runtimeRasterization:boolean,
+  controls:array(dataset),provenance:requireRecord});
 export const parseSaturnLayouts=shape({schema:text,sources:dictionary(text),classes:dictionary(shape({width:text,height:text,backgroundSize:text}))});

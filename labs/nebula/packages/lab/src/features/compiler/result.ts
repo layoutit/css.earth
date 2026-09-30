@@ -37,7 +37,7 @@ export function readCompilerResult(v: unknown): CompilerResult {
   const m = v.metrics;
   for (const key of ['components', 'unconstrainedComponents', 'stars', 'fitRmse', 'baselineRmse', 'missingSignalFraction', 'excessSignalFraction']) if (!finite(m[key]) || m[key] < 0) throw new TypeError('Invalid compiler fit metrics.');
   const scene = readCompilerBakeResult(v.scene);
-  if (scene.id !== v.id || scene.stars.length !== m.stars || scene.lenses.length !== sources.length || scene.lenses.some(lens => !sources.some(s => s.id === lens.id))) throw new TypeError('Compiler scene differs from the result.');
+  if (scene.id !== v.id || scene.stars.length !== m.stars || scene.datasets.length !== sources.length || scene.datasets.some(dataset => !sources.some(s => s.id === dataset.id))) throw new TypeError('Compiler scene differs from the result.');
   return { schema: v.schema, id: v.id, label: v.label, defaultSourceId: v.defaultSourceId, controls: readCompilerControls(v.controls), scene, sources, pipeline,
     ...(v.inspectionBoundsArcsec === undefined ? {} : { inspectionBoundsArcsec: bounds(v.inspectionBoundsArcsec) }),
     metrics: { components: Number(m.components), unconstrainedComponents: Number(m.unconstrainedComponents), stars: Number(m.stars), fitRmse: Number(m.fitRmse), baselineRmse: Number(m.baselineRmse),

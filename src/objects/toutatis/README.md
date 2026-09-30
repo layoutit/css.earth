@@ -45,7 +45,7 @@ Zou et al. (2014), Figure 3, and its scale and position were matched by hand to
 Zou's radar rendering. Three check windows agreed within 1.0–2.2 figure pixels,
 but they compare two photographs, not photograph pixels with surface points.
 With no measured camera or control points, that placement does not register
-the photograph, so the photographic lens stays deferred.
+the photograph, so the photographic dataset stays deferred.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 

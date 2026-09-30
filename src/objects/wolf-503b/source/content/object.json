@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wolf-503b",
   "displayName": "Wolf 503 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by Wolf 503; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "wolf-503b-lens-shape.webp",
+        "thumbnail": "wolf-503b-dataset-shape.webp",
         "surface": "wolf-503b-surface-shape@2x.webp",
         "poles": "wolf-503b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of Wolf 503 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wolf-503's light, as its colour lens measures it."
+        "notes": "No image or colour of Wolf 503 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wolf-503's light, as its colour dataset measures it."
       }
     ]
   },

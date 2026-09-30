@@ -39,6 +39,90 @@
     },
     {
       "location": "public",
+      "filename": "ceres-dataset-ammonium-band.webp",
+      "bytes": 3962,
+      "sha256": "4ea7bbf76e6a16b212abadc0b0da56e6785bd02c4b78d5adb78daf13bd666661"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-ammonium-centre.webp",
+      "bytes": 3244,
+      "sha256": "adacd4936f8bfafa3f85d4042ec49b09f6b059b540911f46d26cd915a34e8c4f"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-bouguer.webp",
+      "bytes": 3482,
+      "sha256": "584450f71b7d0c824c59c8cc8c3d110072a6e3ea5dc2c37e59455d69ed7c29db"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-clay-band.webp",
+      "bytes": 2976,
+      "sha256": "d76761242d14878e5846a3df4ec5ae0de7707709f46e8ec377669072ef1f061e"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-clay-centre.webp",
+      "bytes": 2402,
+      "sha256": "9270b15e8ed68efe03abb78a876e12faf39c061afab4476abe54ffbe04769558"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-elevation.webp",
+      "bytes": 1182,
+      "sha256": "d4938ed7a157c863fa5b87d42f58982648dd602344d2a4e8ed58b32f80629ed7"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-enhanced.webp",
+      "bytes": 1234,
+      "sha256": "aab8290ceeb6e17f4fef356f65d35c3c5fa38e4d0442347d221bd515f8f84b48"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-geoid.webp",
+      "bytes": 2310,
+      "sha256": "0353ae6bf91d192bd142d0b0efc1e6d80a9e033281c0271867fcb1e87c832d52"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-gravity-uncertainty.webp",
+      "bytes": 906,
+      "sha256": "ad6d5f8d25201b75c81621cdf11eef66e0741d420eb632db5d9d63d04c845718"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-gravity.webp",
+      "bytes": 3194,
+      "sha256": "ef0cb212f6e3c84f01da337c3348d5b4f7f21aad29a646f8b187b7816f944821"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-hydrogen.webp",
+      "bytes": 168,
+      "sha256": "815ddc7fbd7afafb5395dfbe6757abd68645e44934b2bf47569e7c60ecd0da95"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-iron.webp",
+      "bytes": 180,
+      "sha256": "3e4496eb48920a19b37ee4865e9e6a118212d4570b8dd32455f32731f0a9cd06"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-neutron-counts.webp",
+      "bytes": 182,
+      "sha256": "85354de2c06be7d263435ef2d629f20509e4c16b72cf248a53ef199ca457fde9"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-dataset-normal.webp",
+      "bytes": 854,
+      "sha256": "39bebb57b23fdea57684a335339167e7392465f30addbe93190e4d176318ac05"
+    },
+    {
+      "location": "public",
       "filename": "ceres-elevation@2x.webp",
       "bytes": 826416,
       "sha256": "c5f390a537c7d2cf1cfb21674e56cfad0d6fce3dab40d772f2959d524f0d072c"
@@ -84,90 +168,6 @@
       "filename": "ceres-iron@2x.webp",
       "bytes": 5346,
       "sha256": "fad2433b7b6bb44da931fe3da418bbea9e83e18dee7179499ad06499c1c0a198"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-ammonium-band.webp",
-      "bytes": 3962,
-      "sha256": "4ea7bbf76e6a16b212abadc0b0da56e6785bd02c4b78d5adb78daf13bd666661"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-ammonium-centre.webp",
-      "bytes": 3244,
-      "sha256": "adacd4936f8bfafa3f85d4042ec49b09f6b059b540911f46d26cd915a34e8c4f"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-bouguer.webp",
-      "bytes": 3482,
-      "sha256": "584450f71b7d0c824c59c8cc8c3d110072a6e3ea5dc2c37e59455d69ed7c29db"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-clay-band.webp",
-      "bytes": 2976,
-      "sha256": "d76761242d14878e5846a3df4ec5ae0de7707709f46e8ec377669072ef1f061e"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-clay-centre.webp",
-      "bytes": 2402,
-      "sha256": "9270b15e8ed68efe03abb78a876e12faf39c061afab4476abe54ffbe04769558"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-elevation.webp",
-      "bytes": 1182,
-      "sha256": "d4938ed7a157c863fa5b87d42f58982648dd602344d2a4e8ed58b32f80629ed7"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-enhanced.webp",
-      "bytes": 1234,
-      "sha256": "aab8290ceeb6e17f4fef356f65d35c3c5fa38e4d0442347d221bd515f8f84b48"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-geoid.webp",
-      "bytes": 2310,
-      "sha256": "0353ae6bf91d192bd142d0b0efc1e6d80a9e033281c0271867fcb1e87c832d52"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-gravity-uncertainty.webp",
-      "bytes": 906,
-      "sha256": "ad6d5f8d25201b75c81621cdf11eef66e0741d420eb632db5d9d63d04c845718"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-gravity.webp",
-      "bytes": 3194,
-      "sha256": "ef0cb212f6e3c84f01da337c3348d5b4f7f21aad29a646f8b187b7816f944821"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-hydrogen.webp",
-      "bytes": 168,
-      "sha256": "815ddc7fbd7afafb5395dfbe6757abd68645e44934b2bf47569e7c60ecd0da95"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-iron.webp",
-      "bytes": 180,
-      "sha256": "3e4496eb48920a19b37ee4865e9e6a118212d4570b8dd32455f32731f0a9cd06"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-neutron-counts.webp",
-      "bytes": 182,
-      "sha256": "85354de2c06be7d263435ef2d629f20509e4c16b72cf248a53ef199ca457fde9"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-lens-normal.webp",
-      "bytes": 854,
-      "sha256": "39bebb57b23fdea57684a335339167e7392465f30addbe93190e4d176318ac05"
     },
     {
       "location": "public",
@@ -478,14 +478,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 297,
-      "sha256": "01f4c7887d56aa8a525d2d1cf1f5edf73594bf623a606400d76e3afe3e5d540f"
+      "bytes": 300,
+      "sha256": "6e5b4fd81de00b9f4d774250ce7c1f573dc92f408e8ca7be54fac893fc662676"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 86433,
-      "sha256": "5188643c821bb3dc67837a5b5767e8c7e17bd9fe4903f5a3db77467a330ad082"
+      "bytes": 86475,
+      "sha256": "0543189c76dde31ffe75b0e975868ad8f47a9ff74d69039c8ee8e1da1e484446"
     },
     {
       "location": "prepared",
@@ -497,25 +497,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2992,
-      "sha256": "36252a5c2b1e5d9447fe2f1dc39973c54b57a3b2625d1d290b905ad297d4b5e1"
+      "sha256": "3a0c36c9592c8d6a7a5ce17b885b92c8fed856035297a36e00942fe8d988313c"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 28545,
-      "sha256": "229c372b9882da6b83f7fa543357f35c814ec0403376a43a291766fa242c7ea0"
+      "bytes": 28598,
+      "sha256": "cf5d1d24cdd9db4990f03157adb639078e7b48a013f866108d76c4e5c1f33603"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 35526,
+      "sha256": "d1ed9846e7ac6c47ec12cdbf186bbaf96b84d847bf81c7705ca735783d31997c"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 579,
       "sha256": "f731d961cce902a0b24608b0492a03d92dea05a50e695d091b812bd8c5eb9105"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 35473,
-      "sha256": "7462501b5d783df8d7c6dd49e8ad0669aef5361eb9d93588ed744e4b962f94e7"
     },
     {
       "location": "prepared",
@@ -616,8 +616,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 645904,
-      "sha256": "b6fd8aef08981c71d6c68fa3b72bb22975924e98cf197e20645fbabacbac5c6f"
+      "bytes": 646128,
+      "sha256": "fce26db3a9eaca1751e321c78003af5c805e2f71700172a44b22e44ee8bc6f9a"
     },
     {
       "location": "prepared",

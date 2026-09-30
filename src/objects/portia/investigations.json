@@ -29,8 +29,8 @@
       "id": "2023-keck-near-infrared-study-and-hst-photometry",
       "subject": "2023 Keck near-infrared study and HST photometry",
       "status": "excluded",
-      "finding": "Integrated brightness/reflectivity measurements, using adopted body sizes; they do not supply spatially resolved color pixels. Excluded as a surface color lens.",
-      "revisitWhen": "A spatially resolved Portia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "finding": "Integrated brightness/reflectivity measurements, using adopted body sizes; they do not supply spatially resolved color pixels. Excluded as a surface color dataset.",
+      "revisitWhen": "A spatially resolved Portia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/portia/source/manifest.json",
         "https://www.sciencedirect.com/science/article/pii/S0019103522004237"
@@ -41,7 +41,7 @@
       "subject": "USGS/PDS mapped products, elevation, geology and spectroscopy",
       "status": "deferred",
       "finding": "No registered Portia surface, elevation or compositional map was located in the relevant archive and cited-release survey. Integrated spectral measurements are distinct from a mapped surface dataset. This is a bounded survey result, not a claim that no other observations exist.",
-      "revisitWhen": "A spatially resolved Portia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Portia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/portia/source/manifest.json"
       ]

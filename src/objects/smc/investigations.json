@@ -3,7 +3,7 @@
   "objectId": "smc",
   "entries": [
     {
-      "id": "lens-optical",
+      "id": "dataset-optical",
       "subject": "Publisher optical display image",
       "status": "included",
       "finding": "publisher-curated AstroPix JPEG derivative. Selected for image-layer display. The SMASH image covers the main optical body, not the full Bridge, Wing or tidal debris. Released foreground and background sources remain. This ledger consolidates existing records; no fresh source survey or visual qualification was performed.",
@@ -32,63 +32,63 @@
       ]
     },
     {
-      "id": "lens-smc-horalek-wide",
+      "id": "dataset-smc-horalek-wide",
       "subject": "Horálek wide-field optical photograph",
       "status": "included",
-      "finding": "Shipped lens. Matched stars through VISTA to SMASH: 32,120 matches, held-out p90 1.53 native VISTA pixels, verified only inside the matched hull (50.5% of the field); the outer field is extrapolated. Display-stretched photograph, not calibrated surface brightness. This image is also the baseline the emission model was fitted to. It recolours one shared finite emission geometry; switching lenses changes colour only, never depth.",
+      "finding": "Shipped dataset. Matched stars through VISTA to SMASH: 32,120 matches, held-out p90 1.53 native VISTA pixels, verified only inside the matched hull (50.5% of the field); the outer field is extrapolated. Display-stretched photograph, not calibrated surface brightness. This image is also the baseline the emission model was fitted to. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
       "evidence": [
         "https://noirlab.edu/public/images/iotw2615a/",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
       ]
     },
     {
-      "id": "lens-smc-vista",
+      "id": "dataset-smc-vista",
       "subject": "ESO VISTA VMC near-infrared image",
       "status": "included",
-      "finding": "Shipped lens. Fitted shared-star homography to the native SMASH TIFF. Publisher 4000-pixel derivative; the 43223 × 38236 publisher master was not acquired. Display colour, not calibrated photometry. It recolours one shared finite emission geometry; switching lenses changes colour only, never depth.",
+      "finding": "Shipped dataset. Fitted shared-star homography to the native SMASH TIFF. Publisher 4000-pixel derivative; the 43223 × 38236 publisher master was not acquired. Display colour, not calibrated photometry. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
       "evidence": [
         "https://www.eso.org/public/images/eso1714a/",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
       ]
     },
     {
-      "id": "lens-smc-smash",
+      "id": "dataset-smc-smash",
       "subject": "NOIRLab SMASH DECam optical image",
       "status": "included",
-      "finding": "Shipped lens. Publisher AVM sky anchor with a reciprocal relative star check. Its absolute sky solution remains the publisher’s, not an independently verified catalogue solution. It recolours one shared finite emission geometry; switching lenses changes colour only, never depth.",
+      "finding": "Shipped dataset. Publisher AVM sky anchor with a reciprocal relative star check. Its absolute sky solution remains the publisher’s, not an independently verified catalogue solution. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
       "evidence": [
         "https://noirlab.edu/public/images/noirlab2030b/",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
       ]
     },
     {
-      "id": "lens-smc-dss2",
+      "id": "dataset-smc-dss2",
       "subject": "ESA/Hubble Digitized Sky Survey 2 plate composite",
       "status": "included",
-      "finding": "Shipped lens. Fitted shared-star homography to the native SMASH TIFF. Full-resolution publisher JPEG; the 421.7 MB TIFF was deferred. Smaller footprint than VISTA and SMASH, and not outer tidal-tail coverage. It recolours one shared finite emission geometry; switching lenses changes colour only, never depth.",
+      "finding": "Shipped dataset. Fitted shared-star homography to the native SMASH TIFF. Full-resolution publisher JPEG; the 421.7 MB TIFF was deferred. Smaller footprint than VISTA and SMASH, and not outer tidal-tail coverage. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
       "evidence": [
         "https://esahubble.org/images/heic0514c/",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
       ]
     },
     {
-      "id": "lens-smc-allwise-wide",
+      "id": "dataset-smc-allwise-wide",
       "subject": "AllWISE 10° colour HiPS infrared field",
       "status": "included",
-      "finding": "Shipped lens. Fixed publisher TAN WCS independently checked against 7,172 bright AllWISE W1 catalogue stars with unchanged control thresholds and no fitted transform. Survey coordinates and image share mission data; diffuse emission and depth are not validated. It recolours one shared finite emission geometry; switching lenses changes colour only, never depth.",
+      "finding": "Shipped dataset. Fixed publisher TAN WCS independently checked against 7,172 bright AllWISE W1 catalogue stars with unchanged control thresholds and no fitted transform. Survey coordinates and image share mission data; diffuse emission and depth are not validated. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
       "evidence": [
         "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
       ]
     },
     {
@@ -127,7 +127,7 @@
       "id": "retired-image-layer",
       "subject": "Superseded parametric image-layer delivery",
       "status": "excluded",
-      "finding": "The previous SMC object distributed one SMASH image through 32 normalized parametric slabs with an authored 25 kpc thickness and no observational depth constraint. Its prepared bank and 96 layer images are removed; its source record, recipe and publisher photograph are retained as documents, and that photograph is now the SMASH lens preview.",
+      "finding": "The previous SMC object distributed one SMASH image through 32 normalized parametric slabs with an authored 25 kpc thickness and no observational depth constraint. Its prepared bank and 96 layer images are removed; its source record, recipe and publisher photograph are retained as documents, and that photograph is now the SMASH dataset preview.",
       "evidence": [
         "https://noirlab.edu/public/images/noirlab2030b/",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/source/provenance.json",
@@ -139,12 +139,12 @@
       "id": "fits-composites",
       "subject": "Four survey-band FITS composites",
       "status": "excluded",
-      "finding": "DSS2 blue/red plates, AllWISE W2/W1, AllWISE W4/W3/W1 and Herschel SPIRE 250 µm pass the registration gate and have baked lenses in the lab, but each carries an uncorrected defect: a smooth W2 background gradient toward the south-east, W3 Galactic cirrus and scattered light, SPIRE covering only about 26% of the rectified field, and uncorrected DSS2 plate-to-plate steps. They stay lab-only rather than shipping a known artefact as SMC structure.",
+      "finding": "DSS2 blue/red plates, AllWISE W2/W1, AllWISE W4/W3/W1 and Herschel SPIRE 250 µm pass the registration gate and have baked datasets in the lab, but each carries an uncorrected defect: a smooth W2 background gradient toward the south-east, W3 Galactic cirrus and scattered light, SPIRE covering only about 26% of the rectified field, and uncorrected DSS2 plate-to-plate steps. They stay lab-only rather than shipping a known artefact as SMC structure.",
       "evidence": [
         "https://alasky.cds.unistra.fr/MocServer/query?ID=ESAVO%2FP%2FHERSCHEL%2FSPIRE-250&get=record&fmt=json",
         "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fblue&get=record&fmt=json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/README-candidates.md",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
       ],
       "revisitWhen": "A background-gradient, cirrus and plate-step correction is implemented and inspected, or SPIRE coverage is extended over the rectified field."
     },
@@ -167,7 +167,7 @@
       "id": "delivery-reproducibility",
       "subject": "Reproducing the delivered bank from a clean checkout",
       "status": "included",
-      "finding": "Resolved. The delivery is regenerated from its own checked-in inputs: 9.3 MB of compact replay inputs (fitted emission field, envelope gain map, neutral alpha bank, the VMC ellipsoid density grid, and per lens the registered colour raster with an alpha-only coverage mask) plus numbered records of the laboratory inputs behind them. `prepare:nebulae --if-missing` rebuilds the bank and its axis atlases, and `prepared/**` is no longer tracked. Verified with the ignored laboratory caches moved aside: all 1,360 regenerated slice textures are byte-identical to the promotion output, every lens is value-identical in label, stars, brightness, frame, provenance and leaf geometry, and the committed descriptor pin matches the regenerated bank. This replaces the earlier finding that a clean checkout could verify the bank but not regenerate it, and that the runtime loaded 272 slice images per lens; it now loads three axis atlases. Re-proven on the merged tree: the restore is byte-identical across all 15 atlases, the bank and the delivery receipt, and re-preparing over an installed delivery is idempotent.",
+      "finding": "Resolved. The delivery is regenerated from its own checked-in inputs: 9.3 MB of compact replay inputs (fitted emission field, envelope gain map, neutral alpha bank, the VMC ellipsoid density grid, and per dataset the registered colour raster with an alpha-only coverage mask) plus numbered records of the laboratory inputs behind them. `prepare:nebulae --if-missing` rebuilds the bank and its axis atlases, and `prepared/**` is no longer tracked. Verified with the ignored laboratory caches moved aside: all 1,360 regenerated slice textures are byte-identical to the promotion output, every dataset is value-identical in label, stars, brightness, frame, provenance and leaf geometry, and the committed descriptor pin matches the regenerated bank. This replaces the earlier finding that a clean checkout could verify the bank but not regenerate it, and that the runtime loaded 272 slice images per dataset; it now loads three axis atlases. Re-proven on the merged tree: the restore is byte-identical across all 15 atlases, the bank and the delivery receipt, and re-preparing over an installed delivery is idempotent.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/source/compact/inputs.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/source/compact-delivery.json",
@@ -228,7 +228,7 @@
       "id": "model-relocation",
       "subject": "Owner relocation and the re-derived model identity",
       "status": "included",
-      "finding": "Replaying the delivery may not import the laboratory or the fitting methods, so the envelope samplers, the observer-ray conversion, the depth-prior contract and the pinned-density loader moved to volume-core and volume-bake. Those paths are hashed into the model identity, so the accepted fit `smc-constrained-emission-envelope-ellipsoid` was re-derived rather than re-labelled. Nothing else changed. The emission field, the envelope, all 342 neutral textures and every registered raster are byte-identical, every fit metric matches to the last digit, and re-baking the nine lenses, the star layer and the promotion reproduced all 1,360 texture digests, all five stacks and frames and all 1,803 star points unchanged.",
+      "finding": "Replaying the delivery may not import the laboratory or the fitting methods, so the envelope samplers, the observer-ray conversion, the depth-prior contract and the pinned-density loader moved to volume-core and volume-bake. Those paths are hashed into the model identity, so the accepted fit `smc-constrained-emission-envelope-ellipsoid` was re-derived rather than re-labelled. Nothing else changed. The emission field, the envelope, all 342 neutral textures and every registered raster are byte-identical, every fit metric matches to the last digit, and re-baking the nine datasets, the star layer and the promotion reproduced all 1,360 texture digests, all five stacks and frames and all 1,803 star points unchanged.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/EMISSION-METHOD.md",
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/volume/fields/simulation-envelope.ts",
@@ -239,7 +239,7 @@
       "id": "atlas-acceptance",
       "subject": "Application acceptance of the regenerated atlas delivery",
       "status": "included",
-      "finding": "Re-inspected in the running application after the delivery became regenerable and atlas-packed. Each lens now decodes one texture at the Earth framing instead of 128, the world camera is unchanged across all five lens switches, all 1,803 stars mount and the shared toggle removes and restores them, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views are unchanged from the slice delivery. The earlier inspection of the pre-relocation slice delivery is preserved beside it. Re-inspected again after merging origin/main (177 commits): unchanged verdict on the merged revision, with the same one-texture-per-lens Earth framing, retained camera, star toggle and clean console.",
+      "finding": "Re-inspected in the running application after the delivery became regenerable and atlas-packed. Each dataset now decodes one texture at the Earth framing instead of 128, the world camera is unchanged across all five dataset switches, all 1,803 stars mount and the shared toggle removes and restores them, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views are unchanged from the slice delivery. The earlier inspection of the pre-relocation slice delivery is preserved beside it. Re-inspected again after merging origin/main (177 commits): unchanged verdict on the merged revision, with the same one-texture-per-dataset Earth framing, retained camera, star toggle and clean console.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/evidence/merged-2026-09-17/inspection.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/evidence/atlas-delivery-2026-09-17/inspection.json",

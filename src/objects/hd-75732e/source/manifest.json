@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "hd-75732e-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -110,7 +110,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -126,7 +126,7 @@
       "acquisition": "TAP query in source/preparation/acquisition.json: every emission row of this planet, ordered by wavelength.",
       "redistribution": "Table rows as served, with the archive acknowledged.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -148,11 +148,11 @@
       "sourceUrl": "https://science.nasa.gov/resource/55-cancri-e-3d-model/",
       "credit": "NASA Visualization Technology Applications and Development (VTAD)",
       "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
-      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/55-cancri-e-3d-model/, unchanged; its base-colour texture is the lens.",
+      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/55-cancri-e-3d-model/, unchanged; its base-colour texture is the dataset.",
       "redistribution": "NASA media; an illustrative model, not photographed terrain or a measured map",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -293,10 +293,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "lens-colour-context-marker",
+      "id": "dataset-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
-      "credit": "The default lens's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -312,7 +312,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

@@ -17,7 +17,7 @@ Both use the paper's colour bar: linear from −12 G (blue) through white at 0 t
 
 **Star.** Placement: Gaia DR3 source 4745373133284418816, parallax 57.613 ± 0.038 mas (17.36 pc). Radius 1.16 solar radii, mass 1.23 solar masses and temperature 6,080 K: Bruntt et al. (2010), as tabulated by Alvarado-Gómez et al. (2018, Table 1). Colour: its Gaia DR3 BP/RP spectrum through the CIE 1931 2° observer, sRGB (252, 246, 255). Limb: Claret (2017)'s TESS-band quadratic law at 6,080 K and log g 4.40 (u1 0.334, u2 0.227), a model.
 
-Catalogue colour: #fcf6ff, the colour lens's prepared colour.
+Catalogue colour: #fcf6ff, the colour dataset's prepared colour.
 
 ## Evidence
 
@@ -27,7 +27,7 @@ Run of 2026-09-23 (this version):
 - The reader was compared with the paper's Fig. 1 epoch-1 radial panel, decoded through its colour bar: correlation 0.945 over 43,412 figure pixels, median difference 0.4 G. Mirrored in longitude the correlation is −0.50; mirrored in latitude, 0.59. The figure is not redistributed, so this was a one-off check.
 - The longitude direction was read from the same figure's phase ticks against the epoch-1 Stokes V fits, as described above.
 - [`iota-horologii-views.png`](evidence/iota-horologii-views.png): ι Horologii's Colour (its default), Radial field October 2015 and Azimuthal field December 2015, and Luhman 16 B's interpolated Brightness, on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready.
-- [`lens-steps.test.mts`](../../../packages/bake/src/objects/content/lens-steps.test.mts) (now [`packages/bake/src/objects/content/lens-steps.test.mts`](../../../packages/bake/src/objects/content/lens-steps.test.mts)) checks that the stepped datasets form groups of consecutive steps with distinct labels.
+- [`dataset-steps.test.mts`](../../../packages/bake/src/objects/content/dataset-steps.test.mts) (now [`packages/bake/src/objects/content/dataset-steps.test.mts`](../../../packages/bake/src/objects/content/dataset-steps.test.mts)) checks that the stepped datasets form groups of consecutive steps with distinct labels.
 
 ## Known problems
 

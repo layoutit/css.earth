@@ -35,7 +35,7 @@
       "id": "sbmt-native-preparation-oracle",
       "subject": "Native SBMT preparation comparison",
       "status": "included",
-      "finding": "The generic native SBMT oracle compares the full released mesh, the MSI FITS exposure and both corrected SUM and SPICE INFO camera cases. Sampled pointing, image values and visible intersections match. Maximum in-image UV difference across the tested orientations/crop is 0.0817 pixel, within the fixed 0.25-pixel criterion. This is preparation test evidence, not qualification of a new surface lens.",
+      "finding": "The generic native SBMT oracle compares the full released mesh, the MSI FITS exposure and both corrected SUM and SPICE INFO camera cases. Sampled pointing, image values and visible intersections match. Maximum in-image UV difference across the tested orientations/crop is 0.0817 pixel, within the fixed 0.25-pixel criterion. This is preparation test evidence, not qualification of a new surface dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/README.md (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)",
         "https://github.com/layoutit/css.earth/blob/2af5c9c167/tests/oracles/sbmt/projection.json (now packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)"
@@ -53,9 +53,9 @@
     },
     {
       "id": "selected-roberts-ponds-catalogue",
-      "subject": "Roberts Eros Ponds Catalog V1.1 as the Ponds lens",
+      "subject": "Roberts Eros Ponds Catalog V1.1 as the Ponds dataset",
       "status": "included",
-      "finding": "The PDS SBN bundle urn:nasa:pds:ast-eros.roberts.ponds-catalog::1.1 (doi:10.26033/4dqc-8067) lists 334 ponds with IAU_EROS centres in km, planetocentric latitude and east longitude, radial distance and one characteristic diameter each (7.4 to 213.6 m, median 49.9 m), identified by P. C. Thomas and relocated on the Gaskell SPC shape with SBMT. Because it publishes diameters, each pond is drawn as the set of source-surface points within half its diameter of the centre, not as a one-cell presence mark. Every row's Cartesian centre reproduces its printed latitude, longitude and distance within 0.009° and 1.1 m. Projected onto ver128q, 326 centres lie within 27.4 m of the surface (median 2.3 m, 95th percentile 12.6 m); 8 lie 66 to 384 m away (ponds 1, 2, 10, 129, 216, 218, 219, 255) and are withheld by the 60 m limit chosen beforehand, a little under half the 131.9 m median ver128q edge; three of them (1, 2, 255) miss it by only 6 to 9 m. The SBMT copy of the table matches the CSV to 0.5 m and carries the cyan colour 0,255,255 the lens uses.",
+      "finding": "The PDS SBN bundle urn:nasa:pds:ast-eros.roberts.ponds-catalog::1.1 (doi:10.26033/4dqc-8067) lists 334 ponds with IAU_EROS centres in km, planetocentric latitude and east longitude, radial distance and one characteristic diameter each (7.4 to 213.6 m, median 49.9 m), identified by P. C. Thomas and relocated on the Gaskell SPC shape with SBMT. Because it publishes diameters, each pond is drawn as the set of source-surface points within half its diameter of the centre, not as a one-cell presence mark. Every row's Cartesian centre reproduces its printed latitude, longitude and distance within 0.009° and 1.1 m. Projected onto ver128q, 326 centres lie within 27.4 m of the surface (median 2.3 m, 95th percentile 12.6 m); 8 lie 66 to 384 m away (ponds 1, 2, 10, 129, 216, 218, 219, 255) and are withheld by the 60 m limit chosen beforehand, a little under half the 131.9 m median ver128q edge; three of them (1, 2, 255) miss it by only 6 to 9 m. The SBMT copy of the table matches the CSV to 0.5 m and carries the cyan colour 0,255,255 the dataset uses.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt",
         "https://doi.org/10.26033/4dqc-8067",
@@ -66,7 +66,7 @@
       "id": "ponds-as-named-features",
       "subject": "Ponds as labelled surface features",
       "status": "excluded",
-      "finding": "The catalogue names ponds only by number (Pond001 to Pond334) and the surface-features bank is built for IAU names with search and captions. 334 numbered labels would add no names; the categorical lens carries position and size instead.",
+      "finding": "The catalogue names ponds only by number (Pond001 to Pond334) and the surface-features bank is built for IAU names with search and captions. 334 numbered labels would add no names; the categorical dataset carries position and size instead.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/data/erosshiftedponds_20190226_sbmt.tab"
       ],
@@ -122,7 +122,7 @@
       "id": "ponds-over-dimmed-photograph",
       "subject": "Ponds drawn over the 550 nm photograph",
       "status": "included",
-      "finding": "The first Ponds bake drew non-pond ground as a flat grey category, so the 1 to 2 pixel ponds read as an empty body. The lens now has one category and leaves non-pond surface missing; the missing texels show the 550 nm photograph in grey at 35% brightness and 6 bits, the catalogue-lens rule used on Mars and Phobos. On the body the photograph is sampled exactly as the 550 nm view's native atlas samples it (same leaf transform and 2 × 2 texel footprint on the original Golish map), so both views share one texel grid. Contrast: the cyan pond colour differs from every dimmed photograph value by at least 47.1 OKLab units (5th percentile 64.7, median 69.6) over 14,252,095 samples, every fourth native value of the 550 nm map.",
+      "finding": "The first Ponds bake drew non-pond ground as a flat grey category, so the 1 to 2 pixel ponds read as an empty body. The dataset now has one category and leaves non-pond surface missing; the missing texels show the 550 nm photograph in grey at 35% brightness and 6 bits, the catalogue-dataset rule used on Mars and Phobos. On the body the photograph is sampled exactly as the 550 nm view's native atlas samples it (same leaf transform and 2 × 2 texel footprint on the original Golish map), so both views share one texel grid. Contrast: the cyan pond colour differs from every dimmed photograph value by at least 47.1 OKLab units (5th percentile 64.7, median 69.6) over 14,252,095 samples, every fourth native value of the 550 nm map.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/eros/evidence/ponds/registration.json",
         "https://doi.org/10.26033/4dqc-8067"

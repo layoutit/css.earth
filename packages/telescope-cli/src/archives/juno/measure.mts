@@ -28,7 +28,7 @@ import { astroqueryRows } from '@cssearth/telescope/node';
 import { flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';
-/** The budget every measured program is held to; a lens may state a tighter one. */
+/** The budget every measured program is held to; a dataset may state a tighter one. */
 export const POLICY: StripRefinementPolicy = { method: 'mesh-limb-epochs', maximumPointingSeconds: 0.05, maximumEphemerisSeconds: 2, maximumResidualPixels: 1.5, minimumControls: 64, maximumControls: 1500, searchPixels: 64 };
 const BANDS = ['RED', 'GREEN', 'BLUE'] as const, STEP_DEGREES = 2, JUNO = -61;
 // The software name this stage has always serialized into a registration record, from when this module lived at

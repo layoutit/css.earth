@@ -41,11 +41,11 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, se
       const options = Object.freeze({ state: settings("cycle") });
       const features = Object.freeze({ state: settings("toggle") });
       const parents = Object.freeze(nodes.map(node => node.parentNode));
-      const lensState = () => Object.freeze({ id: selection.state().committed?.lensId ?? initialSelection.lensId,
+      const datasetState = () => Object.freeze({ id: selection.state().committed?.datasetId ?? initialSelection.datasetId,
         ready: selection.state().ready });
-      const selectLens = (id: string) => selection.dispatch({ kind: "lens", id });
+      const selectDataset = (id: string) => selection.dispatch({ kind: "dataset", id });
       const diagnostics = Object.freeze({ ready: true,
-        view: () => orbit.state(), setView: (state: OrbitStateUpdate) => orbit.setState(state), lens: lensState, selectLens,
+        view: () => orbit.state(), setView: (state: OrbitStateUpdate) => orbit.setState(state), dataset: datasetState, selectDataset,
         camera: Object.freeze({ state: orbit.state, setState: orbit.setState, flyToState: orbit.flyToState, stats: orbit.stats,
           publication: orbit.publicationState,
           captureWorldCamera: orbit.captureWorldCamera, applyWorldCamera: orbit.applyWorldCamera }),
@@ -55,7 +55,7 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, se
           // project them independently.
           sceneRegistration: definition.sky.sceneRegistration ?? null,
           sunLocalDirection: definition.sun?.localDirection ?? null }),
-        lenses: Object.freeze({ state: lensState, select: selectLens }),
+        datasets: Object.freeze({ state: datasetState, select: selectDataset }),
         options, settings: Object.freeze({ state: settings() }), features,
         renderStats: Object.freeze({
           selectedPreparedDensity: context.density, visibleAssetsDecodedBeforeMount: startupDecodedAssets,

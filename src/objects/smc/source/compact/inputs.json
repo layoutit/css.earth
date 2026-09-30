@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-compact-finite-emission@1",
+  "schema": "cssearth-compact-finite-emission@2",
   "method": "simulation-guided-finite-material@1",
   "bankId": "smc",
-  "defaultLens": "smc-horalek-wide",
+  "defaultDataset": "smc-horalek-wide",
   "framingRadiusUnits": 7,
   "frame": {
     "referenceFrame": "sun-icrf",
@@ -95,7 +95,7 @@
     "path": "src/objects/smc/source/compact/stars.json.gz",
     "bytes": 159252
   },
-  "lenses": [
+  "datasets": [
     {
       "imageId": "smc-horalek-wide",
       "tangentBoundsKpc": {

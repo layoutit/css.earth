@@ -13,9 +13,9 @@ import { parseRuntimeManifest } from '@cssearth/bake/delivery';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 
-export async function refreshPhotographs(id: string, lensIds: readonly string[]) {
-  if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
-    throw new TypeError('Choose an object and distinct photographic lens IDs.');
+export async function refreshPhotographs(id: string, datasetIds: readonly string[]) {
+  if (!/^[a-z][a-z0-9-]*$/.test(id) || !datasetIds.length || new Set(datasetIds).size !== datasetIds.length)
+    throw new TypeError('Choose an object and distinct photographic dataset IDs.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const authored = await readAuthoredSources(objectDirectory);
@@ -23,12 +23,12 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   const config = parseRasterRecipe(sources.get('raster'));
   if (config.resample !== 'density-before-pack' || config.emission)
     throw new TypeError('Photographic refresh needs separately packed non-emissive raster surfaces.');
-  if (lensIds.some(id => !config.surfaces.some(surface => surface.id === id))) throw new TypeError('Unknown photographic lens.');
-  const selected = { ...config, surfaces: config.surfaces.filter(surface => lensIds.includes(surface.id)),
+  if (datasetIds.some(id => !config.surfaces.some(surface => surface.id === id))) throw new TypeError('Unknown photographic dataset.');
+  const selected = { ...config, surfaces: config.surfaces.filter(surface => datasetIds.includes(surface.id)),
     lighting: undefined, atmosphere: undefined, interior: undefined };
   const { createSurfaceInterpreter, selectSurfaceDependencies } = await import('@cssearth/bake/objects/interpretation');
   const interpret = await createSurfaceInterpreter({ objectId: id, displayName: id, sourceDirectory,
-    recipe: selectSurfaceDependencies(config, lensIds), sourceVerification: 'photographs',
+    recipe: selectSurfaceDependencies(config, datasetIds), sourceVerification: 'photographs',
     solarGeometry: await import(pathToFileURL(resolve('src/platform/solar-geometry.mts')).href) as SolarGeometry });
   const stageRoot = resolve('.local/photographic-refresh'); await mkdir(stageRoot, { recursive: true });
   const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
@@ -57,30 +57,30 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(combined) + '\n');
   await updateInventory({ objectId: id, objectDirectory, location: 'public', assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) });
   const { prepareSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
-  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds,
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: datasetIds,
     solarGeometry: await import(pathToFileURL(resolve('src/platform/solar-geometry.mts')).href) as SolarGeometry });
-  await refreshSurfaceContent(id, lensIds);
-  return { id, lenses: lensIds, assets: replacements.size, bytes: [...replacements.values()].reduce((sum, entry) => sum + entry.bytes, 0),
+  await refreshSurfaceContent(id, datasetIds);
+  return { id, datasets: datasetIds, assets: replacements.size, bytes: [...replacements.values()].reduce((sum, entry) => sum + entry.bytes, 0),
     seconds: (Date.now() - start) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024, stage };
 }
 
-/** Refresh selected authored captions while preserving the retained scene and other lens controls. */
-export async function refreshSurfaceContent(id: string, lensIds: readonly string[]) {
-  if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
-    throw new TypeError('Choose an object and distinct surface lens IDs.');
+/** Refresh selected authored captions while preserving the retained scene and other dataset controls. */
+export async function refreshSurfaceContent(id: string, datasetIds: readonly string[]) {
+  if (!/^[a-z][a-z0-9-]*$/.test(id) || !datasetIds.length || new Set(datasetIds).size !== datasetIds.length)
+    throw new TypeError('Choose an object and distinct surface dataset IDs.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const content = (await readAuthoredSources(objectDirectory)).sources.get('content')?.reference;
   if (!content?.path.startsWith('source/')) throw new TypeError('Photographic refresh needs authored content.');
-  const previousLenses = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'lenses.json'), 'utf8')));
+  const previousDatasets = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'datasets.json'), 'utf8')));
   const previousContent = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')));
   await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: content.path.slice(7) } });
-  const lensPath = resolve(outputDirectory, 'lenses.json'), preparedLenses = requireRecord(JSON.parse(await readFile(lensPath, 'utf8')));
-  const replacementsById = new Map(requireArray(preparedLenses.controls).map(value => { const lens = requireRecord(value); return [requireString(lens.id), lens] as const; }));
-  await writeFile(lensPath, JSON.stringify({ ...previousLenses, controls: requireArray(previousLenses.controls).map(value => {
-    const lens = requireRecord(value), key = requireString(lens.id);
-    if (!lensIds.includes(key)) return lens;
-    const replacement = replacementsById.get(key); if (!replacement) throw new Error(`Missing photographic lens: ${key}`); return replacement;
+  const datasetPath = resolve(outputDirectory, 'datasets.json'), preparedDatasets = requireRecord(JSON.parse(await readFile(datasetPath, 'utf8')));
+  const replacementsById = new Map(requireArray(preparedDatasets.controls).map(value => { const dataset = requireRecord(value); return [requireString(dataset.id), dataset] as const; }));
+  await writeFile(datasetPath, JSON.stringify({ ...previousDatasets, controls: requireArray(previousDatasets.controls).map(value => {
+    const dataset = requireRecord(value), key = requireString(dataset.id);
+    if (!datasetIds.includes(key)) return dataset;
+    const replacement = replacementsById.get(key); if (!replacement) throw new Error(`Missing photographic dataset: ${key}`); return replacement;
   }) }) + '\n');
   if (previousContent.features !== undefined) {
     const features = requireRecord(previousContent.features);
@@ -92,16 +92,16 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
   const runtime = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')));
   const { repinObjectJson } = await import('@cssearth/bake/contract');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));
-  const labels = new Map(requireArray(requireRecord(updatedControls.lenses).controls).map(value => { const lens = requireRecord(value); return [requireString(lens.id), lens] as const; }));
-  const controls = requireRecord(runtime.controls), lenses = requireRecord(controls.lenses);
-  const selection = requireArray(lenses.controls).map(value => {
-    const lens = requireRecord(value), key = requireString(lens.id);
-    if (!lensIds.includes(key)) return lens;
+  const labels = new Map(requireArray(requireRecord(updatedControls.datasets).controls).map(value => { const dataset = requireRecord(value); return [requireString(dataset.id), dataset] as const; }));
+  const controls = requireRecord(runtime.controls), datasets = requireRecord(controls.datasets);
+  const selection = requireArray(datasets.controls).map(value => {
+    const dataset = requireRecord(value), key = requireString(dataset.id);
+    if (!datasetIds.includes(key)) return dataset;
     const label = labels.get(key); if (!label) throw new Error(`Missing photographic caption: ${key}`); return label;
   });
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
   const navigation = await prepareWorldNavigationDefinition({ objectDirectory, projectRoot: process.cwd(),
-    definition: { ...runtime, controls: { ...controls, lenses: { ...lenses, controls: selection } } } });
+    definition: { ...runtime, controls: { ...controls, datasets: { ...datasets, controls: selection } } } });
   const scene = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
   await writeWorldNavigationArtifacts(outputDirectory, navigation, scene);
   // Captions do not require recompiling texture matrices, seam treatment or body geometry.
@@ -109,7 +109,7 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [id, ...lenses] = process.argv.slice(2);
-  if (!id) throw new TypeError('Usage: refresh-photographs.js <objectId> <lensId> [...]');
-  console.log(JSON.stringify(await refreshPhotographs(id, lenses)));
+  const [id, ...datasets] = process.argv.slice(2);
+  if (!id) throw new TypeError('Usage: refresh-photographs.js <objectId> <datasetId> [...]');
+  console.log(JSON.stringify(await refreshPhotographs(id, datasets)));
 }

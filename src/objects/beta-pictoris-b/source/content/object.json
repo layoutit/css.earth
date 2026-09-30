@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "beta-pictoris-b",
   "displayName": "Beta Pictoris b",
@@ -113,15 +113,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "infrared",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "infrared",
     "controls": [
       {
         "id": "infrared",
         "label": "Infrared colour",
         "qualification": "False colour from its measured flux in three infrared bands (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
-        "thumbnail": "beta-pictoris-b-lens-infrared.webp",
+        "thumbnail": "beta-pictoris-b-dataset-infrared.webp",
         "surface": "beta-pictoris-b-surface-infrared@2x.webp",
         "poles": "beta-pictoris-b-poles-infrared@2x.webp",
         "source": {

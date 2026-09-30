@@ -36,11 +36,11 @@ A new source/removal result or changed placement requires Preview again. Results
 
 ## Local app handoff
 
-**Save lens settings** exports this browser's stored per-image choices and the active cloud/star controls. The receipt separates the visible density filter from an unapplied cutoff draft. Select completed result IDs from that receipt and its saved jobs, not from the newest cache entry (another browser or an automated check may have created it).
+**Save dataset settings** exports this browser's stored per-image choices and the active cloud/star controls. The receipt separates the visible density filter from an unapplied cutoff draft. Select completed result IDs from that receipt and its saved jobs, not from the newest cache entry (another browser or an automated check may have created it).
 
-The offline `promote-volume-lenses` command consumes an explicit `cssearth-volume-lens-promotion@1` recipe and writes to a staging object directory. The recipe pins the settings receipt and each reconstruction result, selected contributions, density cutoff, cloud axis/overall attenuation and star exposure/size. It reuses the lab's density filter, keeps exactly the selected reference or contribution leaves, and stores image/source/catalogue provenance. No image registration, star removal or new volume inference runs during promotion. A material draft must first receive its own Preview result.
+The offline `promote-volume-datasets` command consumes an explicit `cssearth-volume-dataset-promotion@1` recipe and writes to a staging object directory. The recipe pins the settings receipt and each reconstruction result, selected contributions, density cutoff, cloud axis/overall attenuation and star exposure/size. It reuses the lab's density filter, keeps exactly the selected reference or contribution leaves, and stores image/source/catalogue provenance. No image registration, star removal or new volume inference runs during promotion. A material draft must first receive its own Preview result.
 
-Verify the staged artifact's hashes, shared geometry/stars and actual app views before installing it. Keep the source recipe and a replayable copy of the pinned lab inputs; a settings receipt alone does not contain image pixels. Runtime receives only fixed volume-lens resources and prepared catalogue-point presentation.
+Verify the staged artifact's hashes, shared geometry/stars and actual app views before installing it. Keep the source recipe and a replayable copy of the pinned lab inputs; a settings receipt alone does not contain image pixels. Runtime receives only fixed volume-dataset resources and prepared catalogue-point presentation.
 
 ## Method limits and next experiment
 

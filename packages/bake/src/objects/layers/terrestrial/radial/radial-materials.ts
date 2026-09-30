@@ -33,8 +33,8 @@ const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - 
 
 /** Shared by the retained atlas and prepare-only context image. Coordinates
  * enter in display units and are immediately restored to physical metres. */
-export function createRadialScienceColorSampler<T extends SourceSurfaceSample>(sourceSurface: {samplePoint(point: readonly number[]): T | null}, lens: SciencePalette, config: {geometry: {radiusKm: number; radius: number}; raster: {width: number}}) {
-  const paint = createSourceSurfacePainter(lens);
+export function createRadialScienceColorSampler<T extends SourceSurfaceSample>(sourceSurface: {samplePoint(point: readonly number[]): T | null}, dataset: SciencePalette, config: {geometry: {radiusKm: number; radius: number}; raster: {width: number}}) {
+  const paint = createSourceSurfacePainter(dataset);
   const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   return (point: readonly number[]) => {
     const sample = sourceSurface.samplePoint(point.map(n => n * metersPerUnit));
@@ -96,7 +96,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       if(!sourceDirectory || lightingRecipe || artifactId || radial.observationSurfaces?.has(surface.id) || radial.scientificSurfaces?.has(surface.id)) {
         throw new Error('Native photograph refresh requires the existing cylindrical-map terrain and lighting.');
       }
-      const input=source.manifest.inputs.find(entry=>requireRecord(entry).lensId===surface.id && entry.consumers.includes('surfaces'));
+      const input=source.manifest.inputs.find(entry=>requireRecord(entry).datasetId===surface.id && entry.consumers.includes('surfaces'));
       if(!input)throw new Error(`No pinned photograph for ${surface.id}.`);
       Object.assign(surface,await prepareNativePhotographicAtlas({radial,sourceDirectory,source:input,validity:photograph.validity,
         sampling:photograph.nativePhotographicSampling,publicDirectory,publicBase:config.publicBase,id:`${config.namespace}-${surface.id}`,
@@ -118,15 +118,15 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     }
     const nearest = surface.displaySampling === 'nearest';
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
-    const scientific = sourceSurface && (config.raster.scientific ?? []).find(lens => lens.id === surface.id);
+    const scientific = sourceSurface && (config.raster.scientific ?? []).find(dataset => dataset.id === surface.id);
     if (sourceSurface && (!scientific || !sourceSurface.samplePoint || !scientific.surfaceSampling)) throw new Error('Terrain science requires its source-point sampler and bound profile.');
     const sampleScience = scientific && sourceSurface?.samplePoint
       ? createRadialScienceColorSampler({samplePoint: sourceSurface.samplePoint}, scientific, config) : null;
-    // A source-surface lens over an underlay shows its photograph where the source sampler finds no catalogued feature. The
+    // A source-surface dataset over an underlay shows its photograph where the source sampler finds no catalogued feature. The
     // photograph is sampled as its own native atlas samples it: the same leaf transform and texel footprint, then dimmed.
     const underlay = sampleScience && scientific?.underlay ? await (async (recipe) => {
       const photograph = config.raster.observations?.find(observation => observation.id === recipe.surface);
-      const input = source.manifest.inputs.find(entry => requireRecord(entry).lensId === recipe.surface && entry.consumers.includes('surfaces'));
+      const input = source.manifest.inputs.find(entry => requireRecord(entry).datasetId === recipe.surface && entry.consumers.includes('surfaces'));
       if (!photograph?.nativePhotographicSampling || !input || !sourceDirectory || scale !== 1)
         throw new Error(`${config.namespace} ${surface.id}: a source-surface underlay needs ${recipe.surface} to be a native photograph at full atlas scale (sourceDirectory ${Boolean(sourceDirectory)}, scale ${scale}).`);
       return { recipe, sampler: await loadNativePhotograph(sourceDirectory, input, photograph.validity), samplesPerAxis: photograph.nativePhotographicSampling.samplesPerAxis };
@@ -358,16 +358,16 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   if (lighting) await writeFile(resolve(outputDirectory, `source-lighting${suffix}.json`), JSON.stringify({ ...lighting.report, reusedLightingSamples, recipe: lightingRecipe }) + '\n');
   for (const entry of snapshotEntries.filter(entry =>
     matchesPreparationGenerator(entry.generator, 'tools/objects/terrestrial-layers/radial-snapshot.mts'))) {
-    const surface = surfaces.find(surface => surface.id === requireRecord(requireRecord(entry).recipe).lensId);
-    if (!surface) throw new TypeError('Radial snapshot requires a prepared source lens.');
+    const surface = surfaces.find(surface => surface.id === requireRecord(requireRecord(entry).recipe).datasetId);
+    if (!surface) throw new TypeError('Radial snapshot requires a prepared source dataset.');
     const science = radial.scientificSurfaces?.get(surface.id);
     const observation = radial.observationSurfaces?.get(surface.id);
-    const lens = science && (config.raster.scientific ?? []).find(lens => lens.id === surface.id);
-    if (science && (!science.samplePoint || !lens)) throw new Error('Terrain snapshot requires its source-point sampler and bound profile.');
-    const scienceSnapshot = science?.samplePoint && lens ? createRadialScienceColorSampler({samplePoint:science.samplePoint}, lens, config) : undefined;
+    const dataset = science && (config.raster.scientific ?? []).find(dataset => dataset.id === surface.id);
+    if (science && (!science.samplePoint || !dataset)) throw new Error('Terrain snapshot requires its source-point sampler and bound profile.');
+    const scienceSnapshot = science?.samplePoint && dataset ? createRadialScienceColorSampler({samplePoint:science.samplePoint}, dataset, config) : undefined;
     const png = await renderRadialSnapshot({ ...parseRadialSnapshot(requireRecord(entry).recipe), faces: radial.faces,
-      ...(scienceSnapshot && lens ? { sampleSurface: scienceSnapshot,
-        ...((lens.format === 'facet-scalars' || lens.displaySampling === 'nearest') ? { displaySampling: 'nearest' } : {}) } : {}),
+      ...(scienceSnapshot && dataset ? { sampleSurface: scienceSnapshot,
+        ...((dataset.format === 'facet-scalars' || dataset.displaySampling === 'nearest') ? { displaySampling: 'nearest' } : {}) } : {}),
       ...(observation ? { sampleSurface: observation.samplePoint } : {}),
       map: resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1))) });
     const reviewed = sourceDirectory ? await readFile(resolve(sourceDirectory, entry.path)).catch(() => null) : null;

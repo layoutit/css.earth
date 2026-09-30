@@ -1,7 +1,7 @@
 /**
- * Set up a VLT/SPHERE survey body's photograph lens and measure it against the survey's own comparison figure.
+ * Set up a VLT/SPHERE survey body's photograph dataset and measure it against the survey's own comparison figure.
  *
- *   node packages/bake/cli/sphere-survey-setup.mts <object-id>    build and measure the lens in output/sphere-survey/<id>/
+ *   node packages/bake/cli/sphere-survey-setup.mts <object-id>    build and measure the dataset in output/sphere-survey/<id>/
  *   node packages/bake/cli/sphere-survey-install.mts <object-id>  write a measured setup into the body's package
  *
  * The first form writes nothing in the package. It copies the package's source directory, finds the body's figure in
@@ -9,7 +9,7 @@
  * apparition's camera-1 frames, fetches what is not already on this machine, decides the spin record's column order
  * from the published pole, writes both Horizons tables, derives every camera and measures the figure through them.
  * The result is `setup.json`, the evidence and its image. Decide on the image; `install.mts` then writes the same records
- * into the package with the lens control, reader text, ledger entries, README sections and credits.
+ * into the package with the dataset control, reader text, ledger entries, README sections and credits.
  */
 import { constants } from 'node:fs';
 import { access, cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
@@ -22,7 +22,7 @@ import { measurePublishedComparison, writeComparisonEvidence } from './published
 import { tableInput } from '../layers/terrestrial/index.ts';
 import { horizonsCommand, horizonsTables } from '../layers/terrestrial/index.ts';
 import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../layers/terrestrial/index.ts';
-import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForLens, spinRecordReading } from '../layers/terrestrial/index.ts';
+import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForDataset, spinRecordReading } from '../layers/terrestrial/index.ts';
 import { loadCameraShape, loadObjShape, requireTerrainMesh, simplifyRadialShape } from '../geometry/index.ts';
 import type { RadialSimplification } from '../geometry/index.ts';
 import { parseSpinState, spinOrientation } from '../cameras/index.ts';
@@ -31,7 +31,7 @@ import { apparitionLinks, listedViews, meshFaces, releasedFrames } from './appar
 import { anchorApparition, apparitions, selectFrames } from './frames.ts';
 import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from './lam.ts';
 
-export const LENS_ID = 'zimpol';
+export const DATASET_ID = 'zimpol';
 export const SETUP_SCHEMA = 'cssearth-sphere-survey-setup@1';
 const SPIN_RECORD_PATH = 'reference/release-parameters.txt', ADAM_METERS_PER_UNIT = 1000;
 const HORIZONS = { observer: 'reference/horizons-sphere-observer.txt', heliocentric: 'reference/horizons-sphere-heliocentric.txt' } as const;
@@ -40,8 +40,8 @@ const PANEL = 240, SURVEY_LABEL_LINES = 2;
 /** The one figure whose labels were read by eye and confirmed against frame headers; its glyphs read every other figure. */
 const REFERENCE_FIGURE = { objectId: 'iris', object: 1085 } as const;
 
-/** The settings every shipped survey lens uses; `setup.test.mts` keeps them equal to the lenses in the repository. */
-export const SURVEY_LENS_SETTINGS = {
+/** The settings every shipped survey dataset uses; `setup.test.mts` keeps them equal to the datasets in the repository. */
+export const SURVEY_DATASET_SETTINGS = {
   format: 'controlled-shape-camera', consumer: 'sphere-photograph', selection: 'edge-weighted-average',
   levelMatching: { samplesPerTriangle: 24, minimumPairs: 128, maximumGain: 4, maximumAngleDegrees: 60 },
   transfer: { maximumSeparationFootprints: 2, visibilityToleranceMeters: 0.5, maximumEmissionDegrees: 70,
@@ -54,7 +54,7 @@ interface ReleasedModel { source: string; model: string; pole: [number, number];
 interface SurveyFigure { figure: string; number: number; name: string; page: number; object: number; width: number; height: number; pole: [number, number]; releasedModel?: ReleasedModel }
 const readJson = async (path: string) => JSON.parse(await readFile(path, 'utf8')) as unknown;
 const exists = (path: string) => access(path).then(() => true, () => false);
-const frameId = (frame: LamFrame) => `${LENS_ID}-${frame.second.slice(0, 10).replaceAll('-', '')}-${frame.second.slice(11).replaceAll(':', '')}`;
+const frameId = (frame: LamFrame) => `${DATASET_ID}-${frame.second.slice(0, 10).replaceAll('-', '')}-${frame.second.slice(11).replaceAll(':', '')}`;
 
 /** The survey's released model as an archive states it, where Table A.1 describes another solution than that model. */
 function releasedModelOf(value: Record<string, unknown>): ReleasedModel {
@@ -124,7 +124,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
   if (!Number.isInteger(number) || !figure) throw new Error(`${objectId} (Horizons '${command}') is not a body of the survey's Appendix B.`);
 
   // The pole the column order is decided by is the survey's own, as its Table A.1 prints it. A body whose published pole
-  // belongs to another solution, a DAMIT model say, carries the survey's in its lens record, beside the rotation it decides.
+  // belongs to another solution, a DAMIT model say, carries the survey's in its dataset record, beside the rotation it decides.
   // The table prints Thisbe's past the pole, latitude 116°: the direction (λ + 180°, 180° − β), which the obliquity it
   // prints confirms, so it is folded; a record describing another solution is still refused below.
   const [printedLongitude, printedLatitude] = figure.pole;
@@ -157,27 +157,27 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
     if (shown.some(frame => frame !== null && frameId(frame) === id)) throw new Error(`Figure ${figure.figure} shows ${id}; a frame the comparison reads cannot be left out.`);
   }
   // Whole apparitions left out by the date of their first night, each for a reason the install records: the pixels can
-  // refuse a link the geometry predicted (Daphne's 2017 frames). Their columns then show no lens frame, like any apparition
-  // the lens does not cast.
+  // refuse a link the geometry predicted (Daphne's 2017 frames). Their columns then show no dataset frame, like any apparition
+  // the dataset does not cast.
   const leftApparitions = apparitions(listing).filter(members => (options.leaveOutApparitions ?? []).includes(members[0].second.slice(0, 10)));
   for (const date of options.leaveOutApparitions ?? []) if (!leftApparitions.some(members => members[0].second.startsWith(date))) throw new Error(`No apparition of ${figure.name} starts on ${date}.`);
   const leftFrames = new Set(leftApparitions.flat());
   const candidates = listing.filter(frame => !leaveOut.includes(frameId(frame)) && !leftFrames.has(frame)), shownFrames = shown.filter((frame): frame is LamFrame => frame !== null && !leftFrames.has(frame));
 
-  // A fresh copy of the package's source directory, without any earlier lens of this id, to build the lens in.
+  // A fresh copy of the package's source directory, without any earlier dataset of this id, to build the dataset in.
   await rm(source, { recursive: true, force: true });
   await cp(packageSource, source, { recursive: true, mode: constants.COPYFILE_FICLONE });
   const recipe = requireRecord(await readJson(resolve(source, 'preparation/terrestrial.json')));
   const raster = requireRecord(recipe.raster), geometry = requireRecord(recipe.geometry);
   const existing = Array.isArray(raster.surfaceObservations) ? raster.surfaceObservations.map(value => requireRecord(value)) : [];
-  const earlierLens = existing.find(lens => lens.id === LENS_ID);
-  raster.surfaceObservations = existing.filter(lens => lens.id !== LENS_ID);
-  geometry.radialTerrainAlternatives = (Array.isArray(geometry.radialTerrainAlternatives) ? geometry.radialTerrainAlternatives.map(value => requireRecord(value)) : []).filter(entry => entry.lensId !== LENS_ID);
+  const earlierDataset = existing.find(dataset => dataset.id === DATASET_ID);
+  raster.surfaceObservations = existing.filter(dataset => dataset.id !== DATASET_ID);
+  geometry.radialTerrainAlternatives = (Array.isArray(geometry.radialTerrainAlternatives) ? geometry.radialTerrainAlternatives.map(value => requireRecord(value)) : []).filter(entry => entry.datasetId !== DATASET_ID);
 
   // Files: the ADAM mesh, the spin record and the paper, each from this machine when present; the frames once they are chosen.
   const written: string[] = [];
   const put = async (path: string, bytes: Buffer | string) => { await mkdir(dirname(resolve(source, path)), { recursive: true }); await writeFile(resolve(source, path), bytes); if (!written.includes(path)) written.push(path); };
-  // A release without an ADAM mesh for the body leaves the lens on the primary mesh, the release's MPCD: Themis's
+  // A release without an ADAM mesh for the body leaves the dataset on the primary mesh, the release's MPCD: Themis's
   // 3Dshape directory answers 404 for it.
   // Where LAM withholds a body's own ADAM mesh and rotation record (Flora), the survey model's archive copy supplies both.
   const withheld = figure.releasedModel?.spin !== undefined && figure.releasedModel.shape !== undefined
@@ -198,11 +198,11 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
 
   // The column order the survey's pole supports.
   // Where Table A.1 describes another solution than the survey's released model (Eleonora, Thisbe), the released model's
-  // pole as the archive's copy of it states decides the reading; the figure then decides whether the lens ships.
+  // pole as the archive's copy of it states decides the reading; the figure then decides whether the dataset ships.
   const released = figure.releasedModel, readingPole = released ? { longitudeDegrees: released.pole[0], latitudeDegrees: released.pole[1] } : surveyPole;
   const reading = spinRecordReading(spinRecord.toString('utf8'), readingPole);
 
-  // The lens mesh: the ADAM mesh as the lens's own model where the primary is another.
+  // The dataset mesh: the ADAM mesh as the dataset's own model where the primary is another.
   // A body whose own shape is already the release's ADAM mesh (Adeona, which has no MPCD) needs no second copy of it.
   const primaryIsAdam = requireRecord(geometry.radialTerrain).path === adamPath;
   if (adam && !primaryIsAdam) {
@@ -210,20 +210,20 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
     // The release's ADAM meshes are Wavefront OBJ files in kilometres, whatever format the primary mesh came in (a DAMIT
     // plate model, say); the rest of the primary's settings carry over.
     const adamGrid = { metersPerUnit: ADAM_METERS_PER_UNIT, expectedVertices: counts.vertices, expectedFaces: counts.faces };
-    const alternative = { lensId: LENS_ID, ...primary, path: adamPath, format: 'wavefront-obj', grid: adamGrid,
+    const alternative = { datasetId: DATASET_ID, ...primary, path: adamPath, format: 'wavefront-obj', grid: adamGrid,
       ...(primary.simplification === undefined ? {} : { simplification: await adamSimplification(requireRecord(primary.simplification), resolve(source, adamPath), adamGrid, counts, Number(primary.faceBudget), Number(geometry.radius) / (Number(geometry.radiusKm) * 1000)) }) };
     requireArray(geometry.radialTerrainAlternatives).push(alternative);
   }
-  const lensTerrain = radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], LENS_ID);
-  const mesh = await loadCameraShape(source, lensTerrain);
+  const datasetTerrain = radialTerrainForDataset(recipe as unknown as Parameters<typeof radialTerrainForDataset>[0], DATASET_ID);
+  const mesh = await loadCameraShape(source, datasetTerrain);
 
-  // The apparitions the lens casts: the figure's, and every other its level fit can reach through shared surface.
+  // The apparitions the dataset casts: the figure's, and every other its level fit can reach through shared surface.
   const { apparitions: byApparition, anchor } = anchorApparition(candidates, shownFrames);
   const apparitionOf = (frame: LamFrame) => byApparition.findIndex(members => members.includes(frame));
   const views = await listedViews(candidates, spinOrientation(parseSpinState(spinRecord.toString('utf8'), reading.order)), command, downloads);
-  const { levelMatching } = SURVEY_LENS_SETTINGS;
+  const { levelMatching } = SURVEY_DATASET_SETTINGS;
   const links = apparitionLinks(meshFaces(mesh), mesh, candidates.map((frame, index) => ({ apparition: apparitionOf(frame), view: views[index] })), anchor,
-    { gateDegrees: levelMatching.maximumAngleDegrees, minimumPairs: levelMatching.minimumPairs, displaySamples: requireFiniteNumber(requireRecord(lensTerrain).faceBudget) * levelMatching.samplesPerTriangle });
+    { gateDegrees: levelMatching.maximumAngleDegrees, minimumPairs: levelMatching.minimumPairs, displaySamples: requireFiniteNumber(requireRecord(datasetTerrain).faceBudget) * levelMatching.samplesPerTriangle });
   const selected = selectFrames(candidates.filter(frame => links[apparitionOf(frame)].cast), shownFrames);
   const columns = labels.map(({ label, band }, index) => ({ label, frame: shown[index] && selected.includes(shown[index]) ? frameId(shown[index]) : null, band }));
   if (!columns.some(column => column.frame)) throw new Error(`None of Figure ${figure.figure}'s columns shows a released camera-1 frame.`);
@@ -243,14 +243,14 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
   await writeFile(cachedTables, JSON.stringify({ starts, ...tables }));
   await put(HORIZONS.observer, tables.observer); await put(HORIZONS.heliocentric, tables.heliocentric);
 
-  // The records: the observer cameras, the figure and the lens itself.
-  const record = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: LENS_ID, rotation: { kind: 'spin-record', path: spinRecordPath, columnOrder: reading.order,
+  // The records: the observer cameras, the figure and the dataset itself.
+  const record = { schema: OBSERVER_CAMERAS_SCHEMA, datasetId: DATASET_ID, rotation: { kind: 'spin-record', path: spinRecordPath, columnOrder: reading.order,
     ...(released ? { publishedPole: { source: released.source, table: released.model, eclipticJ2000Degrees: released.pole } }
       : ownPole ? {} : { publishedPole: { source: paperPin.source, table: 'Table A.1', eclipticJ2000Degrees: [surveyPole.longitudeDegrees, surveyPole.latitudeDegrees] } }) },
     ephemeris: HORIZONS, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
   await put(OBSERVER_CAMERAS_FILE, JSON.stringify(record, null, 2) + '\n');
   const manifest = requireRecord(await readJson(resolve(source, 'manifest.json')));
-  const spec = { schema: COMPARISON_SPEC_SCHEMA, lensId: LENS_ID, source: paperPin.source, figure: `Figure ${figure.figure}`,
+  const spec = { schema: COMPARISON_SPEC_SCHEMA, datasetId: DATASET_ID, source: paperPin.source, figure: `Figure ${figure.figure}`,
     document: { url: SURVEY_PAPER_URL, object: figure.object, width: image.width, height: image.height },
     rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
@@ -259,12 +259,12 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
   const unsettled = cameras.filter(camera => !limbSettled(camera.limb));
   if (unsettled.length > 0) throw new Error(`The limb fit does not settle on ${unsettled.map(camera => `${camera.id} (last move ${camera.limb.movedPixels.toFixed(2)} px)`).join(', ')}; leave those frames out with --leave-out and say why.`);
   const nights = [...new Set(frames.map(entry => entry.frame.second.slice(0, 10)))], cast = links.filter(link => link.cast).length;
-  const lens = { id: LENS_ID, format: SURVEY_LENS_SETTINGS.format, consumer: SURVEY_LENS_SETTINGS.consumer,
-    metadata: { label: 'SPHERE photograph', falseColor: false, coverage: lensCoverage(frames.length, nights, figure.figure, cast) },
-    selection: SURVEY_LENS_SETTINGS.selection, levelMatching: SURVEY_LENS_SETTINGS.levelMatching, transfer: SURVEY_LENS_SETTINGS.transfer,
-    photometry: SURVEY_LENS_SETTINGS.photometry, display: SURVEY_LENS_SETTINGS.display,
+  const dataset = { id: DATASET_ID, format: SURVEY_DATASET_SETTINGS.format, consumer: SURVEY_DATASET_SETTINGS.consumer,
+    metadata: { label: 'SPHERE photograph', falseColor: false, coverage: datasetCoverage(frames.length, nights, figure.figure, cast) },
+    selection: SURVEY_DATASET_SETTINGS.selection, levelMatching: SURVEY_DATASET_SETTINGS.levelMatching, transfer: SURVEY_DATASET_SETTINGS.transfer,
+    photometry: SURVEY_DATASET_SETTINGS.photometry, display: SURVEY_DATASET_SETTINGS.display,
     frames: cameras.map(camera => ({ id: camera.id, path: camera.path, encoding: 'fits-zimpol-intensity', ...recipeFields(camera) })) };
-  requireArray(raster.surfaceObservations).push(lens);
+  requireArray(raster.surfaceObservations).push(dataset);
   await put('preparation/terrestrial.json', JSON.stringify(recipe, null, 2) + '\n');
 
   // The manifest: every new file declared, so the scratch copy measures exactly what the package would hold.
@@ -285,7 +285,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
   // The measurement, through the same cameras the recipe states.
   const result = await measurePublishedComparison(objectId, { root: root, sourceDirectory: source });
   await writeComparisonEvidence(result, resolve(work, 'evidence'));
-  const setup = { schema: SETUP_SCHEMA, objectId, survey: { number, name: figure.name, figure: figure.figure, command }, lensId: LENS_ID,
+  const setup = { schema: SETUP_SCHEMA, objectId, survey: { number, name: figure.name, figure: figure.figure, command }, datasetId: DATASET_ID,
     listing: framesUrl(number, figure.name), spinRecordUrl, cast: { nights, frames: frames.length, released: listing.length },
     apparitions: byApparition.map((members, index) => {
       const latitudes = candidates.flatMap((frame, at) => apparitionOf(frame) === index ? [views[at].latitude] : []);
@@ -293,11 +293,11 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
         anchor: index === anchor, sharedSamples: links[index].sharedSamples, subObserverLatitude: [Math.min(...latitudes), Math.max(...latitudes)].map(value => Number(value.toFixed(1))) };
     }),
     leftOutApparitions: leftApparitions.map(members => ({ from: members[0].second.slice(0, 10), to: members.at(-1)!.second.slice(0, 10), frames: members.length })),
-    leftOut: leaveOut, lensMesh: adam && !primaryIsAdam ? 'adam' : 'primary', primaryIsAdam, releasedModel: released ?? null, tablePole: figure.pole,
+    leftOut: leaveOut, datasetMesh: adam && !primaryIsAdam ? 'adam' : 'primary', primaryIsAdam, releasedModel: released ?? null, tablePole: figure.pole,
     sources: { mesh: adam ? { label: withheld ? `ADAM reconstruction, as ${withheld.model} distributes it` : 'ADAM reconstruction', url: adamUrl } : null,
       rotation: { label: withheld ? `Rotation state, as ${withheld.model} states it` : 'Release rotation record', url: spinRecordUrl } },
     labels: columns, columnOrder: { order: reading.order, separationDegrees: Number(reading.separationDegrees.toFixed(2)), otherSeparationDegrees: reading.otherSeparationDegrees === null ? null : Number(reading.otherSeparationDegrees.toFixed(2)) },
-    written: written.sort(), earlierLens: earlierLens ? compareEarlierLens(earlierLens, lens) : null, evidence: result.evidence };
+    written: written.sort(), earlierDataset: earlierDataset ? compareEarlierDataset(earlierDataset, dataset) : null, evidence: result.evidence };
   await writeFile(resolve(work, 'setup.json'), JSON.stringify(setup, null, 2) + '\n');
   return setup;
 }
@@ -330,18 +330,18 @@ export async function adamSimplification(primary: Record<string, unknown>, path:
   return simplification;
 }
 
-/** How a rebuilt lens compares with the one the package already has: its frames and every camera field. */
-function compareEarlierLens(earlier: Record<string, unknown>, rebuilt: { frames: Record<string, unknown>[] }) {
+/** How a rebuilt dataset compares with the one the package already has: its frames and every camera field. */
+function compareEarlierDataset(earlier: Record<string, unknown>, rebuilt: { frames: Record<string, unknown>[] }) {
   const before = requireArray(earlier.frames).map(value => requireRecord(value));
   const sameFrames = JSON.stringify(before.map(frame => frame.path)) === JSON.stringify(rebuilt.frames.map(frame => frame.path));
   const differing = sameFrames ? rebuilt.frames.filter((frame, index) => JSON.stringify(frame) !== JSON.stringify(before[index])).map(frame => frame.id) : [];
   return { frames: before.length, sameFrames, camerasDiffering: differing };
 }
 
-function lensCoverage(frames: number, nights: readonly string[], figure: string, apparitions: number) {
+function datasetCoverage(frames: number, nights: readonly string[], figure: string, apparitions: number) {
   const over = nights.length === 1 ? `on ${nights[0]}` : `over ${nights.length} nights${apparitions > 1 ? ` in ${apparitions} apparitions` : ''} from ${nights[0]} to ${nights.at(-1)}`;
   const levels = `matched relative frame brightness,${apparitions > 1 ? ' each apparition placed through the surface it shares with another,' : ''} averaged where frames overlap with each fading out toward its disc edge,`;
-  return `${frames} deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, ${over}, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure ${figure}. Grayscale retains photographed illumination and ${levels} not measured albedo. The grid marks unphotographed, grazing or rejected surface.`;
+  return `${frames} deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, ${over}, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the dataset mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure ${figure}. Grayscale retains photographed illumination and ${levels} not measured albedo. The grid marks unphotographed, grazing or rejected surface.`;
 }
 
 const SURVEY_CREDIT = 'P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey';
@@ -353,7 +353,7 @@ const surveyTerms = { license: 'Public scientific release from the source-author
 function frameInput(objectId: string, frame: LamFrame, bytes: Buffer) {
   const { width, height } = readFitsImageSize(bytes);
   return { id: `${objectId}-sphere-${frame.second.replace(/\D/gu, '')}`, path: `observations/${frame.file}`, origin: frame.url, credit: SURVEY_CREDIT, capture: surveyCapture, ...surveyTerms,
-    consumers: ['sphere-photograph'], width, height, lensId: LENS_ID, label: 'Deconvolved ZIMPOL frame',
+    consumers: ['sphere-photograph'], width, height, datasetId: DATASET_ID, label: 'Deconvolved ZIMPOL frame',
     coverage: 'Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.' };
 }
 function adamInput(objectId: string, number: number, name: string, path: string, bytes: Buffer, archive?: { model: string; shape: string }) {
@@ -362,8 +362,8 @@ function adamInput(objectId: string, number: number, name: string, path: string,
     capture: surveyCapture, ...(archive ? damitTerms : surveyTerms), consumers: ['adam-terrain'],
     projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'kilometers' },
     coverage: archive
-      ? `ADAM reconstruction from the same survey, as ${archive.model} distributes it: LAM withholds the release’s own file for this body. The survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.`
-      : 'ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.' };
+      ? `ADAM reconstruction from the same survey, as ${archive.model} distributes it: LAM withholds the release’s own file for this body. The survey’s comparison figure shows it beside the frames, so the photographic dataset is registered to this mesh.`
+      : 'ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic dataset is registered to this mesh.' };
 }
 const damitTerms = { license: 'CC-BY-4.0; DAMIT site license, retained with author and model attribution.', acquisition: 'Restored through source/preparation/acquisition.json.',
   redistribution: 'CC-BY-4.0 with author/model attribution; see NOTICE.md.' };
@@ -377,14 +377,14 @@ export function surveySetupSummary(setup: Awaited<ReturnType<typeof buildSetup>>
   const lines = [`${setup.objectId}: (${setup.survey.number}) ${setup.survey.name}, Figure ${setup.survey.figure}; ${setup.cast.frames} of ${setup.cast.released} released camera-1 frames, ${setup.cast.nights.join(', ')}.`,
     ...setup.apparitions.map(entry => `  apparition ${entry.from} to ${entry.to}: ${entry.cast} of ${entry.frames} frames cast, sub-observer latitude ${entry.subObserverLatitude.join(' to ')}°; ${entry.anchor ? 'the figure\'s' : `${entry.sharedSamples} display samples shared with a cast frame at the level fit's angle limit`}`),
     `Spin record read ${setup.columnOrder.order}: ${setup.columnOrder.separationDegrees}° from the published pole, the other reading ${setup.columnOrder.otherSeparationDegrees ?? '—'}°.`,
-    ...setup.labels.map(column => `  column ${column.label}${column.band ? ` (band ${column.band})` : ''}: ${column.frame ?? 'no lens frame'}`)];
+    ...setup.labels.map(column => `  column ${column.label}${column.band ? ` (band ${column.band})` : ''}: ${column.frame ?? 'no dataset frame'}`)];
   for (const column of setup.evidence.columns) lines.push(`  ${column.label}  model ${column.overlapWithModel}, photograph ${column.overlapWithPhotograph}, same shape ${column.sameShapeOverlap}; best turn ${column.bestTurnDegrees}°; axis ${column.axis.oursDegrees}° against ${column.axis.paperDegrees}°`);
   lines.push(`  native outline ${setup.evidence.nativeOutline.residualPixelsAtZero} px over ${setup.evidence.nativeOutline.frames} frames, smallest at ${setup.evidence.nativeOutline.bestOffsetDegrees}°`);
   if (setup.leftOut.length) lines.push(`  left out by name: ${setup.leftOut.join(', ')}`);
   for (const entry of setup.leftOutApparitions) lines.push(`  apparition left out by name: ${entry.from} to ${entry.to}, ${entry.frames} frames`);
-  if (setup.primaryIsAdam) lines.push('  the body’s own shape is the release’s ADAM mesh; the lens rides it');
-  else if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
-  if (setup.earlierLens) lines.push(`  the package's lens: ${setup.earlierLens.frames} frames, ${setup.earlierLens.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierLens.camerasDiffering.length ? setup.earlierLens.camerasDiffering.join(', ') : 'none'}`);
+  if (setup.primaryIsAdam) lines.push('  the body’s own shape is the release’s ADAM mesh; the dataset rides it');
+  else if (setup.datasetMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the dataset rides the primary mesh');
+  if (setup.earlierDataset) lines.push(`  the package's dataset: ${setup.earlierDataset.frames} frames, ${setup.earlierDataset.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierDataset.camerasDiffering.length ? setup.earlierDataset.camerasDiffering.join(', ') : 'none'}`);
   lines.push(`Evidence: ${relative(root, resolve(root, 'output/sphere-survey', setup.objectId, 'evidence/published-comparison.webp'))}`);
   return lines.join('\n');
 }

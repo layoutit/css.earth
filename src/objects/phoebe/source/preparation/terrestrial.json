@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "phoebe",
   "displayName": "Phoebe",
@@ -506,6 +506,6 @@
     "sunSource": "JPL Phoebe orbit and the retained Gaskell source-model orientation; the 2023 release uses the same image/kernel set and shifts its origin to the center of figure. Present-day rotation phase is not independently qualified."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

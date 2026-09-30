@@ -16,7 +16,7 @@ export async function prepareImageLayerObject(objectDirectory: string) {
   let previous:string[]=[];try{const old=JSON.parse(await readFile(resolve(outputDirectory,'image-layers.json'),'utf8')) as {resources?:{path?:unknown}[]};previous=(old.resources??[]).flatMap(r=>typeof r.path==='string'?[r.path]:[]);}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}
   const prepared=await prepareImageLayers({sourceDirectory,outputDirectory,recipe});
   const preparedPath=resolve(outputDirectory,'image-layers.json'),preparedBytes=await readFile(preparedPath);
-  const nextDescriptor={schema:'cssearth-object@1',id:recipe.id,type:'image-layer-bank',properties:{frame:prepared.frame,preparation:ref},
+  const nextDescriptor={schema:'cssearth-object@2',id:recipe.id,type:'image-layer-bank',properties:{frame:prepared.frame,preparation:ref},
     prepared:{format:'cssearth-image-layer-bank@1',url:'prepared/image-layers.json'}};
   await writeFile(resolve(root,'object.json'),JSON.stringify(nextDescriptor,null,2)+'\n');
   const retained=new Set(prepared.resources.map(resource=>resource.path));

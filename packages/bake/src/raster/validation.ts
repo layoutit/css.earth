@@ -16,7 +16,7 @@ function fields(value: RecordValue, keys: string[], label: string, positive = fa
     finite(value[key], `${label}.${key}`, positive); }
 export function parseRasterRecipe(value: unknown): RasterRecipe {
     const recipe = record(value, 'raster');
-    if (recipe.schema !== 'cssearth-raster-recipe@1')
+    if (recipe.schema !== 'cssearth-raster-recipe@2')
         throw new TypeError('Unsupported raster recipe schema.');
     fields(recipe, ['sourceWidth', 'sourceHeight', 'width', 'height', 'latitudeBands', 'polarTile'], 'raster', true);
     for (const key of ['sourceWidth', 'sourceHeight', 'width', 'height', 'latitudeBands', 'polarTile'])
@@ -33,7 +33,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
     if (recipe.missingCoverage !== undefined && recipe.missingCoverage !== 'gray' && recipe.missingCoverage !== 'dark')
         throw new TypeError('Unknown missing-coverage fill.');
     if (recipe.polesCombined !== undefined)
-        throw new TypeError('Every lens writes its own poles (polesOutput with {id}); remove polesCombined.');
+        throw new TypeError('Every dataset writes its own poles (polesOutput with {id}); remove polesCombined.');
     // Angular poles sample the whole source map, which only the source-packed lane keeps in memory.
     if (recipe.polarProjection === 'angular-nearest' && recipe.resample !== 'source-packed')
         throw new TypeError('Angular-nearest poles need source-packed storage.');
@@ -44,7 +44,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         throw new TypeError('publicBase must be an absolute asset URL prefix.');
     path(recipe.polesOutput, 'polesOutput');
     if (!String(recipe.polesOutput).includes('{id}'))
-        throw new TypeError('polesOutput must name each lens ({id}): every lens writes its own poles.');
+        throw new TypeError('polesOutput must name each dataset ({id}): every dataset writes its own poles.');
     const metadata = record(recipe.surfaceMetadata, 'surfaceMetadata');
     text(metadata.schema, 'surfaceMetadata.schema');
     if (metadata.sourcePositionVariable !== undefined)
@@ -131,14 +131,14 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             const base = (recipe.surfaces as Record<string, unknown>[]).find(other => other.id === underlay.surface);
             if (surface.science === undefined || !base || underlay.surface === surface.id || !ids.has(String(underlay.surface)) || base.underlay !== undefined ||
                 (base.resolutionScale ?? 1) !== (surface.resolutionScale ?? 1) || recipe.resample !== 'density-before-pack' || recipe.emission !== undefined)
-                throw new TypeError(`${String(surface.id)}: surface.underlay needs a science lens drawn over an earlier surface ${String(underlay.surface)} of the same resolution, with no underlay of its own, in density-before-pack storage.`);
+                throw new TypeError(`${String(surface.id)}: surface.underlay needs a science dataset drawn over an earlier surface ${String(underlay.surface)} of the same resolution, with no underlay of its own, in density-before-pack storage.`);
             if (typeof underlay.brightness !== 'number' || !(underlay.brightness > 0 && underlay.brightness <= 1))
                 throw new TypeError(`${String(surface.id)}: surface.underlay.brightness must be in (0, 1], not ${String(underlay.brightness)}.`);
         }
         if (surface.thumbnailCenterLongitudeDegrees !== undefined) {
             finite(surface.thumbnailCenterLongitudeDegrees, 'surface.thumbnailCenterLongitudeDegrees');
             if (recipe.resample !== 'density-before-pack')
-                throw new TypeError('A per-lens thumbnail centre needs density-before-pack storage.');
+                throw new TypeError('A per-dataset thumbnail centre needs density-before-pack storage.');
         }
         if (surface.sharpen !== undefined)
             finite(surface.sharpen, 'surface.sharpen', true);

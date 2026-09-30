@@ -39,7 +39,7 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
 }
 
 /** The object page stylesheets (the renderer package's own stylesheets name no scene image), whose `url(/scenes/<id>/…)` values the deploy resolves to published hashes like the
- * prepared data's (site/asset-origin.mts). A body's stylesheet lenses are part of what it ships. */
+ * prepared data's (site/asset-origin.mts). A body's stylesheet datasets are part of what it ships. */
 export async function stylesheetTexts():Promise<string[]> {
  const directory=resolve(process.cwd(),'src/renderers/css/styles');
  // A tree without renderer stylesheets (an isolated fixture) has no stylesheet references.

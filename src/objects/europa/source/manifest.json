@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "usgs-voyager-galileo-global-500m",
@@ -16,7 +16,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 19631,
@@ -1417,7 +1417,7 @@
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
-        "lenses",
+        "datasets",
         "presentation",
         "features"
       ],
@@ -1450,7 +1450,7 @@
       "consumers": [
         "agenor-elevation"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "width": 642,
@@ -1531,7 +1531,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Infrared",
       "falseColor": true,
       "width": 2048,
@@ -1761,7 +1761,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -1845,7 +1845,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -1862,7 +1862,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -19684,7 +19684,7 @@
       "consumers": [
         "jwst-carbon-dioxide"
       ],
-      "lensId": "carbon-dioxide",
+      "datasetId": "carbon-dioxide",
       "label": "Carbon dioxide",
       "falseColor": true,
       "sourceBinding": {
@@ -20123,7 +20123,7 @@
       "acquisition": "Download the pinned calibrated image (RDR) from the PDS Cartography and Imaging Sciences Node volume JNOJNC_0024.",
       "width": 1648,
       "height": 10752,
-      "lensId": "junocam",
+      "datasetId": "junocam",
       "label": "JunoCam",
       "capture": {
         "attributions": [
@@ -20424,7 +20424,7 @@
       "consumers": [
         "jwst-hydrogen-peroxide"
       ],
-      "lensId": "hydrogen-peroxide",
+      "datasetId": "hydrogen-peroxide",
       "label": "Hydrogen peroxide",
       "falseColor": true,
       "sourceBinding": {
@@ -20451,7 +20451,7 @@
       "consumers": [
         "hst-sodium-chloride"
       ],
-      "lensId": "sodium-chloride",
+      "datasetId": "sodium-chloride",
       "label": "Sea salt",
       "falseColor": true,
       "sourceBinding": {

@@ -13,7 +13,7 @@ test('partial refresh changes only chart bytes and sizes; refuses local content 
     await mkdir(resolve(object, 'source/content'), { recursive: true });
     await mkdir(resolve(object, 'prepared'), { recursive: true });
     await mkdir(resolve(root, 'public/scenes/fixture'), { recursive: true });
-    const content = { schema: 'cssearth-prepared-content@1', objectId: 'fixture', facts: ['keep facts'],
+    const content = { schema: 'cssearth-prepared-content@2', objectId: 'fixture', facts: ['keep facts'],
       galleries: ['keep gallery'], charts: [{ src: '/scenes/fixture/phase.svg', width: 1, height: 1, alt: 'keep alt' }] };
     const bytes = Buffer.from(JSON.stringify(content));
     await writeFile(resolve(object, 'prepared/content.json'), bytes);

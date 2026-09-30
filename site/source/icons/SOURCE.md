@@ -11,7 +11,7 @@ optical height of approximately 15 to 16 pixels, and the existing cssEarth
 | `symbol-sine-wave.svg` | Reflectance spectrum (`∿`) | [Sine wave.svg](https://commons.wikimedia.org/wiki/File:Sine_wave.svg) |
 | `symbol-proportional-to.svg` | Temperature–pressure profile (`∝`) | [Proportional To in Linux Biolinum Regular - U+221D.svg](https://commons.wikimedia.org/wiki/File:Proportional_To_in_Linux_Biolinum_Regular_-_U%2B221D.svg) |
 | `symbol-quarter-phase.svg` | Photometric phase curve (`◔`) | [U+25D4.svg](https://commons.wikimedia.org/wiki/File:U%2B25D4.svg) |
-| `symbol-half-black-circle.svg` | Surface lens (`◐`) | [GNU Unifont - U+25D0.svg](https://commons.wikimedia.org/wiki/File:GNU_Unifont_-_U%2B25D0.svg) |
+| `symbol-half-black-circle.svg` | Surface dataset (`◐`) | [GNU Unifont - U+25D0.svg](https://commons.wikimedia.org/wiki/File:GNU_Unifont_-_U%2B25D0.svg) |
 | `symbol-reference-mark.svg` | Sources & Resources (`※`) | [Reference Mark in Linux Biolinum Regular - U+203B.svg](https://commons.wikimedia.org/wiki/File:Reference_Mark_in_Linux_Biolinum_Regular_-_U%2B203B.svg) |
 
 The square-with-crosshatch and quarter-phase sources are public domain. The

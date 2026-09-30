@@ -77,27 +77,27 @@ available content, not an uncertainty estimate or a qualification verdict.
 
 ## Prepared promotion
 
-`catalog.illustrationLenses` names a package's approximate stand-in datasets.
-A body is **Illustration only** when every exposed lens is one of them. A body that
-also has a measured lens, such as Makemake's whole-disc colour beside NASA's
+`catalog.illustrationDatasets` names a package's approximate stand-in datasets.
+A body is **Illustration only** when every exposed dataset is one of them. A body that
+also has a measured dataset, such as Makemake's whole-disc colour beside NASA's
 illustrative texture, stays **Shape only**, and the illustration never counts as
 imagery. The list is not a permanent blacklist of object identities. When replacing an
 approximation with a body-specific mesh, remove that dataset from this list as
 part of the package's source interpretation update.
 
 `pnpm prepare:catalog` derives discovery from exposed `prepared/controls.json`
-lenses and their raster recipes. It writes each body's
+datasets and their raster recipes. It writes each body's
 discovery beside its descriptor and distance in the ignored prepared catalogue
 (`site/prepared-catalogue.mjs`) that the single `OBJECTS` registry reads. Runtime reads this prepared metadata; it does not inspect source images or
 generate assets. The controls come from R2, not Git, so the dev, build and deploy
 chains restore prepared assets before the catalogue runs. Without them, a clean
 checkout finds no imagery for any body, and moons and small bodies read **Shape only**.
 
-A prepared observation lens makes the destination visible and featured without
+A prepared observation dataset makes the destination visible and featured without
 changing a second promotion flag. For asteroids, that discovery metadata does
 not decide default context prominence. Downloaded candidates absent from the
 prepared controls do not count. Modeled observation textures, declared illustration
-lenses, GLB base-color illustrations, shape views and shape-derived elevation
+datasets, GLB base-color illustrations, shape views and shape-derived elevation
 do not count as imagery. Partial photographic coverage does count; its gaps and
 interpretation remain the dataset panel's responsibility. Removing the prepared
 imagery restores the approximation gate when only that stand-in remains.
@@ -105,7 +105,7 @@ imagery restores the approximation gate when only that stand-in remains.
 [Itokawa](../src/objects/itokawa/README.md),
 [Ryugu](../src/objects/ryugu/README.md) and
 [67P](../src/objects/comet-67p/README.md) illustrate useful observation datasets
-with distinct limitations. Neither lens count nor source count measures quality.
+with distinct limitations. Neither dataset count nor source count measures quality.
 New preparation adapters must extend the observation classification and its
 tests when introducing a new representation.
 
@@ -114,7 +114,7 @@ tests when introducing a new representation.
 Selecting a body with a prepared photograph uses the body's default camera
 angle, so visitors arrive facing the photographed side. Preparation derives
 that angle ([`packages/bake/src/objects/scene/default-camera.ts`](../packages/bake/src/objects/scene/default-camera.ts));
-no package states it. A body whose default lens has observation frames opens
+no package states it. A body whose default dataset has observation frames opens
 on the mean of their sub-observer points. A flyby body with an `approach`
 recipe, such as Pluto and Charon, opens facing the side its spacecraft
 approached, computed from a shared SPICE kernel bank
@@ -126,11 +126,11 @@ ecliptic plane on its north side. When that body's default map covers mostly one
 side, the camera keeps the 40-degree tilt and turns to face the centre of the
 map's data, taking the tilt on the ecliptic's south side when the data lies
 south. Preparation finds the gaps in the prepared minimap by the gray fill's
-graticule ([`packages/bake/src/objects/default-view/lens-coverage.ts`](../packages/bake/src/objects/default-view/lens-coverage.ts)).
+graticule ([`packages/bake/src/objects/default-view/dataset-coverage.ts`](../packages/bake/src/objects/default-view/dataset-coverage.ts)).
 Complete maps keep the design pose. The [openings before and after this rule](images/default-openings-partial-maps.png)
 show the eight bodies it turns. Catalogue
 preparation stores the angle for exposed, non-modeled `observations` and
-`surfaceObservations` lenses. The shared flight approaches this pose; it does
+`surfaceObservations` datasets. The shared flight approaches this pose; it does
 not analyze coverage in the browser or create missing imagery.
 
 The opening sizes a body by its volume-equivalent diameter. An elongated shape model reaches past it, so

@@ -7,8 +7,8 @@ import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export function parseLonLatSliceTable(text: string, value: unknown) {
-  const lens = requireRecord(value, 'longitude/latitude table');
-  const columns = requireRecord(lens.columns, 'columns'), slice = requireRecord(lens.slice, 'slice');
+  const dataset = requireRecord(value, 'longitude/latitude table');
+  const columns = requireRecord(dataset.columns, 'columns'), slice = requireRecord(dataset.slice, 'slice');
   const column = (n: unknown) => {
     const v = requireFiniteNumber(n, 'column');
     if (!Number.isSafeInteger(v) || v < 1) throw new TypeError('Table columns must be positive one-based integers.');
@@ -17,7 +17,7 @@ export function parseLonLatSliceTable(text: string, value: unknown) {
   const lonColumn = column(columns.longitude), latColumn = column(columns.latitude), dataColumn = column(columns.value), sliceColumn = column(slice.column);
   if (new Set([lonColumn, latColumn, dataColumn, sliceColumn]).size !== 4) throw new TypeError('Table columns must be distinct.');
   const level = requireFiniteNumber(slice.value, 'slice.value');
-  const tolerance = requireFiniteNumber(lens.coordinateToleranceDegrees, 'coordinateToleranceDegrees');
+  const tolerance = requireFiniteNumber(dataset.coordinateToleranceDegrees, 'coordinateToleranceDegrees');
   if (!(tolerance >= 0 && tolerance <= 0.01)) throw new RangeError('Coordinate tolerance must be between 0 and 0.01 degrees.');
   const rows: { lon: number; lat: number; value: number }[] = [];
   for (const [i, line] of text.split(/\r?\n/u).entries()) {

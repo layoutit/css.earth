@@ -20,7 +20,7 @@ Run of 2026-09-23 (this version): [the four bodies in the app](../eps-indi-a/evi
 
 - **Ba is drawn at the pair's light centre.** It is off by up to 1.1 au, less than half the pair's separation.
 - **Borrowed distance and radial velocity.** Both are Epsilon Indi A's; the depth between A and B is not measured.
-- **No surface.** The sphere is neutral gray. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's colour, so none is used, and with no colour lens there is no limb to draw ([ledger](investigations.json)).
+- **No surface.** The sphere is neutral gray. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's colour, so none is used, and with no colour dataset there is no limb to draw ([ledger](investigations.json)).
 - **The spin axis is a display convention.**
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

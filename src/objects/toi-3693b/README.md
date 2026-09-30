@@ -8,7 +8,7 @@ It is the only planet known around TOI-3693. Its orbit and size follow Yee et al
 
 **Orbit.** Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): P 9.088516 d Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): a/R* 22.13; Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): inclination 89.57 degrees Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): e 0 Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): transit mid-time 2458806.68164 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-3693's measured colour (#ffe5d4, the colour lens of toi-3693 (src/objects/toi-3693/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-3693's measured colour (#ffe5d4, the colour dataset of toi-3693 (src/objects/toi-3693/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-3693's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (58, 85), folded onto its orbit. Upper limits and rows without an error are left out.
 

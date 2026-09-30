@@ -8,7 +8,7 @@ It is the only planet known around TOI-1693. Its orbit and size follow Giacalone
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.76669200948 d Giacalone et al. 2022 (2022AJ....163...99G), via the NASA Exoplanet Archive ps table (pl_refname GIACALONE_ET_AL__2022): a/R* derived from its semi-major axis 0.0226 au and stellar radius 0.46 solar radii; Giacalone et al. 2022 (2022AJ....163...99G), via the NASA Exoplanet Archive ps table (pl_refname GIACALONE_ET_AL__2022): inclination derived from its impact parameter 0.3 with its a/R* 10.5646 (Winn 2010, eq. 7) No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458817.684965 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1693's measured colour (#ffc88a, the colour lens of toi-1693 (src/objects/toi-1693/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1693's measured colour (#ffc88a, the colour dataset of toi-1693 (src/objects/toi-1693/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1693's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (45, 72, 73), folded onto its orbit. Upper limits and rows without an error are left out.
 

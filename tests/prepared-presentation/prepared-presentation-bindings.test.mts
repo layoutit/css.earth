@@ -27,7 +27,7 @@ async function fixture(run: (fixture: Fixture) => Promise<void>) {
     .scene, .moving, .fixed { transform-style:preserve-3d; }
     .leaf { width:10px; height:10px; backface-visibility:hidden; transform:translateZ(4px); }
     .moving { animation:spin 12s linear infinite; }
-    [data-lens=slow] .moving { animation-duration:36s; }
+    [data-dataset=slow] .moving { animation-duration:36s; }
     @keyframes spin { from { transform:rotateY(0deg); } to { transform:rotateY(360deg); } }`;
   const runtime = await mimasRuntime(fileURLToPath(new URL('../../', import.meta.url)));
   const nodes: PreparedTree['nodes'][number][] = [];
@@ -35,8 +35,8 @@ async function fixture(run: (fixture: Fixture) => Promise<void>) {
     nodes.push({ tag: 'div', parent, className, style: '', properties: [], attributes: {} });
   }
   const definition: PresentationSource = { id: 'fixture', camera: runtime.camera, tree: { camera: 0, scene: 1, stageClasses: [], properties: [], nodes },
-    animations: [], viewBindings: [], materials: [], variants: ['fast', 'slow'].map(lensId => ({ when: { lensId }, required: [], materials: [],
-      writes: [{ kind: 'attribute', target: -1, name: 'data-lens', value: lensId }] })) };
+    animations: [], viewBindings: [], materials: [], variants: ['fast', 'slow'].map(datasetId => ({ when: { datasetId }, required: [], materials: [],
+      writes: [{ kind: 'attribute', target: -1, name: 'data-dataset', value: datasetId }] })) };
   const setCss = (value: string): Promise<void> => writeFile(join(page, 'fixture.css'), value);
   try { await setCss(css); await run({ root, definition, css, setCss }); }
   finally { await rm(root, { recursive: true, force: true }); }
@@ -48,7 +48,7 @@ test('source CSS compiles selection timing', async () => fixture(async ({ root, 
   assert.equal(prepared.motion.length, 1);
   assert.equal(prepared.motion[0].target, 2);
   assert.equal(prepared.motion[0].duration, 12000);
-  assert.deepEqual(prepared.motion[0].timings, [{ when: { lensId: 'slow' }, duration: 36000 }]);
+  assert.deepEqual(prepared.motion[0].timings, [{ when: { datasetId: 'slow' }, duration: 36000 }]);
   // Back faces are the browser's: preparation publishes no facing planes.
   assert.equal('facing' in prepared, false);
 }));
@@ -61,7 +61,7 @@ test('explicit two-sided source leaves keep their own style', async () => fixtur
 }));
 
 test('unsupported motion cannot silently become an unowned native animation', async () => fixture(async ({ root, definition, css, setCss }) => {
-  await setCss(css + ' [data-lens=slow] .moving { animation:none; }');
+  await setCss(css + ' [data-dataset=slow] .moving { animation:none; }');
   await assert.rejects(preparePresentationBindings(definition, root, { pageStyles: objectPageStyles }), /motion membership/);
   await setCss(css + ' @keyframes spin { from { opacity:0; } to { opacity:1; } }');
   await assert.rejects(preparePresentationBindings(definition, root, { pageStyles: objectPageStyles }), /linear transform keyframes/);

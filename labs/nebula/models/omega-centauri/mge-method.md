@@ -19,7 +19,7 @@ competing measurements.
   interpretation, multiply by `distancePc × π/(180×3600)` to obtain parsecs. The
   recipe's5426±47pc distance changes scale, not the observed angular shape or the
   original paper's dynamical fit, which assumed5500±200pc.
-- Use the observation recipe's ICRS center for every lens and the prior. This explicitly
+- Use the observation recipe's ICRS center for every dataset and the prior. This explicitly
   re-centers the older radial model; it is not a new center measurement.
 
 ## Oblate deprojection
@@ -55,21 +55,21 @@ nearer. The recipe records that choice instead of presenting it as a measurement
 
 The shared sampler truncates each component at ellipsoidal radius6σ. This authored
 numerical bound is not a measured tidal radius. Geometry and relative density are
-common to all image lenses. Preserve the images' integrated starlight and attach
+common to all image datasets. Preserve the images' integrated starlight and attach
 image material to finite 3D emitters conditioned on this prior.
 
 The current candidate separates a smooth envelope from positive image residuals.
 The envelope uses the MGE density at every depth, with a slowly varying gain fitted
 at an 8-pixel Gaussian smoothing scale and authored fraction 0.95. Its floor is zero;
 512 depth samples retain the central 99.6% of the image-weighted profile. Coarse
-smoothed lens chromaticity colors only this envelope. Up to 4096 residual features
+smoothed dataset chromaticity colors only this envelope. Up to 4096 residual features
 receive one conditional depth each and retain finite XYZ material; no full source
 photograph is repeated through depth. These numerical settings are authored display
 choices, not additional measurements of the cluster.
 
 The unchanged 512-pixel fit grid and minimum projected sigma of 0.9 fit pixels cannot
 recover native stellar widths or all crowded core texture. Compact replay retains
-the density, gain grid, coarse lens colors and finite supports explicitly. Actual
+the density, gain grid, coarse dataset colors and finite supports explicitly. Actual
 bake and byte-identical replay acceptance remain separate from analytic fit checks.
 
 The result remains relative display emission under a smooth axisymmetric hypothesis.

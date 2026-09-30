@@ -57,6 +57,6 @@ All 1016 source face centroids and 8,192 sphere directions were checked: 0 centr
 
 The baked Elevation flood and directional WebP atlases pass 11 independent unique-interior color anchors, with maximum RGB channel error 2 under the existing fixed tolerance of 12. Actual retained matrices locate texel centers; independent NumPy projection against every original triangle supplies source points, radii and source normals. Product correspondence agrees at all 22 interior and clamped edge-padding queries. Source-edge/vertex normals can be nonunique, and WebP chroma filtering crosses cell boundaries; boundary RGB is recorded diagnostically and is not a color-fidelity acceptance claim. The full source-surface radius range, including triangle interiors, lies inside the authored palette domain.
 
-The prepared package test verifies the selected body's asset hashes, 800 native u raster triangles, source-connected closed topology, hit geometry, Shape/Elevation lenses, distinct prepared lighting images and its Sun-context registration. Shared browser/DPR conformance remains part of the integration qualification.
+The prepared package test verifies the selected body's asset hashes, 800 native u raster triangles, source-connected closed topology, hit geometry, Shape/Elevation datasets, distinct prepared lighting images and its Sun-context registration. Shared browser/DPR conformance remains part of the integration qualification.
 
 </details>

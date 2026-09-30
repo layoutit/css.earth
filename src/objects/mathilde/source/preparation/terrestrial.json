@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "mathilde",
   "displayName": "Mathilde",
@@ -180,7 +180,7 @@
     },
     "radialTerrainAlternatives": [
       {
-        "lensId": "near-msi",
+        "datasetId": "near-msi",
         "path": "shape/stooke-253mathilde.tab",
         "format": "pds-radius-table",
         "grid": {
@@ -207,6 +207,6 @@
     "sunQualification": "Illustrative directional lighting in Mathilde’s explicitly arbitrary J2000-parallel mapping frame. The source has no solved spin pole or rotational phase, so this is not an accurately timed body-fixed Sun solution. The Monochrome view separately retains NEAR encounter illumination and photographed shadows."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

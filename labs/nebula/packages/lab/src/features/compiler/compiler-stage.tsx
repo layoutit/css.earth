@@ -11,7 +11,7 @@ export type { CloudView } from '../shape-cloud/shape-cloud-stage';
 export const earthCompilerView: CloudView = { zoom: 1, panX: 0, panY: 0, yaw: 0, pitch: 0, locked: true };
 export interface CompilerStageProps {
   result: CompilerResult | null;
-  lensId: string | null;
+  datasetId: string | null;
   mode: CompilerMaterial;
   stars: boolean;
   showOriginal: boolean;
@@ -24,19 +24,19 @@ export interface CompilerStageProps {
 const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`;
 declare const __NEBULA_REPO_ROOT__: string;
 
-/** One retained final scene; result and lens replacements become visible only after decoding. */
-export function CompilerStage({ result, lensId, mode, stars, showOriginal, view, onView,
+/** One retained final scene; result and dataset replacements become visible only after decoding. */
+export function CompilerStage({ result, datasetId, mode, stars, showOriginal, view, onView,
   fieldOfViewArcsec, inspectionFrame }: CompilerStageProps) {
   const viewport = useRef<HTMLDivElement>(null), host = useRef<HTMLDivElement>(null);
   const renderer = useRef<CompilerViewer | null>(null), viewRef = useRef(view);
-  const selection = useRef({ lensId, mode, stars }); selection.current = { lensId, mode, stars }; viewRef.current = view;
+  const selection = useRef({ datasetId, mode, stars }); selection.current = { datasetId, mode, stars }; viewRef.current = view;
   const dragEvents = useOrbitDrag(viewRef, onView);
   const committedKey = useRef('');
   const [visible, setVisible] = useState<CompilerResult | null>(null), [error, setError] = useState('');
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
   const scene = result?.scene;
   const inspectionKey = inspectionFrame ? JSON.stringify(inspectionFrame) : fieldOfViewArcsec ?? 'scene';
-  const key = scene ? `${scene.neutral.path}:${scene.lenses.map(item => item.volume.path).join(':')}:${inspectionKey}` : '';
+  const key = scene ? `${scene.neutral.path}:${scene.datasets.map(item => item.volume.path).join(':')}:${inspectionKey}` : '';
   useEffect(() => () => { renderer.current?.destroy(); renderer.current = null; committedKey.current = ''; }, []);
   useEffect(() => {
     if (!result || !scene || !host.current || committedKey.current === key) return;
@@ -47,7 +47,7 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
         const currentView = viewRef.current, currentSelection = selection.current;
         next.setFraming({ zoom: currentView.zoom, panX: currentView.panX, panY: currentView.panY });
         next.setPose(currentView.yaw, currentView.pitch); next.setStars(currentSelection.stars);
-        await next.setMaterial(currentSelection.mode, currentSelection.lensId);
+        await next.setMaterial(currentSelection.mode, currentSelection.datasetId);
         if (disposed) { next.destroy(); return; }
         next.commit(); const previous = renderer.current; renderer.current = next; committedKey.current = key;
         previous?.destroy(); setVisible(result);
@@ -66,11 +66,11 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
   useEffect(() => { renderer.current?.setStars(stars); }, [stars, visible?.id]);
   useEffect(() => {
     let stale = false;
-    void renderer.current?.setMaterial(mode, lensId).catch((reason: unknown) => {
-      if (!stale) setError(reason instanceof Error ? reason.message : 'Compiled lens could not be loaded.');
+    void renderer.current?.setMaterial(mode, datasetId).catch((reason: unknown) => {
+      if (!stale) setError(reason instanceof Error ? reason.message : 'Compiled dataset could not be loaded.');
     });
     return () => { stale = true; };
-  }, [mode, lensId, visible?.id]);
+  }, [mode, datasetId, visible?.id]);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
     return bindViewportZoom(element, viewRef, onView);
@@ -81,7 +81,7 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
     observer.observe(element); setViewportSize({ width: element.clientWidth, height: element.clientHeight });
     return () => observer.disconnect();
   }, []);
-  const source = visible?.sources.find(item => item.id === lensId);
+  const source = visible?.sources.find(item => item.id === datasetId);
   const fov = fieldOfViewArcsec ?? visible?.scene.spanArcsec ?? 1;
   const originalStyle = useMemo(() => {
     const yaw = view.yaw * Math.PI / 180, pitch = view.pitch * Math.PI / 180;
@@ -107,7 +107,7 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
     visible?.scene.coordinates.localOriginArcsec, source?.boundsArcsec, viewportSize, fov, inspectionFrame]);
   const ready = Boolean(visible);
   return <section className="shape-cloud-pane shape-cloud-pane-cloud compiler-stage" aria-label="Compiled nebula volume"
-    data-compiler-ready={ready} data-compiler-result={visible?.id ?? ''} data-compiler-lens={lensId ?? ''}
+    data-compiler-ready={ready} data-compiler-result={visible?.id ?? ''} data-compiler-dataset={datasetId ?? ''}
     data-compiler-mode={mode} data-compiler-stars={stars} data-compiler-original={showOriginal}
     data-compiler-pose={`${view.yaw},${view.pitch}`} data-compiler-field-of-view={fov}>
     <div className="shape-cloud-pane-label">Compiled cloud</div>

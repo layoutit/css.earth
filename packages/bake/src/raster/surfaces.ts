@@ -76,7 +76,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
     const metadata: Record<string, unknown> = {};
     const interpretations: Record<string, Record<string, Readonly<Record<string, unknown>>>> = {};
     const nativeSourcePoles = new Map<string, Promise<NativePoleSampler>>();
-    // Only surfaces another lens draws over are kept, finished (after exposure), for that lens to fill its empty cells from.
+    // Only surfaces another dataset draws over are kept, finished (after exposure), for that dataset to fill its empty cells from.
     const underlaid = new Set(config.surfaces.flatMap(surface => surface.underlay ? [surface.underlay.surface] : []));
     const underlays = new Map<string, Uint8Array>();
     const load = async (path: string) => { let data = decoded.get(path); if (!data) {
@@ -114,7 +114,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             nearest = interpreted.nearest; pixels = withAlpha(interpreted, width, height); nativePhotograph = interpreted.nativePhotograph;
             if (surface.underlay) {
                 const base = underlays.get(surface.underlay.surface);
-                if (!base || !interpreted.missing) throw new TypeError(`${surface.id}: underlay ${surface.underlay.surface} needs that surface prepared first and this lens's missing-cell mask (${interpreted.missing ? 'mask present' : 'no mask'}).`);
+                if (!base || !interpreted.missing) throw new TypeError(`${surface.id}: underlay ${surface.underlay.surface} needs that surface prepared first and this dataset's missing-cell mask (${interpreted.missing ? 'mask present' : 'no mask'}).`);
                 pixels = applyUnderlay(pixels === interpreted.data ? Uint8Array.from(pixels) : pixels, interpreted.missing, base, surface.id, surface.underlay);
             }
             if (config.resample === 'source-packed') {
@@ -174,7 +174,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             const { encoder, progressive, quality, grayscale = false, chromaSubsampling } = surface.encoding;
             const pixels = image.clone().removeAlpha();
             await (grayscale ? pixels.grayscale().toColourspace('b-w') : pixels).jpeg({ quality, mozjpeg: encoder === 'mozjpeg', progressive, ...(chromaSubsampling ? { chromaSubsampling } : {}) }).toFile(output);
-            // Lens thumbnails come from the WebP encoding of the prepared map, held in memory only.
+            // Dataset thumbnails come from the WebP encoding of the prepared map, held in memory only.
             if (config.thumbnail.crop)
                 thumbnailSource = await encodeLossyWebp(image.clone(), { effort: 6 });
         }
@@ -196,7 +196,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
         if (config.resample === 'density-before-pack') {
             const cropSize = Math.round(height / 2), top = Math.round((height - cropSize) / 2);
             // The crop is centred on the declared longitude (column x is longitude x / width * 360) and wraps across the map edge.
-            // A lens that observed one hemisphere names its own centre, so its picker tile is not a crop of the data gap.
+            // A dataset that observed one hemisphere names its own centre, so its picker tile is not a crop of the data gap.
             const centerLongitude = surface.thumbnailCenterLongitudeDegrees ?? config.thumbnail.centerLongitudeDegrees;
             const centre = centerLongitude === undefined ? width / 2 : ((centerLongitude / 360) * width % width + width) % width;
             const left = Math.round(centre - cropSize / 2), crop = new Uint8Array(cropSize * cropSize * 4);
@@ -232,8 +232,8 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             }
         }
     }
-    // Angular poles are sampled from the whole source map (and an incomplete lens is completed from its fallback), so they
-    // are drawn once every source is loaded. Each lens writes its own north-then-south sprite, as the bilinear poles do.
+    // Angular poles are sampled from the whole source map (and an incomplete dataset is completed from its fallback), so they
+    // are drawn once every source is loaded. Each dataset writes its own north-then-south sprite, as the bilinear poles do.
     if (config.polarProjection === 'angular-nearest') {
         const density = RASTER_DENSITY, tileSize = config.polarTile * density, width = tileSize * 2;
         const dimensions = { width: config.sourceWidth, height: config.sourceHeight, latitudeBands: config.latitudeBands };

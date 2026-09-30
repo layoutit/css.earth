@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "pds-shape",
@@ -48,7 +48,7 @@
       },
       "width": 512,
       "height": 256,
-      "lensId": "model",
+      "datasetId": "model",
       "label": "Shape model",
       "falseColor": false,
       "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mts",
@@ -84,7 +84,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "constraints",
+      "datasetId": "constraints",
       "label": "Source constraints",
       "falseColor": true,
       "width": 512,
@@ -3371,7 +3371,7 @@
         "latitudeDegrees": 15,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "model"
+        "datasetId": "model"
       }
     }
   ],

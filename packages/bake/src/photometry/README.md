@@ -63,12 +63,12 @@ and the limits:
   with its phase inside the fitted range.
 - Phase limits may extend past the fitted range. The prepared report then says
   the model is extrapolated.
-- A lens names the model as its `photometry`; its display range and level
+- A dataset names the model as its `photometry`; its display range and level
   matching stay in their own recipe blocks.
 
-Surface-observation lenses with Sun geometry (`packages/bake/src/objects/layers/terrestrial/surface-observations/`),
-controlled-camera lenses included, accept this block. Filter-colour lenses refuse it, because a model fitted in
-one filter would change band ratios. Observed-colour lenses keep their
+Surface-observation datasets with Sun geometry (`packages/bake/src/objects/layers/terrestrial/surface-observations/`),
+controlled-camera datasets included, accept this block. Filter-colour datasets refuse it, because a model fitted in
+one filter would change band ratios. Observed-colour datasets keep their
 per-observation ISIS Lunar-Lambert weights, and ISIS2 orthographic images carry
 no Sun geometry to normalize with.
 

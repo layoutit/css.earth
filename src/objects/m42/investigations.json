@@ -3,8 +3,8 @@
   "objectId": "m42",
   "entries": [
     {
-      "id": "lens-eso-optical",
-      "subject": "eso-optical shipped image lens",
+      "id": "dataset-eso-optical",
+      "subject": "eso-optical shipped image dataset",
       "status": "included",
       "finding": "Default i/H-alpha/r/G display, 4000 by 3106 pixels over 59.95 by 46.56 arcmin. It colors the conditional coherent front; image intensity does not measure gas depth. The rectangular optical coverage transition remains unresolved.",
       "evidence": [
@@ -14,8 +14,8 @@
       ]
     },
     {
-      "id": "lens-eso-vista",
-      "subject": "eso-vista shipped image lens",
+      "id": "dataset-eso-vista",
+      "subject": "eso-vista shipped image dataset",
       "status": "included",
       "finding": "K/J/Z near-IR display, 3252 by 4000 pixels over 71.84 by 88.35 arcmin, on the same cloud geometry as optical. Different coverage and display color do not imply a second view or calibrated common emission.",
       "evidence": [

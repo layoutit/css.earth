@@ -1,13 +1,13 @@
 /** Stage one selected raster lane without rebuilding the object's bands, lighting, geometry, or scene.
- * `node packages/bake/cli/refresh-sphere-photographs.mts <body-id> <lens-id>` writes only that lens below
- * output/sphere-photographs/<body-id>/<lens-id>. The caller decides whether and how to apply the receipt. */
+ * `node packages/bake/cli/refresh-sphere-photographs.mts <body-id> <dataset-id>` writes only that dataset below
+ * output/sphere-photographs/<body-id>/<dataset-id>. The caller decides whether and how to apply the receipt. */
 import { access, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import type { Sharp } from 'sharp';
 import { completeEnhancedCoverage, createNativePhotographPolarSprite, packLatitudeRaster } from '@cssearth/objects';
 import { missingCoverageColor, applyNativeSurfaceExposure, loadNativeSourcePoleSampler } from '@cssearth/bake/raster';
-import { loadNativeObservationPoleSampler, parseObservationLens } from '@cssearth/bake/objects/layers/observation';
+import { loadNativeObservationPoleSampler, parseObservationDataset } from '@cssearth/bake/objects/layers/observation';
 import { loadNativePhotograph, parseSolidObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
@@ -81,7 +81,7 @@ async function nativeSampler(surface:Surface, config:Recipe, sourceDirectory:str
   }
   if(surface.science) {
     if(!surface.nativeSourcePoles) throw new Error(`Selected static observation has not opted into native poles: ${surface.id}.`);
-    const plan=parseObservationLens({id:surface.id,input:surface.source,...surface.science,nativeSourcePoles:true});
+    const plan=parseObservationDataset({id:surface.id,input:surface.source,...surface.science,nativeSourcePoles:true});
     return {sampler:await loadNativeObservationPoleSampler(contained(sourceDirectory,surface.source),plan),source};
   }
   if(!surface.nativeSourcePoles) throw new Error(`Selected raw photograph has not opted into native poles: ${surface.id}.`);
@@ -102,10 +102,10 @@ function sourceContributors(surface:Surface, config:Recipe, manifest:RecordValue
   return sources;
 }
 
-async function stagePoles({lens,config,sourceDirectory,manifest,stage,publicDirectory}:{lens:Surface;config:Recipe;sourceDirectory:string;manifest:RecordValue;stage:string;publicDirectory:string}) {
-  const {sampler}=await nativeSampler(lens,config,sourceDirectory,manifest), assets=[] as {filename:string;url:string;width:number;height:number;bytes:number}[];
+async function stagePoles({dataset,config,sourceDirectory,manifest,stage,publicDirectory}:{dataset:Surface;config:Recipe;sourceDirectory:string;manifest:RecordValue;stage:string;publicDirectory:string}) {
+  const {sampler}=await nativeSampler(dataset,config,sourceDirectory,manifest), assets=[] as {filename:string;url:string;width:number;height:number;bytes:number}[];
   for(const density of config.densities) {
-    const tile=config.polarTile*density, filename=outputName(config.polesOutput,density,lens.id), previous=contained(publicDirectory,filename);
+    const tile=config.polarTile*density, filename=outputName(config.polesOutput,density,dataset.id), previous=contained(publicDirectory,filename);
     const old=await existingMetadata(previous);
     if(old&&(old.width!==tile*2||old.height!==tile)) throw new Error(`Existing pole dimensions changed: ${filename}`);
     const bytes=await sharp(createNativePhotographPolarSprite(tile,config.latitudeBands,sampler,missingCoverageColor),{raw:{width:tile*2,height:tile,channels:4}}).webp({lossless:true,effort:6}).toBuffer();
@@ -116,22 +116,22 @@ async function stagePoles({lens,config,sourceDirectory,manifest,stage,publicDire
   }
   return assets;
 }
-async function stageMercuryBand({lens,config,sourceDirectory,manifest,stage,publicDirectory}:{lens:Surface;config:Recipe;sourceDirectory:string;manifest:RecordValue;stage:string;publicDirectory:string}) {
+async function stageMercuryBand({dataset,config,sourceDirectory,manifest,stage,publicDirectory}:{dataset:Surface;config:Recipe;sourceDirectory:string;manifest:RecordValue;stage:string;publicDirectory:string}) {
   if(config.resample!=='source-packed'||!config.unpackedResizeBeforePack) throw new Error('Selected source-packed raster has not opted into unpacked resize-before-pack.');
-  const source=sourceRecord(manifest,lens.source),verified=await requireSourceFile(sourceDirectory,source); let pixels=await readSourceRgba(verified.path,config.sourceWidth,config.sourceHeight);
-  if(lens.coverage) {
-    const normal=sourceRecord(manifest,lens.coverage.normal),topography=sourceRecord(manifest,lens.coverage.topography);
+  const source=sourceRecord(manifest,dataset.source),verified=await requireSourceFile(sourceDirectory,source); let pixels=await readSourceRgba(verified.path,config.sourceWidth,config.sourceHeight);
+  if(dataset.coverage) {
+    const normal=sourceRecord(manifest,dataset.coverage.normal),topography=sourceRecord(manifest,dataset.coverage.topography);
     const [normalFile,topographyFile]=await Promise.all([requireSourceFile(sourceDirectory,normal),requireSourceFile(sourceDirectory,topography)]);
-    const completed=completeEnhancedCoverage(pixels,await readSourceRgba(normalFile.path,config.sourceWidth,config.sourceHeight),await readSourceRgba(topographyFile.path,config.sourceWidth,config.sourceHeight),{width:config.sourceWidth,height:config.sourceHeight},lens.coverage.references);
+    const completed=completeEnhancedCoverage(pixels,await readSourceRgba(normalFile.path,config.sourceWidth,config.sourceHeight),await readSourceRgba(topographyFile.path,config.sourceWidth,config.sourceHeight),{width:config.sourceWidth,height:config.sourceHeight},dataset.coverage.references);
     pixels=completed.rgba;
   }
   const assets=[] as {filename:string;url:string;width:number;height:number;bytes:number}[];
   for(const density of config.densities) {
     const width=config.width*density,height=config.height*density;
     const target=width===config.sourceWidth&&height===config.sourceHeight?pixels:await sharp(Buffer.from(pixels),{raw:{width:config.sourceWidth,height:config.sourceHeight,channels:4}}).resize(width,height,{kernel:'lanczos3'}).raw().toBuffer();
-    if(target.length!==width*height*4) throw new Error(`Unpacked resize dimensions changed: ${lens.id}.`);
-    const packed=packLatitudeRaster(target,width,height,config.latitudeBands,Math.max(2,height/config.latitudeBands/4)), filename=outputName(lens.output,density,lens.id), previous=contained(publicDirectory,filename);
-    const old=await existingMetadata(previous), bytes=await encodeBand(sharp(packed.data,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels:4}}),lens.encoding,density).toBuffer();
+    if(target.length!==width*height*4) throw new Error(`Unpacked resize dimensions changed: ${dataset.id}.`);
+    const packed=packLatitudeRaster(target,width,height,config.latitudeBands,Math.max(2,height/config.latitudeBands/4)), filename=outputName(dataset.output,density,dataset.id), previous=contained(publicDirectory,filename);
+    const old=await existingMetadata(previous), bytes=await encodeBand(sharp(packed.data,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels:4}}),dataset.encoding,density).toBuffer();
     const stagePath=resolve(stage,filename); await writeFile(stagePath,bytes);
     const current=await sharp(stagePath).metadata();
     if(current.width!==packed.packedWidth||current.height!==packed.packedHeight||(old&&(old.width!==current.width||old.height!==current.height))) throw new Error(`Staged band dimensions changed: ${filename}`);
@@ -140,29 +140,29 @@ async function stageMercuryBand({lens,config,sourceDirectory,manifest,stage,publ
   return assets;
 }
 
-export async function refreshSpherePhotographs(id:string,lensId:string) {
-  if(!/^[a-z][a-z0-9-]*$/.test(id)||!/^[a-z][a-z0-9-]*$/.test(lensId)) throw new TypeError('Use one body id and one lens id.');
+export async function refreshSpherePhotographs(id:string,datasetId:string) {
+  if(!/^[a-z][a-z0-9-]*$/.test(id)||!/^[a-z][a-z0-9-]*$/.test(datasetId)) throw new TypeError('Use one body id and one dataset id.');
   sharp.cache(false);sharp.concurrency(1);
-  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),publicDirectory=resolve('public/scenes',id),stage=resolve('output/sphere-photographs',id,lensId);
+  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),publicDirectory=resolve('public/scenes',id),stage=resolve('output/sphere-photographs',id,datasetId);
   const [sourceManifest,rasterRecipe,descriptor]=await Promise.all([json(resolve(sourceDirectory,'manifest.json')),json(resolve(sourceDirectory,'preparation/raster.json')),json(resolve(objectDirectory,'object.json'))]);
-  const config=recipe(rasterRecipe),lens=config.surfaces.filter(surface=>surface.id===lensId);
-  if(lens.length!==1) throw new Error(`Unknown raster lens: ${id}/${lensId}.`);
+  const config=recipe(rasterRecipe),dataset=config.surfaces.filter(surface=>surface.id===datasetId);
+  if(dataset.length!==1) throw new Error(`Unknown raster dataset: ${id}/${datasetId}.`);
   const recipePath=resolve(sourceDirectory,'preparation/raster.json'),descriptorRecipe=requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources).map(value=>requireRecord(value)).find(source=>source.id==='raster');
   if(!descriptorRecipe||requireString(descriptorRecipe.path)!=='source/preparation/raster.json') throw new Error('Object descriptor does not name the selected raster recipe.');
   if(![...requireArray(sourceManifest.inputs).map(value=>requireRecord(value)),...requireArray(sourceManifest.documents).map(value=>requireRecord(value))].some(source=>source.path==='preparation/raster.json')) throw new Error('Source manifest does not declare the selected raster recipe.');
   await mkdir(stage,{recursive:true});
-  const assets=config.resample==='source-packed' ? await stageMercuryBand({lens:lens[0]!,config,sourceDirectory,manifest:sourceManifest,stage,publicDirectory}) : await stagePoles({lens:lens[0]!,config,sourceDirectory,manifest:sourceManifest,stage,publicDirectory});
+  const assets=config.resample==='source-packed' ? await stageMercuryBand({dataset:dataset[0]!,config,sourceDirectory,manifest:sourceManifest,stage,publicDirectory}) : await stagePoles({dataset:dataset[0]!,config,sourceDirectory,manifest:sourceManifest,stage,publicDirectory});
   // The receipt names what the stage read by path and byte count; the inventory names the applied files.
-  const selected=sourceContributors(lens[0]!,config,sourceManifest), selectedFiles=await Promise.all(selected.map(source=>requireSourceFile(sourceDirectory,source)));
+  const selected=sourceContributors(dataset[0]!,config,sourceManifest), selectedFiles=await Promise.all(selected.map(source=>requireSourceFile(sourceDirectory,source)));
   const inputs:Record<string,number>={};
   for(const path of [resolve(sourceDirectory,'manifest.json'),recipePath,resolve(objectDirectory,'prepared/scene.json')]) inputs[repositoryPath(path)]=(await stat(path)).size;
   for(const selectedFile of selectedFiles) inputs[repositoryPath(selectedFile.path)]=selectedFile.bytes;
-  if(lens[0]!.coverage) for(const path of [lens[0]!.coverage!.normal,lens[0]!.coverage!.topography]) { const source=sourceRecord(sourceManifest,path),file=await requireSourceFile(sourceDirectory,source); inputs[repositoryPath(file.path)]=file.bytes; }
+  if(dataset[0]!.coverage) for(const path of [dataset[0]!.coverage!.normal,dataset[0]!.coverage!.topography]) { const source=sourceRecord(sourceManifest,path),file=await requireSourceFile(sourceDirectory,source); inputs[repositoryPath(file.path)]=file.bytes; }
   const receipt={schema:'cssearth-sphere-photograph-stage@2',id,inputs,assets};
   await writeFile(resolve(stage,'receipt.json'),JSON.stringify(receipt,null,2)+'\n');
   return receipt;
 }
 if(process.argv[1]&&['refresh-sphere-photographs.mts','refresh-sphere-photographs.js'].includes(basename(process.argv[1]))) {
-  const [id,lensId,...extra]=process.argv.slice(2);if(!id||!lensId||extra.length) throw new TypeError('Usage: refresh-sphere-photographs <body-id> <lens-id>.');
-  console.log(JSON.stringify(await refreshSpherePhotographs(id,lensId)));
+  const [id,datasetId,...extra]=process.argv.slice(2);if(!id||!datasetId||extra.length) throw new TypeError('Usage: refresh-sphere-photographs <body-id> <dataset-id>.');
+  console.log(JSON.stringify(await refreshSpherePhotographs(id,datasetId)));
 }

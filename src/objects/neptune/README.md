@@ -10,13 +10,13 @@ The visible-detail globe is the 2025 Hubble OPAL Cycle 32 colour global map
 assembled by the OPAL team from WFC3/UVIS F467M, F547M, and F657N exposures.
 The OPAL readme declares that the TIFF is arbitrarily scaled and contrast
 enhanced, so
-the normal lens does not publish those display values as literal true colour.
+the normal dataset does not publish those display values as literal true colour.
 Preparation matches the mean and channel variation of a checked equatorial OPAL
 sample to the unobscured central region of the 2024 Irwin et al. true-colour
 Neptune reconstruction distributed by the Royal Astronomical Society. The
 calibration reference is committed under `source/color/` with CC BY 4.0
-attribution. The methane lens uses the matching FQ619N global map and the
-near-infrared lens uses F845M. Their checked FITS and TIFF products, plus the
+attribution. The methane dataset uses the matching FQ619N global map and the
+near-infrared dataset uses F845M. Their checked FITS and TIFF products, plus the
 OPAL readme, are in `source/opal/`. Preparation converts them to fixed runtime
 rasters; the browser does not parse FITS, TIFF, or the calibration reference.
 
@@ -76,22 +76,22 @@ registration or recover unobserved polar features.
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="neptune-source-record"></a>
-<a id="planet-surface-and-observation-lenses"></a>
+<a id="planet-surface-and-observation-datasets"></a>
 <a id="shape-satellites-and-rings"></a>
 <a id="atmosphere-facts-and-sky"></a>
 
-The lighting overlay has one colour and alpha per pixel, so its per-channel limb law is exact for the colour map's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The FQ619N and F845M lenses share the colour map's bank; OPAL applied no Minnaert correction to those two maps, so their limb is not their own law.
+The lighting overlay has one colour and alpha per pixel, so its per-channel limb law is exact for the colour map's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The FQ619N and F845M datasets share the colour map's bank; OPAL applied no Minnaert correction to those two maps, so their limb is not their own law.
 
 <details>
 <summary>Methods and source notes</summary>
 
-**Planet surface and observation lenses**
+**Planet surface and observation datasets**
 
-Each lens is mapped across 722 surface leaves on the shared sphere lane: 720
+Each dataset is mapped across 722 surface leaves on the shared sphere lane: 720
 longitude-latitude cells and two polar caps. The orientation is solved from
 Neptune's pole and rotation at the scene epoch; the hand-typed rotations it
 replaced were about 65° off. Lighting is one 256-frame bank indexed by the
-Sun's direction in view and shared by every lens. Each frame puts back the limb
+Sun's direction in view and shared by every dataset. Each frame puts back the limb
 darkening OPAL removed from the colour map, with the 2025b README's Minnaert
 coefficients: k 0.50 in F657N, 0.80 in F547M and 0.88 in F467M ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). At
 k 0.50 red does not darken at all under full light, so the limb loses its cyan

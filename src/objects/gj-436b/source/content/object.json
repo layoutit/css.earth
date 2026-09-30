@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gj-436b",
   "displayName": "GJ 436 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 1,120 K. The disc itself is unresolved.",
-        "thumbnail": "gj-436b-lens-thermal.webp",
+        "thumbnail": "gj-436b-dataset-thermal.webp",
         "surface": "gj-436b-surface-thermal@2x.webp",
         "poles": "gj-436b-poles-thermal@2x.webp",
         "source": {

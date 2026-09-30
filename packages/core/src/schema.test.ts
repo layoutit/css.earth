@@ -23,7 +23,7 @@ describe('structural guards (the material-composition dialect)', () => {
   });
   it('parse names the deepest failing field and its value', () => {
     expect(message(() => parse({ id: 'x', size: '1', tags: [], mode: 'a' }, recipe))).toBe('Invalid recipe structure at recipe.size ("1").');
-    expect(message(() => parse({ id: 'x', size: 1, tags: [], mode: 'a', flag: 1 }, recipe, 'lens'))).toBe('Invalid lens structure at lens.flag (1).');
+    expect(message(() => parse({ id: 'x', size: 1, tags: [], mode: 'a', flag: 1 }, recipe, 'dataset'))).toBe('Invalid dataset structure at dataset.flag (1).');
     expect(message(() => parse({ outer: { inner: {} } }, object({ outer: object({ inner: object({ depth: number }) }) }))))
       .toBe('Invalid recipe structure at recipe.outer.inner.depth (missing).');
     expect(message(() => parse([], recipe))).toBe('Invalid recipe structure.');

@@ -53,10 +53,10 @@
       ]
     },
     {
-      "id": "opal-uv-and-methane-lenses",
+      "id": "opal-uv-and-methane-datasets",
       "subject": "Hubble OPAL F225W and FQ889N single-band maps",
       "status": "included",
-      "finding": "The ultraviolet and methane lenses use the pinned 1,800 by 900 single-band maps, keeping rotation A intact rather than averaging temporally separated cloud detail with rotation B, filling only unmeasured polar and ring-occluded rows in the same longitude, applying a declared false-colour palette and a pansharpening pass clamped to 0.88-1.12 so the Hubble maps keep authority over broad spectral luminance; they are source-backed spectral interpretations, not pure single-band products or natural colour.",
+      "finding": "The ultraviolet and methane datasets use the pinned 1,800 by 900 single-band maps, keeping rotation A intact rather than averaging temporally separated cloud detail with rotation B, filling only unmeasured polar and ring-occluded rows in the same longitude, applying a declared false-colour palette and a pansharpening pass clamped to 0.88-1.12 so the Hubble maps keep authority over broad spectral luminance; they are source-backed spectral interpretations, not pure single-band products or natural colour.",
       "evidence": [
         "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
       ]
@@ -65,7 +65,7 @@
       "id": "hubble-ring-frames",
       "subject": "Hubble WFC3 programme 17843 ring frames of 2025-08-29",
       "status": "included",
-      "finding": "The broad ring response is cross-checked against ifcu37ccq in F225W, ifcu37cdq in F631N and ifcu37ceq in FQ889N, and the prepared lens textures modify broad ring-band colour and luminance while retaining the UVIS alpha profile, narrow gaps, ringlets and readability floors.",
+      "finding": "The broad ring response is cross-checked against ifcu37ccq in F225W, ifcu37cdq in F631N and ifcu37ceq in FQ889N, and the prepared dataset textures modify broad ring-band colour and luminance while retaining the UVIS alpha profile, narrow gaps, ringlets and readability floors.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L187",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L195"
@@ -125,7 +125,7 @@
       "id": "interior-shared-schematic-bank",
       "subject": "One schematic bank for the interior layers",
       "status": "included",
-      "finding": "The structural section, metallic-hydrogen and diffuse-core textures share one schematic bank because none of the observation lenses measures below Saturn's atmosphere, and the declared false-colour responses of the other lenses do not recolour the unobserved deep layers.",
+      "finding": "The structural section, metallic-hydrogen and diffuse-core textures share one schematic bank because none of the observation datasets measures below Saturn's atmosphere, and the declared false-colour responses of the other datasets do not recolour the unobserved deep layers.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L232"
       ]

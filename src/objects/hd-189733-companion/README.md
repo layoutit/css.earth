@@ -8,7 +8,7 @@ HD 189733 B is a red dwarf 11.4 arcseconds from [HD 189733 A](../hd-189733/READM
 
 **Radius and mass.** 0.224 solar radii and 0.193 solar masses from the TESS Input Catalog v8.2 (TIC 256364937; Stassun et al. 2019, AJ 158, 138), pinned as one VizieR row in [`photometry/tic-8.2.tsv`](source/photometry/tic-8.2.tsv). The catalogue derives both from the star's Ks magnitude and distance with relations calibrated on nearby M dwarfs (Mann et al. 2015, 2019). They are model values, not a measured diameter.
 
-**Colour lens.** Gaia DR3 published a BP/RP spectrum of B too, calibrated to absolute flux and sampled every 2 nm from 336 to 1020 nm, pinned unchanged as `photometry/gaia-dr3-xp-sampled.csv` (same [acquisition record](../../sources/gaia-dr3-hd-189733-companion.json)). The colour is computed as for A ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **255, 201, 123 (#ffc97b)**. B is faint in blue light, and below about 400 nm its samples are within their errors of zero. Moving every sample one standard error down or up, with negative values stopped at zero, moves the blue channel from 121 to 126. The disc is uniform: no limb darkening is measured for this star.
+**Colour dataset.** Gaia DR3 published a BP/RP spectrum of B too, calibrated to absolute flux and sampled every 2 nm from 336 to 1020 nm, pinned unchanged as `photometry/gaia-dr3-xp-sampled.csv` (same [acquisition record](../../sources/gaia-dr3-hd-189733-companion.json)). The colour is computed as for A ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **255, 201, 123 (#ffc97b)**. B is faint in blue light, and below about 400 nm its samples are within their errors of zero. Moving every sample one standard error down or up, with negative values stopped at zero, moves the blue channel from 121 to 126. The disc is uniform: no limb darkening is measured for this star.
 
 **No orbit is drawn.** No orbit of the pair is published: the 2006 discovery paper says it is "premature to derive specific orbital parameters", and its tentative clockwise, face-on orbit rests on a differential proper motion, −1 ± 5 and −21.2 ± 5 mas/yr, that Gaia has since replaced. Gaia DR3 measures the pair's separation and their relative motion across the sky precisely (−8.98, −3.67 mas/yr, 0.91 km/s at their distance), but not how far apart they lie along the line of sight, and their two published relative radial velocities disagree. Many orbits fit those measurements, so the package draws none. It fits them anyway, once, to record how open the orbit is.
 
@@ -35,7 +35,7 @@ An earlier version of this package drew 24 of those orbits, dashed. Each of them
 
 **Zooming out centres the pair.** A system overview normally holds its star at the centre of the view. Once the camera is farther out than the stars are from each other, this one turns onto the pair's centre of mass instead ([prepared-world-navigation.mts](../../../site/prepared-world-navigation.mts)), so A and B sit either side of it as the view widens. Closer in, where the two are not a pair on screen, the mounted star stays the subject.
 
-**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this lens's prepared colour, #ffc97b.
+**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this dataset's prepared colour, #ffc97b.
 
 ## Evidence
 
@@ -47,7 +47,7 @@ Run of 2026-09-17 (this version): [`node tools/prepare/prepare-object.mts hd-189
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the HD 189733 system's members are the planet and B, and that its exit distance scales the Sun's 100 au.
 - [`rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/hd-189733-companion/` in headless Chrome, no console errors.
 - Driven in a real browser from the planet outwards (1440 by 900, headless Chrome): where both stars are on screen, the pair's centre of mass sits 2 px from the centre of the view with A 35 px to one side and B to the other, and it stays within 1 px of the centre as the view widens further. Before this change A sat exactly at the centre and B swept in from the corner.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`tests/contract/object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts)) checks that the catalogue colour #ffc97b is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`tests/contract/object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts)) checks that the catalogue colour #ffc97b is the colour dataset's prepared colour.
 
 ## Known problems
 

@@ -8,7 +8,7 @@ It is the only planet known around TOI-1227. Its orbit and size follow Mann et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 27.36137783684 d Mann et al. 2022 (2022AJ....163..156M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2022): a/R* 34.01; Mann et al. 2022 (2022AJ....163..156M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2022): inclination 88.571 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458617.479256 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 14 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1227's measured colour (#ffba72, the colour lens of toi-1227 (src/objects/toi-1227/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1227's measured colour (#ffba72, the colour dataset of toi-1227 (src/objects/toi-1227/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1227's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (65, 99, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

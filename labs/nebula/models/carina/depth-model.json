@@ -72,7 +72,7 @@
       ],
       "thicknessArcsec": 45,
       "strength": 0.65,
-      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Lens material never chooses the depth."
+      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Dataset material never chooses the depth."
     },
     {
       "id": "eta-car-local-front",
@@ -105,7 +105,7 @@
       ],
       "thicknessArcsec": 45,
       "strength": 0.65,
-      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Lens material never chooses the depth."
+      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Dataset material never chooses the depth."
     },
     {
       "id": "wr25-local-front",
@@ -138,10 +138,10 @@
       ],
       "thicknessArcsec": 45,
       "strength": 0.65,
-      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Lens material never chooses the depth."
+      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Dataset material never chooses the depth."
     }
   ],
   "detailThicknessRatio": 0.45,
   "minimumThicknessArcsec": 1.5,
-  "interpretation": "Authored coherent height-surface experiment with three topology-inspired local deformations. Sky anchors are observed; all unmeasured depth, gradient, curvature, thickness and strength choices remain authored. The background is unconstrained. Only one surface exists per sightline: overlapping shells, disconnected fronts, foreground extinction and true cavities are unsupported. No published velocity, density, distance or extinction measurement is fitted; no Helix expansion law or Homunculus geometry is transferred. All source lenses share the same cloud and compact-light distribution."
+  "interpretation": "Authored coherent height-surface experiment with three topology-inspired local deformations. Sky anchors are observed; all unmeasured depth, gradient, curvature, thickness and strength choices remain authored. The background is unconstrained. Only one surface exists per sightline: overlapping shells, disconnected fronts, foreground extinction and true cavities are unsupported. No published velocity, density, distance or extinction measurement is fitted; no Helix expansion law or Homunculus geometry is transferred. All source datasets share the same cloud and compact-light distribution."
 }

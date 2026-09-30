@@ -18,7 +18,7 @@ export function parseSolidScience(value: unknown) {
     qualityMasks:optional(array(sourcePath)),additionalGrids:optional(array(sourcePath)),
     underlay:optional(parseScienceUnderlay)})(value));
 }
-/** A catalogue lens drawn over an earlier observation: its empty cells show that photograph as grey context
+/** A catalogue dataset drawn over an earlier observation: its empty cells show that photograph as grey context
  * (applyUnderlay in the raster lane owns the arithmetic). */
 export function parseScienceUnderlay(value: unknown) {
   const underlay = shape({surface:text,brightness:number,grayscale:optional(boolean),bits:optional(number)})(value);
@@ -44,6 +44,6 @@ export const parseSolidRasterConfig = shape({namespace:text,publicBase:text,
     observedColors:optional(array(shape({...identity,profile:requireRecord,monochromeBase:text,photometry:optional(parseColorPhotometry)})))})});
 
 /** The manifest verifies bytes; the observation consumer owns these extra fields. */
-const surfaceSource = shape({id:text,lensId:text,path:text,width:number,height:number,
+const surfaceSource = shape({id:text,datasetId:text,path:text,width:number,height:number,
   label:optional(text),falseColor:optional(boolean),projection:optional(requireRecord)});
 export const parseSurfaceSource = (value: unknown) => Object.assign({}, requireRecord(value), surfaceSource(value));

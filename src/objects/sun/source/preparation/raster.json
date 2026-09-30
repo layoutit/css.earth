@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/sun/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -22,7 +22,7 @@
       "source": "hmi/continuum",
       "falseColor": true,
       "output": "sun-surface-{id}{suffix}.webp",
-      "thumbnail": "sun-lens-{id}.webp",
+      "thumbnail": "sun-dataset-{id}.webp",
       "science": {
         "synoptic": {
           "kind": "hmi-continuum-mosaic",
@@ -219,7 +219,7 @@
       "source": "hmi/CR2311-synopMr.fits",
       "falseColor": true,
       "output": "sun-surface-{id}{suffix}.webp",
-      "thumbnail": "sun-lens-{id}.webp",
+      "thumbnail": "sun-dataset-{id}.webp",
       "science": {
         "synoptic": {
           "kind": "fits-map",
@@ -269,7 +269,7 @@
       "source": "sdo/synoptic/AIA0304/CR2311.fits",
       "falseColor": true,
       "output": "sun-surface-{id}{suffix}.webp",
-      "thumbnail": "sun-lens-{id}.webp",
+      "thumbnail": "sun-dataset-{id}.webp",
       "science": {
         "synoptic": {
           "kind": "fits-map",
@@ -318,7 +318,7 @@
       "source": "sdo/synoptic/AIA0171/CR2311.fits",
       "falseColor": true,
       "output": "sun-surface-{id}{suffix}.webp",
-      "thumbnail": "sun-lens-{id}.webp",
+      "thumbnail": "sun-dataset-{id}.webp",
       "science": {
         "synoptic": {
           "kind": "fits-map",
@@ -367,7 +367,7 @@
       "source": "sdo/synoptic/AIA0193/CR2311.fits",
       "falseColor": true,
       "output": "sun-surface-{id}{suffix}.webp",
-      "thumbnail": "sun-lens-{id}.webp",
+      "thumbnail": "sun-dataset-{id}.webp",
       "science": {
         "synoptic": {
           "kind": "fits-map",
@@ -430,7 +430,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "body-registered lens-derived rim and continuum source-derived limb-darkening plate over visible retained leaves",
+        "composition": "body-registered dataset-derived rim and continuum source-derived limb-darkening plate over visible retained leaves",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

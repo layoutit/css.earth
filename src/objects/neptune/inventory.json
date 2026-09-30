@@ -129,73 +129,73 @@
     },
     {
       "location": "public",
-      "filename": "neptune-lens-methane.webp",
+      "filename": "neptune-dataset-methane.webp",
       "bytes": 446,
       "sha256": "46479ce7a25d26e4fb9218b04a7010169f4ceefe3a6beda525dccf008f5542e1"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-near-infrared.webp",
+      "filename": "neptune-dataset-near-infrared.webp",
       "bytes": 286,
       "sha256": "7fe99543082395893d81a987e52bd88a799d3708f872c381783591053e847d42"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-normal.webp",
+      "filename": "neptune-dataset-normal.webp",
       "bytes": 238,
       "sha256": "574b0aef12b199bc5d4cd5ad9a13afbc6a02620ecddccea2ea036a197d75624e"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2017a.webp",
+      "filename": "neptune-dataset-visible-2017a.webp",
       "bytes": 1630,
       "sha256": "3ee6996cc73b32eea1eafe67c800c48866354a73e08a223b038a2da5040c8c9b"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2018a.webp",
+      "filename": "neptune-dataset-visible-2018a.webp",
       "bytes": 1604,
       "sha256": "198584bf62a4876e07cba31572d58b31bd25f9d0b8cf119b12bf110aaa49710c"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2019a.webp",
+      "filename": "neptune-dataset-visible-2019a.webp",
       "bytes": 1602,
       "sha256": "e830c0b9eee57a8a9df66485f7ef6bedd0d5393baf0adb64df42c556e87d54ae"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2020a.webp",
+      "filename": "neptune-dataset-visible-2020a.webp",
       "bytes": 1626,
       "sha256": "96e9b559fab160c88cb412a4400373fe4eda24480d7110c62294f47a700ce213"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2021a.webp",
+      "filename": "neptune-dataset-visible-2021a.webp",
       "bytes": 1538,
       "sha256": "25f18955a0d2b21148262d2f6aa24eaa2022721f3d12e5a8a94f2e7cce989a63"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2022a.webp",
+      "filename": "neptune-dataset-visible-2022a.webp",
       "bytes": 1298,
       "sha256": "1002c1b86c4aff056bb0dec4328f4c65064963f9bfce57cced4ee6f2ab5278f6"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2023a.webp",
+      "filename": "neptune-dataset-visible-2023a.webp",
       "bytes": 1666,
       "sha256": "b6a23a63b7d4585c8163ac82744847842aa90504aeae7f9cf0d8f7c1e14cbb1d"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2025a.webp",
+      "filename": "neptune-dataset-visible-2025a.webp",
       "bytes": 1458,
       "sha256": "4d0150ee137ef21b01537eef46913bed4245e01d7c894203d6f6a5be4232d68f"
     },
     {
       "location": "public",
-      "filename": "neptune-lens-visible-2025b.webp",
+      "filename": "neptune-dataset-visible-2025b.webp",
       "bytes": 1386,
       "sha256": "91c58529745b53183338b9205a8da2eeb2fb56862c6a9fdd822c3b891204238a"
     },
@@ -508,8 +508,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 303,
-      "sha256": "8e0d8904ff8489ad4b5b9133d2985533e6abf5a8b17eb43cb4f64fface85adca"
+      "bytes": 306,
+      "sha256": "9a66d234bbe898c9bff5b44b523732e00d9901a51a56e31c61f4429ea59e8675"
     },
     {
       "location": "prepared",
@@ -526,20 +526,20 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 4753,
-      "sha256": "8aeb28f9204617c225957ca5b8d4bcd50ecbac75cc7f54242208bc4257b52106"
+      "bytes": 4755,
+      "sha256": "b8a8e81f663167a0358218ac6fdc668dbddc8a0e228869fe6b8702524dbc84b2"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 4951,
-      "sha256": "60e1e554fe3a75e553018163bb7ea869a7aad80f661c136a12f7f25912351621"
+      "bytes": 4998,
+      "sha256": "4cbee9e348ba66a3df189612a0f4b5ddf5baacc018fe43ab4c5713770456668f"
     },
     {
       "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 11044,
-      "sha256": "4b0c27f7942a00888016d1c8cf2745d96addfb5de89f1594773a432e718b2e18"
+      "filename": "datasets.json",
+      "bytes": 11091,
+      "sha256": "bb5b3663adabc6262f2a16e24e00f4b76da953136d92263920651b3ce8825f03"
     },
     {
       "location": "prepared",
@@ -622,8 +622,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 874738,
-      "sha256": "7b6f4ecb71db167ecc07b49f14134df3f599440c8af16f0c708069f0f047468f"
+      "bytes": 875073,
+      "sha256": "218af24638d79aa411a2549bff19faaf82a359145193bb874e75027cb6920bff"
     },
     {
       "location": "prepared",

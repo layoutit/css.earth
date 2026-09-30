@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "didymos",
   "displayName": "Didymos",
@@ -402,6 +402,6 @@
     "sunSource": "JPL heliocentric orbit and the source Didymos v003 pole; arbitrary body phase, fixed-epoch display lighting"
   },
   "presentation": {
-    "defaultLens": "shape"
+    "defaultDataset": "shape"
   }
 }

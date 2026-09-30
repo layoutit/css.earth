@@ -114,14 +114,14 @@ citation URL.
 
 The [contribution compiler](../../packages/objects/src/provenance/exploration-contributions.ts)
 walks the existing source/product lineage, including dependencies and parent
-products. Each edge retains its object, product, source, lens IDs and attribution.
+products. Each edge retains its object, product, source, dataset IDs and attribution.
 All forward and reverse indexes come from this one edge set. Dataset destinations
-are deduplicated by `(objectId, lensId)`; multiple evidence edges remain distinct.
+are deduplicated by `(objectId, datasetId)`; multiple evidence edges remain distinct.
 Mission-only evidence creates no vehicle contribution edge. Participation creates
 no observation edges.
 
 The compiler validates every authored capture, including inputs outside the
-current products. It validates product lens IDs against prepared page controls,
+current products. It validates product dataset IDs against prepared page controls,
 checks those controls against the object's scene identity, and retains the
 existing exclusions for schematic interiors, illustrative models, modeled noise
 and schematic morphology. Empty attribution stays empty; names, publishers,
@@ -168,15 +168,15 @@ The router owns both the fragment and history:
 - A cross-body link uses the shared camera handoff, selects after scene readiness,
   and commits one destination entry. Dataset failure leaves the destination's
   default available and publishes a canonical URL with a notice.
-- Manual lens selection replaces the current history entry. It does not fill the
-  back stack with every lens click.
+- Manual dataset selection replaces the current history entry. It does not fill the
+  back stack with every dataset click.
 - Ordinary body/overview navigation removes the departing dataset choice. Back
   and forward restore the saved camera and dataset, using the default when the
   fragment is absent.
 - An invalid initial fragment stays visible for diagnosis while the default is
   shown. A valid selection or navigation clears that state.
 - The Datasets tab opens after a requested dataset succeeds. No router simulates
-  a click on a lens button or changes the object scene registry.
+  a click on a dataset button or changes the object scene registry.
 
 ## Interface examples
 

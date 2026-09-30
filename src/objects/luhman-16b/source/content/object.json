@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "luhman-16b",
   "displayName": "Luhman 16 B",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from its measured optical spectrum. The disc itself is unresolved.",
-        "thumbnail": "luhman-16b-lens-color.webp",
+        "thumbnail": "luhman-16b-dataset-color.webp",
         "surface": "luhman-16b-surface-color@2x.webp",
         "poles": "luhman-16b-poles-color@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "brightness",
         "label": "Brightness",
         "qualification": "Published map · Ureshino et al. 2026 · VLT CRIRES 2.30–2.32 µm",
-        "thumbnail": "luhman-16b-lens-brightness.webp",
+        "thumbnail": "luhman-16b-dataset-brightness.webp",
         "surface": "luhman-16b-surface-brightness@2x.webp",
         "poles": "luhman-16b-poles-brightness@2x.webp",
         "source": {
@@ -131,7 +131,7 @@
         "id": "uncertainty",
         "label": "Uncertainty",
         "qualification": "Published map · Ureshino et al. 2026 · VLT CRIRES 2.30–2.32 µm",
-        "thumbnail": "luhman-16b-lens-uncertainty.webp",
+        "thumbnail": "luhman-16b-dataset-uncertainty.webp",
         "surface": "luhman-16b-surface-uncertainty@2x.webp",
         "poles": "luhman-16b-poles-uncertainty@2x.webp",
         "source": {

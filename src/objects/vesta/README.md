@@ -55,8 +55,8 @@ the released PNGs at 2880 × 1440: the LAMO mosaic covers 84 % of the map and
 nothing above 75° N; the natural-color mosaic 91 %, thinning above 60° N; the
 HAMO-1-2 clear mosaic every cell, with the 90–75° N band dim (mean 7 of 255,
 94 % of pixels below 32) but showing craters and shadows rather than fill. The
-mosaic is pinned as the HAMO photography lens and declared the fallback base of
-the natural-color and LAMO lenses, so their gaps take HAMO texels in gray and the
+mosaic is pinned as the HAMO photography dataset and declared the fallback base of
+the natural-color and LAMO datasets, so their gaps take HAMO texels in gray and the
 prepared report counts them (`monochromePixels`). Before-and-after minimaps are in
 [`evidence/hamo/`](evidence/hamo/); the HAMO test
 pins the label grid, the fallback order and the prepared coverage.
@@ -72,7 +72,7 @@ of regolith from low orbit, about 210 km up. Five archived numeric maps are
 shown, read from the PDS4 bundle `urn:nasa:pds:dawn-grand-vesta` 1.0, not from
 the colour renders in NASA Vesta Trek.
 
-| Lens | Archived quantity | Pixels | Values | Dates |
+| Dataset | Archived quantity | Pixels | Values | Dates |
 | --- | --- | --- | --- | --- |
 | Hydrogen | Hydrogen abundance, µg/g | 16,200, 2° × 2° | 0.0 to 391.1 | 2011-12-08 to 2012-01-14 |
 | Iron gamma rays | Fe 7.6 MeV counting rate corrected for neutron density, counts/s | 178,698 equal-area, 0.5° tall | 0.0687 to 0.07746 | 2011-12-08 to 2012-04-27 |
@@ -148,15 +148,15 @@ contrast shrinks or reverses (1.208, 12.815, −0.0137). South of 60° S all thr
 below the mean, and the lowest gamma-ray pixel (67.5° to 82.5° S, 270° to 315° E)
 lies in Rheasilvia.
 
-**Geologic map.** The geology lens shows the global map of Yingst et al. (2023), [PSJ 4:157](https://doi.org/10.3847/PSJ/acebe9), from the authors' ArcGIS linework on [Zenodo](https://doi.org/10.5281/zenodo.19475473) (CC BY 4.0): 136 polygons in 18 hybrid units that pair landforms with Dawn colour-ratio classes. The unit colours are the authors' own: the layer file stores them as CIE L*a*b*, and ArcMap's conversion (Apple RGB primaries, gamma 1.8, D65 white) lands every one within 1e-6 of an integer RGB value.
+**Geologic map.** The geology dataset shows the global map of Yingst et al. (2023), [PSJ 4:157](https://doi.org/10.3847/PSJ/acebe9), from the authors' ArcGIS linework on [Zenodo](https://doi.org/10.5281/zenodo.19475473) (CC BY 4.0): 136 polygons in 18 hybrid units that pair landforms with Dawn colour-ratio classes. The unit colours are the authors' own: the layer file stores them as CIE L*a*b*, and ArcMap's conversion (Apple RGB primaries, gamma 1.8, D65 white) lands every one within 1e-6 of an integer RGB value.
 
 The linework is in Claudia Double Prime. `geology-grid.py` rasterizes it at 2048 x 1024 in its own coordinates and writes the Claudia central meridian (-150) into the GeoTIFF, so no pixel moves. **Checks (2026-09-27, on ccbf483de8).** The committed grid is read through the shared scientific GeoTIFF reader. At this placement crater-floor units average 1,120 m below a 10-degree high-pass of the HAMO terrain, against -146 to +217 m at every other 10-degree offset; 19 of 38 Gazetteer craters 20 to 150 km across fall in crater units, against 10 unshifted. 2,753 cells (0.13%) are unmapped in the source: the two south-pole rows and a thin line at 30 E south of 25 S. Contacts and linear features are not drawn. Evidence: [terrain anomaly by offset](evidence/geology/placement-dtm.json) and [the units over the HAMO mosaic](evidence/geology/units-over-hamo.png). The rasterization plan and receipt are [`source/geology/prepare-grid.json`](source/geology/prepare-grid.json) and [`vesta-geologic-units.json`](source/geology/vesta-geologic-units.json).
 
 ## Gravity from Dawn radio science
 
-Four lenses, grouped as **Gravity**, show the gridded maps JPL archived for VESTA20H, a degree-20 fit to Dawn's Deep Space Network tracking and optical landmarks from July 2011 to July 2012 ([Konopliv et al. 2014](https://doi.org/10.1016/j.icarus.2013.09.005)). The bundle keeps the later degree-26 model VESTA26J only as coefficients, so it is not shown; we do not sum coefficients ourselves.
+Four datasets, grouped as **Gravity**, show the gridded maps JPL archived for VESTA20H, a degree-20 fit to Dawn's Deep Space Network tracking and optical landmarks from July 2011 to July 2012 ([Konopliv et al. 2014](https://doi.org/10.1016/j.icarus.2013.09.005)). The bundle keeps the later degree-26 model VESTA26J only as coefficients, so it is not shown; we do not sum coefficients ourselves.
 
-| Lens | Archived product | Values | Scale |
+| Dataset | Archived product | Values | Scale |
 | --- | --- | --- | --- |
 | Radial gravity | `JGDWN_VES20H_ACCEL_0020`: radial gravity without J2 on a 290 × 265 km ellipsoid | −1233.6 to 2045.8 mGal | ±2000 mGal; 0.16% of the area, in Vestalia Terra |
 | Uncertainty | `ACCERR_0020`: one-sigma error from the model covariance | 19.3 to 169.2 mGal | 0 to 170 |
@@ -167,14 +167,14 @@ Four lenses, grouped as **Gravity**, show the gridded maps JPL archived for VEST
 
 **Resolution.** Degree 20 corresponds to features about 42 km across at the 265 km reference radius (π × 265 km / 20), degree 15 to about 55 km. [Raymond et al. (2013)](https://meetingorganizer.copernicus.org/EGU2013/EGU2013-12408.pdf) call the field accurate to about degree 20. The 1° cells, 4.6 km at the reference radius, are sampling, not detail. No degree-strength map is archived.
 
-**Frame.** The archive rotated the field 210° from the published Claudia frame to near Claudia Double Prime (prime meridian 284.59521°, Claudia crater at 146° E), the frame of the Gazetteer and GRaND. The lenses read each grid at Claudia longitude + 150° (`outputLongitudeOrigin` 150, the surface map's left edge in the Gazetteer frame), so no cell is resampled. Each map is 181 lines of 360 little-endian 64-bit values with cell centres at whole degrees from −180° E and from 90° N, as the producer's PDS3 labels (volume `DWNVGRS_2`) and the bundle description state; the PDS4 labels' added corner coordinates put the first column's edge there instead, half a cell away. The bytes are the same file in both archives.
+**Frame.** The archive rotated the field 210° from the published Claudia frame to near Claudia Double Prime (prime meridian 284.59521°, Claudia crater at 146° E), the frame of the Gazetteer and GRaND. The datasets read each grid at Claudia longitude + 150° (`outputLongitudeOrigin` 150, the surface map's left edge in the Gazetteer frame), so no cell is resampled. Each map is 181 lines of 360 little-endian 64-bit values with cell centres at whole degrees from −180° E and from 90° N, as the producer's PDS3 labels (volume `DWNVGRS_2`) and the bundle description state; the PDS4 labels' added corner coordinates put the first column's edge there instead, half a cell away. The bytes are the same file in both archives.
 
 **Checks (28 September 2026)** ([results](evidence/gravity/registration.json)):
 
 - Against the DLR HAMO terrain, which is in Claudia: row by row within 60° of the equator, radial gravity correlates with the terrain radius at r = 0.896 when read at Claudia + 150°, the best of all 360 one-degree shifts; the next best peak away from it is 0.753, and without the shift r is −0.13. The geoid peaks one degree away, at +149° (r = 0.71). The Bouguer map is built to remove the shape's pull, so it is not used for this check.
 - Against [Raymond et al. (2013)](https://meetingorganizer.copernicus.org/EGU2013/EGU2013-12408.pdf): the Bouguer maximum, 238 mGal at 11° E 32° S (Claudia Double Prime), lies inside Vestalia Terra's Gazetteer extent where the Rheasilvia and Veneneia rims approach, the large positive anomaly they describe; the Rheasilvia centre reads +87 mGal and Divalia Fossae, the equatorial troughs, +53, both positive as they describe. The Veneneia centre reads −1 mGal, not the negative they describe for most of that basin.
-- The geoid reaches −2.4 × 10⁷ m near the poles, where the errata say it is not valid; the lens withholds every cell poleward of 60° and the gray grid shows there. The geoid error map (40 to 89 m) is decoded but not shown ([ledger](investigations.json)).
-- Flat maps painted by the shared scientific painter from these grids were inspected before the bake; the painted pixels match the lens recipe exactly.
+- The geoid reaches −2.4 × 10⁷ m near the poles, where the errata say it is not valid; the dataset withholds every cell poleward of 60° and the gray grid shows there. The geoid error map (40 to 89 m) is decoded but not shown ([ledger](investigations.json)).
+- Flat maps painted by the shared scientific painter from these grids were inspected before the bake; the painted pixels match the dataset recipe exactly.
 
 ## Known problems
 
@@ -185,10 +185,10 @@ Feature notes: 9 of the labelled names carry a caption note, the lead summary of
 - The visible mosaic has clipped bright terrain and registration artifacts. The black-pixel mask is a heuristic that can hide valid dark pixels.
 - Clear-filter photography retains the illumination and seams of the original low-altitude mosaic. Its 20 m/pixel source is downsampled for this display; it does not change the 800-face mesh or supply 20 m terrain geometry. North of the LAMO coverage the 60 m/pixel HAMO mosaic shows instead, so resolution and sun angle change across that boundary, and the last few degrees around the north pole are very dark in the source.
 - Spectral ratios are not mineral-abundance measurements.
-- GRaND maps resolve about 300 km; their 2° and 0.5° pixels are sampling, not detail. The iron lens is a counting rate, not a weight percent.
-- The geology lens leaves 2,753 cells (0.13%) grey where the source has no polygon: the two south-pole rows and a thin line at 30° E south of 25° S. Unit names describe Dawn colour-ratio classes, not the map colours.
+- GRaND maps resolve about 300 km; their 2° and 0.5° pixels are sampling, not detail. The iron dataset is a counting rate, not a weight percent.
+- The geology dataset leaves 2,753 cells (0.13%) grey where the source has no polygon: the two south-pole rows and a thin line at 30° E south of 25° S. Unit names describe Dawn colour-ratio classes, not the map colours.
 - The fast neutron, high-energy gamma-ray and neutron absorption maps have 114 to 210 pixels each and show blocks 15° to 20° tall. The fast neutron level has an arbitrary offset; DCP is not converted to a cross section; the gamma-ray and DCP uncertainties are archived but not drawn.
-- Gravity lenses resolve about 42 km at best (55 km for Bouguer); the 1° cells are sampling. Radial gravity leaves out J2 and is not a gravity anomaly. The geoid is withheld poleward of 60°. The frame is close to, not exactly, Claudia Double Prime: the pole and spin were fitted with the field.
+- Gravity datasets resolve about 42 km at best (55 km for Bouguer); the 1° cells are sampling. Radial gravity leaves out J2 and is not a gravity anomaly. The geoid is withheld poleward of 60°. The frame is close to, not exactly, Claudia Double Prime: the pole and spin were fitted with the field.
 - Terrain values are radii, despite contradictory generic label wording. Polar interpolation is not independent stereo coverage.
 - The 8 km simplification allowance is an approximation, not an error bound or source uncertainty. Placement uses osculating elements with limited temporal validity.
 

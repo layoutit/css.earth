@@ -27,12 +27,12 @@ export async function selectSceneFeature(session: SceneSession, request: Navigat
   const city = /^city-([0-9]+)$/u.exec(id);
   const destinations = mount.destinations, features = mount.features;
   if (city ? !destinations : !features || !/^[0-9]+$/u.test(id)) throw new RangeError(`Feature “${id}” is unavailable on this object.`);
-  const supported = city ? [destinations!.lensId] : features!.lensIds;
+  const supported = city ? [destinations!.datasetId] : features!.datasetIds;
   const current = datasets?.current();
-  const lens = current && supported.includes(current) ? current : supported.find(id => datasets?.ids.includes(id));
-  if (!datasets || !lens) throw new RangeError('The feature source dataset is unavailable.');
-  // Even selecting the committed lens cancels an older, still decoding dataset choice.
-  if (!await datasets.select(lens, { signal })) return finish(false);
+  const dataset = current && supported.includes(current) ? current : supported.find(id => datasets?.ids.includes(id));
+  if (!datasets || !dataset) throw new RangeError('The feature source dataset is unavailable.');
+  // Even selecting the committed dataset cancels an older, still decoding dataset choice.
+  if (!await datasets.select(dataset, { signal })) return finish(false);
   signal.throwIfAborted();
   let completed: boolean;
   if (city) {

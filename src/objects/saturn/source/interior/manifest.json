@@ -1,5 +1,5 @@
 {
-  "schema": "csssaturn-interior-sources@1",
+  "schema": "csssaturn-interior-sources@2",
   "defaultView": "exterior",
   "cutaway": {
     "centerLongitudeDegrees": -56.25,
@@ -15,7 +15,7 @@
     "diffuseCore": [196, 121, 79],
     "deepCore": [224, 159, 101]
   },
-  "interiorLenses": {
+  "interiorDatasets": {
     "ultraviolet": {
       "filter": "F225W",
       "wavelength": "225 nm",

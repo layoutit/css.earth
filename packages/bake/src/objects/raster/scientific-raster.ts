@@ -105,10 +105,10 @@ export function scienceMapPoint(longitude: number, latitude: number, grid: Scien
 }
 
 export function validateScienceQualityMasks(value: unknown) {
-  const lens=decodeProfile(parseQualitySource,value,"Scientific quality masks require bounded numeric nearest-neighbor grids and nearest source sampling.");
-  if(lens.qualityMasks===undefined)return;
-  if(!['isis3','geotiff','fits-image-map'].includes(lens.format ?? '')||lens.sampling!=='nearest'||lens.additionalGrids||
-      !isArray(lens.qualityMasks)||!lens.qualityMasks.length||lens.qualityMasks.some(mask=>
+  const dataset=decodeProfile(parseQualitySource,value,"Scientific quality masks require bounded numeric nearest-neighbor grids and nearest source sampling.");
+  if(dataset.qualityMasks===undefined)return;
+  if(!['isis3','geotiff','fits-image-map'].includes(dataset.format ?? '')||dataset.sampling!=='nearest'||dataset.additionalGrids||
+      !isArray(dataset.qualityMasks)||!dataset.qualityMasks.length||dataset.qualityMasks.some(mask=>
         !['isis3','geotiff','fits-image-map'].includes(mask.format)||mask.sampling!=='nearest'||mask.qualityMasks||mask.additionalGrids||mask.valueTransform||
         typeof mask.path!=='string'||!mask.path||mask.path.startsWith('/')||mask.path.split('/').includes('..')||
         !mask.grid||![mask.grid.width,mask.grid.height].every(n=>Number.isSafeInteger(n)&&n>0)||
@@ -119,13 +119,13 @@ export function validateScienceQualityMasks(value: unknown) {
 }
 
 export async function loadScienceSurface(root: string, value: unknown, sourceMesh?: SourceMesh | null): Promise<SourceScalar & {report?:Record<string,unknown>;fieldReport?:Record<string,unknown>}> {
-  const lens=parseScienceInput(value);
-  if (lens.format === 'obj-uv-fits') return loadObjUvFits(root, lens, sourceMesh);
-  if (lens.format === 'image-plane-dem') return loadImageDemScience(root, lens, sourceMesh);
-  if(lens.qualityMasks!==undefined){
-    validateScienceQualityMasks(lens);
-    const source=await loadScienceSurface(root,{...lens,qualityMasks:undefined},sourceMesh);
-    const limits=lens.qualityMasks.map(parseQualityMask);
+  const dataset=parseScienceInput(value);
+  if (dataset.format === 'obj-uv-fits') return loadObjUvFits(root, dataset, sourceMesh);
+  if (dataset.format === 'image-plane-dem') return loadImageDemScience(root, dataset, sourceMesh);
+  if(dataset.qualityMasks!==undefined){
+    validateScienceQualityMasks(dataset);
+    const source=await loadScienceSurface(root,{...dataset,qualityMasks:undefined},sourceMesh);
+    const limits=dataset.qualityMasks.map(parseQualityMask);
     const masks=await Promise.all(limits.map(mask=>loadScienceSurface(root,mask)));
     return {sample(longitude: number,latitude: number){
       for(let i=0;i<masks.length;i++){
@@ -135,25 +135,25 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
       return source.sample(longitude,latitude);
     }};
   }
-  if (lens.format === 'pds-image') return loadPdsImage(root, lens);
-  if (lens.format === 'facet-scalars') return loadFacetScalarSurface(root, lens, sourceMesh);
-  if (lens.format === 'vtk-cell-categories') { if(!sourceMesh)throw new Error('Categorical science requires source mesh'); return loadVtkCategories(root, lens, sourceMesh); }
-  if (lens.format === 'circle-catalogue') return loadCircleCatalogue(root, lens, sourceMesh);
-  if (lens.format === 'geologic-shapefile') return loadGeologySurface(root, lens);
-  if (lens.format === 'pds3-scalar-map') return loadScalarMap(root, lens, sourceMesh);
-  if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {
-    const loader = lens.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
-    const raster = await loader(resolve(root, lens.path), lens.grid, lens.sampleGrid);
+  if (dataset.format === 'pds-image') return loadPdsImage(root, dataset);
+  if (dataset.format === 'facet-scalars') return loadFacetScalarSurface(root, dataset, sourceMesh);
+  if (dataset.format === 'vtk-cell-categories') { if(!sourceMesh)throw new Error('Categorical science requires source mesh'); return loadVtkCategories(root, dataset, sourceMesh); }
+  if (dataset.format === 'circle-catalogue') return loadCircleCatalogue(root, dataset, sourceMesh);
+  if (dataset.format === 'geologic-shapefile') return loadGeologySurface(root, dataset);
+  if (dataset.format === 'pds3-scalar-map') return loadScalarMap(root, dataset, sourceMesh);
+  if (['pds3-radius-zip', 'pds-radial-table'].includes(dataset.format)) {
+    const loader = dataset.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
+    const raster = await loader(resolve(root, dataset.path), dataset.grid, dataset.sampleGrid);
     return { sample(longitude: number, latitude: number) {
       if (latitude < -90 || latitude > 90) return null;
       const value = raster.sample(longitude, latitude);
-      return value === null ? null : value * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0);
+      return value === null ? null : value * (dataset.valueTransform?.scale ?? 1) + (dataset.valueTransform?.offset ?? 0);
     } };
   }
-  if (['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format)) return loadShapeScalarGrid(root, lens, sourceMesh);
-  if (lens.additionalGrids?.length) {
-    const rasters = await Promise.all([lens, ...lens.additionalGrids].map(entry =>
-      loadScienceSurface(root, {...lens, ...entry, additionalGrids: undefined})));
+  if (['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(dataset.format)) return loadShapeScalarGrid(root, dataset, sourceMesh);
+  if (dataset.additionalGrids?.length) {
+    const rasters = await Promise.all([dataset, ...dataset.additionalGrids].map(entry =>
+      loadScienceSurface(root, {...dataset, ...entry, additionalGrids: undefined})));
     return { sample(longitude: number, latitude: number) {
       for (const raster of rasters) {
         const value = raster.sample(longitude, latitude);
@@ -162,42 +162,42 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
       return null;
     } };
   }
-  if (lens.format === 'pds3-float-map') return loadPdsFloatMap(root, lens);
-  if (lens.format === 'fits-image-map') return loadFitsImageMap(root, lens);
-  if (lens.format === 'npy-dictionary-map') return loadNpyDictionaryMap(root, lens);
-  if (lens.format === 'npy-lonlat-grid') return loadNpyLonLatGrid(root, value);
-  if (lens.format === 'pds3-grid') return loadPds3Grid(root, value);
-  if (lens.format === 'vicar-grid') return loadVicarGrid(root, value);
-  if (lens.format === 'eclipse-map-fit') return loadEclipseMapFit(root, value);
-  if (lens.format === 'published-phase-curve-map') return loadPublishedPhaseCurveMap(root, value);
-  if (lens.format === 'eigenspectra-temperature') return loadEigenspectraTemperature(root, value);
-  if (lens.format === 'healpix-npy-map') return loadHealpixNpyMap(root, value);
-  if (lens.format === 'tecplot-lonlat-map') return loadTecplotLonLatMap(root, value);
-  if (lens.format === 'latitude-belt-map') return loadLatitudeBeltMap(root, value);
-  if (lens.format === 'lonlat-slice-table') return loadLonLatSliceTable(root, value);
-  if (lens.format === 'pds-binned-table') return loadPdsBinnedTable(root, value);
-  if (lens.format === 'pds-equal-area-table') return loadPdsEqualAreaTable(root, value);
-  if (lens.format === 'bare-rock-fit') return loadBareRockFit(root, value);
-  if (lens.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
-  if (lens.format === 'isis3') {
-    const grid = parseScienceGrid(lens.grid);
-    const {data, origin, resolution} = await loadIsis3Raster(resolve(root, lens.path), grid);
+  if (dataset.format === 'pds3-float-map') return loadPdsFloatMap(root, dataset);
+  if (dataset.format === 'fits-image-map') return loadFitsImageMap(root, dataset);
+  if (dataset.format === 'npy-dictionary-map') return loadNpyDictionaryMap(root, dataset);
+  if (dataset.format === 'npy-lonlat-grid') return loadNpyLonLatGrid(root, value);
+  if (dataset.format === 'pds3-grid') return loadPds3Grid(root, value);
+  if (dataset.format === 'vicar-grid') return loadVicarGrid(root, value);
+  if (dataset.format === 'eclipse-map-fit') return loadEclipseMapFit(root, value);
+  if (dataset.format === 'published-phase-curve-map') return loadPublishedPhaseCurveMap(root, value);
+  if (dataset.format === 'eigenspectra-temperature') return loadEigenspectraTemperature(root, value);
+  if (dataset.format === 'healpix-npy-map') return loadHealpixNpyMap(root, value);
+  if (dataset.format === 'tecplot-lonlat-map') return loadTecplotLonLatMap(root, value);
+  if (dataset.format === 'latitude-belt-map') return loadLatitudeBeltMap(root, value);
+  if (dataset.format === 'lonlat-slice-table') return loadLonLatSliceTable(root, value);
+  if (dataset.format === 'pds-binned-table') return loadPdsBinnedTable(root, value);
+  if (dataset.format === 'pds-equal-area-table') return loadPdsEqualAreaTable(root, value);
+  if (dataset.format === 'bare-rock-fit') return loadBareRockFit(root, value);
+  if (dataset.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
+  if (dataset.format === 'isis3') {
+    const grid = parseScienceGrid(dataset.grid);
+    const {data, origin, resolution} = await loadIsis3Raster(resolve(root, dataset.path), grid);
     return {sample(longitude: number, latitude: number) {
       if (latitude < -90 || latitude > 90) return null;
       const [easting, northing] = scienceMapPoint(longitude, latitude, grid);
       return sampleScienceGrid(data, grid, (easting - origin[0]) / resolution[0],
-        (northing - origin[1]) / resolution[1], lens);
+        (northing - origin[1]) / resolution[1], dataset);
     }};
   }
-  if (lens.format !== 'geotiff') throw new Error(`Unsupported scientific source format: ${lens.format}`);
-  const tiff = await fromFile(resolve(root, lens.path));
+  if (dataset.format !== 'geotiff') throw new Error(`Unsupported scientific source format: ${dataset.format}`);
+  const tiff = await fromFile(resolve(root, dataset.path));
   try {
-    const image = await tiff.getImage(), keys = image.getGeoKeys(), grid = parseScienceGrid(lens.grid);
+    const image = await tiff.getImage(), keys = image.getGeoKeys(), grid = parseScienceGrid(dataset.grid);
     if(!keys)throw new Error("Missing scientific GeoTIFF keys");
     const polar = grid.projection === 'polar-stereographic';
     const geographic = grid.coordinates === 'degrees';
     if (grid.coordinates !== undefined && !['degrees', 'meters'].includes(grid.coordinates) || geographic && polar)
-      throw new Error(`Unsupported scientific grid coordinates: ${lens.path}`);
+      throw new Error(`Unsupported scientific grid coordinates: ${dataset.path}`);
     const projectionMatches = geographic
       ? keys.GTModelTypeGeoKey === 2 && keys.GTRasterTypeGeoKey === 1 && keys.GeogAngularUnitsGeoKey === 9102 &&
         keys.GeogSemiMinorAxisGeoKey === grid.referenceRadiusMeters && (keys.GeogPrimeMeridianLongGeoKey ?? 0) === 0 && grid.centerLongitude === 0
@@ -207,13 +207,13 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
       : keys.ProjCoordTransGeoKey === 17 && keys.ProjCenterLongGeoKey === grid.centerLongitude;
     if (image.getWidth() !== grid.width || image.getHeight() !== grid.height || !projectionMatches ||
         keys.GeogSemiMajorAxisGeoKey !== grid.referenceRadiusMeters ||
-        !sameNoData(image.getGDALNoData(), grid.noData)) throw new Error(`Scientific source grid changed: ${lens.path}`);
+        !sameNoData(image.getGDALNoData(), grid.noData)) throw new Error(`Scientific source grid changed: ${dataset.path}`);
     const origin = image.getOrigin(), resolution = image.getResolution();
     if (resolution[0] <= 0 || resolution[1] >= 0 || image.getSamplesPerPixel() !== 1 ||
         (grid.origin && (origin[0] !== grid.origin[0] || origin[1] !== grid.origin[1])) ||
         (grid.resolutionMeters && (resolution[0] !== grid.resolutionMeters || resolution[1] !== -grid.resolutionMeters)) ||
         (grid.resolution && (resolution[0] !== grid.resolution[0] || resolution[1] !== grid.resolution[1]))) {
-      throw new Error(`Scientific source georeference changed: ${lens.path}`);
+      throw new Error(`Scientific source georeference changed: ${dataset.path}`);
     }
     const data = numericRaster(await image.readRasters({ interleave: true }));
     return { sample(longitude: number, latitude: number) {
@@ -222,7 +222,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
       const [easting, northing] = scienceMapPoint(longitude, latitude, grid);
       const x = (easting - origin[0]) / resolution[0];
       const y = (northing - origin[1]) / resolution[1];
-      return sampleScienceGrid(data, grid, x, y, lens);
+      return sampleScienceGrid(data, grid, x, y, dataset);
     } };
   } finally { await tiff.close(); }
 }
@@ -251,20 +251,20 @@ export function sourceSurfaceBrightness({ point, normal }: {point:readonly numbe
  * texel (raw pixels differ by at most 2). Relief shading multiplies the looked-up colour afterwards.
  */
 export const LOSSLESS_PALETTE_STEPS = 256, LOSSY_PALETTE_STEPS = 1024;
-export const paletteSteps = (lens: SciencePalette) => lens.displaySampling === 'nearest' ? LOSSLESS_PALETTE_STEPS : LOSSY_PALETTE_STEPS;
-export function paletteLookup(lens: SciencePalette) {
-  const { minimum, maximum } = lens;
+export const paletteSteps = (dataset: SciencePalette) => dataset.displaySampling === 'nearest' ? LOSSLESS_PALETTE_STEPS : LOSSY_PALETTE_STEPS;
+export function paletteLookup(dataset: SciencePalette) {
+  const { minimum, maximum } = dataset;
   if (minimum === undefined || maximum === undefined || !(maximum > minimum)) throw new TypeError('A numeric palette needs a declared range.');
-  const steps = paletteSteps(lens);
-  const palette = Array.from({ length: steps }, (_, i) => colorForValue(minimum + i / (steps - 1) * (maximum - minimum), lens));
+  const steps = paletteSteps(dataset);
+  const palette = Array.from({ length: steps }, (_, i) => colorForValue(minimum + i / (steps - 1) * (maximum - minimum), dataset));
   return (value: number) => palette[Math.round(Math.max(0, Math.min(1, (value - minimum) / (maximum - minimum))) * (steps - 1))]!;
 }
 
-export function createSourceSurfacePainter(lens: SciencePalette) {
-  const palette = lens.categories ? null : paletteLookup(lens);
+export function createSourceSurfacePainter(dataset: SciencePalette) {
+  const palette = dataset.categories ? null : paletteLookup(dataset);
   return (sample: {value:number;point:readonly number[];normal:readonly number[]}) => {
-    const color = lens.categories ? categoryColorForValue(sample.value, lens) : palette!(sample.value);
-    const brightness = sourceSurfaceBrightness(sample, lens.relief);
+    const color = dataset.categories ? categoryColorForValue(sample.value, dataset) : palette!(sample.value);
+    const brightness = sourceSurfaceBrightness(sample, dataset.relief);
     return color.map(c => Math.max(0, Math.min(255, Math.round(c * brightness))));
   };
 }
@@ -272,18 +272,18 @@ export function createSourceSurfacePainter(lens: SciencePalette) {
 /** The colour of drawn boundaries: black, as the contours of the papers' figures. */
 const OUTLINE = [0, 0, 0] as const;
 
-export function paintScienceSurface(source: SourceScalar, lens: SciencePalette, width: number, height: number) {
-  const origin = lens.outputLongitudeOrigin ?? 0;
+export function paintScienceSurface(source: SourceScalar, dataset: SciencePalette, width: number, height: number) {
+  const origin = dataset.outputLongitudeOrigin ?? 0;
   if (!Number.isFinite(origin) || origin < -180 || origin >= 360) throw new TypeError('Invalid scientific output longitude origin.');
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
-  const palette = lens.categories ? null : paletteLookup(lens);
+  const palette = dataset.categories ? null : paletteLookup(dataset);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const longitude = origin + (x + 0.5) / width * 360, latitude = 90 - (y + 0.5) / height * 180;
     const i = y * width + x, value = source.sample(longitude, latitude);
     if (value === null) { missing[i] = 1; continue; }
     // A source may draw published boundaries over its values, as a paper's figure draws contours on its map.
-    const color = source.outline?.(longitude, latitude, 360 / width) ? OUTLINE : lens.categories ? categoryColorForValue(value, lens) : palette!(value);
-    const brightness = lens.relief ? terrainBrightness(source, longitude, latitude, 360 / width, lens.relief) : 1;
+    const color = source.outline?.(longitude, latitude, 360 / width) ? OUTLINE : dataset.categories ? categoryColorForValue(value, dataset) : palette!(value);
+    const brightness = dataset.relief ? terrainBrightness(source, longitude, latitude, 360 / width, dataset.relief) : 1;
     for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.min(255, Math.round(color[c] * brightness));
   }
   return { rgb: paintMissingCoverage(rgb, { width, height, channels: 3 }, missing), missing };

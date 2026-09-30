@@ -26,7 +26,7 @@
       "id": "rotation-axis",
       "subject": "Rotation axis, period and prime meridian",
       "status": "unresolved",
-      "finding": "No publication measures the rotation axis or period of π¹ Gruis. The object uses the display-orientation record: the axis shown is celestial north in the plane of the sky and the display meridian faces the Earth at the scene epoch, both labelled as a convention in the lens notes and the README.",
+      "finding": "No publication measures the rotation axis or period of π¹ Gruis. The object uses the display-orientation record: the axis shown is celestial north in the plane of the sky and the display meridian faces the Earth at the scene epoch, both labelled as a convention in the dataset notes and the README.",
       "revisitWhen": "A measured position angle of the rotation axis, as ALMA gave for Betelgeuse, is published.",
       "evidence": [
         "https://doi.org/10.1038/nature25001"

@@ -8,7 +8,7 @@ It is one of 4 planets known around K2-266. Its orbit and size follow Rodriguez 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 19.48348329613 d Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): a/R* 38.2; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): inclination 89.45 degrees Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): e 0.043 Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): omega 89 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459263.380209 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 25 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-266's measured colour (#ffd9b2, the colour lens of k2-266 (src/objects/k2-266/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-266's measured colour (#ffd9b2, the colour dataset of k2-266 (src/objects/k2-266/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-266's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (62, 72, 89), folded onto its orbit. Upper limits and rows without an error are left out.
 

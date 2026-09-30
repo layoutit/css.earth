@@ -20,9 +20,9 @@ All four use a linear 0–0.08 I/F display range. This common range preserves br
 
 ## Derived maps
 
-Six lenses show the mission's own derived facet tables. Each table gives one value per triangle of the shape model it was computed on. None of those meshes is the display PTM, so each lens is drawn on its own archived mesh, simplified to 800 triangles like the default shape (the OLA v20 mesh within 11 m of its source, since 800 triangles need 10.6 m there; the others within 10 m). A texel takes the released value of the nearest triangle of that full mesh, within 10 m; nothing is interpolated between triangles. The four meshes share Bennu's body-fixed frame. Their equivalent radii are 244.7 m (OLA v20) to 245.2 m (SPO v34), so switching lenses barely changes the outline.
+Six datasets show the mission's own derived facet tables. Each table gives one value per triangle of the shape model it was computed on. None of those meshes is the display PTM, so each dataset is drawn on its own archived mesh, simplified to 800 triangles like the default shape (the OLA v20 mesh within 11 m of its source, since 800 triangles need 10.6 m there; the others within 10 m). A texel takes the released value of the nearest triangle of that full mesh, within 10 m; nothing is interpolated between triangles. The four meshes share Bennu's body-fixed frame. Their equivalent radii are 244.7 m (OLA v20) to 245.2 m (SPO v34), so switching datasets barely changes the outline.
 
-| Lens | Product (PDS4 LIDVID ends `::1.0`) | Mesh | Archived values | Display range |
+| Dataset | Product (PDS4 LIDVID ends `::1.0`) | Mesh | Archived values | Display range |
 | --- | --- | --- | --- | --- |
 | Geopotential height | `g_01680mm_alt_elv_0000n00000_v020` | OLA v20, 786,432 facets | 0 to 84.7 m | 0–90 m |
 | Slope | `g_01680mm_alt_slp_0000n00000_v020` | OLA v20, 786,432 facets | 0.03° to 107.9°, median 21.3° | 0–80° |
@@ -33,7 +33,7 @@ Six lenses show the mission's own derived facet tables. Each table gives one val
 
 Checks against the papers:
 
-- OLA v20: the archive's 0.88 m tables reproduce [Daly et al. 2020](https://doi.org/10.1126/sciadv.abd3649) Table 1, which uses that model. Slopes run 0.0° to 113.0° with a median of 24.6°, and gravity from −0.0000748 to 0.0000806 m/s². The lenses use the 1.68 m tables of the same model, whose median slope is lower (21.3°). Geopotential height is (U − Umin)/|g|, with Umin the lowest surface potential (altimetry SIS §5), so its minimum is 0.
+- OLA v20: the archive's 0.88 m tables reproduce [Daly et al. 2020](https://doi.org/10.1126/sciadv.abd3649) Table 1, which uses that model. Slopes run 0.0° to 113.0° with a median of 24.6°, and gravity from −0.0000748 to 0.0000806 m/s². The datasets use the 1.68 m tables of the same model, whose median slope is lower (21.3°). Geopotential height is (U − Umin)/|g|, with Umin the lowest surface potential (altimetry SIS §5), so its minimum is 0.
 - Gravity anomaly: [Scheeres et al. 2020](https://doi.org/10.1126/sciadv.abc3350) say the variations "vary between ±3%" (Fig. 2A); the archived map spans −3.49% to +2.61%. That figure is built to degree 4, while the archived map belongs to the degree-10 field `grav_20_particles`, so only the range is compared. The sign follows the collection overview: positive is stronger than uniform density.
 - Thermal inertia: the mean is 296 (SD 28) and the mean sigma is 8.1. [Rozitis et al. 2020](https://doi.org/10.1126/sciadv.abc3699) give 300 ± 30 and a mean uncertainty of 8 for OTES. Equatorial facets average 327 and facets above 60° average 263–280, matching the paper's equator being 40–60 higher.
 - 2.7 µm band: the 5th–95th percentiles are 12.2–15.4% and the depth grows toward both poles. [Simon et al. 2020](https://doi.org/10.1126/science.abc3522) report 12 to 17% that correlates with latitude. The 3.4 µm band area has no published range to compare.
@@ -54,7 +54,7 @@ Current atlases are 3513 × 3728 pixels, with 800 retained faces. The [delivery 
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 1.468 / 3.965 / 10.120 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 
-The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
+The earlier source notes report Headless Chrome 152 checks of the then-selected datasets with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
 The [native-value check](evidence/spectral-bands/native-values.json) compares the production sampler with independent float32 byte reads and coordinates from the original ISIS labels. It checks native pixels, fractional footprints, extrema, negative values and gaps for all four bands. This verifies decoding and display transfer, not the instrument calibration or boulder-level registration.
 
@@ -69,7 +69,7 @@ Inspected evidence: [native map](evidence/spectral-bands/green-native-map.webp),
 Derived-map labels disagree with their FITS tables in places. The recipe declares each disagreement, and the table decides:
 
 - The OVIRS labels give 49,152 records; the tables and byte lengths hold 196,608.
-- The 2.7 µm label unit is percent, but the values are fractions (0.139 median). The lens multiplies by 100, which matches the paper's 12–17%.
+- The 2.7 µm label unit is percent, but the values are fractions (0.139 median). The dataset multiplies by 100, which matches the paper's 12–17%.
 - The thermal-inertia and OVIRS FITS headers name the value column `VALUE` and carry a working product name.
 - The OLA headers name their mesh `shape3.obj`, so every row is checked against the archived OBJ instead.
 - The gravity map numbers its facets from 1 and has no uncertainty column.
@@ -86,7 +86,7 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 Landing sites: 1 spacecraft landing, touchdown or impact sites are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
 
-Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 run): the refreshed catalogue labels 37 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band against the 2026-09-18 export. The Gazetteer regenerates this export on its own schedule (USGS Astrogeology, observed weekly): the 2026-09-12 snapshot’s exact bytes were superseded upstream and were not recoverable from git history, this repository’s other checkouts or the R2 source mirror, so the manifest is re-pinned to the 2026-09-18 bytes; `source/manifest.json` and `source/features/manifest.json` record the acquisition. The 2026-09-12 run’s headless Chrome probe (`output/probe-spheres.mts`, ignored scratch), which mounted the page, selected every lens and pinned Roc Saxum from the sidebar search with no console errors or failed requests, has not been re-run against the 2026-09-18 export.
+Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 run): the refreshed catalogue labels 37 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band against the 2026-09-18 export. The Gazetteer regenerates this export on its own schedule (USGS Astrogeology, observed weekly): the 2026-09-12 snapshot’s exact bytes were superseded upstream and were not recoverable from git history, this repository’s other checkouts or the R2 source mirror, so the manifest is re-pinned to the 2026-09-18 bytes; `source/manifest.json` and `source/features/manifest.json` record the acquisition. The 2026-09-12 run’s headless Chrome probe (`output/probe-spheres.mts`, ignored scratch), which mounted the page, selected every dataset and pinned Roc Saxum from the sidebar search with no console errors or failed requests, has not been re-run against the 2026-09-18 export.
 
 Fine triangle-edge artifacts remain visible in smooth areas, particularly Itokawa elevation. They persisted in a flat-color diagnostic and existing PolyCSS overlap variants; they are a rendering limitation, not source terrain.
 
@@ -149,7 +149,7 @@ Included: the 6.25 cm zero-phase albedo map on OLA v20, the separate 5 cm global
 
 The [USGS MapCam release](https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm)
 adds the published false-color composite from [DellaGiustina et al. (2020)](https://figshare.com/articles/journal_contribution/Maps_DellaGiustina_et_al_Science_2020_abc3660/12996494).
-It is a separate lens. Red is x/v (847/550 nm), green is w-band strength near
+It is a separate dataset. Red is x/v (847/550 nm), green is w-band strength near
 698 nm, and blue is b′/v (473/550 nm), overlaid on v-band normal reflectance.
 The authors filtered ratio maps with a 7 × 7 boxcar and removed shadows using
 their v-band mask. Preparation does not recalculate ratios or infer minerals.

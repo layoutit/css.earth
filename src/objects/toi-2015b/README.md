@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-2015. Its orbit and size follow Barkaoui
 
 **Orbit.** Jones et al. 2024 (2024AJ....168...93J), via the NASA Exoplanet Archive ps table (pl_refname JONES_ET_AL_2024): P 3.348968 d Barkaoui et al. 2025 (2025A&A...695A.281B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2025): a/R* 19.2811; Barkaoui et al. 2025 (2025A&A...695A.281B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2025): inclination 87.61 degrees Jones et al. 2024 (2024AJ....168...93J), via the NASA Exoplanet Archive ps table (pl_refname JONES_ET_AL_2024): e 0 Jones et al. 2024 (2024AJ....168...93J), via the NASA Exoplanet Archive ps table (pl_refname JONES_ET_AL_2024): transit mid-time 2458956.0226 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2015's measured colour (#ffcc83, the colour lens of toi-2015 (src/objects/toi-2015/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2015's measured colour (#ffcc83, the colour dataset of toi-2015 (src/objects/toi-2015/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2015's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (24, 51, 78), folded onto its orbit. Upper limits and rows without an error are left out.
 

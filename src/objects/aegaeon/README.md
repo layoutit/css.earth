@@ -25,7 +25,7 @@ interior registration are still unqualified.
 
 ## Known problems
 
-- The mesh is an analytic ellipsoid approximating those axes, not a copy of the detailed irregular shape solution. The Shape model lens uses the normal shared grid throughout: there are no mapped surface texels.
+- The mesh is an analytic ellipsoid approximating those axes, not a copy of the detailed irregular shape solution. The Shape model dataset uses the normal shared grid throughout: there are no mapped surface texels.
 
 - The 2010 pair remains unqualified for texture mapping: the producer's star-based image navigation has not been recovered or independently reproduced. The previously sampled 2015 frame still has no securely identified, registered disc. No photograph was promoted.
 

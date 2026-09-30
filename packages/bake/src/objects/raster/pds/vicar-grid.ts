@@ -24,10 +24,10 @@ export function vicarLabel(bytes: Buffer, where: string) {
 }
 
 export async function loadVicarGrid(root: string, value: unknown) {
-  const lens = requireRecord(value, 'vicar-grid lens');
+  const dataset = requireRecord(value, 'vicar-grid dataset');
   // The scientific block has no id of its own; its file names it in every error.
-  const id = requireString(lens.path, 'vicar-grid lens path');
-  const grid = requireRecord(lens.grid, `${id}.grid`);
+  const id = requireString(dataset.path, 'vicar-grid dataset path');
+  const grid = requireRecord(dataset.grid, `${id}.grid`);
   const integer = (key: string) => {
     const n = requireFiniteNumber(grid[key], `${id}.grid.${key}`);
     if (!Number.isSafeInteger(n) || n <= 0) throw new TypeError(`${id}.grid.${key} must be a positive integer.`);
@@ -41,7 +41,7 @@ export async function loadVicarGrid(root: string, value: unknown) {
   const fills = grid.noData === undefined ? [] : grid.noData;
   if (!Array.isArray(fills) || !fills.every(Number.isFinite)) throw new TypeError(`${id}.grid.noData must list numbers.`);
   if (fills.length) requireString(grid.noDataEvidence, `${id}.grid.noDataEvidence`);
-  if (lens.sampling !== undefined && lens.sampling !== 'nearest') throw new TypeError(`${id}: VICAR grid cells require nearest sampling.`);
+  if (dataset.sampling !== undefined && dataset.sampling !== 'nearest') throw new TypeError(`${id}: VICAR grid cells require nearest sampling.`);
   if (Math.abs(width / ppd - 360) > 1e-9 || north - height / ppd < -90 - 1e-9 || north > 90 + 1e-9) {
     throw new TypeError(`${id}: the recipe grid must span 360 degrees of longitude inside -90..90 latitude.`);
   }
@@ -71,7 +71,7 @@ export async function loadVicarGrid(root: string, value: unknown) {
     if (v < lowest) lowest = v;
     if (v > highest) highest = v;
   }
-  const transform = lens.valueTransform === undefined ? null : requireRecord(lens.valueTransform, `${id}.valueTransform`);
+  const transform = dataset.valueTransform === undefined ? null : requireRecord(dataset.valueTransform, `${id}.valueTransform`);
   const scale = transform ? requireFiniteNumber(transform.scale, `${id}.valueTransform.scale`) : 1;
   const offset = transform ? requireFiniteNumber(transform.offset, `${id}.valueTransform.offset`) : 0;
   return {

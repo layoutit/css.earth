@@ -14,7 +14,7 @@
         "charts",
         "features",
         "panel-content",
-        "lenses",
+        "datasets",
         "starfield",
         "sky-sun",
         "system-markers",
@@ -52,7 +52,7 @@
       "bodyRadiusM": 6051840
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "raster",
@@ -104,7 +104,7 @@
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "clouds",
               "source": "content",
@@ -200,6 +200,6 @@
       }
     }
   },
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "type": "layered-body"
 }

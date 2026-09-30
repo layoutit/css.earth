@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "chiron",
   "displayName": "Chiron",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Chiron has no measured spin pole. The published ring or disk pole near ecliptic longitude 151 degrees, latitude +20 degrees is a pole of the surrounding material; the shape paper assumes the body shares it, and this display does not adopt that assumption as an orientation."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

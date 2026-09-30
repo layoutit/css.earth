@@ -37,11 +37,11 @@
       ]
     },
     {
-      "id": "mapped-lenses",
+      "id": "mapped-datasets",
       "subject": "Aegaeon terrain, colour and composition routes",
       "status": "excluded",
       "finding": "Published photometry and spectra are integrated constraints, and no DEM, geology or mapped composition product was qualified.",
-      "revisitWhen": "A spatially registered image, spectral, terrain or geology product can support a lens.",
+      "revisitWhen": "A spatially registered image, spectral, terrain or geology product can support a dataset.",
       "evidence": [
         "https://arxiv.org/abs/1912.09192"
       ]

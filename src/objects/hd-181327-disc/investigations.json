@@ -3,7 +3,7 @@
   "objectId": "hd-181327-disc",
   "entries": [
     {
-      "id": "lens-reflectance",
+      "id": "dataset-reflectance",
       "subject": "JWST/NIRCam F182M, F210M, F250M, F300M, F335M and F444W behind MASK335R, 11 October 2023 (programme 2780, observation c1014): MAST's level-3 coronagraph mosaics in the reflectance colour of Gáspár et al. (2026) Figure 1",
       "status": "included",
       "finding": "Each of the six mosaics was re-run here from the archived exposures on the pinned toolchain and lands on MAST's grid with every PSF alignment fit converged; correlation with MAST above the median brightness is 0.961 to 0.996, at 1 to 2 arcsec 0.887 to 0.987. MAST's products are drawn, combined by the paper's own recipe for its Figure 1: each band divided by the star's flux in it (their Table 9), averaged in pairs into blue (F182M, F210M), green (F250M, F300M) and red (F335M, F444W). Figure 1 prints no scale, so its stretch, log(1 + a u) / log(1 + a) with a = 14.1 and u = reflectance / 7.15, was fitted to the panel by packages/telescope-cli/authoring/circumstellar/fit-figure-stretch.mts: colour error 12.6 of 255, luminance correlation 0.990, mirrored 14.4. Rendered from Earth in the application, the ring's long axis lies 77.9 degrees clockwise from up with axis ratio 0.875, against 78.5 and 0.876 in the panel (a mirror would give 101.5), luminance correlation 0.985, brightness profile within 0.035 of the ring's peak, and a near-neutral ring colour like the paper's. The render is at 0.48 of the figure's brightness (evidence/rendered.json).",
@@ -36,7 +36,7 @@
       "id": "display-choices-that-failed",
       "subject": "Displays tried and rejected",
       "status": "excluded",
-      "finding": "Six lenses in the paper's per-filter colour bars (one ring six times); a composite on the sky-band display with M8's asinh settings, which drew the ring at 70 to 100 percent of its peak from 48 to 120 au where the data fall to a fifth; and F182M alone in its Figure 26 scale, which matched that figure but showed one filter's brightness legend rather than the dust. The reflectance colour of the paper's Figure 1 shows the dust itself and is drawn.",
+      "finding": "Six datasets in the paper's per-filter colour bars (one ring six times); a composite on the sky-band display with M8's asinh settings, which drew the ring at 70 to 100 percent of its peak from 48 to 120 au where the data fall to a fifth; and F182M alone in its Figure 26 scale, which matched that figure but showed one filter's brightness legend rather than the dust. The reflectance colour of the paper's Figure 1 shows the dust itself and is drawn.",
       "evidence": [
         "https://arxiv.org/abs/2608.27437"
       ],

@@ -1,7 +1,7 @@
 /** Restore accepted app textures from regenerated cloud slices; keep reference metadata immutable. */
 import assert from 'node:assert/strict';
 import { prepareVolumeAtlases } from '../density/index.ts';
-import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
 
@@ -9,7 +9,7 @@ export interface BakeDelivery { directory: string; manifest: Pin; atlasInputs?: 
 async function deliveryFiles(root: string, delivery: BakeDelivery) {
   localPath(root, delivery.directory);
   const manifest = JSON.parse((await pinned(root, delivery.manifest)).toString());
-  assert.equal(manifest.schema, 'cssearth-volume-lens-manifest@1');
+  assert.equal(manifest.schema, 'cssearth-volume-dataset-manifest@1');
   const images = Object.entries(manifest.outputs).filter(([path]) => /^prepared\/[a-z][a-z0-9-]*\/(?:slices\/[xyz]\/\d+|atlases\/[a-z0-9-]+)\.webp$/.test(path)) as [string, {bytes: number}][];
   assert.ok(images.length > 0, 'Delivery manifest has no cloud textures.');
   for (const [path, pin] of Object.entries(manifest.outputs) as [string, {bytes: number}][]) {
@@ -56,15 +56,15 @@ async function restoreAtlasDelivery(root: string, delivery: BakeDelivery, result
   assert.ok(delivery.atlasInputs);
   const inputs = JSON.parse((await pinned(root, delivery.atlasInputs)).toString());
   assert.equal(inputs.schema, 'cssearth-volume-atlas-inputs@1');
-  assert.ok(Array.isArray(inputs.lenses));
+  assert.ok(Array.isArray(inputs.datasets));
   const manifest = JSON.parse((await pinned(root, delivery.manifest)).toString());
-  const envelope = JSON.parse((await pinned(root, { path: `${delivery.directory}/prepared/lenses.json` })).toString());
-  const bank = validatePreparedVolumeLenses(envelope.data);
+  const envelope = JSON.parse((await pinned(root, { path: `${delivery.directory}/prepared/datasets.json` })).toString());
+  const bank = validatePreparedVolumeDatasets(envelope.data);
   const writes: {path: string; bytes: Buffer}[] = [];
   for (const result of results) {
     const sourceDirectory = result.directory;
-    const accepted = bank.lenses.find(lens => lens.id === result.imageId);
-    const input = inputs.lenses.find((lens: {id: string}) => lens.id === result.imageId);
+    const accepted = bank.datasets.find(dataset => dataset.id === result.imageId);
+    const input = inputs.datasets.find((dataset: {id: string}) => dataset.id === result.imageId);
     assert.ok(accepted && input && Array.isArray(input.textures));
     const volume = validatePreparedCssVolume({ ...accepted.volume, resources: input.resources,
       stacks: accepted.volume.stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => {

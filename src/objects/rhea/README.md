@@ -90,7 +90,7 @@ differences include real surface alteration and E-ring dust. Photographed shadow
 and coarse inserts remain; no inpainting, color synthesis or shadow-removal correction is
 applied.
 
-Shared curvature lighting and optional Shadows remain available on every lens.
+Shared curvature lighting and optional Shadows remain available on every dataset.
 
 Independent landmarks: [Tirawa](https://planetarynames.wr.usgs.gov/Feature/6026), 34.2° N,
 151.7° W (208.3° E), and [Inktomi](https://planetarynames.wr.usgs.gov/Feature/14671), 14.1° S,
@@ -143,7 +143,7 @@ its values; it is neither geometric albedo nor calibrated reflectance.
 Rhea used calibrated ISS frames. Source sigma is internal maplet agreement, not absolute height
 uncertainty.
 
-The Shape lens uses the shared neutral gray over the source mesh to distinguish geometry from
+The Shape dataset uses the shared neutral gray over the source mesh to distinguish geometry from
 imagery. The Photographic views retain pre-existing image seams, shadows and local control
 differences. Source reference radii and projections do not become spherical geometry
 constraints.

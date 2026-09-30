@@ -16,7 +16,7 @@ import { openFitsSource } from './fits-source.mts';
 import { openPdsSource, preparePdsSource } from './pds-source.mts';
 import { parseSourceQuestion, sourceQuestionFromRequest } from './source-relevance.mts';
 export interface OutputChoice {
-  readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume'|'volume-lens-bank';readonly available:boolean;readonly reason:string;
+  readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume'|'volume-dataset-bank';readonly available:boolean;readonly reason:string;
   readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[];
   readonly unit?:NativeMetadata['units'];readonly spectral?:NativeMetadata['spectral'];readonly limitations?:readonly string[];
 }
@@ -100,7 +100,7 @@ function choices(structures:readonly NativeMetadata[],sourceOnly=false):OutputCh
   return [...result,
     {kind:'body-map',available:false,reason:sourceOnly?'A pinned archive source has no verified delivery and navigation context for body-map projection.':'First export a 2D image measurement. Its output.product.json can then be exported as a body map with explicit navigation.'},
     {kind:'sphere',available:false,reason:'Use telescope export MAP/map.fits.product.json --output sphere after projection; native pixels are insufficient.'},
-    {kind:'points',available:false,reason:'Export an existing physical object.json with --output points, volume or volume-lens-bank. A spectral cube requires a scientific reconstruction first; wavelength or radial velocity is not distance.'}];
+    {kind:'points',available:false,reason:'Export an existing physical object.json with --output points, volume or volume-dataset-bank. A spectral cube requires a scientific reconstruction first; wavelength or radial velocity is not distance.'}];
 }
 export async function listOutputs(resultPath:string,structure?:string,position?:{readonly raDegrees:number;readonly decDegrees:number}){
   const source=await openFitsSource(resultPath);

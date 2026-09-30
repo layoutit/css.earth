@@ -75,7 +75,7 @@
       "id": "liciacube-texture",
       "subject": "LICIACube images as a separate surface texture",
       "status": "deferred",
-      "finding": "LICIACube observations contribute to the released shape, but the retained survey does not qualify them as a separate registered surface lens. The selected DRACO mosaic is independently documented.",
+      "finding": "LICIACube observations contribute to the released shape, but the retained survey does not qualify them as a separate registered surface dataset. The selected DRACO mosaic is independently documented.",
       "revisitWhen": "A specific LICIACube image has documented camera-to-shape registration, usable coverage and calibrated interpretation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dimorphos/source/manifest.json"

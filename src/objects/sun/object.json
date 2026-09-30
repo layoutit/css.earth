@@ -12,7 +12,7 @@
         "verify-sources",
         "assets",
         "panel-content",
-        "lenses",
+        "datasets",
         "starfield",
         "system-markers",
         "world-context",
@@ -23,7 +23,7 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "sources": [
         {
           "id": "raster",
@@ -71,7 +71,7 @@
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "photosphere",
               "source": "content",
@@ -153,6 +153,6 @@
       "orientationReference": 5
     }
   },
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "type": "layered-body"
 }

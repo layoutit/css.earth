@@ -17,7 +17,7 @@
       "id": "cassini-iss-photometry",
       "subject": "Fornjot Cassini ISS photometry",
       "status": "included",
-      "finding": "Cassini ISS and the Fornjot observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour lens.",
+      "finding": "Cassini ISS and the Fornjot observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour dataset.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
         "https://tilmanndenk.de/outersaturnianmoons/fornjot/"
@@ -39,7 +39,7 @@
       "subject": "Fornjot registered imagery, terrain and composition routes",
       "status": "excluded",
       "finding": "The reviewed Cassini and author sources qualify no registered image map, DEM, geology layer or spatial composition product for Fornjot. Integrated observations remain separate from the explicit missing-data grid.",
-      "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified lens.",
+      "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified dataset.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
         "https://tilmanndenk.de/outersaturnianmoons/fornjot/"

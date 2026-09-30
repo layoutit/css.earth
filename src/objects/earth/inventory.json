@@ -2283,6 +2283,36 @@
     },
     {
       "location": "public",
+      "filename": "earth-dataset-clouds.webp",
+      "bytes": 3194,
+      "sha256": "9f13e33b23a1d9cc0ceffb8f9c983c69b98c1445bedaea74ddcaf9ac462f659c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-dataset-enso.webp",
+      "bytes": 4414,
+      "sha256": "354f1bf436b4791fb792020a931a79d2d504e33e982c2ddb9fa820bc70afa8de"
+    },
+    {
+      "location": "public",
+      "filename": "earth-dataset-night-lights.webp",
+      "bytes": 2836,
+      "sha256": "d88f52b66ae3f501ebbd6c4ef0a5fa6c20ba2b669eefd97110c342f451431db0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-dataset-normal.webp",
+      "bytes": 2044,
+      "sha256": "616b83ae1e4c9b47b72bd8aef350c178630ade712c88a12839a4990913565a11"
+    },
+    {
+      "location": "public",
+      "filename": "earth-dataset-topography.webp",
+      "bytes": 1950,
+      "sha256": "b9fa0fc3c2238ce31009358bebda5b48092cb64c4249df278aa6c66a99bcba86"
+    },
+    {
+      "location": "public",
       "filename": "earth-enso-legend.png",
       "bytes": 603,
       "sha256": "1cd39ea593edd9785a0a2e95edf4b32edefb18262f4eb8a58df50c9193951636"
@@ -6183,36 +6213,6 @@
     },
     {
       "location": "public",
-      "filename": "earth-lens-clouds.webp",
-      "bytes": 3194,
-      "sha256": "9f13e33b23a1d9cc0ceffb8f9c983c69b98c1445bedaea74ddcaf9ac462f659c"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lens-enso.webp",
-      "bytes": 4414,
-      "sha256": "354f1bf436b4791fb792020a931a79d2d504e33e982c2ddb9fa820bc70afa8de"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lens-night-lights.webp",
-      "bytes": 2836,
-      "sha256": "d88f52b66ae3f501ebbd6c4ef0a5fa6c20ba2b669eefd97110c342f451431db0"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lens-normal.webp",
-      "bytes": 2044,
-      "sha256": "616b83ae1e4c9b47b72bd8aef350c178630ade712c88a12839a4990913565a11"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lens-topography.webp",
-      "bytes": 1950,
-      "sha256": "b9fa0fc3c2238ce31009358bebda5b48092cb64c4249df278aa6c66a99bcba86"
-    },
-    {
-      "location": "public",
       "filename": "earth-night-lights-legend.png",
       "bytes": 1932,
       "sha256": "3a2e79ee42683af3e652b0ce460c3dc0bbf6b601e244ded4511bfff6aafb6bc4"
@@ -8284,8 +8284,8 @@
     {
       "location": "public",
       "filename": "earth-places.json",
-      "bytes": 14806819,
-      "sha256": "b34dc5e2e5dc9d701526a0ad21621bb9ba36ffa93354c9f2ddc34314e95d2418"
+      "bytes": 14806825,
+      "sha256": "e5d1251bc33323a5deee05a4f31134fca9fe2b0b22ac56828eefdb512ec7f1b3"
     },
     {
       "location": "public",
@@ -12478,38 +12478,38 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 297,
-      "sha256": "9ed1a8f554259e723b75fa1a391681dcec93a1cf06f8f680f2c1154a5a2900e0"
+      "bytes": 300,
+      "sha256": "540b82ffb16cf4e6cfba622a93d4489504b644cb90cbc4c6f079cbc322173f07"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 710,
-      "sha256": "3ac56605e0fc970dce45d32d14959128cedf7f281b4a958ca42eca6bbc3f143a"
+      "bytes": 713,
+      "sha256": "465543d8b7497f8a92ee2d20e8b769cbe0ed52fcfff43e207ef4d865c5d461f2"
     },
     {
       "location": "prepared",
       "filename": "content.json",
       "bytes": 4304,
-      "sha256": "132baf8e0f7bc16baf56c6434ace6df9d40cbd53852a3af95b94a2b16212b11f"
+      "sha256": "df2346f61e6b275957aab5efaebcea60e4945a734648124584e554effd67508f"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3615,
-      "sha256": "693778757f52fcb47792a8baf50d717147d2aca8e144ad828e38cb403d833564"
+      "bytes": 3641,
+      "sha256": "a2be2da225b46b227cdb3d6646e8634007154542c1dfdadf61554525ba9f3248"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 29691,
+      "sha256": "4dc42e138130fc4d72cbc6fcbd7a5cb1afaab13a3229dd526c3d9c9c632f7e25"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 6206,
       "sha256": "94f70a6a6d0f58f34caf87d40dbbf548153da892e6bab5429441a791ba2b5c9b"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 29671,
-      "sha256": "9d87c77b6cb97a2364e44d91bf46887eb6d3536754056e109ae1b5c95c21da41"
     },
     {
       "location": "prepared",
@@ -12556,14 +12556,14 @@
     {
       "location": "prepared",
       "filename": "raster-assets.json",
-      "bytes": 53914,
-      "sha256": "72e012bcff4eeb02fda173d5ed220022ab79edaba47ea45ddd995a4428fcb20d"
+      "bytes": 53929,
+      "sha256": "9188e1577846da61b6e5e352f4131727cfbe72d89ad12abcdb99f9418d337b75"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 2197943,
-      "sha256": "99d42f4b806ebf4828d7bf871b99d2fe8697f049bde3d203a2b6dabc36a80c87"
+      "bytes": 2198059,
+      "sha256": "8fc60f5787363813c46808743af706cc8935df6bf7310ff02e869e42a1626c59"
     },
     {
       "location": "prepared",

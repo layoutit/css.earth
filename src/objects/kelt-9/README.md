@@ -11,7 +11,7 @@ KELT-9 (HD 195689) is a hot A star, about 10,000 K and 2.5 solar masses, 207 par
 - **Limb:** the quadratic law Claret (2017, A&A 600, A30) computes from PHOENIX models for the TESS band, read at Gaudi et al.'s 10,170 K and log g 4.093: u1 0.159, u2 0.250. Ahlers et al. started their fit from the same grid's coefficients (0.1588, 0.2544 at 10,200 K, their Table 1). A model, stated as one.
 - **Spin axis:** [rotation.json](source/preparation/rotation.json), `cssearth-measured-obliquity-pole@1`, builds the pole against KELT-9b's orbit from λ = −88° and a stellar inclination of 52° in the paper's convention (0° equator-on), 38° from the line of sight. The star turns in 16 hours (Table 2). With the orbit's 86.79° these give a true obliquity of 86.2°, inside the paper's 87 +10/−11°.
 
-Catalogue colour: #b5c9ff, this lens's prepared colour.
+Catalogue colour: #b5c9ff, this dataset's prepared colour.
 
 ## Evidence
 
@@ -19,7 +19,7 @@ Run of 2026-09-23 (this version):
 
 - [`gravity-darkening.test.mts`](../../../packages/bake/src/objects/stellar/gravity-darkening.test.mts) (now [`packages/bake/src/objects/stellar/gravity-darkening.test.mts`](../../../packages/bake/src/objects/stellar/gravity-darkening.test.mts)) checks that the Roche surface built from the record has the paper's 1.089 ratio and 2.39 solar-radius equator. It fixes the model's equator at 9,672 K, 10.4 % dimmer at 800 nm and 18 % bolometrically, and keeps the paper's own contrast statements beside it.
 - [`authored-rotation.ts`](../../../packages/bake/src/objects/scene/authored-rotation.ts) refuses the rotation record unless λ, i* and the orbit's inclination give the published true obliquity within its uncertainty.
-- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks that the catalogue colour is the colour lens's prepared colour.
+- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks that the catalogue colour is the colour dataset's prepared colour.
 
 ## Known problems
 

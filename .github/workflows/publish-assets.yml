@@ -110,13 +110,13 @@ jobs:
               density-volume)
                 pnpm prepare:volume "src/objects/$OBJECT"
                 ;;
-              volume-lens-bank)
+              volume-dataset-bank)
                 delivery_schema=$(node -e 'const {existsSync,readFileSync}=require("node:fs");const base=process.argv[1];const path=existsSync(`${base}/source/compact-delivery.json`)?`${base}/source/compact-delivery.json`:`${base}/source/delivery.json`;process.stdout.write(JSON.parse(readFileSync(path,"utf8")).schema)' "src/objects/$OBJECT")
                 case "$delivery_schema" in
-                  cssearth-nebula-delivery@1|cssearth-compact-density-delivery@1)
+                  cssearth-nebula-delivery@2|cssearth-compact-density-delivery@1)
                     node packages/bake/cli/prepare-nebulae.mts "--object=$OBJECT"
                     ;;
-                  cssearth-density-volume-lens-bank-source@1)
+                  cssearth-density-volume-dataset-bank-source@1)
                     echo "::error::$OBJECT is a promoted physical volume bank; publish it from its producing checkout after verifying its committed inventory."
                     exit 1
                     ;;

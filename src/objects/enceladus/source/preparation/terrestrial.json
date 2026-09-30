@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "enceladus",
   "displayName": "Enceladus",
@@ -360,6 +360,6 @@
     "sunSource": "JPL Enceladus orbit plus VSOP87 Saturn position and IAU/WGCCRE Enceladus rotation"
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

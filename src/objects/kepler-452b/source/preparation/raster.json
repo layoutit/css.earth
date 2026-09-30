@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/kepler-452b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,23 +21,23 @@
     {
       "id": "shape",
       "output": "kepler-452b-surface-{id}{suffix}.webp",
-      "thumbnail": "kepler-452b-lens-{id}.webp",
+      "thumbnail": "kepler-452b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffece1, the colour lens of kepler-452 (src/objects/kepler-452/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffece1, the colour dataset of kepler-452 (src/objects/kepler-452/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "kepler-452",
           "srgb": "#ffece1",
-          "source": "the colour lens of kepler-452 (src/objects/kepler-452/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of kepler-452 (src/objects/kepler-452/source/photometry/stellar-color.json)"
         }
       }
     },
     {
       "id": "illustration",
       "output": "kepler-452b-surface-{id}{suffix}.webp",
-      "thumbnail": "kepler-452b-lens-{id}.webp",
+      "thumbnail": "kepler-452b-dataset-{id}.webp",
       "source": "illustration/Kepler-452_b.jpg",
       "falseColor": false,
       "science": {

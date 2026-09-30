@@ -6,7 +6,7 @@
       "id": "published-shape-model",
       "subject": "Karkoschka 2003 Neptune inner-moon dimensions",
       "status": "included",
-      "finding": "Karkoschka (2003) 48 × 30 × 26 km semiaxes are included as the Shape model; the 29 km JPL radius is reference scale only. Included as Shape model; no elevation lens from an analytic ellipsoid.",
+      "finding": "Karkoschka (2003) 48 × 30 × 26 km semiaxes are included as the Shape model; the 29 km JPL radius is reference scale only. Included as Shape model; no elevation dataset from an analytic ellipsoid.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/naiad/source/manifest.json"
       ]
@@ -26,7 +26,7 @@
       "subject": "HST recovery of Naiad, Showalter et al. (2019)",
       "status": "excluded",
       "finding": "Astrometry and unresolved detections, not a surface map.",
-      "revisitWhen": "A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/naiad/source/manifest.json"
       ]
@@ -46,7 +46,7 @@
       "subject": "USGS mapping and published photometry",
       "status": "unresolved",
       "finding": "No usable Naiad cartographic or spatial scalar product found in this pass. Disk-integrated photometry does not supply local color or elevation.",
-      "revisitWhen": "A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/naiad/source/manifest.json"
       ]

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "af-lep",
   "displayName": "AF Lep",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of Gaia's spectrum of the star. The disc itself is unresolved.",
-        "thumbnail": "af-lep-lens-color.webp",
+        "thumbnail": "af-lep-dataset-color.webp",
         "surface": "af-lep-surface-color@2x.webp",
         "poles": "af-lep-poles-color@2x.webp",
         "source": {

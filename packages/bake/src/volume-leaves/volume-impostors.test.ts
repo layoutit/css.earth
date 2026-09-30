@@ -5,11 +5,11 @@ import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Pol
 import { prepareVolumeImpostors } from './volume-impostors.ts';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import type { PreparedCssVolume, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '@cssearth/renderer/volume/types.ts';
-import type { PreparedVolumeLensBrightness } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import type { PreparedVolumeDatasetBrightness } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 import { dot3 as dot } from '@cssearth/core';
 
 const AXES = ['x', 'y', 'z'] as const;
-const WHITE: PreparedVolumeLensBrightness = { overall: 1, x: 1, y: 1, z: 1 };
+const WHITE: PreparedVolumeDatasetBrightness = { overall: 1, x: 1, y: 1, z: 1 };
 type Rgba = readonly [number, number, number, number];
 interface Source {
   axis: VolumeAxis; depth: number; color: Rgba;
@@ -127,7 +127,7 @@ test('front/back order, fractional optical copies, normalized source-over axes a
   // A wrong implementation using source metadata or input order must fail.
   input.volume = { ...input.volume, stacks: input.volume.stacks.map(stack => ({ ...stack,
     leaves: [...stack.leaves].reverse().map(leaf => ({ ...leaf, centerUnits: [99, -99, 99] })) })) };
-  const brightness: PreparedVolumeLensBrightness = { overall: .8, x: .2, y: .6, z: .9 };
+  const brightness: PreparedVolumeDatasetBrightness = { overall: .8, x: .2, y: .6, z: .9 };
   const baked = await bake(input, brightness);
   for (const view of baked.result.impostors!.views) {
     const { data } = await baked.image(view.back);
@@ -187,7 +187,7 @@ test('rejects undecodable sources, unsafe output collisions and unsupported proj
 });
 
 test('leaves that share one delivered atlas render the same views as leaves that own their textures', async () => {
-  // Delivered lens banks pack every slice of an axis into one atlas image, which is how the Magellanic Clouds ship.
+  // Delivered dataset banks pack every slice of an axis into one atlas image, which is how the Magellanic Clouds ship.
   // The leaf's CSS background is the mapping, so the same pixels must come out either way, with one decode per image.
   const raster = (color: Rgba) => ({ width: 4, height: 4, data: Uint8Array.from(Array.from({ length: 16 }, () => color).flat()) });
   const red = raster([220, 40, 40, 255]), blue = raster([40, 80, 220, 255]);

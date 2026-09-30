@@ -8,7 +8,7 @@ import { createSurfaceInterpreter } from '@cssearth/bake/objects/interpretation'
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 const input = (path: string) => ({ path, id: path, origin: `https://example.test/${path}`, credit: 'Fixture', license: 'Fixture', acquisition: 'Fixture',
-  redistribution: 'Fixture', sourceBinding: { kind: 'local', reason: 'Authored test fixture' }, consumers: ['lenses'] });
+  redistribution: 'Fixture', sourceBinding: { kind: 'local', reason: 'Authored test fixture' }, consumers: ['datasets'] });
 
 async function fixture(t: test.TestContext, width: number, height: number) {
   const sourceDirectory = await mkdtemp(join(tmpdir(), 'cssearth-illustration-'));
@@ -17,7 +17,7 @@ async function fixture(t: test.TestContext, width: number, height: number) {
   const pixels = Buffer.alloc(width * height * 3);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) pixels.set(x < width / 2 ? [255, 0, 0] : [0, 0, 255], (y * width + x) * 3);
   await sharp(pixels, { raw: { width, height, channels: 3 } }).png().toFile(join(sourceDirectory, 'map.png'));
-  await writeFile(join(sourceDirectory, 'manifest.json'), JSON.stringify({ schema: 'cssearth-authoritative-sources@2', inputs: [input('map.png')], generatedIntermediates: [], documents: [] }));
+  await writeFile(join(sourceDirectory, 'manifest.json'), JSON.stringify({ schema: 'cssearth-authoritative-sources@3', inputs: [input('map.png')], generatedIntermediates: [], documents: [] }));
   return sourceDirectory;
 }
 const surface = { id: 'illustration', source: 'map.png', science: { kind: 'equirectangular-illustration' } };
@@ -42,7 +42,7 @@ test('an emissive body gets transparent plates beside the illustration', async t
   assert.ok(plates.offLimb.data.every((value: number) => value === 0) && plates.limb.data.every((value: number) => value === 0));
 });
 
-test('a map that is not 2:1 is refused with its object, lens, file and size', async t => {
+test('a map that is not 2:1 is refused with its object, dataset, file and size', async t => {
   const sourceDirectory = await fixture(t, 8, 8);
   const interpret = await createSurfaceInterpreter({ objectId: 'fixture', displayName: 'Fixture', sourceDirectory, solarGeometry, recipe: { surfaces: [surface] } });
   await assert.rejects(interpret(surface, 16, 8, 1), /fixture\/illustration: map\.png is 8 × 8, not a 2:1 equirectangular map/u);

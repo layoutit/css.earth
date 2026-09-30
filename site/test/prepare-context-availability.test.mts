@@ -11,12 +11,12 @@ import { writeContextPackage } from '../../tests/fixtures/context-package.mts';
 test('a missing bank isolates one object; restoring it admits the complete package on the next startup', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const helix = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
-  const file = resolve(helix.directory, 'prepared/lenses.json'), bytes = await readFile(file);
+  const file = resolve(helix.directory, 'prepared/datasets.json'), bytes = await readFile(file);
   await rm(file);
   const { availability } = await prepareContextAvailability({ projectRoot: root });
   assert.equal(availability.helix.available, false); assert.equal(availability.lmc.available, true);
   assert.deepEqual(parseContextAvailability(availability), availability);
-  await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /helix: Missing .*helix\/prepared\/lenses.json/);
+  await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /helix: Missing .*helix\/prepared\/datasets.json/);
   await writeFile(file, bytes);
   assert.deepEqual((await prepareContextAvailability({ projectRoot: root, strict: true })).availability, { helix: { available: true }, lmc: { available: true } });
 });
@@ -35,19 +35,19 @@ for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'source
 test('a corrupt prepared bank fails to decode without disabling another package', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
-  await writeFile(resolve(f.directory, 'prepared/lenses.json'), 'tampered');
+  await writeFile(resolve(f.directory, 'prepared/datasets.json'), 'tampered');
   const state = await inspectContextAvailability(root);
   assert.equal(state.helix.available, false); assert.equal(state.lmc.available, true);
   await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /not valid JSON/i);
 });
 
-test('an invalid presentation or unbound lens source cannot become available merely because the files exist', async t => {
+test('an invalid presentation or unbound dataset source cannot become available merely because the files exist', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const f = await writeContextPackage(root, 'helix');
   await writeFile(resolve(f.directory, 'prepared/presentation.json'), JSON.stringify({ ...f.presentation, objectId: 'different' }));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   await writeContextPackage(root, 'helix');
-  await writeFile(resolve(f.directory, 'source/manifest.json'), JSON.stringify({ ...f.manifest, inputs: [{ ...f.manifest.inputs[0], lensId: 'infrared' }] }));
+  await writeFile(resolve(f.directory, 'source/manifest.json'), JSON.stringify({ ...f.manifest, inputs: [{ ...f.manifest.inputs[0], datasetId: 'infrared' }] }));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   assert.throws(() => parseContextAvailability({ helix: { available: 'true' } }));
   assert.throws(() => parseContextAvailability({ helix: { available: false } }));

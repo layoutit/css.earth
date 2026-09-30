@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "cie-1931-2deg-cmf",
@@ -13,7 +13,7 @@
       "acquisition": "Committed byte for byte in this shared bank; every photometric colour reads this copy.",
       "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",

@@ -1,11 +1,11 @@
-import { LENS_VISIBILITY } from './runtime-policy.mts';
+import { DATASET_VISIBILITY } from './runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
-// Generated after the prepared lens payloads are restored: text now, validated below.
-import lensBillboardText from './prepared-lens-billboards.json?raw';
-import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
+// Generated after the prepared dataset payloads are restored: text now, validated below.
+import datasetBillboardText from './prepared-dataset-billboards.json?raw';
+import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
-import { createPreparedUniverse, parseLensBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
+import { createPreparedUniverse, parseDatasetBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
@@ -15,16 +15,16 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
-import { readPageDatasets, selectedPageLens } from './page-datasets.mts';
+import { readPageDatasets, selectedPageDataset } from './page-datasets.mts';
 
-/** The view the page `page` shows its image mesh in: its selected lens's (page-datasets.mts), read from the address. The
+/** The view the page `page` shows its image mesh in: its selected dataset's (page-datasets.mts), read from the address. The
  * shell presents the cards (object-shell-client.mts); a page without datasets shows its mesh cut open. */
 let cards: ReturnType<typeof readPageDatasets> | null = null;
 // The cards are retained shell markup: read once.
 const pageDatasets = () => cards ??= readPageDatasets(document);
 function meshView(page: string): string {
   const datasets = pageDatasets().find(candidate => candidate.page === page);
-  return datasets ? datasets.views.get(selectedPageLens(location.href, datasets))! : 'cutaway';
+  return datasets ? datasets.views.get(selectedPageDataset(location.href, datasets))! : 'cutaway';
 }
 import { isOverviewPage, withOverviewScope } from './navigation/navigation-scope.mts';
 
@@ -113,15 +113,15 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       id => asteroidIds.includes(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
     // Bank declarations do not fetch payloads. Deduplicate pending loads only; the
     // mounted layer owns residency and can release banks after they leave view.
-    const volumeLensDescriptors = parsedDescriptors
-      .filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
-    const volumeLensIds = new Set(volumeLensDescriptors.map(descriptor => descriptor.id));
-    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
+    const volumeDatasetDescriptors = parsedDescriptors
+      .filter(descriptor => descriptor.type === 'volume-dataset-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
+    const volumeDatasetIds = new Set(volumeDatasetDescriptors.map(descriptor => descriptor.id));
+    const volumeDatasetBanks = volumeDatasetDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
     // Every bank's context visibility and Sun-facing billboard, prepared from those same payloads.
-    const lensBillboards = { plan: parseLensBillboards(JSON.parse(lensBillboardText)), atlasUrl: lensBillboardAtlasUrl };
-    const loadVolumeLens = createInFlightLoader(async (id: string) => {
-      if (!volumeLensIds.has(id)) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
-      const set = resourceSet(id), payload = await loadPreparedVolumeLenses(set.descriptor, set.transport);
+    const datasetBillboards = { plan: parseDatasetBillboards(JSON.parse(datasetBillboardText)), atlasUrl: datasetBillboardAtlasUrl };
+    const loadVolumeDataset = createInFlightLoader(async (id: string) => {
+      if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
+      const set = resourceSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
     });
     // The worker receives the validated summary and reads orbit paths on demand.
@@ -142,7 +142,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyCataloguePoints: ['globular-clusters', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.json`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
-      imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
+      imageLayerBanks, loadImageLayer, volumeDatasetBanks, loadVolumeDataset,
       backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole.
@@ -154,7 +154,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
-      lensVisibility: LENS_VISIBILITY, lensBillboards,
+      datasetVisibility: DATASET_VISIBILITY, datasetBillboards,
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
       sky: !phone,
       loadCatalog: async () => {

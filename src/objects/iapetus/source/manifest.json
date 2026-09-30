@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "credit": "NASA/JPL/Space Science Institute",
@@ -17,7 +17,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 5760,
@@ -79,7 +79,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "enhanced",
+      "datasetId": "enhanced",
       "label": "Enhanced color",
       "falseColor": true,
       "width": 11741,
@@ -371,7 +371,7 @@
       "consumers": [
         "ice-absorption"
       ],
-      "lensId": "ice-absorption",
+      "datasetId": "ice-absorption",
       "label": "Ice absorption",
       "falseColor": true,
       "width": 1024,
@@ -448,7 +448,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "temperature",
+      "datasetId": "temperature",
       "label": "Temperature",
       "falseColor": true,
       "width": 358,
@@ -498,7 +498,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Infrared",
       "falseColor": true,
       "width": 1024,
@@ -631,7 +631,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -715,7 +715,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -732,7 +732,7 @@
       "redistribution": "Prepared package configuration.",
       "consumers": [
         "panel",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",

@@ -23,7 +23,7 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
 2. The authored recipe owns the transformation and its parameters. The shared
    preparation-family bindings in `packages/bake/src/objects/lineage/lineage-recipes.ts`
    identify the inputs each operation consumes; `body-lineage.ts` beside it
-   reads a layered body's records into its lineage. A volume's lenses read their
+   reads a layered body's records into its lineage. A volume's datasets read their
    own image, their declared further inputs and the shared inputs its
    `source/presentation.json` names. A catalogue context declares its products
    and their inputs in the `provenance` block of its `source/presentation.json`.
@@ -37,7 +37,7 @@ Each product records its label, the datasets it shows, its input IDs, parent
 products, interpretation and limitations. Acquisition operations
 (`source/preparation/acquisition.json`) add the file an input was built from, and
 its conversion recipe, as dependencies of that input. A dataset that borrows
-another lens's plates has that lens as its parent. A recipe may describe a
+another dataset's plates has that dataset as its parent. A recipe may describe a
 scientific model or an illustration; recording lineage does not turn either into
 an observation.
 
@@ -50,7 +50,7 @@ explicitly unrecorded. Generated intermediates retain their own generator and
 source credits.
 
 The lineage check rejects unknown inputs, parents and datasets and dependency
-cycles. A lens whose preparation family has no binding has no product, so it
+cycles. A dataset whose preparation family has no binding has no product, so it
 credits no source. Extending a preparation family requires adding its actual
 dependency binding and a behavioral test, not a body-specific UI condition.
 

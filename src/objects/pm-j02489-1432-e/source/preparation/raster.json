@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/pm-j02489-1432-e/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "pm-j02489-1432-e-surface-{id}{suffix}.webp",
-      "thumbnail": "pm-j02489-1432-e-lens-{id}.webp",
+      "thumbnail": "pm-j02489-1432-e-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

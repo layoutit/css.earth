@@ -7,16 +7,16 @@ function fixture() {
   const stage = { ownerDocument: {}, appendChild(node: typeof nodes[number]) { node.parentNode = this as never; } };
   const definition = { tree: { nodes: [], camera: 0, scene: 1, stageClasses: [] }, materials: [], animations: [], viewBindings: [],
     variants: [
-      { when: { lensId: 'a' }, writes: [{ kind: 'texture', target: 2, name: 'backgroundImage', resource: 'a', quoted: true }] },
-      { when: { lensId: 'b' }, writes: [{ kind: 'texture', target: 3, name: 'backgroundImage', resource: 'b', quoted: true }] },
-      { when: { lensId: 'fixed' }, writes: [{ kind: 'style', target: 2, name: 'backgroundImage', value: 'url("/fixed.webp")' }] },
+      { when: { datasetId: 'a' }, writes: [{ kind: 'texture', target: 2, name: 'backgroundImage', resource: 'a', quoted: true }] },
+      { when: { datasetId: 'b' }, writes: [{ kind: 'texture', target: 3, name: 'backgroundImage', resource: 'b', quoted: true }] },
+      { when: { datasetId: 'fixed' }, writes: [{ kind: 'style', target: 2, name: 'backgroundImage', value: 'url("/fixed.webp")' }] },
     ] } as unknown as PreparedPresentationDefinition;
   const ready = new Set(['a', 'b']);
   const resources = { url(key: string) { return ready.has(key) ? `/${key}.webp` : null; } } as PreparedResources;
   const presentation = mountPreparedPresentation(stage as unknown as HTMLElement,
     { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
     { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
-  return { nodes, ready, select: (lensId: string) => presentation.commitSelection({ selection: { lensId }, resources }) };
+  return { nodes, ready, select: (datasetId: string) => presentation.commitSelection({ selection: { datasetId }, resources }) };
 }
 
 test('dataset replacement retires only its former texture references without replacing nodes', () => {
@@ -64,7 +64,7 @@ test('an alternative surface profile is hidden before its shared atlas changes',
   const nodes = [0, 1, 2].map(() => ({ style, parentNode: null }));
   const stage = { ownerDocument: {}, appendChild(node: typeof nodes[number]) { node.parentNode = this as never; } };
   const definition = { tree: { nodes: [], camera: 0, scene: 1, stageClasses: [] }, materials: [], animations: [], viewBindings: [],
-    variants: [{ when: { lensId: 'b' }, writes: [
+    variants: [{ when: { datasetId: 'b' }, writes: [
       { kind: 'texture', target: 2, name: '--fixture-surface-image', resource: 'b', quoted: true },
       { kind: 'style', target: 2, name: '--fixture-a-display', value: 'none' },
       { kind: 'style', target: 2, name: '--fixture-b-display', value: 'block' },
@@ -76,7 +76,7 @@ test('an alternative surface profile is hidden before its shared atlas changes',
   const resources: PreparedResources = {
     has: key => key === 'b', read: () => null, url: key => key === 'b' ? '/b.webp' : null, readyKeys: () => ['b'],
   };
-  presentation.commitSelection({ selection: { lensId: 'b' }, resources });
+  presentation.commitSelection({ selection: { datasetId: 'b' }, resources });
   expect(invalid).toEqual([]);
   expect(Object.fromEntries(values)).toMatchObject({
     '--fixture-surface-image': 'url("/b.webp")',

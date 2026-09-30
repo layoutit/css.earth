@@ -8,7 +8,7 @@ It is the only planet known around TOI-2285. Its orbit and size follow Fukui et 
 
 **Orbit.** Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_2025): P 13.635109 d Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_2025): a/R* 43.1; Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2022): inclination 89.66 degrees Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2022): e 0.3 Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2022): omega 56 degrees Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_2025): transit mid-time 2458747.1831 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2285's measured colour (#ffc588, the colour lens of toi-2285 (src/objects/toi-2285/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2285's measured colour (#ffc588, the colour dataset of toi-2285 (src/objects/toi-2285/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2285's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (77, 83, 84), folded onto its orbit. Upper limits and rows without an error are left out.
 

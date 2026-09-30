@@ -3,8 +3,8 @@
   "objectId": "m8",
   "entries": [
     {
-      "id": "lens-eso-optical",
-      "subject": "eso-optical shipped image lens",
+      "id": "dataset-eso-optical",
+      "subject": "eso-optical shipped image dataset",
       "status": "included",
       "finding": "Default H-alpha/R/V/B publication TIFF preserves the full 93.49 by 62.61 arcmin footprint at 4000 by 2679 pixels. Registration and native separation qualify processing; the 450 arcsec optical support taper is authored and does not infer a physical boundary.",
       "evidence": [
@@ -14,8 +14,8 @@
       ]
     },
     {
-      "id": "lens-eso-vista",
-      "subject": "eso-vista shipped image lens",
+      "id": "dataset-eso-vista",
+      "subject": "eso-vista shipped image dataset",
       "status": "included",
       "finding": "J/H/Ks publication TIFF, 4000 by 2202 pixels, 71.81 by 39.54 arcmin. The caption identifies near-IR bands despite an H-alpha metadata mislabel. Its current 240 arcsec source-edge fade softens missing coverage without adding gas.",
       "evidence": [
@@ -25,8 +25,8 @@
       ]
     },
     {
-      "id": "lens-spitzer-mid-infrared",
-      "subject": "spitzer-mid-infrared shipped image lens",
+      "id": "dataset-spitzer-mid-infrared",
+      "subject": "spitzer-mid-infrared shipped image dataset",
       "status": "included",
       "finding": "Calibrated IRAC 8.0/4.5/3.6 micrometre maps from CDS hips2fits, composed on the 1757 by 1417 pixel, 35.73 by 28.81 arcmin TAN grid with one measured background and range per band and one asinh display. Registered against ESO optical with 214 matched stars and 0.118 px held-out RMS. MIPS 24 micrometres is left out because its HiPS has no data over the Hourglass core; hue shows band-relative brightness, not physical ratios.",
       "evidence": [
@@ -37,7 +37,7 @@
     },
     {
       "id": "spitzer-sig11-012-publisher-image",
-      "subject": "Spitzer sig11-012 publisher TIFF as the mid-infrared lens",
+      "subject": "Spitzer sig11-012 publisher TIFF as the mid-infrared dataset",
       "status": "excluded",
       "finding": "Replaced by the calibrated IRAC composite. Its earlier use: IRAC 3.6/4.5/5.8/8 plus MIPS 24 micrometre false color, 1757 by 1417 pixels over 35.73 by 28.81 arcmin. AstroPix supplies the matching WCS; different beams and the narrow footprint remain explicit, with a 240 arcsec source-edge fade.",
       "revisitWhen": "A calibrated MIPS 24 micrometre map with coverage over the Hourglass core, or evidence that the IRAC composite misplaces or loses structure the publisher image shows.",
@@ -51,7 +51,7 @@
       "id": "gaia-surroundings",
       "subject": "Gaia DR3 astrometry/photometry and Bailer-Jones EDR3 geometric distances",
       "status": "included",
-      "finding": "226 Gaia sources in an authored 60 pc sphere, G < 12, shared across the three lenses; the sparse brightness selection is intentional and not filled with artificial stars. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
+      "finding": "226 Gaia sources in an authored 60 pc sphere, G < 12, shared across the three datasets; the sparse brightness selection is intentional and not filled with artificial stars. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8/source/stellar-field.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8/source/delivery.json",

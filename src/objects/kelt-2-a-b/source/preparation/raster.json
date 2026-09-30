@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/kelt-2-a-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "kelt-2-a-b-surface-{id}{suffix}.webp",
-      "thumbnail": "kelt-2-a-b-lens-{id}.webp",
+      "thumbnail": "kelt-2-a-b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#f9f4ff, the colour lens of kelt-2-a (src/objects/kelt-2-a/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#f9f4ff, the colour dataset of kelt-2-a (src/objects/kelt-2-a/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "kelt-2-a",
           "srgb": "#f9f4ff",
-          "source": "the colour lens of kelt-2-a (src/objects/kelt-2-a/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of kelt-2-a (src/objects/kelt-2-a/source/photometry/stellar-color.json)"
         }
       }
     }

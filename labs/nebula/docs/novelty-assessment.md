@@ -85,7 +85,7 @@ The audited cached output is the [Helix checkpoint](../models/helix/README.md) w
 | Scaffold ridge RMS **128″**; **56.9%** beyond the configured 80″ correspondence tolerance | The restricted coarse shape leaves substantial projected structure unexplained. A later good image fit does not repair this depth-model mismatch. |
 | Matched HCO+ RMS **6.37 km/s training**, **12.78 km/s held out** | Some independent checking exists at the scaffold stage. Missing intersections are reported separately: 2 of 228 training and 1 of 51 held-out components. No superiority or physical acceptance follows without appropriate baselines and uncertainty. |
 | About **26 seconds** with prepared source/evidence caches; roughly **12 MiB** scene textures | Useful one-machine engineering measurements. Not cold processing cost, a portable speed claim or a comparison against older papers' different hardware/settings. |
-| Shared alpha across all lenses; completed interaction checks | Evidence of software behavior. It cannot verify astrophysical depth or prove a novel method. |
+| Shared alpha across all datasets; completed interaction checks | Evidence of software behavior. It cannot verify astrophysical depth or prove a novel method. |
 
 The analytic fit integrates additive emission. The delivery renderer uses a finite texture/alpha approximation. Therefore its actual screen projection and rotation behavior also need separate measurement. Existing oblique color streaks and stellar halos remain relevant; a solver residual alone does not characterize them.
 

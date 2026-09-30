@@ -13,7 +13,7 @@ interface FramingCandidate { originM?: PositionM; minimumM: PositionM; maximumM:
 interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
-import lensVolumes from './prepared-lens-volumes.json' with { type: 'json' };
+import datasetVolumes from './prepared-dataset-volumes.json' with { type: 'json' };
 import localGroupGalaxies from './prepared-local-group-galaxies.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
@@ -79,8 +79,8 @@ export function loadSystemView(id: string, read?: (id: string) => Promise<unknow
 /** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
 export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
-/** Volumes a body shows through one of its lenses, by volume id (site/build/prepare/prepare-catalog.mts). */
-export const LENS_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Object.entries(lensVolumes).map(([id, frame]) => [id, parseDensityVolumeFrame(frame)]));
+/** Volumes a body shows through one of its datasets, by volume id (site/build/prepare/prepare-catalog.mts). */
+export const DATASET_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Object.entries(datasetVolumes).map(([id, frame]) => [id, parseDensityVolumeFrame(frame)]));
 
 /** The Local Group as the universe draws it: the Milky Way's volume and the other galaxies the Local Group catalogue draws,
  * each a sphere of its recipe focus radius (site/build/prepare/prepare-catalog.mts), in one box in reference axes. */

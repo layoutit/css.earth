@@ -17,7 +17,7 @@ function bank(texture: (index: number) => string, geometry: { centerZ?: number; 
     provenance: null, approximation: null };
 }
 
-test('choosing another lens repaints the retained leaves without changing geometry identities', async () => {
+test('choosing another dataset repaints the retained leaves without changing geometry identities', async () => {
   const decoded: string[] = [];
   Reflect.set(globalThis, 'Image', class { src = ''; naturalWidth = 4; naturalHeight = 2; async decode() { decoded.push(this.src); } });
   try {

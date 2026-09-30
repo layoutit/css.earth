@@ -9,8 +9,8 @@ export function assertReplayScene(actual: CompilerBakeResult, expected: Compiler
   for (const key of ['fieldIdentity', 'frame', 'boundsArcsec', 'skyBoundsArcsec', 'spanArcsec',
     'sourceImage', 'coordinates', 'sampling', 'stars'] as const)
     assert.deepEqual(actual[key], expected[key], `Cold replay changed ${key}`);
-  assert.deepEqual(actual.lenses.map(({ volume: _volume, ...lens }) => lens),
-    expected.lenses.map(({ volume: _volume, ...lens }) => lens), 'Cold replay changed lens metadata');
+  assert.deepEqual(actual.datasets.map(({ volume: _volume, ...dataset }) => dataset),
+    expected.datasets.map(({ volume: _volume, ...dataset }) => dataset), 'Cold replay changed dataset metadata');
   const sprite = (scene: CompilerBakeResult) => scene.starSprites && {
     ...scene.starSprites, atlas: { path: scene.starSprites.atlas.path },
   };
@@ -20,7 +20,7 @@ export function assertReplayScene(actual: CompilerBakeResult, expected: Compiler
 /** Read every encoded texture, including all three axes, and check it has the size its descriptor records. */
 export async function verifyReplayFiles(root: string, scene: CompilerBakeResult): Promise<number> {
   let count = 0;
-  for (const pin of [scene.neutral, ...scene.lenses.map(lens => lens.volume)]) {
+  for (const pin of [scene.neutral, ...scene.datasets.map(dataset => dataset.volume)]) {
     const bytes = await readFile(resolve(root, pin.path));
     const volume = validatePreparedCssVolume(JSON.parse(bytes.toString()));
     assert.ok(volume.resources.length > 0);

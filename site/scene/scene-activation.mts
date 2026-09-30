@@ -59,7 +59,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       const selected = session.url ? await selectSceneDataset(session, session.url, datasetSignal, { initial: true }) : true;
       if (!isCurrent(session) || datasetSignal.aborted) return false;
       if (!selected) throw new Error('Dataset selection was superseded.');
-      if (!await frameLensVolume(session) || !isCurrent(session)) return false;
+      if (!await frameDatasetVolume(session) || !isCurrent(session)) return false;
     } catch (error) {
       if (!isCurrent(session) || datasetSignal.aborted) return false;
       const datasets = mount.datasets;
@@ -78,15 +78,15 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     return { interrupted, feature: request ? request.feature : initialSelection?.feature ?? null };
   }
 
-  /** A plain body page whose lens shows a volume opens on the whole volume when the view does not already hold it.
+  /** A plain body page whose dataset shows a volume opens on the whole volume when the view does not already hold it.
    * A saved view, a feature, an overview, a focus and a history restore keep their own camera. */
-  async function frameLensVolume(session: SceneSession) {
+  async function frameDatasetVolume(session: SceneSession) {
     const { objectId, request, mount } = session;
     if (!mount || !session.url || request?.camera.kind === 'restore') return true;
     const selection = readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS);
     if (selection.subject.kind !== 'object' || selection.savedView || selection.feature) return true;
     const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
-    const target = volume ? navigation.lensVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;
+    const target = volume ? navigation.datasetVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;
     if (!target) return true;
     // A cold page frames before it is ready; an arrival pulls back from the flight's endpoint.
     const framed = await session.wait(navigation.focus({ objectId, mount, signal: request?.signal ?? session.signal,

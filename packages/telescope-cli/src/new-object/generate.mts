@@ -1,6 +1,6 @@
 /** Generate a complete placed-star package from a star spec (spec.mts): the astronomy record from Gaia DR3 and SIMBAD, the colour
- * lens from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue colour and navigation
- * marker from that lens, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
+ * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue colour and navigation
+ * marker from that dataset, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
  * tests/contract/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
 import { execFileSync } from 'node:child_process';
@@ -8,7 +8,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { bindInputs, installColorLens, json } from './lens.mts';
+import { bindInputs, installColorDataset, json } from './dataset.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
@@ -189,7 +189,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const files = new Map<string, string | Buffer>(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   files.set(`${s}/photometry/gaia-dr3-source.csv`, csv);
-  const { hex: colorHex, words: colorWords } = await installColorLens(files, id, color, limb);
+  const { hex: colorHex, words: colorWords } = await installColorDataset(files, id, color, limb);
 
   const measurements = read(`${s}/measurements.json`), distance = place.parsecs, out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(measurements)) {
@@ -276,7 +276,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     `**Colour.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
-    '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.`, '',
+    '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.`, '',
     ...color.crossCheck ? [`- The colour's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../tests/contract/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
@@ -374,7 +374,7 @@ export async function writePackageFiles(files: Map<string, string | Buffer>, id:
 export async function writeGenerated(generated: Generated, root = process.cwd(), refresh = false) {
   const { written, kept } = await writePackageFiles(generated.files, generated.id, root, refresh);
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
-  // The marker needs the package on disk: a placeholder first, then the colour lens as a disc.
+  // The marker needs the package on disk: a placeholder first, then the colour dataset as a disc.
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   const { authorContextMarkers } = await import('../source-authoring/context-markers.mts');
   await authorContextMarkers([generated.id]);
@@ -494,7 +494,7 @@ export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_
       const presentation = resolve(root, `src/objects/${record.spec.id}/source/presentation`);
       await mkdir(presentation, { recursive: true });
       await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-      // Every hosted body's marker is drawn from its default lens: a companion's colour, a planet's colour or map.
+      // Every hosted body's marker is drawn from its default dataset: a companion's colour, a planet's colour or map.
       const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
       return { id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
         orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'record' in record.spec.orbit ? `its kept record (${record.orbitCitation.label})` : 'cited elements',

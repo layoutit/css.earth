@@ -47,17 +47,17 @@ test('pds3-grid reads a band of an attached-label float64 image at its stated ce
     const body = Buffer.alloc(16 * 8);
     [...values, ...errors].forEach((v, i) => body.writeDoubleBE(v, i * 8));
     await writeFile(join(directory, 'freeair.dat'), Buffer.concat([head, body]));
-    const lens = (band: number) => ({ id: 'gravity', format: 'pds3-grid', path: 'freeair.dat', sampling: 'nearest', grid: gridPolicy(band) });
-    const value = await loadPds3Grid(directory, lens(1)), error = await loadPds3Grid(directory, lens(2));
+    const dataset = (band: number) => ({ id: 'gravity', format: 'pds3-grid', path: 'freeair.dat', sampling: 'nearest', grid: gridPolicy(band) });
+    const value = await loadPds3Grid(directory, dataset(1)), error = await loadPds3Grid(directory, dataset(2));
     assert.equal(value.sample(-120, 1.5), 1);
     assert.equal(value.sample(-117, 0.5), 8);
     assert.equal(value.sample(-119.4, 1.4), 2, 'a point takes its nearest cell centre');
     assert.equal(error.sample(-118, 0.5), 0.7);
     assert.equal(value.sample(0, 1), null, 'outside a partial longitude span there is no value');
-    await assert.rejects(loadPds3Grid(directory, { ...lens(1), grid: { ...gridPolicy(1), labelExtent: 'edges' } }), /WESTERNMOST_LONGITUDE/u,
+    await assert.rejects(loadPds3Grid(directory, { ...dataset(1), grid: { ...gridPolicy(1), labelExtent: 'edges' } }), /WESTERNMOST_LONGITUDE/u,
       'edges would place the grid half a cell away from the label');
-    await assert.rejects(loadPds3Grid(directory, lens(3)), /BANDS 2 for band 3/u);
-    await assert.rejects(loadPds3Grid(directory, { ...lens(1), grid: { ...gridPolicy(1), noData: -1 } }), /noDataEvidence/u,
+    await assert.rejects(loadPds3Grid(directory, dataset(3)), /BANDS 2 for band 3/u);
+    await assert.rejects(loadPds3Grid(directory, { ...dataset(1), grid: { ...gridPolicy(1), noData: -1 } }), /noDataEvidence/u,
       'a missing value the label does not declare needs the producer\'s evidence');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
@@ -145,20 +145,20 @@ END
     await writeFile(join(directory, 'GEOID.IMG'), body);
     await writeFile(join(directory, 'first.lbl'), label(1));
     await writeFile(join(directory, 'second.lbl'), label(2));
-    const lens = (labelPath: string, extra = {}) => ({ id: 'geoid', format: 'pds3-grid', path: 'GEOID.IMG', labelPath, sampling: 'nearest', ...extra,
+    const dataset = (labelPath: string, extra = {}) => ({ id: 'geoid', format: 'pds3-grid', path: 'GEOID.IMG', labelPath, sampling: 'nearest', ...extra,
       grid: { width, height, pixelsPerDegree: 0.05, firstCentreLongitude: 0, firstCentreLatitude: 90, labelExtent: 'centres',
         datasetId: 'TEST-GEOID', productId: 'GEOID.IMG', noData: null } });
-    const second = await loadPds3Grid(directory, lens('second.lbl'));
+    const second = await loadPds3Grid(directory, dataset('second.lbl'));
     assert.equal(second.sample(0, 90), 100, 'the image starts at the named record');
     assert.equal(second.sample(20, 10), 100 + 4 * width + 1);
-    assert.equal((await loadPds3Grid(directory, lens('first.lbl'))).sample(0, 90), 0, 'record 1 starts at the first byte');
-    const limited = await loadPds3Grid(directory, lens('second.lbl', { latitudeLimit: { maximumAbsolute: 60, evidence: 'valid within about 60 degrees' } }));
+    assert.equal((await loadPds3Grid(directory, dataset('first.lbl'))).sample(0, 90), 0, 'record 1 starts at the first byte');
+    const limited = await loadPds3Grid(directory, dataset('second.lbl', { latitudeLimit: { maximumAbsolute: 60, evidence: 'valid within about 60 degrees' } }));
     assert.equal(limited.sample(0, 90), null, 'a polar row beyond the valid latitude is withheld');
     assert.equal(limited.sample(20, -50), 100 + 7 * width + 1, 'a row within the valid latitude keeps its value');
     assert.equal(limited.sample(20, -70), null);
     assert.equal(limited.report.withheldByLatitude, 4 * width);
-    assert.equal('withheldByLatitude' in second.report, false, 'a lens without a limit reports as before');
-    await assert.rejects(loadPds3Grid(directory, lens('second.lbl', { latitudeLimit: { maximumAbsolute: 60 } })), /latitudeLimit.evidence/u);
+    assert.equal('withheldByLatitude' in second.report, false, 'a dataset without a limit reports as before');
+    await assert.rejects(loadPds3Grid(directory, dataset('second.lbl', { latitudeLimit: { maximumAbsolute: 60 } })), /latitudeLimit.evidence/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

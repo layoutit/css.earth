@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "sun-cor1-density",
   "name": "Solar-corona electron density",
-  "defaultLens": "electron-density",
+  "defaultDataset": "electron-density",
   "bank": {
-    "path": "src/objects/sun-cor1-density/prepared/lenses.json"
+    "path": "src/objects/sun-cor1-density/prepared/datasets.json"
   },
   "recipes": [],
   "sharedInputs": [],
   "inputEvidence": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "electron-density",
       "label": "STEREO COR1-B · μ=10",

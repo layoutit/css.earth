@@ -297,12 +297,12 @@ async function authorBody(body: Body) {
   const css = (await readFile(resolve('src/renderers/css/styles', `${TEMPLATE}-surfaces.css`), 'utf8')).replaceAll(TEMPLATE, id);
   await write(resolve('src/renderers/css/styles', `${id}-surfaces.css`), css);
 
-  // Content: facts, lenses, resources.
+  // Content: facts, datasets, resources.
   const horizonsSource = (locator: string) => ({ url: elementsQuery, label: 'JPL Horizons, 2026-09-03 epoch', checked, path: 'source/reference/horizons-elements.txt', catalogueId: 'jpl-horizons', locator });
   const legendMiddle = (elevation[0]! + elevation[1]!) / 2;
   const fmt = (value: number) => String(Number(value.toPrecision(4)));
   const content = {
-    schema: 'cssearth-object-content@1', version: 1, id, displayName: name,
+    schema: 'cssearth-object-content@2', version: 1, id, displayName: name,
     panel: {
       facts: [
         { id: 'radius', label: 'Display reference radius', value: `${fmt(radiusKm)} km (size-calibrated model)`,
@@ -314,8 +314,8 @@ async function authorBody(body: Body) {
       ],
       moreFacts: [],
     },
-    lenses: {
-      titleKey: 'lenses', defaultLens: 'shape',
+    datasets: {
+      titleKey: 'datasets', defaultDataset: 'shape',
       controls: [
         { id: 'shape', label: 'Shape', thumbnail: `/scenes/${id}/${id}-shape-thumbnail.webp`, surface: `${id}-shape-surface@2x.webp`, poles: `${id}-shape-surface@2x.webp`,
           source: { id: shapeId, path: '../manifest.json' }, falseColor: false,
@@ -398,11 +398,11 @@ async function authorBody(body: Body) {
 
   // Manifest, then the marker snapshot that reads it.
   const manifest: Record<string, unknown> = {
-    schema: `cssearth-authoritative-sources@2`,
+    schema: `cssearth-authoritative-sources@3`,
     inputs: [
       { id: shapeId, path: shapePath, origin: shapeUrl, credit, license: 'CC-BY-4.0, DAMIT; retain original model and authors attribution.',
         acquisition: 'Restore original uncalibrated counted triangle table through the pinned acquisition recipe.',
-        redistribution: 'Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.', consumers: ['terrain', 'shape', 'elevation'], lensId: 'elevation',
+        redistribution: 'Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.', consumers: ['terrain', 'shape', 'elevation'], datasetId: 'elevation',
         projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'uncalibrated source coordinates', metersPerUnit, referenceRadiusMeters: radiusMeters },
         coverage: `Published ${kind} ${model.id}. ${calibration.visibleDescription} ${limitation}`,
         sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `damit-shape-${model.shapeFile}`, role: 'material', evidence: ENTRY_EVIDENCE }] } },
@@ -414,7 +414,7 @@ async function authorBody(body: Body) {
   const source = await createSourceManifest({ objectId: id, objectName: name, sourceRoot: src });
   const radial = await loadRadialTerrain({ config: { ...terrestrial, geometry: { ...terrestrial.geometry, radius: geometryRadius, radiusKm } }, sourceDirectory: src, source });
   if (!radial) throw new TypeError(`${id}: the marker snapshot requires a radial terrain.`);
-  const recipeRecord = { generator: 'tools/objects/terrestrial-layers/radial-snapshot.mts', inputs: [shapeId], size: 512, longitudeDegrees: 0, latitudeDegrees: 35, ambient: 0.45, diffuse: 0.55, lensId: 'shape' };
+  const recipeRecord = { generator: 'tools/objects/terrestrial-layers/radial-snapshot.mts', inputs: [shapeId], size: 512, longitudeDegrees: 0, latitudeDegrees: 35, ambient: 0.45, diffuse: 0.55, datasetId: 'shape' };
   const context = await renderRadialSnapshot({ ...recipeRecord, faces: radial.faces, map: await neutralMap() });
   await write(resolve(src, 'presentation/context.png'), context);
   manifest.generatedIntermediates = [{ id: 'prepared-radial-context', path: 'presentation/context.png', origin: shapeUrl, credit, license: 'CC-BY-4.0', consumers: ['navigation'],

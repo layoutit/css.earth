@@ -23,7 +23,7 @@ The asteroid validation report records the earlier source, preparation and brows
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1439.4 m error; the authored stopping threshold is 1500 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 722.8 m and maximum 1716.8 m.
 
-Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
+Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
 ## Known problems
 
@@ -40,7 +40,7 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 <details>
 <summary>Selected data</summary>
 
-- [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/128_Nemesis_adam.obj): radius 83.161643 km. The ADAM model is an alternative reconstruction of the same shape. Excluded as a second lens. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
+- [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/128_Nemesis_adam.obj): radius 83.161643 km. The ADAM model is an alternative reconstruction of the same shape. Excluded as a second dataset. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
 
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/128Nemesis/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
 

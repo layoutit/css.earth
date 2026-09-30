@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ganymede/",
   "sourceWidth": 8192,
   "sourceHeight": 4096,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "ganymede-{id}{suffix}.webp",
-      "thumbnail": "ganymede-lens-{id}.webp",
+      "thumbnail": "ganymede-dataset-{id}.webp",
       "source": "ganymede-mono.tif",
       "falseColor": false,
       "science": {
@@ -45,7 +45,7 @@
     {
       "id": "dlr-juno",
       "output": "ganymede-{id}{suffix}.webp",
-      "thumbnail": "ganymede-lens-{id}.webp",
+      "thumbnail": "ganymede-dataset-{id}.webp",
       "source": "ganymede-dlr-juno.tif",
       "falseColor": false,
       "science": {
@@ -76,7 +76,7 @@
     {
       "id": "enhanced",
       "output": "ganymede-{id}{suffix}.webp",
-      "thumbnail": "ganymede-lens-{id}.webp",
+      "thumbnail": "ganymede-dataset-{id}.webp",
       "source": "ganymede-color.tif",
       "falseColor": true,
       "science": {
@@ -106,7 +106,7 @@
     {
       "id": "geology",
       "output": "ganymede-{id}{suffix}.webp",
-      "thumbnail": "ganymede-lens-{id}.webp",
+      "thumbnail": "ganymede-dataset-{id}.webp",
       "source": "science/geology-sim3237/GeologyUnits.shp",
       "falseColor": true,
       "science": {
@@ -284,7 +284,7 @@
     {
       "id": "oxygen-signature",
       "output": "ganymede-{id}{suffix}.webp",
-      "thumbnail": "ganymede-lens-{id}.webp",
+      "thumbnail": "ganymede-dataset-{id}.webp",
       "source": "muse/ganymede/577.3nm_band-night-1.tif",
       "falseColor": true,
       "science": {

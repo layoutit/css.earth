@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "moon",
   "displayName": "Moon",
@@ -99,14 +99,14 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "surface",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "surface",
     "controls": [
       {
         "id": "surface",
         "label": "Monochrome",
-        "thumbnail": "moon-lens-surface.webp",
+        "thumbnail": "moon-dataset-surface.webp",
         "surface": "moon-surface@2x.webp",
         "poles": "moon-poles-surface@2x.webp",
         "source": {
@@ -121,7 +121,7 @@
       {
         "id": "midnight-temperature",
         "label": "Midnight temperature",
-        "thumbnail": "moon-lens-midnight-temperature.webp",
+        "thumbnail": "moon-dataset-midnight-temperature.webp",
         "surface": "moon-midnight-temperature@2x.webp",
         "poles": "moon-poles-midnight-temperature@2x.webp",
         "source": {
@@ -191,7 +191,7 @@
       {
         "id": "maximum-temperature",
         "label": "Maximum temperature",
-        "thumbnail": "moon-lens-maximum-temperature.webp",
+        "thumbnail": "moon-dataset-maximum-temperature.webp",
         "surface": "moon-maximum-temperature@2x.webp",
         "poles": "moon-poles-maximum-temperature@2x.webp",
         "source": {
@@ -287,7 +287,7 @@
       {
         "id": "noon-temperature",
         "label": "Noon temperature",
-        "thumbnail": "moon-lens-noon-temperature.webp",
+        "thumbnail": "moon-dataset-noon-temperature.webp",
         "surface": "moon-noon-temperature@2x.webp",
         "poles": "moon-poles-noon-temperature@2x.webp",
         "source": {
@@ -384,7 +384,7 @@
       {
         "id": "heat-anomalies",
         "label": "Heat anomalies",
-        "thumbnail": "moon-lens-heat-anomalies.webp",
+        "thumbnail": "moon-dataset-heat-anomalies.webp",
         "surface": "moon-heat-anomalies@2x.webp",
         "poles": "moon-poles-heat-anomalies@2x.webp",
         "source": {
@@ -454,7 +454,7 @@
       {
         "id": "rock-abundance",
         "label": "Rock abundance",
-        "thumbnail": "moon-lens-rock-abundance.webp",
+        "thumbnail": "moon-dataset-rock-abundance.webp",
         "surface": "moon-rock-abundance@2x.webp",
         "poles": "moon-poles-rock-abundance@2x.webp",
         "source": {
@@ -514,7 +514,7 @@
       {
         "id": "topography",
         "label": "Elevation",
-        "thumbnail": "moon-lens-topography.webp",
+        "thumbnail": "moon-dataset-topography.webp",
         "surface": "moon-topography@2x.webp",
         "poles": "moon-poles-topography@2x.webp",
         "source": {
@@ -573,7 +573,7 @@
       {
         "id": "roughness",
         "label": "Roughness",
-        "thumbnail": "moon-lens-roughness.webp",
+        "thumbnail": "moon-dataset-roughness.webp",
         "surface": "moon-roughness@2x.webp",
         "poles": "moon-poles-roughness@2x.webp",
         "source": {
@@ -640,7 +640,7 @@
       {
         "id": "crust",
         "label": "Crust",
-        "thumbnail": "moon-lens-crust.webp",
+        "thumbnail": "moon-dataset-crust.webp",
         "surface": "moon-crust@2x.webp",
         "poles": "moon-poles-crust@2x.webp",
         "source": {
@@ -991,7 +991,7 @@
       {
         "id": "gravity",
         "label": "Gravity",
-        "thumbnail": "moon-lens-gravity.webp",
+        "thumbnail": "moon-dataset-gravity.webp",
         "surface": "moon-gravity@2x.webp",
         "poles": "moon-poles-gravity@2x.webp",
         "source": {
@@ -1060,7 +1060,7 @@
       {
         "id": "bouguer-gravity",
         "label": "Bouguer gravity",
-        "thumbnail": "moon-lens-bouguer-gravity.webp",
+        "thumbnail": "moon-dataset-bouguer-gravity.webp",
         "surface": "moon-bouguer-gravity@2x.webp",
         "poles": "moon-poles-bouguer-gravity@2x.webp",
         "source": {
@@ -1129,7 +1129,7 @@
       {
         "id": "silicate-signature",
         "label": "Silicate signature",
-        "thumbnail": "moon-lens-silicate-signature.webp",
+        "thumbnail": "moon-dataset-silicate-signature.webp",
         "surface": "moon-silicate-signature@2x.webp",
         "poles": "moon-poles-silicate-signature@2x.webp",
         "source": {
@@ -1189,7 +1189,7 @@
       {
         "id": "geology",
         "label": "Geology",
-        "thumbnail": "moon-lens-geology.webp",
+        "thumbnail": "moon-dataset-geology.webp",
         "surface": "moon-geology@2x.webp",
         "poles": "moon-poles-geology@2x.webp",
         "source": {
@@ -1455,7 +1455,7 @@
       {
         "id": "submicroscopic-iron",
         "label": "Tiny iron particles",
-        "thumbnail": "moon-lens-submicroscopic-iron.webp",
+        "thumbnail": "moon-dataset-submicroscopic-iron.webp",
         "surface": "moon-submicroscopic-iron@2x.webp",
         "poles": "moon-poles-submicroscopic-iron@2x.webp",
         "source": {
@@ -1522,7 +1522,7 @@
       {
         "id": "plagioclase-grain-size",
         "label": "Mineral grain size",
-        "thumbnail": "moon-lens-plagioclase-grain-size.webp",
+        "thumbnail": "moon-dataset-plagioclase-grain-size.webp",
         "surface": "moon-plagioclase-grain-size@2x.webp",
         "poles": "moon-poles-plagioclase-grain-size@2x.webp",
         "source": {
@@ -1580,7 +1580,7 @@
       {
         "id": "plagioclase",
         "label": "Mineral composition",
-        "thumbnail": "moon-lens-plagioclase.webp",
+        "thumbnail": "moon-dataset-plagioclase.webp",
         "surface": "moon-plagioclase@2x.webp",
         "poles": "moon-poles-plagioclase@2x.webp",
         "source": {
@@ -1651,7 +1651,7 @@
       {
         "id": "olivine",
         "label": "Mineral composition",
-        "thumbnail": "moon-lens-olivine.webp",
+        "thumbnail": "moon-dataset-olivine.webp",
         "surface": "moon-olivine@2x.webp",
         "poles": "moon-poles-olivine@2x.webp",
         "source": {
@@ -1722,7 +1722,7 @@
       {
         "id": "orthopyroxene",
         "label": "Mineral composition",
-        "thumbnail": "moon-lens-orthopyroxene.webp",
+        "thumbnail": "moon-dataset-orthopyroxene.webp",
         "surface": "moon-orthopyroxene@2x.webp",
         "poles": "moon-poles-orthopyroxene@2x.webp",
         "source": {
@@ -1793,7 +1793,7 @@
       {
         "id": "clinopyroxene",
         "label": "Mineral composition",
-        "thumbnail": "moon-lens-clinopyroxene.webp",
+        "thumbnail": "moon-dataset-clinopyroxene.webp",
         "surface": "moon-clinopyroxene@2x.webp",
         "poles": "moon-poles-clinopyroxene@2x.webp",
         "source": {
@@ -1864,7 +1864,7 @@
       {
         "id": "iron-oxide",
         "label": "Iron content",
-        "thumbnail": "moon-lens-iron-oxide.webp",
+        "thumbnail": "moon-dataset-iron-oxide.webp",
         "surface": "moon-iron-oxide@2x.webp",
         "poles": "moon-poles-iron-oxide@2x.webp",
         "source": {
@@ -1931,7 +1931,7 @@
       {
         "id": "optical-maturity",
         "label": "Surface weathering",
-        "thumbnail": "moon-lens-optical-maturity.webp",
+        "thumbnail": "moon-dataset-optical-maturity.webp",
         "surface": "moon-optical-maturity@2x.webp",
         "poles": "moon-poles-optical-maturity@2x.webp",
         "source": {
@@ -1998,7 +1998,7 @@
       {
         "id": "thorium",
         "label": "Surface elements",
-        "thumbnail": "moon-lens-thorium.webp",
+        "thumbnail": "moon-dataset-thorium.webp",
         "surface": "moon-thorium@2x.webp",
         "poles": "moon-poles-thorium@2x.webp",
         "source": {
@@ -2068,7 +2068,7 @@
       {
         "id": "potassium",
         "label": "Surface elements",
-        "thumbnail": "moon-lens-potassium.webp",
+        "thumbnail": "moon-dataset-potassium.webp",
         "surface": "moon-potassium@2x.webp",
         "poles": "moon-poles-potassium@2x.webp",
         "source": {
@@ -2138,7 +2138,7 @@
       {
         "id": "iron-gamma",
         "label": "Surface elements",
-        "thumbnail": "moon-lens-iron-gamma.webp",
+        "thumbnail": "moon-dataset-iron-gamma.webp",
         "surface": "moon-iron-gamma@2x.webp",
         "poles": "moon-poles-iron-gamma@2x.webp",
         "source": {
@@ -2208,7 +2208,7 @@
       {
         "id": "titanium",
         "label": "Surface elements",
-        "thumbnail": "moon-lens-titanium.webp",
+        "thumbnail": "moon-dataset-titanium.webp",
         "surface": "moon-titanium@2x.webp",
         "poles": "moon-poles-titanium@2x.webp",
         "source": {

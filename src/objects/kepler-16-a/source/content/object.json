@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kepler-16-a",
   "displayName": "Kepler-16 A",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "kepler-16-a-lens-color.webp",
+        "thumbnail": "kepler-16-a-dataset-color.webp",
         "surface": "kepler-16-a-surface-color@2x.webp",
         "poles": "kepler-16-a-poles-color@2x.webp",
         "source": {

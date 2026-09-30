@@ -81,7 +81,7 @@ physical source bindings live in `source/preparation/`, `source/presentation/`
 and `source/content/object.json`, pinned by `object.json`. The generic authored
 preparation (`site/build/prepare/prepare-authored.ts`: raster, celestial, scene,
 content, composite presentation, features) compiles those records into
-`prepared/*.json`. Each numeric scientific lens declares its interpretation in
+`prepared/*.json`. Each numeric scientific dataset declares its interpretation in
 the `science` block of `source/preparation/raster.json`; the shared observation
 painter decodes source values and missing coverage before display colour is
 chosen, at both prepared densities. Unit checks live under
@@ -113,7 +113,7 @@ The globe is lit with the Hapke model of [Sato et al. (2014)](https://doi.org/10
 - The WAC looks almost straight down, so the fit saw emission only up to 30°. Toward the limb the law is held at 30°. Beyond that the limb follows no measurement.
 - With the Sun behind the viewer the law hardly darkens the limb: 0.996 of the centre at 30° emission and beyond. The shared bank it replaces (Lambert with a 0.35 floor) darkened it much more.
 - One set of values lights the whole globe. The paper's maps vary by tile: w from 0.27 to 0.44 between the 16th and 84th percentiles over 30°S to 30°N.
-- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js moon --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.004 at half the radius, 0.353 then 0.004 at 0.9 and 0.490 then 0.004 at 0.98.
+- The bank was redrawn on 2026-09-25 with [`node tools/objects/dist/prepare-authored.js moon --write --reuse-images --accept-changed=raster`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each dataset writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.004 at half the radius, 0.353 then 0.004 at 0.9 and 0.490 then 0.004 at 0.98.
 
 ## Scene and sky
 
@@ -165,11 +165,11 @@ The old 2K Moon Kit remains the small navigation sprite's source.
 </details>
 
 <details>
-<summary>Numeric lenses, missing data and qualification limits</summary>
+<summary>Numeric datasets, missing data and qualification limits</summary>
 
-## Numeric scientific lenses
+## Numeric scientific datasets
 
-The topography lens consumes `source/science/ldem_16.img`, the 5,760 × 2,880
+The topography dataset consumes `source/science/ldem_16.img`, the 5,760 × 2,880
 LRO LOLA LDEM_16 V3.1 grid from the [NASA PDS release](https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml).
 David E. Smith and the GSFC LOLA team produced this global 16-pixel/degree
 product from 2009–2016 observations. Signed little-endian 16-bit samples encode
@@ -182,7 +182,7 @@ There is no per-cell uncertainty or no-data constant in the selected product.
 The full array spans −8,981.5 to +10,685.5 m; the authored color scale spans
 −12 to +12 km. Numeric color does not displace the retained spherical geometry.
 
-The three nighttime lenses use the [LRO Diviner GHRM v1.0 float32 mosaics](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/),
+The three nighttime datasets use the [LRO Diviner GHRM v1.0 float32 mosaics](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/),
 produced by Powell and the UCLA Diviner team from 2009–2022 observations.
 The exact product labels, original hash pins, compact numeric grids and conversion
 receipts live in `source/science/diviner-ghrm/`; candidate selection and independent
@@ -222,7 +222,7 @@ scales; endpoint colors are saturation, not rejection or a scientific limit.
 
 The older Bandfield GDR L3 32-pixel/degree rock map (2009–2010, ±60°) and its
 independent raw-DN anchors remain archived for provenance but no longer drive
-the rock-abundance lens. The expanded record and GHRM thermal model replace it.
+the rock-abundance dataset. The expanded record and GHRM thermal model replace it.
 
 Numeric output retains its −180° left-edge origin, established against the
 previous SVS color map. The new LROC photograph uses the equivalent 180° E
@@ -232,10 +232,10 @@ verify the corresponding source values through the numeric painter. These are
 landform alignment anchors, not a claim of subpixel survey accuracy.
 
 Nearest display sampling preserves selected numeric values and gaps: each
-numeric lens is painted directly at 2,048 × 1,024 and 4,096 × 2,048 from the
+numeric dataset is painted directly at 2,048 × 1,024 and 4,096 × 2,048 from the
 source grid (no image resampling), latitude-band packing copies pixels, polar
 tiles use nearest pixel-center samples, and thumbnails use nearest resizing.
-Surface, pole and thumbnail WebPs of numeric lenses are lossless. This preserves
+Surface, pole and thumbnail WebPs of numeric datasets are lossless. This preserves
 prepared palette colors, not a claim that browser-transformed screen pixels
 are quantitative samples. The new monochrome photograph uses footprint integration and lossy WebP;
 the unchanged GRAIL display uses Lanczos resampling and lossy WebP.
@@ -249,9 +249,9 @@ The GRAIL crustal-thickness print remains unchanged at
 [NASA SVS](https://svs.gsfc.nasa.gov/4014/). It is a gravity/topography-derived
 interior model with assumed densities, shown with shaded relief. It has not
 become a new numeric crust grid. The old LOLA press JPEG is no longer an active
-input; its existing local file is not removed. All lenses use the same shared
-sphere mesh and polar-tile topology; every lens legend is declared beside its
-lens in `source/content/object.json` (colour stops, labels and units).
+input; its existing local file is not removed. All datasets use the same shared
+sphere mesh and polar-tile topology; every dataset legend is declared beside its
+dataset in `source/content/object.json` (colour stops, labels and units).
 
 PDS publicly archives these NASA mission scientific products. Preserve the
 named producers, exact product/version, original archive links and [PDS data
@@ -338,7 +338,7 @@ limits: 1.0% of the Moon's area lies beyond the Gravity stretch and
 
 ### Evidence
 
-- The lenses read the archive's EXTRAS GeoTIFF copies. The volume's
+- The datasets read the archive's EXTRAS GeoTIFF copies. The volume's
   [extrinfo.txt](source/science/grail/extrinfo.txt) says they hold the same data
   as the RSDMAP images. A byte-level comparison agreed on all 16,588,800 cells
   of each map after shifting the GeoTIFF's −180° left edge to the image's 0°.
@@ -361,7 +361,7 @@ limits: 1.0% of the Moon's area lies beyond the Gravity stretch and
   highlands between 201° and 210° E near the equator; that map keeps the pull
   of topography.
 - [All check results](evidence/grail-gravity/checks.json), with the tested
-  file sizes and hashes. Flat previews painted with the lens palette were
+  file sizes and hashes. Flat previews painted with the dataset palette were
   inspected; they are not in the repository.
 
 ### Known problems
@@ -427,7 +427,7 @@ the maximum view and 0.94% in the noon view; almost none is above 400 K.
 - Their abstract says dark surfaces reach higher maxima and bright ones lower.
   Here Mare Tranquillitatis reaches 394.5 K and the farside highlands 389.9 K;
   bright young Tycho 349.5 K and Aristarchus 376.2 K.
-- Flat previews painted with the lens palette were inspected; they are not in
+- Flat previews painted with the dataset palette were inspected; they are not in
   the repository.
 
 ### Known problems
@@ -501,7 +501,7 @@ precision of about 0.5% TiO₂ or 230 ppm K. They are shown as zero, as archived
   This table's coarser pixels there hold less, as the 150 km footprint predicts.
 - [All check results](evidence/lp-grs/checks.json), with pixel values at nine
   landing and sample sites and the tested file sizes and hashes. Flat previews
-  painted with the lens palette were inspected; they are not in the repository.
+  painted with the dataset palette were inspected; they are not in the repository.
 
 ### Known problems
 

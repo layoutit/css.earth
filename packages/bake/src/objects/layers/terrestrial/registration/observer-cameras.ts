@@ -1,7 +1,7 @@
 /**
  * The observer-camera derivation a body records beside its recipe, so every camera field a ground-based photograph
- * lens states is reproducible from pinned inputs: the rotation model, the pinned Horizons tables, each frame's own
- * header, and the lens mesh. `source/preparation/observer-cameras.json` names those inputs; the derivation reads
+ * dataset states is reproducible from pinned inputs: the rotation model, the pinned Horizons tables, each frame's own
+ * header, and the dataset mesh. `source/preparation/observer-cameras.json` names those inputs; the derivation reads
  * them and returns the controlled-camera fields the recipe must state. The command in `packages/bake/cli/observer-cameras.mts`
  * writes them, and the shared test refuses a recipe that drifts from its own inputs.
  */
@@ -18,7 +18,7 @@ import { limbCentre } from './registration-sweeps.ts';
 import { readingPole, spinRecordReading } from './spin-record-reading.ts';
 
 const DEGREE = Math.PI / 180;
-export const OBSERVER_CAMERAS_SCHEMA = 'cssearth-observer-cameras@1';
+export const OBSERVER_CAMERAS_SCHEMA = 'cssearth-observer-cameras@2';
 export const OBSERVER_CAMERAS_FILE = 'preparation/observer-cameras.json';
 /** The shared leap-second kernel every IAU pole model is evaluated with. */
 export const LEAP_SECONDS_KERNEL = 'src/spice/cassini/lsk/naif0012.tls';
@@ -30,24 +30,24 @@ export const limbSettled = (limb: { limbBins: number; movedPixels: number }) => 
 
 /**
  * A spin record's column order is established against a published pole: the body's own, `reference/model-properties.json`,
- * or, when that belongs to another solution (a DAMIT model beside a survey lens, say), the one the rotation states with
+ * or, when that belongs to another solution (a DAMIT model beside a survey dataset, say), the one the rotation states with
  * the publication and table it comes from.
  */
 const parsePublishedPole = shape({ source: text, table: text, eclipticJ2000Degrees: array(number) });
 const parseRotation = shape({ kind: text, path: text, columnOrder: optional(text), body: optional(number), publishedPole: optional(parsePublishedPole) });
 /**
- * The published comparison a ground-based lens ships on. The survey papers register a model by fitting shape, spin and a
- * per-image offset together and show the fit as a figure per epoch; they state no independent check. A lens whose cameras
+ * The published comparison a ground-based dataset ships on. The survey papers register a model by fitting shape, spin and a
+ * per-image offset together and show the fit as a figure per epoch; they state no independent check. A dataset whose cameras
  * reproduce that figure names the included ledger entry that decides it; the figure itself, the measurements and their
  * image are owned by `preparation/published-comparison.json` and `evidence/published-comparison.json`, which
- * `packages/bake/cli/published-comparison.mts` writes. Its registration verdict is then reported beside the lens, not a gate.
+ * `packages/bake/cli/published-comparison.mts` writes. Its registration verdict is then reported beside the dataset, not a gate.
  */
 const parseComparison = shape({ ledgerEntry: text });
-const parseRecord = shape({ schema: text, lensId: text, rotation: parseRotation, ephemeris: shape({ observer: text, heliocentric: text }), epoch: text,
+const parseRecord = shape({ schema: text, datasetId: text, rotation: parseRotation, ephemeris: shape({ observer: text, heliocentric: text }), epoch: text,
   centre: shape({ method: text, edgeFraction: number }), publishedComparison: optional(parseComparison) });
 export type ObserverCamerasRecord = ReturnType<typeof parseRecord>;
 
-/** The derivation record, validated: one lens, one rotation model, two Horizons tables, the epoch and centre rules. */
+/** The derivation record, validated: one dataset, one rotation model, two Horizons tables, the epoch and centre rules. */
 export function parseObserverCameras(value: unknown): ObserverCamerasRecord {
   const record = decodeProfile(parseRecord, value, 'Invalid observer-cameras record.');
   if (record.schema !== OBSERVER_CAMERAS_SCHEMA) throw new TypeError(`Invalid observer-cameras record: schema ${record.schema}.`);
@@ -129,9 +129,9 @@ export function zimpolExposure(header: Record<string, unknown>): ZimpolExposure 
 export interface DerivedCamera extends ObserverCamera { id: string; path: string; exposure: ZimpolExposure; sighting: ObserverSighting; limb: { iterations: number; movedPixels: number; limbBins: number; residualPixels: number } }
 
 /**
- * Every controlled-camera field for the lens's frames. The epoch is the exposure midpoint; the geometry is the pinned
+ * Every controlled-camera field for the dataset's frames. The epoch is the exposure midpoint; the geometry is the pinned
  * Horizons row at the exposure start, matched by its calendar date; the Sun direction is the negated heliocentric
- * position; the disc centre is the limb fit against the lens mesh.
+ * position; the disc centre is the limb fit against the dataset mesh.
  */
 export async function deriveObserverCameras(sourceDirectory: string, record: ObserverCamerasRecord, frames: readonly { id: string; path: string }[],
     mesh: { positions: readonly (readonly number[])[] }, repositoryRoot: string, { orientation: given }: { orientation?: BodyOrientation } = {}): Promise<DerivedCamera[]> {
@@ -167,13 +167,13 @@ export function recipeFields(camera: ObserverCamera) {
     pixelAngleMicroradians: round(camera.pixelAngleMicroradians, 6), center: [round(camera.center[0], 3), round(camera.center[1], 3)] as [number, number] };
 }
 
-/** The lens recipe's frames and the record, from an object's source directory. */
+/** The dataset recipe's frames and the record, from an object's source directory. */
 export async function loadObserverCameraInputs(sourceDirectory: string) {
   const record = parseObserverCameras(JSON.parse(await readFile(resolve(sourceDirectory, OBSERVER_CAMERAS_FILE), 'utf8')));
   const recipe = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8')));
-  const lenses = requireRecord(recipe.raster).surfaceObservations;
-  const lens = Array.isArray(lenses) ? lenses.map(value => requireRecord(value)).find(entry => entry.id === record.lensId) : undefined;
-  if (!lens || !Array.isArray(lens.frames)) throw new Error(`The recipe states no lens ${record.lensId} with frames.`);
-  const frames = lens.frames.map(value => requireRecord(value)).map(frame => ({ id: requireString(frame.id), path: requireString(frame.path), stated: frame }));
-  return { record, recipe, lens, frames };
+  const datasets = requireRecord(recipe.raster).surfaceObservations;
+  const dataset = Array.isArray(datasets) ? datasets.map(value => requireRecord(value)).find(entry => entry.id === record.datasetId) : undefined;
+  if (!dataset || !Array.isArray(dataset.frames)) throw new Error(`The recipe states no dataset ${record.datasetId} with frames.`);
+  const frames = dataset.frames.map(value => requireRecord(value)).map(frame => ({ id: requireString(frame.id), path: requireString(frame.path), stated: frame }));
+  return { record, recipe, dataset, frames };
 }

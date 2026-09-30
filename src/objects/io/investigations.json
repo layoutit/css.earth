@@ -37,7 +37,7 @@
       "id": "sim3168-geology",
       "subject": "USGS SIM 3168 Io geologic polygons",
       "status": "included",
-      "finding": "The selected polygon members supply the categorical Geology lens; no-data, unmapped poles and category conflicts remain missing, and colors are interpretive.",
+      "finding": "The selected polygon members supply the categorical Geology dataset; no-data, unmapped poles and category conflicts remain missing, and colors are interpretive.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/source/manifest.json",
         "https://pubs.usgs.gov/publication/sim3168"
@@ -67,7 +67,7 @@
       "id": "jiram-m-night-mosaic",
       "subject": "Juno JIRAM M-band (4.8 µm) night-side hot-spot map, orbits 41, 43, 47 and 49",
       "status": "included",
-      "finding": "Our reduction of 59 JIRAM frames, following Mura et al. (2024), supplies the Volcanic heat lens. 34 frames register to the sunlit limb; integrated hot-spot output matches the paper's Table 3 (median ratio 1.06 per orbit, 0.83 in the merged map) and 22 of 24 bright peaks lie within 3 degrees of a Davies et al. (2024) source. Coverage is 22% of Io, north and night side only. Revisit when: orbits 51 to 60 are reduced, or Mura et al. or the JIRAM team publish radiance maps as data.",
+      "finding": "Our reduction of 59 JIRAM frames, following Mura et al. (2024), supplies the Volcanic heat dataset. 34 frames register to the sunlit limb; integrated hot-spot output matches the paper's Table 3 (median ratio 1.06 per orbit, 0.83 in the merged map) and 22 of 24 bright peaks lie within 3 degrees of a Davies et al. (2024) source. Coverage is 22% of Io, north and night side only. Revisit when: orbits 51 to 60 are reduced, or Mura et al. or the JIRAM team publish radiance maps as data.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/source/science/jiram/receipt.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/evidence/volcanic-heat/figure-2.png",
@@ -82,7 +82,7 @@
       "evidence": [
         "https://doi.org/10.3389/fspas.2024.1369472"
       ],
-      "revisitWhen": "A saturation correction for early JIRAM Io frames is published, or the lens shows hot-spot locations rather than radiance."
+      "revisitWhen": "A saturation correction for early JIRAM Io frames is published, or the dataset shows hot-spot locations rather than radiance."
     },
     {
       "id": "jiram-orbits-51-to-60",
@@ -103,11 +103,11 @@
       "id": "davies-2024-thermal-sources",
       "subject": "Davies et al. (2024) Table A1 hot spots",
       "status": "excluded",
-      "finding": "No longer drawn: the symbol lens was replaced by measured JIRAM radiance. The table is kept byte for byte as an independent check of the map's hot-spot positions.",
+      "finding": "No longer drawn: the symbol dataset was replaced by measured JIRAM radiance. The table is kept byte for byte as an independent check of the map's hot-spot positions.",
       "evidence": [
         "https://doi.org/10.3847/PSJ/ad4346"
       ],
-      "revisitWhen": "A lens shows catalogued hot-spot power as symbols again."
+      "revisitWhen": "A dataset shows catalogued hot-spot power as symbols again."
     },
     {
       "id": "limb-law",
@@ -158,7 +158,7 @@
       "id": "trek-stereo-dem",
       "subject": "White et al. (2014) Voyager/Galileo stereo DEM, NASA Io Trek product IoDEM (1000 mpp, global)",
       "status": "included",
-      "finding": "Supplies the Elevation lens unchanged through the shared GeoTIFF sampler. The Float32 grid is 11500 x 5750 geographic degrees on the Io_2015 sphere, east-positive from -180. Frame check against the Gazetteer centres, which share the Voyager/Galileo mosaic frame of the Monochrome lens: 24 of 30 covered mountains, mesas, plana and tholi rise above their surroundings (mean +813 m) against 13 of 29 (+40 m) with longitudes mirrored; the relief score peaks at 0 to -0.5 degrees longitude shift and 0 to +1 degree latitude shift. The highest sample, 16,942 m at 88.83 E, 9.88 S, lies inside the Boosaule Montes extent. Heights follow the limb-profile ellipsoid, not the header sphere: sub-Jovian and leading equatorial boxes differ by 0.16 km where the IAU ellipsoid (1829.4 and 1819.4 km equatorial axes) would give 10 km. Coverage is 53.8% of the sphere by area, reaching 66.8 N; the edge columns agree to 6 m, so the map wraps. The display range -2 to 6 km holds 99.7% of the covered area.",
+      "finding": "Supplies the Elevation dataset unchanged through the shared GeoTIFF sampler. The Float32 grid is 11500 x 5750 geographic degrees on the Io_2015 sphere, east-positive from -180. Frame check against the Gazetteer centres, which share the Voyager/Galileo mosaic frame of the Monochrome dataset: 24 of 30 covered mountains, mesas, plana and tholi rise above their surroundings (mean +813 m) against 13 of 29 (+40 m) with longitudes mirrored; the relief score peaks at 0 to -0.5 degrees longitude shift and 0 to +1 degree latitude shift. The highest sample, 16,942 m at 88.83 E, 9.88 S, lies inside the Boosaule Montes extent. Heights follow the limb-profile ellipsoid, not the header sphere: sub-Jovian and leading equatorial boxes differ by 0.16 km where the IAU ellipsoid (1829.4 and 1819.4 km equatorial axes) would give 10 km. Coverage is 53.8% of the sphere by area, reaching 66.8 N; the edge columns agree to 6 m, so the map wraps. The display range -2 to 6 km holds 99.7% of the covered area.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/source/manifest.json",
         "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM",
@@ -170,19 +170,19 @@
       "id": "trek-dem-slope-and-shading",
       "subject": "Io Trek Slope, Color Slope, Hillshade and Color Hillshade products (IoDEM_Slope and siblings)",
       "status": "excluded",
-      "finding": "Trek describes the slope map as generated from the same stereo DEM, and the other three are display renderings of it; none adds a measurement. The Elevation lens already shows slopes through its relief lighting, and Trek gives no slope method or baseline. Slopes on the smoothed plains would reflect the stereo patch size (White and Schenk 2014) more than the terrain. Not downloaded.",
+      "finding": "Trek describes the slope map as generated from the same stereo DEM, and the other three are display renderings of it; none adds a measurement. The Elevation dataset already shows slopes through its relief lighting, and Trek gives no slope method or baseline. Slopes on the smoothed plains would reflect the stereo patch size (White and Schenk 2014) more than the terrain. Not downloaded.",
       "evidence": [
         "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM_Slope",
         "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=200&key=DEM",
         "https://www.hou.usra.edu/meetings/lpsc2014/pdf/1534.pdf"
       ],
-      "revisitWhen": "The authors or an archive publish a slope product with a stated method and baseline that resolves relief the elevation lens cannot show."
+      "revisitWhen": "The authors or an archive publish a slope product with a stated method and baseline that resolves relief the elevation dataset cannot show."
     },
     {
       "id": "stereo-dem-label-gaps",
       "subject": "Height unit, datum, coverage and Voyager spacecraft for the Io stereo DEM",
       "status": "unresolved",
-      "finding": "Neither the GeoTIFF, the Trek record nor its FGDC metadata states a height unit, datum, originator or use constraints. Metres and the ellipsoid datum rest on the LPSC 2014 abstract (plains mean 0.00 km, 89.9% within 1 km; models fitted to the limb-profile triaxial ellipsoid) and on our measurements (85.3% of all samples within 1000 m; no 10 km ellipsoid signal). Trek and the abstract state about 75% coverage; the delivered file covers 53.8% of the area, and the reason is unknown. Trek names only 'Voyager', so the lens credits Galileo as a facility and Voyager in text only. The journal article returned HTTP 403, so its datum and release statements were not read.",
+      "finding": "Neither the GeoTIFF, the Trek record nor its FGDC metadata states a height unit, datum, originator or use constraints. Metres and the ellipsoid datum rest on the LPSC 2014 abstract (plains mean 0.00 km, 89.9% within 1 km; models fitted to the limb-profile triaxial ellipsoid) and on our measurements (85.3% of all samples within 1000 m; no 10 km ellipsoid signal). Trek and the abstract state about 75% coverage; the delivered file covers 53.8% of the area, and the reason is unknown. Trek names only 'Voyager', so the dataset credits Galileo as a facility and Voyager in text only. The journal article returned HTTP 403, so its datum and release statements were not read.",
       "evidence": [
         "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM",
         "https://trek.nasa.gov/io/TrekWS/rest/cat/metadata/fgdc/html?label=IoDEM",
