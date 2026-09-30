@@ -11,3 +11,8 @@ check. Image resource metadata is retained for loader validation; these tests
 mock image transport and need no atlas image. This fixture tests hierarchy
 selection, binary validation and runtime loading without the full catalogue.
 It does not qualify full-catalogue performance or source coverage.
+
+The sampled rows hold magnitudes that were already decoded from the full bank, so
+re-encoding them loses nothing and the magnitude quantization error measures 0;
+the full bank measures about 0.0005. The check therefore asserts the bound
+(`measured <= bound`), not a positive error.
