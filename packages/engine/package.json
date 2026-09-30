@@ -19,13 +19,11 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "vitest run"
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
-    "vitest": "^3.1.1",
     "@types/node": "^26.4.0"
   }
 }

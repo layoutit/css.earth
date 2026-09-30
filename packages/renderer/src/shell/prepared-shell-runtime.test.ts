@@ -1,5 +1,7 @@
 import { cameraPoseToReferenceFrame } from '@cssearth/engine';
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
@@ -56,7 +58,7 @@ class FakeDocument {
 }
 function mount(payload = fixture()) {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
-  const resolveResource = vi.fn((path: string) => `/prepared/${path}`);
+  const resolveResource = mock.fn((path: string) => `/prepared/${path}`);
   const runtime = mountPreparedCssSurfaceShell({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource });
   const root = runtime.root as unknown as FakeElement, camera = root.children[0]!, scene = camera.children[0]!;
   return { payload, document, host, before, runtime, root, camera, scene, leaves: scene.children, resolveResource };
@@ -74,20 +76,20 @@ function vertexFixture(): PreparedCssSurfaceShell {
 
 test('retains one leaf while addressing sorted vertex gradients and all-prepared corner transforms', () => {
   const payload = vertexFixture(), { runtime, leaves, document } = mount(payload), created = document.created;
-  expect(validatePreparedCssSurfaceShell(payload)).toEqual(payload);
+  assert.deepEqual(validatePreparedCssSurfaceShell(payload), payload);
   runtime.publish(world(payload, [6, 2, 4]), viewport);
-  expect(leaves[0]!.dataset.shellFrame).toBe('17');
-  expect(leaves[0]!.style.transform).toBe(payload.faces[0]!.materialTransforms![3]);
+  assert.equal(leaves[0]!.dataset.shellFrame, '17');
+  assert.equal(leaves[0]!.style.transform, payload.faces[0]!.materialTransforms![3]);
   const writes = { ...leaves[0]!.writes };
   runtime.publish(world(payload, [6, 2, 4]), viewport);
-  expect(leaves[0]!.writes).toEqual(writes);
+  assert.deepEqual(leaves[0]!.writes, writes);
   runtime.publish(world(payload, [-6, 2, 4]), viewport);
-  expect(leaves[0]!.dataset.shellFrame).toBe('7');
-  expect(leaves[0]!.style.transform).toBe(payload.faces[0]!.materialTransforms![0]);
-  expect(document.created).toBe(created); expect(leaves).toHaveLength(1);
+  assert.equal(leaves[0]!.dataset.shellFrame, '7');
+  assert.equal(leaves[0]!.style.transform, payload.faces[0]!.materialTransforms![0]);
+  assert.equal(document.created, created); assert.equal(leaves.length, 1);
 });
 
-test.each([
+for (const [_name, mutate] of [
   ['missing prepared vertices', (data: any) => { delete data.vertices; }],
   ['unsorted facing levels', (data: any) => { data.atlas.facingLevels = [-1, .5, 0, 1]; }],
   ['incomplete triple bank', (data: any) => { data.atlas.frames = 19; }],
@@ -96,19 +98,19 @@ test.each([
   ['runtime transform expression', (data: any) => { data.faces[0].materialTransforms[1] = 'rotate(20deg)'; }],
   ['wrong initial permutation', (data: any) => { data.faces[0].materialTransforms[0] = data.faces[0].materialTransforms[1]; }],
   ['nonunit vertex normal', (data: any) => { data.vertices[0].radialNormal = [2, 0, 0]; }],
-] as const)('rejects vertex material %s', (_name, mutate) => {
+] as const) test(`rejects vertex material ${_name}`, () => {
   const payload = structuredClone(vertexFixture()); mutate(payload);
-  expect(() => validatePreparedCssSurfaceShell(payload)).toThrow(TypeError);
+  assert.throws(() => validatePreparedCssSurfaceShell(payload), TypeError);
 });
 
 test('validates the complete shell with strict compiled material and geometry fields', () => {
   const payload = fixture();
-  expect(validatePreparedCssSurfaceShell(payload)).toEqual(payload);
+  assert.deepEqual(validatePreparedCssSurfaceShell(payload), payload);
   const exponential = { ...payload, faces: [{ ...payload.faces[0], style: { ...payload.faces[0]!.style, transform: 'matrix3d(1e0,0,0,0,0,+1,0,0,0,0,1,0,-1e-3,2.5,3,1)' } }] };
-  expect(validatePreparedCssSurfaceShell(exponential).faces).toHaveLength(1);
+  assert.equal(validatePreparedCssSurfaceShell(exponential).faces.length, 1);
 });
 
-test.each([
+for (const [_name, mutate] of [
   ['missing key', (data: any) => { delete data.unitScale; }],
   ['extra top-level key', (data: any) => { data.shader = ''; }],
   ['nonpositive unit scale', (data: any) => { data.unitScale = 0; }],
@@ -146,25 +148,25 @@ test.each([
   ['wrong atlas dimensions', (data: any) => { data.resources[0].height = 64; }],
   ['fractional atlas frame count', (data: any) => { data.atlas.frames = 1.5; }],
   ['missing provenance', (data: any) => { data.provenance = null; }],
-] as const)('rejects %s', (_name, mutate) => {
+] as const) test(`rejects ${_name}`, () => {
   const payload = structuredClone(fixture()); mutate(payload);
-  expect(() => validatePreparedCssSurfaceShell(payload)).toThrow(TypeError);
+  assert.throws(() => validatePreparedCssSurfaceShell(payload), TypeError);
 });
 
 test('retains one transparent perspective scene and applies the prepared CSS verbatim', () => {
   const { payload, host, before, root, camera, scene, leaves, resolveResource } = mount();
-  expect(host.children).toEqual([root, before]);
-  expect(root.children).toHaveLength(1); expect(camera.children).toEqual([scene]);
-  expect(leaves).toHaveLength(payload.faces.length);
-  expect(root.style.transformStyle).toBe('flat'); expect(root.style.background).toBeUndefined();
-  expect(camera.style.transformStyle).toBe('preserve-3d'); expect(scene.style.transformStyle).toBe('preserve-3d');
-  expect(camera.style.opacity).toBeUndefined(); expect(scene.style.opacity).toBeUndefined();
+  assert.deepEqual(host.children, [root, before]);
+  assert.equal(root.children.length, 1); assert.deepEqual(camera.children, [scene]);
+  assert.equal(leaves.length, payload.faces.length);
+  assert.equal(root.style.transformStyle, 'flat'); assert.equal(root.style.background, undefined);
+  assert.equal(camera.style.transformStyle, 'preserve-3d'); assert.equal(scene.style.transformStyle, 'preserve-3d');
+  assert.equal(camera.style.opacity, undefined); assert.equal(scene.style.opacity, undefined);
   for (let index = 0; index < leaves.length; index++) {
     const leaf = leaves[index]!;
-    expect(leaf.tagName).toBe('s'); expect(leaf.style).toMatchObject(payload.faces[index]!.style);
-    expect(leaf.style.opacity).toBeUndefined(); expect(leaf.style.backgroundImage).toBe('url("/prepared/materials/rim.png")');
+    assert.equal(leaf.tagName, 's'); assert.partialDeepStrictEqual(leaf.style, payload.faces[index]!.style);
+    assert.equal(leaf.style.opacity, undefined); assert.equal(leaf.style.backgroundImage, 'url("/prepared/materials/rim.png")');
   }
-  expect(resolveResource).toHaveBeenCalledExactlyOnceWith('materials/rim.png');
+  assert.equal(resolveResource.mock.callCount(), 1); assert.deepEqual(resolveResource.mock.calls[0]!.arguments, ['materials/rim.png']);
 });
 
 test('uses the shared physical camera transform, prepared scale, frame origin and rotation', () => {
@@ -172,19 +174,19 @@ test('uses the shared physical camera transform, prepared scale, frame origin an
   const observer = world(payload, [3, 4, 6], [0, Math.SQRT1_2, 0, Math.SQRT1_2]);
   runtime.publish(observer, viewport);
   const expected = preparedVolumeCameraTransform({ world: observer, viewport }, payload.frame, payload.unitScale);
-  expect(scene.style.transform).toBe(`translate3d(${expected.translationCssPixels.map(value => `${Number(value.toFixed(6))}px`).join(',')}) ${worldRotationCss(expected.rotation)}`);
-  expect(camera.style.perspective).toBe('600px'); expect(camera.style.perspectiveOrigin).toBe('calc(50% + 17px) calc(50% + -11px)');
-  expect(runtime.stats().distanceM).toBeCloseTo(Math.sqrt(61) * 10, 10);
-  expect(root.style.opacity).toBe('1');
+  assert.equal(scene.style.transform, `translate3d(${expected.translationCssPixels.map(value => `${Number(value.toFixed(6))}px`).join(',')}) ${worldRotationCss(expected.rotation)}`);
+  assert.equal(camera.style.perspective, '600px'); assert.equal(camera.style.perspectiveOrigin, 'calc(50% + 17px) calc(50% + -11px)');
+  assert.ok(Math.abs(runtime.stats().distanceM - (Math.sqrt(61) * 10)) < 10 ** -10 / 2, `${runtime.stats().distanceM} is not close to ${Math.sqrt(61) * 10}`);
+  assert.equal(root.style.opacity, '1');
 });
 
 test('distance visibility uses the local physical observer with exact endpoints and smoothstep fade', () => {
   const { payload, runtime, root } = mount();
   for (const [distance, opacity] of [[0, 0], [10, 0], [10.01, 1], [100, 1], [125, .84375], [150, .5], [175, .15625], [200, 0], [300, 0]]) {
     runtime.publish(world(payload, [0, 0, distance! / 10]), viewport);
-    expect(runtime.stats().distanceM).toBeCloseTo(distance!, 10); expect(runtime.stats().opacity).toBeCloseTo(opacity!, 10);
-    expect(root.style.visibility).toBe(opacity! > 0 ? 'visible' : 'hidden');
-    if (opacity === 0) expect(runtime.stats().visibleFaces).toBe(0);
+    assert.ok(Math.abs(runtime.stats().distanceM - (distance!)) < 10 ** -10 / 2, `${runtime.stats().distanceM} is not close to ${distance!}`); assert.ok(Math.abs(runtime.stats().opacity - (opacity!)) < 10 ** -10 / 2, `${runtime.stats().opacity} is not close to ${opacity!}`);
+    assert.equal(root.style.visibility, opacity! > 0 ? 'visible' : 'hidden');
+    if (opacity === 0) assert.equal(runtime.stats().visibleFaces, 0);
   }
 });
 
@@ -192,20 +194,20 @@ test('culls by the true face normal while sampling and clamping radial-facing at
   const payload = { ...fixture(), faces: [face('rim', [0, 0, 0], [0, 0, 1], [1, 0, 0])] };
   const { runtime, leaves } = mount(payload), leaf = leaves[0]!;
   runtime.publish(world(payload, [-6, 0, 4]), viewport);
-  expect(runtime.stats().visibleFaces).toBe(1); expect(leaf.dataset.shellFrame).toBe('0'); expect(leaf.style.backgroundPosition).toBe('2px -3px');
+  assert.equal(runtime.stats().visibleFaces, 1); assert.equal(leaf.dataset.shellFrame, '0'); assert.equal(leaf.style.backgroundPosition, '2px -3px');
   runtime.publish(world(payload, [6, 0, 4]), viewport);
-  expect(leaf.dataset.shellFrame).toBe('6'); expect(leaf.style.backgroundPosition).toBe('-38px -33px');
+  assert.equal(leaf.dataset.shellFrame, '6'); assert.equal(leaf.style.backgroundPosition, '-38px -33px');
   runtime.publish(world(payload, [6, 0, -4]), viewport);
-  expect(runtime.stats().visibleFaces).toBe(0); expect(leaf.style.visibility).toBe('hidden');
+  assert.equal(runtime.stats().visibleFaces, 0); assert.equal(leaf.style.visibility, 'hidden');
   runtime.publish(world(payload, [6, 0, .1]), viewport);
-  expect(leaf.dataset.shellFrame).toBe('7'); expect(leaf.style.backgroundPosition).toBe('-58px -33px');
+  assert.equal(leaf.dataset.shellFrame, '7'); assert.equal(leaf.style.backgroundPosition, '-58px -33px');
 });
 
 test('grazing geometric faces stay culled even when their radial normal faces the observer', () => {
   const payload = { ...fixture(), faces: [face('tangent', [0, 0, 0], [0, 0, 1], [1, 0, 0])] };
   const { runtime, leaves } = mount(payload);
   runtime.publish(world(payload, [6, 0, 0]), viewport);
-  expect(runtime.stats().visibleFaces).toBe(0); expect(leaves[0]!.style.visibility).toBe('hidden');
+  assert.equal(runtime.stats().visibleFaces, 0); assert.equal(leaves[0]!.style.visibility, 'hidden');
 });
 
 test('camera updates retain every node and avoid repeated material and transform style writes', () => {
@@ -214,10 +216,10 @@ test('camera updates retain every node and avoid repeated material and transform
   runtime.publish(observer, viewport);
   const writes = [root, camera, scene, ...leaves].map(node => ({ ...node.writes }));
   runtime.publish(observer, viewport);
-  expect([root, camera, scene, ...leaves].map(node => node.writes)).toEqual(writes);
+  assert.deepEqual([root, camera, scene, ...leaves].map(node => node.writes), writes);
   runtime.publish(world(payload, [0, 0, 7]), viewport);
-  expect(leaves[0]!.writes.backgroundPosition).toBe(1); expect(scene.writes.transform).toBe(2);
-  expect(document.created).toBe(created); expect(scene.children).toEqual(nodes); expect(resolveResource).toHaveBeenCalledTimes(1);
+  assert.equal(leaves[0]!.writes.backgroundPosition, 1); assert.equal(scene.writes.transform, 2);
+  assert.equal(document.created, created); assert.deepEqual(scene.children, nodes); assert.equal(resolveResource.mock.callCount(), 1);
 });
 
 test('hidden distance publications skip all retained face reads and camera style work, then resume cleanly', () => {
@@ -227,28 +229,28 @@ test('hidden distance publications skip all retained face reads and camera style
   const center = payload.faces[0]!.centerUnits;
   Object.defineProperty(payload.faces[0], 'centerUnits', { configurable: true, get() { throw new Error('Hidden shell read a face'); } });
   runtime.publish(world(payload, [0, 0, 6]), viewport, false);
-  expect(runtime.stats()).toMatchObject({ visible: false, distanceM: 60, opacity: 0, visibleFaces: 0 });
+  assert.partialDeepStrictEqual(runtime.stats(), { visible: false, distanceM: 60, opacity: 0, visibleFaces: 0 });
   runtime.publish(world(payload, [0, 0, 0]), viewport);
   runtime.publish(world(payload, [0, 0, 30]), viewport);
-  expect([camera, scene, ...leaves].map(node => node.writes)).toEqual(writes);
-  expect(root.style.opacity).toBe('0'); expect(root.dataset).toMatchObject({ shellDistanceM: '300', shellVisibleFaces: '0', shellOpacity: '0' });
+  assert.deepEqual([camera, scene, ...leaves].map(node => node.writes), writes);
+  assert.equal(root.style.opacity, '0'); assert.partialDeepStrictEqual(root.dataset, { shellDistanceM: '300', shellVisibleFaces: '0', shellOpacity: '0' });
   Object.defineProperty(payload.faces[0], 'centerUnits', { configurable: true, value: center });
   runtime.publish(world(payload, [0, 0, 6]), viewport);
-  expect(runtime.stats()).toMatchObject({ visible: true, visibleFaces: 1, opacity: 1 });
-  expect(root.dataset).toMatchObject({ shellDistanceM: '60', shellVisibleFaces: '1', shellOpacity: '1' });
-  expect(leaves[0]!.style.visibility).toBe('visible');
+  assert.partialDeepStrictEqual(runtime.stats(), { visible: true, visibleFaces: 1, opacity: 1 });
+  assert.partialDeepStrictEqual(root.dataset, { shellDistanceM: '60', shellVisibleFaces: '1', shellOpacity: '1' });
+  assert.equal(leaves[0]!.style.visibility, 'visible');
 });
 
 test('rejects incompatible publications before mutating DOM and destroys only its retained root', () => {
   const { payload, runtime, root, host, before } = mount();
   const observer = world(payload, [0, 0, 6]), snapshot = JSON.stringify(root.style);
-  expect(() => runtime.publish({ ...observer, referenceFrame: 'other' }, viewport)).toThrow();
-  expect(() => runtime.publish({ ...observer, epochJdTt: 124 }, viewport)).toThrow();
-  expect(() => runtime.publish(observer, { ...viewport, focalPixels: Infinity })).toThrow();
-  expect(() => runtime.publish(observer, { ...viewport, focalPixels: 0 })).toThrow();
-  expect(JSON.stringify(root.style)).toBe(snapshot);
+  assert.throws(() => runtime.publish({ ...observer, referenceFrame: 'other' }, viewport));
+  assert.throws(() => runtime.publish({ ...observer, epochJdTt: 124 }, viewport));
+  assert.throws(() => runtime.publish(observer, { ...viewport, focalPixels: Infinity }));
+  assert.throws(() => runtime.publish(observer, { ...viewport, focalPixels: 0 }));
+  assert.equal(JSON.stringify(root.style), snapshot);
   runtime.publish(observer, viewport); runtime.destroy(); runtime.destroy();
-  expect(host.children).toEqual([before]); expect(runtime.stats()).toMatchObject({ visible: false, visibleFaces: 0, opacity: 0 });
+  assert.deepEqual(host.children, [before]); assert.partialDeepStrictEqual(runtime.stats(), { visible: false, visibleFaces: 0, opacity: 0 });
   const destroyedStyle = JSON.stringify(root.style); runtime.publish(world(payload, [0, 0, 7]), viewport);
-  expect(JSON.stringify(root.style)).toBe(destroyedStyle);
+  assert.equal(JSON.stringify(root.style), destroyedStyle);
 });

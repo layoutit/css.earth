@@ -26,7 +26,7 @@ test('reuse-images preparation reaches the authored preparation only when asked'
 test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun is re-pinned last', async () => {
   const ids = ['hd-219134', 'hd-219134b'];
   const scopes = Object.fromEntries(PREPARATION_STEPS.map(step => [step.name, step.scope]));
-  assert.deepEqual(scopes, { builds: 'once', inputs: 'ids', catalogue: 'once', geometry: 'once', prepare: 'each', discovery: 'once', sources: 'each', page: 'ids', text: 'ids', markers: 'ids', billboard: 'ids', world: 'once', catalogues: 'once', pins: 'once' });
+  assert.deepEqual(scopes, { builds: 'once', inputs: 'ids', catalogue: 'once', geometry: 'once', prepare: 'each', discovery: 'once', sources: 'each', page: 'ids', audit: 'each', text: 'ids', markers: 'ids', billboard: 'ids', world: 'once', catalogues: 'once', pins: 'once' });
   assert.equal(PREPARATION_STEPS.find(step => step.name === 'prepare')?.parallel, true);
   for (const name of ['inputs', 'page', 'text', 'markers']) {
     const commands = await PREPARATION_STEPS.find(step => step.name === name)!.commands(ids);

@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { requireTree } from './resources-tree.js';
 
 function fixture() {
@@ -9,9 +11,9 @@ function fixture() {
 }
 
 test('activation accepts bounded leaf references and rejects tree containers or duplicate ownership', () => {
-  expect(() => requireTree(fixture())).not.toThrow();
+  assert.doesNotThrow(() => requireTree(fixture()));
   for (const groups of [[[]], [[0]], [[1]], [[100]], [[2, 2]], [[2], [2]], [Array.from({ length: 65 }, (_, i) => i + 2)]]) {
     const tree = fixture(); tree.activationGroups = groups;
-    expect(() => requireTree(tree)).toThrow(/activation/);
+    assert.throws(() => requireTree(tree), /activation/);
   }
 });

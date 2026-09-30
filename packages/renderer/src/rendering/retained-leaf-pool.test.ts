@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createRetainedLeafPool, createRetainedGeometrySnapshot } from './retained-leaf-pool.js';
 
 class Element {
@@ -22,22 +24,22 @@ test('dormant blocks leave layout without detaching, reallocating, or hiding act
   const host = new Element();
   const pool = createRetainedLeafPool(host as unknown as HTMLElement, 130, 'points');
   const elements = [...pool.elements], parents = elements.map(element => element.parentNode);
-  expect(host.children.map(block => block.style.display)).toEqual(['none', 'none', 'none']);
+  assert.deepEqual(host.children.map(block => block.style.display), ['none', 'none', 'none']);
   pool.setVisible(0, true); pool.setVisible(63, true); pool.setVisible(64, true);
   pool.setVisible(0, true); // repeated publication must not retain a phantom active leaf
   pool.setVisible(0, false);
   pool.commitVisibility();
-  expect(host.children.map(block => block.style.display)).toEqual(['contents', 'contents', 'none']);
-  expect(elements[63].style.visibility).toBe('');
+  assert.deepEqual(host.children.map(block => block.style.display), ['contents', 'contents', 'none']);
+  assert.equal(elements[63].style.visibility, '');
   pool.setVisible(63, false);
   pool.commitVisibility();
-  expect(host.children.map(block => block.style.display)).toEqual(['none', 'contents', 'none']);
+  assert.deepEqual(host.children.map(block => block.style.display), ['none', 'contents', 'none']);
   pool.setVisible(129, true); pool.setVisible(64, false); pool.setVisible(63, true);
   pool.commitVisibility();
-  expect(host.children.map(block => block.style.display)).toEqual(['contents', 'none', 'contents']);
-  expect(pool.elements).toEqual(elements);
-  expect(pool.elements.map(element => element.parentNode)).toEqual(parents);
-  expect(host.children.map(block => block.children.length)).toEqual([64, 64, 2]);
+  assert.deepEqual(host.children.map(block => block.style.display), ['contents', 'none', 'contents']);
+  assert.deepEqual(pool.elements, elements);
+  assert.deepEqual(pool.elements.map(element => element.parentNode), parents);
+  assert.deepEqual(host.children.map(block => block.children.length), [64, 64, 2]);
 });
 
 test('replacing the last visible member publishes only final block membership', () => {
@@ -49,14 +51,14 @@ test('replacing the last visible member publishes only final block membership', 
     set(target, key, value) { if (key === 'display') writes++; return Reflect.set(target, key, value); },
   });
   pool.setVisible(0, false); pool.setVisible(1, true); pool.commitVisibility();
-  expect(writes).toBe(0);
-  expect(host.children[0].style.display).toBe('contents');
+  assert.equal(writes, 0);
+  assert.equal(host.children[0].style.display, 'contents');
   pool.setVisible(64, true); pool.setVisible(64, false); pool.commitVisibility();
-  expect(host.children[1].style.display).toBe('none');
-  expect(pool.stats()).toMatchObject({ blockActivations: 1, blockDeactivations: 0 });
+  assert.equal(host.children[1].style.display, 'none');
+  assert.partialDeepStrictEqual(pool.stats(), { blockActivations: 1, blockDeactivations: 0 });
   pool.setVisible(1, false); pool.commitVisibility(); pool.commitVisibility();
-  expect(writes).toBe(1);
-  expect(pool.stats()).toMatchObject({ blockActivations: 1, blockDeactivations: 1 });
+  assert.equal(writes, 1);
+  assert.partialDeepStrictEqual(pool.stats(), { blockActivations: 1, blockDeactivations: 1 });
 });
 
 test('retained commits keep an emptied block in layout until its membership stays empty', () => {
@@ -64,14 +66,14 @@ test('retained commits keep an emptied block in layout until its membership stay
   const pool = createRetainedLeafPool(host as unknown as HTMLElement, 128, 'points', { retainCommits: 2 });
   pool.setVisible(0, true); pool.commitVisibility();
   pool.setVisible(0, false); pool.commitVisibility(); pool.commitVisibility();
-  expect(host.children[0].style.display).toBe('contents');
+  assert.equal(host.children[0].style.display, 'contents');
   pool.setVisible(1, true); pool.commitVisibility(); // returning membership reuses the resident block
   pool.setVisible(1, false); pool.commitVisibility(); pool.commitVisibility();
-  expect(host.children[0].style.display).toBe('contents');
-  expect(pool.stats()).toMatchObject({ blockActivations: 1, blockDeactivations: 0, visibleLeaves: 0 });
+  assert.equal(host.children[0].style.display, 'contents');
+  assert.partialDeepStrictEqual(pool.stats(), { blockActivations: 1, blockDeactivations: 0, visibleLeaves: 0 });
   pool.commitVisibility();
-  expect(host.children[0].style.display).toBe('none');
-  expect(pool.stats()).toMatchObject({ blockActivations: 1, blockDeactivations: 1, residentLeaves: 0 });
+  assert.equal(host.children[0].style.display, 'none');
+  assert.partialDeepStrictEqual(pool.stats(), { blockActivations: 1, blockDeactivations: 1, residentLeaves: 0 });
 });
 
 test('sparse prefixes preserve all slots while reducing dormant layout across boundary crossings', () => {
@@ -82,20 +84,20 @@ test('sparse prefixes preserve all slots while reducing dormant layout across bo
   for (const direction of [1, -1]) for (let step = 0; step < 130; step++) {
     const index = direction === 1 ? step : 129 - step;
     for (const pool of [dense, sparse]) { pool.setVisible(index, direction === 1); pool.commitVisibility(); }
-    expect(sparse.stats().visibleLeaves).toBe(dense.stats().visibleLeaves);
-    expect(sparse.stats().residentLeaves).toBeLessThanOrEqual(dense.stats().residentLeaves);
-    expect(sparse.elements.map(node => node.style.visibility)).toEqual(dense.elements.map(node => node.style.visibility));
+    assert.equal(sparse.stats().visibleLeaves, dense.stats().visibleLeaves);
+    assert.ok(sparse.stats().residentLeaves <= dense.stats().residentLeaves);
+    assert.deepEqual(sparse.elements.map(node => node.style.visibility), dense.elements.map(node => node.style.visibility));
   }
   for (const index of [0, 9, 31, 63, 128]) sparse.setVisible(index, true);
   sparse.commitVisibility();
-  expect(sparse.stats().visibleLeaves).toBe(5);
-  expect(sparse.stats().residentLeaves).toBe(66);
+  assert.equal(sparse.stats().visibleLeaves, 5);
+  assert.equal(sparse.stats().residentLeaves, 66);
   sparse.setVisible(0, false); sparse.setVisible(9, false); sparse.setVisible(31, false); sparse.setVisible(63, false);
   sparse.commitVisibility();
-  expect(sparse.stats().residentLeaves).toBe(2);
-  expect(sparse.elements).toEqual(identities);
-  expect(sparse.elements.map(node => node.parentNode)).toEqual(parents);
-  expect(createRetainedGeometrySnapshot(sparse.elements)().directlyHiddenLeaves).toBe(129);
+  assert.equal(sparse.stats().residentLeaves, 2);
+  assert.deepEqual(sparse.elements, identities);
+  assert.deepEqual(sparse.elements.map(node => node.parentNode), parents);
+  assert.equal(createRetainedGeometrySnapshot(sparse.elements)().directlyHiddenLeaves, 129);
 });
 
 test('diagnostic membership matches direct visibility without scanning complete pools', () => {
@@ -115,8 +117,8 @@ test('diagnostic membership matches direct visibility without scanning complete 
     const expected = pool.elements.reduce((sum, leaf) => sum + Number(leaf.style.visibility === 'hidden'), 0) +
       Number(extra.style.visibility === 'hidden');
     pooledReads = 0;
-    expect(snapshot()).toEqual({ retainedNodes: nodes.length, retainedLeaves: 131, directlyHiddenLeaves: expected });
-    expect(pooledReads).toBe(0);
+    assert.deepEqual(snapshot(), { retainedNodes: nodes.length, retainedLeaves: 131, directlyHiddenLeaves: expected });
+    assert.equal(pooledReads, 0);
   };
   verify();
   for (let index = 0; index < 130; index++) {
@@ -132,10 +134,10 @@ test('diagnostics count only captured leaves when a retained block is partial', 
   const snapshot = createRetainedGeometrySnapshot(pool.elements.slice(0, 65));
   pool.setVisible(129, true); // a different block is outside this identity snapshot
   pool.setVisible(65, true); // an uncaptured sibling is not counted
-  expect(snapshot().directlyHiddenLeaves).toBe(65);
+  assert.equal(snapshot().directlyHiddenLeaves, 65);
   pool.setVisible(64, true); pool.setVisible(63, true);
-  expect(snapshot().directlyHiddenLeaves).toBe(63);
+  assert.equal(snapshot().directlyHiddenLeaves, 63);
   pool.setVisible(64, false);
-  expect(snapshot().directlyHiddenLeaves).toBe(64);
+  assert.equal(snapshot().directlyHiddenLeaves, 64);
 });
 

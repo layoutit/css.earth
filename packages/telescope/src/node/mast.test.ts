@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 import { parseMastObservations, type MastServiceResult } from './mast.js';
 
 const row = () => ({ obs_collection: 'HST', obs_id: 'j96o01010', target_name: 'PLUTO', proposal_id: 10427, instrument_name: 'ACS/WFC', filters: 'F606W',

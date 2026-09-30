@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { DWARF_PLANET_IDS, bodyData, moonsOf } from './bodies.js'
 import { distance, magnitude } from './__fixtures__/compare.js'
 import { HORIZONS } from './__fixtures__/horizons.js'
@@ -63,9 +65,9 @@ const FAR_TOLERANCE_KM: Record<string, number> = {
 const FAR_EPOCH_JD = 2462771.5
 
 describe('dwarf-planet ephemerides against JPL Horizons', () => {
-  it.each(DWARF_PLANET_IDS)('places %s within its documented propagation-error budget', (id) => {
+  for (const id of DWARF_PLANET_IDS) it(`places ${id} within its documented propagation-error budget`, () => {
     const fixture = HORIZONS[`${id}Heliocentric`]!
-    expect(fixture.rows.length).toBe(4)
+    assert.equal(fixture.rows.length, 4)
     let worstNear = 0
     let worstFar = 0
     for (const row of fixture.rows) {
@@ -73,11 +75,11 @@ describe('dwarf-planet ephemerides against JPL Horizons', () => {
       if (row.jdTdb === FAR_EPOCH_JD) worstFar = Math.max(worstFar, error)
       else worstNear = Math.max(worstNear, error)
     }
-    expect(worstNear).toBeLessThan(NEAR_TOLERANCE_KM[id]!)
-    expect(worstFar).toBeLessThan(FAR_TOLERANCE_KM[id]!)
+    assert.ok(worstNear < NEAR_TOLERANCE_KM[id]!)
+    assert.ok(worstFar < FAR_TOLERANCE_KM[id]!)
   })
 
-  it.each(DWARF_PLANET_IDS)('reproduces %s exactly at its own element epoch', (id) => {
+  for (const id of DWARF_PLANET_IDS) it(`reproduces ${id} exactly at its own element epoch`, () => {
     // The point the header comment calls "float64 noise": this is the same
     // conic Horizons fitted, evaluated at the fit's own epoch, so nothing
     // about perturbations enters yet. A wrong unit conversion, a degrees/
@@ -86,27 +88,27 @@ describe('dwarf-planet ephemerides against JPL Horizons', () => {
     const elements = dwarfPlanetElements(id)
     const fixture = HORIZONS[`${id}Heliocentric`]!
     const atEpoch = fixture.rows.find((row) => row.jdTdb === elements.epochJdTt)!
-    expect(distance(dwarfPlanetPositionKm(id, elements.epochJdTt), atEpoch.positionKm)).toBeLessThan(1)
+    assert.ok(distance(dwarfPlanetPositionKm(id, elements.epochJdTt), atEpoch.positionKm) < 1)
   })
 
-  it.each(DWARF_PLANET_IDS)('bounds %s by a(1 + e) over many orbits', (id) => {
+  for (const id of DWARF_PLANET_IDS) it(`bounds ${id} by a(1 + e) over many orbits`, () => {
     const elements = dwarfPlanetElements(id)
     const bound = dwarfPlanetApoapsisKm(id)
-    expect(bound).toBe(keplerApoapsisKm(elements))
+    assert.equal(bound, keplerApoapsisKm(elements))
     const period = keplerPeriodDays(elements)
     let farthest = 0
     for (let i = 0; i <= 3000; i++) {
       farthest = Math.max(farthest, magnitude(dwarfPlanetPositionKm(id, elements.epochJdTt + (i * period * 3.3) / 3000)))
     }
-    expect(farthest).toBeLessThanOrEqual(bound)
+    assert.ok(farthest <= bound)
   })
 
   it('places Eris the farthest out, at roughly its published aphelion', () => {
     // 97.6 au, the number `AGENTS.md` names as the reason to check frame
     // containment at all.
     const apoapsisAu = dwarfPlanetApoapsisKm('eris') / (M_PER_AU / M_PER_KM)
-    expect(apoapsisAu).toBeGreaterThan(95)
-    expect(apoapsisAu).toBeLessThan(100)
+    assert.ok(apoapsisAu > 95)
+    assert.ok(apoapsisAu < 100)
   })
 })
 
@@ -120,20 +122,18 @@ describe('dwarf-planet frames', () => {
 
   it('keeps scene-only satellites out of the propagated frame tree without hiding their explicit states', () => {
     const specs = dwarfPlanetFrameSpecs()
-    expect(moonsOf('haumea')).toContain('hiiaka')
+    assert.ok(moonsOf('haumea').includes('hiiaka'))
     for (const id of SCENE_SATELLITE_IDS) {
-      expect(specs.some(spec => spec.body === id)).toBe(false)
+      assert.equal(specs.some(spec => spec.body === id), false)
     }
     const state = sceneSatelliteStateKm('hiiaka', 2461286.5)
-    expect(state.centerBodyId).toBe('haumea')
-    expect(state.parentHeliocentricState).toBeDefined()
+    assert.equal(state.centerBodyId, 'haumea')
+    assert.notEqual(state.parentHeliocentricState, undefined)
     const haumea = specs.find(spec => spec.body === 'haumea')!
     // Generic parent frames keep their existing time domain and elements;
     // no source-only child is silently attached to a different primary state.
     for (const epoch of [2461285.5, 2461286.5, 2461287.5]) {
-      expect(haumea.frame.originInParent(epoch)).toEqual(
-        dwarfPlanetPositionKm('haumea', epoch).map(km => km / (M_PER_AU / M_PER_KM)),
-      )
+      assert.deepEqual(haumea.frame.originInParent(epoch), dwarfPlanetPositionKm('haumea', epoch).map(km => km / (M_PER_AU / M_PER_KM)))
     }
   })
 
@@ -141,19 +141,19 @@ describe('dwarf-planet frames', () => {
     // The invariant this whole file exists to prove: Eris's exit ball, at
     // ~98 au, still fits inside the Sun frame's — `FrameTree.add` enforces
     // that on every call, this just proves it does not throw.
-    expect(() => buildTree()).not.toThrow()
+    assert.doesNotThrow(() => buildTree())
     const tree = buildTree()
-    for (const id of DWARF_PLANET_IDS) expect(tree.get(id).parent).toBe(SUN_FRAME_ID)
+    for (const id of DWARF_PLANET_IDS) assert.equal(tree.get(id).parent, SUN_FRAME_ID)
   })
 
   it('attaches Charon to Pluto with a contained finer frame', () => {
     const tree = buildTree()
-    expect(tree.get('charon').parent).toBe('pluto')
-    expect(tree.get('charon').unitM).toBeLessThan(tree.get('pluto').unitM)
+    assert.equal(tree.get('charon').parent, 'pluto')
+    assert.ok(tree.get('charon').unitM < tree.get('pluto').unitM)
     const offset = tree.get('charon').originInParent(2461286.5)
     const separationKm = magnitude(offset) * tree.get('pluto').unitM / M_PER_KM
-    expect(separationKm).toBeGreaterThan(19580)
-    expect(separationKm).toBeLessThan(19620)
+    assert.ok(separationKm > 19580)
+    assert.ok(separationKm < 19620)
   })
 
   it('grafts under a coarser parent without changing anything else', () => {
@@ -166,16 +166,16 @@ describe('dwarf-planet frames', () => {
     for (const frame of solarSystemFrames('milkyWay')) tree.add(frame)
     for (const spec of dwarfPlanetFrameSpecs()) tree.add(spec.frame)
     for (const spec of dwarfPlanetFrameSpecs()) {
-      expect(tree.get(spec.frame.id).unitM).toBe(spec.frame.unitM)
-      expect(tree.get(spec.frame.id).maxOffsetInParent).toBe(spec.frame.maxOffsetInParent)
+      assert.equal(tree.get(spec.frame.id).unitM, spec.frame.unitM)
+      assert.equal(tree.get(spec.frame.id).maxOffsetInParent, spec.frame.maxOffsetInParent)
     }
   })
 
   it('picks a unit strictly finer than the Sun frame, off the ladder', () => {
     for (const spec of dwarfPlanetFrameSpecs()) {
-      expect(spec.frame.unitM).toBeLessThan(M_PER_AU)
+      assert.ok(spec.frame.unitM < M_PER_AU)
       const tree = buildTree()
-      expect(spec.frame.unitM).toBeLessThan(tree.get(spec.frame.parent!).unitM)
+      assert.ok(spec.frame.unitM < tree.get(spec.frame.parent!).unitM)
     }
   })
 
@@ -192,8 +192,8 @@ describe('dwarf-planet frames', () => {
       for (let i = 0; i <= 4000; i++) {
         worst = Math.max(worst, magnitude(spec.frame.originInParent(elements.epochJdTt + (i * period * 3.3) / 4000)))
       }
-      expect(worst).toBeLessThanOrEqual(spec.frame.maxOffsetInParent)
-      expect(worst / spec.frame.maxOffsetInParent).toBeGreaterThan(0.9)
+      assert.ok(worst <= spec.frame.maxOffsetInParent)
+      assert.ok((worst / spec.frame.maxOffsetInParent) > 0.9)
     }
   })
 })

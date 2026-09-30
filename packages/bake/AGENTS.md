@@ -70,7 +70,7 @@ its validators accept); the renderer never imports the bake.
   the inventoried runtime-asset locations (the R2 key, URL and restore path of each inventoried file, for a checkout root
   the caller passes in), the public scene images an object ships (its runtime manifest) and the publication of a staged
   preparation into the object package. It imports `objects/sources`. Its tests are `node --test` suites in
-  `src/delivery/`; the runtime-manifest and publication tests are in `src/delivery/`, where `pnpm test:preparation` finds them.
+  `src/delivery/`; the runtime-manifest and publication tests are in `src/delivery/`.
 - `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
   object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
   physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure;
@@ -90,7 +90,7 @@ its validators accept); the renderer never imports the bake.
   against the descriptor (`check-prepared-presentation.ts`; the prepared format constant comes
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command,
-  run over every object by `pnpm test:universe:runtime`. `prepared-object-pin.ts` pins a prepared object to its
+  run for each object by the `audit` step of `prepare-object`. `prepared-object-pin.ts` pins a prepared object to its
   transport (the descriptor's `prepared` pin and page reference, and the inventory; the transports themselves are built from
   the runtime when read); the world-navigation
   and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
@@ -274,8 +274,7 @@ its validators accept); the renderer never imports the bake.
   source-surface fixture in its `fixtures/` directory. Tests read body sources, kernel banks and
   oracle fixtures through test helpers and import the entries. Self-contained Node tests sit beside their modules
   (`objects/layers/paged-ellipsoid/*.test.ts`, `objects/layers/terrestrial/triangle-alpha-atlas.test.ts`,
-  `objects/raster/observed/observed-geotiff.test.ts`); Vitest skips `src/objects/**/*.test.{ts,mts}`. `pnpm test:bake-objects`
-  (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
+  `objects/raster/observed/observed-geotiff.test.ts`); `pnpm test:packages` runs them with the rest of the package.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
   kinds, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
   render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `packages/bake/cli/prepare-nebulae.mts` is its

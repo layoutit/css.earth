@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { createPreparedEllipsoidProjection } from '../prepared-data/prepared-ellipsoid-projection.js';
 import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';

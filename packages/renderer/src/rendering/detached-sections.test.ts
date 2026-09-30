@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { sectionElements, sectionPlaceholder, showSection } from './detached-sections.js';
 
@@ -10,19 +12,19 @@ test('a section waits in its template until shown, and goes back into one when h
     <template data-detached-section><div class="card" data-id="b"><p class="row">b</p></div></template></main>`);
   const main = document.querySelector('main')!;
   const cards = sectionElements(main, '.card');
-  expect(cards.map(card => card.dataset.id)).toEqual(['a', 'b']);
-  expect(sectionElements(main, '.row').map(row => row.textContent)).toEqual(['a', 'b']);
+  assert.deepEqual(cards.map(card => card.dataset.id), ['a', 'b']);
+  assert.deepEqual(sectionElements(main, '.row').map(row => row.textContent), ['a', 'b']);
   const [a, b] = cards as [HTMLElement, HTMLElement];
-  expect(mounted(b)).toBe(false);
+  assert.equal(mounted(b), false);
   showSection(b, true);
   showSection(a, false);
-  expect([mounted(a), mounted(b)]).toEqual([false, true]);
-  expect([...main.children].map(child => child.localName)).toEqual(['template', 'div']);
+  assert.deepEqual(([mounted(a), mounted(b)]), [false, true]);
+  assert.deepEqual([...main.children].map(child => child.localName), ['template', 'div']);
   // A moved placeholder mounts its section where it now stands.
   const other = document.createElement('section'); main.append(other);
   other.append(sectionPlaceholder(a));
   showSection(a, true);
-  expect(a.parentElement).toBe(other);
+  assert.equal(a.parentElement, other);
 });
 
 test('a section in a template nested inside another is found in its content', () => {
@@ -34,8 +36,8 @@ test('a section in a template nested inside another is found in its content', ()
   sectionElements(document.querySelector('main')!, '.card')[0]!.append(inner);
   const row = document.createElement('p'); row.className = 'row';
   inner.content.append(row);
-  expect(inner.children.length).toBe(0);
-  expect(sectionElements(document.querySelector('main')!, '.row')).toEqual([row]);
+  assert.equal(inner.children.length, 0);
+  assert.deepEqual(sectionElements(document.querySelector('main')!, '.row'), [row]);
 });
 
 test('a server DOM keeps a detached section in its markup', () => {
@@ -46,7 +48,7 @@ test('a server DOM keeps a detached section in its markup', () => {
   // Re-parsing the serialized page finds the section in its template, and it mounts again.
   const again = parseHTML(main.outerHTML).document.querySelector('main')!;
   const cards = sectionElements(again, '.card');
-  expect(cards.map(card => card.dataset.id)).toEqual(['a', 'b']);
+  assert.deepEqual(cards.map(card => card.dataset.id), ['a', 'b']);
   showSection(cards[0]!, true);
-  expect([...again.querySelectorAll('.card')].map(card => (card as HTMLElement).dataset.id)).toEqual(['a', 'b']);
+  assert.deepEqual([...again.querySelectorAll('.card')].map(card => (card as HTMLElement).dataset.id), ['a', 'b']);
 });

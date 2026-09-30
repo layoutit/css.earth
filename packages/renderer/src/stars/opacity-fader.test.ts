@@ -1,4 +1,6 @@
-import {expect,test} from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import {createOpacityFader} from './opacity-fader.js';
 import {opacityClockFor} from './opacity-clock.js';
 
@@ -17,25 +19,25 @@ test('numeric alpha combines hover weight, reverses continuously, and can be rea
   const fader = createOpacityFader(clock);
   fader.multiply(element, .5);
   fader.set(element, 1, 200); clock.frame(100);
-  expect(Number(element.style.opacity)).toBe(.25);
-  expect(fader.current(element)).toBe(.5);
+  assert.equal(Number(element.style.opacity), .25);
+  assert.equal(fader.current(element), .5);
   fader.set(element, 0, 200); clock.frame(100);
-  expect(Number(element.style.opacity)).toBe(.125);
+  assert.equal(Number(element.style.opacity), .125);
   fader.cancel(element);
   fader.set(element, 1, 200); clock.frame(100);
-  expect(fader.current(element)).toBe(.5625);
-  clock.frame(100); expect(fader.current(element)).toBe(1);
-  fader.set(element, 0); expect(element.style.opacity).toBe('0');
-  expect(clock.pending.size).toBe(0); fader.destroy();
+  assert.equal(fader.current(element), .5625);
+  clock.frame(100); assert.equal(fader.current(element), 1);
+  fader.set(element, 0); assert.equal(element.style.opacity, '0');
+  assert.equal(clock.pending.size, 0); fader.destroy();
 });
 
 test('interpolates on wall time, retargets from the current value, and avoids Web Animations',()=>{
   const clock=new Clock(),element=new Element(),fader=createOpacityFader(clock);
-  fader.set(element as unknown as HTMLElement,1,100);expect(element.style.opacity).toBe('0');expect(clock.pending.size).toBe(1);
-  clock.frame(50);expect(Number(element.style.opacity)).toBeCloseTo(.5);
-  fader.set(element as unknown as HTMLElement,0,100);expect(clock.pending.size).toBe(1);
-  clock.frame(25);expect(Number(element.style.opacity)).toBeCloseTo(.375);
-  clock.frame(75);expect(element.style.opacity).toBe('0');
+  fader.set(element as unknown as HTMLElement,1,100);assert.equal(element.style.opacity, '0');assert.equal(clock.pending.size, 1);
+  clock.frame(50);assert.ok(Math.abs(Number(element.style.opacity) - (.5)) < 10 ** -2 / 2, `${Number(element.style.opacity)} is not close to ${.5}`);
+  fader.set(element as unknown as HTMLElement,0,100);assert.equal(clock.pending.size, 1);
+  clock.frame(25);assert.ok(Math.abs(Number(element.style.opacity) - (.375)) < 10 ** -2 / 2, `${Number(element.style.opacity)} is not close to ${.375}`);
+  clock.frame(75);assert.equal(element.style.opacity, '0');
   fader.destroy();
 });
 
@@ -45,16 +47,16 @@ test('disabling animation settles existing tracks and new targets without contin
   fader.set(target, 1, 200); fader.multiply(target, .5, 120);
   clock.frame(50);
   fader.setAnimationEnabled(false);
-  expect(element.style.opacity).toBe('0.5');
-  expect(fader.stats().active).toBe(0);
-  expect(clock.pending.size).toBe(0);
+  assert.equal(element.style.opacity, '0.5');
+  assert.equal(fader.stats().active, 0);
+  assert.equal(clock.pending.size, 0);
   fader.multiply(target, 1, 120); fader.set(target, .75, 200);
-  expect(element.style.opacity).toBe('0.75');
-  expect(clock.pending.size).toBe(0);
+  assert.equal(element.style.opacity, '0.75');
+  assert.equal(clock.pending.size, 0);
   fader.setAnimationEnabled(true);
-  expect(clock.pending.size).toBe(0);
+  assert.equal(clock.pending.size, 0);
   fader.set(target, 0, 200); clock.frame(100);
-  expect(element.style.opacity).toBe('0.375');
+  assert.equal(element.style.opacity, '0.375');
   fader.destroy();
 });
 
@@ -63,33 +65,33 @@ test('suppression preserves a running fade and resumes its current value without
   const target = element as unknown as HTMLElement;
   fader.set(target, 1, 200); clock.frame(50);
   fader.suppress(target, true);
-  expect(element.style.opacity).toBe('0');
+  assert.equal(element.style.opacity, '0');
   clock.frame(50);
-  expect(element.style.opacity).toBe('0');
-  expect(fader.current(target)).toBe(.5);
+  assert.equal(element.style.opacity, '0');
+  assert.equal(fader.current(target), .5);
   fader.suppress(target, false);
-  expect(element.style.opacity).toBe('0.5');
+  assert.equal(element.style.opacity, '0.5');
   clock.frame(100);
-  expect(element.style.opacity).toBe('1');
-  expect(clock.pending.size).toBe(0);
+  assert.equal(element.style.opacity, '1');
+  assert.equal(clock.pending.size, 0);
   fader.destroy();
 });
 
 test('same target does not restart, duration zero adopts immediately, and cancel stops work',()=>{
   const clock=new Clock(),element=new Element(),second=new Element(),fader=createOpacityFader(clock);
   fader.set(element as unknown as HTMLElement,1,100);const firstFrame=1;
-  fader.set(element as unknown as HTMLElement,1,100);expect(clock.next).toBe(firstFrame);
-  fader.set(second as unknown as HTMLElement,.4);expect(second.style.opacity).toBe('0.4');
-  fader.cancel(element as unknown as HTMLElement);expect(clock.cancelled).toEqual([firstFrame]);expect(clock.pending.size).toBe(0);
-  clock.frame(100);expect(element.style.opacity).toBe('0');fader.destroy();fader.destroy();
+  fader.set(element as unknown as HTMLElement,1,100);assert.equal(clock.next, firstFrame);
+  fader.set(second as unknown as HTMLElement,.4);assert.equal(second.style.opacity, '0.4');
+  fader.cancel(element as unknown as HTMLElement);assert.deepEqual(clock.cancelled, [firstFrame]);assert.equal(clock.pending.size, 0);
+  clock.frame(100);assert.equal(element.style.opacity, '0');fader.destroy();fader.destroy();
 });
 
 test('preserving a deadline retargets from the current value without extending the fade',()=>{
   const clock=new Clock(),element=new Element(),fader=createOpacityFader(clock);
   fader.set(element as unknown as HTMLElement,1,100);clock.frame(40);
   fader.set(element as unknown as HTMLElement,.5,100,true);clock.frame(30);
-  expect(Number(element.style.opacity)).toBeCloseTo(.45);
-  clock.frame(30);expect(element.style.opacity).toBe('0.5');fader.destroy();
+  assert.ok(Math.abs(Number(element.style.opacity) - (.45)) < 10 ** -2 / 2, `${Number(element.style.opacity)} is not close to ${.45}`);
+  clock.frame(30);assert.equal(element.style.opacity, '0.5');fader.destroy();
 });
 
 test('duration zero clears a completed fade before the element is admitted again',()=>{
@@ -98,7 +100,7 @@ test('duration zero clears a completed fade before the element is admitted again
   fader.set(element as unknown as HTMLElement,0,100);clock.frame(100);
   fader.set(element as unknown as HTMLElement,0,0);
   fader.set(element as unknown as HTMLElement,1,100);clock.frame(50);
-  expect(Number(element.style.opacity)).toBeCloseTo(.5);fader.destroy();
+  assert.ok(Math.abs(Number(element.style.opacity) - (.5)) < 10 ** -2 / 2, `${Number(element.style.opacity)} is not close to ${.5}`);fader.destroy();
 });
 
 test('cancelling a pool retains unfinished fades and stops after its final active member', () => {
@@ -108,16 +110,16 @@ test('cancelling a pool retains unfinished fades and stops after its final activ
   const fading = new Element();
   fader.set(fading as unknown as HTMLElement, 1, 100);
   for (const element of settled) fader.cancel(element as unknown as HTMLElement);
-  expect(clock.pending.size).toBe(1);
+  assert.equal(clock.pending.size, 1);
   clock.frame(50);
-  expect(Number(fading.style.opacity)).toBeCloseTo(.5);
+  assert.ok(Math.abs(Number(fading.style.opacity) - (.5)) < 10 ** -2 / 2, `${Number(fading.style.opacity)} is not close to ${.5}`);
   fader.set(fading as unknown as HTMLElement, .8, 0);
-  expect(clock.pending.size).toBe(0);
-  expect(fading.style.opacity).toBe('0.8');
+  assert.equal(clock.pending.size, 0);
+  assert.equal(fading.style.opacity, '0.8');
   fader.set(fading as unknown as HTMLElement, 0, 100);
   clock.frame(100);
-  expect(fading.style.opacity).toBe('0');
-  expect(clock.pending.size).toBe(0);
+  assert.equal(fading.style.opacity, '0');
+  assert.equal(clock.pending.size, 0);
   fader.destroy();
 });
 
@@ -134,14 +136,14 @@ test('camera commits and all fade owners flush each element only once in one RAF
     first.multiply(element, .5);
     first.suppress(element, false);
   });
-  expect(window.pending.size).toBe(1);
+  assert.equal(window.pending.size, 1);
   window.frame(100);
-  expect(writes).toHaveLength(1);
-  expect(Number(alpha)).toBeCloseTo(.25);
-  expect(Number(star.style.opacity)).toBe(.5);
+  assert.equal(writes.length, 1);
+  assert.ok(Math.abs(Number(alpha) - (.25)) < 10 ** -2 / 2, `${Number(alpha)} is not close to ${.25}`);
+  assert.equal(Number(star.style.opacity), .5);
   window.frame(100);
-  expect(Number(alpha)).toBe(.4);
-  expect(window.pending.size).toBe(0);
+  assert.equal(Number(alpha), .4);
+  assert.equal(window.pending.size, 0);
   first.destroy(); second.destroy();
 });
 
@@ -149,14 +151,14 @@ test('culled and suppressed fades stop ticking and reveal at their current wall 
   const window = new Clock(), fader = createOpacityFader(window), e = new Element() as unknown as HTMLElement;
   fader.set(e, 1, 200); window.frame(50);
   fader.visible(e, false);
-  expect(e.style.opacity).toBe('0'); expect(window.pending.size).toBe(0);
+  assert.equal(e.style.opacity, '0'); assert.equal(window.pending.size, 0);
   window.frame(100);
   fader.visible(e, true);
-  expect(Number(e.style.opacity)).toBe(.75);
-  fader.suppress(e, true); expect(window.pending.size).toBe(0);
+  assert.equal(Number(e.style.opacity), .75);
+  fader.suppress(e, true); assert.equal(window.pending.size, 0);
   window.frame(100);
   fader.suppress(e, false);
-  expect(e.style.opacity).toBe('1'); expect(window.pending.size).toBe(0);
+  assert.equal(e.style.opacity, '1'); assert.equal(window.pending.size, 0);
   fader.destroy();
 });
 
@@ -164,11 +166,11 @@ test('hover uses the existing 120ms ease, reverses continuously and stops at the
   const window = new Clock(), fader = createOpacityFader(window), e = new Element() as unknown as HTMLElement;
   fader.set(e, 1); fader.multiply(e, .5); fader.multiply(e, 1, 120);
   window.frame(60); const halfway = Number(e.style.opacity);
-  expect(halfway).toBeCloseTo(.5 + .5 * .802403, 5);
+  assert.ok(Math.abs(halfway - (.5 + .5 * .802403)) < 10 ** -5 / 2, `${halfway} is not close to ${.5 + .5 * .802403}`);
   fader.multiply(e, .5, 120);
-  expect(Number(e.style.opacity)).toBe(halfway);
-  window.frame(120); expect(Number(e.style.opacity)).toBe(.5);
-  expect(window.pending.size).toBe(0); fader.destroy();
+  assert.equal(Number(e.style.opacity), halfway);
+  window.frame(120); assert.equal(Number(e.style.opacity), .5);
+  assert.equal(window.pending.size, 0); fader.destroy();
 });
 
 test('retiring a large set does not repeatedly advance surviving fades between animation frames', () => {
@@ -187,16 +189,16 @@ test('retiring a large set does not repeatedly advance surviving fades between a
   // been presented. Previously each removal resampled every surviving fade.
   window.performance.now = () => (window.now += .001);
   for (const e of retiring) { fader.visible(e, false); fader.cancel(e); }
-  expect(writes).toBe(retiring.length);
-  expect(active.every(e => e.style.opacity === '0.25')).toBe(true);
-  expect(unrelated.style.opacity).toBe('0.25');
-  expect(window.pending.size).toBe(1);
+  assert.equal(writes, retiring.length);
+  assert.equal(active.every(e => e.style.opacity === '0.25'), true);
+  assert.equal(unrelated.style.opacity, '0.25');
+  assert.equal(window.pending.size, 1);
   writes = 0; window.frame(50);
-  expect(writes).toBe(active.length + 1);
-  expect(Number(active[0].style.opacity)).toBeCloseTo(window.now / 200);
+  assert.equal(writes, active.length + 1);
+  assert.ok(Math.abs(Number(active[0].style.opacity) - (window.now / 200)) < 10 ** -2 / 2, `${Number(active[0].style.opacity)} is not close to ${window.now / 200}`);
   window.frame(200);
-  expect(active.every(e => e.style.opacity === '1')).toBe(true);
-  expect(window.pending.size).toBe(0);
+  assert.equal(active.every(e => e.style.opacity === '1'), true);
+  assert.equal(window.pending.size, 0);
   fader.destroy(); other.destroy();
 });
 
@@ -206,43 +208,43 @@ test('repeated setters publish their own values immediately without advancing ot
   fader.set(fading, 1, 200); window.frame(50);
   window.now = 75;
   fader.set(changing, .3); fader.multiply(changing, .5);
-  expect(changing.style.opacity).toBe('0.15');
-  expect(fading.style.opacity).toBe('0.25');
-  expect(fader.current(fading)).toBe(.375);
+  assert.equal(changing.style.opacity, '0.15');
+  assert.equal(fading.style.opacity, '0.25');
+  assert.equal(fader.current(fading), .375);
   window.frame(25);
-  expect(fading.style.opacity).toBe('0.5');
+  assert.equal(fading.style.opacity, '0.5');
   fader.destroy();
 });
 
 test('a window has one frame clock, which requests a browser frame only while an owner has work', () => {
   const window = new Clock(), clock = opacityClockFor(window);
-  expect(opacityClockFor(window)).toBe(clock);
-  expect(opacityClockFor(new Clock())).not.toBe(clock);
+  assert.equal(opacityClockFor(window), clock);
+  assert.notEqual(opacityClockFor(new Clock()), clock);
   const ran: string[] = [];
   const first = clock.request(() => ran.push('first')), second = clock.request(() => ran.push('second'), 'input');
-  expect(window.pending.size).toBe(1);
+  assert.equal(window.pending.size, 1);
   clock.cancel(first);
   window.frame(16);
-  expect(ran).toEqual(['second']);
-  expect(window.pending.size).toBe(0);
+  assert.deepEqual(ran, ['second']);
+  assert.equal(window.pending.size, 0);
   // An owner that cancels its last request stops the browser frame; the clock itself is never released.
   clock.cancel(clock.request(() => ran.push('cancelled')));
-  expect(window.pending.size).toBe(0);
-  expect(window.cancelled).toHaveLength(1);
+  assert.equal(window.pending.size, 0);
+  assert.equal(window.cancelled.length, 1);
   clock.request(() => ran.push('later')); window.frame(16);
-  expect(ran).toEqual(['second', 'later']);
-  expect(second).toBeGreaterThan(first);
+  assert.deepEqual(ran, ['second', 'later']);
+  assert.ok(second > first);
 });
 
 test('an owner that asks for it gets elements hidden while their opacity is 0, and shown as soon as it rises',()=>{
   const clock=new Clock(),element=new Element(),plain=new Element(),fader=createOpacityFader(clock,undefined,{hideAtZero:true}),other=createOpacityFader(clock);
   element.style.visibility='hidden';
   fader.set(element as unknown as HTMLElement,1,100);clock.frame(50);
-  expect(Number(element.style.opacity)).toBeCloseTo(.5);expect(element.style.visibility).toBe('');
+  assert.ok(Math.abs(Number(element.style.opacity) - (.5)) < 10 ** -2 / 2, `${Number(element.style.opacity)} is not close to ${.5}`);assert.equal(element.style.visibility, '');
   fader.set(element as unknown as HTMLElement,0,100);clock.frame(100);
-  expect(element.style.opacity).toBe('0');expect(element.style.visibility).toBe('hidden');
+  assert.equal(element.style.opacity, '0');assert.equal(element.style.visibility, 'hidden');
   other.set(plain as unknown as HTMLElement,0);other.set(plain as unknown as HTMLElement,1);
-  expect(plain.style.visibility).toBeUndefined();
+  assert.equal(plain.style.visibility, undefined);
   fader.destroy();other.destroy();
 });
 
@@ -252,8 +254,8 @@ test('an opacity that rounds to 0 in 8-bit colour is written once, as 0', () => 
   const tracked={style} as unknown as HTMLElement;
   fader.set(tracked,1);clock.frame(16);writes.length=0;
   for(const faint of [.0019,.0015,.0011,.0004]){fader.set(tracked,faint);clock.frame(16);}
-  expect(writes).toEqual(['0']);
+  assert.deepEqual(writes, ['0']);
   fader.set(tracked,.002);clock.frame(16);
-  expect(writes).toEqual(['0','0.002']);
+  assert.deepEqual(writes, ['0','0.002']);
   fader.destroy();
 });

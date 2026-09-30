@@ -12,9 +12,6 @@
   ],
   "compilerOptions": {
     "paths": {
-      "vitest": [
-        "../packages/engine/node_modules/vitest"
-      ],
       "/site/*": [
         "./*"
       ],

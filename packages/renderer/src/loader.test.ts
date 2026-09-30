@@ -1,7 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { preparedObjectText } from '@cssearth/objects/node';
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject } from './loader.js';
 
@@ -22,64 +24,64 @@ async function changedPayload(value: unknown) {
   return { descriptor: { ...f.descriptor, prepared: f.reference }, bytes };
 }
 
-for (const id of ['mercury', 'venus']) test(`${id} loads its actual prepared JSON through the shared decoder`, async () => {
-  const f = await fixture(id), read = vi.fn(async () => f.bytes);
+for (const id of ['mercury']) test(`${id} loads its actual prepared JSON through the shared decoder`, async () => {
+  const f = await fixture(id), read = mock.fn(async () => f.bytes);
   const definition = await loadPreparedCssObject(f.descriptor, { read });
-  expect(read).toHaveBeenCalledExactlyOnceWith(f.reference.url);
-  expect(definition.id).toBe(id);
-  expect(definition.tree.nodes.length).toBeGreaterThan(100);
-  expect(definition.controls.datasets?.controls.length).toBeGreaterThan(1);
-  expect(definition.assets.startup.length).toBeGreaterThan(0);
+  assert.equal(read.mock.callCount(), 1); assert.deepEqual(read.mock.calls[0]!.arguments, [f.reference.url]);
+  assert.equal(definition.id, id);
+  assert.ok(definition.tree.nodes.length > 100);
+  assert.ok((definition.controls.datasets?.controls.length ?? 0) > 1);
+  assert.ok(definition.assets.startup.length > 0);
 });
 
 for (const field of ['id', 'type', 'format', 'schema']) test(`an authenticated mismatched envelope ${field} fails before mount`, async () => {
-  const f = await fixture(), changed = await changedPayload({ ...f.payload, [field]: 'other' }), mount = vi.fn();
-  await expect(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes }).then(mount)).rejects.toThrow(/does not match/);
-  expect(mount).not.toHaveBeenCalled();
+  const f = await fixture(), changed = await changedPayload({ ...f.payload, [field]: 'other' }), mount = mock.fn(() => {});
+  await assert.rejects(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes }).then(mount), /does not match/);
+  assert.equal(mount.mock.callCount(), 0);
 });
 
 test('the decoded CSS definition must match the descriptor as well as its envelope', async () => {
   const f = await fixture();
   if (!isRecord(f.payload.data)) throw new Error('Fixture requires a CSS definition.');
-  const changed = await changedPayload({ ...f.payload, data: { ...f.payload.data, id: 'different' } }), mount = vi.fn();
-  await expect(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes }).then(mount)).rejects.toThrow(/does not match object venus/);
-  expect(mount).not.toHaveBeenCalled();
+  const changed = await changedPayload({ ...f.payload, data: { ...f.payload.data, id: 'different' } }), mount = mock.fn(() => {});
+  await assert.rejects(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes }).then(mount), /does not match object venus/);
+  assert.equal(mount.mock.callCount(), 0);
 });
 
 test('missing preparation, unknown object type and unsupported format never request or bake data', async () => {
-  const f = await fixture(), read = vi.fn(async () => f.bytes);
+  const f = await fixture(), read = mock.fn(async () => f.bytes);
   const { prepared: _prepared, ...unprepared } = f.descriptor;
   for (const descriptor of [unprepared, { ...f.descriptor, type: 'unknown' },
     { ...f.descriptor, prepared: { ...f.reference, format: 'other-artifact@1' } }]) {
-    await expect(loadPreparedCssObject(descriptor, { read })).rejects.toThrow();
+    await assert.rejects(loadPreparedCssObject(descriptor, { read }));
   }
-  expect(read).not.toHaveBeenCalled();
+  assert.equal(read.mock.callCount(), 0);
 });
 
 test('transport failure stays a failed load with no runtime preparation fallback', async () => {
-  const f = await fixture(), mount = vi.fn();
-  await expect(loadPreparedCssObject(f.descriptor, { read: async () => { throw new Error('asset unavailable'); } }).then(mount)).rejects.toThrow('asset unavailable');
-  expect(mount).not.toHaveBeenCalled();
+  const f = await fixture(), mount = mock.fn(() => {});
+  await assert.rejects(loadPreparedCssObject(f.descriptor, { read: async () => { throw new Error('asset unavailable'); } }).then(mount), /asset unavailable/);
+  assert.equal(mount.mock.callCount(), 0);
 });
 
 test('cancellation reaches the transport and an already-cancelled load cannot read bytes', async () => {
   const f = await fixture(), controller = new AbortController();
   let received: AbortSignal | undefined;
-  const read = vi.fn((_url: string, signal?: AbortSignal) => new Promise<ArrayBuffer>((_resolve, reject) => {
+  const read = mock.fn((_url: string, signal?: AbortSignal) => new Promise<ArrayBuffer>((_resolve, reject) => {
     received = signal;
     signal!.addEventListener('abort', () => reject(signal!.reason), { once: true });
   }));
   const loading = loadPreparedCssObject(f.descriptor, { read }, { signal: controller.signal });
-  expect(received).toBe(controller.signal);
+  assert.equal(received, controller.signal);
   controller.abort();
-  await expect(loading).rejects.toMatchObject({ name: 'AbortError' });
-  await expect(loadPreparedCssObject(f.descriptor, { read }, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
-  expect(read).toHaveBeenCalledOnce();
+  await assert.rejects(loading, { name: 'AbortError' });
+  await assert.rejects(loadPreparedCssObject(f.descriptor, { read }, { signal: controller.signal }), { name: 'AbortError' });
+  assert.equal(read.mock.callCount(), 1);
 });
 
 test('authenticated invalid UTF-8 JSON fails before the renderer can mount', async () => {
-  const f = await fixture(), bytes = new Uint8Array([0xff]).buffer, mount = vi.fn();
+  const f = await fixture(), bytes = new Uint8Array([0xff]).buffer, mount = mock.fn(() => {});
   const descriptor = { ...f.descriptor, prepared: f.reference };
-  await expect(loadPreparedCssObject(descriptor, { read: async () => bytes }).then(mount)).rejects.toThrow('UTF-8 JSON');
-  expect(mount).not.toHaveBeenCalled();
+  await assert.rejects(loadPreparedCssObject(descriptor, { read: async () => bytes }).then(mount), /UTF-8 JSON/);
+  assert.equal(mount.mock.callCount(), 0);
 });

@@ -3,3 +3,4 @@
 // a test inspects or deliberately corrupts it.
 export * from './object-test-data.js';
 export * from './test-values.js';
+export * from './test-environment.js';

@@ -1,7 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { preparedObjectText } from '@cssearth/objects/node';
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { loadNavigableObject } from './navigable-object-mount.js';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
@@ -34,32 +36,32 @@ test('preflight and native mount share one authenticated definition and transfer
   const { descriptor, bytes } = await authenticateFixture(await preparedFixture());
   const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
   if (!frame) throw new Error('Venus fixture needs its prepared world frame.');
-  const read = vi.fn(async () => bytes), destroyed = vi.fn();
-  const bind = vi.fn((definition: ObjectRuntimeDefinition, worldFrame: NonNullable<ReturnType<typeof parsePreparedWorldCameraFrame>>) => (_stage: HTMLElement, options: Pick<ObjectMountOptions, 'preparedResources'>) => {
+  const read = mock.fn(async () => bytes), destroyed = mock.fn(() => {});
+  const bind = mock.fn((definition: ObjectRuntimeDefinition, worldFrame: NonNullable<ReturnType<typeof parsePreparedWorldCameraFrame>>) => (_stage: HTMLElement, options: Pick<ObjectMountOptions, 'preparedResources'>) => {
     if (!options.preparedResources) throw new Error('Mount must receive preflight resources.');
     const resources = options.preparedResources.claim(definition.assets, {});
-    expect(worldFrame.referenceFrame).toBe('sun-icrf');
+    assert.equal(worldFrame.referenceFrame, 'sun-icrf');
     return { ready: Promise.resolve(), pause() {}, resume() {}, destroy() { resources.destroy(); destroyed(); },
       sharedView: { capture: () => null, restore: async () => false, subscribe: () => () => {} } };
   });
   const factory = await loadNavigableObject(descriptor, { read }, bind);
-  expect(read).toHaveBeenCalledOnce();
+  assert.equal(read.mock.callCount(), 1);
   const signal = new AbortController();
   const prepared = await factory.navigation!.prepare({ signal: signal.signal, getView: () => ({
     world: { referenceFrame: 'sun-icrf', epochJdTt: frame.epochJdTt,
       pose: { positionM: [0, 0, 1e12], orientationXyzw: [0, 0, 0, 1] } },
     viewport: { focalPixels: 1000, principalOffsetPixels: [0, 0] },
   }) });
-  expect(bind).not.toHaveBeenCalled();
-  expect(prepared.definition.tree.activationGroups?.length).toBeGreaterThan(0);
+  assert.equal(bind.mock.callCount(), 0);
+  assert.ok((prepared.definition.tree.activationGroups?.length ?? 0) > 0);
   const mount = factory({} as HTMLElement, { preparedResources: prepared.resources });
   await mount.ready;
-  expect(read).toHaveBeenCalledOnce();
-  expect(bind.mock.calls[0][0]).toBe(prepared.definition);
+  assert.equal(read.mock.callCount(), 1);
+  assert.equal(bind.mock.calls[0]!.arguments[0], prepared.definition);
   signal.abort(); prepared.resources.destroy();
-  expect(destroyed).not.toHaveBeenCalled();
+  assert.equal(destroyed.mock.callCount(), 0);
   mount.destroy();
-  expect(destroyed).toHaveBeenCalledOnce();
+  assert.equal(destroyed.mock.callCount(), 1);
 });
 
 test('authenticated transport without prepared activation groups fails before native binding', async () => {
@@ -67,8 +69,7 @@ test('authenticated transport without prepared activation groups fails before na
   const tree: { activationGroups?: readonly (readonly number[])[] } = fixture.payload.data.tree;
   delete tree.activationGroups;
   const { descriptor, bytes } = await authenticateFixture(fixture);
-  const bind = vi.fn();
-  await expect(loadNavigableObject(descriptor, { read: async () => bytes }, bind))
-    .rejects.toThrow(/activation groups must be prepared/);
-  expect(bind).not.toHaveBeenCalled();
+  const bind = mock.fn<NonNullable<Parameters<typeof loadNavigableObject>[2]>>(() => { throw new Error('An unauthenticated tree must not bind.'); });
+  await assert.rejects(loadNavigableObject(descriptor, { read: async () => bytes }, bind), /activation groups must be prepared/);
+  assert.equal(bind.mock.callCount(), 0);
 });

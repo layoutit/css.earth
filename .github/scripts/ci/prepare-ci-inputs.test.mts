@@ -122,13 +122,13 @@ test('universe selection keeps registry JSON and actual renderer banks without u
     'milky-way/slices/z/one.webp', 'milky-way/volume.json',
     'mimas/features.json', 'mimas/runtime.json', 'mimas/scene.json',
     'new-body/new-body-photometric-phase-curve.svg', 'new-body/runtime.json', 'new-body/scene.json',
-    'stellar-neighbourhood/stars.bin', 'stellar-neighbourhood/stars.json',
+    'stellar-neighbourhood/point-atlas.webp', 'stellar-neighbourhood/stars.bin', 'stellar-neighbourhood/stars.json',
   ]);
   assert.equal(new Set(assets.map(asset => asset.file)).size, assets.length);
   assert.deepEqual(assets.filter(asset => asset.file.startsWith(resolve(root, 'public') + '/')).map(asset => asset.filename).sort(),
     ['features.json', 'new-body-photometric-phase-curve.svg']);
   assert.deepEqual(assets.filter(asset => !asset.filename.endsWith('.json')).map(asset => `${asset.id}/${asset.filename}`).sort(), [
-    'heliosphere/atlas.webp', 'milky-way/slices/z/one.webp', 'new-body/new-body-photometric-phase-curve.svg', 'stellar-neighbourhood/stars.bin',
+    'heliosphere/atlas.webp', 'milky-way/slices/z/one.webp', 'new-body/new-body-photometric-phase-curve.svg', 'stellar-neighbourhood/point-atlas.webp', 'stellar-neighbourhood/stars.bin',
   ]);
 });
 

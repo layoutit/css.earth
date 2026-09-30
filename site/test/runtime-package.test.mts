@@ -1,14 +1,12 @@
-// One runner for the prepared runtime contract of every registered object, replacing the
-// per-body runtime-contract files that stamped the same checks with the body's name filled in.
-// CSSEARTH_TEST_OBJECTS=<id>[,<id>] limits a run to those bodies (see anchor-table.mts).
+// The prepared runtime contract and the shared selection owner, on the bodies with the most kinds of control. The code is
+// the same for every body, and each body's own data is checked when it is prepared. CSSEARTH_TEST_OBJECTS=<id>[,<id>] runs
+// those bodies instead (see anchor-table.mts).
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { objectRuntimePackageTests, preparedSelectionFixture } from '../../packages/renderer/test/node/fixtures/object-runtime-package.mts';
-import { required } from '@cssearth/objects/node/contract';
+import { loadObjectTestDefinition, required } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { selectedObjectIds } from './fixtures/anchor-table.mts';
 import { projectRoot } from './fixtures/objects.mts';
@@ -19,14 +17,6 @@ function sameNodes(actual: ArrayLike<unknown>, expected: ArrayLike<unknown>) {
   return actual.length === expected.length && Array.prototype.every.call(actual, (node, index) => node === expected[index]);
 }
 
-async function preparedRuntime(id: string): Promise<unknown> {
-  const text = await readFile(resolve(projectRoot, 'src/objects', id, 'prepared/runtime.json'), 'utf8').catch((error: unknown) => {
-    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
-    throw error;
-  });
-  return text === null ? null : JSON.parse(text);
-}
-
 /** The dataset ids the prepared controls publish, in their published order. */
 function datasetIds(definition: unknown): string[] {
   const controls = requireRecord(requireRecord(definition).controls, 'runtime controls');
@@ -34,9 +24,9 @@ function datasetIds(definition: unknown): string[] {
   return datasets.map((dataset, index) => requireString(requireRecord(dataset, `dataset ${index}`).id, `dataset ${index} id`));
 }
 
-for (const id of selectedObjectIds(SCENE_OBJECTS.map(object => object.id))) {
-  const definition = await preparedRuntime(id);
-  if (definition === null) continue;
+const ids = process.env.CSSEARTH_TEST_OBJECTS ? selectedObjectIds(SCENE_OBJECTS.map(object => object.id)) : ['earth', 'moon', 'saturn'];
+for (const id of ids) {
+  const definition = await loadObjectTestDefinition(id, projectRoot);
   objectRuntimePackageTests(definition);
 
   test(`${id}: every declared toggle commits through the shared selection owner without touching the retained tree`, async () => {

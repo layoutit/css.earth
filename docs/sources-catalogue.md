@@ -98,7 +98,7 @@ For source identities, bindings or catalogue code, run:
 
 ```sh
 pnpm install
-pnpm test:node
+pnpm test:site
 ```
 
 This is the broad native suite. For a focused edit, run the affected tests under

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { test } from "vitest";
+import { test } from 'node:test';
 import { createExposure, screenFactor, starPresentation } from "./star-photometry.js";
 import { STAR_LABEL_POLICY, selectStarLabel } from "./star-labels.js";
 

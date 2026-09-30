@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { surfaceFeatureBankIndex } from './surface-feature-banks.js';
 
 test('surface feature bank addresses are stable and bounded', () => {

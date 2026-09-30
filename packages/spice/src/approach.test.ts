@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { parseApproachRecipe } from './approach.js';
 
 test('an approach recipe states its schema, NAIF ids, window and inbound time', () => {

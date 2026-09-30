@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 import { parseAstroqueryAnswer } from './astroquery.js';
 import { parsePyuvdataUvfitsAnswer } from './pyuvdata.js';
 

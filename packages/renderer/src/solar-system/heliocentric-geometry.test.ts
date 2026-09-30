@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, rotationFromMatrix3d,
   offAxisFrame, silhouetteEllipse, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle } from './heliocentric-geometry.js';
 

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { prepareHyperbolicPath } from "./hyperbolic-path.ts";
 
 // Independent polar conic: a=-10 au, e=2 has p=a(1-e²)=30 au.

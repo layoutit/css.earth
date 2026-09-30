@@ -1,4 +1,6 @@
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
@@ -7,34 +9,34 @@ const world = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5,
 const viewport: WorldCameraViewport = { focalPixels: 800, principalOffsetPixels: [4, -3] };
 
 test('world publication hub replays the latest sample and detaches subscribers', () => {
-  const hub = createWorldNavigationPublicationHub(vi.fn());
-  const listener = vi.fn();
+  const hub = createWorldNavigationPublicationHub(mock.fn(() => {}));
+  const listener = mock.fn(() => {});
   hub.publish(world, viewport);
   const unsubscribe = hub.subscribe(listener);
-  expect(listener).toHaveBeenCalledExactlyOnceWith(world, viewport);
+  assert.equal(listener.mock.callCount(), 1); assert.deepEqual(listener.mock.calls[0]!.arguments, [world, viewport]);
   unsubscribe();
   hub.publish(world, { ...viewport, focalPixels: 801 });
-  expect(listener).toHaveBeenCalledOnce();
+  assert.equal(listener.mock.callCount(), 1);
 });
 
 test('world publication hub clears all subscribers after a listener error', () => {
-  const onError = vi.fn(), hub = createWorldNavigationPublicationHub(onError);
-  const bad = vi.fn(() => { throw new Error('context publish failed'); });
-  const good = vi.fn();
+  const onError = mock.fn(() => {}), hub = createWorldNavigationPublicationHub(onError);
+  const bad = mock.fn(() => { throw new Error('context publish failed'); });
+  const good = mock.fn(() => {});
   hub.subscribe(bad); hub.subscribe(good);
   hub.publish(world, viewport);
-  expect(onError).toHaveBeenCalledOnce();
-  expect(good).not.toHaveBeenCalled();
+  assert.equal(onError.mock.callCount(), 1);
+  assert.equal(good.mock.callCount(), 0);
   hub.publish(world, viewport);
-  expect(bad).toHaveBeenCalledOnce();
+  assert.equal(bad.mock.callCount(), 1);
 });
 
 test('equivalent publications do not repeat world work, but every camera dependency invalidates', () => {
-  const hub = createWorldNavigationPublicationHub(vi.fn()), listener = vi.fn();
+  const hub = createWorldNavigationPublicationHub(mock.fn(() => {})), listener = mock.fn(() => {});
   hub.subscribe(listener);
   hub.publish(world, viewport);
   hub.publish(structuredClone(world), structuredClone(viewport));
-  expect(listener).toHaveBeenCalledTimes(1);
+  assert.equal(listener.mock.callCount(), 1);
   for (const next of [
     { ...world, epochJdTt: world.epochJdTt + 1 },
     { ...world, pose: { ...world.pose, positionM: [1, 0, 0] as const } },
@@ -42,5 +44,5 @@ test('equivalent publications do not repeat world work, but every camera depende
   ]) hub.publish(next, viewport);
   for (const next of [{ ...viewport, widthPixels: 100 }, { ...viewport, heightPixels: 100 },
     { ...viewport, focalPixels: 900 }, { ...viewport, principalOffsetPixels: [0, 0] as const }]) hub.publish(world, next);
-  expect(listener).toHaveBeenCalledTimes(8);
+  assert.equal(listener.mock.callCount(), 8);
 });

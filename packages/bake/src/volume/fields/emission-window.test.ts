@@ -1,4 +1,4 @@
-import { test } from 'vitest';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createEmissionWindowSampler, readEmissionWindow, type EmissionWindow } from './emission-window.ts';
 import { createEmissionField, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from './emission.ts';

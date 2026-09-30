@@ -1,5 +1,7 @@
 import { readFile } from 'node:fs/promises';
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
 import { createWorldContextPlanner, type WorldContextView } from './world-context-planner.js';
 
@@ -19,7 +21,7 @@ test('a selected satellite overview retains its selected host locator', () => {
   };
   const calculate = createWorldContextPlanner(plan);
   const selected = calculate(view);
-  expect(selected.emphasizedId).toBe('jupiter');
-  expect(calculate({ ...view, overviewSelection: false }).emphasizedId).toBeNull();
-  expect(calculate({ ...view, overview: false, overviewSelection: false }).emphasizedId).toBe('jupiter');
+  assert.equal(selected.emphasizedId, 'jupiter');
+  assert.equal(calculate({ ...view, overviewSelection: false }).emphasizedId, null);
+  assert.equal(calculate({ ...view, overview: false, overviewSelection: false }).emphasizedId, 'jupiter');
 });

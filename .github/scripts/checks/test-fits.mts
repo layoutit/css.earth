@@ -22,7 +22,7 @@ const run = (args: string[], command = process.execPath) => {
   if (result.status !== 0) process.exit(result.status ?? 1);
 };
 // The reader's own behaviour tests, including the float32 transport image, are the package's.
-run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
+run(['--import', './packages/core/src/node/register-vite-suffix.mts', '--test', 'packages/fits/src/**/*.test.ts']);
 const unit = ['packages/bake/src/objects/cameras/core.oracle.test.mts', 'packages/bake/src/objects/cameras/sky-orientation.oracle.test.mts', 'packages/bake/src/objects/cameras/sky-projection.oracle.test.mts',
   'packages/fits/src/node/file-region.oracle.test.mts', 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.oracle.test.mts',
   'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'packages/bake/src/objects/color/color-transfer.oracle.test.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.oracle.test.mts',
