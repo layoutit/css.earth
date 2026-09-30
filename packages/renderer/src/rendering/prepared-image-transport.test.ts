@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createPreparedImageStore, type PreparedImage } from './prepared-image-store.js';
 
 class NetworkImage implements PreparedImage {
@@ -25,35 +27,35 @@ function harness() {
 test('downloads overlap while explicit decoding and pending work remain bounded', async () => {
   const { images, store, lease } = harness();
   const requests = Array.from({ length: 9 }, (_, i) => lease.load(`/${i}.webp`, { pool: 'pages' }));
-  expect(images).toHaveLength(6);
-  expect(images.reduce((sum, image) => sum + image.decodeCalls, 0)).toBe(0);
+  assert.equal(images.length, 6);
+  assert.equal(images.reduce((sum, image) => sum + image.decodeCalls, 0), 0);
   // A slow first request cannot hold a decode slot away from later downloads.
   images[1].emit('load'); images[2].emit('load'); images[3].emit('load');
-  expect(images[0].decodeCalls).toBe(0);
-  expect(images[1].decodeCalls).toBe(1); expect(images[2].decodeCalls).toBe(1);
-  expect(images[3].decodeCalls).toBe(0);
+  assert.equal(images[0].decodeCalls, 0);
+  assert.equal(images[1].decodeCalls, 1); assert.equal(images[2].decodeCalls, 1);
+  assert.equal(images[3].decodeCalls, 0);
   images[1].completeDecode(); await flush();
-  expect(images).toHaveLength(7);
-  expect(images[3].decodeCalls).toBe(1);
-  expect(store.ownershipStats().pools[0]).toMatchObject({ active: 2, pending: 6 });
+  assert.equal(images.length, 7);
+  assert.equal(images[3].decodeCalls, 1);
+  assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { active: 2, pending: 6 });
   store.destroy();
-  expect((await Promise.all(requests)).filter(Boolean)).toHaveLength(1);
-  expect(images.every(image => image.src === '')).toBe(true);
+  assert.equal((await Promise.all(requests)).filter(Boolean).length, 1);
+  assert.equal(images.every(image => image.src === ''), true);
 });
 
 test('shared download ownership and cancellation do not resurrect reused slots', async () => {
   const { images, store, lease } = harness(); const other = store.createLease();
   const first = lease.load('/shared.webp', { pool: 'pages' });
   const second = other.load('/shared.webp', { pool: 'pages' });
-  expect(images).toHaveLength(1);
-  lease.release('/shared.webp'); expect(await first).toBeNull();
+  assert.equal(images.length, 1);
+  lease.release('/shared.webp'); assert.equal((await first), null);
   const staleLoad = [...images[0].listeners.load][0];
-  other.destroy(); expect(await second).toBeNull();
-  expect(images[0].listeners.load.size).toBe(0); expect(images[0].src).toBe('');
+  other.destroy(); assert.equal((await second), null);
+  assert.equal(images[0].listeners.load.size, 0); assert.equal(images[0].src, '');
   const replacement = lease.load('/new.webp', { pool: 'pages' });
-  staleLoad(); expect(images[0].decodeCalls).toBe(0);
+  staleLoad(); assert.equal(images[0].decodeCalls, 0);
   images[0].emit('load'); images[0].completeDecode();
-  expect(await replacement).toBe(images[0]); expect(images[0].src).toBe('/new.webp');
+  assert.equal((await replacement), images[0]); assert.equal(images[0].src, '/new.webp');
   store.destroy();
 });
 
@@ -62,9 +64,9 @@ test('a network failure releases its pending slot and rejects every owner', asyn
   const first = lease.load('/bad.webp', { pool: 'pages' });
   const second = other.load('/bad.webp', { pool: 'pages' });
   images[0].emit('error');
-  await expect(first).rejects.toThrow('did not load'); await expect(second).rejects.toThrow('did not load');
-  expect(store.ownershipStats().pools[0]).toMatchObject({ active: 0, pending: 0, occupied: 0 });
-  expect(images[0].listeners.error.size).toBe(0);
+  await assert.rejects(first, /did not load/); await assert.rejects(second, /did not load/);
+  assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { active: 0, pending: 0, occupied: 0 });
+  assert.equal(images[0].listeners.error.size, 0);
   store.destroy();
 });
 
@@ -74,8 +76,8 @@ test('budgeted pools overlap admitted downloads without raising explicit decode 
     pools: [{ id: 'large', capacity: 20, concurrency: 2, reuse: true, maximumDecodedBytes: 1024 }] });
   const lease = store.createLease();
   for (let i = 0; i < 9; i++) void lease.load(`/${i}.webp`, { pool: 'large' });
-  expect(images).toHaveLength(6);
+  assert.equal(images.length, 6);
   for (const image of images) image.emit('load');
-  expect(store.ownershipStats().pools[0]).toMatchObject({ pending: 6, active: 2 });
+  assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { pending: 6, active: 2 });
   store.destroy();
 });

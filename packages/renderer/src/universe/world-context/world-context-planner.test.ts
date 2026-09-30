@@ -1,5 +1,7 @@
 import { readFile } from 'node:fs/promises';
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { decodeWorldOrbitBank, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
 import { createSystemFade } from './context-scale.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
@@ -42,10 +44,10 @@ test('shell rectangles do not decide world annotation membership or placement', 
   };
   publish();
   const settled = publish();
-  expect(publish()).toEqual(settled);
-  expect(settled.length).toBeGreaterThan(0);
+  assert.deepEqual(publish(), settled);
+  assert.ok(settled.length > 0);
   current.labelBlockers = [{ left: -10000, top: -10000, right: 10000, bottom: 10000 }];
-  expect(publish()).toEqual(settled);
+  assert.deepEqual(publish(), settled);
 });
 
 test('viewport edges constrain captions without retiring an in-frame circle', () => {
@@ -53,8 +55,8 @@ test('viewport edges constrain captions without retiring an in-frame circle', ()
   const initial = planner(current);
   const targetIndex = [plan.focus, ...plan.bodies].findIndex(body => body.id === 'earth');
   const target = initial.projectedBodies.find(body => body.index === targetIndex)!;
-  expect(target.labelShown).toBe(true);
-  expect(target.indicatorShown).toBe(true);
+  assert.equal(target.labelShown, true);
+  assert.equal(target.indicatorShown, true);
   const targetX = target.x;
   for (const body of initial.projectedBodies) Object.assign(current.bodies[body.index], {
     labelShown: body.labelShown, labelPlacement: body.labelPlacement, indicatorShown: body.indicatorShown,
@@ -64,12 +66,12 @@ test('viewport edges constrain captions without retiring an in-frame circle', ()
   const shifted = { ...current, viewport: { ...current.viewport,
     principalOffsetPixels: [offsetX + width / 2 - 1 - targetX, offsetY] as const } };
   const edge = planner(shifted).projectedBodies.find(body => body.index === targetIndex)!;
-  expect(edge.visible).toBe(true);
-  expect(edge.labelShown).toBe(true);
-  expect(edge.indicatorShown).toBe(true);
+  assert.equal(edge.visible, true);
+  assert.equal(edge.labelShown, true);
+  assert.equal(edge.indicatorShown, true);
   const label = current.bodies[targetIndex]!.labelSize;
-  expect(edge.labelPosition![0]).toBeGreaterThanOrEqual(-width / 2 + 4);
-  expect(edge.labelPosition![0] + label.width).toBeLessThanOrEqual(width / 2 - 4);
+  assert.ok(edge.labelPosition![0] >= -width / 2 + 4);
+  assert.ok((edge.labelPosition![0] + label.width) <= width / 2 - 4);
 });
 
 test('complete context frames cross a structured-clone boundary without mutating the input owner', () => {
@@ -78,24 +80,24 @@ test('complete context frames cross a structured-clone boundary without mutating
   const savedInput = structuredClone(input);
   const first = structuredClone(calculate(input));
   const savedFirst = structuredClone(first);
-  expect(first.projectedBodies.some(body => body.segments.length > 0)).toBe(true);
+  assert.equal(first.projectedBodies.some(body => body.segments.length > 0), true);
   for (const distance of [5, 50, 5000, 20]) {
     const next = structuredClone(input);
     Object.assign(next.world.pose, { positionM: [next.world.pose.positionM[0], next.world.pose.positionM[1], distance * 149597870700] });
     next.selectedId = 'saturn'; next.overview = false;
     next.bodies[0].hovered = true;
     const packet = structuredClone(calculate(freeze(next)));
-    expect(packet.emphasizedId).toBe('saturn');
+    assert.equal(packet.emphasizedId, 'saturn');
     for (const body of packet.projectedBodies) {
-      expect(body).not.toHaveProperty('transforms');
-      expect(body.segments.every(segment => segment.length === 5 && segment.every(Number.isFinite))).toBe(true);
+      assert.ok(!("transforms" in body));
+      assert.equal(body.segments.every(segment => segment.length === 5 && segment.every(Number.isFinite)), true);
     }
   }
-  expect(input).toEqual(savedInput);
-  expect(first).toEqual(savedFirst);
+  assert.deepEqual(input, savedInput);
+  assert.deepEqual(first, savedFirst);
   // Replaying the same committed inputs is independent of requests that ran
   // in between: rejected/superseded frames cannot own decluttering history.
-  expect(structuredClone(calculate(input))).toEqual(first);
+  assert.deepEqual(structuredClone(calculate(input)), first);
 });
 
 test('retired and incompatible frame requests respect prepared identity and measured optics', () => {
@@ -103,20 +105,20 @@ test('retired and incompatible frame requests respect prepared identity and meas
   input.anchorOnly = true;
   // The anchor and every placed orbitless body (Betelgeuse) remain as galactic locators.
   const locators = [plan.focus, ...plan.bodies].flatMap((body, index) => index === 0 || !('orbit' in body && body.orbit) ? [index] : []);
-  expect(locators.length).toBeGreaterThan(1);
-  expect(calculate(input).projectedBodies.map(body => body.index)).toEqual(locators);
-  expect(() => calculate({ ...input, selectedId: 'missing' })).toThrow('unavailable');
-  expect(() => calculate({ ...input, bodies: [] })).toThrow('matching frame');
-  expect(() => calculate({ ...input, viewport: { ...input.viewport, widthPixels: undefined } })).toThrow('measured viewport');
-  expect(() => calculate({ ...input, world: { ...input.world, epochJdTt: input.world.epochJdTt + 1 } })).toThrow('matching frame');
+  assert.ok(locators.length > 1);
+  assert.deepEqual(calculate(input).projectedBodies.map(body => body.index), locators);
+  assert.throws(() => calculate({ ...input, selectedId: 'missing' }), /unavailable/);
+  assert.throws(() => calculate({ ...input, bodies: [] }), /matching frame/);
+  assert.throws(() => calculate({ ...input, viewport: { ...input.viewport, widthPixels: undefined } }), /measured viewport/);
+  assert.throws(() => calculate({ ...input, world: { ...input.world, epochJdTt: input.world.epochJdTt + 1 } }), /matching frame/);
 });
 
 test('overview does not resurrect the selected billboard over a resolved surface', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.world.pose.positionM = [0, 0, plan.focus.radiusM * 20];
   const marker = (overview: boolean) => calculate({ ...input, overview }).projectedBodies.find(body => body.index === 0)!;
-  expect(marker(true).markerOpacity).toBe(0);
-  expect(marker(false).markerOpacity).toBe(0);
+  assert.equal(marker(true).markerOpacity, 0);
+  assert.equal(marker(false).markerOpacity, 0);
 });
 
 test('a departed focus outside the view cannot blank the surrounding orbit field', () => {
@@ -125,14 +127,13 @@ test('a departed focus outside the view cannot blank the surrounding orbit field
   for (const z of [0, -149597870700, 149597870]) {
     input.world.pose.positionM = [20 * 149597870700, 0, z];
     const packet = calculate(input);
-    expect(packet.projectedBodies.some(body => body.orbitVisibility > 0 && body.segments.length > 0),
-      `orbit field remains visible while the departed Sun crosses the eye plane at ${z}`).toBe(true);
+    assert.equal(packet.projectedBodies.some(body => body.orbitVisibility > 0 && body.segments.length > 0), true, `orbit field remains visible while the departed Sun crosses the eye plane at ${z}`);
   }
   // Preserve the close-up fade when the selected disc really fills the view:
   // context lines soften to the shared close-detail floor.
   input.selectionPreview = undefined;
   input.world.pose.positionM = [0, 0, plan.focus.radiusM * 5];
-  expect(Math.max(...calculate(input).projectedBodies.map(body => body.orbitVisibility))).toBeLessThanOrEqual(.3);
+  assert.ok(Math.max(...calculate(input).projectedBodies.map(body => body.orbitVisibility)) <= .3);
 });
 
 test('zoom jitter does not repeatedly reverse annotation visibility at its exit threshold', () => {
@@ -148,16 +149,16 @@ test('zoom jitter does not repeatedly reverse annotation visibility at its exit 
   };
   // The label leaves at the authored 50% billboard alpha and does not flicker
   // back on when wheel/camera samples straddle that same boundary.
-  expect(sample(16).labelShown).toBe(true);
-  expect(sample(17.06).labelShown).toBe(false);
-  for (const diameter of [16.94, 17.06, 16.94, 17.06]) expect(sample(diameter).labelShown).toBe(false);
-  expect(sample(16.64).labelShown).toBe(true);
-  expect(sample(16.94).labelShown).toBe(true);
+  assert.equal(sample(16).labelShown, true);
+  assert.equal(sample(17.06).labelShown, false);
+  for (const diameter of [16.94, 17.06, 16.94, 17.06]) assert.equal(sample(diameter).labelShown, false);
+  assert.equal(sample(16.64).labelShown, true);
+  assert.equal(sample(16.94).labelShown, true);
   // Ring eligibility uses the same committed-state rule at the 8px boundary.
-  expect(sample(7.7).indicatorShown).toBe(true);
-  expect(sample(8.01).indicatorShown).toBe(false);
-  for (const diameter of [7.99, 8.01, 7.99]) expect(sample(diameter).indicatorShown).toBe(false);
-  expect(sample(7.7).indicatorShown).toBe(true);
+  assert.equal(sample(7.7).indicatorShown, true);
+  assert.equal(sample(8.01).indicatorShown, false);
+  for (const diameter of [7.99, 8.01, 7.99]) assert.equal(sample(diameter).indicatorShown, false);
+  assert.equal(sample(7.7).indicatorShown, true);
 });
 
 test('a flight destination keeps its caption and its side across the preview fade', () => {
@@ -172,19 +173,19 @@ test('a flight destination keeps its caption and its side across the preview fad
     input.world.pose.positionM = [target.positionM[0], target.positionM[1],
       target.positionM[2] + Math.hypot(target.radiusM, 2 * input.viewport.focalPixels * target.radiusM / diameter)];
     const body = calculate(input).projectedBodies.find(body => body.index === index)!;
-    expect(body.labelShown, `${diameter}px destination must remain named`).toBe(true);
-    expect(body.labelPlacement).toBe(0);
-    expect(body.indicatorShown, `${diameter}px circle follows the preview handoff`).toBe(diameter < 20);
-    if (diameter >= 20) expect(body.markerOpacity).toBe(0);
+    assert.equal(body.labelShown, true, `${diameter}px destination must remain named`);
+    assert.equal(body.labelPlacement, 0);
+    assert.equal(body.indicatorShown, diameter < 20, `${diameter}px circle follows the preview handoff`);
+    if (diameter >= 20) assert.equal(body.markerOpacity, 0);
     Object.assign(input.bodies[index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
       indicatorShown: body.indicatorShown });
   }
   input.navigationInFlight = false; input.overview = false; input.selectedId = target.id;
-  expect(calculate(input).projectedBodies.find(body => body.index === index)!.labelShown).toBe(false);
+  assert.equal(calculate(input).projectedBodies.find(body => body.index === index)!.labelShown, false);
   }
 });
 
-test.each(['luhman-16', 'mercury'])('selected %s keeps its locator when the separate selected caption owns its name', id => {
+for (const id of ['luhman-16', 'mercury']) test(`selected ${id} keeps its locator when the separate selected caption owns its name`, () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const target = plan.bodies.find(body => body.id === id)!, index = 1 + plan.bodies.indexOf(target);
   input.selectedId = id; input.overview = false;
@@ -195,20 +196,20 @@ test.each(['luhman-16', 'mercury'])('selected %s keeps its locator when the sepa
     return calculate(input).projectedBodies.find(body => body.index === index)!;
   };
   const point = sample(.1);
-  expect(point.visible).toBe(true);
-  expect(point.indicatorShown).toBe(true);
-  expect(point.labelShown).toBe(false);
-  expect(point.labelPosition).toBeUndefined();
+  assert.equal(point.visible, true);
+  assert.equal(point.indicatorShown, true);
+  assert.equal(point.labelShown, false);
+  assert.equal(point.labelPosition, undefined);
   // Resolved detail owns the surface; the small locator must not sit over it.
-  expect(sample(100).indicatorShown).toBe(false);
-  expect(sample(.1).indicatorShown).toBe(true);
+  assert.equal(sample(100).indicatorShown, false);
+  assert.equal(sample(.1).indicatorShown, true);
   input.selectionPreview = plan.focus.id;
-  expect(sample(.1).indicatorShown).toBe(false);
+  assert.equal(sample(.1).indicatorShown, false);
   input.selectionPreview = undefined;
   input.bodies[index].labelSuppressed = false;
   const ordinary = sample(.1);
-  expect(ordinary.indicatorShown).toBe(true);
-  expect(ordinary.labelShown).toBe(true);
+  assert.equal(ordinary.indicatorShown, true);
+  assert.equal(ordinary.labelShown, true);
 });
 
 test('orbit settings do not change admitted names or label placement', () => {
@@ -216,9 +217,9 @@ test('orbit settings do not change admitted names or label placement', () => {
   const labels = () => calculate(input).projectedBodies.filter(body => body.labelShown)
     .map(body => ({ index: body.index, position: body.labelPosition }));
   const before = structuredClone(labels());
-  expect(before.length).toBeGreaterThan(0);
+  assert.ok(before.length > 0);
   input.bodies.forEach(body => { body.orbitHidden = true; });
-  expect(labels()).toEqual(before);
+  assert.deepEqual(labels(), before);
 });
 
 test('hidden planetary annotations remove labels, circles and their orbit paths', () => {
@@ -229,10 +230,10 @@ test('hidden planetary annotations remove labels, circles and their orbit paths'
   input.bodies.forEach((body, index) => { body.labelHidden = planets.has(points[index]!.id); });
   const bodies = calculate(input).projectedBodies;
   const outer = bodies.filter(body => ['jupiter', 'saturn', 'uranus', 'neptune'].includes(points[body.index]!.id));
-  expect(outer.every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
+  assert.equal(outer.every(body => !body.labelShown && !body.indicatorShown), true);
   const onScreen = outer.filter(body => body.visible);
-  expect(onScreen.length).toBeGreaterThan(0);
-  expect(onScreen.every(body => body.orbitVisibility === 0 && body.segments.length === 0)).toBe(true);
+  assert.ok(onScreen.length > 0);
+  assert.equal(onScreen.every(body => body.orbitVisibility === 0 && body.segments.length === 0), true);
 });
 
 test('highlighted moons remain identifiable when their orbits are too small to draw', () => {
@@ -247,16 +248,16 @@ test('highlighted moons remain identifiable when their orbits are too small to d
     input.world.pose.positionM = [0, 0, distance * 149597870700];
     const frame = calculate({ ...input, bodies: unpackWorldBodies(packWorldBodies(input.bodies)) });
     const admitted = frame.projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown);
-    expect(admitted.length).toBeGreaterThan(0);
+    assert.ok(admitted.length > 0);
     for (const body of admitted) {
-      expect(body.indicatorShown).toBe(true);
-      expect(body.markerOpacity).toBeGreaterThan(.5);
-      expect(body.segments).toHaveLength(0);
+      assert.equal(body.indicatorShown, true);
+      assert.ok(body.markerOpacity > .5);
+      assert.equal(body.segments.length, 0);
     }
   }
   input.bodies.forEach(body => { body.highlighted = false; });
-  expect(calculate({ ...input, bodies: unpackWorldBodies(packWorldBodies(input.bodies)) })
-    .projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown)).toHaveLength(0);
+  assert.equal(calculate({ ...input, bodies: unpackWorldBodies(packWorldBodies(input.bodies)) })
+    .projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown).length, 0);
 });
 
 test('system zoom and rotation keep orbit paths when captions lose their slots', () => {
@@ -267,7 +268,7 @@ test('system zoom and rotation keep orbit paths when captions lose their slots',
     Object.assign(input.world.pose, { orientationXyzw: [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)] });
     const frame = calculate(input);
     for (const body of frame.projectedBodies) {
-      if (body.indicatorShown) expect(body.labelShown).toBe(true);
+      if (body.indicatorShown) assert.equal(body.labelShown, true);
       if (body.segments.length && body.visible && body.labelShown) paths++;
       if (body.segments.length && body.visible && !body.labelShown) uncaptionedPaths++;
       if (!body.labelShown && body.visible) crowded++;
@@ -275,9 +276,9 @@ test('system zoom and rotation keep orbit paths when captions lose their slots',
         indicatorShown: body.indicatorShown });
     }
   }
-  expect(paths).toBeGreaterThan(0);
-  expect(crowded).toBeGreaterThan(0);
-  expect(uncaptionedPaths).toBeGreaterThan(0);
+  assert.ok(paths > 0);
+  assert.ok(crowded > 0);
+  assert.ok(uncaptionedPaths > 0);
 });
 
 test('a body too faint for this camera to name draws no ring beside the named ones', () => {
@@ -285,17 +286,17 @@ test('a body too faint for this camera to name draws no ring beside the named on
   const points = [plan.focus, ...plan.bodies], index = points.findIndex(body => body.id === 'ceres');
   input.world.pose.positionM = [0, 0, 205 * 149597870700];
   const far = calculate(input).projectedBodies.find(body => body.index === index)!;
-  expect(far.visible, 'Ceres is on screen at whole-system range').toBe(true);
-  expect(far.labelShown).toBe(false);
-  expect(far.indicatorShown).toBe(false);
-  expect(far.segments, 'an unnamed body on screen draws no path').toHaveLength(0);
+  assert.equal(far.visible, true, 'Ceres is on screen at whole-system range');
+  assert.equal(far.labelShown, false);
+  assert.equal(far.indicatorShown, false);
+  assert.equal(far.segments.length, 0, 'an unnamed body on screen draws no path');
   input.world.pose.positionM = [0, 0, 8 * 149597870700];
   const near = calculate(input).projectedBodies.find(body => body.index === index)!;
-  expect(near.labelShown, 'the same body is named once the camera resolves it').toBe(true);
-  expect(near.segments.length).toBeGreaterThan(0);
+  assert.equal(near.labelShown, true, 'the same body is named once the camera resolves it');
+  assert.ok(near.segments.length > 0);
 });
 
-test('turning the view preserves projected paths through caption admission changes', () => {
+test('turning the view preserves projected paths through caption admission changes', { timeout: 20000 }, () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.rotationActive = true;
   const points = [plan.focus, ...plan.bodies];
@@ -320,11 +321,11 @@ test('turning the view preserves projected paths through caption admission chang
         indicatorShown: body.indicatorShown });
     }
   }
-  expect(captionFlips, 'captions come and go as their bodies cross the edge').toBeGreaterThan(0);
-  expect(paths, 'admitted bodies still draw their paths').toBeGreaterThan(0);
-  expect(uncaptionedPaths, 'caption collisions do not retire on-screen paths').toBeGreaterThan(0);
-  expect(offScreenPaths, 'paths keep crossing after their bodies leave the frame').toBeGreaterThan(0);
-}, 20000); // Plans every prepared orbit through a full turn; CI measured 4.4 s at 60 points.
+  assert.ok(captionFlips > 0, 'captions come and go as their bodies cross the edge');
+  assert.ok(paths > 0, 'admitted bodies still draw their paths');
+  assert.ok(uncaptionedPaths > 0, 'caption collisions do not retire on-screen paths');
+  assert.ok(offScreenPaths > 0, 'paths keep crossing after their bodies leave the frame');
+}); // Plans every prepared orbit through a full turn; CI measured 4.4 s at 60 points.
 
 test('an active camera drag preserves the committed inner-system annotations', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
@@ -339,7 +340,7 @@ test('an active camera drag preserves the committed inner-system annotations', (
   for (const body of initial.projectedBodies) Object.assign(input.bodies[body.index], {
     labelShown: body.labelShown, labelPlacement: body.labelPlacement, indicatorShown: body.indicatorShown,
   });
-  expect([...committed.values()].some(Boolean)).toBe(true);
+  assert.equal([...committed.values()].some(Boolean), true);
   input.rotationActive = true;
   for (let step = -12; step <= 12; step++) {
     const angle = step * Math.PI / 180;
@@ -347,7 +348,7 @@ test('an active camera drag preserves the committed inner-system annotations', (
     const frame = calculate(input);
     for (const body of frame.projectedBodies) {
       const id = points[body.index]!.id;
-      if (tracked.has(id)) expect(body.labelShown, `${id} keeps its drag-start admission`).toBe(committed.get(id));
+      if (tracked.has(id)) assert.equal(body.labelShown, committed.get(id), `${id} keeps its drag-start admission`);
       Object.assign(input.bodies[body.index], {
         labelShown: body.labelShown, labelPlacement: body.labelPlacement, indicatorShown: body.indicatorShown,
       });
@@ -359,12 +360,12 @@ test('an active camera drag preserves the committed inner-system annotations', (
   for (const body of settled.projectedBodies) {
     const id = points[body.index]!.id;
     if (!tracked.has(id)) continue;
-    expect(body.labelShown, `${id} keeps its final inertial admission on settlement`).toBe(committed.get(id));
-    if (body.labelShown) expect(body.labelPlacement).toBe(input.bodies[body.index]!.labelPlacement);
+    assert.equal(body.labelShown, committed.get(id), `${id} keeps its final inertial admission on settlement`);
+    if (body.labelShown) assert.equal(body.labelPlacement, input.bodies[body.index]!.labelPlacement);
   }
 });
 
-test('major planets remain identified through a full active-drag rotation', () => {
+test('major planets remain identified through a full active-drag rotation', { timeout: 20000 }, () => {
   const points = [plan.focus, ...plan.bodies], input = view();
   const majorIds = new Set(['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']);
   const priorities = Object.fromEntries(points.map(body => [body.id,
@@ -381,15 +382,15 @@ test('major planets remain identified through a full active-drag rotation', () =
     const frame = calculate(input);
     for (const id of ['mars', 'uranus', 'neptune']) {
       const body = frame.projectedBodies.find(body => points[body.index]!.id === id)!;
-      expect(body.labelShown, `${id} stays named at rotation step ${step}`).toBe(true);
-      expect(body.indicatorShown, `${id} keeps its circle at rotation step ${step}`).toBe(true);
+      assert.equal(body.labelShown, true, `${id} stays named at rotation step ${step}`);
+      assert.equal(body.indicatorShown, true, `${id} keeps its circle at rotation step ${step}`);
     }
     for (const body of frame.projectedBodies) {
       Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
         indicatorShown: body.indicatorShown });
     }
   }
-}, 20000); // Plans every prepared orbit through a full drag rotation; CI measured 4.0 s at 60 points.
+}); // Plans every prepared orbit through a full drag rotation; CI measured 4.0 s at 60 points.
 
 test('an off-screen body keeps an orbit path that crosses the viewport', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
@@ -401,13 +402,13 @@ test('an off-screen body keeps an orbit path that crosses the viewport', () => {
     for (const body of calculate(input).projectedBodies) {
       if (body.visible || !body.segments.length) continue;
       offScreenPaths++;
-      expect(body.labelShown).toBe(false);
-      expect(body.orbitVisibility, 'an off-screen ring keeps its own fade').toBeGreaterThan(0);
+      assert.equal(body.labelShown, false);
+      assert.ok(body.orbitVisibility > 0, 'an off-screen ring keeps its own fade');
       Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
         indicatorShown: body.indicatorShown });
     }
   }
-  expect(offScreenPaths, 'rings stay while their bodies leave the frame').toBeGreaterThan(0);
+  assert.ok(offScreenPaths > 0, 'rings stay while their bodies leave the frame');
 });
 
 test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-space distance', () => {
@@ -417,9 +418,9 @@ test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-s
     sun: labelImportance('star', true, 5), earth: labelImportance('planet', true, 4),
   });
   input.world.pose.positionM = [0, 0, 5 * 149597870700];
-  expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toContain('earth');
+  assert.ok(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id).includes('earth'));
   input.world.pose.positionM = [0, 0, plan.system.hiddenDistanceM * 2];
-  expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toEqual(['sun']);
+  assert.deepEqual(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id), ['sun']);
 });
 
 test('Earth remains a circle-and-label reference through the framed outer Solar System, then retires normally', () => {
@@ -431,16 +432,16 @@ test('Earth remains a circle-and-label reference through the framed outer Solar 
   for (const distanceAu of [50]) {
     input.world.pose.positionM = [0, 0, distanceAu * 149597870700];
     const frame = calculate(input), earth = frame.projectedBodies.find(body => points[body.index].id === 'earth')!;
-    expect(earth.labelShown).toBe(true);
-    expect(earth.indicatorShown).toBe(true);
-    expect(earth.segments).toHaveLength(0);
+    assert.equal(earth.labelShown, true);
+    assert.equal(earth.indicatorShown, true);
+    assert.equal(earth.segments.length, 0);
   }
   for (const distanceAu of [233.27, plan.system.fadeOutStartDistanceM / 149597870700]) {
     input.world.pose.positionM = [0, 0, distanceAu * 149597870700];
     const frame = calculate(input), earth = frame.projectedBodies.find(body => points[body.index].id === 'earth')!;
-    expect(earth.labelShown).toBe(true);
-    expect(earth.indicatorShown).toBe(false);
-    expect(earth.segments).toHaveLength(0);
+    assert.equal(earth.labelShown, true);
+    assert.equal(earth.indicatorShown, false);
+    assert.equal(earth.segments.length, 0);
     if (distanceAu === 233.27) {
       Object.assign(input.bodies[earth.index], {
         labelShown: earth.labelShown,
@@ -449,17 +450,17 @@ test('Earth remains a circle-and-label reference through the framed outer Solar 
         hovered: true,
       });
       const hovered = calculate(input).projectedBodies.find(body => body.index === earth.index)!;
-      expect(hovered.labelShown).toBe(true);
-      expect(hovered.indicatorShown).toBe(false);
-      expect(hovered.segments).toHaveLength(0);
-      expect(hovered.labelPosition).toEqual(earth.labelPosition);
+      assert.equal(hovered.labelShown, true);
+      assert.equal(hovered.indicatorShown, false);
+      assert.equal(hovered.segments.length, 0);
+      assert.deepEqual(hovered.labelPosition, earth.labelPosition);
       input.bodies[earth.index]!.hovered = false;
     }
   }
   input.world.pose.positionM = [0, 0, plan.system.hiddenDistanceM * 2];
   const beyond = calculate(input).projectedBodies.find(body => points[body.index].id === 'earth')!;
-  expect(beyond.labelShown).toBe(false);
-  expect(beyond.indicatorShown).toBe(false);
+  assert.equal(beyond.labelShown, false);
+  assert.equal(beyond.indicatorShown, false);
 });
 
 test('the Sun and Earth remain distinct landmarks in the distant Solar System', () => {
@@ -472,13 +473,13 @@ test('the Sun and Earth remain distinct landmarks in the distant Solar System', 
   })(input);
   const sun = frame.projectedBodies.find(body => points[body.index]!.id === 'sun')!;
   const earth = frame.projectedBodies.find(body => points[body.index]!.id === 'earth')!;
-  expect(sun.labelShown).toBe(true);
-  expect(sun.indicatorShown).toBe(true);
-  expect(earth.labelShown).toBe(true);
-  expect(sun.labelPosition![1]).toBeLessThan(earth.labelPosition![1]);
+  assert.equal(sun.labelShown, true);
+  assert.equal(sun.indicatorShown, true);
+  assert.equal(earth.labelShown, true);
+  assert.ok(sun.labelPosition![1] < earth.labelPosition![1]);
 });
 
-test.each(['ryugu', 'bennu'])('%s remains identifiable when its category is hidden, then retires on deselection', id => {
+for (const id of ['ryugu', 'bennu']) test(`${id} remains identifiable when its category is hidden, then retires on deselection`, () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const points = [plan.focus, ...plan.bodies], index = points.findIndex(body => body.id === id);
   const selected = points[index]!;
@@ -488,18 +489,18 @@ test.each(['ryugu', 'bennu'])('%s remains identifiable when its category is hidd
   // circles and captions still carry the user's category preferences.
   input.bodies.forEach(body => Object.assign(body, { bodyHidden: true, indicatorHidden: true, labelHidden: true }));
   const shown = calculate(input).projectedBodies.find(body => body.index === index)!;
-  expect(shown.visible).toBe(true);
-  expect(shown.indicatorShown).toBe(true);
-  expect(shown.labelShown).toBe(true);
-  expect(shown.orbitVisibility).toBeGreaterThan(0);
-  expect(shown.segments.length).toBeGreaterThan(0);
-  expect(calculate(input).projectedBodies.filter(body => body.visible)).toHaveLength(1);
+  assert.equal(shown.visible, true);
+  assert.equal(shown.indicatorShown, true);
+  assert.equal(shown.labelShown, true);
+  assert.ok(shown.orbitVisibility > 0);
+  assert.ok(shown.segments.length > 0);
+  assert.equal(calculate(input).projectedBodies.filter(body => body.visible).length, 1);
   input.selectedId = plan.focus.id; input.overview = true;
   const hidden = calculate(input).projectedBodies.find(body => body.index === index)!;
-  expect(hidden.visible).toBe(false);
-  expect(hidden.indicatorShown).toBe(false);
-  expect(hidden.labelShown).toBe(false);
-  expect(hidden.segments).toHaveLength(0);
+  assert.equal(hidden.visible, false);
+  assert.equal(hidden.indicatorShown, false);
+  assert.equal(hidden.labelShown, false);
+  assert.equal(hidden.segments.length, 0);
 });
 
 test('planet views label their own moon family, with a bounded total', () => {
@@ -509,13 +510,13 @@ test('planet views label their own moon family, with a bounded total', () => {
   input.selectedId = 'saturn'; input.overview = false;
   input.world.pose.positionM = [saturn.positionM[0], saturn.positionM[1], saturn.positionM[2] + 4e10];
   const names = calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index]!);
-  expect(names.length).toBeLessThanOrEqual(24);
-  expect(names.some(body => body.id === 'saturn')).toBe(true);
-  expect(names.filter(body => 'orbit' in body && body.orbit && body.orbit.centerBodyId !== plan.focus.id)
-    .every(body => 'orbit' in body && body.orbit?.centerBodyId === 'saturn')).toBe(true);
+  assert.ok(names.length <= 24);
+  assert.equal(names.some(body => body.id === 'saturn'), true);
+  assert.equal(names.filter(body => 'orbit' in body && body.orbit && body.orbit.centerBodyId !== plan.focus.id)
+    .every(body => 'orbit' in body && body.orbit?.centerBodyId === 'saturn'), true);
 });
 
-test.each(['saturn', 'jupiter', 'uranus'])('%s: close detail retires its own and unrelated solar orbits', id => {
+for (const id of ['saturn', 'jupiter', 'uranus']) test(`${id}: close detail retires its own and unrelated solar orbits`, () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const points = [plan.focus, ...plan.bodies], index = points.findIndex(body => body.id === id);
   const selected = plan.bodies[index - 1]!;
@@ -528,24 +529,24 @@ test.each(['saturn', 'jupiter', 'uranus'])('%s: close detail retires its own and
     const own = frame.projectedBodies.find(body => body.index === index)!;
     // Below the fade the path is drawn; from the fade's end (30% of the viewport height) it is gone.
     if (discHeightShare < .3) {
-      expect(own.segments.length, `${discHeightShare} viewport height`).toBeGreaterThan(0);
-      expect(own.orbitVisibility).toBeGreaterThan(0);
-      expect(own.segments.every(segment => segment.every(Number.isFinite))).toBe(true);
-    } else expect(own.orbitVisibility, `${discHeightShare} viewport height`).toBe(0);
+      assert.ok(own.segments.length > 0, `${discHeightShare} viewport height`);
+      assert.ok(own.orbitVisibility > 0);
+      assert.equal(own.segments.every(segment => segment.every(Number.isFinite)), true);
+    } else assert.equal(own.orbitVisibility, 0, `${discHeightShare} viewport height`);
     // Other planets' paths are irrelevant at close detail. The selected planet's nearby moons retain their own policy.
     const otherSolarOrbits = frame.projectedBodies.filter(body => {
       const point = points[body.index]!;
       return body.index !== index && 'orbit' in point && point.orbit?.centerBodyId === plan.focus.id;
     });
-    if (discHeightShare >= .3) expect(otherSolarOrbits.every(body => body.orbitVisibility === 0)).toBe(true);
+    if (discHeightShare >= .3) assert.equal(otherSolarOrbits.every(body => body.orbitVisibility === 0), true);
   }
   input.bodies[index]!.orbitHidden = true;
-  expect(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility).toBe(0);
+  assert.equal(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility, 0);
 });
 
 test('a featured orbitless star keeps its marker beyond the system fade, like the anchor; another gives way to the galaxy', () => {
   const star = plan.bodies.findIndex(body => !body.orbit) + 1;
-  expect(star).toBeGreaterThan(0);
+  assert.ok(star > 0);
   const calculate = createWorldContextPlanner(plan, { [plan.bodies[star - 1]!.id]: FEATURED_STAR_TIER }), input = view();
   // 300 pc above the Sun-Betelgeuse midpoint, looking down -z: both locators are in frame and the
   // system fade has run its course (opacity 0), so only locators publish.
@@ -556,49 +557,49 @@ test('a featured orbitless star keeps its marker beyond the system fade, like th
   input.anchorOnly = true; input.world.pose.positionM = [placedM[0] / 2, placedM[1] / 2, placedM[2] / 2 + 300 * 3.085677581491367e16];
   const packet = calculate(input);
   const anchor = packet.projectedBodies.find(body => body.index === 0)!, placed = packet.projectedBodies.find(body => body.index === star)!;
-  expect(placed.markerOpacity).toBe(1);
-  expect(placed.lineWidth).toBe(anchor.lineWidth);
-  expect(placed.indicatorShown).toBe(true);
-  expect(placed.labelShown).toBe(true);
+  assert.equal(placed.markerOpacity, 1);
+  assert.equal(placed.lineWidth, anchor.lineWidth);
+  assert.equal(placed.indicatorShown, true);
+  assert.equal(placed.labelShown, true);
   const unfeatured = createWorldContextPlanner(plan)(input).projectedBodies.find(body => body.index === star);
-  expect(unfeatured?.markerOpacity ?? 0, 'a star that is not featured gives its place to the catalogue dots').toBe(0);
+  assert.equal((unfeatured?.markerOpacity ?? 0), 0, 'a star that is not featured gives its place to the catalogue dots');
 });
 
 test('each planetary system fades with the camera distance from its own star', () => {
   const fade = createSystemFade(plan);
   const index = (id: string) => [plan.focus, ...plan.bodies].findIndex(point => point.id === id);
   const wasp = plan.bodies.find(body => body.id === 'wasp-43')!;
-  expect(fade.isSystemStar('sun')).toBe(true);
-  expect(fade.isSystemStar('wasp-43')).toBe(true);
-  expect(fade.isSystemStar('jupiter')).toBe(false);
-  expect(fade.isSystemStar('betelgeuse')).toBe(false);
+  assert.equal(fade.isSystemStar('sun'), true);
+  assert.equal(fade.isSystemStar('wasp-43'), true);
+  assert.equal(fade.isSystemStar('jupiter'), false);
+  assert.equal(fade.isSystemStar('betelgeuse'), false);
   // Beside WASP-43, 87 pc from the Sun: its planet's orbit shows while the Solar System has retired.
-  expect(fade.update([wasp.positionM[0], wasp.positionM[1], wasp.positionM[2] + 1e11])).toBe(1);
-  expect(fade.of(index('wasp-43b'))).toBe(1);
-  expect(fade.of(index('earth'))).toBe(0);
-  expect(fade.of(index('moon'))).toBe(0);
-  expect(fade.of(index('betelgeuse')), 'a star outside every system is never faded').toBe(1);
-  expect(fade.update([0, 0, 1e11])).toBe(1);
-  expect(fade.of(index('earth'))).toBe(1);
-  expect(fade.of(index('wasp-43b'))).toBe(0);
-  expect(fade.update([0, 0, 1e18]), 'between the stars every system has retired').toBe(0);
+  assert.equal(fade.update([wasp.positionM[0], wasp.positionM[1], wasp.positionM[2] + 1e11]), 1);
+  assert.equal(fade.of(index('wasp-43b')), 1);
+  assert.equal(fade.of(index('earth')), 0);
+  assert.equal(fade.of(index('moon')), 0);
+  assert.equal(fade.of(index('betelgeuse')), 1, 'a star outside every system is never faded');
+  assert.equal(fade.update([0, 0, 1e11]), 1);
+  assert.equal(fade.of(index('earth')), 1);
+  assert.equal(fade.of(index('wasp-43b')), 0);
+  assert.equal(fade.update([0, 0, 1e18]), 0, 'between the stars every system has retired');
 });
 
 test('the Solar System begins revealing context as the distance readout hands from light-years to AU', () => {
   const lightYearM = 299792458 * 31557600;
-  expect(plan.system.hiddenDistanceM).toBe(lightYearM);
+  assert.equal(plan.system.hiddenDistanceM, lightYearM);
   const fade = createSystemFade(plan);
-  expect(fade.update([0, 0, lightYearM])).toBe(0);
-  expect(fade.update([0, 0, lightYearM / 2])).toBeGreaterThan(0);
+  assert.equal(fade.update([0, 0, lightYearM]), 0);
+  assert.ok(fade.update([0, 0, lightYearM / 2]) > 0);
 });
 
 test('inside its authored range a system draws every member orbit, named or not, and retires beyond it', () => {
   const recorded = plan.bodies.filter(body => body.unpackaged === true);
-  expect(recorded.map(body => body.id)).toEqual(expect.arrayContaining(['s29', 's301', 's1']));
+  { const values = recorded.map(body => body.id); assert.ok(['s29', 's301', 's1'].every(item => values.includes(item))); }
   // The application gives a recorded body the tier of a planet of its host's system.
   const calculate = createWorldContextPlanner(plan, Object.fromEntries(recorded.map(body => [body.id, labelImportance('planet')]))), input = view();
   const host = plan.bodies.find(body => body.id === 'sgr-a-star')!;
-  expect(host.orbitsWithinM).toBeGreaterThan(0);
+  assert.ok((host.orbitsWithinM ?? 0) > 0);
   const members = recorded.filter(body => body.orbit?.centerBodyId === host.id).map(body => [plan.focus, ...plan.bodies].indexOf(body));
   input.overview = false; input.selectedId = host.id;
   const at = (rangeShare: number) => {
@@ -614,9 +615,9 @@ test('inside its authored range a system draws every member orbit, named or not,
   // Captions collide in the crowded core; the paths do not follow them.
   const inside = at(.07);
   const framed = inside.filter(body => body.visible);
-  expect(framed.some(body => !body.labelShown), 'some framed captions lose the collision').toBe(true);
-  for (const body of framed) expect(body.orbitVisibility, plan.bodies[body.index - 1]!.id).toBeGreaterThan(0);
-  for (const body of at(2.5)) expect(body.orbitVisibility, plan.bodies[body.index - 1]!.id).toBe(0);
+  assert.equal(framed.some(body => !body.labelShown), true, 'some framed captions lose the collision');
+  for (const body of framed) assert.ok(body.orbitVisibility > 0, plan.bodies[body.index - 1]!.id);
+  for (const body of at(2.5)) assert.equal(body.orbitVisibility, 0, plan.bodies[body.index - 1]!.id);
 });
 
 test('the planner plans from the summary alone, names the paths it lacked, and draws them once their bank arrives', async () => {
@@ -626,22 +627,22 @@ test('the planner plans from the summary alone, names the paths it lacked, and d
   const planner = createWorldContextPlanner(summary), current = view();
   const before = planner(current), wanted = planner.takeWantedOrbits();
   // From 20 au over the Sun the planets' orbits would be drawn; without their banks none is, and each is named once.
-  expect(wanted).toContain('earth');
-  expect(before.projectedBodies.every(body => body.segments.length === 0)).toBe(true);
-  expect(planner.takeWantedOrbits()).toEqual([]);
+  assert.ok(wanted.includes('earth'));
+  assert.equal(before.projectedBodies.every(body => body.segments.length === 0), true);
+  assert.deepEqual(planner.takeWantedOrbits(), []);
   // Each wanted path is its own bank; the frame requested exactly the paths it would draw.
   for (const id of wanted) planner.attachOrbits(decodeWorldOrbitBank(summary, id, await bank(id)));
   const after = planner(current), full = createWorldContextPlanner(plan)(view());
   // With the bank attached, the Sun's orbits draw as the planner given every full-precision path draws them: the Int32
   // vertices move no projected point by a thousandth of a pixel.
   const earth = (frame: typeof after) => frame.projectedBodies.find(body => [plan.focus, ...plan.bodies][body.index]!.id === 'earth')!.segments;
-  expect(earth(after).length).toBeGreaterThan(0);
-  expect(earth(after).length).toBe(earth(full).length);
+  assert.ok(earth(after).length > 0);
+  assert.equal(earth(after).length, earth(full).length);
   const numbers = (value: unknown): number[] => typeof value === 'number' ? [value] : Array.isArray(value) ? value.flatMap(numbers)
     : value && typeof value === 'object' ? Object.values(value).flatMap(numbers) : [];
   const drawn = numbers(earth(after)), exact = numbers(earth(full));
-  expect(drawn.length).toBe(exact.length);
-  drawn.forEach((value, index) => expect(Math.abs(value - exact[index]!)).toBeLessThan(1e-3));
+  assert.equal(drawn.length, exact.length);
+  drawn.forEach((value, index) => assert.ok(Math.abs(value - exact[index]!) < 1e-3));
 });
 
 test('host detail defers satellite paths until each planetary system is opened', async () => {
@@ -654,11 +655,11 @@ test('host detail defers satellite paths until each planetary system is opened',
     current.viewport = { focalPixels: 900, widthPixels: 820, heightPixels: 1094, principalOffsetPixels: [0, 0] };
     current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + Math.max(host.radiusM * 6, 4e7)];
     planner(current);
-    expect(planner.takeWantedOrbits(), `${hostId} detail`).not.toContain(satelliteId);
+    assert.ok(!planner.takeWantedOrbits().includes(satelliteId), `${hostId} detail`);
     current.overview = true;
     current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + 5e9];
     planner(current);
-    expect(planner.takeWantedOrbits(), `${hostId} system`).toContain(satelliteId);
+    assert.ok(planner.takeWantedOrbits().includes(satelliteId), `${hostId} system`);
   }
 });
 
@@ -666,19 +667,19 @@ test('a minor path that cannot show is never requested; highlighting it requests
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
   const points = [summary.focus, ...summary.bodies], dots = new Set(summary.bodies.filter(body => body.plainDot).map(body => body.id));
-  expect(dots.size).toBeGreaterThan(0);
+  assert.ok(dots.size > 0);
   // Asteroids have no caption tier of their own (tier 0); the app hides a plain dot's caption.
   const priorities = Object.fromEntries([...dots].map(id => [id, 0]));
   const planner = createWorldContextPlanner(summary, priorities), current = view();
   current.bodies.forEach((body, index) => { body.labelHidden = dots.has(points[index]!.id); });
   planner(current);
   const wanted = planner.takeWantedOrbits();
-  expect(wanted).toContain('earth');
-  expect(wanted.filter(id => dots.has(id))).toEqual([]);
+  assert.ok(wanted.includes('earth'));
+  assert.deepEqual(wanted.filter(id => dots.has(id)), []);
   // Highlighting the asteroids names them, so their paths can show and their banks are read.
   current.bodies.forEach((body, index) => { body.highlighted = dots.has(points[index]!.id); });
   planner(current);
-  expect(planner.takeWantedOrbits().some(id => dots.has(id))).toBe(true);
+  assert.equal(planner.takeWantedOrbits().some(id => dots.has(id)), true);
 });
 
 test('destination orbit fading completes during approach, before the detail selection changes', () => {
@@ -695,11 +696,11 @@ test('destination orbit fading completes during approach, before the detail sele
   };
   const wide = sample(.1), nearing = sample(.2), arrived = sample(.35);
   const fading = wide.filter(body => body.opacity > 0 && body.segments.length > 0);
-  expect(fading.length).toBeGreaterThan(0);
-  expect(nearing.some(body => body.opacity > 0 && body.opacity < wide.find(before => before.index === body.index)!.opacity)).toBe(true);
-  expect(arrived.every(body => body.opacity === 0)).toBe(true);
+  assert.ok(fading.length > 0);
+  assert.equal(nearing.some(body => body.opacity > 0 && body.opacity < wide.find(before => before.index === body.index)!.opacity), true);
+  assert.equal(arrived.every(body => body.opacity === 0), true);
   input.selectedId = target.id; input.selectionPreview = undefined; input.navigationInFlight = false;
-  expect(sample(.35)).toEqual(arrived);
+  assert.deepEqual(sample(.35), arrived);
 });
 
 // The app's own tiers from each body's classification, and the app's naming rule: of the stars beyond the Sun only one is named.
@@ -716,8 +717,8 @@ async function namedAlphaCentauri() {
 test('a notable star beyond the Solar System is named before the Solar System comets once the label cap is full', async () => {
   const { calculate, input, index } = await namedAlphaCentauri();
   const frame = calculate(input), star = frame.projectedBodies.find(body => body.index === index)!;
-  expect(frame.projectedBodies.filter(body => body.labelShown).length, 'the cap is full').toBe(24);
-  expect(star.labelShown, 'Alpha Centauri A outranks the comets that filled the cap').toBe(true);
+  assert.equal(frame.projectedBodies.filter(body => body.labelShown).length, 24, 'the cap is full');
+  assert.equal(star.labelShown, true, 'Alpha Centauri A outranks the comets that filled the cap');
 });
 
 test('past the Local Group scale the stars give their names to the galaxies', async () => {
@@ -726,23 +727,23 @@ test('past the Local Group scale the stars give their names to the galaxies', as
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
     return calculate(input).projectedBodies.filter(body => body.labelShown).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
   };
-  expect(named(200e3), 'from 200 kpc, short of the Local Group scale, the Sun and Sgr A* keep their names').toEqual(expect.arrayContaining(['sun', 'sgr-a-star']));
-  expect(named(1e6), 'from 1 Mpc no star or planet is named').toEqual([]);
+  { const values = named(200e3); assert.ok(['sun', 'sgr-a-star'].every(item => values.includes(item)), 'from 200 kpc, short of the Local Group scale, the Sun and Sgr A* keep their names'); }
+  assert.deepEqual(named(1e6), [], 'from 1 Mpc no star or planet is named');
 });
 
 test('past the Solar System only the featured stars and the references keep a dot; past the Local Group no body does', () => {
   const featured = 'betelgeuse';
-  expect(plan.bodies.some(body => body.id === featured && !body.orbit)).toBe(true);
+  assert.equal(plan.bodies.some(body => body.id === featured && !body.orbit), true);
   const calculate = createWorldContextPlanner(plan, { [featured]: FEATURED_STAR_TIER }), input = view();
   const dotted = (parsecs: number) => {
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
     return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
   };
   const nearby = dotted(3e3);
-  expect(nearby, 'from 3 kpc above the Sun the Sun and the featured star stay (Sgr A* is out of frame)').toEqual(expect.arrayContaining(['sun', featured]));
-  expect(nearby.length, 'from 3 kpc the other stars have given way to the catalogue dots').toBeLessThan(10);
-  expect(dotted(200e3), 'from 200 kpc the references keep a dot').toEqual(expect.arrayContaining(['sgr-a-star', 'sun']));
-  expect(dotted(1e6), 'from 1 Mpc, in the overview, no body keeps a dot').toEqual([]);
+  { const values = nearby; assert.ok(['sun', featured].every(item => values.includes(item)), 'from 3 kpc above the Sun the Sun and the featured star stay (Sgr A* is out of frame)'); }
+  assert.ok(nearby.length < 10, 'from 3 kpc the other stars have given way to the catalogue dots');
+  { const values = dotted(200e3); assert.ok(['sgr-a-star', 'sun'].every(item => values.includes(item)), 'from 200 kpc the references keep a dot'); }
+  assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no body keeps a dot');
 });
 
 test('the moons of a framed planet keep their names before stars beyond the Solar System', async () => {
@@ -761,5 +762,5 @@ test('the moons of a framed planet keep their names before stars beyond the Sola
   input.world = { ...input.world, pose: { orientationXyzw: [axis[0]! / norm, axis[1]! / norm, axis[2]! / norm, w / norm],
     positionM: [0, 1, 2].map(index => jupiter.positionM[index]! - toward[index]! * .08 * 149597870700) as [number, number, number] } };
   const named = new Set(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index]!.id));
-  for (const moon of ['io', 'europa', 'ganymede', 'callisto']) expect(named.has(moon), `${moon} is named`).toBe(true);
+  for (const moon of ['io', 'europa', 'ganymede', 'callisto']) assert.equal(named.has(moon), true, `${moon} is named`);
 });

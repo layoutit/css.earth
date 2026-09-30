@@ -678,13 +678,15 @@ test('a star Gaia gives no radial velocity takes SIMBAD\'s, cited to its paper, 
 });
 
 test('an archive answering a server error or a rate limit is asked again; a 404 is an answer', async () => {
-  const { liveArchive } = await import('./archives.mts');
+  // Waits are counted, not waited out: the 503's real pause is five seconds.
+  const waits: number[] = [], liveArchive = (await import('./archives.mts')).createLiveArchive(async ms => { waits.push(ms); });
   const real = globalThis.fetch, answers = [503, 200, 404];
   let calls = 0;
   globalThis.fetch = (async () => { calls++; const status = answers.shift()!; return new Response(status === 200 ? 'rows' : 'busy', { status }); }) as typeof fetch;
   try {
     assert.equal(await liveArchive.text('https://example.invalid/tap'), 'rows');
     assert.equal(calls, 2, 'the 503 was asked again once');
+    assert.deepEqual(waits, [5000], 'after the five seconds a 5xx waits');
     await assert.rejects(liveArchive.text('https://example.invalid/tap'), /answered 404/u);
     assert.equal(calls, 3, 'the 404 was not');
   } finally { globalThis.fetch = real; }

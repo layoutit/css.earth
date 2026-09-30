@@ -1,5 +1,7 @@
 import { SCENE_SATELLITE_IDS } from './sceneSatellites.js'
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import {
   BODIES,
   BODY_IDS,
@@ -26,18 +28,18 @@ const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star, black hole and hosted star, and every exoplanet', () => {
-    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length + HOSTED_STAR_IDS.length)
+    assert.equal(BODY_IDS.length, 1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length + HOSTED_STAR_IDS.length)
     // A black hole is placed by its astrometry (Sgr A*) or hosted by the star it orbits (Cygnus X-1).
-    for (const id of BLACK_HOLE_IDS) expect([...STAR_IDS, ...HOSTED_STAR_IDS] as readonly string[]).toContain(id)
+    for (const id of BLACK_HOLE_IDS) assert.ok(([...STAR_IDS, ...HOSTED_STAR_IDS] as readonly string[]).includes(id))
     for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS, ...EXOPLANET_IDS, ...HOSTED_STAR_IDS] as BodyId[]) {
-      expect(BODIES[id]).toBeDefined()
-      expect(BODIES[id].id).toBe(id)
+      assert.notEqual(BODIES[id], undefined)
+      assert.equal(BODIES[id].id, id)
     }
   })
 
   it('parents every dwarf planet directly on the Sun', () => {
     // Dwarf element sources target the body centre directly.
-    for (const id of DWARF_PLANET_IDS) expect(bodyData(id).parent).toBe('sun')
+    for (const id of DWARF_PLANET_IDS) assert.equal(bodyData(id).parent, 'sun')
   })
 
   it('is a tree rooted at the Sun', () => {
@@ -45,17 +47,17 @@ describe('the body table', () => {
       const parent = bodyData(id).parent
       // The Sun roots the Solar System; a star placed by its own astrometry orbits nothing here.
       if (id === 'sun' || STAR_IDS.includes(id as StarId)) {
-        expect(parent).toBeNull()
+        assert.equal(parent, null)
         continue
       }
-      expect(parent).not.toBeNull()
+      assert.notEqual(parent, null)
       // Walk to the root in bounded steps; a cycle would not terminate.
       let cursor: BodyId | null = id
       let steps = 0
       while (cursor !== null) {
         cursor = bodyData(cursor).parent
         steps++
-        expect(steps).toBeLessThan(5)
+        assert.ok(steps < 5)
       }
     }
   })
@@ -66,13 +68,13 @@ describe('the body table', () => {
       // Zero radius is an unmeasured one, allowed only for a hosted star or black hole. Such a star has no published mass either;
       // a hosted black hole's mass is what its orbit measures.
       if (data.meanRadiusKm === 0) {
-        expect(HOSTED_STAR_IDS, id).toContain(id)
-        if ((BLACK_HOLE_IDS as readonly string[]).includes(id)) expect(data.gravitationalParameterKm3PerS2, id).toBeGreaterThan(0)
-        else expect(data.gravitationalParameterKm3PerS2, id).toBe(0)
+        assert.ok((HOSTED_STAR_IDS as readonly string[]).includes(id), id)
+        if ((BLACK_HOLE_IDS as readonly string[]).includes(id)) assert.ok(data.gravitationalParameterKm3PerS2 > 0, id)
+        else assert.equal(data.gravitationalParameterKm3PerS2, 0, id)
         continue
       }
-      expect(data.meanRadiusKm).toBeGreaterThan(0)
-      expect(data.gravitationalParameterKm3PerS2).toBeGreaterThanOrEqual(0)
+      assert.ok(data.meanRadiusKm > 0)
+      assert.ok(data.gravitationalParameterKm3PerS2 >= 0)
       // Zero represents an unpublished GM, not a measured massless body.
       if (data.gravitationalParameterKm3PerS2 === 0) continue
       // Stars range from a red supergiant a thousand times less dense than water to a K dwarf denser than it; only planets and
@@ -86,12 +88,12 @@ describe('the body table', () => {
         // Below the hydrogen-burning limit, about 80 Jupiter masses, a small "star" is an old brown dwarf: Epsilon Indi Ba, 67 Jupiter
         // masses in 0.080 solar radii (Chen et al. 2022; King et al. 2010), is about 180 g/cm^3.
         if (data.gravitationalParameterKm3PerS2 < 80 * bodyData('jupiter').gravitationalParameterKm3PerS2) {
-          expect(densityGramsPerCm3, id).toBeGreaterThan(1)
-          expect(densityGramsPerCm3, id).toBeLessThan(500)
+          assert.ok(densityGramsPerCm3 > 1, id)
+          assert.ok(densityGramsPerCm3 < 500, id)
           continue
         }
-        expect(densityGramsPerCm3, id).toBeGreaterThan(1e4)
-        expect(densityGramsPerCm3, id).toBeLessThan(1e8)
+        assert.ok(densityGramsPerCm3 > 1e4, id)
+        assert.ok(densityGramsPerCm3 < 1e8, id)
         continue
       }
       // Mean density between 0.1 and 8.5 g/cm^3 covers the inflated hot Jupiter WASP-76b (0.17 +/- 0.02, Ehrenreich
@@ -105,31 +107,31 @@ describe('the body table', () => {
       // is 19.3. Smaller planets keep 8.5, where a wrong unit shows up (Kepler-32 f's 5.9 Jupiter masses in 0.07 Jupiter radii).
       const brownDwarf = data.gravitationalParameterKm3PerS2 > 13 * bodyData('jupiter').gravitationalParameterKm3PerS2
       const giant = data.meanRadiusKm >= 0.5 * bodyData('jupiter').meanRadiusKm
-      expect(densityGramsPerCm3, id).toBeGreaterThan(0.1)
-      expect(densityGramsPerCm3, id).toBeLessThan(brownDwarf ? 150 : giant ? 20 : 8.5)
+      assert.ok(densityGramsPerCm3 > 0.1, id)
+      assert.ok(densityGramsPerCm3 < (brownDwarf ? 150 : giant ? 20 : 8.5), id)
     }
   })
 
   it('agrees with units.ts about the Sun', () => {
     const sunMassKg = BODIES.sun.gravitationalParameterKm3PerS2 / GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2
-    expect(Math.abs(sunMassKg - SOLAR_MASS_KG) / SOLAR_MASS_KG).toBeLessThan(1e-3)
+    assert.ok((Math.abs(sunMassKg - SOLAR_MASS_KG) / SOLAR_MASS_KG) < 1e-3)
   })
 
   it('orders the planets by distance from the Sun', () => {
-    expect(PLANET_IDS).toEqual(['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'])
+    assert.deepEqual(PLANET_IDS, ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'])
   })
 
   it('lists exactly the moons the satellite data carries, plus the Moon', () => {
-    expect(moonsOf('earth')).toEqual(['moon'])
-    expect(moonsOf('didymos')).toEqual(['dimorphos'])
-    expect(moonsOf('mercury')).toEqual([])
-    expect(moonsOf('venus')).toEqual([])
+    assert.deepEqual(moonsOf('earth'), ['moon'])
+    assert.deepEqual(moonsOf('didymos'), ['dimorphos'])
+    assert.deepEqual(moonsOf('mercury'), [])
+    assert.deepEqual(moonsOf('venus'), [])
     const fromSatellites = SATELLITE_IDS.filter((id) => SATELLITE_ELEMENTS[id].parent === 'jupiter')
-    expect(moonsOf('jupiter')).toEqual(fromSatellites)
+    assert.deepEqual(moonsOf('jupiter'), fromSatellites)
     const total = [...PLANET_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS].flatMap((parent) => moonsOf(parent))
-    expect(total.length).toBe(SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + 1)
+    assert.equal(total.length, SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + 1)
     for (const planet of [...PLANET_IDS, ...DWARF_PLANET_IDS].filter(id => id !== 'earth')) {
-      expect(moonsOf(planet)).toEqual([...SATELLITE_IDS.filter(id => SATELLITE_ELEMENTS[id].parent === planet), ...SCENE_SATELLITE_IDS.filter(id => bodyData(id).parent === planet)])
+      assert.deepEqual(moonsOf(planet), [...SATELLITE_IDS.filter(id => SATELLITE_ELEMENTS[id].parent === planet), ...SCENE_SATELLITE_IDS.filter(id => bodyData(id).parent === planet)])
     }
   })
 
@@ -137,19 +139,19 @@ describe('the body table', () => {
     for (const planet of PLANET_IDS) {
       const systemGm = systemGravitationalParameterKm3PerS2(planet)
       const planetGm = bodyData(planet).gravitationalParameterKm3PerS2
-      expect(systemGm).toBeGreaterThanOrEqual(planetGm)
-      if (moonsOf(planet).length === 0) expect(systemGm).toBe(planetGm)
+      assert.ok(systemGm >= planetGm)
+      if (moonsOf(planet).length === 0) assert.equal(systemGm, planetGm)
     }
     // The Earth-Moon system is 1.23 percent heavier than Earth, the one case
     // where the difference is not a rounding detail.
     const ratio = systemGravitationalParameterKm3PerS2('earth') / BODIES.earth.gravitationalParameterKm3PerS2
-    expect(ratio).toBeCloseTo(1.0123, 4)
+    assert.ok(Math.abs(ratio - (1.0123)) < 10 ** -4 / 2, `${ratio} is not close to ${1.0123}`)
   })
 
   it('rejects an unknown body', () => {
     // Was 'pluto' — the id this test used specifically BECAUSE it was
     // anticipated and absent (`rotation.test.ts` pinned the same thing). Pluto
     // is a real body now; a probe id has to be one that never will be.
-    expect(() => bodyData('planetNine' as BodyId)).toThrow(/unknown body/)
+    assert.throws(() => bodyData('planetNine' as BodyId), /unknown body/)
   })
 })

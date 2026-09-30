@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { CAPTION_LIMIT, abstractText, arxivQuery, displayName, evidenceScore, extractCaptions, hostNames, isChallenge, mentions, openAlexQuery, parseArxivResponse, parseOpenAlexResponse, rankWorks, relevantCaptions, searchPapers } from './papers.mts';
@@ -66,14 +66,19 @@ test('a temporary OpenAlex failure falls back to source-identified arXiv works w
     if (url.startsWith('https://export.arxiv.org/')) return new Response(feed, { headers: { 'content-type': 'application/atom+xml' } });
     return new Response('%PDF', { headers: { 'content-type': 'application/pdf' } });
   };
-  const result = await searchPapers(WORKSPACE, { target: 'Io', instrument: 'JIRAM', fetcher });
+  // A workspace holding Io's descriptor alone: the search reads every descriptor it finds, and the checkout has thousands.
+  const workspace = await mkdtemp(resolve(tmpdir(), 'cssearth-papers-'));
+  await mkdir(resolve(workspace, 'src/objects/io'), { recursive: true });
+  await writeFile(resolve(workspace, 'src/objects/io/object.json'), await readFile(resolve(WORKSPACE, 'src/objects/io/object.json')));
+  const result = await searchPapers(workspace, { target: 'Io', instrument: 'JIRAM', fetcher });
   assert.equal(result.source, 'arxiv'); assert.match(result.sourceIssue!, /429/u);
   assert.equal(result.requests, 3); assert.equal(result.works[0]?.arxiv, 'https://arxiv.org/abs/2609.12345');
   assert.equal(result.works[0]?.openAlex, undefined); assert.equal(result.works[0]?.access.status, 'fetchable');
   assert.match(calls[1]!, /export\.arxiv\.org/u);
   assert.match(new URL(arxivQuery('Io', 'JIRAM')).searchParams.get('search_query')!, /all:"Io" AND all:"JIRAM"/u);
   assert.throws(() => parseArxivResponse('<html>not Atom</html>'), /Atom feed/u);
-  await assert.rejects(searchPapers(WORKSPACE, { target: 'Io', fetcher: async () => new Response('', { status: 400 }) }), /OpenAlex returned HTTP 400/u);
+  await assert.rejects(searchPapers(workspace, { target: 'Io', fetcher: async () => new Response('', { status: 400 }) }), /OpenAlex returned HTTP 400/u);
+  await rm(workspace, { recursive: true, force: true });
 });
 
 test('a hosted body is searched together with any one of its host names', () => {

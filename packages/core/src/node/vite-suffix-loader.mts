@@ -1,5 +1,5 @@
 // Node loader for the two Vite import suffixes the site build owners use: `?raw` (file text as the default export) and
-// `?url` (the file's path as the default export). Registered by `pnpm test:node`, so those owners load under plain node.
+// `?url` (the file's path as the default export). Registered by `pnpm test:run`, so those owners load under plain node.
 import { readFile } from 'node:fs/promises';
 import type { LoadHook, ResolveHook } from 'node:module';
 import { fileURLToPath } from 'node:url';

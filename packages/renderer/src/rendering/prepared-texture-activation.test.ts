@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { readFileSync } from 'node:fs';
 import { parseHTML } from 'linkedom';
 import { prepareTextureActivation, TEXTURE_PENDING_ATTRIBUTE } from './prepared-texture-activation.js';
@@ -12,8 +14,8 @@ const image = (node: HTMLElement) => pendingValue(node) === null ? node.style.ba
 const display = (node: HTMLElement) => pendingValue(node) === 'withheld' ? 'none' : node.style.display || '';
 
 test('the stylesheet holds a pending face without an image and a withheld one without a box', () => {
-  expect(css).toContain(`[${TEXTURE_PENDING_ATTRIBUTE}] { background-image: none !important; }`);
-  expect(css).toContain(`[${TEXTURE_PENDING_ATTRIBUTE}="withheld"] { display: none !important; }`);
+  assert.ok(css.includes(`[${TEXTURE_PENDING_ATTRIBUTE}] { background-image: none !important; }`));
+  assert.ok(css.includes(`[${TEXTURE_PENDING_ATTRIBUTE}="withheld"] { display: none !important; }`));
 });
 
 function fixture() {
@@ -36,42 +38,42 @@ function fixture() {
 test('complete connected topology stays fixed while selection images activate in batches', async () => {
   const f = fixture(), topology = [...f.root.querySelectorAll('*')].map(node => [node, node.parentNode]);
   for (const leaf of f.leaves) f.controller.write(leaf, 'url(surface.webp)');
-  expect(f.leaves.every(node => node.isConnected && image(node) === 'none')).toBe(true);
-  const ready = f.controller.activate(); expect(f.controller.activate()).toBe(ready);
+  assert.equal(f.leaves.every(node => node.isConnected && image(node) === 'none'), true);
+  const ready = f.controller.activate(); assert.equal(f.controller.activate(), ready);
   f.paint();
-  expect(f.leaves.map(image)).toEqual(['url(surface.webp)', 'none', 'none']);
+  assert.deepEqual(f.leaves.map(image), ['url(surface.webp)', 'none', 'none']);
   // A selection supersedes the withheld image and immediately updates resident leaves.
   for (const leaf of f.leaves) f.controller.write(leaf, 'url(next.webp)');
   f.paint();
-  expect(f.leaves.map(image)).toEqual(['url(next.webp)', 'url(next.webp)', 'none']);
+  assert.deepEqual(f.leaves.map(image), ['url(next.webp)', 'url(next.webp)', 'none']);
   f.paint();
-  expect(f.leaves.map(image)).toEqual(Array(3).fill('url(next.webp)'));
+  assert.deepEqual(f.leaves.map(image), Array(3).fill('url(next.webp)'));
   let settled = false; ready.then(() => { settled = true; });
-  await Promise.resolve(); expect(settled).toBe(false);
+  await Promise.resolve(); assert.equal(settled, false);
   f.paint(); await ready;
-  expect([...f.root.querySelectorAll('*')].map(node => [node, node.parentNode])).toEqual(topology);
-  expect(f.callbacks.size).toBe(0);
+  assert.deepEqual([...f.root.querySelectorAll('*')].map(node => [node, node.parentNode]), topology);
+  assert.equal(f.callbacks.size, 0);
 });
 
 test('retiring during activation cancels image writes without changing membership', async () => {
   const f = fixture(); f.leaves.forEach(leaf => f.controller.write(leaf, 'url(surface.webp)'));
   const ready = f.controller.activate(); f.paint(); f.dispose();
   f.controller.write(f.leaves[2], 'url(stale.webp)'); f.paint(); await ready;
-  expect(image(f.leaves[2])).toBe('none');
-  expect(display(f.leaves[2])).toBe('none');
-  expect(f.leaves.every(leaf => leaf.isConnected)).toBe(true);
-  expect(f.callbacks.size).toBe(0);
+  assert.equal(image(f.leaves[2]), 'none');
+  assert.equal(display(f.leaves[2]), 'none');
+  assert.equal(f.leaves.every(leaf => leaf.isConnected), true);
+  assert.equal(f.callbacks.size, 0);
 });
 
 test('untextured leaves still restore rendering in their prepared batches', async () => {
   const f = fixture(), ready = f.controller.activate();
-  expect(f.leaves.map(display)).toEqual(['', 'none', 'none']);
+  assert.deepEqual(f.leaves.map(display), ['', 'none', 'none']);
   f.paint();
-  expect(f.leaves.map(display)).toEqual(['', '', 'none']);
+  assert.deepEqual(f.leaves.map(display), ['', '', 'none']);
   f.paint(); f.paint(); await ready;
-  expect(f.leaves.every(node => !display(node) && image(node) === 'none' && pendingValue(node) === null)).toBe(true);
+  assert.equal(f.leaves.every(node => !display(node) && image(node) === 'none' && pendingValue(node) === null), true);
   // An activated leaf without an image draws none inline, as before it was pending.
-  expect(f.leaves.every(node => node.style.backgroundImage === 'none')).toBe(true);
+  assert.equal(f.leaves.every(node => node.style.backgroundImage === 'none'), true);
   f.dispose();
 });
 
@@ -82,30 +84,30 @@ test('each new atlas starts with one retained face before the regular batch resu
   f.controller.write(f.leaves[2], 'url(second.webp)');
   const ready = f.controller.activate();
   f.paint();
-  expect(f.leaves.map(image)).toEqual(['url(first.webp)', 'none', 'none']);
+  assert.deepEqual(f.leaves.map(image), ['url(first.webp)', 'none', 'none']);
   f.paint();
-  expect(f.leaves.map(image)).toEqual(['url(first.webp)', 'url(second.webp)', 'none']);
+  assert.deepEqual(f.leaves.map(image), ['url(first.webp)', 'url(second.webp)', 'none']);
   f.paint(); f.paint(); await ready;
-  expect(f.leaves.map(image)).toEqual(['url(first.webp)', 'url(second.webp)', 'url(second.webp)']);
+  assert.deepEqual(f.leaves.map(image), ['url(first.webp)', 'url(second.webp)', 'url(second.webp)']);
   f.dispose();
 });
 
 test('pending faces retain membership and defer changed display selection until activation', async () => {
   const f = fixture();
-  expect(f.leaves.map(display)).toEqual(['', 'none', 'none']);
-  expect(f.controller.deferDisplay(f.leaves[1], 'block')).toBe(true);
-  expect(f.controller.deferDisplay(f.leaves[2], 'none')).toBe(true);
-  expect(display(f.leaves[1])).toBe('none');
+  assert.deepEqual(f.leaves.map(display), ['', 'none', 'none']);
+  assert.equal(f.controller.deferDisplay(f.leaves[1], 'block'), true);
+  assert.equal(f.controller.deferDisplay(f.leaves[2], 'none'), true);
+  assert.equal(display(f.leaves[1]), 'none');
   f.leaves.forEach(leaf => f.controller.write(leaf, 'url(surface.webp)'));
   const ready = f.controller.activate();
   f.paint();
-  expect(f.leaves.map(display)).toEqual(['', 'none', 'none']);
+  assert.deepEqual(f.leaves.map(display), ['', 'none', 'none']);
   f.paint();
-  expect(f.leaves.map(display)).toEqual(['', 'block', 'none']);
+  assert.deepEqual(f.leaves.map(display), ['', 'block', 'none']);
   f.paint(); f.paint(); await ready;
-  expect(display(f.leaves[2])).toBe('none');
-  expect(f.controller.deferDisplay(f.leaves[1], 'none')).toBe(false);
-  expect(f.leaves.every(leaf => leaf.isConnected)).toBe(true);
+  assert.equal(display(f.leaves[2]), 'none');
+  assert.equal(f.controller.deferDisplay(f.leaves[1], 'none'), false);
+  assert.equal(f.leaves.every(leaf => leaf.isConnected), true);
   f.dispose();
 });
 
@@ -114,10 +116,10 @@ test('each mesh parent retains a renderable anchor and exact prepared display is
   const leaves = [...document.querySelectorAll('u')], callbacks: FrameRequestCallback[] = [];
   window.requestAnimationFrame = callback => { callbacks.push(callback); return callbacks.length; };
   const activation = prepareTextureActivation([leaves], () => {});
-  expect(leaves.map(display)).toEqual(['', 'none', '', 'none']);
+  assert.deepEqual(leaves.map(display), ['', 'none', '', 'none']);
   const ready = activation.activate();
   callbacks.shift()!(0); callbacks.shift()!(0); await ready;
-  expect(leaves.map(pendingValue)).toEqual([null, null, null, null]);
-  expect(leaves[1].style.display).toBe('inline-block');
-  expect(leaves[3].style.display).toBe('none');
+  assert.deepEqual(leaves.map(pendingValue), [null, null, null, null]);
+  assert.equal(leaves[1].style.display, 'inline-block');
+  assert.equal(leaves[3].style.display, 'none');
 });

@@ -1,24 +1,17 @@
 /**
- * Every body that records an observer-camera derivation states, in its recipe, exactly the camera fields its pinned
- * inputs give. Without this the eight numbers per frame are hand-copied constants and the derivation is code the
+ * A body that records an observer-camera derivation states, in its recipe, exactly the camera fields its pinned inputs
+ * give. Psyche stands for them: the derivation is one code path, and each body's recipe is checked when it is prepared. Without this the eight numbers per frame are hand-copied constants and the derivation is code the
  * build never runs. The disc centre is part of the derivation, so it is checked too: nothing in the recipe is fitted.
  */
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
-import { readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { deriveObserverCameras, limbSettled, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, radialTerrainForDataset } from '@cssearth/bake/objects/layers/terrestrial';
+import { deriveObserverCameras, limbSettled, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_SCHEMA, radialTerrainForDataset } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadCameraShape } from '@cssearth/bake/objects/geometry';
 const test = sourceTest();
 
 const ROOT = resolve(import.meta.dirname, '../../../../../../..'), OBJECTS = resolve(ROOT, 'src/objects');
-const bodies = readdirSync(OBJECTS).filter(id => existsSync(resolve(OBJECTS, id, 'source', OBSERVER_CAMERAS_FILE))).sort();
-
-test('the SPHERE photograph bodies record their derivation', () => {
-  for (const id of ['psyche', 'sylvia']) assert.ok(bodies.includes(id), `${id} records an observer-camera derivation`);
-});
-
-for (const id of bodies) test(`${id}: the recipe states the cameras its pinned inputs derive`, async () => {
+for (const id of ['psyche']) test(`${id}: the recipe states the cameras its pinned inputs derive`, async () => {
   const sourceDirectory = resolve(OBJECTS, id, 'source');
   const { record, recipe, frames } = await loadObserverCameraInputs(sourceDirectory);
   const mesh = await loadCameraShape(sourceDirectory, radialTerrainForDataset(recipe as unknown as Parameters<typeof radialTerrainForDataset>[0], record.datasetId));

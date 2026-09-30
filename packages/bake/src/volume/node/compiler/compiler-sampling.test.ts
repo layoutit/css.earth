@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { onTestFinished, test, vi } from 'vitest';
+import { after, test } from 'node:test';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -10,8 +10,11 @@ import { readCompactCompiler } from '../compact-inputs/compiler.ts';
 import { validateVolumeLayerSlices, type VolumeSlices } from '../../contracts/volume-slices.ts';
 import { createRenderElementBudget, type RenderElementProfile } from '../../contracts/render-element-budget.ts';
 
+// Temporary checkouts the tests make, removed once the file's tests finish.
+const temporary: string[] = [];
+after(() => Promise.all(temporary.map(path => rm(path, { recursive: true, force: true }))));
+
 // The real compiler probes millions of samples; the lab's Node runner gave these tests no timeout.
-vi.setConfig({ testTimeout: 120_000 });
 const boundsArcsec = { min: [-1, -1, -1] as [number, number, number], max: [1, 1, 1] as [number, number, number] };
 const renderProfile: RenderElementProfile = { schema: 'cssearth-render-element-profile@1', id: 'test-retained-renderer@1',
   maximumElements: 500, elementsPerSlab: 3, elementsPerStar: 1, reservedElements: 47 };
@@ -78,7 +81,7 @@ test('the optimizer receives the remaining budget after retained stars, not a de
 
 test('a small historical compiler replay keeps unreflected source geometry, sampling and physical intervals absent', async () => {
   const root = await mkdtemp(join(tmpdir(), 'legacy-compiler-sampling-'));
-  onTestFinished(() => rm(root, { recursive: true, force: true }));
+  temporary.push(root);
   const compiled: VolumeSlices[] = [];
   const sampling = { sliceCounts: { x: 1, y: 1, z: 2 }, imageWidth: 512 as const, samplesPerSlab: 4 as const };
   const scene = await bakeCompiler({ root, outputDirectory: 'bake', id: 'historical', fieldIdentity: 'historical-field',

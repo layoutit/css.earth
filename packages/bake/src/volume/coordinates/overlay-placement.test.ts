@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { defaultOverlayPlacement, overlayPlacementTransform, updateOverlayPlacement } from './overlay-placement.ts';
 
 test('manual placement rejects invalid controls without changing accepted state', () => {

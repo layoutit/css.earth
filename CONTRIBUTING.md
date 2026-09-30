@@ -166,16 +166,13 @@ JSON inputs and generate real shell data, without downloading body texture banks
 Full-universe integrity and production-build checks remain distinct and can
 still expose unrelated package defects. Report those failures; do not bypass pins.
 
-Test selection belongs in the native `package.json` scripts, not workflow file
-inventories or a separate runner. `test:node` and the `test:universe:*`
-suites use quoted Node filename/folder globs; Vitest retains its
-package and renderer discovery. Matching new tests run automatically without a
-workflow edit. Existing filenames with different setup requirements remain explicit
-exceptions; do not broaden a glob to include asset-authoring tests in a read-only
-runtime suite. Tests stay beside their current owners.
+Every test runs under `node --test` through one command, `pnpm test:run`. The
+lanes are folders: `test:packages` runs `packages/`, and `test:site` runs `site/`,
+`src/`, `integration/` and `.github/`. A new test file runs without a workflow edit.
+A test that needs an input CI does not restore skips through `sourceTest()`.
+Tests stay beside their owners.
 
-The required universe matrix separates runtime, shell and renderer checks;
-every selected lane must pass. The preparation gate checks publication. Source
+The required universe matrix runs the two lanes; both must pass. The preparation gate checks publication. Source
 catalogue reconciliation and broad bake reproduction run in the separate advisory
 audit. Native tests needing unavailable sources, prepared outputs or toolchains
 can skip through `@cssearth/objects/node/source-test`; a pass with skips does not prove

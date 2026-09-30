@@ -1,7 +1,9 @@
 import { createCameraMotion } from './camera-motion.js';
-import { expect, it } from 'vitest';
+import { it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { getEventListeners } from 'node:events';
-import scene from '../../../../src/objects/mercury/prepared/scene.json';
+import scene from '../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
 import { createRetainedCubicSkyOrbit } from './object-orbit.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
 import { presentWorldCamera } from './world-camera.js';
@@ -81,54 +83,54 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
 }
 
 function close(actual: readonly number[], expected: readonly number[], tolerance = 1e-10) {
-  actual.forEach((value, axis) => expect(Math.abs(value - expected[axis]) / Math.max(1, Math.abs(expected[axis]))).toBeLessThan(tolerance));
+  actual.forEach((value, axis) => assert.ok((Math.abs(value - expected[axis]) / Math.max(1, Math.abs(expected[axis]))) < tolerance));
 }
 
 it('uses prepared surface picking for detail flights and suppresses them while a catalogue focus owns input', () => {
   const f = fixture((x, y) => x === 23 && y === 45);
   f.roots[0]!.dataset.lod = 'geometry';
   const hit = f.callbacks.drag.surfaceFlyToHitTest;
-  expect(hit(23, 45)).toBe(true);
-  expect(hit(24, 45)).toBe(false);
+  assert.equal(hit(23, 45), true);
+  assert.equal(hit(24, 45), false);
   f.orbit.setPreparedFocus(focus, frame);
-  expect(hit(23, 45)).toBe(false);
+  assert.equal(hit(23, 45), false);
   f.orbit.setPreparedFocus(null, frame);
-  expect(hit(23, 45)).toBe(true);
+  assert.equal(hit(23, 45), true);
   f.orbit.destroy();
 });
 
 it('flies, drags and dollies around a prepared focus while retaining the original detail frame and camera', async () => {
   const f = fixture(), roots = [...f.roots], initial = f.world();
   const flight = f.orbit.flyToPreparedFocus(focus, frame, optics, { durationMilliseconds: 1000 });
-  expect(f.orbit.preparedFocus()?.id).toBe(focus.id);
+  assert.equal(f.orbit.preparedFocus()?.id, focus.id);
   close(f.world().pose.positionM, initial.pose.positionM);
   f.tick(.35);
-  expect(f.world().pose.positionM).not.toEqual(initial.pose.positionM);
-  expect(f.range()).toBeGreaterThan(focus.arrivalDistanceM!);
+  assert.notDeepEqual(f.world().pose.positionM, initial.pose.positionM);
+  assert.ok(f.range() > focus.arrivalDistanceM!);
   f.tick(1);
-  expect(await flight).toEqual({ completed: true });
-  expect(f.range() / focus.arrivalDistanceM!).toBeCloseTo(1, 12);
+  assert.deepEqual((await flight), { completed: true });
+  assert.ok(Math.abs((f.range() / focus.arrivalDistanceM!) - (1)) < 10 ** -12 / 2, `${(f.range() / focus.arrivalDistanceM!)} is not close to ${1}`);
   const arrived = f.focusView().centerPixels!;
   close(arrived, [0,0], 1e-9);
   const oldDetailRange = f.range(frame.originM);
   f.callbacks.drag.rotate({ controlPitchDelta: 0, controlYawDelta: 45, rotation: [0, Math.sin(Math.PI/8), 0, Math.cos(Math.PI/8)] });
-  expect(f.range() / focus.arrivalDistanceM!).toBeCloseTo(1, 12);
+  assert.ok(Math.abs((f.range() / focus.arrivalDistanceM!) - (1)) < 10 ** -12 / 2, `${(f.range() / focus.arrivalDistanceM!)} is not close to ${1}`);
   close(f.focusView().centerPixels!, arrived, 1e-9);
-  expect(f.range(frame.originM)).not.toBe(oldDetailRange);
+  assert.notEqual(f.range(frame.originM), oldDetailRange);
   const metrics = f.callbacks.drag.trackballMetrics();
-  expect(metrics.centerX).toBeCloseTo(970, 8);
-  expect(metrics.centerY).toBeCloseTo(450, 8);
+  assert.ok(Math.abs(metrics.centerX - (970)) < 10 ** -8 / 2, `${metrics.centerX} is not close to ${970}`);
+  assert.ok(Math.abs(metrics.centerY - (450)) < 10 ** -8 / 2, `${metrics.centerY} is not close to ${450}`);
   const distance = f.callbacks.wheel.camera.state.distance;
   f.callbacks.wheel.rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance: distance * 2 });
-  expect(f.range() / (focus.arrivalDistanceM! * 2)).toBeCloseTo(1, 12);
+  assert.ok(Math.abs((f.range() / (focus.arrivalDistanceM! * 2)) - (1)) < 10 ** -12 / 2, `${(f.range() / (focus.arrivalDistanceM! * 2))} is not close to ${1}`);
   close(f.focusView().centerPixels!, arrived, 1e-9);
   f.callbacks.wheel.rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance: 1e30 });
-  expect(f.range() / focus.limits.maximumDistanceM).toBeCloseTo(1, 12);
-  expect(f.orbit.sharedState().distanceKilometers! * 1000 / f.range(frame.originM)).toBeCloseTo(1, 12);
-  expect(f.physicalOwners).toBe(1);
-  expect(f.roots).toEqual(roots);
-  expect(frame.originM).toEqual([3e7,4e7,5e7]);
-  expect(f.publications).toBeGreaterThan(5);
+  assert.ok(Math.abs((f.range() / focus.limits.maximumDistanceM) - (1)) < 10 ** -12 / 2, `${(f.range() / focus.limits.maximumDistanceM)} is not close to ${1}`);
+  assert.ok(Math.abs((f.orbit.sharedState().distanceKilometers! * 1000 / f.range(frame.originM)) - (1)) < 10 ** -12 / 2, `${(f.orbit.sharedState().distanceKilometers! * 1000 / f.range(frame.originM))} is not close to ${1}`);
+  assert.equal(f.physicalOwners, 1);
+  assert.deepEqual(f.roots, roots);
+  assert.deepEqual(frame.originM, [3e7,4e7,5e7]);
+  assert.ok(f.publications > 5);
   f.orbit.destroy();
 });
 
@@ -137,7 +139,7 @@ it('restores a focus without moving the saved world pose, then clears it without
   await f.orbit.flyToPreparedFocus(focus, frame, optics, { reducedMotion: true });
   const saved = f.orbit.sharedState(), before = f.world();
   f.orbit.setState(saved);
-  expect(f.orbit.preparedFocus()).toBeNull();
+  assert.equal(f.orbit.preparedFocus(), null);
   f.orbit.setPreparedFocus(focus, frame);
   close(f.world().pose.positionM, before.pose.positionM);
   close(f.world().pose.orientationXyzw, before.pose.orientationXyzw);
@@ -146,14 +148,14 @@ it('restores a focus without moving the saved world pose, then clears it without
   close(f.world().pose.positionM, translated.pose.positionM);
   const currentRange = f.range();
   f.callbacks.wheel.rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance: f.callbacks.wheel.camera.state.distance * .9 });
-  expect(f.range() / currentRange).toBeCloseTo(.9, 12);
+  assert.ok(Math.abs((f.range() / currentRange) - (.9)) < 10 ** -12 / 2, `${(f.range() / currentRange)} is not close to ${.9}`);
   const returnStart = f.world();
   f.orbit.setPreparedFocus(null, frame);
   close(f.world().pose.positionM, returnStart.pose.positionM);
   const detailRange = f.range(frame.originM);
   f.callbacks.drag.rotate({ controlPitchDelta: 0, controlYawDelta: 30, rotation: [0, Math.sin(Math.PI/12), 0, Math.cos(Math.PI/12)] });
-  expect(f.range(frame.originM) / detailRange).toBeCloseTo(1, 12);
-  expect(f.range() / currentRange).not.toBeCloseTo(.9, 3);
+  assert.ok(Math.abs((f.range(frame.originM) / detailRange) - (1)) < 10 ** -12 / 2, `${(f.range(frame.originM) / detailRange)} is not close to ${1}`);
+  assert.ok(!(Math.abs((f.range() / currentRange) - (.9)) < 10 ** -3 / 2));
   f.orbit.destroy();
 });
 
@@ -163,19 +165,19 @@ it('uses the retained motion owner for interruption, replacement and teardown, r
   f.tick(.2);
   const interrupted = f.world();
   controller.abort();
-  expect(await pending).toEqual({ completed: false });
-  expect(getEventListeners(controller.signal, 'abort')).toHaveLength(0);
+  assert.deepEqual((await pending), { completed: false });
+  assert.equal(getEventListeners(controller.signal, 'abort').length, 0);
   close(f.world().pose.positionM, interrupted.pose.positionM);
-  expect(f.orbit.preparedFocus()?.id).toBe(focus.id);
-  await expect(f.orbit.flyToPreparedFocus({ ...focus, limits: { minimumDistanceM: 1, maximumDistanceM: 0 } }, frame, optics)).rejects.toThrow('metadata');
+  assert.equal(f.orbit.preparedFocus()?.id, focus.id);
+  await assert.rejects(f.orbit.flyToPreparedFocus({ ...focus, limits: { minimumDistanceM: 1, maximumDistanceM: 0 } }, frame, optics), /metadata/);
   close(f.world().pose.positionM, interrupted.pose.positionM);
   const replacement = f.orbit.flyToPreparedFocus(focus, frame, optics, { durationMilliseconds: 1000 });
   // Catalogue ids such as the dwarf galaxy dw1343+58 carry a plus sign.
   const final = f.orbit.flyToPreparedFocus({ ...focus, id: 'dw1343+58', positionM: [2e20, -1e20, 3e20] }, frame, optics);
-  expect(await replacement).toEqual({ completed: false });
+  assert.deepEqual((await replacement), { completed: false });
   f.orbit.destroy();
-  expect(await final).toEqual({ completed: false });
-  for (const name of ['pointerdown','pointermove','pointerup','wheel','resize']) expect(getEventListeners(f.view, name)).toHaveLength(0);
+  assert.deepEqual((await final), { completed: false });
+  for (const name of ['pointerdown','pointermove','pointerup','wheel','resize']) assert.equal(getEventListeners(f.view, name).length, 0);
 });
 
 it('arrives on the line of sight from the Sun, celestial north up, whatever the previous view faced', async () => {
@@ -186,7 +188,7 @@ it('arrives on the line of sight from the Sun, celestial north up, whatever the 
     if (turned) f.callbacks.drag.rotate({ controlPitchDelta: 0, controlYawDelta: 180, rotation: [0, 1, 0, 0] });
     const flight = f.orbit.flyToPreparedFocus(focus, frame, optics, { durationMilliseconds: 1000 });
     f.tick(1);
-    expect(await flight).toEqual({ completed: true });
+    assert.deepEqual((await flight), { completed: true });
     poses.push(f.world().pose);
     f.orbit.destroy();
   }
@@ -195,15 +197,15 @@ it('arrives on the line of sight from the Sun, celestial north up, whatever the 
   const { positionM, orientationXyzw } = poses[0]!;
   const length = (v: readonly number[]) => Math.hypot(...v);
   // Between the Sun and the focus, at the arrival distance.
-  expect(length(positionM)).toBeLessThan(length(focus.positionM));
+  assert.ok(length(positionM) < length(focus.positionM));
   const sight = focus.positionM.map(v => v / length(focus.positionM));
   const offset = focus.positionM.map((v, axis) => v - positionM[axis]!);
   // The ray through the principal point, offset beside the panel, is the sightline; the view axis leaves it by that angle.
   const principal = Math.cos(Math.atan2(Math.hypot(...optics.principalOffsetPixels), optics.focalPixels));
-  expect(offset.reduce((sum, v, axis) => sum + v * sight[axis]!, 0) / length(offset)).toBeCloseTo(1, 9);
+  assert.ok(Math.abs((offset.reduce((sum, v, axis) => sum + v * sight[axis]!, 0) / length(offset)) - (1)) < 10 ** -9 / 2, `${(offset.reduce((sum, v, axis) => sum + v * sight[axis]!, 0) / length(offset))} is not close to ${1}`);
   const forward = [-worldRotationFromQuaternion(orientationXyzw)[2]!, -worldRotationFromQuaternion(orientationXyzw)[5]!, -worldRotationFromQuaternion(orientationXyzw)[8]!];
-  expect(forward.reduce((sum, v, axis) => sum + v * sight[axis]!, 0)).toBeCloseTo(principal, 9);
+  assert.ok(Math.abs(forward.reduce((sum, v, axis) => sum + v * sight[axis]!, 0) - (principal)) < 10 ** -9 / 2, `${forward.reduce((sum, v, axis) => sum + v * sight[axis]!, 0)} is not close to ${principal}`);
   // Camera +y (up) leans toward celestial north.
   const axes = worldRotationFromQuaternion(orientationXyzw);
-  expect(axes[7]).toBeGreaterThan(0);
+  assert.ok(axes[7] > 0);
 });

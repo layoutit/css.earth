@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseImageLayerBankDescriptor } from './image-layer-bank.js';
 
 function descriptor() {
@@ -8,11 +10,11 @@ function descriptor() {
     preparation: { source: 'source/recipe.json' } } };
 }
 test('parses a renderer-independent spatial image model without assigning measured density', () => {
-  expect(parseImageLayerBankDescriptor(descriptor())).toMatchObject({ type: 'image-layer-bank', frame: { metersPerUnit: 100 } });
+  assert.partialDeepStrictEqual(parseImageLayerBankDescriptor(descriptor()), { type: 'image-layer-bank', frame: { metersPerUnit: 100 } });
 });
 test('rejects malformed physical frames and uncontained source references', () => {
   const invalidFrame = descriptor(); invalidFrame.properties.frame.localToReferenceXyzw[3] = 2;
-  expect(() => parseImageLayerBankDescriptor(invalidFrame)).toThrow(/unit quaternion/);
+  assert.throws(() => parseImageLayerBankDescriptor(invalidFrame), /unit quaternion/);
   const escaped = descriptor(); escaped.properties.preparation.source = '../recipe.json';
-  expect(() => parseImageLayerBankDescriptor(escaped)).toThrow(/contained/);
+  assert.throws(() => parseImageLayerBankDescriptor(escaped), /contained/);
 });

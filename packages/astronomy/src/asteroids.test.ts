@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { asteroidElements, asteroidPositionKm, isExtremeTransNeptunian } from './asteroids.js'
 import { ASTEROID_FIXTURES } from './__fixtures__/horizons.asteroids.js'
 import { SMALL_BODY_IDS } from './bodies.js'
@@ -10,7 +12,7 @@ describe('asteroid positions against JPL Horizons', () => {
       const row = ASTEROID_FIXTURES[id].rows.find(row => row.jd === epoch)!
       const actual = asteroidPositionKm(id, epoch)
       // Printed-digit roundoff: 2017 OF201 (e = 0.945, 91 au away) measures 2.00 m, a relative 1.5e-13.
-      expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(0.003)
+      assert.ok(Math.hypot(...actual.map((v, i) => v - row.position[i]!)) < 0.003)
     }
   })
   it('bounds the measured propagation error at the two independent nearby dates', () => {
@@ -76,7 +78,7 @@ describe('asteroid positions against JPL Horizons', () => {
       aspasia: 233, papagena: 2527, ara: 244, aquitania: 243, carlova: 297, siegena: 2807, aurelia: 327, 'asteroid-1999-jv6': 210, nyx: 1152, eger: 592 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
-      expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])
+      assert.ok(Math.hypot(...actual.map((v, i) => v - row.position[i]!)) < maximumErrorKm[id])
     }
   })
 })
@@ -84,7 +86,7 @@ describe('asteroid positions against JPL Horizons', () => {
 describe('extreme trans-Neptunian objects', () => {
   it('are the trans-Neptunian objects beyond a = 150 au with perihelion past 30 au', () => {
     // Sedna (a 541 au, q 76 au) and Leleakuhonua qualify; Eris (a 68 au) and Quaoar (a 43 au) do not; an asteroid never does.
-    for (const id of ['sedna', 'leleakuhonua', 'asteroid-2012-vp113']) expect(isExtremeTransNeptunian(id), id).toBe(true)
-    for (const id of ['quaoar', 'gonggong', 'ceres', 'vesta', 'not-a-body']) expect(isExtremeTransNeptunian(id), id).toBe(false)
+    for (const id of ['sedna', 'leleakuhonua', 'asteroid-2012-vp113']) assert.equal(isExtremeTransNeptunian(id), true, id)
+    for (const id of ['quaoar', 'gonggong', 'ceres', 'vesta', 'not-a-body']) assert.equal(isExtremeTransNeptunian(id), false, id)
   })
 })

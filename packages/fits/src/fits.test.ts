@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable, readFitsPrimary, readFitsPlane } from './index.js';
 import { card, imageFixture } from './node/fixtures/bytes.js';
 

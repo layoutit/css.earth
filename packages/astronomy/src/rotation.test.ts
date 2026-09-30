@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { angleBetweenDeg, distance, magnitude } from './__fixtures__/compare.js'
 import { ROTATION_FIXTURES } from './__fixtures__/rotation.js'
 import { OBLIQUITY_J2000_RAD, RAD_PER_DEG } from './angles.js'
@@ -70,12 +72,12 @@ describe('IAU WGCCRE rotation against the orientation Horizons uses', () => {
     // The Sun is the one body Horizons will not put a site on, so it is the one
     // model here with no independent check. Said out loud rather than left to
     // be noticed.
-    expect(new Set(FIXTURE_IDS)).toEqual(new Set(ROTATING_BODY_IDS.filter((id) => id !== 'sun')))
+    assert.deepEqual((new Set(FIXTURE_IDS)), new Set(ROTATING_BODY_IDS.filter((id) => id !== 'sun')))
   })
 
-  it.each(FIXTURE_IDS)('orients %s', (id) => {
+  for (const id of FIXTURE_IDS) it(`orients ${id}`, () => {
     const fixture = ROTATION_FIXTURES[id]!
-    expect(fixture.rows.length).toBe(3)
+    assert.equal(fixture.rows.length, 3)
     const tolerance = toleranceFor(id)
     let worstPole = 0
     let worstMeridian = 0
@@ -86,8 +88,8 @@ describe('IAU WGCCRE rotation against the orientation Horizons uses', () => {
       worstPole = Math.max(worstPole, angleBetweenDeg(bodyZ, row.poleSiteKm))
       worstMeridian = Math.max(worstMeridian, angleBetweenDeg(bodyX, row.primeMeridianSiteKm))
     }
-    expect(worstPole).toBeLessThan(tolerance.pole)
-    expect(worstMeridian).toBeLessThan(tolerance.primeMeridian)
+    assert.ok(worstPole < tolerance.pole)
+    assert.ok(worstMeridian < tolerance.primeMeridian)
   })
 
   it('agrees with the fixtures about which way the pole points, not just which axis', () => {
@@ -99,7 +101,7 @@ describe('IAU WGCCRE rotation against the orientation Horizons uses', () => {
       for (const row of ROTATION_FIXTURES[id]!.rows) {
         const pole = bodyPoleIcrf(bodyRotationAt(id as RotatingBodyId, row.jdTdb))
         const dot = pole[0] * row.poleSiteKm[0] + pole[1] * row.poleSiteKm[1] + pole[2] * row.poleSiteKm[2]
-        expect(dot).toBeGreaterThan(0)
+        assert.ok(dot > 0)
       }
     }
   })
@@ -115,17 +117,17 @@ describe('the rotation matrix itself', () => {
           [m[1]!, m[4]!, m[7]!],
           [m[2]!, m[5]!, m[8]!],
         ]
-        for (const column of columns) expect(magnitude(column)).toBeCloseTo(1, 12)
+        for (const column of columns) assert.ok(Math.abs(magnitude(column) - (1)) < 10 ** -12 / 2, `${magnitude(column)} is not close to ${1}`)
         const dot = (a: number[], b: number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!
-        expect(dot(columns[0]!, columns[1]!)).toBeCloseTo(0, 12)
-        expect(dot(columns[1]!, columns[2]!)).toBeCloseTo(0, 12)
-        expect(dot(columns[0]!, columns[2]!)).toBeCloseTo(0, 12)
+        assert.ok(Math.abs(dot(columns[0]!, columns[1]!) - (0)) < 10 ** -12 / 2, `${dot(columns[0]!, columns[1]!)} is not close to ${0}`)
+        assert.ok(Math.abs(dot(columns[1]!, columns[2]!) - (0)) < 10 ** -12 / 2, `${dot(columns[1]!, columns[2]!)} is not close to ${0}`)
+        assert.ok(Math.abs(dot(columns[0]!, columns[2]!) - (0)) < 10 ** -12 / 2, `${dot(columns[0]!, columns[2]!)} is not close to ${0}`)
         const cross = [
           columns[0]![1]! * columns[1]![2]! - columns[0]![2]! * columns[1]![1]!,
           columns[0]![2]! * columns[1]![0]! - columns[0]![0]! * columns[1]![2]!,
           columns[0]![0]! * columns[1]![1]! - columns[0]![1]! * columns[1]![0]!,
         ]
-        expect(distance(cross, columns[2]!)).toBeLessThan(1e-12)
+        assert.ok(distance(cross, columns[2]!) < 1e-12)
       }
     }
   })
@@ -134,7 +136,7 @@ describe('the rotation matrix itself', () => {
     for (const id of ROTATING_BODY_IDS) {
       const elements = bodyRotationAt(id, 2461041.5)
       const m = bodyFixedToIcrf(elements)
-      expect(distance([m[2]!, m[5]!, m[8]!], bodyPoleIcrf(elements))).toBeLessThan(1e-15)
+      assert.ok(distance([m[2]!, m[5]!, m[8]!], bodyPoleIcrf(elements)) < 1e-15)
     }
   })
 
@@ -147,9 +149,7 @@ describe('the rotation matrix itself', () => {
     for (const id of ROTATING_BODY_IDS) {
       const before = bodyRotationAt(id, 2451545)
       const after = bodyRotationAt(id, 2451546)
-      expect(Math.abs(wrapToPi(after.primeMeridianRad - before.primeMeridianRad - before.spinRateRadPerDay))).toBeLessThan(
-        2 * RAD_PER_DEG,
-      )
+      assert.ok(Math.abs(wrapToPi(after.primeMeridianRad - before.primeMeridianRad - before.spinRateRadPerDay)) < 2 * RAD_PER_DEG)
     }
   })
 
@@ -165,7 +165,7 @@ describe('the rotation matrix itself', () => {
       const before = bodyRotationAt(id, 2451545)
       const after = bodyRotationAt(id, 2451545 + days)
       const expected = before.spinRateRadPerDay * days
-      expect(Math.abs(wrapToPi(after.primeMeridianRad - before.primeMeridianRad - expected))).toBeLessThan(120 * RAD_PER_DEG)
+      assert.ok(Math.abs(wrapToPi(after.primeMeridianRad - before.primeMeridianRad - expected)) < 120 * RAD_PER_DEG)
     }
   })
 
@@ -173,20 +173,20 @@ describe('the rotation matrix itself', () => {
     // 23.44 degrees, the one number in this module a reader can check by eye.
     const pole = bodyPoleIcrf(bodyRotationAt('earth', 2451545))
     const eclipticPole = [0, -Math.sin(OBLIQUITY_J2000_RAD), Math.cos(OBLIQUITY_J2000_RAD)]
-    expect(Math.abs(angleBetweenDeg(pole, eclipticPole) - 23.4392911)).toBeLessThan(0.01)
+    assert.ok(Math.abs(angleBetweenDeg(pole, eclipticPole) - 23.4392911) < 0.01)
   })
 
   it('rejects a body with no rotation model rather than returning identity', () => {
     // Was 'pluto' — deliberately changed, not deleted: Pluto now HAS a WGCCRE
     // pole (`rotation.ts`, sourced from NAIF's post-New-Horizons PCK) and is
     // checked against Horizons like every other rotating body, in the
-    // `it.each(FIXTURE_IDS)('orients %s', ...)` test above. Eris, Haumea and
+    // fixture loop above. Eris, Haumea and
     // Makemake replace it here: they genuinely have no published pole — no
     // resolved-disk imagery exists to derive one from — so this absence is
     // correct and permanent, not a gap waiting to be filled the way Pluto's
     // was. `ROTATING_BODY_IDS` correctly omits all three.
     for (const id of ['eris', 'haumea', 'makemake'] as const) {
-      expect(() => bodyRotationAt(id as RotatingBodyId, 2451545)).toThrow(/no IAU rotation model/)
+      assert.throws(() => bodyRotationAt(id as RotatingBodyId, 2451545), /no IAU rotation model/)
     }
   })
 
@@ -199,7 +199,7 @@ describe('the rotation matrix itself', () => {
     const turned = start.spinRateRadPerDay * DAYS_PER_JULIAN_CENTURY
     let delta = end.primeMeridianRad - start.primeMeridianRad - turned
     delta = ((delta % (2 * Math.PI)) + 3 * Math.PI) % (2 * Math.PI) - Math.PI
-    expect(Math.abs(delta)).toBeLessThan(1e-6)
+    assert.ok(Math.abs(delta) < 1e-6)
   })
 })
 

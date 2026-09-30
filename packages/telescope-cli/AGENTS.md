@@ -27,7 +27,7 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   A lock's `Regenerate:` header still naming the old tool path is refreshed at the next solve, since an installed toolchain
   keeps the lock's text and a changed lock asks for a reinstall. `packages/bake/authoring/juno/juno.test.mts`
   stays there until the stale JunoCam ledger is regenerated: its ledger-state check fails until then, and
-  `test:telescope-cli` runs every test in this package;
+  `test:packages` runs every test in this package;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `src/sphere/sphere-lane.mts` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
   application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
@@ -51,7 +51,7 @@ and the nebula lab's sky-band adapter use it; its tests are beside the composer 
 `@cssearth/objects/node/source-test` helper and FITS fixtures they read.
 
 The workspace's tools import it only through the subpaths `package.json` exports. Its node tests run with
-`pnpm test:telescope-cli`; a test whose toolchain or restored input is absent skips and names it.
+`pnpm test:packages`; a test whose toolchain or restored input is absent skips and names it.
 
 ## Shared package contract
 

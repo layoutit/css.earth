@@ -2,9 +2,13 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { onTestFinished, test } from 'vitest';
+import { after, test } from 'node:test';
 import { parseNavigationDistance } from '../registry/index.js';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from './prepared-registry.js';
+
+// Temporary checkouts the tests make, removed once the file's tests finish.
+const temporary: string[] = [];
+after(() => Promise.all(temporary.map(path => rm(path, { recursive: true, force: true }))));
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, 0, 1, 0, 1, 0],
   metersPerUnit: 1, bodyRadiusM: 1 };
@@ -26,7 +30,7 @@ const scenes = [scene('sun', 0, false), scene('mars', 1.5, true)];
 
 async function checkout(records: { scenes?: typeof scenes; focuses?: readonly unknown[]; module?: string; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));
-  onTestFinished(() => rm(root, { force: true, recursive: true }));
+  temporary.push(root);
   for (const [id, order, classification] of [['sun', 0, 'star'], ['mars', 4, 'planet']] as const) {
     await mkdir(join(root, 'src/objects', id), { recursive: true });
     await writeFile(join(root, 'src/objects', id, 'object.json'), JSON.stringify(descriptor(id, order, classification)));

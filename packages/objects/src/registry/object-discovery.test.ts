@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { discoveryVisibility } from './object-discovery.js';
 
 const star = (id: string, discovery: { featured?: boolean; imagery?: boolean } = {}) => ({ id, classification: 'star',

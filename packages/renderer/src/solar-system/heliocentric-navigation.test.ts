@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { bindObjectNavigationTarget, supportsObjectNavigation } from './heliocentric-navigation.js';
 
 class Target extends EventTarget {

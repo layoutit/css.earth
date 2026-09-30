@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { distance, magnitude } from './__fixtures__/compare.js'
 import {
   keplerApoapsisKm, keplerPeriodDays, keplerStateKm,
@@ -29,8 +31,8 @@ const hyperbola: KeplerianElements = {
 describe('hyperbolic Keplerian propagation', () => {
   it('recovers the independently specified perigee position and tangential speed', () => {
     const state = keplerStateKm(hyperbola, hyperbola.epochJdTt)
-    expect(distance(state.positionKm, [perigeeKm, 0, 0])).toBeLessThan(1e-9)
-    expect(distance(state.velocityKmPerDay, [0, perigeeSpeedKmPerS * 86400, 0])).toBeLessThan(1e-8)
+    assert.ok(distance(state.positionKm, [perigeeKm, 0, 0]) < 1e-9)
+    assert.ok(distance(state.velocityKmPerDay, [0, perigeeSpeedKmPerS * 86400, 0]) < 1e-8)
   })
 
   it('matches the published worked example away from perigee', () => {
@@ -40,23 +42,23 @@ describe('hyperbolic Keplerian propagation', () => {
     const h = 2 * Math.atanh(Math.sqrt((eccentricity - 1) / (eccentricity + 1)) * Math.tan(trueAnomalyRad / 2))
     const days = (eccentricity * Math.sinh(h) - h) / hyperbola.meanMotionRadPerDay + 3 / 24
     const state = keplerStateKm(hyperbola, hyperbola.epochJdTt + days)
-    expect(Math.abs(Math.atan2(state.positionKm[1], state.positionKm[0]) * 180 / Math.PI - 107.78)).toBeLessThan(0.005)
-    expect(Math.abs(magnitude(state.positionKm) - 163180)).toBeLessThan(5)
-    expect(Math.abs(magnitude(state.velocityKmPerDay) / 86400 - 10.51)).toBeLessThan(0.005)
+    assert.ok(Math.abs(Math.atan2(state.positionKm[1], state.positionKm[0]) * 180 / Math.PI - 107.78) < 0.005)
+    assert.ok(Math.abs(magnitude(state.positionKm) - 163180) < 5)
+    assert.ok(Math.abs(magnitude(state.velocityKmPerDay) / 86400 - 10.51) < 0.005)
   })
 
   it('has inbound/outbound symmetry and never repeats after 2π of mean anomaly', () => {
     for (const days of [1 / 64, 1, 10000]) {
       const before = keplerStateKm(hyperbola, hyperbola.epochJdTt - days)
       const after = keplerStateKm(hyperbola, hyperbola.epochJdTt + days)
-      expect(distance(before.positionKm, [after.positionKm[0], -after.positionKm[1], 0]) / magnitude(after.positionKm)).toBeLessThan(1e-14)
-      expect(distance(before.velocityKmPerDay, [-after.velocityKmPerDay[0], after.velocityKmPerDay[1], 0]) / magnitude(after.velocityKmPerDay)).toBeLessThan(1e-14)
-      expect(before.positionKm[1]).toBeLessThan(0)
-      expect(after.positionKm[1]).toBeGreaterThan(0)
+      assert.ok((distance(before.positionKm, [after.positionKm[0], -after.positionKm[1], 0]) / magnitude(after.positionKm)) < 1e-14)
+      assert.ok((distance(before.velocityKmPerDay, [-after.velocityKmPerDay[0], after.velocityKmPerDay[1], 0]) / magnitude(after.velocityKmPerDay)) < 1e-14)
+      assert.ok(before.positionKm[1] < 0)
+      assert.ok(after.positionKm[1] > 0)
     }
     const later = keplerStateKm(hyperbola, hyperbola.epochJdTt + 2 * Math.PI / hyperbola.meanMotionRadPerDay)
-    expect(magnitude(later.positionKm)).toBeGreaterThan(perigeeKm)
-    expect(later.positionKm[1]).toBeGreaterThan(perigeeKm)
+    assert.ok(magnitude(later.positionKm) > perigeeKm)
+    assert.ok(later.positionKm[1] > perigeeKm)
   })
 
   it('preserves the independently specified positive energy and angular momentum', () => {
@@ -66,8 +68,8 @@ describe('hyperbolic Keplerian propagation', () => {
       const v = velocityKmPerDay.map(component => component / 86400)
       const energy = magnitude(v) ** 2 / 2 - gmKm3PerS2 / magnitude(r)
       const momentum = magnitude([r[1] * v[2]! - r[2] * v[1]!, r[2] * v[0]! - r[0] * v[2]!, r[0] * v[1]! - r[1] * v[0]!])
-      expect(Math.abs(energy / energyKm2PerS2 - 1)).toBeLessThan(1e-12)
-      expect(Math.abs(momentum / (perigeeKm * perigeeSpeedKmPerS) - 1)).toBeLessThan(1e-10)
+      assert.ok(Math.abs(energy / energyKm2PerS2 - 1) < 1e-12)
+      assert.ok(Math.abs(momentum / (perigeeKm * perigeeSpeedKmPerS) - 1) < 1e-10)
     }
   })
 
@@ -82,7 +84,7 @@ describe('hyperbolic Keplerian propagation', () => {
       const at = (offset: number) => keplerStateKm(elements, epoch + offset).positionKm
       const numeric = [0, 1, 2].map(i => (-at(2 * stepDays)[i]! + 8 * at(stepDays)[i]! - 8 * at(-stepDays)[i]! + at(-2 * stepDays)[i]!) / (12 * stepDays))
       const analytic = keplerStateKm(elements, epoch).velocityKmPerDay
-      expect(distance(numeric, analytic) / magnitude(analytic)).toBeLessThan(1e-8)
+      assert.ok((distance(numeric, analytic) / magnitude(analytic)) < 1e-8)
     }
   })
 
@@ -90,8 +92,8 @@ describe('hyperbolic Keplerian propagation', () => {
     for (const e of [1.000001, 1.2, eccentricity, 10]) {
       for (const m of [-1e6, -100, -1, -1e-6, 1e-6, 1, 100, 1e6]) {
         const h = solveKeplerHyperbolicAnomalyRad(m, e)
-        expect(Math.abs((e * Math.sinh(h) - h - m) / m)).toBeLessThan(1e-11)
-        expect(Math.sign(h)).toBe(Math.sign(m))
+        assert.ok(Math.abs((e * Math.sinh(h) - h - m) / m) < 1e-11)
+        assert.equal(Math.sign(h), Math.sign(m))
       }
     }
   })
@@ -104,16 +106,16 @@ describe('hyperbolic Keplerian propagation', () => {
       { semiMajorAxisKm: Number.NEGATIVE_INFINITY }, { semiMajorAxisKm: Number.NaN },
     ]) {
       const invalid = { ...hyperbola, ...override }
-      expect(() => keplerStateKm(invalid, invalid.epochJdTt)).toThrow(/eccentricity|semiMajorAxisKm/)
-      expect(() => keplerApoapsisKm(invalid)).toThrow(/eccentricity|semiMajorAxisKm/)
-      expect(() => keplerPeriodDays(invalid)).toThrow(/eccentricity|semiMajorAxisKm/)
+      assert.throws(() => keplerStateKm(invalid, invalid.epochJdTt), /eccentricity|semiMajorAxisKm/)
+      assert.throws(() => keplerApoapsisKm(invalid), /eccentricity|semiMajorAxisKm/)
+      assert.throws(() => keplerPeriodDays(invalid), /eccentricity|semiMajorAxisKm/)
     }
-    expect(() => solveKeplerHyperbolicAnomalyRad(Number.POSITIVE_INFINITY, 1.2)).toThrow(/finite/)
-    expect(() => solveKeplerHyperbolicAnomalyRad(1, 1)).toThrow(/eccentricity/)
+    assert.throws(() => solveKeplerHyperbolicAnomalyRad(Number.POSITIVE_INFINITY, 1.2), /finite/)
+    assert.throws(() => solveKeplerHyperbolicAnomalyRad(1, 1), /eccentricity/)
   })
 
   it('does not manufacture an apoapsis or orbital period for an unbound trajectory', () => {
-    expect(() => keplerApoapsisKm(hyperbola)).toThrow(/no finite apoapsis/)
-    expect(() => keplerPeriodDays(hyperbola)).toThrow(/no orbital period/)
+    assert.throws(() => keplerApoapsisKm(hyperbola), /no finite apoapsis/)
+    assert.throws(() => keplerPeriodDays(hyperbola), /no orbital period/)
   })
 })

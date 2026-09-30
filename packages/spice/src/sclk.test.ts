@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { parseTextKernel } from './text-kernel.js';
 import { parseLeapSeconds } from './lsk.js';
 import { parseSpacecraftClock, encodeClock, clockToEt, etToClock } from './sclk.js';

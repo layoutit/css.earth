@@ -79,9 +79,7 @@ node .github/scripts/checks/typescript-ownership.mts
 pnpm typecheck
 pnpm typecheck:oracles
 pnpm test:packages
-pnpm test:renderer
-pnpm test:node
-pnpm test:preparation
+pnpm test:site
 ```
 
 `typecheck:tests` invokes the strict test compiler directly. The native suite uses

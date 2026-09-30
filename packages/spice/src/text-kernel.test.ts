@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { parseTextKernel, parseDateToken, numbers, strings, number } from './text-kernel.js';
 import { parseLeapSeconds, utcToEt } from './lsk.js';
 

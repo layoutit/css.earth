@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { test } from "vitest";
+import { test } from 'node:test';
 import {
   DEFAULT_LABEL_POLICY,
   LABEL_OWNER_BODY,

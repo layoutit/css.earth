@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { mountPreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
 import type { PreparedResources } from './prepared-residency.js';
 
@@ -22,28 +24,28 @@ function fixture() {
 test('dataset replacement retires only its former texture references without replacing nodes', () => {
   const f = fixture(), identities = [...f.nodes];
   f.select('a');
-  expect(f.nodes[2].style.backgroundImage).toBe('url("/a.webp")');
+  assert.equal(f.nodes[2].style.backgroundImage, 'url("/a.webp")');
   f.select('b');
-  expect(f.nodes[2].style.backgroundImage).toBe('none');
-  expect(f.nodes[3].style.backgroundImage).toBe('url("/b.webp")');
+  assert.equal(f.nodes[2].style.backgroundImage, 'none');
+  assert.equal(f.nodes[3].style.backgroundImage, 'url("/b.webp")');
   f.select('a');
-  expect(f.nodes[2].style.backgroundImage).toBe('url("/a.webp")');
-  expect(f.nodes[3].style.backgroundImage).toBe('none');
-  expect(f.nodes).toEqual(identities);
+  assert.equal(f.nodes[2].style.backgroundImage, 'url("/a.webp")');
+  assert.equal(f.nodes[3].style.backgroundImage, 'none');
+  assert.deepEqual(f.nodes, identities);
 });
 
 test('an undecoded replacement leaves the entire previous dataset published', () => {
   const f = fixture(); f.select('a'); f.ready.delete('b');
-  expect(() => f.select('b')).toThrow('not ready');
-  expect(f.nodes[2].style.backgroundImage).toBe('url("/a.webp")');
-  expect(f.nodes[3].style.backgroundImage).toBe('none');
+  assert.throws(() => f.select('b'), /not ready/);
+  assert.equal(f.nodes[2].style.backgroundImage, 'url("/a.webp")');
+  assert.equal(f.nodes[3].style.backgroundImage, 'none');
 });
 
 test('a successor style takes ownership of the same texture property', () => {
   const f = fixture(); f.select('a'); f.select('fixed');
-  expect(f.nodes[2].style.backgroundImage).toBe('url("/fixed.webp")');
+  assert.equal(f.nodes[2].style.backgroundImage, 'url("/fixed.webp")');
   f.select('b');
-  expect(f.nodes[2].style.backgroundImage).toBe('url("/fixed.webp")');
+  assert.equal(f.nodes[2].style.backgroundImage, 'url("/fixed.webp")');
 });
 
 test('an alternative surface profile is hidden before its shared atlas changes', () => {
@@ -77,8 +79,8 @@ test('an alternative surface profile is hidden before its shared atlas changes',
     has: key => key === 'b', read: () => null, url: key => key === 'b' ? '/b.webp' : null, readyKeys: () => ['b'],
   };
   presentation.commitSelection({ selection: { datasetId: 'b' }, resources });
-  expect(invalid).toEqual([]);
-  expect(Object.fromEntries(values)).toMatchObject({
+  assert.deepEqual(invalid, []);
+  assert.partialDeepStrictEqual(Object.fromEntries(values), {
     '--fixture-surface-image': 'url("/b.webp")',
     '--fixture-a-display': 'none',
     '--fixture-b-display': 'block',
@@ -105,15 +107,15 @@ test('a body with several shape models mounts only the mesh its dataset draws on
     { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
   const mounted = () => nodes.slice(3).map(node => node.parentNode !== null);
   // Before any selection no mesh shows, so none is mounted.
-  expect(mounted()).toEqual([false, false, false]);
+  assert.deepEqual(mounted(), [false, false, false]);
   const resources: PreparedResources = { has: () => true, read: () => null, url: () => null, readyKeys: () => [] };
   presentation.commitSelection({ selection: { datasetId: 'a' }, resources });
-  expect(mounted()).toEqual([true, true, false]);
+  assert.deepEqual(mounted(), [true, true, false]);
   presentation.commitSelection({ selection: { datasetId: 'b' }, resources });
-  expect(mounted()).toEqual([false, false, true]);
+  assert.deepEqual(mounted(), [false, false, true]);
   presentation.commitSelection({ selection: { datasetId: 'a' }, resources });
-  expect(mounted()).toEqual([true, true, false]);
-  expect([...nodes[2]!.children]).toEqual([nodes[3], nodes[4]]);
+  assert.deepEqual(mounted(), [true, true, false]);
+  assert.deepEqual(([...nodes[2]!.children]), [nodes[3], nodes[4]]);
 });
 
 test('a hidden subtree such as a cutaway is mounted only while a dataset shows it', async () => {
@@ -130,10 +132,10 @@ test('a hidden subtree such as a cutaway is mounted only while a dataset shows i
   const presentation = mountPreparedPresentation(stage, { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
     { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
   const mounted = () => [nodes[3], nodes[4]].map(node => node!.parentNode !== null);
-  expect(mounted()).toEqual([false, false]);
+  assert.deepEqual(mounted(), [false, false]);
   const resources: PreparedResources = { has: () => true, read: () => null, url: () => null, readyKeys: () => [] };
   presentation.commitSelection({ selection: { datasetId: 'cut' }, resources });
-  expect(mounted()).toEqual([true, true]);
+  assert.deepEqual(mounted(), [true, true]);
   presentation.commitSelection({ selection: { datasetId: 'surface' }, resources });
-  expect(mounted()).toEqual([false, false]);
+  assert.deepEqual(mounted(), [false, false]);
 });

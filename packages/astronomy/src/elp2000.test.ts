@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { angleBetweenDeg, distance, magnitude, scaled } from './__fixtures__/compare.js'
 import { HORIZONS } from './__fixtures__/horizons.js'
 import {
@@ -29,13 +31,13 @@ const REGRESSION_TOLERANCE_KM = 3.17
 describe('ELP2000-82B against JPL Horizons', () => {
   it('places the Moon inside its budget at every fixture epoch', () => {
     const fixture = HORIZONS.moonGeocentric!
-    expect(fixture.rows.length).toBe(7)
+    assert.equal(fixture.rows.length, 7)
     let worst = 0
     for (const row of fixture.rows) {
       worst = Math.max(worst, distance(moonGeocentricKm(row.jdTdb), row.positionKm))
     }
-    expect(worst).toBeLessThan(REGRESSION_TOLERANCE_KM)
-    expect(REGRESSION_TOLERANCE_KM).toBeLessThanOrEqual(BUDGET_KM)
+    assert.ok(worst < REGRESSION_TOLERANCE_KM)
+    assert.ok(REGRESSION_TOLERANCE_KM <= BUDGET_KM)
   })
 
   it('is right at both ends of the validity window, not just near J2000', () => {
@@ -43,7 +45,7 @@ describe('ELP2000-82B against JPL Horizons', () => {
     // J2000 by construction: t = 0 kills every term it multiplies.
     for (const jd of [ELP2000_VALID_FROM_JD, ELP2000_VALID_TO_JD]) {
       const row = HORIZONS.moonGeocentric!.rows.find((candidate) => candidate.jdTdb === jd)!
-      expect(distance(moonGeocentricKm(jd), row.positionKm)).toBeLessThan(REGRESSION_TOLERANCE_KM)
+      assert.ok(distance(moonGeocentricKm(jd), row.positionKm) < REGRESSION_TOLERANCE_KM)
     }
   })
 
@@ -61,19 +63,19 @@ describe('ELP2000-82B against JPL Horizons', () => {
     // the elongation Horizons' own vectors give to a thousandth of a degree.
     const moonRows = HORIZONS.moonGeocentricSyzygy!.rows
     const sunRows = HORIZONS.sunGeocentricSyzygy!.rows
-    expect(moonRows.length).toBe(2)
+    assert.equal(moonRows.length, 2)
 
     const [fullMoon, newMoon] = moonRows
     const elongation = (jd: number, sunPositionKm: readonly number[]) => angleBetweenDeg(moonGeocentricKm(jd), sunPositionKm)
 
-    expect(180 - elongation(fullMoon!.jdTdb, sunRows[0]!.positionKm)).toBeLessThan(0.5)
-    expect(elongation(newMoon!.jdTdb, sunRows[1]!.positionKm)).toBeLessThan(1.2)
+    assert.ok((180 - elongation(fullMoon!.jdTdb, sunRows[0]!.positionKm)) < 0.5)
+    assert.ok(elongation(newMoon!.jdTdb, sunRows[1]!.positionKm) < 1.2)
 
     // Sharp form: same angle, computed from Horizons' Moon instead of ours.
     for (let i = 0; i < 2; i++) {
       const fromHorizons = angleBetweenDeg(moonRows[i]!.positionKm, sunRows[i]!.positionKm)
       const fromHere = elongation(moonRows[i]!.jdTdb, sunRows[i]!.positionKm)
-      expect(Math.abs(fromHere - fromHorizons)).toBeLessThan(0.002)
+      assert.ok(Math.abs(fromHere - fromHorizons) < 0.002)
     }
 
     // And the alignment is a property of those instants, not of the geometry in
@@ -84,13 +86,13 @@ describe('ELP2000-82B against JPL Horizons', () => {
       const target = i === 0 ? 180 : 0
       for (const offsetDays of [-1, 1]) {
         const away = elongation(moonRows[i]!.jdTdb + offsetDays, sunRows[i]!.positionKm)
-        expect(Math.abs(away - target)).toBeGreaterThan(10)
+        assert.ok(Math.abs(away - target) > 10)
       }
     }
 
     // And the Moon really is where Horizons puts it at those two instants.
-    expect(distance(moonGeocentricKm(fullMoon!.jdTdb), fullMoon!.positionKm)).toBeLessThan(REGRESSION_TOLERANCE_KM)
-    expect(distance(moonGeocentricKm(newMoon!.jdTdb), newMoon!.positionKm)).toBeLessThan(REGRESSION_TOLERANCE_KM)
+    assert.ok(distance(moonGeocentricKm(fullMoon!.jdTdb), fullMoon!.positionKm) < REGRESSION_TOLERANCE_KM)
+    assert.ok(distance(moonGeocentricKm(newMoon!.jdTdb), newMoon!.positionKm) < REGRESSION_TOLERANCE_KM)
   })
 
   it('stays between perigee and apogee across a full year of orbits', () => {
@@ -109,15 +111,15 @@ describe('ELP2000-82B against JPL Horizons', () => {
       worstStepKm = Math.max(worstStepKm, magnitude(sub(position, previous)))
       previous = position
     }
-    expect(closest).toBeGreaterThan(356300)
-    expect(closest).toBeLessThan(370000)
-    expect(farthest).toBeGreaterThan(400000)
-    expect(farthest).toBeLessThan(406900)
+    assert.ok(closest > 356300)
+    assert.ok(closest < 370000)
+    assert.ok(farthest > 400000)
+    assert.ok(farthest < 406900)
     // The Moon's fastest geocentric speed is 1.10 km/s at perigee, so a
     // quarter day is 23 800 km. Anything past 24 200 is a discontinuity, not
     // motion.
-    expect(worstStepKm).toBeLessThan(24200)
-    expect(worstStepKm).toBeGreaterThan(15000)
+    assert.ok(worstStepKm < 24200)
+    assert.ok(worstStepKm > 15000)
   })
 
   it('is 1.4 degrees of the Moon\'s own orbit away from the ecliptic, not the equator', () => {
@@ -132,14 +134,14 @@ describe('ELP2000-82B against JPL Horizons', () => {
       const latitude = (Math.asin(position[2] / magnitude(position)) * 180) / Math.PI
       maxLatitudeDeg = Math.max(maxLatitudeDeg, Math.abs(latitude))
     }
-    expect(maxLatitudeDeg).toBeGreaterThan(18)
-    expect(maxLatitudeDeg).toBeLessThan(29)
+    assert.ok(maxLatitudeDeg > 18)
+    assert.ok(maxLatitudeDeg < 29)
   })
 
   it('kept the number of terms the data file claims', () => {
-    expect(ELP2000_TERM_COUNT).toBe(934)
-    expect(ELP2000_TRUNCATION_BOUND_KM).toBeLessThan(2)
+    assert.equal(ELP2000_TERM_COUNT, 934)
+    assert.ok(ELP2000_TRUNCATION_BOUND_KM < 2)
     // Sanity on the unit: the Moon is 384 400 km away, not 384 400 au.
-    expect(magnitude(scaled(moonGeocentricKm(2451545), 1 / AU_KM))).toBeLessThan(0.003)
+    assert.ok(magnitude(scaled(moonGeocentricKm(2451545), 1 / AU_KM)) < 0.003)
   })
 })

@@ -1,6 +1,8 @@
 // Hosted orbits of binaries, and orbits timed at superior conjunction.
 import { keplerStateKm } from './kepler.js'
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { hostedBarycentreCompanion, hostedOrbitCentreStateKm, hostedPlanetStateAboutCentreKm, hostedKeplerElements, hostSkyFrame, hostedOrbit, hostedOrbitApoapsisKm, hostedOrbitPhase, hostedOrbitPhaseBmjdTdb, hostedOrbitStateRelativeBmjdTdb, hostedOrbitStateRelativeKm, hostedPlanetStateRelativeKm, HOSTED_PLANET_IDS, type HostedOrbit } from './hostedOrbits.js'
 import { directionFromRaDec, skyBasis, starAstrometry } from './stars.js'
 import { PARSEC_KM } from './index.js'
@@ -22,25 +24,25 @@ describe('Kepler-16: a circumbinary planet', () => {
       const primary = hostedPlanetStateRelativeKm('kepler-16-b', catalogue.bjd0 + n * catalogue.periodDays).positionKm
       const secondary = hostedPlanetStateRelativeKm('kepler-16-b', catalogue.bjd0 + (n + catalogue.secondaryPhase) * catalogue.periodDays).positionKm
       // In front is toward the observer, against the line of sight.
-      expect(dot(primary, sight), `primary ${n}`).toBeLessThan(0)
-      expect(projected(primary), `primary ${n}`).toBeLessThan(radiusA + radiusB)
-      expect(dot(secondary, sight), `secondary ${n}`).toBeGreaterThan(0)
-      expect(projected(secondary), `secondary ${n}`).toBeLessThan(radiusA + radiusB)
+      assert.ok(dot(primary, sight) < 0, `primary ${n}`)
+      assert.ok(projected(primary) < radiusA + radiusB, `primary ${n}`)
+      assert.ok(dot(secondary, sight) > 0, `secondary ${n}`)
+      assert.ok(projected(secondary) < radiusA + radiusB, `secondary ${n}`)
     }
   })
   it('centres the planet orbit on the mass-weighted point between A and B', () => {
     const companion = hostedBarycentreCompanion('kepler-16ab-b')!
-    expect(companion.id).toBe('kepler-16-b')
-    expect(companion.weight).toBeCloseTo(0.20255 / (0.6897 + 0.20255), 12)
+    assert.equal(companion.id, 'kepler-16-b')
+    assert.ok(Math.abs(companion.weight - (0.20255 / (0.6897 + 0.20255))) < 10 ** -12 / 2, `${companion.weight} is not close to ${0.20255 / (0.6897 + 0.20255)}`)
     for (const epoch of [2455212.12316, 2461306.5]) {
       const b = hostedPlanetStateRelativeKm('kepler-16-b', epoch).positionKm, centre = hostedOrbitCentreStateKm('kepler-16ab-b', epoch).positionKm
       const own = hostedPlanetStateAboutCentreKm('kepler-16ab-b', epoch).positionKm, planet = hostedPlanetStateRelativeKm('kepler-16ab-b', epoch).positionKm
       for (let axis = 0; axis < 3; axis++) {
-        expect(centre[axis]!).toBeCloseTo(b[axis]! * companion.weight, 3)
-        expect(planet[axis]!).toBeCloseTo(own[axis]! + centre[axis]!, 3)
+        assert.ok(Math.abs((centre[axis]!) - (b[axis]! * companion.weight)) < 10 ** -3 / 2, `${(centre[axis]!)} is not close to ${b[axis]! * companion.weight}`)
+        assert.ok(Math.abs((planet[axis]!) - (own[axis]! + centre[axis]!)) < 10 ** -3 / 2, `${(planet[axis]!)} is not close to ${own[axis]! + centre[axis]!}`)
       }
     }
-    expect(hostedOrbitCentreStateKm('wasp-43b', 2461306.5).positionKm).toEqual([0, 0, 0])
+    assert.deepEqual(hostedOrbitCentreStateKm('wasp-43b', 2461306.5).positionKm, [0, 0, 0])
   })
   it('reproduces the seven Kepler transits across A, early and late as A swings around the barycentre', () => {
     // Mid-times of the planet's transits across A, measured from the Kepler long-cadence PDCSAP light curves of KIC 12644769
@@ -55,8 +57,8 @@ describe('Kepler-16: a circumbinary planet', () => {
         const planet = hostedPlanetStateRelativeKm('kepler-16ab-b', t).positionKm
         if (dot(planet, sight) < 0 && projected(planet) < best.separation) best = { time: t, separation: projected(planet) }
       }
-      expect(best.separation, `transit near ${time}`).toBeLessThan(radiusA + radiusPlanet)
-      expect(Math.abs(best.time - time), `transit near ${time}`).toBeLessThan(0.5)
+      assert.ok(best.separation < radiusA + radiusPlanet, `transit near ${time}`)
+      assert.ok(Math.abs(best.time - time) < 0.5, `transit near ${time}`)
     }
   })
 })
@@ -71,18 +73,18 @@ describe('an orbit timed at its superior conjunction', () => {
   const sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
   it('puts the body behind its host at the stated time, as far along the line of sight as the tilt allows', () => {
     const { positionKm } = hostedOrbitStateRelativeBmjdTdb(superior, star, radiusKm, superior.transitTimeBmjdTdb)
-    expect(dot(positionKm, sight) / Math.hypot(...positionKm)).toBeCloseTo(Math.sin((180 - 152.49) * Math.PI / 180), 3)
+    assert.ok(Math.abs((dot(positionKm, sight) / Math.hypot(...positionKm)) - (Math.sin((180 - 152.49) * Math.PI / 180))) < 10 ** -3 / 2, `${(dot(positionKm, sight) / Math.hypot(...positionKm))} is not close to ${Math.sin((180 - 152.49) * Math.PI / 180)}`)
   })
   it('is the orbit the hand-computed periastron epoch describes', () => {
     for (const t of [41163.0424, 50000, 61000.25]) {
       const a = hostedOrbitStateRelativeBmjdTdb(superior, star, radiusKm, t).positionKm, b = hostedOrbitStateRelativeBmjdTdb(periastron, star, radiusKm, t).positionKm
       // Both epochs are rounded to 1e-4 d, and the black hole moves about 41 million km a day: some 4,000 km of a 36-million-km
       // orbit, 1.1e-4 of it. Half an orbit's error, the other conjunction, would be 2.
-      expect(Math.hypot(...a.map((v, axis) => v - b[axis]!)) / Math.hypot(...a)).toBeLessThan(2e-4)
+      assert.ok((Math.hypot(...a.map((v, axis) => v - b[axis]!)) / Math.hypot(...a)) < 2e-4)
     }
   })
   it('refuses an epoch definition it does not know', () => {
-    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...superior, epochDefinition: 'secondary-eclipse' as never }, star, radiusKm, 60000)).toThrow(/Unsupported hosted-orbit epoch definition: secondary-eclipse/)
+    assert.throws(() => hostedOrbitStateRelativeBmjdTdb({ ...superior, epochDefinition: 'secondary-eclipse' as never }, star, radiusKm, 60000), /Unsupported hosted-orbit epoch definition: secondary-eclipse/)
   })
 })
 
@@ -98,18 +100,18 @@ describe('Cygnus X-1: a black hole on its measured orbit around its supergiant',
     for (let n = 0; n <= 3500; n += 50) {
       const behind = hostedPlanetStateRelativeKm('cygnus-x-1', spectroscopic.hjd0 + n * spectroscopic.periodDays).positionKm
       const inFront = hostedPlanetStateRelativeKm('cygnus-x-1', spectroscopic.hjd0 + (n + 0.5) * spectroscopic.periodDays).positionKm
-      expect(depth(behind), `conjunction ${n}`).toBeGreaterThan(0.44)
-      expect(depth(inFront), `opposition ${n}`).toBeLessThan(-0.44)
+      assert.ok(depth(behind) > 0.44, `conjunction ${n}`)
+      assert.ok(depth(inFront) < -0.44, `opposition ${n}`)
     }
   })
   it('keeps the star and black hole 0.244 au apart, on a clockwise orbit on the sky', () => {
     const au = 149597870.7, t = spectroscopic.hjd0
     const { positionKm, velocityKmPerDay } = hostedPlanetStateRelativeKm('cygnus-x-1', t)
-    expect(Math.hypot(...positionKm) / au).toBeGreaterThan(0.244 * (1 - 0.0189) - 1e-3)
-    expect(Math.hypot(...positionKm) / au).toBeLessThan(0.244 * (1 + 0.0189) + 1e-3)
+    assert.ok((Math.hypot(...positionKm) / au) > 0.244 * (1 - 0.0189) - 1e-3)
+    assert.ok((Math.hypot(...positionKm) / au) < 0.244 * (1 + 0.0189) + 1e-3)
     // Clockwise on the sky: the orbital angular momentum points away from the observer (i > 90 degrees).
     const h = [positionKm[1]! * velocityKmPerDay[2]! - positionKm[2]! * velocityKmPerDay[1]!, positionKm[2]! * velocityKmPerDay[0]! - positionKm[0]! * velocityKmPerDay[2]!, positionKm[0]! * velocityKmPerDay[1]! - positionKm[1]! * velocityKmPerDay[0]!]
-    expect(dot(h, sight) / Math.hypot(...h)).toBeCloseTo(Math.cos((180 - 152.49) * Math.PI / 180), 2)
+    assert.ok(Math.abs((dot(h, sight) / Math.hypot(...h)) - (Math.cos((180 - 152.49) * Math.PI / 180))) < 10 ** -2 / 2, `${(dot(h, sight) / Math.hypot(...h))} is not close to ${Math.cos((180 - 152.49) * Math.PI / 180)}`)
   })
 })
 
@@ -128,7 +130,7 @@ describe('eclipsing binaries: each paper\'s periastron angle, checked against it
       const t = c.secondaryHjd + n * c.periodDays
       let best = 0
       for (let dt = -0.5; dt <= 0.5; dt += 0.001) if (depth(t + dt) > depth(t + best)) best = dt
-      expect(Math.abs(best) * 24, `cycle ${n}`).toBeLessThan(0.1)
+      assert.ok((Math.abs(best) * 24) < 0.1, `cycle ${n}`)
     }
   })
 })

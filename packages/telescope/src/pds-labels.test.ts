@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { pds3Keyword, pds3Values, pds4Block, pds4Blocks, pds4Elements, pds4Field, pds4Number } from './pds-labels.js';
 
