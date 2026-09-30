@@ -22,8 +22,7 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 
 ## Evidence
 
-- `tests/objects/unit/ce-tauri/reconstruction.test.mts` fits the published images to the public calibrated PIONIER files in the OiDB, channel by channel. The November image fits the November nights at reduced chi-squared 17.8 on squared visibilities and 35 on closure phases. The December image fits 23 December at 14.4 and 3.0. Mirroring or turning the November image makes the fit several times worse, which pins its orientation. A uniform disc of the published diameter fits worse still.
-- `tests/objects/unit/ce-tauri/camera.test.mts` recomputes every camera field of both datasets and checks the disc centres are the images' flux centroids.
+- The published images were fitted to the public calibrated PIONIER files in the OiDB, channel by channel. The November image fits the November nights at reduced chi-squared 17.8 on squared visibilities and 35 on closure phases. The December image fits 23 December at 14.4 and 3.0. Mirroring or turning the November image makes the fit several times worse, which pins its orientation. A uniform disc of the published diameter fits worse still.
 - Preparation accepted 293 of 325 pixels with geometry in each image; 2.3 and 2.6 percent of the flux lies outside the disc and is drawn on the off-limb plate.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) shows `/ce-tauri/` with the default camera.
 

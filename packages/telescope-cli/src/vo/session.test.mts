@@ -119,7 +119,7 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     await assert.rejects(qualifyVoProduct(root, plan.products[0]!, { allowedPrivateHosts: ['127.0.0.1'] }), /stale|changed/u);
     const metadata = data.files.find(f => f.path.endsWith('.xml'))!;
     await appendFile(resolve(data.directory, metadata.path), '\nchanged');
-    await assert.rejects(delivery(result.resultPath), /content pin mismatch/u);
+    await assert.rejects(delivery(result.resultPath), / is \d+ bytes; .* records \d+/u);
   } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(root, { recursive: true, force: true }); }
 });
 

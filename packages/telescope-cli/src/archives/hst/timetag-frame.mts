@@ -39,10 +39,8 @@ import {
   type GoodTimeInterval, type SectorStatistics, type TimeTagDefinition,
 } from './timetag-reduction.mts';
 
-// The FITS ORIGIN card this stage has always serialized, from when this module lived at
-// tools/objects/hst/timetag-frame.mts. Changing it changes every output's hash, so it is pinned rather than derived from
-// the module's current path.
-const HISTORICAL_ORIGIN = 'cssEarth tools/objects/hst/timetag-frame.mts';
+// The FITS ORIGIN card this stage writes.
+const FITS_ORIGIN = 'cssEarth packages/telescope-cli/src/archives/hst/timetag-frame.mts';
 
 const MJD_TO_JD = 2400000.5;
 /** Degree of the polynomial that stands in for the smooth background, and how far out it is fitted, in body radii. */
@@ -305,7 +303,7 @@ export function timeTagProduct(run: TimeTagRun): Buffer {
     ['NEVENTS', run.eventsPlaced, 'TIME-TAG events counted on this grid'],
     ['DRIFTPIX', run.driftPixels, 'detector pixels the target moved'],
     ['GEOCORR', 'OMIT', 'detector geometric distortion is not corrected'],
-    ['STACKID', definition.id], ['ORIGIN', HISTORICAL_ORIGIN],
+    ['STACKID', definition.id], ['ORIGIN', FITS_ORIGIN],
   ];
   const extension = (values: Float64Array, name: string, unit: string, note: string) => {
     const data = Buffer.alloc(values.length * 4);
@@ -356,7 +354,7 @@ export function timeTagPicture(run: TimeTagRun): Buffer {
     // The crop is centred, so the target stands at continuous `crop.size / 2` in it and FITS names that place one further on.
     ['CRPIX1', crop.size / 2 + 0.5, 'the target at mid-exposure'], ['CRPIX2', crop.size / 2 + 0.5], ['CRVAL1', run.place.rightAscensionDegrees], ['CRVAL2', run.place.declinationDegrees],
     ['CD1_1', -degreesPerPixel, 'east is left'], ['CD1_2', 0], ['CD2_1', 0], ['CD2_2', degreesPerPixel, 'north is up'],
-    ['KMPERPIX', definition.grid.kmPerPixel, 'km at the target'], ['BODYRPIX', run.radiusGridPixels, 'pixels, the target radius on this grid'], ['STACKID', definition.id], ['ORIGIN', HISTORICAL_ORIGIN]]), padBlock(data)]);
+    ['KMPERPIX', definition.grid.kmPerPixel, 'km at the target'], ['BODYRPIX', run.radiusGridPixels, 'pixels, the target radius on this grid'], ['STACKID', definition.id], ['ORIGIN', FITS_ORIGIN]]), padBlock(data)]);
 }
 
 export async function writeProducts(run: TimeTagRun, outputDirectory: string): Promise<readonly string[]> {

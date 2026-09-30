@@ -5,7 +5,7 @@ import { readFitsImage, readFitsHdus, readFitsPrimary } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireRecord } from '@cssearth/core';
 
-const fixture = await readOracleFixture('fits/pallas.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json');
 for (const input of fixture.inputs) test(`Pallas SPHERE image layout and ESO header count: ${input.path}`, async () => {
   const expected = requireRecord(fixture.cases[input.path]), bytes = await readOracleInput(input);
   const image = readFitsImage(bytes), hierarchy = Object.entries(image.header).filter(([key]) => key.startsWith('ESO '));

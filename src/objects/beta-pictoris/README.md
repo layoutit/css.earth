@@ -24,7 +24,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Run of 2026-09-22 (this version):
 
-- [`node tools/prepare/prepare-object.mts beta-pictoris`](../../../packages/bake/cli/prepare-object.mts) prepared the package through its world step; its shared provenance step stops on the Large Magellanic Cloud's recipe pin, which is inconsistent on main itself (see the PR).
+- [`node packages/bake/src/prepare-object/index.ts beta-pictoris`](../../../packages/bake/cli/prepare-object.mts) prepared the package through its world step; its shared provenance step stops on the Large Magellanic Cloud's recipe pin, which is inconsistent on main itself (see the PR).
 - [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #c2d4ff is the colour dataset's prepared colour and that the limb-darkening law is read at the recorded temperature and gravity.
 - Dev server `/beta-pictoris/` renders the star in its Gaia colour with no console errors.
 

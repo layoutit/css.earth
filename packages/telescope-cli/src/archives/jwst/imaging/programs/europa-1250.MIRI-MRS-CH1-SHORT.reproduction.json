@@ -3,7 +3,7 @@
   "program": "europa-1250",
   "band": "MIRI-MRS-CH1-SHORT",
   "observation": "jw01250-o003_t001_miri_ch1-short",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw01250-o003_t001_miri_ch1-short_s3d.fits",

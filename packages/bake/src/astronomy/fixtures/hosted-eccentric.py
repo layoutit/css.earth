@@ -93,9 +93,9 @@ for url in REFERENCE_URLS:
         references.append(external_record(url, response.read()))
 
 write(
-    'astronomy/hosted-eccentric.json',
+    'packages/bake/src/astronomy/fixtures/hosted-eccentric.json',
     'SpiceyPy CSPICE conics_c eccentric propagation',
-    'tests/oracles/astronomy/hosted-eccentric.py',
+    'packages/bake/src/astronomy/fixtures/hosted-eccentric.py',
     {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT'), 'method': 'conics_c'},
     [SOURCE],
     {'orbits': [orbit_case(config) for config in ORBITS]},

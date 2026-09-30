@@ -74,9 +74,9 @@ for path in REFERENCE_PATHS:
         references.append(external_record(url, response.read()))
 
 write(
-    'physical-units/spectral.json',
+    'packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.json',
     'Astropy blackbody and Rayleigh unit conversions',
-    'tests/oracles/physical-units/spectral.py',
+    'packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.py',
     {'astropy': astropy.__version__, 'methods': 'BlackBody, exact constants and Rayleigh units'},
     [],
     {'planckFrequency': planck_cases(), 'rayleigh': rayleigh_cases()},

@@ -1,5 +1,5 @@
 # Solved by micromamba on osx-arm64 from toolchain.json (channels: cxc ciao, conda-forge).
-# Regenerate: node tools/objects/chandra/toolchain.mts solve
+# Regenerate: node packages/telescope-cli/src/archives/chandra/toolchain.mts solve
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/osx-arm64/_openmp_mutex-4.5-8_kmp_llvm.conda
 https://conda.anaconda.org/conda-forge/noarch/_python_abi3_support-1.0-hd8ed1ab_3.conda

@@ -5,7 +5,7 @@
   "product": "idr203wtq_flt",
   "instrument": "WFC3/UVIS",
   "opticalElement": "F631N",
-  "toolchain": "tools/objects/hst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/hst/toolchain.json",
   "crdsContext": "hst_1358.pmap",
   "mast": {
     "name": "idr203wtq_flt.fits",

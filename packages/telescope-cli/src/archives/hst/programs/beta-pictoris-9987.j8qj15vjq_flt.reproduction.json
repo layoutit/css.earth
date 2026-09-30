@@ -5,7 +5,7 @@
   "product": "j8qj15vjq_flt",
   "instrument": "ACS/HRC",
   "opticalElement": "F435W",
-  "toolchain": "tools/objects/hst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/hst/toolchain.json",
   "crdsContext": "hst_1358.pmap",
   "mast": {
     "name": "j8qj15vjq_flt.fits",

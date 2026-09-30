@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "pvl",
- "generatedBy": "tools/oracles/pds3/amica-ddr.py",
+ "generatedBy": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.py",
  "tool": {
   "pvl": "1.3.2",
   "astropy": "8.0.1",

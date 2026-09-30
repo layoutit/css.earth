@@ -47,4 +47,4 @@ for name, tile, grid in [
         grid_pixels = grid_wcs.all_world2pix(world, 1)
         cases[name] = {'path': input_record(path)['path'], 'tile': list(tile), 'grid': list(grid),
                        'tilePixels': tile_pixels.tolist(), 'gridPixels': grid_pixels.tolist()}
-write('fits/wise-atlas-projection.json', 'astropy', 'tests/oracles/fits/wise-atlas-projection.py', {'astropy': astropy.__version__}, inputs, cases)
+write('packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json', 'astropy', 'packages/bake/src/objects/raster/fixtures/wise-atlas-projection.py', {'astropy': astropy.__version__}, inputs, cases)

@@ -1718,7 +1718,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "n1563643679_1",
           "n1606207298_1",
@@ -1742,7 +1742,7 @@
         "diffuse": 0.55,
         "datasetId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ],
   "documents": [

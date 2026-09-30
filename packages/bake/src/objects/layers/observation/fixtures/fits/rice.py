@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Astropy RICE_1 tile compression and helioprojective WCS for packages/fits/src/rice.ts and
-tools/objects/observation/hmi-continuum.mts. Run with the pinned oracle environment; never imports
+packages/bake/src/objects/layers/observation/hmi-continuum.ts. Run with the pinned oracle environment; never imports
 the TypeScript readers. The compressed images are tiny, checked-in test data, not pipeline assets.
 """
 import json, sys
@@ -70,4 +70,4 @@ for west, north in points:
     pixels.append({'west': west, 'north': north, 'x': float(x) + 1, 'y': float(y) + 1})
 cases['hmi-wcs'] = {'record': record, 'pixels': pixels}
 
-write('fits/rice.json', 'astropy', 'tests/oracles/fits/rice.py', {'astropy': astropy.__version__}, inputs, cases)
+write('packages/bake/src/objects/layers/observation/fixtures/fits/rice.json', 'astropy', 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.py', {'astropy': astropy.__version__}, inputs, cases)

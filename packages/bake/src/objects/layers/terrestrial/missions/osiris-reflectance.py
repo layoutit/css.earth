@@ -23,4 +23,4 @@ for i, name in enumerate(['IMAGE', 'SIGMA_MAP_IMAGE', 'QUALITY_MAP_IMAGE']):
 quality = raw[(int(label['^QUALITY_MAP_IMAGE']) - 1) * record:][: planes['QUALITY_MAP_IMAGE']['width'] * planes['QUALITY_MAP_IMAGE']['height']]
 histogram = {str(int(v)): int(c) for v, c in zip(*np.unique(quality, return_counts=True))}
 identity = {key: label_text(find(label, key)) for key in ['INSTRUMENT_ID', 'START_TIME', 'FILTER_NAME', 'TARGET_NAME', 'DATA_QUALITY_ID']}
-write('pds3/osiris-reflectance.json', 'pvl', 'tests/oracles/pds3/osiris-reflectance.py', {'pvl': pvl.__version__}, [path], {'identity': identity, 'planes': planes, 'qualityHistogram': histogram})
+write('packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json', 'pvl', 'packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.py', {'pvl': pvl.__version__}, [path], {'identity': identity, 'planes': planes, 'qualityHistogram': histogram})

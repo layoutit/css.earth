@@ -31,4 +31,4 @@ for structure in structures:
     planes[structure.id] = {'width': int(width), 'height': int(height), 'dataType': str(structure.data.dtype),
         'samples': [{'index': int(i), 'value': float(flat[i])} for i in np.concatenate([picks, extremes])],
         'onBodyCount': int(len(on_body)), 'sum': float(flat[on_body].sum()) if len(on_body) else 0.0}
-write('pds/dart-draco-cube.json', 'pds4_tools', 'tests/oracles/pds/dart-draco-cube.py', {'pds4_tools': pds4_tools.__version__}, [fits, label], {'planes': planes})
+write('packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json', 'pds4_tools', 'packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.py', {'pds4_tools': pds4_tools.__version__}, [fits, label], {'planes': planes})

@@ -3,7 +3,7 @@
   "program": "ngc-6720-1558",
   "band": "MIRI-F770W",
   "observation": "jw01558-o001_t001_miri_f770w",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw01558-o001_t001_miri_f770w_i2d.fits",

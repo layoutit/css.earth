@@ -3,7 +3,7 @@
   "program": "hd-181327-2780",
   "band": "NIRCAM-F335M-MASK335R",
   "observation": "jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",

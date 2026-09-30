@@ -87,4 +87,4 @@ r = REGION
 region = values[r['y0']:r['y0'] + r['height'], r['x0']:r['x0'] + r['width']]
 cases['region'] = {**r, 'extension': 'SCI', 'values': [None if np.isnan(v) else float(v) for v in region.reshape(-1)]}
 cases['refused'] = refused
-write('fits/sky-projection.json', 'astropy', 'tests/oracles/fits/sky-projection.py', {'astropy': astropy.__version__}, [path], cases)
+write('packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json', 'astropy', 'packages/bake/src/objects/cameras/fixtures/fits/sky-projection.py', {'astropy': astropy.__version__}, [path], cases)

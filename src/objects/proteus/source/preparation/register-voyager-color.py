@@ -135,7 +135,7 @@ def main():
     args = parser.parse_args()
     source = args.source.resolve()
     repository = source.parents[3]
-    module = (repository/'tools/objects/terrestrial-layers/obj-shape.mjs').as_uri()
+    module = (repository/'packages/bake/src/objects/geometry/obj-shape.ts').as_uri()
     script = ('import {loadPdsRadiusTable} from '+json.dumps(module)+';'
               'const m=await loadPdsRadiusTable(process.argv[1],{metersPerUnit:1000,expectedVertices:2522,'
               "expectedFaces:5040,stepDegrees:5,longitudeDirection:'west-positive'});"

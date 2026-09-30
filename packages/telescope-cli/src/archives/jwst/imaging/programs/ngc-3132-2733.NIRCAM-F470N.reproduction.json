@@ -3,7 +3,7 @@
   "program": "ngc-3132-2733",
   "band": "NIRCAM-F470N",
   "observation": "jw02733-o001_t001_nircam_f444w-f470n",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw02733-o001_t001_nircam_f444w-f470n_i2d.fits",

@@ -35,5 +35,5 @@ kernels = json.loads((root / 'src/objects/pluto/source/preparation/approach.json
 
 sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import write
-write('spice/new-horizons-approach.json', 'spiceypy', 'tests/oracles/spice/new-horizons-approach.py',
+write('packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json', 'spiceypy', 'packages/bake/src/objects/default-view/fixtures/new-horizons-approach.py',
       {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT')}, [bank / kernel for kernel in kernels], cases)

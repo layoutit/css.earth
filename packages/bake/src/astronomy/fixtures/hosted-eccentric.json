@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "SpiceyPy CSPICE conics_c eccentric propagation",
- "generatedBy": "tools/oracles/astronomy/hosted-eccentric.py",
+ "generatedBy": "packages/bake/src/astronomy/fixtures/hosted-eccentric.py",
  "tool": {
   "spiceypy": "8.2.0",
   "cspice": "CSPICE_N0067",
@@ -11,7 +11,7 @@
  },
  "inputs": [
   {
-   "path": "tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json",
+   "path": "packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/qualification.json",
    "bytes": 3946
   }
  ],

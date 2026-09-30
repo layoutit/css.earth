@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "Astropy blackbody and Rayleigh unit conversions",
- "generatedBy": "tools/oracles/physical-units/spectral.py",
+ "generatedBy": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.py",
  "tool": {
   "astropy": "8.0.1",
   "methods": "BlackBody, exact constants and Rayleigh units",

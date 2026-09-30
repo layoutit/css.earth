@@ -411,7 +411,7 @@ async function authorBody(body: Body) {
   const source = await createSourceManifest({ objectId: id, objectName: name, sourceRoot: src });
   const radial = await loadRadialTerrain({ config: { ...terrestrial, geometry: { ...terrestrial.geometry, radius: geometryRadius, radiusKm } }, sourceDirectory: src, source });
   if (!radial) throw new TypeError(`${id}: the marker snapshot requires a radial terrain.`);
-  const recipeRecord = { generator: 'tools/objects/terrestrial-layers/radial-snapshot.mts', inputs: [shapeId], size: 512, longitudeDegrees: 0, latitudeDegrees: 35, ambient: 0.45, diffuse: 0.55, datasetId: 'shape' };
+  const recipeRecord = { generator: 'packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts', inputs: [shapeId], size: 512, longitudeDegrees: 0, latitudeDegrees: 35, ambient: 0.45, diffuse: 0.55, datasetId: 'shape' };
   const context = await renderRadialSnapshot({ ...recipeRecord, faces: radial.faces, map: await neutralMap() });
   await write(resolve(src, 'presentation/context.png'), context);
   manifest.generatedIntermediates = [{ id: 'prepared-radial-context', path: 'presentation/context.png', origin: shapeUrl, credit, license: 'CC-BY-4.0', consumers: ['navigation'],

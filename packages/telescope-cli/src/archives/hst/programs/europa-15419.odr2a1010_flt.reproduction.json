@@ -5,7 +5,7 @@
   "product": "odr2a1010_flt",
   "instrument": "STIS/CCD",
   "opticalElement": "G750M",
-  "toolchain": "tools/objects/hst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/hst/toolchain.json",
   "crdsContext": "hst_1358.pmap",
   "mast": {
     "name": "odr2a1010_flt.fits",

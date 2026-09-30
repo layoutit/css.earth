@@ -3,7 +3,7 @@
   "program": "hip-65426-1386",
   "band": "NIRCAM-F444W-MASK335R",
   "observation": "jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",

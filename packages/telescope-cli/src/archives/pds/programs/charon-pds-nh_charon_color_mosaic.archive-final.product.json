@@ -127,7 +127,7 @@
   "evidence": [
     {
       "kind": "archive-origin",
-      "receipt": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+      "receipt": "packages/telescope-cli/src/archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
       "product": "nh_charon_color_mosaic.img",
       "establishes": "nh_charon_color_mosaic.img and every file referenced by urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0 match the PDS Registry sizes, are pinned here by URI and size, and pdr 1.4.4 decoded the complete science array. This establishes origin and readability only; no local calibration or archive agreement is claimed."
     }

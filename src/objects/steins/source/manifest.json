@@ -357,7 +357,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "steins-shape",
           "steins-observations-w20080905t183606461id4df17-img",
@@ -372,7 +372,7 @@
         "diffuse": 0.55,
         "datasetId": "osiris"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ],
   "documents": [
@@ -436,7 +436,7 @@
         "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
         "https://www.wikidata.org/wiki/Wikidata:Licensing"
       ],
-      "acquisition": "node tools/prepare-feature-notes.mts steins: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "acquisition": "node packages/bake/cli/prepare-feature-notes.mts steins: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
       "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
       "consumers": [
         "features"

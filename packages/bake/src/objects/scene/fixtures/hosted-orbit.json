@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "Astropy ICRS sky geometry and NumPy circular-orbit states",
- "generatedBy": "tools/oracles/astronomy/hosted-orbit.py",
+ "generatedBy": "packages/bake/src/objects/scene/fixtures/hosted-orbit.py",
  "tool": {
   "astropy": "8.0.1",
   "methods": "SkyCoord.directional_offset_by and NumPy vectors",

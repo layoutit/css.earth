@@ -5,21 +5,8 @@ import type { Plugin } from 'esbuild';
 import { pathToFileURL } from 'node:url';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
-/** Workspace entries a bundled lane compiles from their TypeScript sources, as it did when they were local modules. The FITS reader was a local module
- * (`tools/fits/`) before it became `@cssearth/fits`, the SPICE kernel readers were local modules (`tools/spice/`) before
- * they became `@cssearth/spice`, and the telescope library's product records, label readers and astronomy-package clients
- * were local modules under `tools/objects/` before they became `@cssearth/telescope`, and the photometric models and raster lane
- * were local modules (`tools/photometry/`, `src/preparation/raster/`) before they became `@cssearth/bake/photometry` and
- * `@cssearth/bake/raster`, as were the renderer's preparation compilers (`src/renderers/css/preparation/`), `src/platform/`
- * and `tools/prepared/` libraries and the `src/preparation/` topics before their `@cssearth/bake/<topic>` entries, and the shared object libraries under
- * `tools/objects/` before `@cssearth/bake/objects/<topic>`, the source catalogue and manifest checks (`src/platform/source-*.mts`)
- * before `@cssearth/objects/sources` and `@cssearth/objects/node`, and the renderer's world-rotation validation before it joined
- * `@cssearth/objects`, and the `tools/prepared/`, `tools/assets/`, `tools/sources/` and `tools/contract/` libraries before
- * `@cssearth/bake/{prepared-presentation,delivery,sources,contract}` and `@cssearth/objects/node/contract`, and the provenance,
- * exploration and source-usage records and the runtime asset closure (`src/platform/`) before `@cssearth/objects/provenance` and
- * `@cssearth/objects/node`, and the galaxy, cluster and nebula catalogue readers (`packages/catalog/src/`), which the navigation
- * destinations and the spatial source citations imported by path before they joined the bake; following them bundles
- * the code the lane runs from the checkout. Other packages stay external, as they always were. */
+/** Workspace entries a bundled lane compiles from their TypeScript sources, so the lane runs the checkout's code rather than
+ * a build. Other packages stay external. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
   '@cssearth/catalog': 'packages/catalog/src/index.ts',
@@ -102,8 +89,7 @@ async function rendererSource(specifier: string): Promise<string | undefined> {
   if (built) return `packages/renderer/${built}`;
   return /^[a-z-]+\/[\w./-]+\.ts$/u.test(subpath) && !subpath.split('/').includes('..') ? `packages/renderer/src/${subpath}` : undefined;
 }
-/** The telescope command's modules were relative modules under `tools/objects/telescopes/` before they became
- * `@cssearth/telescope-cli`. A subpath is followed to the source its package.json `exports` entry declares, as Node resolves it
+/** A `@cssearth/telescope-cli` subpath is followed to the source its package.json `exports` entry declares, as Node resolves it
  * (`@cssearth/telescope-cli/archives/jwst/imaging/image3` → `src/archives/jwst/imaging/image3.mts`); a subpath the package does
  * not export stays external, as Node would refuse it. The map is read from the bundled checkout, once per bundle. */
 async function telescopeCliExports(root: string): Promise<ReadonlyMap<string, string>> {

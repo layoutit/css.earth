@@ -5,8 +5,8 @@ import { readFitsHdus, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 
-const fixture = await readOracleFixture('fits/sky-orientation.json');
-const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/sky-orientation.fits');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json');
+const input = fixture.inputs.find(entry => entry.path === 'packages/fits/src/node/fixtures/fits/sky-orientation.fits');
 assert.ok(input);
 // Read the WCS cards the oracle wrote, not copies of them.
 const headers = new Map(readFitsHdus(await readOracleInput(input)).slice(1).map(hdu => [hdu.header.EXTNAME, hdu.header]));

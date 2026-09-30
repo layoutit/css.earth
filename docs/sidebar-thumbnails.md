@@ -52,9 +52,9 @@ tablet 768 × 1024. They are browser viewport checks, not physical iPad recordin
 The resting sheet exposes 280 px on phones and 248 px on portrait tablets, plus
 any safe-area inset; other snap states and gestures retain their shared policy.
 
-![Mars and its moons under Celestial bodies](illustrations/sidebar-thumbnails/mars.png)
-![Featured stars use prepared arrival thumbnails](illustrations/sidebar-thumbnails/stars.png)
-![Galaxy members use the shared result row](illustrations/sidebar-thumbnails/galaxies.png)
-![The Observable Universe uses the shared dataset tab panel](illustrations/sidebar-thumbnails/universe.png)
-![Phone resting sheet](illustrations/sidebar-thumbnails/phone.png)
-![Portrait tablet resting sheet and round dataset picker](illustrations/sidebar-thumbnails/tablet.png)
+![Mars and its moons under Celestial bodies](images/sidebar-thumbnails/mars.png)
+![Featured stars use prepared arrival thumbnails](images/sidebar-thumbnails/stars.png)
+![Galaxy members use the shared result row](images/sidebar-thumbnails/galaxies.png)
+![The Observable Universe uses the shared dataset tab panel](images/sidebar-thumbnails/universe.png)
+![Phone resting sheet](images/sidebar-thumbnails/phone.png)
+![Portrait tablet resting sheet and round dataset picker](images/sidebar-thumbnails/tablet.png)

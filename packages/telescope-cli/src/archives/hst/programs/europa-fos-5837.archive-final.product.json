@@ -224,7 +224,7 @@
   "evidence": [
     {
       "kind": "archive-origin",
-      "receipt": "tools/objects/hst/programs/europa-fos-5837.archive-final.product.json",
+      "receipt": "packages/telescope-cli/src/archives/hst/programs/europa-fos-5837.archive-final.product.json",
       "product": "y2p60503t_c1f.fits",
       "establishes": "y2p60503t_c1f.fits is the archive's own final calibrated product for y2p60503t, retrieved from MAST and pinned at 43200 bytes. It establishes origin: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive."
     }

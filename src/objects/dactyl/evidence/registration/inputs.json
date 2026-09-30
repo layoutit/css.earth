@@ -72,7 +72,7 @@
     },
     {
       "id": "oracle",
-      "path": "tests/objects/fixtures/dactyl/galileo-pointing.json",
+      "path": "src/objects/dactyl/fixtures/galileo-pointing.json",
       "expectedBytes": 2421
     }
   ],

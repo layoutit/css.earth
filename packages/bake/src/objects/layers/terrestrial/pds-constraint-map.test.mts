@@ -76,7 +76,7 @@ test('a source-selected constraint grid preserves stereo and limb categories eve
   await assert.rejects(preparePdsConstraintMap(mesh, { ...recipe, gridFlags: [3, 3] }), /Invalid PDS constraint map/);
 });
 
-test('terrain preparation verifies categorical output pins named by either historical or typed generators', async t => {
+test('terrain preparation verifies categorical output pins named by their generator', async t => {
   const {mkdtemp,writeFile,rm}=await import('node:fs/promises');
   const {tmpdir}=await import('node:os');
   const {join}=await import('node:path');
@@ -88,16 +88,14 @@ test('terrain preparation verifies categorical output pins named by either histo
   const expected=await preparePdsConstraintMap(parsePdsPlanetocentricShape(table,profile),recipe);
   const config={namespace:'fixture',geometry:{radius:1,radiusKm:1,radialTerrain:{format:'pds-planetocentric-plate',path:'source.tab',grid:profile,
     faceBudget:8,texelsPerFace:16,simplification:{method:'source-meshoptimizer',targetFaces:8,maximumErrorMeters:.1}}}};
-  for(const extension of ['mjs','mts']) {
-    await writeFile(join(directory,'constraint.png'),expected);
-    const pinned=await fixtureSource(directory,[{id:'shape',path:'source.tab',consumers:['geometry']},
-      {id:'constraint',path:'constraint.png',consumers:['geometry'],generator:`tools/objects/terrestrial-layers/pds-constraint-map.${extension}`,recipe}]);
-    assert.ok(pinned.manifest.inputs.find(input=>input.id==='constraint'));
-    const source={...pinned,async validatePath(path:string){assert.equal(path,'source.tab');return pinned.validatePath(path);}};
-    await loadRadialTerrain({sourceDirectory:directory,config,source});
-    // The recorded name must bind to the map preparation: an invalid recipe under it fails the terrain load.
-    const invalid=await fixtureSource(directory,[{id:'shape',path:'source.tab',consumers:['geometry']},
-      {id:'constraint',path:'constraint.png',consumers:['geometry'],generator:`tools/objects/terrestrial-layers/pds-constraint-map.${extension}`,recipe:{...recipe,gridFlags:[4]}}]);
-    await assert.rejects(loadRadialTerrain({sourceDirectory:directory,config,source:invalid}),/Invalid PDS constraint map/);
-  }
+  await writeFile(join(directory,'constraint.png'),expected);
+  const pinned=await fixtureSource(directory,[{id:'shape',path:'source.tab',consumers:['geometry']},
+    {id:'constraint',path:'constraint.png',consumers:['geometry'],generator:'packages/bake/src/objects/layers/terrestrial/pds-constraint-map.ts',recipe}]);
+  assert.ok(pinned.manifest.inputs.find(input=>input.id==='constraint'));
+  const source={...pinned,async validatePath(path:string){assert.equal(path,'source.tab');return pinned.validatePath(path);}};
+  await loadRadialTerrain({sourceDirectory:directory,config,source});
+  // The generator binds the map preparation: an invalid recipe under it fails the terrain load.
+  const invalid=await fixtureSource(directory,[{id:'shape',path:'source.tab',consumers:['geometry']},
+    {id:'constraint',path:'constraint.png',consumers:['geometry'],generator:'packages/bake/src/objects/layers/terrestrial/pds-constraint-map.ts',recipe:{...recipe,gridFlags:[4]}}]);
+  await assert.rejects(loadRadialTerrain({sourceDirectory:directory,config,source:invalid}),/Invalid PDS constraint map/);
 });

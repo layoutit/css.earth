@@ -4,13 +4,13 @@
   "date": "2026-09-14",
   "dependencies": [
     {
-      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts"
+      "path": "packages/bake/src/objects/geometry/shape-camera-mosaic.ts"
     },
     {
-      "path": "tools/spice/text-kernel.mts"
+      "path": "packages/spice/src/text-kernel.ts"
     },
     {
-      "path": "tools/source-values.mts"
+      "path": "packages/bake/src/objects/sources/source-values.ts"
     }
   ],
   "rangeKm": 3887,

@@ -13,7 +13,7 @@ import { kernelBankPaths } from '../../cameras/index.js';
  * approach recipe; this test reads the same recipes and kernels through @cssearth/spice and compares.
  */
 const loaded = await sourceLoad(async () => {
-  const fixture = await readOracleFixture('spice/new-horizons-approach.json');
+  const fixture = await readOracleFixture('packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json');
   await assertPinnedInputs(fixture.inputs, kernelBankPaths);
   const results = await Promise.all(['pluto', 'charon'].map(async body => {
     const recipe = parseApproachRecipe(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', body, 'source/preparation/approach.json'), 'utf8')), body);

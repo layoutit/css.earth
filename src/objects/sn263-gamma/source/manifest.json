@@ -55,9 +55,9 @@
       "consumers": [
         "navigation"
       ],
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "radar-shape"
         ],

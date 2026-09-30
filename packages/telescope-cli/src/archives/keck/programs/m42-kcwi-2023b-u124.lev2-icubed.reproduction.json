@@ -15,7 +15,7 @@
     "gainmul": "10"
   },
   "target": "m42",
-  "toolchain": "tools/objects/keck/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/keck/toolchain.json",
   "archive": {
     "koaid": "KB.20231209.37031.94.fits",
     "name": "KB.20231209.37031.94_icubed.fits",

@@ -5,75 +5,18 @@
  * oracle.
  */
 import { readFile } from 'node:fs/promises';
-import { isAbsolute, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { projectRoot } from '../project-root.ts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../validate.ts';
 
-const relocatedPaths: Readonly<Record<string, string>> = {
-  "tests/oracles/physical-units/spectral.json": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.json",
-  "tests/oracles/astronomy/hosted-orbit.json": "packages/bake/src/objects/scene/fixtures/hosted-orbit.json",
-  "tests/oracles/isis/photometric-truth.json": "packages/bake/src/photometry/fixtures/photometric-truth.json",
-  "tests/oracles/isis2/borrelly-micas.json": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json",
-  "tests/oracles/npy/psyche-alma.json": "packages/bake/src/objects/raster/numpy/psyche-alma.json",
-  "tests/oracles/pds/dart-draco-cube.json": "packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json",
-  "tests/oracles/pds3/amica-ddr.json": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.json",
-  "tests/oracles/pds3/osiris-geo.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.json",
-  "tests/oracles/pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json",
-  "tests/fixtures/fits/byte.fits": "packages/fits/src/node/fixtures/fits/byte.fits",
-  "tests/fixtures/fits/cube.fits": "packages/fits/src/node/fixtures/fits/cube.fits",
-  "tests/fixtures/fits/eso-hierarchy.fits": "packages/fits/src/node/fixtures/fits/eso-hierarchy.fits",
-  "tests/fixtures/fits/extensions.fits": "packages/fits/src/node/fixtures/fits/extensions.fits",
-  "tests/fixtures/fits/float32.fits": "packages/fits/src/node/fixtures/fits/float32.fits",
-  "tests/fixtures/fits/float64.fits": "packages/fits/src/node/fixtures/fits/float64.fits",
-  "tests/fixtures/fits/long-string.fits": "packages/fits/src/node/fixtures/fits/long-string.fits",
-  "tests/fixtures/fits/scaled-blank.fits": "packages/fits/src/node/fixtures/fits/scaled-blank.fits",
-  "tests/fixtures/fits/signed-int32.fits": "packages/fits/src/node/fixtures/fits/signed-int32.fits",
-  "tests/fixtures/fits/sky-orientation.fits": "packages/fits/src/node/fixtures/fits/sky-orientation.fits",
-  "tests/fixtures/fits/sky-projection.fits": "packages/fits/src/node/fixtures/fits/sky-projection.fits",
-  "tests/fixtures/hosted-orbits/trappist-1f-agol2021/manifest.json": "packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/manifest.json",
-  "tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json": "packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/qualification.json",
-  "tests/fixtures/telescope-families/f04-europa-stis/SOURCE.json": "packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/SOURCE.json",
-  "tests/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits": "packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits",
-  "tests/fixtures/telescope-families/family-sources.json": "packages/fits/src/node/fixtures/telescope-families/family-sources.json",
-  "tests/oracles/astronomy/hosted-eccentric.json": "packages/bake/src/astronomy/fixtures/hosted-eccentric.json",
-  "tests/oracles/sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
-  "tests/fixtures/sbmt/concave.sum": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum",
-  "tests/fixtures/sbmt/cases.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json",
-  "tests/fixtures/sbmt/concave.tab": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.tab",
-
-  "tests/oracles/spice/dart-draco.json": "packages/bake/src/astronomy/fixtures/dart-draco.json",
-  "tests/oracles/spice/new-horizons-approach.json": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json",
-
-  "tests/oracles/eclipse-map/numerics.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json",
-  "tests/oracles/eclipse-map/theresa-eigenbasis.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json",
-  "tests/oracles/fits/binary-table.json": "packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json",
-  "tests/oracles/fits/charon-leisa.json": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json",
-  "tests/oracles/fits/core.json": "packages/bake/src/objects/layers/observation/fixtures/fits/core.json",
-  "tests/oracles/fits/encounter.json": "packages/bake/src/objects/layers/terrestrial/missions/encounter.json",
-  "tests/oracles/fits/llorri.json": "packages/bake/src/objects/layers/terrestrial/missions/llorri.json",
-  "tests/oracles/fits/lupton-asinh.json": "packages/bake/src/objects/color/fixtures/lupton-asinh.json",
-  "tests/oracles/fits/pallas.json": "packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json",
-  "tests/oracles/fits/rice.json": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.json",
-  "tests/oracles/fits/sky-orientation.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json",
-  "tests/oracles/fits/sky-projection.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json",
-  "tests/oracles/fits/synoptic.json": "packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json",
-  "tests/oracles/fits/wise-atlas-projection.json": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json",
-  "tests/fixtures/fits/binary-table-columns.fits": "packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits",
-  "tests/fixtures/fits/lupton-bands.fits": "packages/bake/src/objects/color/fixtures/lupton-bands.fits",
-  "tests/fixtures/fits/rice-int16.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits",
-  "tests/fixtures/fits/rice-int32.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits",
-  "tests/fixtures/fits/rice-uint8.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-uint8.fits",
-  "tests/fixtures/fits/wise-atlas-lmc-centre.fits": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-centre.fits",
-  "tests/fixtures/fits/wise-atlas-lmc-far-corner.fits": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-far-corner.fits",
-  "tests/fixtures/fits/wise-atlas-pleiades-tile.fits": "packages/bake/src/objects/raster/fixtures/wise-atlas-pleiades-tile.fits"
-};
-const oraclePath = (path: string) => resolve(ORACLE_ROOT, relocatedPaths[path] ?? path);
+const oraclePath = (path: string) => resolve(ORACLE_ROOT, path);
 
 export const ORACLE_ROOT = projectRoot(import.meta.url);
 export interface OracleSample { index: number; value: number }
 
+/** Read a fixture by its absolute or repository-relative path. */
 export async function readOracleFixture(name: string) {
-  const fixture = requireRecord(JSON.parse(await readFile(oraclePath(isAbsolute(name) ? name : `tests/oracles/${name}`), 'utf8')));
+  const fixture = requireRecord(JSON.parse(await readFile(oraclePath(name), 'utf8')));
   if (fixture.schema !== 'cssearth-oracle-fixture@1') throw new Error(`${name} is not an oracle fixture.`);
   const inputs = requireArray(fixture.inputs).map(entry => { const e = requireRecord(entry); return { path: requireString(e.path), bytes: requireFiniteNumber(e.bytes) }; });
   // References outside the repository, such as another project's test data, are named by a commit in the URL and their size.
@@ -87,26 +30,17 @@ export async function pinnedOracleVersions() {
   return new Map(text.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('#')).map(line => { const [name, version] = line.split('=='); return [name.toLowerCase().replace(/-/g, '_'), version] as const; }));
 }
 
-/** Every input is a body manifest input, a checked-in FITS fixture or a test-only archive record.
+/** Every input is a body manifest input, a checked-in package fixture or a test-only archive record.
  * Kernel callers supply their existing bank verifier; core does not own acquisition. */
 export async function assertPinnedInputs(inputs: readonly { path: string; bytes?: number }[], verifyKernelBank?: (set: string, kernels: readonly string[]) => Promise<unknown>) {
   for (const input of inputs) {
-    if (/^tests\/fixtures\/hosted-orbits\/[a-z0-9-]+\/qualification\.json$/u.test(input.path)) {
-      verifyOracleBytes(input, await readFile(oraclePath(input.path)));
-      continue;
-    }
-    if (/^tests\/fixtures\/sbmt\/[a-z0-9-]+\.(json|tab|sum|info)$/u.test(input.path)) {
+    if (/^packages\/[a-z0-9-]+\/src\/(?:[a-z0-9-]+\/)*fixtures\/[A-Za-z0-9_/-]+\.(?:fits|json|sum|tab)$/u.test(input.path)) {
       verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;
     }
     if (input.path.startsWith('.local/fits-reference/')) {
       const pin = (await fitsArchiveInputs()).find(pin => pin.path === input.path);
       if (!pin || (input.bytes !== undefined && pin.bytes !== input.bytes)) throw new Error(`FITS test archive record changed: ${input.path}`);
-      continue;
-    }
-    if (/^(?:tests\/fixtures\/fits|packages\/telescope-cli\/src\/fixtures\/fits)\/[a-z0-9-]+\.fits$/u.test(input.path) ||
-        (input.path.endsWith('.fits') && Object.values(relocatedPaths).includes(input.path))) {
-      verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;
     }
     const kernel = /^src\/spice\/([a-z][a-z0-9-]*)\/(.+)$/u.exec(input.path);

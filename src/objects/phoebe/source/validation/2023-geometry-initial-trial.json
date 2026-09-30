@@ -115,10 +115,10 @@
   "node": "v24.19.0",
   "toolchain": [
     {
-      "path": "tools/objects/terrestrial-layers/obj-shape.mjs"
+      "path": "packages/bake/src/objects/geometry/obj-shape.ts"
     },
     {
-      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs"
+      "path": "packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts"
     }
   ],
   "elapsedMs": 1195,
