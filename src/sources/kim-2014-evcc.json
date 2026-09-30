@@ -1,0 +1,58 @@
+{
+  "id": "kim-2014-evcc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Extended Virgo Cluster Catalog",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2014ApJS..215...22K"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/215/22"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..215...22K",
+      "label": "2014ApJS..215...22K"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/215/22",
+      "label": "CDS J/ApJS/215/22"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/215/22/ReadMe",
+      "checkedOn": "2026-09-30",
+      "locator": "table2: 1,589 galaxies with J2000 positions, radial velocities, infall-model membership (MmI: 1,028 M, 561 P) and morphology codes (TT1, table 1)."
+    }
+  ],
+  "creators": [
+    "S. Kim",
+    "S.-C. Rey",
+    "H. Jerjen",
+    "T. Lisker",
+    "E.-C. Sung",
+    "Y. Lee",
+    "J. Chung",
+    "M. Pak",
+    "W. Yi",
+    "W. Lee"
+  ],
+  "publisher": "ApJS 215, 22",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kim et al. (2014), ApJS 215, 22.",
+      "scope": "Virgo Cluster member galaxies",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/215/22/ReadMe"
+    }
+  ]
+}

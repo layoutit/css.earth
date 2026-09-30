@@ -6,7 +6,7 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
-import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
+import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 import type { ProjectedGalaxy } from './galaxy-catalog-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
@@ -20,7 +20,6 @@ interface Entry {
   readonly dot: HTMLElement | null;
   readonly navigable: boolean;
   readonly label: HTMLElement;
-  readonly aperture: HTMLElement | null;
   readonly activate: (event: Event) => void;
   readonly cornersM: readonly (readonly number[])[] | null;
   /** The object's drawn sphere and published stellar extent: its caption hangs under the one, hides inside the other. */
@@ -69,7 +68,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   const root = document.createElement('div');
   root.className = 'prepared-galaxy-catalog';
   // Zero-size root at the stage centre, children placed from it (world-context.css): a full-screen box above the globe
-  // became a full-screen layer. Dots, apertures and labels keep their fixed look there too; only their place, size, fade
+  // became a full-screen layer. Dots and labels keep their fixed look there too; only their place, size, fade
   // and pointer state are inline.
   host.insertBefore(root, before);
   const picking = screenPicking(pickingHost);
@@ -85,13 +84,6 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       dot.style.cssText = 'opacity:0;visibility:hidden';
       root.append(dot);
     }
-    const aperture = isPreparedCluster(object) ? document.createElement('span') : null;
-    if (aperture) {
-      aperture.dataset.clusterAperture = object.id;
-      aperture.style.cssText = 'opacity:0;visibility:hidden';
-      aperture.title = 'R500 overdensity aperture; not the cluster boundary';
-      root.append(aperture);
-    }
     marker.dataset.galaxyMarker = object.id;
     mountCatalogMarker(marker, object);
     label.dataset.galaxyLabel = object.id;
@@ -99,7 +91,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     if (navigable) label.dataset.objectNavigate = object.id;
     label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
-    label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
+    label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
     label.style.cssText = 'opacity:0;visibility:hidden';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
@@ -111,11 +103,12 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     if (navigable) label.setAttribute('role', 'button');
     label.tabIndex = -1;
     // Catalogue-only rows have no prepared scene. Keep their dots, but do not
-    // mount inert marker/caption nodes that can resemble a destination.
-    if (navigable) root.append(marker, label);
+    // mount inert marker/caption nodes that can resemble a destination. A cluster is its member galaxies' dots: its name
+    // alone marks it.
+    if (navigable) root.append(...isPreparedCluster(object) ? [label] : [marker, label]);
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
     const caption = !isPreparedCluster(object) && object.detailedObjectId !== undefined ? galaxyCaptions?.get(object.detailedObjectId) ?? null : null;
-    const entry: Entry = { object, marker, dot, navigable, label, aperture, activate, cornersM: frame && !caption ? catalogVolumeCorners(frame) : null, caption,
+    const entry: Entry = { object, marker, dot, navigable, label, activate, cornersM: frame && !caption ? catalogVolumeCorners(frame) : null, caption,
       placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null, transform: '' };
     return entry;
   };
@@ -165,7 +158,6 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       const width = viewport.widthPixels ?? host.clientWidth, height = viewport.heightPixels ?? host.clientHeight;
       const candidates: ProjectedGalaxy[] = [];
       const visible = new Set<string>();
-      const apertures = new Set<string>();
       const alpha = Math.max(0, Math.min(1, opacity));
       const clusterAlpha = Math.max(0, Math.min(1, clusterOpacity));
       const objectOpacity = (object: PreparedCatalogObject) =>
@@ -185,15 +177,6 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       for (const entry of drawn) {
         const point = projectCatalogPosition(entry.object.positionM, world, viewport);
         if (!point || !(width > 0 && height > 0)) continue;
-        if (entry.aperture && isPreparedCluster(entry.object)) {
-          const ellipse = projectCatalogAperture(entry.object.aperture.comovingRadiusM, point, viewport);
-          if (ellipse && ellipse.b >= 2 && ellipse.a < Math.max(width, height) * 2 &&
-              Math.abs(ellipse.x) < width / 2 + ellipse.a && Math.abs(ellipse.y) < height / 2 + ellipse.a) {
-            entry.aperture.style.width = `${ellipse.a * 2}px`; entry.aperture.style.height = `${ellipse.b * 2}px`;
-            entry.aperture.style.transform = `translate(${ellipse.x - ellipse.a}px,${ellipse.y - ellipse.b}px) rotate(${ellipse.angle}deg)`;
-            apertures.add(entry.object.id);
-          }
-        }
         const anchor = entry.caption ? projectGalaxyCaptionAnchor(world, viewport, entry.caption.frame, entry.caption.drawnRadiusUnits, entry.caption.extentRadiusUnits) : null;
         // Inside its published extent the camera is within the galaxy: no caption names it from outside.
         if (entry.caption && !anchor) continue;
@@ -252,7 +235,6 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         }
         const billboarded = !isPreparedCluster(entry.object) && entry.object.detailedObjectId !== undefined && billboardedObjectIds?.has(entry.object.detailedObjectId) === true;
         fader.set(entry.marker, projected && !billboarded ? objectAlpha * emphasised(entry, .45) : 0, 200);
-        if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
         // Interactivity flips rarely; rewriting it for every galaxy each frame reflected three attributes.
         if (entry.dot) fader.set(entry.dot, visible.has(entry.object.id) ? Math.max(0, Math.min(1, dotOpacity)) * (1 - (projected ? objectAlpha : 0)) * .4 : 0, 200);
         const interactive = entry.navigable && labelOpacity > .1;

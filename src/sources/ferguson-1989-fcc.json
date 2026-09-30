@@ -1,0 +1,49 @@
+{
+  "id": "ferguson-1989-fcc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Population studies in groups and clusters of galaxies. II. A catalog of galaxies in the central 3.5 degrees of the Fornax Cluster",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "1989AJ.....98..367F"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "VII/180"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1989AJ.....98..367F",
+      "label": "1989AJ.....98..367F"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/180",
+      "label": "CDS VII/180"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/VII/180/ReadMe",
+      "checkedOn": "2026-09-30",
+      "locator": "p2tbl2: 340 likely Fornax Cluster members with B1950 positions, membership status (Mem: 255 definite, 85 likely) and morphological type."
+    }
+  ],
+  "creators": [
+    "H. C. Ferguson"
+  ],
+  "publisher": "AJ 98, 367",
+  "publicationDate": "1989",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Ferguson (1989), AJ 98, 367.",
+      "scope": "Fornax Cluster member galaxies",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/VII/180/ReadMe"
+    }
+  ]
+}

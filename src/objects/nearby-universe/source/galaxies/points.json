@@ -15,7 +15,7 @@
       "magnitudeOrigin": "http://atlas.obs-hp.fr/hyperleda/fG.cgi?n=meandata&c=o&of=1,leda,simbad&nra=l&nakd=1&d=pgc%2C%20btc%2C%20itc%2C%20mabs%2C%20v&sql=v%3C33000%20and%20(btc%20is%20not%20null%20or%20itc%20is%20not%20null)&ob=&a=csv%5B%2C%5D",
       "note": "HyperLEDA's numerical morphological type t and its total B magnitude corrected for Galactic extinction, inclination and redshift (btc), each joined by PGC number; empty where HyperLEDA has none. Queried 2026-09-29."
     },
-    "bytes": 439324,
+    "bytes": 552964,
     "format": "csv",
     "gzip": true,
     "columns": {
@@ -24,7 +24,22 @@
       "decDeg": 3,
       "distance": 4
     },
-    "distanceUnit": "distance-modulus"
+    "distanceUnit": "distance-modulus",
+    "groupDistance": {
+      "group": 7,
+      "distance": 8,
+      "depth": "isotropic",
+      "source": "cosmicflows-4",
+      "basis": "A galaxy's own distance modulus carries a median uncertainty of 0.5 mag in table 2 (e_DM), about 26% in distance, so a group drawn at its members' own distances is smeared along the line of sight into a spike several times longer than it is wide. Tully et al. (2023) average each group's members into one group distance (table 3, DMzp). Members sit at that distance, spread in depth as widely as the group spreads across the sky: that it is as deep as it is wide is an assumption (a group with no preferred axis), not a measurement of any member's depth."
+    },
+    "groups": {
+      "origin": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/94/table2.dat.gz",
+        "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/94/table3.dat.gz"
+      ],
+      "generator": "packages/bake/authoring/nearby-universe/cf4-groups.mts",
+      "note": "Columns 7 and 8: the group's dominant galaxy (table 2, 1PGC) and the group's distance modulus on the calibrated scale (table 3, DMzp), joined by PGC; column 8 is empty for the 7 galaxies whose group table 3 does not list."
+    }
   },
   "sample": "The tracked file keeps the 27,277 of CF4's 55,877 galaxies whose distance modulus puts them between 3 and 200 Mpc (27.386 to 36.505 mag), in PGC order. Nearer, the Local Group catalogue (src/objects/local-group) draws each galaxy; farther, only the SDSS fundamental-plane sample reaches, over part of the northern sky.",
   "filters": [],
@@ -36,7 +51,7 @@
     "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
   },
   "source": "cosmicflows-4",
-  "meaning": "Every galaxy of Cosmicflows-4 (Tully et al. 2023) between 3 and 200 Mpc, each at its measured distance (the distance modulus of all methodologies), coloured by its HyperLEDA morphological type.",
+  "meaning": "Every galaxy of Cosmicflows-4 (Tully et al. 2023) between 3 and 200 Mpc, each at its measured distance (the distance modulus of all methodologies), or, for a group of two or more, at the group's averaged distance, coloured by its HyperLEDA morphological type.",
   "appearance": {
     "colorCss": "#ffffff",
     "radiusPx": 0.75,

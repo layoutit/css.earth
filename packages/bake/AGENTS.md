@@ -47,7 +47,9 @@ its validators accept); the renderer never imports the bake.
   writes them with the object's inventory and descriptor). It imports `volume` (its node entry).
   `packages/bake/cli/prepare-galaxy-catalog.mts <object-directory>` is its command.
 - `src/cluster-catalog/` is published as `@cssearth/bake/cluster-catalog` (Node only): the galaxy-cluster catalogue,
-  placed with the galaxy positions. It imports `galaxy-catalog`.
+  placed with the galaxy positions at each cluster's Cosmicflows-4 group distance, and the object preparation that writes
+  it with its inventory. It imports `galaxy-catalog`. `packages/bake/cli/prepare-cluster-catalog.mts <object-directory>`
+  is its command.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
   bodies, orbit banks, system and group views, hyperbolic paths). It imports no topic.
 - `src/runtime-source/` is published as `@cssearth/bake/runtime-source` (Node only): the runtime-source reader that
@@ -287,7 +289,8 @@ its validators accept); the renderer never imports the bake.
   sampling. It stays host-neutral, because the nebula lab's browser viewer imports it: no Node built-ins, `Buffer`,
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
-  compiler bake and the published catalogue point banks. It may import `node:*`, `sharp`, the main volume entry and the
+  compiler bake and the published catalogue point banks, with the galaxy groups' placement and the shell selection that
+  keeps them first (`catalogue-groups.ts`). It may import `node:*`, `sharp`, the main volume entry and the
   renderer's catalogue bank codec (`@cssearth/renderer/prepared-data/catalogue-bank-binary.ts`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only
   topics above may, as a lower layer.
 

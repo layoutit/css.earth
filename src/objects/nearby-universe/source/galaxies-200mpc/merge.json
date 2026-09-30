@@ -7,11 +7,16 @@
   ],
   "densityCap": {
     "perMpc3": 0.00018,
-    "kernelMpc": 20,
     "taperMpc": [
       150,
       200
     ],
-    "basis": "Presentation choice: 0.18 per 1,000 Mpc\u00b3, half the 0.37 CF4 still holds between 150 and 200 Mpc, so the field is even out to its edge; the taper softens the edge where the catalogue ends. The kernel holds about five galaxies at the cap. Real concentrations above the cap are thinned to it; sparser regions, as the zone the Milky Way's disc hides, stay as they are."
+    "basis": "Presentation choice: 0.18 per 1,000 Mpc\u00b3, half the 0.37 CF4 still holds between 150 and 200 Mpc, so the field is even out to its edge; the taper softens the edge where the catalogue ends. It is counted in shells 10 Mpc wide around the Sun, so only the catalogue's fall-off with distance is evened and a cluster keeps its contrast with the space around it.",
+    "shellMpc": 10,
+    "groupsFirst": {
+      "background": 1,
+      "basis": "Presentation choice: a shell's room goes first to galaxies in Cosmicflows-4 groups of two or more, the richest group first, so the dots trace the groups, filaments and clusters; as many again, drawn at random from the rest, fill the space between them, so the view still reads as open space. Doubling the dots cost no measurable time in the zoom profile (2026-09-30). Every member of a group of five or more is kept here, the outermost level, room or not: the inner levels only fill in around the Milky Way, so without this a cluster far from it, such as Virgo, would show only part of its members from anywhere else.",
+      "wholeGroupsOf": 5
+    }
   }
 }

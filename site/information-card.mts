@@ -2,6 +2,8 @@ import type { SceneLifetime } from '@cssearth/engine';
 import { sectionElement, type BrowserWindow } from './browser/browser-types.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 import { mountDatasetPickerLayout } from './dataset-picker.mts';
+import { NARROW_LAYOUT } from './narrow-layout.mts';
+import { syncTabPanels } from './tab-panels.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];
 const TREE_PANEL_STATE = 'tree-sections@1';
@@ -58,7 +60,10 @@ export function createTabsController(card: HTMLElement | null, lifetime: SceneLi
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
     if (tab) {
       tab.checked = true;
-      tab.dispatchEvent(new tab.ownerDocument.defaultView!.Event('change', { bubbles: true }));
+      // The card mounts its own panels: a card still waiting in a detached section (detached-sections.ts) belongs to its
+      // template's inert document, whose change events never reach the page's listener (tab-panels.mts), nor its window.
+      if (card) syncTabPanels(card, tabs.filter(other => other.name === tab.name), globalThis.matchMedia?.(NARROW_LAYOUT).matches ?? true);
+      tab.dispatchEvent(new (tab.ownerDocument.defaultView ?? globalThis).Event('change', { bubbles: true }));
     }
     const section = sections.find(panel => panel.dataset.informationPanel === id);
     if (section && !section.open) section.open = true;

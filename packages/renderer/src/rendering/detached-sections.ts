@@ -7,12 +7,11 @@ const anchors = new WeakMap<Element, Element>();
 
 type Template = Element & { readonly content: DocumentFragment };
 const isTemplate = (element: Element): element is Template => element.localName === 'template' && 'content' in element;
-/** Where a template holds its section: its inert content in a browser, including a template nested in another's content.
- * A server DOM (linkedom) keeps and serializes a template's own children, and its content shares the page's document, so
- * there an empty template holds a new section itself. */
-const holder = (template: Template): ParentNode =>
-  template.children.length > 0 ? template : template.content.children.length > 0 ? template.content
-    : template.content.ownerDocument === template.ownerDocument ? template : template.content;
+/** Where a template holds its section: its inert content in a browser. A server DOM (linkedom) keeps and serializes a
+ * template's own children, and its content shares the page's document, so there the template itself holds it. A browser's
+ * template inside another's content shares that inert document too, so a section already in the content stays there. */
+const holder = (template: Template): ParentNode => template.children.length > 0
+  || (template.content.childElementCount === 0 && template.content.ownerDocument === template.ownerDocument) ? template : template.content;
 
 /** Every element matching `selector` under `root`, mounted or waiting in a detached template, in document order. */
 export function sectionElements<E extends Element = HTMLElement>(root: ParentNode, selector: string): E[] {
