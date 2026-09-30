@@ -3,7 +3,7 @@
 // stack and stays in the repository's ignored `output/`, out of the inventory, R2 and the site's module graph.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, cataloguePointSpread } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 /** A bake input: `output/catalogue-points/<object>/<id>.json` under the repository root. */
@@ -30,9 +30,11 @@ export async function readCatalogueBank(objectDirectory: string, id: string, rep
 }
 
 /** Write a bank where its recipe says it belongs. A published bank is inventoried, never exceeds MAX_CATALOGUE_POINTS and
- * carries its `spread` (the shape its points trace, which the app reads instead of deriving it on every mount). */
+ * carries its `spread` (the shape its points trace, which the app reads instead of deriving it on every mount) and its
+ * `cells` (boxes of nearby points the app skips whole when they are out of view, each within one level). */
 export async function writeCatalogueBank({ objectDirectory, id, bank, published, repositoryRoot, inventory = inventoryPreparedAssets }: {
-  objectDirectory: string; id: string; bank: { readonly schema: unknown; readonly points: readonly unknown[] }; published: boolean;
+  objectDirectory: string; id: string; published: boolean;
+  bank: { readonly schema: unknown; readonly points: readonly unknown[]; readonly appearance?: unknown };
   repositoryRoot?: string; inventory?: (object: { objectId: string; objectDirectory: string }) => Promise<unknown>;
 }): Promise<string> {
   const objectId = basename(objectDirectory);
@@ -43,9 +45,23 @@ export async function writeCatalogueBank({ objectDirectory, id, bank, published,
   }
   const path = published ? publishedCatalogueBankPath(objectDirectory, id) : catalogueBankInputPath(objectDirectory, id, repositoryRoot);
   await mkdir(dirname(path), { recursive: true });
-  await writeFile(path, JSON.stringify(published ? { ...bank, spread: cataloguePointSpread(pointRows(objectId, id, bank.points)) } : bank) + '\n');
+  const rows = published ? pointRows(objectId, id, bank.points) : [];
+  const levels = published ? levelPoints(objectId, id, bank.appearance) : undefined;
+  await writeFile(path, JSON.stringify(published ? { ...bank, spread: cataloguePointSpread(rows), cells: catalogueCells(rows, levels) } : bank) + '\n');
   if (published) await inventory({ objectId, objectDirectory });
   return path;
+}
+
+/** A stacked bank's level sizes in order (`appearance.levels[].points`), or undefined for a bank without levels. */
+function levelPoints(objectId: string, id: string, appearance: unknown): number[] | undefined {
+  const levels = appearance && typeof appearance === 'object' ? (appearance as { levels?: unknown }).levels : undefined;
+  if (levels === undefined) return undefined;
+  if (!Array.isArray(levels)) throw new TypeError(`${objectId}: bank ${id} appearance.levels must be a list, got ${JSON.stringify(levels)}.`);
+  return levels.map((level: unknown, index) => {
+    const points = level && typeof level === 'object' ? (level as { points?: unknown }).points : undefined;
+    if (!Number.isSafeInteger(points) || (points as number) < 1) throw new TypeError(`${objectId}: bank ${id} level ${index} needs a positive whole points count, got ${JSON.stringify(points)}.`);
+    return points as number;
+  });
 }
 
 function pointRows(objectId: string, id: string, points: readonly unknown[]): readonly (readonly number[])[] {

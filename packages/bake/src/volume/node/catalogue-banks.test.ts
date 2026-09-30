@@ -2,7 +2,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { expect, test } from 'vitest';
-import { MAX_CATALOGUE_POINTS, cataloguePointSpread } from '@cssearth/objects';
+import { MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { readCatalogueBank, recipePublished, writeCatalogueBank } from './catalogue-banks.ts';
 
 const bank = (points: number) => ({ schema: 'cssearth-catalogue-points@1', id: 'x', points: Array.from({ length: points }, (_, i) => [i, 0, 0]) });
@@ -16,12 +16,14 @@ test('a bake input goes to output/, a published bank to prepared/ with its inven
   expect(await writeCatalogueBank({ objectDirectory, id: 'dots', bank: bank(2), published: true, repositoryRoot: root, inventory }))
     .toBe(resolve(objectDirectory, 'prepared/dots.json'));
   expect(inventoried).toEqual(['galaxy']);
-  const raw = await readCatalogueBank(objectDirectory, 'raw', root) as { points: unknown[]; spread?: unknown };
-  const dots = await readCatalogueBank(objectDirectory, 'dots', root) as { points: number[][]; spread?: unknown };
+  const raw = await readCatalogueBank(objectDirectory, 'raw', root) as { points: unknown[]; spread?: unknown; cells?: unknown };
+  const dots = await readCatalogueBank(objectDirectory, 'dots', root) as { points: number[][]; spread?: unknown; cells?: unknown };
   expect(raw.points).toHaveLength(3);
   expect(raw.spread, 'a bake input is not drawn, so it carries no spread').toBeUndefined();
   expect(dots.points).toHaveLength(2);
   expect(dots.spread, 'a published bank carries the spread its points trace').toEqual(cataloguePointSpread(dots.points));
+  expect(raw.cells, 'nor cells').toBeUndefined();
+  expect(dots.cells, 'a published bank carries its cells').toEqual(catalogueCells(dots.points));
   await expect(readCatalogueBank(objectDirectory, 'missing', root)).rejects.toThrow(/galaxy: catalogue bank missing has not been prepared/u);
   await rm(root, { recursive: true, force: true });
 });

@@ -1,5 +1,5 @@
-import { MAX_CATALOGUE_POINTS, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
-import type { CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
+import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
+import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
@@ -81,6 +81,8 @@ export interface PreparedCataloguePoints {
   readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string }[];
   /** The bank's prepared shape around its origin, written by the bake that published it. */
   readonly spread: CataloguePointSpread;
+  /** Its points' prepared cells: boxes the projection skips whole when they are out of view. */
+  readonly cells: CatalogueCells;
 }
 
 /** A prepared `cssearth-catalogue-points@1` bank: fixed 3D positions of a published catalogue and how to draw them. */
@@ -118,10 +120,11 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     if (!entry(colour)) throw new TypeError(`${data.id}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
     return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour });
   });
+  const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
     ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
     ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }) }),
-    points: Object.freeze(points), spread });
+    points: Object.freeze(points), spread, cells });
 }
 
 function parseLevels(value: unknown, total: number, id: string): readonly CataloguePointLevel[] {
@@ -229,7 +232,8 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
         };
         const distanceOf = (publication: VolumeCameraPublication) =>
           Math.hypot(...publication.world.pose.positionM.map((value, axis) => value - bank.frame.originM[axis]!)) / bank.frame.metersPerUnit;
-        const mount = (points: typeof bank.points, count: (total: number) => number, share: () => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
+        const mount = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
+          cells: { boxes: bank.cells.boxes, of: cellOf },
           drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
           // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
@@ -250,11 +254,11 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
           });
         };
         if (parts.length < 2) {
-          const whole = { share: 1 }, single = mount(bank.points, total => total, () => whole.share);
+          const whole = { share: 1 }, single = mount(bank.points, bank.cells.of, total => total, () => whole.share);
           runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
-          const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points),
+          const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points), bank.cells.of.subarray(part.start, part.start + part.points),
             total => Math.max(0, Math.min(part.points, total - part.start)), () => part.share) }));
           runtime = { layers: mounted.map(part => part.runtime.root), publish(publication) {
             const distanceUnits = distanceOf(publication);

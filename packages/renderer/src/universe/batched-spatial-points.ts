@@ -43,8 +43,11 @@ const transpose = (m: Matrix3): Matrix3 => [m[0], m[3], m[6], m[1], m[4], m[7], 
 const parallaxPixels = (focalPixels: number, shift: number, nearestUnits: number) =>
   nearestUnits > shift ? focalPixels * shift / (nearestUnits - shift) : Infinity;
 
-export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host, before, frame, points, className, stylePoint, drawnCount, paintPalette, keepFraction }: {
+export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host, before, frame, points, cells, className, stylePoint, drawnCount, paintPalette, keepFraction }: {
   host: HTMLElement; before?: Element; frame: DensityVolumeFrame; points: readonly T[]; className: string;
+  /** The points' prepared cells (@cssearth/objects CatalogueCells): `of[i]` is point i's box in `boxes`, six bounds each.
+   * A cell out of view is skipped whole; without cells every point is visited. */
+  cells?: { readonly boxes: Float64Array; readonly of: ArrayLike<number> };
   /** A point's fixed style, read once when the field mounts. */
   stylePoint(point: T): BatchedSpatialPointStyle | null;
   drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
@@ -94,7 +97,19 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     paths[index] = pathPaint.entry(pointPaint(style), Math.max(.5, style.radiusPx));
     margins[index] = Math.max(2, style.radiusPx);
   });
-  let last={visiblePoints:0,candidates:0,residentElements,publishMs:0};
+  // The cells' points in ascending order, each cell a run of `order` from cellStart to cellStart of the next: the prefix a
+  // frame draws ends a run early, and a point keeps its own index for its rank. One cell holds everything without cells.
+  const cellCount = cells ? cells.boxes.length / 6 : 1, cellStart = new Int32Array(cellCount + 1), order = new Int32Array(points.length);
+  if (cells && cells.of.length !== points.length) throw new TypeError(`${className}: ${cells.of.length} cells for ${points.length} points.`);
+  for (let index = 0; index < points.length; index++) cellStart[(cells ? cells.of[index]! : 0) + 1]!++;
+  for (let cell = 0; cell < cellCount; cell++) cellStart[cell + 1]! += cellStart[cell]!;
+  { const next = cellStart.slice(0, cellCount); for (let index = 0; index < points.length; index++) order[next[cells ? cells.of[index]! : 0]!++] = index; }
+  const boxes = cells?.boxes ?? new Float64Array(6);
+  // The widest margin a drawn point has: a cell is out of view when even its nearest corner is beyond it.
+  let widestMargin = 0;
+  for (let index = 0; index < points.length; index++) if (paths[index]! >= 0) widestMargin = Math.max(widestMargin, margins[index]!);
+  const culled = new Int32Array(cellCount);
+  let last={visiblePoints:0,candidates:0,skippedCells:0,residentElements,publishMs:0};
   const publish = (publication: VolumeCameraPublication, exact = false) => {
     if (destroyed) return;
     const { world, viewport } = publication;
@@ -144,30 +159,76 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     const [px, py, pz] = local.positionUnits, focal = viewport.focalPixels, [ox, oy] = viewport.principalOffsetPixels;
     const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
     const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = r as unknown as [number, number, number, number, number, number, number, number, number];
-    for (let index = 0; index < count; index++) {
-      const o = index * 3, x = positions[o]! - px, y = positions[o + 1]! - py, z = positions[o + 2]! - pz;
-      const squared = x * x + y * y + z * z;
-      if (squared < nearestSquared) nearestSquared = squared;
-      const path = paths[index]!;
-      if (path < 0) continue;
-      const depth = -(r2 * x + r5 * y + r8 * z);
-      if (depth <= 0) continue;
-      const sx = focal * (r0 * x + r3 * y + r6 * z) / depth + ox, sy = focal * (r1 * x + r4 * y + r7 * z) / depth + oy;
-      const margin = margins[index]!;
-      if (Math.abs(sx) > halfWidth * (1 + 2 * OVERSCAN) + margin || Math.abs(sy) > halfHeight * (1 + 2 * OVERSCAN) + margin) continue;
-      // The share and the counts are of the view; the overscan only paints ahead of a turn.
-      const inView = Math.abs(sx) <= halfWidth + margin && Math.abs(sy) <= halfHeight + margin;
-      if (inView) candidates++;
-      if (keep < 1 && ranks[index]! >= keep) continue;
-      pathPaint.add(path, sx, sy);
-      if (inView) visible++;
+    // A cell is out of view when all of its box is behind the camera or beyond one edge of the painted view and its
+    // margins (a plane through the camera for each edge). The test is on the box, so it never drops a point the point test
+    // below would keep; a relative tolerance keeps rounding on the box's side.
+    const edgeX = halfWidth * (1 + 2 * OVERSCAN) + widestMargin, edgeY = halfHeight * (1 + 2 * OVERSCAN) + widestMargin;
+    const sides = Number.isFinite(edgeX) && Number.isFinite(edgeY);
+    // Each edge's plane n, with n · offset >= 0 on the view's side: sx <= edgeX is (edgeX - ox) depth - focal x >= 0, and
+    // sx >= -edgeX is focal x + (edgeX + ox) depth >= 0, where depth = -(r2, r5, r8) · offset (likewise for y).
+    const planes = [
+      -focal * r0 - (edgeX - ox) * r2, -focal * r3 - (edgeX - ox) * r5, -focal * r6 - (edgeX - ox) * r8,
+      focal * r0 - (edgeX + ox) * r2, focal * r3 - (edgeX + ox) * r5, focal * r6 - (edgeX + ox) * r8,
+      -focal * r1 - (edgeY - oy) * r2, -focal * r4 - (edgeY - oy) * r5, -focal * r7 - (edgeY - oy) * r8,
+      focal * r1 - (edgeY + oy) * r2, focal * r4 - (edgeY + oy) * r5, focal * r7 - (edgeY + oy) * r8,
+    ];
+    const outOfView = (cell: number) => {
+      const b = cell * 6;
+      const cx = (boxes[b]! + boxes[b + 3]!) / 2 - px, cy = (boxes[b + 1]! + boxes[b + 4]!) / 2 - py, cz = (boxes[b + 2]! + boxes[b + 5]!) / 2 - pz;
+      const hx = (boxes[b + 3]! - boxes[b]!) / 2, hy = (boxes[b + 4]! - boxes[b + 1]!) / 2, hz = (boxes[b + 5]! - boxes[b + 2]!) / 2;
+      const reach = Math.abs(cx) + Math.abs(cy) + Math.abs(cz) + hx + hy + hz;
+      // In front: the largest depth over the box, depth = -(r2, r5, r8) · offset.
+      if (!(-(r2 * cx + r5 * cy + r8 * cz) + Math.abs(r2) * hx + Math.abs(r5) * hy + Math.abs(r8) * hz > -1e-9 * reach * (Math.abs(r2) + Math.abs(r5) + Math.abs(r8)))) return true;
+      for (let plane = 0; sides && plane < 12; plane += 3) {
+        const nx = planes[plane]!, ny = planes[plane + 1]!, nz = planes[plane + 2]!, scale = Math.abs(nx) + Math.abs(ny) + Math.abs(nz);
+        if (nx * cx + ny * cy + nz * cz + Math.abs(nx) * hx + Math.abs(ny) * hy + Math.abs(nz) * hz < -1e-9 * reach * scale) return true;
+      }
+      return false;
+    };
+    let culledCount = 0;
+    for (let cell = 0; cell < cellCount; cell++) {
+      if (cells && outOfView(cell)) { culled[culledCount++] = cell; continue; }
+      for (let run = cellStart[cell]!, end = cellStart[cell + 1]!; run < end; run++) {
+        const index = order[run]!;
+        if (index >= count) break;
+        const o = index * 3, x = positions[o]! - px, y = positions[o + 1]! - py, z = positions[o + 2]! - pz;
+        const squared = x * x + y * y + z * z;
+        if (squared < nearestSquared) nearestSquared = squared;
+        const path = paths[index]!;
+        if (path < 0) continue;
+        const depth = -(r2 * x + r5 * y + r8 * z);
+        if (depth <= 0) continue;
+        const sx = focal * (r0 * x + r3 * y + r6 * z) / depth + ox, sy = focal * (r1 * x + r4 * y + r7 * z) / depth + oy;
+        const margin = margins[index]!;
+        if (Math.abs(sx) > halfWidth * (1 + 2 * OVERSCAN) + margin || Math.abs(sy) > halfHeight * (1 + 2 * OVERSCAN) + margin) continue;
+        // The share and the counts are of the view; the overscan only paints ahead of a turn.
+        const inView = Math.abs(sx) <= halfWidth + margin && Math.abs(sy) <= halfHeight + margin;
+        if (inView) candidates++;
+        if (keep < 1 && ranks[index]! >= keep) continue;
+        pathPaint.add(path, sx, sy);
+        if (inView) visible++;
+      }
+    }
+    // The paint is kept while the camera moves less than its nearest drawn-prefix point allows (parallaxPixels), so the
+    // nearest is over every point of the prefix: a skipped cell's points count when its box is nearer than the nearest yet.
+    for (let skipped = 0; skipped < culledCount; skipped++) {
+      const cell = culled[skipped]!, b = cell * 6;
+      const dx = Math.max(0, boxes[b]! - px, px - boxes[b + 3]!), dy = Math.max(0, boxes[b + 1]! - py, py - boxes[b + 4]!), dz = Math.max(0, boxes[b + 2]! - pz, pz - boxes[b + 5]!);
+      if (!(dx * dx + dy * dy + dz * dz < nearestSquared)) continue;
+      for (let run = cellStart[cell]!, end = cellStart[cell + 1]!; run < end; run++) {
+        const index = order[run]!;
+        if (index >= count) break;
+        const o = index * 3, x = positions[o]! - px, y = positions[o + 1]! - py, z = positions[o + 2]! - pz;
+        const squared = x * x + y * y + z * z;
+        if (squared < nearestSquared) nearestSquared = squared;
+      }
     }
     const nearestUnits = Math.sqrt(nearestSquared);
     pathPaint.commit();
     setWarp('');
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
     painted={position:[...local.positionUnits],rest,count,nearestUnits,keep,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height};
-    last={visiblePoints:visible,candidates,residentElements,publishMs:performance.now()-started};
+    last={visiblePoints:visible,candidates,skippedCells:culledCount,residentElements,publishMs:performance.now()-started};
   };
   return Object.freeze({root,publish:(publication: VolumeCameraPublication) => publish(publication),stats:()=>Object.freeze({...last}),
     destroy(){if(destroyed)return;destroyed=true;if(settle!==null)clearTimeout(settle);arrivals.destroy();root.remove();}});

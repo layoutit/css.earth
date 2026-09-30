@@ -105,3 +105,60 @@ test('dots a zoom adds arrive during the zoom, through the pacer; dots it takes 
   expect(dots(), 'the pause brings the exact paint').toBe(20);
   field.destroy();
 });
+
+test('prepared cells skip out-of-view boxes without changing a single drawn dot or the paint decisions', async () => {
+  const { catalogueCells } = await import('@cssearth/objects');
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-200, -200, -200] as const, max: [200, 200, 200] as const } };
+  let seed = 11;
+  const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
+  // Clumps and a thin shell, so cells are uneven and many lie beside, behind and around the camera.
+  const rows = Array.from({ length: 3000 }, (_, index) => {
+    if (index % 3 === 0) { const u = random() * 2 - 1, a = random() * 2 * Math.PI, r = 150 + random() * 5, s = Math.sqrt(1 - u * u);
+      return [r * s * Math.cos(a), r * s * Math.sin(a), r * u, index % 2]; }
+    const clump = [[40, 0, -60], [-90, 30, 20], [5, -5, 5]][index % 3]!;
+    return [clump[0]! + (random() - .5) * 30, clump[1]! + (random() - .5) * 30, clump[2]! + (random() - .5) * 30, index % 2];
+  });
+  const cells = catalogueCells(rows, undefined, 32);
+  const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], colour: row[3] }));
+  const styles = [{ colorCss: '#ffffff', opacity: .5, radiusPx: 1 }, { colorCss: '#ff8800', opacity: 1, radiusPx: 2.5 }];
+  let keep = 1, drawn = rows.length;
+  const mount = (withCells: boolean) => { const { document } = parseHTML('<div id="host"></div>');
+    return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+      ...(withCells ? { cells: { boxes: Float64Array.from(cells.boxes.flat()), of: Int32Array.from(cells.of) } } : {}),
+      stylePoint: point => styles[point.colour]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep }); };
+  const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
+    .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h0/g)].map(match => match[0]).sort().join(''));
+  const plain = mount(false), celled = mount(true);
+  let last: { focalPixels: number; principalOffsetPixels: readonly [number, number]; widthPixels: number; heightPixels: number } =
+    { focalPixels: 800, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 };
+  let checked = 0, skippedSome = false, skippedCells = 0;
+  let orientation = [0, 0, 0, 1] as readonly number[], position = [0, 0, 0] as readonly number[];
+  for (let trial = 0; trial < 300; trial++) {
+    if (trial % 3 === 2) {
+      // A small move of the last camera: whether each field keeps its paint rides on its nearest point, which must agree.
+      position = position.map(value => value + (random() - .5) * 1e-3);
+    } else {
+      const axis = [random() - .5, random() - .5, random() - .5], length = Math.hypot(...axis), angle = random() * Math.PI;
+      orientation = [...axis.map(value => value / length * Math.sin(angle / 2)), Math.cos(angle / 2)];
+      position = [0, 1, 2].map(() => (random() - .5) * (trial % 2 ? 60 : 400));
+    }
+    const viewport = trial % 3 === 2 ? last : { focalPixels: 200 + random() * 1500, principalOffsetPixels: [(random() - .5) * 80, (random() - .5) * 80] as const, widthPixels: 640 + Math.round(random() * 800), heightPixels: 480 + Math.round(random() * 400) };
+    last = viewport;
+    if (trial % 3 !== 2) { keep = trial % 5 === 0 ? .4 : 1; drawn = trial % 7 === 0 ? Math.round(random() * rows.length) : rows.length; }
+    const publication = { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: {
+      positionM: position as unknown as readonly [number, number, number], orientationXyzw: orientation as unknown as readonly [number, number, number, number] } }, viewport };
+    plain.publish(publication); celled.publish(publication);
+    expect(dots(celled), `trial ${trial}`).toEqual(dots(plain));
+    expect(celled.stats().visiblePoints).toBe(plain.stats().visiblePoints);
+    expect(celled.stats().candidates).toBe(plain.stats().candidates);
+    if (plain.stats().visiblePoints < rows.length / 2) skippedSome = true;
+    skippedCells += celled.stats().skippedCells;
+    expect(plain.stats().skippedCells).toBe(0);
+    checked++;
+  }
+  expect(checked).toBe(300);
+  expect(skippedSome, 'some views leave most points out').toBe(true);
+  expect(skippedCells / 300, 'the cells skip most of what a view leaves out').toBeGreaterThan(cells.boxes.length / 4);
+  plain.destroy(); celled.destroy();
+});

@@ -2,13 +2,16 @@ import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints, parseCataloguePoints } from './catalogue-points.js';
-import { cataloguePointSpread } from '@cssearth/objects';
+import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
+
+/** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */
+const baked = (points: readonly (readonly number[])[], levels?: readonly number[]) => ({ spread: cataloguePointSpread(points), cells: catalogueCells(points, levels) });
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } };
 const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-stars', frame,
   appearance: { colorCss: '#ffe2a8', radiusPx: .75, opacity: .7 }, points: [[1, 0, -10], [-1, 0, -10]],
-  spread: cataloguePointSpread([[1, 0, -10], [-1, 0, -10]]) };
+  ...baked([[1, 0, -10], [-1, 0, -10]]) };
 
 test('the prepared catalogues the app draws are valid banks of every selected row with a distance', () => {
   // The published banks: what each recipe marks `published: true` and the app fetches. Their inputs (a survey's stars,
@@ -20,6 +23,8 @@ test('the prepared catalogues the app draws are valid banks of every selected ro
     expect(parsed.id).toBe(id);
     expect(parsed.points).toHaveLength(prepared.counts.points);
     expect(parsed.spread, `${object}/${id}: the bake's spread is the one its points trace`).toEqual(cataloguePointSpread(prepared.points));
+    const cells = catalogueCells(prepared.points, prepared.appearance.levels?.map((level: { points: number }) => level.points));
+    expect([...parsed.cells.of], `${object}/${id}: the bake's cells are the ones its points and levels give`).toEqual(cells.of);
     // A merged or stacked bank (packages/bake/cli/merge-catalogue-points.mts, stack.mts) counts only its points; a prepared one also its rows.
     if (prepared.source !== 'merge' && prepared.source !== 'stack') expect(prepared.counts.points + prepared.counts.missingDistance).toBe(prepared.counts.selected);
   }
@@ -70,6 +75,8 @@ test('catalogue point banks refuse malformed points and appearances, naming the 
   expect(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, colorCss: 'gold' } })).toThrow(/test-stars: catalogue point appearance/);
   expect(() => parseCataloguePoints({ ...bank, points: [] })).toThrow(/test-stars: a catalogue point bank holds/);
   const { spread: _spread, ...unspread } = bank;
+  const { cells: _cells, ...uncelled } = bank;
+  expect(() => parseCataloguePoints(uncelled)).toThrow(/test-stars \(catalogue points\): catalogue point bank field cells must be/);
   expect(() => parseCataloguePoints(unspread)).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread must be .* got undefined/);
   expect(() => parseCataloguePoints({ ...bank, spread: { normal: [1, 1, 0], across: 1, along: 0 } })).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread/);
   expect(() => parseCataloguePoints({ ...bank, spread: { ...bank.spread, across: -1 } })).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread/);
@@ -103,7 +110,7 @@ test('a catalogue loads on its first publication and draws every point as the sa
 test('a level with a near opacity draws as its own part and dims to it as the innermost level fills the view', async () => {
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
-  const stacked = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, levels: [
+  const stacked = { ...bank, points, ...baked(points, [1, 1, 1]), appearance: { ...bank.appearance, opacity: 1, levels: [
     { points: 1, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1, appearUnits: [10, 1] }, { points: 1, appearUnits: [1, .01] }] } };
   const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => stacked });
   // The view's half-width at the origin is the camera's distance times hypot(1000, 800) / 2 / 100.
@@ -130,7 +137,7 @@ test('a screen budget draws an even, stable share of the visible dots and refuse
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   // 1,000 dots spread in front of the camera, all on screen; the budget keeps about 250 of them.
   const points = Array.from({ length: 1000 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
-  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250 } };
+  const budgeted = { ...bank, points, ...baked(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250 } };
   const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   const at = (x: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
@@ -178,7 +185,7 @@ test('dot layers switching on show one a frame, so their first paints never shar
   const frames: FrameRequestCallback[] = [];
   Object.assign(window, { requestAnimationFrame: (callback: FrameRequestCallback) => frames.push(callback), cancelAnimationFrame() {}, performance: { now: () => 0 } });
   const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
-  const stacked = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, levels: [
+  const stacked = { ...bank, points, ...baked(points, [1, 1, 1]), appearance: { ...bank.appearance, opacity: 1, levels: [
     { points: 1, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1, appearUnits: [10, 1] }, { points: 1, appearUnits: [1, .01] }] } };
   const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => stacked });
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
@@ -202,7 +209,7 @@ test('an inner level with its own screen budget moves the bank\'s to it as the l
   // 1,000 dots in the outer level and one in the inner level, all on screen; 250 at most from far, 750 once inside.
   const points = Array.from({ length: 1001 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
   const levels = [{ points: 1000, fullDetailUnits: 100 }, { points: 1, appearUnits: [0.64, 0.064], screenBudget: 750 }];
-  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250, levels } };
+  const budgeted = { ...bank, points, ...baked(points, levels.map(level => level.points)), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250, levels } };
   const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
   // The view's half-width at the origin is 0.64 times the camera's distance.
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
@@ -228,7 +235,7 @@ test('an arriving level spends what the budget leaves, never thinning the levels
   // 200 outer dots and 1,000 inner ones, all on screen; a budget of 500 keeps every outer dot and 300 inner ones.
   const points = Array.from({ length: 1200 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
   const levels = [{ points: 200, fullDetailUnits: 100 }, { points: 1000, appearUnits: [0.64, 0.064] }];
-  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 500, levels } };
+  const budgeted = { ...bank, points, ...baked(points, levels.map(level => level.points)), appearance: { ...bank.appearance, opacity: 1, screenBudget: 500, levels } };
   const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
