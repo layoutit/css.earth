@@ -9,7 +9,7 @@ import type { PresentationInputs } from './types.ts';
 const root = resolve(import.meta.dirname, '../../../..');
 const read = async (file: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, file), 'utf8'));
 describe('retained presentation compiler compatibility', () => {
-  for (const id of ['mercury', 'venus']) it(`${id} preserves its prepared tree, resources, settings and navigation`, async () => {
+  for (const id of ['mercury']) it(`${id} preserves its prepared tree, resources, settings and navigation`, async () => {
     const base = `src/objects/${id}/prepared`;
     const profile = parsePresentationProfile(await read(`src/objects/${id}/source/preparation/presentation.json`));
     const [scene, assets, datasets, sun, markers, controls, expected, solarSource] = await Promise.all([

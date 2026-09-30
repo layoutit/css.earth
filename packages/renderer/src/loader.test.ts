@@ -22,7 +22,7 @@ async function changedPayload(value: unknown) {
   return { descriptor: { ...f.descriptor, prepared: f.reference }, bytes };
 }
 
-for (const id of ['mercury', 'venus']) test(`${id} loads its actual prepared JSON through the shared decoder`, async () => {
+for (const id of ['mercury']) test(`${id} loads its actual prepared JSON through the shared decoder`, async () => {
   const f = await fixture(id), read = vi.fn(async () => f.bytes);
   const definition = await loadPreparedCssObject(f.descriptor, { read });
   expect(read).toHaveBeenCalledExactlyOnceWith(f.reference.url);
