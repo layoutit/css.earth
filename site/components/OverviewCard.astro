@@ -6,10 +6,12 @@ import ObjectCard from './ObjectCard.astro';
 import ObjectCardHeader from './ObjectCardHeader.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
+import ObjectResult from './ObjectResult.astro';
+import { overviewDistanceM } from '../overview-context.mts';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import ObjectFactsheet from './ObjectFactsheet.astro';
 import DatasetList from './DatasetList.astro';
-import { OBJECTS } from '../objects.mts';
+import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
 import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
 import { pageDatasetList } from '../page-datasets-content.mts';
 import overviewFacts from '../source/overview-facts.json';
@@ -51,7 +53,14 @@ const lists = overview.holds.flatMap(group => {
 const factsEntry: unknown = Object.hasOwn(overviewFacts, overview.id) ? (overviewFacts as Record<string, unknown>)[overview.id] : undefined;
 if (factsEntry !== undefined && !(isRecord(factsEntry) && Array.isArray(factsEntry.facts))) throw new Error(`site/source/overview-facts.json: ${overview.id} needs a facts list.`);
 const facts = isRecord(factsEntry) ? { facts: factsEntry.facts as ObjectProps['facts'] } : undefined;
-const tabs = [...lists.map(list => ({ id: list.id, label: list.label, count: list.members.length })),
+// Unlabelled held scene groups expose a small featured navigation list, using the search's exact rows.
+const classifications = overview.holds.filter(group => !group.list && group.classifications.includes('star')).flatMap(group => group.classifications);
+const sceneMembers = SCENE_OBJECTS.filter(object => classifications.includes(object.classification)
+  && (object.id === overview.sceneHostId || object.discovery.featured)
+  && (!overview.zoom.centreWithin || object.distance.meters < overviewDistanceM(overview.zoom.centreWithin)))
+  .sort((a, b) => Number(b.id === overview.sceneHostId) - Number(a.id === overview.sceneHostId) || a.distance.meters - b.distance.meters);
+const tabs = [...(sceneMembers.length ? [{ id: 'bodies', label: 'Celestial bodies' }] : []),
+  ...lists.map((list, index) => ({ id: list.id, label: index === 0 ? 'Celestial bodies' : list.label, count: list.members.length })),
   ...(facts ? [{ id: 'factsheet', label: 'Factsheet' }] : [])];
 const datasets = pageDatasetList(overview.id);
 // A card's distances are measured from the member that holds the stars, where it lists one (the Milky Way in the Local
@@ -67,8 +76,11 @@ const home = lists.flatMap(list => list.members).find(member => member.holdsStar
     <DatasetList objectId={`page-${overview.id}`} thumbnailObjectId={overview.id} page={overview.id} route={overview.route}
       datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} focus />
   </div>}
-  {tabs.length > 0 && <InformationTabs idPrefix={overview.id} group={overview.id} label={`${overview.name} information`} hidden {tabs} />}
-  {lists.map(list => <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-${list.id}-content`} hidden role="region" aria-label={list.label}>
+  {tabs.length > 0 && <InformationTabs idPrefix={overview.id} group={overview.id} label={`${overview.name} information`} {tabs} />}
+  {sceneMembers.length > 0 && <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-bodies-content`} role="region" aria-label="Celestial bodies">
+    <ul class="object-list">{sceneMembers.map(object => <ObjectResult {object} />)}</ul>
+  </div>}
+  {lists.map(list => <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-${list.id}-content`} role="region" aria-label={list.label}>
     <ul class="object-list">
       {list.members.map(member => <li data-neighbor-id={member.id}
         data-neighbor-distances={JSON.stringify({ observer: member.distancePc, ...Object.fromEntries(list.members.map(origin => [origin.id,
@@ -84,7 +96,7 @@ const home = lists.flatMap(list => list.members).find(member => member.holdsStar
       </li>)}
     </ul>
   </div>)}
-  {facts && <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-factsheet-content`} hidden role="region" aria-label="Factsheet">
+  {facts && <div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-factsheet-content`} role="region" aria-label="Factsheet">
     <ObjectFactsheet id={overview.id} facts={facts.facts} embedded />
   </div>}
 </ObjectCard>

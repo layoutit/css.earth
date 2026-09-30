@@ -10,11 +10,11 @@
       "zoom": {
         "enter": {
           "fade": "system",
-          "at": "end"
+          "at": "middle"
         },
         "returnBelow": {
           "fade": "system",
-          "at": "middle"
+          "at": "start"
         },
         "centreWithin": {
           "fade": "galaxy",

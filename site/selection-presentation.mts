@@ -1,3 +1,4 @@
+import { createSystemBodiesPresentation } from './system-bodies-fragment.mts';
 import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
@@ -40,6 +41,7 @@ export function createSelectionPresentation(documentTarget: Document, {
     }).catch(error => { systemHeadersLoading = null; windowTarget.reportError(error); });
   };
   const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
+  const systemBodies = createSystemBodiesPresentation(system, windowTarget);
   let systemContent = createSystemCardContent(documentTarget);
   const objectName = (id: string) => WORLD_OBJECTS.find(object => object.id === id)?.name ?? '';
   const overviewName = ({ scope, systemId }: SceneOverview) => scope === 'system'
@@ -70,6 +72,7 @@ export function createSelectionPresentation(documentTarget: Document, {
     setPanelHidden(context, !showContext);
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
     showSystemHeader(headerSystemId);
+    systemBodies.show(systemSelected ? headerSystemId : null);
     if (solarSystemFacts && solarSystemFacts.hidden !== (headerSystemId !== SOLAR_SYSTEM_ID)) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
     const label = subject.kind === 'focus'
       ? (focusCard?.dataset.preparedFocusId === subject.id ? focusCard.querySelector('[data-focus-name]')?.textContent : null) || 'Selected object'
