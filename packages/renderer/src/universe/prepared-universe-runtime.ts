@@ -192,7 +192,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           labelSuppressed: [...(!overview ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],
         });
         publishSuppressedLabels();
-        const bodyAnnotations = spatial.inspect();
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
         const environmentLabels = own(mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock,
           ...(stellarExtents[payload.id] === undefined ? {} : { extentRadiusM: stellarExtents[payload.id] }) }));
@@ -308,10 +307,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const selectedRect = selectedLabel.publish(world, viewport, caption(), captionFlags());
               const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
                 ...coveredTopRects(viewport)];
-              // A loop, not flatMap: that built a one-element array for every body, every frame.
-              const bodyLabelRects: LabelScreenRect[] = [];
-              for (const body of bodyAnnotations) if (body.labelRect) bodyLabelRects.push(body.labelRect);
-              labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!, bodyLabelRects, foregroundRects);
+              // Read from the bodies themselves: a flatMap over the inspection wrappers built an array and crossed two getters per body.
+              labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!, spatial.labelRects(), foregroundRects);
               const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);
               const environmentRects = environmentLabels.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
                 shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget });

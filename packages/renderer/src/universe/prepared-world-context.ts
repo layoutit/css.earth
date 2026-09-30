@@ -41,20 +41,38 @@ type ProjectedBody = PlannedWorldContext['projectedBodies'][number];
  * re-sorts once on release: re-ranking every frame rewrote dozens of z-indices as one body changed place. */
 function createDepthOrder<Entry extends { readonly body: { readonly positionM: readonly number[] } }>(members: readonly Entry[], base: number) {
   let orientation: readonly number[] | null = null, selection: Entry | null = null, selectedRank = 0;
-  let ranks = new Map<Entry, number>();
+  const ranks = new Map<Entry, number>();
+  // The last order, as member indices, and each member's depth. Deepest first, then member order: the one order the stable
+  // sort by depth gives. Between two sorts it barely changes, so an insertion pass from the last order does the same work in
+  // about n steps; a first sort, or one that would move too much, sorts from scratch.
+  let order: number[] = [], depths = new Float64Array(0);
+  const before = (a: number, b: number) => depths[a]! > depths[b]! || (depths[a] === depths[b] && a < b);
+  const insertionSort = () => {
+    let moves = 0;
+    for (let i = 1; i < order.length; i++) {
+      const member = order[i]!; let j = i - 1;
+      while (j >= 0 && before(member, order[j]!)) { order[j + 1] = order[j]!; j--; if (++moves > order.length * 8) return false; }
+      order[j + 1] = member;
+    }
+    return true;
+  };
   return {
     /** Hidden bodies leave the order; the next update re-sorts. */
-    setMembers(next: readonly Entry[]) { members = next; orientation = null; },
+    setMembers(next: readonly Entry[]) { members = next; orientation = null; order = []; },
     update(orientationXyzw: OrientationXyzw, rotating: boolean, selected: Entry) {
       let ranksChanged = false;
       if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
         orientation = [...orientationXyzw];
         const view = cssViewFromOrientation(orientationXyzw);
-        // Each depth once, then a stable sort of the keys: the comparator recomputed both depths n log n times.
-        const keyed = members.map(entry => ({ entry,
-          depth: -(view[6]! * entry.body.positionM[0]! + view[7]! * entry.body.positionM[1]! + view[8]! * entry.body.positionM[2]!) }));
-        keyed.sort((a, b) => b.depth - a.depth);
-        ranks = new Map(keyed.map(({ entry }, index) => [entry, index * 4]));
+        if (depths.length !== members.length) depths = new Float64Array(members.length);
+        members.forEach((entry, index) => {
+          depths[index] = -(view[6]! * entry.body.positionM[0]! + view[7]! * entry.body.positionM[1]! + view[8]! * entry.body.positionM[2]!);
+        });
+        if (order.length !== members.length || !insertionSort()) {
+          order = members.map((_, index) => index).sort((a, b) => before(a, b) ? -1 : before(b, a) ? 1 : 0);
+        }
+        ranks.clear();
+        order.forEach((member, index) => ranks.set(members[member]!, index * 4));
         selection = null; ranksChanged = true;
       }
       const changed = ranksChanged || selection !== selected;
@@ -331,6 +349,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         bodies: packWorldBodies(bodies) };
   };
   const layer = Object.freeze({ root,
+    /** Every body's caption box, in body order: the universe's label budget counts and avoids them each frame. */
+    labelRects() {
+      const rects: LabelScreenRect[] = [];
+      for (const entry of bodies) { const rect = entry.interaction.labelRect; if (rect) rects.push(rect); }
+      return rects;
+    },
     /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */
     captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []) {
       const view = readView(world, viewport, frameBlockers), revision = presentationRevision;
