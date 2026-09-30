@@ -292,6 +292,9 @@ test('a galaxy backing that loads while the camera rests is placed before any la
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 20000 * parsecM], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(camera, viewport, spatialFrame);
     await vi.waitFor(() => expect(all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking)).toHaveLength(1 + backing.sections.length));
+    // Right over the galaxy's own layer, under every later one: its black square never hides what is drawn after it.
+    const order = (mounted.root as unknown as FakeElement).children.map(node => node.className);
+    expect(order.indexOf('prepared-galaxy-backing')).toBe(order.indexOf('prepared-volume-context') + 1);
     for (const layer of all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking)) {
       const scene = all(layer).find(node => node.className === 'css-volume-scene')!;
       expect(scene.style.transform, 'placed from the latest frame').toMatch(/^translate3d/);
