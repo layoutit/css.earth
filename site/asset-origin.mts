@@ -57,14 +57,15 @@ export function assetHashSplit(id: string, root = process.cwd()): Promise<AssetH
   if (!cached) {
     cached = (async () => {
       const map = await assetShaMap(id, root);
-      const text = await readFile(resolve(root, 'src/objects', id, 'prepared/object.json'), 'utf8').catch((error: unknown) => {
+      // The runtime is the transport's `data` (`prepared/object.json` is built from it when served).
+      const text = await readFile(resolve(root, 'src/objects', id, 'prepared/runtime.json'), 'utf8').catch((error: unknown) => {
         // An object without a prepared scene has no resource demands: every hash stays embedded.
         if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
         throw error;
       });
       if (text === null) return Object.freeze({ embedded: map, groups: new Map() });
       const document: unknown = JSON.parse(text);
-      const data = isRecord(document) && isRecord(document.data) ? document.data : null, assets = data && isRecord(data.assets) ? data.assets : null;
+      const data = isRecord(document) ? document : null, assets = data && isRecord(data.assets) ? data.assets : null;
       const entries = assets && Array.isArray(assets.entries) ? assets.entries : [], startup = assets && Array.isArray(assets.startup) ? assets.startup : [];
       const embedded = new Map<string, string>(), groups = new Map<string, Record<string, string>>();
       const embed = (filename: string, owner: string) => {

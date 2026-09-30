@@ -89,7 +89,8 @@ its validators accept); the renderer never imports the bake.
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command,
   run over every object by `pnpm test:universe:runtime`. `prepared-object-pin.ts` pins a prepared object to its
-  transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
+  transport (the descriptor's `prepared` pin and page reference, and the inventory; the transports themselves are built from
+  the runtime when read); the world-navigation
   and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `src/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime

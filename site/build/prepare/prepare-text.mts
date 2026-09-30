@@ -28,8 +28,8 @@ interface BodyText { readonly id: string; readonly directory: string; readonly t
 async function readBody(projectRoot: string, object: { id: string; name: string }, catalogue: ReadonlySet<string>): Promise<BodyText> {
   const directory = resolve(projectRoot, 'src/objects', object.id);
   const bytes = await readFile(resolve(directory, 'text.json'));
-  const page = requireRecord(await readJson(resolve(directory, 'prepared/page.json')));
-  const datasets = requireRecord(page.controls).datasets;
+  // The runtime's controls, as published beside it.
+  const datasets = requireRecord(await readJson(resolve(directory, 'prepared/controls.json'))).datasets;
   const lineage = await bodyLineage(directory);
   return {
     id: object.id, directory,

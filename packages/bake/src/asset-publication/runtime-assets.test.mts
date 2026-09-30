@@ -43,11 +43,13 @@ test('objects are discovered by their inventory; each entry is located by its lo
   await writeFile(prepared, stale);
   await utimes(prepared, new Date(1000), new Date(1000));
   await utimes(resolve(base, 'inventory.json'), new Date(2000), new Date(2000));
-  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => new Response(bytes) }), { installed: 1, reused: 1, skipped: 0 });
+  assert.deepEqual(await installRuntimeAssets(assets, { trustFresh: true, fetcher: async () => new Response(bytes) }), { installed: 1, reused: 1, skipped: 0 });
   assert.deepEqual(await readFile(prepared), bytes);
   await writeFile(prepared, stale);
-  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2, skipped: 0 },
+  assert.deepEqual(await installRuntimeAssets(assets, { trustFresh: true, fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2, skipped: 0 },
     'a file written after its inventory is trusted by size');
+  // CI does not trust: every file is hashed, so the same edit is replaced.
+  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => new Response(bytes) }), { installed: 1, reused: 1, skipped: 0 });
   // Existing symlinks must never redirect installation.
   await rm(resolve(base, 'prepared/levels'), { recursive: true });
   await symlink(resolve(root), resolve(base, 'prepared/levels'));

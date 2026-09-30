@@ -50,7 +50,7 @@ export const explorationCompilerClosure = [
 interface Options { root?: string; publish?: boolean | 'catalogues'; sourceTransport?: FactsheetSourceTransport;
   /** Catalogue consumers validate published package records; authoring explicitly reproduces them. */
   packageMode?: 'author' | 'published';
-  /** Skip bodies whose derived `prepared/page.json` this checkout has not restored. */
+  /** Skip bodies whose `prepared/controls.json` this checkout has not restored. */
   restoredOnly?: boolean;
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
@@ -147,15 +147,11 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     part.metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
     part.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
-    // `prepared/page.json` is derived from the restored runtime, so a checkout that deliberately
-    // restores no body banks (the typecheck job) does not have one. Skipping there yields a partial
-    // catalogue, which is all a compiler program needs; every publishing path leaves this off and
-    // still fails loudly on a missing page.
-    const pagePath = `${base}/prepared/page.json`;
-    if (restoredOnly && !existsSync(resolve(root, pagePath))) return part;
-    const page = explorationRecord(await json(pagePath));
-    if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id) throw new Error(`Stale prepared controls for ${object.id}.`);
-    const controls = explorationRecord(page.controls);
+    // The runtime's controls, published beside it. A checkout that deliberately restores no body banks (the typecheck
+    // job) lacks them; skipping there yields a partial catalogue, which is all a compiler program needs.
+    const controlsPath = `${base}/prepared/controls.json`;
+    if (restoredOnly && !existsSync(resolve(root, controlsPath))) return part;
+    const controls = explorationRecord(await json(controlsPath));
     const datasets = controls.datasets === null ? [] : explorationArray(explorationRecord(controls.datasets).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };
     });

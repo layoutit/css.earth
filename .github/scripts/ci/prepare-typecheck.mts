@@ -155,9 +155,6 @@ async function run(root: string, args: string[]) {
 export async function prepareTypecheck() {
   const result = await restoreTypecheckInputs();
   console.log(`Typecheck inputs: ${result.files} pinned files, ${result.bytes} bytes; ${result.installed} downloaded, ${result.reused} reused. No body texture banks.`);
-  // `prepared/page.json` is a build output, not a tracked file: restore-object-json writes it from
-  // the restored runtime. The two steps below read it, so it has to exist before they run.
-  await run(projectRoot, ['packages/bake/cli/restore-object-json.mts', '--restored-only']);
   await run(projectRoot, ['site/build/prepare/prepare-feature-index.mts']);
   await run(projectRoot, ['site/build/prepare/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: source catalogues generated.');

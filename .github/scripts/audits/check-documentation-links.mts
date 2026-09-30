@@ -159,9 +159,9 @@ export function localLinks(file: string, text: string): Link[] {
   return links;
 }
 
-// `prepared/page.json` is a build output, never committed: `restore-object-json.mts` writes it in
-// `predev`/`prebuild`. A checkout therefore never holds one, so a body README that cites its own
-// generated page file is describing it correctly, not linking at nothing. Accept the path only
+// `prepared/page.json` is a transport the site builds from the restored runtime when it is read, never a file
+// (@cssearth/objects/node prepared-transport). A body README that cites its own page transport is describing it
+// correctly, not linking at nothing. Accept the path only
 // where the object's tracked inventory proves the object exists.
 const BUILD_OUTPUTS = new Set(['prepared/page.json']);
 function buildOutput(path: string, known: ReadonlySet<string>): boolean {

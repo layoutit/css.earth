@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseObjectDescriptor } from '@cssearth/objects';
+import { preparedObjectText, preparedPageData } from '@cssearth/objects/node';
 import { requireAssets, requireControls } from '@cssearth/renderer';
 import { isRecord } from '@cssearth/core';
 import { resolveSceneAddressesDeep } from './asset-origin.mts';
@@ -13,7 +14,8 @@ export async function readPreparedObjectBytes(id: string, root = process.cwd()) 
   if (descriptor.id !== id || descriptor.prepared?.url !== 'prepared/object.json') {
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
-  const bytes = await readFile(resolve(directory, 'prepared/object.json'));
+  // The transport is built from the restored runtime when read; no copy is kept on disk (prepared-transport.ts).
+  const bytes = Buffer.from(await preparedObjectText(directory, descriptor));
   return { descriptor, bytes };
 }
 
@@ -26,9 +28,8 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   if (descriptor.id !== id || reference?.url !== 'prepared/page.json') {
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
-  // page.json is written from the restored runtime by prepare:object-json.
-  const bytes = await readFile(resolve(directory, reference.url));
-  const object: unknown = JSON.parse(bytes.toString('utf8'));
+  // The page data is the runtime's asset table and its published controls, read when needed (prepared-transport.ts).
+  const object: unknown = await preparedPageData(directory, id);
   if (!isRecord(object) || object.schema !== 'cssearth-object-page@1' || object.id !== id || !object.assets || !object.controls) {
     throw new TypeError(`${id}: incomplete prepared page data.`);
   }

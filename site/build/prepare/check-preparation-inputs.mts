@@ -19,7 +19,7 @@ import { parseObjectText, textBudgetErrors } from '../../object-text.mts';
 import type { TextFinding } from '../../object-text.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
 import type { InventoryAsset } from '@cssearth/objects/node';
-import { deriveRestoredPreparedFiles, installRuntimeAssets } from '@cssearth/bake/asset-publication';
+import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 
 const root = resolve(import.meta.dirname, '../../..');
 const readOptional = (path: string) => readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
@@ -90,8 +90,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     if (!ids.includes('sun')) {
       const restored = await restoreDriftedFiles('sun', { keep: worldStepOutput });
       if (restored.length) console.log(`Restored ${restored.length} Sun file(s) that differed from its inventory, before the world and pins steps build on them: ${restored.join(', ')}.`);
-      // A checkout that never restored the Sun also lacks the page data derived from it, which the sources catalogue step reads.
-      await deriveRestoredPreparedFiles(['sun'], root);
     }
   }
 }
