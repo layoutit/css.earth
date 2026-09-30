@@ -188,12 +188,17 @@ its validators accept); the renderer never imports the bake.
     vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control
     fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
     commands), and attaching the banks to a prepared globe (`attach.ts`); a body's panorama standpoints join its catalogue
-    as `PN` point features. It imports `objects/panoramas`, `objects/geometry`, `objects/raster`,
+    as `PN` point features. It imports `objects/gis`, `objects/panoramas`, `objects/geometry`, `objects/raster`,
     `objects/scene`, `objects/layers/paged-ellipsoid` and `objects/layers/terrestrial`.
-  - `objects/panoramas`: a body's surface panoramas: the `cssearth-surface-panoramas@1` document, the rover's PDS PLACES
-    localisation that places each one by its sols, the cylinder-to-cube resampling into sky-cube faces, and the
-    attachment (`attach.ts`) that writes the faces, list thumbnails, `prepared/panoramas.json` and the runtime plan.
-    `site/build/prepare/refresh-panoramas.ts <object-id>` refreshes them on a prepared object. It imports `sky` and `raster`.
+  - `objects/panoramas`: a body's surface panoramas: the `cssearth-surface-panoramas@2` document, what places each one
+    (a rover's PDS PLACES localisation by its sols, or LROC's Apollo Hasselblad layer), what turns it (a projection its
+    publisher states, or tie points: the Sun from a recorded sub-solar point, the shadow opposite it and hardware from the
+    LROC equipment layer) and what levels it (the horizon an LROC NAC DTM predicts laid on the photograph's skyline), the
+    cylinder-to-cube resampling into sky-cube faces, and the attachment (`attach.ts`) that writes the faces, list
+    thumbnails, `prepared/panoramas.json` and the runtime plan. `site/build/prepare/refresh-panoramas.ts <object-id>`
+    refreshes them on a prepared object. It imports `sky`, `raster` and `objects/gis`.
+  - `objects/gis`: the GIS containers archive products ship in: ESRI shapefile geometry, dBASE attribute tables, zip
+    members, and points of an equidistant-cylindrical layer on a sphere. It imports no topic.
   - `objects/stellar`: a star's colour dataset from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
     from a published figure or occultation, and Roche-von Zeipel gravity darkening, with the GaiaXPy script that samples a
     continuous Gaia XP spectrum (`xp-continuous-sample.py`) the body READMEs name. It imports `objects/color`,

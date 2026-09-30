@@ -17,7 +17,6 @@ import TreeDisclosure from './TreeDisclosure.astro';
 import { readObjectArticleUrl } from '../server/object-article.mts';
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], datasets, panoramas } = Astro.props;
 const panoramaEntries = panoramas?.panoramas ?? [];
-const solRange = ([first, last]: readonly [number, number]) => first === last ? `Sol ${first}` : `Sols ${first}–${last}`;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
 const orderedCharts = orderScientificCharts(charts);
@@ -77,14 +76,14 @@ const articleUrl = await readObjectArticleUrl(objectId);
               name="panorama" value={panorama.id} data-panorama-open={panorama.id} aria-pressed="false">
               <DatasetThumbnail class="object-dataset-icon" src={panorama.thumbnail} />
               <span class="object-dataset-label">{panorama.title}</span>
-              <span class="object-dataset-detail">{panorama.camera} · {solRange(panorama.sols)}</span>
+              <span class="object-dataset-detail">{panorama.camera} · {panorama.when}</span>
             </button>
           </div>)}
         </nav>
         <section class="object-dataset-details">
           <div class="object-dataset-details-body" aria-live="polite" aria-atomic="true">
             {panoramaEntries.map((panorama) => <Detached detached><div data-panorama-details={panorama.id} hidden>
-              <SelectedContent title={panorama.title} description={`${panorama.camera} 360° panorama, ${solRange(panorama.sols).toLowerCase()}, seen from where the rover stood. ${panorama.credit}.`} />
+              <SelectedContent title={panorama.title} description={`${panorama.camera} 360° panorama, ${panorama.when}, seen from where it was taken. ${panorama.credit}.`} />
               <a class="object-dataset-source-link" href={panorama.pageUrl} target="_blank" rel="noopener noreferrer">View source ↗</a>
             </div></Detached>)}
           </div>

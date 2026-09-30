@@ -2,9 +2,7 @@
 // document is repository-authored: every coordinate quotes the public page it was read from (NASA NSSDCA, PDS, LROC,
 // mission releases, papers) and the traverse paths are pinned data products (PDS PLACES localisation tables, LROC
 // Apollo shapefiles). Sites are unsized points ranked like a 20 km feature; traverses are open traces.
-import { parseDbf } from './dbf.ts';
-import { parseShpRecords } from './shp.ts';
-import { unzipMember } from './archive.ts';
+import { equidistantCylindricalInverse, parseDbf, parseShpRecords, unzipMember } from '../gis/index.ts';
 import { readFileSync } from 'node:fs';
 import type { PanoramaSite, SurfacePanoramas } from '../panoramas/index.ts';
 import { resolve } from 'node:path';
@@ -106,14 +104,10 @@ function placesPath(csv: string, latitudeColumn: string, longitudeColumn: string
 }
 /** LROC Apollo path shapefiles: equidistant-cylindrical metres on the 1737.4 km sphere; the .prj names the central meridian. */
 function lrocPaths(archive: string, member: string): (readonly [number, number])[][] {
-  const projection = new TextDecoder().decode(unzipMember(archive, `${member}.PRJ`));
-  const radius = Number(/SPHEROID\["[^"]+",\s*([\d.]+)/u.exec(projection)?.[1]), central = Number(/"Central_Meridian",\s*(-?[\d.]+)/u.exec(projection)?.[1] ?? '0');
-  const parallel = Number(/"Standard_Parallel_1",\s*(-?[\d.]+)/u.exec(projection)?.[1] ?? '0');
-  if (!(radius > 0) || !Number.isFinite(central) || !Number.isFinite(parallel) || !/Equidistant_Cylindrical/u.test(projection)) throw new TypeError('LROC path projection is not the expected equidistant cylindrical sphere.');
-  const scale = 180 / Math.PI / radius, cosine = Math.cos(parallel * Math.PI / 180);
+  const inverse = equidistantCylindricalInverse(new TextDecoder().decode(unzipMember(archive, `${member}.PRJ`)), `${member}.PRJ`);
   const shapes = parseShpRecords(unzipMember(archive, `${member}.SHP`));
   parseDbf(unzipMember(archive, `${member}.DBF`));
-  return shapes.records.filter((shape): shape is NonNullable<typeof shape> => shape !== null).flatMap(shape => shape.parts.map(part => part.map(([x, y]) => [wrap(central + x * scale / cosine), y * scale] as const)));
+  return shapes.records.filter((shape): shape is NonNullable<typeof shape> => shape !== null).flatMap(shape => shape.parts.map(part => part.map(([x, y]) => inverse(x, y))));
 }
 
 /** Rows for the shared preparation: sites as unsized points, traverses as open traces. Ids are numeric offsets. */
@@ -151,17 +145,16 @@ export function loadSiteRows(sourceDirectory: string, directory: string, sites: 
   return rows;
 }
 
-/** One point row for each surface panorama, at the rover's localised standpoint. Ids follow the sites' and traverses'. */
+/** One point row for each surface panorama, where its camera stood. Ids follow the sites' and traverses'. */
 export function panoramaSiteRows(document: SurfacePanoramas, sites: ReadonlyMap<string, PanoramaSite>, idBase = 90_000_000): SiteRow[] {
   return document.panoramas.map((panorama, index) => {
     const site = sites.get(panorama.id);
     if (!site) throw new TypeError(`Panorama ${panorama.id} has no standpoint.`);
-    const [first, last] = panorama.sols, sols = first === last ? `sol ${first}` : `sols ${first}–${last}`;
     return { id: String(idBase + 2000 + index), name: panorama.title, type: PANORAMA_SITE.type, code: PANORAMA_SITE.code, kind: 'point', priority: SITE_PRIORITY_KM,
       centerLon: site.longitudeDegEast, centerLat: site.latitudeDeg, extent: null, paths: null,
-      origin: `${panorama.camera} 360° panorama, ${sols}, from the rover's place (${site.localization}).`, credit: panorama.credit,
+      origin: `${panorama.camera} 360° panorama, ${panorama.when}, from where it was taken (${site.localization}).`, credit: panorama.credit,
       approved: document.retrievedAt, link: panorama.pageUrl,
-      note: { text: clip(`${panorama.camera} 360° panorama taken here on ${sols}. Select it to look around.`), title: document.source, url: document.sourcePage, credit: panorama.credit },
+      note: { text: clip(`${panorama.camera} 360° panorama taken here, ${panorama.when}. Select it to look around.`), title: document.source, url: document.sourcePage, credit: panorama.credit },
       panoramaId: panorama.id, facilityId: null };
   });
 }

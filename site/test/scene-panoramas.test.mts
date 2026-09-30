@@ -13,9 +13,9 @@ test('the address names an open panorama beside the other scene parameters', () 
 });
 
 test('the card lists a body\'s own prepared panoramas and refuses another body\'s list', () => {
-  const list = { schema: 'cssearth-surface-panorama-list@1', objectId: 'mars', source: { label: 'Collection', url: 'https://example.org/' },
-    panoramas: [{ id: 'belva', title: 'Belva crater', sols: [789, 791], camera: 'Mastcam-Z', credit: 'NASA/JPL-Caltech/ASU/MSSS', pageUrl: 'https://example.org/',
+  const list = { schema: 'cssearth-surface-panorama-list@2', objectId: 'mars', source: { label: 'Collection', url: 'https://example.org/' },
+    panoramas: [{ id: 'belva', title: 'Belva crater', when: 'Sols 789–791', camera: 'Mastcam-Z', credit: 'NASA/JPL-Caltech/ASU/MSSS', pageUrl: 'https://example.org/',
       site: { latitudeDeg: 18.48, longitudeDegEast: 77.37, localization: 'site 39 drive 926, sol 784' }, thumbnail: '/scenes/mars/mars-panorama-belva-thumbnail.webp' }] };
-  assert.equal(parsePanoramaList(list, 'mars').panoramas[0]!.sols[1], 791);
+  assert.equal(parsePanoramaList(list, 'mars').panoramas[0]!.when, 'Sols 789–791');
   assert.throws(() => parsePanoramaList(list, 'moon'), /not a surface panorama list for this object/u);
 });

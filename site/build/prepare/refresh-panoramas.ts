@@ -12,7 +12,7 @@ import { collectRuntimeAssetUrls, parseRuntimeManifest } from '@cssearth/bake/de
 
 const record = (value: unknown, label: string): Record<string, unknown> => { if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new TypeError(`${label} must be an object.`); return value as Record<string, unknown>; };
 
-export async function refreshObjectPanoramas(id: string): Promise<{ count: number; files: number }> {
+export async function refreshObjectPanoramas(id: string): Promise<{ count: number; files: number; reports: readonly string[] }> {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object id.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source'), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const { descriptor, sources } = await readAuthoredSources(objectDirectory);
@@ -36,12 +36,13 @@ export async function refreshObjectPanoramas(id: string): Promise<{ count: numbe
   const writer = record(await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/prepare-object-json.mts')).href), 'prepared object writer');
   if (typeof writer.writeObjectJson !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (writer.writeObjectJson as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, attached.definition);
-  return { count: attached.count, files: entries.length };
+  return { count: attached.count, files: entries.length, reports: attached.reports };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   for (const id of process.argv.slice(2)) {
     const result = await refreshObjectPanoramas(id);
-    console.log(JSON.stringify({ id, ...result }));
+    for (const report of result.reports) console.log(report);
+    console.log(JSON.stringify({ id, count: result.count, files: result.files }));
   }
 }

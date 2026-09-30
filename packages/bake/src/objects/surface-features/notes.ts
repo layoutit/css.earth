@@ -4,9 +4,8 @@
 // tooltip shows the note with its licence. Run through packages/bake/cli/prepare-feature-notes.mts.
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseDbf } from './dbf.ts';
+import { parseDbf, unzipMember } from '../gis/index.ts';
 import { parseSurfaceFeaturesConfig } from './surface-features.ts';
-import { unzipMember } from './archive.ts';
 import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote, type FeatureNotes } from './notes-schema.ts';
 import { isRecord } from '@cssearth/core';
 

@@ -146,6 +146,11 @@
       "import": "./dist/objects/panoramas.js",
       "default": "./dist/objects/panoramas.js"
     },
+    "./objects/gis": {
+      "types": "./dist/objects/gis.d.ts",
+      "import": "./dist/objects/gis.js",
+      "default": "./dist/objects/gis.js"
+    },
     "./objects/layers/observation": {
       "types": "./dist/objects/layers/observation.d.ts",
       "import": "./dist/objects/layers/observation.js",
