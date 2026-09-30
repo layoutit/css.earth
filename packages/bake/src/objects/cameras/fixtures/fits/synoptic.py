@@ -6,7 +6,7 @@ import numpy as np
 import astropy
 from astropy.io import fits
 sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
-from fixture import ROOT, samples, write
+from fixture import input_record, ROOT, samples, write
 warnings.simplefilter('ignore')
 inputs, products = [], {}
 for body in ['sun', 'jupiter']:
@@ -19,7 +19,7 @@ for body in ['sun', 'jupiter']:
         path = source / entry['path']; inputs.append(path)
         with fits.open(path, memmap=False) as hdus:
             data = hdus[0].data
-            products[str(path.relative_to(ROOT))] = {
+            products[input_record(path)['path']] = {
                 'shape': list(data.shape), 'samples': samples(data, 918, 24),
                 'nonfinite': int((~np.isfinite(data)).sum()),
                 'negative': int((data < 0).sum()), 'zero': int((data == 0).sum())}

@@ -30,4 +30,4 @@ for longitude, latitude in zip(rng.uniform(-360, 360, 96), rng.uniform(-90, 90, 
     value = values[row, column]
     cases['nodes'].append({'longitude': float(longitude), 'latitude': float(latitude), 'row': row,
                            'value': None if np.isnan(value) else float(value)})
-write(Path(__file__).with_suffix('.json'), 'numpy', 'tests/oracles/npy/psyche-alma.py', {}, paths, cases)
+write('npy/psyche-alma.json', 'numpy', 'tests/oracles/npy/psyche-alma.py', {}, paths, cases)
