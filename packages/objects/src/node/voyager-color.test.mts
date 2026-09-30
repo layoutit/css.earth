@@ -1,5 +1,5 @@
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
-// The five Uranian moons' Voyager colour lenses: each frame placed by limb fit and registered to the moon's Schenk mosaic,
+// The five Uranian moons' Voyager colour datasets: each frame placed by limb fit and registered to the moon's Schenk mosaic,
 // every placed tile pinned, and the prepared composite reporting its band levels. One test file, five packages: the route is
 // the same and the numbers per moon are read from their own reports.
 import assert from "node:assert/strict";
