@@ -33,7 +33,11 @@
     },
     "preparation": {
       "source": "source/recipe.json"
-    }
+    },
+    "cataloguePoints": [
+      "stars",
+      "dots"
+    ]
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

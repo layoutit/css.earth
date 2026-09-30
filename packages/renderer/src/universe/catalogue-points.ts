@@ -84,6 +84,9 @@ export interface PreparedCataloguePoints {
   readonly frame: DensityVolumeFrame;
   readonly appearance: { readonly colorCss: string; readonly radiusPx: number; readonly opacity: number; readonly palette?: readonly string[];
     readonly levels?: readonly CataloguePointLevel[];
+    /** A bank without levels is whole within this camera distance of its origin, in its units (10 kpc when absent), and
+     * thinned with the distance beyond it. */
+    readonly fullDetailUnits?: number;
     /** The most of its dots a bank shows on screen at once: past it, an even, stable share of them is drawn. */
     readonly screenBudget?: number };
   /** Each point's position, and its palette colour when the bank has a palette. */
@@ -102,7 +105,10 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   const frame = parseDensityVolumeFrame(data.frame);
   const appearance = data.appearance as Record<string, unknown> | undefined;
   const colorCss = appearance?.colorCss, radiusPx = appearance?.radiusPx, opacity = appearance?.opacity, palette = appearance?.palette, levels = appearance?.levels;
-  const screenBudget = appearance?.screenBudget;
+  const screenBudget = appearance?.screenBudget, fullDetailUnits = appearance?.fullDetailUnits;
+  if (fullDetailUnits !== undefined && (levels !== undefined || typeof fullDetailUnits !== 'number' || !(fullDetailUnits > 0 && Number.isFinite(fullDetailUnits)))) {
+    throw new TypeError(`${String(data.id)}: fullDetailUnits is a positive distance on a bank without levels, got ${JSON.stringify(fullDetailUnits)}.`);
+  }
   if (screenBudget !== undefined && !(Number.isSafeInteger(screenBudget) && (screenBudget as number) > 0)) {
     throw new TypeError(`${String(data.id)}: catalogue point screenBudget must be a positive whole number, got ${JSON.stringify(screenBudget)}.`);
   }
@@ -132,7 +138,8 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
     ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
-    ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }) }),
+    ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }),
+    ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }) }),
     points: Object.freeze(points), spread, cells });
 }
 
@@ -221,7 +228,8 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         // bank's reach the share is also capped by how many dots its projected shape holds.
         const drawn = (distanceUnits: number, cameraUnits: VolumeVector) => Math.min(bank.appearance.levels
           ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
-          : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
+          : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit,
+            bank.appearance.fullDetailUnits === undefined ? undefined : bank.appearance.fullDetailUnits * bank.frame.metersPerUnit),
           screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0));
         // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count. An inner
         // level with its own budget moves the bank's to it as the level appears, evenly in the logarithm of the half-width.

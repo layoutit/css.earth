@@ -6,7 +6,6 @@ import { cssCameraAxesFromOrientation, worldRotationFromQuaternion } from '../na
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { admitStableLabels } from '../labels/stable-label-layout.js';
-import { offAxisFrame, silhouetteEllipse } from '../solar-system/heliocentric-geometry.js';
 import { createLabelBudget, labelImportance, type LabelBudget } from '../labels/universe-label-policy.js';
 
 export interface ProjectedGalaxy {
@@ -34,16 +33,6 @@ export function projectCatalogPosition(positionM: readonly number[], world: Worl
   return { x: viewport.principalOffsetPixels[0] + viewport.focalPixels * x / depth,
     y: viewport.principalOffsetPixels[1] + viewport.focalPixels * y / depth,
     distanceM: Math.hypot(dx, dy, dz), depthM: depth };
-}
-
-/** Project a prepared spherical aperture; this outline is an annotation, not a gas surface. */
-export function projectCatalogAperture(radiusM: number, point: NonNullable<ReturnType<typeof projectCatalogPosition>>, viewport: WorldCameraViewport) {
-  const axis = offAxisFrame(viewport.focalPixels, [viewport.principalOffsetPixels[0] - point.x, viewport.principalOffsetPixels[1] - point.y]);
-  if (!(radiusM > 0 && radiusM < point.distanceM * axis.cosTheta)) return null;
-  const ellipse = silhouetteEllipse(radiusM, viewport.focalPixels, point.distanceM, axis);
-  return { x: point.x + ellipse.centre[0], y: point.y + ellipse.centre[1],
-    a: ellipse.radialSemiAxis, b: ellipse.tangentialSemiAxis,
-    angle: Math.atan2(axis.radial[1], axis.radial[0]) * 180 / Math.PI };
 }
 
 /** Resolve the prepared cloud bounds once; catalogue stars do not enlarge this box. */

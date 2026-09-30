@@ -33,8 +33,9 @@ second row bank. It does not change GXCT or infer membership from proximity.
 Prepared navigation framing remains distinct from measured half-light radii.
 
 `parsePreparedClusterCatalog` validates the separate `cssearth-cluster-catalog@1`
-interchange. Cluster centres carry redshift references and explicit distance
-cosmology; R500 proper and comoving apertures remain distinct from cluster edges.
+interchange. Cluster centres carry their Cosmicflows-4 group distance, redshift references and the
+cosmology that checks their angular scale; R500 proper and comoving apertures remain distinct from cluster edges. A
+cluster may name the package that details it (`detailedObjectId`), as a galaxy does.
 `PreparedCatalogObject` composes galaxy, cluster and nebula records without assigning
 galaxy membership to other object types. `parsePreparedNebulaCatalog` validates
 source-backed sky centres, distances and classification independently of rendering. Source tables and coordinate preparation remain

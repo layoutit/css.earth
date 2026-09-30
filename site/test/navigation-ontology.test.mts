@@ -44,9 +44,10 @@ test('distance display and order use the prepared position, never the legacy orb
   assert.ok(SEARCH_OBJECTS.every((object, index) => index === 0 || object.distance.meters >= SEARCH_OBJECTS[index - 1]!.distance.meters));
   const cluster = requireObject('virgo-cluster');
   assert.ok(cluster.kind !== 'overview');
-  assert.equal(cluster.distance.quantity, 'comoving');
+  // A cluster sits at its Cosmicflows-4 group's measured distance, a catalogue distance, not its redshift's comoving one.
+  assert.equal(cluster.distance.quantity, 'catalogue');
   assert.equal(cluster.distance.epochJdTt, null, 'navigation epoch must not become a measured distance epoch');
-  assert.match(distanceDescription(cluster.distance), /comoving/);
+  assert.match(distanceDescription(cluster.distance), /adopted from the catalogue/);
   assert.throws(() => parseNavigationDistance({ ...cluster.distance, epochJdTt: 2461286.5 }));
   assert.throws(() => parseNavigationDistance({ ...cluster.distance, meters: cluster.distance.meters / 10 }), /inconsistent/);
   assert.throws(() => parseNavigationDistance({ ...cluster.distance, value: Number.MAX_VALUE }), /inconsistent/);

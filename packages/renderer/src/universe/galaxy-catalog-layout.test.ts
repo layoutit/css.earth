@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import type { PreparedGalaxyRecord } from '@cssearth/catalog';
-import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
+import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 
 const world = { referenceFrame: 'test', epochJdTt: 1,
   pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } };
@@ -44,17 +44,6 @@ test('catalogues use the shared desktop budget, including a distant selected lab
   expect(accepted).toHaveLength(24); expect(accepted[0]!.object.id).toBe('39');
   expect(admitGalaxyLabels([...rows].reverse(), [], '39')).toEqual(accepted);
 });
-test('an R500 aperture is projected with sphere perspective, including off-axis displacement and the near-plane limit', () => {
-  const centred = projectCatalogPosition([0, 0, -100], world, viewport)!;
-  const result = projectCatalogAperture(10, centred, viewport)!;
-  expect(result.x).toBe(2); expect(result.y).toBe(-3);
-  expect(result.a).toBeCloseTo(100 * 10 / Math.sqrt(10000 - 100), 10);
-  expect(result.b).toBeCloseTo(result.a, 10);
-  const off = projectCatalogAperture(10, projectCatalogPosition([50, 0, -100], world, viewport)!, viewport)!;
-  expect(off.x).toBeGreaterThan(52); expect(off.a).toBeGreaterThan(off.b);
-  expect(projectCatalogAperture(101, centred, viewport)).toBeNull();
-});
-
 test('cloud bounds follow physical scale and orientation instead of its central catalogue marker', () => {
   const corners = catalogVolumeCorners({ referenceFrame: 'test', epochJdTt: 1,
     originM: [0, 0, -100], metersPerUnit: 2, localToReferenceXyzw: [0, 0, Math.SQRT1_2, Math.SQRT1_2],

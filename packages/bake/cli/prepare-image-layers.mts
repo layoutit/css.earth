@@ -6,9 +6,10 @@ import { parseImageLayerRecipe, prepareImageLayers } from '@cssearth/bake/image-
 
 export async function prepareImageLayerObject(objectDirectory: string) {
   const root=resolve(objectDirectory), sourceDirectory=resolve(root,'source'), outputDirectory=resolve(root,'prepared');
-  const descriptor=JSON.parse(await readFile(resolve(root,'object.json'),'utf8')) as {properties?:{preparation?:{source?:string}}};
+  const descriptor=JSON.parse(await readFile(resolve(root,'object.json'),'utf8')) as {properties?:{preparation?:{source?:string}}&Record<string,unknown>};
   const ref=descriptor.properties?.preparation;
-  // Git holds the tracked recipe; the descriptor names it and pins nothing.
+  // Git holds the tracked recipe; the descriptor names it and pins nothing. Its other authored properties (the catalogue
+  // points it draws, for one) stay; the frame is this bake's.
   if(!ref?.source)throw new TypeError(`Image-layer object ${root} must name its source recipe in properties.preparation.source.`);
   const recipeBytes=await readFile(resolve(root,ref.source));
   const recipe=parseImageLayerRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
@@ -16,7 +17,7 @@ export async function prepareImageLayerObject(objectDirectory: string) {
   let previous:string[]=[];try{const old=JSON.parse(await readFile(resolve(outputDirectory,'image-layers.json'),'utf8')) as {resources?:{path?:unknown}[]};previous=(old.resources??[]).flatMap(r=>typeof r.path==='string'?[r.path]:[]);}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}
   const prepared=await prepareImageLayers({sourceDirectory,outputDirectory,recipe});
   const preparedPath=resolve(outputDirectory,'image-layers.json'),preparedBytes=await readFile(preparedPath);
-  const nextDescriptor={schema:'cssearth-object@2',id:recipe.id,type:'image-layer-bank',properties:{frame:prepared.frame,preparation:ref},
+  const nextDescriptor={schema:'cssearth-object@2',id:recipe.id,type:'image-layer-bank',properties:{...descriptor.properties,frame:prepared.frame,preparation:ref},
     prepared:{format:'cssearth-image-layer-bank@1',url:'prepared/image-layers.json'}};
   await writeFile(resolve(root,'object.json'),JSON.stringify(nextDescriptor,null,2)+'\n');
   const retained=new Set(prepared.resources.map(resource=>resource.path));
