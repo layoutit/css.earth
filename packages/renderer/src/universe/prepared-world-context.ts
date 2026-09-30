@@ -4,7 +4,8 @@ import { ContextChange, createWorldContextFrameReceiver } from './world-context/
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
-import type { PlannedWorldContext, WorldContextView } from './world-context/world-context-planner.js';
+import type { PlannedWorldContext, WorldContextCapture } from './world-context/world-context-planner.js';
+import { packWorldBodies } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -49,8 +50,11 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
       if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
         orientation = [...orientationXyzw];
         const view = cssViewFromOrientation(orientationXyzw);
-        const depth = (entry: Entry) => -(view[6]! * entry.body.positionM[0] + view[7]! * entry.body.positionM[1] + view[8]! * entry.body.positionM[2]);
-        ranks = new Map([...members].sort((a, b) => depth(b) - depth(a)).map((entry, index) => [entry, index * 4]));
+        // Each depth once, then a stable sort of the keys: the comparator recomputed both depths n log n times.
+        const keyed = members.map(entry => ({ entry,
+          depth: -(view[6]! * entry.body.positionM[0]! + view[7]! * entry.body.positionM[1]! + view[8]! * entry.body.positionM[2]!) }));
+        keyed.sort((a, b) => b.depth - a.depth);
+        ranks = new Map(keyed.map(({ entry }, index) => [entry, index * 4]));
         selection = null; ranksChanged = true;
       }
       const changed = ranksChanged || selection !== selected;
@@ -293,7 +297,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (!destroyed) refresh();
     });
   };
-  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []): WorldContextView => {
+  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []): WorldContextCapture => {
       if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt) {
         throw new TypeError('Context and camera reference frames differ.');
       }
@@ -323,9 +327,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         preserveCommittedAnnotations: rotationPhase === 'released',
         labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
-        bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
-          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
-          labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
+        // Packed as captured: the columns the worker reads, without a copied object per body per frame.
+        bodies: packWorldBodies(bodies) };
   };
   const layer = Object.freeze({ root,
     /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */

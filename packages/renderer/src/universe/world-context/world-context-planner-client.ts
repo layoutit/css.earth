@@ -1,8 +1,7 @@
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import { parsePreparedWorldContextPlan, worldContextGeometry } from '../../prepared-data/world-context.js';
-import type { WorldContextView } from './world-context-planner.js';
+import type { WorldContextCapture } from './world-context-planner.js';
 import type { WorldContextFrame } from './world-context-frame.js';
-import { packWorldBodies } from './world-context-view-transport.js';
 
 export interface WorldPlannerWorker {
   onmessage: ((event: MessageEvent<{ ready?: boolean; id?: number; frame?: WorldContextFrame; error?: string; orbitsLoaded?: string }>) => void) | null;
@@ -64,15 +63,15 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   const initialise: WorldPlannerInitialise = source ? { source, validatedPlan, annotationPriorities, annotationLandmarks }
     : { validatedPlan: worldContextGeometry(validatedPlan), annotationPriorities, annotationLandmarks };
   worker.postMessage(initialise);
-  return { async plan(view: WorldContextView): Promise<WorldContextFrame> {
+  return { async plan(view: WorldContextCapture): Promise<WorldContextFrame> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');
     if (pending) throw new Error('World frame admission exceeded one in-flight request.');
     return new Promise((resolve, reject) => {
       pending = { id: ++sequence, resolve, reject };
       try {
-        const { bodies, ...rest } = view, packed = packWorldBodies(bodies);
-        worker.postMessage({ id: sequence, view: rest, bodies: packed }, [packed.buffer as ArrayBuffer]);
+        const { bodies, ...rest } = view;
+        worker.postMessage({ id: sequence, view: rest, bodies }, [bodies.buffer as ArrayBuffer]);
       }
       catch (error) { destroy(error instanceof Error ? error : new Error(String(error))); }
     });

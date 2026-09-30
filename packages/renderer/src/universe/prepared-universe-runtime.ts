@@ -308,8 +308,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const selectedRect = selectedLabel.publish(world, viewport, caption(), captionFlags());
               const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
                 ...coveredTopRects(viewport)];
-              labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
-                bodyAnnotations.flatMap(body => body.labelRect ? [body.labelRect] : []), foregroundRects);
+              // A loop, not flatMap: that built a one-element array for every body, every frame.
+              const bodyLabelRects: LabelScreenRect[] = [];
+              for (const body of bodyAnnotations) if (body.labelRect) bodyLabelRects.push(body.labelRect);
+              labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!, bodyLabelRects, foregroundRects);
               const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);
               const environmentRects = environmentLabels.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
                 shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget });
