@@ -249,6 +249,54 @@
       },
       "dependencies": [],
       "license": "STScI reference data; cite Francis et al. (1991)."
+    },
+    {
+      "id": "wisescos-galaxies-sample",
+      "path": "src/objects/nearby-universe/source/wisescos-galaxies/wisescos-sample.csv.gz",
+      "origin": "http://ssa.roe.ac.uk/cats/wiseScosPhotoz160708.csv.gz",
+      "sourceUrl": "https://doi.org/10.3847/0067-0049/225/1/5",
+      "title": "WISE x SuperCOSMOS galaxies outside DESI's footprint, at DESI's density in each redshift bin",
+      "credit": "Bilicki et al. (2016), ApJS 225, 5; Wide Field Astronomy Unit, University of Edinburgh",
+      "acquisition": "The whole catalogue (the origin, 1,709,149,603 bytes) downloaded 2026-09-30 and read as a stream; the generator keeps the photometric redshift 0.1 to 0.4 galaxies brighter than absolute R -21.5 outside DESI's footprint, thinned in each redshift bin to the DESI sample's count per sky cell, and prints DESI's median colour per bin.",
+      "generator": "packages/bake/authoring/nearby-universe/wisescos-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "bilicki-2016-wisescos",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/wisescos-galaxies/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "desi-bright-galaxies-sample"
+      ],
+      "license": "Original catalogue terms apply; cite Bilicki et al. (2016) and acknowledge the Wide Field Astronomy Unit (WFAU)."
+    },
+    {
+      "id": "galaxies-2mrs-sample",
+      "path": "src/objects/nearby-universe/source/galaxies-2mrs/twomrs-sample.csv.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/199/26/table3.dat.gz",
+      "sourceUrl": "https://ui.adsabs.harvard.edu/abs/2012ApJS..199...26H",
+      "title": "2MASS Redshift Survey galaxies that Cosmicflows-4 lacks, to redshift 0.05 in the CMB frame",
+      "credit": "Huchra et al. (2012), ApJS 199, 26, distributed by CDS/VizieR",
+      "acquisition": "CDS table 3 (the origin, 44,599 galaxies) downloaded 2026-09-30; the generator drops the galaxies within 10 arcsec of a Cosmicflows-4 position, moves each redshift to the CMB frame with Planck's dipole and keeps z_CMB 0.0007 to 0.05.",
+      "generator": "packages/bake/authoring/nearby-universe/twomrs-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "huchra-2012-2mrs",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/galaxies-2mrs/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "galaxies-table"
+      ],
+      "license": "Original catalogue terms apply; cite Huchra et al. (2012) and CDS/VizieR."
     }
   ],
   "documents": [
@@ -403,6 +451,30 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored provenance presentation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-wisescos-galaxies",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/wisescos-galaxies/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored WISE x SuperCOSMOS fill selection, colour and tone.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-2mrs",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/galaxies-2mrs/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored 2MRS selection, colour classes and tone.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

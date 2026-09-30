@@ -37,16 +37,28 @@ export function placeGroupMembers(points: number[][], groups: readonly string[],
 
 export interface ShellPoint { readonly reference: readonly number[]; readonly group?: string }
 /** A level's shell selection: in `order`, the points kept under each shell's room, `room(shell)` dots for shell
- * `floor(distance / width)`. With `groupsFirst`, members of groups of two or more (among these points) take the room first,
- * the richest group first and ties in `order`; a group of `wholeGroupsOf` or more is kept whole, room or not; then the
- * rest, in `order`, fill `background` times the room again. Returns the kept points in `order`. */
+ * `floor(distance / width)`. With `skyBands`, a shell's room is split evenly over equal-area cells of the sky (the points'
+ * own frame: `skyBands` bands equal in the sine of the latitude, each cut into twice as many cells in longitude), so a
+ * direction a catalogue covers densely cannot take the room of one it covers thinly. With `groupsFirst`, members of groups
+ * of two or more (among these points) take the room first, the richest group first and ties in `order`; a group of
+ * `wholeGroupsOf` or more is kept whole, room or not; then the rest, in `order`, fill `background` times the room again.
+ * Returns the kept points in `order`. */
 export function selectByShell<T extends ShellPoint>(order: readonly T[], width: number, room: (shell: number) => number,
-  groupsFirst?: { readonly background: number; readonly wholeGroupsOf?: number }): T[] {
-  const shellOf = (point: T) => Math.floor(Math.hypot(...point.reference) / width);
+  groupsFirst?: { readonly background: number; readonly wholeGroupsOf?: number }, skyBands?: number): T[] {
+  if (skyBands !== undefined && !(Number.isSafeInteger(skyBands) && skyBands >= 1)) throw new TypeError(`selectByShell: skyBands must be a whole number from 1, got ${skyBands}.`);
+  const cells = skyBands === undefined ? 1 : 2 * skyBands * skyBands;
+  const skyCell = (reference: readonly number[]) => {
+    if (skyBands === undefined) return 0;
+    const [x, y, z] = reference as [number, number, number], length = Math.hypot(x, y, z) || 1;
+    const band = Math.min(skyBands - 1, Math.floor((z / length + 1) / 2 * skyBands));
+    const longitude = (Math.atan2(y, x) / (2 * Math.PI) + 1) % 1;
+    return band * 2 * skyBands + Math.min(2 * skyBands - 1, Math.floor(longitude * 2 * skyBands));
+  };
+  const shellOf = (point: T) => Math.floor(Math.hypot(...point.reference) / width) * cells + skyCell(point.reference);
   const left = new Map<number, [groups: number, all: number]>();
   const roomOf = (shell: number) => {
     let entry = left.get(shell);
-    if (!entry) { const total = room(shell); entry = [total, total * (1 + (groupsFirst?.background ?? 0))]; left.set(shell, entry); }
+    if (!entry) { const total = room(Math.floor(shell / cells)) / cells; entry = [total, total * (1 + (groupsFirst?.background ?? 0))]; left.set(shell, entry); }
     return entry;
   };
   const size = new Map<string, number>();

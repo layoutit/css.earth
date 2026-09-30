@@ -1,0 +1,68 @@
+{
+  "id": "huchra-2012-2mrs",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The 2MASS Redshift Survey (2MRS)",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2012ApJS..199...26H"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/199/26"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJS..199...26H",
+      "label": "Huchra et al. (2012), ApJS 199, 26"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/199/26",
+      "label": "CDS J/ApJS/199/26"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/199/26/ReadMe",
+      "checkedOn": "2026-09-30",
+      "locator": "table3: 44,599 galaxies with J2000 positions, galactic coordinates, extinction-corrected Ks magnitude, ZCAT morphological type and cz in the solar system barycentre's frame."
+    }
+  ],
+  "creators": [
+    "J. P. Huchra",
+    "L. M. Macri",
+    "K. L. Masters",
+    "T. H. Jarrett",
+    "P. Berlind",
+    "M. Calkins",
+    "A. C. Crook",
+    "R. Cutri",
+    "P. Erdogdu",
+    "E. Falco",
+    "T. George",
+    "C. M. Hutcheson",
+    "O. Lahav",
+    "J. Mader",
+    "J. D. Mink",
+    "N. Martimbeau",
+    "S. Schneider",
+    "M. Skrutskie",
+    "S. Tokarz",
+    "M. Westover"
+  ],
+  "publisher": "ApJS 199, 26",
+  "publicationDate": "2012",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Huchra et al. (2012), ApJS 199, 26, distributed by CDS/VizieR.",
+      "scope": "2MRS galaxies in the Nearby Universe field",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/199/26/ReadMe"
+    }
+  ]
+}

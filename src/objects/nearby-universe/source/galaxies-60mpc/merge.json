@@ -1,9 +1,10 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "galaxies-60mpc",
-  "meaning": "A nested level of galaxies around the Milky Way, out to 60 Mpc: the galaxies it adds to the levels around it bring it to its own even density, so zooming in never empties the view. Each dot is one galaxy at its measured distance, in the colour of its morphological type.",
+  "meaning": "A nested level of Cosmicflows-4 and 2MRS galaxies around the Milky Way, out to 60 Mpc: the galaxies it adds to the levels around it bring it to its own even density, so zooming in never empties the view. Each dot is one galaxy at its measured distance, in the colour of its morphological type.",
   "banks": [
-    "galaxies"
+    "galaxies",
+    "galaxies-2mrs"
   ],
   "densityCap": {
     "perMpc3": 0.005,
@@ -11,12 +12,13 @@
       30,
       60
     ],
-    "basis": "Presentation choice: 5 per 1,000 Mpc\u00b3, under the 8 CF4 holds from 20 to 40 Mpc. It is counted in shells 3 Mpc wide around the Sun, so only the catalogue's fall-off with distance is evened and a cluster keeps its contrast with the space around it.",
+    "basis": "Presentation choice: 5 per 1,000 Mpc³, under the 8 CF4 holds from 20 to 40 Mpc. It is counted in shells 3 Mpc wide around the Sun, so only the catalogue's fall-off with distance is evened and a cluster keeps its contrast with the space around it. Each shell's room is split evenly over 8 equal-area cells of the sky (skyBands 2), so the northern sky SDSS covers densely does not take the room of the southern sky and the low latitudes 2MRS fills.",
     "shellMpc": 3,
     "groupsFirst": {
       "background": 1,
       "basis": "Presentation choice: a shell's room goes first to galaxies in Cosmicflows-4 groups of two or more, the richest group first, so the dots trace the groups, filaments and clusters; as many again, drawn at random from the rest, fill the space between them, so the view still reads as open space. Doubling the dots cost no measurable time in the zoom profile (2026-09-30)."
-    }
+    },
+    "skyBands": 2
   },
   "within": [
     "galaxies-200mpc"

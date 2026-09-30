@@ -25,7 +25,8 @@
  * whose points carry their `groups`, prepare-catalogue-points.mts `groupDistance`), a shell's room goes first to members
  * of groups of two or more, the richest group first, then a random share of the rest (`background` times the room,
  * again) fills the space between them; `wholeGroupsOf` keeps every member of a group that large, room or not, so a
- * cluster is whole from wherever it is seen.
+ * cluster is whole from wherever it is seen. With `skyBands`, each shell's room is split evenly over equal-area cells of the
+ * sky (catalogue-groups.ts), so a direction one survey covers densely does not take the room of one another covers.
  * With a taper (`taperKpc` or `taperMpc`: [from, to]) the cap falls linearly to nothing between those distances from
  * the Sun: a nested level of denser dots around the Sun, with a soft edge. `within` names the enclosing levels, already
  * merged: their dots count toward this level's cap and are not drawn again, so a level only adds dots, and nested
@@ -66,7 +67,7 @@ if (recipe.colourTowardWhite !== undefined && (typeof recipe.colourTowardWhite !
 
 type DiscCap = { mode: 'disc'; atSunPerKpc2: number; scaleLengthKpc: number; kernel: number; taper?: [number, number] };
 type VolumeCap = { mode: 'volume'; perMpc3: number; kernel: number; shell?: number; taper?: [number, number];
-  groupsFirst?: { background: number; wholeGroupsOf?: number } };
+  groupsFirst?: { background: number; wholeGroupsOf?: number }; skyBands?: number };
 const cap = ((): DiscCap | VolumeCap | undefined => {
   const value = recipe.densityCap as Record<string, unknown> | undefined;
   if (value === undefined) return undefined;
@@ -80,7 +81,11 @@ const cap = ((): DiscCap | VolumeCap | undefined => {
       || (groups.wholeGroupsOf !== undefined && !(Number.isSafeInteger(groups.wholeGroupsOf) && (groups.wholeGroupsOf as number) >= 2)) || !text(groups.basis))) {
       fail('groupsFirst needs shellMpc, a background share of at least 0, an optional wholeGroupsOf of at least 2, and its basis.');
     }
+    if (value.skyBands !== undefined && (!positive(value.shellMpc) || !(Number.isSafeInteger(value.skyBands) && (value.skyBands as number) >= 1))) {
+      fail('skyBands needs shellMpc and is a whole number from 1.');
+    }
     return { mode: 'volume', perMpc3: value.perMpc3 as number, kernel: (value.kernelMpc ?? value.shellMpc) as number,
+      ...(value.skyBands === undefined ? {} : { skyBands: value.skyBands as number }),
       ...(positive(value.shellMpc) ? { shell: value.shellMpc as number } : {}), ...(value.taperMpc ? { taper: value.taperMpc as [number, number] } : {}),
       ...(groups ? { groupsFirst: { background: groups.background as number, ...(groups.wholeGroupsOf === undefined ? {} : { wholeGroupsOf: groups.wholeGroupsOf as number }) } } : {}) };
   }
@@ -199,7 +204,7 @@ if (cap?.mode === 'volume' && cap.shell !== undefined) {
     const taper = cap.taper ? Math.max(0, Math.min(1, (cap.taper[1] - middle) / (cap.taper[1] - cap.taper[0]))) : 1;
     return cap.perMpc3 * 4 / 3 * Math.PI * (((shell + 1) * width) ** 3 - (shell * width) ** 3) * taper - (drawn.get(shell) ?? 0);
   };
-  const selected = new Set(selectByShell(ordered, width, roomOf, cap.groupsFirst));
+  const selected = new Set(selectByShell(ordered, width, roomOf, cap.groupsFirst, cap.skyBands));
   ordered = ordered.filter(point => {
     if (selected.has(point)) return true;
     capped[point.bank] = (capped[point.bank] ?? 0) + 1; kept[point.bank]!--; return false;

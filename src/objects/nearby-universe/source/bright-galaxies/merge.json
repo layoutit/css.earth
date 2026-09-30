@@ -1,8 +1,17 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "bright-galaxies",
-  "meaning": "DESI's bright galaxies as dots: every row of the tracked sample (one in 10 of the catalogue).",
+  "meaning": "The bright-galaxy ball as dots: one in 3 of the tracked DESI sample (one in 10 of the catalogue) on DESI's footprint, and one in 3 of the WISE x SuperCOSMOS fill, at DESI's density in each redshift bin, everywhere else the Milky Way does not hide.",
   "banks": [
-    "desi-bright-galaxies"
+    {
+      "bank": "desi-bright-galaxies",
+      "keepEvery": 3,
+      "basis": "Presentation choice: the two samples together hold 88,218 galaxies and a bank draws at most 40,000 (MAX_CATALOGUE_POINTS), so both keep one in 3 and stay at one density: 29,407 dots, about as many as DESI's cones alone drew before."
+    },
+    {
+      "bank": "wisescos-galaxies",
+      "keepEvery": 3,
+      "basis": "Presentation choice: the same share as DESI's, so the ball stays even."
+    }
   ]
 }
