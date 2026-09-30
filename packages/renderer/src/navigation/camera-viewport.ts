@@ -1,3 +1,4 @@
+import { opacityClockFor } from '../stars/opacity-clock.js';
 export interface CameraViewportSnapshot {
   readonly bounds: { readonly x: number; readonly y: number; readonly left: number; readonly top: number; readonly width: number; readonly height: number };
   readonly focalPixels: number;
@@ -27,6 +28,8 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
   const view = stage.ownerDocument.defaultView;
   if (!view) throw new Error('Camera viewport requires a window.');
   const projections = new Map<string, { probe: HTMLElement; snapshot: CameraViewportSnapshot | null }>();
+  // The document's one frame clock (opacity-clock.ts).
+  const clock = opacityClockFor(view);
   let frame: number | null = null, destroyed = false;
   const listeners = new Set<() => void>();
   const measure = () => {
@@ -68,7 +71,7 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
     // Keep the last published measurement until the layout owner refreshes it.
     // Sidebar content resizes must not force an incoming scene to measure DOM.
     if (destroyed || frame !== null || projections.size === 0) return;
-    frame = view.requestAnimationFrame(() => {
+    frame = clock.request(() => {
       frame = null;
       refresh();
     });
@@ -76,7 +79,7 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
   // ResizeObserver runs after layout. Measure here while geometry is current,
   // instead of next frame after camera/scene writes have dirtied style again.
   const observer = new view.ResizeObserver(() => {
-    if (frame !== null) { view.cancelAnimationFrame(frame); frame = null; }
+    if (frame !== null) { clock.cancel(frame); frame = null; }
     refresh();
   });
   observer.observe(stage);
@@ -106,7 +109,7 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
     destroy() {
       if (destroyed) return;
       destroyed = true;
-      if (frame !== null) view.cancelAnimationFrame(frame);
+      if (frame !== null) clock.cancel(frame);
       observer.disconnect();
       view.removeEventListener('resize', invalidate);
       view.removeEventListener('scroll', invalidate);

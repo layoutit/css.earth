@@ -3,6 +3,11 @@ import { parseHTML } from 'linkedom';
 import { readFileSync } from 'node:fs';
 import { bindPreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 import { prepareConnectedActivation } from './prepared-activation.js';
+import { createFramePacer, SETTLE_PACING } from './settle-pacer.js';
+
+// One batch a frame: a pacer whose budget never exceeds one unit, so each frame admits exactly one whole batch.
+const oneBatch = (window: { requestAnimationFrame(callback: FrameRequestCallback): unknown }) =>
+  createFramePacer(callback => window.requestAnimationFrame(now => callback(now)), { ...SETTLE_PACING, startUnits: 1, maximumUnits: 1 });
 
 function fixture(batchSize = 1) {
   let nextId = 0;
@@ -16,7 +21,7 @@ function fixture(batchSize = 1) {
     node.style.transform = `translateX(${i}px)`; root.append(node); return node;
   });
   const batches = Array.from({ length: Math.ceil(leaves.length / batchSize) }, (_, i) => leaves.slice(i * batchSize, (i + 1) * batchSize));
-  const activate = prepareConnectedActivation(batches, fn => cleanup.push(fn));
+  const activate = prepareConnectedActivation(batches, fn => cleanup.push(fn), [], undefined, oneBatch(window));
   document.body.append(root);
   return { root, leaves, activate, callbacks, dispose() { cleanup.forEach(fn => fn()); },
     paint() { const pending = [...callbacks.values()]; callbacks.clear(); pending.forEach(fn => fn(0)); } };
@@ -116,7 +121,7 @@ test('mesh parents first connect populated, in prepared order, while later batch
   const connectedWith: number[] = [];
   const insertBefore = root.insertBefore.bind(root);
   root.insertBefore = (node, reference) => { connectedWith.push(node.childNodes.length); return insertBefore(node, reference); };
-  const activate = prepareConnectedActivation([[...b.querySelectorAll('u')], leaves.slice(0, 2), leaves.slice(2), [...c.querySelectorAll('u')]], () => {});
+  const activate = prepareConnectedActivation([[...b.querySelectorAll('u')], leaves.slice(0, 2), leaves.slice(2), [...c.querySelectorAll('u')]], () => {}, [], undefined, oneBatch(window));
   document.body.append(root);
   expect([...root.childNodes]).toEqual([original[1]]);
   expect([a, b, c].every(node => !node.isConnected)).toBe(true);
