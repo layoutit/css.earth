@@ -13,7 +13,7 @@ export function parsePageDatasets(objectId: string, raw: unknown, assetUrl: (pat
   };
   const views: Record<string, string> = {};
   const controls = raw.controls.map((value: unknown) => {
-    if (!isRecord(value) || (value.view !== 'cutaway' && value.view !== 'full') || !isRecord(value.texture)) return fail('each dataset names its view (cutaway or full) and its picture.');
+    if (!isRecord(value) || (value.view !== 'cutaway' && value.view !== 'full' && value.view !== 'hidden') || !isRecord(value.texture)) return fail('each dataset names its view (cutaway, full or hidden) and its picture.');
     const { view, ...control } = value, dataset = parseDatasetControl({ ...control, thumbnailUrl: resolve(control.thumbnailUrl), texture: { ...value.texture, url: resolve(value.texture.url) } });
     if (Object.hasOwn(views, dataset.id)) fail(`dataset ${dataset.id} is listed twice.`);
     views[dataset.id] = view;

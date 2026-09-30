@@ -20,7 +20,7 @@ if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeErro
 const objectDirectory = resolve(objectArgument), prepared = resolve(objectDirectory, 'prepared');
 const recipePath = resolve(objectDirectory, 'source', id, 'stack.json');
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { schema?: unknown; id?: unknown; meaning?: unknown; basis?: unknown; screenBudget?: unknown;
-  levels?: { bank?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown; nearOpacity?: unknown }[] };
+  levels?: { bank?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown; nearOpacity?: unknown; screenBudget?: unknown }[] };
 const fail = (message: string): never => { throw new TypeError(`${recipePath}: ${message}`); };
 if (recipe.schema !== 'cssearth-catalogue-points-stack@1' || recipe.id !== id || typeof recipe.meaning !== 'string' || typeof recipe.basis !== 'string') {
   fail(`needs schema cssearth-catalogue-points-stack@1, id ${id}, its meaning and the basis of its windows.`);
@@ -47,6 +47,11 @@ for (const level of levels!) if (level.nearOpacity !== undefined && !(typeof lev
 }
 if (recipe.screenBudget !== undefined && !(Number.isSafeInteger(recipe.screenBudget) && (recipe.screenBudget as number) > 0)) {
   fail(`screenBudget must be a positive whole number, got ${JSON.stringify(recipe.screenBudget)}.`);
+}
+// An inner level may raise or lower the bank's budget: it moves to the level's as the level appears (catalogue-points.ts).
+for (const [index, level] of levels!.entries()) if (level.screenBudget !== undefined && (index === 0 || recipe.screenBudget === undefined
+  || !(Number.isSafeInteger(level.screenBudget) && (level.screenBudget as number) > 0))) {
+  fail(`${String(level.bank)}: a level's screenBudget is a positive whole number on an inner level of a bank with a screenBudget, got ${JSON.stringify(level.screenBudget)}.`);
 }
 const palette: string[] = [], points: number[][] = [], counts: number[] = [];
 let frame: unknown = null, metersPerUnit = 0;
@@ -76,7 +81,8 @@ const output = { schema: 'cssearth-catalogue-points@1', id, source: 'stack', mea
   appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette,
     levels: levels!.map((level, index) => ({ bank: level.bank, points: counts[index],
       ...(index === 0 ? { fullDetailUnits: level.fullDetailUnits } : { appearUnits: level.appearUnits }),
-      ...(level.nearOpacity === undefined ? {} : { nearOpacity: level.nearOpacity }) })),
+      ...(level.nearOpacity === undefined ? {} : { nearOpacity: level.nearOpacity }),
+      ...(level.screenBudget === undefined ? {} : { screenBudget: level.screenBudget }) })),
     ...(recipe.screenBudget === undefined ? {} : { screenBudget: recipe.screenBudget }) },
   basis: recipe.basis, counts: { points: points.length }, points };
 await writeCatalogueBank({ objectDirectory, id, bank: output, published: recipePublished(recipe, recipePath) });

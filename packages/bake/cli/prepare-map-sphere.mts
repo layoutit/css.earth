@@ -46,25 +46,26 @@ const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
   colourTable?: { path?: unknown; origin?: unknown; basis?: unknown; scale?: unknown; scaleBasis?: unknown; gamma?: unknown; gammaBasis?: unknown };
   range?: { min?: unknown; max?: unknown; basis?: unknown };
   radius?: { redshift?: unknown; cosmology?: unknown; basis?: unknown };
+  holds?: { redshift?: unknown; cosmology?: unknown; basis?: unknown };
   mesh?: { latitudeSegments?: unknown; longitudeSegments?: unknown; tilePx?: unknown; samplesPerTexel?: unknown; basis?: unknown };
   epochJdTt?: unknown };
 const fail = (message: string): never => { throw new TypeError(`${recipePath}: ${message}`); };
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0;
 const integer = (value: unknown, low: number, high: number): value is number => Number.isInteger(value) && (value as number) >= low && (value as number) <= high;
-const { map, colourTable, range, radius, mesh, limb, cutaway, datasets: datasetRecipe } = recipe;
+const { map, colourTable, range, radius, holds, mesh, limb, cutaway, datasets: datasetRecipe } = recipe;
 if (cutaway !== undefined && ((cutaway.hemisphere !== 'north' && cutaway.hemisphere !== 'south') || typeof cutaway.interiorOpacity !== 'number'
   || !(cutaway.interiorOpacity > 0 && cutaway.interiorOpacity <= 1) || typeof cutaway.exteriorOpacity !== 'number'
   || !(cutaway.exteriorOpacity > 0 && cutaway.exteriorOpacity <= 1) || !text(cutaway.basis))) {
   fail('cutaway names the hemisphere it opens (north or south), the inside wall\'s and the open shell\'s opacities in (0, 1] and a basis.');
 }
-// The page's datasets of the sphere: each dataset shows it whole or cut open, with the card text, a picture of that view and the
-// colour table's legend.
-type PageDataset = { id: string; view: 'cutaway' | 'full'; label: string; detail: string; title: string; summary: string; description: string };
+// The page's datasets of the sphere: each dataset shows it whole, cut open or not at all, with the card text, a picture of that
+// view and, when the sphere shows, the colour table's legend.
+type PageDataset = { id: string; view: 'cutaway' | 'full' | 'hidden'; label: string; detail: string; title: string; summary: string; description: string };
 const datasets: PageDataset[] | null = datasetRecipe === undefined ? null : Array.isArray(datasetRecipe.datasets) ? datasetRecipe.datasets.map((dataset: unknown) => {
   const value = dataset as Partial<Record<keyof PageDataset, unknown>> | null;
-  if (!value || !/^[a-z][a-z0-9-]*$/u.test(String(value.id)) || (value.view !== 'cutaway' && value.view !== 'full')
+  if (!value || !/^[a-z][a-z0-9-]*$/u.test(String(value.id)) || !['cutaway', 'full', 'hidden'].includes(String(value.view))
     || !['label', 'detail', 'title', 'summary', 'description'].every(key => text(value[key as keyof PageDataset]))) {
-    return fail(`datasets.datasets: ${JSON.stringify(value?.id)} needs an id, a view (cutaway or full), label, detail, title, summary and description.`);
+    return fail(`datasets.datasets: ${JSON.stringify(value?.id)} needs an id, a view (cutaway, full or hidden), label, detail, title, summary and description.`);
   }
   return value as PageDataset;
 }) : fail('datasets.datasets lists the page\'s datasets of the sphere.');
@@ -93,6 +94,9 @@ if (colourTable!.gamma !== undefined && (typeof colourTable!.gamma !== 'number' 
 }
 if (!range || typeof range.min !== 'number' || typeof range.max !== 'number' || !(range.max > range.min) || !text(range.basis)) fail('range is an increasing min and max with a basis.');
 if (!radius || typeof radius.redshift !== 'number' || !(radius.redshift > 0) || radius.cosmology !== 'planck18' || !text(radius.basis)) fail('radius is a positive redshift in the planck18 cosmology, with a basis.');
+// How far what the sphere holds reaches: a hidden sphere's caption sits below it.
+if (holds !== undefined && (typeof holds.redshift !== 'number' || !(holds.redshift > 0 && holds.redshift < (radius!.redshift as number))
+  || holds.cosmology !== 'planck18' || !text(holds.basis))) fail(`holds is a positive redshift inside the sphere's, in the planck18 cosmology, with a basis; got ${JSON.stringify(holds)}.`);
 if (!mesh || !integer(mesh.latitudeSegments, 3, 64) || !integer(mesh.longitudeSegments, 3, 128) || !integer(mesh.tilePx, 8, 256) || !integer(mesh.samplesPerTexel, 1, 4) || !text(mesh.basis)) {
   fail('mesh names latitudeSegments (3 to 64), longitudeSegments (3 to 128), tilePx (8 to 256), samplesPerTexel (1 to 4) and a basis.');
 }
@@ -193,7 +197,8 @@ for key in ('previewNear', 'previewFar'):
   idx = np.clip(np.round((v - lo) / (hi - lo) * 255), 0, 255).astype(int)
   open(r[key] + '.rgb', 'wb').write(np.round(255 * (table[idx] / 255) ** r['colourGamma'] * r['colourScale']).astype(np.uint8).tobytes())
 d = Planck18.comoving_distance(r['redshift']).to(u.Mpc).value
-json.dump({'nside': int(nside), 'ordering': order, 'radiusMpc': float(d), 'min': float(np.nanmin(values)), 'max': float(np.nanmax(values))}, sys.stdout)`;
+holds = float(Planck18.comoving_distance(r['holdsRedshift']).to(u.Mpc).value) if r.get('holdsRedshift') is not None else None
+json.dump({'nside': int(nside), 'ordering': order, 'radiusMpc': float(d), 'holdsMpc': holds, 'min': float(np.nanmin(values)), 'max': float(np.nanmax(values))}, sys.stdout)`;
 const ICRS_TO_GALACTIC = [[-0.0548755604162154, -0.8734370902348850, -0.4838350155487132],
   [0.4941094278755837, -0.4448296299600112, 0.7469822444972189], [-0.8676661490190047, -0.1980763734312015, 0.4559837761750669]];
 const rawPath = resolve(prepared, `${id}.rgb.tmp`), directionsPath = resolve(prepared, `${id}.directions.tmp`);
@@ -208,9 +213,9 @@ const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   input: JSON.stringify({ map: resolve(sourceDirectory, map!.path as string), column: map!.column, table: resolve(sourceDirectory, colourTable!.path as string),
-    icrsToGalactic: ICRS_TO_GALACTIC, directions: directionsPath, places, samples, width: atlasWidth, height: atlasHeight, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift, colourScale: colourTable!.scale ?? 1, colourGamma: colourTable!.gamma ?? 1, ...(rays ? previewPaths : {}) }) });
+    icrsToGalactic: ICRS_TO_GALACTIC, directions: directionsPath, places, samples, width: atlasWidth, height: atlasHeight, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift, holdsRedshift: holds?.redshift ?? null, colourScale: colourTable!.scale ?? 1, colourGamma: colourTable!.gamma ?? 1, ...(rays ? previewPaths : {}) }) });
 if (run.status !== 0) throw new Error(`Map sampling failed: ${run.stderr.slice(-2000)}`);
-const sampled = JSON.parse(run.stdout) as { nside: number; ordering: string; radiusMpc: number; min: number; max: number };
+const sampled = JSON.parse(run.stdout) as { nside: number; ordering: string; radiusMpc: number; holdsMpc: number | null; min: number; max: number };
 const atlasBytes = await readFile(resolve(rawPath));
 await rm(rawPath); await rm(directionsPath);
 const webp = await encodeLossyWebp(sharp(atlasBytes, { raw: { width: atlasWidth, height: atlasHeight, channels: 3 } }));
@@ -273,7 +278,8 @@ if (datasets && rays && view) {
   for (const path of Object.values(previewPaths)) { await rm(path); await rm(`${path}.rgb`); }
   const pictures = new Map<string, string>();
   for (const dataset of datasets) {
-    const rgba = composeMapSpherePreview({ view, rays, nearColours, farColours,
+    // A hidden sphere's picture is the empty view.
+    const rgba = dataset.view === 'hidden' ? new Uint8Array(view.sizePx * view.sizePx * 4) : composeMapSpherePreview({ view, rays, nearColours, farColours,
       limb: limbOutput ? { coefficient: limbOutput.coefficient, referenceColour: limbOutput.referenceColour as [number, number, number] } : null,
       cut: dataset.view === 'cutaway' ? { hemisphere: cutaway!.hemisphere as 'north' | 'south', interiorOpacity: cutaway!.interiorOpacity as number, exteriorOpacity: cutaway!.exteriorOpacity as number } : null });
     const path = `${id}/${id}-${dataset.view}.webp`;
@@ -293,8 +299,8 @@ if (datasets && rays && view) {
     controls: datasets.map(dataset => ({ id: dataset.id, view: dataset.view, label: dataset.label, detail: dataset.detail, title: dataset.title, summary: dataset.summary,
       description: dataset.description, thumbnailUrl: pictures.get(dataset.view)!,
       texture: { url: pictures.get(dataset.view)!, width: view.sizePx, height: view.sizePx, attribution: pictureAttribution },
-      legend: { kind: 'scale', title: legend!.title, meta: legend!.meta, colors,
-        labels: [inUnit(range!.min as number), inUnit((range!.min as number + (range!.max as number)) / 2), inUnit(range!.max as number)] } })) };
+      ...(dataset.view === 'hidden' ? {} : { legend: { kind: 'scale', title: legend!.title, meta: legend!.meta, colors,
+        labels: [inUnit(range!.min as number), inUnit((range!.min as number + (range!.max as number)) / 2), inUnit(range!.max as number)] } }) })) };
 }
 const extent = Math.ceil(R);
 const output = { schema: 'cssearth-image-mesh@1', id, name: recipe.name, source: recipe.source, meaning: recipe.meaning,
@@ -303,6 +309,7 @@ const output = { schema: 'cssearth-image-mesh@1', id, name: recipe.name, source:
   radiusUnits: Number(R.toFixed(3)), texture: { path: texturePath, width: atlasWidth, height: atlasHeight, bytes: webp.length },
   ...(limbOutput ? { limb: limbOutput } : {}),
   ...(cutaway ? { cutaway: { hemisphere: cutaway.hemisphere, interiorOpacity: cutaway.interiorOpacity, exteriorOpacity: cutaway.exteriorOpacity } } : {}),
+  ...(sampled.holdsMpc !== null ? { holds: { radiusUnits: Number(sampled.holdsMpc.toFixed(3)), redshift: holds!.redshift, basis: holds!.basis } } : {}),
   sampling: { nside: sampled.nside, ordering: sampled.ordering, mapMin: sampled.min, mapMax: sampled.max, range: range, colourTable: colourTable!.basis, radius: radius, mesh },
   leaves };
 await writeFile(resolve(prepared, `${id}.json`), JSON.stringify(output) + '\n');

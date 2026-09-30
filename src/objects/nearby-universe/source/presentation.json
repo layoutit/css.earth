@@ -29,6 +29,27 @@
         ]
       },
       {
+        "id": "local-group-galaxies",
+        "label": "Local Group galaxies",
+        "process": "Place each LVDB galaxy at its adopted distance; tone it by its absolute V magnitude.",
+        "recipe": "source/local-group-galaxies/points.json",
+        "selector": "",
+        "inputs": [
+          "local-group-galaxies-sample"
+        ],
+        "outputs": [
+          "prepared/local-group-galaxies.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "The templates are spectra of galaxy centres, not whole-galaxy light; types later than Sc take the Sc template.",
+          "A galaxy with no HyperLEDA type is drawn white."
+        ]
+      },
+      {
         "id": "galaxies-200mpc",
         "label": "Galaxy dots, 200 Mpc level",
         "process": "Keep galaxies, in a fixed shuffle, while the ones within the kernel stay under the level's even density; nested levels add only galaxies the enclosing levels do not draw.",
@@ -109,16 +130,37 @@
         ]
       },
       {
+        "id": "galaxies-3mpc",
+        "label": "Galaxy dots, Local Volume level",
+        "process": "Every LVDB galaxy nearer than Cosmicflows-4's nearest galaxy (3.03 Mpc), unthinned: the innermost level.",
+        "recipe": "source/galaxies-3mpc/merge.json",
+        "selector": "",
+        "inputs": [
+          "local-group-galaxies-sample"
+        ],
+        "outputs": [
+          "prepared/galaxies-3mpc.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "An even density is a presentation choice: real concentrations above it are thinned; sparser regions, as the zone the Milky Way's disc hides, are the catalogue's gaps, not voids."
+        ]
+      },
+      {
         "id": "dots",
         "label": "Galaxy dots at every zoom",
-        "process": "Join the four levels, outermost first, into one bank the app draws as a growing prefix: the field whole within 100 Mpc, each inner level's galaxies one at a time as the view narrows past its radius.",
+        "process": "Join the five levels, outermost first, into one bank the app draws as a growing prefix: the field whole within 100 Mpc, each inner level's galaxies one at a time as the view narrows past its radius, the Local Volume galaxies last.",
         "recipe": "source/dots/stack.json",
         "selector": "",
         "inputs": [
-          "galaxies-table"
+          "galaxies-table",
+          "local-group-galaxies-sample"
         ],
         "outputs": [
-          "prepared/dots.json"
+          "prepared/dots.bin"
         ],
         "interpretation": {
           "kind": "catalogue-count-visualization",
@@ -170,6 +212,27 @@
         ]
       },
       {
+        "id": "quaia-quasars",
+        "label": "Quaia quasars",
+        "process": "Place each quasar at its comoving distance in the Planck 2018 cosmology; colour it by the composite quasar spectrum stretched to its redshift.",
+        "recipe": "source/quaia-quasars/points.json",
+        "inputs": [
+          "quaia-quasars-sample",
+          "quasar-template"
+        ],
+        "outputs": [
+          "prepared/quaia-quasars.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
         "id": "bright-galaxies",
         "label": "Bright-galaxy dots",
         "process": "Every row of the tracked sample, in catalogue order.",
@@ -192,10 +255,11 @@
       {
         "id": "quasars",
         "label": "Quasar dots",
-        "process": "One in 3 of the tracked sample, in catalogue order.",
+        "process": "One in 2 of each of the DESI and Quaia samples, in catalogue order.",
         "recipe": "source/quasars/merge.json",
         "inputs": [
-          "desi-quasars-sample"
+          "desi-quasars-sample",
+          "quaia-quasars-sample"
         ],
         "outputs": [
           "prepared/quasars.json"
@@ -218,7 +282,7 @@
           "desi-bright-galaxies-sample"
         ],
         "outputs": [
-          "prepared/bright-galaxy-dots.json"
+          "prepared/bright-galaxy-dots.bin"
         ],
         "selector": "",
         "interpretation": {
@@ -235,10 +299,11 @@
         "process": "One level, drawn whole within 6,600 Mpc.",
         "recipe": "source/quasar-dots/stack.json",
         "inputs": [
-          "desi-quasars-sample"
+          "desi-quasars-sample",
+          "quaia-quasars-sample"
         ],
         "outputs": [
-          "prepared/quasar-dots.json"
+          "prepared/quasar-dots.bin"
         ],
         "selector": "",
         "interpretation": {

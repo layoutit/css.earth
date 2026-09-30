@@ -1,4 +1,5 @@
 import { parseDensityVolumeFrame, parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
+import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
 import type { PreparedCssPointField, PreparedPointAppearance } from './types.js';
@@ -10,7 +11,9 @@ export async function loadPreparedCssPointField(input: unknown, transport: Prepa
   const { descriptor, manifest } = await loadManifest(input, transport);
   const url = descriptor.prepared!.url;
   // The bank sits beside its manifest; its length is checked before any column is decoded.
-  const bank = await transport.read(`${url.slice(0, url.lastIndexOf('/') + 1)}${manifest.bank.path}`);
+  // It is packed (@cssearth/objects prepared-binary.ts); the manifest pins the unpacked bytes.
+  const bankUrl = `${url.slice(0, url.lastIndexOf('/') + 1)}${manifest.bank.path}`;
+  const bank = await readPreparedBinary(await transport.read(bankUrl), bankUrl);
   if (bank.byteLength !== manifest.bank.bytes) {
     throw new TypeError(`Prepared point-field bank ${manifest.bank.path} is ${bank.byteLength} bytes; its manifest says ${manifest.bank.bytes}.`);
   }

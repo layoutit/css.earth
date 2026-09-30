@@ -20,7 +20,7 @@ interface MarkerState {
 
 /** One body's retained pointer shapes and keyboard targets. Paint owns the visible state these shapes describe. */
 export function createWorldContextBodyInteraction(marker: HTMLElement, orbitRoot: HTMLElement, host: HTMLElement,
-  body: { readonly id: string; readonly name: string }, hasOrbit: boolean, labelled?: Set<LabelScreenRect>) {
+  body: { readonly id: string; readonly name: string }, hasOrbit: boolean) {
   const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
   const orbitNavigation = hasOrbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
   let markerPick: ScreenPickTarget | null = null, indicatorPick: ScreenPickTarget | null = null;
@@ -65,14 +65,13 @@ export function createWorldContextBodyInteraction(marker: HTMLElement, orbitRoot
     },
     updateLabel(projected: ProjectedBody, rank: number, labelShown: boolean, labelSize: { readonly width: number; readonly height: number },
       navigationSuppressed: boolean) {
-      if (labelRect) labelled?.delete(labelRect);
       labelRect = null; labelPick = null;
       if (!labelShown || !projected.labelPosition) return;
       const [left, top] = projected.labelPosition;
       const rect = labelRectTarget ??= { left: 0, top: 0, right: 0, bottom: 0 };
       rect.left = left; rect.top = top;
       rect.right = left + labelSize.width; rect.bottom = top + labelSize.height;
-      labelRect = rect; labelled?.add(rect);
+      labelRect = rect;
       const target = labelTarget ??= { element: marker, rank: rank + 1, shape: { kind: 'rect', left: 0, top: 0, right: 0, bottom: 0 } };
       const horizontalReach = Math.max(8, (44 - labelSize.width) / 2);
       const verticalReach = Math.max(0, (44 - labelSize.height) / 2);
@@ -105,8 +104,11 @@ interface PaintedEntry {
 export function createWorldContextInteractions(host: HTMLElement, root: HTMLElement) {
   const picking = screenPicking(host);
   let labelExclusions: readonly LabelScreenRect[] = [], backgroundExclusions: readonly LabelScreenRect[] = [];
+  let bodyLabels: readonly LabelScreenRect[] = [];
   return {
     labelExclusionRects: () => labelExclusions,
+    /** The painted bodies' own labels, without the caption: what the view's label budget counts as already placed. */
+    bodyLabelRects: () => bodyLabels,
     backgroundExclusionRects: () => backgroundExclusions,
     clearPicking() { picking.publish(root, []); },
     commit<Entry extends PaintedEntry>(paintedOrder: readonly Entry[], rankOf: (entry: Entry) => number | undefined,
@@ -121,6 +123,7 @@ export function createWorldContextInteractions(host: HTMLElement, root: HTMLElem
           indicatorRects.push({ left: x - radius, right: x + radius, top: y - radius, bottom: y + radius });
         }
       }
+      bodyLabels = [...acceptedRects];
       if (caption?.labelPosition && captionSize) {
         const [left, top] = caption.labelPosition;
         acceptedRects.push({ left, top, right: left + captionSize.width, bottom: top + captionSize.height });
@@ -130,6 +133,6 @@ export function createWorldContextInteractions(host: HTMLElement, root: HTMLElem
       backgroundExclusions = [...acceptedRects, ...indicatorRects];
       if (pickingChanged) picking.publish(root, navigationInFlight ? [] : targets);
     },
-    destroy() { picking.remove(root); labelExclusions = []; backgroundExclusions = []; },
+    destroy() { picking.remove(root); labelExclusions = []; backgroundExclusions = []; bodyLabels = []; },
   };
 }

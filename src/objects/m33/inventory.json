@@ -9,9 +9,9 @@
     },
     {
       "location": "prepared",
-      "filename": "dots.json",
-      "bytes": 68585,
-      "sha256": "c2b6e9f4100ccf5262fbc5f9990e386d4b1ff33800d341106da738f0787526dc"
+      "filename": "dots.bin",
+      "bytes": 23952,
+      "sha256": "730a628907e2ff5b11c9cb20bc1185648c44c4fe009e9ae4d3ade9323b0a8148"
     },
     {
       "location": "prepared",
@@ -543,9 +543,9 @@
     },
     {
       "location": "prepared",
-      "filename": "stars.json",
-      "bytes": 132509,
-      "sha256": "6413ff19a62b5007b62df994cde223bd0ed2c624ad9c053790fb34c32aca96b9"
+      "filename": "stars.bin",
+      "bytes": 43443,
+      "sha256": "cd6a11c3222022b8ad3f3c974ec315eb469630113c3cc0b43acc85eed14500fb"
     }
   ]
 }

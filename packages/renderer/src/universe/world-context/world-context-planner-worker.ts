@@ -1,5 +1,6 @@
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context-planner.js';
+import { readPreparedBinary } from '../../prepared-data/prepared-binary.js';
 import { decodeWorldOrbitBank } from '../../prepared-data/world-context.js';
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldPlannerInitialise, WorldPlannerSource } from './world-context-planner-client.js';
@@ -17,7 +18,8 @@ const report = (error: unknown) => scope.postMessage({ error: error instanceof E
 async function read(url: string): Promise<ArrayBuffer> {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Prepared planner resource ${url} request failed: ${response.status}.`);
-  return response.arrayBuffer();
+  // A bank is packed (@cssearth/objects prepared-binary.ts): the platform gunzips it here, off the page's thread.
+  return readPreparedBinary(await response.arrayBuffer(), url);
 }
 
 // Orbit paths arrive one per bank: a frame that needs a path it lacks names the body, and that body's bank is read once,

@@ -5,7 +5,7 @@ import { mountPreparedVolumeLod } from '../volume/prepared-volume-lod.js';
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
-import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank, fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountGalaxyBacking, parseGalaxyBacking, type BackingNearFade } from './galaxy-backing.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
@@ -93,7 +93,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       lifetime.onDispose(() => volumeLayer?.destroy());
       // Their own layer over the galaxy's: the dots show from just past the Solar System, where the galaxy volume is still clear.
       for (const url of cataloguePointUrls) {
-        const points = mountCataloguePoints({ host: root, before: end, url, fetchJson: fetchPreparedJson });
+        const points = mountCataloguePoints({ host: root, before: end, url, loadBank: target => fetchPreparedCatalogueBank(target) });
         cataloguePoints.push(points);
         lifetime.onDispose(() => points.destroy());
       }

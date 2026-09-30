@@ -38,8 +38,6 @@ export interface WorldBodyPresentation {
   indicatorRadius: number;
   orbitAppearance: { width: number; opacity: number };
 }
-/** A view as captured for the worker: its bodies already packed into the transport columns (world-context-view-transport.ts). */
-export type WorldContextCapture = Omit<WorldContextView, 'bodies'> & { readonly bodies: Float64Array };
 export interface WorldContextView {
   world: WorldCameraPose;
   viewport: WorldCameraViewport;

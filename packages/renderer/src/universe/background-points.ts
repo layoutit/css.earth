@@ -8,8 +8,8 @@ export interface BackgroundPointBank { readonly url: string; readonly fromDistan
  * Way), each fetched the first time the camera is far enough out to show it. A far survey (DESI's shells, 0.7 Gpc and
  * beyond) begins farther out, so the Local Group and Nearby Universe never download it.
  */
-export function mountBackgroundPoints(host: HTMLElement, before: Element, sources: readonly BackgroundPointBank[], fetchJson: (url: string) => Promise<unknown>) {
-  const banks = sources.map(source => ({ from: source.fromDistanceM, bank: mountCataloguePoints({ host, before, url: source.url, fetchJson }) }));
+export function mountBackgroundPoints(host: HTMLElement, before: Element, sources: readonly BackgroundPointBank[], loadBank: (url: string) => Promise<unknown>) {
+  const banks = sources.map(source => ({ from: source.fromDistanceM, bank: mountCataloguePoints({ host, before, url: source.url, loadBank }) }));
   return {
     /** `outside` is how far the camera is out of our galaxy (volumeOutsideFade): the galaxies beyond show only there. */
     publish(publication: VolumeCameraPublication, distanceM: number, outside: number) {

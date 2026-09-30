@@ -1,6 +1,8 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
+import { packPreparedBinary } from '@cssearth/objects/node';
+import { pointFieldBankRegions } from '@cssearth/renderer/stars/point-field-bank.ts';
 import { M_PER_PC } from '@cssearth/astronomy';
 import { parseStarsRecipe } from './config.ts';
 import { requireRecord as record, requireNonemptyText as text } from '@cssearth/core';
@@ -41,7 +43,8 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   // Rows travel as a pinned binary column bank; the encoder decodes it again and asserts every bound.
   const encoded = encodePointFieldBank({path:'stars.bin',idPrefix:recipe.catalogue.idPrefix,frame,colorCount:colors.length,
     stars:hierarchy.stars,nodes:hierarchy.nodes,photometry,atlas:recipe.atlas});
-  await writeFile(resolve(outputDirectory,encoded.bank.path),encoded.bytes);
+  // Packed for delivery (@cssearth/objects prepared-binary.ts); the manifest pins the unpacked bank's bytes.
+  await writeFile(resolve(outputDirectory,encoded.bank.path),packPreparedBinary(encoded.bytes,pointFieldBankRegions(encoded.bytes,encoded.bank.path),encoded.bank.path));
   const data: PreparedCssPointFieldManifest = { schema:'cssearth-css-point-field-bank@1',id,frame,bank:encoded.bank,
     atlas:{path:atlasPath,columns:colors.length,tileSize:recipe.atlas.tileSize,colors,haloRadii:recipe.atlas.haloRadii},
     photometry,policy:recipe.policy,labels:recipe.labels,
