@@ -74,10 +74,13 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     ? navigation.systemTarget({ ...targetRequest, force: true })
     : intent.kind === 'object' && family && !opensFamilyFocus && object.id !== current.centeredObjectId && current.hasPresented
       ? navigation.systemTarget(targetRequest) : null;
+  // A host's first selection flies to frame its system, as a planet's does its moons; the next one opens the body. Only
+  // turning toward it kept the camera where it was, so a star picked from across the galaxy never came closer.
+  const firstHostSelection = intent.kind === 'object' && (family !== null || systemById(objects, object.id) !== null)
+    && !opensOverviewFocus && object.id !== current.centeredObjectId && current.hasPresented;
   const center = overviewTarget?.world ?? familyTarget
-    ?? (intent.kind === 'object' && (family !== null || systemById(objects, object.id) !== null)
-      && !opensOverviewFocus && object.id !== current.centeredObjectId && current.hasPresented
-      ? navigation.centerTarget(targetRequest) : null);
+    ?? (firstHostSelection && !family ? navigation.systemTarget(targetRequest) : null)
+    ?? (firstHostSelection ? navigation.centerTarget(targetRequest) : null);
   if (intent.kind === 'focus') {
     url.pathname = object.route;
     url = withPreparedFocus(url, object.id, intent.id, null);
