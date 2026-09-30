@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "tracers",
-  "meaning": "The Milky Way drawn from published catalogues as star dots, from just past the Solar System until the camera leaves the galaxy: hot young stars across the disc (Zari et al. 2021), the bulge's RR Lyrae stars (Prudil et al. 2025), and the disc's arm tracers: the maser parallaxes (Reid et al. 2019), the clouds, masers and HII regions Hou & Han (2014) use to outline the arms, young open clusters (Hunt & Reffert 2023) and young classical Cepheids (Skowron et al. 2019), each in its layer's colour.",
+  "meaning": "The Milky Way drawn from published catalogues as star dots, from just past the Solar System until the camera leaves the galaxy: hot young stars across the disc (Zari et al. 2021), and the disc's arm tracers: the maser parallaxes (Reid et al. 2019), the clouds, masers and HII regions Hou & Han (2014) use to outline the arms, young open clusters (Hunt & Reffert 2023) and young classical Cepheids (Skowron et al. 2019), each in its layer's colour.",
   "banks": [
     {
       "bank": "hot-stars",
@@ -13,16 +13,10 @@
     "hou-han-masers",
     "hou-han-hii",
     "open-clusters",
-    "cepheids",
-    {
-      "bank": "bulge-rr-lyrae",
-      "withinPcOfCentre": 3000,
-      "keepEvery": 16,
-      "basis": "Presentation choices, not paper values: stars within 3 kpc of the Galactic centre show the bulge and leave out the disc and halo stars along OGLE's sightlines; one star in 16, in catalogue order, keeps the bulge from outnumbering the disc."
-    }
+    "cepheids"
   ],
   "maxKinematicSigmaKpc": 1,
-  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose \u00b17 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
+  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose ±7 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
   "armScore": {
     "rule": "A disc arm-tracer layer is drawn when its arm score is at least 0.5; where a catalogue gives ages, the age cut is the one that follows the arms best at a useful count. The nearby and hot stars are drawn as the field of stars itself, not as arm tracers, and are not scored.",
     "method": "Arm score: the mean arm contrast of the backing image (source/backing) at the layer's positions outside 3.5 kpc of the centre, where arm contrast is the image's luminance minus its mean at that radius, divided by the contrast's standard deviation. Random points in the disc score 0. Presentation choice: it keeps the layers that follow the arms the backing draws.",
@@ -53,6 +47,6 @@
     "atSunPerKpc2": 15,
     "scaleLengthKpc": 2.6,
     "kernelKpc": 0.25,
-    "basis": "The disc's scale length is the thin disc's, 2.6 kpc (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, table 5, https://arxiv.org/abs/1602.07702). The density at the Sun, 15 dots per kpc\u00b2, is the highest that stays even out to 4 kpc from the Sun along the solar circle; past 4 to 6 kpc the catalogues thin out, since dust hides the far disc."
+    "basis": "The disc's scale length is the thin disc's, 2.6 kpc (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, table 5, https://arxiv.org/abs/1602.07702). The density at the Sun, 15 dots per kpc², is the highest that stays even out to 4 kpc from the Sun along the solar circle; past 4 to 6 kpc the catalogues thin out, since dust hides the far disc."
   }
 }

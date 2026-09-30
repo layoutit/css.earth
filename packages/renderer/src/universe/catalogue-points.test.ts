@@ -20,7 +20,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-stars', frame,
 test('the prepared catalogues the app draws are valid banks of every selected row with a distance', () => {
   // The published banks: what each recipe marks `published: true` and the app fetches. Their inputs (a survey's stars,
   // one catalogue's masers) are bake inputs in output/catalogue-points/, so they are not read here.
-  for (const [object, id] of [['milky-way', 'globular-clusters'], ['milky-way', 'dots'], ['nearby-universe', 'dots'], ['nearby-universe', 'bright-galaxy-dots'],
+  for (const [object, id] of [['milky-way', 'globular-clusters'], ['milky-way', 'dots'], ['milky-way', 'old-star-dots'], ['nearby-universe', 'dots'], ['nearby-universe', 'bright-galaxy-dots'],
     ['nearby-universe', 'quasar-dots'], ['m31', 'stars'], ['m31', 'dots'], ['m33', 'stars'], ['m33', 'dots'], ['m81', 'dots'], ['ngc-253', 'dots']]) {
     const path = new URL(`../../../../src/objects/${object}/prepared/${id}.bin`, import.meta.url);
     const prepared = decodeCatalogueBankBinary(unpackPreparedBinary(readFileSync(path), path.pathname), path.pathname) as {
@@ -249,4 +249,24 @@ test('an arriving level spends what the budget leaves, never thinning the levels
   assert.ok(drawn(inner!) > 240);
   assert.ok(drawn(inner!) < 360);
   field.destroy();
+});
+
+test('a bank with fadeOutUnits fades out as the view narrows at its origin, and draws nothing below it', async () => {
+  const { document } = parseHTML('<div id="host"></div>');
+  const host = document.getElementById('host')! as unknown as HTMLElement;
+  const faded = { ...bank, appearance: { ...bank.appearance, fadeOutUnits: [9, 3] } };
+  const points = mountCataloguePoints({ host, url: 'test.json', loadBank: async () => faded });
+  // A 600 x 800 view with a 500-pixel focal length: the half-width at the origin is the camera's distance from it.
+  const at = (distance: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } },
+    viewport: { focalPixels: 500, principalOffsetPixels: [0, 0] as const, widthPixels: 600, heightPixels: 800 } });
+  points.publish(at(20));
+  await new Promise(resolve => setTimeout(resolve, 0));
+  points.publish(at(20));
+  assert.equal(points.root.style.opacity, '1', 'wider than the window, whole');
+  points.publish(at(Math.sqrt(27)));
+  assert.ok(Math.abs(Number(points.root.style.opacity) - 0.5) < 1e-9, `halfway through the window in the logarithm, got ${points.root.style.opacity}`);
+  points.publish(at(2));
+  assert.equal(points.root.style.display, 'none', 'narrower than the window, not drawn');
+  assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, fadeOutUnits: [3, 9] } }), /test-stars: fadeOutUnits/);
+  points.destroy();
 });
