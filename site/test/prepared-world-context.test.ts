@@ -91,7 +91,8 @@ class Clock extends EventTarget {
   now = 0; next = 0; frames = new Map<number, (time: number) => void>(); timers = new Map<number, { at: number; callback: () => void }>();
   performance = { now: () => this.now };
   getComputedStyle = (element: FakeElement, pseudo: string) => {
-    expect(pseudo).toBe('::after'); element.measurements++;
+    // The caption element's ::after holds the name; its marker counts the measurement.
+    expect(pseudo).toBe('::after'); (element.className === 'context-caption' ? element.parentNode! : element).measurements++;
     return { width: `${element.dataset.contextName.length * 6}px`, height: '14px' };
   };
   requestAnimationFrame = (callback: (time: number) => void) => { const id = ++this.next; this.frames.set(id, callback); return id; };
@@ -224,8 +225,8 @@ function billboardCenter(element: HTMLElement | FakeElement): number[] {
 }
 function captionPosition(element: HTMLElement | FakeElement): number[] {
   const [x, y] = billboardCenter(element);
-  const dx = Number(element.style.getPropertyValue('--context-label-x').replace('px', ''));
-  const dy = Number(element.style.getPropertyValue('--context-label-y').replace('px', ''));
+  const caption = (element as unknown as { children: HTMLElement[] }).children.find(child => child.className === 'context-caption');
+  const [dx, dy] = (caption?.style.transform ?? '').match(/-?[\d.]+/g)?.map(Number) ?? [12, -9];
   return [x + dx, y + dy];
 }
 const paintedOrbitLeaf = (piece: HTMLElement | SVGElement) => piece.getAttribute('stroke-opacity') !== null
@@ -1721,8 +1722,9 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(label.dataset.contextName).toBe('Anchor');
   expect(mover(label).parentNode).toBe(null);
   expect(mover(label).children).toEqual([label]);
-  // The only child is the sprite, which alone scales; the ring and caption stay pseudos of the unscaled marker.
-  expect(label.children.map(child => child.tagName)).toEqual(['i']); expect(label.children[0]!.children).toHaveLength(0); expect(label).toBe(locator);
+  // The sprite alone scales; the ring stays a pseudo of the unscaled marker and the caption is a retained element
+  // placed by transform (world-context-marker-paint.ts).
+  expect(label.children.map(child => child.tagName)).toEqual(['i', 'u']); expect(label.children[0]!.children).toHaveLength(0); expect(label).toBe(locator);
   expect(all(host).filter(node => node.dataset.contextLabel === 'anchor')).toEqual([]);
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   const camera = (distance: number): {referenceFrame: string; epochJdTt: number; pose: {positionM: [number, number, number]; orientationXyzw: OrientationXyzw}} => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
@@ -1915,7 +1917,7 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(1000);
-  expect(element.children.map(child => child.tagName)).toEqual(['i']); expect(element.textContent).toBe('');
+  expect(element.children.map(child => child.tagName)).toEqual(['i', 'u']); expect(element.textContent).toBe('');
   expect(element.dataset.contextName).toBe('Mercury');
   expect(element.dataset.contextLabelVisible).toBe('true');
   expect(Number((element.parentNode as unknown as HTMLElement).style.opacity)).toBeGreaterThan(0);

@@ -177,6 +177,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // remain colour dots and never fetch an image.
     if (plainDot) { spriteLeaf.style.backgroundColor = body.color; spriteLeaf.style.borderRadius = '50%'; marker.dataset.contextPlainDot = ''; }
     marker.appendChild(spriteLeaf);
+    const caption = host.ownerDocument.createElement('u');
+    caption.className = 'context-caption';
+    caption.dataset.contextName = body.name;
+    marker.appendChild(caption);
     // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
     // body drawn from its record carries its own; without either the world's default applies. Capitals mark a star, black
     // hole or planet caption. No page carries a stylesheet rule per body.
@@ -186,7 +190,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const approximate = 'placement' in body && body.placement === 'approximate';
     if (approximate) {
       marker.dataset.contextPlacement = 'approximate';
-      marker.dataset.contextName = `${body.name} (approx)`;
+      marker.dataset.contextName = caption.dataset.contextName = `${body.name} (approx)`;
       marker.title = `${body.name} · Approximate orbital placement`;
     }
     marker.style.width = marker.style.height = `${BILLBOARD_SIZE}px`;
@@ -221,8 +225,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, orbit !== null);
-    const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, body, sprite, locator);
-    return { index, body, sprite, unpackaged, plainDot, marker, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, interaction,
+    const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, caption, body, sprite, locator);
+    return { index, body, sprite, unpackaged, plainDot, marker, caption, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, interaction,
       paint,
       get markerShown() { return paint.markerShown; }, get markerDiameter() { return paint.markerDiameter; },
       get billboardShown() { return paint.billboardShown; }, get center() { return paint.center; },
@@ -457,7 +461,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const entry = bodies[index];
         if (entry.labelSize.width !== 0) continue;
         if (!entry.mover.parentNode) { attachMarkers.add(entry); continue; }
-        const text = windowTarget.getComputedStyle(entry.marker, '::after');
+        const text = windowTarget.getComputedStyle(entry.caption, '::after');
         const width = Math.ceil(parseFloat(text.width)), height = Math.ceil(parseFloat(text.height));
         if (width > 0 && height > 0) { entry.labelSize = { width, height }; measured = true; }
       }

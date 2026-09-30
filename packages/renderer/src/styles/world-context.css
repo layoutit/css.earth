@@ -34,7 +34,7 @@
   opacity: 0.5;
 }
 .prepared-world-context [data-context-body]::before,
-.prepared-world-context [data-context-body]::after {
+.prepared-world-context [data-context-body] > .context-caption {
   position: absolute;
   inset: 0 auto auto 0;
   transform-origin: 0 0;
@@ -43,7 +43,22 @@
      counter-scale. The annotation scale is a device setting. */
   scale: var(--context-annotation-scale, 1);
   pointer-events: none;
+}
+.prepared-world-context [data-context-body]::before,
+.prepared-world-context [data-context-body] > .context-caption::after {
   visibility: hidden;
+}
+/* The caption is a retained element whose inline transform places the name beside its body (world-context-marker-paint.ts):
+   a transform write, never a custom property the name's style would re-resolve. */
+.prepared-world-context [data-context-body] > .context-caption {
+  width: 0;
+  height: 0;
+  transform: translate(12px, -9px);
+}
+.prepared-world-context [data-context-body] > .context-caption::after {
+  position: absolute;
+  inset: 0 auto auto 0;
+  pointer-events: none;
 }
 .prepared-world-context [data-context-body]::before,
 .prepared-context-marker {
@@ -69,7 +84,7 @@
 }
 /* Ordinary captions share typography; a body's colour and caption case come from its prepared world data, set on its
    marker (prepared-world-context.ts). Geometry owners only place and fade text. */
-.prepared-world-context [data-context-body]::after,
+.prepared-world-context [data-context-body] > .context-caption::after,
 .prepared-context-label {
   width: max-content;
   height: 18px;
@@ -77,9 +92,8 @@
   font: var(--shell-font-label, 400 14px/18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   text-decoration: none;
 }
-.prepared-world-context [data-context-body]::after {
+.prepared-world-context [data-context-body] > .context-caption::after {
   content: attr(data-context-name);
-  transform: translate(var(--context-label-x, 12px), var(--context-label-y, -9px));
   opacity: var(--context-label-alpha, .65);
 }
 .prepared-world-context .context-flight-caption {
@@ -100,14 +114,14 @@
   box-shadow: inset 0 0 0 1.5px currentColor;
   pointer-events: none;
 }
-.prepared-world-context [data-context-annotations-animate="true"]::after {
+.prepared-world-context [data-context-annotations-animate="true"] > .context-caption::after {
   transition: opacity 200ms linear;
 }
-.prepared-world-context [data-context-label-visible="true"]::after {
+.prepared-world-context [data-context-label-visible="true"] > .context-caption::after {
   visibility: inherit;
 }
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-indicator-visible="true"]::before,
-.prepared-world-context [data-context-indicator-hovered="true"][data-context-label-visible="true"]::after {
+.prepared-world-context [data-context-indicator-hovered="true"][data-context-label-visible="true"] > .context-caption::after {
   opacity: 1;
 }
 .prepared-context-label[tabindex="0"]:is(:hover, :focus-visible, [data-object-hovered="true"]) {
@@ -157,7 +171,7 @@
 
 
 .prepared-world-context [data-context-body][data-context-highlight]::before,
-.prepared-world-context [data-context-body][data-context-highlight]::after {
+.prepared-world-context [data-context-body][data-context-highlight] > .context-caption::after {
   opacity: 1;
 }
 
@@ -171,10 +185,10 @@
 }
 /* The Galactic-centre landmark sits over the bright Milky Way bulge. */
 .prepared-world-context [data-context-body="sgr-a-star"]::before,
-.prepared-world-context [data-context-body="sgr-a-star"]::after {
+.prepared-world-context [data-context-body="sgr-a-star"] > .context-caption::after {
   color: #000;
 }
-.prepared-world-context [data-context-body="sgr-a-star"]::after {
+.prepared-world-context [data-context-body="sgr-a-star"] > .context-caption::after {
   content: 'Sgr A*';
   text-transform: none;
 }

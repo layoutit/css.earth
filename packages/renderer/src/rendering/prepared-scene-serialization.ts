@@ -1,6 +1,7 @@
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
 import { textureTileStyles, tiledTextureKeys } from './prepared-texture-levels.js';
+import { compileLeafBoxes, initialLeafBox, leafBoxStyles, replacedByLeafBox } from './prepared-leaf-box-direct.js';
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; }
@@ -62,10 +63,20 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
     textures.set(key, address);
     return `url(${JSON.stringify(resolveTexture(key, address))})`;
   };
+  // Leaf boxes ship their final values at the prepared step, never the variables that would compute them
+  // (prepared-leaf-box-direct.ts); the mounted writer continues from the same values.
+  const leafBoxes = compileLeafBoxes(definition.tree, definition.id);
   for (const [index, node] of definition.tree.nodes.entries()) {
+    const leaf = leafBoxes.get(index);
     for (const id of node.properties) {
       const property = definition.tree.properties[id];
+      if (leaf && replacedByLeafBox(leaf, property.name)) continue;
       write(index, property.name, rewritePreparedStyleUrls(property.value, definition.assetOrigin));
+    }
+    if (leaf) {
+      const { step, outset } = initialLeafBox(definition.tree, leaf);
+      for (const [name, value] of leafBoxStyles(leaf, step, outset)) write(index, name, value);
+      for (const name of ['--leaf-box', '--polycss-atlas-width', '--polycss-atlas-height']) elements[index]!.style.delete(name);
     }
     if (node.parent === -1) roots.push(index); else elements[node.parent].children.push(index);
   }

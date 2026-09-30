@@ -23,7 +23,7 @@ interface MarkerFrame {
 }
 
 /** Retained DOM and cached writes for one world-context marker. Presentation decisions stay with the publisher. */
-export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLElement, spriteLeaf: HTMLElement,
+export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLElement, spriteLeaf: HTMLElement, caption: HTMLElement,
   body: { readonly color: string; readonly contextColor?: string; readonly dotColor?: string }, sprite: SpriteWithUrl | undefined, locator: SVGSVGElement) {
   let billboardShown: boolean | undefined, markerShown: boolean | undefined;
   let markerDiameter = 0, flatDot = false, spriteApplied = false, indicatorHovered = false;
@@ -101,9 +101,7 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       const [x, y] = projected.labelPosition;
       const offset = `translate(${Math.round((x - projected.x) * 1e6) / 1e6}px,${Math.round((y - projected.y) * 1e6) / 1e6}px)`;
       if (labelOffset === offset) return;
-      const [labelX, labelY] = offset.match(/-?[\d.]+/g)!.map(Number);
-      if (marker.style.getPropertyValue('--context-label-x') !== `${labelX}px`) marker.style.setProperty('--context-label-x', `${labelX}px`);
-      if (marker.style.getPropertyValue('--context-label-y') !== `${labelY}px`) marker.style.setProperty('--context-label-y', `${labelY}px`);
+      caption.style.transform = offset;
       labelOffset = offset;
     },
   };

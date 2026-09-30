@@ -107,7 +107,12 @@ function mountOrbitStrokes(host: HTMLElement, root: HTMLElement, dashed: boolean
   // be rasterized into the shared layer, so the compositor would give every fading
   // orbit its own layer. Stroke opacity is a paint property: the group's alpha times
   // the level's alpha, written per polyline whenever either changes.
-  const strokeOpacity = (element: SVGPolylineElement, level: number) => { element.style.strokeOpacity = formatLineNumber(groupOpacity * level / ORBIT_OPACITY_LEVELS); };
+  // Written only when the value changes: a fade step rewrote every run of every level (166-231 writes a packet on the
+  // iPad, 2026-09-29), and a run holding no points has nothing to fade.
+  const strokeOpacity = (element: SVGPolylineElement, level: number) => {
+    const next = formatLineNumber(groupOpacity * level / ORBIT_OPACITY_LEVELS);
+    if (element.style.strokeOpacity !== next) element.style.strokeOpacity = next;
+  };
   const polyline = (level: number, run: number) => {
     const pool = levels[level]!;
     let element = pool.runs[run];
@@ -125,7 +130,10 @@ function mountOrbitStrokes(host: HTMLElement, root: HTMLElement, dashed: boolean
       writtenOpacity = value;
       if (!Number.isFinite(next) || next === groupOpacity) return;
       groupOpacity = next;
-      for (let level = 1; level <= ORBIT_OPACITY_LEVELS; level++) for (const element of levels[level]!.runs) strokeOpacity(element, level);
+      for (let level = 1; level <= ORBIT_OPACITY_LEVELS; level++) {
+        const pool = levels[level]!;
+        for (let run = 0; run < pool.runs.length; run++) if (pool.written[run]) strokeOpacity(pool.runs[run]!, level);
+      }
     },
     get visibility() { return group.style.visibility; },
     set visibility(value: string) { group.style.visibility = value; },
@@ -171,6 +179,8 @@ function mountOrbitStrokes(host: HTMLElement, root: HTMLElement, dashed: boolean
           for (let i = 0; i < points.length; i += 2) text += (i ? ' ' : '') + points[i] + ',' + points[i + 1];
           const line = polyline(level, run);
           if (line.getAttribute('points') !== text) line.setAttribute('points', text);
+          // An empty run skipped the fades while it held no points.
+          strokeOpacity(line, level);
         }
         for (let run = runs.length; run < pool.written.length; run++) {
           if (!pool.written[run]) continue;

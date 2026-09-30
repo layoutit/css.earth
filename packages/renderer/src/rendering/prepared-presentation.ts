@@ -9,6 +9,7 @@ import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
+import { createLeafBoxWriter } from './prepared-leaf-box-direct.js';
 import { createSettlePacer } from './settle-pacer.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
@@ -321,10 +322,18 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   // Hysteresis needs the step each silhouette binding last published.
   const silhouetteSteps = new Map<PreparedViewBinding, number>();
   // A leaf box group's step is written on its own leaves; until then they inherit the binding target's initial step.
+  // Leaf boxes receive final values, never their prepared variables (prepared-leaf-box-direct.ts); other step
+  // properties keep their plain write.
+  const leafBoxes = createLeafBoxWriter(definition.tree, stage?.dataset?.objectId ?? sceneElement.className, nodes, writeStyle);
+  const readStep = (index: number, property: string) => leafBoxes.owns(index, property) ? leafBoxes.read(index, property) : styleValue(target(index), property);
+  const writeStep = (index: number, property: string, value: string) => {
+    if (leafBoxes.owns(index, property)) styleWrites += leafBoxes.set(index, property, value);
+    else { writeStyle(target(index), property, value); styleWrites++; }
+  };
   const leafBoxBlocks = new Map(definition.viewBindings.flatMap(binding => binding.kind === "silhouette-step-property" && binding.groups
     ? [[binding as PreparedViewBinding, createLeafBoxBlocks({ ...binding, groups: binding.groups },
-      name => styleValue(nodes[binding.groups![name]![0]!]!, binding.property) || styleValue(target(binding.target), binding.property),
-      (name, value) => { for (const leaf of binding.groups![name]!) { writeStyle(nodes[leaf]!, binding.property, value); styleWrites++; } })] as const] : []));
+      name => readStep(binding.groups![name]![0]!, binding.property) || readStep(binding.target, binding.property),
+      (name, value) => { for (const leaf of binding.groups![name]!) writeStep(leaf, binding.property, value); })] as const] : []));
   // A body-wide step property (the surface seam outset) sits on an ancestor of every leaf, so a change restyles the whole
   // mesh: like the leaf-box steps it switches only once the camera has stopped (motion-freezes-membership.md). The first
   // value is written at once.
@@ -332,19 +341,17 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
     ? [[binding as PreparedViewBinding, (() => {
       let wanted: string | null = null;
       const pacer = createSettlePacer((_budget, moving) => {
-        const element = target(binding.target);
-        if (moving || wanted === null || styleValue(element, binding.property) === wanted) return 0;
-        writeStyle(element, binding.property, wanted); styleWrites++; return 1;
+        if (moving || wanted === null || readStep(binding.target, binding.property) === wanted) return 0;
+        writeStep(binding.target, binding.property, wanted); return 1;
       }, { frame: globalThis.requestAnimationFrame?.bind(globalThis) ?? null });
       return (value: string, detached: boolean) => {
         if (detached) {
           wanted = value;
-          const element = target(binding.target);
-          if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+          if (readStep(binding.target, binding.property) !== value) writeStep(binding.target, binding.property, value);
           return;
         }
         pacer.published();
-        const first = wanted === null && !styleValue(target(binding.target), binding.property);
+        const first = wanted === null && !readStep(binding.target, binding.property);
         wanted = value;
         pacer.request(first);
       };
