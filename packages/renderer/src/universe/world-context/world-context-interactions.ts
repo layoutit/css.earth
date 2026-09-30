@@ -20,7 +20,7 @@ interface MarkerState {
 
 /** One body's retained pointer shapes and keyboard targets. Paint owns the visible state these shapes describe. */
 export function createWorldContextBodyInteraction(marker: HTMLElement, orbitRoot: HTMLElement, host: HTMLElement,
-  body: { readonly id: string; readonly name: string }, hasOrbit: boolean) {
+  body: { readonly id: string; readonly name: string }, hasOrbit: boolean, labelled?: Set<LabelScreenRect>) {
   const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
   const orbitNavigation = hasOrbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
   let markerPick: ScreenPickTarget | null = null, indicatorPick: ScreenPickTarget | null = null;
@@ -65,13 +65,14 @@ export function createWorldContextBodyInteraction(marker: HTMLElement, orbitRoot
     },
     updateLabel(projected: ProjectedBody, rank: number, labelShown: boolean, labelSize: { readonly width: number; readonly height: number },
       navigationSuppressed: boolean) {
+      if (labelRect) labelled?.delete(labelRect);
       labelRect = null; labelPick = null;
       if (!labelShown || !projected.labelPosition) return;
       const [left, top] = projected.labelPosition;
       const rect = labelRectTarget ??= { left: 0, top: 0, right: 0, bottom: 0 };
       rect.left = left; rect.top = top;
       rect.right = left + labelSize.width; rect.bottom = top + labelSize.height;
-      labelRect = rect;
+      labelRect = rect; labelled?.add(rect);
       const target = labelTarget ??= { element: marker, rank: rank + 1, shape: { kind: 'rect', left: 0, top: 0, right: 0, bottom: 0 } };
       const horizontalReach = Math.max(8, (44 - labelSize.width) / 2);
       const verticalReach = Math.max(0, (44 - labelSize.height) / 2);

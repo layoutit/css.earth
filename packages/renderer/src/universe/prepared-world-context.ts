@@ -45,7 +45,7 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
   // The last order, as member indices, and each member's depth. Deepest first, then member order: the one order the stable
   // sort by depth gives. Between two sorts it barely changes, so an insertion pass from the last order does the same work in
   // about n steps; a first sort, or one that would move too much, sorts from scratch.
-  let order: number[] = [], ranked: number[] = [], depths = new Float64Array(0), positions = new Float64Array(0);
+  let order: number[] = [], ranked: number[] = [], depths = new Float64Array(0), positions = new Float64Array(0), insertion = true;
   const before = (a: number, b: number) => depths[a]! > depths[b]! || (depths[a] === depths[b] && a < b);
   // Past about 12n moves a full sort of n (about n log n comparisons for the few thousand bodies) is the cheaper one.
   const insertionSort = () => {
@@ -76,9 +76,14 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
         for (let index = 0, offset = 0; index < count; index++, offset += 3) {
           depths[index] = -(vx * positions[offset]! + vy * positions[offset + 1]! + vz * positions[offset + 2]!);
         }
-        if (order.length !== count || !insertionSort()) {
+        // After a pass that gave up, sort from scratch directly; once the order holds still again, insertion resumes.
+        const kept = order.length === count && insertion && insertionSort();
+        if (!kept) {
           // Deeper first, then member order: for finite depths this is exactly `before`, with one subtraction per comparison.
+          const previous = order;
           order = members.map((_, index) => index).sort((a, b) => depths[b]! - depths[a]! || a - b);
+          let moved = 0; for (let index = 0; index < count; index++) if (previous[index] !== order[index]) moved++;
+          insertion = previous.length !== count || moved < count / 4;
         }
         // Only members whose place changed get a new rank.
         for (let index = 0; index < count; index++) if (ranked[index] !== order[index]) ranks.set(members[order[index]!]!, index * 4);
@@ -187,6 +192,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // own WebKit layer over the composited sky and globe.
   const orbitTemplate = host.ownerDocument.createElement('div');
   orbitTemplate.className = orbitRenderer === 'bars' ? 'context-orbit context-orbit-bars' : 'context-orbit';
+  // The bodies whose caption box is current, kept by their interactions (world-context-interactions.ts).
+  const labelled = new Set<LabelScreenRect>();
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
     // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
     // name and orbit and is never a navigation target.
@@ -227,7 +234,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
-    const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, orbit !== null);
+    const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, orbit !== null, labelled);
     const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, caption, body, sprite, locator);
     // The dot a body's circle holds, sized by its radius. A placed star's is capped when drawn: sized by radius, every
     // giant reached the largest dot and thousands buried the view.
@@ -359,12 +366,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         bodies: packWorldBodies(bodies) };
   };
   const layer = Object.freeze({ root,
-    /** Every body's caption box, in body order: the universe's label budget counts and avoids them each frame. */
-    labelRects() {
-      const rects: LabelScreenRect[] = [];
-      for (const entry of bodies) { const rect = entry.interaction.labelRect; if (rect) rects.push(rect); }
-      return rects;
-    },
+    /** Every body's caption box: the universe's label budget counts them and avoids them, in no particular order. */
+    labelRects: () => [...labelled],
     /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */
     captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []) {
       const view = readView(world, viewport, frameBlockers), revision = presentationRevision;
