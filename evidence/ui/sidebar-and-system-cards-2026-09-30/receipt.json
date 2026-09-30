@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-ui-browser-evidence@1",
   "testedSource": {
-    "branch": "ui/sidebar-tabs",
+    "branch": "ui/overview-body-navigation",
     "trackedChanges": true,
     "date": "2026-09-30"
   },
@@ -115,6 +115,28 @@
       ],
       "measurements": {
         "firstBody": "sun"
+      }
+    },
+    {
+      "file": "earth-dataset-rows.png",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "claims": [
+        "Dataset controls reuse the shared search-row layout",
+        "Three 48px rows show before scrolling",
+        "40px round thumbnails with shaded edges",
+        "Cloud coverage remains selectable"
+      ],
+      "measurements": {
+        "listHeightPx": 160,
+        "scrollHeightPx": 384,
+        "visibleRows": 3,
+        "rowHeightPx": 48,
+        "thumbnailWidthPx": 40,
+        "cloudSelected": true,
+        "cloudDetailsVisible": true
       }
     }
   ],

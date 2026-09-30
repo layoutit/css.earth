@@ -490,6 +490,16 @@
   height: 40px;
   object-fit: contain;
 }
+.object-dataset-round-preview { position: relative; border-radius: 50%; }
+.object-dataset-round-preview > .object-search-preview { border-radius: inherit; object-fit: cover; }
+.object-dataset-round-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 6px 2px rgb(0 0 0 / 75%);
+  pointer-events: none;
+}
 #object-category-results:has(> .object-list > :not([hidden])) > .object-feature-results {
   margin-top: 8px;
   border-top: 1px solid var(--explorer-divider);
