@@ -252,7 +252,7 @@ its validators accept); the renderer never imports the bake.
     from `site/build/prepare/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
     asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
-    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `packages/bake/authoring/earth/`
+    `objects/content`, as lower topics. Earth's MUR acquisition commands stay in `packages/bake/authoring/earth/`
     for its per-body authoring and read the MUR colour table through `globe/mur-image.ts`; the mantle-tomography extraction script
     (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,

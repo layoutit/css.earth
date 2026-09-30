@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync, spawn } from 'node:child_process';
 import { createServer } from 'node:http';
-import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
@@ -84,8 +84,8 @@ async function runScan(): Promise<Scan> {
     for (const value of [...requireArray(manifest.inputs), ...requireArray(manifest.documents), ...requireArray(manifest.generatedIntermediates)]) {
       const entry = requireRecord(value);
       const entryPath = requireString(entry.path);
-      // The archive-backed Earth restore runs before acquisition; exercised below.
-      if (id === 'earth' && entryPath === 'science/mur-gibs.png') continue;
+      // Earth's dated MUR archives and mosaics come back through its own restore, before acquisition; exercised below.
+      if (id === 'earth' && /^science\/mur\/\d{4}-\d{2}-\d{2}\/(tiles\.tar\.gz|mosaic\.png)$/.test(entryPath)) continue;
       const path = `${source}/${entryPath}`;
       if (!tracked.has(path) && !restored.has(entryPath)) missingSources.push(path);
     }
@@ -242,35 +242,28 @@ test('source format check matches each image and archive extension and refuses p
   for (const [path, bytes, problem] of cases) assert.equal(sourceFormatProblem(path, bytes), problem, path);
 });
 
-test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
+test('Earth rebuilds its dated MUR mosaics before verification, pointing the restore at the source mirror', async t => {
   const root = await fixture(t, 'earth'), source = resolve(root, 'src/objects/earth/source');
-  const mosaic = Buffer.from('pinned mosaic'), archive = Buffer.from('pinned archive');
-  const restore = resolve(root, 'packages/bake/authoring/earth/mur-imagery.mts');
-  for (const dir of ['src/objects/earth/source/science', 'packages/bake/authoring/earth']) {
-    await mkdir(resolve(root, dir), { recursive: true });
-  }
+  const restore = resolve(root, 'packages/bake/authoring/earth/mur-imagery.mts'), date = 'science/mur/2026-09-28';
+  for (const dir of [`src/objects/earth/source/${date}`, 'packages/bake/authoring/earth']) await mkdir(resolve(root, dir), { recursive: true });
+  // The restore owns which dates need a mosaic; the fixture writes the one date it is given and records how it was called.
   await writeFile(restore, `
-    import assert from 'node:assert/strict';
     import { writeFile } from 'node:fs/promises';
     import { resolve } from 'node:path';
-    assert.equal(process.argv[2], 'restore');
-    await writeFile(resolve(process.argv[3], 'mur-gibs.png'), 'pinned mosaic');
+    await writeFile(resolve(process.argv[3], 'mur/2026-09-28/mosaic.png'), 'rebuilt mosaic');
+    await writeFile(resolve(process.cwd(), 'restore-arguments.json'), JSON.stringify(process.argv.slice(2)));
   `);
-  await writeFile(resolve(source, 'science/mur-gibs-tiles.tar.gz'), archive);
+  const receipt = Buffer.from('{}');
+  await writeFile(resolve(source, `${date}/receipt.json`), receipt);
   await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@3', inputs: [{
-    ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['enso'],
-    credit: 'Fixture', license: 'CC0', acquisition: 'Pinned archive', redistribution: 'Allowed',
-  }], generatedIntermediates: [{ ...pin('science/mur-gibs.png', mosaic), generator: 'MUR archive restore' }], documents: [] });
-  const args = [RESTORE, '--object=earth'];
-  await run(root, args);
-  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), mosaic);
-
-  await writeFile(restore, "throw new Error('Existing mosaic must not be restored.');");
-  await run(root, args);
-  const corrupted = Buffer.from('wrong! mosaic');
-  await writeFile(resolve(source, 'science/mur-gibs.png'), corrupted);
-  await run(root, args);
-  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), corrupted, 'a present file is never replaced');
+    ...pin(`${date}/receipt.json`, receipt), id: 'receipt', origin: 'Fixture receipt', sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['enso-2026-09-28'],
+    credit: 'Fixture', license: 'CC0', acquisition: 'Pinned receipt', redistribution: 'Allowed',
+  }], generatedIntermediates: [{ ...pin(`${date}/mosaic.png`, Buffer.from('rebuilt mosaic')), generator: 'MUR archive restore' }], documents: [] });
+  await writeRestore(root, 'http://mirror.test');
+  await run(root, [RESTORE, '--object=earth']);
+  assert.equal(await readFile(resolve(source, `${date}/mosaic.png`), 'utf8'), 'rebuilt mosaic');
+  assert.deepEqual(JSON.parse(await readFile(resolve(root, 'restore-arguments.json'), 'utf8')),
+    ['restore', resolve(await realpath(source), 'science'), 'http://mirror.test']);
 });
 
 test('manifest refresh keeps runtime and shell images but excludes preparation maps', async t => {

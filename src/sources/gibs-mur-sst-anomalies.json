@@ -19,11 +19,11 @@
   "evidence": [
     {
       "path": "src/objects/earth/source/manifest.json",
-      "locator": "/inputs/27"
+      "locator": "/inputs/28"
     },
     {
-      "path": "src/objects/earth/source/science/mur-gibs-receipt.json",
-      "locator": "/layer"
+      "path": "src/objects/earth/source/science/mur-gibs-layer.xml",
+      "locator": "/Layer"
     }
   ],
   "relations": [],
