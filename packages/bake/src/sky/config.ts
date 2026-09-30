@@ -13,12 +13,7 @@ export interface SkyRecipe {
     shadowFloor?: SkyShadowFloor; webpQuality: number };
   provenance: SkyReference;
   parallax?: SkyParallax;
-  /** Bake a prepared point field into a second face set for the observer near its origin. */
-  stars?: SkyStars;
 }
-/** The point field is a sibling object; its pinned descriptor pins the bank it carries.
- * Sprite radii are screen pixels, so one authored screen scale fixes their angular size. */
-export interface SkyStars { object: string; cssPixelsPerDegree: number; }
 export function reference(value: unknown): SkyReference {
   const r = record(value, 'sky source reference'), path = text(r.path, 'sky path');
   if (path.startsWith('/') || /[\\\u0000]/u.test(path) || path.split('/').includes('..')) throw new TypeError('Sky source needs a contained path.');
@@ -53,12 +48,6 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
     parallax = { originM: input.originM.map(n => finite(n, 'sky parallax origin')) as [number, number, number],
       radiusM: positive(input.radiusM, 'sky parallax radius') };
   }
-  let stars: SkyStars | undefined;
-  if (r.stars !== undefined) {
-    const input = record(r.stars, 'sky stars'), object = text(input.object, 'sky stars object');
-    if (!/^[a-z][a-z0-9-]*$/u.test(object) || Object.keys(input).length !== 2) throw new TypeError('Sky stars need a sibling object id and a screen scale.');
-    stars = { object, cssPixelsPerDegree: positive(input.cssPixelsPerDegree, 'sky stars screen scale') };
-  }
   if (b.shadowFloor !== undefined) {
     const floor = record(b.shadowFloor, 'sky shadow floor');
     const blackPoint = finite(floor.blackPoint, 'sky shadow black point');
@@ -70,6 +59,5 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
   return { schema: r.schema, source: { format: s.format, width, height, chunks, acquisition: reference(s.acquisition) },
     projection: { frame: p.frame, mapping: p.mapping, centerRaDegrees: 0 },
     bake: { faceSize, exposure: positive(b.exposure, 'sky exposure'), transfer: b.transfer, displayGain,
-      ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance), ...(parallax ? { parallax } : {}),
-    ...(stars ? { stars } : {}) };
+      ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance), ...(parallax ? { parallax } : {}) };
 }

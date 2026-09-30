@@ -36,5 +36,5 @@ sigma_object = find(quality_label, 'SIGMA_MAP_IMAGE')
 sigma = np.fromfile(str(quality), dtype='u1')[(int(find(quality_label, '^SIGMA_MAP_IMAGE')) - 1) * record:][: int(sigma_object['LINE_SAMPLES']) * int(sigma_object['LINES']) * 4].view('<f4')
 finite_sigma = int(np.isfinite(sigma).sum())
 identity = {key: label_text(find(geo_label, key)) for key in ['INSTRUMENT_ID', 'START_TIME', 'FILTER_NAME', 'TARGET_NAME', 'PRODUCT_ID']}
-write(Path(__file__).with_suffix('.json'), 'pvl', 'tests/oracles/pds3/osiris-geo.py', {'pvl': pvl.__version__}, [geo, quality],
+write('pds3/osiris-geo.json', 'pvl', 'tests/oracles/pds3/osiris-geo.py', {'pvl': pvl.__version__}, [geo, quality],
       {'identity': identity, 'geometry': geo_planes, 'quality': quality_planes, 'qualityHistogram': histogram, 'finiteSigmaPixels': finite_sigma})

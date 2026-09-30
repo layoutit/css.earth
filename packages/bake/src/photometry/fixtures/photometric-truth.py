@@ -47,6 +47,6 @@ def swept(text, keyword):
         cases += [{keyword: value, **case} for case in tests(block)]
     return cases
 
-write(Path(__file__).with_suffix('.json'), 'isis3', 'tests/oracles/isis/photometric-truth.py', {'isis': '10.0.0_LTS'}, [],
+write('isis/photometric-truth.json', 'isis3', 'tests/oracles/isis/photometric-truth.py', {'isis': '10.0.0_LTS'}, [],
       {'commit': COMMIT, 'printedSignificantDigits': 6, 'hapke': unique(hapke), 'lunarLambert': unique(swept(texts['LunarLambert'], 'PhotoL')),
        'minnaert': unique(swept(texts['Minnaert'], 'PhotoK')), 'lommelSeeliger': unique(tests(texts['LommelSeeliger']))}, references)

@@ -5,7 +5,7 @@
     "target": "europa",
     "acquisition": {
       "kind": "repository",
-      "identity": "../../../../packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json"
+      "identity": "../../../../archives/hst/programs/europa-salt-map.scan.json"
     },
     "producingRecord": "packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.reproduction.json",
     "sourceClassifications": [
@@ -29,13 +29,13 @@
   "members": [
     {
       "id": "definition",
-      "path": "../../../../packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json",
+      "path": "../../../../archives/hst/programs/europa-salt-map.scan.json",
       "role": "provenance",
       "mediaType": "application/json"
     },
     {
       "id": "receipt",
-      "path": "../../../../packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.reproduction.json",
+      "path": "../../../../archives/hst/programs/europa-salt-map.scan.reproduction.json",
       "role": "provenance",
       "mediaType": "application/json"
     }

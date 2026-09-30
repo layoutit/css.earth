@@ -38,22 +38,15 @@ test('prepared volume opacity preserves authored grading and validates bounded l
   const source = parseWorldContextSource(raw), profile = source.volume.opacityProfile!;
   assert.deepEqual(profile, raw.volume.opacityProfile);
   assert.equal(profile.nearOpacity, 0); assert.equal(profile.fullOpacity, 1);
-  assert(profile.fadeStartDistanceM > source.system.hiddenDistanceM, 'NASA stays opaque throughout the prepared Solar System');
-  const brightness = source.volume.brightnessProfile!;
-  assert.deepEqual(brightness, raw.volume.brightnessProfile);
-  assert(profile.fadeStartDistanceM < brightness.fadeStartDistanceM && profile.fullDistanceM > brightness.fadeStartDistanceM,
-    'NASA remains present while the faint incoming volume starts brightening');
-  assert(profile.fullDistanceM < brightness.fullDistanceM, 'the panorama retires before the exterior galaxy reaches full brightness');
+  assert(profile.fadeStartDistanceM > source.system.hiddenDistanceM, 'the galaxy\'s nebulae stay out of the prepared Solar System');
   const prepared = prepareWorldContext({ ...source, bodies: [] }, {}, {});
   assert.deepEqual(prepared.volume.opacityProfile, profile);
-  assert.deepEqual(prepared.volume.brightnessProfile, brightness);
-  const { opacityProfile: _profile, brightnessProfile: _brightness, ...legacyVolume } = raw.volume;
+  const { opacityProfile: _profile, ...legacyVolume } = raw.volume;
   assert.equal(parseWorldContextSource({ ...raw, volume: legacyVolume }).volume.opacityProfile, undefined);
-  assert.equal(parseWorldContextSource({ ...raw, volume: legacyVolume }).volume.brightnessProfile, undefined);
   for (const invalid of [{ ...profile, model: 'linear' }, { ...profile, nearOpacity: -.01 }, { ...profile, fullOpacity: 1.01 },
     { ...profile, fullOpacity: NaN }, { ...profile, nearOpacity: undefined }, { ...profile, fadeStartDistanceM: 0 },
     { ...profile, fullDistanceM: profile.fadeStartDistanceM }, { ...profile, runtimeExposure: true }]) {
-    for (const key of ['opacityProfile', 'brightnessProfile']) assert.throws(() => parseWorldContextSource({ ...raw, volume: { ...raw.volume, [key]: invalid } }), /opacity/i);
+    assert.throws(() => parseWorldContextSource({ ...raw, volume: { ...raw.volume, opacityProfile: invalid } }), /opacity/i);
   }
 });
 

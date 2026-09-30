@@ -22,13 +22,11 @@ function compileFaces(faces: BakedSky['faces']): PreparedCssSky['faces'] {
 }
 export function compileCssSky(baked: BakedSky, frame: DensityVolumeFrame) {
   const resource = (face: BakedSky['faces'][number]) => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: face.bytes });
-  const resources = [...baked.faces.map(resource), ...(baked.nearFaces ?? []).map(resource)];
+  const resources = baked.faces.map(resource);
   const sky: PreparedCssSky = { schema: 'cssearth-css-sky@1', referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, radiusUnits: RADIUS_UNITS,
     ...(baked.parallax ? { parallax: { originM: [...baked.parallax.originM] as [number, number, number],
       metersPerCssPixel: baked.parallax.radiusM / (RADIUS_UNITS * CSS_PIXELS_PER_UNIT) } } : {}),
     faces: compileFaces(baked.faces),
-    // The near cube shares every face's geometry; only its image differs.
-    ...(baked.nearFaces && baked.stars ? { nearFaces: compileFaces(baked.nearFaces), stars: baked.stars } : {}),
     provenance: baked.provenance, approximation: baked.approximation };
   validatePreparedCssSky(sky, resources); return { sky, resources };
 }

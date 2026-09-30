@@ -68,7 +68,7 @@ for url in REFERENCE_URLS:
 write(
     'eclipse-map/theresa-eigenbasis.json',
     'NumPy SVD following ThERESA 74a8fec signed-harmonic convention',
-    'packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.py',
+    'tests/oracles/eclipse-map/theresa-eigenbasis.py',
     {'method': 'numpy.linalg.svd'},
     [],
     {name: oracle_case(curves) for name, curves in HARMONIC_CURVES.items()},
