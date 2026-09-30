@@ -25,6 +25,13 @@ export interface WheelZoomPinch {
   /** The zoom factor of a full pinch far from any closest view. */
   readonly farZoomPerFullPinch: number;
 }
+/** A surface panorama's look-around: its horizontal field of view in degrees, how far a wheel delta zooms it, and how far
+ * a gesture must zoom out past the widest view, without pausing longer than the gap, to leave for the body. */
+export interface SurfacePanoramaPolicy {
+  readonly fieldOfView: { readonly initialDeg: number; readonly minimumDeg: number; readonly maximumDeg: number };
+  readonly wheelZoomPerDelta: number;
+  readonly zoomOutExit: { readonly overshoot: number; readonly gapMs: number };
+}
 export interface ResponsiveOrbitPolicyOptions {
   controls: { update(options: ControlsUpdate): void };
   inputSurface: HTMLElement;
@@ -45,6 +52,8 @@ export interface RuntimePolicy {
    * carries the platform's own momentum, so gliding it again compounds two
    * decays; leaving it out lets that gesture stop with its last event. */
   readonly WHEEL_ZOOM_INERTIA_INPUT_KINDS: readonly WheelInputKind[];
+  /** Supplied by an application that opens surface panoramas; a viewer without them (the nebula lab) leaves it out. */
+  readonly SURFACE_PANORAMA?: SurfacePanoramaPolicy;
   sceneCursor(state: { surface: boolean; pressed: boolean; enabled: boolean }): string;
   isOrbitDragStart(event: Pick<PointerEvent, 'isPrimary' | 'button'>): boolean;
   wheelZoomInputKind(event: Pick<WheelEvent, 'deltaMode' | 'ctrlKey' | 'deltaX' | 'deltaY' | 'timeStamp'>,

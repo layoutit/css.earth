@@ -1,6 +1,6 @@
 /** Attach a body's surface panoramas to its prepared runtime definition: six sky-cube faces and a thumbnail each, written to
  * the body's public scene directory, and a small `panoramas` plan the runtime opens them from. */
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
@@ -11,9 +11,11 @@ import { locatePanorama, parsePlacesTable, type PanoramaSite } from './site.ts';
 import { panoramaFacePixels, SKY_BASES, type RgbImage } from './cube.ts';
 
 export const SURFACE_PANORAMA_PLAN_SCHEMA = 'cssearth-surface-panorama-plan@1';
+/** The card's list of a body's panoramas, `prepared/panoramas.json`: what the page renders before the runtime loads. */
+export const SURFACE_PANORAMA_LIST_SCHEMA = 'cssearth-surface-panorama-list@1';
 /** The panorama's own frame: x north, y west, z up at the camera. Nothing else is drawn in it. */
 export const SURFACE_PANORAMA_FRAME = 'surface-panorama-local-north-west-up';
-const THUMBNAIL_HEIGHT = 96;
+const THUMBNAIL_PIXELS = 80;
 
 interface Verified { readonly value: unknown }
 
@@ -23,8 +25,8 @@ export async function locateSurfacePanoramas(document: SurfacePanoramas, sourceD
   return new Map(document.panoramas.map(panorama => [panorama.id, locatePanorama(table, panorama.sols, `${panorama.id}`)]));
 }
 
-export async function attachSurfacePanoramas({ descriptor, sources, sourceDirectory, publicDirectory, definition }: {
-  descriptor: AuthoredObjectDescriptor; sources: ReadonlyMap<string, Verified>; sourceDirectory: string; publicDirectory: string; definition: Record<string, unknown>;
+export async function attachSurfacePanoramas({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition }: {
+  descriptor: AuthoredObjectDescriptor; sources: ReadonlyMap<string, Verified>; sourceDirectory: string; publicDirectory: string; outputDirectory: string; definition: Record<string, unknown>;
 }): Promise<{ definition: Record<string, unknown>; count: number }> {
   const recipe = descriptor.recipe.panoramas;
   if (!recipe) return { definition, count: 0 };
@@ -50,10 +52,10 @@ export async function attachSurfacePanoramas({ descriptor, sources, sourceDirect
         vertices: corners.map(([u, v]) => basis.forwardIcrf.map((f, i) => f + u * basis.rightIcrf[i]! + v * basis.upIcrf[i]!) as [number, number, number]) });
     }
     const thumbnail = `${id}-panorama-${panorama.id}-thumbnail.webp`;
-    const thumbnailWidth = Math.round(THUMBNAIL_HEIGHT * 2 * Math.min(4, width / height));
-    // The strip around the horizon, north in the middle as published: a picture for the list, not data.
-    await sharp(decoded.data, { raw: { width, height, channels: 3 } }).resize(thumbnailWidth * 2, THUMBNAIL_HEIGHT * 2, { fit: 'cover', position: 'top' })
-      .webp(DECORATIVE_WEBP).toFile(resolve(publicDirectory, thumbnail));
+    // The list's round 40 px preview at 2x: a square of the image as tall as it is, centred on north as published.
+    const side = Math.min(height, width);
+    await sharp(decoded.data, { raw: { width, height, channels: 3 } }).extract({ left: Math.round((width - side) / 2), top: 0, width: side, height: side })
+      .resize(THUMBNAIL_PIXELS, THUMBNAIL_PIXELS).webp(DECORATIVE_WEBP).toFile(resolve(publicDirectory, thumbnail));
     const site = sites.get(panorama.id)!;
     const { sky, resources } = compileCssSky({ faces, provenance: { image: panorama.image, pageUrl: panorama.pageUrl }, approximation: {
       projection: `cylinder, one scale in both axes; azimuth ${document.projection.azimuthAtCentreDeg}° at the centre and ${document.projection.topElevationDeg}° elevation at the top, as the publisher states`,
@@ -64,5 +66,8 @@ export async function attachSurfacePanoramas({ descriptor, sources, sourceDirect
       spanDeg: Number(spanDeg.toFixed(2)), thumbnail: url(thumbnail), faces: faces.map(face => url(face.texturePath)), sky, resources });
   }
   const plan = { schema: SURFACE_PANORAMA_PLAN_SCHEMA, source: { label: document.source, url: document.sourcePage }, frame: SURFACE_PANORAMA_FRAME, panoramas: entries };
+  const list = { schema: SURFACE_PANORAMA_LIST_SCHEMA, objectId: id, source: plan.source,
+    panoramas: entries.map(({ id: panoramaId, title, sols, camera, credit, pageUrl, site, thumbnail }) => ({ id: panoramaId, title, sols, camera, credit, pageUrl, site, thumbnail })) };
+  await writeFile(resolve(outputDirectory, 'panoramas.json'), `${JSON.stringify(list, null, 1)}\n`);
   return { definition: { ...definition, panoramas: plan }, count: entries.length };
 }

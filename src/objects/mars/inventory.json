@@ -166,8 +166,8 @@
     {
       "location": "public",
       "filename": "mars-features.json",
-      "bytes": 6046258,
-      "sha256": "ef2cd04dd50b1cfbd15f16d2a7b038ade8bbd03f940b5c4e8888176c8da8fd78"
+      "bytes": 6051330,
+      "sha256": "9b91108de436f8288dd633fd275f237d7d46b98d91f340743cb0831de3345167"
     },
     {
       "location": "public",
@@ -226,8 +226,8 @@
     {
       "location": "public",
       "filename": "mars-panorama-belva-thumbnail.webp",
-      "bytes": 23700,
-      "sha256": "662e92e19d29a413f99ae38b65412ff072404b62ede6aa69cf339d51b21b6aaf"
+      "bytes": 768,
+      "sha256": "b27bcb482ddf6ad5159faa1c2f31fc78e218a14917b085cb8e7ae60c0e88897c"
     },
     {
       "location": "public",
@@ -268,8 +268,8 @@
     {
       "location": "public",
       "filename": "mars-panorama-bright-angel-thumbnail.webp",
-      "bytes": 17240,
-      "sha256": "2688b885e2a7a406e7299723ea1bb56c6060bf16684c787aa1fcae237ba2a189"
+      "bytes": 672,
+      "sha256": "cf3420aabd23fbd46eb124b5d0bc0cfe3fdada990ae653198090303f559d4dae"
     },
     {
       "location": "public",
@@ -310,8 +310,8 @@
     {
       "location": "public",
       "filename": "mars-panorama-butler-landing-thumbnail.webp",
-      "bytes": 20114,
-      "sha256": "d975dafb017b2d67aedc5f72cb1ad804eac7cff5963a7088f0a7aca9ec9f17dc"
+      "bytes": 1390,
+      "sha256": "88c4a7afff581d970812db2866b67f502599d573e1b2bce538688839fdcefac9"
     },
     {
       "location": "public",
@@ -352,8 +352,8 @@
     {
       "location": "public",
       "filename": "mars-panorama-three-forks-depot-thumbnail.webp",
-      "bytes": 12010,
-      "sha256": "8e75283a21bfe58d5749c4df0b735cf478beba342bc1d3dc6e817a3c03d5c25e"
+      "bytes": 458,
+      "sha256": "95e8ca6c85dc0798ea13149259f5f5bd7f8015838cbc67fbcfb7dae573513ad0"
     },
     {
       "location": "public",
@@ -394,8 +394,8 @@
     {
       "location": "public",
       "filename": "mars-panorama-van-zyl-overlook-thumbnail.webp",
-      "bytes": 15654,
-      "sha256": "f6d28bcff96940d17b80122fb3405858c385c42b38933f174921444bd8c6a8e8"
+      "bytes": 600,
+      "sha256": "3fe9e8bf00f4f407490c5457cdfe9f32d2cf7cf91380705c557f05fae1dae68f"
     },
     {
       "location": "public",
@@ -749,7 +749,7 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 4787,
-      "sha256": "956fc6c69b7eea1ac0021ae2f856f75dcc561c7e3b025c28f90b89a8bedc9cc6"
+      "sha256": "c92c94122e6b8c742fea562b51224258b4a712fb9e37fa5fd54eeaad4bd38025"
     },
     {
       "location": "prepared",
@@ -766,8 +766,8 @@
     {
       "location": "prepared",
       "filename": "features.json",
-      "bytes": 751,
-      "sha256": "8efc1a826184c6c7def992774dd9748caed8dcc7e32ad8fc6ab040a64db76dd4"
+      "bytes": 758,
+      "sha256": "624ddbb690b0e77c504a98eb06e560a27cc260ae1ddfd03d80602f900e04c29c"
     },
     {
       "location": "prepared",
@@ -933,9 +933,15 @@
     },
     {
       "location": "prepared",
+      "filename": "panoramas.json",
+      "bytes": 2589,
+      "sha256": "57877e699384bd1cf35ac885b61151f0e690b944021979de0cfee485c43722a9"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
       "bytes": 441599,
-      "sha256": "630aace0eebcd22334a8b8384ff764f0dcb41b4ecac952afbfcafdd8623aa6fc"
+      "sha256": "9e9b9b73c7434540b29dac4aa705e877886a0b6c3197a65a64485431d7abfef3"
     },
     {
       "location": "prepared",

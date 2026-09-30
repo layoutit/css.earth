@@ -2076,3 +2076,18 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     column-gap: 24px;
   }
 }
+
+/* A body's surface panorama covers the viewport while open (packages/renderer/src/panorama/panorama-view.ts): above the
+   world stage and the shared input surface, below the scene overlays and the sidebar. The sky cube draws on black; what
+   the published image does not cover stays black. */
+.surface-panorama-view {
+  position: absolute;
+  z-index: 15;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+.surface-panorama-view:active { cursor: grabbing; }

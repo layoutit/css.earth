@@ -631,7 +631,7 @@
 @media (max-width: 820px), (orientation: portrait) {
   .object-information-panel.object-card > .object-selected-panel:has(+ .object-card-tabs)::after { content: none; }
   .object-information-panel > .object-native-tabs { display: none; }
-  .object-information-panel > :is(.object-factsheet-content, .object-dataset-content, .object-charts-content):not([hidden]) { display: block; }
+  .object-information-panel > :is(.object-factsheet-content, .object-dataset-content, .object-charts-content, .object-imagery-content):not([hidden]) { display: block; }
   .object-information-panel > .object-dataset-content > summary { display: none; }
   .object-mobile-information-heading {
     display: flex;

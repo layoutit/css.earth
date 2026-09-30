@@ -19,6 +19,7 @@ import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "./scene-native-waits.js";
 import { createPreparedResidency } from "../rendering/prepared-residency.js";
 import { resolvePreparedAssetUrl } from "../rendering/prepared-asset-origin.js";
+import { mountSurfacePanoramaView, type SurfacePanoramaView } from "../panorama/panorama-view.js";
 import { createObjectSelectionRuntime } from "../rendering/object-selection-runtime.js";
 import { cameraMotionSignalFor } from "../navigation/camera-motion-signal.js";
 import { createObjectControlBinding } from "../rendering/object-control-binding.js";
@@ -223,7 +224,36 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       clear: () => surfaceFeatures?.clear(),
       setNavigationInFlight: (active: boolean, landed = true) => { featuresInFlight = active; surfaceFeatures?.setNavigationInFlight?.(active, landed); },
     }) : undefined;
-    const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations } : {}), ...(features ? { features } : {}),
+    // A panorama is a view of this body: while one is open it covers the stage and the body's motion pauses.
+    // Closing restores the body's motion as it was before opening; it never starts a rotation the reader had off.
+    let panoramaView: SurfacePanoramaView | null = null, allowedBeforePanorama = false;
+    const closePanorama = () => {
+      if (!panoramaView) return;
+      panoramaView.destroy(); panoramaView = null;
+      delete stage.dataset.surfacePanorama;
+      if (!lifetime.disposed) guarded(() => setAllowed(allowedBeforePanorama));
+    };
+    lifetime.onDispose(closePanorama);
+    const panoramaPlan = definition.panoramas;
+    const panoramas = panoramaPlan ? Object.freeze({
+      plan: panoramaPlan,
+      current: () => panoramaView ? stage.dataset.surfacePanorama ?? null : null,
+      open(id: string, host: HTMLElement = stage, onZoomOut?: () => void) {
+        if (!live()) return null;
+        const panorama = panoramaPlan.panoramas.find(entry => entry.id === id);
+        if (!panorama) throw new RangeError(`Panorama “${id}” is unavailable on this object.`);
+        if (!runtimePolicy?.SURFACE_PANORAMA) throw new TypeError('A surface panorama needs the application’s SURFACE_PANORAMA policy.');
+        closePanorama();
+        allowedBeforePanorama = allowed;
+        guarded(() => setAllowed(false));
+        panoramaView = mountSurfacePanoramaView({ host, panorama, policy: runtimePolicy.SURFACE_PANORAMA, ...(onZoomOut ? { onZoomOut } : {}), onError: error => console.error(error),
+          resolveUrl: address => resolvePreparedAssetUrl(address, definition.assetOrigin) });
+        stage.dataset.surfacePanorama = id;
+        return panoramaView;
+      },
+      close: closePanorama,
+    }) : undefined;
+    const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations } : {}), ...(features ? { features } : {}), ...(panoramas ? { panoramas } : {}),
       // Only the native owner knows when these capabilities can use its camera and selection.
       get navigation() { return live() ? navigation : undefined; },
       get datasets() { return live() ? datasets : undefined; },

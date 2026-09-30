@@ -8,7 +8,8 @@ import { extname, relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.ts';
 import { parseFeatureNotes, type FeatureNotes } from './notes-schema.ts';
 import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig } from './natural-earth.ts';
-import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.ts';
+import { loadSiteRows, panoramaSiteRows, parseSurfaceSites, type SiteRow } from './sites.ts';
+import { locateSurfacePanoramas, parseSurfacePanoramas } from '../panoramas/index.ts';
 import { prepareLandmarks } from './landmarks.ts';
 import { parseShpPolylines } from './shp.ts';
 import { dot3 as dot } from '@cssearth/core';
@@ -24,7 +25,7 @@ export const SURFACE_FEATURES_SOURCE_SCHEMA = 'cssearth-surface-features-source@
  * marker and rim circle, elongated ones a linear label, extended terrains a region label. Recipes may override. */
 export const DEFAULT_TYPE_KINDS: Readonly<Record<string, SurfaceFeatureKind>> = Object.freeze({
   AA: 'point', AS: 'point', CB: 'point', ER: 'point', FA: 'point', FR: 'point', LF: 'point', MA: 'point', PE: 'point', PU: 'point', SF: 'point', SA: 'point', ST: 'point', TH: 'point',
-  LS: 'point', IM: 'point', SS: 'point', RT: 'linear',
+  LS: 'point', IM: 'point', SS: 'point', RT: 'linear', PN: 'point',
   MN: 'region', CH: 'region', LU: 'region', AR: 'linear', CA: 'linear', CM: 'linear', DO: 'linear', FE: 'linear', FM: 'linear', FO: 'linear', FT: 'linear', LI: 'linear', RI: 'linear', RU: 'linear', SC: 'linear', SE: 'linear', SU: 'linear', VA: 'linear', VI: 'linear',
   CO: 'region', CL: 'region', LO: 'region', CR: 'region', FL: 'region', IN: 'region', LA: 'region', LB: 'region', LG: 'region', LC: 'region', LN: 'region', MR: 'region', ME: 'region', MO: 'region', OC: 'region', PA: 'region', PL: 'region', PM: 'region', PR: 'region', RE: 'region', SI: 'region', TA: 'region', TE: 'region', UN: 'region', VS: 'region',
 });
@@ -60,6 +61,8 @@ export interface SurfaceFeaturesConfig {
   readonly naturalEarth?: NaturalEarthConfig;
   /** Optional landing, impact and sample sites and traverses (inside `directory`): the document and its pinned path files. */
   readonly sites?: { readonly document: string; readonly inputs: readonly string[] };
+  /** Optional surface panoramas document (under `source/`, not `directory`): each panorama's standpoint is a point feature. */
+  readonly panoramas?: { readonly document: string };
   /** Mission-defined regions or source-backed model anatomy, independent of IAU naming. */
   readonly landmarks?: { readonly document: string; readonly inputs: readonly string[]; readonly priority?: number };
 }
@@ -129,7 +132,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     datasetIds: Object.freeze([...datasetIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
     ...(selectionBankCount === undefined ? {} : { selectionBankCount }),
-    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.landmarks === undefined ? {} : { landmarks: parseLandmarksRecipe(input.landmarks) }),
+    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.panoramas === undefined ? {} : { panoramas: { document: relativePath(record(input.panoramas, 'features recipe panoramas').document, 'panoramas.document') } }), ...(input.landmarks === undefined ? {} : { landmarks: parseLandmarksRecipe(input.landmarks) }),
   });
 }
 
@@ -360,9 +363,12 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   }) } : archive === null || config.members === null ? { fields: [], rows: [] as Readonly<Record<string, string | undefined>>[] } : parseDbf(unzipMember(archive, config.members.attributes));
   const creditById = new Map<string, string>(), siteNoteById = new Map<string, NonNullable<PreparedSurfaceFeature['note']>>(), facilityById = new Map<string, string>();
   const siteDocument = config.sites ? parseSurfaceSites(JSON.parse(await readFile(resolve(directory, config.sites.document), 'utf8'))) : null;
-  const siteRows: SiteRow[] = siteDocument ? loadSiteRows(context.sourceDirectory, config.directory, siteDocument) : [];
+  const panoramaDocument = config.panoramas ? parseSurfacePanoramas(JSON.parse(await readFile(resolve(context.sourceDirectory, config.panoramas.document), 'utf8'))) : null;
+  const siteRows: SiteRow[] = [...(siteDocument ? loadSiteRows(context.sourceDirectory, config.directory, siteDocument) : []),
+    ...(panoramaDocument ? panoramaSiteRows(panoramaDocument, await locateSurfacePanoramas(panoramaDocument, context.sourceDirectory)) : [])];
+  const panoramaById = new Map<string, string>();
   const rows: Readonly<Record<string, string | undefined>>[] = [...table.rows, ...siteRows.map(row => {
-    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, SITE_ZOOM_SHARE); creditById.set(row.id, row.credit); if (row.paths) pathsById.set(row.id, row.paths); if (row.note) siteNoteById.set(row.id, row.note); if (row.facilityId) facilityById.set(row.id, row.facilityId);
+    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, SITE_ZOOM_SHARE); creditById.set(row.id, row.credit); if (row.paths) pathsById.set(row.id, row.paths); if (row.note) siteNoteById.set(row.id, row.note); if (row.facilityId) facilityById.set(row.id, row.facilityId); if (row.panoramaId) panoramaById.set(row.id, row.panoramaId);
     return { name: row.name, clean_name: row.name, approvaldt: `${row.approved.replaceAll('-', '/')} 00:00:00`, origin: row.origin, diameter: '0', center_lon: String(row.centerLon), center_lat: String(row.centerLat),
       type: row.type, code: row.code, approval: approvalLabel, min_lon: row.extent ? String(row.extent.minLon) : '', max_lon: row.extent ? String(row.extent.maxLon) : '', min_lat: row.extent ? String(row.extent.minLat) : '', max_lat: row.extent ? String(row.extent.maxLat) : '',
       quad_code: 'sites', link: `${row.link}#feature-${row.id}` };
@@ -479,6 +485,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       credit: creditById.get(id) ?? (naturalEarth ? 'Natural Earth' : `IAU name, ${approved[1]}`),
       ...(siteNoteById.has(id) ? { note: siteNoteById.get(id)! } : noteById.has(id) ? { note: { text: noteById.get(id)!.extract, title: noteById.get(id)!.title, url: noteById.get(id)!.url, credit: 'Wikipedia, CC BY-SA 4.0' } } : {}),
       ...(facilityById.has(id) ? { facilityId: facilityById.get(id)! } : {}),
+      ...(panoramaById.has(id) ? { panoramaId: panoramaById.get(id)! } : {}),
       minimumZoomShare: 0,
       ...(searchOnlyIds.has(id) ? { searchOnly: true as const } : {}),
     };

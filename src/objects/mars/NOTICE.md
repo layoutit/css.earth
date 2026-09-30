@@ -13,6 +13,13 @@ This package combines prepared material derived from the following sources:
   information. The limb halo profile (`source/atmosphere/psg-limb.json`) was
   computed with a local copy of the Planetary Spectrum Generator (nasapsg/psg
   container; Villanueva et al. 2018, 2022).
+- Mastcam-Z 360° panoramas: NASA/JPL-Caltech/ASU/MSSS, from the
+  [Mastcam-Z 360° Panorama Collection](https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/),
+  which permits public use without explicit permission and asks for this credit
+  and a reference to J.F. Bell III et al., Landscape Mosaics Acquired in Jezero
+  Crater by the Mastcam-Z Investigation on the NASA Mars 2020 Mission's
+  Perseverance Rover, 56th Lunar and Planetary Science Conference, abstract 1719
+  (2025). cssEarth resamples them into sky-cube faces and list thumbnails.
 - The shared clean-room directional-sun standard cites the earlier Google Earth
   Pro Mars behavioural measurements retained in
   `source/sky/google-earth-pro-contract.json`; no Google sky, shader, or Sun

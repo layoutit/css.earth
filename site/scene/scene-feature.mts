@@ -2,6 +2,7 @@ import { FIND_PATH, parseDestinationPlace } from '../search/find-protocol.mts';
 import { withSceneDataset } from '../dataset-url.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { SceneSession } from './scene-session.mts';
+import { openScenePanorama, withScenePanorama } from './scene-panoramas.mts';
 
 /** Search, links and label clicks share the navigation request's dataset, load and flight lifetime. */
 export async function selectSceneFeature(session: SceneSession, request: NavigationRequest, bodyName: string) {
@@ -59,6 +60,15 @@ export async function selectSceneFeature(session: SceneSession, request: Navigat
       present('Flight failed. Select the city again to retry.');
       throw error;
     } finally { signal.removeEventListener('abort', clear); }
-  } else ({ completed } = await features!.select(id, { signal }));
+  } else {
+    ({ completed } = await features!.select(id, { signal }));
+    // A panorama's standpoint opens the panorama once the camera has arrived over it; the committed address names it.
+    const panoramaId = completed ? features!.catalog()?.features.find(feature => feature.id === id)?.panoramaId ?? null : null;
+    if (panoramaId && openScenePanorama(session, panoramaId)) {
+      const settled = finish(completed);
+      request.url = withScenePanorama(new URL(request.url), panoramaId).href;
+      return settled;
+    }
+  }
   return finish(completed);
 }

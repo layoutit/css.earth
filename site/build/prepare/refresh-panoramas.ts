@@ -19,7 +19,7 @@ export async function refreshObjectPanoramas(id: string): Promise<{ count: numbe
   if (!descriptor.recipe.panoramas) throw new TypeError(`${id} declares no panoramas.`);
   const previous = record(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), 'prepared runtime');
   const { panoramas: _previous, ...definition } = previous;
-  const attached = await attachSurfacePanoramas({ descriptor, sources, sourceDirectory, publicDirectory, definition });
+  const attached = await attachSurfacePanoramas({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition });
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`);
   // Only the panorama files changed among the delivered assets: every file the new plan names replaces the old plan's.
   const manifest = parseRuntimeManifest(JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8')), id);

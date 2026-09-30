@@ -106,6 +106,8 @@ export interface Props {
   facts?: Fact[];
   moreFacts?: Fact[];
   galleries?: Gallery[];
+  /** Surface panoramas the Imagery tab lists (prepared/panoramas.json). */
+  panoramas?: import('./panorama-list.mts').PanoramaList;
   charts?: Chart[];
   datasets?: {
     title: PreparedTitle;

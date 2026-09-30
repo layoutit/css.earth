@@ -56,5 +56,8 @@
       "traverses/msl_localized_pos.csv",
       "traverses/m2020_best_tactical.csv"
     ]
+  },
+  "panoramas": {
+    "document": "panoramas/panoramas.json"
   }
 }

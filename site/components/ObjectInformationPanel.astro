@@ -10,9 +10,14 @@ import InformationTabs from './InformationTabs.astro';
 import { satelliteSystemFromUrl } from '../navigation/navigation-scope.mts';
 import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetList from "./DatasetList.astro";
+import DatasetThumbnail from "./DatasetThumbnail.astro";
+import Detached from "./Detached.astro";
+import SelectedContent from "./SelectedContent.astro";
 import TreeDisclosure from './TreeDisclosure.astro';
 import { readObjectArticleUrl } from '../server/object-article.mts';
-const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], datasets } = Astro.props;
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], datasets, panoramas } = Astro.props;
+const panoramaEntries = panoramas?.panoramas ?? [];
+const solRange = ([first, last]: readonly [number, number]) => first === last ? `Sol ${first}` : `Sols ${first}–${last}`;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
 const orderedCharts = orderScientificCharts(charts);
@@ -27,6 +32,7 @@ const articleUrl = await readObjectArticleUrl(objectId);
       </ObjectCardHeader>
       {hasFacts && <InformationTabs idPrefix={objectId} initialTab="dataset" tabs={[
         { id: 'dataset', label: 'Datasets' },
+        ...(panoramaEntries.length ? [{ id: 'imagery', label: 'Imagery' }] : []),
         { id: 'factsheet', label: 'Factsheet' },
         ...(orderedCharts.length ? [{ id: 'charts', label: 'Charts' }] : []),
       ]} />}
@@ -62,6 +68,28 @@ const articleUrl = await readObjectArticleUrl(objectId);
       </details>
       ))}
       </TreeDisclosure>
+      {panoramaEntries.length > 0 && <section class="object-card-tabpanel object-imagery-content" id={`${objectId}-imagery-content`} data-information-panel="imagery" aria-label="Imagery">
+        <h2 class="object-mobile-information-heading">Imagery</h2>
+        <form id={`${objectId}-panoramas`} method="get" hidden></form>
+        <nav class="object-observation-controls" aria-label="Imagery">
+          {panoramaEntries.map((panorama) => <div class="object-observation-option">
+            <button class="object-observation-control object-thumbnail-leading object-result-row" type="submit" form={`${objectId}-panoramas`}
+              name="panorama" value={panorama.id} data-panorama-open={panorama.id} aria-pressed="false">
+              <DatasetThumbnail class="object-dataset-icon" src={panorama.thumbnail} />
+              <span class="object-dataset-label">{panorama.title}</span>
+              <span class="object-dataset-detail">{panorama.camera} · {solRange(panorama.sols)}</span>
+            </button>
+          </div>)}
+        </nav>
+        <section class="object-dataset-details">
+          <div class="object-dataset-details-body" aria-live="polite" aria-atomic="true">
+            {panoramaEntries.map((panorama) => <Detached detached><div data-panorama-details={panorama.id} hidden>
+              <SelectedContent title={panorama.title} description={`${panorama.camera} 360° panorama, ${solRange(panorama.sols).toLowerCase()}, seen from where the rover stood. ${panorama.credit}.`} />
+              <a class="object-dataset-source-link" href={panorama.pageUrl} target="_blank" rel="noopener noreferrer">View source ↗</a>
+            </div></Detached>)}
+          </div>
+        </section>
+      </section>}
       {hasFacts && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
         <h2 class="object-mobile-information-heading">Factsheet</h2>
         <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />

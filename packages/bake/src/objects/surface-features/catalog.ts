@@ -42,6 +42,7 @@ export interface PreparedSurfaceFeature {
   readonly note?: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string };
   /** The facilities-catalogue id of the spacecraft at a site, when catalogued. */
   readonly facilityId?: string;
+  readonly panoramaId?: string;
   /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
   readonly minimumZoomShare: number;
   /** Found by search and labelled when selected, never by default. */

@@ -6,10 +6,13 @@ import { parseDbf } from './dbf.ts';
 import { parseShpRecords } from './shp.ts';
 import { unzipMember } from './archive.ts';
 import { readFileSync } from 'node:fs';
+import type { PanoramaSite, SurfacePanoramas } from '../panoramas/index.ts';
 import { resolve } from 'node:path';
 
 export const SURFACE_SITES_SCHEMA = 'cssearth-surface-sites@1';
 export const SITE_KINDS = Object.freeze({ lander: { code: 'LS', type: 'Landing site' }, impact: { code: 'IM', type: 'Impact site' }, 'sample-site': { code: 'SS', type: 'Sample site' }, 'rover-traverse': { code: 'RT', type: 'Rover position' } } as const);
+/** A surface panorama's standpoint: a point feature that opens the panorama. */
+export const PANORAMA_SITE = Object.freeze({ code: 'PN', type: 'Panorama' } as const);
 export type SiteKind = keyof typeof SITE_KINDS;
 /** Sites rank among named features as if they were this large; a label policy sees them like a mid-sized crater. */
 export const SITE_PRIORITY_KM = 20;
@@ -30,7 +33,7 @@ export interface SiteRow {
   readonly id: string; readonly name: string; readonly type: string; readonly code: string; readonly kind: 'point' | 'linear'; readonly priority: number;
   readonly centerLon: number; readonly centerLat: number; readonly extent: { minLon: number; maxLon: number; minLat: number; maxLat: number } | null;
   readonly paths: readonly (readonly (readonly [number, number])[])[] | null; readonly origin: string; readonly credit: string; readonly approved: string; readonly link: string;
-  readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null; readonly facilityId: string | null;
+  readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null; readonly panoramaId?: string; readonly facilityId: string | null;
 }
 
 const text = (value: unknown, label: string): string => { if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${label} must be a non-empty string.`); return value; };
@@ -146,4 +149,19 @@ export function loadSiteRows(sourceDirectory: string, directory: string, sites: 
       note: { text: clip(`Path from ${traverse.source.title}.`), title: traverse.source.title, url: traverse.source.url, credit: '' }, facilityId: traverse.facilityId });
   });
   return rows;
+}
+
+/** One point row for each surface panorama, at the rover's localised standpoint. Ids follow the sites' and traverses'. */
+export function panoramaSiteRows(document: SurfacePanoramas, sites: ReadonlyMap<string, PanoramaSite>, idBase = 90_000_000): SiteRow[] {
+  return document.panoramas.map((panorama, index) => {
+    const site = sites.get(panorama.id);
+    if (!site) throw new TypeError(`Panorama ${panorama.id} has no standpoint.`);
+    const [first, last] = panorama.sols, sols = first === last ? `sol ${first}` : `sols ${first}–${last}`;
+    return { id: String(idBase + 2000 + index), name: panorama.title, type: PANORAMA_SITE.type, code: PANORAMA_SITE.code, kind: 'point', priority: SITE_PRIORITY_KM,
+      centerLon: site.longitudeDegEast, centerLat: site.latitudeDeg, extent: null, paths: null,
+      origin: `${panorama.camera} 360° panorama, ${sols}, from the rover's place (${site.localization}).`, credit: panorama.credit,
+      approved: document.retrievedAt, link: panorama.pageUrl,
+      note: { text: clip(`${panorama.camera} 360° panorama taken here on ${sols}. Select it to look around.`), title: document.source, url: document.sourcePage, credit: panorama.credit },
+      panoramaId: panorama.id, facilityId: null };
+  });
 }

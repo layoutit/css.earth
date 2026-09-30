@@ -82,6 +82,7 @@ export const runtimePolicy = {
     gain: 1,
   },
   WHEEL_ZOOM_INERTIA_INPUT_KINDS: ['wheel'],
+  SURFACE_PANORAMA: { fieldOfView: { initialDeg: 75, minimumDeg: 30, maximumDeg: 100 }, wheelZoomPerDelta: 0.001, zoomOutExit: { overshoot: 1.3, gapMs: 250 } },
   sceneCursor: ({ surface, pressed, enabled }) => !enabled ? '' : pressed ? 'grabbing' : surface ? 'grab' : 'crosshair',
   isOrbitDragStart: ({ isPrimary, button }) => isPrimary && button === 0,
   wheelZoomInputKind(event, previousKind = null, previousTimestamp = -Infinity) {

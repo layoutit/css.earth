@@ -21,6 +21,7 @@ Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations 
 | Landform and mineral catalogues | Eleven published surveys through their [NASA Trek](https://trek.nasa.gov/mars/) GIS layers, listed [below](#landform-and-mineral-catalogues-27-september-2026) |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain |
 | Feature notes | Lead summaries of English Wikipedia articles (CC BY-SA 4.0, retrieved 2026-09-12), credited in each caption |
+| Surface panoramas | Five natural-colour 360° panoramas from the [Mastcam-Z 360° Panorama Collection](https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/) (NASA/JPL-Caltech/ASU/MSSS; [Bell et al. 2025, LPSC abstract 1719](https://www.hou.usra.edu/meetings/lpsc2025/pdf/1719.pdf)), each placed at the rover's [PDS PLACES](https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/) localisation for its sols |
 | Navigation marker | NASA/ESA Hubble [full-disc Mars portrait](https://esahubble.org/images/heic1609a/) (2016), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Dimensions, placement and charts | USGS, JPL and NASA PSG records; editorial text from NASA Science topic `107740` |
 
@@ -41,6 +42,14 @@ Photographic datasets are resampled with Lanczos3 to 4,096 by 2,048 texels, pack
 - Named features are placed through `presentation/surface-map.json`. Craters trace a rim circle; other types their published extent box. Fourteen landing, touchdown or impact sites and 2 traverse paths quote their source page in `source/features/sites.json`.
 
 The disc is lit by Vincendon's mean surface law (Hapke with w 0.85 and 17° roughness), with the atmosphere removed. One law lights all three channels, and the limb keeps three quarters of the centre's brightness ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The halo outside the disc comes from a PSG limb profile of PSG's Mars template with Mars Climate Database dust and water ice, computed by [acquire-psg-limb-table.mts](../../../packages/bake/cli/acquire-psg-limb-table.mts). The reflectance spectrum and temperature-pressure charts are static SVGs from a pinned PSG configuration. The browser makes no PSG request.
+
+### Surface panoramas (30 September 2026)
+
+The Imagery tab lists five Mastcam-Z panoramas: Octavia E. Butler Landing (sols 3–11), Van Zyl Overlook (53–64), Three Forks sample depot (690–692), Belva crater (789–791) and Bright Angel (1178). Their list is [`source/panoramas/panoramas.json`](source/panoramas/panoramas.json); the images are manifest inputs restored from their ASU links.
+
+- **Projection.** ASU states that most images are "a simple cylindrical projection, with 0° azimuth (due north …) in the center" and "typically" +10° at the top. The preparation reads each image with one scale in both axes, the width spanning 360°, north in the middle and +10° at the top row. The measured spans are 77° to 100° of elevation, whole degrees, as one scale predicts.
+- **Placement.** Each panorama stands where the rover's last localised drive on or before its first sol left it (PLACES `m2020_best_tactical.csv`); before the first drive, at the origin of that drive's site frame. A drive during the panorama's sols stops the preparation.
+- **Delivery.** Each image is resampled bilinearly into the six 2048-pixel faces of a sky cube (about 23 pixels a degree) in the lossy lane, 1.2 to 2 MB a panorama, loaded only when opened. The standpoints are also point features (`PN`) in the feature catalogue.
 
 ### Landform and mineral catalogues (27 September 2026)
 
@@ -82,3 +91,6 @@ A coloured cell holds at least one catalogued feature; no size is drawn. A white
 - Nomenclature outlines are not published boundaries.
 - The first column of the Viking MDIM 2.1 map is nearly black. A thin dark line can show along 180° E at close zoom.
 - The camera and background sky do not represent an observer at a stated epoch.
+- A panorama's top edge is placed at ASU's "typical" +10°. It is checked only at Octavia E. Butler Landing, where the horizon falls near 0°; the other four spans differ from the typical 80°, so their horizons may sit a few degrees off.
+- Above a panorama's top edge and below its bottom edge nothing was imaged: the view shows black there.
+- The cube faces hold about a quarter of the published resolution (83 pixels a degree for most images).

@@ -2,6 +2,8 @@
 import ObjectShell from "./ObjectShell.astro";
 import { parsePreparedText } from '../object-text.mts';
 import { authoredDatasetMetadata, parsePreparedPanelContent, parsePanelControls, withDatasetText } from '../prepared-panel-content.mts';
+import { parsePanoramaList } from '../panorama-list.mts';
+import { resolveSceneAddressesDeep } from '../asset-origin.mts';
 interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
 const { preparedContent, preparedControls } = Astro.props;
 const content = parsePreparedPanelContent(preparedContent);
@@ -17,6 +19,7 @@ const imageFiles = import.meta.glob<string>(
 const minimapFiles = import.meta.glob("../../src/objects/*/source/presentation/surface-map.json", { import: "default" });
 const textFiles = import.meta.glob("../../src/objects/*/prepared/text.json", { import: "default" });
 const sourceFiles = import.meta.glob("../../src/objects/*/source/content/object.json", { import: "default" });
+const panoramaFiles = import.meta.glob("../../src/objects/*/prepared/panoramas.json", { import: "default" });
 const objectRoot = `../../src/objects/${content.objectId}`;
 const text = parsePreparedText(await textFiles[`${objectRoot}/prepared/text.json`]?.(), content.objectId);
 const authoredSource = await sourceFiles[`${objectRoot}/source/content/object.json`]?.();
@@ -24,6 +27,8 @@ const authoredDatasets = authoredSource === undefined
   ? { sourceUrls: new Map<string, string>(), systemDatasetIds: new Set<string>() }
   : authoredDatasetMetadata(authoredSource, content.objectId);
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
+const panoramaFile = await panoramaFiles[`${objectRoot}/prepared/panoramas.json`]?.();
+const panoramas = panoramaFile === undefined ? undefined : await resolveSceneAddressesDeep(parsePanoramaList(panoramaFile, content.objectId));
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
 const datasets = withDatasetText(controls.datasets && {
   ...controls.datasets,
@@ -48,6 +53,7 @@ const datasets = withDatasetText(controls.datasets && {
   moreFacts={content.moreFacts}
   charts={content.charts}
   galleries={content.galleries}
+  panoramas={panoramas}
   datasets={datasets}
   settings={controls.settings}
   destinations={content.destinations}

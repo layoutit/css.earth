@@ -4,6 +4,7 @@ import { retainInputSurface } from '@cssearth/renderer';
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
 import { createSceneView } from './scene-view.mts';
 import { selectSceneFeature } from './scene-feature.mts';
+import { bindScenePanoramas } from './scene-panoramas.mts';
 import { createScenePublication } from './scene-publication.mts';
 import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
 import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
@@ -287,6 +288,7 @@ export function createSceneRouter({
       if (!scenes.isCurrent(session)) return;
       activation.connectControls(session);
       if (!session.commit()) return false;
+      bindScenePanoramas(session, { documentTarget, href: () => view.capture() ?? session.url ?? windowTarget.location.href, publish: url => view.replace(session, url) });
       if (mount.datasets) {
         session.own(mount.datasets.subscribe(() => {
           if (!scenes.isCurrent(session) || requests.current || scenes.state.kind !== 'ready') return;

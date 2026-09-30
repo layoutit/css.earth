@@ -90,6 +90,16 @@ export const WHEEL_ZOOM_INERTIA = Object.freeze({
 // notches stop, are released into the glide above.
 export const WHEEL_ZOOM_INERTIA_INPUT_KINDS = Object.freeze(["wheel"] as const);
 
+// A surface panorama's look-around. A 2048-pixel face spans 90°, 22.8 texels a degree: 75° keeps about one texel to a
+// device pixel on a 2x screen 1,000 CSS pixels wide, and 30° magnifies them about three times. Zooming out past 100°
+// leaves for the body once the gesture pushes 30% further without pausing a quarter second: a wheel's tail or one
+// flick does not.
+export const SURFACE_PANORAMA: NonNullable<RuntimePolicy["SURFACE_PANORAMA"]> = Object.freeze({
+  fieldOfView: Object.freeze({ initialDeg: 75, minimumDeg: 30, maximumDeg: 100 }),
+  wheelZoomPerDelta: 0.001,
+  zoomOutExit: Object.freeze({ overshoot: 1.3, gapMs: 250 }),
+});
+
 // Phones present information in a bottom sheet over the scene. Snap heights
 // live in shell-layout.css; these values shape the drag between them.
 export const MOBILE_SHEET_POLICY = Object.freeze({
