@@ -289,7 +289,6 @@ builds disable them. Keep the built assets unchanged throughout the matrix.
 Choose checks for the changed behavior after building and preparing its inputs:
 
 ```sh
-node --test packages/bake/src/presentation/prepared-activation-registry.test.mts
 node --test packages/objects/src/node/prepared-activation-transport.test.mts
 node --test site/test/navigation-lifecycle.test.mts
 node --test site/test/scene-session.test.mts

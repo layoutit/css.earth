@@ -1,14 +1,12 @@
-// One runner for the prepared runtime contract of every registered object, replacing the
-// per-body runtime-contract files that stamped the same checks with the body's name filled in.
+// One runner for the prepared runtime contract, run once per runtime structure (runtimeRepresentatives): objects of one
+// structure take the same paths, and each object's own data is checked when it is prepared.
 // CSSEARTH_TEST_OBJECTS=<id>[,<id>] limits a run to those bodies (see anchor-table.mts).
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { objectRuntimePackageTests, preparedSelectionFixture } from '../../packages/renderer/test/node/fixtures/object-runtime-package.mts';
-import { required } from '@cssearth/objects/node/contract';
+import { required, runtimeRepresentatives } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { selectedObjectIds } from './fixtures/anchor-table.mts';
 import { projectRoot } from './fixtures/objects.mts';
@@ -19,14 +17,6 @@ function sameNodes(actual: ArrayLike<unknown>, expected: ArrayLike<unknown>) {
   return actual.length === expected.length && Array.prototype.every.call(actual, (node, index) => node === expected[index]);
 }
 
-async function preparedRuntime(id: string): Promise<unknown> {
-  const text = await readFile(resolve(projectRoot, 'src/objects', id, 'prepared/runtime.json'), 'utf8').catch((error: unknown) => {
-    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
-    throw error;
-  });
-  return text === null ? null : JSON.parse(text);
-}
-
 /** The dataset ids the prepared controls publish, in their published order. */
 function datasetIds(definition: unknown): string[] {
   const controls = requireRecord(requireRecord(definition).controls, 'runtime controls');
@@ -34,26 +24,10 @@ function datasetIds(definition: unknown): string[] {
   return datasets.map((dataset, index) => requireString(requireRecord(dataset, `dataset ${index}`).id, `dataset ${index} id`));
 }
 
-/** A runtime's structure: its keys and value types, with each array reduced to the distinct structures of its items. The
- * selection tests below exercise the shared owner, which reads nothing else, so objects of one structure take the same
- * paths: 3,588 runtimes had 107 structures, and running the tests once per object cost two minutes a run. */
-function structure(value: unknown): string {
-  if (Array.isArray(value)) return `[${[...new Set(value.map(structure))].sort().join('|')}]`;
-  if (value !== null && typeof value === 'object') return `{${Object.entries(value).sort(([a], [b]) => a < b ? -1 : 1).map(([key, item]) => `${key}:${structure(item)}`).join(',')}}`;
-  return typeof value;
-}
-const toggled = new Set<string>(), selected = new Set<string>();
-/** Whether `key` is new to `seen`, adding it. */
-const first = (seen: Set<string>, key: string) => !seen.has(key) && seen.add(key).has(key);
-
-for (const id of selectedObjectIds(SCENE_OBJECTS.map(object => object.id))) {
-  const definition = await preparedRuntime(id);
-  if (definition === null) continue;
-  // Each object's own data still meets the common contract.
+for (const { id, definition } of await runtimeRepresentatives(selectedObjectIds(SCENE_OBJECTS.map(object => object.id)), projectRoot)) {
   objectRuntimePackageTests(definition);
-  const shape = structure(definition);
 
-  if (first(toggled, shape)) test(`${id}: every declared toggle commits through the shared selection owner without touching the retained tree`, async () => {
+  test(`${id}: every declared toggle commits through the shared selection owner without touching the retained tree`, async () => {
     const f = await preparedSelectionFixture(definition);
     try {
       const nodes = f.stage.querySelectorAll('*');
@@ -77,7 +51,7 @@ for (const id of selectedObjectIds(SCENE_OBJECTS.map(object => object.id))) {
   const ids = datasetIds(definition);
   // A dataset may swap which prepared mesh or cutaway is mounted (prepared-omitted-nodes.ts); it never makes new nodes, and
   // the first dataset's tree comes back whole.
-  if (ids.length > 1 && first(selected, shape)) test(`${id}: dataset selection reuses the prepared nodes and commits every published dataset`, async () => {
+  if (ids.length > 1) test(`${id}: dataset selection reuses the prepared nodes and commits every published dataset`, async () => {
     const f = await preparedSelectionFixture(definition);
     try {
       const records = f.stage.querySelectorAll('*'), made = f.document.created;

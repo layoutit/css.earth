@@ -10,6 +10,9 @@ import { installRuntimeAssets, readAllowMissingFlag } from "@cssearth/bake/asset
 import { inspectContextAvailability } from "../build/prepare/prepare-context-availability.mts";
 import { writeContextPackage } from "./fixtures/context-package.mts";
 
+/** Retries are asserted by count, not by waiting out the real backoff. */
+const noWait = async () => {};
+
 test("setup installs pinned files, reuses them offline, and repairs a corrupt file", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));
   const bytes = Buffer.from("prepared image");
@@ -114,7 +117,7 @@ test("a dropped connection, a 5xx and a 429 are retried; a 404 is a verdict and 
       if (requests === 3) return new Response("slow down", { status: 429 });
       return new Response(bytes);
     };
-    assert.deepEqual(await installRuntimeAssets([asset], { fetcher: flaky }), { installed: 1, reused: 0, skipped: 0 });
+    assert.deepEqual(await installRuntimeAssets([asset], { fetcher: flaky, wait: noWait }), { installed: 1, reused: 0, skipped: 0 });
     assert.equal(requests, 4);
     assert.deepEqual(await readFile(asset.file), bytes);
 
@@ -128,7 +131,7 @@ test("a dropped connection, a 5xx and a 429 are retried; a 404 is a verdict and 
     // Retries are bounded: a permanently broken network still fails rather than hanging forever.
     let attempts = 0;
     const broken = async () => { attempts++; throw new TypeError("fetch failed"); };
-    await assert.rejects(installRuntimeAssets([asset], { fetcher: broken }), /earth\/image\.webp \(https:\/\/example\.invalid\/image\.webp\): fetch failed/);
+    await assert.rejects(installRuntimeAssets([asset], { fetcher: broken, wait: noWait }), /earth\/image\.webp \(https:\/\/example\.invalid\/image\.webp\): fetch failed/);
     assert.equal(attempts, 4);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -144,12 +147,12 @@ test("a connection that drops while the body streams is retried, and a failure n
   try {
     let requests = 0;
     const once = async () => (++requests === 1 ? dropped() : new Response(bytes));
-    assert.deepEqual(await installRuntimeAssets([asset], { fetcher: once }), { installed: 1, reused: 0, skipped: 0 });
+    assert.deepEqual(await installRuntimeAssets([asset], { fetcher: once, wait: noWait }), { installed: 1, reused: 0, skipped: 0 });
     assert.equal(requests, 2);
     await rm(asset.file);
     let drops = 0;
     const always = async () => { drops++; return dropped(); };
-    await assert.rejects(installRuntimeAssets([asset], { fetcher: always }), /pluto\/runtime\.json \(https:\/\/example\.invalid\/runtime\.json\): terminated/);
+    await assert.rejects(installRuntimeAssets([asset], { fetcher: always, wait: noWait }), /pluto\/runtime\.json \(https:\/\/example\.invalid\/runtime\.json\): terminated/);
     assert.equal(drops, 4);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
