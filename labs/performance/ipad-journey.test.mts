@@ -8,7 +8,8 @@ const test = sourceTest();
 test('a journey resolves displayed body names through the one object registry', () => {
   const journey = parseJourney({ start: 'Mars', actions: [{ fly: 'Moon' }, { screenshot: 'after-flight' }] });
   assert.deepEqual(journey, { start: 'mars', actions: [{ fly: 'moon' }, { screenshot: 'after-flight' }] });
-  const steps = compileJourney(journey);
+  const [ready, ...steps] = compileJourney(journey);
+  assert.match((ready as { script: string }).script, /dataset\.ready/u, 'every journey first waits for its start scene');
   assert.equal(steps.length, 3);
   assert.match((steps[0] as { script: string }).script, /__cssEarthControl/u);
   assert.match((steps[0] as { script: string }).script, /control\.fly\("moon"\)/u);
@@ -32,7 +33,7 @@ test('ordered flags preserve the user supplied sequence', () => {
 });
 
 test('live flights use the ordinary navigation event and require the app to accept it', async () => {
-  const steps = compileJourney(parseJourney({ start: 'earth', actions: [{ fly: 'lutetia' }] }), 'objectnavigate');
+  const steps = compileJourney(parseJourney({ start: 'earth', actions: [{ fly: 'lutetia' }] }), 'objectnavigate').slice(1);
   const step = steps[0];
   assert.ok(step && 'script' in step);
   assert.deepEqual(steps[1], { route: '/lutetia/' });
