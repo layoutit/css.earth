@@ -6,6 +6,7 @@ import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
 import { contextOrbitOpacity, focusOwnOrbitOpacity, selectedOrbitDepthFade } from '../context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../../solar-system/heliocentric-geometry.js';
+import { billboardImageScale } from '../../navigation/prepared-body-billboards.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
@@ -67,11 +68,12 @@ export interface PlannedBodyOutput {
   lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition: readonly number[] | undefined;
   orbitBounds: { left: number; top: number; right: number; bottom: number } | null;
   index: number; labelShown: boolean; labelPlacement: number; indicatorShown: boolean; indicatorCutout: boolean;
-  orbitAppearance: { width: number; opacity: number };
+  orbitAppearance: { width: number; opacity: number }; coveredBy: string | null;
 }
 interface ProjectedBody<Entry> {
   entry: Entry; x: number; y: number; depth: number; diameter: number; markerOpacity: number; circle: boolean; visible: boolean;
   annotationVisible: boolean; hovered: boolean; inFrame: boolean; priority: number; lineWidth: number; orbitVisibility: number;
+  coveredBy: string | null; // A nearer sphere hides part of the drawn image, rings included; the client stacks the billboard just below that sphere.
   /** The body reaches this camera's naming policy, whether or not a caption slot was free for it. */
   nameable: boolean;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
@@ -102,7 +104,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
-      closedOrbit: orbit?.fullTrail === true,
+      closedOrbit: orbit?.fullTrail === true, drawnRadiusM: body.radiusM * ('billboard' in body && body.billboard ? Math.max(1, billboardImageScale(body.billboard, body.radiusM)) : 1),
       orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
       hiddenStub: null as null | { projected: ProjectedBody<unknown> },
@@ -240,7 +242,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           // A hidden body's changing depth has no consumer. Keeping its
           // retirement state stable avoids a worker patch on every camera move.
           const stub = (prepared[entry.index]!.hiddenStub ??= { projected: { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false,
-            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
+            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, coveredBy: null,
             lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [] } });
           stub.projected.entry = entry;
           projectedBodies.push(stub.projected as ProjectedBody<Entry>);
@@ -255,7 +257,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const prominentOrbiter = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
           (annotationPriorities[body.id] ?? 0) >= 3;
         const inFrame = depth > body.radiusM && Math.abs(bodyX) < width / 2 && Math.abs(bodyY) < height / 2;
-        const visible = inFrame && !occlusion.hidden(eye, body.id);
+        const cover = inFrame ? occlusion.cover(eye, prepared[entry.index]!.drawnRadiusM, body.id) : null, visible = inFrame && cover !== true;
         // Planet circles and captions are orientation landmarks, not physical
         // sprites. Keep them through occultation and pin an off-screen planet to
         // the nearest stage edge; the body sprite itself remains truthful below.
@@ -266,7 +268,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // Unresolved foreground points cannot occlude this annotation; physical sprites keep exact occlusion.
         const annotationVisible = prominentOrbiter ? depth > body.radiusM : isLocator ? inFrame && !(selectedId !== body.id &&
           selectedDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
-          rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
+          rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : inFrame && !occlusion.hidden(eye, body.id);
         const hovered = entry.hovered, highlighted = entry.highlighted === true;
         // Satellites keep the complete, uniform path from the shared policy,
         // including selection previews and hover during navigation.
@@ -354,13 +356,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
-          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
+          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, coveredBy: null,
           lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
         // In a system overview a planet of another star is a locator: its dot stays inside the indicator circle.
         projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth;
         projected.diameter = hostedPlanet && overview ? Math.min(diameter, BODY_INDICATOR_DIAMETER / 2) : diameter; projected.markerOpacity = markerOpacity;
         projected.circle = circle; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
-        projected.inFrame = inFrame; projected.priority = priority;
+        projected.inFrame = inFrame; projected.priority = priority; projected.coveredBy = typeof cover === 'string' ? cover : null;
         projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
         projected.segments = segments; projected.labelPosition = undefined;
         projectedBodies.push(projected);
@@ -549,13 +551,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const flightCueShown = navigationInFlight && entry.body.id === emphasizedId && (entry.labelShown || entry.indicatorShown);
       const output = slot.output ??= { x: 0, y: 0, diameter: 0, markerOpacity: 0, visible: false, annotationVisible: false, hovered: false, lineWidth: 0,
         orbitVisibility: 0, segments: [], labelPosition: undefined, orbitBounds: null, index: entry.index, labelShown: false, labelPlacement: 0,
-        indicatorShown: false, indicatorCutout: false, orbitAppearance: entry.orbitAppearance };
+        indicatorShown: false, indicatorCutout: false, orbitAppearance: entry.orbitAppearance, coveredBy: null };
       output.x = billboardShown || flightCueShown ? projected.x : 0; output.y = billboardShown || flightCueShown ? projected.y : 0;
       // Alphas travel in 1/64 steps: every rotation frame moves a marker's silhouette a
       // little, and a step this small cannot change a composited pixel, so unchanged
       // steps neither cross the worker boundary nor restyle the marker's cue and caption.
       output.diameter = billboardShown || flightCueShown ? projected.diameter : 0; output.markerOpacity = billboardShown ? quantizeAlpha(projected.markerOpacity) : 0;
-      output.visible = projected.visible; output.annotationVisible = projected.annotationVisible; output.hovered = projected.hovered;
+      output.visible = projected.visible; output.coveredBy = projected.coveredBy; output.annotationVisible = projected.annotationVisible; output.hovered = projected.hovered;
       output.lineWidth = projected.lineWidth; output.orbitVisibility = quantizeAlpha(projected.orbitVisibility); output.segments = projected.segments;
       output.labelPosition = projected.labelPosition;
       output.orbitBounds = orbitBounds(projected.segments, slot.bounds);

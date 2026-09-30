@@ -513,7 +513,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       }
       for (const { projected, entry, mask } of projectedBodies) {
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
-          orbitVisibility, segments, index } = projected;
+          orbitVisibility, segments, index, coveredBy } = projected;
         const { body } = entry;
         if (mask === 0) continue;
         const contextEmphasis = (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
@@ -555,10 +555,17 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (!billboardShown && !entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
         const rank = depthOrder.rank(entry)!;
         const zIndex = depthOrder.zIndex(rank);
+        // A billboard partly behind a nearer sphere is drawn, and the sphere's own paint hides that part, so it stacks
+        // just below the sphere: the focus's detail or the covering body's billboard. Ranks hold still through a drag,
+        // and a body that was nearer when the drag began would otherwise cross in front of the sphere it passes behind.
+        const cover = coveredBy === null ? undefined : entriesById.get(coveredBy);
+        const coverRank = cover && depthOrder.rank(cover);
+        const coverZ = cover === bodies[0] ? depthBase : coverRank === undefined ? undefined : Number(depthOrder.zIndex(coverRank));
+        const markerZIndex = coverZ === undefined || Number(zIndex) < coverZ ? zIndex : String(coverZ - 1);
         // Styles distinguish only the emphasized body. Overview shares the unselected
         // value, so a new selection restyles its two owners, not every marker and chord.
         const selection = String(emphasizedId !== null && body.id === emphasizedId);
-        entry.paint.publish({ projected, billboardShown, plannedShown, markerShown, markerDiameter, flatDot, zIndex,
+        entry.paint.publish({ projected, billboardShown, plannedShown, markerShown, markerDiameter, flatDot, zIndex: markerZIndex,
           selected: selection === 'true', hovered: entry.hovered, animated: animatedAnnotations.has(entry), coast,
           policyChanged, emphasis }, fader);
         entry.interaction.updateMarker(projected, rank, entry, navigationSuppressed);

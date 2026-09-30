@@ -93,3 +93,20 @@ test('shared occlusion preserves point visibility, clipped chords and saturated 
     }
   }
 }, 20000);
+
+test('a far disc sliding behind a near sphere is part covered before it is wholly covered, at every scale', () => {
+  // A moon of radius 1 at depth 10 (5.7°) and a planet of radius 20 at depth 1000 (1.1°), as a Saturnian moon sees Saturn.
+  for (const scale of [1, 1e9, 1e16]) {
+    const moon = { id: 'moon', positionM: [0, 0, -10 * scale] as Vector3, radiusM: scale };
+    const frame = createWorldFrameProjection(moon, moon, point => [...point] as Vector3, point => [point[0] / -point[2], point[1] / -point[2]]);
+    const cover = (x: number) => frame.occlusion(null).cover([x * scale, 0, -1000 * scale], 20 * scale);
+    expect(cover(200)).toBeNull(); // 11.3° off the axis: clear.
+    expect(cover(100)).toBe('moon'); // The planet's centre is behind the limb, but most of its disc is not.
+    expect(cover(118)).toBe('moon'); // Only the planet's near edge is behind.
+    expect(cover(50)).toBe(true);
+    expect(cover(0)).toBe(true);
+    expect(frame.occlusion(null).cover([0, 0, -1000 * scale], 20 * scale, moon.id)).toBeNull();
+    // Nothing nearer than the sphere is covered by it.
+    expect(frame.occlusion(null).cover([0, 0, -5 * scale], scale / 10)).toBeNull();
+  }
+});
