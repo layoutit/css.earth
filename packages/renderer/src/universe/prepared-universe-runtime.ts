@@ -253,6 +253,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
+          /** A header pill's category: the galaxy, cluster and nebula catalogue emphasises its members; the body markers take
+           * theirs through `setBodyVisibility`. */
+          setHighlightedClassification: catalogBanks.setHighlightedClassification,
           /** Label suppression follows the selection here; callers set the other flags. */
           setBodyVisibility(next: Omit<BodyVisibility, 'labelSuppressed'>) { spatial.setBodyVisibility(next); },
           setRotationActive(active: boolean) { spatial.setRotationActive(active); },

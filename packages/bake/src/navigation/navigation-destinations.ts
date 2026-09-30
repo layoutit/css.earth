@@ -36,8 +36,8 @@ export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: s
       quantity: isPreparedCluster(object) ? 'comoving' : 'catalogue', referencePoint: 'observer', epochJdTt: null } });
 }
 
-/** Source catalogues own identity. Rendering-resource descriptors do not add destinations. */
-export async function readPreparedFocusObjects(objectsDirectory: string, sceneHostId: string) {
+/** Every row of every spatial catalogue (galaxies, clusters, nebulae), in folder order. */
+export async function readPreparedCatalogObjects(objectsDirectory: string) {
   const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
   const objects: PreparedCatalogObject[] = [];
   // Every folder's two catalogue files, read in parallel and parsed below in folder order.
@@ -54,6 +54,12 @@ export async function readPreparedFocusObjects(objectsDirectory: string, sceneHo
     else if (value.schema === 'cssearth-cluster-catalog@1') objects.push(...parsePreparedClusterCatalog(value).objects);
     else if (path === 'source/nebula.json') objects.push(...parsePreparedNebulaCatalog(value).objects);
   }
+  return objects;
+}
+
+/** Source catalogues own identity. Rendering-resource descriptors do not add destinations. */
+export async function readPreparedFocusObjects(objectsDirectory: string, sceneHostId: string, objects?: readonly PreparedCatalogObject[]) {
+  objects ??= await readPreparedCatalogObjects(objectsDirectory);
   // Only a subject the application can open has a page (isNavigableCatalogObject); the rest stay labels.
   const destinations = objects.filter(isNavigableCatalogObject).map(object => prepareFocusObject(object, sceneHostId)).sort((a, b) => a.id.localeCompare(b.id, 'en'));
   return destinations.length ? defineObjects(destinations) : Object.freeze(destinations);

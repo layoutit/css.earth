@@ -29,6 +29,13 @@ export function discoveryDescription(discovery: ObjectDiscovery): string | null 
   return discovery.simulation ? 'Simulation' : discovery.illustration ? 'Illustration only' : !discovery.imagery ? 'Shape only' : null;
 }
 
+/** A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
+ * that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose colour comes from
+ * its own measurements. */
+export function offTheMap(object: { classification: string; discovery: ObjectDiscovery }): boolean {
+  return object.classification === 'star' && !object.discovery.imagery && !object.discovery.hostsImagery && !object.discovery.sourceColor;
+}
+
 export function isDiscoveryAnchor(object: { classification: string }): boolean {
   return object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet';
 }
@@ -75,10 +82,7 @@ function computeDiscoveryVisibility(objects: DiscoveryObjects, options: Discover
     // hover, so the names on the map point to where there is more to click.
     const namedStar = object.classification !== 'star' || object.discovery.featured || options.systemMembers?.has(object.id) === true;
     const featured = (!illustration || options.illustrations) && (options.defaultFeatures.has(object.id) || isDiscoveryAnchor(object) && namedStar);
-    // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
-    // that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose colour comes from
-    // its own measurements.
-    if (object.classification === 'star' && !object.discovery.imagery && !object.discovery.hostsImagery && !object.discovery.sourceColor) { hiddenBodies.push(object.id); hiddenLabels.push(object.id); continue; }
+    if (offTheMap(object)) { hiddenBodies.push(object.id); hiddenLabels.push(object.id); continue; }
     const highlighted = matchesObjectClassification(object.classification, options.highlighted) && (!illustration || options.illustrations);
     if (highlighted) highlightedBodies.push(object.id);
     if (illustration && !options.illustrations) hiddenBodies.push(object.id);

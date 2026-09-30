@@ -29,7 +29,7 @@ export function mountObjectShell({
   readSelection,
   documentTarget = document,
   windowTarget = window,
-  preferences, onResetDestination, navigable, prefetch,
+  preferences, onResetDestination, onFrameCategory, navigable, prefetch,
 }: ShellOptions): ObjectShell {
   const drawer = requiredElement(documentTarget, ".object-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -142,7 +142,7 @@ export function mountObjectShell({
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId,
       onCategoryChange: value => preferences.set('highlightedClassification', value),
-      onResetDestination, readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
+      onResetDestination, onFrameCategory, readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
       onSearchChange: open => sheet.followSearch(open) }));
     lifetime.onDispose(preferences.subscribe(key => {
       if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();

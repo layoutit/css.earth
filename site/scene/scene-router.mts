@@ -336,6 +336,13 @@ export function createSceneRouter({
       owner.shell = registry.mountObjectShell({ objectId, readSelection: () => current.current, documentTarget, windowTarget,
         preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
         onResetDestination: () => { void navigate(objectId, { kind: 'feature', id: null }).catch(report); },
+        // A header pill flies to its category, keeping the selection; a navigation already in flight keeps the camera.
+        onFrameCategory: classification => {
+          const session = scenes.current;
+          if (!session?.mount || !context || requests.current || !scenes.isCurrent(session)) return;
+          void context.navigation.frameCategory({ classification, objectId, mount: session.mount, signal: session.signal, reducedMotion: reducedMotionActive })
+            .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); });
+        },
         navigable: id => navigable(id),
         // A failed prefetch is not an error yet: the navigation that needs it asks again and reports.
         prefetch: id => { void registry.loadObject(id).catch(() => {}); void registry.loadSystemView(id).catch(() => {}); },

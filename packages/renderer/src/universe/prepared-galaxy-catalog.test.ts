@@ -284,3 +284,29 @@ test('a galaxy with a published stellar extent hangs its caption under its drawn
   expect(Number(label.style.opacity)).toBe(0);
   runtime.destroy();
 });
+test('a header pill category shows its labels at full strength and fades the other classes to a third', () => {
+  const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] }, clusters = read('galaxy-clusters/prepared/catalogue.json');
+  const nebulae = read('m42/source/nebula.json');
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload, clusters, nebulae });
+  const object = clusters.objects[0], label = runtime.inspect().labels[object.id]!, root = runtime.root as unknown as Element;
+  const pose = { referenceFrame: clusters.frame.referenceFrame, epochJdTt: clusters.frame.epochJdTt,
+    pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + object.aperture.comovingRadiusM * 4] as const,
+      orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
+  const settle = (time: number) => { runtime.publish(pose, viewport, 1, [], 1); document.defaultView.advance(time); return Number(label.style.opacity); };
+  expect(settle(400)).toBe(.65);
+  runtime.highlight('galaxy-cluster');
+  expect(root.dataset.highlighted).toBe(String(clusters.objects.length));
+  expect(settle(800)).toBe(1);
+  // A category this layer does not draw leaves it as it was; the body markers carry that highlight.
+  runtime.highlight('galaxy');
+  expect(root.dataset.highlighted).toBe('0');
+  expect(settle(1200)).toBe(.65);
+  runtime.highlight('nebula');
+  expect(root.dataset.highlighted).toBe(String(nebulae.objects.length));
+  expect(settle(1600)).toBeCloseTo(.65 * .3);
+  runtime.highlight(null);
+  expect(settle(2000)).toBe(.65);
+  runtime.destroy();
+});

@@ -11,6 +11,8 @@ export interface ShellOptions {
   readSelection(): SceneSubject;
   preferences: WorldPreferences;
   onResetDestination?(): void;
+  /** A header pill was pressed: frame every member of its classification on the map. */
+  onFrameCategory?(classification: string): void;
   /** Whether the app can fly to the object `id` in place; links to it prefetch its fragment on intent. */
   navigable(id: string): boolean;
   /** Start loading what a flight to `id` reads besides its card: its object entry and system view. */

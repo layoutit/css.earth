@@ -7,9 +7,10 @@ import { allSatelliteSystems } from '../satellite-systems.mts';
 function fixture() {
   const lifetime = createSceneLifetime();
   type Layer = Parameters<typeof createApplicationWorldVisibility>[0];
-  const publications: Parameters<Layer['setBodyVisibility']>[0][] = [];
-  const visibility = createApplicationWorldVisibility({ setBodyVisibility(value) { publications.push(value); } }, lifetime);
-  return { visibility, publications, latest: () => publications.at(-1)! };
+  const publications: Parameters<Layer['setBodyVisibility']>[0][] = [], categories: (string | null)[] = [];
+  const visibility = createApplicationWorldVisibility({ setBodyVisibility(value) { publications.push(value); },
+    setHighlightedClassification(value) { categories.push(value); } }, lifetime);
+  return { visibility, publications, categories, latest: () => publications.at(-1)! };
 }
 
 test('every satellite family is visible when its host or any member is selected', () => {
@@ -58,4 +59,15 @@ test('only an explicitly selected non-featured comet gains its default-hidden or
   assert.ok(latest().orbitHidden?.includes('comet-209p'));
   visibility.selectObject('earth');
   assert.ok(latest().orbitHidden?.includes('comet-2p'));
+});
+
+test('a pill category highlights its bodies and reaches the galaxy, cluster and nebula catalogue too', () => {
+  const { visibility, categories, latest } = fixture();
+  visibility.setHighlightedClassification('planet');
+  assert.ok(latest().highlighted?.includes('jupiter'));
+  assert.ok(latest().highlighted?.includes('pluto'), 'the Planets pill marks the dwarf planets too');
+  visibility.setHighlightedClassification('galaxy');
+  assert.deepEqual(latest().highlighted, []);
+  visibility.setHighlightedClassification(null);
+  assert.deepEqual(categories, ['planet', 'galaxy', null]);
 });

@@ -2,13 +2,17 @@ import { pathToFileURL } from 'node:url';
 /** `node site/build/prepare/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
  * sources so the browser reads one small file instead of source tables and recipes: which moons are major, which orbits
  * the default view hides, which objects are default features, the galaxy and cluster fade distances, and which bodies each
- * planetary system holds (read from the world context's orbit graph once here, not by walking it in the browser). */
+ * planetary system holds (read from the world context's orbit graph once here, not by walking it in the browser), and the box
+ * each header pill frames. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import majorMoons from '../../source/major-moons.json' with { type: 'json' };
 import galaxies from '../../../src/objects/local-group/source/presentation.json' with { type: 'json' };
 import clusters from '../../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
-import type { ObjectDiscovery } from '@cssearth/objects';
+import { discoveryVisibility, matchesObjectClassification, type ObjectDiscovery } from '@cssearth/objects';
+import { catalogueClassification, isNavigableCatalogObject, isPreparedCluster, isPreparedNebula, type PreparedCatalogObject } from '@cssearth/catalog';
+import { readPreparedCatalogObjects } from '@cssearth/bake/navigation';
+import { WORLD_OBJECTS } from '../../world-objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 import { planetarySystemMembers } from '../../planetary-system-members.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
@@ -62,19 +66,56 @@ export function orbitFeature(object: { id: string; classification: string }): bo
   return object.classification === 'trans-neptunian' && isExtremeTransNeptunian(object.id);
 }
 
-export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>) {
+/** Share of each category's members, nearest to the Sun first, that its header pill frames: a few distant outliers must not
+ * shrink the rest to dots. Every member is still highlighted. */
+export const CATEGORY_FRAMED_SHARE = .9;
+type Position = readonly number[];
+export interface CategoryFrame { readonly centreM: Position; readonly minimumM: Position; readonly maximumM: Position }
+
+/** The reference-axis box around the nearest CATEGORY_FRAMED_SHARE of one category's members, centred on itself. Fewer than two
+ * members, or members at one point, give no box: there is nothing to fit, and the pill only highlights. */
+export function prepareCategoryFrame(positionsM: readonly Position[]): CategoryFrame | null {
+  const framed = [...positionsM].sort((a, b) => Math.hypot(...a) - Math.hypot(...b)).slice(0, Math.ceil(positionsM.length * CATEGORY_FRAMED_SHARE));
+  if (framed.length < 2) return null;
+  const minimum = [0, 1, 2].map(axis => Math.min(...framed.map(position => position[axis]!)));
+  const maximum = [0, 1, 2].map(axis => Math.max(...framed.map(position => position[axis]!)));
+  if (minimum.every((value, axis) => value === maximum[axis])) return null;
+  const centreM = minimum.map((value, axis) => (value + maximum[axis]!) / 2);
+  return { centreM, minimumM: minimum.map((value, axis) => value - centreM[axis]!), maximumM: maximum.map((value, axis) => value - centreM[axis]!) };
+}
+
+/** Every category's frame, from the members its pill marks: the world's bodies it highlights with the default settings (the same
+ * discoveryVisibility the browser runs), and the catalogue rows the galaxy layer draws (packages/renderer/src/universe/
+ * prepared-galaxy-catalog.ts: the Local Group's galaxies with a page, the clusters, and the nebulae with a page). The world and the
+ * catalogues share the Sun-centred ICRF frame and epoch. */
+export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS, catalogue: readonly PreparedCatalogObject[],
+  defaultFeatures: ReadonlySet<string>, orbitFeatures: ReadonlySet<string>) {
+  const drawn = catalogue.filter(object => isNavigableCatalogObject(object) && (isPreparedCluster(object) || isPreparedNebula(object) || object.membership.group === 'local-group'));
+  const classifications = [...new Set([...worldObjects.map(object => object.classification), ...drawn.map(catalogueClassification)])].sort();
+  return Object.fromEntries(classifications.flatMap(classification => {
+    const marked = new Set(discoveryVisibility(worldObjects, { illustrations: false, highlighted: classification, defaultFeatures, orbitFeatures }).highlightedBodies);
+    const frame = prepareCategoryFrame([...worldObjects.filter(object => marked.has(object.id)).map(object => object.worldFrame.originM),
+      ...drawn.filter(object => matchesObjectClassification(catalogueClassification(object), classification)).map(object => object.positionM)]);
+    return frame ? [[classification, frame] as const] : [];
+  }));
+}
+
+export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>, catalogue: readonly PreparedCatalogObject[]) {
   const minor = minorMoonOrbitIds(APPLICATION_WORLD_CONTEXT.bodies);
+  const defaultFeatureIds = SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id);
+  const orbitFeatureIds = SCENE_OBJECTS.filter(orbitFeature).map(object => object.id);
   return {
-    schema: 'cssearth-world-presentation@2',
+    schema: 'cssearth-world-presentation@3',
     satelliteSystemIntroductions,
     moons: { major: majorMoonIds(), minor },
-    defaultFeatureIds: SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id),
-    orbitFeatureIds: SCENE_OBJECTS.filter(orbitFeature).map(object => object.id),
+    defaultFeatureIds,
+    orbitFeatureIds,
     hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
     planetarySystems: planetarySystemMembers(APPLICATION_WORLD_CONTEXT),
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },
+    categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, catalogue, new Set(defaultFeatureIds), new Set(orbitFeatureIds)),
   };
 }
 
@@ -82,7 +123,7 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
 export async function writeWorldPresentation() {
   const catalogue = await readSourceCatalog(resolve(import.meta.dirname, '../../..'));
   const introductions = prepareSystemIntroductions(systemText, allSatelliteSystems().map(system => system.hostId), new Set(catalogue.records.map(record => record.id)));
-  const text = `${JSON.stringify(prepareWorldPresentation(introductions))}\n`;
+  const text = `${JSON.stringify(prepareWorldPresentation(introductions, await readPreparedCatalogObjects(resolve(import.meta.dirname, '../../../src/objects'))))}\n`;
   await mkdir(dirname(output), { recursive: true });
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);
 }

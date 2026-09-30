@@ -12,7 +12,7 @@ export type { NavigationDistance } from './navigation-distance.js';
 export { catalogEntry, catalogueObject } from './object-catalog.js';
 export type { CatalogContext, CatalogEntry } from './object-catalog.js';
 export { matchesObjectCategory, matchesObjectClassification } from './object-categories.js';
-export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, parseObjectDiscovery } from './object-discovery.js';
+export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, offTheMap, parseObjectDiscovery } from './object-discovery.js';
 export type { ObjectDiscovery } from './object-discovery.js';
 export { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from './object-schema.js';
 export type { ObjectClassification, ObjectDefinitionInput, ObjectEntry, ObjectPositionM, ObjectWorldFrame } from './object-schema.js';

@@ -95,7 +95,7 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
   const image: PreparedCssImageLayers = { ...volume, id: 'lazy-image', bankViews: volume.stacks.map(stack => ({ axis: stack.axis,
     normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
   const loadImageLayer = vi.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
-  const catalogRuntime = { destroy: vi.fn(), select: vi.fn(), resolve: vi.fn(), publish: vi.fn(), inspect: vi.fn(() => ({ count: 0 })) };
+  const catalogRuntime = { destroy: vi.fn(), select: vi.fn(), highlight: vi.fn(), resolve: vi.fn(), publish: vi.fn(), inspect: vi.fn(() => ({ count: 0 })) };
   catalogMount.mockReturnValue(catalogRuntime);
   const loadCatalog = vi.fn(async () => ({ payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 }));
   const document = new FakeDocument(), stage = document.createElement();
@@ -626,7 +626,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
   const loadVolumeDataset = vi.fn(async (id: string) => ({ payload: banks.find(bank => bank.id === id)!, resolveResource: (path: string) => `/bank/${id}/${path}` }));
   const loadImageLayer = vi.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
-  catalogMount.mockReturnValue({ destroy() {}, select() {}, resolve: (id: string) => ({ id, detailedObjectId: id === 'catalogue-only' ? undefined : id.replace('catalogue:', '') }), publish() {}, inspect() {} });
+  catalogMount.mockReturnValue({ destroy() {}, select() {}, highlight() {}, resolve: (id: string) => ({ id, detailedObjectId: id === 'catalogue-only' ? undefined : id.replace('catalogue:', '') }), publish() {}, inspect() {} });
   const document = new FakeDocument(), stage = document.createElement();
   const fetchResource = vi.fn<typeof fetch>(async () => new Response(new Uint8Array([1])));
   Object.assign(document.defaultView, { fetch: fetchResource });

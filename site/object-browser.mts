@@ -17,6 +17,8 @@ export interface ObjectBrowserOptions {
   onCategoryChange?(classification: string | null): void;
   readIllustrationModels?(): boolean;
   onResetDestination?(): void;
+  /** A pill was pressed: the scene frames every member of its classification. */
+  onFrameCategory?(classification: string): void;
   /** Search results opened or closed. The mobile sheet follows this state, not the input's own events. */
   onSearchChange?(open: boolean): void;
 }
@@ -37,7 +39,7 @@ interface SubjectOverride {
 
 export function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
   { readSelection, readObjectId, onCategoryChange = () => {}, readIllustrationModels = () => false, onResetDestination = () => {},
-    onSearchChange = () => {} }: ObjectBrowserOptions) {
+    onFrameCategory = () => {}, onSearchChange = () => {} }: ObjectBrowserOptions) {
   // Browsing a system keeps the committed focus; a flight preview temporarily
   // covers it. Neither changes which scene or focus the shell owns.
   let subjectOverride: SubjectOverride | null = null;
@@ -207,6 +209,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       search.value = button.dataset.searchQuery ?? "";
       showResults();
       requiredElement(documentTarget, '.object-sidebar').scrollTop = 0;
+      const classification = button.dataset.searchClassification;
+      if (classification) onFrameCategory(classification);
     }, { signal: events.signal });
     button.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
