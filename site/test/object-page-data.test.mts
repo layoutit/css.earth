@@ -6,8 +6,6 @@ import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {loadObjectPageData,readPreparedObjectBytes} from '../object-page-data.mts';
 import {objectPageStyles} from '../object-page-contract.mts';
-import {SCENE_OBJECTS} from '../objects.mts';
-import {runtimeRepresentatives} from '@cssearth/objects/node/contract';
 
 test('page data and the object transport are read from the restored runtime, with no copy on disk',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));
@@ -29,8 +27,8 @@ test('page data and the object transport are read from the restored runtime, wit
  assert.throws(()=>objectPageStyles({id:'body',properties:{page:{stylesheets:['src/../escape.css']}}}),/invalid/);
 });
 
-test('objects own ordered CSS and scene-bound page metadata, once per runtime structure',async()=>{
- for(const {id} of await runtimeRepresentatives(SCENE_OBJECTS.map(object=>object.id))){
+test('objects own ordered CSS and scene-bound page metadata',async()=>{
+ for(const id of ['earth','moon','saturn']){
   const descriptor=JSON.parse(await readFile(new URL(`../../src/objects/${id}/object.json`,import.meta.url),'utf8'));
   const page=await loadObjectPageData(id);
   const styles=objectPageStyles(descriptor);

@@ -1,8 +1,7 @@
-import { loadObjectTestDefinition, runtimeRepresentatives } from '@cssearth/objects/node/contract';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { SCENE_OBJECTS } from "../objects.mts";
 import { createObjectControlBinding } from '@cssearth/renderer/testing';
 import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '@cssearth/renderer/testing';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
@@ -80,9 +79,9 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   };
 }
 
-// Once per runtime structure: the binder reads only the controls' shape.
-for (const { id, definition } of await runtimeRepresentatives(SCENE_OBJECTS.map(object => object.id))) test(`${id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
-  const {controls} = parsePreparedObjectRuntime(definition);
+// The bodies with the most kinds of control: the binder is one code path, whatever the body.
+for (const id of ['earth', 'moon', 'saturn']) test(`${id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
+  const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(id));
   const h = harness(controls);
   assert.ok(h.datasetInputs.every(input => !input.disabled));
   assert.ok(h.settingInputs.filter(input => !["motion", "surfaceLabels", "heliosphere", "illustrationModels"].includes(input.name)).every(input => input.disabled));
