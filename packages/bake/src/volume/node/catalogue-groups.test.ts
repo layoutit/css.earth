@@ -33,7 +33,7 @@ test('sky bands split each shell\'s room evenly over the sky, so a densely cover
   const east = Array.from({ length: 6 }, (_, index) => ({ reference: [1, 0.1 * (index + 1), 0] }));
   const west = [{ reference: [1, -0.5, 0] }];
   const kept = selectByShell([...east, ...west], 10, () => 4, undefined, 1);
-  expect(kept.filter(point => point.reference[1]! > 0)).toHaveLength(2);
-  expect(kept.filter(point => point.reference[1]! < 0)).toHaveLength(1);
-  expect(() => selectByShell(east, 10, () => 4, undefined, 0)).toThrow(/skyBands/);
+  assert.equal(kept.filter(point => point.reference[1]! > 0).length, 2);
+  assert.equal(kept.filter(point => point.reference[1]! < 0).length, 1);
+  assert.throws(() => selectByShell(east, 10, () => 4, undefined, 0), /skyBands/);
 });
