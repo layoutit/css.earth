@@ -33,8 +33,21 @@ export function leafBoxStyles(leaf: PreparedLeafBox, step: number, outset: numbe
     ? ` translate(50%, 50%) scale(${format(1 + outset * leaf.seam[0])}, ${format(1 + outset * leaf.seam[1])}) translate(-50%, -50%)` : '');
   if (seamOnly) return leaf.seam ? [['transform', transform]] : [];
   const styles: [string, string][] = [];
-  if (leaf.backgroundPosition) styles.push(['backgroundPosition', leaf.backgroundPosition.map(part => component(part, factor)).join(' ')]);
-  if (leaf.backgroundSize) styles.push(['backgroundSize', leaf.backgroundSize.map(part => component(part, factor)).join(' ')]);
+  // The background as a share of the box: it scales with the box, so a step writes only the box and the transform (a
+  // stress run on Mars rewrote both backgrounds of every resized leaf, 2026-09-30). An axis a share cannot express (an
+  // image as wide as its box, or a size kept as written) keeps pixels scaled by the step.
+  const share = (axis: 0 | 1) => {
+    const size = leaf.backgroundSize?.[axis], box = leaf.box?.[axis], position = leaf.backgroundPosition?.[axis];
+    const sized = typeof size === 'number' && typeof box === 'number' && box > 0;
+    return {
+      size: size === undefined ? undefined : sized ? `${format(size / box * 100)}%` : component(size, factor),
+      position: position === undefined ? undefined
+        : typeof position === 'number' && sized && box !== size ? `${format(position / (box - size) * 100)}%` : component(position, factor),
+    };
+  };
+  const x = share(0), y = share(1);
+  if (leaf.backgroundPosition) styles.push(['backgroundPosition', `${x.position} ${y.position}`]);
+  if (leaf.backgroundSize) styles.push(['backgroundSize', `${x.size} ${y.size}`]);
   styles.push(['transform', transform]);
   if (leaf.box) styles.push(['width', `${format(leaf.box[0] * factor)}px`], ['height', `${format(leaf.box[1] * factor)}px`]);
   return styles;

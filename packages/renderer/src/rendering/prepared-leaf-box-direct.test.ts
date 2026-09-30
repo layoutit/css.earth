@@ -18,16 +18,17 @@ const bindings = [
 test('a leaf box record gives the final values at a step and seam outset', () => {
   // Step 362 × 0.003253 exceeds 1: the full box. Step 100 gives a factor of 0.3253.
   expect(leafBoxStyles(boxes[0]!, 362, 0.00116133)).toEqual([
-    ['backgroundPosition', '-14.5454px -1317.818px'], ['backgroundSize', '2016.96px 1489.454px'],
+    // The background is a share of the box, the same at every step: 2016.96 / 64 and -14.5454 / (64 - 2016.96).
+    ['backgroundPosition', '0.744787% 92.449002%'], ['backgroundSize', '3151.5% 2327.271875%'],
     ['transform', `${matrix} scale(1) translate(50%, 50%) scale(1.08945, 1.023078) translate(-50%, -50%)`],
     ['width', '64px'], ['height', '64px'],
   ]);
   expect(Object.fromEntries(leafBoxStyles(boxes[0]!, 100, 0))).toMatchObject({
-    backgroundSize: '656.117088px 484.519386px', width: '20.8192px', height: '20.8192px',
+    backgroundSize: '3151.5% 2327.271875%', width: '20.8192px', height: '20.8192px',
     transform: `${matrix} scale(3.074085) translate(50%, 50%) scale(1, 1) translate(-50%, -50%)`,
   });
   // A component kept as written is not scaled; a leaf without seam coefficients has no seam term.
-  expect(Object.fromEntries(leafBoxStyles(boxes[1]!, 100, 0.002))).toMatchObject({ backgroundPosition: '0 -425.786996px', transform: `${matrix} scale(3.095017)` });
+  expect(Object.fromEntries(leafBoxStyles(boxes[1]!, 100, 0.002))).toMatchObject({ backgroundPosition: '0 92.449002%', transform: `${matrix} scale(3.095017)` });
 });
 
 test('a mounted leaf receives its values from the record and writes only what changes', () => {
@@ -39,7 +40,8 @@ test('a mounted leaf receives its values from the record and writes only what ch
   expect(nodes[1]!.getAttribute('style')).not.toMatch(/var\(|calc\(|--/);
   writes.length = 0;
   writer.set(1, '--silhouette-step', '100');
-  expect(writes).toEqual([[1, 'backgroundPosition'], [1, 'backgroundSize'], [1, 'transform'], [1, 'width'], [1, 'height']]);
+  // A step resizes the box; the background, a share of it, is not written again.
+  expect(writes).toEqual([[1, 'transform'], [1, 'width'], [1, 'height']]);
   expect(writer.read(1, '--silhouette-step')).toBe('100');
   expect(writer.read(2, '--silhouette-step')).toBe('362');
   writes.length = 0;
