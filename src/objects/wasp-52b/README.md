@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-52. Its orbit and size follow Hebrard et al. 2013's fit, the archive's default. This account was drafted from Hebrard et al. 2013's values; the sections below are the data's own.
+It is the only planet known around WASP-52. Its orbit and size follow Hebrard et al. 2013's fit, the archive's default. The introduction is generated from Hebrard et al. 2013's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.27 Jupiter radii from Hebrard et al. 2013 (2013A&A...549A.134H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract): 90,794.8 km at 71,492 km per Jupiter radius. GM from the mass 0.46 Jupiter masses (Hebrard et al. 2013, the mass the NASA Exoplanet Archive's composite table adopts (2013A&A...549A.134H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around WASP-52. Its orbit and size follow Hebrard et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-52b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

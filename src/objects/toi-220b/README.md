@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-220. Its orbit and size follow Hoyer et al. 2021's fit, the archive's default. This account was drafted from Hoyer et al. 2021's values; the sections below are the data's own.
+It is the only planet known around TOI-220. Its orbit and size follow Hoyer et al. 2021's fit, the archive's default. The introduction is generated from Hoyer et al. 2021's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.27031896 Jupiter radii from Hoyer et al. 2021 (2021MNRAS.505.3361H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract): 19,325.6 km at 71,492 km per Jupiter radius. GM from the mass 0.04341966 Jupiter masses (Hoyer et al. 2021, the mass the NASA Exoplanet Archive's composite table adopts (2021MNRAS.505.3361H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around TOI-220. Its orbit and size follow Hoyer et a
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-220b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 248 degrees is taken as Hoyer et al. 2021 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.032) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

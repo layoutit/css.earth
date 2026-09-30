@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around LP 791-18. Its orbit and size follow Peterson et al. 2023's fit, the archive's default. This account was drafted from Greklek-McKeon et al. 2025's values; the sections below are the data's own.
+It is one of 3 planets known around LP 791-18. Its orbit and size follow Peterson et al. 2023's fit, the archive's default. The introduction is generated from Greklek-McKeon et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.09206903 Jupiter radii from Greklek-McKeon et al. 2025 (2025AJ....170...65G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170...65G/abstract): 6,582.2 km at 71,492 km per Jupiter radius. GM from the mass 0.00286318 Jupiter masses (Greklek-McKeon et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170...65G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170...65G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 3 planets known around LP 791-18. Its orbit and size follow Peterso
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/lp-791-18d.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

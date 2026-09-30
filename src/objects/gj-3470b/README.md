@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around GJ 3470. Its orbit and size follow Awiphan et al. 2016's fit, the archive's default. This account was drafted from Awiphan et al. 2016's values; the sections below are the data's own.
+It is the only planet known around GJ 3470. Its orbit and size follow Awiphan et al. 2016's fit, the archive's default. The introduction is generated from Awiphan et al. 2016's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.40770809 Jupiter radii from Awiphan et al. 2016 (2016MNRAS.463.2574A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract): 29,147.9 km at 71,492 km per Jupiter radius. GM from the mass 0.04373407 Jupiter masses (Awiphan et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.463.2574A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,9 @@ It is the only planet known around GJ 3470. Its orbit and size follow Awiphan et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-3470b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 1.7 degrees is taken as Kokori et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.017) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "GJ 3470 b" (revision 1374245683), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "GJ 3470 b" (revision 1374245683) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

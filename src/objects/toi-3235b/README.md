@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-3235. Its orbit and size follow Hobson et al. 2023's fit, the archive's default. This account was drafted from Hobson et al. 2023's values; the sections below are the data's own.
+It is the only planet known around TOI-3235. Its orbit and size follow Hobson et al. 2023's fit, the archive's default. The introduction is generated from Hobson et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.017 Jupiter radii from Hobson et al. 2023 (2023ApJ...946L...4H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract): 72,707.4 km at 71,492 km per Jupiter radius. GM from the mass 0.665 Jupiter masses (Hobson et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023ApJ...946L...4H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,9 @@ It is the only planet known around TOI-3235. Its orbit and size follow Hobson et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-3235b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 90 degrees is taken as Ko et al. 2026 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.03) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "TOI-3235 b" (revision 1374086867), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "TOI-3235 b" (revision 1374086867) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

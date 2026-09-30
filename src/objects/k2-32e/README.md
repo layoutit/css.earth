@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 4 planets known around K2-32. Its orbit and size follow Lillo-Box et al. 2020's fit, the archive's default. This account was drafted from Lillo-Box et al. 2020's values; the sections below are the data's own.
+It is one of 4 planets known around K2-32. Its orbit and size follow Lillo-Box et al. 2020's fit, the archive's default. The introduction is generated from Lillo-Box et al. 2020's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.10812758 Jupiter radii from Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract): 7,730.3 km at 71,492 km per Jupiter radius. GM from the mass 0.00660734 Jupiter masses (Lillo-Box et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...640A..48L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 4 planets known around K2-32. Its orbit and size follow Lillo-Box e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-32e.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 205 degrees is taken as Lillo-Box et al. 2020 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.043) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

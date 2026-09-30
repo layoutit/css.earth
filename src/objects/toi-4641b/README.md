@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-4641. Its orbit and size follow Bieryla et al. 2024's fit, the archive's default. This account was drafted from Bieryla et al. 2024's values; the sections below are the data's own.
+It is the only planet known around TOI-4641. Its orbit and size follow Bieryla et al. 2024's fit, the archive's default. The introduction is generated from Bieryla et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.73 Jupiter radii from Bieryla et al. 2024 (2024MNRAS.52710955B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract): 52,189.2 km at 71,492 km per Jupiter radius. No mass is measured: Bieryla et al. 2024 (2024MNRAS.52710955B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract) gives only an upper limit of 3.87 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-4641. Its orbit and size follow Bieryla e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-4641b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

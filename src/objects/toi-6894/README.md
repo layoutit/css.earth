@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Bryant et al. 2025. This account was drafted from Bryant et al. 2025's values; the sections below are the data's own.
+Its radius and temperature follow Bryant et al. 2025. The introduction is generated from Bryant et al. 2025's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3917278287286247808, parallax 13.684 ± 0.053 mas (73.08 pc). Radius 0.2276 +/- 0.0057 solar radii from Bryant et al. 2025, the stellar radius of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract). Mass 0.207 +/- 0.011 solar masses from Bryant et al. 2025, the stellar mass of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract). Temperature 3,007 K from Bryant et al. 2025, the stellar temperature of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive. log g 5.04 from the mass and radius.
 
@@ -14,11 +14,10 @@ Its radius and temperature follow Bryant et al. 2025. This account was drafted f
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "TOI-6894" (revision 1357019233), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "TOI-6894" (revision 1357019233) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

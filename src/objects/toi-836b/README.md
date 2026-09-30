@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-836. Its orbit and size follow Hawthorn et al. 2023's fit, the archive's default. This account was drafted from Hawthorn et al. 2023's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-836. Its orbit and size follow Hawthorn et al. 2023's fit, the archive's default. The introduction is generated from Hawthorn et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.15202096 Jupiter radii from Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract): 10,868.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01425297 Jupiter masses (Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -14,10 +14,8 @@ It is one of 2 planets known around TOI-836. Its orbit and size follow Hawthorn 
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-836b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 9 degrees is taken as Hawthorn et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

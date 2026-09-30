@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around Kepler-22. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default. This account was drafted from Bonomo et al. 2023's values; the sections below are the data's own.
+It is the only planet known around Kepler-22. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default. The introduction is generated from Bonomo et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.18734977 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 13,394 km at 71,492 km per Jupiter radius. No mass is measured: Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract) gives only an upper limit of 0.0286318 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -22,7 +22,7 @@ Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 ## Known problems
 
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "Kepler-22b" (revision 1374868815), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "Kepler-22b" (revision 1374868815) verbatim, CC BY-SA 4.0.
 - **The Illustration dataset is art, not data.** Its colours and features are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

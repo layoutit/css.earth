@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-1453. Its orbit and size follow Stalport et al. 2025's fit, the archive's default. This account was drafted from Stalport et al. 2025's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-1453. Its orbit and size follow Stalport et al. 2025's fit, the archive's default. The introduction is generated from Stalport et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.10464823 Jupiter radii from Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract): 7,481.5 km at 71,492 km per Jupiter radius. No mass is measured: Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract) gives only an upper limit of 0.00729954 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 2 planets known around TOI-1453. Its orbit and size follow Stalport
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1453b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

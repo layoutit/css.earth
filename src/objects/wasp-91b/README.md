@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-91. Its orbit and size follow Anderson et al. 2017's fit, the archive's default. This account was drafted from Anderson et al. 2017's values; the sections below are the data's own.
+It is the only planet known around WASP-91. Its orbit and size follow Anderson et al. 2017's fit, the archive's default. The introduction is generated from Anderson et al. 2017's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.03 Jupiter radii from Anderson et al. 2017 (2017A&A...604A.110A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...604A.110A/abstract): 73,636.8 km at 71,492 km per Jupiter radius. GM from the mass 1.34 Jupiter masses (Anderson et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017A&A...604A.110A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017A&A...604A.110A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around WASP-91. Its orbit and size follow Anderson e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-91b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

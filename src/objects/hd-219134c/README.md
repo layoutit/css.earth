@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 6 planets known around HD 219134. Its orbit and size follow Gillon et al. 2017's fit, the archive's default. This account was drafted from Gillon et al. 2017's values; the sections below are the data's own.
+It is one of 6 planets known around HD 219134. Its orbit and size follow Gillon et al. 2017's fit, the archive's default. The introduction is generated from Gillon et al. 2017's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.13480239 Jupiter radii from Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract): 9,637.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01371803 Jupiter masses (Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -14,10 +14,8 @@ It is one of 6 planets known around HD 219134. Its orbit and size follow Gillon 
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-219134c.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 70 degrees is taken as Gillon et al. 2017 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

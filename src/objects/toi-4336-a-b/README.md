@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-4336 A. Its orbit and size follow Parc et al. 2026's fit, the archive's default. This account was drafted from Parc et al. 2026's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-4336 A. Its orbit and size follow Parc et al. 2026's fit, the archive's default. The introduction is generated from Parc et al. 2026's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.1906507 Jupiter radii from Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract): 13,630 km at 71,492 km per Jupiter radius. GM from the mass 0.01047735 Jupiter masses (Parc et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...708A..81P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 2 planets known around TOI-4336 A. Its orbit and size follow Parc e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-4336-a-b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HATS-71. Its orbit and size follow Bakos et al. 2020's fit, the archive's default. This account was drafted from Bakos et al. 2020's values; the sections below are the data's own.
+It is the only planet known around HATS-71. Its orbit and size follow Bakos et al. 2020's fit, the archive's default. The introduction is generated from Bakos et al. 2020's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.024 Jupiter radii from Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract): 73,207.8 km at 71,492 km per Jupiter radius. GM from the mass 0.37 Jupiter masses (Bakos et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....159..267B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around HATS-71. Its orbit and size follow Bakos et a
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hats-71b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

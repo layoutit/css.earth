@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 4 planets known around TOI-4010. Its orbit and size follow Kunimoto et al. 2023's fit, the archive's default. This account was drafted from Kunimoto et al. 2023's values; the sections below are the data's own.
+It is one of 4 planets known around TOI-4010. Its orbit and size follow Kunimoto et al. 2023's fit, the archive's default. The introduction is generated from Kunimoto et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.26942682 Jupiter radii from Kunimoto et al. 2023 (2023AJ....166....7K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....7K/abstract): 19,261.9 km at 71,492 km per Jupiter radius. GM from the mass 0.03460987 Jupiter masses (Kunimoto et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166....7K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166....7K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 4 planets known around TOI-4010. Its orbit and size follow Kunimoto
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-4010b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 0 degrees is taken as Kunimoto et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.03) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

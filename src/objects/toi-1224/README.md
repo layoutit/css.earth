@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Thao et al. 2024. This account was drafted from Thao et al. 2024's values; the sections below are the data's own.
+Its radius and temperature follow Thao et al. 2024. The introduction is generated from Thao et al. 2024's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4620009665047355520, parallax 26.827 ± 0.018 mas (37.28 pc); its RUWE is 1.5, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.404 +/- 0.012 solar radii from Thao et al. 2024, the stellar radius of the default parameter set of TOI-1224 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract). Mass 0.4 +/- 0.01 solar masses from Thao et al. 2024, the stellar mass of the default parameter set of TOI-1224 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract). Temperature 3,326 K from Thao et al. 2024, the stellar temperature of the default parameter set of TOI-1224 b in the NASA Exoplanet Archive. log g 4.83 from the mass and radius.
 
@@ -14,11 +14,9 @@ Its radius and temperature follow Thao et al. 2024. This account was drafted fro
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

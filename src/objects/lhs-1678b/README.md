@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around LHS 1678. Its orbit and size follow Silverstein et al. 2022's fit, the archive's default. This account was drafted from Silverstein et al. 2024's values; the sections below are the data's own.
+It is one of 3 planets known around LHS 1678. Its orbit and size follow Silverstein et al. 2022's fit, the archive's default. The introduction is generated from Silverstein et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.06111171 Jupiter radii from Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S/abstract): 4,369 km at 71,492 km per Jupiter radius. No mass is measured: Silverstein et al. 2022 (2022AJ....163..151S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract) gives only an upper limit of 0.00110122 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 3 planets known around LHS 1678. Its orbit and size follow Silverst
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/lhs-1678b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -23 degrees is taken as Silverstein et al. 2024 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.033) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

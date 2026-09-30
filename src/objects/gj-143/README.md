@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Dragomir et al. 2019. It is also HD 21749, HIP 16069. This account was drafted from Dragomir et al. 2019's values; the sections below are the data's own.
+Its radius and temperature follow Dragomir et al. 2019. It is also HD 21749, HIP 16069. The introduction is generated from Dragomir et al. 2019's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4673947174316727040, parallax 61.227 ± 0.015 mas (16.33 pc). Radius 0.695 +/- 0.03 solar radii from Dragomir et al. 2019, the stellar radius of the default parameter set of HD 21749 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract). Mass 0.73 +/- 0.07 solar masses from Dragomir et al. 2019, the stellar mass of the default parameter set of HD 21749 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract). Temperature 4,640 K from Dragomir et al. 2019, the stellar temperature of the default parameter set of HD 21749 c in the NASA Exoplanet Archive. log g 4.62 from the mass and radius.
 
@@ -14,11 +14,9 @@ Its radius and temperature follow Dragomir et al. 2019. It is also HD 21749, HIP
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

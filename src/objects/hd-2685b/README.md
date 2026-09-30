@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HD 2685. Its orbit and size follow Jones et al. 2019's fit, the archive's default. This account was drafted from Jones et al. 2019's values; the sections below are the data's own.
+It is the only planet known around HD 2685. Its orbit and size follow Jones et al. 2019's fit, the archive's default. The introduction is generated from Jones et al. 2019's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.44 Jupiter radii from Jones et al. 2019 (2019A&A...625A..16J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract): 102,948.5 km at 71,492 km per Jupiter radius. GM from the mass 1.17 Jupiter masses (Jones et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...625A..16J), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around HD 2685. Its orbit and size follow Jones et a
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-2685b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 184.36 degrees is taken as Jones et al. 2019 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.091) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

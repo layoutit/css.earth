@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-530. Its orbit and size follow Gan et al. 2022's fit, the archive's default. This account was drafted from Gan et al. 2022's values; the sections below are the data's own.
+It is the only planet known around TOI-530. Its orbit and size follow Gan et al. 2022's fit, the archive's default. The introduction is generated from Gan et al. 2022's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.83 Jupiter radii from Gan et al. 2022 (2022MNRAS.511...83G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract): 59,338.4 km at 71,492 km per Jupiter radius. GM from the mass 0.4 Jupiter masses (Gan et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.511...83G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-530. Its orbit and size follow Gan et al.
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-530b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

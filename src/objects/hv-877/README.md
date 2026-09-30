@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its mean radius, 171.7 solar radii, comes from comparing how fast its surface moves with how its size changes, 49,138 parsecs away. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
+Its mean radius, 171.7 solar radii, comes from comparing how fast its surface moves with how its size changes, 49,138 parsecs away. The introduction is generated from Groenewegen (2013), A&A 550, A70's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4661550421263759360, distance 49,138 pc from Groenewegen (2013), A&A 550, A70, table10, HV 877: Baade-Wesselink distance (pc) 49137.9 +/- 5164 (Monte-Carlo); Gaia DR3's parallax, -0.028 ± 0.012 mas (-2.3 standard errors), is not used. Radius 171.7 +/- 18.4 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 877: Baade-Wesselink mean radius (solar radii) 171.7 +/- 18.4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 4,750 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0461, columns Teffp, e_Teffp: Teff 4750 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 1.52 from 2022AJ....163..152S ("APOGEE Net: An Expanded Spectral Model of Both Low-mass and High-mass Stars."), the APOGEE Net pipeline.
 
@@ -26,7 +26,6 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Not shown.** No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.
 - **Not shown.** Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 - **Brightness.** The model is Gaia's 2014-2017 fit carried 100 cycles to the scene date; with the period's error the phase shown is known to 0.03 of a cycle, and period changes after 2017 are not included. The G band stands for all colours: the star's temperature and colour change through the cycle, and the page does not show that.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

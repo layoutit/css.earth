@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HD 202772 A. Its orbit and size follow Jofré et al. 2025's fit, the archive's default. This account was drafted from Jofré et al. 2025's values; the sections below are the data's own.
+It is the only planet known around HD 202772 A. Its orbit and size follow Jofré et al. 2025's fit, the archive's default. The introduction is generated from Jofré et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.627 Jupiter radii from Jofré et al. 2025 (2025MNRAS.544.3994J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract): 116,317.5 km at 71,492 km per Jupiter radius. GM from the mass 1.018 Jupiter masses (Jofré et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025MNRAS.544.3994J), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around HD 202772 A. Its orbit and size follow Jofré
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-202772-a-b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 99 degrees is taken as Jofré et al. 2025 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.03) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

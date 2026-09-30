@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-1259 A. Its orbit and size follow Veldhuis et al. 2026's fit, the archive's default. This account was drafted from Veldhuis et al. 2026's values; the sections below are the data's own.
+It is the only planet known around TOI-1259 A. Its orbit and size follow Veldhuis et al. 2026's fit, the archive's default. The introduction is generated from Veldhuis et al. 2026's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.03488447 Jupiter radii from Veldhuis et al. 2026 (2026A&A...708A.272V), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract): 73,986 km at 71,492 km per Jupiter radius. GM from the mass 0.44363561 Jupiter masses (Veldhuis et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...708A.272V), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-1259 A. Its orbit and size follow Veldhui
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1259-a-b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-156. Its orbit and size follow Lafarga et al. 2026's fit, the archive's default. This account was drafted from Lafarga et al. 2026's values; the sections below are the data's own.
+It is the only planet known around WASP-156. Its orbit and size follow Lafarga et al. 2026's fit, the archive's default. The introduction is generated from Lafarga et al. 2026's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.5486672 Jupiter radii from Lafarga et al. 2026 (2026MNRAS.tmp..940L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract): 39,225.3 km at 71,492 km per Jupiter radius. GM from the mass 0.13214678 Jupiter masses (Lafarga et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.tmp..940L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around WASP-156. Its orbit and size follow Lafarga e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-156b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around TOI-663. Its orbit and size follow Cointepas et al. 2024's fit, the archive's default. This account was drafted from Cointepas et al. 2024's values; the sections below are the data's own.
+It is one of 3 planets known around TOI-663. Its orbit and size follow Cointepas et al. 2024's fit, the archive's default. The introduction is generated from Cointepas et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.20251618 Jupiter radii from Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract): 14,478.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01400127 Jupiter masses (Cointepas et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...685A..19C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 3 planets known around TOI-663. Its orbit and size follow Cointepas
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-663b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

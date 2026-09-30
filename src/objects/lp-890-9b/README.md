@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around LP 890-9. Its orbit and size follow Delrez et al. 2022's fit, the archive's default. This account was drafted from Delrez et al. 2022's values; the sections below are the data's own.
+It is one of 2 planets known around LP 890-9. Its orbit and size follow Delrez et al. 2022's fit, the archive's default. The introduction is generated from Delrez et al. 2022's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.11776272 Jupiter radii from Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract): 8,419.1 km at 71,492 km per Jupiter radius. No mass is measured: Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract) gives only an upper limit of 0.04153184 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 2 planets known around LP 890-9. Its orbit and size follow Delrez e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/lp-890-9b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

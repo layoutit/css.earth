@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around HR 858. Its orbit and size follow Bonfanti et al. 2025's fit, the archive's default. This account was drafted from Bonfanti et al. 2025's values; the sections below are the data's own.
+It is one of 3 planets known around HR 858. Its orbit and size follow Bonfanti et al. 2025's fit, the archive's default. The introduction is generated from Bonfanti et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.17655486 Jupiter radii from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract): 12,622.3 km at 71,492 km per Jupiter radius. No mass is measured: Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract) gives only an upper limit of 0.01195614 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 3 planets known around HR 858. Its orbit and size follow Bonfanti e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hr-858c.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

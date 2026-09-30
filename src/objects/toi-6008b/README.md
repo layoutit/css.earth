@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-6008. Its orbit and size follow Barkaoui et al. 2024's fit, the archive's default. This account was drafted from Barkaoui et al. 2024's values; the sections below are the data's own.
+It is the only planet known around TOI-6008. Its orbit and size follow Barkaoui et al. 2024's fit, the archive's default. The introduction is generated from Barkaoui et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.0918906 Jupiter radii from Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract): 6,569.4 km at 71,492 km per Jupiter radius. No mass is measured: Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract) gives only an upper limit of 0.01258541 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -15,10 +15,5 @@ It is the only planet known around TOI-6008. Its orbit and size follow Barkaoui 
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-6008b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

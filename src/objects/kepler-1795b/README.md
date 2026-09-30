@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around Kepler-1795. Its orbit and size follow Q1-Q17 DR25 KOI Table's fit, the archive's default. This account was drafted from Valizadegan et al. 2022's values; the sections below are the data's own.
+It is the only planet known around Kepler-1795. Its orbit and size follow Q1-Q17 DR25 KOI Table's fit, the archive's default. The introduction is generated from Valizadegan et al. 2022's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.14836462 Jupiter radii from Valizadegan et al. 2022 (2022ApJ...926..120V), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022ApJ...926..120V/abstract): 10,606.9 km at 71,492 km per Jupiter radius. GM from the mass 0.0107 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -15,10 +15,5 @@ It is the only planet known around Kepler-1795. Its orbit and size follow Q1-Q17
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/kepler-1795b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

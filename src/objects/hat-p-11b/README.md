@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around HAT-P-11. Its orbit and size follow An et al. 2025's fit, the archive's default. This account was drafted from An et al. 2025's values; the sections below are the data's own.
+It is one of 2 planets known around HAT-P-11. Its orbit and size follow An et al. 2025's fit, the archive's default. The introduction is generated from An et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.4466 Jupiter radii from Basilicata et al. 2024 (2024A&A...686A.127B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract): 31,928.3 km at 71,492 km per Jupiter radius. GM from the mass 0.0787 Jupiter masses (Basilicata et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...686A.127B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -23,7 +23,7 @@ Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src
 ## Known problems
 
 - **Orbit convention.** omega 28 degrees is taken as An et al. 2025 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.251) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "HAT-P-11b" (revision 1374246338), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "HAT-P-11b" (revision 1374246338) verbatim, CC BY-SA 4.0.
 - **The Illustration dataset is art, not data.** Its colours and features are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

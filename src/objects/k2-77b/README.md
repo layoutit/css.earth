@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around K2-77. Its orbit and size follow Thygesen et al. 2023's fit, the archive's default. This account was drafted from Thygesen et al. 2023's values; the sections below are the data's own.
+It is the only planet known around K2-77. Its orbit and size follow Thygesen et al. 2023's fit, the archive's default. The introduction is generated from Thygesen et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.223 Jupiter radii from Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract): 15,942.7 km at 71,492 km per Jupiter radius. No mass is measured: Gaidos et al. 2017 (2017MNRAS.464..850G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..850G/abstract) gives only an upper limit of 1.9 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around K2-77. Its orbit and size follow Thygesen et 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-77b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -40 degrees is taken as Thygesen et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.29) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

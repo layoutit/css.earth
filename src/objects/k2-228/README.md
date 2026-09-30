@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Livingston et al. 2018. This account was drafted from Livingston et al. 2018's values; the sections below are the data's own.
+Its radius and temperature follow Livingston et al. 2018. The introduction is generated from Livingston et al. 2018's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3583611726988838144, parallax 6.163 ± 0.048 mas (162.25 pc); its RUWE is 2.6, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.65 +/- 0.01 solar radii from Livingston et al. 2018, the stellar radius of the default parameter set of K2-228 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract). Mass 0.71 +/- 0.02 solar masses from Livingston et al. 2018, the stellar mass of the default parameter set of K2-228 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract). Temperature 4,715 K from Livingston et al. 2018, the stellar temperature of the default parameter set of K2-228 b in the NASA Exoplanet Archive. log g 4.66 from the mass and radius.
 
@@ -14,11 +14,9 @@ Its radius and temperature follow Livingston et al. 2018. This account was draft
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

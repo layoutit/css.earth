@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around LTT 1445 A. Its orbit and size follow Pass et al. 2023's fit, the archive's default. This account was drafted from Pass et al. 2023's values; the sections below are the data's own.
+It is one of 2 planets known around LTT 1445 A. Its orbit and size follow Pass et al. 2023's fit, the archive's default. The introduction is generated from Pass et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.119547 Jupiter radii from Pass et al. 2023 (2023AJ....166..171P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..171P/abstract): 8,546.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00858954 Jupiter masses (Pass et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166..171P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166..171P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 2 planets known around LTT 1445 A. Its orbit and size follow Pass e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ltt-1445-a-b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 221 degrees is taken as Kokori et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.19) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Kunovac Hod&#x17E;ić et al. 2021. It is also HD 39091, HR 2022, HIP 26394. This account was drafted from Kunovac Hod&#x17E;i&#x107; et al. 2021's values; the sections below are the data's own.
+Its radius and temperature follow Kunovac Hod&#x17E;ić et al. 2021. It is also HD 39091, HR 2022, HIP 26394. The introduction is generated from Kunovac Hod&#x17E;i&#x107; et al. 2021's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4623036865373793408, parallax 54.683 ± 0.035 mas (18.29 pc). Radius 1.17 +/- 0.02 solar radii from Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar radius of the default parameter set of pi Men c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract). Mass 1.07 +/- 0.04 solar masses from Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar mass of the default parameter set of pi Men c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract). Temperature 5,998 K from Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar temperature of the default parameter set of pi Men c in the NASA Exoplanet Archive. log g 4.33 from the mass and radius.
 
@@ -14,13 +14,11 @@ Its radius and temperature follow Kunovac Hod&#x17E;ić et al. 2021. It is also 
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** HD 39091 b: found by radial velocity, not a transit fit.
 - **Not shown.** pi Men d: found by radial velocity, not a transit fit.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around TOI-1839. Its orbit and size follow Castro-González et al. 2026's fit, the archive's default. This account was drafted from Castro-González et al. 2026's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-1839. Its orbit and size follow Castro-González et al. 2026's fit, the archive's default. The introduction is generated from Castro-González et al. 2026's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.20251618 Jupiter radii from Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract): 14,478.3 km at 71,492 km per Jupiter radius. GM from the mass 0.0223391 Jupiter masses (Castro-González et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260905413C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is one of 2 planets known around TOI-1839. Its orbit and size follow Castro-G
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1839b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

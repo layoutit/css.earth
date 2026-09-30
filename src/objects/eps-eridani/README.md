@@ -2,7 +2,7 @@
 
 ## Sources
 
-ε Eridani is a star of 5,039 K 3.2 parsecs away. Its planet is b, placed on the orbit its paper measured. It is also HD 22049, HR 1084, HIP 16537. This account was drafted from Baines & Armstrong (2012), ApJ 744, 138's values; the sections below are the data's own.
+ε Eridani is a star of 5,039 K 3.2 parsecs away. Its planet is b, placed on the orbit its paper measured. It is also HD 22049, HR 1084, HIP 16537. The introduction is generated from Baines & Armstrong (2012), ApJ 744, 138's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 5164707970261890560, parallax 310.577 ± 0.135 mas (3.22 pc); its RUWE is 2.7, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.74 +/- 0.01 solar radii from Baines & Armstrong (2012), ApJ 744, 138, section 3: the Navy Optical Interferometer limb-darkened angular diameter 2.153 ± 0.028 mas at the parallax of Benedict et al. (2006) (https://arxiv.org/abs/1112.0447). Mass 0.82 +/- 0.02 solar masses from Thompson et al. (2025), AJ 170, 301, the stellar mass their orbit fit of ε Eridani b adopts, via the NASA Exoplanet Archive default parameter set (https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract). Temperature 5,039 K from Baines & Armstrong (2012), ApJ 744, 138, section 3: from the interferometric angular diameter and the bolometric flux. log g 4.61 from the mass and radius.
 
@@ -24,6 +24,6 @@ Generated 2026-09-26 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** The star's magnetic maps (Jeffers et al. 2014, 2017, 2022) are published only as figures, so none is drawn.
 - **Not shown.** The planet has not been imaged: JWST/NIRCam coronagraphy found no point source (Llop-Sayson et al. 2025, arXiv:2508.08463). Earlier orbit fits put its tilt between 30 and 89 degrees; Thompson et al. (2025) measure 40 +6/-5 degrees.
 - **Not shown.** The spin axis is a display convention: no source used here measures its orientation.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "Epsilon Eridani" (revision 1376485045), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "Epsilon Eridani" (revision 1376485045) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

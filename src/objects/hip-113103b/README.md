@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around HIP 113103. Its orbit and size follow Lowson et al. 2024's fit, the archive's default. This account was drafted from Lowson et al. 2024's values; the sections below are the data's own.
+It is one of 2 planets known around HIP 113103. Its orbit and size follow Lowson et al. 2024's fit, the archive's default. The introduction is generated from Lowson et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.16317273 Jupiter radii from Lowson et al. 2024 (2024MNRAS.527.1146L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.1146L/abstract): 11,665.5 km at 71,492 km per Jupiter radius. GM from the mass 0.0126 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 2 planets known around HIP 113103. Its orbit and size follow Lowson
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hip-113103b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -10 degrees is taken as Lowson et al. 2024 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.17) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Turner et al. 2016. This account was drafted from Alexoudi 2022's values; the sections below are the data's own.
+Its radius and temperature follow Turner et al. 2016. The introduction is generated from Alexoudi 2022's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 6756148659453907200, parallax 5.009 ± 0.020 mas (199.65 pc). Radius 1.285 +/- 0.051 solar radii from Turner et al. 2016, the stellar radius of WASP-123 b's parameter set from Turner et al. 2016 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract). Mass 1.166 +/- 0.061 solar masses from Turner et al. 2016, the stellar mass of WASP-123 b's parameter set from Turner et al. 2016 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract). Temperature 5,740 K from Turner et al. 2016, the stellar temperature of WASP-123 b's parameter set from Turner et al. 2016 (the default leaves it empty) in the NASA Exoplanet Archive. log g 4.29 from the mass and radius.
 
@@ -14,11 +14,9 @@ Its radius and temperature follow Turner et al. 2016. This account was drafted f
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

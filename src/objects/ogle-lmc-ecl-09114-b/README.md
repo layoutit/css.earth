@@ -2,7 +2,7 @@
 
 ## Sources
 
-It has 3.205 solar masses and 18.79 solar radii; its partner has 3.304 and 26.33, measured from the eclipses and the stars' motions. This account was drafted from Graczyk et al. (2018ApJ...860....1G)'s values; the sections below are the data's own.
+It has 3.205 solar masses and 18.79 solar radii; its partner has 3.304 and 26.33, measured from the eclipses and the stars' motions. The introduction is generated from Graczyk et al. (2018ApJ...860....1G)'s published values; the sections below are the data's own.
 
 **Size and mass.** Radius 18.79 +/- 0.37 solar radii from Secondary radius (solar radii) 18.79 +/- 0.37, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G) (https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G): 13,072,203 km at 695,700 km per solar radius. GM from the mass 3.205 +/- 0.025 solar masses (Secondary mass (solar masses) 3.205 +/- 0.025, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G), https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G) times the JPL solar GM. Temperature 5420 +/- 112 K from Secondary log Teff 3.734 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G): 5420 K (https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G). A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It has 3.205 solar masses and 18.79 solar radii; its partner has 3.304 and 26.33
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ogle-lmc-ecl-09114-b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

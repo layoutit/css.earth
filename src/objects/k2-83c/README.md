@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 2 planets known around K2-83. Its orbit and size follow Crossfield et al. 2016's fit, the archive's default. This account was drafted from Crossfield et al. 2016's values; the sections below are the data's own.
+It is one of 2 planets known around K2-83. Its orbit and size follow Crossfield et al. 2016's fit, the archive's default. The introduction is generated from Crossfield et al. 2016's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.1323044 Jupiter radii from Crossfield et al. 2016 (2016ApJS..226....7C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract): 9,458.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00882 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 2 planets known around K2-83. Its orbit and size follow Crossfield 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-83c.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -19.35 degrees is taken as Dressing et al. 2017 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.06) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

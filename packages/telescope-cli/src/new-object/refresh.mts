@@ -75,7 +75,7 @@ export async function mergeRefresh(files: PackageFiles, id: string, root: string
   // README: regenerated while it is still the tool's draft; once a person has written it, kept whole, and the numbers in it are theirs
   // to check against the regenerated package.
   const readme = await readFile(resolve(o, 'README.md'), 'utf8').catch(() => null);
-  if (readme !== null && !readme.includes('This account was drafted from') && !readme.includes(TODO)) { files.delete(`${rel}/README.md`); kept.push('README.md (a person wrote it; check its numbers)'); }
+  if (readme !== null && !readme.includes('The introduction is generated from') && !readme.includes(TODO)) { files.delete(`${rel}/README.md`); kept.push('README.md (a person wrote it; check its numbers)'); }
   // The ledger is a person's record: every entry already there stays as written; a decision the regeneration made that it lacks
   // (a new route, such as the surface gravity) is added after them.
   if (await exists(resolve(o, 'investigations.json'))) {

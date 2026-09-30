@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around K2-136. Its orbit and size follow Mayo et al. 2023's fit, the archive's default. This account was drafted from Mayo et al. 2023's values; the sections below are the data's own.
+It is one of 3 planets known around K2-136. Its orbit and size follow Mayo et al. 2023's fit, the archive's default. The introduction is generated from Mayo et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.09046318 Jupiter radii from Mayo et al. 2023 (2023AJ....165..235M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract): 6,467.4 km at 71,492 km per Jupiter radius. No mass is measured: Mayo et al. 2023 (2023AJ....165..235M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract) gives only an upper limit of 0.01352931 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is one of 3 planets known around K2-136. Its orbit and size follow Mayo et al
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-136b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 189 degrees is taken as Mayo et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.14) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

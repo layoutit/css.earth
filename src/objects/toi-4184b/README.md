@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around TOI-4184. Its orbit and size follow Barkaoui et al. 2023's fit, the archive's default. This account was drafted from Barkaoui et al. 2023's values; the sections below are the data's own.
+It is the only planet known around TOI-4184. Its orbit and size follow Barkaoui et al. 2023's fit, the archive's default. The introduction is generated from Barkaoui et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.21679045 Jupiter radii from Barkaoui et al. 2023 (2023A&A...677A..38B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract): 15,498.8 km at 71,492 km per Jupiter radius. GM from the mass 0.0204 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-4184. Its orbit and size follow Barkaoui 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-4184b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

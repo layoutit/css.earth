@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HD 18599. Its orbit and size follow Desidera et al. 2023's fit, the archive's default. This account was drafted from Desidera et al. 2023's values; the sections below are the data's own.
+It is the only planet known around HD 18599. Its orbit and size follow Desidera et al. 2023's fit, the archive's default. The introduction is generated from Desidera et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.23195686 Jupiter radii from Desidera et al. 2023 (2023A&A...675A.158D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract): 16,583.1 km at 71,492 km per Jupiter radius. GM from the mass 0.07582708 Jupiter masses (Desidera et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A.158D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,8 @@ It is the only planet known around HD 18599. Its orbit and size follow Desidera 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-18599b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega -2.5 degrees is taken as Desidera et al. 2023 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.34) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-10. Its orbit and size follow Johnson et al. 2009's fit, the archive's default. This account was drafted from Johnson et al. 2009's values; the sections below are the data's own.
+It is the only planet known around WASP-10. Its orbit and size follow Johnson et al. 2009's fit, the archive's default. The introduction is generated from Johnson et al. 2009's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.08 Jupiter radii from Johnson et al. 2009 (2009ApJ...692L.100J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract): 77,211.4 km at 71,492 km per Jupiter radius. GM from the mass 3.15 Jupiter masses (Johnson et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009ApJ...692L.100J), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,9 @@ It is the only planet known around WASP-10. Its orbit and size follow Johnson et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-10b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 151.9 degrees is taken as Bonomo et al. 2017 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.0601) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "WASP-10b" (revision 1374241985), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "WASP-10b" (revision 1374241985) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Jordán et al. 2022. This account was drafted from Jordán et al. 2022's values; the sections below are the data's own.
+Its radius and temperature follow Jordán et al. 2022. The introduction is generated from Jordán et al. 2022's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 5082914338199586560, parallax 5.061 ± 0.021 mas (197.60 pc). Radius 0.5848 +/- 0.0026 solar radii from Jordán et al. 2022, the stellar radius of the default parameter set of HATS-75 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract). Mass 0.6017 +/- 0.0074 solar masses from Jordán et al. 2022, the stellar mass of the default parameter set of HATS-75 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract). Temperature 3,790.4 K from Jordán et al. 2022, the stellar temperature of the default parameter set of HATS-75 b in the NASA Exoplanet Archive. log g 4.68 from the mass and radius.
 
@@ -14,11 +14,9 @@ Its radius and temperature follow Jordán et al. 2022. This account was drafted 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
