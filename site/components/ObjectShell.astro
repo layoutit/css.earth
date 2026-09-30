@@ -15,12 +15,11 @@ import CssEarthWordmark from "./CssEarthWordmark.astro";
 import OverviewCard from './OverviewCard.astro';
 import ObjectCard from './ObjectCard.astro';
 import SystemHeaders from './SystemHeaders.astro';
+import SystemBodies from './SystemBodies.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
-import ObjectFactsheet from './ObjectFactsheet.astro';
 import InformationTabs from './InformationTabs.astro';
 import Accordion from './Accordion.astro';
 import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
-import overviewFacts from '../source/overview-facts.json';
 import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
 
 declare const __CSSEARTH_VERSION__: string;
@@ -54,7 +53,7 @@ const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const activeObject = SCENE_OBJECTS.find((object) => object.id === objectId);
 const ownSystem = systemOfObject(SCENE_OBJECTS, objectId);
-const searchPlaceholder = `Search ${new Intl.NumberFormat('en-US').format(SCENE_OBJECTS.length)} celestial objects...`;
+const searchPlaceholder = `Search ${new Intl.NumberFormat('en-US').format(SCENE_OBJECTS.length)} celestial bodies...`;
 const searchFormId = `${objectId}-search`;
 // Each pill types the plural classification query the search already understands.
 const searchCategories = [
@@ -216,7 +215,7 @@ const searchCategories = [
     {!navigation && <nav
       id={`${objectId}-object-browser`}
       class="object-browser maps-object-results"
-      aria-label="Celestial objects"
+      aria-label="Celestial bodies"
       hidden
     >
       <ObjectResults>
@@ -282,14 +281,8 @@ const searchCategories = [
         </div>
         {/* A telescope's picture of the whole system, kept in its star's gallery, is shown here while the system is the selection. */}
         <div class="object-system-galleries" data-system-galleries hidden></div>
-        <div data-solar-system-facts>
-          <InformationTabs idPrefix={`${objectId}-solar-system`} group="solar-system"
-            label="Solar System information" tabs={[{ id: 'factsheet', label: 'Factsheet' }]} />
-          <div class="object-results-scroll object-card-tabpanel"
-            id={`${objectId}-solar-system-factsheet-content`} data-information-panel="factsheet"
-            data-information-group="solar-system" role="region" aria-label="Factsheet">
-            <ObjectFactsheet id={`${objectId}-solar-system`} facts={overviewFacts['solar-system'].facts} embedded />
-          </div>
+        <div data-system-bodies-slot>
+          {Astro.url.searchParams.get('overview') === 'system' && <SystemBodies systemId={ownSystem?.id ?? SOLAR_SYSTEM_ID} />}
         </div>
       </ObjectCard></div>}
     {/* Every page carries the selected-city panel: a visit that starts on another body can open a city on Earth. */}

@@ -27,7 +27,8 @@
         "labelsAndCirclesVisible": true,
         "headerDividerWidthPx": 2,
         "tabBorderWidthPx": 0
-      }
+      },
+      "testedCommit": "22b10d2e38"
     },
     {
       "file": "mercury-detail.png",
@@ -35,7 +36,8 @@
         "Body detail card replaces obsolete portrait overview",
         "Datasets first; uppercase 14px tabs",
         "Wikipedia Learn more link"
-      ]
+      ],
+      "testedCommit": "22b10d2e38"
     },
     {
       "file": "saturn-system.png",
@@ -43,11 +45,88 @@
         "MOONS (293) tab at 14px",
         "Separator between intro and moon list",
         "No obsolete portrait overview"
-      ]
+      ],
+      "testedCommit": "22b10d2e38"
+    },
+    {
+      "file": "solar-system-desktop.png",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "claims": [
+        "Celestial bodies first; shared search rows",
+        "Solar System planets precede other bodies",
+        "Search says celestial bodies"
+      ],
+      "measurements": {
+        "memberCount": 545,
+        "firstEight": [
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune"
+        ]
+      }
+    },
+    {
+      "file": "solar-system-mobile.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "claims": [
+        "First body row fits inside the resting sheet"
+      ],
+      "measurements": {
+        "peekHeightPx": 320,
+        "sheetTopPx": 524,
+        "firstRowBottomPx": 824.890625
+      }
+    },
+    {
+      "file": "solar-system-tablet.png",
+      "viewport": {
+        "width": 820,
+        "height": 1180
+      },
+      "claims": [
+        "Raised tablet sheet shows tabs and first body row"
+      ],
+      "measurements": {
+        "peekHeightPx": 320,
+        "sheetTopPx": 860,
+        "firstRowBottomPx": 1138.5
+      }
+    },
+    {
+      "file": "milky-way-bodies.png",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "claims": [
+        "Celestial bodies tab lists Sun first, then featured stars",
+        "Exact shared search rows"
+      ],
+      "measurements": {
+        "firstBody": "sun"
+      }
     }
   ],
   "limits": [
-    "Desktop captures; not a native iPad report",
+    "Chrome desktop and responsive viewport captures, not native iPad evidence",
+    "The first three captures remain valid for their unchanged renderer and body-card claims at the recorded commit",
     "No matched pixel-difference comparison"
-  ]
+  ],
+  "handoff": {
+    "previousEntryAU": 63241.07708426628,
+    "entryAU": 6501.849655873876,
+    "returnBelowAU": 668.4587122268446,
+    "checks": "overview-context and overview-selection tests; browser checks on each side of the entry threshold"
+  }
 }
