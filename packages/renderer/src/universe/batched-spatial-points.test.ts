@@ -55,7 +55,7 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'] }); };
   const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)h0/g)]
-    .map(match => [Number(match[1]) + 500, Number(match[2]) + 400]);
+    .map(match => [Number(match[1]) / 8 + 500, Number(match[2]) / 8 + 400]);
   const warped = mount(), exact = mount();
   warped.publish({ world: pose(0), viewport });
   const painted = centres(warped), before = warped.root.querySelector('path')!.getAttribute('d');
@@ -69,7 +69,9 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   exact.publish({ world: pose(2), viewport });
   const repainted = centres(exact);
   // The same dots, placed by the warp and by a repaint: every in-view dot of the repaint has its warped twin.
-  for (const [x, y] of repainted) expect(Math.min(...moved.map(([mx, my]) => Math.hypot(mx! - x!, my! - y!)))).toBeLessThan(2e-3);
+  // Each paint rounds its centres to an eighth of a pixel (up to 0.09 px off), and the warp carries the first paint's
+  // rounding with it, so the warped and the repainted dot agree to within 0.2 px.
+  for (const [x, y] of repainted) expect(Math.min(...moved.map(([mx, my]) => Math.hypot(mx! - x!, my! - y!)))).toBeLessThan(.2);
   // A pause brings back the exact paint.
   await new Promise(resolve => setTimeout(resolve, 200));
   expect(warped.root.querySelector('svg')!.style.transform).toBe('');
@@ -78,4 +80,28 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   warped.publish({ world: pose(40), viewport });
   expect(warped.root.querySelector('svg')!.style.transform).toBe('');
   warped.destroy(); exact.destroy();
+});
+
+test('dots a zoom adds arrive during the zoom, through the pacer; dots it takes away wait for the pause', async () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-2e6, -2e6, -2e6] as const, max: [2e6, 2e6, 2e6] as const } };
+  const points = Array.from({ length: 40 }, (_, i) => ({ positionUnits: [((i * 37) % 80 - 40) * 1e4, ((i * 53) % 60 - 30) * 1e4, -1e6] as const }));
+  const { document } = parseHTML('<div id="host"></div>');
+  // Twenty dots from far, all forty once the camera comes a little closer.
+  const field = mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'], drawnCount: distance => distance > .5 ? 20 : 40 });
+  const viewport = { focalPixels: 900, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const dots = () => field.root.querySelector('path')!.getAttribute('d')!.match(/M/g)?.length ?? 0;
+  field.publish(at(1));
+  expect(dots()).toBe(20);
+  // A step in of a unit: no dot moves a visible amount, but twenty more are drawn now (here without a frame clock, at once).
+  field.publish(at(0));
+  expect(dots(), 'the added dots arrive mid-zoom').toBe(40);
+  // A step back: twenty should go, but they stay until the pause.
+  field.publish(at(1));
+  expect(dots(), 'removals wait').toBe(40);
+  await new Promise(resolve => setTimeout(resolve, 200));
+  expect(dots(), 'the pause brings the exact paint').toBe(20);
+  field.destroy();
 });

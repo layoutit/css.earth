@@ -89,7 +89,7 @@ test('a catalogue loads on its first publication and draws every point as the sa
   const paths = [...points.root.querySelectorAll('path')];
   expect(paths).toHaveLength(1);
   expect(paths[0]!.getAttribute('stroke')).toBe('#ffe2a8ff');
-  expect(paths[0]!.getAttribute('stroke-width'), 'as wide as the dot').toBe('1.5');
+  expect(paths[0]!.getAttribute('stroke-width'), 'as wide as the dot, 1.5 px in eighths of a pixel').toBe('12');
   expect(paths[0]!.getAttribute('d')!.match(/M/g)).toHaveLength(2);
   expect(paths[0]!.getAttribute('d')).toMatch(/^(M-?[\d.]+ -?[\d.]+h0){2}$/);
   const retainedPath = paths[0];

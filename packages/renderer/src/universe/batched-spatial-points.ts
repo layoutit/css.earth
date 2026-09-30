@@ -3,6 +3,7 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountPointPaths } from './point-paths.js';
+import { createSettlePacer } from '../rendering/settle-pacer.js';
 
 export interface BatchedSpatialPoint { readonly positionUnits: VolumeVector }
 export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly opacity: number; readonly radiusPx: number }
@@ -21,6 +22,9 @@ const MAX_PARALLAX_PIXELS = .25;
  * drag shows no hole at its leading edge (content is resident a margin before it enters the view,
  * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. */
 const OVERSCAN = .2;
+/** Painted dots per unit of the document's pacer (settle-pacer.ts, where a unit is about 0.6 ms of iPhone-class work):
+ * on the four-times-slowed zoom of 2026-09-30, each 1,000 painted dots cost about 5 ms more a frame. */
+const DOTS_PER_PACER_UNIT = 125;
 /** The exact paint follows the last warp once publications have paused this long. */
 const SETTLE_MS = 120;
 
@@ -41,7 +45,8 @@ const parallaxPixels = (focalPixels: number, shift: number, nearestUnits: number
 
 export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host, before, frame, points, className, stylePoint, drawnCount, paintPalette, keepFraction }: {
   host: HTMLElement; before?: Element; frame: DensityVolumeFrame; points: readonly T[]; className: string;
-  stylePoint(point: T, distanceUnits: number): BatchedSpatialPointStyle | null;
+  /** A point's fixed style, read once when the field mounts. */
+  stylePoint(point: T): BatchedSpatialPointStyle | null;
   drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
   /** Every paint colour a style can give (`pointPaint`): one retained path each. */
   paintPalette: readonly string[];
@@ -67,6 +72,25 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
   let warp = '', latest: VolumeCameraPublication | null = null, settle: ReturnType<typeof setTimeout> | null = null;
   const setWarp = (value: string) => { if (warp !== value) { pathPaint.svg.style.transform = value; warp = value; } };
   const residentElements = 1 + pathPaint.residentElements;
+  // A repaint the pacer runs for dots a zoom adds. The dots' paint is a paint exception of the motion contract
+  // (docs/performance/motion-freezes-membership.md), so nothing holds it: the pacer only spaces it by the frame budget.
+  let arriving = false;
+  const arrivals = createSettlePacer(() => {
+    if (destroyed || !latest || !arriving) return 0;
+    arriving = false;
+    publish(latest, true);
+    return Math.max(1, Math.ceil(last.visiblePoints / DOTS_PER_PACER_UNIT));
+  }, { holdWhile: 'never' });
+  // Everything about a point but where the camera sees it, resolved once: its position in one flat array, its path (-1:
+  // not drawn) and its margin past the view's edge.
+  const positions = new Float64Array(points.length * 3), paths = new Int32Array(points.length), margins = new Float64Array(points.length);
+  points.forEach((point, index) => {
+    positions.set(point.positionUnits, index * 3);
+    const style = stylePoint(point);
+    if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; return; }
+    paths[index] = pathPaint.entry(pointPaint(style), Math.max(.5, style.radiusPx));
+    margins[index] = Math.max(2, style.radiusPx);
+  });
   let last={visiblePoints:0,candidates:0,residentElements,publishMs:0};
   const publish = (publication: VolumeCameraPublication, exact = false) => {
     if (destroyed) return;
@@ -87,9 +111,11 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
       const same = painted.count === count && painted.keep === keep, turned = !rest.every((value, i) => value === painted!.rest[i]);
       if (still && same && !turned) { setWarp(''); return; }
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
-      // what it painted still covers the view. Which points it draws (the levels and share a zoom changes) is detail: like
-      // every level swap it waits for the pause (blur while moving), so a zoom warps too, and the pause's repaint brings it.
+      // what it painted still covers the view. Dots a zoom adds (a longer prefix, a larger share) arrive at once, by a
+      // repaint; dots it takes away wait for the pause, so a zoom warps while it only thins the view.
       if (still && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
+        // Dots the zoom adds come through the pacer while the warp holds: a repaint as soon as the frame budget allows.
+        if (count > painted.count || keep > painted.keep) { arriving = true; arrivals.request(true); }
         const next = axesMatrix(r), turn = multiply(next, transpose(painted.axes));
         const forward = multiply(project(viewport.focalPixels, cx, cy), multiply(turn, unproject(painted.focal, painted.cx, painted.cy)));
         const back = multiply(project(painted.focal, painted.cx, painted.cy), multiply(transpose(turn), unproject(viewport.focalPixels, cx, cy)));
@@ -109,29 +135,32 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
       }
     }
     if (settle !== null) { clearTimeout(settle); settle = null; }
-    let nearestUnits = Infinity;
+    let nearestSquared = Infinity;
     let visible = 0, candidates = 0;
     pathPaint.begin(viewport);
-    points.slice(0, count).forEach((point,index)=>{
-      const x=point.positionUnits[0]-local.positionUnits[0], y=point.positionUnits[1]-local.positionUnits[1], z=point.positionUnits[2]-local.positionUnits[2];
-      const distance=Math.hypot(x,y,z);
-      if(distance<nearestUnits)nearestUnits=distance;
-      const depth=-(r[2]!*x+r[5]!*y+r[8]!*z);
-      if(depth<=0)return;
-      const sx=viewport.focalPixels*(r[0]!*x+r[3]!*y+r[6]!*z)/depth+viewport.principalOffsetPixels[0];
-      const sy=viewport.focalPixels*(r[1]!*x+r[4]!*y+r[7]!*z)/depth+viewport.principalOffsetPixels[1];
-      const style=stylePoint(point,distance);
-      if(!style || !(style.opacity>0) || !(style.radiusPx>0))return;
-      const margin=Math.max(2,style.radiusPx), halfWidth=(viewport.widthPixels??Infinity)/2, halfHeight=(viewport.heightPixels??Infinity)/2;
-      if(Math.abs(sx)>halfWidth*(1+2*OVERSCAN)+margin || Math.abs(sy)>halfHeight*(1+2*OVERSCAN)+margin)return;
+    const [px, py, pz] = local.positionUnits, focal = viewport.focalPixels, [ox, oy] = viewport.principalOffsetPixels;
+    const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
+    const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = r as unknown as [number, number, number, number, number, number, number, number, number];
+    for (let index = 0; index < count; index++) {
+      const o = index * 3, x = positions[o]! - px, y = positions[o + 1]! - py, z = positions[o + 2]! - pz;
+      const squared = x * x + y * y + z * z;
+      if (squared < nearestSquared) nearestSquared = squared;
+      const path = paths[index]!;
+      if (path < 0) continue;
+      const depth = -(r2 * x + r5 * y + r8 * z);
+      if (depth <= 0) continue;
+      const sx = focal * (r0 * x + r3 * y + r6 * z) / depth + ox, sy = focal * (r1 * x + r4 * y + r7 * z) / depth + oy;
+      const margin = margins[index]!;
+      if (Math.abs(sx) > halfWidth * (1 + 2 * OVERSCAN) + margin || Math.abs(sy) > halfHeight * (1 + 2 * OVERSCAN) + margin) continue;
       // The share and the counts are of the view; the overscan only paints ahead of a turn.
-      const inView = Math.abs(sx)<=halfWidth+margin && Math.abs(sy)<=halfHeight+margin;
-      if(inView)candidates++;
+      const inView = Math.abs(sx) <= halfWidth + margin && Math.abs(sy) <= halfHeight + margin;
+      if (inView) candidates++;
       // A fixed low-discrepancy rank per point: the kept share is spread evenly and stable from frame to frame.
-      if(keep<1 && (index*0.6180339887498949)%1>=keep)return;
-      pathPaint.point(sx, sy, Math.max(.5, style.radiusPx), pointPaint(style));
-      if(inView)visible++;
-    });
+      if (keep < 1 && (index * 0.6180339887498949) % 1 >= keep) continue;
+      pathPaint.add(path, sx, sy);
+      if (inView) visible++;
+    }
+    const nearestUnits = Math.sqrt(nearestSquared);
     pathPaint.commit();
     setWarp('');
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
@@ -139,5 +168,5 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     last={visiblePoints:visible,candidates,residentElements,publishMs:performance.now()-started};
   };
   return Object.freeze({root,publish:(publication: VolumeCameraPublication) => publish(publication),stats:()=>Object.freeze({...last}),
-    destroy(){if(destroyed)return;destroyed=true;if(settle!==null)clearTimeout(settle);root.remove();}});
+    destroy(){if(destroyed)return;destroyed=true;if(settle!==null)clearTimeout(settle);arrivals.destroy();root.remove();}});
 }
