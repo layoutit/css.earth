@@ -103,6 +103,13 @@ test('camera sampling settles before changing selection and releases timers and 
   getListener()(camera(sun, 101 * au), viewport);
   [...timers.values()][0](); timers.clear();
   assert.equal(changes.length, 1);
+  // A pill's flight holds the watcher off all the way out; where it lands is settled at once, without a settle timer.
+  available = false;
+  getListener()(camera(sun, 150 * au), viewport);
+  assert.equal(timers.size, 0);
+  available = true;
+  dispose.refresh();
+  assert.equal(changes.length, 2);
   getListener()(camera(sun, 102 * au), viewport);
   dispose();
   assert.equal(listener, null); assert.equal(timers.size, 0);

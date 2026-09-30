@@ -70,5 +70,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     timer = null; candidate = next;
     if (next) timer = windowTarget.setTimeout(inspect, policy.settleMilliseconds);
   });
-  return () => { disposed = true; unsubscribe(); if (timer !== null) windowTarget.clearTimeout(timer); };
+  // `refresh` settles at once on the last camera: a flight that held the watcher off (isAvailable) hands over where it landed.
+  return Object.assign(() => { disposed = true; unsubscribe(); if (timer !== null) windowTarget.clearTimeout(timer); },
+    { refresh() { if (timer !== null) windowTarget.clearTimeout(timer); inspect(); } });
 }

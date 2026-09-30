@@ -248,3 +248,30 @@ test('passive maps allow sheet scrolling while sequence controls retain their ge
     controller.destroy();
   }
 });
+
+test('a pill leaves its results at the peek so the map shows the category it frames; typing takes the whole sheet', () => {
+  const { document, controller } = mountSheet();
+  assert.equal(document.body.dataset.sheet, 'peek');
+  controller.followSearch(true);
+  assert.equal(document.body.dataset.sheet, 'full');
+  controller.followSearch(true, true);
+  assert.equal(document.body.dataset.sheet, 'peek', 'a pill pressed over full typed results lowers them');
+  controller.followSearch(false);
+  assert.equal(document.body.dataset.sheet, 'peek', 'closing returns to where the search found the sheet');
+});
+
+test('a camera fit waits for the sheet to come to rest', async () => {
+  const { window, sheet, controller, runFrames } = mountSheet();
+  let rested = false;
+  await controller.whenSettled();
+  controller.followSearch(true);
+  void controller.whenSettled().then(() => { rested = true; });
+  await Promise.resolve();
+  assert.equal(rested, false, 'the sheet is still snapping');
+  runFrames();
+  const end = new window.Event('transitionend');
+  Object.defineProperties(end, { propertyName: { value: 'transform' } });
+  sheet.dispatchEvent(end);
+  await Promise.resolve();
+  assert.equal(rested, true);
+});

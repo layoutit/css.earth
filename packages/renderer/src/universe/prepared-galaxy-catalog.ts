@@ -1,5 +1,6 @@
 import { mountCatalogMarker } from './catalog-marker.js';
-import { isPreparedCluster, isPreparedNebula, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
+import { catalogueClassification, isPreparedCluster, isPreparedNebula, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
+import { matchesObjectClassification } from '@cssearth/objects';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -124,6 +125,8 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   const focusEntry = unsampled[0] ? createEntry(unsampled[0]) : null;
   let focusBound = false;
   let destroyed = false, selectedId: string | null = null;
+  // A header pill's category: its entries rank first in label admission.
+  let highlighted: ReadonlySet<string> = new Set();
   let exclusions: readonly LabelScreenRect[] = [];
   let dormant = false;
   // Labels are measured when the catalogue first wakes, not at mount: reading
@@ -144,6 +147,11 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       }
       if (!row && focusBound) for (const element of [focusEntry.label, focusEntry.marker, focusEntry.dot!]) fader.set(element, 0, 200);
       focusBound = Boolean(row);
+    },
+    highlight(classification: string | null) {
+      highlighted = new Set(classification === null ? [] : entries.filter(entry =>
+        matchesObjectClassification(catalogueClassification(entry.object), classification)).map(entry => entry.object.id));
+      root.dataset.highlighted = String(highlighted.size);
     },
     resolve(id: string) { return [...catalog.objects, ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].find(object => object.id === id || (!isPreparedCluster(object) && object.detailedObjectId === id)) ?? null; },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number, blockerRects: readonly LabelScreenRect[] = [], clusterOpacity = opacity, dotOpacity = opacity,
@@ -218,7 +226,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
             ...point, labelRect, alternateLabelRects });
         }
       }
-      const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId, budget ?? createLabelBudget(width, height));
+      const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId, budget ?? createLabelBudget(width, height), highlighted);
+      // With a category highlighted its labels and markers show at full strength and the rest at a third, as the body markers do.
+      const emphasised = (entry: Entry, base: number) => highlighted.size === 0 ? base : highlighted.has(entry.object.id) ? 1 : base * .3;
       const admittedById = new Map(admitted.map(entry => [entry.object.id, entry]));
       const pickTargets: ScreenPickTarget[] = [];
       for (const entry of drawn) {
@@ -226,7 +236,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         const projected = admittedById.get(entry.object.id);
         entry.shown = Boolean(projected);
         if (projected) { entry.placement = projected.placement ?? 0; entry.labelX = (projected.labelRect.left + projected.labelRect.right) / 2; entry.labelY = projected.labelRect.bottom; }
-        const labelOpacity = projected ? objectAlpha * DEFAULT_CONTEXT_LABEL_OPACITY : 0;
+        const labelOpacity = projected ? objectAlpha * emphasised(entry, DEFAULT_CONTEXT_LABEL_OPACITY) : 0;
         fader.set(entry.label, labelOpacity, 200);
         // Only a shown or still-fading label follows its galaxy. Moving every on-screen
         // candidate restyled each hidden label on every camera frame.
@@ -234,7 +244,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
           entry.label.style.transform = `translate(${entry.labelX}px,${entry.labelY}px) translate(-50%,-100%)`;
         }
         const billboarded = !isPreparedCluster(entry.object) && entry.object.detailedObjectId !== undefined && billboardedObjectIds?.has(entry.object.detailedObjectId) === true;
-        fader.set(entry.marker, projected && !billboarded ? objectAlpha * .45 : 0, 200);
+        fader.set(entry.marker, projected && !billboarded ? objectAlpha * emphasised(entry, .45) : 0, 200);
         if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
         // Interactivity flips rarely; rewriting it for every galaxy each frame reflected three attributes.
         if (entry.dot) fader.set(entry.dot, visible.has(entry.object.id) ? Math.max(0, Math.min(1, dotOpacity)) * (1 - (projected ? objectAlpha : 0)) * .4 : 0, 200);

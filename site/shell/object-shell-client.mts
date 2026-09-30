@@ -31,7 +31,7 @@ export function mountObjectShell({
   readSelection,
   documentTarget = document,
   windowTarget = window,
-  preferences, onResetDestination, navigable, prefetch,
+  preferences, onResetDestination, onFrameCategory, navigable, prefetch,
 }: ShellOptions): ObjectShell {
   const drawer = requiredElement(documentTarget, ".object-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -151,8 +151,11 @@ export function mountObjectShell({
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId,
       onCategoryChange: value => preferences.set('highlightedClassification', value),
-      onResetDestination, readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
-      onSearchChange: open => sheet.followSearch(open) }));
+      onResetDestination,
+      // The fit measures the shell around the scene, so it waits for the sheet a pill just opened to come to rest.
+      onFrameCategory: classification => { void sheet.whenSettled().then(() => { if (!lifetime.disposed) onFrameCategory?.(classification); }); },
+      readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
+      onSearchChange: (open, browsing) => sheet.followSearch(open, browsing) }));
     lifetime.onDispose(preferences.subscribe(key => {
       if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();
     }));

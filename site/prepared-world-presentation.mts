@@ -32,9 +32,31 @@ function planetarySystems(value: unknown) {
   }));
 }
 
+/** Each category's framed box (prepareCategoryFrames), by classification: a centre and two corners relative to it, in metres. */
+function categoryFrames(value: unknown) {
+  if (!isRecord(value)) throw new TypeError(`Prepared world presentation categoryFrames must map classifications to boxes; got ${typeof value}.`);
+  const vector = (input: unknown, name: string): readonly [number, number, number] => {
+    if (!Array.isArray(input) || input.length !== 3 || !input.every(Number.isFinite)) {
+      throw new TypeError(`Prepared world presentation categoryFrames.${name} must be three finite numbers; got ${JSON.stringify(input)}.`);
+    }
+    return Object.freeze([input[0], input[1], input[2]] as const);
+  };
+  return new Map(Object.entries(value).map(([classification, frame]) => {
+    if (!isRecord(frame)) throw new TypeError(`Prepared world presentation categoryFrames.${classification} must be a box.`);
+    const minimumM = vector(frame.minimumM, `${classification}.minimumM`), maximumM = vector(frame.maximumM, `${classification}.maximumM`);
+    if (minimumM.some((value, axis) => value > maximumM[axis]!)) throw new TypeError(`Prepared world presentation categoryFrames.${classification} has a minimum beyond its maximum.`);
+    // Present when the pill marks and frames only the category's notable members.
+    const memberIds = frame.memberIds === undefined ? undefined : new Set(ids(frame.memberIds, `categoryFrames.${classification}.memberIds`));
+    // The placed stars that carry the members' mark from afar.
+    const hostIds = frame.hostIds === undefined ? undefined : ids(frame.hostIds, `categoryFrames.${classification}.hostIds`);
+    return [classification, Object.freeze({ centreM: vector(frame.centreM, `${classification}.centreM`), minimumM, maximumM,
+      ...(memberIds ? { memberIds } : {}), ...(hostIds ? { hostIds } : {}) })] as const;
+  }));
+}
+
 function parseWorldPresentation(value: unknown) {
-  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@2' || !isRecord(value.moons)) {
-    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@2; run pnpm prepare:world-context.`);
+  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@3' || !isRecord(value.moons)) {
+    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@3; run pnpm prepare:world-context.`);
   }
   return Object.freeze({
     satelliteSystemIntroductions: Object.freeze(Object.fromEntries(Object.entries(requireRecord(value.satelliteSystemIntroductions)).map(([id, text]) => [id, requireString(text)]))),
@@ -45,6 +67,7 @@ function parseWorldPresentation(value: unknown) {
     planetarySystems: planetarySystems(value.planetarySystems),
     galaxies: distances(value.galaxies, 'galaxies', ['fadeStartDistanceM', 'fullDistanceM', 'maximumDistanceM', 'minimumDistanceRadii', 'defaultFocusRadiusM', 'metersPerParsec']),
     clusters: distances(value.clusters, 'clusters', ['fadeStartDistanceM', 'fullDistanceM']),
+    categoryFrames: categoryFrames(value.categoryFrames),
   });
 }
 
