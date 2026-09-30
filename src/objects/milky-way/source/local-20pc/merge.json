@@ -11,20 +11,11 @@
   "colourTowardWhiteBasis": "Presentation choice: each catalogue colour mixed halfway to white before the gamma, because the saturated colours read as neon over the backing. The hue order of every catalogue is kept.",
   "colourGamma": 1.6,
   "colourGammaBasis": "Presentation choice, picked from three renders over the backing (full opacity, 65% opacity, gamma 1.6): each colour channel raised to the power 1.6, so the coloured dots sink into the painted arms and the whitest keep their sparkle.",
-  "densityCap": {
-    "atSunPerKpc2": 1000000,
-    "scaleLengthKpc": 2.6,
-    "kernelKpc": 0.0025,
-    "taperKpc": [
-      0.01,
-      0.02
-    ],
-    "basis": "The same disc law as the galaxy level (tracers/merge.json): exponential in Galactocentric radius with the thin disc's 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, https://arxiv.org/abs/1602.07702). Presentation choice: 1,000,000 dots per kpc\u00b2, about half the 2.1 million the complete 20 pc census holds face-on. It puts about 800 dots on screen when the level first covers the view, as the 100 pc level does. The taper softens the level's edge."
-  },
   "within": [
     "tracers",
     "local-3kpc",
     "local-800pc",
     "local-100pc"
-  ]
+  ],
+  "basis": "Every star of the Gaia Catalogue of Nearby Stars within 20 pc not already drawn by an outer level, unthinned: inside the galaxy the census is drawn as measured, so its real clumps and gaps show. The census's own 20 pc reach is the level's edge."
 }

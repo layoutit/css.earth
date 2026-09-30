@@ -41,3 +41,73 @@ export function parseCataloguePointSpread(value: unknown, id: string): Catalogue
   }
   return Object.freeze({ normal: Object.freeze([normal[0], normal[1], normal[2]]) as VolumeVector, across, along });
 }
+
+/** The most points in one cell of a bank's `cells`. The renderer tests a cell's box against the view before any of its
+ * points, so the smaller the cells, the fewer points a view outside them costs; each cell adds one box to the bank. */
+export const CATALOGUE_CELL_POINTS = 128;
+
+/** A bank's points grouped into cells, each a box that holds them: the renderer skips a cell whose box lies behind the
+ * camera or outside the view without visiting its points (2026-09-30: on the zoom out of the nearby universe, 74% of the
+ * points a repaint visited were behind the camera or off screen). `of[i]` is point i's cell; `boxes` holds each cell's
+ * `[minX, minY, minZ, maxX, maxY, maxZ]` in bank units. A cell never spans two levels of a stacked bank, so each level
+ * draws from its own cells. */
+export interface CatalogueCells { readonly boxes: Float64Array; readonly of: Int32Array }
+
+/** Cells for a bank's point rows: each level (`levelPoints`, the counts in order; the whole bank when absent) split at
+ * the median of its longest axis until no cell holds more than `cellPoints`. The same rows give the same cells. */
+export function catalogueCells(points: readonly (readonly number[])[], levelPoints: readonly number[] = [points.length],
+  cellPoints = CATALOGUE_CELL_POINTS): { readonly boxes: number[][]; readonly of: number[] } {
+  if (levelPoints.reduce((sum, count) => sum + count, 0) !== points.length) throw new RangeError(`Levels of ${levelPoints.join(' + ')} points do not add up to the bank's ${points.length}.`);
+  const boxes: number[][] = [], of = new Array<number>(points.length).fill(-1);
+  const box = (indices: readonly number[]) => {
+    const bounds = [Infinity, Infinity, Infinity, -Infinity, -Infinity, -Infinity];
+    for (const index of indices) for (let axis = 0; axis < 3; axis++) {
+      const value = points[index]![axis]!;
+      if (value < bounds[axis]!) bounds[axis] = value;
+      if (value > bounds[axis + 3]!) bounds[axis + 3] = value;
+    }
+    return bounds;
+  };
+  const split = (indices: number[]) => {
+    const bounds = box(indices);
+    if (indices.length <= cellPoints) { for (const index of indices) of[index] = boxes.length; boxes.push(bounds); return; }
+    const extent = [0, 1, 2].map(axis => bounds[axis + 3]! - bounds[axis]!), axis = extent.indexOf(Math.max(...extent));
+    indices.sort((a, b) => points[a]![axis]! - points[b]![axis]! || a - b);
+    const half = indices.length >> 1;
+    split(indices.slice(0, half)); split(indices.slice(half));
+  };
+  let start = 0;
+  for (const count of levelPoints) { split(Array.from({ length: count }, (_, index) => start + index)); start += count; }
+  return { boxes, of };
+}
+
+/** A bank's prepared `cells`: every point in exactly one cell whose box holds it, every box used, and no cell spanning
+ * two levels (`levelPoints`, the level counts in order). */
+export function parseCatalogueCells(value: unknown, points: readonly (readonly number[])[], levelPoints: readonly number[], id: string): CatalogueCells {
+  const cells = value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;
+  const fail = (why: string): never => { throw new TypeError(`${id}: catalogue point bank field cells ${why}.`); };
+  if (!cells || !Array.isArray(cells.boxes) || !cells.boxes.length || !Array.isArray(cells.of)) fail('must be { boxes: [[minX, minY, minZ, maxX, maxY, maxZ], ...], of: a cell per point }');
+  const rows = cells!.boxes as unknown[], cellOf = cells!.of as unknown[];
+  if (cellOf.length !== points.length) fail(`names ${cellOf.length} cells for ${points.length} points`);
+  const boxes = new Float64Array(rows.length * 6);
+  rows.forEach((row, cell) => {
+    if (!Array.isArray(row) || row.length !== 6 || !row.every(bound => typeof bound === 'number' && Number.isFinite(bound)) ||
+        !(row[0] <= row[3] && row[1] <= row[4] && row[2] <= row[5])) fail(`box ${cell} must be six finite bounds, each minimum at most its maximum, got ${JSON.stringify(row)}`);
+    boxes.set(row as number[], cell * 6);
+  });
+  const of = new Int32Array(points.length), used = new Uint8Array(rows.length), levelOf = new Int32Array(rows.length).fill(-1);
+  let level = 0, levelEnd = levelPoints[0] ?? points.length;
+  cellOf.forEach((raw, index) => {
+    while (index >= levelEnd && level < levelPoints.length - 1) levelEnd += levelPoints[++level]!;
+    if (!Number.isInteger(raw) || (raw as number) < 0 || (raw as number) >= rows.length) fail(`names cell ${JSON.stringify(raw)} for point ${index}, outside its ${rows.length} boxes`);
+    const cell = raw as number, point = points[index]!;
+    for (let axis = 0; axis < 3; axis++) if (!(point[axis]! >= boxes[cell * 6 + axis]! && point[axis]! <= boxes[cell * 6 + axis + 3]!)) {
+      fail(`box ${cell} does not hold point ${index} (${point.slice(0, 3).join(', ')})`);
+    }
+    if (levelOf[cell] !== -1 && levelOf[cell] !== level) fail(`cell ${cell} spans levels ${levelOf[cell]} and ${level}`);
+    levelOf[cell] = level; used[cell] = 1; of[index] = cell;
+  });
+  const unused = used.indexOf(0);
+  if (unused >= 0) fail(`box ${unused} holds no point`);
+  return Object.freeze({ boxes, of });
+}

@@ -15,6 +15,8 @@ export interface PreparedImageMesh {
   readonly id: string; readonly name: string; readonly frame: DensityVolumeFrame; readonly radiusUnits: number; readonly texturePath: string;
   /** A camera-facing plate over the sphere that darkens toward its outline; the outline sits at `edge` of the plate's half-width. */
   readonly limb: { readonly path: string; readonly edge: number } | null;
+  /** How far what the sphere holds reaches: a hidden sphere's caption sits below it. */
+  readonly holdsRadiusUnits: number | null;
   /** The hemisphere a cutaway opens (its leaves are marked `cut`), and the opacities the rest's inside and outside are drawn
    * at while it is open. */
   readonly cutaway: { readonly hemisphere: 'north' | 'south'; readonly interiorOpacity: number; readonly exteriorOpacity: number } | null;
@@ -23,7 +25,7 @@ export interface PreparedImageMesh {
 
 /** A `cssearth-image-mesh@1` bank (packages/bake/cli/prepare-map-sphere.mts): patches of one atlas around a centre. */
 export function parseImageMesh(value: unknown, at = 'image mesh'): PreparedImageMesh {
-  const data = value as { schema?: unknown; id?: unknown; name?: unknown; frame?: unknown; radiusUnits?: unknown; texture?: { path?: unknown };
+  const data = value as { schema?: unknown; id?: unknown; name?: unknown; frame?: unknown; radiusUnits?: unknown; holds?: { radiusUnits?: unknown }; texture?: { path?: unknown };
     limb?: { path?: unknown; edge?: unknown }; cutaway?: { hemisphere?: unknown; interiorOpacity?: unknown; exteriorOpacity?: unknown }; leaves?: unknown } | null;
   if (!data || data.schema !== 'cssearth-image-mesh@1' || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a cssearth-image-mesh@1 bank with an id.`);
   if (typeof data.name !== 'string' || !data.name.trim()) throw new TypeError(`${data.id}: the mesh needs the name its caption shows.`);
@@ -41,6 +43,10 @@ export function parseImageMesh(value: unknown, at = 'image mesh'): PreparedImage
     throw new TypeError(`${data.id}: a cutaway names the hemisphere it opens (north or south) and its inside and outside opacities in (0, 1], not ${JSON.stringify(cutaway)}.`);
   }
   if (typeof data.radiusUnits !== 'number' || !(data.radiusUnits > 0)) throw new TypeError(`${data.id}: the mesh needs a positive radius.`);
+  const holds = data.holds?.radiusUnits;
+  if (data.holds !== undefined && (typeof holds !== 'number' || !(holds > 0 && holds < data.radiusUnits))) {
+    throw new TypeError(`${data.id}: what the mesh holds reaches a positive radius inside its own, not ${JSON.stringify(data.holds)}.`);
+  }
   if (!Array.isArray(data.leaves) || !data.leaves.length || data.leaves.length > 1536) throw new TypeError(`${data.id}: the mesh holds 1 to 1536 leaves.`);
   const leaves = data.leaves.map((raw: unknown, index: number) => {
     const leaf = raw as { style?: Record<string, unknown>; cut?: unknown } | null, style = leaf?.style;
@@ -53,7 +59,7 @@ export function parseImageMesh(value: unknown, at = 'image mesh'): PreparedImage
       .map(key => [key, style[key] as string]))) as PreparedImageMesh['leaves'][number]['style'] });
   });
   return Object.freeze({ id: data.id, name: data.name, frame: parseDensityVolumeFrame(data.frame), radiusUnits: data.radiusUnits, texturePath: texturePath as string,
-    limb: limb ? Object.freeze({ path: limb.path as string, edge: limb.edge as number }) : null,
+    limb: limb ? Object.freeze({ path: limb.path as string, edge: limb.edge as number }) : null, holdsRadiusUnits: typeof holds === 'number' ? holds : null,
     cutaway: cutaway ? Object.freeze({ hemisphere: cutaway.hemisphere as 'north' | 'south', interiorOpacity: cutaway.interiorOpacity as number,
       exteriorOpacity: (cutaway.exteriorOpacity as number | undefined) ?? 1 }) : null,
     leaves: Object.freeze(leaves) });
@@ -69,10 +75,14 @@ export function parseImageMesh(value: unknown, at = 'image mesh'): PreparedImage
  * A mesh with a cutaway opens one hemisphere (`setCutaway`, on unless the caller says otherwise): its marked leaves hide,
  * and a copy of the rest, drawn from both sides at the cutaway's opacity, is mounted at `interiorBefore`, behind what the
  * sphere holds, so the inside of the far wall shows through the opening under the points inside it.
+ *
+ * A hidden mesh (`setHidden`) draws no leaf, interior or limb and never asks for its texture; it only keeps its caption
+ * below its outline, reading `hiddenCaption` (what the sphere bounds) instead of its own name.
  */
-export function mountImageMesh({ host, before, interiorBefore = before, labelHost, url, fetchJson, resolveResource, cutaway: initialCutaway = true }: {
+export function mountImageMesh({ host, before, interiorBefore = before, labelHost, url, fetchJson, resolveResource, cutaway: initialCutaway = true,
+  hidden: initialHidden = false, hiddenCaption }: {
   host: HTMLElement; before: Node | null; interiorBefore?: Node | null; labelHost?: HTMLElement; url: string; fetchJson(url: string): Promise<unknown>;
-  resolveResource(path: string): string; cutaway?: boolean;
+  resolveResource(path: string): string; cutaway?: boolean; hidden?: boolean; hiddenCaption?: string;
 }) {
   const document = host.ownerDocument;
   const root = document.createElement('div'), camera = document.createElement('div'), scene = document.createElement('div');
@@ -87,8 +97,8 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
   interior.style.display = 'none';
   interiorCamera.className = 'css-volume-camera'; interiorScene.className = 'css-volume-scene';
   interiorCamera.append(interiorScene); interior.append(interiorCamera);
-  let cutaway = initialCutaway;
-  const cutLeaves: HTMLElement[] = [];
+  let cutaway = initialCutaway, hidden = initialHidden, textured = false;
+  const cutLeaves: HTMLElement[] = [], leaves: HTMLElement[] = [];
   // The limb plate's centred LIMB_BOX_PX box is a volume.css rule; its image, transform and display are inline.
   const limb = document.createElement('i');
   limb.style.display = 'none';
@@ -102,7 +112,17 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
   });
   let payload: PreparedImageMesh | null = null, loading = false, destroyed = false, latest: VolumeCameraPublication | null = null;
   let perspective = '', origin = '', transform = '', opacity = '', limbTransform = '', labelTransform = '', labelOpacity = '', interiorOpacity = '';
-  let lastShown = 1, lastCaptioned = true;
+  let lastShown = 1, lastCaptioned = true, image = '', limbImage = '';
+  // The texture and limb image are set the first time the sphere shows, so a hidden sphere never asks for them.
+  const applyTexture = () => {
+    if (textured || hidden || !payload) return;
+    textured = true;
+    for (const node of leaves) node.style.backgroundImage = image;
+    if (limbImage) { limb.style.backgroundImage = limbImage; root.append(limb); }
+  };
+  const caption = () => hidden && hiddenCaption ? hiddenCaption : payload!.name;
+  // Hidden, the caption and its fade follow what the sphere holds, when the bank says how far that reaches.
+  const radiusUnits = () => hidden && payload!.holdsRadiusUnits !== null ? payload!.holdsRadiusUnits : payload!.radiusUnits;
   const open = () => cutaway && payload?.cutaway !== null && payload?.cutaway !== undefined;
   const draw = (publication: VolumeCameraPublication) => {
     const view = preparedVolumeCameraTransform(publication, payload!.frame);
@@ -116,11 +136,11 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
   };
   // The outline and the caption below it: transforms and opacity only, written on change.
   const outline = (publication: VolumeCameraPublication, alpha: number, captioned: boolean) => {
-    const centreM = payload!.frame.originM, radiusM = payload!.radiusUnits * payload!.frame.metersPerUnit;
+    const centreM = payload!.frame.originM, radiusM = radiusUnits() * payload!.frame.metersPerUnit;
     const shape = alpha > 0 ? sphereSilhouette(publication.world, publication.viewport, centreM, radiusM) : null;
-    if (payload!.limb) {
+    if (limbImage) {
       const scale = (semiAxis: number) => format(semiAxis / payload!.limb!.edge / (LIMB_BOX_PX / 2));
-      const next = shape ? `translate(${format(shape.x)}px,${format(shape.y)}px) rotate(${format(shape.angle)}rad) scale(${scale(shape.major)},${scale(shape.minor)})` : '';
+      const next = shape && !hidden ? `translate(${format(shape.x)}px,${format(shape.y)}px) rotate(${format(shape.angle)}rad) scale(${scale(shape.major)},${scale(shape.minor)})` : '';
       if (next !== limbTransform) { limbTransform = next; if (next) limb.style.transform = next; limb.style.display = next ? '' : 'none'; }
     }
     const placement = captioned && shape && labelSize && placeSelectedBodyLabel(publication.world, publication.viewport, { positionM: centreM, radiusM },
@@ -138,23 +158,25 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
       if (destroyed) return 0;
       lastShown = shown; lastCaptioned = captioned; latest = publication;
       const distanceM = Math.hypot(...publication.world.pose.positionM);
-      const radiusM = payload ? payload.radiusUnits * payload.frame.metersPerUnit : null;
+      const radiusM = payload ? radiusUnits() * payload.frame.metersPerUnit : null;
       // Before the bank loads its radius is unknown; it loads once the camera is past the fade's far end of any mesh
       // this size could have, which the caller's own opacity (shown) already gates.
       const t = radiusM === null ? 0 : Math.max(0, Math.min(1, (distanceM / radiusM - OUTSIDE_FADE_RADII[0]) / (OUTSIDE_FADE_RADII[1] - OUTSIDE_FADE_RADII[0])));
       const alpha = Math.max(0, Math.min(1, shown)) * t * t * (3 - 2 * t);
       if (payload) {
-        const nextOpacity = String(Number((open() ? alpha * payload.cutaway!.exteriorOpacity : alpha).toFixed(3)));
+        // Hidden, only the caption shows.
+        const sphere = hidden ? 0 : alpha;
+        const nextOpacity = String(Number((open() ? sphere * payload.cutaway!.exteriorOpacity : sphere).toFixed(3)));
         if (nextOpacity !== opacity) root.style.opacity = opacity = nextOpacity;
-        const display = alpha > 0 ? '' : 'none';
+        const display = sphere > 0 ? '' : 'none';
         if (root.style.display !== display) root.style.display = display;
-        const inside = open() ? alpha * payload.cutaway!.interiorOpacity : 0, nextInterior = String(Number(inside.toFixed(3)));
+        const inside = open() ? sphere * payload.cutaway!.interiorOpacity : 0, nextInterior = String(Number(inside.toFixed(3)));
         if (nextInterior !== interiorOpacity) interior.style.opacity = interiorOpacity = nextInterior;
         const interiorDisplay = inside > 0 ? '' : 'none';
         if (interior.style.display !== interiorDisplay) interior.style.display = interiorDisplay;
-        if (alpha > 0) draw(publication);
+        if (sphere > 0) draw(publication);
         outline(publication, alpha, captioned);
-        return open() ? 0 : alpha;
+        return open() ? 0 : sphere;
       }
       if (loading || !(shown > 0)) return 0;
       loading = true;
@@ -163,28 +185,28 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
         payload = parseImageMesh(value, url);
         const mesh = document.createElement('div'); mesh.className = 'css-volume-mesh';
         const inner = document.createElement('div'); inner.className = 'css-volume-mesh';
-        const image = `url("${resolveResource(payload.texturePath).replace(/["\\\n\r]/gu, character => `\\${character}`)}")`;
+        image = `url("${resolveResource(payload.texturePath).replace(/["\\\n\r]/gu, character => `\\${character}`)}")`;
         for (const leaf of payload.leaves) {
           const node = document.createElement('s');
           // A leaf's box and cell are its own; its texture is the mesh's, and outside faces hide their backs (volume.css).
-          Object.assign(node.style, { ...leaf.style, backgroundImage: image });
-          mesh.append(node);
+          Object.assign(node.style, leaf.style);
+          mesh.append(node); leaves.push(node);
           if (leaf.cut) { cutLeaves.push(node); node.style.display = cutaway ? 'none' : ''; continue; }
           // The inside copy: the far wall is seen from within, so both faces are drawn (a face's back is its mirror image,
           // the sky as seen from inside the sphere).
-          if (payload.cutaway) inner.append(node.cloneNode());
+          if (payload.cutaway) { const copy = node.cloneNode() as HTMLElement; inner.append(copy); leaves.push(copy); }
         }
         scene.append(mesh);
         if (payload.cutaway) { interiorScene.append(inner); host.insertBefore(interior, interiorBefore); }
-        label.textContent = payload.name; label.dataset.imageMeshLabel = payload.id;
+        label.textContent = caption(); label.dataset.imageMeshLabel = payload.id;
         (labelHost ?? host).append(label); observer?.observe(label);
         // The limb is a decoration of the sphere: one that cannot be resolved leaves the sphere and its caption drawn.
         if (payload.limb) {
           try {
-            limb.style.backgroundImage = `url("${resolveResource(payload.limb.path).replace(/["\\\n\r]/gu, character => `\\${character}`)}")`;
-            root.append(limb);
+            limbImage = `url("${resolveResource(payload.limb.path).replace(/["\\\n\r]/gu, character => `\\${character}`)}")`;
           } catch (error) { console.error(`Image mesh ${url} limb unavailable`, error); }
         }
+        applyTexture();
         root.dataset.imageMesh = payload.id;
         if (latest) this.publish(latest, shown, captioned);
       }).catch(error => { root.dataset.imageMesh = 'failed'; console.error(`Image mesh ${url} failed`, error); });
@@ -195,6 +217,14 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
       if (destroyed || cutaway === value) return;
       cutaway = value;
       for (const node of cutLeaves) node.style.display = cutaway ? 'none' : '';
+      if (payload && latest) this.publish(latest, lastShown, lastCaptioned);
+    },
+    /** Hides or shows the sphere, keeping its caption: a one-off change, never made on every frame. */
+    setHidden(value: boolean) {
+      if (destroyed || hidden === value) return;
+      hidden = value;
+      applyTexture();
+      if (payload) label.textContent = caption();
       if (payload && latest) this.publish(latest, lastShown, lastCaptioned);
     },
     destroy() { destroyed = true; observer?.disconnect(); label.remove(); interior.remove(); root.remove(); } });

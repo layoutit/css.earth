@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "quaia-quasars",
+  "table": {
+    "path": "quaia-sample.csv.gz",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=1000000&QUERY=SELECT+GaiaDR3,RA_ICRS,DE_ICRS,zQuaia+FROM+%22J/ApJ/964/69/quaiag200%22+WHERE+zQuaia+BETWEEN+0.8+AND+3.5+ORDER+BY+GaiaDR3",
+    "bytes": 1096938,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "redshift-planck18"
+  },
+  "sample": "The tracked file keeps the 413,578 of Quaia's 619,961 quasars between redshift 0.8 and 3.5 that lie outside DESI's footprint, one in 9 in source id order, with GaiaDR3, RA, DEC and Z (packages/bake/authoring/nearby-universe/quaia-sample.mts).",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "quaia-2024",
+  "meaning": "The Gaia-unWISE quasars of Quaia (G < 20.0, redshift 0.8 to 3.5) where DESI did not look, each at its comoving distance in the Planck 2018 cosmology, at the tracked DESI sample's density on the sky: they close DESI's two cones into one shell.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorBySpectrumAtRedshift": {
+      "spectrum": {
+        "path": "../desi-quasars/qso_template.fits",
+        "bytes": 23040,
+        "wavelength": "WAVELENGTH",
+        "flux": "FLUX",
+        "wavelengthUnit": "angstrom"
+      },
+      "step": 0.1,
+      "basis": "The Large Bright Quasar Survey composite (Francis et al. 1991), stretched by 1 + z to each quasar's redshift in steps of 0.1: the colour its light arrives with. At z 0.8 and beyond, the visible range is 211 to 433 nm in the quasar's frame, inside the composite's 80 to 600 nm."
+    }
+  },
+  "cosmology": "planck-2018-cosmology"
+}

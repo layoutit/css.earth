@@ -1,12 +1,17 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "quasars",
-  "meaning": "DESI's quasars as dots: one in 3 of the tracked sample (one in 150 of the catalogue), in catalogue order.",
+  "meaning": "The quasar shell as dots: one in 2 of the tracked DESI sample (one in 100 of the catalogue) on DESI's footprint, and one in 2 of Quaia's, at the same density on the sky, everywhere else.",
   "banks": [
     {
       "bank": "desi-quasars",
-      "keepEvery": 3,
-      "basis": "Presentation choice: about 8,000 dots across the quasar shell, 2.8 to 6.6 Gpc away."
+      "keepEvery": 2,
+      "basis": "Presentation choice: the two samples together hold 70,423 quasars and a bank draws at most 40,000 (MAX_CATALOGUE_POINTS), so both keep one in 2 and stay at one density."
+    },
+    {
+      "bank": "quaia-quasars",
+      "keepEvery": 2,
+      "basis": "Presentation choice: the same share as DESI's, so the shell stays even."
     }
   ]
 }

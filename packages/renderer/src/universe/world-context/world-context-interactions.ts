@@ -104,8 +104,11 @@ interface PaintedEntry {
 export function createWorldContextInteractions(host: HTMLElement, root: HTMLElement) {
   const picking = screenPicking(host);
   let labelExclusions: readonly LabelScreenRect[] = [], backgroundExclusions: readonly LabelScreenRect[] = [];
+  let bodyLabels: readonly LabelScreenRect[] = [];
   return {
     labelExclusionRects: () => labelExclusions,
+    /** The painted bodies' own labels, without the caption: what the view's label budget counts as already placed. */
+    bodyLabelRects: () => bodyLabels,
     backgroundExclusionRects: () => backgroundExclusions,
     clearPicking() { picking.publish(root, []); },
     commit<Entry extends PaintedEntry>(paintedOrder: readonly Entry[], rankOf: (entry: Entry) => number | undefined,
@@ -120,6 +123,7 @@ export function createWorldContextInteractions(host: HTMLElement, root: HTMLElem
           indicatorRects.push({ left: x - radius, right: x + radius, top: y - radius, bottom: y + radius });
         }
       }
+      bodyLabels = [...acceptedRects];
       if (caption?.labelPosition && captionSize) {
         const [left, top] = caption.labelPosition;
         acceptedRects.push({ left, top, right: left + captionSize.width, bottom: top + captionSize.height });
@@ -129,6 +133,6 @@ export function createWorldContextInteractions(host: HTMLElement, root: HTMLElem
       backgroundExclusions = [...acceptedRects, ...indicatorRects];
       if (pickingChanged) picking.publish(root, navigationInFlight ? [] : targets);
     },
-    destroy() { picking.remove(root); labelExclusions = []; backgroundExclusions = []; },
+    destroy() { picking.remove(root); labelExclusions = []; backgroundExclusions = []; bodyLabels = []; },
   };
 }

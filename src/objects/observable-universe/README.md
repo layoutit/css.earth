@@ -5,7 +5,7 @@ object registry with its own page, `/observable-universe/`, drawn by the Sun's w
 reads from 1 Gpc out, opens 52 Gpc from the Sun and reaches 80 Gpc, far enough for the microwave background's caption to
 fit below it.
 
-Inside it are DESI's galaxies and quasars, out to 6.6 Gpc, which the
+Inside it are DESI's galaxies and the quasars of DESI and Quaia, out to 6.6 Gpc, which the
 [Nearby Universe](../nearby-universe/README.md) package draws. This package draws what lies at its edge: the cosmic
 microwave background, light from 372,000 years after the Big Bang, on the sphere 14 Gpc away that it left from.
 
@@ -54,10 +54,12 @@ quotes.
 
 ## Datasets
 
-The page has two datasets, shown with the shared dataset card in its overview card and chosen with `?dataset=` on
+The page has three datasets, shown with the shared dataset card in its overview card and chosen with `?dataset=` on
 `/observable-universe/`:
 
-- **Cut open** (the default): the northern half is left out of the drawing so the galaxies and quasars inside show. The
+- **Off** (the default): the sphere is not drawn or loaded, so the page opens on the galaxies and quasars alone. Its
+  picture is empty and it has no legend.
+- **Cut open** (`?dataset=cutaway`): the northern half is left out of the drawing so the galaxies and quasars inside show. The
   inside of the far wall is drawn at 55% opacity, behind the dots, and the rest of the shell at 85%.
 - **Full sphere** (`?dataset=full`): the closed shell, which hides everything inside it.
 
