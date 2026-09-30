@@ -156,8 +156,9 @@ async function assertDefaultViewsFaceDatasets(objectDirectory: string, definitio
 }
 
 /** Feature anchors address scene-tree nodes, so they carry over only while the tree keeps the published node topology. A node's
- * style and the shared declaration table may change (a leaf's raster size, say) without moving any node. */
-function carryPublishedFeatures(id: string, definition: Record<string, unknown>, published: { runtime: Record<string, unknown>; content: Record<string, unknown> }) {
+ * style and the shared declaration table may change (a leaf's raster size, say) without moving any node. When nodes move
+ * (a removed dataset's cutaway), `null` asks the caller to anchor them afresh: that reads only tracked JSON and the scene. */
+function carryPublishedFeatures(definition: Record<string, unknown>, published: { runtime: Record<string, unknown>; content: Record<string, unknown> }) {
   if (published.runtime.features === undefined) return { definition, features: null };
   // Finalization appends nodes and activation groups to the lane's tree; the lane's own tree must be the published prefix.
   const tree = record(definition.tree, 'prepared tree'), previous = record(published.runtime.tree, 'published tree');
@@ -169,7 +170,7 @@ function carryPublishedFeatures(id: string, definition: Record<string, unknown>,
   const differs = ([key, value]: [string, unknown]) => key === 'properties' ? false
     : key === 'nodes' ? topology(previousNodes.slice(0, nodes.length)) !== topology(nodes)
       : JSON.stringify(previous[key]) !== JSON.stringify(value);
-  if (Object.entries(tree).some(differs)) throw new Error(`${id}: the scene tree differs from the published preparation, so its feature anchors cannot carry over; run the full preparation.`);
+  if (Object.entries(tree).some(differs)) return null;
   return { definition: { ...definition, features: published.runtime.features },
     features: record(published.content.features, 'published feature content') as unknown as Parameters<typeof writeFeatureContent>[1] };
 }
@@ -251,7 +252,9 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           const recomputed = [...(result.recomputedImages ?? []), ...shadowless, ...[rasterRecipe?.lighting, rasterRecipe?.atmosphere].flatMap(block => Object.entries(block ?? {}))
             .filter(([key, value]) => key.endsWith('Output') && typeof value === 'string').map(([, value]) => outputName(value as string, RASTER_DENSITY))].map(pattern);
           const redrawn = (filename: string) => recomputed.some(output => output.test(filename));
-          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(redrawn(filename) && existing.has(filename) && staged.has(filename)) && !(shadowless.has(filename) && !existing.has(filename)));
+          // A removed dataset drops its images: the run may leave published images out, never add or change others.
+          const removed = (filename: string) => existing.has(filename) && !staged.has(filename);
+          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !removed(filename) && !(redrawn(filename) && existing.has(filename) && staged.has(filename)) && !(shadowless.has(filename) && !existing.has(filename)));
           if (unexpected.length || !changed.length)
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }
@@ -289,8 +292,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets,
       solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged });
     // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
-    const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, prepared.definition as unknown as Record<string, unknown>, publishedFeatures)
-      : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
+    const attached = (publishedFeatures && carryPublishedFeatures(prepared.definition as unknown as Record<string, unknown>, publishedFeatures))
+      ?? await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
     if (attached.features) { await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`); await writeFeatureContent(outputDirectory, attached.features); }
     const definition = attached.definition as typeof prepared.definition;
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
@@ -421,8 +424,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return pulsationTrack(model, checkGaiaCepheidModel(model, where), Number((scene.worldFrame as { epochJdTt?: unknown } | null)?.epochJdTt), path, where);
   })(presentation.lightCurve.model) : undefined;
   const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.datasetFocus ? { datasetFocus: presentation.datasetFocus } : {}), ...(lightCurve ? { lightCurve } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], datasets: content.datasets as unknown as PresentationInputs['datasets'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters(await solarGeometry()));
-  const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, definition as unknown as Record<string, unknown>, publishedFeatures)
-    : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
+  const attached = (publishedFeatures && carryPublishedFeatures(definition as unknown as Record<string, unknown>, publishedFeatures))
+    ?? await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
   const runtime = attached.definition, features = attached.features !== null;
   if (attached.features) await writeFeatureContent(outputDirectory, attached.features);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);

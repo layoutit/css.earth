@@ -4,7 +4,7 @@ import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { packTextureSheet, prepareTextureLevels } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { keepTextureLevelBanks, packTextureSheet, prepareTextureLevels } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { requirePreparedData } from '@cssearth/bake/presentation';
 
 test('a map capped below the finest level reads its capped files there; other maps keep every level', async () => {
@@ -79,4 +79,17 @@ test('a bank prepared at lower density places its pages on the same CSS offsets 
   // Earth's cutaway shell: its pages are a quarter of the surface's width, but tile the same CSS pages.
   assert.deepEqual(coarse!.tiles?.['page:outer:1'], { ...coarse!.tiles?.['page:normal:1'], scale: coarse!.tiles?.['page:outer:1']?.scale });
   assert.equal(coarse!.tiles?.['page:outer:1']?.x, coarse!.tiles?.['page:normal:1']?.x);
+});
+
+test('a reuse run keeps the published levels of the banks it still declares and drops a removed dataset\'s', () => {
+  const entry = (key: string, url: string) => ({ key, url, decodedBytes: 4, pool: 'pages' });
+  const published = { maximumDecodedBytes: 8, entries: [entry('page:normal:0', '/a.webp'), entry('sheet:cut:level:16', '/cut-sheet.webp'), entry('poles:cut', '/cut-poles.webp')],
+    textureLevels: { hysteresis: 0.2, levels: [{ minimumDiameter: 0, resources: { 'page:normal:0': 'page:normal:0', 'page:cut:0': 'sheet:cut:level:16' },
+      tiles: { 'page:cut:0': { x: 0, y: 0, scale: 1 } } }] },
+    provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'source-webp-encoding', texelsPerCssPixel: 2,
+      receipts: [], sheets: [{ url: '/cut-sheet.webp', side: 16, pages: [] }] } };
+  const kept = keepTextureLevelBanks(published as never, new Set(['normal']), new Set(['normal']));
+  assert.deepEqual(kept.entries.map(item => item.key), ['page:normal:0']);
+  assert.deepEqual(kept.textureLevels.levels[0], { minimumDiameter: 0, resources: { 'page:normal:0': 'page:normal:0' }, tiles: {} });
+  assert.deepEqual(kept.provenance.sheets, []);
 });

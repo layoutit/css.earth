@@ -8889,54 +8889,6 @@
     },
     {
       "location": "public",
-      "filename": "earth-interior-inner-core-poles@2x.webp",
-      "bytes": 9466,
-      "sha256": "17b5e0d54028087176b72c044ea177754369425822d973d10a9e85dffc2249f0"
-    },
-    {
-      "location": "public",
-      "filename": "earth-interior-inner-core@2x.webp",
-      "bytes": 107008,
-      "sha256": "25b334494dfbb0959d04d53f8a3a2242682eea641a4d56dc738086c3b48d27e3"
-    },
-    {
-      "location": "public",
-      "filename": "earth-interior-mantle-poles@2x.webp",
-      "bytes": 7248,
-      "sha256": "6858c5fc16e1afcd0001515a17bd8294cd18a21dd0b566143e64bf1836b7d9a9"
-    },
-    {
-      "location": "public",
-      "filename": "earth-interior-mantle@2x.webp",
-      "bytes": 73622,
-      "sha256": "03ab4b119a46a88af51e2ce17585dcbbe6dcec1acb6636c0af0aefbcab07cbb9"
-    },
-    {
-      "location": "public",
-      "filename": "earth-interior-outer-core-poles@2x.webp",
-      "bytes": 8002,
-      "sha256": "705406adb7b40f6d602ddcc75f7a5be94b0fe5373e9222ddfa8b83e6723d8bf4"
-    },
-    {
-      "location": "public",
-      "filename": "earth-interior-outer-core@2x.webp",
-      "bytes": 88492,
-      "sha256": "59abf483313abb0d00cb05d2e66897f9b7418e3d20df301a387bd411d78f1dc9"
-    },
-    {
-      "location": "public",
-      "filename": "earth-interior-outer-poles.webp",
-      "bytes": 104138,
-      "sha256": "b7b3d7edbc18d8d4f2026a91b8285b4e4cf82a2b7619dce74f46bdb7f534b2af"
-    },
-    {
-      "location": "public",
-      "filename": "earth-interior-section@2x.webp",
-      "bytes": 56838,
-      "sha256": "403f1f7c445fe7d56e2232d71155734bc04dc052a94268cf56a7577f575f08ed"
-    },
-    {
-      "location": "public",
       "filename": "earth-night-lights-legend.png",
       "bytes": 1932,
       "sha256": "3a2e79ee42683af3e652b0ce460c3dc0bbf6b601e244ded4511bfff6aafb6bc4"
@@ -13077,54 +13029,6 @@
     },
     {
       "location": "public",
-      "filename": "earth-tomography-inner-core-poles@2x.webp",
-      "bytes": 9936,
-      "sha256": "b1fb72941f8fb1b88583c074508222c9c0fa20da4a4cd5ed873a082b7d534cfc"
-    },
-    {
-      "location": "public",
-      "filename": "earth-tomography-inner-core@2x.webp",
-      "bytes": 115800,
-      "sha256": "e585328ba89004929bda4e9ff1d5932679c37e95cdb91968f355b55d46aed0d6"
-    },
-    {
-      "location": "public",
-      "filename": "earth-tomography-legend.png",
-      "bytes": 2083,
-      "sha256": "c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286"
-    },
-    {
-      "location": "public",
-      "filename": "earth-tomography-mantle-poles@2x.webp",
-      "bytes": 33714,
-      "sha256": "d85c51b2b82833b034c60486732a65a3af590d115bd6914eef1de84788667f99"
-    },
-    {
-      "location": "public",
-      "filename": "earth-tomography-mantle@2x.webp",
-      "bytes": 117986,
-      "sha256": "39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b"
-    },
-    {
-      "location": "public",
-      "filename": "earth-tomography-outer-core-poles@2x.webp",
-      "bytes": 8106,
-      "sha256": "6565941181738882ab60d4d9909ea418d20e18736b68225b40b11b0a4955264a"
-    },
-    {
-      "location": "public",
-      "filename": "earth-tomography-outer-core@2x.webp",
-      "bytes": 86368,
-      "sha256": "59671a6f82f756b1c8e74ef44429e5daccd1c33b0c59b856b05a95f72b2c8e99"
-    },
-    {
-      "location": "public",
-      "filename": "earth-tomography-section@2x.webp",
-      "bytes": 110362,
-      "sha256": "db5505965d3bfdb697a79cf4aaaed0983708f0211fd9267291a34ac5deab8735"
-    },
-    {
-      "location": "public",
       "filename": "earth-topography-legend.png",
       "bytes": 2066,
       "sha256": "cd30437db4818a37363dc9ac616ce395f3aec411d13c02960c4e03e46585496c"
@@ -15188,18 +15092,6 @@
       "sha256": "f52454e05cd450cabd6c6ca204fff1fe3ab1517952a416b5ecfdcb2e9a02b755"
     },
     {
-      "location": "public",
-      "filename": "earth-view-interior.webp",
-      "bytes": 1152,
-      "sha256": "3d7bc0d6a342734fcb496bc3c275e3df6043de5304a967f736f7b52ea2d465dc"
-    },
-    {
-      "location": "public",
-      "filename": "earth-view-tomography.webp",
-      "bytes": 2094,
-      "sha256": "dbbf6668d7688e11815e304c7d056c027871c4876b188618b7574e32766b115f"
-    },
-    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 300,
@@ -15220,14 +15112,14 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 5289,
-      "sha256": "3c1d53a7133a20e7c5ba16ddc8931c3092fe865894ecd3523b8819e721c0e874"
+      "bytes": 3973,
+      "sha256": "1df86ae85982a993705f3ccc47d298ff14400d30715b1aad82bfb6c5932fddc1"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 43732,
-      "sha256": "1aad97e7fe62b3e7d97a8098866da468a5f8230ffa72afebdf4f04533784ed7f"
+      "bytes": 41795,
+      "sha256": "391e5c33ae7ce2e861853bf27445dfcc494a432fea582488a585a1b245b1f067"
     },
     {
       "location": "prepared",
@@ -15292,20 +15184,20 @@
     {
       "location": "prepared",
       "filename": "raster-assets.json",
-      "bytes": 42691,
-      "sha256": "045bc38805d5d9901aa53836ba150003de28453d2cbf8cf009764ef637506fbc"
+      "bytes": 66797,
+      "sha256": "1c52f9d8581e107c0a7bb928b921f74c7092762339c3c490413b4e8654e5cefb"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1749684,
-      "sha256": "866dc855579ad0e4b6b94fd8296af03e34fbb914f0798af4deb533a6ac411cc5"
+      "bytes": 1191554,
+      "sha256": "98fa7f85527ca4955b886e1f6fee1ebac67e1d22ca3368f703a6572405f085f4"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1311844,
-      "sha256": "ca2b745acef769128df45c3a5248cbee01897182028ef71173abc4394c95fb99"
+      "bytes": 1330183,
+      "sha256": "b837d78cb4f9c2d0256a0f806ca0ab36ec999d51efff1179a9a7cdb27d7fc3a6"
     },
     {
       "location": "prepared",
@@ -15334,8 +15226,8 @@
     {
       "location": "prepared",
       "filename": "texture-levels.json",
-      "bytes": 1154249,
-      "sha256": "512d3a368327d20b0cf01e6da50e5fb5abed442ea4f6baf15a7f9d5375dfb798"
+      "bytes": 1135021,
+      "sha256": "d6367db838d948ec67b76857e0ef9711fb2ddc0afba7f774dfcdac9c8dc05f51"
     },
     {
       "location": "prepared",

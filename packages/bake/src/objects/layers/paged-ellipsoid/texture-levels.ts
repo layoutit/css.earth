@@ -49,6 +49,25 @@ export function packTextureSheet(sides: readonly number[]): { side: number; posi
 
 /** Downsample the canonical prepared atlas offline. Padding before reduction
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
+type PreparedTextureLevels = NonNullable<Awaited<ReturnType<typeof prepareTextureLevels>>>;
+
+/** Published texture levels less the banks and pole atlases a run no longer declares (a removed dataset): a reuse run keeps
+ * every other level, sheet and tile as published. */
+export function keepTextureLevelBanks(levels: PreparedTextureLevels, bankIds: ReadonlySet<string>, datasetIds: ReadonlySet<string>): PreparedTextureLevels {
+  const kept = (key: string) => {
+    const match = /^(page|sheet|poles):([^:]+)/u.exec(key);
+    if (!match) throw new TypeError(`Unknown texture level resource: ${key}.`);
+    return match[1] === 'poles' ? datasetIds.has(match[2]!) : bankIds.has(match[2]!);
+  };
+  const entries = levels.entries.filter(entry => kept(entry.key)), urls = new Set(entries.map(entry => entry.url));
+  const pick = <T>(record: Record<string, T>) => Object.fromEntries(Object.entries(record).filter(([key]) => kept(key)));
+  return { ...levels, entries,
+    textureLevels: { ...levels.textureLevels, levels: levels.textureLevels.levels.map(level => ({ ...level, resources: pick(level.resources),
+      ...(level.tiles ? { tiles: pick(level.tiles) } : {}) })) },
+    provenance: { ...levels.provenance, receipts: levels.provenance.receipts.filter(receipt => urls.has(receipt.url)),
+      sheets: levels.provenance.sheets.filter(sheet => urls.has(sheet.url)) } };
+}
+
 export async function prepareTextureLevels({ config, plan, datasets, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;datasets?:SurfaceBankDatasets;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
   const { widths, fixedWidth, maximumWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
