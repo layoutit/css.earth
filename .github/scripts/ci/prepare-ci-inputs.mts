@@ -47,7 +47,7 @@ function uniqueCiInputs(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLo
  * catalogue and feature consumers also inspect inventoried context/public JSON. Keep that open-ended JSON
  * closure. The renderer's volume/loader and shell/loader suites additionally inspect every prepared image in
  * the real Milky Way and Heliosphere fixture banks. Sky and point-field renderer tests read the canonical
- * stellar-neighbourhood binary bank, but not its atlas. Source checks also require the inventoried
+ * stellar-neighbourhood binary bank, and the spatial hand-off test reads its atlas. Source checks also require the inventoried
  * photometric phase-chart SVG family.
  * These are test fixtures, never a second application registry.
  *
@@ -65,7 +65,7 @@ export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAsset
     if (!asset.file.startsWith(preparedDirectory)) return false;
     // The shared context arrives from one publish with the orbit banks it describes (above): restoring the JSON halves
     // alone would pair a context with whatever banks a runner happens to hold.
-    return asset.id === 'milky-way' || asset.id === 'heliosphere';
+    return asset.id === 'milky-way' || asset.id === 'heliosphere' || asset.id === 'stellar-neighbourhood';
   }));
 }
 

@@ -344,14 +344,15 @@ jobs:
         # A test whose restored input this job leaves out skips through sourceTest() and names it.
         run: |
           node site/build/prepare/prepare-facilities.mts --catalog-only
+          pnpm exec playwright install --with-deps --only-shell chromium
           if [ "$CI_UNIVERSE_LANE" = packages ]; then
-            # The volume packages' previews and compact inputs, as the nebula job keeps them, and the tracked geology shapefiles.
+            # The volume packages' previews and compact inputs, as the nebula job keeps them, the tracked density sources
+            # the volume tests decode (52 MB) and the tracked geology shapefiles.
             git grep -l 'cssearth-volume-source-manifest@2' -- 'src/objects/*/source/manifest.json' |
               while IFS= read -r manifest; do printf '/%s/**\n' "${manifest%/source/manifest.json}"; done | git sparse-checkout add --stdin
-            git sparse-checkout add '/src/objects/**/*.shp'
+            git sparse-checkout add '/src/objects/**/*.shp' '/src/objects/**/*.ktx2'
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
           else
-            pnpm exec playwright install --with-deps --only-shell chromium
             pnpm typecheck:oracles
           fi
           pnpm "test:$CI_UNIVERSE_LANE"
