@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { defineObjects, type CatalogEntry } from '@cssearth/objects';
-import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readOverviews } from '@cssearth/objects/node';
+import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance, readPreparedFocusObjects } from '@cssearth/bake/navigation';
 
@@ -110,11 +110,14 @@ async function writeGenerated(output: string, text: string) {
  * names must be a catalogued record. The universe rings those objects at that radius. */
 async function readStellarExtents(entries: readonly { id: string }[], projectRoot: string) {
   const extents: Record<string, number> = {};
-  for (const { id } of entries) {
-    const path = `src/objects/${id}/source/stellar-extent.json`;
-    let record: unknown;
-    try { record = JSON.parse(await readFile(resolve(projectRoot, path), 'utf8')); }
-    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+  // Read in parallel; the records are checked below in the entries' order.
+  const records = await Promise.all(entries.map(async ({ id }) => {
+    try { return JSON.parse(await readFile(resolve(projectRoot, `src/objects/${id}/source/stellar-extent.json`), 'utf8')) as unknown; }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; }
+  }));
+  for (const [index, { id }] of entries.entries()) {
+    const path = `src/objects/${id}/source/stellar-extent.json`, record = records[index];
+    if (record === undefined) continue;
     if (!isRecord(record) || record.schema !== 'cssearth-stellar-extent@1' || record.objectId !== id) throw new TypeError(`${path}: expected a cssearth-stellar-extent@1 record for ${id}.`);
     const radiusPc = record.radiusPc, source = record.source;
     if (typeof radiusPc !== 'number' || !(radiusPc > 0) || !Number.isFinite(radiusPc)) throw new TypeError(`${path}: radiusPc must be a positive number, got ${String(radiusPc)}.`);
@@ -127,16 +130,17 @@ async function readStellarExtents(entries: readonly { id: string }[], projectRoo
 }
 
 export async function prepareCatalog({ projectRoot = root } = {}) {
-  const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance);
+  // Every descriptor once, shared by each read below.
+  const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
+  const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
   const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
   if (!host) throw new TypeError('Prepared focus destinations need a shared world host.');
   const focuses = await readPreparedFocusObjects(resolve(projectRoot, 'src/objects'), host.id);
   // The levels above the star systems are drawn by the same shared world host as every catalogue focus.
-  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), host.id);
+  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), host.id, descriptors);
   defineObjects<{ id: string; route: string }>([...entries, ...focuses, ...overviews]);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
-    const folder = resolve(projectRoot, 'src/objects', id);
-    return prepareObjectDiscovery(JSON.parse(await readFile(resolve(folder, 'object.json'), 'utf8')), folder);
+    return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
   // A star without imagery of its own stays on the map when a body with imagery orbits it (a placed star's planet).
   const withImagery = new Set(entries.filter((_, index) => discoveries[index]!.imagery).map(({ id }) => id));
@@ -151,7 +155,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
-  const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
+  const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);
   await writeGenerated(resolve(projectRoot, 'site/prepared-stellar-extents.json'), JSON.stringify(await readStellarExtents([...entries, ...contexts], projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,
     await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));

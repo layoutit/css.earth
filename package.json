@@ -43,7 +43,7 @@
     "lab:nebula": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
     "lint": "eslint packages labs src site .github/scripts tests",
     "lint:packages": "eslint packages --max-warnings 0",
-    "postinstall": "node .github/scripts/ci/commit-message.mts --install && pnpm build:tools",
+    "postinstall": "node .github/scripts/ci/commit-message.mts --install && node packages/bake/cli/check-stale-builds.mts --run && pnpm prepare:tools",
     "prebuild": "node site/build/run-script-chain.mts build:prepare",
     "build:prepare": "pnpm setup:asset-data && pnpm build:tools && pnpm setup:assets && pnpm prepare:object-json && pnpm prepare:lens-billboards && pnpm prepare:environment-images && pnpm prepare:nebulae",
     "predev": "node site/build/run-script-chain.mts dev:prepare",

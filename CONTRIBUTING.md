@@ -13,7 +13,9 @@ pnpm dev
 ```
 
 `pnpm install` builds the shared packages, the renderer and the preparation
-tools. `pnpm dev` restores every object's baked `prepared/` output and the
+tools. It rebuilds only the packages whose sources changed since their last
+build (`check-stale-builds --run`), so a repeat install takes about 24 s;
+`pnpm build:packages` forces a full rebuild. `pnpm dev` restores every object's baked `prepared/` output and the
 prepared browser images from R2 (nothing under `prepared/` is tracked; only
 files that are missing or changed are downloaded), derives the prepared JSON
 transport beside each body, and serves the site on port 4210. A warm start
