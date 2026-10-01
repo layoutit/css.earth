@@ -139,7 +139,10 @@ async function readStellarExtents(entries: readonly { id: string }[], projectRoo
 export async function prepareCatalog({ projectRoot = root } = {}) {
   // Every descriptor once, shared by each read below.
   const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
-  const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
+  const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
+  // A level that is also a body of the world (the Local Group among the clusters) keeps its overview as its registry entry.
+  const authorsOverview = (id: string) => { const descriptor = descriptors.get(id); return isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.overview !== undefined; };
+  const entries = catalogued.filter(entry => !authorsOverview(entry.id)), levels = catalogued.filter(entry => authorsOverview(entry.id));
   const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
   if (!host) throw new TypeError('Prepared focus destinations need a shared world host.');
   // The spatial catalogues are data: they name no destination. Every page is a package's own entry: a scene, or a package
@@ -163,6 +166,8 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
       return [rows.filter(row => !isHostedDescriptor(row.descriptor)), rows.filter(row => isHostedDescriptor(row.descriptor)).map(row => ({ ...row, sceneHostId: host.id }))] as const;
     })()));
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews) + '\n');
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.levelBodies), JSON.stringify(levels.map(({ id, distance }) => ({ kind: 'prepared-focus',
+    descriptor: descriptors.get(id), distance, discovery: { featured: true, imagery: false, illustration: false }, sceneHostId: host.id }))) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);

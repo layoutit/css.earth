@@ -90,6 +90,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // The catalogue step's discovery records, as the prepared catalogue holds them: what the world's visibility reads per body.
     const discoveries: Record<string, unknown> = Object.fromEntries(prepared.entries.flatMap(entry =>
       (entry.kind === 'scene' || entry.kind === 'prepared-focus') && isRecord(entry.descriptor) && typeof entry.descriptor.id === 'string' ? [[entry.descriptor.id, entry.discovery]] : []));
+    for (const object of registry) if (!Object.hasOwn(discoveries, object.id)) discoveries[object.id] = object.discovery;
     const present = async (body: Record<string, unknown>) => {
       const object = byId.get(String(body.id));
       if (!object) return;

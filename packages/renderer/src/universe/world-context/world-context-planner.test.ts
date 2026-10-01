@@ -737,12 +737,14 @@ test('a notable star beyond the Solar System is named before the Solar System co
 
 test('past the Local Group scale the stars give their names to the galaxies', async () => {
   const { calculate, input } = await namedAlphaCentauri();
-  const named = (parsecs: number) => {
+  const labelled = (parsecs: number) => {
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
-    return calculate(input).projectedBodies.filter(body => body.labelShown).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
+    return calculate(input).projectedBodies.filter(body => body.labelShown).map(body => [plan.focus, ...plan.bodies][body.index]!);
   };
+  const named = (parsecs: number) => labelled(parsecs).filter(body => !('classification' in body && isExtendedClassification(body.classification))).map(body => body.id);
   { const values = named(200e3); assert.ok(['sun', 'sgr-a-star'].every(item => values.includes(item)), 'from 200 kpc, short of the Local Group scale, the Sun and Sgr A* keep their names'); }
   assert.deepEqual(named(1e6), [], 'from 1 Mpc no star or planet is named');
+  { const values = labelled(1e6).map(body => body.id); assert.ok(['lmc', 'smc'].every(item => values.includes(item)), 'from 1 Mpc the galaxies are'); }
 });
 
 test('past the Solar System only the featured stars and the references keep a dot; past the Local Group no body does', () => {

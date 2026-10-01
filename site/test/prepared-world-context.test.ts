@@ -18,7 +18,7 @@ import { createWorldContextFrameEncoder } from '../../packages/renderer/src/univ
 import { type PackedWorldContextView, unpackWorldBodies } from '../../packages/renderer/src/universe/world-context/world-context-view-transport.js';
 import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from '../../packages/renderer/src/universe/world-context/context-scale.js';
-import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { isPlacedClassification } from '@cssearth/objects';
 import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../system-framing.mts';
@@ -762,8 +762,8 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
   // Each entry's distance as `prepare:catalog` placed it in the registry.
-  // Every body of the world: the scenes, and the packages the host draws (galaxies, clusters, nebulae).
-  const worldObjects = OBJECTS.filter(object => object.kind !== 'overview');
+  // Every body of the world: the scenes, the packages the host draws (galaxies, clusters, nebulae) and the levels that are bodies.
+  const worldObjects = (await import('@cssearth/objects/node')).readPreparedObjects(fileURLToPath(new URL('../..', import.meta.url))).worldObjects;
   const distance = (descriptor: unknown) => parseNavigationDistance(worldObjects.find(object => object.id === (descriptor as { id: string }).id)?.distance);
   const contextEntries = (await readCatalog(fileURLToPath(new URL('../../src/objects', import.meta.url)), distance)).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));

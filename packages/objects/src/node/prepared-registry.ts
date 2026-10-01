@@ -13,6 +13,9 @@ import type { NavigableObject, NavigationDistance, ObjectDiscovery, ObjectEntry,
 export const PREPARED_CATALOGUE = Object.freeze({
   entries: 'site/prepared-catalogue.mjs',
   overviews: 'site/prepared-overview-objects.json',
+  /** The levels that are also bodies of the world (the Local Group, marked among the clusters): each one's descriptor with
+   * its distance and discovery, as a hosted package's row. Its registry entry stays its overview. */
+  levelBodies: 'site/prepared-level-bodies.json',
 });
 
 /** The catalogue module `prepare:catalog` writes at `PREPARED_CATALOGUE.entries`. */
@@ -71,7 +74,11 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   for (const object of objects) if (object.kind !== 'scene' && !sceneObjects.some(host => host.id === object.sceneHostId)) {
     throw new TypeError(`${object.kind === 'overview' ? 'Overview' : 'Prepared focus'} host is not a registered scene: ${object.id}`);
   }
-  const worldObjects = Object.freeze(objects.filter((object): object is PreparedSceneObject | PreparedFocusObject => object.kind !== 'overview'));
+  const levelRows: unknown = load(resolve(checkout, PREPARED_CATALOGUE.levelBodies));
+  if (!Array.isArray(levelRows)) throw new TypeError(`Invalid prepared level bodies: ${PREPARED_CATALOGUE.levelBodies}.`);
+  const levelBodies = levelRows.map(row => catalogueObject<never, AbortSignal>(row, refuse)).filter((body): body is PreparedFocusObject => body.kind === 'prepared-focus');
+  for (const body of levelBodies) if (objects.find(object => object.id === body.id)?.kind !== 'overview') throw new TypeError(`Level body is not a registered overview: ${body.id}`);
+  const worldObjects = Object.freeze([...objects.filter((object): object is PreparedSceneObject | PreparedFocusObject => object.kind !== 'overview'), ...levelBodies]);
   return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects, worldObjects, requireSceneObject(id: string) {
     const object = objects.find(candidate => candidate.id === id);
     if (!object) throw new Error(`Unknown cssEarth object: ${id}`);
