@@ -1,0 +1,262 @@
+{
+  "schema": "cssearth-emission-inference@1",
+  "id": "m49-inferred",
+  "source": {
+    "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=3000&height=3000&fov=0.584423&projection=TAN&coordsys=icrs&ra=187.444992&dec=8.00041&format=jpg",
+    "width": 3000,
+    "height": 3000,
+    "publisher": "https://www.legacysurvey.org/dr10/",
+    "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+  },
+  "crop": {
+    "left": 0,
+    "top": 0,
+    "width": 3000,
+    "height": 3000
+  },
+  "pointMasks": [],
+  "neighbourMasks": {
+    "source": "paturel-2003-hyperleda-pgc",
+    "fill": "isophote",
+    "masks": [
+      {
+        "name": "PGC 41363 (NGC4488)",
+        "x": 132,
+        "y": -347,
+        "radius": 406
+      },
+      {
+        "name": "PGC 41383 (NGC4492)",
+        "x": -46,
+        "y": 1100,
+        "radius": 262
+      },
+      {
+        "name": "PGC 41189 (NGC4470)",
+        "x": 1690,
+        "y": 2410,
+        "radius": 165
+      },
+      {
+        "name": "PGC 41258 (UGC7636)",
+        "x": 1207,
+        "y": 1864,
+        "radius": 128
+      },
+      {
+        "name": "PGC 41107 (MCG1-32-076)",
+        "x": 2495,
+        "y": 2266,
+        "radius": 125
+      },
+      {
+        "name": "PGC 41170 (NGC4466)",
+        "x": 1847,
+        "y": 3059,
+        "radius": 120
+      },
+      {
+        "name": "PGC 41148 (NGC4464)",
+        "x": 2039,
+        "y": 699,
+        "radius": 117
+      },
+      {
+        "name": "PGC 41130 (VCC1167)",
+        "x": 2233,
+        "y": 2125,
+        "radius": 87
+      },
+      {
+        "name": "PGC 1333286",
+        "x": 2180,
+        "y": 2130,
+        "radius": 81
+      },
+      {
+        "name": "PGC 41264 (VCC1254)",
+        "x": 1114,
+        "y": 1125,
+        "radius": 76
+      },
+      {
+        "name": "PGC 41169 (NGC4467)",
+        "x": 1849,
+        "y": 1533,
+        "radius": 67
+      },
+      {
+        "name": "PGC 1341897",
+        "x": 1108,
+        "y": 392,
+        "radius": 57
+      },
+      {
+        "name": "PGC 41185 (VCC1203)",
+        "x": 1707,
+        "y": 1847,
+        "radius": 56
+      },
+      {
+        "name": "PGC 41056 (VCC1120)",
+        "x": 2868,
+        "y": 2501,
+        "radius": 52
+      },
+      {
+        "name": "PGC 41180 (VCC1199)",
+        "x": 1749,
+        "y": 1204,
+        "radius": 43
+      },
+      {
+        "name": "PGC 1334997",
+        "x": 197,
+        "y": 1794,
+        "radius": 41
+      },
+      {
+        "name": "PGC 1331864",
+        "x": 222,
+        "y": 2412,
+        "radius": 40
+      },
+      {
+        "name": "PGC 1337963",
+        "x": 430,
+        "y": 1188,
+        "radius": 39
+      },
+      {
+        "name": "PGC 1337888",
+        "x": 320,
+        "y": 1203,
+        "radius": 39
+      },
+      {
+        "name": "PGC 41172 (VCC1195)",
+        "x": 1813,
+        "y": 2407,
+        "radius": 30
+      },
+      {
+        "name": "PGC 41157 (NGC4465)",
+        "x": 1991,
+        "y": 1363,
+        "radius": 29
+      },
+      {
+        "name": "PGC 41305 (VCC1281)",
+        "x": 811,
+        "y": 1986,
+        "radius": 27
+      },
+      {
+        "name": "PGC 1331332",
+        "x": 95,
+        "y": 2511,
+        "radius": 25
+      },
+      {
+        "name": "PGC 41074 (VCC1133)",
+        "x": 2729,
+        "y": 311,
+        "radius": 23
+      },
+      {
+        "name": "PGC 41319 (VCC1292)",
+        "x": 646,
+        "y": 549,
+        "radius": 21
+      },
+      {
+        "name": "PGC 41138 (VCC1171)",
+        "x": 2170,
+        "y": 260,
+        "radius": 18
+      },
+      {
+        "name": "PGC 41145 (VCC1176)",
+        "x": 2082,
+        "y": 1397,
+        "radius": 17
+      },
+      {
+        "name": "PGC 41332 (VCC1299)",
+        "x": 481,
+        "y": 1576,
+        "radius": 17
+      },
+      {
+        "name": "PGC 41301 (VCC1275)",
+        "x": 836,
+        "y": 2089,
+        "radius": 13
+      }
+    ]
+  },
+  "nativeRemoval": {
+    "directory": ".local/nebula-lab/m49/nox",
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
+  },
+  "grid": {
+    "width": 150,
+    "height": 150,
+    "depth": 150
+  },
+  "prior": {
+    "axis": [
+      0.900029,
+      0.435831,
+      0
+    ],
+    "center": [
+      74.5,
+      74.5,
+      74.5
+    ],
+    "binWidth": 1
+  },
+  "tau": 0.001,
+  "iterations": 100,
+  "blackLevel": 0.051,
+  "displayExposure": 1.5,
+  "slices": 48,
+  "assumptions": [
+    "Depth follows the deprojected density (Prugniel & Simien 1997) of Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4472: n = 5.99 (+0.31, -0.29), half-light radius 269.29 (+23.6, -18.6) arcsec, on an oblate spheroid whose axis is M49's minor axis (position angle 244.16 degrees: the major axis is at 154.16 degrees in Table 3, interpolated to the half-light radius between the rows at 262.623 and 286.748 arcsec) in the plane of the sky, axis ratio 0.795 (1 - 0.205, the ellipticity interpolated the same way). The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+    "The prior ends at 3.906 half-light radii, where Kormendy et al.'s Table 3 profile of NGC 4472 stops (1051.962 arcsec, 85.2 kpc at 16.7 Mpc); light beyond that spheroid is not drawn.",
+    "The 3000 x 3000 px cutout is requested on M49's 2MASS Extended Source Catalog position (2MASX J12294679+0800014: 187.444992, +8.00041) in a tangent projection, north up and east left, 0.584423 degrees wide (twice 1051.962 arcsec), so its registration is the request's. The centroid of the saturated core falls within 2 px (1.4 arcsec) of the image centre.",
+    "NOX removes stars; 29 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
+    "Every pixel is clamped to the median of the 51 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
+    "Black level 0.051 is the median of the cutout's four 150 px corners (13 of 255).",
+    "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes M49's faint outer light: the image fades into the sky about 560 arcsec from the centre, where Kormendy et al. still measure the galaxy to 1052 arcsec. Single-image depth is modelled by the prior, not measured."
+  ],
+  "compactClamp": {
+    "windowPx": 51,
+    "basis": "51 px (36 arcsec, 2.9 kpc) is about two and a half of the grid's 20 px cells, the proportion M87's recipe uses: light more compact than that cannot be M49's smooth light at this grid."
+  },
+  "shapePrior": {
+    "components": [
+      {
+        "kind": "sersic",
+        "axis": [
+          0.900029,
+          0.435831,
+          0
+        ],
+        "radius": 19.199,
+        "radialSigma": 1,
+        "axialSigma": 1,
+        "weight": 1,
+        "sersicIndex": 5.99,
+        "axisRatio": 0.795
+      }
+    ],
+    "sigmaCutoff": 3.906
+  },
+  "modelReference": {
+    "paper": "https://arxiv.org/abs/0810.1681"
+  }
+}

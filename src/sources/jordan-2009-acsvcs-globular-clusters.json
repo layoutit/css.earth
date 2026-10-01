@@ -1,0 +1,57 @@
+{
+  "id": "jordan-2009-acsvcs-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The ACS Virgo Cluster Survey XVI: selection procedure and catalogs of globular clusters",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2009ApJS..180...54J"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/180/54"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJS..180...54J",
+      "label": "2009ApJS..180...54J"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54",
+      "label": "CDS J/ApJS/180/54"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/180/54/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "table4: 12,763 sources in the HST/ACS fields of 100 Virgo galaxies with J2000 positions and pGC, the probability that a source is a globular cluster; note 1 restricts a bona fide sample to pGC >= 0.5. 765 rows of VCC 1226 (M49) pass it."
+    }
+  ],
+  "creators": [
+    "A. Jordán",
+    "E. W. Peng",
+    "J. P. Blakeslee",
+    "P. Côté",
+    "S. Eyheramendy",
+    "L. Ferrarese",
+    "S. Mei",
+    "J. L. Tonry",
+    "M. J. West"
+  ],
+  "publisher": "ApJS 180, 54",
+  "publicationDate": "2009",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Jordán et al. (2009), ApJS 180, 54.",
+      "scope": "M49 globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/180/54/ReadMe"
+    }
+  ]
+}

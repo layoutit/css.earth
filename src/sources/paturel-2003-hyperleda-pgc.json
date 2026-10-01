@@ -1,0 +1,56 @@
+{
+  "id": "paturel-2003-hyperleda-pgc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "HYPERLEDA. I. Identification and designation of galaxies",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2003A&A...412...45P"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "VII/237"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2003A&A...412...45P",
+      "label": "2003A&A...412...45P"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+      "label": "CDS VII/237"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/VII/237/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "pgc: J2000 positions and logD25 (the decimal logarithm of the apparent diameter in 0.1 arcmin). The 61 galaxies with a logD25 within 0.5 degrees of M49 were read on 2026-10-01; the 29 whose masks reach the M49 cutout are listed in labs/nebula/models/m49/experiment.json."
+    }
+  ],
+  "creators": [
+    "G. Paturel",
+    "C. Petit",
+    "P. Prugniel",
+    "G. Theureau",
+    "J. Rousseau",
+    "M. Brouty",
+    "P. Dubois",
+    "L. Cambrésy"
+  ],
+  "publisher": "A&A 412, 45",
+  "publicationDate": "2003",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Paturel et al. (2003), A&A 412, 45.",
+      "scope": "Positions and sizes of the galaxies masked around M49",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/VII/237/ReadMe"
+    }
+  ]
+}

@@ -37,6 +37,7 @@ const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
 
 // Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
 const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
+  'm49-volume': ['dots'],
   'm87-volume': ['dots'],
 };
 
