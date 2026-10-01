@@ -129,6 +129,15 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     /** The URL this owner has published or holds to publish at rest. */
     href() { return pending ? new URL(pending.path, windowTarget.location.href).href : windowTarget.location.href; },
     checkpoint, remember,
+    /** The current entry keeps `url`, a view the camera has since left: a header pill flew out of it, and the entry
+     * pushed next must come Back to it rather than to where that flight landed. */
+    keep(url: string) {
+      if (disposed) return;
+      const value = new URL(url, navigationHref(windowTarget)), path = value.pathname + value.search + value.hash;
+      snapshots.set(entry, path);
+      if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
+      if (!isCurrentView(path)) apply(false, path);
+    },
     commit(url: string, action: NavigationHistory = { history: 'push' }) {
       const { history } = action, targetEntry = action.history === 'pop' ? action.entry : undefined;
       if (disposed) return;

@@ -20,3 +20,16 @@ test('a body answers to the catalogue designation its id spells', () => {
   assert.deepEqual(items[1]!.names, []);
   for (const query of ['HD 75732', '75732']) assert.deepEqual(searchObjects(items, query).matches.map(item => item.name), ['55 cnc'], query);
 });
+
+test('spaces and hyphens in a typed designation do not decide the match', () => {
+  const items = [label('hd 189733 companion'), label('hd 189733b'), label('wasp-121b'), label('trappist-1'), label('trappist-1b'), label('mars')];
+  const found = (query: string) => searchObjects(items, query).matches.map(item => item.name);
+  assert.deepEqual(found('HD 189733 b'), ['hd 189733b']);
+  assert.deepEqual(found('hd189733'), ['hd 189733 companion', 'hd 189733b']);
+  for (const query of ['wasp 121 b', 'WASP-121 b', 'wasp121b']) assert.deepEqual(found(query), ['wasp-121b'], query);
+  // The exact joined name leads, as an exact typed name does.
+  assert.deepEqual(found('trappist1'), ['trappist-1', 'trappist-1b']);
+  // Under four joined characters a query matches only as typed: "st1" spans the hyphen of "trappist-1".
+  assert.deepEqual(found('st1'), []);
+  assert.deepEqual(found('ist1'), ['trappist-1', 'trappist-1b']);
+});
