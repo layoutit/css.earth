@@ -12,11 +12,20 @@ test('a pile of markers keeps its highest tier, then its highest priority, and h
   assert.deepEqual(pile.map(item => [item.entry.body.id, item.visible]), [['a', false], ['jupiter', true], ['b', false], ['far', true]]);
 });
 
-test('the focus, the selection and a named or hovered marker are kept first, over any tier', () => {
+test('the focus, the selection and a hovered marker are kept first, over any tier', () => {
   const declutter = createMarkerDeclutter({ jupiter: 3 });
-  const pile = [marker('jupiter', 0), marker('sun', .2), marker('labelled', .4, 0, { labelShown: true }), { ...marker('hovered', .6), hovered: true }];
+  const pile = [marker('jupiter', 0), marker('sun', .2), { ...marker('hovered', .6), hovered: true }];
   declutter(pile, ['sun', null]);
-  assert.deepEqual(pile.map(item => item.visible), [false, true, true, true], 'Jupiter outranks no named marker');
+  assert.deepEqual(pile.map(item => item.visible), [false, true, true]);
+});
+
+test('a labelled moon never hides its planet: tier ranks before an admitted label', () => {
+  // A label is admitted only once measured, and only a drawn marker is measured: ranking labels first kept Rhea over
+  // Saturn at 220 AU for good.
+  const declutter = createMarkerDeclutter({ saturn: 3, rhea: 1 });
+  const pile = [marker('rhea', 0, 0, { labelShown: true }), marker('saturn', .5), marker('labelled-dust', 1, 0, { labelShown: true }), marker('dust', 1.5)];
+  declutter(pile, []);
+  assert.deepEqual(pile.map(item => [item.entry.body.id, item.visible]), [['rhea', false], ['saturn', true], ['labelled-dust', false], ['dust', false]]);
 });
 
 test('a hidden marker returns only once it clears the kept one by the hysteresis', () => {

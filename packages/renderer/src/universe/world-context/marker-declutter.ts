@@ -2,8 +2,10 @@
  * Markers that overlap a marker the planner keeps are not drawn. Where a whole system shrinks to a few pixels, its markers
  * pile onto one another: zooming out from the Sun, 246 to 363 markers drew into about 40 by 12 pixels at 84 to 582 AU
  * (2026-09-30), each restyled and composited every frame though almost all were under others. Markers are kept in order:
- * those the reader named or picked (the focus, the selection, a hovered or highlighted body, an admitted label or circle),
- * then by annotation tier, then by the planner's frame priority. A marker is hidden when its drawn dot overlaps a kept one.
+ * those the reader picked (the focus, the selection, a hovered or highlighted body), then by annotation tier, then those
+ * with an admitted label or circle, then by the planner's frame priority. A marker is hidden when its drawn dot overlaps a
+ * kept one. Tier comes before an admitted label: a label is admitted only once measured, and only a drawn marker is
+ * measured, so ranking labels first let a labelled moon hide its planet's dot for good (Rhea over Saturn at 220 AU).
  * A hidden marker returns only when it clears by HYSTERESIS more, so a zoom does not blink dots at the edge of overlapping.
  */
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../../solar-system/heliocentric-sprites.js';
@@ -22,13 +24,13 @@ export interface DeclutterMarker {
 export function createMarkerDeclutter(annotationPriorities: Readonly<Record<string, number>>) {
   let hidden = new Set<object>();
   const kept = new Map<number, { x: number; y: number; radius: number }[]>();
-  /** Hides each visible marker that overlaps one kept before it; `pinned` ids (the focus, the selection) are always kept. */
+  /** Hides each visible marker that overlaps one kept before it; `pinned` ids (the focus, the selection) and hovered or
+   * highlighted bodies are always kept. */
   return (markers: readonly DeclutterMarker[], pinned: readonly (string | null)[]) => {
-    const named = (marker: DeclutterMarker) => pinned.includes(marker.entry.body.id) || marker.hovered || marker.entry.highlighted === true ||
-      marker.entry.labelShown || marker.entry.indicatorShown;
-    const order = markers.filter(marker => marker.visible).map(marker => ({ marker, named: named(marker),
-      tier: annotationPriorities[marker.entry.body.id] ?? 0 })).sort((a, b) =>
-      Number(b.named) - Number(a.named) || b.tier - a.tier || b.marker.priority - a.marker.priority);
+    const picked = (marker: DeclutterMarker) => pinned.includes(marker.entry.body.id) || marker.hovered || marker.entry.highlighted === true;
+    const order = markers.filter(marker => marker.visible).map(marker => ({ marker, named: picked(marker),
+      tier: annotationPriorities[marker.entry.body.id] ?? 0, annotated: marker.entry.labelShown || marker.entry.indicatorShown })).sort((a, b) =>
+      Number(b.named) - Number(a.named) || b.tier - a.tier || Number(b.annotated) - Number(a.annotated) || b.marker.priority - a.marker.priority);
     kept.clear();
     const next = new Set<object>();
     for (const { marker, named: always } of order) {
