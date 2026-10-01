@@ -39,6 +39,9 @@ body[data-object-shell] {
   --explorer-panel-background: var(--explorer-surface-background);
   --explorer-divider: #000;
   --explorer-divider-width: 2px;
+  /* The space a card leaves above and below each of its dividers, to the nearest line of text or image: 14px measured on
+     both sides of every divider (2026-10-01), where the header's had 14 above and 22 or 30 below and a dataset's 12 and 12. */
+  --explorer-divider-gap: 12px;
   --explorer-control-border: var(--shell-border);
   --explorer-control-text: var(--shell-text-secondary);
 }
@@ -76,7 +79,7 @@ body[data-object-shell] {
 .object-card > .object-selected-panel:has(+ :is(.object-card-tabs, .object-tabs))::after {
   content: "";
   display: block;
-  margin-top: 12px;
+  margin-top: var(--explorer-divider-gap);
   margin-inline: calc(-1 * var(--explorer-card-padding-inline-start)) calc(-1 * var(--explorer-card-padding-inline-end));
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
