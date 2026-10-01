@@ -258,7 +258,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let selectedEntry = bodies[0]!;
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
   const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
-  let systemRetired = false, systemRetiredByScope = false;
+  let systemRetired = false, systemRetiredByScope = false, galaxyRetiredByScope = false;
   const depthOrder = createDepthOrder(bodies, depthBase, annotationPriorities);
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
@@ -356,7 +356,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         contextCommittedId: contextFrames.committedId,
         selectedId: selectedEntry.body.id, overview, overviewSelection, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
         preserveCommittedAnnotations: rotationPhase === 'released',
-        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly, systemRetired: systemRetiredByScope,
+        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly, systemRetired: systemRetiredByScope, galaxyRetired: galaxyRetiredByScope,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         // Each body's presentation as it stands, copied for the planner's worker (the copy is transferred).
         bodyColumns: bodyColumns.slice() };
@@ -393,10 +393,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       refresh();
     },
     /** The application's view has left the systems' scale (its overview scope is past the system): every system retires
-     * through the same path as a system the camera has faded past, its star standing for it. */
-    setSystemRetired(retired: boolean) {
-      if (systemRetiredByScope === retired || destroyed) return;
-      systemRetiredByScope = retired;
+     * through the same path as a system the camera has faded past, its star standing for it. Past the galaxy's scale too
+     * (`galaxy`: the Local Group's and beyond), the galaxy's stars retire as well and the anchor alone stands for them. */
+    setSystemRetired(retired: boolean, galaxy = false) {
+      const nextGalaxy = retired && galaxy;
+      if ((systemRetiredByScope === retired && galaxyRetiredByScope === nextGalaxy) || destroyed) return;
+      systemRetiredByScope = retired; galaxyRetiredByScope = nextGalaxy;
       invalidatePolicy();
       refresh();
     },
@@ -676,6 +678,21 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // Publish first, then attach populated owners. A later view reads only requested caption sizes.
       for (const entry of attachMarkers) root.appendChild(entry.mover);
       for (const entry of attachOrbits) root.appendChild(entry.orbitRoot);
+      // A retired system's members leave the page once their retiring frame has hidden them, and so does any other body
+      // that paints nothing then (a galaxy's stars past its scope): the anchor stands for them, and a return inside
+      // attaches each again as it shows. Inside a system, hidden markers stay attached; they toggle often there.
+      // A member paints nothing once retired, even an orbit a coast kept fading when its retiring frame was planned: the
+      // following frames publish only the anchor and the placed stars, so it is never published again until a return.
+      if (systemRetired && !coasting) {
+        for (const entry of bodies) {
+          if (entry === bodies[0] || (entry.orbit === null && paintedBodies.has(entry))) continue;
+          if (entry.mover.parentNode) entry.mover.remove();
+          if (entry.orbitRoot.parentNode) entry.orbitRoot.remove();
+          entry.piecePool.detach();
+          paintedBodies.delete(entry);
+        }
+        if (paintedOrder.length !== paintedBodies.size) paintedOrder = [...paintedBodies].sort((a, b) => a.index - b.index);
+      }
       if (measured || attachMarkers.size > 0) { invalidatePolicy(); refresh(); }
     },
     destroy() { if (!destroyed) { destroyed = true; interactions.destroy();

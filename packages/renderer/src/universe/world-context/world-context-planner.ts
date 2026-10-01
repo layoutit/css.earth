@@ -57,8 +57,8 @@ export interface WorldContextView {
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
   orbitLodPixels?: number;
   anchorOnly: boolean;
-  /** The view has left the systems' scale (prepared-world-context.ts setSystemRetired): only their stars are drawn. */
-  systemRetired?: boolean;
+  /** The view has left the systems' scale, or also the galaxy's (prepared-world-context.ts setSystemRetired). */
+  systemRetired?: boolean; galaxyRetired?: boolean;
   bodies: readonly WorldBodyPresentation[];
   contextCommittedId?: number;
 }
@@ -344,7 +344,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // The focus, a featured star and a body of another kind (a black hole) keep their dots; planets fade with their system.
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
           (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
-        const atGalaxyScale = galaxyHost ? galaxyHandoff : 0;
+        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null ? 1 : galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));

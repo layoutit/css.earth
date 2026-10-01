@@ -26,7 +26,19 @@ frame, though almost all lay under others.
   the scope to the universe with each crossing. Once it leaves the system for the Milky Way's (about 6,500 AU from the
   Sun on the way out, 670 AU on the way back), every system retires through the path a system faded past already took,
   and its star stands for it. Inside the system the existing fades still apply. Before, the Solar System's bodies faded
-  only with the camera's distance, to a light-year: four trans-Neptunian objects were still drawn at 27,000 AU.
+  only with the camera's distance, to a light-year: four trans-Neptunian objects were still drawn at 27,000 AU. Past the
+  galaxy's scope (the Local Group's and beyond), the galaxy's placed stars retire the same way and the Sun alone stands
+  for them.
+- **A retired level leaves the page.** Once its retiring frame has hidden them and the camera is not coasting, a retired
+  system's members leave the DOM: marker groups, orbit roots and their stroke groups in the shared orbit svg
+  (`PreparedOrbitLines.detach`), and so do the placed stars past the galaxy's scope. A return attaches each again as it
+  shows. Before, a marker group stayed mounted, hidden, from its first showing until the page closed: zoomed out from the
+  Sun to the Local Group, 435 marker groups were mounted and none drawn.
+- **An overview page frames its camera before the world plans** (`frameInitialView` in `site/scene/scene-activation.mts`).
+  An overview or satellite-system page opened without a saved view mounts its body's scene, then moves the camera to the
+  overview. The world context planned one frame between the two, from the Sun's default view, and its planner fetched
+  the 40 Solar System orbit banks that view would draw, on the Nearby Universe page among others. The page now frames
+  its overview first.
 - **A system card lays out only the rows in view** (`site/shell/maps-shell.css`). Past about 580 AU the card lists the
   Sun's system: 549 rows, 682 KB of HTML, about five shown at once. Inserted mid-zoom, the list laid out 7,649 objects
   in one frame. Its rows now take `content-visibility: auto`.
@@ -41,6 +53,9 @@ frame, though almost all lay under others.
 | Slow stretch frame, median / 95th percentile / worst | 6.6 / 13.7 / 29.1 ms | 5.5 / 12.4 / 13.0 ms |
 | Largest layout of the zoom | 7,649 objects | 596 objects |
 | Solar System bodies drawn at 10,600 and 27,000 AU | 4 and 4 | none: the Sun |
+| Zoomed out from the Sun to the Milky Way's level (3 ly): marker groups mounted (drawn), orbit groups, elements | 398 (21), 70, 2,803 | 20 (20), 0, 952 |
+| Zoomed on to the Local Group's level: marker groups mounted (drawn), orbit groups, elements | 435 (0), 70, 3,942 | 1 (0), 0, 1,866 |
+| Milky Way page opened directly: marker groups mounted (drawn), elements | 40 (40), 2,260 | 15 (15), 2,160 |
 
 ![The Sun's marker pile at 220 AU, main left and this change right, 3x](marker-declutter/pile-220-au.jpg)
 
