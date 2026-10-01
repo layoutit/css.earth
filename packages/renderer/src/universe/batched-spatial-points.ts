@@ -8,9 +8,10 @@ import { createSettlePacer } from '../rendering/settle-pacer.js';
 export interface BatchedSpatialPoint { readonly positionUnits: VolumeVector }
 export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly opacity: number; readonly radiusPx: number }
 
-/** The paint colour of a style, `#rrggbbaa`: the colour with its opacity as the alpha byte. */
+/** The paint of a style, `#rrggbbaa@radius`: the colour with its opacity as the alpha byte, at its dot radius. One path
+ * strokes each paint (point-paths.ts), so dots of one colour at two sizes take two paths. */
 export const pointPaint = (style: BatchedSpatialPointStyle) =>
-  `${style.colorCss}${Math.max(0, Math.min(255, Math.round(style.opacity * 255))).toString(16).padStart(2, '0')}`;
+  `${style.colorCss}${Math.max(0, Math.min(255, Math.round(style.opacity * 255))).toString(16).padStart(2, '0')}@${Math.max(.5, style.radiusPx)}`;
 
 /** Project a bounded 3D field into retained SVG circle paths, one per prepared paint colour (point-paths.ts).
  * Camera motion changes paint but never DOM shape.

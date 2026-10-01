@@ -9,7 +9,7 @@ test('a spatial point field reprojects through one retained SVG path per paint c
   const frame={referenceFrame:'sun-icrf',epochJdTt:2451545,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,
     metersPerUnit:1,boundsUnits:{min:[-20,-20,-20] as const,max:[20,20,20] as const}};
   const style={colorCss:'#ffb38a',opacity:.85,radiusPx:1};
-  assert.equal(pointPaint(style), '#ffb38ad9');
+  assert.equal(pointPaint(style), '#ffb38ad9@1');
   let clock=0;
   const field=mountBatchedSpatialPoints({host,before,frame,points:[{positionUnits:[1,0,-10] as const}],className:'test-points',
     stylePoint:()=>style,paintPalette:[pointPaint(style)],now:()=>clock});
@@ -33,7 +33,7 @@ test('changing the kept share repaints even when the camera has not moved', () =
     frame: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
       metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } },
     points: Array.from({ length: 20 }, (_, x) => ({ positionUnits: [x / 100, 0, -10] as const })),
-    className: 'test-points', stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'], keepFraction: () => keep });
+    className: 'test-points', stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], keepFraction: () => keep });
   const publication = { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
     pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } },
     viewport: { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 } };
@@ -57,7 +57,7 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
     return { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [.3 * Math.sin(half), Math.sin(half), 0, Math.cos(half)].map((value, _, all) => value / Math.hypot(...all)) as unknown as readonly [number, number, number, number] } }; };
   const mount = () => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
-      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'] }); };
+      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] }); };
   const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)h0/g)]
     .map(match => [Number(match[1]) / 8 + 500, Number(match[2]) / 8 + 400]);
   const warped = mount(), exact = mount();
@@ -93,7 +93,7 @@ test('dots a zoom adds arrive during the zoom, through the pacer; dots it takes 
   const { document } = parseHTML('<div id="host"></div>');
   // Twenty dots from far, all forty once the camera comes a little closer.
   const field = mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
-    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'], drawnCount: distance => distance > .5 ? 20 : 40 });
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], drawnCount: distance => distance > .5 ? 20 : 40 });
   const viewport = { focalPixels: 900, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   const dots = () => field.root.querySelector('path')!.getAttribute('d')!.match(/M/g)?.length ?? 0;
@@ -177,7 +177,7 @@ test('a travelling camera repaints at most every 25 ms, warps the frames between
   let clock = 0, settled = 0;
   const mount = () => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
-      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'], now: () => clock, onSettle: () => settled++ }); };
+      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], now: () => clock, onSettle: () => settled++ }); };
   const exact0 = () => { const fresh = mount(); fresh.publish(at(-3)); const d = fresh.root.querySelector('path')!.getAttribute('d'); fresh.destroy(); return d; };
   const field = mount(), path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
   field.publish(at(0));
@@ -219,7 +219,7 @@ test('a turn warps the paint only while no dot grows or shrinks by more than a t
     return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
   const { document } = parseHTML('<div id="host"></div>');
   const field = mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
-    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'], now: () => 0 });
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], now: () => 0 });
   const path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
   field.publish(turned(0));
   const first = path.getAttribute('d');

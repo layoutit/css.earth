@@ -317,7 +317,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const settleHover = () => {
     fader.setAnimationEnabled(false);
     for (const entry of animatedAnnotations) {
-      entry.marker.dataset.contextAnnotationsAnimate = 'false';
+      entry.paint.stopAnimating();
       if (!entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
     }
     animatedAnnotations.clear();

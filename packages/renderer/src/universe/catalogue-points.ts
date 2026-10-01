@@ -5,6 +5,7 @@ import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
+import { afterStartup } from '../rendering/startup-gate.js';
 
 /** Dot layers switching on show one a frame (layer-reveal.ts). */
 const revealLayers = (layers: readonly HTMLElement[]) => { for (const layer of layers) revealLayer(layer); };
@@ -83,6 +84,8 @@ export interface PreparedCataloguePoints {
   readonly id: string;
   readonly frame: DensityVolumeFrame;
   readonly appearance: { readonly colorCss: string; readonly radiusPx: number; readonly opacity: number; readonly palette?: readonly string[];
+    /** Each palette entry's own dot radius, where the bank sizes its dots (by absolute magnitude, in tiers). */
+    readonly paletteRadiusPx?: readonly number[];
     readonly levels?: readonly CataloguePointLevel[];
     /** A bank without levels is whole within this camera distance of its origin, in its units (10 kpc when absent), and
      * thinned with the distance beyond it. */
@@ -91,9 +94,12 @@ export interface PreparedCataloguePoints {
     readonly screenBudget?: number;
     /** The whole bank fades out as the view's half-width at its origin shrinks from the first to the second, evenly in its
      * logarithm, and draws nothing below it: a bank that shapes a galaxy from outside, too busy from within. */
-    readonly fadeOutUnits?: readonly [number, number] };
-  /** Each point's position, and its palette colour when the bank has a palette. */
-  readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string }[];
+    readonly fadeOutUnits?: readonly [number, number];
+    /** Seen from outside its reach, the bank draws at most one dot per this many square pixels of its projected shape
+     * (PIXELS_PER_DOT when absent): a bank inside a sparser field matches the field's density, so its edge does not show. */
+    readonly outsidePixelsPerDot?: number };
+  /** Each point's position, and its palette colour (and radius, where the palette sizes its dots) when the bank has a palette. */
+  readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string; readonly radiusPx: number }[];
   /** The bank's prepared shape around its origin, written by the bake that published it. */
   readonly spread: CataloguePointSpread;
   /** Its points' prepared cells: boxes the projection skips whole when they are out of view. */
@@ -109,6 +115,10 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   const appearance = data.appearance as Record<string, unknown> | undefined;
   const colorCss = appearance?.colorCss, radiusPx = appearance?.radiusPx, opacity = appearance?.opacity, palette = appearance?.palette, levels = appearance?.levels;
   const screenBudget = appearance?.screenBudget, fullDetailUnits = appearance?.fullDetailUnits, fadeOutUnits = appearance?.fadeOutUnits;
+  const outsidePixelsPerDot = appearance?.outsidePixelsPerDot;
+  if (outsidePixelsPerDot !== undefined && !(typeof outsidePixelsPerDot === 'number' && outsidePixelsPerDot > 0 && Number.isFinite(outsidePixelsPerDot))) {
+    throw new TypeError(`${String(data.id)}: outsidePixelsPerDot is a positive number of square pixels, got ${JSON.stringify(outsidePixelsPerDot)}.`);
+  }
   if (fadeOutUnits !== undefined && !(Array.isArray(fadeOutUnits) && fadeOutUnits.length === 2 && fadeOutUnits.every(value => typeof value === 'number' && Number.isFinite(value))
       && fadeOutUnits[0] > fadeOutUnits[1] && fadeOutUnits[1] > 0)) {
     throw new TypeError(`${String(data.id)}: fadeOutUnits is [from, to], from above to above 0, got ${JSON.stringify(fadeOutUnits)}.`);
@@ -125,6 +135,11 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   // A palette entry may carry its own opacity as a fourth byte (#rrggbbaa).
   const entry = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}(?:[0-9a-f]{2})?$/iu.test(value);
   if (palette !== undefined && (!Array.isArray(palette) || !palette.length || !palette.every(entry))) throw new TypeError(`${data.id}: a catalogue point palette is a list of hex colours, with an optional alpha byte.`);
+  const paletteRadiusPx = appearance?.paletteRadiusPx;
+  if (paletteRadiusPx !== undefined && (!Array.isArray(palette) || !Array.isArray(paletteRadiusPx) || paletteRadiusPx.length !== palette.length
+      || !paletteRadiusPx.every(value => typeof value === 'number' && value > 0 && Number.isFinite(value)))) {
+    throw new TypeError(`${data.id}: paletteRadiusPx holds one positive radius per palette colour.`);
+  }
   if (!Array.isArray(data.points) || !data.points.length || data.points.length > MAX_CATALOGUE_POINTS) {
     throw new TypeError(`${data.id}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got ${Array.isArray(data.points) ? data.points.length : 'none'}.`);
   }
@@ -140,13 +155,15 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     }
     const colour = palette ? palette[point[3]] : colorCss;
     if (!entry(colour)) throw new TypeError(`${data.id}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
-    return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour });
+    return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour,
+      radiusPx: paletteRadiusPx ? (paletteRadiusPx as number[])[point[3]]! : radiusPx });
   });
   const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
-    ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
+    ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(paletteRadiusPx ? { paletteRadiusPx: Object.freeze([...paletteRadiusPx as number[]]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
     ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }),
     ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }),
+    ...(outsidePixelsPerDot === undefined ? {} : { outsidePixelsPerDot }),
     ...(fadeOutUnits === undefined ? {} : { fadeOutUnits: Object.freeze([...fadeOutUnits as number[]]) as unknown as readonly [number, number] }) }),
     points: Object.freeze(points), spread, cells });
 }
@@ -231,16 +248,18 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
       if (runtime) { runtime.publish(publication); return; }
       if (loading) return;
       loading = true;
-      void loadBank(url).then(value => {
+      // A body's first view does not draw the background dots: they wait for it to be interactive (startup-gate.ts).
+      afterStartup(host.ownerDocument.defaultView, () => { if (!destroyed) void loadBank(url).then(value => {
         if (destroyed) return;
         const bank = parseCataloguePoints(value, url);
         extent = { originM: bank.frame.originM, radiusM: Math.max(...bank.points.map(point => Math.hypot(...point.positionUnits))) * bank.frame.metersPerUnit };
         const fadeOut = bank.appearance.fadeOutUnits;
         fadeOutM = fadeOut ? [fadeOut[0] * bank.frame.metersPerUnit, fadeOut[1] * bank.frame.metersPerUnit] : null;
-        // One style object per palette entry: the projection asks for a style per point on every frame. An entry's alpha
-        // byte scales the bank's opacity.
-        const styles = new Map([...new Set(bank.points.map(point => point.colorCss))].map(colour =>
-          [colour, { colorCss: colour.slice(0, 7), radiusPx: bank.appearance.radiusPx,
+        // One style object per palette entry (a colour at one radius): the projection asks for a style per point on every
+        // frame. An entry's alpha byte scales the bank's opacity.
+        const styleKey = (point: { colorCss: string; radiusPx: number }) => `${point.colorCss}|${point.radiusPx}`;
+        const styles = new Map([...new Map(bank.points.map(point => [styleKey(point), point] as const)).entries()].map(([key, { colorCss: colour, radiusPx }]) =>
+          [key, { colorCss: colour.slice(0, 7), radiusPx,
             opacity: bank.appearance.opacity * (colour.length === 9 ? parseInt(colour.slice(7), 16) / 255 : 1) }] as const));
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
         // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
@@ -249,7 +268,7 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
           ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
           : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit,
             bank.appearance.fullDetailUnits === undefined ? undefined : bank.appearance.fullDetailUnits * bank.frame.metersPerUnit),
-          screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0));
+          screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0, bank.appearance.outsidePixelsPerDot));
         // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count. An inner
         // level with its own budget moves the bank's to it as the level appears, evenly in the logarithm of the half-width.
         // The levels spend it in order, outermost first: an arriving level takes what the ones already on screen leave, so
@@ -277,8 +296,8 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
           ...(budget === undefined ? {} : { keepFraction: share }),
           // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
           // keeps a path only for the colours its own dots use.
-          paintPalette: [...new Set(points.map(point => point.colorCss))].map(colour => pointPaint(styles.get(colour)!)),
-          stylePoint: (point: (typeof bank.points)[number]) => styles.get(point.colorCss)! });
+          paintPalette: [...new Set(points.map(styleKey))].map(key => pointPaint(styles.get(key)!)),
+          stylePoint: (point: (typeof bank.points)[number]) => styles.get(styleKey(point))! });
         const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, parts,
           onSettle: settled, className: `catalogue-points-${bank.id}` });
         // Each level draws as its own part: it dims to its near opacity as the innermost level fills, and takes its share
@@ -316,7 +335,7 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         root.dataset.cataloguePoints = bank.id;
         if (root.style.display !== 'none') revealLayers(runtime.layers);
         if (latest) runtime.publish(latest);
-      }).catch(error => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); });
+      }).catch(error => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); }); });
     },
     destroy() { if (destroyed) return; destroyed = true; runtime?.destroy(); root.remove(); },
   });
