@@ -17,7 +17,7 @@ import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import { chooseGravity } from './gravity.mts';
 import type { Cited, StarSpec } from './spec.mts';
-import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
+import { citedRow, DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
 import { gaiaCepheidForm, installLightCurve } from './light-curve.mts';
@@ -179,8 +179,8 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
       throw new Error(`${id}: Gaia DR3 ${gaia.sourceId} eclipses every ${gaiaDays!.toFixed(4)} d, not on the orbit's ${paperDays} d (or half or twice it): it is probably another star of that name.`);
   }
   // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.
-  const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: gaia ? 2016 : 2000 }, refresh ? id : undefined);
-  if (held) throw new Error(`${id}: ${label} is ${held}, already in the universe (within ${DUPLICATE_ARCSEC}" of its position); add its bodies with { "host": "${held}" }.`);
+  const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: gaia ? 2016 : 2000, ...(catalogueRow ? { row: citedRow(`${label}:`)! } : {}) }, refresh ? id : undefined);
+  if (held) throw new Error(`${id}: ${label} is ${held}, already in the universe (${catalogueRow ? 'the same row' : `within ${DUPLICATE_ARCSEC}" of its position`}); add its bodies with { "host": "${held}" }.`);
   // Gaia DR3 measures no radial velocity for a faint or hot star (a quarter of the archive's transiting hosts): SIMBAD's, else zero.
   if (gaia && gaia.radialVelocity === undefined && !spec.radialVelocity) {
     const radialVelocity = await fallbackRadialVelocity(archive, gaia.sourceId, place.parsecs);

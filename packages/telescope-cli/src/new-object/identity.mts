@@ -9,7 +9,8 @@
  *
  * **Duplicates.** A star is already in the universe when an existing placed star sits within DUPLICATE_ARCSEC of it at a common
  * epoch, whatever its id or name; a planet or companion when an existing record carries its name. Both are refused with the id that
- * holds them. */
+ * holds them. A star placed by a catalogue row (spec `position`) is compared with the stars of its own table by row, not position:
+ * the table already tells apart the Cepheids Hubble resolved 0.3" from each other in one galaxy. */
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -43,7 +44,10 @@ export function planetPrefix(planetName: string, letter: string): string | undef
 
 const normal = (name: string) => name.normalize('NFKD').replace(/[̀-ͯ]/gu, '').toLowerCase().replace(/[^a-z0-9]+/gu, '');
 
-interface Placed { readonly id: string; readonly ra: number; readonly dec: number; readonly epoch: number; readonly pmra: number; readonly pmdec: number }
+/** `row` is the VizieR table and row a catalogue-placed star cites (CatalogueRow.words without its "VizieR"). */
+interface Placed { readonly id: string; readonly ra: number; readonly dec: number; readonly epoch: number; readonly pmra: number; readonly pmdec: number; readonly row?: { readonly table: string; readonly key: string } }
+/** The table and row an astronomy record's position cites, as generate.mts writes it ("VizieR J/ApJ/830/10/table5 row Gal = N4536, ID = 38676:"). */
+export const citedRow = (position: string) => { const match = /VizieR (\S+) row ([^:]+):/u.exec(position); return match ? { table: match[1]!, key: match[2]! } : undefined; };
 /** What the universe already holds: ids, the normalized names of every record, and where every placed star is. */
 export interface Existing { readonly ids: ReadonlySet<string>; readonly names: ReadonlyMap<string, string>; readonly stars: readonly Placed[];
   /** Placed stars by the Gaia DR3 source their position cites, and every package's system name. */
@@ -59,7 +63,8 @@ export async function existingBodies(root: string): Promise<Existing> {
     if (body.physical?.name) names.set(normal(body.physical.name), body.id);
     const s = body.star;
     if (s && Number.isFinite(s.rightAscensionDegrees) && Number.isFinite(s.declinationDegrees))
-      stars.push({ id: body.id, ra: s.rightAscensionDegrees!, dec: s.declinationDegrees!, epoch: s.positionEpochJulianYear ?? 2016, pmra: s.properMotionRaMasPerYear ?? 0, pmdec: s.properMotionDecMasPerYear ?? 0 });
+    { const row = citedRow(body.star?.sources?.position ?? '');
+      stars.push({ id: body.id, ra: s.rightAscensionDegrees!, dec: s.declinationDegrees!, epoch: s.positionEpochJulianYear ?? 2016, pmra: s.properMotionRaMasPerYear ?? 0, pmdec: s.properMotionDecMasPerYear ?? 0, ...(row ? { row } : {}) }); }
   }
   for (const name of await readdir(resolve(root, 'src/objects'))) {
     ids.add(name);
@@ -70,10 +75,11 @@ export async function existingBodies(root: string): Promise<Existing> {
 }
 
 /** The placed star within DUPLICATE_ARCSEC of a position, both moved by their proper motions to the new star's epoch. */
-export function duplicateStar(existing: Existing, star: { readonly ra: number; readonly dec: number; readonly epoch: number }, except?: string): string | undefined {
+export function duplicateStar(existing: Existing, star: { readonly ra: number; readonly dec: number; readonly epoch: number; readonly row?: Placed['row'] }, except?: string): string | undefined {
   const rad = Math.PI / 180;
   for (const other of existing.stars) {
     if (other.id === except) continue;
+    if (star.row && other.row?.table === star.row.table) { if (other.row.key === star.row.key) return other.id; continue; }
     const years = star.epoch - other.epoch, dec = other.dec + other.pmdec * years / 3.6e6, ra = other.ra + other.pmra * years / 3.6e6 / Math.cos(other.dec * rad);
     const cos = Math.sin(star.dec * rad) * Math.sin(dec * rad) + Math.cos(star.dec * rad) * Math.cos(dec * rad) * Math.cos((star.ra - ra) * rad);
     if (Math.acos(Math.min(1, cos)) / rad * 3600 < DUPLICATE_ARCSEC) return other.id;

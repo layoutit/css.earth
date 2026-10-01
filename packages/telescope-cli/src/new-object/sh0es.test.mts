@@ -5,6 +5,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseCatalogueRow, type Archive } from './archives.mts';
 import { cepheidRelations, draftFromHoffmann, GROENEWEGEN_2020, hostName, parseHoffmannRows } from './sh0es.mts';
 import { parseStarSpec } from './spec.mts';
+import { citedRow, duplicateStar } from './identity.mts';
 import { loadSolarEpoch } from './solar-epoch.mts';
 
 const test = sourceTest(), root = resolve(import.meta.dirname, '../../../..');
@@ -81,4 +82,14 @@ test('a whole package for a star Gaia cannot see: the archived row placed and de
   const operation = JSON.parse(String(files.get(`${o}/source/preparation/acquisition.json`))).operations.find((entry: { path: string }) => entry.path === CATALOGUE_ROW_PATH);
   assert.deepEqual(operation.form, { '-source': 'J/ApJ/830/10/table5', '-out.all': '', '-out.max': '2', Gal: 'N4536', ID: '38676' });
   assert.match(generated.color.summary, /Planck spectrum at 5,270 K/u);
+});
+
+test('two Cepheids of one table 0.3" apart are two stars; the same row twice, or another table\'s star there, is a duplicate', () => {
+  const table5 = 'J/ApJ/830/10/table5', row = (key: string) => ({ table: table5, key });
+  assert.deepEqual(citedRow('Hoffmann et al. (2016), VizieR J/ApJ/830/10/table5 row Gal = N1365, ID = 97956: RAJ2000 53.4'), row('Gal = N1365, ID = 97956'));
+  const existing = { ids: new Set<string>(), names: new Map<string, string>(), stars: [{ id: 'held', ra: 53.4, dec: -36.1, epoch: 2000, pmra: 0, pmdec: 0, row: row('Gal = N1365, ID = 97956') }] };
+  const near = { ra: 53.4 + 0.32 / 3600, dec: -36.1, epoch: 2000 };
+  assert.equal(duplicateStar(existing, { ...near, row: row('Gal = N1365, ID = 98015') }), undefined);
+  assert.equal(duplicateStar(existing, { ...near, row: row('Gal = N1365, ID = 97956') }), 'held');
+  assert.equal(duplicateStar(existing, near), 'held', 'a star placed any other way is still compared by position');
 });
