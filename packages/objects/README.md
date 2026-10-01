@@ -29,7 +29,7 @@ test (run in the universe runtime lane) holds both reads equal.
 
 `parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
 physical frame, bounds, and declared preparation source. Volume images, concrete
-sampling, and renderer-specific slice geometry remain outside this package.
+sampling, and compiled renderer leaves remain outside this package. Physical slice data and its validation live here.
 
 `parseImageLayerBankDescriptor()` uses the same physical-frame contract for
 spatial models reconstructed from observations. Its type distinguishes prepared
@@ -88,4 +88,4 @@ Venus share implementations selected by capabilities; packages contain no
 per-planet code or data folders. Concrete CSS/DOM rendering belongs to the
 application renderer. Earth is a future consumer, outside this migration's scope.
 
-Prepared volume scene contracts and their pure validators/helpers live in `src/volume/`, exported by `@cssearth/objects`. Baking and optimization remain in `@cssearth/bake`.
+Prepared volume scene contracts and their pure validators/helpers live in `src/volume/`, exported by `@cssearth/objects`. This includes volume and sampled recipes, emission-fit settings, slice data and layer validation, compiler controls and star inputs, joint parameters, authored shape settings, observation photo data and prepared catalogue stars. Writers and readers import the same contracts here. Baking, fitting, sampling, cancellation and I/O remain in `@cssearth/bake`.

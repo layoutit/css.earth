@@ -19,7 +19,7 @@ import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings, va
 import { physicalToField, angularScale } from '../../coordinates/observer-tangent.ts';
 import { parseCloudAppearance } from '../../materials/cloud-appearance.ts';
 import type { EmissionFieldModel } from '../../contracts/emission.ts';
-import type { VolumeSlices } from '../../contracts/volume-slices.ts';
+import type { VolumeSlices } from '@cssearth/objects';
 import type { Vector3 } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 import { recolorCloudSlices } from '../slices/material.ts';

@@ -1,5 +1,5 @@
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-import { readCompilerControls } from '../contracts/compiler-controls.ts';
+import { readCompilerControls } from '@cssearth/objects';
 import type { EmissionComponent, EmissionFieldModel } from '../contracts/emission.ts';
 import { readPhotometricEnvelope } from './photometric-emission.ts';
 import { readEmissionWindow } from './emission-window.ts';

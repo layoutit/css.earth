@@ -3,7 +3,8 @@ import test from 'node:test';
 import { mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { recolorCloudSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/bake/volume/node';
+import { recolorCloudSlices } from '@cssearth/bake/volume/node';
+import { type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 
 async function temporary(t: { after(fn: () => Promise<void>): void }) {

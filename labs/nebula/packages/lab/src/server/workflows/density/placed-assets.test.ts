@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, writeFile, readFile, rm, realpath } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
 import sharp from 'sharp';
-import type { VolumeSlices } from '@cssearth/bake/volume';
+import type { VolumeSlices } from '@cssearth/objects';
 import { preparePlacedDensity } from './placed-assets.ts';
 
 test('compact model placement reuses exact density/alpha bytes and restores missing generated resources', async () => {

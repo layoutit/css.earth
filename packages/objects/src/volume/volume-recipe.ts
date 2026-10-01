@@ -1,4 +1,4 @@
-import type { Axis, Bounds3, Vector3 } from '@cssearth/objects';
+import type { Axis, Bounds3, Vector3 } from './coordinates.js';
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
 /** Row-major transform of ordinary display RGB values during offline preparation. */

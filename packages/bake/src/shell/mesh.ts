@@ -1,7 +1,7 @@
 /** Offline mesh construction; runtime receives only retained transforms and source-derived normals. */
 import type { ShellRecipe } from './config.ts';
 import { requireRecord as record } from '@cssearth/core';
-import { triple } from '../volume/index.ts';
+import { triple } from '@cssearth/objects';
 import { type Vector3 } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 

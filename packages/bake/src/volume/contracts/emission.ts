@@ -1,8 +1,7 @@
 import type { RetainedPhotometricEnvelope } from '../fields/photometric-emission.ts';
-import type { JointParameters } from './joint-parameters.ts';
-import type { CompilerControls } from './compiler-controls.ts';
+import type { JointParameters } from '@cssearth/objects';
+import type { CompilerControls } from '@cssearth/objects';
 import type { EmissionWindow } from '../fields/emission-window.ts';
-export { defaultCompilerControls, readCompilerControls, type CompilerControls } from './compiler-controls.ts';
 
 import type { EmissionVector3, EmissionBounds, SkyBounds } from '@cssearth/objects';
 export interface EmissionFitInput {

@@ -4,7 +4,7 @@ import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { bakeSlab } from '@cssearth/bake/volume/node';
-import type { VolumeRecipe } from '@cssearth/bake/volume';
+import type { VolumeRecipe } from '@cssearth/objects';
 import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
 import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from '@cssearth/renderer/volume/types.ts';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';

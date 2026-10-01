@@ -6,7 +6,7 @@
  */
 import { resolve, dirname } from 'node:path';
 import { fieldToPhysical, angularScale } from '../../coordinates/observer-tangent.ts';
-import { parseVolumeRecipe } from '../../contracts/volume-recipe.ts';
+import { parseVolumeRecipe } from '@cssearth/objects';
 import type { SimulationDepthPrior } from '../../contracts/simulation-prior.ts';
 import { loadVolumeSource, sampleEncoded, sourceBytes } from './density-grid.ts';
 import { channelDensity } from '../slices/density.ts';

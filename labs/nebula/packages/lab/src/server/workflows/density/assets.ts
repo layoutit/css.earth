@@ -3,8 +3,9 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import sharp from 'sharp';
-import { parseVolumeRecipe } from '@cssearth/bake/volume';
-import { prepareVolumeSlices, type VolumeSlices, writeAtomic } from '@cssearth/bake/volume/node';
+import { parseVolumeRecipe } from '@cssearth/objects';
+import { prepareVolumeSlices, writeAtomic } from '@cssearth/bake/volume/node';
+import { type VolumeSlices } from '@cssearth/objects';
 import { acquire, json, pinned } from './io.ts';
 
 /** Replay the recorded geometry, without changing its scientific descriptor or catalogue reference. */
