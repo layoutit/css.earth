@@ -331,7 +331,8 @@
       "import": "./dist/thread-pool.js",
       "default": "./dist/thread-pool.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./test/object-runtime-package": "./src/contract/fixtures/object-runtime-package.mts"
   },
   "scripts": {
     "build": "tsup",

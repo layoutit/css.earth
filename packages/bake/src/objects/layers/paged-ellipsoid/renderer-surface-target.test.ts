@@ -4,7 +4,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import { preparedScenePitch } from '@cssearth/engine';
 import { prepareLocationPoint, prepareLocationCamera } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { prepareSurfaceTargetRotation } from './surface-target.js';
+import { prepareSurfaceTargetRotation } from '@cssearth/renderer/navigation/surface-target.ts';
 import { dotN as dot } from '@cssearth/core';
 
 const apply = (matrix: readonly number[], point: readonly number[]) => [0, 1, 2].map(row =>
@@ -38,8 +38,8 @@ test('surface correction is a finite proper rotation toward the real physical ey
 
 test('prepared destination correction preserves close-range framing when the globe radius changes', async () => {
   const read = async (path: string) => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
-  const scene = await read('../../../../src/objects/earth/prepared/scene.json');
-  const config = await read('../../../../src/objects/earth/source/preparation/paged-ellipsoid.json');
+  const scene = await read('../../../../../../src/objects/earth/prepared/scene.json');
+  const config = await read('../../../../../../src/objects/earth/source/preparation/paged-ellipsoid.json');
   const body = scene[config.sceneBodyKey];
   const point = prepareLocationPoint(scene, -58.3816, -34.6037);
   const destination = prepareLocationCamera(scene, point, 2048, { body, camera: config.camera });
