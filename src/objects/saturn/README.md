@@ -75,6 +75,12 @@ D-ring ringlets at 67,580 km and 71,710 km are cross-checked against the PDS
 For readability, C-ring alpha is boosted and at DPR 2 each one-pixel ringlet
 and gap gets a two-CSS-pixel minimum footprint. Source radii are unchanged.
 
+Nothing is drawn on the rings beyond that profile. Until 2026-10-01 four spinning
+plates added 190 seeded dots, grouped into authored wake arcs and spokes; no
+source placed them, so they were removed (left before, right after).
+
+![Ring detail before and after removing the seeded dots](evidence/2026-10-01/ring-tracers-before-after.webp)
+
 The mutual shadows of body and rings are prepared from one fixed light and keep
 the ring gaps. They are cross-checked against NASA's
 [Saturn shadow on the rings](https://science.nasa.gov/photojournal/saturns-shadow-upon-the-rings/)
