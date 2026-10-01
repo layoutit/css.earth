@@ -13,7 +13,7 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/m2-9/source/image-frame.json",
+      "path": "src/objects/m2-9-volume/source/image-frame.json",
       "locator": "/references"
     }
   ],
@@ -24,7 +24,7 @@
       "kind": "credit",
       "text": "Uncovering the structure and kinematics of the ionized core of M 2-9 with ALMA",
       "scope": "Published source",
-      "evidence": "src/objects/m2-9/source/image-frame.json#/references"
+      "evidence": "src/objects/m2-9-volume/source/image-frame.json#/references"
     }
   ]
 }

@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "m8-volume",
+  "method": "compiler",
+  "request": {
+    "path": "src/objects/m8-volume/source/request.json"
+  },
+  "inputPins": [
+    {
+      "path": "labs/nebula/models/m8/compiler.json"
+    },
+    {
+      "path": "labs/nebula/models/m8/depth-model.json"
+    },
+    {
+      "path": "labs/nebula/models/m8/physical-evidence.json"
+    },
+    {
+      "path": "labs/nebula/models/m8/processing-observations.json"
+    },
+    {
+      "path": "labs/nebula/models/m8/processing-structures.json"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      270.76531645904527,
+      -24.30622861770443
+    ],
+    "distancePc": 1326,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 1
+  },
+  "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
+  "description": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB datasets retain one geometry; surrounding stars use Gaia astrometry and estimated distances independently of source-image boundaries. No gas velocity is converted to depth.",
+  "defaultDataset": "eso-optical",
+  "framingRadiusUnits": 3414.784262,
+  "acceptedLabResult": "m8",
+  "fieldStars": {
+    "path": "src/objects/m8-volume/source/stellar-field.json"
+  },
+  "compactInputs": {
+    "path": "src/objects/m8-volume/source/bake-inputs.json.gz"
+  },
+  "compactMethod": "compiler"
+}

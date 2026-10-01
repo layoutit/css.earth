@@ -1,6 +1,6 @@
 # Orion · M42
 
-This lab model studies a 3D emission reconstruction of M42, an asymmetric H II region and star-forming nebula. The [shipped object record](../../../../src/objects/m42/README.md) owns the active sources, delivery evidence and known problems.
+This lab model studies a 3D emission reconstruction of M42, an asymmetric H II region and star-forming nebula. The [shipped object record](../../../../src/objects/m42-volume/README.md) owns the active sources, delivery evidence and known problems.
 
 ## Sources
 

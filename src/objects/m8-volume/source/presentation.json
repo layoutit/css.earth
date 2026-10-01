@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m8-volume",
+  "name": "Lagoon Nebula",
+  "host": "m8",
+  "defaultDataset": "eso-optical",
+  "sharedInputs": [
+    "eso-optical",
+    "eso-vista",
+    "spitzer-mid-infrared",
+    "physical-evidence",
+    "distance",
+    "stellar-field"
+  ],
+  "datasets": [
+    {
+      "id": "eso-optical",
+      "label": "ESO · optical",
+      "title": "Lagoon nebula in visible light",
+      "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Optical display colors on one inferred cloud front; physical depth and foreground extinction are not recovered.",
+      "detail": "4000 × 2679 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Optical · H-alpha / R / V / B"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 2679"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "93.49 × 62.61 arcmin"
+        }
+      ],
+      "input": "eso-optical",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
+        "url": "https://cdn.eso.org/images/publicationtiff/eso0936a.tif"
+      }
+    },
+    {
+      "id": "eso-vista",
+      "label": "ESO VISTA · infrared",
+      "title": "Lagoon stars and nebulosity in near infrared",
+      "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. The publisher caption identifies J/H/Ks; its conflicting H-alpha metadata is not used. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Near-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
+      "detail": "4000 × 2202 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Near-infrared · J / H / Ks"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 2202"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "71.81 × 39.54 arcmin"
+        }
+      ],
+      "input": "eso-vista",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
+        "url": "https://cdn.eso.org/images/publicationtiff/eso1101d.tif"
+      }
+    },
+    {
+      "id": "spitzer-mid-infrared",
+      "label": "Spitzer · infrared",
+      "title": "Lagoon warm dust in calibrated mid-infrared",
+      "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the calibrated composite before star removal and 3D material fitting. It is built from Spitzer IRAC 8.0, 4.5 and 3.6 µm maps in MJy/sr; each band is scaled to its own measured range, so hue shows where a band is bright, not physical band ratios. MIPS 24 µm is not used because its map has no data over the Hourglass core. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Calibrated mid-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
+      "detail": "1757 × 1417 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Mid-infrared · IRAC 8.0 / 4.5 / 3.6 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1757 × 1417"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "35.73 × 28.81 arcmin"
+        }
+      ],
+      "input": "spitzer-mid-infrared",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.skybands.png",
+        "skyBands": {
+          "path": "src/objects/m8-volume/source/sky-bands/spitzer-irac.json"
+        }
+      }
+    }
+  ],
+  "bank": {
+    "path": "src/objects/m8-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "recipe-1",
+      "path": "src/objects/m8-volume/source/delivery.json"
+    },
+    {
+      "id": "recipe-2",
+      "path": "src/objects/m8-volume/source/request.json"
+    },
+    {
+      "id": "recipe-3",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/01-compiler.json"
+    },
+    {
+      "id": "recipe-4",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/02-depth-model.json"
+    },
+    {
+      "id": "recipe-5",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/03-physical-evidence.json"
+    },
+    {
+      "id": "recipe-6",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/04-processing-observations.json"
+    },
+    {
+      "id": "recipe-7",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/05-processing-structures.json"
+    },
+    {
+      "id": "recipe-8",
+      "path": "src/objects/m8-volume/source/sky-bands/spitzer-irac.json"
+    }
+  ]
+}

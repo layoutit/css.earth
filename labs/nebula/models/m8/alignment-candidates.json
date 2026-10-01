@@ -254,7 +254,7 @@
       "credit": "NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
       "termsUrl": "https://www.spitzer.caltech.edu/page/image-use-policy",
       "skyBands": {
-        "path": "src/objects/m8/source/sky-bands/spitzer-irac.json"
+        "path": "src/objects/m8-volume/source/sky-bands/spitzer-irac.json"
       },
       "metadataNote": "Composed from pinned CDS hips2fits IRAC maps in MJy/sr, calibrated with IRAC Handbook surface-brightness factors, one measured background and range per band, then one Lupton asinh display. WCS is the recipe grid. MIPS 24 µm is omitted: its HiPS has no data over the Hourglass core."
     },

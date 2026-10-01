@@ -1,0 +1,210 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "hst-optical",
+      "path": ".local/nebula-lab/research/wenger/m2-9-original.jpg",
+      "origin": "https://apod.nasa.gov/apod/ap040201.html",
+      "sourceUrl": "https://apod.nasa.gov/apod/ap040201.html",
+      "title": "Twin Jet Nebula · accepted APOD edition",
+      "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "displayCredit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opo9738a",
+            "role": "material",
+            "evidence": "src/objects/m2-9-volume/source/image-frame.json#/acceptedImage"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "hst-optical",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://esahubble.org/images/opo9738a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "image-frame",
+      "path": "src/objects/m2-9-volume/source/image-frame.json",
+      "origin": "https://arxiv.org/html/2411.03825v1",
+      "sourceUrl": "https://arxiv.org/html/2411.03825v1",
+      "title": "M2–9 angular frame and adopted distance",
+      "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sanchez-contreras-2024",
+            "role": "method",
+            "evidence": "src/objects/m2-9-volume/source/image-frame.json: /references"
+          },
+          {
+            "catalogueId": "corradi-2011",
+            "role": "method",
+            "evidence": "src/objects/m2-9-volume/source/image-frame.json: /references"
+          },
+          {
+            "catalogueId": "hubble-opo9738a",
+            "role": "reference",
+            "evidence": "src/objects/m2-9-volume/source/image-frame.json: publisherImage and WCS; angular registration transferred between editions of the same photograph"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m2-9-volume/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Twin Jet Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m2-9-volume/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m2-9-volume/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m2-9-volume/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing facility."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m2-9-volume/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m2-9-volume/source/image-frame.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m2-9-volume/source/nebula.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m2-9-volume/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "retained-evidence-5",
+      "path": "src/objects/m2-9-volume/source/bake-inputs/references/00-experiment.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-6",
+      "path": "src/objects/m2-9-volume/source/provenance-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-7",
+      "path": "src/objects/m2-9-volume/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "compact-compact-model-json",
+      "path": "src/objects/m2-9-volume/source/compact/model.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-1-f32-gz",
+      "path": "src/objects/m2-9-volume/source/compact/emission-1.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-2-f32-gz",
+      "path": "src/objects/m2-9-volume/source/compact/emission-2.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-0-f32-gz",
+      "path": "src/objects/m2-9-volume/source/compact/emission-0.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-README-md",
+      "path": "src/objects/m2-9-volume/source/compact/README.md",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice model/material input or replay record; published inputs are separately bound in this manifest and retained provenance."
+      }
+    }
+  ]
+}

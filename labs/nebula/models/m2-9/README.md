@@ -1,7 +1,7 @@
 # M2–9: image-to-volume experiment
 
 This file preserves processing studies and their dated results. The
-[current shipped object record](../../../../src/objects/m2-9/README.md) owns
+[current shipped object record](../../../../src/objects/m2-9-volume/README.md) owns
 the active sources, delivery evidence and known problems. Historical experiments
 below do not qualify later deliveries.
 

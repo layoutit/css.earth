@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-provenance-references@1",
+  "references": [
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/compiler.json",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/01-compiler.json",
+      "bytes": 1361
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/photometric-mge.json",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/02-photometric-mge.json",
+      "bytes": 2508
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/observation-structures.json",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/03-observation-structures.json",
+      "bytes": 397
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/physical-evidence.json",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/04-physical-evidence.json",
+      "bytes": 36711
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/observations.json",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/05-observations.json",
+      "bytes": 3842
+    }
+  ]
+}

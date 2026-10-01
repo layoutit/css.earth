@@ -17,7 +17,7 @@
     {
       "id": "lmc-particles",
       "directory": "labs/nebula/models/lmc-particles",
-      "referenceObject": "src/objects/lmc/object.json",
+      "referenceObject": "src/objects/lmc-volume/object.json",
       "photo": "labs/nebula/sources/lmc-smash-full.webp",
       "photoUrl": "https://noirlab.edu/public/images/noirlab2030a/",
       "photoCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
@@ -91,8 +91,8 @@
     {
       "id": "smc-particles",
       "directory": "labs/nebula/models/smc-particles",
-      "referenceObject": "src/objects/smc/object.json",
-      "photo": "src/objects/smc/source/source.jpg",
+      "referenceObject": "src/objects/smc-volume/object.json",
+      "photo": "src/objects/smc-volume/source/source.jpg",
       "photoUrl": "https://noirlab.edu/public/images/noirlab2030b/",
       "photoCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
       "starRange": {

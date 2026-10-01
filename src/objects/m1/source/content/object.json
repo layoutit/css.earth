@@ -22,7 +22,104 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "hubble-optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "hubble-optical",
+        "label": "Hubble \u00b7 optical lines",
+        "thumbnail": "m1-dataset-hubble-optical.webp",
+        "volume": {
+          "objectId": "m1-volume",
+          "datasetId": "hubble-optical",
+          "surface": "hubble-optical"
+        },
+        "source": {
+          "id": "m1-volume-hubble-optical",
+          "path": "../../m1-volume/source/manifest.json",
+          "url": "https://esahubble.org/images/heic0515a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "webb-infrared",
+        "label": "Webb \u00b7 near/mid-infrared",
+        "thumbnail": "m1-dataset-webb-infrared.webp",
+        "volume": {
+          "objectId": "m1-volume",
+          "datasetId": "webb-infrared",
+          "surface": "webb-infrared"
+        },
+        "source": {
+          "id": "m1-volume-webb-infrared",
+          "path": "../../m1-volume/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2326a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "webb-components",
+        "label": "Webb \u00b7 dust, sulfur, synchrotron",
+        "thumbnail": "m1-dataset-webb-components.webp",
+        "volume": {
+          "objectId": "m1-volume",
+          "datasetId": "webb-components",
+          "surface": "webb-components"
+        },
+        "source": {
+          "id": "m1-volume-webb-components",
+          "path": "../../m1-volume/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2417a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "spitzer-infrared",
+        "label": "Spitzer \u00b7 mid-infrared",
+        "thumbnail": "m1-dataset-spitzer-infrared.webp",
+        "volume": {
+          "objectId": "m1-volume",
+          "datasetId": "spitzer-infrared",
+          "surface": "spitzer-infrared"
+        },
+        "source": {
+          "id": "m1-volume-spitzer-infrared",
+          "path": "../../m1-volume/source/manifest.json",
+          "url": "https://esahubble.org/images/potw1720c/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "vla-radio",
+        "label": "VLA \u00b7 radio synchrotron",
+        "thumbnail": "m1-dataset-vla-radio.webp",
+        "volume": {
+          "objectId": "m1-volume",
+          "datasetId": "vla-radio",
+          "surface": "vla-radio"
+        },
+        "source": {
+          "id": "m1-volume-vla-radio",
+          "path": "../../m1-volume/source/manifest.json",
+          "url": "https://esahubble.org/images/potw1720b/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "chandra-xray",
+        "label": "Chandra \u00b7 X-ray pulsar wind",
+        "thumbnail": "m1-dataset-chandra-xray.webp",
+        "volume": {
+          "objectId": "m1-volume",
+          "datasetId": "chandra-xray",
+          "surface": "chandra-xray"
+        },
+        "source": {
+          "id": "m1-volume-chandra-xray",
+          "path": "../../m1-volume/source/manifest.json",
+          "url": "https://esahubble.org/images/potw1720f/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

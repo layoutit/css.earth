@@ -7,17 +7,20 @@ import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
-import { distanceDescription, isExtendedClassification, isHostedDescriptor, isOverviewObject, isPlacedObject, isSceneObject, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { distanceDescription, isExtendedClassification, isOverviewObject, isPlacedObject, isSceneObject, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { resolve } from 'node:path';
 
 test('every scene and every package the host draws has exactly one searchable destination, built from its own descriptor', async () => {
   const descriptors = await readObjectDescriptors(resolve('src/objects'));
-  // A hosted package's entry is its own descriptor's, as a scene's is: no catalogue row names a destination.
-  const hosted = [...descriptors].filter(([, descriptor]) => isHostedDescriptor(descriptor) && isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.catalog !== undefined).map(([id]) => id);
+  // A galaxy, a nebula or a cluster is an authored object like any body: its recipe declares no surface.
+  const hosted = [...descriptors].filter(([, descriptor]) => isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe)
+    && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length).map(([id]) => id);
+  assert.equal(hosted.length, 18);
+  // A bank is context the world draws, never an object: none carries a catalogue entry.
+  for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
   const overviews = await readOverviews(resolve('src/objects'));
-  // A bank package is a scene like any body: its scene has no body in it, and the world draws its bank.
   assert.equal(OBJECTS.length, SCENE_OBJECTS.length + overviews.length);
   for (const id of hosted) assert.ok(isSceneObject(requireObject(id)), id);
   assert.deepEqual(OBJECTS.filter(isOverviewObject).map(object => object.id), overviews.map(overview => overview.id));

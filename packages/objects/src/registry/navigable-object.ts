@@ -55,18 +55,6 @@ export interface PlacedObject {
   readonly worldFrame: ObjectWorldFrame;
   readonly discovery: Readonly<ObjectDiscovery>;
 }
-/** The package types the world's host draws instead of mounting a scene of their own: image layers, a volume, catalogue points. */
-export const HOSTED_OBJECT_TYPES: readonly string[] = Object.freeze(['image-layer-bank', 'volume-dataset-bank', 'catalogue-point-bank']);
-export const isHostedDescriptor = (descriptor: unknown): boolean => isRecord(descriptor) && typeof descriptor.type === 'string' && HOSTED_OBJECT_TYPES.includes(descriptor.type);
-
-/** A bank package's descriptor as its scene reads it: `prepared` names the scene's transport (`properties.scene`), where the
- * package's own `prepared` names its bank. Any other descriptor is returned as it is. */
-export function sceneDescriptorOf<Descriptor>(descriptor: Descriptor): Descriptor {
-  if (!isHostedDescriptor(descriptor) || !isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.scene)) return descriptor;
-  // The scene is an ordinary layered body with no layers of its own: the renderer mounts it as it mounts any body.
-  return { ...descriptor, type: 'layered-body', prepared: descriptor.properties.scene } as Descriptor;
-}
-
 /** The object mounts a scene of its own. */
 export const isSceneObject = <Scene, Signal>(object: NavigableObject<Scene, Signal>): object is ObjectEntry<Scene, Signal> => typeof object.loadScene === 'function';
 /** The object is a level of the zoom ladder. */

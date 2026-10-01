@@ -195,7 +195,7 @@
         "requiredCases": []
       },
       "source": {
-        "path": "src/objects/m1/source/stellar-field.json",
+        "path": "src/objects/m1-volume/source/stellar-field.json",
         "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist"
       },
       "command": "telescope family-run packages/telescope-cli/src/families/fixtures/telescope-family-examples/descriptors/F09.json astrometry-export --out example-output/F09",

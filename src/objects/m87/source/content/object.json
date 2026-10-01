@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "16.8 Mpc (−800,000 / +800,000 pc)",
+        "value": "16.8 Mpc (\u2212800,000 / +800,000 pc)",
         "source": {
           "catalogueId": "arxiv-1906-11238",
           "url": "https://arxiv.org/abs/1906.11238",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 187.7°, Dec 12.39°",
+        "value": "RA 187.7\u00b0, Dec 12.39\u00b0",
         "source": {
           "catalogueId": "publication-charlot2020a-a-644a-159c",
           "url": "https://doi.org/10.1051/0004-6361/202038368",
@@ -44,7 +44,24 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "eso-optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "eso-optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "m87-dataset-eso-optical.webp",
+        "volume": {
+          "objectId": "m87-volume",
+          "datasetId": "eso-optical",
+          "surface": "eso-optical"
+        },
+        "source": {
+          "id": "m87-volume-eso-optical",
+          "path": "../../m87-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1525a/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

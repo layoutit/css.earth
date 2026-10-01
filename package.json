@@ -63,7 +63,6 @@
     "prepare:typecheck": "node .github/scripts/ci/prepare-typecheck.mts",
     "prepare:titles": "node site/build/prepare/prepare-shell-titles.mts",
     "prepare:volume": "node packages/bake/cli/prepare-volume.mts",
-    "prepare:bank-scene": "node site/build/prepare/prepare-bank-scene.mts",
     "prepare:world-presentation": "node site/build/prepare/prepare-moon-labels.mts && node site/build/prepare/prepare-world-presentation.mts",
     "prepare:world-context": "node site/build/prepare/prepare-spatial-context.ts src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && pnpm prepare:world-presentation",
     "pretest": "pnpm prepare:shell",

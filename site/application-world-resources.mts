@@ -35,9 +35,9 @@ const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
 const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
 
-// Published catalogues drawn through a volume bank, with its opacity (src/objects/m87/README.md).
+// Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
 const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
-  m87: ['dots'],
+  'm87-volume': ['dots'],
 };
 
 // Inventory of prepared resources, not navigation entries or runtime generators.

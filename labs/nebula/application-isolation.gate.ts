@@ -33,9 +33,9 @@ for (const path of inputs) {
 }
 // Runtime host fingerprints include validation owners even when esbuild removes type-only imports.
 for (const path of ['packages/renderer/src/volume/types.ts', 'packages/renderer/src/navigation/world-camera-math.ts',
-  'packages/renderer/src/stars/prepared-catalogue-points.ts', 'src/objects/m42/object.json',
-  'src/objects/m42/source', 'src/objects/m2-9/object.json', 'src/objects/m2-9/source',
-  'src/objects/lmc/object.json', 'src/objects/lmc/prepared/datasets.json', 'src/objects/lmc/source', 'src/objects/stellar-neighbourhood/source/stars.json']) {
+  'packages/renderer/src/stars/prepared-catalogue-points.ts', 'src/objects/m42-volume/object.json',
+  'src/objects/m42-volume/source', 'src/objects/m2-9-volume/object.json', 'src/objects/m2-9-volume/source',
+  'src/objects/lmc-volume/object.json', 'src/objects/lmc-volume/prepared/datasets.json', 'src/objects/lmc-volume/source', 'src/objects/stellar-neighbourhood/source/stars.json']) {
   const destination = resolve(sandbox, path); await mkdir(dirname(destination), { recursive: true });
   await cp(resolve(root, path), destination, { recursive: true });
 }

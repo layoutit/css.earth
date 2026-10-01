@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "5.426 kpc (−47 / +47 pc)",
+        "value": "5.426 kpc (\u221247 / +47 pc)",
         "source": {
           "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
           "url": "https://arxiv.org/pdf/2105.09526",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 201.7°, Dec -47.48°",
+        "value": "RA 201.7\u00b0, Dec -47.48\u00b0",
         "source": {
           "catalogueId": "eso-eso1119b",
           "url": "https://cdn.eso.org/images/original/eso1119b.tif",
@@ -34,7 +34,7 @@
         "source": {
           "catalogueId": "dsouza-rix-2013",
           "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
-          "label": "D’Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths.",
+          "label": "D\u2019Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths.",
           "checked": "2026-10-01"
         }
       }
@@ -44,7 +44,40 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "eso1119b",
-    "controls": []
+    "controls": [
+      {
+        "id": "eso1119b",
+        "label": "VST \u00b7 optical G / R / I",
+        "thumbnail": "omega-centauri-dataset-eso1119b.webp",
+        "volume": {
+          "objectId": "omega-centauri-volume",
+          "datasetId": "eso1119b",
+          "surface": "eso1119b"
+        },
+        "source": {
+          "id": "omega-centauri-volume-eso1119b",
+          "path": "../../omega-centauri-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1119b/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "eso0844a",
+        "label": "WFI \u00b7 optical B / V / I",
+        "thumbnail": "omega-centauri-dataset-eso0844a.webp",
+        "volume": {
+          "objectId": "omega-centauri-volume",
+          "datasetId": "eso0844a",
+          "surface": "eso0844a"
+        },
+        "source": {
+          "id": "omega-centauri-volume-eso0844a",
+          "path": "../../omega-centauri-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso0844a/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",
@@ -67,7 +100,7 @@
     {
       "label": "Research",
       "role": "facts",
-      "description": "D’Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths.",
+      "description": "D\u2019Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths.",
       "href": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf"
     }
   ],

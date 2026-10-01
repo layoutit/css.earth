@@ -58,9 +58,7 @@ merge**, and the tracked inventory must be part of the diff. Git holds the
 inventory; R2 holds the bytes.
 
 1. Bake the object. `pnpm prepare:objects --object=<id>` for a body,
-   `pnpm prepare:volume src/objects/<id>` for a volume field,
-   `pnpm prepare:bank-scene <id>` for the scene of a package whose subject is a
-   bank (a galaxy's image layers, a nebula's volume, a cluster's dots). From a clean
+   `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, restore that object's sources with
    `node packages/bake/cli/restore-source-inputs.mts --object=<id>` first.
 2. Publish the bytes: `node packages/bake/cli/publish-runtime-assets.mts --object=<id>`.

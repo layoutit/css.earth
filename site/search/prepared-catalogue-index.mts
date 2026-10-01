@@ -8,11 +8,9 @@ import { allPlanetarySystems } from '../object-systems.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 
-/** How a result row shows an object: a body by its marker. An object drawn from a bank (a galaxy, a nebula, a cluster) has no
- * marker: its bank's thumbnail stands for it, or the plain marker where the bank has no image. */
+/** A result row shows an object by its marker. */
 export function objectResultMarker(object: { readonly id: string; readonly color: string }) {
-  return Object.freeze(Object.hasOwn(PREPARED_NAVIGATION_MARKERS, object.id) ? { kind: 'scene' as const, id: object.id, color: object.color }
-    : { kind: 'thumbnail' as const, thumbnail: sidebarThumbnail(object.id)?.url2x ?? null });
+  return Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color });
 }
 
 /** Every object search can list. The build writes it once (`pages/catalogue/index.json.ts`); the find function reads

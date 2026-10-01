@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "414 pc (−7 / +7 pc)",
+        "value": "414 pc (\u22127 / +7 pc)",
         "source": {
           "catalogueId": "menten-2007",
           "url": "https://arxiv.org/abs/0709.0485",
@@ -19,11 +19,11 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 83.79°, Dec -5.4°",
+        "value": "RA 83.79\u00b0, Dec -5.4\u00b0",
         "source": {
           "catalogueId": "eso-eso1723a",
           "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif",
-          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+          "label": "ESO ESO \u00b7 optical image and publisher astrometry; registration retained in the observation recipe",
           "checked": "2026-10-01"
         }
       },
@@ -34,7 +34,7 @@
         "source": {
           "catalogueId": "eso-eso1723a",
           "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif",
-          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+          "label": "ESO ESO \u00b7 optical image and publisher astrometry; registration retained in the observation recipe",
           "checked": "2026-10-01"
         }
       }
@@ -44,7 +44,40 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "eso-optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "eso-optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "m42-dataset-eso-optical.webp",
+        "volume": {
+          "objectId": "m42-volume",
+          "datasetId": "eso-optical",
+          "surface": "eso-optical"
+        },
+        "source": {
+          "id": "m42-volume-eso-optical",
+          "path": "../../m42-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1723a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "eso-vista",
+        "label": "ESO VISTA \u00b7 infrared",
+        "thumbnail": "m42-dataset-eso-vista.webp",
+        "volume": {
+          "objectId": "m42-volume",
+          "datasetId": "eso-vista",
+          "surface": "eso-vista"
+        },
+        "source": {
+          "id": "m42-volume-eso-vista",
+          "path": "../../m42-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1006a/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",
@@ -61,7 +94,7 @@
     {
       "label": "Research",
       "role": "facts",
-      "description": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+      "description": "ESO ESO \u00b7 optical image and publisher astrometry; registration retained in the observation recipe",
       "href": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif"
     }
   ],

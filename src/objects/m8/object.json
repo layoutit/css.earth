@@ -1,38 +1,51 @@
 {
   "schema": "cssearth-object@2",
   "id": "m8",
-  "type": "volume-dataset-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
-      "referenceFrame": "sun-icrf",
-      "epochJdTt": 2461286.5,
-      "originM": [
-        516077129585567100,
-        -37305840564853540000,
-        -16843028683624583000
-      ],
-      "localToReferenceXyzw": [
-        0.8401043005513,
-        0.005610842661921013,
-        0.003622443103695396,
-        0.5423837760716987
-      ],
-      "metersPerUnit": 198366776548200,
-      "boundsUnits": {
-        "min": [
-          -3954.981314224592,
-          -2672.51843533766,
-          -1722.1029829216286
-        ],
-        "max": [
-          3954.981314224592,
-          2672.51843533766,
-          1722.1029829216286
-        ]
-      }
-    },
     "preparation": {
-      "source": "source/delivery.json"
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lagoon Nebula",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 677379746660464.1
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
     },
     "catalog": {
       "name": "Lagoon Nebula",
@@ -40,7 +53,7 @@
       "classification": "nebula",
       "color": "#9a9a9a",
       "distanceAu": 273507133.1,
-      "description": "The Lagoon is a star-forming H II region about 1,326 parsecs away. Its young NGC 6530 cluster shares the surrounding cloud complex.",
+      "description": "The Lagoon is a star-forming H II region about 1,326 parsecs away.",
       "aliases": [
         "M8",
         "NGC 6523",
@@ -75,22 +88,10 @@
       ],
       "metersPerUnit": 2185095956969239,
       "bodyRadiusM": 677379746660464100
-    },
-    "page": {
-      "stylesheets": [
-        "src/renderers/css/styles/body-surfaces.css"
-      ],
-      "metadata": {
-        "url": "prepared/page.json"
-      }
-    },
-    "scene": {
-      "format": "cssearth-css-object@5",
-      "url": "prepared/object.json"
     }
   },
   "prepared": {
-    "format": "cssearth-volume-datasets@1",
-    "url": "prepared/datasets.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

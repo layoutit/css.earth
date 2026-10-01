@@ -23,7 +23,7 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/m2-9/source/image-frame.json",
+      "path": "src/objects/m2-9-volume/source/image-frame.json",
       "locator": "/publisherImage"
     }
   ],
@@ -34,7 +34,7 @@
       "kind": "credit",
       "text": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "scope": "Published source",
-      "evidence": "src/objects/m2-9/source/image-frame.json#/publisherImage"
+      "evidence": "src/objects/m2-9-volume/source/image-frame.json#/publisherImage"
     }
   ]
 }

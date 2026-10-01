@@ -1,0 +1,258 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "eso-optical",
+      "path": ".local/nebula-lab/observations/m42/sources/eso-optical.tif",
+      "origin": "https://www.eso.org/public/images/eso1723a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1723a/",
+      "title": "Orion · eso1723a",
+      "credit": "ESO/G. Beccari",
+      "displayCredit": "ESO/G. Beccari",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1723a",
+            "role": "material",
+            "evidence": "labs/nebula/models/m42/observations.json#/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "eso-optical",
+      "license": "ESO public-image terms; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vst",
+            "evidence": "https://www.eso.org/public/images/eso1723a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-vista",
+      "path": ".local/nebula-lab/observations/m42/sources/eso-vista.tif",
+      "origin": "https://www.eso.org/public/images/eso1006a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1006a/",
+      "title": "Orion · eso1006a",
+      "credit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "displayCredit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1006a",
+            "role": "material",
+            "evidence": "labs/nebula/models/m42/observations.json#/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "eso-vista",
+      "license": "ESO public-image terms; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1006a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "physical-evidence",
+      "path": "src/objects/m42-volume/source/bake-inputs/references/05-physical-evidence.json",
+      "origin": "https://doi.org/10.1086/175123",
+      "sourceUrl": "https://doi.org/10.1086/175123",
+      "title": "Orion physical-evidence ledger",
+      "credit": "Published Orion structure studies; authored extrapolation",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "wen-odell-1995",
+            "role": "method",
+            "evidence": "src/objects/m42-volume/source/bake-inputs/references/05-physical-evidence.json: /sources/1"
+          },
+          {
+            "catalogueId": "henney-2005",
+            "role": "method",
+            "evidence": "src/objects/m42-volume/source/bake-inputs/references/05-physical-evidence.json: /sources/2"
+          },
+          {
+            "catalogueId": "odell-2009",
+            "role": "method",
+            "evidence": "src/objects/m42-volume/source/bake-inputs/references/05-physical-evidence.json: /sources/3"
+          },
+          {
+            "catalogueId": "odell-abel-2025",
+            "role": "method",
+            "evidence": "src/objects/m42-volume/source/bake-inputs/references/05-physical-evidence.json: /sources/4"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "distance",
+      "path": "src/objects/m42-volume/source/delivery.json",
+      "origin": "https://arxiv.org/abs/0709.0485",
+      "sourceUrl": "https://arxiv.org/abs/0709.0485",
+      "title": "Orion adopted world placement",
+      "credit": "Menten et al. (2007); cssEarth placement",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "menten-2007",
+            "role": "reference",
+            "evidence": "src/objects/m42-volume/source/delivery.json: sky.distancePc = 414; adopted world placement"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m42-volume/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Orion Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m42-volume/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m42-volume/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m42-volume/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing facility."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m42-volume/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m42-volume/source/nebula.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m42-volume/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m42-volume/source/request.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "retained-evidence-5",
+      "path": "src/objects/m42-volume/source/bake-inputs/references/01-compiler.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-6",
+      "path": "src/objects/m42-volume/source/bake-inputs/references/02-observations.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-7",
+      "path": "src/objects/m42-volume/source/bake-inputs/references/03-observation-structures.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-8",
+      "path": "src/objects/m42-volume/source/bake-inputs/references/04-depth-model.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-9",
+      "path": "src/objects/m42-volume/source/provenance-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-10",
+      "path": "src/objects/m42-volume/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "compact-bake-inputs-json-gz",
+      "path": "src/objects/m42-volume/source/bake-inputs.json.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { catalogEntry, defineObjects, isHostedDescriptor, overviewLevel } from '../registry/index.js';
+import { catalogEntry, defineObjects, overviewLevel } from '../registry/index.js';
 import type { CatalogEntry, NavigationDistance, OverviewObject } from '../registry/index.js';
 
 const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
@@ -36,12 +36,11 @@ export async function readCatalog(objectsDirectory: string, distance: (descripto
   return entries;
 }
 
-/** A descriptor that mounts no scene of its own is application context: the world loads its prepared resources directly. One
- * with a catalogue entry is also an object of the registry, drawn by the world's host (isHostedDescriptor). */
+/** A descriptor that mounts no scene of its own is application context: the world loads its prepared resources directly. */
 export async function readContextObjects(objectsDirectory: string, descriptors?: ObjectDescriptors) {
   const contexts: { id: string; type: string }[] = [];
   for (const [name, descriptor] of descriptors ?? await readObjectDescriptors(objectsDirectory)) {
-    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog !== undefined && !isHostedDescriptor(descriptor) && descriptor.properties.overview === undefined) continue;
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog !== undefined && descriptor.properties.overview === undefined) continue;
     if (descriptor.id !== name || typeof descriptor.type !== 'string') throw new TypeError(`Context object identity differs: ${name}.`);
     contexts.push({ id: name, type: descriptor.type });
   }

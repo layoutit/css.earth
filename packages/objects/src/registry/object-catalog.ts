@@ -6,7 +6,7 @@ import { defineObject, OBJECT_CLASSIFICATIONS } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
-import { destinationSearchNames, isHostedDescriptor, sceneDescriptorOf } from './navigable-object.js';
+import { destinationSearchNames } from './navigable-object.js';
 import type { NavigableObject } from './navigable-object.js';
 import { overviewLevel } from './overview-object.js';
 
@@ -84,11 +84,11 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   loadScene: (descriptor: Record<string, unknown>) => ObjectDefinitionInput<Scene, Signal>['loadScene']): NavigableObject<Scene, Signal> {
   if (!isRecord(value) || !isRecord(value.descriptor) || !isRecord(value.descriptor.properties) || typeof value.descriptor.id !== 'string') throw new TypeError('Invalid catalogue entry.');
   const descriptor = value.descriptor, properties = value.descriptor.properties, id = value.descriptor.id, level = overviewLevel(descriptor);
-  // A bank package has a scene of its own once its body-less scene is prepared (`properties.scene`).
-  const placed = properties.catalog !== undefined, scene = placed && level === null && (!isHostedDescriptor(descriptor) || properties.scene !== undefined);
+  // A package with a catalogue entry that is not a level mounts its own scene.
+  const placed = properties.catalog !== undefined, scene = placed && level === null;
   if (!placed && level === null) throw new TypeError(`Invalid catalogue entry: ${id} has neither a catalogue entry nor an overview.`);
   if (!scene && (typeof value.sceneHostId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.sceneHostId))) throw new TypeError(`Invalid catalogue entry: ${id} names no scene host.`);
-  const entry = placed ? catalogEntry(descriptor, scene ? loadScene(sceneDescriptorOf(descriptor)) : async () => { throw new Error(`${id} has no scene of its own.`); },
+  const entry = placed ? catalogEntry(descriptor, scene ? loadScene(descriptor) : async () => { throw new Error(`${id} has no scene of its own.`); },
     parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery)) : null;
   // An object with alternate names is found by them: search matches its id, its name and each alias.
   const searchNames = entry?.aliases.length ? { searchNames: Object.freeze(destinationSearchNames([id, entry.name, ...entry.aliases])) } : {};

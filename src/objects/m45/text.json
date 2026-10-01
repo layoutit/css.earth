@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "m45",
   "card": {
-    "text": "The Pleiades is an open star cluster surrounded by reflection nebulosity. Its stars lie about 136 parsecs away; the dust may not.",
+    "text": "The Pleiades is an open star cluster surrounded by reflection nebulosity.",
     "sources": [
       {
         "catalogueId": "melis-2014",
@@ -27,29 +27,74 @@
   },
   "datasets": {
     "optical-composite": {
-      "title": "Pleiades optical cloud with wider image coverage",
-      "detail": "8000 × 5199 px · wide optical source",
-      "summary": "Wide optical photograph with central detail from NOIRLab; cloud depth is inferred and fine filaments are softened."
+      "title": "Pleiades optical cloud, wider field",
+      "detail": "8000 × 5199 px",
+      "summary": "Wide optical photograph with central detail from NOIRLab; cloud depth is inferred and fine filaments are softened.",
+      "sources": [
+        {
+          "catalogueId": "niittee-plejades",
+          "url": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+          "label": "Pleiades · Tõrva / Niittee · wide optical; Taavi Niittee / Tõrva Astronomy Club",
+          "checked": "2026-10-01",
+          "locator": "Pleiades · Tõrva / Niittee · wide optical"
+        }
+      ]
     },
     "noirlab-optical": {
-      "title": "Pleiades reflection filaments in visible light",
+      "title": "Pleiades filaments in visible light",
       "detail": "4000 × 2920 px",
-      "summary": "Optical B/V/I display on an inferred reflection cloud; this image covers only the central region."
+      "summary": "Optical B/V/I display on an inferred reflection cloud; this image covers only the central region.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-noao-m45",
+          "url": "https://noirlab.edu/public/images/noao-m45/",
+          "label": "Pleiades · NOIRLab · optical B / V / I; NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+          "checked": "2026-10-01",
+          "locator": "Pleiades · NOIRLab · optical B / V / I"
+        }
+      ]
     },
     "spitzer-irac": {
       "title": "Pleiades dust in the Spitzer IRAC bands",
       "detail": "2855 × 2855 px",
-      "summary": "IRAC infrared false color on an inferred cloud; the image covers only its central region."
+      "summary": "IRAC infrared false color on an inferred cloud; the image covers only its central region.",
+      "sources": [
+        {
+          "catalogueId": "nasa-pia09262",
+          "url": "https://science.nasa.gov/photojournal/pink-pleiades/",
+          "label": "Pleiades · Spitzer · IRAC 3.6–8 µm; NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+          "checked": "2026-10-01",
+          "locator": "Pleiades · Spitzer · IRAC 3.6–8 µm"
+        }
+      ]
     },
     "spitzer-irac-mips": {
-      "title": "Pleiades warm dust through 24 micrometres",
+      "title": "Pleiades warm dust to 24 micrometres",
       "detail": "2855 × 2855 px",
-      "summary": "IRAC/MIPS infrared false color on an inferred cloud; the image covers only its central region."
+      "summary": "IRAC/MIPS infrared false color on an inferred cloud; the image covers only its central region.",
+      "sources": [
+        {
+          "catalogueId": "nasa-pia09263",
+          "url": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
+          "label": "Pleiades · Spitzer · IRAC + MIPS 4.5–24 µm; NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+          "checked": "2026-10-01",
+          "locator": "Pleiades · Spitzer · IRAC + MIPS 4.5–24 µm"
+        }
+      ]
     },
     "wise-four-band": {
       "title": "The wider Pleiades infrared cloud",
       "detail": "4007 × 3061 px",
-      "summary": "WISE infrared false color on an inferred reflection cloud; dust depth and scattering are not recovered."
+      "summary": "WISE infrared false color on an inferred reflection cloud; dust depth and scattering are not recovered.",
+      "sources": [
+        {
+          "catalogueId": "nasa-pia13121",
+          "url": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
+          "label": "Pleiades · WISE · 3.4–22 µm wide field; NASA/JPL-Caltech/UCLA",
+          "checked": "2026-10-01",
+          "locator": "Pleiades · WISE · 3.4–22 µm wide field"
+        }
+      ]
     }
   }
 }

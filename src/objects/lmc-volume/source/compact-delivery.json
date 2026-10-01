@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-compact-density-delivery@1",
+  "id": "lmc-volume",
+  "delivery": {
+    "directory": "src/objects/lmc-volume",
+    "method": "finite-emission",
+    "compactInputs": {
+      "path": "src/objects/lmc-volume/source/compact/inputs.json"
+    }
+  },
+  "researchRecipe": {
+    "path": "labs/nebula/models/lmc/envelope/app-datasets.json"
+  }
+}

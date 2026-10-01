@@ -101,7 +101,8 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   if (catalogueBytes === null && recipe.attachedTo === undefined) throw new TypeError('A nebula delivery without a catalogue entry names the body it attaches to.');
   if (catalogueBytes !== null) {
     const catalogue = parsePreparedNebulaCatalog(JSON.parse(catalogueBytes.toString()) as unknown);
-    if (catalogue.objects.length !== 1 || catalogue.objects[0]!.id !== recipe.id ||
+    // The catalogue row names the nebula; the package it details to is this delivery's bank.
+    if (catalogue.objects.length !== 1 || catalogue.objects[0]!.detailedObjectId !== recipe.id ||
         catalogue.objects[0]!.distance.valuePc !== recipe.sky.distancePc ||
         catalogue.objects[0]!.skyPosition.raDeg !== recipe.sky.centerIcrsDegrees[0] ||
         catalogue.objects[0]!.skyPosition.decDeg !== recipe.sky.centerIcrsDegrees[1]) throw new TypeError('Nebula catalogue and delivery identity/sky frame differ.');

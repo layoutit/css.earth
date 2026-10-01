@@ -155,7 +155,7 @@ test('runtime validation rejects lossy identifiers, malformed uncertainty, dupli
 });
 
 test('the acquired Crab catalogue prepares a nonempty physical volume with pinned uncertainty and no image stars', async () => {
-  const path = 'src/objects/m1/source/stellar-field.json', bytes = await readFile(path);
+  const path = 'src/objects/m1-volume/source/stellar-field.json', bytes = await readFile(path);
   const target = embedNebulaFrame(frame, { centerIcrsDegrees: [83.6334511837, 22.0151236394], distancePc: 2000, imageRotationDegrees: 0, arcsecPerUnit: 1 });
   const result = await prepareNebulaCatalogueField(process.cwd(), { path }, target, [{ ...retainedPoint, id: 'crab-pulsar' }]);
   assert.ok(result.receipt.catalogueCount > 0); assert.ok(result.receipt.maximumRelativeDistanceHalfWidth > 0);
@@ -166,7 +166,7 @@ test('the acquired Crab catalogue prepares a nonempty physical volume with pinne
 });
 
 test('the checked-in Helix selection retains wide-image cores and its central star across the budget and datasets', async () => {
-  const path = 'src/objects/helix/source/stellar-field.json', bytes = await readFile(path);
+  const path = 'src/objects/helix-volume/source/stellar-field.json', bytes = await readFile(path);
   const source: unknown = JSON.parse(bytes.toString());
   assert.ok(source && typeof source === 'object' && 'selection' in source && 'provenance' in source);
   const selection = source.selection, provenance = source.provenance;
@@ -208,12 +208,12 @@ test('the checked-in Helix selection retains wide-image cores and its central st
 });
 
 test('catalogue refresh preserves the existing Helix core identities, matching tolerance and evidence', async t => {
-  const sourceBytes = await readFile('src/objects/helix/source/stellar-field.json');
+  const sourceBytes = await readFile('src/objects/helix-volume/source/stellar-field.json');
   const source = JSON.parse(sourceBytes.toString());
-  const { root } = await fixture(t, {}), owner = join(root, 'src/objects/helix/source');
+  const { root } = await fixture(t, {}), owner = join(root, 'src/objects/helix-volume/source');
   await mkdir(owner, { recursive: true });
   await writeFile(join(owner, 'stellar-field.json'), sourceBytes);
-  await writeFile(join(owner, 'delivery.json'), await readFile('src/objects/helix/source/delivery.json'));
+  await writeFile(join(owner, 'delivery.json'), await readFile('src/objects/helix-volume/source/delivery.json'));
   // A one-row catalogue cache exercises the actual refresh CLI without requiring native processing or archive access.
   const query = source.provenance.query.replace(/^WITH candidates AS \(SELECT (?!ALL )/, 'WITH candidates AS (SELECT ALL ');
   const star = source.stars[0], columns = ['source_id', 'ra', 'dec', 'pmra', 'pmdec', 'parallax', 'parallax_error',
@@ -221,10 +221,10 @@ test('catalogue refresh preserves the existing Helix core identities, matching t
   const cells = [star.sourceId, star.raDeg, star.decDeg, star.pmRaMasYr, star.pmDecMasYr, star.parallaxMas,
     star.parallaxErrorMas, star.photGMeanMag, '', '', star.ruwe, star.distancePc, star.distanceLowerPc, star.distanceUpperPc];
   const cache = join(root, '.local/nebula-lab/stellar-fields'); await mkdir(cache, { recursive: true });
-  await writeFile(join(cache, 'helix.csv'), `${columns.join(',')}\n${cells.join(',')}\n`);
-  await writeFile(join(cache, 'helix.csv.query.json'), JSON.stringify({ query }));
+  await writeFile(join(cache, 'helix-volume.csv'), `${columns.join(',')}\n${cells.join(',')}\n`);
+  await writeFile(join(cache, 'helix-volume.csv.query.json'), JSON.stringify({ query }));
   const refreshed = spawnSync(process.execPath, ['--experimental-strip-types',
-    join(process.cwd(), 'packages/bake/cli/prepare-nebula-field-catalogues.mts'), 'helix'], { cwd: root, encoding: 'utf8', timeout: 3000 });
+    join(process.cwd(), 'packages/bake/cli/prepare-nebula-field-catalogues.mts'), 'helix-volume'], { cwd: root, encoding: 'utf8', timeout: 3000 });
   assert.equal(refreshed.status, 0, `${refreshed.error?.message ?? ''}\n${refreshed.stdout}\n${refreshed.stderr}`);
   assert.match(refreshed.stdout, /NEBULA_FIELD_CATALOGUES_COMPLETE/);
   const next = JSON.parse(await readFile(join(owner, 'stellar-field.json'), 'utf8'));

@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { defineObjects, isHostedDescriptor, type CatalogEntry } from '@cssearth/objects';
+import { defineObjects, type CatalogEntry } from '@cssearth/objects';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -173,9 +173,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // One row shape for every object: its descriptor, its distance and discovery when placed, its host when it has no scene.
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries), preparedCatalogueModule(entries.map(({ id, distance }, index) => {
     const descriptor = descriptors.get(id);
-    // A bank package whose body-less scene is not prepared yet is drawn by the world's host.
-    const sceneless = isHostedDescriptor(descriptor) && isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.scene === undefined;
-    return { descriptor, distance, discovery: discoveries[index]!, ...(sceneless ? { sceneHostId: host.id } : {}) };
+    return { descriptor, distance, discovery: discoveries[index]! };
   })));
   // Every page reads the levels, so their rows are apart and carry only what an entry reads of a descriptor.
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {

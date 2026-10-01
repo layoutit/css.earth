@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/smc/source/provenance.json",
+      "path": "src/objects/smc-volume/source/provenance.json",
       "locator": "/"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
       "scope": "Published source",
-      "evidence": "src/objects/smc/source/provenance.json"
+      "evidence": "src/objects/smc-volume/source/provenance.json"
     }
   ]
 }

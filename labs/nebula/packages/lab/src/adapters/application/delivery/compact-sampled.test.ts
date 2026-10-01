@@ -10,7 +10,7 @@ import { maximumPlanningEmission, prepareCompactSampledInputs } from '@cssearth/
 test("compact sampled replay rejects changed measured particles before any reconstruction", async () => {
   const root = await mkdtemp(join(tmpdir(), "nebula-sampled-"));
   try {
-    const path = "src/objects/m1/source/compact/model.json.gz";
+    const path = "src/objects/m1-volume/source/compact/model.json.gz";
     const bytes = await readFile(path);
     const model: unknown = JSON.parse(gunzipSync(bytes).toString());
     assert.ok(
@@ -56,7 +56,7 @@ test('sampled planning preserves features unique to any dataset without changing
 test('retained sampled loader rejects a renamed scene before reading particles or writing outputs', async () => {
   const root = await mkdtemp(join(tmpdir(), 'nebula-retained-sampled-'));
   try {
-    const value: unknown = JSON.parse(gunzipSync(await readFile('src/objects/m1/source/compact/model.json.gz')).toString());
+    const value: unknown = JSON.parse(gunzipSync(await readFile('src/objects/m1-volume/source/compact/model.json.gz')).toString());
     assert.ok(jointRecord(value)); value.sourceResult = 'another-result';
     const bytes = gzipSync(Buffer.from(JSON.stringify(value))), path = 'input.json.gz';
     await writeFile(join(root, path), bytes);

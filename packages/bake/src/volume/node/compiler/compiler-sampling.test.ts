@@ -32,7 +32,7 @@ test('the actual compiler default creates a bounded plan without an opt-in sampl
 });
 
 test('actual accepted M42 sampling bypasses optimization with its historical omission unchanged', async () => {
-  const compact = readCompactCompiler(JSON.parse(gunzipSync(await readFile(fileURLToPath(new URL('../../../../../../src/objects/m42/source/bake-inputs.json.gz', import.meta.url)))).toString()));
+  const compact = readCompactCompiler(JSON.parse(gunzipSync(await readFile(fileURLToPath(new URL('../../../../../../src/objects/m42-volume/source/bake-inputs.json.gz', import.meta.url)))).toString()));
   const saved = compact.scene.sampling, before = JSON.stringify(saved);
   assert.equal(saved.layerPlan, undefined);
   const forbidden = () => { throw new Error('Historical replay must not probe or replan the source field.'); };

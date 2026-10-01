@@ -1,0 +1,133 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "lmc-volume",
+  "name": "Large Magellanic Cloud",
+  "host": "lmc",
+  "defaultDataset": "horalek-widefield",
+  "bank": {
+    "path": "src/objects/lmc-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "recipe-1",
+      "path": "src/objects/lmc-volume/source/lenses.json"
+    },
+    {
+      "id": "recipe-2",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/envelope/emission-envelope.json"
+    },
+    {
+      "id": "recipe-3",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/envelope/finite-lenses.json"
+    },
+    {
+      "id": "recipe-4",
+      "path": "src/objects/lmc-volume/source/compact/prior/volume.json"
+    },
+    {
+      "id": "recipe-5",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/candidates/source/alignment-report.json"
+    },
+    {
+      "id": "recipe-6",
+      "path": "src/objects/lmc-volume/source/lens-settings-evidence.json"
+    }
+  ],
+  "sharedInputs": [
+    "density-prior",
+    "catalogue-stars",
+    "sky-registration"
+  ],
+  "datasets": [
+    {
+      "id": "horalek-widefield",
+      "label": "Horálek optical",
+      "title": "Petr Horálek’s visible-light LMC",
+      "description": "Optical photograph colours are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "6582 × 4388 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Visible-light photograph"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "6582 × 4388"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Image-fitted emission on a simulated stellar-density envelope"
+        }
+      ],
+      "input": "horalek-widefield",
+      "preview": {
+        "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg"
+      }
+    },
+    {
+      "id": "vista-infrared",
+      "label": "ESO VISTA",
+      "title": "LMC in near infrared",
+      "description": "Near-infrared colours from ESO's VISTA survey are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All datasets share one opacity, so this dataset renders brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "8954 × 10000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Near-infrared · Y / J / Ks"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "8954 × 10000"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Image-fitted emission on a simulated stellar-density envelope"
+        }
+      ],
+      "input": "vista-infrared",
+      "preview": {
+        "path": ".local/nebula-presentation/lmc-vista-infrared.jpg",
+        "url": "https://cdn.eso.org/images/screen/eso1914a.jpg"
+      }
+    },
+    {
+      "id": "wise-wide-infrared",
+      "label": "NASA AllWISE",
+      "title": "LMC in WISE infrared",
+      "description": "Infrared colours from the NASA/IPAC AllWISE mosaic are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All datasets share one opacity, so this dataset renders much brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "6000 × 6000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Infrared display color · W4 / W2 / W1"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "6000 × 6000"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Image-fitted emission on a simulated stellar-density envelope"
+        }
+      ],
+      "input": "wise-wide-infrared",
+      "preview": {
+        "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg"
+      }
+    }
+  ]
+}

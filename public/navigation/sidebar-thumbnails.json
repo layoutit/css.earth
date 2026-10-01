@@ -55,71 +55,71 @@
       "bytes": 4052
     },
     {
-      "path": "src/objects/helix/prepared/presentation.json",
-      "bytes": 4697
+      "path": "src/objects/helix-volume/prepared/presentation.json",
+      "bytes": 3733
     },
     {
-      "path": "public/scenes/helix/datasets/eso-vista.webp",
+      "path": "public/scenes/helix-volume/datasets/eso-vista.webp",
       "bytes": 39332
     },
     {
-      "path": "public/scenes/helix/datasets/eso-wfi.webp",
+      "path": "public/scenes/helix-volume/datasets/eso-wfi.webp",
       "bytes": 9410
     },
     {
-      "path": "public/scenes/helix/datasets/eso-wide.webp",
+      "path": "public/scenes/helix-volume/datasets/eso-wide.webp",
       "bytes": 8158
     },
     {
-      "path": "src/objects/lmc/prepared/presentation.json",
-      "bytes": 4804
+      "path": "src/objects/lmc-volume/prepared/presentation.json",
+      "bytes": 3840
     },
     {
-      "path": "public/scenes/lmc/datasets/horalek-widefield.webp",
+      "path": "public/scenes/lmc-volume/datasets/horalek-widefield.webp",
       "bytes": 17694
     },
     {
-      "path": "public/scenes/lmc/datasets/vista-infrared.webp",
+      "path": "public/scenes/lmc-volume/datasets/vista-infrared.webp",
       "bytes": 26292
     },
     {
-      "path": "public/scenes/lmc/datasets/wise-wide-infrared.webp",
+      "path": "public/scenes/lmc-volume/datasets/wise-wide-infrared.webp",
       "bytes": 2868
     },
     {
-      "path": "src/objects/m1/prepared/presentation.json",
-      "bytes": 10248
+      "path": "src/objects/m1-volume/prepared/presentation.json",
+      "bytes": 8333
     },
     {
-      "path": "public/scenes/m1/datasets/hubble-optical.webp",
+      "path": "public/scenes/m1-volume/datasets/hubble-optical.webp",
       "bytes": 33070
     },
     {
-      "path": "public/scenes/m1/datasets/webb-infrared.webp",
+      "path": "public/scenes/m1-volume/datasets/webb-infrared.webp",
       "bytes": 24098
     },
     {
-      "path": "public/scenes/m1/datasets/webb-components.webp",
+      "path": "public/scenes/m1-volume/datasets/webb-components.webp",
       "bytes": 23986
     },
     {
-      "path": "public/scenes/m1/datasets/spitzer-infrared.webp",
+      "path": "public/scenes/m1-volume/datasets/spitzer-infrared.webp",
       "bytes": 3424
     },
     {
-      "path": "public/scenes/m1/datasets/vla-radio.webp",
+      "path": "public/scenes/m1-volume/datasets/vla-radio.webp",
       "bytes": 5446
     },
     {
-      "path": "public/scenes/m1/datasets/chandra-xray.webp",
+      "path": "public/scenes/m1-volume/datasets/chandra-xray.webp",
       "bytes": 4464
     },
     {
-      "path": "src/objects/m2-9/prepared/presentation.json",
-      "bytes": 1842
+      "path": "src/objects/m2-9-volume/prepared/presentation.json",
+      "bytes": 1512
     },
     {
-      "path": "public/scenes/m2-9/datasets/hst-optical.webp",
+      "path": "public/scenes/m2-9-volume/datasets/hst-optical.webp",
       "bytes": 14756
     },
     {
@@ -139,55 +139,55 @@
       "bytes": 15530
     },
     {
-      "path": "src/objects/m42/prepared/presentation.json",
-      "bytes": 3234
+      "path": "src/objects/m42-volume/prepared/presentation.json",
+      "bytes": 2587
     },
     {
-      "path": "public/scenes/m42/datasets/eso-optical.webp",
+      "path": "public/scenes/m42-volume/datasets/eso-optical.webp",
       "bytes": 10124
     },
     {
-      "path": "public/scenes/m42/datasets/eso-vista.webp",
+      "path": "public/scenes/m42-volume/datasets/eso-vista.webp",
       "bytes": 16000
     },
     {
-      "path": "src/objects/m45/prepared/presentation.json",
-      "bytes": 8154
+      "path": "src/objects/m45-volume/prepared/presentation.json",
+      "bytes": 6556
     },
     {
-      "path": "public/scenes/m45/datasets/optical-composite.webp",
+      "path": "public/scenes/m45-volume/datasets/optical-composite.webp",
       "bytes": 14636
     },
     {
-      "path": "public/scenes/m45/datasets/noirlab-optical.webp",
+      "path": "public/scenes/m45-volume/datasets/noirlab-optical.webp",
       "bytes": 11712
     },
     {
-      "path": "public/scenes/m45/datasets/spitzer-irac.webp",
+      "path": "public/scenes/m45-volume/datasets/spitzer-irac.webp",
       "bytes": 14772
     },
     {
-      "path": "public/scenes/m45/datasets/spitzer-irac-mips.webp",
+      "path": "public/scenes/m45-volume/datasets/spitzer-irac-mips.webp",
       "bytes": 13854
     },
     {
-      "path": "public/scenes/m45/datasets/wise-four-band.webp",
+      "path": "public/scenes/m45-volume/datasets/wise-four-band.webp",
       "bytes": 20398
     },
     {
-      "path": "src/objects/m8/prepared/presentation.json",
-      "bytes": 5263
+      "path": "src/objects/m8-volume/prepared/presentation.json",
+      "bytes": 4299
     },
     {
-      "path": "public/scenes/m8/datasets/eso-optical.webp",
+      "path": "public/scenes/m8-volume/datasets/eso-optical.webp",
       "bytes": 21732
     },
     {
-      "path": "public/scenes/m8/datasets/eso-vista.webp",
+      "path": "public/scenes/m8-volume/datasets/eso-vista.webp",
       "bytes": 51638
     },
     {
-      "path": "public/scenes/m8/datasets/spitzer-mid-infrared.webp",
+      "path": "public/scenes/m8-volume/datasets/spitzer-mid-infrared.webp",
       "bytes": 36602
     },
     {
@@ -207,11 +207,11 @@
       "bytes": 14088
     },
     {
-      "path": "src/objects/m87/prepared/presentation.json",
-      "bytes": 1343
+      "path": "src/objects/m87-volume/prepared/presentation.json",
+      "bytes": 1013
     },
     {
-      "path": "public/scenes/m87/datasets/eso-optical.webp",
+      "path": "public/scenes/m87-volume/datasets/eso-optical.webp",
       "bytes": 33532
     },
     {
@@ -231,15 +231,15 @@
       "bytes": 15188
     },
     {
-      "path": "src/objects/omega-centauri/prepared/presentation.json",
-      "bytes": 3983
+      "path": "src/objects/omega-centauri-volume/prepared/presentation.json",
+      "bytes": 3228
     },
     {
-      "path": "public/scenes/omega-centauri/datasets/eso1119b.webp",
+      "path": "public/scenes/omega-centauri-volume/datasets/eso1119b.webp",
       "bytes": 54638
     },
     {
-      "path": "public/scenes/omega-centauri/datasets/eso0844a.webp",
+      "path": "public/scenes/omega-centauri-volume/datasets/eso0844a.webp",
       "bytes": 74642
     },
     {
@@ -251,27 +251,27 @@
       "bytes": 5604
     },
     {
-      "path": "src/objects/smc/prepared/presentation.json",
-      "bytes": 7624
+      "path": "src/objects/smc-volume/prepared/presentation.json",
+      "bytes": 6026
     },
     {
-      "path": "public/scenes/smc/datasets/smc-horalek-wide.webp",
+      "path": "public/scenes/smc-volume/datasets/smc-horalek-wide.webp",
       "bytes": 19112
     },
     {
-      "path": "public/scenes/smc/datasets/smc-vista.webp",
+      "path": "public/scenes/smc-volume/datasets/smc-vista.webp",
       "bytes": 23910
     },
     {
-      "path": "public/scenes/smc/datasets/smc-smash.webp",
+      "path": "public/scenes/smc-volume/datasets/smc-smash.webp",
       "bytes": 31424
     },
     {
-      "path": "public/scenes/smc/datasets/smc-dss2.webp",
+      "path": "public/scenes/smc-volume/datasets/smc-dss2.webp",
       "bytes": 27364
     },
     {
-      "path": "public/scenes/smc/datasets/smc-allwise-wide.webp",
+      "path": "public/scenes/smc-volume/datasets/smc-allwise-wide.webp",
       "bytes": 3552
     },
     {
@@ -385,119 +385,119 @@
       "credit": "NASA/ESA/CSA JWST, MAST",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf"
     },
-    "helix/eso-vista": {
-      "url2x": "/navigation/focus-helix-eso-vista@2x.webp",
+    "helix-volume/eso-vista": {
+      "url2x": "/navigation/focus-helix-volume-eso-vista@2x.webp",
       "inputs": [
-        "src/objects/helix/prepared/presentation.json",
-        "public/scenes/helix/datasets/eso-vista.webp"
+        "src/objects/helix-volume/prepared/presentation.json",
+        "public/scenes/helix-volume/datasets/eso-vista.webp"
       ],
       "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
       "sourceUrl": "https://www.eso.org/public/images/eso1205a/"
     },
-    "helix/eso-wfi": {
-      "url2x": "/navigation/focus-helix-eso-wfi@2x.webp",
+    "helix-volume/eso-wfi": {
+      "url2x": "/navigation/focus-helix-volume-eso-wfi@2x.webp",
       "inputs": [
-        "src/objects/helix/prepared/presentation.json",
-        "public/scenes/helix/datasets/eso-wfi.webp"
+        "src/objects/helix-volume/prepared/presentation.json",
+        "public/scenes/helix-volume/datasets/eso-wfi.webp"
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0907a/"
     },
-    "helix/eso-wide": {
-      "url2x": "/navigation/focus-helix-eso-wide@2x.webp",
+    "helix-volume/eso-wide": {
+      "url2x": "/navigation/focus-helix-volume-eso-wide@2x.webp",
       "inputs": [
-        "src/objects/helix/prepared/presentation.json",
-        "public/scenes/helix/datasets/eso-wide.webp"
+        "src/objects/helix-volume/prepared/presentation.json",
+        "public/scenes/helix-volume/datasets/eso-wide.webp"
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/helix/"
     },
-    "lmc/horalek-widefield": {
-      "url2x": "/navigation/focus-lmc-horalek-widefield@2x.webp",
+    "lmc-volume/horalek-widefield": {
+      "url2x": "/navigation/focus-lmc-volume-horalek-widefield@2x.webp",
       "inputs": [
-        "src/objects/lmc/prepared/presentation.json",
-        "public/scenes/lmc/datasets/horalek-widefield.webp"
+        "src/objects/lmc-volume/prepared/presentation.json",
+        "public/scenes/lmc-volume/datasets/horalek-widefield.webp"
       ],
       "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/"
     },
-    "lmc/vista-infrared": {
-      "url2x": "/navigation/focus-lmc-vista-infrared@2x.webp",
+    "lmc-volume/vista-infrared": {
+      "url2x": "/navigation/focus-lmc-volume-vista-infrared@2x.webp",
       "inputs": [
-        "src/objects/lmc/prepared/presentation.json",
-        "public/scenes/lmc/datasets/vista-infrared.webp"
+        "src/objects/lmc-volume/prepared/presentation.json",
+        "public/scenes/lmc-volume/datasets/vista-infrared.webp"
       ],
       "credit": "ESO/VMC Survey",
       "sourceUrl": "https://www.eso.org/public/images/eso1914a/"
     },
-    "lmc/wise-wide-infrared": {
-      "url2x": "/navigation/focus-lmc-wise-wide-infrared@2x.webp",
+    "lmc-volume/wise-wide-infrared": {
+      "url2x": "/navigation/focus-lmc-volume-wise-wide-infrared@2x.webp",
       "inputs": [
-        "src/objects/lmc/prepared/presentation.json",
-        "public/scenes/lmc/datasets/wise-wide-infrared.webp"
+        "src/objects/lmc-volume/prepared/presentation.json",
+        "public/scenes/lmc-volume/datasets/wise-wide-infrared.webp"
       ],
       "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
       "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
     },
-    "m1/hubble-optical": {
-      "url2x": "/navigation/focus-m1-hubble-optical@2x.webp",
+    "m1-volume/hubble-optical": {
+      "url2x": "/navigation/focus-m1-volume-hubble-optical@2x.webp",
       "inputs": [
-        "src/objects/m1/prepared/presentation.json",
-        "public/scenes/m1/datasets/hubble-optical.webp"
+        "src/objects/m1-volume/prepared/presentation.json",
+        "public/scenes/m1-volume/datasets/hubble-optical.webp"
       ],
       "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "sourceUrl": "https://esahubble.org/images/heic0515a/"
     },
-    "m1/webb-infrared": {
-      "url2x": "/navigation/focus-m1-webb-infrared@2x.webp",
+    "m1-volume/webb-infrared": {
+      "url2x": "/navigation/focus-m1-volume-webb-infrared@2x.webp",
       "inputs": [
-        "src/objects/m1/prepared/presentation.json",
-        "public/scenes/m1/datasets/webb-infrared.webp"
+        "src/objects/m1-volume/prepared/presentation.json",
+        "public/scenes/m1-volume/datasets/webb-infrared.webp"
       ],
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "sourceUrl": "https://esawebb.org/images/weic2326a/"
     },
-    "m1/webb-components": {
-      "url2x": "/navigation/focus-m1-webb-components@2x.webp",
+    "m1-volume/webb-components": {
+      "url2x": "/navigation/focus-m1-volume-webb-components@2x.webp",
       "inputs": [
-        "src/objects/m1/prepared/presentation.json",
-        "public/scenes/m1/datasets/webb-components.webp"
+        "src/objects/m1-volume/prepared/presentation.json",
+        "public/scenes/m1-volume/datasets/webb-components.webp"
       ],
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "sourceUrl": "https://esawebb.org/images/weic2417a/"
     },
-    "m1/spitzer-infrared": {
-      "url2x": "/navigation/focus-m1-spitzer-infrared@2x.webp",
+    "m1-volume/spitzer-infrared": {
+      "url2x": "/navigation/focus-m1-volume-spitzer-infrared@2x.webp",
       "inputs": [
-        "src/objects/m1/prepared/presentation.json",
-        "public/scenes/m1/datasets/spitzer-infrared.webp"
+        "src/objects/m1-volume/prepared/presentation.json",
+        "public/scenes/m1-volume/datasets/spitzer-infrared.webp"
       ],
       "credit": "JPL/Caltech",
       "sourceUrl": "https://esahubble.org/images/potw1720c/"
     },
-    "m1/vla-radio": {
-      "url2x": "/navigation/focus-m1-vla-radio@2x.webp",
+    "m1-volume/vla-radio": {
+      "url2x": "/navigation/focus-m1-volume-vla-radio@2x.webp",
       "inputs": [
-        "src/objects/m1/prepared/presentation.json",
-        "public/scenes/m1/datasets/vla-radio.webp"
+        "src/objects/m1-volume/prepared/presentation.json",
+        "public/scenes/m1-volume/datasets/vla-radio.webp"
       ],
       "credit": "NRAO/AUI/NSF",
       "sourceUrl": "https://esahubble.org/images/potw1720b/"
     },
-    "m1/chandra-xray": {
-      "url2x": "/navigation/focus-m1-chandra-xray@2x.webp",
+    "m1-volume/chandra-xray": {
+      "url2x": "/navigation/focus-m1-volume-chandra-xray@2x.webp",
       "inputs": [
-        "src/objects/m1/prepared/presentation.json",
-        "public/scenes/m1/datasets/chandra-xray.webp"
+        "src/objects/m1-volume/prepared/presentation.json",
+        "public/scenes/m1-volume/datasets/chandra-xray.webp"
       ],
       "credit": "CXC",
       "sourceUrl": "https://esahubble.org/images/potw1720f/"
     },
-    "m2-9/hst-optical": {
-      "url2x": "/navigation/focus-m2-9-hst-optical@2x.webp",
+    "m2-9-volume/hst-optical": {
+      "url2x": "/navigation/focus-m2-9-volume-hst-optical@2x.webp",
       "inputs": [
-        "src/objects/m2-9/prepared/presentation.json",
-        "public/scenes/m2-9/datasets/hst-optical.webp"
+        "src/objects/m2-9-volume/prepared/presentation.json",
+        "public/scenes/m2-9-volume/datasets/hst-optical.webp"
       ],
       "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "sourceUrl": "https://apod.nasa.gov/apod/ap040201.html"
@@ -520,92 +520,92 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1424a/"
     },
-    "m42/eso-optical": {
-      "url2x": "/navigation/focus-m42-eso-optical@2x.webp",
+    "m42-volume/eso-optical": {
+      "url2x": "/navigation/focus-m42-volume-eso-optical@2x.webp",
       "inputs": [
-        "src/objects/m42/prepared/presentation.json",
-        "public/scenes/m42/datasets/eso-optical.webp"
+        "src/objects/m42-volume/prepared/presentation.json",
+        "public/scenes/m42-volume/datasets/eso-optical.webp"
       ],
       "credit": "ESO/G. Beccari",
       "sourceUrl": "https://www.eso.org/public/images/eso1723a/"
     },
-    "m42/eso-vista": {
-      "url2x": "/navigation/focus-m42-eso-vista@2x.webp",
+    "m42-volume/eso-vista": {
+      "url2x": "/navigation/focus-m42-volume-eso-vista@2x.webp",
       "inputs": [
-        "src/objects/m42/prepared/presentation.json",
-        "public/scenes/m42/datasets/eso-vista.webp"
+        "src/objects/m42-volume/prepared/presentation.json",
+        "public/scenes/m42-volume/datasets/eso-vista.webp"
       ],
       "credit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
       "sourceUrl": "https://www.eso.org/public/images/eso1006a/"
     },
-    "m45/optical-composite": {
-      "url2x": "/navigation/focus-m45-optical-composite@2x.webp",
+    "m45-volume/optical-composite": {
+      "url2x": "/navigation/focus-m45-volume-optical-composite@2x.webp",
       "inputs": [
-        "src/objects/m45/prepared/presentation.json",
-        "public/scenes/m45/datasets/optical-composite.webp"
+        "src/objects/m45-volume/prepared/presentation.json",
+        "public/scenes/m45-volume/datasets/optical-composite.webp"
       ],
       "credit": "Taavi Niittee / Tõrva Astronomy Club",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg"
     },
-    "m45/noirlab-optical": {
-      "url2x": "/navigation/focus-m45-noirlab-optical@2x.webp",
+    "m45-volume/noirlab-optical": {
+      "url2x": "/navigation/focus-m45-volume-noirlab-optical@2x.webp",
       "inputs": [
-        "src/objects/m45/prepared/presentation.json",
-        "public/scenes/m45/datasets/noirlab-optical.webp"
+        "src/objects/m45-volume/prepared/presentation.json",
+        "public/scenes/m45-volume/datasets/noirlab-optical.webp"
       ],
       "credit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
       "sourceUrl": "https://noirlab.edu/public/images/noao-m45/"
     },
-    "m45/spitzer-irac": {
-      "url2x": "/navigation/focus-m45-spitzer-irac@2x.webp",
+    "m45-volume/spitzer-irac": {
+      "url2x": "/navigation/focus-m45-volume-spitzer-irac@2x.webp",
       "inputs": [
-        "src/objects/m45/prepared/presentation.json",
-        "public/scenes/m45/datasets/spitzer-irac.webp"
+        "src/objects/m45-volume/prepared/presentation.json",
+        "public/scenes/m45-volume/datasets/spitzer-irac.webp"
       ],
       "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
       "sourceUrl": "https://science.nasa.gov/photojournal/pink-pleiades/"
     },
-    "m45/spitzer-irac-mips": {
-      "url2x": "/navigation/focus-m45-spitzer-irac-mips@2x.webp",
+    "m45-volume/spitzer-irac-mips": {
+      "url2x": "/navigation/focus-m45-volume-spitzer-irac-mips@2x.webp",
       "inputs": [
-        "src/objects/m45/prepared/presentation.json",
-        "public/scenes/m45/datasets/spitzer-irac-mips.webp"
+        "src/objects/m45-volume/prepared/presentation.json",
+        "public/scenes/m45-volume/datasets/spitzer-irac-mips.webp"
       ],
       "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
       "sourceUrl": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/"
     },
-    "m45/wise-four-band": {
-      "url2x": "/navigation/focus-m45-wise-four-band@2x.webp",
+    "m45-volume/wise-four-band": {
+      "url2x": "/navigation/focus-m45-volume-wise-four-band@2x.webp",
       "inputs": [
-        "src/objects/m45/prepared/presentation.json",
-        "public/scenes/m45/datasets/wise-four-band.webp"
+        "src/objects/m45-volume/prepared/presentation.json",
+        "public/scenes/m45-volume/datasets/wise-four-band.webp"
       ],
       "credit": "NASA/JPL-Caltech/UCLA",
       "sourceUrl": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
     },
-    "m8/eso-optical": {
-      "url2x": "/navigation/focus-m8-eso-optical@2x.webp",
+    "m8-volume/eso-optical": {
+      "url2x": "/navigation/focus-m8-volume-eso-optical@2x.webp",
       "inputs": [
-        "src/objects/m8/prepared/presentation.json",
-        "public/scenes/m8/datasets/eso-optical.webp"
+        "src/objects/m8-volume/prepared/presentation.json",
+        "public/scenes/m8-volume/datasets/eso-optical.webp"
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0936a/"
     },
-    "m8/eso-vista": {
-      "url2x": "/navigation/focus-m8-eso-vista@2x.webp",
+    "m8-volume/eso-vista": {
+      "url2x": "/navigation/focus-m8-volume-eso-vista@2x.webp",
       "inputs": [
-        "src/objects/m8/prepared/presentation.json",
-        "public/scenes/m8/datasets/eso-vista.webp"
+        "src/objects/m8-volume/prepared/presentation.json",
+        "public/scenes/m8-volume/datasets/eso-vista.webp"
       ],
       "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "sourceUrl": "https://www.eso.org/public/images/eso1101d/"
     },
-    "m8/spitzer-mid-infrared": {
-      "url2x": "/navigation/focus-m8-spitzer-mid-infrared@2x.webp",
+    "m8-volume/spitzer-mid-infrared": {
+      "url2x": "/navigation/focus-m8-volume-spitzer-mid-infrared@2x.webp",
       "inputs": [
-        "src/objects/m8/prepared/presentation.json",
-        "public/scenes/m8/datasets/spitzer-mid-infrared.webp"
+        "src/objects/m8-volume/prepared/presentation.json",
+        "public/scenes/m8-volume/datasets/spitzer-mid-infrared.webp"
       ],
       "credit": "NASA/JPL-Caltech; CDS",
       "sourceUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/"
@@ -628,11 +628,11 @@
       "credit": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
       "sourceUrl": "https://www.eso.org/public/images/m83/"
     },
-    "m87/eso-optical": {
-      "url2x": "/navigation/focus-m87-eso-optical@2x.webp",
+    "m87-volume/eso-optical": {
+      "url2x": "/navigation/focus-m87-volume-eso-optical@2x.webp",
       "inputs": [
-        "src/objects/m87/prepared/presentation.json",
-        "public/scenes/m87/datasets/eso-optical.webp"
+        "src/objects/m87-volume/prepared/presentation.json",
+        "public/scenes/m87-volume/datasets/eso-optical.webp"
       ],
       "credit": "Chris Mihos/ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1525a/"
@@ -655,20 +655,20 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
     },
-    "omega-centauri/eso1119b": {
-      "url2x": "/navigation/focus-omega-centauri-eso1119b@2x.webp",
+    "omega-centauri-volume/eso1119b": {
+      "url2x": "/navigation/focus-omega-centauri-volume-eso1119b@2x.webp",
       "inputs": [
-        "src/objects/omega-centauri/prepared/presentation.json",
-        "public/scenes/omega-centauri/datasets/eso1119b.webp"
+        "src/objects/omega-centauri-volume/prepared/presentation.json",
+        "public/scenes/omega-centauri-volume/datasets/eso1119b.webp"
       ],
       "credit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
       "sourceUrl": "https://www.eso.org/public/images/eso1119b/"
     },
-    "omega-centauri/eso0844a": {
-      "url2x": "/navigation/focus-omega-centauri-eso0844a@2x.webp",
+    "omega-centauri-volume/eso0844a": {
+      "url2x": "/navigation/focus-omega-centauri-volume-eso0844a@2x.webp",
       "inputs": [
-        "src/objects/omega-centauri/prepared/presentation.json",
-        "public/scenes/omega-centauri/datasets/eso0844a.webp"
+        "src/objects/omega-centauri-volume/prepared/presentation.json",
+        "public/scenes/omega-centauri-volume/datasets/eso0844a.webp"
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0844a/"
@@ -682,47 +682,47 @@
       "credit": "ALMA (ESO/NAOJ/NRAO)",
       "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S"
     },
-    "smc/smc-horalek-wide": {
-      "url2x": "/navigation/focus-smc-smc-horalek-wide@2x.webp",
+    "smc-volume/smc-horalek-wide": {
+      "url2x": "/navigation/focus-smc-volume-smc-horalek-wide@2x.webp",
       "inputs": [
-        "src/objects/smc/prepared/presentation.json",
-        "public/scenes/smc/datasets/smc-horalek-wide.webp"
+        "src/objects/smc-volume/prepared/presentation.json",
+        "public/scenes/smc-volume/datasets/smc-horalek-wide.webp"
       ],
       "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/"
     },
-    "smc/smc-vista": {
-      "url2x": "/navigation/focus-smc-smc-vista@2x.webp",
+    "smc-volume/smc-vista": {
+      "url2x": "/navigation/focus-smc-volume-smc-vista@2x.webp",
       "inputs": [
-        "src/objects/smc/prepared/presentation.json",
-        "public/scenes/smc/datasets/smc-vista.webp"
+        "src/objects/smc-volume/prepared/presentation.json",
+        "public/scenes/smc-volume/datasets/smc-vista.webp"
       ],
       "credit": "ESO/VISTA VMC",
       "sourceUrl": "https://www.eso.org/public/images/eso1714a/"
     },
-    "smc/smc-smash": {
-      "url2x": "/navigation/focus-smc-smc-smash@2x.webp",
+    "smc-volume/smc-smash": {
+      "url2x": "/navigation/focus-smc-volume-smc-smash@2x.webp",
       "inputs": [
-        "src/objects/smc/prepared/presentation.json",
-        "public/scenes/smc/datasets/smc-smash.webp"
+        "src/objects/smc-volume/prepared/presentation.json",
+        "public/scenes/smc-volume/datasets/smc-smash.webp"
       ],
       "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
       "sourceUrl": "https://noirlab.edu/public/images/noirlab2030b/"
     },
-    "smc/smc-dss2": {
-      "url2x": "/navigation/focus-smc-smc-dss2@2x.webp",
+    "smc-volume/smc-dss2": {
+      "url2x": "/navigation/focus-smc-volume-smc-dss2@2x.webp",
       "inputs": [
-        "src/objects/smc/prepared/presentation.json",
-        "public/scenes/smc/datasets/smc-dss2.webp"
+        "src/objects/smc-volume/prepared/presentation.json",
+        "public/scenes/smc-volume/datasets/smc-dss2.webp"
       ],
       "credit": "ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
       "sourceUrl": "https://esahubble.org/images/heic0514c/"
     },
-    "smc/smc-allwise-wide": {
-      "url2x": "/navigation/focus-smc-smc-allwise-wide@2x.webp",
+    "smc-volume/smc-allwise-wide": {
+      "url2x": "/navigation/focus-smc-volume-smc-allwise-wide@2x.webp",
       "inputs": [
-        "src/objects/smc/prepared/presentation.json",
-        "public/scenes/smc/datasets/smc-allwise-wide.webp"
+        "src/objects/smc-volume/prepared/presentation.json",
+        "public/scenes/smc-volume/datasets/smc-allwise-wide.webp"
       ],
       "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
@@ -753,23 +753,23 @@
     "betelgeuse-shell": "betelgeuse-shell/zimpol-v",
     "eps-eridani-disc": "eps-eridani-disc/dust",
     "hd-181327-disc": "hd-181327-disc/reflectance",
-    "helix": "helix/eso-wfi",
-    "lmc": "lmc/horalek-widefield",
-    "m1": "m1/hubble-optical",
-    "m2-9": "m2-9/hst-optical",
+    "helix-volume": "helix-volume/eso-wfi",
+    "lmc-volume": "lmc-volume/horalek-widefield",
+    "m1-volume": "m1-volume/hubble-optical",
+    "m2-9-volume": "m2-9-volume/hst-optical",
     "m31-layers": "m31-layers/optical",
     "m33-layers": "m33-layers/optical",
-    "m42": "m42/eso-optical",
-    "m45": "m45/optical-composite",
-    "m8": "m8/eso-optical",
+    "m42-volume": "m42-volume/eso-optical",
+    "m45-volume": "m45-volume/optical-composite",
+    "m8-volume": "m8-volume/eso-optical",
     "m81-layers": "m81-layers/optical",
     "m83-layers": "m83-layers/optical",
-    "m87": "m87/eso-optical",
+    "m87-volume": "m87-volume/eso-optical",
     "ngc-253-layers": "ngc-253-layers/optical",
     "ngc-300-layers": "ngc-300-layers/optical",
-    "omega-centauri": "omega-centauri/eso1119b",
+    "omega-centauri-volume": "omega-centauri-volume/eso1119b",
     "pds-70-disc": "pds-70-disc/dust",
-    "smc": "smc/smc-horalek-wide",
+    "smc-volume": "smc-volume/smc-horalek-wide",
     "sun-cor1-density": "sun-cor1-density/electron-density",
     "milky-way": "milky-way/volume"
   }

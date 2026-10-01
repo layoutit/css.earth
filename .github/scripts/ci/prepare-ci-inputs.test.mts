@@ -39,7 +39,7 @@ async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) 
   await inventory('milky-way', 'prepared', ['volume.json', 'slices/z/one.webp']);
   await inventory('helix', 'prepared', ['datasets.json', 'slice.webp', 'presentation.json']);
   await inventory('helix', 'runtime', ['unrelated-preview.webp']);
-  await json('src/objects/helix/source/presentation.json', { schema: 'cssearth-volume-presentation-source@2', objectId: 'helix' });
+  await json('src/objects/helix-volume/source/presentation.json', { schema: 'cssearth-volume-presentation-source@2', objectId: 'helix' });
   await inventory('local-group', 'runtime', ['catalogue.json'], 'prepared');
   await json('src/objects/local-group/source/presentation.json', { provenance: { products: [] } });
   const fetcher: typeof fetch = async url => {

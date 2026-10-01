@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "helix",
   "card": {
-    "text": "The Helix is a planetary nebula about 216 parsecs away. Its broad ring of glowing gas surrounds the remnant central star.",
+    "text": "The Helix is a planetary nebula about 216 parsecs away.",
     "sources": [
       {
         "catalogueId": "benedict-2009",
@@ -29,17 +29,44 @@
     "eso-vista": {
       "title": "Helix in near infrared",
       "detail": "6592 × 6592 px",
-      "summary": "Near-infrared false color on a partly velocity-constrained model; halo and bright-core depths remain inferred."
+      "summary": "Near-infrared false color on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1205a",
+          "url": "https://www.eso.org/public/images/eso1205a/",
+          "label": "Helix · eso1205a; ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
+          "checked": "2026-10-01",
+          "locator": "Helix · eso1205a"
+        }
+      ]
     },
     "eso-wfi": {
       "title": "Helix in visible light",
       "detail": "7059 × 6535 px",
-      "summary": "Optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred."
+      "summary": "Optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso0907a",
+          "url": "https://www.eso.org/public/images/eso0907a/",
+          "label": "Helix · eso0907a; ESO",
+          "checked": "2026-10-01",
+          "locator": "Helix · eso0907a"
+        }
+      ]
     },
     "eso-wide": {
       "title": "The wider Helix field",
       "detail": "6850 × 4759 px",
-      "summary": "Wide optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred."
+      "summary": "Wide optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "sources": [
+        {
+          "catalogueId": "eso-helix",
+          "url": "https://www.eso.org/public/images/helix/",
+          "label": "Helix · helix; ESO",
+          "checked": "2026-10-01",
+          "locator": "Helix · helix"
+        }
+      ]
     }
   }
 }

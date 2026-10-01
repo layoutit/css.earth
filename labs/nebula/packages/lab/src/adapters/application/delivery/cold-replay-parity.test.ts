@@ -6,7 +6,7 @@ import { readCompactCompiler } from './compact-compiler.ts';
 import { assertReplayScene } from './cold-replay-parity.ts';
 
 test('cold parity rejects independent field, frame, star, dataset and alpha mutations', async () => {
-  const input = readCompactCompiler(JSON.parse(gunzipSync(await readFile('src/objects/m42/source/bake-inputs.json.gz')).toString()));
+  const input = readCompactCompiler(JSON.parse(gunzipSync(await readFile('src/objects/m42-volume/source/bake-inputs.json.gz')).toString()));
   const expected = input.scene;
   assertReplayScene(structuredClone(expected), expected);
   for (const mutate of [

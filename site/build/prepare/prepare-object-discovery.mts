@@ -96,17 +96,11 @@ export async function preparedRuntimeCamera(path: string): Promise<unknown> {
   } finally { await handle.close(); }
 }
 
-/** A dataset package (image layers, a volume, a bank of catalogue points) has no body recipe: what it shows is its
- * observations. Images and volumes built from them are imagery; a bank of catalogue points is measured, not pictured. Each is
- * a place on the map by itself, so it is featured. */
+/** What a bank shows is its observations: images and volumes built from them are imagery; a bank of catalogue points is
+ * measured, not pictured. */
 const DATASET_PACKAGE_IMAGERY: Readonly<Record<string, boolean>> = { 'image-layer-bank': true, 'volume-dataset-bank': true, 'catalogue-point-bank': false };
 
 export async function prepareObjectDiscovery(descriptor: unknown, objectDirectory: string) {
-  if (isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.recipe === undefined && typeof descriptor.type === 'string' && Object.hasOwn(DATASET_PACKAGE_IMAGERY, descriptor.type)) {
-    const policy = discoveryPolicy(descriptor.properties.catalog);
-    return { imagery: DATASET_PACKAGE_IMAGERY[descriptor.type]!, illustration: false, featured: true,
-      ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
-  }
   if (isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length) {
     // An object with no surface shows the banks its datasets name: it is pictured when one of them is imagery. It is a
     // place on the map by itself, so it is featured.

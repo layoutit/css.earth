@@ -4,8 +4,8 @@
   "defaultDataset": "horalek-widefield",
   "framingRadiusUnits": 5,
   "evidence": {
-    "emissionRecipe": "src/objects/lmc/source/evidence/lmc/envelope/emission-envelope.json",
-    "datasetRecipe": "src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
+    "emissionRecipe": "src/objects/lmc-volume/source/evidence/lmc/envelope/emission-envelope.json",
+    "datasetRecipe": "src/objects/lmc-volume/source/evidence/lmc/envelope/finite-lenses.json"
   },
   "datasets": [
     {

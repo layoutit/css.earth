@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "49.59 kpc (−545.1 / +551.1 pc)",
+        "value": "49.59 kpc (\u2212545.1 / +551.1 pc)",
         "source": {
           "catalogueId": "publication-pietrzynski2019natur-567-200p",
           "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 78.76°, Dec -69.19°",
+        "value": "RA 78.76\u00b0, Dec -69.19\u00b0",
         "source": {
           "catalogueId": "publication-vandermarel2014apj-781-121v",
           "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781..121V",
@@ -55,7 +55,56 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "horalek-widefield",
-    "controls": []
+    "controls": [
+      {
+        "id": "horalek-widefield",
+        "label": "Hor\u00e1lek optical",
+        "thumbnail": "lmc-dataset-horalek-widefield.webp",
+        "volume": {
+          "objectId": "lmc-volume",
+          "datasetId": "horalek-widefield",
+          "surface": "horalek-widefield"
+        },
+        "source": {
+          "id": "lmc-volume-horalek-widefield",
+          "path": "../../lmc-volume/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/iotw2547a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "vista-infrared",
+        "label": "ESO VISTA",
+        "thumbnail": "lmc-dataset-vista-infrared.webp",
+        "volume": {
+          "objectId": "lmc-volume",
+          "datasetId": "vista-infrared",
+          "surface": "vista-infrared"
+        },
+        "source": {
+          "id": "lmc-volume-vista-infrared",
+          "path": "../../lmc-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1914a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "wise-wide-infrared",
+        "label": "NASA AllWISE",
+        "thumbnail": "lmc-dataset-wise-wide-infrared.webp",
+        "volume": {
+          "objectId": "lmc-volume",
+          "datasetId": "wise-wide-infrared",
+          "surface": "wise-wide-infrared"
+        },
+        "source": {
+          "id": "lmc-volume-wise-wide-infrared",
+          "path": "../../lmc-volume/source/manifest.json",
+          "url": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

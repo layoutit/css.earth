@@ -16,25 +16,25 @@ import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepar
 const root = projectRoot(import.meta.url);
 
 test('sanitizeVolumeProvenance replaces the process-pid staging directory with a stable placeholder', () => {
-  const volume = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-59471/compact/hubble-optical/datasets/hubble-optical/volume.json' } } };
+  const volume = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1-volume/.prepared-59471/compact/hubble-optical/datasets/hubble-optical/volume.json' } } };
   const sanitized = sanitizeVolumeProvenance(volume);
   assert.equal(sanitized.provenance.sourceVolume.path,
-    'src/objects/m1/.prepared-compact/compact/hubble-optical/datasets/hubble-optical/volume.json');
+    'src/objects/m1-volume/.prepared-compact/compact/hubble-optical/datasets/hubble-optical/volume.json');
   assert.doesNotMatch(sanitized.provenance.sourceVolume.path, /\.prepared-\d+/);
   // A different process's bake must record the identical, pid-independent path.
-  const otherPid = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-1/compact/hubble-optical/datasets/hubble-optical/volume.json' } } };
+  const otherPid = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1-volume/.prepared-1/compact/hubble-optical/datasets/hubble-optical/volume.json' } } };
   assert.deepEqual(sanitizeVolumeProvenance(otherPid), sanitized);
 });
 
 test('sanitizeVolumeProvenance leaves provenance without a staging path untouched', () => {
   const noProvenance = { provenance: null };
   assert.equal(sanitizeVolumeProvenance(noProvenance), noProvenance);
-  const stablePath = { provenance: { sourceVolume: { path: 'src/objects/m1/prepared/hubble-optical/volume.json' } } };
+  const stablePath = { provenance: { sourceVolume: { path: 'src/objects/m1-volume/prepared/hubble-optical/volume.json' } } };
   assert.equal(sanitizeVolumeProvenance(stablePath), stablePath);
   const noSourceVolume = { provenance: { layout: 'x' } };
   assert.equal(sanitizeVolumeProvenance(noSourceVolume), noSourceVolume);
   // Only a whole `.prepared-<pid>` path segment is the staging directory.
-  const lookalike = { provenance: { sourceVolume: { path: 'src/objects/m1/data.prepared-7/volume.json' } } };
+  const lookalike = { provenance: { sourceVolume: { path: 'src/objects/m1-volume/data.prepared-7/volume.json' } } };
   assert.equal(sanitizeVolumeProvenance(lookalike), lookalike);
 });
 
@@ -59,7 +59,7 @@ test('every volume the nebula delivery validates is sanitized, and an explicit b
 });
 
 test('a prepared m1 dataset bank, if baked locally, records no process-pid staging directory', async () => {
-  const path = resolve(root, 'src/objects/m1/prepared/datasets.json');
+  const path = resolve(root, 'src/objects/m1-volume/prepared/datasets.json');
   let bytes: string;
   try { bytes = await readFile(path, 'utf8'); }
   catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return; throw error; }

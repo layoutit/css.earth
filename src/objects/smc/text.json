@@ -29,27 +29,72 @@
     "smc-horalek-wide": {
       "title": "Petr Horálek’s wide-field SMC",
       "detail": "6069 × 4045 px",
-      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured."
+      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-iotw2615a",
+          "url": "https://noirlab.edu/public/images/iotw2615a/",
+          "label": "Small Magellanic Cloud · NOIRLab iotw2615a; NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+          "checked": "2026-10-01",
+          "locator": "Small Magellanic Cloud · NOIRLab iotw2615a"
+        }
+      ]
     },
     "smc-vista": {
       "title": "SMC in VISTA near infrared",
       "detail": "4000 × 3540 px",
-      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured."
+      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1714a",
+          "url": "https://www.eso.org/public/images/eso1714a/",
+          "label": "Small Magellanic Cloud · ESO eso1714a; ESO/VISTA VMC",
+          "checked": "2026-10-01",
+          "locator": "Small Magellanic Cloud · ESO eso1714a"
+        }
+      ]
     },
     "smc-smash": {
       "title": "SMC in the SMASH DECam survey",
       "detail": "3827 × 3190 px",
-      "summary": "DECam survey colours on an image-fitted emission model; gas and dust depth are not measured."
+      "summary": "DECam survey colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-noirlab2030b",
+          "url": "https://noirlab.edu/public/images/noirlab2030b/",
+          "label": "Small Magellanic Cloud · NOIRLab noirlab2030b; CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+          "checked": "2026-10-01",
+          "locator": "Small Magellanic Cloud · NOIRLab noirlab2030b"
+        }
+      ]
     },
     "smc-dss2": {
       "title": "SMC on Digitized Sky Survey 2 plates",
       "detail": "13096 × 13616 px",
-      "summary": "Photographic plate colours on an image-fitted emission model; gas and dust depth are not measured."
+      "summary": "Photographic plate colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic0514c",
+          "url": "https://esahubble.org/images/heic0514c/",
+          "label": "Small Magellanic Cloud · ESA/Hubble heic0514c; ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
+          "checked": "2026-10-01",
+          "locator": "Small Magellanic Cloud · ESA/Hubble heic0514c"
+        }
+      ]
     },
     "smc-allwise-wide": {
       "title": "SMC in AllWISE infrared",
       "detail": "4000 × 4000 px",
-      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured."
+      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "cds-allwise-color",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
+          "label": "Small Magellanic Cloud · AllWISE colour HiPS, 10° TAN field; IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+          "checked": "2026-10-01",
+          "locator": "Small Magellanic Cloud · AllWISE colour HiPS, 10° TAN field"
+        }
+      ]
     }
   }
 }

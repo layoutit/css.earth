@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "62.44 kpc (±470 pc statistical, ±810 pc systematic)",
+        "value": "62.44 kpc (\u00b1470 pc statistical, \u00b1810 pc systematic)",
         "source": {
           "catalogueId": "doi-10-3847-1538-4357-abbb2b",
           "url": "https://arxiv.org/abs/2010.08754",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 16.25°, Dec -72.42°",
+        "value": "RA 16.25\u00b0, Dec -72.42\u00b0",
         "source": {
           "catalogueId": "publication-stanimirovic2004apj-604-176s",
           "url": "https://ui.adsabs.harvard.edu/abs/2004ApJ...604..176S",
@@ -55,7 +55,88 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "smc-horalek-wide",
-    "controls": []
+    "controls": [
+      {
+        "id": "smc-horalek-wide",
+        "label": "Hor\u00e1lek optical",
+        "thumbnail": "smc-dataset-smc-horalek-wide.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-horalek-wide",
+          "surface": "smc-horalek-wide"
+        },
+        "source": {
+          "id": "smc-volume-smc-horalek-wide",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/iotw2615a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-vista",
+        "label": "ESO VISTA",
+        "thumbnail": "smc-dataset-smc-vista.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-vista",
+          "surface": "smc-vista"
+        },
+        "source": {
+          "id": "smc-volume-smc-vista",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1714a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-smash",
+        "label": "NOIRLab SMASH",
+        "thumbnail": "smc-dataset-smc-smash.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-smash",
+          "surface": "smc-smash"
+        },
+        "source": {
+          "id": "smc-volume-smc-smash",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noirlab2030b/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-dss2",
+        "label": "DSS2 optical",
+        "thumbnail": "smc-dataset-smc-dss2.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-dss2",
+          "surface": "smc-dss2"
+        },
+        "source": {
+          "id": "smc-volume-smc-dss2",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://esahubble.org/images/heic0514c/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-allwise-wide",
+        "label": "NASA AllWISE",
+        "thumbnail": "smc-dataset-smc-allwise-wide.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-allwise-wide",
+          "surface": "smc-allwise-wide"
+        },
+        "source": {
+          "id": "smc-volume-smc-allwise-wide",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

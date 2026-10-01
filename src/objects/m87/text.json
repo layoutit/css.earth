@@ -29,7 +29,16 @@
     "eso-optical": {
       "title": "The halo of M87 in visible light",
       "detail": "3400 × 3400 px",
-      "summary": "Deep visible-light image on an inferred symmetric volume; depth is not measured."
+      "summary": "Deep visible-light image on an inferred symmetric volume; depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1525a",
+          "url": "https://www.eso.org/public/images/eso1525a/",
+          "label": "The Halo of Galaxy Messier 87; Chris Mihos (Case Western Reserve University)/ESO",
+          "checked": "2026-10-01",
+          "locator": "The Halo of Galaxy Messier 87"
+        }
+      ]
     }
   }
 }

@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "136.2 pc (−1.2 / +1.2 pc)",
+        "value": "136.2 pc (\u22121.2 / +1.2 pc)",
         "source": {
           "catalogueId": "melis-2014",
           "url": "https://arxiv.org/pdf/1408.6544",
@@ -22,7 +22,88 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "optical-composite",
-    "controls": []
+    "controls": [
+      {
+        "id": "optical-composite",
+        "label": "Optical composite \u00b7 NOIRLab + Niittee",
+        "thumbnail": "m45-dataset-optical-composite.webp",
+        "volume": {
+          "objectId": "m45-volume",
+          "datasetId": "optical-composite",
+          "surface": "optical-composite"
+        },
+        "source": {
+          "id": "m45-volume-niittee-widefield",
+          "path": "../../m45-volume/source/manifest.json",
+          "url": "https://commons.wikimedia.org/wiki/File:Plejades.jpg"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "noirlab-optical",
+        "label": "NOIRLab \u00b7 optical B / V / I",
+        "thumbnail": "m45-dataset-noirlab-optical.webp",
+        "volume": {
+          "objectId": "m45-volume",
+          "datasetId": "noirlab-optical",
+          "surface": "noirlab-optical"
+        },
+        "source": {
+          "id": "m45-volume-noirlab-optical",
+          "path": "../../m45-volume/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noao-m45/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "spitzer-irac",
+        "label": "Spitzer \u00b7 IRAC 3.6\u20138 \u00b5m",
+        "thumbnail": "m45-dataset-spitzer-irac.webp",
+        "volume": {
+          "objectId": "m45-volume",
+          "datasetId": "spitzer-irac",
+          "surface": "spitzer-irac"
+        },
+        "source": {
+          "id": "m45-volume-spitzer-irac",
+          "path": "../../m45-volume/source/manifest.json",
+          "url": "https://science.nasa.gov/photojournal/pink-pleiades/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "spitzer-irac-mips",
+        "label": "Spitzer \u00b7 IRAC + MIPS 4.5\u201324 \u00b5m",
+        "thumbnail": "m45-dataset-spitzer-irac-mips.webp",
+        "volume": {
+          "objectId": "m45-volume",
+          "datasetId": "spitzer-irac-mips",
+          "surface": "spitzer-irac-mips"
+        },
+        "source": {
+          "id": "m45-volume-spitzer-irac-mips",
+          "path": "../../m45-volume/source/manifest.json",
+          "url": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "wise-four-band",
+        "label": "WISE \u00b7 3.4\u201322 \u00b5m wide field",
+        "thumbnail": "m45-dataset-wise-four-band.webp",
+        "volume": {
+          "objectId": "m45-volume",
+          "datasetId": "wise-four-band",
+          "surface": "wise-four-band"
+        },
+        "source": {
+          "id": "m45-volume-wise-four-band",
+          "path": "../../m45-volume/source/manifest.json",
+          "url": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

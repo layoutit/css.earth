@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "m8",
   "card": {
-    "text": "The Lagoon is a star-forming H II region about 1,326 parsecs away. Its young NGC 6530 cluster shares the surrounding cloud complex.",
+    "text": "The Lagoon is a star-forming H II region about 1,326 parsecs away.",
     "sources": [
       {
         "catalogueId": "wright-2019-kinematics",
@@ -29,17 +29,44 @@
     "eso-optical": {
       "title": "Lagoon nebula in visible light",
       "detail": "4000 × 2679 px",
-      "summary": "Optical display colors on one inferred cloud front; physical depth and foreground extinction are not recovered."
+      "summary": "Optical display colors on one inferred cloud front; physical depth and foreground extinction are not recovered.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso0936a",
+          "url": "https://www.eso.org/public/images/eso0936a/",
+          "label": "Lagoon Nebula · ESO · optical; ESO",
+          "checked": "2026-10-01",
+          "locator": "Lagoon Nebula · ESO · optical"
+        }
+      ]
     },
     "eso-vista": {
-      "title": "Lagoon stars and nebulosity in near infrared",
+      "title": "Lagoon in near infrared",
       "detail": "4000 × 2202 px",
-      "summary": "Near-infrared false color on an inferred cloud front; image coverage is narrower than the optical view."
+      "summary": "Near-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1101d",
+          "url": "https://www.eso.org/public/images/eso1101d/",
+          "label": "Lagoon Nebula · ESO VISTA · infrared; ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+          "checked": "2026-10-01",
+          "locator": "Lagoon Nebula · ESO VISTA · infrared"
+        }
+      ]
     },
     "spitzer-mid-infrared": {
-      "title": "Lagoon warm dust in calibrated mid-infrared",
+      "title": "Lagoon warm dust in mid-infrared",
       "detail": "1757 × 1417 px",
-      "summary": "Calibrated mid-infrared false color on an inferred cloud front; image coverage is narrower than the optical view."
+      "summary": "Calibrated mid-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
+      "sources": [
+        {
+          "catalogueId": "cds-hips-spitzer-irac",
+          "url": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/",
+          "label": "Lagoon Nebula · Spitzer IRAC · calibrated mid-infrared maps; NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
+          "checked": "2026-10-01",
+          "locator": "Lagoon Nebula · Spitzer IRAC · calibrated mid-infrared maps"
+        }
+      ]
     }
   }
 }
