@@ -1,0 +1,28 @@
+{
+  "id": "m87",
+  "classification": "galaxy",
+  "order": 5148,
+  "physical": {
+    "name": "M87",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M87 is recorded: it is an extended galaxy, and its package frames it at 199000 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 187.70593076725,
+    "declinationDegrees": 12.391123246083334,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 16800000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 1256.4841773442704,
+    "sources": {
+      "position": "Charlot et al. (2020), A&A 644, A159: ICRF3, the position SIMBAD adopts for M 87. (https://doi.org/10.1051/0004-6361/202038368); catalogue reference Charlot2020A&A...644A.159C",
+      "distance": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI. (https://arxiv.org/abs/1906.11238); catalogue reference EHT2019ApJ...875L...1E: 16800000 pc (-800000/+800000); adopted",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 87: 1256.4841773442704 km/s +/- 0.00012, from 2009ApJS..182..543A (https://ui.adsabs.harvard.edu/abs/2009ApJS..182..543A/abstract)"
+    }
+  }
+}

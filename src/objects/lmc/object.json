@@ -33,6 +33,43 @@
     },
     "preparation": {
       "source": "source/compact-delivery.json"
+    },
+    "catalog": {
+      "name": "LMC",
+      "systemName": "Local Group",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 10228810510,
+      "description": "A galaxy 49,591 parsecs away.",
+      "aliases": [
+        "Nubecula Major",
+        "Large Magellanic Cloud",
+        "Large Milky Cloud"
+      ],
+      "order": 5138,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        105965323959178080000,
+        533210010179927000000,
+        -1.4303833279717612e+21
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 154283879074568370000
     }
   },
   "prepared": {

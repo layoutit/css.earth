@@ -1,0 +1,28 @@
+{
+  "id": "m2-9",
+  "classification": "nebula",
+  "order": 5140,
+  "physical": {
+    "name": "Twin Jet Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Twin Jet Nebula is recorded: it is an extended nebula, and its package frames it at 0.09144 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 256.407962101,
+    "declinationDegrees": -10.1425459988,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 650,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "NASA/ESA Hubble 1997 image opo9738a; AVM sky astrometry (https://esahubble.org/media/archives/images/original/opo9738a.tif); catalogue reference hst-opo9738a",
+      "distance": "Sánchez Contreras et al. A&A 692, A151 (2024) (https://arxiv.org/html/2411.03825v1); catalogue reference sanchez-contreras-2024: 650 pc; Adopted model distance, not a parallax. Published expansion alternative:1300±200pc.",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: SIMBAD lists no radial velocity for PN M 2-9 (queried 2026-10-01); the nebula is held at its catalogued distance."
+    }
+  }
+}

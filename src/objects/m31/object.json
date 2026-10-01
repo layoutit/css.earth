@@ -37,7 +37,42 @@
     "cataloguePoints": [
       "stars",
       "dots"
-    ]
+    ],
+    "catalog": {
+      "name": "M 31",
+      "systemName": "Local Group",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 160112461100,
+      "description": "A galaxy 776,247 parsecs away.",
+      "aliases": [
+        "Andromeda"
+      ],
+      "order": 5141,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.7692007682599815e+22,
+        3.3377962460728383e+21,
+        1.5797892971967472e+22
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 771419395372841800000
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

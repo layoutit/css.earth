@@ -1,0 +1,28 @@
+{
+  "id": "m1",
+  "classification": "nebula",
+  "order": 5139,
+  "physical": {
+    "name": "Crab Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Crab Nebula is recorded: it is an extended nebula, and its package frames it at 1.317 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 83.6334511837,
+    "declinationDegrees": 22.0151236394,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 2000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid. (https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/observations.json); catalogue reference m1-registered-frame",
+      "distance": "Martin, Milisavljevic & Drissen (2021), 3D mapping of the Crab Nebula with SITELLE. I (https://arxiv.org/pdf/2101.02709v1); catalogue reference martin-2021: 2000 pc; Adopted 2 kpc reconstruction scale from Martin et al. (2021), section 3.4, following Trimble (1973). The cited 1.7–2.4 kpc range is not a statistical error. Lin et al. (2023) independently find 1.90 −0.18/+0.22 kpc; no distance refit is applied.",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: SIMBAD lists no radial velocity for M 1 (queried 2026-10-01); the nebula is held at its catalogued distance."
+    }
+  }
+}

@@ -33,6 +33,42 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "Orion Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 85393629.79,
+      "description": "The Orion Nebula is a Milky Way H II region about 414 parsecs away. Its bright gas surrounds the young Orion Nebula Cluster.",
+      "aliases": [
+        "M42",
+        "NGC 1976"
+      ],
+      "order": 5143,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1376373810181025800,
+        12643329345247054000,
+        -1202293075751323600
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 61933518469800,
+      "bodyRadiusM": 148640444327520000
     }
   },
   "prepared": {

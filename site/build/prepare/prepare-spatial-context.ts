@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { isPlacedClassification, parseObjectDescriptor } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/renderer';
@@ -160,7 +160,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // A star other than the focus is placed, not orbiting: the context carries its position and radius and draws no trajectory.
     // A planet of another star closes its orbit around that star, which makes the star the root of its own planetary system.
     const classification = classifications.get(body.id);
-    facts[body.id] = { radiusM, orbitStyle: hostedStarIds.has(body.id) ? 'trail' : hostedIds.has(body.id) ? 'closed' : classification === 'star' || classification === 'black-hole' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
+    facts[body.id] = { radiusM, orbitStyle: hostedStarIds.has(body.id) ? 'trail' : hostedIds.has(body.id) ? 'closed' : isPlacedClassification(classification) ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
   }
   // A star measured to be bound to another with no measured orbit carries the pair's centre of mass, weighted by the
   // published masses (as gravitational parameters) at the two prepared positions.
@@ -337,7 +337,8 @@ function orbits(value: unknown): Readonly<Record<string, Orbit>> {
     const orbit = record(value, `Solar geometry orbit ${id}`);
     if ((orbit.centerBodyId === undefined) !== (orbit.centerPositionAu === undefined)) throw new TypeError(`${id} orbit parent and centre must be declared together.`);
     const semiMajorAxisAu = number(orbit.semiMajorAxisAu, `${id} semi-major axis`), orbitEccentricity = eccentricity(orbit.eccentricity, id);
-    if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis and eccentricity are incompatible.`);
+    // A straight path (eccentricity exactly 1, a placed body moving along its line of sight or held still) is bound or unbound.
+    if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : orbitEccentricity === 1 ? semiMajorAxisAu !== 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis ${semiMajorAxisAu} AU and eccentricity ${orbitEccentricity} are incompatible.`);
     return [id, { semiMajorAxisAu, eccentricity: orbitEccentricity, heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
       perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`),
       ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }),

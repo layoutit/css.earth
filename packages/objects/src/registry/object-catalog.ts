@@ -1,7 +1,7 @@
 import type { ObjectDiscovery } from './object-discovery.js';
 import { parseObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';
-import { defineObject } from './object-schema.js';
+import { defineObject, OBJECT_CLASSIFICATIONS } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
@@ -16,11 +16,8 @@ export interface CatalogContext { name?: string; color?: string; order?: number;
 export type CatalogEntry<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> & { readonly aliases: readonly string[]; order?: number; context?: CatalogContext };
 
 function classification(value: unknown): ObjectClassification {
-  switch (value) {
-    case 'star': case 'planet': case 'satellite': case 'dwarf-planet':
-    case 'asteroid': case 'comet': case 'trans-neptunian': case 'interstellar': case 'exoplanet': case 'black-hole': return value;
-    default: throw new TypeError('Invalid catalogue classification.');
-  }
+  if (!(OBJECT_CLASSIFICATIONS as readonly unknown[]).includes(value)) throw new TypeError(`Invalid catalogue classification: ${String(value)}.`);
+  return value as ObjectClassification;
 }
 
 function order(value: unknown): number | undefined {

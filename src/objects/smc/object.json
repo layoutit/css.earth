@@ -33,6 +33,44 @@
     },
     "preparation": {
       "source": "source/compact-delivery.json"
+    },
+    "catalog": {
+      "name": "SMC",
+      "systemName": "Local Group",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 12879174500,
+      "description": "A galaxy 62,440 parsecs away.",
+      "aliases": [
+        "Nubecula Minor",
+        "NGC 292",
+        "Small Magellanic Cloud",
+        "Small Milky Cloud"
+      ],
+      "order": 5152,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        558685771853032800000,
+        162842052396096230000,
+        -1.8367130401501783e+21
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 123427103259654680000
     }
   },
   "prepared": {

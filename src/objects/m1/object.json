@@ -33,6 +33,43 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "Crab Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 412529612.5,
+      "description": "The Crab combines an expanding supernova remnant with a pulsar wind nebula. It lies about 2,000 parsecs away.",
+      "aliases": [
+        "M1",
+        "NGC 1952",
+        "Crab"
+      ],
+      "order": 5139,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6344354362860136000,
+        56860857745615634000,
+        23133406124448793000
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 299195741400000,
+      "bodyRadiusM": 40627486340224216
     }
   },
   "prepared": {

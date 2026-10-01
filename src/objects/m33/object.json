@@ -37,7 +37,44 @@
     "cataloguePoints": [
       "stars",
       "dots"
-    ]
+    ],
+    "catalog": {
+      "name": "M 33",
+      "systemName": "Local Group",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 177184257600,
+      "description": "A galaxy 859,014 parsecs away.",
+      "aliases": [
+        "Triangulum",
+        "NGC 598",
+        "UGC 1117"
+      ],
+      "order": 5142,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.091586510501188e+22,
+        9.077987154992237e+21,
+        1.3516852986079745e+22
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 277710982334223060000
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

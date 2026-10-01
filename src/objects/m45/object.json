@@ -33,6 +33,43 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "Pleiades",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 28093266.61,
+      "description": "The Pleiades is an open star cluster surrounded by reflection nebulosity. Its stars lie about 136 parsecs away; the dust may not.",
+      "aliases": [
+        "M45",
+        "Seven Sisters",
+        "Pleiades reflection nebula"
+      ],
+      "order": 5144,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2103179275207846700,
+        3207881506511226400,
+        1717207646325540600
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 20375229989339.996,
+      "bodyRadiusM": 109203529398159400
     }
   },
   "prepared": {

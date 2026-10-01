@@ -36,7 +36,45 @@
     },
     "cataloguePoints": [
       "dots"
-    ]
+    ],
+    "catalog": {
+      "name": "M83",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 1010241333000,
+      "description": "A galaxy 4.9 million parsecs away.",
+      "aliases": [
+        "ESO444-081",
+        "NGC5236",
+        "PGC048082",
+        "UGCA366"
+      ],
+      "order": 5147,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1.1949184389051951e+23,
+        -5.382819619468973e+22,
+        -7.526278726357485e+22
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 286968015078697140000
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

@@ -1,0 +1,28 @@
+{
+  "id": "m33",
+  "classification": "galaxy",
+  "order": 5142,
+  "physical": {
+    "name": "M 33",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M 33 is recorded: it is an extended galaxy, and its package frames it at 9000 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 23.462,
+    "declinationDegrees": 30.6603,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 859013.521505,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -179.2,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:m_033:location",
+      "distance": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure (https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S); catalogue reference Savino2022ApJ...938..101S: 859013.521505 pc (-23410.5032741/+24066.3789132); unspecified",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 33: -179.2 km/s +/- 1.7, from 2012AJ....144....4M (https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract)"
+    }
+  }
+}

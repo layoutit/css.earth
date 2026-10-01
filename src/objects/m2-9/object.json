@@ -33,6 +33,42 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "Twin Jet Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 134072124.1,
+      "description": "The Twin Jet is a bipolar nebula with two opposing lobes. Published distance estimates range from 650 to about 1,300 parsecs.",
+      "aliases": [
+        "M2–9",
+        "PN M2-9"
+      ],
+      "order": 5140,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4639854198945162000,
+        -19190526609290568000,
+        -3531975474921166000
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 564324590702700,
+      "bodyRadiusM": 2821622953513500
     }
   },
   "prepared": {

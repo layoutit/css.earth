@@ -36,7 +36,39 @@
     },
     "cataloguePoints": [
       "dots"
-    ]
+    ],
+    "catalog": {
+      "name": "NGC 300",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 430948261600,
+      "description": "A galaxy 2.1 million parsecs away.",
+      "order": 5150,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4.956364387918276e+22,
+        1.2103318163954808e+22,
+        -3.941065128390322e+22
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 290053692660188500000
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

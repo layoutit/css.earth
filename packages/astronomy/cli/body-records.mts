@@ -43,12 +43,13 @@ function bodyRecord(value: unknown): BodyRecord {
   }
   // Zero radius means no source measures one; only a star or black hole known from its hosted orbit alone may lack it (most S-stars,
   // the black hole of Cygnus X-1).
-  if (physical.meanRadiusKm === 0 && (!['star', 'black-hole'].includes(record.classification) || record.hostedOrbit === undefined)) {
-    throw new TypeError(`Only a hosted star or black hole may have an unmeasured radius: ${record.id} has meanRadiusKm 0.`);
+  // An extended placed body (a galaxy, a cluster, a nebula) has no single measured radius: its package frames it instead.
+  if (physical.meanRadiusKm === 0 && !EXTENDED.includes(record.classification) && (!['star', 'black-hole'].includes(record.classification) || record.hostedOrbit === undefined)) {
+    throw new TypeError(`Only a hosted star or black hole, or an extended placed body, may have an unmeasured radius: ${record.id} has meanRadiusKm 0.`);
   }
   // A star or black hole beyond the Solar System is placed by its astrometry and orbits nothing this package models.
-  if (record.star !== undefined && (!['star', 'black-hole'].includes(record.classification) || physical.parent !== null)) {
-    throw new TypeError(`Placement astrometry belongs to a parentless star or black hole: ${record.id}.`);
+  if (record.star !== undefined && (!PLACED.includes(record.classification) || physical.parent !== null)) {
+    throw new TypeError(`Placement astrometry belongs to a parentless placed body (${PLACED.join(', ')}): ${record.id}.`);
   }
   // A hosted orbit is placed around its parent: every exoplanet has one, and a star may have one instead of its own placement
   // (the S-stars around Sgr A*), and so may a black hole (the one of Cygnus X-1). The parent must be placed; readBodyRecords checks that.
@@ -67,7 +68,10 @@ const packageRoot = resolve(import.meta.dirname, '..');
 const order = (a: {id: string; order?: number}, b: {id: string; order?: number}) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
 const kinds = { planet: 'PLANET_IDS', 'dwarf-planet': 'DWARF_PLANET_IDS', asteroid: 'ASTEROID_IDS',
   'trans-neptunian': 'TRANS_NEPTUNIAN_IDS', interstellar: 'INTERSTELLAR_IDS', comet: 'COMET_IDS', exoplanet: 'EXOPLANET_IDS',
-  'black-hole': 'BLACK_HOLE_IDS' };
+  'black-hole': 'BLACK_HOLE_IDS', galaxy: 'GALAXY_IDS', 'galaxy-cluster': 'GALAXY_CLUSTER_IDS', nebula: 'NEBULA_IDS', 'globular-cluster': 'GLOBULAR_CLUSTER_IDS' };
+/** Classifications placed by astrometry, as @cssearth/objects PLACED_CLASSIFICATIONS lists them (this package does not import it). */
+const EXTENDED = ['galaxy', 'galaxy-cluster', 'nebula', 'globular-cluster'];
+const PLACED = ['star', 'black-hole', ...EXTENDED];
 const models = {
   asteroid: ['ASTEROID_ELEMENTS', "import type { KeplerianElements } from '../../kepler.js'", '{ query: string; elements: KeplerianElements }'],
   comet: ['COMET_ELEMENTS', "import type { KeplerianElements } from '../../kepler.js'", '{ query: string; elements: KeplerianElements }'],

@@ -33,6 +33,41 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "Helix Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 44553198.15,
+      "description": "The Helix is a planetary nebula about 216 parsecs away. Its broad ring of glowing gas surrounds the remnant central star.",
+      "aliases": [
+        "NGC 7293"
+      ],
+      "order": 5137,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5751238142720137000,
+        -2392748347554614000,
+        -2370847812686342000
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 32313140071200,
+      "bodyRadiusM": 48469710106800000
     }
   },
   "prepared": {

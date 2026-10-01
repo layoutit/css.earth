@@ -1,0 +1,28 @@
+{
+  "id": "ngc-253",
+  "classification": "galaxy",
+  "order": 5149,
+  "physical": {
+    "name": "NGC 253",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 253 is recorded: it is an extended galaxy, and its package frames it at 19900 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 11.888,
+    "declinationDegrees": -25.28822,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 3467368.50453,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 258.8,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:ngc_0253:location",
+      "distance": "RadburnSmith2011ApJS..195...18R: The GHOSTS Survey. I. Hubble Space Telescope Advanced Camera for Surveys Data (https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R); catalogue reference RadburnSmith2011ApJS..195...18R: 3467368.50453 pc (-109992.362096/+113595.866501); trgb",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 253: 258.8 km/s, from 2004MNRAS.350.1195M (https://ui.adsabs.harvard.edu/abs/2004MNRAS.350.1195M/abstract)"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "lmc",
+  "classification": "galaxy",
+  "order": 5138,
+  "physical": {
+    "name": "LMC",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of LMC is recorded: it is an extended galaxy, and its package frames it at 5000 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 78.76,
+    "declinationDegrees": -69.19,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 49590.6727505,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 262.2,
+    "sources": {
+      "position": "vanderMarel2014ApJ...781..121V: Third-epoch Magellanic Cloud Proper Motions. II. The Large Magellanic Cloud Rotation Field in Three Dimensions (https://ui.adsabs.harvard.edu/abs/2014ApJ...781..121V); catalogue reference vanderMarel2014ApJ...781..121V",
+      "distance": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent (https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P); catalogue reference Pietrzynski2019Natur.567..200P: 49590.6727505 pc (-545.078605979/+551.136452599); unspecified",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NAME LMC: 262.2 km/s +/- 3.4, from 2012AJ....144....4M (https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract)"
+    }
+  }
+}

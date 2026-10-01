@@ -1,0 +1,28 @@
+{
+  "id": "m42",
+  "classification": "nebula",
+  "order": 5143,
+  "physical": {
+    "name": "Orion Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Orion Nebula is recorded: it is an extended nebula, and its package frames it at 4.817 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 83.78715182853901,
+    "declinationDegrees": -5.400382551151912,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 414,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 27.8,
+    "sources": {
+      "position": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe (https://cdn.eso.org/images/publicationtiff/eso1723a.tif); catalogue reference m42-registered-images",
+      "distance": "Menten et al. (2007), The distance to the Orion Nebula (https://arxiv.org/abs/0709.0485); catalogue reference menten-2007: 414 pc (-7/+7); Adopted published trigonometric parallax; not a fitted image scale.",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 42: 27.8 km/s +/- 5, from 2017A&A...600A.106C (https://ui.adsabs.harvard.edu/abs/2017A%26A...600A.106C/abstract)"
+    }
+  }
+}

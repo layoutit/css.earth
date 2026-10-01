@@ -5,6 +5,42 @@
   "properties": {
     "preparation": {
       "source": "source/dots/points.json"
+    },
+    "catalog": {
+      "name": "Virgo Cluster",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 3342143809000,
+      "description": "A cluster of galaxies 16.2 million parsecs away.",
+      "aliases": [
+        "Virgo",
+        "MCXC J1230.7+1220"
+      ],
+      "order": 5153,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4.840313484186915e+23,
+        -6.541779898547467e+22,
+        1.0682585877607982e+23
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 5.0140062462525665e+22,
+      "bodyRadiusM": 5.0140062462525665e+22
     }
   },
   "prepared": {

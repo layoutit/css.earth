@@ -36,7 +36,46 @@
     },
     "cataloguePoints": [
       "dots"
-    ]
+    ],
+    "catalog": {
+      "name": "M81",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 745461352900,
+      "description": "A galaxy 3.6 million parsecs away.",
+      "aliases": [
+        "NGC 3031",
+        "UGC 5318",
+        "PGC 28630",
+        "MCG+12-10-010",
+        "Bode's Galaxy"
+      ],
+      "order": 5146,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3.4114911797827514e+22,
+        2.0588933098510244e+22,
+        1.0415782317338e+23
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 509136800946075600000
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

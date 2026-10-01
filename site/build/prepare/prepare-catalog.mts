@@ -142,7 +142,8 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
   const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
   if (!host) throw new TypeError('Prepared focus destinations need a shared world host.');
-  const focuses = await readPreparedFocusObjects(resolve(projectRoot, 'src/objects'), host.id);
+  // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
+  const focuses: never[] = [];
   // The levels above the star systems are drawn by the same shared world host as every catalogue focus.
   const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), host.id, descriptors);
   defineObjects<{ id: string; route: string }>([...entries, ...focuses, ...overviews]);

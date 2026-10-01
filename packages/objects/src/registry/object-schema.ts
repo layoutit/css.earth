@@ -17,7 +17,12 @@ export interface ObjectWorldFrame {
   readonly orbitUpReference?: ObjectPositionM;
 }
 
-export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole';
+export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole'
+  | 'galaxy' | 'galaxy-cluster' | 'nebula' | 'globular-cluster';
+/** A body placed by its astrometry (a position and a distance) rather than an orbit: stars, black holes and the galaxies,
+ * clusters and nebulae beyond them. Each is a parentless world-context body; none draws a trajectory. */
+export const PLACED_CLASSIFICATIONS: readonly ObjectClassification[] = Object.freeze(['star', 'black-hole', 'galaxy', 'galaxy-cluster', 'nebula', 'globular-cluster']);
+export const isPlacedClassification = (classification: string | undefined): boolean => (PLACED_CLASSIFICATIONS as readonly (string | undefined)[]).includes(classification);
 /** `Scene` is what the host's loader resolves to and `Signal` how the host cancels it (an `AbortSignal`); the registry only
  * checks that a loader is bound. */
 export interface ObjectDefinitionInput<Scene = unknown, Signal = unknown> {
@@ -48,6 +53,7 @@ const OBJECT_INPUT_KEYS = new Set([
 // list deliberately when a package introduces a new kind of body.
 export const OBJECT_CLASSIFICATIONS = Object.freeze([
   "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet", "black-hole",
+  "galaxy", "galaxy-cluster", "nebula", "globular-cluster",
 ]);
 
 export function defineObject<Scene, Signal>(input: ObjectDefinitionInput<Scene, Signal>): ObjectEntry<Scene, Signal> {

@@ -33,6 +33,43 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "M87",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 3465248745000,
+      "description": "A galaxy 16.8 million parsecs away.",
+      "aliases": [
+        "NGC 4486",
+        "Virgo A",
+        "VCC 1316"
+      ],
+      "order": 5148,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5.017457335350851e+23,
+        -6.789157133212104e+22,
+        1.1123902789140173e+23
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 1.238634295408084e+21,
+      "bodyRadiusM": 6.140498387167821e+21
     }
   },
   "prepared": {

@@ -33,6 +33,43 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "Lagoon Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 273507133.1,
+      "description": "The Lagoon is a star-forming H II region about 1,326 parsecs away. Its young NGC 6530 cluster shares the surrounding cloud complex.",
+      "aliases": [
+        "M8",
+        "NGC 6523",
+        "Lagoon"
+      ],
+      "order": 5145,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        498068231034880400,
+        -37285896590482730000,
+        -16841610171260310000
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 198366776548200,
+      "bodyRadiusM": 677379746660464100
     }
   },
   "prepared": {

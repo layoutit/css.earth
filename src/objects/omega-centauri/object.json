@@ -33,6 +33,43 @@
     },
     "preparation": {
       "source": "source/delivery.json"
+    },
+    "catalog": {
+      "name": "Omega Centauri",
+      "systemName": "Milky Way",
+      "classification": "globular-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 1119192839,
+      "description": "Omega Centauri is a globular star cluster in the Milky Way, about 5,426 parsecs away. That published distance locates the cluster, not its individual stars.",
+      "aliases": [
+        "NGC 5139",
+        "ω Centauri",
+        "Caldwell 80"
+      ],
+      "order": 5151,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -105140549150265080000,
+        -41834040087509950000,
+        -123401250499199320000
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 811718046418199.9,
+      "bodyRadiusM": 1339334776590029800
     }
   },
   "prepared": {

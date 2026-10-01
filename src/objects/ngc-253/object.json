@@ -36,7 +36,44 @@
     },
     "cataloguePoints": [
       "dots"
-    ]
+    ],
+    "catalog": {
+      "name": "NGC 253",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 715196092800,
+      "description": "A galaxy 3.5 million parsecs away.",
+      "aliases": [
+        "ESO474-029",
+        "PGC002789",
+        "UGCA013"
+      ],
+      "order": 5149,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9.466398987631915e+22,
+        1.9928125630700205e+22,
+        -4.570390401431423e+22
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "bodyRadiusM": 614049838716782100000
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

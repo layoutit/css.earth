@@ -5,6 +5,43 @@
   "properties": {
     "preparation": {
       "source": "source/dots/points.json"
+    },
+    "catalog": {
+      "name": "Fornax Cluster",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 4055320034000,
+      "description": "A cluster of galaxies 19.7 million parsecs away.",
+      "aliases": [
+        "RXCJ0338.4-3526",
+        "FORNAX",
+        "MCXC J0338.4-3526"
+      ],
+      "order": 5136,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.8617512664442398e+23,
+        4.02930234971015e+23,
+        -3.518467946012384e+23
+      ],
+      "presentationToReference": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 1.912022062157274e+22,
+      "bodyRadiusM": 1.912022062157274e+22
     }
   },
   "prepared": {
