@@ -1566,7 +1566,12 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
       const reply = await session.send('Runtime.evaluate', { expression: `({url: location.href, pathname: location.pathname, visible: document.visibilityState === 'visible', ready: document.readyState === 'complete' && (document.documentElement.dataset.ready === 'true'), failed: (document.documentElement.dataset.ready === 'error')})`, returnByValue: true });
       const state = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
       last = state;
-      if (isRecord(state) && state.failed === true) throw new Error(`The destination page failed while navigating to ${pathname}: ${JSON.stringify(state)}`);
+      if (isRecord(state) && state.failed === true) {
+        // The page's own account of the failure: the scene notice and any error text it shows.
+        const told = await session.send('Runtime.evaluate', { expression: "[...document.querySelectorAll('[role=alert], [data-scene-error], .dataset-notice, .scene-error')].map(node => node.textContent.trim()).filter(Boolean).join(' | ') || document.body.innerText.slice(0, 400)", returnByValue: true }).catch(() => null);
+        const text = told && isRecord(told.result) && isRecord(told.result.result) ? told.result.result.value : null;
+        throw new Error(`The destination page failed while navigating to ${pathname}: ${JSON.stringify(state)}; the page says: ${JSON.stringify(text)}`);
+      }
       if (isRecord(state) && state.pathname === pathname && state.ready === true && state.visible === true) return { url: state.url, ready: true, visible: true };
       await wait(300);
     }
