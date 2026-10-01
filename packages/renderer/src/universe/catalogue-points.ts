@@ -5,6 +5,7 @@ import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
+import { afterStartup } from '../rendering/startup-gate.js';
 
 /** Dot layers switching on show one a frame (layer-reveal.ts). */
 const revealLayers = (layers: readonly HTMLElement[]) => { for (const layer of layers) revealLayer(layer); };
@@ -247,7 +248,8 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
       if (runtime) { runtime.publish(publication); return; }
       if (loading) return;
       loading = true;
-      void loadBank(url).then(value => {
+      // A body's first view does not draw the background dots: they wait for it to be interactive (startup-gate.ts).
+      afterStartup(host.ownerDocument.defaultView, () => { if (!destroyed) void loadBank(url).then(value => {
         if (destroyed) return;
         const bank = parseCataloguePoints(value, url);
         extent = { originM: bank.frame.originM, radiusM: Math.max(...bank.points.map(point => Math.hypot(...point.positionUnits))) * bank.frame.metersPerUnit };
@@ -333,7 +335,7 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         root.dataset.cataloguePoints = bank.id;
         if (root.style.display !== 'none') revealLayers(runtime.layers);
         if (latest) runtime.publish(latest);
-      }).catch(error => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); });
+      }).catch(error => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); }); });
     },
     destroy() { if (destroyed) return; destroyed = true; runtime?.destroy(); root.remove(); },
   });
