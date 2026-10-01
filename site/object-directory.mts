@@ -1,3 +1,4 @@
+import { importPackagedObjectRuntime } from './import-queue.mts';
 import { catalogueObject, isOverviewObject, isSceneObject } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
@@ -31,7 +32,7 @@ export const knownObject = (id: string): NavigableObject | undefined => NAVIGABL
 /** A prepared catalogue entry as the directory serves it (`@cssearth/objects` catalogueObject), bound to the shell's scene loader. */
 export function objectFromEntry(value: unknown): NavigableObject {
   return catalogueObject(value, descriptor => async (signal?: AbortSignal) => {
-    const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
+    const { loadPackagedObject } = await importPackagedObjectRuntime();
     return loadPackagedObject(descriptor, signal);
   });
 }

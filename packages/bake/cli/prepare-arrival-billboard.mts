@@ -7,6 +7,7 @@ import sharp from 'sharp';
 import { requireRecord, requireFiniteNumber, requireString, isRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
+import { writeWorldBillboard } from '@cssearth/bake/site-assets';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation';
 import { parseArrivalBillboard } from '@cssearth/objects';
@@ -191,6 +192,8 @@ try {
             assets.push({ location, filename: name, bytes: data.length, sha256: sha256(data) });
             await updateInventory({ objectId: object.id, objectDirectory, location, assets });
           }
+          // The world draws this body from the same photograph at billboard size (site-assets/world-billboard.ts).
+          await writeWorldBillboard(root, object.id);
           await writeFile(receiptPath, JSON.stringify(report, null, 2) + '\n');
         });
         reports.push(report); console.log(`[${index + 1}/${objects.length}] ${object.id}: ${bytes.length} bytes`);

@@ -127,6 +127,16 @@ pnpm ipad:run --live --start earth --fly lutetia --name live-earth-to-lutetia
 
 Flights use the app's own `objectnavigationquery` and `objectnavigate` events and verify the destination is ready and visible. Tap, drag, type and zoom are page-dispatched through the app's input handlers, not native touch: this iPad's iOS 26.6 refuses CoreDevice HID remote touch. `screens/*.jpg` and `filmstrip.png` come from the actual iPad screen. Each journey records WebKit memory categories over time and `residency.json` snapshots of scene resources before and after each action. These are WebKit's accounting categories, not total process memory.
 
+### Release gate: cold loads on a slow connection
+
+Run this on the connected iPad before calling a build a release candidate. It serves a running production preview
+through a proxy that holds the world summary back, cold-loads each page in visible Safari one after another, and exits 1
+when a load does not start. Safari failed this way on a slow connection while headless WebKit and Chromium passed.
+
+```sh
+node labs/performance/ipad-slow-start.mts --target 4216 /earth/ /itokawa/ /comet-67p/ /trappist-1b/
+```
+
 ### Debug exports
 
 `pnpm ipad:run --debug ...` records the DOM-to-compositor chain. It is diagnostic; use a normal run for frame-time comparisons.

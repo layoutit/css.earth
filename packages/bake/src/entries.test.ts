@@ -74,7 +74,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'refresh-shape-materials': ['objects/layers/terrestrial', 'objects/sources', 'objects/scene', 'refresh-surface-observations', 'surface-previews', 'navigation', 'site-assets'],
   'refresh-terrain-photographs': ['objects/layers/terrestrial', 'objects/scene'],
   'asset-publication': ['contract', 'delivery', 'density', 'sky', 'volume', 'objects/sources'],
-  'site-assets': ['raster', 'runtime-source', 'objects/raster', 'objects/charts'],
+  'site-assets': ['raster', 'runtime-source', 'world-context', 'objects/raster', 'objects/charts'],
   'navigation': ['astronomy', 'delivery', 'raster', 'sources', 'objects/raster'],
   'objects/surface-features': ['objects/geometry', 'objects/raster', 'objects/scene', 'objects/layers/paged-ellipsoid', 'objects/layers/terrestrial'],
   'objects/lineage': ['objects/layers/terrestrial'],

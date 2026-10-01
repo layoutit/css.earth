@@ -203,7 +203,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
 
   // The package the scaffold writes, then every file the data decide.
   const scaffold = scaffoldStarFiles({ id, name: spec.name, system: spec.system, temperatureK: spec.temperature.value, temperatureSource: `${spec.temperature.source} (${spec.temperature.url})`,
-    description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order }, body, solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT);
+    description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order, ...(spec.aliases ? { aliases: spec.aliases } : {}), ...(spec.featured ? { featured: true as const } : {}) }, body, solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT);
   const files = new Map<string, string | Buffer>(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   if (gaiaRead) files.set(`${s}/photometry/gaia-dr3-source.csv`, gaiaRead.csv);

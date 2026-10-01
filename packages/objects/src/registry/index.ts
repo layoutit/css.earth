@@ -7,6 +7,7 @@ export type { PreparedArrivalView, PreparedArrivalBillboard } from './arrival-vi
 export { composited, contextColour, contrastRatio, DEFAULT_CONTEXT_COLOUR, readableOnSky, relativeLuminance, SKY_BACKGROUND, TEXT_CONTRAST_MINIMUM } from './context-colour.js';
 export { normalizeDestinationQuery, searchDestinations } from './destination-search.js';
 export { orderFacts } from './fact-order.js';
+export { mapLabel } from './map-label.js';
 export { distanceDescription, parseNavigationDistance } from './navigation-distance.js';
 export type { NavigationDistance } from './navigation-distance.js';
 export { catalogEntry, catalogueObject } from './object-catalog.js';

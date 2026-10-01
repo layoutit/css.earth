@@ -13,7 +13,7 @@ export const TODO = 'TODO(new-object)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;
 const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
 
-export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK?: number; readonly temperatureSource?: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number;
+export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK?: number; readonly temperatureSource?: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number; readonly aliases?: readonly string[]; readonly featured?: true;
   /** A black hole instead of a star: its record's radius is the measured shadow, drawn black. It has no temperature, so its catalogue colour is the shared neutral gray. */
   readonly blackHole?: { readonly shadowSource: string } }
 const NEUTRAL_GRAY = '#9a9a9a', SHADOW_BLACK = '#000000';
@@ -149,7 +149,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
         { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       emission: { source: 'raster', material: 'emission' } },
     page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
-    catalog: { name, classification: blackHole ? 'black-hole' : 'star', color: catalogColor, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
+    catalog: { name, classification: blackHole ? 'black-hole' : 'star', color: catalogColor, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, ...(spec.aliases?.length ? { aliases: spec.aliases } : {}), order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 }, ...(spec.featured ? { featured: true } : {}) },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });

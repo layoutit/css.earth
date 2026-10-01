@@ -13,6 +13,7 @@
  * The colour is the Planck spectrum at the GSP-Phot temperature: GSP-Phot's extinction says how much dust reddens the
  * spectrum, and the colour routes do not remove it. */
 import { GAIA_TAP, type Archive } from './archives.mts';
+import { preferredName, simbadIdentifiers } from './display-name.mts';
 
 export const GAIA_FLAME = { paper: 'https://doi.org/10.1051/0004-6361/202243688', credit: 'Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)' };
 export const GAIA_GSPPHOT = { paper: 'https://doi.org/10.1051/0004-6361/202243462', credit: 'Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot)' };
@@ -64,8 +65,11 @@ export async function draftsFromGaia(sourceIds: readonly string[], archive: Arch
   for (const sourceId of sourceIds.map(value => value.replace(/^Gaia\s*DR3\s*/iu, '').trim())) {
     if (!/^\d{6,20}$/u.test(sourceId)) throw new Error(`Gaia DR3 drafts are read by source_id, not ${sourceId}.`);
     const csv = await archive.text(GAIA_TAP, { REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: gaiaDraftQuery(sourceId) });
-    stars.push(draftFromGaia(parseGaiaDraftRow(csv, sourceId)));
-    report.push(`Gaia DR3 ${sourceId}: drafted from ${GAIA_FLAME.credit} and ${GAIA_GSPPHOT.credit}; placed by its parallax.`);
+    const draft = draftFromGaia(parseGaiaDraftRow(csv, sourceId)), gaiaName = draft.name;
+    // A star SIMBAD knows by a designation that reads as a name takes it (display-name.mts); its Gaia number becomes an alias.
+    const preferred = preferredName(await simbadIdentifiers(archive, gaiaName));
+    stars.push(preferred ? { ...draft, name: preferred.name, system: `${preferred.name} system`, aliases: [gaiaName] } : draft);
+    report.push(`Gaia DR3 ${sourceId}: drafted from ${GAIA_FLAME.credit} and ${GAIA_GSPPHOT.credit}; placed by its parallax${preferred ? `; named ${preferred.name}, as SIMBAD lists it (${preferred.identifier})` : ''}.`);
   }
   return { stars, report };
 }

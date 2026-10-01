@@ -3,7 +3,8 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
-import { isPlacedClassification, parseObjectDescriptor } from '@cssearth/objects';
+import { isPlacedClassification, mapLabel, parseObjectDescriptor } from '@cssearth/objects';
+import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/renderer';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -55,7 +56,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const objects = await readCatalog(options.objectsDirectory ?? resolve(process.cwd(), 'src/objects'), prepareSceneDistance);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
-      .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,
+      .map(body => ({ id: body.id, name: body.context!.name ?? mapLabel(body.name), color: body.context!.color ?? body.color,
         ...(body.context!.orbitsWithinAu === undefined ? {} : { orbitsWithinM: body.context!.orbitsWithinAu * M_PER_AU }),
         ...(body.context!.labelPlacement === undefined ? {} : { labelPlacement: body.context!.labelPlacement }),
         ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
@@ -70,7 +71,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     for (const id of HOSTED_PLANET_IDS as readonly string[]) {
       const record = records[id], parent = record?.parent;
       if (packaged.has(id) || !parent || !packaged.has(parent)) continue;
-      input.bodies.push({ id, name: record!.name, color: record!.effectiveTemperatureK === undefined ? '#9a9a9a'
+      input.bodies.push({ id, name: mapLabel(record!.name), color: record!.effectiveTemperatureK === undefined ? '#9a9a9a'
         : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
   }

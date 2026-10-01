@@ -55,6 +55,7 @@ test('JSON keys publish as application/json; every other key stays application/o
   assert.equal(contentType('runtime-assets/abc123/scene.json'), 'application/json');
   assert.equal(contentType('runtime-assets/abc123/inventory.json'), 'application/json');
   assert.equal(contentType('runtime-assets/abc123/atlas.webp'), 'application/octet-stream');
+  assert.equal(contentType('runtime-assets/abc123/chart.svg'), 'image/svg+xml', 'an <img> draws an SVG only as image/svg+xml');
   assert.equal(contentType('runtime-assets/abc123/model.jsonl'), 'application/octet-stream');
 });
 

@@ -1,4 +1,5 @@
 import { prepareStartupBillboard } from '../startup-billboard.mts';
+import { importApplicationWorld, importSceneRegistry } from '../shared-imports.mts';
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { holdStartup, releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
@@ -77,7 +78,12 @@ export function createSceneRouter({
   loadObject = (id, descriptor, signal) => objectAdapter.load(id, descriptor, undefined, signal),
   documentTarget = document,
   windowTarget = window,
-  reportError = (error) => console.error(error),
+  // A scene the router gives up on is caught here, so the page's own report never saw it: it is also dispatched as an
+  // `error` event (error-report.mts).
+  reportError = (error) => {
+    console.error(error);
+    if (typeof windowTarget.ErrorEvent === 'function') windowTarget.dispatchEvent(new windowTarget.ErrorEvent('error', { error, message: error instanceof Error ? error.message : String(error) }));
+  },
   persistentWorldContext,
 }: RouterOptions) {
   const sharedInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
@@ -308,7 +314,7 @@ export function createSceneRouter({
   /** Load the router's modules and this page's object entry once, and build what the router reads from them. */
   function ensureContext(): Promise<RouterContext> {
     if (contextTask) return contextTask;
-    const task = import('./scene-registry.mts').then(async registry => {
+    const task = importSceneRegistry().then(async registry => {
       // The page's own object enters the live directory the navigation reads; other objects join as the page navigates.
       if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
       const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
@@ -681,7 +687,7 @@ function createWorldContextOwner(): WorldContextOwner {
   return {
     createViewport: createWorldViewport,
     async mount(options: Parameters<WorldContextOwner['mount']>[0]) {
-      world ??= import('../application-world-context.mts').then(module => module.createApplicationWorldContext());
+      world ??= importApplicationWorld().then(module => module.createApplicationWorldContext());
       return (await world).mount(options);
     },
   } satisfies WorldContextOwner;

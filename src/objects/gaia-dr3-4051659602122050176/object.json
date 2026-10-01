@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Gaia DR3 4051659602122050176",
+      "label": "TYC 6865-327-1",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,12 +94,15 @@
       }
     },
     "catalog": {
-      "name": "Gaia DR3 4051659602122050176",
+      "name": "TYC 6865-327-1",
       "classification": "star",
       "color": "#e4e8ff",
       "distanceAu": 2048633100.7,
       "description": "A star about 9,900 parsecs away, 22 times the Sun's width, measured by Gaia.",
-      "systemName": "Gaia DR3 4051659602122050176 system",
+      "systemName": "TYC 6865-327-1 system",
+      "aliases": [
+        "Gaia DR3 4051659602122050176"
+      ],
       "order": 2756,
       "context": {
         "order": 2753

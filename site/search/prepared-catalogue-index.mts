@@ -1,3 +1,4 @@
+import { designationNames } from './object-search.mts';
 import { distanceDescription } from '@cssearth/objects';
 import { objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
@@ -27,7 +28,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
         kind: 'scene' as const,
         id: object.id,
         name: object.name,
-        searchNames: Object.freeze((object.searchNames ?? []).map(name => name.toLocaleLowerCase('en'))),
+        searchNames: Object.freeze([...new Set([...designationNames(object.id, object.name), ...(object.searchNames ?? []).map(name => name.toLocaleLowerCase('en'))])]),
         classification: object.classification,
         classificationName: objectTypeLabel(object).toLocaleLowerCase('en'),
         systemName: object.systemName.toLocaleLowerCase('en'),

@@ -77,3 +77,18 @@ export function worldRotationCss(m: WorldRotation): string {
   return `matrix3d(${[m[0], m[3], m[6], 0, m[1], m[4], m[7], 0, m[2], m[5], m[8], 0, 0, 0, 0, 1]
     .map(value => Number(value.toFixed(12))).join(',')})`;
 }
+
+/** The nearest rotation to a row-major 3×3 whose rows have drifted from orthonormal (Gram-Schmidt on its first two rows; the
+ * third is their cross product). A camera's scene matrix is multiplied again on every drag, playback frame and rebase, and
+ * a restored pose was written to twelve decimals: left alone it drifts until `validateWorldRotation` (1e-9) refuses it. */
+export function nearestWorldRotation(rows: readonly number[]): number[] {
+  if (rows.length !== 9 || !rows.every(Number.isFinite)) throw new TypeError('World rotation must contain nine finite components.');
+  const firstLength = Math.hypot(rows[0]!, rows[1]!, rows[2]!);
+  if (!(firstLength > 0)) throw new TypeError('World rotation is degenerate.');
+  const a = [rows[0]! / firstLength, rows[1]! / firstLength, rows[2]! / firstLength];
+  const along = a[0]! * rows[3]! + a[1]! * rows[4]! + a[2]! * rows[5]!;
+  const across = [rows[3]! - along * a[0]!, rows[4]! - along * a[1]!, rows[5]! - along * a[2]!], acrossLength = Math.hypot(...across);
+  if (!(acrossLength > 0)) throw new TypeError('World rotation is degenerate.');
+  const b = across.map(value => value / acrossLength);
+  return [...a, ...b, a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
+}

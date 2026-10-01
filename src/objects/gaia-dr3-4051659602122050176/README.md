@@ -1,4 +1,4 @@
-# Gaia DR3 4051659602122050176
+# TYC 6865-327-1
 
 ## Sources
 
@@ -12,7 +12,8 @@ Gaia's parallax, brightness and spectrum give it 21.9 solar radii and 6.29 solar
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-01 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
 
 ## Known problems
 

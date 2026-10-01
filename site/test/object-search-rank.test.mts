@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { searchObjects } from '../search/object-search.mts';
+import { designationNames, searchObjects } from '../search/object-search.mts';
 
 const label = (name: string) => ({ name, names: [name], illustration: false, classification: 'body', classificationName: 'moon', systemName: '' });
 
@@ -8,4 +8,15 @@ test('a typed name lists exact names, then names that begin with it, then the re
   const items = [label('52 europa'), label('europa regio'), label('europa')];
   assert.deepEqual(searchObjects(items, 'Europa').matches.map(item => item.name), ['europa', 'europa regio', '52 europa']);
   assert.deepEqual(searchObjects(items, 'rop').matches.map(item => item.name), ['52 europa', 'europa regio', 'europa']);
+});
+
+test("a system's name lists its members and the body that has that very name", () => {
+  const items = [{ ...label('m87'), systemName: 'virgo cluster' }, { ...label('m87*'), systemName: 'm87' }, label('m870')];
+  assert.deepEqual(searchObjects(items, 'M87').matches.map(item => item.name), ['m87', 'm87*']);
+});
+
+test('a body answers to the catalogue designation its id spells', () => {
+  const items = [{ ...label('55 cnc'), names: designationNames('hd-75732', '55 Cnc') }, { ...label('mars'), names: designationNames('mars', 'Mars') }];
+  assert.deepEqual(items[1]!.names, []);
+  for (const query of ['HD 75732', '75732']) assert.deepEqual(searchObjects(items, query).matches.map(item => item.name), ['55 cnc'], query);
 });

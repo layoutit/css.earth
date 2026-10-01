@@ -1,4 +1,5 @@
 import { extendWorldContext, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/renderer';
+import { WORLD_SUMMARY_SOURCE, startupWorld, worldSystemHost } from './startup-world.mts';
 import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/renderer';
 import { startupFetch } from './startup-requests.mts';
 
@@ -29,13 +30,17 @@ import { startupFetch } from './startup-requests.mts';
 // it before startup ends; navigation reads the one it flies to (`loadWorldSystemOf`), and the rest arrive in a few batches
 // once the first view is interactive (`streamWorldSystems`). Node tools, tests and the build read every file, so they see
 // the whole world in its prepared order.
-const source = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
+const source = WORLD_SUMMARY_SOURCE;
 /** Orbit banks the planner worker reads on demand, served per centre by the build
  * (`pages/world/orbits/[id].bin.ts`). The main thread sends its validated summary to the worker. */
 export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ orbitBanksUrl: '/world/orbits/' });
 /** How many requests the systems a page does not show arrive in, after its first view. */
 const SYSTEM_BATCHES = 4;
 const node = source.protocol === 'file:';
+// What the page read before it imported this module (`startup-world.mts`). With it the browser reads its world without
+// waiting, so nothing that imports this module can run before it has finished. Node, and a page that did not read it,
+// wait for the same files here.
+const startup = node ? undefined : startupWorld();
 
 async function readNodeJson(path: string): Promise<unknown> {
   const { nodeProjectFileUrl } = await import('./prepared/prepared-world-context-node-source.mts');
@@ -54,7 +59,7 @@ async function fetchJson(url: string): Promise<unknown> {
   return response.json();
 }
 
-const summary = parsePreparedWorldContextSummary(await readPreparedWorldContext());
+const summary = parsePreparedWorldContextSummary(startup ? startup.summary : await readPreparedWorldContext());
 /** Each deferred body's star, and every star whose system is its own file, in id order. */
 const hostOf = new Map((summary.deferred ?? []).map(body => [body.id, body.host]));
 export const WORLD_SYSTEM_HOSTS: readonly string[] = Object.freeze([...new Set(hostOf.values())].sort());
@@ -65,7 +70,7 @@ export function worldSystemBatch(index: number): readonly string[] {
 }
 export const WORLD_SYSTEM_BATCH_COUNT = SYSTEM_BATCHES;
 /** The star whose system file holds `id` or its planets (a star's own id), or null when the summary holds them all: the Sun's system, or a star without planets. */
-export const worldSystemOf = (id: string): string | null => hostOf.get(id) ?? (WORLD_SYSTEM_HOSTS.includes(id) ? id : null);
+export const worldSystemOf = (id: string): string | null => worldSystemHost(summary.deferred, id);
 
 const loaded = new Set<string>(), loading = new Map<string, Promise<void>>();
 const listeners = new Set<(plan: PreparedWorldContext) => void>();
@@ -86,7 +91,7 @@ if (node) {
 } else {
   // A page's own body: the first path segment of its address (`/<id>/`).
   const own = worldSystemOf(globalThis.location?.pathname.split('/')[1] ?? '');
-  if (own) adopt([parseSystem(await fetchJson(`/world/systems/${own}.json`), own)], true);
+  if (own) adopt([parseSystem(startup?.system?.id === own ? startup.system.value : await fetchJson(`/world/systems/${own}.json`), own)], true);
 }
 
 /** Calls `listener` with the extended plan each time other systems' bodies are added; returns the unsubscribe. */
