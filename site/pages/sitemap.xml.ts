@@ -1,9 +1,11 @@
 import { OBJECTS, OVERVIEWS } from "../objects.mts";
-import { objectSeo } from "../seo.mts";
+import { homeSeo, objectSeo } from "../seo.mts";
+import { ROOT_OBJECT_ID } from "../root-object.mts";
 
-/** Every page, `/<id>/`: each object and each level. */
+/** The site's own page, `/`, then every page `/<id>/`: each object and each level. */
 export function GET() {
-  const pages = [...OBJECTS, ...OVERVIEWS].map(page => objectSeo(page));
+  const root = OBJECTS.find(object => object.id === ROOT_OBJECT_ID);
+  const pages = [...(root ? [homeSeo(objectSeo(root))] : []), ...[...OBJECTS, ...OVERVIEWS].map(page => objectSeo(page))];
   const urls = pages.map((page) => `  <url><loc>${page.canonical}</loc></url>`).join("\n");
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
