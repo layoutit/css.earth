@@ -340,7 +340,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
             for (const listener of datasetListeners) listener(action.id);
           }
           return committed;
-        }, onError: error => datasetEffects ? datasetEffects.error(error) : console.error(error) });
+        }, onError: error => datasetEffects ? datasetEffects.error(error) : console.error(error),
+        // A failed early read is read again, and reported, when the dataset is selected.
+        onIntent: datasetId => { loadPreparedDataset(definition, datasetId).catch(() => {}); } });
       context.own(() => controls?.destroy({ preserveControls }));
       // A claimed preflight bank already completed and released default startup.
       // Re-running it would pin obsolete lighting rows beside the incoming view.

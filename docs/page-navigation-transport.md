@@ -35,7 +35,9 @@ lists the datasets whose tables have not arrived.
 
 When the reader selects a deferred dataset, the selection runtime reads its file
 through the transport the object came from. The file is read before the
-selection resolves, and the committed dataset keeps drawing while it loads. The
+selection resolves, and the committed dataset keeps drawing while it loads.
+Pointing at, touching or focusing a dataset's control starts that read early, and
+the click shares it, so the images do not wait for a second round trip. The
 runtime then adopts the tables into the decoded definition and commits the
 selection, so a dataset change is still atomic. A server-rendered dataset page
 and a flight to another body read the file the same way. A key that the startup

@@ -7,6 +7,8 @@ import { loadPreparedCssObject, loadPreparedDataset } from '../loader.js';
 import { selectedPreparedVariant } from '../rendering/prepared-presentation.js';
 import { serializePreparedScene } from '../rendering/prepared-scene-serialization.js';
 import { initialObjectSelection } from '../runtime/object-contract.js';
+import { createObjectControlBinding } from '../rendering/object-control-binding.js';
+import { parseHTML } from 'linkedom';
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 import { adoptPreparedDatasetTables, deferredDatasetIds, preparedDatasetReference, splitPreparedDatasetTables } from './dataset-tables.js';
 
@@ -90,4 +92,40 @@ test('a definition reads each deferred dataset once through the transport it cam
   await loadPreparedDataset(definition, datasetId);
   await loadPreparedDataset(definition, definition.controls.datasets!.defaultDataset);
   assert.equal(read.mock.callCount(), 3, 'an adopted or default dataset reads nothing');
+});
+
+test('pointing at, touching or focusing a dataset reads its tables once, and the click shares that read', async () => {
+  const descriptor = parseObjectDescriptor(await readFile(new URL('src/objects/mars/object.json', root), 'utf8'));
+  const { definition: split, tables } = splitPreparedDatasetTables(await runtime('mars'));
+  const encode = (value: unknown) => new TextEncoder().encode(JSON.stringify(value)).buffer;
+  const read = mock.fn(async (reference: string) => reference === descriptor.prepared!.url
+    ? encode({ schema: 'cssearth-prepared-object@1', id: descriptor.id, type: descriptor.type, format: descriptor.prepared!.format, data: split })
+    : encode(tables.find(table => preparedDatasetReference(descriptor.prepared!.url, table.datasetId) === reference)));
+  const definition = await loadPreparedCssObject(descriptor, { read });
+  const datasetId = tables[0]!.datasetId, ids = definition.controls.datasets!.controls.map(control => control.id);
+  const { document, Event } = parseHTML(`<main></main><section class="object-information-panel"><div class="object-datasets">
+    <form data-dataset-form>${ids.map(id => `<div data-dataset-option><button type="submit" name="dataset" value="${id}" aria-controls="details-${id}">${id}</button></div>`).join('')}</form></div>
+    ${ids.map(id => `<div id="details-${id}" data-dataset-details="${id}"></div>`).join('')}</section>`);
+  const form = document.querySelector('form')!;
+  // Linkedom does not implement form.elements or button.value.
+  for (const button of form.querySelectorAll('button')) button.value = button.getAttribute('value')!;
+  Object.defineProperty(form, 'elements', { value: [...form.querySelectorAll('button')] });
+  const selection = initialObjectSelection(definition.controls);
+  const state = { desired: selection, committed: selection, committedBy: null, plan: null, pending: false, loadingMaterial: false, ready: true, error: null, viewRevision: null };
+  const selected: Promise<void>[] = [];
+  // Only the dataset controls are rendered here.
+  const binding = createObjectControlBinding({ stage: document.querySelector('main')!, controls: { ...definition.controls, settings: null }, initialSelection: selection,
+    getState: () => state, onError: error => { throw error; },
+    onAction: action => { if (action.kind === 'dataset') selected.push(loadPreparedDataset(definition, action.id)); },
+    onIntent: id => { void loadPreparedDataset(definition, id); } });
+  binding.setReady();
+  const button = document.querySelector(`button[value="${datasetId}"]`)!;
+  for (const event of ['pointerenter', 'focus', 'touchstart', 'pointerenter']) button.dispatchEvent(new Event(event));
+  assert.equal(read.mock.callCount(), 2, 'intent starts the read before the click');
+  button.dispatchEvent(new Event('click', { cancelable: true }));
+  await Promise.all(selected);
+  assert.equal(selected.length, 1);
+  assert.deepEqual(read.mock.calls.map(call => call.arguments[0]).slice(1), [`prepared/datasets/${datasetId}.json`]);
+  assert.ok(!definition.deferredDatasets?.includes(datasetId));
+  binding.destroy();
 });
