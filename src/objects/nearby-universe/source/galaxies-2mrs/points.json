@@ -108,6 +108,21 @@
       "faintTone": 0.3,
       "steps": 8,
       "basis": "Presentation of a measured quantity, on the pattern of the field's B tone: each galaxy's absolute Ks magnitude (Kcmag at its Planck 2018 luminosity distance) darkens its colour, full at -25.5 and 30% at -22.5, the 5th and 95th percentiles of these galaxies (-25.46 and -22.56). 2MRS has no B magnitude, so the tone is ranked within this sample, not on the field's scale."
+    },
+    "sizeBy": {
+      "shells": 16,
+      "tiers": [
+        {
+          "brightestShare": 0.25,
+          "radiusPx": 0.9
+        },
+        {
+          "brightestShare": 0.75,
+          "radiusPx": 0.65
+        }
+      ],
+      "radiusPx": 0.5,
+      "basis": "Presentation of a measured quantity: three dot sizes by absolute Ks magnitude, ranked among the galaxies at about the same distance (16 shells of equal count), so the survey reaching only luminous galaxies far away does not make the far dots the large ones. The brightest quarter of each shell draws 0.9 px, the middle half 0.65 px and the faintest quarter 0.5 px. The radii keep the bank's total light (each dot's luminance times its area) within 2% of its one 0.75 px size before, measured on the baked stack, so the sizes move light between galaxies without adding any."
     }
   },
   "classBasis": "Class bounds are the midpoints between the de Vaucouleurs numerical types the templates stand for (E -5, S0 -2, Sa 1, Sb 3, Sc 5); types later than Sc take the Sc template, the latest in the atlas. 2MRS's types are ZCAT's numerical stages (Huchra et al. 2012, table 3 note G1)."
