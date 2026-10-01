@@ -99,15 +99,13 @@ const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.v
 export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
   const wantedOrbits = new Set<string>(), landmarkMoonIds = new Set(annotationLandmarks), declutterMarkers = createMarkerDeclutter(annotationPriorities);
-  // An extended body (a galaxy, a cluster, a nebula) is a point here: its framing radius is no sphere that hides or resolves.
   const points = [plan.focus, ...plan.bodies].map(body => 'classification' in body && isExtendedClassification(body.classification) ? { ...body, radiusM: 0 } : body), byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
   let systemFade = createSystemFade(plan);
   const entryOf = (body: (typeof points)[number]) => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
-    // A star placed by its own record, not one on an orbit: only such a star can belong to another galaxy's field.
-    const placedStar = orbit === null && 'classification' in body && body.classification === 'star';
+    const placedStar = orbit === null && 'classification' in body && body.classification === 'star'; // Placed by its own record: only such a star can be of another galaxy's field.
     const distanceFromSunM = Math.hypot(...body.positionM.map((value, axis) => value - plan.focus.positionM[axis]!));
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null, scale: markerScale(distanceFromSunM, placedStar ? plan.volume : undefined),
       galaxyField: !placedStar || inGalaxyField(distanceFromSunM, plan.volume), kind: 'classification' in body ? body.classification : undefined, extended: 'classification' in body && isExtendedClassification(body.classification),
@@ -345,15 +343,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           (annotationPriorities[body.id] ?? 0) >= 3;
         const proxyOpacity = highlighted || hostedPlanet ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const flightDestination = navigationInFlight && body.id === emphasizedId;
-        // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera over
-        // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
-        // so without this every star of the Milky Way stayed a dot from intergalactic distances. A body beyond it uses the cluster scale.
+        // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera, as its name
+        // does below (a star in no system has no other fade); a galaxy or a cluster fades at its own scale (extendedRetirement).
         const beyondLocalGroup = extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
-        // The focus, a featured star, a star outside the Milky Way and a black hole keep their dots; planets fade with their system.
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
           entry.galaxyField && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
-        // A retired galaxy level takes its own stars with it; a star of another galaxy (a Magellanic Cloud's, or one beyond the
-        // Local Group at the cluster scale) stays for that galaxy's view.
+        // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy and a cluster keep their dots.
         const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField && entry.kind !== 'galaxy' && entry.kind !== 'galaxy-cluster' ? 1 : galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
