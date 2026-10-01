@@ -68,4 +68,4 @@ export async function presentStartupCover(document: Document): Promise<void> {
   document.querySelector('.startup-loading')?.remove();
 }
 
-void presentStartupCover(document).catch(error => console.error('Startup cover failed', error));
+if (typeof document !== 'undefined') void presentStartupCover(document).catch(error => console.error('Startup cover failed', error));

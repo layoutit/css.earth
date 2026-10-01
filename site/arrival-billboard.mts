@@ -45,7 +45,9 @@ export async function prepareArrivalBillboard(stage: HTMLElement, arrival: Prepa
   image.dataset.arrivalBillboard = 'flight';
   Object.assign(image.style, { position: 'absolute', left: '50%', top: '50%', width: `${asset.size}px`,
     height: `${asset.size}px`, maxWidth: 'none', margin: '0', transformOrigin: '50% 50%',
-    pointerEvents: 'none', zIndex: '2147483646', opacity: '0' });
+    pointerEvents: 'none', zIndex: '2147483646',
+    // The page's cover already shows this image in the same place (startup-cover.mts); hiding it would blink.
+    opacity: existing?.dataset.startupCover === 'shown' ? existing.style.opacity : '0' });
   let disposed = false, rejectPending: ((reason: unknown) => void) | null = null;
   const aborted = () => signal.reason ?? new DOMException('Arrival cancelled.', 'AbortError');
   function destroy() {
