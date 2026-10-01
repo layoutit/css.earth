@@ -35,7 +35,7 @@ const createPlannerWorker = (): WorldPlannerWorker => new Worker(new URL('./worl
 let prestarted: WorldPlannerWorker | null = null;
 /** Start the planner worker while the plan it serves still downloads: its script loads and evaluates meanwhile, and messages
  * posted before it runs wait in its queue. The next default client adopts it. */
-export function prestartWorldContextPlanner() { prestarted ??= createPlannerWorker(); }
+export function prestartWorldContextPlanner() { try { prestarted ??= createPlannerWorker(); } catch { /* the client creates it and reports */ } }
 const adoptPlannerWorker = (): WorldPlannerWorker => { const worker = prestarted ?? createPlannerWorker(); prestarted = null; return worker; };
 
 export function createWorldContextPlannerClient(plan: PreparedWorldContext,

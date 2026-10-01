@@ -12,6 +12,9 @@ import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
+
+/** The world's prepared data, which `startup-boot.mts` starts reading while the first body still loads. */
+export { loadApplicationUniverse };
 import { createApplicationWorldFrames } from './application-world-frames.mts';
 import { createApplicationWorldVisibility, worldVisibilityPolicy } from './application-world-visibility.mts';
 import type { ApplicationWorldLayer } from './application-world-types.mts';

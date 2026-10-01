@@ -8,6 +8,7 @@ import { loadNavigableObject, preparedObjectCapabilities,
   createWorldContextObjectRuntime } from '@cssearth/renderer';
 import { APPLICATION_WORLD_CAMERA } from './world-camera.mts';
 import * as runtimePolicy from './runtime-policy.mts';
+import { startupFetch } from './startup-requests.mts';
 import { preparedObjectPath } from './prepared-object-path.mts';
 
 // The application supplies its shell nodes and authoritative input policy.
@@ -45,7 +46,7 @@ export async function loadPackagedObject(input: unknown, signal?: AbortSignal) {
       }
       const path = reference === 'prepared/object.json' && adoptsServerMarkup(descriptorInput.id) ? 'first-view.json' : preparedObjectPath(reference);
       const url = `/objects/${descriptorInput.id}/${path}`;
-      const response = await fetch(url, { signal });
+      const response = await startupFetch(url, { signal });
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
     },

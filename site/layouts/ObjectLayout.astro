@@ -3,6 +3,8 @@ import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
+import { startupRequestsBootstrap } from '../startup-requests.mts';
+import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
 import { breadcrumbJsonLd, focusSeo, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
@@ -54,6 +56,8 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
   <head>
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
+    {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
+    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id) })}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content={seo.description} />
     <link rel="canonical" href={seo.canonical} />
@@ -83,6 +87,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
       bindNativeViewForms(document, window);
+      import("../startup-boot.mts").then(boot => boot.startFirstView(document)).catch(() => {});
       import("../scene/scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();
