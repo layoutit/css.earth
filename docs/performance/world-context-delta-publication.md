@@ -22,8 +22,9 @@ orbits bypass the segment writer; changed slots keep the existing prepared
 leaf pool, including its shrink/re-entry rules. Picking, label exclusions and
 sprite residency retain their state between geometric changes. Selection,
 hover, navigation, font measurements and image readiness still invalidate
-presentation policy, independently of camera geometry. Depth ranks continue to
-follow the same camera order.
+presentation policy, independently of camera geometry. Depth ranks continued to
+follow the same camera order; [marker declutter](marker-declutter.md) later
+replaced that order with a fixed one.
 
 No geometry, style rules, dimensions, color, opacity curve, content or input
 policy was changed. Existing projection is still required when the observer

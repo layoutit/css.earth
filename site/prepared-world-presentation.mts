@@ -54,9 +54,19 @@ function categoryFrames(value: unknown) {
   }));
 }
 
+/** The framing radius of each system whose bodies are their own file (site/system-framing-radii.mts, measured over the whole
+ * world), so a page has it before it reads that system. */
+function systemFramingRadii(value: unknown): ReadonlyMap<string, number> {
+  if (!isRecord(value)) throw new TypeError(`Prepared world presentation systemFramingRadii must map system hosts to radii; got ${typeof value}.`);
+  return new Map(Object.entries(value).map(([id, radius]) => {
+    if (typeof radius !== 'number' || !(radius > 0) || !Number.isFinite(radius)) throw new TypeError(`Prepared world presentation systemFramingRadii.${id} must be a positive number; got ${String(radius)}.`);
+    return [id, radius] as const;
+  }));
+}
+
 function parseWorldPresentation(value: unknown) {
-  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@3' || !isRecord(value.moons)) {
-    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@3; run pnpm prepare:world-context.`);
+  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@4' || !isRecord(value.moons)) {
+    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@4; run pnpm prepare:world-context.`);
   }
   return Object.freeze({
     satelliteSystemIntroductions: Object.freeze(Object.fromEntries(Object.entries(requireRecord(value.satelliteSystemIntroductions)).map(([id, text]) => [id, requireString(text)]))),
@@ -68,6 +78,7 @@ function parseWorldPresentation(value: unknown) {
     galaxies: distances(value.galaxies, 'galaxies', ['fadeStartDistanceM', 'fullDistanceM', 'maximumDistanceM', 'minimumDistanceRadii', 'defaultFocusRadiusM', 'metersPerParsec']),
     clusters: distances(value.clusters, 'clusters', ['fadeStartDistanceM', 'fullDistanceM']),
     categoryFrames: categoryFrames(value.categoryFrames),
+    systemFramingRadii: systemFramingRadii(value.systemFramingRadii),
   });
 }
 

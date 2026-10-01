@@ -3,6 +3,7 @@ import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-as
 import { textureTileGroups, textureTileLeafStyles } from './prepared-texture-levels.js';
 import { leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
+import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; }
@@ -41,6 +42,7 @@ const styleText = (style: ReadonlyMap<string, string>) => [...style].map(([key, 
 export function serializePreparedScene(definition: ObjectRuntimeDefinition, datasetId?: string, settings?: unknown,
   resolveTexture: PreparedTextureResolver = (_key, address) => resolvePreparedAssetUrl(address, definition.assetOrigin)): SerializedPreparedScene {
   const selection = initialObjectSelection(definition.controls, datasetId, settings);
+  if (preparedDatasetPending(definition, selection)) throw new TypeError(`${definition.id}: dataset ${String(selection.datasetId)} needs its tables (adoptPreparedDatasetTables).`);
   const variant = definition.variants.find(entry => Object.entries(entry.when).every(([key, value]) => selection[key] === value));
   if (!variant) throw new TypeError(`${definition.id}: initial presentation is missing.`);
   const elements = definition.tree.nodes.map(node => ({

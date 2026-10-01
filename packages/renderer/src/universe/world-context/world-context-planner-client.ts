@@ -2,7 +2,7 @@ import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../p
 import { parsePreparedWorldContextPlan, worldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldContextView } from './world-context-planner.js';
 import type { WorldContextFrame } from './world-context-frame.js';
-import { packWorldBodies, type PackedWorldContextView } from './world-context-view-transport.js';
+import { packWorldBodies, WORLD_BODY_FIELDS, type PackedWorldContextView } from './world-context-view-transport.js';
 
 export interface WorldPlannerWorker {
   onmessage: ((event: MessageEvent<{ ready?: boolean; id?: number; frame?: WorldContextFrame; error?: string; orbitsLoaded?: string }>) => void) | null;
@@ -27,12 +27,23 @@ export type WorldPlannerInitialise = { readonly annotationPriorities: Readonly<R
   ({ readonly validatedPlan: PreparedWorldContextGeometry; readonly source?: undefined } |
    { readonly validatedPlan: PreparedWorldContext; readonly source: WorldPlannerSource });
 
+/** A plan with more systems' bodies (`extendWorldContext`), validated by the client like its first plan. The worker adds the
+ * bodies it does not hold, after those it does, so every index it planned keeps its body. */
+export type WorldPlannerExtend = { readonly validatedExtension: PreparedWorldContext };
+
 /** The publication queue owns admission; this transport owns one persistent prepared bank.
  * With a `source`, the worker receives the main thread's validated summary and
  * reads orbit banks as needed. Without one, `plan` must be the full context. */
+const createPlannerWorker = (): WorldPlannerWorker => new Worker(new URL('./world-context-planner-worker.js', import.meta.url),
+  { type: 'module', name: 'cssearth-world-planner' });
+let prestarted: WorldPlannerWorker | null = null;
+/** Start the planner worker while the plan it serves still downloads: its script loads and evaluates meanwhile, and messages
+ * posted before it runs wait in its queue. The next default client adopts it. */
+export function prestartWorldContextPlanner() { try { prestarted ??= createPlannerWorker(); } catch { /* the client creates it and reports */ } }
+const adoptPlannerWorker = (): WorldPlannerWorker => { const worker = prestarted ?? createPlannerWorker(); prestarted = null; return worker; };
+
 export function createWorldContextPlannerClient(plan: PreparedWorldContext,
-  createWorker: () => WorldPlannerWorker = () => new Worker(new URL('./world-context-planner-worker.js', import.meta.url),
-    { type: 'module', name: 'cssearth-world-planner' }),
+  createWorker: () => WorldPlannerWorker = adoptPlannerWorker,
   annotationPriorities: Readonly<Record<string, number>> = {}, source?: WorldPlannerSource, annotationLandmarks: readonly string[] = []) {
   const worker = createWorker();
   let resolveReady!: () => void, rejectReady!: (error: Error) => void;
@@ -60,10 +71,14 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   worker.onerror = event => destroy(new Error(event.message));
   // A plan validated on this thread returns at once (its mark); anything else is validated here, before it is vouched for.
   const validatedPlan = parsePreparedWorldContextPlan(plan);
-  if (source && validatedPlan.schema !== 'cssearth-world-context-summary@1') throw new TypeError('Orbit banks complete the world context summary only.');
+  if (source && validatedPlan.schema !== 'cssearth-world-context-summary@2') throw new TypeError('Orbit banks complete the world context summary only.');
   const initialise: WorldPlannerInitialise = source ? { source, validatedPlan, annotationPriorities, annotationLandmarks }
     : { validatedPlan: worldContextGeometry(validatedPlan), annotationPriorities, annotationLandmarks };
   worker.postMessage(initialise);
+  // Bodies the worker holds, and extended plans it has not been sent: each goes just before the first view whose columns
+  // hold its bodies, since a view captured before the extension still holds fewer.
+  let held = 1 + validatedPlan.bodies.length;
+  const extensions: PreparedWorldContext[] = [];
   return { async plan(view: WorldContextView | PackedWorldContextView): Promise<WorldContextFrame> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');
@@ -74,10 +89,22 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
         // A retained context sends its columns as they are; a view of objects is packed here.
         const { rest, packed } = 'bodyColumns' in view ? (({ bodyColumns, ...rest }) => ({ rest, packed: bodyColumns }))(view)
           : (({ bodies, ...rest }) => ({ rest, packed: packWorldBodies(bodies) }))(view);
+        const count = packed.length / WORLD_BODY_FIELDS;
+        while (held < count && extensions.length) {
+          const next = extensions.shift()!;
+          held = 1 + next.bodies.length;
+          worker.postMessage({ validatedExtension: next } satisfies WorldPlannerExtend);
+        }
         worker.postMessage({ id: sequence, view: rest, bodies: packed }, [packed.buffer as ArrayBuffer]);
       }
       catch (error) { destroy(error instanceof Error ? error : new Error(String(error))); }
     });
+  },
+  /** Plan with `next`, an extension of this client's plan, from the first view whose columns hold its bodies. */
+  extend(next: PreparedWorldContext) {
+    const validated = parsePreparedWorldContextPlan(next);
+    if (source && validated.schema !== 'cssearth-world-context-summary@2') throw new TypeError('Orbit banks complete the world context summary only.');
+    extensions.push(validated);
   },
   /** Call `listener` whenever an orbit centre's paths arrive after a frame that lacked them; returns the unsubscribe. */
   onOrbitsLoaded(listener: () => void) { orbitListeners.add(listener); return () => { orbitListeners.delete(listener); }; },

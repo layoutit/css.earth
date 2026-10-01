@@ -11,6 +11,7 @@ import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsM
 import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
+import { createMarkerDeclutter } from './marker-declutter.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
 import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, markerScale, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
@@ -19,7 +20,7 @@ const ORBIT_LOD_PIXELS = 0.1;
 // camera sample. This uses committed visibility, never worker-local history.
 const ANNOTATION_ENTRY_MARGIN = .05;
 export { orbitOutsideMarker } from './orbit-presentation.js';
-import { orbitOutsideMarker, orbitPresentation, quantizeAlpha, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS } from './orbit-presentation.js';
+import { orbitBounds, orbitOutsideMarker, orbitPresentation, quantizeAlpha, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS } from './orbit-presentation.js';
 
 /** UI measurements and the last committed annotation state, without DOM handles. */
 export interface WorldBodyPresentation {
@@ -56,6 +57,8 @@ export interface WorldContextView {
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
   orbitLodPixels?: number;
   anchorOnly: boolean;
+  /** The view has left the systems' scale (prepared-world-context.ts setSystemRetired): only their stars are drawn. */
+  systemRetired?: boolean;
   bodies: readonly WorldBodyPresentation[];
   contextCommittedId?: number;
 }
@@ -94,13 +97,11 @@ const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.v
 
 export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
-  const wantedOrbits = new Set<string>();
-  const landmarkMoonIds = new Set(annotationLandmarks);
-  const points = [plan.focus, ...plan.bodies];
-  const byId = new Map(points.map(point => [point.id, point]));
+  const wantedOrbits = new Set<string>(), landmarkMoonIds = new Set(annotationLandmarks), declutterMarkers = createMarkerDeclutter(annotationPriorities);
+  const points = [plan.focus, ...plan.bodies], byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
-  const systemFade = createSystemFade(plan);
-  const prepared = points.map(body => {
+  let systemFade = createSystemFade(plan);
+  const entryOf = (body: (typeof points)[number]) => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null, scale: markerScale(Math.hypot(...body.positionM.map((value, axis) => value - plan.focus.positionM[axis]!))),
@@ -112,9 +113,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // assigned over them instead of spreading 470 new objects every frame.
       state: null as unknown, projected: null as ProjectedBody<unknown> | null,
       output: null as PlannedBodyOutput | null, bounds: { left: 0, top: 0, right: 0, bottom: 0 } };
-  });
+  };
+  const prepared = points.map(entryOf);
   // Only the selected path fades with depth; one shared scratch pool serves it.
-  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0))));
+  const projectionCapacity = () => Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0)));
+  let selectedOrbitProjection = createRetainedRingProjection(projectionCapacity());
   const planFrame = (view: WorldContextView) => {
     const labelMeasurements: number[] = [];
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
@@ -132,7 +135,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     if (!selectedEntry) throw new TypeError('Selected context body is unavailable.');
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
-    const opacity = systemFade.update(world.pose.positionM);
+    const opacity = systemFade.update(world.pose.positionM, view.systemRetired === true);
     const focusDistanceM = Math.hypot(world.pose.positionM[0] - plan.focus.positionM[0], world.pose.positionM[1] - plan.focus.positionM[1], world.pose.positionM[2] - plan.focus.positionM[2]);
     const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       // The camera rotation applied to the camera-relative position, fused: one array per point instead of two, the same
@@ -494,8 +497,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         (candidate.tier ?? 0) >= 3);
       const acceptedLandmarks = landmarks.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
       for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);
-      const landmarkSet = new Set(landmarks);
-      const otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
+      const landmarkSet = new Set(landmarks), otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
       // Use the same admission during motion and at rest. Clear committed
       // placements survive first; obstructed labels can move and newly clear
       // labels can return. Gesture history must not strand a visible star as a dot.
@@ -509,14 +511,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const passes = [(candidate: typeof candidates[number]) => ownSystem(candidate) && major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && major(candidate),
         (candidate: typeof candidates[number]) => ownSystem(candidate) && !major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && !major(candidate)];
       const accepted = [...acceptedLandmarks, ...passes.flatMap(pass => admitStableLabels(otherCandidates.filter(pass), labelBudget))];
-      for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
-      if (selectedLocator) selectedLocator.entry.indicatorShown = true;
+      for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; } if (selectedLocator) selectedLocator.entry.indicatorShown = true;
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;
         projected.entry.labelShown = true; projected.entry.labelPlacement = placement;
-        projected.entry.indicatorShown = projected.circle;
-        projected.labelPosition = [rect.left, rect.top];
+        projected.entry.indicatorShown = projected.circle; projected.labelPosition = [rect.left, rect.top];
       }
+      declutterMarkers(projectedBodies, [plan.focus.id, selectedId, emphasizedId]);
       for (const projected of projectedBodies) {
         const { entry, x, y } = projected;
         if (!entry.orbit) continue;
@@ -568,6 +569,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     return { emphasizedId, opacity, width, height, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
   };
   return Object.assign(planFrame, {
+    /** Another system's bodies, read after the plan was made (`extendWorldContext`): each takes the next index, so every
+     * body already planned keeps its own. `next` is the extended plan, for the systems' fades. */
+    extend(next: PreparedWorldContext | PreparedWorldContextGeometry) {
+      const added = next.bodies.filter(body => !byId.has(body.id));
+      for (const body of added) { points.push(body); byId.set(body.id, body); indexById.set(body.id, points.length - 1); }
+      for (const body of added) prepared.push(entryOf(body));
+      systemFade = createSystemFade(next);
+      selectedOrbitProjection = createRetainedRingProjection(projectionCapacity());
+    },
     /** Give bodies the paths their centre's bank decoded; each keeps its retained projection and per-frame state. */
     attachOrbits(orbits: ReadonlyMap<string, PreparedContextOrbitGeometry>) {
       for (const entry of prepared) {
@@ -585,16 +595,3 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   });
 }
 export type PlannedWorldContext = ReturnType<ReturnType<typeof createWorldContextPlanner>>;
-
-/** The picking bounds of the final clipped chords, including the marker cutout,
- * written into the body's retained bounds object; the paint owner formats the strokes. */
-function orbitBounds(segments: readonly OrbitSegment[], into: NonNullable<PlannedBodyOutput['orbitBounds']>) {
-  if (segments.length === 0) return null;
-  let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
-  for (const [x0, y0, x1, y1] of segments) {
-    left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
-    top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
-  }
-  into.left = left; into.top = top; into.right = right; into.bottom = bottom;
-  return into;
-}

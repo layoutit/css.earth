@@ -6,7 +6,7 @@ import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createPreparedUniverse, parseDatasetBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
-import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
@@ -112,8 +112,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       return { id: descriptor.id, url: resourceSet(descriptor.id).resolve(descriptor.prepared.url) };
     });
     const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
-    const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,
+    const billboards = (bodies: Parameters<typeof preparedBodyBillboards>[0]) => preparedBodyBillboards(bodies, plainDots,
       id => asteroids.has(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
+
     // Bank declarations do not fetch payloads. Deduplicate pending loads only; the
     // mounted layer owns residency and can release banks after they leave view.
     const volumeDatasetDescriptors = parsedDescriptors
@@ -135,6 +136,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const fades = PREPARED_WORLD_PRESENTATION;
     const catalogBank = { fadeStartDistanceM: fades.galaxies.fadeStartDistanceM, fullDistanceM: fades.galaxies.fullDistanceM,
       clusters: { fadeStartDistanceM: fades.clusters.fadeStartDistanceM, fullDistanceM: fades.clusters.fullDistanceM } };
+    // The plan as it stands now: systems read later reach the universe through onWorldSystems below.
+    const plan = applicationContext, sprites = billboards([plan.focus, ...plan.bodies]);
     const universe = createPreparedUniverse({
       // The world's volume is an overview's package (the Milky Way): clicking it opens that overview's page.
       environmentLinks: isOverviewPage(applicationContext.volume.objectId) ? { [applicationContext.volume.objectId]: (link => link.pathname + link.search)(
@@ -145,7 +148,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
       galaxyCataloguePoints: ['globular-clusters', 'old-star-dots', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
-      context: applicationContext, volume, pointAppearance, sprites,
+      context: plan, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,
       backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
@@ -168,8 +171,23 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
+    // Other systems' bodies join the world as their files arrive (site/world-context-plan.mts), with their billboards.
+    let drawn = plan.bodies.length;
+    onWorldSystems(next => {
+      const added = next.bodies.slice(drawn);
+      drawn = next.bodies.length;
+      universe.addSystems(next, billboards(added));
+    });
+    // The first world mount adopts a planner made now: its worker builds the planner from the summary while the first body
+    // still prepares, so the world's first frame waits only for its own plan. Later mounts make their own.
+    let firstPlanner: ReturnType<typeof universe.createFramePlanner> | null = universe.createFramePlanner();
     return {
       ...universe, loadShells,
+      createFramePlanner() {
+        const planner = firstPlanner ?? universe.createFramePlanner();
+        firstPlanner = null;
+        return planner;
+      },
       catalogSources: () => catalogs ? [...catalogs.galaxies.sources, ...catalogs.clusters.sources, ...catalogs.nebulae.sources] : [],
     };
   })().catch(error => { universePromise = null; throw error; });

@@ -7,10 +7,10 @@ import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { PlannedWorldContext } from './world-context/world-context-planner.js';
 import { bindWorldBodyColumns, createWorldBodyColumns, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
-import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
+import type { OrientationXyzw } from '@cssearth/engine';
+import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
@@ -36,75 +36,54 @@ export type BodyVisibility = Partial<Record<(typeof VISIBILITY_FLAGS)[number], r
 
 type ProjectedBody = PlannedWorldContext['projectedBodies'][number];
 
-/** Paint and pick order by camera depth. Camera translation shifts every body's depth equally, so only the
- * orientation, the ranked members and the selection move ranks. A rotation keeps the committed order and
- * re-sorts once on release: re-ranking every frame rewrote dozens of z-indices as one body changed place. */
-function createDepthOrder<Entry extends { readonly body: { readonly positionM: readonly number[] } }>(members: readonly Entry[], base: number) {
-  let orientation: readonly number[] | null = null, selection: Entry | null = null, selectedRank = 0, sorted = false;
-  // Each member's index, fixed for a member list; its rank is four pick slots per place in the order.
-  const indexOf = new Map<Entry, number>();
-  let ranks = new Uint32Array(0), depths = new Float64Array(0), positions = new Float64Array(0);
-  let keys = new Uint32Array(0), from = new Uint32Array(0), to = new Uint32Array(0);
-  const counts = new Uint32Array(256);
-  // Deepest first, then member order: the order a stable sort by depth gives. A stable radix sort on the depth's bits finds
-  // it in eight linear passes, with no comparator call per pair. Each depth becomes two words that sort ascending as the
-  // depth descends: a negative depth keeps its bits, a positive one flips all but the sign.
-  const sortByDepth = (count: number) => {
-    const bits = new Uint32Array(depths.buffer, 0, count * 2);
-    for (let index = 0; index < count; index++) {
-      const low = bits[index * 2]!, high = bits[index * 2 + 1]!, negative = high >>> 31;
-      keys[index * 2] = negative ? low : ~low >>> 0; keys[index * 2 + 1] = negative ? high : (high ^ 0x7fffffff) >>> 0;
-      from[index] = index;
-    }
-    let source = from, target = to;
-    for (let pass = 0; pass < 8; pass++) {
-      const word = pass >> 2, shift = (pass & 3) * 8;
-      counts.fill(0);
-      for (let index = 0; index < count; index++) counts[(keys[source[index]! * 2 + word]! >>> shift) & 255]++;
-      // A byte every depth shares moves nothing.
-      if (counts[(keys[source[0]! * 2 + word]! >>> shift) & 255] === count) continue;
-      for (let bucket = 0, sum = 0; bucket < 256; bucket++) { const size = counts[bucket]!; counts[bucket] = sum; sum += size; }
-      for (let index = 0; index < count; index++) { const member = source[index]!; target[counts[(keys[member * 2 + word]! >>> shift) & 255]++] = member; }
-      [source, target] = [target, source];
-    }
-    for (let place = 0; place < count; place++) ranks[source[place]!] = place * 4;
-  };
+/** Paint and pick order. A body stacks behind the selected body's retained detail layers (z-index base..base+3) when it
+ * is farther along the view than the selected body, in front of them otherwise, so a billboard behind a translucent
+ * focus (a galaxy's image, an atmosphere) stays under it. On each side the order is fixed: the bodies' prepared annotation
+ * priority, the larger body first on a tie. Markers overlap almost only where a whole system has shrunk to a few pixels (a
+ * zoom out from the Sun at 84 to 582 AU drew 246 to 363 markers in 5,523 to 21,391 overlapping pairs, and a half turn
+ * there swapped 13,679 of them, 2026-09-30), where no order among them shows; a full camera-depth order rewrote hundreds of
+ * z-indices on every turn's release. Now a turn moves only the bodies that cross the selected body's depth. Camera
+ * translation shifts every depth equally, so only the orientation, the members and the selection move a side; a rotation
+ * keeps the sides and updates them once on release. */
+function createDepthOrder<Entry extends { readonly body: { readonly id: string; readonly radiusM: number; readonly positionM: readonly number[] } }>(
+  members: readonly Entry[], base: number, priorities: Readonly<Record<string, number>>) {
+  let orientation: OrientationXyzw | null = null, selection: Entry | null = null, sorted = false;
+  // Each member's place in the fixed order (its rank, four pick slots per place) and whether it is behind the selection.
+  const places = new Map<Entry, number>(), behind = new Map<Entry, boolean>();
   const allocate = () => {
-    const count = members.length;
-    indexOf.clear(); members.forEach((entry, index) => indexOf.set(entry, index));
-    // Positions are fixed for a member list: copied once, then each depth is three multiplies over a flat array.
-    positions = new Float64Array(count * 3);
-    members.forEach((entry, index) => positions.set(entry.body.positionM.slice(0, 3), index * 3));
-    depths = new Float64Array(count); ranks = new Uint32Array(count); keys = new Uint32Array(count * 2);
-    from = new Uint32Array(count); to = new Uint32Array(count);
+    places.clear();
+    [...members].map((entry, index) => ({ entry, index })).sort((a, b) =>
+      (priorities[a.entry.body.id] ?? 0) - (priorities[b.entry.body.id] ?? 0) || a.entry.body.radiusM - b.entry.body.radiusM || a.index - b.index)
+      .forEach(({ entry }, place) => places.set(entry, place));
   };
-  allocate();
   return {
-    /** Hidden bodies leave the order; the next update re-sorts. */
-    setMembers(next: readonly Entry[]) { members = next; orientation = null; sorted = false; allocate(); },
+    /** Hidden bodies leave the order; the next update places the rest. */
+    setMembers(next: readonly Entry[]) { members = next; orientation = null; sorted = false; },
     update(orientationXyzw: OrientationXyzw, rotating: boolean, selected: Entry) {
       let ranksChanged = false;
-      if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
-        orientation = [...orientationXyzw];
-        const view = cssViewFromOrientation(orientationXyzw);
-        const count = members.length;
-        const vx = view[6]!, vy = view[7]!, vz = view[8]!;
-        // Adding zero turns -0 into 0: the two are one depth, and their bits must sort as one.
-        for (let index = 0, offset = 0; index < count; index++, offset += 3) {
-          depths[index] = -(vx * positions[offset]! + vy * positions[offset + 1]! + vz * positions[offset + 2]!) + 0;
-        }
-        sortByDepth(count);
-        sorted = true; selection = null; ranksChanged = true;
+      if (!sorted) { allocate(); sorted = true; ranksChanged = true; }
+      const turned = !orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]));
+      if (!turned && !ranksChanged && selection === selected) return { ranksChanged, changed: false };
+      if (turned) orientation = [orientationXyzw[0], orientationXyzw[1], orientationXyzw[2], orientationXyzw[3]];
+      const view = cssViewFromOrientation(orientation!), vx = view[6]!, vy = view[7]!, vz = view[8]!;
+      const depth = (entry: Entry) => -(vx * entry.body.positionM[0]! + vy * entry.body.positionM[1]! + vz * entry.body.positionM[2]!);
+      const selectedDepth = depth(selected);
+      let changed = ranksChanged || selection !== selected;
+      for (const entry of members) {
+        const next = entry !== selected && depth(entry) > selectedDepth;
+        if (behind.get(entry) !== next) { behind.set(entry, next); changed = true; }
       }
-      const changed = ranksChanged || selection !== selected;
       selection = selected;
-      selectedRank = ranks[indexOf.get(selected)!]!;
       return { ranksChanged, changed };
     },
     /** Four pick slots per body: orbit and marker, label, indicator. */
-    rank: (entry: Entry) => { const index = sorted ? indexOf.get(entry) : undefined; return index === undefined ? undefined : ranks[index]; },
-    /** The selected body's retained detail layers take z-index base..base+3; other bodies stack behind or in front. */
-    zIndex(rank: number) { const relative = (rank - selectedRank) / 4; return String(base + (relative > 0 ? relative + 3 : relative)); },
+    rank: (entry: Entry) => { const place = sorted ? places.get(entry) : undefined; return place === undefined ? undefined : place * 4; },
+    /** The selected body's retained detail layers take z-index base..base+3; the others stack behind or in front of them. */
+    zIndex(rank: number, entry: Entry) {
+      if (entry === selection) return String(base);
+      const place = rank / 4;
+      return String(behind.get(entry) ? base - members.length + place : base + 4 + place);
+    },
   };
 }
 
@@ -155,12 +134,14 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, distantNavigation, plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, annotationPriorities = {}, distantNavigation, plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
+  /** Each body's annotation priority (the planner's): the fixed order its marker paints and picks in. */
+  annotationPriorities?: Readonly<Record<string, number>>;
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
   /** Bodies drawn as a dot in their colour, at least `minimumDiameterPixels` wide: no sprite, and never a hover or
    * navigation target. */
@@ -198,12 +179,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // own WebKit layer over the composited sky and globe.
   const orbitTemplate = host.ownerDocument.createElement('div');
   orbitTemplate.className = orbitRenderer === 'bars' ? 'context-orbit context-orbit-bars' : 'context-orbit';
-  const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
+  // Sprites by body id; a system added later brings its own (addBodies).
+  const spriteTable: Record<string, SpriteWithUrl> = { ...sprites };
+  const createEntry = (body: PreparedWorldContext['focus'] | PreparedContextBody, index: number) => {
     // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
     // name and orbit and is never a navigation target.
     const unpackaged = 'unpackaged' in body && body.unpackaged === true;
     const plainDot = plainDotIds.has(body.id);
-    const sprite = plainDot ? undefined : sprites[body.id];
+    const sprite = plainDot ? undefined : spriteTable[body.id];
     const approximate = 'placement' in body && body.placement === 'approximate';
     // The body billboard is set only when resolved and visible. Unresolved bodies remain colour dots and never fetch an image.
     const { mover, marker, spriteLeaf, caption } = createMarker(plainDot), data = marker.dataset;
@@ -262,23 +245,24 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       baseAlpha,
       hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
-  });
+  };
+  const bodies = [plan.focus, ...plan.bodies].map(createEntry);
   // Each body's presentation lives in its row of these columns (bindWorldBodyColumns): a frame sends a copy of them.
-  const bodyColumns = createWorldBodyColumns(bodies.length);
+  let bodyColumns = createWorldBodyColumns(bodies.length);
   bodies.forEach((entry, index) => bindWorldBodyColumns(entry, bodyColumns, index));
   const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
   for (const entry of bodies) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
   const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail, depthBase);
-  const systemFade = createSystemFade(plan);
+  let systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const clock = opacityClock ?? opacityClockFor(windowTarget);
   const fader = createOpacityFader(windowTarget, clock);
   let destroyed = false;
   let selectedEntry = bodies[0]!;
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
-  const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
-  let systemRetired = false;
-  const depthOrder = createDepthOrder(bodies, depthBase);
+  let anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
+  let systemRetired = false, systemRetiredByScope = false;
+  const depthOrder = createDepthOrder(bodies, depthBase, annotationPriorities);
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
   let overview = false, overviewSelection = false;
@@ -299,6 +283,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     if (outsideGalaxy) root.dataset.galaxyView = 'outside'; else delete root.dataset.galaxyView;
   };
   let labelBlockers: readonly LabelScreenRect[] = [];
+  // The bodies each flag was last given to, for bodies another system adds later (addBodies).
+  const flagged: Partial<Record<(typeof VISIBILITY_FLAGS)[number], ReadonlySet<string>>> = {};
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
   // The prepared bank stays retained. Only owners currently contributing paint
@@ -365,7 +351,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           else if (!hoverIntent || rotationPhase === 'dragging' || navigationInFlight || !sameCamera(world, viewport)) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
         }
       }
-      const opacity = systemFade.update(world.pose.positionM);
+      const opacity = systemFade.update(world.pose.positionM, systemRetiredByScope);
       // Publish the first zero-opacity frame normally to retire picking and
       // annotations. Later frames need only the anchor locator; its siblings
       // keep their prepared DOM without further visibility work.
@@ -375,7 +361,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         contextCommittedId: contextFrames.committedId,
         selectedId: selectedEntry.body.id, overview, overviewSelection, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
         preserveCommittedAnnotations: rotationPhase === 'released',
-        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
+        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly, systemRetired: systemRetiredByScope,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         // Each body's presentation as it stands, copied for the planner's worker (the copy is transferred).
         bodyColumns: bodyColumns.slice() };
@@ -411,6 +397,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       selectionPreview = id;
       refresh();
     },
+    /** The application's view has left the systems' scale (its overview scope is past the system): every system retires
+     * through the same path as a system the camera has faded past, its star standing for it. */
+    setSystemRetired(retired: boolean) {
+      if (systemRetiredByScope === retired || destroyed) return;
+      systemRetiredByScope = retired;
+      invalidatePolicy();
+      refresh();
+    },
     setOverview(enabled: boolean, preserveSelection = false) {
       const selected = enabled && preserveSelection;
       if ((overview === enabled && overviewSelection === selected) || destroyed) return;
@@ -427,6 +421,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const ids = next[flag];
         if (!ids) continue;
         const marked = new Set(ids);
+        flagged[flag] = marked;
         for (const entry of bodies) {
           const value = marked.has(entry.body.id);
           if (entry[flag] === value) continue;
@@ -482,6 +477,29 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // Orbit leaves are built on first use; report the retained leaves now.
         get orbit() { return Object.freeze(entry.pieces.filter((piece): piece is HTMLElement | SVGElement => piece !== undefined)); },
       })));
+    },
+    /** Another system's bodies (`extendWorldContext`): `next` is the extended plan, whose new bodies take the next indices.
+     * Each is retained detached, as a mounted body is, with the flags its id was last given. */
+    addBodies(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>> = {}) {
+      if (destroyed) return;
+      const added = next.bodies.filter(body => !entriesById.has(body.id));
+      if (!added.length) return;
+      Object.assign(spriteTable, nextSprites);
+      const entries = added.map((body, offset) => createEntry(body, bodies.length + offset));
+      bodies.push(...entries);
+      bodyColumns = createWorldBodyColumns(bodies.length);
+      bodies.forEach((entry, index) => bindWorldBodyColumns(entry, bodyColumns, index));
+      for (const entry of entries) {
+        entriesById.set(entry.body.id, entry); indicatorTransitions.set(entry.marker, entry);
+        for (const flag of VISIBILITY_FLAGS) if (flagged[flag]?.has(entry.body.id)) {
+          entry[flag] = true;
+          if (flag === 'highlighted') entry.marker.dataset.contextHighlight = 'true';
+        }
+      }
+      for (const entry of entries) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
+      systemFade = createSystemFade(next);
+      anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
+      refreshDepthBodies(); invalidatePolicy(); refresh();
     },
     selectObject(id: string) {
       const entry = bodies.find(entry => entry.body.id === id);
@@ -570,7 +588,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const rank = depthOrder.rank(entry);
         if (rank === undefined) continue;
         depthPublications++;
-        const zIndex = depthOrder.zIndex(rank);
+        const zIndex = depthOrder.zIndex(rank, entry);
         if (entry.paint.billboardShown && entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
         if (orbitRenderer === 'bars' && entry.previousCount > 0 && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
       }
@@ -617,13 +635,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (!billboardShown || (hoverChanged && !animateHover)) animatedAnnotations.delete(entry);
         if (!billboardShown && !entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
         const rank = depthOrder.rank(entry)!;
-        const zIndex = depthOrder.zIndex(rank);
+        const zIndex = depthOrder.zIndex(rank, entry);
         // A billboard partly behind a nearer sphere is drawn, and the sphere's own paint hides that part, so it stacks
         // just below the sphere: the focus's detail or the covering body's billboard. Ranks hold still through a drag,
         // and a body that was nearer when the drag began would otherwise cross in front of the sphere it passes behind.
         const cover = coveredBy === null ? undefined : entriesById.get(coveredBy);
         const coverRank = cover && depthOrder.rank(cover);
-        const coverZ = cover === bodies[0] ? depthBase : coverRank === undefined ? undefined : Number(depthOrder.zIndex(coverRank));
+        const coverZ = cover === bodies[0] ? depthBase : coverRank === undefined || !cover ? undefined : Number(depthOrder.zIndex(coverRank, cover));
         const markerZIndex = coverZ === undefined || Number(zIndex) < coverZ ? zIndex : String(coverZ - 1);
         // Styles distinguish only the emphasized body. Overview shares the unselected
         // value, so a new selection restyles its two owners, not every marker and chord.

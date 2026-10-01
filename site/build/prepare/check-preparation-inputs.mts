@@ -38,7 +38,7 @@ export async function textBudgetFindings(ids: readonly string[], projectRoot = r
 
 /** The Sun's files that the world step rewrites before pins reads them (site/build/prepare/prepare-spatial-context.ts). */
 export const worldStepOutput = ({ location, filename }: InventoryAsset) =>
-  location === 'prepared' && /^(?:world-context(?:-summary)?\.json|world-orbits\/|system-views\/)/u.test(filename);
+  location === 'prepared' && /^(?:world-context(?:-summary)?\.json|world-orbits\/|world-systems\/|system-views\/)/u.test(filename);
 
 /** Restore from R2 each inventoried file of `id` whose local copy is missing or differs from its inventory, leaving the
  * ones `keep` names. Returns the restored files as `<location>/<filename>`. */

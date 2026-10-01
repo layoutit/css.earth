@@ -1,5 +1,7 @@
 import type { CameraPlan } from './types.js';
-export interface ResponsiveZoomOptions { plan: CameraPlan; mobile: boolean; framingReferenceZoom?: number; viewport: import('./camera-viewport.js').CameraViewport; }
+/** The camera plan fields the responsive fit reads; a page bakes them for its startup cover (site/startup-cover.mts). */
+export type ResponsiveZoomPlan = Pick<CameraPlan, 'responsiveFit' | 'logicalBodyDiameter' | 'defaultZoom' | 'framingScale' | 'projection'>;
+export interface ResponsiveZoomOptions { plan: ResponsiveZoomPlan; mobile: boolean; framingReferenceZoom?: number; viewport: import('./camera-viewport.js').CameraViewport; }
 import { smoothstep } from "@cssearth/engine";
 
 /** Share of a portrait tablet's open scene area (between header and drawer) the focus body spans on arrival.

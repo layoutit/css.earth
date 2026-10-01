@@ -6,6 +6,8 @@ export interface ObjectControlBindingOptions {
   stage: HTMLElement; controls: ObjectControls; initialSelection: ObjectSelection; getState(): Readonly<ObjectSelectionState>;
   /** `frameCamera` false keeps the reader's camera: a step within the sequence already on screen. */
   onAction(action: ObjectAction, options?: { frameCamera: boolean }): unknown; onError(error: unknown): void;
+  /** The reader points at, touches or focuses a dataset's control: its tables may start loading before the click. */
+  onIntent?(datasetId: string): void;
 }
 type SettingInput = HTMLInputElement | HTMLButtonElement;
 const isInput = (element: SettingInput): element is HTMLInputElement => element.tagName === "INPUT";
@@ -72,7 +74,7 @@ export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], d
 import { requireObjectControls } from "../runtime/object-contract.js";
 import { objectCycleStates, requireObjectAction } from "../runtime/object-contract.js";
 
-export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError }: ObjectControlBindingOptions) {
+export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, onIntent }: ObjectControlBindingOptions) {
   requireObjectControls(controls);
   if (!stage?.ownerDocument || [getState, onAction, onError].some(callback => typeof callback !== "function")) {
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
@@ -186,9 +188,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   const nativeChanges = new Map<string, ObjectAction>();
   const listeners: (() => void)[] = [];
-  function listen(input: EventTarget, event: string, callback: EventListener) {
-    input.addEventListener(event, callback);
-    listeners.push(() => input.removeEventListener(event, callback));
+  function listen(input: EventTarget, event: string, callback: EventListener, options?: AddEventListenerOptions) {
+    input.addEventListener(event, callback, options);
+    listeners.push(() => input.removeEventListener(event, callback, options));
   }
   function publish(next = getState()) {
     if (destroyed) return;
@@ -266,6 +268,10 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       stopPlayback();
       act({ kind: "dataset", id });
     });
+    // Intent reads the dataset's tables ahead of the click (dataset-tables.ts); the click shares that one read.
+    if (onIntent) for (const [id, input] of datasets) for (const event of ['pointerenter', 'focus', 'touchstart']) {
+      listen(input, event, () => { if (!destroyed) onIntent(id); }, { passive: true });
+    }
     for (const input of stepInputs) {
       // The first and last steps render a disabled button with nothing to step to.
       if (input.disabled && !input.dataset.datasetStep) continue;

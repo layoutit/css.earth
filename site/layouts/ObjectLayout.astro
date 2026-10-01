@@ -3,6 +3,8 @@ import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
+import { startupRequestsBootstrap } from '../startup-requests.mts';
+import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
 import { breadcrumbJsonLd, focusSeo, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
@@ -22,7 +24,10 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
+// The same hashed file the client's `world-context-plan.mts` fetches, requested by the head (startup-requests.mts).
+import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 import { worldCameraOf } from '@cssearth/renderer';
+import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
@@ -30,7 +35,7 @@ interface Props {
   /** The object the page is: `objectId`, or a catalogue focus its scene draws. */
   pageId?: string;
   navigation?: boolean;
-  scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor'>;
+  scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor' | 'coverPlan'>;
   descriptor?: ObjectDescriptor;
   /** The site's root page: it shows `objectId` but is named and addressed as the site. */
   home?: boolean;
@@ -42,6 +47,17 @@ const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
+// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); a catalogue focus page
+// drawn by another scene leaves it to that scene's startup.
+const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId === objectId ? {
+  plan: scene.coverPlan, mobileQuery: MOBILE_VIEWPORT_QUERY,
+  billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },
+  bodyRadiusM: objectRecord.worldFrame.bodyRadiusM,
+} : undefined;
+// The arrival photograph is the first thing a cold page shows, and it comes from the asset origin: dial that origin with
+// the head, or the photograph's request pays the DNS and TLS setup (430 ms of a cold iPad load against 33 ms on a warm
+// connection, 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
+const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
 const pageSeo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
@@ -54,7 +70,12 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
   <head>
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
+    {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
+    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl })}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}
+    {assetPreconnect && <link rel="preconnect" href={assetPreconnect} />}
+    {assetPreconnect && <link rel="preconnect" href={assetPreconnect} crossorigin />}
     <meta name="description" content={seo.description} />
     <link rel="canonical" href={seo.canonical} />
     <meta property="og:type" content="website" />
@@ -79,10 +100,17 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* Until the first body is ready, the phone sheet's lazy images wait (object-shell.css), so the globe's textures have
         the connection. The router clears this; without JavaScript it is never set. */}
     {!navigation && <script is:inline>document.documentElement.dataset.bodyPending = '';</script>}
+    {/* The arrival photograph takes its place from the HTML before the application's code and data (startup-cover.mts).
+        It comes first: module scripts run in document order, and its few modules are a small part of the graph. */}
+    {startupCover && <script>
+      import '../startup-cover.mts';
+    </script>}
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
+      import { startFirstView } from '../startup-boot.mts';
       bindNativeViewForms(document, window);
+      startFirstView(document);
       import("../scene/scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();
@@ -94,7 +122,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* Static imports make the browser fetch the application's modules while it parses the HTML; the dynamic import
         above only starts after parsing. A browser finds a module's imports only after downloading it, and the bundler
         does not hoist transitive imports, so the body runtime the router imports while it mounts is named here too.
-        The registry and world summary load after the first body (`scene-router.mts`). All resolve to the same module
+        The registry and the world's code start loading at boot (`startup-boot.mts`). All resolve to the same module
         instances, and the script above owns failure. */}
     {!navigation && <script>
       import '../packaged-object-runtime.mts';
@@ -137,6 +165,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
         {startup && <>
           <script is:inline type="application/json" data-startup-discovery set:html={JSON.stringify(startup).replace(/</g, '\u003c')} />
           <img data-startup-billboard fetchpriority="high" src={startupImage} alt="" aria-hidden="true" draggable="false" style="position:absolute;opacity:0;pointer-events:none" />
+          {startupCover && <script is:inline type="application/json" data-startup-cover set:html={JSON.stringify(startupCover).replace(/</g, '\u003c')} />}
         </>}
       </div>
       <div class="object-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />

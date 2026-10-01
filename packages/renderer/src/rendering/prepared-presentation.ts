@@ -14,6 +14,7 @@ import { hiddenSubtreeRoots, meshProfile, omittedPreparedNodes } from './prepare
 import { createSettlePacer } from './settle-pacer.js';
 import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
+import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
 import type { PreparedAssetOrigin } from './prepared-asset-origin.js';
@@ -68,6 +69,9 @@ export interface PreparedPresentationDefinition {
   /** The resource catalogue; presentation reads only its capability fallbacks. */
   assets?: PreparedAssets;
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
+  /** Datasets whose tables travel in their own transport and have not arrived (dataset-tables.ts). Their variants stand
+   * in without demand or textures until `adoptPreparedDatasetTables` replaces them. */
+  deferredDatasets?: readonly string[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[];
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
   /** Infinite motion: a spin resolved from source CSS, or a star's light curve as opacity. */
@@ -91,6 +95,7 @@ import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 
 const matches = (variant: PreparedVariant, selection: ObjectSelection) => Object.entries(variant.when).every(([name, value]) => selection[name] === value);
 export function selectedPreparedVariant(definition: PreparedPresentationDefinition, selection: ObjectSelection) {
+  if (preparedDatasetPending(definition, selection)) throw new TypeError(`The tables of dataset ${String(selection.datasetId)} have not arrived.`);
   const variant = definition.variants.find(variant => matches(variant, selection));
   if (!variant) throw new TypeError("The selected presentation was not prepared.");
   return variant;

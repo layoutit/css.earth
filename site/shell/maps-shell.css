@@ -531,6 +531,13 @@
 .object-sidebar .object-results-scroll .object-list[data-catalogue-window] > .object-item {
   width: 100%;
 }
+/* A system card lists every body of its system (549 rows for the Sun's, 682 KB) and shows about eight: rows out of view
+   skip style and layout until scrolled to. Inserting the Sun's list mid-zoom laid out 7,649 objects in one 22 ms frame
+   (2026-09-30). The list is flat, so a row's paint stays inside its 48 px box. */
+[data-system-bodies] .object-item {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 48px;
+}
 .object-results-scroll .object-observation-control { text-decoration: none; }
 .object-information-panel [data-information-panel="moons"] .object-list {
   width: 100%;
