@@ -19,6 +19,10 @@ Generated 2026-10-01 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 A headless capture of the M 33 page after orbiting the view: VHK 45 stays on the disc, placed where its sight line crosses the disc the app draws. The other 153 Cepheids Hubble measured for the galaxy's distance ([Breuval et al. 2023](https://arxiv.org/abs/2304.00037)) are plain dots on it, reached through search.
 
+![VHK 45 from 5,660 light-years, inside M33, among the galaxy's catalogue dots](evidence/2026-10-01/inside-m33.jpg)
+
+A headless capture 5,660 light-years from the star, inside M33: the galaxy's catalogue dots draw around it, and its photograph, which is the galaxy seen from outside, does not.
+
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
