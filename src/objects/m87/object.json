@@ -70,7 +70,38 @@
       ],
       "metersPerUnit": 1.238634295408084e+21,
       "bodyRadiusM": 6.140498387167821e+21
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "16.8 Mpc (−800,000 / +800,000 pc)",
+        "note": "adopted",
+        "source": {
+          "label": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI.",
+          "url": "https://arxiv.org/abs/1906.11238"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 187.7°, Dec 12.39°",
+        "source": {
+          "label": "Charlot et al. (2020), A&A 644, A159: ICRF3, the position SIMBAD adopts for M 87.",
+          "url": "https://doi.org/10.1051/0004-6361/202038368"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Virgo",
+        "note": "The Virgo Cluster Catalog classes VCC 1316 (NGC 4486) a member; it is the central giant elliptical of the cluster.",
+        "source": {
+          "label": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1316 = NGC 4486, membership M (member).",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

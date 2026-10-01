@@ -1,33 +1,26 @@
-import { catalogueClassification, isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import { publishDatasetPreview, sectionElements, showSection } from '@cssearth/renderer';
-import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
-import { preparedFocusObjectId } from './prepared-focus.mts';
-import type { PreparedFocusPresentation } from './prepared-focus.mts';
+import type { FocusObject, PreparedFocusPresentation } from './prepared-focus.mts';
+import { objectTypeLabel } from './object-classification-label.mts';
 import { overviewHoldingAt } from './overview-context.mts';
 import { wikipediaLearnMoreUrl } from './learn-more.mts';
 
 interface PreparedFocusCard {
-  set(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;
-  /** Adopt dataset banks spliced in after mount (`focus-fragment.mts`) and present the current record again. */
+  set(object: FocusObject | null, presentation?: PreparedFocusPresentation | null): void;
+  /** Adopt dataset banks spliced in after mount (`focus-fragment.mts`) and present the current object again. */
   adoptBanks(): void;
   destroy(): void;
 }
 
-const number = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 4 });
-const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, letter => letter.toUpperCase());
-
-/** One retained card transports the selected prepared record; no catalogue is imported here.
+/** One retained card presents the selected object from its registry entry; no catalogue is read here.
  * Its visibility belongs to the selection presentation (`selection-presentation.mts`). */
 export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
   if (!root) return { set() {}, adoptBanks() {}, destroy() {} };
   // The factsheet tab's panel waits in a template while closed (tab-panels.mts): its fields are found there too.
   const find = <E extends HTMLElement = HTMLElement>(selector: string) => sectionElements<E>(root, selector);
-  const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
+  const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status']
     .map(name => { const field = find(`[data-focus-${name}]`)[0]; if (!field) throw new Error(`Prepared focus field is missing: ${name}.`); return [name, field]; }));
   const aliasesRow = find('[data-focus-aliases-row]')[0] ?? null;
   const learnMore = find<HTMLAnchorElement>('[data-focus-learn-more]')[0] ?? null;
-  const links = find<HTMLAnchorElement>('[data-focus-source]');
-  const sourceRows = find('[data-focus-source-row]');
   const breadcrumbs = find('[data-focus-breadcrumb-scope]');
   const events = new AbortController();
   const unavailable = root.querySelector<HTMLElement>('[data-focus-unavailable]');
@@ -55,9 +48,9 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   };
   adopt();
   let presented: Parameters<PreparedFocusCard['set']> | null = null;
-  const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
+  const setPresentation = (record: FocusObject | null, presentation: PreparedFocusPresentation | null) => {
     const previous = currentPresentation?.objectId;
-    currentPresentation = record && preparedFocusObjectId(record) === presentation?.objectId ? presentation : null;
+    currentPresentation = record && record.id === presentation?.objectId ? presentation : null;
     if (datasetTab && datasetTab.hidden !== !currentPresentation) datasetTab.hidden = !currentPresentation;
     if (record && (record.id !== currentRecordId || previous !== currentPresentation?.objectId))
       showTab(currentPresentation ? 'dataset' : 'factsheet');
@@ -81,58 +74,38 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
-  const card: PreparedFocusCard = { set(record, sources = [], presentation = null) {
-    presented = [record, sources, presentation];
-    setPresentation(record, presentation);
+  const card: PreparedFocusCard = { set(object, presentation = null) {
+    presented = [object, presentation];
+    setPresentation(object, presentation);
     if (unavailable) {
-      const objectId = record && preparedFocusObjectId(record);
-      const missing = objectId && unavailableIds.has(objectId);
+      const missing = object !== null && unavailableIds.has(object.id);
       if (unavailable.hidden !== !missing) unavailable.hidden = !missing;
-      const message = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
+      const message = missing ? `The 3D view of ${object.name} is unavailable in this installation. Its facts remain available.` : '';
       if (unavailable.textContent !== message) unavailable.textContent = message;
     }
-    if (learnMore && !record) learnMore.hidden = true;
-    if (!record) return;
-    root.dataset.preparedFocusId = record.id;
-    for (const bank of find('[data-focus-record-bank]')) showSection(bank, bank.dataset.focusRecordBank === record.id);
-    const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
-    const aliases = record.aliases.join(', ');
-    write('name', record.name);
+    if (learnMore && !object) learnMore.hidden = true;
+    if (!object) return;
+    root.dataset.preparedFocusId = object.id;
+    // Each object's facts are its package's own, rendered at build time (HostedObjectFacts.astro); only the selected one's is mounted.
+    for (const bank of find('[data-focus-record-bank]')) showSection(bank, bank.dataset.focusRecordBank === object.id);
+    const aliases = object.aliases.join(', ');
+    write('name', object.name);
     write('aliases', aliases);
-    write('introduction', nebula ? record.introduction.text : aliases ? `Also known as ${aliases}` : '');
-    fields.introduction.hidden = !nebula && !aliases;
+    write('introduction', object.description);
+    if (fields.introduction.hidden) fields.introduction.hidden = false;
+    // A nebula or a globular cluster keeps its classification out of the title; its facts state it.
+    const galactic = object.classification === 'nebula' || object.classification === 'globular-cluster';
+    if (fields.status.hidden !== galactic) fields.status.hidden = galactic;
+    write('status', galactic ? '' : objectTypeLabel(object));
     if (learnMore) {
-      const href = wikipediaLearnMoreUrl(record.name);
+      const href = wikipediaLearnMoreUrl(object.name);
       if (learnMore.getAttribute('href') !== href) learnMore.setAttribute('href', href);
-      learnMore.hidden = fields.introduction.hidden;
+      learnMore.hidden = false;
     }
-    if (aliasesRow) aliasesRow.hidden = !nebula || !aliases;
-    // The trail leads to the level that holds the focus's classification (its overview's `holds`) where it lies.
-    const parent = overviewHoldingAt(catalogueClassification(record), record.positionM);
-    const parentScope = parent?.id;
+    if (aliasesRow) aliasesRow.hidden = !aliases;
+    // The trail leads to the level that holds the object's classification (its overview's `holds`) where it lies.
+    const parentScope = overviewHoldingAt(object.classification, object.worldFrame.originM)?.id;
     for (const trail of breadcrumbs) trail.hidden = trail.dataset.focusBreadcrumbScope !== parentScope;
-    fields.status.hidden = nebula;
-    write('status', nebula ? '' : cluster ? record.classification.name : `${words(record.status)} galaxy`);
-    const distanceScale = record.distance.valuePc >= 1e6 ? 1e6 : record.distance.valuePc >= 1e3 ? 1e3 : 1;
-    write('distance', `${number.format(record.distance.valuePc / distanceScale)} ${distanceScale === 1e6 ? 'Mpc' : distanceScale === 1e3 ? 'kpc' : 'pc'}`);
-    const associationLabel = find('[data-focus-fact-label=association]')[0] ?? null;
-    if (associationLabel) associationLabel.textContent = cluster ? 'Redshift' : 'Association';
-    const distanceLabel = find('[data-focus-fact-label=distance]')[0] ?? null;
-    if (distanceLabel) distanceLabel.textContent = cluster ? 'Group distance' : 'Observer distance';
-    const { minusPc, plusPc, uncertainty } = record.distance;
-    write('uncertainty', uncertainty ? `${number.format(uncertainty.statisticalPc)} pc statistical; ${number.format(uncertainty.systematicPc)} pc systematic`
-      : minusPc !== undefined && plusPc !== undefined ? `−${number.format(minusPc)} / +${number.format(plusPc)} pc` : 'Not supplied');
-    if (fields.uncertainty.parentElement) fields.uncertainty.parentElement.hidden = !uncertainty && minusPc === undefined && plusPc === undefined;
-    if (fields.membership.parentElement) fields.membership.parentElement.hidden = cluster;
-    write('membership', cluster ? 'Galaxy cluster' : nebula ? parent?.name ?? '' : words(record.membership.group));
-    write('association', cluster ? `${record.redshift.value}` : nebula ? record.kind === 'globular-cluster' ? 'Galactic globular cluster' : 'Galactic nebula' : words(record.membership.subgroup));
-    for (const [index, link] of links.entries()) {
-      const source = sources[index];
-      link.hidden = !source;
-      if (sourceRows[index]) sourceRows[index].hidden = !source;
-      if (source) { link.href = source.url; link.textContent = source.citation; }
-      else { link.removeAttribute('href'); link.textContent = ''; }
-    }
   }, adoptBanks() { adopt(); if (presented) card.set(...presented); }, destroy() { events.abort(); currentPresentation = null; presented = null; } };
   return card;
 }

@@ -7,16 +7,15 @@ import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mt
 import { withPreparedFocus } from '../navigation/navigation-scope.mts';
 import { createImageFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import { overviewScopeFromUrl, preparedFocusFromUrl } from '../navigation/navigation-scope.mts';
-import { isPreparedCluster } from '@cssearth/catalog';
-import type { PreparedFocusPresentation } from '../prepared-focus.mts';
-import type { PreparedCatalogObject, PreparedGalaxyRecord, PreparedClusterRecord, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
+import type { FocusObject, PreparedFocusPresentation } from '../prepared-focus.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
 import type { PreparedVolumeDatasetState } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 type ContextLayer = Parameters<typeof createPreparedContextNavigation>[0]['layer'];
-type Content = { record: PreparedCatalogObject | null; references: readonly SpatialCitation[]; presentation: PreparedFocusPresentation | null };
-type FixtureOptions = { object?: Partial<PreparedGalaxyRecord> & Partial<Pick<PreparedClusterRecord, 'kind' | 'classification'>>;
+type Content = { object: FocusObject | null; presentation: PreparedFocusPresentation | null };
+/** `detailedObjectId` names the fixture bank the object's package holds; `presentation.focusRadiusM` the framing radius its world frame authors. */
+type FixtureOptions = { object?: { detailedObjectId?: string; presentation?: { focusRadiusM: number }; classification?: FocusObject['classification'] };
   unavailableObjectIds?: readonly string[]; bankReady?: Promise<PreparedVolumeDatasetState>; loadedFramingRadiusUnits?: number;
   imageLayerFrames?: Readonly<Record<string, DensityVolumeFrame>>; volumeDatasetFrames?: Readonly<Record<string, { frame: DensityVolumeFrame; framingRadiusUnits: number }>>; volumeBank?: PreparedVolumeDatasetState | null;
   deferredVolumeBank?: PreparedVolumeDatasetState | null;
@@ -80,20 +79,20 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeDatasetFrames = {},
       assert.equal(objectId, declaredBankId());
       datasetCallbacks.add(listener); return () => { datasetCallbacks.delete(listener); };
     },
-    selectGalaxy: (id: string | null, focus?: PreparedNavigationFocus | null) => { selections.push(id); presentationFocuses.push(focus); },
-    resolveGalaxy: (id: string): PreparedCatalogObject | null => {
-      if (!['catalogue-a','catalogue-b'].includes(id)) return null;
-      const galaxy: PreparedGalaxyRecord = { id, name: id, aliases: [], status: 'confirmed', positionM: [1e20,0,0],
-        skyPosition: { raDeg: 0, decDeg: 0, sourceRef: 'positions:row' },
-        distance: { valuePc: 1, method: 'Published distance', sourceRef: 'PublishedBibliographicKey' },
-        membership: { group: 'local-group', subgroup: 'field', basis: 'Published membership', sourceRef: 'membership:row' }, ...object };
-      if (object.kind !== 'galaxy-cluster') return galaxy;
-      return { ...galaxy, kind: 'galaxy-cluster', classification: required(object.classification),
-        redshift: { value: .01, type: 'spectroscopic', sourceRef: 'positions:row' },
-        aperture: { definition: 'R500', properRadiusM: 1e22, comovingRadiusM: 1e22, sourceRef: 'positions:row' } };
-    } };
-  const focusLayer: ContextLayer = { ensureGalaxyCatalog: async () => {}, selectGalaxy: layer.selectGalaxy, resolveGalaxy: layer.resolveGalaxy,
-    focusBank(id) {
+    selectGalaxy: (id: string | null, focus?: PreparedNavigationFocus | null) => { selections.push(id); presentationFocuses.push(focus); } };
+  const bankKey = (id: string) => ['catalogue-a', 'catalogue-b'].includes(id) ? object.detailedObjectId ?? id : id;
+  // An object's world frame authors its framing radius: here the fixture's own, else what its bank frames.
+  const objectOf = (id: string): FocusObject | null => {
+    if (!['catalogue-a', 'catalogue-b'].includes(id)) return null;
+    const key = bankKey(id), volume = currentVolumeDatasetFrames[key];
+    const bodyRadiusM = object.presentation?.focusRadiusM ?? (imageLayerFrames[key] ? 500 * imageLayerFrames[key].metersPerUnit
+      : volume ? (loadedFramingRadiusUnits ?? volume.framingRadiusUnits) * volume.frame.metersPerUnit : 1e18);
+    return { id, name: id, description: `The ${id}.`, aliases: [], classification: object.classification ?? 'galaxy',
+      worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [1e20, 0, 0], presentationToReference: [0, 1, 0, 1, 0, 0, 0, 0, 1], metersPerUnit: bodyRadiusM, bodyRadiusM } };
+  };
+  const focusLayer: ContextLayer = { selectGalaxy: layer.selectGalaxy,
+    focusBank(objectId) {
+      const id = bankKey(objectId);
       if (imageLayerFrames[id]) return createImageFocusBank(id, imageLayerFrames[id], () => Promise.resolve());
       if (!currentVolumeDatasetFrames[id]) return null;
       return { objectId: id,
@@ -102,21 +101,18 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeDatasetFrames = {},
         selectDataset: dataset => layer.selectVolumeDataset(id, dataset), subscribe: listener => layer.subscribeVolumeDataset(id, listener) };
     },
   };
-  const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', bytes: 1, citation: 'Published positions', references: [{ id: 'PublishedBibliographicKey', url: 'https://example.test/paper', citation: 'Distance paper' }] },
-    { id: 'membership', url: 'https://example.test/membership', bytes: 1, citation: 'Published membership' },
-    { id: 'unrelated', url: 'https://example.test/unrelated', bytes: 1, citation: 'Unused audit input' }];
   // Narrow test doubles intentionally expose only this controller's browser/runtime surface.
   const executor = createPreparedContextNavigation({ layer: focusLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
-    sources, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
+    objects: { known: objectOf, load: async id => objectOf(id) }, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
   // The application request now owns supersession and abort; the focus executor receives that lifetime.
   const requests = createNavigationLifecycle({ onCancel() {}, onError: error => { assert.ok(error instanceof Error); errors.push(error); } });
   let available = false;
   const selection = createSceneSelection({ objectId: 'mercury', initial: { kind: 'object', objectId: 'mercury' }, onChange() {} });
   const disconnect = executor.connect(owner as unknown as ObjectWorldNavigation, { canPublish: () => available,
     readFocus: () => selection.current.kind === 'focus' ? selection.current.id : null,
-    onFocusChange: ({ record, sources: references, presentation, url: policy }) => {
-      available = true; content.push({ record, references, presentation });
-      selection.focus(record, references, presentation);
+    onFocusChange: ({ object, presentation, url: policy }) => {
+      available = true; content.push({ object, presentation });
+      selection.focus(object, presentation);
       if (policy === 'preserve') return;
       const url = new URL(windowTarget.location.href);
       if (policy === 'reframe') url.searchParams.delete('v');
@@ -146,12 +142,12 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeDatasetFrames = {},
     resolveDeferredVolumeBank() { required(releaseDeferredBank)(); } };
 }
 
-test('a saved dataset link to an unavailable package still opens its actual catalogue record', () => {
-  const f = fixture({ object: { detailedObjectId: 'helix' }, unavailableObjectIds: ['helix'] });
+test('a saved dataset link to an unavailable package still opens its object', () => {
+  const f = fixture({ unavailableObjectIds: ['catalogue-a'] });
   f.windowTarget.location.searchParams.set('dataset', 'eso-vista');
   f.controller.restore(f.windowTarget.location.href);
   assert.deepEqual(f.errors, []);
-  assert.equal(last(f.content).record?.id, 'catalogue-a');
+  assert.equal(last(f.content).object?.id, 'catalogue-a');
   assert.equal(last(f.content).presentation, null);
   assert.deepEqual(f.datasetWrites, []);
   f.controller.destroy();
@@ -209,12 +205,10 @@ test('a focus link whose saved camera puts the named target off-screen reframes 
 test('suspension isolates camera restore publications from incoming focus history and cancels an older selection flight', async () => {
   const f = fixture();
   f.controller.restore(f.windowTarget.location.href);
-  assert.equal(required(last(f.content).record).id, 'catalogue-a');
-  assert.deepEqual(last(f.content).references.map(source => source.id), ['positions', 'PublishedBibliographicKey', 'membership']);
-  assert.equal(required(last(f.content).record).distance.sourceRef, 'PublishedBibliographicKey');
+  assert.equal(required(last(f.content).object).id, 'catalogue-a');
   const flight = f.controller.select({ id: 'catalogue-b' });
   assert.equal(required(f.owner.preparedFocus()).id, 'catalogue-b');
-  assert.equal(required(last(f.content).record).id, 'catalogue-b');
+  assert.equal(required(last(f.content).object).id, 'catalogue-b');
   const incoming = 'https://example.test/catalogue-a/?v=restored';
   f.windowTarget.location = new URL(incoming);
   f.controller.suspend();
@@ -225,7 +219,7 @@ test('suspension isolates camera restore publications from incoming focus histor
   assert.equal(f.windowTarget.location.href, incoming);
   f.controller.restore(incoming);
   assert.equal(required(f.owner.preparedFocus()).id, 'catalogue-a');
-  assert.equal(required(last(f.content).record).id, 'catalogue-a');
+  assert.equal(required(last(f.content).object).id, 'catalogue-a');
   assert.equal(f.windowTarget.location.href, incoming);
   assert.deepEqual(f.errors, []);
   f.controller.destroy();
@@ -242,10 +236,10 @@ test('an invalid incoming catalogue ID remains available for diagnosis after res
   await f.controller.restore(incoming);
   f.owner.setPreparedFocus(null);
   assert.equal(f.errors.length, 1);
-  assert.match(f.errors[0].message, /Unknown prepared galaxy/);
+  assert.match(f.errors[0].message, /Unknown object the world's host draws/);
   assert.equal(f.windowTarget.location.href, incoming);
   assert.equal(f.selections.at(-1), null);
-  assert.equal(last(f.content).record, null);
+  assert.equal(last(f.content).object, null);
   f.controller.destroy();
 });
 
@@ -264,16 +258,12 @@ test('an authored framing radius takes precedence over an oversized transparent 
   fallback.controller.destroy();
 });
 
-test('a cluster focus uses its prepared aperture framing and source without pretending it has galaxy membership', () => {
-  const f = fixture({ object: { kind: 'galaxy-cluster', membership: undefined,
-    classification: { name: 'Cluster', basis: 'Published aperture', sourceRef: 'membership:cluster-row' }, presentation: { focusRadiusM: 9e22 } } });
+test('a cluster focus is framed at its own authored radius', () => {
+  const f = fixture({ object: { classification: 'galaxy-cluster', presentation: { focusRadiusM: 9e22 } } });
   f.controller.restore(f.windowTarget.location.href);
   assert.deepEqual(f.errors, []);
   assert.equal(required(f.owner.preparedFocus()).framingRadiusM, 9e22);
-  assert.deepEqual(last(f.content).references.map(source => source.id), ['positions', 'PublishedBibliographicKey', 'membership']);
-  const cluster = required(last(f.content).record);
-  assert.ok(isPreparedCluster(cluster));
-  assert.equal(cluster.kind, 'galaxy-cluster');
+  assert.equal(required(last(f.content).object).classification, 'galaxy-cluster');
   f.controller.destroy();
 });
 
@@ -342,7 +332,7 @@ test('a saved dataset waits for its lazy bank instead of rejecting the focus as 
   assert.deepEqual(f.errors, []);
   assert.equal(f.owner.preparedFocus()?.id, 'catalogue-a');
   assert.deepEqual(f.datasetWrites, ['second']);
-  assert.equal(last(f.content).record?.id, 'catalogue-a');
+  assert.equal(last(f.content).object?.id, 'catalogue-a');
   assert.equal(required(last(f.content).presentation).selectedDataset, 'second');
   assert.equal(f.windowTarget.location.href, incoming, 'The saved dataset link is preserved exactly');
   f.controller.destroy();

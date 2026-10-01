@@ -17,7 +17,7 @@ export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDes
   if (descriptor.type !== 'image-layer-bank') throw new TypeError('Object is not an image-layer bank.');
   const properties = descriptor.properties;
   // `catalog` and `worldFrame` are the package's registry entry and placement (prepared-focus-object.ts), read by the registry.
-  const unknown = Object.keys(properties).filter(key => !['frame', 'preparation', 'cataloguePoints', 'catalog', 'worldFrame'].includes(key));
+  const unknown = Object.keys(properties).filter(key => !['frame', 'preparation', 'cataloguePoints', 'catalog', 'worldFrame', 'facts'].includes(key));
   if (unknown.length) throw new TypeError(`Unknown image-layer property: ${unknown.join(', ')}.`);
   const cataloguePoints = properties.cataloguePoints ?? [];
   if (!Array.isArray(cataloguePoints) || !cataloguePoints.every(bank => typeof bank === 'string' && /^[a-z][a-z0-9-]*$/u.test(bank)) || new Set(cataloguePoints).size !== cataloguePoints.length) {

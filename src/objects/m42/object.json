@@ -69,7 +69,38 @@
       ],
       "metersPerUnit": 61933518469800,
       "bodyRadiusM": 148640444327520000
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "414 pc (−7 / +7 pc)",
+        "note": "Adopted published trigonometric parallax; not a fitted image scale.",
+        "source": {
+          "label": "Menten et al. (2007), The distance to the Orion Nebula",
+          "url": "https://arxiv.org/abs/0709.0485"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 83.79°, Dec -5.4°",
+        "source": {
+          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+          "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "H II region",
+        "note": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances.",
+        "source": {
+          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+          "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

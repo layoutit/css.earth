@@ -126,7 +126,7 @@ export function mountObjectShell({
     if (presentedSubject === subject) { updateBodyCard(); return; }
     // What the world draws around the scene (a catalogue focus, an overview) is its own page, `/<id>/`.
     const drawnPage = (selected: typeof subject | null) => {
-      if (selected?.kind === 'focus') return selected.record ? { id: selected.record.id, seo: focusSeo(selected.record) } : null;
+      if (selected?.kind === 'focus') return selected.object ? { id: selected.object.id, seo: focusSeo(selected.object) } : null;
       const overview = selected?.kind === 'overview' ? knownObject(overviewPage(objectId, selected.overview.scope) ?? '') : undefined;
       return overview?.zoom !== undefined ? { id: overview.id, seo: objectSeo(overview) } : null;
     };
@@ -136,15 +136,15 @@ export function mountObjectShell({
     // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
     // (object-browser.mts bindObject).
     if (page) presentPage(`/${page.id}/`, page.seo);
-    // A focus whose record is still loading is already this page's subject: its head waits for the record.
+    // A focus whose entry is still loading is already this page's subject: its head waits for the record.
     else if (leftPage && !focus) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
       if (scene && isSceneObject(scene)) presentPage(scene.route, objectSeo(scene));
     } else pendingPage = null;
-    focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
+    focusCard.set(focus?.object ?? null, focus?.presentation ?? null);
     if (focus) loadFocusBanks();
     objectBrowser.refreshSelection();
-    viewReadout.setPreparedFocus(focus?.record ?? null);
+    viewReadout.setPreparedFocus(focus?.object ? { name: focus.object.name, positionM: focus.object.worldFrame.originM } : null);
     viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : 'system');
     updateBodyCard();
   }
@@ -303,7 +303,7 @@ export function mountObjectShell({
     settingsController.bindObject();
     bindCardMaps();
     const subject = readSelection();
-    viewReadout.setPreparedFocus(subject.kind === 'focus' ? subject.record : null);
+    viewReadout.setPreparedFocus(subject.kind === 'focus' && subject.object ? { name: subject.object.name, positionM: subject.object.worldFrame.originM } : null);
     informationCard.activatePanels();
   }
 }

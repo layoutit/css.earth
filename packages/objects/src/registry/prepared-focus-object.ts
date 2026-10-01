@@ -42,6 +42,7 @@ export interface NavigableObject<Scene = unknown, Signal = unknown> {
 export interface PreparedFocusObject {
   readonly id: string;
   readonly name: string;
+  readonly aliases: readonly string[];
   readonly searchNames: readonly string[];
   readonly classification: ObjectClassification;
   readonly classificationLabel?: string;

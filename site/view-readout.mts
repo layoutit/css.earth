@@ -1,5 +1,4 @@
 import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from './minimap/view-format.mts';
-import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser/browser-types.mts';
@@ -13,7 +12,7 @@ import { measureView } from './minimap/view-measure.mts';
 import { surfaceMapContext, surfaceMapViewport } from './minimap/surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';
 import { dotN as dot } from '@cssearth/core';
-type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
+type PreparedFocus = { readonly name: string; readonly positionM: readonly [number, number, number] };
 interface ViewReadout { bindObject(): void; setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
 
 export function measurePreparedFocusView(world: WorldCameraPose, focus: PreparedFocus, focalPixels: number) {

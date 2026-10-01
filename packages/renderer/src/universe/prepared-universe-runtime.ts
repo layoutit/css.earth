@@ -268,7 +268,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             if (pointsChanged || changed || bodyChanged) requestPublication?.();
           },
-          resolveGalaxy(id: string) { return catalogBanks.catalog?.resolve(id) ?? null; },
           ensureGalaxyCatalog: catalogBanks.ensureCatalog,
           focusBank(id: string) { return datasets.focusBank(id) ?? catalogBanks.focusBank(id); },
           setVolumeDatasetEnabled: datasets.setEnabled,

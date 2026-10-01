@@ -1,6 +1,5 @@
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 /** `system` is the planetary system of the mounted star, and every other scope is an overview's id (its registry entry,
  * KNOWN_OVERVIEWS); every scope is measured from that star (overviewScopeAtCamera). */
@@ -95,7 +94,7 @@ export function overviewScopeAtCamera(world: WorldCameraPose, previous: Overview
   return reachable[0]?.id ?? 'system';
 }
 
-export function viewDistance(world: WorldCameraPose, frame: PreparedWorldCameraFrame, scope: OverviewScope, plan = context, focus: Pick<PreparedCatalogObject, 'name' | 'positionM'> | null = null) {
+export function viewDistance(world: WorldCameraPose, frame: PreparedWorldCameraFrame, scope: OverviewScope, plan = context, focus: { readonly name: string; readonly positionM: readonly number[] } | null = null) {
   if (focus) return { label: `Distance to ${focus.name}:`, meters: distance(world.pose.positionM, focus.positionM),
     title: `Camera distance from the prepared center of ${focus.name}` };
   return scope !== 'system' ? {

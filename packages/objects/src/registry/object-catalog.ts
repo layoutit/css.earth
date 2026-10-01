@@ -96,6 +96,6 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   return Object.freeze({ id, name, description, route: `/${id}/`, sceneHostId: value.sceneHostId as string,
     ...(entry ? { classification: entry.classification, ...(entry.classificationLabel === undefined ? {} : { classificationLabel: entry.classificationLabel }),
       systemName: entry.systemName, color: entry.color, distance: entry.distance, worldFrame: entry.worldFrame, discovery: entry.discovery,
-      searchNames: Object.freeze(destinationSearchNames([id, entry.name, ...entry.aliases])) } : {}),
+      aliases: entry.aliases, searchNames: Object.freeze(destinationSearchNames([id, entry.name, ...entry.aliases])) } : {}),
     ...ladder });
 }

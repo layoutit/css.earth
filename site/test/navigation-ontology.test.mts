@@ -7,7 +7,7 @@ import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
-import { distanceDescription, isExtendedClassification, isHostedDescriptor, isHostedObject, isOverviewObject, isPlacedObject, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { distanceDescription, isExtendedClassification, isHostedDescriptor, isHostedObject, isOverviewObject, isPlacedObject, objectFacts, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { resolve } from 'node:path';
@@ -31,6 +31,8 @@ test('every scene and every package the host draws has exactly one searchable de
     const object = requireObject(id!);
     assert.ok(isHostedObject(object) && object.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))), query);
   }
+  // Each states its card's facts itself, every one with its source; no catalogue row is read for them.
+  for (const id of [...hosted, 'local-group']) assert.ok(objectFacts(descriptors.get(id)).some(fact => fact.id === 'distance'), id);
   // Each is a body of the world, placed by its own world frame.
   for (const id of hosted) {
     const object = requireObject(id);

@@ -1,18 +1,17 @@
 import { syncTabPanels } from './tab-panels.mts';
 import { parseHTML } from 'linkedom';
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { catalogueObject, isHostedObject, parseObjectDescriptor } from '@cssearth/objects';
 import { sectionElements } from '@cssearth/renderer';
 import { loadPreparedVolumeDatasets, createPreparedVolumeDatasets, imageFocusDatasets } from '@cssearth/renderer/universe';
 import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSelectionTarget, savedWorldCamera } from '@cssearth/renderer/navigation';
 import type { PreparedWorldCameraFrame, SharedView } from '@cssearth/renderer/navigation';
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
-import { initialFocusCatalog, loadFocusCatalogs } from './focus-catalog.mts';
 import { requiredElement } from './browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from './focus-fragment.mts';
 import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
-import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusDataset } from './prepared-focus.mts';
+import { resolvePreparedFocus, resolvePreparedFocusDataset } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 
@@ -22,18 +21,19 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   frame: PreparedWorldCameraFrame, saved: SharedView | null, fetcher: typeof fetch): Promise<SharedView | null> {
   const selection = readPreparedFocusSelection(url, definition.id);
   if (!selection) return saved;
-  const catalogs = await loadFocusCatalogs(url.origin, fetcher);
-  const catalog = [catalogs.galaxies, catalogs.clusters, catalogs.nebulae].find(catalog => catalog.objects.some(record => record.id === selection.id));
-  const selected = catalog?.objects.find(record => record.id === selection.id);
-  if (!catalog || !selected) throw new RangeError('Prepared focus is unavailable.');
-  const objectId = preparedFocusObjectId(selected);
+  // The object's own registry entry, as every page reads it.
+  const entry = await fetcher(new URL(`/objects/${selection.id}/entry.json`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
+  if (!entry.ok) throw new RangeError('Prepared focus is unavailable.');
+  const selected = catalogueObject(await entry.json() as unknown, () => async () => { throw new Error('A focus has no scene of its own.'); });
+  if (!isHostedObject(selected)) throw new RangeError('Prepared focus is unavailable.');
+  const objectId = selected.id;
   const root = sectionElements(shell, '[data-prepared-focus-card]')[0];
   if (!root) throw new Error('Prepared focus card is missing.');
   if (focusBanksPending(root)) {
     const html = await fetchFocusFragment(path => fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) }));
     spliceFocusBanks(root, parseHTML(html).document);
   }
-  const unavailable = objectId !== undefined && (root.querySelector<HTMLElement>('[data-focus-unavailable]')?.dataset.unavailableObjects?.split(' ') ?? []).includes(objectId);
+  const unavailable = (root.querySelector<HTMLElement>('[data-focus-unavailable]')?.dataset.unavailableObjects?.split(' ') ?? []).includes(objectId);
   const bank = unavailable ? undefined : sectionElements(root, '[data-focus-dataset-bank]').find(bank => bank.dataset.focusDatasetBank === objectId);
   let presentation: PreparedFocusPresentation | undefined;
   if (bank) {
@@ -58,8 +58,7 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
         return response.arrayBuffer();
       } });
       const datasetId = resolvePreparedFocusDataset(selection.dataset, payload)!;
-      const focus = resolvePreparedFocus(selected, payload.framingRadiusUnits * payload.datasets[0].volume.frame.metersPerUnit,
-        PREPARED_WORLD_PRESENTATION.galaxies);
+      const focus = resolvePreparedFocus(selected, PREPARED_WORLD_PRESENTATION.galaxies);
       const focalCss = definition.camera.projection.cssPerspective;
       const viewport = { focalPixels: 1000, widthPixels: 1e9, heightPixels: 1e9, principalOffsetPixels: [0, 0] as const };
       const world = saved ? savedWorldCamera(saved, frame, viewport) : createWorldSelectionTarget(
@@ -84,12 +83,8 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   const card = createPreparedFocusCard(root, id => {
     for (const radio of root.querySelectorAll<HTMLInputElement>(':scope > .object-native-tabs > input')) radio.toggleAttribute('checked', radio.value === id);
   });
-  card.set(selected, preparedFocusCitations(selected, catalog.sources), presentation);
+  card.set(selected, presentation);
   card.destroy();
   syncTabPanels(root);
-  // A page the build already rendered its focus into answers a query again: one initial record, the latest.
-  for (const previous of root.querySelectorAll(':scope > script[data-initial-focus]')) previous.remove();
-  const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;
-  initial.textContent = JSON.stringify(initialFocusCatalog(catalog, selected)).replace(/</gu, '\\u003c'); root.append(initial);
   return saved;
 }

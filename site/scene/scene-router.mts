@@ -14,6 +14,7 @@ import { isHostedObject } from '@cssearth/objects';
 import type { NavigableObject } from '../objects.mts';
 /** A placed object the world's host draws: its page is the host's scene framed on it. */
 const hosted = (object: NavigableObject | null | undefined) => object != null && isHostedObject(object);
+const hostedPage = (object: NavigableObject | null | undefined) => object != null && isHostedObject(object) ? object : null;
 import type { ObjectEntry } from '../objects.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
@@ -29,7 +30,6 @@ import { createWorldViewport } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-import { readInitialFocus } from '../focus-catalog.mts';
 import { drawnPageFromUrl, isOverviewPage, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
@@ -131,7 +131,7 @@ export function createSceneRouter({
     onFocusChange(session, focus) {
       const selection = context?.selection;
       if (!selection) return;
-      selection.focus(focus.record, focus.sources, focus.presentation);
+      selection.focus(focus.object, focus.presentation);
       if (focus.url === 'preserve') return;
       const url = new URL(navigationHref(windowTarget));
       if (focus.url === 'reframe') url.searchParams.delete('v');
@@ -333,7 +333,7 @@ export function createSceneRouter({
       const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion, windowTarget, documentTarget });
       const selection = registry.createSceneSelection({ objectId, systems: objects,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
-        initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
+        initialFocus: hostedPage(registry.knownObject(drawnPageFromUrl(windowTarget.location?.href ?? 'https://example.test', objectId) ?? '')), onChange: publishSelection });
       const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, getReducedMotion: () => reducedMotionActive });
       if (windowTarget.location?.href && !destroyed) {
         // Only a settled scene belongs to the entry that history names. An unfinished navigation

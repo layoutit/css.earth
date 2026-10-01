@@ -11,6 +11,8 @@ export { distanceDescription, parseNavigationDistance } from './navigation-dista
 export type { NavigationDistance } from './navigation-distance.js';
 export { catalogEntry, catalogueObject } from './object-catalog.js';
 export type { CatalogContext, CatalogEntry } from './object-catalog.js';
+export { objectFacts } from './object-facts.js';
+export type { ObjectFact } from './object-facts.js';
 export { matchesObjectCategory, matchesObjectClassification } from './object-categories.js';
 export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, offTheMap, parseObjectDiscovery } from './object-discovery.js';
 export type { ObjectDiscovery } from './object-discovery.js';

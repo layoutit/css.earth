@@ -70,7 +70,38 @@
       ],
       "metersPerUnit": 299195741400000,
       "bodyRadiusM": 40627486340224216
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "2 kpc",
+        "note": "Adopted 2 kpc reconstruction scale from Martin et al. (2021), section 3.4, following Trimble (1973). The cited 1.7–2.4 kpc range is not a statistical error. Lin et al. (2023) independently find 1.90 −0.18/+0.22 kpc; no distance refit is applied.",
+        "source": {
+          "label": "Martin, Milisavljevic & Drissen (2021), 3D mapping of the Crab Nebula with SITELLE. I",
+          "url": "https://arxiv.org/pdf/2101.02709v1"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 83.63°, Dec 22.02°",
+        "source": {
+          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
+          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/observations.json"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "Supernova remnant and pulsar wind nebula",
+        "note": "Released SITELLE ejecta samples use a conditional expansion-to-depth model; a separate published torus interpretation and authored jets describe the pulsar wind. Spectral display colors are not calibrated gas or dust density.",
+        "source": {
+          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
+          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/observations.json"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

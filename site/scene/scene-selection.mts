@@ -1,5 +1,4 @@
-import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
-import type { PreparedFocusPresentation } from '../prepared-focus.mts';
+import type { FocusObject, PreparedFocusPresentation } from '../prepared-focus.mts';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import { overviewScopeAtCamera, type OverviewScope } from '../overview-context.mts';
 import { overviewScopeFromUrl, preparedFocusFromUrl, satelliteSystemFromUrl, withOverviewScope, withPreparedFocus, withSatelliteSystemView } from '../navigation/navigation-scope.mts';
@@ -15,8 +14,8 @@ export type SceneContext =
 export type SelectionTarget = SceneContext | { readonly kind: 'focus'; readonly id: string };
 export type SceneSubject = SceneContext | {
   readonly kind: 'focus'; readonly id: string;
-  readonly record: PreparedCatalogObject | null;
-  readonly sources: readonly SpatialCitation[];
+  /** The registry object the page names; null until its entry is read. */
+  readonly object: FocusObject | null;
   readonly presentation: PreparedFocusPresentation | null;
   /** The underlying camera context is restored when the native focus clears. */
   readonly context: SceneContext;
@@ -47,7 +46,7 @@ export function selectionKey(subject: SelectionTarget): string {
 
 /** One committed subject. Mounted scene ownership and temporary browsing/flight previews remain independent. */
 export function createSceneSelection({ initial, objectId, initialFocus = null, systems = [], onChange }: {
-  initial: SelectionTarget; objectId: string; initialFocus?: PreparedCatalogObject | null;
+  initial: SelectionTarget; objectId: string; initialFocus?: FocusObject | null;
   /** The world's bodies, for a system overview's star: its overview is left by the distance from that star. */
   systems?: SystemObjects;
   onChange(): void;
@@ -55,7 +54,7 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, s
   // The mounted scene: a URL that selects no focus is on its page.
   let scene = objectId;
   let subject: SceneSubject = initial.kind === 'focus'
-    ? { ...initial, record: initialFocus?.id === initial.id ? initialFocus : null, sources: [], presentation: null,
+    ? { ...initial, object: initialFocus?.id === initial.id ? initialFocus : null, presentation: null,
       context: { kind: 'object', objectId } } : initial;
   function publish(next: SceneSubject, notify = true) {
     if (subject === next) return false;
@@ -75,11 +74,11 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, s
         : context.kind === 'satellite-system' ? context.hostId : context.overview.systemId;
       const retained = subject.kind === 'focus' && subject.id === target.id ? subject : null;
       if (retained && host === mountedObjectId) return false;
-      return publish({ ...target, record: retained?.record ?? null, sources: retained?.sources ?? [], presentation: retained?.presentation ?? null,
+      return publish({ ...target, object: retained?.object ?? null, presentation: retained?.presentation ?? null,
         context: host === mountedObjectId ? context : { kind: 'object', objectId: mountedObjectId } }, notify);
     },
-    focus(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null) {
-      return publish(record ? { kind: 'focus', id: record.id, record, sources, presentation, context: selectionContext(subject) }
+    focus(object: FocusObject | null, presentation: PreparedFocusPresentation | null) {
+      return publish(object ? { kind: 'focus', id: object.id, object, presentation, context: selectionContext(subject) }
         : selectionContext(subject));
     },
     followCamera(world: WorldCameraPose) {

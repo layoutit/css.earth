@@ -76,7 +76,38 @@
       ],
       "metersPerUnit": 20375229989339.996,
       "bodyRadiusM": 109203529398159400
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "136.2 pc (−1.2 / +1.2 pc)",
+        "note": "Adopted VLBI stellar-cluster distance from Melis et al. (2014), main text and Table 1; not a measured distance to each dust filament.",
+        "source": {
+          "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
+          "url": "https://arxiv.org/pdf/1408.6544"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 56.75°, Dec 24.12°",
+        "source": {
+          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
+          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "Reflection nebula around an open cluster",
+        "note": "Observed optical reflection nebulosity and infrared dust emission painted on an authored finite depth surface. The stellar distance locates the scene; dust depth, scattering and individual stellar distances are not recovered.",
+        "source": {
+          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
+          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

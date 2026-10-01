@@ -1,7 +1,6 @@
 ---
 import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import ObjectInformationPanel from "./ObjectInformationPanel.astro";
-import PreparedClusterFacts from './PreparedClusterFacts.astro';
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../object-shell-types";
 import { OVERVIEWS, SCENE_OBJECTS } from "../objects.mts";
@@ -255,11 +254,8 @@ import Detached from './Detached.astro';
           data-information-group="prepared-focus" role="region" aria-label="Factsheet">
           <div class="object-factsheet-body"><div class="object-facts"><ul class="object-primary-facts">
             <li data-focus-aliases-row hidden><span class="object-fact-label">Also known as</span><span class="object-fact-value" data-focus-aliases></span></li>
-            {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
-              <li><span class="object-fact-label" data-focus-fact-label={id}>{label}</span><span class="object-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
           </ul></div></div>
           <div data-focus-banks-slot="facts" hidden></div>
-          <PreparedClusterFacts />
         </div></Detached>
       </ObjectCard></Detached>
       {OVERVIEWS.map(overview => <OverviewCard {overview} />)}

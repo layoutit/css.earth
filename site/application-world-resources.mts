@@ -43,7 +43,6 @@ const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
   loadShells(): Promise<{ payload: Awaited<ReturnType<typeof loadPreparedCssSurfaceShell>>; resolveResource(path: string): string }[]>;
-  catalogSources(): Awaited<ReturnType<typeof loadFocusCatalogs>>['galaxies']['sources'];
 };
 let universePromise: Promise<ApplicationUniverse> | null = null;
 export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
@@ -188,7 +187,6 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         firstPlanner = null;
         return planner;
       },
-      catalogSources: () => catalogs ? [...catalogs.galaxies.sources, ...catalogs.clusters.sources, ...catalogs.nebulae.sources] : [],
     };
   })().catch(error => { universePromise = null; throw error; });
   return universePromise;

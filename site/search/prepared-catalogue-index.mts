@@ -1,5 +1,4 @@
 import { distanceDescription, isSceneObject } from '@cssearth/objects';
-import { FOCUS_SOURCE_DOCUMENTS } from '../focus-catalog-data.mts';
 import { objectClassificationLabel, objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 import { sourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
@@ -35,8 +34,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
           marker: Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color }),
         });
       }
-      const source = FOCUS_SOURCE_DOCUMENTS.get(object.id);
-      if (!source) throw new Error(`Missing focus source document: ${object.id}`);
+      const source = sourceDocumentation(object.id, object.name);
       const value = new Intl.NumberFormat('en', { maximumSignificantDigits: 4 }).format(object.distance.value);
       const detail = `${value} pc${object.distance.quantity === 'comoving' ? ' (comoving)' : ''}`;
       return Object.freeze({

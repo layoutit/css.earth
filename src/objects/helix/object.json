@@ -68,7 +68,38 @@
       ],
       "metersPerUnit": 32313140071200,
       "bodyRadiusM": 48469710106800000
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "216 pc (−12 / +14 pc)",
+        "note": "Adopted published trigonometric parallax; not a fitted image scale.",
+        "source": {
+          "label": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
+          "url": "https://arxiv.org/abs/0909.4281"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 337.4°, Dec -20.84°",
+        "source": {
+          "label": "ESO ESO WFI · optical detail image and publisher astrometry; registration retained in the observation recipe",
+          "url": "https://cdn.eso.org/images/original/eso0907a.tif"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "Planetary nebula",
+        "note": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths.",
+        "source": {
+          "label": "ESO ESO WFI · optical detail image and publisher astrometry; registration retained in the observation recipe",
+          "url": "https://cdn.eso.org/images/original/eso0907a.tif"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

@@ -1,3 +1,8 @@
+import { isHostedObject } from '@cssearth/objects';
+import { knownObject, loadObject } from './object-directory.mts';
+import type { NavigableObject } from './objects.mts';
+/** The registry object a focus is on: a placed object the world's host draws. */
+const hostedFocus = (object: NavigableObject | null | undefined) => object != null && isHostedObject(object) ? object : null;
 import { createSceneLifetime } from '@cssearth/engine';
 import { labelOcclusionFor } from '@cssearth/renderer';
 import { afterStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
@@ -57,7 +62,7 @@ export function createApplicationWorldContext() {
         lifetime.onDispose(occlusion.subscribe(updateOcclusion));
         const contextNavigation = own(createPreparedContextNavigation({ layer, presentation: PREPARED_WORLD_PRESENTATION.galaxies,
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
-          sources: prepared.catalogSources, windowTarget }));
+          objects: { known: id => hostedFocus(knownObject(id)), load: id => loadObject(id).then(hostedFocus) }, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
         // The systems this page does not show arrive after its first view (startup-gate.ts), in a few batches; each joins

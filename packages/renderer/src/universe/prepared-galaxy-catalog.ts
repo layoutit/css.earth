@@ -1,4 +1,4 @@
-import { isPreparedCluster, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
@@ -38,8 +38,6 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   });
   let destroyed = false, dormant = false;
   return Object.freeze({ root, catalog,
-    /** The catalogue row `id` names, as data for whoever presents it. */
-    resolve(id: string) { return [...catalog.objects, ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].find(object => object.id === id || (!isPreparedCluster(object) && object.detailedObjectId === id)) ?? null; },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number) {
       if (destroyed) return;
       if (world.referenceFrame !== catalog.frame.referenceFrame || world.epochJdTt !== catalog.frame.epochJdTt) {

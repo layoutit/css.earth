@@ -1,0 +1,15 @@
+---
+import { objectFacts } from '@cssearth/objects';
+import { CONTEXT_OBJECT_DESCRIPTORS } from '../prepared-context-objects.mts';
+import ObjectFactsheet from './ObjectFactsheet.astro';
+// Each package the world's host draws states its own facts (object.json `properties.facts`), each with its source.
+const packages = Object.values(CONTEXT_OBJECT_DESCRIPTORS).map(descriptor => ({ id: (descriptor as { id: string }).id, facts: objectFacts(descriptor) }))
+  .filter(({ facts }) => facts.length > 0).sort((a, b) => a.id.localeCompare(b.id, 'en'));
+---
+{packages.map(({ id, facts }) => <div data-focus-record-bank={id} hidden>
+  <ObjectFactsheet id={`focus-${id}-facts`} embedded facts={facts.map(fact => ({ id: fact.id, label: fact.label, value: fact.value }))} />
+  <ul class="object-fact-sources">
+    {[...new Map(facts.map(fact => [fact.source.url, fact.source])).values()].map(source =>
+      <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a></li>)}
+  </ul>
+</div>)}

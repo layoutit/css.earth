@@ -13,27 +13,33 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 | Dataset view | A selectable `(objectId, datasetId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
 
-Every page is `/<id>/`, one URL system for all three kinds of page:
+Every page is `/<id>/`, one URL system for every object:
 [`navigation-scope.mts`](../site/navigation/navigation-scope.mts) reads and
-writes them. A scene's page mounts that scene. A catalogue subject or an overview
-is drawn by a mounted scene: opened cold, its page mounts the world host, the Sun,
-which every catalogue subject and overview is placed from. In place, a catalogue
-subject keeps the mounted scene; an overview is always the host's, as zooming out
-of any system reaches it. Their pages carry none of the scene's own selections
+writes them. An object with a scene of its own mounts it. An object without one
+(a galaxy, a cluster of galaxies or a nebula with a package; a level of the zoom
+ladder) is drawn by a mounted scene: opened cold, its page mounts the world host,
+the Sun. In place, a hosted package keeps the mounted scene; a level is always the
+host's, as zooming out of any system reaches it. Their pages carry none of the scene's own selections
 (`dataset`, `feature`), so a cold open never reads them as the host's.
 
-`SCENE_OBJECTS` filters `OBJECTS` by scene capability. Routes, body preparation
-and scene conformance use this filter because a prepared focus does not own
-another scene. `requireObject` resolves either destination kind;
-`requireSceneObject` rejects a focus when a caller needs a scene loader.
+`OBJECTS` has one entry shape and no kinds. Each entry is built from its package's
+own descriptor, and what it can do is what the descriptor declares: a catalogue
+block and world frame place it in the world (`isPlacedObject`), a scene type gives
+it a scene (`isSceneObject`, which `SCENE_OBJECTS` filters by), and
+`properties.overview` makes it a level of the zoom ladder (`isOverviewObject`).
+The Local Group is placed and a level; the observable universe is a level only.
+`requireSceneObject` rejects an object without a scene when a caller needs a
+scene loader. A hosted package states its card's facts under `properties.facts`,
+each with its source.
 
-One object has one id. A catalogue row that an object package details takes the
-package's id when the catalogue is prepared: Andromeda is `m31` in the catalogue,
-the registry, its page and its links, and the LVDB key `m_031` stays in its source
-references. Non-navigable context resources remain outside `OBJECTS`.
+One object has one id. The spatial catalogues (Local Group galaxies, galaxy
+clusters, the nearby field) are data the world draws as dots: a row makes no page
+and no registry entry, and nothing in the application reads a row for an object's
+identity, position or facts. Non-navigable context resources remain outside
+`OBJECTS`.
 Adding a classification does not add a renderer, shell or camera owner.
 
-`sceneHostId` identifies the scene displaying a prepared focus. A galaxy's
+`sceneHostId` identifies the scene that draws an object without one of its own. A catalogue galaxy's
 `hostId` identifies its physical host. Referenced hosts excluded from positional
 selection remain in the catalogue's `unpositionedHosts`, with a source reference
 and exclusion reason. They acquire no position or destination. The reader rejects

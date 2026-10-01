@@ -70,7 +70,38 @@
       ],
       "metersPerUnit": 198366776548200,
       "bodyRadiusM": 677379746660464100
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1.326 kpc (−69 / +77 pc)",
+        "note": "Adopted Gaia DR2 cluster distance from Wright et al. (2019), section 3.4: 1326 −69/+77 pc, including the stated parallax zero-point correction and systematic uncertainty. It is not an individual gas-cloud depth measurement.",
+        "source": {
+          "label": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+          "url": "https://arxiv.org/pdf/1903.12176v1"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 270.8°, Dec -24.31°",
+        "source": {
+          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
+          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "H II region and star-forming nebula",
+        "note": "Observed optical and infrared emission on an authored coherent front with local literature-guided structure. Foreground extinction, distinct molecular clouds and true front/back distances are not reconstructed.",
+        "source": {
+          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
+          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

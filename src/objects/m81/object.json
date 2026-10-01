@@ -75,7 +75,28 @@
       ],
       "metersPerUnit": 30856775814913670000,
       "bodyRadiusM": 509136800946075600000
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "3.614 Mpc (−65,960 / +33,440 pc)",
+        "note": "trgb",
+        "source": {
+          "label": "Newman2024ApJ...966..175N: An Empirical Calibration of the Tip of the Red Giant Branch Distance Method in the Near Infrared. I. Hubble Space Telescope WFC3/IR F110W and F160W Filters",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 148.9°, Dec 69.07°",
+        "source": {
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

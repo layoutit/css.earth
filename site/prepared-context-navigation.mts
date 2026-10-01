@@ -1,4 +1,3 @@
-import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
 import type { createPreparedUniverse } from '@cssearth/renderer/universe/prepared-universe-runtime.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
@@ -6,12 +5,12 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
 import { acquirePreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusTarget } from './prepared-focus-target.mts';
-import type { PreparedFocusPolicy, PreparedFocusPresentation } from './prepared-focus.mts';
+import type { FocusObject, PreparedFocusPolicy, PreparedFocusPresentation } from './prepared-focus.mts';
 
-type PreparedContextLayer = Pick<ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>, 'resolveGalaxy' | 'ensureGalaxyCatalog' | 'focusBank' | 'selectGalaxy'>;
+type PreparedContextLayer = Pick<ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>, 'focusBank' | 'selectGalaxy'>;
 export interface FocusPublication {
-  record: PreparedCatalogObject | null;
-  sources: readonly SpatialCitation[];
+  /** The registry object the focus is on. */
+  object: FocusObject | null;
   presentation: PreparedFocusPresentation | null;
   url: 'preserve' | 'selection' | 'reframe';
 }
@@ -31,7 +30,8 @@ export interface FocusOperation {
 interface ContextNavigationOptions {
   layer: PreparedContextLayer;
   presentation: PreparedFocusPolicy;
-  sources?: readonly SpatialCatalogSource[] | (() => readonly SpatialCatalogSource[]);
+  /** The registry's object with an id: the one the page already holds, and a read of its entry when it does not. */
+  objects: { known(id: string): FocusObject | null; load(id: string): Promise<FocusObject | null> };
   windowTarget: Window;
   onError?(error: unknown): void;
   unavailableObjectIds?: readonly string[];
@@ -58,14 +58,15 @@ function savedCameraShowsFocus(navigation: ObjectWorldNavigation, focus: Prepare
 }
 
 /** Catalogue focus on the current detailed scene's shared camera owner. */
-export function createPreparedContextNavigation({ layer, presentation, sources = [], windowTarget, onError = console.error, unavailableObjectIds = [] }: ContextNavigationOptions) {
+export function createPreparedContextNavigation({ layer, presentation, objects, windowTarget, onError = console.error, unavailableObjectIds = [] }: ContextNavigationOptions) {
   /** The detailed scene's camera owner this focus is connected to, with that scene's publication callbacks. */
   let connection: (FocusCallbacks & { readonly owner: ObjectWorldNavigation; unsubscribe(): void }) | null = null;
   let target: PreparedFocusTarget | null = null;
-  const currentSources = () => typeof sources === 'function' ? sources() : sources;
   const useTarget = (id: string | null) => {
     if (id === (target?.id ?? null)) return target;
-    const next = id ? acquirePreparedFocusTarget(id, { layer, policy: presentation, sources: currentSources, unavailableObjectIds,
+    const object = id ? objects.known(id) : null;
+    if (id && !object) throw new TypeError(`Unknown object the world's host draws: ${id}`);
+    const next = object ? acquirePreparedFocusTarget(object, { layer, policy: presentation, unavailableObjectIds,
       onChange: () => { if (target?.id === id) publishDataset(); }, onError }) : null;
     const previous = target;
     target = next;
@@ -82,7 +83,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     const controls = active && state ? { ...state,
       selectDataset(dataset: string) { if (target === active && owns(active)) active.selectDataset(dataset); },
     } : null;
-    connection?.onFocusChange({ record: active?.record ?? null, sources: active?.citations ?? [], presentation: controls, url });
+    connection?.onFocusChange({ object: active?.object ?? null, presentation: controls, url });
   };
   const publishDataset = () => { if (target && owns(target)) publishContent(); };
   const publishSelection = (force = false) => {
@@ -141,7 +142,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
       return loading ? loading.then(activate) : activate();
     };
     try {
-      const pending = selection && !layer.resolveGalaxy(selection.id) ? layer.ensureGalaxyCatalog().then(prepare) : prepare();
+      const pending = selection && !objects.known(selection.id) ? objects.load(selection.id).then(prepare) : prepare();
       return pending?.catch(recover);
     } catch (error) { return recover(error); }
   }

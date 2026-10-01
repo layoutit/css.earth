@@ -74,7 +74,37 @@
       ],
       "metersPerUnit": 30856775814913670000,
       "bodyRadiusM": 277710982334223060000
-    }
+    },
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "859 kpc (−23,410 / +24,070 pc)",
+        "source": {
+          "label": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 23.46°, Dec 30.66°",
+        "source": {
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Local group, Andromeda",
+        "note": "Author catalogue host association: m_033 -> m_031; object confirmation is recorded separately.",
+        "source": {
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+        }
+      }
+    ]
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",
