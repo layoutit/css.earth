@@ -88,8 +88,9 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
+      import { startFirstView } from '../startup-boot.mts';
       bindNativeViewForms(document, window);
-      import("../startup-boot.mts").then(boot => boot.startFirstView(document)).catch(() => {});
+      startFirstView(document);
       import("../scene/scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();

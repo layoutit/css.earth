@@ -69,7 +69,6 @@ export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLe
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';
-export { prestartWorldContextPlanner } from './universe/world-context/world-context-planner-client.js';
 export { parseDatasetBillboards } from './universe/dataset-billboards.js';
 
 export { requireAssets } from './validation/resources-tree.js';

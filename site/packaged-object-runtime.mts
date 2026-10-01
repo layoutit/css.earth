@@ -9,6 +9,8 @@ import { loadNavigableObject, preparedObjectCapabilities,
 import { APPLICATION_WORLD_CAMERA } from './world-camera.mts';
 import * as runtimePolicy from './runtime-policy.mts';
 import { startupFetch } from './startup-requests.mts';
+/** Started at boot (`startup-boot.mts`), so the decoding worker's script loads beside the first object's bytes. */
+export { prestartPreparedObjectDecoding as prestartObjectDecoding } from '@cssearth/renderer';
 import { preparedObjectPath } from './prepared-object-path.mts';
 
 // The application supplies its shell nodes and authoritative input policy.
