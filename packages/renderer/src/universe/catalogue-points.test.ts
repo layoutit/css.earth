@@ -7,6 +7,7 @@ import { mountCataloguePoints, parseCataloguePoints } from './catalogue-points.j
 import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
+import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
 /** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */
 const baked = (points: readonly (readonly number[])[], levels?: readonly number[]) => ({ spread: cataloguePointSpread(points), cells: catalogueCells(points, levels) });
@@ -113,6 +114,29 @@ test('a catalogue loads on its first publication and draws every point as the sa
   assert.equal(points.root.querySelectorAll('i').length, 0);
   points.publish({ world, viewport }); assert.equal(fetched, 1);
   points.destroy(); assert.equal(host.children.length, 0);
+});
+
+test('a catalogue shown during a body\'s first view loads once that view is interactive and the browser idle', async () => {
+  const { document, window } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const idle: (() => void)[] = [];
+  Reflect.set(window, 'requestIdleCallback', (run: () => void) => idle.push(run));
+  const fetched: string[] = [];
+  const points = mountCataloguePoints({ host, url: '/dots.bin', loadBank: async url => { fetched.push(url); return bank; } });
+  const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  holdStartup(window as unknown as Window);
+  points.publish({ world, viewport });
+  points.publish({ world, viewport });
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.deepEqual(fetched, []);
+  releaseStartup(window as unknown as Window);
+  assert.deepEqual(fetched, [], 'released, it still waits for idle');
+  idle[0]!();
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.deepEqual(fetched, ['/dots.bin'], 'one request, once');
+  assert.equal(points.root.dataset.cataloguePoints, 'test-stars');
+  assert.equal(points.root.querySelectorAll('path').length, 1, 'drawn from the latest view');
+  points.destroy();
 });
 
 test('a level with a near opacity draws as its own part and dims to it as the innermost level fills the view', async () => {

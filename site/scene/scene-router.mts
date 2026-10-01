@@ -1,6 +1,7 @@
 import { prepareStartupBillboard } from '../startup-billboard.mts';
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
+import { holdStartup, releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
 import { createSceneView } from './scene-view.mts';
 import { selectSceneFeature } from './scene-feature.mts';
@@ -199,6 +200,9 @@ export function createSceneRouter({
       // A plain cold page can present its prepared cover before downloading the
       // registry. Every path still prepares the world before mounting detail.
       const bodyFirst = !context && !replacement && !worldOwnsArrival();
+      // A body's first view holds the world's background banks until its detail is interactive (startup-gate.ts). A
+      // focus or overview arrival shows the world itself first, and loads them at once.
+      if (!replacement && !worldOwnsArrival()) holdStartup(windowTarget);
       let ready = replacement?.context;
       if (!bodyFirst) {
         const loaded = await session.wait(ensureContext());
@@ -301,6 +305,10 @@ export function createSceneRouter({
       return !interrupted;
     } catch (error) {
       if (scenes.isCurrent(session)) fail(session, error);
+    } finally {
+      // The startup arrival releases the gate as its detail reveals (startup-billboard.mts); an initial view without one
+      // releases it once it has arrived, and a cancelled or failed one still lets the background load.
+      if (!replacement) releaseStartup(windowTarget);
     }
   }
 

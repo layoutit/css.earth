@@ -6,6 +6,7 @@ import { prepareArrivalBillboard } from './arrival-billboard.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
+import { releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
 
 /** A custom view never borrows the default arrival photograph. */
 export function usesDefaultStartupView(url: string, sceneId: string): boolean {
@@ -50,6 +51,8 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
     if (cover) removeLoader();
     pending = createPreparedArrival(signal, cover, () => {
       window.performance.mark('cssearth:startup-detail-ready');
+      // The world's background banks held for this moment start once the browser is idle (startup-gate.ts).
+      releaseStartup(window);
       removeLoader();
     }, input);
     await pending.prepare(factory, { getView: () => view, cameraViewport: viewport, selectionStage: stage, ownerDocument: document });
