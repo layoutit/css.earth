@@ -41,7 +41,7 @@
       "note": "Columns 7 and 8: the group's dominant galaxy (table 2, 1PGC) and the group's distance modulus on the calibrated scale (table 3, DMzp), joined by PGC; column 8 is empty for the 7 galaxies whose group table 3 does not list."
     }
   },
-  "sample": "The tracked file keeps the 27,277 of CF4's 55,877 galaxies whose distance modulus puts them between 3 and 200 Mpc (27.386 to 36.505 mag), in PGC order. Nearer, the Local Group catalogue (src/objects/local-group) draws each galaxy; farther, only the SDSS fundamental-plane sample reaches, over part of the northern sky.",
+  "sample": "The tracked file keeps the 27,277 of CF4's 55,877 galaxies whose distance modulus puts them between 3 and 200 Mpc (27.386 to 36.505 mag), in PGC order. Nearer, the Local Group catalogue (src/objects/local-group-galaxies) draws each galaxy; farther, only the SDSS fundamental-plane sample reaches, over part of the northern sky.",
   "filters": [],
   "frame": {
     "input": "icrs",

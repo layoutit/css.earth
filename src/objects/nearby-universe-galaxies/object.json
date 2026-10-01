@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nearby-universe-galaxies",
+  "type": "galaxy-point-field",
+  "properties": {
+    "preparation": {
+      "source": "source/dots/stack.json"
+    },
+    "farBanks": {
+      "banks": [
+        "prepared/bright-galaxy-dots.bin",
+        "prepared/quasar-dots.bin"
+      ],
+      "fromDistancePc": 300000000.0,
+      "basis": "DESI's shells begin past the Cosmicflows-4 field, so they load only once the camera is 300 Mpc from the Sun: the Local Group and Nearby Universe pages never download them."
+    }
+  },
+  "prepared": {
+    "format": "cssearth-catalogue-points-bin@1",
+    "url": "prepared/dots.bin"
+  }
+}

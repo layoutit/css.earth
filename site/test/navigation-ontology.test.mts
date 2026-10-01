@@ -74,7 +74,7 @@ test('distance display and order use the prepared position, never the legacy orb
 });
 
 test('galaxy citations resolve across the full prepared catalogue, including the separate SMC paper', async () => {
-  const raw: unknown = JSON.parse(await readFile('src/objects/local-group/prepared/catalogue.json', 'utf8'));
+  const raw: unknown = JSON.parse(await readFile('src/objects/local-group-galaxies/prepared/catalogue.json', 'utf8'));
   const catalogue = parsePreparedGalaxyCatalog(raw);
   for (const galaxy of catalogue.objects) {
     for (const reference of [galaxy.distance.sourceRef, galaxy.skyPosition.sourceRef, galaxy.halfLightRadius?.sourceRef, galaxy.membership.sourceRef]) {
@@ -89,7 +89,7 @@ test('galaxy citations resolve across the full prepared catalogue, including the
 
 
 test('physical hosts remain distinct from scene hosts and M45 retains its measured subject', async () => {
-  const raw: unknown = JSON.parse(await readFile('src/objects/local-group/prepared/catalogue.json', 'utf8'));
+  const raw: unknown = JSON.parse(await readFile('src/objects/local-group-galaxies/prepared/catalogue.json', 'utf8'));
   const catalogue = parsePreparedGalaxyCatalog(raw), satellite = catalogue.objects.find(o => o.id === 'andromeda_01')!;
   assert.equal(satellite.hostId, 'm31', 'a host its object package details takes the package id');
   assert.equal(OBJECTS.some(o => o.id === satellite.id), false, 'a catalogue row without a package is data, never a destination');

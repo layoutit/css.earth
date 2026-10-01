@@ -98,8 +98,10 @@ export async function preparedRuntimeCamera(path: string): Promise<unknown> {
 
 /** What a bank shows is its observations: images and volumes built from them are imagery; a bank of catalogue points is
  * measured, not pictured, and so is our own galaxy's volume (catalogue dots over a simulated bulge: nobody has pictured the
- * Milky Way from outside). */
-const DATASET_PACKAGE_IMAGERY: Readonly<Record<string, boolean>> = { 'image-layer-bank': true, 'volume-dataset-bank': true, 'catalogue-point-bank': false, 'density-volume': false };
+ * Milky Way from outside); a catalogue or field of galaxy dots is measured too, and a sky map (the microwave background) is
+ * an observation. */
+const DATASET_PACKAGE_IMAGERY: Readonly<Record<string, boolean>> = { 'image-layer-bank': true, 'volume-dataset-bank': true, 'catalogue-point-bank': false, 'density-volume': false,
+  'galaxy-catalog': false, 'galaxy-point-field': false, 'map-sphere': true };
 
 export async function prepareObjectDiscovery(descriptor: unknown, objectDirectory: string) {
   if (isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length) {

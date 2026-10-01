@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "local-group-galaxies",
+  "type": "galaxy-catalog",
+  "properties": {
+    "preparation": {
+      "source": "source/catalogue.json"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-galaxy-catalog@1",
+    "url": "prepared/catalogue.json"
+  }
+}

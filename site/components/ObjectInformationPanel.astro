@@ -15,7 +15,9 @@ import { readObjectArticleUrl } from '../server/object-article.mts';
 import ObjectResult from './ObjectResult.astro';
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
 import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
-import { overviewDistanceM } from '../overview-context.mts';
+import { overviewDistanceM, overviewsReachableFrom } from '../overview-context.mts';
+import { objectResultMarkup } from '../server/object-result-markup.mts';
+import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts';
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], datasets } = Astro.props;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
@@ -29,16 +31,42 @@ const bodies = level ? SCENE_OBJECTS.filter(object => held.includes(object.class
   && (object.id === WORLD_HOST_ID || object.discovery.featured)
   && (!level.zoom.centreWithin || object.distance.meters < overviewDistanceM(level.zoom.centreWithin)))
   .sort((a, b) => Number(b.id === WORLD_HOST_ID) - Number(a.id === WORLD_HOST_ID) || a.distance.meters - b.distance.meters) : [];
+// Each group it holds under a list label is a tab: the registry's objects of those classifications whose own zoom reaches
+// this level (M87 is in Virgo, not the Local Group), each with its distance from the member that holds the stars (the
+// Milky Way: the view from home), or from the observer where the list has no such member.
+const PARSEC_M = 3.085677581491367e16;
+const slug = (label: string) => label.toLocaleLowerCase('en').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
+const resultRows = new Map(PREPARED_CATALOGUE_INDEX.entries.filter(row => row.kind !== 'system').map(row => [row.id, row]));
+const lists = (level?.holds ?? []).flatMap(group => {
+  if (!group.list) return [];
+  // A level lists what is inside it, never a level as far out as itself or farther.
+  const members = OBJECTS.filter(object => object.id !== objectId && !(object.level && object.level.order >= level!.order) && group.classifications.includes(object.classification)
+    && overviewsReachableFrom(object.worldFrame.originM).some(reached => reached.id === objectId));
+  const home = members.find(member => member.level?.holds.some(held => held.classifications.includes('star')));
+  const rows = members.map(member => ({ member, distancePc: home
+    ? Math.hypot(...member.worldFrame.originM.map((value, axis) => value - home.worldFrame.originM[axis]!)) / PARSEC_M : member.distance.meters / PARSEC_M }))
+    .sort((a, b) => a.distancePc - b.distancePc);
+  return [{ id: slug(group.list), label: group.list, title: home ? `Catalogue center distance from ${home.name}` : 'Published catalogue distance from the Solar System', home, rows }];
+});
+const memberMarkup = (list: (typeof lists)[number], { member, distancePc }: (typeof lists)[number]['rows'][number]) => {
+  const row = resultRows.get(member.id);
+  if (!row) throw new Error(`Missing search row for ${objectId} member ${member.id}.`);
+  const ly = distancePc * 3.261563777, divisor = ly >= 1e6 ? 1e6 : ly >= 1e3 ? 1e3 : 1;
+  const value = `≈${new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor)}`, unit = divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly';
+  return objectResultMarkup({ ...row, detail: { text: `${value} ${unit}`, value, unit, title: list.title, ariaLabel: `${value} ${unit}. ${list.title}` } });
+};
+const opening = bodies.length ? 'bodies' : lists[0]?.id ?? 'dataset';
 ---
 
 <ObjectCard class="object-information-panel" data-card-subject={satelliteSystemFromUrl(Astro.url) ? 'satellite-system' : 'body'}
   data-card-view={satelliteSystemFromUrl(Astro.url) ? 'overview' : undefined}>
   <SatelliteSystemCard hostId={objectId} detached={!satelliteSystemFromUrl(Astro.url)} />
       <ObjectCardHeader {objectId} {title} {introduction} {articleUrl}>
-          <ObjectBreadcrumbs {objectId} />
+          {level ? <ObjectBreadcrumbs scope={objectId} /> : <ObjectBreadcrumbs {objectId} />}
       </ObjectCardHeader>
-      {hasFacts && <InformationTabs idPrefix={objectId} initialTab="dataset" tabs={[
+      {hasFacts && <InformationTabs idPrefix={objectId} initialTab={opening} tabs={[
         ...(bodies.length ? [{ id: 'bodies', label: 'Celestial bodies' }] : []),
+        ...lists.map((list, index) => ({ id: list.id, label: index === 0 && !bodies.length ? 'Celestial bodies' : list.label, count: list.rows.length })),
         { id: 'dataset', label: 'Datasets' },
         { id: 'factsheet', label: 'Factsheet' },
         ...(orderedCharts.length ? [{ id: 'charts', label: 'Charts' }] : []),
@@ -47,6 +75,11 @@ const bodies = level ? SCENE_OBJECTS.filter(object => held.includes(object.class
       {bodies.length > 0 && <section class="object-results-scroll object-card-tabpanel" id={`${objectId}-bodies-content`} data-information-panel="bodies" aria-label="Celestial bodies">
         <ul class="object-list">{bodies.map(object => <ObjectResult {object} />)}</ul>
       </section>}
+      {lists.map(list => <section class="object-results-scroll object-card-tabpanel" id={`${objectId}-${list.id}-content`} data-information-panel={list.id} aria-label={list.label}>
+        <ul class="object-list">
+          {list.rows.map(row => <li class="object-item"><Fragment set:html={row.member === list.home ? objectResultMarkup({ ...resultRows.get(row.member.id)!, detail: undefined }) : memberMarkup(list, row)} /></li>)}
+        </ul>
+      </section>)}
       <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" open>
       <h2 class="object-mobile-information-heading">Datasets</h2>
       {hasDatasets && datasets && <DatasetList {objectId} {datasets} />}

@@ -337,7 +337,8 @@ function orbits(value: unknown): Readonly<Record<string, Orbit>> {
     const semiMajorAxisAu = number(orbit.semiMajorAxisAu, `${id} semi-major axis`), orbitEccentricity = eccentricity(orbit.eccentricity, id);
     // A straight path (eccentricity exactly 1, a placed body moving along its line of sight or held still) is bound or unbound.
     if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : orbitEccentricity === 1 ? semiMajorAxisAu !== 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis ${semiMajorAxisAu} AU and eccentricity ${orbitEccentricity} are incompatible.`);
-    return [id, { semiMajorAxisAu, eccentricity: orbitEccentricity, heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
+    return [id, { semiMajorAxisAu, eccentricity: orbitEccentricity, // Zero is a scale of the universe centred on the observer: it is nowhere but at the Sun.
+      heliocentricDistanceAu: (distance => { if (!(distance >= 0)) throw new TypeError(`${id} distance must not be negative.`); return distance; })(number(orbit.heliocentricDistanceAu, `${id} distance`)),
       perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`),
       ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }),
       ...(orbit.centerParentBodyId === undefined ? {} : { centerParentBodyId: text(orbit.centerParentBodyId, `${id} orbit centre parent`) }) }];

@@ -41,7 +41,7 @@ async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) 
   await inventory('helix', 'runtime', ['unrelated-preview.webp']);
   await json('src/objects/helix-volume/source/presentation.json', { schema: 'cssearth-volume-presentation-source@2', objectId: 'helix' });
   await inventory('local-group', 'runtime', ['catalogue.json'], 'prepared');
-  await json('src/objects/local-group/source/presentation.json', { provenance: { products: [] } });
+  await json('src/objects/local-group-galaxies/source/presentation.json', { provenance: { products: [] } });
   const fetcher: typeof fetch = async url => {
     const key = new URL(String(url)).pathname.slice(1), bytes = payloads.get(key);
     assert.ok(bytes, `Only declared fixture bytes may be requested: ${key}`);

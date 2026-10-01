@@ -1,0 +1,485 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "galaxies-table",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+PGC,DM,e_DM,DMtf,DMfp,DMsbf,RAJ2000,DEJ2000+FROM+%22J/ApJ/944/94/table2%22+ORDER+BY+PGC",
+      "sourceUrl": "https://doi.org/10.3847/1538-4357/ac94d8",
+      "title": "Cosmicflows-4 galaxies between 3 and 200 Mpc, with their groups and HyperLEDA morphological types",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94, distributed by CDS/VizieR; HyperLEDA (Makarov et al. 2014, A&A 570, A13)",
+      "acquisition": "CF4 table2 from CDS TAP (the origin query), rows between 3 and 200 Mpc, each joined by PGC to HyperLEDA's numerical type t (the join origin in source/galaxies/points.json). Queried 2026-09-29. On 2026-09-30 packages/bake/authoring/nearby-universe/cf4-groups.mts added each galaxy's group (table 2, 1PGC) and the group's distance modulus (table 3, DMzp), from https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/94/table2.dat.gz and table3.dat.gz.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cosmicflows-4",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/table"
+          },
+          {
+            "catalogueId": "hyperleda-2014",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/table/join"
+          },
+          {
+            "catalogueId": "cosmicflows-4",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/table/groupDistance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite Tully et al. (2023), CDS/VizieR and HyperLEDA.",
+      "generator": "packages/bake/authoring/nearby-universe/cf4-groups.mts"
+    },
+    {
+      "id": "local-group-galaxies-sample",
+      "path": "src/objects/nearby-universe-galaxies/source/local-group-galaxies/lvdb-sample.csv.gz",
+      "origin": "src/objects/local-group-galaxies/prepared/catalogue.json",
+      "sourceUrl": "https://doi.org/10.33232/001c.144859",
+      "title": "LVDB v1.1.1 galaxies nearer than the Cosmicflows-4 field",
+      "credit": "Pace (2025), Local Volume Database v1.1.1 (CC0)",
+      "acquisition": "The generator keeps the prepared Local Group catalogue's galaxies nearer than the field's nearest Cosmicflows-4 galaxy, without a detailed object of their own, with LVDB's apparent V magnitude joined by key. Written 2026-09-30.",
+      "generator": "packages/bake/authoring/nearby-universe/local-group-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lvdb-v1-1-1",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/local-group-galaxies/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "galaxies-table"
+      ],
+      "license": "LVDB is CC0; cite Pace (2025) and its input papers."
+    },
+    {
+      "id": "kc96-elliptical",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/kc96/elliptical_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/elliptical_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti elliptical template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-s0",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/kc96/s0_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/s0_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti s0 template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sa",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/kc96/sa_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sa_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sa template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sb",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/kc96/sb_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sb_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sb template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sc",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/kc96/sc_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sc_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sc template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "desi-bright-galaxies-sample",
+      "path": "src/objects/nearby-universe-galaxies/source/desi-bright-galaxies/bgs-bright-21.5-sample.csv.gz",
+      "origin": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/",
+      "sourceUrl": "https://arxiv.org/abs/2503.14745",
+      "title": "DESI DR1 BGS BRIGHT-21.5 clustering catalogues, one row in 10",
+      "credit": "DESI Collaboration (2025), arXiv:2503.14745; Ross et al. (2025), arXiv:2405.16593",
+      "acquisition": "Downloaded 2026-09-29 (NGC and SGC files); one row in 10 kept in catalogue order with TARGETID, RA, DEC, Z and the dereddened g, r, z fluxes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "desi-2025-dr1",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/desi-bright-galaxies/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "DESI data are public; cite DESI Collaboration (2025)."
+    },
+    {
+      "id": "desi-quasars-sample",
+      "path": "src/objects/nearby-universe-galaxies/source/desi-quasars/qso-sample.csv.gz",
+      "origin": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/",
+      "sourceUrl": "https://arxiv.org/abs/2503.14745",
+      "title": "DESI DR1 QSO clustering catalogues, one row in 50",
+      "credit": "DESI Collaboration (2025), arXiv:2503.14745; Ross et al. (2025), arXiv:2405.16593",
+      "acquisition": "Downloaded 2026-09-29 (NGC and SGC files); one row in 50 kept in catalogue order with TARGETID, RA, DEC and Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "desi-2025-dr1",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/desi-quasars/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "DESI data are public; cite DESI Collaboration (2025)."
+    },
+    {
+      "id": "quaia-quasars-sample",
+      "path": "src/objects/nearby-universe-galaxies/source/quaia-quasars/quaia-sample.csv.gz",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=1000000&QUERY=SELECT+GaiaDR3,RA_ICRS,DE_ICRS,zQuaia+FROM+%22J/ApJ/964/69/quaiag200%22+WHERE+zQuaia+BETWEEN+0.8+AND+3.5+ORDER+BY+GaiaDR3",
+      "sourceUrl": "https://doi.org/10.3847/1538-4357/ad1328",
+      "title": "Quaia G < 20.0 quasars outside DESI's footprint, one row in 9",
+      "credit": "Storey-Fisher et al. (2024), ApJ 964, 69, distributed by CDS/VizieR",
+      "acquisition": "The origin query (CDS TAP, 619,961 quasars between redshift 0.8 and 3.5), run 2026-09-30; the generator keeps the rows outside DESI's footprint, one in 9 in source id order.",
+      "generator": "packages/bake/authoring/nearby-universe/quaia-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "quaia-2024",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/quaia-quasars/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "desi-quasars-sample"
+      ],
+      "license": "Original catalogue terms apply; cite Storey-Fisher et al. (2024) and CDS/VizieR."
+    },
+    {
+      "id": "quasar-template",
+      "path": "src/objects/nearby-universe-galaxies/source/desi-quasars/qso_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/agn/qso_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/170066",
+      "title": "Francis et al. (1991) composite quasar spectrum",
+      "credit": "Francis et al. (1991), ApJ 373, 465; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "francis-1991-quasar-composite",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe-galaxies/source/desi-quasars/points.json#/appearance/colorBySpectrumAtRedshift"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Francis et al. (1991)."
+    },
+    {
+      "id": "wisescos-galaxies-sample",
+      "path": "src/objects/nearby-universe-galaxies/source/wisescos-galaxies/wisescos-sample.csv.gz",
+      "origin": "http://ssa.roe.ac.uk/cats/wiseScosPhotoz160708.csv.gz",
+      "sourceUrl": "https://doi.org/10.3847/0067-0049/225/1/5",
+      "title": "WISE x SuperCOSMOS galaxies outside DESI's footprint, at DESI's density in each redshift bin",
+      "credit": "Bilicki et al. (2016), ApJS 225, 5; Wide Field Astronomy Unit, University of Edinburgh",
+      "acquisition": "The whole catalogue (the origin, 1,709,149,603 bytes) downloaded 2026-09-30 and read as a stream; the generator keeps the photometric redshift 0.1 to 0.4 galaxies brighter than absolute R -21.5 outside DESI's footprint, thinned in each redshift bin to the DESI sample's count per sky cell, and prints DESI's median colour per bin.",
+      "generator": "packages/bake/authoring/nearby-universe/wisescos-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "bilicki-2016-wisescos",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/wisescos-galaxies/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "desi-bright-galaxies-sample"
+      ],
+      "license": "Original catalogue terms apply; cite Bilicki et al. (2016) and acknowledge the Wide Field Astronomy Unit (WFAU)."
+    },
+    {
+      "id": "galaxies-2mrs-sample",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies-2mrs/twomrs-sample.csv.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/199/26/table3.dat.gz",
+      "sourceUrl": "https://ui.adsabs.harvard.edu/abs/2012ApJS..199...26H",
+      "title": "2MASS Redshift Survey galaxies that Cosmicflows-4 lacks, to redshift 0.05 in the CMB frame",
+      "credit": "Huchra et al. (2012), ApJS 199, 26, distributed by CDS/VizieR",
+      "acquisition": "CDS table 3 (the origin, 44,599 galaxies) downloaded 2026-09-30; the generator drops the galaxies within 10 arcsec of a Cosmicflows-4 position, moves each redshift to the CMB frame with Planck's dipole and keeps z_CMB 0.0007 to 0.05.",
+      "generator": "packages/bake/authoring/nearby-universe/twomrs-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "huchra-2012-2mrs",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe-galaxies/source/galaxies-2mrs/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "galaxies-table"
+      ],
+      "license": "Original catalogue terms apply; cite Huchra et al. (2012) and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-galaxies",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored catalogue selection and colour classes.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-200mpc",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies-200mpc/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-60mpc",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies-60mpc/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-20mpc",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies-20mpc/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-10mpc",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies-10mpc/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-dots",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/dots/stack.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored stack of the galaxy dot levels.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-desi-bright-galaxies",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/desi-bright-galaxies/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored DESI bright-galaxy selection, colour and tone.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-desi-quasars",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/desi-quasars/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored DESI quasar selection and colour.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-bright-galaxies",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/bright-galaxies/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored share of the bright galaxies drawn.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-quasars",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/quasars/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored share of the quasars drawn.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-bright-galaxy-dots",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/bright-galaxy-dots/stack.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored reach of the bright-galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-quasar-dots",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/quasar-dots/stack.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored reach of the quasar dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-presentation",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/presentation.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored provenance presentation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-wisescos-galaxies",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/wisescos-galaxies/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored WISE x SuperCOSMOS fill selection, colour and tone.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-2mrs",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies-2mrs/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored 2MRS selection, colour classes and tone.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

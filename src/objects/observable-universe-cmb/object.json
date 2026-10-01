@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "observable-universe-cmb",
+  "type": "map-sphere",
+  "properties": {
+    "preparation": {
+      "source": "source/cmb/sphere.json"
+    },
+    "views": {
+      "default": "off",
+      "datasets": {
+        "off": "hidden",
+        "cutaway": "cutaway",
+        "full": "full"
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-mesh@1",
+    "url": "prepared/cmb.json"
+  }
+}

@@ -15,7 +15,7 @@ import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
-const tablePath = resolve(repository, 'src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz');
+const tablePath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const table2Path = resolve(process.argv[2] ?? resolve(repository, 'output/cf4/table2.dat.gz'));
 const table3Path = resolve(process.argv[3] ?? resolve(repository, 'output/cf4/table3.dat.gz'));
 

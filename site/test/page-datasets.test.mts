@@ -34,7 +34,7 @@ test('the card marks the chosen dataset on its host scene and hides its datasets
 });
 
 test("the prepared cards of the Observable Universe resolve to its published pictures, and a bad one names the package", async () => {
-  const raw: unknown = JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/datasets.json', import.meta.url), 'utf8'));
+  const raw: unknown = JSON.parse(await readFile(new URL('../../src/objects/observable-universe-cmb/prepared/datasets.json', import.meta.url), 'utf8'));
   const cards = parsePageDatasets('observable-universe', raw, path => `https://assets.example/${path}`);
   // It opens with the sphere off: the galaxies and quasars alone, with no legend for a map it does not show.
   assert.equal(cards.defaultDataset, 'off');

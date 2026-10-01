@@ -36,7 +36,7 @@ The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image pl
 | [Graczyk et al. (2020)](https://arxiv.org/abs/2010.08754) | SMC distance: 62.44 kpc, with 0.47 kpc statistical and 0.81 kpc systematic uncertainty. | Direct eclipsing-binary result. |
 | [Sadibekova et al. (2024), MCXC-II](https://arxiv.org/abs/2402.01538), [CDS J/A+A/688/A187](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/688/A187) | Seven clusters: Virgo, Fornax, Hydra, Centaurus, Norma, Perseus and Coma. Centres and R500 annotations. | Each centre at its Cosmicflows-4 group's measured distance, where its members are drawn; the redshift distance (H0 = 70 km/s/Mpc, Ωm = 0.3) only checks the angular scale. R500 is an overdensity aperture, not a physical edge. Virgo's and Fornax's packages add their member catalogues' galaxies when selected. |
 
-[Galaxy selection, frames and source pins](../../src/objects/local-group/README.md) and [cluster selection and cosmology](../../src/objects/galaxy-clusters/README.md) give the full derivations. Both catalogues prepare Sun-origin Cartesian metres offline; the application does not parse tables or integrate cosmology at runtime. Navigation framing radii are presentation choices.
+[Galaxy selection, frames and source pins](../../src/objects/local-group-galaxies/README.md) and [cluster selection and cosmology](../../src/objects/galaxy-clusters/README.md) give the full derivations. Both catalogues prepare Sun-origin Cartesian metres offline; the application does not parse tables or integrate cosmology at runtime. Navigation framing radii are presentation choices.
 
 ## Other detailed galaxies
 

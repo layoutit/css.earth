@@ -3,7 +3,7 @@
   "id": "local-group-galaxies",
   "table": {
     "path": "lvdb-sample.csv.gz",
-    "origin": "src/objects/local-group/prepared/catalogue.json, joined by key to src/objects/local-group/source/lvdb/comb_all.csv",
+    "origin": "src/objects/local-group-galaxies/prepared/catalogue.json, joined by key to src/objects/local-group-galaxies/source/lvdb/comb_all.csv",
     "bytes": 4518,
     "format": "csv",
     "gzip": true,

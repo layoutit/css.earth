@@ -112,10 +112,11 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const optics = worldCameraViewport({ projectionScale: 1 }, current);
       // Its `zoom.frame` (object.json): fit what it draws, or a distance from the centre, looking the way the camera looks.
       const distanceM = overviewFrameDistanceM(overview);
-      if (distanceM === null) return drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics, documentTarget));
-      const frame = frames.get(objectId);
+      const frame = frames.get(objectId), arrival = view === 'default' ? arrivals.get(objectId) : undefined;
+      // The centre's own default view, at its body: what a fit backs out from when the level opens by its page.
+      const origin = arrival && frame ? worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits: 4 * frame.bodyRadiusM / frame.metersPerUnit }, frame, optics) : from;
+      if (distanceM === null) return drawnGalaxiesZoomTarget(origin, optics, systemFramingRect(optics, documentTarget));
       if (!frame) return null;
-      const arrival = view === 'default' ? arrivals.get(objectId) : undefined;
       const projection = arrival ? { rotation: arrival.rotation } : presentWorldCamera(from, frame, optics);
       return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: distanceM / frame.metersPerUnit },
         frame, optics), focusPositionM: frame.originM };

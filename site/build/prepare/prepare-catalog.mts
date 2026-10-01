@@ -78,7 +78,7 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
  * overview reads its volume directly. A galaxy beyond the Local Group level's reach (its zoom's `centreWithin`, M87 in
  * Virgo) is drawn but not framed by it. */
 async function readLocalGroupGalaxies(projectRoot: string) {
-  const recipePath = 'src/objects/local-group/source/catalogue.json';
+  const recipePath = 'src/objects/local-group-galaxies/source/catalogue.json';
   let text: string;
   // A project without the Local Group object has no Local Group galaxies to frame.
   try { text = await readFile(resolve(projectRoot, recipePath), 'utf8'); }
@@ -95,8 +95,8 @@ async function readLocalGroupGalaxies(projectRoot: string) {
   // catalogue is restored the association is unknown and the distance rule alone applies.
   let members: Set<string> | null = null;
   try {
-    const prepared: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/prepared/catalogue.json'), 'utf8'));
-    if (!isRecord(prepared) || !Array.isArray(prepared.objects)) throw new TypeError('src/objects/local-group/prepared/catalogue.json: objects is missing.');
+    const prepared: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group-galaxies/prepared/catalogue.json'), 'utf8'));
+    if (!isRecord(prepared) || !Array.isArray(prepared.objects)) throw new TypeError('src/objects/local-group-galaxies/prepared/catalogue.json: objects is missing.');
     members = new Set(prepared.objects.flatMap(object => isRecord(object) && typeof object.id === 'string' && isRecord(object.membership)
       && object.membership.group === 'local-group' ? [object.id] : []));
   } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }

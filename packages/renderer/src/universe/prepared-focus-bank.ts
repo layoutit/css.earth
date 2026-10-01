@@ -10,6 +10,8 @@ export interface PreparedFocusBank {
   state(): PreparedFocusDatasets | null;
   load(): Promise<void>;
   selectDataset(id: string): void;
+  /** The world always draws it: it has no datasets of its own to load or switch (a level's context package). */
+  readonly always?: true;
   /** Keep the bank resident until the focus releases it. */
   subscribe(listener: () => void): () => void;
 }
@@ -30,15 +32,12 @@ export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame
   };
 }
 
-/** The world's own volume (the galaxy): the world always draws it, so the one dataset an object names it by has nothing
- * to load or to switch. */
+/** A context package the world always draws (the galaxy's volume, the Local Group's catalogue): the dataset a level object
+ * names it by has nothing to load or to switch. */
 export function createContextFocusBank(objectId: string): PreparedFocusBank {
-  const state: PreparedFocusDatasets = { objectId, id: 'galaxy', defaultDataset: 'galaxy', selectedDataset: 'galaxy', starsVisible: false,
-    datasets: [{ id: 'galaxy', label: 'Galaxy', title: 'The galaxy the world draws', description: 'Prepared world volume', sourceUrl: '' }] };
   return {
-    objectId, framingRadiusM: () => { throw new TypeError('The world volume is framed by its scene.'); }, state: () => state, load: () => Promise.resolve(),
-    selectDataset(id) { if (id !== 'galaxy') throw new TypeError('Unknown world-volume dataset.'); },
-    subscribe: () => () => {},
+    objectId, always: true, framingRadiusM: () => { throw new TypeError('A context package is framed by its scene.'); }, state: () => null, load: () => Promise.resolve(),
+    selectDataset() {}, subscribe: () => () => {},
   };
 }
 

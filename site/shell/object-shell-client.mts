@@ -135,7 +135,7 @@ export function mountObjectShell({
     const shown = knownObject(objectId);
     // A level is seen from inside, around the star it is centred on: its readout is an overview's, from that star.
     const level = subject.kind === 'object' && isLevelObject(objectId);
-    viewReadout.setExtendedSubject(!level && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
+    viewReadout.setExtendedSubject(!isLevelObject(objectId) && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
     viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : level ? objectId : 'system');
     updateBodyCard();
   }

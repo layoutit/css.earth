@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import majorMoons from '../../source/major-moons.json' with { type: 'json' };
-import galaxies from '../../../src/objects/local-group/source/presentation.json' with { type: 'json' };
+import galaxies from '../../../src/objects/local-group-galaxies/source/presentation.json' with { type: 'json' };
 import clusters from '../../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';

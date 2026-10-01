@@ -334,7 +334,7 @@ export function createSceneRouter({
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
-      navigable = id => isOverviewPage(id) || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      navigable = id => isOverviewPage(id) || isLevelObject(id) || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       if (destroyed) navigation.destroy();
       return context = { registry, objects, navigation, selection, activation };
     });
