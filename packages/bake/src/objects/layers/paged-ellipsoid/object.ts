@@ -31,7 +31,7 @@ export interface PagedEllipsoidContext {
   acceptChanged?: readonly string[];
 }
 
-import { keepTextureLevelBanks, prepareTextureLevels } from './texture-levels.ts';
+import { keepTextureLevelBanks, keepTextureLevelWidths, prepareTextureLevels } from './texture-levels.ts';
 import { surfaceBankInventory } from './surface-banks.ts';
 import { preparePagedEllipsoidAssetsInParallel } from './parallel-assets.ts';
 
@@ -95,9 +95,11 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
   const publishedLevels = reuseImages ? await json(resolve(outputDirectory, 'texture-levels.json')).then(value => value === null ? null : requireRecord(value, 'published texture-levels') as unknown as Awaited<ReturnType<typeof prepareTextureLevels>>,
       error => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; }) : null;
-  // A reuse run may drop datasets: their banks and pole atlases leave the published levels, the rest stay as published.
-  const textureLevels = reuseImages ? publishedLevels && keepTextureLevelBanks(publishedLevels,
-      new Set(surfaceBankInventory(scene, datasets, config.publicBase).map(bank => bank.id)), new Set(datasets.controls.map(dataset => dataset.id)))
+  // A reuse run may drop datasets and texture level widths: their banks, pole atlases and levels leave the published levels,
+  // the rest stay as published.
+  const textureLevels = reuseImages ? publishedLevels && keepTextureLevelWidths(keepTextureLevelBanks(publishedLevels,
+      new Set(surfaceBankInventory(scene, datasets, config.publicBase).map(bank => bank.id)), new Set(datasets.controls.map(dataset => dataset.id))),
+      config.textureLevels?.widths ?? [], config.atlas.pageSize)
     : await prepareTextureLevels({ config, plan: scene, datasets, publicDirectory });
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
   if (publishedPlan && !publishedSubset(publishedPlan.datasets, datasets)) throw new Error(`${descriptor.id}: datasets differ from the published preparation beyond removed datasets; run the full preparation.`);

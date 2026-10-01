@@ -68,6 +68,31 @@ export function keepTextureLevelBanks(levels: PreparedTextureLevels, bankIds: Re
       sheets: levels.provenance.sheets.filter(sheet => urls.has(sheet.url)) } };
 }
 
+/** Published texture levels less the widths a recipe no longer lists: a reuse run drops those levels' sheets, pages and
+ * pole atlases, and each remaining level starts where a full preparation of the new widths would start it (the first at
+ * 0, every other at its predecessor's width over the canonical width, a fixed factor of the published thresholds). */
+export function keepTextureLevelWidths(levels: PreparedTextureLevels, widths: readonly number[], canonicalWidth: number): PreparedTextureLevels {
+  const widthOf = (level: PreparedTextureLevels['textureLevels']['levels'][number]) => {
+    const resource = Object.values(level.resources).find(value => /:level:\d+$/u.test(value));
+    return resource ? Number(/:level:(\d+)$/u.exec(resource)![1]) : canonicalWidth;
+  };
+  const published = levels.textureLevels.levels.map(level => ({ level, width: widthOf(level) }));
+  if (published.every(({ width }) => widths.includes(width))) return levels;
+  const second = published[1];
+  if (!second || !(second.level.minimumDiameter > 0)) throw new TypeError('Published texture levels have no threshold to scale.');
+  // Every threshold is one factor times the width before it (prepareTextureLevels).
+  const factor = second.level.minimumDiameter / published[0]!.width;
+  const kept = published.filter(({ width }) => widths.includes(width));
+  if (kept.length !== widths.length) throw new TypeError(`A reuse run can only drop texture level widths: published ${published.map(({ width }) => width).join(', ')}, recipe ${widths.join(', ')}.`);
+  const dropped = new Set(published.filter(({ width }) => !widths.includes(width)).map(({ width }) => `:level:${width}`));
+  const keptKey = (key: string) => ![...dropped].some(suffix => key.endsWith(suffix));
+  const entries = levels.entries.filter(entry => keptKey(entry.key)), urls = new Set(entries.map(entry => entry.url));
+  return { ...levels, entries,
+    textureLevels: { ...levels.textureLevels, levels: kept.map(({ level }, index) => ({ ...level, minimumDiameter: index ? factor * kept[index - 1]!.width : 0 })) },
+    provenance: { ...levels.provenance, receipts: levels.provenance.receipts.filter(receipt => urls.has(receipt.url)),
+      sheets: levels.provenance.sheets.filter(sheet => urls.has(sheet.url)) } };
+}
+
 export async function prepareTextureLevels({ config, plan, datasets, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;datasets?:SurfaceBankDatasets;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
   const { widths, fixedWidth, maximumWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
