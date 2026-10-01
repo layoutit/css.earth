@@ -51,10 +51,12 @@ export type PerspectivePublication = ReturnType<ReturnType<PerspectiveDolly['pre
 // the disc a fifth of the viewport) is nearly everywhere: measured as a
 // 0.99 roll share and 11-27 degrees per 240 px stroke off-centre against
 // 82 degrees of pure tumble at the centre. A plan with the
-// "pole-held-tumble" model (Earth's) tumbles the same way while its mesh is
-// drawn, but about the body's own pole and across it, as Cesium holds a globe
-// to its axis, so drags never roll the pole (engine pole-drag.ts); its tilt
-// stops with the pole facing the eye. Every other tumble is unbounded. The
+// "pole-held-tumble" model (Earth's) turns about the body's own pole and
+// across it while its mesh is drawn, as Cesium holds a globe to its axis, so
+// drags never roll the pole (engine pole-drag.ts). On the disc the grabbed
+// ground stays under the pointer (Cesium's constrained pan); off it the turn
+// goes by angle. Its tilt stops with the pole facing the eye. Every other
+// tumble is unbounded. The
 // control pitch anchors in the plan calibrate the affine control-to-scene map
 // and clamp nothing.
 //
@@ -190,6 +192,9 @@ export function createPerspectiveDolly({
   // screen when the shell lays the root out partly beyond the stage.
   let visibleRect: VisibleRect | null = null;
   let projectedBody: BodyProjection | null = null;
+  // The published body centre in CSS eye axes, in scene units: drags that keep the grabbed ground under the pointer cast
+  // their rays at it.
+  let projectedCenterUnits: readonly number[] | null = null;
   let lod = levelOfDetailFor(levelOfDetail, Number.POSITIVE_INFINITY);
   let publishedSceneTransform: string | null = null;
   let publishedProjectionScale = 1;
@@ -269,6 +274,7 @@ export function createPerspectiveDolly({
       }
       const genericBody = genericBodyProjection(genericPresentation, bodyRadius, focal);
       projectedBody = genericBody;
+      projectedCenterUnits = genericPresentation.bodyCenterUnits;
       // An oblique sphere can project a large ellipse millions of pixels outside
       // the viewport. Size alone must not reactivate its hidden render layers.
       const inView = bodyIntersectsViewport(genericPresentation, bodyRadius, focal, visibleRect!);
@@ -357,11 +363,15 @@ export function createPerspectiveDolly({
           : Math.hypot(viewportWidth, viewportHeight),
         Math.min(viewportWidth, viewportHeight) / 5,
       );
+      const opticalCenterX = bounds.x + bounds.width / 2 + principalOffset[0]!;
+      const opticalCenterY = bounds.y + bounds.height / 2 + principalOffset[1]!;
       return camera.trackball(Object.freeze({
         centerX,
         centerY,
-        opticalCenterX: bounds.x + bounds.width / 2 + principalOffset[0],
-        opticalCenterY: bounds.y + bounds.height / 2 + principalOffset[1],
+        opticalCenterX,
+        opticalCenterY,
+        ...(projectedCenterUnits ? { grabSphere: Object.freeze({ center: projectedCenterUnits, radius: bodyRadius,
+          opticalCenterX, opticalCenterY, focalLength: focal * camera.projectionScale }) } : {}),
         radius,
         surfaceRadius: radius,
         focalLength: focal * camera.projectionScale,

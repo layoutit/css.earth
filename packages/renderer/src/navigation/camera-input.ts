@@ -13,7 +13,7 @@ import type { SphereDragInput } from "@cssearth/engine";
 import type { DragThrow } from "@cssearth/engine";
 export type MatrixDragControls = ReturnType<typeof createUnboundedMatrixDragControls>;
 import { createSceneLifetime } from "@cssearth/engine";
-import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity, poleTumbleTurn, poleTurnRotation, rotateVector } from "@cssearth/engine";
+import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity, poleTumbleTurn, poleGrabTurn, poleTurnRotation, rotateVector } from "@cssearth/engine";
 import { advanceDragThrow, createDragHistory, estimateDragThrow, TRACKBALL_DRAG_INERTIA, projectTrackballDelta, recordDragSample, resetDragHistory } from "@cssearth/engine";
 import { SURFACE_FLY_TO, planSurfaceFlyTo, sampleSurfaceFlyTo } from "./surface-fly-to.js";
 import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
@@ -81,8 +81,10 @@ export function createUnboundedMatrixDragControls({
   };
   const announceRotation = (active: boolean) =>
     inputSurface.dispatchEvent(new CustomEvent('objectrotationchange', { bubbles: true, detail: { active } }));
+  // On the body the grabbed ground follows the pointer; off it, and without a published body, the turn goes by angle.
   const projectSkyTurn = (trackball: TrackballMetrics, pointer: SphereDragInput, pole: Vector3) =>
-    poleTumbleTurn(projectTrackballDelta({ ...trackball, ...pointer, radius: trackball.radius }), pole);
+    (trackball.grabSphere ? poleGrabTurn(pointer, trackball.grabSphere, pole) : null)
+      ?? poleTumbleTurn(projectTrackballDelta({ ...trackball, ...pointer, radius: trackball.radius }), pole);
   // A body with a pole tumbles about it and across it; otherwise about the screen axes.
   const projectSkyRotation = (trackball: TrackballMetrics, pointer: SphereDragInput, pole: Vector3 | null = null) => {
     if (pole) return poleTurnRotation(projectSkyTurn(trackball, pointer, pole), pole);
