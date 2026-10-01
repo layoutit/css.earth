@@ -668,6 +668,51 @@
       ],
       "path": "catalogues/chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.layer.json",
       "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/Mastcam-Z_360_Butler_Landing_1_Sols03-11_L0_natural.jpg",
+      "url": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Butler_Landing_1_Sols03-11_L0_natural.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/Mastcam-Z_360_Van_Zyl_Sols53-64_L0_natural_2x.jpg",
+      "url": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Van_Zyl_Sols53-64_L0_natural_2x.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/Mastcam-Z_360_Three_Forks_Depot_2_Sols690-692_L0_natural.jpg",
+      "url": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Three_Forks_Depot_2_Sols690-692_L0_natural.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/Mastcam-Z_360_Belva_Sols789-791_L0_natural.jpg",
+      "url": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Belva_Sols789-791_L0_natural.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/Mastcam-Z_360_Bright_Angel_Z63_Sol1178_L0_natural.jpg",
+      "url": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Bright_Angel_Z63_Sol1178_L0_natural.jpg"
     }
   ]
 }

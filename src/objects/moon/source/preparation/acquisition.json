@@ -439,6 +439,69 @@
       ],
       "path": "science/diviner-gcp/global_cumul_avg_cyl_80n90n_002.tab",
       "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80n90n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/JSC2007e045375.jpg",
+      "url": "https://www.lpi.usra.edu/resources/apollopanoramas/images/print/original/JSC2007e045375.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/JSC2007e045376.jpg",
+      "url": "https://www.lpi.usra.edu/resources/apollopanoramas/images/print/original/JSC2007e045376.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/JSC2007e045377.jpg",
+      "url": "https://www.lpi.usra.edu/resources/apollopanoramas/images/print/original/JSC2007e045377.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/terrain/NAC_DTM_APOLLO11_E008N0234.IMG",
+      "url": "https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-5-rdr/LROLRC_2001/DATA/SDP/NAC_DTM/APOLLO11/NAC_DTM_APOLLO11_E008N0234.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/terrain/NAC_DTM_APOLLO12_E030S3365.IMG",
+      "url": "https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-5-rdr/LROLRC_2001/DATA/SDP/NAC_DTM/APOLLO12/NAC_DTM_APOLLO12_E030S3365.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "panoramas/terrain/NAC_DTM_APOLLO14_E034S3425.IMG",
+      "url": "https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-5-rdr/LROLRC_2001/DATA/SDP/NAC_DTM/APOLLO14/NAC_DTM_APOLLO14_E034S3425.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/traverses/APOLLO_14.ZIP",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_14/APOLLO_14.ZIP"
     }
   ]
 }
