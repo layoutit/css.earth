@@ -182,12 +182,12 @@ test("decode failure preserves the actual committed plan and pages, and a retry 
 test("Saturn's last dataset wins and repeated selection stays selected", async t => {
   const h = await preparedSelectionFixture(saturnDefinition); t.after(h.restore);
   const a = h.selection.dispatch({ kind: "dataset", id: "methane" }); await h.flush();
-  const b = h.selection.dispatch({ kind: "dataset", id: "thermal" });
+  const b = h.selection.dispatch({ kind: "dataset", id: "ultraviolet" });
   const c = h.selection.dispatch({ kind: "toggle", name: "rings", value: false });
   await h.settle(); assert.deepEqual(await Promise.all([a, b, c]), [false, false, true]);
-  const thermal = h.selection.state().committed; assert.ok(thermal); assert.equal(thermal.datasetId, "thermal"); assert.equal(thermal.rings, false);
-  const again = h.selection.dispatch({ kind: "dataset", id: "thermal" }); await h.settle(); assert.equal(await again, true);
-  assert.deepEqual(h.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["thermal"]);
+  const ultraviolet = h.selection.state().committed; assert.ok(ultraviolet); assert.equal(ultraviolet.datasetId, "ultraviolet"); assert.equal(ultraviolet.rings, false);
+  const again = h.selection.dispatch({ kind: "dataset", id: "ultraviolet" }); await h.settle(); assert.equal(await again, true);
+  assert.deepEqual(h.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["ultraviolet"]);
   const methane = h.selection.dispatch({ kind: "dataset", id: "methane" }); await h.settle(); assert.equal(await methane, true);
   assert.equal(h.selection.state().committed?.datasetId, "methane");
 });
