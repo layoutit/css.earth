@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "direct-v13042-m31c",
+  "angularDiameterMas": 0,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 46,959,750 km at 761027.00 pc = 0 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 761027,
+  "distanceSource": "Li et al. (2021), ApJ 920, 84, abstract: M31's Cepheid distance modulus 24.407 +/- 0.032 mag, 10^(mu/5 + 1) pc (https://arxiv.org/abs/2107.08029): 761027 +/- 11215 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 46959750,
+  "radiusSource": "Radius 67.5 +/- 11.3 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 10.85 d in Li et al. (2021), ApJ 920, 84, table 2; not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186): 46,959,750 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5300 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 10.85 d in Li et al. (2021), ApJ 920, 84, table 2; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5300,
+  "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 10.85 d in Li et al. (2021), ApJ 920, 84, table 2; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186)",
+  "limbDisplayGravityLogg": 0.95,
+  "limbDisplayGravitySource": "no gravity of this star is published (none in SIMBAD); Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra) gives the class's range, log g -1.33 to 2.86. Across log g 0 to 2.85, the part the grid covers, the limb laws differ by at most 1.8% of the centre brightness from the one drawn, at log g 0.95, the gravity closest to all of them; log g 0.95 is a display choice, not a measurement (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

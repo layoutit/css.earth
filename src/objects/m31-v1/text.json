@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m31-v1",
+  "card": {
+    "text": "A Cepheid in the Andromeda Galaxy, 761 kiloparsecs away, that swells and shrinks every 31.4 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1111-0262",
+        "url": "https://arxiv.org/abs/1111.0262",
+        "label": "Templeton et al. (2011)",
+        "checked": "2026-10-01",
+        "locator": "Templeton et al. (2011), PASP 123, 1374: M31-V1; J/AJ/156/130/main, ID 579568: Pr; Li et al. (2021), ApJ 920, 84: mu_0"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Edwin Hubble's M31-V1 is the first Cepheid found in the Andromeda Galaxy. Its galaxy's distance, 761 kiloparsecs, was measured from Cepheids like it.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1111-0262",
+        "url": "https://arxiv.org/abs/1111.0262",
+        "label": "Templeton et al. (2011)",
+        "checked": "2026-10-01",
+        "locator": "Templeton et al. (2011), PASP 123, 1374: M31-V1; J/AJ/156/130/main, ID 579568: Pr; Li et al. (2021), ApJ 920, 84: mu_0"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -24,6 +24,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   gaia: { names: 'SOURCE_ID', draft: async (names, { archive }) => (await import('./gaia.mts')).draftsFromGaia(names, archive) },
   // A Cepheid Hubble found in another galaxy (Hoffmann et al. 2016), placed by its catalogue row: HOST (N4536) or HOST/ID (sh0es.mts).
   sh0es: { names: 'HOST[/ID]', draft: async (names, { archive }) => (await import('./sh0es.mts')).draftsFromSh0es(names, archive) },
+  // A Cepheid in the Andromeda Galaxy: Hubble's V1, or those Hubble measured for its distance (Li et al. 2021) (m31-cepheids.mts).
+  m31cepheids: { names: 'all | V1 | ID', draft: async (names, { archive }) => (await import('./m31-cepheids.mts')).draftsFromM31Cepheids(names, archive) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */

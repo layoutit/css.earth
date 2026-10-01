@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "direct-v6568-m31b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "DIRECT V6568 M31B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 73535490
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/direct-v6568-m31b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "DIRECT V6568 M31B",
+      "classification": "star",
+      "color": "#ffe7d3",
+      "distanceAu": 156973085016,
+      "description": "A Cepheid in the Andromeda Galaxy, 761 kiloparsecs away, that swells and shrinks every 20.2 days.",
+      "systemName": "DIRECT V6568 M31B system",
+      "aliases": [
+        "CEPH-11.26353+41.60053",
+        "[MAP97] 104"
+      ],
+      "order": 5148,
+      "context": {
+        "order": 5145
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.7221959155653498e+22,
+        3.4297229947375803e+21,
+        1.5591179027381932e+22
+      ],
+      "presentationToReference": [
+        0.733384875377935,
+        0.651152451540605,
+        0.1953128501137364,
+        0.14605231311623185,
+        0.12967586997182254,
+        -0.9807409905680751,
+        0.6639392640899384,
+        -0.7477865026862354,
+        4.0654554729799614e-17
+      ],
+      "orbitUpReference": [
+        -0.651152451540605,
+        -0.12967586997182254,
+        0.7477865026862354
+      ],
+      "metersPerUnit": 237211258.06451613,
+      "bodyRadiusM": 73535490000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

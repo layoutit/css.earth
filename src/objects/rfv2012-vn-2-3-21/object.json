@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "rfv2012-vn-2-3-21",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "[RFV2012] vn.2.3.21",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 62404290
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rfv2012-vn-2-3-21-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "[RFV2012] vn.2.3.21",
+      "classification": "star",
+      "color": "#ffe8d5",
+      "distanceAu": 156973085016,
+      "description": "A Cepheid in the Andromeda Galaxy, 761 kiloparsecs away, that swells and shrinks every 16.1 days.",
+      "systemName": "[RFV2012] vn.2.3.21 system",
+      "aliases": [
+        "CEPH-11.45542+41.86441"
+      ],
+      "order": 5155,
+      "context": {
+        "order": 5152
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.714004696689216e+22,
+        3.4731652225935097e+21,
+        1.5671619372381433e+22
+      ],
+      "presentationToReference": [
+        0.7298967031088148,
+        0.6540715106836912,
+        0.19859824194296558,
+        0.14790226947568605,
+        0.13253746786014223,
+        -0.9800809855808669,
+        0.667364758939835,
+        -0.7447310108523586,
+        4.0864305794970696e-17
+      ],
+      "orbitUpReference": [
+        -0.6540715106836912,
+        -0.13253746786014223,
+        0.7447310108523586
+      ],
+      "metersPerUnit": 201304161.29032257,
+      "bodyRadiusM": 62404290000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
