@@ -176,7 +176,9 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
         return;
       }
       drag.active = true;
-      drag.capture.setPointerCapture(event.pointerId);
+      // A touch lifted before this handler ran cannot be captured; the drag carries on without it.
+      try { drag.capture.setPointerCapture(event.pointerId); }
+      catch (error) { if (!(error instanceof Error && error.name === 'NotFoundError')) throw error; }
       endSettle();
       sheet.classList.add("is-dragging");
     }
