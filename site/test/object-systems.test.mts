@@ -6,7 +6,7 @@ import { WORLD_OBJECTS } from '../world-objects.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, systemOfObject } from '../object-systems.mts';
 import { planetarySystemMembers } from '../planetary-system-members.mts';
 import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
-import { SYSTEM_FRAMING_RADII } from '../system-framing.mts';
+import { SYSTEM_FRAMING_RADII, systemFramingRadii } from '../system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../world-context-plan.mts';
 
 test('planetary systems follow prepared orbit chains to their stars', () => {
@@ -57,6 +57,16 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   assert.equal(systemById(SCENE_OBJECTS, 'eps-indi-ba'), null);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'vhs-1256-1257')!.memberIds, ['vhs-1256-1257-companion', 'vhs-1256-1257-b']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'roxs-42b')!.memberIds, ['roxs-42b-companion', 'roxs-42b-b']);
+});
+
+test('every system a page reads later has its prepared framing, measured as a page holding it would', () => {
+  // A page holds only the Sun's system and one point per other star until it reads the rest (site/world-context-plan.mts);
+  // planetarySystems needs each system's radius before then, from site/prepared-world-presentation.json.
+  const hosts = new Set((APPLICATION_WORLD_CONTEXT.deferred ?? []).map(body => body.host));
+  assert.ok(hosts.size > 0);
+  const measured = systemFramingRadii(APPLICATION_WORLD_CONTEXT);
+  for (const host of hosts) assert.equal(PREPARED_WORLD_PRESENTATION.systemFramingRadii.get(host), measured.get(host), host);
+  assert.deepEqual([...PREPARED_WORLD_PRESENTATION.systemFramingRadii.keys()].sort(), [...hosts].sort());
 });
 
 test('the prepared system members are the orbit graph read at runtime', () => {

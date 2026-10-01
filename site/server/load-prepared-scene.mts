@@ -11,5 +11,8 @@ export async function loadPreparedSceneMarkup(id: string) {
     async read() { return Uint8Array.from(bytes).buffer; },
   });
   const { textures, ...markup } = serializePreparedScene(definition);
-  return { ...markup, descriptor: await withPreparedAssetOrigin(descriptor, undefined, { addresses: textures.map(texture => texture.address) }) };
+  // The fields the page's startup cover fits its photograph with, before the scene's code arrives (startup-cover.mts).
+  const { responsiveFit, logicalBodyDiameter, defaultZoom, framingScale, projection } = definition.camera;
+  const coverPlan = { responsiveFit, logicalBodyDiameter, defaultZoom, framingScale, projection };
+  return { ...markup, coverPlan, descriptor: await withPreparedAssetOrigin(descriptor, undefined, { addresses: textures.map(texture => texture.address) }) };
 }

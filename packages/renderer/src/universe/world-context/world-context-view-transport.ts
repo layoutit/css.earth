@@ -8,6 +8,8 @@ export type PackedWorldContextView = Omit<WorldContextView, 'bodies'> & { readon
  * block instead of hundreds of structured-cloned objects every frame. Optional
  * flags keep their absence (NaN), so the worker rebuilds the exact objects. */
 const FIELDS = 15;
+/** Columns per body: a block's length over this is its body count. */
+export const WORLD_BODY_FIELDS = FIELDS;
 const flag = (value: boolean | undefined) => value === undefined ? Number.NaN : value ? 1 : 0;
 const optional = (value: number) => Number.isNaN(value) ? undefined : value === 1;
 

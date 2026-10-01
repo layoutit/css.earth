@@ -17,3 +17,4 @@ name the recorder and trace identifiers instead.
 | [Billboard-first startup](startup-billboard.md) | A default page's arrival image in place of the scene DOM at startup |
 | [Marker declutter](marker-declutter.md) | Markers under others not drawn, a fixed marker order, a system past its scope drawn as its star, and a system card that lays out only the rows in view |
 | [Startup gate](startup-gate.md) | Background banks held until a body's first view is interactive |
+| [World context by system](world-context-by-system.md) | The world summary holds the Sun's system and one point per other system; the rest load later |

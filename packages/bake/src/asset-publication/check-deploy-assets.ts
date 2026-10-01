@@ -5,7 +5,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry } from '../objects/sources/index.ts';
-import { parsePreparedSystemView, parsePreparedWorldContextSummary } from '@cssearth/renderer/prepared-data/world-context.ts';
+import { parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/renderer/prepared-data/world-context.ts';
 
 const execFileAsync = promisify(execFile);
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
@@ -38,7 +38,7 @@ async function readPublishedText(url: string): Promise<string> {
   catch (cause) { throw new Error(`Could not read ${url}.`, { cause }); }
 }
 
-/** The site reads the Sun's world summary and each system's views as published, from their inventory hashes, while builds
+/** The site reads the Sun's world summary, each other system's bodies and each system's views as published, from their inventory hashes, while builds
  * regenerate them locally. A set re-pinned apart (2026-09-24: 48 systems, 44 views) passes every local build and breaks
  * in-app navigation, so every system the published summary names must have its published views, and they must parse. */
 export async function checkPublishedWorldPair(root: string, fetchText: (url: string) => Promise<string> = readPublishedText) {
@@ -55,6 +55,18 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
     await Promise.all(hosts.slice(start, start + 16).map(async id => {
       const asset = assets.find(entry => entry.filename === `system-views/${id}.json`)!, text = await fetchText(asset.url);
       try { parsePreparedSystemView(JSON.parse(text), summary, id); }
+      catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
+    }));
+  }
+  // Every system the summary defers has its published file, and it holds the bodies the summary lists for it.
+  const systems = [...new Set((summary.deferred ?? []).map(body => body.host))], systemFiles = systems.map(id => `world-systems/${id}.json`);
+  const systemAssets = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: systemFiles });
+  const unpublished = systemFiles.filter(name => !systemAssets.some(entry => entry.filename === name));
+  if (unpublished.length) throw disagree(`the inventory lacks ${unpublished.join(', ')}.`);
+  for (let start = 0; start < systems.length; start += 16) {
+    await Promise.all(systems.slice(start, start + 16).map(async id => {
+      const asset = systemAssets.find(entry => entry.filename === `world-systems/${id}.json`)!;
+      try { parsePreparedWorldSystem(JSON.parse(await fetchText(asset.url)), summary, id); }
       catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
     }));
   }

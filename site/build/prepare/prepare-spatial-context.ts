@@ -213,8 +213,16 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   for (const name of await readdir(bankDirectory).catch(() => [] as string[])) if (!keptBanks.has(name)) await rm(resolve(bankDirectory, name));
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
-  await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
-    Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength]))))}\n`);
+  // Every page reads the summary: the Sun's own system and one point per other system. Each other system's bodies are their
+  // own file, read when a page shows that system or the camera approaches it (summarizeWorldContext).
+  const { summary, systems } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])));
+  await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summary)}\n`);
+  const systemDirectory = worldSystemsDirectory(options.outputPath), keptSystems = new Set<string>();
+  for (const system of systems) {
+    keptSystems.add(`${system.id}.json`);
+    await writeIfChanged(resolve(systemDirectory, `${system.id}.json`), `${JSON.stringify(system.file)}\n`);
+  }
+  for (const name of await readdir(systemDirectory).catch(() => [] as string[])) if (!keptSystems.has(name)) await rm(resolve(systemDirectory, name));
   // System framing's camera candidates, one file per host, read when navigation frames that system.
   const directory = worldSystemViewsDirectory(options.outputPath), views = worldSystemViews(prepared), kept = new Set<string>();
   for (const view of views) { kept.add(`${view.id}.json`); await writeIfChanged(resolve(directory, `${view.id}.json`), `${JSON.stringify(view)}\n`); }
@@ -225,6 +233,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
 /** `world-context.json` → `system-views/`, beside it: `<host id>.json` per system. */
 export function worldSystemViewsDirectory(outputPath: string): string {
   return resolve(dirname(outputPath), 'system-views');
+}
+
+/** `world-context.json` → `world-systems/`, beside it: `<star id>.json` per system other than the focus's. */
+export function worldSystemsDirectory(outputPath: string): string {
+  return resolve(dirname(outputPath), 'world-systems');
 }
 
 /** `world-context.json` → `world-orbits/`, beside it: `<orbit centre id>.bin` per centre. */

@@ -179,12 +179,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // own WebKit layer over the composited sky and globe.
   const orbitTemplate = host.ownerDocument.createElement('div');
   orbitTemplate.className = orbitRenderer === 'bars' ? 'context-orbit context-orbit-bars' : 'context-orbit';
-  const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
+  // Sprites by body id; a system added later brings its own (addBodies).
+  const spriteTable: Record<string, SpriteWithUrl> = { ...sprites };
+  const createEntry = (body: PreparedWorldContext['focus'] | PreparedContextBody, index: number) => {
     // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
     // name and orbit and is never a navigation target.
     const unpackaged = 'unpackaged' in body && body.unpackaged === true;
     const plainDot = plainDotIds.has(body.id);
-    const sprite = plainDot ? undefined : sprites[body.id];
+    const sprite = plainDot ? undefined : spriteTable[body.id];
     const approximate = 'placement' in body && body.placement === 'approximate';
     // The body billboard is set only when resolved and visible. Unresolved bodies remain colour dots and never fetch an image.
     const { mover, marker, spriteLeaf, caption } = createMarker(plainDot), data = marker.dataset;
@@ -243,21 +245,22 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       baseAlpha,
       hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
-  });
+  };
+  const bodies = [plan.focus, ...plan.bodies].map(createEntry);
   // Each body's presentation lives in its row of these columns (bindWorldBodyColumns): a frame sends a copy of them.
-  const bodyColumns = createWorldBodyColumns(bodies.length);
+  let bodyColumns = createWorldBodyColumns(bodies.length);
   bodies.forEach((entry, index) => bindWorldBodyColumns(entry, bodyColumns, index));
   const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
   for (const entry of bodies) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
   const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail, depthBase);
-  const systemFade = createSystemFade(plan);
+  let systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const clock = opacityClock ?? opacityClockFor(windowTarget);
   const fader = createOpacityFader(windowTarget, clock);
   let destroyed = false;
   let selectedEntry = bodies[0]!;
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
-  const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
+  let anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
   let systemRetired = false, systemRetiredByScope = false, galaxyRetiredByScope = false;
   const depthOrder = createDepthOrder(bodies, depthBase, annotationPriorities);
   // Hidden bodies leave the paint order, except the selected one.
@@ -280,6 +283,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     if (outsideGalaxy) root.dataset.galaxyView = 'outside'; else delete root.dataset.galaxyView;
   };
   let labelBlockers: readonly LabelScreenRect[] = [];
+  // The bodies each flag was last given to, for bodies another system adds later (addBodies).
+  const flagged: Partial<Record<(typeof VISIBILITY_FLAGS)[number], ReadonlySet<string>>> = {};
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
   // The prepared bank stays retained. Only owners currently contributing paint
@@ -418,6 +423,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const ids = next[flag];
         if (!ids) continue;
         const marked = new Set(ids);
+        flagged[flag] = marked;
         for (const entry of bodies) {
           const value = marked.has(entry.body.id);
           if (entry[flag] === value) continue;
@@ -473,6 +479,29 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // Orbit leaves are built on first use; report the retained leaves now.
         get orbit() { return Object.freeze(entry.pieces.filter((piece): piece is HTMLElement | SVGElement => piece !== undefined)); },
       })));
+    },
+    /** Another system's bodies (`extendWorldContext`): `next` is the extended plan, whose new bodies take the next indices.
+     * Each is retained detached, as a mounted body is, with the flags its id was last given. */
+    addBodies(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>> = {}) {
+      if (destroyed) return;
+      const added = next.bodies.filter(body => !entriesById.has(body.id));
+      if (!added.length) return;
+      Object.assign(spriteTable, nextSprites);
+      const entries = added.map((body, offset) => createEntry(body, bodies.length + offset));
+      bodies.push(...entries);
+      bodyColumns = createWorldBodyColumns(bodies.length);
+      bodies.forEach((entry, index) => bindWorldBodyColumns(entry, bodyColumns, index));
+      for (const entry of entries) {
+        entriesById.set(entry.body.id, entry); indicatorTransitions.set(entry.marker, entry);
+        for (const flag of VISIBILITY_FLAGS) if (flagged[flag]?.has(entry.body.id)) {
+          entry[flag] = true;
+          if (flag === 'highlighted') entry.marker.dataset.contextHighlight = 'true';
+        }
+      }
+      for (const entry of entries) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
+      systemFade = createSystemFade(next);
+      anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
+      refreshDepthBodies(); invalidatePolicy(); refresh();
     },
     selectObject(id: string) {
       const entry = bodies.find(entry => entry.body.id === id);

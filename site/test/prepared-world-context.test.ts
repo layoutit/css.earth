@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../packages/renderer/src/prepared-data/world-context.js';
+import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../packages/renderer/src/prepared-data/world-context.js';
 import { mountPreparedWorldContext } from '../../packages/renderer/src/universe/prepared-world-context.js';
 import { worldContextGeometry } from '../../packages/renderer/src/prepared-data/world-context.js';
 import type { WorldContextFrame } from '../../packages/renderer/src/universe/world-context/world-context-frame.js';
@@ -2453,7 +2453,7 @@ test('opacity-only ticks do not reproject, republish picking or measure retained
 
 test('the main thread draws worker frames from the orbit summary exactly as from the full context', () => {
   const full = plan(1);
-  const summaryInput = { ...full, schema: 'cssearth-world-context-summary@1', bodies: full.bodies.map(({ orbit, ...body }) => !orbit ? body : { ...body,
+  const summaryInput = { ...full, schema: 'cssearth-world-context-summary@2', bodies: full.bodies.map(({ orbit, ...body }) => !orbit ? body : { ...body,
     orbit: { centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM, vertexCount: orbit.verticesM.length, fullTrail: orbit.fullTrail,
       ...(orbit.bounds ? { bounds: orbit.bounds } : {}), ...(orbit.lod ? { lod: { bounds: orbit.lod.bounds } } : {}) } }) };
   const summary = parsePreparedWorldContextSummary(summaryInput);
@@ -2690,7 +2690,9 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
 test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 30_000 }, async () => {
   const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
-  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  // Every system's file read, as Node reads the world (site/world-context-plan.mts).
+  const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')),
+    async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')));
   const bankOf = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
   const decoded = decodeWorldOrbits(summary, banks);
