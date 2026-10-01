@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { builtObjectPages, builtScenePaths, namedPages } from './built-pages.mts';
+import { builtObjectPages, builtScenePaths, namedPages } from '../built-pages.mts';
 
 const objects = [
   { id: 'earth', kind: 'scene' }, { id: 'moon', kind: 'scene' }, { id: 'mars', kind: 'scene' },

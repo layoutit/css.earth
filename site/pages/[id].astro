@@ -2,7 +2,7 @@
 import ObjectPage from '../components/ObjectPage.astro';
 import { OBJECTS } from '../objects.mts';
 import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
-import { builtObjectPages } from '../build/built-pages.mts';
+import { builtObjectPages } from '../built-pages.mts';
 export function getStaticPaths() {
   // Every object has its page, `/<id>/`. A scene's page mounts it; the page of anything the world draws around a scene
   // (a catalogue subject, an overview) mounts its host, the world's, with it selected: the path names it.

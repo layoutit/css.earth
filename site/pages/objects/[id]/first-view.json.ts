@@ -1,7 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { OBJECTS, SCENE_OBJECTS } from '../../../objects.mts';
 import { ROOT_OBJECT_ID } from '../../../root-object.mts';
-import { builtScenePaths } from '../../../build/built-pages.mts';
+import { builtScenePaths } from '../../../built-pages.mts';
 import { firstViewTransport } from '../../../first-view-transport.mts';
 
 // The transport a page's first mount reads; see `first-view-transport.mts`.
