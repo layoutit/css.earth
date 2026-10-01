@@ -21,7 +21,7 @@ runtime forwards them without remeasuring the camera DOM. Application navigation
 owns history restoration; each detail only writes its current saved view.
 
 `createCameraFlight` owns scheduling, acceleration, cancellation and completion
-for world navigation, prepared-focus flights and native surface fly-to. Each
+for world navigation and native surface fly-to. Each
 path supplies its existing camera sampling math. World navigation retains one
 document wheel listener for the navigation owner's lifetime and switches only
 its active callback. Adding or removing a nonpassive document wheel listener at
@@ -235,10 +235,7 @@ A newly mounted world receives the latest settings. Playback permission remains
 governed by the shared runtime policy.
 
 `site/scene/scene-selection.mts` owns the committed subject and projects its URL.
-Prepared-focus navigation owns the acquired target and executes camera/dataset
-commands. It publishes one result to the selection owner, including whether a
-saved camera must be discarded. It neither mirrors the selected ID nor formats
-another selection URL. Native camera focus remains the geometric pivot.
+Every subject is an object's scene; the geometric pivot is that object's centre.
 
 ## Scene activation and prepared ownership
 

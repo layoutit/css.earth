@@ -1,7 +1,7 @@
 # Sidebar thumbnails
 
 Galaxy and nebula object rows use the default dataset's own image. Dataset rows
-use their selected dataset's image. The prepared focus bank contains 80 px WebPs;
+use their selected dataset's image. The prepared bank of thumbnails contains 80 px WebPs;
 search and overview members display them in the shared 40 px result row. Smaller
 navigation markers display them at 14 or 16 CSS pixels. The sidebar does not download
 a full preview just for an icon.

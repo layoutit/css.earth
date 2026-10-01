@@ -467,8 +467,8 @@ export function createSceneRouter({
         source.shell?.setDatasetNotice?.(errorMessage(error));
         // Input can take over a same-owner selection flight before arrival. The
         // selected destination still owns that camera: keep only the drawn view
-        // from the departed URL, otherwise its old prepared focus is restored
-        // and pulls the camera back to the object the user just left.
+        // from the departed URL, otherwise its saved camera is restored
+        // and pulls the view back to the object the user just left.
         const snapshot = view.capture(interruptedSelection ? request.url : undefined);
         const captured = snapshot;
         if (captured && interruptedSelection) {

@@ -23,7 +23,7 @@ application controls hidden. Every other scene page uses its arrival billboard:
 `site/build/share-images.mts` runs in `pnpm build:deploy` after `astro build`. It
 centres each billboard on black at 1200×630 and writes `dist/social/<id>.jpg`
 (about 3,570 cards, 24 MB). A billboard it cannot read fails the deploy. Pages
-with neither, such as catalogue focus pages, fall back to the Earth capture.
+with neither, such as the pages of galaxies and nebulae, fall back to the Earth capture.
 None of these images adds requests to ordinary page loads.
 
 ![Share images drawn from the arrival billboards of Betelgeuse, WASP-43 b, Phobos and Comet 67P](images/share-cards.webp)

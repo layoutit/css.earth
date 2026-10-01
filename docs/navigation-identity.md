@@ -6,9 +6,8 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 
 | Concept | Meaning and owner |
 | --- | --- |
-| Scene destination | A body package with a route, prepared world frame and scene loader. |
-| Prepared-focus destination | A catalogue subject the map can open: a galaxy cluster, or a subject an object package details. Its page, `/<id>/`, is its host scene’s page with the subject selected; `?dataset=` selects its dataset, as on every page. Other catalogue rows are labels with no page. |
-| Overview | The Milky Way, the Local Group, the Nearby and the Observable Universe: registry entries of kind `overview`, authored under `properties.overview` in their packages: name, description, order, the zoom thresholds and framing of their level, the classifications they hold and the packages they draw. The zoom ladder, the cards, the breadcrumbs and the sidebar tree's sections are built from these entries. Its page, `/<id>/`, is the world host's scene page with the overview selected. |
+| Object | A package with a catalogue entry: a route, a prepared world frame and a scene loader. A planet, a star, a galaxy, a nebula and a cluster of galaxies are all this. `?dataset=` selects one of its datasets. |
+| Level | The Milky Way, the Local Group, the Nearby and the Observable Universe: views of a scene on the zoom ladder, not objects, authored under `properties.overview` in their packages (name, description, order, zoom thresholds, what they hold). A level's page, `/<id>/`, is the world host's scene at that zoom. |
 | Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
 | Dataset view | A selectable `(objectId, datasetId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
@@ -161,6 +160,6 @@ owners. Its test preload rejects accidental use of application boot; it does
 not prove the Vite-generated context inventory or browser startup.
 
 Scene conformance remains derived from the scene capability filter. Run
-`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/test/scene-session.test.mts`) to check prepared-focus search, selection, saved links and retained
+`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/test/scene-session.test.mts`) to check search, selection, saved links and retained
 camera ownership. These checks do not establish the scientific accuracy of a
 catalogue measurement or a reconstructed volume.

@@ -19,10 +19,11 @@ const COLLECTIONS = Object.freeze([
   "documents",
 ] as const);
 
-export async function createSourceManifest({ objectId, objectName, sourceRoot }: SourceManifestLocation) {
+export async function createSourceManifest({ objectId, objectName, sourceRoot, inputs = 'required' }: SourceManifestLocation & { inputs?: 'required' | 'optional' }) {
   const manifest = validateSourceManifest(
     objectId,
     JSON.parse(await readFile(resolve(sourceRoot, "manifest.json"), "utf8")),
+    { inputs },
   );
   // A dataset may read an acquired input or a file this repository generates from one, such as a spectrum sampled here from the
   // archive's coefficients. Both are declared the same way, and both must be present before they are read.
@@ -72,7 +73,9 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot }:
 /** Every source manifest, of an object or of a shared kernel bank, has this one format name. */
 export const SOURCE_MANIFEST_SCHEMA = "cssearth-authoritative-sources@3";
 
-export function validateSourceManifest(objectId: string, input: unknown): Readonly<SourceManifest> {
+/** `inputs: 'optional'` is for an object whose recipe declares no surface: it prepares nothing from input files, and its
+ * datasets' inputs are their banks'. Every other manifest lists at least one input. */
+export function validateSourceManifest(objectId: string, input: unknown, { inputs = 'required' }: { inputs?: 'required' | 'optional' } = {}): Readonly<SourceManifest> {
   const value = input as SourceManifest;
   if (!value || typeof value !== "object" || isArray(value) ||
       value.schema !== SOURCE_MANIFEST_SCHEMA) {
@@ -82,6 +85,10 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
     if (!isArray(value[collection])) {
       throw new TypeError(`Object ${objectId} source manifest ${collection} is missing.`);
     }
+  }
+
+  if (inputs === 'required' && value.inputs.length === 0) {
+    throw new TypeError(`Object ${objectId} source manifest inputs are empty.`);
   }
 
   const ids = new Set<string>();

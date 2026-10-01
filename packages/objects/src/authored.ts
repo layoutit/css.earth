@@ -1,5 +1,7 @@
 import type { ObjectDescriptor } from './descriptor.js';
 import { parseObjectDescriptor } from './parse.js';
+import { isRecord } from '@cssearth/core';
+import { isExtendedClassification } from './registry/object-schema.js';
 
 export type ShapeKind = 'sphere' | 'ellipsoid' | 'radial-terrain';
 /** A recipe input by id and package path. The source manifest declares the file once, never here. */
@@ -178,5 +180,10 @@ export function parseAuthoredObjectDescriptor(value: unknown): AuthoredObjectDes
   const descriptor = parseObjectDescriptor(value);
   const raw = descriptor.properties.recipe;
   if (raw === undefined) throw new TypeError('object.properties.recipe is required for authored objects.');
-  return freeze({ ...descriptor, recipe: parseAuthoredRecipe(raw) });
+  const recipe = parseAuthoredRecipe(raw), catalog = descriptor.properties.catalog;
+  // Only an object with no solid surface (a galaxy, a nebula, a cluster) may declare none: a body without surfaces is a mistake.
+  if (!recipe.surfaces.length && !(isRecord(catalog) && typeof catalog.classification === 'string' && isExtendedClassification(catalog.classification))) {
+    throw new TypeError(`${descriptor.id}: recipe.surfaces is empty, which only a galaxy, a galaxy cluster, a nebula or a globular cluster may declare.`);
+  }
+  return freeze({ ...descriptor, recipe });
 }

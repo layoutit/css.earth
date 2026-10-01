@@ -77,7 +77,7 @@ GET form; sky contrast follows its checkbox directly in CSS. Dataset attribution
 cards are already present, and CSS owns their placement and visibility. Startup
 preserves open settings, early selections and these same elements.
 
-The response can restore a saved camera URL and select a prepared focus volume.
+The response can restore a saved camera URL and select a dataset that shows a companion bank.
 JavaScript adds camera input, animation, live filtering, dataset changes in place
 and continuing world navigation. The separate [native camera experiment](native-resize-input.md)
 explores scroll zoom and resize rotation; it is not enabled in the normal site.
@@ -117,10 +117,10 @@ deploy build renders each level page through the search function once
 without JavaScript. Catalogue transport is separate pinned JSON, shared by the response and
 browser. Construction-order identities let the live volume publisher adopt
 the response's elements and selected dataset. Responsive CSS lengths retain the
-prepared camera's projection until the browser resolves its viewport. A flight
-to a prepared focus arrives on the line of sight from the Sun with celestial
-north up, as its datasets were observed, whichever way the previous view faced;
-a saved camera URL that still shows the focus keeps its own pose. Before this
+prepared camera's projection until the browser resolves its viewport. A galaxy,
+nebula or cluster opens on the line of sight from the Sun, as its datasets were
+observed: its default camera is derived like a placed star's (default-camera.ts).
+A saved camera URL keeps its own pose. Before this
 rule, [the Crab reached from Pluto](images/crab-focus-arrival.png) was seen from
 behind, with the Sun and other foreground markers across it.
 

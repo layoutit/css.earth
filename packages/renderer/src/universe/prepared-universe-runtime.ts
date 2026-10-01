@@ -199,8 +199,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
         const mountedShells = [...shells];
         let selected = plan.focus;
-        // The mounted scene's own body: a package the host draws is selected over it, and clearing that returns to it.
-        let sceneBody: typeof selected = selected;
         // The selected body and the centre it orbits: a point bank of either's system draws (universe-catalog-banks.ts).
         let selectedSystem: readonly string[] = [plan.focus.id];
         // The caption sits below the selected body's longest reach, which an elongated shape model extends past its radius.
@@ -208,10 +206,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let previewCaption: typeof selected | null = null;
         let selectedEdge: PreparedLabelEdge | undefined, previewEdge: PreparedLabelEdge | undefined;
         const caption = () => previewCaption ?? captionBody;
-        const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: false, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
+        const captionFlags = () => ({ overview: selectionPreview ? false : overview, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
         let companion: string | null = null;
-        const attachedBanks = new Set(volumeDatasetBanks.filter((_, index) => datasetFacts[index]!.attached).map(bank => bank.id));
+        // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
+        const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...volumeDatasetBanks.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
         const bankOf = (id: string) => datasets.focusBank(id) ?? catalogBanks.focusBank(id);
         background.mount();
         catalogBanks.loadInitialImages();
@@ -303,7 +302,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               throw new TypeError('Selected detail does not match its prepared world context.');
             }
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
-            selected = sceneBody = body;
+            selected = body;
             selectedSystem = 'orbit' in body && body.orbit ? [body.id, body.orbit.centerBodyId] : [body.id];
             selectedEdge = edge;
             captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
@@ -316,15 +315,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (lifetime.disposed) return;
             opacityClock.batch(() => {
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
-              // A companion that is its scene's whole subject (a galaxy, a nebula, a cluster) is framed as a body is, by the
-              // selected body's place and radius, and the context gives way to it. One attached to a body (a star's disc)
-              // shows beside that body and dims nothing.
-              const detailedFocus: { objectId: string; focus: SelectedBank } | null = companion === null || attachedBanks.has(companion) ? null
-                : { objectId: companion, focus: { positionM: sceneBody.positionM as SelectedBank['positionM'], framingRadiusM: sceneBody.radiusM } };
+              // A companion that is its scene's whole subject (a galaxy's layers, a nebula's volume) is framed as a body is, by
+              // the selected body's place and radius, and the context gives way to it. A volume attached to a body (a star's
+              // disc) and a bank of dots (a cluster's members) show beside what is there and dim nothing. Until the scene's
+              // own body is selected the companion has nothing to be framed by.
+              const detailedFocus: { objectId: string; focus: SelectedBank } | null = companion === null || !subjectBanks.has(companion) || selected === plan.focus ? null
+                : { objectId: companion, focus: { positionM: selected.positionM as SelectedBank['positionM'], framingRadiusM: selected.radiusM } };
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               const outsideGalaxy = galaxyOutsideFade(
-                Math.hypot(...world.pose.positionM.map((value, axis) => value - sceneBody.positionM[axis]!)), plan.volume.discHalfHeightM);
+                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM);
               additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
@@ -336,7 +336,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               for (const mesh of meshes) mesh.runtime.setHidden(mesh.hidden());
               const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
-              const volumeOpacity = background.publish(world, viewport, distanceM, sceneBody.positionM, detailContextOpacity);
+              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
