@@ -23,7 +23,6 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
 import { worldCameraOf } from '@cssearth/renderer';
-import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/navigation';
 import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 const worldCamera = worldCameraOf(worldSummary);
 
@@ -49,7 +48,7 @@ const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddres
 const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId === objectId ? {
   plan: scene.coverPlan, mobileQuery: MOBILE_VIEWPORT_QUERY,
   billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },
-  bodyRadiusM: parsePreparedWorldCameraFrame(scene.descriptor.properties.worldFrame).bodyRadiusM,
+  bodyRadiusM: objectRecord.worldFrame.bodyRadiusM,
 } : undefined;
 // The arrival photograph is the first thing a cold page shows, and it comes from the asset origin: dial that origin with
 // the head, or the photograph's request pays the DNS and TLS setup (430 ms of a cold iPad load against 33 ms on a warm
