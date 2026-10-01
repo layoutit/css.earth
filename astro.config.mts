@@ -55,7 +55,10 @@ export default defineConfig({
   } }],
   vite: {
     css: { postcss: { plugins: [preparedMotionCss(process.cwd())] } },
-    plugins: [searchServer(), performanceSourceMaps(), packageSources()],
+    plugins: [searchServer(), performanceSourceMaps(), packageSources(),
+      // Safari fetches a module a second time when Vite's preload helper links one the import graph already requested
+      // (163 KB of 932 on Earth's first visit, 2026-09-30). The client environment owns the browser bundle's setting.
+      { name: 'cssearth-no-module-preload', configEnvironment: name => name === 'client' ? { build: { modulePreload: false } } : undefined }],
     // Workers are bundled on their own plugins. They read the objects package from its sources too, so a worker keeps only
     // the object contracts it calls; renderer modules in a worker keep the bundling they had.
     worker: { plugins: () => [packageSources(['@cssearth/objects'])] },
