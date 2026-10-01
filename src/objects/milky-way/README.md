@@ -13,6 +13,14 @@ The card's facts cite their sources in [source/content/object.json](source/conte
 1. `pnpm prepare:objects --object=milky-way` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame; the framing radius is a presentation value ([solar-system.json](source/presentation/solar-system.json)). When the scene mounts, its frame is moved to the star the view is centred on (the Sun on a cold page).
 2. `node site/build/prepare/companion-context.mts milky-way --picture=../milky-way-volume/prepared/backing/backing.webp` saves the list marker from the galaxy backing picture.
 
+## Evidence
+
+The page before, as a level drawn by the Sun's scene, and after, as this object's own scene, opened cold on the local preview on 2026-10-01 (Chrome, 1440 by 900): the same view and the same distance from the Sun.
+
+![Before: the level page](evidence/2026-10-01/before-level-page.jpg)
+
+![After: the object's page](evidence/2026-10-01/after-object-page.jpg)
+
 ## Known problems
 
 - The framing radius is the nominal solar radius, 695,700 km (IAU 2015 Resolution B3): the galaxy is seen from inside, centred on a star, so the sphere the camera stays outside of is a star's, not the galaxy's. It is a presentation value.
