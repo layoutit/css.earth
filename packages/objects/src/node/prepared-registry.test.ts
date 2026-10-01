@@ -29,7 +29,7 @@ const scene = (id: string, order: number, classification: string, distanceAu: nu
   ({ descriptor: descriptor(id, order, classification), distance: parseNavigationDistance(au(distanceAu)), discovery: discovery(featured) });
 const scenes = [scene('sun', 0, 'star', 0, false), scene('mars', 4, 'planet', 1.5, true)];
 
-async function checkout(records: { scenes?: typeof scenes; focuses?: readonly unknown[]; module?: string; overviews?: unknown } = {}) {
+async function checkout(records: { scenes?: Parameters<typeof preparedCatalogueModule>[0]; focuses?: readonly unknown[]; module?: string; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));
   temporary.push(root);
   for (const [id, order, classification] of [['sun', 0, 'star'], ['mars', 4, 'planet']] as const) {
