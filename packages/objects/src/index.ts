@@ -3,6 +3,8 @@ export { parseObjectDescriptor } from './parse.js';
 export { objectPageCss } from './page-style.js';
 export { parseImageLayerBankDescriptor } from './image-layer-bank.js';
 export type { ImageLayerBankDescriptor } from './image-layer-bank.js';
+export { parseCataloguePointBankDescriptor } from './catalogue-point-bank.js';
+export type { CataloguePointBankDescriptor } from './catalogue-point-bank.js';
 export { parseDensityVolumeFrame, parseDensityVolumeObjectDescriptor } from './density-volume.js';
 export { CATALOGUE_CELL_POINTS, CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread, parseCatalogueCells, parseCataloguePointSpread } from './catalogue-points.js';
 export type { CatalogueCells, CataloguePointSpread } from './catalogue-points.js';

@@ -208,11 +208,11 @@
     {
       "id": "moon-catalogue",
       "subject": "JPL satellite catalogue of 293 Saturn moons",
-      "status": "excluded",
-      "finding": "The retained catalogue records the moons listed by JPL on 2026-08-29 with mean elements for 291 records, S/2009 S1's published approximate ring-moonlet orbit and S/2009 S2's orbital radius extracted from MPEC 2026-M19 without committing the circular text; the moons have their own object packages and are not rendered as embedded bodies or a dot field in Saturn's recipe.",
+      "status": "included",
+      "finding": "The retained catalogue records the 293 moons listed by JPL on 2026-08-29, with mean elements for 291, S/2009 S1's published approximate ring-moonlet orbit and S/2009 S2's orbital radius from MPEC 2026-M19 without committing the circular text. Forty-six moons have their own object packages; the 245 others with a Horizons code are drawn as plain dots at their Horizons positions by the saturn-minor-moons package, and the two without an ephemeris are not drawn.",
       "revisitWhen": "The shared runtime gains a contract for rendering a moon system inside a planet scene.",
       "evidence": [
-        "https://ssd.jpl.nasa.gov/sats/elem/"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn-minor-moons/README.md"
       ]
     },
     {

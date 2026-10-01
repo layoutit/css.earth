@@ -126,7 +126,8 @@ The retained catalogue records the 293 Saturn moons listed by JPL, from the
 [satellite discovery table](https://ssd.jpl.nasa.gov/sats/discovery.html)
 and [mean elements](https://ssd.jpl.nasa.gov/sats/elem/); S/2009 S2 uses the
 orbit in [MPEC 2026-M19](https://minorplanetcenter.net/mpec/K26/K26M19.html).
-Moons are separate object packages.
+Forty-six moons are separate object packages; 245 more are drawn as plain dots
+at their JPL Horizons positions by [Saturn's moons without a page](../saturn-minor-moons/README.md).
 
 ## Hubble dates
 

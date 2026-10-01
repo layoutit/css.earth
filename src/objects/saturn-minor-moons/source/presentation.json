@@ -1,0 +1,29 @@
+{
+  "provenance": {
+    "name": "Saturn's moons without a page",
+    "products": [
+      {
+        "id": "dots",
+        "label": "JPL Horizons, satellite ephemerides SAT455 to SAT459",
+        "process": "Take every confirmed Saturn moon in the retained JPL catalogue that has no object package and has a Horizons code; ask Horizons for its geometric position relative to Saturn's centre at the world's epoch; draw one dot at that position.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions",
+          "saturn-moon-catalogue"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A dot's colour and size are not measurements; the moons are a few kilometres across and would be invisible at scale.",
+          "S/2009 S1 and S/2009 S2 have no Horizons ephemeris and are not drawn."
+        ]
+      }
+    ]
+  }
+}

@@ -8,7 +8,7 @@ import { CONTEXT_ROUTE } from '@cssearth/objects/provenance';
 test('each catalogue context reads its products and sources from its source records alone', async () => {
   const read: string[] = [];
   const contexts = await contextLineages({ route: CONTEXT_ROUTE, input: path => { read.push(path); return readFile(path); } });
-  assert.deepEqual(contexts.map(context => context.id), ['fornax-cluster', 'galaxy-clusters', 'local-group', 'nearby-universe', 'observable-universe', 'virgo-cluster']);
+  assert.deepEqual(contexts.map(context => context.id), ['fornax-cluster', 'galaxy-clusters', 'local-group', 'nearby-universe', 'observable-universe', 'saturn-minor-moons', 'virgo-cluster']);
   // The application route passed in is what the catalogue links each context to: the Sun's scene.
   assert.ok(contexts.every(context => context.route === '/sun/'));
   assert.ok(read.every(path => /\/source\/(presentation|manifest)\.json$/u.test(path)), 'nothing prepared is read');
