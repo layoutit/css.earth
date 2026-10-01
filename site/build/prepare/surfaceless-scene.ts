@@ -27,7 +27,9 @@ export async function prepareSurfacelessScene({ source, controls, solarGeometry 
       node(0, 'polycss-scene', `transform:${camera.defaultTransform}`, { 'aria-hidden': 'true', 'data-polycss-lighting': 'baked' }),
       node(1, `polycss-mesh ${id}-system`, `transform:${scene.systemTransform}`)],
       properties: [{ name: 'scale', value: '1', custom: false }], camera: 0, scene: 1, stageClasses: [], activationGroups: [], textureBindings: [] },
-    variants: (controls.datasets?.controls ?? []).map(control => ({ when: { datasetId: control.id }, required: [], writes: [], materials: [] })),
+    // An object none of whose datasets shows a bank (the Milky Way: the world always draws its volume) has the one view.
+    variants: controls.datasets?.controls.length ? controls.datasets.controls.map(control => ({ when: { datasetId: control.id }, required: [], writes: [], materials: [] }))
+      : [{ when: {}, required: [], writes: [], materials: [] }],
     materials: [], viewBindings: [{ kind: 'view-attribute', target: -1, property: 'data-lod', source: 'level-of-detail-stage', precision: null }],
     animations: [], id, controls, motion: [] };
   parsePreparedObjectRuntime(definition, { parsedJson: true });
@@ -71,6 +73,13 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
     const bankDirectory = resolve(objectDirectory, '..', control.volume.objectId), output = resolve(publicDirectory, control.thumbnail);
     const bank = JSON.parse(await readFile(resolve(bankDirectory, 'object.json'), 'utf8')) as { prepared?: { format?: string } };
     if (bank.prepared?.format === 'cssearth-catalogue-points-bin@1') { await dotsPicture(bankDirectory, output); continue; }
+    // The galaxy's own volume publishes one picture of itself, its backing.
+    if (bank.prepared?.format === 'cssearth-density-volume@1') {
+      await mkdir(dirname(output), { recursive: true });
+      const sharp = (await import('sharp')).default;
+      await sharp(resolve(bankDirectory, 'prepared/backing/backing.webp')).resize(160, 160, { fit: 'cover' }).webp({ quality: 80 }).toFile(output);
+      continue;
+    }
     const presentation = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/presentation.json'), 'utf8')) as { controls: { id: string; thumbnailUrl: string }[] };
     const picture = presentation.controls.find(candidate => candidate.id === control.volume!.datasetId)?.thumbnailUrl;
     const prefix = `/scenes/${control.volume.objectId}/`;

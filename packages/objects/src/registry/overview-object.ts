@@ -61,6 +61,8 @@ export interface OverviewObject {
   readonly distance?: NavigationDistance;
   readonly discovery?: Readonly<ObjectDiscovery>;
   readonly route: string;
+  /** The level is an object of the registry too: its page mounts its own scene, seen from the star the zoom is centred on. */
+  readonly scene?: true;
 }
 
 const text = (value: unknown) => typeof value === 'string' && value.trim().length > 0;

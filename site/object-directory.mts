@@ -1,5 +1,5 @@
 import { importPackagedObjectRuntime } from './import-queue.mts';
-import { catalogueLevel, catalogueObject } from '@cssearth/objects';
+import { catalogueLevel, catalogueObject, isSceneDescriptor } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
@@ -22,6 +22,8 @@ function add(object: NavigableObject) {
 /** The overviews, from the nearest level of the zoom ladder out: every page knows them (see above). The build's registry
  * holds the same entries (objects.mts OVERVIEWS). */
 export const KNOWN_OVERVIEWS: readonly OverviewObject[] = Object.freeze(overviews.map(catalogueLevel).sort((a, b) => a.order - b.order));
+// A level that is an object too (the Milky Way) is known as one from the start: its row is its catalogue entry.
+for (const row of overviews) if (isSceneDescriptor((row as { descriptor?: unknown }).descriptor)) add(objectFromEntry(row));
 /** The level with `id`, when `id` names one. */
 export const knownLevel = (id: string | null | undefined): OverviewObject | undefined => KNOWN_OVERVIEWS.find(level => level.id === id);
 /** The object with `id` if the page has loaded it. */

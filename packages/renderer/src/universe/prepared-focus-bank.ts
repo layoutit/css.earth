@@ -30,6 +30,18 @@ export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame
   };
 }
 
+/** The world's own volume (the galaxy): the world always draws it, so the one dataset an object names it by has nothing
+ * to load or to switch. */
+export function createContextFocusBank(objectId: string): PreparedFocusBank {
+  const state: PreparedFocusDatasets = { objectId, id: 'galaxy', defaultDataset: 'galaxy', selectedDataset: 'galaxy', starsVisible: false,
+    datasets: [{ id: 'galaxy', label: 'Galaxy', title: 'The galaxy the world draws', description: 'Prepared world volume', sourceUrl: '' }] };
+  return {
+    objectId, framingRadiusM: () => { throw new TypeError('The world volume is framed by its scene.'); }, state: () => state, load: () => Promise.resolve(),
+    selectDataset(id) { if (id !== 'galaxy') throw new TypeError('Unknown world-volume dataset.'); },
+    subscribe: () => () => {},
+  };
+}
+
 /** A bank of catalogue dots: one dataset, its members, with nothing to decode before it shows. */
 export function createPointFocusBank(objectId: string): PreparedFocusBank {
   const state: PreparedFocusDatasets = { objectId, id: 'members', defaultDataset: 'members', selectedDataset: 'members', starsVisible: false,

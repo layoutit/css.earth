@@ -95,15 +95,15 @@
     "Production bake applies matrix before lossy WebP encoding, so small codec differences are expected."
   ],
   "inputs": {
-    "src/objects/milky-way/prepared/volume.json": {
+    "src/objects/milky-way-volume/prepared/volume.json": {
     },
-    "src/objects/milky-way/prepared/volume-slices.json": {
+    "src/objects/milky-way-volume/prepared/volume-slices.json": {
     },
-    "src/objects/milky-way/source/volume.json": {
+    "src/objects/milky-way-volume/source/volume.json": {
     },
-    "src/objects/milky-way/object.json": {
+    "src/objects/milky-way-volume/object.json": {
     },
-    "src/objects/milky-way/source/sky/nasa-preview.jpg": {
+    "src/objects/milky-way-volume/source/sky/nasa-preview.jpg": {
     }
   },
   "localReproductionScripts": {

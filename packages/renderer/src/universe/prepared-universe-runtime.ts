@@ -17,6 +17,7 @@ import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
+import { createContextFocusBank } from './prepared-focus-bank.js';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { SelectedBank } from './detailed-focus-context.js';
 import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
@@ -211,7 +212,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let companion: string | null = null;
         // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
         const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...volumeDatasetBanks.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
-        const bankOf = (id: string) => datasets.focusBank(id) ?? catalogBanks.focusBank(id);
+        // The world's own volume is a bank too, for the object whose dataset names it (the Milky Way).
+        const worldVolume = createContextFocusBank(plan.volume.objectId);
+        const bankOf = (id: string) => datasets.focusBank(id) ?? catalogBanks.focusBank(id) ?? (id === worldVolume.objectId ? worldVolume : null);
         background.mount();
         catalogBanks.loadInitialImages();
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));

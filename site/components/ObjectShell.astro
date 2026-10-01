@@ -230,7 +230,7 @@ import Detached from './Detached.astro';
     </nav></Detached>}
     <div class="object-selected-content">
     {!navigation && <Detached detached><div class="object-context" hidden>
-      {OVERVIEWS.map(overview => <OverviewCard {overview} />)}
+      {OVERVIEWS.filter(overview => overview.scene !== true).map(overview => <OverviewCard {overview} />)}
       <Detached detached><ObjectCard class="object-overview-card" data-system-results>
         {/* The Solar System's header and this page's own; the others arrive with the first overview of another system. */}
         <SystemHeaders only={[SOLAR_SYSTEM_ID, ...(ownSystem ? [ownSystem.id] : [])]} />

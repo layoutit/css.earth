@@ -12,11 +12,23 @@ import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetList from "./DatasetList.astro";
 import TreeDisclosure from './TreeDisclosure.astro';
 import { readObjectArticleUrl } from '../server/object-article.mts';
+import ObjectResult from './ObjectResult.astro';
+import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
+import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
+import { overviewDistanceM } from '../overview-context.mts';
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], datasets } = Astro.props;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const articleUrl = await readObjectArticleUrl(objectId);
+// An object that is a level of the zoom ladder lists what it holds: the world's host and the featured bodies of the
+// classifications it holds without a list label of their own, nearest first, with search's own rows.
+const level = OBJECTS.find(object => object.id === objectId)?.level;
+const held = level?.holds.filter(group => !group.list && group.classifications.includes('star')).flatMap(group => group.classifications) ?? [];
+const bodies = level ? SCENE_OBJECTS.filter(object => held.includes(object.classification)
+  && (object.id === WORLD_HOST_ID || object.discovery.featured)
+  && (!level.zoom.centreWithin || object.distance.meters < overviewDistanceM(level.zoom.centreWithin)))
+  .sort((a, b) => Number(b.id === WORLD_HOST_ID) - Number(a.id === WORLD_HOST_ID) || a.distance.meters - b.distance.meters) : [];
 ---
 
 <ObjectCard class="object-information-panel" data-card-subject={satelliteSystemFromUrl(Astro.url) ? 'satellite-system' : 'body'}
@@ -26,11 +38,15 @@ const articleUrl = await readObjectArticleUrl(objectId);
           <ObjectBreadcrumbs {objectId} />
       </ObjectCardHeader>
       {hasFacts && <InformationTabs idPrefix={objectId} initialTab="dataset" tabs={[
+        ...(bodies.length ? [{ id: 'bodies', label: 'Celestial bodies' }] : []),
         { id: 'dataset', label: 'Datasets' },
         { id: 'factsheet', label: 'Factsheet' },
         ...(orderedCharts.length ? [{ id: 'charts', label: 'Charts' }] : []),
       ]} />}
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
+      {bodies.length > 0 && <section class="object-results-scroll object-card-tabpanel" id={`${objectId}-bodies-content`} data-information-panel="bodies" aria-label="Celestial bodies">
+        <ul class="object-list">{bodies.map(object => <ObjectResult {object} />)}</ul>
+      </section>}
       <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" open>
       <h2 class="object-mobile-information-heading">Datasets</h2>
       {hasDatasets && datasets && <DatasetList {objectId} {datasets} />}

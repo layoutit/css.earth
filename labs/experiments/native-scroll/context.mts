@@ -18,9 +18,9 @@ import { BODY_INDICATOR_DIAMETER } from '@cssearth/renderer/universe/world-conte
 
 const root = pathToFileURL(resolve('.') + '/');
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('src/objects/sun/prepared/world-context.json', root), 'utf8')));
-const descriptor: unknown = JSON.parse(await readFile(new URL('src/objects/milky-way/object.json', root), 'utf8'));
+const descriptor: unknown = JSON.parse(await readFile(new URL('src/objects/milky-way-volume/object.json', root), 'utf8'));
 const volume = await loadPreparedCssVolume(descriptor, { read: async path => {
-  const bytes = await readFile(new URL(`src/objects/milky-way/${path}`, root));
+  const bytes = await readFile(new URL(`src/objects/milky-way-volume/${path}`, root));
   return Uint8Array.from(bytes).buffer;
 } });
 const sprites = preparedBodyBillboards([plan.focus, ...plan.bodies], new Set(), () => 2.4);
@@ -42,7 +42,7 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
   const overlays = document.querySelector<HTMLElement>('.object-scene-overlays')!;
   if (!volume.sky) throw new Error('The shared prepared sky is missing.');
   const sky = mountPreparedCssSky({ host: worldStage, before: stage, payload: volume.sky, resources: volume.resources,
-    resolveResource: path => `/src/objects/milky-way/prepared/${path}` });
+    resolveResource: path => `/src/objects/milky-way-volume/prepared/${path}` });
   sky.publish(world, viewport);
   // The live publisher can cull faces again for each camera pose. A native
   // camera retains all six and lets CSS perspective clip them as it turns.

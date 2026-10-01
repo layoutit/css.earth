@@ -21,7 +21,7 @@ export const SCENE_OBJECTS = OBJECTS;
  * world host's scene at that zoom. */
 export const OVERVIEWS = Object.freeze(overviews.map(catalogueLevel).sort((a, b) => a.order - b.order));
 // An id names one page: an object's or a level's.
-defineObjects<{ id: string; route: string }>([...OBJECTS, ...OVERVIEWS]);
+defineObjects<{ id: string; route: string }>([...OBJECTS, ...OVERVIEWS.filter(level => !OBJECTS.some(object => object.id === level.id))]);
 
 export function requireObject(id: string) {
   const object = OBJECTS.find(candidate => candidate.id === id);
@@ -35,6 +35,6 @@ export function requirePage(id: string): { readonly id: string; readonly name: s
 }
 
 export function requireSceneObject(id: string) {
-  if (OVERVIEWS.some(level => level.id === id)) throw new TypeError(`${id} is a level of the zoom ladder: it has no scene of its own.`);
+  if (OVERVIEWS.some(level => level.id === id) && !OBJECTS.some(object => object.id === id)) throw new TypeError(`${id} is a level of the zoom ladder: it has no scene of its own.`);
   return requireObject(id);
 }

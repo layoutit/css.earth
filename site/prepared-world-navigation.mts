@@ -95,7 +95,9 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       return worldCameraFromCenteredPresentation({ rotation: projection.rotation,
         distanceUnits: Math.max(current.distanceM, minimumDistance) / frame.metersPerUnit }, frame, optics);
     },
-    overviewTarget({ scope, objectId, fromId, mount }: TargetRequest & {scope: string}) {
+    /** `view: 'default'` frames the level as `objectId`'s own page looks, not as the camera looks now: a level opened by its
+     * page or a link shows its centre from that body's default direction, whatever scene the camera was in. */
+    overviewTarget({ scope, objectId, fromId, mount, view }: TargetRequest & {scope: string; view?: 'default'}) {
       if (scope === 'system') {
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
@@ -113,7 +115,8 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       if (distanceM === null) return drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics, documentTarget));
       const frame = frames.get(objectId);
       if (!frame) return null;
-      const projection = presentWorldCamera(from, frame, optics);
+      const arrival = view === 'default' ? arrivals.get(objectId) : undefined;
+      const projection = arrival ? { rotation: arrival.rotation } : presentWorldCamera(from, frame, optics);
       return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: distanceM / frame.metersPerUnit },
         frame, optics), focusPositionM: frame.originM };
     },

@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { defineObjects, type CatalogEntry } from '@cssearth/objects';
+import { defineObjects, isSceneDescriptor, type CatalogEntry } from '@cssearth/objects';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -153,10 +153,11 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
   // A level of the zoom ladder is a package's entry like any other; one that is placed too (the Local Group) is in both reads.
   const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
-  const levelIds = new Set(overviews.map(overview => overview.id));
+  // A level that is an object too (the Milky Way) is an entry of the catalogue; one without a scene is only a level.
+  const levelIds = new Set(overviews.filter(overview => !isSceneDescriptor(overview.descriptor)).map(overview => overview.id));
   const entries = catalogued.filter(entry => !levelIds.has(entry.id));
   // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
-  defineObjects<{ id: string; route: string }>([...entries, ...overviews.map(({ id }) => ({ id, route: `/${id}/` }))]);
+  defineObjects<{ id: string; route: string }>([...entries, ...[...levelIds].map(id => ({ id, route: `/${id}/` }))]);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -177,6 +178,9 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {
     const { schema, type, properties } = descriptor as { schema: unknown; type: unknown; properties: Record<string, unknown> };
     const placed = catalogued.find(entry => entry.id === id), volume = properties.volume;
+    // An object's row is the catalogue's: its whole descriptor, with its distance and discovery.
+    const index = entries.findIndex(entry => entry.id === id);
+    if (index >= 0) return { descriptor, distance: entries[index]!.distance, discovery: discoveries[index]! };
     return { descriptor: { schema, id, type, properties: { overview: properties.overview,
       ...(properties.catalog === undefined ? {} : { catalog: properties.catalog, worldFrame: properties.worldFrame }),
       ...(isRecord(volume) && volume.originM !== undefined ? { volume: { originM: volume.originM } } : {}) } },

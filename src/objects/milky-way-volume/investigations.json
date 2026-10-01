@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-investigation-ledger@1",
-  "objectId": "milky-way",
+  "objectId": "milky-way-volume",
   "entries": [
     {
       "id": "openspace-milky-way-volume",
@@ -17,8 +17,8 @@
       "status": "included",
       "finding": "RGB channels emit independently after squaring filtered UNORM values and alpha is dust decoded with exponent 1.4; the recipe preserves emission 250, absorption 200, extinction tint 0.3/0.54/0.85, cylindrical support and the source's channel transfer, converting the 8 kpc Galactic centre and authored Euler rotation into the shared Sun-centred ICRF frame.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L52",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L57"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L52",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L57"
       ]
     },
     {
@@ -27,8 +27,8 @@
       "status": "included",
       "finding": "The display gain is calibrated to 16 after slab integration, three stops below the previous 128 baseline that was too bright with the OpenSpace emission model; these are renderer approximation choices kept separate from OpenSpace's authored emission and absorption coefficients.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L75",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L81"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L75",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L81"
       ]
     },
     {
@@ -37,8 +37,8 @@
       "status": "included",
       "finding": "A single offline matrix diag(1, 0.951277424, 0.709752511) grades every slab toward the original NASA interior palette from every viewing direction, following the exponential transfer and preserving emission and dust alpha; calibrated on paired patches within 15 degrees of the Galactic plane with held-out longitude blocks, it reduces held-out chromaticity error by 53.8 percent while retaining colour variation, and matches the palette rather than morphology or physical photometry.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L83",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L95"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L83",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L95"
       ]
     },
     {
@@ -48,7 +48,7 @@
       "finding": "Ordinary-alpha slices approximate RGB extinction and emitted energy, retain finite-slice and axis-handoff artefacts and do not reproduce OpenSpace's additive HDR raymarching, stochastic sampling or camera-dependent fade.",
       "revisitWhen": "A prepared route reproduces additive HDR raymarching within the project's rendering rules.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L98"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L98"
       ]
     },
     {
@@ -66,8 +66,8 @@
       "status": "included",
       "finding": "A shared smooth shadow factor suppresses faint image grain, zero below transferred display luminance 0.04 and full above 0.12, intentionally removing faint background detail while retaining the separately baked catalogue stars; faint Gaia stars remain in the image, so it is not literally star-free.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L141",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L147"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L141",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L147"
       ]
     },
     {
@@ -76,9 +76,9 @@
       "status": "included",
       "finding": "The baker composites the sibling stellar-neighbourhood point field, pinned by descriptor digest at an authored 43.6 CSS pixels per degree, onto a copy of each face: about 17,500 sprites drawn with the same atlas tile, photometry table and source-over blend the browser uses, supersampled three times per axis; the NASA Milky Way-only image omits bright Hipparcos and Tycho stars, so the prepared bright stars are composited in.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L145",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L151",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L156"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L145",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L151",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L156"
       ]
     },
     {
@@ -88,8 +88,8 @@
       "finding": "The runtime mounts only the baked faces: there is no 100 AU handoff to individual DOM stars, star-slot pool, catalogue-selection worker or per-star frame transport, so individual stellar parallax is no longer rendered and a star's disc is about three times softer than the browser's own sprite at device pixel ratio 2, which the README calls a deliberate visual difference.",
       "revisitWhen": "The project decides that per-star parallax inside the neighbourhood is worth the runtime star transport again.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L158",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L172"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L158",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L172"
       ]
     },
     {
@@ -99,8 +99,8 @@
       "finding": "The 20 kpc half-extent shell depth is an authored visual approximation because NASA supplies angular radiance, not measured cloud depths; it aligns neither source's dust structure nor reproduces physical disocclusion, and it avoids copying cloud features across independent depth layers.",
       "revisitWhen": "A source supplies measured cloud depths that can replace the authored shell.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L174",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way/README.md#L186"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L174",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L186"
       ]
     }
   ]

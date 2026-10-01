@@ -8,11 +8,13 @@ import { withDataset } from '../dataset-url.mts';
 import { withOverviewScope, withSatelliteSystemView } from './navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
+import { isLevelObject, levelCentre } from '../level-view.mts';
 import { selectionContext, selectionKey, selectionTargetFromUrl, type SelectionTarget, type SceneSubject } from '../scene/scene-selection.mts';
 
 export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'pop'; entry: string };
 export type NavigationIntent =
-  | { kind: 'object' }
+  /** `preserve`: the zoom ladder hands the view to a level's scene where the camera is. */
+  | { kind: 'object'; camera?: 'preserve' }
   | { kind: 'satellite-system'; camera: 'frame' | 'preserve' }
   | { kind: 'feature'; id: string | null }
   | { kind: 'link'; url: string }
@@ -60,12 +62,15 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const linked = intent.kind === 'link' || intent.kind === 'history';
   let url = new URL(intent.kind === 'link' || intent.kind === 'history' ? intent.url : current.href, current.href);
   let history: NavigationHistory = intent.kind === 'history' ? intent.history
-    : { history: (intent.kind === 'overview' || intent.kind === 'satellite-system') && intent.camera === 'preserve' ? 'replace' : 'push' };
+    : { history: (intent.kind === 'overview' || intent.kind === 'satellite-system' || intent.kind === 'object') && intent.camera === 'preserve' ? 'replace' : 'push' };
   const targetRequest = { objectId: object.id, fromId: current.objectId, mount: current.mount };
   const family = satelliteSystemByHost(object.id);
   if (intent.kind === 'satellite-system' && !family) throw new TypeError(`${object.id} has no satellite system.`);
   const overviewTarget = intent.kind === 'overview' && intent.camera === 'frame'
     ? navigation.overviewTarget({ ...targetRequest, scope: intent.scope }) : null;
+  // A level opens framed as its ladder says (`zoom.frame`), around its centre; a hand-over keeps the camera.
+  const levelTarget = isLevelObject(object.id) && intent.kind !== 'history' && !(intent.kind === 'object' && intent.camera === 'preserve')
+    ? navigation.overviewTarget({ ...targetRequest, objectId: levelCentre(), scope: object.id, view: 'default' }) : null;
   const opensOverviewFocus = current.subject.kind === 'overview' && object.id === current.objectId && current.subject.overview.scope === 'system';
   const opensFamilyFocus = current.subject.kind === 'satellite-system' && object.id === current.objectId;
   const familyTarget = intent.kind === 'satellite-system' && intent.camera === 'frame'
@@ -76,7 +81,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   // turning toward it kept the camera where it was, so a star picked from across the galaxy never came closer.
   const firstHostSelection = intent.kind === 'object' && (family !== null || systemById(objects, object.id) !== null)
     && !opensOverviewFocus && object.id !== current.centeredObjectId && current.hasPresented;
-  const center = overviewTarget?.world ?? familyTarget
+  const center = overviewTarget?.world ?? levelTarget?.world ?? familyTarget
     ?? (firstHostSelection && !family ? navigation.systemTarget(targetRequest) : null)
     ?? (firstHostSelection ? navigation.centerTarget(targetRequest) : null);
   if (!linked) {
@@ -91,13 +96,13 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const interruptedFlight = current.pending !== null
     && !(current.pending.camera.kind === 'frame' && current.pending.camera.framing === 'center') && !center;
   const restore = history.history === 'pop' || linked && selection.savedView;
-  const keepCamera = intent.kind === 'overview' && intent.camera === 'preserve'
+  const keepCamera = (intent.kind === 'overview' || intent.kind === 'object') && intent.camera === 'preserve'
     || intent.kind === 'satellite-system' && intent.camera === 'preserve'
     || current.reuseScene && (linked && selection.dataset || interruptedFlight);
   const camera: NavigationCamera = current.reuseScene && (intent.kind === 'feature' || selection.feature !== null)
     ? { kind: 'surface' } : restore ? { kind: 'restore', animate: history.history === 'pop' }
     : keepCamera ? { kind: 'preserve' }
-    : { kind: 'frame', framing: center ? 'center' : 'detail', world: center, focusPositionM: overviewTarget?.focusPositionM ?? null };
+    : { kind: 'frame', framing: center ? 'center' : 'detail', world: center, focusPositionM: overviewTarget?.focusPositionM ?? levelTarget?.focusPositionM ?? null };
   if (current.reuseScene && !restore) {
     const changesSelection = selectionKey(selectionContext(current.subject)) !== selectionKey(selection.subject);
     if (!changesSelection && !(linked && selection.dataset)) history = { history: 'replace' };

@@ -73,8 +73,8 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   const objects = defineObjects<PreparedNavigableObject>(entries.map(entry => catalogueObject<never, AbortSignal>(entry, refuse)));
   const levels = Object.freeze(rows(overviews, PREPARED_CATALOGUE.overviews).map(catalogueLevel).sort((a, b) => a.order - b.order));
   // An id names one page: an object's or a level's.
-  defineObjects<{ id: string; route: string }>([...objects, ...levels]);
-  const placedLevels = levels.flatMap((level): WorldBody[] => level.worldFrame && level.classification && level.systemName && level.color && level.distance && level.discovery
+  defineObjects<{ id: string; route: string }>([...objects, ...levels.filter(level => !objects.some(object => object.id === level.id))]);
+  const placedLevels = levels.filter(level => !objects.some(object => object.id === level.id)).flatMap((level): WorldBody[] => level.worldFrame && level.classification && level.systemName && level.color && level.distance && level.discovery
     ? [{ id: level.id, name: level.name, classification: level.classification, ...(level.classificationLabel === undefined ? {} : { classificationLabel: level.classificationLabel }),
       systemName: level.systemName, color: level.color, distance: level.distance, worldFrame: level.worldFrame, discovery: level.discovery }] : []);
   const worldObjects = Object.freeze([...objects, ...placedLevels]);

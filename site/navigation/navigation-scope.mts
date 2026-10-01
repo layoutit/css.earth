@@ -2,6 +2,7 @@ import { objectIdAtPath } from '../root-object.mts';
 import { knownLevel } from '../object-directory.mts';
 import type { OverviewScope } from '../overview-context.mts';
 import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
+import { isLevelObject, levelCentre } from '../level-view.mts';
 
 /** Every page is `/<id>/`. A page is either an object's own scene (a body, a star, a galaxy, a nebula, a cluster) or a level
  * of the zoom ladder the shared world draws around the mounted scene (the Milky Way, the Local Group, the nearby and the
@@ -16,7 +17,8 @@ export const WORLD_HOST_ID = SOLAR_SYSTEM_ID;
 
 /** The overviews that are pages: the registry's overview entries, every level of the zoom ladder above a star's system. */
 export type OverviewPageId = Exclude<OverviewScope, 'system'>;
-export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => knownLevel(id) !== undefined;
+/** A level that is an object too (the Milky Way) is its own scene's page, not a page the world's host draws. */
+export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => { const level = knownLevel(id); return level !== undefined && level.scene !== true; };
 
 /** The page a URL names when it is something the mounted scene `sceneId` draws, not the scene itself; null on the
  * scene's own page. The URL is the selection from the moment it is named, before any bank has loaded. */
@@ -72,7 +74,8 @@ export function withSatelliteSystemView(url: URL, selected: boolean): URL {
  * overview's page is the world host's scene; another star's scene zoomed out past its system stays that star's system
  * overview in its URL, so a reload reopens the scene it shows and the zoom recomputes the scope from there. */
 export function overviewPage(sceneId: string, scope: string | null): OverviewPageId | null {
-  return isOverviewPage(scope) && sceneId === WORLD_HOST_ID ? scope : null;
+  // A mounted level centred on the world's host stands where the host's scene would.
+  return isOverviewPage(scope) && (sceneId === WORLD_HOST_ID || isLevelObject(sceneId) && levelCentre() === WORLD_HOST_ID) ? scope : null;
 }
 
 /** Selects the named overview on the page of scene `sceneId`: its page, or the scene page's `overview=system`. */

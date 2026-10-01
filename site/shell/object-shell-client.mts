@@ -1,3 +1,4 @@
+import { isLevelObject } from '../level-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from '../tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
@@ -132,8 +133,10 @@ export function mountObjectShell({
     objectBrowser.refreshSelection();
     // A galaxy, a cluster or a nebula has no surface to stand above: the readout measures to its centre.
     const shown = knownObject(objectId);
-    viewReadout.setExtendedSubject(shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
-    viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : 'system');
+    // A level is seen from inside, around the star it is centred on: its readout is an overview's, from that star.
+    const level = subject.kind === 'object' && isLevelObject(objectId);
+    viewReadout.setExtendedSubject(!level && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
+    viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : level ? objectId : 'system');
     updateBodyCard();
   }
   function own<T extends { destroy(): void }>(controller: T) {

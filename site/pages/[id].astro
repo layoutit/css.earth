@@ -6,7 +6,7 @@ import { builtObjectPages } from '../built-pages.mts';
 export function getStaticPaths() {
   // Every object has its page, `/<id>/`, which mounts its scene. A level of the zoom ladder has a page too: the world
   // host's scene at that zoom, with the level selected.
-  const pages: { id: string; sceneHostId?: string }[] = [...OBJECTS.map(object => ({ id: object.id })), ...OVERVIEWS.map(level => ({ id: level.id, sceneHostId: WORLD_HOST_ID }))];
+  const pages: { id: string; sceneHostId?: string }[] = [...OBJECTS.map(object => ({ id: object.id })), ...OVERVIEWS.filter(level => level.scene !== true).map(level => ({ id: level.id, sceneHostId: WORLD_HOST_ID }))];
   return builtObjectPages(pages.map(page => ({ params: { id: page.id }, props: { sceneId: page.sceneHostId ?? page.id } })), pages);
 }
 ---

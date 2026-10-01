@@ -94,7 +94,7 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url);
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const image: PreparedCssImageLayers = { ...volume, id: 'lazy-image', bankViews: volume.stacks.map(stack => ({ axis: stack.axis,
     normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
   const loadImageLayer = mock.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
@@ -120,7 +120,7 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
 test('the galaxy is its bulge slices at every overview scope, with no disc plane and no impostor views', () => {
   const base = new URL('../../../../src/', import.meta.url);
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const document = new FakeDocument();
   const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}` }).mount(document.createElement() as unknown as HTMLElement);
@@ -205,7 +205,7 @@ test('validates six inward orthonormal faces, exact resource metadata and URL-fr
 });
 
 test('optional sky is validated as part of the existing volume capability and shared resource bank', () => {
-  const volume = JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way/prepared/volume.json', import.meta.url), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way-volume/prepared/volume.json', import.meta.url), 'utf8')).data as PreparedCssVolume;
   const sky = { ...fixture(), referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt };
   const withSky = { ...volume, sky, resources: [...volume.resources.filter(resource => !resource.path.startsWith('sky/')), ...resources] };
   assert.deepEqual(validatePreparedCssVolume(withSky).sky, sky);
@@ -225,7 +225,7 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url);
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const sky = { ...fixture(), referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt };
   const { sky: _originalSky, ...volumeWithoutSky } = volume;
   const data = { ...volumeWithoutSky, ...(withSky ? { sky } : {}), resources: [
@@ -281,8 +281,8 @@ test('a galaxy backing that loads while the camera rests is placed before any la
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
-  const backing = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/backing.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const backing = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/backing.json', base), 'utf8'));
   stubGlobal('fetch', async () => new Response(JSON.stringify(backing)));
   const document = new FakeDocument(), stage = document.createElement();
   const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {}, galaxyBacking: '/backing.json',
@@ -309,8 +309,8 @@ test('a galaxy backing whose ring image cannot resolve mounts no layer at all', 
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
-  const backing = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/backing.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const backing = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/backing.json', base), 'utf8'));
   stubGlobal('fetch', async () => new Response(JSON.stringify(backing)));
   const failed = mock.method(console, 'error', () => {});
   const document = new FakeDocument(), stage = document.createElement();
@@ -330,7 +330,7 @@ test('shared universe draws only resolved nebulae and never prefetches their dat
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
     originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 50 * parsecM],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM,
@@ -433,7 +433,7 @@ test('an unloaded independent bank is fetched by proximity while the galactic fa
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
     originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 50 * parsecM],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
@@ -483,7 +483,7 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
     originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 5000 * parsecM],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
@@ -535,7 +535,7 @@ test('hidden dataset banks are bounded, active subscriptions pin them, and evict
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const makeBank = (id: string, distancePc: number): PreparedVolumeDatasets => {
     const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
       originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
@@ -611,7 +611,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   context.volume.opacityProfile = { model: 'logarithmic-distance', fadeStartDistanceM: 1e19, fullDistanceM: 1e21, nearOpacity: 0, fullOpacity: 1 };
   // The galaxy's volume is gated by the distance to the selected body, as for every body: the close-up is mid-fade.
   context.volume.discHalfHeightM = .5 * parsecM;
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
     originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 450 * parsecM],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };

@@ -15,7 +15,7 @@ dataset names its preview `datasets/<dataset id>.webp`, and fits the complete im
 It preserves the image's aspect ratio and published display colors, with transparent
 padding. The Milky Way icon resamples its published face-on backing, the same
 ESA artist's impression used by the map. It is artwork, not an observation;
-its [source recipe](../src/objects/milky-way/source/backing/recipe.json) retains that qualification.
+its [source recipe](../src/objects/milky-way-volume/source/backing/recipe.json) retains that qualification.
 The former slab-derived icon no longer matched the delivered galaxy view.
 
 The [prepared receipt](../public/navigation/sidebar-thumbnails.json) records every
