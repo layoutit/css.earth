@@ -12,6 +12,9 @@ export interface TrackballMetrics {
   tumbleOnly?: boolean; sceneMatrix?: string | readonly number[];
   /** The body's north pole as a unit view direction (CSS axes): body drags turn about it and never roll it. */
   pole?: Vector3;
+  /** The drawn body and the projection that draws it: pole drags keep the grabbed ground under the pointer
+   * (engine pole-drag.ts). It carries its own optical centre and focal length, which interactionTrackball replaces. */
+  grabSphere?: { center: Vector3; radius: number; opticalCenterX: number; opticalCenterY: number; focalLength: number };
 }
 export interface CameraUpdate { rotX?: number; rotY?: number; zoom?: number; distance?: number; distanceKilometers?: number; }
 export interface NavigationCamera {
