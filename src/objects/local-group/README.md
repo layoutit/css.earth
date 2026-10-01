@@ -38,6 +38,10 @@ The command also writes `prepared/display-sample.json`. The [sampling recipe](so
 
 The [catalogue tests](../../../packages/bake/src/galaxy-catalog/galaxy-catalog.test.ts) regenerate the catalogue, display sample and receipt and compare them byte for byte. They check coordinate axes independently, keep the four detailed galaxies' published directions and distances, and reject corrupted sources, coordinate-frame changes, radius-based membership and lost candidates. A pypdf 5.9.0 extraction checks the Table 1 transcription against the original PDF. These checks establish derivation, not visual or scientific acceptance.
 
+![The Local Group's marker between the Virgo and Fornax clusters, 100 Mpc out](evidence/2026-10-01/local-group-marker.jpg)
+
+A headless capture of this version's Nearby Universe page on the local preview: the Local Group's marker and name stand with the two clusters that have packages.
+
 ## Known problems
 
 - The display sample is incomplete by design and is not a density, completeness or mass map.
