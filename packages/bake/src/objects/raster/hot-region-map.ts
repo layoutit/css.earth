@@ -11,8 +11,12 @@
  * longitude here is 360 x phase, plus 180 for an antiphased region, and a ceding circle's centre lies its `azimuthRadians` east of
  * its superseding circle's (the same file: phi_c = phi_s + cede_azimuth / 2 pi).
  *
- * A point inside a circle is one whose great-circle angle from the circle's centre is at most the circle's angular radius. Surface
- * outside every region has no value: these fits give it no temperature. Regions are refused if they overlap, as X-PSI refuses them. */
+ * A point inside a circle is one whose great-circle angle from the circle's centre is at most the circle's angular radius. Regions
+ * are refused if they overlap, as X-PSI refuses them.
+ *
+ * These fits give the surface outside the regions no temperature. A record may add `bulk`: the temperature another measurement
+ * gives the whole surface apart from the hot regions (a far-ultraviolet and soft X-ray spectrum), with its own source. The surface
+ * outside every region then has that temperature; without it, it has no value. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -27,7 +31,9 @@ export interface HotRegion {
   readonly omitRadiusRadians?: number;
   readonly ceding?: HotCircle & { readonly kelvin: number };
 }
-export interface PublishedHotRegions { readonly source: string; readonly regions: readonly HotRegion[] }
+export interface PublishedHotRegions { readonly source: string; readonly regions: readonly HotRegion[];
+  /** The measured temperature of the surface outside the hot regions, from its own source. */
+  readonly bulk?: { readonly kelvin: number; readonly source: string; readonly url: string } }
 
 const DEGREES = 180 / Math.PI;
 const wrap = (degrees: number) => ((degrees + 180) % 360 + 360) % 360 - 180;
@@ -74,17 +80,22 @@ export function parsePublishedHotRegions(value: unknown): PublishedHotRegions {
     if (angleFrom(first, second.longitudeDegrees, 90 - second.colatitudeRadians * DEGREES) < first.radiusRadians + second.radiusRadians)
       throw new RangeError(`Hot regions ${regions[a]!.id} and ${regions[b]!.id} overlap.`);
   }
-  return { source: requireString(input.source, 'source'), regions };
+  const bulk = input.bulk === undefined ? undefined : (() => {
+    const b = requireRecord(input.bulk, 'bulk'), kelvin = cell(b.temperatureK, 'bulk.temperatureK'), coolest = Math.min(...circles.flat().map(circle => circle.kelvin));
+    if (!(kelvin > 0 && kelvin < coolest)) throw new RangeError(`bulk.temperatureK ${kelvin} must be positive and below the coolest hot region's ${Math.round(coolest)} K.`);
+    return { kelvin, source: requireString(b.source, 'bulk.source'), url: requireString(b.url, 'bulk.url') };
+  })();
+  return { source: requireString(input.source, 'source'), regions, ...(bulk ? { bulk } : {}) };
 }
 
-/** Effective temperature in kelvin at a point, or null outside every region. */
+/** Effective temperature in kelvin at a point; outside every region, the bulk temperature when the record has one, else null. */
 export function hotRegionTemperature(record: PublishedHotRegions, longitude: number, latitude: number): number | null {
   for (const region of record.regions) {
     const fromCentre = angleFrom(region.superseding, longitude, latitude);
     if (fromCentre <= region.superseding.radiusRadians && !(region.omitRadiusRadians !== undefined && fromCentre < region.omitRadiusRadians)) return region.superseding.kelvin;
     if (region.ceding && angleFrom(region.ceding, longitude, latitude) <= region.ceding.radiusRadians) return region.ceding.kelvin;
   }
-  return null;
+  return record.bulk?.kelvin ?? null;
 }
 
 /** The share of the sphere a circle of angular radius `radians` covers. */
@@ -97,7 +108,7 @@ export function publishedHotRegionMap(record: PublishedHotRegions) {
       if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
       return hotRegionTemperature(record, longitude, latitude);
     },
-    report: { format: 'published-hot-region-map', units: 'K', source: record.source,
+    report: { format: 'published-hot-region-map', units: 'K', source: record.source, ...(record.bulk ? { bulk: record.bulk } : {}),
       regions: record.regions.map(region => ({ id: region.id,
         superseding: { latitudeDegrees: 90 - region.superseding.colatitudeRadians * DEGREES, eastLongitudeDegrees: region.superseding.longitudeDegrees, radiusDegrees: region.superseding.radiusRadians * DEGREES, kelvin: region.superseding.kelvin,
           sphereShare: capShare(region.superseding.radiusRadians) - (region.omitRadiusRadians === undefined ? 0 : capShare(region.omitRadiusRadians)) },

@@ -27,16 +27,20 @@ test('a circle is hot inside its angular radius; a ring has a cold middle; a ced
   assert.equal(publishedHotRegionMap(map).sample(0, 91), null);
   assert.throws(() => parsePublishedHotRegions(record([{ id: 'a', phaseCycles: cell(0), superseding: circle(1, 0.3, 6) }, { id: 'b', phaseCycles: cell(0.05), superseding: circle(1, 0.3, 6) }])), /overlap/u);
   assert.throws(() => parsePublishedHotRegions(record([{ id: 'a', phaseCycles: cell(0), superseding: circle(1, 0.3, 6), omit: { radiusRadians: cell(0.4) } }])), /inside the superseding/u);
+  // A separately measured temperature fills the surface outside the regions, and must be cooler than every region.
+  const spot = { id: 'a', phaseCycles: cell(0), superseding: circle(1, 0.3, 6) }, bulk = (kelvin: number) => ({ temperatureK: cell(kelvin), source: 'another paper', url: 'https://arxiv.org/abs/0000.00000' });
+  assert.equal(hotRegionTemperature(parsePublishedHotRegions({ ...record([spot]), bulk: bulk(250000) }), 180, -80), 250000);
+  assert.throws(() => parsePublishedHotRegions({ ...record([spot]), bulk: bulk(2e6) }), /below the coolest hot region/u);
 });
 
 test("PSR J0437-4715's record draws what Choudhury et al. (2024) describe: a ring around the north pole and a two-temperature spot in the south", async () => {
   const map = parsePublishedHotRegions(JSON.parse(await readFile(resolve('src/objects/psr-j0437-4715/source/science/choudhury-2024/hot-regions.json'), 'utf8')) as unknown);
   const at = (longitude: number, latitude: number) => hotRegionTemperature(map, longitude, latitude);
   // Section VI and Figure 11: "a ring encompassing the north pole". The pole is in the hole and the ring crosses every meridian.
-  assert.equal(at(0, 90), null);
+  assert.equal(at(0, 90), map.bulk!.kelvin, 'the pole is in the hole of the ring, at the bulk temperature');
   for (let longitude = -180; longitude < 180; longitude += 10) {
     let hot = 0;
-    for (let latitude = 40; latitude < 90; latitude += 0.5) if (at(longitude, latitude) !== null) hot++;
+    for (let latitude = 40; latitude < 90; latitude += 0.5) if (at(longitude, latitude) !== map.bulk!.kelvin) hot++;
     assert.ok(hot > 0, `the ring crosses longitude ${longitude}`);
   }
   // "a two-temperature spot in the southern hemisphere", "almost at the observer inclination" (137.5 degrees from the north pole).
@@ -48,8 +52,9 @@ test("PSR J0437-4715's record draws what Choudhury et al. (2024) describe: a rin
   const antipode = { colatitude: Math.PI - primary!.superseding.colatitudeRadians, longitude: primary!.superseding.longitudeDegrees + 180 };
   const s = secondary!.superseding, separation = Math.acos(Math.cos(antipode.colatitude) * Math.cos(s.colatitudeRadians) + Math.sin(antipode.colatitude) * Math.sin(s.colatitudeRadians) * Math.cos((antipode.longitude - s.longitudeDegrees) * Math.PI / 180));
   assert.ok(separation * 180 / Math.PI > 30, `the secondary is ${(separation * 180 / Math.PI).toFixed(1)} degrees from the primary's antipode`);
-  // The three temperatures of the table's ML column, in kelvin.
+  // The three temperatures of the table's ML column, in kelvin, and the bulk surface.
   const temperatures = new Set<number>();
-  for (let latitude = -89.75; latitude < 90; latitude += 0.5) for (let longitude = -179.75; longitude < 180; longitude += 0.5) { const kelvin = at(longitude, latitude); if (kelvin !== null) temperatures.add(Math.round(kelvin)); }
-  assert.deepEqual([...temperatures].sort((a, b) => a - b), [10 ** 5.724, 10 ** 6.075, 10 ** 6.199].map(Math.round));
+  for (let latitude = -89.75; latitude < 90; latitude += 0.5) for (let longitude = -179.75; longitude < 180; longitude += 0.5) { const kelvin = at(longitude, latitude); temperatures.add(Math.round(kelvin!)); }
+  // The fourth is the bulk surface of Qi et al. (2026), Table 1: 2.50 x 10^5 K.
+  assert.deepEqual([...temperatures].sort((a, b) => a - b), [250000, ...[10 ** 5.724, 10 ** 6.075, 10 ** 6.199].map(Math.round)]);
 });

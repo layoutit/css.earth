@@ -79,10 +79,10 @@
         "falseColor": true,
         "legend": {
           "kind": "scale",
-          "title": "Hot-region temperature",
+          "title": "Surface temperature",
           "labels": [
-            "0.5",
-            "1.05",
+            "0.2",
+            "0.9",
             "1.6"
           ],
           "recipe": {
@@ -114,15 +114,15 @@
               ]
             ],
             "labels": [
-              "0.5",
-              "1.05",
+              "0.2",
+              "0.9",
               "1.6"
             ]
           },
           "meta": "million K",
           "sourceUrl": "https://arxiv.org/abs/2407.06789"
         },
-        "notes": "The hot regions of PSR J0437−4715 in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021: 2 regions built from circles, 0.53 million K to 1.58 million K, covering 4.9% of the surface. They are the shapes the fit allows, not an image. The gray grid is surface the fit gives no temperature. The false colour runs from 0.5 to 1.6 million K."
+        "notes": "The hot regions of PSR J0437−4715 in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021: 2 regions built from circles, 0.53 million K to 1.58 million K, covering 4.9% of the surface. They are the shapes the fit allows, not an image. The rest of the surface is drawn at 250,000 K, the temperature Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions for the surface outside the hot regions. The false colour runs from 0.2 to 1.6 million K."
       }
     ]
   },

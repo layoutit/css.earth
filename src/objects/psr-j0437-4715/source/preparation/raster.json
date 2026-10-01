@@ -35,7 +35,7 @@
         "displaySampling": "bilinear",
         "outputLongitudeOrigin": 0,
         "units": "K",
-        "minimum": 500000,
+        "minimum": 200000,
         "maximum": 1600000,
         "colors": [
           "#0d0887",
@@ -45,11 +45,11 @@
           "#f0f921"
         ],
         "labels": [
-          "0.5",
-          "1.05",
+          "0.2",
+          "0.9",
           "1.6"
         ],
-        "description": "Effective temperature of the hot regions in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021. The rest of the surface has no value in the fit.",
+        "description": "Effective temperature of the hot regions in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021. The rest of the surface is at the 250,000 K of Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions.",
         "title": "NICER · published hot-region fit",
         "sourceUrl": "https://arxiv.org/abs/2407.06789"
       }

@@ -15,7 +15,7 @@
       "id": "radius-and-mass",
       "subject": "Radius and mass",
       "status": "included",
-      "finding": "Radius 11.36 km from Choudhury et al. (2024), ApJL 971, L20, Table A.1: equatorial radius 11.36 +0.95/-0.63 km (68% credible interval) from NICER pulse-profile modelling. Mass 1.418 solar masses from Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: pulsar mass from the Shapiro delay. No whole-surface temperature is measured.",
+      "finding": "Radius 11.36 km from Choudhury et al. (2024), ApJL 971, L20, Table A.1: equatorial radius 11.36 +0.95/-0.63 km (68% credible interval) from NICER pulse-profile modelling. Mass 1.418 solar masses from Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: pulsar mass from the Shapiro delay.",
       "evidence": [
         "https://arxiv.org/abs/2407.06789",
         "https://arxiv.org/abs/2407.07132"
@@ -25,9 +25,10 @@
       "id": "hot-regions",
       "subject": "Hot regions",
       "status": "included",
-      "finding": "Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021, transcribed as science/choudhury-2024/hot-regions.json and drawn without refitting: 2 regions, 0.53 million K to 1.58 million K.",
+      "finding": "Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021, transcribed as science/choudhury-2024/hot-regions.json and drawn without refitting: 2 regions, 0.53 million K to 1.58 million K. The surface outside them is at 250,000 K: Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions (https://arxiv.org/abs/2605.05429).",
       "evidence": [
-        "https://arxiv.org/abs/2407.06789"
+        "https://arxiv.org/abs/2407.06789",
+        "https://arxiv.org/abs/2605.05429"
       ]
     },
     {

@@ -73,5 +73,13 @@
         }
       }
     }
-  ]
+  ],
+  "bulk": {
+    "temperatureK": {
+      "value": 250000,
+      "cell": "Qi et al. (2026), Table 1, row T_eff,bulk, column CI 68%: 2.50 +0.18/-0.16 x 10^5 K"
+    },
+    "source": "Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions",
+    "url": "https://arxiv.org/abs/2605.05429"
+  }
 }

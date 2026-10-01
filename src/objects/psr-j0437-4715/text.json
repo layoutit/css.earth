@@ -14,7 +14,7 @@
     ]
   },
   "introduction": {
-    "text": "PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in a ball 23 km wide. NICER's X-ray pulse fit places hot patches on it.",
+    "text": "PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in a ball 23 km wide. Its surface is near 250,000 K, with patches over a million.",
     "sources": [
       {
         "catalogueId": "arxiv-2407-06789",
@@ -29,7 +29,7 @@
     "temperature": {
       "title": "NICER hot regions",
       "detail": "Published fit",
-      "summary": "Hot patches a fit to the X-ray pulse places on the surface. They are fitted shapes, not an image."
+      "summary": "Hot patches from a fit to the X-ray pulse, on a cooler surface measured in ultraviolet light. Fitted shapes, not an image."
     }
   }
 }

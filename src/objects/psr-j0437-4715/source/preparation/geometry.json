@@ -54,7 +54,7 @@
       "axialTiltDegrees": 0,
       "rotationDirection": "prograde",
       "rotationPeriodEarthDays": 36525,
-      "sourceProjection": "the hot-region dataset: the published regions on the reference sphere, the rest marked as no data",
+      "sourceProjection": "the hot-region dataset: the published regions on the reference sphere, the rest at its published temperature",
       "polarPreparation": "the same map on the polar tiles",
       "axialTiltNote": "the rotation record tilts the north pole by the published inclination; the axis's position angle on the sky is a convention, and this profile's tilt is not used for the frame"
     }

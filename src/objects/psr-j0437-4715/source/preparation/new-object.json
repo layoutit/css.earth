@@ -131,12 +131,20 @@
             }
           }
         }
-      ]
+      ],
+      "bulk": {
+        "temperatureK": {
+          "value": 250000,
+          "cell": "Qi et al. (2026), Table 1, row T_eff,bulk, column CI 68%: 2.50 +0.18/-0.16 x 10^5 K"
+        },
+        "source": "Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions",
+        "url": "https://arxiv.org/abs/2605.05429"
+      }
     }
   },
   "text": {
     "card": "The nearest millisecond pulsar: a neutron star 23 km across that turns 174 times a second.",
-    "introduction": "PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in a ball 23 km wide. NICER's X-ray pulse fit places hot patches on it.",
+    "introduction": "PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in a ball 23 km wide. Its surface is near 250,000 K, with patches over a million.",
     "locator": "Abstract and Table A.1"
   },
   "notes": [
