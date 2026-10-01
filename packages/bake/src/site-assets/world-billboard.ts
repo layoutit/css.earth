@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
 import { readInventory, updateInventory } from '@cssearth/objects/node';
 import { writeLossyWebp } from '../raster/index.ts';
-import { WORLD_BILLBOARD_SIZE, worldBillboardFilename } from '../world-context/summary.ts';
+import { WORLD_BILLBOARD_SIZE, worldBillboardFilename } from '../world-context/index.ts';
 
 /** A body's world billboard: its own arrival photograph at `WORLD_BILLBOARD_SIZE` pixels, `/scenes/<id>/<id>-billboard.webp`,
  * recorded in its inventory. The world draws every body but its focus with it (`summary.ts`), so a body with an arrival

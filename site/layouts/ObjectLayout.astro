@@ -2,6 +2,7 @@
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
+import { errorReportBootstrap } from "../error-report.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../startup-requests.mts';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
@@ -73,6 +74,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
     {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl })}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    {!navigation && <script is:inline set:html={errorReportBootstrap}></script>}
     {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}
     {assetPreconnect && <link rel="preconnect" href={assetPreconnect} />}
     {assetPreconnect && <link rel="preconnect" href={assetPreconnect} crossorigin />}

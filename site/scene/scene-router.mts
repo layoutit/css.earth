@@ -79,7 +79,12 @@ export function createSceneRouter({
   loadObject = (id, descriptor, signal) => objectAdapter.load(id, descriptor, undefined, signal),
   documentTarget = document,
   windowTarget = window,
-  reportError = (error) => console.error(error),
+  // A scene the router gives up on is caught here, so the page's own report never saw it: it is also dispatched as an
+  // `error` event (error-report.mts).
+  reportError = (error) => {
+    console.error(error);
+    if (typeof windowTarget.ErrorEvent === 'function') windowTarget.dispatchEvent(new windowTarget.ErrorEvent('error', { error, message: error instanceof Error ? error.message : String(error) }));
+  },
   persistentWorldContext,
 }: RouterOptions) {
   const sharedInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
