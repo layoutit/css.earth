@@ -14,7 +14,7 @@ import assert from 'node:assert/strict';
 import { createInspectionCamera, type InspectionCameraBindings } from '@cssearth/volume-viewer/camera/inspection-camera';
 import { interactionTrackball, projectTrackballDelta, rotationFromAngularVelocity,
   directAngularDegreesPerTrackballRadius, directPitchResponseForZoom } from '@cssearth/engine';
-import type { DensityVolumeFrame } from '@cssearth/bake/volume';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 import { inspectionCameraRenderer } from './inspection-camera-renderer';
 import { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
 import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';

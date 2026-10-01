@@ -26,7 +26,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
-    "@cssearth/bake": "workspace:*"
+    "@cssearth/objects": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.0.1"

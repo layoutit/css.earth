@@ -14,8 +14,8 @@ export default {
     'scene/image-plane': 'src/scene/image-plane.ts',
   },
   format: ['esm'],
-  external: ['@cssearth/bake'],
-  dts: false, // exports resolve to source; declarations would need bake's dist, which builds after this package (bake -> renderer -> volume-viewer)
+  external: ['@cssearth/objects'],
+  dts: false, // Public subpaths resolve to TypeScript source.
   clean: true,
   target: 'es2022',
 };

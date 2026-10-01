@@ -1,5 +1,5 @@
 import { jointPath, jointRecord, readJointControls, readJointParameters, type JointControls, type JointFit } from './model.ts';
-import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/bake/volume';
+import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/objects';
 import { isVariantName } from '../variant-name.ts';
 
 export interface JointPin { path: string }

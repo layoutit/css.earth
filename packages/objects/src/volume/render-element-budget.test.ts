@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, renderElementCount, type RenderElementProfile } from './render-element-budget.ts';
+import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, renderElementCount, type RenderElementProfile } from './render-element-budget.js';
 
 const profile: RenderElementProfile = { schema: 'cssearth-render-element-profile@1', id: 'test-retained-renderer@1',
   maximumElements: 500, elementsPerSlab: 3, elementsPerStar: 1, reservedElements: 47 };

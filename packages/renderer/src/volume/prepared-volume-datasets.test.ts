@@ -13,7 +13,7 @@ import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import { CSS_COMPILER_RENDER_BUDGET } from './compiler-render-budget.js';
-import { createRenderElementBudget } from '@cssearth/bake/volume';
+import { createRenderElementBudget } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 class FakeElement {

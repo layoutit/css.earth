@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { decodeFits } from '@cssearth/fits';
 import { encodeFits } from '@cssearth/fits/node';
-import { type EmissionVector3, analyticEmission, mapSample, prepareSampledField } from '@cssearth/bake/volume';
+import { analyticEmission, mapSample, prepareSampledField } from '@cssearth/bake/volume';
+import { type EmissionVector3 } from '@cssearth/objects';
 import { readSampledRecipe, verifySampledEvidence, type SampledRecipe, type SampleTerm } from '../../../features/sampled-prior/model.ts';
 
 const fixture = {

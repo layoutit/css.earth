@@ -9,7 +9,7 @@ import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { compilerFrame } from './bake.ts';
-import { readCompilerBakeResult } from '@cssearth/bake/volume';
+import { readCompilerBakeResult } from '@cssearth/objects';
 import { assertCompilerDatasetGeometry } from './bank-validation.ts';
 import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from './retained-material-bank.ts';
 

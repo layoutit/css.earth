@@ -2,7 +2,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { Vector3 } from '../volume/index.ts';
+import type { Vector3 } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 import type { SkyRecipe } from './config.ts';
 import { loadSkySource, HALF_LINEAR } from './source.ts';

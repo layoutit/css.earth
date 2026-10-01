@@ -7,7 +7,8 @@ import { bakeMasterVolumeSlices, type MasterVolumeOptions } from './emission.ts'
 import sharp from 'sharp';
 import { recolorCloudSlices } from './material.ts';
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
-import { readVolumeLayerPlan, validateVolumeLayerSlices, type VolumeLayerPlan } from '../../contracts/volume-slices.ts';
+import { validateVolumeLayerSlices } from '../../contracts/volume-slices.ts';
+import { readVolumeLayerPlan, type VolumeLayerPlan } from '@cssearth/objects';
 
 // Temporary checkouts the tests make, removed once the file's tests finish.
 const temporary: string[] = [];

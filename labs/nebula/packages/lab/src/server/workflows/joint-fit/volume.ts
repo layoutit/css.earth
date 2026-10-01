@@ -1,13 +1,12 @@
 /** Offline transport from a bounded analytic emission sampler to one neutral PolyCSS volume. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve } from 'node:path';
-import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { Bounds3, Vector3, JointVolumeResult } from '@cssearth/bake/volume';
+import { type DensityVolumeFrame, type Bounds3, type Vector3, type JointVolumeResult } from '@cssearth/objects';
 import { containedPath, bakeMasterVolumeSlices, type MasterSliceProgress } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 
-export type { JointVolumePin, JointVolumeResult } from '@cssearth/bake/volume';
+export type { JointVolumePin, JointVolumeResult } from '@cssearth/objects';
 export interface JointVolumeProgress {
   phase: 'volume' | 'compile'; completed: number; total: number; message: string;
 }

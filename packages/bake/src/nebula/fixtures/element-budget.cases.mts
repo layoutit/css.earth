@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { type CompilerBakeResult, createRenderElementBudget } from '../../volume/index.js';
+import { type CompilerBakeResult, createRenderElementBudget } from '@cssearth/objects';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import type { PreparedCssVolume, VolumeVector } from '@cssearth/renderer/volume/types.ts';
 import type { PreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';

@@ -87,3 +87,5 @@ Object JSON descriptors and generated assets live outside packages. Mercury and
 Venus share implementations selected by capabilities; packages contain no
 per-planet code or data folders. Concrete CSS/DOM rendering belongs to the
 application renderer. Earth is a future consumer, outside this migration's scope.
+
+Prepared volume scene contracts and their pure validators/helpers live in `src/volume/`, exported by `@cssearth/objects`. Baking and optimization remain in `@cssearth/bake`.

@@ -1,5 +1,5 @@
 /** One owner for every write to the retained bank's texture slots: material toggles, dataset swaps and density cutoffs. */
-import type { CloudDensityFilter } from '@cssearth/bake/volume';
+import type { CloudDensityFilter } from '@cssearth/objects';
 
 export type MaterialMode = 'neutral' | 'textured';
 export const unfilteredCloud = (): CloudDensityFilter => ({ cutoff: 0, softness: .25, showRemoved: false });

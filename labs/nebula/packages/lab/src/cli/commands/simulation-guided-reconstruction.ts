@@ -11,7 +11,8 @@ import {parseSimulationGuidedLevels} from './simulation-guided-levels.ts';
 import {fitSimulationGuidedEmission} from '@cssearth/nebula-reconstruction/methods/inference/simulation-guided';
 import {fitSimulationEnvelope,createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,envelopeChromaSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import {loadSimulationPrior} from './simulation-prior.ts';
-import { compilerSlabMaterial, alphaLimitedSlabMaterial, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/bake/volume';
+import { compilerSlabMaterial, alphaLimitedSlabMaterial } from '@cssearth/bake/volume';
+import { type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/objects';
 import { bakeMasterVolumeSlices, recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 const json=async(path:string,value:unknown)=>{await writeFile(path,JSON.stringify(value,null,2)+'\n');};
 /** Reconstructions are named by what they were made from, like `<subject>-<image>` or `<subject>-<settings>`. */

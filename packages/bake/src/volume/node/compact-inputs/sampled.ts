@@ -2,7 +2,7 @@ import { readCompactPin as pinned } from './io.ts';
 /** Replay retained measured samples and emitter colors without fitting or native images. */
 import { gunzipSync } from 'node:zlib';
 import { readSampledRecipe } from '../../contracts/sampled-recipe.ts';
-import { readCompilerBakeResult, type CompilerPin } from '../../contracts/compiler-bake.ts';
+import { readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
 import { prepareSampledMaterial, type SampledColor } from '../../materials/sampled.ts';
 import { prepareSampledField } from '../../fields/sampled.ts';
 import { gridDiffuse, type DiffuseAtom } from '../../fields/diffuse-atoms.ts';

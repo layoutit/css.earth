@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { type EmissionVector3, type SkyBounds, prepareSampledField, type SpatialField, type SampledEmissionFit } from '@cssearth/bake/volume';
+import { prepareSampledField, type SpatialField, type SampledEmissionFit } from '@cssearth/bake/volume';
+import { type EmissionVector3, type SkyBounds } from '@cssearth/objects';
 import type { CompilerImage } from '../compiler/images.ts';
 import { readSampledRecipe, verifySampledEvidence } from '../../../features/sampled-prior/model.ts';
 import { diffuseAtomEmission, diffuseAtomProjection, diffuseAtoms, fitSampledEmission, gridDiffuse } from '@cssearth/nebula-reconstruction/methods/sampled/emission-fit';
