@@ -2,7 +2,7 @@ import { mountCataloguePoints } from './catalogue-points.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 /** The galaxies beyond the Local Group draw at this share of their dots' own opacity: a backdrop behind the object in view.
  * A presentation choice, set by eye in the app. */
-const BACKGROUND_OPACITY = 0.6;
+const BACKGROUND_OPACITY = 0.7;
 /** A background bank, and the camera distance it begins at: it is fetched there and fades in over the next doubling. */
 export interface BackgroundPointBank { readonly url: string; readonly fromDistanceM?: number }
 
