@@ -1,0 +1,64 @@
+{
+  "id": "ngc-4536-cepheid-67162",
+  "name": "NGC 4536 Cepheid 67162",
+  "system": "NGC 4536 Cepheid 67162 system",
+  "description": "A Cepheid in the galaxy NGC 4536 that pulsates every 24.1 days, found by the Hubble Space Telescope.",
+  "target": "[HMR2016] N4536 67162",
+  "paper": {
+    "url": "https://arxiv.org/abs/1607.08658",
+    "credit": "Hoffmann et al. (2016), ApJ 830, 10"
+  },
+  "radius": {
+    "value": 119.9,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 24.06 d in Hoffmann et al. (2016), ApJ 830, 10, table 5; not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 20
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5030,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 24.06 d in Hoffmann et al. (2016), ApJ 830, 10, table 5; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own temperatures of its Cepheids",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 1802,
+    "source": "SIMBAD's radial velocity of NGC 4536, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract",
+    "uncertainty": 3
+  },
+  "distance": {
+    "value": 15177492,
+    "source": "Riess et al. (2016), ApJ 826, 56, table 5: NGC 4536's Cepheid distance modulus 30.906 +/- 0.053 mag, 10^(mu/5 + 1) pc",
+    "url": "https://arxiv.org/abs/1604.01424",
+    "uncertainty": 370443
+  },
+  "position": {
+    "catalogue": "J/ApJ/830/10/table5",
+    "row": {
+      "Gal": "N4536",
+      "ID": "67162"
+    },
+    "credit": "Hoffmann et al. (2016), ApJ 830, 10, table 5",
+    "url": "https://arxiv.org/abs/1607.08658"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy NGC 4536, 15 million parsecs away, that swells and shrinks every 24.1 days.",
+    "introduction": "The Hubble Space Telescope found it and timed its pulsation at 24.1 days. Its galaxy's distance, 15.2 million parsecs, was measured from Cepheids like it.",
+    "locator": "table 5, Gal N4536, ID 67162: Per; Riess et al. (2016), ApJ 826, 56, table 5, N4536: mu_Ceph"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within NGC 4536 is not measured"
+  ],
+  "order": 4986
+}

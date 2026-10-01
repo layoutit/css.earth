@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-1365-cepheid-64027",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 1365 Cepheid 64027",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 104841990
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ngc-1365-cepheid-64027-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 1365 Cepheid 64027",
+      "classification": "star",
+      "color": "#ffe5cd",
+      "distanceAu": 3765521426652.3,
+      "description": "A Cepheid in the galaxy NGC 1365, 18 million parsecs away, that swells and shrinks every 33.0 days.",
+      "systemName": "NGC 1365 Cepheid 64027 system",
+      "order": 5105,
+      "context": {
+        "order": 5102
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.7095118166219243e+23,
+        3.654674724994802e+23,
+        -3.321771097119292e+23
+      ],
+      "presentationToReference": [
+        0.48099494717594277,
+        -0.3511922784084758,
+        0.8033105528856668,
+        0.6487811071758895,
+        -0.4736991865615799,
+        -0.5955603710981149,
+        -0.5896837591140177,
+        -0.8076342391436615,
+        3.6107716405408034e-17
+      ],
+      "orbitUpReference": [
+        0.3511922784084758,
+        0.4736991865615799,
+        0.8076342391436615
+      ],
+      "metersPerUnit": 338199967.7419355,
+      "bodyRadiusM": 104841990000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

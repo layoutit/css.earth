@@ -158,7 +158,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     if ([...withImagery].some(child => parents[child]?.parent === entry.id)) discovery.hostsImagery = true;
   }
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries),
-    preparedCatalogueModule(entries.map(({ id, distance }, index) => ({ id, distance, discovery: discoveries[index]! })), focuses));
+    preparedCatalogueModule(entries.map(({ id, distance }, index) => ({ descriptor: descriptors.get(id), distance, discovery: discoveries[index]! })), focuses));
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');

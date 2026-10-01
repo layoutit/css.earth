@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-4424-cepheid-2031956",
+  "card": {
+    "text": "A Cepheid in the galaxy NGC 4424, 16 million parsecs away, that swells and shrinks every 45.8 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016)",
+        "checked": "2026-10-01",
+        "locator": "table 5, Gal N4424, ID 2031956: Per; Riess et al. (2016), ApJ 826, 56, table 5, N4424: mu_Ceph"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Hubble Space Telescope found it and timed its pulsation at 45.8 days. Its galaxy's distance, 16.4 million parsecs, was measured from Cepheids like it.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016)",
+        "checked": "2026-10-01",
+        "locator": "table 5, Gal N4424, ID 2031956: Per; Riess et al. (2016), ApJ 826, 56, table 5, N4424: mu_Ceph"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

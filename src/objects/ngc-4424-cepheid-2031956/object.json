@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-4424-cepheid-2031956",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 4424 Cepheid 2031956",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 132739560
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ngc-4424-cepheid-2031956-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 4424 Cepheid 2031956",
+      "classification": "star",
+      "color": "#ffe3c9",
+      "distanceAu": 3391760103383.8,
+      "description": "A Cepheid in the galaxy NGC 4424, 16 million parsecs away, that swells and shrinks every 45.8 days.",
+      "systemName": "NGC 4424 Cepheid 2031956 system",
+      "order": 5053,
+      "context": {
+        "order": 5050
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4.970350676999632e+23,
+        -5.927233067822151e+22,
+        8.30528928268018e+22
+      ],
+      "presentationToReference": [
+        -0.9795722903716811,
+        -0.16253164339955434,
+        -0.11841280686572282,
+        -0.11681576711843235,
+        -0.019382192403109386,
+        0.992964454132262,
+        0.1636832443731216,
+        -0.9865129474626722,
+        -2.6322273264897273e-17
+      ],
+      "orbitUpReference": [
+        0.16253164339955434,
+        0.019382192403109386,
+        0.9865129474626722
+      ],
+      "metersPerUnit": 428192129.0322581,
+      "bodyRadiusM": 132739560000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

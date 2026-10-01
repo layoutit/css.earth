@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-1365-cepheid-91952",
+  "displayName": "NGC 1365 Cepheid 91952",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "103 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2002-02186",
+          "url": "https://arxiv.org/abs/2002.02186",
+          "label": "Groenewegen (2020), A&A 635, A33 (2020)",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "18,255,763 parsecs",
+        "source": {
+          "catalogueId": "arxiv-1604-01424",
+          "url": "https://arxiv.org/abs/1604.01424",
+          "label": "Riess et al. (2016), ApJ 826, 56, table 5: NGC 1365's Cepheid distance modulus 31.307 +/- 0.057 mag, 10^(mu/5 + 1) pc",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ngc-1365-cepheid-91952-dataset-color.webp",
+        "surface": "ngc-1365-cepheid-91952-surface-color@2x.webp",
+        "poles": "ngc-1365-cepheid-91952-poles-color@2x.webp",
+        "source": {
+          "id": "ngc-1365-cepheid-91952-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2002.02186"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,100 K and log g 0.8 (u1 0.598, u2 0.151): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hoffmann et al. (2016), ApJ 830, 10",
+      "href": "https://arxiv.org/abs/1607.08658"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1607.08658",
+      "credit": "Hoffmann et al. (2016), ApJ 830, 10"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ngc-1365-cepheid-91952.json",
+      "credit": "Groenewegen radius; Hoffmann et al. (2016), ApJ 830, 10, table 5 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

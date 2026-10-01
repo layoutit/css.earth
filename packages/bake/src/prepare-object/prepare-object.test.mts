@@ -32,7 +32,7 @@ test('several objects run each tool once: the id-list tools take every id, the a
     const commands = await PREPARATION_STEPS.find(step => step.name === name)!.commands(ids);
     assert.equal(commands.length, 1, name); assert.deepEqual(commands[0]!.slice(-2), ids, name);
   }
-  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'site/build/prepare/prepare-object-json.mts', 'sun']]);
+  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'site/build/prepare/prepare-object-json.mts', 'sun'], ['node', 'site/build/prepare/prepare-catalog.mts']]);
 });
 
 test('every baked body gets its arrival billboard before the world files read the catalogue, from a site that must answer', async () => {

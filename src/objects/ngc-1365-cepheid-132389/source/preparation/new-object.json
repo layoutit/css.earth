@@ -1,0 +1,64 @@
+{
+  "id": "ngc-1365-cepheid-132389",
+  "name": "NGC 1365 Cepheid 132389",
+  "system": "NGC 1365 Cepheid 132389 system",
+  "description": "A Cepheid in the galaxy NGC 1365 that pulsates every 17.0 days, found by the Hubble Space Telescope.",
+  "target": "[HMR2016] N1365 132389",
+  "paper": {
+    "url": "https://arxiv.org/abs/1607.08658",
+    "credit": "Hoffmann et al. (2016), ApJ 830, 10"
+  },
+  "radius": {
+    "value": 93.3,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 16.996 d in Hoffmann et al. (2016), ApJ 830, 10, table 5; not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 15.6
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5140,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 16.996 d in Hoffmann et al. (2016), ApJ 830, 10, table 5; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own temperatures of its Cepheids",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 1522.2390946596668,
+    "source": "SIMBAD's radial velocity of NGC 1365, the Cepheid's galaxy, from 2022ApJS..261....2K; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K/abstract",
+    "uncertainty": 0.0005
+  },
+  "distance": {
+    "value": 18255763,
+    "source": "Riess et al. (2016), ApJ 826, 56, table 5: NGC 1365's Cepheid distance modulus 31.307 +/- 0.057 mag, 10^(mu/5 + 1) pc",
+    "url": "https://arxiv.org/abs/1604.01424",
+    "uncertainty": 479204
+  },
+  "position": {
+    "catalogue": "J/ApJ/830/10/table5",
+    "row": {
+      "Gal": "N1365",
+      "ID": "132389"
+    },
+    "credit": "Hoffmann et al. (2016), ApJ 830, 10, table 5",
+    "url": "https://arxiv.org/abs/1607.08658"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy NGC 1365, 18 million parsecs away, that swells and shrinks every 17.0 days.",
+    "introduction": "The Hubble Space Telescope found it and timed its pulsation at 17.0 days. Its galaxy's distance, 18.3 million parsecs, was measured from Cepheids like it.",
+    "locator": "table 5, Gal N1365, ID 132389: Per; Riess et al. (2016), ApJ 826, 56, table 5, N1365: mu_Ceph"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within NGC 1365 is not measured"
+  ],
+  "order": 5064
+}

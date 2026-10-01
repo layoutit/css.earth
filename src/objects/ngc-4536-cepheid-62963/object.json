@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-4536-cepheid-62963",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 4536 Cepheid 62963",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 141435810
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ngc-4536-cepheid-62963-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 4536 Cepheid 62963",
+      "classification": "star",
+      "color": "#ffe3c8",
+      "distanceAu": 3130582456835.2,
+      "description": "A Cepheid in the galaxy NGC 4536, 15 million parsecs away, that swells and shrinks every 50.0 days.",
+      "systemName": "NGC 4536 Cepheid 62963 system",
+      "order": 5005,
+      "context": {
+        "order": 5002
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4.6272378886100325e+23,
+        -6.9970067636346834e+22,
+        1.795662241933593e+22
+      ],
+      "presentationToReference": [
+        -0.9880325858959832,
+        -0.037910963626108914,
+        -0.14951377209018762,
+        -0.1494038312407217,
+        -0.005732648186529149,
+        0.9887596431668131,
+        0.038341940721495424,
+        -0.9992646774412219,
+        2.3477667488838466e-18
+      ],
+      "orbitUpReference": [
+        0.037910963626108914,
+        0.005732648186529149,
+        0.9992646774412219
+      ],
+      "metersPerUnit": 456244548.38709676,
+      "bodyRadiusM": 141435810000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
