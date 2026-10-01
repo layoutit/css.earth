@@ -64,32 +64,32 @@
     {
       "id": "hubble-ring-frames",
       "subject": "Hubble WFC3 programme 17843 ring frames of 2025-08-29",
-      "status": "included",
-      "finding": "The broad ring response is cross-checked against ifcu37ccq in F225W, ifcu37cdq in F631N and ifcu37ceq in FQ889N, and the prepared dataset textures modify broad ring-band colour and luminance while retaining the UVIS alpha profile, narrow gaps, ringlets and readability floors.",
+      "status": "excluded",
+      "finding": "The ultraviolet, methane and thermal ring images recoloured the UVIS profile with hand-set per-ring gains that were only compared by eye with ifcu37ccq (F225W), ifcu37cdq (F631N) and ifcu37ceq (FQ889N); no ring brightness was measured from those frames, so the images were removed and every dataset shows the one measured ring profile.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L187",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L195"
-      ]
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#rings"
+      ],
+      "revisitWhen": "Ring I/F per ring region is measured from the programme 17843 frames, or a published ring spectrum covers 225 nm and 889 nm."
     },
     {
       "id": "d-g-e-ring-profiles",
       "subject": "Replacement profiles for the D, G and E rings",
       "status": "unresolved",
-      "finding": "Hubble does not resolve a complete replacement profile for the D, G and E rings in these frames, so those details remain qualified visible-light morphology.",
+      "finding": "The UVIS occultation covers 66,900 to 140,612 km; the D ring inside it and the G and E rings outside it are not drawn.",
       "revisitWhen": "A dataset resolves complete D, G and E ring profiles.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L192"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#rings"
       ]
     },
     {
       "id": "thermal-illustration",
       "subject": "Thermal view as an explicit illustration",
-      "status": "included",
-      "finding": "The thermal view is schematic, prepared from visible luminance, cloud-window contrast and authored latitude and longitude patterns; no Cassini detector samples or measured global thermal raster enter it, its colour is illustrative intensity rather than infrared brightness or temperature, and the visible label and legend state that distinction.",
+      "status": "excluded",
+      "finding": "The thermal view was schematic: visible luminance, cloud-window contrast and authored latitude and longitude patterns under an orange palette, with no detector samples. It was removed.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L26",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L173"
-      ]
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#other-views"
+      ],
+      "revisitWhen": "A registered global thermal or brightness-temperature map of Saturn is qualified."
     },
     {
       "id": "vims-pia17468",
@@ -134,20 +134,18 @@
       "id": "pds-ring-boundaries",
       "subject": "NASA PDS Ring-Moon Systems Saturn ring statistics",
       "status": "included",
-      "finding": "The published PDS boundaries constrain the Cassini and Roche divisions, the Encke and Keeler gaps and the F ring, whose 140,224 km core uses the PDS optical-depth range rather than a painted line; the prepared image extends through the F ring's 140,612 km outer boundary and keeps the documented D-ring ringlets at 67,580 and 71,710 km with their existing 105 km footprint.",
+      "finding": "The published PDS boundaries constrain the Cassini and Roche divisions, the Encke and Keeler gaps and the F ring, whose 140,224 km core uses the PDS optical-depth range rather than a painted line; the prepared image extends through the F ring's 140,612 km outer boundary. Nothing is drawn inside the profile's first radius, 66,900 km.",
       "evidence": [
-        "https://pds-rings.seti.org/saturn/saturn_rings_table.html"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#rings"
       ]
     },
     {
       "id": "ring-readability-emphasis",
       "subject": "Prepared opacity and extrema emphasis in the rings",
       "status": "included",
-      "finding": "Across the C-ring interval from 74,500 to 91,975 km preparation remaps source alpha with 1-(1-alpha)^2.25 and a DPR-2 local-extrema pass gives salient one-pixel ringlets and gaps a two-CSS-pixel minimum footprint, applied to light and dark extrema alike; source radii, band widths, shadow sampling and ring-plane geometry are unchanged, and the README calls these prepared opacity emphases rather than physical optical-depth claims, with Keeler still source-limited.",
+      "finding": "Twenty-nine named narrow features (5 dark gaps and 24 bright hairlines, among them the Encke and Keeler gaps and the F-ring core) get a minimum width of 4 texels at density 1 and 6 at density 2; bright hairlines also take an opacity gain of 1.8, or 1.35 at half scale for 21 of them. Source radii and the rest of the profile are unchanged. The C-ring alpha remap described earlier is no longer in the recipe.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L27",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L263",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L274"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#rings"
       ]
     },
     {
@@ -174,11 +172,12 @@
     {
       "id": "openspace-lambert-material",
       "subject": "Lambert illumination parameters adapted from the OpenSpace globe shader",
-      "status": "included",
-      "finding": "The separate material overlays use a Lambert model with 0.05 ambient intensity, Oren-Nayar roughness 0 and a smoothstep terminator, adapted from the MIT OpenSpace globe shader and stated in the geometry recipe, with the neutral albedo multiplier replaced by the prepared warm solar presentation.",
+      "status": "excluded",
+      "finding": "The Lambert parameters adapted from the OpenSpace globe shader were replaced by the OPAL Minnaert laws of the map.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L326"
-      ]
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#other-views"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "mutual-shadows",
@@ -209,11 +208,11 @@
     {
       "id": "moon-catalogue",
       "subject": "JPL satellite catalogue of 293 Saturn moons",
-      "status": "excluded",
-      "finding": "The retained catalogue records the moons listed by JPL on 2026-08-29 with mean elements for 291 records, S/2009 S1's published approximate ring-moonlet orbit and S/2009 S2's orbital radius extracted from MPEC 2026-M19 without committing the circular text; the moons have their own object packages and are not rendered as embedded bodies or a dot field in Saturn's recipe.",
+      "status": "included",
+      "finding": "The retained catalogue records the 293 moons listed by JPL on 2026-08-29, with mean elements for 291, S/2009 S1's published approximate ring-moonlet orbit and S/2009 S2's orbital radius from MPEC 2026-M19 without committing the circular text. Forty-six moons have their own object packages; the 245 others with a Horizons code are drawn as plain dots at their Horizons positions by the saturn-minor-moons package, and the two without an ephemeris are not drawn.",
       "revisitWhen": "The shared runtime gains a contract for rendering a moon system inside a planet scene.",
       "evidence": [
-        "https://ssd.jpl.nasa.gov/sats/elem/"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn-minor-moons/README.md"
       ]
     },
     {

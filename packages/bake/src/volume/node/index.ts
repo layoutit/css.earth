@@ -16,5 +16,6 @@ export * from './slices/material.ts';
 export * from './slices/painted-field.ts';
 export * from './slices/raster.ts';
 export * from './catalogue-banks.ts';
+export * from './body-points.ts';
 export * from './catalogue-groups.ts';
 export * from './catalogue-tones.ts';

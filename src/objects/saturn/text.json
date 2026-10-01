@@ -34,17 +34,12 @@
     "ultraviolet": {
       "title": "OPAL F225W map",
       "detail": "225 nm",
-      "summary": "225 nm observations from August 2025; filled rows and added visible detail are not ultraviolet data."
+      "summary": "225 nm observations from August 2025; filled rows are not ultraviolet data."
     },
     "methane": {
       "title": "OPAL FQ889N map",
       "detail": "889 nm",
-      "summary": "889 nm observations, gap-filled and sharpened with visible light; brightness does not measure methane."
-    },
-    "thermal": {
-      "title": "Thermal-style cloud illustration",
-      "detail": "Schematic",
-      "summary": "Visible cloud patterns recolored to suggest a thermal view; the colors do not measure temperature."
+      "summary": "889 nm observations from August 2025, gap-filled; brightness does not measure methane."
     },
     "visible-2018a": {
       "title": "Hubble 2018-06-06",

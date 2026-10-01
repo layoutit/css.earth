@@ -288,7 +288,8 @@ its validators accept); the renderer never imports the bake.
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
   compiler bake and the published catalogue point banks, with the galaxy groups' placement and the shell selection that
-  keeps them first (`catalogue-groups.ts`). It may import `node:*`, `sharp`, the main volume entry and the
+  keeps them first (`catalogue-groups.ts`). `body-points.ts` builds a bank centred on a body from positions relative to it
+  (a planet's moons without a page); `packages/bake/cli/prepare-body-points.mts <object-directory> <id>` is its command. It may import `node:*`, `sharp`, the main volume entry and the
   renderer's catalogue bank codec (`@cssearth/renderer/prepared-data/catalogue-bank-binary.ts`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only
   topics above may, as a lower layer.
 

@@ -9,10 +9,6 @@
     "body2xWidth": 4096,
     "body2xHeight": 2048,
     "latitudeBandCount": 16,
-    "detailBlurSigma": 3,
-    "detailGain": 3,
-    "minimumDetailScale": 0.88,
-    "maximumDetailScale": 1.12,
     "ringOuterKm": 140612,
     "poleTileSize": 512,
     "poleAtlasWidth": 4096,
@@ -38,7 +34,6 @@
         "hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
         "hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
       ],
-      "detailSourceIndex": 0,
       "sourceKind": "hubble-global-map",
       "palette": [
         [
@@ -57,33 +52,9 @@
           255
         ]
       ],
-      "ringPalette": [
-        [
-          18,
-          14,
-          39
-        ],
-        [
-          101,
-          80,
-          149
-        ],
-        [
-          205,
-          188,
-          235
-        ]
-      ],
-      "ringGain": 0.62,
       "materialGain": 0.72,
-      "ringBands": {
-        "d": 0.35,
-        "c": 0.47,
-        "b": 0.715,
-        "a": 1,
-        "f": 0.9
-      },
-      "operation": "scalar-map"
+      "operation": "scalar-map",
+      "sourceIndex": 0
     },
     {
       "id": "methane",
@@ -95,7 +66,6 @@
         "hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
         "hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
       ],
-      "detailSourceIndex": 0,
       "sourceKind": "hubble-global-map",
       "palette": [
         [
@@ -114,90 +84,9 @@
           235
         ]
       ],
-      "ringPalette": [
-        [
-          18,
-          52,
-          58
-        ],
-        [
-          105,
-          173,
-          173
-        ],
-        [
-          235,
-          255,
-          248
-        ]
-      ],
-      "ringGain": 1.2,
       "materialGain": 0.88,
-      "ringBands": {
-        "d": 0.3,
-        "c": 0.288,
-        "b": 0.917,
-        "a": 0.905,
-        "f": 0.811
-      },
-      "operation": "scalar-map"
-    },
-    {
-      "id": "thermal",
-      "label": "Thermal illustration",
-      "shortLabel": "Model",
-      "filter": "Schematic",
-      "wavelength": "Illustration",
-      "sourceKind": "schematic-morphology-illustration",
-      "sourceFiles": [],
-      "sourceUrls": [
-        "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/",
-        "https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/composite-infrared-spectrometer/"
-      ],
-      "palette": [
-        [
-          5,
-          4,
-          10
-        ],
-        [
-          121,
-          35,
-          21
-        ],
-        [
-          255,
-          190,
-          74
-        ]
-      ],
-      "ringPalette": [
-        [
-          6,
-          4,
-          10
-        ],
-        [
-          92,
-          35,
-          24
-        ],
-        [
-          232,
-          143,
-          65
-        ]
-      ],
-      "ringGain": 0.9,
-      "materialGain": 0.84,
-      "ringBands": {
-        "d": 0.52,
-        "c": 0.88,
-        "b": 0.66,
-        "a": 0.77,
-        "f": 0.9
-      },
-      "operation": "morphology-response"
+      "operation": "scalar-map",
+      "sourceIndex": 0
     }
   ],
   "descriptor": {
@@ -223,24 +112,13 @@
     "provenance": {
       "bodyAuthority": "Hubble OPAL Cycle 32 Saturn global maps",
       "bodySourceUrl": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32",
-      "bodyDetailAuthority": "Hubble OPAL Cycle 32 2025A visible-light map",
-      "ringAuthority": "Hubble WFC3 program 17843, 2025-08-29",
-      "ringProducts": [
-        "ifcu37ccq",
-        "ifcu37cdq",
-        "ifcu37ceq"
-      ],
-      "ringMethod": "broad source-derived spectral response over the prepared Cassini UVIS radial opacity morphology",
-      "fineRingQualification": "D, G, E and unresolved ringlets retain the visible-light morphology because the Hubble frames do not resolve a complete replacement profile",
-      "thermalAuthority": "Illustration inspired by Cassini infrared imagery; not Cassini measurement data",
-      "thermalMethod": "Authored morphology-based illustration; color does not measure infrared brightness or temperature"
+      "bodyDetailAuthority": "Hubble OPAL Cycle 32 2025A visible-light map"
     }
   },
   "controlOrder": [
     "normal",
     "ultraviolet",
-    "methane",
-    "thermal"
+    "methane"
   ],
   "files": {
     "surface": "saturn-surface.jpg",
@@ -251,7 +129,6 @@
     "interiorAtmosphere": "saturn-interior-atmosphere.webp",
     "normalThumbnail": "saturn-dataset-normal.webp"
   },
-  "detailCarrierUrl": "/scenes/saturn/saturn-surface.jpg",
   "scalar": {
     "width": 1800,
     "height": 900,
@@ -267,24 +144,7 @@
     "maximumPercentileSamples": 250000
   },
   "colorExponent": 0.82,
-  "detailMinimumLuminance": 12,
-  "thermal": {
-    "polarExponent": 5,
-    "fineCenter": 0.5,
-    "fineDenominator": 44,
-    "latitudeFrequency": 34,
-    "longitudeFrequency": 3,
-    "longitudeAmplitude": 0.42,
-    "bandAmplitude": 0.035,
-    "baseline": 0.12,
-    "broadGain": 0.46,
-    "fineGain": 0.3,
-    "polarGain": 0.1,
-    "exponent": 0.84
-  },
   "qualifications": {
-    "morphology": "Schematic thermal-style illustration made from visible-light morphology and authored cloud-window/latitude patterns; no measured infrared, temperature or thermal-response map.",
-    "morphologyDetail": "Visible-light luminance and authored spatial patterns; decorative relative intensity, without instrument units or a measurement epoch.",
-    "scalarDetail": "intact rotation A, lossless DPR surfaces, bounded visible-detail pansharpening"
+    "scalarDetail": "intact rotation A, lossless DPR surfaces"
   }
 }

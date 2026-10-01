@@ -15,11 +15,11 @@ import {planetographicRowsToMeshLatitude} from '../../geometry/index.ts';
 import {verifyObservationSources} from '../observed-surfaces/index.ts';
 import {validateMaterialRecipe} from './recipe.ts';
 import {validateRelativePath} from '../giant/index.ts';
-/** Compose source-selected scalar/thermal surfaces and the corresponding material variants. */
+/** Compose source-selected single-band surfaces and the corresponding material variants. */
 export async function prepareSpectralMaterialVariants({sourceDirectory,publicDirectory,stagingDirectory,config: input}: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown}) {
 const config = parse(input, spectralRecipe, 'spectral material recipe');
 validateMaterialRecipe(config, 'cssearth-spectral-material-variants@2');
-if(!Array.isArray(config.datasets)||config.datasets.some(plan=>!['scalar-map','morphology-response'].includes(plan.operation)))throw new TypeError('Unsupported spectral material operation.');
+if(!Array.isArray(config.datasets)||config.datasets.some(plan=>plan.operation!=='scalar-map'))throw new TypeError('Unsupported spectral material operation.');
 validateRelativePath(config.sourceSubdirectory);
 for(const plan of config.datasets)for(const filename of plan.sourceFiles)validateRelativePath(filename);
 // Every dataset names its files; they are the inputs, read from the source subdirectory.
@@ -46,10 +46,6 @@ const bodyHeight = config.parameters.bodyHeight;
 const body2xWidth = config.parameters.body2xWidth;
 const body2xHeight = config.parameters.body2xHeight;
 const latitudeBandCount = config.parameters.latitudeBandCount;
-const detailBlurSigma = config.parameters.detailBlurSigma;
-const detailGain = config.parameters.detailGain;
-const minimumDetailScale = config.parameters.minimumDetailScale;
-const maximumDetailScale = config.parameters.maximumDetailScale;
 const ringOuterKm = config.parameters.ringOuterKm;
 const poleTileSize = config.parameters.poleTileSize;
 const poleAtlasWidth = config.parameters.poleAtlasWidth;
@@ -88,7 +84,6 @@ const normalAssets = Object.freeze({
     },
   ))),
 });
-const highResolutionDetailPromise = prepareHighResolutionDetailCarrier();
 
 const prepared: Awaited<ReturnType<typeof prepareDataset>>[] = [];
 await prepareThumbnail(normalAssets.surface, resolve(publicRoot, config.files.normalThumbnail));
@@ -101,9 +96,7 @@ const descriptor = {...config.descriptor,controls:config.controlOrder.map(id=>{c
 async function prepareDataset(plan: SpectralDataset) {
   const surfacePath = resolve(publicRoot, `${config.namespace}-surface-${plan.id}.webp`);
   const surface2xPath = resolve(publicRoot, `${config.namespace}-surface-${plan.id}@2x.webp`);
-  const preparedSurface = plan.operation === "morphology-response"
-    ? await prepareThermalSurface(plan)
-    : await prepareScalarSurface(plan);
+  const preparedSurface = await prepareScalarSurface(plan);
   const bodyData = preparedSurface.data;
   await Promise.all([
     writeProjectiveSurface(
@@ -124,8 +117,6 @@ async function prepareDataset(plan: SpectralDataset) {
   const polesPath = resolve(publicRoot, `${config.namespace}-poles-${plan.id}.webp`);
   await preparePolarAtlas(body, plan, polesPath);
 
-  const ringPath = resolve(publicRoot, `${config.namespace}-rings-${plan.id}.webp`);
-  const ring2xPath = resolve(publicRoot, `${config.namespace}-rings-${plan.id}@2x.webp`);
 
 
   const materialPaths = Object.freeze(Object.fromEntries(materialModes.map(
@@ -168,8 +159,9 @@ async function prepareDataset(plan: SpectralDataset) {
     surfaceUrl: `${config.publicPrefix}${config.namespace}-surface-${plan.id}.webp`,
     surface2xUrl: `${config.publicPrefix}${config.namespace}-surface-${plan.id}@2x.webp`,
     polesUrl: `${config.publicPrefix}${config.namespace}-poles-${plan.id}.webp`,
-    ringUrl: `${config.publicPrefix}${config.namespace}-rings-${plan.id}.webp`,
-    ring2xUrl: `${config.publicPrefix}${config.namespace}-rings-${plan.id}@2x.webp`,
+    // No ring response is measured in these bands: every dataset shows the one measured ring profile.
+    ringUrl: `${config.publicPrefix}${config.files.rings}`,
+    ring2xUrl: `${config.publicPrefix}${config.files.rings2x}`,
     materialVariant: plan.id,
     materialPreparationFile: `${config.namespace}-orbit-material-${plan.id}.webp`,
     interiorMaterialPreparationFile:
@@ -179,20 +171,9 @@ async function prepareDataset(plan: SpectralDataset) {
     materialGain: plan.materialGain,
     sourceModel: plan.sourceKind,
     falseColor: true,
-    qualification: plan.operation === "scalar-map"
-      ? `${plan.filter} single-band Hubble data shown with a declared false-color palette`
-      : config.qualifications.morphology,
-    detailPreparation: plan.operation === "scalar-map"
-      ? config.qualifications.scalarDetail
-      : config.qualifications.morphologyDetail,
-    detailCarrierUrl: config.detailCarrierUrl,
-    maximumDetailScale: plan.operation === "scalar-map"
-      ? maximumDetailScale
-      : 1,
-    sourceFiles: Object.freeze(plan.operation === "scalar-map"
-      ? [plan.sourceFiles[plan.detailSourceIndex]]
-      : []),
-    sourceUrls: Object.freeze('sourceUrls' in plan ? plan.sourceUrls : []),
+    qualification: `${plan.filter} single-band Hubble data shown with a declared false-color palette`,
+    detailPreparation: config.qualifications.scalarDetail,
+    sourceFiles: Object.freeze([plan.sourceFiles[plan.sourceIndex]]),
   });
 }
 
@@ -217,13 +198,13 @@ async function writeProjectiveSurface(source: RawImage, width: number, height: n
     .toFile(outputPath);
 }
 
-async function prepareScalarSurface(plan: Extract<SpectralDataset,{operation:'scalar-map'}>) {
+async function prepareScalarSurface(plan: SpectralDataset): Promise<RawImage> {
   const maps = await Promise.all(plan.sourceFiles.map(async (filename) =>
     readFitsPrimary(await readFile(resolve(sourceRoot, config.sourceSubdirectory, filename)))));
   if (maps.some(({ width, height }) => width !== config.scalar.width || height !== config.scalar.height)) {
     throw new Error(`${plan.id} Hubble map dimensions changed.`);
   }
-  const detailMap = selectHighResolutionMap(maps, plan.detailSourceIndex);
+  const detailMap = selectHighResolutionMap(maps, plan.sourceIndex);
   maskPreparedRingOcclusion(detailMap);
   fillMissingColumns(detailMap.values, detailMap.coverage, detailMap.width, detailMap.height);
   const [low, high] = finitePercentiles(detailMap.values, ...config.scalar.percentiles);
@@ -235,50 +216,8 @@ async function prepareScalarSurface(plan: Extract<SpectralDataset,{operation:'sc
   // OPAL maps index rows by planetographic latitude; the mesh texture rows follow parametric latitude.
   const meshSurface = planetographicRowsToMeshLatitude(spectralSurface.data, spectralSurface.info.width,
     spectralSurface.info.height, spectralSurface.info.channels, surfaceAxisRatio);
-  const highResolutionDetail = await highResolutionDetailPromise;
-  return Object.freeze({
-    data: applyHighResolutionDetail(meshSurface, highResolutionDetail),
-    info: spectralSurface.info,
-  });
+  return Object.freeze({ data: meshSurface, info: spectralSurface.info });
 }
-
-async function prepareThermalSurface(plan: SpectralDataset): Promise<RawImage> {
-  const detail = await highResolutionDetailPromise;
-  const { width, height } = detail.source.info;
-  const output = Buffer.alloc(width * height * 4);
-  for (let row = 0; row < height; row += 1) {
-    const latitude = (0.5 - (row + 0.5) / height) * Math.PI;
-    const polarEmission = Math.pow(Math.abs(Math.sin(latitude)), config.thermal.polarExponent);
-    for (let column = 0; column < width; column += 1) {
-      const offset = (row * width + column) * 4;
-      const sourceLuminance = luminance(detail.source.data, offset);
-      const localLuminance = luminance(detail.blurred, offset);
-      const broadCloudWindow = 1 - localLuminance / 255;
-      const fineCloudWindow = clamp01(
-        config.thermal.fineCenter + (localLuminance - sourceLuminance) / config.thermal.fineDenominator,
-      );
-      const longitude = (column + 0.5) / width * Math.PI * 2;
-      const bandStructure = Math.sin(
-        latitude * config.thermal.latitudeFrequency + Math.sin(longitude * config.thermal.longitudeFrequency) * config.thermal.longitudeAmplitude,
-      ) * config.thermal.bandAmplitude;
-      const intensity = clamp01(
-        config.thermal.baseline + broadCloudWindow * config.thermal.broadGain + fineCloudWindow * config.thermal.fineGain +
-        polarEmission * config.thermal.polarGain + bandStructure,
-      );
-      const color = samplePalette(plan.palette, Math.pow(intensity, config.thermal.exponent));
-      output[offset] = color[0];
-      output[offset + 1] = color[1];
-      output[offset + 2] = color[2];
-      output[offset + 3] = detail.source.data[offset + 3];
-    }
-  }
-  return Object.freeze({
-    data: output,
-    info: Object.freeze({ width, height, channels: 4 }),
-  });
-}
-
-
 
 function selectHighResolutionMap(maps: ReturnType<typeof readFitsPrimary>[], sourceIndex: number) {
   const source = maps[sourceIndex];
@@ -290,42 +229,6 @@ function selectHighResolutionMap(maps: ReturnType<typeof readFitsPrimary>[], sou
     if (Number.isFinite(value) && value > config.scalar.minimumValue) coverage[index] = 1;
   }
   return { width: source.width, height: source.height, values, coverage };
-}
-
-async function prepareHighResolutionDetailCarrier() {
-  const source = await sharp(normalAssets.surface).ensureAlpha().raw()
-    .toBuffer({ resolveWithObject: true });
-  if (source.info.width !== bodyWidth || source.info.height !== bodyHeight) {
-    throw new Error("Observed detail-carrier dimensions changed.");
-  }
-  const blurred = await sharp(normalAssets.surface).blur(detailBlurSigma)
-    .ensureAlpha().raw().toBuffer();
-  return Object.freeze({ source, blurred });
-}
-
-function applyHighResolutionDetail(spectral: Buffer, detail: Awaited<ReturnType<typeof prepareHighResolutionDetailCarrier>>) {
-  const output = Buffer.from(spectral);
-  for (let offset = 0; offset < output.length; offset += 4) {
-    const detailLuminance = luminance(detail.source.data, offset);
-    const localLuminance = luminance(detail.blurred, offset);
-    const scale = Math.max(minimumDetailScale, Math.min(
-      maximumDetailScale,
-      1 + (detailLuminance - localLuminance) /
-        Math.max(config.detailMinimumLuminance, localLuminance) * detailGain,
-    ));
-    for (let channel = 0; channel < 3; channel += 1) {
-      output[offset + channel] = Math.round(Math.max(
-        0,
-        Math.min(255, output[offset + channel] * scale),
-      ));
-    }
-  }
-  return output;
-}
-
-function luminance(data: Uint8Array, offset: number) {
-  return data[offset] * 0.2126 + data[offset + 1] * 0.7152 +
-    data[offset + 2] * 0.0722;
 }
 
 function maskPreparedRingOcclusion(map: ScalarMap) {

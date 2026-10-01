@@ -15,8 +15,8 @@ colour is recorded in `source/photometry/`, and the table is cited, not
 redistributed.
 
 The ultraviolet and methane observation inputs are Hubble OPAL products from
-NASA, ESA, and the OPAL team. The thermal interpretation and atmospheric
-charts use declared Cassini and NASA Planetary Spectrum Generator authorities.
+NASA, ESA, and the OPAL team. The atmospheric charts are NASA Planetary
+Spectrum Generator models.
 The interior section textures are project-authored schematic rasters derived
 from cited measurements and terminology; no pixels from the NASA/JPL interior
 illustration are redistributed.

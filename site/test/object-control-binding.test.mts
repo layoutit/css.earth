@@ -154,8 +154,8 @@ test("pending controls project desired values while pressed datasets remain comm
 });
 test("the same declared dataset controls can project two pressed datasets at once", () => {
   const h = harness(saturnControls); h.ready();
-  h.setState({ ...h.state(), plan: { required: [], prewarm: [], materials: {}, pressedDatasets: ["methane", "thermal"] } });
-  assert.deepEqual(h.datasetInputs.filter(input => input.attributes["aria-pressed"] === "true").map(input => input.value), ["methane", "thermal"]);
+  h.setState({ ...h.state(), plan: { required: [], prewarm: [], materials: {}, pressedDatasets: ["ultraviolet", "methane"] } });
+  assert.deepEqual(h.datasetInputs.filter(input => input.attributes["aria-pressed"] === "true").map(input => input.value), ["ultraviolet", "methane"]);
   h.binding.destroy();
 });
 test("invalid range events restore the selected rate, and a late failure cannot update a disposed binding", async () => {
