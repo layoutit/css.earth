@@ -13,6 +13,7 @@ import { viewSunDirectionToPhysicalLightDirection } from '../solar-system/direct
 import { initialObjectSelection } from './object-contract.js';
 import { resolvePreparedPresentation } from '../rendering/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';
+import { loadPreparedDataset } from '../loader.js';
 import { preparePresentationTree, type PreparedTreeLease } from '../rendering/prepared-tree.js';
 import type { CameraViewport } from '../navigation/camera-viewport.js';
 import { selectPreparedResponsiveZoom } from '../navigation/camera-layout.js';
@@ -98,12 +99,15 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       // A server-rendered scene is already prepared DOM; attachment adopts it.
       const construction = ownerDocument && !selectionStage?.dataset.preparedObject ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
       const destroy = () => { resources.destroy(); tree?.destroy(); };
+      const selection = selectionStage ? initialStageSelection(definition.controls, selectionStage).selection : initialObjectSelection(definition.controls);
       let demand: ReturnType<typeof createObjectViewDemand> | null = null;
       const prepareView = (read: () => ObjectPreparationView) => {
-        demand ??= createObjectViewDemand(definition, frame, selectionStage ? initialStageSelection(definition.controls, selectionStage).selection : undefined);
+        demand ??= createObjectViewDemand(definition, frame, selection);
         return resources.prepareDemand(() => demand!(read()));
       };
       try {
+        // A view of a dataset whose tables travel apart resolves once they are adopted (dataset-tables.ts).
+        await abortable(loadPreparedDataset(definition, selection.datasetId), signal);
         // The incoming camera owns demand; the default close-up startup bank must not decode first.
         await Promise.all([prepareView(getView), construction]);
         return Object.freeze({ frame, definition, resources, tree, prepareView, destroy,
