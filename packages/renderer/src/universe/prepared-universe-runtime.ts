@@ -7,7 +7,8 @@ import { opacityClockFor } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scale.js';
 import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
-import { parsePreparedWorldContextPlan } from '../prepared-data/world-context.js';
+import { parsePreparedWorldContextPlan, type PreparedWorldContext } from '../prepared-data/world-context.js';
+import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
@@ -40,7 +41,12 @@ const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
 
 export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
-  const plan = parsePreparedWorldContextPlan(context), payload = validatePreparedCssVolume(volume);
+  let plan = parsePreparedWorldContextPlan(context);
+  const payload = validatePreparedCssVolume(volume);
+  // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
+  const planners = new Set<ReturnType<typeof createWorldContextPlannerClient>>();
+  const layers = new Set<ReturnType<typeof mountPreparedWorldContext>>();
+  const spriteTable: Record<string, SpriteWithUrl> = { ...sprites };
   if (volumeDatasetBanks.length && !datasetBillboards) throw new TypeError('Volume dataset banks require their prepared billboards.');
   const datasetFacts = volumeDatasetBanks.map(bank => {
     const facts = datasetBillboards!.plan.banks.get(bank.id);
@@ -103,7 +109,23 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     .map(entry => entry.url);
   const galaxyPrefetchDistanceM = (plan.volume.opacityProfile?.fadeStartDistanceM ?? plan.volume.fadeStartDistanceM) * GALAXY_PREFETCH_RATIO;
   return Object.freeze({ assets,
-    createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities, plannerSource, annotationLandmarks),
+    createFramePlanner: () => {
+      const client = createWorldContextPlannerClient(plan, undefined, annotationPriorities, plannerSource, annotationLandmarks);
+      planners.add(client);
+      return { ...client, destroy() { planners.delete(client); client.destroy(); } };
+    },
+    /** Draw `next`, an extension of this universe's plan with other systems' bodies (`extendWorldContext`), with their
+     * billboards: mounted layers add the bodies after their own, and planners plan them from the first view that holds them. */
+    addSystems(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>>) {
+      const validated = parsePreparedWorldContextPlan(next);
+      if (validated === plan) return;
+      if (validated.focus.id !== plan.focus.id || plan.bodies.some((body, index) => validated.bodies[index] !== body)) {
+        throw new TypeError('A universe only adds bodies after the ones its plan holds.');
+      }
+      plan = validated; Object.assign(spriteTable, nextSprites);
+      for (const layer of layers) layer.addBodies(plan, nextSprites);
+      for (const planner of planners) planner.extend(plan);
+    },
     mount(stage: HTMLElement, { onSelectGalaxy, requestPublication, presentationHost = stage }: {
       onSelectGalaxy?: (object: PreparedCatalogObject) => void; requestPublication?: () => boolean;
       /** Stationary world presentation, outside the selected detail's CSS scope. */
@@ -127,7 +149,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // The stage's depth band starts above zero: the background at 1, every depth-sorted body, the selected detail
         // and the annotations above it. A composited child with a negative z-index made WebKit split
         // the stage into a background and a foreground layer, each backed at the whole stage (15.8 MB at 3x together).
-        const depthBase = plan.bodies.length + 3;
+        // Counted over the whole world, so bodies another system adds later stack under the same base.
+        const depthBase = (plan.worldBodyCount ?? plan.bodies.length) + 3;
         // Set only the depth owner: an inherited custom property here propagates into the mounted detail tree.
         const previousDepth = stage.style.zIndex;
         stage.style.zIndex = String(depthBase);
@@ -190,7 +213,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, annotationPriorities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
+        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites: spriteTable, requestPublication, annotationOpacities, annotationPriorities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
+        layers.add(spatial);
+        lifetime.onDispose(() => { layers.delete(spatial); });
         // The selected body's own label is the close-up's; overviews label every body.
         const publishSuppressedLabels = () => spatial.setBodyVisibility({
           labelSuppressed: [...(!overview ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],

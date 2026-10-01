@@ -23,7 +23,7 @@ export interface PlanetarySystem {
 }
 /** The Solar System's star: the prepared world context's focus. */
 export const SOLAR_SYSTEM_ID = context.focus.id;
-type Plan = Pick<PreparedWorldContext, 'focus' | 'bodies' | 'orbitCenters' | 'system'>;
+type Plan = Pick<PreparedWorldContext, 'focus' | 'bodies' | 'orbitCenters' | 'system'> & Partial<Pick<PreparedWorldContext, 'deferred'>>;
 /** How many times its opening distance a system overview lasts before its orbits are gone: two doublings. */
 const SYSTEM_OVERVIEW_SPAN = 4;
 
@@ -33,6 +33,8 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
   candidates: readonly PlanetarySystemMembers[] = plan === context ? PREPARED_WORLD_PRESENTATION.planetarySystems : planetarySystemMembers(plan)): readonly PlanetarySystem[] {
   const registry = new Map(objects.map(object => [object.id, object]));
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
+  // A member whose system the page has not read is listed by the summary instead (site/world-context-plan.mts).
+  const listed = new Set(('deferred' in plan ? plan.deferred ?? [] : []).map(body => body.id));
   // A candidate is a system when the registry holds its star; a registry without it (a partial fixture) has no system for it.
   const hosts = candidates.filter(candidate => ['star', 'black-hole'].includes(registry.get(candidate.id)?.classification ?? ''));
   const solarRadiusM = radii.get(plan.focus.id);
@@ -40,9 +42,9 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
   return Object.freeze(hosts.map(({ id, memberIds }) => {
     const host = points.get(id), star = registry.get(id), radiusM = radii.get(id);
     if (!host) throw new TypeError(`site/prepared-world-presentation.json planetarySystems names ${id}, which the world context does not place; run pnpm prepare:world-context.`);
-    if (!star || !radiusM) throw new TypeError(`Planetary system ${id} requires a registered star and its prepared framing.`);
+    if (!star || !radiusM) throw new TypeError(`Planetary system ${id} requires a registered star and its prepared framing (site/prepared-world-presentation.json systemFramingRadii); run pnpm prepare:world-presentation.`);
     for (const memberId of memberIds) {
-      if (!points.has(memberId)) throw new TypeError(`site/prepared-world-presentation.json planetarySystems ${id} lists ${memberId}, which the world context does not place; run pnpm prepare:world-context.`);
+      if (!points.has(memberId) && !listed.has(memberId)) throw new TypeError(`site/prepared-world-presentation.json planetarySystems ${id} lists ${memberId}, which the world context does not place; run pnpm prepare:world-context.`);
       const member = registry.get(memberId);
       if (member && member.systemName !== star.systemName) throw new TypeError(`${memberId} orbits ${star.name} but names its system ${member.systemName}, not ${star.systemName}.`);
     }

@@ -12,6 +12,7 @@ These wait:
 - the galaxies beyond and every other catalogue point bank
 - the celestial sky cube's faces (`milky-way/prepared/sky/*.webp`)
 - the galaxy's face-on backing image
+- the other systems' bodies, in four batches ([world context by system](world-context-by-system.md))
 
 What the first view needs does not wait:
 
