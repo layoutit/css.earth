@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "2.089 Mpc (−56,940 / +58,530 pc)",
+        "value": "2.089 Mpc (\u221256,940 / +58,530 pc)",
         "source": {
           "catalogueId": "publication-tully2009aj-138-323t",
           "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 13.72°, Dec -37.68°",
+        "value": "RA 13.72\u00b0, Dec -37.68\u00b0",
         "source": {
           "catalogueId": "lvdb-v1-1-1",
           "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
@@ -55,7 +55,24 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "ngc-300-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-300-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-300-layers-optical",
+          "path": "../../ngc-300-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1037a/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

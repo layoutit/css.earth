@@ -29,7 +29,16 @@
     "optical": {
       "title": "Spiral galaxy NGC 300",
       "detail": "7603 × 7603 px",
-      "summary": "Visible-light image on an approximate depth model; individual depths are not measured."
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1037a",
+          "url": "https://www.eso.org/public/images/eso1037a/",
+          "label": "Spiral galaxy NGC 300; ESO",
+          "checked": "2026-10-01",
+          "locator": "Spiral galaxy NGC 300"
+        }
+      ]
     }
   }
 }

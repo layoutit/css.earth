@@ -1,42 +1,52 @@
 {
   "schema": "cssearth-object@2",
   "id": "ngc-300",
-  "type": "image-layer-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
-      "referenceFrame": "sun-icrf",
-      "epochJdTt": 2461286.5,
-      "originM": [
-        4.956364378480618e+22,
-        1.2103318140908282e+22,
-        -3.941065120885946e+22
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 300",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 290053692660188500
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
       ],
-      "localToReferenceXyzw": [
-        0.5543162219670787,
-        0.7059671578625875,
-        0.3467329400754733,
-        0.2722501907257057
-      ],
-      "metersPerUnit": 30856775814913670000,
-      "boundsUnits": {
-        "min": [
-          -8.902334352164612,
-          -7.014792587616671,
-          -10.154972684155837
-        ],
-        "max": [
-          8.95685837380931,
-          7.084676922939968,
-          10.270064401717264
-        ]
+      "metadata": {
+        "url": "prepared/page.json"
       }
     },
-    "preparation": {
-      "source": "source/recipe.json"
-    },
-    "cataloguePoints": [
-      "dots"
-    ],
     "catalog": {
       "name": "NGC 300",
       "systemName": "Galaxy catalogue",
@@ -71,24 +81,12 @@
         -0.3977771559319137,
         0.9174820620691818
       ],
-      "metersPerUnit": 935657073097382300,
-      "bodyRadiusM": 290053692660188500000
-    },
-    "page": {
-      "stylesheets": [
-        "src/renderers/css/styles/body-surfaces.css"
-      ],
-      "metadata": {
-        "url": "prepared/page.json"
-      }
-    },
-    "scene": {
-      "format": "cssearth-css-object@5",
-      "url": "prepared/object.json"
+      "metersPerUnit": 935657073097382100,
+      "bodyRadiusM": 290053692660188480000
     }
   },
   "prepared": {
-    "format": "cssearth-image-layer-bank@1",
-    "url": "prepared/image-layers.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }
