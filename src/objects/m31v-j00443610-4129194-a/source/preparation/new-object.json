@@ -46,7 +46,7 @@
   },
   "distance": {
     "value": 769731,
-    "source": "Placed in M31 as the app draws it, where the star's sight line crosses the disc's midplane: 769,731 pc (src/objects/m31/source/recipe.json: centre 776,247 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 74 deg, line of nodes 37.7 deg). The pair's own measured distance: Distance 724 +/- 37 kpc, (m-M)0 = 24.30 +/- 0.11 mag, from the pair's own radii, temperatures and brightness, Vilardell et al. (2010), A&A 509, A70, Table 3; it is told in the text, and the star is drawn in the galaxy",
+    "source": "Placed in M31 as the app draws it, where the star's sight line crosses the disc's midplane: 769,731 pc (src/objects/m31-layers/source/recipe.json: centre 776,247 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 74 deg, line of nodes 37.7 deg). The pair's own measured distance: Distance 724 +/- 37 kpc, (m-M)0 = 24.30 +/- 0.11 mag, from the pair's own radii, temperatures and brightness, Vilardell et al. (2010), A&A 509, A70, Table 3; it is told in the text, and the star is drawn in the galaxy",
     "url": "https://doi.org/10.33232/001c.144859"
   },
   "planets": [],
