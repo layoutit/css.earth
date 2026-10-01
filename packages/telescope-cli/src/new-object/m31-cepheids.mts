@@ -42,7 +42,7 @@ export interface GalaxyCepheid { readonly name: string; readonly target: string;
 const LVDB = { credit: 'the Local Volume Database v1.1.1 (Pace 2025)', url: 'https://doi.org/10.33232/001c.144859' };
 /** The disc the app draws `galaxy` on, from its package's recipe: the same construction its layers and catalogue dots use. */
 export async function galaxyDisc(root: string, galaxy: CepheidGalaxy) {
-  const recipe = JSON.parse(await readFile(resolve(root, 'src/objects', galaxy.objectId, 'source/recipe.json'), 'utf8')) as Parameters<typeof imageLayerDisc>[0];
+  const recipe = JSON.parse(await readFile(resolve(root, 'src/objects', `${galaxy.objectId}-layers`, 'source/recipe.json'), 'utf8')) as Parameters<typeof imageLayerDisc>[0];
   return { disc: imageLayerDisc(recipe), recipe };
 }
 /** A star of a galaxy is placed in the galaxy as it is drawn: where its sight line crosses the disc's midplane, as the galaxy's
@@ -52,7 +52,7 @@ export async function galaxyDisc(root: string, galaxy: CepheidGalaxy) {
 export function discPlacement(galaxy: CepheidGalaxy, placed: Awaited<ReturnType<typeof galaxyDisc>>, raDeg: number, decDeg: number, measured: string) {
   const parsecs = Math.round(imageLayerDiscDistanceKpc(placed.disc, raDeg, decDeg) * 1000), { target, geometry } = placed.recipe;
   return { value: parsecs, url: LVDB.url,
-    source: `Placed in ${galaxy.name} as the app draws it, where the star's sight line crosses the disc's midplane: ${parsecs.toLocaleString('en-US')} pc (src/objects/${galaxy.objectId}/source/recipe.json: centre ${Math.round(target.distancePc).toLocaleString('en-US')} pc from ${LVDB.credit}, inclination ${geometry.inclinationDeg} deg, line of nodes ${geometry.lineOfNodesPaDeg} deg). ${measured}` };
+    source: `Placed in ${galaxy.name} as the app draws it, where the star's sight line crosses the disc's midplane: ${parsecs.toLocaleString('en-US')} pc (src/objects/${galaxy.objectId}-layers/source/recipe.json: centre ${Math.round(target.distancePc).toLocaleString('en-US')} pc from ${LVDB.credit}, inclination ${geometry.inclinationDeg} deg, line of nodes ${geometry.lineOfNodesPaDeg} deg). ${measured}` };
 }
 
 /** One Cepheid's draft in `galaxy`: `name` as a reader meets it, `found` the sentence of who measured it. */
