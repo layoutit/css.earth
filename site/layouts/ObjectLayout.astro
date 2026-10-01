@@ -1,7 +1,7 @@
 ---
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
-import { googleAnalyticsBootstrap } from "../google-analytics.mts";
+import { webAnalyticsBootstrap } from "../web-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
@@ -100,7 +100,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
       import '../packaged-object-runtime.mts';
       import '../scene/scene-router.mts';
     </script>}
-    {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
+    {!navigation && <script is:inline set:html={webAnalyticsBootstrap}></script>}
     <slot name="object-head" />
     {tabStyles.map(({ key, css }) => <style is:inline data-object-style={key} set:html={css} />)}
     {!navigation && <noscript><style is:inline>.startup-loading { display: none; }</style></noscript>}
