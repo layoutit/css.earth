@@ -1,5 +1,5 @@
 /** Evaluate and grid accepted finite 3D atoms; no fitting or image inference. */
-import type { EmissionVector3 } from '../contracts/emission.ts';
+import type { EmissionVector3 } from '@cssearth/objects';
 import type { Cancellation } from '../contracts/cancellation.ts';
 import type { PreparedSampledField } from './sampled.ts';
 

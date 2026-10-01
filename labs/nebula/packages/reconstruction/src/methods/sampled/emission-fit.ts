@@ -1,5 +1,8 @@
-import { diffuseAtomEmission, diffuseAtomProjection, gridDiffuse, type DiffuseAtom, type EmissionVector3, type SkyBounds, type MaterialImage as CompilerImage, type ComponentWeights, type PreparedSampledField, type SpatialField, type SampledEmissionFit } from '@cssearth/bake/volume';
+import { diffuseAtomEmission, diffuseAtomProjection, gridDiffuse, type DiffuseAtom, type MaterialImage as CompilerImage, type PreparedSampledField, type SpatialField } from '@cssearth/bake/volume';
+import { type ComponentWeights, type SampledEmissionFit } from '@cssearth/objects';
+import { type EmissionVector3, type SkyBounds } from '@cssearth/objects';
 export { diffuseAtomEmission, diffuseAtomProjection, gridDiffuse, type DiffuseAtom } from '@cssearth/bake/volume';
+
 /** Offline nonnegative image fit. Spatial atoms and measured XYZ are never optimized. */
 import { finiteDetailAtoms } from './emission-detail.ts';
 

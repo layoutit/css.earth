@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { compilerPreparedSlices } from './compiler-frame.ts';
-import { validateVolumeLayerSlices, type VolumeLayerPlan, type VolumeSlices, type VolumeSliceQuad } from '../contracts/volume-slices.ts';
-import type { Vector3 } from '../contracts/volume-recipe.ts';
+import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
+import { type VolumeLayerPlan, type Vector3 } from '@cssearth/objects';
 
 function sourceSlices(): VolumeSlices {
   const boundsUnits = { min: [-2, -3, -5] as Vector3, max: [2, 5, 11] as Vector3 };

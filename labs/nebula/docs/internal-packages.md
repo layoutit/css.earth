@@ -1,15 +1,15 @@
 # Internal packages and validation
 
-The lab uses three private pnpm workspace packages: `lab` and `reconstruction` under `labs/nebula/packages/`, and [`volume-viewer`](../../../packages/volume-viewer/README.md) under `packages/`. They use source TypeScript exports and are not published. The volume contracts and the deterministic volume bake they share are the `@cssearth/bake/volume` and `@cssearth/bake/volume/node` entries of [`packages/bake`](../../../packages/bake/README.md), the repository's build-time preparation package; until 2026-09 they were the lab's `volume-core` and `volume-bake` packages. Recipes, historical receipts and scientific distinctions remain source-owned; moving code does not qualify a new physical model or visual result.
+The lab uses three private pnpm workspace packages: `lab` and `reconstruction` under `labs/nebula/packages/`, and [`volume-viewer`](../../../packages/volume-viewer/README.md) under `packages/`. They use source TypeScript exports and are not published. Prepared-format contracts live in `@cssearth/objects`. Shared field operations and the deterministic volume bake are the `@cssearth/bake/volume` and `@cssearth/bake/volume/node` entries of [`packages/bake`](../../../packages/bake/README.md), the repository's build-time preparation package; until 2026-09 they were the lab's `volume-core` and `volume-bake` packages. Recipes, historical receipts and scientific distinctions remain source-owned; moving code does not qualify a new physical model or visual result.
 
 ## Ownership
 
 ```text
 lab
-├── reconstruction ── @cssearth/bake/volume
-├── volume-viewer ─── @cssearth/bake/volume
+├── reconstruction ── @cssearth/bake/volume + @cssearth/objects
+├── volume-viewer ─── @cssearth/objects
 ├── @cssearth/bake/volume/node ── @cssearth/bake/volume
-└── @cssearth/bake/volume
+└── @cssearth/bake/volume ── @cssearth/objects
 ```
 
 Each branch means an allowed import. Reconstruction, baking and viewing do not import one another: only the lab imports the Node-only `@cssearth/bake/volume/node`. The lab coordinates them through explicit package APIs.
@@ -17,7 +17,8 @@ Each branch means an allowed import. Reconstruction, baking and viewing do not i
 | Package | Responsibility |
 | --- | --- |
 | `@cssearth/nebula-lab` | One React application tree, pages and control portals; saved sessions; jobs, routes, workers, research commands and host adapters |
-| `@cssearth/bake/volume` | Validated contracts, units/frames, coordinates, fields, sampling and material operations without filesystem or browser dependencies |
+| `@cssearth/objects` | Prepared-format contracts, recipes, slices and pure validators |
+| `@cssearth/bake/volume` | Implementation contracts, units/frames, coordinates, fields, sampling and material operations without filesystem or browser dependencies |
 | `@cssearth/bake/volume/node` | Replay accepted compact inputs; deterministically sample, encode and verify prepared images through explicit host backends |
 | `@cssearth/nebula-reconstruction` | Configured acquisition, registration, separation, image evidence and scientific fitting |
 | `@cssearth/volume-viewer` | Retained scene lifecycle, camera and inspection through an injected renderer; prepared assets only |

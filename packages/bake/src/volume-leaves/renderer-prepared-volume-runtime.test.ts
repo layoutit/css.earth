@@ -4,9 +4,9 @@ import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { bakeSlab } from '@cssearth/bake/volume/node';
-import type { VolumeRecipe } from '@cssearth/bake/volume';
-import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
-import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from './types.js';
+import type { VolumeRecipe } from '@cssearth/objects';
+import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
+import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from '@cssearth/renderer/volume/types.ts';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 const AXES = ['x', 'y', 'z'] as const;
@@ -89,7 +89,7 @@ test('optical copies reuse canonical textures and transforms inside isolated unf
     }
   }
   assert.equal(resolver.mock.callCount(), 9);
-  const css = readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../../../renderer/src/styles/volume.css', import.meta.url), 'utf8');
   assert.match(css, /\.css-volume-projection\s*\{[^}]*background:\s*#000[^}]*transform-style:\s*flat/su);
   assert.match(css, /\.css-volume-camera,\s*\.css-volume-scene,\s*\.css-volume-mesh\s*\{[^}]*transform-style:\s*preserve-3d/su);
 });

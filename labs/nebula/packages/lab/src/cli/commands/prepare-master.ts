@@ -7,9 +7,10 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 import { extractExtendedSource, type ExtractionOptions, type NativeExtractionReceipt } from '@cssearth/nebula-reconstruction/star-removal/extraction';
 import { createPhotoMasterEmissionSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/photo-master';
-import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type VolumeSlices } from '@cssearth/bake/volume/node';
+import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
+import { type VolumeSlices } from '@cssearth/objects';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
-import type { VolumeRecipe } from '@cssearth/bake/volume';
+import type { VolumeRecipe } from '@cssearth/objects';
 
 type Vec3 = [number, number, number];
 interface MasterExperiment {

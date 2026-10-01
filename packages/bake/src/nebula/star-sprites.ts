@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { preparePointAtlas, parseStarsRecipe } from '../stars/index.ts';
 import { containedPath } from '../volume/node/index.ts';
-import type { CompilerStarSprites, PreparedCompilerStar } from '../volume/index.ts';
+import type { CompilerStarSprites, PreparedCompilerStar } from '@cssearth/objects';
 
 /** The real site's prepared compact core/halo profile; never rebuilt in the viewer. */
 export const COMPILER_STAR_PROFILE_PATH = 'src/objects/stellar-neighbourhood/source/stars.json';

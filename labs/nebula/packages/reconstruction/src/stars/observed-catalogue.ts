@@ -1,5 +1,7 @@
 export type CatalogueColor=(temperature:number,colorIndex:number)=>readonly [number,number,number];
-import type { CompilerStarInput, CompilerStarMaterial, EmissionFieldModel } from '@cssearth/bake/volume';
+import type { EmissionFieldModel } from '@cssearth/bake/volume';
+import type { CompilerStarInput } from '@cssearth/objects';
+import type { CompilerStarMaterial } from '@cssearth/objects';
 import { createCompilerStarDepthSampler } from './compiler.ts';
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);

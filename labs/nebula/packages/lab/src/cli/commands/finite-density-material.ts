@@ -8,7 +8,9 @@ import sharp from 'sharp';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { fitFiniteRegionMaterial, type MaterialTransportSample } from '@cssearth/nebula-reconstruction/methods/sampled/finite-region-material';
-import { compilerSlabMaterial, parseVolumeRecipe, type Vector3, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/bake/volume';
+import { compilerSlabMaterial } from '@cssearth/bake/volume';
+import { parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
+import { type Vector3 } from '@cssearth/objects';
 import { recolorCloudSlices, loadVolumeSource, sampleEncoded, sourceBytes, containedPath, channelDensity } from '@cssearth/bake/volume/node';
 const json=async(path:string,value:unknown)=>{await writeFile(path,JSON.stringify(value,null,2)+'\n');};
 /** A reconstruction is named by what it was made from, like `<subject>-<image>`. */

@@ -1,5 +1,6 @@
 /** Cepheids of the Triangulum Galaxy drafted from their catalogue rows (m33-cepheids.mts), offline on fixtures. */
 import assert from 'node:assert/strict';
+import { resolve } from 'node:path';
 import { test } from 'node:test';
 import type { Archive } from './archives.mts';
 import { BREUVAL_2023, draftsFromM33Cepheids, surveyName } from './m33-cepheids.mts';
@@ -25,10 +26,12 @@ test('the table\'s ID is the survey name SIMBAD lists', () => {
 });
 
 test('each row is a star at the galaxy\'s Cepheid distance, named by the order of preference, the longest Gold period featured', async () => {
-  const { stars } = await draftsFromM33Cepheids(['all'], archive), specs = stars.map(star => parseStarSpec(star));
+  const { stars } = await draftsFromM33Cepheids(['all'], archive, resolve(import.meta.dirname, '../../../..')), specs = stars.map(star => parseStarSpec(star));
   assert.deepEqual(specs.map(spec => [spec.name, spec.featured ?? false]), [['M33SSS J013326.10+303320.0', false], ['VHK 45', true], ['M33SSS J013405.16+303851.1', false]]);
   assert.deepEqual(specs[1]!.aliases, ['M33SSS J013343.90+303245.2']);
   assert.deepEqual(specs[1]!.position?.row, { ID: '01334390+3032452' });
-  assert.equal(specs[0]!.distance?.value, Math.round(10 ** (BREUVAL_2023.modulus[0] / 5 + 1)));
+  // On the disc as drawn (859 kpc, 9 kpc in radius), not at the galaxy's Cepheid distance (840 kpc), 19 kpc in front of it.
+  for (const spec of specs) assert.ok(Math.abs(spec.distance!.value - 859_014) < 9_000, `${spec.name} at ${spec.distance!.value} pc`);
+  assert.match(specs[0]!.distance!.source, /Placed in M33 as the app draws it.*840 kpc; it places the galaxy, not a star within it/u);
   assert.match(specs[0]!.radius === 'gaia-flame' ? '' : specs[0]!.radius.source, /20 d in Breuval et al\. \(2023\), ApJ 951, 118, table 9 \(log P 1\.301\)/u);
 });

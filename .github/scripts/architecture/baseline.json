@@ -20,10 +20,6 @@
       {"from":"site/navigation","to":"site/scene","imports":1}
     ]
   },
-  "packageCycles": [
-    {"nodes":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"]},
-    {"nodes":["@cssearth/bake","@cssearth/renderer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"]}
-  ],
   "rules": {
     "authoring-is-leaf": [],
     "bake-nebula-and-objects-independent": [],

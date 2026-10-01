@@ -15,15 +15,15 @@
   "rightAscensionDegrees": 23.36521,
   "declinationDegrees": 30.57321,
   "positionEpochJulianYear": 2000,
-  "distanceParsecs": 840234,
+  "distanceParsecs": 859918,
   "properMotionRaMasPerYear": 0,
   "properMotionDecMasPerYear": 0,
   "radialVelocityKmPerS": -179.2,
   "presentationUp": "display-axis",
   "sources": {
    "position": "Breuval et al. (2023), ApJ 951, 118, table 9 (https://arxiv.org/abs/2304.00037), VizieR J/ApJ/951/118/table9 row ID = 01332768+3034238: RAJ2000 23.36521, DEJ2000 30.57321, from the archived row src/objects/m33sss-j013327-68-303423-8/source/photometry/catalogue-row.tsv; SIMBAD names it M33SSS J013327.68+303423.8",
-   "distance": "Breuval et al. (2023), ApJ 951, 118, abstract: M33's Cepheid distance modulus 24.622 +/- 0.03 mag, 10^(mu/5 + 1) pc (https://arxiv.org/abs/2304.00037): 840234 +/- 11608 pc; Gaia DR3 cannot see the star",
-   "properMotion": "J/ApJ/951/118/table9 row ID = 01332768+3034238 measures no proper motion; zero is assumed (at 840,234 pc, 1 mas/yr would be 3,983 km/s across the sky)",
+   "distance": "Placed in M33 as the app draws it, where the star's sight line crosses the disc's midplane: 859,918 pc (src/objects/m33/source/recipe.json: centre 859,014 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 54 deg, line of nodes 22.5 deg). The galaxy's Cepheid distance, Breuval et al. (2023), ApJ 951, 118, abstract: modulus 24.622 +/- 0.03 mag, 840 kpc; it places the galaxy, not a star within it (https://doi.org/10.33232/001c.144859): 859918 pc; Gaia DR3 cannot see the star",
+   "properMotion": "J/ApJ/951/118/table9 row ID = 01332768+3034238 measures no proper motion; zero is assumed (at 859,918 pc, 1 mas/yr would be 4,076 km/s across the sky)",
    "radialVelocity": "SIMBAD's radial velocity of M33, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract)"
   }
  }

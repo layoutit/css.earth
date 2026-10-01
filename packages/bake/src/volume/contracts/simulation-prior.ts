@@ -1,5 +1,5 @@
 /** A pinned density field sampled as a conditional depth prior, in the compiler's angular tangent units. */
-import type { EmissionBounds } from './emission.ts';
+import type { EmissionBounds } from '@cssearth/objects';
 
 export interface SimulationDepthPrior {
   bounds: EmissionBounds;

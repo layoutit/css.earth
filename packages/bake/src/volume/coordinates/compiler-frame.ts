@@ -1,8 +1,5 @@
-import type { DensityVolumeFrame } from '../contracts/volume-frame.ts';
-import type { Bounds3, Vector3 } from '../contracts/volume-recipe.ts';
-import type { EmissionBounds, EmissionVector3 } from '../contracts/emission.ts';
-import { COMPILER_LONGEST_AXIS_SLICES } from '../contracts/compiler-bake.ts';
-import { validateVolumeLayerSlices, type VolumeSlices } from '../contracts/volume-slices.ts';
+import { type DensityVolumeFrame, type Bounds3, type Vector3, type EmissionBounds, type EmissionVector3, COMPILER_LONGEST_AXIS_SLICES } from '@cssearth/objects';
+import { validateVolumeLayerSlices, type VolumeSlices } from '@cssearth/objects';
 
 /** Angular source axes west/north/away are left-handed. Prepared physical axes are west/north/toward. */
 export const COMPILER_PHYSICAL_REFERENCE = 'lab-sky-west-north-toward';

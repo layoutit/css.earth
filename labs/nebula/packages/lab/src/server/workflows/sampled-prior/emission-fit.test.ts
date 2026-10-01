@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { type EmissionVector3, type SkyBounds, prepareSampledField, type SpatialField, type SampledEmissionFit } from '@cssearth/bake/volume';
+import { prepareSampledField, type SpatialField } from '@cssearth/bake/volume';
+import { type SampledEmissionFit } from '@cssearth/objects';
+import { type EmissionVector3, type SkyBounds } from '@cssearth/objects';
 import type { CompilerImage } from '../compiler/images.ts';
-import { readSampledRecipe, verifySampledEvidence } from '../../../features/sampled-prior/model.ts';
+import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
+import { verifySampledEvidence } from '@cssearth/objects';
 import { diffuseAtomEmission, diffuseAtomProjection, diffuseAtoms, fitSampledEmission, gridDiffuse } from '@cssearth/nebula-reconstruction/methods/sampled/emission-fit';
 
 const fit: SampledEmissionFit = {

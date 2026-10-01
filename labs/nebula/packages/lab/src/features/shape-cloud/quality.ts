@@ -1,5 +1,5 @@
 import type { ShapeCloudQuality } from './types.ts';
-import type { Bounds3 } from '@cssearth/bake/volume';
+import type { Bounds3 } from '@cssearth/objects';
 export const SHAPE_CLOUD_PREPARATION_VERSION = 'ring-sectors@2';
 
 /** Quality changes sampling only; both passes evaluate the same physical field and exposure. */

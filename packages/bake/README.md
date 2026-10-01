@@ -10,7 +10,7 @@ layer (the raster lane uses the photometric models), never sideways. Command ent
 
 | entry | what it holds | host |
 |---|---|---|
-| `@cssearth/bake/volume` | volume contracts, coordinates, fields, materials and sampling | host-neutral: no Node built-ins, DOM or native codecs, so the lab's browser viewer imports it too |
+| `@cssearth/bake/volume` | implementation contracts, coordinates, fields, materials and sampling | host-neutral: no Node built-ins, DOM or native codecs; prepared recipes, slice formats, compiler controls, star inputs and pure validators live in `@cssearth/objects` |
 | `@cssearth/bake/volume/node` | compact-input replay, offline XYZ slices, the target-neutral compiler bake | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/photometry` | disk and phase functions, the Hapke model, limb laws from published models, PSG limb profiles | Node only (`node:fs`, `sharp`) |
 | `@cssearth/bake/raster` | raster recipes, surface maps, pages and poles, lighting banks, atmospheres and halos, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |
@@ -66,8 +66,8 @@ for example `Compact sampled replay changed accepted <dataset> volume`.
 
 The nebula boundary checks (the `nebula-boundaries` rule of `pnpm check:architecture`, in
 `.github/scripts/architecture/nebula-packages.mts` and `nebula-inbound.mts`) enforce that the runtime closure imports nothing from
-`@cssearth/bake`, the lab's reconstruction and viewer packages may import `@cssearth/bake/volume` but not its node
-entry, the main volume entry imports no platform dependency, and no volume source names an object, an object path or
+`@cssearth/bake`, the lab's reconstruction package may import `@cssearth/bake/volume` but not its node
+entry; volume-viewer consumes `@cssearth/objects`, the main volume entry imports no platform dependency, and no volume source names an object, an object path or
 another topic.
 
 `pnpm --filter @cssearth/bake build` writes `dist/`; `pnpm test:packages` runs the package's tests

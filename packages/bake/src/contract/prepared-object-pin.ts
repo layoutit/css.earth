@@ -8,7 +8,7 @@ import { dirname, resolve } from 'node:path';
 import { requireRecord } from '@cssearth/core';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer/prepared-data/object-format.ts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 import { preparePageMetadata, writePreparedText } from '../delivery/index.ts';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.ts';
 

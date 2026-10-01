@@ -1,6 +1,7 @@
 /** Assign observation color once to finite 3D emitters; never project an image through depth. */
 import { createEmissionField, emissionKernel, prepareEmissionComponent } from '../fields/emission.ts';
-import type { EmissionFieldModel, EmissionVector3 } from '../contracts/emission.ts';
+import type { EmissionFieldModel } from '../contracts/emission.ts';
+import type { EmissionVector3 } from '@cssearth/objects';
 
 const QUADRATURE_STEPS = 24;
 export interface MaterialImage { id: string; sampleRgb(x: number, y: number, out: EmissionVector3): boolean }

@@ -6,12 +6,15 @@ import type { CompilerProgress, CompilerStep } from '../compiler/prerequisites.t
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
 import { validateCompilerResult } from '../compiler/bank-validation.ts';
 import { loadCompilerImages, compilerImagePanel } from '../compiler/images.ts';
-import { bakeCompiler, type CompilerStarInput } from '../compiler/bake.ts';
+import { bakeCompiler } from '../compiler/bake.ts';
+import { type CompilerStarInput } from '@cssearth/objects';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';
-import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin, type SkyBounds, prepareSampledField, prepareSampledMaterial } from '@cssearth/bake/volume';
+import { prepareSampledField, prepareSampledMaterial } from '@cssearth/bake/volume';
+import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin, type SkyBounds } from '@cssearth/objects';
 import { decodeFits } from '@cssearth/fits';
 import { float32LittleEndian } from '../float32-little-endian.ts';
-import { readSampledRecipe, verifySampledEvidence } from '../../../features/sampled-prior/model.ts';
+import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
+import { verifySampledEvidence } from '@cssearth/objects';
 import { sampledStars } from './stars.ts';
 import { sampledPanels } from './panels.ts';
 import { isSampledFitsOwner, sampledOwnerPins } from '../../../features/sampled-prior/ownership.ts';

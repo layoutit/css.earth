@@ -4,8 +4,8 @@ import type { Polygon } from '@layoutit/polycss';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
-import type { VolumeSliceQuad } from '../volume/node/index.ts';
-import type { Vector3 } from '../volume/index.ts';
+import type { VolumeSliceQuad, VolumeSlices } from '@cssearth/objects';
+import type { Vector3 } from '@cssearth/objects';
 import { test } from 'node:test';
 
 type Quad = Pick<VolumeSliceQuad, 'id' | 'axis' | 'texturePath' | 'widthPx' | 'heightPx' | 'vertices' | 'uvs'>;
@@ -54,8 +54,8 @@ test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the p
   const { compileCssVolume } = await import('./volume.ts');
   const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
-  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/bake/volume/node').VolumeSlices;
+  const { parseVolumeRecipe } = await import('@cssearth/objects');
+  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as VolumeSlices;
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
   const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
   const volume = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, recipe, slices });

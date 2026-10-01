@@ -1,23 +1,8 @@
-// `@cssearth/bake/volume`: the host-neutral volume contracts, coordinates, fields, materials and sampling.
-export * from './contracts/authored-shapes.ts';
+// `@cssearth/bake/volume`: the host-neutral implementation contracts, coordinates, fields, materials and sampling.
 export * from './contracts/cancellation.ts';
-export * from './contracts/compiler-bake.ts';
-export * from './contracts/compiler-controls.ts';
-export * from './contracts/compiler-star-input.ts';
 export * from './contracts/emission.ts';
-export * from './contracts/joint-parameters.ts';
-export * from './contracts/joint-volume.ts';
 export * from './contracts/observation-mapping.ts';
-export * from './contracts/observation-photo.ts';
-export * from './contracts/prepared-catalogue-stars.ts';
-export * from './contracts/render-element-budget.ts';
-export * from './contracts/sampled-emission-fit.ts';
-export * from './contracts/sampled-recipe.ts';
-export * from './contracts/shape-scene.ts';
 export * from './contracts/simulation-prior.ts';
-export * from './contracts/volume-frame.ts';
-export * from './contracts/volume-recipe.ts';
-export * from './contracts/volume-slices.ts';
 export * from './coordinates/catalogue-position.ts';
 export * from './coordinates/compiler-frame.ts';
 export * from './coordinates/density-placement.ts';

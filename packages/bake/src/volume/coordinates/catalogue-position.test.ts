@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { cataloguePosition, METERS_PER_KPC } from './catalogue-position.ts';
-import type { DensityVolumeFrame } from '../contracts/volume-frame.ts';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 const frame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
     originM: [10 * METERS_PER_KPC, 0, 0], metersPerUnit: METERS_PER_KPC,
     localToReferenceXyzw: [0, 0, 0, 1], boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };

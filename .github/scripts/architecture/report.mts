@@ -7,7 +7,6 @@ import { BASELINE_PATH, compare, createBaseline, decodeBaseline, formatBaseline,
 import { cycleClosingEdges, folderCycles, folderGraph, folderStats, layerOrder } from './folders.mts';
 import { buildImportGraph, repositoryFiles } from './graph.mts';
 import { isBroken, REPOSITORY_RULES, repositoryFindings } from './repository-rules.mts';
-import { packageCycles, packageCycleText } from './package-cycles.mts';
 import { LAYER_RULES } from './rules.mts';
 
 const UPDATE_HINT = 'Run `pnpm check:architecture --update-baseline` and commit .github/scripts/architecture/baseline.json.';
@@ -21,12 +20,9 @@ export function formatDelta(delta: Delta): string {
   lines.push(`folders in the largest cycle: ${delta.largestCycle.now} (baseline ${delta.largestCycle.baseline})`);
   lines.push(`cycle-closing folder edges in it: ${cycle.largestNow.length}, ${imports(cycle.largestNow)} imports (baseline ${cycle.largestBaseline.length}, ${imports(cycle.largestBaseline)} imports)`);
   lines.push(`cycle-closing folder edges in all cycles: ${cycle.now.length}, ${imports(cycle.now)} imports (baseline ${cycle.baseline.length}, ${imports(cycle.baseline)} imports)`);
-  lines.push(`workspace package cycles: ${delta.packageCycles.now.length} (baseline ${delta.packageCycles.baseline.length})`);
   for (const rule of delta.rules) lines.push(`${rule.rule}: ${rule.count} file-to-file imports (${rule.noBaseline ? 'no baseline; any finding fails' : `baseline ${rule.baseline}`})`);
   if (isWorse(delta)) {
     lines.push('', 'NEW, not allowed:');
-    for (const cycle of delta.packageCycles.added) lines.push(`  workspace package cycle: ${packageCycleText(cycle)}`);
-    for (const cycle of delta.packageCycles.grown) lines.push(`  workspace package cycle SCC grew: ${packageCycleText(cycle)} (${cycle.scc.join(', ')})`);
     for (const rule of delta.rules) {
       if (!rule.added.length) continue;
       const description = LAYER_RULES.find(item => item.id === rule.rule)?.description ?? rule.rule;
@@ -50,11 +46,6 @@ export function formatDelta(delta: Delta): string {
   for (const { edge, was } of cycle.heavier) lines.push(`note: ${edge.from} -> ${edge.to} now carries ${edge.imports} imports (was ${was})`);
   if (isStale(delta)) {
     lines.push('', 'Better than the baseline:');
-    for (const cycle of delta.packageCycles.removed) lines.push(`  workspace package cycle gone: ${packageCycleText(cycle)}`);
-    for (const cycle of delta.packageCycles.now) {
-      const old = delta.packageCycles.baseline.find(item => JSON.stringify(item.nodes) === JSON.stringify(cycle.nodes));
-      if (old && old.scc.some(name => !cycle.scc.includes(name))) lines.push(`  workspace package cycle SCC shrank: ${packageCycleText(cycle)}`);
-    }
     if (delta.largestCycle.now < delta.largestCycle.baseline) lines.push(`  the largest folder cycle shrank from ${delta.largestCycle.baseline} to ${delta.largestCycle.now} folders`);
     for (const edge of cycle.removed) lines.push(`  cycle-closing edge gone: ${edge.from} -> ${edge.to}`);
     for (const rule of delta.rules) for (const item of rule.removed) lines.push(`  ${rule.rule} gone: ${item.from} -> ${item.to}`);
@@ -89,7 +80,7 @@ export async function check(root: string, update: boolean): Promise<boolean> {
   const measurement = measure(await buildImportGraph(root, { details: false }).catch((error: unknown) => {
     if (broken) console.error(formatFindings(findings));
     throw error;
-  }), LAYER_RULES, packageCycles(root, files));
+  }));
   // Only an update may start from a missing baseline; a check without one is a broken checkout.
   const baseline = await readBaseline(root).catch((error: unknown) => {
     if (update && hasErrorCode(error, 'ENOENT')) return undefined;

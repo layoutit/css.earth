@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { parseVolumeRecipe } from '../volume/index.ts';
+import { parseVolumeRecipe } from '@cssearth/objects';
 import { sourceBytes, containedPath, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume } from '../volume-leaves/index.ts';
 import { acquireVolumeSource } from './acquisition.ts';

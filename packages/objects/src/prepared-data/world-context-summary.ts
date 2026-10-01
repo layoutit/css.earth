@@ -1,4 +1,6 @@
-import { array, positive, record, text, unique } from '../validation/guards.js';
+import { checks, failure } from '@cssearth/core';
+
+const { array, positive, record, text, unique } = checks(failure('Prepared presentation: '));
 
 /** `world-context-summary.json` and each `world-systems/<star id>.json` write what many bodies repeat once
  * (`summarizeWorldContext` in @cssearth/bake). These put each body back in the shape `parsePreparedWorldContextSummary`

@@ -1,5 +1,5 @@
-import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { Bounds3, Vector3 } from './volume-recipe.ts';
+import type { DensityVolumeFrame } from '../density-volume.js';
+import type { Bounds3, Vector3 } from './coordinates.js';
 
 export interface JointVolumePin { path: string }
 export interface JointVolumeResult {

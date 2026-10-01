@@ -1,6 +1,6 @@
 /** Pure optically emitting shell field and its fixed orthographic image projection. */
-import type { Bounds3, Vector3 } from '../contracts/volume-recipe.ts';
-import type { ShapeCloudSettings } from '../contracts/authored-shapes.ts';
+import type { Bounds3, Vector3 } from '@cssearth/objects';
+import type { ShapeCloudSettings } from '@cssearth/objects';
 
 export function shapePixelToUnits(x: number, y: number, width: number, height: number): [number, number] {
   const scale = 10 / width;

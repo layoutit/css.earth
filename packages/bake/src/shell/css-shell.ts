@@ -2,7 +2,7 @@
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, resolveProjectiveQuadGuards, type Polygon } from '@layoutit/polycss';
 import type { ShellRecipe } from './config.ts';
 import { unitVector, type ShellMesh } from './mesh.ts';
-import type { Vector3 } from '../volume/index.ts';
+import type { Vector3 } from '@cssearth/objects';
 import type { PreparedCssSurfaceShell } from '@cssearth/renderer/shell/types.ts';
 import { SHELL_CORNER_PERMUTATIONS } from '@cssearth/renderer/shell/material-address.ts';
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../scene/index.ts';

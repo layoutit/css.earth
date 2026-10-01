@@ -2,7 +2,7 @@
 
 Own the build-time preparation code: what the preparation tools and the nebula lab run to turn source records into
 prepared delivery. Nothing here runs in the application. The runtime (`@cssearth/renderer` and
-`site/**`, apart from its build-time `site/build/`) must never import `@cssearth/bake`; a type the renderer needs belongs in the renderer's own contracts.
+`site/**`, apart from its build-time `site/build/`) must never import `@cssearth/bake`; shared prepared-format types belong in `@cssearth/objects`.
 
 Each topic is one subpath entry. Topics must not import each other sideways. A topic may import a lower topic, and only
 through that topic's `index.ts`, when `LOWER_TOPICS` in `src/entries.test.ts` declares it; the declared order has no
@@ -88,7 +88,7 @@ its validators accept); the renderer never imports the bake.
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls, and the audits that read a prepared presentation and its authored runtime sources back
   against the descriptor (`check-prepared-presentation.ts`; the prepared format constant comes
-  from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
+  from `@cssearth/objects`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command,
   run for each object by the `audit` step of `prepare-object`. `prepared-object-pin.ts` pins a prepared object to its
   transport (the descriptor's `prepared` pin and page reference, and the inventory; the transports themselves are built from
@@ -283,8 +283,10 @@ its validators accept); the renderer never imports the bake.
   (`packages/bake/cli/prepare-stars.mts`, `prepare-shell.mts`, `prepare-volume.mts`, the last also `pnpm prepare:volume`
   and the telescope's F16 volume operation) pass `@cssearth/objects/node`'s.
 
-- `src/volume/` is published as `@cssearth/bake/volume`: the volume contracts, coordinates, fields, materials and
-  sampling. It stays host-neutral, because the nebula lab's browser viewer imports it: no Node built-ins, `Buffer`,
+- `src/volume/` is published as `@cssearth/bake/volume`: the implementation contracts, coordinates, fields, materials and
+  sampling. Prepared recipes, slices, compiler controls, star inputs, catalogue stars, authored shapes, observation
+  photo data and their pure validators live in `@cssearth/objects`; import them there, without bake re-exports.
+  Cancellation, callable observation mapping, simulation sampling and emission types coupled to field implementations stay here. It stays host-neutral, for preparation callers: no Node built-ins, `Buffer`,
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
   compiler bake and the published catalogue point banks, with the galaxy groups' placement and the shell selection that

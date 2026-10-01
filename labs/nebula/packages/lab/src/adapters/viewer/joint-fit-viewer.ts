@@ -1,11 +1,11 @@
 /** Lab URL and renderer binding for the retained joint-fit scene. */
 import { createJointFitViewer as createScene, type JointFitViewerOptions as SceneOptions,
   type JointFitViewer } from '@cssearth/volume-viewer/scene/joint-fit-viewer';
-import type { JointVolumeResult } from '@cssearth/bake/volume';
+import type { JointVolumeResult } from '@cssearth/objects';
 import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import { volumeRenderer } from './volume-renderer';
 import '@cssearth/renderer/styles/volume.css';
-export { readJointVolumeResult } from '@cssearth/bake/volume';
+export { readJointVolumeResult } from '@cssearth/objects';
 export type { JointFitViewer } from '@cssearth/volume-viewer/scene/joint-fit-viewer';
 export interface JointFitViewerOptions extends Omit<SceneOptions<PreparedCssVolume, VolumeCameraPublication>, 'backend' | 'resolvePath'> { resolvePath?: (path: string) => string }
 declare const __NEBULA_REPO_ROOT__: string;

@@ -1,4 +1,4 @@
-import type { JointParameters } from '@cssearth/bake/volume';
+import type { JointParameters } from '@cssearth/objects';
 const radians = Math.PI / 180;
 /** Position angle east of north; positive inclination points its projected axis toward that PA. */
 export function jointAxis(p: JointParameters): [number, number, number] {

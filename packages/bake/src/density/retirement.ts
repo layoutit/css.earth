@@ -2,7 +2,7 @@
 import { readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { containedPath } from '../volume/node/index.ts';
-import { text } from '../volume/index.ts';
+import { text } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 
 function texturePath(outputDirectory: string, value: unknown): string {

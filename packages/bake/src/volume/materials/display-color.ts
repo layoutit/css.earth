@@ -1,4 +1,5 @@
-import type { DisplayColorMatrix, Vector3 } from '../contracts/volume-recipe.ts';
+import type { DisplayColorMatrix } from '@cssearth/objects';
+import type { Vector3 } from '@cssearth/objects';
 
 const IDENTITY_DISPLAY_COLOR_MATRIX: DisplayColorMatrix = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 

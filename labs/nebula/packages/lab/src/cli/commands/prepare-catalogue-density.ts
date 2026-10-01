@@ -2,8 +2,9 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { cataloguePosition, METERS_PER_KPC, type Vector3, type VolumeRecipe } from '@cssearth/bake/volume';
+import { parseDensityVolumeObjectDescriptor, type Vector3 } from '@cssearth/objects';
+import { cataloguePosition, METERS_PER_KPC } from '@cssearth/bake/volume';
+import { type VolumeRecipe } from '@cssearth/objects';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
 import { sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';

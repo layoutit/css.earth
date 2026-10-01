@@ -1,6 +1,6 @@
 import {readAuthoredSources} from '../../sources/index.ts';
 import {parse} from '@cssearth/core/schema';
-import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer/prepared-data/object-format.ts';
+import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/objects';
 import { layeredRecipe } from './layered-recipe.ts';
 import { spectralRecipe } from './spectral-recipe.ts';
 import { radialMotionRecipe } from './radial-motion-recipe.ts';

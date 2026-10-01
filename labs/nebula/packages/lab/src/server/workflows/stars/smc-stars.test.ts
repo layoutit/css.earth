@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, stat } from 'node:fs/promises';
 import sharp from 'sharp';
-import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane } from '@cssearth/bake/volume';
+import { rayToOverlayPlane } from '@cssearth/bake/volume';
+import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/objects';
 import { prepareSmcCatalogue, readBonanos2010Row, readSmcStarManifest, finiteModelStarsIndex, preparedStarsPath, MAGNITUDE_LIMIT } from '../../../cli/commands/prepare-smc-stars.ts';
 import { loadFiniteModelStarContext, finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';
 

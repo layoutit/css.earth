@@ -8,7 +8,7 @@ import type { PreparedWorldCameraFrame } from '../navigation/world-camera.js';
 import { cssViewFromOrientation, validateWorldRotation } from '../navigation/world-camera-math.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
-import { expandWorldContextSummary, expandWorldSystem } from './world-context-summary.js';
+import { expandWorldContextSummary, expandWorldSystem } from '@cssearth/objects';
 import { parseClassificationViews, parseSystemView } from './world-system-view.js';
 import type { PreparedSystemViewCandidate } from './world-system-view.js';
 export { parsePreparedSystemView, type PreparedSystemViewCandidate } from './world-system-view.js';

@@ -1,7 +1,8 @@
 /** Discover the baked image datasets of the newest finite model owned by one lab subject. */
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parsePreparedLmcStars, type DensityVolumeFrame } from '@cssearth/bake/volume';
+import { parsePreparedLmcStars } from '@cssearth/objects';
+import { type DensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
 
 export const finiteDatasetDirectory = '.local/nebula-lab';

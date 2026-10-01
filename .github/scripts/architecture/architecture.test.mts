@@ -216,6 +216,16 @@ test('bake nebula/ and objects/ never import each other, in either direction', (
   ], 'nebula/objects.ts and the @cssearth/objects package are not bake objects/');
 });
 
+test('the baseline format excludes package cycles, including a retired key', () => {
+  const baseline = createBaseline(measure(graph()));
+  assert.equal(Object.hasOwn(baseline, 'packageCycles'), false);
+  const decoded = decodeBaseline({ ...baseline, packageCycles: [{ nodes: ['@cssearth/a'], scc: ['@cssearth/a'] }] });
+  assert.equal(Object.hasOwn(decoded, 'packageCycles'), false);
+  const encoded = formatBaseline(decoded);
+  assert.doesNotMatch(encoded, /packageCycles/u);
+  assert.deepEqual(decodeBaseline(JSON.parse(encoded)), baseline);
+});
+
 test('external JSON is validated before use', () => {
   assert.throws(() => decodeBaseline({ schema: 'other' }), /schema/u);
   assert.throws(() => decodeBaseline({ schema: 'cssearth-architecture-baseline@1', cycles: { largestCycle: 1.5, layerOrder: [], cycleClosingEdges: [] }, rules: {} }), /whole number/u);
@@ -238,7 +248,7 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['workspace package cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
 });
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
@@ -423,59 +433,33 @@ test('recorded cycle-closing folder edges pass but every new closing edge fails'
   assert.equal(isWorse(delta), true);
 });
 
-test('manifest cycles ratchet every canonical cycle and SCC, across all dependency fields', () => {
+test('manifest cycles fail without a baseline across all dependency fields', () => {
   const root = mkdtempSync(join(tmpdir(), 'package-cycles-'));
   const write = (id: string, fields: Record<string, unknown> = {}) => {
     const path = join(root, 'packages', id, 'package.json');
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, JSON.stringify({ name: `@cssearth/${id}`, ...fields }));
   };
-  const snapshot = () => measure(graph(), LAYER_RULES, packageCycles(root, repositoryFiles(root)));
+  const rule = REPOSITORY_RULES.find(rule => rule.id === 'workspace package cycles');
+  assert.ok(rule, 'cycle detection must be wired into the no-baseline repository checks');
+  const findings = () => repositoryFindings(root, repositoryFiles(root), [rule]);
   try {
     execFileSync('git', ['init', '-q'], { cwd: root });
     write('a', { dependencies: { '@cssearth/b': 'workspace:*' } });
     write('b', { devDependencies: { '@cssearth/a': 'workspace:*' }, peerDependencies: { '@cssearth/c': 'workspace:*' } });
     write('c', { dependencies: { '@cssearth/a': 'workspace:*' } });
-    write('d');
-    const initial = snapshot(), baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(initial))));
-    assert.deepEqual(initial.packageCycles.map(packageCycleText), ['@cssearth/a -> @cssearth/b -> @cssearth/c -> @cssearth/a', '@cssearth/a -> @cssearth/b -> @cssearth/a']);
-    assert.equal(isWorse(compare(baseline, initial)), false, 'baselined cycles pass');
-    const missing = decodeBaseline({ ...baseline, packageCycles: undefined });
-    assert.equal(isWorse(compare(missing, initial)), true, 'deleting the package baseline cannot bypass the ratchet');
-    write('a', { dependencies: { '@cssearth/b': 'workspace:*', '@cssearth/c': 'workspace:*' } });
-    const chord = compare(baseline, snapshot());
-    assert.equal(isWorse(chord), true, 'new cycle inside the same SCC fails');
-    assert.match(formatDelta(chord), /workspace package cycle: @cssearth\/a -> @cssearth\/c -> @cssearth\/a/u);
-    assert.equal(isWorse({ ...chord, packageCycles: { ...chord.packageCycles, added: [], grown: [] } }), false, 'removing the package comparison makes the mutation green');
-    assert.equal(isWorse(compare(baseline, measure(graph()))), false, 'removing package graph evaluation makes the mutation green');
-    write('a', { dependencies: { '@cssearth/b': 'workspace:*' } });
-    write('c', { dependencies: { '@cssearth/a': 'workspace:*', '@cssearth/d': 'workspace:*' } });
-    write('d', { peerDependencies: { '@cssearth/a': 'workspace:*' } });
-    const grown = compare(baseline, snapshot());
-    assert.equal(isWorse(grown), true, 'a larger elementary cycle fails');
-    assert.equal(grown.packageCycles.grown.length, 2, 'both recorded cycles have a growing SCC');
-    assert.equal(isWorse({ ...grown, packageCycles: { ...grown.packageCycles, added: [] } }), true, 'SCC growth independently fails even if a new cycle comparison is removed');
-    write('c'); write('d');
-    const shrunk = snapshot(), better = compare(baseline, shrunk);
-    assert.equal(isWorse(better), false);
-    assert.equal(isStale(better), true);
-    assert.match(formatDelta(better), /Better than the baseline:[\s\S]*workspace package cycle gone/u);
-    const tightened = createBaseline(shrunk);
-    assert.equal(tightened.packageCycles?.length, 1);
-    assert.equal(isStale(compare(tightened, shrunk)), false);
+    assert.deepEqual(packageCycles(root, repositoryFiles(root)).map(packageCycleText), [
+      '@cssearth/a -> @cssearth/b -> @cssearth/c -> @cssearth/a', '@cssearth/a -> @cssearth/b -> @cssearth/a',
+    ]);
+    assert.equal(isBroken(findings()), true, 'any cycle fails without reading or creating a baseline');
+    assert.match(formatFindings(findings()), /workspace package cycles: 2 findings \(no baseline; any finding fails\)/u);
+    assert.match(formatFindings(findings()), /workspace package cycle: @cssearth\/a -> @cssearth\/b -> @cssearth\/a/u);
+    assert.equal(isBroken(repositoryFindings(root, repositoryFiles(root), [])), false, 'disabling the rule makes the mutation green');
+    write('b');
+    assert.equal(isBroken(findings()), false, 'removing the cycle clears the finding');
     write('a', { peerDependencies: { '@cssearth/a': 'workspace:*' } });
-    assert.deepEqual(snapshot().packageCycles.map(packageCycleText), ['@cssearth/a -> @cssearth/a'], 'self-dependency is a cycle');
+    assert.equal(isBroken(findings()), true, 'self-dependency is a cycle');
     write('a', { dependencies: [] });
-    assert.throws(snapshot, /dependencies/u, 'malformed manifest fields fail rather than hiding edges');
+    assert.throws(findings, /dependencies/u, 'malformed fields fail rather than hiding edges');
   } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test('package cycle baseline validates canonical paths and component membership', () => {
-  const baseline = createBaseline(measure(graph()));
-  for (const cycle of [
-    { nodes: [], scc: [] }, { nodes: ['@cssearth/a'], scc: [] },
-    { nodes: ['@cssearth/b', '@cssearth/a'], scc: ['@cssearth/a', '@cssearth/b'] },
-    { nodes: ['@cssearth/a', '@cssearth/a'], scc: ['@cssearth/a'] },
-    { nodes: ['npm'], scc: ['npm'] },
-  ]) assert.throws(() => decodeBaseline({ ...baseline, packageCycles: [cycle] }), /canonical package cycle/u);
 });

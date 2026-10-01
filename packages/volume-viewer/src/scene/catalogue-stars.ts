@@ -1,5 +1,5 @@
 /** Retained prepared catalogue points; the host validates catalogue provenance and supplies camera projection. */
-import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/bake/volume';
+import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/objects';
 export interface PreparedCataloguePoint {
   id: string; magnitude: number; positionUnits: readonly [number, number, number];
   sizePx: number; colorCss: string; opacity: number; cloudSignal: number; cloudPartIds: readonly string[];

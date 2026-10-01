@@ -9,7 +9,7 @@ import type { ObjectEntry } from '@cssearth/objects';
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../presentation/index.ts";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.ts";
 import { requireAuthoredWorldFrame } from '../sources/index.ts';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer/prepared-data/object-format.ts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { nodeName, staticObjectProperties } from '../runtime-source/index.ts';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';

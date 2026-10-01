@@ -3,6 +3,7 @@
   "name": "M33SSS J013402.23+304242.3",
   "system": "M33SSS J013402.23+304242.3 system",
   "description": "A Cepheid in the Triangulum Galaxy that pulsates every 7.83 days.",
+  "order": 5290,
   "target": "M33SSS J013402.23+304242.3",
   "paper": {
     "url": "https://arxiv.org/abs/2304.00037",
@@ -34,10 +35,9 @@
     "uncertainty": 1.7
   },
   "distance": {
-    "value": 840234,
-    "source": "Breuval et al. (2023), ApJ 951, 118, abstract: M33's Cepheid distance modulus 24.622 +/- 0.03 mag, 10^(mu/5 + 1) pc",
-    "url": "https://arxiv.org/abs/2304.00037",
-    "uncertainty": 11608
+    "value": 858647,
+    "source": "Placed in M33 as the app draws it, where the star's sight line crosses the disc's midplane: 858,647 pc (src/objects/m33/source/recipe.json: centre 859,014 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 54 deg, line of nodes 22.5 deg). The galaxy's Cepheid distance, Breuval et al. (2023), ApJ 951, 118, abstract: modulus 24.622 +/- 0.03 mag, 840 kpc; it places the galaxy, not a star within it",
+    "url": "https://doi.org/10.33232/001c.144859"
   },
   "position": {
     "catalogue": "J/ApJ/951/118/table9",
@@ -58,6 +58,5 @@
     "The star pulsates; it is drawn at its mean radius",
     "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
     "Its radial velocity is its galaxy's; its own motion within M33 is not measured"
-  ],
-  "order": 5290
+  ]
 }

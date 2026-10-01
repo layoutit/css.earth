@@ -4,8 +4,9 @@ import { dirname } from 'node:path';
 import sharp from 'sharp';
 import { encodeVolumeRaster } from './raster.ts';
 import { containedPath } from '../compact-inputs/density-grid.ts';
-import type { VolumeImageEncoding, Vector3 } from '../../contracts/volume-recipe.ts';
-import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
+import type { VolumeImageEncoding } from '@cssearth/objects';
+import type { Vector3 } from '@cssearth/objects';
+import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
 import type { SlabMaterialSampling } from '../../materials/slab-material.ts';
 import { parseCloudAppearance, type CloudAppearance } from '../../materials/cloud-appearance.ts';
 

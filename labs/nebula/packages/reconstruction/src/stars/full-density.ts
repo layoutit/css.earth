@@ -1,4 +1,4 @@
-import type { Vector3, DensityVolumeFrame } from '@cssearth/bake/volume';
+import type { Vector3, DensityVolumeFrame } from '@cssearth/objects';
 export type Matrix3 = [number, number, number, number, number, number, number, number, number];
 export interface TransformRecipe {
   mwCenterKpc: Vector3;
