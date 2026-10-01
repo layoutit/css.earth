@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "helix",
+  "displayName": "Helix Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "216 pc (\u221212 / +14 pc)",
+        "source": {
+          "catalogueId": "benedict-2009",
+          "url": "https://arxiv.org/abs/0909.4281",
+          "label": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 337.4\u00b0, Dec -20.84\u00b0",
+        "source": {
+          "catalogueId": "eso-eso0907a",
+          "url": "https://cdn.eso.org/images/original/eso0907a.tif",
+          "label": "ESO ESO WFI \u00b7 optical detail image and publisher astrometry; registration retained in the observation recipe",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "Planetary nebula",
+        "source": {
+          "catalogueId": "eso-eso0907a",
+          "url": "https://cdn.eso.org/images/original/eso0907a.tif",
+          "label": "ESO ESO WFI \u00b7 optical detail image and publisher astrometry; registration retained in the observation recipe",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "eso-wfi",
+    "controls": [
+      {
+        "id": "eso-vista",
+        "label": "ESO VISTA \u00b7 infrared",
+        "thumbnail": "helix-dataset-eso-vista.webp",
+        "volume": {
+          "objectId": "helix-volume",
+          "datasetId": "eso-vista",
+          "surface": "eso-vista"
+        },
+        "source": {
+          "id": "helix-volume-eso-vista",
+          "path": "../../helix-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1205a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "eso-wfi",
+        "label": "ESO WFI \u00b7 optical detail",
+        "thumbnail": "helix-dataset-eso-wfi.webp",
+        "volume": {
+          "objectId": "helix-volume",
+          "datasetId": "eso-wfi",
+          "surface": "eso-wfi"
+        },
+        "source": {
+          "id": "helix-volume-eso-wfi",
+          "path": "../../helix-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso0907a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "eso-wide",
+        "label": "ESO \u00b7 wider field",
+        "thumbnail": "helix-dataset-eso-wide.webp",
+        "volume": {
+          "objectId": "helix-volume",
+          "datasetId": "eso-wide",
+          "surface": "eso-wide"
+        },
+        "source": {
+          "id": "helix-volume-eso-wide",
+          "path": "../../helix-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/helix/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
+      "href": "https://arxiv.org/abs/0909.4281"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESO ESO WFI \u00b7 optical detail image and publisher astrometry; registration retained in the observation recipe",
+      "href": "https://cdn.eso.org/images/original/eso0907a.tif"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/0909.4281",
+      "credit": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei"
+    }
+  }
+}

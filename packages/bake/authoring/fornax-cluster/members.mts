@@ -15,7 +15,7 @@
  * Inputs: FCC p2tbl2, by default `output/clusters/fcc-p2tbl2.dat.gz`, from
  * https://cdsarc.cds.unistra.fr/ftp/VII/180/p2tbl2.dat.gz (byte columns from its ReadMe), and the tracked
  * `src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz`.
- * Output: `src/objects/fornax-cluster/source/dots/fcc-members.csv.gz`. It prints what it kept.
+ * Output: `src/objects/fornax-cluster-members/source/dots/fcc-members.csv.gz`. It prints what it kept.
  */
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -25,7 +25,7 @@ import { gunzipSync, gzipSync } from 'node:zlib';
 const repository = resolve(import.meta.dirname, '../../../..');
 const fccPath = resolve(process.argv[2] ?? resolve(repository, 'output/clusters/fcc-p2tbl2.dat.gz'));
 const fieldPath = resolve(repository, 'src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz');
-const outputPath = resolve(repository, 'src/objects/fornax-cluster/source/dots/fcc-members.csv.gz');
+const outputPath = resolve(repository, 'src/objects/fornax-cluster-members/source/dots/fcc-members.csv.gz');
 const FORNAX_GROUP = '13418', MATCH_ARCSEC = 10;
 
 const stage = (type: string): string => {

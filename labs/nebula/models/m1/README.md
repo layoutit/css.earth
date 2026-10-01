@@ -1,7 +1,7 @@
 # Crab Nebula: measured ejecta and a separate pulsar wind
 
 This lab model holds processing studies for the Crab Nebula. The
-[current shipped object record](../../../../src/objects/m1/README.md) owns
+[current shipped object record](../../../../src/objects/m1-volume/README.md) owns
 the active sources, delivery evidence and known problems. Experiments here do
 not qualify later deliveries.
 

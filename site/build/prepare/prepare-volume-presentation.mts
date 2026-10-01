@@ -114,11 +114,12 @@ export interface HostedDatasets {
   objectId: string; name: string; route: string; datasets: Record<string, { datasetId: string; label: string }>;
 }
 /** The body an attached volume's delivery names, and which of the body's own datasets shows each of the volume's datasets. */
-async function hostedDatasets(root: string, base: string, objectId: string, datasetIds: readonly string[], input: (path: string) => Promise<Buffer>): Promise<HostedDatasets | undefined> {
+async function hostedDatasets(root: string, base: string, objectId: string, datasetIds: readonly string[], input: (path: string) => Promise<Buffer>, declared?: string): Promise<HostedDatasets | undefined> {
+  // The bank's descriptor names its host (`properties.host`); a bank attached to a body is hosted by that body.
   const deliveryPath = `${base}/source/delivery.json`;
-  const exists = await readFile(resolve(root, deliveryPath)).then(() => true, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
-  if (!exists) return undefined;
-  const host = sourceObject(json(await input(deliveryPath))).attachedTo;
+  const attached = declared !== undefined ? undefined : await readFile(resolve(root, deliveryPath)).then(() => true, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; })
+    ? sourceObject(json(await input(deliveryPath))).attachedTo : undefined;
+  const host = declared ?? attached;
   if (host === undefined) return undefined;
   const hostId = sourceId(host), content = sourceObject(json(await input(`src/objects/${hostId}/source/content/object.json`)));
   const datasets: Record<string, { datasetId: string; label: string }> = {};
@@ -144,7 +145,7 @@ export async function readPreparedVolumes({ root = process.cwd(), input = path =
     const lineage = volumeLineage(record, manifest, descriptor.type === 'image-layer-bank');
     const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
       { id: record.objectId, defaultDataset: record.defaultDataset, datasets: record.datasets }, lineage.sources);
-    const hostedBy = await hostedDatasets(root, base, record.objectId, prepared.controls.map(control => control.id), input);
+    const hostedBy = await hostedDatasets(root, base, record.objectId, prepared.controls.map(control => control.id), input, typeof descriptor.properties.host === 'string' ? descriptor.properties.host : undefined);
     results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base,
       controls: prepared.controls, defaultDataset: prepared.defaultDataset, lineage, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
   }
@@ -276,7 +277,7 @@ export async function prepareVolumePresentations({ root = process.cwd(), objectI
       : [...(current?.assets.filter(asset => asset.location === 'prepared' && !preparedOutputs.some(output => output.filename === asset.filename)) ?? []), ...preparedOutputs];
     const next = mergeInventory(mergeInventory(current, 'public', publicAssets), 'prepared', preparedAssets);
     outputs.push({ path: resolve(root, `${base}/inventory.json`), text: inventoryText(next) });
-    const hostedBy = await hostedDatasets(root, base, record.objectId, record.datasets.map(dataset => dataset.id), input);
+    const hostedBy = await hostedDatasets(root, base, record.objectId, record.datasets.map(dataset => dataset.id), input, typeof descriptor.properties.host === 'string' ? descriptor.properties.host : undefined);
     results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base, controls, defaultDataset: record.defaultDataset, lineage, outputs,
       ...(hostedBy === undefined ? {} : { hostedBy }) });
   }

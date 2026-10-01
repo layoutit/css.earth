@@ -1,0 +1,28 @@
+{
+  "id": "m45",
+  "classification": "nebula",
+  "order": 5144,
+  "physical": {
+    "name": "Pleiades",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Pleiades is recorded: it is an extended nebula, and its package frames it at 3.539 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 56.75,
+    "declinationDegrees": 24.1167,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 136.2,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 5.88,
+    "sources": {
+      "position": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid. (https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json); catalogue reference m45-registered-frame",
+      "distance": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy (https://arxiv.org/pdf/1408.6544); catalogue reference melis-2014: 136.2 pc (-1.2/+1.2); Adopted VLBI stellar-cluster distance from Melis et al. (2014), main text and Table 1; not a measured distance to each dust filament.",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 45: 5.88 km/s +/- 0.03, from 2021A&A...647A..19T (https://ui.adsabs.harvard.edu/abs/2021A%26A...647A..19T/abstract)"
+    }
+  }
+}

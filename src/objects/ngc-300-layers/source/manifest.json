@@ -1,0 +1,257 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/ngc-300-layers/source/source.jpg",
+      "origin": "https://www.eso.org/public/images/eso1037a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1037a/",
+      "title": "Spiral galaxy NGC 300",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "The publisher Large JPEG (7603 x 7603 px), restored from its origin; not tracked. Registration re-measured against Gaia stars (recipe observation). The hash identifies the local JPEG bytes, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1037a",
+            "role": "material",
+            "evidence": "src/objects/ngc-300-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "WFI B [O III] V R H-alpha",
+            "evidence": "https://www.eso.org/public/images/eso1037a/",
+            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pena-pne-table",
+      "path": "src/objects/ngc-300-layers/source/pena-pne/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Seq%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F547%2FA78%2Ftable2%22+WHERE+Com+NOT+LIKE+%27%25cHII%25%27+AND+Com+NOT+LIKE+%27%25uncertain%25%27+AND+Com+NOT+LIKE+%27%25indef%25%27",
+      "title": "A catalog of planetary nebula candidates in the Sculptor spiral galaxy NGC300, table.csv",
+      "credit": "M. Pena, J. Reyes-Perez, L. Hernandez-Martinez, M. Perez-Guillen; A&A 547, A78",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through pena-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pena-2012-ngc300-pne",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Seq%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F547%2FA78%2Ftable2%22+WHERE+Com+NOT+LIKE+%27%25cHII%25%27+AND+Com+NOT+LIKE+%27%25uncertain%25%27+AND+Com+NOT+LIKE+%27%25indef%25%27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pietrzynski-cepheids-table",
+      "path": "src/objects/ngc-300-layers/source/pietrzynski-cepheids/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BPGF2002%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FAJ%2F123%2F789%2Ftable2%22",
+      "title": "The ARAUCARIA project: discovery of Cepheid variables in NGC 300 from a wide-field imaging survey, table.csv",
+      "credit": "G. Pietrzynski, W. Gieren, P. Fouque, F. Pont; AJ 123, 789",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through pietrzynski-cepheids/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pietrzynski-2002-ngc300-cepheids",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BPGF2002%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FAJ%2F123%2F789%2Ftable2%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pietrzynski-ob-table",
+      "path": "src/objects/ngc-300-layers/source/pietrzynski-ob/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BPGF2001%5D%22%2C+RA2000%2C+DE2000+FROM+%22J%2FA%2BA%2F371%2F497%2Ftable1%22",
+      "title": "A catalog of OB associations in the spiral galaxy NGC 300, table.csv",
+      "credit": "G. Pietrzynski, W. Gieren, P. Fouque, F. Pont; A&A 371, 497",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through pietrzynski-ob/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pietrzynski-2001-ngc300-ob-associations",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BPGF2001%5D%22%2C+RA2000%2C+DE2000+FROM+%22J%2FA%2BA%2F371%2F497%2Ftable1%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "soffner-hii-table",
+      "path": "src/objects/ngc-300-layers/source/soffner-hii/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Field+%7C%7C+%27-%27+%7C%7C+HII%2C+RA2000%2C+DE2000+FROM+%22J%2FA%2BA%2F306%2F9%2Ftab3-5%22",
+      "title": "Planetary nebulae and HII regions in NGC 300, table.csv",
+      "credit": "T. Soffner, R. H. Mendez, G. H. Jacoby, R. Ciardullo; A&A 306, 9",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through soffner-hii/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "soffner-1996-ngc300-hii",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Field+%7C%7C+%27-%27+%7C%7C+HII%2C+RA2000%2C+DE2000+FROM+%22J%2FA%2BA%2F306%2F9%2Ftab3-5%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vucetic-snr-table",
+      "path": "src/objects/ngc-300-layers/source/vucetic-snr/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fngc300%22",
+      "title": "Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission, table.csv",
+      "credit": "M. M. Vucetic, B. Arbutina, D. Urosevic; MNRAS 446, 943",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through vucetic-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vucetic-2015-optical-snr",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fngc300%22"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/ngc-300-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/ngc-300-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/ngc-300-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "stellar-extent",
+      "path": "src/objects/ngc-300-layers/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "bland-hawthorn-2005-ngc300-outer-disc",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/astro-ph/0503488"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-300-layers/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "pena-pne-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-300-layers/source/pena-pne/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A catalog of planetary nebula candidates in the Sculptor spiral galaxy NGC300 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "pietrzynski-cepheids-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-300-layers/source/pietrzynski-cepheids/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the The ARAUCARIA project: discovery of Cepheid variables in NGC 300 from a wide-field imaging survey rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "pietrzynski-ob-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-300-layers/source/pietrzynski-ob/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A catalog of OB associations in the spiral galaxy NGC 300 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "soffner-hii-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-300-layers/source/soffner-hii/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Planetary nebulae and HII regions in NGC 300 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "vucetic-snr-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-300-layers/source/vucetic-snr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

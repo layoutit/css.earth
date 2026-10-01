@@ -1,6 +1,6 @@
 # Pleiades (M45): source evidence and 3D experiment
 
-This file holds processing studies for the Pleiades nebula lab. The [shipped object record](../../../../src/objects/m45/README.md) owns the active sources, delivery evidence and known problems. The experiments below do not qualify later deliveries.
+This file holds processing studies for the Pleiades nebula lab. The [shipped object record](../../../../src/objects/m45-volume/README.md) owns the active sources, delivery evidence and known problems. The experiments below do not qualify later deliveries.
 
 The current result is an experimental display volume, not a recovered dust cloud or an accepted production-quality scene. Reconstruction has an **Optical composite · NOIRLab + Niittee** research dataset: Niittee's registered optical footprint covers 99.84% of the model's projected emission, compared with 60.14% for NOIRLab alone. See the [method, result, credits, rejected trials and replay limits](optical-composite-notes.md).
 

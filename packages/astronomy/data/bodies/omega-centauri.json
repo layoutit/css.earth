@@ -1,0 +1,28 @@
+{
+  "id": "omega-centauri",
+  "classification": "globular-cluster",
+  "order": 5151,
+  "physical": {
+    "name": "Omega Centauri",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Omega Centauri is recorded: it is an extended globular cluster, and its package frames it at 43.4 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 201.696958,
+    "declinationDegrees": -47.479539,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 5426,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 232.7,
+    "sources": {
+      "position": "ESO/INAF-VST/OmegaCAM eso1119b native TIFF and embedded AVM. The common observation-frame center is an adopted registration origin, not a new dynamical centroid measurement. (https://cdn.eso.org/images/original/eso1119b.tif); catalogue reference eso1119b-frame",
+      "distance": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes. (https://arxiv.org/pdf/2105.09526); catalogue reference baumgardt-vasiliev-2021: 5426 pc (-47/+47); Combined Gaia EDR3, HST and literature distance, Table 2, NGC 5139. One cluster scale; individual stellar distances are not recovered.",
+      "properMotion": "Zero: the globular cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 5139: 232.7 km/s +/- 0.2, from 2018MNRAS.478.1520B (https://ui.adsabs.harvard.edu/abs/2018MNRAS.478.1520B/abstract)"
+    }
+  }
+}

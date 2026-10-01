@@ -179,18 +179,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         setAllowed(false);
         return getOrbit().applyWorldCamera(pose, worldFrame, options?.signal, options?.departing);
       },
-      preparedFocus() { return getOrbit().preparedFocus(); },
       // Every prepared group is connected and painted once: an arriving flight
       // may resume before the remaining readiness bookkeeping settles.
       detailActivated() { return phase !== 'mounting' && !lifetime.disposed; },
-      setPreparedFocus(focus: Parameters<ObjectWorldNavigation['setPreparedFocus']>[0]) {
-        if (!lifetime.disposed) getOrbit().setPreparedFocus(focus, worldFrame);
-      },
-      flyToPreparedFocus(focus: Parameters<ObjectWorldNavigation['flyToPreparedFocus']>[0], options?: Parameters<ObjectWorldNavigation['flyToPreparedFocus']>[1]) {
-        if (lifetime.disposed) return Promise.resolve({ completed: false });
-        setAllowed(false);
-        return getOrbit().flyToPreparedFocus(focus, worldFrame, this.optics(), options);
-      },
       optics() {
         const state = getOrbit().state();
         return { focalPixels: state.focal, projectionScale: state.projectionScale, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,

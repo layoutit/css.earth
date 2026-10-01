@@ -22,12 +22,10 @@ export function quaternion(values: readonly number[]): WorldCameraPose['pose']['
 export function navigationFixture(frame: PreparedWorldCameraFrame, capture: () => WorldCameraPose,
   optics: ObjectWorldNavigation['optics']): ObjectWorldNavigation {
   return { motion: createCameraMotion(), frame, capture, optics, apply() { throw new Error('This fixture only samples the camera.'); },
-    preparedFocus: () => null, setPreparedFocus() {},
-    async flyToPreparedFocus() { throw new Error('This fixture does not fly the camera.'); },
     subscribe() { throw new Error('This fixture does not subscribe to camera changes.'); } };
 }
 export function objectFixture(id: string, worldFrame: PreparedWorldCameraFrame, overrides: Partial<ObjectEntry> = {}): ObjectEntry {
-  return { kind: 'scene', id, name: id, systemName: id, classification: 'planet', color: '#000000', distance: testDistance(1),
+  return { id, name: id, systemName: id, classification: 'planet', color: '#000000', distance: testDistance(1),
     route: `/${id}/`, description: id, worldFrame, discovery: { featured: false, imagery: false, illustration: false },
     async loadScene() { throw new Error('This fixture does not mount a scene.'); }, ...overrides };
 }

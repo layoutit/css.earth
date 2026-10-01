@@ -51,31 +51,26 @@ export async function focusExistingScene({ session, request, selectionTransition
   const { camera } = request;
   const reducedMotion = getReducedMotion();
   let fly: (() => void | Promise<void>) | undefined;
-  if (camera.kind === 'focus') {
-    if (!view.commit(request, session)) return false;
-    fly = () => view.focus(session, request);
-  } else {
-    if (camera.kind === 'restore') {
-      if (request.history.history === 'pop' || request.url !== navigationHref(windowTarget)) view.commit(request, session);
-      else session.url = request.url;
-    }
-    // Saved history can fly to its endpoint before exact restoration at arrival.
-    const savedWorld = camera.kind === 'restore' && camera.animate && !reducedMotion
-      ? navigation.savedTarget?.({ objectId: session.objectId, url: request.url, mount: session.mount }) : null;
-    if (camera.kind === 'frame' || savedWorld) {
-      fly = () => navigation.focus({ objectId: session.objectId, mount: session.mount!, signal: request.signal,
-        reducedMotion, timing: request.timing,
-        targetWorldCamera: camera.kind === 'frame' ? camera.world ?? undefined : savedWorld!,
-        targetFocusPositionM: camera.kind === 'frame' ? camera.focusPositionM ?? undefined : undefined,
-        centerSelection: camera.kind === 'frame' && camera.framing === 'center' });
-    }
+  if (camera.kind === 'restore') {
+    if (request.history.history === 'pop' || request.url !== navigationHref(windowTarget)) view.commit(request, session);
+    else session.url = request.url;
+  }
+  // Saved history can fly to its endpoint before exact restoration at arrival.
+  const savedWorld = camera.kind === 'restore' && camera.animate && !reducedMotion
+    ? navigation.savedTarget?.({ objectId: session.objectId, url: request.url, mount: session.mount }) : null;
+  if (camera.kind === 'frame' || savedWorld) {
+    fly = () => navigation.focus({ objectId: session.objectId, mount: session.mount!, signal: request.signal,
+      reducedMotion, timing: request.timing,
+      targetWorldCamera: camera.kind === 'frame' ? camera.world ?? undefined : savedWorld!,
+      targetFocusPositionM: camera.kind === 'frame' ? camera.focusPositionM ?? undefined : undefined,
+      centerSelection: camera.kind === 'frame' && camera.framing === 'center' });
   }
   if (fly) {
     requests.advance(request, 'flying'); syncPlayback();
     const flown = await request.lifetime.wait(fly());
     if (flown.cancelled || !requests.owns(request)) return false;
   }
-  if (camera.kind !== 'focus') commitSelection(request, selectionTransition);
+  commitSelection(request, selectionTransition);
   if (!await view.arrive(session, { request })) return false;
   finishArrival(session, request);
   return true;
@@ -107,7 +102,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   const factoryTask = contentTransport.descriptor(object, { signal: request.signal })
     .then(descriptor => loadObject(object.id, descriptor, request.signal))
     .then(async factory => {
-      if (factory.navigation && request.subject.kind !== 'overview' && request.subject.kind !== 'focus') {
+      if (factory.navigation && request.subject.kind !== 'overview') {
         const framingScale = await factory.navigation.framingScale(request.signal);
         const edge = await factory.navigation.labelEdge?.(request.signal);
         if (systemTask) await systemTask;

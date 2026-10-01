@@ -1,42 +1,95 @@
 {
   "schema": "cssearth-object@2",
   "id": "helix",
-  "type": "volume-dataset-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Helix Nebula",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 48469710106800
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Helix Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 44553198.15,
+      "description": "The Helix is a planetary nebula about 216 parsecs away.",
+      "aliases": [
+        "NGC 7293"
+      ],
+      "order": 5137,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        5753513735748707000,
-        -2384067544684067000,
-        -2373834772056189000
+        5751238142720137000,
+        -2392748347554614300,
+        -2370847812686341600
       ],
-      "localToReferenceXyzw": [
-        0.6849222152530097,
-        0.45687881312187983,
-        0.31496089303866553,
-        0.47216834395111507
+      "presentationToReference": [
+        0.877809978455815,
+        0,
+        -0.479009020503165,
+        -0.4394821838809828,
+        0.3977771559319137,
+        -0.8053749091385451,
+        -0.19053884584148073,
+        -0.9174820620691818,
+        -0.34917275667880854
       ],
-      "metersPerUnit": 32313140071200,
-      "boundsUnits": {
-        "min": [
-          -2280.280787514437,
-          -2096.5462776359145,
-          -694.7955367141913
-        ],
-        "max": [
-          2280.280787514437,
-          2096.5462776359145,
-          694.7955367141913
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/delivery.json"
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 156353903570322.6,
+      "bodyRadiusM": 48469710106800000
     }
   },
   "prepared": {
-    "format": "cssearth-volume-datasets@1",
-    "url": "prepared/datasets.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

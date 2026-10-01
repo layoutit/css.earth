@@ -7,7 +7,7 @@ declare global { interface Window { __cssEarthStartupRequests?: StartupRequests 
 
 /** Runs in the static document's head: one request per URL, kept for its reader by absolute URL. The object transport is
  * requested only at the default view of the page's own scene (`sceneRoute`, or the site root): a custom view (a query, a
- * catalogue focus's path) may be served other markup (`dataset-response.mts`), so its reader picks the transport itself. */
+ * level's path) may be served other markup (`dataset-response.mts`), so its reader picks the transport itself. */
 export function startStartupRequests(window: Window, urls: readonly string[], transportUrl: string, sceneRoute: string) {
   const location = window.location, query = new URLSearchParams(location.search);
   const defaultView = (location.pathname === '/' || location.pathname === sceneRoute) &&

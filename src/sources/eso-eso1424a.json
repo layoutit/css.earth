@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/m33/source/provenance.json",
+      "path": "src/objects/m33-layers/source/provenance.json",
       "locator": "/"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "ESO",
       "scope": "Published source",
-      "evidence": "src/objects/m33/source/provenance.json"
+      "evidence": "src/objects/m33-layers/source/provenance.json"
     }
   ]
 }

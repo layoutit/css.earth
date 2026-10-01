@@ -9,13 +9,13 @@ import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepar
 import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.ts';
 
 test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {
-  const recipe: unknown = JSON.parse(await readFile('src/objects/m45/source/delivery.json', 'utf8'));
+  const recipe: unknown = JSON.parse(await readFile('src/objects/m45-volume/source/delivery.json', 'utf8'));
   const parsed = readNebulaDelivery(recipe);
   assert.equal(parsed.defaultDataset, 'optical-composite');
   assert.equal(parsed.compositeRecipe?.path, 'labs/nebula/models/m45/optical-composite.json');
   assert.ok(parsed.compositeRecipe);
   assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@2', method: 'axial-symmetry' }), /requires compiler/);
-  const ordinary = readNebulaDelivery(JSON.parse(await readFile('src/objects/m8/source/delivery.json', 'utf8')));
+  const ordinary = readNebulaDelivery(JSON.parse(await readFile('src/objects/m8-volume/source/delivery.json', 'utf8')));
   assert.equal(ordinary.compositeRecipe, undefined);
 });
 async function put(root: string, path: string, bytes: Uint8Array | string) {
@@ -32,7 +32,7 @@ async function fixture(root: string) {
     }
   }
   const request = '{}', directory = join(root,'object');
-  const recipe = JSON.parse(await readFile('src/objects/m2-9/source/delivery.json','utf8'));
+  const recipe = JSON.parse(await readFile('src/objects/m2-9-volume/source/delivery.json','utf8'));
   for (const path of [recipe.fieldStars.path, 'packages/renderer/src/navigation/world-camera-math.ts',
     'packages/renderer/src/stars/prepared-catalogue-points.ts']) {
     await put(root,path,await readFile(path));
@@ -40,7 +40,7 @@ async function fixture(root: string) {
   await put(root,'input/request.json',request);
   await put(directory,'source/delivery.json',JSON.stringify({...recipe,
     request:{path:'input/request.json'},inputPins:[],compactInputs:undefined,compactMethod:undefined,symmetryDirectory:'input'}));
-  await copyFile('src/objects/m2-9/source/nebula.json',join(directory,'source/nebula.json'));
+  await copyFile('src/objects/m2-9-volume/source/nebula.json',join(directory,'source/nebula.json'));
   const pixels = await sharp({create:{width:2,height:2,channels:4,background:{r:220,g:80,b:30,alpha:0.6}}}).png().toBuffer();
   const matrices: Record<VolumeAxis,string> = {
     x:'50,0,0,0,0,0,50,0,0,1,0,0,-50,0,-50,1',

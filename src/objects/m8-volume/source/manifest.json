@@ -1,0 +1,293 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "eso-optical",
+      "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
+      "origin": "https://www.eso.org/public/images/eso0936a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
+      "title": "Lagoon Nebula · ESO · optical",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0936a",
+            "role": "material",
+            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "eso-optical",
+      "license": "Provider terms: https://www.eso.org/public/outreach/copyright/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mpg-eso-2-2m",
+            "evidence": "https://www.eso.org/public/images/eso0936a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-vista",
+      "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
+      "origin": "https://www.eso.org/public/images/eso1101d/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1101d/",
+      "title": "Lagoon Nebula · ESO VISTA · infrared",
+      "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "displayCredit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1101d",
+            "role": "material",
+            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "eso-vista",
+      "license": "Provider terms: https://www.eso.org/public/outreach/copyright/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1101d/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spitzer-mid-infrared",
+      "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.skybands.png",
+      "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/",
+      "title": "Lagoon Nebula · Spitzer IRAC · calibrated mid-infrared maps",
+      "credit": "NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
+      "displayCredit": "NASA/JPL-Caltech; CDS",
+      "acquisition": "Composed by the pinned sky band recipe src/objects/m8-volume/source/sky-bands/spitzer-irac.json from three pinned CDS hips2fits IRAC 8.0/4.5/3.6 µm maps: calibrated to MJy/sr, one measured background and range per band, one Lupton asinh display. The repository-relative path is an ignored cache that the recipe reproduces byte for byte.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cds-hips-spitzer-irac",
+            "role": "material",
+            "evidence": "src/objects/m8-volume/source/sky-bands/spitzer-irac.json#/bands"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "spitzer-mid-infrared",
+      "license": "Provider terms: https://www.spitzer.caltech.edu/page/image-use-policy; CDS HiPS distribution under ODbL-1.0. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "spitzer",
+            "evidence": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "physical-evidence",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/03-physical-evidence.json",
+      "origin": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
+      "sourceUrl": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
+      "title": "Lagoon Nebula physical evidence and authored limits",
+      "credit": "Published structural studies; authored display assumptions",
+      "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arias-2006-hourglass",
+            "role": "method",
+            "evidence": "src/objects/m8-volume/source/bake-inputs/references/03-physical-evidence.json#/sources/0"
+          },
+          {
+            "catalogueId": "tiwari-2018-pdr",
+            "role": "method",
+            "evidence": "src/objects/m8-volume/source/bake-inputs/references/03-physical-evidence.json#/sources/5"
+          },
+          {
+            "catalogueId": "tiwari-2020-east",
+            "role": "method",
+            "evidence": "src/objects/m8-volume/source/bake-inputs/references/03-physical-evidence.json#/sources/6"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "distance",
+      "path": "src/objects/m8-volume/source/delivery.json",
+      "origin": "https://arxiv.org/pdf/1903.12176v1",
+      "sourceUrl": "https://arxiv.org/pdf/1903.12176v1",
+      "title": "Lagoon Nebula adopted world placement",
+      "credit": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+      "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "wright-2019-kinematics",
+            "role": "reference",
+            "evidence": "src/objects/m8-volume/source/delivery.json#/sky/distancePc"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m8-volume/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Lagoon Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m8-volume/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m8-volume/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m8-volume/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing facility."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m8-volume/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m8-volume/source/nebula.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m8-volume/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m8-volume/source/request.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "retained-evidence-5",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/01-compiler.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-6",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/02-depth-model.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-7",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/04-processing-observations.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-8",
+      "path": "src/objects/m8-volume/source/bake-inputs/references/05-processing-structures.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-9",
+      "path": "src/objects/m8-volume/source/provenance-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-10",
+      "path": "src/objects/m8-volume/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
+      }
+    },
+    {
+      "id": "document-11",
+      "path": "src/objects/m8-volume/source/sky-bands/spitzer-irac.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "compact-bake-inputs-json-gz",
+      "path": "src/objects/m8-volume/source/bake-inputs.json.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    }
+  ]
+}

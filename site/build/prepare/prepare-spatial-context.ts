@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
-import { mapLabel, parseObjectDescriptor } from '@cssearth/objects';
+import { isPlacedClassification, mapLabel, parseObjectDescriptor } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/renderer';
@@ -79,15 +79,15 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
   // @cssearth/objects `contextColour`), capitals for a star, black hole or planet's caption, and its classification and system name.
   {
-    const prepared = readPreparedObjects(process.cwd()), registry = prepared.sceneObjects;
+    // Every placed object the world draws: the scenes and the packages the world's host draws.
+    const prepared = readPreparedObjects(process.cwd()), registry = prepared.worldObjects;
     const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
         const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('./jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records, as the prepared catalogue holds them: what the world's visibility reads per body.
-    const discoveries: Record<string, unknown> = Object.fromEntries(prepared.entries.flatMap(entry =>
-      entry.kind === 'scene' && isRecord(entry.descriptor) && typeof entry.descriptor.id === 'string' ? [[entry.descriptor.id, entry.discovery]] : []));
+    const discoveries: Record<string, unknown> = Object.fromEntries(registry.map(object => [object.id, object.discovery]));
     const present = async (body: Record<string, unknown>) => {
       const object = byId.get(String(body.id));
       if (!object) return;
@@ -127,7 +127,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
-  const SCENE_OBJECTS = readPreparedObjects(process.cwd()).sceneObjects;
+  const SCENE_OBJECTS = readPreparedObjects(process.cwd()).worldObjects;
   const planetIds = new Set(SCENE_OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   const classifications = new Map(SCENE_OBJECTS.map(body => [body.id, body.classification]));
   // A planet of another star closes its orbit. A star on a hosted orbit (an S-star around Sgr A*) draws the half-orbit trail a
@@ -158,7 +158,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // A star other than the focus is placed, not orbiting: the context carries its position and radius and draws no trajectory.
     // A planet of another star closes its orbit around that star, which makes the star the root of its own planetary system.
     const classification = classifications.get(body.id);
-    facts[body.id] = { radiusM, orbitStyle: hostedStarIds.has(body.id) ? 'trail' : hostedIds.has(body.id) ? 'closed' : classification === 'star' || classification === 'black-hole' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
+    facts[body.id] = { radiusM, orbitStyle: hostedStarIds.has(body.id) ? 'trail' : hostedIds.has(body.id) ? 'closed' : isPlacedClassification(classification) ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
   }
   // A star measured to be bound to another with no measured orbit carries the pair's centre of mass, weighted by the
   // published masses (as gravitational parameters) at the two prepared positions.
@@ -335,7 +335,8 @@ function orbits(value: unknown): Readonly<Record<string, Orbit>> {
     const orbit = record(value, `Solar geometry orbit ${id}`);
     if ((orbit.centerBodyId === undefined) !== (orbit.centerPositionAu === undefined)) throw new TypeError(`${id} orbit parent and centre must be declared together.`);
     const semiMajorAxisAu = number(orbit.semiMajorAxisAu, `${id} semi-major axis`), orbitEccentricity = eccentricity(orbit.eccentricity, id);
-    if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis and eccentricity are incompatible.`);
+    // A straight path (eccentricity exactly 1, a placed body moving along its line of sight or held still) is bound or unbound.
+    if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : orbitEccentricity === 1 ? semiMajorAxisAu !== 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis ${semiMajorAxisAu} AU and eccentricity ${orbitEccentricity} are incompatible.`);
     return [id, { semiMajorAxisAu, eccentricity: orbitEccentricity, heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
       perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`),
       ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }),

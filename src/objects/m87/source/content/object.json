@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m87",
+  "displayName": "M87",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "16.8 Mpc (\u2212800,000 / +800,000 pc)",
+        "source": {
+          "catalogueId": "arxiv-1906-11238",
+          "url": "https://arxiv.org/abs/1906.11238",
+          "label": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 187.7\u00b0, Dec 12.39\u00b0",
+        "source": {
+          "catalogueId": "publication-charlot2020a-a-644a-159c",
+          "url": "https://doi.org/10.1051/0004-6361/202038368",
+          "label": "Charlot et al. (2020), A&A 644, A159: ICRF3, the position SIMBAD adopts for M 87.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Virgo",
+        "source": {
+          "catalogueId": "publication-binggeli1985aj-90-1681b",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681",
+          "label": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1316 = NGC 4486, membership M (member).",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "eso-optical",
+    "controls": [
+      {
+        "id": "eso-optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "m87-dataset-eso-optical.webp",
+        "volume": {
+          "objectId": "m87-volume",
+          "datasetId": "eso-optical",
+          "surface": "eso-optical"
+        },
+        "source": {
+          "id": "m87-volume-eso-optical",
+          "path": "../../m87-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1525a/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI.",
+      "href": "https://arxiv.org/abs/1906.11238"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Charlot et al. (2020), A&A 644, A159: ICRF3, the position SIMBAD adopts for M 87.",
+      "href": "https://doi.org/10.1051/0004-6361/202038368"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1316 = NGC 4486, membership M (member).",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1906.11238",
+      "credit": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI."
+    }
+  }
+}

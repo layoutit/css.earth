@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "m45-volume",
+  "method": "compiler",
+  "request": {
+    "path": "src/objects/m45-volume/source/request.json"
+  },
+  "inputPins": [
+    {
+      "path": "labs/nebula/models/m45/compiler.json"
+    },
+    {
+      "path": "labs/nebula/models/m45/depth-model.json"
+    },
+    {
+      "path": "labs/nebula/models/m45/observation-structures.json"
+    },
+    {
+      "path": "labs/nebula/models/m45/physical-evidence.json"
+    },
+    {
+      "path": "labs/nebula/models/m45/processing-observations.json"
+    },
+    {
+      "path": "labs/nebula/models/m45/stellar-catalogue.json"
+    },
+    {
+      "path": "labs/nebula/models/m45/optical-composite-observations.json"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      56.75,
+      24.1167
+    ],
+    "distancePc": 136.2,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 1
+  },
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+  "description": "Authored warped finite display-emission surface inspired by localized scattering and absorption topology. Five datasets share geometry and the stellar field. Multiple dust layers, scattering, illumination and extinction are not recovered. Named Hipparcos stars retain conditional model depths; surrounding Gaia sources use parallax-informed distances. Display colors are not calibrated luminosity.",
+  "defaultDataset": "optical-composite",
+  "framingRadiusUnits": 5359.621926,
+  "acceptedLabResult": "m45-compiler",
+  "compositeRecipe": {
+    "path": "labs/nebula/models/m45/optical-composite.json"
+  },
+  "fieldStars": {
+    "path": "src/objects/m45-volume/source/stellar-field.json"
+  },
+  "compactInputs": {
+    "path": "src/objects/m45-volume/source/bake-inputs.json.gz"
+  },
+  "compactMethod": "compiler"
+}

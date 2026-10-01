@@ -6,9 +6,10 @@ interface Props {
   objectId: string;
   dataset: Control;
   members: Control[];
-  focus: boolean;
+  /** The scene's own sequence can play; a drawn page's steps are links to its page. */
+  playable: boolean;
 }
-const { objectId, dataset, members, focus } = Astro.props;
+const { objectId, dataset, members, playable } = Astro.props;
 const index = members.findIndex(member => member.id === dataset.id);
 ---
 <!-- A sequence plays like a short video over its own map: one segment per step, filled up to the step on screen. -->
@@ -21,14 +22,13 @@ const index = members.findIndex(member => member.id === dataset.id);
       name="dataset"
       value={member.id}
       data-dataset-step={member.id}
-      data-focus-dataset={focus ? true : undefined}
       aria-current={position === index ? 'step' : undefined}
       aria-label={member.step!.label}
       title={member.step!.label}
     ><span class="object-sequence-segment-bar" aria-hidden="true"><span class="object-sequence-segment-fill"></span></span></button>)}
   </div>
   <div class="object-sequence-row">
-    {!focus && <button class="object-dataset-play" type="button" data-dataset-play={dataset.step!.group} disabled
+    {playable && <button class="object-dataset-play" type="button" data-dataset-play={dataset.step!.group} disabled
       aria-label="Play sequence" aria-pressed="false" title="Loop through this sequence">
       <span class="object-dataset-play-icon is-play"><MaterialSymbol name="play_arrow" /></span>
       <span class="object-dataset-play-icon is-pause"><MaterialSymbol name="pause" /></span>

@@ -13,42 +13,37 @@ import { overviewResult } from '../server/overview-result.mts';
 import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts';
 import ObjectFactsheet from './ObjectFactsheet.astro';
 import DatasetList from './DatasetList.astro';
-import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
-import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
+import { OBJECTS, OVERVIEWS, SCENE_OBJECTS } from '../objects.mts';
+import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { pageDatasetList } from '../page-datasets-content.mts';
 import overviewFacts from '../source/overview-facts.json';
 
 /** One overview's card, entirely from its registry entry (overview-object.ts): its name, description and breadcrumbs, its
  * page's datasets, a tab for each group of subjects it holds with a list label, and its factsheet when
  * site/source/overview-facts.json has one. Each held group with a list label lists the registry's
- * subjects of those classifications (catalogue focuses, member overviews), each with its distance from the others. */
+ * objects of those classifications and its member levels, each with its distance from the others. */
 interface Props { overview: OverviewObject }
 const { overview } = Astro.props;
 const PARSEC_M = 3.085677581491367e16;
-const catalogue = new Map(FOCUS_CATALOG_DATA.flatMap(({ data }) => data.objects.map(object => [object.id, object] as const)));
 const distance = (pc: number) => {
   const ly = pc * 3.261563777, divisor = ly >= 1e6 ? 1e6 : ly >= 1e3 ? 1e3 : 1;
   return { value: new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor), unit: divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly' };
 };
 const slug = (label: string) => label.toLocaleLowerCase('en').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
 type Member = { id: string; name: string; positionM: readonly number[]; distancePc: number; holdsStars: boolean };
-const members = (classifications: readonly string[]): Member[] => OBJECTS.filter(object => object.id !== overview.id).flatMap((object): Member[] => {
-  if (object.kind === 'prepared-focus') {
-    if (!classifications.includes(object.classification)) return [];
-    const record = catalogue.get(object.id);
-    if (!record) throw new Error(`${overview.id} lists ${object.id}, which no prepared catalogue places.`);
-    return [{ id: object.id, name: object.name, positionM: record.positionM, distancePc: record.distance.valuePc, holdsStars: false }];
-  }
-  if (object.kind === 'overview') {
-    if (!object.classification || !classifications.includes(object.classification)) return [];
-    if (!object.originM) throw new Error(`${overview.id} lists ${object.id}, whose package has no volume origin to place it.`);
-    return [{ id: object.id, name: object.name, positionM: object.originM, distancePc: Math.hypot(...object.originM) / PARSEC_M,
-      holdsStars: object.holds.some(group => group.classifications.includes('star')) }];
-  }
-  if (!classifications.includes(object.classification) || !object.worldFrame) return [];
-  return [{ id: object.id, name: object.name, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false }];
+// A level lists the objects of the classifications it holds, and the levels that are members of it (the Milky Way is a
+// galaxy of the Local Group).
+const members = (classifications: readonly string[]): Member[] => [
+  ...OVERVIEWS.filter(level => level.id !== overview.id && level.classification && classifications.includes(level.classification)).map((level): Member => {
+    const originM = level.worldFrame?.originM ?? level.originM;
+    if (!originM) throw new Error(`${overview.id} lists ${level.id}, whose package has neither a world frame nor a volume origin to place it.`);
+    return { id: level.id, name: level.name, positionM: originM, distancePc: Math.hypot(...originM) / PARSEC_M,
+      holdsStars: level.holds.some(group => group.classifications.includes('star')) };
+  }),
+  ...OBJECTS.filter(object => classifications.includes(object.classification)).map((object): Member =>
+    ({ id: object.id, name: object.name, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false })),
   // A level lists only the subjects whose own zoom reaches it (M87 is in Virgo, not the Local Group).
-}).filter(member => overviewsReachableFrom(member.positionM).some(level => level.id === overview.id)).sort((a, b) => a.distancePc - b.distancePc);
+].filter(member => overviewsReachableFrom(member.positionM).some(level => level.id === overview.id)).sort((a, b) => a.distancePc - b.distancePc);
 const lists = overview.holds.flatMap(group => {
   if (!group.list) return [];
   return [{ id: slug(group.list), label: group.list, members: members(group.classifications) }];
@@ -59,13 +54,13 @@ const facts = isRecord(factsEntry) ? { facts: factsEntry.facts as ObjectProps['f
 // Unlabelled held scene groups expose a small featured navigation list, using the search's exact rows.
 const classifications = overview.holds.filter(group => !group.list && group.classifications.includes('star')).flatMap(group => group.classifications);
 const sceneMembers = SCENE_OBJECTS.filter(object => classifications.includes(object.classification)
-  && (object.id === overview.sceneHostId || object.discovery.featured)
+  && (object.id === WORLD_HOST_ID || object.discovery.featured)
   && (!overview.zoom.centreWithin || object.distance.meters < overviewDistanceM(overview.zoom.centreWithin)))
-  .sort((a, b) => Number(b.id === overview.sceneHostId) - Number(a.id === overview.sceneHostId) || a.distance.meters - b.distance.meters);
+  .sort((a, b) => Number(b.id === WORLD_HOST_ID) - Number(a.id === WORLD_HOST_ID) || a.distance.meters - b.distance.meters);
 const resultRows = new Map(PREPARED_CATALOGUE_INDEX.entries.filter(row => row.kind !== 'system').map(row => [row.id, row]));
 const memberMarkup = (member: Member) => {
-  const object = OBJECTS.find(object => object.id === member.id);
-  const row = object?.kind === 'overview' ? overviewResult(object) : resultRows.get(member.id);
+  const level = OVERVIEWS.find(level => level.id === member.id);
+  const row = level ? overviewResult(level) : resultRows.get(member.id);
   if (!row) throw new Error(`Missing search row for ${overview.id} member ${member.id}.`);
   const { value, unit } = distance(member.distancePc);
   const text = `≈${value} ${unit}`, title = 'Published catalogue distance from the Solar System';
@@ -92,7 +87,7 @@ import Detached from './Detached.astro';
     role="region" aria-label="Datasets" data-page-datasets={overview.id} data-default-dataset={datasets.defaultDataset}
     data-dataset-views={JSON.stringify(datasets.views)}>
     <DatasetList objectId={`page-${overview.id}`} thumbnailObjectId={overview.id} page={overview.id} route={overview.route}
-      datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} focus />
+      datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} />
   </div></Detached>}
   {sceneMembers.length > 0 && <Detached detached={opening !== 'bodies'}><div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-bodies-content`} role="region" aria-label="Celestial bodies">
     <ul class="object-list">{sceneMembers.map(object => <ObjectResult {object} />)}</ul>

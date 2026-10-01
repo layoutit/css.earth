@@ -14,7 +14,7 @@ const VIEWPORT_EDGE_PX = 4;
 const HEADER_CLEARANCE_PX = 64;
 const FOOTER_CLEARANCE_PX = 30;
 
-export interface SelectedLabelFlags { overview: boolean; focused: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge }
+export interface SelectedLabelFlags { overview: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge }
 interface SelectedLabelPlacement { left: number; top: number; rect: LabelScreenRect }
 
 /** What a caption is placed from: a body's centre and radius, and where its package asks for the caption. */
@@ -23,8 +23,8 @@ export type CaptionedBody = Pick<PreparedContextPoint, 'positionM' | 'radiusM'> 
 /** Where the caption of `body` sits for this camera, or null when it is hidden: below the body's disc or point, clear of the
  * header and footer, or over the body's middle when its package asks. */
 export function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraViewport, body: CaptionedBody,
-  { overview, focused, preview, edge }: SelectedLabelFlags, width: number, height: number): SelectedLabelPlacement | null {
-  if (overview || focused || preview !== undefined && preview !== body.id) return null;
+  { overview, preview, edge }: SelectedLabelFlags, width: number, height: number): SelectedLabelPlacement | null {
+  if (overview || preview !== undefined && preview !== body.id) return null;
   const widthPixels = viewport.widthPixels, heightPixels = viewport.heightPixels;
   // The caption stays below the shell header where the viewport measures one, else below a fixed clearance.
   const headerClearance = viewport.coveredTopPixels ?? HEADER_CLEARANCE_PX;
@@ -101,7 +101,7 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, body: PreparedContextPoint, flags: SelectedLabelFlags): LabelScreenRect | null {
       const hide = () => { fader.set(label, 0); return null; };
-      if (flags.overview || flags.focused || flags.preview !== undefined && flags.preview !== body.id) return hide();
+      if (flags.overview || flags.preview !== undefined && flags.preview !== body.id) return hide();
       measure(body);
       if (measuredId !== body.id) return hide();
       const placement = placeSelectedBodyLabel(world, viewport, body, flags, width, height);

@@ -10,5 +10,5 @@ export function overviewResult(overview: OverviewObject): ObjectResultEntry {
   return { kind: 'overview', id: overview.id, name: overview.name, route: overview.route,
     classificationName: objectClassificationLabel(overview.classification ?? 'overview'),
     source: { subject: `overview:${overview.id}`, document: source.href, label: source.label },
-    marker: { kind: 'focus', thumbnail: sidebarThumbnail(overview.id)?.url2x ?? null } };
+    marker: { kind: 'thumbnail', thumbnail: sidebarThumbnail(overview.id)?.url2x ?? null } };
 }

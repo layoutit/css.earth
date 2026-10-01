@@ -9,9 +9,7 @@ import { dirname, resolve } from 'node:path';
 import majorMoons from '../../source/major-moons.json' with { type: 'json' };
 import galaxies from '../../../src/objects/local-group/source/presentation.json' with { type: 'json' };
 import clusters from '../../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
-import { discoveryVisibility, matchesObjectClassification, type ObjectDiscovery } from '@cssearth/objects';
-import { catalogueClassification, isNavigableCatalogObject, isPreparedCluster, isPreparedNebula, type PreparedCatalogObject } from '@cssearth/catalog';
-import { readPreparedCatalogObjects } from '@cssearth/bake/navigation';
+import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
 import { APPLICATION_WORLD_CONTEXT, WORLD_SYSTEM_HOSTS } from '../../world-context-plan.mts';
 import { systemFramingRadii } from '../../system-framing-radii.mts';
@@ -99,13 +97,11 @@ export function notableBodies(worldObjects: readonly { id: string; discovery: { 
 }
 
 /** Every category's frame, from the members its pill marks: the world's bodies it highlights with the default settings (the same
- * discoveryVisibility the browser runs), and the catalogue rows the galaxy layer draws (packages/renderer/src/universe/
- * prepared-galaxy-catalog.ts: the Local Group's galaxies with a page, the clusters, and the nebulae with a page). A category whose
+ * discoveryVisibility the browser runs): the galaxies, clusters and nebulae with a package are bodies among them. A category whose
  * notable bodies (notableBodies) are only some of its members, at least two, is marked and framed by those alone, listed as its
  * memberIds: the 40 notable exoplanets and stars, not all 865 and 2,174. hostIds lists the placed stars whose systems hold the
- * marked members: from afar a planet is drawn inside its star's dot, so the pill marks that star too. The world and the catalogues
- * share the Sun-centred ICRF frame and epoch. */
-export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS, catalogue: readonly PreparedCatalogObject[],
+ * marked members: from afar a planet is drawn inside its star's dot, so the pill marks that star too. */
+export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS,
   defaultFeatures: ReadonlySet<string>, orbitFeatures: ReadonlySet<string>, notable: ReadonlySet<string>,
   centreOf: ReadonlyMap<string, string>, worldHostId: string) {
   // Where a member is drawn from afar: inside the dot of the placed star its orbits lead to. The world's own host (the Sun) is
@@ -116,18 +112,16 @@ export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS, catalo
     for (let steps = 0; steps <= centreOf.size && centreOf.has(at); steps++) at = centreOf.get(at)!;
     return at !== id && placedStars.has(at) ? at : null;
   };
-  const drawn = catalogue.filter(object => isNavigableCatalogObject(object) && (isPreparedCluster(object) || isPreparedNebula(object) || object.membership.group === 'local-group'));
-  const classifications = [...new Set([...worldObjects.map(object => object.classification), ...drawn.map(catalogueClassification)])].sort();
+  const classifications = [...new Set(worldObjects.map(object => object.classification))].sort();
   return Object.fromEntries(classifications.flatMap(classification => {
     const marked = new Set(discoveryVisibility(worldObjects, { illustrations: false, highlighted: classification, defaultFeatures, orbitFeatures }).highlightedBodies);
     const bodies = worldObjects.filter(object => marked.has(object.id)), notables = bodies.filter(object => notable.has(object.id));
     const narrowed = notables.length >= 2 && notables.length < bodies.length;
-    const frame = prepareCategoryFrame([...(narrowed ? notables : bodies).map(object => {
+    const frame = prepareCategoryFrame((narrowed ? notables : bodies).map(object => {
       // Preparation reads every system's file (site/world-context-plan.mts), so every body is placed.
       if (!object.worldFrame) throw new TypeError(`${object.id} has no world position; the world context read here lacks its system.`);
       return object.worldFrame.originM;
-    }),
-      ...drawn.filter(object => matchesObjectClassification(catalogueClassification(object), classification)).map(object => object.positionM)]);
+    }));
     const markedBodies = narrowed ? notables : bodies;
     const hostIds = [...new Set(markedBodies.flatMap(object => hostOf(object.id) ?? []))];
     return frame ? [[classification, { ...frame, ...(narrowed ? { memberIds: notables.map(object => object.id) } : {}), ...(hostIds.length ? { hostIds } : {}) }] as const] : [];
@@ -140,7 +134,7 @@ function orbitCentres(context: typeof APPLICATION_WORLD_CONTEXT): ReadonlyMap<st
     ...Object.entries(context.orbitCenters ?? {}).map(([id, centre]) => [id, centre.centerBodyId] as const)]);
 }
 
-export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>, catalogue: readonly PreparedCatalogObject[]) {
+export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>) {
   const minor = minorMoonOrbitIds(APPLICATION_WORLD_CONTEXT.bodies);
   const defaultFeatureIds = SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id);
   const orbitFeatureIds = SCENE_OBJECTS.filter(orbitFeature).map(object => object.id);
@@ -155,7 +149,7 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },
-    categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, catalogue, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
+    categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
       notableBodies(WORLD_OBJECTS, new Set(defaultFeatureIds), orbitCentres(APPLICATION_WORLD_CONTEXT)), orbitCentres(APPLICATION_WORLD_CONTEXT),
       APPLICATION_WORLD_CONTEXT.focus.id),
     // Every system whose bodies are their own file, framed before a page reads it (site/system-framing.mts).
@@ -167,7 +161,7 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
 export async function writeWorldPresentation() {
   const catalogue = await readSourceCatalog(resolve(import.meta.dirname, '../../..'));
   const introductions = prepareSystemIntroductions(systemText, allSatelliteSystems().map(system => system.hostId), new Set(catalogue.records.map(record => record.id)));
-  const text = `${JSON.stringify(prepareWorldPresentation(introductions, await readPreparedCatalogObjects(resolve(import.meta.dirname, '../../../src/objects'))))}\n`;
+  const text = `${JSON.stringify(prepareWorldPresentation(introductions))}\n`;
   await mkdir(dirname(output), { recursive: true });
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);
 }

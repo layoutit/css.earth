@@ -10,6 +10,10 @@ import {
   COMET_IDS,
   EXOPLANET_IDS,
   BLACK_HOLE_IDS,
+  GALAXY_IDS,
+  GALAXY_CLUSTER_IDS,
+  NEBULA_IDS,
+  GLOBULAR_CLUSTER_IDS,
   PLANET_IDS,
   bodyData,
   moonsOf,
@@ -25,6 +29,8 @@ import { HOSTED_PLANET_IDS } from './hostedOrbits.js'
 const HOSTED_STAR_IDS = HOSTED_PLANET_IDS.filter(id => !(EXOPLANET_IDS as readonly string[]).includes(id))
 
 const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
+
+const EXTENDED_IDS: readonly string[] = [...GALAXY_IDS, ...GALAXY_CLUSTER_IDS, ...NEBULA_IDS, ...GLOBULAR_CLUSTER_IDS]
 
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star, black hole and hosted star, and every exoplanet', () => {
@@ -65,6 +71,12 @@ describe('the body table', () => {
   it('has physically plausible radii and masses', () => {
     for (const id of BODY_IDS) {
       const data = bodyData(id)
+      // An extended body (a galaxy, a cluster of galaxies, a nebula, a globular cluster) has no radius or mass of a sphere.
+      if (EXTENDED_IDS.includes(id)) {
+        assert.equal(data.meanRadiusKm, 0, id)
+        assert.equal(data.gravitationalParameterKm3PerS2, 0, id)
+        continue
+      }
       // Zero radius is an unmeasured one, allowed only for a hosted star or black hole. Such a star has no published mass either;
       // a hosted black hole's mass is what its orbit measures.
       if (data.meanRadiusKm === 0) {

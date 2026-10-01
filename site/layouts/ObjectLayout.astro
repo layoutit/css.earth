@@ -7,8 +7,8 @@ import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../startup-requests.mts';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
-import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
-import { breadcrumbJsonLd, focusSeo, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
+import { SCENE_OBJECTS, requirePage, requireSceneObject } from "../objects.mts";
+import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
 import "./cubic-sky.css";
@@ -33,7 +33,7 @@ const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
   objectId: string;
-  /** The object the page is: `objectId`, or a catalogue focus its scene draws. */
+  /** What the page is: `objectId`, or a level of the zoom ladder its scene shows. */
   pageId?: string;
   navigation?: boolean;
   scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor' | 'coverPlan'>;
@@ -48,8 +48,8 @@ const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
-// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); a catalogue focus page
-// drawn by another scene leaves it to that scene's startup.
+// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); a level's page, drawn by
+// the world host's scene, leaves it to that scene's startup.
 const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId === objectId ? {
   plan: scene.coverPlan, mobileQuery: MOBILE_VIEWPORT_QUERY,
   billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },
@@ -60,8 +60,8 @@ const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId =
 // connection, 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
 const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
-const pageRecord = requireObject(pageId);
-const pageSeo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
+const pageRecord = requirePage(pageId);
+const pageSeo = objectSeo(pageRecord, seoOptions);
 const seo = home ? homeSeo(pageSeo) : pageSeo;
 const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(pageTrail(pageRecord))).replace(/</g, '\\u003c');
 ---

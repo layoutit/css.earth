@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-300-layers",
+  "name": "NGC 300",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-300-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-300-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-300-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "Spiral galaxy NGC 300",
+      "description": "The MPG/ESO 2.2-metre WFI view of NGC 300 with Milky Way foreground stars removed and the whole-galaxy colour tied to RC3's measured B-V of 0.59, on a disc tilted 44° with a 211 pc layer.",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "detail": "7603 × 7603 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "WFI B [O III] V R H-alpha"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "7603 × 7603"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "30.22 × 30.22 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": ".local/previews/ngc-300-eso1037a-screen.jpg",
+        "url": "https://cdn.eso.org/images/screen/eso1037a.jpg"
+      }
+    }
+  ]
+}

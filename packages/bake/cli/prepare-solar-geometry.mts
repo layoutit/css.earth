@@ -32,6 +32,7 @@ import { resolve } from "node:path";
 import { loadAstronomyPackage } from "@cssearth/bake/astronomy";
 import { loadSceneEpochEphemeris } from "../../astronomy/cli/scene-ephemeris.mts";
 import { readPreparedObjects } from "@cssearth/objects/node";
+import { isPlacedClassification } from "@cssearth/objects";
 
 /** Write src/platform/solar-geometry.mts for the registered bodies at the pinned scene epoch and print each body's geometry. */
 export async function prepareSolarGeometry() {
@@ -60,9 +61,9 @@ export async function prepareSolarGeometry() {
   const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
   // A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
   const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
-  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../../..")).sceneObjects.filter(body =>
+  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../../..")).worldObjects.filter(body =>
     ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
-    ((body.classification === "star" || body.classification === "black-hole") && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
+    (isPlacedClassification(body.classification) && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
     if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
     return body.id as BodyId;
   });
@@ -122,7 +123,9 @@ export async function prepareSolarGeometry() {
   const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promise<readonly [BodyId, RotationElements | null]> => {
     if (RECORD_ONLY_HOSTED.includes(id)) return [id, recordOnlyRotation(id)];
     const descriptor = requireRecord(await readJsonSource(resolve("src/objects", id, "object.json")));
-    const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
+    // No surface (a galaxy, a nebula, a cluster, the Local Group level) means nothing rotates: the body-fixed frame is the ICRF.
+    const authored = requireRecord(descriptor.properties).recipe, recipe = authored === undefined ? null : requireRecord(authored);
+    if (!recipe || !requireArray(recipe.surfaces).length) return [id, { poleRightAscensionRad: 0, poleDeclinationRad: Math.PI / 2, primeMeridianRad: 0, spinRateRadPerDay: 0 }];
     const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
     if (!ref) return [id, null];
     const { readAuthoredRotation } = await import('@cssearth/bake/objects/scene');
@@ -226,7 +229,7 @@ export async function prepareSolarGeometry() {
     const angularMomentum = cross(orbitPositionAu, velocityAuPerDay);
     const radialOnly = star && Math.hypot(...angularMomentum) <= 1e-12 * Math.hypot(...orbitPositionAu) * Math.hypot(...velocityAuPerDay);
     const orbitNormalIcrf = normalize(radialOnly ? cross(orbitPositionAu, ECLIPTIC_NORTH_ICRF) : angularMomentum);
-    const velocityIcrf = normalize(velocityAuPerDay);
+    const velocityIcrf = normalize(Math.hypot(...velocityAuPerDay) > 0 ? velocityAuPerDay : orbitPositionAu); // A placed body held still has no velocity direction: its line of sight stands in, and nothing draws its path.
     // Columns of bodyFixedToIcrf are the body axes in ICRF, so its transpose
     // takes an ICRF direction into the body-fixed frame.
     const matrix = bodyFixedToIcrf(rotationAtEpoch(body));

@@ -40,10 +40,9 @@ test('the shared server row escapes authored names and attributes', () => {
 test('overview navigation shares the row without a fabricated distance or focus target', () => {
   const { document } = parseHTML(objectResultMarkup({ kind: 'overview', id: 'milky-way', name: 'Milky Way',
     route: '/milky-way/', classificationName: 'galaxy', source: earth.source,
-    marker: { kind: 'focus', thumbnail: '/navigation/focus-milky-way@2x.webp' } }));
+    marker: { kind: 'thumbnail', thumbnail: '/navigation/focus-milky-way@2x.webp' } }));
   const link = document.querySelector('a')!;
   assert.equal(link.getAttribute('href'), '/milky-way/');
-  assert.equal(link.dataset.preparedFocusId, undefined);
   assert.equal(link.dataset.objectId, undefined);
   assert.equal(link.querySelector('img')?.getAttribute('width'), '40');
   assert.equal(link.querySelector('.object-distance')?.textContent, 'Galaxy');

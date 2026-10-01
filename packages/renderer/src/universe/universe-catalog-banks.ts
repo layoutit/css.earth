@@ -1,4 +1,4 @@
-import { createImageFocusBank } from './prepared-focus-bank.js';
+import { createImageFocusBank, createPointFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -29,7 +29,7 @@ interface ImageBank {
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas,
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas,
   pointBanks = [] }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
@@ -39,7 +39,6 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   catalogBank: PreparedUniverseOptions['catalogBank'];
   loadCatalog: PreparedUniverseOptions['loadCatalog'];
   loadImageLayer: PreparedUniverseOptions['loadImageLayer'];
-  onSelect?: (object: PreparedCatalogObject) => void;
   requestPublication?: () => boolean;
   prepareBillboardAtlas: () => boolean;
   /** Published stellar extents in metres by object id (PreparedUniverseOptions.stellarExtents). */
@@ -50,8 +49,6 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   pointBanks?: PreparedUniverseOptions['pointBanks'];
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
-  // The header pill's category, applied again when the catalogue mounts after it was pressed.
-  let highlightedClassification: string | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
   let billboardCount = 0;
   const images: ImageBank[] = declarations.map(bank => {
@@ -100,23 +97,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     if (catalog || lifetime.disposed) return;
     globalThis.performance?.mark?.('cssEarth:catalog:mount');
     catalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: bank.payload, galaxySample: bank.galaxySample,
-      clusters: bank.clusters?.payload, nebulae: bank.nebulae,
-      renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(dataset => dataset.id)]),
-      billboardedObjectIds: new Set([...prepared?.plan.banks.values() ?? []].filter(bank => bank.billboard).map(bank => bank.id)),
-      galaxyCaptions: galaxyCaptions(),
-      nebulaFrames: new Map(volumeDeclarations.map(dataset => [dataset.id, dataset.frame])), onSelect, pickingHost: stage });
-    catalog.highlight(highlightedClassification);
+      clusters: bank.clusters?.payload, nebulae: bank.nebulae });
     publishResidency();
-  }
-  /** Every bank with a published stellar extent: its caption hangs under its authored framing sphere (else its
-   * billboard's), and hides inside the extent. */
-  function galaxyCaptions() {
-    return new Map([...declarations, ...volumeDeclarations].flatMap(bank => {
-      const radiusM = stellarExtents[bank.id], facts = prepared?.plan.banks.get(bank.id);
-      const extentRadiusUnits = radiusM === undefined ? 0 : radiusM / bank.frame.metersPerUnit;
-      const drawnRadiusUnits = facts?.framingRadiusUnits ?? facts?.billboard?.radiusUnits ?? extentRadiusUnits;
-      return radiusM === undefined ? [] : [[bank.id, { frame: bank.frame, drawnRadiusUnits, extentRadiusUnits }] as const];
-    }));
   }
   function ensureCatalog(): Promise<void> {
     if (lifetime.disposed || catalog) return Promise.resolve();
@@ -156,11 +138,6 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
 
   return {
     get catalog() { return catalog; },
-    setHighlightedClassification(classification: string | null) {
-      highlightedClassification = classification;
-      catalog?.highlight(classification);
-      requestPublication?.();
-    },
     get presentation() { return catalogPayload ?? catalogBank; },
     ensureCatalog,
     publishResidency,
@@ -170,7 +147,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     mountInitialCatalog() { if (catalogPayload) mountCatalog(catalogPayload); },
     focusBank(id: string) {
       const bank = byId.get(id);
-      return bank ? createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank)) : null;
+      if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank));
+      // A bank of dots has one dataset, its members; the dots mount when they are first shown.
+      return points.some(point => point.id === id) ? createPointFocusBank(id) : null;
     },
     /** Draw the selected package's catalogue dots, and those of the selected body's system (`systemIds`: the body and the
      * centre it orbits), and hide every other's. */
@@ -196,9 +175,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       inside?: { readonly objectId: string; readonly opacity: number }) {
       if (lifetime.disposed) return;
       for (const bank of images) {
-        // A galaxy's slices paint only for the observer who selected it.
-        const presentationOpacity = bank.id === detailedObjectId ? 1 : 0;
-        const opacity = presentationOpacity * volumeOpacity * projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits);
+        // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
+        // fade is measured from the selected body, which is the galaxy itself.
+        const opacity = bank.id === detailedObjectId ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
         // Its billboard shows it from everywhere else, and gives way as the loaded slices fade in.
         if (billboards && bank.billboardIndex >= 0) {
           const context = bank.independent ? 1 : volumeOpacity;

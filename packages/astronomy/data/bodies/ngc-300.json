@@ -1,0 +1,28 @@
+{
+  "id": "ngc-300",
+  "classification": "galaxy",
+  "order": 5150,
+  "physical": {
+    "name": "NGC 300",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 300 is recorded: it is an extended galaxy, and its package frames it at 9400 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 13.7229167,
+    "declinationDegrees": -37.68444444,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 2089296.13085,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 146,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:ngc_0300:location",
+      "distance": "Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 2089296.13085 pc (-56939.1199178/+58534.3432765); trgb",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 300: 146 km/s +/- 2, from 2012AJ....144....4M (https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract)"
+    }
+  }
+}

@@ -14,7 +14,7 @@
  * Inputs: EVCC table 2, by default `output/clusters/evcc-table2.dat`, from
  * https://cdsarc.cds.unistra.fr/ftp/J/ApJS/215/22/table2.dat (byte columns from its ReadMe), and the tracked
  * `src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz`.
- * Output: `src/objects/virgo-cluster/source/dots/evcc-members.csv.gz`. It prints what it kept.
+ * Output: `src/objects/virgo-cluster-members/source/dots/evcc-members.csv.gz`. It prints what it kept.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -23,7 +23,7 @@ import { gunzipSync, gzipSync } from 'node:zlib';
 const repository = resolve(import.meta.dirname, '../../../..');
 const evccPath = resolve(process.argv[2] ?? resolve(repository, 'output/clusters/evcc-table2.dat'));
 const fieldPath = resolve(repository, 'src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz');
-const outputPath = resolve(repository, 'src/objects/virgo-cluster/source/dots/evcc-members.csv.gz');
+const outputPath = resolve(repository, 'src/objects/virgo-cluster-members/source/dots/evcc-members.csv.gz');
 const VIRGO_GROUP = '41220', MATCH_ARCSEC = 10;
 
 // EVCC table 2 byte columns (ReadMe): 1-4 EVCC, 17-24 RAdeg, 26-32 DEdeg, 74 MmI, 90-92 TT1, 126-130 gmag, 138-142 rmag.

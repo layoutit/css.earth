@@ -1,5 +1,4 @@
 import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from './minimap/view-format.mts';
-import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser/browser-types.mts';
@@ -13,10 +12,11 @@ import { measureView } from './minimap/view-measure.mts';
 import { surfaceMapContext, surfaceMapViewport } from './minimap/surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';
 import { dotN as dot } from '@cssearth/core';
-type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
-interface ViewReadout { bindObject(): void; setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
+/** A subject with no surface (a galaxy, a cluster, a nebula): the readout measures to its centre, not above a radius. */
+type ExtendedSubject = { readonly name: string; readonly positionM: readonly [number, number, number] };
+interface ViewReadout { bindObject(): void; setExtendedSubject(record: ExtendedSubject | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
 
-export function measurePreparedFocusView(world: WorldCameraPose, focus: PreparedFocus, focalPixels: number) {
+export function measureExtendedSubjectView(world: WorldCameraPose, focus: ExtendedSubject, focalPixels: number) {
   const forward = rotateWorldPosition(worldRotationFromQuaternion(world.pose.orientationXyzw), [0, 0, -1]);
   const relative: PositionM = [focus.positionM[0] - world.pose.positionM[0], focus.positionM[1] - world.pose.positionM[1], focus.positionM[2] - world.pose.positionM[2]];
   return { coordinates: null, scale: viewScale(dot(relative, forward) / focalPixels),
@@ -26,7 +26,7 @@ export function measurePreparedFocusView(world: WorldCameraPose, focus: Prepared
 export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; surfaceReader?: SurfaceMapReader }): ViewReadout {
   // The footer holding the readout waits off the page on narrow layouts (layout-sections.mts); the readout keeps it current.
   const root = sectionElements(documentTarget, '.object-view-readout')[0];
-  if (!root) return { bindObject() {}, setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
+  if (!root) return { bindObject() {}, setCamera() {}, setExtendedSubject() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
   const dateGroup = requiredElement(root, '.object-view-date'), date = requiredElement(root, '[data-view-date]');
   const coordinates = requiredElement(root, '.object-view-coordinates');
   const latitude = requiredElement(root, '[data-view-latitude]'), longitude = requiredElement(root, '[data-view-longitude]');
@@ -42,7 +42,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, flying = false, moving = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
   let overviewScope: OverviewScope = 'system';
-  let preparedFocus: PreparedFocus | null = null;
+  let extendedSubject: ExtendedSubject | null = null;
   const hidden = (element: HTMLElement, value: boolean) => { if (element.hidden !== value) element.hidden = value; };
   const write = (element: HTMLElement, value: string) => { if (element.textContent !== value) element.textContent = value; };
   /** Drop a scheduled render: the page hid, a flight began, or the readout retired. */
@@ -65,18 +65,18 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     const scene = sectionElements(documentTarget, '.polycss-scene')[0];
     if (!navigation || !scene) { clearReading({ date: true }); return; }
     const map = maps.find(map => !map.closest<HTMLElement>('[data-dataset-details]')?.hidden) ?? maps[0];
-    const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)
+    const surface = extendedSubject ? null : surfaceReader ? surfaceReader.read(map, camera)
       : surfaceMapContext(map ? configs.get(map) : undefined, camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();
     hidden(dateGroup, !Number.isFinite(world.epochJdTt));
     const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
     if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
-    const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : measureView({
+    const value = extendedSubject ? measureExtendedSubjectView(world, extendedSubject, optics.focalPixels) : measureView({
       eyeM: [world.pose.positionM[0] - navigation.frame.originM[0], world.pose.positionM[1] - navigation.frame.originM[1], world.pose.positionM[2] - navigation.frame.originM[2]],
       radiusM: navigation.frame.bodyRadiusM, rotation: cssCameraAxesFromOrientation(world.pose.orientationXyzw),
       view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes, mapLeftEdgeLongitudeDeg: surface?.mapLeftEdgeLongitudeDeg,
     });
-    const distance = viewDistance(world, navigation.frame, overviewScope, undefined, preparedFocus);
+    const distance = viewDistance(world, navigation.frame, overviewScope, undefined, extendedSubject);
     write(altitude, formatViewDistance(distance.meters));
     if (distanceLabel) write(distanceLabel, distance.label);
     if (distanceGroup && distanceGroup.title !== distance.title) distanceGroup.title = distance.title;
@@ -129,7 +129,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
       for (const map of maps) configs.set(map, parseSurfaceMapConfig(map.dataset.surfaceMinimap));
       refresh();
     },
-    setPreparedFocus(record) { preparedFocus = record; refresh(); },
+    setExtendedSubject(record) { extendedSubject = record; refresh(); },
     setOverviewScope(scope) { overviewScope = scope; refresh(); },
     setCamera(next) { if (camera === next) return; unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(() => schedule()) ?? null; refresh(); },
     setPlaybackState(state) {

@@ -1,0 +1,28 @@
+{
+  "id": "local-group",
+  "classification": "galaxy-cluster",
+  "order": 5154,
+  "physical": {
+    "name": "Local Group",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of the Local Group is recorded here: it is a group of galaxies, and its package frames it at 1060000 pc (object.json worldFrame.bodyRadiusM), the zero-velocity surface radius R_LG = 1060 +/- 70 kpc of McConnachie (2012), AJ 144, 4 (https://arxiv.org/abs/1204.1562), section 3.",
+  "star": {
+    "rightAscensionDegrees": 9.99294,
+    "declinationDegrees": 41.12706,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 386146,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "The mid-point of the vector connecting the Milky Way and M31, where McConnachie (2012), AJ 144, 4 (https://arxiv.org/abs/1204.1562), Table 2 notes to columns 8 to 10, places the barycentre of the Local Group. Computed 2026-10-01 from this repository's records of the Galactic centre (sgr-a-star.json) and M31 (m31.json).",
+      "distance": "The Sun's distance from that mid-point, from the same two records: 386146 pc. The paper adopts (m-M)0 = 24.47 for M31; the mid-point here uses the M31 distance this repository draws M31 at, so the marker sits between the two as drawn.",
+      "properMotion": "Zero: the group is held at this position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: a mid-point has no measured radial velocity; the group is held at its distance."
+    }
+  }
+}

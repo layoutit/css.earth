@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m2-9",
+  "displayName": "Twin Jet Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "650 pc",
+        "source": {
+          "catalogueId": "sanchez-contreras-2024",
+          "url": "https://arxiv.org/html/2411.03825v1",
+          "label": "S\u00e1nchez Contreras et al. A&A 692, A151 (2024)",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 256.4\u00b0, Dec -10.14\u00b0",
+        "source": {
+          "catalogueId": "hubble-opo9738a",
+          "url": "https://esahubble.org/media/archives/images/original/opo9738a.tif",
+          "label": "NASA/ESA Hubble 1997 image opo9738a; AVM sky astrometry",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "Bipolar nebula",
+        "source": {
+          "catalogueId": "hubble-opo9738a",
+          "url": "https://esahubble.org/media/archives/images/original/opo9738a.tif",
+          "label": "NASA/ESA Hubble 1997 image opo9738a; AVM sky astrometry",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "hst-optical",
+    "controls": [
+      {
+        "id": "hst-optical",
+        "label": "Hubble \u00b7 optical",
+        "thumbnail": "m2-9-dataset-hst-optical.webp",
+        "volume": {
+          "objectId": "m2-9-volume",
+          "datasetId": "hst-optical",
+          "surface": "hst-optical"
+        },
+        "source": {
+          "id": "m2-9-volume-hst-optical",
+          "path": "../../m2-9-volume/source/manifest.json",
+          "url": "https://apod.nasa.gov/apod/ap040201.html"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "S\u00e1nchez Contreras et al. A&A 692, A151 (2024)",
+      "href": "https://arxiv.org/html/2411.03825v1"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "NASA/ESA Hubble 1997 image opo9738a; AVM sky astrometry",
+      "href": "https://esahubble.org/media/archives/images/original/opo9738a.tif"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/html/2411.03825v1",
+      "credit": "S\u00e1nchez Contreras et al. A&A 692, A151 (2024)"
+    }
+  }
+}

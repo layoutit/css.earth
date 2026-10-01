@@ -1,42 +1,97 @@
 {
   "schema": "cssearth-object@2",
   "id": "m87",
-  "type": "volume-dataset-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M87",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6140498387167821000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M87",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 3465248745000,
+      "description": "A galaxy 16.8 million parsecs away.",
+      "aliases": [
+        "NGC 4486",
+        "Virgo A",
+        "VCC 1316"
+      ],
+      "order": 5148,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -5.0174573251150825e+23,
-        -6.789157119362013e+22,
-        1.1123902766447065e+23
+        -5.017457335350851e+23,
+        -6.789157133212104e+22,
+        1.1123902789140171e+23
       ],
-      "localToReferenceXyzw": [
-        0.4718928501802452,
-        -0.4123410395284899,
-        -0.512767477257921,
-        0.5868232436908718
+      "presentationToReference": [
+        -0.9993541958990894,
+        0,
+        -0.03593314819055807,
+        -0.0329680188985107,
+        0.3977771559319137,
+        0.9168895483909856,
+        -0.014293385490920197,
+        -0.9174820620691818,
+        0.3975202698133643
       ],
-      "metersPerUnit": 1.238634295408084e+21,
-      "boundsUnits": {
-        "min": [
-          -5,
-          -5,
-          -5
-        ],
-        "max": [
-          5,
-          5,
-          5
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/delivery.json"
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 19808059313444580000,
+      "bodyRadiusM": 6.140498387167821e+21
     }
   },
   "prepared": {
-    "format": "cssearth-volume-datasets@1",
-    "url": "prepared/datasets.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

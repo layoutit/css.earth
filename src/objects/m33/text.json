@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m33",
+  "card": {
+    "text": "A galaxy 859,014 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-savino2022apj-938-101s",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S",
+        "label": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure",
+        "checked": "2026-10-01",
+        "locator": "distance: 859 kpc (−23,410 / +24,070 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 859,014 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-savino2022apj-938-101s",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S",
+        "label": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure",
+        "checked": "2026-10-01",
+        "locator": "distance: 859 kpc (−23,410 / +24,070 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "VST view of the Triangulum Galaxy",
+      "detail": "4000 × 3355 px",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1424a",
+          "url": "https://www.eso.org/public/images/eso1424a/",
+          "label": "VST snaps a very detailed view of the Triangulum Galaxy; ESO",
+          "checked": "2026-10-01",
+          "locator": "VST snaps a very detailed view of the Triangulum Galaxy"
+        }
+      ]
+    }
+  }
+}

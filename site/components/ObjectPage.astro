@@ -10,7 +10,7 @@ import shellCss from '../object-shell.css?inline';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import { rewriteSceneCss, resolveSceneAddressesDeep, withPreparedAssetOrigin } from '../asset-origin.mts';
 
-/** `objectId` owns the scene; `pageId` is the object the page is, a catalogue focus that scene draws when it differs. */
+/** `objectId` owns the scene; `pageId` is what the page is: the object, or a level of the zoom ladder that scene shows when it differs. */
 interface Props { objectId: string; pageId?: string; navigation?: boolean; home?: boolean; }
 const { objectId, pageId = objectId, navigation = false, home = false } = Astro.props;
 const preparedPage = await loadObjectPageData(objectId);

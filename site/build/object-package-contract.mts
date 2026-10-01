@@ -65,7 +65,9 @@ export async function validateObjectData(
     readJson(paths.sourceManifest),
   ]);
   const inventory = requireInventory(planet.id, runtimeInput);
-  const sourceManifest = validateSourceManifest(planet.id, sourceInput);
+  // An object whose recipe declares no surface prepares nothing from input files: its manifest may list none.
+  const authored = await authoredObject(planet.id, projectRoot);
+  const sourceManifest = validateSourceManifest(planet.id, sourceInput, { inputs: authored && !authored.recipe.surfaces.length ? 'optional' : 'required' });
   await verifyInventory({ objectId: planet.id, inventory, publicRoot: paths.publicAssets, locations: ['public'] });
   await verifySourceManifest({
     manifest: sourceManifest,

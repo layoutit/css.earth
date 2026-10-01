@@ -34,19 +34,15 @@ interface ShownSearch {
 
 interface SubjectOverride {
   readonly subject: SceneSubject;
-  hideFocus: boolean;
 }
 
 export function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
   { readSelection, readObjectId, onCategoryChange = () => {}, readIllustrationModels = () => false, onResetDestination = () => {},
     onFrameCategory = () => {}, onSearchChange = () => {} }: ObjectBrowserOptions) {
-  // Browsing a system keeps the committed focus; a flight preview temporarily
-  // covers it. Neither changes which scene or focus the shell owns.
+  // A flight preview temporarily covers the committed selection; it does not change which scene the shell owns.
   let subjectOverride: SubjectOverride | null = null;
   const currentSubject = (): SceneSubject => {
-    const committed = readSelection();
-    return subjectOverride && (subjectOverride.hideFocus || committed.kind !== 'focus')
-      ? subjectOverride.subject : committed;
+    return subjectOverride ? subjectOverride.subject : readSelection();
   };
   const search = documentTarget.querySelector(".object-sidebar-search");
   const searchCard = documentTarget.querySelector(".object-sidebar-search-card");
@@ -268,12 +264,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       if (next < 0) search.focus(); else controls[Math.min(next, controls.length - 1)]?.focus();
     }
   }, { signal: events.signal });
-  browser.addEventListener('click', event => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (!(event.target instanceof windowTarget.Element) || !event.target.closest('a[data-prepared-focus-id]')) return;
-    setOpen(false);
-    search.blur();
-  }, { signal: events.signal });
   // Pressing or wheeling the scene leaves the search: the results close and the typed query stays for reopening.
   const sceneInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
   for (const type of ['pointerdown', 'wheel'] as const) {
@@ -290,7 +280,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
 
   const previewSelection = (subject: SceneSubject) => {
     const previous = subjectOverride, previousOpen = open, previousQuery = search.value;
-    const preview = { subject, hideFocus: true };
+    const preview = { subject };
     subjectOverride = preview;
     // Choosing a result ends that search; a cancelled flight gives the query back.
     if (search.value) search.value = '';
@@ -313,10 +303,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     previewSelection,
     refreshSelection() {
       const subject = readSelection();
-      // Focus content can publish during a preview; keep its temporary context.
-      if (subject.kind === 'focus') {
-        if (subjectOverride) subjectOverride.hideFocus = false;
-      } else subjectOverride = null;
+      subjectOverride = null;
       if (subject.kind === 'overview') destinations?.present(null);
       refreshSelection();
     },

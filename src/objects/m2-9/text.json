@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m2-9",
+  "card": {
+    "text": "The Twin Jet is a bipolar nebula with two opposing lobes.",
+    "sources": [
+      {
+        "catalogueId": "sanchez-contreras-2024",
+        "url": "https://arxiv.org/html/2411.03825v1",
+        "label": "Sánchez Contreras et al. A&A 692, A151 (2024)",
+        "checked": "2026-10-01",
+        "locator": "distance: 650 pc"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Twin Jet is a bipolar nebula with two opposing lobes. Published distance estimates range from 650 to about 1,300 parsecs.",
+    "sources": [
+      {
+        "catalogueId": "sanchez-contreras-2024",
+        "url": "https://arxiv.org/html/2411.03825v1",
+        "label": "Sánchez Contreras et al. A&A 692, A151 (2024)",
+        "checked": "2026-10-01",
+        "locator": "distance: 650 pc"
+      }
+    ]
+  },
+  "datasets": {
+    "hst-optical": {
+      "title": "The Twin Jet Nebula in visible light",
+      "detail": "788 × 438 px",
+      "summary": "Hubble optical colors on an assumed symmetric cloud; depth and inclination are not measured.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opo9738a",
+          "url": "https://apod.nasa.gov/apod/ap040201.html",
+          "label": "Twin Jet Nebula · accepted APOD edition; Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+          "checked": "2026-10-01",
+          "locator": "Twin Jet Nebula · accepted APOD edition"
+        }
+      ]
+    }
+  }
+}

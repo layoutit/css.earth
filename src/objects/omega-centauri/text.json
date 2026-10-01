@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "omega-centauri",
+  "card": {
+    "text": "Omega Centauri is a globular star cluster in the Milky Way, about 5,426 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://arxiv.org/pdf/2105.09526",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes.",
+        "checked": "2026-10-01",
+        "locator": "distance: 5.426 kpc (−47 / +47 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Omega Centauri is a globular star cluster in the Milky Way, about 5,426 parsecs away. That published distance locates the cluster, not its individual stars.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://arxiv.org/pdf/2105.09526",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes.",
+        "checked": "2026-10-01",
+        "locator": "distance: 5.426 kpc (−47 / +47 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "eso1119b": {
+      "title": "Omega Centauri in the wider VST field",
+      "detail": "14540 × 14540 px",
+      "summary": "Integrated optical starlight with conditional oblate depth; individual stellar positions are not recovered.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1119b",
+          "url": "https://www.eso.org/public/images/eso1119b/",
+          "label": "Omega Centauri · VST/OmegaCAM · optical; ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
+          "checked": "2026-10-01",
+          "locator": "Omega Centauri · VST/OmegaCAM · optical"
+        }
+      ]
+    },
+    "eso0844a": {
+      "title": "Omega Centauri in the WFI mosaic",
+      "detail": "8040 × 7560 px",
+      "summary": "A second optical view on the same conditional geometry, limited to the WFI mosaic footprint.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso0844a",
+          "url": "https://www.eso.org/public/images/eso0844a/",
+          "label": "Omega Centauri · MPG/ESO 2.2-m WFI · optical; ESO",
+          "checked": "2026-10-01",
+          "locator": "Omega Centauri · MPG/ESO 2.2-m WFI · optical"
+        }
+      ]
+    }
+  }
+}

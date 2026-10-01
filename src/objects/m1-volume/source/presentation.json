@@ -1,0 +1,264 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m1-volume",
+  "name": "Crab Nebula",
+  "defaultDataset": "hubble-optical",
+  "sharedInputs": [
+    "hubble-optical",
+    "webb-infrared",
+    "webb-components",
+    "spitzer-infrared",
+    "vla-radio",
+    "chandra-xray",
+    "hubble-2017-bridge",
+    "physical-evidence",
+    "sitelle-1",
+    "sitelle-2",
+    "sitelle-4",
+    "distance",
+    "stellar-field"
+  ],
+  "datasets": [
+    {
+      "id": "hubble-optical",
+      "label": "Hubble · optical lines",
+      "title": "Crab ejecta in optical emission lines",
+      "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Optical line colors on expansion-inferred ejecta and a modeled pulsar wind; fine structure is softened.",
+      "detail": "3864 × 3864 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Optical · [O III] 502 nm / [O I] 631 nm / [S II] 673 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3864 × 3864"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "6.41 × 6.41 arcmin"
+        }
+      ],
+      "input": "hubble-optical",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m1/sources/hubble-optical.tif",
+        "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif"
+      }
+    },
+    {
+      "id": "webb-infrared",
+      "label": "Webb · near/mid-infrared",
+      "title": "Crab filaments and pulsar wind in infrared",
+      "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Infrared false color on expansion-inferred ejecta and a modeled pulsar wind; fine structure is softened.",
+      "detail": "4000 × 3483 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Near/mid-infrared · 1.62 / 4.8 / 5.6 / 11.3 / 18 / 21 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 3483"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "5.47 × 4.76 arcmin"
+        }
+      ],
+      "input": "webb-infrared",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m1/sources/webb-infrared.tif",
+        "url": "https://esawebb.org/media/archives/images/publicationtiff/weic2326a.tif"
+      }
+    },
+    {
+      "id": "webb-components",
+      "label": "Webb · dust, sulfur, synchrotron",
+      "title": "Crab dust, sulfur and synchrotron component color",
+      "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Published dust, sulfur and synchrotron component colors on an inferred 3D model; not measured material density.",
+      "detail": "2958 × 2569 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Derived infrared components · 4.8 / 18 / 21 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "2958 × 2569"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "5.33 × 4.62 arcmin"
+        }
+      ],
+      "input": "webb-components",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m1/sources/webb-components.tif",
+        "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif"
+      }
+    },
+    {
+      "id": "spitzer-infrared",
+      "label": "Spitzer · mid-infrared",
+      "title": "Crab mid-infrared emission at 24 micrometres",
+      "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Mid-infrared false color on inferred ejecta and pulsar-wind geometry; brightness is not calibrated.",
+      "detail": "5290 × 5290 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Mid-infrared · 24 µm (companion CXC metadata)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "5290 × 5290"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "8.83 × 8.83 arcmin"
+        }
+      ],
+      "input": "spitzer-infrared",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m1/sources/spitzer-infrared.tif",
+        "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif"
+      }
+    },
+    {
+      "id": "vla-radio",
+      "label": "VLA · radio synchrotron",
+      "title": "Crab radio synchrotron emission",
+      "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Radio display colors on modeled wind and ejecta geometry; no measured radio depth.",
+      "detail": "5290 × 5290 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Radio · S band, approximately 3 GHz / 10 cm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "5290 × 5290"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "8.83 × 8.83 arcmin"
+        }
+      ],
+      "input": "vla-radio",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m1/sources/vla-radio.tif",
+        "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif"
+      }
+    },
+    {
+      "id": "chandra-xray",
+      "label": "Chandra · X-ray pulsar wind",
+      "title": "Crab inner pulsar wind in X-rays",
+      "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "X-ray pulsar-wind display on published torus/jet assumptions; depth and emission strength are modeled.",
+      "detail": "5290 × 5290 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "X-ray · ACIS; exact selected display passband unspecified"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "5290 × 5290"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "8.83 × 8.83 arcmin"
+        }
+      ],
+      "input": "chandra-xray",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m1/sources/chandra-xray.tif",
+        "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif"
+      }
+    }
+  ],
+  "bank": {
+    "path": "src/objects/m1-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "recipe-1",
+      "path": "src/objects/m1-volume/source/delivery.json"
+    },
+    {
+      "id": "recipe-2",
+      "path": "src/objects/m1-volume/source/request.json"
+    },
+    {
+      "id": "recipe-3",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/01-chandra-xray-grid-transfer.json"
+    },
+    {
+      "id": "recipe-4",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/02-compiler.json"
+    },
+    {
+      "id": "recipe-5",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/03-hubble-2017-bridge-matched-stars.json"
+    },
+    {
+      "id": "recipe-6",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/04-observation-structures.json"
+    },
+    {
+      "id": "recipe-7",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/05-observations.json"
+    },
+    {
+      "id": "recipe-8",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/06-physical-evidence.json"
+    },
+    {
+      "id": "recipe-9",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/07-sampled.json"
+    },
+    {
+      "id": "recipe-10",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/08-sitelle-alignment-check.json"
+    },
+    {
+      "id": "recipe-11",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/09-spitzer-infrared-grid-transfer.json"
+    },
+    {
+      "id": "recipe-12",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/10-vla-radio-grid-transfer.json"
+    },
+    {
+      "id": "recipe-13",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/11-webb-components-astrometric-calibration.json"
+    },
+    {
+      "id": "recipe-14",
+      "path": "src/objects/m1-volume/source/bake-inputs/references/12-webb-components-matched-stars.json"
+    }
+  ]
+}

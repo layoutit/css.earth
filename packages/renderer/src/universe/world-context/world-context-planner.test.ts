@@ -1,3 +1,4 @@
+import { isExtendedClassification } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -736,12 +737,14 @@ test('a notable star beyond the Solar System is named before the Solar System co
 
 test('past the Local Group scale the stars give their names to the galaxies', async () => {
   const { calculate, input } = await namedAlphaCentauri();
-  const named = (parsecs: number) => {
+  const labelled = (parsecs: number) => {
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
-    return calculate(input).projectedBodies.filter(body => body.labelShown).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
+    return calculate(input).projectedBodies.filter(body => body.labelShown).map(body => [plan.focus, ...plan.bodies][body.index]!);
   };
+  const named = (parsecs: number) => labelled(parsecs).filter(body => !('classification' in body && isExtendedClassification(body.classification))).map(body => body.id);
   { const values = named(200e3); assert.ok(['sun', 'sgr-a-star'].every(item => values.includes(item)), 'from 200 kpc, short of the Local Group scale, the Sun and Sgr A* keep their names'); }
   assert.deepEqual(named(1e6), [], 'from 1 Mpc no star or planet is named');
+  { const values = labelled(1e6).map(body => body.id); assert.ok(['lmc', 'smc'].every(item => values.includes(item)), 'from 1 Mpc the galaxies are'); }
 });
 
 test('past the Solar System only the featured stars and the references keep a dot; past the Local Group no body does', () => {
@@ -750,13 +753,15 @@ test('past the Solar System only the featured stars and the references keep a do
   const calculate = createWorldContextPlanner(plan, { [featured]: FEATURED_STAR_TIER }), input = view();
   const dotted = (parsecs: number) => {
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
-    return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
+    // The galaxies, clusters and nebulae are bodies too, and keep their own dots: this is about the stars and their planets.
+    return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!)
+      .filter(body => !('classification' in body && isExtendedClassification(body.classification))).map(body => body.id);
   };
   const nearby = dotted(3e3);
   { const values = nearby; assert.ok(['sun', featured].every(item => values.includes(item)), 'from 3 kpc above the Sun the Sun and the featured star stay (Sgr A* is out of frame)'); }
-  assert.ok(nearby.length < 10, 'from 3 kpc the other stars have given way to the catalogue dots');
+  assert.ok(nearby.length < 10, 'from 3 kpc the other stars have given way');
   { const values = dotted(200e3); assert.ok(['sgr-a-star', 'sun'].every(item => values.includes(item)), 'from 200 kpc the references keep a dot'); }
-  assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no body keeps a dot');
+  assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no star or planet keeps a dot');
 });
 
 test('a body beyond the Local Group keeps its dot at the scale of its cluster, and loses it from the Milky Way', () => {

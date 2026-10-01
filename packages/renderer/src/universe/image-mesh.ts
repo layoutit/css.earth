@@ -144,7 +144,7 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
       if (next !== limbTransform) { limbTransform = next; if (next) limb.style.transform = next; limb.style.display = next ? '' : 'none'; }
     }
     const placement = captioned && shape && labelSize && placeSelectedBodyLabel(publication.world, publication.viewport, { positionM: centreM, radiusM },
-      { overview: false, focused: false, preview: undefined, edge: () => silhouetteBottom(shape) }, labelSize[0], labelSize[1]);
+      { overview: false, preview: undefined, edge: () => silhouetteBottom(shape) }, labelSize[0], labelSize[1]);
     const nextLabel = placement ? `translate(${format(placement.left)}px,${format(placement.top)}px) translate(-50%,0)` : labelTransform;
     if (nextLabel !== labelTransform) label.style.transform = labelTransform = nextLabel;
     const nextOpacity = String(placement ? Number((alpha * DEFAULT_CONTEXT_LABEL_OPACITY).toFixed(3)) : 0);
@@ -153,7 +153,7 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
   return Object.freeze({ root,
     /** Publishes the camera and returns how much the mesh covers what lies inside it, so that can give way as it closes over:
      * its opacity, or nothing while it is cut open. `captioned` is false while another subject owns the view's caption (a
-     * catalogue focus): the mesh then names nothing. */
+     * selection preview, a galaxy shown as its scene's subject): the mesh then names nothing. */
     publish(publication: VolumeCameraPublication, shown = 1, captioned = true): number {
       if (destroyed) return 0;
       lastShown = shown; lastCaptioned = captioned; latest = publication;

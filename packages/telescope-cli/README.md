@@ -93,7 +93,7 @@ telescope export MEASUREMENT/output.product.json --output body-map --geometry na
 telescope export MAP/map.fits.product.json --output sphere --out SPHERE
 telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars
 telescope export src/objects/milky-way/object.json --output volume --out galaxy
-telescope export src/objects/lmc/object.json --output volume-dataset-bank --out lmc-datasets
+telescope export src/objects/lmc-volume/object.json --output volume-dataset-bank --out lmc-datasets
 ```
 
 The navigation file pins SPICE kernels. The sphere is a standalone HTML file with no JavaScript. See the [navigation contract](../../docs/virtual-telescopes.md#projection-and-sphere). Physical handoffs copy prepared renderer files and credits; restore missing inputs with `setup:prepared --object=ID`.

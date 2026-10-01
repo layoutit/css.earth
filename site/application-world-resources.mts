@@ -12,7 +12,7 @@ import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepare
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
-import { loadFocusCatalogs } from './focus-catalog.mts';
+import { loadDotCatalogues } from './dot-catalogues.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { readPageDatasets, selectedPageDataset } from './page-datasets.mts';
@@ -35,22 +35,21 @@ const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
 const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
 
-// Published catalogues drawn through a volume bank, with its opacity (src/objects/m87/README.md).
+// Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
 const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
-  m87: ['dots'],
+  'm87-volume': ['dots'],
 };
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
   loadShells(): Promise<{ payload: Awaited<ReturnType<typeof loadPreparedCssSurfaceShell>>; resolveResource(path: string): string }[]>;
-  catalogSources(): Awaited<ReturnType<typeof loadFocusCatalogs>>['galaxies']['sources'];
 };
 let universePromise: Promise<ApplicationUniverse> | null = null;
 export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
-    let catalogs: Awaited<ReturnType<typeof loadFocusCatalogs>> | null = null;
-    let catalogsLoading: Promise<Awaited<ReturnType<typeof loadFocusCatalogs>>> | null = null;
-    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadFocusCatalogs(location.origin)
+    let catalogs: Awaited<ReturnType<typeof loadDotCatalogues>> | null = null;
+    let catalogsLoading: Promise<Awaited<ReturnType<typeof loadDotCatalogues>>> | null = null;
+    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadDotCatalogues(location.origin)
       .then(value => catalogs = value).finally(() => { catalogsLoading = null; });
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;
@@ -187,7 +186,6 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         firstPlanner = null;
         return planner;
       },
-      catalogSources: () => catalogs ? [...catalogs.galaxies.sources, ...catalogs.clusters.sources, ...catalogs.nebulae.sources] : [],
     };
   })().catch(error => { universePromise = null; throw error; });
   return universePromise;

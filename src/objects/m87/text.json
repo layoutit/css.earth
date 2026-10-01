@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m87",
+  "card": {
+    "text": "A galaxy 16.8 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1906-11238",
+        "url": "https://arxiv.org/abs/1906.11238",
+        "label": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI.",
+        "checked": "2026-10-01",
+        "locator": "distance: 16.8 Mpc (−800,000 / +800,000 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 16.8 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1906-11238",
+        "url": "https://arxiv.org/abs/1906.11238",
+        "label": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI.",
+        "checked": "2026-10-01",
+        "locator": "distance: 16.8 Mpc (−800,000 / +800,000 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "eso-optical": {
+      "title": "The halo of M87 in visible light",
+      "detail": "3400 × 3400 px",
+      "summary": "Deep visible-light image on an inferred symmetric volume; depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1525a",
+          "url": "https://www.eso.org/public/images/eso1525a/",
+          "label": "The Halo of Galaxy Messier 87; Chris Mihos (Case Western Reserve University)/ESO",
+          "checked": "2026-10-01",
+          "locator": "The Halo of Galaxy Messier 87"
+        }
+      ]
+    }
+  }
+}

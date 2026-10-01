@@ -63,6 +63,14 @@ describe('object descriptor boundary', () => {
     }
   });
 
+  it('lets only an object with no solid surface declare no surfaces', () => {
+    const { sources, shape } = recipe(), bare = { schema: 'cssearth-authored-object@2', sources, shape, surfaces: [] };
+    const authored = (classification: string) => ({ ...descriptor(), properties: { recipe: bare, catalog: { classification } } });
+    assert.deepEqual(parseAuthoredObjectDescriptor(authored('galaxy')).recipe.surfaces, []);
+    assert.throws(() => parseAuthoredObjectDescriptor(authored('planet')), /recipe.surfaces is empty/);
+    assert.throws(() => parseAuthoredObjectDescriptor({ ...descriptor(), properties: { recipe: bare } }), /recipe.surfaces is empty/);
+  });
+
   it('requires a typed recipe at the authored object boundary', () => {
     assert.throws(() => parseAuthoredObjectDescriptor(descriptor()), /properties.recipe/);
   });

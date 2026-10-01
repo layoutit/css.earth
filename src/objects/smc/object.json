@@ -1,42 +1,98 @@
 {
   "schema": "cssearth-object@2",
   "id": "smc",
-  "type": "volume-dataset-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Small Magellanic Cloud",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 123427103259654690
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "SMC",
+      "systemName": "Local Group",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 12879174500,
+      "description": "A galaxy 62,440 parsecs away.",
+      "aliases": [
+        "Nubecula Minor",
+        "NGC 292",
+        "Small Magellanic Cloud",
+        "Small Milky Cloud"
+      ],
+      "order": 5152,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        558685736318132900000,
-        162842042038617440000,
-        -1.83671292332706e+21
+        558685771853032800000,
+        162842052396096230000,
+        -1.8367130401501783e+21
       ],
-      "localToReferenceXyzw": [
-        0.5930234436925893,
-        0.7905512466577111,
-        0.12224251888534837,
-        0.09169889975068647
+      "presentationToReference": [
+        0.693006685704213,
+        0,
+        -0.7209311573023195,
+        -0.6614414048116538,
+        0.3977771559319137,
+        -0.6358212030276307,
+        -0.2867699453744198,
+        -0.9174820620691818,
+        -0.27566222848122346
       ],
-      "metersPerUnit": 30856775814913670000,
-      "boundsUnits": {
-        "min": [
-          -7.921340139025261,
-          -9.077825371668188,
-          -10.652996905888628
-        ],
-        "max": [
-          8.600007418943365,
-          6.891913440126711,
-          8.882893247926392
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/compact-delivery.json"
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 398151945998886100,
+      "bodyRadiusM": 123427103259654680000
     }
   },
   "prepared": {
-    "format": "cssearth-volume-datasets@1",
-    "url": "prepared/datasets.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

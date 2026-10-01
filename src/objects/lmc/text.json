@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lmc",
+  "card": {
+    "text": "A galaxy 49,591 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-pietrzynski2019natur-567-200p",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
+        "label": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent",
+        "checked": "2026-10-01",
+        "locator": "distance: 49.59 kpc (−545.1 / +551.1 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 49,591 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-pietrzynski2019natur-567-200p",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
+        "label": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent",
+        "checked": "2026-10-01",
+        "locator": "distance: 49.59 kpc (−545.1 / +551.1 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "horalek-widefield": {
+      "title": "Petr Horálek’s visible-light LMC",
+      "detail": "6582 × 4388 px",
+      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-iotw2547a",
+          "url": "https://noirlab.edu/public/images/iotw2547a/",
+          "label": "Large Magellanic Cloud · NOIRLab iotw2547a; NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+          "checked": "2026-10-01",
+          "locator": "Large Magellanic Cloud · NOIRLab iotw2547a"
+        }
+      ]
+    },
+    "vista-infrared": {
+      "title": "LMC in near infrared",
+      "detail": "8954 × 10000 px",
+      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1914a",
+          "url": "https://www.eso.org/public/images/eso1914a/",
+          "label": "Large Magellanic Cloud · ESO eso1914a; ESO/VMC Survey",
+          "checked": "2026-10-01",
+          "locator": "Large Magellanic Cloud · ESO eso1914a"
+        }
+      ]
+    },
+    "wise-wide-infrared": {
+      "title": "LMC in WISE infrared",
+      "detail": "6000 × 6000 px",
+      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "sources": [
+        {
+          "catalogueId": "cds-allwise-color",
+          "url": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+          "label": "Large Magellanic Cloud · AllWISE color mosaic; IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
+          "checked": "2026-10-01",
+          "locator": "Large Magellanic Cloud · AllWISE color mosaic"
+        }
+      ]
+    }
+  }
+}

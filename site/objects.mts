@@ -1,5 +1,5 @@
-import { defineObjects, isSceneObject } from '@cssearth/objects';
-import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry, OverviewObject } from '@cssearth/objects';
+import { catalogueLevel, defineObjects } from '@cssearth/objects';
+import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry } from '@cssearth/objects';
 import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
 import { objectFromEntry } from './object-directory.mts';
@@ -12,17 +12,16 @@ export type NavigableObject = RegistryNavigableObject<SceneFactory, AbortSignal>
 
 /** The single application registry: every entry of the prepared catalogue (`pnpm prepare:catalog`), decoded as a page's
  * object directory decodes the one entry it loads. */
-export const OBJECTS = defineObjects<NavigableObject>([...CATALOGUE_ENTRIES, ...overviews].map(objectFromEntry));
+export const OBJECTS = defineObjects<NavigableObject>(CATALOGUE_ENTRIES.map(objectFromEntry));
 
-/** A capability projection of OBJECTS, never an independently maintained registry. */
-export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(isSceneObject));
-for (const object of OBJECTS) if (object.kind !== 'scene' && !SCENE_OBJECTS.some(host => host.id === object.sceneHostId)) {
-  throw new TypeError(`${object.kind === 'overview' ? 'Overview' : 'Prepared focus'} host is not a registered scene: ${object.id}`);
-}
+/** Every object has a scene of its own: the same list, under the name the scene code reads. */
+export const SCENE_OBJECTS = OBJECTS;
 
-/** The overviews, from the nearest level of the zoom ladder out: a projection of OBJECTS like SCENE_OBJECTS. */
-export const OVERVIEWS = Object.freeze(OBJECTS.filter((object): object is OverviewObject => object.kind === 'overview')
-  .sort((a, b) => a.order - b.order));
+/** The levels of the zoom ladder, from the nearest out. A level is a view of a scene, not an object: its page is the
+ * world host's scene at that zoom. */
+export const OVERVIEWS = Object.freeze(overviews.map(catalogueLevel).sort((a, b) => a.order - b.order));
+// An id names one page: an object's or a level's.
+defineObjects<{ id: string; route: string }>([...OBJECTS, ...OVERVIEWS]);
 
 export function requireObject(id: string) {
   const object = OBJECTS.find(candidate => candidate.id === id);
@@ -30,8 +29,12 @@ export function requireObject(id: string) {
   return object;
 }
 
+/** What the page `/<id>/` is: an object, or a level of the zoom ladder. */
+export function requirePage(id: string): { readonly id: string; readonly name: string; readonly description: string; readonly route: string } {
+  return OVERVIEWS.find(level => level.id === id) ?? requireObject(id);
+}
+
 export function requireSceneObject(id: string) {
-  const object = requireObject(id);
-  if (!isSceneObject(object)) throw new TypeError(`Object ${id} is ${object.kind === 'overview' ? 'an overview' : 'a prepared focus'}, not a scene owner.`);
-  return object;
+  if (OVERVIEWS.some(level => level.id === id)) throw new TypeError(`${id} is a level of the zoom ladder: it has no scene of its own.`);
+  return requireObject(id);
 }

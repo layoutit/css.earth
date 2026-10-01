@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-provenance-references@1",
+  "references": [
+    {
+      "originalPath": "labs/nebula/models/smc/image-candidates.json",
+      "path": "src/objects/smc-volume/source/evidence/image-candidates.json",
+      "bytes": 29958
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/registration/alignment-report.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/registration/alignment-report.json",
+      "bytes": 12990
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/stars/source/catalogue.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/stars/source/catalogue.json",
+      "bytes": 1015
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/constrained/emission-envelope-ellipsoid.json",
+      "bytes": 1724
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
+      "bytes": 2224
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/constrained/fit.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/constrained/fit.json",
+      "bytes": 4922
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/constrained/fit-evidence.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/constrained/fit-evidence.json",
+      "bytes": 32306
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/vmc/recipe.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/vmc/recipe.json",
+      "bytes": 817
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/vmc/density.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/vmc/density.json",
+      "bytes": 626
+    },
+    {
+      "originalPath": "labs/nebula/models/smc/full-density/source/provenance.json",
+      "path": "src/objects/smc-volume/source/evidence/smc/full-density/source/provenance.json",
+      "bytes": 5794
+    }
+  ]
+}

@@ -6,34 +6,37 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 
 | Concept | Meaning and owner |
 | --- | --- |
-| Scene destination | A body package with a route, prepared world frame and scene loader. |
-| Prepared-focus destination | A catalogue subject the map can open: a galaxy cluster, or a subject an object package details. Its page, `/<id>/`, is its host scene’s page with the subject selected; `?dataset=` selects its dataset, as on every page. Other catalogue rows are labels with no page. |
-| Overview | The Milky Way, the Local Group, the Nearby and the Observable Universe: registry entries of kind `overview`, authored under `properties.overview` in their packages: name, description, order, the zoom thresholds and framing of their level, the classifications they hold and the packages they draw. The zoom ladder, the cards, the breadcrumbs and the sidebar tree's sections are built from these entries. Its page, `/<id>/`, is the world host's scene page with the overview selected. |
+| Object | A package with a catalogue entry: a route, a prepared world frame and a scene loader. A planet, a star, a galaxy, a nebula and a cluster of galaxies are all this. `?dataset=` selects one of its datasets. |
+| Level | The Milky Way, the Local Group, the Nearby and the Observable Universe: views of a scene on the zoom ladder, not objects, authored under `properties.overview` in their packages (name, description, order, zoom thresholds, what they hold). A level's page, `/<id>/`, is the world host's scene at that zoom. |
 | Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
 | Dataset view | A selectable `(objectId, datasetId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
 
-Every page is `/<id>/`, one URL system for all three kinds of page:
+Every page is `/<id>/`, one URL system for every object:
 [`navigation-scope.mts`](../site/navigation/navigation-scope.mts) reads and
-writes them. A scene's page mounts that scene. A catalogue subject or an overview
-is drawn by a mounted scene: opened cold, its page mounts the world host, the Sun,
-which every catalogue subject and overview is placed from. In place, a catalogue
-subject keeps the mounted scene; an overview is always the host's, as zooming out
-of any system reaches it. Their pages carry none of the scene's own selections
-(`dataset`, `feature`), so a cold open never reads them as the host's.
+writes them. Every object has a scene of its own, and its page mounts it. A level
+of the zoom ladder (the Milky Way, the Local Group, the nearby and the observable
+universe) is not an object: it is a view of a scene, reached by zooming out of any
+system. Its page, opened cold, mounts the world host, the Sun, at that zoom. A
+level's page carries none of the scene's own selections (`dataset`, `feature`), so
+a cold open never reads them as the host's.
 
-`SCENE_OBJECTS` filters `OBJECTS` by scene capability. Routes, body preparation
-and scene conformance use this filter because a prepared focus does not own
-another scene. `requireObject` resolves either destination kind;
-`requireSceneObject` rejects a focus when a caller needs a scene loader.
+`OBJECTS` has one entry shape and no kinds. Each entry is built from its package's
+own descriptor: a catalogue block, a world frame and a scene. A galaxy, a nebula
+and a cluster of galaxies are objects like any body; their recipe declares no
+surface, and their imagery is a context bank a dataset names. `SCENE_OBJECTS` is
+the same list. The levels are a separate short list (`OVERVIEWS`), each authored
+under its package's `properties.overview`. The Local Group is a level with a
+place of its own, so the world context also draws and names it.
 
-One object has one id. A catalogue row that an object package details takes the
-package's id when the catalogue is prepared: Andromeda is `m31` in the catalogue,
-the registry, its page and its links, and the LVDB key `m_031` stays in its source
-references. Non-navigable context resources remain outside `OBJECTS`.
+One object has one id. The spatial catalogues (Local Group galaxies, galaxy
+clusters, the nearby field) are data the world draws as dots: a row makes no page
+and no registry entry, and nothing in the application reads a row for an object's
+identity, position or facts. Non-navigable context resources remain outside
+`OBJECTS`.
 Adding a classification does not add a renderer, shell or camera owner.
 
-`sceneHostId` identifies the scene displaying a prepared focus. A galaxy's
+A catalogue galaxy's
 `hostId` identifies its physical host. Referenced hosts excluded from positional
 selection remain in the catalogue's `unpositionedHosts`, with a source reference
 and exclusion reason. They acquire no position or destination. The reader rejects
@@ -157,6 +160,6 @@ owners. Its test preload rejects accidental use of application boot; it does
 not prove the Vite-generated context inventory or browser startup.
 
 Scene conformance remains derived from the scene capability filter. Run
-`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/test/scene-session.test.mts`) to check prepared-focus search, selection, saved links and retained
+`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/test/scene-session.test.mts`) to check search, selection, saved links and retained
 camera ownership. These checks do not establish the scientific accuracy of a
 catalogue measurement or a reconstructed volume.

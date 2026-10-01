@@ -4,7 +4,7 @@ import type { DatasetHost, DatasetRoutes } from './dataset-routes.js';
 /** The application route that shows the context objects (the Sun's scene); preparation records it for each context package. */
 export const CONTEXT_ROUTE = '/sun/';
 
-/** An object's dataset is selected on its own page, a scene's or a catalogue focus's alike. */
+/** An object's dataset is selected on its own page. */
 export function datasetDestination(objectId: string, route: string, datasetId: string): string {
   sourceId(objectId); sourceId(datasetId);
   if (route !== `/${objectId}/`) throw new TypeError(`Invalid dataset object route ${route} for ${objectId}: an object's dataset is on its own page.`);

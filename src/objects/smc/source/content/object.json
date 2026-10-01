@@ -1,0 +1,178 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "smc",
+  "displayName": "SMC",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "62.44 kpc (\u00b1470 pc statistical, \u00b1810 pc systematic)",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+          "url": "https://arxiv.org/abs/2010.08754",
+          "label": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 16.25\u00b0, Dec -72.42\u00b0",
+        "source": {
+          "catalogueId": "publication-stanimirovic2004apj-604-176s",
+          "url": "https://ui.adsabs.harvard.edu/abs/2004ApJ...604..176S",
+          "label": "Stanimirovic2004ApJ...604..176S: A New Look at the Kinematics of Neutral Hydrogen in the Small Magellanic Cloud",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Local group, Milky way",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "half-light-radius",
+        "label": "Half-light radius",
+        "value": "1.079 kpc",
+        "source": {
+          "catalogueId": "publication-munoz2018apj-860-66m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860...66M/abstract",
+          "label": "Munoz2018ApJ...860...66M: A MegaCam Survey of Outer Halo Satellites. III. Photometric and Structural Parameters",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "smc-horalek-wide",
+    "controls": [
+      {
+        "id": "smc-horalek-wide",
+        "label": "Hor\u00e1lek optical",
+        "thumbnail": "smc-dataset-smc-horalek-wide.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-horalek-wide",
+          "surface": "smc-horalek-wide"
+        },
+        "source": {
+          "id": "smc-volume-smc-horalek-wide",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/iotw2615a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-vista",
+        "label": "ESO VISTA",
+        "thumbnail": "smc-dataset-smc-vista.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-vista",
+          "surface": "smc-vista"
+        },
+        "source": {
+          "id": "smc-volume-smc-vista",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1714a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-smash",
+        "label": "NOIRLab SMASH",
+        "thumbnail": "smc-dataset-smc-smash.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-smash",
+          "surface": "smc-smash"
+        },
+        "source": {
+          "id": "smc-volume-smc-smash",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noirlab2030b/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-dss2",
+        "label": "DSS2 optical",
+        "thumbnail": "smc-dataset-smc-dss2.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-dss2",
+          "surface": "smc-dss2"
+        },
+        "source": {
+          "id": "smc-volume-smc-dss2",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://esahubble.org/images/heic0514c/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "smc-allwise-wide",
+        "label": "NASA AllWISE",
+        "thumbnail": "smc-dataset-smc-allwise-wide.webp",
+        "volume": {
+          "objectId": "smc-volume",
+          "datasetId": "smc-allwise-wide",
+          "surface": "smc-allwise-wide"
+        },
+        "source": {
+          "id": "smc-volume-smc-allwise-wide",
+          "path": "../../smc-volume/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+      "href": "https://arxiv.org/abs/2010.08754"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stanimirovic2004ApJ...604..176S: A New Look at the Kinematics of Neutral Hydrogen in the Small Magellanic Cloud",
+      "href": "https://ui.adsabs.harvard.edu/abs/2004ApJ...604..176S"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Munoz2018ApJ...860...66M: A MegaCam Survey of Outer Halo Satellites. III. Photometric and Structural Parameters",
+      "href": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860...66M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2010.08754",
+      "credit": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b"
+    }
+  }
+}

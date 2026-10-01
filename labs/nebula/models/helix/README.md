@@ -1,6 +1,6 @@
 # Helix: conditional emission compiler
 
-This lab model studies how to turn Helix Nebula photographs into a 3D emission cloud. The [shipped object record](../../../../src/objects/helix/README.md) owns the active sources, delivery evidence and known problems.
+This lab model studies how to turn Helix Nebula photographs into a 3D emission cloud. The [shipped object record](../../../../src/objects/helix-volume/README.md) owns the active sources, delivery evidence and known problems.
 
 Open `/reconstruction?subject=helix-model-prior&inspection=compiler`. **Nebula → Compile nebula** runs the configured sources through separation, evidence, an optional velocity scaffold, positive multiscale emission fitting and a shared three-dataset bake. The [compiler method and complete setup](../../docs/emission-compiler.md) describe jobs, replay and assumptions. Visual acceptance is still open, and no compiled result is a production nebula asset.
 

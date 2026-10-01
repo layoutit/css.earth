@@ -1,0 +1,28 @@
+{
+  "id": "smc",
+  "classification": "galaxy",
+  "order": 5152,
+  "physical": {
+    "name": "SMC",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of SMC is recorded: it is an extended galaxy, and its package frames it at 4000 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 16.25,
+    "declinationDegrees": -72.42,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 62440,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 145.6,
+    "sources": {
+      "position": "Stanimirovic2004ApJ...604..176S: A New Look at the Kinematics of Neutral Hydrogen in the Small Magellanic Cloud (https://ui.adsabs.harvard.edu/abs/2004ApJ...604..176S); catalogue reference Stanimirovic2004ApJ...604..176S",
+      "distance": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b (https://arxiv.org/abs/2010.08754); catalogue reference Graczyk2020ApJ...904...13G: 62440 pc; eclipsing-binaries",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NAME SMC: 145.6 km/s +/- 0.6, from 2012AJ....144....4M (https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract)"
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { drawnPageFromUrl, overviewPage, overviewScopeFromUrl, preparedFocusFromUrl, satelliteSystemFromUrl, withOverviewScope,
-  withPreparedFocus, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
+import { drawnPageFromUrl, overviewPage, overviewScopeFromUrl, satelliteSystemFromUrl, withOverviewScope,
+  WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { withSceneDataset, readSceneDatasetUrl } from '../dataset-url.mts';
 
 const at = (path: string) => new URL(path, 'https://css.earth');
@@ -11,13 +11,13 @@ const write = (path: string, scene: string, scope: Parameters<typeof withOvervie
   return url.pathname + url.search;
 };
 
-test('every page is /<id>/: an overview and a catalogue subject are both read from the path', () => {
+test('every page is /<id>/: a level is read from the path, and an object with a scene is its own page', () => {
   assert.equal(WORLD_HOST_ID, 'sun');
   assert.equal(overviewScopeFromUrl(at('/milky-way/'), 'sun'), 'milky-way');
   assert.equal(drawnPageFromUrl(at('/milky-way/'), 'sun'), 'milky-way');
-  assert.equal(preparedFocusFromUrl(at('/milky-way/'), 'sun'), null, 'an overview is not a catalogue focus');
-  assert.equal(preparedFocusFromUrl(at('/m31/'), 'sun'), 'm31');
-  assert.equal(overviewScopeFromUrl(at('/m31/'), 'sun'), null, 'a catalogue focus has no overview');
+  assert.equal(drawnPageFromUrl(at('/m31/'), 'm31'), null, 'a galaxy is the scene of its own page');
+  assert.equal(overviewScopeFromUrl(at('/m31/'), 'm31'), null);
+  assert.equal(overviewScopeFromUrl(at('/m31/?overview=system'), 'm31'), 'system');
   // The page wins over its query; only a star's system overview is a query.
   assert.equal(overviewScopeFromUrl(at('/milky-way/?overview=system'), 'sun'), 'milky-way');
   assert.equal(satelliteSystemFromUrl(at('/milky-way/?view=satellites')), false);
@@ -40,10 +40,6 @@ test("an overview's page is the world host's scene; another star's overview stay
 
 test("a drawn subject's page carries none of the scene's own selections, so a cold open reads none", () => {
   assert.equal(write('/sun/?dataset=spectral-slope&feature=12&v=saved', 'sun', 'milky-way'), '/milky-way/?v=saved');
-  const focus = withPreparedFocus(at('/sun/?dataset=spectral-slope&feature=12'), 'sun', 'm42', null);
-  assert.equal(focus.pathname + focus.search, '/m42/');
-  const dataset = withPreparedFocus(at('/sun/?dataset=spectral-slope'), 'sun', 'm42', 'optical');
-  assert.equal(dataset.pathname + dataset.search, '/m42/?dataset=optical', "a focus's dataset is its own dataset");
   assert.deepEqual(readSceneDatasetUrl(at('/milky-way/?dataset=spectral-slope'), 'sun'), { requested: false, id: null });
   assert.equal(withSceneDataset(at('/milky-way/'), 'sun', 'spectral-slope').search, '', 'the scene never writes its dataset there');
 });

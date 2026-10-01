@@ -1,7 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import credits from './prepared-source-credits.json' with { type: 'json' };
 import { parseSourceCredits } from '@cssearth/objects/provenance';
 import { projectRoot } from '@cssearth/core/node';
@@ -45,11 +44,6 @@ export function sourceDocumentation(objectId: string, name: string) {
   }
   return { href: `https://github.com/layoutit/cssEarth/blob/${revision}/${path}`,
     label: creditLabel(sourceProviders(objectId)) };
-}
-
-export function focusSourceDocumentation(object: PreparedCatalogObject, catalogId: string) {
-  const owner = object.detailedObjectId ?? (isPreparedCluster(object) ? 'galaxy-clusters' : catalogId === 'galaxies' ? 'local-group' : object.id);
-  return sourceDocumentation(owner, object.name);
 }
 
 // A star hosts its system overview, but its own maps do not own the other bodies'

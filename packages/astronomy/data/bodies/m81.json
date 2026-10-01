@@ -1,0 +1,28 @@
+{
+  "id": "m81",
+  "classification": "galaxy",
+  "order": 5146,
+  "physical": {
+    "name": "M81",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M81 is recorded: it is an extended galaxy, and its package frames it at 16500 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 148.8883,
+    "declinationDegrees": 69.065278,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 3614098.6264,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -47.003684215379074,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:m_081:location",
+      "distance": "Newman2024ApJ...966..175N: An Empirical Calibration of the Tip of the Red Giant Branch Distance Method in the Near Infrared. I. Hubble Space Telescope WFC3/IR F110W and F160W Filters (https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N); catalogue reference Newman2024ApJ...966..175N: 3614098.6264 pc (-65964.7340604/+33440.8428599); trgb",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 81: -47.003684215379074 km/s +/- 0.00007004846, from 2022ApJS..261....6K (https://ui.adsabs.harvard.edu/abs/2022ApJS..261....6K/abstract)"
+    }
+  }
+}

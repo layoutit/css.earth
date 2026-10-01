@@ -3,11 +3,13 @@ import { sectionElements, sectionPlaceholder } from '@cssearth/renderer';
 export function createSystemCardContent(documentTarget: Document) {
   const groups = [
     { source: '[data-system-dataset]', target: '[data-system-dataset-options]' },
-    { source: '[data-system-dataset-details]', target: '[data-system-dataset-details]' },
+    // The card's container carries the bare attribute; a dataset's details carry its id.
+    { source: '[data-system-dataset-details]:not([data-system-dataset-details=""])', target: '[data-system-dataset-details=""]' },
     { source: 'details.object-gallery-panel', target: '[data-system-galleries]' },
   ];
   const entries = groups.flatMap(({ source, target }) => {
-    const destination = documentTarget.querySelector<HTMLElement>(target);
+    // The system card is mounted only while a system is the subject: its containers are found in or out of the page.
+    const destination = sectionElements(documentTarget, target)[0];
     if (!destination) return [];
     // A detached dataset's details (detached-sections.ts) travel as their template placeholder.
     const nodes = new Set([...sectionElements(documentTarget, '.object-information-panel'), ...documentTarget.querySelectorAll<HTMLElement>(target)].flatMap(root => sectionElements(root, source)));

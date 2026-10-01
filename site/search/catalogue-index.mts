@@ -3,7 +3,7 @@ import { isRecord } from '@cssearth/core';
 /** One search result row as the find function sends it: what the row shows and where it leads. A `system` row leads to a
  * planetary system's overview and is drawn with its star's marker. */
 export interface CatalogueRow {
-  readonly kind: 'scene' | 'prepared-focus' | 'system';
+  readonly kind: 'scene' | 'system';
   readonly id: string;
   readonly name: string;
   readonly classificationName: string;
@@ -18,7 +18,7 @@ export interface CatalogueRow {
   readonly source: Readonly<{ subject: string; document: string; label: string }>;
   readonly marker: Readonly<
     { kind: 'scene'; id: string; color: string }
-    | { kind: 'focus'; thumbnail: string | null }
+    | { kind: 'thumbnail'; thumbnail: string | null }
   >;
 }
 
@@ -43,7 +43,7 @@ const text = (value: unknown, label: string) => {
 
 /** Validate one row of a find response before it reaches the retained result list. */
 export function parseCatalogueRow(input: unknown, index: number): CatalogueRow {
-  if (!isRecord(input) || (input.kind !== 'scene' && input.kind !== 'prepared-focus' && input.kind !== 'system') || !isRecord(input.detail)
+  if (!isRecord(input) || (input.kind !== 'scene' && input.kind !== 'system') || !isRecord(input.detail)
       || !isRecord(input.source) || !isRecord(input.marker)) {
     throw new TypeError(`Invalid object catalogue row: ${index}.`);
   }
@@ -57,11 +57,10 @@ export function parseCatalogueRow(input: unknown, index: number): CatalogueRow {
   if ((detail.value === undefined) !== (detail.unit === undefined)) throw new TypeError(`Catalogue detail parts are incomplete: ${index}.`);
   const marker = input.marker.kind === 'scene'
     ? { kind: 'scene' as const, id: text(input.marker.id, 'marker id'), color: text(input.marker.color, 'marker color') }
-    : input.marker.kind === 'focus' && (input.marker.thumbnail === null || typeof input.marker.thumbnail === 'string')
-      ? { kind: 'focus' as const, thumbnail: input.marker.thumbnail }
+    : input.marker.kind === 'thumbnail' && (input.marker.thumbnail === null || typeof input.marker.thumbnail === 'string')
+      ? { kind: 'thumbnail' as const, thumbnail: input.marker.thumbnail }
       : null;
   if (!marker) throw new TypeError(`Invalid object catalogue marker: ${index}.`);
-  if ((input.kind !== 'prepared-focus') !== (marker.kind === 'scene')) throw new TypeError(`Object catalogue marker kind changed: ${index}.`);
   return Object.freeze({
     kind: input.kind,
     id: text(input.id, 'id'),

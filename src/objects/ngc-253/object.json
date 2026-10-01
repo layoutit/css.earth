@@ -1,45 +1,97 @@
 {
   "schema": "cssearth-object@2",
   "id": "ngc-253",
-  "type": "image-layer-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sculptor Galaxy (NGC 253)",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 614049838716782100
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 253",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 715196092800,
+      "description": "A galaxy 3.5 million parsecs away.",
+      "aliases": [
+        "ESO474-029",
+        "PGC002789",
+        "UGCA013"
+      ],
+      "order": 5149,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        9.466398955991882e+22,
-        1.99281255640934e+22,
-        -4.570390386155572e+22
+        9.466398987631915e+22,
+        1.9928125630700205e+22,
+        -4.570390401431424e+22
       ],
-      "localToReferenceXyzw": [
-        0.5322536118875325,
-        0.6559665237048081,
-        0.41558096803764877,
-        0.33720390184011223
+      "presentationToReference": [
+        0.9999993996575256,
+        0,
+        0.0010957575408784143,
+        0.0010053378881329802,
+        0.3977771559319137,
+        -0.9174815112657304,
+        0.0004358673182015706,
+        -0.9174820620691818,
+        -0.39777691712939167
       ],
-      "metersPerUnit": 30856775814913670000,
-      "boundsUnits": {
-        "min": [
-          -15.93923293966862,
-          -11.729666064687265,
-          -78.56474644888249
-        ],
-        "max": [
-          15.855142372222327,
-          11.981418565749985,
-          81.31495831369375
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/recipe.json"
-    },
-    "cataloguePoints": [
-      "dots"
-    ]
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1980805931344458500,
+      "bodyRadiusM": 614049838716782100000
+    }
   },
   "prepared": {
-    "format": "cssearth-image-layer-bank@1",
-    "url": "prepared/image-layers.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

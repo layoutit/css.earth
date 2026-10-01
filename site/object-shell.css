@@ -643,6 +643,20 @@ details:not([open]) > .object-panel-summary .object-panel-icon {
   font: var(--shell-font-introduction);
   user-select: text;
 }
+/* The publications a hosted package's facts come from, under its factsheet (HostedObjectFacts.astro). */
+.object-fact-sources {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font: var(--shell-font-small);
+}
+.object-fact-sources a {
+  color: var(--shell-text-secondary);
+  overflow-wrap: anywhere;
+  text-underline-offset: 2px;
+}
 .object-learn-more-link {
   display: inline-block;
   width: fit-content;

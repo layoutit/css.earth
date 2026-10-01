@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { defineObjects, type CatalogEntry } from '@cssearth/objects';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { prepareSceneDistance, readPreparedFocusObjects } from '@cssearth/bake/navigation';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES, M_PER_PC } from '@cssearth/astronomy';
@@ -53,7 +53,7 @@ export async function contextObjectAssetUrls(contexts: readonly { id: string }[]
   return Object.fromEntries(entries.sort(([left], [right]) => left.localeCompare(right, 'en')));
 }
 
-/** The frame of every volume a body shows through one of its datasets, so an opening camera can fit it. */
+/** The frame of every bank a body shows through one of its datasets, when the bank declares one, so an opening camera can fit it. */
 async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot: string) {
   const volumes: Record<string, unknown> = {};
   for (const { id } of entries) {
@@ -65,10 +65,9 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
       const volumeId = isRecord(control) && isRecord(control.volume) ? control.volume.objectId : undefined;
       if (typeof volumeId !== 'string' || volumes[volumeId]) continue;
       const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8'));
-      if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
-        throw new TypeError(`src/objects/${volumeId}/object.json: the volume ${id} shows has no properties.frame.`);
-      }
-      volumes[volumeId] = descriptor.properties.frame;
+      if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`src/objects/${volumeId}/object.json: the bank ${id} shows has no properties.`);
+      // A bank of catalogue dots declares no frame: its object's own radius frames it.
+      if (isRecord(descriptor.properties.frame)) volumes[volumeId] = descriptor.properties.frame;
     }
   }
   return volumes;
@@ -107,10 +106,11 @@ async function readLocalGroupGalaxies(projectRoot: string) {
     if (detail.focusRadiusM === undefined || members && !members.has(detail.id)) continue;
     if (typeof detail.focusRadiusM !== 'number' || !(detail.focusRadiusM > 0)) throw new TypeError(`${recipePath}: detailObjects.${row}.focusRadiusM is ${String(detail.focusRadiusM)}, not a positive number.`);
     const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', detail.id, 'object.json'), 'utf8'));
-    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
-      throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.frame.`);
+    // A galaxy is an object of the world: its world frame places it.
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.worldFrame)) {
+      throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.worldFrame.`);
     }
-    const originM = descriptor.properties.frame.originM;
+    const originM = descriptor.properties.worldFrame.originM;
     if (within !== undefined && Array.isArray(originM) && Math.hypot(...originM.map(Number)) > within * M_PER_PC) continue;
     galaxies[detail.id] = { originM, radiusM: detail.focusRadiusM };
   }
@@ -150,13 +150,13 @@ async function readStellarExtents(entries: readonly { id: string }[], projectRoo
 export async function prepareCatalog({ projectRoot = root } = {}) {
   // Every descriptor once, shared by each read below.
   const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
-  const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
-  const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
-  if (!host) throw new TypeError('Prepared focus destinations need a shared world host.');
-  const focuses = await readPreparedFocusObjects(resolve(projectRoot, 'src/objects'), host.id);
-  // The levels above the star systems are drawn by the same shared world host as every catalogue focus.
-  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), host.id, descriptors);
-  defineObjects<{ id: string; route: string }>([...entries, ...focuses, ...overviews]);
+  const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
+  // A level of the zoom ladder is a package's entry like any other; one that is placed too (the Local Group) is in both reads.
+  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
+  const levelIds = new Set(overviews.map(overview => overview.id));
+  const entries = catalogued.filter(entry => !levelIds.has(entry.id));
+  // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
+  defineObjects<{ id: string; route: string }>([...entries, ...overviews.map(({ id }) => ({ id, route: `/${id}/` }))]);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -168,9 +168,21 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     if (entry.classification !== 'star' || discovery.imagery) continue;
     if ([...withImagery].some(child => parents[child]?.parent === entry.id)) discovery.hostsImagery = true;
   }
-  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries),
-    preparedCatalogueModule(entries.map(({ id, distance }, index) => ({ descriptor: descriptors.get(id), distance, discovery: discoveries[index]! })), focuses));
-  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews) + '\n');
+  // One row shape for every object: its descriptor, its distance and its discovery.
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries), preparedCatalogueModule(entries.map(({ id, distance }, index) => {
+    const descriptor = descriptors.get(id);
+    return { descriptor, distance, discovery: discoveries[index]! };
+  })));
+  // Every page reads the levels, so their rows are apart and carry only what an entry reads of a descriptor.
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {
+    const { schema, type, properties } = descriptor as { schema: unknown; type: unknown; properties: Record<string, unknown> };
+    const placed = catalogued.find(entry => entry.id === id), volume = properties.volume;
+    return { descriptor: { schema, id, type, properties: { overview: properties.overview,
+      ...(properties.catalog === undefined ? {} : { catalog: properties.catalog, worldFrame: properties.worldFrame }),
+      ...(isRecord(volume) && volume.originM !== undefined ? { volume: { originM: volume.originM } } : {}) } },
+      // A placed level is a landmark of the scale above it, without imagery of its own.
+      ...(placed ? { distance: placed.distance, discovery: { featured: true, imagery: false, illustration: false } } : {}) };
+  })) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);
