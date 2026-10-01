@@ -16,7 +16,7 @@ const focus: PreparedNavigationFocus = { id: 'catalogue:7', positionM: [1e20, 2e
   limits: { minimumDistanceM: 1e13, maximumDistanceM: 1e22 }, upReference: [0, 0, 1], arrivalDistanceM: 4e18 };
 const optics = { focalPixels: 1000, principalOffsetPixels: [-170, 0] as const, framingRadiusPixels: 200 };
 
-function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean) {
+function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean, cameraPlan: any = scene.camera) {
   class Surface extends EventTarget {
     style: Record<string, any> = { setProperty() {}, removeProperty() {} };
     dataset: Record<string, string> = {};
@@ -25,6 +25,8 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
     readonly x: number;
     constructor(x = 0) { super(); this.x = x; }
     getBoundingClientRect() { return { x: this.x, y: 0, left: this.x, top: 0, width: 1600, height: 900 }; }
+    system: { style: { transform: string } } | null = null;
+    querySelector() { return this.system; }
   }
   const frames = new Map<number, FrameRequestCallback>();
   let nextFrame = 0, time = 0;
@@ -44,7 +46,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
     viewport: { read: () => ({ bounds: stage.getBoundingClientRect(), focalPixels: 1000, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} },
     framePresenter: { present(request: any) { request.commit(); } },
     worldContext: { frame, bodyRadiusUnits: 100, kilometersPerUnit: .002, maximumExtentUnits: 1e8 },
-    cameraPlan: scene.camera, objectId: 'unit', runtimePolicy: { MOBILE_VIEWPORT_QUERY: '(max-width: 500px)' },
+    cameraPlan, objectId: 'unit', runtimePolicy: { MOBILE_VIEWPORT_QUERY: '(max-width: 500px)' },
     preparedSurfaceHitTest,
     onPublish() { publications++; }, onError(error: unknown) { throw error; },
   } as any, { HTMLElement: Surface,
@@ -87,8 +89,8 @@ function close(actual: readonly number[], expected: readonly number[], tolerance
 }
 
 it('uses prepared surface picking for detail flights and suppresses them while a catalogue focus owns input', () => {
+  // The published level of detail gates picking; no lane needs to write `data-lod` on the stage.
   const f = fixture((x, y) => x === 23 && y === 45);
-  f.roots[0]!.dataset.lod = 'geometry';
   const hit = f.callbacks.drag.surfaceFlyToHitTest;
   assert.equal(hit(23, 45), true);
   assert.equal(hit(24, 45), false);
@@ -96,6 +98,17 @@ it('uses prepared surface picking for detail flights and suppresses them while a
   assert.equal(hit(23, 45), false);
   f.orbit.setPreparedFocus(null, frame);
   assert.equal(hit(23, 45), true);
+  f.orbit.destroy();
+});
+
+it('holds a pole-held drag to the body pole without a stage level-of-detail attribute', () => {
+  // Earth's paged globe writes no `data-lod`; its drags still turn about the system node's +Z pole.
+  const f = fixture(undefined, { ...scene.camera, drag: { model: 'pole-held-tumble' } });
+  f.roots[2]!.system = { style: { transform: 'rotateX(90deg)' } };
+  assert.equal(f.roots[0]!.dataset.lod, undefined);
+  const pole = f.callbacks.drag.trackballMetrics().pole;
+  assert.ok(Array.isArray(pole), 'pole-held drag lost its pole');
+  assert.ok(Math.abs(Math.hypot(...pole) - 1) < 1e-9);
   f.orbit.destroy();
 });
 

@@ -194,8 +194,11 @@ export function createRetainedCubicSkyOrbit({
   };
   const mobileQuery = matchMedia(runtimePolicy.MOBILE_VIEWPORT_QUERY);
   const publishCameraDelta = (delta: CameraDelta, signal?: AbortSignal) => { camera.rotate(delta); return publish(signal); };
+  // The committed publication owns the level of detail. Not every lane writes it back as a stage attribute (Earth's paged
+  // globe does not), so input never reads `data-lod`.
+  const lodStage = () => projected?.levelOfDetail.stage;
   const surfaceHitTest = (clientX: number, clientY: number) => {
-    if (preparedSurfaceHitTest && stage.dataset.lod !== 'marker' && stage.dataset.lod !== 'billboard') return preparedSurfaceHitTest(clientX, clientY);
+    if (preparedSurfaceHitTest && lodStage() !== 'marker' && lodStage() !== 'billboard') return preparedSurfaceHitTest(clientX, clientY);
     const body = projected?.body;
     if (!body) return false;
     const radius = worldContext.bodyRadiusUnits;
@@ -206,13 +209,13 @@ export function createRetainedCubicSkyOrbit({
   };
   lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage,
     () => viewport.read(cameraPlan.projection.cssPerspective).bounds,
-    (x, y) => stage.dataset.lod === 'geometry' && surfaceHitTest(x, y)));
+    (x, y) => lodStage() === 'geometry' && surfaceHitTest(x, y)));
   // Every prepared body draws its system node first under the scene, with the body's north pole on its +Z axis. Drags
   // turn about that pole when the plan's drag model is "pole-held-tumble" (Earth's recipe) and the mesh is drawn; other
   // bodies, the same body as a billboard or dot, and a focused neighbour keep the screen axes.
   const poleHeld = cameraPlan.drag?.model === 'pole-held-tumble';
   const bodyPole = (): { pole?: Vector3 } => {
-    if (!poleHeld || stage.dataset.lod !== 'geometry' || camera.focus()) return {};
+    if (!poleHeld || lodStage() !== 'geometry' || camera.focus()) return {};
     const system = sceneElement.querySelector<HTMLElement>(':scope > .polycss-mesh');
     if (!system) return {};
     const m = multiplyPreparedMatrix4(readPreparedMatrix4(camera.scene()), readPreparedTransform(system.style.transform || 'none'));
