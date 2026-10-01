@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "M31V J00443610+4129194 A",
+      "label": "DIRECT V12262 M31C A",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,12 +94,15 @@
       }
     },
     "catalog": {
-      "name": "M31V J00443610+4129194 A",
+      "name": "DIRECT V12262 M31C A",
       "classification": "star",
       "color": "#a0baff",
       "distanceAu": 149335719353.7,
       "description": "The primary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 2.048644 days.",
-      "systemName": "M31V J00443610+4129194 system",
+      "systemName": "DIRECT V12262 M31C system",
+      "aliases": [
+        "M31V J00443610+4129194"
+      ],
       "order": 5138,
       "context": {
         "order": 5135

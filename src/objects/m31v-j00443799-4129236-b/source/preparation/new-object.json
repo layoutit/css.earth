@@ -3,8 +3,9 @@
   "companions": [
     {
       "id": "m31v-j00443799-4129236-b",
-      "name": "M31V J00443799+4129236 B",
-      "description": "The secondary star of M31V J00443799+4129236, an eclipsing pair of hot stars in the Andromeda Galaxy, 15.0 solar masses and 11.3 solar radii; the two eclipse each other every 3.549694 days.",
+      "name": "DIRECT V12650 M31C B",
+      "description": "The secondary star of DIRECT V12650 M31C, an eclipsing pair of hot stars in the Andromeda Galaxy, 15.0 solar masses and 11.3 solar radii; the two eclipse each other every 3.549694 days.",
+      "order": 5137,
       "paper": {
         "url": "https://arxiv.org/abs/astro-ph/0511045",
         "credit": "Ribas et al. (2005), ApJ 635, L37"
@@ -43,8 +44,7 @@
         "card": "The secondary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 3.549694 days.",
         "introduction": "It has 15.0 solar masses and 11.3 solar radii; its partner has 23.1 and 13.1. The pair gave a direct distance to the galaxy: 772 kiloparsecs.",
         "locator": "Ribas et al. (2005), ApJ 635, L37, Table 2: M, R, P and the distance"
-      },
-      "order": 5137
+      }
     }
   ]
 }
