@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { createTextureTileWriter, selectPreparedTextureLevel, textureTileLeafStyles, tiledTextureKeys, type PreparedTextureTileLeaves } from './prepared-texture-levels.js';
-import { mountPreparedPresentation, resolvePreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
+import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
 import type { PreparedResources } from './prepared-residency.js';
 import { requireTextureLevels } from '../validation/presentation.js';
 
@@ -22,6 +22,13 @@ test('startup demands the camera texture level and only the selected dataset', (
   const refined = resolvePreparedPresentation(definition, { selection: { datasetId: 'a' }, view, previousPlan: initial });
   assert.deepEqual(refined.required, ['a']);
   assert.deepEqual(resolvePreparedPresentation(definition, { selection: { datasetId: 'b' }, view }).required, ['b']);
+});
+
+test('a level names the selected dataset\'s textures there, and nothing beyond the prepared levels', () => {
+  assert.deepEqual(preparedTextureLevelKeys(definition, { datasetId: 'a' }, 0), ['a-small']);
+  assert.deepEqual(preparedTextureLevelKeys(definition, { datasetId: 'b' }, 1), ['b']);
+  assert.deepEqual(preparedTextureLevelKeys(definition, { datasetId: 'a' }, 2), []);
+  assert.deepEqual(preparedTextureLevelKeys(definition, { datasetId: 'a' }, -1), []);
 });
 
 test('zoom hysteresis retains detail at a boundary and downgrades outside it', () => {

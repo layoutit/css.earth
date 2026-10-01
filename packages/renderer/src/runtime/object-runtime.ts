@@ -3,6 +3,7 @@ import { initialStageSelection } from './initial-stage-selection.js';
 import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
 import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
+import type { ObjectSelection } from "./object-contract.js";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { SharedView } from "../navigation/view-url.js";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './world-navigation-types.js';
@@ -25,7 +26,8 @@ import { cameraMotionSignalFor } from "../navigation/camera-motion-signal.js";
 import { createObjectControlBinding } from "../rendering/object-control-binding.js";
 import { createPreparedPlayback } from "../rendering/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
-import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
+import { mountPreparedPresentation, preparedTextureLevelKeys } from "../rendering/prepared-presentation.js";
+import { afterStartup } from "../rendering/startup-gate.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { requireObjectRuntimeDefinition, selectedDatasetVolume } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
@@ -80,6 +82,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let allowed = false, navigatedDataset: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
+    /** The dataset and level whose neighbours last read their hash groups. */
+    let prefetchedLevel: string | null = null;
     let revision = 0, selection: ReturnType<typeof createObjectSelectionRuntime> | null = null, controls: ReturnType<typeof createObjectControlBinding> | null = null;
     const viewListeners = new Set<() => void>();
     const datasetListeners = new Set<(id: string) => void>();
@@ -254,6 +258,20 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       surfaceFeatures?.setPlaying(allowed && (speed ?? 1) !== 0);
     }
     function setAllowed(value: boolean) { allowed = value; playback.setAllowed(value); syncPagePlayback(); republishMotion(); }
+    /** A texture level the page did not embed names its images' hashes in a group read on first demand, one round trip
+     * before the images. Once the first view is interactive, the committed level's neighbours read theirs at idle, and
+     * every level a zoom commits reads the next one's, so crossing into it starts the images at once. Fetching changes no
+     * DOM, so a coasting camera may trigger it. */
+    function prefetchAdjacentLevelHashes(next: ObjectSelection, level: number | undefined) {
+      if (level === undefined) return;
+      const key = `${String(next.datasetId)}:${level}`;
+      if (key === prefetchedLevel) return;
+      prefetchedLevel = key;
+      afterStartup(stage.ownerDocument.defaultView, () => {
+        if (lifetime.disposed || prefetchedLevel !== key) return;
+        for (const adjacent of [level + 1, level - 1]) resources.prefetchHashes(preparedTextureLevelKeys(definition, next, adjacent));
+      });
+    }
     /** Texture placements hold only at rest: a spin starting or stopping re-plans which faces may stay coarse. */
     function republishMotion() {
       const atRest = playback.motionAtRest();
@@ -361,10 +379,11 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         motion: inputSurface ? cameraMotionSignalFor(inputSurface) : null,
         prepareSelection: datasetEffects && ((next, signal) => datasetEffects.prepare(selectedDatasetVolume(definition.controls, next.datasetId), signal)),
         readDatasetTables: datasetId => loadPreparedDataset(definition, datasetId),
-        onCommit: (next, _plan, intent) => {
+        onCommit: (next, plan, intent) => {
           if (intent.kind === 'selection') datasetEffects?.commit(selectedDatasetVolume(definition.controls, next.datasetId));
           playback.setSelection(next);
           surfaceFeatures?.setDataset({ id: next.datasetId }); syncPagePlayback(next.speed ?? 1); republishMotion();
+          prefetchAdjacentLevelHashes(next, plan.textureLevel);
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });

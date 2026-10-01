@@ -226,6 +226,15 @@ export function createPreparedResidency({
       await Promise.all([...handles].map(image => image.decode()));
       return !destroyed;
     },
+    /** Reads the hash groups of resources a later demand may need, so that demand starts its images at once. Loads no
+     * image and changes no demand; one read per group is shared with every demand (`createPreparedAssetResolver`). */
+    prefetchHashes(keys: Iterable<string>) {
+      if (destroyed) return;
+      for (const key of keys) {
+        const asset = declared().get(key);
+        if (asset) published.prefetch(key, asset.url);
+      }
+    },
     finishStartup() {
       warm = [...startup].filter(key => policyFor(assetFor(key).pool).retention !== "warm");
       try { releaseWarmed(startup); } finally { startup.clear(); }

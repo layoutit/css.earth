@@ -156,6 +156,14 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     ...(textureTiles && Object.keys(textureTiles).length ? { textureTiles } : {}),
     ...(variant.navigation ? { navigation: variant.navigation } : {}) };
 }
+/** The texture resources a selection draws at a prepared level, with this browser's fallbacks: the demand a switch to that
+ * level makes, so the runtime can read their hash groups ahead of it. */
+export function preparedTextureLevelKeys(definition: PreparedPresentationDefinition, selection: ObjectSelection, level: number): string[] {
+  const levelResources = definition.textureLevels?.levels[level]?.resources;
+  if (!levelResources || preparedDatasetPending(definition, selection)) return [];
+  const resources = textureResourcesFor(levelResources, fallbacksFor(definition.assets?.fallbacks))!;
+  return selectedPreparedVariant(definition, selection).required.flatMap(key => key in levelResources ? [resources[key]!] : []);
+}
 // One choice per level and set of kept-back textures: a turn that hides the same faces again reuses it, so the texture map
 // it resolves to is reused too (textureResourcesFor).
 const levelChoices = new WeakMap<PreparedTextureLevels, Map<string, { resources: Record<string, string>; tiles: Record<string, PreparedTextureTile> }>>();

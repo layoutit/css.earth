@@ -87,6 +87,31 @@ test('a hash the page did not embed arrives with its group, read once for every 
   await assert.rejects(resolver.ensure('page:normal:3:level:2048', '/scenes/earth/page-3.webp'), /does not list page-3\.webp \(page:normal:3:level:2048\)/);
 });
 
+test('a prefetched hash group is the read a later demand waits on, and an embedded hash reads nothing', async () => {
+  const reads: string[] = [];
+  let answer!: (value: unknown) => void;
+  const resolver = createPreparedAssetResolver({ origin: 'https://earth-assets.lowpoly.cc', assets: { 'first.webp': sha }, groups: '/objects/earth/asset-hashes/' },
+    url => { reads.push(url); return new Promise(resolve => { answer = resolve; }); });
+  resolver.prefetch('page:normal:0:level:1024', '/scenes/earth/first.webp');
+  resolver.prefetch('page:normal:1:level:2048', '/scenes/earth/page-1.webp');
+  resolver.prefetch('page:normal:2:level:2048', '/scenes/earth/page-2.webp');
+  const demand = resolver.ensure('page:normal:2:level:2048', '/scenes/earth/page-2.webp');
+  answer({ 'page-1.webp': other, 'page-2.webp': sha });
+  await demand;
+  assert.deepEqual(reads, ['/objects/earth/asset-hashes/page.normal.level.2048.json']);
+  assert.equal(resolver.url('/scenes/earth/page-2.webp'), `https://earth-assets.lowpoly.cc/runtime-assets/${sha}/page-2.webp`);
+});
+
+test('a failed prefetch reports nothing, and the demand reads its group again', async () => {
+  let attempts = 0;
+  const resolver = createPreparedAssetResolver({ origin: 'https://earth-assets.lowpoly.cc', groups: '/objects/earth/asset-hashes/' },
+    async () => { attempts++; if (attempts === 1) throw new Error('offline'); return { 'page-1.webp': sha }; });
+  resolver.prefetch('page:clouds:1', '/scenes/earth/page-1.webp');
+  await new Promise(resolve => setImmediate(resolve));
+  await resolver.ensure('page:clouds:1', '/scenes/earth/page-1.webp');
+  assert.equal(attempts, 2);
+});
+
 test('a failed hash group read is retried by the next demand', async () => {
   let attempts = 0;
   const resolver = createPreparedAssetResolver({ origin: 'https://earth-assets.lowpoly.cc', groups: '/objects/earth/asset-hashes/' },
