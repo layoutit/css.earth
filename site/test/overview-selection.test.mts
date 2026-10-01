@@ -33,6 +33,14 @@ test('every body switches to Solar System at 100 AU from the Sun', () => {
   }
 });
 
+test('a flight that lands as far from a body as its star is opens the system; a zoom by hand does not', () => {
+  const at = (range: number, landed: boolean) => selectionAtCamera({ world: camera(ceres, range * au), viewport, objects, systems: objects, objectId: 'ceres', overview: false, landed });
+  assert.equal(at(20, false), null, 'a hand zoom keeps the body out to the exit distance');
+  assert.equal(at(20, true), null, 'a landing near the body keeps it');
+  assert.deepEqual(at(71, true), { overview: true, objectId: 'sun' });
+  assert.equal(selectionAtCamera({ world: camera(sun, 50 * au), viewport, objects, systems: objects, objectId: 'sun', overview: false, landed: true }), null, 'the star itself is its system');
+});
+
 test('the threshold follows the Sun origin even in a translated world frame', () => {
   const translatedSun = frame([20 * au, -40 * au, 60 * au], 10);
   const translatedObjects = [objectFixture('sun', translatedSun, { classification: 'star', systemName: 'Solar System', distance: testDistance(0) })];

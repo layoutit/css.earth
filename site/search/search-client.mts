@@ -65,7 +65,12 @@ export function createSearchClient({ documentTarget, windowTarget, resultsPanel,
   lifetime.onDispose(() => rows.destroy());
 
   const showError = (show: boolean) => { if (error.hidden === show) error.hidden = !show; };
-  const setBusy = (busy: boolean) => { if (resultsPanel.ariaBusy !== String(busy)) resultsPanel.ariaBusy = String(busy); };
+  // The answer takes most of a second, and four on the function's first call: the panel says so instead of sitting empty.
+  const searching = resultsPanel.querySelector<HTMLElement>('[data-search-busy]');
+  const setBusy = (busy: boolean) => {
+    if (resultsPanel.ariaBusy !== String(busy)) resultsPanel.ariaBusy = String(busy);
+    if (searching && searching.hidden === busy) searching.hidden = !busy;
+  };
   let lastRequest: { query: string; illustrations: boolean } | null = null;
   async function search(query: string, illustrations: boolean) {
     if (events.signal.aborted) return;
@@ -97,8 +102,16 @@ export function createSearchClient({ documentTarget, windowTarget, resultsPanel,
   }
   retry.addEventListener('click', () => { if (lastRequest) void search(lastRequest.query, lastRequest.illustrations); }, { signal: events.signal });
 
+  let warmed = false;
   return Object.freeze({
     search,
+    /** The reader is about to search: start the find function now, so its first start is not their first answer (4.0 s
+     * against 0.8 s on the live site, 2026-10-01). One request per page, its answer unused. */
+    warm() {
+      if (warmed || events.signal.aborted) return;
+      warmed = true;
+      request(readObjectId(), false, 0, events.signal).catch(() => {});
+    },
     /** Leave the search: nothing stays in flight and no rows stay connected. */
     clear() {
       inFlight?.abort();
