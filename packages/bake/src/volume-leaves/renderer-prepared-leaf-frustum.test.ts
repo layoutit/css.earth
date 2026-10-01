@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createPreparedLeafFrustum, preparedLeafMayContribute, validatePreparedLeafBounds } from './prepared-leaf-frustum.js';
+import { createPreparedLeafFrustum, preparedLeafMayContribute, validatePreparedLeafBounds } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
 import { compileLeafBounds } from '@cssearth/bake/volume-leaves';
 
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];

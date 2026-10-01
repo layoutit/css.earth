@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
-import { objectRuntimePackageTests, preparedSelectionFixture } from '../../packages/renderer/test/node/fixtures/object-runtime-package.mts';
+import { objectRuntimePackageTests, preparedSelectionFixture } from '@cssearth/bake/test/object-runtime-package';
 import { loadObjectTestDefinition, required } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { isDeepStrictEqual } from 'node:util';

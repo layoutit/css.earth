@@ -67,7 +67,8 @@
     "./validation/*": "./src/validation/*",
     "./volume/*": "./src/volume/*",
     "./styles/*": "./src/styles/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./prepared-object-decoder.ts": "./src/prepared-object-decoder.ts"
   },
   "scripts": {
     "build": "tsup",

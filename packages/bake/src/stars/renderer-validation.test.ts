@@ -2,11 +2,11 @@ import { readFileSync } from 'node:fs';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { loadPreparedCssPointField, loadPreparedPointAppearance } from './loader.js';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './validation.js';
-import { readCanonicalPointFieldFiles } from '../../test/canonical-point-field-fixture.js';
-import { POINT_FIELD_MAGNITUDE_BOUND } from './point-field-bank.js';
-import { IMPERCEPTIBLE_LUMINANCE } from './point-field-projection.js';
+import { loadPreparedCssPointField, loadPreparedPointAppearance } from '@cssearth/renderer/stars/loader.ts';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/renderer/stars/validation.ts';
+import { readCanonicalPointFieldFiles } from '@cssearth/renderer/test/canonical-point-field-fixture.ts';
+import { POINT_FIELD_MAGNITUDE_BOUND } from '@cssearth/renderer/stars/point-field-bank.ts';
+import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/renderer/stars/point-field-projection.ts';
 import { magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
 
 const copy = (bytes: Uint8Array) => new Uint8Array(bytes).buffer;
@@ -42,7 +42,7 @@ test('decodes the local prepared point field and reads its manifest and bank onc
 
 test('declared magnitude quantization is bounded below what the runtime can display', () => {
   const { manifest } = fixture();
-  const atlas = JSON.parse(readFileSync(new URL('../../test/fixtures/point-field/atlas-recipe.json', import.meta.url), 'utf8')) as {
+  const atlas = JSON.parse(readFileSync(new URL('../../../../packages/renderer/test/fixtures/point-field/atlas-recipe.json', import.meta.url), 'utf8')) as {
     tileSize: number; haloRadii: number; coreInnerRadii: number; coreOuterRadii: number; haloPeak: number; samplesPerPixelAxis: number };
   const magnitude = manifest.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   assert.equal(magnitude.bound, POINT_FIELD_MAGNITUDE_BOUND);
