@@ -63,7 +63,7 @@ export function worldSystemBatch(index: number): readonly string[] {
   return WORLD_SYSTEM_HOSTS.slice(index * size, (index + 1) * size);
 }
 export const WORLD_SYSTEM_BATCH_COUNT = SYSTEM_BATCHES;
-/** The star whose system file holds `id`, or null when the summary holds it (the Sun's system, or a star itself). */
+/** The star whose system file holds `id` or its planets (a star's own id), or null when the summary holds them all: the Sun's system, or a star without planets. */
 export const worldSystemOf = (id: string): string | null => hostOf.get(id) ?? (WORLD_SYSTEM_HOSTS.includes(id) ? id : null);
 
 const loaded = new Set<string>(), loading = new Map<string, Promise<void>>();
