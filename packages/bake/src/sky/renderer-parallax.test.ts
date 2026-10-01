@@ -2,11 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { compileCssSky } from '@cssearth/bake/sky';
-import { preparedSkyCameraTransform } from './prepared-sky-runtime.js';
-import { validatePreparedCssSky } from './validation.js';
+import { preparedSkyCameraTransform } from '@cssearth/renderer/sky/prepared-sky-runtime.ts';
+import { validatePreparedCssSky } from '@cssearth/renderer/sky/validation.ts';
 import type { BakedSky } from '@cssearth/bake/sky';
-import type { WorldCameraPose } from '../navigation/world-camera.js';
-import type { PreparedCssVolume } from '../volume/types.js';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11] } as const;
 const origin = [1000, -2000, 3000] as const;

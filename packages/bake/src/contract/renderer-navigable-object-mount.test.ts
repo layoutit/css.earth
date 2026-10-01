@@ -4,17 +4,17 @@ import { preparedObjectText } from '@cssearth/objects/node';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { loadNavigableObject } from './navigable-object-mount.js';
+import { loadNavigableObject } from '@cssearth/renderer/runtime/navigable-object-mount.ts';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
-import { requirePreparedCssDescriptor } from '../prepared-object-decoder.js';
-import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
-import { record } from '../validation/guards.js';
-import type { ObjectMountOptions, ObjectRuntimeDefinition } from './object-runtime-types.js';
+import { requirePreparedCssDescriptor } from '@cssearth/renderer/prepared-object-decoder.ts';
+import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/validation/world-frame.ts';
+import { record } from '@cssearth/renderer/validation/guards.ts';
+import type { ObjectMountOptions, ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 
 async function preparedFixture() {
   const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../../src/objects/venus/object.json', import.meta.url), 'utf8')));
-  const envelope = record(JSON.parse(await preparedObjectText(fileURLToPath(new URL('../../../../src/objects/venus/', import.meta.url)), descriptor)), 'prepared Venus fixture');
+  const envelope = record(JSON.parse(await preparedObjectText(fileURLToPath(new URL('../../../../src/objects/venus', import.meta.url)), descriptor)), 'prepared Venus fixture');
   const source = requireObjectRuntimeDefinition(envelope.data);
   // Retain the real tree and selections while keeping image decoding in its browser gate.
   const data = { ...source, assets: { ...source.assets, startup: [] }, materials: [],

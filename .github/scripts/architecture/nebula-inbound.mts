@@ -35,7 +35,7 @@ function files(directory: string): string[] {
 }
 function policy(path: string): Policy {
   // Tests hold fixtures and helpers beside their owners; a runtime module that imports one is still checked through its own closure.
-  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('site/test/fixtures/') || path.startsWith('packages/renderer/test/node/fixtures/') ||
+  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('site/test/fixtures/') || path.startsWith('packages/bake/src/contract/fixtures/') ||
       path.startsWith('src/platform/fixtures/') || path.startsWith('src/objects/earth/fixtures/')) return 'test';
   // `@cssearth/telescope-cli` is the telescope command, preparation tooling that imports the bake by design.
   // `.github/scripts` holds the CI and repository checks. `site/build/` is site-owned preparation (build
