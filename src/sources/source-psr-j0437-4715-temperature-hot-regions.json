@@ -1,0 +1,35 @@
+{
+  "id": "source-psr-j0437-4715-temperature-hot-regions",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PSR J0437−4715 · psr j0437 4715 temperature hot regions",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2407.06789",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/psr-j0437-4715/source/manifest.json",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Choudhury et al. (2024); NICER X-ray pulse profiles of 2017 to 2021",
+      "scope": "The psr j0437 4715 temperature hot regions input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

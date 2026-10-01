@@ -395,7 +395,7 @@ export async function writePackageFiles(files: Map<string, string | Buffer>, id:
 }
 
 /** Write a generated star's package and its marker. */
-export async function writeGenerated(generated: Generated, root = process.cwd(), refresh = false) {
+export async function writeGenerated(generated: Pick<Generated, 'id' | 'files'>, root = process.cwd(), refresh = false) {
   const { written, kept } = await writePackageFiles(generated.files, generated.id, root, refresh);
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
   // The marker needs the package on disk: a placeholder first, then the colour dataset as a disc.
@@ -430,7 +430,8 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   for (const addition of additions) if (!await exists(`packages/astronomy/data/bodies/${addition.host}.json`)) throw new Error(`${addition.host}: no such star to add bodies to.`);
   // An id or a name the universe holds is refused before any archive is read; a refresh may only name bodies the tool made.
   const universe = await existingBodies(root);
-  for (const entry of [...specs, ...specs.flatMap(spec => [...spec.planets, ...spec.companions]), ...additions.flatMap(addition => [...addition.planets, ...addition.companions])]) {
+  const pulsars = await keep(parsed.pulsars);
+  for (const entry of [...pulsars, ...specs, ...specs.flatMap(spec => [...spec.planets, ...spec.companions]), ...additions.flatMap(addition => [...addition.planets, ...addition.companions])]) {
     if (refresh) { if (!await exists(`src/objects/${entry.id}/${STORED_SPEC}`)) throw new Error(`${entry.id}: no ${STORED_SPEC}; refresh only regenerates what new-object made.`); continue; }
     // A kept record (orbit route { "record": true }) exists by definition: only its package must be new.
     const kept = 'orbit' in entry && 'record' in entry.orbit;
@@ -444,7 +445,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   for (const name of await readdir(bodies)) taken.push(Number((JSON.parse(await readFile(resolve(bodies, name), 'utf8')) as { order?: number }).order ?? 0));
   let next = Math.max(...taken) + 1;
   const results: NewObjectResult[] = [], hosted: unknown[] = [], recordsOnly: string[] = [];
-  const total = specs.length + additions.length, started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
+  const total = pulsars.length + specs.length + additions.length, started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
   let done = 0;
   // Orders are handed out before the systems run, so the numbering does not depend on which finishes first.
   const orders = new Map<string, number>();
@@ -474,6 +475,14 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
       else hosted.push({ ...record, documents: Object.fromEntries(record.documents) });
     } catch (error) { failed(entry.id, entry.kind, error); }
   };
+  // A pulsar is written whole from its cited values (pulsar.mts): no archive is searched for it and nothing is hosted on it.
+  for (const pulsar of pulsars) {
+    progress(`[${++done}/${total}] ${pulsar.id}: writing the pulsar from its cited values`);
+    try {
+      const { generatePulsar } = await import('./pulsar.mts'), generated = await generatePulsar(pulsar, { order: pulsar.order ?? next++, epochJdTt: solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT });
+      results.push({ id: pulsar.id, kind: 'star', files: (await writeGenerated(generated, root)).written.length, color: `${generated.regions} hot regions`, todo: ['review the drafted card, introduction and README'] });
+    } catch (error) { failed(pulsar.id, 'star', error); }
+  }
   const queue = [...specs];
   await Promise.all(Array.from({ length: Math.min(3, queue.length) }, async () => { for (let spec = queue.shift(); spec; spec = queue.shift()) await system(spec); }));
   for (const addition of additions) {

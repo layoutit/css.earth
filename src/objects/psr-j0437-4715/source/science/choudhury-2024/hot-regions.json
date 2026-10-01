@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-published-hot-regions@1",
+  "source": "Choudhury et al. (2024), ApJL 971, L20 (arXiv:2407.06789), Table A.1: the maximum-likelihood parameter vector of the headline CST+PDT run (NICER 3C50 data set, lower and upper background limits, 20,000 live points), the configuration their Figure 11 draws. https://arxiv.org/abs/2407.06789",
+  "frame": "X-PSI: colatitude from the rotation pole the paper calls north; phase in cycles from the meridian facing Earth at phase zero (primary) or from the opposite meridian (secondary); east longitude = 360 x phase (+180 when antiphased).",
+  "regions": [
+    {
+      "id": "primary",
+      "model": "CST: concentric single temperature, a ring",
+      "antiphased": false,
+      "phaseCycles": {
+        "value": 0.4381,
+        "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row phi_p"
+      },
+      "superseding": {
+        "colatitudeRadians": {
+          "value": 0.112,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row Theta_p"
+        },
+        "radiusRadians": {
+          "value": 0.561,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_p"
+        },
+        "log10TemperatureK": {
+          "value": 6.075,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row log10(T_p [K])"
+        }
+      },
+      "omit": {
+        "radiusRadians": {
+          "value": 0.336,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_o,p"
+        }
+      }
+    },
+    {
+      "id": "secondary",
+      "model": "PDT: protruding dual temperature",
+      "antiphased": true,
+      "phaseCycles": {
+        "value": 0.466,
+        "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row phi_s"
+      },
+      "superseding": {
+        "colatitudeRadians": {
+          "value": 2.392,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row Theta_s"
+        },
+        "radiusRadians": {
+          "value": 0.026,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_s"
+        },
+        "log10TemperatureK": {
+          "value": 6.199,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row log10(T_s [K])"
+        }
+      },
+      "cede": {
+        "colatitudeRadians": {
+          "value": 2.318,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row Theta_c,s"
+        },
+        "azimuthRadians": {
+          "value": 0.0121,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row chi_s"
+        },
+        "radiusRadians": {
+          "value": 0.177,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_c,s"
+        },
+        "log10TemperatureK": {
+          "value": 5.724,
+          "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row log10(T_c,s [K])"
+        }
+      }
+    }
+  ]
+}

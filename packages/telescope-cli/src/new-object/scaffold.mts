@@ -16,7 +16,9 @@ const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
 
 export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK?: number; readonly temperatureSource?: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number; readonly aliases?: readonly string[]; readonly featured?: true;
   /** A black hole instead of a star: its record's radius is the measured shadow, drawn black. It has no temperature, so its catalogue colour is the shared neutral gray. */
-  readonly blackHole?: { readonly shadowSource: string } }
+  readonly blackHole?: { readonly shadowSource: string };
+  /** A neutron star instead of a star with a photosphere: no whole-surface temperature is measured, so it has no temperature, its catalogue colour is the shared neutral gray, and its generator writes its measurements (pulsar.mts). */
+  readonly neutronStar?: true }
 const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOUR, SHADOW_BLACK = '#000000';
 
 /** The emissive stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. The plates keep
@@ -125,9 +127,9 @@ export const solarRadii = (value: number): string => value >= 10 ? String(Math.r
 export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epochJdTt: number): Map<string, string> {
   if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A star needs a lowercase id.');
   const blackHole = spec.blackHole;
-  const temperature = blackHole ? null : readStarTemperature({ effectiveTemperatureK: spec.temperatureK, effectiveTemperatureSource: spec.temperatureSource });
+  const temperature = blackHole || spec.neutronStar ? null : readStarTemperature({ effectiveTemperatureK: spec.temperatureK, effectiveTemperatureSource: spec.temperatureSource });
   // A black hole's sphere is its shadow, drawn black; its catalogue dot has no measured colour.
-  const color = temperature ? temperatureCatalogueColor(temperature.kelvin) : SHADOW_BLACK, catalogColor = temperature ? color : NEUTRAL_GRAY;
+  const color = temperature ? temperatureCatalogueColor(temperature.kelvin) : blackHole ? SHADOW_BLACK : NEUTRAL_GRAY, catalogColor = temperature ? color : NEUTRAL_GRAY;
   const body = requireRecord(bodyRecord, 'astronomy record'), star = requireRecord(body.star, 'star astrometry'), physical = requireRecord(body.physical, 'physical');
   if (body.id !== spec.id) throw new TypeError(`The astronomy record is for ${String(body.id)}, not ${spec.id}.`);
   const astrometry = { rightAscensionDegrees: requireFiniteNumber(star.rightAscensionDegrees), declinationDegrees: requireFiniteNumber(star.declinationDegrees),
@@ -187,10 +189,10 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     angularDiameterSource: blackHole.shadowSource, distanceParsecs: astrometry.distanceParsecs, distanceSource: requireString(requireRecord(star.sources).distance),
     radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     shape: { kind: 'shadow-sphere', qualification: 'A black sphere at the measured shadow radius: the dark region an observer sees, not an event horizon or a surface.' } });
-  else put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
+  else if (temperature) put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
-    effectiveTemperatureK: temperature!.kelvin, effectiveTemperatureSource: temperature!.source,
+    effectiveTemperatureK: temperature.kelvin, effectiveTemperatureSource: temperature.source,
     shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp.' } });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@2', version: 1, id, displayName: name,
     // A published fact names its source: the author replaces each TODO catalogue id with the entry the measurement record cites.

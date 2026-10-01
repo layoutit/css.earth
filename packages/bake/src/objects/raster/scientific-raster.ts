@@ -28,6 +28,7 @@ import { loadVicarGrid } from './pds/vicar-grid.ts';
 import { loadBareRockEclipse, loadBareRockFit, loadEclipseMapFit } from './eclipse-map/eclipse-map-fit.ts';
 import { loadPublishedPhaseCurveMap } from './eclipse-map/published-phase-curve-map.ts';
 import { loadEigenspectraTemperature } from './eclipse-map/eigenspectra-map.ts';
+import { loadPublishedHotRegionMap } from './hot-region-map.ts';
 import { loadHealpixNpyMap } from './healpix-map.ts';
 import { loadTecplotLonLatMap } from './tecplot-lonlat-map.ts';
 import { loadLatitudeBeltMap } from './latitude-belt-map.ts';
@@ -170,6 +171,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (dataset.format === 'vicar-grid') return loadVicarGrid(root, value);
   if (dataset.format === 'eclipse-map-fit') return loadEclipseMapFit(root, value);
   if (dataset.format === 'published-phase-curve-map') return loadPublishedPhaseCurveMap(root, value);
+  if (dataset.format === 'published-hot-region-map') return loadPublishedHotRegionMap(root, value);
   if (dataset.format === 'eigenspectra-temperature') return loadEigenspectraTemperature(root, value);
   if (dataset.format === 'healpix-npy-map') return loadHealpixNpyMap(root, value);
   if (dataset.format === 'tecplot-lonlat-map') return loadTecplotLonLatMap(root, value);

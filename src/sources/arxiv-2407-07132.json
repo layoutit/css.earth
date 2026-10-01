@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-2407-07132",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reardon et al. (2024): The neutron star mass, distance, and inclination from precision timing of the brilliant millisecond pulsar J0437$-$4715",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2407.07132"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ad614a"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2407.07132",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ad614a",
+      "label": "Astrophys.J.Lett. 971 (2024) 1, L18"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2407.07132",
+      "checkedOn": "2026-10-01",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Reardon et al. (2024), Astrophys.J.Lett. 971 (2024) 1, L18",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2407.07132"
+    }
+  ],
+  "publisher": "Astrophys.J.Lett. 971 (2024) 1, L18",
+  "creators": [
+    "Daniel J. Reardon",
+    "Matthew Bailes",
+    "Ryan M. Shannon",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

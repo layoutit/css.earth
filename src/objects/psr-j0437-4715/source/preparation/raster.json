@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/psr-j0437-4715/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "psr-j0437-4715-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csspsr-j0437-4715-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature",
+      "output": "psr-j0437-4715-surface-{id}{suffix}.webp",
+      "thumbnail": "psr-j0437-4715-dataset-{id}.webp",
+      "source": "science/choudhury-2024/hot-regions.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "NICER",
+        "format": "published-hot-region-map",
+        "path": "science/choudhury-2024/hot-regions.json",
+        "consumer": "temperature-hot-region-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 500000,
+        "maximum": 1600000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "0.5",
+          "1.05",
+          "1.6"
+        ],
+        "description": "Effective temperature of the hot regions in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021. The rest of the surface has no value in the fit.",
+        "title": "NICER · published hot-region fit",
+        "sourceUrl": "https://arxiv.org/abs/2407.06789"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "psr-j0437-4715-context-{id}{suffix}.webp",
+    "limbOutput": "psr-j0437-4715-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csspsr-j0437-4715-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

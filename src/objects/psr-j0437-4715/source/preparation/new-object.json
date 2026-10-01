@@ -1,0 +1,147 @@
+{
+  "id": "psr-j0437-4715",
+  "name": "PSR J0437−4715",
+  "system": "PSR J0437−4715 system",
+  "description": "The nearest millisecond pulsar: a neutron star 23 km across that turns 174 times a second.",
+  "aliases": [
+    "PSR J0437-4715",
+    "J0437-4715"
+  ],
+  "paper": {
+    "url": "https://arxiv.org/abs/2407.06789",
+    "credit": "Choudhury et al. (2024), ApJL 971, L20"
+  },
+  "position": {
+    "rightAscensionDegrees": 69.31636835083,
+    "declinationDegrees": -47.25258436111,
+    "epochJulianYear": 2010.7912,
+    "properMotionRaMasPerYear": 121.442,
+    "properMotionDecMasPerYear": -71.4717,
+    "source": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3 column: RA 04:37:15.9284042(4), Dec -47:15:09.303700(4) (J2000) at reference epoch MJD 55486, proper motion 121.4420(6), -71.4717(7) mas/yr",
+    "url": "https://arxiv.org/abs/2407.07132"
+  },
+  "distance": {
+    "value": 156.98,
+    "source": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: distance from the Shklovskii effect on the orbital period",
+    "url": "https://arxiv.org/abs/2407.07132",
+    "uncertainty": 0.15
+  },
+  "radialVelocity": {
+    "value": -75,
+    "source": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR2e: derived from the spin frequency's second derivative assuming no excess timing noise contributes to it; with another noise model the same paper finds -24 +/- 40",
+    "url": "https://arxiv.org/abs/2407.07132",
+    "uncertainty": 18
+  },
+  "radius": {
+    "value": 11.36,
+    "source": "Choudhury et al. (2024), ApJL 971, L20, Table A.1: equatorial radius 11.36 +0.95/-0.63 km (68% credible interval) from NICER pulse-profile modelling",
+    "url": "https://arxiv.org/abs/2407.06789",
+    "uncertainty": 0.95
+  },
+  "mass": {
+    "value": 1.418,
+    "source": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: pulsar mass from the Shapiro delay",
+    "url": "https://arxiv.org/abs/2407.07132",
+    "uncertainty": 0.044
+  },
+  "spin": {
+    "frequencyHz": 173.6879456649439,
+    "inclinationDegrees": 137.506,
+    "source": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: spin frequency, and the orbital inclination 137.506(16) degrees that Choudhury et al. (2024) use as the spin axis's inclination",
+    "url": "https://arxiv.org/abs/2407.07132"
+  },
+  "hotRegions": {
+    "label": "NICER",
+    "path": "science/choudhury-2024/hot-regions.json",
+    "url": "https://arxiv.org/abs/2407.06789",
+    "credit": "Choudhury et al. (2024)",
+    "observed": "NICER X-ray pulse profiles of 2017 to 2021",
+    "record": {
+      "schema": "cssearth-published-hot-regions@1",
+      "source": "Choudhury et al. (2024), ApJL 971, L20 (arXiv:2407.06789), Table A.1: the maximum-likelihood parameter vector of the headline CST+PDT run (NICER 3C50 data set, lower and upper background limits, 20,000 live points), the configuration their Figure 11 draws. https://arxiv.org/abs/2407.06789",
+      "frame": "X-PSI: colatitude from the rotation pole the paper calls north; phase in cycles from the meridian facing Earth at phase zero (primary) or from the opposite meridian (secondary); east longitude = 360 x phase (+180 when antiphased).",
+      "regions": [
+        {
+          "id": "primary",
+          "model": "CST: concentric single temperature, a ring",
+          "antiphased": false,
+          "phaseCycles": {
+            "value": 0.4381,
+            "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row phi_p"
+          },
+          "superseding": {
+            "colatitudeRadians": {
+              "value": 0.112,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row Theta_p"
+            },
+            "radiusRadians": {
+              "value": 0.561,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_p"
+            },
+            "log10TemperatureK": {
+              "value": 6.075,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row log10(T_p [K])"
+            }
+          },
+          "omit": {
+            "radiusRadians": {
+              "value": 0.336,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_o,p"
+            }
+          }
+        },
+        {
+          "id": "secondary",
+          "model": "PDT: protruding dual temperature",
+          "antiphased": true,
+          "phaseCycles": {
+            "value": 0.466,
+            "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row phi_s"
+          },
+          "superseding": {
+            "colatitudeRadians": {
+              "value": 2.392,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row Theta_s"
+            },
+            "radiusRadians": {
+              "value": 0.026,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_s"
+            },
+            "log10TemperatureK": {
+              "value": 6.199,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row log10(T_s [K])"
+            }
+          },
+          "cede": {
+            "colatitudeRadians": {
+              "value": 2.318,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row Theta_c,s"
+            },
+            "azimuthRadians": {
+              "value": 0.0121,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row chi_s"
+            },
+            "radiusRadians": {
+              "value": 0.177,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row zeta_c,s"
+            },
+            "log10TemperatureK": {
+              "value": 5.724,
+              "cell": "Table A.1 (Table 4 in arXiv:2407.06789v1), column ML, row log10(T_c,s [K])"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "text": {
+    "card": "The nearest millisecond pulsar: a neutron star 23 km across that turns 174 times a second.",
+    "introduction": "PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in a ball 23 km wide. NICER's X-ray pulse fit places hot patches on it.",
+    "locator": "Abstract and Table A.1"
+  },
+  "notes": [
+    "Its companion, a 0.22 solar-mass helium white dwarf on a 5.74-day orbit (Reardon et al. 2024), is not drawn",
+    "The maximum-likelihood regions are drawn, as in the paper's Figure 11; the same fit's radius for that single vector is 13.17 km, and the sphere uses the posterior median 11.36 km"
+  ],
+  "order": 5349
+}

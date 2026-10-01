@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "psr-j0437-4715",
+  "displayName": "PSR J0437−4715",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "11.36 km",
+        "source": {
+          "catalogueId": "arxiv-2407-06789",
+          "url": "https://arxiv.org/abs/2407.06789",
+          "label": "Choudhury et al. (2024), ApJL 971, L20, Table A.1: equatorial radius 11.36 +0.95/-0.63 km (68% credible interval) from NICER pulse-profile modelling",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.418 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2407-07132",
+          "url": "https://arxiv.org/abs/2407.07132",
+          "label": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: pulsar mass from the Shapiro delay",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Spin",
+        "value": "174 turns a second",
+        "source": {
+          "catalogueId": "arxiv-2407-07132",
+          "url": "https://arxiv.org/abs/2407.07132",
+          "label": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: spin frequency, and the orbital inclination 137.506(16) degrees that Choudhury et al. (2024) use as the spin axis's inclination",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "spinFrequencyHz; spinSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "157 parsecs",
+        "source": {
+          "catalogueId": "arxiv-2407-07132",
+          "url": "https://arxiv.org/abs/2407.07132",
+          "label": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: distance from the Shklovskii effect on the orbital period",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
+    "controls": [
+      {
+        "id": "temperature",
+        "label": "NICER",
+        "qualification": "Published fit · Choudhury et al. (2024) · NICER X-ray pulse profiles of 2017 to 2021",
+        "thumbnail": "psr-j0437-4715-dataset-temperature.webp",
+        "surface": "psr-j0437-4715-surface-temperature@2x.webp",
+        "poles": "psr-j0437-4715-poles-temperature@2x.webp",
+        "source": {
+          "id": "psr-j0437-4715-temperature-hot-regions",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2407.06789"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Hot-region temperature",
+          "labels": [
+            "0.5",
+            "1.05",
+            "1.6"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "0.5",
+              "1.05",
+              "1.6"
+            ]
+          },
+          "meta": "million K",
+          "sourceUrl": "https://arxiv.org/abs/2407.06789"
+        },
+        "notes": "The hot regions of PSR J0437−4715 in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021: 2 regions built from circles, 0.53 million K to 1.58 million K, covering 4.9% of the surface. They are the shapes the fit allows, not an image. The gray grid is surface the fit gives no temperature. The false colour runs from 0.5 to 1.6 million K."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Choudhury et al. (2024), ApJL 971, L20",
+      "href": "https://arxiv.org/abs/2407.06789"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2407.06789",
+      "credit": "Choudhury et al. (2024), ApJL 971, L20"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/psr-j0437-4715.json",
+      "credit": "Choudhury et al. (2024), ApJL 971, L20, Table A.1: equatorial radius 11.36 +0.95/-0.63 km (68% credible interval) from NICER pulse-profile modelling radius; Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3 column: RA 04:37:15.9284042(4), Dec -47:15:09.303700(4) (J2000) at reference epoch MJD 55486, proper motion 121.4420(6), -71.4717(7) mas/yr position, motion and distance; published spin tilt, axis direction a display convention"
+    }
+  }
+}
