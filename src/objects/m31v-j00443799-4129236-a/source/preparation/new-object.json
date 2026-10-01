@@ -1,8 +1,13 @@
 {
   "id": "m31v-j00443799-4129236-a",
-  "name": "M31V J00443799+4129236 A",
-  "system": "M31V J00443799+4129236 system",
-  "description": "The primary star of M31V J00443799+4129236, an eclipsing pair of hot stars in the Andromeda Galaxy, 23.1 solar masses and 13.1 solar radii; the two eclipse each other every 3.549694 days.",
+  "name": "DIRECT V12650 M31C A",
+  "system": "DIRECT V12650 M31C system",
+  "description": "The primary star of DIRECT V12650 M31C, an eclipsing pair of hot stars in the Andromeda Galaxy, 23.1 solar masses and 13.1 solar radii; the two eclipse each other every 3.549694 days.",
+  "aliases": [
+    "M31V J00443799+4129236"
+  ],
+  "featured": true,
+  "order": 5136,
   "target": "[VRJ2006] M31V-J00443799+4129236",
   "gaia": "369281910880929792",
   "paper": {
@@ -54,6 +59,5 @@
   },
   "notes": [
     "Masses, radii, temperatures, the orbit and the distance are all from Ribas et al. (2005), ApJ 635, L37."
-  ],
-  "order": 5136
+  ]
 }

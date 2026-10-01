@@ -1,4 +1,4 @@
-/* M31V J00443610+4129194 A: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* DIRECT V12262 M31C A: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="m31v-j00443610-4129194-a"] > :is(.polycss-camera, .m31v-j00443610-4129194-a-corona-layer, .m31v-j00443610-4129194-a-limb-layer) {
   --m31v-j00443610-4129194-a-scene-side-padding: 16px;

@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gaia-dr3-4051659602122050176",
-  "displayName": "Gaia DR3 4051659602122050176",
+  "displayName": "TYC 6865-327-1",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "gaia-dr3-gaia-dr3-4051659602122050176",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 FLAME",
-          "checked": "2026-09-28",
+          "checked": "2026-10-01",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-gaia-dr3-4051659602122050176",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-28",
+          "checked": "2026-10-01",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

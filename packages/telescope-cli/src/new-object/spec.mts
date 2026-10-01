@@ -48,6 +48,10 @@
  * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records; ADS links are cited by
  * bibcode; any other page by its address).
  *
+ * `aliases` lists the star's other designations (the catalogue's `aliases`: searchable, never a map label); `new-object --rename`
+ * moves the old name there when a better designation exists (display-name.mts). `featured: true` makes the star a map target
+ * (ring, name, click); without it a star is a plain dot, reachable through search.
+ *
  * `text` ({ card, introduction, locator }) is drafted reader text cited to the paper, as `--from-archive` writes it; without it the
  * card and introduction stay marked for a person. `notes` are sentences for the README's "Not shown" list. A planet may carry
  * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" dataset) or
@@ -64,6 +68,10 @@ export interface StarSpec {
   readonly id: string; readonly name: string; readonly system: string; readonly description: string; readonly order?: number;
   /** A SIMBAD name, a Gaia DR3 source_id, or both. */
   readonly target?: string; readonly gaia?: string;
+  /** Other designations of the star, searchable and listed on its card: the names `name` was preferred to (display-name.mts). */
+  readonly aliases?: readonly string[];
+  /** A map target: ringed, named and opened by a click (the catalogue's `featured`). Every other star is a plain dot. */
+  readonly featured?: true;
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius: Cited | 'gaia-flame'; readonly mass: Cited | 'gaia-flame' | 'unmeasured'; readonly temperature: Cited;
   readonly gravity?: Cited; readonly radialVelocity?: Cited;
@@ -223,7 +231,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes', 'aliases', 'featured']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -251,8 +259,11 @@ export function parseStarSpec(value: unknown): StarSpec {
     return { skip: skip as ColorRoute[], reason: requireString(c.reason, at('color.reason')) };
   })();
   const limb = input.limb === undefined ? undefined : { none: requireString(requireRecord(input.limb, at('limb')).none, at('limb.none')) };
+  const aliases = input.aliases === undefined ? undefined : requireArray(input.aliases, at('aliases')).map(alias => requireString(alias, at('aliases')));
   return {
     id, name, system: input.system === undefined ? `${name} system` : requireString(input.system, at('system')), description: requireString(input.description, at('description')),
+    ...(aliases?.length ? { aliases } : {}),
+    ...(input.featured === undefined ? {} : input.featured === true ? { featured: true as const } : (() => { throw new TypeError(`${at('featured')} is true or absent, not ${JSON.stringify(input.featured)}.`); })()),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), ...(target ? { target } : {}), ...(gaia ? { gaia } : {}),
     paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     radius: citedOrFlame(input.radius, at('radius'), [0.005, 3000]), mass: input.mass === 'unmeasured' ? 'unmeasured' : citedOrFlame(input.mass, at('mass'), [0.01, 300]),

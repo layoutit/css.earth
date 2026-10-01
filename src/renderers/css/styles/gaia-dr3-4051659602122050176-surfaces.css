@@ -1,4 +1,4 @@
-/* Gaia DR3 4051659602122050176: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* TYC 6865-327-1: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="gaia-dr3-4051659602122050176"] > :is(.polycss-camera, .gaia-dr3-4051659602122050176-corona-layer, .gaia-dr3-4051659602122050176-limb-layer) {
   --gaia-dr3-4051659602122050176-scene-side-padding: 16px;
