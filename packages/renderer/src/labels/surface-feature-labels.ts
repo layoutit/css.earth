@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import { bindInputEvent } from '../navigation/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { surfaceFeatureBankIndex } from './surface-feature-banks.js';
@@ -383,7 +384,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const shortSide = rect ? Math.min(rect.right - rect.left, rect.bottom - rect.top) : Math.min(host.clientWidth, host.clientHeight);
     const featureRadiusM = Math.max(MINIMUM_FRAMED_RADIUS_M, feature.radiusUnits / plan.meshRadiusUnits * frame.bodyRadiusM);
     const current = navigation.capture(), origin = frame.originM;
-    const currentDistanceM = Math.hypot(current.pose.positionM[0] - origin[0], current.pose.positionM[1] - origin[1], current.pose.positionM[2] - origin[2]);
+    const currentDistanceM = eyeDistanceM(current.pose, origin);
     const fitDistanceM = frame.bodyRadiusM + optics.focalPixels * featureRadiusM / (shortSide * ARRIVAL_DIAMETER_SHARE / 2);
     const minimumM = flightLimits().minimumDistanceM;
     // Never fly away from the surface: arrive at the framing distance or stay as close as the observer already is.

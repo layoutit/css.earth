@@ -1,3 +1,4 @@
+import { fromEyeM } from '@cssearth/engine';
 import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from './minimap/view-format.mts';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PositionM } from '@cssearth/engine';
@@ -18,7 +19,7 @@ interface ViewReadout { bindObject(): void; setExtendedSubject(record: ExtendedS
 
 export function measureExtendedSubjectView(world: WorldCameraPose, focus: ExtendedSubject, focalPixels: number) {
   const forward = rotateWorldPosition(worldRotationFromQuaternion(world.pose.orientationXyzw), [0, 0, -1]);
-  const relative: PositionM = [focus.positionM[0] - world.pose.positionM[0], focus.positionM[1] - world.pose.positionM[1], focus.positionM[2] - world.pose.positionM[2]];
+  const relative = fromEyeM(world.pose, focus.positionM);
   return { coordinates: null, scale: viewScale(dot(relative, forward) / focalPixels),
     scaleTitle: `Scale at the distance of ${focus.name}` };
 }
@@ -72,7 +73,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
     if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
     const value = extendedSubject ? measureExtendedSubjectView(world, extendedSubject, optics.focalPixels) : measureView({
-      eyeM: [world.pose.positionM[0] - navigation.frame.originM[0], world.pose.positionM[1] - navigation.frame.originM[1], world.pose.positionM[2] - navigation.frame.originM[2]],
+      eyeM: fromEyeM(world.pose, navigation.frame.originM).map(value => 0 - value) as [number, number, number],
       radiusM: navigation.frame.bodyRadiusM, rotation: cssCameraAxesFromOrientation(world.pose.orientationXyzw),
       view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes, mapLeftEdgeLongitudeDeg: surface?.mapLeftEdgeLongitudeDeg,
     });

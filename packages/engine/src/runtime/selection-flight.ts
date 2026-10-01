@@ -44,6 +44,10 @@ export interface SelectionFlightSample {
   orientationXyzw: MutableOrientation;
   progress: number;
   complete: boolean;
+  /** The sample's exact offset from an origin, as PhysicalCameraPose.focusOffset holds it; read only while `hasFocusOffset`. */
+  focusOriginM: MutablePosition;
+  focusOffsetM: MutablePosition;
+  hasFocusOffset: boolean;
 }
 
 // Galaxio navigation/orbitMath.ts buildSelectionFlightCurve and
@@ -107,7 +111,7 @@ export function createSelectionFlight({ from, to, focusPositionM, durationS }: {
 }
 
 export function createSelectionFlightSample(): SelectionFlightSample {
-  return { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1], progress: 0, complete: false };
+  return { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1], progress: 0, complete: false, focusOriginM: [0, 0, 0], focusOffsetM: [0, 0, 0], hasFocusOffset: false };
 }
 
 /** Call with the last painted sample as `from` when another selection interrupts. */
@@ -117,9 +121,13 @@ export function sampleSelectionFlightInto(flight: SelectionFlight, elapsedS: num
   const progress = selectionFlightProgress(flight.curve, elapsed / flight.positionDurationS);
   const { done, remaining } = selectionFlightEnds(flight.curve, elapsed / flight.positionDurationS);
   slerpQuaternionInto(out.orientationXyzw, flight.from.orientationXyzw, flight.to.orientationXyzw, progress);
-  if (done === 0) copy3Into(out.positionM, flight.from.positionM);
-  else if (remaining === 0) copy3Into(out.positionM, flight.to.positionM);
-  else {
+  if (done === 0 || remaining === 0) {
+    // An end keeps the exact offset its pose came with.
+    const end = done === 0 ? flight.from : flight.to;
+    copy3Into(out.positionM, end.positionM);
+    out.hasFocusOffset = end.focusOffset !== undefined;
+    copy3Into(out.focusOriginM, end.focusOffset?.originM ?? ZERO); copy3Into(out.focusOffsetM, end.focusOffset?.offsetM ?? ZERO);
+  } else {
     // Interpolate the focus direction in the camera frame. Its on-screen
     // position then approaches the destination without swinging off-screen
     // while the camera rotates around it.
@@ -128,7 +136,13 @@ export function sampleSelectionFlightInto(flight: SelectionFlight, elapsedS: num
     // Measure from the nearer end, where the fraction still has its precision.
     const rangeM = done < .5 ? flight.curve.startRangeM + (flight.curve.endRangeM - flight.curve.startRangeM) * done
       : flight.curve.endRangeM + (flight.curve.startRangeM - flight.curve.endRangeM) * remaining;
-    for (let axis = 0; axis < 3; axis++) out.positionM[axis] = flight.focusPositionM[axis] + out.positionM[axis] * rangeM;
+    // The position is the focus plus an offset; the sample keeps both, so a reader near the focus loses nothing to the sum.
+    for (let axis = 0; axis < 3; axis++) {
+      const offset = out.positionM[axis] * rangeM;
+      out.focusOriginM[axis] = flight.focusPositionM[axis]; out.focusOffsetM[axis] = offset;
+      out.positionM[axis] = flight.focusPositionM[axis] + offset;
+    }
+    out.hasFocusOffset = true;
   }
   out.progress = progress;
   out.complete = elapsed >= flight.durationS;
@@ -146,14 +160,30 @@ export function cameraPoseToReferenceFrame(pose: PhysicalCameraPose, frame: Focu
     focusOffset: Object.freeze({ originM: frame.originM, offsetM: offset }) });
 }
 
+/** Where the eye is, as an origin and an offset from it: the pose's exact focus offset while it still adds up to `positionM`
+ * (a copy whose position was changed keeps a stale one), else `positionM` itself with no offset. */
+export function eyeAnchor(pose: PhysicalCameraPose): { readonly originM: PositionM; readonly offsetM: PositionM } {
+  const exact = pose.focusOffset;
+  return exact !== undefined && [0, 1, 2].every(axis => pose.positionM[axis] === exact.originM[axis]! + exact.offsetM[axis]!) ? exact : { originM: pose.positionM, offsetM: ZERO };
+}
+const ZERO: PositionM = Object.freeze([0, 0, 0]);
+
+/** A point's position from the eye in the reference frame, point - eye. Every reader of the camera's place goes through this:
+ * `point - pose.positionM` loses whatever a double cannot hold at the eye's distance from the frame origin (a kilometre at 157
+ * parsecs), while (point - origin) - offset keeps the eye's offset from the body it is near. */
+export function fromEyeM(pose: PhysicalCameraPose, pointM: readonly number[]): PositionM {
+  const { originM, offsetM } = eyeAnchor(pose);
+  return [(pointM[0]! - originM[0]) - offsetM[0], (pointM[1]! - originM[1]) - offsetM[1], (pointM[2]! - originM[2]) - offsetM[2]];
+}
+/** The eye's distance from a point, through `fromEyeM`. */
+export function eyeDistanceM(pose: PhysicalCameraPose, pointM: readonly number[]): number { return Math.hypot(...fromEyeM(pose, pointM)); }
+
 export function cameraPoseFromReferenceFrame(pose: PhysicalCameraPose, frame: FocusFrame): PhysicalCameraPose {
   validatePose(pose); validateFrame(frame);
   const [x, y, z, w] = frame.localToReferenceXyzw;
   const inverse: OrientationXyzw = [-x, -y, -z, w];
-  // The exact offset when the pose was made from this same origin and still stands where that offset puts it (a copy whose
-  // position was changed keeps a stale offset); otherwise the difference of the two world positions.
-  const exact = pose.focusOffset, same = exact !== undefined && [0, 1, 2].every(axis => exact.originM[axis] === frame.originM[axis] && pose.positionM[axis] === frame.originM[axis]! + exact.offsetM[axis]!);
-  return Object.freeze({ positionM: rotateVector(inverse, same ? exact.offsetM : subtract(pose.positionM, frame.originM)),
+  const [dx, dy, dz] = fromEyeM(pose, frame.originM);
+  return Object.freeze({ positionM: rotateVector(inverse, [0 - dx, 0 - dy, 0 - dz]),
     orientationXyzw: multiplyQuaternion(inverse, pose.orientationXyzw) });
 }
 
@@ -206,7 +236,8 @@ function validateFrame(frame: FocusFrame): void { validatePosition(frame.originM
 function copyPosition(value: PositionM): PositionM { return Object.freeze([value[0], value[1], value[2]]); }
 function copyPose(pose: PhysicalCameraPose): PhysicalCameraPose {
   const orientationXyzw: OrientationXyzw = Object.freeze([pose.orientationXyzw[0], pose.orientationXyzw[1], pose.orientationXyzw[2], pose.orientationXyzw[3]]);
-  return Object.freeze({ positionM: copyPosition(pose.positionM), orientationXyzw });
+  return Object.freeze({ positionM: copyPosition(pose.positionM), orientationXyzw,
+    ...(pose.focusOffset ? { focusOffset: Object.freeze({ originM: copyPosition(pose.focusOffset.originM), offsetM: copyPosition(pose.focusOffset.offsetM) }) } : {}) });
 }
 function copy3Into(out: MutablePosition, value: PositionM): void { out[0] = value[0]; out[1] = value[1]; out[2] = value[2]; }
 function subtract(a: PositionM, b: PositionM): PositionM { return Object.freeze([a[0] - b[0], a[1] - b[1], a[2] - b[2]]); }
