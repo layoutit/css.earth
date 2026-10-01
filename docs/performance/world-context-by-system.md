@@ -51,6 +51,6 @@ Prepared on 2026-09-30 from the same world (3,628 bodies), gzip level 9:
 2,165 stars. Positions are the largest remaining part (79 KB of the 203 KB gzipped). Each system file is small:
 `trappist-1.json` is 2.7 KB, 0.7 KB gzipped.
 
-On the dev server the Earth page mounts its world with 2,709 bodies. The four batches start about 3 s after load and the
-world then holds all 3,628, with no console errors. A flight from Earth to TRAPPIST-1 b, with the batches held back,
+On the dev server the Earth page mounts its world with the Sun and the summary's 2,709 bodies. The four batches start
+about 3 s after load, and the world then holds all 3,628 bodies with no console errors. A flight from Earth to TRAPPIST-1 b, with the batches held back,
 reads `trappist-1.json` and arrives with its system drawn.
