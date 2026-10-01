@@ -132,6 +132,8 @@ export const SYSTEM_FRAMING_ANGLES = Object.freeze({
 export const OVERVIEW_SELECTION_POLICY = Object.freeze({
   exitSunDistanceM: 100 * 149_597_870_700,
   enterSunDiameterPixels: 48,
+  // A body narrower than this is no longer read as a disc; with the camera as far from it as its star is, the view is the system's.
+  exitBodyDiameterPixels: 8,
   centerRadiusPixels: 160,
   settleMilliseconds: 180,
 });
