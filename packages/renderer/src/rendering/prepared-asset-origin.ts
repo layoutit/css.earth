@@ -83,6 +83,9 @@ export interface PreparedAssetResolver {
   has(address: string): boolean;
   /** Makes the hash of a resource's address present, fetching its group once when the page did not embed it. */
   ensure(key: string, address: string): Promise<void>;
+  /** Starts that read ahead of demand, so a later `ensure` from the same group waits on no round trip of its own. A
+   * failed read is not reported here: the demand that needs the group reads it again and reports its failure. */
+  prefetch(key: string, address: string): void;
 }
 
 export function createPreparedAssetResolver(assetOrigin: PreparedAssetOrigin | null | undefined,
@@ -109,16 +112,26 @@ export function createPreparedAssetResolver(assetOrigin: PreparedAssetOrigin | n
       const filename = filenameOf(address);
       if (!assetOrigin || !filename || hashes.has(filename)) return;
       if (!assetOrigin.groups) throw new Error(`No published asset hash for ${address} (${key}), and the page names no hash groups.`);
-      const group = preparedAssetGroup(key), url = `${assetOrigin.groups}${preparedAssetGroupFile(group)}`;
-      let load = loads.get(url);
-      if (!load) {
-        load = readJson(url).then(value => { for (const [name, digest] of Object.entries(parseHashes(value, `Prepared asset hash group ${url}`))) hashes.set(name, digest); });
-        loads.set(url, load);
-        // A failed read is retried by the next demand rather than cached.
-        load.catch(() => loads.delete(url));
-      }
+      const { url, load } = groupLoad(assetOrigin.groups, key);
       await load;
       if (!hashes.has(filename)) throw new Error(`Prepared asset hash group ${url} does not list ${filename} (${key}).`);
     },
+    prefetch(key: string, address: string) {
+      const filename = filenameOf(address);
+      if (!assetOrigin?.groups || !filename || hashes.has(filename)) return;
+      groupLoad(assetOrigin.groups, key).load.catch(() => {});
+    },
   });
+  /** One shared read per group, whichever of a demand or a prefetch asks first. */
+  function groupLoad(directory: string, key: string) {
+    const url = `${directory}${preparedAssetGroupFile(preparedAssetGroup(key))}`;
+    let load = loads.get(url);
+    if (!load) {
+      load = readJson(url).then(value => { for (const [name, digest] of Object.entries(parseHashes(value, `Prepared asset hash group ${url}`))) hashes.set(name, digest); });
+      loads.set(url, load);
+      // A failed read is retried by the next demand rather than cached.
+      load.catch(() => loads.delete(url));
+    }
+    return { url, load };
+  }
 }

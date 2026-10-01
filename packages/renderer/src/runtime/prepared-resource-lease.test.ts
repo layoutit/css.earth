@@ -58,6 +58,28 @@ test('an image whose hash the page did not embed loads from the published origin
   assert.equal(images[0]?.src, `https://earth-assets.example/runtime-assets/${'c'.repeat(64)}/page-level-1024.webp`);
   lease.destroy();
 });
+test('a prefetched hash group starts no image, and the demand that follows reads no group of its own', async () => {
+  const assets: PreparedAssets = {
+    entries: [{ key: 'page:normal:0:level:2048', url: '/scenes/earth/page-level-1024.webp', pool: 'pages' }],
+    pools: [{ id: 'pages', capacity: 1, concurrency: 1, reuse: false, retention: 'mount' }],
+    startup: [],
+  };
+  const images: { src: string; decoding: 'async'; naturalWidth: number; naturalHeight: number; decode(): Promise<void> }[] = [];
+  const reads: string[] = [];
+  const residency = createPreparedResidency({ assets,
+    assetOrigin: { origin: 'https://earth-assets.example', assets: {}, groups: '/objects/earth/asset-hashes/' },
+    readAssetHashes: async url => { reads.push(url); return { 'page-level-1024.webp': 'c'.repeat(64) }; },
+    createImage: () => { const image = { src: '', decoding: 'async' as const, naturalWidth: 8, naturalHeight: 8, decode: async () => {} }; images.push(image); return image; },
+  });
+  residency.prefetchHashes(['page:normal:0:level:2048', 'undeclared']);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(reads, ['/objects/earth/asset-hashes/page.normal.level.2048.json']);
+  assert.equal(images.length, 0);
+  await residency.request({ required: ['page:normal:0:level:2048'] }).ready;
+  assert.equal(reads.length, 1);
+  assert.equal(images[0]?.src, `https://earth-assets.example/runtime-assets/${'c'.repeat(64)}/page-level-1024.webp`);
+  residency.destroy();
+});
 test('cancelled preflight releases an unclaimed bank and cannot reach a scene', async () => {
   const controller = new AbortController(); controller.abort();
   const residency = createPreparedResidency({ assets });

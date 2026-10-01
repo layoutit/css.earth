@@ -13,6 +13,9 @@ These wait:
 - the celestial sky cube's faces (`milky-way/prepared/sky/*.webp`)
 - the galaxy's face-on backing image
 - the other systems' bodies, in four batches ([world context by system](world-context-by-system.md))
+- the hash groups of the body's texture levels next to the one shown (`/objects/<id>/asset-hashes/<group>.json`). Each
+  level the body commits then reads its own neighbours' groups, so a zoom into a new level starts that level's images
+  without first waiting for the group ([object-runtime.ts](../../packages/renderer/src/runtime/object-runtime.ts)).
 
 What the first view needs does not wait:
 

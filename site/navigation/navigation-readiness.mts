@@ -14,14 +14,10 @@ export function createNavigationReadiness<Context>({ context, knownObject, loadO
       try {
         const ready = await context();
         if (!current()) return null;
-        if (!knownObject(ready, id)) {
-          const loaded = await loadObject(ready, id);
-          if (!current() || !loaded) return null;
-        }
-        if (needsSystemView && !systemViewLoaded(ready, id)) {
-          await loadSystemView(ready, id);
-          if (!current()) return null;
-        }
+        // The entry and the system view are independent reads: both start at once instead of one after the other.
+        const [loaded] = await Promise.all([knownObject(ready, id) || loadObject(ready, id),
+          needsSystemView && !systemViewLoaded(ready, id) ? loadSystemView(ready, id) : undefined]);
+        if (!current() || !loaded) return null;
         return ready;
       } catch (error) {
         // A superseded request must not report a failure after its successor starts.

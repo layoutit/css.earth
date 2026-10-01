@@ -11,7 +11,7 @@ import * as runtimePolicy from './runtime-policy.mts';
 import { startupFetch } from './startup-requests.mts';
 /** Started at boot (`startup-boot.mts`), so the decoding worker's script loads beside the first object's bytes. */
 export { prestartPreparedObjectDecoding as prestartObjectDecoding } from '@cssearth/renderer';
-import { preparedObjectPath } from './prepared-object-path.mts';
+import { preparedObjectUrl } from './prepared-object-path.mts';
 
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.
@@ -46,8 +46,8 @@ export async function loadPackagedObject(input: unknown, signal?: AbortSignal) {
       if (descriptorInput.prepared?.url !== 'prepared/object.json' || !/^[a-z][a-z0-9-]*$/u.test(descriptorInput.id)) {
         throw new Error(`Prepared object asset is not available: ${reference}.`);
       }
-      const path = reference === 'prepared/object.json' && adoptsServerMarkup(descriptorInput.id) ? 'first-view.json' : preparedObjectPath(reference);
-      const url = `/objects/${descriptorInput.id}/${path}`;
+      const url = reference === 'prepared/object.json' && adoptsServerMarkup(descriptorInput.id)
+        ? `/objects/${descriptorInput.id}/first-view.json` : preparedObjectUrl(descriptorInput.id, reference);
       const response = await startupFetch(url, { signal });
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();

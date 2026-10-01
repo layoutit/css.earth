@@ -45,7 +45,7 @@
     "lint:packages": "eslint packages --max-warnings 0",
     "postinstall": "node .github/scripts/ci/commit-message.mts --install && node packages/bake/cli/check-stale-builds.mts --run",
     "prebuild": "node site/build/run-script-chain.mts build:prepare",
-    "build:prepare": "pnpm setup:asset-data && pnpm build:tools && pnpm setup:assets && pnpm prepare:object-json && pnpm prepare:dataset-billboards && pnpm prepare:environment-images && pnpm prepare:nebulae",
+    "build:prepare": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:tool-inputs && pnpm prepare:world-presentation && pnpm prepare:shell-assets && pnpm prepare:object-json && pnpm prepare:dataset-billboards && pnpm prepare:environment-images && pnpm prepare:nebulae",
     "predev": "node site/build/run-script-chain.mts dev:prepare",
     "dev:prepare": "node packages/bake/cli/check-stale-builds.mts --run && pnpm setup:asset-data && pnpm prepare:catalog && pnpm prepare:titles && node packages/bake/cli/prepare-solar-geometry.mts && node packages/bake/cli/prepare-navigation.mts --catalog-only && pnpm prepare:world-context && pnpm prepare:shell-assets && pnpm prepare:object-json && pnpm prepare:dataset-billboards && pnpm prepare:environment-images && node site/build/prepare/prepare-facilities.mts --catalog-only",
     "prepare:catalog": "node site/build/prepare/prepare-catalog.mts",

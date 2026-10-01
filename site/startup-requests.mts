@@ -33,10 +33,29 @@ export function startupRequestsBootstrap({ objectId, serverMarkup, systemView, s
   return `(${startStartupRequests.toString()})(window, ${args.join(', ')});`;
 }
 
-/** `fetch(url)`, adopting the head's request for `url` once. */
+/** Requests a flight starts before the step that reads each one: the destination's object transport goes out with its
+ * card, entry and system view (`scene-router.mts`) instead of after the card. Only the latest few wait for a reader. */
+const flightRequests: StartupRequests = new Map();
+export const FLIGHT_REQUEST_CAPACITY = 4;
+export function startFlightRequest(url: string) {
+  if (typeof window === 'undefined') return;
+  const key = new URL(url, window.location.href).href;
+  if (flightRequests.has(key) || window.__cssEarthStartupRequests?.has(key)) return;
+  const response = fetch(url);
+  // A request nobody reads must not report an unhandled rejection; its reader sees the failure.
+  response.catch(() => {});
+  flightRequests.set(key, response);
+  for (const oldest of flightRequests.keys()) {
+    if (flightRequests.size <= FLIGHT_REQUEST_CAPACITY) break;
+    flightRequests.delete(oldest);
+  }
+}
+
+/** `fetch(url)`, adopting the head's or a flight's request for `url` once. */
 export function startupFetch(url: string | URL, init?: RequestInit): Promise<Response> {
-  const requests = typeof window === 'undefined' ? undefined : window.__cssEarthStartupRequests;
-  const key = requests ? new URL(url, window.location.href).href : '';
+  if (typeof window === 'undefined') return fetch(url, init);
+  const key = new URL(url, window.location.href).href;
+  const requests = [window.__cssEarthStartupRequests, flightRequests].find(requests => requests?.has(key));
   const started = requests?.get(key);
   if (!started) return fetch(url, init);
   // A cancelled reader leaves the request for the next one.
