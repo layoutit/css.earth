@@ -1,5 +1,8 @@
 import { mountCataloguePoints } from './catalogue-points.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
+/** The galaxies beyond the Local Group draw at this share of their dots' own opacity: a backdrop behind the object in view.
+ * A presentation choice, set by eye in the app. */
+const BACKGROUND_OPACITY = 0.75;
 /** A background bank, and the camera distance it begins at: it is fetched there and fades in over the next doubling. */
 export interface BackgroundPointBank { readonly url: string; readonly fromDistanceM?: number }
 
@@ -13,7 +16,7 @@ export function mountBackgroundPoints(host: HTMLElement, before: Element, source
   return {
     /** `outside` is how far the camera is out of our galaxy (volumeOutsideFade): the galaxies beyond show only there. */
     publish(publication: VolumeCameraPublication, distanceM: number, outside: number) {
-      const opacity = Math.max(0, Math.min(1, outside));
+      const opacity = BACKGROUND_OPACITY * Math.max(0, Math.min(1, outside));
       for (const { from, bank } of banks) {
         const t = from === undefined ? 1 : Math.max(0, Math.min(1, Math.log(distanceM / from) / Math.LN2));
         bank.publish(publication, opacity * t * t * (3 - 2 * t));

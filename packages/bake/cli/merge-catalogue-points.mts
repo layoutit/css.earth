@@ -130,11 +130,13 @@ const centreKpc = galaxyFrame ? galaxyFrame.originM.map(value => value / KPC_M) 
 const hex = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}$/iu.test(value);
 
 const unplaced: Record<string, number> = {}, kept: Record<string, number> = {};
-const merged: { reference: number[]; colour: string; bank: string; group?: string }[] = [];
+const merged: { reference: number[]; colour: string; radius: number; bank: string; group?: string }[] = [];
+// Whether any bank sizes its dots: only then is each palette entry a (colour, radius) pair with paletteRadiusPx.
+let sized = false;
 let bankFrame: ReturnType<typeof parseDensityVolumeFrame> | null = null, rawFrame: unknown = null;
 for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun } of entries) {
   const bank = await readCatalogueBank(objectDirectory, bankIdValue) as { schema?: unknown; frame?: unknown; source?: unknown;
-    appearance?: { colorCss?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown; groups?: unknown };
+    appearance?: { colorCss?: unknown; radiusPx?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown; paletteRadiusPx?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown; groups?: unknown };
   const parsedFrame = parseDensityVolumeFrame(bank?.frame), appearance = bank?.appearance;
   if (bank?.schema !== 'cssearth-catalogue-points@1' || !appearance || !hex(appearance.colorCss) || typeof appearance.opacity !== 'number' ||
       !(appearance.opacity > 0 && appearance.opacity <= 1) || !Array.isArray(bank.points)) throw new TypeError(`${bankIdValue}: not a catalogue point bank.`);
@@ -152,6 +154,12 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun }
   if (tones !== undefined && (!Array.isArray(palette) || !Array.isArray(tones) || tones.length !== palette.length || !tones.every(value => typeof value === 'number' && value > 0 && value <= 1))) {
     throw new TypeError(`${bankIdValue}: paletteTone holds one tone in (0, 1] per palette colour.`);
   }
+  // A bank sized by its magnitudes (prepare-catalogue-points.mts `sizeBy`) gives each palette entry its own radius.
+  const radii = appearance.paletteRadiusPx;
+  if (radii !== undefined && (!Array.isArray(palette) || !Array.isArray(radii) || radii.length !== palette.length || !radii.every(value => typeof value === 'number' && value > 0))) {
+    throw new TypeError(`${bankIdValue}: paletteRadiusPx holds one positive radius per palette colour.`);
+  }
+  if (radii !== undefined) sized = true;
   const sigmas = bank.kinematicSigmaKpc;
   if (sigmas !== undefined && (!Array.isArray(sigmas) || sigmas.length !== bank.points.length || !sigmas.every(value => value === null || (typeof value === 'number' && value > 0)))) {
     throw new TypeError(`${bankIdValue}: kinematicSigmaKpc must be one positive number or null per point.`);
@@ -181,7 +189,8 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun }
     if (!hex(colour)) throw new TypeError(`${bankIdValue}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
     const tone = (tones ? (tones as number[])[point[3] as number]! : 1) * layerTone;
     const group = groups ? (groups as string[])[index]! : '';
-    merged.push({ reference: position, colour: toned(graded(colour), tone), bank: bankIdValue, ...(group ? { group: `${bankIdValue}:${group}` } : {}) }); kept[bankIdValue]!++;
+    const radius = radii ? (radii as number[])[point[3] as number]! : typeof appearance.radiusPx === 'number' ? appearance.radiusPx : 0.75;
+    merged.push({ reference: position, colour: toned(graded(colour), tone), radius, bank: bankIdValue, ...(group ? { group: `${bankIdValue}:${group}` } : {}) }); kept[bankIdValue]!++;
   });
 }
 const hash = (index: number) => ((index + 1) * 2654435761) % 4294967296;
@@ -255,7 +264,10 @@ if (cap?.mode === 'volume' && cap.shell !== undefined) {
     return true;
   });
 }
-const palette = [...new Set(ordered.map(point => point.colour))], paletteIndex = new Map(palette.map((colour, index) => [colour, index]));
+// A palette entry is a colour, or with sized banks a colour at one radius.
+const entryOf = (point: { colour: string; radius: number }) => sized ? `${point.colour}|${point.radius}` : point.colour;
+const paletteEntries = [...new Set(ordered.map(entryOf))], paletteIndex = new Map(paletteEntries.map((entry, index) => [entry, index]));
+const palette = paletteEntries.map(entry => entry.split('|')[0]!), paletteRadiusPx = sized ? paletteEntries.map(entry => Number(entry.split('|')[1])) : null;
 // Around the galaxy's centre: its frame origin, the Sun-centred frame's axes and unit, bounds reaching the farthest dot.
 const written = centreOnGalaxy ? ordered.map(point => point.reference.map((value, axis) => Math.round((value - centreKpc![axis]!) * 1e4) / 1e4)) : ordered.map(point => point.reference);
 const reach = Math.ceil(Math.max(...written.map(point => Math.hypot(...point))));
@@ -265,8 +277,8 @@ const output = { schema: 'cssearth-catalogue-points@1', id, source: 'merge', mea
   ...(recipe.within ? { within: recipe.within } : {}),
   ...(maxSigma === undefined ? {} : { unplaced: { maxKinematicSigmaKpc: maxSigma, basis: recipe.maxKinematicSigmaBasis, left: unplaced } }),
   ...(cap ? { densityCap: { ...recipe.densityCap as object, left: capped } } : {}),
-  frame: outputFrame, appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette },
-  counts: { points: ordered.length }, points: ordered.map((point, index) => [...written[index]!, paletteIndex.get(point.colour)!]) };
+  frame: outputFrame, appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette, ...(paletteRadiusPx ? { paletteRadiusPx } : {}) },
+  counts: { points: ordered.length }, points: ordered.map((point, index) => [...written[index]!, paletteIndex.get(entryOf(point))!]) };
 // A merged bank is published only when its recipe says the app fetches it; a level of a later stack is a bake input.
 await writeCatalogueBank({ objectDirectory, id, bank: output, published: recipePublished(recipe, recipePath) });
 console.log(`Merged ${ordered.length} dots: kept ${JSON.stringify(kept)}; left out as unplaced ${JSON.stringify(unplaced)}; over the density cap ${JSON.stringify(capped)}.`);

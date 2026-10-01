@@ -67,6 +67,9 @@ test('seen from outside, a bank draws only as many dots as its projected shape h
   assert.equal(faceOn, Math.floor(Math.PI * (1000 * spread.across / 1000) ** 2 / 64));
   assert.ok(tilted < faceOn);
   assert.equal(far, Math.floor(Math.PI * (1000 * spread.across / 4000) ** 2 / 64), 'four times farther holds a sixteenth');
+  assert.equal(screenPointCount(spread, [0, 0, 1000], 1000, 256), Math.floor(faceOn * 64 / 256), 'a sparser bank holds a quarter as many');
+  assert.equal(parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, outsidePixelsPerDot: 256 } }).appearance.outsidePixelsPerDot, 256);
+  assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, outsidePixelsPerDot: 0 } }), /test-stars: outsidePixelsPerDot is a positive number/);
 });
 
 test('a palette bank colours each point by its index and refuses an index outside the palette', () => {
@@ -181,6 +184,21 @@ test('a translucent catalogue draws its dots as paths with their alpha', async (
   await new Promise(resolve=>setTimeout(resolve,0));
   assert.equal(points.root.querySelector('i'), null);
   assert.equal([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('stroke')==='#ffe2a8b3'&&path.getAttribute('d')), true);
+  points.destroy();
+});
+
+test('a sized palette draws one colour at two radii as two paths, and refuses a radius list that does not match', async () => {
+  const sized = { ...bank, appearance: { ...bank.appearance, palette: ['#ffffff', '#ffffff'], paletteRadiusPx: [1.1, 0.5] },
+    points: [[1, 0, -10, 0], [-1, 0, -10, 1]] };
+  assert.deepEqual(parseCataloguePoints(sized).points.map(point => point.radiusPx), [1.1, 0.5]);
+  assert.throws(() => parseCataloguePoints({ ...sized, appearance: { ...sized.appearance, paletteRadiusPx: [1] } }), /test-stars: paletteRadiusPx holds one positive radius per palette colour/);
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const points = mountCataloguePoints({ host, url: '/sized.json', loadBank: async () => sized });
+  points.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } },
+    viewport: { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 } });
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const drawn = [...points.root.querySelectorAll('path')].filter(path => path.getAttribute('d'));
+  assert.deepEqual(drawn.map(path => [path.getAttribute('stroke'), path.getAttribute('stroke-width')]).sort(), [['#ffffffb3', '17.6'], ['#ffffffb3', '8']]);
   points.destroy();
 });
 

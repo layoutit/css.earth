@@ -34,7 +34,8 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[], i
   part.append(group); svg.append(part);
   const paths = new Map([...new Set(palette)].map(color => {
     const path = document.createElementNS(SVG_NS, 'path');
-    path.setAttribute('fill', 'none'); path.setAttribute('stroke', color); path.setAttribute('stroke-linecap', 'round'); group.append(path);
+    // A paint is `#rrggbbaa@radius` (batched-spatial-points.ts pointPaint): the path strokes its colour.
+    path.setAttribute('fill', 'none'); path.setAttribute('stroke', color.split('@')[0]!); path.setAttribute('stroke-linecap', 'round'); group.append(path);
     const entry = { path, text: '', published: '', width: 0 };
     return [color, entry] as const;
   }));
@@ -47,7 +48,7 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[], i
     part,
     residentElements: paths.size + (into ? 2 : 3),
     /** A dot colour's path, stroked as wide as its dots: resolved once for each point before any frame, so a frame only
-     * adds positions. One path strokes all its dots at one width, so the dots of a colour share their size. */
+     * adds positions. One path strokes all its dots at one width, so a paint (a colour at a radius) is one size. */
     entry(color: string, radius: number) {
       const index = indexOf.get(color);
       if (index === undefined) throw new TypeError(`Point colour ${color} is absent from the prepared paint palette.`);
