@@ -153,12 +153,6 @@
     url("/scenes/saturn/saturn-surface-methane@2x.webp") !important;
 }
 
-.object-stage:where([data-object-id="saturn"])[data-dataset="thermal"]
-  .saturn-body:not(.saturn-body-polar):not(.saturn-cutaway-polar-band) > s {
-  --polycss-projective-texture-image:
-    url("/scenes/saturn/saturn-surface-thermal@2x.webp") !important;
-}
-
 .object-stage:where([data-object-id="saturn"])[data-dataset="ultraviolet"]
   .saturn-body-polar > s {
   background-image: url("/scenes/saturn/saturn-poles-ultraviolet.webp") !important;
@@ -167,11 +161,6 @@
 .object-stage:where([data-object-id="saturn"])[data-dataset="methane"]
   .saturn-body-polar > s {
   background-image: url("/scenes/saturn/saturn-poles-methane.webp") !important;
-}
-
-.object-stage:where([data-object-id="saturn"])[data-dataset="thermal"]
-  .saturn-body-polar > s {
-  background-image: url("/scenes/saturn/saturn-poles-thermal.webp") !important;
 }
 
 .object-stage:where([data-object-id="saturn"])[data-dataset="ultraviolet"]
@@ -188,41 +177,11 @@
   ) !important;
 }
 
-.object-stage:where([data-object-id="saturn"])[data-dataset="thermal"]
-  .saturn-cutaway-polar-band > s {
-  background-image: url(
-    "/scenes/saturn/saturn-interior-outer-poles-thermal@2x.webp"
-  ) !important;
-}
-
-.object-stage:where([data-object-id="saturn"])[data-dataset="ultraviolet"] .saturn-ring-plane > s {
-  background-image:
-    url("/scenes/saturn/saturn-rings-ultraviolet@2x.webp") !important;
-}
-
-.object-stage:where([data-object-id="saturn"])[data-dataset="methane"] .saturn-ring-plane > s {
-  background-image: url("/scenes/saturn/saturn-rings-methane@2x.webp") !important;
-}
-
-.object-stage:where([data-object-id="saturn"])[data-dataset="thermal"] .saturn-ring-plane > s {
-  background-image: url("/scenes/saturn/saturn-rings-thermal@2x.webp") !important;
-}
-
 :where(.object-stage[data-object-id="saturn"]) .saturn-ring-plane > s,
 :where(.object-stage[data-object-id="saturn"]) .saturn-ring-orbit > s,
-:where(.object-stage[data-object-id="saturn"]) .saturn-ring-shadow > s,
-:where(.object-stage[data-object-id="saturn"]) .saturn-ring-surface b,
-:where(.object-stage[data-object-id="saturn"]) .saturn-ring-billboard b {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-shadow > s {
   border-radius: 50%;
   pointer-events: none;
-}
-
-:where(.object-stage[data-object-id="saturn"]) .saturn-ring-billboard b {
-  rotate: z 128deg;
-}
-
-:where(.object-stage[data-object-id="saturn"]) .saturn-ring-flat {
-  transform-style: flat;
 }
 
 :where(.object-stage[data-object-id="saturn"]) .saturn-ring-shadow > s,
@@ -246,7 +205,6 @@
 .object-stage:where([data-object-id="saturn"]).saturn-hide-rings :is(
   .saturn-ring-plane,
   .saturn-ring-orbit,
-  .saturn-ring-billboard,
   .saturn-ring-shadow
 ) {
   visibility: hidden;

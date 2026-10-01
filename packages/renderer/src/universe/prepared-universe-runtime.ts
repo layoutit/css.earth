@@ -199,6 +199,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
         const mountedShells = [...shells];
         let selected = plan.focus;
+        // The selected body and the centre it orbits: a point bank of either's system draws (universe-catalog-banks.ts).
+        let selectedSystem: readonly string[] = [plan.focus.id];
         // The caption sits below the selected body's longest reach, which an elongated shape model extends past its radius.
         let captionBody: typeof selected = selected;
         let previewCaption: typeof selected | null = null;
@@ -311,6 +313,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
             selected = body;
+            selectedSystem = 'orbit' in body && body.orbit ? [body.id, body.orbit.centerBodyId] : [body.id];
             selectedEdge = edge;
             captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
             selectedLabel.prepare(caption());
@@ -339,7 +342,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
-              catalogBanks.publishPoints(world, viewport, selectedPoints);
+              catalogBanks.publishPoints(world, viewport, selectedPoints, selectedSystem);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
                 selectedBodyContextOpacity(world, viewport, captionBody));
               for (const [index, shell] of shellLayers.entries()) {

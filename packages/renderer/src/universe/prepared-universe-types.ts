@@ -52,8 +52,9 @@ export interface PreparedUniverseOptions {
   imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
   loadImageLayer?(id: string): Promise<PreparedImageLayerBank>;
   /** Packages that are only a prepared catalogue point bank (`catalogue-point-bank` descriptors), by URL: fetched and drawn
-   * while the catalogue row that details to them (`detailedObjectId`) is selected. */
-  pointBanks?: readonly { id: string; url: string }[];
+   * while the catalogue row that details to them (`detailedObjectId`) is selected, or, for a bank that belongs to a body's
+   * system (`host`), while the selected body is that host or orbits it. */
+  pointBanks?: readonly { id: string; url: string; host?: string }[];
   /** Volume dataset banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all datasets, plus catalogue points) is fetched only through {@link loadVolumeDataset}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */

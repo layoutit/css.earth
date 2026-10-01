@@ -61,3 +61,24 @@ test('a package of catalogue dots mounts them when its row is selected, and hide
   lifetime.destroy();
   assert.equal(layer(), null, 'the scene takes them with it');
 });
+
+test('a bank that belongs to a body draws while that body or one of its system is selected', () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
+    pointBanks: [{ id: 'minor-moons', url: '/minor-moons/dots.bin', host: 'planet' }] });
+  const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, undefined, system);
+  const layer = () => root.querySelector<HTMLElement>('[data-catalogue-points]');
+  publish('elsewhere');
+  assert.equal(layer(), null, 'nothing is mounted or fetched while another system is selected');
+  publish('planet');
+  assert.equal(layer()?.style.display, '', 'its host selected, the dots draw');
+  publish('moon', 'planet');
+  assert.equal(layer()?.style.display, '', 'a body that orbits the host selected, they stay');
+  publish('elsewhere', 'star');
+  assert.equal(layer()?.style.display, 'none', 'another system hides them');
+  lifetime.destroy();
+});

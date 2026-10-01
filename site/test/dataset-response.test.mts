@@ -20,7 +20,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
 <input class="object-sheet-handle" type="checkbox"><section class="object-information-panel">
 <section data-information-panel="factsheet">Fact</section>
 <details data-information-panel="dataset"><summary>Datasets</summary>
-${['normal', 'ultraviolet', 'thermal'].map(id => `<button type="submit" name="dataset" value="${id}" aria-pressed="${id === 'normal'}">${id}</button><div data-dataset-details="${id}" ${id === 'normal' ? '' : 'hidden'}>${id}</div>`).join('')}
+${['normal', 'ultraviolet', 'methane'].map(id => `<button type="submit" name="dataset" value="${id}" aria-pressed="${id === 'normal'}">${id}</button><div data-dataset-details="${id}" ${id === 'normal' ? '' : 'hidden'}>${id}</div>`).join('')}
 </details>
 </section><!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(scene.descriptor)}</script><!--prepared-descriptor:end-->
 <!--prepared-scene:start--><main class="object-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" aria-label="Saturn">${scene.html}</main><!--prepared-scene:end--><script src="/app.js"></script></body></html>`;
@@ -34,7 +34,7 @@ const read: typeof fetch = async input => {
   return new Response(prepared.bytes);
 };
 test('native selection replaces only the existing prepared presentation and selected controls', async () => {
-  for (const id of ['ultraviolet', 'thermal', 'normal']) {
+  for (const id of ['ultraviolet', 'methane', 'normal']) {
     const result = await renderDatasetResponse(html, new URL(`/saturn/?dataset=${id}`, origin), 'saturn', read);
     const document = parseHTML(result).document;
     assert.equal(document.querySelectorAll('.polycss-scene').length, 1);
@@ -88,7 +88,7 @@ test('a city link is left to the page, which selects the city on arrival', async
   assert.equal(await renderDatasetResponse(html, new URL('/saturn/?feature=city-3435910', origin), 'saturn', read), html);
 });
 test('Netlify handles dataset and combined search queries without intercepting static assets', () => {
-  for (const query of ['dataset=ultraviolet', 'q=Titan&dataset=thermal&v=view']) {
+  for (const query of ['dataset=ultraviolet', 'q=Titan&dataset=methane&v=view']) {
     const destination = searchRoute(new Request(`${origin}/saturn/?${query}`));
     assert.equal(destination?.pathname, '/.netlify/functions/search');
     assert.equal(destination?.searchParams.get('object'), 'saturn');

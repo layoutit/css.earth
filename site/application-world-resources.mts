@@ -4,7 +4,7 @@ import { isRecord } from '@cssearth/core';
 import datasetBillboardText from './prepared-dataset-billboards.json?raw';
 import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
-import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
+import { parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createPreparedUniverse, parseDatasetBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
@@ -106,11 +106,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
         cataloguePointUrls: imageLayerCataloguePoints.get(id)!.map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
-    // Packages that are only catalogue dots (a galaxy cluster's members): drawn while their catalogue row is selected.
-    const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(descriptor => {
-      if (!descriptor.prepared) throw new TypeError(`src/objects/${descriptor.id}/object.json: a catalogue point bank names its prepared dots.`);
-      return { id: descriptor.id, url: resourceSet(descriptor.id).resolve(descriptor.prepared.url) };
-    });
+    // Packages that are only catalogue dots: a galaxy cluster's members draw while their catalogue row is selected, and a
+    // body's (a planet's moons without a page) while that body or one that orbits it is.
+    const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(parseCataloguePointBankDescriptor).map(bank =>
+      ({ id: bank.id, url: resourceSet(bank.id).resolve(bank.url), ...(bank.host === undefined ? {} : { host: bank.host }) }));
     const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
     const billboards = (bodies: Parameters<typeof preparedBodyBillboards>[0]) => preparedBodyBillboards(bodies, plainDots,
       id => asteroids.has(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
