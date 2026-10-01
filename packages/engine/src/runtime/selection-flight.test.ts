@@ -130,3 +130,23 @@ describe('universal selection flight', () => {
     assert.throws(() => sampleSelectionFlight(createSelectionFlight(input), NaN));
   });
 });
+
+describe('a camera a few kilometres from a focus hundreds of parsecs away', () => {
+  // PSR J0437-4715: 157 parsecs from the Sun, where a double resolves 1,024 m, and 11.36 km in radius.
+  const frame = { originM: [6.9e17, 3.3e18, -3.5e18] as PositionM, localToReferenceXyzw: [0, 0, 0, 1] as OrientationXyzw };
+  const local = (x: number): PhysicalCameraPose => ({ positionM: [x, 12.25, 44000], orientationXyzw: [0, 0, 0, 1] });
+  it('reads back its own position exactly, through the offset the pose carries', () => {
+    for (const x of [0, 0.5, 137.25, 5000.125]) {
+      const back = cameraPoseFromReferenceFrame(cameraPoseToReferenceFrame(local(x), frame), frame);
+      assert.deepEqual([...back.positionM], [x, 12.25, 44000]);
+    }
+  });
+  it('falls back to the world positions for another origin or a pose rebuilt without the offset', () => {
+    const world = cameraPoseToReferenceFrame(local(137.25), frame), rebuilt = { positionM: world.positionM, orientationXyzw: world.orientationXyzw };
+    assert.notEqual(cameraPoseFromReferenceFrame(rebuilt, frame).positionM[0], 137.25, 'a double cannot hold 137 m at this distance');
+    const moved = { ...world, positionM: [world.positionM[0] + 1e6, world.positionM[1], world.positionM[2]] as PositionM };
+    assert.ok(Math.abs(cameraPoseFromReferenceFrame(moved, frame).positionM[0] - 1e6) < 2048, 'a stale offset is not used');
+    const other = { ...frame, originM: [frame.originM[0] + 1e6, frame.originM[1], frame.originM[2]] as PositionM };
+    assert.ok(Math.abs(cameraPoseFromReferenceFrame(world, other).positionM[0] + 1e6) < 2048);
+  });
+});

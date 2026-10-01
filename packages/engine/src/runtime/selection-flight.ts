@@ -7,6 +7,11 @@ type MutableOrientation = [number, number, number, number];
 export interface PhysicalCameraPose {
   readonly positionM: PositionM;
   readonly orientationXyzw: OrientationXyzw;
+  /** The position as an exact offset from a focus origin, when the pose was made from one (cameraPoseToReferenceFrame).
+   * `positionM` cannot hold it: 157 parsecs from the Sun a double resolves a kilometre, and a neutron star is 23 km wide.
+   * A pose rebuilt from `positionM` and `orientationXyzw` alone drops it and reads back at that resolution; an offset that no
+   * longer adds up to `positionM` is ignored. */
+  readonly focusOffset?: { readonly originM: PositionM; readonly offsetM: PositionM };
 }
 export interface FocusFrame {
   readonly originM: PositionM;
@@ -137,14 +142,18 @@ export function sampleSelectionFlight(flight: SelectionFlight, elapsedS: number)
 export function cameraPoseToReferenceFrame(pose: PhysicalCameraPose, frame: FocusFrame): PhysicalCameraPose {
   validatePose(pose); validateFrame(frame);
   const offset = rotateVector(frame.localToReferenceXyzw, pose.positionM);
-  return Object.freeze({ positionM: add(frame.originM, offset), orientationXyzw: multiplyQuaternion(frame.localToReferenceXyzw, pose.orientationXyzw) });
+  return Object.freeze({ positionM: add(frame.originM, offset), orientationXyzw: multiplyQuaternion(frame.localToReferenceXyzw, pose.orientationXyzw),
+    focusOffset: Object.freeze({ originM: frame.originM, offsetM: offset }) });
 }
 
 export function cameraPoseFromReferenceFrame(pose: PhysicalCameraPose, frame: FocusFrame): PhysicalCameraPose {
   validatePose(pose); validateFrame(frame);
   const [x, y, z, w] = frame.localToReferenceXyzw;
   const inverse: OrientationXyzw = [-x, -y, -z, w];
-  return Object.freeze({ positionM: rotateVector(inverse, subtract(pose.positionM, frame.originM)),
+  // The exact offset when the pose was made from this same origin and still stands where that offset puts it (a copy whose
+  // position was changed keeps a stale offset); otherwise the difference of the two world positions.
+  const exact = pose.focusOffset, same = exact !== undefined && [0, 1, 2].every(axis => exact.originM[axis] === frame.originM[axis] && pose.positionM[axis] === frame.originM[axis]! + exact.offsetM[axis]!);
+  return Object.freeze({ positionM: rotateVector(inverse, same ? exact.offsetM : subtract(pose.positionM, frame.originM)),
     orientationXyzw: multiplyQuaternion(inverse, pose.orientationXyzw) });
 }
 
