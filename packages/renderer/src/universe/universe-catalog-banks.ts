@@ -1,4 +1,4 @@
-import { createImageFocusBank } from './prepared-focus-bank.js';
+import { createImageFocusBank, createPointFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -145,7 +145,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     mountInitialCatalog() { if (catalogPayload) mountCatalog(catalogPayload); },
     focusBank(id: string) {
       const bank = byId.get(id);
-      return bank ? createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank)) : null;
+      if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank));
+      // A bank of dots has one dataset, its members; the dots mount when they are first shown.
+      return points.some(point => point.id === id) ? createPointFocusBank(id) : null;
     },
     /** Draw the selected package's catalogue dots and hide every other's. */
     publishPoints(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string) {

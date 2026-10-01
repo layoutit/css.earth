@@ -646,11 +646,15 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id)!;
   const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
   const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
-  // A bank package is a body of the world: selecting that body is what draws its bank.
+  // A bank package is a body of the world; its scene's dataset shows the bank as its companion.
+  let shown: string | null = null;
   const select = (id: string) => {
+    if (shown) mounted.setVolumeDatasetEnabled(shown, false);
+    shown = mounted.focusBank(id) ? id : null;
     const body = [context.focus, ...context.bodies].find((candidate: { id: string }) => candidate.id === id) as { positionM: [number, number, number]; radiusM: number };
     mounted.selectObject(id, { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, originM: body.positionM,
       presentationToReference: [0, 1, 0, 1, 0, 0, 0, 0, 1], metersPerUnit: body.radiusM, bodyRadiusM: body.radiusM });
+    if (shown) mounted.setVolumeDatasetEnabled(shown, true);
   };
   const camera = (radii: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
     pose: { positionM: [frame.originM[0], frame.originM[1], frame.originM[2] + radii * frame.metersPerUnit], orientationXyzw: [0, 0, 0, 1] } });

@@ -58,9 +58,8 @@ export async function prepareBankScene(id: string, projectRoot = root) {
   const published = presentation.controls.filter(isRecord);
   const datasets = { title: content.datasets.title, defaultDataset: presentation.defaultDataset,
     controls: published.map(({ title: _title, summary: _summary, detail: _detail, description: _description, ...control }) =>
-      // A volume bank holds several datasets and the shared dataset selection switches among them; an image-layer bank and a
-      // bank of dots are drawn whole while the object is selected.
-      ({ ...control, id: String(control.id), ...(descriptor.type === 'volume-dataset-bank' ? { volume: { objectId: id, datasetId: String(control.id), surface: String(control.id) } } : {}) })) };
+      // Each dataset shows the package's bank as its companion, as a star's disc dataset shows its disc.
+      ({ ...control, id: String(control.id), volume: { objectId: id, datasetId: String(control.id), surface: String(control.id) } })) };
   for (const control of datasets.controls) if (!text.datasets[control.id]) throw new TypeError(`src/objects/${id}/text.json: dataset ${control.id} has no reader text.`);
   const controls = { datasets, settings: content.settings };
   requireControls(controls);

@@ -207,9 +207,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let selectedEdge: PreparedLabelEdge | undefined, previewEdge: PreparedLabelEdge | undefined;
         const caption = () => previewCaption ?? captionBody;
         const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: false, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
-        let detailedFocus: { objectId: string; focus: SelectedBank } | null = null;
-        const pointBankIds = new Set(pointBanks.map(bank => bank.id));
-        let selectedPoints: string | undefined;
+        // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
+        let companion: string | null = null;
+        const attachedBanks = new Set(volumeDatasetBanks.filter((_, index) => datasetFacts[index]!.attached).map(bank => bank.id));
+        const bankOf = (id: string) => datasets.focusBank(id) ?? catalogBanks.focusBank(id);
         background.mount();
         catalogBanks.loadInitialImages();
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
@@ -242,9 +243,19 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             requestPublication?.();
           },
           ensureGalaxyCatalog: catalogBanks.ensureCatalog,
-          focusBank(id: string) { return datasets.focusBank(id) ?? catalogBanks.focusBank(id); },
-          setVolumeDatasetEnabled: datasets.setEnabled,
-          selectVolumeDataset: datasets.select,
+          focusBank: bankOf,
+          setVolumeDatasetEnabled(id: string, enabled: boolean) {
+            if (lifetime.disposed) return;
+            if (!bankOf(id)) throw new TypeError(`Unknown prepared bank: ${id}.`);
+            datasets.setEnabled(id, enabled);
+            if (enabled) companion = id; else if (companion === id) companion = null;
+            requestPublication?.();
+          },
+          selectVolumeDataset(id: string, dataset: string) {
+            const bank = bankOf(id);
+            if (!bank) throw new TypeError(`Unknown prepared bank: ${id}.`);
+            bank.selectDataset(dataset);
+          },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             // The context's labels keep clear of the selected body's caption, placed for the same camera.
             const rect = selectedLabel.rect(world, viewport, caption(), captionFlags());
@@ -292,11 +303,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
             selected = sceneBody = body;
             selectedEdge = edge;
-            // A bank package draws its bank while it is the selected body: a galaxy's image layers or volume, a cluster's dots.
-            // Its framing radius is its world frame's, as a body's radius is.
-            detailedFocus = [...declaredImageLayers, ...volumeDatasetBanks].some(bank => bank.id === id)
-              ? { objectId: id, focus: { positionM: body.positionM as SelectedBank['positionM'], framingRadiusM: body.radiusM } } : null;
-            selectedPoints = pointBankIds.has(id) ? id : undefined;
             captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
             selectedLabel.prepare(caption());
             spatial.selectObject(id);
@@ -307,6 +313,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (lifetime.disposed) return;
             opacityClock.batch(() => {
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
+              // A companion that is its scene's whole subject (a galaxy, a nebula, a cluster) is framed as a body is, by the
+              // selected body's place and radius, and the context gives way to it. One attached to a body (a star's disc)
+              // shows beside that body and dims nothing.
+              const detailedFocus: { objectId: string; focus: SelectedBank } | null = companion === null || attachedBanks.has(companion) ? null
+                : { objectId: companion, focus: { positionM: sceneBody.positionM as SelectedBank['positionM'], framingRadiusM: sceneBody.radiusM } };
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               const outsideGalaxy = galaxyOutsideFade(
@@ -324,7 +335,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, sceneBody.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
-              catalogBanks.publishPoints(world, viewport, selectedPoints);
+              catalogBanks.publishPoints(world, viewport, companion ?? undefined);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
                 selectedBodyContextOpacity(world, viewport, captionBody));
               for (const [index, shell] of shellLayers.entries()) {
