@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-0911-3391",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Vilardell et al. (2009): The distance to the Andromeda Galaxy from eclipsing binaries",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0911.3391"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200913299"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0911.3391",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200913299",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0911.3391",
+      "checkedOn": "2026-10-01",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Vilardell et al. (2009)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/0911.3391"
+    }
+  ],
+  "creators": [
+    "F. Vilardell",
+    "I. Ribas",
+    "C. Jordi",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

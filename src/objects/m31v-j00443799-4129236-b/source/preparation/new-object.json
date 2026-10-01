@@ -1,0 +1,50 @@
+{
+  "host": "m31v-j00443799-4129236-a",
+  "companions": [
+    {
+      "id": "m31v-j00443799-4129236-b",
+      "name": "M31V J00443799+4129236 B",
+      "description": "The secondary star of M31V J00443799+4129236, an eclipsing pair of hot stars in the Andromeda Galaxy, 15.0 solar masses and 11.3 solar radii; the two eclipse each other every 3.549694 days.",
+      "paper": {
+        "url": "https://arxiv.org/abs/astro-ph/0511045",
+        "credit": "Ribas et al. (2005), ApJ 635, L37"
+      },
+      "radius": {
+        "value": 11.3,
+        "source": "Secondary radius 11.3 +/- 0.3 solar radii, Ribas et al. (2005), ApJ 635, L37, Table 2",
+        "url": "https://arxiv.org/abs/astro-ph/0511045",
+        "uncertainty": 0.3
+      },
+      "mass": {
+        "value": 15,
+        "source": "Secondary mass 15.0 +/- 1.1 solar masses, Ribas et al. (2005), ApJ 635, L37, Table 2",
+        "url": "https://arxiv.org/abs/astro-ph/0511045",
+        "uncertainty": 1.1
+      },
+      "temperature": {
+        "value": 27700,
+        "source": "Secondary Teff 27700 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2",
+        "url": "https://arxiv.org/abs/astro-ph/0511045",
+        "uncertainty": 500
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 3.549694,
+          "semiMajorAxisStellarRadii": 2.5191,
+          "inclinationDegrees": 89.3,
+          "eccentricity": 0,
+          "transitTimeBmjdTdb": 52203.921
+        },
+        "epoch": "inferior-conjunction",
+        "source": "M31V J00443799+4129236: P 3.549694 d, time of primary minimum HJD 2452204.421, i 89.3 degrees and a 33.0 +/- 0.7 solar radii (Ribas et al. (2005), ApJ 635, L37, Table 2); a circular orbit was adopted in the fit (Sect. 3). a/R = 33.0/13.1 = 2.5191 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front.",
+        "url": "https://arxiv.org/abs/astro-ph/0511045"
+      },
+      "text": {
+        "card": "The secondary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 3.549694 days.",
+        "introduction": "It has 15.0 solar masses and 11.3 solar radii; its partner has 23.1 and 13.1. The pair gave a direct distance to the galaxy: 772 kiloparsecs.",
+        "locator": "Ribas et al. (2005), ApJ 635, L37, Table 2: M, R, P and the distance"
+      },
+      "order": 5137
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "m31v-j00443610-4129194-a",
+  "name": "M31V J00443610+4129194 A",
+  "system": "M31V J00443610+4129194 system",
+  "description": "The primary star of M31V J00443610+4129194, an eclipsing pair of hot stars in the Andromeda Galaxy, 21.7 solar masses and 9.2 solar radii; the two eclipse each other every 2.048644 days.",
+  "target": "[VRJ2006] M31V-J00443610+4129194",
+  "gaia": "369281910881860352",
+  "paper": {
+    "url": "https://arxiv.org/abs/0911.3391",
+    "credit": "Vilardell et al. (2010), A&A 509, A70"
+  },
+  "radius": {
+    "value": 9.2,
+    "source": "Primary radius 9.2 +/- 0.2 solar radii, Vilardell et al. (2010), A&A 509, A70, Table 2",
+    "url": "https://arxiv.org/abs/0911.3391",
+    "uncertainty": 0.2
+  },
+  "mass": {
+    "value": 21.7,
+    "source": "Primary mass 21.7 +/- 1.7 solar masses, Vilardell et al. (2010), A&A 509, A70, Table 2",
+    "url": "https://arxiv.org/abs/0911.3391",
+    "uncertainty": 1.7
+  },
+  "temperature": {
+    "value": 33600,
+    "source": "Primary Teff 33600 +/- 600 K, Vilardell et al. (2010), A&A 509, A70, Table 3",
+    "url": "https://arxiv.org/abs/0911.3391",
+    "uncertainty": 600
+  },
+  "gravity": {
+    "value": 3.85,
+    "source": "Primary log g 3.85 +/- 0.02 (cgs), Vilardell et al. (2010), A&A 509, A70, Table 2",
+    "url": "https://arxiv.org/abs/0911.3391",
+    "uncertainty": 0.02
+  },
+  "radialVelocity": {
+    "value": -164,
+    "source": "Systemic velocity gamma -164 +/- 5 km/s of the pair, Vilardell et al. (2010), A&A 509, A70, Table 2",
+    "url": "https://arxiv.org/abs/0911.3391",
+    "uncertainty": 5
+  },
+  "distance": {
+    "value": 724000,
+    "source": "Distance 724 +/- 37 kpc, (m-M)0 = 24.30 +/- 0.11 mag, from the pair's own radii, temperatures and brightness, Vilardell et al. (2010), A&A 509, A70, Table 3",
+    "url": "https://arxiv.org/abs/0911.3391",
+    "uncertainty": 37000
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The primary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 2.048644 days.",
+    "introduction": "It has 21.7 solar masses and 9.2 solar radii; its partner has 15.4 and 5.6. The pair gave a direct distance to the galaxy: 724 kiloparsecs.",
+    "locator": "Vilardell et al. (2010), A&A 509, A70, Table 2: M, R, P and the distance"
+  },
+  "notes": [
+    "Masses, radii, temperatures, the orbit and the distance are all from Vilardell et al. (2010), A&A 509, A70."
+  ],
+  "order": 5138
+}

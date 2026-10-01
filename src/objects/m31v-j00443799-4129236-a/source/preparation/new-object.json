@@ -1,0 +1,59 @@
+{
+  "id": "m31v-j00443799-4129236-a",
+  "name": "M31V J00443799+4129236 A",
+  "system": "M31V J00443799+4129236 system",
+  "description": "The primary star of M31V J00443799+4129236, an eclipsing pair of hot stars in the Andromeda Galaxy, 23.1 solar masses and 13.1 solar radii; the two eclipse each other every 3.549694 days.",
+  "target": "[VRJ2006] M31V-J00443799+4129236",
+  "gaia": "369281910880929792",
+  "paper": {
+    "url": "https://arxiv.org/abs/astro-ph/0511045",
+    "credit": "Ribas et al. (2005), ApJ 635, L37"
+  },
+  "radius": {
+    "value": 13.1,
+    "source": "Primary radius 13.1 +/- 0.3 solar radii, Ribas et al. (2005), ApJ 635, L37, Table 2",
+    "url": "https://arxiv.org/abs/astro-ph/0511045",
+    "uncertainty": 0.3
+  },
+  "mass": {
+    "value": 23.1,
+    "source": "Primary mass 23.1 +/- 1.3 solar masses, Ribas et al. (2005), ApJ 635, L37, Table 2",
+    "url": "https://arxiv.org/abs/astro-ph/0511045",
+    "uncertainty": 1.3
+  },
+  "temperature": {
+    "value": 33900,
+    "source": "Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2",
+    "url": "https://arxiv.org/abs/astro-ph/0511045",
+    "uncertainty": 500
+  },
+  "gravity": {
+    "value": 3.57,
+    "source": "Primary log g 3.57 +/- 0.03 (cgs), Ribas et al. (2005), ApJ 635, L37, Table 2",
+    "url": "https://arxiv.org/abs/astro-ph/0511045",
+    "uncertainty": 0.03
+  },
+  "radialVelocity": {
+    "value": -173,
+    "source": "Systemic velocity gamma -173 +/- 4 km/s of the pair, Ribas et al. (2005), ApJ 635, L37, Table 2",
+    "url": "https://arxiv.org/abs/astro-ph/0511045",
+    "uncertainty": 4
+  },
+  "distance": {
+    "value": 772000,
+    "source": "Distance 772 +/- 44 kpc, (m-M)0 = 24.44 +/- 0.12 mag, from the pair's own radii, temperatures and brightness, Ribas et al. (2005), ApJ 635, L37, Sect. 4",
+    "url": "https://arxiv.org/abs/astro-ph/0511045",
+    "uncertainty": 44000
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The primary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 3.549694 days.",
+    "introduction": "It has 23.1 solar masses and 13.1 solar radii; its partner has 15.0 and 11.3. The pair gave a direct distance to the galaxy: 772 kiloparsecs.",
+    "locator": "Ribas et al. (2005), ApJ 635, L37, Table 2: M, R, P and the distance"
+  },
+  "notes": [
+    "Masses, radii, temperatures, the orbit and the distance are all from Ribas et al. (2005), ApJ 635, L37."
+  ],
+  "order": 5136
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m31v-j00443610-4129194-a",
+  "displayName": "M31V J00443610+4129194 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "9.2 solar radii",
+        "source": {
+          "catalogueId": "arxiv-0911-3391",
+          "url": "https://arxiv.org/abs/0911.3391",
+          "label": "Vilardell et al. (2009)",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "724,000 parsecs",
+        "source": {
+          "catalogueId": "arxiv-0911-3391",
+          "url": "https://arxiv.org/abs/0911.3391",
+          "label": "Distance 724 +/- 37 kpc, (m-M)0 = 24.30 +/- 0.11 mag, from the pair's own radii, temperatures and brightness, Vilardell et al. (2010), A&A 509, A70, Table 3",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "m31v-j00443610-4129194-a-dataset-color.webp",
+        "surface": "m31v-j00443610-4129194-a-surface-color@2x.webp",
+        "poles": "m31v-j00443610-4129194-a-poles-color@2x.webp",
+        "source": {
+          "id": "m31v-j00443610-4129194-a-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/0911.3391"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 33,600 K and log g 3.85 (u1 0.082, u2 0.292): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Vilardell et al. (2010), A&A 509, A70",
+      "href": "https://arxiv.org/abs/0911.3391"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/0911.3391",
+      "credit": "Vilardell et al. (2010), A&A 509, A70"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/m31v-j00443610-4129194-a.json",
+      "credit": "Primary radius 9.2 +/- 0.2 solar radii, Vilardell et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

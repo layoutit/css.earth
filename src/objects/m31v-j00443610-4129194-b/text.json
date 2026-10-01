@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m31v-j00443610-4129194-b",
+  "card": {
+    "text": "The secondary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 2.048644 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0911-3391",
+        "url": "https://arxiv.org/abs/0911.3391",
+        "label": "Vilardell et al. 2009",
+        "checked": "2026-10-01",
+        "locator": "Vilardell et al. (2010), A&A 509, A70, Table 2: M, R, P and the distance"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It has 15.4 solar masses and 5.6 solar radii; its partner has 21.7 and 9.2. The pair gave a direct distance to the galaxy: 724 kiloparsecs.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0911-3391",
+        "url": "https://arxiv.org/abs/0911.3391",
+        "label": "Vilardell et al. 2009",
+        "checked": "2026-10-01",
+        "locator": "Vilardell et al. (2010), A&A 509, A70, Table 2: M, R, P and the distance"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

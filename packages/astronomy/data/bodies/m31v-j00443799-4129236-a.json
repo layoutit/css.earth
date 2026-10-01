@@ -1,0 +1,30 @@
+{
+ "id": "m31v-j00443799-4129236-a",
+ "classification": "star",
+ "order": 5136,
+ "physical": {
+  "name": "M31V J00443799+4129236 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 9113670,
+  "gravitationalParameterKm3PerS2": 3065657364968.8,
+  "parent": null,
+  "effectiveTemperatureK": 33900
+ },
+ "physicalNotes": "Radius 13.1 +/- 0.3 solar radii from Primary radius 13.1 +/- 0.3 solar radii, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045): 9,113,670 km at 695,700 km per solar radius. Mass 23.1 +/- 1.3 solar masses from Primary mass 23.1 +/- 1.3 solar masses, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045); GM is that mass times the JPL solar GM. Temperature 33900 +/- 500 K from Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 11.158351600967814,
+  "declinationDegrees": 41.489929129091585,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 772000,
+  "properMotionRaMasPerYear": -0.7414059050426701,
+  "properMotionDecMasPerYear": 0.2637970635625689,
+  "radialVelocityKmPerS": -173,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 369281910880929792 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/m31v-j00443799-4129236-a/source/photometry/gaia-dr3-source.csv",
+   "distance": "Distance 772 +/- 44 kpc, (m-M)0 = 24.44 +/- 0.12 mag, from the pair's own radii, temperatures and brightness, Ribas et al. (2005), ApJ 635, L37, Sect. 4 (https://arxiv.org/abs/astro-ph/0511045): 772000 +/- 44000 pc; Gaia DR3 parallax 0.8565 +/- 0.4344 mas (same row, RUWE 0.98), 2.0 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -0.741, 0.264 mas/yr",
+   "radialVelocity": "Systemic velocity gamma -173 +/- 4 km/s of the pair, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045)"
+  }
+ }
+}
