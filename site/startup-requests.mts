@@ -37,8 +37,9 @@ export function startupFetch(url: string, init?: RequestInit): Promise<Response>
   const requests = typeof window === 'undefined' ? undefined : window.__cssEarthStartupRequests;
   const started = requests?.get(url);
   if (!started) return fetch(url, init);
-  requests!.delete(url);
+  // A cancelled reader leaves the request for the next one.
   init?.signal?.throwIfAborted();
+  requests!.delete(url);
   return started;
 }
 
