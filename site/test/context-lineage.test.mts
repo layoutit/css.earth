@@ -9,8 +9,8 @@ test('each catalogue context reads its products and sources from its source reco
   const read: string[] = [];
   const contexts = await contextLineages({ route: CONTEXT_ROUTE, input: path => { read.push(path); return readFile(path); } });
   assert.deepEqual(contexts.map(context => context.id), ['fornax-cluster-members', 'galaxy-clusters', 'local-group', 'nearby-universe', 'observable-universe', 'virgo-cluster-members']);
-  // The application route passed in is what the catalogue links each context to: the Sun's scene.
-  assert.ok(contexts.every(context => context.route === '/sun/'));
+  // A bank that names its host object is linked to that object's page; the rest to the route passed in, the Sun's scene.
+  assert.deepEqual(contexts.map(context => context.route), ['/fornax-cluster/', '/sun/', '/sun/', '/sun/', '/sun/', '/virgo-cluster/']);
   assert.ok(read.every(path => /\/source\/(presentation|manifest)\.json$/u.test(path)), 'nothing prepared is read');
   for (const context of contexts) {
     assert.ok(context.lineage.products.length, context.id);
