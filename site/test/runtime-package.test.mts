@@ -8,6 +8,8 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import { objectRuntimePackageTests, preparedSelectionFixture } from '../../packages/renderer/test/node/fixtures/object-runtime-package.mts';
 import { loadObjectTestDefinition, required } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { isDeepStrictEqual } from 'node:util';
+import { adoptPreparedDatasetTables, parsePreparedObjectRuntime, splitPreparedDatasetTables } from '@cssearth/renderer';
 import { selectedObjectIds } from './fixtures/anchor-table.mts';
 import { projectRoot } from './fixtures/objects.mts';
 
@@ -69,3 +71,44 @@ for (const id of ids) {
     } finally { f.restore(); }
   });
 }
+
+// A dataset whose tables travel apart from the object transport (dataset-tables.ts) waits for them while the committed
+// dataset keeps drawing, then commits the demand and styles the complete runtime commits.
+test('earth: a dataset whose tables travel apart commits once they arrive, as the complete runtime commits it', async () => {
+  const complete = await loadObjectTestDefinition('earth', projectRoot);
+  const { definition: split, tables } = splitPreparedDatasetTables(parsePreparedObjectRuntime(structuredClone(complete)));
+  const table = required(tables[0]);
+  let arrive = () => {};
+  const arrived = new Promise<void>(resolve => { arrive = resolve; });
+  const reads: string[] = [];
+  const f = await preparedSelectionFixture(split, { async readDatasetTables(datasetId) {
+    reads.push(datasetId);
+    await arrived;
+    adoptPreparedDatasetTables(split, table, datasetId);
+  } });
+  const g = await preparedSelectionFixture(complete);
+  type Fixture = typeof f;
+  const names = [...new Set([...parsePreparedObjectRuntime(structuredClone(complete)).variants.flatMap(variant => variant.writes.map(write => write.name)),
+    'backgroundImage', 'backgroundPosition', 'backgroundSize', 'display'])];
+  const read = (style: Fixture['stage']['style'], name: string) => name.startsWith('--') ? style.getPropertyValue(name) : String(Reflect.get(style, name) ?? '');
+  const drawn = (fixture: Fixture) => [JSON.stringify(fixture.stage.dataset),
+    ...[fixture.stage, ...fixture.stage.querySelectorAll('*')].map(node => names.map(name => read(node.style, name)).join('|'))];
+  try {
+    const before = drawn(f), request = f.selection.dispatch({ kind: 'dataset', id: table.datasetId });
+    await f.settle();
+    assert.deepEqual(reads, [table.datasetId]);
+    assert.equal(required(f.selection.state().committed).datasetId, required(split.controls.datasets).defaultDataset);
+    assert.equal(f.selection.state().pending, true);
+    assert.ok(isDeepStrictEqual(drawn(f), before), 'nothing changes before the tables arrive');
+    arrive();
+    await f.settle();
+    assert.equal(await request, true);
+    const expected = g.selection.dispatch({ kind: 'dataset', id: table.datasetId });
+    await g.settle();
+    assert.equal(await expected, true);
+    assert.deepEqual(required(f.selection.state().plan).required, required(g.selection.state().plan).required);
+    assert.deepEqual(f.residency.stats().committed, g.residency.stats().committed);
+    assert.ok(isDeepStrictEqual(drawn(f), drawn(g)), 'the split runtime draws what the complete one draws');
+    assert.deepEqual([...f.errors, ...f.materialErrors, ...g.errors, ...g.materialErrors], []);
+  } finally { f.restore(); g.restore(); }
+});

@@ -31,7 +31,13 @@ export function createPreparedResidency({
   // The single chokepoint every image load and material `url()` reads through
   // (`resources.read`/`resources.url` below). Entries keep their prepared `/scenes/` address as their identity; a load
   // first makes the address's hash present, then reads the published URL when the build published this object's assets.
-  const catalog = new Map(assets.entries.map(entry => [entry.key, entry]));
+  // A dataset's tables may arrive after mount (dataset-tables.ts): they replace the entry list with a longer one, adding
+  // keys and never changing one, and the catalogue follows.
+  let indexed = assets.entries, catalog = new Map(indexed.map(entry => [entry.key, entry]));
+  const declared = () => {
+    if (assets.entries !== indexed) catalog = new Map((indexed = assets.entries).map(entry => [entry.key, entry]));
+    return catalog;
+  };
   const published = createPreparedAssetResolver(assetOrigin, ...(readAssetHashes ? [readAssetHashes] : []));
   const publishedUrl = (key: string) => published.url(assetFor(key).url);
   const policies = new Map(assets.pools.map(pool => [pool.id, pool]));
@@ -41,7 +47,7 @@ export function createPreparedResidency({
   let pending: TicketState | null = null, destroyed = false, frameReads: Set<string> | null = null, sequence = 0, decodes = 0, paintDecodeChecks = 0;
 
   function assetFor(key: string): PreparedResourceEntry {
-    const entry = catalog.get(key);
+    const entry = declared().get(key);
     if (!entry) throw new RangeError(`Undeclared prepared resource: ${key}.`);
     return entry;
   }
@@ -51,7 +57,7 @@ export function createPreparedResidency({
     return pool;
   }
   function requireKeys(values: readonly string[]) {
-    if (!Array.isArray(values) || new Set(values).size !== values.length || values.some(key => !catalog.has(key))) {
+    if (!Array.isArray(values) || new Set(values).size !== values.length || values.some(key => !declared().has(key))) {
       throw new TypeError("Residency demand requires unique declared resource keys.");
     }
     return new Set(values);
@@ -184,13 +190,13 @@ export function createPreparedResidency({
   const resources: PreparedResources = Object.freeze({
     has: ready,
     read(key: string) {
-      if (!catalog.has(key)) throw new RangeError(`Undeclared prepared resource: ${key}.`);
+      if (!declared().has(key)) throw new RangeError(`Undeclared prepared resource: ${key}.`);
       if (!ready(key)) return null;
       frameReads?.add(key);
       return images.read(publishedUrl(key));
     },
     url(key: string) {
-      if (!catalog.has(key)) throw new RangeError(`Undeclared prepared resource: ${key}.`);
+      if (!declared().has(key)) throw new RangeError(`Undeclared prepared resource: ${key}.`);
       if (!ready(key)) return null;
       frameReads?.add(key);
       return publishedUrl(key);

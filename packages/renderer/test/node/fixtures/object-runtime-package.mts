@@ -147,7 +147,8 @@ function createStyle(): FixtureStyle { const values: Record<string, string> = {}
         values[key] = next;
         (style as Record<string, unknown>)[key.replace(/-([a-z])/g, (_match, letter: string) => letter.toUpperCase())] = next;
     } } }); return new Proxy(style, { get(target, name) { return typeof name === "string" ? (target as Record<string, unknown>)[name] ?? "" : Reflect.get(target, name); } }) as unknown as FixtureStyle; }
-function runtimeDefinition(value: unknown): ObjectRuntimeDefinition { const definition = parsePreparedObjectRuntime(value); requireObjectRuntimeDefinition(definition); return definition; }
+// The bake contract qualifies prepared runtimes; a transport split by dataset (dataset-tables.ts) is the renderer's own.
+function runtimeDefinition(value: unknown): ObjectRuntimeDefinition { const definition = parsePreparedObjectRuntime(value); if (!definition.deferredDatasets) requireObjectRuntimeDefinition(definition); return definition; }
 class ControlledImage implements PreparedImage {
     naturalWidth = 1;
     naturalHeight = 1;
@@ -246,8 +247,9 @@ class SelectionImage implements PreparedImage {
     removeAttribute(name: string): void { if (name === "src")
         this.src = ""; }
 }
-export async function preparedSelectionFixture(value: unknown, { silhouetteDiameter }: {
+export async function preparedSelectionFixture(value: unknown, { silhouetteDiameter, readDatasetTables }: {
     silhouetteDiameter?: number;
+    readDatasetTables?: (datasetId: string) => Promise<void>;
 } = {}) {
     const definition = runtimeDefinition(value), f = retainedPresentationFixture(definition), jobs: SelectionJob[] = [], errors: unknown[] = [], materialErrors: unknown[] = [], timers = new Map<number, () => void>();
     let nextTimer = 0;
@@ -286,7 +288,7 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
     f.document.querySelector = selector => selector === ".object-information-panel" ? information
         : selector === ".object-settings" ? settingsRoot : null;
     let binding: ReturnType<typeof createObjectControlBinding> | null = null;
-    const selection = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime, onCommit: state => f.playback.setSelection(state), onChange: state => binding?.publish(state), onFatalError(error) { errors.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
+    const selection = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime, ...(readDatasetTables ? { readDatasetTables } : {}), onCommit: state => f.playback.setSelection(state), onChange: state => binding?.publish(state), onFatalError(error) { errors.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
     f.lifetime.onDispose(() => selection.destroy());
     binding = createObjectControlBinding({ stage: html(f.stage), controls: definition.controls, initialSelection: initialObjectSelection(definition.controls), getState: selection.state, onAction: selection.dispatch, onError: error => materialErrors.push(error) } satisfies ObjectControlBindingOptions);
     f.lifetime.onDispose(() => binding?.destroy());

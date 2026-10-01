@@ -1,11 +1,12 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
+import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedDataset,loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '@cssearth/renderer/navigation';
 import { renderNativeFocus } from './focus-response.mts';
 import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
+import { preparedObjectPath } from './prepared-object-path.mts';
 import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
 
 function region(html: string, name: string) {
@@ -60,7 +61,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     return response.arrayBuffer();
   };
   const definition = await loadPreparedCssObject(descriptor, {
-    read: () => read(`/objects/${objectId}/object.json`),
+    read: reference => read(`/objects/${objectId}/${preparedObjectPath(reference)}`),
   });
   if (definition.id !== objectId) throw new Error('Prepared dataset object identity drifted.');
   const feature = featureIds.length && definition.features ? await loadPreparedSurfaceFeature(definition.features, objectId, featureIds[0]!,
@@ -69,6 +70,8 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   if (feature && definition.features && !definition.features.datasetIds.includes(datasetId ?? definition.controls.datasets?.defaultDataset ?? '')) {
     datasetId = definition.features.datasetIds[0];
   }
+  // Another dataset's tables travel apart from the object transport (dataset-tables.ts in @cssearth/renderer).
+  await loadPreparedDataset(definition, datasetId ?? null);
   const settings: Record<string, number | boolean> = {};
   if (settingRequest) {
     if (url.searchParams.getAll('settings').length !== 1 || url.searchParams.get('settings') !== '1') throw new RangeError('Invalid settings selection.');
