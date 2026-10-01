@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
+import { resolveWorldBillboards } from '../../../asset-origin.mts';
 import { WORLD_SYSTEM_BATCH_COUNT, WORLD_SYSTEM_HOSTS, worldSystemBatch } from '../../../world-context-plan.mts';
 
 // One system's bodies, copied from the Sun's prepared world files at build (`world-systems/<star id>.json`): a page reads its
@@ -10,7 +11,8 @@ const batches = Array.from({ length: WORLD_SYSTEM_BATCH_COUNT }, (_, index) => `
 export const getStaticPaths: GetStaticPaths = async () => [...WORLD_SYSTEM_HOSTS, ...batches].map(id => ({ params: { id } }));
 
 // Astro renders from the project root; a relative module URL would point into the bundled build instead.
-const read = (id: string) => readFile(resolve(process.cwd(), `src/objects/sun/prepared/world-systems/${id}.json`), 'utf8');
+// Each billboard carries its published address (asset-origin.mts).
+const read = async (id: string) => resolveWorldBillboards(await readFile(resolve(process.cwd(), `src/objects/sun/prepared/world-systems/${id}.json`), 'utf8'));
 const json = (body: string) => new Response(body, { headers: {
   'Content-Type': 'application/json; charset=utf-8',
   'Cache-Control': 'public, max-age=0, must-revalidate',

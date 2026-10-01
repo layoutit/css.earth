@@ -177,3 +177,24 @@ export async function rewriteSceneCss(css: string, root = process.cwd()): Promis
   let index = 0;
   return css.replace(CSS_SCENE_URL, (_match, quote: string) => `url(${quote}${resolved[index++]}${quote})`);
 }
+
+/** A world file (`world-context-summary.json` or `world-systems/<star>.json`) with every billboard's published address.
+ * The file leaves a body's own `/scenes/<id>/<id>-billboard.webp` implicit (world-context-summary.ts), and production serves
+ * no `/scenes`: the build writes the bucket's address for each. No-op when unset. */
+export async function resolveWorldBillboards(text: string, root = process.cwd()): Promise<string> {
+  if (!assetOrigin()) return text;
+  const file = JSON.parse(text) as { bodies?: { id?: unknown; billboard?: unknown } };
+  const ids = file.bodies?.id, billboards = file.bodies?.billboard;
+  // A system none of whose bodies has a photograph writes no billboard column.
+  if (billboards === undefined) return text;
+  if (!Array.isArray(ids) || !Array.isArray(billboards) || ids.length !== billboards.length) {
+    throw new TypeError('A world file names its bodies and their billboards column by column, of equal length.');
+  }
+  file.bodies!.billboard = await Promise.all(billboards.map(async (billboard: unknown, index) => {
+    if (billboard === null) return null;
+    const drawn = billboard as { url?: unknown }, id = String(ids[index]);
+    const address = typeof drawn.url === 'string' ? drawn.url : `/scenes/${id}/${id}-billboard.webp`;
+    return { ...drawn, url: await resolveBuildSceneAddress(address, root) };
+  }));
+  return JSON.stringify(file);
+}

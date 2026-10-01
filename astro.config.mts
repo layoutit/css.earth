@@ -8,7 +8,7 @@ import { packageSources } from "./site/build/package-sources.mts";
 import { searchServer } from './site/server/search-server.mts';
 import { prepareContextAvailability } from "./site/build/prepare/prepare-context-availability.mts";
 import { preparedMotionCss } from "./site/build/prepared-motion-css.mts";
-import { assetOrigin } from "./site/asset-origin.mts";
+import { assetOrigin, resolveWorldBillboards } from "./site/asset-origin.mts";
 
 function cssEarthVersion() {
   try {
@@ -58,6 +58,13 @@ export default defineConfig({
     plugins: [searchServer(), performanceSourceMaps(), packageSources(),
       // Safari fetches a module a second time when Vite's preload helper links one the import graph already requested
       // (163 KB of 932 on Earth's first visit, 2026-09-30). The client environment owns the browser bundle's setting.
+      // The world summary ships as Vite emits it; its billboards take their published addresses (asset-origin.mts).
+      { name: 'cssearth-world-billboards', apply: 'build', async generateBundle(_options, bundle) {
+        for (const file of Object.values(bundle)) {
+          if (file.type !== 'asset' || !file.originalFileNames.some(name => name.endsWith('world-context-summary.json'))) continue;
+          file.source = await resolveWorldBillboards(typeof file.source === 'string' ? file.source : new TextDecoder().decode(file.source));
+        }
+      } },
       { name: 'cssearth-no-module-preload', configEnvironment: name => name === 'client' ? { build: { modulePreload: false } } : undefined }],
     // Workers are bundled on their own plugins. They read the objects package from its sources too, so a worker keeps only
     // the object contracts it calls; renderer modules in a worker keep the bundling they had.
