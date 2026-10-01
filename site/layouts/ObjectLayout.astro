@@ -51,9 +51,9 @@ const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId =
   billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },
   bodyRadiusM: parsePreparedWorldCameraFrame(scene.descriptor.properties.worldFrame).bodyRadiusM,
 } : undefined;
-// The arrival photograph is the first thing a cold page shows. Its request starts with the head instead of where the
-// parser reaches the image, and a separate asset origin is dialled at once: the first request to it pays the DNS and
-// TLS setup (430 ms of a cold iPad load against 33 ms on a warm connection, 2026-09-30).
+// The arrival photograph is the first thing a cold page shows, and it comes from the asset origin: dial that origin with
+// the head, or the photograph's request pays the DNS and TLS setup (430 ms of a cold iPad load against 33 ms on a warm
+// connection, 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
 const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
@@ -68,7 +68,8 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    {startupImage && <link rel="preload" as="image" href={startupImage} fetchpriority="high" />}
+    {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}
+    {assetPreconnect && <link rel="preconnect" href={assetPreconnect} />}
     {assetPreconnect && <link rel="preconnect" href={assetPreconnect} crossorigin />}
     <meta name="description" content={seo.description} />
     <link rel="canonical" href={seo.canonical} />
