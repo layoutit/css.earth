@@ -190,7 +190,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
+        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, annotationPriorities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
         // The selected body's own label is the close-up's; overviews label every body.
         const publishSuppressedLabels = () => spatial.setBodyVisibility({
           labelSuppressed: [...(!overview ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],

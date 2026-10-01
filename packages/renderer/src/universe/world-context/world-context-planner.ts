@@ -11,6 +11,7 @@ import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsM
 import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
+import { createMarkerDeclutter } from './marker-declutter.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
 import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
@@ -94,10 +95,8 @@ const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.v
 
 export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
-  const wantedOrbits = new Set<string>();
-  const landmarkMoonIds = new Set(annotationLandmarks);
-  const points = [plan.focus, ...plan.bodies];
-  const byId = new Map(points.map(point => [point.id, point]));
+  const wantedOrbits = new Set<string>(), landmarkMoonIds = new Set(annotationLandmarks), declutterMarkers = createMarkerDeclutter(annotationPriorities);
+  const points = [plan.focus, ...plan.bodies], byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
   const systemFade = createSystemFade(plan);
   const prepared = points.map(body => {
@@ -514,9 +513,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;
         projected.entry.labelShown = true; projected.entry.labelPlacement = placement;
-        projected.entry.indicatorShown = projected.circle;
-        projected.labelPosition = [rect.left, rect.top];
+        projected.entry.indicatorShown = projected.circle; projected.labelPosition = [rect.left, rect.top];
       }
+      declutterMarkers(projectedBodies, [plan.focus.id, selectedId, emphasizedId]);
       for (const projected of projectedBodies) {
         const { entry, x, y } = projected;
         if (!entry.orbit) continue;

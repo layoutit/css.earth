@@ -1,0 +1,32 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { createMarkerDeclutter, type DeclutterMarker } from './marker-declutter.js';
+
+const marker = (id: string, x: number, priority = 0, entry: Partial<DeclutterMarker['entry']> = {}): DeclutterMarker =>
+  ({ x, y: 0, diameter: 2.4, visible: true, hovered: false, priority, entry: { body: { id }, labelShown: false, indicatorShown: false, ...entry } });
+
+test('a pile of markers keeps its highest tier, then its highest priority, and hides the ones it covers', () => {
+  const declutter = createMarkerDeclutter({ jupiter: 3 });
+  const pile = [marker('a', 0, 5), marker('jupiter', .5, 1), marker('b', 1, 9), marker('far', 40)];
+  declutter(pile, []);
+  assert.deepEqual(pile.map(item => [item.entry.body.id, item.visible]), [['a', false], ['jupiter', true], ['b', false], ['far', true]]);
+});
+
+test('the focus, the selection and a named or hovered marker are kept first, over any tier', () => {
+  const declutter = createMarkerDeclutter({ jupiter: 3 });
+  const pile = [marker('jupiter', 0), marker('sun', .2), marker('labelled', .4, 0, { labelShown: true }), { ...marker('hovered', .6), hovered: true }];
+  declutter(pile, ['sun', null]);
+  assert.deepEqual(pile.map(item => item.visible), [false, true, true, true], 'Jupiter outranks no named marker');
+});
+
+test('a hidden marker returns only once it clears the kept one by the hysteresis', () => {
+  const declutter = createMarkerDeclutter({});
+  // The planner retains each body's entry across frames; the hysteresis follows it.
+  const kept = marker('kept', 0, 1), moving = marker('moving', 0);
+  const frame = (x: number) => { const pair = [{ ...kept }, { ...moving, x }]; declutter(pair, []); return pair[1]!.visible; };
+  assert.equal(frame(2), false, 'overlapping dots: the lower priority is hidden');
+  assert.equal(frame(2.5), false, 'just clear of touching (2.4 px), it stays hidden');
+  assert.equal(frame(2.9), true, 'clear by 15%, it returns');
+  assert.equal(frame(2.5), true, 'a visible marker stays until it overlaps');
+  assert.equal(frame(2.3), false);
+});
