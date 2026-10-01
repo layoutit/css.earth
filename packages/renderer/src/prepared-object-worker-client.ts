@@ -53,6 +53,8 @@ export function createPreparedObjectDecoder(createWorker = createDecodeWorker) {
     } catch (error) { retire(); finish(job, error); }
   }
   return {
+    /** Start the worker before the first object's bytes arrive, so its script downloads beside them; the first decode adopts it. */
+    prestart() { try { worker ??= createWorker(); } catch { /* the first decode creates it and reports */ } },
     decode(request: PreparedObjectDecodeRequest, { signal }: { signal?: AbortSignal } = {}): Promise<ObjectRuntimeDefinition> {
       return new Promise((resolve, reject) => {
         if (signal?.aborted) { reject(signal.reason); return; }
@@ -83,3 +85,4 @@ export function createPreparedObjectDecoder(createWorker = createDecodeWorker) {
 const decoder = createPreparedObjectDecoder();
 globalThis.addEventListener?.('pagehide', () => decoder.dispose());
 export const decodePreparedObjectInWorker = decoder.decode;
+export const prestartPreparedObjectDecoding = decoder.prestart;
