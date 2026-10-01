@@ -9,6 +9,14 @@ export const UNIVERSE_LABEL_POLICY = Object.freeze({
 /** Where the Local Group scale begins: a camera moving out passes 300 kpc, one coming back 240 kpc (a UI threshold, not a
  * physical boundary). Past it the galaxies are the named objects, and a star's name fades over the same band. */
 export const LOCAL_GROUP_SCALE = Object.freeze({ returnDistanceM: 240e3 * 3.085677581491367e16, enterDistanceM: 300e3 * 3.085677581491367e16 });
+/** Where a body beyond the Local Group (a Cepheid in a Virgo Cluster galaxy, M87*) keeps its dot and name: within 8 Mpc of
+ * the camera, gone past 10 Mpc (UI thresholds, not physical ones). It is seen at the scale of its galaxy's cluster, as a Milky
+ * Way star is at the Local Group's: a camera framing the Virgo Cluster is a few Mpc from its galaxies, the Milky Way 15 Mpc. */
+export const CLUSTER_SCALE = Object.freeze({ returnDistanceM: 8e6 * 3.085677581491367e16, enterDistanceM: 10e6 * 3.085677581491367e16 });
+/** The band a body's dot and name fade over, by its distance from the Sun: the Local Group's inside it, the cluster scale beyond. */
+export function markerScale(distanceFromSunM: number) {
+  return distanceFromSunM > LOCAL_GROUP_SCALE.enterDistanceM ? CLUSTER_SCALE : LOCAL_GROUP_SCALE;
+}
 
 /** One handoff between the planet hosts and the galaxy's published tracers, by the camera's distance from the selected
  * body (so a visited far system keeps its own markers): over 4 to 9 kpc the

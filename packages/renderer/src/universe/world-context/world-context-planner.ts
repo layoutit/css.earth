@@ -12,7 +12,7 @@ import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, markerScale, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
@@ -103,7 +103,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   const prepared = points.map(body => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
-    return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
+    return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null, scale: markerScale(Math.hypot(...body.positionM.map((value, axis) => value - plan.focus.positionM[axis]!))),
       closedOrbit: orbit?.fullTrail === true, drawnRadiusM: body.radiusM * ('billboard' in body && body.billboard ? Math.max(1, billboardImageScale(body.billboard, body.radiusM)) : 1),
       orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
@@ -338,11 +338,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera over
         // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
-        // so without this every star of the Milky Way stayed a dot from intergalactic distances.
-        const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
-        // The focus, a featured star and a body of another kind (a black hole) keep their dots; planets fade with their system.
+        // so without this every star of the Milky Way stayed a dot from intergalactic distances. A body beyond it uses the cluster scale.
+        const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
+        // The focus, a featured star, a star beyond the Local Group and a black hole keep their dots; planets fade with their system.
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
-          (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
+          entry.scale === LOCAL_GROUP_SCALE && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
         const atGalaxyScale = galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
@@ -427,8 +427,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // A planet of the framed system keeps its name whatever its orbit measures on screen. The extent fade is for bodies
         // read as neighbourhood: an inner planet is not less part of its system because the camera frames the outer one.
         // Past the Local Group scale the galaxies are named, not the stars inside them: a name fades with the body's distance
-        // from the camera over the band where the overview becomes the Local Group.
-        const galactic = 1 - logarithmicFade(Math.hypot(...frame.eye(body)), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
+        // from the camera over the band where the overview becomes the Local Group (the cluster scale beyond it).
+        const galactic = 1 - logarithmicFade(Math.hypot(...frame.eye(body)), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
         const alpha = flightDestination ? 1 : referenceAnnotationOnly ? galactic : targeted ? markerOpacity : Math.min(markerOpacity, galactic, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.

@@ -746,6 +746,17 @@ test('past the Solar System only the featured stars and the references keep a do
   assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no body keeps a dot');
 });
 
+test('a body beyond the Local Group keeps its dot at the scale of its cluster, and loses it from the Milky Way', () => {
+  const far = plan.bodies.find(body => body.id === 'm87-star')!, calculate = createWorldContextPlanner(plan), input = view();
+  const dotted = (parsecs: number) => {
+    // Looking down -z at M87*, from `parsecs` above it.
+    input.world.pose.positionM = [far.positionM[0], far.positionM[1], far.positionM[2] + parsecs * 3.085677581491367e16];
+    return calculate(input).projectedBodies.some(body => [plan.focus, ...plan.bodies][body.index]!.id === far.id && body.markerOpacity > 0);
+  };
+  assert.equal(dotted(3e6), true, 'from 3 Mpc, framing the Virgo Cluster, M87* keeps a dot');
+  assert.equal(dotted(12e6), false, 'past 10 Mpc it has gone, as from the Milky Way');
+});
+
 test('the moons of a framed planet keep their names before stars beyond the Solar System', async () => {
   const summary = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')) as { bodies: { id: string; classification: string }[] };
   const kinds = new Map(summary.bodies.map(body => [body.id, body.classification]));
