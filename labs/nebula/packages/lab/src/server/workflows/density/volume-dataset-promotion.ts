@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, sep } from 'node:path';
 import { createCloudDensityPreparer } from '../../services/density-material.ts';
-import { parsePreparedLmcStars } from '@cssearth/bake/volume';
+import { parsePreparedLmcStars } from '@cssearth/objects';
 import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/objects';
 import { createCloudInspection, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import { readPreparedReconstruction } from '../../services/density-reconstruction.ts';

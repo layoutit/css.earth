@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
-import { text } from '../volume/index.ts';
+import { text } from '@cssearth/objects';
 import { sourceBytes, containedPath } from '../volume/node/index.ts';
 import { parseShellRecipe } from './config.ts';
 import { loadShellMesh } from './mesh.ts';

@@ -4,7 +4,7 @@ import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { type CompilerBakeResult, type CompilerDatasetVolume, type CompilerPin, readVolumeLayerPlan, readVolumeSlabInterval, type VolumeSlabInterval } from '@cssearth/objects';
 import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '../../coordinates/compiler-frame.ts';
-import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
+import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
 import type { CompilerBakeBackend, CompiledVolumeArtifact } from './bake.ts';
 
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);

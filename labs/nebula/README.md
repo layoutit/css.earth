@@ -42,7 +42,7 @@ labs/nebula/
 └── nebula_lab_refactor.md # Verified progress and remaining migration work
 ```
 
-The viewer is at [`packages/volume-viewer`](../../packages/volume-viewer/README.md). The volume contracts, fields and materials the packages share, and the deterministic compact replay and offline image encoding, are `@cssearth/bake/volume` and `@cssearth/bake/volume/node` in [`packages/bake`](../../packages/bake/README.md).
+The viewer is at [`packages/volume-viewer`](../../packages/volume-viewer/README.md). Prepared-format contracts live in `@cssearth/objects`; shared fields and materials, deterministic compact replay and offline image encoding are `@cssearth/bake/volume` and `@cssearth/bake/volume/node` in [`packages/bake`](../../packages/bake/README.md).
 
 Reprocess the saved LMC research recipe with **`node --experimental-strip-types labs/nebula/run.mts bake-nebula --research`**, then check its native artifacts with **`node --experimental-strip-types labs/nebula/run.mts verify-nebula`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
 

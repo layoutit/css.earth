@@ -1,6 +1,6 @@
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
-import { parseVolumeRecipe } from '../volume/index.ts';
+import { parseVolumeRecipe } from '@cssearth/objects';
 import { type CompilerBakeResult, type DensityVolumeFrame } from '@cssearth/objects';
 /** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
 import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';

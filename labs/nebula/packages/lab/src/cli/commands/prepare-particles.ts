@@ -10,7 +10,7 @@ import { convertParticlesToDensityVolume } from '../../server/workflows/stars/pa
 import type { ParticlePhotoEmissionOptions } from '../../server/workflows/stars/particles.ts';
 import { extractExtendedSource } from '@cssearth/nebula-reconstruction/star-removal/extraction';
 import { createParticleAlignmentDiagnostic } from '@cssearth/nebula-reconstruction/registration/particle-alignment';
-import type { VolumeRecipe } from '@cssearth/bake/volume';
+import type { VolumeRecipe } from '@cssearth/objects';
 import type { Vector3 } from '@cssearth/objects';
 
 interface ParticleExperiment {

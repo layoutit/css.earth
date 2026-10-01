@@ -9,7 +9,8 @@ import { savedInputsMatch } from '../../server/services/saved-variants.ts';
 import { decomposeStructures, type WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
 import { createCoherentVolumeSampler, type CoarseStellarDensityPrior } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-volume';
 import { validateCoherentColumns, validateCoherentAxisSampling } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-validation';
-import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type VolumeSlices } from '@cssearth/bake/volume/node';
+import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
+import { type VolumeSlices } from '@cssearth/objects';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 
 type Vec3 = [number, number, number];

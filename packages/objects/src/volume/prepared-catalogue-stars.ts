@@ -1,5 +1,5 @@
 /** Prepared catalogue contract. Historical schema identifiers are preserved byte-for-byte. */
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import type { DensityVolumeFrame } from '../density-volume.js';
 
 export interface PreparedLmcStar {
   id: string; raDeg: number; decDeg: number; magnitude: number; colorIndexBv: number | null; spectralType: string;

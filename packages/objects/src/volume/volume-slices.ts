@@ -1,5 +1,6 @@
-import type { DisplayColorMatrix, VolumeRecipe } from './volume-recipe.ts';
-import { type Axis, type Bounds3, type Vector3, readVolumeLayerPlan, readVolumeSlabInterval, type VolumeLayerGroup, type VolumeLayerPlan, type VolumeSlabInterval } from '@cssearth/objects';
+import type { DisplayColorMatrix, VolumeRecipe } from './volume-recipe.js';
+import type { Axis, Bounds3, Vector3 } from './coordinates.js';
+import { readVolumeLayerPlan, readVolumeSlabInterval, type VolumeLayerGroup, type VolumeLayerPlan, type VolumeSlabInterval } from './volume-layer-plan.js';
 
 const axes = ['x', 'y', 'z'] as const;
 

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseVolumeRecipe } from '../volume/index.ts';
+import { parseVolumeRecipe } from '@cssearth/objects';
 import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath, bakeSlab, channelDensity, slabStepSize, withinVolumeSupport, encodeVolumeRaster } from '../volume/node/index.ts';
 import { parseVolumeAcquisition, reduceRawVolume, encodeDensityKtx2 } from './acquisition.ts';
 import sharp from 'sharp';

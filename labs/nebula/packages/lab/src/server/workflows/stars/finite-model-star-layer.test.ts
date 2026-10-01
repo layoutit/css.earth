@@ -7,7 +7,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, stat } from 'node:fs/promises';
 import sharp from 'sharp';
-import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane, overlayCorners, type ImageWcs, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
+import { rayToOverlayPlane, overlayCorners, type ImageWcs, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
+import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/objects';
 import { loadFiniteModelStarContext, finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';
 import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, finiteModelStarsIndex, finiteModelSubjectId,
   MAGNITUDE_LIMIT } from './finite-model-star-layer.ts';

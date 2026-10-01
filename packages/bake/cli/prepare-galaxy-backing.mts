@@ -18,7 +18,7 @@ import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
-import type { VolumeSliceQuad } from '@cssearth/bake/volume';
+import type { VolumeSliceQuad } from '@cssearth/objects';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 
 type Vector3 = [number, number, number];

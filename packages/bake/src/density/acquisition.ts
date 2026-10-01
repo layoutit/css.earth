@@ -6,7 +6,7 @@ import { pipeline } from 'node:stream/promises';
 import { dirname, resolve } from 'node:path';
 import { zstdCompressSync, constants } from 'node:zlib';
 import { containedPath, sourceBytes, urlCachePath, type DecodedGrid } from '../volume/node/index.ts';
-import { triple, type VolumeRecipe } from '../volume/index.ts';
+import { triple, type VolumeRecipe } from '@cssearth/objects';
 import { type Vector3 } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 

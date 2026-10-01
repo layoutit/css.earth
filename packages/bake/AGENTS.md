@@ -283,8 +283,10 @@ its validators accept); the renderer never imports the bake.
   (`packages/bake/cli/prepare-stars.mts`, `prepare-shell.mts`, `prepare-volume.mts`, the last also `pnpm prepare:volume`
   and the telescope's F16 volume operation) pass `@cssearth/objects/node`'s.
 
-- `src/volume/` is published as `@cssearth/bake/volume`: the remaining volume contracts, coordinates, fields, materials and
-  sampling. Prepared scene readers, density filters and their format types live in `@cssearth/objects`. It stays host-neutral, for preparation callers: no Node built-ins, `Buffer`,
+- `src/volume/` is published as `@cssearth/bake/volume`: the implementation contracts, coordinates, fields, materials and
+  sampling. Prepared recipes, slices, compiler controls, star inputs, catalogue stars, authored shapes, observation
+  photo data and their pure validators live in `@cssearth/objects`; import them there, without bake re-exports.
+  Cancellation, callable observation mapping, simulation sampling and emission types coupled to field implementations stay here. It stays host-neutral, for preparation callers: no Node built-ins, `Buffer`,
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
   compiler bake and the published catalogue point banks, with the galaxy groups' placement and the shell selection that

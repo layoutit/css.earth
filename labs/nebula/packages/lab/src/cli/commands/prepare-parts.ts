@@ -1,10 +1,12 @@
-import { observationEnvelope as envelope, type VolumeRecipe, type ImageWcs } from '@cssearth/bake/volume';
+import { observationEnvelope as envelope, type ImageWcs } from '@cssearth/bake/volume';
+import { type VolumeRecipe } from '@cssearth/objects';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of frozen cloud-component inspection banks. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { loadVolumeSource, type VolumeSlices, bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
+import { loadVolumeSource, bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
+import { type VolumeSlices } from '@cssearth/objects';
 import { savedInputsMatch } from '../../server/services/saved-variants.ts';
 import { compileCssVolume, type PreparedCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { decomposeFilledComponents, type FilledComponentOptions } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';

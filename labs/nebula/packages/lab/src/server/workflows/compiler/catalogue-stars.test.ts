@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { prepareCatalogueStars } from './catalogue-stars.ts';
 import type { EmissionFieldModel } from '@cssearth/bake/volume';
-import type { CompilerStarInput } from './bake.ts';
+import type { CompilerStarInput } from '@cssearth/objects';
 
 function star(id: string, magnitudeV: number, colorIndexBV: number | null = null, raDegrees = 56.75, decDegrees = 24.12) {
   return { id, raDegrees, decDegrees, magnitudeV, colorIndexBV, sourceId: 'fixture-catalogue',
