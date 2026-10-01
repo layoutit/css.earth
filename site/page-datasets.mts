@@ -33,6 +33,17 @@ export function presentPageDatasets(document: ParentNode, url: string | URL, sce
   for (const datasets of readPageDatasets(document)) {
     const page = knownObject(datasets.page), hosted = page?.kind === 'overview' && page.sceneHostId === sceneId;
     if (datasets.root.hidden !== !hosted) datasets.root.hidden = !hosted;
+    // Their tab goes with them: from another star the Observable Universe card showed a Datasets tab over nothing
+    // (2026-10-01). A card left with no tab hides the row; one whose Datasets tab was open opens its first other tab.
+    const tab = sectionElements(document, `#${datasets.page}-datasets-tab`)[0] as HTMLInputElement | undefined, row = tab?.parentElement;
+    if (tab && row) {
+      const label = row.querySelector<HTMLElement>(`label[for="${tab.id}"]`);
+      const others = [...row.querySelectorAll<HTMLInputElement>('input.object-native-tab')].filter(other => other !== tab);
+      if (tab.hidden !== !hosted) tab.hidden = !hosted;
+      if (label && label.hidden !== !hosted) label.hidden = !hosted;
+      if (!others.length && row.hidden !== !hosted) row.hidden = !hosted;
+      if (!hosted && tab.checked && others[0]) others[0].click();
+    }
     const dataset = selectedPageDataset(url, datasets);
     const buttons = [...datasets.root.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')];
     for (const button of buttons) {
