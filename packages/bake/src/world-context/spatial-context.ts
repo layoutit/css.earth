@@ -292,32 +292,6 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
 
-/** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as binary
- * orbit banks (`worldOrbitBanks`), which this summary pins by byte length; each orbit here keeps its parent, bounds and
- * size; each path's bank is named by its body. Classification views are build-time only. */
-export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>) {
-  const { classificationViews: _views, ...rest } = prepared;
-  // System views keep their members; their camera candidates are `worldSystemViews`, loaded after the first body mounts.
-  const members = <T extends { readonly systemView?: PreparedSystemView }>(body: T): T => {
-    if (!body.systemView) return body;
-    const { candidates: _candidates, ...view } = body.systemView;
-    return freeze({ ...body, systemView: freeze(view) });
-  };
-  // A body's arrival view is its own page's (the object entry carries it); the world only draws its photograph, so the summary
-  // keeps the billboard's address and scale. With 3,575 bodies the arrival rotations were 1.4 of the summary's 3.5 MB.
-  const drawn = <T extends { readonly discovery?: Readonly<Record<string, unknown>> }>(body: T): T => {
-    if (!body.discovery || body.discovery.arrival === undefined) return body;
-    const { arrival, ...discovery } = body.discovery, billboard = (arrival as { billboard?: { url: string; size: number; focalPixels: number; distanceM: number } }).billboard;
-    return freeze({ ...body, discovery: freeze(discovery), ...(billboard ? { billboard: freeze({ url: billboard.url, size: billboard.size, focalPixels: billboard.focalPixels, distanceM: billboard.distanceM }) } : {}) });
-  };
-  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: drawn(members(prepared.focus)), bodies: freeze(prepared.bodies.map(members).map(drawn).map(body => {
-    if (!body.orbit) return body;
-    const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
-    return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
-      bounds: outwardSphere(bounds), lod: freeze({ bounds: outwardSphere(lod.bounds) }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
-  })) });
-}
-
 /** A culling sphere written in steps of a millionth of its radius, grown to still hold the sphere it rounds: seventeen
  * digits of metres were a quarter of the summary's compressed bytes, and a sphere grows by at most 2.8 millionths of its
  * radius (the rounded centre's shift plus one step). */

@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1604-01424",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1604.01424"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-637X/826/1/56"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1604.01424",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0004-637X/826/1/56",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1604.01424",
+      "checkedOn": "2026-09-30",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Riess et al. (2016)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1604.01424"
+    }
+  ],
+  "creators": [
+    "Adam G. Riess",
+    "Lucas M. Macri",
+    "Samantha L. Hoffmann",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

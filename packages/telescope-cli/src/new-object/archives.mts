@@ -2,6 +2,7 @@
  * the URL it read; a failed request says which archive, which URL and which status. */
 import { requireString } from '@cssearth/core';
 import { decodeEntities } from './orbit.mts';
+import type { CataloguePosition } from './spec.mts';
 
 export interface Archive {
   /** GET, or POST a form when `form` is given; the response text. */
@@ -116,6 +117,29 @@ export function parseGaiaRow(csv: string, sourceId: string): GaiaRow {
 export async function fetchGaiaRow(archive: Archive, sourceId: string) {
   const csv = await archive.text(GAIA_TAP, gaiaRowForm(sourceId));
   return { csv, row: parseGaiaRow(csv, sourceId) };
+}
+
+/** One row of a VizieR table, for a star Gaia cannot see (spec `position`): the whole row as VizieR serves it, archived beside the
+ * body, and the J2000 position it gives. */
+export interface CatalogueRow { readonly catalogue: string; readonly tsv: string; readonly form: Readonly<Record<string, string>>; readonly cells: Readonly<Record<string, string>>; readonly ra: number; readonly dec: number; readonly words: string }
+export const catalogueRowForm = (position: CataloguePosition): Record<string, string> => ({ '-source': position.catalogue, '-out.all': '', '-out.max': '2', ...position.row });
+/** The row `position.row` picks; exactly one, with a decimal J2000 position. */
+export function parseCatalogueRow(tsv: string, position: CataloguePosition, where: string): Omit<CatalogueRow, 'tsv' | 'form'> {
+  const words = `${position.catalogue} row ${Object.entries(position.row).map(([column, cell]) => `${column} = ${cell}`).join(', ')}`;
+  const lines = tsv.split('\n').filter(line => line.trim() && !line.startsWith('#'));
+  const header = lines[0]?.split('\t').map(cell => cell.trim()) ?? [], rows = lines.slice(3).map(line => line.split('\t').map(cell => cell.trim()));
+  if (rows.length !== 1) throw new Error(`${where}: VizieR ${words} matches ${rows.length} rows, not one; add the columns that tell them apart to position.row.`);
+  const cells = Object.fromEntries(header.map((column, i) => [column, rows[0]![i] ?? '']));
+  for (const [column, cell] of Object.entries(position.row)) if (cells[column] !== cell) throw new Error(`${where}: VizieR ${words}: the row found has ${column} = ${cells[column] ?? '(no such column)'}, not ${cell}.`);
+  const degrees = (column: string) => { const value = Number(cells[column]); if (!cells[column] || !Number.isFinite(value)) throw new Error(`${where}: VizieR ${words} has no decimal ${column} (${cells[column] ?? 'no such column'}); the position must be decimal J2000 degrees.`); return value; };
+  return { catalogue: position.catalogue, cells, ra: degrees('RAJ2000'), dec: degrees('DEJ2000'), words };
+}
+export const CATALOGUE_ROW_REPLACEMENTS = [{ pattern: '^#.*\\n', flags: 'gm', replacement: '' }, { pattern: '^\\s*\\n', flags: 'gm', replacement: '' }] as const;
+const stableVizier = (text: string) => CATALOGUE_ROW_REPLACEMENTS.reduce((out, { pattern, flags, replacement }) => out.replace(new RegExp(pattern, `${flags}u`), replacement), text);
+export async function fetchCatalogueRow(archive: Archive, position: CataloguePosition, where: string): Promise<CatalogueRow> {
+  // The response's dated comment lines and blank lines are dropped so the archived bytes are stable (CATALOGUE_ROW_REPLACEMENTS).
+  const form = catalogueRowForm(position), tsv = stableVizier(await archive.text(VIZIER_ASU, form));
+  return { ...parseCatalogueRow(tsv, position, where), tsv, form };
 }
 
 /** Gaia DR3's eclipsing-binary period of a source, in days, when its variability pipeline fitted one (gaiadr3.vari_eclipsing_binary). */

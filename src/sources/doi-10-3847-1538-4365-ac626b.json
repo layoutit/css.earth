@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4365-ac626b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "余 et al. (2022): Statistical Analysis of H i Profile Asymmetry and Shape for Nearby Galaxies",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2203.13404"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ac626b"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022ApJS..261...21Y"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ac626b",
+      "label": "The Astrophysical Journal Supplement Series 261 21"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y",
+      "checkedOn": "2026-09-30",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "余 et al. (2022), The Astrophysical Journal Supplement Series 261 21",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 261 21",
+  "creators": [
+    "Niankun 捻坤 Yu 余",
+    "Luis C. Ho",
+    "Jing Wang",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-1365-cepheid-111818",
+  "card": {
+    "text": "A Cepheid in the galaxy NGC 1365, 18 million parsecs away, that swells and shrinks every 15.9 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016)",
+        "checked": "2026-10-01",
+        "locator": "table 5, Gal N1365, ID 111818: Per; Riess et al. (2016), ApJ 826, 56, table 5, N1365: mu_Ceph"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Hubble Space Telescope found it and timed its pulsation at 15.9 days. Its galaxy's distance, 18.3 million parsecs, was measured from Cepheids like it.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016)",
+        "checked": "2026-10-01",
+        "locator": "table 5, Gal N1365, ID 111818: Per; Riess et al. (2016), ApJ 826, 56, table 5, N1365: mu_Ceph"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -40,10 +40,10 @@ export function coverageGaps(wavelengthsNm: readonly number[]): Gap[] {
 
 /** A catalogue record in src/sources for the spectrum a route reads (the shared form the placed stars already cite). */
 export interface SourceRecord { readonly id: string; readonly record: Record<string, unknown> }
-const dataProduct = (id: string, title: string, identifier: [string, string], landing: [string, string], evidence: [string, string], credit: string, creditEvidence: string, publisher: string): SourceRecord => ({ id, record: {
+export const dataProduct = (id: string, title: string, identifier: [string, string], landing: [string, string], evidence: [string, string], credit: string, creditEvidence: string, publisher: string): SourceRecord => ({ id, record: {
   id, kind: 'data-product', identityLevel: 'work', title, identifiers: [{ type: identifier[0], value: identifier[1] }], links: [{ role: 'landing', url: landing[0], label: landing[1] }],
   evidence: [{ url: evidence[0], checkedOn: CHECKED, locator: evidence[1] }], relations: [], statements: [{ kind: 'credit', text: credit, scope: 'citation', evidence: creditEvidence }], publisher } });
-const CDS = 'Centre de Données astronomiques de Strasbourg';
+export const CDS = 'Centre de Données astronomiques de Strasbourg';
 
 /** One route that yielded a spectrum: its file, how the dataset reads it, where it came from and how to restore it. */
 export interface Candidate {
@@ -54,7 +54,8 @@ export interface Candidate {
   readonly acquisition: string; readonly color: StellarColor;
 }
 
-interface Context { readonly spec: StarSpec; readonly row: GaiaRow; readonly ids: Identifiers; readonly archive: Archive; readonly cmf: Map<number, readonly number[]> }
+/** `row` is absent for a star Gaia cannot see (spec `position`). */
+interface Context { readonly spec: StarSpec; readonly row: GaiaRow | undefined; readonly ids: Identifiers; readonly archive: Archive; readonly cmf: Map<number, readonly number[]> }
 /** The catalogue files every star reads (Pulkovo, Kharitonov, Burnashev) are fetched once per process, however many stars run at once. */
 const shared = new Map<string, Promise<Buffer>>();
 const once = (context: Context, url: string) => { let bytes = shared.get(url); if (!bytes) { bytes = context.archive.bytes(url); shared.set(url, bytes); bytes.catch(() => shared.delete(url)); } return bytes; };
@@ -84,6 +85,7 @@ const ROUTES: Record<ColorRoute, Route> = {
         [url, 'HDU 1 binary table: WAVELENGTH (Angstrom), FLUX (FLAM)'], 'NASA/STScI; STIS Next Generation Spectral Library v2 (Heap & Lindler), MAST', 'https://archive.stsci.edu/publishing/data-use', 'Space Telescope Science Institute') };
   },
   async 'gaia-xp'({ row, archive }) {
+    if (!row) return 'the star has no Gaia DR3 source';
     if (!row.hasXpSampled) return 'Gaia DR3 published no sampled BP/RP spectrum of it';
     // ESA's DataLink first; when it is down, the same product from the ARI Heidelberg partner data centre's TAP mirror.
     const url = xpSampledUrl(row.sourceId), form = xpSampledMirrorForm(row.sourceId);
@@ -184,7 +186,7 @@ export interface ColorChoice {
 const channelDifference = (a: StellarColor, b: StellarColor) => Math.max(...a.srgb.map((value, i) => Math.abs(value - b.srgb[i]!)));
 
 /** Try every route in order and write the colour record for the first, with the second as its cross-check. */
-export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers, archive: Archive, cmf: Map<number, readonly number[]>): Promise<ColorChoice> {
+export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids: Identifiers, archive: Archive, cmf: Map<number, readonly number[]>): Promise<ColorChoice> {
   const context: Context = { spec, row, ids, archive, cmf }, candidates: Candidate[] = [], tried: string[] = [];
   // Every route is probed at once; the candidates are then taken in the routes' quality order.
   const probed = await Promise.all((Object.keys(ROUTES) as ColorRoute[]).map(async route => {
@@ -217,7 +219,7 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
   }
   const primaryPath = `photometry/${primary.file}`;
   addFile(primary, primaryPath, `${id}-${primary.route}`);
-  const record: Record<string, unknown> = primary.route === 'gaia-xp'
+  const record: Record<string, unknown> = primary.route === 'gaia-xp' && row
     ? { schema: 'cssearth-stellar-photometric-color@1', objectId: id, spectrum: 'gaia-xp-sampled', sampledSpectrum: {
         source: 'Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; BP/RP spectra: De Angeli et al. (2023), A&A 674, A2, and externally calibrated sampled spectra: Montegriffo et al. (2023), A&A 674, A3',
         path: primaryPath, service: primary.origin, checked: CHECKED, sourceId: row.sourceId, sampling: '343 samples from 336 to 1020 nm in 2 nm steps, flux in W m^-2 nm^-1 (the DataLink default sampling)', note: primary.note } }

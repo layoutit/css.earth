@@ -35,6 +35,9 @@ for (const id of ids) if (!objects.some(object => object.id === id)) throw new E
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports: unknown[] = [], failures: string[] = [], captureSize = 4096;
+// A package file written mid-run makes the dev server being photographed reload every module, and the next pages time out
+// (168 Cepheids, 2026-09-30): each body's metadata and inventory are written once every photograph is taken.
+const packageWrites: (() => Promise<void>)[] = [];
 try {
   for (const [index, object] of objects.entries()) {
     const objectDirectory = resolve(root, 'src/objects', object.id), prepared = resolve(objectDirectory, 'prepared');
@@ -178,16 +181,18 @@ try {
         if (errors.length) throw new Error(errors.join('\n'));
         const bytes = await writeLossyWebp(sharp(image), resolve(root, 'public/scenes', object.id, filename));
         const metadata = Buffer.from(JSON.stringify(billboard, null, 2) + '\n');
-        await writeFile(resolve(prepared, 'arrival-billboard.json'), metadata);
-        const inventory = await readInventory(object.id, objectDirectory);
-        if (!inventory) throw new Error(`No runtime inventory for ${object.id}.`);
-        for (const [location, name, data] of [['public', filename, bytes], ['prepared', 'arrival-billboard.json', metadata]] as const) {
-          const assets = inventory.assets.filter(asset => asset.location === location && asset.filename !== name);
-          assets.push({ location, filename: name, bytes: data.length, sha256: sha256(data) });
-          await updateInventory({ objectId: object.id, objectDirectory, location, assets });
-        }
         const report = { id: object.id, identity, billboard, bytes: bytes.length, renderer: browser.version(), errors };
-        await writeFile(receiptPath, JSON.stringify(report, null, 2) + '\n');
+        packageWrites.push(async () => {
+          await writeFile(resolve(prepared, 'arrival-billboard.json'), metadata);
+          const inventory = await readInventory(object.id, objectDirectory);
+          if (!inventory) throw new Error(`No runtime inventory for ${object.id}.`);
+          for (const [location, name, data] of [['public', filename, bytes], ['prepared', 'arrival-billboard.json', metadata]] as const) {
+            const assets = inventory.assets.filter(asset => asset.location === location && asset.filename !== name);
+            assets.push({ location, filename: name, bytes: data.length, sha256: sha256(data) });
+            await updateInventory({ objectId: object.id, objectDirectory, location, assets });
+          }
+          await writeFile(receiptPath, JSON.stringify(report, null, 2) + '\n');
+        });
         reports.push(report); console.log(`[${index + 1}/${objects.length}] ${object.id}: ${bytes.length} bytes`);
         break;
       }
@@ -197,6 +202,7 @@ try {
     finally { await context.close(); }
   }
 } finally { await browser.close(); }
+for (const write of packageWrites) await write();
 await writeFile(resolve(output, 'report.json'), JSON.stringify({ reports, failures }, null, 2) + '\n');
 if (failures.length) throw new Error(`Arrival preparation failed: ${failures.join(', ')}`);
 console.log(`Prepared ${reports.length} arrival billboards. Publish the changed inventories before merging.`);

@@ -25,10 +25,11 @@ const overview = { kind: 'overview', id: 'milky-way', name: 'Milky Way', descrip
   zoom: { enter: { fade: 'system', at: 'end' }, returnBelow: { fade: 'system', at: 'middle' }, frame: { distance: { distancePc: 8000 } } },
   holds: [{ classifications: ['nebula'] }], packages: [], route: '/milky-way/', sceneHostId: 'sun' };
 
-const scene = (id: string, distanceAu: number, featured: boolean) => ({ id, distance: parseNavigationDistance(au(distanceAu)), discovery: discovery(featured) });
-const scenes = [scene('sun', 0, false), scene('mars', 1.5, true)];
+const scene = (id: string, order: number, classification: string, distanceAu: number, featured: boolean) =>
+  ({ descriptor: descriptor(id, order, classification), distance: parseNavigationDistance(au(distanceAu)), discovery: discovery(featured) });
+const scenes = [scene('sun', 0, 'star', 0, false), scene('mars', 4, 'planet', 1.5, true)];
 
-async function checkout(records: { scenes?: typeof scenes; focuses?: readonly unknown[]; module?: string; overviews?: unknown } = {}) {
+async function checkout(records: { scenes?: Parameters<typeof preparedCatalogueModule>[0]; focuses?: readonly unknown[]; module?: string; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));
   temporary.push(root);
   for (const [id, order, classification] of [['sun', 0, 'star'], ['mars', 4, 'planet']] as const) {
@@ -66,7 +67,7 @@ test('reads each checkout once per process', async () => {
 
 test('refuses a catalogue it cannot decode or a focus without its host', async () => {
   const cases: [Parameters<typeof checkout>[0], RegExp][] = [
-    [{ scenes: [...scenes, scene('pluto', 39, false)] }, /Cannot find module|ENOENT/],
+    [{ scenes: [...scenes, { ...scenes[1]!, descriptor: { id: 'pluto' } }] }, /Invalid catalogue descriptor/],
     [{ scenes: [{ ...scenes[0]!, discovery: { featured: 'yes' } as never }] }, /Invalid prepared object discovery/],
     [{ focuses: [{ ...focus, sceneHostId: 'mars', route: '/helix/' }, { ...focus, id: 'm1', focusId: 'm1', route: '/m1/', sceneHostId: 'jupiter' }] }, /not a registered scene: m1/],
     [{ focuses: [{ kind: 'planet', id: 'x' }] }, /Invalid catalogue entry/],

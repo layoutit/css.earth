@@ -19,7 +19,11 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   view: SceneView;
   isCurrent(session: SceneSession): boolean;
 }) {
-  async function restore(session: SceneSession, handoff?: WorldHandoff) {
+  /** A page opened on an overview or a satellite system, without a saved view, frames it before the world context connects:
+   * the world's first frame then plans from that camera, not from the body's default view (an overview page planned one
+   * frame at the Sun's default view and fetched 40 Solar System orbit banks it never drew, 2026-09-30). False when the
+   * session was superseded. */
+  async function frameInitialView(session: SceneSession) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
     const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
@@ -29,7 +33,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         const framed = await session.wait(navigation.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,
           targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
-        if (framed.cancelled || !isCurrent(session)) return;
+        if (framed.cancelled || !isCurrent(session)) return false;
       }
     }
     if (initialSelection?.subject.kind === 'satellite-system' && !initialSelection.savedView) {
@@ -38,8 +42,15 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       if (!target) throw new Error(`No prepared satellite-system target for ${objectId}.`);
       const framed = await session.wait(navigation.focus({ objectId, mount, signal: session.signal,
         reducedMotion: true, targetWorldCamera: target }));
-      if (framed.cancelled || !isCurrent(session)) return;
+      if (framed.cancelled || !isCurrent(session)) return false;
     }
+    return true;
+  }
+
+  async function restore(session: SceneSession, handoff?: WorldHandoff) {
+    const { objectId, request, mount, shell } = session;
+    if (!mount || !shell) return false;
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
     let interrupted = false;
     if (handoff?.afterMount) {
       try {
@@ -102,5 +113,5 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     session.own(() => { shell.setCamera?.(null); });
   }
 
-  return { restore, connectControls };
+  return { frameInitialView, restore, connectControls };
 }

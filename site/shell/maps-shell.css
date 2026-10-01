@@ -531,6 +531,13 @@
 .object-sidebar .object-results-scroll .object-list[data-catalogue-window] > .object-item {
   width: 100%;
 }
+/* A system card lists every body of its system (549 rows for the Sun's, 682 KB) and shows about eight: rows out of view
+   skip style and layout until scrolled to. Inserting the Sun's list mid-zoom laid out 7,649 objects in one 22 ms frame
+   (2026-09-30). The list is flat, so a row's paint stays inside its 48 px box. */
+[data-system-bodies] .object-item {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 48px;
+}
 .object-results-scroll .object-observation-control { text-decoration: none; }
 .object-information-panel [data-information-panel="moons"] .object-list {
   width: 100%;
@@ -583,7 +590,7 @@
 }
 
 /* Object tabs share the overview tabs without moving the card heading. */
-.object-card.object-information-panel > .object-selected-panel { padding-bottom: 8px; }
+.object-card:is(.object-information-panel, .object-prepared-information-panel) > .object-selected-panel { padding-bottom: 8px; }
 .object-card-tabs:not(:has(> :is([role="tab"], .object-native-tab):not([hidden]))) { display: none; }
 .object-native-tab { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .object-native-tab[hidden] + .object-native-tab-label { display: none; }
@@ -678,9 +685,10 @@
   padding: 0 var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
-.object-information-panel > .atlas-tree-disclosure[open] { padding-bottom: 12px; }
+/* A focus card's single panel ends as the planet card's open disclosure does. */
+:is(.object-information-panel > .atlas-tree-disclosure[open], .object-prepared-information-panel > .object-card-tabpanel) { padding-bottom: 12px; }
 @media (min-width: 821px) and (orientation: landscape) {
-  .object-information-panel > .atlas-tree-disclosure[open] { padding-bottom: 14px; }
+  :is(.object-information-panel > .atlas-tree-disclosure[open], .object-prepared-information-panel > .object-card-tabpanel) { padding-bottom: 14px; }
 }
 .object-information-panel > .atlas-tree-disclosure > summary {
   box-sizing: border-box;

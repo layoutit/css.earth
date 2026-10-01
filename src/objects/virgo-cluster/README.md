@@ -21,6 +21,10 @@ The Virgo Cluster's member galaxies that the [Nearby Universe](../nearby-univers
 
 A browser capture of this version, after picking Virgo in the Nearby Universe list: 797 member dots load with the field's 164. The Nearby Universe places the field's own Virgo galaxies the same way; there the cluster comes out 0.64 Mpc deep (rms), where [Mei et al. (2007)](https://arxiv.org/abs/astro-ph/0702510) measured 0.6 ± 0.1 Mpc. The EVCC reaches 3.5 times Virgo's virial radius, so these members spread wider, about as deep as their 725 deg² footprint is wide.
 
+![Hovering the NGC 4639 Cepheids beside M87 names one of them](evidence/2026-09-30/cepheid-hover.jpg)
+
+A headless capture of M87's page, 1.2 Mpc out: the 32 Cepheids Hubble resolved in NGC 4639 ([Hoffmann et al. 2016](https://arxiv.org/abs/1607.08658)) sit together as one dot, which names one of them on hover and opens its page on a click. They are stars of their own packages, placed at their galaxy's Cepheid distance; a star beyond the Local Group keeps its marker within 8 Mpc of the camera.
+
 ## Known problems
 
 - A member's depth is assumed, not measured. Mei et al. found Virgo slightly elongated, 20 to 40° from the line of sight; the dots are not.

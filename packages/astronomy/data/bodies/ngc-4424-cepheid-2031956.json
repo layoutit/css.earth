@@ -1,0 +1,30 @@
+{
+ "id": "ngc-4424-cepheid-2031956",
+ "classification": "star",
+ "order": 5053,
+ "physical": {
+  "name": "NGC 4424 Cepheid 2031956",
+  "horizonsCode": null,
+  "meanRadiusKm": 132739560,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 4820
+ },
+ "physicalNotes": "Radius 190.8 +/- 31.8 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 45.82 d in Hoffmann et al. (2016), ApJ 830, 10, table 5; not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186): 132,739,560 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4820 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 45.82 d in Hoffmann et al. (2016), ApJ 830, 10, table 5; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own temperatures of its Cepheids (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 186.80051,
+  "declinationDegrees": 9.42075,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 16443717,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": 426,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Hoffmann et al. (2016), ApJ 830, 10, table 5 (https://arxiv.org/abs/1607.08658), VizieR J/ApJ/830/10/table5 row Gal = N4424, ID = 2031956: RAJ2000 186.80051, DEJ2000 9.42075, from the archived row src/objects/ngc-4424-cepheid-2031956/source/photometry/catalogue-row.tsv; SIMBAD names it [HMR2016] N4424 2031956",
+   "distance": "Riess et al. (2016), ApJ 826, 56, table 5: NGC 4424's Cepheid distance modulus 31.08 +/- 0.292 mag, 10^(mu/5 + 1) pc (https://arxiv.org/abs/1604.01424): 16443717 +/- 2211203 pc; Gaia DR3 cannot see the star",
+   "properMotion": "J/ApJ/830/10/table5 row Gal = N4424, ID = 2031956 measures no proper motion; zero is assumed (at 16,443,717 pc, 1 mas/yr would be 77,951 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity of NGC 4424, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract)"
+  }
+ }
+}

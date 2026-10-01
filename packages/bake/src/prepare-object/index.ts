@@ -68,7 +68,8 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
   { name: 'catalogues', purpose: 'rebuild the shared sources and facilities catalogues from the object\'s source records', scope: 'once', commands: async () => [node('site/build/prepare/prepare-facilities.mts', '--catalog-only')] },
   // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.
-  { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun')] },
+  // The catalogue carries every descriptor as the pins leave it (prepared-registry.ts preparedCatalogueModule).
+  { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun'), node('site/build/prepare/prepare-catalog.mts')] },
 ]);
 
 export type Progress = (line: string) => void;

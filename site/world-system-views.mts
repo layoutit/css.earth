@@ -1,11 +1,12 @@
 import { parsePreparedSystemView } from '@cssearth/renderer';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
+import { startupFetch } from './startup-requests.mts';
 
 // One system's camera candidates, fetched when navigation frames that system (`site/system-framing.mts`), from the
 // per-host copy the build serves (`pages/world/system-views/[id].json.ts`). Node tests pass their own reader of the
 // prepared file.
 async function fetchPreparedSystemView(id: string): Promise<unknown> {
-  const response = await fetch(`/world/system-views/${id}.json`);
+  const response = await startupFetch(`/world/system-views/${id}.json`);
   if (!response.ok) throw new Error(`Prepared system view request for ${id} failed: ${response.status}.`);
   return response.json();
 }

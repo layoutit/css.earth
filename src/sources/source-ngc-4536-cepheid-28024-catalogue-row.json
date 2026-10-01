@@ -1,0 +1,35 @@
+{
+  "id": "source-ngc-4536-cepheid-28024-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "NGC 4536 Cepheid 28024 · ngc 4536 cepheid 28024 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ngc-4536-cepheid-28024/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hoffmann et al. (2016), ApJ 830, 10, table 5; VizieR J/ApJ/830/10/table5 (CDS)",
+      "scope": "The ngc 4536 cepheid 28024 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

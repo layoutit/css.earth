@@ -13,7 +13,8 @@ import { discoveryVisibility, matchesObjectClassification, type ObjectDiscovery 
 import { catalogueClassification, isNavigableCatalogObject, isPreparedCluster, isPreparedNebula, type PreparedCatalogObject } from '@cssearth/catalog';
 import { readPreparedCatalogObjects } from '@cssearth/bake/navigation';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
-import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT, WORLD_SYSTEM_HOSTS } from '../../world-context-plan.mts';
+import { systemFramingRadii } from '../../system-framing-radii.mts';
 import { planetarySystemMembers } from '../../planetary-system-members.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
@@ -121,7 +122,11 @@ export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS, catalo
     const marked = new Set(discoveryVisibility(worldObjects, { illustrations: false, highlighted: classification, defaultFeatures, orbitFeatures }).highlightedBodies);
     const bodies = worldObjects.filter(object => marked.has(object.id)), notables = bodies.filter(object => notable.has(object.id));
     const narrowed = notables.length >= 2 && notables.length < bodies.length;
-    const frame = prepareCategoryFrame([...(narrowed ? notables : bodies).map(object => object.worldFrame.originM),
+    const frame = prepareCategoryFrame([...(narrowed ? notables : bodies).map(object => {
+      // Preparation reads every system's file (site/world-context-plan.mts), so every body is placed.
+      if (!object.worldFrame) throw new TypeError(`${object.id} has no world position; the world context read here lacks its system.`);
+      return object.worldFrame.originM;
+    }),
       ...drawn.filter(object => matchesObjectClassification(catalogueClassification(object), classification)).map(object => object.positionM)]);
     const markedBodies = narrowed ? notables : bodies;
     const hostIds = [...new Set(markedBodies.flatMap(object => hostOf(object.id) ?? []))];
@@ -140,7 +145,7 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
   const defaultFeatureIds = SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id);
   const orbitFeatureIds = SCENE_OBJECTS.filter(orbitFeature).map(object => object.id);
   return {
-    schema: 'cssearth-world-presentation@3',
+    schema: 'cssearth-world-presentation@4',
     satelliteSystemIntroductions,
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds,
@@ -153,6 +158,8 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
     categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, catalogue, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
       notableBodies(WORLD_OBJECTS, new Set(defaultFeatureIds), orbitCentres(APPLICATION_WORLD_CONTEXT)), orbitCentres(APPLICATION_WORLD_CONTEXT),
       APPLICATION_WORLD_CONTEXT.focus.id),
+    // Every system whose bodies are their own file, framed before a page reads it (site/system-framing.mts).
+    systemFramingRadii: Object.fromEntries([...systemFramingRadii(APPLICATION_WORLD_CONTEXT)].filter(([id]) => WORLD_SYSTEM_HOSTS.includes(id))),
   };
 }
 

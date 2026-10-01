@@ -34,6 +34,10 @@
  *
  * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope/src/node/sky-target.ts); `gaia` is a Gaia
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
+ * `position` anchors a star Gaia cannot see (a Cepheid in another galaxy, 25th magnitude) on one row of a published VizieR table
+ * instead: { "catalogue": "J/ApJ/830/10/table5", "row": { "Gal": "N4536", "ID": "12345" }, "credit", "url" }, where `row` holds the
+ * column values that pick exactly one row, whose RAJ2000 and DEJ2000 place the star (generate.mts catalogueAnchor). Such a star takes
+ * no `gaia`, and cites its distance, radial velocity, radius and mass; `target` is then only its SIMBAD name, for the README.
  * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
  * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
  * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
@@ -67,6 +71,8 @@ export interface StarSpec {
   readonly gravityRange?: { readonly min: number; readonly max: number; readonly source: string; readonly url: string };
   /** Parsecs, cited: replaces Gaia DR3's parallax distance (spec header). */
   readonly distance?: Cited;
+  /** One row of a published VizieR table that places a star Gaia cannot see (spec header). */
+  readonly position?: CataloguePosition;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   readonly limb?: { readonly none: string };
   readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string };
@@ -76,6 +82,7 @@ export interface StarSpec {
   /** What the generator or a person chose not to show, one sentence each, for the README. */
   readonly notes: readonly string[];
 }
+export interface CataloguePosition { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string }
 /** Sentences of the body's Wikipedia article lead, verbatim (prose.mts), cited as quotes beside the drafted text. */
 export interface DraftQuotes { readonly url: string; readonly title: string; readonly revision: string; readonly card?: string; readonly introduction?: string }
 export interface DraftText { readonly card: string; readonly introduction: string; readonly locator: string; readonly quotes?: DraftQuotes }
@@ -201,18 +208,34 @@ function cited(value: unknown, label: string, range: readonly [number, number]):
   if (uncertainty !== undefined && !(uncertainty > 0)) throw new RangeError(`${label}.uncertainty must be positive.`);
   return { value: number, source: requireString(input.source, `${label}.source`), url, ...(uncertainty === undefined ? {} : { uncertainty }) };
 }
+function cataloguePosition(value: unknown, label: string): CataloguePosition {
+  const input = requireRecord(value, label), catalogue = requireString(input.catalogue, `${label}.catalogue`), row = requireRecord(input.row, `${label}.row`);
+  if (!/^[A-Z]+\/[\w+/.-]+$/u.test(catalogue)) throw new TypeError(`${label}.catalogue is a VizieR table (J/ApJ/830/10/table5), not ${catalogue}.`);
+  const entries = Object.entries(row).map(([column, cell]) => [column, requireString(cell, `${label}.row.${column}`)] as const);
+  if (!entries.length) throw new TypeError(`${label}.row names no column: give the values that pick one row of ${catalogue}.`);
+  const url = requireString(input.url, `${label}.url`);
+  if (!URL_PATTERN.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
+  return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url };
+}
 const citedOrFlame = (value: unknown, label: string, range: readonly [number, number]) => value === 'gaia-flame' ? 'gaia-flame' as const : cited(value, label, range);
 
 export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
   if (gaia !== undefined && !/^\d{6,20}$/u.test(gaia)) throw new TypeError(`${at('gaia')} is a Gaia DR3 source_id (digits), not ${gaia}.`);
-  if (gaia === undefined && target === undefined) throw new TypeError(`${id}: give target (a SIMBAD name) or gaia (a Gaia DR3 source_id).`);
+  const position = input.position === undefined ? undefined : cataloguePosition(input.position, at('position'));
+  if (gaia === undefined && target === undefined && !position) throw new TypeError(`${id}: give target (a SIMBAD name), gaia (a Gaia DR3 source_id) or position (a catalogue row).`);
+  if (position) {
+    // Gaia supplies nothing for a star it cannot see: every value it would have given is cited instead.
+    if (gaia !== undefined) throw new TypeError(`${id}: a star placed by a catalogue row has no Gaia DR3 source; give position or gaia, not both.`);
+    const missing = [input.distance === undefined && 'distance', input.radialVelocity === undefined && 'radialVelocity', input.radius === 'gaia-flame' && 'a cited radius (not gaia-flame)', input.mass === 'gaia-flame' && 'a cited or "unmeasured" mass (not gaia-flame)'].filter(Boolean);
+    if (missing.length) throw new TypeError(`${id}: a star placed by ${position.catalogue} has no Gaia DR3 row; give ${missing.join(', ')}.`);
+  }
   const paper = requireRecord(input.paper, at('paper')), name = requireString(input.name, at('name'));
   const spin = input.spin === undefined ? undefined : (() => {
     const s = requireRecord(input.spin, at('spin')), inclination = requireFiniteNumber(s.inclinationDegrees, at('spin.inclinationDegrees'));
@@ -242,8 +265,10 @@ export function parseStarSpec(value: unknown): StarSpec {
       if (!URL_PATTERN.test(url)) throw new TypeError(`${at('gravityRange.url')} must be an https URL, not ${url}.`);
       return { min, max, source: requireString(r.source, at('gravityRange.source')), url };
     })() }),
-    ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), [-1000, 1000]) }),
-    ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e7]) }),
+    // A star in another galaxy recedes with it: NGC 4536's Cepheids at 1,800 km/s, a galaxy at redshift 0.1 at 30,000.
+    ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), input.position ? [-30000, 30000] : [-1000, 1000]) }),
+    // Out to a gigaparsec: the stars measured one by one in other galaxies are at most tens of megaparsecs away.
+    ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e9]) }), ...(position ? { position } : {}),
     ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),

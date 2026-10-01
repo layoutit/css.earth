@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../packages/renderer/src/prepared-data/world-context.js';
+import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../packages/renderer/src/prepared-data/world-context.js';
 import { mountPreparedWorldContext } from '../../packages/renderer/src/universe/prepared-world-context.js';
 import { worldContextGeometry } from '../../packages/renderer/src/prepared-data/world-context.js';
 import type { WorldContextFrame } from '../../packages/renderer/src/universe/world-context/world-context-frame.js';
@@ -1268,7 +1268,8 @@ test('overlapping circles retain selection priority and reappear when separated'
   assert.equal(annotationVisibility(venus, 'indicator'), 'hidden');
   assert.equal(declared(venus, 'pointerEvents'), 'none');
   const venusMarker = find(root, 'contextBody', 'venus');
-  assert.equal(venusMarker.style.visibility, ''); // Decluttering only hides annotations.
+  // Venus's dot is 2 px from Mercury's, under it (marker-declutter.ts): it is not drawn, and follows no camera sample.
+  assert.equal(venusMarker.style.visibility, 'hidden');
   let writes = 0;
   for (const node of [mover(venusMarker)]) {
     let transform = node.style.transform;
@@ -1277,9 +1278,10 @@ test('overlapping circles retain selection priority and reappear when separated'
     });
   }
   publish(2200); publish(2500);
-  assert.equal(writes, 2); // The visible physical sprite follows both camera samples.
+  assert.equal(writes, 0);
+  // Selected, it draws over Mercury and follows the camera again.
   layer.selectObject('venus'); publish(2000);
-  assert.equal(writes, 3);
+  assert.equal(writes, 1);
   assert.deepEqual(billboardCenter(venus), [82, 0]);
   assert.equal(venusMarker, venus);
   assert.equal(venus.style.visibility, '');
@@ -1442,7 +1444,8 @@ test('retired depth groups defer rotation and selection writes until same-pose r
   publish(-1000, halfTurn);
   assert.ok(writes > 0);
   assert.equal(depth('venus'), 0);
-  assert.ok(depth('mercury') > depth('sun'));
+  // Behind the selection the order is the fixed one: equal priorities, so the larger Sun stacks over Mercury.
+  assert.ok(depth('sun') > depth('mercury'));
   assert.ok(depth('mercury') < 0);
   expectRetained(root, nodes);
   layer.destroy();
@@ -1503,6 +1506,29 @@ test('selection transfers the detail handoff to the destination while retaining 
   layer.destroy();
 });
 
+test('past the system scope only the star is drawn and mounted, and its members return with the system scope', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const publish = () => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 2000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const drawn = () => layer.inspect().filter(body => body.mover.style.visibility === '').map(body => body.id);
+  publish();
+  const inside = drawn();
+  assert.ok(inside.includes('sun') && inside.length > 1, `inside the system its members draw, got ${inside.join(', ')}`);
+  // The application's overview scope moved past the system (the Milky Way's): the system retires, its star stays.
+  layer.setSystemRetired(true); publish(); publish();
+  assert.deepEqual(drawn(), ['sun']);
+  // Retired, the members leave the page: their marker groups are not mounted hidden.
+  const attached = () => layer.inspect().filter(body => body.mover.parentNode).map(body => body.id);
+  assert.deepEqual(attached(), ['sun']);
+  layer.setSystemRetired(false); publish(); publish();
+  assert.deepEqual(drawn(), inside);
+  assert.deepEqual(attached().filter(id => inside.includes(id)), inside);
+  layer.destroy();
+});
+
 test('crowded labels keep selection and hover priority, disable hidden targets, and reappear with clearance', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
@@ -1521,10 +1547,13 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   assert.equal(declared(venus, 'pointerEvents'), 'none');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
-  // The hidden caption has no hit rectangle; the visible physical dot still navigates.
+  // The hidden caption has no hit rectangle, and Venus's dot, under Mercury's, is not drawn: the spot navigates to Mercury.
   assert.equal(layer.inspect().find(body => body.id === 'venus')!.labelRect, null);
-  venus.dispatchEvent(new Event('click')); assert.deepEqual(selections, ['venus']);
-  layer.selectObject('venus'); publish(); assert.deepEqual(shown(), ['Venus']);
+  assert.equal(find(root, 'contextBody', 'venus').style.visibility, 'hidden');
+  venus.dispatchEvent(new Event('click')); assert.deepEqual(selections, []);
+  // Venus's dot was under Mercury's, so it was never drawn or measured: selected, it draws, and its caption follows once
+  // measured, a frame later.
+  layer.selectObject('venus'); publish(); publish(); assert.deepEqual(shown(), ['Venus']);
   find(root, 'contextBody', 'mercury').dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange'));
   publish(); assert.deepEqual(shown(), ['Mercury']); // Hover takes priority over selection.
@@ -1668,7 +1697,7 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
 });
 
 
-for (const closed of [true, false]) test(`crowding retires complete annotations and their orbits while preserving physical bodies (closed=${closed})`, () => {
+for (const closed of [true, false]) test(`crowding retires complete annotations and their orbits, and the dots under another body's (closed=${closed})`, () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -1689,7 +1718,8 @@ for (const closed of [true, false]) test(`crowding retires complete annotations 
   for (const body of entries.slice(1)) {
     assert.equal(body.indicatorShown, false);
     assert.equal(body.labelShown, false);
-    assert.equal(body.mover.style.visibility, '');
+    // Mercury's dot, 4 px from the Sun's, clears it; Venus's, 2 px further, is under Mercury's (marker-declutter.ts).
+    assert.equal(body.mover.style.visibility, body.id === 'venus' ? 'hidden' : '');
     assert.equal(declared(body.billboard, 'pointerEvents'), 'none');
     // Too far for this camera to name any of them: no captions, and no unidentified paths.
     assert.equal(body.orbit.some(piece => piece.style.visibility === ''), false);
@@ -2423,7 +2453,7 @@ test('opacity-only ticks do not reproject, republish picking or measure retained
 
 test('the main thread draws worker frames from the orbit summary exactly as from the full context', () => {
   const full = plan(1);
-  const summaryInput = { ...full, schema: 'cssearth-world-context-summary@1', bodies: full.bodies.map(({ orbit, ...body }) => !orbit ? body : { ...body,
+  const summaryInput = { ...full, schema: 'cssearth-world-context-summary@2', bodies: full.bodies.map(({ orbit, ...body }) => !orbit ? body : { ...body,
     orbit: { centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM, vertexCount: orbit.verticesM.length, fullTrail: orbit.fullTrail,
       ...(orbit.bounds ? { bounds: orbit.bounds } : {}), ...(orbit.lod ? { lod: { bounds: orbit.lod.bounds } } : {}) } }) };
   const summary = parsePreparedWorldContextSummary(summaryInput);
@@ -2660,7 +2690,9 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
 test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 30_000 }, async () => {
   const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
-  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  // Every system's file read, as Node reads the world (site/world-context-plan.mts).
+  const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')),
+    async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')));
   const bankOf = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
   const decoded = decodeWorldOrbits(summary, banks);

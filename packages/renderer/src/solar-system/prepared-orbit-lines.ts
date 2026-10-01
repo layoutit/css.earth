@@ -23,6 +23,9 @@ export interface PreparedOrbitLines {
    * the compositor by writing it as `stroke-opacity` on every polyline. */
   readonly presentation: OrbitPresentation;
   publish(segments: readonly OrbitSegment[]): void;
+  /** Takes the orbit's paint out of the page until a publish draws it again (a retired system's member): a stroke group
+   * leaves the shared svg; bars live in the orbit's own root, which its owner detaches. */
+  detach(): void;
   stats(): Record<string, number>;
   destroy(): void;
 }
@@ -60,6 +63,7 @@ function mountOrbitBars(host: HTMLElement, capacity: number): PreparedOrbitLines
       pool.commitVisibility(); count = segments.length;
     },
     stats: () => ({ ...pool.stats(), transformWrites, capacity }),
+    detach() {},
     destroy() { for (const block of new Set(pool.elements.map(leaf => leaf?.parentNode))) (block as Element | undefined)?.remove(); },
   };
 }
@@ -199,6 +203,7 @@ function mountOrbitStrokes(host: HTMLElement, root: HTMLElement, dashed: boolean
       if (shown !== visible > 0) { shown = visible > 0; group.style.display = shown ? '' : 'none'; }
     },
     stats: () => ({ pointWrites, visibleRuns: membership.visible, builtRuns: membership.size }),
+    detach() { group.remove(); },
     destroy() { group.remove(); },
   };
 }

@@ -1,17 +1,22 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import { labelOcclusionFor } from '@cssearth/renderer';
+import { afterStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
 import { prepareObjectResources, createRetainedGeometrySnapshot } from '@cssearth/renderer/universe';
 import { createCameraViewport } from '@cssearth/renderer/navigation';
 import type { PreparedLabelEdge } from '@cssearth/renderer/navigation/prepared-label-edge.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
-import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as applicationContext, streamWorldSystems } from './world-context-plan.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
+
+/** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
+export { loadApplicationUniverse };
+export { prestartWorldContextPlanner as prestartWorldPlanner } from '@cssearth/renderer/universe';
 import { createApplicationWorldFrames } from './application-world-frames.mts';
 import { createApplicationWorldVisibility, worldVisibilityPolicy } from './application-world-visibility.mts';
 import type { ApplicationWorldLayer } from './application-world-types.mts';
@@ -55,6 +60,9 @@ export function createApplicationWorldContext() {
           sources: prepared.catalogSources, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
+        // The systems this page does not show arrive after its first view (startup-gate.ts), in a few batches; each joins
+        // the mounted world and its planner as it lands (site/world-context-plan.mts).
+        afterStartup(target, () => { if (!lifetime.disposed) void streamWorldSystems(); });
         const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld(), layer.depthBase));
         let heliosphereEnabled = false, shellsMounted = false;
         const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,

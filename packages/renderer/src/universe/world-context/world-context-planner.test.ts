@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { decodeWorldOrbitBank, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
+import { decodeWorldOrbitBank, parseCompleteWorldContext, parsePreparedWorldContext } from '../../prepared-data/world-context.js';
 import { createSystemFade } from './context-scale.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
@@ -98,6 +98,16 @@ test('complete context frames cross a structured-clone boundary without mutating
   // Replaying the same committed inputs is independent of requests that ran
   // in between: rejected/superseded frames cannot own decluttering history.
   assert.deepEqual(structuredClone(calculate(input)), first);
+});
+
+test('past the galaxy scope the placed stars retire too, and the anchor alone keeps its marker', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  input.anchorOnly = true; input.systemRetired = true;
+  const locatorOpacity = () => calculate(input).projectedBodies.filter(body => body.index !== 0).map(body => body.markerOpacity);
+  assert.ok(locatorOpacity().some(opacity => opacity > 0), 'past the system scope the placed stars stay as galactic locators');
+  input.galaxyRetired = true;
+  assert.deepEqual(locatorOpacity().filter(opacity => opacity > 0), [], 'past the galaxy scope they retire');
+  assert.ok(calculate(input).projectedBodies[0]!.markerOpacity > 0, 'the anchor stands for them');
 });
 
 test('retired and incompatible frame requests respect prepared identity and measured optics', () => {
@@ -620,9 +630,13 @@ test('inside its authored range a system draws every member orbit, named or not,
   for (const body of at(2.5)) assert.equal(body.orbitVisibility, 0, plan.bodies[body.index - 1]!.id);
 });
 
+/** The summary with every system's file read, as Node reads it (site/world-context-plan.mts). */
+const readWholeSummary = (prepared: URL) => readFile(new URL('world-context-summary.json', prepared), 'utf8').then(text => parseCompleteWorldContext(JSON.parse(text),
+  async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8'))));
+
 test('the planner plans from the summary alone, names the paths it lacked, and draws them once their bank arrives', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
-  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  const summary = await readWholeSummary(prepared);
   const bank = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const planner = createWorldContextPlanner(summary), current = view();
   const before = planner(current), wanted = planner.takeWantedOrbits();
@@ -647,7 +661,7 @@ test('the planner plans from the summary alone, names the paths it lacked, and d
 
 test('host detail defers satellite paths until each planetary system is opened', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
-  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  const summary = await readWholeSummary(prepared);
   for (const [hostId, satelliteId] of [['earth', 'moon'], ['jupiter', 'europa'], ['saturn', 'titan']]) {
     const host = summary.bodies.find(body => body.id === hostId)!;
     const planner = createWorldContextPlanner(summary), current = view();
@@ -665,7 +679,7 @@ test('host detail defers satellite paths until each planetary system is opened',
 
 test('a minor path that cannot show is never requested; highlighting it requests its bank', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
-  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  const summary = await readWholeSummary(prepared);
   const points = [summary.focus, ...summary.bodies], dots = new Set(summary.bodies.filter(body => body.plainDot).map(body => body.id));
   assert.ok(dots.size > 0);
   // Asteroids have no caption tier of their own (tier 0); the app hides a plain dot's caption.
@@ -705,8 +719,7 @@ test('destination orbit fading completes during approach, before the detail sele
 
 // The app's own tiers from each body's classification, and the app's naming rule: of the stars beyond the Sun only one is named.
 async function namedAlphaCentauri() {
-  const summary = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')) as { bodies: { id: string; classification: string }[] };
-  const kinds = new Map(summary.bodies.map(body => [body.id, body.classification]));
+  const kinds = new Map(plan.bodies.map(body => [body.id, body.classification]));
   const points = [plan.focus, ...plan.bodies];
   const priorities = Object.fromEntries(points.map(body => [body.id, labelImportance(kinds.get(body.id) ?? 'star')]));
   const input = view();
@@ -746,9 +759,19 @@ test('past the Solar System only the featured stars and the references keep a do
   assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no body keeps a dot');
 });
 
+test('a body beyond the Local Group keeps its dot at the scale of its cluster, and loses it from the Milky Way', () => {
+  const far = plan.bodies.find(body => body.id === 'm87-star')!, calculate = createWorldContextPlanner(plan), input = view();
+  const dotted = (parsecs: number) => {
+    // Looking down -z at M87*, from `parsecs` above it.
+    input.world.pose.positionM = [far.positionM[0], far.positionM[1], far.positionM[2] + parsecs * 3.085677581491367e16];
+    return calculate(input).projectedBodies.some(body => [plan.focus, ...plan.bodies][body.index]!.id === far.id && body.markerOpacity > 0);
+  };
+  assert.equal(dotted(3e6), true, 'from 3 Mpc, framing the Virgo Cluster, M87* keeps a dot');
+  assert.equal(dotted(12e6), false, 'past 10 Mpc it has gone, as from the Milky Way');
+});
+
 test('the moons of a framed planet keep their names before stars beyond the Solar System', async () => {
-  const summary = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')) as { bodies: { id: string; classification: string }[] };
-  const kinds = new Map(summary.bodies.map(body => [body.id, body.classification]));
+  const kinds = new Map(plan.bodies.map(body => [body.id, body.classification]));
   const points = [plan.focus, ...plan.bodies], jupiter = plan.bodies.find(body => body.id === 'jupiter')!;
   // Plain tiers: a moon ranks with the comets (1) and every star is named (3), so the 24-label cap is contested.
   const calculate = createWorldContextPlanner(plan, Object.fromEntries(points.map(body => [body.id, labelImportance(kinds.get(body.id) ?? 'star')])));
