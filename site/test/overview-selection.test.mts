@@ -79,6 +79,17 @@ test('a star outside every system keeps its scene until the camera is as far fro
   assert.deepEqual(at(168 * pc), { overview: true, objectId: 'sun' });
 });
 
+test('a galaxy that comes to rest farther out than the Sun is keeps its scene to twice that range', () => {
+  // The LMC, 49.6 kpc away, is framed from farther than that.
+  const kpc = 206_264_806 * au, galaxy = frame([49.6 * kpc, 0, 0], 5 * kpc);
+  const placed = [...objects, objectFixture('lmc', galaxy, { classification: 'galaxy', systemName: 'Local Group' })];
+  assert.equal(systemById(placed, 'lmc'), null);
+  const at = (range: number, restRangeM?: number) => selectionAtCamera({ world: camera(galaxy, range), viewport, objects: placed, systems: placed, objectId: 'lmc', overview: false, restRangeM });
+  assert.deepEqual(at(80 * kpc), { overview: true, objectId: 'sun' });
+  for (const range of [80 * kpc, 120 * kpc, 159.9 * kpc]) assert.equal(at(range, 80 * kpc), null);
+  assert.deepEqual(at(160 * kpc, 80 * kpc), { overview: true, objectId: 'sun' });
+});
+
 test('only approaching the Sun opens a card, with separate entry and exit thresholds', () => {
   assert.equal(choose(camera(sun, 1281), 'sun', true), null);
   assert.equal(choose(camera(sun, 1000), 'sun', true), null);
