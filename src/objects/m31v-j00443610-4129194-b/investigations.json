@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m31v-j00443610-4129194-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "5.6 +/- 0.4 solar radii from Secondary radius 5.6 +/- 0.4 solar radii, Vilardell et al. (2010), A&A 509, A70, Table 2.",
+      "evidence": [
+        "https://arxiv.org/abs/0911.3391"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "15.4 solar masses: Secondary mass 15.4 +/- 1.2 solar masses, Vilardell et al. (2010), A&A 509, A70, Table 2 (https://arxiv.org/abs/0911.3391).",
+      "evidence": [
+        "https://arxiv.org/abs/0911.3391"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "M31V J00443610+4129194: P 2.048644 d, time of primary minimum HJD 2452908.694, i 69.9 degrees and a 22.6 +/- 0.5 solar radii (Vilardell et al. (2010), A&A 509, A70, Table 2); the fit follows the procedure of Ribas et al. (2005), which adopts a circular orbit, in a semi-detached configuration (Sect. 4). a/R = 22.6/9.2 = 2.4565 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/0911.3391): P 2.048644 d; M31V J00443610+4129194: P 2.048644 d, time of primary minimum HJD 2452908.694, i 69.9 degrees and a 22.6 +/- 0.5 solar radii (Vilardell et al. (2010), A&A 509, A70, Table 2); the fit follows the procedure of Ribas et al. (2005), which adopts a circular orbit, in a semi-detached configuration (Sect. 4). a/R = 22.6/9.2 = 2.4565 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/0911.3391): a/R* 2.4565, inclination 69.9 degrees; M31V J00443610+4129194: P 2.048644 d, time of primary minimum HJD 2452908.694, i 69.9 degrees and a 22.6 +/- 0.5 solar radii (Vilardell et al. (2010), A&A 509, A70, Table 2); the fit follows the procedure of Ribas et al. (2005), which adopts a circular orbit, in a semi-detached configuration (Sect. 4). a/R = 22.6/9.2 = 2.4565 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/0911.3391): e 0; M31V J00443610+4129194: P 2.048644 d, time of primary minimum HJD 2452908.694, i 69.9 degrees and a 22.6 +/- 0.5 solar radii (Vilardell et al. (2010), A&A 509, A70, Table 2); the fit follows the procedure of Ribas et al. (2005), which adopts a circular orbit, in a semi-detached configuration (Sect. 4). a/R = 22.6/9.2 = 2.4565 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/0911.3391): transit (inferior conjunction) at 52908.194 BMJD_TDB; Display convention: the orbit's position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://arxiv.org/abs/0911.3391"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 30100 K from Secondary Teff 30100 +/- 900 K, Vilardell et al. (2010), A&A 509, A70, Table 3: #a2bbff, because the archives do not resolve this companion from its star. The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 30,100 K and log g 4.13 (u1 0.075, u2 0.288): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://arxiv.org/abs/0911.3391"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "page-arxiv-org-abs-astro-ph-0511045",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Web page arxiv.org/abs/astro-ph/0511045",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://arxiv.org/abs/astro-ph/0511045"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0511045",
+      "label": "arxiv.org/abs/astro-ph/0511045"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0511045",
+      "checkedOn": "2026-10-01",
+      "locator": "The page as cited by a NASA Exoplanet Archive parameter set or by a spec"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "arxiv.org/abs/astro-ph/0511045",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/astro-ph/0511045"
+    }
+  ]
+}

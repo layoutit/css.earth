@@ -1,0 +1,18 @@
+# M31V J00443799+4129236 B
+
+## Sources
+
+It has 15.0 solar masses and 11.3 solar radii; its partner has 23.1 and 13.1. The pair gave a direct distance to the galaxy: 772 kiloparsecs. The introduction is generated from Ribas et al. (2005), ApJ 635, L37's published values; the sections below are the data's own.
+
+**Size and mass.** Radius 11.3 +/- 0.3 solar radii from Secondary radius 11.3 +/- 0.3 solar radii, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045): 7,861,410 km at 695,700 km per solar radius. GM from the mass 15 +/- 1.1 solar masses (Secondary mass 15.0 +/- 1.1 solar masses, Ribas et al. (2005), ApJ 635, L37, Table 2, https://arxiv.org/abs/astro-ph/0511045) times the JPL solar GM. Temperature 27700 +/- 500 K from Secondary Teff 27700 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045). A sphere: no oblateness is measured.
+
+**Orbit.** M31V J00443799+4129236: P 3.549694 d, time of primary minimum HJD 2452204.421, i 89.3 degrees and a 33.0 +/- 0.7 solar radii (Ribas et al. (2005), ApJ 635, L37, Table 2); a circular orbit was adopted in the fit (Sect. 3). a/R = 33.0/13.1 = 2.5191 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/astro-ph/0511045): P 3.549694 d M31V J00443799+4129236: P 3.549694 d, time of primary minimum HJD 2452204.421, i 89.3 degrees and a 33.0 +/- 0.7 solar radii (Ribas et al. (2005), ApJ 635, L37, Table 2); a circular orbit was adopted in the fit (Sect. 3). a/R = 33.0/13.1 = 2.5191 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/astro-ph/0511045): a/R* 2.5191, inclination 89.3 degrees M31V J00443799+4129236: P 3.549694 d, time of primary minimum HJD 2452204.421, i 89.3 degrees and a 33.0 +/- 0.7 solar radii (Ribas et al. (2005), ApJ 635, L37, Table 2); a circular orbit was adopted in the fit (Sect. 3). a/R = 33.0/13.1 = 2.5191 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/astro-ph/0511045): e 0 M31V J00443799+4129236: P 3.549694 d, time of primary minimum HJD 2452204.421, i 89.3 degrees and a 33.0 +/- 0.7 solar radii (Ribas et al. (2005), ApJ 635, L37, Table 2); a circular orbit was adopted in the fit (Sect. 3). a/R = 33.0/13.1 = 2.5191 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/astro-ph/0511045): transit (inferior conjunction) at 52203.921 BMJD_TDB Display convention: the orbit's position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).
+
+**Colour.** A Planck spectrum at 27,700 K: #a3bcff, because the archives do not resolve this companion from its star. The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 27,700 K and log g 3.51 (u1 0.093, u2 0.322): a model, because no fit of this star's limb is used.
+
+## Evidence
+
+Generated 2026-10-01 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/m31v-j00443799-4129236-b.json).
+
+
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
