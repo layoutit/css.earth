@@ -10,8 +10,10 @@ export interface PreparedCssTransport {
   read(url: string, signal?: AbortSignal): Promise<ArrayBuffer>;
 }
 
-/** The transport each decoded definition came through, which also delivers its deferred datasets' tables. */
-const datasetTransports = new WeakMap<ObjectRuntimeDefinition, { reference: string; transport: PreparedCssTransport; loads: Map<string, Promise<void>> }>();
+/** The transport each decoded definition came through, which also delivers its deferred datasets' tables. It is kept by
+ * the definition's asset table: a mount adapts a copy of the definition (world-context-runtime.ts), and every copy shares
+ * that table, whose identity adoption keeps. */
+const datasetTransports = new WeakMap<ObjectRuntimeDefinition['assets'], { reference: string; transport: PreparedCssTransport; loads: Map<string, Promise<unknown>> }>();
 
 /** Decode a prepared artifact. Runtime never bakes a missing or stale payload. */
 export async function loadPreparedCssObject(
@@ -26,29 +28,28 @@ export async function loadPreparedCssObject(
   // Node preparation/tests have no browser Worker. Browser failures propagate;
   // they never silently repeat the expensive decode on the UI thread.
   const definition = typeof Worker === 'undefined' ? await decodePreparedCssObject(descriptor, bytes) : await decodePreparedObjectInWorker({ descriptor, bytes }, { signal });
-  if (definition.deferredDatasets?.length) datasetTransports.set(definition, { reference: descriptor.prepared!.url, transport, loads: new Map() });
+  if (definition.deferredDatasets?.length) datasetTransports.set(definition.assets, { reference: descriptor.prepared!.url, transport, loads: new Map() });
   return definition;
 }
 
-/** Make a dataset's tables part of its definition (dataset-tables.ts): at once when they are, otherwise read through
- * the transport the definition came from and adopted. Every caller waiting for one dataset shares one read, which no
- * caller's cancellation stops: a newer selection may want the same tables. A failed read is tried again next time. */
-export function loadPreparedDataset(definition: ObjectRuntimeDefinition, datasetId: string | null): Promise<void> {
-  if (datasetId === null || !definition.deferredDatasets?.includes(datasetId)) return Promise.resolve();
-  const source = datasetTransports.get(definition);
-  if (!source) return Promise.reject(new Error(`${definition.id}: dataset ${datasetId} has no transport for its tables.`));
+/** Make a dataset's tables part of a definition (dataset-tables.ts): at once when they are, otherwise read through the
+ * transport the definition came from and adopted. Every caller and copy waiting for one dataset shares one read, which
+ * no caller's cancellation stops: a newer selection may want the same tables. A failed read is tried again next time. */
+export async function loadPreparedDataset(definition: ObjectRuntimeDefinition, datasetId: string | null): Promise<void> {
+  if (datasetId === null || !definition.deferredDatasets?.includes(datasetId)) return;
+  const source = datasetTransports.get(definition.assets);
+  if (!source) throw new Error(`${definition.id}: dataset ${datasetId} has no transport for its tables.`);
   let load = source.loads.get(datasetId);
   if (!load) {
     const reference = preparedDatasetReference(source.reference, datasetId);
-    load = source.transport.read(reference).then(bytes => {
-      let tables: unknown;
-      try { tables = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)); }
+    const read = load = source.transport.read(reference).then(bytes => {
+      try { return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)) as unknown; }
       catch (cause) { throw new TypeError(`${definition.id}: ${reference} is not valid UTF-8 JSON.`, { cause }); }
-      // A concurrent read of the same tables may have adopted them first.
-      if (definition.deferredDatasets?.includes(datasetId)) adoptPreparedDatasetTables(definition, tables, datasetId);
     });
-    source.loads.set(datasetId, load);
-    load.catch(() => { if (source.loads.get(datasetId) === load) source.loads.delete(datasetId); });
+    source.loads.set(datasetId, read);
+    read.catch(() => { if (source.loads.get(datasetId) === read) source.loads.delete(datasetId); });
   }
-  return load;
+  const tables = await load;
+  // Another caller waiting on this definition may have adopted them first.
+  if (definition.deferredDatasets?.includes(datasetId)) adoptPreparedDatasetTables(definition, tables, datasetId);
 }

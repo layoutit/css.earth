@@ -184,8 +184,12 @@ export function adoptPreparedDatasetTables(definition: ObjectRuntimeDefinition, 
     const tiles = level.tiles || own.tiles ? { tiles: { ...level.tiles, ...own.tiles } } : {};
     return { ...level, resources: { ...level.resources, ...own.resources }, ...tiles };
   }) } : undefined;
+  // A copy of this definition shares its asset table (world-context-runtime.ts) and may have adopted the entries first.
+  const declared = new Set(definition.assets.entries.map(entry => entry.key));
+  const present = tables.entries.filter(entry => declared.has(entry.key)).length;
+  if (present && present !== tables.entries.length) fail(`dataset ${datasetId} tables share only some entries with ${definition.id}'s asset table`);
   const merged: ObjectRuntimeDefinition = { ...definition, variants,
-    assets: { ...definition.assets, entries: [...definition.assets.entries, ...tables.entries] },
+    assets: { ...definition.assets, entries: present ? definition.assets.entries : [...definition.assets.entries, ...tables.entries] },
     ...(textureLevels ? { textureLevels } : {}),
     deferredDatasets: definition.deferredDatasets!.filter(id => id !== datasetId) };
   try { requireSplitTables(merged); }

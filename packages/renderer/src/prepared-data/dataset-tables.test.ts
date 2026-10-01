@@ -75,11 +75,18 @@ test('a definition reads each deferred dataset once through the transport it cam
     return encode(table);
   });
   const definition = await loadPreparedCssObject(descriptor, { read });
+  // A mount adapts a copy of the definition (world-context-runtime.ts); preflight keeps the original.
+  const mounted = { ...definition, camera: { ...definition.camera } };
   const datasetId = tables[0]!.datasetId;
   await assert.rejects(loadPreparedDataset(definition, datasetId), /offline/);
-  await Promise.all([loadPreparedDataset(definition, datasetId), loadPreparedDataset(definition, datasetId)]);
+  await Promise.all([loadPreparedDataset(definition, datasetId), loadPreparedDataset(definition, datasetId), loadPreparedDataset(mounted, datasetId)]);
   assert.deepEqual(read.mock.calls.map(call => call.arguments[0]), [descriptor.prepared!.url, ...Array(2).fill(`prepared/datasets/${datasetId}.json`)]);
-  assert.ok(!definition.deferredDatasets?.includes(datasetId));
+  for (const copy of [definition, mounted]) {
+    assert.ok(!copy.deferredDatasets?.includes(datasetId));
+    assert.doesNotThrow(() => selectedPreparedVariant(copy, initialObjectSelection(copy.controls, datasetId)));
+  }
+  assert.equal(mounted.assets, definition.assets);
+  assert.equal(new Set(definition.assets.entries.map(entry => entry.key)).size, definition.assets.entries.length, 'each entry is adopted once');
   await loadPreparedDataset(definition, datasetId);
   await loadPreparedDataset(definition, definition.controls.datasets!.defaultDataset);
   assert.equal(read.mock.callCount(), 3, 'an adopted or default dataset reads nothing');

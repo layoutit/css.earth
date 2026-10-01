@@ -6,7 +6,7 @@ import { deferredDatasetIds, parsePreparedObjectRuntime, requireAssets, requireC
 import { isRecord } from '@cssearth/core';
 import { resolveSceneAddressesDeep } from './asset-origin.mts';
 
-interface PreparedTransports { readonly descriptor: ObjectDescriptor; readonly object: Buffer; readonly datasets: ReadonlyMap<string, Buffer> }
+interface PreparedTransports { readonly descriptor: ObjectDescriptor; readonly object: Buffer<ArrayBuffer>; readonly datasets: ReadonlyMap<string, Buffer<ArrayBuffer>> }
 // The dataset routes read one body's transports in turn: its split is kept for the next request, not rebuilt per file.
 const recent = new Map<string, Promise<PreparedTransports>>(), RECENT = 4;
 
