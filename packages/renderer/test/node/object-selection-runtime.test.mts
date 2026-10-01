@@ -121,14 +121,14 @@ test('initial commit remains successful when its publication immediately request
   const initialCommit = h.commits[0], finalCommit = h.commits.at(-1); assert.ok(initialCommit); assert.ok(finalCommit);
   // The initial 100 px view needs the small bank; the new 1000 px view needs the 4096 level.
   assert.equal(initialCommit.plan.textureLevel, 0);
-  assert.equal(finalCommit.plan.textureLevel, 3);
+  assert.equal(finalCommit.plan.textureLevel, 2);
   assert.deepEqual(h.fatal, []);
 });
 test('a close startup decodes its destination level without a coarse pass or input gate', async t => {
   const h = harness({ initialDiameter: 1000 }); t.after(h.restore); await h.ready();
-  assert.equal(h.commits[0].plan.textureLevel, 3);
-  assert(h.commits.every(commit => commit.plan.textureLevel === 3));
-  assert(!h.jobs.some(job => /-level-512\.webp/.test(job.url)), 'startup never requests the forced coarse bank');
+  assert.equal(h.commits[0].plan.textureLevel, 2);
+  assert(h.commits.every(commit => commit.plan.textureLevel === 2));
+  assert(!h.jobs.some(job => /-sheet-1024\.webp/.test(job.url)), 'startup never requests the coarse sheet');
   h.view(0, 0, 100); await h.resolveJobs();
   assert.equal(h.coordinator.state().plan?.textureLevel, 0, 'a distant view still selects its sufficient small level');
 });
