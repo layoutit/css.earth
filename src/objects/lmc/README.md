@@ -36,6 +36,10 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 - **App inspection.** Captures from the running application cover the Earth view, an oblique view, both 90° side views, all three dataset switches and stars on and off. The side views show line-of-sight extent rather than a flat sheet.
 - **Replay.** With the laboratory caches moved aside, all 726 regenerated slice textures are byte-identical to the promotion output. The [object descriptor](object.json) names the result and the [prepared inventory](inventory.json) pins it.
 
+![The LMC page with HV 2827, HV 877 and HV 900 ringed and named](evidence/2026-10-01/featured-cepheids.jpg)
+
+A browser capture of this page: the 35 packaged stars of the Cloud draw as dots, and the three largest by measured radius ([Groenewegen 2013](https://arxiv.org/abs/1212.5478)), HV 2827, HV 877 and HV 900, are featured: ringed, named and opened by a click. The rest are plain dots, reachable through search. A Cloud star's dot is gone once the camera is as far from it as the Sun is, so none shows from inside the Milky Way. The SMC features HV 837 and HV 822 the same way.
+
 ## Known problems
 
 - **VISTA and AllWISE are brighter than their own images:** +17% and +264% after fitting. Every dataset shares the one opacity fitted to Horálek, so a tone curve can only dim or recolour inside it. AllWISE's own composite spans about 19 grey levels inside its footprint.

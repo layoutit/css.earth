@@ -13,7 +13,7 @@ import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import { createMarkerDeclutter } from './marker-declutter.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, markerScale, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, inGalaxyField, markerScale, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
@@ -104,7 +104,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   const entryOf = (body: (typeof points)[number]) => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
-    return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null, scale: markerScale(Math.hypot(...body.positionM.map((value, axis) => value - plan.focus.positionM[axis]!))),
+    // A star placed by its own record, not one on an orbit: only such a star can belong to another galaxy's field.
+    const placedStar = orbit === null && 'classification' in body && body.classification === 'star';
+    const distanceFromSunM = Math.hypot(...body.positionM.map((value, axis) => value - plan.focus.positionM[axis]!));
+    return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null, scale: markerScale(distanceFromSunM, placedStar ? plan.volume : undefined),
+      galaxyField: !placedStar || inGalaxyField(distanceFromSunM, plan.volume),
       closedOrbit: orbit?.fullTrail === true, drawnRadiusM: body.radiusM * ('billboard' in body && body.billboard ? Math.max(1, billboardImageScale(body.billboard, body.radiusM)) : 1),
       orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
@@ -343,11 +347,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
         // so without this every star of the Milky Way stayed a dot from intergalactic distances. A body beyond it uses the cluster scale.
         const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
-        // The focus, a featured star, a star beyond the Local Group and a black hole keep their dots; planets fade with their system.
+        // The focus, a featured star, a star outside the Milky Way and a black hole keep their dots; planets fade with their system.
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
-          entry.scale === LOCAL_GROUP_SCALE && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
-        // A retired galaxy level takes its own stars with it; a body beyond the Local Group belongs to the cluster scale.
-        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.scale === LOCAL_GROUP_SCALE ? 1 : galaxyHost ? galaxyHandoff : 0;
+          entry.galaxyField && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
+        // A retired galaxy level takes its own stars with it; a star of another galaxy (a Magellanic Cloud's, or one beyond the
+        // Local Group at the cluster scale) stays for that galaxy's view.
+        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField ? 1 : galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));

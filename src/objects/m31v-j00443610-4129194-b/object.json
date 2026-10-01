@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m31v-j00443610-4129194-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M31V J00443610+4129194 B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3895920
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/m31v-j00443610-4129194-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M31V J00443610+4129194 B",
+      "classification": "star",
+      "color": "#a2bbff",
+      "distanceAu": 149335719353.8,
+      "description": "The secondary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 2.048644 days.",
+      "systemName": "M31V J00443610+4129194 system",
+      "order": 5139,
+      "context": {
+        "order": 5139
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.6418902251645172e+22,
+        3.2362763854025285e+21,
+        1.479984526486083e+22
+      ],
+      "presentationToReference": [
+        0.6237239198555589,
+        0.4341787232231208,
+        -0.6499671592475709,
+        0.47321208764238226,
+        -0.8715832670980818,
+        -0.12811295259954109,
+        0.6221244183514699,
+        0.22766520334687657,
+        0.7490859518612472
+      ],
+      "orbitUpReference": [
+        -0.4341787232231208,
+        0.8715832670980818,
+        -0.22766520334687657
+      ],
+      "metersPerUnit": 12567483.870967742,
+      "bodyRadiusM": 3895920000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

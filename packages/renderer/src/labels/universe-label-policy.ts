@@ -13,9 +13,21 @@ export const LOCAL_GROUP_SCALE = Object.freeze({ returnDistanceM: 240e3 * 3.0856
  * the camera, gone past 10 Mpc (UI thresholds, not physical ones). It is seen at the scale of its galaxy's cluster, as a Milky
  * Way star is at the Local Group's: a camera framing the Virgo Cluster is a few Mpc from its galaxies, the Milky Way 15 Mpc. */
 export const CLUSTER_SCALE = Object.freeze({ returnDistanceM: 8e6 * 3.085677581491367e16, enterDistanceM: 10e6 * 3.085677581491367e16 });
-/** The band a body's dot and name fade over, by its distance from the Sun: the Local Group's inside it, the cluster scale beyond. */
-export function markerScale(distanceFromSunM: number) {
-  return distanceFromSunM > LOCAL_GROUP_SCALE.enterDistanceM ? CLUSTER_SCALE : LOCAL_GROUP_SCALE;
+/** Whether a body is one of the Milky Way's field: nearer the Sun than the middle of the galaxy volume's fade, the reach the
+ * Milky Way overview gives its own zoom step (`centreWithin`, about 19 kpc: a UI threshold, not the galaxy's edge). A star of
+ * the Magellanic Clouds is not: it does not retire with the Milky Way's stars, so its own galaxy's page shows it. */
+export function inGalaxyField(distanceFromSunM: number, volume: { readonly fadeStartDistanceM: number; readonly fullDistanceM: number }) {
+  return distanceFromSunM < Math.sqrt(volume.fadeStartDistanceM * volume.fullDistanceM);
+}
+
+/** The band a body's dot and name fade over, by its distance from the Sun: the Local Group's inside it, the cluster scale
+ * beyond. A placed star passes the galaxy `volume`: one outside the Milky Way's field but inside the Local Group (a Magellanic
+ * Cloud's) is seen from its own galaxy, so its dot and name are gone once the camera is as far from it as the Sun is (about
+ * 50 kpc for the Large Cloud): it shows on its galaxy's page and not from inside the Milky Way. The 0.8 return ratio is the
+ * other bands'. UI thresholds, not physical ones. */
+export function markerScale(distanceFromSunM: number, volume?: { readonly fadeStartDistanceM: number; readonly fullDistanceM: number }) {
+  if (distanceFromSunM > LOCAL_GROUP_SCALE.enterDistanceM) return CLUSTER_SCALE;
+  return !volume || inGalaxyField(distanceFromSunM, volume) ? LOCAL_GROUP_SCALE : { returnDistanceM: distanceFromSunM * .8, enterDistanceM: distanceFromSunM };
 }
 
 /** One handoff between the planet hosts and the galaxy's published tracers, by the camera's distance from the selected

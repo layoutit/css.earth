@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/reeve-2016-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/MNRAS/456/1294/summary1",
+        "-out.max": "500",
+        "FileName": "OG*",
+        "Filter": "Bessell-V",
+        "-out": "FileName,quad2.2,quad2.3"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^FileName\\tquad2\\.2\\tquad2\\.3",
+          "flags": "m",
+          "replacement": "logg\tTeff\ta\tb\n[cgs]\tK\t\t"
+        },
+        {
+          "pattern": "^O[A-Z](\\d{5})g(\\d)(\\d{2})v\\d+\\t",
+          "flags": "gm",
+          "replacement": "$2.$3\t$1\t"
+        }
+      ]
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-source.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT s.source_id, s.ref_epoch, s.ra, s.dec, s.parallax, s.parallax_error, s.pmra, s.pmdec, s.radial_velocity, s.radial_velocity_error, s.ruwe, s.phot_g_mean_mag, s.bp_rp, s.has_xp_sampled, a.mass_flame, a.mass_flame_lower, a.mass_flame_upper, a.radius_flame, a.radius_flame_lower, a.radius_flame_upper FROM gaiadr3.gaia_source AS s LEFT JOIN gaiadr3.astrophysical_parameters AS a ON a.source_id = s.source_id WHERE s.source_id = 369281910881860352"
+      },
+      "requiredPrefix": "source_id,"
+    }
+  ]
+}
