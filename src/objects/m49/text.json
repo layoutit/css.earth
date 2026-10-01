@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m49",
+  "card": {
+    "text": "A galaxy 16.7 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-blakeslee2009apj-694-556b",
+        "url": "https://arxiv.org/abs/0901.1138",
+        "label": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc.",
+        "checked": "2026-10-01",
+        "locator": "distance: 16.7 Mpc (−600,000 / +600,000 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 16.7 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-blakeslee2009apj-694-556b",
+        "url": "https://arxiv.org/abs/0901.1138",
+        "label": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc.",
+        "checked": "2026-10-01",
+        "locator": "distance: 16.7 Mpc (−600,000 / +600,000 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "legacy-optical": {
+      "title": "M49 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "desi-legacy-surveys-dr10-color-hips",
+          "url": "https://www.legacysurvey.org/dr10/",
+          "label": "DESI Legacy Surveys color (g, r, i, z); DESI Legacy Imaging Surveys DR10; colour HiPS by CDS (CNRS/Unistra)",
+          "checked": "2026-10-01",
+          "locator": "DESI Legacy Surveys color (g, r, i, z)"
+        }
+      ]
+    }
+  }
+}

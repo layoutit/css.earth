@@ -7,6 +7,10 @@
     {
       "type": "ads",
       "value": "2009ApJS..182..216K"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/182/216"
     }
   ],
   "links": [
@@ -21,6 +25,11 @@
       "url": "https://arxiv.org/abs/0810.1681",
       "checkedOn": "2026-09-30",
       "locator": "Table 3, NGC 4486 = M87 composite V-band surface photometry: radius along the major axis, surface brightness, ellipticity and position angle out to 2443.7 arcsec (the arXiv source's m87.tex). Sect. 7: a Sérsic fit to the whole profile gives n = 11.8 (+1.8, -1.2)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/182/216",
+      "checkedOn": "2026-10-01",
+      "locator": "Table 1, row NGC 4472 = VCC 1226 (arXiv:0810.1681, page 6): D = 17.14 Mpc, major-axis Sérsic fit n = 5.99 (+0.31, -0.29), mu_e = 23.37 V mag per square arcsec, r_e = 269.29 (+23.6, -18.6) arcsec. Table 3 (CDS J/ApJS/182/216 table3.dat), 84 rows NGC4472: the profile ends at r = 1051.962 arcsec (mu_V = 26.771); the rows at 262.623 and 286.748 arcsec give ellipticity 0.203 and 0.209, position angle 154.00 and 154.57 degrees."
     }
   ],
   "creators": [
@@ -36,7 +45,7 @@
     {
       "kind": "credit",
       "text": "Cite Kormendy et al. (2009), ApJS 182, 216.",
-      "scope": "M87 surface photometry",
+      "scope": "M87 and M49 surface photometry",
       "evidence": "https://arxiv.org/abs/0810.1681"
     }
   ]

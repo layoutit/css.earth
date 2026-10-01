@@ -1,0 +1,34 @@
+{
+  "id": "publication-skrutskie2006aj-131-1163s",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) row 2MASX J12294679+0800014.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Skrutskie2006AJ....131.1163S"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "locator": "/sources/9/references/3"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/9/references/3"
+    }
+  ]
+}

@@ -56,7 +56,7 @@
     },
     {
       "path": "src/objects/helix-volume/prepared/presentation.json",
-      "bytes": 3733
+      "bytes": 4746
     },
     {
       "path": "public/scenes/helix-volume/datasets/eso-vista.webp",
@@ -72,7 +72,7 @@
     },
     {
       "path": "src/objects/lmc-volume/prepared/presentation.json",
-      "bytes": 3840
+      "bytes": 4853
     },
     {
       "path": "public/scenes/lmc-volume/datasets/horalek-widefield.webp",
@@ -88,7 +88,7 @@
     },
     {
       "path": "src/objects/m1-volume/prepared/presentation.json",
-      "bytes": 8333
+      "bytes": 10339
     },
     {
       "path": "public/scenes/m1-volume/datasets/hubble-optical.webp",
@@ -116,7 +116,7 @@
     },
     {
       "path": "src/objects/m2-9-volume/prepared/presentation.json",
-      "bytes": 1512
+      "bytes": 1863
     },
     {
       "path": "public/scenes/m2-9-volume/datasets/hst-optical.webp",
@@ -124,7 +124,7 @@
     },
     {
       "path": "src/objects/m31-layers/prepared/presentation.json",
-      "bytes": 1376
+      "bytes": 1781
     },
     {
       "path": "public/scenes/m31-layers/datasets/optical.webp",
@@ -140,7 +140,7 @@
     },
     {
       "path": "src/objects/m42-volume/prepared/presentation.json",
-      "bytes": 2587
+      "bytes": 3269
     },
     {
       "path": "public/scenes/m42-volume/datasets/eso-optical.webp",
@@ -152,7 +152,7 @@
     },
     {
       "path": "src/objects/m45-volume/prepared/presentation.json",
-      "bytes": 6556
+      "bytes": 8231
     },
     {
       "path": "public/scenes/m45-volume/datasets/optical-composite.webp",
@@ -175,8 +175,16 @@
       "bytes": 20398
     },
     {
+      "path": "src/objects/m49-volume/prepared/presentation.json",
+      "bytes": 1409
+    },
+    {
+      "path": "public/scenes/m49-volume/datasets/legacy-optical.webp",
+      "bytes": 18470
+    },
+    {
       "path": "src/objects/m8-volume/prepared/presentation.json",
-      "bytes": 4299
+      "bytes": 5312
     },
     {
       "path": "public/scenes/m8-volume/datasets/eso-optical.webp",
@@ -192,7 +200,7 @@
     },
     {
       "path": "src/objects/m81-layers/prepared/presentation.json",
-      "bytes": 1165
+      "bytes": 1570
     },
     {
       "path": "public/scenes/m81-layers/datasets/optical.webp",
@@ -200,7 +208,7 @@
     },
     {
       "path": "src/objects/m83-layers/prepared/presentation.json",
-      "bytes": 1042
+      "bytes": 1447
     },
     {
       "path": "public/scenes/m83-layers/datasets/optical.webp",
@@ -208,7 +216,7 @@
     },
     {
       "path": "src/objects/m87-volume/prepared/presentation.json",
-      "bytes": 1013
+      "bytes": 1364
     },
     {
       "path": "public/scenes/m87-volume/datasets/eso-optical.webp",
@@ -232,7 +240,7 @@
     },
     {
       "path": "src/objects/omega-centauri-volume/prepared/presentation.json",
-      "bytes": 3228
+      "bytes": 4018
     },
     {
       "path": "public/scenes/omega-centauri-volume/datasets/eso1119b.webp",
@@ -252,7 +260,7 @@
     },
     {
       "path": "src/objects/smc-volume/prepared/presentation.json",
-      "bytes": 6026
+      "bytes": 7701
     },
     {
       "path": "public/scenes/smc-volume/datasets/smc-horalek-wide.webp",
@@ -300,7 +308,7 @@
     },
     {
       "path": "src/objects/local-group/prepared/catalogue.json",
-      "bytes": 703991
+      "bytes": 705298
     }
   ],
   "images": {
@@ -583,6 +591,15 @@
       "credit": "NASA/JPL-Caltech/UCLA",
       "sourceUrl": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
     },
+    "m49-volume/legacy-optical": {
+      "url2x": "/navigation/focus-m49-volume-legacy-optical@2x.webp",
+      "inputs": [
+        "src/objects/m49-volume/prepared/presentation.json",
+        "public/scenes/m49-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
     "m8-volume/eso-optical": {
       "url2x": "/navigation/focus-m8-volume-eso-optical@2x.webp",
       "inputs": [
@@ -761,6 +778,7 @@
     "m33-layers": "m33-layers/optical",
     "m42-volume": "m42-volume/eso-optical",
     "m45-volume": "m45-volume/optical-composite",
+    "m49-volume": "m49-volume/legacy-optical",
     "m8-volume": "m8-volume/eso-optical",
     "m81-layers": "m81-layers/optical",
     "m83-layers": "m83-layers/optical",

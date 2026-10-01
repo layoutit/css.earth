@@ -235,8 +235,11 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     // Install complete generated files only. Authored source inputs stay untouched.
     await mkdir(resolve(directory,'prepared'),{recursive:true});
     for (const entry of await readdir(staging)) { await rm(resolve(directory,'prepared',entry),{recursive:true,force:true}); await rename(resolve(staging,entry),resolve(directory,'prepared',entry)); }
+    // The descriptor names the object that hosts the bank (`properties.host`); a rebake keeps it.
+    const host = await read(directory,'object.json').then(value => record(record(value).properties).host, (error: unknown) => {
+      if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined; throw error; });
     await put(resolve(directory,'object.json'),json({schema:'cssearth-object@2',id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
-      preparation:{source:'source/delivery.json'}},prepared:{format:'cssearth-volume-datasets@1',url:'prepared/datasets.json'}}));
+      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)})},prepared:{format:'cssearth-volume-datasets@1',url:'prepared/datasets.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }
