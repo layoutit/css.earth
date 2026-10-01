@@ -76,8 +76,11 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   const nearSquares = Float64Array.from(fades, fade => fade.fadeOutStartDistanceM ** 2 * (1 - MARGIN));
   const farSquares = Float64Array.from(fades, fade => fade.hiddenDistanceM ** 2 * (1 + MARGIN));
   return Object.freeze({
-    /** The largest system opacity, after measuring every system from this camera position. */
-    update(positionM: readonly number[]) {
+    /** The largest system opacity, after measuring every system from this camera position. Once the view has left the
+     * systems' scale for a larger one (`retired`: the application's overview scope is past its system), every system is
+     * gone and its star stands for it. */
+    update(positionM: readonly number[], retired = false) {
+      if (retired) { values.fill(0); return 0; }
       let maximum = 0;
       for (let index = 0; index < roots.length; index++) {
         const star = positions[index]!;
