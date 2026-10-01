@@ -19,7 +19,7 @@ const ORBIT_LOD_PIXELS = 0.1;
 // camera sample. This uses committed visibility, never worker-local history.
 const ANNOTATION_ENTRY_MARGIN = .05;
 export { orbitOutsideMarker } from './orbit-presentation.js';
-import { orbitOutsideMarker, orbitPresentation, quantizeAlpha, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS } from './orbit-presentation.js';
+import { orbitBounds, orbitOutsideMarker, orbitPresentation, quantizeAlpha, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS } from './orbit-presentation.js';
 
 /** UI measurements and the last committed annotation state, without DOM handles. */
 export interface WorldBodyPresentation {
@@ -99,8 +99,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
-  const systemFade = createSystemFade(plan);
-  const prepared = points.map(body => {
+  let systemFade = createSystemFade(plan);
+  const entryOf = (body: (typeof points)[number]) => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
@@ -112,9 +112,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // assigned over them instead of spreading 470 new objects every frame.
       state: null as unknown, projected: null as ProjectedBody<unknown> | null,
       output: null as PlannedBodyOutput | null, bounds: { left: 0, top: 0, right: 0, bottom: 0 } };
-  });
+  };
+  const prepared = points.map(entryOf);
   // Only the selected path fades with depth; one shared scratch pool serves it.
-  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0))));
+  const projectionCapacity = () => Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0)));
+  let selectedOrbitProjection = createRetainedRingProjection(projectionCapacity());
   const planFrame = (view: WorldContextView) => {
     const labelMeasurements: number[] = [];
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
@@ -568,6 +570,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     return { emphasizedId, opacity, width, height, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
   };
   return Object.assign(planFrame, {
+    /** Another system's bodies, read after the plan was made (`extendWorldContext`): each takes the next index, so every
+     * body already planned keeps its own. `next` is the extended plan, for the systems' fades. */
+    extend(next: PreparedWorldContext | PreparedWorldContextGeometry) {
+      const added = next.bodies.filter(body => !byId.has(body.id));
+      for (const body of added) { points.push(body); byId.set(body.id, body); indexById.set(body.id, points.length - 1); }
+      for (const body of added) prepared.push(entryOf(body));
+      systemFade = createSystemFade(next);
+      selectedOrbitProjection = createRetainedRingProjection(projectionCapacity());
+    },
     /** Give bodies the paths their centre's bank decoded; each keeps its retained projection and per-frame state. */
     attachOrbits(orbits: ReadonlyMap<string, PreparedContextOrbitGeometry>) {
       for (const entry of prepared) {
@@ -585,16 +596,3 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   });
 }
 export type PlannedWorldContext = ReturnType<ReturnType<typeof createWorldContextPlanner>>;
-
-/** The picking bounds of the final clipped chords, including the marker cutout,
- * written into the body's retained bounds object; the paint owner formats the strokes. */
-function orbitBounds(segments: readonly OrbitSegment[], into: NonNullable<PlannedBodyOutput['orbitBounds']>) {
-  if (segments.length === 0) return null;
-  let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
-  for (const [x0, y0, x1, y1] of segments) {
-    left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
-    top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
-  }
-  into.left = left; into.top = top; into.right = right; into.bottom = bottom;
-  return into;
-}

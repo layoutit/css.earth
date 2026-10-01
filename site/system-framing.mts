@@ -15,33 +15,13 @@ const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import datasetVolumes from './prepared-dataset-volumes.json' with { type: 'json' };
 import localGroupGalaxies from './prepared-local-group-galaxies.json' with { type: 'json' };
-import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
+import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
+import { systemFramingRadii } from './system-framing-radii.mts';
+export { systemFramingRadii } from './system-framing-radii.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { readApplicationSystemView } from './world-system-views.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
-
-/** Camera framing consumes the prepared orbit bounds, never orbit vertices. */
-export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>) {
-  const parents = new Map([...(plan.focus?.systemView ? [plan.focus] : []), ...plan.bodies].map(body => [body.id, body]));
-  const largestMoons = new Map<string, number>();
-  for (const moon of plan.bodies) {
-    const parentId = moon.orbit?.centerBodyId;
-    if (!parentId || !parents.has(parentId) || !moon.orbit?.bounds) continue;
-    largestMoons.set(parentId, Math.max(largestMoons.get(parentId) ?? 0, moon.radiusM));
-  }
-  const radii = new Map<string, number>();
-  for (const moon of plan.bodies) {
-    const parent = parents.get(moon.orbit?.centerBodyId ?? ""), bounds = moon.orbit?.bounds;
-    if (!parent || !bounds) continue;
-    if (parent.systemView ? !parent.systemView.memberIds.includes(moon.id)
-      : moon.radiusM < (largestMoons.get(parent.id) ?? 0) * SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE) continue;
-    const radius = Math.hypot(...bounds.centerM.map((value, axis) => value - parent.positionM[axis]))
-      + bounds.radiusM + moon.radiusM;
-    radii.set(parent.id, Math.max(radii.get(parent.id) ?? parent.radiusM, radius));
-  }
-  return radii;
-}
 
 /** Each bound pair's centre of mass and the separation of its stars: what the camera aims at once it is far enough out to
  * see both. The system keeps its star's framing, which is the planet orbits around it. */
@@ -54,7 +34,10 @@ export function systemCenters(plan: Pick<PreparedWorldContext, 'bodies' | 'focus
   }));
 }
 
-export const SYSTEM_FRAMING_RADII = systemFramingRadii(context);
+/** Each system host's framing radius. A system whose file the page has not read keeps the radius preparation measured
+ * over the whole world (site/build/prepare/prepare-world-presentation.mts); the rest are measured here from the same
+ * prepared bounds, so a page has every system's radius before it reads that system. */
+export const SYSTEM_FRAMING_RADII: ReadonlyMap<string, number> = new Map([...PREPARED_WORLD_PRESENTATION.systemFramingRadii, ...systemFramingRadii(context)]);
 export const SYSTEM_CENTERS = systemCenters(context);
 /** Systems of other stars: placed stars, which have no orbit of their own, that planets orbit. They are reached from light
  * years away, where a turn out of edge-on reads as an approach; the Sun's and a planet's moons keep the departure angle. */

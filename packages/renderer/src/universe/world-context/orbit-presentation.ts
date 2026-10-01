@@ -42,3 +42,16 @@ export function orbitOutsideMarker(segments: readonly OrbitSegment[], x: number,
   }
   return result;
 }
+
+/** The picking bounds of the final clipped chords, including the marker cutout,
+ * written into the body's retained bounds object; the paint owner formats the strokes. */
+export function orbitBounds<Bounds extends { left: number; top: number; right: number; bottom: number }>(segments: readonly OrbitSegment[], into: Bounds) {
+  if (segments.length === 0) return null;
+  let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
+  for (const [x0, y0, x1, y1] of segments) {
+    left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
+    top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
+  }
+  into.left = left; into.top = top; into.right = right; into.bottom = bottom;
+  return into;
+}
