@@ -100,6 +100,16 @@ test('complete context frames cross a structured-clone boundary without mutating
   assert.deepEqual(structuredClone(calculate(input)), first);
 });
 
+test('past the galaxy scope the placed stars retire too, and the anchor alone keeps its marker', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  input.anchorOnly = true; input.systemRetired = true;
+  const locatorOpacity = () => calculate(input).projectedBodies.filter(body => body.index !== 0).map(body => body.markerOpacity);
+  assert.ok(locatorOpacity().some(opacity => opacity > 0), 'past the system scope the placed stars stay as galactic locators');
+  input.galaxyRetired = true;
+  assert.deepEqual(locatorOpacity().filter(opacity => opacity > 0), [], 'past the galaxy scope they retire');
+  assert.ok(calculate(input).projectedBodies[0]!.markerOpacity > 0, 'the anchor stands for them');
+});
+
 test('retired and incompatible frame requests respect prepared identity and measured optics', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.anchorOnly = true;

@@ -1506,7 +1506,7 @@ test('selection transfers the detail handoff to the destination while retaining 
   layer.destroy();
 });
 
-test('past the system scope only the star is drawn, and its members return with the system scope', () => {
+test('past the system scope only the star is drawn and mounted, and its members return with the system scope', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -1520,8 +1520,12 @@ test('past the system scope only the star is drawn, and its members return with 
   // The application's overview scope moved past the system (the Milky Way's): the system retires, its star stays.
   layer.setSystemRetired(true); publish(); publish();
   assert.deepEqual(drawn(), ['sun']);
-  layer.setSystemRetired(false); publish();
+  // Retired, the members leave the page: their marker groups are not mounted hidden.
+  const attached = () => layer.inspect().filter(body => body.mover.parentNode).map(body => body.id);
+  assert.deepEqual(attached(), ['sun']);
+  layer.setSystemRetired(false); publish(); publish();
   assert.deepEqual(drawn(), inside);
+  assert.deepEqual(attached().filter(id => inside.includes(id)), inside);
   layer.destroy();
 });
 

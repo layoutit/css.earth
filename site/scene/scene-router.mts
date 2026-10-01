@@ -277,6 +277,7 @@ export function createSceneRouter({
       const { registry: { loadSystemView, systemViewLoaded }, activation } = ready;
       // The world and this system's view load once the body is ready, so its textures have the connection to themselves.
       if (!systemViewLoaded(objectId)) void loadSystemView(objectId).catch(report);
+      if (!await activation.frameInitialView(session) || !scenes.isCurrent(session)) return; // its camera before the world's first frame
       if (world.current) world.connect(session);
       else void world.ensure().then(() => {
         if (scenes.isCurrent(session)) { world.connect(session); publishSelection(); }
