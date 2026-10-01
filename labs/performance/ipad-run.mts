@@ -132,11 +132,14 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
   const route = requireSceneObject(journey.start).route;
   const startUrl = new URL(route, origin).href;
   // A dev server compiles a page on its first request: wait for that here, once, not on the iPad.
-  const response = await fetch(startUrl, { signal: AbortSignal.timeout(built || live ? 12_000 : 180_000) }).catch(async error => {
-    if (built || live) throw error;
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    return fetch(startUrl, { signal: AbortSignal.timeout(180_000) });
-  });
+  // A dev server just started may not listen yet: it is asked again each second for up to three minutes.
+  const deadline = Date.now() + 180_000;
+  const response = await (async () => {
+    for (;;) {
+      try { return await fetch(startUrl, { signal: AbortSignal.timeout(built || live ? 12_000 : 180_000) }); }
+      catch (error) { if (built || live || Date.now() > deadline) throw error; await new Promise(resolve => setTimeout(resolve, 1000)); }
+    }
+  })();
   await response.body?.cancel();
   if (!response.ok) throw new Error(`The target has no start route ${route} (${response.status}).`);
   const flightSource = live ? 'objectnavigate' : 'scene-router';
