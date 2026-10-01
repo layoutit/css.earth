@@ -1,8 +1,7 @@
 # Saturn sources
 
 Saturn combines a Hubble OPAL visible body map, Hubble spectral maps, a Cassini
-UVIS ring opacity profile, a schematic thermal view, and modeled atmosphere
-charts.
+UVIS ring opacity profile, and modeled atmosphere charts.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -68,16 +67,21 @@ and 140,612 km, 60,886 carry a measured normal optical depth, 4,518 are below
 the detection floor and count as empty, and 8,309 are flagged corrupted and
 are interpolated. The Encke and Keeler gaps, the Cassini division and the F
 ring come from the occultation. No qualified radial colour dataset exists, so
-the ring colour is uniform white under the solar tint. Boundaries and the
-D-ring ringlets at 67,580 km and 71,710 km are cross-checked against the PDS
+the ring colour is uniform white under the solar tint. Boundaries are
+cross-checked against the PDS
 [Saturn ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html).
+Nothing is drawn inside 66,900 km, where the profile starts.
 
-For readability, C-ring alpha is boosted and at DPR 2 each one-pixel ringlet
-and gap gets a two-CSS-pixel minimum footprint. Source radii are unchanged.
+For readability, 29 named narrow features (5 dark gaps and 24 bright hairlines)
+get a minimum width of 6 texels in the 4,096-pixel ring image, and the bright
+ones an opacity gain. Their radii and the rest of the profile are unchanged.
 
-Nothing is drawn on the rings beyond that profile. Until 2026-10-01 four spinning
-plates added 190 seeded dots, grouped into authored wake arcs and spokes; no
-source placed them, so they were removed (left before, right after).
+Nothing is drawn on the rings beyond that profile, and every dataset shows the
+same rings: no ring brightness is measured here in ultraviolet or at 889 nm.
+Until 2026-10-01 four spinning plates added 190 seeded dots, grouped into
+authored wake arcs and spokes; no source placed them, so they were removed
+(left before, right after). The same change removed ring images recoloured per
+dataset with hand-set band gains.
 
 ![Ring detail before and after removing the seeded dots](evidence/2026-10-01/ring-tracers-before-after.webp)
 
@@ -99,11 +103,14 @@ gives cloud-top periods, recorded on 16 latitude bands.
 ## Other views
 
 The ultraviolet and methane views use OPAL Cycle 32 F225W and FQ889N maps.
-Preparation keeps rotation A, fills the same unmeasured rows, applies a
-false-colour palette and transfers high-frequency detail from the visible map.
+Preparation keeps rotation A, fills the same unmeasured rows and applies a
+false-colour palette. No visible-light detail is added.
 The FQ889N identification follows the
 [WFC3 UVIS filter reference](https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-imaging-with-wfc3/6-5-uvis-spectral-elements).
-The thermal illustration is schematic.
+There is no thermal view: no measured global thermal raster of Saturn is
+qualified here, and the earlier schematic one was removed.
+
+![Ultraviolet and methane views before (left) and after (right)](evidence/2026-10-01/datasets-before-after.webp)
 
 The cross-section view is parked: its sources and preparation stay, but the page
 no longer offers it. It is a schematic model of the diffuse core of
@@ -152,9 +159,9 @@ component FITS rows in stored order than after a north/south flip.
 
 ## Known problems
 
-- Ultraviolet and methane views contain filled rows and added visible-light detail; they are not pure single-band observations.
-- Thermal colors and interior layers are illustrations. No measured global thermal raster is qualified here.
-- Ring opacity and narrow features are enhanced for readability; they do not establish optical depth or fully resolved ringlets.
+- Ultraviolet and methane views contain filled rows, and their rings are the visible-light opacity profile.
+- Interior layers are illustrations.
+- Narrow ring features are widened and brightened for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
 - The visible map's colour balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colours are kept, but a seasonal change in Saturn's overall colour since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 4 % of texels are compressed by a soft shoulder.
 - The map's blue channel is F395N (violet) data, displayed as sRGB blue with the F467M limb law. The navigation portrait and context image still crop the untied TIF.

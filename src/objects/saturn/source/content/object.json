@@ -170,7 +170,7 @@
           "id": "ultraviolet",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "notes": "Hubble OPAL F225W (225 nm), August 2025, shown in false color. Broad ultraviolet structure is measured; missing polar/ring-occluded rows are filled along longitude and fine detail comes from a bounded visible-light transfer. This composite is not pure ultraviolet imagery."
+        "notes": "Hubble OPAL F225W (225 nm), August 2025, shown in false color. Missing polar and ring-occluded rows are filled along longitude. The rings show the Cassini visible-light opacity profile; no ultraviolet ring measurement is used."
       },
       {
         "id": "methane",
@@ -212,48 +212,7 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "notes": "Hubble OPAL FQ889N (889 nm), August 2025, shown in false color. This methane-absorption band traces atmospheric structure, not a methane concentration map. Missing rows and fine visible-light detail are filled as described for ultraviolet."
-      },
-      {
-        "id": "thermal",
-        "label": "Thermal illustration",
-        "thumbnail": "/scenes/saturn/saturn-dataset-thermal.webp",
-        "surface": "/scenes/saturn/saturn-surface-thermal.webp",
-        "poles": "/scenes/saturn/saturn-poles-thermal.webp",
-        "falseColor": true,
-        "legend": {
-          "kind": "scale",
-          "title": "Illustrative intensity",
-          "meta": "Schematic",
-          "recipe": {
-            "palette": [
-              [
-                5,
-                4,
-                10
-              ],
-              [
-                121,
-                35,
-                21
-              ],
-              [
-                255,
-                190,
-                74
-              ]
-            ],
-            "labels": [
-              "Lower",
-              "Higher"
-            ]
-          }
-        },
-        "source": {
-          "id": "thermal",
-          "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/"
-        },
-        "notes": "Schematic illustration from visible-light morphology and authored patterns. Colors do not measure infrared brightness or temperature; this is not a Cassini observation."
+        "notes": "Hubble OPAL FQ889N (889 nm), August 2025, shown in false color. This methane-absorption band traces atmospheric structure, not a methane concentration map. Missing rows are filled and the rings shown as described for ultraviolet."
       },
       {
         "id": "visible-2018a",
@@ -494,22 +453,10 @@
   "galleries": [],
   "resources": [
     {
-      "label": "NASA",
-      "role": "imagery",
-      "description": "Thermal dataset & hexagon",
-      "href": "https://science.nasa.gov/saturn/"
-    },
-    {
       "label": "JPL",
       "role": "orbits",
       "description": "Moon orbits",
       "href": "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
-    },
-    {
-      "label": "OpenSpace",
-      "role": "scene",
-      "description": "Globe lighting parameters (adapted, MIT)",
-      "href": "https://github.com/OpenSpace/OpenSpace"
     },
     {
       "label": "Hubble OPAL",

@@ -22,8 +22,8 @@
     {
       "location": "public",
       "filename": "saturn-dataset-methane.webp",
-      "bytes": 628,
-      "sha256": "19732f43234baa306b8e1ab322d92120565f7cebfc5f963b2460db1991857729"
+      "bytes": 630,
+      "sha256": "6b7adf5d734a2fe72d10806fb3d66cb6efacaa6b98cf363621916a5e13dd0c16"
     },
     {
       "location": "public",
@@ -33,15 +33,9 @@
     },
     {
       "location": "public",
-      "filename": "saturn-dataset-thermal.webp",
-      "bytes": 338,
-      "sha256": "13e94fca0e655d116f00bb8b5fa8a2627db591b8a5023fdd43221c353ab5d670"
-    },
-    {
-      "location": "public",
       "filename": "saturn-dataset-ultraviolet.webp",
-      "bytes": 422,
-      "sha256": "051d9f0a23df2f38bb6913512f49b00be908e3ab9d8d4adaf722724736713ff3"
+      "bytes": 418,
+      "sha256": "ad97a7bf159fdba2a8957bd4fac472b8b5691981180342cf52ca0a5f27187912"
     },
     {
       "location": "public",
@@ -106,20 +100,14 @@
     {
       "location": "public",
       "filename": "saturn-interior-outer-poles-methane@2x.webp",
-      "bytes": 10034,
-      "sha256": "94c0215be2beb8aaec7af1307f876c18a71ee8bc6136aa51b52616fb9623ecd1"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-interior-outer-poles-thermal@2x.webp",
-      "bytes": 12060,
-      "sha256": "e0a9a25848acc9ae168cdc6db23d27176b8a172c77334912f503461e9f3d795f"
+      "bytes": 9012,
+      "sha256": "f924b5c8f0e996627434fa0942fb71586ff28a09c1f91ec15e6cbc043901a381"
     },
     {
       "location": "public",
       "filename": "saturn-interior-outer-poles-ultraviolet@2x.webp",
-      "bytes": 10150,
-      "sha256": "c1a04d696625b8215f14a8c476d66df5b8b8fa2e050112a0779865f3355b8305"
+      "bytes": 8518,
+      "sha256": "5697e1118539843ca4cf4fc18f5befac62547722c4651b64c90b5cd2c6cd2c71"
     },
     {
       "location": "public",
@@ -531,210 +519,6 @@
     },
     {
       "location": "public",
-      "filename": "saturn-orbit-material-thermal-no-shadows-shadowless.webp",
-      "bytes": 17510,
-      "sha256": "dfe281bebebf25694b659b3679333ec2a63bee2c0ec0f76065fdc95ee54f7ed1"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-no-shadows-shadowless.webp",
-      "bytes": 17874,
-      "sha256": "3fb48ebc4843dcea4f243d173f9fd47f68cca7cae0e6658ac8d03e8e39918044"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-00.webp",
-      "bytes": 491422,
-      "sha256": "c005a07ab1773586382bf41cd67efdcee10ccd7dca235688da519a2585a8376b"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-01.webp",
-      "bytes": 496588,
-      "sha256": "734d844ec8ae556575152ce9e4273423218e42060c2a41884bf57a0a30db1948"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-02.webp",
-      "bytes": 488184,
-      "sha256": "d4bbc674c516b8b655f0b96f5a5a65599c6e5a465382fc8c04166960626e9b55"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-03.webp",
-      "bytes": 491408,
-      "sha256": "b50caacfb42d507309a7b9642b2e69ffd7e7816bd3428cf07a9f0731122519f9"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-04.webp",
-      "bytes": 485686,
-      "sha256": "4e223aebba452e7e4084537bb14bea456f7b6b3214ab1a4ab03f2111a7129498"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-05.webp",
-      "bytes": 483994,
-      "sha256": "e68b453a17ac64e181fb39e4aa8bbfacd9c1f76047118eaa635dbb451722f911"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-06.webp",
-      "bytes": 467016,
-      "sha256": "9d23ca368f13ece97821e5f4ae0c369a057af0c5fffc672c7206a05508fdee5a"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-07.webp",
-      "bytes": 455102,
-      "sha256": "14e6cc71748db8ec4ca6944ddfc6e9018006e03d778f821a1152e9bac0ecb69b"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-08.webp",
-      "bytes": 445326,
-      "sha256": "41c9cfbde1cc63af5d4ec0eae739300659be3a000dc67c66762b356e3b59c2ff"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-09.webp",
-      "bytes": 435354,
-      "sha256": "1381a130275579ccfe3f672b289ee19b4507cab9ea0d239d353aa36d9202687d"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-10.webp",
-      "bytes": 426068,
-      "sha256": "d145e95f77f65a553ce9db57a840e3e67f221c8739d53d73e33eeae08e0f8c86"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-11.webp",
-      "bytes": 420612,
-      "sha256": "551812c04c2e56f1fb8c8e829a12a3b7d728b3f19455a3d8620bed350170b619"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-12.webp",
-      "bytes": 413678,
-      "sha256": "c3580d130cd47c78d30fa7149ea6d8fb46c659bf4cd8a670acc9c813895a6245"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-13.webp",
-      "bytes": 405394,
-      "sha256": "b2e3645eb58ef52789f1df135b47c638ab05697abdfc29b50f06b7c40d19c60f"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-14.webp",
-      "bytes": 396772,
-      "sha256": "b05457f461344c3750894fb67bba4537465a2f6568b8b687e8eec8970bab5b7e"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-ringless-stream-row-15.webp",
-      "bytes": 391804,
-      "sha256": "e506f5fbe9e03ce5176da31764e3b1bdbc2c2b3fa8d884fc480d36231868e969"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-00.webp",
-      "bytes": 743678,
-      "sha256": "ab503f3029dc3e9ba264109569d8d21793c48961305564722e5ee0b6bbccadea"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-01.webp",
-      "bytes": 698080,
-      "sha256": "89ea4d6d736ec9df6aaef74611fab4d97e31547dadd0ac886e5e6cb45c7bf747"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-02.webp",
-      "bytes": 665568,
-      "sha256": "478e5400b359d34e760ca4427f40f79c5027d8e675b275fed1abf82c7047b1ce"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-03.webp",
-      "bytes": 710678,
-      "sha256": "2cfbdd185d66c883fcf74ea8756a6547273e457442d787b632cf81b67067b7d2"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-04.webp",
-      "bytes": 719516,
-      "sha256": "68ace40523fd2d7e89f052c479d2b4b335e624b52351e1c4385da42152bb3291"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-05.webp",
-      "bytes": 673542,
-      "sha256": "45de46c0a121d0c798ed6f64b753b3f0757e7afc943223e6ee9bdec14e9581b1"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-06.webp",
-      "bytes": 576272,
-      "sha256": "79fb35bc3419ce7612761c4919e0f6e49aeeb9a52c9434a10603b40cce5fb9e7"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-07.webp",
-      "bytes": 536004,
-      "sha256": "203a129bc09f1bf1da9ddff774aa6432e48c3ce84e886578fec6f6d45e141bd8"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-08.webp",
-      "bytes": 522162,
-      "sha256": "acb1d40a5c9abcbdc2131e474b7801725e7e7011fa2164060ce0cecd97eb5c15"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-09.webp",
-      "bytes": 513246,
-      "sha256": "88e8d6c764bc22b2b2aaf1bb56fe4ee8102d6411579ab299c0bf65aa27066915"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-10.webp",
-      "bytes": 491480,
-      "sha256": "1ff89177acdd9af44fb8ddc421ca2d27bd497d12d93ea6c1dc75bb8387520238"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-11.webp",
-      "bytes": 466200,
-      "sha256": "be7ff88ab945bb6215076fe01b58ef1a6c3fb5a1cad11ce2a07e5f2865598620"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-12.webp",
-      "bytes": 433264,
-      "sha256": "588bd06166ceb45b98f105c25cb730789428f3c1bf9a89bc15c19e9c844665cf"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-13.webp",
-      "bytes": 409336,
-      "sha256": "da1f6583a92dcd9c4ef71a845a9a3c6658e253cc3ba9f477af82972b8ca6fc7f"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-14.webp",
-      "bytes": 393874,
-      "sha256": "a736a1de3c7f9a6d8a08e5fee94f155bcb428249478fc552bc97940321c96d3b"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-orbit-material-thermal-stream-row-15.webp",
-      "bytes": 390462,
-      "sha256": "b263fcd0b4775c24004d8a670d304a71cd27baa109be57b983bb34fb1ee7e5c4"
-    },
-    {
-      "location": "public",
       "filename": "saturn-orbit-material-ultraviolet-no-shadows-shadowless.webp",
       "bytes": 15126,
       "sha256": "e68da98d0b468078d2c7d7c3f44aa9ef666dd24b14b8e9b09d3d6fecc0b70c59"
@@ -946,20 +730,14 @@
     {
       "location": "public",
       "filename": "saturn-poles-methane.webp",
-      "bytes": 458318,
-      "sha256": "07f872248524bb2667df4b649fefed277347c1318789140bda61b170c662836f"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-poles-thermal.webp",
-      "bytes": 503334,
-      "sha256": "0778f87dfef8e12e5e028182fa37e6a4897dae9747e070e1bd5bbf176f926120"
+      "bytes": 345590,
+      "sha256": "5ff550f68ba7f27174d2ddb8fd8667dbb98947ea473ed6932a9530bd2cd44948"
     },
     {
       "location": "public",
       "filename": "saturn-poles-ultraviolet.webp",
-      "bytes": 537556,
-      "sha256": "f31f3229707c5adf6f3c58b60b3608d8f8eecf6de4ad0c2a48b3857b119f4244"
+      "bytes": 385240,
+      "sha256": "bcdebe4f66557741a7d2834faa96a4d941dd185cddf32da41e91f9d72e114076"
     },
     {
       "location": "public",
@@ -1023,24 +801,6 @@
     },
     {
       "location": "public",
-      "filename": "saturn-rings-methane@2x.webp",
-      "bytes": 5572988,
-      "sha256": "8be9804809fc7f46ef2e40cb2922b826799217adfdfe0664bc0f0e872ca9b80e"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-rings-thermal@2x.webp",
-      "bytes": 5792488,
-      "sha256": "3de30d0f3cec83ad29320ff91cc0a19d90d71c9747b90e5be27349659508efd9"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-rings-ultraviolet@2x.webp",
-      "bytes": 5599984,
-      "sha256": "6e0538ffdd12ddda4a3ac56b914a5632de35f46f1f65f903d0dc3582f4bb9917"
-    },
-    {
-      "location": "public",
       "filename": "saturn-rings@2x.webp",
       "bytes": 5326944,
       "sha256": "c35edf900189ba395d34e92da4be0860e8cf2c9503e0afb7458b7b0085b09dbf"
@@ -1054,20 +814,14 @@
     {
       "location": "public",
       "filename": "saturn-surface-methane@2x.webp",
-      "bytes": 6040838,
-      "sha256": "6d2abb764d7066d4bb26649e585f32459765e921711ef3d5ed4d91904312bb0a"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-surface-thermal@2x.webp",
-      "bytes": 4939452,
-      "sha256": "6cb4fc2761e3051c4c5807e51476dc5c9c51d047098512c7f883eb2cacf27a06"
+      "bytes": 3771904,
+      "sha256": "8296226053e7c3f91e468a538e3e8e6e6f8b3619a2a1fb158dbeb4331ab5d43c"
     },
     {
       "location": "public",
       "filename": "saturn-surface-ultraviolet@2x.webp",
-      "bytes": 8372684,
-      "sha256": "4895959700cf6580ac9e3b427d031276cd2096e2b5f14b494a79c944b219031e"
+      "bytes": 5924792,
+      "sha256": "918e9ad8a492ca382dd50950ff0d72dd47074dd11ef3f41cbc7fd0b9731c8b06"
     },
     {
       "location": "public",
@@ -1138,20 +892,20 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 4948,
-      "sha256": "405a2e4f45e2f51a99f7f8c7f348fee569b0fd297c565c3ce66f18b18284fed2"
+      "bytes": 4688,
+      "sha256": "811e5d9187f05a39ac451a92d449d56e6071968bda443f6cb1c3615d0c36dc30"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 6065,
-      "sha256": "54c36a86f5c017a6b202a2a768ba459fdeec44cc58425858fee515b0b1bc59c5"
+      "bytes": 4767,
+      "sha256": "b29fcb34227b57185043b15177a96abdcbb065147ed03246a46effc952fbc788"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 11933,
-      "sha256": "857fac81170820715ebc4391872b1bc431dd23f48c389d3b3b47634675e4c899"
+      "bytes": 10231,
+      "sha256": "1fc145a4211198dcbe691e9bd4f536348b63d1abe9e2cbff7d24f40c237a41c2"
     },
     {
       "location": "prepared",
@@ -1168,20 +922,20 @@
     {
       "location": "prepared",
       "filename": "material-datasets.json",
-      "bytes": 10956,
-      "sha256": "155e9f5ff64e602e7df69aa29b769836d0c2093e98ffa110077222eb70037d65"
+      "bytes": 8512,
+      "sha256": "546de44df6ffa6ca8493c61686bccd8e404f6abbb864ecd90b25130f8b3ec5ac"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1339,
-      "sha256": "db73c521d87ebec24a999781d8c021e7a92988f176da32653c74d90940336b82"
+      "bytes": 1247,
+      "sha256": "0ae1a17183d6f4f727dbb6e63b7d26e3448586503c9d797444a691e91286860d"
     },
     {
       "location": "prepared",
       "filename": "minimaps/methane.webp",
-      "bytes": 2758,
-      "sha256": "0ff0c2fad0fdd3c1f2adb5b36f7879cdb3add82676ba7450518f7074cac73b3d"
+      "bytes": 2662,
+      "sha256": "c97a1d9818fa625e863732b0fc5bda93c3a3353bded7cf348e845b4800e72a5e"
     },
     {
       "location": "prepared",
@@ -1191,15 +945,9 @@
     },
     {
       "location": "prepared",
-      "filename": "minimaps/thermal.webp",
-      "bytes": 2488,
-      "sha256": "e438ad314d66e757ed60ce5d3dd090122324ae6199337d029160207ed37cc7a1"
-    },
-    {
-      "location": "prepared",
       "filename": "minimaps/ultraviolet.webp",
-      "bytes": 2448,
-      "sha256": "3c812a6aaeb6df5a66c1c96e17cb3dd8c18b12d6532a45eff93024df0e7a775b"
+      "bytes": 2392,
+      "sha256": "4282621d4db371beb90065df8eb1c0bd1d5feab2609623dac6c4bb26faf12b63"
     },
     {
       "location": "prepared",
@@ -1252,14 +1000,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 666765,
-      "sha256": "aa855ca207509239834f16a9ea70ca4232d6ca618115401ab4a565161e0cabe1"
+      "bytes": 565720,
+      "sha256": "0b639573c238db76cdd77770dae7ad3d43cc28099149244d62664a9ecd259e2e"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1756159,
-      "sha256": "694e9dc1e7f3c1f4c02abdaf140c7b62ff98d8b16e8953e52088e09846c32864"
+      "bytes": 1468863,
+      "sha256": "73188fca6ca53f2a705bc48fe1f4e2bcd3977e13e53867521e365e8e4f428e56"
     },
     {
       "location": "prepared",
@@ -1276,14 +1024,14 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 4392,
-      "sha256": "0c78cb3e17fec71b1baaa83ac9a074e8e3a0dcc27104b348a76907469ebdb83e"
+      "bytes": 4164,
+      "sha256": "6ae1f47a0d13a348bc1fc17c1a1bbe70785617c051dbcd012a7fc5d52e56845f"
     },
     {
       "location": "prepared",
       "filename": "views.json",
-      "bytes": 8866,
-      "sha256": "4fc75ffed14dc116d45b92b25a083ab9635ae04c6d81370af419d36001e496b6"
+      "bytes": 8408,
+      "sha256": "b63848a6270c7207339d63b62eccbb708ef37af91977612a225ffb8a107d7454"
     },
     {
       "location": "prepared",

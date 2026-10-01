@@ -32,8 +32,7 @@ export const parseSaturnViews=shape({schema:text,presentation:text,runtimeGeomet
 const datasetBase={id:text,materialDataset:text,label:text,shortLabel:text,thumbnailUrl:text,qualification:text};
 const exteriorFields={...datasetBase,surfaceUrl:text,surface2xUrl:optional(text),polesUrl:text,ringUrl:text,ring2xUrl:text,materialUrl:optional(text)};
 const colorFields={...exteriorFields,surface2xUrl:text,materialVariant:text,materialPreparationFile:text,filter:text,
-  falseColorPalette:array(array(number)),materialGain:number,sourceModel:text,detailPreparation:text,detailCarrierUrl:text,
-  maximumDetailScale:number,sourceFiles:array(text),sourceUrls:array(text)};
+  falseColorPalette:array(array(number)),materialGain:number,sourceModel:text,detailPreparation:text,sourceFiles:array(text)};
 function dataset(value:unknown) {
  const record=requireRecord(value);
  if(record.view==='interior')return {...shape({...datasetBase,interiorMaterialUrl:text})(value),view:'interior' as const,

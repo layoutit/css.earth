@@ -137,7 +137,7 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
     // attribution inventory. The material preparer reads these exact paths.
     const baseInputs = [...paths(recipe('geometry')?.sources), ...paths(recipe('materials')), ...paths(recipe('rings'))];
     namedRecords(plan.datasets).forEach(dataset => add(dataset.id, [...paths(dataset, `${String(plan.sourceSubdirectory)}/`), ...baseInputs], {
-      observationAttribution: dataset.sourceKind === 'schematic-morphology-illustration' ? 'none' : 'source-lineage',
+      observationAttribution: 'source-lineage',
       ...(typeof dataset.sourceKind === 'string' ? { interpretation: { sourceKind: dataset.sourceKind } } : {}),
     }));
     // The base material and cutaway are produced by the material recipe.
