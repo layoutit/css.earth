@@ -10,6 +10,7 @@ import type { SceneView } from './scene-view.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
+import { loadWorldSystemOf } from '../world-context-plan.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
@@ -95,6 +96,9 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   stage?: HTMLElement;
   getWorld(): WorldContextMount | null;
 }) {
+  // A body of another system is previewed and flown to once that system's bodies are in the world
+  // (site/world-context-plan.mts); for a body the world already holds this resolves at once.
+  const systemTask = loadWorldSystemOf(object.id);
   const contentTask = contentTransport.load(object, { signal: request.signal })
     .then(content => {
       request.own(() => content.dispose?.());
@@ -106,6 +110,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
       if (factory.navigation && request.subject.kind !== 'overview' && request.subject.kind !== 'focus') {
         const framingScale = await factory.navigation.framingScale(request.signal);
         const edge = await factory.navigation.labelEdge?.(request.signal);
+        if (systemTask) await systemTask;
         if (requests.owns(request)) getWorld()?.previewSelection(object.id, framingScale, edge);
       }
       request.timing.mark('factory-ready'); return factory;
@@ -113,17 +118,20 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   // The registry already owns the physical frames. Start the camera while
   // the destination factory, content and texture bank load independently.
   requests.advance(request, 'flying');
-  const preparationTask = navigation.prepare({
-    fromId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factoryTask,
+  // What the flight starts from is read now, as if it started now; a body of another system starts once that system is read.
+  const fromMount = source?.mount ?? null, cameraViewport = getWorld()?.viewport, presenting = getWorld() !== null;
+  const prepare = () => navigation.prepare({
+    fromId, toId: object.id, fromMount, toFactory: factoryTask,
     signal: request.signal, url: request.url, stage,
     reducedMotion,
     targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined,
     targetFocusPositionM: request.camera.kind === 'frame' ? request.camera.focusPositionM ?? undefined : undefined,
     centerSelection: request.camera.kind === 'frame' && request.camera.framing === 'center',
     preserveView: request.camera.kind === 'preserve',
-    cameraViewport: getWorld()?.viewport,
+    cameraViewport,
     timing: request.timing,
-    presentWorld: getWorld() ? (world, viewport, options) => getWorld()?.present(world, viewport, options) : null,
+    presentWorld: presenting ? (world, viewport, options) => getWorld()?.present(world, viewport, options) : null,
   });
+  const preparationTask = systemTask ? systemTask.then(prepare) : prepare();
   return request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
 }

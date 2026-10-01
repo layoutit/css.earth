@@ -3,12 +3,12 @@ import type { PlannedWorldContext, WorldContextView } from './world-context-plan
 import { readPreparedBinary } from '../../prepared-data/prepared-binary.js';
 import { decodeWorldOrbitBank } from '../../prepared-data/world-context.js';
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
-import type { WorldPlannerInitialise, WorldPlannerSource } from './world-context-planner-client.js';
+import type { WorldPlannerExtend, WorldPlannerInitialise, WorldPlannerSource } from './world-context-planner-client.js';
 import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-context-frame.js';
 import { unpackWorldBodies } from './world-context-view-transport.js';
 
 const scope = globalThis as unknown as {
-  onmessage: (event: MessageEvent<WorldPlannerInitialise | { id: number; view: Omit<WorldContextView, 'bodies'>; bodies: Float64Array }>) => void;
+  onmessage: (event: MessageEvent<WorldPlannerInitialise | WorldPlannerExtend | { id: number; view: Omit<WorldContextView, 'bodies'>; bodies: Float64Array }>) => void;
   postMessage(value: unknown, transfer?: Transferable[]): void;
 };
 let calculate: ReturnType<typeof createWorldContextPlanner>;
@@ -25,7 +25,7 @@ async function read(url: string): Promise<ArrayBuffer> {
 // Orbit paths arrive one per bank: a frame that needs a path it lacks names the body, and that body's bank is read once,
 // decoded and attached; the page is told so it plans again. A bank that fails is logged
 // once and left out, so a missing file costs its orbits, not the world.
-let banks: { plan: PreparedWorldContext; source: WorldPlannerSource; bankOf: ReadonlyMap<string, string>;
+let banks: { plan: PreparedWorldContext; source: WorldPlannerSource; bankOf: Map<string, string>;
   requested: Set<string> } | null = null;
 function requestWantedBanks() {
   const wanted = calculate.takeWantedOrbits();
@@ -54,6 +54,14 @@ scope.onmessage = ({ data }) => {
       banks = source ? { plan, source, requested: new Set(),
         bankOf: new Map(plan.bodies.flatMap(body => body.orbit ? [[body.id, body.id] as const] : [])) } : null;
       initialise(plan, data.annotationPriorities, data.annotationLandmarks);
+    } else if ('validatedExtension' in data) {
+      // The client sends a system's bodies just before the first view that holds them (WorldPlannerExtend).
+      const plan = data.validatedExtension;
+      if (banks) {
+        banks.plan = plan;
+        for (const body of plan.bodies) if (body.orbit && !banks.bankOf.has(body.id)) banks.bankOf.set(body.id, body.id);
+      }
+      calculate.extend(plan);
     } else {
       const view: WorldContextView = { ...data.view, bodies: unpackWorldBodies(data.bodies) };
       const frame: PlannedWorldContext = calculate(view);
