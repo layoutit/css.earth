@@ -2,9 +2,12 @@
  * galaxy's distance (Li et al. 2021, ApJ 920, 84; arXiv:2107.08029; VizieR J/ApJ/920/84/table2: position, period, sample) and Hubble's V1, the first
  * Cepheid found there (row 579568 of the PAndromeda sample, Kodric et al. 2018, AJ 156, 130; VizieR J/AJ/156/130/main).
  *
- * Each is placed by its catalogue row at the Cepheid distance of M31 from Li et al. (2021), with the galaxy's radial velocity from
- * SIMBAD. As for the SH0ES Cepheids (sh0es.mts), no paper measures the radius, temperature or mass of any one of them: the draft
+ * Each is placed by its catalogue row in the galaxy as the app draws it (discPlacement), with the galaxy's radial velocity from
+ * SIMBAD; the Cepheid distance of M31 from Li et al. (2021) is what its text tells. As for the SH0ES Cepheids (sh0es.mts), no paper measures the radius, temperature or mass of any one of them: the draft
  * gives the radius and temperature Groenewegen's (2020) period relations give at the star's period, and says so. */
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { imageLayerDisc, imageLayerDiscDistanceKpc } from '@cssearth/bake/image-layers';
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { preferredName, simbadIdentifiers } from './display-name.mts';
 import { slug } from './identity.mts';
@@ -29,39 +32,57 @@ export function vizierRows(tsv: string, columns: readonly string[], catalogue: s
 }
 const period = (row: Row, column: string, what: string) => { const value = Number(row[column]); if (!row[column] || !(value > 0)) throw new Error(`${what}: ${column} is empty.`); return value; };
 
-/** A Local Group galaxy and its Cepheid distance: what places every Cepheid drafted in it. */
-export interface CepheidGalaxy { readonly name: string; readonly reader: string; readonly distance: { readonly credit: string; readonly paper: string; readonly modulus: readonly [number, number] } }
-const M31: CepheidGalaxy = { name: GALAXY, reader: 'the Andromeda Galaxy', distance: LI_2021 };
-export interface GalaxyCepheid { readonly name: string; readonly target: string; readonly periodDays: number; readonly periodSource: string; readonly paper: { url: string; credit: string };
+/** A Local Group galaxy the app draws as an inclined disc (its package's image-layer recipe), and its Cepheid distance. */
+export interface CepheidGalaxy { readonly name: string; readonly objectId: string; readonly reader: string; readonly distance: { readonly credit: string; readonly paper: string; readonly modulus: readonly [number, number] } }
+export const M31: CepheidGalaxy = { name: GALAXY, objectId: 'm31', reader: 'the Andromeda Galaxy', distance: LI_2021 };
+export interface GalaxyCepheid { readonly name: string; readonly target: string; readonly raDeg: number; readonly decDeg: number; readonly periodDays: number; readonly periodSource: string; readonly paper: { url: string; credit: string };
   readonly position: { catalogue: string; row: Record<string, string>; credit: string; url: string }; readonly found: string; readonly locator: string; readonly aliases?: readonly string[]; readonly featured?: true }
 
+/** The Local Volume Database release the Local Group's galaxies are placed by (src/objects/local-group). */
+const LVDB = { credit: 'the Local Volume Database v1.1.1 (Pace 2025)', url: 'https://doi.org/10.33232/001c.144859' };
+/** The disc the app draws `galaxy` on, from its package's recipe: the same construction its layers and catalogue dots use. */
+export async function galaxyDisc(root: string, galaxy: CepheidGalaxy) {
+  const recipe = JSON.parse(await readFile(resolve(root, 'src/objects', galaxy.objectId, 'source/recipe.json'), 'utf8')) as Parameters<typeof imageLayerDisc>[0];
+  return { disc: imageLayerDisc(recipe), recipe };
+}
+/** A star of a galaxy is placed in the galaxy as it is drawn: where its sight line crosses the disc's midplane, as the galaxy's
+ * own catalogue dots are. A galaxy's Cepheid distance places the galaxy, not a star within it: M33's (840 kpc) put its Cepheids
+ * 19 kpc in front of a disc drawn at 859 kpc and 9 kpc in radius, outside the galaxy from every direction but the Sun's
+ * (2026-10-01). */
+export function discPlacement(galaxy: CepheidGalaxy, placed: Awaited<ReturnType<typeof galaxyDisc>>, raDeg: number, decDeg: number, measured: string) {
+  const parsecs = Math.round(imageLayerDiscDistanceKpc(placed.disc, raDeg, decDeg) * 1000), { target, geometry } = placed.recipe;
+  return { value: parsecs, url: LVDB.url,
+    source: `Placed in ${galaxy.name} as the app draws it, where the star's sight line crosses the disc's midplane: ${parsecs.toLocaleString('en-US')} pc (src/objects/${galaxy.objectId}/source/recipe.json: centre ${Math.round(target.distancePc).toLocaleString('en-US')} pc from ${LVDB.credit}, inclination ${geometry.inclinationDeg} deg, line of nodes ${geometry.lineOfNodesPaDeg} deg). ${measured}` };
+}
+
 /** One Cepheid's draft in `galaxy`: `name` as a reader meets it, `found` the sentence of who measured it. */
-export function draftGalaxyCepheid(star: GalaxyCepheid, galaxy: CepheidGalaxy, velocity: { value: number; uncertainty?: number; source: string; url: string }) {
+export function draftGalaxyCepheid(star: GalaxyCepheid, galaxy: CepheidGalaxy, placed: Awaited<ReturnType<typeof galaxyDisc>>, velocity: { value: number; uncertainty?: number; source: string; url: string }) {
   const [modulus, error] = galaxy.distance.modulus, parsecs = 10 ** (modulus / 5 + 1), days = star.periodDays.toFixed(star.periodDays < 10 ? 2 : 1), kpc = Math.round(parsecs / 1000);
   return { ...relationCepheidDraft({
     id: slug(star.name), name: star.name, target: star.target, galaxy: galaxy.name, periodDays: star.periodDays, paper: star.paper, periodSource: star.periodSource, position: star.position,
     description: `A Cepheid in ${galaxy.reader} that pulsates every ${days} days.`,
-    distance: { value: Math.round(parsecs), uncertainty: Math.round(parsecs * Math.LN10 / 5 * error),
-      source: `${galaxy.distance.credit}, abstract: ${galaxy.name}'s Cepheid distance modulus ${modulus} +/- ${error} mag, 10^(mu/5 + 1) pc`, url: galaxy.distance.paper },
+    distance: discPlacement(galaxy, placed, star.raDeg, star.decDeg,
+      `The galaxy's Cepheid distance, ${galaxy.distance.credit}, abstract: modulus ${modulus} +/- ${error} mag, ${kpc} kpc; it places the galaxy, not a star within it`),
     velocity,
     text: { card: `A Cepheid in ${galaxy.reader}, ${kpc} kiloparsecs away, that swells and shrinks every ${days} days.`,
       introduction: `${star.found} Its galaxy's distance, ${kpc} kiloparsecs, was measured from Cepheids like it.`, locator: star.locator },
   }), ...(star.aliases?.length ? { aliases: star.aliases } : {}), ...(star.featured ? { featured: true as const } : {}) };
 }
-export const draftM31Cepheid = (star: GalaxyCepheid, velocity: { value: number; uncertainty?: number; source: string; url: string }) => draftGalaxyCepheid(star, M31, velocity);
+
 
 /** `new-object --from-m31cepheids all | V1 | ID... --out spec.json`: Hubble's V1, every Cepheid of Li et al. (2021), or those named
  * by their table ID (CEPH-10.91809+41.18565). */
-export async function draftsFromM31Cepheids(names: readonly string[], archive: Archive) {
-  const stars: Record<string, unknown>[] = [], report: string[] = [], velocity = await galaxyVelocity(archive, GALAXY), all = names.includes('all');
+export async function draftsFromM31Cepheids(names: readonly string[], archive: Archive, root: string) {
+  const stars: Record<string, unknown>[] = [], report: string[] = [], velocity = await galaxyVelocity(archive, GALAXY), all = names.includes('all'), placed = await galaxyDisc(root, M31);
+  const degrees = (row: Row, column: string) => { const value = Number(row[column]); if (!row[column] || !Number.isFinite(value)) throw new Error(`${row.ID}: ${column} is empty.`); return value; };
   if (all || names.includes('V1')) {
     const columns = ['ID', 'RAJ2000', 'DEJ2000', 'Pr', 'PSO'], [row] = vizierRows(await archive.text(VIZIER_ASU, { '-source': KODRIC_2018.catalogue, '-out': columns.join(','), ID: HUBBLE_V1.row }), columns, KODRIC_2018.catalogue);
     if (!row) throw new Error(`${KODRIC_2018.catalogue} has no row ${HUBBLE_V1.row}, Hubble's V1.`);
     const days = period(row, 'Pr', `${KODRIC_2018.catalogue} ${HUBBLE_V1.row}`);
-    stars.push(draftM31Cepheid({ name: HUBBLE_V1.name, target: row.PSO!, periodDays: days, periodSource: `${KODRIC_2018.credit}, VizieR ${KODRIC_2018.catalogue}`, paper: HUBBLE_V1.identification,
+    stars.push(draftGalaxyCepheid({ name: HUBBLE_V1.name, target: row.PSO!, raDeg: degrees(row, 'RAJ2000'), decDeg: degrees(row, 'DEJ2000'), periodDays: days, periodSource: `${KODRIC_2018.credit}, VizieR ${KODRIC_2018.catalogue}`, paper: HUBBLE_V1.identification,
       position: { catalogue: KODRIC_2018.catalogue, row: { ID: HUBBLE_V1.row }, credit: KODRIC_2018.credit, url: KODRIC_2018.paper }, aliases: [row.PSO!], featured: true,
       found: `Edwin Hubble's M31-V1 is the first Cepheid found in the Andromeda Galaxy.`,
-      locator: `${HUBBLE_V1.identification.credit}: M31-V1; ${KODRIC_2018.catalogue}, ID ${HUBBLE_V1.row}: Pr; ${LI_2021.credit}: mu_0` }, velocity));
+      locator: `${HUBBLE_V1.identification.credit}: M31-V1; ${KODRIC_2018.catalogue}, ID ${HUBBLE_V1.row}: Pr; ${LI_2021.credit}: mu_0` }, M31, placed, velocity));
     report.push(`V1: Hubble's first Cepheid in M31, ${KODRIC_2018.catalogue} row ${HUBBLE_V1.row}, P ${days} d.`);
   }
   const wanted = names.filter(name => name !== 'all' && name !== 'V1');
@@ -78,10 +99,10 @@ export async function draftsFromM31Cepheids(names: readonly string[], archive: A
       // The name is the designation SIMBAD prefers (display-name.mts), else the one CDS matched to the row, else the table's own.
       const simbad = matched(row), preferred = simbad ? preferredName(await simbadIdentifiers(archive, simbad)) : undefined, name = preferred?.name ?? (simbad || row.ID!);
       const days = period(row, 'Per', `${LI_2021.catalogue} ${row.ID}`), own = row.ID!.startsWith('CEPH-') ? [row.ID!] : [];
-      stars.push(draftM31Cepheid({ name, target: simbad || row.ID!, periodDays: days, periodSource: `${LI_2021.credit}, table 2`, paper: { url: LI_2021.paper, credit: LI_2021.credit },
+      stars.push(draftGalaxyCepheid({ name, target: simbad || row.ID!, raDeg: degrees(row, 'RAJ2000'), decDeg: degrees(row, 'DEJ2000'), periodDays: days, periodSource: `${LI_2021.credit}, table 2`, paper: { url: LI_2021.paper, credit: LI_2021.credit },
         position: { catalogue: LI_2021.catalogue, row: { ID: row.ID!, Per: row.Per! }, credit: `${LI_2021.credit}, table 2`, url: LI_2021.paper }, aliases: [...own, ...simbad && simbad !== name ? [simbad] : []],
         found: `The Hubble Space Telescope measured its brightness in three colours and its pulsation of ${days.toFixed(days < 10 ? 2 : 1)} days.`,
-        locator: `table 2, ID ${row.ID}, Per ${row.Per}: Per; ${LI_2021.credit}: mu_0` }, velocity));
+        locator: `table 2, ID ${row.ID}, Per ${row.Per}: Per; ${LI_2021.credit}: mu_0` }, M31, placed, velocity));
     }
     report.push(`${stars55.length} Cepheid${stars55.length === 1 ? '' : 's'} of ${LI_2021.credit} in M31; radius and temperature from Groenewegen (2020)'s period relations.`);
   }

@@ -1,0 +1,40 @@
+{
+  "id": "doi-10-33232-001c-144859",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Pace (2025): The Local Volume Database: a library of the observed properties of nearby dwarf galaxies and star clusters",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.33232/001c.144859"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.33232/001c.144859",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.33232/001c.144859",
+      "checkedOn": "2026-10-01",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Pace (2025), The Open Journal of Astrophysics 8",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.33232/001c.144859"
+    }
+  ],
+  "publisher": "The Open Journal of Astrophysics 8",
+  "creators": [
+    "Andrew B Pace"
+  ],
+  "publicationDate": "2025"
+}

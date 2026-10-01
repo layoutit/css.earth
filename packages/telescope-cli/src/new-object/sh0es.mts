@@ -75,7 +75,7 @@ export interface RelationCepheid {
   readonly id: string; readonly name: string; readonly target: string; readonly galaxy: string; readonly periodDays: number;
   readonly paper: { readonly url: string; readonly credit: string }; readonly periodSource: string;
   readonly position: { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string };
-  readonly distance: { readonly value: number; readonly uncertainty: number; readonly source: string; readonly url: string };
+  readonly distance: { readonly value: number; readonly uncertainty?: number; readonly source: string; readonly url: string };
   readonly velocity: { readonly value: number; readonly uncertainty?: number; readonly source: string; readonly url: string };
   readonly description: string; readonly text: { readonly card: string; readonly introduction: string; readonly locator: string };
 }

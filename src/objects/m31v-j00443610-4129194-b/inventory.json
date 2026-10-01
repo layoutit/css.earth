@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "m31v-j00443610-4129194-b-arrival.webp",
-      "bytes": 28274,
-      "sha256": "874dbb0680973a68d69ff97700e4d914d0310ea6adfe3fe1bf97097dacf2a240"
+      "bytes": 28830,
+      "sha256": "91b8d9ad048f88d035bdd17daee9ef0648b0f12fcac180003b2a9a66154d6e44"
     },
     {
       "location": "public",
       "filename": "m31v-j00443610-4129194-b-billboard.webp",
-      "bytes": 5086,
-      "sha256": "a6eb3c7ac7d72381d1ca3d3119a1b4ab6973dab75b24fa2868e51cebe674fb1b"
+      "bytes": 5146,
+      "sha256": "47695c231efc5ce96578f4d9460ac7cec198d94a1507caf449ffdf7b397ceb98"
     },
     {
       "location": "public",
@@ -41,7 +41,7 @@
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 341,
-      "sha256": "83de0740537dc9476021688ac3051871e3e1fcc61f4450ad4696ce966ce8878b"
+      "sha256": "a1e414a169dbad778fb8e0ebecc4bfeccdf64279be70bd271e115359709486dd"
     },
     {
       "location": "prepared",
@@ -88,20 +88,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 278511,
-      "sha256": "8a7b959d0626c9bb5ff45330b135eac0f906bec336cfa135c56e567947293181"
+      "bytes": 278504,
+      "sha256": "2d4c10c958983adab0bb97aa22f7def016dbeeaa51c08874b2cfa16e60381bc6"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 400607,
-      "sha256": "33792df79776dc06c3009bf0a72ef7d475c3065cd13b34a5dc3a9afcf9eb45ef"
+      "bytes": 400579,
+      "sha256": "e33f284ac1dff2835ae6477fceff2c80be753feb484ccf6b137ab1f18654cb6a"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1215,
-      "sha256": "04ca1a7bd3ed71490f6bda9447017425643ac94abd028a40df3abe0e557a969f"
+      "bytes": 1214,
+      "sha256": "21f70664195b8a3d467374f9dc1452a5f9ca47e457d369d7f6a5bfa537f2e285"
     },
     {
       "location": "prepared",
@@ -118,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1176,
-      "sha256": "9f7f6b24745582e7907c08e3930c1c735fb3c9506e9a50e82bbaf15f1c5c9b5b"
+      "bytes": 1172,
+      "sha256": "ebad78c1333373a2bdb05269781e9c8119089a2668164855d0b78c3876863d23"
     }
   ]
 }
