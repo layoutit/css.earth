@@ -145,7 +145,7 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
   const defaultFeatureIds = SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id);
   const orbitFeatureIds = SCENE_OBJECTS.filter(orbitFeature).map(object => object.id);
   return {
-    schema: 'cssearth-world-presentation@3',
+    schema: 'cssearth-world-presentation@4',
     satelliteSystemIntroductions,
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds,

@@ -42,7 +42,7 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
   return Object.freeze(hosts.map(({ id, memberIds }) => {
     const host = points.get(id), star = registry.get(id), radiusM = radii.get(id);
     if (!host) throw new TypeError(`site/prepared-world-presentation.json planetarySystems names ${id}, which the world context does not place; run pnpm prepare:world-context.`);
-    if (!star || !radiusM) throw new TypeError(`Planetary system ${id} requires a registered star and its prepared framing.`);
+    if (!star || !radiusM) throw new TypeError(`Planetary system ${id} requires a registered star and its prepared framing (site/prepared-world-presentation.json systemFramingRadii); run pnpm prepare:world-presentation.`);
     for (const memberId of memberIds) {
       if (!points.has(memberId) && !listed.has(memberId)) throw new TypeError(`site/prepared-world-presentation.json planetarySystems ${id} lists ${memberId}, which the world context does not place; run pnpm prepare:world-context.`);
       const member = registry.get(memberId);
