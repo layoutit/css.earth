@@ -28,14 +28,11 @@ test('a labelled moon never hides its planet: tier ranks before an admitted labe
   assert.deepEqual(pile.map(item => [item.entry.body.id, item.visible]), [['rhea', false], ['saturn', true], ['labelled-dust', false], ['dust', false]]);
 });
 
-test('a hidden marker returns only once it clears the kept one by the hysteresis', () => {
+test('a frame decides from its own projection alone', () => {
   const declutter = createMarkerDeclutter({});
-  // The planner retains each body's entry across frames; the hysteresis follows it.
-  const kept = marker('kept', 0, 1), moving = marker('moving', 0);
-  const frame = (x: number) => { const pair = [{ ...kept }, { ...moving, x }]; declutter(pair, []); return pair[1]!.visible; };
+  const frame = (x: number) => { const pair = [marker('kept', 0, 1), marker('moving', x)]; declutter(pair, []); return pair[1]!.visible; };
   assert.equal(frame(2), false, 'overlapping dots: the lower priority is hidden');
-  assert.equal(frame(2.5), false, 'just clear of touching (2.4 px), it stays hidden');
-  assert.equal(frame(2.9), true, 'clear by 15%, it returns');
-  assert.equal(frame(2.5), true, 'a visible marker stays until it overlaps');
-  assert.equal(frame(2.3), false);
+  assert.equal(frame(2.5), true, 'clear of touching (2.4 px), it draws');
+  assert.equal(frame(2), false);
 });
+

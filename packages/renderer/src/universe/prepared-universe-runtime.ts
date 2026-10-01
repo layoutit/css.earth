@@ -258,6 +258,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setOverview(enabled: boolean, scope?: string, preserveSelection = false) {
             overview = enabled;
             spatial.setOverview(enabled, preserveSelection);
+            // Past the system scope (the Milky Way's and beyond), the Solar System is its star.
+            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system');
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },

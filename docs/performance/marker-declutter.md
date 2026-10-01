@@ -20,6 +20,13 @@ frame, though almost all lay under others.
   galaxy's image, an atmosphere) stays under it. On each side the order is the bodies' annotation priority, the larger
   body first on a tie. The camera-depth sort it replaces re-ranked every body on each turn's release; a half turn at
   582 AU swapped the order of 13,679 overlapping pairs.
+- **Past the system scope, a system is its star** (`setSystemRetired` in `prepared-world-context.ts`). The universe nests
+  one inside another: the Solar System in the Milky Way, the Milky Way in the Local Group. The application already
+  crosses those levels (its overview scope, `site/overview-context.mts`, with a lower edge on the way back), and passes
+  the scope to the universe with each crossing. Once it leaves the system for the Milky Way's (about 6,500 AU from the
+  Sun on the way out, 670 AU on the way back), every system retires through the path a system faded past already took,
+  and its star stands for it. Inside the system the existing fades still apply. Before, the Solar System's bodies faded
+  only with the camera's distance, to a light-year: four trans-Neptunian objects were still drawn at 27,000 AU.
 - **A system card lays out only the rows in view** (`site/shell/maps-shell.css`). Past about 580 AU the card lists the
   Sun's system: 549 rows, 682 KB of HTML, about five shown at once. Inserted mid-zoom, the list laid out 7,649 objects
   in one frame. Its rows now take `content-visibility: auto`.
@@ -33,6 +40,7 @@ frame, though almost all lay under others.
 | Overlapping pairs swapped by a half turn at 578 AU | 13,679 | 31 |
 | Slow stretch frame, median / 95th percentile / worst | 6.6 / 13.7 / 29.1 ms | 5.5 / 12.4 / 13.0 ms |
 | Largest layout of the zoom | 7,649 objects | 596 objects |
+| Solar System bodies drawn at 10,600 and 27,000 AU | 4 and 4 | none: the Sun |
 
 ![The Sun's marker pile at 220 AU, main left and this change right, 3x](marker-declutter/pile-220-au.jpg)
 

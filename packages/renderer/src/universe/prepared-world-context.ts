@@ -258,7 +258,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let selectedEntry = bodies[0]!;
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
   const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
-  let systemRetired = false;
+  let systemRetired = false, systemRetiredByScope = false;
   const depthOrder = createDepthOrder(bodies, depthBase, annotationPriorities);
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
@@ -346,7 +346,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           else if (!hoverIntent || rotationPhase === 'dragging' || navigationInFlight || !sameCamera(world, viewport)) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
         }
       }
-      const opacity = systemFade.update(world.pose.positionM);
+      const opacity = systemFade.update(world.pose.positionM, systemRetiredByScope);
       // Publish the first zero-opacity frame normally to retire picking and
       // annotations. Later frames need only the anchor locator; its siblings
       // keep their prepared DOM without further visibility work.
@@ -356,7 +356,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         contextCommittedId: contextFrames.committedId,
         selectedId: selectedEntry.body.id, overview, overviewSelection, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
         preserveCommittedAnnotations: rotationPhase === 'released',
-        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
+        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly, systemRetired: systemRetiredByScope,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         // Each body's presentation as it stands, copied for the planner's worker (the copy is transferred).
         bodyColumns: bodyColumns.slice() };
@@ -390,6 +390,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (selectionPreview !== id) settleHover();
       invalidatePolicy();
       selectionPreview = id;
+      refresh();
+    },
+    /** The application's view has left the systems' scale (its overview scope is past the system): every system retires
+     * through the same path as a system the camera has faded past, its star standing for it. */
+    setSystemRetired(retired: boolean) {
+      if (systemRetiredByScope === retired || destroyed) return;
+      systemRetiredByScope = retired;
+      invalidatePolicy();
       refresh();
     },
     setOverview(enabled: boolean, preserveSelection = false) {

@@ -57,6 +57,8 @@ export interface WorldContextView {
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
   orbitLodPixels?: number;
   anchorOnly: boolean;
+  /** The view has left the systems' scale (prepared-world-context.ts setSystemRetired): only their stars are drawn. */
+  systemRetired?: boolean;
   bodies: readonly WorldBodyPresentation[];
   contextCommittedId?: number;
 }
@@ -131,7 +133,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     if (!selectedEntry) throw new TypeError('Selected context body is unavailable.');
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
-    const opacity = systemFade.update(world.pose.positionM);
+    const opacity = systemFade.update(world.pose.positionM, view.systemRetired === true);
     const focusDistanceM = Math.hypot(world.pose.positionM[0] - plan.focus.positionM[0], world.pose.positionM[1] - plan.focus.positionM[1], world.pose.positionM[2] - plan.focus.positionM[2]);
     const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       // The camera rotation applied to the camera-relative position, fused: one array per point instead of two, the same
@@ -493,8 +495,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         (candidate.tier ?? 0) >= 3);
       const acceptedLandmarks = landmarks.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
       for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);
-      const landmarkSet = new Set(landmarks);
-      const otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
+      const landmarkSet = new Set(landmarks), otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
       // Use the same admission during motion and at rest. Clear committed
       // placements survive first; obstructed labels can move and newly clear
       // labels can return. Gesture history must not strand a visible star as a dot.
@@ -508,8 +509,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const passes = [(candidate: typeof candidates[number]) => ownSystem(candidate) && major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && major(candidate),
         (candidate: typeof candidates[number]) => ownSystem(candidate) && !major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && !major(candidate)];
       const accepted = [...acceptedLandmarks, ...passes.flatMap(pass => admitStableLabels(otherCandidates.filter(pass), labelBudget))];
-      for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
-      if (selectedLocator) selectedLocator.entry.indicatorShown = true;
+      for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; } if (selectedLocator) selectedLocator.entry.indicatorShown = true;
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;
         projected.entry.labelShown = true; projected.entry.labelPlacement = placement;
