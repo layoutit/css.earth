@@ -23,6 +23,8 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
 import { worldCameraOf } from '@cssearth/renderer';
+import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/navigation';
+import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
@@ -30,7 +32,7 @@ interface Props {
   /** The object the page is: `objectId`, or a catalogue focus its scene draws. */
   pageId?: string;
   navigation?: boolean;
-  scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor'>;
+  scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor' | 'coverPlan'>;
   descriptor?: ObjectDescriptor;
   /** The site's root page: it shows `objectId` but is named and addressed as the site. */
   home?: boolean;
@@ -42,6 +44,13 @@ const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
+// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); a catalogue focus page
+// drawn by another scene leaves it to that scene's startup.
+const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId === objectId ? {
+  plan: scene.coverPlan, mobileQuery: MOBILE_VIEWPORT_QUERY,
+  billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },
+  bodyRadiusM: parsePreparedWorldCameraFrame(scene.descriptor.properties.worldFrame).bodyRadiusM,
+} : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
 const pageSeo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
@@ -79,6 +88,11 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* Until the first body is ready, the phone sheet's lazy images wait (object-shell.css), so the globe's textures have
         the connection. The router clears this; without JavaScript it is never set. */}
     {!navigation && <script is:inline>document.documentElement.dataset.bodyPending = '';</script>}
+    {/* The arrival photograph takes its place from the HTML before the application's code and data (startup-cover.mts).
+        It comes first: module scripts run in document order, and its few modules are a small part of the graph. */}
+    {startupCover && <script>
+      import '../startup-cover.mts';
+    </script>}
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
@@ -137,6 +151,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
         {startup && <>
           <script is:inline type="application/json" data-startup-discovery set:html={JSON.stringify(startup).replace(/</g, '\u003c')} />
           <img data-startup-billboard fetchpriority="high" src={startupImage} alt="" aria-hidden="true" draggable="false" style="position:absolute;opacity:0;pointer-events:none" />
+          {startupCover && <script is:inline type="application/json" data-startup-cover set:html={JSON.stringify(startupCover).replace(/</g, '\u003c')} />}
         </>}
       </div>
       <div class="object-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
