@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { composeDragRotation, rotationFromAngularVelocity } from './sphere-drag.js';
-import { poleTumbleTurn, poleTurnRotation, rotateVector } from './pole-drag.js';
+import { poleGrabTurn, poleTumbleTurn, poleTurnRotation, rotateVector } from './pole-drag.js';
 import { createDragHistory, estimateDragThrow, projectTrackballDelta, recordDragSample } from './trackball-drag-inertia.js';
 import type { Vector3 } from './math-types.js';
 
@@ -68,5 +68,53 @@ describe('pole-held tumble', () => {
     assert.ok(Math.abs(motion.poleTurnPerMillisecond.tilt - (0)) < 10 ** -12 / 2, `${motion.poleTurnPerMillisecond.tilt} is not close to ${0}`);
     assert.ok(Math.abs(lean(rotateVector(composeDragRotation(motion.launchRotation, [0, 0, 0, 1]), opening)) - (0)) < 10 ** -9 / 2, `${lean(rotateVector(composeDragRotation(motion.launchRotation, [0, 0, 0, 1]), opening))} is not close to ${0}`);
     assert.equal(estimateDragThrow({ history, releaseTimestamp: 48, trackball })?.poleTurnPerMillisecond, null);
+  });
+});
+
+describe('pole grab', () => {
+  // Earth at its opening distance, drawn a little off the optical axis: 230 px across on a 1829 px focal length.
+  const sphere = { center: [40, -25, -1000], radius: 120, opticalCenterX: 640, opticalCenterY: 400, focalLength: 1829 };
+  const project = (q: Vector3) => {
+    const p = [0, 1, 2].map(i => sphere.center[i]! + sphere.radius * q[i]!);
+    return [sphere.opticalCenterX + sphere.focalLength * p[0]! / -p[2]!, sphere.opticalCenterY + sphere.focalLength * p[1]! / -p[2]!];
+  };
+  const centre = project([0, 0, 0]);
+  // The surface point under a screen pixel, by bisecting along the ray: independent of the solver's own intersection.
+  const under = (x: number, y: number): Vector3 => {
+    const ray = [x - sphere.opticalCenterX, y - sphere.opticalCenterY, -sphere.focalLength];
+    const n = Math.hypot(...ray), d = ray.map(c => c / n);
+    let lo = 0, hi = Math.hypot(...sphere.center);
+    for (let i = 0; i < 200; i++) {
+      const mid = (lo + hi) / 2;
+      const inside = Math.hypot(...d.map((c, k) => c * mid - sphere.center[k]!)) < sphere.radius;
+      if (inside) hi = mid; else lo = mid;
+    }
+    return d.map((c, k) => (c * hi - sphere.center[k]!) / sphere.radius);
+  };
+
+  it('keeps the grabbed ground under the pointer and the pole on its screen direction', () => {
+    for (const [x0, y0, x1, y1] of [[-60, 10, 70, 30], [0, -80, 20, 60], [50, 50, -40, -30], [-90, -40, -10, -60]]) {
+      const pointer = { previousX: centre[0]! + x0!, previousY: centre[1]! + y0!, currentX: centre[0]! + x1!, currentY: centre[1]! + y1! };
+      const turn = poleGrabTurn(pointer, sphere, opening);
+      assert.ok(turn);
+      const rotation = poleTurnRotation(turn, opening);
+      const landed = project(rotateVector(rotation, under(pointer.previousX, pointer.previousY)));
+      assert.ok(Math.hypot(landed[0]! - pointer.currentX, landed[1]! - pointer.currentY) < 1e-6, `${landed} missed ${pointer.currentX},${pointer.currentY}`);
+      assert.ok(Math.abs(lean(rotateVector(rotation, opening)) - lean(opening)) < 1e-9);
+    }
+  });
+
+  it('turns by angle when the pointer leaves the body', () => {
+    assert.equal(poleGrabTurn({ previousX: centre[0]!, previousY: centre[1]!, currentX: centre[0]! + 400, currentY: centre[1]! }, sphere, opening), null);
+  });
+
+  it('stays finite where no turn reaches the pointer beside the pole', () => {
+    const top = project(rotateVector([0, 0, 0, 1], opening));
+    // 80 px sideways, 20 px under the pole: the latitude circle there is narrower than the stroke.
+    const pointer = { previousX: top[0]! - 2, previousY: top[1]! + 20, currentX: top[0]! + 80, currentY: top[1]! + 20 };
+    const turn = poleGrabTurn(pointer, sphere, opening);
+    assert.ok(turn && Number.isFinite(turn.spin) && Number.isFinite(turn.tilt));
+    const landed = project(rotateVector(poleTurnRotation(turn, opening), under(pointer.previousX, pointer.previousY)));
+    assert.ok(Math.hypot(landed[0]! - pointer.currentX, landed[1]! - pointer.currentY) > 1, 'the stroke was reachable after all');
   });
 });

@@ -3,8 +3,8 @@ import { composeDragRotation } from './sphere-drag.js';
 
 /** A body tumble held to the body's own pole, as Cesium holds a globe to its constrained axis: sideways drags turn the
  * body about its pole and drags along the pole tilt it about the screen axis across the pole. The pole keeps its
- * direction on screen, so drags never roll the body. With the pole upright on screen this is the plain screen-axis
- * tumble. All vectors are view directions in CSS axes: +x right, +y down, +z toward the eye. */
+ * direction on screen, so drags never roll the body. On the body the turn keeps the grabbed ground under the pointer
+ * (poleGrabTurn); off it the angles come from the screen-axis tumble, which it equals with the pole upright. All vectors are view directions in CSS axes: +x right, +y down, +z toward the eye. */
 export interface PoleTurn { spin: number; tilt: number; }
 
 // The pole may reach the line of sight but not cross it: crossing would turn the body upside down.
@@ -20,6 +20,52 @@ export function poleTumbleTurn({ pitchDegrees, yawDegrees }: { pitchDegrees: num
   const along = yawDegrees * -up[1]! + pitchDegrees * up[0]!;
   const toward = yawDegrees * up[0]! + pitchDegrees * up[1]!;
   return { spin: -along * radians, tilt: -toward * radians };
+}
+
+/** The body as the eye sees it: its centre in CSS eye axes (the eye at the origin, looking down -z), its radius in the
+ * same units, and the screen projection that draws it. */
+export interface GrabSphere { center: Vector3; radius: number; opticalCenterX: number; opticalCenterY: number; focalLength: number; }
+
+/** The pole turn that carries the surface point under the previous pointer to the point under the current one, as
+ * Cesium's pan3D does about its constrained axis: the grabbed ground stays under the pointer while the pole keeps its
+ * screen direction. Null when either pointer misses the body; the caller then turns by angle. Where no turn reaches the
+ * pointer (a sideways drag close to the pole), the tilt goes as far as it can and the spin follows. */
+export function poleGrabTurn({ previousX, previousY, currentX, currentY }: { previousX: number; previousY: number; currentX: number; currentY: number },
+  sphere: GrabSphere, pole: Vector3): PoleTurn | null {
+  if (![previousX, previousY, currentX, currentY].every(Number.isFinite)) throw new TypeError('Pole grab pointer is invalid.');
+  const from = sphereHit(previousX, previousY, sphere), to = sphereHit(currentX, currentY, sphere);
+  if (!from || !to) return null;
+  const { pole: axis, east } = poleFrame(pole);
+  // A tilt by t about east followed by nothing else must bring the target to the source's height along the pole:
+  // rotating `to` by a = -t about east gives it height A cos a + B sin a; solve for the smallest |a|.
+  const height = dot(axis, from);
+  const across = cross(axis, east);
+  const A = dot(axis, to), B = dot(across, to);
+  const reach = Math.hypot(A, B);
+  const phase = Math.atan2(B, A);
+  const spread = reach > 1e-12 ? Math.acos(Math.min(1, Math.max(-1, height / reach))) : 0;
+  const a = [phase - spread, phase + spread].map(wrap).reduce((best, value) => Math.abs(value) < Math.abs(best) ? value : best);
+  const lifted = rotateVector(axisAngle(east, a), to);
+  // The spin about the pole between the source and the lifted target, both seen down the pole.
+  const u = reject(from, axis), v = reject(lifted, axis);
+  const spin = Math.hypot(...u) < 1e-12 || Math.hypot(...v) < 1e-12 ? 0 : Math.atan2(dot(axis, cross(u, v)), dot(u, v));
+  return { spin, tilt: -a };
+}
+
+function sphereHit(x: number, y: number, { center, radius, opticalCenterX, opticalCenterY, focalLength }: GrabSphere): Vector3 | null {
+  if (!Array.isArray(center) || center.length !== 3 || !center.every(Number.isFinite) || !(radius > 0) ||
+      ![opticalCenterX, opticalCenterY, focalLength].every(Number.isFinite) || !(focalLength > 0)) {
+    throw new TypeError('Pole grab sphere is invalid.');
+  }
+  const ray = [x - opticalCenterX, y - opticalCenterY, -focalLength];
+  const length = Math.hypot(...ray);
+  const direction = scale(ray, 1 / length);
+  const along = dot(direction, center);
+  const discriminant = along * along - (dot(center, center) - radius * radius);
+  if (discriminant < 0) return null;
+  const t = along - Math.sqrt(discriminant);
+  if (t <= 0) return null;
+  return scale([direction[0]! * t - center[0]!, direction[1]! * t - center[1]!, direction[2]! * t - center[2]!], 1 / radius);
 }
 
 export function poleTurnRotation({ spin, tilt }: PoleTurn, pole: Vector3): Quaternion {
@@ -54,3 +100,7 @@ function axisAngle(axis: Vector3, angle: number): Quaternion {
   return [axis[0]! * s, axis[1]! * s, axis[2]! * s, Math.cos(angle / 2)];
 }
 function scale(a: Vector3, s: number): Vector3 { return [a[0]! * s, a[1]! * s, a[2]! * s]; }
+function dot(a: Vector3, b: Vector3) { return a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!; }
+function cross(a: Vector3, b: Vector3): Vector3 { return [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!]; }
+function reject(a: Vector3, axis: Vector3): Vector3 { const d = dot(a, axis); return [a[0]! - axis[0]! * d, a[1]! - axis[1]! * d, a[2]! - axis[2]! * d]; }
+function wrap(angle: number) { return Math.atan2(Math.sin(angle), Math.cos(angle)); }
