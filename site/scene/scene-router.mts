@@ -111,6 +111,8 @@ export function createSceneRouter({
   let reducedMotionActive = reducedMotion?.matches === true;
   // A header pill's flight holds the overview hand-over off until it lands, then settles it once.
   let categoryFlight = false, refreshOverviewSelection: ((landed?: boolean) => void) | null = null;
+  // The view a header pill's flight left, while that flight's landing is being handed over.
+  let categoryDeparture: string | null = null;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
     if (scenes.current?.request === request && scenes.state.kind !== 'ready') retire(scenes.current, null, { preserveShell: true, flush: false });
   } });
@@ -350,9 +352,17 @@ export function createSceneRouter({
           const session = scenes.current;
           if (!session?.mount || !context || requests.current || !scenes.isCurrent(session)) return;
           categoryFlight = true;
+          // Read before the flight: its camera rewrites this entry's view on the way out.
+          const departed = view.capture() ?? navigationHref(windowTarget);
           void context.navigation.frameCategory({ classification, objectId, mount: session.mount, signal: session.signal, reducedMotion: reducedMotionActive })
             .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); })
-            .finally(() => { categoryFlight = false; if (scenes.isCurrent(session)) refreshOverviewSelection?.(true); });
+            .finally(() => {
+              categoryFlight = false;
+              if (!scenes.isCurrent(session)) return;
+              // The hand-over, if the landing has one, runs inside this call.
+              categoryDeparture = departed;
+              try { refreshOverviewSelection?.(true); } finally { categoryDeparture = null; }
+            });
         },
         navigable: id => navigable(id),
         // A failed prefetch is not an error yet: the navigation that needs it asks again and reports.
@@ -406,6 +416,7 @@ export function createSceneRouter({
     centeredObjectId = resolved.centeredObjectId;
     // Snapshot the departed view before cancelling: a superseded navigation records nothing.
     if (resolved.destination.history.history === 'pop') historyOwner?.remember();
+    else if (intent.kind === 'overview' && intent.departed) historyOwner?.keep(intent.departed);
     else historyOwner?.checkpoint();
     requests.cancel();
     scenes.current?.setViewUrl(null);
@@ -622,7 +633,9 @@ export function createSceneRouter({
           session.viewUrl?.flush();
           return;
         }
-        void navigate(next.objectId, { kind: 'overview', scope: 'system', camera: 'preserve' });
+        // A pill's landing is a place the reader chose, so it is its own entry: as a replacement, Back from the Planets
+        // pill skipped Earth for the page before it (2026-10-01).
+        void navigate(next.objectId, { kind: 'overview', scope: 'system', camera: 'preserve', ...(categoryDeparture ? { departed: categoryDeparture } : {}) });
       },
     });
     session.own(watch);

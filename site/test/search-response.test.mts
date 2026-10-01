@@ -247,3 +247,10 @@ test('an unreadable saved view renders the page as if it were absent', async () 
   // Two views are a malformed request, not an old link.
   assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?v=a&v=b`), data(), fetcher)).status, 400);
 });
+
+test('the bodies of one far system list by name, digits as numbers', () => {
+  // Each body is a little nearer or farther by its place on its orbit.
+  const system = ['TRAPPIST-1h', 'TRAPPIST-1 system', 'TRAPPIST-1b', 'TRAPPIST-10', 'TRAPPIST-1', 'TRAPPIST-1c'].map((name, index) => entry('bank', name, 'exoplanet', 3.85e17 + (5 - index) * 1e9));
+  assert.deepEqual(findObjects(system, 'trappist').objects.rows.map(row => row.name),
+    ['TRAPPIST-1', 'TRAPPIST-1 system', 'TRAPPIST-1b', 'TRAPPIST-1c', 'TRAPPIST-1h', 'TRAPPIST-10']);
+});
