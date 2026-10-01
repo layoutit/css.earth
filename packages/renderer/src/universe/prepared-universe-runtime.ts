@@ -213,7 +213,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites: spriteTable, requestPublication, annotationOpacities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
+        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites: spriteTable, requestPublication, annotationOpacities, annotationPriorities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
         layers.add(spatial);
         lifetime.onDispose(() => { layers.delete(spatial); });
         // The selected body's own label is the close-up's; overviews label every body.
@@ -283,6 +283,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setOverview(enabled: boolean, scope?: string, preserveSelection = false) {
             overview = enabled;
             spatial.setOverview(enabled, preserveSelection);
+            // Past the system scope (the Milky Way's and beyond), the Solar System is its star.
+            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system');
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
