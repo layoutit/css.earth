@@ -26,8 +26,8 @@ test('the baked cover places the photograph where the scene publishes it', async
     const view = await nav.initialView(viewport, mobile, { rotation: arrival.rotation, distanceM: arrival.billboard.distanceM }, new AbortController().signal);
     const projection = presentWorldCamera(view.world, object.worldFrame, view.viewport), rect = view.viewport.visibleRect;
     // prepareArrivalBillboard's publish: scale by the projected silhouette, shift to the open area's centre.
-    const scale = projection.silhouette!.tangentialSemiAxis / billboardBodyRadiusPixels(arrival.billboard, object.worldFrame.bodyRadiusM);
-    const offsetY = projection.centerPixels![1] - (rect.top + rect.bottom) / 2;
+    const scale: number = projection.silhouette!.tangentialSemiAxis / billboardBodyRadiusPixels(arrival.billboard, object.worldFrame.bodyRadiusM);
+    const offsetY: number = projection.centerPixels![1] - (rect.top + rect.bottom) / 2;
     const placed = startupCoverPlacement(cover, viewport, mobile);
     assert.ok(Math.abs(placed.scale / scale - 1) < 1e-9, `${width}×${height} scale ${placed.scale} vs ${scale}`);
     assert.ok(Math.abs(placed.offsetY - offsetY) < 1e-6, `${width}×${height} offset ${placed.offsetY} vs ${offsetY}`);
