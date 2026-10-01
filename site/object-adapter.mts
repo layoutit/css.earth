@@ -1,3 +1,4 @@
+import { importPackagedObjectRuntime } from './shared-imports.mts';
 import { parseObjectDescriptor, type ObjectDescriptor } from '@cssearth/objects';
 import type { ObjectEntry } from './objects.mts';
 
@@ -8,7 +9,7 @@ export const objectAdapter = Object.freeze({
     if (descriptor) {
       const preparedDescriptor = parseObjectDescriptor(descriptor);
       if (preparedDescriptor.id !== objectId) throw new TypeError(`Prepared descriptor does not match object ${objectId}.`);
-      const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
+      const { loadPackagedObject } = await importPackagedObjectRuntime();
       mount = await loadPackagedObject(preparedDescriptor, signal);
     } else {
       const directory = objects ? null : await import('./object-directory.mts');

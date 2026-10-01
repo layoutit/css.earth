@@ -114,10 +114,18 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   if (saved || focusing) {
     const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
     if (!frame) throw new RangeError('A saved view requires a prepared world frame.');
-    saved = await renderNativeFocus(shell.document, stage, url, definition, frame, saved, fetcher);
-    if (saved) {
-      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, saved);
-      stage.dataset.preparedView = formatSharedView(saved).slice(2);
+    try {
+      saved = await renderNativeFocus(shell.document, stage, url, definition, frame, saved, fetcher);
+      if (saved) {
+        publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, saved);
+        stage.dataset.preparedView = formatSharedView(saved).slice(2);
+      }
+    } catch (error) {
+      // A view that reads but names no camera this scene can take (a rotation that is not orthonormal, a distance out
+      // of range) is answered like one that does not read: the page without it, never a failed function. One such link
+      // answered 502 with the function's stack (2026-10-01).
+      if (views.length && (error instanceof TypeError || error instanceof RangeError)) throw new UnreadableSavedView(views[0]!);
+      throw error;
     }
   }
   if (feature) {

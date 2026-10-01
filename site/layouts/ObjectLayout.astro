@@ -108,25 +108,16 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
-      import { startFirstView } from '../startup-boot.mts';
+      import { startViewCode } from '../startup-boot.mts';
       bindNativeViewForms(document, window);
-      startFirstView(document);
-      import("../scene/scene-router.mts").catch(error => {
+      // The router's graph has exactly one way in, and nothing else is imported until it has evaluated (startup-boot.mts).
+      import("../scene/scene-router.mts").then(() => startViewCode(document), error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();
         delete document.documentElement.dataset.shellContext;
         delete document.documentElement.dataset.bodyPending;
         console.error('The interactive scene could not load.', error);
       });
-    </script>}
-    {/* Static imports make the browser fetch the application's modules while it parses the HTML; the dynamic import
-        above only starts after parsing. A browser finds a module's imports only after downloading it, and the bundler
-        does not hoist transitive imports, so the body runtime the router imports while it mounts is named here too.
-        The registry and the world's code start loading at boot (`startup-boot.mts`). All resolve to the same module
-        instances, and the script above owns failure. */}
-    {!navigation && <script>
-      import '../packaged-object-runtime.mts';
-      import '../scene/scene-router.mts';
     </script>}
     {!navigation && <script is:inline set:html={webAnalyticsBootstrap}></script>}
     <slot name="object-head" />

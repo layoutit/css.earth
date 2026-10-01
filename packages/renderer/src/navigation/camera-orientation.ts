@@ -3,7 +3,7 @@ export interface CameraOrientationOptions extends CameraAngles { cameraPlan: Cam
 export type CameraOrientation = ReturnType<typeof createCameraOrientation>;
 import { rotationAxisAngle } from "@cssearth/engine";
 import { cssDirectionToViewDirection } from "../solar-system/solar-view-direction.js";
-import { validateWorldRotation } from './world-camera-math.js';
+import { nearestWorldRotation, validateWorldRotation } from './world-camera-math.js';
 import { preparedSceneMatrix } from './prepared-camera-basis.js';
 
 export function createCameraOrientation({
@@ -47,7 +47,7 @@ export function createCameraOrientation({
       invalidatePresentations();
     },
     rebaseScene(change: DOMMatrix) {
-      sceneMatrix = sceneMatrix.multiply(change);
+      sceneMatrix = rotationOf(sceneMatrix.multiply(change));
       invalidatePresentations();
     },
     prepareFlight(target: CameraAngles, targetCorrection?: DOMMatrix) {
@@ -72,20 +72,20 @@ export function createCameraOrientation({
     },
     restore(snapshot: CameraPose) {
       if (snapshot?.schema !== "cssearth-camera-pose@2") throw new TypeError("Physical camera pose is invalid.");
-      sceneMatrix = parseCameraPoseMatrix(snapshot.scene, "scene");
+      sceneMatrix = rotationOf(parseCameraPoseMatrix(snapshot.scene, "scene"));
       invalidatePresentations();
     },
     rotate({ renderedPitchDelta, yawDelta, rotation }: { renderedPitchDelta: number; yawDelta: number; rotation?: Quaternion }) {
       if (rotation) {
-        sceneMatrix = dragRotationMatrix(rotation).multiply(sceneMatrix);
+        sceneMatrix = rotationOf(dragRotationMatrix(rotation).multiply(sceneMatrix));
         invalidatePresentations();
         return;
       }
 
-      sceneMatrix = new DOMMatrix()
+      sceneMatrix = rotationOf(new DOMMatrix()
         .rotateAxisAngle(1, 0, 0, renderedPitchDelta)
         .rotateAxisAngle(0, 1, 0, yawDelta)
-        .multiply(sceneMatrix);
+        .multiply(sceneMatrix));
       invalidatePresentations();
     },
     scene() {
@@ -119,6 +119,13 @@ export function createCameraOrientation({
       return sunViewDirection;
     },
   });
+}
+
+/** The scene matrix as a true rotation again (`nearestWorldRotation`): without this the camera's own check refused a
+ * drifted matrix and the capture failed the scene (illustrative rotation, a drag, then a dataset switch on Earth, 2026-10-01). */
+function rotationOf(matrix: DOMMatrix): DOMMatrix {
+  const [a, b, c, d, e, f, g, h, i] = nearestWorldRotation([matrix.m11, matrix.m12, matrix.m13, matrix.m21, matrix.m22, matrix.m23, matrix.m31, matrix.m32, matrix.m33]);
+  return new DOMMatrix([a!, b!, c!, 0, d!, e!, f!, 0, g!, h!, i!, 0, 0, 0, 0, 1]);
 }
 
 function formatMatrix3d(matrix: DOMMatrixReadOnly) {
