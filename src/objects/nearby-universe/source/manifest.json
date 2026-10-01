@@ -297,6 +297,54 @@
         "galaxies-table"
       ],
       "license": "Original catalogue terms apply; cite Huchra et al. (2012) and CDS/VizieR."
+    },
+    {
+      "id": "galaxies-cepheid-hosts",
+      "path": "src/objects/nearby-universe/source/galaxies/cepheid-hosts.csv",
+      "origin": "https://arxiv.org/abs/1604.01424",
+      "sourceUrl": "https://arxiv.org/abs/1604.01424",
+      "title": "Galaxies of this table with a Cepheid distance from the Hubble Space Telescope",
+      "credit": "Riess et al. (2016), ApJ 826, 56, table 5; positions resolved by SIMBAD (CDS, Strasbourg)",
+      "acquisition": "The generator lists each of Riess et al.'s 19 hosts by the row SIMBAD's position matches within 30 arcsec, with the paper's Cepheid distance modulus. Written 2026-10-01.",
+      "generator": "packages/telescope-cli/authoring/nearby-universe/cepheid-hosts.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1604-01424",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/table/measuredDistance"
+          }
+        ]
+      },
+      "dependencies": [
+        "galaxies-table"
+      ],
+      "license": "Published measurements; cite Riess et al. (2016)."
+    },
+    {
+      "id": "galaxies-2mrs-cepheid-hosts",
+      "path": "src/objects/nearby-universe/source/galaxies-2mrs/cepheid-hosts.csv",
+      "origin": "https://arxiv.org/abs/1604.01424",
+      "sourceUrl": "https://arxiv.org/abs/1604.01424",
+      "title": "Galaxies of this table with a Cepheid distance from the Hubble Space Telescope",
+      "credit": "Riess et al. (2016), ApJ 826, 56, table 5; positions resolved by SIMBAD (CDS, Strasbourg)",
+      "acquisition": "The generator lists each of Riess et al.'s 19 hosts by the row SIMBAD's position matches within 30 arcsec, with the paper's Cepheid distance modulus. Written 2026-10-01.",
+      "generator": "packages/telescope-cli/authoring/nearby-universe/cepheid-hosts.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1604-01424",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/galaxies-2mrs/points.json#/table/measuredDistance"
+          }
+        ]
+      },
+      "dependencies": [
+        "galaxies-2mrs-sample"
+      ],
+      "license": "Published measurements; cite Riess et al. (2016)."
     }
   ],
   "documents": [

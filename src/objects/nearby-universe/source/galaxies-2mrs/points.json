@@ -14,7 +14,13 @@
       "decDeg": 3,
       "distance": 4
     },
-    "distanceUnit": "redshift-planck18"
+    "distanceUnit": "redshift-planck18",
+    "measuredDistance": {
+      "path": "cepheid-hosts.csv",
+      "unit": "distance-modulus",
+      "source": "arxiv-1604-01424",
+      "basis": "Riess et al. (2016), table 5, column mu_Ceph: each host's distance modulus from its own Cepheids, measured by the Hubble Space Telescope to about 0.05 mag, where a group's average or a redshift places it megaparsecs away. The packaged Cepheids of these galaxies sit at the same distance."
+    }
   },
   "sample": "The tracked file keeps the 27,897 of 2MRS's 44,599 galaxies that Cosmicflows-4 does not hold (none within 10 arcsec of a Cosmicflows-4 position), with a redshift from Cosmicflows-4's nearest galaxy to z 0.05 in the cosmic microwave background's frame (packages/bake/authoring/nearby-universe/twomrs-sample.mts: Planck's dipole, 369.82 km/s toward l 264.021, b 48.253), with ID, RA, DEC, Z, the ZCAT numerical type T and Kcmag.",
   "filters": [],

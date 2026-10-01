@@ -33,7 +33,7 @@ import { readFitsHdus, binaryTable, tableColumn, numbers } from '@cssearth/bake/
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
 import { spectrumLinearSrgb } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, placeGroupMembers, recipePublished, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
+import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, placeGroupMembers, placeMeasuredRows, recipePublished, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectDirectoryArgument, id] = process.argv.slice(2);
 if (!objectDirectoryArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare-catalogue-points.mts <object-directory> <id>');
@@ -65,7 +65,11 @@ const table = recipe.table as { path: string; bytes: number; format: 'whitespace
    * distance unit), spread along the line of sight as widely as the group spreads across the sky: `depth: 'isotropic'`
    * gives each member the sky-plane offset of the member half the group away in table order. A row's own distance is kept
    * where its group has one member here or no distance. `source` and `basis` say whose groups and why. */
-  groupDistance?: { group: Column; distance: Column; depth: 'isotropic'; source: string; basis: string } };
+  groupDistance?: { group: Column; distance: Column; depth: 'isotropic'; source: string; basis: string };
+  /** Rows a paper measures one by one: a CSV with a header, `name` (this table's name column) and `distance` in `unit`. Such a
+   * row sits at that distance on its own sight line, whatever its column, its redshift or its group says: a galaxy whose
+   * Cepheids Hubble measured is where they put it, not at its group's average. `source` and `basis` say whose measurements. */
+  measuredDistance?: { path: string; unit: 'distance-modulus'; source: string; basis: string } };
 const discPlacement = (recipe.frame as { placement?: unknown } | undefined)?.placement === 'image-layer-disc';
 // A galaxy with no disc (M87): each ICRS row at a depth drawn from a published spheroid's density along its sight line.
 const spheroidPlacement = (recipe.frame as { placement?: unknown } | undefined)?.placement === 'spheroid';
@@ -282,7 +286,7 @@ if r['disc']: xyz = []
 elif r['icrs']: xyz = SkyCoord(ra=[k[1] for k in kept] * u.deg, dec=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='icrs').cartesian.xyz.to(out).value.T
 else: xyz = SkyCoord(l=[k[1] for k in kept] * u.deg, b=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='galactic').icrs.cartesian.xyz.to(out).value.T
 json.dump({'rows': rows, 'selected': len(kept) + missing, 'missingDistance': missing, 'excluded': excluded, 'astropy': astropy.__version__,
-  'points': [[round(float(v), 4) for v in p] for p in xyz], 'groups': grouped if r['group'] else None, 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'bands': [k[7] for k in kept], 'redshifts': redshifts,
+  'points': [[round(float(v), 4) for v in p] for p in xyz], 'names': [k[0] for k in kept], 'groups': grouped if r['group'] else None, 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'bands': [k[7] for k in kept], 'redshifts': redshifts,
   'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'sky': [[k[1], k[2]] for k in kept] if r['disc'] else None,
   'maxDistanceKpc': 0 if r['disc'] else max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus', 'redshift-planck18') else 1)}, sys.stdout)`;
 const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
@@ -294,7 +298,7 @@ const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env,
     disc: skyPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
     bands: colorByBands ? [colorByBands.red, colorByBands.green, colorByBands.blue] : null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
-const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; excluded: number; astropy: string; points: number[][]; colors: (number | null)[];
+const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; excluded: number; astropy: string; points: number[][]; names: string[]; colors: (number | null)[];
   magnitudes: (number | null)[]; bands: (number[] | null)[]; redshifts: number[] | null;
   sigmas: (number | null)[]; sky: [number, number][] | null; maxDistanceKpc: number; groups: [string, string][] | null };
 /** A disc placement may spread the rows through the disc's published thickness: each row keeps its place in the disc (the
@@ -316,6 +320,10 @@ if (groupDistance) {
   }
   groupPlaced = placeGroupMembers(converted.points, converted.groups!.map(([group]) => group), group => groupDistances.get(group) ?? null);
 }
+const measuredDistance = table.measuredDistance;
+if (measuredDistance && (skyPlacement || measuredDistance.unit !== 'distance-modulus' || !measuredDistance.source || !measuredDistance.basis)) throw new TypeError(`${at('table.measuredDistance')} needs a path, unit distance-modulus, a source and a basis, and a table placed by distance.`);
+if (measuredDistance) await readFile(resolve(objectDirectory, '../../sources', `${measuredDistance.source}.json`)).catch(() => { throw new TypeError(`${at('table.measuredDistance.source')} ${measuredDistance.source} has no record in src/sources.`); });
+const measuredPlaced = measuredDistance ? placeMeasuredRows(converted.points, converted.names, await readFile(resolve(sourceDirectory, measuredDistance.path), 'utf8'), measuredDistance.path, frame.unit === 'Mpc' ? 1e-6 : 1e-3) : 0;
 const discThickness = (recipe.frame as { discThickness?: unknown } | undefined)?.discThickness as undefined | {
   profile: 'sech2' | 'exponential'; scaleHeightPc: number | { atCentrePc: number; perKpcPc: number }; source: string; basis: string };
 const flare = typeof discThickness?.scaleHeightPc === 'object' && discThickness.scaleHeightPc !== null ? discThickness.scaleHeightPc : null;
@@ -576,6 +584,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   counts: { rows: converted.rows, selected: converted.selected, points: converted.points.length, missingDistance: converted.missingDistance,
     ...(table.exclude ? { excluded: converted.excluded } : {}), ...(bulgePlacement ? { bulge: bulgeMembers } : {}) },
   ...(bulgePlacement ? { bulge: { source: bulgePlacement.source, basis: bulgePlacement.basis } } : {}),
+  ...(measuredDistance ? { measuredDistance: { source: measuredDistance.source, basis: measuredDistance.basis, placed: measuredPlaced } } : {}),
   // Each point's group, which a merge that keeps groups first reads (merge-catalogue-points.mts).
   ...(groupDistance ? { groupDistance: { source: groupDistance.source, depth: groupDistance.depth, basis: groupDistance.basis, placed: groupPlaced },
     groups: converted.groups!.map(([group]) => group) } : {}),

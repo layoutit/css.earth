@@ -84,3 +84,28 @@ export function selectByShell<T extends ShellPoint>(order: readonly T[], width: 
     return true;
   });
 }
+
+/** Rows a paper measures one by one, at that distance on their own sight line whatever their column, redshift or group says:
+ * a galaxy whose Cepheids Hubble measured is where they put it, not at its group's average (NGC 4536 was drawn 17 Mpc from
+ * its Cepheids, by its redshift, 2026-10-01). `csv` is `name,distance` with distance moduli; `perPc` turns parsecs into the
+ * points' unit. A listed row the table does not hold is a mistake in the list. Returns how many rows moved. */
+export function placeMeasuredRows(points: number[][], names: readonly string[], csv: string, path: string, perPc: number,
+  round = (value: number) => Math.round(value * 1e4) / 1e4): number {
+  const [header, ...lines] = csv.trim().split('\n');
+  if (header !== 'name,distance') throw new TypeError(`${path}: the header is name,distance, not "${header}".`);
+  const wanted = new Map(lines.map(line => {
+    const [name, modulus] = line.split(','), value = Number(modulus);
+    if (!name || !modulus || !Number.isFinite(value)) throw new TypeError(`${path}: "${line}" is not a name and a distance modulus.`);
+    return [name, 10 ** (value / 5 + 1) * perPc] as const;
+  }));
+  let placed = 0;
+  for (const [index, name] of names.entries()) {
+    const distance = wanted.get(name);
+    if (distance === undefined) continue;
+    const point = points[index]!, length = Math.hypot(point[0]!, point[1]!, point[2]!);
+    for (const axis of [0, 1, 2]) point[axis] = round(point[axis]! / length * distance);
+    wanted.delete(name); placed++;
+  }
+  if (wanted.size) throw new TypeError(`${path}: ${[...wanted.keys()].join(', ')} ${wanted.size === 1 ? 'is' : 'are'} not among the table's rows.`);
+  return placed;
+}
