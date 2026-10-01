@@ -45,10 +45,9 @@
     "uncertainty": 4
   },
   "distance": {
-    "value": 772000,
-    "source": "Distance 772 +/- 44 kpc, (m-M)0 = 24.44 +/- 0.12 mag, from the pair's own radii, temperatures and brightness, Ribas et al. (2005), ApJ 635, L37, Sect. 4",
-    "url": "https://arxiv.org/abs/astro-ph/0511045",
-    "uncertainty": 44000
+    "value": 769549,
+    "source": "Placed in M31 as the app draws it, where the star's sight line crosses the disc's midplane: 769,549 pc (src/objects/m31/source/recipe.json: centre 776,247 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 74 deg, line of nodes 37.7 deg). The pair's own measured distance: Distance 772 +/- 44 kpc, (m-M)0 = 24.44 +/- 0.12 mag, from the pair's own radii, temperatures and brightness, Ribas et al. (2005), ApJ 635, L37, Sect. 4; it is told in the text, and the star is drawn in the galaxy",
+    "url": "https://doi.org/10.33232/001c.144859"
   },
   "planets": [],
   "companions": [],

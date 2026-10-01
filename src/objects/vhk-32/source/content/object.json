@@ -21,11 +21,11 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "840,234 parsecs",
+        "value": "859,887 parsecs",
         "source": {
-          "catalogueId": "arxiv-2304-00037",
-          "url": "https://arxiv.org/abs/2304.00037",
-          "label": "Breuval et al. (2023), ApJ 951, 118, abstract: M33's Cepheid distance modulus 24.622 +/- 0.03 mag, 10^(mu/5 + 1) pc",
+          "catalogueId": "doi-10-33232-001c-144859",
+          "url": "https://doi.org/10.33232/001c.144859",
+          "label": "Placed in M33 as the app draws it, where the star's sight line crosses the disc's midplane: 859,887 pc (src/objects/m33/source/recipe.json: centre 859,014 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 54 deg, line of nodes 22.5 deg). The galaxy's Cepheid distance, Breuval et al. (2023), ApJ 951, 118, abstract: modulus 24.622 +/- 0.03 mag, 840 kpc; it places the galaxy, not a star within it",
           "checked": "2026-10-01",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"

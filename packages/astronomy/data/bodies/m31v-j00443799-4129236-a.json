@@ -15,14 +15,14 @@
   "rightAscensionDegrees": 11.158351600967814,
   "declinationDegrees": 41.489929129091585,
   "positionEpochJulianYear": 2016,
-  "distanceParsecs": 772000,
+  "distanceParsecs": 769549,
   "properMotionRaMasPerYear": -0.7414059050426701,
   "properMotionDecMasPerYear": 0.2637970635625689,
   "radialVelocityKmPerS": -173,
   "presentationUp": "display-axis",
   "sources": {
    "position": "Gaia DR3 source 369281910880929792 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/m31v-j00443799-4129236-a/source/photometry/gaia-dr3-source.csv",
-   "distance": "Distance 772 +/- 44 kpc, (m-M)0 = 24.44 +/- 0.12 mag, from the pair's own radii, temperatures and brightness, Ribas et al. (2005), ApJ 635, L37, Sect. 4 (https://arxiv.org/abs/astro-ph/0511045): 772000 +/- 44000 pc; Gaia DR3 parallax 0.8565 +/- 0.4344 mas (same row, RUWE 0.98), 2.0 standard errors, is not used",
+   "distance": "Placed in M31 as the app draws it, where the star's sight line crosses the disc's midplane: 769,549 pc (src/objects/m31/source/recipe.json: centre 776,247 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 74 deg, line of nodes 37.7 deg). The pair's own measured distance: Distance 772 +/- 44 kpc, (m-M)0 = 24.44 +/- 0.12 mag, from the pair's own radii, temperatures and brightness, Ribas et al. (2005), ApJ 635, L37, Sect. 4; it is told in the text, and the star is drawn in the galaxy (https://doi.org/10.33232/001c.144859): 769549 pc; Gaia DR3 parallax 0.8565 +/- 0.4344 mas (same row, RUWE 0.98), 2.0 standard errors, is not used",
    "properMotion": "Gaia DR3 (same row): -0.741, 0.264 mas/yr",
    "radialVelocity": "Systemic velocity gamma -173 +/- 4 km/s of the pair, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045)"
   }
