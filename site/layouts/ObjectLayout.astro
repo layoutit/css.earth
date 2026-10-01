@@ -102,7 +102,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* Static imports make the browser fetch the application's modules while it parses the HTML; the dynamic import
         above only starts after parsing. A browser finds a module's imports only after downloading it, and the bundler
         does not hoist transitive imports, so the body runtime the router imports while it mounts is named here too.
-        The registry and world summary load after the first body (`scene-router.mts`). All resolve to the same module
+        The registry and the world's code start loading at boot (`startup-boot.mts`). All resolve to the same module
         instances, and the script above owns failure. */}
     {!navigation && <script>
       import '../packaged-object-runtime.mts';
