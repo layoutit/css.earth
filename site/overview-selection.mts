@@ -15,7 +15,9 @@ const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axi
 export const solarSystemFocus = (objects: SystemObjects) => objects.find(object => object.id === SOLAR_SYSTEM_ID);
 
 /** `objects` are the loaded objects, for the mounted one's frame; `systems` are the world's bodies, for its system and the Sun. */
-export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean }): OverviewSelection | null {
+export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview, landed = false }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean;
+  /** A flight to a framing (a header pill's category) has just landed here. */
+  landed?: boolean }): OverviewSelection | null {
   const selected = objects.find(object => object.id === objectId)?.worldFrame;
   if (!selected) return null;
   const system = systemOfObject(systems, objectId);
@@ -26,12 +28,10 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
     if (system) {
       const outside = distance(selected.originM, system.originM);
       const exit = outside >= system.exitDistanceM ? outside + system.exitDistanceM : system.exitDistanceM;
-      // A camera as far from the body as its star is has left the body for its system: from there the star is as near as
-      // the body, and the system is what the view shows. Earth kept its "Earth–Moon system" card out to 100 au, with
-      // the whole Solar System on screen from 40 (2026-10-01). The star itself keeps the exit distance.
-      // A body still drawn as a disc keeps its card: a hot Jupiter a few stellar radii out is 60 px wide from there.
-      const range = distance(world.pose.positionM, selected.originM);
-      if (outside > 0 && range >= outside && 2 * selected.bodyRadiusM / range * viewport.focalPixels < policy.exitBodyDiameterPixels) return { overview: true, objectId: system.id };
+      // A flight that lands as far from the body as its star is has left the body for its system: the Moons pill from
+      // Earth framed the whole Solar System at 88 au under the "Earth–Moon system" card (2026-10-01). A zoom by hand
+      // keeps the body's scene out to the exit distance, so a reader can come back in.
+      if (landed && outside > 0 && distance(world.pose.positionM, selected.originM) >= outside) return { overview: true, objectId: system.id };
       return distance(world.pose.positionM, system.originM) >= exit ? { overview: true, objectId: system.id } : null;
     }
     // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
@@ -59,11 +59,11 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
 export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
   onChange, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; windowTarget: Window }) {
   let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
-  function inspect() {
+  function inspect(landed = false) {
     timer = null;
     candidate = null;
     if (disposed || !isAvailable() || !latest) return;
-    const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview() });
+    const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), landed });
     if (next) onChange(next);
   }
   const unsubscribe = navigation.subscribe((world, viewport) => {
@@ -74,9 +74,9 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     if (next?.objectId === candidate?.objectId && next?.overview === candidate?.overview) return;
     if (timer !== null) windowTarget.clearTimeout(timer);
     timer = null; candidate = next;
-    if (next) timer = windowTarget.setTimeout(inspect, policy.settleMilliseconds);
+    if (next) timer = windowTarget.setTimeout(() => inspect(), policy.settleMilliseconds);
   });
   // `refresh` settles at once on the last camera: a flight that held the watcher off (isAvailable) hands over where it landed.
   return Object.assign(() => { disposed = true; unsubscribe(); if (timer !== null) windowTarget.clearTimeout(timer); },
-    { refresh() { if (timer !== null) windowTarget.clearTimeout(timer); inspect(); } });
+    { refresh(landed = false) { if (timer !== null) windowTarget.clearTimeout(timer); inspect(landed); } });
 }
