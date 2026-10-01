@@ -283,8 +283,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setOverview(enabled: boolean, scope?: string, preserveSelection = false) {
             overview = enabled;
             spatial.setOverview(enabled, preserveSelection);
-            // Past the system scope (the Milky Way's and beyond), the Solar System is its star.
-            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system');
+            // Past the system scope (the Milky Way's), the Solar System is its star; past the galaxy's (the Local Group's and
+            // beyond), the galaxy's stars retire too.
+            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system', scope !== undefined && scope !== 'system' && scope !== 'milky-way');
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
