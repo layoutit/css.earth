@@ -31,6 +31,8 @@ test('every scene and every package the host draws has exactly one searchable de
   assert.equal(requirePage('mars').name, 'Mars');
   const sitemap = await (await import('../pages/sitemap.xml.ts')).GET().text();
   for (const level of OVERVIEWS) assert.ok(sitemap.includes(`/${level.id}/</loc>`), level.id);
+  // The site's own address leads: it was absent, and it is the page a search result should name (2026-10-01).
+  assert.ok(sitemap.includes('<url><loc>https://css.earth/</loc></url>'));
   // The Local Group is a level with a place of its own: the world draws and names it.
   assert.ok(OVERVIEWS.find(level => level.id === 'local-group')?.worldFrame);
   // Levels are searched through their own rows (CatalogueOverviewRows.astro); every object through the catalogue.
