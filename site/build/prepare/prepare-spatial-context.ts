@@ -82,8 +82,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const prepared = readPreparedObjects(process.cwd()), registry = prepared.sceneObjects;
     const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
-    const { markerScale, LOCAL_GROUP_SCALE } = await import('@cssearth/renderer/labels/universe-label-policy.ts');
-    const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('./jpl-mission-targets.mts');
+        const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('./jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records, as the prepared catalogue holds them: what the world's visibility reads per body.
@@ -105,11 +104,10 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       if (object.classification === 'asteroid' && !isJplMissionTarget(object) && !imagery) body.plainDot = true;
       // The galactic map's stars are decorative except the notable ones: a star is a map target only when it is featured (an IAU
       // name, or marked notable), has real imagery or hosts a body that does. Every other star, archive hosts included, is a
-      // plain dot; its page stays reachable through search. A star beyond the Local Group is not one of the Milky Way's field:
-      // it is a target at the scale of its own galaxy's cluster, where it keeps its marker (universe-label-policy markerScale).
+      // plain dot; its page stays reachable through search. The rule holds in every galaxy: a clickable marker always shows its
+      // ring and name, so a Cepheid in a Virgo Cluster galaxy is a target only when its package features it.
       const discovery = discoveries[object.id] as { featured?: unknown; hostsImagery?: unknown } | undefined;
-      if (object.classification === 'star' && body !== input.focus && !imagery && discovery?.featured !== true && discovery?.hostsImagery !== true &&
-        markerScale(object.distance.meters) === LOCAL_GROUP_SCALE) body.plainDot = true;
+      if (object.classification === 'star' && body !== input.focus && !imagery && discovery?.featured !== true && discovery?.hostsImagery !== true) body.plainDot = true;
       // A star's dot is its colour dimmed by its luminosity, L/L☉ = (R/R☉)²(T/T☉)⁴ from the radius and effective temperature
       // its package cites, against the IAU 2015 nominal solar values. Baked here, so the map writes nothing per frame for it.
       // A star whose package cites neither keeps its full colour.

@@ -21,9 +21,9 @@ The Virgo Cluster's member galaxies that the [Nearby Universe](../nearby-univers
 
 A browser capture of this version, after picking Virgo in the Nearby Universe list: 797 member dots load with the field's 164. The Nearby Universe places the field's own Virgo galaxies the same way; there the cluster comes out 0.64 Mpc deep (rms), where [Mei et al. (2007)](https://arxiv.org/abs/astro-ph/0702510) measured 0.6 ± 0.1 Mpc. The EVCC reaches 3.5 times Virgo's virial radius, so these members spread wider, about as deep as their 725 deg² footprint is wide.
 
-![Hovering the NGC 4639 Cepheids beside M87 names one of them](evidence/2026-09-30/cepheid-hover.jpg)
+![M87's page: one Cepheid of NGC 4639 ringed and named beside M87](evidence/2026-10-01/featured-cepheid.jpg)
 
-A headless capture of M87's page, 1.2 Mpc out: the 32 Cepheids Hubble resolved in NGC 4639 ([Hoffmann et al. 2016](https://arxiv.org/abs/1607.08658)) sit together as one dot, which names one of them on hover and opens its page on a click. They are stars of their own packages, placed at their galaxy's Cepheid distance; a star beyond the Local Group keeps its marker within 8 Mpc of the camera.
+A headless capture of M87's page, 1.2 Mpc out: the 32 Cepheids Hubble resolved in NGC 4639 ([Hoffmann et al. 2016](https://arxiv.org/abs/1607.08658)) sit together as plain dots, and the largest by the period relation, NGC 4639 Cepheid 36973, is featured: ringed, named and opened by a click. The others are reached through search, as an unfeatured star is in every galaxy. They are stars of their own packages, placed at their galaxy's Cepheid distance; a star beyond the Local Group keeps its dot within 8 Mpc of the camera.
 
 ## Known problems
 

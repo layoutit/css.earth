@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-2107-08029",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Li et al. (2021): A sub-2% Distance to M31 from Photometrically Homogeneous Near-Infrared Cepheid Period-Luminosity Relations Measured with the Hubble Space Telescope",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2107.08029"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ac1597"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2107.08029",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ac1597",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2107.08029",
+      "checkedOn": "2026-10-01",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Li et al. (2021)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2107.08029"
+    }
+  ],
+  "creators": [
+    "Siyang Li",
+    "Adam G. Riess",
+    "Michael P. Busch",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

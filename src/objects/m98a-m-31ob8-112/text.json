@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m98a-m-31ob8-112",
+  "card": {
+    "text": "A Cepheid in the Andromeda Galaxy, 761 kiloparsecs away, that swells and shrinks every 76.6 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2107-08029",
+        "url": "https://arxiv.org/abs/2107.08029",
+        "label": "Li et al. (2021)",
+        "checked": "2026-10-01",
+        "locator": "table 2, ID CEPH-11.06418+41.56925, Per 76.556: Per; Li et al. (2021), ApJ 920, 84: mu_0"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Hubble Space Telescope measured its brightness in three colours and its pulsation of 76.6 days. Its galaxy's distance, 761 kiloparsecs, was measured from Cepheids like it.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2107-08029",
+        "url": "https://arxiv.org/abs/2107.08029",
+        "label": "Li et al. (2021)",
+        "checked": "2026-10-01",
+        "locator": "table 2, ID CEPH-11.06418+41.56925, Per 76.556: Per; Li et al. (2021), ApJ 920, 84: mu_0"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

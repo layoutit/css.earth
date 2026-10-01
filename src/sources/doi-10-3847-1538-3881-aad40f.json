@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aad40f",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kodric et al. (2018): Cepheids in M31: The PAndromeda Cepheid Sample",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1806.07895"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aad40f"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018AJ....156..130K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..130K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aad40f",
+      "label": "The Astronomical Journal 156 130"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..130K",
+      "checkedOn": "2026-10-01",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kodric et al. (2018), The Astronomical Journal 156 130",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..130K"
+    }
+  ],
+  "publisher": "The Astronomical Journal 156 130",
+  "creators": [
+    "Mihael Kodric",
+    "Arno Riffeser",
+    "Ulrich Hopp",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

@@ -85,7 +85,7 @@ const ROUTES: Record<ColorRoute, Route> = {
         [url, 'HDU 1 binary table: WAVELENGTH (Angstrom), FLUX (FLAM)'], 'NASA/STScI; STIS Next Generation Spectral Library v2 (Heap & Lindler), MAST', 'https://archive.stsci.edu/publishing/data-use', 'Space Telescope Science Institute') };
   },
   async 'gaia-xp'({ row, archive }) {
-    if (!row) return 'the star has no Gaia DR3 source';
+    if (!row) return 'the star is placed by a catalogue row, so no Gaia DR3 source is read for it';
     if (!row.hasXpSampled) return 'Gaia DR3 published no sampled BP/RP spectrum of it';
     // ESA's DataLink first; when it is down, the same product from the ARI Heidelberg partner data centre's TAP mirror.
     const url = xpSampledUrl(row.sourceId), form = xpSampledMirrorForm(row.sourceId);
