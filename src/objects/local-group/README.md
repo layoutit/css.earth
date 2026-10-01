@@ -42,6 +42,10 @@ The [catalogue tests](../../../packages/bake/src/galaxy-catalog/galaxy-catalog.t
 
 A headless capture of this version's Nearby Universe page on the local preview: the Local Group's marker and name stand with the two clusters that have packages.
 
+![Before: the same view named seven clusters from catalogue rows, with no Local Group](evidence/2026-10-01/before-catalogue-labels.jpg)
+
+The version before this one, same view: five clusters named from catalogue rows alone (Centaurus, Norma and three out of frame) and no Local Group. Those five have no package, so they are no longer named or listed.
+
 ## Known problems
 
 - The display sample is incomplete by design and is not a density, completeness or mass map.
