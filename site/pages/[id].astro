@@ -2,13 +2,14 @@
 import ObjectPage from '../components/ObjectPage.astro';
 import { OBJECTS } from '../objects.mts';
 import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
+import { builtObjectPages } from '../built-pages.mts';
 export function getStaticPaths() {
   // Every object has its page, `/<id>/`. A scene's page mounts it; the page of anything the world draws around a scene
   // (a catalogue subject, an overview) mounts its host, the world's, with it selected: the path names it.
   for (const object of OBJECTS) if (object.kind !== 'scene' && object.sceneHostId !== WORLD_HOST_ID) {
     throw new TypeError(`${object.id} is hosted by ${object.sceneHostId}, not the world's host ${WORLD_HOST_ID}.`);
   }
-  return OBJECTS.map(object => ({ params: { id: object.id }, props: { sceneId: object.kind === 'scene' ? object.id : object.sceneHostId } }));
+  return builtObjectPages(OBJECTS.map(object => ({ params: { id: object.id }, props: { sceneId: object.kind === 'scene' ? object.id : object.sceneHostId } })), OBJECTS);
 }
 ---
 <ObjectPage objectId={Astro.props.sceneId} pageId={Astro.params.id!} />
