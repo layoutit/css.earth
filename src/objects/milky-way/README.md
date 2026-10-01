@@ -19,7 +19,7 @@ The page before, as a level drawn by the Sun's scene, and after, as this object'
 
 ![Before: the level page](evidence/2026-10-01/before-level-page.jpg)
 
-![After: the object's page](evidence/2026-10-01/after-object-page.jpg)
+![After: the object's page](evidence/2026-10-01/object-page.jpg)
 
 ## Known problems
 
