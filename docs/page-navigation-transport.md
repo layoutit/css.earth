@@ -17,6 +17,33 @@ The first-load build serializes the decoded prepared tree into
 scene. `/objects/<id>/object.json` serves the transport with
 `Cache-Control: public, max-age=0, must-revalidate`.
 
+### One dataset per transport
+
+A body with several datasets sends the tables of its default dataset only. Each
+other dataset's tables go in their own file, `/objects/<id>/datasets/<dataset>.json`.
+These tables are the dataset's selection variants, the texture-level addresses
+of its pages, and the image entries that only it reads
+([dataset tables](../packages/renderer/src/prepared-data/dataset-tables.ts)).
+Earth's transport fell from 85 KB to 44 KB gzipped. Each of its other datasets is
+about 7 KB gzipped (2026-09-30).
+
+The object transport keeps a stand-in variant for each deferred dataset. A
+stand-in keeps the dataset's mesh, subtree and stage writes. It drops the
+dataset's image demand and texture writes. With the stand-ins, a mount still
+knows every node any selection shows. The transport's `deferredDatasets` field
+lists the datasets whose tables have not arrived.
+
+When the reader selects a deferred dataset, the selection runtime reads its file
+through the transport the object came from. The file is read before the
+selection resolves, and the committed dataset keeps drawing while it loads.
+Pointing at, touching or focusing a dataset's control starts that read early, and
+the click shares it, so the images do not wait for a second round trip. The
+runtime then adopts the tables into the decoded definition and commits the
+selection, so a dataset change is still atomic. A server-rendered dataset page
+and a flight to another body read the file the same way. A key that the startup
+bank, a material, a fallback, the tree or two datasets name stays in the object
+transport. A body whose default dataset cannot stand alone fails its build.
+
 Runtime validates the prepared structure; it does not authenticate this transport
 against the descriptor. R2 delivery inventories own the byte counts and content
 addresses of installed baked assets. Keep transport/page regeneration and inventory

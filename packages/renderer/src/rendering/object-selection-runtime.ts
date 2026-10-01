@@ -17,6 +17,8 @@ export interface ObjectSelectionRuntimeOptions {
   residency: ReturnType<typeof createPreparedResidency>; lifetime: SceneLifetime;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   prepareSelection?: (selection: ObjectSelection, signal: AbortSignal) => void | Promise<void>;
+  /** Adopts the tables of a dataset the definition defers (dataset-tables.ts); the selection resolves once they arrive. */
+  readDatasetTables?: (datasetId: string) => Promise<void>;
   onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan, intent: SelectionIntent) => void;
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
   /** The input surface's camera-motion signal: view-driven levels commit only while it is still. */
@@ -27,6 +29,7 @@ export interface ObjectSelectionRuntimeOptions {
 interface SelectionRequest { selection: ObjectSelection; intent: SelectionIntent; controller: AbortController; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
 
 import { resolvePreparedPresentation } from "./prepared-presentation.js";
+import { preparedDatasetPending } from "../prepared-data/dataset-tables.js";
 import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from "../runtime/object-contract.js";
 
 const sameKeys = (a: readonly string[], b: readonly string[]) => a.length === b.length && a.every((key, index) => key === b[index]);
@@ -35,7 +38,7 @@ const sameDemand = (a: PreparedPresentationPlan, b: PreparedPresentationPlan) =>
 
 export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime, initialDataset, initialSettings,
-  onChange = () => {}, prepareSelection, onCommit = () => {}, onFatalError, onMaterialError = () => {},
+  onChange = () => {}, prepareSelection, readDatasetTables, onCommit = () => {}, onFatalError, onMaterialError = () => {},
   motion = null,
 }: ObjectSelectionRuntimeOptions) {
   // Blur while moving (motion-freezes-membership.md): a texture level the view asks for may decode during camera motion,
@@ -141,6 +144,13 @@ export function createObjectSelectionRuntime({
         }
         let ticket;
         try {
+          if (preparedDatasetPending(definition, selection)) {
+            // A dataset whose tables travel apart resolves once they are adopted; the committed one draws meanwhile.
+            if (!readDatasetTables) throw new Error(`Dataset ${String(selection.datasetId)} has no reader for its tables.`);
+            const loaded = await Promise.race([lifetime.wait(readDatasetTables(selection.datasetId!)), cancelled]);
+            if (!current() || loaded.cancelled) { discard(request); return false; }
+            continue;
+          }
           const plan = resolve(selection);
           ticket = request.ticket && request.plan && sameDemand(plan, planFor(request)) ? request.ticket : preparePass(request, plan);
           if (!prepared && kind === 'selection' && prepareSelection) {
