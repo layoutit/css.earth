@@ -18,6 +18,11 @@
             "catalogueId": "jpl-horizons",
             "role": "material",
             "evidence": "src/objects/saturn-minor-moons/source/dots/points.json#/table"
+          },
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "method",
+            "evidence": "src/objects/saturn-minor-moons/source/dots/points.json#/classes"
           }
         ]
       },
@@ -40,6 +45,11 @@
           {
             "catalogueId": "jpl-satellite-discovery",
             "role": "method",
+            "evidence": "src/objects/saturn-minor-moons/README.md#processing"
+          },
+          {
+            "catalogueId": "jpl-satellite-mean-elements",
+            "role": "material",
             "evidence": "src/objects/saturn-minor-moons/README.md#processing"
           }
         ]

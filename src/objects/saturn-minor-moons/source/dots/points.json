@@ -4,7 +4,7 @@
   "published": true,
   "host": "saturn",
   "source": "jpl-horizons",
-  "meaning": "Saturn's confirmed moons that have no page, one dot each at its JPL Horizons position relative to Saturn at the world's epoch. The dot's colour and size are not measurements.",
+  "meaning": "Saturn's confirmed moons that have no page, one dot each at its JPL Horizons position relative to Saturn at the world's epoch, coloured by dynamical group. The colours name the group; they and the dot's size are not measurements of the moons.",
   "table": {
     "path": "positions.csv",
     "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
@@ -19,5 +19,26 @@
     "colorCss": "#b8b8b8",
     "radiusPx": 1,
     "opacity": 1
+  },
+  "classes": {
+    "source": "denk-2018-irregular-moons",
+    "basis": "Denk et al. (2018) describe the prograde Gallic group near 38 degrees of inclination, the prograde Inuit group near 47 degrees, and every other irregular as retrograde (the Norse group). Each moon's group is read from its JPL mean inclination: retrograde above 90 degrees, otherwise the nearer of the two prograde values.",
+    "entries": [
+      {
+        "id": "norse",
+        "label": "Norse group (retrograde)",
+        "colorCss": "#9db7e0"
+      },
+      {
+        "id": "inuit",
+        "label": "Inuit group (prograde, near 47 degrees)",
+        "colorCss": "#f0c27a"
+      },
+      {
+        "id": "gallic",
+        "label": "Gallic group (prograde, near 38 degrees)",
+        "colorCss": "#e58f8f"
+      }
+    ]
   }
 }
