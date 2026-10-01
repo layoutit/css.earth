@@ -19,8 +19,7 @@ export const parseSaturnScene=shape({schema:text,systemTransform:text,meshTransf
     coverageScale:number,textureSize:number,depthBias:number,presentationNodeDegrees:number,meshRotationDegrees:number,tileSize:number})}),
   preparedRingSource:shape({planeVisualOrbitSeconds:number,saturnGmKm3PerS2:number,shadowModel:shape({systemTiltDegrees:number,systemNodeDegrees:number})}),
   ringPlane:shape({style:text,projectiveTextureLayer:textureLayer}),ringShadowPlane:shape({style:text,projectiveTextureLayer:textureLayer}),
-  ringMotionPlates:array(shape({population:text,durationSeconds:number,textureUrl:text,texture2xUrl:text,leaf:shape({style:text,projectiveTextureLayer:textureLayer})})),
-  ringMotionExpansionPlates:array(requireRecord),ringPointGroups:array(requireRecord),bodyBands:bands,
+  bodyBands:bands,
   interior:shape({schema:text,outerBodyBands:bands,shells:array(shape({className:text,leaves:array(preparedLeaf)})),sectionLeaves:array(preparedLeaf),
     atmosphere:shape({model:text,frameCount:number,minimumScenePitchDegrees:number,maximumScenePitchDegrees:number,leaf:preparedLeaf,runtimeShards:shards}),leafCount:number}),
   preparedMotion:shape({referenceRotationVisualSeconds:number,obliquityDegrees:number,cameraRotationXDegrees:number}),counts:dictionary(number)});
