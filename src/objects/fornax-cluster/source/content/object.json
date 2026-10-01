@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 54.62°, Dec -35.45°",
+        "value": "RA 54.62\u00b0, Dec -35.45\u00b0",
         "source": {
           "catalogueId": "mcxc-ii-2024",
           "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
@@ -65,8 +65,25 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "",
-    "controls": []
+    "defaultDataset": "members",
+    "controls": [
+      {
+        "id": "members",
+        "label": "Member galaxies",
+        "thumbnail": "fornax-cluster-dataset-members.webp",
+        "volume": {
+          "objectId": "fornax-cluster-members",
+          "datasetId": "members",
+          "surface": "members"
+        },
+        "source": {
+          "id": "fornax-cluster-members",
+          "path": "../../fornax-cluster-members/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/180"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",
