@@ -14,6 +14,7 @@
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
+import { NEUTRAL_CATALOGUE_COLOUR } from '@cssearth/objects';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -29,7 +30,7 @@ const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
 /** A hosted planet's sphere is drawn 1.25 times its logical size (solar-system.json geometryScale). */
 const GEOMETRY_SCALE = 1.25;
 /** The shared neutral gray of an unresolved surface, as the shape-only bodies use. */
-const NEUTRAL_GRAY = '#9a9a9a';
+const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOUR;
 
 /** A lit hosted planet's page stylesheet: the shared lane template that sizes its 460px lighting frames. It names no dataset
  * image: each dataset's variant writes the textures every leaf reads (scene/projector.ts, presentation/composite.ts). */

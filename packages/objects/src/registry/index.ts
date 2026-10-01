@@ -4,7 +4,7 @@
 // scene loader (`site/objects.mts`); nothing here loads a scene or reads a file.
 export { parseArrivalView, parseArrivalBillboard } from './arrival-view.js';
 export type { PreparedArrivalView, PreparedArrivalBillboard } from './arrival-view.js';
-export { composited, contextColour, contrastRatio, DEFAULT_CONTEXT_COLOUR, readableOnSky, relativeLuminance, SKY_BACKGROUND, TEXT_CONTRAST_MINIMUM } from './context-colour.js';
+export { composited, contextColour, contrastRatio, DEFAULT_CONTEXT_COLOUR, NEUTRAL_CATALOGUE_COLOUR, readableOnSky, relativeLuminance, SKY_BACKGROUND, TEXT_CONTRAST_MINIMUM } from './context-colour.js';
 export { normalizeDestinationQuery, searchDestinations } from './destination-search.js';
 export { orderFacts } from './fact-order.js';
 export { mapLabel } from './map-label.js';
