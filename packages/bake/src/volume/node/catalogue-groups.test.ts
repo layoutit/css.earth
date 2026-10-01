@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { placeGroupMembers, selectByShell } from './catalogue-groups.ts';
+import { placeGroupMembers, placeMeasuredRows, selectByShell } from './catalogue-groups.ts';
 
 test('a group sits at its distance, as deep as it is wide; a lone member or a group without a distance keeps its place', () => {
   // Four members around +x at 10 units, spread along y (east of +x is +y), plus a lone galaxy and a group with no distance.
@@ -36,4 +36,14 @@ test('sky bands split each shell\'s room evenly over the sky, so a densely cover
   assert.equal(kept.filter(point => point.reference[1]! > 0).length, 2);
   assert.equal(kept.filter(point => point.reference[1]! < 0).length, 1);
   assert.throws(() => selectByShell(east, 10, () => 4, undefined, 0), /skyBands/);
+});
+
+test('a row a paper measures sits at that distance on its own sight line; a listed row the table lacks is refused', () => {
+  // Three galaxies in Mpc: the first a group member moved to 19.7, the second placed by its redshift at 32, the third untouched.
+  const points = [[19.7, 0, 0, 5], [0, 32, 0], [3, 4, 0]], names = ['13179', '12342712+0211163', '50063'];
+  const placed = placeMeasuredRows(points, names, 'name,distance\n13179,31.307\n12342712+0211163,30.906\n', 'cepheid-hosts.csv', 1e-6);
+  assert.equal(placed, 2);
+  assert.deepEqual(points, [[18.2558, 0, 0, 5], [0, 15.1775, 0], [3, 4, 0]]);
+  assert.throws(() => placeMeasuredRows(points, names, 'name,distance\n99999,31\n', 'cepheid-hosts.csv', 1e-6), /99999 is not among the table's rows/u);
+  assert.throws(() => placeMeasuredRows(points, names, 'PGC,DM\n13179,31.307\n', 'cepheid-hosts.csv', 1e-6), /the header is name,distance/u);
 });
