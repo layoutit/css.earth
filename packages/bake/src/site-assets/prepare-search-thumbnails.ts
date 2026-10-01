@@ -82,7 +82,7 @@ async function featuredStarPreviews(projectRoot: string): Promise<ReadonlyMap<st
   const previews = new Map<string, string>();
   for (const entry of module.CATALOGUE_ENTRIES) {
     if (!isRecord(entry)) throw new TypeError('Invalid prepared catalogue entry.');
-    if (entry.kind !== 'scene') continue;
+    if (entry.sceneHostId !== undefined) continue;
     if (!isRecord(entry.descriptor) || !isRecord(entry.descriptor.properties) || !isRecord(entry.descriptor.properties.catalog))
       throw new TypeError('Invalid scene catalogue descriptor.');
     if (entry.descriptor.properties.catalog.classification !== 'star') continue;

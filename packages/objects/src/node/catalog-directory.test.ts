@@ -22,14 +22,14 @@ async function objects(packages: Record<string, unknown>) {
 const level = (order: number, classifications: string[], packages: string[] = []) =>
   ({ name: `Level ${order}`, description: 'A level.', order, zoom, holds: [{ classifications }], packages });
 
-test('reads the overviews the packages author, from the nearest level out, hosted by the world host', async () => {
+test('reads the overviews the packages author, from the nearest level out', async () => {
   const root = await objects({ outer: level(2, ['galaxy-cluster']), inner: level(1, ['nebula'], ['stars']), stars: null });
-  const overviews = await readOverviews(root, 'sun');
-  assert.deepEqual(overviews.map(overview => [overview.id, overview.sceneHostId]), [['inner', 'sun'], ['outer', 'sun']]);
+  const overviews = await readOverviews(root);
+  assert.deepEqual(overviews.map(overview => [overview.id, overview.level.order]), [['inner', 1], ['outer', 2]]);
 });
 
 test('refuses levels that share an order, a classification or draw a missing package, naming them', async () => {
-  await assert.rejects(readOverviews(await objects({ a: level(1, ['nebula']), b: level(1, ['galaxy']) }), 'sun'), /a and b share order 1/);
-  await assert.rejects(readOverviews(await objects({ a: level(1, ['galaxy']), b: level(2, ['galaxy']) }), 'sun'), /a and b both hold galaxy/);
-  await assert.rejects(readOverviews(await objects({ a: level(1, ['nebula'], ['stars']) }), 'sun'), /a draws package stars/);
+  await assert.rejects(readOverviews(await objects({ a: level(1, ['nebula']), b: level(1, ['galaxy']) })), /a and b share order 1/);
+  await assert.rejects(readOverviews(await objects({ a: level(1, ['galaxy']), b: level(2, ['galaxy']) })), /a and b both hold galaxy/);
+  await assert.rejects(readOverviews(await objects({ a: level(1, ['nebula'], ['stars']) })), /a draws package stars/);
 });

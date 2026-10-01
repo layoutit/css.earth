@@ -1,25 +1,54 @@
 import { isRecord } from '@cssearth/core';
-import { parseNavigationDistance } from './navigation-distance.js';
 import type { NavigationDistance } from './navigation-distance.js';
-import { parseWorldFrame } from './object-schema.js';
-import type { ObjectEntry, ObjectWorldFrame } from './object-schema.js';
-import { parseObjectDiscovery } from './object-discovery.js';
+import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry, ObjectWorldFrame } from './object-schema.js';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { normalizeDestinationQuery } from './destination-search.js';
-import type { OverviewObject } from './overview-object.js';
+import type { OverviewHolding, OverviewObject, OverviewZoom } from './overview-object.js';
 
-export interface PreparedFocusObject {
-  readonly kind: 'prepared-focus';
+/**
+ * An object of the one registry. Every object has an identity and a page; what else it has is what its package declares:
+ * a place in the world (its catalogue block and world frame), a scene of its own (`loadScene`), a level of the zoom ladder
+ * (`zoom`). A planet is placed and has a scene; a galaxy package is placed and is drawn by the world's host; the Local Group
+ * is placed and is a level; the observable universe is a level only. There is no kind: code asks for the capability it needs.
+ */
+export interface NavigableObject<Scene = unknown, Signal = unknown> {
   readonly id: string;
-  readonly focusId: string;
+  readonly name: string;
+  readonly description: string;
+  readonly route: string;
+  /** Placed: as the package's catalogue block and world frame declare them. */
+  readonly classification?: ObjectClassification;
+  readonly classificationLabel?: string;
+  readonly systemName?: string;
+  readonly color?: string;
+  readonly distance?: NavigationDistance;
+  readonly worldFrame?: ObjectWorldFrame;
+  readonly discovery?: Readonly<ObjectDiscovery>;
+  readonly aliases?: readonly string[];
+  /** The names an object without a scene is found by. */
+  readonly searchNames?: readonly string[];
+  /** A scene of its own; without one the object is drawn by `sceneHostId`'s scene. */
+  readonly loadScene?: ObjectDefinitionInput<Scene, Signal>['loadScene'];
+  readonly sceneHostId?: string;
+  /** A level of the zoom ladder (overview-object.ts). */
+  readonly order?: number;
+  readonly zoom?: OverviewZoom;
+  readonly holds?: readonly OverviewHolding[];
+  readonly packages?: readonly string[];
+  readonly originM?: readonly [number, number, number];
+}
+
+/** A placed object the world's host draws: a galaxy, a cluster of galaxies, a nebula or a globular cluster with a package. */
+export interface PreparedFocusObject {
+  readonly id: string;
   readonly name: string;
   readonly searchNames: readonly string[];
-  readonly classification: 'galaxy' | 'galaxy-cluster' | 'nebula' | 'globular-cluster';
+  readonly classification: ObjectClassification;
+  readonly classificationLabel?: string;
   readonly systemName: string;
   readonly route: string;
   readonly sceneHostId: string;
   readonly distance: NavigationDistance;
-  /** As the package's catalogue block and world frame declare them: the world context places and names it like any body. */
   readonly color: string;
   readonly description: string;
   readonly worldFrame: ObjectWorldFrame;
@@ -28,39 +57,20 @@ export interface PreparedFocusObject {
 /** The package types the world's host draws instead of mounting a scene of their own: image layers, a volume, catalogue points. */
 export const HOSTED_OBJECT_TYPES: readonly string[] = Object.freeze(['image-layer-bank', 'volume-dataset-bank', 'catalogue-point-bank']);
 export const isHostedDescriptor = (descriptor: unknown): boolean => isRecord(descriptor) && typeof descriptor.type === 'string' && HOSTED_OBJECT_TYPES.includes(descriptor.type);
-/** Every entry of the one registry: a scene, or what a host scene draws without one (a catalogue focus, an overview). */
-export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> | PreparedFocusObject | OverviewObject;
-export const isSceneObject = <Scene, Signal>(object: NavigableObject<Scene, Signal>): object is ObjectEntry<Scene, Signal> => object.kind === 'scene';
 
-/** The names a hosted object is found by: its id, name and aliases, normalised, with and without spaces. */
+/** The object mounts a scene of its own. */
+export const isSceneObject = <Scene, Signal>(object: NavigableObject<Scene, Signal>): object is ObjectEntry<Scene, Signal> => typeof object.loadScene === 'function';
+/** The object is a level of the zoom ladder. */
+export const isOverviewObject = (object: NavigableObject<never, never> | NavigableObject): object is OverviewObject => (object as NavigableObject).zoom !== undefined;
+/** The object has a place in the world: the world context draws, names and selects it. */
+export const isPlacedObject = <Scene, Signal>(object: NavigableObject<Scene, Signal>): object is NavigableObject<Scene, Signal> & PlacedFields => object.worldFrame !== undefined;
+export type PlacedFields = Pick<PreparedFocusObject, 'classification' | 'systemName' | 'color' | 'distance' | 'worldFrame' | 'discovery'>;
+/** A placed object with neither a scene nor a level: its page is the host's scene framed on it. */
+export const isHostedObject = <Scene, Signal>(object: NavigableObject<Scene, Signal>): object is PreparedFocusObject =>
+  object.worldFrame !== undefined && typeof object.loadScene !== 'function' && object.zoom === undefined;
+
+/** The names an object without a scene is found by: its id, name and aliases, normalised, with and without spaces. */
 export const destinationSearchNames = (names: readonly string[]): string[] => [...new Set(names.flatMap(name => {
   const normalized = normalizeDestinationQuery(name);
   return [normalized, normalized.replaceAll(' ', '')];
 }))];
-
-/** A package the world's host draws, from its own entry (its descriptor's catalogue block, world frame and discovery). It
- * reuses the host scene and camera; it has no scene loader. */
-export function hostedObject(entry: Pick<ObjectEntry, 'id' | 'name' | 'systemName' | 'classification' | 'color' | 'description' | 'distance' | 'worldFrame' | 'discovery'> & { readonly aliases?: readonly string[] },
-  sceneHostId: string): PreparedFocusObject {
-  return definePreparedFocus({ kind: 'prepared-focus', id: entry.id, focusId: entry.id, name: entry.name,
-    searchNames: destinationSearchNames([entry.id, entry.name, ...entry.aliases ?? []]), classification: entry.classification,
-    systemName: entry.systemName, route: `/${entry.id}/`, sceneHostId, distance: entry.distance, color: entry.color,
-    description: entry.description, worldFrame: entry.worldFrame, discovery: entry.discovery });
-}
-
-export function definePreparedFocus(input: unknown): PreparedFocusObject {
-  if (!isRecord(input) || Object.keys(input).some(key => !['kind', 'id', 'focusId', 'name', 'searchNames', 'classification', 'systemName', 'route', 'sceneHostId', 'distance', 'color', 'description', 'worldFrame', 'discovery'].includes(key)) ||
-      input.kind !== 'prepared-focus' || typeof input.id !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9_.+-]*$/u.test(input.id) || input.focusId !== input.id ||
-      typeof input.sceneHostId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(input.sceneHostId) ||
-      input.route !== `/${input.id}/` ||
-      typeof input.name !== 'string' || !input.name || typeof input.systemName !== 'string' || !input.systemName ||
-      typeof input.color !== 'string' || !/^#[0-9a-f]{6}$/u.test(input.color) || typeof input.description !== 'string' || !input.description || !isRecord(input.worldFrame) ||
-      (input.classification !== 'galaxy' && input.classification !== 'galaxy-cluster' && input.classification !== 'nebula' && input.classification !== 'globular-cluster') ||
-      !Array.isArray(input.searchNames) || !input.searchNames.length || !input.searchNames.every(name => typeof name === 'string' && name)) {
-    throw new TypeError(`Invalid prepared focus destination: ${isRecord(input) ? String(input.id) : typeof input}; its route must be /<id>/ and its fields complete.`);
-  }
-  return Object.freeze({ kind: input.kind, id: input.id, focusId: input.id, name: input.name,
-    searchNames: Object.freeze([...input.searchNames]), classification: input.classification, systemName: input.systemName,
-    route: input.route, sceneHostId: input.sceneHostId, distance: parseNavigationDistance(input.distance), color: input.color,
-    description: input.description, worldFrame: parseWorldFrame(input.worldFrame), discovery: parseObjectDiscovery(input.discovery) });
-}

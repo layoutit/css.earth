@@ -16,7 +16,7 @@ export const WORLD_HOST_ID = SOLAR_SYSTEM_ID;
 
 /** The overviews that are pages: the registry's overview entries, every level of the zoom ladder above a star's system. */
 export type OverviewPageId = Exclude<OverviewScope, 'system'>;
-export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => typeof id === 'string' && knownObject(id)?.kind === 'overview';
+export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => typeof id === 'string' && knownObject(id)?.zoom !== undefined;
 
 /** The page a URL names when it is something the mounted scene `sceneId` draws, not the scene itself; null on the
  * scene's own page. The URL is the selection from the moment it is named, before any bank has loaded. */

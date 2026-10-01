@@ -7,7 +7,7 @@ import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
-import { distanceDescription, isExtendedClassification, isHostedDescriptor, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { distanceDescription, isExtendedClassification, isHostedDescriptor, isHostedObject, isOverviewObject, isPlacedObject, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { resolve } from 'node:path';
@@ -16,24 +16,25 @@ test('every scene and every package the host draws has exactly one searchable de
   const descriptors = await readObjectDescriptors(resolve('src/objects'));
   // A hosted package's entry is its own descriptor's, as a scene's is: no catalogue row names a destination.
   const hosted = [...descriptors].filter(([, descriptor]) => isHostedDescriptor(descriptor) && isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.catalog !== undefined).map(([id]) => id);
-  const overviews = await readOverviews(resolve('src/objects'), 'sun');
+  const overviews = await readOverviews(resolve('src/objects'));
   assert.equal(OBJECTS.length, SCENE_OBJECTS.length + hosted.length + overviews.length);
-  assert.deepEqual(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => object.id).sort(), hosted.sort());
-  assert.deepEqual(OBJECTS.filter(object => object.kind === 'overview'), overviews);
+  assert.deepEqual(OBJECTS.filter(isHostedObject).map(object => object.id).sort(), hosted.sort());
+  assert.deepEqual(OBJECTS.filter(isOverviewObject).map(object => object.id), overviews.map(overview => overview.id));
+  // One object can be more than one thing: the Local Group is a level and has a place in the world.
+  assert.ok(isPlacedObject(requireObject('local-group')) && isOverviewObject(requireObject('local-group')));
   // Overviews are searched through their own rows (CatalogueOverviewRows.astro); everything else through the catalogue.
-  assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.filter(object => object.kind !== 'overview').map(object => object.id)));
+  assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.filter(object => !isOverviewObject(object)).map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
-  assert.equal(requireObject('m31').kind, 'prepared-focus');
-  assert.throws(() => requireSceneObject('m31'), /not a scene owner/);
+  assert.ok(isHostedObject(requireObject('m31')));
+  assert.throws(() => requireSceneObject('m31'), /no scene of its own/);
   for (const [query, id] of [['Andromeda', 'm31'], ['M31', 'm31'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
     const object = requireObject(id!);
-    assert.equal(object.kind, 'prepared-focus');
-    assert.ok(object.kind === 'prepared-focus' && object.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))), query);
+    assert.ok(isHostedObject(object) && object.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))), query);
   }
   // Each is a body of the world, placed by its own world frame.
   for (const id of hosted) {
     const object = requireObject(id);
-    assert.ok(object.kind === 'prepared-focus' && isExtendedClassification(object.classification) && object.worldFrame && Math.hypot(...object.worldFrame.originM) > 0, id);
+    assert.ok(isHostedObject(object) && isExtendedClassification(object.classification) && Math.hypot(...object.worldFrame.originM) > 0, id);
   }
 });
 
@@ -51,7 +52,7 @@ test('distance display and order use the prepared position, never the legacy orb
   assert.ok(!('distanceAu' in halley));
   assert.ok(SEARCH_OBJECTS.every((object, index) => index === 0 || object.distance.meters >= SEARCH_OBJECTS[index - 1]!.distance.meters));
   const cluster = requireObject('virgo-cluster');
-  assert.ok(cluster.kind !== 'overview');
+  assert.ok(isPlacedObject(cluster));
   // A cluster sits at its Cosmicflows-4 group's measured distance, a catalogue distance, not its redshift's comoving one.
   assert.equal(cluster.distance.quantity, 'catalogue');
   assert.equal(cluster.distance.epochJdTt, null, 'navigation epoch must not become a measured distance epoch');
@@ -83,9 +84,9 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   assert.equal(OBJECTS.some(o => o.id === satellite.id), false, 'a catalogue row without a package is data, never a destination');
   // The Milky Way row is detailed by the milky-way package, so it carries that id; its LVDB key stays in its source reference.
   assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'milky-way')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
-  assert.equal(OBJECTS.find(o => o.id === 'milky-way')?.kind, 'overview', 'a physical host does not fabricate a catalogue destination; its page is the overview');
+  assert.equal(isOverviewObject(OBJECTS.find(o => o.id === 'milky-way')!), true, 'a physical host does not fabricate a catalogue destination; its page is the overview');
   const m45 = OBJECTS.find(o => o.id === 'm45')!;
-  assert.ok(m45.kind !== 'overview');
+  assert.ok(isPlacedObject(m45));
   assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
   assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
   assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);

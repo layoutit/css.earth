@@ -1,3 +1,4 @@
+import { isSceneObject } from '@cssearth/objects';
 // Entry script: node site/build/prerender-focus-pages.mts (in build:deploy, after bundle-netlify-functions.mts)
 /**
  * The page of anything the world draws (a catalogue subject, an overview) is the world host's page with it selected
@@ -33,7 +34,7 @@ if (typeof loaded !== 'object' || loaded === null || !('default' in loaded) || t
   throw new Error('netlify/functions-bundled/search.mjs has no default export handler; run site/build/bundle-netlify-functions.mts first.');
 }
 const handler = loaded.default as (request: Request) => Promise<Response>;
-const pages = readPreparedObjects(root).objects.filter(object => object.kind !== 'scene').map(object => object.id);
+const pages = readPreparedObjects(root).objects.filter(object => !isSceneObject(object)).map(object => object.id);
 for (const id of pages) {
   const response = await handler(new Request(`${origin}/.netlify/functions/search?object=${encodeURIComponent(id)}`));
   if (!response.ok) throw new Error(`${id}: the search function answered ${response.status} for /${id}/: ${(await response.text()).slice(0, 300)}`);

@@ -1,4 +1,5 @@
 import { isRecord } from '@cssearth/core';
+import type { ObjectClassification, ObjectWorldFrame } from './object-schema.js';
 
 /**
  * A distance on the zoom ladder, measured from the star the zoom is centred on: a fixed distance, a point of the world
@@ -37,7 +38,6 @@ export interface OverviewHolding { readonly classifications: readonly string[]; 
  * with a volume, its origin.
  */
 export interface OverviewObject {
-  readonly kind: 'overview';
   readonly id: string;
   readonly name: string;
   /** The card's introduction and the page's description. */
@@ -49,9 +49,12 @@ export interface OverviewObject {
   /** The context packages it draws besides its own (the stars of the Milky Way, the catalogue of galaxy clusters). */
   readonly packages: readonly string[];
   /** What it is as a member of a larger level (the Milky Way is a galaxy of the Local Group). */
-  readonly classification?: string;
+  readonly classification?: ObjectClassification;
+  readonly classificationLabel?: string;
   /** Where it is, for a level that is a member of another: its package's volume origin, Sun-centred ICRF metres. */
   readonly originM?: readonly [number, number, number];
+  /** Its world frame, for a level with a catalogue entry (the Local Group): the world context places it. */
+  readonly worldFrame?: ObjectWorldFrame;
   readonly route: string;
   readonly sceneHostId: string;
 }
@@ -100,42 +103,34 @@ function holds(value: unknown, at: string): readonly OverviewHolding[] {
   }));
 }
 
-const KEYS = ['kind', 'id', 'name', 'description', 'order', 'zoom', 'holds', 'packages', 'classification', 'originM', 'route', 'sceneHostId'];
-
-/** Decode a prepared overview entry, as `prepare:catalog` writes it. */
-export function defineOverview(input: unknown): OverviewObject {
-  const id = isRecord(input) ? String(input.id) : typeof input;
-  if (!isRecord(input) || !only(input, KEYS) || input.kind !== 'overview' || !identifier(input.id) || input.route !== `/${input.id}/`
-      || !text(input.name) || !text(input.description) || !Number.isSafeInteger(input.order) || Number(input.order) < 1
-      || !identifier(input.sceneHostId) || !Array.isArray(input.packages) || !input.packages.every(identifier)
-      || (input.classification !== undefined && !identifier(input.classification))
-      || (input.originM !== undefined && !(Array.isArray(input.originM) && input.originM.length === 3 && input.originM.every(Number.isFinite)))) {
-    throw new TypeError(`Invalid overview entry: ${id}; it needs a name, description, order from 1, zoom, holds, packages, its host and the route /<id>/, with an optional classification and originM of three numbers.`);
-  }
-  return Object.freeze({ kind: 'overview', id: input.id, name: input.name as string, description: input.description as string,
-    order: input.order as number, zoom: zoom(input.zoom, `${id} zoom`), holds: holds(input.holds, `${id} holds`),
-    packages: Object.freeze([...input.packages as string[]]),
-    ...(input.classification === undefined ? {} : { classification: input.classification as string }),
-    ...(input.originM === undefined ? {} : { originM: Object.freeze([...input.originM as number[]]) as unknown as readonly [number, number, number] }),
-    route: input.route, sceneHostId: input.sceneHostId as string });
-}
-
-/** The overview a package's descriptor authors (`properties.overview`), hosted by `sceneHostId`; null when it authors none.
- * A package with a volume is placed at its origin. */
-export function overviewEntry(descriptor: unknown, sceneHostId: string): OverviewObject | null {
+/** The level a package's descriptor authors under `properties.overview`: its zoom, what it holds and the packages it draws.
+ * Null when it authors none. A level that is not placed names itself and describes itself there; a placed one is named by
+ * its catalogue block. A package with a volume is at its origin. */
+export function overviewLevel(descriptor: unknown): { readonly name?: string; readonly description?: string; readonly order: number; readonly zoom: OverviewZoom;
+  readonly holds: readonly OverviewHolding[]; readonly packages: readonly string[]; readonly classification?: ObjectClassification;
+  readonly originM?: readonly [number, number, number] } | null {
   if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.overview === undefined) return null;
-  const overview = descriptor.properties.overview, volume = descriptor.properties.volume;
+  const overview = descriptor.properties.overview, volume = descriptor.properties.volume, id = String(descriptor.id);
   if (!isRecord(overview) || !only(overview, ['name', 'description', 'order', 'zoom', 'holds', 'packages', 'classification'])) {
-    throw new TypeError(`Invalid overview metadata: ${String(descriptor.id)}; it names only its name, description, order, zoom, holds, packages and classification.`);
+    throw new TypeError(`Invalid overview metadata: ${id}; it names only its name, description, order, zoom, holds, packages and classification.`);
   }
-  return defineOverview({ kind: 'overview', id: descriptor.id, name: overview.name, description: overview.description, order: overview.order,
-    zoom: overview.zoom, holds: overview.holds, packages: overview.packages ?? [],
-    ...(overview.classification === undefined ? {} : { classification: overview.classification }),
-    ...(isRecord(volume) && volume.originM !== undefined ? { originM: volume.originM } : {}),
-    route: `/${String(descriptor.id)}/`, sceneHostId });
+  const placed = descriptor.properties.catalog !== undefined;
+  const originM = isRecord(volume) ? volume.originM : undefined;
+  if ((placed ? overview.name !== undefined || overview.description !== undefined : !text(overview.name) || !text(overview.description))
+      || !Number.isSafeInteger(overview.order) || Number(overview.order) < 1
+      || (overview.packages !== undefined && !(Array.isArray(overview.packages) && overview.packages.every(identifier)))
+      || (overview.classification !== undefined && (placed || !identifier(overview.classification)))
+      || (originM !== undefined && !(Array.isArray(originM) && originM.length === 3 && originM.every(Number.isFinite)))) {
+    throw new TypeError(`Invalid overview metadata: ${id}; it needs an order from 1, zoom and holds, with optional packages; a level without a catalogue entry also names and describes itself and may state its classification, and one with a catalogue entry leaves those to it.`);
+  }
+  return Object.freeze({ ...(placed ? {} : { name: overview.name as string, description: overview.description as string }),
+    order: overview.order as number, zoom: zoom(overview.zoom, `${id} zoom`), holds: holds(overview.holds, `${id} holds`),
+    packages: Object.freeze([...(overview.packages ?? []) as string[]]),
+    ...(overview.classification === undefined ? {} : { classification: overview.classification as ObjectClassification }),
+    ...(originM === undefined ? {} : { originM: Object.freeze([...originM as number[]]) as unknown as readonly [number, number, number] }) });
 }
 
 /** The level that holds registry subjects of `classification`, among `overviews`; undefined when none does. */
-export function overviewHolding(overviews: readonly OverviewObject[], classification: string): OverviewObject | undefined {
+export function overviewHolding<Level extends Pick<OverviewObject, 'holds'>>(overviews: readonly Level[], classification: string): Level | undefined {
   return overviews.find(overview => overview.holds.some(group => group.classifications.includes(classification)));
 }

@@ -16,9 +16,9 @@ export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, offTheMap
 export type { ObjectDiscovery } from './object-discovery.js';
 export { defineObject, defineObjects, EXTENDED_CLASSIFICATIONS, isExtendedClassification, isPlacedClassification, OBJECT_CLASSIFICATIONS, PLACED_CLASSIFICATIONS } from './object-schema.js';
 export type { ObjectClassification, ObjectDefinitionInput, ObjectEntry, ObjectPositionM, ObjectWorldFrame } from './object-schema.js';
-export { definePreparedFocus, destinationSearchNames, HOSTED_OBJECT_TYPES, hostedObject, isHostedDescriptor, isSceneObject } from './prepared-focus-object.js';
-export type { NavigableObject, PreparedFocusObject } from './prepared-focus-object.js';
-export { defineOverview, overviewEntry, overviewHolding } from './overview-object.js';
+export { destinationSearchNames, HOSTED_OBJECT_TYPES, isHostedDescriptor, isHostedObject, isOverviewObject, isPlacedObject, isSceneObject } from './prepared-focus-object.js';
+export type { NavigableObject, PlacedFields, PreparedFocusObject } from './prepared-focus-object.js';
+export { overviewHolding, overviewLevel } from './overview-object.js';
 export type { OverviewDistance, OverviewFrame, OverviewHolding, OverviewObject, OverviewZoom } from './overview-object.js';
 export { validateWorldReflection, validateWorldRotation } from './world-rotation.js';
 export type { WorldRotation } from './world-rotation.js';

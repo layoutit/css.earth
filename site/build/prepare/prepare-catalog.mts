@@ -140,15 +140,14 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // Every descriptor once, shared by each read below.
   const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
   const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
-  // A level that is also a body of the world (the Local Group among the clusters) keeps its overview as its registry entry.
-  const authorsOverview = (id: string) => { const descriptor = descriptors.get(id); return isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.overview !== undefined; };
-  const entries = catalogued.filter(entry => !authorsOverview(entry.id)), levels = catalogued.filter(entry => authorsOverview(entry.id));
+  // A level of the zoom ladder is a package's entry like any other; one that is placed too (the Local Group) is in both reads.
+  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
+  const levelIds = new Set(overviews.map(overview => overview.id));
+  const entries = catalogued.filter(entry => !levelIds.has(entry.id));
   const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
-  if (!host) throw new TypeError('Prepared focus destinations need a shared world host.');
-  // The spatial catalogues are data: they name no destination. Every page is a package's own entry: a scene, or a package
-  // the world's host draws (image layers, a volume, catalogue points), which the levels above the star systems are too.
-  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), host.id, descriptors);
-  defineObjects<{ id: string; route: string }>([...entries, ...overviews]);
+  if (!host) throw new TypeError('Objects without a scene of their own need a shared world host.');
+  // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
+  defineObjects<{ id: string; route: string }>([...entries, ...overviews.map(({ id }) => ({ id, route: `/${id}/` }))]);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -160,14 +159,21 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     if (entry.classification !== 'star' || discovery.imagery) continue;
     if ([...withImagery].some(child => parents[child]?.parent === entry.id)) discovery.hostsImagery = true;
   }
-  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries),
-    preparedCatalogueModule(...(() => {
-      const rows = entries.map(({ id, distance }, index) => ({ descriptor: descriptors.get(id), distance, discovery: discoveries[index]! }));
-      return [rows.filter(row => !isHostedDescriptor(row.descriptor)), rows.filter(row => isHostedDescriptor(row.descriptor)).map(row => ({ ...row, sceneHostId: host.id }))] as const;
-    })()));
-  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews) + '\n');
-  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.levelBodies), JSON.stringify(levels.map(({ id, distance }) => ({ kind: 'prepared-focus',
-    descriptor: descriptors.get(id), distance, discovery: { featured: true, imagery: false, illustration: false }, sceneHostId: host.id }))) + '\n');
+  // One row shape for every object: its descriptor, its distance and discovery when placed, its host when it has no scene.
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries), preparedCatalogueModule(entries.map(({ id, distance }, index) => {
+    const descriptor = descriptors.get(id);
+    return { descriptor, distance, discovery: discoveries[index]!, ...(isHostedDescriptor(descriptor) ? { sceneHostId: host.id } : {}) };
+  })));
+  // Every page reads the levels, so their rows are apart and carry only what an entry reads of a descriptor.
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {
+    const { schema, type, properties } = descriptor as { schema: unknown; type: unknown; properties: Record<string, unknown> };
+    const placed = catalogued.find(entry => entry.id === id), volume = properties.volume;
+    return { descriptor: { schema, id, type, properties: { overview: properties.overview,
+      ...(properties.catalog === undefined ? {} : { catalog: properties.catalog, worldFrame: properties.worldFrame }),
+      ...(isRecord(volume) && volume.originM !== undefined ? { volume: { originM: volume.originM } } : {}) } },
+      // A placed level is a landmark of the scale above it, without imagery of its own.
+      ...(placed ? { distance: placed.distance, discovery: { featured: true, imagery: false, illustration: false } } : {}), sceneHostId: host.id };
+  })) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);

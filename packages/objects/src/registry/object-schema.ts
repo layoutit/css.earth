@@ -35,7 +35,7 @@ export interface ObjectDefinitionInput<Scene = unknown, Signal = unknown> {
   color: string; distance: NavigationDistance; route: string; description: string;
   loadScene(signal?: Signal): Promise<Scene>; worldFrame: unknown; discovery?: ObjectDiscovery;
 }
-export type ObjectEntry<Scene = unknown, Signal = unknown> = Readonly<Omit<ObjectDefinitionInput<Scene, Signal>, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: ObjectWorldFrame }>;
+export type ObjectEntry<Scene = unknown, Signal = unknown> = Readonly<Omit<ObjectDefinitionInput<Scene, Signal>, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; worldFrame: ObjectWorldFrame }>;
 
 const OBJECT_INPUT_KEYS = new Set([
   "id",
@@ -79,7 +79,6 @@ export function defineObject<Scene, Signal>(input: ObjectDefinitionInput<Scene, 
   }
 
   return Object.freeze({
-    kind: 'scene',
     id,
     name,
     systemName,

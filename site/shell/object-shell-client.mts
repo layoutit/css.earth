@@ -1,3 +1,4 @@
+import { isSceneObject } from '@cssearth/objects';
 import { bindTabPanels } from '../tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 import { createObjectBrowserController } from '../object-browser.mts';
@@ -127,7 +128,7 @@ export function mountObjectShell({
     const drawnPage = (selected: typeof subject | null) => {
       if (selected?.kind === 'focus') return selected.record ? { id: selected.record.id, seo: focusSeo(selected.record) } : null;
       const overview = selected?.kind === 'overview' ? knownObject(overviewPage(objectId, selected.overview.scope) ?? '') : undefined;
-      return overview?.kind === 'overview' ? { id: overview.id, seo: objectSeo(overview) } : null;
+      return overview?.zoom !== undefined ? { id: overview.id, seo: objectSeo(overview) } : null;
     };
     const leftPage = presentedSubject?.kind === 'focus' || drawnPage(presentedSubject) !== null;
     presentedSubject = subject;
@@ -138,7 +139,7 @@ export function mountObjectShell({
     // A focus whose record is still loading is already this page's subject: its head waits for the record.
     else if (leftPage && !focus) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
-      if (scene?.kind === 'scene') presentPage(scene.route, objectSeo(scene));
+      if (scene && isSceneObject(scene)) presentPage(scene.route, objectSeo(scene));
     } else pendingPage = null;
     focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
     if (focus) loadFocusBanks();

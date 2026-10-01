@@ -1,3 +1,4 @@
+import { isSceneObject } from '@cssearth/objects';
 import { OBJECTS } from './objects.mts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 
@@ -7,7 +8,7 @@ const parents = new Map<string, string>([
   ...context.bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const]
     : body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []),
 ]);
-const pages = new Map(OBJECTS.filter(object => object.kind === 'scene').map(object => [object.id, object]));
+const pages = new Map(OBJECTS.filter(isSceneObject).map(object => [object.id, object]));
 
 /** The pages from the root of a body's orbit chain down to the page itself: Sun, Mars, Phobos. Centres without a page
  * (a barycentre) are passed through; a page outside every chain is its own one-step trail. */

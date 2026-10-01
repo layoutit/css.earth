@@ -1,3 +1,4 @@
+import { isOverviewObject, isPlacedObject } from '@cssearth/objects';
 import { OBJECTS } from "../objects.mts";
 
 // Pages label classifications without loading the registry.
@@ -14,7 +15,7 @@ export function objectNavigation<T extends { distance: { meters: number }; class
   });
 }
 
-// Overviews have no distance of their own; search lists them in their own rows (CatalogueOverviewRows.astro).
-const navigation = objectNavigation(OBJECTS.filter(object => object.kind !== 'overview'));
+// A level of the zoom ladder is listed in its own rows (CatalogueOverviewRows.astro), placed or not.
+const navigation = objectNavigation(OBJECTS.filter(isPlacedObject).filter(object => !isOverviewObject(object)));
 export const SEARCH_OBJECTS = navigation.search;
 export const PLANET_NAVIGATION_OBJECTS = navigation.planets;

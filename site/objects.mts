@@ -1,5 +1,5 @@
-import { defineObjects, isSceneObject } from '@cssearth/objects';
-import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry, OverviewObject } from '@cssearth/objects';
+import { defineObjects, isOverviewObject, isSceneObject } from '@cssearth/objects';
+import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry } from '@cssearth/objects';
 import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
 import { objectFromEntry } from './object-directory.mts';
@@ -16,12 +16,12 @@ export const OBJECTS = defineObjects<NavigableObject>([...CATALOGUE_ENTRIES, ...
 
 /** A capability projection of OBJECTS, never an independently maintained registry. */
 export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(isSceneObject));
-for (const object of OBJECTS) if (object.kind !== 'scene' && !SCENE_OBJECTS.some(host => host.id === object.sceneHostId)) {
-  throw new TypeError(`${object.kind === 'overview' ? 'Overview' : 'Prepared focus'} host is not a registered scene: ${object.id}`);
+for (const object of OBJECTS) if (!isSceneObject(object) && !SCENE_OBJECTS.some(host => host.id === object.sceneHostId)) {
+  throw new TypeError(`Scene host is not a registered scene: ${object.id}`);
 }
 
 /** The overviews, from the nearest level of the zoom ladder out: a projection of OBJECTS like SCENE_OBJECTS. */
-export const OVERVIEWS = Object.freeze(OBJECTS.filter((object): object is OverviewObject => object.kind === 'overview')
+export const OVERVIEWS = Object.freeze(OBJECTS.filter(isOverviewObject)
   .sort((a, b) => a.order - b.order));
 
 export function requireObject(id: string) {
@@ -32,6 +32,6 @@ export function requireObject(id: string) {
 
 export function requireSceneObject(id: string) {
   const object = requireObject(id);
-  if (!isSceneObject(object)) throw new TypeError(`Object ${id} is ${object.kind === 'overview' ? 'an overview' : 'a prepared focus'}, not a scene owner.`);
+  if (!isSceneObject(object)) throw new TypeError(`Object ${id} has no scene of its own.`);
   return object;
 }

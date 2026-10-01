@@ -10,6 +10,10 @@ import { focusExistingScene, prepareSceneReplacement } from './scene-transition.
 import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
+import { isHostedObject } from '@cssearth/objects';
+import type { NavigableObject } from '../objects.mts';
+/** A placed object the world's host draws: its page is the host's scene framed on it. */
+const hosted = (object: NavigableObject | null | undefined) => object != null && isHostedObject(object);
 import type { ObjectEntry } from '../objects.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
@@ -338,7 +342,7 @@ export function createSceneRouter({
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
-      navigable = id => isOverviewPage(id) || registry.knownObject(id)?.kind === 'prepared-focus' || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      navigable = id => isOverviewPage(id) || hosted(registry.knownObject(id)) || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       if (destroyed) navigation.destroy();
       return context = { registry, objects, navigation, selection, activation };
     });
@@ -400,7 +404,7 @@ export function createSceneRouter({
         startFlightRequest(preparedObjectUrl(id, 'prepared/object.json'));
         if (intent.kind !== 'feature') void registry.loadSystemView(id).catch(() => {});
       }
-      const focus = !isOverviewPage(id) && (registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null))?.kind === 'prepared-focus';
+      const focus = !isOverviewPage(id) && hosted(registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null));
       if (destroyed) return false;
       if (isOverviewPage(id)) id = WORLD_HOST_ID;
       else if (focus) id = scenes.current ? objectId : WORLD_HOST_ID;

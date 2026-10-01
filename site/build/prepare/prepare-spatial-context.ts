@@ -4,7 +4,6 @@ import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { isPlacedClassification, parseObjectDescriptor } from '@cssearth/objects';
-import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/renderer';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -88,9 +87,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records, as the prepared catalogue holds them: what the world's visibility reads per body.
-    const discoveries: Record<string, unknown> = Object.fromEntries(prepared.entries.flatMap(entry =>
-      (entry.kind === 'scene' || entry.kind === 'prepared-focus') && isRecord(entry.descriptor) && typeof entry.descriptor.id === 'string' ? [[entry.descriptor.id, entry.discovery]] : []));
-    for (const object of registry) if (!Object.hasOwn(discoveries, object.id)) discoveries[object.id] = object.discovery;
+    const discoveries: Record<string, unknown> = Object.fromEntries(registry.map(object => [object.id, object.discovery]));
     const present = async (body: Record<string, unknown>) => {
       const object = byId.get(String(body.id));
       if (!object) return;

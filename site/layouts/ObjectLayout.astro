@@ -1,4 +1,5 @@
 ---
+import { isHostedObject } from '@cssearth/objects';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
@@ -60,7 +61,7 @@ const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId =
 const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
-const pageSeo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
+const pageSeo = isHostedObject(pageRecord) ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
 const seo = home ? homeSeo(pageSeo) : pageSeo;
 const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(pageTrail(pageRecord))).replace(/</g, '\\u003c');
 ---

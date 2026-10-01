@@ -1,4 +1,5 @@
 ---
+import { isHostedObject, isOverviewObject, isPlacedObject } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import type { Props as ObjectProps } from '../object-shell-types';
@@ -14,7 +15,6 @@ import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts
 import ObjectFactsheet from './ObjectFactsheet.astro';
 import DatasetList from './DatasetList.astro';
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
-import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
 import { pageDatasetList } from '../page-datasets-content.mts';
 import overviewFacts from '../source/overview-facts.json';
 
@@ -25,7 +25,6 @@ import overviewFacts from '../source/overview-facts.json';
 interface Props { overview: OverviewObject }
 const { overview } = Astro.props;
 const PARSEC_M = 3.085677581491367e16;
-const catalogue = new Map(FOCUS_CATALOG_DATA.flatMap(({ data }) => data.objects.map(object => [object.id, object] as const)));
 const distance = (pc: number) => {
   const ly = pc * 3.261563777, divisor = ly >= 1e6 ? 1e6 : ly >= 1e3 ? 1e3 : 1;
   return { value: new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor), unit: divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly' };
@@ -33,19 +32,19 @@ const distance = (pc: number) => {
 const slug = (label: string) => label.toLocaleLowerCase('en').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
 type Member = { id: string; name: string; positionM: readonly number[]; distancePc: number; holdsStars: boolean };
 const members = (classifications: readonly string[]): Member[] => OBJECTS.filter(object => object.id !== overview.id).flatMap((object): Member[] => {
-  if (object.kind === 'prepared-focus') {
+  // A package the world's host draws is where its own world frame puts it.
+  if (isHostedObject(object)) {
     if (!classifications.includes(object.classification)) return [];
-    const record = catalogue.get(object.id);
-    if (!record) throw new Error(`${overview.id} lists ${object.id}, which no prepared catalogue places.`);
-    return [{ id: object.id, name: object.name, positionM: record.positionM, distancePc: record.distance.valuePc, holdsStars: false }];
+    return [{ id: object.id, name: object.name, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false }];
   }
-  if (object.kind === 'overview') {
+  if (isOverviewObject(object)) {
     if (!object.classification || !classifications.includes(object.classification)) return [];
-    if (!object.originM) throw new Error(`${overview.id} lists ${object.id}, whose package has no volume origin to place it.`);
-    return [{ id: object.id, name: object.name, positionM: object.originM, distancePc: Math.hypot(...object.originM) / PARSEC_M,
+    const originM = object.worldFrame?.originM ?? object.originM;
+    if (!originM) throw new Error(`${overview.id} lists ${object.id}, whose package has neither a world frame nor a volume origin to place it.`);
+    return [{ id: object.id, name: object.name, positionM: originM, distancePc: Math.hypot(...originM) / PARSEC_M,
       holdsStars: object.holds.some(group => group.classifications.includes('star')) }];
   }
-  if (!classifications.includes(object.classification) || !object.worldFrame) return [];
+  if (!isPlacedObject(object) || !classifications.includes(object.classification)) return [];
   return [{ id: object.id, name: object.name, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false }];
   // A level lists only the subjects whose own zoom reaches it (M87 is in Virgo, not the Local Group).
 }).filter(member => overviewsReachableFrom(member.positionM).some(level => level.id === overview.id)).sort((a, b) => a.distancePc - b.distancePc);
@@ -65,7 +64,7 @@ const sceneMembers = SCENE_OBJECTS.filter(object => classifications.includes(obj
 const resultRows = new Map(PREPARED_CATALOGUE_INDEX.entries.filter(row => row.kind !== 'system').map(row => [row.id, row]));
 const memberMarkup = (member: Member) => {
   const object = OBJECTS.find(object => object.id === member.id);
-  const row = object?.kind === 'overview' ? overviewResult(object) : resultRows.get(member.id);
+  const row = object && isOverviewObject(object) ? overviewResult(object) : resultRows.get(member.id);
   if (!row) throw new Error(`Missing search row for ${overview.id} member ${member.id}.`);
   const { value, unit } = distance(member.distancePc);
   const text = `≈${value} ${unit}`, title = 'Published catalogue distance from the Solar System';

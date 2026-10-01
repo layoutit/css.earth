@@ -1,4 +1,4 @@
-import { catalogueObject, defineOverview, isSceneObject } from '@cssearth/objects';
+import { catalogueObject, isOverviewObject, isSceneObject } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
@@ -20,7 +20,8 @@ function add(object: NavigableObject) {
 }
 /** The overviews, from the nearest level of the zoom ladder out: every page knows them (see above). The build's registry
  * holds the same entries (objects.mts OVERVIEWS). */
-export const KNOWN_OVERVIEWS: readonly OverviewObject[] = Object.freeze(overviews.map(defineOverview).sort((a, b) => a.order - b.order));
+export const KNOWN_OVERVIEWS: readonly OverviewObject[] = Object.freeze(overviews.map(row => catalogueObject(row, () => async () => { throw new Error('A level has no scene of its own.'); }))
+  .filter(isOverviewObject).sort((a, b) => a.order - b.order));
 for (const overview of KNOWN_OVERVIEWS) add(overview);
 /** Whether a loaded object owns a scene. */
 export const isLoadedScene = isSceneObject;

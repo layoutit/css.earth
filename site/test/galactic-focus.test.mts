@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { catalogueObject } from '@cssearth/objects';
+import { catalogueObject, isHostedObject } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { searchObjects } from '../search/object-search.mts';
 
@@ -15,9 +15,9 @@ test('a globular cluster package is an entry of the registry from its own descri
   // A hosted package's distance is its catalogued one: no epoch, read from the observer.
   assert.partialDeepStrictEqual(distance, { meters: 100 * PC_M, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null });
   assert.ok(Math.abs(distance.value - 100) < 1e-9);
-  const focus = catalogueObject({ kind: 'prepared-focus', descriptor, distance, discovery: { featured: false, imagery: true, illustration: false }, sceneHostId: 'sun' },
+  const focus = catalogueObject({ descriptor, distance, discovery: { featured: false, imagery: true, illustration: false }, sceneHostId: 'sun' },
     () => async () => { throw new Error('unused'); });
-  assert.ok(focus.kind === 'prepared-focus');
+  assert.ok(isHostedObject(focus));
   assert.equal(focus.classification, 'globular-cluster');
   assert.equal(focus.systemName, 'Milky Way');
   assert.equal(focus.route, '/test-cluster/');

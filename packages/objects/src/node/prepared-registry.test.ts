@@ -5,6 +5,8 @@ import { join } from 'node:path';
 import { after, test } from 'node:test';
 import { parseNavigationDistance } from '../registry/index.js';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from './prepared-registry.js';
+import type { PreparedCatalogueRow } from './prepared-registry.js';
+import { isHostedObject, isOverviewObject } from '../registry/index.js';
 
 // Temporary checkouts the tests make, removed once the file's tests finish.
 const temporary: string[] = [];
@@ -23,15 +25,16 @@ const hosted = (id: string, sceneHostId: string) => ({ descriptor: { ...descript
   distance: parseNavigationDistance(parsec), discovery: discovery(false), sceneHostId });
 const focus = hosted('helix', 'sun');
 
-const overview = { kind: 'overview', id: 'milky-way', name: 'Milky Way', description: 'Our galaxy.', order: 1,
+const level = (id: string, name: string) => ({ schema: 'cssearth-object@2', id, type: 'density-volume', properties: { overview: { name, description: 'Our galaxy.', order: 1,
   zoom: { enter: { fade: 'system', at: 'end' }, returnBelow: { fade: 'system', at: 'middle' }, frame: { distance: { distancePc: 8000 } } },
-  holds: [{ classifications: ['nebula'] }], packages: [], route: '/milky-way/', sceneHostId: 'sun' };
+  holds: [{ classifications: ['nebula'] }], packages: [] } } });
+const overview = { descriptor: level('milky-way', 'Milky Way'), sceneHostId: 'sun' };
 
 const scene = (id: string, order: number, classification: string, distanceAu: number, featured: boolean) =>
   ({ descriptor: descriptor(id, order, classification), distance: parseNavigationDistance(au(distanceAu)), discovery: discovery(featured) });
 const scenes = [scene('sun', 0, 'star', 0, false), scene('mars', 4, 'planet', 1.5, true)];
 
-async function checkout(records: { scenes?: Parameters<typeof preparedCatalogueModule>[0]; focuses?: Parameters<typeof preparedCatalogueModule>[1]; module?: string; overviews?: unknown; levelBodies?: unknown } = {}) {
+async function checkout(records: { scenes?: PreparedCatalogueRow[]; focuses?: unknown[]; module?: string; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));
   temporary.push(root);
   for (const [id, order, classification] of [['sun', 0, 'star'], ['mars', 4, 'planet']] as const) {
@@ -41,9 +44,8 @@ async function checkout(records: { scenes?: Parameters<typeof preparedCatalogueM
   await mkdir(join(root, 'site'));
   // The catalogue order is the order prepare:catalog wrote, not the alphabetical one.
   await writeFile(join(root, PREPARED_CATALOGUE.entries), records.module ??
-    preparedCatalogueModule(records.scenes ?? scenes, records.focuses ?? [focus]));
+    preparedCatalogueModule([...records.scenes ?? scenes, ...records.focuses ?? [focus]] as PreparedCatalogueRow[]));
   await writeFile(join(root, PREPARED_CATALOGUE.overviews), JSON.stringify(records.overviews ?? [overview]));
-  await writeFile(join(root, PREPARED_CATALOGUE.levelBodies), JSON.stringify(records.levelBodies ?? []));
   return root;
 }
 
@@ -58,16 +60,20 @@ test('reads the registry in catalogue order, with distances, discoveries, prepar
   // The catalogue's order and context stay out of the registry, as the application registry leaves them out.
   assert.ok(!('order' in mars) && !('context' in mars));
   await assert.rejects(mars.loadScene(), /cannot mount a scene/);
-  assert.throws(() => registry.requireSceneObject('helix'), /prepared focus/);
+  assert.throws(() => registry.requireSceneObject('helix'), /no scene of its own/);
   // A hosted package is a body of the world as a scene is, with its identity from its own descriptor.
   assert.deepEqual(registry.worldObjects.map(object => object.id), ['sun', 'mars', 'helix']);
   const helix = registry.objects.find(object => object.id === 'helix')!;
-  // A level that is a body too joins the world's objects; its registry entry stays its overview.
-  const placed = readPreparedObjects(await checkout({ levelBodies: [{ kind: 'prepared-focus', ...hosted('milky-way', 'sun') }] }));
-  assert.deepEqual(placed.worldObjects.map(object => object.id), ['sun', 'mars', 'helix', 'milky-way']);
-  assert.equal(placed.objects.find(object => object.id === 'milky-way')?.kind, 'overview');
-  assert.partialDeepStrictEqual(helix, { kind: 'prepared-focus', classification: 'nebula', route: '/helix/', sceneHostId: 'sun', systemName: 'Solar System' });
-  assert.throws(() => registry.requireSceneObject('milky-way'), /is an overview, not a scene owner/);
+  // A level with a catalogue entry is a body of the world too, and still one object.
+  const placedLevel = { descriptor: { ...hosted('local-group', 'sun').descriptor, type: 'galaxy-catalog', properties: { ...hosted('local-group', 'sun').descriptor.properties,
+    overview: { order: 2, zoom: level('x', 'x').properties.overview.zoom, holds: [{ classifications: ['galaxy'] }] } } },
+    distance: parseNavigationDistance(parsec), discovery: discovery(true), sceneHostId: 'sun' };
+  const placed = readPreparedObjects(await checkout({ overviews: [overview, placedLevel] }));
+  assert.deepEqual(placed.worldObjects.map(object => object.id), ['sun', 'mars', 'helix', 'local-group']);
+  assert.deepEqual(placed.objects.filter(isOverviewObject).map(object => object.id), ['milky-way', 'local-group']);
+  assert.equal(isHostedObject(helix), true);
+  assert.partialDeepStrictEqual(helix, { classification: 'nebula', route: '/helix/', sceneHostId: 'sun', systemName: 'Solar System' });
+  assert.throws(() => registry.requireSceneObject('milky-way'), /no scene of its own/);
   assert.throws(() => registry.requireSceneObject('pluto'), /Unknown/);
 });
 
@@ -78,14 +84,13 @@ test('reads each checkout once per process', async () => {
 
 test('refuses a catalogue it cannot decode or a focus without its host', async () => {
   const cases: [Parameters<typeof checkout>[0], RegExp][] = [
-    [{ scenes: [...scenes, { ...scenes[1]!, descriptor: { id: 'pluto' } }] }, /Invalid catalogue descriptor/],
+    [{ scenes: [...scenes, { ...scenes[1]!, descriptor: { id: 'pluto' } }] }, /Invalid catalogue entry/],
     [{ scenes: [{ ...scenes[0]!, discovery: { featured: 'yes' } as never }] }, /Invalid prepared object discovery/],
     [{ focuses: [hosted('helix', 'mars'), hosted('m1', 'jupiter')] }, /not a registered scene: m1/],
     [{ focuses: [{ ...focus, descriptor: null }] }, /Invalid catalogue entry/],
     [{ module: 'export const OTHER = [];\n' }, /exports no CATALOGUE_ENTRIES array/],
-    [{ overviews: [{ ...overview, sceneHostId: 'jupiter' }] }, /Overview host is not a registered scene: milky-way/],
+    [{ overviews: [{ ...overview, sceneHostId: 'jupiter' }] }, /Scene host is not a registered scene: milky-way/],
     [{ overviews: {} }, /overviews/],
-    [{ levelBodies: [{ kind: 'prepared-focus', ...hosted('m1', 'sun') }] }, /Level body is not a registered overview: m1/],
   ];
   for (const [records, error] of cases) {
     const root = await checkout(records);

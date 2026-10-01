@@ -6,9 +6,9 @@ import { defineObject, OBJECT_CLASSIFICATIONS } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
-import { hostedObject } from './prepared-focus-object.js';
+import { destinationSearchNames, isHostedDescriptor } from './prepared-focus-object.js';
 import type { NavigableObject } from './prepared-focus-object.js';
-import { defineOverview } from './overview-object.js';
+import { overviewLevel } from './overview-object.js';
 
 /** `orbitsWithinAu`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
 /** `labelPlacement: 'centre'` captions the body over its middle instead of below it (Sgr A*'s black shadow). */
@@ -75,21 +75,27 @@ export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDef
     order: order(catalog.order), ...(context ? { context } : {}) };
 }
 
-/** One entry of the prepared catalogue, as `prepare:catalog` writes it and `/objects/<id>/entry.json` serves it: a scene
- * object's descriptor with its navigation distance and discovery, a prepared focus or an overview. `loadScene` binds a
- * scene object's descriptor to the host's scene loader. The catalogue's order and context stay out of the object. */
+/** One entry of the prepared catalogue, as `prepare:catalog` writes it and `/objects/<id>/entry.json` serves it: a package's
+ * descriptor, with its navigation distance and discovery when it is placed and the scene that draws it when it has none of
+ * its own. What the object is comes from the descriptor alone: a catalogue block places it, `properties.overview` makes it a
+ * level, and a scene type gives it a scene, which `loadScene` binds to the host's loader. The catalogue's order and context
+ * stay out of the object. */
 export function catalogueObject<Scene, Signal>(value: unknown,
   loadScene: (descriptor: Record<string, unknown>) => ObjectDefinitionInput<Scene, Signal>['loadScene']): NavigableObject<Scene, Signal> {
-  if (!isRecord(value)) throw new TypeError('Invalid catalogue entry.');
-  if (value.kind === 'overview') return defineOverview(value);
-  if ((value.kind !== 'scene' && value.kind !== 'prepared-focus') || !isRecord(value.descriptor)) throw new TypeError('Invalid catalogue entry.');
-  // A package the world's host draws: the same descriptor as a scene's, read into an entry with no scene of its own.
-  if (value.kind === 'prepared-focus') {
-    if (typeof value.sceneHostId !== 'string') throw new TypeError(`Invalid catalogue entry: ${String(value.descriptor.id)} names no scene host.`);
-    return hostedObject(catalogEntry(value.descriptor, async () => { throw new Error('A hosted object has no scene of its own.'); },
-      parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery)), value.sceneHostId);
-  }
-  const { order: _order, context: _context, ...object } = catalogEntry(value.descriptor, loadScene(value.descriptor),
-    parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
-  return object;
+  if (!isRecord(value) || !isRecord(value.descriptor) || !isRecord(value.descriptor.properties) || typeof value.descriptor.id !== 'string') throw new TypeError('Invalid catalogue entry.');
+  const descriptor = value.descriptor, properties = value.descriptor.properties, id = value.descriptor.id, level = overviewLevel(descriptor);
+  const placed = properties.catalog !== undefined, scene = placed && level === null && !isHostedDescriptor(descriptor);
+  if (!placed && level === null) throw new TypeError(`Invalid catalogue entry: ${id} has neither a catalogue entry nor an overview.`);
+  if (!scene && (typeof value.sceneHostId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.sceneHostId))) throw new TypeError(`Invalid catalogue entry: ${id} names no scene host.`);
+  const entry = placed ? catalogEntry(descriptor, scene ? loadScene(descriptor) : async () => { throw new Error(`${id} has no scene of its own.`); },
+    parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery)) : null;
+  if (entry && scene) { const { order: _order, context: _context, ...object } = entry; return object; }
+  const { name: levelName, description: levelDescription, ...ladder } = level ?? {};
+  const name = entry?.name ?? levelName, description = entry?.description ?? levelDescription;
+  if (name === undefined || description === undefined) throw new TypeError(`Invalid catalogue entry: ${id} has no name or description.`);
+  return Object.freeze({ id, name, description, route: `/${id}/`, sceneHostId: value.sceneHostId as string,
+    ...(entry ? { classification: entry.classification, ...(entry.classificationLabel === undefined ? {} : { classificationLabel: entry.classificationLabel }),
+      systemName: entry.systemName, color: entry.color, distance: entry.distance, worldFrame: entry.worldFrame, discovery: entry.discovery,
+      searchNames: Object.freeze(destinationSearchNames([id, entry.name, ...entry.aliases])) } : {}),
+    ...ladder });
 }

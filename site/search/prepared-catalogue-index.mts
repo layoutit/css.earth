@@ -18,7 +18,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
         const source = sourceDocumentation(object.id, object.name);
         const value = String(Number(object.distance.value.toFixed(3)));
         return Object.freeze({
-          kind: object.kind,
+          kind: 'scene' as const,
           id: object.id,
           name: object.name,
           searchNames: Object.freeze([]),
@@ -40,10 +40,10 @@ export function preparedCatalogueIndex(): CatalogueIndex {
       const value = new Intl.NumberFormat('en', { maximumSignificantDigits: 4 }).format(object.distance.value);
       const detail = `${value} pc${object.distance.quantity === 'comoving' ? ' (comoving)' : ''}`;
       return Object.freeze({
-        kind: object.kind,
-        id: object.focusId,
+        kind: 'prepared-focus' as const,
+        id: object.id,
         name: object.name,
-        searchNames: Object.freeze(object.searchNames.map(name => name.toLocaleLowerCase('en'))),
+        searchNames: Object.freeze((object.searchNames ?? []).map(name => name.toLocaleLowerCase('en'))),
         classification: object.classification,
         classificationName: objectClassificationLabel(object.classification).toLocaleLowerCase('en'),
         systemName: object.systemName.toLocaleLowerCase('en'),
@@ -51,7 +51,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
         illustration: false,
         distanceMeters: object.distance.meters,
         detail: Object.freeze({ text: detail, title, ariaLabel: `${object.distance.value} pc. ${title}` }),
-        source: Object.freeze({ subject: `focus:${object.focusId}`, document: source.href, label: source.label }),
+        source: Object.freeze({ subject: `focus:${object.id}`, document: source.href, label: source.label }),
         marker: Object.freeze({ kind: 'focus' as const, thumbnail: sidebarThumbnail(object.id)?.url2x ?? null }),
       });
     }), ...systemEntries()]),

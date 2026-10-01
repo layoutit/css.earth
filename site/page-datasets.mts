@@ -31,7 +31,7 @@ export function selectedPageDataset(url: string | URL, datasets: Pick<PageDatase
  * since choosing one would mean leaving that star for the page. */
 export function presentPageDatasets(document: ParentNode, url: string | URL, sceneId: string) {
   for (const datasets of readPageDatasets(document)) {
-    const page = knownObject(datasets.page), hosted = page?.kind === 'overview' && page.sceneHostId === sceneId;
+    const page = knownObject(datasets.page), hosted = page?.zoom !== undefined && page.sceneHostId === sceneId;
     if (datasets.root.hidden !== !hosted) datasets.root.hidden = !hosted;
     const dataset = selectedPageDataset(url, datasets);
     const buttons = [...datasets.root.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')];

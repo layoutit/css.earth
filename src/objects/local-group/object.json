@@ -4,8 +4,6 @@
   "type": "galaxy-catalog",
   "properties": {
     "overview": {
-      "name": "Local Group",
-      "description": "Our galaxy group, including the Milky Way, Andromeda and their neighboring galaxies.",
       "order": 2,
       "zoom": {
         "enter": {
