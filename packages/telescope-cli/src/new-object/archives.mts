@@ -229,8 +229,23 @@ async function doiPublication(archive: Archive, doi: string, url: string): Promi
     return parseDatacite(await archive.text(`https://api.datacite.org/dois/${encodeURIComponent(doi)}`), doi, url);
   }
 }
-/** The publication behind a cited URL: an arXiv abstract or a DOI link. Any other URL is cited as a web page by its author. */
-export async function fetchPublication(archive: Archive, url: string): Promise<Publication | undefined> {
+/** Publications already asked of an archive in this run, by URL. A batch cites the same few papers on every star, and arXiv is
+ * asked no faster than once in three seconds (PACE_MS): 154 Cepheids citing two arXiv papers each waited six seconds a star for
+ * records the first star had read (2026-10-01). A failed read is not kept, so the next star asks again. */
+const publicationsRead = new WeakMap<Archive, Map<string, Promise<Publication | undefined>>>();
+/** The publication behind a cited URL: an arXiv abstract or a DOI link. Any other URL is cited as a web page by its author. Read
+ * once per archive and URL in a run. */
+export function fetchPublication(archive: Archive, url: string): Promise<Publication | undefined> {
+  let read = publicationsRead.get(archive);
+  if (!read) publicationsRead.set(archive, read = new Map());
+  let publication = read.get(url);
+  if (!publication) {
+    read.set(url, publication = readPublication(archive, url));
+    publication.catch(() => { read.delete(url); });
+  }
+  return publication;
+}
+async function readPublication(archive: Archive, url: string): Promise<Publication | undefined> {
   const arxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(url)?.[1];
   if (arxiv) return parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${arxiv}`), arxiv, url);
   const bibcode = /adsabs\.harvard\.edu\/abs\/([^/?#]+)/u.exec(url)?.[1];
