@@ -85,7 +85,8 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     url.pathname = object.route;
     url = withPreparedFocus(url, object.id, intent.id, null);
     url.searchParams.delete('v');
-    history = { history: 'replace' };
+    // A focus picked from search or a list is a destination like any other: it adds a history entry, so Back returns to
+    // the subject before it (M 33, then LMC, then Back left the site, 2026-10-01). Picking the current one again replaces.
   } else if (!linked) {
     url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
     url = withDataset(withPreparedFocus(url, object.id, null, null), null);
