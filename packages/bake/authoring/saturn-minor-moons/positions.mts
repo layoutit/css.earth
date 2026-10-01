@@ -3,29 +3,19 @@
  *
  * The retained JPL catalogue (src/objects/saturn/source/moons/saturn-moons.json) lists every confirmed moon with its
  * Horizons code. For each one without an object package this asks Horizons for the geometric position relative to
- * Saturn's centre, ICRF axes, kilometres, at Saturn's prepared epoch, and writes `name,xKm,yKm,zKm,class`. A moon the catalogue
+ * Saturn's centre, ICRF axes, kilometres, at Saturn's prepared epoch, and writes `name,xKm,yKm,zKm`. A moon the catalogue
  * gives no code (no ephemeris) is left out and named. One request at a time.
- *
- * The class is the moon's dynamical group, from the catalogue's JPL mean inclination: Denk et al. (2018, The Irregular
- * Satellites of Saturn) describe the prograde Gallic group near 38 degrees, the prograde Inuit group near 47 degrees, and
- * every other irregular as retrograde (the Norse group). A prograde moon goes to the nearer of the two prograde values.
  *
  * Usage: node packages/bake/authoring/saturn-minor-moons/positions.mts
  */
 import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { gzipSync } from 'node:zlib';
 
 const root = resolve(import.meta.dirname, '../../../..'), objects = resolve(root, 'src/objects');
 const cataloguePath = resolve(objects, 'saturn/source/moons/saturn-moons.json');
-const catalogue = JSON.parse(await readFile(cataloguePath, 'utf8')) as { moons: { id: string; name: string; code?: string | null; inclinationDeg?: number }[] };
-const GALLIC_INCLINATION_DEG = 38, INUIT_INCLINATION_DEG = 47;
-function group(moon: { name: string; inclinationDeg?: number }): 'norse' | 'inuit' | 'gallic' {
-  const inclination = moon.inclinationDeg;
-  if (typeof inclination !== 'number' || !(inclination >= 0 && inclination <= 180)) throw new TypeError(`${cataloguePath}: ${moon.name} inclinationDeg must be 0 to 180 degrees, got ${JSON.stringify(inclination)}.`);
-  if (inclination > 90) return 'norse';
-  return Math.abs(inclination - INUIT_INCLINATION_DEG) < Math.abs(inclination - GALLIC_INCLINATION_DEG) ? 'inuit' : 'gallic';
-}
+const catalogue = JSON.parse(await readFile(cataloguePath, 'utf8')) as { moons: { id: string; name: string; code?: string | null }[] };
 const saturn = JSON.parse(await readFile(resolve(objects, 'saturn/object.json'), 'utf8')) as { properties: { worldFrame: { epochJdTt: number } } };
 const epochJdTt = saturn.properties.worldFrame.epochJdTt;
 if (!Number.isFinite(epochJdTt)) throw new TypeError(`src/objects/saturn/object.json properties.worldFrame.epochJdTt must be a Julian date, got ${JSON.stringify(epochJdTt)}.`);
@@ -54,12 +44,12 @@ async function position(moon: { name: string; code?: string | null }): Promise<{
 const rows: string[] = [], solutions = new Map<string, number>();
 for (const [index, moon] of wanted.entries()) {
   const { km, solution } = await position(moon);
-  rows.push(`${moon.name},${km.map(value => value.toFixed(1)).join(',')},${group(moon)}`);
+  rows.push(`${moon.name},${km.map(value => value.toFixed(1)).join(',')}`);
   solutions.set(solution, (solutions.get(solution) ?? 0) + 1);
   if ((index + 1) % 25 === 0 || index + 1 === wanted.length) console.log(`${index + 1}/${wanted.length}`);
 }
-const output = resolve(objects, 'saturn-minor-moons/source/dots/positions.csv');
-await writeFile(output, `name,xKm,yKm,zKm,class\n${rows.join('\n')}\n`);
+const output = resolve(objects, 'saturn-minor-moons/source/dots/positions.csv.gz');
+await writeFile(output, gzipSync(`name,xKm,yKm,zKm\n${rows.join('\n')}\n`));
 console.log(`Wrote ${rows.length} positions at JD ${epochJdTt} TT to ${output}.`);
 console.log(`Horizons solutions: ${[...solutions].map(([name, count]) => `${name} (${count})`).join(', ')}.`);
 console.log(`Without an ephemeris, left out: ${withoutEphemeris.map(moon => moon.name).join(', ') || 'none'}.`);

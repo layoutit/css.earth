@@ -8,6 +8,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { gunzipSync } from 'node:zlib';
 import { bodyCentredBank, parseBodyPointsRecipe, parseBodyPointsTable, recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectDirectoryArgument, id] = process.argv.slice(2);
@@ -27,7 +28,8 @@ if (descriptor.properties?.host !== recipe.host) {
   throw new TypeError(`${resolve(objectDirectory, 'object.json')} properties.host is ${JSON.stringify(descriptor.properties?.host)}, but ${recipePath} places the bank at ${recipe.host}.`);
 }
 const tablePath = resolve(sourceDirectory, recipe.table.path);
-const rows = parseBodyPointsTable(await readFile(tablePath, 'utf8'), tablePath);
+const tableBytes = await readFile(tablePath);
+const rows = parseBodyPointsTable((tablePath.endsWith('.gz') ? gunzipSync(tableBytes) : tableBytes).toString('utf8'), tablePath);
 const bank = bodyCentredBank({ recipe, rows, hostFrame: { referenceFrame: worldFrame.referenceFrame, epochJdTt: worldFrame.epochJdTt, originM: worldFrame.originM as number[] } });
 const outputPath = await writeCatalogueBank({ objectDirectory, id, bank, published: recipePublished(raw, recipePath) });
 console.log(`Prepared ${rows.length} points around ${recipe.host} into ${outputPath}.`);

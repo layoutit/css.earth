@@ -4,7 +4,7 @@
   "inputs": [
     {
       "id": "positions",
-      "path": "src/objects/saturn-minor-moons/source/dots/positions.csv",
+      "path": "src/objects/saturn-minor-moons/source/dots/positions.csv.gz",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
       "title": "Positions of Saturn's moons without a page, relative to Saturn, at the world's epoch",
@@ -18,11 +18,6 @@
             "catalogueId": "jpl-horizons",
             "role": "material",
             "evidence": "src/objects/saturn-minor-moons/source/dots/points.json#/table"
-          },
-          {
-            "catalogueId": "denk-2018-irregular-moons",
-            "role": "method",
-            "evidence": "src/objects/saturn-minor-moons/source/dots/points.json#/classes"
           }
         ]
       },
@@ -45,11 +40,6 @@
           {
             "catalogueId": "jpl-satellite-discovery",
             "role": "method",
-            "evidence": "src/objects/saturn-minor-moons/README.md#processing"
-          },
-          {
-            "catalogueId": "jpl-satellite-mean-elements",
-            "role": "material",
             "evidence": "src/objects/saturn-minor-moons/README.md#processing"
           }
         ]
