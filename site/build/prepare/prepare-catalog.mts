@@ -106,10 +106,11 @@ async function readLocalGroupGalaxies(projectRoot: string) {
     if (detail.focusRadiusM === undefined || members && !members.has(detail.id)) continue;
     if (typeof detail.focusRadiusM !== 'number' || !(detail.focusRadiusM > 0)) throw new TypeError(`${recipePath}: detailObjects.${row}.focusRadiusM is ${String(detail.focusRadiusM)}, not a positive number.`);
     const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', detail.id, 'object.json'), 'utf8'));
-    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
-      throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.frame.`);
+    // A galaxy is an object of the world: its world frame places it.
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.worldFrame)) {
+      throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.worldFrame.`);
     }
-    const originM = descriptor.properties.frame.originM;
+    const originM = descriptor.properties.worldFrame.originM;
     if (within !== undefined && Array.isArray(originM) && Math.hypot(...originM.map(Number)) > within * M_PER_PC) continue;
     galaxies[detail.id] = { originM, radiusM: detail.focusRadiusM };
   }
