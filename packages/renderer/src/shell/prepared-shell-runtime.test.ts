@@ -254,3 +254,14 @@ test('rejects incompatible publications before mutating DOM and destroys only it
   const destroyedStyle = JSON.stringify(root.style); runtime.publish(world(payload, [0, 0, 7]), viewport);
   assert.equal(JSON.stringify(root.style), destroyedStyle);
 });
+
+test('a shell its setting turns off leaves the document, and returns in place when turned on', () => {
+  const payload = fixture(), { runtime, host, before, root } = mount(payload);
+  runtime.publish(world(payload, [6, 2, 4]), viewport);
+  assert.deepEqual(host.children, [root, before]);
+  runtime.publish(world(payload, [6, 2, 4]), viewport, false);
+  assert.deepEqual(host.children, [before]);
+  assert.equal(runtime.stats().visible, false);
+  runtime.publish(world(payload, [6, 2, 4]), viewport);
+  assert.deepEqual(host.children, [root, before]);
+});
