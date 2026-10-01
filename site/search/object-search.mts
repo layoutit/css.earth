@@ -10,6 +10,12 @@ export interface ObjectSearchLabels {
   illustration?: boolean;
 }
 
+/** A body also answers to the catalogue designation its id spells: "hd 75732" and "75732" find 55 Cnc. */
+export function designationNames(id: string, name: string): string[] {
+  const designation = id.replaceAll('-', ' ');
+  return designation === name.toLocaleLowerCase('en') ? [] : [designation];
+}
+
 /** One matching policy for the native form response and its live enhancement. */
 export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[], value: string,
   { illustrations = false } = {}) {

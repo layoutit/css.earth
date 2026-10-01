@@ -186,11 +186,17 @@ test('the Local Group overview frames the Milky Way and every drawn member galax
   const { GALACTIC_VOLUME, drawnGalaxiesZoomTarget } = await import('../system-framing.mts');
   const members = (await import('../prepared-local-group-galaxies.json', { with: { type: 'json' } })).default as Record<string, { originM: number[] }>;
   const { cssViewFromOrientation, rotateWorldPosition } = await import('@cssearth/renderer/navigation');
-  assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'm81', 'm83', 'ngc-253', 'ngc-300', 'smc'], 'the catalogue members with a drawn object');
+  // The catalogue's Local Group members with a drawn object: M81, NGC 253, M83 and NGC 300 are drawn but belong elsewhere.
+  // The association comes from the restored prepared catalogue (prepare-catalog.mts); without it only distance applies.
+  const { existsSync } = await import('node:fs');
+  const associated = existsSync(new URL('../../src/objects/local-group/prepared/catalogue.json', import.meta.url));
+  if (associated) assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'smc']);
+  const { overviewScopeAtCamera } = await import('../overview-context.mts');
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5], [0, .7071067811865476, 0, .7071067811865476]] as const) {
     const from: WorldCameraPose = { ...world, pose: { ...world.pose, orientationXyzw } };
     const { world: target } = drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics));
     assert.deepEqual(target.pose.orientationXyzw, orientationXyzw, 'the view keeps its angle');
+    if (associated) assert.equal(overviewScopeAtCamera(target, 'local-group'), 'local-group', 'the Local Group frame is a Local Group view');
     const view = cssViewFromOrientation(orientationXyzw);
     for (const [id, originM] of [['milky-way', GALACTIC_VOLUME.originM], ...Object.entries(members).map(([id, frame]) => [id, frame.originM] as const)] as const) {
       const [x, y, z] = rotateWorldPosition(view, position(originM.map((value, axis) => value - target.pose.positionM[axis]!)));

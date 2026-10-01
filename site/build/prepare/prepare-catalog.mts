@@ -90,10 +90,21 @@ async function readLocalGroupGalaxies(projectRoot: string) {
   const within = isRecord(level) && isRecord(level.properties) && isRecord(level.properties.overview) && isRecord(level.properties.overview.zoom)
     && isRecord(level.properties.overview.zoom.centreWithin) ? level.properties.overview.zoom.centreWithin.distancePc : undefined;
   if (within !== undefined && !(typeof within === 'number' && within > 0)) throw new TypeError(`src/objects/local-group/object.json: zoom.centreWithin.distancePc is ${String(within)}, not a positive number.`);
+  // The level frames its members: the prepared catalogue's Local Group association. M81, NGC 253 and M83 are drawn from
+  // this catalogue but belong to other groups, 3.5 to 4.9 Mpc away; framing them pulled the camera past the Nearby
+  // Universe threshold, so the Local Group page opened as the Nearby Universe (2026-10-01). Before the prepared
+  // catalogue is restored the association is unknown and the distance rule alone applies.
+  let members: Set<string> | null = null;
+  try {
+    const prepared: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/prepared/catalogue.json'), 'utf8'));
+    if (!isRecord(prepared) || !Array.isArray(prepared.objects)) throw new TypeError('src/objects/local-group/prepared/catalogue.json: objects is missing.');
+    members = new Set(prepared.objects.flatMap(object => isRecord(object) && typeof object.id === 'string' && isRecord(object.membership)
+      && object.membership.group === 'local-group' ? [object.id] : []));
+  } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
   const galaxies: Record<string, { originM: unknown; radiusM: number }> = {};
   for (const [row, detail] of Object.entries(recipe.detailObjects)) {
     if (!isRecord(detail) || typeof detail.id !== 'string') throw new TypeError(`${recipePath}: detailObjects.${row} has no id.`);
-    if (detail.focusRadiusM === undefined) continue;
+    if (detail.focusRadiusM === undefined || members && !members.has(detail.id)) continue;
     if (typeof detail.focusRadiusM !== 'number' || !(detail.focusRadiusM > 0)) throw new TypeError(`${recipePath}: detailObjects.${row}.focusRadiusM is ${String(detail.focusRadiusM)}, not a positive number.`);
     const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', detail.id, 'object.json'), 'utf8'));
     if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {

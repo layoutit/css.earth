@@ -1,3 +1,4 @@
+import { designationNames } from './object-search.mts';
 import { distanceDescription, isSceneObject } from '@cssearth/objects';
 import { FOCUS_SOURCE_DOCUMENTS } from '../focus-catalog-data.mts';
 import { objectClassificationLabel, objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
@@ -21,7 +22,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
           kind: object.kind,
           id: object.id,
           name: object.name,
-          searchNames: Object.freeze([]),
+          searchNames: Object.freeze(designationNames(object.id, object.name)),
           classification: object.classification,
           classificationName: objectTypeLabel(object).toLocaleLowerCase('en'),
           systemName: object.systemName.toLocaleLowerCase('en'),
