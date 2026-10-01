@@ -46,6 +46,8 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
     if (!cover) image?.remove();
     cover?.publish(view.world, view.viewport);
     window.performance.mark('cssearth:startup-billboard');
+    // The billboard is the loading state: once it shows, the ring leaves. Without one, the ring waits for the detail.
+    if (cover) removeLoader();
     pending = createPreparedArrival(signal, cover, () => {
       window.performance.mark('cssearth:startup-detail-ready');
       removeLoader();
