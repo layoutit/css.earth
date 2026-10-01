@@ -3,7 +3,6 @@ import { decodePreparedCssObject, requirePreparedCssDescriptor } from './prepare
 import { decodePreparedObjectInWorker } from './prepared-object-worker-client.js';
 import { adoptPreparedDatasetTables, preparedDatasetReference } from './prepared-data/dataset-tables.js';
 
-export { PREPARED_CSS_OBJECT_FORMAT } from './prepared-object-decoder.js';
 export interface PreparedCssTransport {
   /** Return the exact bytes addressed by the prepared reference. The decoder
    * owns this buffer and may transfer it to a worker. */

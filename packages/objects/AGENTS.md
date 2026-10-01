@@ -15,6 +15,9 @@ layer-plan/report readers and render-element budgets; exported through the main 
 volume and sampled recipes, emission-fit settings, physical slice formats and validation, compiler controls and star
 inputs, joint parameters, authored shape settings, observation photo data and prepared catalogue stars. Writers and
 readers import these from `@cssearth/objects`; sampling, fitting, cancellation and file I/O remain outside this area.
+`src/prepared-data/` owns the prepared CSS object format identifier and compact world-summary/system table decoders,
+exported through the browser-safe main entry. Full world-context validation still resides in renderer pending extraction of shared frame/presentation contracts
+from camera/projection modules; do not import renderer implementation here.
 An object type describes supported behavior and data, not an individual planet.
 Do not ship per-object configuration, generated payload modules, shell content, or renderer code here.
 Keep one shared object contract; application discovery remains in the existing registry.

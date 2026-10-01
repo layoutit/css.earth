@@ -36,3 +36,5 @@ export * from './volume/sampled-emission-fit.js';
 export * from './volume/sampled-recipe.js';
 export * from './volume/volume-recipe.js';
 export * from './volume/volume-slices.js';
+export { PREPARED_CSS_OBJECT_FORMAT } from './prepared-data/object-format.js';
+export { expandWorldContextSummary, expandWorldSystem } from './prepared-data/world-context-summary.js';

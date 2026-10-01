@@ -88,7 +88,7 @@ its validators accept); the renderer never imports the bake.
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls, and the audits that read a prepared presentation and its authored runtime sources back
   against the descriptor (`check-prepared-presentation.ts`; the prepared format constant comes
-  from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
+  from `@cssearth/objects`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command,
   run for each object by the `audit` step of `prepare-object`. `prepared-object-pin.ts` pins a prepared object to its
   transport (the descriptor's `prepared` pin and page reference, and the inventory; the transports themselves are built from
