@@ -23,7 +23,7 @@ import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/render
 // reduced to its parent, bounds and size. Only the planner worker projects orbit
 // paths; it reads each orbit centre's binary bank when a frame first needs it. The full JSON is build-time only.
 //
-// The summary holds the Sun's own system and one point per other system (packages/bake/src/world-context/summary.ts).
+// The summary holds the Sun's own system and one point per other system (`summarizeWorldContext`, which writes it).
 // Each other system's bodies are their own file (`pages/world/systems/[id].json.ts`): a page whose body belongs to one reads
 // it before startup ends; navigation reads the one it flies to (`loadWorldSystemOf`), and the rest arrive in a few batches
 // once the first view is interactive (`streamWorldSystems`). Node tools, tests and the build read every file, so they see
