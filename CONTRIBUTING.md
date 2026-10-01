@@ -212,12 +212,13 @@ from. It groups the files into folders and fails when a change adds:
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 
 Type-only imports count. The package-only and application-entry layer rules have
-no baseline: every violation fails, including during a baseline update. Existing
-folder edges and canonical workspace package cycles are listed in
+no baseline: every violation fails, including during a baseline update. Workspace
+package cycles also have no baseline, including dev and peer dependencies. Existing
+folder edges are listed in
 `.github/scripts/architecture/baseline.json`, so they do not fail the check. If the
 check reports that something got better,
 run `pnpm check:architecture --update-baseline` and commit the baseline. Updates
-refuse new violations; recorded package cycles may only shrink. It needs
+refuse new violations and all package cycles. It needs
 every source file on disk and the shared packages built (`pnpm install` does
 both). It stops, rather than passing, when a source file is missing or an
 import of a shared package names no entry it can trace to a source file.
