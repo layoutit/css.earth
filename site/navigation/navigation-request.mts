@@ -87,8 +87,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   if (!linked) {
     url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
     url = withDataset(url, null);
-    withOverviewScope(url, object.id, intent.kind === 'overview' ? intent.scope
-      : center && intent.kind === 'object' && systemById(objects, object.id) ? 'system' : null);
+    withOverviewScope(url, intent.kind === 'overview' || Boolean(center && intent.kind === 'object' && systemById(objects, object.id)));
     withSatelliteSystemView(url, intent.kind === 'satellite-system' || intent.kind === 'object' && familyTarget !== null);
     if (intent.kind === 'feature' && intent.id !== null) url.searchParams.set('feature', intent.id);
   }

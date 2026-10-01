@@ -51,12 +51,12 @@ test('asset-origin context resources come from inventories without local prepare
     ],
   });
   const origin = 'https://assets.example.test';
-  const assets = await contextObjectAssetUrls([{ id: 'nearby-universe' }], root, origin);
+  const assets = await contextObjectAssetUrls([{ id: 'nearby-universe-galaxies' }], root, origin);
   assert.deepEqual(assets, {
     '../src/objects/nearby-universe-galaxies/prepared/galaxies.json': `${origin}/runtime-assets/${'b'.repeat(64)}/galaxies.json`,
     '../src/objects/nearby-universe-galaxies/prepared/dots.json': `${origin}/runtime-assets/${'a'.repeat(64)}/dots.json`,
   });
-  const source = contextObjectModule([{ id: 'nearby-universe' }], assets);
+  const source = contextObjectModule([{ id: 'nearby-universe-galaxies' }], assets);
   assert.match(source, /https:\/\/assets\.example\.test\/runtime-assets/u);
   assert.doesNotMatch(source, /query: '\?url&no-inline'/u);
 });

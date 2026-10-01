@@ -33,7 +33,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
   <form class="object-sidebar-search-card" data-search-object="saturn"><input class="object-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="object-sheet-handle" type="checkbox">
   <div class="object-drawer-content"><nav class="object-browser" hidden>
-    <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/milky-way/">Milky Way</a></li></ul>
+    <div id="object-category-results" role="region" aria-label="Search results">
     <ul class="object-list" data-catalogue-list></ul>
     <p class="object-error" data-search-error hidden>Couldn't load search results. <button type="button" data-search-retry>Retry</button></p>
     <p class="object-empty" hidden>No matching results</p>
@@ -106,19 +106,21 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.equal(failure.querySelector('.object-destination-result')?.hasAttribute('href'), false);
 });
 
-test('typed search shows a flat result list, including queries that name an overview', async () => {
+test('typed search shows a flat result list, including queries that name a level of the zoom ladder', async () => {
   for (const query of ['t', 'Milky Way']) {
     const document = await render(`/saturn/?q=${encodeURIComponent(query)}`);
-    // A card no selection shows is not mounted (detached-sections.ts).
-    assert.equal(document.querySelector<HTMLElement>('[data-large-scale-overview="milky-way"]'), null);
     assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
     assert.equal(document.querySelectorAll('[data-object-tab]').length, 0);
     assert.equal(document.querySelector('.object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
     // A name that begins with the query ranks first, as in the live search.
     if (query === 't') assert.deepEqual(visibleNames(document), ['Titan', 'Saturn']);
-    assert.equal(document.querySelector<HTMLElement>('[data-search-overview]')?.hidden, query !== 'Milky Way');
-    if (query === 'Milky Way') assert.equal(document.querySelector<HTMLElement>('.object-empty')?.hidden, true);
+    // A level is an object: it is found as an ordinary row of the catalogue, here one the fixture adds.
+    if (query === 'Milky Way') {
+      const found = await render('/saturn/?q=Milky%20Way', data([...entries, entry('scene', 'Milky Way', 'galaxy', 4)]));
+      assert.deepEqual(visibleNames(found), ['Milky Way']);
+      assert.equal(found.querySelector<HTMLElement>('.object-empty')?.hidden, true);
+    }
   }
 });
 
@@ -127,15 +129,11 @@ const contextHtml = html
 
 test('native and live selections share card visibility, inertness, labels and system headers', async () => {
   const state = (document: Document) => [...document.querySelectorAll<HTMLElement>(
-    '.object-context, .object-information-panel, [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
+    '.object-context, .object-information-panel, [data-system-results], [data-system-header], [data-solar-system-facts]')]
     .map(element => ({ hidden: element.hidden, inert: element.hasAttribute('inert'), label: element.getAttribute('aria-label'), current: element.hasAttribute('data-system-current') }));
   const cases = [
     ['', 'saturn', { kind: 'object', objectId: 'saturn' }, '/saturn/'],
     ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }, '/trappist-1/'],
-    // An overview's page draws the Sun's scene.
-    ['', 'sun', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }, '/milky-way/'],
-    ['', 'sun', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }, '/local-group/'],
-    ['', 'sun', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }, '/nearby-universe/'],
   ] as const;
   for (const [query, objectId, subject, page] of cases) {
     const source = contextHtml.replace('data-search-object="saturn"', `data-search-object="${objectId}"`);

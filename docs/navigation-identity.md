@@ -7,7 +7,7 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 | Concept | Meaning and owner |
 | --- | --- |
 | Object | A package with a catalogue entry: a route, a prepared world frame and a scene loader. A planet, a star, a galaxy, a nebula and a cluster of galaxies are all this. `?dataset=` selects one of its datasets. |
-| Level | The Milky Way, the Local Group, the Nearby and the Observable Universe: views of a scene on the zoom ladder, not objects, authored under `properties.overview` in their packages (name, description, order, zoom thresholds, what they hold). A level's page, `/<id>/`, is the world host's scene at that zoom. |
+| Level | The Milky Way, the Local Group, the Nearby and the Observable Universe: objects that are also steps of the zoom ladder. Each authors its place on the ladder under `properties.overview` in its package (order, zoom thresholds, what it holds, the context packages the world draws for it). Its scene has no body and is seen from inside, centred on the star the zoom came from (the Sun on a page opened cold). |
 | Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
 | Dataset view | A selectable `(objectId, datasetId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
@@ -25,9 +25,10 @@ a cold open never reads them as the host's.
 own descriptor: a catalogue block, a world frame and a scene. A galaxy, a nebula
 and a cluster of galaxies are objects like any body; their recipe declares no
 surface, and their imagery is a context bank a dataset names. `SCENE_OBJECTS` is
-the same list. The levels are a separate short list (`OVERVIEWS`), each authored
-under its package's `properties.overview`. The Local Group is a level with a
-place of its own, so the world context also draws and names it.
+the same list. The four levels are objects of that list too; `OVERVIEWS` is those
+four as the zoom ladder reads them. Zooming out of a star's system past a level's
+threshold hands the view to that level's scene with the camera kept where it is,
+and zooming back in returns to the star.
 
 One object has one id. The spatial catalogues (Local Group galaxies, galaxy
 clusters, the nearby field) are data the world draws as dots: a row makes no page

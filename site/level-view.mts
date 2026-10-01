@@ -8,7 +8,7 @@ import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 let centreId = SOLAR_SYSTEM_ID;
 
 /** The level object with `id`, when `id` names one. */
-export const levelObject = (id: string | null | undefined) => KNOWN_OVERVIEWS.find(level => level.id === id && level.scene === true);
+export const levelObject = (id: string | null | undefined) => KNOWN_OVERVIEWS.find(level => level.id === id);
 export const isLevelObject = (id: string | null | undefined) => levelObject(id) !== undefined;
 
 /** The star the mounted level is centred on. */

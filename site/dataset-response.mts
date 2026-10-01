@@ -6,7 +6,6 @@ import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
 import { preparedObjectUrl } from './prepared-object-path.mts';
-import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -45,7 +44,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
   const objectId = descriptor.id;
-  if ((pageId !== objectId && drawnPageFromUrl(url, objectId) !== pageId) || descriptor.prepared?.url !== 'prepared/object.json') {
+  if (pageId !== objectId || descriptor.prepared?.url !== 'prepared/object.json') {
     throw new Error(`Prepared dataset descriptor identity drifted: page ${pageId}, scene ${objectId}.`);
   }
   const dataset = readSceneDatasetUrl(url, objectId);

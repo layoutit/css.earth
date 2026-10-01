@@ -9,10 +9,9 @@ import { renderDatasetResponse, UnreadableSavedView } from '../dataset-response.
 import { createSelectionPresentation } from '../selection-presentation.mts';
 import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
-import { presentFeatureResults, presentOverviewResults, createSearchPresentation } from '../search/search-results-presentation.mts';
+import { presentFeatureResults, createSearchPresentation } from '../search/search-results-presentation.mts';
 import { objectIdAtPath } from '../root-object.mts';
-import { presentPageDatasets } from '../page-datasets.mts';
-import { drawnPageFromUrl, isOverviewPage, overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
+import { overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
 
 /** Modify only the shared shell. Everything outside these boundaries, including
  * the authenticated scene, head, styles and application scripts, passes through byte for byte. */
@@ -47,14 +46,13 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
       }
     }
   }
-  // A page of something the scene draws keeps its path, which names it.
-  const clear = new URL(drawnPageFromUrl(url, objectId) === null ? `/${objectId}/` : url.pathname, url.origin);
+  const clear = new URL(`/${objectId}/`, url.origin);
   for (const name of ['v', 'overview', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].map(input => input.name)]) {
     const value = url.searchParams.get(name);
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }
   // Clearing the search keeps the view context, normalized the way the router resolves it.
-  withOverviewScope(clear, objectId, overviewScopeFromUrl(url, objectId));
+  withOverviewScope(clear, overviewScopeFromUrl(url) !== null);
   document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredSection(document, '.object-browser');
   const presentation = createSearchPresentation(document);
@@ -65,7 +63,6 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
     // The same matcher and order as the find function; with no JavaScript the page lists every match at once.
     const found = findObjects(await data.catalogue(), value || 'all objects', { pageRows: Infinity });
     renderCatalogueRows(document, requiredElement<HTMLUListElement>(browser, '[data-catalogue-list]'), found.objects.rows);
-    const overviewCount = presentOverviewResults(browser, value);
     presentation.markCategory(found.classification);
     const featureRoot = browser.querySelector<HTMLElement>('.object-feature-results');
     let detailCount = 0;
@@ -77,10 +74,9 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
         detailCount = 1;
       }
     }
-    presentation.setEmptyHidden(found.objects.total + detailCount + overviewCount > 0);
+    presentation.setEmptyHidden(found.objects.total + detailCount > 0);
   }
   createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
-  presentPageDatasets(document, url, objectId);
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
@@ -98,8 +94,7 @@ export async function handleSearchRequest(request: Request, data: SearchData, fe
   // The page's own address: a level's page is named by its path, which the rewrite to the function drops.
   const address = new URL(url);
   if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${objectId}/`; address.searchParams.delete('object'); }
-  const drawnPage = isOverviewPage(objectId);
-  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher, { drawnPage }), target, data);
+  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, data);
   let html: string;
   try {
     try { html = await render(address); }

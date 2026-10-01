@@ -34,9 +34,9 @@ existing package views, including their model qualifications; no new surface det
 The shared shell renders each subject's header, tabs and content with `ObjectCard`,
 `ObjectCardHeader`, `InformationTabs` and the common tab-panel padding. Bodies,
 planetary systems and overview members all use the search row renderer
-(`site/search/object-result.mts`); overview navigation levels show their classification
-without an invented observer distance. `OverviewCard` keeps its prepared neighbor
-distances and uses the same row for galaxies and clusters. Page datasets use the
+(`site/search/object-result.mts`). A level's card is the object card: it lists the
+galaxies or clusters it holds with the same row, each with its distance from the
+member that holds the stars. Its datasets use the
 same `DatasetList` inside a padded, scrollable tab panel, including the Observable
 Universe. The shell reads the shared navigation address while native history waits
 for camera rest, so the selected dataset's card follows the current choice.

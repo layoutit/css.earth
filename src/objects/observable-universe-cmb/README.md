@@ -1,7 +1,7 @@
-# Observable Universe
+# Observable Universe microwave background
 
-The last level of the zoom ladder: everything whose light has had time to reach us. It is an overview, an entry of the one
-object registry with its own page, `/observable-universe/`, drawn by the Sun's world context around the mounted scene. It
+What the world draws at the edge of the last level of the zoom ladder, the [Observable Universe](../observable-universe/README.md):
+everything whose light has had time to reach us. That object has its own page, `/observable-universe/`. The level
 reads from 1 Gpc out, opens 52 Gpc from the Sun and reaches 80 Gpc, far enough for the microwave background's caption to
 fit below it.
 
@@ -22,12 +22,10 @@ The [recipe](source/cmb/sphere.json) names the map, colour table, range, radius,
 
 ## Registry entry
 
-[object.json](object.json) authors the overview under `properties.overview`: its name, card description and place on the
-zoom ladder (4, after the Milky Way, the Local Group and the Nearby Universe); its `zoom`, entered from 1 Gpc and left
-below 800 Mpc, and framed 52 Gpc from the Sun; and what it holds (nothing yet: its card has no list). `pnpm
-prepare:catalog` writes it to `site/prepared-overview-objects.json` with the world host, and `site/objects.mts` adds it
-to `OBJECTS`. Its prepared file is the image mesh (`cssearth-image-mesh@1`); the world draws every context object prepared
-as one.
+This package is a context bank: it has no catalogue entry and no page. The [Observable Universe](../observable-universe/README.md)
+object names it under `properties.overview.packages`, and its three datasets (off, cut open, full sphere) name this
+bank's views, which [object.json](object.json) lists under `properties.views`. Its prepared file is the image mesh
+(`cssearth-image-mesh@1`); the world draws every context object prepared as one.
 
 ## Processing
 
@@ -75,7 +73,7 @@ the page draws it from the same map, limb law and opacities
   with its dataset card, and the full sphere after choosing it in place, at the
   same camera. An earlier capture, from before the cutaway, shows
   the whole sphere from outside seamless across its 450 patches.
-- The registry tests check that the four overviews are `OBJECTS` entries and that zooming out from the Sun walks them in
+- The registry tests check that the four levels are `OBJECTS` entries and that zooming out from the Sun walks them in
   their order (`site/test/navigation-ontology.test.mts`, `site/test/overview-context.test.mts`).
 - The [context lineage test](../../../site/test/context-lineage.test.mts) checks that its products read only its source records.
 

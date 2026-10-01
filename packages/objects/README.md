@@ -23,7 +23,7 @@ binds `loadScene` to its own scene type; the site's client build compiles these 
 Preparation reads the same registry through `readPreparedObjects(root)` in `@cssearth/objects/node`: it decodes the
 prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`: `site/prepared-catalogue.mjs`, every scene object's
 descriptor with its distance and discovery and every prepared focus in registry order, written by
-`preparedCatalogueModule()`, and the overviews apart in `site/prepared-overview-objects.json`, the one part every page's
+`preparedCatalogueModule()`, and the rows of the objects that are levels of the zoom ladder again in `site/prepared-overview-objects.json`, the one part every page's
 object directory reads) with these contracts and binds a `loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
 test (run in the universe runtime lane) holds both reads equal.
 

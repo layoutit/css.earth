@@ -5,8 +5,6 @@ import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/rend
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, objectSeo } from '../seo.mts';
 import { knownLevel, knownObject } from '../object-directory.mts';
-import { overviewPage } from '../navigation/navigation-scope.mts';
-import { presentPageDatasets } from '../page-datasets.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { selectionKey } from '../scene/scene-selection.mts';
@@ -103,33 +101,10 @@ export function mountObjectShell({
   function presentSelection() {
     if (lifetime.disposed) return;
     const subject = readSelection();
-    // A page's datasets follow its address on every publication, a dataset-only change included (page-datasets.mts).
-    presentPageDatasets(documentTarget, navigationHref(windowTarget), objectId);
     if (presentedSubject === subject) { updateBodyCard(); return; }
-    // A level the world draws around the scene is its own page, `/<id>/`.
-    const drawnPage = (selected: typeof subject | null) => {
-      const overview = selected?.kind === 'overview' ? knownLevel(overviewPage(objectId, selected.overview.scope)) : undefined;
-      return overview ? { id: overview.id, seo: objectSeo(overview) } : null;
-    };
-    // Another star's scene zoomed out to an overview keeps its own address (a reload reopens that scene), but the tab
-    // names what the card shows: the Milky Way from the ε Eridani system was still titled "ε Eridani" (2026-10-01).
-    const titledOverview = (selected: typeof subject | null) => {
-      if (selected?.kind !== 'overview' || selected.overview.scope === 'system' || drawnPage(selected)) return null;
-      const overview = knownLevel(selected.overview.scope), scene = knownObject(objectId);
-      return overview && scene ? { route: scene.route, seo: { ...objectSeo(scene), title: objectSeo(overview).title } } : null;
-    };
-    const leftPage = drawnPage(presentedSubject) !== null || titledOverview(presentedSubject) !== null;
     presentedSubject = subject;
-    const page = drawnPage(subject);
-    // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
-    // (object-browser.mts bindObject).
-    const titled = titledOverview(subject);
-    if (page) presentPage(`/${page.id}/`, page.seo);
-    else if (titled) presentPage(titled.route, titled.seo);
-    else if (leftPage) {
-      const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
-      if (scene) presentPage(scene.route, objectSeo(scene));
-    } else pendingPage = null;
+    // Every subject is its scene's own page: a scene change writes the head and forms (object-browser.mts bindObject).
+    pendingPage = null;
     objectBrowser.refreshSelection();
     // A galaxy, a cluster or a nebula has no surface to stand above: the readout measures to its centre.
     const shown = knownObject(objectId);

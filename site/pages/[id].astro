@@ -1,13 +1,12 @@
 ---
 import ObjectPage from '../components/ObjectPage.astro';
-import { OBJECTS, OVERVIEWS } from '../objects.mts';
-import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
+import { OBJECTS } from '../objects.mts';
 import { builtObjectPages } from '../built-pages.mts';
 export function getStaticPaths() {
   // Every object has its page, `/<id>/`, which mounts its scene. A level of the zoom ladder has a page too: the world
   // host's scene at that zoom, with the level selected.
-  const pages: { id: string; sceneHostId?: string }[] = [...OBJECTS.map(object => ({ id: object.id })), ...OVERVIEWS.filter(level => level.scene !== true).map(level => ({ id: level.id, sceneHostId: WORLD_HOST_ID }))];
-  return builtObjectPages(pages.map(page => ({ params: { id: page.id }, props: { sceneId: page.sceneHostId ?? page.id } })), pages);
+  const pages = OBJECTS.map(object => ({ id: object.id }));
+  return builtObjectPages(pages.map(page => ({ params: { id: page.id }, props: { sceneId: page.id } })), pages);
 }
 ---
 <ObjectPage objectId={Astro.props.sceneId} pageId={Astro.params.id!} />

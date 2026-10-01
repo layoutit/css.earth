@@ -5,7 +5,8 @@
   "properties": {
     "preparation": {
       "source": "source/catalogue.json"
-    }
+    },
+    "host": "local-group"
   },
   "prepared": {
     "format": "cssearth-galaxy-catalog@1",

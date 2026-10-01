@@ -10,7 +10,7 @@ export { orderFacts } from './fact-order.js';
 export { mapLabel } from './map-label.js';
 export { distanceDescription, parseNavigationDistance } from './navigation-distance.js';
 export type { NavigationDistance } from './navigation-distance.js';
-export { catalogEntry, catalogueLevel, catalogueObject, isSceneDescriptor } from './object-catalog.js';
+export { catalogEntry, catalogueObject, levelOf } from './object-catalog.js';
 export type { CatalogContext, CatalogEntry } from './object-catalog.js';
 export { matchesObjectCategory, matchesObjectClassification } from './object-categories.js';
 export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, offTheMap, parseObjectDiscovery } from './object-discovery.js';

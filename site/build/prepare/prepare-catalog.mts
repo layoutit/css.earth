@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { defineObjects, isSceneDescriptor, type CatalogEntry } from '@cssearth/objects';
+import type { CatalogEntry } from '@cssearth/objects';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -151,13 +151,10 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // Every descriptor once, shared by each read below.
   const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
   const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
-  // A level of the zoom ladder is a package's entry like any other; one that is placed too (the Local Group) is in both reads.
+  // A level of the zoom ladder is an object: its package is a catalogue entry that also authors its place on the ladder.
   const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
-  // A level that is an object too (the Milky Way) is an entry of the catalogue; one without a scene is only a level.
-  const levelIds = new Set(overviews.filter(overview => !isSceneDescriptor(overview.descriptor)).map(overview => overview.id));
-  const entries = catalogued.filter(entry => !levelIds.has(entry.id));
-  // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
-  defineObjects<{ id: string; route: string }>([...entries, ...[...levelIds].map(id => ({ id, route: `/${id}/` }))]);
+  const entries = catalogued;
+  for (const { id } of overviews) if (!entries.some(entry => entry.id === id)) throw new TypeError(`src/objects/${id}/object.json authors a level of the zoom ladder without a catalogue entry: a level is an object.`);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -174,18 +171,10 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     const descriptor = descriptors.get(id);
     return { descriptor, distance, discovery: discoveries[index]! };
   })));
-  // Every page reads the levels, so their rows are apart and carry only what an entry reads of a descriptor.
+  // Every page reads the levels, so their rows are written apart as well: the same rows as the catalogue's.
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {
-    const { schema, type, properties } = descriptor as { schema: unknown; type: unknown; properties: Record<string, unknown> };
-    const placed = catalogued.find(entry => entry.id === id), volume = properties.volume;
-    // An object's row is the catalogue's: its whole descriptor, with its distance and discovery.
     const index = entries.findIndex(entry => entry.id === id);
-    if (index >= 0) return { descriptor, distance: entries[index]!.distance, discovery: discoveries[index]! };
-    return { descriptor: { schema, id, type, properties: { overview: properties.overview,
-      ...(properties.catalog === undefined ? {} : { catalog: properties.catalog, worldFrame: properties.worldFrame }),
-      ...(isRecord(volume) && volume.originM !== undefined ? { volume: { originM: volume.originM } } : {}) } },
-      // A placed level is a landmark of the scale above it, without imagery of its own.
-      ...(placed ? { distance: placed.distance, discovery: { featured: true, imagery: false, illustration: false } } : {}) };
+    return { descriptor, distance: entries[index]!.distance, discovery: discoveries[index]! };
   })) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');

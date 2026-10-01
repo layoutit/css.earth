@@ -29,7 +29,6 @@ function meshView(descriptor: { id: string; properties: Record<string, unknown> 
   if (view !== 'cutaway' && view !== 'full' && view !== 'hidden') throw new TypeError(`src/objects/${descriptor.id}/object.json properties.views: a view is cutaway, full or hidden, not ${String(view)}.`);
   return view;
 }
-import { isOverviewPage, withOverviewScope } from './navigation/navigation-scope.mts';
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
@@ -140,7 +139,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const universe = createPreparedUniverse({
       // The world's volume is an overview's package (the Milky Way): clicking it opens that overview's page.
       environmentLinks: (level => level ? { [applicationContext.volume.objectId]: level.route } : {})(KNOWN_OVERVIEWS.find(level => level.packages.includes(applicationContext.volume.objectId))),
-      contextBanks: KNOWN_OVERVIEWS.flatMap(level => level.scene ? level.packages : []),
+      contextBanks: KNOWN_OVERVIEWS.flatMap(level => level.packages),
       stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.

@@ -10,7 +10,6 @@ import ObjectResults from "./ObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
 import CssEarthWordmark from "./CssEarthWordmark.astro";
-import OverviewCard from './OverviewCard.astro';
 import ObjectCard from './ObjectCard.astro';
 import SystemHeaders from './SystemHeaders.astro';
 import SystemBodies from './SystemBodies.astro';
@@ -230,7 +229,6 @@ import Detached from './Detached.astro';
     </nav></Detached>}
     <div class="object-selected-content">
     {!navigation && <Detached detached><div class="object-context" hidden>
-      {OVERVIEWS.filter(overview => overview.scene !== true).map(overview => <OverviewCard {overview} />)}
       <Detached detached><ObjectCard class="object-overview-card" data-system-results>
         {/* The Solar System's header and this page's own; the others arrive with the first overview of another system. */}
         <SystemHeaders only={[SOLAR_SYSTEM_ID, ...(ownSystem ? [ownSystem.id] : [])]} />

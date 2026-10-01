@@ -23,7 +23,7 @@ export function selectionContext(subject: SceneSubject): SceneContext {
 
 export function selectionTargetFromUrl(url: URL, objectId: string, objects: SystemObjects): SelectionTarget {
   if (satelliteSystemFromUrl(url) && satelliteSystemByHost(objectId)) return { kind: 'satellite-system', hostId: objectId };
-  const scope = overviewScopeFromUrl(url, objectId);
+  const scope = overviewScopeFromUrl(url);
   return scope ? { kind: 'overview', overview: { scope, systemId: systemById(objects, objectId)?.id ?? SOLAR_SYSTEM_ID } }
     : { kind: 'object', objectId };
 }
@@ -78,8 +78,7 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
     },
     /** Project the committed identity while preserving camera, dataset and diagnostic URL payloads. */
     url(value: string | URL) {
-      return withSatelliteSystemView(withOverviewScope(new URL(value), scene,
-        subject.kind === 'overview' ? subject.overview.scope : null), subject.kind === 'satellite-system').href;
+      return withSatelliteSystemView(withOverviewScope(new URL(value), subject.kind === 'overview'), subject.kind === 'satellite-system').href;
     },
   };
 }

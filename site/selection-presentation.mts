@@ -6,7 +6,6 @@ import { requiredSection, setSectionShown, setLinkSelected, type BrowserWindow }
 import { sectionElements } from '@cssearth/renderer';
 import type { CatalogueSelection } from './search/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
-import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { knownLevel } from './object-directory.mts';
@@ -23,8 +22,6 @@ export function createSelectionPresentation(documentTarget: Document, {
   // The context and each of its cards are mounted only while shown (detached-sections.ts); the others wait in templates.
   const context = sectionElements(documentTarget, '.object-context')[0];
   if (!context) throw new Error('Object shell context is missing.');
-  // One card per overview (OverviewCard.astro).
-  const overviewCards = sectionElements(context, '[data-large-scale-overview]');
   const system = sectionElements(context, '[data-system-results]')[0] ?? null;
   let systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   // Other systems' headers load with the first overview that needs one (`system-headers-fragment.mts`).
@@ -51,17 +48,8 @@ export function createSelectionPresentation(documentTarget: Document, {
     : knownLevel(scope)?.name ?? '';
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     const overview = subject.kind === 'overview' ? subject.overview : null;
-    // A level that is a member of a larger one (the Milky Way in the Local Group) is the subject its card measures from.
-    const subjectId = overview && overview.scope !== 'system' ? overview.scope : null;
-    const lists = (card: HTMLElement) => subjectId !== null
-      && sectionElements(card, '[data-neighbor-id]').some(row => row.dataset.neighborId === subjectId);
-    const shown = overview && overview.scope !== 'system' ? overviewCards.find(card => card.dataset.largeScaleOverview === overview.scope) : undefined;
-    // Each card measures its distances from the subject it lists, or else from its home (the member holding the stars, or
-    // the observer).
-    for (const card of overviewCards) selectGalaxyNeighbor(card, lists(card) ? subjectId! : card.dataset.neighborHome ?? 'observer');
     const systemSelected = overview?.scope === 'system';
     const showContext = subject.kind === 'overview';
-    for (const card of overviewCards) setSectionShown(card, card === shown);
     if (system) setSectionShown(system, systemSelected);
     systemContent.show(systemSelected);
     // An overview shows its own card; the body's card waits off the page.

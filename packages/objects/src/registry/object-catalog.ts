@@ -85,8 +85,6 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   const descriptor = value.descriptor, id = value.descriptor.id;
   if (value.descriptor.properties.catalog === undefined) throw new TypeError(`Invalid catalogue entry: ${id} has no catalogue entry.`);
   const ladder = overviewLevel(descriptor);
-  // A package that only authors a level has no scene: it is a view of the world host's (catalogueLevel).
-  if (ladder !== null && !isSceneDescriptor(descriptor)) throw new TypeError(`Invalid catalogue entry: ${id} is a level of the zoom ladder without a scene, not an object.`);
   const { order: _order, context: _context, ...entry } = catalogEntry(descriptor, loadScene(descriptor), parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
   const object = ladder === null ? entry
     : { ...entry, level: Object.freeze({ order: ladder.order, zoom: ladder.zoom, holds: ladder.holds, packages: ladder.packages }) };
@@ -94,22 +92,10 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   return object.aliases.length ? { ...object, searchNames: Object.freeze(destinationSearchNames([id, object.name, ...object.aliases])) } : object;
 }
 
-/** Whether a descriptor is a package with a scene of its own: an authored body with a recipe. */
-export const isSceneDescriptor = (descriptor: unknown): boolean => isRecord(descriptor) && descriptor.type === 'layered-body'
-  && isRecord(descriptor.properties) && descriptor.properties.recipe !== undefined;
-
-/** One level of the zoom ladder, from its prepared row: its package's `properties.overview`, named by that block or, for a
- * level with a place of its own (the Local Group), by its catalogue block, which also makes it a body of the world. */
-export function catalogueLevel(value: unknown): OverviewObject {
-  if (!isRecord(value) || !isRecord(value.descriptor) || !isRecord(value.descriptor.properties) || typeof value.descriptor.id !== 'string') throw new TypeError('Invalid level entry.');
-  const descriptor = value.descriptor, id = value.descriptor.id, level = overviewLevel(descriptor);
-  if (level === null) throw new TypeError(`Invalid level entry: ${id} authors no overview.`);
-  const placed = value.descriptor.properties.catalog === undefined ? null
-    : catalogEntry(descriptor, async () => { throw new Error(`${id} is read here as a level: its scene is its registry object's.`); }, parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
-  const { name: levelName, description: levelDescription, ...ladder } = level;
-  const name = placed?.name ?? levelName, description = placed?.description ?? levelDescription;
-  if (name === undefined || description === undefined) throw new TypeError(`Invalid level entry: ${id} has no name or description.`);
-  return Object.freeze({ id, name, description, route: `/${id}/`, ...ladder, ...(isSceneDescriptor(descriptor) ? { scene: true as const } : {}),
-    ...(placed ? { classification: placed.classification, ...(placed.classificationLabel === undefined ? {} : { classificationLabel: placed.classificationLabel }),
-      systemName: placed.systemName, color: placed.color, distance: placed.distance, worldFrame: placed.worldFrame, discovery: placed.discovery } : {}) });
+/** A level of the zoom ladder as the ladder reads it, from the object that is the level. */
+export function levelOf(object: NavigableObject): OverviewObject {
+  if (!object.level) throw new TypeError(`${object.id} is not a level of the zoom ladder.`);
+  return Object.freeze({ id: object.id, name: object.name, description: object.description, route: object.route, ...object.level,
+    classification: object.classification, ...(object.classificationLabel === undefined ? {} : { classificationLabel: object.classificationLabel }),
+    worldFrame: object.worldFrame });
 }

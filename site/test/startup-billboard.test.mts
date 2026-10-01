@@ -17,7 +17,6 @@ test('default startup never overwrites a saved camera, dataset or context', () =
   assert.equal(usesDefaultStartupView('https://css.earth/earth/?embed', 'earth'), true);
   for (const key of ['v', 'dataset', 'feature', 'view', 'overview', 'settings'])
     assert.equal(usesDefaultStartupView(`https://css.earth/earth/?${key}=custom`, 'earth'), false, key);
-  assert.equal(usesDefaultStartupView('https://css.earth/m31/', 'sun'), false, 'a catalogue focus page');
 });
 
 test('startup uses the baked perspective and viewport texture demand before mounting', async () => {

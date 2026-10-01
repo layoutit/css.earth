@@ -36,11 +36,11 @@ async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) 
   // A newly inventoried body joins navigation coverage without updating this helper's selection.
   await inventory('new-body', 'prepared', ['runtime.json', 'scene.json']);
   await inventory('new-body', 'runtime', ['unrelated.webp']);
-  await inventory('milky-way', 'prepared', ['volume.json', 'slices/z/one.webp']);
+  await inventory('milky-way-volume', 'prepared', ['volume.json', 'slices/z/one.webp']);
   await inventory('helix', 'prepared', ['datasets.json', 'slice.webp', 'presentation.json']);
   await inventory('helix', 'runtime', ['unrelated-preview.webp']);
   await json('src/objects/helix-volume/source/presentation.json', { schema: 'cssearth-volume-presentation-source@2', objectId: 'helix' });
-  await inventory('local-group', 'runtime', ['catalogue.json'], 'prepared');
+  await inventory('local-group-galaxies', 'runtime', ['catalogue.json'], 'prepared');
   await json('src/objects/local-group-galaxies/source/presentation.json', { provenance: { products: [] } });
   const fetcher: typeof fetch = async url => {
     const key = new URL(String(url)).pathname.slice(1), bytes = payloads.get(key);
@@ -56,10 +56,10 @@ async function universeFixture(t: { after: (cleanup: () => Promise<unknown>) => 
   await result.inventory('new-body', 'runtime', ['unrelated.webp', 'new-body-photometric-phase-curve.svg', 'unrelated.svg']);
   await result.inventory('heliosphere', 'prepared', ['shell.json', 'atlas.webp']);
   await result.inventory('stellar-neighbourhood', 'prepared', ['stars.json', 'stars.bin', 'point-atlas.webp']);
-  await result.inventory('milky-way', 'runtime', ['unused-preview.webp']);
+  await result.inventory('milky-way-volume', 'runtime', ['unused-preview.webp']);
   await result.inventory('m31', 'runtime', ['layers.json', 'image.webp'], 'prepared');
   // Two manifest kinds may name the same prepared JSON; one validated installation suffices.
-  await result.inventory('local-group', 'prepared', ['catalogue.json']);
+  await result.inventory('local-group-galaxies', 'prepared', ['catalogue.json']);
   return result;
 }
 
@@ -68,8 +68,8 @@ test('preparation selection retains all prepared packages and real fixture textu
   const assets = await ciPreparationInputs(root);
   assert.deepEqual(assets.map(asset => `${asset.id}/${asset.filename}`).sort(), [
     'helix/datasets.json', 'helix/presentation.json', 'helix/slice.webp',
-    'local-group/catalogue.json',
-    'milky-way/slices/z/one.webp', 'milky-way/volume.json',
+    'local-group-galaxies/catalogue.json',
+    'milky-way-volume/slices/z/one.webp', 'milky-way-volume/volume.json',
     'mimas/runtime.json', 'mimas/scene.json', 'mimas/surface.webp',
     'new-body/runtime.json', 'new-body/scene.json',
   ]);
@@ -117,9 +117,9 @@ test('universe selection keeps registry JSON and actual renderer banks without u
   assert.deepEqual(assets.map(asset => `${asset.id}/${asset.filename}`).sort(), [
     'heliosphere/atlas.webp', 'heliosphere/shell.json',
     'helix/datasets.json', 'helix/presentation.json',
-    'local-group/catalogue.json',
+    'local-group-galaxies/catalogue.json',
     'm31/layers.json',
-    'milky-way/slices/z/one.webp', 'milky-way/volume.json',
+    'milky-way-volume/slices/z/one.webp', 'milky-way-volume/volume.json',
     'mimas/features.json', 'mimas/runtime.json', 'mimas/scene.json',
     'new-body/new-body-photometric-phase-curve.svg', 'new-body/runtime.json', 'new-body/scene.json',
     'stellar-neighbourhood/point-atlas.webp', 'stellar-neighbourhood/stars.bin', 'stellar-neighbourhood/stars.json',
@@ -128,7 +128,7 @@ test('universe selection keeps registry JSON and actual renderer banks without u
   assert.deepEqual(assets.filter(asset => asset.file.startsWith(resolve(root, 'public') + '/')).map(asset => asset.filename).sort(),
     ['features.json', 'new-body-photometric-phase-curve.svg']);
   assert.deepEqual(assets.filter(asset => !asset.filename.endsWith('.json')).map(asset => `${asset.id}/${asset.filename}`).sort(), [
-    'heliosphere/atlas.webp', 'milky-way/slices/z/one.webp', 'new-body/new-body-photometric-phase-curve.svg', 'stellar-neighbourhood/point-atlas.webp', 'stellar-neighbourhood/stars.bin',
+    'heliosphere/atlas.webp', 'milky-way-volume/slices/z/one.webp', 'new-body/new-body-photometric-phase-curve.svg', 'stellar-neighbourhood/point-atlas.webp', 'stellar-neighbourhood/stars.bin',
   ]);
 });
 

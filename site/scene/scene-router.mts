@@ -26,7 +26,7 @@ import { createWorldViewport } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-import { drawnPageFromUrl, isOverviewPage, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
+import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { isLevelObject, setLevelCentre } from '../level-view.mts';
 import type { LadderHandover } from './scene-selection.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
@@ -334,7 +334,7 @@ export function createSceneRouter({
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
-      navigable = id => isOverviewPage(id) || isLevelObject(id) || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      navigable = id => isLevelObject(id) || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       if (destroyed) navigation.destroy();
       return context = { registry, objects, navigation, selection, activation };
     });
@@ -393,7 +393,6 @@ export function createSceneRouter({
         startFlightRequest(preparedObjectUrl(id, 'prepared/object.json'));
         if (intent.kind !== 'feature') void registry.loadSystemView(id).catch(() => {});
       }
-      if (isOverviewPage(id)) id = WORLD_HOST_ID;
     }
     // A level reached by a link or the menu is centred on the world's host; the zoom ladder names its centre itself.
     if (isLevelObject(id) && id !== objectId && !(intent.kind === 'object' && intent.camera === 'preserve')) setLevelCentre(WORLD_HOST_ID);
@@ -556,7 +555,7 @@ export function createSceneRouter({
   /** A focus or overview arrival is placed by the world, so it cannot start before the world has loaded. */
   function worldOwnsArrival() {
     const url = new URL(navigationHref(windowTarget));
-    return drawnPageFromUrl(url, objectId) !== null || isLevelObject(objectId) || ['overview', 'view'].some(name => url.searchParams.has(name));
+    return isLevelObject(objectId) || ['overview', 'view'].some(name => url.searchParams.has(name));
   }
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }

@@ -4,7 +4,7 @@
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { catalogueLevel, catalogueObject, defineObjects } from '../registry/index.js';
+import { catalogueObject, defineObjects, levelOf } from '../registry/index.js';
 import type { NavigableObject, NavigationDistance, ObjectDiscovery, ObjectEntry, OverviewObject, WorldBody } from '../registry/index.js';
 
 /** The catalogue files, relative to the checkout. `entries` is a module: each scene object's descriptor, as its folder's
@@ -37,9 +37,9 @@ export interface PreparedObjectRegistry {
   readonly objects: readonly PreparedNavigableObject[];
   /** The same list, under the name the body lanes read. */
   readonly sceneObjects: readonly PreparedSceneObject[];
-  /** The levels of the zoom ladder, from the nearest out. They are views, not objects. */
+  /** The levels of the zoom ladder, from the nearest out: the objects that are levels, as the ladder reads them. */
   readonly levels: readonly OverviewObject[];
-  /** What the world context draws and names: every object, and a level with a place of its own (the Local Group). */
+  /** What the world context draws and names: every object. */
   readonly worldObjects: readonly WorldBody[];
   requireSceneObject(id: string): PreparedSceneObject;
 }
@@ -71,17 +71,16 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   const entries = rows(catalogue, PREPARED_CATALOGUE.entries);
   const refuse = () => async (): Promise<never> => { throw new Error('Preparation cannot mount a scene.'); };
   const objects = defineObjects<PreparedNavigableObject>(entries.map(entry => catalogueObject<never, AbortSignal>(entry, refuse)));
-  const levels = Object.freeze(rows(overviews, PREPARED_CATALOGUE.overviews).map(catalogueLevel).sort((a, b) => a.order - b.order));
-  // An id names one page: an object's or a level's.
-  defineObjects<{ id: string; route: string }>([...objects, ...levels.filter(level => !objects.some(object => object.id === level.id))]);
-  const placedLevels = levels.filter(level => !objects.some(object => object.id === level.id)).flatMap((level): WorldBody[] => level.worldFrame && level.classification && level.systemName && level.color && level.distance && level.discovery
-    ? [{ id: level.id, name: level.name, classification: level.classification, ...(level.classificationLabel === undefined ? {} : { classificationLabel: level.classificationLabel }),
-      systemName: level.systemName, color: level.color, distance: level.distance, worldFrame: level.worldFrame, discovery: level.discovery }] : []);
-  const worldObjects = Object.freeze([...objects, ...placedLevels]);
+  // A level of the zoom ladder is one of the objects; the levels file holds their rows again for the pages that read it alone.
+  const levels = Object.freeze(objects.filter(object => object.level).map(levelOf).sort((a, b) => a.order - b.order));
+  for (const row of rows(overviews, PREPARED_CATALOGUE.overviews)) {
+    const id = isRecord(row.descriptor) ? row.descriptor.id : undefined;
+    if (!levels.some(level => level.id === id)) throw new TypeError(`${PREPARED_CATALOGUE.overviews}: ${String(id)} is not a level object of ${PREPARED_CATALOGUE.entries}.`);
+  }
+  const worldObjects = objects;
   return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects: objects, levels, worldObjects, requireSceneObject(id: string) {
     const object = objects.find(candidate => candidate.id === id);
     if (object) return object;
-    if (levels.some(level => level.id === id)) throw new TypeError(`${id} is a level of the zoom ladder: it has no scene of its own.`);
     throw new Error(`Unknown cssEarth object: ${id}`);
   } });
 }

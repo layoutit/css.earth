@@ -1,12 +1,10 @@
 ---
-import CatalogueOverviewRows from './CatalogueOverviewRows.astro';
 
 // Overview rows are small and stay inline. Object rows come from the find function, a page at a time, in astro dev
 // and production alike (`search/search-client.mts`).
 ---
 
 <div id="object-category-results" class="object-results-scroll" role="region" aria-label="Search results" tabindex="0" hidden>
-  <ul class="object-list object-overview-list"><CatalogueOverviewRows /></ul>
   <ul class="object-list" data-catalogue-list></ul>
   <p class="object-error" role="alert" data-search-error hidden>
     Couldn't load search results. <button type="button" class="object-retry" data-search-retry>Retry</button>

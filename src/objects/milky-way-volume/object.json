@@ -33,7 +33,8 @@
     },
     "preparation": {
       "source": "source/volume.json"
-    }
+    },
+    "host": "milky-way"
   },
   "prepared": {
     "format": "cssearth-density-volume@1",
