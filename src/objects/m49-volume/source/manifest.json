@@ -1,0 +1,175 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "legacy-optical",
+      "path": ".local/nebula-lab/planetary/m49-inferred-original.jpg",
+      "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=3000&height=3000&fov=0.584423&projection=TAN&coordsys=icrs&ra=187.444992&dec=8.00041&format=jpg",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/",
+      "title": "DESI Legacy Surveys color (g, r, i, z)",
+      "credit": "DESI Legacy Imaging Surveys DR10; colour HiPS by CDS (CNRS/Unistra)",
+      "displayCredit": "Legacy Surveys / CDS",
+      "acquisition": "A 3000 x 3000 px tangent-plane cutout of the colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/m49/experiment.json) into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "desi-legacy-surveys-dr10-color-hips",
+            "role": "material",
+            "evidence": "https://www.legacysurvey.org/dr10/"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "legacy-optical",
+      "license": "ODbL-1.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "DECam g, r, i, z",
+            "evidence": "https://www.legacysurvey.org/dr10/",
+            "reason": "The survey's colour composite of coadded images; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cote-gc-table",
+      "path": "src/objects/m49-volume/source/cote-gc/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+DISTINCT+%22%5BGLK96%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F591%2F850%2Ftable2%22+WHERE+Class%3D%27GC%27",
+      "title": "Dynamics of the globular cluster system associated with M49 (NGC 4472), table.csv",
+      "credit": "P. Côté, D. E. McLaughlin, J. G. Cohen, J. P. Blakeslee; ApJ 591, 850",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through cote-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cote-2003-m49-globular-clusters",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+DISTINCT+%22%5BGLK96%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F591%2F850%2Ftable2%22+WHERE+Class%3D%27GC%27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jordan-gc-table",
+      "path": "src/objects/m49-volume/source/jordan-gc/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJS%2F180%2F54%2Ftable4%22+WHERE+VCC%3D1226+AND+pGC%3E%3D0.5",
+      "title": "The ACS Virgo Cluster Survey XVI: selection procedure and catalogs of globular clusters, table.csv",
+      "credit": "A. Jordán, E. W. Peng, J. P. Blakeslee et al.; ApJS 180, 54",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through jordan-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jordan-2009-acsvcs-globular-clusters",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJS%2F180%2F54%2Ftable4%22+WHERE+VCC%3D1226+AND+pGC%3E%3D0.5"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m49-volume/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m49-volume/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m49-volume/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m49-volume/source/bake-inputs/references/00-experiment.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-5",
+      "path": "src/objects/m49-volume/source/cote-gc/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-6",
+      "path": "src/objects/m49-volume/source/jordan-gc/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-7",
+      "path": "src/objects/m49-volume/source/dots/merge.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-8",
+      "path": "src/objects/m49-volume/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "compact-compact-emission-0-f32-gz",
+      "path": "src/objects/m49-volume/source/compact/emission-0.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-1-f32-gz",
+      "path": "src/objects/m49-volume/source/compact/emission-1.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-2-f32-gz",
+      "path": "src/objects/m49-volume/source/compact/emission-2.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-model-json",
+      "path": "src/objects/m49-volume/source/compact/model.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    }
+  ]
+}

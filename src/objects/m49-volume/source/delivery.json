@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "m49-volume",
+  "method": "axial-symmetry",
+  "request": {
+    "path": "labs/nebula/models/m49/experiment.json"
+  },
+  "inputPins": [],
+  "sky": {
+    "centerIcrsDegrees": [
+      187.444992,
+      8.00041
+    ],
+    "distancePc": 16700000,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 210.39228
+  },
+  "sourceUrl": "https://www.legacysurvey.org/dr10/",
+  "description": "M49's starlight as a volume: the survey image with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light along each sight line spread in depth by the deprojected density of Kormendy et al.'s Sérsic fit, on an oblate spheroid about M49's minor axis in the plane of the sky. Depth follows that stated shape; it is not measured.",
+  "defaultDataset": "legacy-optical",
+  "framingRadiusUnits": 5,
+  "attachedTo": "m49",
+  "acceptedLabResult": "m49-inferred",
+  "symmetryDirectory": ".local/nebula-lab/planetary/m49-inferred",
+  "compactInputs": {
+    "path": "src/objects/m49-volume/source/compact/model.json"
+  },
+  "compactMethod": "symmetry"
+}

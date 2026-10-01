@@ -1,4 +1,4 @@
-import {applyRecordedPointMasks,emissionInputChannels,emissionRasterPixels,createInferredEmissionSampler} from '@cssearth/nebula-reconstruction/methods/symmetry/processing';
+import {applyIsophoteMasks,applyRecordedPointMasks,emissionInputChannels,emissionRasterPixels,createInferredEmissionSampler} from '@cssearth/nebula-reconstruction/methods/symmetry/processing';
 /** Offline planetary-nebula experiment; never runs from a browser mount. */
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -19,7 +19,10 @@ interface Recipe {
   pointMasks: { x: number; y: number; radius: number }[];
   /** Catalogued neighbouring galaxies, masked after NOX: NOX removes stars, not galaxies, and an axisymmetric fit would
    * turn each into a ring about the axis. Positions and sizes come from a catalogue the recipe names. */
-  neighbourMasks?: { source: string; masks: { name: string; x: number; y: number; radius: number }[] };
+  neighbourMasks?: { source: string; masks: { name: string; x: number; y: number; radius: number }[];
+    /** For neighbours inside the galaxy's own light: fill each mask with the median light of its isophote (the shape
+     * prior's Sérsic spheroid) instead of the light around it, which is fainter than the galaxy there and would leave a hole. */
+    fill?: 'isophote' };
   /** Each pixel clamped to the median of the square window around it: compact light smaller than the window (star
    * haloes, small background galaxies) drops out and the smooth light stays. Only for a window above the fit's cell. */
   compactClamp?: { windowPx: number; basis: string };
@@ -55,7 +58,16 @@ const removed = recipe.nativeRemoval ? await nativeStarless(source, [recipe.sour
 const diffuse = Buffer.from(removed?.pixels ?? native.data);
 if (recipe.nativeRemoval && recipe.pointMasks.length) throw new TypeError('Do not remove point sources again after native NOX separation.');
 applyRecordedPointMasks(diffuse,native.data,native.info.width,native.info.height,recipe.pointMasks);
-if (recipe.neighbourMasks) applyRecordedPointMasks(diffuse,diffuse,native.info.width,native.info.height,recipe.neighbourMasks.masks);
+if (recipe.neighbourMasks?.fill === 'isophote') {
+  const spheroid = recipe.shapePrior?.components.length === 1 && recipe.shapePrior.components[0]!.kind === 'sersic' ? recipe.shapePrior.components[0]! : undefined;
+  if (!spheroid || spheroid.axis[2] !== 0 || !Number.isFinite(spheroid.axisRatio)) throw new TypeError('Isophote-filled masks need one Sérsic spheroid whose axis lies in the plane of the sky.');
+  // The spheroid's centre in the grid, as a pixel of the source image.
+  const pixel = (cell: number, cells: number, start: number, size: number) => start + (cell + .5) * size / cells - .5;
+  applyIsophoteMasks(diffuse,native.info.width,native.info.height,recipe.neighbourMasks.masks,{
+    centre: [pixel(recipe.prior.center[0]!, recipe.grid.width, recipe.crop.left, recipe.crop.width), pixel(recipe.prior.center[1]!, recipe.grid.height, recipe.crop.top, recipe.crop.height)],
+    minorAxis: [spheroid.axis[0], spheroid.axis[1]], axisRatio: spheroid.axisRatio! });
+}
+else if (recipe.neighbourMasks) applyRecordedPointMasks(diffuse,diffuse,native.info.width,native.info.height,recipe.neighbourMasks.masks);
 if (recipe.compactClamp) {
   const window = recipe.compactClamp.windowPx;
   if (!Number.isInteger(window) || window < 3 || window % 2 === 0) throw new TypeError(`compactClamp.windowPx must be an odd integer of at least 3, not ${window}.`);

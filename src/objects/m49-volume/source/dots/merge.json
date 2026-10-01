@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "M49's globular clusters as dots through its spheroid: Côté et al.'s (2003) clusters with measured velocities and Jordán et al.'s (2009) Hubble clusters on the centre.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "cote-gc",
+      "withinPcOfCentre": 85200,
+      "basis": "Presentation choice: a dot is drawn only inside the spheroid's 85.2 kpc edge, where the volume ends."
+    },
+    {
+      "bank": "jordan-gc",
+      "withinPcOfCentre": 85200,
+      "basis": "Presentation choice: a dot is drawn only inside the spheroid's 85.2 kpc edge, where the volume ends."
+    }
+  ],
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m49-volume",
+  "name": "M49",
+  "defaultDataset": "legacy-optical",
+  "bank": {
+    "path": "src/objects/m49-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/m49/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m49-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "legacy-optical",
+      "label": "Legacy Surveys · optical",
+      "title": "M49 in visible light",
+      "description": "The DESI Legacy Imaging Surveys' view of M49 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Kormendy et al.'s measured profile. Depth is modelled, not measured, and the survey's sky subtraction removes the faint outer light.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "3000 × 3000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "DECam g, r, i, z"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "35.1 × 35.1 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "16.7 Mpc"
+        }
+      ],
+      "input": "legacy-optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/m49-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=3000&height=3000&fov=0.584423&projection=TAN&coordsys=icrs&ra=187.444992&dec=8.00041&format=jpg"
+      }
+    }
+  ]
+}

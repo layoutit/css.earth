@@ -1,0 +1,28 @@
+{
+  "id": "m49",
+  "classification": "galaxy",
+  "order": 5151,
+  "physical": {
+    "name": "M49",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M49 is recorded: it is an extended galaxy, and its package frames it at 85200 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 187.444992,
+    "declinationDegrees": 8.00041,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 16700000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 948.835807188691,
+    "sources": {
+      "position": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) row 2MASX J12294679+0800014. (https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233); catalogue reference Skrutskie2006AJ....131.1163S",
+      "distance": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc. (https://arxiv.org/abs/0901.1138); catalogue reference Blakeslee2009ApJ...694..556B: 16700000 pc (-600000/+600000); sbf",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 49: 948.835807188691 km/s +/- 0.0001, from 2009ApJS..182..543A (https://ui.adsabs.harvard.edu/abs/2009ApJS..182..543A/abstract)"
+    }
+  }
+}
