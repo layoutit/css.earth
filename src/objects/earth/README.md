@@ -12,7 +12,7 @@ The [navigation marker recipe](source/preparation/navigation.json) supplies the 
 | --- | --- | --- |
 | Surface and clouds | NASA Blue Marble, July 2004 surface plus archival cloud TIFF | Brightness is adjusted for display. Surface and clouds are separate observations. Deep ocean is shaded from depth, not observed water colour. |
 | Elevation | [GEBCO_2026](https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa) | Sampled modeled height relative to sea level. Relief shading is exaggerated; globe geometry is unchanged. |
-| Night lights | [NASA VJ146A4.002](https://doi.org/10.5067/VIIRS/VJ146A4.002), 2025, via Jurij Stare | Annual radiance in logarithmic false color. Gaps and aurora remain; this is not ground-level sky darkness. |
+| Night lights | [NASA Black Marble 2016 colour map](https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps), 3 km | Suomi NPP VIIRS night lights over MODIS Blue Marble land, ice and ocean. An annual composite, not live lighting or sky darkness. |
 | Limb | [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames, Minnaert law fitted here | Measured: Earth's brightness toward the edge in 680, 551 and 443 nm |
 | Atmosphere and charts | Authored atmosphere parameter record; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
 | Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
@@ -67,8 +67,8 @@ By default only oceans, continents, countries, capitals, cities, landmarks and e
   clouds move. It applies to every dataset, including the cloud-free map.
 - The EPIC law already includes the atmosphere over the disc, so the model atmosphere counts that haze twice near the
   limb. It stays until a NASA PSG limb profile replaces it (the `limb-halo` ledger entry).
-- Night-light coverage stops at 75° N and 65° S. The mirror lacks quality bands, so aurora and transient lights
-  cannot be filtered.
+- Night lights are NASA's 2016 composite, the newest colour map NASA publishes. The 2025 annual radiance was tried
+  first and rendered near-black at globe scale (the `viirs-night-lights-2025` ledger entry).
 - ENSO uses NASA's display colors and clipped anomaly range. Land, ice and unavailable imagery remain gaps; RGB is not
   turned back into temperature.
 
@@ -87,12 +87,9 @@ measured and estimated depths, land-and-ice-surface version. Every tenth native 
 arc-minutes: an overview, not a full-resolution DEM. The palette spans −10,000 to +10,000 m. Relief shading uses 4×
 slope exaggeration and northwest light at 45°.
 
-Night lights come through the [public mirror](https://www.lightpollutionmap.info/help.html) by Jurij Stare, the
-`AllAngle_Composite_Snow_Free` band, 86,400 × 33,600 Float32 cells at 15 arc-seconds. A display cell with less than half
-its area observed is gray. The logarithmic transfer saturates at 21 nW/cm²/sr, the area-weighted 99.9th percentile of
-the 2025 display grid, so only the brightest 0.1% of observed area, the cores of large cities, reaches the top. Native
-city peaks pass 150 nW/cm²/sr, but averaging into 8,192-column cells leaves no cell above 100: the earlier 100 cap put
-three quarters of lit cells in the bottom quarter of the scale.
+Night lights are NASA's 2016 colour map at 3 km, 13,500 × 6,750 pixels, resampled to the 8,192-column surface grid
+with no colour change. NASA composited the best cloud-free nights of each month over each land mass from the Suomi NPP
+VIIRS day/night band, over its MODIS Blue Marble land, ice and ocean.
 
 ENSO steps through two weeks in three days: NASA's newest MUR analysis and the same weekday one and two weeks before
 it. NASA publishes each day about two days late. The dataset opens on the newest day.

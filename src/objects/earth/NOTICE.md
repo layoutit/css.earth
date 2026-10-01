@@ -1,16 +1,11 @@
 # Earth source notices
 
-## 2025 annual night lights
+## Night lights
 
-NASA's Black Marble nighttime lights product, VJ146A4 Collection 2,
-`AllAngle_Composite_Snow_Free`, annual 2025.
-[Product DOI](https://doi.org/10.5067/VIIRS/VJ146A4.002).
-Public raw GeoTIFF mosaic: **Jurij Stare, www.lightpollutionmap.info**.
-[Publisher source and reuse guidance](https://www.lightpollutionmap.info/help.html).
-The publisher identifies the underlying NASA data as CC0 and requests these
-credits when the data are used or displayed. cssEarth averages the radiance
-offline and creates its own logarithmic false-color textures; it does not copy
-the publisher's rendered map or sky-brightness model. No endorsement is implied.
+NASA Black Marble 2016 colour map, 3 km edition, by NASA Earth Observatory
+from Suomi NPP VIIRS day/night band data over MODIS Blue Marble imagery.
+[NASA Earth at Night maps](https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps).
+Used under NASA's media guidelines with credit; no endorsement is implied.
 
 ## Blue Marble deep ocean
 

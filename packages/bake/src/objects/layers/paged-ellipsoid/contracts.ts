@@ -7,12 +7,6 @@ export interface ElevationRecipe {
   palette: readonly {meters: number; color: string}[]; relief?: Relief;
   legend: {width: number; height: number; minimum: number; maximum: number};
 }
-export interface NightLightGrid extends Dimensions {cellDegrees: number; bounds: readonly number[];}
-export interface NightLightDisplay {missing: readonly number[]; softening: number; maximum: number;}
-export interface NightLightRecipe {
-  kind: string; member: string; year: number; product: string; band: string; units: string;
-  archiveBytes: number; grid: NightLightGrid; display: NightLightDisplay;
-}
 export interface MapSource<T> {path: string; scientific: T;}
 export interface EnsoRecipe {date: string; baseline: string; checked: string; advisory: {status: string; date: string};}
 export interface SurfaceBankPlan {

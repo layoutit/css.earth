@@ -157,8 +157,7 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
       const scientific = maybeRecord(map.scientific)?.kind, fill = maybeRecord(map.deepOceanFill);
       add(dataset.id, [text(map.path), ...paths(map.scientific), ...(map.compositeClouds ? [text(record(planSurface.clouds).path)] : []), ...(fill ? [text(fill.path)] : [])],
         fill ? { interpretation: kind('observed-colour-with-depth-shaded-deep-ocean') }
-          : scientific === 'gebco-elevation' ? { interpretation: kind('modeled-elevation') }
-          : scientific === 'black-marble-radiance' ? { interpretation: kind('observed-nighttime-radiance') } : {});
+          : scientific === 'gebco-elevation' ? { interpretation: kind('modeled-elevation') } : {});
     }
     for (const dataset of controls.filter(dataset => !products.some(product => product.id === dataset.id))) {
       if (dataset.view === 'interior') {

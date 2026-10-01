@@ -154,24 +154,10 @@
         "label": "Night lights",
         "thumbnail": "/scenes/earth/earth-dataset-night-lights.webp",
         "source": {
-          "id": "nasa-black-marble-2025-public-radiance",
-          "url": "https://www.lightpollutionmap.info/help.html"
+          "id": "nasa-black-marble-2016",
+          "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
         },
-        "falseColor": true,
-        "legend": {
-          "kind": "scale",
-          "title": "Annual radiance · nW/cm²/sr",
-          "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
-          "image": "earth-night-lights-legend.png",
-          "width": 620,
-          "height": 16,
-          "labels": [
-            "0",
-            "≥ 21 nW/cm²/sr"
-          ]
-        },
-        "legendNote": "Logarithmic color scale, capped at 21 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness.",
-        "notes": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting."
+        "notes": "NASA Black Marble 2016 · Suomi NPP VIIRS night lights from the best cloud-free nights of each month. Land, ice and ocean are NASA's MODIS Blue Marble imagery, added for context. This is an annual composite, not live lighting."
       },
       {
         "id": "enso-2026-09-14",

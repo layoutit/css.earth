@@ -23,7 +23,6 @@ export * from './globe/mur-image.ts';
 export * from './globe/profile-source.ts';
 export * from './globe/scene.ts';
 export * from './interior-poles.ts';
-export * from './night-lights.ts';
 export * from './object.ts';
 export * from './parallel-assets.ts';
 export * from './presentation.ts';
