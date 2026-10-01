@@ -1,4 +1,4 @@
-# M31V J00443799+4129236 A
+# DIRECT V12650 M31C A
 
 ## Sources
 
@@ -14,10 +14,6 @@ It has 23.1 solar masses and 13.1 solar radii; its partner has 15.0 and 11.3. Th
 
 Generated 2026-10-01 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
-![The Andromeda page with this star ringed and named beside the disc](evidence/2026-10-01/m31-page.jpg)
-
-A browser capture of the M 31 page: this star is ringed and named. M31V J00443610+4129194 A, the other measured pair, is the dot beside it; its name gives way to this one at this zoom. Each sits at its own measured distance (772 and 724 kpc), in front of the galaxy as the page places it.
 
 ## Known problems
 

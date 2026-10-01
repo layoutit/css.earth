@@ -1,4 +1,4 @@
-# M31V J00443610+4129194 B credits
+# DIRECT V12262 M31C B credits
 
 Radius: Secondary radius 5.6 +/- 0.4 solar radii, Vilardell et al. (2010), A&A 509, A70, Table 2. Mass: Secondary mass 15.4 +/- 1.2 solar masses, Vilardell et al. (2010), A&A 509, A70, Table 2. Temperature: Secondary Teff 30100 +/- 900 K, Vilardell et al. (2010), A&A 509, A70, Table 3.
 

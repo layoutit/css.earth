@@ -1,8 +1,12 @@
 {
   "id": "gaia-dr3-4051659602122050176",
-  "name": "Gaia DR3 4051659602122050176",
-  "system": "Gaia DR3 4051659602122050176 system",
+  "name": "TYC 6865-327-1",
+  "system": "TYC 6865-327-1 system",
   "description": "A star 21.9 solar radii and 6.29 solar masses, about 9,900 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 4051659602122050176"
+  ],
+  "order": 2756,
   "target": "Gaia DR3 4051659602122050176",
   "gaia": "4051659602122050176",
   "paper": {
@@ -35,6 +39,5 @@
     "introduction": "Gaia's parallax, brightness and spectrum give it 21.9 solar radii and 6.29 solar masses (FLAME) and 7,883 K at its surface (GSP-Phot).",
     "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4051659602122050176: radius_flame, mass_flame, teff_gspphot"
   },
-  "notes": [],
-  "order": 2756
+  "notes": []
 }

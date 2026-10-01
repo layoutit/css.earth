@@ -1,4 +1,4 @@
-# M31V J00443799+4129236 A credits
+# DIRECT V12650 M31C A credits
 
 Radius, mass and temperature: Radius 13.1 +/- 0.3 solar radii from Primary radius 13.1 +/- 0.3 solar radii, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045); Mass 23.1 +/- 1.3 solar masses from Primary mass 23.1 +/- 1.3 solar masses, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045); temperature from Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2.
 

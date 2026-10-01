@@ -5,6 +5,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --bake <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh <id>... [--check | --bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>... --out entries.json
@@ -59,6 +60,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { retimeHosts } = await import('./retime.mts'), { liveArchive } = await import('./archives.mts');
     const lines = await retimeHosts(process.cwd(), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Rebuild the astronomy package, then bake the changed ones.\n`);
+  } else if (args.includes('--rename') && !specPath) {
+    // Names by the order of preference, for stars the tool made: `--rename STAR_ID...` (new-object/rename.mts), then `--refresh`.
+    const { renameStars } = await import('./rename.mts'), { liveArchive } = await import('./archives.mts');
+    const { lines, refresh } = await renameStars(process.cwd(), args.filter(argument => !argument.startsWith('--')), liveArchive);
+    process.stdout.write(`${lines.join('\n')}\n${refresh.length ? `Regenerate: node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh ${refresh.join(' ')} --bake\n` : ''}`);
   } else if (args.includes('--retext') && !specPath) {
     // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/retext.mts).
     const { retextHosts } = await import('./retext.mts'), { liveArchive } = await import('./archives.mts');
