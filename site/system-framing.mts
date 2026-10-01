@@ -179,7 +179,7 @@ export function systemViewTarget(from: WorldCameraPose, frame: FramingFrame, opt
   const offset = rotateWorldPosition(cameraToReference, [ox / focal * depth, oy / focal * depth, depth]);
   return { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
     pose: { positionM: tuple(axis => frame.originM[axis] + offset[axis]),
-      orientationXyzw } };
+      orientationXyzw, focusOffset: { originM: frame.originM, offsetM: offset } } };
 }
 
 /** The departure angle, unless it sees the orbits nearly edge-on: a transiting system seen from the Sun is a line. Such a

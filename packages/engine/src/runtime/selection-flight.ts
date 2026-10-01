@@ -99,7 +99,9 @@ export function createSelectionFlight({ from, to, focusPositionM, durationS }: {
 }): SelectionFlight {
   validatePose(from); validatePose(to); validatePosition(focusPositionM);
   if (durationS !== undefined && (!Number.isFinite(durationS) || durationS <= 0)) throw new TypeError('Flight duration must be positive seconds.');
-  const fromOffset = subtract(from.positionM, focusPositionM), toOffset = subtract(to.positionM, focusPositionM);
+  // The eye from the focus, through each pose's exact offset when it has one.
+  const fromFocus = (pose: PhysicalCameraPose): PositionM => { const [x, y, z] = fromEyeM(pose, focusPositionM); return [0 - x, 0 - y, 0 - z]; };
+  const fromOffset = fromFocus(from), toOffset = fromFocus(to);
   const startRangeM = Math.hypot(...fromOffset), endRangeM = Math.hypot(...toOffset);
   if (startRangeM < .001 || endRangeM < .001) throw new TypeError('A selection camera must be at least one millimetre from its focus.');
   const curve = buildSelectionFlightCurve(startRangeM, endRangeM);
