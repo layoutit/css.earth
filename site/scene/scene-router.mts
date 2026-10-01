@@ -39,6 +39,7 @@ import { watchSatelliteSelection } from '../satellite-selection.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { observeSceneRetirement } from './scene-memory.mts';
+import { releaseStartupRequests } from '../startup-requests.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
@@ -152,6 +153,8 @@ export function createSceneRouter({
   reducedMotion?.addEventListener("change", syncReducedMotion);
   const firstMount = mountApplication();
   mountTask = firstMount;
+  // Requests the head started for the first view and no reader took are dropped once it settles.
+  void firstMount.finally(releaseStartupRequests).catch(() => {});
   // The iPad trace harness drives this same navigation path as the shell. Keep
   // the control out of ordinary builds; a performance build opts in explicitly.
   const control = DIAGNOSTICS_ENABLED ? Object.freeze({

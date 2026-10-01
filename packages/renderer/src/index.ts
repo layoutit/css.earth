@@ -22,6 +22,7 @@ export { loadPreparedCssObject, loadPreparedDataset, PREPARED_CSS_OBJECT_FORMAT 
 export { adoptPreparedDatasetTables, splitPreparedDatasetTables, deferredDatasetIds, preparedDatasetReference } from './prepared-data/dataset-tables.js';
 export type { PreparedDatasetTables } from './prepared-data/dataset-tables.js';
 export type { PreparedCssTransport } from './loader.js';
+export { prestartPreparedObjectDecoding } from './prepared-object-worker-client.js';
 export { parsePreparedObjectRuntime } from './validation/index.js';
 export type { ObjectDatasets } from './runtime/object-scene.js';
 export type { ObjectSharedView, ObjectSceneLifecycle } from './runtime/object-scene.js';

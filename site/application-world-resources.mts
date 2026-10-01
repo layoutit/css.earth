@@ -178,8 +178,16 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       drawn = next.bodies.length;
       universe.addSystems(next, billboards(added));
     });
+    // The first world mount adopts a planner made now: its worker builds the planner from the summary while the first body
+    // still prepares, so the world's first frame waits only for its own plan. Later mounts make their own.
+    let firstPlanner: ReturnType<typeof universe.createFramePlanner> | null = universe.createFramePlanner();
     return {
       ...universe, loadShells,
+      createFramePlanner() {
+        const planner = firstPlanner ?? universe.createFramePlanner();
+        firstPlanner = null;
+        return planner;
+      },
       catalogSources: () => catalogs ? [...catalogs.galaxies.sources, ...catalogs.clusters.sources, ...catalogs.nebulae.sources] : [],
     };
   })().catch(error => { universePromise = null; throw error; });

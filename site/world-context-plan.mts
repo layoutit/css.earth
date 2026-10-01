@@ -1,5 +1,6 @@
 import { extendWorldContext, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/renderer';
 import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/renderer';
+import { startupFetch } from './startup-requests.mts';
 
 // The application's prepared world context, validated once. Startup, framing and
 // every detail mount share this immutable plan. The browser fetches the prepared
@@ -43,7 +44,7 @@ async function readNodeJson(path: string): Promise<unknown> {
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
   if (node) return readNodeJson('src/objects/sun/prepared/world-context-summary.json');
-  const response = await fetch(source);
+  const response = await startupFetch(source);
   if (!response.ok) throw new Error(`Prepared world context request failed: ${response.status}.`);
   return response.json();
 }

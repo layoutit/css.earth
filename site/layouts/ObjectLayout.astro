@@ -3,6 +3,8 @@ import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
+import { startupRequestsBootstrap } from '../startup-requests.mts';
+import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
 import { breadcrumbJsonLd, focusSeo, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
@@ -22,6 +24,8 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
+// The same hashed file the client's `world-context-plan.mts` fetches, requested by the head (startup-requests.mts).
+import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 import { worldCameraOf } from '@cssearth/renderer';
 import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 const worldCamera = worldCameraOf(worldSummary);
@@ -66,6 +70,8 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
   <head>
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
+    {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
+    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl })}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}
     {assetPreconnect && <link rel="preconnect" href={assetPreconnect} />}
@@ -102,7 +108,9 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
+      import { startFirstView } from '../startup-boot.mts';
       bindNativeViewForms(document, window);
+      startFirstView(document);
       import("../scene/scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();
@@ -114,7 +122,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* Static imports make the browser fetch the application's modules while it parses the HTML; the dynamic import
         above only starts after parsing. A browser finds a module's imports only after downloading it, and the bundler
         does not hoist transitive imports, so the body runtime the router imports while it mounts is named here too.
-        The registry and world summary load after the first body (`scene-router.mts`). All resolve to the same module
+        The registry and the world's code start loading at boot (`startup-boot.mts`). All resolve to the same module
         instances, and the script above owns failure. */}
     {!navigation && <script>
       import '../packaged-object-runtime.mts';
