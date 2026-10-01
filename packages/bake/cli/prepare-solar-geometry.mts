@@ -123,9 +123,9 @@ export async function prepareSolarGeometry() {
   const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promise<readonly [BodyId, RotationElements | null]> => {
     if (RECORD_ONLY_HOSTED.includes(id)) return [id, recordOnlyRotation(id)];
     const descriptor = requireRecord(await readJsonSource(resolve("src/objects", id, "object.json")));
-    // A dataset package (a galaxy, a nebula, a cluster) has no body recipe and no rotation: its body-fixed frame is the ICRF.
-    if (requireRecord(descriptor.properties).recipe === undefined) return [id, { poleRightAscensionRad: 0, poleDeclinationRad: Math.PI / 2, primeMeridianRad: 0, spinRateRadPerDay: 0 }];
-    const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
+    // An object with no surface (a galaxy, a nebula, a cluster) has nothing that rotates: its body-fixed frame is the ICRF.
+    const authored = requireRecord(descriptor.properties).recipe, recipe = authored === undefined ? null : requireRecord(authored);
+    if (!recipe || !requireArray(recipe.surfaces).length) return [id, { poleRightAscensionRad: 0, poleDeclinationRad: Math.PI / 2, primeMeridianRad: 0, spinRateRadPerDay: 0 }];
     const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
     if (!ref) return [id, null];
     const { readAuthoredRotation } = await import('@cssearth/bake/objects/scene');

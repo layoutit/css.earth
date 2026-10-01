@@ -83,9 +83,6 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
       throw new TypeError(`Object ${objectId} source manifest ${collection} is missing.`);
     }
   }
-  if (value.inputs.length === 0) {
-    throw new TypeError(`Object ${objectId} source manifest inputs are empty.`);
-  }
 
   const ids = new Set<string>();
   const paths = new Set<string>();

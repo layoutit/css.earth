@@ -53,7 +53,7 @@ export async function contextObjectAssetUrls(contexts: readonly { id: string }[]
   return Object.fromEntries(entries.sort(([left], [right]) => left.localeCompare(right, 'en')));
 }
 
-/** The frame of every volume a body shows through one of its datasets, so an opening camera can fit it. */
+/** The frame of every bank a body shows through one of its datasets, when the bank declares one, so an opening camera can fit it. */
 async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot: string) {
   const volumes: Record<string, unknown> = {};
   for (const { id } of entries) {
@@ -65,10 +65,9 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
       const volumeId = isRecord(control) && isRecord(control.volume) ? control.volume.objectId : undefined;
       if (typeof volumeId !== 'string' || volumes[volumeId]) continue;
       const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8'));
-      if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
-        throw new TypeError(`src/objects/${volumeId}/object.json: the volume ${id} shows has no properties.frame.`);
-      }
-      volumes[volumeId] = descriptor.properties.frame;
+      if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`src/objects/${volumeId}/object.json: the bank ${id} shows has no properties.`);
+      // A bank of catalogue dots declares no frame: its object's own radius frames it.
+      if (isRecord(descriptor.properties.frame)) volumes[volumeId] = descriptor.properties.frame;
     }
   }
   return volumes;

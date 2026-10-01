@@ -115,7 +115,8 @@ function parseMaterials(value: unknown, sourceIds: ReadonlySet<string>, frameIds
   unique(output.map(item => item.id), 'recipe.materials'); return freeze(output);
 }
 function parseSurfaces(value: unknown, sourceIds: ReadonlySet<string>, materialIds: ReadonlySet<string>, frameIds: ReadonlySet<string>): readonly SurfaceRecipe[] {
-  if (!Array.isArray(value) || !value.length) throw new TypeError('recipe.surfaces must be a nonempty array.');
+  // An object with no surface (a galaxy, a nebula, a cluster of galaxies) declares none: its datasets show companion banks.
+  if (!Array.isArray(value)) throw new TypeError('recipe.surfaces must be an array.');
   const output = value.map((item, index) => {
     const at = `recipe.surfaces[${index}]`, input = record(item, at); keys(input, ['id', 'source', 'projection', 'datasets'], at);
     if (input.projection !== 'equirectangular' && input.projection !== 'cubemap') throw new TypeError(`${at}.projection is not supported.`);

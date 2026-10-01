@@ -177,7 +177,8 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
   // turns on a volume another package prepares. Its parent is that dataset; the cloud's own sources are that package's.
   for (const dataset of controls) {
     const volume = maybeRecord(dataset.volume);
-    if (volume && !products.some(product => product.id === dataset.id)) add(dataset.id, [], { parents: [text(volume.surface)], interpretation: kind('companion-volume') });
+    // On an object with no surface the dataset is the companion alone: it borrows no surface, so it has no parent.
+    if (volume && !products.some(product => product.id === dataset.id)) add(dataset.id, [], { parents: volume.surface === dataset.id ? [] : [text(volume.surface)], interpretation: kind('companion-volume') });
   }
   const content = recipes.get('content');
   if (content) add('content', [content.path.replace(/^source\//u, '')], { label: 'Object information', datasetIds: [] });

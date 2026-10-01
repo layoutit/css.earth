@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 187.7°, Dec 12.34°",
+        "value": "RA 187.7\u00b0, Dec 12.34\u00b0",
         "source": {
           "catalogueId": "mcxc-ii-2024",
           "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
@@ -65,8 +65,25 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "",
-    "controls": []
+    "defaultDataset": "members",
+    "controls": [
+      {
+        "id": "members",
+        "label": "Member galaxies",
+        "thumbnail": "virgo-cluster-dataset-members.webp",
+        "volume": {
+          "objectId": "virgo-cluster-members",
+          "datasetId": "members",
+          "surface": "members"
+        },
+        "source": {
+          "id": "virgo-cluster-members",
+          "path": "../../virgo-cluster-members/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/215/22"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

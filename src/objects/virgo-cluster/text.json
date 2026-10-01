@@ -14,21 +14,37 @@
     ]
   },
   "introduction": {
-    "text": "A cluster of galaxies 16.2 million parsecs away.",
+    "text": "An X-ray selected cluster of galaxies at redshift 0.0036, with an R500 radius of 1.079 million parsecs.",
     "sources": [
       {
-        "catalogueId": "cosmicflows-4",
-        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
-        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+        "catalogueId": "mcxc-ii-2024",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+        "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
         "checked": "2026-10-01",
-        "locator": "distance: 16.2 Mpc"
+        "locator": "MCXC J1230.7+1220: z 0.0036, R500 1.079 Mpc"
       }
     ]
   },
   "datasets": {
     "members": {
       "title": "Cosmicflows-4 group members",
-      "summary": "One dot for each member galaxy the Nearby Universe field does not already draw, at the cluster's group distance. A member's depth is assumed, not measured."
+      "summary": "One dot per member galaxy the Nearby Universe field does not draw. A member's depth is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "kim-2014-evcc",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/215/22",
+          "label": "Kim et al. (2014), Extended Virgo Cluster Catalog, ApJS 215, 22; CDS J/ApJS/215/22, table 2",
+          "checked": "2026-10-01",
+          "locator": "table 2, certain members (MmI = M)"
+        },
+        {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 3 (group distance modulus, DMzp)",
+          "checked": "2026-10-01",
+          "locator": "group 41220: DMzp 31.048 mag"
+        }
+      ]
     }
   }
 }

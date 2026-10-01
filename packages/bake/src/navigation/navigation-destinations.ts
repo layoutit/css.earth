@@ -1,4 +1,4 @@
-import { isHostedDescriptor, parseNavigationDistance } from '@cssearth/objects';
+import { isExtendedClassification, isHostedDescriptor, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 
 const AU_M = 149597870700, PC_M = 3.085677581491367e16;
@@ -11,10 +11,11 @@ export function prepareSceneDistance(descriptor: unknown) {
     throw new TypeError('Navigation distance requires a prepared Sun-centred world frame.');
   }
   const meters = Math.hypot(...frame.originM);
-  // A package the world's host draws (a galaxy, a cluster, a nebula), or a level that is a body too, sits where its catalogued distance puts it: that distance
+  // A galaxy, a cluster or a nebula, or a level that is a body too, sits where its catalogued distance puts it: that distance
   // has no epoch, and may be another subject's (a reflection nebula placed at its star cluster's).
-  if (isHostedDescriptor(descriptor) || (isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.overview !== undefined)) {
-    const catalog = isRecord(descriptor) && isRecord(descriptor.properties) ? descriptor.properties.catalog : null;
+  const catalog = isRecord(descriptor) && isRecord(descriptor.properties) ? descriptor.properties.catalog : null;
+  const extended = isRecord(catalog) && typeof catalog.classification === 'string' && isExtendedClassification(catalog.classification);
+  if (extended || isHostedDescriptor(descriptor) || (isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.overview !== undefined)) {
     const subject = isRecord(catalog) ? catalog.distanceSubject : undefined;
     return parseNavigationDistance({ ...(subject === undefined ? {} : { subject }), meters, value: meters / PC_M, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null });
   }

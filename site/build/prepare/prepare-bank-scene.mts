@@ -97,7 +97,7 @@ export async function prepareBankScene(id: string, projectRoot = root) {
 
 /** A bank of dots as seen from the Sun: each dot in its own colour on the plane across the line of sight to the bank's
  * middle, north up and east left as the sky is drawn, fitted to the picture. Returns the picture's public address. */
-async function memberDotsThumbnail(id: string, directory: string, projectRoot: string): Promise<string> {
+export async function memberDotsThumbnail(id: string, directory: string, projectRoot: string): Promise<string> {
   const { unpackPreparedBinary } = await import('@cssearth/objects/node');
   const { decodeCatalogueBankBinary } = await import('@cssearth/renderer/prepared-data/catalogue-bank-binary.ts');
   const bank = decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(resolve(directory, 'prepared/dots.bin'))), `src/objects/${id}/prepared/dots.bin`);
