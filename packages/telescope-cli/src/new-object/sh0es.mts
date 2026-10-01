@@ -63,40 +63,58 @@ export function parseHoffmannRows(tsv: string): HoffmannRow[] {
 }
 
 /** A galaxy's radial velocity from SIMBAD, cited to the paper SIMBAD names. */
-async function galaxyVelocity(archive: Archive, name: string) {
+export async function galaxyVelocity(archive: Archive, name: string) {
   const [row] = csv(await archive.text(SIMBAD_TAP, adql(`SELECT b.rvz_radvel, b.rvz_err, b.rvz_bibcode FROM basic AS b JOIN ident AS n ON b.oid = n.oidref WHERE n.id = '${name}'`)));
   if (!row?.rvz_radvel || !row.rvz_bibcode) throw new Error(`SIMBAD gives ${name} no radial velocity; cite one for its Cepheids.`);
   return { value: Number(row.rvz_radvel), ...(Number(row.rvz_err) > 0 ? { uncertainty: Number(row.rvz_err) } : {}),
     source: `SIMBAD's radial velocity of ${name}, the Cepheid's galaxy, from ${row.rvz_bibcode}; the star's own motion within the galaxy is not measured`, url: `https://ui.adsabs.harvard.edu/abs/${row.rvz_bibcode}/abstract` };
 }
 
+/** What a Cepheid placed by a catalogue row needs beside its period: who it is, where its row is, and its galaxy's distance and velocity. */
+export interface RelationCepheid {
+  readonly id: string; readonly name: string; readonly target: string; readonly galaxy: string; readonly periodDays: number;
+  readonly paper: { readonly url: string; readonly credit: string }; readonly periodSource: string;
+  readonly position: { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string };
+  readonly distance: { readonly value: number; readonly uncertainty: number; readonly source: string; readonly url: string };
+  readonly velocity: { readonly value: number; readonly uncertainty?: number; readonly source: string; readonly url: string };
+  readonly description: string; readonly text: { readonly card: string; readonly introduction: string; readonly locator: string };
+}
+/** The draft of a Cepheid no paper sizes: radius and temperature from Groenewegen's relations at its period, mass unmeasured. */
+export function relationCepheidDraft(star: RelationCepheid) {
+  const { radius, temperature } = cepheidRelations(star.periodDays);
+  const relation = `${GROENEWEGEN_2020.credit}, period relations for Galactic fundamental-mode Cepheids applied to this star's period, ${star.periodDays} d in ${star.periodSource}; not a measurement of this star`;
+  return {
+    id: star.id, name: star.name, system: `${star.name} system`, target: star.target, paper: star.paper, description: star.description,
+    position: star.position, distance: star.distance, radialVelocity: star.velocity,
+    radius: { value: Number(radius.toFixed(1)), uncertainty: Number((radius * (10 ** GROENEWEGEN_2020.radiusRmsDex - 1)).toFixed(1)),
+      source: `${relation}: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, ${GROENEWEGEN_2020.radiusRmsDex} dex`, url: GROENEWEGEN_2020.url },
+    temperature: { value: Math.round(temperature / 10) * 10, uncertainty: GROENEWEGEN_2020.temperatureRmsK,
+      source: `${relation}: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (${IAU_SUN.sources}); the uncertainty is the ${GROENEWEGEN_2020.temperatureRmsK} K by which the two relations miss the paper's own Cepheid temperatures`, url: GROENEWEGEN_2020.url },
+    mass: 'unmeasured' as const, gravityRange: CEPHEID_GRAVITIES, text: star.text,
+    planets: [], companions: [],
+    notes: ['The star pulsates; it is drawn at its mean radius',
+      `Its radius and temperature are what ${GROENEWEGEN_2020.credit}'s relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists`,
+      ...star.periodDays > GROENEWEGEN_2020.longestPeriodDays ? [`Its period, ${star.periodDays} d, is longer than any in the relations' sample (${GROENEWEGEN_2020.longestPeriodDays} d), so they are extrapolated`] : [],
+      `Its radial velocity is its galaxy's; its own motion within ${star.galaxy} is not measured`],
+  };
+}
+
 export function draftFromHoffmann(row: HoffmannRow, velocity: { value: number; uncertainty?: number; source: string; url: string }) {
   const distance = RIESS_2016_HOSTS[row.host];
   if (!distance) throw new Error(`${row.host} ${row.id}: Riess et al. (2016) table 5 gives ${hostName(row.host)} no Cepheid distance${row.host === 'N4258' ? ' (it is the maser anchor)' : ''}.`);
-  const galaxy = hostName(row.host), [modulus, error] = distance, parsecs = 10 ** (modulus / 5 + 1), { radius, temperature } = cepheidRelations(row.periodDays);
+  const galaxy = hostName(row.host), [modulus, error] = distance, parsecs = 10 ** (modulus / 5 + 1);
   const period = row.periodDays.toFixed(row.periodDays < 10 ? 2 : 1), id = `${galaxy.toLowerCase().replace(/\s+/gu, '-')}-cepheid-${row.id}`, name = `${galaxy} Cepheid ${row.id}`;
-  const relation = `${GROENEWEGEN_2020.credit}, period relations for Galactic fundamental-mode Cepheids applied to this star's period, ${row.periodDays} d in ${HOFFMANN.credit}, table 5; not a measurement of this star`;
-  return {
-    id, name, system: `${name} system`, target: row.simbad, paper: { url: HOFFMANN.paper, credit: HOFFMANN.credit },
+  return relationCepheidDraft({
+    id, name, target: row.simbad, galaxy, periodDays: row.periodDays, paper: { url: HOFFMANN.paper, credit: HOFFMANN.credit }, periodSource: `${HOFFMANN.credit}, table 5`,
     description: `A Cepheid in the galaxy ${galaxy} that pulsates every ${period} days, found by the Hubble Space Telescope.`,
     position: { catalogue: HOFFMANN.catalogue, row: { Gal: row.host, ID: row.id }, credit: `${HOFFMANN.credit}, table 5`, url: HOFFMANN.paper },
     distance: { value: Math.round(parsecs), uncertainty: Math.round(parsecs * Math.LN10 / 5 * error),
       source: `${RIESS_2016.credit}, table 5: ${galaxy}'s Cepheid distance modulus ${modulus} +/- ${error} mag, 10^(mu/5 + 1) pc`, url: RIESS_2016.url },
-    radialVelocity: velocity,
-    radius: { value: Number(radius.toFixed(1)), uncertainty: Number((radius * (10 ** GROENEWEGEN_2020.radiusRmsDex - 1)).toFixed(1)),
-      source: `${relation}: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, ${GROENEWEGEN_2020.radiusRmsDex} dex`, url: GROENEWEGEN_2020.url },
-    temperature: { value: Math.round(temperature / 10) * 10, uncertainty: GROENEWEGEN_2020.temperatureRmsK,
-      source: `${relation}: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (${IAU_SUN.sources}); the uncertainty is the ${GROENEWEGEN_2020.temperatureRmsK} K by which the two relations miss the paper's own temperatures of its Cepheids`, url: GROENEWEGEN_2020.url },
-    mass: 'unmeasured', gravityRange: CEPHEID_GRAVITIES,
+    velocity,
     text: { card: `A Cepheid in the galaxy ${galaxy}, ${Math.round(parsecs / 1e6)} million parsecs away, that swells and shrinks every ${period} days.`,
       introduction: `The Hubble Space Telescope found it and timed its pulsation at ${period} days. Its galaxy's distance, ${(parsecs / 1e6).toFixed(1)} million parsecs, was measured from Cepheids like it.`,
       locator: `table 5, Gal ${row.host}, ID ${row.id}: Per; ${RIESS_2016.credit}, table 5, ${row.host}: mu_Ceph` },
-    planets: [], companions: [],
-    notes: ['The star pulsates; it is drawn at its mean radius',
-      `Its radius and temperature are what ${GROENEWEGEN_2020.credit}'s relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists`,
-      ...row.periodDays > GROENEWEGEN_2020.longestPeriodDays ? [`Its period, ${row.periodDays} d, is longer than any in the relations' sample (${GROENEWEGEN_2020.longestPeriodDays} d), so they are extrapolated`] : [],
-      `Its radial velocity is its galaxy's; its own motion within ${galaxy} is not measured`],
-  };
+  });
 }
 
 /** `new-object --from-sh0es HOST[/ID]... --out spec.json`: every Cepheid of each host, or the one named. */

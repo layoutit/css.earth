@@ -1,0 +1,35 @@
+{
+  "id": "source-m31-v1-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M31-V1 · m31 v1 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m31-v1/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kodric et al. (2018), AJ 156, 130; VizieR J/AJ/156/130/main (CDS)",
+      "scope": "The m31 v1 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
