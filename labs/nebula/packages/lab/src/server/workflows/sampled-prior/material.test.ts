@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { type EmissionVector3, prepareSampledField, prepareSampledMaterial, sampledPointColors } from '@cssearth/bake/volume';
+import { prepareSampledField, prepareSampledMaterial, sampledPointColors } from '@cssearth/bake/volume';
+import { type EmissionVector3 } from '@cssearth/objects';
 import { gridDiffuse, type DiffuseAtom } from '@cssearth/nebula-reconstruction/methods/sampled/emission-fit';
 import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
 

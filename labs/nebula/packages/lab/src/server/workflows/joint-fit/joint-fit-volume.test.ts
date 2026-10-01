@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import { readJointVolumeResult } from '@cssearth/bake/volume';
+import { readJointVolumeResult } from '@cssearth/objects';
 import { bakeJointVolume, type JointVolumeProgress } from './volume.ts';
 
 test('joint volume samples caller arcseconds and prepares nonempty retained XYZ stacks', async () => {

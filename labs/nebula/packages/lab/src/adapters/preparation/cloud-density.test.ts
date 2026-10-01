@@ -1,16 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { cloudDensityWeight, createIntegratedSignalSampler, filterCloudDensityRgba, partitionCloudAlpha } from '@cssearth/bake/volume';
+import { createIntegratedSignalSampler, filterCloudDensityRgba, partitionCloudAlpha } from '@cssearth/bake/volume';
+import { cloudDensityWeight } from '@cssearth/objects';
 import { cloudTextureTexelPoint } from '../../server/services/density-material.ts';
-
-test('cutoff zero preserves every kept alpha and smooth cutoff distinguishes centre from edge', () => {
-  for (const density of [0, .1, .5, 1]) assert.equal(cloudDensityWeight(density,
-    { cutoff: 0, softness: density, showRemoved: false }), 1);
-  const filter = { cutoff: .5, softness: .4, showRemoved: false };
-  assert.equal(cloudDensityWeight(.2, filter), 0);
-  assert.ok(Math.abs(cloudDensityWeight(.5, filter) - .5) < 1e-14);
-  assert.equal(cloudDensityWeight(.8, filter), 1);
-});
 
 test('non-square texture texels retain each prepared X/Y/Z leaf plane and centre', () => {
   const planes: Array<[[number, number, number], [number, number, number], [number, number, number], [number, number, number]]> = [

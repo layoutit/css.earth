@@ -1,5 +1,6 @@
 import type { CompilerImage } from '../observations/compiler-image.ts';
-import type { EmissionFieldModel, CompilerStarInput, CompilerStarMaterial } from '@cssearth/bake/volume';
+import type { EmissionFieldModel, CompilerStarInput } from '@cssearth/bake/volume';
+import type { CompilerStarMaterial } from '@cssearth/objects';
 import { readCompilerStarCatalogue, type CompilerStarCatalogue } from './catalogue-model.ts';
 import { compilerStarDatasetPoints, createCompilerStarDepthSampler, createCompilerStarPhotometer, detectCompilerStarCandidates } from './compiler.ts';
 type Point = [number, number];

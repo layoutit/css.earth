@@ -4,7 +4,7 @@
  * Relocated from the lab so bake-time replay shares one coordinate convention. The arithmetic and the
  * perspective sign conventions are unchanged.
  */
-import type { EmissionBounds, EmissionVector3 } from '../contracts/emission.ts';
+import type { EmissionBounds, EmissionVector3 } from '@cssearth/objects';
 export const ARCSECONDS_PER_RADIAN = 180 * 3600 / Math.PI;
 export function angularScale(distanceKpc: number): number {
   if (!Number.isFinite(distanceKpc) || distanceKpc <= 0) throw new TypeError('Observer distance must be positive kpc.');

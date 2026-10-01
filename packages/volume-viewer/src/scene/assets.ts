@@ -1,4 +1,4 @@
-import type { CompilerBakeResult, CompilerPin } from '@cssearth/bake/volume';
+import type { CompilerBakeResult, CompilerPin } from '@cssearth/objects';
 import type { CompilerViewerBackend } from './backend.ts';
 export interface LoadedBank<Bank> { payload: Bank; textures: Map<string, string>; urls: string[] }
 

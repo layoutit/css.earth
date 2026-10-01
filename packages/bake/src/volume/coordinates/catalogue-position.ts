@@ -1,4 +1,4 @@
-import type { DensityVolumeFrame } from '../contracts/volume-frame.ts';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 export const METERS_PER_KPC = 3.085677581491367e19;
 /** Convert a heliocentric ICRS measurement, never a projected image footprint. */
 export function cataloguePosition(raDeg: number, decDeg: number, distanceKpc: number, frame: DensityVolumeFrame): [

@@ -1,6 +1,6 @@
 import type { Cancellation } from '../contracts/cancellation.ts';
 /** Offline normalized splatting of qualified points; analytic components never reposition those samples. */
-import type { EmissionBounds, EmissionVector3 } from '../contracts/emission.ts';
+import type { EmissionBounds, EmissionVector3 } from '@cssearth/objects';
 import type { SampledRecipe, SampleTerm, ComponentWeights } from '../contracts/sampled-recipe.ts';
 
 export interface SpatialField { bounds: EmissionBounds; sampleEmission(x: number, y: number, z: number, out: EmissionVector3): void }

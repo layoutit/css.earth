@@ -4,14 +4,7 @@ import type { CompilerControls } from './compiler-controls.ts';
 import type { EmissionWindow } from '../fields/emission-window.ts';
 export { defaultCompilerControls, readCompilerControls, type CompilerControls } from './compiler-controls.ts';
 
-export type EmissionVector3 = [number, number, number];
-export interface EmissionBounds { min: EmissionVector3; max: EmissionVector3 }
-export interface SkyBounds {
-  /** [minimum xWest, minimum yNorth], in arcseconds. */
-  min: [number, number];
-  /** [maximum xWest, maximum yNorth], in arcseconds. Raster row zero is maximum yNorth. */
-  max: [number, number];
-}
+import type { EmissionVector3, EmissionBounds, SkyBounds } from '@cssearth/objects';
 export interface EmissionFitInput {
   /** Linear integrated relative emission (dimensionless display optical depth), never calibrated flux. */
   target: Float32Array; width: number; height: number; bounds: SkyBounds;

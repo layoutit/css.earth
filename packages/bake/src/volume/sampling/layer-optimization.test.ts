@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { optimizeVolumeLayers, readLayerOptimizationReport, type LayerOptimizationOptions } from './layer-optimization.ts';
-import type { VolumeLayerPlan } from '../contracts/volume-slices.ts';
+import { optimizeVolumeLayers, type LayerOptimizationOptions } from './layer-optimization.ts';
+import { readLayerOptimizationReport, type VolumeLayerPlan } from '@cssearth/objects';
 
 // The default planner probes a 512-cell reference grid; the lab's Node runner gave these tests no timeout.
 const axes = ['x', 'y', 'z'] as const;

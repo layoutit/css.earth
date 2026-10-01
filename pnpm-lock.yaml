@@ -211,6 +211,9 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../../../../packages/core
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../../../../packages/objects
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
@@ -299,6 +302,9 @@ importers:
         specifier: ^2.9.0
         version: 2.9.0
     devDependencies:
+      '@cssearth/volume-viewer':
+        specifier: workspace:*
+        version: link:../volume-viewer
       '@types/estree':
         specifier: ^1.0.9
         version: 1.0.9
@@ -398,9 +404,6 @@ importers:
         specifier: workspace:*
         version: link:../objects
     devDependencies:
-      '@cssearth/bake':
-        specifier: workspace:*
-        version: link:../bake
       '@cssearth/volume-viewer':
         specifier: workspace:*
         version: link:../volume-viewer
@@ -506,9 +509,9 @@ importers:
 
   packages/volume-viewer:
     dependencies:
-      '@cssearth/bake':
+      '@cssearth/objects':
         specifier: workspace:*
-        version: link:../bake
+        version: link:../objects
     devDependencies:
       tsup:
         specifier: ^8.0.1

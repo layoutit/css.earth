@@ -1,6 +1,6 @@
 /** Explicit, bounded image fitting on fixed measured and inferred spatial supports. */
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-import type { EmissionVector3 } from './emission.ts';
+import type { EmissionVector3 } from '@cssearth/objects';
 
 export interface SampledEmissionFit {
   sourceIds: string[]; evidenceIds: string[];

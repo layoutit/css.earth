@@ -1,8 +1,8 @@
-import type { DensityVolumeFrame } from './volume-frame.ts';
-import type { EmissionBounds, EmissionVector3, SkyBounds } from './emission.ts';
-import { readVolumeLayerPlan, type VolumeLayerPlan } from './volume-slices.ts';
-import { readLayerOptimizationReport, type LayerOptimizationReport } from '../sampling/layer-optimization.ts';
-import { readRenderElementBudget, type RenderElementBudget } from './render-element-budget.ts';
+import type { DensityVolumeFrame } from '../density-volume.js';
+import type { EmissionBounds, EmissionVector3, SkyBounds } from './coordinates.js';
+import { readVolumeLayerPlan, type VolumeLayerPlan } from './volume-layer-plan.js';
+import { readLayerOptimizationReport, type LayerOptimizationReport } from './layer-optimization-report.js';
+import { readRenderElementBudget, type RenderElementBudget } from './render-element-budget.js';
 
 export const COMPILER_LONGEST_AXIS_SLICES = 512;
 

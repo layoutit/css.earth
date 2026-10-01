@@ -1,4 +1,4 @@
-import type { SkyBounds } from '@cssearth/bake/volume';
+import type { SkyBounds } from '@cssearth/objects';
 
 type Rgb = [number, number, number];
 type Point = [number, number];

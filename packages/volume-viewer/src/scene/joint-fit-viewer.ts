@@ -1,4 +1,4 @@
-import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/bake/volume';
+import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/objects';
 import type { ViewFraming as ShapeCloudFraming } from '../camera/framing.ts';
 import type { VolumeViewerBackend } from './backend.ts';
 import { loadImageBank, requiredImageTexture as requiredTexture, releaseImageUrls as release, type ImageBank } from './image-assets.ts';
