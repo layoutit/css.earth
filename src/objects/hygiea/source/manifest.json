@@ -1199,7 +1199,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by packages/bake/src/objects/layers/terrestrial/registration/sphere-horizons.ts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "sphere-sighting-geometry"
@@ -1222,7 +1222,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by packages/bake/src/objects/layers/terrestrial/registration/sphere-horizons.ts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "sphere-sighting-geometry"
@@ -1251,7 +1251,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "hygiea-shape"
         ],
@@ -1262,7 +1262,7 @@
         "diffuse": 0.55,
         "datasetId": "shape"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ],
   "documents": [

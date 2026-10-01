@@ -33,7 +33,7 @@ import { readFitsHdus, binaryTable, tableColumn, numbers } from '@cssearth/bake/
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
 import { spectrumLinearSrgb } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
+import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, placeGroupMembers, recipePublished, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectDirectoryArgument, id] = process.argv.slice(2);
 if (!objectDirectoryArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare-catalogue-points.mts <object-directory> <id>');
@@ -60,11 +60,24 @@ const table = recipe.table as { path: string; bytes: number; format: 'whitespace
   onePerName?: boolean;
   /** Leave out every ICRS row within `withinArcsec` of a position listed in another table (a CSV with a header), such as
    * the foreground stars a published criterion identifies; `source` and `basis` say whose list and radius they are. */
-  exclude?: { path: string; raDegColumn: string; decDegColumn: string; withinArcsec: number; source: string; basis: string } };
+  exclude?: { path: string; raDegColumn: string; decDegColumn: string; withinArcsec: number; source: string; basis: string };
+  /** Members of one group (a column naming each row's group) at the group's own measured distance (a column in the table's
+   * distance unit), spread along the line of sight as widely as the group spreads across the sky: `depth: 'isotropic'`
+   * gives each member the sky-plane offset of the member half the group away in table order. A row's own distance is kept
+   * where its group has one member here or no distance. `source` and `basis` say whose groups and why. */
+  groupDistance?: { group: Column; distance: Column; depth: 'isotropic'; source: string; basis: string } };
 const discPlacement = (recipe.frame as { placement?: unknown } | undefined)?.placement === 'image-layer-disc';
-if ([table.columns.distance, table.distanceByFlag, table.distanceFirstOf].filter(value => value !== undefined).length !== (discPlacement ? 0 : 1) ||
-    (discPlacement ? table.distanceUnit !== undefined : table.distanceUnit === undefined)) {
-  throw new TypeError(`${at('table')} needs exactly one of columns.distance, distanceByFlag and distanceFirstOf with a distanceUnit, or none with frame.placement image-layer-disc.`);
+// A galaxy with no disc (M87): each ICRS row at a depth drawn from a published spheroid's density along its sight line.
+const spheroidPlacement = (recipe.frame as { placement?: unknown } | undefined)?.placement === 'spheroid';
+const skyPlacement = discPlacement || spheroidPlacement;
+if ([table.columns.distance, table.distanceByFlag, table.distanceFirstOf].filter(value => value !== undefined).length !== (skyPlacement ? 0 : 1) ||
+    (skyPlacement ? table.distanceUnit !== undefined : table.distanceUnit === undefined)) {
+  throw new TypeError(`${at('table')} needs exactly one of columns.distance, distanceByFlag and distanceFirstOf with a distanceUnit, or none with frame.placement image-layer-disc or spheroid.`);
+}
+const groupDistance = table.groupDistance;
+if (groupDistance !== undefined && (discPlacement || groupDistance.depth !== 'isotropic' || groupDistance.group === undefined || groupDistance.distance === undefined
+    || typeof groupDistance.source !== 'string' || !groupDistance.source || typeof groupDistance.basis !== 'string' || !groupDistance.basis)) {
+  throw new TypeError(`${at('table.groupDistance')} needs a group and a distance column, depth isotropic, a source and a basis, and no disc placement; got ${JSON.stringify(groupDistance)}.`);
 }
 const filters = (recipe.filters ?? []) as { column: Column; op: '==' | '!=' | '>' | '<'; value: string | number }[];
 const icrsInput = (recipe.frame as { input?: unknown } | undefined)?.input === 'icrs';
@@ -89,7 +102,7 @@ if (kinematicUncertainty && (typeof kinematicUncertainty.basis !== 'string' || !
     !(kinematicUncertainty.rotation.theta0KmS > 0) || !(kinematicUncertainty.rotation.sigmaVKmS > 0) || table.distanceUnit !== 'kpc')) {
   throw new TypeError(`${at('kinematicUncertainty')} needs a kinematic rule, the rotation curve, a basis and kpc distances.`);
 }
-const frame = recipe.frame as { input: string; output: string; epochJdTt: number; unit?: 'kpc' | 'Mpc'; placement?: 'image-layer-disc' };
+const frame = recipe.frame as { input: string; output: string; epochJdTt: number; unit?: 'kpc' | 'Mpc'; placement?: 'image-layer-disc' | 'spheroid' };
 type Spectrum = { path: string; bytes: number; wavelength: string; flux: string; wavelengthUnit: 'angstrom';
   /** A template that ends inside the visible range: no light is counted past its last sample, and `basis` says why that holds. */
   endsNm?: { value: number; basis: string } };
@@ -102,6 +115,8 @@ const appearance = recipe.appearance as { colorCss: string; radiusPx: number; op
   toneBy?: { magnitudeColumn: Column; band: string; brightMagnitude: number; faintMagnitude: number; faintTone: number; steps: number; basis: string;
     /** The column holds a flux in nanomaggies (m = 22.5 - 2.5 log10 f, the Legacy Surveys' zero point), not a magnitude. */
     nanomaggies?: true };
+  /** Each dot's size from its rank by the tone's magnitude among the dots at about its distance (catalogue-tones.ts). */
+  sizeBy?: CatalogueSizeBy;
   /** Each row's colour from three flux columns, one per display channel, each times its scale, the brightest channel full:
    * the colour an image made with those scales gives the object. */
   colorByBands?: { red: { column: Column; scale: number }; green: { column: Column; scale: number }; blue: { column: Column; scale: number };
@@ -110,15 +125,16 @@ const appearance = recipe.appearance as { colorCss: string; radiusPx: number; op
    * to `step`: the colour its light arrives with. */
   colorBySpectrumAtRedshift?: { spectrum: Spectrum; step: number; basis: string } };
 if (!['whitespace', 'fixed-width', 'csv'].includes(table.format)) throw new TypeError(`${at('table.format')} must be whitespace, fixed-width or csv (with a header row).`);
-if (!discPlacement && !['pc', 'kpc', 'parallax-mas', 'distance-modulus', 'redshift-planck18'].includes(table.distanceUnit!)) {
+if (!skyPlacement && !['pc', 'kpc', 'parallax-mas', 'distance-modulus', 'redshift-planck18'].includes(table.distanceUnit!)) {
   throw new TypeError(`${at('table.distanceUnit')} must be pc, kpc, parallax-mas, distance-modulus or redshift-planck18.`);
 }
 if (frame.unit !== undefined && frame.unit !== 'kpc' && frame.unit !== 'Mpc') throw new TypeError(`${at('frame.unit')} must be kpc or Mpc.`);
 if (!['galactic', 'icrs'].includes(frame.input) || frame.output !== 'sun-icrf' || !Number.isFinite(frame.epochJdTt)) throw new TypeError(`${at('frame')} must convert galactic or icrs to sun-icrf at a finite epoch.`);
-if (discPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty)) throw new TypeError(`${at('frame.placement')} image-layer-disc places ICRS rows in kpc, without kinematic distances.`);
+if (skyPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty)) throw new TypeError(`${at('frame.placement')} ${String(frame.placement)} places ICRS rows in kpc, without kinematic distances.`);
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
 const hex = /^#[0-9a-f]{6}$/iu;
 if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex colour, a positive radius and an opacity in (0, 1].`);
+const sizeBy = appearance.sizeBy;
 const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, colorByBv = appearance.colorByBv, toneBy = appearance.toneBy,
   colorByBands = appearance.colorByBands, colorBySpectrumAtRedshift = appearance.colorBySpectrumAtRedshift;
 if ([colorBy, colorByClass, colorByBv, colorByBands, colorBySpectrumAtRedshift].filter(Boolean).length > 1) {
@@ -128,7 +144,7 @@ if (colorByBv && (!Array.isArray(colorByBv.range) || !(colorByBv.range[0] < colo
     || colorByBv.steps < 2 || colorByBv.steps > 64 || typeof colorByBv.basis !== 'string' || !colorByBv.basis)) {
   throw new TypeError(`${at('appearance.colorByBv')} takes a rising [low, high] B-V range, 2-64 steps and a basis; got ${JSON.stringify(colorByBv)}.`);
 }
-if (discPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a disc placement has none.`);
+if (skyPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a ${String(frame.placement)} placement has none.`);
 if (colorBySpectrumAtRedshift && (table.distanceUnit !== 'redshift-planck18' || !colorBySpectrumAtRedshift.spectrum || !(colorBySpectrumAtRedshift.step > 0) ||
     typeof colorBySpectrumAtRedshift.basis !== 'string')) {
   throw new TypeError(`${at('appearance.colorBySpectrumAtRedshift')} needs a redshift-planck18 distance, a spectrum, a positive step and a basis.`);
@@ -137,10 +153,8 @@ if (colorByBands && (!(['red', 'green', 'blue'] as const).every(channel => color
     !Number.isInteger(colorByBands.levels) || colorByBands.levels < 2 || colorByBands.levels > 16 || typeof colorByBands.basis !== 'string')) {
   throw new TypeError(`${at('appearance.colorByBands')} needs a flux column and a positive scale for red, green and blue, 2 to 16 levels and a basis.`);
 }
-if (toneBy && (typeof toneBy.band !== 'string' || !(toneBy.faintMagnitude > toneBy.brightMagnitude) || !(toneBy.faintTone > 0 && toneBy.faintTone < 1) ||
-    !Number.isInteger(toneBy.steps) || toneBy.steps < 2 || toneBy.steps > 16 || typeof toneBy.basis !== 'string' || !toneBy.basis)) {
-  throw new TypeError(`${at('appearance.toneBy')} needs a magnitude column and its band, faint > bright magnitudes, a faint tone in (0, 1), 2 to 16 steps and a basis.`);
-}
+if (toneBy) checkCatalogueToneBy(toneBy, at('appearance.toneBy'));
+if (sizeBy) checkCatalogueSizeBy(sizeBy, toneBy, at('appearance.sizeBy'));
 if (colorBy && colorByClass) throw new TypeError(`${at('appearance')} takes colorBy or colorByClass, not both.`);
 if (colorByClass && (!Array.isArray(colorByClass.classes) || colorByClass.classes.length < 2 ||
     !colorByClass.classes.every((entry, index, all) => typeof entry.label === 'string' && entry.spectrum && typeof entry.spectrum.path === 'string' &&
@@ -165,7 +179,7 @@ opener = gzip.open if r['gzip'] else open
 def field(line, column):
   if isinstance(column, list): return line[column[0] - 1:column[1]].strip()
   parts = line.rstrip('\n').split(',') if r['csv'] else line.split(); return parts[column - 1].strip() if column - 1 < len(parts) else ''
-rows, kept, missing, named, excluded = 0, [], 0, set(), 0
+rows, kept, missing, named, excluded, grouped = 0, [], 0, set(), 0, []
 import math, csv
 # Rows within the exclusion radius of a listed position (another catalogue's sources) are left out; a grid of
 # cells as wide as the radius finds the candidates.
@@ -250,6 +264,7 @@ with opener(r['table'], 'rt', encoding='utf8') as handle:
         magnitude -= 5 * math.log10(parsecs / 10)
     bands = [max(0.0, float(field(line, c['column']) or 0) * c['scale']) for c in r['bands']] if r['bands'] else None
     kept.append((name, l, b, d, color, kinematic_sigma(line, l, b, d) if r['weight'] else None, magnitude, bands))
+    if r['group']: grouped.append((field(line, r['group']['group']), field(line, r['group']['distance'])))
 if r['unit'] == 'redshift-planck18':
   # A redshift becomes the comoving distance for the position and the luminosity distance for a tone, both in Planck18.
   from astropy.cosmology import Planck18
@@ -267,7 +282,7 @@ if r['disc']: xyz = []
 elif r['icrs']: xyz = SkyCoord(ra=[k[1] for k in kept] * u.deg, dec=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='icrs').cartesian.xyz.to(out).value.T
 else: xyz = SkyCoord(l=[k[1] for k in kept] * u.deg, b=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='galactic').icrs.cartesian.xyz.to(out).value.T
 json.dump({'rows': rows, 'selected': len(kept) + missing, 'missingDistance': missing, 'excluded': excluded, 'astropy': astropy.__version__,
-  'points': [[round(float(v), 4) for v in p] for p in xyz], 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'bands': [k[7] for k in kept], 'redshifts': redshifts,
+  'points': [[round(float(v), 4) for v in p] for p in xyz], 'groups': grouped if r['group'] else None, 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'bands': [k[7] for k in kept], 'redshifts': redshifts,
   'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'sky': [[k[1], k[2]] for k in kept] if r['disc'] else None,
   'maxDistanceKpc': 0 if r['disc'] else max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus', 'redshift-planck18') else 1)}, sys.stdout)`;
 const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
@@ -275,18 +290,32 @@ const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
   input: JSON.stringify({ table: resolve(sourceDirectory, table.path), gzip: table.gzip === true, columns: table.columns, unit: table.distanceUnit ?? null,
     fromName: table.galacticFromName === true, byFlag: table.distanceByFlag ?? null, icrs: icrsInput, csv: table.format === 'csv', weight: kinematicUncertainty ?? null, firstOf: table.distanceFirstOf ?? null, onePerName: table.onePerName === true,
-    exclude: table.exclude ? { ...table.exclude, path: resolve(sourceDirectory, table.exclude.path) } : null,
-    disc: discPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
+    exclude: table.exclude ? { ...table.exclude, path: resolve(sourceDirectory, table.exclude.path) } : null, group: groupDistance ?? null,
+    disc: skyPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
     bands: colorByBands ? [colorByBands.red, colorByBands.green, colorByBands.blue] : null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
 const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; excluded: number; astropy: string; points: number[][]; colors: (number | null)[];
   magnitudes: (number | null)[]; bands: (number[] | null)[]; redshifts: number[] | null;
-  sigmas: (number | null)[]; sky: [number, number][] | null; maxDistanceKpc: number };
+  sigmas: (number | null)[]; sky: [number, number][] | null; maxDistanceKpc: number; groups: [string, string][] | null };
 /** A disc placement may spread the rows through the disc's published thickness: each row keeps its place in the disc (the
  * midplane point under its catalogue position) and moves along the disc's normal to a height drawn from the source's vertical
  * profile: an isothermal sheet, sech²(z / z0), or an exponential, exp(-|z| / h). A scale height that grows with disc
  * radius (a flaring layer) is given as its value at the centre plus a linear rise per kpc. The draw is seeded by the bank
  * and the row's order, so a bake repeats it exactly. Only the spread is published; no row's own height is measured. */
+let groupPlaced = 0;
+if (groupDistance) {
+  if (!['distance-modulus', 'pc', 'kpc'].includes(table.distanceUnit!)) throw new TypeError(`${at('table.groupDistance')} needs a distance-modulus, pc or kpc table.`);
+  const perPc = (frame.unit === 'Mpc' ? 1e-6 : 1e-3) * (table.distanceUnit === 'kpc' ? 1000 : 1);
+  const toFrame = (text: string) => table.distanceUnit === 'distance-modulus' ? 10 ** (Number(text) / 5 + 1) * perPc : Number(text) * perPc;
+  // Every member of a group names the same group distance; a group without one keeps its members' own.
+  const groupDistances = new Map<string, number | null>();
+  for (const [group, distance] of converted.groups!) {
+    const value = distance ? toFrame(distance) : null, known = groupDistances.get(group);
+    if (known !== undefined && known !== value) throw new TypeError(`${at('table.groupDistance')}: group ${group}'s members name different distances.`);
+    groupDistances.set(group, value);
+  }
+  groupPlaced = placeGroupMembers(converted.points, converted.groups!.map(([group]) => group), group => groupDistances.get(group) ?? null);
+}
 const discThickness = (recipe.frame as { discThickness?: unknown } | undefined)?.discThickness as undefined | {
   profile: 'sech2' | 'exponential'; scaleHeightPc: number | { atCentrePc: number; perKpcPc: number }; source: string; basis: string };
 const flare = typeof discThickness?.scaleHeightPc === 'object' && discThickness.scaleHeightPc !== null ? discThickness.scaleHeightPc : null;
@@ -353,6 +382,41 @@ if (discPlacement) {
     const h = discThickness ? height(index, radiusKpc) : 0, position = ray.map((value, axis) => value * midplane + h * normal[axis]!);
     converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, Math.hypot(...position));
     return position.map(value => Math.round(value * 1e4) / 1e4);
+  });
+}
+
+/** A spheroid placement (`frame.spheroid`): the deprojected Sérsic density (Prugniel & Simien 1997) of a published fit, on
+ * an oblate spheroid whose axis lies in the plane of the sky at a position angle, ending at `cutoffHalfLightRadii`. Each row
+ * sits along its sight line at a depth drawn from that density, seeded like the disc heights. The depth is drawn, not
+ * measured; the same density spreads the galaxy's light in depth (its nebula-lab recipe's `shapePrior`). */
+if (spheroidPlacement) {
+  const sph = (recipe.frame as { spheroid?: Record<string, unknown> }).spheroid;
+  const num = (key: string) => { const value = sph?.[key]; if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at(`frame.spheroid.${key}`)} must be a finite number, got ${JSON.stringify(value)}.`); return value; };
+  if (!sph || typeof sph.source !== 'string' || !sph.source || typeof sph.basis !== 'string' || !sph.basis) throw new TypeError(`${at('frame.spheroid')} needs its fit's numbers, a source and a basis; got ${JSON.stringify(sph)}.`);
+  const [ra0, dec0, distanceKpc, re, n, q, pa, cutoff] = ['centerRaDeg', 'centerDecDeg', 'distancePc', 'halfLightRadiusKpc', 'sersicIndex', 'axisRatio', 'axisPositionAngleDeg', 'cutoffHalfLightRadii'].map(num) as number[];
+  const rad = Math.PI / 180, unit = (raDeg: number, decDeg: number) => [Math.cos(decDeg * rad) * Math.cos(raDeg * rad), Math.cos(decDeg * rad) * Math.sin(raDeg * rad), Math.sin(decDeg * rad)];
+  const target = unit(ra0!, dec0!), northPole = [0, 0, 1], dotv = (a: number[], b: number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
+  const northRaw = northPole.map((v, i) => v - dotv(northPole, target) * target[i]!), northLength = Math.hypot(...northRaw), north = northRaw.map(v => v / northLength);
+  const east = [north[1]! * target[2]! - north[2]! * target[1]!, north[2]! * target[0]! - north[0]! * target[2]!, north[0]! * target[1]! - north[1]! * target[0]!];
+  const axis = [0, 1, 2].map(i => Math.sin(pa! * rad) * east[i]! + Math.cos(pa! * rad) * north[i]!), dKpc = distanceKpc! / 1000;
+  const p = 1 - 0.6097 / n! + 0.05463 / (n! * n!), b = 1.9992 * n! - 0.3271;
+  const density = (point: number[]) => {
+    const offset = point.map((v, i) => v - target[i]! * dKpc), axial = dotv(offset, axis), radial = Math.sqrt(Math.max(0, dotv(offset, offset) - axial * axial));
+    const m = Math.hypot(radial, axial / q!) / re!;
+    return m >= cutoff! ? 0 : Math.max(m, .01) ** -p * Math.exp(-b * (Math.max(m, .01) ** (1 / n!) - 1));
+  };
+  const { createHash } = await import('node:crypto');
+  const draw = (index: number, salt: string) => (Number(createHash('sha256').update(`${id}:${index}${salt}`).digest().readBigUInt64BE(0) >> 11n) + 0.5) / 2 ** 53;
+  const reach = cutoff! * re!, samples = 400;
+  converted.points = converted.sky!.map(([ra, dec], index) => {
+    const ray = unit(ra, dec), weights: number[] = [];
+    for (let k = 0; k < samples; k++) { const t = dKpc - reach + (k + 0.5) / samples * 2 * reach; weights.push(density(ray.map(v => v * t))); }
+    const total = weights.reduce((a, c) => a + c, 0);
+    // A row whose sight line misses the spheroid stays at the galaxy's distance.
+    let distance = dKpc;
+    if (total > 0) { const want = draw(index, ':depth') * total; let k = 0, running = weights[0]!; while (running < want && k < samples - 1) running += weights[++k]!; distance = dKpc - reach + (k + 0.5) / samples * 2 * reach; }
+    converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, distance);
+    return ray.map(value => Math.round(value * distance * 1e4) / 1e4);
   });
 }
 
@@ -440,22 +504,11 @@ const bandIndices = colorByBands ? converted.points.map((_, index) => bandColour
 const redshiftIndices = colorBySpectrumAtRedshift ? converted.points.map((_, index) => redshiftColour(index)) : null;
 const basePalette = colorByBands ? bandPalette : colorBySpectrumAtRedshift ? redshiftPalette : classPalette ?? palette ?? [appearance.colorCss];
 const baseIndex = (index: number) => bandIndices ? bandIndices[index]! : redshiftIndices ? redshiftIndices[index]! : colorByClass ? classIndex(converted.colors[index] ?? null) : palette ? paletteIndex(converted.colors[index] ?? null) : 0;
-const toneStep = (magnitude: number | null) => {
-  const tone = toneBy!;
-  if (magnitude === null || !Number.isFinite(magnitude)) return tone.steps - 1;
-  return Math.round(Math.max(0, Math.min(1, (magnitude - tone.brightMagnitude) / (tone.faintMagnitude - tone.brightMagnitude))) * (tone.steps - 1));
-};
-// With a tone, a palette entry is a (colour, tone) pair; the colour stays the base colour and paletteTone says how dark.
-const combos = new Map<string, number>(), tonedPalette: string[] = [], paletteTone: number[] = [];
-const pointIndex = converted.points.map((_, index) => {
-  if (!toneBy) return baseIndex(index);
-  const base = baseIndex(index), step = toneStep(converted.magnitudes[index] ?? null), key = `${base},${step}`;
-  if (!combos.has(key)) {
-    combos.set(key, tonedPalette.length); tonedPalette.push(basePalette[base]!);
-    paletteTone.push(Number((1 - step / (toneBy.steps - 1) * (1 - toneBy.faintTone)).toFixed(4)));
-  }
-  return combos.get(key)!;
-});
+// With a tone, a palette entry is a (colour, tone) pair, and with a size a (colour, tone, size) triple (catalogue-tones.ts).
+const toned = toneBy ? toneCataloguePalette({ basePalette, baseIndices: converted.points.map((_, index) => baseIndex(index)),
+  magnitudes: converted.magnitudes, distances: converted.points.map(point => Math.hypot(point[0]!, point[1]!, point[2]!)), toneBy, ...(sizeBy ? { sizeBy } : {}) }) : null;
+const pointIndex = toned ? toned.indices : converted.points.map((_, index) => baseIndex(index));
+const tonedPalette = toned?.palette ?? [], paletteTone = toned?.paletteTone ?? [], paletteRadiusPx = toned?.paletteRadiusPx ?? [];
 /** Every disc bank of catalogued objects takes each dot's look from the photograph under it, so the dots read as part of the galaxy's light:
  * a dot's tone follows the photograph's brightness there, relative to the 90th percentile over the bank's dots on the
  * photograph and never below PHOTOGRAPH_TONE_FLOOR, and its colour moves PHOTOGRAPH_COLOUR_MIX of the way to the
@@ -497,12 +550,19 @@ const photographLook = discPlacement && !colorByBv ? await (async () => {
   return { colours, tones, indices, reference: Number(reference.toFixed(1)) };
 })() : null;
 const magnitudes = converted.magnitudes.filter((value): value is number => value !== null && Number.isFinite(value)).sort((a, b) => a - b);
+// A bank without levels may be whole within a camera distance of its origin other than the renderer's 10 kpc: a galaxy
+// cluster's members, seen from across the Nearby Universe.
+const fullDetail = (appearance as { fullDetail?: { units?: unknown; basis?: unknown } }).fullDetail;
+if (fullDetail !== undefined && (typeof fullDetail.units !== 'number' || !(fullDetail.units > 0) || typeof fullDetail.basis !== 'string' || !fullDetail.basis)) {
+  throw new TypeError(`${at('appearance.fullDetail')} needs positive units and a basis, got ${JSON.stringify(fullDetail)}.`);
+}
 const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
   appearance: photographLook ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, palette: photographLook.colours, paletteTone: photographLook.tones }
     : { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
-      ...(toneBy ? { palette: tonedPalette, paletteTone } : colorByBands ? { palette: bandPalette } : colorBySpectrumAtRedshift ? { palette: redshiftPalette } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
+      ...(fullDetail ? { fullDetailUnits: fullDetail.units, fullDetailBasis: fullDetail.basis } : {}),
+      ...(toneBy ? { palette: tonedPalette, paletteTone, ...(sizeBy ? { paletteRadiusPx, sizeBasis: sizeBy.basis } : {}) } : colorByBands ? { palette: bandPalette } : colorBySpectrumAtRedshift ? { palette: redshiftPalette } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
   ...(colorBySpectrumAtRedshift ? { spectrumColour: { spectrum: colorBySpectrumAtRedshift.spectrum.path, step: colorBySpectrumAtRedshift.step, basis: colorBySpectrumAtRedshift.basis,
     colours: Object.fromEntries([...redshiftIndex].map(([z, index]) => [z, redshiftPalette[index]])) } } : {}),
   ...(colorByBands ? { bandColour: { red: colorByBands.red, green: colorByBands.green, blue: colorByBands.blue, levels: colorByBands.levels, basis: colorByBands.basis } } : {}),
@@ -516,8 +576,11 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   counts: { rows: converted.rows, selected: converted.selected, points: converted.points.length, missingDistance: converted.missingDistance,
     ...(table.exclude ? { excluded: converted.excluded } : {}), ...(bulgePlacement ? { bulge: bulgeMembers } : {}) },
   ...(bulgePlacement ? { bulge: { source: bulgePlacement.source, basis: bulgePlacement.basis } } : {}),
+  // Each point's group, which a merge that keeps groups first reads (merge-catalogue-points.mts).
+  ...(groupDistance ? { groupDistance: { source: groupDistance.source, depth: groupDistance.depth, basis: groupDistance.basis, placed: groupPlaced },
+    groups: converted.groups!.map(([group]) => group) } : {}),
   ...(table.exclude ? { exclusion: { path: table.exclude.path, withinArcsec: table.exclude.withinArcsec, source: table.exclude.source, basis: table.exclude.basis } } : {}),
-  conversion: discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
+  conversion: spheroidPlacement ? 'Right ascension and declination at a depth drawn from the spheroid\'s density along the sight line (frame.spheroid), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.' : discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
     : `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),
@@ -525,4 +588,4 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   points: photographLook ? converted.points.map((point, index) => [...point, photographLook.indices[index]!])
     : toneBy || colorByClass || colorByBands || colorBySpectrumAtRedshift || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
 const outputPath = await writeCatalogueBank({ objectDirectory, id, bank, published });
-console.log(`Prepared ${converted.points.length} of ${converted.selected} selected rows of ${converted.rows} (${converted.missingDistance} without a distance${table.exclude ? `, ${converted.excluded} excluded` : ''}${bulgePlacement ? `, ${bulgeMembers} in the bulge` : ''}) into ${outputPath}.`);
+console.log(`Prepared ${converted.points.length} of ${converted.selected} selected rows of ${converted.rows} (${converted.missingDistance} without a distance${table.exclude ? `, ${converted.excluded} excluded` : ''}${bulgePlacement ? `, ${bulgeMembers} in the bulge` : ''}${groupDistance ? `, ${groupPlaced} at their group's distance` : ''}) into ${outputPath}.`);

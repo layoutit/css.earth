@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-hst-slit-scan-map-reproduction@1",
  "scan": "europa-salt-map",
- "definition": "tools/objects/hst/programs/europa-salt-map.scan.json",
+ "definition": "packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json",
  "target": "Europa",
  "instrument": "STIS/CCD",
  "opticalElement": "G430L",

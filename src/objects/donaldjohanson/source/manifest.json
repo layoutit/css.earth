@@ -285,7 +285,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "donaldjohanson-shape",
           "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
@@ -300,7 +300,7 @@
         "diffuse": 0.55,
         "datasetId": "llorri"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ],
   "documents": [
@@ -400,7 +400,7 @@
         "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
         "https://www.wikidata.org/wiki/Wikidata:Licensing"
       ],
-      "acquisition": "node tools/prepare-feature-notes.mts donaldjohanson: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "acquisition": "node packages/bake/cli/prepare-feature-notes.mts donaldjohanson: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
       "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
       "consumers": [
         "features"

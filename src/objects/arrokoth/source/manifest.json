@@ -423,7 +423,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "published-shape",
           "lorri-ca06",
@@ -436,7 +436,7 @@
         "diffuse": 0.55,
         "datasetId": "lorri"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ]
 }

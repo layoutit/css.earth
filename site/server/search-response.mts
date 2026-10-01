@@ -1,6 +1,6 @@
 import { sectionElements } from '@cssearth/renderer';
 import { parseHTML } from 'linkedom';
-import { requiredElement } from '../browser/browser-types.mts';
+import { requiredElement, requiredSection } from '../browser/browser-types.mts';
 import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
 import { findObjects, findResults } from './find.mts';
 import type { SearchData } from './search-data.mts';
@@ -57,7 +57,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
   // Clearing the search keeps the view context, normalized the way the router resolves it.
   withOverviewScope(clear, objectId, overviewScopeFromUrl(url, objectId));
   document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
-  const browser = requiredElement<HTMLElement>(document, '.object-browser');
+  const browser = requiredSection(document, '.object-browser');
   const presentation = createSearchPresentation(document);
   presentation.present(searching, searching);
   if (searching) requiredElement(document, '.object-sheet-handle').setAttribute('checked', '');
@@ -68,7 +68,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
     renderCatalogueRows(document, requiredElement<HTMLUListElement>(browser, '[data-catalogue-list]'), found.objects.rows);
     const overviewCount = presentOverviewResults(browser, value);
     presentation.markCategory(found.classification);
-    const featureRoot = document.querySelector<HTMLElement>('.object-feature-results');
+    const featureRoot = browser.querySelector<HTMLElement>('.object-feature-results');
     let detailCount = 0;
     if (found.detailQuery && featureRoot && data.pin) {
       try {

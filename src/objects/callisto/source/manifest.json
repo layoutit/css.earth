@@ -144,7 +144,7 @@
         "referenceRadiusMeters": 2410300
       },
       "acquisition": "Checked-in derived RGBA GeoTIFF. Reproduce with python3 src/objects/callisto/source/preparation/prepare-galileo-color.py from the pinned original and fixed camera; no controlled-map texture is sampled.",
-      "generator": "source/preparation/prepare-galileo-color.py",
+      "generator": "src/objects/callisto/source/preparation/prepare-galileo-color.py",
       "recipe": "preparation/galileo-color-conversion.json",
       "derivedFrom": [
         "galileo-pia03456-original"
@@ -562,7 +562,7 @@
         "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
         "https://www.wikidata.org/wiki/Wikidata:Licensing"
       ],
-      "acquisition": "node tools/prepare-feature-notes.mts callisto: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "acquisition": "node packages/bake/cli/prepare-feature-notes.mts callisto: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
       "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
       "consumers": [
         "features"

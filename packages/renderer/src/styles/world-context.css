@@ -197,7 +197,6 @@
   pointer-events: none;
 }
 .prepared-galaxy-catalog [data-galaxy-dot],
-.prepared-galaxy-catalog [data-cluster-aperture],
 .prepared-galaxy-catalog [data-galaxy-label] {
   position: absolute;
   left: 0;
@@ -209,11 +208,6 @@
   height: 2px;
   border-radius: 50%;
   background: #c2ccd8;
-}
-.prepared-galaxy-catalog [data-cluster-aperture] {
-  box-sizing: border-box;
-  border: 1px solid #80a1cc;
-  border-radius: 50%;
 }
 .prepared-galaxy-catalog [data-galaxy-label] {
   cursor: default;
@@ -315,9 +309,10 @@
      translation, pulling the caption back across the body's projected limb. */
   .prepared-selected-body-label { font-size: 10.5px; line-height: 13.5px; height: 13.5px; }
 }
-/* The Galactic-centre landmark sits over the bright Milky Way bulge. */
-.prepared-world-context [data-context-body="sgr-a-star"]::before,
-.prepared-world-context [data-context-body="sgr-a-star"] > .context-caption::after {
+/* Seen from outside the galaxy, the Galactic-centre landmark sits over the bright Milky Way bulge; from inside it is
+   named like every other body. */
+.prepared-world-context[data-galaxy-view="outside"] [data-context-body="sgr-a-star"]::before,
+.prepared-world-context[data-galaxy-view="outside"] [data-context-body="sgr-a-star"] > .context-caption::after {
   color: #000;
 }
 .prepared-world-context [data-context-body="sgr-a-star"] > .context-caption::after {
@@ -331,16 +326,17 @@
 .prepared-world-context [data-context-locator][data-context-selected="true"]::before {
   box-shadow: none;
 }
+/* The locator's box is the marker's own 16px square, so it scales about its centre and needs no offset. No `translate` or
+   `scale` beside `transform` in one rule: lightningcss 1.33 (Vite's CSS minifier) drops them as overridden, and the
+   deployed locator sat 8px up-left of its body (2026-09-30). */
 .prepared-world-context [data-context-body] > .context-locator {
   position: absolute;
   inset: 0 auto auto 0;
-  transform-origin: 0 0;
-  translate: 8px 8px;
-  scale: 1;
+  transform-origin: 50% 50%;
   width: 16px;
   height: 16px;
   overflow: visible;
-  transform: scale(1) translate(-50%, -50%);
+  transform: scale(1);
   opacity: .65;
   pointer-events: none;
   visibility: hidden;
@@ -352,7 +348,7 @@
   visibility: inherit;
 }
 .prepared-world-context [data-context-indicator-hovered="true"] > .context-locator {
-  transform: scale(1.25) translate(-50%, -50%);
+  transform: scale(1.25);
 }
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-indicator-visible="true"] > .context-locator {
   opacity: 1;

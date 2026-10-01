@@ -8,9 +8,12 @@ const anchors = new WeakMap<Element, Element>();
 type Template = Element & { readonly content: DocumentFragment };
 const isTemplate = (element: Element): element is Template => element.localName === 'template' && 'content' in element;
 /** Where a template holds its section: its inert content in a browser. A server DOM (linkedom) keeps and serializes a
- * template's own children, and its content shares the page's document, so there the template itself holds it. */
-const holder = (template: Template): ParentNode =>
-  template.children.length > 0 || template.content.ownerDocument === template.ownerDocument ? template : template.content;
+ * template's own children, and its content shares the page's document, so there the template itself holds it. A browser's
+ * template inside another's content shares that inert document too, but that document has no window: its sections go in
+ * the content, or the outer query would reach them and they would come into the page as live elements with their parent. */
+const holder = (template: Template): ParentNode => template.children.length > 0
+  || (template.content.childElementCount === 0 && template.content.ownerDocument === template.ownerDocument && !!template.ownerDocument.defaultView)
+  ? template : template.content;
 
 /** Every element matching `selector` under `root`, mounted or waiting in a detached template, in document order. */
 export function sectionElements<E extends Element = HTMLElement>(root: ParentNode, selector: string): E[] {

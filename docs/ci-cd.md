@@ -95,11 +95,10 @@ Selection belongs in the existing test runner's configuration or
 files must run without editing a workflow list. Keep test cases at their current
 paths; do not move them into a bespoke wrapper to make CI faster.
 
-Node owns the native suites; Vitest owns package/renderer discovery. `test:node`
-loads `packages/core/src/node/register-vite-suffix.mts` for the site's Vite imports. The lab CLI
-owns lab-test discovery; `pnpm test:lab` also runs its assets stage first.
-Some preparation suites keep explicit selections. Preserve setup-sensitive
-exceptions and distinguish source-dependent skips from executed checks.
+`node --test` runs every suite. `pnpm test:run` loads
+`packages/core/src/node/register-vite-suffix.mts` for Vite imports and enables module mocks; `test:packages`
+and `test:site` pass it their folders. The lab CLI owns lab-test discovery; `pnpm test:lab` also runs its
+assets stage first. Distinguish source-dependent skips from executed checks.
 
 When changing selection, prove both that a newly matching file is discovered and
 that a deliberately failing assertion makes the command fail. When changing a

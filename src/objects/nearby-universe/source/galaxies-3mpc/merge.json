@@ -1,9 +1,15 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "galaxies-3mpc",
-  "meaning": "The innermost level: every Local Volume Database galaxy nearer than Cosmicflows-4's nearest (3.03 Mpc), unthinned. Each dot is one galaxy at its adopted distance, in the tone of its apparent V magnitude.",
+  "meaning": "The innermost level: every Local Volume Database galaxy nearer than Cosmicflows-4's nearest (3.03 Mpc), and every Cosmicflows-4 and 2MRS galaxy the levels outside it left out, unthinned. It appears only once the view is inside the Local Group, where the screen shows a narrow cone of the sky: seen from there, the thinned levels put about 600 galaxies on screen against about 1,800 from outside the field, and the whole catalogue brings it back to about 1,400 (measured 2026-09-30). Each dot is one galaxy at its adopted distance, in the tone of its apparent V magnitude, or at its Cosmicflows-4 distance in the colour of its type.",
   "banks": [
-    "local-group-galaxies"
+    "local-group-galaxies",
+    "galaxies",
+    {
+      "bank": "galaxies-2mrs",
+      "keepEvery": 3,
+      "basis": "Presentation choice: the stacked bank draws at most 40,000 dots (MAX_CATALOGUE_POINTS), and the levels outside this one hold 16,678, so of the 23,177 2MRS galaxies they leave out this level keeps one in 3 (7,726), after every Local Volume Database and Cosmicflows-4 galaxy."
+    }
   ],
   "within": [
     "galaxies-200mpc",

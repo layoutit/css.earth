@@ -20,7 +20,7 @@
   "sources": {
    "period": "Torres et al. 2008 (ApJ 677, 1324 (2008); arXiv:0801.1841), Table 2, row 3 HD 209458: 3.524746 d",
    "shape": "Inclination 86.71 degrees and a/R* = 8.76 \u00b1 0.04, both from Torres et al. 2008, Table 2. Eccentricity is set to 0: a circular display approximation, not an orbital solution.",
-   "phase": "T0 = BJD_TDB 2459893.75120 \u00b1 0.00005, MEASURED here from the JWST NIRCam F322W2 grism white-light curve of programme 1274 observation 2 (MAST product jw01274-o002_t002_nircam_f322w2-grismr-subgrism64_whtlt.ecsv), by a trapezoid fit with a linear baseline (tools/objects/jwst/fit-transit-time.mts); Torres et al. (2008) give no transit time.",
+   "phase": "T0 = BJD_TDB 2459893.75120 \u00b1 0.00005, MEASURED here from the JWST NIRCam F322W2 grism white-light curve of programme 1274 observation 2 (MAST product jw01274-o002_t002_nircam_f322w2-grismr-subgrism64_whtlt.ecsv), by a trapezoid fit with a linear baseline (packages/telescope-cli/src/archives/jwst/fit-transit-time.mts); Torres et al. (2008) give no transit time.",
    "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
   }
  }

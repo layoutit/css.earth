@@ -54,7 +54,7 @@ packages/renderer/
 │   ├── solar-system/   heliocentric geometry, orbits, and the prepared cubic-sky and directional-Sun contracts
 │   ├── sky/, stars/, volume/, shell/, image-layers/, labels/
 │   └── styles/         runtime stylesheets
-├── test/node/          Node suites and fixtures; test:node runs them, Vitest excludes them
+├── test/node/          Node suites and fixtures
 ├── tsup.config.ts      built entries
 ├── AGENTS.md           package rules
 └── CLAUDE.md           symlink to AGENTS.md
@@ -86,7 +86,7 @@ Most tests read prepared object data, so restore it first with `pnpm setup:asset
 ```sh
 pnpm build:renderer
 pnpm typecheck:renderer
-pnpm test:renderer
+pnpm test:packages
 ```
 
 ## Prepared image transport

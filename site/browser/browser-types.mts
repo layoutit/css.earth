@@ -1,4 +1,4 @@
-import { showSection } from '@cssearth/renderer';
+import { sectionElements, showSection } from '@cssearth/renderer';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
@@ -10,6 +10,16 @@ export type SceneFactory = ((stage: HTMLElement, options: MountOptions) => Objec
 export const errorMessage = (error: unknown): string => error instanceof Error ? error.message : String(error);
 export function requiredElement<T extends Element = HTMLElement>(root: ParentNode, selector: string): T {
   const element = root.querySelector<T>(selector);
+  if (!element) throw new Error(`Missing shell element: ${selector}.`);
+  return element;
+}
+/** A section a selection may detach (detached-sections.ts: the body card, the search browser, the settings panel), found
+ * whether it is mounted or waiting in its template. */
+export function sectionElement<T extends HTMLElement = HTMLElement>(root: ParentNode, selector: string): T | null {
+  return sectionElements<T>(root, selector)[0] ?? null;
+}
+export function requiredSection<T extends HTMLElement = HTMLElement>(root: ParentNode, selector: string): T {
+  const element = sectionElement<T>(root, selector);
   if (!element) throw new Error(`Missing shell element: ${selector}.`);
   return element;
 }

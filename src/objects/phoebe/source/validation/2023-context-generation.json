@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-phoebe-2023-context-generation@2",
   "recipe": {
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
     "inputs": [
       "phoebe-2023-shape",
       "phoebe-2023-albedo",

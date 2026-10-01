@@ -2,14 +2,14 @@
   "schema": "cssearth-nh-lorri-registration-evidence@1",
   "bodyId": "nix",
   "generator": {
-    "path": "tools/objects/new-horizons/prepare-photographic-cameras.mts"
+    "path": "packages/bake/authoring/new-horizons/prepare-photographic-cameras.mts"
   },
   "helpers": [
     {
-      "path": "tools/objects/new-horizons/compare-photographic-interiors.mts"
+      "path": "packages/bake/authoring/new-horizons/compare-photographic-interiors.mts"
     },
     {
-      "path": "tools/objects/new-horizons/render-interior-comparison.mts"
+      "path": "packages/bake/authoring/new-horizons/render-interior-comparison.mts"
     }
   ],
   "recipe": {

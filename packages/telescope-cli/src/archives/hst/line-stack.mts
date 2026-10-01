@@ -41,10 +41,9 @@ import { accumulatedImage, addSample, discMetrics, gridPoint, inSubset, limbFall
 import { readHorizonsResponses, stackEphemerides, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import { type Card, DEGREE, type FrameHeader, MJD_TO_JD, type PreparedFrame, type VisitRegistration, locateAcrossSlit, locateDiscRow, readFrameHeader, readFrameRegion, reflectedSunlight, skyByColumn } from './line-stack-frames.mts';
 
-// The FITS ORIGIN card and software name this stage has always serialized, from when this module lived at
-// tools/objects/hst/line-stack.mts. Earlier records name it, so it is kept rather than derived from the module's current path.
-const HISTORICAL_ORIGIN = 'cssEarth tools/objects/hst/line-stack.mts';
-const HISTORICAL_SOFTWARE_NAME = 'cssearth tools/objects/hst/line-stack.mts';
+// The FITS ORIGIN card and the software name its receipts record.
+const FITS_ORIGIN = 'cssEarth packages/telescope-cli/src/archives/hst/line-stack.mts';
+const SOFTWARE_NAME = 'cssearth packages/telescope-cli/src/archives/hst/line-stack.mts';
 
 export interface StackSet { readonly line: StackLine; readonly subset: string; readonly accumulator: StackAccumulator }
 export interface LineStackRun {
@@ -212,7 +211,7 @@ export function stackProduct(definition: LineStackDefinition, set: StackSet, han
     ['BODYRAD', definition.bodyRadiusKm, 'km, the radius one unit stands for'],
     ['ORIENT', 'body north up, celestial east left'], ['HANDEDNS', handedness, 'image +x of the exposure on the sky'],
     ['NFRAMES', new Set(set.accumulator.frames).size], ['EXPTIME', set.accumulator.exposureSeconds, 'seconds, summed over the frames'],
-    ['STACKID', definition.id], ['ORIGIN', HISTORICAL_ORIGIN],
+    ['STACKID', definition.id], ['ORIGIN', FITS_ORIGIN],
   ];
   return Buffer.concat([
     headerBlock([['SIMPLE', true, 'conforms to FITS standard'], ['BITPIX', 8], ['NAXIS', 0], ['EXTEND', true], ...cards]),
@@ -237,7 +236,7 @@ export function measureSet(definition: LineStackDefinition, set: StackSet): SetM
 /** The software that stacked a set. There is no installed toolchain here: the reduction is this repository's own TypeScript,
  * named with the telescope command's version. */
 export async function lineStackSoftware(): Promise<ProductSoftware[]> {
-  return [{ name: HISTORICAL_SOFTWARE_NAME, version: VERSION }];
+  return [{ name: SOFTWARE_NAME, version: VERSION }];
 }
 
 /** What identifies one stacked set: the frames that went into this one at their pinned sizes, the definition and

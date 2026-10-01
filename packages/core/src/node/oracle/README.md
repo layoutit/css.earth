@@ -35,7 +35,7 @@ pipeline's result is right.
 | numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `packages/bake/src/objects/raster/numpy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
 | USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `packages/bake/src/photometry/fixtures/photometric-truth.py` | `packages/bake/src/photometry/isis.oracle.test.mts` |
 
-Script paths in the table are repository-relative and live with their owning packages. The moved mission scripts and comparing tests are in
+Script paths in the table are repository-relative and live with their owning packages. The mission scripts and comparing tests are in
 `packages/bake/src/objects/layers/terrestrial/missions/`; NumPy surface cases are in
 `packages/bake/src/objects/raster/numpy/`, circular hosted-orbit fixtures in
 `packages/bake/src/objects/scene/fixtures/`, and ISIS photometric fixtures in
@@ -44,8 +44,7 @@ verifier are in `packages/bake/src/objects/geometry/`.
 
 The FITS runner lives in `.github/scripts/checks/`; the SBMT runner lives in `packages/bake/cli/`, and this directory owns the oracle tsconfig. Bake-owned FITS records and
 eclipse-map cases live beside their comparing bake suites. SBMT lives in
-`packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/`. Historical `generatedBy` strings
-keep the generator’s original path. `packages/core/src/node/oracle/tsconfig.json` includes the relocated scripts.
+`packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/`. `packages/core/src/node/oracle/tsconfig.json` includes the oracle scripts.
 
 The SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions only.
 The shared FITS reader is the

@@ -17,7 +17,7 @@ Adopted diameter: **1.79 ± 0.36 km**, meaning thermal-model effective diameter,
 
 ## Evidence
 
-Checked 2026-09-25 by `tools/objects/source-authoring/damit-asteroids/author.mts` from the pinned inputs (pinned at commit `f4d47f1661`; now `packages/bake/authoring/damit-asteroids/`). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records and every derived record are declared in the [input manifest](source/manifest.json).
+Checked 2026-09-25 by `packages/bake/authoring/damit-asteroids/author.mts` from the pinned inputs (pinned at commit `f4d47f1661`; now `packages/bake/authoring/damit-asteroids/`). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records and every derived record are declared in the [input manifest](source/manifest.json).
 
 ## Known problems
 

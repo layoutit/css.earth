@@ -11,7 +11,7 @@
     "spectrum": "Planck, 5772 K: the Sun's effective temperature in NASA's Sun fact sheet, the temperature of the lane's solar tint",
     "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html"
   },
-  "observer": "CIE 1931 2 degree colour-matching functions (tools/references/reference-bank.mts), summed at 1 nm and converted with the IEC 61966-2-1 XYZ-to-linear-sRGB matrix, as spectrumLinearSrgb in tools/objects/observation/stellar/stellar-photometric-color.mts",
+  "observer": "CIE 1931 2 degree colour-matching functions (packages/bake/src/objects/sources/reference-bank.ts), summed at 1 nm and converted with the IEC 61966-2-1 XYZ-to-linear-sRGB matrix, as spectrumLinearSrgb in packages/bake/src/objects/stellar/stellar-photometric-color.ts",
   "linearSrgb": [
     0.616839,
     0.471292,

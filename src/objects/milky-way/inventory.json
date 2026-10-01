@@ -34,14 +34,20 @@
     {
       "location": "prepared",
       "filename": "dots.bin",
-      "bytes": 255775,
-      "sha256": "048e4eca07d2aecccb199adcb0d5632e72f45467798a077ce3884182d05d4279"
+      "bytes": 234403,
+      "sha256": "2fa7006d72d00e8e042782a0a033b40b97711110979f48b7dd4cc77c82acd66a"
     },
     {
       "location": "prepared",
       "filename": "globular-clusters.bin",
       "bytes": 2513,
       "sha256": "3cb903542f6f8636a934e2fd3767df44482e6b8f74f3089fb32bb745e3a09983"
+    },
+    {
+      "location": "prepared",
+      "filename": "old-star-dots.bin",
+      "bytes": 71124,
+      "sha256": "b6576278b9f756f693663aae5973f72fe8077c636af0c9df14e548b906167982"
     },
     {
       "location": "prepared",

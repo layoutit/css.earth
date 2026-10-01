@@ -23,4 +23,4 @@ for body in ['sun', 'jupiter']:
                 'shape': list(data.shape), 'samples': samples(data, 918, 24),
                 'nonfinite': int((~np.isfinite(data)).sum()),
                 'negative': int((data < 0).sum()), 'zero': int((data == 0).sum())}
-write('fits/synoptic.json', 'astropy', 'tests/oracles/fits/synoptic.py', {'astropy': astropy.__version__}, inputs, {'products': products})
+write('packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json', 'astropy', 'packages/bake/src/objects/cameras/fixtures/fits/synoptic.py', {'astropy': astropy.__version__}, inputs, {'products': products})

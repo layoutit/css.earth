@@ -1,0 +1,108 @@
+/* M87*: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="m87-star"] > :is(.polycss-camera, .m87-star-corona-layer, .m87-star-limb-layer) {
+  --m87-star-scene-side-padding: 16px;
+  --m87-star-reference-width: 1920px;
+  --m87-star-reference-height: 1080px;
+  --m87-star-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--m87-star-scene-side-padding) - var(--m87-star-scene-side-padding)) /
+        var(--m87-star-reference-width)
+    ),
+    calc(100cqh / var(--m87-star-reference-height))
+  );
+}
+
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="m87-star"] > :is(.m87-star-corona-layer, .m87-star-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* The off-limb plate is larger than the stage: its box is the plate's own size, centred, so zooming out never clips it. */
+.object-stage[data-object-id="m87-star"] > .m87-star-corona-layer {
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  width: 1608px;
+  height: 1608px;
+  margin-left: -804px;
+  margin-top: -804px;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.object-stage[data-object-id="m87-star"] .m87-star-corona-layer {
+  z-index: 0;
+}
+
+.object-stage[data-object-id="m87-star"] .polycss-camera {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="m87-star"] .m87-star-limb-layer {
+  z-index: 2;
+}
+
+.object-stage[data-object-id="m87-star"] .m87-star-body {
+  transform-style: preserve-3d;
+}
+
+.object-stage[data-object-id="m87-star"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* The shadow is the limb plate's black disc, which always faces the viewer; the sphere is not drawn. */
+.object-stage[data-object-id="m87-star"] .m87-star-body {
+  display: none;
+}
+
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
+.object-stage[data-object-id="m87-star"] .m87-star-corona-layer {
+  background-image: var(--m87-star-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    1608px
+    1608px;
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+.object-stage[data-object-id="m87-star"] .m87-star-limb-layer {
+  background-image: var(--m87-star-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    496px
+    496px;
+}
+
+.object-stage[data-object-id="m87-star"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="m87-star"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="m87-star"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

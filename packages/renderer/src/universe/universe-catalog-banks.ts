@@ -27,7 +27,8 @@ interface ImageBank {
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas }: {
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas,
+  pointBanks = [] }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerBank>;
@@ -43,6 +44,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   stellarExtents?: Readonly<Record<string, number>>;
   /** The prepared billboards: a galaxy with one shows its Sun-facing view from afar, before and without its slices. */
   billboards?: PreparedUniverseOptions['datasetBillboards'];
+  /** Packages that are only catalogue dots (PreparedUniverseOptions.pointBanks). */
+  pointBanks?: PreparedUniverseOptions['pointBanks'];
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
   // The header pill's category, applied again when the catalogue mounts after it was pressed.
@@ -56,6 +59,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       independent: facts?.contextVisibility === 'independent' };
   });
   const byId = new Map(images.map(bank => [bank.id, bank]));
+  // A package that is only catalogue dots mounts them the first time its catalogue row is selected; they draw while it is.
+  const points = (pointBanks ?? []).map(bank => ({ ...bank, mounted: null as ReturnType<typeof mountCataloguePoints> | null }));
+  lifetime.onDispose(() => { for (const bank of points) { bank.mounted?.destroy(); bank.mounted = null; } });
   const billboardEntries = images.flatMap(bank => {
     const billboard = prepared?.plan.banks.get(bank.id)?.billboard;
     return billboard ? [{ id: bank.id, frame: bank.frame, billboard }] : [];
@@ -163,6 +169,17 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     focusBank(id: string) {
       const bank = byId.get(id);
       return bank ? createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank)) : null;
+    },
+    /** Draw the selected package's catalogue dots and hide every other's. */
+    publishPoints(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string) {
+      if (lifetime.disposed) return;
+      for (const bank of points) {
+        const selected = bank.id === selectedObjectId;
+        if (!bank.mounted && !selected) continue;
+        bank.mounted ??= mountCataloguePoints({ host: root, before: end, url: bank.url,
+          loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) });
+        bank.mounted.publish({ world, viewport }, selected ? 1 : 0);
+      }
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */
     setCoasting(active: boolean) { billboards?.setCoasting(active); },

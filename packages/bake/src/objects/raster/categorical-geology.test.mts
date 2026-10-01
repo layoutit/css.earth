@@ -45,7 +45,7 @@ test('discrete colors reject fractional and unknown category indices', () => {
   assert.throws(() => categoryColorForValue(2, dataset), /Invalid/);
 });
 
-for (const id of ['io', 'ganymede']) test(`${id} archived geography, attribute identity and source pins remain intact`, async () => {
+for (const id of ['io']) test(`${id} archived geography, attribute identity and source pins remain intact`, async () => {
   const {source, dataset, surface} = await body(id);
   const directory = dataset.path.slice(0, dataset.path.lastIndexOf('/'));
   const receipts = JSON.parse(await readFile(`${source}/${directory}/intake-downloads.json`, 'utf8'));

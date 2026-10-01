@@ -83,11 +83,22 @@ export interface PreparedCataloguePoints {
   readonly id: string;
   readonly frame: DensityVolumeFrame;
   readonly appearance: { readonly colorCss: string; readonly radiusPx: number; readonly opacity: number; readonly palette?: readonly string[];
+    /** Each palette entry's own dot radius, where the bank sizes its dots (by absolute magnitude, in tiers). */
+    readonly paletteRadiusPx?: readonly number[];
     readonly levels?: readonly CataloguePointLevel[];
+    /** A bank without levels is whole within this camera distance of its origin, in its units (10 kpc when absent), and
+     * thinned with the distance beyond it. */
+    readonly fullDetailUnits?: number;
     /** The most of its dots a bank shows on screen at once: past it, an even, stable share of them is drawn. */
-    readonly screenBudget?: number };
-  /** Each point's position, and its palette colour when the bank has a palette. */
-  readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string }[];
+    readonly screenBudget?: number;
+    /** The whole bank fades out as the view's half-width at its origin shrinks from the first to the second, evenly in its
+     * logarithm, and draws nothing below it: a bank that shapes a galaxy from outside, too busy from within. */
+    readonly fadeOutUnits?: readonly [number, number];
+    /** Seen from outside its reach, the bank draws at most one dot per this many square pixels of its projected shape
+     * (PIXELS_PER_DOT when absent): a bank inside a sparser field matches the field's density, so its edge does not show. */
+    readonly outsidePixelsPerDot?: number };
+  /** Each point's position, and its palette colour (and radius, where the palette sizes its dots) when the bank has a palette. */
+  readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string; readonly radiusPx: number }[];
   /** The bank's prepared shape around its origin, written by the bake that published it. */
   readonly spread: CataloguePointSpread;
   /** Its points' prepared cells: boxes the projection skips whole when they are out of view. */
@@ -102,7 +113,18 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   const frame = parseDensityVolumeFrame(data.frame);
   const appearance = data.appearance as Record<string, unknown> | undefined;
   const colorCss = appearance?.colorCss, radiusPx = appearance?.radiusPx, opacity = appearance?.opacity, palette = appearance?.palette, levels = appearance?.levels;
-  const screenBudget = appearance?.screenBudget;
+  const screenBudget = appearance?.screenBudget, fullDetailUnits = appearance?.fullDetailUnits, fadeOutUnits = appearance?.fadeOutUnits;
+  const outsidePixelsPerDot = appearance?.outsidePixelsPerDot;
+  if (outsidePixelsPerDot !== undefined && !(typeof outsidePixelsPerDot === 'number' && outsidePixelsPerDot > 0 && Number.isFinite(outsidePixelsPerDot))) {
+    throw new TypeError(`${String(data.id)}: outsidePixelsPerDot is a positive number of square pixels, got ${JSON.stringify(outsidePixelsPerDot)}.`);
+  }
+  if (fadeOutUnits !== undefined && !(Array.isArray(fadeOutUnits) && fadeOutUnits.length === 2 && fadeOutUnits.every(value => typeof value === 'number' && Number.isFinite(value))
+      && fadeOutUnits[0] > fadeOutUnits[1] && fadeOutUnits[1] > 0)) {
+    throw new TypeError(`${String(data.id)}: fadeOutUnits is [from, to], from above to above 0, got ${JSON.stringify(fadeOutUnits)}.`);
+  }
+  if (fullDetailUnits !== undefined && (levels !== undefined || typeof fullDetailUnits !== 'number' || !(fullDetailUnits > 0 && Number.isFinite(fullDetailUnits)))) {
+    throw new TypeError(`${String(data.id)}: fullDetailUnits is a positive distance on a bank without levels, got ${JSON.stringify(fullDetailUnits)}.`);
+  }
   if (screenBudget !== undefined && !(Number.isSafeInteger(screenBudget) && (screenBudget as number) > 0)) {
     throw new TypeError(`${String(data.id)}: catalogue point screenBudget must be a positive whole number, got ${JSON.stringify(screenBudget)}.`);
   }
@@ -112,6 +134,11 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   // A palette entry may carry its own opacity as a fourth byte (#rrggbbaa).
   const entry = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}(?:[0-9a-f]{2})?$/iu.test(value);
   if (palette !== undefined && (!Array.isArray(palette) || !palette.length || !palette.every(entry))) throw new TypeError(`${data.id}: a catalogue point palette is a list of hex colours, with an optional alpha byte.`);
+  const paletteRadiusPx = appearance?.paletteRadiusPx;
+  if (paletteRadiusPx !== undefined && (!Array.isArray(palette) || !Array.isArray(paletteRadiusPx) || paletteRadiusPx.length !== palette.length
+      || !paletteRadiusPx.every(value => typeof value === 'number' && value > 0 && Number.isFinite(value)))) {
+    throw new TypeError(`${data.id}: paletteRadiusPx holds one positive radius per palette colour.`);
+  }
   if (!Array.isArray(data.points) || !data.points.length || data.points.length > MAX_CATALOGUE_POINTS) {
     throw new TypeError(`${data.id}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got ${Array.isArray(data.points) ? data.points.length : 'none'}.`);
   }
@@ -127,12 +154,16 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     }
     const colour = palette ? palette[point[3]] : colorCss;
     if (!entry(colour)) throw new TypeError(`${data.id}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
-    return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour });
+    return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour,
+      radiusPx: paletteRadiusPx ? (paletteRadiusPx as number[])[point[3]]! : radiusPx });
   });
   const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
-    ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
-    ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }) }),
+    ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(paletteRadiusPx ? { paletteRadiusPx: Object.freeze([...paletteRadiusPx as number[]]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
+    ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }),
+    ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }),
+    ...(outsidePixelsPerDot === undefined ? {} : { outsidePixelsPerDot }),
+    ...(fadeOutUnits === undefined ? {} : { fadeOutUnits: Object.freeze([...fadeOutUnits as number[]]) as unknown as readonly [number, number] }) }),
     points: Object.freeze(points), spread, cells });
 }
 
@@ -181,6 +212,8 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
   if (before) host.insertBefore(root, before); else host.append(root);
   let runtime: { readonly layers: readonly HTMLElement[]; publish(publication: VolumeCameraPublication): void; destroy(): void } | null = null, loading = false, destroyed = false;
   let latest: VolumeCameraPublication | null = null, extent: { originM: readonly number[]; radiusM: number } | null = null;
+  // The loaded bank's fade as the view narrows at its origin (its appearance's fadeOutUnits, in its units), in metres.
+  let fadeOutM: readonly [number, number] | null = null;
   // The view's half-width at the bank's origin per unit of camera distance: a stacked bank's inner levels fill in by it.
   let halfWidthPerDistance = 1;
   return Object.freeze({ root,
@@ -193,6 +226,13 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         const pixels = distanceM > extent.radiusM ? publication.viewport.focalPixels * extent.radiusM / distanceM : Infinity;
         const t = Math.max(0, Math.min(1, (pixels - EXTENT_FADE_PIXELS[0]) / (EXTENT_FADE_PIXELS[1] - EXTENT_FADE_PIXELS[0])));
         alpha *= t * t * (3 - 2 * t);
+        if (fadeOutM) {
+          // The whole bank fades out as the view's half-width at its origin narrows, evenly in its logarithm; faded out it
+          // neither draws nor projects.
+          const { widthPixels, heightPixels, focalPixels } = publication.viewport;
+          const halfWidthM = distanceM * (widthPixels && heightPixels && focalPixels > 0 ? Math.hypot(widthPixels, heightPixels) / 2 / focalPixels : halfWidthPerDistance);
+          alpha *= Math.max(0, Math.min(1, Math.log(halfWidthM / fadeOutM[1]) / Math.log(fadeOutM[0] / fadeOutM[1])));
+        }
       }
       const display = alpha > 0 ? '' : 'none';
       if (root.style.opacity !== String(alpha)) root.style.opacity = String(alpha);
@@ -211,18 +251,22 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         if (destroyed) return;
         const bank = parseCataloguePoints(value, url);
         extent = { originM: bank.frame.originM, radiusM: Math.max(...bank.points.map(point => Math.hypot(...point.positionUnits))) * bank.frame.metersPerUnit };
-        // One style object per palette entry: the projection asks for a style per point on every frame. An entry's alpha
-        // byte scales the bank's opacity.
-        const styles = new Map([...new Set(bank.points.map(point => point.colorCss))].map(colour =>
-          [colour, { colorCss: colour.slice(0, 7), radiusPx: bank.appearance.radiusPx,
+        const fadeOut = bank.appearance.fadeOutUnits;
+        fadeOutM = fadeOut ? [fadeOut[0] * bank.frame.metersPerUnit, fadeOut[1] * bank.frame.metersPerUnit] : null;
+        // One style object per palette entry (a colour at one radius): the projection asks for a style per point on every
+        // frame. An entry's alpha byte scales the bank's opacity.
+        const styleKey = (point: { colorCss: string; radiusPx: number }) => `${point.colorCss}|${point.radiusPx}`;
+        const styles = new Map([...new Map(bank.points.map(point => [styleKey(point), point] as const)).entries()].map(([key, { colorCss: colour, radiusPx }]) =>
+          [key, { colorCss: colour.slice(0, 7), radiusPx,
             opacity: bank.appearance.opacity * (colour.length === 9 ? parseInt(colour.slice(7), 16) / 255 : 1) }] as const));
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
         // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
         // bank's reach the share is also capped by how many dots its projected shape holds.
         const drawn = (distanceUnits: number, cameraUnits: VolumeVector) => Math.min(bank.appearance.levels
           ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
-          : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
-          screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0));
+          : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit,
+            bank.appearance.fullDetailUnits === undefined ? undefined : bank.appearance.fullDetailUnits * bank.frame.metersPerUnit),
+          screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0, bank.appearance.outsidePixelsPerDot));
         // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count. An inner
         // level with its own budget moves the bank's to it as the level appears, evenly in the logarithm of the half-width.
         // The levels spend it in order, outermost first: an arriving level takes what the ones already on screen leave, so
@@ -244,45 +288,47 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
         // published once more, so a still view keeps the same dots however the frames before it were paced.
         const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };
-        const mount = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
-          cells: { boxes: bank.cells.boxes, of: cellOf }, onSettle: settled,
-          drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
+        const part = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => ({ points,
+          cells: { boxes: bank.cells.boxes, of: cellOf },
+          drawnCount: (distanceUnits: number, cameraUnits: VolumeVector) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
           // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
           // keeps a path only for the colours its own dots use.
-          paintPalette: [...new Set(points.map(point => point.colorCss))].map(colour => pointPaint(styles.get(colour)!)),
-          className: `catalogue-points-${bank.id}`, stylePoint: point => styles.get(point.colorCss)! });
+          paintPalette: [...new Set(points.map(styleKey))].map(key => pointPaint(styles.get(key)!)),
+          stylePoint: (point: (typeof bank.points)[number]) => styles.get(styleKey(point))! });
+        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, parts,
+          onSettle: settled, className: `catalogue-points-${bank.id}` });
         // Each level draws as its own part: it dims to its near opacity as the innermost level fills, and takes its share
-        // of the budget after the levels outside it.
+        // of the budget after the levels outside it. The levels share one field, so they are one layer (batched-spatial-points.ts).
         const levels = bank.appearance.levels ?? [];
         let start = 0;
-        const parts = levels.map(level => { const part = { start, points: level.points, nearOpacity: level.nearOpacity ?? 1, share: 1 }; start += level.points; return part; });
-        const rebudget = (candidates: readonly number[], distanceUnits: number, shares: { share: number }[]) => {
+        const shares = levels.map(level => { const entry = { start, points: level.points, nearOpacity: level.nearOpacity ?? 1, share: 1 }; start += level.points; return entry; });
+        const rebudget = (candidates: readonly number[], distanceUnits: number, entries: { share: number }[]) => {
           if (budget === undefined) return;
           let left = budgetAt(distanceUnits);
           candidates.forEach((count, index) => {
-            shares[index]!.share = count > left ? Math.max(0, left) / count : 1;
-            left -= count * shares[index]!.share;
+            entries[index]!.share = count > left ? Math.max(0, left) / count : 1;
+            left -= count * entries[index]!.share;
           });
         };
-        if (parts.length < 2) {
-          const whole = { share: 1 }, single = mount(bank.points, bank.cells.of, total => total, () => whole.share);
+        if (shares.length < 2) {
+          const whole = { share: 1 }, single = mount([part(bank.points, bank.cells.of, total => total, () => whole.share)]);
           runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
-          const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points), bank.cells.of.subarray(part.start, part.start + part.points),
-            total => Math.max(0, Math.min(part.points, total - part.start)), () => part.share) }));
-          runtime = { layers: mounted.map(part => part.runtime.root), publish(publication) {
+          const field = mount(shares.map(entry => part(bank.points.slice(entry.start, entry.start + entry.points), bank.cells.of.subarray(entry.start, entry.start + entry.points),
+            total => Math.max(0, Math.min(entry.points, total - entry.start)), () => entry.share)));
+          runtime = { layers: [field.root], publish(publication) {
             const distanceUnits = distanceOf(publication);
             const [from, to] = innermost.appearUnits ?? [1, 1];
             const filled = from > to ? Math.max(0, Math.min(1, Math.log(from / (distanceUnits * halfWidthPerDistance)) / Math.log(from / to))) : 0;
-            for (const part of mounted) {
-              const opacity = String(1 - (1 - part.nearOpacity) * filled);
-              if (part.runtime.root.style.opacity !== opacity) part.runtime.root.style.opacity = opacity;
-              part.runtime.publish(publication);
-            }
-            rebudget(mounted.map(part => part.runtime.stats().candidates), distanceUnits, parts);
-          }, destroy() { for (const part of mounted) part.runtime.destroy(); } };
+            shares.forEach((entry, index) => {
+              const group = field.parts[index]!.group, opacity = String(1 - (1 - entry.nearOpacity) * filled);
+              if (group.style.opacity !== opacity) group.style.opacity = opacity;
+            });
+            field.publish(publication);
+            rebudget(field.parts.map(entry => entry.stats().candidates), distanceUnits, shares);
+          }, destroy: field.destroy };
         }
         root.dataset.cataloguePoints = bank.id;
         if (root.style.display !== 'none') revealLayers(runtime.layers);

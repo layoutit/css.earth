@@ -36,5 +36,5 @@ for i in picks:
     d, r = float(dn[source_line, sample]), float(response[source_line, sample])
     pairs.append({'index': int(i), 'ddr': float(data[0, line, sample]), 'dn': d, 'flat': r, 'radiance': (d / r / exposure) if r > 0 and np.isfinite(r) and d != 255 else None})
 identity = {key: label_text(find(label, key)) for key in ['DATA_SET_ID', 'INSTRUMENT_ID', 'TARGET_NAME', 'FILTER_NAME', 'START_TIME', 'EXPOSURE_DURATION']}
-write('pds3/amica-ddr.json', 'pvl', 'tests/oracles/pds3/amica-ddr.py', {'pvl': pvl.__version__, 'astropy': astropy.__version__}, [cube, label_path, original, flat],
+write('packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.json', 'pvl', 'packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.py', {'pvl': pvl.__version__, 'astropy': astropy.__version__}, [cube, label_path, original, flat],
       {'identity': identity, 'cube': {'bands': bands, 'lines': lines, 'samples': samples_per_line, 'nullHex': 'f49dc5ae'}, 'exposure': exposure, 'planes': planes, 'imagePairs': pairs})

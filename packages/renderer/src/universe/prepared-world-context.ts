@@ -40,30 +40,69 @@ type ProjectedBody = PlannedWorldContext['projectedBodies'][number];
  * orientation, the ranked members and the selection move ranks. A rotation keeps the committed order and
  * re-sorts once on release: re-ranking every frame rewrote dozens of z-indices as one body changed place. */
 function createDepthOrder<Entry extends { readonly body: { readonly positionM: readonly number[] } }>(members: readonly Entry[], base: number) {
-  let orientation: readonly number[] | null = null, selection: Entry | null = null, selectedRank = 0;
-  let ranks = new Map<Entry, number>();
+  let orientation: readonly number[] | null = null, selection: Entry | null = null, selectedRank = 0, sorted = false;
+  // Each member's index, fixed for a member list; its rank is four pick slots per place in the order.
+  const indexOf = new Map<Entry, number>();
+  let ranks = new Uint32Array(0), depths = new Float64Array(0), positions = new Float64Array(0);
+  let keys = new Uint32Array(0), from = new Uint32Array(0), to = new Uint32Array(0);
+  const counts = new Uint32Array(256);
+  // Deepest first, then member order: the order a stable sort by depth gives. A stable radix sort on the depth's bits finds
+  // it in eight linear passes, with no comparator call per pair. Each depth becomes two words that sort ascending as the
+  // depth descends: a negative depth keeps its bits, a positive one flips all but the sign.
+  const sortByDepth = (count: number) => {
+    const bits = new Uint32Array(depths.buffer, 0, count * 2);
+    for (let index = 0; index < count; index++) {
+      const low = bits[index * 2]!, high = bits[index * 2 + 1]!, negative = high >>> 31;
+      keys[index * 2] = negative ? low : ~low >>> 0; keys[index * 2 + 1] = negative ? high : (high ^ 0x7fffffff) >>> 0;
+      from[index] = index;
+    }
+    let source = from, target = to;
+    for (let pass = 0; pass < 8; pass++) {
+      const word = pass >> 2, shift = (pass & 3) * 8;
+      counts.fill(0);
+      for (let index = 0; index < count; index++) counts[(keys[source[index]! * 2 + word]! >>> shift) & 255]++;
+      // A byte every depth shares moves nothing.
+      if (counts[(keys[source[0]! * 2 + word]! >>> shift) & 255] === count) continue;
+      for (let bucket = 0, sum = 0; bucket < 256; bucket++) { const size = counts[bucket]!; counts[bucket] = sum; sum += size; }
+      for (let index = 0; index < count; index++) { const member = source[index]!; target[counts[(keys[member * 2 + word]! >>> shift) & 255]++] = member; }
+      [source, target] = [target, source];
+    }
+    for (let place = 0; place < count; place++) ranks[source[place]!] = place * 4;
+  };
+  const allocate = () => {
+    const count = members.length;
+    indexOf.clear(); members.forEach((entry, index) => indexOf.set(entry, index));
+    // Positions are fixed for a member list: copied once, then each depth is three multiplies over a flat array.
+    positions = new Float64Array(count * 3);
+    members.forEach((entry, index) => positions.set(entry.body.positionM.slice(0, 3), index * 3));
+    depths = new Float64Array(count); ranks = new Uint32Array(count); keys = new Uint32Array(count * 2);
+    from = new Uint32Array(count); to = new Uint32Array(count);
+  };
+  allocate();
   return {
     /** Hidden bodies leave the order; the next update re-sorts. */
-    setMembers(next: readonly Entry[]) { members = next; orientation = null; },
+    setMembers(next: readonly Entry[]) { members = next; orientation = null; sorted = false; allocate(); },
     update(orientationXyzw: OrientationXyzw, rotating: boolean, selected: Entry) {
       let ranksChanged = false;
       if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
         orientation = [...orientationXyzw];
         const view = cssViewFromOrientation(orientationXyzw);
-        // Each depth is taken once, not once per comparison; the stable sort keeps equal depths in member order.
-        const depths = Float64Array.from(members, ({ body: { positionM } }) => -(view[6]! * positionM[0]! + view[7]! * positionM[1]! + view[8]! * positionM[2]!));
-        const order = Array.from(members, (_, index) => index).sort((a, b) => depths[b]! - depths[a]!);
-        ranks = new Map();
-        for (let index = 0; index < order.length; index++) ranks.set(members[order[index]!]!, index * 4);
-        selection = null; ranksChanged = true;
+        const count = members.length;
+        const vx = view[6]!, vy = view[7]!, vz = view[8]!;
+        // Adding zero turns -0 into 0: the two are one depth, and their bits must sort as one.
+        for (let index = 0, offset = 0; index < count; index++, offset += 3) {
+          depths[index] = -(vx * positions[offset]! + vy * positions[offset + 1]! + vz * positions[offset + 2]!) + 0;
+        }
+        sortByDepth(count);
+        sorted = true; selection = null; ranksChanged = true;
       }
       const changed = ranksChanged || selection !== selected;
       selection = selected;
-      selectedRank = ranks.get(selected)!;
+      selectedRank = ranks[indexOf.get(selected)!]!;
       return { ranksChanged, changed };
     },
     /** Four pick slots per body: orbit and marker, label, indicator. */
-    rank: (entry: Entry) => ranks.get(entry),
+    rank: (entry: Entry) => { const index = sorted ? indexOf.get(entry) : undefined; return index === undefined ? undefined : ranks[index]; },
     /** The selected body's retained detail layers take z-index base..base+3; other bodies stack behind or in front. */
     zIndex(rank: number) { const relative = (rank - selectedRank) / 4; return String(base + (relative > 0 ? relative + 3 : relative)); },
   };
@@ -251,6 +290,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, shown bodies only move and
   // fade; nothing is revealed, retired, restyled, restacked or re-announced until the coast stops.
   let coasting = false;
+  // The camera sees the galaxy from outside (setOutsideGalaxy): names over its bright bulge turn dark (world-context.css).
+  // A restyle, so like any other it waits for a coast to stop.
+  let outsideGalaxy = false, publishedOutsideGalaxy = false;
+  const publishOutsideGalaxy = () => {
+    if (coasting || outsideGalaxy === publishedOutsideGalaxy) return;
+    publishedOutsideGalaxy = outsideGalaxy;
+    if (outsideGalaxy) root.dataset.galaxyView = 'outside'; else delete root.dataset.galaxyView;
+  };
   let labelBlockers: readonly LabelScreenRect[] = [];
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
@@ -270,7 +317,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const settleHover = () => {
     fader.setAnimationEnabled(false);
     for (const entry of animatedAnnotations) {
-      entry.marker.dataset.contextAnnotationsAnimate = 'false';
+      entry.paint.stopAnimating();
       if (!entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
     }
     animatedAnnotations.clear();
@@ -396,11 +443,18 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (depthChanged) refreshDepthBodies();
       if (changed) { invalidatePolicy(); refresh(); }
     },
+    /** Whether the camera is outside the galaxy, looking at it as a whole rather than from among its stars. */
+    setOutsideGalaxy(outside: boolean) {
+      if (destroyed) return;
+      outsideGalaxy = outside;
+      publishOutsideGalaxy();
+    },
     /** The camera coasts on inertia (camera-motion-signal.ts). Held membership lands on the first frame after. */
     setCoasting(active: boolean) {
       if (destroyed || active === coasting) return;
       coasting = active;
       if (active) { hoverIntent = false; settleHover(); return; }
+      publishOutsideGalaxy();
       invalidatePolicy();
       refresh();
     },
@@ -497,11 +551,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const candidates = !policyChanged ? delta.changed : frame.projectedBodies;
       const projectedBodies = candidates.map(projected => {
         const entry = bodies[projected.index];
-        entry.labelShown = projected.labelShown;
-        entry.labelPlacement = projected.labelPlacement;
-        entry.indicatorShown = projected.indicatorShown;
+        // These fields write through to the body's columns (bindWorldBodyColumns); an unchanged one skips its setter.
+        if (entry.labelShown !== projected.labelShown) entry.labelShown = projected.labelShown;
+        if (entry.labelPlacement !== projected.labelPlacement) entry.labelPlacement = projected.labelPlacement;
+        if (entry.indicatorShown !== projected.indicatorShown) entry.indicatorShown = projected.indicatorShown;
         entry.indicatorCutout = projected.indicatorCutout;
-        entry.orbitAppearance = projected.orbitAppearance;
+        const orbit = entry.orbitAppearance, next = projected.orbitAppearance;
+        if (orbit.width !== next.width || orbit.opacity !== next.opacity) entry.orbitAppearance = next;
         const changed = delta.changes.get(projected.index) ?? 0;
         const mask = policyChanged ? ContextChange.all : changed;
         return { projected, entry, mask };

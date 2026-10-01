@@ -1,3 +1,4 @@
+import { showSection } from './detached-sections.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
 /** Eye in raw prepared scene coordinates; no DOM/style or geometry derivation. */
@@ -22,6 +23,10 @@ export interface PreparedDepthPartitions {
 }
 
 export interface DepthPartitionNode { hidden: boolean; style: Pick<CSSStyleDeclaration, 'transform' | 'zIndex'>; }
+/** A partition's scene follows the body's: off the page while the body is hidden (detached-sections.ts). */
+const setShown = (node: DepthPartitionNode, shown: boolean) => {
+  if (typeof HTMLElement !== 'undefined' && node instanceof HTMLElement) showSection(node, shown); else node.hidden = !shown;
+};
 
 /** Retained paint contexts share the camera's already-published transform.
  * Only prepared priorities and plane signs determine their painter order. No face sorting,
@@ -40,7 +45,7 @@ export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | un
     if (transform !== nextTransform || hidden !== nextHidden) {
       for (const group of groups) {
         if (transform !== nextTransform) group.scene.style.transform = nextTransform;
-        if (hidden !== nextHidden) group.scene.hidden = nextHidden;
+        if (hidden !== nextHidden) setShown(group.scene, !nextHidden);
       }
       transform = nextTransform; hidden = nextHidden;
     }

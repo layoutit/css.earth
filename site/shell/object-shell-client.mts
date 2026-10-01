@@ -12,7 +12,7 @@ import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focu
 import { selectionKey } from '../scene/scene-selection.mts';
 import type { DestinationPresentation } from '../destination-browser.mts';
 import type { ShellCamera, PlaybackState } from '../browser/browser-types.mts';
-import { errorMessage, requiredElement } from '../browser/browser-types.mts';
+import { errorMessage, requiredElement, sectionElement } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { createSceneLifetime } from "@cssearth/engine";
@@ -22,6 +22,7 @@ import { mountDiagnosticRecorder } from '../diagnostic-recorder.mts';
 import { bindNavigationIntent, navigationFragments } from '../navigation/navigation-fragments.mts';
 import { createSheetController } from './shell-sheet.mts';
 import { bindDatasetPicker } from '../dataset-picker.mts';
+import { mountLayoutSections } from '../layout-sections.mts';
 import { createSettingsController } from './shell-settings.mts';
 import { mountInformationCard, createTabsController } from '../information-card.mts';
 import type { ObjectShell, ShellOptions, ShellNavigationTarget, ShellNavigationTransition } from './object-shell-types.mts';
@@ -41,10 +42,13 @@ export function mountObjectShell({
   const navigationProgress = documentTarget.querySelector<HTMLElement>('.explorer-navigation-progress');
   lifetime.onDispose(() => { if (navigationProgress) navigationProgress.ariaHidden = 'true'; });
   bindDatasetPicker(documentTarget, windowTarget, lifetime);
+  const layoutSections = new AbortController();
+  lifetime.onDispose(() => layoutSections.abort());
+  mountLayoutSections(documentTarget, windowTarget, layoutSections.signal);
   // Closed tabs' panels are not mounted (tab-panels.mts).
   const tabPanels = new AbortController();
   lifetime.onDispose(() => tabPanels.abort());
-  bindTabPanels(documentTarget, tabPanels.signal);
+  const tabs = bindTabPanels(documentTarget, tabPanels.signal);
   const fragments = navigationFragments(windowTarget);
   let informationCard: ReturnType<typeof mountInformationCard>;
   let sheet: ReturnType<typeof createSheetController>;
@@ -93,7 +97,7 @@ export function mountObjectShell({
   lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
   function updateBodyCard() {
     if (coasting || navigationTransition?.retainsSourceCard) return;
-    if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
+    if (!information || !drawer.contains(sectionPlaceholder(information))) information = sectionElement(drawer, '.object-information-panel');
     const subject = navigationTransition?.cardSubject ?? (readSelection().kind === 'satellite-system' ? 'satellite-system' : 'body');
     const view = subject === 'satellite-system' ? 'overview' : 'detail';
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
@@ -238,7 +242,7 @@ export function mountObjectShell({
         settlePreview(keep);
         if (content) {
           setObject(content);
-          const controls = [...drawer.querySelectorAll<HTMLElement>('.object-information-panel .object-card-tabs, .object-information-panel [data-information-panel]')]
+          const controls = [...sectionElement(drawer, '.object-information-panel')?.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]') ?? []]
             .filter(node => node.dataset.informationGroup !== 'overview').map(node => [node, node.inert] as const);
           for (const [node] of controls) node.inert = true;
           releaseArrivalControls = () => { for (const [node, inert] of controls) if (node.inert !== inert) node.inert = inert; };
@@ -294,6 +298,7 @@ export function mountObjectShell({
   function mountContent(id: string) {
     const owner = contentLifetime = createSceneLifetime();
     informationCard = mountInformationCard(drawer, id, windowTarget, owner);
+    tabs.sync();
     settingsController.bindObject();
     bindCardMaps();
     const subject = readSelection();

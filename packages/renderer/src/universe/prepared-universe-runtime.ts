@@ -39,7 +39,7 @@ const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 /** Hidden, unsubscribed dataset banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
   const plan = parsePreparedWorldContextPlan(context), payload = validatePreparedCssVolume(volume);
   if (volumeDatasetBanks.length && !datasetBillboards) throw new TypeError('Volume dataset banks require their prepared billboards.');
   const datasetFacts = volumeDatasetBanks.map(bank => {
@@ -167,6 +167,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeDatasetBanks,
+          pointBanks,
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
@@ -182,6 +183,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const caption = () => previewCaption ?? captionBody;
         const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: detailedFocus !== null, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
+        const pointBankIds = new Set(pointBanks.map(bank => bank.id));
+        let selectedPoints: string | undefined;
         background.mount();
         catalogBanks.loadInitialImages();
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
@@ -223,7 +226,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             const changed = next?.objectId !== detailedFocus?.objectId || next?.focus.framingRadiusM !== detailedFocus?.focus.framingRadiusM ||
               next?.focus.positionM.some((value, axis) => value !== detailedFocus?.focus.positionM[axis]);
             detailedFocus = next;
+            // A package of catalogue dots draws them for its selected row, without the detailed focus's context fade.
+            const points = record?.detailedObjectId !== undefined && pointBankIds.has(record.detailedObjectId) ? record.detailedObjectId : undefined;
+            const pointsChanged = points !== selectedPoints;
+            selectedPoints = points;
             catalogBanks.catalog?.select(id);
+            if (pointsChanged) requestPublication?.();
             if (changed) requestPublication?.();
           },
           resolveGalaxy(id: string) { return catalogBanks.catalog?.resolve(id) ?? null; },
@@ -288,8 +296,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
-              additionalPoints.publish({world, viewport}, distanceM, galaxyOutsideFade(
-                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM));
+              const outsideGalaxy = galaxyOutsideFade(
+                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM);
+              additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
+              // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
+              spatial.setOutsideGalaxy(outsideGalaxy > .5);
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
               const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);
@@ -300,6 +311,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
+              catalogBanks.publishPoints(world, viewport, selectedPoints);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
                 selectedBodyContextOpacity(world, viewport, captionBody));
               for (const [index, shell] of shellLayers.entries()) {

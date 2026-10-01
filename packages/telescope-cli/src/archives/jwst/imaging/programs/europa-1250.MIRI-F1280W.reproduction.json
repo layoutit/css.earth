@@ -3,7 +3,7 @@
   "program": "europa-1250",
   "band": "MIRI-F1280W",
   "observation": "jw01250-o004_t001_miri_f1280w-sub64",
-  "toolchain": "tools/objects/jwst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/jwst/toolchain.json",
   "crdsContext": "jwst_1535.pmap",
   "mast": {
     "name": "jw01250-o004_t001_miri_f1280w-sub64_i2d.fits",

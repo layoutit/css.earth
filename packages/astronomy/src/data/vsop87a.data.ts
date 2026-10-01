@@ -1,9 +1,9 @@
 // GENERATED FILE — do not edit by hand.
 //
 // Source:    VSOP87A (Bretagnon & Francou 1988, A&A 202, 309), CDS VI/81, files VSOP87A.{mer,ven,emb,mar,jup,sat,ura,nep}
-// Generator: packages/astronomy/tools/generate-series.mjs
+// Generator: packages/astronomy/cli/generate-series.mts
 //
-// Regenerate with `node tools/generate-series.mjs` from packages/astronomy. The
+// Regenerate with `node cli/generate-series.mts` from packages/astronomy. The
 // generator re-downloads the source series, re-derives the truncation, and
 // prints the error budget it certifies; the numbers in README.md come from it.
 

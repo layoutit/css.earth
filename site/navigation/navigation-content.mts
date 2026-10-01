@@ -1,5 +1,5 @@
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { requiredElement, setLinkSelected } from '../browser/browser-types.mts';
+import { requiredElement, requiredSection, sectionElement, setLinkSelected } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
 import { createNavigationStyles, type NavigationStyleStage } from './navigation-styles.mts';
@@ -46,14 +46,14 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
       if (!descriptor) { releaseSource(); throw new Error(`Object ${object.id} navigation content has no prepared descriptor.`); }
       const required = ['.object-sidebar', '.object-sidebar-search', '.object-drawer-content',
         '.object-information-panel', '.object-settings-panel'];
-      for (const selector of required) if (!readSource().querySelector(selector) || !documentTarget.querySelector(selector)) {
+      for (const selector of required) if (!sectionElement(readSource(), selector) || !sectionElement(documentTarget, selector)) {
         releaseSource();
         throw new Error(`Object shell content is missing ${selector}.`);
       }
       // Navigation fragments deliberately omit the shared object browser. Its
       // Atlas tree and deferred catalogue belong to the retained shell, not to
       // every destination fragment.
-      if (!documentTarget.querySelector('.object-browser')) {
+      if (!sectionElement(documentTarget, '.object-browser')) {
         releaseSource();
         throw new Error('Retained object shell content is missing .object-browser.');
       }
@@ -79,7 +79,8 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               committed = true;
               signal.removeEventListener('abort', dispose);
               for (const selector of ['.object-information-panel', '.object-settings-panel']) {
-                const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
+                // Either card may wait off its page (detached-sections.ts); its contents still swap.
+                const target = sectionElement(documentTarget, selector), incoming = sectionElement(incomingSource, selector);
                 if (!target || !incoming) throw new Error(`Object shell content disappeared: ${selector}.`);
                 // The router retires the source scene before publishing this card.
                 if (selector === '.object-settings-panel') updateSettingsPanel(target, incoming);
@@ -88,7 +89,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               // The hidden form and its view-context inputs belong to the shell.
               // Native submission refreshes their values from the current URL.
               for (const selector of [...required, '[data-settings-form]', '.object-sheet-handle', '.object-settings-action']) {
-                const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
+                const target = sectionElement(documentTarget, selector), incoming = sectionElement(incomingSource, selector);
                 if (!target || !incoming) continue;
                 for (const name of ['id', 'action', 'aria-label', 'aria-controls', 'aria-labelledby', 'popovertarget', 'placeholder', 'data-has-destinations']) {
                   const value = incoming.getAttribute(name);
@@ -97,14 +98,14 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
                   }
                 }
               }
-              const footer = documentTarget.querySelector<HTMLElement>('.object-attribution-footer'), incomingFooter = incomingSource.querySelector('.object-attribution-footer');
+              const footer = sectionElement(documentTarget, '.object-attribution-footer'), incomingFooter = incomingSource.querySelector('.object-attribution-footer');
               if (footer) {
                 if (footer.hidden !== !incomingFooter) footer.hidden = !incomingFooter;
                 if (incomingFooter) {
                   updateShellElement(footer, incomingFooter);
                 }
               } else if (incomingFooter) {
-                const readout = documentTarget.querySelector('.object-view-readout') ?? documentTarget.body;
+                const readout = sectionElement(documentTarget, '.object-view-readout') ?? documentTarget.body;
                 readout.prepend(documentTarget.importNode(incomingFooter, true));
               }
               documentTarget.title = incomingSource.title;
@@ -120,7 +121,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
                 } else documentTarget.head.append(documentTarget.importNode(incoming, true));
               }
               // The shell marker is structural; scene identity belongs to the stage.
-              requiredElement(documentTarget, '.object-browser').id = `${object.id}-object-browser`;
+              requiredSection(documentTarget, '.object-browser').id = `${object.id}-object-browser`;
               publishPreparedDescriptor(documentTarget, descriptor);
               const stage = requiredElement(documentTarget, '.object-stage'), input = documentTarget.querySelector('.object-input-surface');
               if (stage.dataset.objectId !== object.id) stage.dataset.objectId = object.id;

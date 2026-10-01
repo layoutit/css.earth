@@ -1,9 +1,16 @@
 import { readFile } from 'node:fs/promises';
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { createWorldContextFrameEncoder, createWorldContextFrameReceiver, contextFrameTransfers } from './world-context-frame.js';
+
+// A received frame omits keys the full frame holds as undefined; compare the defined values.
+const defined = (value: unknown): unknown => Array.isArray(value) ? value.map(defined)
+  : value && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype
+    ? Object.fromEntries(Object.entries(value).filter(([, item]) => item !== undefined).map(([key, item]) => [key, defined(item)])) : value;
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
 // Tests move the observer in place; the planner itself receives the readonly view.
@@ -33,20 +40,20 @@ test('delta transport exactly reconstructs prepared projections across camera, h
     for (const body of full.projectedBodies) {
       const xs = body.segments.flatMap(segment => [segment[0], segment[2]]);
       const ys = body.segments.flatMap(segment => [segment[1], segment[3]]);
-      expect(body.orbitBounds).toEqual(xs.length ? {
+      assert.deepEqual(body.orbitBounds, xs.length ? {
         left: Math.min(...xs), right: Math.max(...xs), top: Math.min(...ys), bottom: Math.max(...ys),
       } : null);
     }
     const packet = encode(++id, receive.committedId, full);
     const wire = structuredClone(packet, { transfer: contextFrameTransfers(packet) });
     const resolved = receive.accept(wire);
-    expect(resolved.frame).toEqual(full);
+    assert.deepEqual(defined(resolved.frame), defined(full));
     // Changed bodies are resolved by prepared index, not by list position: with only
     // the locators publishing, the placed star's index is far beyond its position.
-    if (input.anchorOnly) expect(full.projectedBodies.some((body, position) => body.index !== position)).toBe(true);
-    for (const body of resolved.changed) expect(resolved.frame.projectedBodies.find(candidate => candidate.index === body.index)).toBe(body);
+    if (input.anchorOnly) assert.equal(full.projectedBodies.some((body, position) => body.index !== position), true);
+    for (const body of resolved.changed) assert.equal(resolved.frame.projectedBodies.find(candidate => candidate.index === body.index), body);
     // Receiver publication is the only owner of the next acknowledgement.
-    expect(receive.committedId).toBe(id);
+    assert.equal(receive.committedId, id);
   }
 });
 
@@ -55,10 +62,10 @@ test('unchanged frames send no bodies or orbit segments and retain receiver iden
   const input = view();
   const first = receive.accept(structuredClone(encode(1, 0, calculate(input))));
   const next = structuredClone(encode(2, receive.committedId, calculate(input)));
-  expect(next.updates).toEqual([]);
+  assert.deepEqual(next.updates, []);
   const second = receive.accept(next);
-  expect(second.changes.size).toBe(0);
-  expect(second.frame.projectedBodies.every((body, i) => body === first.frame.projectedBodies[i])).toBe(true);
+  assert.equal(second.changes.size, 0);
+  assert.equal(second.frame.projectedBodies.every((body, i) => body === first.frame.projectedBodies[i]), true);
 });
 
 test('off-screen camera motion sends no unused marker state, and reveal repairs it', () => {
@@ -66,18 +73,18 @@ test('off-screen camera motion sends no unused marker state, and reveal repairs 
   const input = view(), visibleViewport = input.viewport;
   input.viewport = { ...visibleViewport, principalOffsetPixels: [1e9, 1e9] };
   const first = receive.accept(structuredClone(encode(1, 0, calculate(input))));
-  expect(first.frame.projectedBodies.every(body => !body.visible && !body.annotationVisible && body.segments.length === 0)).toBe(true);
+  assert.equal(first.frame.projectedBodies.every(body => !body.visible && !body.annotationVisible && body.segments.length === 0), true);
   input.world.pose.positionM[2] += 1e9;
   const packet = encode(2, receive.committedId, calculate(input));
-  expect(packet.updates).toEqual([]);
+  assert.deepEqual(packet.updates, []);
   receive.accept(structuredClone(packet));
   input.viewport = visibleViewport;
   const visible = structuredClone(calculate(input));
   const revealed = receive.accept(structuredClone(encode(3, receive.committedId, visible)));
-  expect(revealed.frame).toEqual(visible);
-  expect(revealed.frame.projectedBodies.some(body => body.visible && body.markerOpacity > 0)).toBe(true);
+  assert.deepEqual(defined(revealed.frame), defined(visible));
+  assert.equal(revealed.frame.projectedBodies.some(body => body.visible && body.markerOpacity > 0), true);
   for (const body of revealed.frame.projectedBodies) {
-    for (const scratch of ['depth', 'priority', 'indicatorOpacity', 'inFrame']) expect(body).not.toHaveProperty(scratch);
+    for (const scratch of ['depth', 'priority', 'indicatorOpacity', 'inFrame']) assert.ok(!(scratch in body));
   }
 });
 
@@ -92,13 +99,13 @@ test('camera updates reuse numeric chord slots and carry no formatted CSS or SVG
   const packet = encode(2, receive.committedId, expected);
   const second = receive.accept(structuredClone(packet, { transfer: contextFrameTransfers(packet) }));
   const next = second.frame.projectedBodies[body.index];
-  expect(second.frame).toEqual(expected);
-  expect(next.segments).toBe(bank);
-  expect(next.segments[0]).toBe(slot);
-  expect(next.segments[0]).not.toEqual(before);
-  expect(next).not.toHaveProperty('transforms');
-  expect(next).not.toHaveProperty('strokePaths');
-  expect(next).not.toHaveProperty('orbitClip');
+  assert.deepEqual(defined(second.frame), defined(expected));
+  assert.equal(next.segments, bank);
+  assert.equal(next.segments[0], slot);
+  assert.notDeepEqual(next.segments[0], before);
+  assert.ok(!("transforms" in next));
+  assert.ok(!("strokePaths" in next));
+  assert.ok(!("orbitClip" in next));
 });
 
 test('hidden bodies send retirement once, then no camera-only body patches', () => {
@@ -108,11 +115,11 @@ test('hidden bodies send retirement once, then no camera-only body patches', () 
   receive.accept(structuredClone(encode(1, 0, calculate(input))));
   input.world.pose.positionM[0] += 1e10;
   const next = encode(2, receive.committedId, calculate(input));
-  expect(next.updates.find(update => update.index === 1)).toBeUndefined();
+  assert.equal(next.updates.find(update => update.index === 1), undefined);
   receive.accept(structuredClone(next));
   input.bodies[1].bodyHidden = false;
   const visible = structuredClone(calculate(input));
-  expect(receive.accept(encode(3, receive.committedId, visible)).frame).toEqual(visible);
+  assert.deepEqual(defined(receive.accept(encode(3, receive.committedId, visible)).frame), defined(visible));
 });
 
 test('an incomplete growth patch cannot resize the retained chord bank', () => {
@@ -123,9 +130,9 @@ test('an incomplete growth patch cannot resize the retained chord bank', () => {
   input.world.pose.positionM[0] += 1e9;
   const malformed = structuredClone(encode(2, 1, calculate(input)));
   malformed.updates.find(update => update.index === body.index)!.orbit!.count += 1;
-  expect(() => receive.accept(malformed)).toThrow('omitted a new slot');
-  expect(body.segments).toEqual(before);
-  expect(receive.committedId).toBe(1);
+  assert.throws(() => receive.accept(malformed), /omitted a new slot/);
+  assert.deepEqual(body.segments, before);
+  assert.equal(receive.committedId, 1);
 });
 
 test('a discarded worker result cannot become a publication baseline, and costs no full repair', () => {
@@ -133,16 +140,16 @@ test('a discarded worker result cannot become a publication baseline, and costs 
   const input = view(); receive.accept(structuredClone(encode(1, 0, calculate(input))));
   input.world.pose.positionM[2] *= 2;
   const dropped = structuredClone(encode(2, receive.committedId, calculate(input)));
-  expect(dropped.baseId).toBe(1);
+  assert.equal(dropped.baseId, 1);
   input.world.pose.positionM[2] *= 2;
   const full = structuredClone(calculate(input));
   // The baseline is the frame the client acknowledged, so the repair is an
   // ordinary delta against it; the discarded frame's state is never promoted,
   // which the resolved frame below proves by matching the full plan exactly.
   const repair = structuredClone(encode(3, receive.committedId, full));
-  expect(repair.baseId).toBe(1); expect(receive.accept(repair).frame).toEqual(full);
-  expect(() => receive.accept(dropped)).toThrow('baseline is stale');
-  expect(receive.committedId).toBe(3);
+  assert.equal(repair.baseId, 1); assert.deepEqual(defined(receive.accept(repair).frame), defined(full));
+  assert.throws(() => receive.accept(dropped), /baseline is stale/);
+  assert.equal(receive.committedId, 3);
 });
 
 test('one edited chord sends one slot; shrinking and regrowing restores every leaf', () => {
@@ -155,11 +162,11 @@ test('one edited chord sends one slot; shrinking and regrowing restores every le
   const changed = structuredClone(full), next = changed.projectedBodies[body.index];
   next.segments = next.segments.map((segment, i) => i === 1 ? [segment[0] + 1, ...segment.slice(1)] as typeof segment : segment);
   const packet = encode(2, 1, changed);
-  expect([...packet.updates.find(update => update.index === body.index)!.orbit!.indices]).toEqual([1]);
-  expect(receive.accept(packet).frame).toEqual(changed);
+  assert.deepEqual(([...packet.updates.find(update => update.index === body.index)!.orbit!.indices]), [1]);
+  assert.deepEqual(defined(receive.accept(packet).frame), defined(changed));
   next.segments = next.segments.slice(0, 1);
   const shrink = encode(3, 2, changed);
-  expect(shrink.updates.find(update => update.index === body.index)!.orbit!.indices.length).toBe(0);
-  expect(receive.accept(shrink).frame).toEqual(changed);
-  expect(receive.accept(encode(4, 3, full)).frame).toEqual(full);
+  assert.equal(shrink.updates.find(update => update.index === body.index)!.orbit!.indices.length, 0);
+  assert.deepEqual(defined(receive.accept(shrink).frame), defined(changed));
+  assert.deepEqual(defined(receive.accept(encode(4, 3, full)).frame), defined(full));
 });

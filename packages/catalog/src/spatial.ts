@@ -53,8 +53,8 @@ export interface PreparedGalaxyRecord {
   readonly halfLightRadius?: SpatialMeasurement;
   readonly hostId?: string;
   readonly membership: {
-    readonly group: 'local-group' | 'local-volume' | 'uncertain';
-    readonly subgroup: 'milky-way' | 'andromeda' | 'field' | 'unknown';
+    readonly group: 'local-group' | 'local-volume' | 'galaxy-cluster' | 'uncertain';
+    readonly subgroup: 'milky-way' | 'andromeda' | 'field' | 'virgo' | 'unknown';
     readonly basis: string;
     readonly sourceRef?: string;
   };
@@ -128,8 +128,8 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
     if (row.halfLightRadius !== undefined) boundReference(measurement(row.halfLightRadius, 'half-light radius').sourceRef, 'half-light radius reference');
     if (row.hostId !== undefined) text(row.hostId, 'host id');
     const membership = record(row.membership, 'membership');
-    if (!['local-group', 'local-volume', 'uncertain'].includes(String(membership.group)) ||
-        !['milky-way', 'andromeda', 'field', 'unknown'].includes(String(membership.subgroup))) {
+    if (!['local-group', 'local-volume', 'galaxy-cluster', 'uncertain'].includes(String(membership.group)) ||
+        !['milky-way', 'andromeda', 'field', 'virgo', 'unknown'].includes(String(membership.subgroup))) {
       throw new TypeError('Unknown catalogue membership classification.');
     }
     text(membership.basis, 'membership evidence');

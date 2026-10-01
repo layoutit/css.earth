@@ -5,8 +5,8 @@ import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { binaryTable, findTable, numbers, readFitsHdus, tableColumn, text, writeCell } from '@cssearth/bake/objects/raster';
 
-const fixture = await readOracleFixture('fits/binary-table.json');
-const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/binary-table-columns.fits');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json');
+const input = fixture.inputs.find(entry => entry.path === 'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits');
 assert.ok(input);
 const bytes = await readOracleInput({ ...input, path: 'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits' }), entry = requireRecord(fixture.cases['oi-test']);
 

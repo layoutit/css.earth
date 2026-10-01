@@ -1,7 +1,8 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow, PlaybackState } from '../browser/browser-types.mts';
 import type { WorldPreferences } from '../world-preferences.mts';
-import { requiredElement } from '../browser/browser-types.mts';
+import { requiredElement, requiredSection } from '../browser/browser-types.mts';
+import { showSection } from '@cssearth/renderer';
 
 export function createSettingsController(
   documentTarget: Document,
@@ -9,12 +10,15 @@ export function createSettingsController(
   preferences: WorldPreferences,
   lifetime: SceneLifetime,
 ) {
-  const motion = documentTarget.querySelector(".object-motion-setting");
-  const lightCurves = documentTarget.querySelector(".object-light-curves-setting");
-  const heliosphere = documentTarget.querySelector(".object-heliosphere-setting");
-  const illustrationModels = documentTarget.querySelector(".object-illustration-models-setting");
-  const surfaceLabels = documentTarget.querySelector(".object-surface-labels-setting");
-  let speed = documentTarget.querySelector<HTMLInputElement>(
+  // The panel is mounted only while it is open: the gear mounts it just before its popover opens, and closing takes it off
+  // the page again (detached-sections.ts). The server renders it mounted, so the gear works without JavaScript.
+  const panel = requiredSection(documentTarget, '.object-settings-panel');
+  const motion = panel.querySelector(".object-motion-setting");
+  const lightCurves = panel.querySelector(".object-light-curves-setting");
+  const heliosphere = panel.querySelector(".object-heliosphere-setting");
+  const illustrationModels = panel.querySelector(".object-illustration-models-setting");
+  const surfaceLabels = panel.querySelector(".object-surface-labels-setting");
+  let speed = panel.querySelector<HTMLInputElement>(
     '.object-speed-setting[type="range"][name="speed"]',
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) || !(lightCurves instanceof windowTarget.HTMLInputElement) ||
@@ -26,6 +30,14 @@ export function createSettingsController(
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
+  const opening = (event: Event) => {
+    if (event.target instanceof windowTarget.Element && event.target.closest(`[popovertarget="${panel.id}"]`)) showSection(panel, true);
+  };
+  documentTarget.addEventListener('click', opening, { capture: true, signal: events.signal });
+  panel.addEventListener('toggle', event => { if ((event as ToggleEvent).newState === 'closed') showSection(panel, false); }, { signal: events.signal });
+  // The shell starts before anyone can open the panel.
+  showSection(panel, false);
+  lifetime.onDispose(() => showSection(panel, true));
   const inputs = { motionEnabled: motion, lightCurvesEnabled: lightCurves, heliosphereEnabled: heliosphere,
     illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels };
   type Toggle = keyof typeof inputs;
@@ -54,7 +66,7 @@ export function createSettingsController(
   const explanation = requiredElement(row, ".object-motion-blocked");
   return Object.freeze({
     bindObject() {
-      const next = documentTarget.querySelector('.object-speed-setting[type="range"][name="speed"]');
+      const next = panel.querySelector('.object-speed-setting[type="range"][name="speed"]');
       if (next !== null && !(next instanceof windowTarget.HTMLInputElement)) throw new Error('Object speed control is invalid.');
       speed = next;
       render();

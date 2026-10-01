@@ -22,7 +22,7 @@ const run = (args: string[], command = process.execPath) => {
   if (result.status !== 0) process.exit(result.status ?? 1);
 };
 // The reader's own behaviour tests, including the float32 transport image, are the package's.
-run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
+run(['--import', './packages/core/src/node/register-vite-suffix.mts', '--test', 'packages/fits/src/**/*.test.ts']);
 const unit = ['packages/bake/src/objects/cameras/core.oracle.test.mts', 'packages/bake/src/objects/cameras/sky-orientation.oracle.test.mts', 'packages/bake/src/objects/cameras/sky-projection.oracle.test.mts',
   'packages/fits/src/node/file-region.oracle.test.mts', 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.oracle.test.mts',
   'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'packages/bake/src/objects/color/color-transfer.oracle.test.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.oracle.test.mts',
@@ -38,7 +38,7 @@ run(['labs/nebula/run.mts', 'test', 'getsf', 'sampled-prior', 'ownership', 'sour
 if (args.includes('--unit')) process.exit(0);
 
 const inputs = new Map<string, { path: string; bytes?: number }>();
-for (const name of ['fits/encounter.json', 'fits/llorri.json', 'fits/charon-leisa.json', 'fits/synoptic.json', 'fits/pallas.json', '../../packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json'])
+for (const name of ['packages/bake/src/objects/layers/terrestrial/missions/encounter.json', 'packages/bake/src/objects/layers/terrestrial/missions/llorri.json', 'packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json', 'packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json', 'packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json', 'packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json'])
   for (const input of (await readOracleFixture(name)).inputs) inputs.set(input.path, input);
 for (const id of ['didymos', 'dimorphos', 'arrokoth', 'pluto']) {
   const source = resolve(ORACLE_ROOT, 'src/objects', id, 'source');

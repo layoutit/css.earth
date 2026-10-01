@@ -41,4 +41,4 @@ for k, body in enumerate(['comet-9p', 'comet-81p', 'comet-103p']):
         'qualityHistogram': {str(int(v)): int(c) for v, c in zip(*np.unique(quality, return_counts=True))},
         'reasons': {'detector-overclock': int((~inside).sum()), 'detector-quality': int((inside & ~good).sum()),
                     'nonfinite-radiance': int((inside & good & ~finite).sum()), 'accepted': int((inside & good & finite).sum())}}
-write('fits/encounter.json', 'astropy', 'tests/oracles/fits/encounter.py', {'astropy': astropy.__version__}, inputs, {'products': products})
+write('packages/bake/src/objects/layers/terrestrial/missions/encounter.json', 'astropy', 'packages/bake/src/objects/layers/terrestrial/missions/encounter.py', {'astropy': astropy.__version__}, inputs, {'products': products})

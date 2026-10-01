@@ -1,4 +1,5 @@
 import { presentFeatureResults } from './search/search-results-presentation.mts';
+import { sectionElement } from './browser/browser-types.mts';
 import type { FindResult } from './search/find-protocol.mts';
 export type { FindResult } from './search/find-protocol.mts';
 
@@ -7,7 +8,7 @@ export type { FindResult } from './search/find-protocol.mts';
 export function createFeatureBrowser({ documentTarget, onSelected }: {
   documentTarget: Document; onSelected(result: FindResult): void;
 }) {
-  const candidate = documentTarget.querySelector<HTMLElement>('.object-feature-results');
+  const candidate = sectionElement(documentTarget, '.object-feature-results');
   if (!candidate) return null;
   const root = candidate;
   const buttons = [...root.querySelectorAll<HTMLAnchorElement>('.object-destination-result')];

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "peng-gc",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BPJB2009%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F703%2F42%2Ftable1%22",
+    "bytes": 56957,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "spheroid",
+    "converter": "Each sky position at a depth drawn from the spheroid's density along its sight line (frame.spheroid).",
+    "spheroid": {
+      "centerRaDeg": 187.70593076725,
+      "centerDecDeg": 12.391123246083334,
+      "distancePc": 16800000,
+      "halfLightRadiusKpc": 69.68,
+      "sersicIndex": 11.89,
+      "axisRatio": 0.548,
+      "axisPositionAngleDeg": 243.2,
+      "cutoffHalfLightRadii": 2.8,
+      "source": "kormendy-2009-virgo-ellipticals",
+      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/m87/experiment.json shapePrior): a Sérsic fit to Kormendy et al.'s (2009) Table 3 profile, axis along M87's minor axis in the plane of the sky, ending at 2.8 half-light radii. Each cluster's depth is drawn from it, not measured."
+    }
+  },
+  "source": "peng-2009-m87-globular-clusters",
+  "meaning": "Globular clusters in the Hubble ACS field on M87's centre (Peng et al. 2009): one dot per cluster at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange."
+  }
+}

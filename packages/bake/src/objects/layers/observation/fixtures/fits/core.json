@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "astropy",
- "generatedBy": "tools/oracles/fits/core.py",
+ "generatedBy": "packages/bake/src/objects/cameras/fixtures/fits/core.py",
  "tool": {
   "astropy": "8.0.1",
   "python": "3.12.14",
@@ -9,45 +9,45 @@
  },
  "inputs": [
   {
-   "path": "tests/fixtures/fits/byte.fits",
+   "path": "packages/fits/src/node/fixtures/fits/byte.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/scaled-blank.fits",
+   "path": "packages/fits/src/node/fixtures/fits/scaled-blank.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/signed-int32.fits",
+   "path": "packages/fits/src/node/fixtures/fits/signed-int32.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/float32.fits",
+   "path": "packages/fits/src/node/fixtures/fits/float32.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/float64.fits",
+   "path": "packages/fits/src/node/fixtures/fits/float64.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/cube.fits",
+   "path": "packages/fits/src/node/fixtures/fits/cube.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/eso-hierarchy.fits",
+   "path": "packages/fits/src/node/fixtures/fits/eso-hierarchy.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/long-string.fits",
+   "path": "packages/fits/src/node/fixtures/fits/long-string.fits",
    "bytes": 5760
   },
   {
-   "path": "tests/fixtures/fits/extensions.fits",
+   "path": "packages/fits/src/node/fixtures/fits/extensions.fits",
    "bytes": 8640
   }
  ],
  "cases": {
   "byte": {
-   "path": "tests/fixtures/fits/byte.fits",
+   "path": "packages/fits/src/node/fixtures/fits/byte.fits",
    "dimensions": [
     2,
     2
@@ -62,7 +62,7 @@
    "observer": "O'Brien / field"
   },
   "scaled-blank": {
-   "path": "tests/fixtures/fits/scaled-blank.fits",
+   "path": "packages/fits/src/node/fixtures/fits/scaled-blank.fits",
    "dimensions": [
     2,
     2
@@ -77,7 +77,7 @@
    "observer": "O'Brien / field"
   },
   "signed-int32": {
-   "path": "tests/fixtures/fits/signed-int32.fits",
+   "path": "packages/fits/src/node/fixtures/fits/signed-int32.fits",
    "dimensions": [
     2,
     2
@@ -92,7 +92,7 @@
    "observer": "O'Brien / field"
   },
   "float32": {
-   "path": "tests/fixtures/fits/float32.fits",
+   "path": "packages/fits/src/node/fixtures/fits/float32.fits",
    "dimensions": [
     2,
     2
@@ -107,7 +107,7 @@
    "observer": "O'Brien / field"
   },
   "float64": {
-   "path": "tests/fixtures/fits/float64.fits",
+   "path": "packages/fits/src/node/fixtures/fits/float64.fits",
    "dimensions": [
     2,
     2
@@ -122,7 +122,7 @@
    "observer": "O'Brien / field"
   },
   "cube": {
-   "path": "tests/fixtures/fits/cube.fits",
+   "path": "packages/fits/src/node/fixtures/fits/cube.fits",
    "dimensions": [
     2,
     2,
@@ -146,7 +146,7 @@
    "observer": "O'Brien / field"
   },
   "eso-hierarchy": {
-   "path": "tests/fixtures/fits/eso-hierarchy.fits",
+   "path": "packages/fits/src/node/fixtures/fits/eso-hierarchy.fits",
    "dimensions": [
     2,
     2
@@ -166,7 +166,7 @@
    }
   },
   "long-string": {
-   "path": "tests/fixtures/fits/long-string.fits",
+   "path": "packages/fits/src/node/fixtures/fits/long-string.fits",
    "dimensions": [
     2,
     2
@@ -182,7 +182,7 @@
    "longString": "IPAC/NASA - http://wise2.ipac.caltech.edu/docs/release/allwise/expsup/sec1_6b.html & O'Brien / field"
   },
   "extensions": {
-   "path": "tests/fixtures/fits/extensions.fits",
+   "path": "packages/fits/src/node/fixtures/fits/extensions.fits",
    "dimensions": [
     2,
     2

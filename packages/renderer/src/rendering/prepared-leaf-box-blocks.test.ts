@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createLeafBoxBlocks, leafBoxBlockNeeds, leafBoxShrinkable, nextLeafBoxWrites, type LeafBoxBinding } from './prepared-leaf-box-blocks.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
@@ -24,7 +26,7 @@ test('the eye transform may carry the scene scale: a block needs the same step e
   const scaled = view(4000);
   const eye = [0.02, 0, 0, 0, 0, 0.02, 0, 0, 0, 0, 0.02, 0, 0, 0, -80, 1];
   const needs = leafBoxBlockNeeds(binding, { ...scaled, projection: { ...scaled.projection!, eyeFromScene: eye } as unknown as PhysicalProjection }, new Map());
-  expect(needs.get('--silhouette-step-0')!.need).toBeCloseTo(400 * 2000 / 3000, 6);
+  assert.ok(Math.abs(needs.get('--silhouette-step-0')!.need - (400 * 2000 / 3000)) < 10 ** -6 / 2, `${needs.get('--silhouette-step-0')!.need} is not close to ${400 * 2000 / 3000}`);
 });
 
 test('each block needs the step for its own nearest depth; a block behind the body takes the first', () => {
@@ -32,14 +34,14 @@ test('each block needs the step for its own nearest depth; a block behind the bo
   const facing = needs.get('--silhouette-step-0')!, limb = needs.get('--silhouette-step-1')!, behind = needs.get('--silhouette-step-2')!;
   // Facing: its bounding sphere reaches 4000 - 950 - 300 = 2750, in front of the body's nearest point at 3000; no leaf is
   // nearer than that, so the body would be 400 × 2000 / 3000 px across there.
-  expect(facing.need).toBeCloseTo(400 * 2000 / 3000, 6);
-  expect(limb.need).toBeLessThan(facing.need);
-  expect(behind).toEqual({ level: 0, need: 0 });
+  assert.ok(Math.abs(facing.need - (400 * 2000 / 3000)) < 10 ** -6 / 2, `${facing.need} is not close to ${400 * 2000 / 3000}`);
+  assert.ok(limb.need < facing.need);
+  assert.deepEqual(behind, { level: 0, need: 0 });
   // The whole body's step follows its silhouette, here unpublished, so it has no need yet.
-  expect(needs.has('--silhouette-step')).toBe(false);
+  assert.equal(needs.has('--silhouette-step'), false);
   const withSilhouette = leafBoxBlockNeeds(binding, { ...view(4000), silhouetteDiameter: 300 }, new Map());
-  expect(binding.levels[withSilhouette.get('--silhouette-step')!.level]!.value).toBe('512');
-  expect(binding.levels[facing.level]!.value).toBe('512');
+  assert.equal(binding.levels[withSilhouette.get('--silhouette-step')!.level]!.value, '512');
+  assert.equal(binding.levels[facing.level]!.value, '512');
 });
 
 test('a block whose turn comes late is written once, at its latest need', () => {
@@ -54,24 +56,24 @@ test('a block whose turn comes late is written once, at its latest need', () => 
   while (frames.length) frames.shift()!();
   time.settle();
   while (frames.length) frames.shift()!();
-  expect(log.filter(([name]) => name === '--silhouette-step-0')).toEqual([['--silhouette-step-0', '2048']]);
+  assert.deepEqual(log.filter(([name]) => name === '--silhouette-step-0'), [['--silhouette-step-0', '2048']]);
 });
 
 test('while the camera moves nothing switches; once it settles the queue applies the final steps', () => {
   const written = new Map([['a', 5], ['b', 5], ['c', 5]]);
   const wanted = new Map([['a', { level: 7, need: 1 }], ['b', { level: 6, need: 1 }], ['c', { level: 0, need: 0 }]]);
-  expect(nextLeafBoxWrites(wanted, written, () => 8, 64, true)).toEqual([]);
-  expect(nextLeafBoxWrites(wanted, written, () => 8, 64, false)).toEqual(['a', 'b']);
+  assert.deepEqual(nextLeafBoxWrites(wanted, written, () => 8, 64, true), []);
+  assert.deepEqual(nextLeafBoxWrites(wanted, written, () => 8, 64, false), ['a', 'b']);
 });
 
 test('sharpenings go first, most under-stepped first; shrinks wait until none are left', () => {
   const wanted = new Map([['a', { level: 7, need: 100 }], ['b', { level: 5, need: 900 }], ['c', { level: 6, need: 50 }], ['d', { level: 0, need: 0 }]]);
   const written = new Map([['a', 5], ['b', 5], ['c', 5], ['d', 5]]);
   // Groups of 14 leaves under a 28-leaf budget: two sharpen per frame; shrinks wait for them, then go the same way.
-  expect(nextLeafBoxWrites(wanted, written, () => 14, 28)).toEqual(['a', 'c']);
-  expect(nextLeafBoxWrites(new Map([['d', { level: 0, need: 0 }], ['b', { level: 4, need: 1 }]]), written, () => 14, 28)).toEqual(['d', 'b']);
+  assert.deepEqual(nextLeafBoxWrites(wanted, written, () => 14, 28), ['a', 'c']);
+  assert.deepEqual(nextLeafBoxWrites(new Map([['d', { level: 0, need: 0 }], ['b', { level: 4, need: 1 }]]), written, () => 14, 28), ['d', 'b']);
   // A group larger than the budget still goes, alone.
-  expect(nextLeafBoxWrites(wanted, written, () => 45, 28)).toEqual(['a']);
+  assert.deepEqual(nextLeafBoxWrites(wanted, written, () => 45, 28), ['a']);
 });
 
 test('in a browser the queue drains a few blocks per frame; without frames every block is written at once', () => {
@@ -81,16 +83,16 @@ test('in a browser the queue drains a few blocks per frame; without frames every
   const blocks = createLeafBoxBlocks(binding, name => styles.get(name) ?? '', (name, value) => styles.set(name, value), callback => frames.push(callback), time);
   blocks.publish(view(1500));
   // While the camera moves the queue requests no frame and writes nothing: the block behind waits.
-  expect(frames).toHaveLength(0);
-  expect(styles.get('--silhouette-step-2')).toBe('512');
+  assert.equal(frames.length, 0);
+  assert.equal(styles.get('--silhouette-step-2'), '512');
   // Once the camera has stayed still, the queue wakes and the rest lands.
   time.settle();
   while (frames.length) frames.shift()!();
-  expect(styles.get('--silhouette-step-2')).toBe('16');
-  expect(Number(styles.get('--silhouette-step-0'))).toBeGreaterThan(512);
+  assert.equal(styles.get('--silhouette-step-2'), '16');
+  assert.ok(Number(styles.get('--silhouette-step-0')) > 512);
   const direct = new Map<string, string>();
   createLeafBoxBlocks(binding, name => direct.get(name) ?? '', (name, value) => direct.set(name, value), null).publish(view(4000));
-  expect([...direct.values()]).toEqual(['512', '256', '16']);
+  assert.deepEqual(([...direct.values()]), ['512', '256', '16']);
 });
 
 test('the queue paces itself by the frames its writes cost', () => {
@@ -112,10 +114,10 @@ test('the queue paces itself by the frames its writes cost', () => {
     now += frame < 4 ? 40 : 10; run(now); perFrame.push(count);
   }
   // Writes, a skipped frame after each slow one with a smaller budget, then growth once frames are quick again.
-  expect(perFrame[0]).toBe(16);
-  expect(perFrame[1]).toBe(0);
-  expect(perFrame[2]).toBe(8);
-  expect(perFrame.slice(4).some(value => value > 8)).toBe(true);
+  assert.equal(perFrame[0], 16);
+  assert.equal(perFrame[1], 0);
+  assert.equal(perFrame[2], 8);
+  assert.equal(perFrame.slice(4).some(value => value > 8), true);
 });
 
 test('detail beyond the need stays within the budget; past it the groups needed longest ago shrink first', () => {
@@ -127,11 +129,11 @@ test('detail beyond the need stays within the budget; past it the groups needed 
   // At DPR 1 a full group holds 4 MB (bytes, 1e6); at step 512 its factor is 1/4, so the view needs 0.25 MB and 3.75 MB is
   // kept beyond it: 15 MB in all, within the 32 MiB cap. Nothing shrinks.
   const wanted = new Map(['a', 'b', 'c', 'd'].map(name => [name, { level: rest, need: 400 }]));
-  expect([...leafBoxShrinkable(sized, wanted, written, lastNeeded, 1)!]).toEqual([]);
+  assert.deepEqual(([...leafBoxShrinkable(sized, wanted, written, lastNeeded, 1)!]), []);
   // At DPR 2 each group keeps 15 MB beyond its need, 60 MB in all: the two needed longest ago go, leaving 30 MB.
-  expect([...leafBoxShrinkable(sized, wanted, written, lastNeeded, 2)!]).toEqual(['a', 'c']);
+  assert.deepEqual(([...leafBoxShrinkable(sized, wanted, written, lastNeeded, 2)!]), ['a', 'c']);
   // Without prepared sizes there is no budget: every group may shrink.
-  expect(leafBoxShrinkable(binding, wanted, written, lastNeeded, 3)).toBe(null);
+  assert.equal(leafBoxShrinkable(binding, wanted, written, lastNeeded, 3), null);
 });
 
 test('detached preparation replaces close-up defaults before first paint, then freezes resident boxes in motion', () => {
@@ -143,17 +145,17 @@ test('detached preparation replaces close-up defaults before first paint, then f
   }, callback => frames.push(callback), time);
   const arrival = { ...view(40000), silhouetteDiameter: 20 };
   blocks.prepare(arrival);
-  expect(styles.get('--silhouette-step')).toBe('32');
-  expect(styles.get('--silhouette-step-0')).toBe('32');
-  expect(styles.get('--silhouette-step-2')).toBe('16');
-  expect(frames).toHaveLength(0);
+  assert.equal(styles.get('--silhouette-step'), '32');
+  assert.equal(styles.get('--silhouette-step-0'), '32');
+  assert.equal(styles.get('--silhouette-step-2'), '16');
+  assert.equal(frames.length, 0);
   writes.length = 0;
   blocks.prepare(arrival);
-  expect(writes).toHaveLength(0);
+  assert.equal(writes.length, 0);
   blocks.publish({ ...view(1500), silhouetteDiameter: 1000 });
   while (frames.length) frames.shift()!();
-  expect(writes).toHaveLength(0);
+  assert.equal(writes.length, 0);
   time.settle();
   while (frames.length) frames.shift()!();
-  expect(Number(styles.get('--silhouette-step-0'))).toBeGreaterThan(512);
+  assert.ok(Number(styles.get('--silhouette-step-0')) > 512);
 });

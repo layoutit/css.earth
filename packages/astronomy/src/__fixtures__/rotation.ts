@@ -1,9 +1,9 @@
 // GENERATED FILE — do not edit by hand.
 //
 // Source:    JPL Horizons, Sun's vector from each body's centre and from two body-fixed sites on it
-// Generator: packages/astronomy/tools/fetch-rotation-fixtures.mjs
+// Generator: packages/astronomy/cli/fetch-rotation-fixtures.mts
 //
-// Regenerate with `node tools/fetch-rotation-fixtures.mjs` from packages/astronomy. The
+// Regenerate with `node cli/fetch-rotation-fixtures.mts` from packages/astronomy. The
 // generator re-downloads the source series, re-derives the truncation, and
 // prints the error budget it certifies; the numbers in README.md come from it.
 

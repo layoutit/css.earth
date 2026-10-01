@@ -29,6 +29,6 @@
     "timeScale": "UTC",
     "path": "reference/16_Psyche_param.txt",
     "order": "longitude-first",
-    "source": "LAM release parameter file, read as the SPHERE photograph dataset reads it (tools/objects/observer-cameras.mts)."
+    "source": "LAM release parameter file, read as the SPHERE photograph dataset reads it (packages/bake/cli/observer-cameras.mts)."
   }
 }

@@ -17,17 +17,13 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   folder beside each tool that reads it (`jwst/programs`, `jwst/imaging/programs`, `jwst/klip/programs`). The
   interferometry reduction (`src/archives/interferometry/`: ALMA restores, VLTI calibration, star imaging) keeps its
   toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`) and test fixtures beside
-  it; `toolchains.json` still names the ROTIR environment at its former path, because an installed toolchain keeps that
-  text, and `currentArchivePath` in `src/archives/programs.mts` finds it here. Per-body
-  authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
+  it. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
   discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
-  other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. A receipt or ledger written before
-  a move keeps the path it recorded; `src/archives/programs.mts` maps a recorded program path to its current location, for
-  qualification, receipt writing and query display alike. No archive module names a body (`archives/archive-scope.test.mts`).
-  A lock's `Regenerate:` header still naming the old tool path is refreshed at the next solve, since an installed toolchain
-  keeps the lock's text and a changed lock asks for a reinstall. `packages/bake/authoring/juno/juno.test.mts`
+  other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. Receipts and ledgers record program paths
+  where `src/archives/programs.mts` puts them. No archive module names a body (`archives/archive-scope.test.mts`).
+  `packages/bake/authoring/juno/juno.test.mts`
   stays there until the stale JunoCam ledger is regenerated: its ledger-state check fails until then, and
-  `test:telescope-cli` runs every test in this package;
+  `test:packages` runs every test in this package;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `src/sphere/sphere-lane.mts` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
   application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
@@ -51,7 +47,7 @@ and the nebula lab's sky-band adapter use it; its tests are beside the composer 
 `@cssearth/objects/node/source-test` helper and FITS fixtures they read.
 
 The workspace's tools import it only through the subpaths `package.json` exports. Its node tests run with
-`pnpm test:telescope-cli`; a test whose toolchain or restored input is absent skips and names it.
+`pnpm test:packages`; a test whose toolchain or restored input is absent skips and names it.
 
 ## Shared package contract
 

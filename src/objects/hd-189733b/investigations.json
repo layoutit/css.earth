@@ -36,7 +36,7 @@
       "id": "raw-miri-map",
       "subject": "This project's map from the raw MIRI exposures",
       "status": "excluded",
-      "finding": "tools/objects/eclipse-map/hd-189733b-raw-map.test.mts fits the two MIRI eclipses reduced from raw (JWST program 2021) and matches the deposited dayside with correlation 0.94, hot spot 41 E 7 N. It uses MIRI only, without the Spitzer data that break the ramp-map degeneracy, so it is a check, not a dataset.",
+      "finding": "packages/bake/src/objects/raster/eclipse-map/hd-189733b-raw-map.test.mts fits the two MIRI eclipses reduced from raw (JWST program 2021) and matches the deposited dayside with correlation 0.94, hot spot 41 E 7 N. It uses MIRI only, without the Spitzer data that break the ramp-map degeneracy, so it is a check, not a dataset.",
       "revisitWhen": "A raw reduction adds the Spitzer data, or the program's remaining observations are mapped.",
       "evidence": [
         "https://www.stsci.edu/jwst/science-execution/program-information?id=2021",

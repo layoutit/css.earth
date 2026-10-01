@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createWorldFrameQueue } from './world-frame-queue.js';
 import type { PreparedWorldFrame } from './world-frame-queue.js';
 import type { WorldFrameRequest } from './world-frame-presenter.js';
@@ -27,20 +29,20 @@ function fixture() {
 test('an awaited flight acknowledges only the complete presented frame and retries semantic invalidation', async () => {
   const f = fixture(), controller = new AbortController(); let shown = false;
   const task = f.queue.presentAndWait(f.request(1), controller.signal).then(value => { shown = value; });
-  await f.finish(() => false); expect(shown).toBe(false);
-  await f.finish(() => true, false); expect(shown).toBe(false);
+  await f.finish(() => false); assert.equal(shown, false);
+  await f.finish(() => true, false); assert.equal(shown, false);
   f.paint(); await task;
-  expect(shown).toBe(true);
-  expect(f.events.slice(-2)).toEqual(['camera:1', 'drawing:1']);
+  assert.equal(shown, true);
+  assert.deepEqual(f.events.slice(-2), ['camera:1', 'drawing:1']);
 });
 
 test('aborting a flight while its worker result is pending leaves the drawn camera untouched', async () => {
   const f = fixture(), controller = new AbortController();
   const task = f.queue.presentAndWait(f.request(1), controller.signal);
-  controller.abort(); expect(await task).toBe(false);
-  await f.finish(); expect(f.events).toEqual(['plan:1']);
+  controller.abort(); assert.equal((await task), false);
+  await f.finish(); assert.deepEqual(f.events, ['plan:1']);
   f.queue.present(f.request(2)); await f.finish();
-  expect(f.events.slice(-2)).toEqual(['camera:2', 'drawing:2']);
+  assert.deepEqual(f.events.slice(-2), ['camera:2', 'drawing:2']);
 });
 
 test('superseding a queued flight and disposing the queue settle their awaiting owners', async () => {
@@ -48,90 +50,90 @@ test('superseding a queued flight and disposing the queue settle their awaiting 
   f.queue.present(f.request(1));
   const superseded = f.queue.presentAndWait(f.request(2), signal);
   const remaining = f.queue.presentAndWait(f.request(3), signal);
-  expect(await superseded).toBe(false);
-  f.queue.destroy(); expect(await remaining).toBe(false);
-  await f.finish(); expect(f.events).toEqual(['plan:1']);
+  assert.equal((await superseded), false);
+  f.queue.destroy(); assert.equal((await remaining), false);
+  await f.finish(); assert.deepEqual(f.events, ['plan:1']);
 });
 
 test('an awaited flight rejects a worker failure instead of claiming a painted checkpoint', async () => {
   const f = fixture(), signal = new AbortController().signal;
   const task = f.queue.presentAndWait(f.request(1), signal);
-  const result = expect(task).rejects.toThrow('worker failed');
+  const result = assert.rejects(task, /worker failed/);
   f.pending.shift()!.reject(new Error('worker failed')); await result;
-  expect(f.events).toEqual(['plan:1', 'error:1']);
+  assert.deepEqual(f.events, ['plan:1', 'error:1']);
 });
 
 test('new input replaces pending work without advancing camera ahead of drawing or starving completion', async () => {
   const f = fixture();
   f.queue.present(f.request(1)); f.queue.present(f.request(2)); f.queue.present(f.request(3));
-  expect(f.events).toEqual(['plan:1']); expect(f.queue.stats()).toMatchObject({ inFlight: 1, pending: 1, superseded: 1 });
+  assert.deepEqual(f.events, ['plan:1']); assert.partialDeepStrictEqual(f.queue.stats(), { inFlight: 1, pending: 1, superseded: 1 });
   await f.finish();
-  expect(f.events).toEqual(['plan:1', 'camera:1', 'drawing:1', 'plan:3']);
+  assert.deepEqual(f.events, ['plan:1', 'camera:1', 'drawing:1', 'plan:3']);
   await f.finish();
-  expect(f.events.slice(-2)).toEqual(['camera:3', 'drawing:3']);
-  expect(f.queue.stats()).toMatchObject({ committed: 2, inFlight: 0, pending: 0 });
+  assert.deepEqual(f.events.slice(-2), ['camera:3', 'drawing:3']);
+  assert.partialDeepStrictEqual(f.queue.stats(), { committed: 2, inFlight: 0, pending: 0 });
 });
 
 test('ready frames wait for paint and newer input coalesces before planning from published state', async () => {
   const f = fixture();
   f.queue.present(f.request(1)); f.queue.present(f.request(2));
   await f.finish(() => true, false); f.queue.present(f.request(3));
-  expect(f.events).toEqual(['plan:1']);
-  expect(f.callbacks.size).toBe(1);
+  assert.deepEqual(f.events, ['plan:1']);
+  assert.equal(f.callbacks.size, 1);
   f.paint();
-  expect(f.events).toEqual(['plan:1', 'camera:1', 'drawing:1', 'plan:3']);
+  assert.deepEqual(f.events, ['plan:1', 'camera:1', 'drawing:1', 'plan:3']);
   await f.finish(() => true, false);
-  expect(f.events.at(-1)).toBe('plan:3'); f.paint();
-  expect(f.events.slice(-2)).toEqual(['camera:3', 'drawing:3']);
-  expect(f.queue.stats()).toMatchObject({ committed: 2, superseded: 1, ready: 0 });
+  assert.equal(f.events.at(-1), 'plan:3'); f.paint();
+  assert.deepEqual(f.events.slice(-2), ['camera:3', 'drawing:3']);
+  assert.partialDeepStrictEqual(f.queue.stats(), { committed: 2, superseded: 1, ready: 0 });
 });
 
 test('navigation disposal and semantic invalidation are checked again at presentation time', async () => {
   const f = fixture(); let current = true;
   f.queue.present(f.request(1, () => current)); await f.finish(() => true, false);
   current = false; f.paint();
-  expect(f.events).toEqual(['plan:1']);
+  assert.deepEqual(f.events, ['plan:1']);
   f.queue.present(f.request(2)); await f.finish(() => true, false);
   f.queue.destroy(); f.paint();
-  expect(f.events).toEqual(['plan:1', 'plan:2']); expect(f.callbacks.size).toBe(0);
+  assert.deepEqual(f.events, ['plan:1', 'plan:2']); assert.equal(f.callbacks.size, 0);
 });
 
 test('resize or owner disposal prevents a delayed frame from touching the presented scene', async () => {
   const f = fixture(); let current = true;
   f.queue.present(f.request(1, () => current));
   current = false; f.queue.present(f.request(2));
-  await f.finish(); expect(f.events).toEqual(['plan:1', 'plan:2']);
+  await f.finish(); assert.deepEqual(f.events, ['plan:1', 'plan:2']);
   f.queue.destroy(); await f.finish();
-  expect(f.events).toEqual(['plan:1', 'plan:2']);
+  assert.deepEqual(f.events, ['plan:1', 'plan:2']);
 });
 
 test('changed annotation state replans the latest requested camera instead of publishing stale picks', async () => {
   const f = fixture(); f.queue.present(f.request(1));
   await f.finish(() => false);
-  expect(f.events).toEqual(['plan:1', 'plan:1']);
-  await f.finish(); expect(f.events.slice(-2)).toEqual(['camera:1', 'drawing:1']);
+  assert.deepEqual(f.events, ['plan:1', 'plan:1']);
+  await f.finish(); assert.deepEqual(f.events.slice(-2), ['camera:1', 'drawing:1']);
 });
 
 test('worker failure is delivered to the live owner and does not strand a later request', async () => {
   const f = fixture(); f.queue.present(f.request(1)); f.queue.present(f.request(2));
   f.pending.shift()!.reject(new Error('worker failed'));
   await Promise.resolve(); await Promise.resolve();
-  expect(f.events).toEqual(['plan:1', 'error:1', 'plan:2']);
-  await f.finish(); expect(f.events.slice(-2)).toEqual(['camera:2', 'drawing:2']);
+  assert.deepEqual(f.events, ['plan:1', 'error:1', 'plan:2']);
+  await f.finish(); assert.deepEqual(f.events.slice(-2), ['camera:2', 'drawing:2']);
 });
 
 test('idle semantic changes replan the retained initial camera through the worker', async () => {
   const f = fixture();
-  expect(f.queue.refresh()).toBe(false);
+  assert.equal(f.queue.refresh(), false);
   f.queue.remember(f.request(1));
-  expect(f.events).toEqual([]);
-  expect(f.queue.refresh()).toBe(true);
-  expect(f.events).toEqual(['plan:1']);
+  assert.deepEqual(f.events, []);
+  assert.equal(f.queue.refresh(), true);
+  assert.deepEqual(f.events, ['plan:1']);
   await f.finish();
-  expect(f.events).toEqual(['plan:1', 'camera:1', 'drawing:1']);
+  assert.deepEqual(f.events, ['plan:1', 'camera:1', 'drawing:1']);
   f.queue.refresh();
   await f.finish();
-  expect(f.events.slice(-3)).toEqual(['plan:1', 'camera:1', 'drawing:1']);
+  assert.deepEqual(f.events.slice(-3), ['plan:1', 'camera:1', 'drawing:1']);
 });
 
 test('semantic refresh preserves newer pending input and coalesces during planning', async () => {
@@ -139,14 +141,14 @@ test('semantic refresh preserves newer pending input and coalesces during planni
   f.queue.present(f.request(1));
   f.queue.present(f.request(2));
   f.queue.refresh(); f.queue.refresh();
-  expect(f.queue.stats()).toMatchObject({ requested: 2, superseded: 0 });
+  assert.partialDeepStrictEqual(f.queue.stats(), { requested: 2, superseded: 0 });
   await f.finish(() => false);
-  expect(f.events).toEqual(['plan:1', 'plan:2']);
+  assert.deepEqual(f.events, ['plan:1', 'plan:2']);
   f.queue.refresh();
   await f.finish(() => false);
-  expect(f.events).toEqual(['plan:1', 'plan:2', 'plan:2']);
+  assert.deepEqual(f.events, ['plan:1', 'plan:2', 'plan:2']);
   await f.finish();
-  expect(f.events.slice(-2)).toEqual(['camera:2', 'drawing:2']);
+  assert.deepEqual(f.events.slice(-2), ['camera:2', 'drawing:2']);
 });
 
 test('a new idle owner can refresh while a disposed owner still has worker work', async () => {
@@ -154,13 +156,13 @@ test('a new idle owner can refresh while a disposed owner still has worker work'
   f.queue.present(f.request(1, () => oldCurrent));
   oldCurrent = false;
   f.queue.remember(f.request(2, () => newCurrent));
-  expect(f.queue.refresh()).toBe(true);
+  assert.equal(f.queue.refresh(), true);
   await f.finish();
-  expect(f.events).toEqual(['plan:1', 'plan:2']);
+  assert.deepEqual(f.events, ['plan:1', 'plan:2']);
   await f.finish();
-  expect(f.events.slice(-2)).toEqual(['camera:2', 'drawing:2']);
+  assert.deepEqual(f.events.slice(-2), ['camera:2', 'drawing:2']);
   newCurrent = false;
-  expect(f.queue.refresh()).toBe(false);
+  assert.equal(f.queue.refresh(), false);
   f.queue.destroy();
-  expect(f.queue.refresh()).toBe(false);
+  assert.equal(f.queue.refresh(), false);
 });

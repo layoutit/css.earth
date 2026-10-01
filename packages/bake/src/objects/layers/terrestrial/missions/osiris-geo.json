@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "pvl",
- "generatedBy": "tools/oracles/pds3/osiris-geo.py",
+ "generatedBy": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.py",
  "tool": {
   "pvl": "1.3.2",
   "python": "3.12.14",

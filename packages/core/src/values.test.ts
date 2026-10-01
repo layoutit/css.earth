@@ -1,11 +1,13 @@
-import { expect, it } from 'vitest';
+import { it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { canonical, isArray } from './index.js';
 
 it('isArray narrows without trusting elements', () => {
-  expect(isArray([1])).toBe(true);
-  expect(isArray({ length: 0 })).toBe(false);
+  assert.equal(isArray([1]), true);
+  assert.equal(isArray({ length: 0 }), false);
 });
 
 it('canonical sorts object keys recursively and keeps array order', () => {
-  expect(JSON.stringify(canonical({ b: [{ d: 1, c: 2 }], a: null }))).toBe('{"a":null,"b":[{"c":2,"d":1}]}');
+  assert.equal(JSON.stringify(canonical({ b: [{ d: 1, c: 2 }], a: null })), '{"a":null,"b":[{"c":2,"d":1}]}');
 });

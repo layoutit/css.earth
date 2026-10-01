@@ -29,4 +29,4 @@ for k, path in enumerate(paths):
     cubes[path.name] = {'width': width, 'height': height, 'coreItemType': str(qube['CORE_ITEM_TYPE']), 'axisName': [str(v) for v in qube['AXIS_NAME']],
                         'specialCounts': {name: int((core == code).sum()) for name, code in [('null', NULL), ('lowRepr', LOW_REPR), ('lowInstr', LOW_INSTR), ('highInstr', HIGH_INSTR), ('highRepr', HIGH_REPR)]},
                         'validCount': int((~special).sum()), 'samples': samples(values, 500 + k, 48, ~special)}
-write('isis2/borrelly-micas.json', 'pvl', 'tests/oracles/isis2/borrelly-micas.py', {'pvl': pvl.__version__}, paths, {'cubes': cubes})
+write('packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json', 'pvl', 'packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.py', {'pvl': pvl.__version__}, paths, {'cubes': cubes})

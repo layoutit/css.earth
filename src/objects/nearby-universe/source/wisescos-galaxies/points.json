@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "wisescos-galaxies",
+  "table": {
+    "path": "wisescos-sample.csv.gz",
+    "origin": "http://ssa.roe.ac.uk/cats/wiseScosPhotoz160708.csv.gz",
+    "generator": "packages/bake/authoring/nearby-universe/wisescos-sample.mts",
+    "bytes": 1216055,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "redshift-planck18"
+  },
+  "sample": "The tracked file keeps 58,213 of the catalogue's 20,416,142 rows (packages/bake/authoring/nearby-universe/wisescos-sample.mts): of the 5,515,837 with photometric redshift 0.1 to 0.4, brighter than absolute R -21.5 and outside DESI's footprint (9,992 deg², found from the tracked DESI sample), those on the 20,409 deg² the catalogue covers well, thinned in each redshift bin 0.02 wide to the DESI sample's count per sky cell, by WISE id; with wiseID, RA, DEC, Z, R and the redshift bin C.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "bilicki-2016-wisescos",
+  "meaning": "The WISE x SuperCOSMOS galaxies (Bilicki et al. 2016) where DESI did not look, from photometric redshift 0.1 to 0.4 and brighter than absolute R -21.5, at DESI's density in each redshift bin, each at its comoving distance in the Planck 2018 cosmology: they close DESI's two cones into one ball. Their photometric redshifts are about 15% uncertain, so they sit less sharply in depth than DESI's.",
+  "cosmology": "planck-2018-cosmology",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorBy": {
+      "column": 6,
+      "stops": [
+        [
+          0,
+          "#ffdb92"
+        ],
+        [
+          1,
+          "#ffdb92"
+        ],
+        [
+          2,
+          "#ffdb92"
+        ],
+        [
+          3,
+          "#ffdb92"
+        ],
+        [
+          4,
+          "#ffdb6d"
+        ],
+        [
+          5,
+          "#ffdb6d"
+        ],
+        [
+          6,
+          "#ffb66d"
+        ],
+        [
+          7,
+          "#ffb66d"
+        ],
+        [
+          8,
+          "#ffb66d"
+        ],
+        [
+          9,
+          "#ffb649"
+        ],
+        [
+          10,
+          "#ffb649"
+        ],
+        [
+          11,
+          "#ffb649"
+        ],
+        [
+          12,
+          "#ffb649"
+        ],
+        [
+          13,
+          "#ffb649"
+        ],
+        [
+          14,
+          "#ffb649"
+        ]
+      ],
+      "steps": 15,
+      "basis": "This catalogue has no g, r and z fluxes to colour a galaxy as DESI's are coloured. Each galaxy takes the median colour DESI's own galaxies show in its redshift bin (column 6, bins 0.02 wide from 0.1): each channel's median over the prepared DESI bank's colours, which wisescos-sample.mts prints. The colour says how galaxies at that distance look, not how this one does."
+    },
+    "toneBy": {
+      "magnitudeColumn": 5,
+      "nanomaggies": false,
+      "band": "R (SuperCOSMOS, extinction-corrected rCalCorr, no k-correction)",
+      "brightMagnitude": -23.4,
+      "faintMagnitude": -22.5,
+      "faintTone": 0.4,
+      "steps": 8,
+      "basis": "DESI's sample's tone scale (its recipe), so a fill galaxy is as bright as a DESI galaxy of the same absolute magnitude: its R magnitude at its Planck 2018 luminosity distance, full at -23.4 and 40% at -22.5. R is the photographic band nearest DESI's r; the two differ by a few tenths of a magnitude, and neither is k-corrected."
+    }
+  }
+}

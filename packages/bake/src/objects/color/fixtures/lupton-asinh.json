@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "astropy",
- "generatedBy": "tools/oracles/fits/lupton-asinh.py",
+ "generatedBy": "packages/bake/src/objects/color/fixtures/lupton-asinh.py",
  "tool": {
   "astropy": "8.0.1",
   "python": "3.12.14",
@@ -9,7 +9,7 @@
  },
  "inputs": [
   {
-   "path": "tests/fixtures/fits/lupton-bands.fits",
+   "path": "packages/bake/src/objects/color/fixtures/lupton-bands.fits",
    "bytes": 8640
   }
  ],

@@ -68,7 +68,29 @@
       "path": "mcconnachie/extract.py",
       "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
       "citation": "Local deterministic extraction receipt, pypdf5.9.0; fetches the unchanged author PDF from its origin and checks it against the checked text. Not a scientific data source.",
-      "bytes": 945
+      "bytes": 816
+    },
+    {
+      "id": "m87-citations",
+      "url": "https://arxiv.org/abs/1906.11238",
+      "citation": "M87's row, written from its papers because the Local Volume Database stops short of the Virgo Cluster: position from ICRF3, distance from EHT M87 Paper I, membership from the Virgo Cluster Catalog.",
+      "references": [
+        {
+          "id": "Charlot2020A&A...644A.159C",
+          "url": "https://doi.org/10.1051/0004-6361/202038368",
+          "citation": "Charlot et al. (2020), A&A 644, A159: ICRF3, the position SIMBAD adopts for M 87."
+        },
+        {
+          "id": "EHT2019ApJ...875L...1E",
+          "url": "https://arxiv.org/abs/1906.11238",
+          "citation": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI."
+        },
+        {
+          "id": "Binggeli1985AJ.....90.1681B",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681",
+          "citation": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1316 = NGC 4486, membership M (member)."
+        }
+      ]
     }
   ],
   "release": {

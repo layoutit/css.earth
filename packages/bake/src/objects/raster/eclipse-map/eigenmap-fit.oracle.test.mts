@@ -5,7 +5,7 @@ import { readOracleFixture } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { eigencurveBasis } from '@cssearth/bake/objects/raster';
 
-const fixture = await readOracleFixture('eclipse-map/theresa-eigenbasis.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json');
 const harmonicCurves = {
   nondegenerate: [
     [0.5, -1, 2, 0.25, 1.5, -0.75, 0.2, 1.1, -0.4],

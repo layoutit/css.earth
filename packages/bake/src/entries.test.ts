@@ -1,7 +1,9 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { expect, it } from 'vitest';
+import { it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 
 const source = fileURLToPath(new URL('.', import.meta.url));
 
@@ -27,7 +29,7 @@ it('the main volume entry stays host-neutral: only volume/node imports Node buil
     }
     if (/\bBuffer\b/u.test(text)) offenders.push(`${name} -> Buffer`);
   }
-  expect(offenders).toEqual([]);
+  assert.deepEqual(offenders, []);
 });
 
 /** The topics a topic may import, always through one of that topic's entries (`index.ts`, or `node/index.ts` for the volume
@@ -108,15 +110,15 @@ function topicOffenders(files: ReadonlyMap<string, string>): string[] {
 it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {
   const files = new Map<string, string>();
   for (const path of await sources(source)) files.set(relative(source, path).replaceAll('\\', '/'), await readFile(path, 'utf8'));
-  expect(topicOffenders(files)).toEqual([]);
+  assert.deepEqual(topicOffenders(files), []);
 });
 
 it('each folder under objects/ and objects/layers/ is a topic of its own: one imports another only as a declared lower topic, through its index', () => {
-  expect(topicOffenders(new Map([
+  assert.deepEqual(topicOffenders(new Map([
     ['objects/geometry/shape.ts', "import { a } from './mesh.ts';\nimport { b } from '../color/color-transfer.ts';\nimport { c } from '../color/index.ts';"],
     ['objects/color/color-transfer.ts', "import { d } from '../../raster/index.ts';"],
     ['objects/layers/giant/rings.ts', "import { e } from './geometry.ts';\nimport { f } from '../cutaway/materials.ts';"],
-  ]))).toEqual([
+  ])), [
     "objects/geometry/shape.ts -> ../color/color-transfer.ts",
     "objects/geometry/shape.ts -> ../color/index.ts",
     "objects/color/color-transfer.ts -> ../../raster/index.ts",
@@ -148,7 +150,6 @@ function builtRendererImports(files: ReadonlyMap<string, string>): string[] {
 it('topics read the renderer through its TypeScript source subpaths, never a built entry the parallel build may not have written', async () => {
   const files = new Map<string, string>();
   for (const path of await sources(source)) files.set(relative(source, path).replaceAll('\\', '/'), await readFile(path, 'utf8'));
-  expect(builtRendererImports(files)).toEqual([]);
-  expect(builtRendererImports(new Map([['objects/scene/probe.ts', "import { a } from '@cssearth/renderer/platform/solar-view-direction';\nimport { b } from '@cssearth/renderer/solar-system/types.ts';"]])))
-    .toEqual(['objects/scene/probe.ts -> @cssearth/renderer/platform/solar-view-direction']);
+  assert.deepEqual(builtRendererImports(files), []);
+  assert.deepEqual(builtRendererImports(new Map([['objects/scene/probe.ts', "import { a } from '@cssearth/renderer/platform/solar-view-direction';\nimport { b } from '@cssearth/renderer/solar-system/types.ts';"]])), ['objects/scene/probe.ts -> @cssearth/renderer/platform/solar-view-direction']);
 });

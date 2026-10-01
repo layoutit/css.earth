@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { hitsScreenShape, type ScreenPickTarget } from '../../navigation/screen-picking.js';
 import { createWorldContextBodyInteraction } from './world-context-interactions.js';
 

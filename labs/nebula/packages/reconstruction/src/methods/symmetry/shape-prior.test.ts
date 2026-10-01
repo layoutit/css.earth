@@ -26,3 +26,18 @@ test('changing the image changes emission but not the supplied depth distributio
   assert.deepEqual(density, before);
   assert.deepEqual(b.volume, a.volume.map(v => v * 2));
 });
+
+test('a Sérsic spheroid falls outward, is flatter along its axis and ends at the cutoff', () => {
+  const grid = { width: 41, height: 41, depth: 41 };
+  const density = geometricDepth(grid, [20, 20, 20], { sigmaCutoff: 2.8, components: [
+    { kind: 'sersic', axis: [1, 0, 0], radius: 6, radialSigma: 1, axialSigma: 1, weight: 1, sersicIndex: 4, axisRatio: .5 },
+  ] });
+  const at = (x: number, y: number, z: number) => density[(z * 41 + y) * 41 + x]!;
+  assert.ok(at(20, 23, 20) > at(20, 28, 20), 'falls outward');
+  assert.ok(at(24, 20, 20) < at(20, 24, 20), 'flatter along the axis');
+  assert.ok(Math.abs(at(20, 26, 20) - 1) < .05, 'about one at the half-light radius');
+  assert.equal(at(20, 20 + 17, 20), 0, 'nothing beyond 2.8 half-light radii');
+  assert.throws(() => geometricDepth(grid, [20, 20, 20], { sigmaCutoff: 2.8, components: [
+    { kind: 'sersic', axis: [1, 0, 0], radius: 6, radialSigma: 1, axialSigma: 1, weight: 1, sersicIndex: 4 },
+  ] }), /axisRatio/);
+});

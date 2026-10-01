@@ -10,7 +10,7 @@ import {
   verifySourceManifest,
 } from "@cssearth/objects/node";
 
-export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name">, projectRoot = process.cwd(), authored = false) {
+export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name">, projectRoot = process.cwd()) {
   const root = resolve(projectRoot, "src", "objects", objectRecord.id);
   return Object.freeze({
     root,
@@ -19,17 +19,8 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
       resolve(root, "inventory.json"),
-      ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
-        resolve(root, 'prepared/content.json'), resolve(root, 'text.json'), resolve(root, 'prepared/text.json')] : [
-      resolve(root, "runtime", "client.mjs"),
-      resolve(root, "site", `${objectRecord.name}Page.astro`),
-      resolve(root, "site", "control-content.mjs"),
-      resolve(root, "tools", "acquire.mjs"),
-      resolve(root, "tools", "prepare.mjs"),
-      resolve(root, "tools", "navigation-marker.mjs"),
-      resolve(root, "tools", "verify-source-manifest.mjs"),
-      resolve(root, "tools", "compact-production-assets.mjs"),
-      ]),
+      resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
+      resolve(root, 'prepared/content.json'), resolve(root, 'text.json'), resolve(root, 'prepared/text.json'),
       // `prepared/page.json` is not listed: it is a transport built from the restored runtime when
       // read (prepared-transport), never a file in a checkout.
       resolve(projectRoot, 'site/pages/[id].astro'),
@@ -45,7 +36,9 @@ export async function validateObjectPackageFiles(
   objectRecord: Pick<ObjectEntry, "id" | "name">,
   { projectRoot = process.cwd(), accessFile = access }: {projectRoot?: string; accessFile?: typeof access} = {},
 ) {
-  const paths = objectPackagePaths(objectRecord, projectRoot, Boolean(await authoredObject(objectRecord.id, projectRoot)));
+  if (!await authoredObject(objectRecord.id, projectRoot))
+    throw new TypeError(`src/objects/${objectRecord.id}/object.json: implemented object ${objectRecord.id} has no authored recipe (properties.recipe).`);
+  const paths = objectPackagePaths(objectRecord, projectRoot);
   const descriptor = JSON.parse(await readFile(resolve(paths.root, 'object.json'), 'utf8'));
   for (const path of objectPageStyles(descriptor)) await accessFile(resolve(projectRoot, path));
   for (const file of paths.requiredFiles) {

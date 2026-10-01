@@ -1,7 +1,7 @@
 ---
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
-import { googleAnalyticsBootstrap } from "../google-analytics.mts";
+import { webAnalyticsBootstrap } from "../web-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
@@ -85,6 +85,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
       bindNativeViewForms(document, window);
       import("../scene/scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
+        document.querySelector('.startup-loading')?.remove();
         delete document.documentElement.dataset.shellContext;
         delete document.documentElement.dataset.bodyPending;
         console.error('The interactive scene could not load.', error);
@@ -99,11 +100,11 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
       import '../packaged-object-runtime.mts';
       import '../scene/scene-router.mts';
     </script>}
-    {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
+    {!navigation && <script is:inline set:html={webAnalyticsBootstrap}></script>}
     <slot name="object-head" />
     {tabStyles.map(({ key, css }) => <style is:inline data-object-style={key} set:html={css} />)}
+    {!navigation && <noscript><style is:inline>.startup-loading { display: none; }</style></noscript>}
     {startup && <noscript><style is:inline>
-      .startup-loading { display: none; }
       img[data-startup-billboard] { opacity: 1 !important; width: 70vmin; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }
     </style></noscript>}
     <title>{seo.title}</title>
@@ -111,7 +112,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->
-    {startup && <div class="startup-loading" role="status" aria-label="Loading scene"><span></span></div>}
+    {!navigation && <div class="startup-loading" role="status" aria-label="Loading scene"></div>}
     <div class="object-ui-layer">
       <Fragment set:html={objectUi} />
     </div>

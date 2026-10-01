@@ -10,7 +10,7 @@ export function createSystemCardContent(documentTarget: Document) {
     const destination = documentTarget.querySelector<HTMLElement>(target);
     if (!destination) return [];
     // A detached dataset's details (detached-sections.ts) travel as their template placeholder.
-    const nodes = new Set([...documentTarget.querySelectorAll<HTMLElement>(`.object-information-panel, ${target}`)].flatMap(root => sectionElements(root, source)));
+    const nodes = new Set([...sectionElements(documentTarget, '.object-information-panel'), ...documentTarget.querySelectorAll<HTMLElement>(target)].flatMap(root => sectionElements(root, source)));
     return [...nodes].map(node => {
       // Homes survive server serialization, so hydration can return already-moved content in authored order.
       let home = [...documentTarget.querySelectorAll<HTMLElement>('[data-system-content-home]')]

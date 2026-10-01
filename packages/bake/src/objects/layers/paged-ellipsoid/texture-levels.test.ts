@@ -4,7 +4,7 @@ import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { keepTextureLevelBanks, packTextureSheet, prepareTextureLevels } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { keepTextureLevelBanks, keepTextureLevelWidths, packTextureSheet, prepareTextureLevels } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { requirePreparedData } from '@cssearth/bake/presentation';
 
 test('a map capped below the finest level reads its capped files there; other maps keep every level', async () => {
@@ -92,4 +92,21 @@ test('a reuse run keeps the published levels of the banks it still declares and 
   assert.deepEqual(kept.entries.map(item => item.key), ['page:normal:0']);
   assert.deepEqual(kept.textureLevels.levels[0], { minimumDiameter: 0, resources: { 'page:normal:0': 'page:normal:0' }, tiles: {} });
   assert.deepEqual(kept.provenance.sheets, []);
+});
+
+test('a reuse run drops a texture level width the recipe no longer lists, at the thresholds a full preparation gives', () => {
+  // Three widths of a canonical 2,048 page: each threshold is one factor (0.45) times the width before it.
+  const level = (minimumDiameter: number, suffix: string) => ({ minimumDiameter, resources: { 'page:normal:0': `sheet:normal${suffix}`, 'poles:normal': `poles:normal${suffix}` } });
+  const entry = (key: string) => ({ key, url: `/scenes/earth/${key.replaceAll(':', '-')}.webp`, decodedBytes: 1, pool: 'pages' });
+  const published = { textureLevels: { hysteresis: 0.2, levels: [level(0, ':level:512'), level(230.4, ':level:1024'), level(460.8, '')] },
+    entries: ['sheet:normal:level:512', 'poles:normal:level:512', 'sheet:normal:level:1024', 'poles:normal:level:1024', 'sheet:normal', 'poles:normal'].map(entry),
+    maximumDecodedBytes: 2,
+    provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'source-webp-encoding', texelsPerCssPixel: 2,
+      receipts: [{ source: 'a', url: '/scenes/earth/sheet-normal-level-512.webp', width: 512, height: 512, bottomPadding: 0 }], sheets: [] } } as unknown as Parameters<typeof keepTextureLevelWidths>[0];
+  const kept = keepTextureLevelWidths(published, [1024, 2048], 2048);
+  assert.deepEqual(kept.textureLevels.levels.map(entry => entry.minimumDiameter), [0, 460.8]);
+  assert.deepEqual(kept.entries.map(entry => entry.key), ['sheet:normal:level:1024', 'poles:normal:level:1024', 'sheet:normal', 'poles:normal']);
+  assert.deepEqual(kept.provenance.receipts, []);
+  assert.equal(keepTextureLevelWidths(published, [512, 1024, 2048], 2048), published, 'nothing dropped, nothing rebuilt');
+  assert.throws(() => keepTextureLevelWidths(published, [256, 2048], 2048), /can only drop texture level widths/u);
 });

@@ -20451,7 +20451,7 @@
   "generatedIntermediates": [
     {
       "path": "hst/nacl-450nm.fits.body-map.json",
-      "generator": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
+      "generator": "packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20459,7 +20459,7 @@
     },
     {
       "path": "hst/nacl-450nm.fits.product.json",
-      "generator": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
+      "generator": "packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20467,7 +20467,7 @@
     },
     {
       "path": "hst/registration.json",
-      "generator": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
+      "generator": "packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20475,7 +20475,7 @@
     },
     {
       "path": "jwst/carbon-dioxide.fits.body-map.json",
-      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
+      "generator": "packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20483,7 +20483,7 @@
     },
     {
       "path": "jwst/carbon-dioxide.fits.product.json",
-      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
+      "generator": "packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20491,7 +20491,7 @@
     },
     {
       "path": "jwst/carbon-dioxide.fits.resolution.json",
-      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
+      "generator": "packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20499,7 +20499,7 @@
     },
     {
       "path": "jwst/hydrogen-peroxide.fits.body-map.json",
-      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
+      "generator": "packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20507,7 +20507,7 @@
     },
     {
       "path": "jwst/hydrogen-peroxide.fits.product.json",
-      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
+      "generator": "packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20515,7 +20515,7 @@
     },
     {
       "path": "jwst/hydrogen-peroxide.fits.resolution.json",
-      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
+      "generator": "packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20792,7 +20792,7 @@
         "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
         "https://www.wikidata.org/wiki/Wikidata:Licensing"
       ],
-      "acquisition": "node tools/prepare-feature-notes.mts europa: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "acquisition": "node packages/bake/cli/prepare-feature-notes.mts europa: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
       "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
       "consumers": [
         "features"

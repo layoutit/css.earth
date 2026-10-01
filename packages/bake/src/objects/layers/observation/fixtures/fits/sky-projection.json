@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-oracle-fixture@1",
   "oracle": "astropy",
-  "generatedBy": "tools/oracles/fits/sky-projection.py",
+  "generatedBy": "packages/bake/src/objects/cameras/fixtures/fits/sky-projection.py",
   "tool": {
     "astropy": "8.0.1",
     "python": "3.12.14",
@@ -9,7 +9,7 @@
   },
   "inputs": [
     {
-      "path": "tests/fixtures/fits/sky-projection.fits",
+      "path": "packages/fits/src/node/fixtures/fits/sky-projection.fits",
       "bytes": 51840
     }
   ],

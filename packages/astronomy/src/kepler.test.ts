@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { distance, magnitude } from './__fixtures__/compare.js'
 import { normalizeAngleRad } from './angles.js'
 import {
@@ -28,7 +30,7 @@ describe("Kepler's equation", () => {
     const m = 0.004628836966509339, eccentricity = 0.9992850366164265
     for (const meanAnomaly of [m, -m]) {
       const anomaly = solveKeplerEccentricAnomalyRad(meanAnomaly, eccentricity)
-      expect(Math.abs(anomaly - eccentricity * Math.sin(anomaly) - normalizeAngleRad(meanAnomaly))).toBeLessThanOrEqual(1e-14)
+      assert.ok(Math.abs(anomaly - eccentricity * Math.sin(anomaly) - normalizeAngleRad(meanAnomaly)) <= 1e-14)
     }
   })
   it('satisfies M = E - e sin E across the whole elliptic range', () => {
@@ -47,7 +49,7 @@ describe("Kepler's equation", () => {
         worst = Math.max(worst, Math.abs(eccentricAnomaly - e * Math.sin(eccentricAnomaly) - normalizeAngleRad(m)))
       }
     }
-    expect(worst).toBeLessThanOrEqual(1e-14)
+    assert.ok(worst <= 1e-14)
   })
 
   it('is insensitive to how many revolutions the mean anomaly has run through', () => {
@@ -55,16 +57,16 @@ describe("Kepler's equation", () => {
       const base = solveKeplerEccentricAnomalyRad(1.3, e)
       for (const turns of [1, 5, -3, 1000]) {
         const shifted = solveKeplerEccentricAnomalyRad(1.3 + 2 * Math.PI * turns, e)
-        expect(Math.abs(shifted - base)).toBeLessThan(1e-12)
+        assert.ok(Math.abs(shifted - base) < 1e-12)
       }
     }
   })
 
   it('refuses a hyperbolic or invalid eccentricity instead of returning a number', () => {
-    expect(() => solveKeplerEccentricAnomalyRad(1, 1)).toThrow(/eccentricity/)
-    expect(() => solveKeplerEccentricAnomalyRad(1, 1.4)).toThrow(/eccentricity/)
-    expect(() => solveKeplerEccentricAnomalyRad(1, -0.1)).toThrow(/eccentricity/)
-    expect(() => solveKeplerEccentricAnomalyRad(1, Number.NaN)).toThrow(/eccentricity/)
+    assert.throws(() => solveKeplerEccentricAnomalyRad(1, 1), /eccentricity/)
+    assert.throws(() => solveKeplerEccentricAnomalyRad(1, 1.4), /eccentricity/)
+    assert.throws(() => solveKeplerEccentricAnomalyRad(1, -0.1), /eccentricity/)
+    assert.throws(() => solveKeplerEccentricAnomalyRad(1, Number.NaN), /eccentricity/)
   })
 })
 
@@ -97,8 +99,8 @@ describe('Keplerian propagation', () => {
       worstEnergy = Math.max(worstEnergy, Math.abs(energy - referenceEnergy) / Math.abs(referenceEnergy))
       worstMomentum = Math.max(worstMomentum, Math.abs(momentum - referenceMomentum) / referenceMomentum)
     }
-    expect(worstEnergy).toBeLessThan(1e-12)
-    expect(worstMomentum).toBeLessThan(1e-12)
+    assert.ok(worstEnergy < 1e-12)
+    assert.ok(worstMomentum < 1e-12)
   })
 
   it('returns to the same place after exactly one period', () => {
@@ -108,10 +110,10 @@ describe('Keplerian propagation', () => {
     // A millimetre, not a micron: a Julian Date near 2.45e6 resolves to 4.7e-10
     // days, and Io moves 0.7 m in that. The floor is the epoch's precision,
     // which is exactly what `time.ts` documents.
-    expect(distance(start, later)).toBeLessThan(1e-6 * 1000)
+    assert.ok(distance(start, later) < 1e-6 * 1000)
     // ... and not after half of one, which is what makes the above an assertion
     // rather than a tautology about a function of a wrapped angle.
-    expect(distance(start, keplerPositionKm(circularish, circularish.epochJdTt + period / 2))).toBeGreaterThan(1e5)
+    assert.ok(distance(start, keplerPositionKm(circularish, circularish.epochJdTt + period / 2)) > 1e5)
   })
 
   it('agrees with a five-point numerical derivative of its own position', () => {
@@ -122,8 +124,7 @@ describe('Keplerian propagation', () => {
       (i) => (-at(2 * h)[i]! + 8 * at(h)[i]! - 8 * at(-h)[i]! + at(-2 * h)[i]!) / (12 * h),
     )
     const analytic = keplerStateKm(elements, elements.epochJdTt).velocityKmPerDay
-    expect(distance(numeric, analytic) / magnitude(analytic)).toBeLessThan
-      (1e-9)
+    assert.ok((distance(numeric, analytic) / magnitude(analytic)) < 1e-9)
   })
 
   it('bounds the orbit by a(1 + e) and nothing tighter', () => {
@@ -142,9 +143,9 @@ describe('Keplerian propagation', () => {
     for (let i = 0; i <= 20000; i++) {
       farthest = Math.max(farthest, magnitude(keplerPositionKm(elements, elements.epochJdTt + i * 0.37)))
     }
-    expect(farthest).toBeLessThanOrEqual(bound)
+    assert.ok(farthest <= bound)
     // Tight: the sampling really does reach apoapsis, so the bound is not slack.
-    expect(farthest / bound).toBeGreaterThan(0.99999)
+    assert.ok((farthest / bound) > 0.99999)
   })
 
   it('precesses the node and the periapsis at the rates it is given', () => {
@@ -172,7 +173,7 @@ describe('Keplerian propagation', () => {
       const position = keplerPositionKm(elements, t)
       const normal = normalFor(nodeAt(t))
       const out = Math.abs(position[0] * normal[0]! + position[1] * normal[1]! + position[2] * normal[2]!)
-      expect(out / magnitude(position)).toBeLessThan(1e-12)
+      assert.ok((out / magnitude(position)) < 1e-12)
     }
     // Sensitivity: the same check against the UNprecessed node fails outright
     // after a thousand days, so the assertion above is about the rate and not
@@ -180,7 +181,7 @@ describe('Keplerian propagation', () => {
     const stale = normalFor(elements.ascendingNodeRad)
     const late = keplerPositionKm(elements, elements.epochJdTt + 1000)
     const staleOut = Math.abs(late[0] * stale[0]! + late[1] * stale[1]! + late[2] * stale[2]!)
-    expect(staleOut / magnitude(late)).toBeGreaterThan(0.1)
+    assert.ok((staleOut / magnitude(late)) > 0.1)
 
     // The periapsis rate, exactly: at mean anomaly zero the body is at
     // a(1 - e) along the periapsis direction, so the position at each periapsis
@@ -202,12 +203,12 @@ describe('Keplerian propagation', () => {
       // 1e-8 of a, not 1e-12: a Julian Date near 2.45e6 resolves to 4.7e-10
       // days, which is 1.7e-9 radians of mean anomaly here. That floor, not the
       // solver, is what this tolerance is made of.
-      expect(distance(keplerPositionKm(elements, t), expected) / semiMajorAxisKm).toBeLessThan(1e-8)
+      assert.ok((distance(keplerPositionKm(elements, t), expected) / semiMajorAxisKm) < 1e-8)
     }
   })
 
   it('rejects a non-positive semi-major axis', () => {
-    expect(() => keplerStateKm({ ...circularish, semiMajorAxisKm: 0 }, 2451545)).toThrow(/semiMajorAxisKm/)
-    expect(() => keplerStateKm({ ...circularish, semiMajorAxisKm: -1 }, 2451545)).toThrow(/semiMajorAxisKm/)
+    assert.throws(() => keplerStateKm({ ...circularish, semiMajorAxisKm: 0 }, 2451545), /semiMajorAxisKm/)
+    assert.throws(() => keplerStateKm({ ...circularish, semiMajorAxisKm: -1 }, 2451545), /semiMajorAxisKm/)
   })
 })

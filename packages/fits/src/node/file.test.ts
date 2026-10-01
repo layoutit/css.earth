@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, open, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { afterAll, beforeAll, test } from 'vitest';
+import { after as afterAll, before as beforeAll, test } from 'node:test';
 import { readFitsHdus, readFitsImage } from '../index.js';
 import { card, imageFixture } from './fixtures/bytes.js';
 import { readFitsFileHdus, readFitsFileRegion } from './index.js';

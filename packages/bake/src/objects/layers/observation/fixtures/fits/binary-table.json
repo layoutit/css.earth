@@ -1,7 +1,7 @@
 {
  "schema": "cssearth-oracle-fixture@1",
  "oracle": "astropy",
- "generatedBy": "tools/oracles/fits/binary-table.py",
+ "generatedBy": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/fits/binary-table.py",
  "tool": {
   "astropy": "8.0.1",
   "python": "3.12.14",
@@ -9,7 +9,7 @@
  },
  "inputs": [
   {
-   "path": "tests/fixtures/fits/binary-table-columns.fits",
+   "path": "packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits",
    "bytes": 11520
   }
  ],

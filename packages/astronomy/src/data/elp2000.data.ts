@@ -1,9 +1,9 @@
 // GENERATED FILE — do not edit by hand.
 //
 // Source:    ELP2000-82B (Chapront-Touze & Chapront 1988, A&A 190, 342), CDS VI/79, files ELP1..ELP36, flattened by the port of ELP82B.F distributed alongside them
-// Generator: packages/astronomy/tools/generate-series.mjs
+// Generator: packages/astronomy/cli/generate-series.mts
 //
-// Regenerate with `node tools/generate-series.mjs` from packages/astronomy. The
+// Regenerate with `node cli/generate-series.mts` from packages/astronomy. The
 // generator re-downloads the source series, re-derives the truncation, and
 // prints the error budget it certifies; the numbers in README.md come from it.
 

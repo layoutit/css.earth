@@ -1,4 +1,6 @@
-import { expect, test } from "vitest";
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { preparedMaterialFrame, preparedMaterialState, preparedMaterialAddress, type PreparedMaterialTrack, type PreparedMaterialSelection } from "./prepared-material.js";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 import { mercuryPhaseMapping, venusPhaseMapping } from "./prepared-material-fixtures.js";
@@ -19,36 +21,36 @@ test("Mercury and Venus preserve their actual prepared phase thresholds across c
       const expected = preparedMaterialFrame(mapping, view(z)), radius = Math.sqrt(1 - z * z);
       for (const degrees of [45, 90, 180, 270]) {
         const radians = degrees * Math.PI / 180;
-        expect(preparedMaterialFrame(mapping, { sunViewDirection: [radius * Math.cos(radians), radius * Math.sin(radians), z] })).toBe(expected);
+        assert.equal(preparedMaterialFrame(mapping, { sunViewDirection: [radius * Math.cos(radians), radius * Math.sin(radians), z] }), expected);
       }
     }
-    expect(preparedMaterialFrame(mapping, view(-1))).toBe(0);
-    expect(preparedMaterialFrame(mapping, view(1))).toBe(mapping.indices[mapping.indices.length - 1]);
+    assert.equal(preparedMaterialFrame(mapping, view(-1)), 0);
+    assert.equal(preparedMaterialFrame(mapping, view(1)), mapping.indices[mapping.indices.length - 1]);
     mapping.thresholds.forEach((threshold, index) => {
-      expect(preparedMaterialFrame(mapping, view(threshold - 1e-12))).toBe(mapping.indices[index]);
-      expect(preparedMaterialFrame(mapping, view(threshold))).toBe(mapping.indices[index + 1]);
+      assert.equal(preparedMaterialFrame(mapping, view(threshold - 1e-12)), mapping.indices[index]);
+      assert.equal(preparedMaterialFrame(mapping, view(threshold)), mapping.indices[index + 1]);
     });
   }
 });
 
 test("material demand follows ready addresses, fixed shadows and the geometry-to-billboard bank", () => {
-  expect(resolvePreparedMaterialDemand(track, selected, view(-1)).required).toEqual(["row:0"]);
+  assert.deepEqual(resolvePreparedMaterialDemand(track, selected, view(-1)).required, ["row:0"]);
   const fixed = { ...selected, mode: "fixed" as const, frameOverride: 255, rotationEnabled: false };
-  expect(resolvePreparedMaterialDemand(track, fixed, view(-1)).required).toEqual(["shadowless"]);
-  expect(resolvePreparedMaterialDemand(track, selected, { ...view(-1), levelOfDetail: { stage: "billboard", silhouetteDiameter: 12, billboardOpacity: 1, markerOpacity: 0 } }).required).toEqual(["billboard"]);
+  assert.deepEqual(resolvePreparedMaterialDemand(track, fixed, view(-1)).required, ["shadowless"]);
+  assert.deepEqual(resolvePreparedMaterialDemand(track, selected, { ...view(-1), levelOfDetail: { stage: "billboard", silhouetteDiameter: 12, billboardOpacity: 1, markerOpacity: 0 } }).required, ["billboard"]);
   const hidden = resolvePreparedMaterialDemand(track, { ...selected, enabled: false }, view(-1));
-  expect(hidden.required).toEqual([]);
-  expect(hidden.prewarm).toEqual([]);
+  assert.deepEqual(hidden.required, []);
+  assert.deepEqual(hidden.prewarm, []);
   const shadowless = resolvePreparedMaterialDemand(track, { ...fixed, enabled: false, publishWhenHidden: "static" }, view(-1));
-  expect(shadowless.required).toEqual(["shadowless"]);
-  expect(shadowless.prewarm).toEqual([]);
-  expect(resolvePreparedMaterialDemand(track, { ...selected, enabled: false, publishWhenHidden: "static" }, view(-1)).required).toEqual([]);
-  expect(preparedMaterialAddress(preparedMaterialState(track, selected, view(-1)), { has: () => false })).toBeNull();
+  assert.deepEqual(shadowless.required, ["shadowless"]);
+  assert.deepEqual(shadowless.prewarm, []);
+  assert.deepEqual(resolvePreparedMaterialDemand(track, { ...selected, enabled: false, publishWhenHidden: "static" }, view(-1)).required, []);
+  assert.equal(preparedMaterialAddress(preparedMaterialState(track, selected, view(-1)), { has: () => false }), null);
 });
 
 test("prepared default addresses require the actual reference pose and Sun direction", () => {
   const reference = { sceneMatrix: "initial", sunViewDirection: [0, 0, 1] };
-  expect(preparedMaterialState(track, selected, { ...reference, reference }).mode).toBe("default");
-  expect(preparedMaterialState(track, selected, { ...reference, reference, sceneMatrix: "rotated" }).mode).toBe("directional");
-  expect(preparedMaterialState(track, selected, { ...reference, reference, sunViewDirection: [1, 0, 0] }).mode).toBe("directional");
+  assert.equal(preparedMaterialState(track, selected, { ...reference, reference }).mode, "default");
+  assert.equal(preparedMaterialState(track, selected, { ...reference, reference, sceneMatrix: "rotated" }).mode, "directional");
+  assert.equal(preparedMaterialState(track, selected, { ...reference, reference, sunViewDirection: [1, 0, 0] }).mode, "directional");
 });

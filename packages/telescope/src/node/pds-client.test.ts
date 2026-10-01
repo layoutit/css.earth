@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 import { parsePdsPackageAnswer } from './pds-client.js';
 
 test('the PDS boundary requires exact package versions and one exact product', () => {

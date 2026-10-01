@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { sampleStatistics } from './index.js';
 
 test('two sample runs are counted, compared bit for bit and above the median, walking the samples twice', async () => {

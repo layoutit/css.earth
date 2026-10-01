@@ -782,7 +782,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     padding: 0;
   }
   .explorer-shell-header .object-wordmark-one-line { display: inline; }
-  .explorer-shell-header .object-wordmark-two-line { display: none; }
   /* Keep the version beside the wordmark in the compact header. */
 
   .object-sidebar {

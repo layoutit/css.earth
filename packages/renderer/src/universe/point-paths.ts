@@ -13,30 +13,42 @@ let moveText: readonly string[] | null = null, lineText: readonly string[] | nul
 const moveTable = () => moveText ??= Array.from({ length: 2 * TABLE_REACH + 1 }, (_, index) => `M${index - TABLE_REACH} `);
 const lineTable = () => lineText ??= Array.from({ length: 2 * TABLE_REACH + 1 }, (_, index) => `${index - TABLE_REACH}h0`);
 
-/** A fixed palette of retained paths. Each projected point remains a circular
- * disc; no per-point elements or native drop-shadow commands are needed. A dot is a zero-length line with round caps,
- * `M x y h0`, stroked as wide as the dot: a fifth of the text of two arcs, and no curve to rasterise. */
-export function mountPointPaths(host: HTMLElement, palette: readonly string[]) {
-  const document = host.ownerDocument;
-  const svg = document.createElementNS(SVG_NS, 'svg');
+/** The svg every part of a point field paints into: one layer, so the parts of a stacked bank (catalogue-points.ts) cost
+ * one raster when they repaint, not one each. */
+export function mountPointPathSvg(host: HTMLElement) {
+  const svg = host.ownerDocument.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%');
   svg.style.position = 'absolute'; svg.style.inset = '0';
-  const group = document.createElementNS(SVG_NS, 'g'); svg.append(group);
+  host.append(svg);
+  return svg;
+}
+
+/** A fixed palette of retained paths. Each projected point remains a circular
+ * disc; no per-point elements or native drop-shadow commands are needed. A dot is a zero-length line with round caps,
+ * `M x y h0`, stroked as wide as the dot: a fifth of the text of two arcs, and no curve to rasterise. A field of several
+ * parts gives each its own group in one svg (`into`); the group's opacity dims its part. */
+export function mountPointPaths(host: HTMLElement, palette: readonly string[], into?: SVGSVGElement) {
+  const document = host.ownerDocument;
+  const svg = into ?? mountPointPathSvg(host);
+  const part = document.createElementNS(SVG_NS, 'g'), group = document.createElementNS(SVG_NS, 'g');
+  part.append(group); svg.append(part);
   const paths = new Map([...new Set(palette)].map(color => {
     const path = document.createElementNS(SVG_NS, 'path');
-    path.setAttribute('fill', 'none'); path.setAttribute('stroke', color); path.setAttribute('stroke-linecap', 'round'); group.append(path);
+    // A paint is `#rrggbbaa@radius` (batched-spatial-points.ts pointPaint): the path strokes its colour.
+    path.setAttribute('fill', 'none'); path.setAttribute('stroke', color.split('@')[0]!); path.setAttribute('stroke-linecap', 'round'); group.append(path);
     const entry = { path, text: '', published: '', width: 0 };
     return [color, entry] as const;
   }));
   const entries = [...paths.values()], indexOf = new Map([...paths.keys()].map((color, index) => [color, index]));
-  host.append(svg);
   let origin = '', move: readonly string[] = [], line: readonly string[] = [];
   return {
     /** The paths' svg: a camera turn can move what it painted as one warp (batched-spatial-points.ts). */
     svg,
-    residentElements: paths.size + 2,
+    /** This palette's group: its opacity dims these paths alone. */
+    part,
+    residentElements: paths.size + (into ? 2 : 3),
     /** A dot colour's path, stroked as wide as its dots: resolved once for each point before any frame, so a frame only
-     * adds positions. One path strokes all its dots at one width, so the dots of a colour share their size. */
+     * adds positions. One path strokes all its dots at one width, so a paint (a colour at a radius) is one size. */
     entry(color: string, radius: number) {
       const index = indexOf.get(color);
       if (index === undefined) throw new TypeError(`Point colour ${color} is absent from the prepared paint palette.`);

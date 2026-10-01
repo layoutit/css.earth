@@ -44,8 +44,8 @@ test('normal runtime and preparation reject all public research imports, includi
 test('preparation accepts the public bake entries while the runtime accepts none of them, not even an erased type', () => {
   const f = fixture();
   try {
-    f.write('tools/prepare.mts', "import {value} from '@cssearth/bake/public'; export {value as core} from '@cssearth/bake/public';");
-    for (const path of ['tools/objects/volume.ts', 'packages/bake/src/volume/other.ts', 'packages/telescope-cli/src/query.mts']) {
+    f.write('site/build/prepare.mts', "import {value} from '@cssearth/bake/public'; export {value as core} from '@cssearth/bake/public';");
+    for (const path of ['site/build/volume.ts', 'packages/bake/src/volume/other.ts', 'packages/telescope-cli/src/query.mts']) {
       f.write(path, "import {value, type Contract} from '@cssearth/bake/public'; export {value};"); assert.deepEqual(f.check(), [], path);
       f.write(path, 'export {};');
     }
@@ -60,7 +60,7 @@ test('preparation accepts the public bake entries while the runtime accepts none
         f.write(path, 'export {};');
       }
     }
-    f.write('tools/prepare.mts', "import '@cssearth/bake/src/private';");
+    f.write('site/build/prepare.mts', "import '@cssearth/bake/src/private';");
     assert.ok(f.check().some(error => error.includes('non-public nebula import')));
   } finally { f.cleanup(); }
 });
@@ -80,21 +80,21 @@ test('relative, absolute, URL, traversal and tsconfig aliases cannot enter the l
   const f = fixture();
   try {
     for (const source of [
-      "export * from '../labs/nebula/packages/volume-core/src/public.ts';",
-      "import '../src/../labs/nebula/packages/lab/src/private.ts';",
+      "export * from '../../labs/nebula/packages/volume-core/src/public.ts';",
+      "import '../../src/../labs/nebula/packages/lab/src/private.ts';",
       "import('/labs/nebula/packages/reconstruction/src/public.ts');",
       `import('${resolve(f.root, 'labs/nebula/packages/lab/src/public.ts')}');`,
       `import('file://${resolve(f.root, 'labs/nebula/packages/lab/src/public.ts')}');`,
-      "import(new URL('../labs/nebula/packages/lab/src/public.ts', import.meta.url).href);",
+      "import(new URL('../../labs/nebula/packages/lab/src/public.ts', import.meta.url).href);",
     ]) {
-      f.write('tools/prepare.mts', source); assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')), source);
+      f.write('site/build/prepare.mts', source); assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')), source);
     }
     f.write('tsconfig.base.json', JSON.stringify({ compilerOptions: { baseUrl: '.', paths: { '@research/*': ['labs/nebula/packages/lab/src/*'], '@cssearth/bake/*': ['labs/nebula/packages/lab/src/*'] } } }));
     f.write('tsconfig.json', JSON.stringify({ extends: './tsconfig.base.json' }));
     for (const path of ['public', 'not-yet-created']) {
-      f.write('tools/prepare.mts', `import '@research/${path}';`); assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')));
+      f.write('site/build/prepare.mts', `import '@research/${path}';`); assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')));
     }
-    f.write('tools/prepare.mts', "import '@cssearth/bake/public';");
+    f.write('site/build/prepare.mts', "import '@cssearth/bake/public';");
     assert.ok(f.check().some(error => error.includes('package alias escapes')));
   } finally { f.cleanup(); }
 });
@@ -103,14 +103,14 @@ test('relative, absolute and URL paths cannot enter the bake sources past the pu
   const f = fixture();
   try {
     for (const source of [
-      "export * from '../packages/bake/src/public.ts';",
-      "import '../src/../packages/bake/src/volume/not-yet-created.ts';",
+      "export * from '../../packages/bake/src/public.ts';",
+      "import '../../src/../packages/bake/src/volume/not-yet-created.ts';",
       `import('${resolve(f.root, 'packages/bake/src/public.ts')}');`,
-      "import(new URL('../packages/bake/src/public.ts', import.meta.url).href);",
+      "import(new URL('../../packages/bake/src/public.ts', import.meta.url).href);",
     ]) {
-      f.write('tools/prepare.mts', source); assert.ok(f.check().some(error => error.includes('direct path into packages/bake')), source);
+      f.write('site/build/prepare.mts', source); assert.ok(f.check().some(error => error.includes('direct path into packages/bake')), source);
     }
-    f.write('tools/prepare.mts', 'export {};');
+    f.write('site/build/prepare.mts', 'export {};');
     f.write('packages/bake/src/volume/field.ts', "export * from '../public.ts';");
     assert.deepEqual(f.check(), [], 'the package reaches its own sources');
   } finally { f.cleanup(); }
@@ -134,9 +134,9 @@ test('test exceptions and preparation wrappers cannot be used as inbound runtime
     f.write('site/runtime.mts', "export * from '../src/check.test.ts';");
     assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via src/check.test.ts')));
     f.write('src/check.test.ts', 'export {};');
-    f.write('tools/prepare.mts', "export * from '@cssearth/bake/public';");
-    f.write('site/runtime.mts', "import '../tools/prepare.mts';");
-    assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via tools/prepare.mts')));
+    f.write('site/build/prepare.mts', "export * from '@cssearth/bake/public';");
+    f.write('site/runtime.mts', "import './build/prepare.mts';");
+    assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via site/build/prepare.mts')));
     f.write('site/runtime.mts', 'export {};');
     f.write('src/check.test.ts', "import '../labs/nebula/packages/lab/src/public.ts';");
     assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')), 'tests must use public exports too');
@@ -163,17 +163,17 @@ test('root research dependencies remain development-only and computed policy sta
     // Preparation code imports the bake by design: its computed loads are not suspect for naming it, but a runtime module
     // that reaches such a file still is.
     f.write('site/plugin.mts', 'export {};');
-    f.write('tools/prepare/plugin.mts', "import '@cssearth/bake/public'; export const load = (name: string) => import(name);");
+    f.write('site/build/plugin.mts', "import '@cssearth/bake/public'; export const load = (name: string) => import(name);");
     assert.deepEqual(f.check(), []);
-    f.write('site/plugin.mts', "import { load } from '../tools/prepare/plugin.mts'; export { load };");
-    assert.ok(f.check().some(error => error.includes('site/plugin.mts: unchecked computed nebula module loading via tools/prepare/plugin.mts')));
-    f.write('tools/prepare/plugin.mts', "import '@cssearth/bake/public'; export const load = (name: string) => import('@cssearth/nebula-lab/' + name);");
+    f.write('site/plugin.mts', "import { load } from './build/plugin.mts'; export { load };");
+    assert.ok(f.check().some(error => error.includes('site/plugin.mts: unchecked computed nebula module loading via site/build/plugin.mts')));
+    f.write('site/build/plugin.mts', "import '@cssearth/bake/public'; export const load = (name: string) => import('@cssearth/nebula-lab/' + name);");
     f.write('site/plugin.mts', 'export {};');
-    assert.ok(f.check().some(error => error.includes('tools/prepare/plugin.mts: unchecked computed nebula module loading')));
+    assert.ok(f.check().some(error => error.includes('site/build/plugin.mts: unchecked computed nebula module loading')));
     // An owner-local test helper may import the bake; a runtime module that reaches it may not.
-    f.write('tools/prepare/plugin.mts', 'export {};');
+    f.write('site/build/plugin.mts', 'export {};');
     f.write('site/test/fixtures/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
-    f.write('tools/prepare/plugin.test.mts', "import { helper } from '../../site/test/fixtures/helper.mts'; export { helper };");
+    f.write('site/build/plugin.test.mts', "import { helper } from '../test/fixtures/helper.mts'; export { helper };");
     assert.deepEqual(f.check(), []);
     f.write('site/plugin.mts', "import { helper } from './test/fixtures/helper.mts'; export { helper };");
     assert.ok(f.check().some(error => error.includes('site/plugin.mts: runtime closure forbids @cssearth/bake/public via site/test/fixtures/helper.mts')));
@@ -193,7 +193,7 @@ test('Astro frontmatter and script imports obey the same inbound policy', () => 
 test('reachable vendor, prepared and generated wrappers cannot hide forbidden imports', () => {
   const f = fixture();
   try {
-    for (const path of ['vendor/helper.ts', 'src/objects/sample/prepared/helper.mts', 'tools/dist/helper.js']) {
+    for (const path of ['vendor/helper.ts', 'src/objects/sample/prepared/helper.mts', 'packages/sample/dist/helper.js']) {
       f.write(path, "export * from '@cssearth/nebula-lab/public';");
       f.write('site/runtime.mts', `import '../${path}';`);
       assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes(`via ${path}`)), path);
@@ -211,12 +211,12 @@ test('production filesystem loads cannot read lab models or research implementat
       "const prefix = 'labs/nebula/'; const path = prefix + 'models/model.json'; fs.readFileSync(path);",
       "readFile(resolve('labs', 'nebula', 'models/model.json'));",
       "readFile(resolve(process.cwd(), 'labs/nebula/models/model.json'));",
-      "readFile(new URL('../labs/nebula/models/model.json', import.meta.url));",
-      "const location = new URL('../labs/nebula/packages/lab/src/main.ts', import.meta.url);",
+      "readFile(new URL('../../labs/nebula/models/model.json', import.meta.url));",
+      "const location = new URL('../../labs/nebula/packages/lab/src/main.ts', import.meta.url);",
     ]) {
-      f.write('tools/prepare.mts', source); assert.ok(f.check().some(error => error.includes('filesystem access into labs/nebula')), source);
+      f.write('site/build/prepare.mts', source); assert.ok(f.check().some(error => error.includes('filesystem access into labs/nebula')), source);
     }
-    f.write('tools/prepare.mts', "const historical = { path: 'labs/nebula/models/immutable.json' }; const migrated = path.startsWith('labs/nebula/');");
+    f.write('site/build/prepare.mts', "const historical = { path: 'labs/nebula/models/immutable.json' }; const migrated = path.startsWith('labs/nebula/');");
     assert.deepEqual(f.check(), [], 'metadata comparisons do not load current lab data');
     f.write('src/evidence.test.ts', "readFile('labs/nebula/models/immutable.json');");
     assert.deepEqual(f.check(), [], 'historical test comparisons are allowed');
@@ -234,7 +234,7 @@ test('package import aliases and redirected public exports cannot disguise a lab
     assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')));
     f.write('site/runtime.mts', 'export {};');
     f.write('packages/bake/package.json', JSON.stringify({ name: '@cssearth/bake', exports: { './public': '../../labs/nebula/packages/lab/src/public.ts' } }));
-    f.write('tools/prepare.mts', "import '@cssearth/bake/public';");
+    f.write('site/build/prepare.mts', "import '@cssearth/bake/public';");
     assert.ok(f.check().some(error => error.includes('public export escapes')));
   } finally { f.cleanup(); }
 });
@@ -252,7 +252,7 @@ test('source-looking directories are never read as modules and directory entry p
   } finally { f.cleanup(); }
 });
 
-test('the telescope command is preparation like the tools folder it came from; a runtime package stays refused', () => {
+test('the telescope command is preparation; a runtime package stays refused', () => {
   const f = fixture();
   try {
     const computed = "const at = String(Math.random()); await import(at + 'packages/bake');";

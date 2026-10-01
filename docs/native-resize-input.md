@@ -1,11 +1,8 @@
 # Native resize as a camera input
 
-This document records a historical input experiment. The browser helpers under
-[`tests/experiments/native-scroll/`](https://github.com/layoutit/cssEarth/tree/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/) (now retired; surviving code is in `labs/experiments/native-scroll/`) and [`tests/experiments/native-resize/`](https://github.com/layoutit/cssEarth/tree/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/) (now retired; surviving code is in `labs/experiments/native-resize/`), and
-the `perf:trace` package command, last existed in git history.
-Commands below that name those helpers or `perf:trace` describe the original
-runs; they cannot be run from this checkout. The previews and their launchers
-under `labs/experiments/` still exist, with the trace analyses beside them.
+This document records a historical input experiment. Its browser helpers and the
+`perf:trace` package command were removed; the previews, their launchers and the
+trace analyses remain under `labs/experiments/`.
 
 Blocks that list a retired helper keep the paths of their original run. The
 current experiment sources are checked, started and their traces analysed with:
@@ -63,7 +60,7 @@ rounding of small registered numbers. Perspective covariance calculations also
 avoid a tiny intermediate factor. A discarded 1e36 storage scale overflowed in
 Chromium; its captures are explicitly invalid. The current scale is 1e6.
 
-The historical browser checks under [`tests/experiments/native-scroll/`](https://github.com/layoutit/cssEarth/tree/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/) (now retired; surviving code is in `labs/experiments/native-scroll/`) covered:
+The removed browser checks covered:
 
 - `resize-browser.mts`: repeated drags, one-pixel movement, release, independent
   wheel zoom, wheel over a marker, and native Neptune navigation.
@@ -99,18 +96,9 @@ The later source cleanup reads the same 0.1px tolerance from its shared owner
 and supplies zero-angle defaults when the native input rule is unsupported.
 Neither changes the measured Chromium path's selection or rendering behavior.
 
-The camera check imports source modules and therefore runs from a bundle:
-
-Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/camera-browser.mts) (now retired; this helper has no current replacement).
+The surviving preview type-checks with:
 
 ```sh
-node --input-type=module <<'JS'
-import { build } from 'esbuild';
-await build({ entryPoints: ['tests/experiments/native-scroll/camera-browser.mts'],
-  outfile: 'output/native-scroll/camera-browser.mjs', bundle: true,
-  platform: 'node', format: 'esm', packages: 'external' });
-JS
-CSSEARTH_CHROME_LOG_STDIO=1 node output/native-scroll/camera-browser.mjs chromium
 pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/tsconfig.json
 ```
 
@@ -197,10 +185,9 @@ CSS property for a resize hit target.
 
 ## Local evidence and limits
 
-Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/browser.mts) (now retired; this helper has no current replacement).
+The surviving preview type-checks with:
 
 ```sh
-CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/browser.mts
 pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
 ```
 
@@ -234,12 +221,6 @@ publication per animation frame. `?contain=size` adds size containment to the
 resized element; `?contain=strict` also isolates the fixed frame with strict
 containment and adds layout/style containment to the resized element.
 
-Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/compare-browser.mts) (now retired; this helper has no current replacement).
-
-```sh
-CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/compare-browser.mts
-```
-
 Each run records the browser version, raw trace hash, endpoint dimensions and
 angles. Compare layout work separately from presentation intervals: extra layout
 does not by itself mean visibly slower animation. The readouts deliberately
@@ -266,12 +247,6 @@ Saturn, rings, sky, materials, labels and depth in every case. The native sensor
 transports inline dimensions to the existing input callbacks with a
 MutationObserver. Renderer JavaScript remains active: this test isolates sensor
 cost on the actual scene, rather than qualifying a finished CSS-only camera.
-
-Historical command preserved at the 2026-09-21 commit: [original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/saturn-browser.mts) (now retired; this helper has no current replacement).
-
-```sh
-CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/saturn-browser.mts
-```
 
 It records three interleaved trials per input, restores the same physical pose
 after warm-up, and verifies the retained prepared tree and rotation endpoint.

@@ -391,7 +391,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "porter-nix-shape",
           "lorri-best",
@@ -404,7 +404,7 @@
         "diffuse": 0.55,
         "datasetId": "monochrome"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ]
 }

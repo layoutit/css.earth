@@ -5,7 +5,7 @@ import { readFitsPrimary } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput, sampleList } from '@cssearth/core/oracle';
 import { requireRecord } from '@cssearth/core';
 
-const fixture = await readOracleFixture('fits/synoptic.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json');
 for (const [path, raw] of Object.entries(requireRecord(fixture.cases.products))) test(`Sun/OPAL reference values: ${path}`, async () => {
   const expected = requireRecord(raw), input = fixture.inputs.find(i => i.path === path); assert.ok(input);
   const image = readFitsPrimary(await readOracleInput(input));

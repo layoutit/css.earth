@@ -23,17 +23,20 @@ export const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
 /** arXiv's API terms: no more than one request every three seconds (https://info.arxiv.org/help/api/tou.html). */
 export const PACE_MS: Readonly<Record<string, number>> = { 'export.arxiv.org': 3000 };
 const nextSlot = new Map<string, number>();
-async function paced(url: string) {
+/** Every pause the transfer takes: its pace, a rate limit, a retry. A test passes one that returns at once. */
+type Wait = (ms: number) => Promise<void>;
+const pause: Wait = ms => new Promise(done => setTimeout(done, ms));
+async function paced(url: string, wait: Wait) {
   const host = new URL(url).host, pace = PACE_MS[host];
   if (!pace) return;
   const now = Date.now(), slot = Math.max(now, nextSlot.get(host) ?? 0);
   nextSlot.set(host, slot + pace);
-  if (slot > now) await new Promise(done => setTimeout(done, slot - now));
+  if (slot > now) await wait(slot - now);
 }
-async function transfer<T>(url: string, read: (response: Response) => Promise<T>, init?: RequestInit): Promise<T> {
+async function transfer<T>(url: string, read: (response: Response) => Promise<T>, init: RequestInit | undefined, wait: Wait): Promise<T> {
   for (let attempt = 1, slowed = 0; ; attempt++) {
     try {
-      await paced(url);
+      await paced(url, wait);
       // Every request names the tool, as the telescope's paper search does; Zenodo refuses one that does not.
       const response = await fetch(url, { ...init, headers: { 'User-Agent': USER_AGENT, ...(init?.headers as Record<string, string> | undefined) }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) });
       const retryAfter = Number(response.headers.get('retry-after'));
@@ -46,24 +49,25 @@ async function transfer<T>(url: string, read: (response: Response) => Promise<T>
       if ((limited || response.status >= 500) && slowed < (limited ? 5 : 3)) {
         slowed++; attempt--;
         await response.body?.cancel();
-        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : limited ? 15 * 2 ** (slowed - 1) : 5 * slowed) * 1000));
+        await wait(Math.min(120, retryAfter > 0 ? retryAfter : limited ? 15 * 2 ** (slowed - 1) : 5 * slowed) * 1000);
         continue;
       }
       if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);
       return await read(response);
     } catch (error) {
       if (error instanceof HttpError || attempt === 3) throw error instanceof HttpError ? error : new Error(`${url}: ${(error as Error).message} after ${attempt} attempts.`);
-      await new Promise(done => setTimeout(done, 1000 * attempt));
+      await wait(1000 * attempt);
     }
   }
 }
 class HttpError extends Error {}
-export const liveArchive: Archive = {
-  text: (url, form) => transfer(url, response => response.text(), form ? { method: 'POST', body: new URLSearchParams(form) } : undefined),
-  bytes: url => transfer(url, async response => Buffer.from(await response.arrayBuffer())),
-  exists: url => transfer(url, async response => response.status === 200, { method: 'HEAD' }).catch(error => { if (error instanceof HttpError) return false; throw error; }),
+export const createLiveArchive = (wait: Wait = pause): Archive => ({
+  text: (url, form) => transfer(url, response => response.text(), form ? { method: 'POST', body: new URLSearchParams(form) } : undefined, wait),
+  bytes: url => transfer(url, async response => Buffer.from(await response.arrayBuffer()), undefined, wait),
+  exists: url => transfer(url, async response => response.status === 200, { method: 'HEAD' }, wait).catch(error => { if (error instanceof HttpError) return false; throw error; }),
   location: url => fetch(url, { redirect: 'manual', headers: { 'User-Agent': USER_AGENT }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) }).then(response => response.status >= 300 && response.status < 400 ? response.headers.get('location') ?? undefined : undefined),
-};
+});
+export const liveArchive: Archive = createLiveArchive();
 
 export const GAIA_TAP = 'https://gea.esac.esa.int/tap-server/tap/sync';
 export const VIZIER_ASU = 'https://vizier.cds.unistra.fr/viz-bin/asu-tsv';

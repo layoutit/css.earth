@@ -67,6 +67,12 @@ class FixtureElement {
     constructor(document: FixtureDocument, tag = "div") { this.document = document; this.tagName = tag.toUpperCase(); this.style = createStyle(); }
     get ownerDocument(): Document { return nativeDocument(this.document); }
     get parentElement(): FixtureElement | null { return this.parentNode; }
+    get localName(): string { return this.tagName.toLowerCase(); }
+    get childElementCount(): number { return this.children.length; }
+    // A detached section (detached-sections.ts) waits in a template: the fixture's templates hold it as their own children,
+    // as a server DOM does, so the content stays empty.
+    private templateContent: FixtureElement | undefined;
+    get content(): FixtureElement | undefined { return this.tagName === "TEMPLATE" ? this.templateContent ??= Object.assign(new FixtureElement(this.document), { nodeType: 11 as const }) : undefined; }
     get isConnected(): boolean { return this === this.document.stage || this.parentNode?.isConnected === true; }
     get classList() { return { contains: (name: string) => this.className.split(/\s+/).includes(name), add: (...names: string[]) => { this.className = [...new Set([...this.className.split(/\s+/).filter(Boolean), ...names])].join(" "); }, remove: (...names: string[]) => { this.className = this.className.split(/\s+/).filter(name => !names.includes(name)).join(" "); }, toggle: (name: string, enabled?: boolean) => { const next = enabled ?? !this.className.split(/\s+/).includes(name); if (next)
             this.classList.add(name);
@@ -95,6 +101,7 @@ class FixtureElement {
     replaceChildren(...children: FixtureElement[]): void { for (const child of [...this.children])
         child.remove(); for (const child of children)
         this.appendChild(child); }
+    replaceWith(node: FixtureElement): void { const parent = this.parentNode; if (!parent) return; parent.insertBefore(node, this); this.remove(); }
     remove(): void { if (this.parentNode)
         this.parentNode.children.splice(this.parentNode.children.indexOf(this), 1); this.parentNode = null; }
     querySelector(selector: string): FixtureElement | null {

@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { CameraMotionState } from './camera-motion-signal.js';
 
@@ -8,17 +10,17 @@ test('a released drag coasts until it stops, and each change is announced once',
   const surface = new EventTarget(), heard: CameraMotionState[] = [], told: CameraMotionState[] = [];
   surface.addEventListener('objectmotionchange', event => heard.push((event as CustomEvent<CameraMotionState>).detail));
   const signal = cameraMotionSignalFor(surface);
-  expect(cameraMotionSignalFor(surface)).toBe(signal);
+  assert.equal(cameraMotionSignalFor(surface), signal);
   signal.subscribe(state => told.push(state));
   signal.begin('drag');
   // The throw begins before the drag ends: one change, to coasting.
   signal.begin('inertia');
   signal.end('drag');
-  expect(signal.coasting).toBe(true);
+  assert.equal(signal.coasting, true);
   signal.end('inertia');
   signal.end('inertia');
-  expect(told).toEqual([driven, coasting, still]);
-  expect(heard).toEqual(told);
+  assert.deepEqual(told, [driven, coasting, still]);
+  assert.deepEqual(heard, told);
 });
 
 test('a hand that takes over a coast steers again', () => {
@@ -26,11 +28,11 @@ test('a hand that takes over a coast steers again', () => {
   const unsubscribe = signal.subscribe(state => told.push(state));
   signal.begin('glide');
   signal.begin('zoom');
-  expect(signal).toMatchObject(driven);
+  assert.partialDeepStrictEqual(signal, driven);
   signal.end('glide');
   signal.end('zoom');
-  expect(told).toEqual([coasting, driven, still]);
+  assert.deepEqual(told, [coasting, driven, still]);
   unsubscribe();
   signal.begin('fly-to');
-  expect(told).toHaveLength(3);
+  assert.equal(told.length, 3);
 });

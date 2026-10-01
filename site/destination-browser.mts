@@ -1,4 +1,5 @@
-import { requiredElement } from './browser/browser-types.mts';
+import { requiredElement, sectionElement } from './browser/browser-types.mts';
+import { showSection } from '@cssearth/renderer';
 
 export interface DestinationPresentation {
   readonly name: string; readonly context: string; readonly coverage: string;
@@ -9,7 +10,8 @@ export interface DestinationPresentation {
 export function createDestinationBrowser({ documentTarget, onSelected, onReset }: {
   documentTarget: Document; onSelected(): void; onReset(): void;
 }) {
-  const panel = documentTarget.querySelector<HTMLElement>('.object-destination-panel');
+  // Mounted only while a city is selected; it waits off the page otherwise (detached-sections.ts).
+  const panel = sectionElement(documentTarget, '.object-destination-panel');
   if (!panel) return null;
   const heading = requiredElement(panel, '.object-destination-name');
   const context = requiredElement(panel, '.object-destination-context');
@@ -23,7 +25,7 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset }
     if (events.signal.aborted) return;
     const opening = value !== null && panel.hidden;
     const hidden = value === null, busy = String(value?.flying ?? false);
-    if (panel.hidden !== hidden) panel.hidden = hidden;
+    if (panel.hidden !== hidden || panel.isConnected === hidden) showSection(panel, !hidden);
     if (panel.ariaBusy !== busy) panel.ariaBusy = busy;
     if (value) {
       heading.textContent = value.name;

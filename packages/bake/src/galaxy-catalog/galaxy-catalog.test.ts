@@ -62,11 +62,25 @@ test('membership never follows a spatial-radius cut and keeps published subgroup
   assert.equal(data.objects.find(row => row.id === 'leo_1')?.membership.subgroup, 'unknown');
   const author: AuthorMetadata = { key: 'new_field', location: { ra: 0, dec: 0 }, name_discovery: {} };
   const base: CsvRow = { key: 'new_field', table: 'field', name: 'New field galaxy', ra: '0', dec: '0', distance_modulus: '0', ref_distance: 'MeasuredPaper', confirmed_real: '1', confirmed_galaxy: '1' };
-  const custom = { ...r, eligibleTables: ['field'], membershipNames: {}, distanceOverrides: {}, detailObjects: {} };
+  const custom = { ...r, eligibleTables: ['field'], membershipNames: {}, distanceOverrides: {}, detailObjects: {}, citedRows: {} };
   for (const modulus of ['0', '30']) {
     const prepared = prepareGalaxyCatalog([{ ...base, distance_modulus: modulus }], new Map([[author.key, author]]), new Map(), custom, []);
     assert.equal(prepared.objects[0]!.membership.group, 'uncertain');
   }
+});
+
+test('a cited row places a galaxy beyond the pinned catalogue under its own id, with its cited membership', async () => {
+  const r = await recipe();
+  const citedRows = { far_elliptical: { name: 'Far elliptical', aliases: ['NGC 1', 'Far elliptical'], raDeg: 187.7, decDeg: 12.4, positionRef: 'cited:position',
+    distance: { valuePc: 16_800_000, method: 'adopted', sourceRef: 'cited:distance' },
+    membership: { group: 'galaxy-cluster' as const, subgroup: 'virgo' as const, basis: 'Fixture.', sourceRef: 'cited:membership' } } };
+  const custom = { ...r, eligibleTables: ['field'], membershipNames: {}, distanceOverrides: {}, detailObjects: { far_elliptical: { id: 'far-elliptical', focusRadiusM: 1e21 } }, citedRows };
+  const prepared = prepareGalaxyCatalog([], new Map(), new Map(), custom, []);
+  const row = prepared.objects[0]!;
+  assert.equal(row.id, 'far-elliptical'); assert.equal(row.detailedObjectId, 'far-elliptical');
+  assert.deepEqual(row.aliases, ['NGC 1']); assert.equal(row.membership.subgroup, 'virgo');
+  assert.ok(Math.abs(Math.hypot(...row.positionM) / M_PER_PC - 16_800_000) < 1e-3);
+  assert.throws(() => parseGalaxyRecipe({ ...JSON.parse(JSON.stringify(r)), citedRows: { x: { ...citedRows.far_elliptical, membership: { ...citedRows.far_elliptical.membership, group: 'uncertain' } } } }), /galaxy cluster/);
 });
 
 test('new source objects follow authored host associations without a fixed galaxy-id dispatch', async () => {

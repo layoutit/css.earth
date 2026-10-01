@@ -8,7 +8,7 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 
 /** astropy as the oracle for the L'LORRI FITS reader and the TAN-SIP distortion (Donaldjohanson). */
 const loaded = await sourceLoad(async () => {
-  const fixture = await readOracleFixture('fits/llorri.json');
+  const fixture = await readOracleFixture('packages/bake/src/objects/layers/terrestrial/missions/llorri.json');
   const [input] = fixture.inputs;
   const source = resolve(ORACLE_ROOT, 'src/objects/donaldjohanson/source');
   const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));

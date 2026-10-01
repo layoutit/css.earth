@@ -17,6 +17,12 @@ interface Recipe {
   source: { url: string; width: number; height: number; publisher: string; credit: string };
   crop: { left: number; top: number; width: number; height: number };
   pointMasks: { x: number; y: number; radius: number }[];
+  /** Catalogued neighbouring galaxies, masked after NOX: NOX removes stars, not galaxies, and an axisymmetric fit would
+   * turn each into a ring about the axis. Positions and sizes come from a catalogue the recipe names. */
+  neighbourMasks?: { source: string; masks: { name: string; x: number; y: number; radius: number }[] };
+  /** Each pixel clamped to the median of the square window around it: compact light smaller than the window (star
+   * haloes, small background galaxies) drops out and the smooth light stays. Only for a window above the fit's cell. */
+  compactClamp?: { windowPx: number; basis: string };
   grid: InferenceGrid; prior: SymmetryPrior; tau: number; iterations: number;
   blackLevel: number; displayExposure: number; slices: number; assumptions: string[];
   nativeRemoval?: NativeRemoval;
@@ -49,6 +55,13 @@ const removed = recipe.nativeRemoval ? await nativeStarless(source, [recipe.sour
 const diffuse = Buffer.from(removed?.pixels ?? native.data);
 if (recipe.nativeRemoval && recipe.pointMasks.length) throw new TypeError('Do not remove point sources again after native NOX separation.');
 applyRecordedPointMasks(diffuse,native.data,native.info.width,native.info.height,recipe.pointMasks);
+if (recipe.neighbourMasks) applyRecordedPointMasks(diffuse,diffuse,native.info.width,native.info.height,recipe.neighbourMasks.masks);
+if (recipe.compactClamp) {
+  const window = recipe.compactClamp.windowPx;
+  if (!Number.isInteger(window) || window < 3 || window % 2 === 0) throw new TypeError(`compactClamp.windowPx must be an odd integer of at least 3, not ${window}.`);
+  const median = await sharp(diffuse, { raw: native.info }).median(window).raw().toBuffer();
+  for (let i = 0; i < diffuse.length; i++) if (median[i]! < diffuse[i]!) diffuse[i] = median[i]!;
+}
 const { grid } = recipe, pixels = grid.width * grid.height;
 const resized = await sharp(diffuse, { raw: native.info }).extract(recipe.crop)
   .resize(grid.width, grid.height, { fit: 'fill', kernel: 'lanczos3' }).raw().toBuffer();

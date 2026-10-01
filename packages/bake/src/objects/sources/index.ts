@@ -4,7 +4,6 @@
 // format check every restored file passes before it is written.
 export * from './authored-sources.ts';
 export * from './idle-timeout.ts';
-export * from './preparation-generator.ts';
 export * from './reference-bank.ts';
 export * from './source-cache.ts';
 export * from './source-file-format.ts';

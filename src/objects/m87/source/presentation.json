@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m87",
+  "name": "M87",
+  "defaultDataset": "eso-optical",
+  "bank": {
+    "path": "src/objects/m87/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/m87/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m87/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "eso-optical",
+      "label": "ESO · optical",
+      "title": "The halo of M87 in visible light",
+      "description": "Chris Mihos's deep Burrell Schmidt view of M87 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, reconstructed as an axially symmetric volume about M87's minor axis. Depth is inferred under that symmetry, not measured.",
+      "summary": "Deep visible-light image on an inferred symmetric volume; depth is not measured.",
+      "detail": "3400 × 3400 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Band",
+          "value": "Burrell Schmidt V"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "82.1 × 82.1 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "16.8 Mpc"
+        }
+      ],
+      "input": "eso-optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/m87-inferred-original.jpg",
+        "url": "https://cdn.eso.org/images/large/eso1525a.jpg"
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 import { parseSkyTarget, readSkyTarget, resolveSkyTarget, simbadObjectQuery, skyCatalogueEntry, skyRegion, skyTargetId } from './sky-target.js';
 import type { MetadataResponse } from './vo-contracts.js';
 

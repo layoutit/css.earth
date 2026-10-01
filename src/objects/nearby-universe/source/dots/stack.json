@@ -2,7 +2,8 @@
   "schema": "cssearth-catalogue-points-stack@1",
   "id": "dots",
   "published": true,
-  "meaning": "The galaxies of Cosmicflows-4 at every zoom: the whole field, then the nested levels around the Milky Way, each adding galaxies as its region fills the view, and innermost the Local Volume Database galaxies nearer than the field.",
+  "meaning": "The galaxies of Cosmicflows-4 at every zoom: the whole field, then the nested levels around the Milky Way, each adding galaxies as its region fills the view, and innermost the Local Volume Database galaxies nearer than the field with the rest of Cosmicflows-4.",
+  "outsidePixelsPerDot": 170,
   "levels": [
     {
       "bank": "galaxies-200mpc",
@@ -11,7 +12,7 @@
     {
       "bank": "galaxies-60mpc",
       "appearUnits": [
-        60,
+        100,
         20
       ]
     },
@@ -37,5 +38,5 @@
       ]
     }
   ],
-  "basis": "Presentation choice: the field is drawn whole within 100 Mpc, half its radius; each level starts to appear when the view's half-width at the Milky Way shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 10 Mpc level is whole at 3 Mpc, where the Local Group catalogue takes over. The Local Volume Database level appears as the half-width shrinks from 3 to 1 Mpc: it starts where the 10 Mpc level is whole, the field's nearest galaxy."
+  "basis": "Presentation choice: the field is drawn whole within 100 Mpc, half its radius; each level starts to appear when the view's half-width at the Milky Way shrinks to the level's radius, so its edge is off screen (the 60 Mpc level from 100 Mpc, where the field is whole, so it arrives over two wheel notches instead of one), and is whole when it reaches the next level's radius; the 10 Mpc level is whole at 3 Mpc, where the Local Group catalogue takes over. The innermost level (the Local Volume Database galaxies and the rest of Cosmicflows-4) appears as the half-width shrinks from 3 to 1 Mpc: it starts where the 10 Mpc level is whole, the field's nearest galaxy. Seen from outside, the field draws at most one dot per 170 square pixels of its projected shape, so it does not show as a ball twice as dense as the sky around it. Measured on screen from 1.6 to 6.7 billion light-years out, the DESI and WISE x SuperCOSMOS galaxies and quasars draw 35 to 53 dots per 10,000 square pixels in the ring from 1.1 to 1.6 of the field.s radius; at one dot per 64 (every bank.s default) the field and those layers drew 104 to 112 inside it, and at 170 they draw within about a fifth of the ring."
 }

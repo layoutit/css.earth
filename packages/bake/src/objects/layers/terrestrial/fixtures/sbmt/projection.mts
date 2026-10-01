@@ -9,7 +9,7 @@ import { ORACLE_ROOT, assertPinnedInputs } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber } from '@cssearth/core';
 
 const definitions = await cases();
-const inputPaths = [...new Set(['tests/fixtures/sbmt/cases.json', ...definitions.flatMap(c => [c.shape, c.pointing, c.image])])].sort();
+const inputPaths = [...new Set(['packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json', ...definitions.flatMap(c => [c.shape, c.pointing, c.image])])].sort();
 const inputs = await Promise.all(inputPaths.map(async path => ({ path, ...await fileBytes(sourceFile(path)) })));
 await assertPinnedInputs(inputs);
 const { java, tool } = await startNative();
@@ -98,5 +98,5 @@ for (const c of definitions) {
 await mkdir(import.meta.dirname,{recursive:true});
 const destination = process.argv[2] ?? resolve(import.meta.dirname,'projection.json');
 if (!resolve(destination).startsWith(import.meta.dirname+'/') && !resolve(destination).startsWith(resolve(ORACLE_ROOT,'output')+'/')) throw new Error('Oracle output must be test evidence or scratch');
-await writeFile(destination, JSON.stringify({schema:'cssearth-oracle-fixture@1',oracle:'SBMT',generatedBy:'tests/oracles/sbmt/projection.mts',tool,inputs,references:[],cases:output},null,2)+'\n');
+await writeFile(destination, JSON.stringify({schema:'cssearth-oracle-fixture@1',oracle:'SBMT',generatedBy:'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.mts',tool,inputs,references:[],cases:output},null,2)+'\n');
 console.log(`Wrote ${destination}`);

@@ -33,7 +33,7 @@ export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: s
       : object.membership.group === 'local-group' ? 'Local Group' : 'Galaxy catalogue',
     sceneHostId, route: `/${object.id}/`,
     distance: { ...(object.distance.subject ? { subject: object.distance.subject } : {}), meters: object.distance.valuePc * PC_M, value: object.distance.valuePc, unit: 'pc',
-      quantity: isPreparedCluster(object) ? 'comoving' : 'catalogue', referencePoint: 'observer', epochJdTt: null } });
+      quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null } });
 }
 
 /** Every row of every spatial catalogue (galaxies, clusters, nebulae), in folder order. */

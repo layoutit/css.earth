@@ -209,7 +209,8 @@ import Detached from './Detached.astro';
 <aside id={`${objectId}-sidebar`} class="object-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Object information">
   <div class="object-drawer-content" id={`${objectId}-information`}>
     <input class="object-sheet-handle" type="checkbox" aria-label="Expand information sheet" aria-controls={`${objectId}-information`} />
-    {!navigation && <nav
+    {/* Search results mount while search is open; the browser waits off the page otherwise. */}
+    {!navigation && <Detached detached><nav
       id={`${objectId}-object-browser`}
       class="object-browser maps-object-results"
       aria-label="Celestial bodies"
@@ -229,7 +230,7 @@ import Detached from './Detached.astro';
           </ul>
         </Accordion>
       </ObjectResults>
-    </nav>}
+    </nav></Detached>}
     <div class="object-selected-content">
     {!navigation && <Detached detached><div class="object-context" hidden><Detached detached><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="object-selected-panel">
@@ -279,13 +280,14 @@ import Detached from './Detached.astro';
         </div>
       </ObjectCard></Detached></div></Detached>}
     {/* Every page carries the selected-city panel: a visit that starts on another body can open a city on Earth. */}
-    <section class="object-destination-panel" aria-label="Selected city" hidden>
+    <Detached detached><section class="object-destination-panel" aria-label="Selected city" hidden>
       <button class="object-destination-back" type="button">← Back to {activeObject?.name}</button>
       <h2 class="object-destination-name"></h2>
       <p class="object-destination-context"></p>
       <p class="object-destination-status" role="status"></p>
-    </section>
-    <ObjectInformationPanel {...Astro.props} />
+    </section></Detached>
+    {/* A page that opens on an overview or a catalogue focus shows that card; the body's waits off the page. */}
+    <Detached detached={pageId !== objectId}><ObjectInformationPanel {...Astro.props} /></Detached>
     <div class="object-sheet-sources"><SourcesLink objectId={objectId} name={Astro.props.title.label} /></div>
     </div>
   </div>

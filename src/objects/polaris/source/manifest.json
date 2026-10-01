@@ -251,7 +251,7 @@
       "path": "reference/spotless-disc-comparison.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence figure for the excluded April 2021 image: SQUEEZE reconstructions of the OiDB file and of a spotless disc simulated on its sampling by tools/objects/interferometry/spotless-disc.mts, beam-convolved and divided by their limb profiles, made 2026-09-16. That tool now lives in packages/telescope-cli/src/archives/interferometry/spotless-disc.mts."
+        "reason": "Evidence figure for the excluded April 2021 image: SQUEEZE reconstructions of the OiDB file and of a spotless disc simulated on its sampling by packages/telescope-cli/src/archives/interferometry/spotless-disc.mts, beam-convolved and divided by their limb profiles, made 2026-09-16. That tool now lives in packages/telescope-cli/src/archives/interferometry/spotless-disc.mts."
       }
     }
   ]

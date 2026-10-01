@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "galaxies-2mrs",
+  "table": {
+    "path": "twomrs-sample.csv.gz",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/199/26/table3.dat.gz",
+    "generator": "packages/bake/authoring/nearby-universe/twomrs-sample.mts",
+    "bytes": 651401,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "redshift-planck18"
+  },
+  "sample": "The tracked file keeps the 27,897 of 2MRS's 44,599 galaxies that Cosmicflows-4 does not hold (none within 10 arcsec of a Cosmicflows-4 position), with a redshift from Cosmicflows-4's nearest galaxy to z 0.05 in the cosmic microwave background's frame (packages/bake/authoring/nearby-universe/twomrs-sample.mts: Planck's dipole, 369.82 km/s toward l 264.021, b 48.253), with ID, RA, DEC, Z, the ZCAT numerical type T and Kcmag.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "huchra-2012-2mrs",
+  "meaning": "The galaxies of the 2MASS Redshift Survey (Huchra et al. 2012, Ks 11.75 and brighter, all sky down to 5 degrees from the Milky Way's plane) that Cosmicflows-4 does not hold, each at its comoving distance in the Planck 2018 cosmology from its redshift in the CMB frame: they fill the sky Cosmicflows-4's surveys leave out. A redshift distance carries the galaxy's own motion, so these sit less exactly than Cosmicflows-4's measured ones.",
+  "cosmology": "planck-2018-cosmology",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorByClass": {
+      "column": 5,
+      "classes": [
+        {
+          "label": "elliptical (T below -3.5)",
+          "below": -3.5,
+          "spectrum": {
+            "path": "../galaxies/kc96/elliptical_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "lenticular (T -3.5 to -0.5)",
+          "below": -0.5,
+          "spectrum": {
+            "path": "../galaxies/kc96/s0_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sa (T -0.5 to 2)",
+          "below": 2,
+          "spectrum": {
+            "path": "../galaxies/kc96/sa_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sb (T 2 to 4)",
+          "below": 4,
+          "spectrum": {
+            "path": "../galaxies/kc96/sb_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sc and later (T 4 and above)",
+          "spectrum": {
+            "path": "../galaxies/kc96/sc_template.fits",
+            "bytes": 17280,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom",
+            "endsNm": {
+              "value": 766,
+              "basis": "The Sc template's optical spectrum ends at 766 nm. Cutting the other four templates at 766 nm leaves each colour the same to the sRGB step (checked 2026-09-29), since the eye's response there is under 0.1% of its peak."
+            }
+          }
+        }
+      ],
+      "missing": {
+        "label": "no type in 2MRS",
+        "colorCss": "#ffffff",
+        "basis": "The D65 white point: a galaxy with no measured type is drawn without a colour."
+      }
+    },
+    "toneBy": {
+      "magnitudeColumn": 6,
+      "band": "Ks (2MRS Kcmag, extinction-corrected isophotal)",
+      "brightMagnitude": -25.5,
+      "faintMagnitude": -22.5,
+      "faintTone": 0.3,
+      "steps": 8,
+      "basis": "Presentation of a measured quantity, on the pattern of the field's B tone: each galaxy's absolute Ks magnitude (Kcmag at its Planck 2018 luminosity distance) darkens its colour, full at -25.5 and 30% at -22.5, the 5th and 95th percentiles of these galaxies (-25.46 and -22.56). 2MRS has no B magnitude, so the tone is ranked within this sample, not on the field's scale."
+    },
+    "sizeBy": {
+      "shells": 16,
+      "tiers": [
+        {
+          "brightestShare": 0.25,
+          "radiusPx": 0.9
+        },
+        {
+          "brightestShare": 0.75,
+          "radiusPx": 0.65
+        }
+      ],
+      "radiusPx": 0.5,
+      "basis": "Presentation of a measured quantity: three dot sizes by absolute Ks magnitude, ranked among the galaxies at about the same distance (16 shells of equal count), so the survey reaching only luminous galaxies far away does not make the far dots the large ones. The brightest quarter of each shell draws 0.9 px, the middle half 0.65 px and the faintest quarter 0.5 px. The radii keep the bank's total light (each dot's luminance times its area) within 2% of its one 0.75 px size before, measured on the baked stack, so the sizes move light between galaxies without adding any."
+    }
+  },
+  "classBasis": "Class bounds are the midpoints between the de Vaucouleurs numerical types the templates stand for (E -5, S0 -2, Sa 1, Sb 3, Sc 5); types later than Sc take the Sc template, the latest in the atlas. 2MRS's types are ZCAT's numerical stages (Huchra et al. 2012, table 3 note G1)."
+}

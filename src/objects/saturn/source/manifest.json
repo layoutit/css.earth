@@ -1681,7 +1681,7 @@
   "generatedIntermediates": [
     {
       "path": "datasets/manifest.json",
-      "generator": "tools/objects/operations-acquisition.ts json-document operation in preparation/acquisition.json"
+      "generator": "packages/bake/src/objects/acquisition/operations-acquisition.ts"
     }
   ],
   "documents": [

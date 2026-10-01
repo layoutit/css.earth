@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-oracle-fixture@1",
   "oracle": "spiceypy",
-  "generatedBy": "tools/oracles/spice/new-horizons-approach.py",
+  "generatedBy": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.py",
   "tool": {
     "spiceypy": "8.2.0",
     "cspice": "CSPICE_N0067",

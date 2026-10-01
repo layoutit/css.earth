@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { ALIGN, HEADER_OFFSET, MAGIC } from './format.js'
 import { readCatalog } from './read.js'
 import { writeCatalog } from './write.js'
@@ -18,16 +20,16 @@ const sample = () =>
 describe('gxct round trip', () => {
   it('writes a recognisable container', () => {
     const bytes = sample()
-    expect(new DataView(bytes.buffer).getUint32(0, true)).toBe(MAGIC)
-    expect(bytes.byteLength % ALIGN).toBe(0)
+    assert.equal(new DataView(bytes.buffer).getUint32(0, true), MAGIC)
+    assert.equal((bytes.byteLength % ALIGN), 0)
   })
 
   it('reads numeric columns back', () => {
     const catalog = readCatalog(sample().buffer as ArrayBuffer)
-    expect(catalog.count).toBe(3)
-    expect([...catalog.numeric('posPc') as Float32Array]).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    expect([...catalog.numeric('hip') as Int32Array]).toEqual([71683, 32349, 91262])
-    expect([...catalog.numeric('absMag') as Float64Array]).toEqual([4.38, 1.42, 0.58])
+    assert.equal(catalog.count, 3)
+    assert.deepEqual(([...catalog.numeric('posPc') as Float32Array]), [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    assert.deepEqual(([...catalog.numeric('hip') as Int32Array]), [71683, 32349, 91262])
+    assert.deepEqual(([...catalog.numeric('absMag') as Float64Array]), [4.38, 1.42, 0.58])
   })
 
   it('reads strings back, including non-ascii', () => {
@@ -36,38 +38,37 @@ describe('gxct round trip', () => {
       columns: { name: { type: 'str', data: ['β Cygni', ''] } },
     })
     const catalog = readCatalog(bytes.buffer as ArrayBuffer)
-    expect(catalog.strings('name')).toEqual(['β Cygni', ''])
+    assert.deepEqual(catalog.strings('name'), ['β Cygni', ''])
   })
 
   it('carries metadata and column names', () => {
     const catalog = readCatalog(sample().buffer as ArrayBuffer)
-    expect(catalog.meta).toEqual({ source: 'test', epoch: 'J2000' })
-    expect(catalog.names).toEqual(['posPc', 'hip', 'absMag', 'name'])
+    assert.deepEqual(catalog.meta, { source: 'test', epoch: 'J2000' })
+    assert.deepEqual(catalog.names, ['posPc', 'hip', 'absMag', 'name'])
   })
 
   it('aligns every blob so views can be constructed in place', () => {
     const catalog = readCatalog(sample().buffer as ArrayBuffer)
     for (const name of catalog.names) {
       const header = catalog.header(name)
-      expect(header.offset % ALIGN).toBe(0)
-      if (header.type === 'str') expect(header.indexOffset % ALIGN).toBe(0)
+      assert.equal((header.offset % ALIGN), 0)
+      if (header.type === 'str') assert.equal((header.indexOffset % ALIGN), 0)
     }
   })
 
   it('does not copy numeric data', () => {
     const bytes = sample()
     const catalog = readCatalog(bytes.buffer as ArrayBuffer)
-    expect((catalog.numeric('hip') as Int32Array).buffer).toBe(bytes.buffer)
+    assert.equal((catalog.numeric('hip') as Int32Array).buffer, bytes.buffer)
   })
 
   it('rejects a row-count mismatch', () => {
-    expect(() =>
-      writeCatalog({ count: 2, columns: { x: { type: 'f32', components: 3, data: [1, 2, 3] } } }),
-    ).toThrow(/components/)
+    assert.throws(() =>
+      writeCatalog({ count: 2, columns: { x: { type: 'f32', components: 3, data: [1, 2, 3] } } }), /components/)
   })
 
   it('rejects a foreign buffer', () => {
     const junk = new Uint8Array(HEADER_OFFSET)
-    expect(() => readCatalog(junk.buffer)).toThrow(/bad magic/)
+    assert.throws(() => readCatalog(junk.buffer), /bad magic/)
   })
 })

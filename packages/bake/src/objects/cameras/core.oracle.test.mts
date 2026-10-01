@@ -5,7 +5,7 @@ import { readFitsHdus, readFitsImage } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput, verifyOracleBytes } from '@cssearth/core/oracle';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
-const fixture = await readOracleFixture('fits/core.json');
+const fixture = await readOracleFixture('packages/bake/src/objects/layers/observation/fixtures/fits/core.json');
 for (const [name, raw] of Object.entries(fixture.cases)) test(`Astropy conformance: ${name}`, async () => {
   const entry = requireRecord(raw), path = requireString(entry.path), input = fixture.inputs.find(i => i.path === path);
   assert.ok(input);

@@ -68,7 +68,7 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
       if (raw.generator !== undefined) {
         const generator = sourcePath(raw.generator), failure = await restore(path, destination, mirror);
         if (failure) throw new Error(`${entry} is built by field "generator" = "${generator}" and the source mirror has no usable copy: ` +
-          `${mirror} ${failure}. Run node ${generator}, then publish it with node packages/bake/cli/publish-source-cache.mts --object=${id}.`);
+          `${mirror} ${failure}. Run ${/^\S+\.py(?:\s|$)/u.test(generator) ? 'python3' : 'node'} ${generator}, then publish it with node packages/bake/cli/publish-source-cache.mts --object=${id}.`);
         continue;
       }
       const origin = typeof raw.origin === 'string' && raw.origin ? raw.origin : null;

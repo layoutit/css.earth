@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-arrokoth-registration-audit@1",
   "generator": {
-    "path": "tools/objects/arrokoth/qualify-photographs.mts"
+    "path": "packages/bake/authoring/arrokoth/qualify-photographs.mts"
   },
   "elapsedSeconds": 1,
   "method": "Frozen mesh attitude and pointing offsets; original TAN-SIP ray distortion. Along-normal ray-hit/miss limb residuals. No correction is fitted by this audit.",

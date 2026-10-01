@@ -2,7 +2,7 @@ import { createSystemBodiesPresentation } from './system-bodies-fragment.mts';
 import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
-import { requiredElement, setPanelHidden, setSectionShown, setLinkSelected, type BrowserWindow } from './browser/browser-types.mts';
+import { requiredSection, setSectionShown, setLinkSelected, type BrowserWindow } from './browser/browser-types.mts';
 import { sectionElements } from '@cssearth/renderer';
 import type { CatalogueSelection } from './search/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
@@ -16,8 +16,8 @@ import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragme
 export function createSelectionPresentation(documentTarget: Document, {
   windowTarget,
 }: { windowTarget?: BrowserWindow } = {}) {
-  const browser = requiredElement<HTMLElement>(documentTarget, '.object-browser');
-  const information = requiredElement<HTMLElement>(documentTarget, '.object-information-panel');
+  const browser = requiredSection(documentTarget, '.object-browser');
+  const information = requiredSection(documentTarget, '.object-information-panel');
   // Search/navigation and the selection share one sidebar content owner. The
   // selected content stays retained while the browser temporarily replaces it.
   // The context and each of its cards are mounted only while shown (detached-sections.ts); the others wait in templates.
@@ -70,7 +70,8 @@ export function createSelectionPresentation(documentTarget: Document, {
     if (focusCard) setSectionShown(focusCard, !!focus);
     if (system) setSectionShown(system, systemSelected);
     systemContent.show(systemSelected);
-    setPanelHidden(information, showContext);
+    // An overview or a catalogue focus shows its own card; the body's card waits off the page.
+    setSectionShown(information, !showContext);
     setSectionShown(context, showContext);
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;

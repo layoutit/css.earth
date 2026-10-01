@@ -1,5 +1,5 @@
 import { requireFiniteNumber as finite, requirePositive as positive, requireRecord as record } from '@cssearth/core';
-import type { GalaxyDistance, GalaxyRecipe, SourcePin } from './types.ts';
+import type { CitedGalaxy, GalaxyDistance, GalaxyRecipe, SourcePin } from './types.ts';
 
 export function keys(value: Record<string, unknown>, allowed: string[], label: string): void {
   for (const key of Object.keys(value)) if (!allowed.includes(key)) throw new TypeError(`Unknown ${label} field: ${key}`);
@@ -34,9 +34,19 @@ function distance(value: unknown): GalaxyDistance {
   }
   return result;
 }
+function citedGalaxy(value: unknown, key: string): CitedGalaxy {
+  const r = record(value, `Cited row ${key}`); keys(r, ['name', 'aliases', 'raDeg', 'decDeg', 'positionRef', 'distance', 'membership'], `Cited row ${key}`);
+  const raDeg = finite(r.raDeg, `${key} RA`), decDeg = finite(r.decDeg, `${key} Dec`);
+  if (raDeg < 0 || raDeg >= 360 || decDeg < -90 || decDeg > 90) throw new TypeError(`Cited row ${key} has no usable ICRS position.`);
+  if (!Array.isArray(r.aliases)) throw new TypeError(`Cited row ${key} aliases must be a list.`);
+  const m = record(r.membership, `${key} membership`); keys(m, ['group', 'subgroup', 'basis', 'sourceRef'], `${key} membership`);
+  if (m.group !== 'galaxy-cluster' || m.subgroup !== 'virgo') throw new TypeError(`Cited row ${key} membership is a galaxy cluster's (galaxy-cluster, virgo), not ${String(m.group)}, ${String(m.subgroup)}.`);
+  return { name: text(r.name, `${key} name`), aliases: r.aliases.map(alias => text(alias, `${key} alias`)), raDeg, decDeg, positionRef: text(r.positionRef, `${key} position reference`),
+    distance: distance(r.distance), membership: { group: m.group, subgroup: m.subgroup, basis: text(m.basis, `${key} membership basis`), sourceRef: text(m.sourceRef, `${key} membership reference`) } };
+}
 export function parseGalaxyRecipe(value: unknown): GalaxyRecipe {
   const r = record(value, 'Galaxy recipe');
-  keys(r, ['schema', 'frame', 'catalogue', 'archive', 'membershipTable', 'provenance', 'catalogueSourceId', 'membershipSourceId', 'archiveInputPrefix', 'eligibleTables', 'excludedDistanceMethods', 'hostRoots', 'membershipNames', 'detailObjects', 'distanceOverrides', 'description'], 'Galaxy recipe');
+  keys(r, ['schema', 'frame', 'catalogue', 'archive', 'membershipTable', 'provenance', 'catalogueSourceId', 'membershipSourceId', 'archiveInputPrefix', 'eligibleTables', 'excludedDistanceMethods', 'hostRoots', 'membershipNames', 'detailObjects', 'distanceOverrides', 'citedRows', 'description'], 'Galaxy recipe');
   if (r.schema !== 'cssearth-galaxy-catalog-source@1') throw new TypeError('Unsupported galaxy recipe schema.');
   const frame = record(r.frame, 'Frame'); keys(frame, ['referenceFrame', 'epochJdTt'], 'Frame');
   if (frame.referenceFrame !== 'sun-icrf') throw new TypeError('Galaxy astrometry requires Sun-origin ICRS axes.');
@@ -57,5 +67,7 @@ export function parseGalaxyRecipe(value: unknown): GalaxyRecipe {
     catalogue: pin(r.catalogue, 'Catalogue'), archive: pin(r.archive, 'Archive'), membershipTable: pin(r.membershipTable, 'Membership table'), provenance: pin(r.provenance, 'Provenance'),
     catalogueSourceId: text(r.catalogueSourceId, 'Catalogue source identifier'), membershipSourceId: text(r.membershipSourceId, 'Membership source identifier'),
     archiveInputPrefix, eligibleTables: strings(r.eligibleTables, 'Eligible tables'), excludedDistanceMethods: strings(r.excludedDistanceMethods, 'Excluded methods'),
-    hostRoots, membershipNames, detailObjects, distanceOverrides, description: text(r.description, 'Selection description') };
+    hostRoots, membershipNames, detailObjects, distanceOverrides,
+    ...(r.citedRows === undefined ? {} : { citedRows: Object.fromEntries(Object.entries(record(r.citedRows, 'Cited rows')).map(([key, value]) => [id(key), citedGalaxy(value, key)])) }),
+    description: text(r.description, 'Selection description') };
 }

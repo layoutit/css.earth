@@ -5,7 +5,7 @@
   "product": "j9xe05e0q_flt",
   "instrument": "ACS/SBC",
   "opticalElement": "PR130L",
-  "toolchain": "tools/objects/hst/toolchain.json",
+  "toolchain": "packages/telescope-cli/src/archives/hst/toolchain.json",
   "crdsContext": "hst_1358.pmap",
   "mast": {
     "name": "j9xe05e0q_flt.fits",

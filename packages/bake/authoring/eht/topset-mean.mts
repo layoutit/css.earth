@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 /**
  * The EHT image of a black hole, made the way its collaboration made it: EHT's own eht-imaging pipeline, run on the
- * released calibrated data for a drawn sample of its published Top Set parameter combinations, and averaged.
+ * released calibrated data for a drawn sample of its published Top Set parameter combinations, and averaged. A release
+ * with no Top Set (the first M87 release, 2019-D01-02) ships its pipeline with the fiducial parameters written in: that
+ * recipe (`cssearth-eht-fiducial@1`) has no sample, and the pipeline runs once as released.
  *
  *   node packages/bake/authoring/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]
  *
- * The recipe is the object's `source/preparation/eht-topset.json`: the data and pipeline releases by commit and file path,
- * the one change made to the pipeline, the toolchain it needs and the drawn combinations. Files are fetched from the releases
+ * The recipe is the object's `source/preparation/eht-topset.json` (or `eht-fiducial.json`): the data and pipeline releases
+ * by commit and file path, any one change made to the pipeline, the toolchain it needs and the drawn combinations. Files are fetched from the releases
  * at those commits; reconstructions are kept under `.local/<object-id>/eht/` and a finished one is never run again.
  * The mean is written to the recipe's output beside the object's sources, with the spread between the sample's first half
  * and the whole reported so the average's convergence is on record.
@@ -30,8 +32,12 @@ const workers = Number(option('workers') ?? 2);
 if (!Number.isSafeInteger(workers) || workers < 1) throw new Error(`--workers is a positive integer, not ${option('workers')}.`);
 
 const sourceDirectory = resolve(root, 'src/objects', objectId, 'source');
-const recipe = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/eht-topset.json'), 'utf8')), 'EHT Top Set recipe');
-if (recipe.schema !== 'cssearth-eht-topset-mean@1') throw new Error(`${objectId}: the EHT recipe schema is ${String(recipe.schema)}, not cssearth-eht-topset-mean@1.`);
+const exists = (path: string) => access(path).then(() => true, () => false);
+const topSetPath = resolve(sourceDirectory, 'preparation/eht-topset.json'), fiducialPath = resolve(sourceDirectory, 'preparation/eht-fiducial.json');
+const fiducial = !await exists(topSetPath);
+const recipe = requireRecord(JSON.parse(await readFile(fiducial ? fiducialPath : topSetPath, 'utf8')), 'EHT recipe');
+const schema = fiducial ? 'cssearth-eht-fiducial@1' : 'cssearth-eht-topset-mean@1';
+if (recipe.schema !== schema) throw new Error(`${objectId}: the EHT recipe schema is ${String(recipe.schema)}, not ${schema}.`);
 const release = (value: unknown, label: string): Release => {
   const record = requireRecord(value, label);
   return { repository: requireString(record.repository, `${label} repository`), commit: requireString(record.commit, `${label} commit`),
@@ -40,16 +46,18 @@ const release = (value: unknown, label: string): Release => {
       return { role: requireString(entry.role, `${label} file role`), path: requireString(entry.path, `${label} file path`) }; }) };
 };
 const data = release(recipe.data, 'data release'), pipeline = release(recipe.pipeline, 'pipeline release');
-const change = requireRecord(requireRecord(recipe.pipeline, 'pipeline release').change, 'pipeline change');
-const sample = requireRecord(recipe.sample, 'sample');
-const combinations = requireArray(sample.combinations, 'sample combinations').map(value => requireFiniteNumber(value, 'combination'));
-if (combinations.length !== requireFiniteNumber(sample.size, 'sample size') || new Set(combinations).size !== combinations.length ||
-    combinations.some(value => !Number.isSafeInteger(value) || value < 0 || value >= requireFiniteNumber(sample.population, 'sample population'))) {
+const changeValue = requireRecord(recipe.pipeline, 'pipeline release').change;
+const change = changeValue === undefined ? null : requireRecord(changeValue, 'pipeline change');
+if (fiducial && 'sample' in recipe) throw new Error(`${objectId}: a fiducial recipe runs the pipeline as released and lists no sample.`);
+const sample = fiducial ? null : requireRecord(recipe.sample, 'sample');
+// A fiducial run is the one reconstruction, numbered -1: it passes no parameter row.
+const combinations = sample ? requireArray(sample.combinations, 'sample combinations').map(value => requireFiniteNumber(value, 'combination')) : [-1];
+if (sample && (combinations.length !== requireFiniteNumber(sample.size, 'sample size') || new Set(combinations).size !== combinations.length ||
+    combinations.some(value => !Number.isSafeInteger(value) || value < 0 || value >= requireFiniteNumber(sample.population, 'sample population')))) {
   throw new Error(`${objectId}: the sample lists ${combinations.length} combinations; it must list ${String(sample.size)} distinct rows below ${String(sample.population)}.`);
 }
 
 const work = resolve(root, '.local', objectId, 'eht');
-const exists = (path: string) => access(path).then(() => true, () => false);
 /** A release file in the work directory, fetched at the release commit when absent. */
 async function releaseFile(source: Release, file: ReleaseFile): Promise<string> {
   const target = resolve(work, 'release', source.repository.split('/').at(-1)!, file.path);
@@ -67,27 +75,34 @@ const [low, high] = await Promise.all(['low band', 'high band'].map(role => {
   return releaseFile(data, file);
 }));
 const pipelineFiles = new Map(await Promise.all(pipeline.files.map(async file => [file.role, await releaseFile(pipeline, file)] as const)));
-// The run directory holds the changed pipeline beside the pre-imaging module it imports, and the Top Set parameters.
+// The run directory holds the pipeline, with its one change if any, beside the pre-imaging module it imports and the Top
+// Set parameters, when the release has them.
 const run = resolve(work, 'run');
 await mkdir(resolve(run, 'fits'), { recursive: true }); await mkdir(resolve(run, 'logs'), { recursive: true });
-const script = await readFile(pipelineFiles.get('pipeline')!, 'utf8'), replace = requireString(change.replace, 'change text'), replacement = requireString(change.with, 'change replacement');
-if (script.split(replace).length !== 2) throw new Error(`${objectId}: the pipeline change "${replace}" does not occur exactly once.`);
-await writeFile(resolve(run, 'eht-imaging_pipeline.py'), script.replace(replace, replacement));
-await writeFile(resolve(run, 'preimcal.py'), await readFile(pipelineFiles.get('pre-imaging')!));
+let script = await readFile(pipelineFiles.get('pipeline')!, 'utf8');
+if (change) {
+  const replace = requireString(change.replace, 'change text'), replacement = requireString(change.with, 'change replacement');
+  if (script.split(replace).length !== 2) throw new Error(`${objectId}: the pipeline change "${replace}" does not occur exactly once.`);
+  script = script.replace(replace, replacement);
+}
+await writeFile(resolve(run, 'eht-imaging_pipeline.py'), script);
+const preImaging = pipelineFiles.get('pre-imaging');
+if (preImaging) await writeFile(resolve(run, 'preimcal.py'), await readFile(preImaging));
 // preimcal.py reads the refractive-scattering noise models from its working directory by name.
 for (const file of pipeline.files.filter(entry => entry.role === 'scattering model'))
   await writeFile(resolve(run, file.path.split('/').at(-1)!), await readFile(resolve(work, 'release', pipeline.repository.split('/').at(-1)!, file.path)));
 const parameters = resolve(run, 'eht-imaging_params.csv');
-await writeFile(parameters, await readFile(pipelineFiles.get('parameters')!));
+if (sample) await writeFile(parameters, await readFile(pipelineFiles.get('parameters')!));
 
-const fitsPath = (combination: number) => resolve(run, 'fits', `combo-${String(combination).padStart(4, '0')}.fits`);
+const fitsPath = (combination: number) => resolve(run, 'fits', combination < 0 ? 'fiducial.fits' : `combo-${String(combination).padStart(4, '0')}.fits`);
 /** One reconstruction; skipped when its FITS exists, written atomically so an interrupted run is never taken as finished. */
 async function reconstruct(combination: number) {
   const out = fitsPath(combination);
   if (await exists(out)) return;
   const partial = resolve(run, 'fits', `.combo-${combination}.fits`);
   await new Promise<void>((accept, reject) => {
-    const child = spawn('nice', ['-n', '15', python, '-u', 'eht-imaging_pipeline.py', '-i', low!, '-i2', high!, '-p', parameters, '-c', String(combination), '-o', partial],
+    const row = combination < 0 ? [] : ['-p', parameters, '-c', String(combination)];
+    const child = spawn('nice', ['-n', '15', python, '-u', 'eht-imaging_pipeline.py', '-i', low!, '-i2', high!, ...row, '-o', partial],
       { cwd: run, stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, MPLBACKEND: 'Agg', OMP_NUM_THREADS: '1', OPENBLAS_NUM_THREADS: '1', MKL_NUM_THREADS: '1', VECLIB_MAXIMUM_THREADS: '1', NUMEXPR_NUM_THREADS: '1' } });
     const log: Buffer[] = [];
     child.stdout.on('data', chunk => log.push(chunk)); child.stderr.on('data', chunk => log.push(chunk));
@@ -127,8 +142,9 @@ const card = (key: string) => [key, header[key] as string | number] as [string, 
 const bytes = Buffer.concat([headerBlock([['SIMPLE', true], ['BITPIX', -64], ['NAXIS', 2], ['NAXIS1', first.width], ['NAXIS2', first.height],
   card('CTYPE1'), card('CTYPE2'), card('CDELT1'), card('CDELT2'), card('CRPIX1'), card('CRPIX2'),
   ['CRVAL1', header.OBSRA as number], ['CRVAL2', header.OBSDEC as number], ['CUNIT1', 'deg'], ['CUNIT2', 'deg'],
-  card('OBSRA'), card('OBSDEC'), card('BUNIT'), card('FREQ'), card('MJD'), card('TELESCOP'), ['NCOMBINE', images.length, 'Top Set reconstructions averaged']]), padBlock(values)]);
+  card('OBSRA'), card('OBSDEC'), card('BUNIT'), card('FREQ'), card('MJD'), card('TELESCOP'), ['NCOMBINE', images.length, sample ? 'Top Set reconstructions averaged' : 'the fiducial reconstruction']]), padBlock(values)]);
 const output = resolve(sourceDirectory, requireString(recipe.output, 'output'));
 await mkdir(resolve(output, '..'), { recursive: true });
 await writeFile(output, bytes);
-console.log(`${images.length} reconstructions averaged into ${output}; half against all: ${(Math.sqrt(square / all.length) / peak * 100).toFixed(1)}% rms, ${(worst / peak * 100).toFixed(1)}% at most, of the peak.`);
+console.log(sample ? `${images.length} reconstructions averaged into ${output}; half against all: ${(Math.sqrt(square / all.length) / peak * 100).toFixed(1)}% rms, ${(worst / peak * 100).toFixed(1)}% at most, of the peak.`
+  : `The fiducial reconstruction written to ${output}.`);

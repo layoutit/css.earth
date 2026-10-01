@@ -6,6 +6,7 @@ import { OVERVIEWS, SCENE_OBJECTS } from '../objects.mts';
 import preparedWorld from '../../src/objects/sun/prepared/world-context.json';
 import { SOLAR_SYSTEM_ID, systemById, systemOfObject } from '../object-systems.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
+import { overviewsReachableFrom } from '../overview-context.mts';
 
 const { objectId, scope, systemId, satelliteSystem = false, includeObject: requestedIncludeObject,
   currentPage: requestedCurrentPage, ...attributes } = Astro.props;
@@ -13,8 +14,10 @@ const includeObject = requestedIncludeObject ?? Boolean(objectId && !satelliteSy
   && (satelliteSystemByHost(objectId) || satelliteSystemOfMember(objectId)));
 const currentPage = requestedCurrentPage ?? (Boolean(scope) || satelliteSystem || includeObject);
 const object = SCENE_OBJECTS.find(object => object.id === objectId);
-// Each overview is its own page; the trail runs from the farthest level in.
-const galactic = [...OVERVIEWS].reverse();
+// Each overview is its own page; the trail runs from the farthest level in, through the levels a zoom centred on the object
+// reaches (M87* is in no Local Group).
+const positionM = !scope && object ? preparedWorld.bodies.find(body => body.id === object.id)?.positionM : undefined;
+const galactic = [...(positionM ? overviewsReachableFrom(positionM) : OVERVIEWS)].reverse();
 const crumbs = galactic.slice(0, scope && scope !== 'system' ? galactic.findIndex(entry => entry.id === scope) + 1 : galactic.length)
   .map(entry => ({ label: entry.name, href: entry.route }));
 // An object's trail passes through its own planetary system; a star outside every system sits directly in the Milky Way.
