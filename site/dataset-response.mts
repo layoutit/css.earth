@@ -18,6 +18,8 @@ function region(html: string, name: string) {
 
 /** A saved view (`v`) this build cannot read: an old or damaged shared link, not a malformed request. The page answers
  * without it rather than refusing the visit. */
+const SCENE_ADDRESSES = /\/scenes\/[a-z][a-z0-9-]*\/[^\s"')]+/gu;
+
 export class UnreadableSavedView extends RangeError {
   readonly value: string;
   constructor(value: string) { super(`Invalid saved view: v=${value.slice(0, 80)}.`); this.value = value; }
@@ -118,6 +120,14 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
       saved = await renderNativeFocus(shell.document, stage, url, definition, frame, saved, fetcher);
       if (saved) {
         publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, saved);
+        // The frame publisher writes the lighting and material frames of this camera by their prepared address: give
+        // each its published URL, as the scene's own textures have. A saved Moon link asked the site for
+        // /scenes/moon/lighting-2x-shadowless.webp and got 404 (2026-10-01).
+        const keys = new Map(definition.assets.entries.map(entry => [entry.url, entry.key]));
+        const styled = [...stage.querySelectorAll<HTMLElement>('[style*="/scenes/"]')];
+        const addresses = new Set(styled.flatMap(node => node.getAttribute('style')!.match(SCENE_ADDRESSES) ?? []));
+        await Promise.all([...addresses].map(address => published.ensure(keys.get(address) ?? '', address)));
+        for (const node of styled) node.setAttribute('style', node.getAttribute('style')!.replace(SCENE_ADDRESSES, address => published.url(address)));
         stage.dataset.preparedView = formatSharedView(saved).slice(2);
       }
     } catch (error) {

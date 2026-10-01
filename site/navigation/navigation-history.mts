@@ -93,6 +93,7 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
   const onPopState = (event: PopStateEvent) => {
     if (disposed) return;
     // The browser moved to another entry: a write held for the one it left no longer applies.
+    const unpublished = pending?.push === true;
     pending = null;
     if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
     // location already names the incoming entry. Capture the old scene without
@@ -105,6 +106,9 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     // left. One step Back means "not there after all": fly back to that view as a new entry
     // instead of skipping it for the one before.
     const departure = snapshots.get(entry);
+    // Back within the rest period of an arrival: the arrival's entry was never published, so the browser left the entry
+    // the flight departed from, one step too far. Step forward to it again; that move restores the departure.
+    if (unpublished && previous.has(entry) && previous.get(entry) !== targetEntry) { windowTarget.history.forward(); return; }
     if (navigating() && departure && previous.get(entry) === targetEntry) {
       const location = new URL(departure, windowTarget.location.href);
       // The router loads the object the entry names before it acts, and declines one that is not an object.
@@ -129,6 +133,12 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
       const { history } = action, targetEntry = action.history === 'pop' ? action.entry : undefined;
       if (disposed) return;
       if (history === 'pop' && !targetEntry) throw new TypeError('History restoration requires an entry.');
+      // A push still held from the last arrival is its own entry: publish it before this one takes its place, or two
+      // flights within the rest period become one entry and Back skips the body between them.
+      if (history === 'push' && pending?.push) {
+        if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
+        apply(true, pending.path);
+      }
       const from = entry;
       entry = history === 'pop' ? targetEntry! : history === 'push' ? `${prefix}-${++serial}` : entry;
       if (history === 'push' && !embedded) previous.set(entry, from);

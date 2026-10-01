@@ -27,6 +27,34 @@ test('Back to the front page returns to the body it shows, not nowhere', () => {
   assert.equal(calls[0][0], ROOT_OBJECT_ID);
 });
 
+test('Back within the rest period of an arrival returns to the body the flight left, not the one before it', () => {
+  const listeners = new Map<string, (event: PopStateEvent) => void>(), calls: [string, { url?: string }][] = [];
+  let href = 'https://css.earth/earth/', state: unknown = null, view = '/earth/', forwards = 0;
+  const windowTarget = {
+    get location() { return { href }; },
+    history: { forward() { forwards++; }, get state() { return state; }, replaceState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; },
+      pushState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; } },
+    addEventListener(type: string, listener: (event: PopStateEvent) => void) { listeners.set(type, listener); },
+    removeEventListener() {},
+    setTimeout(callback: () => void) { queued.push(callback); return queued.length; }, clearTimeout() {},
+  } as unknown as Window;
+  const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); };
+  const history = createNavigationHistory({ windowTarget, capture: () => view,
+    navigate: (id, intent) => { calls.push([id, intent as { url?: string }]); return Promise.resolve(true); } });
+  const earth = state;
+  view = '/mars/'; history.commit('/mars/'); rest();
+  const mars = state;
+  // The Moon's entry is still held when the reader presses Back: the browser leaves Mars's entry for Earth's.
+  view = '/moon/'; history.commit('/moon/');
+  href = 'https://css.earth/earth/'; state = earth;
+  listeners.get('popstate')!({ state: earth } as PopStateEvent);
+  assert.equal(calls.length, 0);
+  assert.equal(forwards, 1, 'the browser steps forward to the entry it left');
+  href = 'https://css.earth/mars/'; state = mars;
+  listeners.get('popstate')!({ state: mars } as PopStateEvent);
+  assert.deepEqual(calls.map(([id, intent]) => [id, intent.url]), [['mars', 'https://css.earth/mars/']]);
+});
+
 test("a drawn page's dataset button navigates in place to that page with the dataset, keeping the camera", async () => {
   const { parseHTML } = await import('linkedom');
   const { bindNavigationLinks } = await import('../navigation/navigation-history.mts');
@@ -138,5 +166,10 @@ test('history written while the camera moves is held and applied once at rest; t
   assert.equal(writes.length, 1);
   advance(1000);
   assert.deepEqual(writes.at(-1), { kind: 'replace', url: '/solar-system/?v=c' });
+  // Two flights inside one rest period are two entries: Back from the second lands on the first (2026-10-01).
+  writes.length = 0;
+  history.commit('/mars/'); advance(300);
+  motion(true); history.commit('/moon/'); motion(false); advance(1000);
+  assert.deepEqual(writes, [{ kind: 'push', url: '/mars/' }, { kind: 'push', url: '/moon/' }]);
   history.destroy();
 });
