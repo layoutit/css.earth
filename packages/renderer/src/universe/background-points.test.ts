@@ -21,7 +21,7 @@ test('inside our galaxy the banks neither load nor show', async () => {
   assert.deepEqual(roots.map(root => root.style.display), ['none', 'none']);
   field.publish(publication, 1e6 * pc, 1);
   assert.deepEqual(fetched, ['/a.json', '/b.json']);
-  assert.deepEqual(roots.map(root => root.style.opacity), ['0.7', '0.7'], 'fully outside, the background draws at its backdrop opacity');
+  assert.deepEqual(roots.map(root => root.style.opacity), ['0.75', '0.75'], 'fully outside, the background draws at its backdrop opacity');
   field.publish(publication, 8_000 * pc, 0);
   assert.deepEqual(roots.map(root => root.style.display), ['none', 'none']);
   field.destroy();
