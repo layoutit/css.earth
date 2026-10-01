@@ -52,6 +52,7 @@
     "prepare:dataset-sprites": "node packages/bake/cli/prepare-dataset-sprites.mts",
     "prepare:environment-images": "node packages/bake/cli/restore-environment-images.mts",
     "prepare:arrival-billboards": "node packages/bake/cli/prepare-arrival-billboard.mts",
+    "prepare:world-billboards": "node packages/bake/cli/prepare-world-billboards.mts",
     "prepare:dataset-billboards": "node packages/bake/cli/prepare-dataset-billboards.mts",
     "prepare:search-thumbnails": "node packages/bake/cli/prepare-search-thumbnails.mts",
     "prepare:nebulae": "node packages/bake/cli/prepare-nebulae.mts --if-missing && node site/build/prepare/prepare-facilities.mts",

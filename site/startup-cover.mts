@@ -47,7 +47,9 @@ export async function presentStartupCover(document: Document): Promise<void> {
   const stage = document.querySelector<HTMLElement>('.object-stage');
   if (!window || !image || !data || !stage || window.location.search) return;
   const cover = parseStartupCover(JSON.parse(data.textContent ?? 'null'));
-  if (!cover) return;
+  // A stage the layout has not sized yet has no camera to fit: the scene's startup places the photograph instead.
+  const box = stage.getBoundingClientRect();
+  if (!cover || !(box.width > 0 && box.height > 0)) return;
   const mobile = window.matchMedia(cover.mobileQuery).matches;
   // The shell's viewport (world-viewport.mts), read once and released: the scene creates its own.
   const viewport = createCameraViewport(stage, document.querySelector<HTMLElement>('.object-sidebar'), mobile ? {

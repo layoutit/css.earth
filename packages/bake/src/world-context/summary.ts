@@ -2,7 +2,7 @@ import { outwardSphere } from './spatial-context.ts';
 import type { PreparedWorldContext, Vector3 } from './spatial-context.ts';
 import type { PreparedSystemView } from './system-view.ts';
 
-type Billboard = { readonly url: string; readonly size: number; readonly focalPixels: number; readonly distanceM: number };
+export type Billboard = { readonly url: string; readonly size: number; readonly focalPixels: number; readonly distanceM: number };
 type Facts = Readonly<Record<string, unknown>>;
 type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][number];
 
@@ -24,7 +24,7 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  * - `bodies` is one column per field, a body's value at its index and `null` where it has none.
  * - A body names its system and discovery record by their place in `systemNames` and `discoveries`.
  * - A billboard writes only what differs from `billboard`, the size, focal length and distance (in body radii) most
- *   billboards share; its address is its page's own, `/scenes/<id>/<id>-arrival.webp`, unless it says otherwise.
+ *   billboards share; its address is its own world billboard, `/scenes/<id>/<id>-billboard.webp`, unless it says otherwise.
  * - An orbit leaves out its centre when that is its parent's prepared position (every orbit, as `prepareWorldContext`
  *   places them), and says `lod: true` when its detail levels share its bounds. */
 export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>) {
@@ -65,9 +65,24 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   }) };
 }
 
+/** The world draws every body but its focus as a billboard of a few to a hundred CSS pixels: its arrival photograph at
+ * this size (`prepare-world-billboards.mts`), not the 1024-pixel photograph the arrival covers the screen with. */
+export const WORLD_BILLBOARD_SIZE = 256;
+export const worldBillboardFilename = (id: string) => `${id}-billboard.webp`;
+/** A body's billboard in the world: its own photograph at `WORLD_BILLBOARD_SIZE`, with the same optics. A body that borrows
+ * another's photograph keeps it as it is. */
+export function worldBillboardOf(id: string, arrival: Billboard): Billboard {
+  if (arrival.url !== `/scenes/${id}/${id}-arrival.webp`) return arrival;
+  const scale = WORLD_BILLBOARD_SIZE / arrival.size;
+  return { url: `/scenes/${id}/${worldBillboardFilename(id)}`, size: WORLD_BILLBOARD_SIZE, focalPixels: arrival.focalPixels * scale, distanceM: arrival.distanceM };
+}
+
 /** Bodies written with one file's shared tables (see `summarizeWorldContext`). `positions` places every orbit's parent. */
 function encodeBodies(bodies: readonly Body[], positions: ReadonlyMap<string, Vector3>) {
-  const arrivalOf = (body: { readonly discovery?: Facts }) => (body.discovery?.arrival as { billboard?: Billboard } | undefined)?.billboard;
+  const arrivalOf = (body: { readonly id: string; readonly discovery?: Facts }) => {
+    const arrival = (body.discovery?.arrival as { billboard?: Billboard } | undefined)?.billboard;
+    return arrival && worldBillboardOf(body.id, arrival);
+  };
   // The billboard most bodies share, each part counted on its own; ties go to the smaller value, so a rerun writes the same.
   const common = (values: readonly number[]) => {
     const counts = new Map<number, number>();
@@ -100,7 +115,7 @@ function encodeBodies(bodies: readonly Body[], positions: ReadonlyMap<string, Ve
       ...(name === undefined ? {} : { system: systemName(name) }),
       ...(record === undefined ? {} : { discovery: discovery(record) }),
       ...(billboard ? { billboard: {
-        ...(billboard.url === `/scenes/${body.id}/${body.id}-arrival.webp` ? {} : { url: billboard.url }),
+        ...(billboard.url === `/scenes/${body.id}/${worldBillboardFilename(body.id)}` ? {} : { url: billboard.url }),
         ...(billboard.size === size ? {} : { size: billboard.size }),
         ...(billboard.focalPixels === focalPixels ? {} : { focalPixels: billboard.focalPixels }),
         ...(distanceRadii !== undefined && billboard.distanceM === body.radiusM * distanceRadii ? {} : { distanceM: billboard.distanceM }) } } : {}),

@@ -6,7 +6,7 @@ import { array, positive, record, text, unique } from '../validation/guards.js';
  * - `bodies` is one column per field, a body's value at its index and `null` where it has none.
  * - A body names its system and discovery record by their place in its file's `systemNames` and `discoveries`.
  * - A billboard writes only what differs from its file's `billboard`, the size, focal length and distance (in body radii)
- *   most billboards share; its address is its page's own, `/scenes/<id>/<id>-arrival.webp`, unless it says otherwise.
+ *   most billboards share; its address is its own world billboard, `/scenes/<id>/<id>-billboard.webp`, unless it says otherwise.
  * - An orbit without a centre is centred on its parent's prepared position (a body's or a named orbit centre's), and
  *   `lod: true` gives its detail levels the orbit's own bounds. */
 export function expandWorldContextSummary(value: unknown): unknown {
@@ -78,7 +78,7 @@ function expandBody(row: unknown, tables: Tables, placed: { get(id: string): unk
       if (drawn.distanceM === undefined && (shared.distanceRadii === undefined || typeof radiusM !== 'number')) {
         throw new TypeError(`${where} ${id} billboard leaves out its distance, and its file's billboard names no distanceRadii.`);
       }
-      return { url: drawn.url ?? `/scenes/${id}/${id}-arrival.webp`, size: part('size'), focalPixels: part('focalPixels'),
+      return { url: drawn.url ?? `/scenes/${id}/${id}-billboard.webp`, size: part('size'), focalPixels: part('focalPixels'),
         distanceM: drawn.distanceM ?? (radiusM as number) * positive(shared.distanceRadii, `${where} billboard distanceRadii`) };
     })() }),
     ...(orbit === undefined ? {} : { orbit: (() => {
