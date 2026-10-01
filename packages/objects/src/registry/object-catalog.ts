@@ -1,3 +1,4 @@
+import { parseDistanceSubject } from '@cssearth/catalog';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { parseObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';
@@ -42,9 +43,11 @@ export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDef
   const catalog = input.properties.catalog;
   if (!isRecord(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
   const { name, systemName, color, distanceAu, description } = catalog;
-  const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationDatasets', 'orientationReference'];
+  const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationDatasets', 'orientationReference', 'distanceSubject'];
   if (Object.keys(catalog).some(key => !keys.includes(key)) || typeof name !== 'string' || typeof systemName !== 'string' ||
       typeof color !== 'string' || typeof distanceAu !== 'number' || typeof description !== 'string') throw new TypeError(`Invalid catalogue metadata: ${input.id}.`);
+  // Another subject's distance the package adopts (a nebula placed at its star cluster's): navigation states it.
+  if (catalog.distanceSubject !== undefined) parseDistanceSubject(catalog.distanceSubject);
   if (catalog.orientationReference !== undefined && (!Number.isInteger(catalog.orientationReference) || Number(catalog.orientationReference) < 1)) throw new TypeError(`Invalid orientation reference: ${input.id}.`);
   if (catalog.featured !== undefined && typeof catalog.featured !== 'boolean' || catalog.illustrationDatasets !== undefined &&
       (!Array.isArray(catalog.illustrationDatasets) || !catalog.illustrationDatasets.every(id => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id)))) throw new TypeError(`Invalid discovery metadata: ${input.id}.`);

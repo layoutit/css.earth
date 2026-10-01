@@ -18,7 +18,8 @@ import { createWorldContextFrameEncoder } from '../../packages/renderer/src/univ
 import { type PackedWorldContextView, unpackWorldBodies } from '../../packages/renderer/src/universe/world-context/world-context-view-transport.js';
 import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from '../../packages/renderer/src/universe/world-context/context-scale.js';
-import { SCENE_OBJECTS } from '../objects.mts';
+import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
+import { isPlacedClassification } from '@cssearth/objects';
 import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
@@ -761,17 +762,19 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
   // Each entry's distance as `prepare:catalog` placed it in the registry.
-  const distance = (descriptor: unknown) => parseNavigationDistance(SCENE_OBJECTS.find(object => object.id === (descriptor as { id: string }).id)?.distance);
+  // Every body of the world: the scenes, and the packages the host draws (galaxies, clusters, nebulae).
+  const worldObjects = OBJECTS.filter(object => object.kind !== 'overview');
+  const distance = (descriptor: unknown) => parseNavigationDistance(worldObjects.find(object => object.id === (descriptor as { id: string }).id)?.distance);
   const contextEntries = (await readCatalog(fileURLToPath(new URL('../../src/objects', import.meta.url)), distance)).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
   // Bodies drawn from their astronomy records around a packaged host follow the catalogue's own entries.
   assert.deepEqual(parsePreparedWorldContext(source).bodies.filter(body => !body.unpackaged).map(body => body.id), contextEntries.map(body => body.id));
   for (const body of parsePreparedWorldContext(source).bodies.filter(body => !body.unpackaged)) {
-    const frame = SCENE_OBJECTS.find(object => object.id === body.id)!.worldFrame!;
+    const frame = worldObjects.find(object => object.id === body.id)!.worldFrame!;
     assert.equal(body.radiusM, frame.bodyRadiusM, `${body.id} context must match the selectable detail radius`);
     expectAlignedContextOrigin(body.positionM, frame.originM, `${body.id} context must match the selectable detail origin`);
-    // A placed star or black hole has no orbit in the Sun's context; every orbiting body's orbit facts are prepared.
-    if (!body.orbit) { assert.ok((['star', 'black-hole']).includes(SCENE_OBJECTS.find(object => object.id === body.id)!.classification)); continue; }
+    // A placed body (a star, a black hole, a galaxy, a cluster, a nebula) has no orbit in the Sun's context; every orbiting body's orbit facts are prepared.
+    if (!body.orbit) { assert.ok(isPlacedClassification(worldObjects.find(object => object.id === body.id)!.classification)); continue; }
     assert.notEqual(body.orbit.bounds, undefined, `${body.id} orbit bounds are owned by preparation`);
     assert.deepEqual(([...body.orbit.activeChords!]), [...body.orbit.trail].flatMap((weight, index) => weight > 0 ? [index] : []));
     assert.deepEqual([...(body.orbit.extentChords ?? [])].sort((a, b) => a - b), [...body.orbit.activeChords!]);

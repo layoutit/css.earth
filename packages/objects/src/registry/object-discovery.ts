@@ -1,3 +1,4 @@
+import { isPlacedClassification } from './object-schema.js';
 import { isRecord } from '@cssearth/core';
 import { matchesObjectClassification } from './object-categories.js';
 import { parseArrivalView, type PreparedArrivalView } from './arrival-view.js';
@@ -37,7 +38,8 @@ export function offTheMap(object: { classification: string; discovery: ObjectDis
 }
 
 export function isDiscoveryAnchor(object: { classification: string }): boolean {
-  return object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet';
+  // A placed body (a star, a black hole, a galaxy, a cluster, a nebula) is a place of its own scale; a planet is one of its system.
+  return isPlacedClassification(object.classification) || object.classification === 'planet';
 }
 
 type DiscoveryObjects = readonly { id: string; classification: string; discovery: ObjectDiscovery }[];

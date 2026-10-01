@@ -48,8 +48,6 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   pointBanks?: PreparedUniverseOptions['pointBanks'];
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
-  // The header pill's category, applied again when the catalogue mounts after it was pressed.
-  let highlightedClassification: string | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
   let billboardCount = 0;
   const images: ImageBank[] = declarations.map(bank => {
@@ -98,23 +96,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     if (catalog || lifetime.disposed) return;
     globalThis.performance?.mark?.('cssEarth:catalog:mount');
     catalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: bank.payload, galaxySample: bank.galaxySample,
-      clusters: bank.clusters?.payload, nebulae: bank.nebulae,
-      renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(dataset => dataset.id)]),
-      billboardedObjectIds: new Set([...prepared?.plan.banks.values() ?? []].filter(bank => bank.billboard).map(bank => bank.id)),
-      galaxyCaptions: galaxyCaptions(),
-      nebulaFrames: new Map(volumeDeclarations.map(dataset => [dataset.id, dataset.frame])), onSelect, pickingHost: stage });
-    catalog.highlight(highlightedClassification);
+      clusters: bank.clusters?.payload, nebulae: bank.nebulae });
     publishResidency();
-  }
-  /** Every bank with a published stellar extent: its caption hangs under its authored framing sphere (else its
-   * billboard's), and hides inside the extent. */
-  function galaxyCaptions() {
-    return new Map([...declarations, ...volumeDeclarations].flatMap(bank => {
-      const radiusM = stellarExtents[bank.id], facts = prepared?.plan.banks.get(bank.id);
-      const extentRadiusUnits = radiusM === undefined ? 0 : radiusM / bank.frame.metersPerUnit;
-      const drawnRadiusUnits = facts?.framingRadiusUnits ?? facts?.billboard?.radiusUnits ?? extentRadiusUnits;
-      return radiusM === undefined ? [] : [[bank.id, { frame: bank.frame, drawnRadiusUnits, extentRadiusUnits }] as const];
-    }));
   }
   function ensureCatalog(): Promise<void> {
     if (lifetime.disposed || catalog) return Promise.resolve();
@@ -154,11 +137,6 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
 
   return {
     get catalog() { return catalog; },
-    setHighlightedClassification(classification: string | null) {
-      highlightedClassification = classification;
-      catalog?.highlight(classification);
-      requestPublication?.();
-    },
     get presentation() { return catalogPayload ?? catalogBank; },
     ensureCatalog,
     publishResidency,

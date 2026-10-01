@@ -5,17 +5,20 @@ import { readFile } from 'node:fs/promises';
 import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
-import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '@cssearth/bake/navigation';
-import { readOverviews } from '@cssearth/objects/node';
-import { distanceDescription, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
+import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
+import { distanceDescription, isExtendedClassification, isHostedDescriptor, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { isRecord } from '@cssearth/core';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { resolve } from 'node:path';
 
-test('every prepared spatial subject and every scene has exactly one searchable destination', async () => {
-  const prepared = await readPreparedFocusObjects(resolve('src/objects'), 'sun');
+test('every scene and every package the host draws has exactly one searchable destination, built from its own descriptor', async () => {
+  const descriptors = await readObjectDescriptors(resolve('src/objects'));
+  // A hosted package's entry is its own descriptor's, as a scene's is: no catalogue row names a destination.
+  const hosted = [...descriptors].filter(([, descriptor]) => isHostedDescriptor(descriptor) && isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.catalog !== undefined).map(([id]) => id);
   const overviews = await readOverviews(resolve('src/objects'), 'sun');
-  assert.equal(OBJECTS.length, SCENE_OBJECTS.length + prepared.length + overviews.length);
-  assert.deepEqual(OBJECTS.filter(object => object.kind === 'prepared-focus'), prepared);
+  assert.equal(OBJECTS.length, SCENE_OBJECTS.length + hosted.length + overviews.length);
+  assert.deepEqual(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => object.id).sort(), hosted.sort());
   assert.deepEqual(OBJECTS.filter(object => object.kind === 'overview'), overviews);
   // Overviews are searched through their own rows (CatalogueOverviewRows.astro); everything else through the catalogue.
   assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.filter(object => object.kind !== 'overview').map(object => object.id)));
@@ -26,6 +29,11 @@ test('every prepared spatial subject and every scene has exactly one searchable 
     const object = requireObject(id!);
     assert.equal(object.kind, 'prepared-focus');
     assert.ok(object.kind === 'prepared-focus' && object.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))), query);
+  }
+  // Each is a body of the world, placed by its own world frame.
+  for (const id of hosted) {
+    const object = requireObject(id);
+    assert.ok(object.kind === 'prepared-focus' && isExtendedClassification(object.classification) && object.worldFrame && Math.hypot(...object.worldFrame.originM) > 0, id);
   }
 });
 
@@ -63,9 +71,6 @@ test('galaxy citations resolve across the full prepared catalogue, including the
   }
   assert.equal(resolveSpatialCitation('Graczyk2020ApJ...904...13G', catalogue.sources)?.url, 'https://arxiv.org/abs/2010.08754');
   const galaxy = catalogue.objects[0]!;
-  const future = prepareFocusObject({ ...galaxy, id: 'future_galaxy', name: 'Future galaxy', aliases: ['New alias'] }, 'sun');
-  assert.equal(future.route, '/future_galaxy/');
-  assert.ok(future.searchNames.includes('new alias'));
   const broken = { ...catalogue, objects: [{ ...galaxy, distance: { ...galaxy.distance, sourceRef: 'missing-paper' } }] };
   assert.throws(() => parsePreparedGalaxyCatalog(broken), /Unresolved distance reference/);
 });
@@ -75,7 +80,7 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   const raw: unknown = JSON.parse(await readFile('src/objects/local-group/prepared/catalogue.json', 'utf8'));
   const catalogue = parsePreparedGalaxyCatalog(raw), satellite = catalogue.objects.find(o => o.id === 'andromeda_01')!;
   assert.equal(satellite.hostId, 'm31', 'a host its object package details takes the package id');
-  assert.equal(prepareFocusObject(satellite, 'sun').sceneHostId, 'sun');
+  assert.equal(OBJECTS.some(o => o.id === satellite.id), false, 'a catalogue row without a package is data, never a destination');
   // The Milky Way row is detailed by the milky-way package, so it carries that id; its LVDB key stays in its source reference.
   assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'milky-way')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
   assert.equal(OBJECTS.find(o => o.id === 'milky-way')?.kind, 'overview', 'a physical host does not fabricate a catalogue destination; its page is the overview');

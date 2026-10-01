@@ -14,7 +14,7 @@ export type { CatalogContext, CatalogEntry } from './object-catalog.js';
 export { matchesObjectCategory, matchesObjectClassification } from './object-categories.js';
 export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, offTheMap, parseObjectDiscovery } from './object-discovery.js';
 export type { ObjectDiscovery } from './object-discovery.js';
-export { defineObject, defineObjects, isPlacedClassification, OBJECT_CLASSIFICATIONS, PLACED_CLASSIFICATIONS } from './object-schema.js';
+export { defineObject, defineObjects, EXTENDED_CLASSIFICATIONS, isExtendedClassification, isPlacedClassification, OBJECT_CLASSIFICATIONS, PLACED_CLASSIFICATIONS } from './object-schema.js';
 export type { ObjectClassification, ObjectDefinitionInput, ObjectEntry, ObjectPositionM, ObjectWorldFrame } from './object-schema.js';
 export { definePreparedFocus, destinationSearchNames, HOSTED_OBJECT_TYPES, hostedObject, isHostedDescriptor, isSceneObject } from './prepared-focus-object.js';
 export type { NavigableObject, PreparedFocusObject } from './prepared-focus-object.js';

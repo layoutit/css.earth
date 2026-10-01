@@ -626,11 +626,14 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       description: 'Prepared fixture', sourceUrl: 'https://example.org/nebula', volume: { ...small, id },
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] });
   const banks = ['focus-bank', 'warm-bank', 'cold-bank'].map(bank);
+  // Each package the host draws is a body of the world context; one of them has no bank of its own.
+  const nebula = context.bodies.find((body: { id: string }) => body.id === 'm1');
+  for (const id of ['focus-bank', 'image-bank', 'no-bank']) context.bodies.push({ ...nebula, id, name: id, positionM: frame.originM, radiusM: frame.metersPerUnit });
   const image: PreparedCssImageLayers = { ...small, id: 'image-bank', bankViews: small.stacks.map(stack => ({ axis: stack.axis,
     normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
   const loadVolumeDataset = mock.fn(async (id: string) => ({ payload: banks.find(bank => bank.id === id)!, resolveResource: (path: string) => `/bank/${id}/${path}` }));
   const loadImageLayer = mock.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
-  catalogMount.mock.mockImplementation(() => ({ destroy() {}, select() {}, highlight() {}, resolve: (id: string) => ({ id, detailedObjectId: id === 'catalogue-only' ? undefined : id.replace('catalogue:', '') }), publish() {}, inspect() {} }));
+  catalogMount.mock.mockImplementation(() => ({ destroy() {}, select() {}, highlight() {}, resolve: (id: string) => ({ id, detailedObjectId: id === 'no-bank' ? undefined : id.replace('catalogue:', '') }), publish() {}, inspect() {} }));
   const document = new FakeDocument(), stage = document.createElement();
   const fetchResource = mock.fn<typeof fetch>(async () => new Response(new Uint8Array([1])));
   Object.assign(document.defaultView, { fetch: fetchResource });
@@ -643,13 +646,13 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id)!;
   const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
   const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
-  const focus = (id = 'catalogue:focus-bank'): PreparedNavigationFocus => ({ id, positionM: frame.originM, framingRadiusM: frame.metersPerUnit,
+  const focus = (id = 'focus-bank'): PreparedNavigationFocus => ({ id, positionM: frame.originM, framingRadiusM: frame.metersPerUnit,
     limits: { minimumDistanceM: .01 * frame.metersPerUnit, maximumDistanceM: 1e25 } });
   const camera = (radii: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
     pose: { positionM: [frame.originM[0], frame.originM[1], frame.originM[2] + radii * frame.metersPerUnit], orientationXyzw: [0, 0, 0, 1] } });
   try {
     await mounted.focusBank('focus-bank')!.load(); await mounted.focusBank('warm-bank')!.load();
-    mounted.selectGalaxy('catalogue:focus-bank', focus());
+    mounted.selectGalaxy('focus-bank', focus());
     const near = camera(6.1), savedPose = structuredClone(near);
     mounted.publish(near, viewport, spatialFrame);
     assert.deepEqual(loadVolumeDataset.mock.calls.map(({ arguments: [id] }) => id), ['focus-bank', 'warm-bank']);
@@ -686,7 +689,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     const before = all(findBank('warm-bank')).map(node => ({ ...node.style }));
     mounted.publish({ ...near, pose: { ...near.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } }, viewport, spatialFrame);
     assert.deepEqual(all(findBank('warm-bank')).map(node => ({ ...node.style })), before);
-    mounted.selectGalaxy('catalogue:image-bank', focus('catalogue:image-bank')); mounted.publish(near, viewport, spatialFrame);
+    mounted.selectGalaxy('image-bank', focus('image-bank')); mounted.publish(near, viewport, spatialFrame);
     assert.equal(imageRoot.style.display, ''); assert.equal(findBank('focus-bank').style.display, 'none');
     mounted.selectGalaxy(null); mounted.publish(near, viewport, spatialFrame);
     assert.equal(mw.style.display, '');
@@ -694,8 +697,9 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       mounted.publish(near, viewport, spatialFrame);
       assert.equal(findBank('focus-bank').style.display, 'block');
     });
-    mounted.selectGalaxy('catalogue-only', focus('catalogue-only')); mounted.publish(near, viewport, spatialFrame);
+    mounted.selectGalaxy('no-bank', focus('no-bank')); mounted.publish(near, viewport, spatialFrame);
     assert.equal(mw.style.display, '');
-    assert.throws(() => mounted.selectGalaxy('catalogue:focus-bank', focus('mismatch')), /focus/);
+    assert.throws(() => mounted.selectGalaxy('focus-bank', focus('mismatch')), /focus/);
+    assert.throws(() => mounted.selectGalaxy('catalogue-row', focus('catalogue-row')), /not a body of the prepared world context/);
   } finally { mounted.destroy(); }
 });

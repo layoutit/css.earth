@@ -7,10 +7,9 @@ import { allSatelliteSystems } from '../satellite-systems.mts';
 function fixture() {
   const lifetime = createSceneLifetime();
   type Layer = Parameters<typeof createApplicationWorldVisibility>[0];
-  const publications: Parameters<Layer['setBodyVisibility']>[0][] = [], categories: (string | null)[] = [];
-  const visibility = createApplicationWorldVisibility({ setBodyVisibility(value) { publications.push(value); },
-    setHighlightedClassification(value) { categories.push(value); } }, lifetime);
-  return { visibility, publications, categories, latest: () => publications.at(-1)! };
+  const publications: Parameters<Layer['setBodyVisibility']>[0][] = [];
+  const visibility = createApplicationWorldVisibility({ setBodyVisibility(value) { publications.push(value); } }, lifetime);
+  return { visibility, publications, latest: () => publications.at(-1)! };
 }
 
 test('every satellite family is visible when its host or any member is selected', () => {
@@ -61,8 +60,8 @@ test('only an explicitly selected non-featured comet gains its default-hidden or
   assert.ok(latest().orbitHidden?.includes('comet-2p'));
 });
 
-test('a pill category highlights its bodies and reaches the galaxy, cluster and nebula catalogue too', () => {
-  const { visibility, categories, latest } = fixture();
+test('a pill category highlights its bodies, the galaxies among them', () => {
+  const { visibility, latest } = fixture();
   visibility.setHighlightedClassification('planet');
   assert.ok(latest().highlighted?.includes('jupiter'));
   assert.ok(latest().highlighted?.includes('pluto'), 'the Planets pill marks the dwarf planets too');
@@ -73,7 +72,9 @@ test('a pill category highlights its bodies and reaches the galaxy, cluster and 
   assert.ok(latest().highlighted?.includes('hr-8799'), 'from afar a planet is its star\'s dot, so the star carries the mark');
   assert.ok(!latest().highlighted?.includes('sun'));
   visibility.setHighlightedClassification('galaxy');
-  assert.deepEqual(latest().highlighted, []);
+  // A galaxy with a package is a body of the world: the pill marks it as it marks a planet.
+  for (const id of ['m31', 'lmc', 'm87']) assert.ok(latest().highlighted?.includes(id), id);
+  assert.ok(!latest().highlighted?.includes('jupiter'));
   visibility.setHighlightedClassification(null);
-  assert.deepEqual(categories, ['planet', 'exoplanet', 'galaxy', null]);
+  assert.deepEqual(latest().highlighted, []);
 });

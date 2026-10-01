@@ -47,7 +47,13 @@
         "Pleiades reflection nebula"
       ],
       "order": 5144,
-      "context": {}
+      "context": {},
+      "distanceSubject": {
+        "id": "m45-stellar-cluster",
+        "name": "Pleiades stellar cluster",
+        "relationship": "Associated illuminating stellar cluster",
+        "reason": "The stellar-cluster distance locates the reflection-nebula scene; individual dust-filament distances are not measured."
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

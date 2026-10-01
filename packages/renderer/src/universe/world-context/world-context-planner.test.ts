@@ -1,3 +1,4 @@
+import { isExtendedClassification } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -750,13 +751,15 @@ test('past the Solar System only the featured stars and the references keep a do
   const calculate = createWorldContextPlanner(plan, { [featured]: FEATURED_STAR_TIER }), input = view();
   const dotted = (parsecs: number) => {
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
-    return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
+    // The galaxies, clusters and nebulae are bodies too, and keep their own dots: this is about the stars and their planets.
+    return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!)
+      .filter(body => !('classification' in body && isExtendedClassification(body.classification))).map(body => body.id);
   };
   const nearby = dotted(3e3);
   { const values = nearby; assert.ok(['sun', featured].every(item => values.includes(item)), 'from 3 kpc above the Sun the Sun and the featured star stay (Sgr A* is out of frame)'); }
-  assert.ok(nearby.length < 10, 'from 3 kpc the other stars have given way to the catalogue dots');
+  assert.ok(nearby.length < 10, 'from 3 kpc the other stars have given way');
   { const values = dotted(200e3); assert.ok(['sgr-a-star', 'sun'].every(item => values.includes(item)), 'from 200 kpc the references keep a dot'); }
-  assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no body keeps a dot');
+  assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no star or planet keeps a dot');
 });
 
 test('a body beyond the Local Group keeps its dot at the scale of its cluster, and loses it from the Milky Way', () => {

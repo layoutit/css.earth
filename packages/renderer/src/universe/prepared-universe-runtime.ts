@@ -199,12 +199,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
         const mountedShells = [...shells];
         let selected = plan.focus;
+        // The mounted scene's own body: a package the host draws is selected over it, and clearing that returns to it.
+        let sceneBody: typeof selected = selected;
         // The caption sits below the selected body's longest reach, which an elongated shape model extends past its radius.
         let captionBody: typeof selected = selected;
         let previewCaption: typeof selected | null = null;
         let selectedEdge: PreparedLabelEdge | undefined, previewEdge: PreparedLabelEdge | undefined;
         const caption = () => previewCaption ?? captionBody;
-        const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: detailedFocus !== null, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
+        const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: false, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
         const pointBankIds = new Set(pointBanks.map(bank => bank.id));
         let selectedPoints: string | undefined;
@@ -244,20 +246,27 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 focus.positionM.length !== 3 || !focus.positionM.every(Number.isFinite))) {
               throw new TypeError('Prepared context focus must match its selection and have finite authored framing.');
             }
-            const record = id ? catalogBanks.catalog?.resolve(id) : null;
-            const objectId = record && !isPreparedCluster(record) ? record.detailedObjectId : undefined;
-            const next = focus && objectId && [...declaredImageLayers, ...volumeDatasetBanks].some(bank => bank.id === objectId)
-              ? { objectId, focus } : null;
+            // A package the host draws is a body of this world: selecting it selects that body, as a scene's page selects its own.
+            const body = id === null ? sceneBody : plan.bodies.find(candidate => candidate.id === id);
+            if (!body) throw new TypeError(`Hosted object ${id} is not a body of the prepared world context.`);
+            const next = focus && id !== null && [...declaredImageLayers, ...volumeDatasetBanks].some(bank => bank.id === id)
+              ? { objectId: id, focus } : null;
             const changed = next?.objectId !== detailedFocus?.objectId || next?.focus.framingRadiusM !== detailedFocus?.focus.framingRadiusM ||
               next?.focus.positionM.some((value, axis) => value !== detailedFocus?.focus.positionM[axis]);
             detailedFocus = next;
-            // A package of catalogue dots draws them for its selected row, without the detailed focus's context fade.
-            const points = record?.detailedObjectId !== undefined && pointBankIds.has(record.detailedObjectId) ? record.detailedObjectId : undefined;
+            // A package of catalogue dots draws them while it is selected, without the detailed focus's context fade.
+            const points = id !== null && pointBankIds.has(id) ? id : undefined;
             const pointsChanged = points !== selectedPoints;
             selectedPoints = points;
-            catalogBanks.catalog?.select(id);
-            if (pointsChanged) requestPublication?.();
-            if (changed) requestPublication?.();
+            const bodyChanged = body !== selected;
+            if (bodyChanged) {
+              selected = body; captionBody = body; selectedEdge = undefined;
+              selectedLabel.prepare(caption());
+              spatial.selectObject(body.id);
+              publishSuppressedLabels();
+              root.dataset.selectedObject = body.id;
+            }
+            if (pointsChanged || changed || bodyChanged) requestPublication?.();
           },
           resolveGalaxy(id: string) { return catalogBanks.catalog?.resolve(id) ?? null; },
           ensureGalaxyCatalog: catalogBanks.ensureCatalog,
@@ -291,7 +300,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           /** A header pill's category: the galaxy, cluster and nebula catalogue emphasises its members; the body markers take
            * theirs through `setBodyVisibility`. */
-          setHighlightedClassification: catalogBanks.setHighlightedClassification,
           /** Label suppression follows the selection here; callers set the other flags. */
           setBodyVisibility(next: Omit<BodyVisibility, 'labelSuppressed'>) { spatial.setBodyVisibility(next); },
           setRotationActive(active: boolean) { spatial.setRotationActive(active); },
@@ -310,7 +318,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               throw new TypeError('Selected detail does not match its prepared world context.');
             }
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
-            selected = body;
+            selected = sceneBody = body;
             selectedEdge = edge;
             captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
             selectedLabel.prepare(caption());
@@ -325,7 +333,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               const outsideGalaxy = galaxyOutsideFade(
-                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM);
+                Math.hypot(...world.pose.positionM.map((value, axis) => value - sceneBody.positionM[axis]!)), plan.volume.discHalfHeightM);
               additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
@@ -337,7 +345,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               for (const mesh of meshes) mesh.runtime.setHidden(mesh.hidden());
               const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
-              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
+              const volumeOpacity = background.publish(world, viewport, distanceM, sceneBody.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
               catalogBanks.publishPoints(world, viewport, selectedPoints);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
@@ -356,13 +364,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget });
               const catalogPresentation = catalogBanks.presentation;
               if (catalogPresentation) {
-                const galaxyOpacity = localAnnotations * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
-                // The clusters lie inside the cosmic microwave background: their names give way as it closes over them.
-                const clusterOpacity = (catalogPresentation.clusters ? logarithmicFade(distanceM, catalogPresentation.clusters.fadeStartDistanceM, catalogPresentation.clusters.fullDistanceM) : 0) * (1 - meshCover);
                 const dotOpacity = (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
-                const nebulaOpacity = (1 - fade) * logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
-                if (!catalogBanks.catalog && Math.max(galaxyOpacity, clusterOpacity, dotOpacity, nebulaOpacity) > 0) void catalogBanks.ensureCatalog().catch(() => {});
-                catalogBanks.catalog?.publish(world, viewport, galaxyOpacity, [...foregroundRects, ...environmentRects], clusterOpacity, dotOpacity, labelBudget, nebulaOpacity);
+                if (!catalogBanks.catalog && dotOpacity > 0) void catalogBanks.ensureCatalog().catch(() => {});
+                catalogBanks.catalog?.publish(world, viewport, dotOpacity);
               }
               const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
               focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,

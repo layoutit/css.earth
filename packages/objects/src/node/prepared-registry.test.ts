@@ -17,9 +17,11 @@ const descriptor = (id: string, order: number, classification: string) => ({ sch
   worldFrame: frame } });
 const au = (value: number) => ({ meters: value * 149597870700, value, unit: 'AU', quantity: 'geometric', referencePoint: 'heliocentre', epochJdTt: 2461286.5 });
 const discovery = (featured: boolean) => ({ featured, imagery: featured, illustration: false });
-const focus = { kind: 'prepared-focus', id: 'helix', focusId: 'helix', name: 'Helix Nebula', searchNames: ['helix'], classification: 'nebula',
-  systemName: 'Milky Way', route: '/helix/', sceneHostId: 'sun',
-  distance: { meters: 3.085677581491367e16, value: 1, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null } };
+const parsec = { meters: 3.085677581491367e16, value: 1, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null };
+// A package the world's host draws: its own descriptor, as a scene's, with the scene that hosts it.
+const hosted = (id: string, sceneHostId: string) => ({ descriptor: { ...descriptor(id, 9, 'nebula'), type: 'volume-dataset-bank' },
+  distance: parseNavigationDistance(parsec), discovery: discovery(false), sceneHostId });
+const focus = hosted('helix', 'sun');
 
 const overview = { kind: 'overview', id: 'milky-way', name: 'Milky Way', description: 'Our galaxy.', order: 1,
   zoom: { enter: { fade: 'system', at: 'end' }, returnBelow: { fade: 'system', at: 'middle' }, frame: { distance: { distancePc: 8000 } } },
@@ -29,7 +31,7 @@ const scene = (id: string, order: number, classification: string, distanceAu: nu
   ({ descriptor: descriptor(id, order, classification), distance: parseNavigationDistance(au(distanceAu)), discovery: discovery(featured) });
 const scenes = [scene('sun', 0, 'star', 0, false), scene('mars', 4, 'planet', 1.5, true)];
 
-async function checkout(records: { scenes?: Parameters<typeof preparedCatalogueModule>[0]; focuses?: readonly unknown[]; module?: string; overviews?: unknown } = {}) {
+async function checkout(records: { scenes?: Parameters<typeof preparedCatalogueModule>[0]; focuses?: Parameters<typeof preparedCatalogueModule>[1]; module?: string; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));
   temporary.push(root);
   for (const [id, order, classification] of [['sun', 0, 'star'], ['mars', 4, 'planet']] as const) {
@@ -39,7 +41,7 @@ async function checkout(records: { scenes?: Parameters<typeof preparedCatalogueM
   await mkdir(join(root, 'site'));
   // The catalogue order is the order prepare:catalog wrote, not the alphabetical one.
   await writeFile(join(root, PREPARED_CATALOGUE.entries), records.module ??
-    preparedCatalogueModule(records.scenes ?? scenes, (records.focuses ?? [focus]) as Parameters<typeof preparedCatalogueModule>[1]));
+    preparedCatalogueModule(records.scenes ?? scenes, records.focuses ?? [focus]));
   await writeFile(join(root, PREPARED_CATALOGUE.overviews), JSON.stringify(records.overviews ?? [overview]));
   return root;
 }
@@ -56,6 +58,10 @@ test('reads the registry in catalogue order, with distances, discoveries, prepar
   assert.ok(!('order' in mars) && !('context' in mars));
   await assert.rejects(mars.loadScene(), /cannot mount a scene/);
   assert.throws(() => registry.requireSceneObject('helix'), /prepared focus/);
+  // A hosted package is a body of the world as a scene is, with its identity from its own descriptor.
+  assert.deepEqual(registry.worldObjects.map(object => object.id), ['sun', 'mars', 'helix']);
+  const helix = registry.objects.find(object => object.id === 'helix')!;
+  assert.partialDeepStrictEqual(helix, { kind: 'prepared-focus', classification: 'nebula', route: '/helix/', sceneHostId: 'sun', systemName: 'Solar System' });
   assert.throws(() => registry.requireSceneObject('milky-way'), /is an overview, not a scene owner/);
   assert.throws(() => registry.requireSceneObject('pluto'), /Unknown/);
 });
@@ -69,8 +75,8 @@ test('refuses a catalogue it cannot decode or a focus without its host', async (
   const cases: [Parameters<typeof checkout>[0], RegExp][] = [
     [{ scenes: [...scenes, { ...scenes[1]!, descriptor: { id: 'pluto' } }] }, /Invalid catalogue descriptor/],
     [{ scenes: [{ ...scenes[0]!, discovery: { featured: 'yes' } as never }] }, /Invalid prepared object discovery/],
-    [{ focuses: [{ ...focus, sceneHostId: 'mars', route: '/helix/' }, { ...focus, id: 'm1', focusId: 'm1', route: '/m1/', sceneHostId: 'jupiter' }] }, /not a registered scene: m1/],
-    [{ focuses: [{ kind: 'planet', id: 'x' }] }, /Invalid catalogue entry/],
+    [{ focuses: [hosted('helix', 'mars'), hosted('m1', 'jupiter')] }, /not a registered scene: m1/],
+    [{ focuses: [{ ...focus, descriptor: null }] }, /Invalid catalogue entry/],
     [{ module: 'export const OTHER = [];\n' }, /exports no CATALOGUE_ENTRIES array/],
     [{ overviews: [{ ...overview, sceneHostId: 'jupiter' }] }, /Overview host is not a registered scene: milky-way/],
     [{ overviews: {} }, /overviews/],
