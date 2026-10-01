@@ -100,6 +100,7 @@
   "dependencies": {
     "@cssearth/core": "workspace:*",
     "@cssearth/bake": "workspace:*",
-    "sharp": "0.35.3"
+    "sharp": "0.35.3",
+    "@cssearth/objects": "workspace:*"
   }
 }

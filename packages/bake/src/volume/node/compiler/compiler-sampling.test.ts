@@ -5,10 +5,10 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
-import { bakeCompiler, compilerSampling, type CompilerBakeResult } from './bake.ts';
+import { type CompilerBakeResult, createRenderElementBudget, type RenderElementProfile } from '@cssearth/objects';
+import { bakeCompiler, compilerSampling } from './bake.ts';
 import { readCompactCompiler } from '../compact-inputs/compiler.ts';
 import { validateVolumeLayerSlices, type VolumeSlices } from '../../contracts/volume-slices.ts';
-import { createRenderElementBudget, type RenderElementProfile } from '../../contracts/render-element-budget.ts';
 
 // Temporary checkouts the tests make, removed once the file's tests finish.
 const temporary: string[] = [];

@@ -3,17 +3,17 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseObjectDescriptor, prepareObject } from '@cssearth/objects';
 import { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, validatePreparedVolumeDatasets,
-  volumeDatasetCompositeOpacity } from './prepared-volume-datasets.js';
-import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
-import type { PreparedVolumeDatasets } from './prepared-volume-datasets.js';
-import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from './types.js';
-import { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
-import type { PreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
-import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
-import { createPreparedResidency } from '../rendering/prepared-residency.js';
+  volumeDatasetCompositeOpacity } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+import { mountPreparedVolumeLod, samePreparedVolumeTopology } from '@cssearth/renderer/volume/prepared-volume-lod.ts';
+import type { PreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from '@cssearth/renderer/volume/types.ts';
+import { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
+import type { PreparedCataloguePoints } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
+import { prepareObjectResources } from '@cssearth/renderer/runtime/prepared-resource-lease.ts';
+import { createPreparedResidency } from '@cssearth/renderer/rendering/prepared-residency.ts';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
-import { CSS_COMPILER_RENDER_BUDGET } from './compiler-render-budget.js';
-import { createRenderElementBudget } from '@cssearth/bake/volume';
+import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
+import { createRenderElementBudget } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 class FakeElement {

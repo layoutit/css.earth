@@ -1,5 +1,5 @@
 /** Attach chromaticity to finite 3D emitters before splatting; never project a photograph through a finished volume. */
-import type { EmissionVector3 } from '../contracts/emission.ts';
+import type { EmissionVector3 } from '@cssearth/objects';
 import type { MaterialImage } from './component-material.ts';
 import type { Cancellation } from '../contracts/cancellation.ts';
 import { analyticEmission, mapSample, type PreparedSampledField } from '../fields/sampled.ts';

@@ -1,5 +1,6 @@
 /** Relative display-signal comparison. Geometry and material are never fitted per image ray. */
-import { type Bounds3, shapePixelToUnits } from '@cssearth/bake/volume';
+import { shapePixelToUnits } from '@cssearth/bake/volume';
+import { type Bounds3 } from '@cssearth/objects';
 import { blur, displayLuminance } from '@cssearth/nebula-reconstruction/evidence/geometry/ridges';
 
 export interface NeutralProjection { alpha: Float32Array; width: number; height: number; bounds: Bounds3 }

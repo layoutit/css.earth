@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { dirname } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { bakeCompiler, type CompilerBakeProgress, type CompilerBakeBackend, type CompiledVolumeArtifact } from '../compiler/bake.ts';
-import { readCompilerBakeResult, type CompilerBakeResult } from '../../contracts/compiler-bake.ts';
+import { readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/objects';
 import { createPhotometricEmission, readEnvelopeColors, type EnvelopeColors } from '../../fields/photometric-emission.ts';
 import { readRetainedEmissionField } from '../../fields/retained-emission.ts';
 import { pinned, type Pin } from './io.ts';

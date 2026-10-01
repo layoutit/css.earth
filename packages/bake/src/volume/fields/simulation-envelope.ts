@@ -5,7 +5,7 @@
  * depending on the fitting methods. Arithmetic order, coordinate conventions and validator bounds are
  * unchanged; the fit itself stays with its scientific owner.
  */
-import type { SkyBounds } from '../contracts/emission.ts';
+import type { SkyBounds } from '@cssearth/objects';
 import type { SimulationDepthPrior } from '../contracts/simulation-prior.ts';
 
 export interface SimulationEnvelopeSettings {

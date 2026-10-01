@@ -2,8 +2,9 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { Axis, Bounds3, Vector3, VolumeImageEncoding } from '../../contracts/volume-recipe.ts';
-import { readVolumeLayerPlan, type VolumeLayerPlan, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
+import type { VolumeImageEncoding } from '../../contracts/volume-recipe.ts';
+import { type Axis, type Bounds3, type Vector3, readVolumeLayerPlan, type VolumeLayerPlan } from '@cssearth/objects';
+import { type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
 import { encodeVolumeRaster } from './raster.ts';
 import { containedPath } from '../compact-inputs/density-grid.ts';
 

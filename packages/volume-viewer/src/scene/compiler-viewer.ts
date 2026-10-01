@@ -1,4 +1,4 @@
-import { readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/bake/volume';
+import { readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/objects';
 import { compilerInspectionCamera, type CompilerInspectionFrame } from '../camera/inspection.ts';
 import type { ViewFraming as ShapeCloudFraming } from '../camera/framing.ts';
 import type { CompilerViewerBackend } from './backend.ts';

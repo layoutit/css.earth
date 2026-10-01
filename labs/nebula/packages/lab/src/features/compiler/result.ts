@@ -1,6 +1,6 @@
 import { readCompilerControls, type CompilerControls } from './model.ts';
 import { jointRecord, jointPath } from '../joint-fit/model.ts';
-import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin, type SkyBounds } from '@cssearth/bake/volume';
+import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin, type SkyBounds } from '@cssearth/objects';
 import type { CompilerStep } from '../../server/workflows/compiler/prerequisites.ts';
 export interface CompilerSource { id: string; label: string; original: CompilerPin; starless: CompilerPin;
   width: number; height: number; boundsArcsec: SkyBounds; credit: string; page: string }

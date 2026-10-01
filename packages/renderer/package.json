@@ -81,7 +81,6 @@
     "@cssearth/objects": "workspace:*"
   },
   "devDependencies": {
-    "@cssearth/bake": "workspace:*",
     "@cssearth/volume-viewer": "workspace:*",
     "@types/node": "^26.4.0",
     "linkedom": "^0.18.13",
