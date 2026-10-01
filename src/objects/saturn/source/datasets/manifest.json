@@ -21,37 +21,5 @@
       "filename": "hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
     }
-  ],
-  "references": [
-    {
-      "id": "cassini-vims-pia17469",
-      "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/",
-      "instrument": "Cassini VIMS",
-      "wavelengthBandsMicrometers": [
-        [
-          1.19,
-          1.5
-        ],
-        [
-          1.9,
-          2.1
-        ],
-        [
-          4.88,
-          5.06
-        ]
-      ],
-      "use": "thermal palette, internal-heat interpretation, and ring response reference"
-    },
-    {
-      "id": "cassini-cirs-thermal-mapping",
-      "url": "https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/composite-infrared-spectrometer/",
-      "instrument": "Cassini CIRS",
-      "wavelengthRangeMicrometers": [
-        7,
-        1000
-      ],
-      "use": "atmospheric and ring temperature interpretation"
-    }
   ]
 }

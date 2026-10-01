@@ -19,8 +19,7 @@ export const parseSaturnScene=shape({schema:text,systemTransform:text,meshTransf
     coverageScale:number,textureSize:number,depthBias:number,presentationNodeDegrees:number,meshRotationDegrees:number,tileSize:number})}),
   preparedRingSource:shape({planeVisualOrbitSeconds:number,saturnGmKm3PerS2:number,shadowModel:shape({systemTiltDegrees:number,systemNodeDegrees:number})}),
   ringPlane:shape({style:text,projectiveTextureLayer:textureLayer}),ringShadowPlane:shape({style:text,projectiveTextureLayer:textureLayer}),
-  ringMotionPlates:array(shape({population:text,durationSeconds:number,textureUrl:text,texture2xUrl:text,leaf:shape({style:text,projectiveTextureLayer:textureLayer})})),
-  ringMotionExpansionPlates:array(requireRecord),ringPointGroups:array(requireRecord),bodyBands:bands,
+  bodyBands:bands,
   interior:shape({schema:text,outerBodyBands:bands,shells:array(shape({className:text,leaves:array(preparedLeaf)})),sectionLeaves:array(preparedLeaf),
     atmosphere:shape({model:text,frameCount:number,minimumScenePitchDegrees:number,maximumScenePitchDegrees:number,leaf:preparedLeaf,runtimeShards:shards}),leafCount:number}),
   preparedMotion:shape({referenceRotationVisualSeconds:number,obliquityDegrees:number,cameraRotationXDegrees:number}),counts:dictionary(number)});
@@ -33,8 +32,7 @@ export const parseSaturnViews=shape({schema:text,presentation:text,runtimeGeomet
 const datasetBase={id:text,materialDataset:text,label:text,shortLabel:text,thumbnailUrl:text,qualification:text};
 const exteriorFields={...datasetBase,surfaceUrl:text,surface2xUrl:optional(text),polesUrl:text,ringUrl:text,ring2xUrl:text,materialUrl:optional(text)};
 const colorFields={...exteriorFields,surface2xUrl:text,materialVariant:text,materialPreparationFile:text,filter:text,
-  falseColorPalette:array(array(number)),materialGain:number,sourceModel:text,detailPreparation:text,detailCarrierUrl:text,
-  maximumDetailScale:number,sourceFiles:array(text),sourceUrls:array(text)};
+  falseColorPalette:array(array(number)),materialGain:number,sourceModel:text,detailPreparation:text,sourceFiles:array(text)};
 function dataset(value:unknown) {
  const record=requireRecord(value);
  if(record.view==='interior')return {...shape({...datasetBase,interiorMaterialUrl:text})(value),view:'interior' as const,

@@ -2,7 +2,6 @@
   "schema": "cssearth-volume-presentation-source@2",
   "objectId": "ngc-300-layers",
   "name": "NGC 300",
-  "host": "ngc-300",
   "defaultDataset": "optical",
   "bank": {
     "path": "src/objects/ngc-300-layers/prepared/image-layers.json"

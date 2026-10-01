@@ -2,7 +2,6 @@
   "schema": "cssearth-volume-presentation-source@2",
   "objectId": "m87-volume",
   "name": "M87",
-  "host": "m87",
   "defaultDataset": "eso-optical",
   "bank": {
     "path": "src/objects/m87-volume/prepared/datasets.json"

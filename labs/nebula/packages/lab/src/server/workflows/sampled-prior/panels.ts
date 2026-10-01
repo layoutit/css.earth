@@ -1,6 +1,7 @@
 import sharp from 'sharp';
 import type { CompilerImage } from '../compiler/images.ts';
-import type { SkyBounds, SpatialField } from '@cssearth/bake/volume';
+import type { SpatialField } from '@cssearth/bake/volume';
+import type { SkyBounds } from '@cssearth/objects';
 
 /** Diagnostic display-luminance comparison using the same depth-aware RGB material as the baked cloud. */
 export async function sampledPanels(field: SpatialField, source: Pick<CompilerImage, 'sampleRgb'>, bounds: SkyBounds,

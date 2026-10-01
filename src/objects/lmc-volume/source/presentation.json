@@ -2,7 +2,6 @@
   "schema": "cssearth-volume-presentation-source@2",
   "objectId": "lmc-volume",
   "name": "Large Magellanic Cloud",
-  "host": "lmc",
   "defaultDataset": "horalek-widefield",
   "bank": {
     "path": "src/objects/lmc-volume/prepared/datasets.json"

@@ -5,7 +5,8 @@
   "properties": {
     "preparation": {
       "source": "source/dots/points.json"
-    }
+    },
+    "host": "virgo-cluster"
   },
   "prepared": {
     "format": "cssearth-catalogue-points-bin@1",

@@ -1,4 +1,4 @@
-import type { CompilerBakeResult, CompilerDatasetVolume, DensityVolumeFrame } from '@cssearth/bake/volume';
+import type { CompilerBakeResult, CompilerDatasetVolume, DensityVolumeFrame } from '@cssearth/objects';
 import type { ViewFraming } from '../camera/framing.ts';
 
 export interface BankResource { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }

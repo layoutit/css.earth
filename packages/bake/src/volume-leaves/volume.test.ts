@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import type { VolumeSliceQuad } from '../volume/node/index.ts';
-import type { Vector3 } from '../volume/index.ts';
+import type { Vector3 } from '@cssearth/objects';
 import { test } from 'node:test';
 
 type Quad = Pick<VolumeSliceQuad, 'id' | 'axis' | 'texturePath' | 'widthPx' | 'heightPx' | 'vertices' | 'uvs'>;

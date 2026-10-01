@@ -4,7 +4,7 @@ import { radialRecipe, type SourcePin, type ObservedRadialLayer } from '../../ge
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
-import { annularContentPixels, rasterAnnularField, rasterAnnularWedges, rasterObservedRadialField, colorizeRadialField, rasterProjectedStripShadow, loadObservedProfile } from './rings.ts';
+import { annularContentPixels, rasterAnnularField, rasterAnnularWedges, rasterObservedRadialField, rasterProjectedStripShadow, loadObservedProfile } from './rings.ts';
 import { ringWedgeLayout } from '../../../scene/index.ts';
 
 
@@ -45,18 +45,9 @@ export function parseRadialLayerRecipe(input: unknown) {
       if(overlay.kind!=='projected-strip-shadow'||layer.densityMode==='downsample-highest'||!positive(overlay.bodyRadius)||!positive(overlay.outerRadius)||overlay.outerRadius<=overlay.bodyRadius||!isArray(overlay.direction)||overlay.direction.length!==2||!overlay.direction.every(Number.isFinite)||Math.hypot(...overlay.direction)===0||!color(overlay.color)||!positive(overlay.startFraction)||!positive(overlay.edgeFraction)||!Number.isInteger(overlay.maximumAlpha)||overlay.maximumAlpha<1||overlay.maximumAlpha>255||![0,1].includes(overlay.centerInset)||!Number.isFinite(overlay.marginPixels)||overlay.marginPixels<0||!overlay.encoding||!/^[a-z0-9][a-z0-9-]*\{suffix\}\.webp$/u.test(overlay.output)||outputs.has(overlay.output))fail('invalid radial overlay.');
       outputs.add(overlay.output);
     }
-    for (const variant of layer.variants ?? []) {
-      if (!/^[a-z0-9][a-z0-9-]*\{suffix\}\.webp$/.test(variant.output) || outputs.has(variant.output) ||
-          !isArray(variant.palette) || variant.palette.length !== 3 || !variant.palette.every(color) ||
-          !positive(variant.outerRadius) || !positive(variant.exponent) || !positive(variant.gain) || !positive(variant.outerGain) ||
-          !isArray(variant.luminance) || variant.luminance.length !== 3 || !variant.luminance.every(positive) ||
-          !isArray(variant.radialGains) || variant.radialGains.some((band, index) => !positive(band.upperBound) || !positive(band.gain) ||
-            (index > 0 && band.upperBound <= variant.radialGains[index - 1].upperBound))) fail('invalid spectral radial variant.');
-      outputs.add(variant.output);
-    }
     // A ring drawn as wedges ships one atlas at the canonical density and nothing else, so nothing else may ask for output.
     if (layer.kind === 'annular-field' && layer.wedges && (!Number.isInteger(layer.wedges.count) || layer.wedges.count < 3 ||
-        layer.densities.length !== 1 || layer.densities[0] !== 2 || layer.overlays?.length || layer.variants?.length || layer.densityMode)) fail('invalid ring wedges.');
+        layer.densities.length !== 1 || layer.densities[0] !== 2 || layer.overlays?.length || layer.densityMode)) fail('invalid ring wedges.');
     if (layer.kind === 'annular-field') {
       const { grid, mapping } = layer;
       if (!positive(layer.outerRadius) || !grid || ![0, 1].includes(grid.centerInset) || ![0, 0.5].includes(grid.sampleOffset) ||
@@ -89,8 +80,6 @@ export function parseRadialLayerRecipe(input: unknown) {
       if (!pair(layer.bounds) || !pair(layer.sourceBounds) || layer.sourceBounds[0] < layer.bounds[0] ||
           layer.sourceBounds[1] !== layer.bounds[1] || !(rowSources || profileSource) ||
           !isArray(layer.channelFactors) || layer.channelFactors.length !== 3 || !layer.channelFactors.every(positive) ||
-          !layer.interior || !color(layer.interior.color) || !isArray(layer.interior.centers) || !layer.interior.centers.length ||
-          !layer.interior.centers.every(positive) || !positive(layer.interior.sigma) ||
           !isArray(layer.operations) || layer.operations.some(operation => !pair(operation.bounds) ||
             !['alpha-cap', 'clear', 'edge-core', 'alpha-gain'].includes(operation.kind)) ||
           !layer.readability || !isArray(layer.readability.features) || !positive(layer.readability.alphaGain) ||
@@ -151,15 +140,6 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
       for(const overlay of layer.overlays??[]){
         const shadow=rasterProjectedStripShadow(data,size,overlay),encoded=await sharp(shadow,{raw:{width:size,height:size,channels:4}}).webp(overlay.encoding).toBuffer(),filename=overlay.output.replace('{suffix}',density===2?'@2x':'');
         assets.push({filename,width:size,height:size,bytes:encoded.length,data:encoded});
-      }
-      if (layer.variants?.length) {
-        const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-        for (const variant of layer.variants) {
-          const data = colorizeRadialField(decoded.data, decoded.info.width, decoded.info.height, variant);
-          const encoded = await sharp(data, { raw: decoded.info }).webp(variant.encoding).toBuffer();
-          const filename = variant.output.replace('{suffix}', density === 2 ? '@2x' : '');
-          assets.push({ filename, width: size, height: size, bytes: encoded.length, data: encoded });
-        }
       }
     }
   }

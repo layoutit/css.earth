@@ -5,7 +5,7 @@ import type { WorldCameraViewport, WorldCameraPose } from '../navigation/world-c
 import type { PreparedCssSky } from '../sky/types.js';
 
 /** The retained-DOM cost of one volume topology, measured by the renderer's conformance tests. The renderer declares it;
- * the bake's element budget (`@cssearth/bake/volume`) validates it and allocates slabs within it. */
+ * the bake's element budget (`@cssearth/objects`) validates it and allocates slabs within it. */
 export interface RenderElementProfile {
   schema: 'cssearth-render-element-profile@1';
   id: string;

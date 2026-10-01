@@ -2,8 +2,7 @@
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {relative} from 'node:path';
 import sharp from 'sharp';
-import type { Bounds3, Vector3 } from '../../contracts/volume-recipe.ts';
-import type { DensityVolumeFrame } from '../../contracts/volume-frame.ts';
+import { type Bounds3, type Vector3, type DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeSlices } from '../../contracts/volume-slices.ts';
 import {containedPath,sourceBytes} from '../compact-inputs/density-grid.ts';
 import {bakeMasterVolumeSlices} from './emission.ts';

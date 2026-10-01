@@ -1,10 +1,8 @@
+import type { Axis, Bounds3, Vector3 } from '@cssearth/objects';
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
-export type Vector3 = [number, number, number];
 /** Row-major transform of ordinary display RGB values during offline preparation. */
 export type DisplayColorMatrix = [number, number, number, number, number, number, number, number, number];
-export type Axis = 'x' | 'y' | 'z';
-export interface Bounds3 { min: Vector3; max: Vector3; }
 export interface VolumeImageEncoding { format: 'png' | 'webp'; quality?: number; }
 export interface DensityChannel { channel: number; color: Vector3; strength: number; decodedPower?: number; }
 export interface RadialEmission {

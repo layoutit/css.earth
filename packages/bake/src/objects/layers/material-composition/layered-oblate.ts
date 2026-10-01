@@ -1,10 +1,9 @@
 import { linearToSrgb, srgbToLinear } from '../../color/index.ts';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
-import type { RingMotionPoint, prepareRadialMotionAndShadow } from './radial-motion.ts';
+import type { prepareRadialMotionAndShadow } from './radial-motion.ts';
 import type { prepareSpectralMaterialVariants } from './spectral-variants.ts';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}
 interface RetainedLeaf {style:string;tag?:string;className?:string;projectiveTextureLayer?:ReturnType<typeof prepareProjectiveTextureLayer>;}
-interface PointGroup {population:string;durationSeconds:number;expansionGroupIndex?:number;points:RingMotionPoint[];}
 interface AtlasPresentation {assetUrl?:string;asset2xUrl?:string;frameIndex?:number;rowIndex?:number;backgroundPosition?:string;backgroundSize?:string;}
 interface AtlasVariant {runtimeAtlas:AtlasPresentation;defaultPresentation?:AtlasPresentation;rows:readonly AtlasPresentation[];presentations:readonly AtlasPresentation[];}
 interface AtlasPlanMetadata {model:string;defaultVariant?:string;defaultPreparedFrame:number;defaultPreparedRow:number;initialWarmRows:readonly number[];
@@ -31,8 +30,7 @@ import { validateMaterialRecipe } from './recipe.ts';
 import {interiorSource} from '../cutaway/index.ts';
 import type {prepareCutawayMaterials} from './cutaway-materials.ts';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
-interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
-  ringGroups:PointGroup[];
+interface LayeredInputs extends RadialPreparation {
   datasets?:Awaited<ReturnType<typeof prepareSpectralMaterialVariants>>;
   views?:Awaited<ReturnType<typeof prepareCutawayMaterials>>;
 }
@@ -124,8 +122,6 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   await verifyObservationSources(sourceDirectory, Object.values(config.sources).map(path => ({ path })));
   const readSourceJson = async (path:string): Promise<unknown> => JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8'));
   const PREPARED_RING_SOURCE = preparedInputs.ringSource;
-  const PREPARED_RING_GROUPS = preparedInputs.ringGroups;
-  const PREPARED_MAIN_RING_PLATES = preparedInputs.ringPlates;
   // The globe's limb: the published photometric models of its map (packages/bake/src/photometry/limb.ts). The overlay's reference
   // colour is measured from the prepared surface once it is written.
   const LIMB_LAW = await loadLimbLaw(sourceDirectory, config.limb.models);
@@ -328,9 +324,6 @@ const BODY_VISIBILITY_RANGE_BANK_COUNT = config.parameters.bodyVisibilityRangeBa
 const BODY_VISIBILITY_PITCH_SAMPLES_PER_RANGE = config.parameters.bodyVisibilityPitchSamplesPerRange;
 const BODY_VISIBILITY_PHASE_SAMPLES_PER_STATE = config.parameters.bodyVisibilityPhaseSamplesPerState;
 const BODY_VISIBILITY_PERSPECTIVE_PX = config.parameters.bodyVisibilityPerspectivePx;
-const POINT_LOCAL_SCALE = 50 / CAMERA_ZOOM;
-const RING_POINT_SOURCE_OPACITY_RANGE = config.parameters.ringPointSourceOpacityRange;
-const RING_POINT_PRESENTATION_OPACITY_RANGE = config.parameters.ringPointPresentationOpacityRange;
 const TILE_SIZE = config.parameters.tileSize;
 const SEAM_BLEED = config.parameters.seamBleed;
 const PLANET_SEAM_BLEED = config.parameters.planetSeamBleed;
@@ -691,56 +684,6 @@ function croppedRingShadowTextureStyle() {
         PREPARED_RING_SOURCE.shadowTextureTransparentGutter,
       retainedLogicalPlaneSize: sourceSize,
       runtimeWork: false,
-    },
-  };
-}
-
-function cropRingMotionLeaf<T extends {style:string}>(leaf:T, plate:RadialPreparation['ringPlates'][number]) {
-  const { x, y, width, height } = plate.textureCropBounds;
-  const fullPosition = "background-position:0px 0px";
-  const fullBackground =
-    `background-size:${formatCssLength(plate.textureSize)} ` +
-    formatCssLength(plate.textureSize);
-  const croppedBackground =
-    `background-size:${formatCssLength(width)} ${formatCssLength(height)}`;
-  if (!leaf.style.includes(fullPosition) ||
-      !leaf.style.includes(fullBackground)) {
-    throw new Error(`Prepared Ellipsoid ${plate.population} crop is incompatible.`);
-  }
-  return {
-    ...leaf,
-    style: leaf.style
-      .replace(
-        fullPosition,
-        `background-position:${formatCssLength(x)} ${formatCssLength(y)}`,
-      )
-      .replace(fullBackground, croppedBackground),
-  };
-}
-
-function canonicalRingMotionPlateStyle(plate:RadialPreparation['ringPlates'][number], index:number) {
-  const leaf = cropRingMotionLeaf(textureStyle(createRingPlane(
-    plate.textureUrl,
-    plate.elevation,
-    plate.textureSize,
-    plate.displayRadius,
-  ), index + 2, plate.texture2xSize), plate);
-  const source = `background-image:url(${plate.textureUrl})`;
-  const canonical = `background-image:url(\"${plate.texture2xUrl}\")`;
-  if (!leaf.style.includes(source)) {
-    throw new Error(`Prepared Ellipsoid ${plate.population} plate is incompatible.`);
-  }
-  return {
-    ...plate,
-    preparedCrop: {
-      sourceSize: plate.textureSize,
-      bounds: plate.textureCropBounds,
-      transparentGutter: plate.textureTransparentGutter,
-      runtimeWork: false,
-    },
-    leaf: {
-      ...leaf,
-      style: leaf.style.replace(source, canonical),
     },
   };
 }
@@ -3108,82 +3051,6 @@ function prepareBodyBands<T extends RetainedLeaf>(preparedBodyLeaves:readonly {l
   });
 }
 
-function prepareRingPoint(point:RingMotionPoint, index:number, pointMode:string) {
-  const [x, y, z, color, sourceOpacity, inverted = false] = point;
-  const [cssX, cssY, cssZ] = worldPositionToCss([x, y, z]);
-  const opacity = inverted ? 0.5 : prepareRingPointOpacity(sourceOpacity);
-  const halfSize = 1.18;
-  const polygon:Polygon = {
-    vertices: [
-      [x - halfSize, y - halfSize, z], [x + halfSize, y - halfSize, z],
-      [x + halfSize, y + halfSize, z], [x - halfSize, y + halfSize, z],
-    ],
-    color,
-  };
-  const plan = computeTextureAtlasPlanPublic(polygon, index, PLAN_OPTIONS);
-  if (!plan) throw new Error(`Ring point ${index} did not prepare.`);
-  const transform = pointMode === "billboard"
-    ? `${buildPolyMeshTransform({ rotation: [-OBJECT_OBLIQUITY_DEGREES, 0, 0] })} ` +
-      `${buildPolyMeshTransform({ rotation: [0, 0, -OBJECT_PRESENTATION_NODE_DEGREES] })} ` +
-      `rotateX(${-CAMERA_ROTATION_X_DEGREES}deg) scale(${POINT_LOCAL_SCALE}) ` +
-      `translate(-50%, -50%)`
-    : `scale(${POINT_LOCAL_SCALE}) translate(-50%, -50%)`;
-  return {
-    style: `translate:${formatCssLength(cssX)} ${formatCssLength(cssY)} ` +
-      `${formatCssLength(cssZ)};transform:${transform}` +
-      `;color:${plan.shadedColor};opacity:${opacity}`,
-    opacity: String(opacity),
-  };
-}
-
-function prepareRingPointExpansion(point:RingMotionPoint, index:number, groupIndex:number):RingMotionPoint {
-  const [x, y, z, color, opacity, inverted = false] = point;
-  const radius = Math.hypot(x, y);
-  const sourceAngle = Math.atan2(x, y);
-  const phaseTurns = (
-    (index + 1) * 0.61803398875 +
-    (groupIndex + 1) * 0.41421356237
-  ) % 1;
-  const angle = sourceAngle + phaseTurns * Math.PI * 2;
-  return [
-    Number((Math.sin(angle) * radius).toFixed(3)),
-    Number((Math.cos(angle) * radius).toFixed(3)),
-    Number((z * ((index + groupIndex) % 2 === 0 ? 1 : -1)).toFixed(3)),
-    color,
-    opacity,
-    inverted,
-  ];
-}
-
-function ringPointMode(population:string) {
-  return population.startsWith("main-ring-") ||
-      population === "g-ring-dust" ||
-      population === "janus-epimetheus-ring-dust"
-    ? "surface"
-    : "billboard";
-}
-
-function ringPointCompositeMode(population:string) {
-  return population === "g-ring-dust" || population.startsWith("e-ring-")
-    ? "flat"
-    : "preserve-3d";
-}
-
-function ringPointAnimated(population:string) {
-  return !population.startsWith("e-ring-");
-}
-
-function prepareRingPointOpacity(sourceOpacity:number) {
-  const [sourceMinimum, sourceMaximum] = RING_POINT_SOURCE_OPACITY_RANGE;
-  const normalized = Math.max(0, Math.min(1,
-    (sourceOpacity - sourceMinimum) / (sourceMaximum - sourceMinimum)));
-  return Number(mix(
-    RING_POINT_PRESENTATION_OPACITY_RANGE[0],
-    RING_POINT_PRESENTATION_OPACITY_RANGE[1],
-    normalized,
-  ).toFixed(3));
-}
-
 function mix(start:number, end:number, amount:number) {
   return start + (end - start) * amount;
 }
@@ -3238,41 +3105,6 @@ const interiorLeafCount = cutawayBodyLeafCount +
   interiorMetallicLeaves.length + interiorCoreLeaves.length +
   interiorSectionLeaves.length;
 const bodyLeafCount = bodyBands.reduce((count, band) => count + band.leaves.length, 0);
-const preparedRingPointGroups = PREPARED_RING_GROUPS.map((group, retainedIndex) => {
-  const groupIndex = group.expansionGroupIndex ??
-    (retainedIndex === 0 ? 0 : retainedIndex + 1);
-  const pointMode = ringPointMode(group.population);
-  const expansionPoints = group.points.map((point, index) =>
-    prepareRingPointExpansion(point, index, groupIndex));
-  return {
-    population: group.population,
-    pointMode,
-    compositeMode: ringPointCompositeMode(group.population),
-    animated: ringPointAnimated(group.population),
-    pointCount: group.points.length,
-    expansionPointCount: expansionPoints.length,
-    durationSeconds: group.durationSeconds,
-    leaves: group.points.map((point, index) =>
-      prepareRingPoint(point, index, pointMode)),
-    expansionLeaves: expansionPoints.map((point, index) => prepareRingPoint(
-      point,
-      group.points.length + index,
-      pointMode,
-    )),
-  };
-});
-const baselineRingPointLeafCount = preparedRingPointGroups.reduce(
-  (count, group) => count + group.leaves.length,
-  0,
-);
-const expansionRingPointLeafCount = preparedRingPointGroups.reduce(
-  (count, group) => count + group.expansionLeaves.length,
-  0,
-);
-const preparedRingMotionPlates = PREPARED_MAIN_RING_PLATES.map(
-  canonicalRingMotionPlateStyle,
-);
-const preparedRingMotionExpansionPlates:typeof preparedRingMotionPlates = [];
 const orbitDefaultControlPitch =
   CAMERA_ORBIT_MAXIMUM_CONTROL_PITCH_DEGREES *
   (1 - CAMERA_ROTATION_X_DEGREES /
@@ -3347,10 +3179,7 @@ const scene = {
   },
   preparedRingSource: PREPARED_RING_SOURCE,
   ringPlane: canonicalRingTextureStyle(leafImages.rings),
-  ringMotionPlates: preparedRingMotionPlates,
-  ringMotionExpansionPlates: preparedRingMotionExpansionPlates,
   ringShadowPlane: croppedRingShadowTextureStyle(),
-  ringPointGroups: preparedRingPointGroups,
 
   bodyBands,
   interior: {
@@ -3390,55 +3219,10 @@ const scene = {
     presentationNodeDegrees: OBJECT_PRESENTATION_NODE_DEGREES,
     cameraOrbitalElevationDegrees: CAMERA_ORBITAL_ELEVATION_DEGREES,
     cameraRotationXDegrees: CAMERA_ROTATION_X_DEGREES,
-    ringPointPresentation: {
-      primitive: "prepared-mode-polycss-point-leaf",
-      surfacePointCount: PREPARED_RING_GROUPS
-        .filter((group) => ringPointMode(group.population) === "surface")
-        .reduce((count, group) => count + group.points.length, 0),
-      preparedRasterPointCount:
-        PREPARED_MAIN_RING_PLATES.reduce(
-          (count, plate) => count + plate.pointCount,
-          0,
-        ),
-      preparedRasterPlateCount: preparedRingMotionPlates.length,
-      preparedRasterExpansionPointCount: 0,
-      preparedRasterExpansionPlateCount: 0,
-      billboardPointCount: PREPARED_RING_GROUPS
-        .filter((group) => ringPointMode(group.population) === "billboard")
-        .reduce((count, group) => count + group.points.length, 0),
-      animatedBillboardPointCount: PREPARED_RING_GROUPS
-        .filter((group) =>
-          ringPointMode(group.population) === "billboard" &&
-          ringPointAnimated(group.population))
-        .reduce((count, group) => count + group.points.length, 0),
-      staticBillboardPointCount: PREPARED_RING_GROUPS
-        .filter((group) =>
-          ringPointMode(group.population) === "billboard" &&
-          !ringPointAnimated(group.population))
-        .reduce((count, group) => count + group.points.length, 0),
-      maximumSurfacePointCount: PREPARED_RING_GROUPS
-        .filter((group) => ringPointMode(group.population) === "surface")
-        .reduce((count, group) => count + group.points.length * 2, 0),
-      maximumBillboardPointCount: PREPARED_RING_GROUPS
-        .filter((group) => ringPointMode(group.population) === "billboard")
-        .reduce((count, group) => count + group.points.length * 2, 0),
-      densityRange: [1, 1],
-      defaultDensity: 1,
-      surfaceMode: "coplanar-ring-quad-no-counter-rotation",
-      freeDustMode: "none",
-      localScale: Number(POINT_LOCAL_SCALE.toFixed(6)),
-      varianceModel: "prepared-continuous-opacity-with-fixed-point-size",
-      sourceOpacityRange: RING_POINT_SOURCE_OPACITY_RANGE,
-      presentationOpacityRange: RING_POINT_PRESENTATION_OPACITY_RANGE,
-      runtimeJavaScriptWritesPerFrame: 0,
-    },
     viewingGeometry: "fixed-camera-independent-orbital-frame-presentation",
   },
   counts: {
-    polygonCount: 2 + preparedRingMotionPlates.length +
-      preparedRingMotionExpansionPlates.length +
-      baselineRingPointLeafCount + expansionRingPointLeafCount +
-      bodyLeafCount + interiorLeafCount + 2,
+    polygonCount: 2 + bodyLeafCount + interiorLeafCount + 2,
     planetPolygonCount: bodyLeafCount + 1,
     interiorLeafCount,
     cutawayBodyLeafCount,
@@ -3453,20 +3237,8 @@ const scene = {
     fixedMaterialPlaneLeafCount: 1,
     ringPlaneCount: 1,
     ringShadowPlaneCount: 1,
-    ringPointCount: PREPARED_RING_SOURCE.pointCount,
-    baselineRingPointLeafCount,
-    ringPointExpansionLeafCount: expansionRingPointLeafCount,
-    ringPointLeafCount:
-      baselineRingPointLeafCount + expansionRingPointLeafCount,
-    ringMotionPlateLeafCount: preparedRingMotionPlates.length,
-    ringMotionExpansionPlateLeafCount:
-      preparedRingMotionExpansionPlates.length,
-    ringDustTextureLeafCount: 0,
-    ringPointGroupCount: PREPARED_RING_GROUPS.length,
     bodyBandCount: bodyBands.length,
-    textureLeafCount: 3 + preparedRingMotionPlates.length +
-      preparedRingMotionExpansionPlates.length +
-      bodyLeafCount + interiorLeafCount + 1,
+    textureLeafCount: 3 + bodyLeafCount + interiorLeafCount + 1,
   },
 };
 
@@ -3619,30 +3391,7 @@ function createRuntimeScenePlan(source:typeof scene) {
       },
     },
     ringPlane: runtimeLeaf(source.ringPlane),
-    ringMotionPlates: source.ringMotionPlates.map((plate) => ({
-      population: plate.population,
-      compositeMode: 'compositeMode' in plate ? requireString(plate.compositeMode) : undefined,
-      durationSeconds: plate.durationSeconds,
-      textureUrl: plate.textureUrl,
-      texture2xUrl: plate.texture2xUrl,
-      leaf: runtimeLeaf(plate.leaf),
-    })),
-    ringMotionExpansionPlates: source.ringMotionExpansionPlates.map((plate) => ({
-      population: plate.population,
-      compositeMode: 'compositeMode' in plate ? requireString(plate.compositeMode) : undefined,
-      durationSeconds: plate.durationSeconds,
-      leaf: runtimeLeaf(plate.leaf),
-    })),
     ringShadowPlane: runtimeLeaf(source.ringShadowPlane),
-    ringPointGroups: source.ringPointGroups.map((group) => ({
-      pointMode: group.pointMode,
-      animated: group.animated,
-      compositeMode: group.compositeMode,
-      durationSeconds: group.durationSeconds,
-      leaves: group.leaves.map(runtimeLeaf),
-      expansionLeaves: group.expansionLeaves.map(runtimeLeaf),
-    })),
-
     bodyBands: source.bodyBands.map(runtimeBodyBand),
     interior: {
       schema: source.interior.schema,

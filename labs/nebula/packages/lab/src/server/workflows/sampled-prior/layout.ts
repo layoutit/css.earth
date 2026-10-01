@@ -3,7 +3,7 @@ import { registerComponentBanks as register } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { readGeometryPin } from '../geometry/registered-source.ts';
-import type { CompilerBakeResult, CompilerDatasetVolume, CompilerPin } from '@cssearth/bake/volume';
+import type { CompilerBakeResult, CompilerDatasetVolume, CompilerPin } from '@cssearth/objects';
 export * from '@cssearth/bake/volume/node';
 export function registerComponentBanks(root: string, outputDirectory: string, neutral: CompilerBakeResult,
   datasets: CompilerDatasetVolume[], signal: AbortSignal,

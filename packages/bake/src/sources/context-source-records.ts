@@ -36,8 +36,9 @@ export async function contextLineages({ route, root = process.cwd(), input = (pa
         interpretation: { ...(typeof interpretation.kind === 'string' ? { kind: interpretation.kind } : {}),
           ...(typeof interpretation.sourceKind === 'string' ? { sourceKind: interpretation.sourceKind } : {}) } };
     });
-    // A bank an object shows through one of its datasets names that object: its page is where the bank is seen.
-    const host = raw.host === undefined ? undefined : sourceId(raw.host);
+    // A bank that names its host object (`properties.host` in its descriptor) is seen on that object's page.
+    const descriptor = sourceObject(JSON.parse((await input(`${base}/object.json`)).toString()));
+    const properties = sourceObject(descriptor.properties), host = properties.host === undefined ? undefined : sourceId(properties.host);
     results.push({ id, name: sourceText(presentation.name), route: host === undefined ? route : `/${host}/`, base, controls: [],
       lineage: checkLineage({ objectId: id, manifestPath: 'source/manifest.json', sources: manifestSources(manifest), products }) });
   }

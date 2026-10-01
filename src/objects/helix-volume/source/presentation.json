@@ -2,7 +2,6 @@
   "schema": "cssearth-volume-presentation-source@2",
   "objectId": "helix-volume",
   "name": "Helix Nebula",
-  "host": "helix",
   "defaultDataset": "eso-wfi",
   "bank": {
     "path": "src/objects/helix-volume/prepared/datasets.json"

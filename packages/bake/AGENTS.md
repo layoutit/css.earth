@@ -2,7 +2,7 @@
 
 Own the build-time preparation code: what the preparation tools and the nebula lab run to turn source records into
 prepared delivery. Nothing here runs in the application. The runtime (`@cssearth/renderer` and
-`site/**`, apart from its build-time `site/build/`) must never import `@cssearth/bake`; a type the renderer needs belongs in the renderer's own contracts.
+`site/**`, apart from its build-time `site/build/`) must never import `@cssearth/bake`; shared prepared-format types belong in `@cssearth/objects`.
 
 Each topic is one subpath entry. Topics must not import each other sideways. A topic may import a lower topic, and only
 through that topic's `index.ts`, when `LOWER_TOPICS` in `src/entries.test.ts` declares it; the declared order has no
@@ -283,12 +283,13 @@ its validators accept); the renderer never imports the bake.
   (`packages/bake/cli/prepare-stars.mts`, `prepare-shell.mts`, `prepare-volume.mts`, the last also `pnpm prepare:volume`
   and the telescope's F16 volume operation) pass `@cssearth/objects/node`'s.
 
-- `src/volume/` is published as `@cssearth/bake/volume`: the volume contracts, coordinates, fields, materials and
-  sampling. It stays host-neutral, because the nebula lab's browser viewer imports it: no Node built-ins, `Buffer`,
+- `src/volume/` is published as `@cssearth/bake/volume`: the remaining volume contracts, coordinates, fields, materials and
+  sampling. Prepared scene readers, density filters and their format types live in `@cssearth/objects`. It stays host-neutral, for preparation callers: no Node built-ins, `Buffer`,
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
   compiler bake and the published catalogue point banks, with the galaxy groups' placement and the shell selection that
-  keeps them first (`catalogue-groups.ts`). It may import `node:*`, `sharp`, the main volume entry and the
+  keeps them first (`catalogue-groups.ts`). `body-points.ts` builds a bank centred on a body from positions relative to it
+  (a planet's moons without a page); `packages/bake/cli/prepare-body-points.mts <object-directory> <id>` is its command. It may import `node:*`, `sharp`, the main volume entry and the
   renderer's catalogue bank codec (`@cssearth/renderer/prepared-data/catalogue-bank-binary.ts`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only
   topics above may, as a lower layer.
 

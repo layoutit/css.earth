@@ -33,7 +33,8 @@
     },
     "preparation": {
       "source": "source/delivery.json"
-    }
+    },
+    "host": "m45"
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

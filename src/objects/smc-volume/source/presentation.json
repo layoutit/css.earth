@@ -2,7 +2,6 @@
   "schema": "cssearth-volume-presentation-source@2",
   "objectId": "smc-volume",
   "name": "Small Magellanic Cloud",
-  "host": "smc",
   "defaultDataset": "smc-horalek-wide",
   "bank": {
     "path": "src/objects/smc-volume/prepared/datasets.json"

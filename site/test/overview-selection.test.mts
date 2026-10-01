@@ -25,20 +25,20 @@ const viewport = { focalPixels: 1000, principalOffsetPixels: [140, 0] as const }
 const camera = (frame: PreparedWorldCameraFrame, distanceUnits: number) => worldCameraFromCenteredPresentation({ rotation, distanceUnits }, frame, viewport);
 const choose = (world: WorldCameraPose, objectId: string, overview: boolean) => selectionAtCamera({ world, viewport, objects, systems: objects, objectId, overview });
 
-test('the Sun switches to Solar System at 100 AU from it', () => {
-  for (const id of ['sun']) {
+test('every body switches to Solar System at 100 AU from the Sun', () => {
+  for (const id of ['sun', 'ceres']) {
     assert.equal(choose(camera(sun, 99.99 * au), id, false), null);
     assert.deepEqual(choose(camera(sun, 100 * au), id, false), { overview: true, objectId: 'sun' });
     assert.deepEqual(choose(camera(sun, 100.01 * au), id, false), { overview: true, objectId: 'sun' });
   }
 });
 
-test('a camera as far from a body as its star is opens the system; the star keeps the exit distance', () => {
-  const at = (range: number) => selectionAtCamera({ world: camera(ceres, range * au), viewport, objects, systems: objects, objectId: 'ceres', overview: false });
-  assert.equal(at(20), null, 'near the body, the body');
-  assert.equal(at(25), null);
-  assert.deepEqual(at(71), { overview: true, objectId: 'sun' });
-  assert.equal(selectionAtCamera({ world: camera(sun, 50 * au), viewport, objects, systems: objects, objectId: 'sun', overview: false }), null, 'the star itself is its system');
+test('a flight that lands as far from a body as its star is opens the system; a zoom by hand does not', () => {
+  const at = (range: number, landed: boolean) => selectionAtCamera({ world: camera(ceres, range * au), viewport, objects, systems: objects, objectId: 'ceres', overview: false, landed });
+  assert.equal(at(20, false), null, 'a hand zoom keeps the body out to the exit distance');
+  assert.equal(at(20, true), null, 'a landing near the body keeps it');
+  assert.deepEqual(at(71, true), { overview: true, objectId: 'sun' });
+  assert.equal(selectionAtCamera({ world: camera(sun, 50 * au), viewport, objects, systems: objects, objectId: 'sun', overview: false, landed: true }), null, 'the star itself is its system');
 });
 
 test('the threshold follows the Sun origin even in a translated world frame', () => {
@@ -92,9 +92,9 @@ test('camera sampling settles before changing selection and releases timers and 
   const getListener = () => required(listener);
   let serial = 0, available = true;
   const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
-  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'sun', getOverview: () => false,
+  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'ceres', getOverview: () => false,
     isAvailable: () => available, onChange: next => changes.push(next),
-    navigation: { ...navigationFixture(sun, () => camera(sun, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => { listener = null; }; } },
+    navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => { listener = null; }; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
   getListener()(camera(sun, 101 * au), viewport);
   const firstTimer = [...timers.keys()][0];

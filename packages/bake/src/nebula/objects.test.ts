@@ -7,7 +7,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import ts from 'typescript';
 import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
-import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
+import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/objects';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';

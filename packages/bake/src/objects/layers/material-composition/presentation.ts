@@ -73,13 +73,12 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   }
   const entries = [
     { key: "ring-shadow", url: `/scenes/${namespace}/${namespace}-ring-shadow.webp`, pool: "warm" },
-    ...plan.ringMotionPlates.map((plate, index) => ({ key: `ring-motion:${index}`, url: canonicalPreparedAsset(plate.textureUrl, plate.texture2xUrl), pool: "warm" })),
     ...interior,
     ...exteriorDatasets.flatMap(dataset => datasetAssets(dataset).map(entry => ({ ...entry, pool: dataset.id === datasets.defaultDataset ? "warm" : "datasets" }))),
     ...[...rowBanks.values()].flatMap(({ entries, pool }) => entries.map(entry => ({ ...entry, pool }))),
     ...[...stills.values()].map(({ entry, pool }) => ({ ...entry, pool })),
   ];
-  const leaves = [plan.ringPlane, plan.ringShadowPlane, ...plan.ringMotionPlates.map(plate => plate.leaf),
+  const leaves = [plan.ringPlane, plan.ringShadowPlane,
     ...plan.bodyBands.flatMap(band => band.leaves), ...!cutawayShown ? [] : [...plan.interior.outerBodyBands.flatMap(band => band.leaves),
       ...plan.interior.shells.flatMap(shell => shell.leaves), ...plan.interior.sectionLeaves, plan.interior.atmosphere.leaf],
     plan.fixedMaterialPlane.leaf];
@@ -90,20 +89,8 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   b.append(null, cameraNode); b.append(cameraNode, scene); b.append(scene, system);
   const ring = b.mesh(`${namespace}-ring-orbit ${namespace}-ring-plane`, plan.meshTransform);
   b.append(system, ring); b.append(ring, b.leaf(plan.ringPlane));
-  for (const plate of plan.ringMotionPlates) {
-    const classes = [`${namespace}-ring-orbit`, ...(plate.compositeMode === "flat" ? [`${namespace}-ring-flat`] : [])];
-    const mesh = b.mesh(classes.join(" "), `${plan.meshTransform};animation-duration:${plate.durationSeconds}s`);
-    b.append(system, mesh); b.append(mesh, b.leaf(plate.leaf));
-  }
   const ringShadow = b.mesh(`${namespace}-ring-shadow`, plan.meshTransform);
   b.append(system, ringShadow); b.append(ringShadow, b.leaf(plan.ringShadowPlane));
-  for (const group of plan.ringPointGroups) {
-    const classes = [...(group.animated ? [`${namespace}-ring-orbit`] : []), `${namespace}-ring-${group.pointMode}`,
-      ...(group.compositeMode === "flat" ? [`${namespace}-ring-flat`] : [])];
-    const mesh = b.mesh(classes.join(" "), group.animated ? `${plan.meshTransform};animation-duration:${group.durationSeconds}s` : plan.meshTransform);
-    b.append(system, mesh);
-    for (const leaf of group.leaves) b.append(mesh, b.element("b", null, leaf.style));
-  }
   const carriers = new Map<string,PreparedNode>();
   for (const band of plan.bodyBands) {
     const polar = band.leaves.some(leaf => leaf.className?.includes(`${namespace}-polar`));

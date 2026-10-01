@@ -6,7 +6,7 @@ import { replayCompactSymmetry as replay } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from "@cssearth/bake/volume-leaves";
 import { validatePreparedCssVolume } from "@cssearth/renderer/volume/validation.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
-import type { CompilerPin } from "@cssearth/bake/volume";
+import type { CompilerPin } from '@cssearth/objects';
 function objectVolume(value: unknown) {
   if (!jointRecord(value)) throw new Error("Invalid volume envelope");
   return validatePreparedCssVolume(value.data);

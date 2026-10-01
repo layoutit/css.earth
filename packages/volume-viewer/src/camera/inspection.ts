@@ -1,4 +1,4 @@
-import type { SkyBounds } from '@cssearth/bake/volume';
+import type { SkyBounds } from '@cssearth/objects';
 import type { ViewFraming as ShapeCloudFraming } from './framing.ts';
 
 export interface CompilerInspectionFrame { boundsArcsec: SkyBounds; paddingPixels?: number }

@@ -1,5 +1,6 @@
 /** Retained two-scale light: an explicit smooth density plus finite 3D residual features. */
-import type { EmissionFieldModel, EmissionVector3, SkyBounds } from '../contracts/emission.ts';
+import type { EmissionFieldModel } from '../contracts/emission.ts';
+import type { EmissionVector3, SkyBounds } from '@cssearth/objects';
 import { createEmissionField } from './emission.ts';
 import { readPhotometricMgeRecipe, samplePhotometricMge, type PhotometricMgeRecipe } from './photometric-mge.ts';
 import { createEnvelopeSampler, sampleEnvelopeGrid } from './simulation-envelope.ts';

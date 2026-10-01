@@ -2,8 +2,8 @@
 import { balanceVolumeSlices } from './volume-order.ts';
 import { compileLeafBounds } from './leaf-bounds.ts';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
-import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { Axis, Vector3, VolumeRecipe } from '../volume/index.ts';
+import { type DensityVolumeFrame, type Axis, type Vector3 } from '@cssearth/objects';
+import type { VolumeRecipe } from '../volume/index.ts';
 import type { VolumeSlices } from '../volume/node/index.ts';
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../scene/index.ts';
 import type { PreparedLeafBounds } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';

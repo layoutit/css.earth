@@ -33,7 +33,8 @@
     },
     "preparation": {
       "source": "source/compact-delivery.json"
-    }
+    },
+    "host": "lmc"
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

@@ -110,7 +110,7 @@ export function createSceneRouter({
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = reducedMotion?.matches === true;
   // A header pill's flight holds the overview hand-over off until it lands, then settles it once.
-  let categoryFlight = false, refreshOverviewSelection: (() => void) | null = null;
+  let categoryFlight = false, refreshOverviewSelection: ((landed?: boolean) => void) | null = null;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
     if (scenes.current?.request === request && scenes.state.kind !== 'ready') retire(scenes.current, null, { preserveShell: true, flush: false });
   } });
@@ -352,7 +352,7 @@ export function createSceneRouter({
           categoryFlight = true;
           void context.navigation.frameCategory({ classification, objectId, mount: session.mount, signal: session.signal, reducedMotion: reducedMotionActive })
             .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); })
-            .finally(() => { categoryFlight = false; if (scenes.isCurrent(session)) refreshOverviewSelection?.(); });
+            .finally(() => { categoryFlight = false; if (scenes.isCurrent(session)) refreshOverviewSelection?.(true); });
         },
         navigable: id => navigable(id),
         // A failed prefetch is not an error yet: the navigation that needs it asks again and reports.
