@@ -496,7 +496,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const added = next.bodies.filter(body => !entriesById.has(body.id));
       if (!added.length) return;
       Object.assign(spriteTable, nextSprites);
-      const entries = added.map(body => createEntry(body, bodies.length + added.indexOf(body)));
+      const entries = added.map((body, offset) => createEntry(body, bodies.length + offset));
       bodies.push(...entries);
       bodyColumns = createWorldBodyColumns(bodies.length);
       bodies.forEach((entry, index) => bindWorldBodyColumns(entry, bodyColumns, index));
