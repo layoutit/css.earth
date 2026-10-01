@@ -108,10 +108,14 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
-      import { startViewCode } from '../startup-boot.mts';
+      import { startBodyCode, startViewCode } from '../startup-boot.mts';
+      import { importSceneRouter } from '../shared-imports.mts';
+      import { loadStartupWorld } from '../startup-world.mts';
       bindNativeViewForms(document, window);
-      // The router's graph has exactly one way in, and nothing else is imported until it has evaluated (startup-boot.mts).
-      import("../scene/scene-router.mts").then(() => startViewCode(document), error => {
+      startBodyCode(document);
+      // The page reads its world first, so no module waits for it (startup-world.mts), and its modules load one at a time
+      // (shared-imports.mts).
+      loadStartupWorld(window).then(importSceneRouter).then(() => startViewCode(document), error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();
         delete document.documentElement.dataset.shellContext;

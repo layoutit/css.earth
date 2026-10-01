@@ -1573,7 +1573,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
         const logged = events.filter(event => event.method === 'Console.messageAdded' && isRecord(event.params) && isRecord(event.params.message))
           .map(event => { const message = (event.params as { message: Record<string, unknown> }).message; const stack = isRecord(message.stackTrace) && Array.isArray(message.stackTrace.callFrames) ? message.stackTrace.callFrames : Array.isArray(message.stackTrace) ? message.stackTrace : [];
             const frames = stack.slice(0, 8).map(frame => isRecord(frame) ? `${String(frame.functionName)}@${String(frame.url).split('/').pop()}:${String(frame.lineNumber)}:${String(frame.columnNumber)}` : '').join(' < ');
-            return `${String(message.level)}: ${String(message.text).slice(0, 400)} [${String(message.url ?? '').split('/').pop()}:${String(message.line ?? '')}:${String(message.column ?? '')}] ${frames}`; }).slice(-8);
+            return `${String(message.level)}: ${String(message.text).slice(0, 2400)} [${String(message.url ?? '').split('/').pop()}:${String(message.line ?? '')}:${String(message.column ?? '')}] ${frames}`; }).slice(-8);
         throw new Error(`The destination page failed while navigating to ${pathname}: ${JSON.stringify(state)}; the page says: ${JSON.stringify(text)}; console: ${JSON.stringify(logged)}`);
       }
       if (isRecord(state) && state.pathname === pathname && state.ready === true && state.visible === true) return { url: state.url, ready: true, visible: true };

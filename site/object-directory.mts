@@ -1,4 +1,4 @@
-import { importPackagedObjectRuntime } from './shared-imports.mts';
+import { importPackagedObjectRuntime } from './import-queue.mts';
 import { catalogueObject, defineOverview, isSceneObject } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
