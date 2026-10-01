@@ -3,7 +3,9 @@
 The CSS renderer runtime. It loads, decodes and validates prepared objects, keeps the one shared world camera and its
 navigation, and renders bodies, skies, star fields, volumes, image layers and labels as retained PolyCSS and CSS, with
 the universe context around the focused object. The site mounts objects through it; the preparation tools import its
-formats and validators so that what they write is what the browser reads.
+validators so that what they write is what the browser reads. The prepared CSS format identifier and compact
+world-summary/system table decoders are shared through `@cssearth/objects`. The world-context parser remains here
+because its full/summary validation shares geometry and camera/projection dependencies.
 
 It was `src/renderers/css` until 2026-09-26. The compilers that write its prepared formats stayed there
 (`src/renderers/css/preparation`) until they moved into `@cssearth/bake`; the object page stylesheets

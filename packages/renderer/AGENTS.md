@@ -4,7 +4,8 @@ Own the CSS renderer runtime: loading, decoding and validating prepared objects,
 navigation, retained CSS rendering of bodies, skies, stars, volumes, image layers and labels, and the universe context
 around the focused object. The site and the preparation tools reach it through `@cssearth/renderer` and its subpaths.
 The compilers that write the renderer's prepared formats are preparation code; they live in `@cssearth/bake` and import
-this package.
+this package. Shared format identifiers and compact world-summary/system table decoders live in
+`@cssearth/objects`; camera/projection-dependent world-context validation remains here.
 
 ## The runtime contract
 
