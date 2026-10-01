@@ -1,7 +1,8 @@
 import { readCompilerRecipe, readCompilerRequest, type CompilerRequest } from './model.ts';
 import { readCompilerResult, type CompilerResult } from './result.ts';
 import { sampledOwnerPins } from '../sampled-prior/ownership.ts';
-import { readSampledRecipe, verifySampledEvidence } from '../sampled-prior/model.ts';
+import { readSampledRecipe } from '../sampled-prior/model.ts';
+import { verifySampledEvidence } from '@cssearth/objects';
 
 interface Pin { path: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }

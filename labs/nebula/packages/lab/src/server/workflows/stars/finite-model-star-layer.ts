@@ -10,7 +10,8 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { sampleJointDepth } from '@cssearth/nebula-reconstruction/stars/joint-depth';
-import { prepareStarPhotometry, rayToOverlayPlane, type PreparedLmcStar, type PreparedLmcStars, parsePreparedLmcStars } from '@cssearth/bake/volume';
+import { prepareStarPhotometry, rayToOverlayPlane } from '@cssearth/bake/volume';
+import { type PreparedLmcStar, type PreparedLmcStars, parsePreparedLmcStars } from '@cssearth/objects';
 import { catalogueColor } from '../../../adapters/sources/stellar-color.ts';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 import { finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';

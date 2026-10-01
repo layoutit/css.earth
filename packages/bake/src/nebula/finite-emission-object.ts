@@ -4,7 +4,7 @@ import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { restoreCompactFiniteEmission, localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
-import { parsePreparedLmcStars } from '../volume/index.ts';
+import { parsePreparedLmcStars } from '@cssearth/objects';
 import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/objects';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { prepareVolumeAtlases } from '../density/index.ts';

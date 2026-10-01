@@ -11,7 +11,10 @@ import `node/`.
 against its contract (its final prepared definition, and fixture values required before a test inspects them).
 `src/node/source-test.ts` is the Node-only `@cssearth/objects/node/source-test` entry for tests that need restored object sources.
 `src/volume/` holds browser-safe prepared compiler/joint/shape scene contracts, density-filter helpers,
-layer-plan/report readers and render-element budgets; exported through the main entry.
+layer-plan/report readers and render-element budgets; exported through the main entry. It also owns the data-only
+volume and sampled recipes, emission-fit settings, physical slice formats and validation, compiler controls and star
+inputs, joint parameters, authored shape settings, observation photo data and prepared catalogue stars. Writers and
+readers import these from `@cssearth/objects`; sampling, fitting, cancellation and file I/O remain outside this area.
 An object type describes supported behavior and data, not an individual planet.
 Do not ship per-object configuration, generated payload modules, shell content, or renderer code here.
 Keep one shared object contract; application discovery remains in the existing registry.

@@ -3,11 +3,11 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
 import { type DensityVolumeFrame, type Vector3, readVolumeLayerPlan, readLayerOptimizationReport, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile, readCompilerBakeResult, validCompilerName, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds } from '@cssearth/objects';
-import { type VolumeSlices } from '../../contracts/volume-slices.ts';
+import { type VolumeSlices } from '@cssearth/objects';
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
 import { optimizeVolumeLayers } from '../../sampling/layer-optimization.ts';
 import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds } from '../../coordinates/compiler-frame.ts';
-import type { CompilerStarInput } from '../../contracts/compiler-star-input.ts';
+import type { CompilerStarInput } from '@cssearth/objects';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { bakeMasterVolumeSlices } from '../slices/emission.ts';
@@ -15,7 +15,7 @@ import { bakeMasterVolumeSlices } from '../slices/emission.ts';
 export { compilerFrame, compilerSliceCounts } from '../../coordinates/compiler-frame.ts';
 
 export interface CompilerBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
-export type { CompilerStarInput } from '../../contracts/compiler-star-input.ts';
+
 export interface CompilerDatasetInput {
   id: string; label: string;
   /** Component-bound 3D chromaticity in 0..255; false means no observed material. No projected-image fallback. */

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { compilerPreparedSlices } from './compiler-frame.ts';
-import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '../contracts/volume-slices.ts';
+import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
 import { type VolumeLayerPlan, type Vector3 } from '@cssearth/objects';
 
 function sourceSlices(): VolumeSlices {

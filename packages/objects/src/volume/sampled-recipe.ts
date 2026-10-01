@@ -1,8 +1,8 @@
 /** A qualified spatial sample set and explicitly authored analytic components. No object-specific code. */
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const jointPath = (v: unknown): v is string => typeof v === 'string' && v.length > 0 && !v.startsWith('/') && !/[\\:?#\s]/.test(v) && v.split('/').every(p => p && p !== '.' && p !== '..');
-import type { EmissionVector3 } from '@cssearth/objects';
-import { readSampledEmissionFit, type SampledEmissionFit } from './sampled-emission-fit.ts';
+import type { EmissionVector3 } from './coordinates.js';
+import { readSampledEmissionFit, type SampledEmissionFit } from './sampled-emission-fit.js';
 
 export interface SamplePin { path: string }
 interface TermBase { id: string; weight: number; evidenceIds: string[] }

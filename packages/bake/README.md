@@ -10,7 +10,7 @@ layer (the raster lane uses the photometric models), never sideways. Command ent
 
 | entry | what it holds | host |
 |---|---|---|
-| `@cssearth/bake/volume` | volume contracts, coordinates, fields, materials and sampling | host-neutral: no Node built-ins, DOM or native codecs; prepared scene contracts live in `@cssearth/objects` |
+| `@cssearth/bake/volume` | implementation contracts, coordinates, fields, materials and sampling | host-neutral: no Node built-ins, DOM or native codecs; prepared recipes, slice formats, compiler controls, star inputs and pure validators live in `@cssearth/objects` |
 | `@cssearth/bake/volume/node` | compact-input replay, offline XYZ slices, the target-neutral compiler bake | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/photometry` | disk and phase functions, the Hapke model, limb laws from published models, PSG limb profiles | Node only (`node:fs`, `sharp`) |
 | `@cssearth/bake/raster` | raster recipes, surface maps, pages and poles, lighting banks, atmospheres and halos, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |

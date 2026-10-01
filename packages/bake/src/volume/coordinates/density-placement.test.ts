@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { densityPlacementTransform, parseDensityPlacement, placeDensitySlices } from './density-placement.ts';
-import type { VolumeSlices } from '../contracts/volume-slices.ts';
+import type { VolumeSlices } from '@cssearth/objects';
 const placement = parseDensityPlacement({ schema: 'cssearth-density-placement@1', scale: 2, rotationZDegrees: 90,
   pivotUnits: [1, 2, 3], translationUnits: [4, 5, 6] });
 test('model placement transports full support with invertible points and rotated normals', () => {

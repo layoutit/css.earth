@@ -1,5 +1,5 @@
 import { type DensityVolumeFrame, type Bounds3, type Vector3, type EmissionBounds, type EmissionVector3, COMPILER_LONGEST_AXIS_SLICES } from '@cssearth/objects';
-import { validateVolumeLayerSlices, type VolumeSlices } from '../contracts/volume-slices.ts';
+import { validateVolumeLayerSlices, type VolumeSlices } from '@cssearth/objects';
 
 /** Angular source axes west/north/away are left-handed. Prepared physical axes are west/north/toward. */
 export const COMPILER_PHYSICAL_REFERENCE = 'lab-sky-west-north-toward';

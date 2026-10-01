@@ -1,5 +1,5 @@
-import { readJointParameters, type JointParameters, type JointFamily } from '@cssearth/bake/volume';
-export { readJointParameters, type JointParameters, type JointFamily } from '@cssearth/bake/volume';
+import { readJointParameters, type JointParameters, type JointFamily } from '@cssearth/objects';
+export { readJointParameters, type JointParameters, type JointFamily } from '@cssearth/objects';
 
 export interface JointControls { ridgeThreshold: number; minLengthArcseconds: number; imageWeight: number; velocityWeight: number }
 export const defaultJointControls: JointControls = { ridgeThreshold: .25, minLengthArcseconds: 40, imageWeight: 1, velocityWeight: 1 };

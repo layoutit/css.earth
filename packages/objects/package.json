@@ -2,7 +2,7 @@
   "name": "@cssearth/objects",
   "version": "0.0.0",
   "private": true,
-  "description": "Prepared celestial object definitions and content, the source catalogue every object cites, and a Node-only entry for source manifests.",
+  "description": "Prepared celestial object definitions, volume format contracts and content, the source catalogue every object cites, and a Node-only entry for source manifests.",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",

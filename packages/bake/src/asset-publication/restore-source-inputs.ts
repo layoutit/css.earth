@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
-import { parseVolumeRecipe } from '../volume/index.ts';
+import { parseVolumeRecipe } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 import { publishSourceBytes } from '../delivery/index.ts';
 import { sourceArray, sourceObject, sourcePath } from '@cssearth/objects/sources';
