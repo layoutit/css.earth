@@ -167,10 +167,10 @@
           "height": 16,
           "labels": [
             "0",
-            "≥ 100 nW/cm²/sr"
+            "≥ 21 nW/cm²/sr"
           ]
         },
-        "legendNote": "Logarithmic color scale, capped at 100 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness.",
+        "legendNote": "Logarithmic color scale, capped at 21 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness.",
         "notes": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting."
       },
       {

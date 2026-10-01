@@ -643,7 +643,7 @@
           "minimumValidAreaFraction": 0.5,
           "missing": "Gray; native missing value and uncovered polar regions.",
           "zero": "Valid thresholded source background; never treated as missing.",
-          "display": "Warm false color. log1p(radiance/0.25) / log1p(100/0.25), saturated at 100 nW/cm2/sr.",
+          "display": "Warm false color. log1p(radiance/0.25) / log1p(21/0.25), saturated at 21 nW/cm2/sr, the area-weighted 99.9th percentile of the 8,192-column display grid.",
           "quality": "The public mosaic contains no QA or observation-count bands. Aurora and transient lights remain, especially at high latitudes.",
           "notMeasured": [
             "live lighting",

@@ -97,7 +97,7 @@
       "id": "viirs-night-lights-2025",
       "subject": "NASA VJ146A4.002 NOAA-20 VIIRS annual radiance, 2025",
       "status": "included",
-      "finding": "Night lights use the numerical radiance band of the processed annual product through Jurij Stare's public mirror, one Float32 band of 86,400 by 33,600 cells in EPSG:4326 with -999.9 as missing and zero as valid thresholded background; preparation averages radiance over display cells weighted by spherical area, marks a cell missing below half-area coverage and applies an authored warm logarithmic transfer with 0.25 softening and saturation at 100 nW/cm2/sr as display parameters rather than calibration factors.",
+      "finding": "Night lights use the numerical radiance band of the processed annual product through Jurij Stare's public mirror, one Float32 band of 86,400 by 33,600 cells in EPSG:4326 with -999.9 as missing and zero as valid thresholded background; preparation averages radiance over display cells weighted by spherical area, marks a cell missing below half-area coverage and applies an authored warm logarithmic transfer with 0.25 softening and saturation at 21 nW/cm2/sr (the area-weighted 99.9th percentile of the 8,192-column display grid, measured 30 September 2026; the earlier 100 cap was never reached after averaging) as display parameters rather than calibration factors.",
       "evidence": [
         "https://doi.org/10.5067/VIIRS/VJ146A4.002"
       ]

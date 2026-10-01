@@ -89,7 +89,10 @@ slope exaggeration and northwest light at 45°.
 
 Night lights come through the [public mirror](https://www.lightpollutionmap.info/help.html) by Jurij Stare, the
 `AllAngle_Composite_Snow_Free` band, 86,400 × 33,600 Float32 cells at 15 arc-seconds. A display cell with less than half
-its area observed is gray. The logarithmic transfer saturates at 100 nW/cm²/sr.
+its area observed is gray. The logarithmic transfer saturates at 21 nW/cm²/sr, the area-weighted 99.9th percentile of
+the 2025 display grid, so only the brightest 0.1% of observed area, the cores of large cities, reaches the top. Native
+city peaks pass 150 nW/cm²/sr, but averaging into 8,192-column cells leaves no cell above 100: the earlier 100 cap put
+three quarters of lit cells in the bottom quarter of the scale.
 
 ENSO steps through two weeks in three days: NASA's newest MUR analysis and the same weekday one and two weeks before
 it. NASA publishes each day about two days late. The dataset opens on the newest day.
