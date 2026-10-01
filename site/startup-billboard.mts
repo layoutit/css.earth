@@ -46,7 +46,8 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
     const cover = defaultView && arrival?.billboard && image ? await prepareArrivalBillboard(stage, arrival, navigation.frame, signal, image) : null;
     if (!cover) image?.remove();
     cover?.publish(view.world, view.viewport);
-    window.performance.mark('cssearth:startup-billboard');
+    // The page's cover may have shown the photograph already (startup-cover.mts); the mark is the first time it showed.
+    if (!window.performance.getEntriesByName('cssearth:startup-billboard').length) window.performance.mark('cssearth:startup-billboard');
     // The billboard is the loading state: once it shows, the ring leaves. Without one, the ring waits for the detail.
     if (cover) removeLoader();
     pending = createPreparedArrival(signal, cover, () => {
