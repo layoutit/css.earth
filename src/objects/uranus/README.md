@@ -16,8 +16,8 @@ observation datasets. Their palettes and percentile stretches are declared in
 
 Ring radii, widths, and normal optical depths come from the
 [PDS Rings Node Uranus table](https://pds-rings.seti.org/uranus/uranus_rings_table.html).
-NASA's public Uranus facts supply the gray inner-ring, reddish Nu, and blue Mu
-color interpretation. Physical facts are checked against
+No ring colour is measured here, so every ring is the neutral gray of a body
+without a measured colour. Physical facts are checked against
 [NASA Uranus facts](https://science.nasa.gov/uranus/facts/) and the JPL
 physical-parameter page.
 
@@ -37,7 +37,7 @@ photometric phase coefficients in `source/photometry/phase.json`.
 
 The body is drawn on the shared sphere lane. Its orientation is solved from its pole and rotation at the scene epoch, so the face toward the camera is the one Uranus turns to it then. Each lighting frame puts back the limb darkening OPAL removed from the colour map, with the readme's own Minnaert coefficients: k 0.57 in F657N, 0.80 in F547M and 0.85 in F467M ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). Red barely darkens toward the limb while green and blue do, so the limb turns grey-red as Hubble saw it. No floor, ambient term or terminator ramp remains.
 
-The rings are drawn from `source/preparation/rings.json` as 16 wedges, each starting outside the planet so the planet hides their far side. The table gives the Epsilon ring's optical depth as "0.5 to 2.3"; the recipe's 1.4 is the midpoint, chosen for display. Extremely narrow rings receive a minimum-pixel width so they stay visible; their radii and ordering are not moved. The planet's shadow on the rings is not drawn: at the scene epoch it reaches 1.05 Uranus radii from the center, short of the innermost ring at 1.48.
+The rings are drawn from `source/preparation/rings.json` as 16 wedges, each starting outside the planet so the planet hides their far side. Each ring's opacity is 1 − exp(−optical depth) from the table, with no gain. The table gives the Epsilon ring's optical depth as "0.5 to 2.3"; the recipe uses the midpoint, 1.4. Nine narrow rings and Epsilon show; Zeta (0.0045) is one display level, and Nu and Mu (under 10⁻⁵) are below one and do not show. Extremely narrow rings receive a minimum-pixel width so they stay visible; their radii and ordering are not moved. Until 2026-10-01 the rings had hand-set opacities and three colours made from the words gray, reddish and blue. The planet's shadow on the rings is not drawn: at the scene epoch it reaches 1.05 Uranus radii from the center, short of the innermost ring at 1.48.
 
 ## Hubble dates
 

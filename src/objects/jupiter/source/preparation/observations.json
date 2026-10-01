@@ -73,7 +73,7 @@
   "datasets": [
     {
       "id": "normal",
-      "operation": "rgb-polar-structure",
+      "operation": "rgb-measured-rows",
       "source": "surface/hubble-jupiter-global-map-2019.png",
       "control": {
         "id": "normal",
@@ -86,7 +86,7 @@
         "polesUrl": "/scenes/jupiter/jupiter-poles.webp",
         "poles2xUrl": "/scenes/jupiter/jupiter-poles@2x.webp",
         "falseColor": false,
-        "qualification": "NASA/ESA Hubble WFC3 395, 502, and 631 nm visible-color map"
+        "qualification": "NASA/ESA Hubble WFC3 395, 502, and 631 nm visible-color map; the gray grid marks the unobserved polar caps"
       },
       "files": {
         "surface": "jupiter-surface.webp",
@@ -101,73 +101,12 @@
         "firstMeasuredRow": 101,
         "lastMeasuredRow": 1698
       },
-      "polarDetails": {
-        "north": {
-          "structure": {
-            "path": "surface/juno-pia23808-north-polar-projection.jpg",
-            "resize": {
-              "fit": "fill"
-            }
-          },
-          "palette": {
-            "path": "surface/juno-pia24239-north-pole-detail.tif",
-            "resize": {
-              "fit": "cover",
-              "position": "attention"
-            }
-          },
-          "contrast": 0.22,
-          "tint": 0.2,
-          "structureRadius": 0.9
-        },
-        "south": {
-          "structure": {
-            "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
-            "extract": {
-              "left": 875,
-              "top": 0,
-              "width": 2249,
-              "height": 2249
-            },
-            "resize": {
-              "fit": "fill"
-            }
-          },
-          "palette": {
-            "path": "surface/juno-pia21382-south-pole-visible.jpg",
-            "extract": {
-              "left": 352,
-              "top": 0,
-              "width": 806,
-              "height": 806
-            },
-            "resize": {
-              "fit": "fill"
-            }
-          },
-          "contrast": 0.2,
-          "tint": 0.14,
-          "structureRadius": 0.9
-        }
-      },
-      "transition": {
-        "transitionStartLatitudeDegrees": 64,
-        "transitionEndLatitudeDegrees": 80,
-        "edgeStructureWeight": 0.3,
-        "innerDetailRadius": 0.72,
-        "outerDetailRadius": 0.9
-      },
-      "continuation": {
+      "projection": {
         "overlap": 1.035,
-        "detailLookbackDegrees": 0.5,
-        "detailBlendStartRadius": 0.08,
-        "detailBlendEndRadius": 0.96,
-        "edgeStructureWeight": 0.3,
         "alphaOpaqueRadius": 0.43,
-        "alphaTransparentRadius": 0.93,
-        "edgeLatitudeDegrees": 64
-      },
-      "planetographicAxisRatio": 1.0693750560923803
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      }
     },
     {
       "id": "ultraviolet",

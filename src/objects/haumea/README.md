@@ -54,6 +54,6 @@ The illustration's area-weighted mean colour is sRGB 112, 102, 96 (#706660) agai
 - The Illustration is far darker than the measured colour, and any dark or red area in it is not the region the light curve implies. It is shown as NASA published it.
 - The ALMA picture averages over Haumea's rotation and shows no surface. The ring the project looked for cannot be made out in it; no ring analysis was tried here.
 - The pole is observationally constrained, but the display meridian is arbitrary. The 3.915341-hour period does not establish an absolute orientation at the app epoch.
-- Ring gray and fixed opacity are schematic. The ring has no invented bands and remains evenly lit.
+- The ring is drawn at the published opacity, 0.5 (Ortiz et al. 2017), in the neutral gray of a body without a measured colour. It has no invented bands and remains evenly lit.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

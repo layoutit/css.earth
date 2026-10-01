@@ -13,8 +13,8 @@
   "poleSource": "https://doi.org/10.1051/0004-6361/202141543",
   "assumptions": [
     "Concentric circular rings in the body equator; radius and width are held fixed at one measured contact instead of inventing unsampled azimuthal structure.",
-    "Use the normal opacity numerically as an explicitly schematic constant display alpha; it is occultation transmission evidence, not reflected-light brightness or a complete view-dependent optical model.",
-    "Neutral gray is display content; no spatially resolved ring-color texture is available.",
+    "The ring is drawn at its measured normal opacity as a constant alpha; it is occultation transmission evidence, not reflected-light brightness or a complete view-dependent optical model.",
+    "No ring colour is measured: the rings take the neutral gray of a body without a measured colour.",
     "The 2021 equivalent width of C2R (0.117 km) is opacity times radial width, and MUST NOT be used as a geometric ring width."
   ],
   "rings": [
@@ -27,9 +27,7 @@
       "innerRadiusKm": 382.38,
       "outerRadiusKm": 389.42,
       "normalOpacity": 0.425,
-      "normalOpacityUncertainty": 0.008,
-      "displayValue": 160,
-      "displayOpacity": 0.425
+      "normalOpacityUncertainty": 0.008
     },
     {
       "id": "c2r",
@@ -46,9 +44,7 @@
       "normalOpacityUncertainty": {
         "minus": 0.033,
         "plus": 0.117
-      },
-      "displayValue": 160,
-      "displayOpacity": 0.048
+      }
     }
   ]
 }

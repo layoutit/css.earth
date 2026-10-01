@@ -12,7 +12,7 @@ const recipe = () => ({schema:'cssearth-radial-layer-recipe@1',units:'kilometers
   kind:'annular-field',size:9,densities:[1],output:'hypothetical-ring{suffix}.webp',encoding:{lossless:true},
   outerRadius:4,mapping:{kind:'linear',scale:1},grid:{centerInset:1,sampleOffset:0,marginPixels:0,scaleOrder:'divide-multiply'},
   composition:'maximum',alphaUnits:255,maximumAlpha:255,
-  bands:[{envelope:'constant',bounds:[2,3],opacity:90,color:[10,20,30]}],
+  bands:[{envelope:'constant',bounds:[2,3],opticalDepth:0.5}],
 }]});
 
 test('annular preparation is driven by physical band data for an unregistered body', () => {
@@ -23,8 +23,9 @@ test('annular preparation is driven by physical band data for an unregistered bo
   const pixels = rasterAnnularField(layer,9);
   const pixel = (x: number,y: number) => [...pixels.subarray((y*9+x)*4,(y*9+x)*4+4)];
   assert.deepEqual(pixel(4,4),[0,0,0,0]);
-  assert.deepEqual(pixel(6,4),[10,20,30,90]);
-  assert.deepEqual(pixel(7,4),[10,20,30,90]);
+  // Optical depth 0.5 stops 1 - exp(-0.5) of the light: alpha 100 of 255, in the neutral gray of an unmeasured colour.
+  assert.deepEqual(pixel(6,4),[154,154,154,100]);
+  assert.deepEqual(pixel(7,4),[154,154,154,100]);
   assert.deepEqual(pixel(8,4),[0,0,0,0]);
   const band = layer.bands[0];
   assert.ok('bounds' in band);
@@ -87,7 +88,7 @@ test('ring wedges cover every point of their sectors from where the ring begins,
   assert.throws(() => ringWedgeLayout({ size: 1200, count: 2, contentPixels: 200 }), /three wedges/);
 });
 
-test('ring wedges draw exactly the square ring image inside each wedge, arcs included', async () => {
+test('ring wedges draw exactly the square ring image inside each wedge', async () => {
   const { rasterAnnularField, rasterAnnularWedges, annularContentPixels } = await import('@cssearth/bake/objects/layers/giant');
   const { ringWedgeLayout, wedgePoint, wedgeShare } = await import('@cssearth/bake/scene');
   for (const body of ['uranus', 'neptune']) {
@@ -106,6 +107,7 @@ test('ring wedges draw exactly the square ring image inside each wedge, arcs inc
       assert.deepEqual([...atlas.subarray(a, a + 4)], [...square.subarray(s, s + 4)], `${body} wedge ${k} texel ${i}, ${j}`);
       compared++; if (square[s + 3]) drawn++;
     }
-    assert.ok(compared > 20000 && drawn > 500, `${body}: compared ${compared}, ${drawn} drawn`);
+    // Neptune's two drawn rings are a pixel wide at their true opacity, so few of the compared texels are drawn.
+    assert.ok(compared > 20000 && drawn > 100, `${body}: compared ${compared}, ${drawn} drawn`);
   }
 });

@@ -84,18 +84,16 @@
         "innerRadiusKm": 382.38,
         "outerRadiusKm": 389.42,
         "segments": 128,
-        "displayValue": 160,
-        "displayOpacity": 0.425,
-        "qualification": "2022 JWST F150W2 first-contact radius and width, extended as a circular annulus. Neutral gray and fixed alpha are schematic; occultation opacity is not a reflected-light scattering model."
+        "qualification": "2022 JWST F150W2 first-contact radius and width, extended as a circular annulus, at its measured normal opacity. No ring colour is measured; occultation opacity is not a reflected-light scattering model.",
+        "normalOpacity": 0.425
       },
       {
         "id": "c2r",
         "innerRadiusKm": 399.7955,
         "outerRadiusKm": 400.8045,
         "segments": 128,
-        "displayValue": 160,
-        "displayOpacity": 0.048,
-        "qualification": "2022 JWST F150W2 first-contact radius and width, extended as a circular annulus. Neutral gray and fixed alpha are schematic; occultation opacity is not a reflected-light scattering model."
+        "qualification": "2022 JWST F150W2 first-contact radius and width, extended as a circular annulus, at its measured normal opacity. No ring colour is measured; occultation opacity is not a reflected-light scattering model.",
+        "normalOpacity": 0.048
       }
     ]
   }

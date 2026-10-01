@@ -36,19 +36,20 @@
     {
       "id": "juno-polar-structure",
       "subject": "JunoCam and JIRAM polar structure products",
-      "status": "included",
-      "finding": "North-pole cyclone structure comes from PIA23808 and south-pole structure from PIA23556: both publications' false-colour or infrared palettes are discarded and only bounded luminance structure is transported, with chroma from the visible-light PIA24239 and PIA21382 products, credited to Emma Walimaki and John Landino under CC BY, and from the measured Hubble 64-degree edge.",
+      "status": "excluded",
+      "finding": "The default map once carried Juno polar structure (PIA23808, PIA23556) coloured from PIA24239 and PIA21382 and blended into the Hubble map from 64 degrees poleward. The south-pole structure was a 5-micron infrared image and neither pole was registered to the Hubble longitudes, so the graft was removed; the map now shows the gray grid over the caps it never observed.",
       "evidence": [
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/",
         "https://science.nasa.gov/photojournal/jupiters-south-pole-cyclones-in-2016/"
-      ]
+      ],
+      "revisitWhen": "A visible-light polar map registered to System III longitudes is published."
     },
     {
       "id": "polar-registration",
       "subject": "Registration of the polar structure to the Hubble longitudes",
-      "status": "unresolved",
-      "finding": "The cyclone arrangements are source-backed but the Juno sources are not registered to the Hubble map's longitudes, so the polar views are structural illustrations rather than a new geodetic map; no absent Hubble pixel is presented as an observation.",
-      "revisitWhen": "A polar product registered to the Hubble longitude system is released.",
+      "status": "excluded",
+      "finding": "No polar source is drawn any more, so nothing needs registering to the Hubble longitudes.",
+      "revisitWhen": "A registered visible-light polar map is published.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L20",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L76",
@@ -87,13 +88,14 @@
     {
       "id": "ring-visibility-presentation",
       "subject": "Contrast emphasis for the faint rings",
-      "status": "included",
-      "finding": "Because the measured optical depths are orders of magnitude below an opaque surface, the presentation declares a log-optical-depth contrast emphasis capped at 0.4 alpha with a 0.65 exponent and a three-unit minimum width for the narrow main ring; the README states this is a visibility presentation, not a claim about how the rings would look to a nearby unaided observer, and every measured radial boundary and ordering is preserved.",
+      "status": "excluded",
+      "finding": "The rings are drawn at their published normal optical depths, 1e-9 to 8e-6: opacity 1 - exp(-optical depth) is below one display level for every ring, so nothing shows. The earlier log-optical-depth contrast emphasis capped at 0.4 alpha, and its hand-picked greys, were removed.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L22",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L175",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L183"
-      ]
+      ],
+      "revisitWhen": "A reflected-light ring brightness at the app's viewing geometry is published."
     },
     {
       "id": "opal-minnaert-limb-law",

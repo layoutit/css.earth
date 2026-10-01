@@ -1,0 +1,342 @@
+
+OBJECT                   = FIELD
+   NAME                  = pressure_bar
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 1
+   BYTES                 = 25
+   DESCRIPTION           = "Pressure levels (bar)"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_49.3S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 2
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -49.3 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_46.2S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 3
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -46.2 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_43.0S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 4
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -43.0 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_39.9S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 5
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -39.9 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_36.8S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 6
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -36.8 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_33.9S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 7
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -33.9 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_31.1S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 8
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -31.1 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_28.3S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 9
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -28.3 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_25.6S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 10
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -25.6 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_23.0S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 11
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -23.0 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_20.4S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 12
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -20.4 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_17.9S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 13
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -17.9 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_15.4S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 14
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -15.4 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_12.9S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 15
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -12.9 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_10.5S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 16
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -10.5 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_08.1S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 17
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -8.1 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_05.7S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 18
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -5.7 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_03.3S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 19
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -3.3 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_00.9S"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 20
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude -0.9 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_01.5N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 21
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +1.5 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_03.9N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 22
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +3.9 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_06.3N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 23
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +6.3 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_08.7N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 24
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +8.7 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_11.1N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 25
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +11.1 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_13.6N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 26
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +13.6 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_16.0N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 27
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +16.0 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_18.5N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 28
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +18.5 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_21.1N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 29
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +21.1 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_23.6N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 30
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +23.6 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_26.3N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 31
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +26.3 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_29.0N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 32
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +29.0 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_31.7N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 33
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +31.7 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_34.6N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 34
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +34.6 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_37.6N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 35
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +37.6 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_40.6N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 36
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +40.6 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_43.8N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 37
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +43.8 degree"
+
+END_OBJECT
+
+OBJECT                   = FIELD
+   NAME                  = "NH3A_PC_lat_47.0N"
+   DATA_TYPE             = ASCII_REAL
+   FIELD_NUMBER          = 38
+   BYTES                 = 25
+   DESCRIPTION           = "Ammonia abundance at planetocentric latitude +47.0 degree"
+
+END_OBJECT
