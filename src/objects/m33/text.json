@@ -27,9 +27,18 @@
   },
   "datasets": {
     "optical": {
-      "title": "VST snaps a very detailed view of the Triangulum Galaxy",
+      "title": "VST view of the Triangulum Galaxy",
       "detail": "4000 × 3355 px",
-      "summary": "Visible-light image on an approximate depth model; individual depths are not measured."
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1424a",
+          "url": "https://www.eso.org/public/images/eso1424a/",
+          "label": "VST snaps a very detailed view of the Triangulum Galaxy; ESO",
+          "checked": "2026-10-01",
+          "locator": "VST snaps a very detailed view of the Triangulum Galaxy"
+        }
+      ]
     }
   }
 }

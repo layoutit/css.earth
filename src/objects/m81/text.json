@@ -29,7 +29,16 @@
     "optical": {
       "title": "Galaxies M81 & M82",
       "detail": "8315 × 4642 px",
-      "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured."
+      "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-noao-m81m82",
+          "url": "https://noirlab.edu/public/images/noao-m81m82/",
+          "label": "Galaxies M81 & M82; T.A. Rector (University of Alaska Anchorage) and NOIRLab/NSF/AURA",
+          "checked": "2026-10-01",
+          "locator": "Galaxies M81 & M82"
+        }
+      ]
     }
   }
 }

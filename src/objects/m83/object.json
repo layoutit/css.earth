@@ -1,42 +1,52 @@
 {
   "schema": "cssearth-object@2",
   "id": "m83",
-  "type": "image-layer-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
-      "referenceFrame": "sun-icrf",
-      "epochJdTt": 2461286.5,
-      "originM": [
-        -1.194918435451837e+23,
-        -5.3828196039124266e+22,
-        -7.526278704606262e+22
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Southern Pinwheel (M83)",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 286968015078697150
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
       ],
-      "localToReferenceXyzw": [
-        0.72685408361818,
-        -0.4697694917678536,
-        -0.2719446318229126,
-        0.4207682057314321
-      ],
-      "metersPerUnit": 30856775814913670000,
-      "boundsUnits": {
-        "min": [
-          -8.67185989746515,
-          -8.730768220861005,
-          -6.660592379216723
-        ],
-        "max": [
-          8.857859069839915,
-          8.67277921317318,
-          6.5924748266097595
-        ]
+      "metadata": {
+        "url": "prepared/page.json"
       }
     },
-    "preparation": {
-      "source": "source/recipe.json"
-    },
-    "cataloguePoints": [
-      "dots"
-    ],
     "catalog": {
       "name": "M83",
       "systemName": "Galaxy catalogue",
@@ -79,22 +89,10 @@
       ],
       "metersPerUnit": 925703274447410200,
       "bodyRadiusM": 286968015078697140000
-    },
-    "page": {
-      "stylesheets": [
-        "src/renderers/css/styles/body-surfaces.css"
-      ],
-      "metadata": {
-        "url": "prepared/page.json"
-      }
-    },
-    "scene": {
-      "format": "cssearth-css-object@5",
-      "url": "prepared/object.json"
     }
   },
   "prepared": {
-    "format": "cssearth-image-layer-bank@1",
-    "url": "prepared/image-layers.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "776.2 kpc (−21,150 / +21,750 pc)",
+        "value": "776.2 kpc (\u221221,150 / +21,750 pc)",
         "source": {
           "catalogueId": "publication-savino2022apj-938-101s",
           "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 10.68°, Dec 41.27°",
+        "value": "RA 10.68\u00b0, Dec 41.27\u00b0",
         "source": {
           "catalogueId": "lvdb-v1-1-1",
           "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
@@ -44,7 +44,24 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "optical",
+        "label": "NOIRLab \u00b7 optical",
+        "thumbnail": "m31-dataset-optical.webp",
+        "volume": {
+          "objectId": "m31-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m31-layers-optical",
+          "path": "../../m31-layers/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

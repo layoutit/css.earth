@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "859 kpc (−23,410 / +24,070 pc)",
+        "value": "859 kpc (\u221223,410 / +24,070 pc)",
         "source": {
           "catalogueId": "publication-savino2022apj-938-101s",
           "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 23.46°, Dec 30.66°",
+        "value": "RA 23.46\u00b0, Dec 30.66\u00b0",
         "source": {
           "catalogueId": "lvdb-v1-1-1",
           "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
@@ -44,7 +44,24 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "m33-dataset-optical.webp",
+        "volume": {
+          "objectId": "m33-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m33-layers-optical",
+          "path": "../../m33-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1424a/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

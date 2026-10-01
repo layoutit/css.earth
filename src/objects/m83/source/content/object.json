@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "4.898 Mpc (−67,200 / +68,140 pc)",
+        "value": "4.898 Mpc (\u221267,200 / +68,140 pc)",
         "source": {
           "catalogueId": "publication-tully2009aj-138-323t",
           "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 204.3°, Dec -29.87°",
+        "value": "RA 204.3\u00b0, Dec -29.87\u00b0",
         "source": {
           "catalogueId": "lvdb-v1-1-1",
           "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
@@ -33,7 +33,24 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "m83-dataset-optical.webp",
+        "volume": {
+          "objectId": "m83-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m83-layers-optical",
+          "path": "../../m83-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/m83/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

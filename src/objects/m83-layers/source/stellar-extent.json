@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "m83-layers",
+  "radiusPc": 40000,
+  "definition": "Projected radius from the M83 centre reached by the Subaru and HST map of its resolved stellar halo.",
+  "quote": "with a mass between 15 and 40 kpc",
+  "source": "bell-2025-m83-halo",
+  "presentation": "Where the galaxy's stars are still measured: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary."
+}

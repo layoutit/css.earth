@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/m31/source/provenance.json",
+      "path": "src/objects/m31-layers/source/provenance.json",
       "locator": "/"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
       "scope": "Published source",
-      "evidence": "src/objects/m31/source/provenance.json"
+      "evidence": "src/objects/m31-layers/source/provenance.json"
     }
   ]
 }

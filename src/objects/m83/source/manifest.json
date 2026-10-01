@@ -1,197 +1,40 @@
 {
-  "schema": "cssearth-volume-source-manifest@2",
-  "pathBase": "repository",
-  "inputs": [
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [
     {
-      "id": "optical",
-      "path": "src/objects/m83/source/source.jpg",
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
       "origin": "https://www.eso.org/public/images/m83/",
-      "sourceUrl": "https://www.eso.org/public/images/m83/",
-      "title": "The Southern Pinwheel",
-      "credit": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
-      "displayCredit": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
-      "acquisition": "The publisher Large JPEG (2373 x 2164 px), restored from its origin; not tracked. Registration re-measured against Gaia stars (recipe observation). The hash identifies the local JPEG bytes, not a calibrated scientific array.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-m83",
-            "role": "material",
-            "evidence": "src/objects/m83/source/provenance.json"
-          }
-        ]
-      },
-      "dependencies": [],
-      "datasetId": "optical",
+      "credit": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Th\u00f6ne; the default dataset's picture as the Southern Pinwheel (M83) bank publishes it, saved by site/build/prepare/companion-context.mts",
       "license": "CC-BY-4.0; retain the complete recorded credit.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "unresolved",
-            "label": "Danish 1.54-m B V R",
-            "evidence": "https://www.eso.org/public/images/m83/",
-            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
-          }
-        ]
-      }
-    },
-    {
-      "id": "hadfield-wr-table",
-      "path": "src/objects/m83/source/hadfield-wr/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BHCS2005%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F439%2F265%2Ftablea1%22",
-      "title": "A spectroscopic search for the non-nuclear Wolf-Rayet population of the metal-rich spiral galaxy M83, table.csv",
-      "credit": "L. J. Hadfield, P. A. Crowther, H. Schild, W. Schmutz; A&A 439, 265",
-      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through hadfield-wr/points.json.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hadfield-2005-m83-wolf-rayet",
-            "role": "material",
-            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BHCS2005%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F439%2F265%2Ftablea1%22"
-          }
-        ]
-      }
-    },
-    {
-      "id": "long-hii-table",
-      "path": "src/objects/m83/source/long-hii/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F929%2F144%2Fhiireg%22",
-      "title": "Supernova remnants in M83 as observed with MUSE, table.csv",
-      "credit": "K. S. Long, W. P. Blair, P. F. Winkler, L. Della Bruna; ApJ 929, 144",
-      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through long-hii/points.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "long-2022-m83-hii",
-            "role": "material",
-            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F929%2F144%2Fhiireg%22"
-          }
-        ]
-      }
-    },
-    {
-      "id": "winkler-snr-table",
-      "path": "src/objects/m83/source/winkler-snr/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F943%2F15%2Ftable5%22",
-      "title": "High-resolution spectra of supernova remnants in M83, table.csv",
-      "credit": "P. F. Winkler, K. S. Long, W. P. Blair, S. D. Points; ApJ 943, 15",
-      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through winkler-snr/points.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "winkler-2023-m83-snr",
-            "role": "material",
-            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F943%2F15%2Ftable5%22"
-          }
-        ]
+        "kind": "local",
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/m83-layers/source/manifest.json)."
       }
     }
   ],
   "documents": [
     {
-      "id": "recipe",
-      "path": "src/objects/m83/source/recipe.json",
+      "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Image-layer preparation recipe",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
-    },
-    {
-      "id": "provenance",
-      "path": "src/objects/m83/source/provenance.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Published image interpretation and acquisition record",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
-    },
-    {
-      "id": "presentation",
-      "path": "src/objects/m83/source/presentation.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Dataset presentation and prepared-bank bindings",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
-    },
-    {
-      "id": "stellar-extent",
-      "path": "src/objects/m83/source/stellar-extent.json",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "bell-2025-m83-halo",
-            "role": "reference",
-            "evidence": "https://arxiv.org/abs/2512.11744"
-          }
-        ]
+        "reason": "Project-authored factsheet and dataset list."
       }
     },
     {
-      "id": "dots-merge",
-      "kind": "authored-document",
-      "path": "src/objects/m83/source/dots/merge.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "path": "presentation/solar-system.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored processing configuration."
+        "reason": "Project-authored framing: the radius the page frames the object at, a presentation value."
       }
     },
     {
-      "id": "hadfield-wr-points",
-      "kind": "authored-document",
-      "path": "src/objects/m83/source/hadfield-wr/points.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the A spectroscopic search for the non-nuclear Wolf-Rayet population of the metal-rich spiral galaxy M83 rows drawn as dots.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "id": "long-hii-points",
-      "kind": "authored-document",
-      "path": "src/objects/m83/source/long-hii/points.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Supernova remnants in M83 as observed with MUSE rows drawn as dots.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "id": "winkler-snr-points",
-      "kind": "authored-document",
-      "path": "src/objects/m83/source/winkler-snr/points.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the High-resolution spectra of supernova remnants in M83 rows drawn as dots.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
+      "path": "preparation/navigation.json"
     }
-  ],
-  "generatedIntermediates": []
+  ]
 }

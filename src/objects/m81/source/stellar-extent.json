@@ -1,9 +1,0 @@
-{
-  "schema": "cssearth-stellar-extent@1",
-  "objectId": "m81",
-  "radiusPc": 65000,
-  "definition": "Projected radius along M81's minor axis out to which Subaru Hyper Suprime-Cam star counts still detect its red-giant halo.",
-  "quote": "we detect RGB halo sources out to 65 kpc",
-  "source": "smercina-2020-m81-halo",
-  "presentation": "Where the galaxy's stars are still measured: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary."
-}

@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "3.614 Mpc (−65,960 / +33,440 pc)",
+        "value": "3.614 Mpc (\u221265,960 / +33,440 pc)",
         "source": {
           "catalogueId": "publication-newman2024apj-966-175n",
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 148.9°, Dec 69.07°",
+        "value": "RA 148.9\u00b0, Dec 69.07\u00b0",
         "source": {
           "catalogueId": "lvdb-v1-1-1",
           "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
@@ -33,7 +33,24 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "optical",
+        "label": "NOIRLab \u00b7 optical",
+        "thumbnail": "m81-dataset-optical.webp",
+        "volume": {
+          "objectId": "m81-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m81-layers-optical",
+          "path": "../../m81-layers/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noao-m81m82/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

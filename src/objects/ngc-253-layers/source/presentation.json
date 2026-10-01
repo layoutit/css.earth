@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-253-layers",
+  "name": "Sculptor Galaxy (NGC 253)",
+  "host": "ngc-253",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-253-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-253-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-253-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "Spiral galaxy NGC 253",
+      "description": "The MPG/ESO 2.2-metre WFI view of NGC 253 with Milky Way foreground stars removed and the whole-galaxy colour tied to RC3's measured B-V of 0.85. Its bulge takes the light of S4G's bulge fit in a round volume, and its disc a 426 pc layer; nearly edge-on, it is modelled more than seen from above.",
+      "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured.",
+      "detail": "8285 × 7510 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "WFI [O III] V R H-alpha"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "8285 × 7510"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "32.87 × 29.79 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": ".local/previews/ngc-253-eso0902c-screen.jpg",
+        "url": "https://cdn.eso.org/images/screen/eso0902c.jpg"
+      }
+    }
+  ]
+}

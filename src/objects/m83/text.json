@@ -29,7 +29,16 @@
     "optical": {
       "title": "The Southern Pinwheel",
       "detail": "2373 × 2164 px",
-      "summary": "Visible-light image on an approximate depth model; individual depths are not measured."
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-m83",
+          "url": "https://www.eso.org/public/images/m83/",
+          "label": "The Southern Pinwheel; ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
+          "checked": "2026-10-01",
+          "locator": "The Southern Pinwheel"
+        }
+      ]
     }
   }
 }

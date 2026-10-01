@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m33",
+  "entries": [
+    {
+      "id": "dataset-optical",
+      "subject": "Publisher optical display image",
+      "status": "included",
+      "finding": "publisher publication JPEG. Selected for image-layer display. The 68 by 57 arcminute VST field contains the full bright optical disk. The larger warped neutral-hydrogen outskirts are not represented. This ledger consolidates existing records; no fresh source survey or visual qualification was performed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m33-layers/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m33-layers/source/recipe.json"
+      ]
+    },
+    {
+      "id": "parametric-depth",
+      "subject": "Parametric image-layer geometry",
+      "status": "included",
+      "finding": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. Adopted thickness: 1.2 kpc. The cited geometry reference is Corbelli et al. 2014, arXiv:1409.2665. Selection does not independently qualify those adopted values.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m33-layers/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m33-layers/source/recipe.json"
+      ]
+    },
+    {
+      "id": "scientific-registration",
+      "survey": "scientific-registration",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m33-layers/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m33-layers/source/recipe.json"
+      ]
+    }
+  ]
+}

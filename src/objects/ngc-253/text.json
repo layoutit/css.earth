@@ -29,7 +29,16 @@
     "optical": {
       "title": "Spiral galaxy NGC 253",
       "detail": "8285 × 7510 px",
-      "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured."
+      "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso0902c",
+          "url": "https://www.eso.org/public/images/eso0902c/",
+          "label": "Spiral galaxy NGC 253; ESO",
+          "checked": "2026-10-01",
+          "locator": "Spiral galaxy NGC 253"
+        }
+      ]
     }
   }
 }

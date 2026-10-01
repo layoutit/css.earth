@@ -27,7 +27,7 @@ test('preparation reads the registry the application holds, without its scene lo
   // Preparation's scene objects are the bodies its lanes bake: a bank package's scene has no body to bake.
   const banks = new Set(prepared.entries.flatMap(entry => isHostedDescriptor(entry.descriptor) ? [(entry.descriptor as { id: string }).id] : []));
   assert.deepEqual(prepared.sceneObjects.map(object => object.id), REGISTERED_SCENE_OBJECTS.filter(object => !banks.has(object.id)).map(object => object.id));
-  assert.throws(() => prepared.requireSceneObject('m31'), /no body of its own/);
+  assert.throws(() => prepared.requireSceneObject('m42'), /no body of its own/);
   assert.equal(prepared.requireSceneObject('mars').name, REGISTERED_SCENE_OBJECTS.find(object => object.id === 'mars')?.name);
   await assert.rejects(prepared.requireSceneObject('mars').loadScene(), /cannot mount a scene/);
 });

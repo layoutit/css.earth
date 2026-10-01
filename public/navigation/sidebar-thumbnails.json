@@ -123,19 +123,19 @@
       "bytes": 14756
     },
     {
-      "path": "src/objects/m31/prepared/presentation.json",
-      "bytes": 1760
+      "path": "src/objects/m31-layers/prepared/presentation.json",
+      "bytes": 1376
     },
     {
-      "path": "public/scenes/m31/datasets/optical.webp",
+      "path": "public/scenes/m31-layers/datasets/optical.webp",
       "bytes": 3062
     },
     {
-      "path": "src/objects/m33/prepared/presentation.json",
-      "bytes": 1688
+      "path": "src/objects/m33-layers/prepared/presentation.json",
+      "bytes": 1709
     },
     {
-      "path": "public/scenes/m33/datasets/optical.webp",
+      "path": "public/scenes/m33-layers/datasets/optical.webp",
       "bytes": 15530
     },
     {
@@ -191,35 +191,43 @@
       "bytes": 36602
     },
     {
-      "path": "src/objects/m81/prepared/presentation.json",
-      "bytes": 1549
+      "path": "src/objects/m81-layers/prepared/presentation.json",
+      "bytes": 1165
     },
     {
-      "path": "public/scenes/m81/datasets/optical.webp",
+      "path": "public/scenes/m81-layers/datasets/optical.webp",
       "bytes": 5842
     },
     {
-      "path": "src/objects/m83/prepared/presentation.json",
-      "bytes": 1426
+      "path": "src/objects/m83-layers/prepared/presentation.json",
+      "bytes": 1042
     },
     {
-      "path": "public/scenes/m83/datasets/optical.webp",
+      "path": "public/scenes/m83-layers/datasets/optical.webp",
       "bytes": 14088
     },
     {
-      "path": "src/objects/ngc-253/prepared/presentation.json",
-      "bytes": 1528
+      "path": "src/objects/m87/prepared/presentation.json",
+      "bytes": 1343
     },
     {
-      "path": "public/scenes/ngc-253/datasets/optical.webp",
+      "path": "public/scenes/m87/datasets/eso-optical.webp",
+      "bytes": 33532
+    },
+    {
+      "path": "src/objects/ngc-253-layers/prepared/presentation.json",
+      "bytes": 1549
+    },
+    {
+      "path": "public/scenes/ngc-253-layers/datasets/optical.webp",
       "bytes": 5324
     },
     {
-      "path": "src/objects/ngc-300/prepared/presentation.json",
-      "bytes": 1403
+      "path": "src/objects/ngc-300-layers/prepared/presentation.json",
+      "bytes": 1424
     },
     {
-      "path": "public/scenes/ngc-300/datasets/optical.webp",
+      "path": "public/scenes/ngc-300-layers/datasets/optical.webp",
       "bytes": 15188
     },
     {
@@ -292,7 +300,7 @@
     },
     {
       "path": "src/objects/local-group/prepared/catalogue.json",
-      "bytes": 702193
+      "bytes": 703991
     }
   ],
   "images": {
@@ -494,20 +502,20 @@
       "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "sourceUrl": "https://apod.nasa.gov/apod/ap040201.html"
     },
-    "m31/optical": {
-      "url2x": "/navigation/focus-m31-optical@2x.webp",
+    "m31-layers/optical": {
+      "url2x": "/navigation/focus-m31-layers-optical@2x.webp",
       "inputs": [
-        "src/objects/m31/prepared/presentation.json",
-        "public/scenes/m31/datasets/optical.webp"
+        "src/objects/m31-layers/prepared/presentation.json",
+        "public/scenes/m31-layers/datasets/optical.webp"
       ],
       "credit": "NOIRLab · ESA/Hubble",
       "sourceUrl": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/"
     },
-    "m33/optical": {
-      "url2x": "/navigation/focus-m33-optical@2x.webp",
+    "m33-layers/optical": {
+      "url2x": "/navigation/focus-m33-layers-optical@2x.webp",
       "inputs": [
-        "src/objects/m33/prepared/presentation.json",
-        "public/scenes/m33/datasets/optical.webp"
+        "src/objects/m33-layers/prepared/presentation.json",
+        "public/scenes/m33-layers/datasets/optical.webp"
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1424a/"
@@ -602,38 +610,47 @@
       "credit": "NASA/JPL-Caltech; CDS",
       "sourceUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/"
     },
-    "m81/optical": {
-      "url2x": "/navigation/focus-m81-optical@2x.webp",
+    "m81-layers/optical": {
+      "url2x": "/navigation/focus-m81-layers-optical@2x.webp",
       "inputs": [
-        "src/objects/m81/prepared/presentation.json",
-        "public/scenes/m81/datasets/optical.webp"
+        "src/objects/m81-layers/prepared/presentation.json",
+        "public/scenes/m81-layers/datasets/optical.webp"
       ],
       "credit": "NOIRLab",
       "sourceUrl": "https://noirlab.edu/public/images/noao-m81m82/"
     },
-    "m83/optical": {
-      "url2x": "/navigation/focus-m83-optical@2x.webp",
+    "m83-layers/optical": {
+      "url2x": "/navigation/focus-m83-layers-optical@2x.webp",
       "inputs": [
-        "src/objects/m83/prepared/presentation.json",
-        "public/scenes/m83/datasets/optical.webp"
+        "src/objects/m83-layers/prepared/presentation.json",
+        "public/scenes/m83-layers/datasets/optical.webp"
       ],
       "credit": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
       "sourceUrl": "https://www.eso.org/public/images/m83/"
     },
-    "ngc-253/optical": {
-      "url2x": "/navigation/focus-ngc-253-optical@2x.webp",
+    "m87/eso-optical": {
+      "url2x": "/navigation/focus-m87-eso-optical@2x.webp",
       "inputs": [
-        "src/objects/ngc-253/prepared/presentation.json",
-        "public/scenes/ngc-253/datasets/optical.webp"
+        "src/objects/m87/prepared/presentation.json",
+        "public/scenes/m87/datasets/eso-optical.webp"
+      ],
+      "credit": "Chris Mihos/ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1525a/"
+    },
+    "ngc-253-layers/optical": {
+      "url2x": "/navigation/focus-ngc-253-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-253-layers/prepared/presentation.json",
+        "public/scenes/ngc-253-layers/datasets/optical.webp"
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0902c/"
     },
-    "ngc-300/optical": {
-      "url2x": "/navigation/focus-ngc-300-optical@2x.webp",
+    "ngc-300-layers/optical": {
+      "url2x": "/navigation/focus-ngc-300-layers-optical@2x.webp",
       "inputs": [
-        "src/objects/ngc-300/prepared/presentation.json",
-        "public/scenes/ngc-300/datasets/optical.webp"
+        "src/objects/ngc-300-layers/prepared/presentation.json",
+        "public/scenes/ngc-300-layers/datasets/optical.webp"
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
@@ -740,15 +757,16 @@
     "lmc": "lmc/horalek-widefield",
     "m1": "m1/hubble-optical",
     "m2-9": "m2-9/hst-optical",
-    "m31": "m31/optical",
-    "m33": "m33/optical",
+    "m31-layers": "m31-layers/optical",
+    "m33-layers": "m33-layers/optical",
     "m42": "m42/eso-optical",
     "m45": "m45/optical-composite",
     "m8": "m8/eso-optical",
-    "m81": "m81/optical",
-    "m83": "m83/optical",
-    "ngc-253": "ngc-253/optical",
-    "ngc-300": "ngc-300/optical",
+    "m81-layers": "m81-layers/optical",
+    "m83-layers": "m83-layers/optical",
+    "m87": "m87/eso-optical",
+    "ngc-253-layers": "ngc-253-layers/optical",
+    "ngc-300-layers": "ngc-300-layers/optical",
     "omega-centauri": "omega-centauri/eso1119b",
     "pds-70-disc": "pds-70-disc/dust",
     "smc": "smc/smc-horalek-wide",

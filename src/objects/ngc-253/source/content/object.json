@@ -8,7 +8,7 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "3.467 Mpc (−110,000 / +113,600 pc)",
+        "value": "3.467 Mpc (\u2212110,000 / +113,600 pc)",
         "source": {
           "catalogueId": "publication-radburnsmith2011apjs-195-18r",
           "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R",
@@ -19,7 +19,7 @@
       {
         "id": "position",
         "label": "Sky position (J2000)",
-        "value": "RA 11.89°, Dec -25.29°",
+        "value": "RA 11.89\u00b0, Dec -25.29\u00b0",
         "source": {
           "catalogueId": "lvdb-v1-1-1",
           "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
@@ -33,7 +33,24 @@
   "datasets": {
     "titleKey": "datasets",
     "defaultDataset": "optical",
-    "controls": []
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "ngc-253-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-253-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-253-layers-optical",
+          "path": "../../ngc-253-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso0902c/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

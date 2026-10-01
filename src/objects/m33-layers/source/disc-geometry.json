@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-disc-geometry@1",
+  "objectId": "m33-layers",
+  "centre": {
+    "raDeg": 23.4607,
+    "decDeg": 30.6583,
+    "frame": "icrs",
+    "source": "Koch et al. (2018), Table 2: Centre R.A. 23.4607 ± 0.0042°, Centre Dec. 30.6583 ± 0.0032°, from the same DiskFit fit"
+  },
+  "inclinationDeg": 55.08,
+  "inclinationUncertaintyDeg": 1.56,
+  "positionAngleDeg": 201.12,
+  "positionAngleUncertaintyDeg": 0.47,
+  "quote": "Position Angle 201.12 ± 0.47° Inclination 55.08 ± 1.56°",
+  "source": "koch-2018-m33-hi-kinematics",
+  "choice": "One flat plane from Koch et al. (2018, Table 2): DiskFit's fit of a rotating disc to the VLA+GBT H I peak-velocity surface (39,970 points), which covers the star-forming disc where these catalogues lie. The position angle is the receding side's, measured from north through east; the line of nodes is 21.12° from north.",
+  "limits": "A single plane. Corbelli et al. (2014) find the H I disc warps beyond the optical disc, its line of nodes turning toward M31; dots placed on this plane inherit that error, largest for the outer planetary nebulae. The erratum to Koch et al. (2018, MNRAS 480, 3193) was not read: its publisher page is behind a browser challenge. The values above are from arXiv:1806.11218v2 (2018-08-08)."
+}

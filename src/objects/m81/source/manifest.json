@@ -1,197 +1,40 @@
 {
-  "schema": "cssearth-volume-source-manifest@2",
-  "pathBase": "repository",
-  "inputs": [
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [
     {
-      "id": "optical",
-      "path": "src/objects/m81/source/source.jpg",
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
       "origin": "https://noirlab.edu/public/images/noao-m81m82/",
-      "sourceUrl": "https://noirlab.edu/public/images/noao-m81m82/",
-      "title": "Galaxies M81 & M82",
-      "credit": "T.A. Rector (University of Alaska Anchorage) and NOIRLab/NSF/AURA",
-      "displayCredit": "NOIRLab",
-      "acquisition": "The publisher Large JPEG (8315 x 4642 px), restored from its origin; not tracked. Registration re-measured against catalogued positions (recipe observation). The hash identifies the local JPEG bytes, not a calibrated scientific array.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "noirlab-noao-m81m82",
-            "role": "material",
-            "evidence": "src/objects/m81/source/provenance.json"
-          }
-        ]
-      },
-      "dependencies": [],
-      "datasetId": "optical",
+      "credit": "T.A. Rector (University of Alaska Anchorage) and NOIRLab/NSF/AURA; the default dataset's picture as the Bode's Galaxy (M81) bank publishes it, saved by site/build/prepare/companion-context.mts",
       "license": "CC-BY-4.0; retain the complete recorded credit.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "unresolved",
-            "label": "Mayall 4-m Mosaic, colour composite",
-            "evidence": "https://noirlab.edu/public/images/noao-m81m82/",
-            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
-          }
-        ]
-      }
-    },
-    {
-      "id": "jacoby-pne-table",
-      "path": "src/objects/m81/source/jacoby-pne/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%2A+FROM+%22J%2FApJ%2F344%2F704%2Ftable1%22",
-      "title": "Planetary nebulae as standard candles. III. The distance to M 81, table.csv",
-      "credit": "G. H. Jacoby, R. Ciardullo, H. C. Ford, J. Booth; ApJ 344, 704",
-      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through jacoby-pne/points.json.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jacoby-1989-m81-pne",
-            "role": "material",
-            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%2A+FROM+%22J%2FApJ%2F344%2F704%2Ftable1%22"
-          }
-        ]
-      }
-    },
-    {
-      "id": "nantais-gc-table",
-      "path": "src/objects/m81/source/nantais-gc/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FAJ%2F139%2F2620%2FM81glob%22",
-      "title": "Spectroscopy of M81 globular clusters, table.csv",
-      "credit": "J. B. Nantais, J. P. Huchra; AJ 139, 2620",
-      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through nantais-gc/points.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "nantais-2010-m81-globular-clusters",
-            "role": "material",
-            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FAJ%2F139%2F2620%2FM81glob%22"
-          }
-        ]
-      }
-    },
-    {
-      "id": "vucetic-snr-table",
-      "path": "src/objects/m81/source/vucetic-snr/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fm81%22",
-      "title": "Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission, table.csv",
-      "credit": "M. M. Vucetic, B. Arbutina, D. Urosevic; MNRAS 446, 943",
-      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through vucetic-snr/points.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "vucetic-2015-optical-snr",
-            "role": "material",
-            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fm81%22"
-          }
-        ]
+        "kind": "local",
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/m81-layers/source/manifest.json)."
       }
     }
   ],
   "documents": [
     {
-      "id": "recipe",
-      "path": "src/objects/m81/source/recipe.json",
+      "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Image-layer preparation recipe",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
-    },
-    {
-      "id": "provenance",
-      "path": "src/objects/m81/source/provenance.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Published image interpretation and acquisition record",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
-    },
-    {
-      "id": "presentation",
-      "path": "src/objects/m81/source/presentation.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Dataset presentation and prepared-bank bindings",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
-    },
-    {
-      "id": "stellar-extent",
-      "path": "src/objects/m81/source/stellar-extent.json",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "smercina-2020-m81-halo",
-            "role": "reference",
-            "evidence": "https://arxiv.org/abs/1910.14672"
-          }
-        ]
+        "reason": "Project-authored factsheet and dataset list."
       }
     },
     {
-      "id": "dots-merge",
-      "kind": "authored-document",
-      "path": "src/objects/m81/source/dots/merge.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "path": "presentation/solar-system.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored processing configuration."
+        "reason": "Project-authored framing: the radius the page frames the object at, a presentation value."
       }
     },
     {
-      "id": "jacoby-pne-points",
-      "kind": "authored-document",
-      "path": "src/objects/m81/source/jacoby-pne/points.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Planetary nebulae as standard candles. III. The distance to M 81 rows drawn as dots.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "id": "nantais-gc-points",
-      "kind": "authored-document",
-      "path": "src/objects/m81/source/nantais-gc/points.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Spectroscopy of M81 globular clusters rows drawn as dots.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "id": "vucetic-snr-points",
-      "kind": "authored-document",
-      "path": "src/objects/m81/source/vucetic-snr/points.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
+      "path": "preparation/navigation.json"
     }
-  ],
-  "generatedIntermediates": []
+  ]
 }

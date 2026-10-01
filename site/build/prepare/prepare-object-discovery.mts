@@ -107,6 +107,21 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     return { imagery: DATASET_PACKAGE_IMAGERY[descriptor.type]!, illustration: false, featured: true,
       ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
   }
+  if (isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length) {
+    // An object with no surface shows the banks its datasets name: it is pictured when one of them is imagery. It is a
+    // place on the map by itself, so it is featured.
+    const content: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8'));
+    const controls = isRecord(content) && isRecord(content.datasets) && Array.isArray(content.datasets.controls) ? content.datasets.controls : [];
+    const banks = new Set(controls.flatMap(control => isRecord(control) && isRecord(control.volume) && typeof control.volume.objectId === 'string' ? [control.volume.objectId] : []));
+    let imagery = false;
+    for (const bank of banks) {
+      const companion: unknown = JSON.parse(await readFile(resolve(objectDirectory, '..', bank, 'object.json'), 'utf8'));
+      if (!isRecord(companion) || typeof companion.type !== 'string' || !Object.hasOwn(DATASET_PACKAGE_IMAGERY, companion.type)) throw new TypeError(`src/objects/${bank}/object.json: ${String(descriptor.id)} shows it as a dataset, but it is not a bank package.`);
+      imagery ||= DATASET_PACKAGE_IMAGERY[companion.type]!;
+    }
+    const policy = discoveryPolicy(descriptor.properties.catalog);
+    return { imagery, illustration: false, featured: true, ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
+  }
   if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.recipe) ||
       !Array.isArray(descriptor.properties.recipe.sources)) throw new TypeError(`Missing discovery recipe sources: ${isRecord(descriptor) ? String(descriptor.id) : 'unknown object'}.`);
   const inputs: unknown[] = [];

@@ -22,7 +22,7 @@ test('the prepared catalogues the app draws are valid banks of every selected ro
   // The published banks: what each recipe marks `published: true` and the app fetches. Their inputs (a survey's stars,
   // one catalogue's masers) are bake inputs in output/catalogue-points/, so they are not read here.
   for (const [object, id] of [['milky-way', 'globular-clusters'], ['milky-way', 'dots'], ['milky-way', 'old-star-dots'], ['nearby-universe', 'dots'], ['nearby-universe', 'bright-galaxy-dots'],
-    ['nearby-universe', 'quasar-dots'], ['m31', 'stars'], ['m31', 'dots'], ['m33', 'stars'], ['m33', 'dots'], ['m81', 'dots'], ['ngc-253', 'dots']]) {
+    ['nearby-universe', 'quasar-dots'], ['m31-layers', 'stars'], ['m31-layers', 'dots'], ['m33-layers', 'stars'], ['m33-layers', 'dots'], ['m81-layers', 'dots'], ['ngc-253-layers', 'dots']]) {
     const path = new URL(`../../../../src/objects/${object}/prepared/${id}.bin`, import.meta.url);
     const prepared = decodeCatalogueBankBinary(unpackPreparedBinary(readFileSync(path), path.pathname), path.pathname) as {
       points: number[][]; counts: { points: number; missingDistance?: number; selected?: number }; source?: string; appearance: { levels?: { points: number }[] } };

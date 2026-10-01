@@ -1,42 +1,52 @@
 {
   "schema": "cssearth-object@2",
   "id": "ngc-253",
-  "type": "image-layer-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
-      "referenceFrame": "sun-icrf",
-      "epochJdTt": 2461286.5,
-      "originM": [
-        9.466398955991882e+22,
-        1.99281255640934e+22,
-        -4.570390386155572e+22
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sculptor Galaxy (NGC 253)",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 614049838716782100
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
       ],
-      "localToReferenceXyzw": [
-        0.5322536118875325,
-        0.6559665237048081,
-        0.41558096803764877,
-        0.33720390184011223
-      ],
-      "metersPerUnit": 30856775814913670000,
-      "boundsUnits": {
-        "min": [
-          -15.93923293966862,
-          -11.729666064687265,
-          -78.56474644888249
-        ],
-        "max": [
-          15.855142372222327,
-          11.981418565749985,
-          81.31495831369375
-        ]
+      "metadata": {
+        "url": "prepared/page.json"
       }
     },
-    "preparation": {
-      "source": "source/recipe.json"
-    },
-    "cataloguePoints": [
-      "dots"
-    ],
     "catalog": {
       "name": "NGC 253",
       "systemName": "Galaxy catalogue",
@@ -78,22 +88,10 @@
       ],
       "metersPerUnit": 1980805931344458500,
       "bodyRadiusM": 614049838716782100000
-    },
-    "page": {
-      "stylesheets": [
-        "src/renderers/css/styles/body-surfaces.css"
-      ],
-      "metadata": {
-        "url": "prepared/page.json"
-      }
-    },
-    "scene": {
-      "format": "cssearth-css-object@5",
-      "url": "prepared/object.json"
     }
   },
   "prepared": {
-    "format": "cssearth-image-layer-bank@1",
-    "url": "prepared/image-layers.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }
