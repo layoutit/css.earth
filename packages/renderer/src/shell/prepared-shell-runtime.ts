@@ -63,7 +63,11 @@ export function mountPreparedCssSurfaceShell({ host, before, payload: input, res
     }
     const local = presentPhysicalPoseInVolume(world.pose, payload.frame);
     const distanceM = Math.hypot(...local.positionUnits) * payload.frame.metersPerUnit;
-    const opacity = enabled ? distanceOpacity(distanceM, payload.visibility) : 0;
+    // A shell its setting turns off leaves the document (1,920 faces stayed mounted and hidden on Earth, 2026-10-01); one
+    // the camera's distance hides stays, since distance changes while the camera moves.
+    if (!enabled) { if (root.parentNode) root.remove(); publishStats(distanceM, 0, 0); return; }
+    if (!root.parentNode) host.insertBefore(root, before.parentNode === host ? before : null);
+    const opacity = distanceOpacity(distanceM, payload.visibility);
     write(root, 'opacity', String(opacity));
     write(root, 'visibility', opacity > 0 ? 'visible' : 'hidden');
     // Hidden shells retain their last material addresses and face visibility.

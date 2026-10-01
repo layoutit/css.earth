@@ -276,7 +276,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     presentCaption();
   }
   const onLabelsChange = () => {
-    if (labelsEnabled()) { requestLoading(); schedule(); } else { hoveredIndex = null; hideAll(); }
+    // Labels turned off leave the document: 713 hidden names stayed mounted on Earth (2026-10-01).
+    if (labelsEnabled()) { if (entries.length && !root.isConnected) host.appendChild(root); requestLoading(); schedule(); }
+    else { hoveredIndex = null; hideAll(); if (root.isConnected) root.remove(); }
     syncLoop();
   };
   document.body.addEventListener('objectsurfacelabelschange', onLabelsChange);

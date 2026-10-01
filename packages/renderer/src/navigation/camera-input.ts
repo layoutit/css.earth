@@ -365,7 +365,7 @@ export function createUnboundedMatrixDragControls({
       abandonOrbit();
       if (lifetime.disposed) return;
       pinchDistance = touchSpread().distance;
-      inputSurface.setPointerCapture(event.pointerId);
+      capturePointer(inputSurface, event.pointerId);
       return;
     }
     if (!drag || press !== null || !runtimePolicy.isOrbitDragStart(event)) return;
@@ -396,7 +396,7 @@ export function createUnboundedMatrixDragControls({
     resetDragHistory(history);
     recordDragSample(history, { x: event.clientX, y: event.clientY, timestamp: event.timeStamp, pitch: 0, yaw: 0 });
     syncCursor();
-    inputSurface.setPointerCapture(event.pointerId);
+    capturePointer(inputSurface, event.pointerId);
   };
   const applyPointerSamples = (current: Press, event: PointerEvent) => {
     const coalesced = typeof event.getCoalescedEvents === "function"
@@ -576,4 +576,11 @@ export function createUnboundedMatrixDragControls({
       if (errors.length) throw new AggregateError(errors, "Drag controls cleanup failed.");
     },
   });
+}
+
+/** Capture keeps a drag that leaves the surface. A pointer that is already gone when its handler runs (a touch lifted
+ * while the main thread was busy) cannot be captured: the gesture carries on without it instead of failing the scene. */
+export function capturePointer(surface: Pick<Element, 'setPointerCapture'>, pointerId: number): void {
+  try { surface.setPointerCapture(pointerId); }
+  catch (error) { if (!(error instanceof Error && error.name === 'NotFoundError')) throw error; }
 }

@@ -81,3 +81,9 @@ export function systemById(objects: Parameters<typeof planetarySystems>[0], syst
 export const allPlanetarySystems = systemsOf;
 /** The objects systems are built from: the world's bodies (`world-objects.mts`) or the registry. */
 export type SystemObjects = Parameters<typeof planetarySystems>[0];
+
+/** Whether a system's card lists a member: its star, its planets and its featured bodies. Search reaches the rest; the
+ * Solar System's card listed all 545 of its bodies, 4,900 elements (2026-10-01). */
+export function listedInSystemCard(object: { readonly id: string; readonly classification: string; readonly discovery: { readonly featured: boolean } }, systemId: string): boolean {
+  return object.id === systemId || object.classification === 'planet' || object.classification === 'exoplanet' || object.discovery.featured;
+}

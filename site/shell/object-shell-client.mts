@@ -110,12 +110,21 @@ export function mountObjectShell({
       const overview = selected?.kind === 'overview' ? knownObject(overviewPage(objectId, selected.overview.scope) ?? '') : undefined;
       return overview?.zoom !== undefined ? { id: overview.id, seo: objectSeo(overview) } : null;
     };
-    const leftPage = drawnPage(presentedSubject) !== null;
+    // Another star's scene zoomed out to an overview keeps its own address (a reload reopens that scene), but the tab
+    // names what the card shows: the Milky Way from the ε Eridani system was still titled "ε Eridani" (2026-10-01).
+    const titledOverview = (selected: typeof subject | null) => {
+      if (selected?.kind !== 'overview' || selected.overview.scope === 'system' || drawnPage(selected)) return null;
+      const overview = knownObject(selected.overview.scope), scene = knownObject(objectId);
+      return overview?.zoom !== undefined && scene && isSceneObject(scene) ? { route: scene.route, seo: { ...objectSeo(scene), title: objectSeo(overview).title } } : null;
+    };
+    const leftPage = drawnPage(presentedSubject) !== null || titledOverview(presentedSubject) !== null;
     presentedSubject = subject;
     const page = drawnPage(subject);
     // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
     // (object-browser.mts bindObject).
+    const titled = titledOverview(subject);
     if (page) presentPage(`/${page.id}/`, page.seo);
+    else if (titled) presentPage(titled.route, titled.seo);
     else if (leftPage) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
       if (scene && isSceneObject(scene)) presentPage(scene.route, objectSeo(scene));
