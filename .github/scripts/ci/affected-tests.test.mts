@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { affectedTests } from './affected-tests.mts';
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { affectedTests, FOREIGN_TESTS } from './affected-tests.mts';
 
 const packages = [
   { directory: 'core', name: '@cssearth/core', dependencies: [] },
@@ -9,23 +11,42 @@ const packages = [
   { directory: 'telescope-cli', name: '@cssearth/telescope-cli', dependencies: ['@cssearth/bake'] },
 ];
 const site = ['@cssearth/core', '@cssearth/renderer'];
+const renderer = FOREIGN_TESTS.renderer!.slice().sort();
 
 test('a changed package tests itself and every package that depends on it, and the site when the site imports one', () => {
-  assert.deepEqual(affectedTests(['packages/core/src/a.ts'], packages, site), { packages: ['core', 'renderer'], site: true });
-  assert.deepEqual(affectedTests(['packages/telescope-cli/src/a.mts'], packages, site), { packages: ['telescope-cli'], site: false });
+  assert.deepEqual(affectedTests(['packages/core/src/a.ts'], packages, site), { packages: ['core', 'renderer'], site: true, files: renderer });
+  assert.deepEqual(affectedTests(['packages/telescope-cli/src/a.mts'], packages, site), { packages: ['telescope-cli'], site: false, files: [] });
 });
 
 test('the offline tools join when they or another tool changed, not when the renderer they import did', () => {
-  assert.deepEqual(affectedTests(['packages/renderer/src/a.ts'], packages, site), { packages: ['renderer'], site: true });
-  assert.deepEqual(affectedTests(['packages/bake/src/a.ts'], packages, site), { packages: ['bake', 'telescope-cli'], site: false });
+  assert.deepEqual(affectedTests(['packages/renderer/src/a.ts'], packages, site), { packages: ['renderer'], site: true, files: renderer });
+  assert.deepEqual(affectedTests(['packages/bake/src/a.ts'], packages, site), { packages: ['bake', 'telescope-cli'], site: false, files: [] });
 });
 
 test('object data and the site test no package; documentation tests nothing', () => {
-  assert.deepEqual(affectedTests(['src/objects/mars/text.json'], packages, site), { packages: [], site: true });
-  assert.deepEqual(affectedTests(['docs/ci-cd.md'], packages, site), { packages: [], site: false });
+  assert.deepEqual(affectedTests(['src/objects/mars/text.json'], packages, site), { packages: [], site: true, files: [] });
+  assert.deepEqual(affectedTests(['docs/ci-cd.md'], packages, site), { packages: [], site: false, files: [] });
 });
 
 test('a push or a shared configuration change tests everything', () => {
-  assert.deepEqual(affectedTests(null, packages, site), { packages: 'all', site: true });
-  assert.deepEqual(affectedTests(['pnpm-lock.yaml', 'src/objects/mars/text.json'], packages, site), { packages: 'all', site: true });
+  assert.deepEqual(affectedTests(null, packages, site), { packages: 'all', site: true, files: [] });
+  assert.deepEqual(affectedTests(['pnpm-lock.yaml', 'src/objects/mars/text.json'], packages, site), { packages: 'all', site: true, files: [] });
+});
+
+test('the bake tests that exercise the renderer run on a renderer-only change, though the bake does not join', () => {
+  const result = affectedTests(['packages/renderer/src/a.ts'], packages, site);
+  assert.deepEqual(result.packages, ['renderer']);
+  assert.ok(result.files.includes('packages/bake/src/contract/renderer-navigable-object-mount.test.ts'));
+  assert.deepEqual(affectedTests(['packages/core/src/a.ts'], packages, site).files, renderer, 'a package the renderer depends on reaches them too');
+  assert.deepEqual(affectedTests(['packages/bake/src/a.ts'], packages, site).files, [], 'when the bake runs, its own glob already holds them');
+  assert.deepEqual(affectedTests(['docs/ci-cd.md'], packages, site).files, []);
+});
+
+test('every foreign test exists, sits in an offline tool and imports its owner package', () => {
+  const root = resolve(import.meta.dirname, '../../..');
+  for (const [owner, tests] of Object.entries(FOREIGN_TESTS)) for (const test of tests) {
+    assert.ok(existsSync(resolve(root, test)), `${test} is missing`);
+    assert.match(test, /^packages\/(bake|telescope-cli)\//u);
+    assert.match(readFileSync(resolve(root, test), 'utf8'), new RegExp(`@cssearth/${owner}[/'"]`, 'u'), `${test} does not import ${owner}`);
+  }
 });
