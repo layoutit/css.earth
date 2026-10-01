@@ -12,6 +12,7 @@ import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
 import { hiddenSubtreeRoots, meshProfile, omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { createSettlePacer } from './settle-pacer.js';
+import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
@@ -308,14 +309,30 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       styleWrites += leaves.length;
     } else if (!samePreparedStyle(styleValue(target(index), name), name, value)) { writeStyle(target(index), name, value); styleWrites++; }
   }
+  type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
+  function publish(binding: CommittedWrite) {
+    const element = target(binding.target);
+    if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
+    else if (binding.kind === "class") { if (element.classList.contains(binding.name) !== binding.value) element.classList.toggle(binding.name, binding.value); }
+    else if (binding.kind === "tile") styleWrites += textureTiles.publish(binding.target, binding.name, binding.tile);
+    else publishStyle(binding.target, binding.name, binding.value);
+  }
+  // A texture level swap repaints every leaf whose page changes: Earth's 160 leaves took one 256 ms commit on the iPad
+  // (2026-09-30), after the zoom had settled. A level-only commit lands its changed pages a slice a frame, held while the
+  // camera moves (settle-pacer.ts); a dataset change still lands whole.
+  let committedVariant: unknown = null, levelPacer: ReturnType<typeof createSettlePacer> | null = null;
+  const pendingLevels = new Map<string, { leaves: number; writes: CommittedWrite[] }>();
   return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.dataset) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.features ? { featureTarget: nodes[definition.features.target] } : {}),
-    commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
+    commitSelection({ selection, resources, plan, motion: cameraMotion = null }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null; motion?: CameraMotionSignal | null }) {
       const variant = selectedPreparedVariant(definition, selection);
+      // A commit of the same dataset only changes texture levels; a new one supersedes any level still waiting.
+      const levelOnly = variant === committedVariant;
+      committedVariant = variant;
+      pendingLevels.clear();
       // Resolve the complete texture group before publishing any part of it.
-      type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
       const writes = variant.writes.flatMap((binding): CommittedWrite[] => {
         if (binding.kind !== "texture") return [binding];
         const url = binding.resource === null ? null : resources.url(plan?.textureResources?.[binding.resource] ?? binding.resource);
@@ -336,13 +353,6 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       const hiddenProfiles = writes.filter(binding => profileDisplay(binding, "none"));
       const shownProfiles = writes.filter(binding => profileDisplay(binding, "block"));
       const contentWrites = writes.filter(binding => !profileDisplay(binding, "none") && !profileDisplay(binding, "block"));
-      const publish = (binding: typeof writes[number]) => {
-        const element = target(binding.target);
-        if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
-        else if (binding.kind === "class") { if (element.classList.contains(binding.name) !== binding.value) element.classList.toggle(binding.name, binding.value); }
-        else if (binding.kind === "tile") styleWrites += textureTiles.publish(binding.target, binding.name, binding.tile);
-        else publishStyle(binding.target, binding.name, binding.value);
-      };
       // Alternative radial meshes address different atlas layouts. Hide the
       // outgoing profile before changing their shared image, then reveal the
       // incoming profile only after the complete dataset has been published.
@@ -354,7 +364,29 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
         publishStyle(binding.target, binding.name, "none");
       }
-      for (const binding of contentWrites) publish(binding);
+      for (let index = 0; index < contentWrites.length; index++) {
+        const binding = contentWrites[index]!, leaves = binding.kind === "style" ? textureBindings.get(`${binding.target}:${binding.name}`) : undefined;
+        if (!levelOnly || binding.kind !== "style" || !leaves?.some(leaf => leaf.style.backgroundImage !== binding.value)) { publish(binding); continue; }
+        // A page's image and its tile placement land together.
+        const next = contentWrites[index + 1];
+        const tile = next?.kind === "tile" && next.target === binding.target && next.name === binding.name ? next : null;
+        if (tile) index++;
+        pendingLevels.set(`${binding.target}:${binding.name}`, { leaves: leaves.length, writes: tile ? [binding, tile] : [binding] });
+      }
+      if (pendingLevels.size) {
+        if (!levelPacer) context.own(() => levelPacer?.destroy());
+        levelPacer ??= createSettlePacer(budget => {
+          let written = 0;
+          for (const [key, unit] of pendingLevels) {
+            if (written > 0 && written + unit.leaves > budget) break;
+            pendingLevels.delete(key);
+            for (const write of unit.writes) publish(write);
+            written += unit.leaves;
+          }
+          return written;
+        }, { motion: cameraMotion });
+        levelPacer.request();
+      }
       for (const root of hiddenRoots) if (!hiddenNow.has(root)) mountDetachable(subtreeKey(root), true);
       for (const binding of shownProfiles) { if (binding.kind === "style") mountDetachable(binding.name, true); publish(binding); }
       selectedTextures = new Map(variant.writes.filter(binding => binding.kind === "texture").map(binding => [styleKey(binding), binding]));

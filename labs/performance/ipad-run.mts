@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** Run an ordered cssEarth journey in the visible iPad Safari tab with a trace and native screen filmstrip. */
-import { execFile } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { networkInterfaces, tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -50,6 +50,26 @@ async function assertLocalBuiltPreview(origin: URL): Promise<void> {
   if (!response.ok) throw new Error(`Built preview on ${origin.origin} did not respond (${response.status}).`);
 }
 
+/** The iPad's default target: this checkout's dev server on the LAN (launch.json `ipad-root`), started here when none
+ * listens. A code change is one reload away; a production build (--built) took 4 minutes of 7,915 pages a change
+ * (2026-09-30) while the iPad sat idle. */
+async function ensureDevServer(origin: URL): Promise<void> {
+  const allowed = new Set([localAddress(), '127.0.0.1', 'localhost']);
+  if (origin.protocol !== 'http:' || !allowed.has(origin.hostname) || !origin.port) throw new Error('The iPad dev target is a local HTTP origin on the Mac LAN.');
+  const listening = await exec('lsof', ['-nP', '-F', 'p', `-iTCP:${origin.port}`, '-sTCP:LISTEN']).then(result => result.stdout, () => '');
+  const pid = listening.split('\n').find(line => /^p\d+$/u.test(line))?.slice(1);
+  if (pid) {
+    const owner = (await exec('lsof', ['-nP', '-a', '-p', pid, '-d', 'cwd', '-Fn'])).stdout.split('\n').find(line => line.startsWith('n'))?.slice(1);
+    if (!owner || resolve(owner) !== root) throw new Error(`Port ${origin.port} belongs to ${owner ?? 'an unknown checkout'}, not ${root}: stop it or pass --origin.`);
+    return;
+  }
+  const head = (await exec('git', ['rev-parse', 'HEAD'], { cwd: root })).stdout.trim();
+  const child = spawn(process.execPath, [resolve(root, 'node_modules/astro/bin/astro.mjs'), 'dev', '--host', '0.0.0.0', '--port', origin.port],
+    { cwd: root, detached: true, stdio: 'ignore', env: { ...process.env, COMMIT_REF: head } });
+  child.unref();
+  console.error(`Started the dev server on ${origin.origin} (pid ${child.pid}); it keeps running for the next journey.`);
+}
+
 async function ensureCurrentBuild(): Promise<void> {
   const built = await stat(resolve(root, 'dist/index.html')).catch(() => null);
   const head = (await exec('git', ['rev-parse', 'HEAD'], { cwd: root })).stdout.trim();
@@ -74,8 +94,12 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
   const args = [...argv];
   const live = args.includes('--live');
   if (live) args.splice(args.indexOf('--live'), 1);
+  // A production build answers load and byte questions; frames are measured on the dev server, one reload per change.
+  const built = args.includes('--built');
+  if (built) args.splice(args.indexOf('--built'), 1);
+  if (live && built) throw new TypeError('--live and --built name different targets.');
   const scenarioFile = takeOption(args, '--scenario');
-  const originText = takeOption(args, '--origin') ?? (live ? 'https://css.earth' : `http://${localAddress()}:4212`);
+  const originText = takeOption(args, '--origin') ?? (live ? 'https://css.earth' : `http://${localAddress()}:${built ? 4212 : 4210}`);
   const name = takeOption(args, '--name') ?? 'ipad-journey';
   const udid = takeOption(args, '--device');
   const native = takeOption(args, '--native') ?? 'off';
@@ -97,14 +121,22 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
   if (origin.pathname !== '/' || origin.search || origin.hash) throw new TypeError('--origin must contain only scheme, host and port.');
   if (live) {
     if (origin.protocol !== 'https:' || origin.username || origin.password) throw new TypeError('--live requires an HTTPS origin without credentials.');
-  } else {
+  } else if (built) {
     await ensureCurrentBuild();
     await assertLocalBuiltPreview(origin);
     stage('built preview ready');
+  } else {
+    await ensureDevServer(origin);
+    stage('dev server ready');
   }
   const route = requireSceneObject(journey.start).route;
   const startUrl = new URL(route, origin).href;
-  const response = await fetch(startUrl, { signal: AbortSignal.timeout(12_000) });
+  // A dev server compiles a page on its first request: wait for that here, once, not on the iPad.
+  const response = await fetch(startUrl, { signal: AbortSignal.timeout(built || live ? 12_000 : 180_000) }).catch(async error => {
+    if (built || live) throw error;
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    return fetch(startUrl, { signal: AbortSignal.timeout(180_000) });
+  });
   await response.body?.cancel();
   if (!response.ok) throw new Error(`The target has no start route ${route} (${response.status}).`);
   const flightSource = live ? 'objectnavigate' : 'scene-router';
@@ -125,12 +157,12 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
     const { out, report } = await captureIosMoment(['--device', ...(udid ? [udid] : []), '--name', name,
       '--expect-url', startUrl, '--steps', stepsPath, '--strict-steps', '--stage-timing', '--no-device-monitors', '--screens',
       // A local preview's source maps do not describe a deployed build.
-      '--dist', live ? '' : 'dist', '--settle', '2', '--native', native,
+      '--dist', built ? 'dist' : '', '--settle', '2', '--native', native,
       ...(debug ? ['--debug'] : []), ...(heapSnapshot ? ['--heap-snapshot'] : []), ...(styleWrites ? ['--style-writes'] : [])], deviceSession);
     stage('WebKit capture complete');
     if (!report.filmstrip || report.filmstrip.frames < 1) throw new Error(`Trace ${out} has no native iPad screen frames.`);
     await writeFile(resolve(out, 'journey.json'), JSON.stringify({ schema: 'cssearth-ipad-journey@1', inputSources,
-      target: live ? 'live' : 'preview', initialUrl: startUrl, journey, steps, recordedAt: new Date().toISOString() }, null, 2) + '\n');
+      target: live ? 'live' : built ? 'preview' : 'dev', initialUrl: startUrl, journey, steps, recordedAt: new Date().toISOString() }, null, 2) + '\n');
     const strip = await makeIpadStrip(out);
     await exec(process.execPath, [resolve(root, 'labs/performance/webkit-devtools-trace.mts'), out], { cwd: root });
     stage('trace and filmstrip exported');
@@ -147,7 +179,8 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   await runIpadJourney(process.argv.slice(2)).catch((error: unknown) => {
-    console.error(`ipad-run: ${error instanceof Error ? error.message : String(error)}`);
+    // Some device failures reject with an empty message; the stack still says where.
+    console.error(`ipad-run: ${error instanceof Error ? error.message || error.stack || error.name : String(error)}`);
     process.exitCode = 1;
   });
 }

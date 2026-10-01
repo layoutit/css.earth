@@ -126,7 +126,8 @@ test('a level with a near opacity draws as its own part and dims to it as the in
   const at = (distance: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
     pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   field.publish(at(1)); await new Promise(resolve => setTimeout(resolve, 0)); field.publish(at(1));
-  const parts = [...field.root.children] as HTMLElement[];
+  // The levels are groups of one svg: one layer (batched-spatial-points.ts), each group dimmed alone.
+  const parts = [...field.root.querySelectorAll('svg > g')] as unknown as HTMLElement[];
   assert.equal(parts.length, 3, 'one part per level');
   assert.equal(parts[0]!.style.opacity, '1', 'before the innermost level appears');
   const halfWidthPerDistance = Math.hypot(1000, 800) / 200;
@@ -201,7 +202,7 @@ test('a sized palette draws one colour at two radii as two paths, and refuses a 
   points.destroy();
 });
 
-test('dot layers switching on show one a frame, so their first paints never share a frame', async () => {
+test('a stacked bank\'s levels are one layer, which switches on in one frame', async () => {
   const { document, window } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const frames: FrameRequestCallback[] = [];
   Object.assign(window, { requestAnimationFrame: (callback: FrameRequestCallback) => frames.push(callback), cancelAnimationFrame() {}, performance: { now: () => 0 } });
@@ -213,14 +214,10 @@ test('dot layers switching on show one a frame, so their first paints never shar
   field.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 1] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   await new Promise(resolve => setTimeout(resolve, 0));
   const layers = [...field.root.children] as HTMLElement[];
-  assert.equal(layers.length, 3);
+  assert.equal(layers.length, 1, 'three levels, one layer');
   const hidden = () => layers.filter(layer => layer.style.visibility === 'hidden').length;
-  assert.equal(hidden(), 3);
-  frames.shift()!(0);
-  assert.equal(hidden(), 2);
-  frames.shift()!(16);
   assert.equal(hidden(), 1);
-  frames.shift()!(32);
+  frames.shift()!(0);
   assert.equal(hidden(), 0);
   field.destroy();
 });
@@ -262,7 +259,7 @@ test('an arriving level spends what the budget leaves, never thinning the levels
   const drawn = (part: Element) => [...part.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
   field.publish(at(0.05)); await new Promise(resolve => setTimeout(resolve, 0));
   field.publish(at(0.05)); field.publish(at(0.050005)); await new Promise(resolve => setTimeout(resolve, 200));
-  const [outer, inner] = [...field.root.children];
+  const [outer, inner] = [...field.root.querySelectorAll('svg > g')];
   assert.equal(drawn(outer!), 200, 'every outer dot');
   assert.ok(drawn(inner!) > 240);
   assert.ok(drawn(inner!) < 360);

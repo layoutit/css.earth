@@ -288,45 +288,47 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
         // published once more, so a still view keeps the same dots however the frames before it were paced.
         const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };
-        const mount = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
-          cells: { boxes: bank.cells.boxes, of: cellOf }, onSettle: settled,
-          drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
+        const part = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => ({ points,
+          cells: { boxes: bank.cells.boxes, of: cellOf },
+          drawnCount: (distanceUnits: number, cameraUnits: VolumeVector) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
           // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
           // keeps a path only for the colours its own dots use.
           paintPalette: [...new Set(points.map(styleKey))].map(key => pointPaint(styles.get(key)!)),
-          className: `catalogue-points-${bank.id}`, stylePoint: point => styles.get(styleKey(point))! });
+          stylePoint: (point: (typeof bank.points)[number]) => styles.get(styleKey(point))! });
+        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, parts,
+          onSettle: settled, className: `catalogue-points-${bank.id}` });
         // Each level draws as its own part: it dims to its near opacity as the innermost level fills, and takes its share
-        // of the budget after the levels outside it.
+        // of the budget after the levels outside it. The levels share one field, so they are one layer (batched-spatial-points.ts).
         const levels = bank.appearance.levels ?? [];
         let start = 0;
-        const parts = levels.map(level => { const part = { start, points: level.points, nearOpacity: level.nearOpacity ?? 1, share: 1 }; start += level.points; return part; });
-        const rebudget = (candidates: readonly number[], distanceUnits: number, shares: { share: number }[]) => {
+        const shares = levels.map(level => { const entry = { start, points: level.points, nearOpacity: level.nearOpacity ?? 1, share: 1 }; start += level.points; return entry; });
+        const rebudget = (candidates: readonly number[], distanceUnits: number, entries: { share: number }[]) => {
           if (budget === undefined) return;
           let left = budgetAt(distanceUnits);
           candidates.forEach((count, index) => {
-            shares[index]!.share = count > left ? Math.max(0, left) / count : 1;
-            left -= count * shares[index]!.share;
+            entries[index]!.share = count > left ? Math.max(0, left) / count : 1;
+            left -= count * entries[index]!.share;
           });
         };
-        if (parts.length < 2) {
-          const whole = { share: 1 }, single = mount(bank.points, bank.cells.of, total => total, () => whole.share);
+        if (shares.length < 2) {
+          const whole = { share: 1 }, single = mount([part(bank.points, bank.cells.of, total => total, () => whole.share)]);
           runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
-          const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points), bank.cells.of.subarray(part.start, part.start + part.points),
-            total => Math.max(0, Math.min(part.points, total - part.start)), () => part.share) }));
-          runtime = { layers: mounted.map(part => part.runtime.root), publish(publication) {
+          const field = mount(shares.map(entry => part(bank.points.slice(entry.start, entry.start + entry.points), bank.cells.of.subarray(entry.start, entry.start + entry.points),
+            total => Math.max(0, Math.min(entry.points, total - entry.start)), () => entry.share)));
+          runtime = { layers: [field.root], publish(publication) {
             const distanceUnits = distanceOf(publication);
             const [from, to] = innermost.appearUnits ?? [1, 1];
             const filled = from > to ? Math.max(0, Math.min(1, Math.log(from / (distanceUnits * halfWidthPerDistance)) / Math.log(from / to))) : 0;
-            for (const part of mounted) {
-              const opacity = String(1 - (1 - part.nearOpacity) * filled);
-              if (part.runtime.root.style.opacity !== opacity) part.runtime.root.style.opacity = opacity;
-              part.runtime.publish(publication);
-            }
-            rebudget(mounted.map(part => part.runtime.stats().candidates), distanceUnits, parts);
-          }, destroy() { for (const part of mounted) part.runtime.destroy(); } };
+            shares.forEach((entry, index) => {
+              const group = field.parts[index]!.group, opacity = String(1 - (1 - entry.nearOpacity) * filled);
+              if (group.style.opacity !== opacity) group.style.opacity = opacity;
+            });
+            field.publish(publication);
+            rebudget(field.parts.map(entry => entry.stats().candidates), distanceUnits, shares);
+          }, destroy: field.destroy };
         }
         root.dataset.cataloguePoints = bank.id;
         if (root.style.display !== 'none') revealLayers(runtime.layers);
