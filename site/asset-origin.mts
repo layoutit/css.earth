@@ -183,15 +183,18 @@ export async function rewriteSceneCss(css: string, root = process.cwd()): Promis
  * no `/scenes`: the build writes the bucket's address for each. No-op when unset. */
 export async function resolveWorldBillboards(text: string, root = process.cwd()): Promise<string> {
   if (!assetOrigin()) return text;
-  const file = JSON.parse(text) as { bodies?: { id?: unknown; billboard?: unknown } };
+  const file = JSON.parse(text) as { bodies?: { id?: unknown; billboard?: unknown; plainDot?: unknown } };
   const ids = file.bodies?.id, billboards = file.bodies?.billboard;
+  // A plain dot never draws its photograph (application-world-visibility.mts), so it carries no address: each one is a
+  // content hash that does not compress (134 KB of the startup summary for 2,392 dots, 2026-10-01).
+  const plain = Array.isArray(file.bodies?.plainDot) ? file.bodies.plainDot : [];
   // A system none of whose bodies has a photograph writes no billboard column.
   if (billboards === undefined) return text;
   if (!Array.isArray(ids) || !Array.isArray(billboards) || ids.length !== billboards.length) {
     throw new TypeError('A world file names its bodies and their billboards column by column, of equal length.');
   }
   file.bodies!.billboard = await Promise.all(billboards.map(async (billboard: unknown, index) => {
-    if (billboard === null) return null;
+    if (billboard === null || plain[index] === true) return billboard;
     const drawn = billboard as { url?: unknown }, id = String(ids[index]);
     const address = typeof drawn.url === 'string' ? drawn.url : `/scenes/${id}/${id}-billboard.webp`;
     return { ...drawn, url: await resolveBuildSceneAddress(address, root) };

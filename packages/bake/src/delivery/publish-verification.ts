@@ -19,8 +19,10 @@ export interface VerifyOptions {
   readonly pickSample?: (assets: readonly PublishAsset[], count: number) => readonly PublishAsset[];
 }
 
-function expectedContentType(key: string): string {
-  return key.endsWith('.json') ? 'application/json' : 'application/octet-stream';
+/** The media type a published key is served with. An `<img>` draws an SVG only when it arrives as `image/svg+xml` (browsers
+ * sniff raster formats, never SVG): published as octet-stream, every chart was a broken image (1,653 files, 2026-10-01). */
+export function expectedContentType(key: string): string {
+  return key.endsWith('.json') ? 'application/json' : key.endsWith('.svg') ? 'image/svg+xml' : 'application/octet-stream';
 }
 
 function headOk(response: Response | null, asset: PublishAsset): boolean {

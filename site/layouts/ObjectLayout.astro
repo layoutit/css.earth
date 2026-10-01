@@ -2,6 +2,7 @@
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
+import { errorReportBootstrap } from "../error-report.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../startup-requests.mts';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
@@ -73,6 +74,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
     {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl })}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    {!navigation && <script is:inline set:html={errorReportBootstrap}></script>}
     {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}
     {assetPreconnect && <link rel="preconnect" href={assetPreconnect} />}
     {assetPreconnect && <link rel="preconnect" href={assetPreconnect} crossorigin />}
@@ -108,25 +110,20 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
-      import { startFirstView } from '../startup-boot.mts';
+      import { startBodyCode, startViewCode } from '../startup-boot.mts';
+      import { importSceneRouter } from '../shared-imports.mts';
+      import { loadStartupWorld } from '../startup-world.mts';
       bindNativeViewForms(document, window);
-      startFirstView(document);
-      import("../scene/scene-router.mts").catch(error => {
+      startBodyCode(document);
+      // The page reads its world first, so no module waits for it (startup-world.mts), and its modules load one at a time
+      // (shared-imports.mts).
+      loadStartupWorld(window).then(importSceneRouter).then(() => startViewCode(document), error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();
         delete document.documentElement.dataset.shellContext;
         delete document.documentElement.dataset.bodyPending;
         console.error('The interactive scene could not load.', error);
       });
-    </script>}
-    {/* Static imports make the browser fetch the application's modules while it parses the HTML; the dynamic import
-        above only starts after parsing. A browser finds a module's imports only after downloading it, and the bundler
-        does not hoist transitive imports, so the body runtime the router imports while it mounts is named here too.
-        The registry and the world's code start loading at boot (`startup-boot.mts`). All resolve to the same module
-        instances, and the script above owns failure. */}
-    {!navigation && <script>
-      import '../packaged-object-runtime.mts';
-      import '../scene/scene-router.mts';
     </script>}
     {!navigation && <script is:inline set:html={webAnalyticsBootstrap}></script>}
     <slot name="object-head" />

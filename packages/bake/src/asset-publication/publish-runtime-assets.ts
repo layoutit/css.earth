@@ -7,7 +7,7 @@ import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
-import { verifyPublished, reportVerification, type PublishAsset } from "../delivery/index.ts";
+import { expectedContentType, verifyPublished, reportVerification, type PublishAsset } from "../delivery/index.ts";
 
 const BUCKET = "cssearth-assets";
 const CACHE_CONTROL = "public,max-age=31536000,immutable";
@@ -17,9 +17,8 @@ interface PublishOptions {
   readonly runCommand?: typeof run;
 }
 
-export function contentType(key: string): string {
-  return key.endsWith(".json") ? "application/json" : "application/octet-stream";
-}
+/** One owner of the published media types (publish-verification.ts). */
+export const contentType = expectedContentType;
 
 function run(command: string, args: readonly string[]): Promise<void> {
   return new Promise((accept, reject) => {
@@ -142,8 +141,10 @@ export async function publishAssets(assets: readonly PublishAsset[], options: Pu
   for (const asset of misses) await requireLocalAsset(asset);
   console.log(`${assets.length - misses.length} already published; uploading ${misses.length} miss(es).`);
   const stillMissing = (batch: readonly PublishAsset[]) => findMisses(batch, fetcher);
-  await bulkPut(misses.filter(a => a.key.endsWith(".json")), "application/json", runCommand, stillMissing);
-  await bulkPut(misses.filter(a => !a.key.endsWith(".json")), "application/octet-stream", runCommand, stillMissing);
+  // A bulk upload carries one media type, so each type uploads on its own.
+  for (const type of new Set(misses.map(asset => contentType(asset.key)))) {
+    await bulkPut(misses.filter(asset => contentType(asset.key) === type), type, runCommand, stillMissing);
+  }
   // A key that was just written can briefly HEAD as missing on some edge before R2 finishes propagating it
   // (observed: a fresh write not yet visible seconds later). Retry the whole HEAD + byte verification pass a
   // few times with backoff before treating a miss as real; the check itself never loosens.

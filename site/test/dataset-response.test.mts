@@ -6,7 +6,7 @@ import { parseHTML } from 'linkedom';
 import { initialObjectSelection, loadPreparedCssObject, loadPreparedDataset, omittedPreparedNodes, selectedPreparedVariant } from '@cssearth/renderer';
 import { readPreparedDatasetBytes, readPreparedObjectBytes } from '../object-page-data.mts';
 import { preparedObjectPath } from '../prepared-object-path.mts';
-import { renderDatasetResponse } from '../dataset-response.mts';
+import { UnreadableSavedView, renderDatasetResponse } from '../dataset-response.mts';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import { handleSearchRequest } from '../server/search-response.mts';
 import searchRoute from '../server/search-route.mts';
@@ -63,6 +63,12 @@ test('invalid requests and corrupt prepared bytes cannot publish another dataset
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', corrupt), /hash|digest|identity/i);
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'earth', read), /identity/);
 });
+test('a saved view that reads but names no camera the scene can take is answered like an unreadable one', async () => {
+  // Written by the app after a drifted camera (2026-10-01): its rotation is not orthonormal, and the function answered 502.
+  const view = 'USO-LVLcltOqqz4XrhR64UeuwOjqIxJul5dBQsczQAAAAEAItQrAPK0yv5m2aZdvmLK_77UVFXayRL_A-Ca1JqZrv9gCXYyBU04_wO37ituYMr_tXAMurmOjP-2m68lngwQ_m1Y7vtPxY7_YAJKURpBfAAA';
+  await assert.rejects(renderDatasetResponse(html, new URL(`/saturn/?v=${view}`, origin), 'saturn', read), UnreadableSavedView);
+});
+
 test('a billboard startup page takes the selected scene and its prepared mark', async () => {
   // ObjectLayout ships an empty stage without data-prepared-object when the object has an arrival billboard.
   const stage = `<main class="object-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" aria-label="Saturn">${scene.html}</main>`;
