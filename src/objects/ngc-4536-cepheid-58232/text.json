@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-4536-cepheid-58232",
+  "card": {
+    "text": "A Cepheid in the galaxy NGC 4536, 15 million parsecs away, that swells and shrinks every 21.9 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016)",
+        "checked": "2026-10-01",
+        "locator": "table 5, Gal N4536, ID 58232: Per; Riess et al. (2016), ApJ 826, 56, table 5, N4536: mu_Ceph"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Hubble Space Telescope found it and timed its pulsation at 21.9 days. Its galaxy's distance, 15.2 million parsecs, was measured from Cepheids like it.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016)",
+        "checked": "2026-10-01",
+        "locator": "table 5, Gal N4536, ID 58232: Per; Riess et al. (2016), ApJ 826, 56, table 5, N4536: mu_Ceph"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4365-ac6c05",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Koss et al. (2022): BASS. XXII. The BASS DR2 AGN Catalog and Data",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2207.12432"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ac6c05"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022ApJS..261....2K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ac6c05",
+      "label": "The Astrophysical Journal Supplement Series 261 2"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K",
+      "checkedOn": "2026-10-01",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Koss et al. (2022), The Astrophysical Journal Supplement Series 261 2",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 261 2",
+  "creators": [
+    "Michael J. Koss",
+    "Claudio Ricci",
+    "Benny Trakhtenbrot",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}
