@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { assetHashSplit, assetShaMap } from '../asset-origin.mts';
+import { assetHashSplit, assetShaMap, resolveWorldBillboards } from '../asset-origin.mts';
 
 test('an object without inventory.json has an empty asset map', async () => {
   const root = await mkdtemp(join(tmpdir(), 'asset-origin-'));
@@ -58,4 +58,27 @@ test('a resource the inventory does not publish fails the build, naming the obje
   await writeFile(join(root, 'src/objects/globe/prepared/runtime.json'), JSON.stringify({ assets: { startup: [],
     entries: [{ key: 'page:normal:3:level:2048', url: '/scenes/globe/page-3.webp', pool: 'pages' }] } }));
   await assert.rejects(assetHashSplit('globe', root), /globe: resource page:normal:3:level:2048 names page-3\.webp, which inventory\.json does not publish/);
+});
+
+test('a world file gives the photographs it draws their published address, and plain dots none', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'asset-origin-world-'));
+  const sha = 'a'.repeat(64);
+  for (const id of ['drawn', 'dot']) {
+    await mkdir(join(root, `src/objects/${id}`), { recursive: true });
+    await writeFile(join(root, `src/objects/${id}/inventory.json`), JSON.stringify({ schema: 'cssearth-inventory@1',
+      assets: [{ location: 'public', filename: `${id}-billboard.webp`, bytes: 1, sha256: sha }] }));
+  }
+  const world = JSON.stringify({ bodies: { id: ['drawn', 'dot', 'bare'], billboard: [{}, {}, null], plainDot: [null, true, null] } });
+  const noColumn = JSON.stringify({ bodies: { id: ['bare'] } });
+  const previous = process.env.ASSET_ORIGIN;
+  try {
+    delete process.env.ASSET_ORIGIN;
+    assert.equal(await resolveWorldBillboards(world, root), world, 'without an asset origin the file is served as written');
+    process.env.ASSET_ORIGIN = 'https://assets.example';
+    assert.deepEqual(JSON.parse(await resolveWorldBillboards(world, root)).bodies.billboard,
+      [{ url: `https://assets.example/runtime-assets/${sha}/drawn-billboard.webp` }, {}, null]);
+    assert.equal(await resolveWorldBillboards(noColumn, root), noColumn, 'a system without photographs has no column');
+  } finally {
+    if (previous === undefined) delete process.env.ASSET_ORIGIN; else process.env.ASSET_ORIGIN = previous;
+  }
 });
