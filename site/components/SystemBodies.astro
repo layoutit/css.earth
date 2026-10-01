@@ -1,6 +1,6 @@
 ---
 import { SCENE_OBJECTS } from '../objects.mts';
-import { SOLAR_SYSTEM_ID, systemById } from '../object-systems.mts';
+import { SOLAR_SYSTEM_ID, listedInSystemCard, systemById } from '../object-systems.mts';
 import ObjectResult from './ObjectResult.astro';
 import ObjectFactsheet from './ObjectFactsheet.astro';
 import InformationTabs from './InformationTabs.astro';
@@ -14,7 +14,7 @@ const objects = new Map(SCENE_OBJECTS.map(object => [object.id, object]));
 const solar = systemId === SOLAR_SYSTEM_ID;
 const bodies = [system.id, ...system.memberIds].flatMap(id => {
   const object = objects.get(id);
-  return object ? [object] : [];
+  return object && listedInSystemCard(object, system.id) ? [object] : [];
 }).sort((a, b) => {
   // The Solar System starts with planets; retain search's distance order within each group.
   const planetOrder = solar ? Number(b.classification === 'planet') - Number(a.classification === 'planet') : 0;

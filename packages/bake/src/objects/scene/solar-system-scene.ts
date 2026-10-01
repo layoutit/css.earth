@@ -2,7 +2,10 @@ import type {BodyId} from '@cssearth/astronomy';
 import type {PreparedCubicSkyPlan} from '../../presentation/index.ts';
 import {requireFiniteNumber} from '@cssearth/core';
 import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
-interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;}
+interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;
+  /** The closest framing, in the default framing's units (4 unless the body says otherwise). A black hole stops at its
+   * default framing: closer, its shadow fills the view and the ring around it leaves the frame. */
+  maximumZoom?:number;}
 interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'initialScenePitchDegrees'|'defaultControlYawDegrees'> {bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan;
   /** What lights the body's map: the Sun, the body itself (a placed star) or its host star (a planet of another star). */
   light?:'sun'|'self'|'host';}
@@ -27,8 +30,9 @@ const RESPONSIVE_FIT = Object.freeze({
 
 export function prepareSolarSystemCamera({
   bodyRadiusUnits, defaultZoom, skyProjection, geometryScale = 1,
-  initialScenePitchDegrees, defaultControlYawDegrees,
+  initialScenePitchDegrees, defaultControlYawDegrees, maximumZoom = 4,
 }:SolarCameraOptions) {
+  if (!Number.isFinite(maximumZoom) || maximumZoom < defaultZoom) throw new TypeError(`Physical camera's closest framing ${maximumZoom} is not at or beyond its default framing ${defaultZoom}.`);
   if (!(bodyRadiusUnits > 0) || !Number.isFinite(bodyRadiusUnits) ||
       !(defaultZoom > 0) || !Number.isFinite(defaultZoom) ||
       !(geometryScale > 0) || !Number.isFinite(geometryScale) ||
@@ -45,7 +49,7 @@ export function prepareSolarSystemCamera({
       rotY: defaultControlYawDegrees, zoom: defaultZoom, distance: 0 }),
     minimumControlPitchDegrees: 0, maximumControlPitchDegrees, defaultControlPitchDegrees,
     defaultControlYawDegrees, initialScenePitchDegrees, maximumScenePitchDegrees,
-    minimumZoom: 0.42, maximumZoom: 4, defaultZoom,
+    minimumZoom: 0.42, maximumZoom, defaultZoom,
     logicalBodyDiameter: bodyRadiusUnits * 2, responsiveFit: RESPONSIVE_FIT,
     sceneScale: geometryScale / 50, horizontalOrbit: true, pitchBounded: false,
     yawBounded: false, cameraModel: "accumulated-matrix3d",
@@ -106,12 +110,12 @@ function unitVector(direction: readonly number[]): Vector3 {
 
 export async function prepareSolarSystemScene(solarGeometry: SolarGeometry, options:SolarSceneOptions) {
   refuseAuthoredCameraAngles(options);
-  const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, geometryScale = 1, light = 'sun' } = options;
+  const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, geometryScale = 1, light = 'sun', maximumZoom } = options;
   const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
   const { initialScenePitchDegrees, defaultControlYawDegrees } = prepareDefaultCameraAngles(solarGeometry, bodyId, { light });
   const registration = prepareAstrometricSkySceneRegistration(solarGeometry, bodyId);
   if(!starfield.projection)throw new TypeError("Physical sky requires its prepared projection.");
-  const camera = prepareSolarSystemCamera({ bodyRadiusUnits, defaultZoom, geometryScale,
+  const camera = prepareSolarSystemCamera({ bodyRadiusUnits, defaultZoom, geometryScale, maximumZoom,
     initialScenePitchDegrees, defaultControlYawDegrees, skyProjection: {...starfield.projection,focalLengthOverViewportWidth:requireFiniteNumber(starfield.projection.focalLengthOverViewportWidth)} });
   return Object.freeze({
     camera, systemTransform: frame.cssTransform,

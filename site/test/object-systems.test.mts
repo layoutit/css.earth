@@ -114,3 +114,11 @@ test("every system's overview lasts two doublings of distance before its orbits 
   }
   assert.ok(systemById(SCENE_OBJECTS, 'sgr-a-star')!.exitDistanceM < 0.8 * 9.4607e15, 'Sgr A* opens at 0.8 ly, not the scaled 3.6 ly');
 });
+
+test("a system's card lists its star, its planets and its featured bodies", async () => {
+  const { listedInSystemCard } = await import('../object-systems.mts');
+  const body = (id: string, classification: string, featured: boolean) => ({ id, classification, discovery: { featured } });
+  assert.deepEqual([body('sun', 'star', false), body('neptune', 'planet', false), body('trappist-1b', 'exoplanet', false), body('ceres', 'dwarf-planet', true),
+    body('asteroid-1998-wt24', 'asteroid', false), body('hyperion', 'satellite', false)].filter(object => listedInSystemCard(object, 'sun')).map(object => object.id),
+  ['sun', 'neptune', 'trappist-1b', 'ceres']);
+});

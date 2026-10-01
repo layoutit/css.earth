@@ -129,12 +129,21 @@ export function mountObjectShell({
       const overview = selected?.kind === 'overview' ? knownObject(overviewPage(objectId, selected.overview.scope) ?? '') : undefined;
       return overview?.kind === 'overview' ? { id: overview.id, seo: objectSeo(overview) } : null;
     };
-    const leftPage = presentedSubject?.kind === 'focus' || drawnPage(presentedSubject) !== null;
+    // Another star's scene zoomed out to an overview keeps its own address (a reload reopens that scene), but the tab
+    // names what the card shows: the Milky Way from the ε Eridani system was still titled "ε Eridani" (2026-10-01).
+    const titledOverview = (selected: typeof subject | null) => {
+      if (selected?.kind !== 'overview' || selected.overview.scope === 'system' || drawnPage(selected)) return null;
+      const overview = knownObject(selected.overview.scope), scene = knownObject(objectId);
+      return overview?.kind === 'overview' && scene?.kind === 'scene' ? { route: scene.route, seo: { ...objectSeo(scene), title: objectSeo(overview).title } } : null;
+    };
+    const leftPage = presentedSubject?.kind === 'focus' || drawnPage(presentedSubject) !== null || titledOverview(presentedSubject) !== null;
     presentedSubject = subject;
     const focus = subject.kind === 'focus' ? subject : null, page = drawnPage(subject);
     // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
     // (object-browser.mts bindObject).
+    const titled = titledOverview(subject);
     if (page) presentPage(`/${page.id}/`, page.seo);
+    else if (titled) presentPage(titled.route, titled.seo);
     // A focus whose record is still loading is already this page's subject: its head waits for the record.
     else if (leftPage && !focus) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
