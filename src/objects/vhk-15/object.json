@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "vhk-15",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "VHK 15",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 141366240
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/vhk-15-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "VHK 15",
+      "classification": "star",
+      "color": "#ffe3c8",
+      "distanceAu": 173310702204,
+      "description": "A Cepheid in the Triangulum Galaxy, 840 kiloparsecs away, that swells and shrinks every 50.0 days.",
+      "systemName": "VHK 15 system",
+      "aliases": [
+        "M33SSS J013359.47+303226.6"
+      ],
+      "order": 5278,
+      "context": {
+        "order": 5275
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.0478348731183893e+22,
+        8.903240742951463e+21,
+        1.3174760125731615e+22
+      ],
+      "presentationToReference": [
+        0.7898491234122236,
+        0.46601237942202545,
+        0.3987114551531776,
+        0.3433976532316652,
+        0.20260522260136665,
+        -0.9170764284014914,
+        0.5081499916362561,
+        -0.8612685910911142,
+        3.111521303720477e-17
+      ],
+      "orbitUpReference": [
+        -0.46601237942202545,
+        -0.20260522260136665,
+        0.8612685910911142
+      ],
+      "metersPerUnit": 456020129.0322581,
+      "bodyRadiusM": 141366240000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "source-m33sss-j013330-80-303111-3-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M33SSS J013330.80+303111.3 · m33sss j013330 80 303111 3 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m33sss-j013330-80-303111-3/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Breuval et al. (2023), ApJ 951, 118, table 9; VizieR J/ApJ/951/118/table9 (CDS)",
+      "scope": "The m33sss j013330 80 303111 3 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

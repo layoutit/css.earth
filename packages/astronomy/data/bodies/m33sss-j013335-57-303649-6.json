@@ -1,0 +1,30 @@
+{
+ "id": "m33sss-j013335-57-303649-6",
+ "classification": "star",
+ "order": 5220,
+ "physical": {
+  "name": "M33SSS J013335.57+303649.6",
+  "horizonsCode": null,
+  "meanRadiusKm": 46472760,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5300
+ },
+ "physicalNotes": "Radius 66.8 +/- 11.1 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 10.69 d in Breuval et al. (2023), ApJ 951, 118, table 9 (log P 1.029); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186): 46,472,760 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5300 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 10.69 d in Breuval et al. (2023), ApJ 951, 118, table 9 (log P 1.029); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 23.39802,
+  "declinationDegrees": 30.61376,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 840234,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": -179.2,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Breuval et al. (2023), ApJ 951, 118, table 9 (https://arxiv.org/abs/2304.00037), VizieR J/ApJ/951/118/table9 row ID = 01333557+3036496: RAJ2000 23.39802, DEJ2000 30.61376, from the archived row src/objects/m33sss-j013335-57-303649-6/source/photometry/catalogue-row.tsv; SIMBAD names it M33SSS J013335.57+303649.6",
+   "distance": "Breuval et al. (2023), ApJ 951, 118, abstract: M33's Cepheid distance modulus 24.622 +/- 0.03 mag, 10^(mu/5 + 1) pc (https://arxiv.org/abs/2304.00037): 840234 +/- 11608 pc; Gaia DR3 cannot see the star",
+   "properMotion": "J/ApJ/951/118/table9 row ID = 01333557+3036496 measures no proper motion; zero is assumed (at 840,234 pc, 1 mas/yr would be 3,983 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity of M33, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract)"
+  }
+ }
+}

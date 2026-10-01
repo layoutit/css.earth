@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "vhk-38",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "VHK 38",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 85501530
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/vhk-38-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "VHK 38",
+      "classification": "star",
+      "color": "#ffe6d0",
+      "distanceAu": 173310702204,
+      "description": "A Cepheid in the Triangulum Galaxy, 840 kiloparsecs away, that swells and shrinks every 24.9 days.",
+      "systemName": "VHK 38 system",
+      "aliases": [
+        "M33SSS J013401.23+303113.5"
+      ],
+      "order": 5283,
+      "context": {
+        "order": 5280
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.0481490347403566e+22,
+        8.907718055076891e+21,
+        1.3166847726543035e+22
+      ],
+      "presentationToReference": [
+        0.7899702954290581,
+        0.4657066324685214,
+        0.3988286158421389,
+        0.343570342988244,
+        0.2025430429155659,
+        -0.9170254822988528,
+        0.5078448107036905,
+        -0.8614485755060094,
+        3.10965260945934e-17
+      ],
+      "orbitUpReference": [
+        -0.4657066324685214,
+        -0.2025430429155659,
+        0.8614485755060094
+      ],
+      "metersPerUnit": 275811387.0967742,
+      "bodyRadiusM": 85501530000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

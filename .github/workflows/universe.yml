@@ -330,14 +330,15 @@ jobs:
         run: |
           if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
           node .github/scripts/ci/build-ci.mts full
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: prepared-cache
         with:
-          # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
-          path: |
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
-          restore-keys: prepared-json-v1-
+          # Every prepared file of every object, not texture banks. Caching two file names of them left each job to
+          # read 47,000 to 54,000 files from R2: three jobs a run, 93 runs on 2026-10-01, 23 million billed reads that
+          # day. The installer below still checks every pin and fetches only what this checkout changed.
+          path: src/objects/*/prepared
+          key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
+          restore-keys: prepared-files-v2-
       - name: Restore prepared assets and object JSON
         # Every object's JSON remains SHA-verified. Only tests that consume real prepared images restore them;
         # application texture banks are not inputs to these runtime and renderer assertions.
@@ -356,6 +357,13 @@ jobs:
           # assets replaces the context the first build wrote: generate them again from this checkout (packages are cached).
           node .github/scripts/ci/build-ci.mts full
           node site/build/prepare/prepare-feature-index.mts
+      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        # Main saves the restored files once per inventory state; pull requests read main's copy and never save their
+        # own (a few of those would fill the repository's 10 GB of cache).
+        if: ${{ github.event_name == 'push' && env.CI_LANE_SKIP != 'true' && steps.prepared-cache.outputs.cache-hit != 'true' }}
+        with:
+          path: src/objects/*/prepared
+          key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
       - name: Test the selected folder lane
         # The packages lane tests the packages this change can break (all of them on a push); `test:site` runs site/, src/,
         # integration/ and .github/. A test whose restored input this job leaves out skips through sourceTest() and names it.
@@ -439,14 +447,12 @@ jobs:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: node .github/scripts/ci/build-ci.mts full
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
-          path: |
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
-          restore-keys: prepared-json-v1-
+          # The prepared files main last saved (the lane job above saves them); this job fetches only what differs.
+          path: src/objects/*/prepared
+          key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
+          restore-keys: prepared-files-v2-
       - name: Restore only the inputs consumed by preparation tests
         run: node .github/scripts/ci/prepare-ci-inputs.mts universe-preparation
       - name: Test the selected preparation lane

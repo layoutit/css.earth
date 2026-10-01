@@ -131,6 +131,10 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
       ? worldCameraFromCenteredPresentation({ rotation, distanceUnits: detailState().distance }, frame, optics())
       : worldCameraFromPresentation({ rotation, bodyCenterUnits }, frame, projectionScale);
   }
+  /** Whether a world camera sits inside this body: a flight to something behind the body passes through it. */
+  function contains(world: WorldCameraPose, frame: PreparedWorldCameraFrame) {
+    return Math.hypot(...presentWorldCamera(world, frame, optics()).bodyCenterUnits) <= bodyRadius;
+  }
   function adopt(world: WorldCameraPose, frame: PreparedWorldCameraFrame) {
     projectionScale = cameraProjectionScale(world.projectionScale);
     const presentation = presentWorldCamera(world, frame, optics());
@@ -182,7 +186,7 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
         controlPitch: inputState().rotX, controlYaw: inputState().rotY, zoom: inputState().zoom,
         sunDirection: orientation.sunViewDirection(), counterRotationFor: orientation.captureCounterRotation() };
     },
-    adopt,
+    adopt, contains,
   });
 }
 function add(a: PositionM, b: PositionM): PositionM { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }

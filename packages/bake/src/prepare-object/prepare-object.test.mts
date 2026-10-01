@@ -35,6 +35,16 @@ test('several objects run each tool once: the id-list tools take every id, the a
   assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'site/build/prepare/prepare-object-json.mts', 'sun'], ['node', 'site/build/prepare/prepare-catalog.mts']]);
 });
 
+test('a site that does not know a new object stops the billboard step before any page is photographed', async () => {
+  const { createServer } = await import('node:http'), billboard = PREPARATION_STEPS.find(step => step.name === 'billboard')!;
+  const server = createServer((request, response) => { response.statusCode = request.url === '/' ? 200 : 404; response.end(); });
+  await new Promise<void>(done => server.listen(0, '127.0.0.1', done));
+  const address = server.address(), previous = process.env.CSSEARTH_BILLBOARD_ORIGIN;
+  process.env.CSSEARTH_BILLBOARD_ORIGIN = `http://127.0.0.1:${typeof address === 'object' && address ? address.port : 0}`;
+  try { await assert.rejects(billboard.commands(['new-star']), /does not know new-star \(404 for \/new-star\/\).*Restart it/u); }
+  finally { server.close(); if (previous === undefined) delete process.env.CSSEARTH_BILLBOARD_ORIGIN; else process.env.CSSEARTH_BILLBOARD_ORIGIN = previous; }
+});
+
 test('every baked body gets its arrival billboard before the world files read the catalogue, from a site that must answer', async () => {
   const order = PREPARATION_STEPS.map(step => step.name), billboard = PREPARATION_STEPS.find(step => step.name === 'billboard')!;
   assert.ok(order.indexOf('billboard') > order.indexOf('page') && order.indexOf('billboard') < order.indexOf('world'));

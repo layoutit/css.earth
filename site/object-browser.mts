@@ -93,7 +93,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   });
   lifetime.onDispose(() => features?.destroy());
   const results = createSearchClient({ documentTarget, windowTarget, resultsPanel, lifetime,
-    readObjectId: () => documentTarget.body.dataset.objectShell || readObjectId(),
+    // The body on stage, not the page first loaded: a search on Phobos reached from Earth asked about Earth's features.
+    readObjectId: () => documentTarget.querySelector<HTMLElement>('.object-stage')?.dataset.objectId || documentTarget.body.dataset.objectShell || readObjectId(),
     onResults(outcome: SearchOutcome | null) {
       if (!showingSearchResults) return;
       // A failed search shows its retry line, never "No matching results".
@@ -217,6 +218,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       closeKeepingFocus();
     }, { signal: events.signal });
   }
+  search.addEventListener("focus", () => results.warm(), { once: true, signal: events.signal });
   search.addEventListener("input", () => {
     if (search.value.trim().length < SEARCH_SUGGESTION_MIN_CHARACTERS) setOpen(false);
     else showResults();

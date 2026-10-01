@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m33sss-j013406-60-303816-7",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M33SSS J013406.60+303816.7",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 39724470
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/m33sss-j013406-60-303816-7-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M33SSS J013406.60+303816.7",
+      "classification": "star",
+      "color": "#ffecdd",
+      "distanceAu": 173310702204,
+      "description": "A Cepheid in the Triangulum Galaxy, 840 kiloparsecs away, that swells and shrinks every 8.59 days.",
+      "systemName": "M33SSS J013406.60+303816.7 system",
+      "order": 5300,
+      "context": {
+        "order": 5297
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.0453205172618554e+22,
+        8.904905540421537e+21,
+        1.3212638734803842e+22
+      ],
+      "presentationToReference": [
+        0.7888793373248301,
+        0.46724692530193895,
+        0.3991862997872314,
+        0.3434618644060946,
+        0.20342971669967708,
+        -0.9168698370336864,
+        0.5096109681321886,
+        -0.8604049402225521,
+        3.120467204667343e-17
+      ],
+      "orbitUpReference": [
+        -0.46724692530193895,
+        -0.20342971669967708,
+        0.8604049402225521
+      ],
+      "metersPerUnit": 128143451.61290322,
+      "bodyRadiusM": 39724470000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

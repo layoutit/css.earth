@@ -63,6 +63,13 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     const origin = billboardOrigin();
     // A dev server's first request compiles the page: it took over 5 s right after a restart (2026-09-27), so wait up to a minute.
     if (!await fetch(origin, { signal: AbortSignal.timeout(60_000) }).then(response => response.ok, () => false)) throw new Error(`No site answers at ${origin}: start it with pnpm dev (or set CSSEARTH_BILLBOARD_ORIGIN), then resume from the billboard step.`);
+    // A dev server started before these objects existed answers 404 for their pages, and each then waits out the renderer's 30 s
+    // before failing: 154 new stars lost an hour that way (2026-10-01). Ask for the first and last page before photographing any.
+    for (const id of new Set([ids[0], ids.at(-1)])) {
+      if (id === undefined) continue;
+      const status = await fetch(new URL(`/${id}/`, origin), { signal: AbortSignal.timeout(120_000) }).then(response => response.status, () => 0);
+      if (status === 404) throw new Error(`The site at ${origin} does not know ${id} (404 for /${id}/): it was started before the object existed. Restart it, then resume from the billboard step.`);
+    }
     return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/prepare-catalog.mts')];
   } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },

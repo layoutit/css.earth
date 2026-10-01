@@ -1,0 +1,66 @@
+{
+  "id": "vhk-30",
+  "name": "VHK 30",
+  "system": "VHK 30 system",
+  "description": "A Cepheid in the Triangulum Galaxy that pulsates every 46.0 days.",
+  "aliases": [
+    "M33SSS J013329.23+303744.9"
+  ],
+  "target": "M33SSS J013329.23+303744.9",
+  "paper": {
+    "url": "https://arxiv.org/abs/2304.00037",
+    "credit": "Breuval et al. (2023), ApJ 951, 118"
+  },
+  "radius": {
+    "value": 191.4,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 46.03 d in Breuval et al. (2023), ApJ 951, 118, table 9 (log P 1.663); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 31.9
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4820,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 46.03 d in Breuval et al. (2023), ApJ 951, 118, table 9 (log P 1.663); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": -179.2,
+    "source": "SIMBAD's radial velocity of M33, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract",
+    "uncertainty": 1.7
+  },
+  "distance": {
+    "value": 840234,
+    "source": "Breuval et al. (2023), ApJ 951, 118, abstract: M33's Cepheid distance modulus 24.622 +/- 0.03 mag, 10^(mu/5 + 1) pc",
+    "url": "https://arxiv.org/abs/2304.00037",
+    "uncertainty": 11608
+  },
+  "position": {
+    "catalogue": "J/ApJ/951/118/table9",
+    "row": {
+      "ID": "01332923+3037449"
+    },
+    "credit": "Breuval et al. (2023), ApJ 951, 118, table 9",
+    "url": "https://arxiv.org/abs/2304.00037"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Triangulum Galaxy, 840 kiloparsecs away, that swells and shrinks every 46.0 days.",
+    "introduction": "The Hubble Space Telescope measured its brightness in three colours; its pulsation takes 46.0 days. Its galaxy's distance, 840 kiloparsecs, was measured from Cepheids like it.",
+    "locator": "table 9, ID 01332923+3037449: logP; Breuval et al. (2023), ApJ 951, 118: mu"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M33 is not measured"
+  ],
+  "order": 5201
+}

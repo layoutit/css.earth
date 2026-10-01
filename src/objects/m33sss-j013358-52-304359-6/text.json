@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m33sss-j013358-52-304359-6",
+  "card": {
+    "text": "A Cepheid in the Triangulum Galaxy, 840 kiloparsecs away, that swells and shrinks every 11.1 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2304-00037",
+        "url": "https://arxiv.org/abs/2304.00037",
+        "label": "Breuval et al. (2023), ApJ 951 118 2023",
+        "checked": "2026-10-01",
+        "locator": "table 9, ID 01335852+3043596: logP; Breuval et al. (2023), ApJ 951, 118: mu"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Hubble Space Telescope measured its brightness in three colours; its pulsation takes 11.1 days. Its galaxy's distance, 840 kiloparsecs, was measured from Cepheids like it.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2304-00037",
+        "url": "https://arxiv.org/abs/2304.00037",
+        "label": "Breuval et al. (2023), ApJ 951 118 2023",
+        "checked": "2026-10-01",
+        "locator": "table 9, ID 01335852+3043596: logP; Breuval et al. (2023), ApJ 951, 118: mu"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

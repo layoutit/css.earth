@@ -26,6 +26,12 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
     if (system) {
       const outside = distance(selected.originM, system.originM);
       const exit = outside >= system.exitDistanceM ? outside + system.exitDistanceM : system.exitDistanceM;
+      // A camera as far from the body as its star is has left the body for its system: from there the star is as near as
+      // the body, and the system is what the view shows. Earth kept its "Earth–Moon system" card out to 100 au, with
+      // the whole Solar System on screen from 40 (2026-10-01). The star itself keeps the exit distance.
+      // A body still drawn as a disc keeps its card: a hot Jupiter a few stellar radii out is 60 px wide from there.
+      const range = distance(world.pose.positionM, selected.originM);
+      if (outside > 0 && range >= outside && 2 * selected.bodyRadiusM / range * viewport.focalPixels < policy.exitBodyDiameterPixels) return { overview: true, objectId: system.id };
       return distance(world.pose.positionM, system.originM) >= exit ? { overview: true, objectId: system.id } : null;
     }
     // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
