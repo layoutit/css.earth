@@ -2,6 +2,18 @@
 
 Tools that record and read performance evidence from the running application: iOS Simulator and iPad WebKit captures, and Chrome traces from `navigation-capture.mts`. Processing is local. Run the tooling checks with `node --test "labs/performance/*.test.mts"`.
 
+## Cold tests
+
+A cold test of first-visit bytes and load time needs a production build, but only of the pages it opens. `CSSEARTH_BUILD_PAGES` names them, comma-separated as `/` and `/<id>/`:
+
+```sh
+ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm prepare:catalog
+ASSET_ORIGIN=https://earth-assets.lowpoly.cc CSSEARTH_BUILD_PAGES=/,/earth/ pnpm exec astro build
+pnpm preview --host 0.0.0.0
+```
+
+The build prerenders those pages and the navigation fragment, first view and prepared object of the scenes they mount; every other data route and fragment still builds. On 2026-09-30 it took 146 s against 318 s for every page: prerendering fell from 3 min 22 s to 19 s, and the remaining time is bundling. The bundles and every file it writes match the full build's byte for byte. A link to a page it did not build answers 404, and a name that is not an object's page stops the build. Unset, every page builds.
+
 ## iOS Simulator
 
 `ios-capture.mts` records one moment of the site in Safari on the booted iOS Simulator:

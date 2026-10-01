@@ -1,8 +1,10 @@
 ---
 import ObjectPage from '../../components/ObjectPage.astro';
-import { SCENE_OBJECTS } from '../../objects.mts';
+import { OBJECTS, SCENE_OBJECTS } from '../../objects.mts';
+import { ROOT_OBJECT_ID } from '../../root-object.mts';
+import { builtScenePaths } from '../../build/built-pages.mts';
 export function getStaticPaths() {
-  return SCENE_OBJECTS.map(({ id }) => ({ params: { id } }));
+  return builtScenePaths(SCENE_OBJECTS.map(({ id }) => ({ params: { id } })), OBJECTS, ROOT_OBJECT_ID);
 }
 ---
 <ObjectPage objectId={Astro.params.id!} navigation />

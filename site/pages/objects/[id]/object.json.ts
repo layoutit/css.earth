@@ -1,8 +1,10 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { SCENE_OBJECTS } from '../../../objects.mts';
+import { OBJECTS, SCENE_OBJECTS } from '../../../objects.mts';
+import { ROOT_OBJECT_ID } from '../../../root-object.mts';
+import { builtScenePaths } from '../../../build/built-pages.mts';
 import { readPreparedObjectBytes } from '../../../object-page-data.mts';
 
-export const getStaticPaths: GetStaticPaths = async () => SCENE_OBJECTS.map(({ id }) => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = async () => builtScenePaths(SCENE_OBJECTS.map(({ id }) => ({ params: { id } })), OBJECTS, ROOT_OBJECT_ID);
 
 export const GET: APIRoute = async ({ params }) => {
   if (typeof params.id !== 'string' || !SCENE_OBJECTS.some(object => object.id === params.id)) {
