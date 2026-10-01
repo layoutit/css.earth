@@ -6,7 +6,7 @@ import { renderNativeFocus } from './focus-response.mts';
 import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
-import { preparedObjectPath } from './prepared-object-path.mts';
+import { preparedObjectUrl } from './prepared-object-path.mts';
 import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
 
 function region(html: string, name: string) {
@@ -61,7 +61,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     return response.arrayBuffer();
   };
   const definition = await loadPreparedCssObject(descriptor, {
-    read: reference => read(`/objects/${objectId}/${preparedObjectPath(reference)}`),
+    read: reference => read(preparedObjectUrl(objectId, reference)),
   });
   if (definition.id !== objectId) throw new Error('Prepared dataset object identity drifted.');
   const feature = featureIds.length && definition.features ? await loadPreparedSurfaceFeature(definition.features, objectId, featureIds[0]!,

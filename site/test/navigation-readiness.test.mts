@@ -24,7 +24,24 @@ test('a delayed entry cannot start a flight after a newer selection', async () =
   assert.equal(await second, ready);
   entry.resolve(true);
   assert.equal(await first, null);
-  assert.deepEqual(systemReads, [], 'stale selection does not start another load');
+  assert.deepEqual(systemReads, ['mars'], 'the entry and the system view are read at once; venus hosts no system view');
+});
+
+test('the entry and the system view are requested together, not one after the other', async () => {
+  const entry = deferred<boolean>(), system = deferred<void>(), started: string[] = [], ready = { id: 'world' };
+  const navigation = createNavigationReadiness({
+    context: async () => ready,
+    knownObject: () => false,
+    loadObject: async () => { started.push('entry'); return entry.promise; },
+    systemViewLoaded: () => false,
+    loadSystemView: async () => { started.push('system'); return system.promise; },
+  });
+  const pending = navigation.prepare('mars', true);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.deepEqual(started, ['entry', 'system']);
+  system.resolve();
+  entry.resolve(true);
+  assert.equal(await pending, ready);
 });
 
 test('a late system-view failure is ignored after supersession; the current failure propagates', async () => {

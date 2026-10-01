@@ -33,9 +33,19 @@ test('site chains restore prepared assets before discovery reads them, and a dep
     const catalogue = commands.indexOf('node site/build/prepare/prepare-catalog.mts');
     assert.ok(restore >= 0 && restore < catalogue, `${name}: first restore at step ${restore}, catalogue at step ${catalogue}`);
   }
-  // The deploy bundles the published world context, so it restores once and never regenerates the world. A copy made on
-  // the runner differs from the published bytes, and restoring over it re-hashed every restored file.
-  const deploy = expandScriptChain(scripts, 'build:deploy').map(step => step.command);
-  assert.equal(deploy.findIndex(command => command.includes('prepare-spatial-context')), -1, 'build:deploy regenerates the world context');
-  assert.equal(deploy.filter(command => command === 'node packages/bake/cli/setup-assets.mts').length, 1, 'build:deploy restores once');
+  // A production build bundles the published world context, so it restores once and never regenerates the world. A copy
+  // made on the runner differs from the published bytes, and restoring over it re-hashed every restored file.
+  for (const name of ['build:prepare', 'build:deploy']) {
+    const commands = expandScriptChain(scripts, name).map(step => step.command);
+    assert.equal(commands.findIndex(command => command.includes('prepare-spatial-context')), -1, `${name} regenerates the world context`);
+    assert.equal(commands.filter(command => command === 'node packages/bake/cli/setup-assets.mts').length, 1, `${name} restores once`);
+  }
+});
+
+test('each step of a site chain runs once', async () => {
+  const scripts = (JSON.parse(await readFile(new URL('../../package.json', import.meta.url), 'utf8')) as { scripts: Record<string, string> }).scripts;
+  for (const name of ['dev:prepare', 'build:prepare', 'build:deploy']) {
+    const commands = expandScriptChain(scripts, name).map(step => step.command);
+    assert.deepEqual(commands.filter((command, index) => commands.indexOf(command) !== index), [], `${name} repeats a step`);
+  }
 });

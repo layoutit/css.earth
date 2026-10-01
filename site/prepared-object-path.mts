@@ -7,3 +7,8 @@ export function preparedObjectPath(reference: string) {
   if (dataset === undefined) throw new Error(`Prepared object asset is not available: ${reference}.`);
   return `datasets/${dataset}.json`;
 }
+
+/** Where a scene body's transport reference is served: `/objects/<id>/<path>`. */
+export function preparedObjectUrl(id: string, reference: string) {
+  return `/objects/${id}/${preparedObjectPath(reference)}`;
+}

@@ -104,7 +104,9 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$KIND" = volume ]; then
-            pnpm build:tools
+            # The install's postinstall (check-stale-builds --run) has built every workspace package; build:tools would
+            # build them all again before the same preparation.
+            pnpm prepare:tools
             object_type=$(node -e 'const {readFileSync}=require("node:fs");process.stdout.write(JSON.parse(readFileSync(process.argv[1],"utf8")).type)' "src/objects/$OBJECT/object.json")
             case "$object_type" in
               density-volume)

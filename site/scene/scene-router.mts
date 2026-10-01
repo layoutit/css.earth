@@ -39,7 +39,9 @@ import { watchSatelliteSelection } from '../satellite-selection.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { observeSceneRetirement } from './scene-memory.mts';
-import { releaseStartupRequests } from '../startup-requests.mts';
+import { releaseStartupRequests, startFlightRequest } from '../startup-requests.mts';
+import { navigationFragments } from '../navigation/navigation-fragments.mts';
+import { preparedObjectUrl } from '../prepared-object-path.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
@@ -389,7 +391,15 @@ export function createSceneRouter({
       // A page of something the world draws (a link or history entry) opens on its scene (navigation-scope.mts): an
       // overview's is the world's host, as zooming out reaches it; a catalogue focus is drawn by the mounted scene, or by
       // the host on the first mount.
-      const { registry } = await ensureContext();
+      const { registry, objects } = await ensureContext();
+      if (destroyed) return false;
+      // A flight to another body reads its entry, system view, card and object transport. All four start now, together:
+      // otherwise the system view waits for the entry, and the transport for the card (scene-transition.mts).
+      if (objects.some(object => object.id === id)) {
+        navigationFragments(windowTarget).prefetch(id);
+        startFlightRequest(preparedObjectUrl(id, 'prepared/object.json'));
+        if (intent.kind !== 'feature') void registry.loadSystemView(id).catch(() => {});
+      }
       const focus = !isOverviewPage(id) && (registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null))?.kind === 'prepared-focus';
       if (destroyed) return false;
       if (isOverviewPage(id)) id = WORLD_HOST_ID;
