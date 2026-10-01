@@ -1,6 +1,6 @@
 /** Manifest dependency cycles are separate from file imports: dev and peer dependencies also constrain
  * workspace build/install ordering. Record every directed elementary cycle, rotated to its smallest
- * name, and its SCC membership so an existing cycle cannot conceal a growing component. */
+ * name, and its SCC membership. Every cycle fails the architecture check without a baseline. */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
@@ -42,5 +42,9 @@ export function packageCycles(root: string, files: readonly string[]): PackageCy
   return cycles.sort((a, b) => byText(JSON.stringify(a.nodes), JSON.stringify(b.nodes)));
 }
 
-export const packageCycleKey = (cycle: PackageCycle): string => JSON.stringify(cycle.nodes);
 export const packageCycleText = (cycle: PackageCycle): string => [...cycle.nodes, cycle.nodes[0]].join(' -> ');
+
+/** Findings retain the directed cycle message; none can be baselined. */
+export function checkPackageCycles(root: string, files: readonly string[]): string[] {
+  return packageCycles(root, files).map(cycle => `workspace package cycle: ${packageCycleText(cycle)}`);
+}

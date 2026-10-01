@@ -20,7 +20,6 @@
       {"from":"site/navigation","to":"site/scene","imports":1}
     ]
   },
-  "packageCycles": [],
   "rules": {
     "authoring-is-leaf": [],
     "bake-nebula-and-objects-independent": [],
