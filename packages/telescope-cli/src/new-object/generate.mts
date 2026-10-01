@@ -12,7 +12,7 @@ import { bindInputs, installColorDataset, json } from './dataset.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
-import { citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
+import { CATALOGUE_ROW_REPLACEMENTS, citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchCatalogueRow, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, VIZIER_ASU, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import { chooseGravity } from './gravity.mts';
@@ -29,13 +29,18 @@ import { adql, csv, SIMBAD_TAP } from './companions.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
 const GAIA_LICENSE = { license: 'Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained', licenseEvidence: ['https://www.cosmos.esa.int/web/gaia-users/credits'] };
+const VIZIER_LICENSE = { license: 'CDS VizieR catalogue: free use with citation', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'] };
 const fixed = (value: number, digits: number) => Number(value.toFixed(digits));
+/** A star Gaia cannot see is placed by one row of a published catalogue (spec `position`) instead of its Gaia DR3 row. */
+const isCatalogue = (row: GaiaRow | CatalogueRow): row is CatalogueRow => 'catalogue' in row;
+/** Where a catalogue-placed star's archived row is kept, beside where a Gaia row would be. */
+export const CATALOGUE_ROW_PATH = 'photometry/catalogue-row.tsv';
 
 /** The star's physical values and the sentence that cites each. */
-export function physicalValues(spec: StarSpec, row: GaiaRow) {
+export function physicalValues(spec: StarSpec, row: GaiaRow | undefined) {
   const flame = (key: 'radiusFlame' | 'massFlame', label: string) => {
-    const value = row[key];
-    if (!value) throw new TypeError(`${spec.id}: the spec asks for the Gaia DR3 FLAME ${label}, and Gaia DR3 source ${row.sourceId} has none; cite a published value.`);
+    const value = row?.[key];
+    if (!value) throw new TypeError(`${spec.id}: the spec asks for the Gaia DR3 FLAME ${label}, and ${row ? `Gaia DR3 source ${row.sourceId} has none` : 'the star has no Gaia DR3 source'}; cite a published value.`);
     return { value: value[0], text: `${label} ${value[0].toFixed(3)} (${value[1].toFixed(3)} to ${value[2].toFixed(3)}) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source)` };
   };
   const cite = (value: Cited, label: string, unit: string) => ({ value: value.value, text: `${label} ${value.value}${value.uncertainty ? ` +/- ${value.uncertainty}` : ''} ${unit} from ${value.source} (${value.url})` });
@@ -65,9 +70,18 @@ export async function fallbackRadialVelocity(archive: Archive, sourceId: string,
  * this floor existed is CE Tauri's, 5.7 (2026-09-27). Below it, or with no parallax at all, the spec cites a distance. */
 export const PARALLAX_FLOOR_SIGMA = 5;
 /** Where a star is: its Gaia DR3 position, at the spec's cited distance or else at its parallax distance, with Gaia's proper motion, or
- * none for a two-parameter solution (a star in another galaxy, whose motion across the sky is negligible at that distance). */
-export function placement(spec: StarSpec, row: GaiaRow) {
+ * none for a two-parameter solution (a star in another galaxy, whose motion across the sky is negligible at that distance). A star Gaia
+ * cannot see sits at its catalogue row's J2000 position and the spec's cited distance, with no proper motion. */
+export function placement(spec: StarSpec, row: GaiaRow | CatalogueRow) {
   const fixedDigits = (value: number, digits: number) => value.toFixed(digits);
+  if (isCatalogue(row)) {
+    if (!spec.distance) throw new TypeError(`${spec.id}: ${row.words} gives a position, not a distance; give distance with its source.`);
+    const parsecs = spec.distance.value, kmPerSecondPerMas = 4.74047 * parsecs / 1000;
+    return { parsecs, source: `${spec.distance.source} (${spec.distance.url}): ${spec.distance.value}${spec.distance.uncertainty ? ` +/- ${spec.distance.uncertainty}` : ''} pc; Gaia DR3 cannot see the star`,
+      readme: `distance ${Math.round(parsecs).toLocaleString('en-US')} pc from ${spec.distance.source}`,
+      properMotion: { ra: 0, dec: 0, source: `${row.words} measures no proper motion; zero is assumed (at ${Math.round(parsecs).toLocaleString('en-US')} pc, 1 mas/yr would be ${Math.round(kmPerSecondPerMas).toLocaleString('en-US')} km/s across the sky)` },
+      cited: spec.distance };
+  }
   const parallax = row.parallax === undefined ? undefined : { value: row.parallax, error: row.parallaxError!, sigma: row.parallax / row.parallaxError!, ruwe: row.ruwe! };
   const gaiaWords = parallax ? `Gaia DR3 parallax ${fixedDigits(parallax.value, 4)} +/- ${fixedDigits(parallax.error, 4)} mas (same row, RUWE ${fixedDigits(parallax.ruwe, 2)})` : undefined;
   let parsecs: number, source: string, readme: string;
@@ -89,11 +103,11 @@ export function placement(spec: StarSpec, row: GaiaRow) {
   return { parsecs, source, readme, properMotion, cited: spec.distance };
 }
 
-/** The astronomy record: Gaia DR3 astrometry, the spec's physical values, each with its source. */
-export function astronomyRecord(spec: StarSpec, row: GaiaRow, ids: Identifiers, order: number) {
-  const p = physicalValues(spec, row), t = spec.temperature, place = placement(spec, row);
-  const rv = row.radialVelocity ?? spec.radialVelocity?.value;
-  if (rv === undefined) throw new TypeError(`${spec.id}: Gaia DR3 source ${row.sourceId} has no radial velocity; give radialVelocity with its source.`);
+/** The astronomy record: Gaia DR3 astrometry (or a catalogue row's position), the spec's physical values, each with its source. */
+export function astronomyRecord(spec: StarSpec, row: GaiaRow | CatalogueRow, ids: Identifiers, order: number) {
+  const gaia = isCatalogue(row) ? undefined : row, catalogue = isCatalogue(row) ? row : undefined, p = physicalValues(spec, gaia), t = spec.temperature, place = placement(spec, row);
+  const rv = gaia?.radialVelocity ?? spec.radialVelocity?.value;
+  if (rv === undefined) throw new TypeError(`${spec.id}: ${gaia ? `Gaia DR3 source ${gaia.sourceId}` : `the star placed by ${spec.position?.catalogue}`} has no radial velocity; give radialVelocity with its source.`);
   const cross = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter(Boolean).join(', ');
   return { id: spec.id, classification: 'star', order,
     physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(p.radiusKm, 1), gravitationalParameterKm3PerS2: fixed(p.gm, 5), parent: null, effectiveTemperatureK: t.value },
@@ -101,13 +115,14 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow, ids: Identifiers, 
       + `Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).`
       + (spec.spin ? ` Spin inclination ${spec.spin.inclinationDegrees} degrees${spec.spin.periodDays ? ` and rotation period ${spec.spin.periodDays} d` : ''} from ${spec.spin.source} (${spec.spin.url}).` : '')
       + ' presentationUp: the display axis is a sky-plane convention; the spin axis\'s position angle on the sky is not measured.',
-    star: { rightAscensionDegrees: row.ra, declinationDegrees: row.dec, positionEpochJulianYear: 2016, distanceParsecs: place.parsecs,
+    star: { rightAscensionDegrees: row.ra, declinationDegrees: row.dec, positionEpochJulianYear: gaia ? 2016 : 2000, distanceParsecs: place.parsecs,
       properMotionRaMasPerYear: place.properMotion.ra, properMotionDecMasPerYear: place.properMotion.dec, radialVelocityKmPerS: rv, presentationUp: 'display-axis',
       sources: {
-        position: `Gaia DR3 source ${row.sourceId} (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/${spec.id}/source/photometry/gaia-dr3-source.csv${cross ? `; cross-identification ${cross}: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+${row.sourceId}` : ''}`,
+        position: gaia ? `Gaia DR3 source ${gaia.sourceId} (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/${spec.id}/source/photometry/gaia-dr3-source.csv${cross ? `; cross-identification ${cross}: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+${gaia.sourceId}` : ''}`
+          : `${spec.position!.credit} (${spec.position!.url}), VizieR ${catalogue!.words}: RAJ2000 ${row.ra}, DEJ2000 ${row.dec}, from the archived row src/objects/${spec.id}/source/${CATALOGUE_ROW_PATH}${spec.target ? `; SIMBAD names it ${spec.target}` : ''}`,
         distance: place.source,
         properMotion: place.properMotion.source,
-        radialVelocity: row.radialVelocity !== undefined ? `Gaia DR3 (same row): ${row.radialVelocity.toFixed(2)}${row.radialVelocityError ? ` +/- ${row.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})` } } };
+        radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})` } } };
 }
 
 /** A publication record in src/sources for a cited arXiv or DOI link. */
@@ -148,37 +163,40 @@ export function eclipsingPeriodAgrees(paperDays: number, gaiaDays: number | unde
 
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
 export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false, solarEpoch }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<Generated> {
-  // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
-  const ids = await identify(resolver, spec.target, spec.gaia, spec.id);
+  // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once. A star Gaia cannot see has
+  // no identifiers to search the archives by: its catalogue row is its identity and its evidence.
+  const ids: Identifiers = spec.position ? { main: spec.target ?? spec.name } : await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
-  const [{ csv, row }, found] = await Promise.all([fetchGaiaRow(archive, ids.gaia), Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
-  const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, row), place = placement(spec, row);
+  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...spec.position ? [spec.position.url] : [], ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
+  const [gaiaRead, catalogueRow, found] = await Promise.all([spec.position ? undefined : fetchGaiaRow(archive, ids.gaia!), spec.position ? fetchCatalogueRow(archive, spec.position, spec.id) : undefined,
+    Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
+  const gaia = gaiaRead?.row, row: GaiaRow | CatalogueRow = gaia ?? catalogueRow!, label = gaia ? `Gaia DR3 ${gaia.sourceId}` : `VizieR ${catalogueRow!.words}`;
+  const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, gaia), place = placement(spec, row);
   const binaryPeriods = spec.companions.flatMap(companion => 'elements' in companion.orbit ? [companion.orbit.elements.periodDays!] : []);
-  if (binaryPeriods.length) {
-    const gaiaDays = await fetchGaiaEclipsingPeriod(archive, row.sourceId);
+  if (binaryPeriods.length && gaia) {
+    const gaiaDays = await fetchGaiaEclipsingPeriod(archive, gaia.sourceId);
     for (const paperDays of binaryPeriods) if (!eclipsingPeriodAgrees(paperDays, gaiaDays))
-      throw new Error(`${id}: Gaia DR3 ${row.sourceId} eclipses every ${gaiaDays!.toFixed(4)} d, not on the orbit's ${paperDays} d (or half or twice it): it is probably another star of that name.`);
+      throw new Error(`${id}: Gaia DR3 ${gaia.sourceId} eclipses every ${gaiaDays!.toFixed(4)} d, not on the orbit's ${paperDays} d (or half or twice it): it is probably another star of that name.`);
   }
   // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.
-  const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: 2016 }, refresh ? id : undefined);
-  if (held) throw new Error(`${id}: Gaia DR3 ${row.sourceId} is ${held}, already in the universe (within ${DUPLICATE_ARCSEC}" of its position); add its bodies with { "host": "${held}" }.`);
+  const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: gaia ? 2016 : 2000 }, refresh ? id : undefined);
+  if (held) throw new Error(`${id}: ${label} is ${held}, already in the universe (within ${DUPLICATE_ARCSEC}" of its position); add its bodies with { "host": "${held}" }.`);
   // Gaia DR3 measures no radial velocity for a faint or hot star (a quarter of the archive's transiting hosts): SIMBAD's, else zero.
-  if (row.radialVelocity === undefined && !spec.radialVelocity) {
-    const radialVelocity = await fallbackRadialVelocity(archive, row.sourceId, place.parsecs);
+  if (gaia && gaia.radialVelocity === undefined && !spec.radialVelocity) {
+    const radialVelocity = await fallbackRadialVelocity(archive, gaia.sourceId, place.parsecs);
     spec = { ...spec, radialVelocity };
     if (radialVelocity.value !== 0) found.push([radialVelocity.url, await fetchPublication(archive, radialVelocity.url)]);
   }
   const body = astronomyRecord(spec, row, ids, order);
   // Gaia DR3 knows every Cepheid it modelled: a fundamental-mode model is a light curve the page plays, and a classical Cepheid
   // takes the class's published gravities when its own is unknown (light-curve.mts, gravity.mts). No spec field asks for either.
-  const cepheidCsv = await archive.text(GAIA_TAP, gaiaCepheidForm(row.sourceId)), cepheid = gaiaCepheidClass(cepheidCsv);
+  const cepheidCsv = gaia ? await archive.text(GAIA_TAP, gaiaCepheidForm(gaia.sourceId)) : undefined, cepheid = cepheidCsv === undefined ? undefined : gaiaCepheidClass(cepheidCsv);
   const gravityRange = spec.gravityRange ?? (cepheid?.type === 'DCEP' ? CEPHEID_GRAVITIES : undefined);
   // No mass: a published spectroscopic gravity, else a display gravity inside the class's cited range (gravity.mts).
   const gravity = Number.isFinite(physical.logg) || spec.limb?.none ? null
     : await chooseGravity({ archive, ra: row.ra, dec: row.dec, teffK: spec.temperature.value, ...(gravityRange ? { range: gravityRange } : {}), where: id });
   const limbLogg = gravity?.logg ?? physical.logg;
-  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined)]);
+  const [color, limb] = await Promise.all([chooseColor(spec, gaia, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
   const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);
@@ -188,7 +206,8 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order }, body, solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT);
   const files = new Map<string, string | Buffer>(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
-  files.set(`${s}/photometry/gaia-dr3-source.csv`, csv);
+  if (gaiaRead) files.set(`${s}/photometry/gaia-dr3-source.csv`, gaiaRead.csv);
+  if (catalogueRow) files.set(`${s}/${CATALOGUE_ROW_PATH}`, catalogueRow.tsv);
   const { hex: colorHex, words: colorWords } = await installColorDataset(files, id, color, limb);
 
   const measurements = read(`${s}/measurements.json`), distance = place.parsecs, out: Record<string, unknown> = {};
@@ -232,7 +251,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
         : { ...gaiaFact, label: 'Gaia DR3 parallax', path: 'source/measurements.json', locator: 'distanceParsecs; distanceSource' } },
     ...spec.spin?.periodDays ? [{ id: 'rotation', label: 'Day', value: spec.spin.periodDays >= 2 ? `${spec.spin.periodDays.toFixed(1)} days` : `${Math.round(spec.spin.periodDays * 24)} hours`,
       source: { catalogueId: catalogueOf(spec.spin.url).id, url: spec.spin.url, label: spec.spin.source, checked: CHECKED, path: 'source/preparation/rotation.json', locator: 'source' } }] : []];
-  content.provenance.physical.credit = `${physical.radiusText.split(' from ')[1]?.split(' (')[0] ?? 'Published radius'} radius; Gaia DR3 ${place.cited ? 'position; cited distance' : 'astrometry'}${spec.spin ? '; measured spin tilt, axis direction a display convention' : '; no measured rotation axis (display convention)'}`;
+  content.provenance.physical.credit = `${physical.radiusText.split(' from ')[1]?.split(' (')[0] ?? 'Published radius'} radius; ${spec.position ? `${spec.position.credit} position; cited distance` : `Gaia DR3 ${place.cited ? 'position; cited distance' : 'astrometry'}`}${spec.spin ? '; measured spin tilt, axis direction a display convention' : '; no measured rotation axis (display convention)'}`;
   files.set(`${s}/content/object.json`, json(content));
 
   const text = read(`${o}/text.json`);
@@ -246,13 +265,17 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
 
   // Manifest and acquisition.
   const manifest = read(`${s}/manifest.json`);
-  const gaiaInput = { id: `${id}-gaia-dr3-source`, path: 'photometry/gaia-dr3-source.csv', origin: GAIA_TAP, credit: 'ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26 (FLAME)', ...GAIA_LICENSE,
-    acquisition: `Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id ${row.sourceId} (position${row.parallax === undefined ? '' : ', parallax, proper motion'}, radial velocity) with its FLAME mass and radius.`,
-    redistribution: 'One catalogue row, retained unchanged with its credit.', consumers: ['placement'] };
-  manifest.inputs = [...manifest.inputs, gaiaInput];
+  const placementInput = gaia ? { id: `${id}-gaia-dr3-source`, path: 'photometry/gaia-dr3-source.csv', origin: GAIA_TAP, credit: 'ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26 (FLAME)', ...GAIA_LICENSE,
+    acquisition: `Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id ${gaia.sourceId} (position${gaia.parallax === undefined ? '' : ', parallax, proper motion'}, radial velocity) with its FLAME mass and radius.`,
+    redistribution: 'One catalogue row, retained unchanged with its credit.', consumers: ['placement'] }
+    : { id: `${id}-catalogue-row`, path: CATALOGUE_ROW_PATH, origin: VIZIER_ASU, credit: `${spec.position!.credit}; VizieR ${spec.position!.catalogue} (CDS)`, ...VIZIER_LICENSE,
+      acquisition: `VizieR ASU TSV query in source/preparation/acquisition.json: ${catalogueRow!.words}, every column, with the response's dated comment lines and blank lines removed so the bytes are stable.`,
+      redistribution: 'One catalogue row, retained unchanged with its credit.', consumers: ['placement'] };
+  manifest.inputs = [...manifest.inputs, placementInput];
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`);
-  plan.operations = [...plan.operations, { kind: 'request-download', groups: ['restore', 'refresh'], path: 'photometry/gaia-dr3-source.csv', url: GAIA_TAP, form: gaiaRowForm(row.sourceId), requiredPrefix: 'source_id,' },
+  plan.operations = [...plan.operations, gaia ? { kind: 'request-download', groups: ['restore', 'refresh'], path: 'photometry/gaia-dr3-source.csv', url: GAIA_TAP, form: gaiaRowForm(gaia.sourceId), requiredPrefix: 'source_id,' }
+    : { kind: 'request-download', groups: ['restore', 'refresh'], path: CATALOGUE_ROW_PATH, url: VIZIER_ASU, form: catalogueRow!.form, replacements: CATALOGUE_ROW_REPLACEMENTS, requiredText: ['RAJ2000', ...Object.values(spec.position!.row)] },
   ];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   // The spec this package was made from, so `--refresh` can make it again (refresh.mts).
@@ -266,17 +289,18 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const credits = [`# ${spec.name} credits`,
     `Radius, mass and temperature: ${[physical.radiusText, physical.massText, `temperature from ${spec.temperature.source}`].join('; ')}.${spec.spin ? ` Spin: ${spec.spin.source}.` : ''}`,
     ...color.credits, ...limb.credit ? [limb.credit] : [],
-    `Placement: Gaia DR3 source ${row.sourceId}: position${place.cited ? '' : ', parallax'}${row.pmra === undefined ? '' : ', proper motion'}${row.radialVelocity !== undefined ? ' and radial velocity' : ''}${place.cited ? `; distance: ${place.cited.source}` : ''}. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.`,
+    gaia ? `Placement: Gaia DR3 source ${gaia.sourceId}: position${place.cited ? '' : ', parallax'}${gaia.pmra === undefined ? '' : ', proper motion'}${gaia.radialVelocity !== undefined ? ' and radial velocity' : ''}${place.cited ? `; distance: ${place.cited.source}` : ''}. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.`
+      : `Placement: position from ${spec.position!.credit}, VizieR ${catalogueRow!.words} (CDS, Strasbourg); distance: ${place.cited!.source}; radial velocity: ${spec.radialVelocity!.source}.`,
   ];
   files.set(`${o}/NOTICE.md`, `${credits.join('\n\n')}\n`);
   const names = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter((name): name is string => Boolean(name) && name !== spec.name).join(', ');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '',
     spec.text ? `${spec.text.introduction}${names ? ` It is also ${names}.` : ''} The introduction is generated from ${spec.paper.credit}'s published values; the sections below are the data's own.` : `${spec.name}${names ? ` (${names})` : ''} is ${distance.toFixed(1)} parsecs away. ${TODO}: what the star is and why it is here, from ${spec.paper.credit}.`, '',
-    `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}.${Number.isFinite(physical.logg) ? ` log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.` : gravity?.kind === 'published' ? ` log g ${gravity.logg} from ${gravity.source}.` : ' No surface gravity of this star is published.'}`, '',
+    `**Star.** Placement: ${gaia ? `Gaia DR3 source ${gaia.sourceId}` : `${spec.position!.credit}, VizieR ${catalogueRow!.words}${spec.target ? ` (SIMBAD ${spec.target})` : ''}; Gaia cannot see it`}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}.${Number.isFinite(physical.logg) ? ` log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.` : gravity?.kind === 'published' ? ` log g ${gravity.logg} from ${gravity.source}.` : ' No surface gravity of this star is published.'}`, '',
     `**Colour.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
-    '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.`, '',
+    '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from ${gaia ? 'Gaia DR3, SIMBAD' : `VizieR ${spec.position!.catalogue}`} and the archives named above; each choice was read with the dataset's own reader.`, '',
     ...color.crossCheck ? [`- The colour's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
@@ -285,10 +309,10 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     ...spec.text ? spec.text.quotes ? [`- **Quoted text.** The introduction quotes sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}) verbatim, CC BY-SA 4.0.`] : [] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
 
-  files.set(`src/sources/gaia-dr3-${id}.json`, json({ id: `gaia-dr3-${id}`, kind: 'data-product', identityLevel: 'work', title: `Gaia DR3 gaia_source row for ${spec.name} (source_id ${row.sourceId})`,
-    identifiers: [{ type: 'Gaia DR3 source_id', value: row.sourceId }], links: [{ role: 'archive', url: 'https://gea.esac.esa.int/archive/', label: 'Gaia Archive' }, { role: 'landing', url: 'https://doi.org/10.1051/0004-6361/202243940', label: 'Gaia Collaboration (2023), Gaia DR3 summary' }],
-    evidence: [{ url: `${GAIA_TAP}?${new URLSearchParams(gaiaRowForm(row.sourceId))}`, checkedOn: CHECKED,
-      locator: `gaiadr3.gaia_source at epoch 2016.0: ${row.parallax === undefined ? 'a two-parameter solution (position only)' : `parallax ${row.parallax.toFixed(5)} +/- ${row.parallaxError!.toFixed(5)} mas, pmra ${row.pmra!.toFixed(3)}, pmdec ${row.pmdec!.toFixed(3)} mas/yr`}${row.radialVelocity !== undefined ? `, radial_velocity ${row.radialVelocity.toFixed(2)} km/s` : ''}${row.ruwe === undefined ? '' : `, RUWE ${row.ruwe.toFixed(2)}`}, has_xp_sampled ${row.hasXpSampled}${row.massFlame ? `; mass_flame ${row.massFlame[0].toFixed(4)}` : ''}${row.radiusFlame ? `, radius_flame ${row.radiusFlame[0].toFixed(4)}` : ''}` }],
+  if (gaia) files.set(`src/sources/gaia-dr3-${id}.json`, json({ id: `gaia-dr3-${id}`, kind: 'data-product', identityLevel: 'work', title: `Gaia DR3 gaia_source row for ${spec.name} (source_id ${gaia.sourceId})`,
+    identifiers: [{ type: 'Gaia DR3 source_id', value: gaia.sourceId }], links: [{ role: 'archive', url: 'https://gea.esac.esa.int/archive/', label: 'Gaia Archive' }, { role: 'landing', url: 'https://doi.org/10.1051/0004-6361/202243940', label: 'Gaia Collaboration (2023), Gaia DR3 summary' }],
+    evidence: [{ url: `${GAIA_TAP}?${new URLSearchParams(gaiaRowForm(gaia.sourceId))}`, checkedOn: CHECKED,
+      locator: `gaiadr3.gaia_source at epoch 2016.0: ${gaia.parallax === undefined ? 'a two-parameter solution (position only)' : `parallax ${gaia.parallax.toFixed(5)} +/- ${gaia.parallaxError!.toFixed(5)} mas, pmra ${gaia.pmra!.toFixed(3)}, pmdec ${gaia.pmdec!.toFixed(3)} mas/yr`}${gaia.radialVelocity !== undefined ? `, radial_velocity ${gaia.radialVelocity.toFixed(2)} km/s` : ''}${gaia.ruwe === undefined ? '' : `, RUWE ${gaia.ruwe.toFixed(2)}`}, has_xp_sampled ${gaia.hasXpSampled}${gaia.massFlame ? `; mass_flame ${gaia.massFlame[0].toFixed(4)}` : ''}${gaia.radiusFlame ? `, radius_flame ${gaia.radiusFlame[0].toFixed(4)}` : ''}` }],
     relations: [], statements: [{ kind: 'credit', text: 'ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26', scope: 'citation', evidence: 'https://www.cosmos.esa.int/web/gaia-users/credits' }],
     publisher: 'European Space Agency, Gaia Data Processing and Analysis Consortium' }));
   for (const publication of publications.values()) files.set(`src/sources/${publication.id}.json`, json(publicationRecord(publication)));
@@ -297,11 +321,11 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // The ledger records each choice made above with the links it read.
   const gaiaArchive = 'https://gea.esac.esa.int/archive/', vizier = (credit: string | undefined) => credit?.match(/VizieR (J\/[^\s.,)]+)/u)?.[1];
   // A Cepheid plays Gaia's published light curve, checked against its own row (light-curve.mts).
-  const lightCurve = cepheid?.mode === 'FUNDAMENTAL' ? installLightCurve(files, { id, name: spec.name, sourceId: row.sourceId, csv: cepheidCsv }, solarEpoch) : null;
+  const lightCurve = gaia && cepheidCsv && cepheid?.mode === 'FUNDAMENTAL' ? installLightCurve(files, { id, name: spec.name, sourceId: gaia.sourceId, csv: cepheidCsv }, solarEpoch) : null;
   const colorLinks = color.inputs.map(input => String(input.origin)).filter(origin => origin.startsWith('https://') && !origin.includes('asu-tsv') && !origin.includes('/tap/'));
   writeLedger(files, id, [
-    { id: 'placement', subject: 'Placement', evidence: [gaiaArchive, ...place.cited ? [place.cited.url] : [], ...row.radialVelocity === undefined && spec.radialVelocity ? [spec.radialVelocity.url] : []],
-      finding: `Gaia DR3 source ${row.sourceId}: position at J2016.0. Distance: ${place.source}. Proper motion: ${place.properMotion.source}. Radial velocity ${row.radialVelocity !== undefined ? 'from the same row' : `from ${spec.radialVelocity!.source}`}.` },
+    { id: 'placement', subject: 'Placement', evidence: [gaia ? gaiaArchive : `https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${spec.position!.catalogue}`, ...place.cited ? [place.cited.url] : [], ...gaia?.radialVelocity === undefined && spec.radialVelocity ? [spec.radialVelocity.url] : []],
+      finding: `${gaia ? `Gaia DR3 source ${gaia.sourceId}: position at J2016.0` : `${spec.position!.credit}, VizieR ${catalogueRow!.words}: J2000 position; Gaia cannot see the star`}. Distance: ${place.source}. Proper motion: ${place.properMotion.source}. Radial velocity ${gaia?.radialVelocity !== undefined ? 'from the same row' : `from ${spec.radialVelocity!.source}`}.` },
     { id: 'radius-mass-and-temperature', subject: 'Radius, mass and temperature', evidence: [...spec.radius === 'gaia-flame' || spec.mass === 'gaia-flame' ? [gaiaArchive] : [], spec.temperature.url],
       finding: `${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value}${spec.temperature.uncertainty ? ` +/- ${spec.temperature.uncertainty}` : ''} K from ${spec.temperature.source}.` },
     { id: 'colour', subject: 'Colour', evidence: color.route === 'planck' ? [spec.temperature.url] : colorLinks,
