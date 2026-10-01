@@ -82,9 +82,14 @@ interface SceneDescriptor { readonly id: string; readonly type: string; readonly
  * `JSON.stringify({ schema, id, type, format, data })` gives for its runtime. */
 export async function preparedObjectText(objectDirectory: string, descriptor: SceneDescriptor) {
   if (!descriptor.prepared) throw new TypeError(`${descriptor.id}: no prepared reference.`);
-  const runtime = (await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8')).trimEnd();
+  return preparedObjectTransport(descriptor, (await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8')).trimEnd());
+}
+
+/** The `cssearth-prepared-object@1` transport that carries `data`, the JSON text of a runtime. */
+export function preparedObjectTransport(descriptor: SceneDescriptor, data: string) {
+  if (!descriptor.prepared) throw new TypeError(`${descriptor.id}: no prepared reference.`);
   return `{"schema":"cssearth-prepared-object@1","id":${JSON.stringify(descriptor.id)},"type":${JSON.stringify(descriptor.type)},` +
-    `"format":${JSON.stringify(descriptor.prepared.format)},"data":${runtime}}`;
+    `"format":${JSON.stringify(descriptor.prepared.format)},"data":${data}}`;
 }
 
 /** A scene body's page data: the runtime's asset table, read from its head, and its published `prepared/controls.json`,

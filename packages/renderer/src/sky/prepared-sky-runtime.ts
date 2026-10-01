@@ -4,6 +4,7 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
 import { validatePreparedCssSky, validatePreparedSkyParallax } from './validation.js';
+import { afterStartup, startupOpen } from '../rendering/startup-gate.js';
 
 /** Transports retained celestial images through the shared physical observer pose. The cube is the diffuse Milky Way
  * only; stars are drawn as their own points. */
@@ -33,6 +34,13 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
   camera.appendChild(scene); root.appendChild(camera);
   host.insertBefore(root, before);
   let destroyed = false, previousTransform = '', previousPerspective = '', previousOrigin = '', previousClipView = '';
+  // During a body's first view the faces in view wait, and take their images once it is interactive (startup-gate.ts).
+  let imagesWaiting = false;
+  const showImages = () => {
+    imagesWaiting = false;
+    if (destroyed) return;
+    for (const face of boundedFaces) if (face.shown && face.image) { face.node.style.backgroundImage = face.image; face.image = null; }
+  };
   return Object.freeze({ root,
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, visible = true): void {
       if (destroyed) return;
@@ -56,7 +64,10 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
           const shown = preparedLeafMayContribute(face.bounds, planes);
           if (shown === face.shown) continue;
           face.shown = shown;
-          if (shown && face.image) { face.node.style.backgroundImage = face.image; face.image = null; }
+          if (shown && face.image) {
+            if (startupOpen(document.defaultView)) { face.node.style.backgroundImage = face.image; face.image = null; }
+            else if (!imagesWaiting) { imagesWaiting = true; afterStartup(document.defaultView, showImages); }
+          }
           face.node.style.visibility = shown ? '' : 'hidden';
         }
       }

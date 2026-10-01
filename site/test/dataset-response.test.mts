@@ -3,8 +3,9 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
-import { initialObjectSelection, loadPreparedCssObject, omittedPreparedNodes, selectedPreparedVariant } from '@cssearth/renderer';
-import { readPreparedObjectBytes } from '../object-page-data.mts';
+import { initialObjectSelection, loadPreparedCssObject, loadPreparedDataset, omittedPreparedNodes, selectedPreparedVariant } from '@cssearth/renderer';
+import { readPreparedDatasetBytes, readPreparedObjectBytes } from '../object-page-data.mts';
+import { preparedObjectPath } from '../prepared-object-path.mts';
 import { renderDatasetResponse } from '../dataset-response.mts';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import { handleSearchRequest } from '../server/search-response.mts';
@@ -26,7 +27,10 @@ ${['normal', 'ultraviolet', 'thermal'].map(id => `<button type="submit" name="da
 const read: typeof fetch = async input => {
   const url = new URL(String(input));
   assert.equal(url.origin, origin);
-  assert.equal(url.pathname, '/objects/saturn/object.json', 'Only the prepared object request is allowed');
+  // The object transport, and the tables of a dataset it leaves out (dataset-tables.ts in @cssearth/renderer).
+  const dataset = /^\/objects\/saturn\/datasets\/([a-z0-9-]+)\.json$/u.exec(url.pathname)?.[1];
+  if (dataset !== undefined) return new Response(new Uint8Array(await readPreparedDatasetBytes('saturn', dataset)));
+  assert.equal(url.pathname, '/objects/saturn/object.json', 'Only the prepared object and dataset requests are allowed');
   return new Response(prepared.bytes);
 };
 test('native selection replaces only the existing prepared presentation and selected controls', async () => {
@@ -35,7 +39,9 @@ test('native selection replaces only the existing prepared presentation and sele
     const document = parseHTML(result).document;
     assert.equal(document.querySelectorAll('.polycss-scene').length, 1);
     // The markup carries the nodes this dataset shows: what it hides stays out (prepared-omitted-nodes.ts).
-    const definition = await loadPreparedCssObject(prepared.descriptor, { async read() { return Uint8Array.from(prepared.bytes).buffer; } });
+    const definition = await loadPreparedCssObject(prepared.descriptor, {
+      read: async reference => (await read(new URL(`/objects/saturn/${preparedObjectPath(reference)}`, origin))).arrayBuffer() });
+    await loadPreparedDataset(definition, id);
     const variant = selectedPreparedVariant(definition, initialObjectSelection(definition.controls, id));
     assert.equal(document.querySelectorAll('[data-prepared-node]').length, scene.nodes - omittedPreparedNodes(definition.tree, variant).size);
     assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-dataset'), id);

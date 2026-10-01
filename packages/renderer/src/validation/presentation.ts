@@ -9,7 +9,9 @@ import type { CameraPlan } from '../navigation/types.js';
 export { requireTextureLevels } from './prepared-texture-levels.js';
 import { requireTexturePlacements } from './prepared-texture-levels.js';
 
-export function requireVariants(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>, tracks: readonly PreparedMaterialTrack[], controls: ObjectControls, camera: CameraPlan): asserts value is readonly PreparedVariant[] {
+/** `deferred`: datasets whose variants stand in until their tables arrive (dataset-tables.ts). A toggle whose effect
+ * only they carry is judged once they are adopted. */
+export function requireVariants(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>, tracks: readonly PreparedMaterialTrack[], controls: ObjectControls, camera: CameraPlan, deferred: readonly string[] = []): asserts value is readonly PreparedVariant[] {
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
   const datasetIds = controls.datasets?.controls.map(dataset => dataset.id) ?? [], settings = new Map(controls.settings?.controls.map(setting => [setting.name, setting]) ?? []);
   const keys: Record<string, unknown>[] = [];
@@ -80,7 +82,7 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
       }
     }
   }
-  for (const name of declaredToggles) if (!effective.has(name)) fail(`setting ${name} has no prepared effect`);
+  if (!deferred.length) for (const name of declaredToggles) if (!effective.has(name)) fail(`setting ${name} has no prepared effect`);
 }
 export function requireViewBindings(value: unknown, tree: PreparedTree, camera: CameraPlan): asserts value is readonly PreparedViewBinding[] {
   for (const input of array(value, 'view bindings')) {

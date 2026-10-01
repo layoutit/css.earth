@@ -8,6 +8,7 @@ import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { fetchPreparedCatalogueBank, fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountGalaxyBacking, parseGalaxyBacking, type BackingNearFade } from './galaxy-backing.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
+import { afterStartup } from '../rendering/startup-gate.js';
 import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
@@ -143,7 +144,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       else if (shownBacking > 0 && backingUrl && !backingLoading) {
         // Fetched the first time the dots show; each layer mounts hidden and is placed from the latest frame at once.
         backingLoading = true;
-        void fetchPreparedJson(backingUrl).then(value => {
+        afterStartup(document.defaultView, () => { if (!lifetime.disposed) void fetchPreparedJson(backingUrl).then(value => {
           if (lifetime.disposed) return;
           const payload = parseGalaxyBacking(value, backingUrl);
           const layers = [{ texturePath: payload.leaf.texturePath, fade: payload.nearFade }, ...(payload.sections ?? []).map(section => ({ texturePath: section.texturePath, fade: section }))];
@@ -155,7 +156,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
           for (const layer of backing) layer.plane.root.style.display = 'none';
           lifetime.onDispose(() => { for (const layer of backing ?? []) layer.plane.destroy(); });
           if (backingFrame) publishBacking(backingFrame);
-        }).catch(error => console.error(`Galaxy backing ${backingUrl} failed`, error));
+        }).catch(error => console.error(`Galaxy backing ${backingUrl} failed`, error)); });
       }
       return volumeOpacity;
     },

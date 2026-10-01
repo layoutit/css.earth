@@ -20,6 +20,7 @@ import { waitForSceneDocument, waitForScenePaint } from "./scene-native-waits.js
 import { createPreparedResidency } from "../rendering/prepared-residency.js";
 import { resolvePreparedAssetUrl } from "../rendering/prepared-asset-origin.js";
 import { createObjectSelectionRuntime } from "../rendering/object-selection-runtime.js";
+import { loadPreparedDataset } from "../loader.js";
 import { cameraMotionSignalFor } from "../navigation/camera-motion-signal.js";
 import { createObjectControlBinding } from "../rendering/object-control-binding.js";
 import { createPreparedPlayback } from "../rendering/prepared-playback.js";
@@ -339,7 +340,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
             for (const listener of datasetListeners) listener(action.id);
           }
           return committed;
-        }, onError: error => datasetEffects ? datasetEffects.error(error) : console.error(error) });
+        }, onError: error => datasetEffects ? datasetEffects.error(error) : console.error(error),
+        // A failed early read is read again, and reported, when the dataset is selected.
+        onIntent: datasetId => { loadPreparedDataset(definition, datasetId).catch(() => {}); } });
       context.own(() => controls?.destroy({ preserveControls }));
       // A claimed preflight bank already completed and released default startup.
       // Re-running it would pin obsolete lighting rows beside the incoming view.
@@ -357,6 +360,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, initialDataset, initialSettings,
         motion: inputSurface ? cameraMotionSignalFor(inputSurface) : null,
         prepareSelection: datasetEffects && ((next, signal) => datasetEffects.prepare(selectedDatasetVolume(definition.controls, next.datasetId), signal)),
+        readDatasetTables: datasetId => loadPreparedDataset(definition, datasetId),
         onCommit: (next, _plan, intent) => {
           if (intent.kind === 'selection') datasetEffects?.commit(selectedDatasetVolume(definition.controls, next.datasetId));
           playback.setSelection(next);
