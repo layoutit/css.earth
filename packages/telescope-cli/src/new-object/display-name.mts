@@ -2,7 +2,8 @@
  *
  * 1. a proper name (SIMBAD `NAME Betelgeuse`);
  * 2. a Bayer or Flamsteed designation (`* alf Ori`, `* 55 Cnc`), spelled out as a reader meets it (Alpha Orionis, 55 Cancri);
- * 3. a variable-star designation (`V* RR Lyr`, `HV 2827`);
+ * 3. a variable-star designation (`V* RR Lyr`, `HV 2827`, `VHK 45`: the Harvard variables, and van den Bergh, Herbst & Kowal's
+ *    1975 variables of M33);
  * 4. a catalogue number that reads as a name: HD, HIP, GJ, then the surveys in `SURVEYS`, in that order;
  * 5. nothing: a designation that is only a position or a source number (2MASS J…, Gaia DR3 …, M31V J…) is kept as the star's name
  *    only when nothing above exists, and the caller keeps what it had.
@@ -26,7 +27,7 @@ export function preferredName(identifiers: readonly string[]): { readonly name: 
   if (proper) return { name: proper.slice(5), step: 'proper', identifier: proper };
   const bayer = found(id => id.startsWith('* '));
   if (bayer) return { name: spelledOut(bayer.slice(2)), step: 'bayer-flamsteed', identifier: bayer };
-  const variable = found(id => id.startsWith('V* ')) ?? found(id => /^HV \d+$/u.test(id));
+  const variable = found(id => id.startsWith('V* ')) ?? found(id => /^(?:HV|VHK) \d+$/u.test(id));
   if (variable) return { name: variable.startsWith('V* ') ? spelledOut(variable.slice(3)) : variable, step: 'variable', identifier: variable };
   for (const prefix of [...CATALOGUES, ...SURVEYS]) {
     const identifier = found(id => starts(id, prefix));

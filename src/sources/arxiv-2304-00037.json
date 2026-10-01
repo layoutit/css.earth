@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-2304-00037",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Breuval et al. (2023): A 1.3% distance to M33 from HST Cepheid photometry",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2304.00037"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/acd3f4"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2304.00037",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/acd3f4",
+      "label": "ApJ 951 118 2023"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2304.00037",
+      "checkedOn": "2026-10-01",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Breuval et al. (2023), ApJ 951 118 2023",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2304.00037"
+    }
+  ],
+  "publisher": "ApJ 951 118 2023",
+  "creators": [
+    "Louise Breuval",
+    "Adam G. Riess",
+    "Lucas M. Macri",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

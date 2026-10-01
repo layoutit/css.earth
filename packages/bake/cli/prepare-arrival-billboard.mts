@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { requireRecord, requireFiniteNumber, requireString, isRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
-import { writeWorldBillboard } from '@cssearth/bake/site-assets';
+import { arrivalLook, writeWorldBillboard } from '@cssearth/bake/site-assets';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation';
 import { parseArrivalBillboard } from '@cssearth/objects';
@@ -39,6 +39,15 @@ const reports: unknown[] = [], failures: string[] = [], captureSize = 4096;
 // A package file written mid-run makes the dev server being photographed reload every module, and the next pages time out
 // (168 Cepheids, 2026-09-30): each body's metadata and inventory are written once every photograph is taken.
 const packageWrites: (() => Promise<void>)[] = [];
+/** A body's look (site-assets/arrival-look.ts) from its prepared runtime and the images its inventory delivers. */
+async function lookOf(id: string, runtime: Record<string, unknown>, objectDirectory: string): Promise<string> {
+  const inventory = await readInventory(id, objectDirectory);
+  if (!inventory) throw new Error(`No runtime inventory for ${id}.`);
+  return arrivalLook(id, runtime, inventory.assets.filter(asset => asset.location === 'public' && !asset.filename.endsWith('-arrival.webp')));
+}
+/** Photographs taken or found intact in this run, by look: the image, and the pose it was taken from in the donor's radii. */
+const photographed = new Map<string, { readonly id: string; readonly bytes: Buffer; readonly distanceRadii: number; readonly focalPixels: number }>();
+let shared = 0;
 try {
   for (const [index, object] of objects.entries()) {
     const objectDirectory = resolve(root, 'src/objects', object.id), prepared = resolve(objectDirectory, 'prepared');
@@ -64,8 +73,42 @@ try {
           const bytes = await readFile(path).catch(() => null);
           return bytes !== null && bytes.length === asset.bytes && sha256(bytes) === asset.sha256;
         }))).every(Boolean);
-        if (intact) { reports.push(previous); console.log(`[${index + 1}/${objects.length}] ${object.id}: already prepared`); continue; }
+        if (intact) {
+          const billboard = parseArrivalBillboard(JSON.parse(await readFile(resolve(prepared, 'arrival-billboard.json'), 'utf8')));
+          const look = await lookOf(object.id, runtime, objectDirectory);
+          if (!photographed.has(look)) photographed.set(look, { id: object.id, bytes: await readFile(resolve(root, 'public/scenes', object.id, filename)),
+            distanceRadii: billboard.distanceM / object.worldFrame.bodyRadiusM, focalPixels: billboard.focalPixels });
+          reports.push(previous); console.log(`[${index + 1}/${objects.length}] ${object.id}: already prepared`); continue;
+        }
       }
+    }
+    const look = await lookOf(object.id, runtime, objectDirectory), same = photographed.get(look);
+    const publish = (billboard: ReturnType<typeof parseArrivalBillboard>, bytes: Buffer, from: string | undefined, errors: readonly string[]) => {
+      const metadata = Buffer.from(JSON.stringify(billboard, null, 2) + '\n');
+      const report = { id: object.id, identity, billboard, bytes: bytes.length, renderer: browser.version(), errors, ...(from ? { sharedWith: from } : {}) };
+      packageWrites.push(async () => {
+        await writeFile(resolve(prepared, 'arrival-billboard.json'), metadata);
+        const inventory = await readInventory(object.id, objectDirectory);
+        if (!inventory) throw new Error(`No runtime inventory for ${object.id}.`);
+        for (const [location, name, data] of [['public', filename, bytes], ['prepared', 'arrival-billboard.json', metadata]] as const) {
+          const assets = inventory.assets.filter(asset => asset.location === location && asset.filename !== name);
+          assets.push({ location, filename: name, bytes: data.length, sha256: sha256(data) });
+          await updateInventory({ objectId: object.id, objectDirectory, location, assets });
+        }
+        // The world draws this body from the same photograph at billboard size (site-assets/world-billboard.ts).
+        await writeWorldBillboard(root, object.id);
+        await writeFile(receiptPath, JSON.stringify(report, null, 2) + '\n');
+      });
+      reports.push(report);
+    };
+    if (same) {
+      // The same look as a body already photographed: its photograph, byte for byte, from the same pose in this body's radii.
+      await mkdir(resolve(root, 'public/scenes', object.id), { recursive: true });
+      await writeFile(resolve(root, 'public/scenes', object.id, filename), same.bytes);
+      publish(parseArrivalBillboard({ url: `/scenes/${object.id}/${filename}`, size, distanceM: object.worldFrame.bodyRadiusM * same.distanceRadii,
+        focalPixels: same.focalPixels, dataset, rotation }), same.bytes, same.id, []);
+      shared++; console.log(`[${index + 1}/${objects.length}] ${object.id}: the photograph of ${same.id} (${same.bytes.length} bytes)`);
+      continue;
     }
     const context = await browser.newContext({ viewport: { width: captureSize, height: captureSize }, deviceScaleFactor: 1 });
     try {
@@ -181,22 +224,9 @@ try {
           focalPixels: focal * resize, dataset, rotation });
         if (errors.length) throw new Error(errors.join('\n'));
         const bytes = await writeLossyWebp(sharp(image), resolve(root, 'public/scenes', object.id, filename));
-        const metadata = Buffer.from(JSON.stringify(billboard, null, 2) + '\n');
-        const report = { id: object.id, identity, billboard, bytes: bytes.length, renderer: browser.version(), errors };
-        packageWrites.push(async () => {
-          await writeFile(resolve(prepared, 'arrival-billboard.json'), metadata);
-          const inventory = await readInventory(object.id, objectDirectory);
-          if (!inventory) throw new Error(`No runtime inventory for ${object.id}.`);
-          for (const [location, name, data] of [['public', filename, bytes], ['prepared', 'arrival-billboard.json', metadata]] as const) {
-            const assets = inventory.assets.filter(asset => asset.location === location && asset.filename !== name);
-            assets.push({ location, filename: name, bytes: data.length, sha256: sha256(data) });
-            await updateInventory({ objectId: object.id, objectDirectory, location, assets });
-          }
-          // The world draws this body from the same photograph at billboard size (site-assets/world-billboard.ts).
-          await writeWorldBillboard(root, object.id);
-          await writeFile(receiptPath, JSON.stringify(report, null, 2) + '\n');
-        });
-        reports.push(report); console.log(`[${index + 1}/${objects.length}] ${object.id}: ${bytes.length} bytes`);
+        publish(billboard, bytes, undefined, errors);
+        photographed.set(look, { id: object.id, bytes, distanceRadii: distanceM / object.worldFrame.bodyRadiusM, focalPixels: billboard.focalPixels });
+        console.log(`[${index + 1}/${objects.length}] ${object.id}: ${bytes.length} bytes`);
         break;
       }
       }
@@ -208,4 +238,4 @@ try {
 for (const write of packageWrites) await write();
 await writeFile(resolve(output, 'report.json'), JSON.stringify({ reports, failures }, null, 2) + '\n');
 if (failures.length) throw new Error(`Arrival preparation failed: ${failures.join(', ')}`);
-console.log(`Prepared ${reports.length} arrival billboards. Publish the changed inventories before merging.`);
+console.log(`Prepared ${reports.length} arrival billboards${shared ? `, ${shared} sharing another body's photograph` : ''}. Publish the changed inventories before merging.`);

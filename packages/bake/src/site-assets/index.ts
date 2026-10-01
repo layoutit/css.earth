@@ -5,4 +5,5 @@ export * from './prepare-dataset-sprites.ts';
 export * from './prepare-dataset-billboards.ts';
 export * from './prepare-scientific-charts.ts';
 export * from './prepare-search-thumbnails.ts';
+export * from './arrival-look.ts';
 export * from './world-billboard.ts';
