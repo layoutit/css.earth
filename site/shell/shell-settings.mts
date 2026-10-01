@@ -30,6 +30,10 @@ export function createSettingsController(
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
+  // Every control applies as it changes, so the form's submit button (for a page without script) leaves the panel while
+  // this controller runs it: it sat under the live toggles as "Apply settings" (2026-10-01).
+  // It stays off: the next scene's controller takes over the same panel, and a page without script never ran this.
+  panel.querySelector('.object-settings-submit')?.remove();
   const opening = (event: Event) => {
     if (event.target instanceof windowTarget.Element && event.target.closest(`[popovertarget="${panel.id}"]`)) showSection(panel, true);
   };
