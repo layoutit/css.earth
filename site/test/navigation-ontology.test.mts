@@ -36,6 +36,8 @@ test('every scene and every package the host draws has exactly one searchable de
   }
   const sitemap = await (await import('../pages/sitemap.xml.ts')).GET().text();
   for (const level of OVERVIEWS) assert.equal(sitemap.split(`/${level.id}/</loc>`).length, 2, `${level.id} is in the sitemap once`);
+  // The site's own address leads: it was absent, and it is the page a search result should name (2026-10-01).
+  assert.ok(sitemap.includes('<url><loc>https://css.earth/</loc></url>'));
   // Every object is searched through the catalogue, the levels included.
   assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));

@@ -64,3 +64,9 @@ test('startup uses the baked perspective and viewport texture demand before moun
   assert.equal(view.viewport.widthPixels, 820);
   assert.equal(view.viewport.heightPixels, 1180);
 });
+
+test('an unreadable saved view opens the default view instead of failing the mount', () => {
+  for (const value of ['garbage', 'UcM-', '']) assert.equal(readStartupSavedView(`https://css.earth/earth/?v=${value}`), null, value);
+  assert.equal(readStartupSavedView('https://css.earth/earth/', 'garbage'), null);
+  assert.equal(readStartupSavedView('https://css.earth/earth/'), null);
+});

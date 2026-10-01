@@ -121,3 +121,38 @@ test('a native search-only Earth selection fetches the base catalogue and exactl
   assert.equal(requests.filter(path => path === '/scenes/earth/earth-features.json').length, 1);
   assert.equal(requests.filter(path => /^\/scenes\/earth\/earth-features-selection-\d+\.json$/u.test(path)).length, 1);
 });
+
+test('a feature link reads its catalogue from the published assets, not from the page origin', async () => {
+  // The deployed site: every prepared file lives at its content address, and `/scenes/...` on the page's origin is 404.
+  const earthScene = await loadPreparedSceneMarkup('earth');
+  const earthPrepared = await readPreparedObjectBytes('earth');
+  const assets: Record<string, string> = {};
+  const collect = (value: unknown): void => {
+    if (Array.isArray(value)) { value.forEach(collect); return; }
+    if (!value || typeof value !== 'object') return;
+    const record = value as Record<string, unknown>;
+    if (typeof record.filename === 'string' && typeof record.sha256 === 'string') assets[record.filename] = record.sha256;
+    Object.values(record).forEach(collect);
+  };
+  collect(JSON.parse(await readFile(new URL('../../src/objects/earth/inventory.json', import.meta.url), 'utf8')));
+  const published = 'https://assets.test', requests: string[] = [];
+  const transport: typeof fetch = async input => {
+    const url = new URL(String(input));
+    requests.push(url.origin === published ? url.href : url.pathname);
+    if (url.origin === origin && url.pathname === '/objects/earth/object.json') return new Response(earthPrepared.bytes);
+    const address = /^\/runtime-assets\/([a-f0-9]{64})\/(earth-features[a-z0-9-]*\.json)$/u.exec(url.pathname);
+    if (url.origin === published && address && assets[address[2]!] === address[1]) {
+      return new Response(await readFile(new URL(`../../public/scenes/earth/${address[2]}`, import.meta.url)));
+    }
+    return new Response(null, { status: 404 });
+  };
+  const descriptor = { ...earthScene.descriptor, properties: { ...earthScene.descriptor.properties, assetOrigin: { origin: published, assets } } };
+  const earthHtml = `<!doctype html><html><body><!--search-shell:start-->
+    <input class="object-sheet-handle" type="checkbox"><section class="object-information-panel"></section>
+    <!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(descriptor)}</script><!--prepared-descriptor:end-->
+    <!--prepared-scene:start--><main class="object-stage ${earthScene.classes.join(' ')}" data-object-id="earth" data-prepared-object="earth" aria-label="Earth">${earthScene.html}</main><!--prepared-scene:end--></body></html>`;
+  const result = await renderDatasetResponse(earthHtml, new URL('/earth/?feature=1159321043', origin), 'earth', transport);
+  assert.equal(parseHTML(result).document.querySelector('[data-feature-tooltip-name]')?.textContent, 'Monaco');
+  assert.ok(requests.includes(`${published}/runtime-assets/${assets['earth-features.json']}/earth-features.json`));
+  assert.equal(requests.filter(path => path.startsWith('/scenes/')).length, 0);
+});
