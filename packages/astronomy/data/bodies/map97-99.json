@@ -1,0 +1,30 @@
+{
+ "id": "map97-99",
+ "classification": "star",
+ "order": 5147,
+ "physical": {
+  "name": "[MAP97] 99",
+  "horizonsCode": null,
+  "meanRadiusKm": 77779260,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5060
+ },
+ "physicalNotes": "Radius 111.8 +/- 18.6 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 21.817 d in Li et al. (2021), ApJ 920, 84, table 2; not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186): 77,779,260 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5060 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 21.817 d in Li et al. (2021), ApJ 920, 84, table 2; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 11.235,
+  "declinationDegrees": 41.473,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 761027,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": -300,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Li et al. (2021), ApJ 920, 84, table 2 (https://arxiv.org/abs/2107.08029), VizieR J/ApJ/920/84/table2 row ID = CEPH-11.23543+41.47288, Per = 21.817: RAJ2000 11.235, DEJ2000 41.473, from the archived row src/objects/map97-99/source/photometry/catalogue-row.tsv; SIMBAD names it [MAP97] 99",
+   "distance": "Li et al. (2021), ApJ 920, 84, abstract: M31's Cepheid distance modulus 24.407 +/- 0.032 mag, 10^(mu/5 + 1) pc (https://arxiv.org/abs/2107.08029): 761027 +/- 11215 pc; Gaia DR3 cannot see the star",
+   "properMotion": "J/ApJ/920/84/table2 row ID = CEPH-11.23543+41.47288, Per = 21.817 measures no proper motion; zero is assumed (at 761,027 pc, 1 mas/yr would be 3,608 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity of M31, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract)"
+  }
+ }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "m31-v1",
+  "name": "M31-V1",
+  "system": "M31-V1 system",
+  "description": "A Cepheid in the Andromeda Galaxy that pulsates every 31.4 days.",
+  "aliases": [
+    "PSO J010.3637+41.1696"
+  ],
+  "featured": true,
+  "order": 5140,
+  "target": "PSO J010.3637+41.1696",
+  "paper": {
+    "url": "https://arxiv.org/abs/1111.0262",
+    "credit": "Templeton et al. (2011), PASP 123, 1374"
+  },
+  "radius": {
+    "value": 145.2,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 31.376577 d in Kodric et al. (2018), AJ 156, 130, VizieR J/AJ/156/130/main; not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 24.2
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4940,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 31.376577 d in Kodric et al. (2018), AJ 156, 130, VizieR J/AJ/156/130/main; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": -300,
+    "source": "SIMBAD's radial velocity of M31, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract",
+    "uncertainty": 4
+  },
+  "distance": {
+    "value": 761027,
+    "source": "Li et al. (2021), ApJ 920, 84, abstract: M31's Cepheid distance modulus 24.407 +/- 0.032 mag, 10^(mu/5 + 1) pc",
+    "url": "https://arxiv.org/abs/2107.08029",
+    "uncertainty": 11215
+  },
+  "position": {
+    "catalogue": "J/AJ/156/130/main",
+    "row": {
+      "ID": "579568"
+    },
+    "credit": "Kodric et al. (2018), AJ 156, 130",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..130K"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Andromeda Galaxy, 761 kiloparsecs away, that swells and shrinks every 31.4 days.",
+    "introduction": "Edwin Hubble's M31-V1 is the first Cepheid found in the Andromeda Galaxy. Its galaxy's distance, 761 kiloparsecs, was measured from Cepheids like it.",
+    "locator": "Templeton et al. (2011), PASP 123, 1374: M31-V1; J/AJ/156/130/main, ID 579568: Pr; Li et al. (2021), ApJ 920, 84: mu_0"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M31 is not measured"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "doi-10-1088-0004-6256-144-1-4",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "McConnachie (2012): THE OBSERVED PROPERTIES OF DWARF GALAXIES IN AND AROUND THE LOCAL GROUP",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1204.1562"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/144/1/4"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012AJ....144....4M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-6256/144/1/4",
+      "label": "The Astronomical Journal 144 4"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M",
+      "checkedOn": "2026-10-01",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "McConnachie (2012), The Astronomical Journal 144 4",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 144 4",
+  "creators": [
+    "Alan W. McConnachie"
+  ],
+  "publicationDate": "2012"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "source-map97-99-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "[MAP97] 99 · map97 99 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/map97-99/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Li et al. (2021), ApJ 920, 84, table 2; VizieR J/ApJ/920/84/table2 (CDS)",
+      "scope": "The map97 99 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
