@@ -5,7 +5,7 @@ import { defineObject, OBJECT_CLASSIFICATIONS } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
-import { definePreparedFocus } from './prepared-focus-object.js';
+import { hostedObject } from './prepared-focus-object.js';
 import type { NavigableObject } from './prepared-focus-object.js';
 import { defineOverview } from './overview-object.js';
 
@@ -78,9 +78,14 @@ export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDef
 export function catalogueObject<Scene, Signal>(value: unknown,
   loadScene: (descriptor: Record<string, unknown>) => ObjectDefinitionInput<Scene, Signal>['loadScene']): NavigableObject<Scene, Signal> {
   if (!isRecord(value)) throw new TypeError('Invalid catalogue entry.');
-  if (value.kind === 'prepared-focus') return definePreparedFocus(value);
   if (value.kind === 'overview') return defineOverview(value);
-  if (value.kind !== 'scene' || !isRecord(value.descriptor)) throw new TypeError('Invalid catalogue entry.');
+  if ((value.kind !== 'scene' && value.kind !== 'prepared-focus') || !isRecord(value.descriptor)) throw new TypeError('Invalid catalogue entry.');
+  // A package the world's host draws: the same descriptor as a scene's, read into an entry with no scene of its own.
+  if (value.kind === 'prepared-focus') {
+    if (typeof value.sceneHostId !== 'string') throw new TypeError(`Invalid catalogue entry: ${String(value.descriptor.id)} names no scene host.`);
+    return hostedObject(catalogEntry(value.descriptor, async () => { throw new Error('A hosted object has no scene of its own.'); },
+      parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery)), value.sceneHostId);
+  }
   const { order: _order, context: _context, ...object } = catalogEntry(value.descriptor, loadScene(value.descriptor),
     parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
   return object;

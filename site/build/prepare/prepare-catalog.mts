@@ -1,10 +1,10 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { defineObjects, type CatalogEntry } from '@cssearth/objects';
+import { defineObjects, isHostedDescriptor, type CatalogEntry } from '@cssearth/objects';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { prepareSceneDistance, readPreparedFocusObjects } from '@cssearth/bake/navigation';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES, M_PER_PC } from '@cssearth/astronomy';
@@ -142,11 +142,10 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
   const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
   if (!host) throw new TypeError('Prepared focus destinations need a shared world host.');
-  // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
-  const focuses: never[] = [];
-  // The levels above the star systems are drawn by the same shared world host as every catalogue focus.
+  // The spatial catalogues are data: they name no destination. Every page is a package's own entry: a scene, or a package
+  // the world's host draws (image layers, a volume, catalogue points), which the levels above the star systems are too.
   const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), host.id, descriptors);
-  defineObjects<{ id: string; route: string }>([...entries, ...focuses, ...overviews]);
+  defineObjects<{ id: string; route: string }>([...entries, ...overviews]);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -159,7 +158,10 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     if ([...withImagery].some(child => parents[child]?.parent === entry.id)) discovery.hostsImagery = true;
   }
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries),
-    preparedCatalogueModule(entries.map(({ id, distance }, index) => ({ descriptor: descriptors.get(id), distance, discovery: discoveries[index]! })), focuses));
+    preparedCatalogueModule(...(() => {
+      const rows = entries.map(({ id, distance }, index) => ({ descriptor: descriptors.get(id), distance, discovery: discoveries[index]! }));
+      return [rows.filter(row => !isHostedDescriptor(row.descriptor)), rows.filter(row => isHostedDescriptor(row.descriptor)).map(row => ({ ...row, sceneHostId: host.id }))] as const;
+    })()));
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');

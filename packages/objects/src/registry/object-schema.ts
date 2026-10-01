@@ -118,7 +118,7 @@ function nonEmpty(value: unknown): value is string {
 }
 // Registry capability data is numeric; importing a renderer entry here would
 // pull its native camera factory into every otherwise unrelated object route.
-function parseWorldFrame(value: unknown): ObjectWorldFrame {
+export function parseWorldFrame(value: unknown): ObjectWorldFrame {
   const fields = ['referenceFrame', 'epochJdTt', 'originM', 'presentationToReference', 'metersPerUnit', 'bodyRadiusM', 'orbitUpReference'];
   const vector = (input: unknown, length: number): input is number[] => isArray(input) && input.length === length && Array.from(input).every(Number.isFinite);
   if (!isRecord(value) || Object.getPrototypeOf(value) !== Object.prototype || Object.keys(value).some(key => !fields.includes(key)) ||

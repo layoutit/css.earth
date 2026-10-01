@@ -79,7 +79,8 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
   // @cssearth/objects `contextColour`), capitals for a star, black hole or planet's caption, and its classification and system name.
   {
-    const prepared = readPreparedObjects(process.cwd()), registry = prepared.sceneObjects;
+    // Every placed object the world draws: the scenes and the packages the world's host draws.
+    const prepared = readPreparedObjects(process.cwd()), registry = prepared.worldObjects;
     const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
     const { markerScale, LOCAL_GROUP_SCALE } = await import('@cssearth/renderer/labels/universe-label-policy.ts');
@@ -88,7 +89,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records, as the prepared catalogue holds them: what the world's visibility reads per body.
     const discoveries: Record<string, unknown> = Object.fromEntries(prepared.entries.flatMap(entry =>
-      entry.kind === 'scene' && isRecord(entry.descriptor) && typeof entry.descriptor.id === 'string' ? [[entry.descriptor.id, entry.discovery]] : []));
+      (entry.kind === 'scene' || entry.kind === 'prepared-focus') && isRecord(entry.descriptor) && typeof entry.descriptor.id === 'string' ? [[entry.descriptor.id, entry.discovery]] : []));
     const present = async (body: Record<string, unknown>) => {
       const object = byId.get(String(body.id));
       if (!object) return;
@@ -129,7 +130,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
-  const SCENE_OBJECTS = readPreparedObjects(process.cwd()).sceneObjects;
+  const SCENE_OBJECTS = readPreparedObjects(process.cwd()).worldObjects;
   const planetIds = new Set(SCENE_OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   const classifications = new Map(SCENE_OBJECTS.map(body => [body.id, body.classification]));
   // A planet of another star closes its orbit. A star on a hosted orbit (an S-star around Sgr A*) draws the half-orbit trail a

@@ -61,7 +61,7 @@ export async function prepareSolarGeometry() {
   const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
   // A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
   const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
-  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../../..")).sceneObjects.filter(body =>
+  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../../..")).worldObjects.filter(body =>
     ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
     (isPlacedClassification(body.classification) && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
     if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
