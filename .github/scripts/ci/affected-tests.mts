@@ -12,6 +12,9 @@ export interface Workspace { readonly directory: string; readonly name: string; 
 export interface AffectedTests { readonly packages: 'all' | readonly string[]; readonly site: boolean; }
 
 const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml$/u, /^tsconfig[^/]*\.json$/u, /^\.github\/workflows\//u];
+/** The offline preparation and archive tools. Nearly every change touches a package they import (the renderer), so a
+ * tool joins only when it, or another tool it imports, changed; a push to main tests them whatever changed. */
+const TOOLS = new Set(['bake', 'telescope-cli']);
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
 export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[]): AffectedTests {
@@ -19,10 +22,13 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? []));
   // Everything that imports a changed package can break with it: walk the dependents until nothing new joins.
   const byName = new Map(packages.map(workspace => [workspace.name, workspace.directory]));
+  const joins = (workspace: Workspace) => workspace.dependencies.some(name => {
+    const directory = byName.get(name) ?? '';
+    return changed.has(directory) && (!TOOLS.has(workspace.directory) || TOOLS.has(directory));
+  });
   for (let grew = true; grew;) {
     grew = false;
-    for (const workspace of packages) if (!changed.has(workspace.directory)
-      && workspace.dependencies.some(name => changed.has(byName.get(name) ?? ''))) { changed.add(workspace.directory); grew = true; }
+    for (const workspace of packages) if (!changed.has(workspace.directory) && joins(workspace)) { changed.add(workspace.directory); grew = true; }
   }
   const site = paths.some(path => SITE.some(pattern => pattern.test(path))) || siteDependencies.some(name => changed.has(byName.get(name) ?? ''));
   return { packages: [...changed].sort(), site };
