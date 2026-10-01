@@ -24,6 +24,8 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
+// The same hashed file the client's `world-context-plan.mts` fetches, requested by the head (startup-requests.mts).
+import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 import { worldCameraOf } from '@cssearth/renderer';
 const worldCamera = worldCameraOf(worldSummary);
 
@@ -57,7 +59,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
     {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
-    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id) })}></script>}
+    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl })}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content={seo.description} />
     <link rel="canonical" href={seo.canonical} />

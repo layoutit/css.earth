@@ -37,8 +37,8 @@ test('a cancelled reader does not adopt the head request', () => withPage('https
 }));
 
 test('the bootstrap names the transport the page reads', () => {
-  assert.match(startupRequestsBootstrap({ objectId: 'earth', serverMarkup: false, systemView: true }),
-    /\["\/objects\/earth\/entry\.json","\/world\/system-views\/earth\.json"\], "\/objects\/earth\/object\.json", "\/earth\/"\);$/u);
-  assert.match(startupRequestsBootstrap({ objectId: 'ceres', serverMarkup: true, systemView: false }),
-    /\["\/objects\/ceres\/entry\.json"\], "\/objects\/ceres\/first-view\.json"/u);
+  assert.match(startupRequestsBootstrap({ objectId: 'earth', serverMarkup: false, systemView: true, summaryUrl: '/_astro/summary.json' }),
+    /\["\/_astro\/summary\.json","\/objects\/earth\/entry\.json","\/world\/system-views\/earth\.json"\], "\/objects\/earth\/object\.json", "\/earth\/"\);$/u);
+  assert.match(startupRequestsBootstrap({ objectId: 'ceres', serverMarkup: true, systemView: false, summaryUrl: '/s.json' }),
+    /\["\/s\.json","\/objects\/ceres\/entry\.json"\], "\/objects\/ceres\/first-view\.json"/u);
 });

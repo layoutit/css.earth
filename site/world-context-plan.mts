@@ -1,4 +1,5 @@
 import { parsePreparedWorldContextSummary } from '@cssearth/renderer';
+import { startupFetch } from './startup-requests.mts';
 
 // The application's prepared world context, validated once. Startup, framing and
 // every detail mount share this immutable plan. The browser fetches the prepared
@@ -31,7 +32,7 @@ async function readPreparedWorldContext(): Promise<unknown> {
     const { nodeProjectFileUrl } = await import('./prepared/prepared-world-context-node-source.mts');
     return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, 'src/objects/sun/prepared/world-context-summary.json'), { with: { type: 'json' } })).default;
   }
-  const response = await fetch(source);
+  const response = await startupFetch(source);
   if (!response.ok) throw new Error(`Prepared world context request failed: ${response.status}.`);
   return response.json();
 }
