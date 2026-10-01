@@ -775,6 +775,18 @@ test('a body beyond the Local Group keeps its dot at the scale of its cluster, a
   assert.equal(dotted(12e6), false, 'past 10 Mpc it has gone, as from the Milky Way');
 });
 
+test('a star of a Magellanic Cloud keeps its dot in its galaxy\'s view, past the scope that retires the Milky Way\'s stars', () => {
+  const star = plan.bodies.find(body => body.id === 'hv-1005')!, calculate = createWorldContextPlanner(plan), input = view();
+  input.systemRetired = true; input.galaxyRetired = true;
+  const dotted = (parsecs: number) => {
+    // Looking down -z at the star, from `parsecs` above it.
+    input.world.pose.positionM = [star.positionM[0], star.positionM[1], star.positionM[2] + parsecs * 3.085677581491367e16];
+    return calculate(input).projectedBodies.some(body => [plan.focus, ...plan.bodies][body.index]!.id === star.id && body.markerOpacity > 0);
+  };
+  assert.equal(dotted(20e3), true, 'from 20 kpc, framing the Large Magellanic Cloud, HV 1005 keeps a dot');
+  assert.equal(dotted(60e3), false, 'from 60 kpc, farther from it than the Sun is, it has gone, as from the Milky Way');
+});
+
 test('the moons of a framed planet keep their names before stars beyond the Solar System', async () => {
   const kinds = new Map(plan.bodies.map(body => [body.id, body.classification]));
   const points = [plan.focus, ...plan.bodies], jupiter = plan.bodies.find(body => body.id === 'jupiter')!;

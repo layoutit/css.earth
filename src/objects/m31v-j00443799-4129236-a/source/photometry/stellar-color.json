@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "m31v-j00443799-4129236-a",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 33900,
+      "lowerKelvin": 33400,
+      "upperKelvin": 34400,
+      "citation": "Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2: 33900 +/- 500 K, https://arxiv.org/abs/astro-ph/0511045"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

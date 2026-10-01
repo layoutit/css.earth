@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/m31v-j00443799-4129236-a/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "m31v-j00443799-4129236-a-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssm31v-j00443799-4129236-a-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "m31v-j00443799-4129236-a-surface-{id}{suffix}.webp",
+      "thumbnail": "m31v-j00443799-4129236-a-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/reeve-2016-v-quadratic.tsv",
+          "grid": {
+            "teffK": 33900,
+            "logg": 3.57,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        },
+        "qualification": "Photosphere colour from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 33,900 K and log g 3.57 (u1 0.092, u2 0.325): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "m31v-j00443799-4129236-a-context-{id}{suffix}.webp",
+    "limbOutput": "m31v-j00443799-4129236-a-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssm31v-j00443799-4129236-a-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

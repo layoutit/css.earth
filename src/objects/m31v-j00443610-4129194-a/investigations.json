@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m31v-j00443610-4129194-a",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 369281910881860352: position at J2016.0. Distance: Distance 724 +/- 37 kpc, (m-M)0 = 24.30 +/- 0.11 mag, from the pair's own radii, temperatures and brightness, Vilardell et al. (2010), A&A 509, A70, Table 3 (https://arxiv.org/abs/0911.3391): 724000 +/- 37000 pc; Gaia DR3 parallax -1.3208 +/- 0.7153 mas (same row, RUWE 1.01), -1.8 standard errors, is not used. Proper motion: Gaia DR3 (same row): -0.775, 0.264 mas/yr. Radial velocity from Systemic velocity gamma -164 +/- 5 km/s of the pair, Vilardell et al. (2010), A&A 509, A70, Table 2.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/0911.3391"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 9.2 +/- 0.2 solar radii from Primary radius 9.2 +/- 0.2 solar radii, Vilardell et al. (2010), A&A 509, A70, Table 2 (https://arxiv.org/abs/0911.3391). Mass 21.7 +/- 1.7 solar masses from Primary mass 21.7 +/- 1.7 solar masses, Vilardell et al. (2010), A&A 509, A70, Table 2 (https://arxiv.org/abs/0911.3391). Temperature 33600 +/- 600 K from Primary Teff 33600 +/- 600 K, Vilardell et al. (2010), A&A 509, A70, Table 3.",
+      "evidence": [
+        "https://arxiv.org/abs/0911.3391"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 33,600 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #a0baff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/0911.3391"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 33,600 K and log g 3.85 (u1 0.082, u2 0.292): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/MNRAS/456/1294"
+      ]
+    }
+  ]
+}
