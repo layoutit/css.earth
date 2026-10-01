@@ -628,8 +628,11 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const banks = ['focus-bank', 'warm-bank', 'cold-bank'].map(bank);
   // Each package the host draws is a body of the world context; one of them has no bank of its own.
   const nebula = context.bodies.find((body: { id: string }) => body.id === 'm1');
-  for (const id of ['focus-bank', 'image-bank', 'no-bank']) context.bodies.push({ ...nebula, id, name: id, positionM: frame.originM, radiusM: frame.metersPerUnit });
-  const image: PreparedCssImageLayers = { ...small, id: 'image-bank', bankViews: small.stacks.map(stack => ({ axis: stack.axis,
+  // The galaxy stands apart from the nebulae: a body inside a galaxy's framing sphere draws that galaxy's dots.
+  const imageFrame = { ...frame, originM: [frame.originM[0] + 100 * frame.metersPerUnit, frame.originM[1], frame.originM[2]] as [number, number, number] };
+  for (const id of ['focus-bank', 'image-bank', 'no-bank']) context.bodies.push({ ...nebula, id, name: id,
+    positionM: id === 'image-bank' ? imageFrame.originM : frame.originM, radiusM: frame.metersPerUnit });
+  const image: PreparedCssImageLayers = { ...small, frame: imageFrame, id: 'image-bank', bankViews: small.stacks.map(stack => ({ axis: stack.axis,
     normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
   const loadVolumeDataset = mock.fn(async (id: string) => ({ payload: banks.find(bank => bank.id === id)!, resolveResource: (path: string) => `/bank/${id}/${path}` }));
   const loadImageLayer = mock.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
@@ -640,7 +643,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
     ...datasetBanks(banks.map(bank => ({ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }))), loadVolumeDataset,
-    imageLayerBanks: [{ id: image.id, frame }], loadImageLayer, catalog: { payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 },
+    imageLayerBanks: [{ id: image.id, frame: imageFrame }], loadImageLayer, catalog: { payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 },
   }).mount(stage as unknown as HTMLElement);
   const root = mounted.root as unknown as FakeElement;
   const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id)!;
@@ -697,7 +700,8 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     const before = all(findBank('warm-bank')).map(node => ({ ...node.style }));
     mounted.publish({ ...near, pose: { ...near.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } }, viewport, spatialFrame);
     assert.deepEqual(all(findBank('warm-bank')).map(node => ({ ...node.style })), before);
-    select('image-bank'); mounted.publish(near, viewport, spatialFrame);
+    select('image-bank');
+    mounted.publish({ ...near, pose: { ...near.pose, positionM: [imageFrame.originM[0], near.pose.positionM[1], near.pose.positionM[2]] } }, viewport, spatialFrame);
     assert.equal(imageRoot.style.display, ''); assert.equal(findBank('focus-bank').style.display, 'none');
     select(context.focus.id); mounted.publish(near, viewport, spatialFrame);
     assert.equal(mw.style.display, '');

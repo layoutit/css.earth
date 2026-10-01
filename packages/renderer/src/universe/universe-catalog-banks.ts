@@ -4,7 +4,7 @@ import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
-import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
+import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
@@ -15,8 +15,10 @@ interface ImageBank {
   readonly frame: DensityVolumeFrame;
   readonly radiusUnits: number;
   mounted: ReturnType<typeof mountPreparedCssImageLayers> | null;
-  /** Its catalogue dots, inside the mounted root so they share its opacity. */
+  /** Its catalogue dots, mounted beside its slices and given their opacity, or their own from inside the galaxy. */
   points: ReturnType<typeof mountCataloguePoints>[];
+  /** Whether the dots drew on the last publication: a hidden bank is told once, not every frame. */
+  dotsShown: boolean;
   loading: Promise<void> | null;
   publishedOpacity: number;
   /** Its leaf in the billboard layer, and whether that billboard fades with the Milky Way; -1 without a billboard. */
@@ -51,7 +53,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   let billboardCount = 0;
   const images: ImageBank[] = declarations.map(bank => {
     const facts = prepared?.plan.banks.get(bank.id);
-    return { ...bank, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], loading: null, publishedOpacity: NaN,
+    return { ...bank, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], dotsShown: false, loading: null, publishedOpacity: NaN,
       billboardIndex: facts?.billboard ? billboardCount++ : -1, billboardRadiusUnits: facts?.billboard?.radiusUnits ?? 0,
       independent: facts?.contextVisibility === 'independent' };
   });
@@ -125,9 +127,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       }
       bank.mounted = mountPreparedCssImageLayers({ host: root, before: end, payload: loaded.payload, resolveResource: loaded.resolveResource });
       bank.mounted.root.style.display = 'none';
-      const host = bank.mounted.root;
-      bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url,
-        loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => host.ownerDocument.defaultView!.fetch(input, init)) }));
+      // The dots are mounted beside the slices, not inside them: from inside the galaxy they draw without its photograph.
+      bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host: root, before: end, url,
+        loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) }));
       requestPublication?.();
     }).finally(() => { bank.loading = null; publishResidency(); });
     publishResidency();
@@ -163,7 +165,14 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */
     setCoasting(active: boolean) { billboards?.setCoasting(active); },
-    publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string) {
+    /** The image bank whose framing sphere holds `positionM`: the galaxy a selected star is in. */
+    imageBankContaining(positionM: readonly number[]): string | undefined {
+      return images.find(bank => Math.hypot(...positionM.map((value, axis) => value - bank.frame.originM[axis]!)) <= bank.radiusUnits * bank.frame.metersPerUnit)?.id;
+    },
+    /** `inside` is the galaxy the selected body is in, and how much of its dots show: a star of M33 stands among M33's
+     * catalogue dots, without the photograph that is the galaxy seen from outside. */
+    publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string,
+      inside?: { readonly objectId: string; readonly opacity: number }) {
       if (lifetime.disposed) return;
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
@@ -173,11 +182,17 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         if (billboards && bank.billboardIndex >= 0) {
           const context = bank.independent ? 1 : volumeOpacity;
           const handoff = bank.mounted ? Math.min(1, opacity / Math.max(context, Number.MIN_VALUE)) : 0;
-          billboards.publish(bank.billboardIndex, context * projectedVolumeOpacity(world, viewport, bank.frame, bank.billboardRadiusUnits) * (1 - handoff), world, viewport);
+          billboards.publish(bank.billboardIndex, context * projectedVolumeOpacity(world, viewport, bank.frame, bank.billboardRadiusUnits) * (1 - handoff) *
+            outsideVolumeOpacity(world, bank.frame, bank.radiusUnits), world, viewport);
         }
+        const dotOpacity = Math.max(opacity, inside?.objectId === bank.id ? inside.opacity : 0);
         if (!bank.mounted) {
-          if (opacity > 0) void ensureImage(bank).catch(() => {});
+          if (dotOpacity > 0) void ensureImage(bank).catch(() => {});
           continue;
+        }
+        if (dotOpacity > 0 || bank.dotsShown) {
+          for (const points of bank.points) points.publish({ world, viewport }, dotOpacity);
+          bank.dotsShown = dotOpacity > 0;
         }
         if (opacity !== bank.publishedOpacity) {
           bank.mounted.root.style.opacity = String(opacity);
@@ -185,10 +200,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }
-        if (opacity > 0) {
-          bank.mounted.publish({ world, viewport });
-          for (const points of bank.points) points.publish({ world, viewport });
-        }
+        if (opacity > 0) bank.mounted.publish({ world, viewport });
       }
     },
   };

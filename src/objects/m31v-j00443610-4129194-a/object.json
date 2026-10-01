@@ -97,7 +97,7 @@
       "name": "DIRECT V12262 M31C A",
       "classification": "star",
       "color": "#a0baff",
-      "distanceAu": 149335719353.7,
+      "distanceAu": 158768415208.2,
       "description": "The primary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 2.048644 days.",
       "systemName": "DIRECT V12262 M31C system",
       "aliases": [
@@ -113,20 +113,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        1.641890225163985e+22,
-        3.2362763853963655e+21,
-        1.479984526484738e+22
+        1.7455991783029173e+22,
+        3.4406937275875485e+21,
+        1.5734668090095776e+22
       ],
       "presentationToReference": [
         0.73494529207259,
         0.6499671501862485,
-        0.19338593883502075,
-        0.1448626745466624,
+        0.19338593883502073,
+        0.14486267454666235,
         0.12811294572482074,
-        -0.9811227643169315,
+        -0.9811227643169316,
         0.6624728093918448,
         -0.7490859608993322,
-        -2.6570556090433007e-8
+        -2.6570556127207637e-8
       ],
       "orbitUpReference": [
         -0.6499671501862485,

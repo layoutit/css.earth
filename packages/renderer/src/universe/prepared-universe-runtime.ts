@@ -337,7 +337,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
-              catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
+              // A body inside a galaxy other than the page's own stands among that galaxy's catalogue dots once the camera has left
+              // the body's own system, over the band the stellar neighbourhood takes around the Sun.
+              const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);
+              catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, insideGalaxy === undefined || insideGalaxy === detailedFocus?.objectId ? undefined
+                : { objectId: insideGalaxy, opacity: logarithmicFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) });
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
                 selectedBodyContextOpacity(world, viewport, captionBody));

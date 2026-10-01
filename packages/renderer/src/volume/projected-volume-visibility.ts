@@ -29,6 +29,15 @@ export function projectedVolumeOpacity(world: WorldCameraPose, viewport: WorldCa
   return t * t * (3 - 2 * t);
 }
 
+/** How much of a volume's billboard draws by where the camera stands: nothing inside the volume's framing sphere, all of it from
+ * a quarter of that radius farther out, evenly in the logarithm between. A billboard is the volume seen from outside; from inside its sphere the
+ * impostor has no view to take (M33's photograph drew a hundred pixels wide beside a star 5,600 light-years away inside it,
+ * 2026-10-01), and what the volume holds there (a galaxy's catalogue dots) stands for it. */
+export function outsideVolumeOpacity(world: WorldCameraPose, frame: DensityVolumeFrame, framingRadiusUnits: number): number {
+  const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis]!)) / frame.metersPerUnit;
+  return Math.max(0, Math.min(1, Math.log(distanceUnits / framingRadiusUnits) / Math.log(1.25)));
+}
+
 export function projectedVolumeRadiusPixels(world: WorldCameraPose, viewport: WorldCameraViewport, frame: DensityVolumeFrame,
   framingRadiusUnits: number): number {
   const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis]!)) / frame.metersPerUnit;

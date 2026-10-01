@@ -297,7 +297,10 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
  * radius (the rounded centre's shift plus one step). */
 export function outwardSphere(sphere: { readonly centerM: Vector3; readonly radiusM: number }) {
   const step = 10 ** Math.floor(Math.log10(sphere.radiusM * 1e-6)), digits = Math.max(0, -Math.log10(step));
-  const snap = (value: number) => Number((Math.round(value / step) * step).toFixed(digits));
+  // A coordinate whose doubles are spaced wider than the step cannot be written in steps: snapping one 1.7e22 m from the Sun (a
+  // hosted orbit in the Andromeda Galaxy, doubles 4e6 m apart) to a 1e4 m step moved it 5e5 m, and the sphere grew by 34 millionths
+  // of its radius to hold it (2026-10-01). Such a coordinate is kept as it is.
+  const snap = (value: number) => Math.abs(value) * Number.EPSILON > step ? value : Number((Math.round(value / step) * step).toFixed(digits));
   const centerM = sphere.centerM.map(snap) as unknown as Vector3;
   const needed = sphere.radiusM + Math.hypot(...centerM.map((value, axis) => value - sphere.centerM[axis]!));
   let radiusM = Number((Math.ceil(needed / step) * step).toFixed(digits));

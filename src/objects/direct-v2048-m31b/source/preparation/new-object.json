@@ -35,10 +35,9 @@
     "uncertainty": 4
   },
   "distance": {
-    "value": 761027,
-    "source": "Li et al. (2021), ApJ 920, 84, abstract: M31's Cepheid distance modulus 24.407 +/- 0.032 mag, 10^(mu/5 + 1) pc",
-    "url": "https://arxiv.org/abs/2107.08029",
-    "uncertainty": 11215
+    "value": 774398,
+    "source": "Placed in M31 as the app draws it, where the star's sight line crosses the disc's midplane: 774,398 pc (src/objects/m31/source/recipe.json: centre 776,247 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 74 deg, line of nodes 37.7 deg). The galaxy's Cepheid distance, Li et al. (2021), ApJ 920, 84, abstract: modulus 24.407 +/- 0.032 mag, 761 kpc; it places the galaxy, not a star within it",
+    "url": "https://doi.org/10.33232/001c.144859"
   },
   "position": {
     "catalogue": "J/ApJ/920/84/table2",

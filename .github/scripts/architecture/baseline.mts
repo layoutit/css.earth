@@ -9,7 +9,6 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, type FolderEdge } from './folders.mts';
 import type { ImportGraph } from './graph.mts';
 import { compareViolations, evaluateRules, LAYER_RULES, NO_BASELINE_RULES, type LayerRule, type Violation } from './rules.mts';
-import { packageCycleKey, type PackageCycle } from './package-cycles.mts';
 import { byText, zoneOf } from './zones.mts';
 
 export const BASELINE_PATH = '.github/scripts/architecture/baseline.json';
@@ -25,21 +24,19 @@ export interface Baseline {
     readonly layerOrder: readonly string[];
     readonly cycleClosingEdges: readonly CycleEdge[];
   };
-  readonly packageCycles: readonly PackageCycle[];
   readonly rules: Readonly<Record<string, readonly Violation[]>>;
 }
 
 export interface Measurement {
   readonly cycles: readonly (readonly string[])[];
   readonly folderEdges: readonly FolderEdge[];
-  readonly packageCycles: readonly PackageCycle[];
   readonly noBaselineRules: ReadonlySet<string>;
   readonly rules: ReadonlyMap<string, readonly Violation[]>;
 }
 
-export function measure(graph: ImportGraph, rules: readonly LayerRule[] = LAYER_RULES, packageCycles: readonly PackageCycle[] = []): Measurement {
+export function measure(graph: ImportGraph, rules: readonly LayerRule[] = LAYER_RULES): Measurement {
   const folders = folderGraph(graph);
-  return { cycles: folderCycles(folders), folderEdges: folders.edges, rules: evaluateRules(graph, rules), packageCycles,
+  return { cycles: folderCycles(folders), folderEdges: folders.edges, rules: evaluateRules(graph, rules),
     noBaselineRules: new Set(rules.filter(rule => rule.noBaseline).map(rule => rule.id)) };
 }
 
@@ -64,7 +61,6 @@ export function createBaseline(measurement: Measurement, previous?: Baseline): B
         ...closing.filter(edge => !previous.cycles.cycleClosingEdges.some(old => same(old, edge))),
       ] : closing,
     },
-    packageCycles: measurement.packageCycles,
     rules: Object.fromEntries([...measurement.rules].filter(([rule]) => !measurement.noBaselineRules.has(rule)).sort(([left], [right]) => byText(left, right))),
   };
 }
@@ -89,16 +85,6 @@ export function decodeBaseline(value: unknown): Baseline {
         return { ...pair(item, label), imports: requireFiniteNumber(requireRecord(item, label).imports, `${label} imports`) };
       }),
     },
-    packageCycles: record.packageCycles === undefined ? [] : requireArray(record.packageCycles, 'baseline packageCycles').map((item, index) => {
-      const entry = requireRecord(item, `package cycle ${index}`);
-      const names = (value: unknown, label: string) => requireArray(value, label).map(name => requireString(name, label));
-      const nodes = names(entry.nodes, 'package cycle nodes'), scc = names(entry.scc, 'package cycle scc');
-      if (!nodes.length || new Set(nodes).size !== nodes.length || nodes.some(name => !name.startsWith('@cssearth/'))
-        || nodes.some(name => !scc.includes(name)) || new Set(scc).size !== scc.length
-        || scc.some(name => !name.startsWith('@cssearth/')) || [...scc].sort(byText).some((name, i) => name !== scc[i])
-        || nodes.some(name => byText(name, nodes[0]!) < 0)) throw new TypeError('Invalid canonical package cycle or SCC.');
-      return { nodes, scc };
-    }),
     rules: Object.fromEntries(Object.entries(requireRecord(record.rules, 'baseline rules')).filter(([rule]) => !NO_BASELINE_RULES.has(rule)).map(([rule, list]) =>
       [rule, requireArray(list, `baseline rule ${rule}`).map((item, index) => pair(item, `${rule} ${index}`))])),
   };
@@ -116,7 +102,6 @@ export function formatBaseline(baseline: Baseline): string {
     "layerOrder": ${list(baseline.cycles.layerOrder, '    ')},
     "cycleClosingEdges": ${list(baseline.cycles.cycleClosingEdges, '    ')}
   },
-  "packageCycles": ${list(baseline.packageCycles ?? [], '  ')},
   "rules": {${rules.length ? `\n${rules.join(',\n')}\n  ` : ''}}
 }
 `;
@@ -124,8 +109,6 @@ export function formatBaseline(baseline: Baseline): string {
 
 export interface RuleDelta { readonly rule: string; readonly added: readonly Violation[]; readonly removed: readonly Violation[]; readonly count: number; readonly baseline: number; readonly noBaseline: boolean }
 export interface Delta {
-  readonly packageCycles: { readonly now: readonly PackageCycle[]; readonly baseline: readonly PackageCycle[];
-    readonly added: readonly PackageCycle[]; readonly removed: readonly PackageCycle[]; readonly grown: readonly PackageCycle[] };
   readonly largestCycle: { readonly now: number; readonly baseline: number };
   readonly cycleClosing: {
     readonly now: readonly CycleEdge[]; readonly baseline: readonly CycleEdge[];
@@ -171,17 +154,7 @@ export function compare(baseline: Baseline, measurement: Measurement): Delta {
     const known = noBaseline ? [] : baseline.rules[rule] ?? [];
     return { rule, added: difference(violations, known), removed: difference(known, violations).sort(compareViolations), count: violations.length, baseline: known.length, noBaseline };
   });
-  const before = baseline.packageCycles ?? [], after = measurement.packageCycles;
-  const packageDifference = (left: readonly PackageCycle[], right: readonly PackageCycle[]) => {
-    const keys = new Set(right.map(packageCycleKey));
-    return left.filter(cycle => !keys.has(packageCycleKey(cycle)));
-  };
-  const grown = after.filter(cycle => {
-    const old = before.find(item => packageCycleKey(item) === packageCycleKey(cycle));
-    return old !== undefined && cycle.scc.some(name => !old.scc.includes(name));
-  });
   return {
-    packageCycles: { now: after, baseline: before, added: packageDifference(after, before), removed: packageDifference(before, after), grown },
     largestCycle: { now: measurement.cycles[0]?.length ?? 0, baseline: baseline.cycles.largestCycle },
     cycleClosing: {
       now, baseline: baseline.cycles.cycleClosingEdges,
@@ -208,15 +181,12 @@ export function compare(baseline: Baseline, measurement: Measurement): Delta {
 
 /** Worse than the baseline: a new cycle-closing edge, a new forbidden import or a larger largest cycle. */
 export function isWorse(delta: Delta): boolean {
-  return delta.packageCycles.added.length > 0 || delta.packageCycles.grown.length > 0 || delta.cycleClosing.added.length > 0 || delta.rules.some(rule => rule.added.length > 0)
+  return delta.cycleClosing.added.length > 0 || delta.rules.some(rule => rule.added.length > 0)
     || delta.largestCycle.now > delta.largestCycle.baseline;
 }
 
 /** Better than the baseline in some way, so it can be tightened. */
 export function isStale(delta: Delta): boolean {
-  return delta.packageCycles.removed.length > 0 || delta.packageCycles.now.some(cycle => {
-    const old = delta.packageCycles.baseline.find(item => packageCycleKey(item) === packageCycleKey(cycle));
-    return old !== undefined && old.scc.some(name => !cycle.scc.includes(name));
-  }) || delta.cycleClosing.removed.length > 0 || delta.rules.some(rule => rule.removed.length > 0)
+  return delta.cycleClosing.removed.length > 0 || delta.rules.some(rule => rule.removed.length > 0)
     || delta.largestCycle.now < delta.largestCycle.baseline || delta.unknownRules.length > 0;
 }
