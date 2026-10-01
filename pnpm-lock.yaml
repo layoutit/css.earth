@@ -299,9 +299,6 @@ importers:
         specifier: ^2.9.0
         version: 2.9.0
     devDependencies:
-      '@cssearth/telescope-cli':
-        specifier: workspace:*
-        version: link:../telescope-cli
       '@types/estree':
         specifier: ^1.0.9
         version: 1.0.9
@@ -459,7 +456,7 @@ importers:
         version: 5.9.3
 
   packages/telescope-cli:
-    devDependencies:
+    dependencies:
       '@cssearth/astronomy':
         specifier: workspace:*
         version: link:../astronomy
@@ -484,6 +481,7 @@ importers:
       '@cssearth/telescope':
         specifier: workspace:*
         version: link:../telescope
+    devDependencies:
       '@types/node':
         specifier: ^26.4.0
         version: 26.4.0
