@@ -364,7 +364,6 @@
     "yaml": "^2.9.0"
   },
   "devDependencies": {
-    "@cssearth/telescope-cli": "workspace:*",
     "@types/estree": "^1.0.9",
     "@types/node": "^26.4.0",
     "@types/three": "0.180.0",

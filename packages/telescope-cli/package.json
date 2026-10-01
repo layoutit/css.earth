@@ -137,7 +137,7 @@
     "prepack": "npm run build",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
-  "devDependencies": {
+  "dependencies": {
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/bake": "workspace:*",
     "@cssearth/core": "workspace:*",
@@ -145,7 +145,9 @@
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
-    "@cssearth/telescope": "workspace:*",
+    "@cssearth/telescope": "workspace:*"
+  },
+  "devDependencies": {
     "@types/node": "^26.4.0",
     "@types/pngjs": "6.0.5",
     "esbuild": "0.27.7",
