@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-sidebar-thumbnails@1",
-  "method": "Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications.",
+  "method": "Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. Each object row shows its default image inside a margin, faded out before the image frame.",
   "inputs": [
     {
       "path": "src/objects/beta-pictoris-disc/prepared/presentation.json",
@@ -113,14 +113,6 @@
     {
       "path": "public/scenes/m1-volume/datasets/chandra-xray.webp",
       "bytes": 4464
-    },
-    {
-      "path": "src/objects/m101-layers/prepared/presentation.json",
-      "bytes": 1425
-    },
-    {
-      "path": "public/scenes/m101-layers/datasets/optical.webp",
-      "bytes": 11168
     },
     {
       "path": "src/objects/m2-9-volume/prepared/presentation.json",
@@ -239,28 +231,12 @@
       "bytes": 5324
     },
     {
-      "path": "src/objects/ngc-2903-layers/prepared/presentation.json",
-      "bytes": 1458
-    },
-    {
-      "path": "public/scenes/ngc-2903-layers/datasets/optical.webp",
-      "bytes": 5180
-    },
-    {
       "path": "src/objects/ngc-300-layers/prepared/presentation.json",
       "bytes": 1424
     },
     {
       "path": "public/scenes/ngc-300-layers/datasets/optical.webp",
       "bytes": 15188
-    },
-    {
-      "path": "src/objects/ngc-6946-layers/prepared/presentation.json",
-      "bytes": 1494
-    },
-    {
-      "path": "public/scenes/ngc-6946-layers/datasets/optical.webp",
-      "bytes": 26340
     },
     {
       "path": "src/objects/omega-centauri-volume/prepared/presentation.json",
@@ -332,7 +308,7 @@
     },
     {
       "path": "src/objects/local-group/prepared/catalogue.json",
-      "bytes": 706101
+      "bytes": 705298
     }
   ],
   "images": {
@@ -362,6 +338,15 @@
       ],
       "credit": "NASA/ESA HST, MAST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST"
+    },
+    "beta-pictoris-disc": {
+      "url2x": "/navigation/focus-object-beta-pictoris-disc@2x.webp",
+      "inputs": [
+        "src/objects/beta-pictoris-disc/prepared/presentation.json",
+        "public/scenes/beta-pictoris-disc/datasets/visible.webp"
+      ],
+      "credit": "NASA/ESA HST, Ren et al. 2023 (CDS)",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/672/A114"
     },
     "betelgeuse-shell/zimpol-v": {
       "url2x": "/navigation/focus-betelgeuse-shell-zimpol-v@2x.webp",
@@ -399,6 +384,15 @@
       "credit": "ALMA (ESO/NAOJ/NRAO)",
       "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
     },
+    "betelgeuse-shell": {
+      "url2x": "/navigation/focus-object-betelgeuse-shell@2x.webp",
+      "inputs": [
+        "src/objects/betelgeuse-shell/prepared/presentation.json",
+        "public/scenes/betelgeuse-shell/datasets/zimpol-v.webp"
+      ],
+      "credit": "ESO/VLT/SPHERE-ZIMPOL",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
+    },
     "eps-eridani-disc/dust": {
       "url2x": "/navigation/focus-eps-eridani-disc-dust@2x.webp",
       "inputs": [
@@ -408,8 +402,26 @@
       "credit": "ALMA (ESO/NAOJ/NRAO)",
       "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S"
     },
+    "eps-eridani-disc": {
+      "url2x": "/navigation/focus-object-eps-eridani-disc@2x.webp",
+      "inputs": [
+        "src/objects/eps-eridani-disc/prepared/presentation.json",
+        "public/scenes/eps-eridani-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S"
+    },
     "hd-181327-disc/reflectance": {
       "url2x": "/navigation/focus-hd-181327-disc-reflectance@2x.webp",
+      "inputs": [
+        "src/objects/hd-181327-disc/prepared/presentation.json",
+        "public/scenes/hd-181327-disc/datasets/reflectance.webp"
+      ],
+      "credit": "NASA/ESA/CSA JWST, MAST",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf"
+    },
+    "hd-181327-disc": {
+      "url2x": "/navigation/focus-object-hd-181327-disc@2x.webp",
       "inputs": [
         "src/objects/hd-181327-disc/prepared/presentation.json",
         "public/scenes/hd-181327-disc/datasets/reflectance.webp"
@@ -444,6 +456,15 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/helix/"
     },
+    "helix-volume": {
+      "url2x": "/navigation/focus-object-helix-volume@2x.webp",
+      "inputs": [
+        "src/objects/helix-volume/prepared/presentation.json",
+        "public/scenes/helix-volume/datasets/eso-wfi.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso0907a/"
+    },
     "lmc-volume/horalek-widefield": {
       "url2x": "/navigation/focus-lmc-volume-horalek-widefield@2x.webp",
       "inputs": [
@@ -470,6 +491,15 @@
       ],
       "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
       "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
+    },
+    "lmc-volume": {
+      "url2x": "/navigation/focus-object-lmc-volume@2x.webp",
+      "inputs": [
+        "src/objects/lmc-volume/prepared/presentation.json",
+        "public/scenes/lmc-volume/datasets/horalek-widefield.webp"
+      ],
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/"
     },
     "m1-volume/hubble-optical": {
       "url2x": "/navigation/focus-m1-volume-hubble-optical@2x.webp",
@@ -525,17 +555,26 @@
       "credit": "CXC",
       "sourceUrl": "https://esahubble.org/images/potw1720f/"
     },
-    "m101-layers/optical": {
-      "url2x": "/navigation/focus-m101-layers-optical@2x.webp",
+    "m1-volume": {
+      "url2x": "/navigation/focus-object-m1-volume@2x.webp",
       "inputs": [
-        "src/objects/m101-layers/prepared/presentation.json",
-        "public/scenes/m101-layers/datasets/optical.webp"
+        "src/objects/m1-volume/prepared/presentation.json",
+        "public/scenes/m1-volume/datasets/hubble-optical.webp"
       ],
-      "credit": "NOIRLab",
-      "sourceUrl": "https://noirlab.edu/public/images/noao-m101ubviha/"
+      "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+      "sourceUrl": "https://esahubble.org/images/heic0515a/"
     },
     "m2-9-volume/hst-optical": {
       "url2x": "/navigation/focus-m2-9-volume-hst-optical@2x.webp",
+      "inputs": [
+        "src/objects/m2-9-volume/prepared/presentation.json",
+        "public/scenes/m2-9-volume/datasets/hst-optical.webp"
+      ],
+      "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "sourceUrl": "https://apod.nasa.gov/apod/ap040201.html"
+    },
+    "m2-9-volume": {
+      "url2x": "/navigation/focus-object-m2-9-volume@2x.webp",
       "inputs": [
         "src/objects/m2-9-volume/prepared/presentation.json",
         "public/scenes/m2-9-volume/datasets/hst-optical.webp"
@@ -552,8 +591,26 @@
       "credit": "NOIRLab · ESA/Hubble",
       "sourceUrl": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/"
     },
+    "m31-layers": {
+      "url2x": "/navigation/focus-object-m31-layers@2x.webp",
+      "inputs": [
+        "src/objects/m31-layers/prepared/presentation.json",
+        "public/scenes/m31-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab · ESA/Hubble",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/"
+    },
     "m33-layers/optical": {
       "url2x": "/navigation/focus-m33-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/m33-layers/prepared/presentation.json",
+        "public/scenes/m33-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1424a/"
+    },
+    "m33-layers": {
+      "url2x": "/navigation/focus-object-m33-layers@2x.webp",
       "inputs": [
         "src/objects/m33-layers/prepared/presentation.json",
         "public/scenes/m33-layers/datasets/optical.webp"
@@ -578,6 +635,15 @@
       ],
       "credit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
       "sourceUrl": "https://www.eso.org/public/images/eso1006a/"
+    },
+    "m42-volume": {
+      "url2x": "/navigation/focus-object-m42-volume@2x.webp",
+      "inputs": [
+        "src/objects/m42-volume/prepared/presentation.json",
+        "public/scenes/m42-volume/datasets/eso-optical.webp"
+      ],
+      "credit": "ESO/G. Beccari",
+      "sourceUrl": "https://www.eso.org/public/images/eso1723a/"
     },
     "m45-volume/optical-composite": {
       "url2x": "/navigation/focus-m45-volume-optical-composite@2x.webp",
@@ -624,8 +690,26 @@
       "credit": "NASA/JPL-Caltech/UCLA",
       "sourceUrl": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
     },
+    "m45-volume": {
+      "url2x": "/navigation/focus-object-m45-volume@2x.webp",
+      "inputs": [
+        "src/objects/m45-volume/prepared/presentation.json",
+        "public/scenes/m45-volume/datasets/optical-composite.webp"
+      ],
+      "credit": "Taavi Niittee / Tõrva Astronomy Club",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg"
+    },
     "m49-volume/legacy-optical": {
       "url2x": "/navigation/focus-m49-volume-legacy-optical@2x.webp",
+      "inputs": [
+        "src/objects/m49-volume/prepared/presentation.json",
+        "public/scenes/m49-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
+    "m49-volume": {
+      "url2x": "/navigation/focus-object-m49-volume@2x.webp",
       "inputs": [
         "src/objects/m49-volume/prepared/presentation.json",
         "public/scenes/m49-volume/datasets/legacy-optical.webp"
@@ -660,8 +744,26 @@
       "credit": "NASA/JPL-Caltech; CDS",
       "sourceUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/"
     },
+    "m8-volume": {
+      "url2x": "/navigation/focus-object-m8-volume@2x.webp",
+      "inputs": [
+        "src/objects/m8-volume/prepared/presentation.json",
+        "public/scenes/m8-volume/datasets/eso-optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso0936a/"
+    },
     "m81-layers/optical": {
       "url2x": "/navigation/focus-m81-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/m81-layers/prepared/presentation.json",
+        "public/scenes/m81-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m81m82/"
+    },
+    "m81-layers": {
+      "url2x": "/navigation/focus-object-m81-layers@2x.webp",
       "inputs": [
         "src/objects/m81-layers/prepared/presentation.json",
         "public/scenes/m81-layers/datasets/optical.webp"
@@ -678,8 +780,26 @@
       "credit": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
       "sourceUrl": "https://www.eso.org/public/images/m83/"
     },
+    "m83-layers": {
+      "url2x": "/navigation/focus-object-m83-layers@2x.webp",
+      "inputs": [
+        "src/objects/m83-layers/prepared/presentation.json",
+        "public/scenes/m83-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
+      "sourceUrl": "https://www.eso.org/public/images/m83/"
+    },
     "m87-volume/eso-optical": {
       "url2x": "/navigation/focus-m87-volume-eso-optical@2x.webp",
+      "inputs": [
+        "src/objects/m87-volume/prepared/presentation.json",
+        "public/scenes/m87-volume/datasets/eso-optical.webp"
+      ],
+      "credit": "Chris Mihos/ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1525a/"
+    },
+    "m87-volume": {
+      "url2x": "/navigation/focus-object-m87-volume@2x.webp",
       "inputs": [
         "src/objects/m87-volume/prepared/presentation.json",
         "public/scenes/m87-volume/datasets/eso-optical.webp"
@@ -696,14 +816,14 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0902c/"
     },
-    "ngc-2903-layers/optical": {
-      "url2x": "/navigation/focus-ngc-2903-layers-optical@2x.webp",
+    "ngc-253-layers": {
+      "url2x": "/navigation/focus-object-ngc-253-layers@2x.webp",
       "inputs": [
-        "src/objects/ngc-2903-layers/prepared/presentation.json",
-        "public/scenes/ngc-2903-layers/datasets/optical.webp"
+        "src/objects/ngc-253-layers/prepared/presentation.json",
+        "public/scenes/ngc-253-layers/datasets/optical.webp"
       ],
-      "credit": "SDSS",
-      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso0902c/"
     },
     "ngc-300-layers/optical": {
       "url2x": "/navigation/focus-ngc-300-layers-optical@2x.webp",
@@ -714,14 +834,14 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
     },
-    "ngc-6946-layers/optical": {
-      "url2x": "/navigation/focus-ngc-6946-layers-optical@2x.webp",
+    "ngc-300-layers": {
+      "url2x": "/navigation/focus-object-ngc-300-layers@2x.webp",
       "inputs": [
-        "src/objects/ngc-6946-layers/prepared/presentation.json",
-        "public/scenes/ngc-6946-layers/datasets/optical.webp"
+        "src/objects/ngc-300-layers/prepared/presentation.json",
+        "public/scenes/ngc-300-layers/datasets/optical.webp"
       ],
-      "credit": "NOIRLab",
-      "sourceUrl": "https://noirlab.edu/public/images/noao-ngc6946kpno/"
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
     },
     "omega-centauri-volume/eso1119b": {
       "url2x": "/navigation/focus-omega-centauri-volume-eso1119b@2x.webp",
@@ -741,8 +861,26 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0844a/"
     },
+    "omega-centauri-volume": {
+      "url2x": "/navigation/focus-object-omega-centauri-volume@2x.webp",
+      "inputs": [
+        "src/objects/omega-centauri-volume/prepared/presentation.json",
+        "public/scenes/omega-centauri-volume/datasets/eso1119b.webp"
+      ],
+      "credit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
+      "sourceUrl": "https://www.eso.org/public/images/eso1119b/"
+    },
     "pds-70-disc/dust": {
       "url2x": "/navigation/focus-pds-70-disc-dust@2x.webp",
+      "inputs": [
+        "src/objects/pds-70-disc/prepared/presentation.json",
+        "public/scenes/pds-70-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S"
+    },
+    "pds-70-disc": {
+      "url2x": "/navigation/focus-object-pds-70-disc@2x.webp",
       "inputs": [
         "src/objects/pds-70-disc/prepared/presentation.json",
         "public/scenes/pds-70-disc/datasets/dust.webp"
@@ -795,8 +933,26 @@
       "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
     },
+    "smc-volume": {
+      "url2x": "/navigation/focus-object-smc-volume@2x.webp",
+      "inputs": [
+        "src/objects/smc-volume/prepared/presentation.json",
+        "public/scenes/smc-volume/datasets/smc-horalek-wide.webp"
+      ],
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/"
+    },
     "sun-cor1-density/electron-density": {
       "url2x": "/navigation/focus-sun-cor1-density-electron-density@2x.webp",
+      "inputs": [
+        "src/objects/sun-cor1-density/prepared/presentation.json",
+        "public/scenes/sun-cor1-density/datasets/electron-density.webp"
+      ],
+      "credit": "NASA STEREO Science Center",
+      "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
+    },
+    "sun-cor1-density": {
+      "url2x": "/navigation/focus-object-sun-cor1-density@2x.webp",
       "inputs": [
         "src/objects/sun-cor1-density/prepared/presentation.json",
         "public/scenes/sun-cor1-density/datasets/electron-density.webp"
@@ -814,35 +970,43 @@
       ],
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
+    },
+    "milky-way": {
+      "url2x": "/navigation/focus-object-milky-way@2x.webp",
+      "inputs": [
+        "src/objects/milky-way/object.json",
+        "src/objects/milky-way/prepared/backing.json",
+        "src/objects/milky-way/prepared/backing/backing.webp",
+        "src/objects/milky-way/source/backing/recipe.json"
+      ],
+      "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
     }
   },
   "defaults": {
-    "beta-pictoris-disc": "beta-pictoris-disc/visible",
-    "betelgeuse-shell": "betelgeuse-shell/zimpol-v",
-    "eps-eridani-disc": "eps-eridani-disc/dust",
-    "hd-181327-disc": "hd-181327-disc/reflectance",
-    "helix-volume": "helix-volume/eso-wfi",
-    "lmc-volume": "lmc-volume/horalek-widefield",
-    "m1-volume": "m1-volume/hubble-optical",
-    "m101-layers": "m101-layers/optical",
-    "m2-9-volume": "m2-9-volume/hst-optical",
-    "m31-layers": "m31-layers/optical",
-    "m33-layers": "m33-layers/optical",
-    "m42-volume": "m42-volume/eso-optical",
-    "m45-volume": "m45-volume/optical-composite",
-    "m49-volume": "m49-volume/legacy-optical",
-    "m8-volume": "m8-volume/eso-optical",
-    "m81-layers": "m81-layers/optical",
-    "m83-layers": "m83-layers/optical",
-    "m87-volume": "m87-volume/eso-optical",
-    "ngc-253-layers": "ngc-253-layers/optical",
-    "ngc-2903-layers": "ngc-2903-layers/optical",
-    "ngc-300-layers": "ngc-300-layers/optical",
-    "ngc-6946-layers": "ngc-6946-layers/optical",
-    "omega-centauri-volume": "omega-centauri-volume/eso1119b",
-    "pds-70-disc": "pds-70-disc/dust",
-    "smc-volume": "smc-volume/smc-horalek-wide",
-    "sun-cor1-density": "sun-cor1-density/electron-density",
-    "milky-way": "milky-way/volume"
+    "beta-pictoris-disc": "beta-pictoris-disc",
+    "betelgeuse-shell": "betelgeuse-shell",
+    "eps-eridani-disc": "eps-eridani-disc",
+    "hd-181327-disc": "hd-181327-disc",
+    "helix-volume": "helix-volume",
+    "lmc-volume": "lmc-volume",
+    "m1-volume": "m1-volume",
+    "m2-9-volume": "m2-9-volume",
+    "m31-layers": "m31-layers",
+    "m33-layers": "m33-layers",
+    "m42-volume": "m42-volume",
+    "m45-volume": "m45-volume",
+    "m49-volume": "m49-volume",
+    "m8-volume": "m8-volume",
+    "m81-layers": "m81-layers",
+    "m83-layers": "m83-layers",
+    "m87-volume": "m87-volume",
+    "ngc-253-layers": "ngc-253-layers",
+    "ngc-300-layers": "ngc-300-layers",
+    "omega-centauri-volume": "omega-centauri-volume",
+    "pds-70-disc": "pds-70-disc",
+    "smc-volume": "smc-volume",
+    "sun-cor1-density": "sun-cor1-density",
+    "milky-way": "milky-way"
   }
 }

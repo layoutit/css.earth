@@ -121,7 +121,8 @@ its validators accept); the renderer never imports the bake.
   bundles from its source into a browser page. The command imports the canonical dataset routes from
   `@cssearth/objects/provenance` and passes them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
-  not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
+  not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the object-row
+  thumbnail framing (`object-thumbnail.ts`: an object's light cut to its measured extent and faded out before the image frame), the planets'
   photometric phase charts. It imports `raster`, `runtime-source`, `objects/raster` and `objects/charts`. Its commands are
   `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,scientific-charts}.mts`; its tests are in `src/site-assets/` and `site/test/`.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
