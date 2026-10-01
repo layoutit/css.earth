@@ -38,6 +38,9 @@ test('objects own ordered CSS and scene-bound page metadata',async()=>{
   for(const path of styles) await access(new URL(`../../${path}`,import.meta.url));
   const transport=await readPreparedObjectBytes(id);
   const data=JSON.parse(transport.bytes.toString('utf8')).data;
-  assert.deepEqual(page,{descriptor:transport.descriptor,assets:data.assets,controls:data.controls},id);
+  // The page lists every dataset's entries; the transport carries its default dataset's (dataset-tables.ts in @cssearth/renderer).
+  const runtime=JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/runtime.json`,import.meta.url),'utf8'));
+  assert.deepEqual(page,{descriptor:transport.descriptor,assets:runtime.assets,controls:data.controls},id);
+  assert.deepEqual(data.assets.startup,runtime.assets.startup,id);
  }
 });
