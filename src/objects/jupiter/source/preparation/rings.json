@@ -81,12 +81,6 @@
             1200
           ],
           "minimumPresentationWidth": 0,
-          "opacity": 0.10352649238413775,
-          "color": [
-            177,
-            174,
-            170
-          ],
           "source": {
             "name": "Halo",
             "innerRadiusKm": 100000,
@@ -95,7 +89,8 @@
             "opticalDepth": 1e-06,
             "verticalThicknessKm": 10000,
             "associatedMoons": []
-          }
+          },
+          "opticalDepth": 1e-06
         },
         {
           "id": "Main Ring",
@@ -109,12 +104,6 @@
             120
           ],
           "minimumPresentationWidth": 3,
-          "opacity": 0.4,
-          "color": [
-            190,
-            187,
-            182
-          ],
           "source": {
             "name": "Main Ring",
             "innerRadiusKm": 122400,
@@ -126,7 +115,8 @@
               "Metis",
               "Adrastea"
             ]
-          }
+          },
+          "opticalDepth": 8e-06
         },
         {
           "id": "Amalthea Gossamer Ring",
@@ -140,12 +130,6 @@
             1200
           ],
           "minimumPresentationWidth": 0,
-          "opacity": 0.06597539553864472,
-          "color": [
-            171,
-            166,
-            160
-          ],
           "source": {
             "name": "Amalthea Gossamer Ring",
             "innerRadiusKm": 122400,
@@ -156,7 +140,8 @@
             "associatedMoons": [
               "Amalthea"
             ]
-          }
+          },
+          "opticalDepth": 5e-07
         },
         {
           "id": "Thebe Gossamer Ring",
@@ -170,12 +155,6 @@
             1200
           ],
           "minimumPresentationWidth": 0,
-          "opacity": 0.02317669469022034,
-          "color": [
-            163,
-            158,
-            153
-          ],
           "source": {
             "name": "Thebe Gossamer Ring",
             "innerRadiusKm": 122400,
@@ -186,7 +165,8 @@
             "associatedMoons": [
               "Thebe"
             ]
-          }
+          },
+          "opticalDepth": 1e-07
         },
         {
           "id": "Thebe Extension",
@@ -200,12 +180,6 @@
             1200
           ],
           "minimumPresentationWidth": 0,
-          "opacity": 0.001161586349641542,
-          "color": [
-            163,
-            158,
-            153
-          ],
           "source": {
             "name": "Thebe Extension",
             "innerRadiusKm": 221900,
@@ -216,7 +190,8 @@
             "associatedMoons": [
               "Thebe"
             ]
-          }
+          },
+          "opticalDepth": 1e-09
         }
       ],
       "shadow": {
@@ -230,7 +205,7 @@
         "luminance": 0.65
       },
       "output": "jupiter-rings{suffix}.webp",
-      "qualification": "PDS radial bounds and optical-depth ordering; accepted logarithmic presentation-radius compression and low-opacity visibility emphasis."
+      "qualification": "PDS radial bounds and normal optical depths; opacity is 1 - exp(-optical depth), which is below one display level for every ring."
     }
   ]
 }

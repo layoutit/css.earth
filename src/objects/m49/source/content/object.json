@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m49",
+  "displayName": "M49",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "16.7 Mpc (−600,000 / +600,000 pc)",
+        "source": {
+          "catalogueId": "publication-blakeslee2009apj-694-556b",
+          "url": "https://arxiv.org/abs/0901.1138",
+          "label": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 187.4°, Dec 8.00°",
+        "source": {
+          "catalogueId": "publication-skrutskie2006aj-131-1163s",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+          "label": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) row 2MASX J12294679+0800014.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Virgo",
+        "source": {
+          "catalogueId": "publication-binggeli1985aj-90-1681b",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681",
+          "label": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1226 = NGC 4472, membership M (member).",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "legacy-optical",
+    "controls": [
+      {
+        "id": "legacy-optical",
+        "label": "Legacy Surveys · optical",
+        "thumbnail": "m49-dataset-legacy-optical.webp",
+        "volume": {
+          "objectId": "m49-volume",
+          "datasetId": "legacy-optical",
+          "surface": "legacy-optical"
+        },
+        "source": {
+          "id": "m49-volume-legacy-optical",
+          "path": "../../m49-volume/source/manifest.json",
+          "url": "https://www.legacysurvey.org/dr10/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc.",
+      "href": "https://arxiv.org/abs/0901.1138"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) row 2MASX J12294679+0800014.",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1226 = NGC 4472, membership M (member).",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/0901.1138",
+      "credit": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc."
+    }
+  }
+}

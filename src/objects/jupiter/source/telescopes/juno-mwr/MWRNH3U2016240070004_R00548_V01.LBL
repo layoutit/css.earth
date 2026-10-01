@@ -1,0 +1,57 @@
+PDS_VERSION_ID                = "PDS3"
+
+/* FILE DATA ELEMENTS */
+
+RECORD_TYPE                   = "STREAM"
+RECORD_BYTES                  = 450
+FILE_RECORDS                  = 549
+MD5_CHECKSUM                  = "5864c63dcfa3736533fe8dcd799888dc"
+
+/* IDENTIFICATION DATA ELEMENTS */
+
+DATA_SET_ID                   = "JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0"
+PRODUCT_ID                    = "MWRNH3U2016240070004_R00548_V01.CSV"
+STANDARD_DATA_PRODUCT_ID      = "NH3U"
+PRODUCT_TYPE                  = "NH3U"
+PRODUCT_VERSION_ID            = "01"
+INSTRUMENT_HOST_ID            = "JNO"
+INSTRUMENT_HOST_NAME          = "JUNO"
+INSTRUMENT_ID                 = "MWR"
+INSTRUMENT_TYPE               = "RADIOMETER"
+INSTRUMENT_NAME               = "MICROWAVE RADIOMETER"
+MISSION_NAME                  = "JUNO"
+MISSION_PHASE_NAME            = "SCIENCE ORBITS"
+PRODUCER_INSTITUTION_NAME     = "MULTIMISSION IMAGE PROCESSING SUBSYSTEM,
+                                 JET PROPULSION LAB"
+PRODUCT_CREATION_TIME         = 2024-10-22T22:08:43
+SPACECRAFT_CLOCK_START_COUNT  = "5/525553380.60452"
+SPACECRAFT_CLOCK_STOP_COUNT   = "5/575863436.60452"
+START_TIME                    = 2016-08-27T07:00:04.844
+STOP_TIME                     = 2018-04-01T13:59:59.299
+TARGET_NAME                   = "JUPITER"
+
+/* HISTORY DATA ELEMENTS */
+
+PROCESSING_LEVEL_ID           = "5"
+
+/* HEADER REFERENCE */
+
+^HEADER                       = ("MWRNH3U2016240070004_R00548_V01.CSV",1)
+OBJECT                        = HEADER
+BYTES                         = 450
+HEADER_TYPE                   = "TEXT"
+DESCRIPTION                   = "See ^STRUCTURE"
+END_OBJECT                    = HEADER
+
+/* DATA REFERENCE */
+
+^SPREADSHEET                  = ("MWRNH3U2016240070004_R00548_V01.CSV",451<BYTES>)
+OBJECT                        = SPREADSHEET
+ROWS                          = 548
+ROW_BYTES                     = 417
+FIELDS                        = 38
+FIELD_DELIMITER               = "COMMA"
+^STRUCTURE                    = "MWR_J_NH3U_V01.FMT"
+END_OBJECT                    = SPREADSHEET
+
+END

@@ -15,9 +15,8 @@
     "innerRadiusKm": 2252,
     "outerRadiusKm": 2322,
     "segments": 128,
-    "displayValue": 130,
-    "displayOpacity": 0.5,
-    "qualification": "Ring dimensions from the 2017 occultation. Gray appearance and constant display opacity are schematic; the measured 0.5 occultation opacity is not a view-independent optical model."
+    "qualification": "Ring dimensions and the 0.5 opacity from the 2017 occultation (Ortiz et al. 2017). No ring colour is measured: it is the neutral gray of a body without a measured colour.",
+    "normalOpacity": 0.5
   },
   "surfaces": [
     {

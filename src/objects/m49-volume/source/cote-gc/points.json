@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "cote-gc",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+DISTINCT+%22%5BGLK96%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F591%2F850%2Ftable2%22+WHERE+Class%3D%27GC%27",
+    "bytes": 10865,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    },
+    "exclude": {
+      "path": "../jordan-gc/table.csv",
+      "raDegColumn": "RAJ2000",
+      "decDegColumn": "DEJ2000",
+      "withinArcsec": 1.5,
+      "source": "jordan-2009-acsvcs-globular-clusters",
+      "basis": "A cluster in both catalogues is drawn once, from Jordán et al.'s Hubble position: 33 of Côté et al.'s clusters lie within 0.8 arcsec of one of theirs and the next nearest pair is 2.6 arcsec apart, so 1.5 arcsec separates the same cluster from a neighbour."
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "spheroid",
+    "converter": "Each sky position at a depth drawn from the spheroid's density along its sight line (frame.spheroid).",
+    "spheroid": {
+      "centerRaDeg": 187.444992,
+      "centerDecDeg": 8.00041,
+      "distancePc": 16700000,
+      "halfLightRadiusKpc": 21.8,
+      "sersicIndex": 5.99,
+      "axisRatio": 0.795,
+      "axisPositionAngleDeg": 244.16,
+      "cutoffHalfLightRadii": 3.906,
+      "source": "kormendy-2009-virgo-ellipticals",
+      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/m49/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4472 (n = 5.99, half-light radius 269.29 arcsec, 21.8 kpc at 16.7 Mpc), axis along M49's minor axis in the plane of the sky, ending at 3.906 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
+    }
+  },
+  "source": "cote-2003-m49-globular-clusters",
+  "meaning": "Globular clusters of M49 with a measured radial velocity (Côté et al. 2003, Table 2, class GC) that Jordán et al.'s (2009) Hubble catalogue does not already list: one dot per cluster at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange."
+  }
+}

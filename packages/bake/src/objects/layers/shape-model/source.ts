@@ -2,7 +2,7 @@ import {refuseAuthoredCameraAngles} from '../../scene/index.ts';
 import {shape,text,number,optional,array,requireRecord} from '@cssearth/core';
 export const parseShapeModelConfig=shape({schema:text,displayName:text,displayRadius:number,quadBudget:number,
   mesh:shape({latitudeSegments:number,longitudeSegments:number,width:number,height:number,poleSize:number,seamOverlap:number}),
-  ring:optional(shape({innerRadiusKm:number,outerRadiusKm:number,segments:number,displayValue:number,displayOpacity:number})),
+  ring:optional(shape({innerRadiusKm:number,outerRadiusKm:number,segments:number,normalOpacity:number})),
   // One entry per dataset; a body without entries shows one neutral gray dataset. Each kind validates its own science block.
   surfaces:optional(array(shape({dataset:text,source:text,science:(value):Record<string,unknown>&{kind:string}=>({...requireRecord(value),kind:shape({kind:text})(value).kind})}))),
   camera:value=>{const camera=shape({maximumHeightShare:number})(value);refuseAuthoredCameraAngles(camera);return camera;}});

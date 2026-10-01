@@ -1,4 +1,5 @@
 import { applyLinearTint } from '../../color/index.ts';
+import { NEUTRAL_CATALOGUE_RGB } from '@cssearth/objects';
 import sharp from 'sharp';
 import type {RadiusMapping, RadialBand, RadialShadow, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from '../../geometry/index.ts';
 import { type RingWedgeLayout, wedgePoint, wedgeShare } from '../../../scene/index.ts';
@@ -76,6 +77,11 @@ function bandCoverage(radius: number, angle: number, band: ReturnType<typeof pre
     (1 - smoothstep(band.outer, band.outer + band.outerFade, radius));
 }
 
+/** A band's colour: no ring here has a measured colour, so each takes the one neutral gray. */
+const RING_COLOUR: readonly number[] = NEUTRAL_CATALOGUE_RGB;
+/** The fraction of light a band of normal optical depth tau stops, seen face-on: 1 - exp(-tau). */
+export const bandOpacity = (opticalDepth: number) => 1 - Math.exp(-opticalDepth);
+
 function annularSetup(recipe: AnnularLayer, size: number) {
   const { grid, mapping } = recipe;
   const center = (size - grid.centerInset) / 2;
@@ -95,19 +101,18 @@ function annularTexel(recipe: AnnularLayer, setup: ReturnType<typeof annularSetu
     : Math.hypot(dx * pixelScale, dy * pixelScale);
   const angle = grid.scaleOrder === 'divide-multiply' ? Math.atan2(dy, dx) : Math.atan2(dy * pixelScale, dx * pixelScale);
   let alpha = 0;
-  let color: readonly number[] = recipe.defaultColor ?? [0, 0, 0];
+  let color: readonly number[] = RING_COLOUR;
   const premultiplied = [0, 0, 0];
   for (const band of preparedBands) {
     const coverage = bandCoverage(radius, angle, band);
     if (coverage === 0) continue;
-    const bandAlpha = Math.min(recipe.alphaUnits, band.opacity * coverage);
+    const bandAlpha = recipe.alphaUnits * bandOpacity(band.opticalDepth) * coverage;
     if (recipe.composition === 'front-to-back') {
       const contribution = bandAlpha * (1 - alpha);
-      for (let channel = 0; channel < 3; channel++) premultiplied[channel] += band.color[channel] * contribution;
+      for (let channel = 0; channel < 3; channel++) premultiplied[channel] += RING_COLOUR[channel]! * contribution;
       alpha += contribution;
     } else {
       alpha = Math.max(alpha, bandAlpha);
-      color = band.color;
     }
   }
   if (alpha <= 0) return null;

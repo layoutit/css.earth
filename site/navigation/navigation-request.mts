@@ -19,7 +19,9 @@ export type NavigationIntent =
   | { kind: 'feature'; id: string | null }
   | { kind: 'link'; url: string }
   | { kind: 'history'; url: string; history: NavigationHistory }
-  | { kind: 'overview'; scope: OverviewScope; camera: 'frame' | 'preserve' };
+  | { kind: 'overview'; scope: OverviewScope; camera: 'frame' | 'preserve';
+    /** The view a header pill's flight left: the hand-over it lands on is a new entry, and Back returns to this view. */
+    departed?: string };
 export type NavigationCamera =
   | { kind: 'surface' }
   | { kind: 'restore'; animate: boolean }
@@ -62,7 +64,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const linked = intent.kind === 'link' || intent.kind === 'history';
   let url = new URL(intent.kind === 'link' || intent.kind === 'history' ? intent.url : current.href, current.href);
   let history: NavigationHistory = intent.kind === 'history' ? intent.history
-    : { history: (intent.kind === 'overview' || intent.kind === 'satellite-system' || intent.kind === 'object') && intent.camera === 'preserve' ? 'replace' : 'push' };
+    : { history: (intent.kind === 'overview' || intent.kind === 'satellite-system' || intent.kind === 'object') && intent.camera === 'preserve' && !('departed' in intent && intent.departed) ? 'replace' : 'push' };
   const targetRequest = { objectId: object.id, fromId: current.objectId, mount: current.mount };
   const family = satelliteSystemByHost(object.id);
   if (intent.kind === 'satellite-system' && !family) throw new TypeError(`${object.id} has no satellite system.`);

@@ -29,7 +29,7 @@
       },
       "bands": [
         {
-          "id": "annulus-0",
+          "id": "Galle",
           "envelope": "constant",
           "bounds": [
             41000,
@@ -39,33 +39,34 @@
             true,
             true
           ],
-          "opacity": 8,
-          "color": [
-            144,
-            174,
-            207
-          ]
+          "opticalDepth": 0.0001,
+          "source": {
+            "name": "Galle",
+            "radiusKm": 42000,
+            "widthKm": 2000,
+            "opticalDepthText": "10^-4",
+            "table": "https://pds-rings.seti.org/neptune/neptune_rings_table.html"
+          }
         },
         {
-          "id": "annulus-1",
-          "envelope": "constant",
-          "bounds": [
-            53150,
-            53250
-          ],
-          "inclusive": [
-            true,
-            true
-          ],
-          "opacity": 48,
-          "color": [
-            144,
-            174,
-            207
-          ]
+          "id": "Le Verrier",
+          "envelope": "tent",
+          "center": 53200,
+          "width": 100,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opticalDepth": 0.003,
+          "source": {
+            "name": "Le Verrier",
+            "radiusKm": 53200,
+            "widthKm": 100,
+            "widthText": "<100",
+            "opticalDepthText": "0.003",
+            "table": "https://pds-rings.seti.org/neptune/neptune_rings_table.html"
+          }
         },
         {
-          "id": "annulus-2",
+          "id": "Lassell",
           "envelope": "constant",
           "bounds": [
             53200,
@@ -75,98 +76,35 @@
             true,
             true
           ],
-          "opacity": 10,
-          "color": [
-            144,
-            174,
-            207
-          ]
+          "opticalDepth": 0.0001,
+          "source": {
+            "name": "Lassell",
+            "radiusKm": 55200,
+            "widthKm": 4000,
+            "opticalDepthText": "10^-4",
+            "table": "https://pds-rings.seti.org/neptune/neptune_rings_table.html"
+          }
         },
         {
-          "id": "annulus-3",
-          "envelope": "constant",
-          "bounds": [
-            57110,
-            57290
-          ],
-          "inclusive": [
-            false,
-            false
-          ],
-          "opacity": 32,
-          "color": [
-            144,
-            174,
-            207
-          ]
-        },
-        {
-          "id": "annulus-4",
-          "envelope": "constant",
-          "bounds": [
-            61863,
-            62043
-          ],
-          "inclusive": [
-            false,
-            false
-          ],
-          "opacity": 20,
-          "color": [
-            144,
-            174,
-            207
-          ]
-        },
-        {
-          "id": "annulus-5",
-          "envelope": "constant",
-          "bounds": [
-            62858,
-            63008
-          ],
-          "inclusive": [
-            false,
-            false
-          ],
-          "opacity": 82,
-          "color": [
-            144,
-            174,
-            207
-          ]
-        },
-        {
-          "id": "arcs",
-          "note": "Schematic arcs. The PDS Rings Node table gives the 62,933 km radius and only relative spacings (Courage 7.3 deg ahead of Liberte, Liberte 12 deg ahead of Egalite 1, Egalite 2 10.7 deg ahead of Fraternite); it gives no arc lengths or absolute longitudes, so these four centres and widths are not measured positions.",
-          "envelope": "constant",
-          "bounds": [
-            62818,
-            63048
-          ],
-          "inclusive": [
-            false,
-            false
-          ],
-          "arcs": {
-            "centers": [
-              -2.6,
-              -2.25,
-              -1.85,
-              -1.45
-            ],
-            "halfWidth": 0.13
-          },
-          "opacity": 165,
-          "color": [
-            144,
-            174,
-            207
-          ]
+          "id": "Adams",
+          "envelope": "tent",
+          "center": 62933,
+          "width": 15,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opticalDepth": 0.003,
+          "source": {
+            "name": "Adams",
+            "radiusKm": 62933,
+            "widthKm": 15,
+            "opticalDepthText": "0.003-0.1",
+            "note": "The ring between its arcs; the arcs, near 0.1, are not drawn: the table gives their spacings but no longitudes at this epoch.",
+            "table": "https://pds-rings.seti.org/neptune/neptune_rings_table.html"
+          }
         }
       ],
       "output": "neptune-rings{suffix}.webp",
-      "qualification": "PDS radial ring positions with the accepted schematic opacity, width emphasis and fixed arc presentation.",
+      "qualification": "PDS Rings Node radii, widths and normal optical depths; opacity is 1 - exp(-optical depth), with the pixel readability floor for the two narrow rings. Arago and the unnamed ring have no optical depth in the table and are not drawn, nor are the Adams arcs.",
       "wedges": {
         "count": 16
       }

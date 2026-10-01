@@ -1,3 +1,4 @@
+import { NEUTRAL_CATALOGUE_RGB } from '@cssearth/objects';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { parseShapeModelConfig, parseShapeContent } from './source.ts';
@@ -93,8 +94,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
       const w = m[3]*x + m[7]*y + m[15];
       const at=(axis:number)=>(m[axis]*x+m[4+axis]*y+m[12+axis])/w;return [at(0),at(1),at(2)] as [number,number,number];
     });
-    ringFaces.push({ vertices, color: [ringConfig.displayValue, ringConfig.displayValue, ringConfig.displayValue,
-      Math.round(ringConfig.displayOpacity * 255)] });
+    ringFaces.push({ vertices, color: [...NEUTRAL_CATALOGUE_RGB, Math.round(ringConfig.normalOpacity * 255)] });
   }) : [];
   const ringRaster = ringTexture ? await prepareCoplanarColorRaster({ faces: ringFaces,
     pixelsPerUnit: ringTexture.width / (2 * Math.max(...ringFaces.flatMap(face => face.vertices.flatMap(v => [Math.abs(v[0]),Math.abs(v[1])])))) }) : null;

@@ -225,6 +225,10 @@
     "m87": {
       "id": "m87",
       "focusRadiusM": 6.140498387167821e+21
+    },
+    "m49": {
+      "id": "m49",
+      "focusRadiusM": 2.628997299430645e+21
     }
   },
   "distanceOverrides": {
@@ -260,6 +264,30 @@
         "group": "galaxy-cluster",
         "subgroup": "virgo",
         "basis": "The Virgo Cluster Catalog classes VCC 1316 (NGC 4486) a member; it is the central giant elliptical of the cluster.",
+        "sourceRef": "Binggeli1985AJ.....90.1681B"
+      }
+    },
+    "m49": {
+      "name": "M49",
+      "aliases": [
+        "NGC 4472",
+        "VCC 1226",
+        "UGC 7629"
+      ],
+      "raDeg": 187.444992,
+      "decDeg": 8.00041,
+      "positionRef": "Skrutskie2006AJ....131.1163S",
+      "distance": {
+        "valuePc": 16700000,
+        "minusPc": 600000,
+        "plusPc": 600000,
+        "method": "sbf",
+        "sourceRef": "Blakeslee2009ApJ...694..556B"
+      },
+      "membership": {
+        "group": "galaxy-cluster",
+        "subgroup": "virgo",
+        "basis": "The Virgo Cluster Catalog classes VCC 1226 (NGC 4472) a member; it is the brightest galaxy of the cluster.",
         "sourceRef": "Binggeli1985AJ.....90.1681B"
       }
     }

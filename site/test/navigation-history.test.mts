@@ -150,3 +150,31 @@ test('history written while the camera moves is held and applied once at rest; t
   assert.deepEqual(writes, [{ kind: 'push', url: '/mars/' }, { kind: 'push', url: '/moon/' }]);
   history.destroy();
 });
+
+test('a view kept for the entry is the one Back returns to after the next push', () => {
+  const listeners = new Map<string, (event: PopStateEvent) => void>(), calls: [string, { url?: string }][] = [];
+  let href = 'https://css.earth/earth/?v=near', state: unknown = null, view = '/earth/?v=near';
+  const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); };
+  const windowTarget = {
+    get location() { return { href }; },
+    history: { get state() { return state; }, replaceState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; },
+      pushState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; } },
+    addEventListener(type: string, listener: (event: PopStateEvent) => void) { listeners.set(type, listener); },
+    removeEventListener() {},
+    setTimeout(callback: () => void) { queued.push(callback); return queued.length; }, clearTimeout() {},
+  } as unknown as Window;
+  const history = createNavigationHistory({ windowTarget, capture: () => view,
+    navigate: (id, intent) => { calls.push([id, intent as { url?: string }]); return Promise.resolve(true); } });
+  const earth = state;
+  // A header pill flies the camera out; the view writer rewrites the entry on the way.
+  view = '/earth/?v=far'; history.checkpoint(); rest();
+  assert.equal(href, 'https://css.earth/earth/?v=far');
+  // The hand-over the flight lands on keeps the view it left, then pushes its own entry.
+  history.keep('/earth/?v=near');
+  assert.equal(href, 'https://css.earth/earth/?v=near');
+  history.commit('/sun/?overview=system'); rest();
+  assert.equal(href, 'https://css.earth/sun/?overview=system');
+  href = 'https://css.earth/earth/?v=near'; state = earth;
+  listeners.get('popstate')!({ state: earth } as PopStateEvent);
+  assert.equal(calls.at(-1)?.[1].url, 'https://css.earth/earth/?v=near');
+});

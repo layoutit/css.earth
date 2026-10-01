@@ -15,6 +15,26 @@ const clearance = (position: PositionM) => Math.min(...anchors.map(anchor =>
   Math.max(anchor.radiusM, distance(position, anchor.positionM) - anchor.radiusM)));
 
 describe('selection flight continuity', () => {
+  it('leaves a small body for a far star instead of stalling on its first frame', () => {
+    // Itokawa to TRAPPIST-1 (live, 2026-10-01): positions measured from a focus 3.85e17 m away resolve to 64 m, more
+    // than the step allowed beside a 165 m body, so no curve time after zero was ever permitted.
+    for (const rangeM of [4e16, 3.85e17, 5.2e18]) {
+      const body = [2.1e11, 4e10, 1e10] as const, star = [rangeM * .6, rangeM * .7, rangeM * .39] as const;
+      const bodies = [{ positionM: body, radiusM: 165 }, { positionM: star, radiusM: 8e7 }];
+      const leaving = createSelectionFlight({ from: pose([body[0] + 400, body[1] + 300, body[2] + 100]),
+        to: pose([star[0] + 6e8, star[1], star[2]]), focusPositionM: star });
+      let elapsed = 0, frames = 0;
+      const out = createSelectionFlightSample();
+      while (elapsed < leaving.durationS && frames++ < 5000) {
+        const next = advanceSelectionFlightInto(leaving, bodies, elapsed, leaving.durationS, out);
+        assert.ok(next > elapsed, `stalled at ${elapsed} s of ${leaving.durationS} s, ${rangeM} m from the star`);
+        elapsed = next;
+      }
+      assert.equal(elapsed, leaving.durationS);
+      // Capped steps grow the clearance by a quarter each: the whole range is a few hundred frames.
+      assert.ok(frames < 400, `${frames} frames`);
+    }
+  });
   it('reaches a small body from galactic range instead of freezing a few thousand kilometres out', () => {
     // Milky Way overview to Bennu: 2.9e21 m departure, 1,469 m arrival around a 245 m body.
     const body = [1.5e11, 0, 0] as const, bodies = [{ positionM: body, radiusM: 245 }];

@@ -1,0 +1,60 @@
+{
+  "id": "desi-legacy-surveys-dr10-color-hips",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "DESI Legacy Surveys color (g, r, i, z) HiPS (CDS)",
+  "identifiers": [
+    {
+      "type": "HiPS",
+      "value": "CDS/P/DESI-Legacy-Surveys/DR10/color"
+    },
+    {
+      "type": "doi",
+      "value": "10.26093/cds/aladin/k3kq-9e"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.legacysurvey.org/dr10/",
+      "label": "Legacy Surveys DR10"
+    },
+    {
+      "role": "archive",
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record",
+      "label": "HiPS record"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.legacysurvey.org/acknowledgment/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record",
+      "checkedOn": "2026-10-01",
+      "locator": "obs_title 'DESI Legacy Surveys color (g, r, i, z)'; hips_creator Boch T. (CDS); hips_license ODbL-1.0; hips_order 11; hips_release_date 2026-07-19; prov_progenitor the DR10 south coadds; bib_reference 2019AJ....157..168D. The M49 cutout is 3000 x 3000 px, 0.584423 degrees wide, tangent projection on 187.444992, +8.00041 through the CDS hips2fits service; the centroid of its saturated core falls within 2 px (1.4 arcsec) of the image centre."
+    }
+  ],
+  "creators": [
+    "DESI Legacy Imaging Surveys",
+    "T. Boch (CDS)"
+  ],
+  "publisher": "CDS (CNRS/Unistra)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "DESI Legacy Imaging Surveys DR10; colour HiPS by CDS (CNRS/Unistra)",
+      "scope": "Survey image of M49",
+      "evidence": "https://www.legacysurvey.org/acknowledgment/"
+    },
+    {
+      "kind": "rights",
+      "text": "Legacy Surveys data are public with the acknowledgment at https://www.legacysurvey.org/acknowledgment/; the CDS HiPS distribution is under ODbL-1.0. Retain the complete recorded credit.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record"
+    }
+  ]
+}

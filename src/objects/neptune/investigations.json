@@ -71,7 +71,7 @@
       "id": "pds-rings-node-ring-table",
       "subject": "PDS Rings Node Neptune ring table",
       "status": "included",
-      "finding": "The PDS Rings Node table supplies the prepared ring radii and widths.",
+      "finding": "The PDS Rings Node table supplies the prepared ring radii, widths and normal optical depths; each ring's opacity is 1 - exp(-optical depth) and its colour the neutral gray of a body without a measured colour. Arago, the unnamed ring and the Adams arcs are not drawn: the table gives the first two no optical depth and the arcs no longitudes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/neptune/README.md#L21"
       ]

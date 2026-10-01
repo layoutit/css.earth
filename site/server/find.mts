@@ -41,12 +41,18 @@ function findData(pin: FeatureIndexPin, read: ReadPrepared): Promise<FindData> {
   return pending;
 }
 
-/** Every result lists planets first, then by distance. A category query already excludes other classes, so it needs no
+/** Every result lists planets first, then by distance, then by name. A category query already excludes other classes, so it needs no
  * second order; a typed name ranks exact and leading matches first within this order (`searchObjects`). */
+/** Two bodies of one system this close, as a fraction of their distance, count as equally far. */
+const SAME_SYSTEM_DISTANCE = 1e-6;
 function catalogueLabels(entries: readonly CatalogueIndexEntry[]) {
   return entries.map(entry => ({ entry, name: entry.name.toLocaleLowerCase('en'), names: entry.searchNames, classification: entry.classification,
     classificationName: entry.classificationName, systemName: entry.systemName, illustration: entry.illustration }))
-    .sort((a, b) => Number(b.classification === 'planet') - Number(a.classification === 'planet') || a.entry.distanceMeters - b.entry.distanceMeters);
+    // The bodies of a far system differ in distance only by where each is on its orbit, a millionth of the way there;
+    // the name orders them, digits as numbers: TRAPPIST-1's planets listed h, g, d, c, b, f, e (2026-10-01).
+    .sort((a, b) => Number(b.classification === 'planet') - Number(a.classification === 'planet')
+      || (a.systemName === b.systemName && Math.abs(a.entry.distanceMeters - b.entry.distanceMeters) <= SAME_SYSTEM_DISTANCE * Math.max(a.entry.distanceMeters, b.entry.distanceMeters)
+        ? a.name.localeCompare(b.name, 'en', { numeric: true }) : a.entry.distanceMeters - b.entry.distanceMeters));
 }
 const catalogueLabelsByIndex = new WeakMap<readonly CatalogueIndexEntry[], ReturnType<typeof catalogueLabels>>();
 

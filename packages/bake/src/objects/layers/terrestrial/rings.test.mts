@@ -10,8 +10,8 @@ import { BASE_TILE } from '@layoutit/polycss';
 import { prepareRingLeaves } from '@cssearth/bake/objects/layers/shape-model';
 import { prepareTerrestrialRings, validateTerrestrialRings } from '@cssearth/bake/objects/layers/terrestrial';
 
-const band = (id: string, innerRadiusKm: number, outerRadiusKm: number, displayOpacity: number) => ({
-  id, innerRadiusKm, outerRadiusKm, displayOpacity, displayValue: 160, segments: 64,
+const band = (id: string, innerRadiusKm: number, outerRadiusKm: number, normalOpacity: number) => ({
+  id, innerRadiusKm, outerRadiusKm, normalOpacity, segments: 64,
   qualification: 'Measured dimensions; opacity is a schematic display value.',
 });
 const profile = { textureSize: 256, bands: [band('inner', 20, 24, 1), band('outer', 28, 30, .25)] };

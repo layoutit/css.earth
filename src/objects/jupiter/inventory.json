@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "jupiter-arrival.webp",
-      "bytes": 77102,
-      "sha256": "4abcd15e26761b45fec486bda74d2ffcd2d87c0a4869eff768b3c742370fdddf"
+      "bytes": 57514,
+      "sha256": "248a139a3f8bc80b22734a0d3191b5a86e0696409a647b8703f32a2ccb27c9f3"
     },
     {
       "location": "public",
       "filename": "jupiter-billboard.webp",
-      "bytes": 10878,
-      "sha256": "9927536317b0dca98e9f34e464cea289e10c463d0055fbafb04eea9c10e966a1"
+      "bytes": 8988,
+      "sha256": "d953cc1ca5306e4f4dbabf31c64977c00a25d415edf4c3839ccebbd8124fe119"
     },
     {
       "location": "public",
@@ -52,8 +52,8 @@
     {
       "location": "public",
       "filename": "jupiter-dataset-normal.webp",
-      "bytes": 1860,
-      "sha256": "4d17ee9df5513286418186a5d1aff1fd33542788b17b3df0fbebd3d556534f2e"
+      "bytes": 1898,
+      "sha256": "d92e7cba187626a85682cb28e2d2a92279277a044dc66be87ca8f632d7b6ceeb"
     },
     {
       "location": "public",
@@ -466,14 +466,14 @@
     {
       "location": "public",
       "filename": "jupiter-poles.webp",
-      "bytes": 40858,
-      "sha256": "8bf95e456b200cfe7fa6f7a0ef982384b405b36e4e0d97ffb768eb9b76894eca"
+      "bytes": 30908,
+      "sha256": "d37c2edf81cc2c1be0119410b84639a489208953fa326ca97cc08cf1f7fdf6f2"
     },
     {
       "location": "public",
       "filename": "jupiter-poles@2x.webp",
-      "bytes": 64580,
-      "sha256": "a9573dfd74143d45dc6d1aeabb72e03b03c7f7c462e416f3bf5173ac4e814fe5"
+      "bytes": 47910,
+      "sha256": "b4c0c6e58ca89984dcf51defbc7d2b6782df775c2cc87d68f7f04e5dc0abc316"
     },
     {
       "location": "public",
@@ -484,26 +484,26 @@
     {
       "location": "public",
       "filename": "jupiter-rings.webp",
-      "bytes": 45252,
-      "sha256": "08e8062e08ee42d1baa2b232cc0fb549aa205142f59bfec5973f512a454c9e3a"
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
       "filename": "jupiter-rings@2x.webp",
-      "bytes": 70254,
-      "sha256": "02461da752c1fa0d20c8d28d5750c2f8f36b025685d7dc622c794beed84b109d"
+      "bytes": 216,
+      "sha256": "b6debde7d81c5f871e4751570a9d3f625b4bc1f3cb04937e2cf6bc3feb84128f"
     },
     {
       "location": "public",
       "filename": "jupiter-surface.webp",
-      "bytes": 435316,
-      "sha256": "3220d21d49844aca05672699ac395c14f4e79116fd32033fc13bee64773e9948"
+      "bytes": 394032,
+      "sha256": "d7a37e0e4ef9eb2ff0aef552e82e12e67fb0671d88b796b006ca632494f2029e"
     },
     {
       "location": "public",
       "filename": "jupiter-surface@2x.webp",
-      "bytes": 1166528,
-      "sha256": "d7a15d917500c696a4bd44cfbe278e328ac6cabdaee8fb905c3c7ec3b366ac40"
+      "bytes": 975854,
+      "sha256": "1b13daa3905ee61aec8afea5f38043880a6d8ed951080d54eb62c1967cee84bf"
     },
     {
       "location": "public",
@@ -779,13 +779,13 @@
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 306,
-      "sha256": "9c9e3a2115bd8aab88fd187070e638b0949d23b9761aabdcf298676378676473"
+      "sha256": "23f8171c2fa4800953d25b05fd7257182e9ec4c938d7b83828b7f6bbe44f55ce"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18725,
-      "sha256": "308111dbff8bdeadf5b650a8a8137adb3cd9a03e86a373a8a5416f7ce497b9b9"
+      "bytes": 18719,
+      "sha256": "82613f0f05f8a579b7c62969008e13cdadc910f330ee74fa11b20fc7c8f562cb"
     },
     {
       "location": "prepared",
@@ -809,7 +809,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 14370,
-      "sha256": "fc6be31f66eb25b7d995c80ce4e26ee4d9734816673c5589ccc07f82a7460682"
+      "sha256": "ec5ada9d525ba8023009f12b9e80efe716902bb22ef56ffc6da7ba45a306fca2"
     },
     {
       "location": "prepared",
@@ -832,8 +832,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 11970,
-      "sha256": "34d812ab7e88954e98fa93a931a606692dda5032c75ce216604dd5e73a069778"
+      "bytes": 9564,
+      "sha256": "e334ca353a7c8dafaee90d0eefc0e4a40fdc414c5e7aaca32032b3a2c335ba13"
     },
     {
       "location": "prepared",
@@ -911,7 +911,7 @@
       "location": "prepared",
       "filename": "runtime.json",
       "bytes": 458200,
-      "sha256": "9a8071ed29ad2ee8cb68bc52c64b95ed0e4da5dcabbaef552fad9c25a3ae1d6c"
+      "sha256": "af3c1743d66b7983a5e5d08a2dbfe864126faa35b8011f4bca38b9fce7621ca6"
     },
     {
       "location": "prepared",
@@ -934,8 +934,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3177,
-      "sha256": "d1e188d2502da375aa0953da382227260972b429680b57be6363ff5f19bfc0bb"
+      "bytes": 3158,
+      "sha256": "d3143fc58c7fd2d633997f6031021edbc3b90d2e4206480bb2201bba97e9abf2"
     },
     {
       "location": "prepared",

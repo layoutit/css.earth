@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
-import { isPlacedClassification, mapLabel, parseObjectDescriptor } from '@cssearth/objects';
+import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOUR, parseObjectDescriptor } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/renderer';
@@ -71,7 +71,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     for (const id of HOSTED_PLANET_IDS as readonly string[]) {
       const record = records[id], parent = record?.parent;
       if (packaged.has(id) || !parent || !packaged.has(parent)) continue;
-      input.bodies.push({ id, name: mapLabel(record!.name), color: record!.effectiveTemperatureK === undefined ? '#9a9a9a'
+      input.bodies.push({ id, name: mapLabel(record!.name), color: record!.effectiveTemperatureK === undefined ? NEUTRAL_CATALOGUE_COLOUR
         : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
   }

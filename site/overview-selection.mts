@@ -15,9 +15,11 @@ const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axi
 export const solarSystemFocus = (objects: SystemObjects) => objects.find(object => object.id === SOLAR_SYSTEM_ID);
 
 /** `objects` are the loaded objects, for the mounted one's frame; `systems` are the world's bodies, for its system and the Sun. */
-export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview, landed = false }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean;
+export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview, landed = false, restRangeM = 0 }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean;
   /** A flight to a framing (a header pill's category) has just landed here. */
-  landed?: boolean }): OverviewSelection | null {
+  landed?: boolean;
+  /** How far from the body its scene came to rest: where its page loaded or its flight landed. */
+  restRangeM?: number }): OverviewSelection | null {
   const selected = objects.find(object => object.id === objectId)?.worldFrame;
   if (!selected) return null;
   const system = systemOfObject(systems, objectId);
@@ -38,7 +40,9 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
     // the Solar System overview then hands the camera to the galactic scopes.
     const sun = solarSystemFocus(systems)?.worldFrame;
     if (!sun) return null;
-    return distance(world.pose.positionM, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM))
+    // A galaxy is a body too, and a near one is framed from farther than the Sun is: the LMC, 49.6 kpc away, opened as
+    // "Local Group" the moment its flight landed (2026-10-01). A body keeps its scene out to twice the range it came to rest at.
+    return distance(world.pose.positionM, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM), 2 * restRangeM)
       ? { overview: true, objectId: SOLAR_SYSTEM_ID } : null;
   }
   // An overview mounts its system's star; only approaching that star opens its card.
@@ -59,18 +63,26 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
 export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
   onChange, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; windowTarget: Window }) {
   let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
+  // Where the body's scene came to rest: the first camera it answers for, and each landing after it.
+  let restRangeM: number | null = null;
+  const range = (world: WorldCameraPose) => {
+    const origin = objects.find(object => object.id === objectId)?.worldFrame?.originM;
+    return origin ? distance(world.pose.positionM, origin) : 0;
+  };
   function inspect(landed = false) {
     timer = null;
     candidate = null;
     if (disposed || !isAvailable() || !latest) return;
-    const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), landed });
+    if (landed || restRangeM === null) restRangeM = range(latest.world);
+    const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), landed, restRangeM });
     if (next) onChange(next);
   }
   const unsubscribe = navigation.subscribe((world, viewport) => {
     // Publications use the whole stage; selection uses the content centre
     // beside the sidebar, just like the active object's orbit controls.
     latest = { world, viewport: navigation.optics?.() ?? viewport };
-    const next = isAvailable() ? selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview() }) : null;
+    if (isAvailable() && restRangeM === null) restRangeM = range(world);
+    const next = isAvailable() ? selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), restRangeM: restRangeM ?? 0 }) : null;
     if (next?.objectId === candidate?.objectId && next?.overview === candidate?.overview) return;
     if (timer !== null) windowTarget.clearTimeout(timer);
     timer = null; candidate = next;

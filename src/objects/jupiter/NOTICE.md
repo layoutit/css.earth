@@ -1,17 +1,6 @@
 # Jupiter source notices
 
 - NASA/ESA Hubble WFC3 2019 global map: NASA, ESA, A. Simon (NASA GSFC), and M. H. Wong (UC Berkeley).
-- Jupiter north-polar-region detail PIA24239: image data
-  NASA/JPL-Caltech/SwRI/MSSS; image processing Emma Wälimäki, CC BY.
-- Jupiter north polar projection PIA23808: image data
-  NASA/JPL-Caltech/SwRI/MSSS; image processing Gerald Eichstädt. Its extreme
-  false color is not transported; preparation uses bounded structure only.
-- Jupiter south polar cyclones PIA23556: NASA/JPL-Caltech/SwRI/ASI/INAF/JIRAM.
-  Its 5-micron infrared color is not transported; preparation uses bounded
-  structure only.
-- Jupiter visible south pole PIA21382: enhanced image by John Landino from
-  NASA/JPL-Caltech/SwRI/MSSS data, CC BY. Preparation uses it as a bounded
-  visible-light chroma source.
 - Hubble OPAL Cycle 32 products: NASA, ESA, A. A. Simon, and M. H. Wong; CC BY 4.0 as recorded in the FITS headers and MAST product page.
 - Galileo PIA01299 Galilean satellites: NASA/JPL/DLR.
 - Jupiter ring statistics and Galileo PIA00701/PIA01623 observations: NASA

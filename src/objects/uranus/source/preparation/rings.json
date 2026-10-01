@@ -35,12 +35,6 @@
           "width": 3500,
           "minimumHalfWidthPixels": 0,
           "edgeGain": 2.5,
-          "opacity": 29.516097302997224,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Zeta",
             "radiusKm": 39600,
@@ -49,7 +43,8 @@
             "color": "gray",
             "sourceLabel": "Zeta",
             "widthQualification": "source-scaled-width"
-          }
+          },
+          "opticalDepth": 0.0045
         },
         {
           "id": "6",
@@ -58,12 +53,6 @@
           "width": 1.53,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 110,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "6",
             "radiusKm": 41838,
@@ -72,7 +61,8 @@
             "color": "gray",
             "sourceLabel": "Six",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.3
         },
         {
           "id": "5",
@@ -81,12 +71,6 @@
           "width": 2.28,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 138,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "5",
             "radiusKm": 42234,
@@ -95,7 +79,8 @@
             "color": "gray",
             "sourceLabel": "Five",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.5
         },
         {
           "id": "4",
@@ -104,12 +89,6 @@
           "width": 2.33,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 110,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "4",
             "radiusKm": 42571,
@@ -118,7 +97,8 @@
             "color": "gray",
             "sourceLabel": "Four",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.3
         },
         {
           "id": "Alpha",
@@ -127,12 +107,6 @@
           "width": 8.46,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 124,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Alpha",
             "radiusKm": 44718,
@@ -141,7 +115,8 @@
             "color": "gray",
             "sourceLabel": "Alpha",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.4
         },
         {
           "id": "Beta",
@@ -150,12 +125,6 @@
           "width": 9.49,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 110,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Beta",
             "radiusKm": 45661,
@@ -164,7 +133,8 @@
             "color": "gray",
             "sourceLabel": "Beta",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.3
         },
         {
           "id": "Eta",
@@ -173,12 +143,6 @@
           "width": 1.6,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 124,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Eta",
             "radiusKm": 47176,
@@ -187,7 +151,8 @@
             "color": "gray",
             "sourceLabel": "Eta",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.4
         },
         {
           "id": "Gamma",
@@ -196,12 +161,6 @@
           "width": 2.15,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 110,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Gamma",
             "radiusKm": 47627,
@@ -210,7 +169,8 @@
             "color": "gray",
             "sourceLabel": "Gamma",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.3
         },
         {
           "id": "Delta",
@@ -219,12 +179,6 @@
           "width": 4.6,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 138,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Delta",
             "radiusKm": 48300,
@@ -233,7 +187,8 @@
             "color": "gray",
             "sourceLabel": "Delta",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.5
         },
         {
           "id": "Lambda",
@@ -242,12 +197,6 @@
           "width": 2.3,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 82,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Lambda",
             "radiusKm": 50024,
@@ -256,7 +205,8 @@
             "color": "gray",
             "sourceLabel": "Lambda",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 0.1
         },
         {
           "id": "Epsilon",
@@ -265,12 +215,6 @@
           "width": 58.1,
           "minimumHalfWidthPixels": 0.72,
           "edgeGain": 2.5,
-          "opacity": 208,
-          "color": [
-            125,
-            137,
-            140
-          ],
           "source": {
             "name": "Epsilon",
             "radiusKm": 51149,
@@ -279,7 +223,8 @@
             "color": "gray",
             "sourceLabel": "Epsilon",
             "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
-          }
+          },
+          "opticalDepth": 1.4
         },
         {
           "id": "Nu",
@@ -288,12 +233,6 @@
           "width": 3800,
           "minimumHalfWidthPixels": 0,
           "edgeGain": 2.5,
-          "opacity": 1.0412300418255322,
-          "color": [
-            141,
-            91,
-            86
-          ],
           "source": {
             "name": "Nu",
             "radiusKm": 67300,
@@ -302,7 +241,8 @@
             "color": "red",
             "sourceLabel": "Nu",
             "widthQualification": "source-scaled-width"
-          }
+          },
+          "opticalDepth": 5.6e-06
         },
         {
           "id": "Mu",
@@ -311,12 +251,6 @@
           "width": 17000,
           "minimumHalfWidthPixels": 0,
           "edgeGain": 2.5,
-          "opacity": 1.282809416865966,
-          "color": [
-            103,
-            151,
-            181
-          ],
           "source": {
             "name": "Mu",
             "radiusKm": 97700,
@@ -325,11 +259,12 @@
             "color": "blue",
             "sourceLabel": "Mu",
             "widthQualification": "source-scaled-width"
-          }
+          },
+          "opticalDepth": 8.5e-06
         }
       ],
       "output": "uranus-rings{suffix}.webp",
-      "qualification": "PDS center radii and physical widths, with the accepted pixel readability floor for narrow rings.",
+      "qualification": "PDS centre radii, physical widths and normal optical depths; opacity is 1 - exp(-optical depth), with the pixel readability floor for narrow rings.",
       "wedges": {
         "count": 16
       }

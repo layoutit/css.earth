@@ -1,6 +1,18 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {emissionInputChannels,emissionRasterPixels,createInferredEmissionSampler} from './processing.ts';
+import {applyIsophoteMasks,emissionInputChannels,emissionRasterPixels,createInferredEmissionSampler} from './processing.ts';
+test('a mask inside a galaxy takes the median light of its isophote, and never adds light',()=>{
+ // A 21 px round galaxy whose light falls off from the centre, with a bright neighbour at x = 15.
+ const width=21,height=21,pixels=Buffer.alloc(width*height*3);
+ const light=(x:number,y:number)=>Math.max(0,200-12*Math.round(Math.hypot(x-10,y-10)));
+ for(let y=0;y<height;y++)for(let x=0;x<width;x++)pixels.fill(light(x,y)+(Math.hypot(x-15,y-10)<2?50:0),(y*width+x)*3,(y*width+x)*3+3);
+ const before=Buffer.from(pixels);
+ applyIsophoteMasks(pixels,width,height,[{x:15,y:10,radius:3}],{centre:[10,10],minorAxis:[1,0],axisRatio:1});
+ assert.equal(pixels[(10*width+15)*3],light(15,10));
+ assert.ok(pixels.every((value,index)=>value<=before[index]!));
+ assert.equal(pixels[(10*width+5)*3],before[(10*width+5)*3]);
+ assert.throws(()=>applyIsophoteMasks(pixels,width,height,[],{centre:[10,10],minorAxis:[0,0],axisRatio:1}),/Isophote masks/);
+});
 test('emission processing preserves channel order, black subtraction and voxel-centre normalization',()=>{
  const channels=emissionInputChannels(Uint8Array.from([255,128,0]),1,0);
  assert.deepEqual(Array.from(emissionRasterPixels(channels,1)),[255,128,0]);
