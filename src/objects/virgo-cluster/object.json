@@ -24,73 +24,41 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -4.840313484186915e+23,
-        -6.541779898547467e+22,
-        1.0682585877607982e+23
+        -4.8403134841869164e+23,
+        -6.541779898547468e+22,
+        1.0682585877607984e+23
       ],
       "presentationToReference": [
+        -0.9993450622492596,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.03618627582417303,
+        -0.03320025896176645,
+        0.3977771559319137,
+        0.9168811684311056,
+        -0.014394073881107321,
+        -0.9174820620691818,
+        0.39751663665611175
       ],
-      "metersPerUnit": 5.0140062462525665e+22,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 161742136975889240000,
       "bodyRadiusM": 5.0140062462525665e+22
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Group distance",
-        "value": "16.2 Mpc",
-        "note": "Cosmicflows-4 group distance: the weighted average of its members' distance moduli on the calibrated scale (table 3, DMzp).",
-        "source": {
-          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
-          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 187.7°, Dec 12.34°",
-        "source": {
-          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
-          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz"
-        }
-      },
-      {
-        "id": "classification",
-        "label": "Classification",
-        "value": "X-ray selected galaxy cluster",
-        "note": "MCXC-II R500 is an X-ray-derived overdensity aperture (500 times the critical density), not the cluster boundary or member distribution.",
-        "source": {
-          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
-          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz"
-        }
-      },
-      {
-        "id": "redshift",
-        "label": "Redshift",
-        "value": "0.0036",
-        "source": {
-          "label": "Redshift reference 1995ApJ...446....1S, transcribed from MCXC-II.",
-          "url": "https://ui.adsabs.harvard.edu/abs/1995ApJ...446....1S"
-        }
-      },
-      {
-        "id": "aperture",
-        "label": "R500 radius",
-        "value": "1.079 Mpc",
-        "source": {
-          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
-          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-catalogue-points-bin@1",

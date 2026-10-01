@@ -53,55 +53,41 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -105140549150265080000,
-        -41834040087509950000,
-        -123401250499199320000
+        -105140549150265100000,
+        -41834040087509960000,
+        -123401250499199340000
       ],
       "presentationToReference": [
+        -0.7687566031478317,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.6395414647359523,
+        -0.5867678218446865,
+        0.3977771559319137,
+        0.7053203934853722,
+        -0.25439498494319734,
+        -0.9174820620691818,
+        0.3057938152040233
       ],
-      "metersPerUnit": 811718046418199.9,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 4320434763193644.5,
       "bodyRadiusM": 1339334776590029800
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "5.426 kpc (−47 / +47 pc)",
-        "note": "Combined Gaia EDR3, HST and literature distance, Table 2, NGC 5139. One cluster scale; individual stellar distances are not recovered.",
-        "source": {
-          "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes.",
-          "url": "https://arxiv.org/pdf/2105.09526"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 201.7°, Dec -47.48°",
-        "source": {
-          "label": "ESO/INAF-VST/OmegaCAM eso1119b native TIFF and embedded AVM. The common observation-frame center is an adopted registration origin, not a new dynamical centroid measurement.",
-          "url": "https://cdn.eso.org/images/original/eso1119b.tif"
-        }
-      },
-      {
-        "id": "classification",
-        "label": "Classification",
-        "value": "Globular stellar cluster",
-        "note": "Observed integrated cluster starlight; the selected oblate Gaussian profile supplies conditional depth for finite display-emission components.",
-        "source": {
-          "label": "D’Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths.",
-          "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

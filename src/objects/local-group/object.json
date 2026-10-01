@@ -66,39 +66,7 @@
       ],
       "metersPerUnit": 3.2708182363808494e+22,
       "bodyRadiusM": 3.2708182363808494e+22
-    },
-    "facts": [
-      {
-        "id": "centre",
-        "label": "Centre",
-        "value": "Midway between the Milky Way and M31",
-        "note": "The paper places the Local Group's barycentre at the mid-point of the vector connecting the two (Table 2, notes to columns 8 to 10); the marker uses this repository's positions of the Galactic centre and M31.",
-        "source": {
-          "label": "McConnachie (2012), The Observed Properties of Dwarf Galaxies in and around the Local Group, AJ 144, 4",
-          "url": "https://arxiv.org/abs/1204.1562"
-        }
-      },
-      {
-        "id": "distance",
-        "label": "Distance to the centre",
-        "value": "386.1 kpc",
-        "note": "The Sun's distance from that mid-point, from the same two positions.",
-        "source": {
-          "label": "McConnachie (2012), The Observed Properties of Dwarf Galaxies in and around the Local Group, AJ 144, 4",
-          "url": "https://arxiv.org/abs/1204.1562"
-        }
-      },
-      {
-        "id": "radius",
-        "label": "Zero-velocity radius",
-        "value": "1,060 ± 70 kpc",
-        "note": "The mean distance of the galaxies at the group's zero-velocity surface (section 3).",
-        "source": {
-          "label": "McConnachie (2012), The Observed Properties of Dwarf Galaxies in and around the Local Group, AJ 144, 4",
-          "url": "https://arxiv.org/abs/1204.1562"
-        }
-      }
-    ]
+    }
   },
   "prepared": {
     "format": "cssearth-galaxy-catalog@1",

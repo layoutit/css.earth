@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m81",
+  "displayName": "M81",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "3.614 Mpc (−65,960 / +33,440 pc)",
+        "source": {
+          "catalogueId": "publication-newman2024apj-966-175n",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N",
+          "label": "Newman2024ApJ...966..175N: An Empirical Calibration of the Tip of the Red Giant Branch Distance Method in the Near Infrared. I. Hubble Space Telescope WFC3/IR F110W and F160W Filters",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 148.9°, Dec 69.07°",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Newman2024ApJ...966..175N: An Empirical Calibration of the Tip of the Red Giant Branch Distance Method in the Near Infrared. I. Hubble Space Telescope WFC3/IR F110W and F160W Filters",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N",
+      "credit": "Newman2024ApJ...966..175N: An Empirical Calibration of the Tip of the Red Giant Branch Distance Method in the Near Infrared. I. Hubble Space Telescope WFC3/IR F110W and F160W Filters"
+    }
+  }
+}

@@ -154,7 +154,6 @@ export function bindNavigationIntent({ documentTarget, windowTarget, navigable, 
   const linked = (event: Event) => {
     const anchor = event.target instanceof windowTarget.Element ? event.target.closest('a[href]') : null;
     if (!(anchor instanceof windowTarget.HTMLAnchorElement) || anchor.origin !== windowTarget.location.origin) return null;
-    if (anchor.hasAttribute('data-prepared-focus-id')) return null;
     const id = anchor.pathname === '/' ? undefined : objectIdAtPath(anchor.pathname);
     // An overview keeps the mounted scene (navigation-scope.mts): there is nothing to prefetch.
     return isOverviewPage(id) ? null : id ?? null;

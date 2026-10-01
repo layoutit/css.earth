@@ -33,6 +33,18 @@
     },
     {
       "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2480,
+      "sha256": "fc430d8520a2d2e6d20f80b9125247544389fb6b439fb6142523d0ee952470c3"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 3562,
+      "sha256": "5e789918688c317f20791c0a8d1a41bcae0e5bbea64d525b453132e53a1896ea"
+    },
+    {
+      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 5843385,
       "sha256": "85124b0a4ff911c4f2ab37701ebe27ad1c0081f6f1de09e2627d3147ad3d1dda"
@@ -54,6 +66,12 @@
       "filename": "provenance.json",
       "bytes": 68141,
       "sha256": "7f7bcf764a9d5b5b694bb150a99e9b47db85526cb0d2820f09e5b2873e425b18"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 8104,
+      "sha256": "78e981082a174768e18c65fa45d001b1275754e4e38c29e345be30b1ebdb5bd4"
     },
     {
       "location": "prepared",
@@ -924,6 +942,12 @@
       "filename": "smc-vista/impostors/view-ppp.png",
       "bytes": 12532,
       "sha256": "64cf0b92cef7e0eab24e92ab5db32c7fdca26e7c70ad48ea7b2e23d01774a4dd"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1689,
+      "sha256": "3e043daca9257625a970239dc9a520a5eedf9d2dfcc627d4c6833bf4b6c8bff0"
     }
   ]
 }

@@ -63,40 +63,36 @@
         1.0415782317338e+23
       ],
       "presentationToReference": [
+        -0.49227712395359197,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        0.8704385292667024,
+        0.79861173673608,
+        0.3977771559319137,
+        0.45165543079442777,
+        0.34624056258526664,
+        -0.9174820620691818,
+        0.19581659429660195
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1642376777245405200,
       "bodyRadiusM": 509136800946075600000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "3.614 Mpc (−65,960 / +33,440 pc)",
-        "note": "trgb",
-        "source": {
-          "label": "Newman2024ApJ...966..175N: An Empirical Calibration of the Tip of the Red Giant Branch Distance Method in the Near Infrared. I. Hubble Space Telescope WFC3/IR F110W and F160W Filters",
-          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 148.9°, Dec 69.07°",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

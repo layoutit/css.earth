@@ -5,7 +5,6 @@ export { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera, worldCameraViewport } from './world-camera.js';
 export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldReflection, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './world-camera-math.js';
 export type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
-export type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
 export { createWorldSelectionTarget } from './selection-target.js';
 export { preparedDefaultViewRotation } from './prepared-arrival-view.js';
 export { savedWorldCamera } from './saved-world-camera.js';

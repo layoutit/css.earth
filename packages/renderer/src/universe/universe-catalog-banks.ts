@@ -27,7 +27,7 @@ interface ImageBank {
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas,
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas,
   pointBanks = [] }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
@@ -37,7 +37,6 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   catalogBank: PreparedUniverseOptions['catalogBank'];
   loadCatalog: PreparedUniverseOptions['loadCatalog'];
   loadImageLayer: PreparedUniverseOptions['loadImageLayer'];
-  onSelect?: (object: PreparedCatalogObject) => void;
   requestPublication?: () => boolean;
   prepareBillboardAtlas: () => boolean;
   /** Published stellar extents in metres by object id (PreparedUniverseOptions.stellarExtents). */
@@ -164,9 +163,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string) {
       if (lifetime.disposed) return;
       for (const bank of images) {
-        // A galaxy's slices paint only for the observer who selected it.
-        const presentationOpacity = bank.id === detailedObjectId ? 1 : 0;
-        const opacity = presentationOpacity * volumeOpacity * projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits);
+        // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
+        // fade is measured from the selected body, which is the galaxy itself.
+        const opacity = bank.id === detailedObjectId ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
         // Its billboard shows it from everywhere else, and gives way as the loaded slices fade in.
         if (billboards && bank.billboardIndex >= 0) {
           const context = bank.independent ? 1 : volumeOpacity;

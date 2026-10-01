@@ -1,5 +1,4 @@
 ---
-import { isHostedObject } from '@cssearth/objects';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
@@ -8,7 +7,7 @@ import { startupRequestsBootstrap } from '../startup-requests.mts';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
-import { breadcrumbJsonLd, focusSeo, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
+import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
 import "./cubic-sky.css";
@@ -61,7 +60,7 @@ const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId =
 const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
-const pageSeo = isHostedObject(pageRecord) ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
+const pageSeo = objectSeo(pageRecord, seoOptions);
 const seo = home ? homeSeo(pageSeo) : pageSeo;
 const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(pageTrail(pageRecord))).replace(/</g, '\\u003c');
 ---

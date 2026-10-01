@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "fornax-cluster",
+  "card": {
+    "text": "A cluster of galaxies 19.7 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+        "checked": "2026-10-01",
+        "locator": "distance: 19.66 Mpc"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A cluster of galaxies 19.7 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+        "checked": "2026-10-01",
+        "locator": "distance: 19.66 Mpc"
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Cosmicflows-4 group members",
+      "summary": "One dot for each member galaxy the Nearby Universe field does not already draw, at the cluster's group distance. A member's depth is assumed, not measured."
+    }
+  }
+}

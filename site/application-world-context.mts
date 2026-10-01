@@ -1,8 +1,3 @@
-import { isHostedObject } from '@cssearth/objects';
-import { knownObject, loadObject } from './object-directory.mts';
-import type { NavigableObject } from './objects.mts';
-/** The registry object a focus is on: a placed object the world's host draws. */
-const hostedFocus = (object: NavigableObject | null | undefined) => object != null && isHostedObject(object) ? object : null;
 import { createSceneLifetime } from '@cssearth/engine';
 import { labelOcclusionFor } from '@cssearth/renderer';
 import { afterStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
@@ -13,7 +8,6 @@ import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/wor
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, streamWorldSystems } from './world-context-plan.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
@@ -28,7 +22,7 @@ import type { ApplicationWorldLayer } from './application-world-types.mts';
 
 export function createApplicationWorldContext() {
   return {
-    async mount({ stage, viewport, signal, onSelectFocus, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; viewport: ReturnType<typeof createCameraViewport>; signal?: AbortSignal; onSelectFocus(id: string): void; windowTarget?: Window | null }) {
+    async mount({ stage, viewport, signal, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; viewport: ReturnType<typeof createCameraViewport>; signal?: AbortSignal; windowTarget?: Window | null }) {
       const target = stage.ownerDocument.defaultView;
       if (!target || !windowTarget) throw new Error('World context requires a window.');
       const lifetime = createSceneLifetime();
@@ -54,15 +48,11 @@ export function createApplicationWorldContext() {
         const presentationHost = stage.closest<HTMLElement>('.object-world-stage') ?? stage;
         const layer = own(prepared.mount(stage, { presentationHost,
           requestPublication: () => refreshWorld(),
-          onSelectGalaxy: object => { if (!lifetime.disposed) onSelectFocus(object.id); },
         }));
         const occlusion = labelOcclusionFor(stage.ownerDocument);
         const updateOcclusion = () => { if (!lifetime.disposed) layer.setLabelBlockers(occlusion.read()); };
         updateOcclusion();
         lifetime.onDispose(occlusion.subscribe(updateOcclusion));
-        const contextNavigation = own(createPreparedContextNavigation({ layer, presentation: PREPARED_WORLD_PRESENTATION.galaxies,
-          unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
-          objects: { known: id => hostedFocus(knownObject(id)), load: id => loadObject(id).then(hostedFocus) }, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
         // The systems this page does not show arrive after its first view (startup-gate.ts), in a few batches; each joins
@@ -100,8 +90,6 @@ export function createApplicationWorldContext() {
           present: frames.present,
           createFramePresenter: frames.createFramePresenter,
           setNavigationInFlight: frames.setNavigationInFlight,
-          connectNavigation: contextNavigation.connect,
-          applyFocus: contextNavigation.apply,
           previewSelection(id?: string | null, framingScale?: number, edge?: PreparedLabelEdge) {
             if (!lifetime.disposed) layer.previewSelection(id, framingScale, edge);
           },

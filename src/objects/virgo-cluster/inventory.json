@@ -2,10 +2,40 @@
   "schema": "cssearth-inventory@1",
   "assets": [
     {
+      "location": "public",
+      "filename": "virgo-cluster-dataset-members.webp",
+      "bytes": 886,
+      "sha256": "73673b9e1bd81a59da196bdd45da72976724a8bf96d60d2e03e8a48eecc156a4"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2990,
+      "sha256": "915835958f88b8e5115f5d56519a5f1e977b446c89d72a3f3407289bd799a446"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 392,
+      "sha256": "b4235c7ed8f4c18f9559fa487d8fbe067e0c2f706c1248a2a0e81721b7d0da44"
+    },
+    {
       "location": "prepared",
       "filename": "dots.bin",
       "bytes": 8321,
       "sha256": "891934b3e3a82c33fb6c16348415ba169af925492c868e04454a0d4efbe62dae"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4592,
+      "sha256": "c8055cc38e2dca27b222652fc1238cfc36b83af8b8a80a2822dccd16dafb19cb"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1160,
+      "sha256": "b4be4b41b92ce12cdc262593d6494f64ad2aa1bf455da615b8aef69678a0ab66"
     }
   ]
 }

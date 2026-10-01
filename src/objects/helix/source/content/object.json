@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "helix",
+  "displayName": "Helix Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "216 pc (−12 / +14 pc)",
+        "source": {
+          "catalogueId": "benedict-2009",
+          "url": "https://arxiv.org/abs/0909.4281",
+          "label": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 337.4°, Dec -20.84°",
+        "source": {
+          "catalogueId": "eso-eso0907a",
+          "url": "https://cdn.eso.org/images/original/eso0907a.tif",
+          "label": "ESO ESO WFI · optical detail image and publisher astrometry; registration retained in the observation recipe",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "Planetary nebula",
+        "source": {
+          "catalogueId": "eso-eso0907a",
+          "url": "https://cdn.eso.org/images/original/eso0907a.tif",
+          "label": "ESO ESO WFI · optical detail image and publisher astrometry; registration retained in the observation recipe",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "eso-wfi",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
+      "href": "https://arxiv.org/abs/0909.4281"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESO ESO WFI · optical detail image and publisher astrometry; registration retained in the observation recipe",
+      "href": "https://cdn.eso.org/images/original/eso0907a.tif"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/0909.4281",
+      "credit": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei"
+    }
+  }
+}

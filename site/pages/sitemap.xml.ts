@@ -1,10 +1,9 @@
-import { isHostedObject } from "@cssearth/objects";
 import { OBJECTS } from "../objects.mts";
-import { focusSeo, objectSeo } from "../seo.mts";
+import { objectSeo } from "../seo.mts";
 
-/** Every page, `/<id>/`: each scene, each catalogue subject and each overview. */
+/** Every page, `/<id>/`: each object and each level. */
 export function GET() {
-  const pages = OBJECTS.map(object => isHostedObject(object) ? focusSeo(object) : objectSeo(object));
+  const pages = OBJECTS.map(object => objectSeo(object));
   const urls = pages.map((page) => `  <url><loc>${page.canonical}</loc></url>`).join("\n");
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?>\n` +

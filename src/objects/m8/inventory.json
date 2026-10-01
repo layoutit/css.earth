@@ -21,6 +21,18 @@
     },
     {
       "location": "prepared",
+      "filename": "content.json",
+      "bytes": 921,
+      "sha256": "8fdbd7de61d38e015aff80548d68be3ddb0bfdd83fc4784870037a1c3b4b9aa2"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 2112,
+      "sha256": "00e299c2a90c18999f9502d9bc0f49b559b3b97a8e5fd2a29276af41da55a4ac"
+    },
+    {
+      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 2665035,
       "sha256": "7ef3ef40c3cd0e95c71ecf98b8ec627051b3636f3c24584630cdc13f50c05e96"
@@ -393,6 +405,12 @@
     },
     {
       "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 6451,
+      "sha256": "975109e1803560e046223da10a09bae08864a162690416997dffd1484cae6f1f"
+    },
+    {
+      "location": "prepared",
       "filename": "spitzer-mid-infrared/atlases/x.webp",
       "bytes": 783898,
       "sha256": "793c65671aeccffa67d76da447052943b55f21dd30fe1f0f4d7cd22b196c2384"
@@ -564,6 +582,12 @@
       "filename": "spitzer-mid-infrared/impostors/view-ppp.png",
       "bytes": 17671,
       "sha256": "fba98139fe7920ed8df48b9e074ae28bba70fab7b37234e3ea45c079f8e52b6e"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1631,
+      "sha256": "48d5c1353f8c986e133a1a5b10236f410ec5c8e3f9cbd67d2ef6f5107b2899ec"
     }
   ]
 }

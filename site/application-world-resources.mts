@@ -12,7 +12,7 @@ import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepare
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
-import { loadFocusCatalogs } from './focus-catalog.mts';
+import { loadDotCatalogues } from './dot-catalogues.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { readPageDatasets, selectedPageDataset } from './page-datasets.mts';
@@ -47,9 +47,9 @@ type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
 let universePromise: Promise<ApplicationUniverse> | null = null;
 export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
-    let catalogs: Awaited<ReturnType<typeof loadFocusCatalogs>> | null = null;
-    let catalogsLoading: Promise<Awaited<ReturnType<typeof loadFocusCatalogs>>> | null = null;
-    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadFocusCatalogs(location.origin)
+    let catalogs: Awaited<ReturnType<typeof loadDotCatalogues>> | null = null;
+    let catalogsLoading: Promise<Awaited<ReturnType<typeof loadDotCatalogues>>> | null = null;
+    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadDotCatalogues(location.origin)
       .then(value => catalogs = value).finally(() => { catalogsLoading = null; });
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;

@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m42",
+  "card": {
+    "text": "The Orion Nebula is a Milky Way H II region about 414 parsecs away. Its bright gas surrounds the young Orion Nebula Cluster.",
+    "sources": [
+      {
+        "catalogueId": "menten-2007",
+        "url": "https://arxiv.org/abs/0709.0485",
+        "label": "Menten et al. (2007), The distance to the Orion Nebula",
+        "checked": "2026-10-01",
+        "locator": "distance: 414 pc (−7 / +7 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Orion Nebula is a Milky Way H II region about 414 parsecs away. Its bright gas surrounds the young Orion Nebula Cluster.",
+    "sources": [
+      {
+        "catalogueId": "menten-2007",
+        "url": "https://arxiv.org/abs/0709.0485",
+        "label": "Menten et al. (2007), The distance to the Orion Nebula",
+        "checked": "2026-10-01",
+        "locator": "distance: 414 pc (−7 / +7 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "eso-optical": {
+      "title": "Orion in visible light",
+      "detail": "4000 × 3106 px",
+      "summary": "Optical display colors on an inferred cloud; physical depth and faint outer structure remain uncertain."
+    },
+    "eso-vista": {
+      "title": "Orion in near infrared",
+      "detail": "3252 × 4000 px",
+      "summary": "Near-infrared false color on the same inferred cloud; the image does not measure its depth."
+    }
+  }
+}

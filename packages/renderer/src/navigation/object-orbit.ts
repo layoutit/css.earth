@@ -16,8 +16,6 @@ import { bindWorldCameraPicking } from './world-camera-picking.js';
 import { hitsProjectedBody } from './world-camera-hit.js';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
-import { prepareFocusFlight } from './prepared-focus.js';
-import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; projectionScale?: number; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & ReturnType<PerspectiveDolly['state']>;
 export interface OrbitPublication extends CameraAngles { worldCamera: WorldCameraPose; sceneMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection: PhysicalProjection; distance: number; focal: number; viewportWidth: number; viewportHeight: number; stageViewport: WorldCameraViewport; principalOffset: readonly number[]; body: PerspectivePublication['body']; levelOfDetail: ReturnType<PerspectiveDolly['levelOfDetail']>; }
@@ -212,10 +210,10 @@ export function createRetainedCubicSkyOrbit({
     (x, y) => lodStage() === 'geometry' && surfaceHitTest(x, y)));
   // Every prepared body draws its system node first under the scene, with the body's north pole on its +Z axis. Drags
   // turn about that pole when the plan's drag model is "pole-held-tumble" (Earth's recipe) and the mesh is drawn; other
-  // bodies, the same body as a billboard or dot, and a focused neighbour keep the screen axes.
+  // bodies and the same body as a billboard or dot keep the screen axes.
   const poleHeld = cameraPlan.drag?.model === 'pole-held-tumble';
   const bodyPole = (): { pole?: Vector3 } => {
-    if (!poleHeld || lodStage() !== 'geometry' || camera.focus()) return {};
+    if (!poleHeld || lodStage() !== 'geometry') return {};
     const system = sceneElement.querySelector<HTMLElement>(':scope > .polycss-mesh');
     if (!system) return {};
     const m = multiplyPreparedMatrix4(readPreparedMatrix4(camera.scene()), readPreparedTransform(system.style.transform || 'none'));
@@ -233,11 +231,11 @@ export function createRetainedCubicSkyOrbit({
     rotate: publishCameraDelta,
     minimumZoom: minimumZoom(),
     maximumZoom: maximumZoom(),
-    surfaceFlyToHitTest: (clientX, clientY) => !camera.focus() && surfaceHitTest(clientX, clientY),
+    surfaceFlyToHitTest: surfaceHitTest,
     // The prepared wheel dolly: the eye moves along its axis, with no
     // surface anchor to hold.
     dolly: Object.freeze({ stepPerDelta: cameraPlan.dolly.wheelStepPerDelta,
-      minimumDistance: () => camera.inputMinimumDistance() }),
+      minimumDistance: () => camera.minimumDistance() }),
     onStart() {
       interactionStarts += 1;
       onInteractionStart();
@@ -296,27 +294,6 @@ export function createRetainedCubicSkyOrbit({
     initialResponsiveZoom: () => initialResponsiveZoom,
     currentResponsiveZoom: () => responsiveFit.zoom,
     setZoomOutCentering(enabled: boolean) { camera.setZoomOutCentering(enabled); },
-    preparedFocus: () => camera.focus() ?? null,
-    setPreparedFocus(focus: PreparedNavigationFocus | null, frame: PreparedWorldCameraFrame) {
-      if (lifetime.disposed) return;
-      validateWorldFrame(frame);
-      cameraMotion.cancel();
-      controls.stop();
-      camera.setFocus(focus, frame);
-      publish();
-    },
-    async flyToPreparedFocus(focus: PreparedNavigationFocus, frame: PreparedWorldCameraFrame,
-      viewport: WorldCameraViewport & { framingRadiusPixels: number }, options: PreparedFocusFlightOptions = {}) {
-      if (lifetime.disposed) return Promise.resolve({ completed: false });
-      validateWorldFrame(frame);
-      if (options.signal?.aborted) return Promise.resolve({ completed: false });
-      const plan = prepareFocusFlight(camera, focus, frame, viewport, options.durationMilliseconds);
-      cameraMotion.cancel(); controls.stop();
-      camera.setFocus(plan.focus, frame);
-      publish();
-      const reduced = options.reducedMotion ?? windowTarget.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      return flyCamera(plan.sample, reduced ? 0 : plan.durationMilliseconds, options.signal);
-    },
     captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
       validateWorldFrame(frame);
       return camera.capture(frame);
@@ -338,7 +315,6 @@ export function createRetainedCubicSkyOrbit({
       if (![controlPitch, controlYaw, controlRoll, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
       cameraMotion.cancel();
       controls.stop();
-      camera.clearFocus();
       const start = { ...camera.state };
       const targetZoom = transition?.preserveZoom ? start.zoom : clamp(zoom, minimumZoom(), maximumZoom());
       const viewport = perspective.viewport();
@@ -439,7 +415,6 @@ export function createRetainedCubicSkyOrbit({
         responsiveWidthShare: responsiveFit.widthShare,
         responsiveBaseZoom: responsiveFit.zoom,
         publications,
-        preparedFocusId: camera.focus()?.id ?? null,
         flightActive: cameraMotion.signal !== undefined,
         framePublication: publicationState(),
         interactionStarts,

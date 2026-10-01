@@ -1,6 +1,6 @@
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseObjectDescriptor, type ObjectDescriptor } from '@cssearth/objects';
+import { parseObjectDescriptor, sceneDescriptorOf, type ObjectDescriptor } from '@cssearth/objects';
 import { preparedObjectText, preparedObjectTransport, preparedPageData } from '@cssearth/objects/node';
 import { deferredDatasetIds, parsePreparedObjectRuntime, requireAssets, requireControls, splitPreparedDatasetTables } from '@cssearth/renderer';
 import { isRecord } from '@cssearth/core';
@@ -21,7 +21,7 @@ async function preparedTransports(id: string, root: string): Promise<PreparedTra
   if (!transports) {
     transports = (async () => {
       const directory = resolve(root, 'src/objects', id);
-      const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')));
+      const descriptor = parseObjectDescriptor(sceneDescriptorOf(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')) as unknown));
       if (descriptor.id !== id || descriptor.prepared?.url !== 'prepared/object.json') {
         throw new TypeError(`${id}: invalid prepared page reference.`);
       }
@@ -69,7 +69,7 @@ export async function readPreparedDatasetBytes(id: string, datasetId: string, ro
 export async function loadObjectPageData(id: string, root = process.cwd()) {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object page identity.');
   const directory = resolve(root, 'src/objects', id);
-  const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')));
+  const descriptor = parseObjectDescriptor(sceneDescriptorOf(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')) as unknown));
   const page = descriptor.properties.page;
   const reference = isRecord(page) && isRecord(page.metadata) ? page.metadata : null;
   if (descriptor.id !== id || reference?.url !== 'prepared/page.json') {

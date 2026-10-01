@@ -58,53 +58,40 @@
       "epochJdTt": 2461286.5,
       "originM": [
         2.091586510501188e+22,
-        9.077987154992237e+21,
-        1.3516852986079745e+22
+        9.077987154992236e+21,
+        1.3516852986079747e+22
       ],
       "presentationToReference": [
+        0.8364228535488972,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        0.5480846741709895,
+        0.5028578570469151,
+        0.3977771559319137,
+        -0.7674029644358314,
+        0.21801556290160587,
+        -0.9174820620691818,
+        -0.3327099038411359
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 895841878497493800,
       "bodyRadiusM": 277710982334223060000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "859 kpc (−23,410 / +24,070 pc)",
-        "source": {
-          "label": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure",
-          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 23.46°, Dec 30.66°",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
-      },
-      {
-        "id": "membership",
-        "label": "Membership",
-        "value": "Local group, Andromeda",
-        "note": "Author catalogue host association: m_033 -> m_031; object confirmation is recorded separately.",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

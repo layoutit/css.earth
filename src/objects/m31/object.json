@@ -55,54 +55,41 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        1.7692007682599815e+22,
-        3.3377962460728383e+21,
-        1.5797892971967472e+22
+        1.7692007682599817e+22,
+        3.337796246072839e+21,
+        1.5797892971967474e+22
       ],
       "presentationToReference": [
+        0.8841998226395167,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        0.4671088456069389,
+        0.4285639868782094,
+        0.3977771559319137,
+        -0.8112374765565086,
+        0.18580522811616745,
+        -0.9174820620691818,
+        -0.35171449072504946
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2488449662493038000,
       "bodyRadiusM": 771419395372841800000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "776.2 kpc (−21,150 / +21,750 pc)",
-        "source": {
-          "label": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure",
-          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 10.68°, Dec 41.27°",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
-      },
-      {
-        "id": "membership",
-        "label": "Membership",
-        "value": "Local group, Andromeda",
-        "note": "Author catalogue host association: m_031; object confirmation is recorded separately.",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

@@ -1,7 +1,6 @@
 import type { createApplicationWorldContext } from '../application-world-context.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
-import type { FocusPublication } from '../prepared-context-navigation.mts';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 
 /** The world's code loads when the world does (`scene-router.mts`); its viewport exists from the start. */
@@ -18,16 +17,12 @@ interface SceneWorldOptions {
   windowTarget: BrowserWindow;
   isCurrent(session: SceneSession): boolean;
   onMount(world: WorldContextMount): void;
-  onSelectFocus(id: string): void;
-  canPublishFocus(): boolean;
-  readFocus(): string | null;
-  onFocusChange(session: SceneSession, publication: FocusPublication): void;
   onCameraChange(session: SceneSession, world: WorldCameraPose): void;
   onError(error: unknown): void;
 }
 
 /** The world survives detail replacement; each detail owns only its connections to it. */
-export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onSelectFocus, canPublishFocus, onFocusChange, readFocus, onCameraChange, onError }: SceneWorldOptions) {
+export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMount, onCameraChange, onError }: SceneWorldOptions) {
   type WorldState = { kind: 'idle' } | { kind: 'loading'; controller: AbortController; task: Promise<WorldContextMount> }
     | { kind: 'ready'; world: WorldContextMount };
   let state: WorldState = { kind: 'idle' };
@@ -44,7 +39,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     // Register the loading owner before invoking mount, including synchronous callbacks.
     const task = Promise.resolve().then(() => {
       if (controller.signal.aborted) throw controller.signal.reason;
-      return owner.mount({ stage, viewport: sharedViewport(), signal: controller.signal, windowTarget, onSelectFocus });
+      return owner.mount({ stage, viewport: sharedViewport(), signal: controller.signal, windowTarget });
     }).then(value => {
       if (controller.signal.aborted) {
         value?.destroy?.();
@@ -106,12 +101,6 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     session.own(() => { if (connectedSession === session) connectedSession = null; });
     session.framePresenter?.attach?.(world);
     world.selectObject?.(session.objectId, navigation.frame, navigation.framingScale, navigation.labelEdge);
-    const disconnectFocus = world.connectNavigation?.(navigation, {
-      readFocus,
-      onFocusChange(publication) { if (isCurrent(session)) onFocusChange(session, publication); },
-      canPublish: () => isCurrent(session) && canPublishFocus(),
-    });
-    if (disconnectFocus) session.own(disconnectFocus);
     session.own(navigation.subscribe(frame => {
       if (isCurrent(session) && mounted() === world) onCameraChange(session, frame);
     }));

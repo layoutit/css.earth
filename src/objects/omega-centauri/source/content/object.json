@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "omega-centauri",
+  "displayName": "Omega Centauri",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "5.426 kpc (−47 / +47 pc)",
+        "source": {
+          "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+          "url": "https://arxiv.org/pdf/2105.09526",
+          "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 201.7°, Dec -47.48°",
+        "source": {
+          "catalogueId": "eso-eso1119b",
+          "url": "https://cdn.eso.org/images/original/eso1119b.tif",
+          "label": "ESO/INAF-VST/OmegaCAM eso1119b native TIFF and embedded AVM. The common observation-frame center is an adopted registration origin, not a new dynamical centroid measurement.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "Globular stellar cluster",
+        "source": {
+          "catalogueId": "dsouza-rix-2013",
+          "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
+          "label": "D’Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths.",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "eso1119b",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes.",
+      "href": "https://arxiv.org/pdf/2105.09526"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESO/INAF-VST/OmegaCAM eso1119b native TIFF and embedded AVM. The common observation-frame center is an adopted registration origin, not a new dynamical centroid measurement.",
+      "href": "https://cdn.eso.org/images/original/eso1119b.tif"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "D’Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths.",
+      "href": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/pdf/2105.09526",
+      "credit": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes."
+    }
+  }
+}

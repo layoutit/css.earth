@@ -25,7 +25,6 @@ export function createSelectionPresentation(documentTarget: Document, {
   if (!context) throw new Error('Object shell context is missing.');
   // One card per overview (OverviewCard.astro).
   const overviewCards = sectionElements(context, '[data-large-scale-overview]');
-  const focusCard = sectionElements(context, '[data-prepared-focus-card]')[0] ?? null;
   const system = sectionElements(context, '[data-system-results]')[0] ?? null;
   let systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   // Other systems' headers load with the first overview that needs one (`system-headers-fragment.mts`).
@@ -51,26 +50,21 @@ export function createSelectionPresentation(documentTarget: Document, {
     ? systemById(WORLD_OBJECTS, systemId)?.name ?? 'Solar System'
     : knownObject(scope)?.name ?? '';
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
-    const focus = subject.kind === 'focus' ? subject : null;
     const overview = subject.kind === 'overview' ? subject.overview : null;
-    // The subject a card may list: a catalogue focus, or an overview that is a member of a larger level (the Milky Way in
-    // the Local Group).
-    const subjectId = focus ? focus.id : overview && overview.scope !== 'system' ? overview.scope : null;
+    // A level that is a member of a larger one (the Milky Way in the Local Group) is the subject its card measures from.
+    const subjectId = overview && overview.scope !== 'system' ? overview.scope : null;
     const lists = (card: HTMLElement) => subjectId !== null
       && sectionElements(card, '[data-neighbor-id]').some(row => row.dataset.neighborId === subjectId);
-    // An overview shows its own card; a catalogue focus shows the card of the level that lists it.
-    const shown = overview && overview.scope !== 'system' ? overviewCards.find(card => card.dataset.largeScaleOverview === overview.scope)
-      : focus ? overviewCards.find(lists) : undefined;
+    const shown = overview && overview.scope !== 'system' ? overviewCards.find(card => card.dataset.largeScaleOverview === overview.scope) : undefined;
     // Each card measures its distances from the subject it lists, or else from its home (the member holding the stars, or
     // the observer).
     for (const card of overviewCards) selectGalaxyNeighbor(card, lists(card) ? subjectId! : card.dataset.neighborHome ?? 'observer');
     const systemSelected = overview?.scope === 'system';
-    const showContext = subject.kind === 'overview' || subject.kind === 'focus';
+    const showContext = subject.kind === 'overview';
     for (const card of overviewCards) setSectionShown(card, card === shown);
-    if (focusCard) setSectionShown(focusCard, !!focus);
     if (system) setSectionShown(system, systemSelected);
     systemContent.show(systemSelected);
-    // An overview or a catalogue focus shows its own card; the body's card waits off the page.
+    // An overview shows its own card; the body's card waits off the page.
     setSectionShown(information, !showContext);
     setSectionShown(context, showContext);
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
@@ -78,21 +72,16 @@ export function createSelectionPresentation(documentTarget: Document, {
     showSystemHeader(headerSystemId);
     systemBodies.show(systemSelected ? headerSystemId : null);
     if (solarSystemFacts && solarSystemFacts.hidden !== (headerSystemId !== SOLAR_SYSTEM_ID)) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
-    const label = subject.kind === 'focus'
-      ? (focusCard?.dataset.preparedFocusId === subject.id ? focusCard.querySelector('[data-focus-name]')?.textContent : null) || 'Selected object'
-      : subject.kind === 'overview' ? overviewName(subject.overview)
+    const label = subject.kind === 'overview' ? overviewName(subject.overview)
       : subject.kind === 'satellite-system' ? objectName(subject.hostId) || 'Selected system'
       : objectName(subject.objectId) || 'Selected object';
     if (context.getAttribute('aria-label') !== label) context.setAttribute('aria-label', label);
-    const kind = subject.kind === 'focus' ? 'prepared-focus'
-      : subject.kind === 'overview' ? subject.overview.scope : subject.kind === 'satellite-system' ? 'satellite-system' : 'object';
+    const kind = subject.kind === 'overview' ? subject.overview.scope : subject.kind === 'satellite-system' ? 'satellite-system' : 'object';
     if (documentTarget.documentElement.dataset.selection !== kind) documentTarget.documentElement.dataset.selection = kind;
-    const selection = subject.kind === 'focus' ? { kind: 'prepared-focus', id: subject.id } as const
-      : subject.kind === 'object' ? { kind: 'scene', id: subject.objectId } as const
+    const selection = subject.kind === 'object' ? { kind: 'scene', id: subject.objectId } as const
       : subject.kind === 'satellite-system' ? { kind: 'scene', id: subject.hostId } as const : null;
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
-      const selected = selection?.kind === 'prepared-focus' ? anchor.dataset.preparedFocusId === selection.id
-        : selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
+      const selected = selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
       setLinkSelected(anchor, selected);
     }
     return selection;

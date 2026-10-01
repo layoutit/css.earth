@@ -59,55 +59,41 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        2103179275207846700,
+        2103179275207847000,
         3207881506511226400,
         1717207646325540600
       ],
       "presentationToReference": [
+        0.5017109928322653,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        0.8650353054478543,
+        0.793654375804942,
+        0.3977771559319137,
+        -0.4603108362665233,
+        0.34409128358174174,
+        -0.9174820620691818,
+        -0.19956917182859527
       ],
-      "metersPerUnit": 20375229989339.996,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 352269449671481.94,
       "bodyRadiusM": 109203529398159400
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "136.2 pc (−1.2 / +1.2 pc)",
-        "note": "Adopted VLBI stellar-cluster distance from Melis et al. (2014), main text and Table 1; not a measured distance to each dust filament.",
-        "source": {
-          "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
-          "url": "https://arxiv.org/pdf/1408.6544"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 56.75°, Dec 24.12°",
-        "source": {
-          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
-          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
-        }
-      },
-      {
-        "id": "classification",
-        "label": "Classification",
-        "value": "Reflection nebula around an open cluster",
-        "note": "Observed optical reflection nebulosity and infrared dust emission painted on an authored finite depth surface. The stellar distance locates the scene; dust depth, scattering and individual stellar distances are not recovered.",
-        "source": {
-          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
-          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

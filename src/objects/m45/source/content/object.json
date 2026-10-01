@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m45",
+  "displayName": "Pleiades",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "136.2 pc (−1.2 / +1.2 pc)",
+        "source": {
+          "catalogueId": "melis-2014",
+          "url": "https://arxiv.org/pdf/1408.6544",
+          "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical-composite",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
+      "href": "https://arxiv.org/pdf/1408.6544"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/pdf/1408.6544",
+      "credit": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy"
+    }
+  }
+}

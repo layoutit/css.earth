@@ -6,7 +6,6 @@ import type { PreparedCssSky } from './types.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
-import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals, waitFor } from '@cssearth/objects/node/contract';
@@ -135,7 +134,6 @@ test('the galaxy is its bulge slices at every overview scope, with no disc plane
       pose: { positionM: [volume.frame.originM[0], volume.frame.originM[1], volume.frame.originM[2] + 2.5 * radiusM], orientationXyzw: [0, 0, 0, 1] } };
     for (const scope of ['local-group', 'milky-way', 'system', 'milky-way', undefined]) {
       mounted.setOverview(scope !== undefined, scope);
-      mounted.selectGalaxy(null);
       mounted.publish(camera, viewport, spatialFrame);
       const nodes = descendants(image);
       assert.equal(nodes.filter(node => node.dataset.volumeImpostor !== undefined).length, 0);
@@ -611,6 +609,8 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
   context.volume.opacityProfile = { model: 'logarithmic-distance', fadeStartDistanceM: 1e19, fullDistanceM: 1e21, nearOpacity: 0, fullOpacity: 1 };
+  // The galaxy's volume is gated by the distance to the selected body, as for every body: the close-up is mid-fade.
+  context.volume.discHalfHeightM = .5 * parsecM;
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
     originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 450 * parsecM],
@@ -646,13 +646,17 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id)!;
   const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
   const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
-  const focus = (id = 'focus-bank'): PreparedNavigationFocus => ({ id, positionM: frame.originM, framingRadiusM: frame.metersPerUnit,
-    limits: { minimumDistanceM: .01 * frame.metersPerUnit, maximumDistanceM: 1e25 } });
+  // A bank package is a body of the world: selecting that body is what draws its bank.
+  const select = (id: string) => {
+    const body = [context.focus, ...context.bodies].find((candidate: { id: string }) => candidate.id === id) as { positionM: [number, number, number]; radiusM: number };
+    mounted.selectObject(id, { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, originM: body.positionM,
+      presentationToReference: [0, 1, 0, 1, 0, 0, 0, 0, 1], metersPerUnit: body.radiusM, bodyRadiusM: body.radiusM });
+  };
   const camera = (radii: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
     pose: { positionM: [frame.originM[0], frame.originM[1], frame.originM[2] + radii * frame.metersPerUnit], orientationXyzw: [0, 0, 0, 1] } });
   try {
     await mounted.focusBank('focus-bank')!.load(); await mounted.focusBank('warm-bank')!.load();
-    mounted.selectGalaxy('focus-bank', focus());
+    select('focus-bank');
     const near = camera(6.1), savedPose = structuredClone(near);
     mounted.publish(near, viewport, spatialFrame);
     assert.deepEqual(loadVolumeDataset.mock.calls.map(({ arguments: [id] }) => id), ['focus-bank', 'warm-bank']);
@@ -670,7 +674,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       mounted.publish(camera(radii), viewport, spatialFrame);
       if (radii > 8) { await mounted.focusBank('cold-bank')!.load(); await mounted.focusBank(image.id)!.load(); mounted.publish(camera(radii), viewport, spatialFrame); }
       const originalOpacity = Number(mw.dataset.volumeOpacity), alpha = Number(mw.style.opacity);
-      assert.ok(originalOpacity > 0); assert.ok(originalOpacity < 1);
+      assert.ok(originalOpacity > 0); assert.ok(radii > 8 ? originalOpacity === 1 : originalOpacity < 1);
       const completedContribution = originalOpacity;
       assert.ok(Math.abs(alpha - (completedContribution * multiplier)) < 10 ** -12 / 2, `${alpha} is not close to ${completedContribution * multiplier}`);
       assert.ok(Math.abs(((1 - alpha) * Number(sky.style.opacity)) - (1 - completedContribution)) < 10 ** -12 / 2, `${((1 - alpha) * Number(sky.style.opacity))} is not close to ${1 - completedContribution}`);
@@ -689,17 +693,15 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     const before = all(findBank('warm-bank')).map(node => ({ ...node.style }));
     mounted.publish({ ...near, pose: { ...near.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } }, viewport, spatialFrame);
     assert.deepEqual(all(findBank('warm-bank')).map(node => ({ ...node.style })), before);
-    mounted.selectGalaxy('image-bank', focus('image-bank')); mounted.publish(near, viewport, spatialFrame);
+    select('image-bank'); mounted.publish(near, viewport, spatialFrame);
     assert.equal(imageRoot.style.display, ''); assert.equal(findBank('focus-bank').style.display, 'none');
-    mounted.selectGalaxy(null); mounted.publish(near, viewport, spatialFrame);
+    select(context.focus.id); mounted.publish(near, viewport, spatialFrame);
     assert.equal(mw.style.display, '');
     await waitFor(() => {
       mounted.publish(near, viewport, spatialFrame);
       assert.equal(findBank('focus-bank').style.display, 'block');
     });
-    mounted.selectGalaxy('no-bank', focus('no-bank')); mounted.publish(near, viewport, spatialFrame);
+    select('no-bank'); mounted.publish(near, viewport, spatialFrame);
     assert.equal(mw.style.display, '');
-    assert.throws(() => mounted.selectGalaxy('focus-bank', focus('mismatch')), /focus/);
-    assert.throws(() => mounted.selectGalaxy('catalogue-row', focus('catalogue-row')), /not a body of the prepared world context/);
   } finally { mounted.destroy(); }
 });

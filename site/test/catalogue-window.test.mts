@@ -58,13 +58,14 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
   assert.equal(list.querySelector('[data-catalogue-index="1"]')?.getAttribute('aria-setsize'), '2', 'marking the selection keeps the list size');
   assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
     'objects with the same display name must not share selection');
-  const focus: CatalogueRow = { ...entry(91), kind: 'prepared-focus', id: 'm42', route: '/m42/',
-    source: { subject: 'focus:m42', document: '/sources/m42/', label: 'Sources M42' },
-    marker: { kind: 'focus', thumbnail: null } };
-  catalogue.setRows(2, 0, [entry(91), focus]);
-  catalogue.setSelection({ kind: 'prepared-focus', id: 'm42' });
+  // A galaxy or a nebula is a scene row like any other, shown by its bank's thumbnail.
+  const nebula: CatalogueRow = { ...entry(91), id: 'm42', route: '/m42/',
+    source: { subject: 'object:m42', document: '/sources/m42/', label: 'Sources M42' },
+    marker: { kind: 'thumbnail', thumbnail: null } };
+  catalogue.setRows(2, 0, [entry(91), nebula]);
+  catalogue.setSelection({ kind: 'scene', id: 'm42' });
   assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
-    'a prepared focus cannot also select the current scene');
+    'selecting the nebula does not also select the other scene');
   assert.equal(list.querySelector('[data-catalogue-index="1"] a')?.getAttribute('aria-current'), 'page');
   catalogue.setSelection(null);
   assert.equal(list.querySelectorAll('[aria-current="page"]').length, 0, 'an overview selects no catalogue row');

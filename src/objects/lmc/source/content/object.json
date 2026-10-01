@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "lmc",
+  "displayName": "LMC",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "49.59 kpc (−545.1 / +551.1 pc)",
+        "source": {
+          "catalogueId": "publication-pietrzynski2019natur-567-200p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
+          "label": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 78.76°, Dec -69.19°",
+        "source": {
+          "catalogueId": "publication-vandermarel2014apj-781-121v",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781..121V",
+          "label": "vanderMarel2014ApJ...781..121V: Third-epoch Magellanic Cloud Proper Motions. II. The Large Magellanic Cloud Rotation Field in Three Dimensions",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Local group, Milky way",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "half-light-radius",
+        "label": "Half-light radius",
+        "value": "2.783 kpc",
+        "source": {
+          "catalogueId": "publication-choi2018apj-869-125c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...869..125C",
+          "label": "Choi2018ApJ...869..125C: SMASHing the LMC: Mapping a Ring-like Stellar Overdensity in the LMC Disk",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "horalek-widefield",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "vanderMarel2014ApJ...781..121V: Third-epoch Magellanic Cloud Proper Motions. II. The Large Magellanic Cloud Rotation Field in Three Dimensions",
+      "href": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781..121V"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Choi2018ApJ...869..125C: SMASHing the LMC: Mapping a Ring-like Stellar Overdensity in the LMC Disk",
+      "href": "https://ui.adsabs.harvard.edu/abs/2018ApJ...869..125C"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
+      "credit": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent"
+    }
+  }
+}

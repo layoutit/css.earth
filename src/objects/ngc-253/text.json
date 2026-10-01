@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-253",
+  "card": {
+    "text": "A galaxy 3.5 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-radburnsmith2011apjs-195-18r",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R",
+        "label": "RadburnSmith2011ApJS..195...18R: The GHOSTS Survey. I. Hubble Space Telescope Advanced Camera for Surveys Data",
+        "checked": "2026-10-01",
+        "locator": "distance: 3.467 Mpc (−110,000 / +113,600 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 3.5 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-radburnsmith2011apjs-195-18r",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R",
+        "label": "RadburnSmith2011ApJS..195...18R: The GHOSTS Survey. I. Hubble Space Telescope Advanced Camera for Surveys Data",
+        "checked": "2026-10-01",
+        "locator": "distance: 3.467 Mpc (−110,000 / +113,600 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Spiral galaxy NGC 253",
+      "detail": "8285 × 7510 px",
+      "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured."
+    }
+  }
+}

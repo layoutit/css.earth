@@ -4,7 +4,7 @@
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { catalogueObject, defineObjects, isPlacedObject, isSceneObject } from '../registry/index.js';
+import { catalogueObject, defineObjects, isHostedDescriptor, isPlacedObject, isSceneObject } from '../registry/index.js';
 import type { NavigableObject, NavigationDistance, ObjectDiscovery, ObjectEntry, PlacedFields } from '../registry/index.js';
 
 /** The catalogue files, relative to the checkout. `entries` is a module: each scene object's descriptor, as its folder's
@@ -68,7 +68,10 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   });
   const refuse = () => async (): Promise<never> => { throw new Error('Preparation cannot mount a scene.'); };
   const objects = defineObjects<PreparedNavigableObject>(entries.map(entry => catalogueObject<never, AbortSignal>(entry, refuse)));
-  const sceneObjects = Object.freeze(objects.filter(isSceneObject));
+  // Preparation's scene objects are the bodies its lanes bake. A bank package's body-less scene is written from its bank
+  // (site/build/prepare/prepare-bank-scene.mts), so no body lane, marker or recipe reads it as one.
+  const banks = new Set(entries.flatMap(entry => isHostedDescriptor(entry.descriptor) && isRecord(entry.descriptor) ? [entry.descriptor.id] : []));
+  const sceneObjects = Object.freeze(objects.filter(isSceneObject).filter(object => !banks.has(object.id)));
   for (const object of objects) if (!isSceneObject(object) && !sceneObjects.some(host => host.id === object.sceneHostId)) {
     throw new TypeError(`Scene host is not a registered scene: ${object.id}`);
   }
@@ -77,7 +80,7 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects, worldObjects, requireSceneObject(id: string) {
     const object = objects.find(candidate => candidate.id === id);
     if (!object) throw new Error(`Unknown cssEarth object: ${id}`);
-    if (!isSceneObject(object)) throw new TypeError(`Object ${id} has no scene of its own.`);
+    if (!isSceneObject(object) || banks.has(id)) throw new TypeError(`Object ${id} has no body of its own to prepare.`);
     return object;
   } });
 }

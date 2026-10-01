@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "smc",
+  "card": {
+    "text": "A galaxy 62,440 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+        "url": "https://arxiv.org/abs/2010.08754",
+        "label": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+        "checked": "2026-10-01",
+        "locator": "distance: 62.44 kpc (±470 pc statistical, ±810 pc systematic)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 62,440 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+        "url": "https://arxiv.org/abs/2010.08754",
+        "label": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+        "checked": "2026-10-01",
+        "locator": "distance: 62.44 kpc (±470 pc statistical, ±810 pc systematic)"
+      }
+    ]
+  },
+  "datasets": {
+    "smc-horalek-wide": {
+      "title": "Petr Horálek’s wide-field SMC",
+      "detail": "6069 × 4045 px",
+      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured."
+    },
+    "smc-vista": {
+      "title": "SMC in VISTA near infrared",
+      "detail": "4000 × 3540 px",
+      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured."
+    },
+    "smc-smash": {
+      "title": "SMC in the SMASH DECam survey",
+      "detail": "3827 × 3190 px",
+      "summary": "DECam survey colours on an image-fitted emission model; gas and dust depth are not measured."
+    },
+    "smc-dss2": {
+      "title": "SMC on Digitized Sky Survey 2 plates",
+      "detail": "13096 × 13616 px",
+      "summary": "Photographic plate colours on an image-fitted emission model; gas and dust depth are not measured."
+    },
+    "smc-allwise-wide": {
+      "title": "SMC in AllWISE infrared",
+      "detail": "4000 × 4000 px",
+      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured."
+    }
+  }
+}

@@ -54,62 +54,40 @@
       "epochJdTt": 2461286.5,
       "originM": [
         105965323959178080000,
-        533210010179927000000,
-        -1.4303833279717612e+21
+        533210010179926950000,
+        -1.430383327971761e+21
       ],
       "presentationToReference": [
+        0.7989521467004992,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.6013946019733332,
+        -0.5517687595357683,
+        0.3977771559319137,
+        -0.7330242630493734,
+        -0.23922103436575845,
+        -0.9174820620691818,
+        -0.31780491264022165
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 497689932498607700,
       "bodyRadiusM": 154283879074568370000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "49.59 kpc (−545.1 / +551.1 pc)",
-        "source": {
-          "label": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent",
-          "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 78.76°, Dec -69.19°",
-        "source": {
-          "label": "vanderMarel2014ApJ...781..121V: Third-epoch Magellanic Cloud Proper Motions. II. The Large Magellanic Cloud Rotation Field in Three Dimensions",
-          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781..121V"
-        }
-      },
-      {
-        "id": "membership",
-        "label": "Membership",
-        "value": "Local group, Milky way",
-        "note": "Author catalogue host association: lmc -> mw; object confirmation is recorded separately.",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
-      },
-      {
-        "id": "half-light-radius",
-        "label": "Half-light radius",
-        "value": "2.783 kpc",
-        "source": {
-          "label": "Choi2018ApJ...869..125C: SMASHing the LMC: Mapping a Ring-like Stellar Overdensity in the LMC Disk",
-          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...869..125C"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

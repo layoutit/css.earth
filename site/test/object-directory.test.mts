@@ -3,6 +3,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { OBJECTS, SCENE_OBJECTS as REGISTERED_SCENE_OBJECTS } from '../objects.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
+import { isHostedDescriptor } from '@cssearth/objects';
 import { resolve } from 'node:path';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../object-entry.mts';
 import { knownObject, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
@@ -23,7 +24,10 @@ test('every prepared entry rebuilds the object the registry holds', () => {
 test('preparation reads the registry the application holds, without its scene loader', async () => {
   const prepared = readPreparedObjects(resolve(import.meta.dirname, '../..'));
   assert.deepEqual(facts(prepared.objects), facts(OBJECTS));
-  assert.deepEqual(prepared.sceneObjects.map(object => object.id), REGISTERED_SCENE_OBJECTS.map(object => object.id));
+  // Preparation's scene objects are the bodies its lanes bake: a bank package's scene has no body to bake.
+  const banks = new Set(prepared.entries.flatMap(entry => isHostedDescriptor(entry.descriptor) ? [(entry.descriptor as { id: string }).id] : []));
+  assert.deepEqual(prepared.sceneObjects.map(object => object.id), REGISTERED_SCENE_OBJECTS.filter(object => !banks.has(object.id)).map(object => object.id));
+  assert.throws(() => prepared.requireSceneObject('m31'), /no body of its own/);
   assert.equal(prepared.requireSceneObject('mars').name, REGISTERED_SCENE_OBJECTS.find(object => object.id === 'mars')?.name);
   await assert.rejects(prepared.requireSceneObject('mars').loadScene(), /cannot mount a scene/);
 });

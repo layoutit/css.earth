@@ -11,15 +11,13 @@ export { distanceDescription, parseNavigationDistance } from './navigation-dista
 export type { NavigationDistance } from './navigation-distance.js';
 export { catalogEntry, catalogueObject } from './object-catalog.js';
 export type { CatalogContext, CatalogEntry } from './object-catalog.js';
-export { objectFacts } from './object-facts.js';
-export type { ObjectFact } from './object-facts.js';
 export { matchesObjectCategory, matchesObjectClassification } from './object-categories.js';
 export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, offTheMap, parseObjectDiscovery } from './object-discovery.js';
 export type { ObjectDiscovery } from './object-discovery.js';
 export { defineObject, defineObjects, EXTENDED_CLASSIFICATIONS, isExtendedClassification, isPlacedClassification, OBJECT_CLASSIFICATIONS, PLACED_CLASSIFICATIONS } from './object-schema.js';
 export type { ObjectClassification, ObjectDefinitionInput, ObjectEntry, ObjectPositionM, ObjectWorldFrame } from './object-schema.js';
-export { destinationSearchNames, HOSTED_OBJECT_TYPES, isHostedDescriptor, isHostedObject, isOverviewObject, isPlacedObject, isSceneObject } from './prepared-focus-object.js';
-export type { NavigableObject, PlacedFields, PreparedFocusObject } from './prepared-focus-object.js';
+export { destinationSearchNames, HOSTED_OBJECT_TYPES, isHostedDescriptor, isOverviewObject, isPlacedObject, isSceneObject, sceneDescriptorOf } from './navigable-object.js';
+export type { NavigableObject, PlacedFields, PlacedObject } from './navigable-object.js';
 export { overviewHolding, overviewLevel } from './overview-object.js';
 export type { OverviewDistance, OverviewFrame, OverviewHolding, OverviewObject, OverviewZoom } from './overview-object.js';
 export { validateWorldReflection, validateWorldRotation } from './world-rotation.js';

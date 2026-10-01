@@ -61,18 +61,6 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     session.shell?.setDatasetNotice?.(null);
   }
 
-  function applyFocus(session: SceneSession, url: string, request?: NavigationRequest, frame = false) {
-    const binding = session.viewUrl;
-    const isCurrent = () => scenes.isCurrent(session) && session.viewUrl === binding && (request ? requests.owns(request) : !requests.current);
-    if (!isCurrent()) return;
-    const world = getWorld();
-    if (!world) return;
-    return world.applyFocus(url, { sceneId: session.objectId,
-      signal: request ? AbortSignal.any([session.signal, request.signal]) : session.signal,
-      isCurrent, frame, reducedMotion: !frame || windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true,
-    });
-  }
-
   /** One arrival path for initial mounts, replacement scenes, retained scenes and recovery. */
   async function arrive(session: SceneSession, { request, interrupted = false }: {
     request?: NavigationRequest; interrupted?: boolean;
@@ -81,9 +69,8 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     if (!owns()) return false;
     if (request) {
       if (!requests.advance(request, 'committing')) return false;
-      // Saved history and explicit focus publish before flight. Their native
-      // focus/dataset result may already have updated the committed URL.
-      if (request.scene === 'replace' || (request.camera.kind !== 'restore' && request.camera.kind !== 'focus')) {
+      // Saved history publishes before flight.
+      if (request.scene === 'replace' || request.camera.kind !== 'restore') {
         if (!commit(request, session)) return false;
       }
     }
@@ -119,21 +106,10 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
       } catch (error) { if (current()) onError(error); }
     }
     if (!current()) return false;
-    // An explicit focus request has already flown and published its native result.
-    if (request?.camera.kind !== 'focus') {
-      try {
-        const focused = await wait(applyFocus(session, href, request));
-        if (focused.cancelled || !current()) return false;
-      } catch (error) {
-        if (!restore) throw error;
-        if (current()) onError(error);
-      }
-    }
     if (!current()) return false;
     owner?.start(incoming);
     return true;
   }
 
-  return { capture, commit, replace, syncDataset, arrive,
-    focus: (session: SceneSession, request: NavigationRequest) => applyFocus(session, request.url, request, true) };
+  return { capture, commit, replace, syncDataset, arrive };
 }

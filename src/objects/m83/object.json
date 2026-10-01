@@ -58,43 +58,40 @@
       "epochJdTt": 2461286.5,
       "originM": [
         -1.1949184389051951e+23,
-        -5.382819619468973e+22,
+        -5.3828196194689734e+22,
         -7.526278726357485e+22
       ],
       "presentationToReference": [
+        -0.833133188888229,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.5530724089781829,
+        -0.5074340142628732,
+        0.3977771559319137,
+        0.7643847561194455,
+        -0.2199995698677538,
+        -0.9174820620691818,
+        0.3314013503884456
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 925703274447410200,
       "bodyRadiusM": 286968015078697140000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "4.898 Mpc (−67,200 / +68,140 pc)",
-        "source": {
-          "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
-          "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 204.3°, Dec -29.87°",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

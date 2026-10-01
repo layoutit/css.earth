@@ -53,55 +53,41 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        498068231034880400,
-        -37285896590482730000,
-        -16841610171260310000
+        498068231034880450,
+        -37285896590482735000,
+        -16841610171260312000
       ],
       "presentationToReference": [
+        0.012174319679167536,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.9999258902240453,
+        -0.9174140676791194,
+        0.3977771559319137,
+        -0.011169719923532051,
+        -0.3977476767560077,
+        -0.9174820620691818,
+        -0.00484266625738519
       ],
-      "metersPerUnit": 198366776548200,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2185095956969239,
       "bodyRadiusM": 677379746660464100
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "1.326 kpc (−69 / +77 pc)",
-        "note": "Adopted Gaia DR2 cluster distance from Wright et al. (2019), section 3.4: 1326 −69/+77 pc, including the stated parallax zero-point correction and systematic uncertainty. It is not an individual gas-cloud depth measurement.",
-        "source": {
-          "label": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
-          "url": "https://arxiv.org/pdf/1903.12176v1"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 270.8°, Dec -24.31°",
-        "source": {
-          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
-          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
-        }
-      },
-      {
-        "id": "classification",
-        "label": "Classification",
-        "value": "H II region and star-forming nebula",
-        "note": "Observed optical and infrared emission on an authored coherent front with local literature-guided structure. Foreground extinction, distinct molecular clouds and true front/back distances are not reconstructed.",
-        "source": {
-          "label": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid.",
-          "url": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

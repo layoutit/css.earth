@@ -8,15 +8,13 @@ import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 interface Props {
   objectId: string;
   datasets: Pick<NonNullable<ShellProps['datasets']>, 'controls' | 'defaultDataset'>;
-  /** The datasets of something the scene draws (a catalogue focus, an overview), rather than of the scene's own object. */
-  focus?: boolean;
   /** The drawn page these datasets belong to (an overview's id): their buttons select its dataset on its page (page-datasets.mts). */
   page?: string;
   /** Null leaves the form without an action, so it submits to the page it is spliced into. */
   route?: string | null;
   thumbnailObjectId?: string;
 }
-const { objectId, datasets, focus = false, page, route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
+const { objectId, datasets, page, route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
 const previewUrl = (dataset: NonNullable<ShellProps['datasets']>['controls'][number]) =>
   sidebarThumbnail(thumbnailObjectId, dataset.id)?.url2x ?? dataset.thumbnailUrl;
 // A dataset that names a companion cloud keeps the plates of another dataset, so the body on screen is drawn in that
@@ -40,7 +38,7 @@ const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultContro
 import Detached from './Detached.astro';
 ---
 <section id={`${objectId}-dataset-list`} class="object-datasets">
-  <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} data-drawn-page={page} hidden>
+  <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-drawn-page={page} hidden>
     {['v', 'overview', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
   </form>
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">
@@ -55,7 +53,7 @@ import Detached from './Detached.astro';
           </span>)}
         </span>
         <span class="object-dataset-picker-chevron" aria-hidden="true"></span>
-        <select class="object-dataset-native-select" data-dataset-native-select aria-label={focus ? 'Focus dataset' : 'Dataset'}>
+        <select class="object-dataset-native-select" data-dataset-native-select aria-label="Dataset">
           {datasets.controls.filter(listed).map(dataset => <option value={dataset.id} selected={dataset.id === defaultListedId}>
             {dataset.label}{dataset.detail ? ` — ${dataset.detail}` : ''}
           </option>)}
@@ -71,7 +69,6 @@ import Detached from './Detached.astro';
             type="submit"
             form={`${objectId}-datasets`}
             name="dataset"
-            data-focus-dataset={focus ? true : undefined}
             value={dataset.id}
             aria-pressed={dataset.id === datasets.defaultDataset ? "true" : "false"}
             aria-controls={`${objectId}-${dataset.id}-details`}
@@ -95,9 +92,9 @@ import Detached from './Detached.astro';
     {datasets.controls.map((dataset) => (
       <Detached detached={dataset.id !== datasets.defaultDataset}><div
         id={`${objectId}-${dataset.id}-details`}
-        data-dataset-details={focus ? undefined : dataset.id}
-        data-system-dataset-details={!focus && dataset.systemDataset ? dataset.id : undefined}
-        data-focus-dataset-details={focus ? dataset.id : undefined}
+        data-dataset-details={page ? undefined : dataset.id}
+        data-system-dataset-details={!page && dataset.systemDataset ? dataset.id : undefined}
+        data-page-dataset-details={page ? dataset.id : undefined}
         hidden={dataset.id !== datasets.defaultDataset}
       >
         <DatasetDescription {dataset}>
@@ -115,9 +112,9 @@ import Detached from './Detached.astro';
                 decoding="async"
                 draggable="false"
               />
-              {dataset.step && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} {focus} />}
+              {dataset.step && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} playable={!page} />}
             </div>}
-          {dataset.step && !dataset.texture && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} {focus} />}
+          {dataset.step && !dataset.texture && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} playable={!page} />}
           {borrowedLegend(dataset) && <DatasetLegend {objectId} dataset={borrowedLegend(dataset)!} owner={dataset.id} />}
           <DatasetLegend {objectId} {dataset} />
         </DatasetDescription>

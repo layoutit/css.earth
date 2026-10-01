@@ -16,9 +16,9 @@ import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
-import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
+import type { SelectedBank } from './detailed-focus-context.js';
 import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
@@ -126,8 +126,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       for (const layer of layers) layer.addBodies(plan, nextSprites);
       for (const planner of planners) planner.extend(plan);
     },
-    mount(stage: HTMLElement, { onSelectGalaxy, requestPublication, presentationHost = stage }: {
-      onSelectGalaxy?: (object: PreparedCatalogObject) => void; requestPublication?: () => boolean;
+    mount(stage: HTMLElement, { requestPublication, presentationHost = stage }: {
+      requestPublication?: () => boolean;
       /** Stationary world presentation, outside the selected detail's CSS scope. */
       presentationHost?: HTMLElement;
     } = {}) {
@@ -191,7 +191,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeDatasetBanks,
           pointBanks,
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;
@@ -207,7 +207,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let selectedEdge: PreparedLabelEdge | undefined, previewEdge: PreparedLabelEdge | undefined;
         const caption = () => previewCaption ?? captionBody;
         const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: false, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
-        let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
+        let detailedFocus: { objectId: string; focus: SelectedBank } | null = null;
         const pointBankIds = new Set(pointBanks.map(bank => bank.id));
         let selectedPoints: string | undefined;
         background.mount();
@@ -240,33 +240,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             mountedShells.push(shell);
             environmentLabels.addShell(shell.payload);
             requestPublication?.();
-          },
-          selectGalaxy(id: string | null, focus: PreparedNavigationFocus | null = null) {
-            if (focus && (focus.id !== id || !Number.isFinite(focus.framingRadiusM) || focus.framingRadiusM <= 0 ||
-                focus.positionM.length !== 3 || !focus.positionM.every(Number.isFinite))) {
-              throw new TypeError('Prepared context focus must match its selection and have finite authored framing.');
-            }
-            // A package the host draws is a body of this world: selecting it selects that body, as a scene's page selects its own.
-            const body = id === null ? sceneBody : plan.bodies.find(candidate => candidate.id === id);
-            if (!body) throw new TypeError(`Hosted object ${id} is not a body of the prepared world context.`);
-            const next = focus && id !== null && [...declaredImageLayers, ...volumeDatasetBanks].some(bank => bank.id === id)
-              ? { objectId: id, focus } : null;
-            const changed = next?.objectId !== detailedFocus?.objectId || next?.focus.framingRadiusM !== detailedFocus?.focus.framingRadiusM ||
-              next?.focus.positionM.some((value, axis) => value !== detailedFocus?.focus.positionM[axis]);
-            detailedFocus = next;
-            // A package of catalogue dots draws them while it is selected, without the detailed focus's context fade.
-            const points = id !== null && pointBankIds.has(id) ? id : undefined;
-            const pointsChanged = points !== selectedPoints;
-            selectedPoints = points;
-            const bodyChanged = body !== selected;
-            if (bodyChanged) {
-              selected = body; captionBody = body; selectedEdge = undefined;
-              selectedLabel.prepare(caption());
-              spatial.selectObject(body.id);
-              publishSuppressedLabels();
-              root.dataset.selectedObject = body.id;
-            }
-            if (pointsChanged || changed || bodyChanged) requestPublication?.();
           },
           ensureGalaxyCatalog: catalogBanks.ensureCatalog,
           focusBank(id: string) { return datasets.focusBank(id) ?? catalogBanks.focusBank(id); },
@@ -319,6 +292,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
             selected = sceneBody = body;
             selectedEdge = edge;
+            // A bank package draws its bank while it is the selected body: a galaxy's image layers or volume, a cluster's dots.
+            // Its framing radius is its world frame's, as a body's radius is.
+            detailedFocus = [...declaredImageLayers, ...volumeDatasetBanks].some(bank => bank.id === id)
+              ? { objectId: id, focus: { positionM: body.positionM as SelectedBank['positionM'], framingRadiusM: body.radiusM } } : null;
+            selectedPoints = pointBankIds.has(id) ? id : undefined;
             captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
             selectedLabel.prepare(caption());
             spatial.selectObject(id);

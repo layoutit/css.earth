@@ -52,54 +52,40 @@
       "epochJdTt": 2461286.5,
       "originM": [
         5751238142720137000,
-        -2392748347554614000,
-        -2370847812686342000
+        -2392748347554614300,
+        -2370847812686341600
       ],
       "presentationToReference": [
+        0.877809978455815,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.479009020503165,
+        -0.4394821838809828,
+        0.3977771559319137,
+        -0.8053749091385451,
+        -0.19053884584148073,
+        -0.9174820620691818,
+        -0.34917275667880854
       ],
-      "metersPerUnit": 32313140071200,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 156353903570322.6,
       "bodyRadiusM": 48469710106800000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "216 pc (−12 / +14 pc)",
-        "note": "Adopted published trigonometric parallax; not a fitted image scale.",
-        "source": {
-          "label": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
-          "url": "https://arxiv.org/abs/0909.4281"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 337.4°, Dec -20.84°",
-        "source": {
-          "label": "ESO ESO WFI · optical detail image and publisher astrometry; registration retained in the observation recipe",
-          "url": "https://cdn.eso.org/images/original/eso0907a.tif"
-        }
-      },
-      {
-        "id": "classification",
-        "label": "Classification",
-        "value": "Planetary nebula",
-        "note": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths.",
-        "source": {
-          "label": "ESO ESO WFI · optical detail image and publisher astrometry; registration retained in the observation recipe",
-          "url": "https://cdn.eso.org/images/original/eso0907a.tif"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

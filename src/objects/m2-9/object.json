@@ -57,50 +57,36 @@
         -3531975474921166000
       ],
       "presentationToReference": [
+        -0.2370914463405361,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.9714873370621733,
+        -0.8913222052819011,
+        0.3977771559319137,
+        0.21752714908747986,
+        -0.38643546996045974,
+        -0.9174820620691818,
+        0.09430956122112238
       ],
-      "metersPerUnit": 564324590702700,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 9102009527462.902,
       "bodyRadiusM": 2821622953513500
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "650 pc",
-        "note": "Adopted model distance, not a parallax. Published expansion alternative:1300±200pc.",
-        "source": {
-          "label": "Sánchez Contreras et al. A&A 692, A151 (2024)",
-          "url": "https://arxiv.org/html/2411.03825v1"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 256.4°, Dec -10.14°",
-        "source": {
-          "label": "NASA/ESA Hubble 1997 image opo9738a; AVM sky astrometry",
-          "url": "https://esahubble.org/media/archives/images/original/opo9738a.tif"
-        }
-      },
-      {
-        "id": "classification",
-        "label": "Classification",
-        "value": "Bipolar nebula",
-        "note": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted650pc model distance is uncertain; published expansion distance1300±200pc would double this physical size. The accepted baseline contains no stellar catalogue.",
-        "source": {
-          "label": "NASA/ESA Hubble 1997 image opo9738a; AVM sky astrometry",
-          "url": "https://esahubble.org/media/archives/images/original/opo9738a.tif"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

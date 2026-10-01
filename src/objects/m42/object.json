@@ -54,53 +54,39 @@
       "originM": [
         1376373810181025800,
         12643329345247054000,
-        -1202293075751323600
+        -1202293075751324000
       ],
       "presentationToReference": [
+        0.12281785923797033,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        0.9924292284350569,
+        0.9105360149623231,
+        0.3977771559319137,
+        -0.11268318275257552,
+        0.3947656759506004,
+        -0.9174820620691818,
+        -0.04885413874532595
       ],
-      "metersPerUnit": 61933518469800,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 479485304282322.56,
       "bodyRadiusM": 148640444327520000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "414 pc (−7 / +7 pc)",
-        "note": "Adopted published trigonometric parallax; not a fitted image scale.",
-        "source": {
-          "label": "Menten et al. (2007), The distance to the Orion Nebula",
-          "url": "https://arxiv.org/abs/0709.0485"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 83.79°, Dec -5.4°",
-        "source": {
-          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
-          "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif"
-        }
-      },
-      {
-        "id": "classification",
-        "label": "Classification",
-        "value": "H II region",
-        "note": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances.",
-        "source": {
-          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
-          "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

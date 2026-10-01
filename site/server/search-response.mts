@@ -25,8 +25,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
   const objectId = form.dataset.searchObject;
   if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Prepared search object is invalid.');
   const search = requiredElement<HTMLInputElement>(form, '.object-sidebar-search');
-  const focusCard = sectionElements(document, '[data-prepared-focus-card][data-prepared-focus-id]')[0] ?? null;
-  const value = (url.searchParams.get('browse') ?? url.searchParams.get('q') ?? (focusCard ? search.getAttribute('value') : '') ?? '').slice(0, SEARCH_QUERY_LIMIT).trim();
+  const value = (url.searchParams.get('browse') ?? url.searchParams.get('q') ?? '').slice(0, SEARCH_QUERY_LIMIT).trim();
   const searching = url.searchParams.has('q');
   search.setAttribute('value', value);
   for (const input of document.querySelectorAll<HTMLInputElement>('input[data-search-context], input[data-view-context]')) {
@@ -96,10 +95,10 @@ export async function handleSearchRequest(request: Request, data: SearchData, fe
   const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
   const page = await response.text();
-  // The page's own address: a catalogue focus's page is named by its path, which the rewrite to the function drops.
+  // The page's own address: a level's page is named by its path, which the rewrite to the function drops.
   const address = new URL(url);
   if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${objectId}/`; address.searchParams.delete('object'); }
-  const drawnPage = isOverviewPage(objectId) || (await data.catalogue()).some(entry => entry.kind === 'prepared-focus' && entry.id === objectId);
+  const drawnPage = isOverviewPage(objectId);
   const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher, { drawnPage }), target, data);
   let html: string;
   try {

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { catalogueObject, isHostedObject } from '@cssearth/objects';
+import { catalogueObject, isPlacedObject, isSceneObject } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { searchObjects } from '../search/object-search.mts';
 
@@ -17,12 +17,13 @@ test('a globular cluster package is an entry of the registry from its own descri
   assert.ok(Math.abs(distance.value - 100) < 1e-9);
   const focus = catalogueObject({ descriptor, distance, discovery: { featured: false, imagery: true, illustration: false }, sceneHostId: 'sun' },
     () => async () => { throw new Error('unused'); });
-  assert.ok(isHostedObject(focus));
+  assert.ok(isPlacedObject(focus) && !isSceneObject(focus), 'without a prepared scene the package is drawn by its host');
+  assert.ok(focus.searchNames);
   assert.equal(focus.classification, 'globular-cluster');
   assert.equal(focus.systemName, 'Milky Way');
   assert.equal(focus.route, '/test-cluster/');
   assert.equal(focus.sceneHostId, 'sun');
-  const labels = [{ name: focus.name.toLowerCase(), names: focus.searchNames, classification: focus.classification,
+  const labels = [{ name: focus.name.toLowerCase(), names: focus.searchNames!, classification: focus.classification,
     classificationName: 'globular cluster', systemName: focus.systemName.toLowerCase() }];
   assert.equal(searchObjects(labels, 'globular clusters').matches.length, 1);
   assert.equal(searchObjects(labels, 'Cluster alias').matches.length, 1);

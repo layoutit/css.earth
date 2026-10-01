@@ -17,15 +17,15 @@ const index = { schema: 'cssearth-prepared-feature-index@2',
   features: [{ objectId: 'moon', id: 'tycho', name: 'Tycho', type: 'Crater', diameterKm: 85,
     searchNames: ['tycho'], searchContext: 'crater' }], places: [] };
 const pin = { url: '/features/index.json', count: 1 };
-const entry = (kind: 'scene' | 'prepared-focus', name: string, classification: string, distanceMeters: number, searchNames: string[] = []): CatalogueIndexEntry => {
+const entry = (kind: 'scene' | 'bank', name: string, classification: string, distanceMeters: number, searchNames: string[] = []): CatalogueIndexEntry => {
   const id = name.toLowerCase();
-  return { kind, id, name, searchNames, classification, classificationName: classification, systemName: 'solar system',
+  return { kind: 'scene', id, name, searchNames, classification, classificationName: classification, systemName: 'solar system',
     route: `/${id}/`, illustration: false, distanceMeters,
     detail: { text: `${distanceMeters} m`, title: 'Observer distance', ariaLabel: `${distanceMeters} m. Observer distance` },
-    source: { subject: `${kind === 'scene' ? 'object' : 'focus'}:${id}`, document: `/sources/${id}/`, label: `Sources for ${name}` },
-    marker: kind === 'scene' ? { kind: 'scene', id: 'saturn', color: '#fff' } : { kind: 'focus', thumbnail: null } };
+    source: { subject: `object:${id}`, document: `/sources/${id}/`, label: `Sources for ${name}` },
+    marker: kind === 'scene' ? { kind: 'scene', id: 'saturn', color: '#fff' } : { kind: 'thumbnail', thumbnail: null } };
 };
-const entries = [entry('scene', 'Saturn', 'planet', 1), entry('scene', 'Titan', 'satellite', 2), entry('prepared-focus', 'M42', 'nebula', 3, ['orion nebula', 'm42'])];
+const entries = [entry('scene', 'Saturn', 'planet', 1), entry('scene', 'Titan', 'satellite', 2), entry('bank', 'M42', 'nebula', 3, ['orion nebula', 'm42'])];
 const reads: string[] = [];
 const data = (catalogue = entries, read: SearchData['read'] = async path => { reads.push(path); if (path === pin.url) return index; throw new Error(`${path} is not prepared.`); }): SearchData =>
   ({ pin, read, catalogue: async () => catalogue });
@@ -40,7 +40,6 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <details class="object-feature-results" hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
   </nav><div class="object-selected-content"><div class="object-context" hidden>
-    <div data-prepared-focus-card hidden><span data-focus-name></span></div>
     <div data-large-scale-overview="milky-way" data-large-scale-name="Milky Way" data-neighbor-home="observer" hidden>Milky Way</div>
     <div data-large-scale-overview="local-group" data-large-scale-name="Local Group" hidden></div>
     <div data-large-scale-overview="nearby-universe" data-large-scale-name="Nearby Universe" hidden></div>
@@ -57,7 +56,7 @@ test('native search lists the rows the find function would answer, with the same
   assert.deepEqual(visibleNames(document), ['M42']);
   const row = document.querySelector('[data-catalogue-list] .object-item a');
   assert.equal(row?.getAttribute('href'), '/m42/');
-  assert.equal(row?.getAttribute('data-source-subject'), 'focus:m42');
+  assert.equal(row?.getAttribute('data-source-subject'), 'object:m42');
   const live = parseFindResponse(await (await handleFindRequest(new Request(`${origin}/.netlify/functions/find?object=saturn&q=orion`), data())).json());
   assert.deepEqual(live.objects.rows.map(result => result.name), visibleNames(document));
 });
@@ -124,30 +123,11 @@ test('typed search shows a flat result list, including queries that name an over
 });
 
 const contextHtml = html
-  .replace('</form>', '<a class="object-sidebar-search-clear" href="/saturn/">Clear search</a></form>')
-  .replace('<div data-prepared-focus-card hidden><span data-focus-name></span></div>',
-    '<div data-prepared-focus-card data-prepared-focus-id="m42" hidden><span data-focus-name>Orion Nebula</span></div>');
-
-test('a focus page that also names an overview resolves to the focus alone', async () => {
-  const card = (path: string) => render(path, data(), contextHtml);
-  const overview = await card('/saturn/?overview=system');
-  assert.equal(overview.querySelector<HTMLElement>('.object-context [data-system-results]')?.hidden, false);
-  assert.equal(overview.querySelector<HTMLElement>('.object-context')?.hidden, false);
-  for (const query of ['/m42/?overview=system', '/m42/?overview=system&q=']) {
-    const both = await card(query);
-    assert.equal(both.querySelector<HTMLElement>('[data-prepared-focus-card]')?.hidden, false, query);
-    assert.equal(both.querySelector<HTMLElement>('.object-context [data-system-results]'), null, query);
-    assert.equal(both.querySelector<HTMLElement>('.object-context [data-large-scale-overview="milky-way"]'), null, query);
-    // Clearing a search keeps the view context, normalized the same way.
-    const clear = new URL(both.querySelector('.object-sidebar-search-clear')?.getAttribute('href') ?? '/', origin);
-    assert.equal(clear.pathname, '/m42/', query);
-    assert.equal(clear.searchParams.has('overview'), false, query);
-  }
-});
+  .replace('</form>', '<a class="object-sidebar-search-clear" href="/saturn/">Clear search</a></form>');
 
 test('native and live selections share card visibility, inertness, labels and system headers', async () => {
   const state = (document: Document) => [...document.querySelectorAll<HTMLElement>(
-    '.object-context, .object-information-panel, [data-prepared-focus-card], [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
+    '.object-context, .object-information-panel, [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
     .map(element => ({ hidden: element.hidden, inert: element.hasAttribute('inert'), label: element.getAttribute('aria-label'), current: element.hasAttribute('data-system-current') }));
   const cases = [
     ['', 'saturn', { kind: 'object', objectId: 'saturn' }, '/saturn/'],
@@ -156,8 +136,6 @@ test('native and live selections share card visibility, inertness, labels and sy
     ['', 'sun', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }, '/milky-way/'],
     ['', 'sun', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }, '/local-group/'],
     ['', 'sun', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }, '/nearby-universe/'],
-    // A catalogue focus's page draws its host scene: the focus wins over an overview it also names.
-    ['?overview=system', 'saturn', { kind: 'focus', id: 'm42' }, '/m42/'],
   ] as const;
   for (const [query, objectId, subject, page] of cases) {
     const source = contextHtml.replace('data-search-object="saturn"', `data-search-object="${objectId}"`);
@@ -167,7 +145,7 @@ test('native and live selections share card visibility, inertness, labels and sy
     present.present({ kind: 'overview', overview: { scope: 'system', systemId: 'sun' } });
     present.present(subject);
     assert.deepEqual(state(native), state(live), query || 'body');
-    // The context is mounted only while an overview or a focus is the subject.
+    // The context is mounted only while an overview is the subject.
     const context = native.querySelector<HTMLElement>('.object-context');
     assert.equal(context === null, subject.kind === 'object');
     if (context) assert.equal(context.hidden || context.hasAttribute('inert'), false);

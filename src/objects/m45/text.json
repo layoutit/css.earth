@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m45",
+  "card": {
+    "text": "The Pleiades is an open star cluster surrounded by reflection nebulosity. Its stars lie about 136 parsecs away; the dust may not.",
+    "sources": [
+      {
+        "catalogueId": "melis-2014",
+        "url": "https://arxiv.org/pdf/1408.6544",
+        "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
+        "checked": "2026-10-01",
+        "locator": "distance: 136.2 pc (−1.2 / +1.2 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Pleiades is an open star cluster surrounded by reflection nebulosity. Its stars lie about 136 parsecs away; the dust may not.",
+    "sources": [
+      {
+        "catalogueId": "melis-2014",
+        "url": "https://arxiv.org/pdf/1408.6544",
+        "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
+        "checked": "2026-10-01",
+        "locator": "distance: 136.2 pc (−1.2 / +1.2 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical-composite": {
+      "title": "Pleiades optical cloud with wider image coverage",
+      "detail": "8000 × 5199 px · wide optical source",
+      "summary": "Wide optical photograph with central detail from NOIRLab; cloud depth is inferred and fine filaments are softened."
+    },
+    "noirlab-optical": {
+      "title": "Pleiades reflection filaments in visible light",
+      "detail": "4000 × 2920 px",
+      "summary": "Optical B/V/I display on an inferred reflection cloud; this image covers only the central region."
+    },
+    "spitzer-irac": {
+      "title": "Pleiades dust in the Spitzer IRAC bands",
+      "detail": "2855 × 2855 px",
+      "summary": "IRAC infrared false color on an inferred cloud; the image covers only its central region."
+    },
+    "spitzer-irac-mips": {
+      "title": "Pleiades warm dust through 24 micrometres",
+      "detail": "2855 × 2855 px",
+      "summary": "IRAC/MIPS infrared false color on an inferred cloud; the image covers only its central region."
+    },
+    "wise-four-band": {
+      "title": "The wider Pleiades infrared cloud",
+      "detail": "4007 × 3061 px",
+      "summary": "WISE infrared false color on an inferred reflection cloud; dust depth and scattering are not recovered."
+    }
+  }
+}

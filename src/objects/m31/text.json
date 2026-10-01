@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m31",
+  "card": {
+    "text": "A galaxy 776,247 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-savino2022apj-938-101s",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S",
+        "label": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure",
+        "checked": "2026-10-01",
+        "locator": "distance: 776.2 kpc (−21,150 / +21,750 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 776,247 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-savino2022apj-938-101s",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...938..101S",
+        "label": "Savino2022ApJ...938..101S: The Hubble Space Telescope Survey of M31 Satellite Galaxies. I. RR Lyrae-based Distances and Refined 3D Geometric Structure",
+        "checked": "2026-10-01",
+        "locator": "distance: 776.2 kpc (−21,150 / +21,750 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Panorama of Spiral Galaxy, M31",
+      "detail": "7560 × 2520 px",
+      "summary": "Visible-light survey image on an approximate depth model with a round bulge; individual depths are not measured."
+    }
+  }
+}

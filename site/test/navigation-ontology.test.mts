@@ -7,7 +7,7 @@ import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
-import { distanceDescription, isExtendedClassification, isHostedDescriptor, isHostedObject, isOverviewObject, isPlacedObject, objectFacts, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { distanceDescription, isExtendedClassification, isHostedDescriptor, isOverviewObject, isPlacedObject, isSceneObject, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { resolve } from 'node:path';
@@ -17,26 +17,25 @@ test('every scene and every package the host draws has exactly one searchable de
   // A hosted package's entry is its own descriptor's, as a scene's is: no catalogue row names a destination.
   const hosted = [...descriptors].filter(([, descriptor]) => isHostedDescriptor(descriptor) && isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.catalog !== undefined).map(([id]) => id);
   const overviews = await readOverviews(resolve('src/objects'));
-  assert.equal(OBJECTS.length, SCENE_OBJECTS.length + hosted.length + overviews.length);
-  assert.deepEqual(OBJECTS.filter(isHostedObject).map(object => object.id).sort(), hosted.sort());
+  // A bank package is a scene like any body: its scene has no body in it, and the world draws its bank.
+  assert.equal(OBJECTS.length, SCENE_OBJECTS.length + overviews.length);
+  for (const id of hosted) assert.ok(isSceneObject(requireObject(id)), id);
   assert.deepEqual(OBJECTS.filter(isOverviewObject).map(object => object.id), overviews.map(overview => overview.id));
   // One object can be more than one thing: the Local Group is a level and has a place in the world.
   assert.ok(isPlacedObject(requireObject('local-group')) && isOverviewObject(requireObject('local-group')));
   // Overviews are searched through their own rows (CatalogueOverviewRows.astro); everything else through the catalogue.
   assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.filter(object => !isOverviewObject(object)).map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
-  assert.ok(isHostedObject(requireObject('m31')));
-  assert.throws(() => requireSceneObject('m31'), /no scene of its own/);
+  assert.equal(requireSceneObject('m31').id, 'm31');
+  assert.throws(() => requireSceneObject('milky-way'), /no scene of its own/);
   for (const [query, id] of [['Andromeda', 'm31'], ['M31', 'm31'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
     const object = requireObject(id!);
-    assert.ok(isHostedObject(object) && object.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))), query);
+    assert.ok((object.searchNames ?? []).some(name => name.includes(normalizeDestinationQuery(query!))), query);
   }
-  // Each states its card's facts itself, every one with its source; no catalogue row is read for them.
-  for (const id of [...hosted, 'local-group']) assert.ok(objectFacts(descriptors.get(id)).some(fact => fact.id === 'distance'), id);
   // Each is a body of the world, placed by its own world frame.
   for (const id of hosted) {
     const object = requireObject(id);
-    assert.ok(isHostedObject(object) && isExtendedClassification(object.classification) && Math.hypot(...object.worldFrame.originM) > 0, id);
+    assert.ok(isPlacedObject(object) && isExtendedClassification(object.classification) && Math.hypot(...object.worldFrame.originM) > 0, id);
   }
 });
 
@@ -45,8 +44,9 @@ test('distance display and order use the prepared position, never the legacy orb
     const descriptor = JSON.parse(await readFile(`src/objects/${object.id}/object.json`, 'utf8'));
     const distance = prepareSceneDistance(descriptor);
     assert.deepEqual(object.distance, distance, object.id);
-    assert.equal(distance.epochJdTt, object.worldFrame?.epochJdTt);
-    assert.equal(distance.referencePoint, 'heliocentre');
+    // A body on an orbit has a distance at the frame's epoch; one placed by a catalogue distance has no epoch.
+    assert.equal(distance.epochJdTt, distance.quantity === 'catalogue' ? null : object.worldFrame?.epochJdTt, object.id);
+    assert.equal(distance.referencePoint, distance.quantity === 'catalogue' ? 'observer' : 'heliocentre', object.id);
   }
   const halley = requireSceneObject('comet-1p');
   assert.ok(halley.distance.value > 30 && halley.distance.value < 40);

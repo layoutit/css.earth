@@ -1,8 +1,0 @@
----
-import HostedObjectFacts from '../../components/HostedObjectFacts.astro';
-// The prepared focus card's dataset banks, rendered once for every object page.
-// Pages fetch this on their first focus selection (`site/focus-fragment.mts`).
-import PreparedFocusDatasets from '../../components/PreparedFocusDatasets.astro';
----
-<div data-focus-banks="datasets"><PreparedFocusDatasets /></div>
-<div data-focus-banks="facts"><PreparedFocusDatasets factsOnly /><HostedObjectFacts /></div>

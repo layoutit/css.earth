@@ -40,6 +40,6 @@ export function presentPageDatasets(document: ParentNode, url: string | URL, sce
       if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
     }
     publishDatasetPreview(datasets.root, buttons);
-    for (const detail of sectionElements(datasets.root, '[data-focus-dataset-details]')) showSection(detail, detail.dataset.focusDatasetDetails === dataset);
+    for (const detail of sectionElements(datasets.root, '[data-page-dataset-details]')) showSection(detail, detail.dataset.pageDatasetDetails === dataset);
   }
 }

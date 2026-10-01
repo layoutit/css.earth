@@ -4,6 +4,7 @@ import type { ObjectEntry } from '../objects.mts';
 import { objectTypeLabel } from '../object-classification-label.mts';
 import { sourceDocumentation } from '../source-documentation.mts';
 import { objectResultMarkup } from '../server/object-result-markup.mts';
+import { objectResultMarker } from '../search/prepared-catalogue-index.mts';
 interface Props { object: ObjectEntry; }
 const { object } = Astro.props;
 const source = sourceDocumentation(object.id, object.name);
@@ -15,7 +16,7 @@ const markup = objectResultMarkup({
   detail: { text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
     title: description, ariaLabel: `${value} ${object.distance.unit}. ${description}` },
   source: { subject: `object:${object.id}`, document: source.href, label: source.label },
-  marker: { kind: 'scene', id: object.id, color: object.color },
+  marker: objectResultMarker(object),
 });
 ---
 

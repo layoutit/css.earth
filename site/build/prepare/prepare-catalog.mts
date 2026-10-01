@@ -162,7 +162,9 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // One row shape for every object: its descriptor, its distance and discovery when placed, its host when it has no scene.
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries), preparedCatalogueModule(entries.map(({ id, distance }, index) => {
     const descriptor = descriptors.get(id);
-    return { descriptor, distance, discovery: discoveries[index]!, ...(isHostedDescriptor(descriptor) ? { sceneHostId: host.id } : {}) };
+    // A bank package whose body-less scene is not prepared yet is drawn by the world's host.
+    const sceneless = isHostedDescriptor(descriptor) && isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.scene === undefined;
+    return { descriptor, distance, discovery: discoveries[index]!, ...(sceneless ? { sceneHostId: host.id } : {}) };
   })));
   // Every page reads the levels, so their rows are apart and carry only what an entry reads of a descriptor.
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {

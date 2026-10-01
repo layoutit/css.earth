@@ -1,10 +1,18 @@
-import { distanceDescription, isSceneObject } from '@cssearth/objects';
-import { objectClassificationLabel, objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
+import { distanceDescription } from '@cssearth/objects';
+import { objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
+import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import { sourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
 import { allPlanetarySystems } from '../object-systems.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
+
+/** How a result row shows an object: a body by its marker. An object drawn from a bank (a galaxy, a nebula, a cluster) has no
+ * marker: its bank's thumbnail stands for it, or the plain marker where the bank has no image. */
+export function objectResultMarker(object: { readonly id: string; readonly color: string }) {
+  return Object.freeze(Object.hasOwn(PREPARED_NAVIGATION_MARKERS, object.id) ? { kind: 'scene' as const, id: object.id, color: object.color }
+    : { kind: 'thumbnail' as const, thumbnail: sidebarThumbnail(object.id)?.url2x ?? null });
+}
 
 /** Every object search can list. The build writes it once (`pages/catalogue/index.json.ts`); the find function reads
  * that file, matches and orders it, and a browser receives only the rows it shows. */
@@ -13,44 +21,24 @@ export function preparedCatalogueIndex(): CatalogueIndex {
     schema: 'cssearth-catalogue-index@1',
     entries: Object.freeze([...SEARCH_OBJECTS.map((object): CatalogueIndexEntry => {
       const title = distanceDescription(object.distance);
-      if (isSceneObject(object)) {
-        const source = sourceDocumentation(object.id, object.name);
-        const value = String(Number(object.distance.value.toFixed(3)));
-        return Object.freeze({
-          kind: 'scene' as const,
-          id: object.id,
-          name: object.name,
-          searchNames: Object.freeze([]),
-          classification: object.classification,
-          classificationName: objectTypeLabel(object).toLocaleLowerCase('en'),
-          systemName: object.systemName.toLocaleLowerCase('en'),
-          route: object.route,
-          illustration: object.discovery.illustration,
-          distanceMeters: object.distance.meters,
-          // A search row always states the distance; what kind of model draws it is the object page's business.
-          detail: Object.freeze({ text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
-            title, ariaLabel: `${value} ${object.distance.unit}. ${title}` }),
-          source: Object.freeze({ subject: `object:${object.id}`, document: source.href, label: source.label }),
-          marker: Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color }),
-        });
-      }
       const source = sourceDocumentation(object.id, object.name);
-      const value = new Intl.NumberFormat('en', { maximumSignificantDigits: 4 }).format(object.distance.value);
-      const detail = `${value} pc${object.distance.quantity === 'comoving' ? ' (comoving)' : ''}`;
+      const value = String(Number(object.distance.value.toFixed(3)));
       return Object.freeze({
-        kind: 'prepared-focus' as const,
+        kind: 'scene' as const,
         id: object.id,
         name: object.name,
         searchNames: Object.freeze((object.searchNames ?? []).map(name => name.toLocaleLowerCase('en'))),
         classification: object.classification,
-        classificationName: objectClassificationLabel(object.classification).toLocaleLowerCase('en'),
+        classificationName: objectTypeLabel(object).toLocaleLowerCase('en'),
         systemName: object.systemName.toLocaleLowerCase('en'),
         route: object.route,
-        illustration: false,
+        illustration: object.discovery.illustration,
         distanceMeters: object.distance.meters,
-        detail: Object.freeze({ text: detail, title, ariaLabel: `${object.distance.value} pc. ${title}` }),
-        source: Object.freeze({ subject: `focus:${object.id}`, document: source.href, label: source.label }),
-        marker: Object.freeze({ kind: 'focus' as const, thumbnail: sidebarThumbnail(object.id)?.url2x ?? null }),
+        // A search row always states the distance; what kind of model draws it is the object page's business.
+        detail: Object.freeze({ text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
+          title, ariaLabel: `${value} ${object.distance.unit}. ${title}` }),
+        source: Object.freeze({ subject: `object:${object.id}`, document: source.href, label: source.label }),
+        marker: objectResultMarker(object),
       });
     }), ...systemEntries()]),
   });

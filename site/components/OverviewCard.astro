@@ -1,5 +1,5 @@
 ---
-import { isHostedObject, isOverviewObject, isPlacedObject } from '@cssearth/objects';
+import { isOverviewObject, isPlacedObject } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import type { Props as ObjectProps } from '../object-shell-types';
@@ -32,11 +32,6 @@ const distance = (pc: number) => {
 const slug = (label: string) => label.toLocaleLowerCase('en').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
 type Member = { id: string; name: string; positionM: readonly number[]; distancePc: number; holdsStars: boolean };
 const members = (classifications: readonly string[]): Member[] => OBJECTS.filter(object => object.id !== overview.id).flatMap((object): Member[] => {
-  // A package the world's host draws is where its own world frame puts it.
-  if (isHostedObject(object)) {
-    if (!classifications.includes(object.classification)) return [];
-    return [{ id: object.id, name: object.name, positionM: object.worldFrame.originM, distancePc: object.distance.meters / PARSEC_M, holdsStars: false }];
-  }
   if (isOverviewObject(object)) {
     if (!object.classification || !classifications.includes(object.classification)) return [];
     const originM = object.worldFrame?.originM ?? object.originM;
@@ -91,7 +86,7 @@ import Detached from './Detached.astro';
     role="region" aria-label="Datasets" data-page-datasets={overview.id} data-default-dataset={datasets.defaultDataset}
     data-dataset-views={JSON.stringify(datasets.views)}>
     <DatasetList objectId={`page-${overview.id}`} thumbnailObjectId={overview.id} page={overview.id} route={overview.route}
-      datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} focus />
+      datasets={{ controls: datasets.controls, defaultDataset: datasets.defaultDataset }} />
   </div></Detached>}
   {sceneMembers.length > 0 && <Detached detached={opening !== 'bodies'}><div class="object-results-scroll object-card-tabpanel" id={`${overview.id}-bodies-content`} role="region" aria-label="Celestial bodies">
     <ul class="object-list">{sceneMembers.map(object => <ObjectResult {object} />)}</ul>

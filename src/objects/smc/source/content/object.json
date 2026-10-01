@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "smc",
+  "displayName": "SMC",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "62.44 kpc (±470 pc statistical, ±810 pc systematic)",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+          "url": "https://arxiv.org/abs/2010.08754",
+          "label": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 16.25°, Dec -72.42°",
+        "source": {
+          "catalogueId": "publication-stanimirovic2004apj-604-176s",
+          "url": "https://ui.adsabs.harvard.edu/abs/2004ApJ...604..176S",
+          "label": "Stanimirovic2004ApJ...604..176S: A New Look at the Kinematics of Neutral Hydrogen in the Small Magellanic Cloud",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Local group, Milky way",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "half-light-radius",
+        "label": "Half-light radius",
+        "value": "1.079 kpc",
+        "source": {
+          "catalogueId": "publication-munoz2018apj-860-66m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860...66M/abstract",
+          "label": "Munoz2018ApJ...860...66M: A MegaCam Survey of Outer Halo Satellites. III. Photometric and Structural Parameters",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "smc-horalek-wide",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+      "href": "https://arxiv.org/abs/2010.08754"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stanimirovic2004ApJ...604..176S: A New Look at the Kinematics of Neutral Hydrogen in the Small Magellanic Cloud",
+      "href": "https://ui.adsabs.harvard.edu/abs/2004ApJ...604..176S"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Munoz2018ApJ...860...66M: A MegaCam Survey of Outer Halo Satellites. III. Photometric and Structural Parameters",
+      "href": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860...66M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2010.08754",
+      "credit": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b"
+    }
+  }
+}

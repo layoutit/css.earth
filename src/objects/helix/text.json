@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "helix",
+  "card": {
+    "text": "The Helix is a planetary nebula about 216 parsecs away. Its broad ring of glowing gas surrounds the remnant central star.",
+    "sources": [
+      {
+        "catalogueId": "benedict-2009",
+        "url": "https://arxiv.org/abs/0909.4281",
+        "label": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
+        "checked": "2026-10-01",
+        "locator": "distance: 216 pc (−12 / +14 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Helix is a planetary nebula about 216 parsecs away. Its broad ring of glowing gas surrounds the remnant central star.",
+    "sources": [
+      {
+        "catalogueId": "benedict-2009",
+        "url": "https://arxiv.org/abs/0909.4281",
+        "label": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei",
+        "checked": "2026-10-01",
+        "locator": "distance: 216 pc (−12 / +14 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "eso-vista": {
+      "title": "Helix in near infrared",
+      "detail": "6592 × 6592 px",
+      "summary": "Near-infrared false color on a partly velocity-constrained model; halo and bright-core depths remain inferred."
+    },
+    "eso-wfi": {
+      "title": "Helix in visible light",
+      "detail": "7059 × 6535 px",
+      "summary": "Optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred."
+    },
+    "eso-wide": {
+      "title": "The wider Helix field",
+      "detail": "6850 × 4759 px",
+      "summary": "Wide optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred."
+    }
+  }
+}

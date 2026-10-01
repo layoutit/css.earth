@@ -9,6 +9,18 @@
     },
     {
       "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1362,
+      "sha256": "2ddd6b13affee9a992d1a33790fb1dd9575b281c08e178a9dd9036a0e748a68e"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 840,
+      "sha256": "b26c62d85be26e1e8b21cad9df115f1404ce517b677a78cfaffc6efc038e6bad"
+    },
+    {
+      "location": "prepared",
       "filename": "dots.bin",
       "bytes": 7892,
       "sha256": "75e670e04adb27f151492e6692d1a619ef39add21eba23d5195986e66e1aa8f9"
@@ -510,6 +522,18 @@
       "filename": "presentation.json",
       "bytes": 1426,
       "sha256": "e203fb4dce925b2781914f1d3878ff1aa3d4015f4ba082a3493f97032716cc6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 5000,
+      "sha256": "98e78445189dcd4f207c5f8e6a7f83de97d55309b0433aea108bd4b32ff24d6e"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 906,
+      "sha256": "eaeeded4854e88157953ddd2315dae50898eb1d36ccfd0f21becda1f953d6fbd"
     }
   ]
 }

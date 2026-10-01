@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m42",
+  "displayName": "Orion Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "414 pc (−7 / +7 pc)",
+        "source": {
+          "catalogueId": "menten-2007",
+          "url": "https://arxiv.org/abs/0709.0485",
+          "label": "Menten et al. (2007), The distance to the Orion Nebula",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 83.79°, Dec -5.4°",
+        "source": {
+          "catalogueId": "eso-eso1723a",
+          "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif",
+          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "H II region",
+        "source": {
+          "catalogueId": "eso-eso1723a",
+          "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif",
+          "label": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "eso-optical",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Menten et al. (2007), The distance to the Orion Nebula",
+      "href": "https://arxiv.org/abs/0709.0485"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESO ESO · optical image and publisher astrometry; registration retained in the observation recipe",
+      "href": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/0709.0485",
+      "credit": "Menten et al. (2007), The distance to the Orion Nebula"
+    }
+  }
+}

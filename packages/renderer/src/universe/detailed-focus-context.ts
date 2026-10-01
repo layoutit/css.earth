@@ -1,14 +1,15 @@
-import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import { worldCameraViewport, type WorldCameraViewport } from '../navigation/world-camera.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 
+/** The selected bank package: where it is and the radius its page frames. */
+export interface SelectedBank { readonly positionM: readonly [number, number, number]; readonly framingRadiusM: number; }
 /** Presentation only: normal focus arrival is about 6.1 authored radii. */
 const HIDDEN_WITHIN_RADII = 8;
 const RESTORED_BY_RADII = 32;
 
 /** Fade surrounding detailed banks, without changing the observer or the Sun-distance sky policy. */
 export function detailedFocusContextOpacity(world: WorldCameraPose,
-  focus: Pick<PreparedNavigationFocus, 'positionM' | 'framingRadiusM'> | null): number {
+  focus: SelectedBank | null): number {
   if (!focus) return 1;
   const radii = Math.hypot(...world.pose.positionM.map((value, axis) => value - focus.positionM[axis])) / focus.framingRadiusM;
   const progress = Math.max(0, Math.min(1, (radii - HIDDEN_WITHIN_RADII) / (RESTORED_BY_RADII - HIDDEN_WITHIN_RADII)));

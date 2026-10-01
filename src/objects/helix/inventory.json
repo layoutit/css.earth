@@ -21,6 +21,18 @@
     },
     {
       "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1588,
+      "sha256": "1b0b1b79a049b3ae9561e64ae1f208d40b51952fa53bba934f1f44fae2e27ff0"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 2027,
+      "sha256": "25f04803a3a036f3b722ac1db98d84d2ed05655ed24792a1974f1c17ecffa6c5"
+    },
+    {
+      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 2953399,
       "sha256": "bf83548d8261f4d80b2ced0d1e9be5a025b77270307b8bd6699c78ead6f012e5"
@@ -564,6 +576,18 @@
       "filename": "provenance.json",
       "bytes": 42580,
       "sha256": "fd63d725e205d683340ba0d24632c74a41a2db496e1060bec85bc2f1b5b97588"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 6356,
+      "sha256": "6d7a726900344ba011ce806b2a6fafe6e6fa8fa59649f7f454ebdf6803556c83"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1388,
+      "sha256": "355405480b612789609007b2a31f61c8a0dff039be5042976530ebd266a59f7c"
     }
   ]
 }

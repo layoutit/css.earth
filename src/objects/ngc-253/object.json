@@ -58,43 +58,39 @@
       "originM": [
         9.466398987631915e+22,
         1.9928125630700205e+22,
-        -4.570390401431423e+22
+        -4.570390401431424e+22
       ],
       "presentationToReference": [
+        0.9999993996575256,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        0.0010957575408784143,
+        0.0010053378881329802,
+        0.3977771559319137,
+        -0.9174815112657304,
+        0.0004358673182015706,
+        -0.9174820620691818,
+        -0.39777691712939167
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1980805931344458500,
       "bodyRadiusM": 614049838716782100000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "3.467 Mpc (−110,000 / +113,600 pc)",
-        "note": "trgb",
-        "source": {
-          "label": "RadburnSmith2011ApJS..195...18R: The GHOSTS Survey. I. Hubble Space Telescope Advanced Camera for Surveys Data",
-          "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 11.89°, Dec -25.29°",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

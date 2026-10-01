@@ -2,12 +2,11 @@ import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedDataset,loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '@cssearth/renderer/navigation';
-import { renderNativeFocus } from './focus-response.mts';
 import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
 import { preparedObjectUrl } from './prepared-object-path.mts';
-import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
+import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -33,23 +32,21 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   // A city link (`city-<id>`) is selected by the page on arrival; only surface features are drawn here.
   const featureIds = featureParams.filter(id => !id.startsWith(PLACE_FEATURE_PREFIX));
   const views = url.searchParams.getAll('v');
-  // The page of a subject the scene draws (a catalogue focus, an overview) always renders its scene and subject; a scene's
-  // own page changes only for what its query asks.
+  // The page of a level the scene draws always renders its scene and subject; a scene's own page changes only for what its
+  // query asks.
   if (!drawnPage && !url.searchParams.has('dataset') && !settingRequest && !featureIds.length && !views.length) return html;
   if (views.length > 1) throw new RangeError(`Invalid saved view: ${views.length} v parameters.`);
   let saved;
   try { saved = views.length ? parseSharedView(`v=${views[0]}`) : null; }
   catch { throw new UnreadableSavedView(views[0]!); }
-  // The page's scene: the page's own object, or the host of the catalogue focus the page is.
+  // The page's scene: the page's own object, or the host of the level the page is.
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
-  const objectId = descriptor.id, focusId = preparedFocusFromUrl(url, objectId);
+  const objectId = descriptor.id;
   if ((pageId !== objectId && drawnPageFromUrl(url, objectId) !== pageId) || descriptor.prepared?.url !== 'prepared/object.json') {
-    throw new Error(`Prepared dataset descriptor identity drifted: page ${pageId}, scene ${objectId}, focus ${String(focusId)}.`);
+    throw new Error(`Prepared dataset descriptor identity drifted: page ${pageId}, scene ${objectId}.`);
   }
-  // On a catalogue focus's page `dataset` selects the focus's dataset; the scene keeps its own default.
   const dataset = readSceneDatasetUrl(url, objectId);
-  const focusing = focusId !== null;
   let datasetId = dataset.id ?? undefined;
   const shell = region(html, 'search-shell');
   const information = requiredSection(shell.document, '.object-information-panel');
@@ -111,14 +108,11 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   if (activeDataset) stage.dataset.preparedDataset = activeDataset;
   stage.dataset.preparedSettings = JSON.stringify(settings);
   stage.innerHTML = selected.html;
-  if (saved || focusing) {
+  if (saved) {
     const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
     if (!frame) throw new RangeError('A saved view requires a prepared world frame.');
-    saved = await renderNativeFocus(shell.document, stage, url, definition, frame, saved, fetcher);
-    if (saved) {
-      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, saved);
-      stage.dataset.preparedView = formatSharedView(saved).slice(2);
-    }
+    publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, saved);
+    stage.dataset.preparedView = formatSharedView(saved).slice(2);
   }
   if (feature) {
     const root = scene.document.createElement('div');
@@ -136,7 +130,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     sectionElements(shell.document, '[data-dataset-details]').map(panel => ({ id: panel.dataset.datasetDetails!, panel })),
     sectionElements(information, '[data-dataset-context]'), new Set([activeDataset ?? null]),
     information.querySelector('.object-datasets'));
-  if (dataset.requested || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
+  if (dataset.requested || featureIds.length) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
   for (const input of shell.document.querySelectorAll<HTMLInputElement>('.object-settings input[name]')) {
     if (Object.hasOwn(settings, input.name)) {
       if (input.type === 'checkbox') input.toggleAttribute('checked', settings[input.name] === true);

@@ -183,12 +183,6 @@ export function bindNavigationLinks({ documentTarget, windowTarget, navigable, n
     if (url.origin !== windowTarget.location.origin) return;
     // An object route is `/<id>/`; the front page's `/` is left to the browser, as before.
     const id = url.pathname === '/' ? undefined : objectIdAtPath(url.pathname);
-    // A catalogue focus link selects its subject in place: the mounted scene draws every focus.
-    if (id && id === anchor.getAttribute('data-prepared-focus-id') && !url.searchParams.has('v')) {
-      event.preventDefault();
-      Promise.resolve(navigate(id, { kind: 'focus', id })).catch(onError);
-      return;
-    }
     if (!id || !available(id)) return;
     event.preventDefault();
     Promise.resolve(navigate(id, { kind: 'link', url: url.href })).catch(onError);

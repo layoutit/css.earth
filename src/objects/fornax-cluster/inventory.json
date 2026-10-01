@@ -2,10 +2,40 @@
   "schema": "cssearth-inventory@1",
   "assets": [
     {
+      "location": "public",
+      "filename": "fornax-cluster-dataset-members.webp",
+      "bytes": 428,
+      "sha256": "d164249e8fa2cc0f4f33df1488093a1fec2fee5867c0bd9054c941f0f4aa6ad5"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2996,
+      "sha256": "259c5773de63f94cc5c0446ac74f101f40f9fffa3107743fccbef19f57cdc863"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 394,
+      "sha256": "8039ecd10a3b17c047932e756c550339ff568b3caf55820a10744ac125daad8a"
+    },
+    {
       "location": "prepared",
       "filename": "dots.bin",
       "bytes": 3581,
       "sha256": "253521ad89bd018222af8496f441177493677b77948290bb04dd922aea42f67d"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4594,
+      "sha256": "4d46f25a924e28483701ea65f9cb56660e7e2886cc13a772e13cd830ae9b9559"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1163,
+      "sha256": "b8e17416735d2fee04f36b28a991e621fe0054a7dc1ce026d901f3569513db05"
     }
   ]
 }

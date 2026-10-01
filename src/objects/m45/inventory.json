@@ -33,6 +33,18 @@
     },
     {
       "location": "prepared",
+      "filename": "content.json",
+      "bytes": 753,
+      "sha256": "3878f9ebe5b6320efc68427f71c211ce155742cc0f5e6e31d82a8f8931953505"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 3714,
+      "sha256": "e3617e6379d235040cee5490b324b0b54cd059e2771a76e322ac9d65485397ee"
+    },
+    {
+      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 5677355,
       "sha256": "538c06e2bf8d78707c15e6b4f2c873a1eb692cb1ebc066375e409dacb8df91c2"
@@ -405,6 +417,12 @@
     },
     {
       "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 8270,
+      "sha256": "c8d654a1edad36e63cb8d91c5345d8fe9baa6273ce5f1ec45aa08ac9560919a5"
+    },
+    {
+      "location": "prepared",
       "filename": "spitzer-irac-mips/atlases/x.webp",
       "bytes": 288212,
       "sha256": "ca3b9cf8f5bf955a465d5827d023aaa2aff005895e2168ab7bc80a9dbe0470b7"
@@ -750,6 +768,12 @@
       "filename": "spitzer-irac/impostors/view-ppp.png",
       "bytes": 17647,
       "sha256": "5ff5e654a5b2fcd5dd647369183ad064253bd1b02f6cc948af6e9ff5e9b61b67"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1934,
+      "sha256": "c7d96ff66bfe798864f9dc245e6e19d0487eac06519e48cefa98a1b0298c491d"
     },
     {
       "location": "prepared",

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m8",
+  "card": {
+    "text": "The Lagoon is a star-forming H II region about 1,326 parsecs away. Its young NGC 6530 cluster shares the surrounding cloud complex.",
+    "sources": [
+      {
+        "catalogueId": "wright-2019-kinematics",
+        "url": "https://arxiv.org/pdf/1903.12176v1",
+        "label": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+        "checked": "2026-10-01",
+        "locator": "distance: 1.326 kpc (−69 / +77 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Lagoon is a star-forming H II region about 1,326 parsecs away. Its young NGC 6530 cluster shares the surrounding cloud complex.",
+    "sources": [
+      {
+        "catalogueId": "wright-2019-kinematics",
+        "url": "https://arxiv.org/pdf/1903.12176v1",
+        "label": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+        "checked": "2026-10-01",
+        "locator": "distance: 1.326 kpc (−69 / +77 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "eso-optical": {
+      "title": "Lagoon nebula in visible light",
+      "detail": "4000 × 2679 px",
+      "summary": "Optical display colors on one inferred cloud front; physical depth and foreground extinction are not recovered."
+    },
+    "eso-vista": {
+      "title": "Lagoon stars and nebulosity in near infrared",
+      "detail": "4000 × 2202 px",
+      "summary": "Near-infrared false color on an inferred cloud front; image coverage is narrower than the optical view."
+    },
+    "spitzer-mid-infrared": {
+      "title": "Lagoon warm dust in calibrated mid-infrared",
+      "detail": "1757 × 1417 px",
+      "summary": "Calibrated mid-infrared false color on an inferred cloud front; image coverage is narrower than the optical view."
+    }
+  }
+}

@@ -59,59 +59,36 @@
         -1.8367130401501783e+21
       ],
       "presentationToReference": [
+        0.693006685704213,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.7209311573023195,
+        -0.6614414048116538,
+        0.3977771559319137,
+        -0.6358212030276307,
+        -0.2867699453744198,
+        -0.9174820620691818,
+        -0.27566222848122346
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 398151945998886100,
       "bodyRadiusM": 123427103259654680000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "62.44 kpc (±470 pc statistical, ±810 pc systematic)",
-        "note": "eclipsing-binaries",
-        "source": {
-          "label": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
-          "url": "https://arxiv.org/abs/2010.08754"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 16.25°, Dec -72.42°",
-        "source": {
-          "label": "Stanimirovic2004ApJ...604..176S: A New Look at the Kinematics of Neutral Hydrogen in the Small Magellanic Cloud",
-          "url": "https://ui.adsabs.harvard.edu/abs/2004ApJ...604..176S"
-        }
-      },
-      {
-        "id": "membership",
-        "label": "Membership",
-        "value": "Local group, Milky way",
-        "note": "Author catalogue host association: smc -> lmc -> mw; object confirmation is recorded separately.",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
-      },
-      {
-        "id": "half-light-radius",
-        "label": "Half-light radius",
-        "value": "1.079 kpc",
-        "source": {
-          "label": "Munoz2018ApJ...860...66M: A MegaCam Survey of Outer Halo Satellites. III. Photometric and Structural Parameters",
-          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860...66M/abstract"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

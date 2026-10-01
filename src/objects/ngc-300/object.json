@@ -51,64 +51,41 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        4.956364387918276e+22,
-        1.2103318163954808e+22,
-        -3.941065128390322e+22
+        4.956364387918275e+22,
+        1.2103318163954806e+22,
+        -3.941065128390321e+22
       ],
       "presentationToReference": [
+        0.9957722418097118,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        -0.09185664070311324,
+        -0.08427682012704027,
+        0.3977771559319137,
+        -0.9136031697668263,
+        -0.03653847329234405,
+        -0.9174820620691818,
+        -0.396095450303013
       ],
-      "metersPerUnit": 30856775814913670000,
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 935657073097382300,
       "bodyRadiusM": 290053692660188500000
     },
-    "facts": [
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "2.089 Mpc (−56,940 / +58,530 pc)",
-        "note": "trgb",
-        "source": {
-          "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
-          "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T"
-        }
-      },
-      {
-        "id": "position",
-        "label": "Sky position (J2000)",
-        "value": "RA 13.72°, Dec -37.68°",
-        "source": {
-          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
-          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
-        }
-      },
-      {
-        "id": "membership",
-        "label": "Membership",
-        "value": "Local volume, Field",
-        "note": "Published neighboring galaxy (N), not a Local Group membership assertion.",
-        "source": {
-          "label": "McConnachie (2012), AJ 144, 4, DOI 10.1088/0004-6256/144/1/4; author October 2019 Table 1 update, read from its text transcription (first seven pages, pypdf 5.9.0; numeric membership classifications unchanged).",
-          "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf"
-        }
-      },
-      {
-        "id": "half-light-radius",
-        "label": "Half-light radius",
-        "value": "3.039 kpc",
-        "source": {
-          "label": "McConnachie2012AJ....144....4M: The Observed Properties of Dwarf Galaxies in and around the Local Group",
-          "url": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract"
-        }
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
       }
-    ]
+    },
+    "scene": {
+      "format": "cssearth-css-object@5",
+      "url": "prepared/object.json"
+    }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",

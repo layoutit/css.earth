@@ -6,7 +6,7 @@ import { after, test } from 'node:test';
 import { parseNavigationDistance } from '../registry/index.js';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from './prepared-registry.js';
 import type { PreparedCatalogueRow } from './prepared-registry.js';
-import { isHostedObject, isOverviewObject } from '../registry/index.js';
+import { isOverviewObject, isSceneObject } from '../registry/index.js';
 
 // Temporary checkouts the tests make, removed once the file's tests finish.
 const temporary: string[] = [];
@@ -60,7 +60,7 @@ test('reads the registry in catalogue order, with distances, discoveries, prepar
   // The catalogue's order and context stay out of the registry, as the application registry leaves them out.
   assert.ok(!('order' in mars) && !('context' in mars));
   await assert.rejects(mars.loadScene(), /cannot mount a scene/);
-  assert.throws(() => registry.requireSceneObject('helix'), /no scene of its own/);
+  assert.throws(() => registry.requireSceneObject('helix'), /no body of its own/);
   // A hosted package is a body of the world as a scene is, with its identity from its own descriptor.
   assert.deepEqual(registry.worldObjects.map(object => object.id), ['sun', 'mars', 'helix']);
   const helix = registry.objects.find(object => object.id === 'helix')!;
@@ -71,9 +71,10 @@ test('reads the registry in catalogue order, with distances, discoveries, prepar
   const placed = readPreparedObjects(await checkout({ overviews: [overview, placedLevel] }));
   assert.deepEqual(placed.worldObjects.map(object => object.id), ['sun', 'mars', 'helix', 'local-group']);
   assert.deepEqual(placed.objects.filter(isOverviewObject).map(object => object.id), ['milky-way', 'local-group']);
-  assert.equal(isHostedObject(helix), true);
+  // A bank package whose body-less scene is not prepared yet is drawn by the world's host.
+  assert.equal(isSceneObject(helix), false);
   assert.partialDeepStrictEqual(helix, { classification: 'nebula', route: '/helix/', sceneHostId: 'sun', systemName: 'Solar System' });
-  assert.throws(() => registry.requireSceneObject('milky-way'), /no scene of its own/);
+  assert.throws(() => registry.requireSceneObject('milky-way'), /no body of its own/);
   assert.throws(() => registry.requireSceneObject('pluto'), /Unknown/);
 });
 

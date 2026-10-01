@@ -4,7 +4,7 @@ import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera
 import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import { required } from './navigation-test-values.mts';
 import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../minimap/view-format.mts';
-import { measurePreparedFocusView } from '../view-readout.mts';
+import { measureExtendedSubjectView } from '../view-readout.mts';
 import { measureView, pickUnitSphere } from '../minimap/view-measure.mts';
 const test = sourceTest();
 
@@ -64,13 +64,13 @@ test('galaxy distances keep a finite ruler without a spurious surface hit', () =
 });
 
 test('prepared focus uses its own depth plane for scale and never supplies planetary coordinates', () => {
-  const focus: Parameters<typeof measurePreparedFocusView>[1] = { name: 'Prepared galaxy', positionM: [1e20, 0, 0] };
+  const focus: Parameters<typeof measureExtendedSubjectView>[1] = { name: 'Prepared galaxy', positionM: [1e20, 0, 0] };
   const world: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, pose: { positionM: [1e20, 0, 1e18], orientationXyzw: [0,0,0,1] } };
-  const value = measurePreparedFocusView(world, focus, 1000);
+  const value = measureExtendedSubjectView(world, focus, 1000);
   assert.deepEqual(value.scale, viewScale(1e15));
   assert.equal(value.coordinates, null);
   assert.equal(value.scaleTitle, 'Scale at the distance of Prepared galaxy');
-  assert.equal(measurePreparedFocusView({ ...world, pose: { ...world.pose, orientationXyzw: [0,1,0,0] } }, focus, 1000).scale, null);
+  assert.equal(measureExtendedSubjectView({ ...world, pose: { ...world.pose, orientationXyzw: [0,1,0,0] } }, focus, 1000).scale, null);
 });
 
 

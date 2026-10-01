@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m8",
+  "displayName": "Lagoon Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1.326 kpc (−69 / +77 pc)",
+        "source": {
+          "catalogueId": "wright-2019-kinematics",
+          "url": "https://arxiv.org/pdf/1903.12176v1",
+          "label": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "eso-optical",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+      "href": "https://arxiv.org/pdf/1903.12176v1"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/pdf/1903.12176v1",
+      "credit": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2"
+    }
+  }
+}
