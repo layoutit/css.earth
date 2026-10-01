@@ -4,20 +4,20 @@
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { catalogueObject, defineObjects, isPlacedObject, isSceneObject } from '../registry/index.js';
-import type { NavigableObject, NavigationDistance, ObjectDiscovery, ObjectEntry, PlacedFields } from '../registry/index.js';
+import { catalogueLevel, catalogueObject, defineObjects } from '../registry/index.js';
+import type { NavigableObject, NavigationDistance, ObjectDiscovery, ObjectEntry, OverviewObject, WorldBody } from '../registry/index.js';
 
 /** The catalogue files, relative to the checkout. `entries` is a module: each scene object's descriptor, as its folder's
- * object.json holds it, with its distance and discovery, then each package the world's host draws, in registry order. The overviews are apart because every
+ * object.json holds it, with its distance and discovery, in registry order. The overviews are apart because every
  * page's object directory reads them (`site/object-directory.mts`) and a page never loads the whole registry. */
 export const PREPARED_CATALOGUE = Object.freeze({
   entries: 'site/prepared-catalogue.mjs',
   overviews: 'site/prepared-overview-objects.json',
 });
 
-/** One row of the prepared catalogue: a package's descriptor, with its distance and discovery when it is placed and the scene
- * that draws it when it has none of its own. Every object's row has this shape (`catalogueObject` reads it). */
-export interface PreparedCatalogueRow { descriptor: unknown; distance?: NavigationDistance; discovery?: ObjectDiscovery; sceneHostId?: string }
+/** One row of the prepared catalogue: a package's descriptor with its distance and discovery. Every object's row has this
+ * shape (`catalogueObject` reads it); a level's row has it too, without a distance unless the level has a place. */
+export interface PreparedCatalogueRow { descriptor: unknown; distance?: NavigationDistance; discovery?: ObjectDiscovery }
 
 /** The catalogue module `prepare:catalog` writes at `PREPARED_CATALOGUE.entries`. */
 export function preparedCatalogueModule(rows: readonly PreparedCatalogueRow[]) {
@@ -31,14 +31,16 @@ export function preparedCatalogueModule(rows: readonly PreparedCatalogueRow[]) {
 export type PreparedSceneObject = ObjectEntry<never, AbortSignal>;
 export type PreparedNavigableObject = NavigableObject<never, AbortSignal>;
 export interface PreparedObjectRegistry {
-  /** The catalogue entries as written, then the overviews, in registry order. */
+  /** The catalogue entries as written, in registry order. */
   readonly entries: readonly Readonly<Record<string, unknown>>[];
-  /** Every navigable object, as `OBJECTS` lists them. */
+  /** Every object, as `OBJECTS` lists them. Each has a scene of its own. */
   readonly objects: readonly PreparedNavigableObject[];
-  /** The scene objects, as `SCENE_OBJECTS` lists them. */
+  /** The same list, under the name the body lanes read. */
   readonly sceneObjects: readonly PreparedSceneObject[];
-  /** Every placed object the world draws: the scenes and the packages the world's host draws (galaxies, nebulae, clusters). */
-  readonly worldObjects: readonly (PreparedNavigableObject & PlacedFields)[];
+  /** The levels of the zoom ladder, from the nearest out. They are views, not objects. */
+  readonly levels: readonly OverviewObject[];
+  /** What the world context draws and names: every object, and a level with a place of its own (the Local Group). */
+  readonly worldObjects: readonly WorldBody[];
   requireSceneObject(id: string): PreparedSceneObject;
 }
 
@@ -62,22 +64,24 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   if (!Array.isArray(catalogue)) throw new TypeError(`Invalid prepared catalogue: ${PREPARED_CATALOGUE.entries} exports no CATALOGUE_ENTRIES array.`);
   const overviews: unknown = load(resolve(checkout, PREPARED_CATALOGUE.overviews));
   if (!Array.isArray(overviews)) throw new TypeError(`Invalid prepared catalogue overviews: ${PREPARED_CATALOGUE.overviews}.`);
-  const entries: Readonly<Record<string, unknown>>[] = [...catalogue, ...overviews].map(entry => {
-    if (!isRecord(entry)) throw new TypeError(`Invalid prepared catalogue entry in ${PREPARED_CATALOGUE.entries}.`);
+  const rows = (list: readonly unknown[], path: string): Readonly<Record<string, unknown>>[] => list.map(entry => {
+    if (!isRecord(entry)) throw new TypeError(`Invalid prepared catalogue entry in ${path}.`);
     return entry;
   });
+  const entries = rows(catalogue, PREPARED_CATALOGUE.entries);
   const refuse = () => async (): Promise<never> => { throw new Error('Preparation cannot mount a scene.'); };
   const objects = defineObjects<PreparedNavigableObject>(entries.map(entry => catalogueObject<never, AbortSignal>(entry, refuse)));
-  const sceneObjects = Object.freeze(objects.filter(isSceneObject));
-  for (const object of objects) if (!isSceneObject(object) && !sceneObjects.some(host => host.id === object.sceneHostId)) {
-    throw new TypeError(`Scene host is not a registered scene: ${object.id}`);
-  }
-  // Every object with a place in the world, whatever else it is.
-  const worldObjects = Object.freeze(objects.filter(isPlacedObject));
-  return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects, worldObjects, requireSceneObject(id: string) {
+  const levels = Object.freeze(rows(overviews, PREPARED_CATALOGUE.overviews).map(catalogueLevel).sort((a, b) => a.order - b.order));
+  // An id names one page: an object's or a level's.
+  defineObjects<{ id: string; route: string }>([...objects, ...levels]);
+  const placedLevels = levels.flatMap((level): WorldBody[] => level.worldFrame && level.classification && level.systemName && level.color && level.distance && level.discovery
+    ? [{ id: level.id, name: level.name, classification: level.classification, ...(level.classificationLabel === undefined ? {} : { classificationLabel: level.classificationLabel }),
+      systemName: level.systemName, color: level.color, distance: level.distance, worldFrame: level.worldFrame, discovery: level.discovery }] : []);
+  const worldObjects = Object.freeze([...objects, ...placedLevels]);
+  return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects: objects, levels, worldObjects, requireSceneObject(id: string) {
     const object = objects.find(candidate => candidate.id === id);
-    if (!object) throw new Error(`Unknown cssEarth object: ${id}`);
-    if (!isSceneObject(object)) throw new TypeError(`Object ${id} has no scene of its own.`);
-    return object;
+    if (object) return object;
+    if (levels.some(level => level.id === id)) throw new TypeError(`${id} is a level of the zoom ladder: it has no scene of its own.`);
+    throw new Error(`Unknown cssEarth object: ${id}`);
   } });
 }

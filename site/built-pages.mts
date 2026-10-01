@@ -1,8 +1,7 @@
 // `CSSEARTH_BUILD_PAGES=/,/earth/ astro build`: a production build that prerenders only the named object pages and the
 // scene routes they mount, for a cold test that opens a few pages, not all of them. Unset, every route builds as before.
 
-/** What a page needs of an `OBJECTS` entry: a scene mounts itself; anything else mounts its host scene. */
-/** An object's page: its own scene's, or the scene of `sceneHostId` with it selected. */
+/** A page: an object's mounts its own scene; a level's mounts the scene of `sceneHostId`, the world host, with it selected. */
 interface PageObject { readonly id: string; readonly sceneHostId?: string }
 interface IdPath { readonly params: { readonly id: string } }
 

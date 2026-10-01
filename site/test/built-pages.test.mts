@@ -3,11 +3,12 @@ import test from 'node:test';
 import { builtObjectPages, builtScenePaths, namedPages } from '../built-pages.mts';
 
 const objects = [
-  { id: 'earth', kind: 'scene' }, { id: 'moon', kind: 'scene' }, { id: 'mars', kind: 'scene' },
-  { id: 'sun', kind: 'scene' }, { id: 'm31', kind: 'focus', sceneHostId: 'sun' },
+  { id: 'earth' }, { id: 'moon' }, { id: 'mars' }, { id: 'sun' },
+  // A level's page mounts the world host's scene.
+  { id: 'milky-way', sceneHostId: 'sun' },
 ];
 const pages = objects.map(({ id }) => ({ params: { id } }));
-const scenes = pages.filter(({ params }) => params.id !== 'm31');
+const scenes = pages.filter(({ params }) => params.id !== 'milky-way');
 const env = (list?: string) => (list === undefined ? {} : { CSSEARTH_BUILD_PAGES: list });
 const ids = (paths: readonly { params: { id: string } }[]) => paths.map(path => path.params.id);
 
@@ -27,7 +28,7 @@ test('a list builds the object pages it names; "/" is the home page, not an obje
 test('scene routes build for the scenes the named pages mount: "/" mounts the root, a focus its host', () => {
   assert.deepEqual(ids(builtScenePaths(scenes, objects, 'earth', env('/'))), ['earth']);
   assert.deepEqual(ids(builtScenePaths(scenes, objects, 'earth', env('/,/earth/'))), ['earth']);
-  assert.deepEqual(ids(builtScenePaths(scenes, objects, 'earth', env('/m31/,/moon/'))), ['moon', 'sun']);
+  assert.deepEqual(ids(builtScenePaths(scenes, objects, 'earth', env('/milky-way/,/moon/'))), ['moon', 'sun']);
 });
 
 test('a page no object has stops the build and names it', () => {

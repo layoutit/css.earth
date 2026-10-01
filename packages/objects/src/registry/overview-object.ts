@@ -1,5 +1,7 @@
 import { isRecord } from '@cssearth/core';
 import type { ObjectClassification, ObjectWorldFrame } from './object-schema.js';
+import type { NavigationDistance } from './navigation-distance.js';
+import type { ObjectDiscovery } from './object-discovery.js';
 
 /**
  * A distance on the zoom ladder, measured from the star the zoom is centred on: a fixed distance, a point of the world
@@ -32,10 +34,9 @@ export interface OverviewZoom {
 export interface OverviewHolding { readonly classifications: readonly string[]; readonly list?: string }
 
 /**
- * A level above the star systems (the Milky Way, the Local Group, the nearby and the observable universe): an object of
- * the one registry whose page, `/<id>/`, is its host scene's with that overview selected. Like a catalogue focus it has
- * no scene of its own. Its package authors it under `properties.overview`; preparation adds the host and, for a package
- * with a volume, its origin.
+ * A level above the star systems (the Milky Way, the Local Group, the nearby and the observable universe). It is a view of
+ * a scene, not an object: the camera, far enough out from the star it is centred on, shows the level, and its page
+ * `/<id>/` is the world host's scene at that zoom. Its package authors it under `properties.overview`.
  */
 export interface OverviewObject {
   readonly id: string;
@@ -53,10 +54,13 @@ export interface OverviewObject {
   readonly classificationLabel?: string;
   /** Where it is, for a level that is a member of another: its package's volume origin, Sun-centred ICRF metres. */
   readonly originM?: readonly [number, number, number];
-  /** Its world frame, for a level with a catalogue entry (the Local Group): the world context places it. */
+  /** A level with a catalogue entry (the Local Group) has a place of its own: the world context draws and names it. */
   readonly worldFrame?: ObjectWorldFrame;
+  readonly systemName?: string;
+  readonly color?: string;
+  readonly distance?: NavigationDistance;
+  readonly discovery?: Readonly<ObjectDiscovery>;
   readonly route: string;
-  readonly sceneHostId: string;
 }
 
 const text = (value: unknown) => typeof value === 'string' && value.trim().length > 0;

@@ -1,9 +1,9 @@
-import { isExtendedClassification, isSceneObject } from '@cssearth/objects';
+import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from '../tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, objectSeo } from '../seo.mts';
-import { knownObject } from '../object-directory.mts';
+import { knownLevel, knownObject } from '../object-directory.mts';
 import { overviewPage } from '../navigation/navigation-scope.mts';
 import { presentPageDatasets } from '../page-datasets.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
@@ -107,15 +107,15 @@ export function mountObjectShell({
     if (presentedSubject === subject) { updateBodyCard(); return; }
     // A level the world draws around the scene is its own page, `/<id>/`.
     const drawnPage = (selected: typeof subject | null) => {
-      const overview = selected?.kind === 'overview' ? knownObject(overviewPage(objectId, selected.overview.scope) ?? '') : undefined;
-      return overview?.zoom !== undefined ? { id: overview.id, seo: objectSeo(overview) } : null;
+      const overview = selected?.kind === 'overview' ? knownLevel(overviewPage(objectId, selected.overview.scope)) : undefined;
+      return overview ? { id: overview.id, seo: objectSeo(overview) } : null;
     };
     // Another star's scene zoomed out to an overview keeps its own address (a reload reopens that scene), but the tab
     // names what the card shows: the Milky Way from the ε Eridani system was still titled "ε Eridani" (2026-10-01).
     const titledOverview = (selected: typeof subject | null) => {
       if (selected?.kind !== 'overview' || selected.overview.scope === 'system' || drawnPage(selected)) return null;
-      const overview = knownObject(selected.overview.scope), scene = knownObject(objectId);
-      return overview?.zoom !== undefined && scene && isSceneObject(scene) ? { route: scene.route, seo: { ...objectSeo(scene), title: objectSeo(overview).title } } : null;
+      const overview = knownLevel(selected.overview.scope), scene = knownObject(objectId);
+      return overview && scene ? { route: scene.route, seo: { ...objectSeo(scene), title: objectSeo(overview).title } } : null;
     };
     const leftPage = drawnPage(presentedSubject) !== null || titledOverview(presentedSubject) !== null;
     presentedSubject = subject;
@@ -127,7 +127,7 @@ export function mountObjectShell({
     else if (titled) presentPage(titled.route, titled.seo);
     else if (leftPage) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
-      if (scene && isSceneObject(scene)) presentPage(scene.route, objectSeo(scene));
+      if (scene) presentPage(scene.route, objectSeo(scene));
     } else pendingPage = null;
     objectBrowser.refreshSelection();
     // A galaxy, a cluster or a nebula has no surface to stand above: the readout measures to its centre.

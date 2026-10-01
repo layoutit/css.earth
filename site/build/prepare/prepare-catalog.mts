@@ -155,8 +155,6 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
   const levelIds = new Set(overviews.map(overview => overview.id));
   const entries = catalogued.filter(entry => !levelIds.has(entry.id));
-  const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
-  if (!host) throw new TypeError('Objects without a scene of their own need a shared world host.');
   // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
   defineObjects<{ id: string; route: string }>([...entries, ...overviews.map(({ id }) => ({ id, route: `/${id}/` }))]);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
@@ -170,7 +168,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     if (entry.classification !== 'star' || discovery.imagery) continue;
     if ([...withImagery].some(child => parents[child]?.parent === entry.id)) discovery.hostsImagery = true;
   }
-  // One row shape for every object: its descriptor, its distance and discovery when placed, its host when it has no scene.
+  // One row shape for every object: its descriptor, its distance and its discovery.
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.entries), preparedCatalogueModule(entries.map(({ id, distance }, index) => {
     const descriptor = descriptors.get(id);
     return { descriptor, distance, discovery: discoveries[index]! };
@@ -183,7 +181,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
       ...(properties.catalog === undefined ? {} : { catalog: properties.catalog, worldFrame: properties.worldFrame }),
       ...(isRecord(volume) && volume.originM !== undefined ? { volume: { originM: volume.originM } } : {}) } },
       // A placed level is a landmark of the scale above it, without imagery of its own.
-      ...(placed ? { distance: placed.distance, discovery: { featured: true, imagery: false, illustration: false } } : {}), sceneHostId: host.id };
+      ...(placed ? { distance: placed.distance, discovery: { featured: true, imagery: false, illustration: false } } : {}) };
   })) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');

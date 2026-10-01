@@ -6,7 +6,6 @@ import { after, test } from 'node:test';
 import { parseNavigationDistance } from '../registry/index.js';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from './prepared-registry.js';
 import type { PreparedCatalogueRow } from './prepared-registry.js';
-import { isOverviewObject, isSceneObject } from '../registry/index.js';
 
 // Temporary checkouts the tests make, removed once the file's tests finish.
 const temporary: string[] = [];
@@ -21,14 +20,13 @@ const au = (value: number) => ({ meters: value * 149597870700, value, unit: 'AU'
 const discovery = (featured: boolean) => ({ featured, imagery: featured, illustration: false });
 const parsec = { meters: 3.085677581491367e16, value: 1, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null };
 // A nebula: an object like any body, placed by a catalogue distance.
-const hosted = (id: string, sceneHostId?: string) => ({ descriptor: descriptor(id, 9, 'nebula'),
-  distance: parseNavigationDistance(parsec), discovery: discovery(false), ...(sceneHostId === undefined ? {} : { sceneHostId }) });
+const hosted = (id: string) => ({ descriptor: descriptor(id, 9, 'nebula'), distance: parseNavigationDistance(parsec), discovery: discovery(false) });
 const focus = hosted('helix');
 
 const level = (id: string, name: string) => ({ schema: 'cssearth-object@2', id, type: 'density-volume', properties: { overview: { name, description: 'Our galaxy.', order: 1,
   zoom: { enter: { fade: 'system', at: 'end' }, returnBelow: { fade: 'system', at: 'middle' }, frame: { distance: { distancePc: 8000 } } },
   holds: [{ classifications: ['nebula'] }], packages: [] } } });
-const overview = { descriptor: level('milky-way', 'Milky Way'), sceneHostId: 'sun' };
+const overview = { descriptor: level('milky-way', 'Milky Way') };
 
 const scene = (id: string, order: number, classification: string, distanceAu: number, featured: boolean) =>
   ({ descriptor: descriptor(id, order, classification), distance: parseNavigationDistance(au(distanceAu)), discovery: discovery(featured) });
@@ -51,8 +49,9 @@ async function checkout(records: { scenes?: PreparedCatalogueRow[]; focuses?: un
 
 test('reads the registry in catalogue order, with distances, discoveries and overviews', async () => {
   const registry = readPreparedObjects(await checkout());
-  assert.deepEqual(registry.objects.map(object => object.id), ['sun', 'mars', 'helix', 'milky-way']);
-  assert.deepEqual(registry.sceneObjects.map(object => object.id), ['sun', 'mars', 'helix']);
+  assert.deepEqual(registry.objects.map(object => object.id), ['sun', 'mars', 'helix']);
+  assert.equal(registry.sceneObjects, registry.objects);
+  assert.deepEqual(registry.levels.map(level => level.id), ['milky-way']);
   const mars = registry.requireSceneObject('mars');
   assert.equal(mars.distance.value, 1.5);
   assert.equal(mars.discovery.featured, true);
@@ -64,14 +63,14 @@ test('reads the registry in catalogue order, with distances, discoveries and ove
   assert.equal(registry.requireSceneObject('helix').id, 'helix');
   assert.deepEqual(registry.worldObjects.map(object => object.id), ['sun', 'mars', 'helix']);
   const helix = registry.objects.find(object => object.id === 'helix')!;
-  // A level with a catalogue entry is a body of the world too, and still one object.
-  const placedLevel = { descriptor: { ...hosted('local-group', 'sun').descriptor, type: 'galaxy-catalog', properties: { ...hosted('local-group', 'sun').descriptor.properties,
+  // A level with a catalogue entry is a body of the world too. It is still a level, not an object.
+  const placedLevel = { descriptor: { ...hosted('local-group').descriptor, type: 'galaxy-catalog', properties: { ...hosted('local-group').descriptor.properties,
     overview: { order: 2, zoom: level('x', 'x').properties.overview.zoom, holds: [{ classifications: ['galaxy'] }] } } },
-    distance: parseNavigationDistance(parsec), discovery: discovery(true), sceneHostId: 'sun' };
+    distance: parseNavigationDistance(parsec), discovery: discovery(true) };
   const placed = readPreparedObjects(await checkout({ overviews: [overview, placedLevel] }));
   assert.deepEqual(placed.worldObjects.map(object => object.id), ['sun', 'mars', 'helix', 'local-group']);
-  assert.deepEqual(placed.objects.filter(isOverviewObject).map(object => object.id), ['milky-way', 'local-group']);
-  assert.equal(isSceneObject(helix), true);
+  assert.deepEqual(placed.levels.map(level => level.id), ['milky-way', 'local-group']);
+  assert.deepEqual(placed.objects.map(object => object.id), ['sun', 'mars', 'helix']);
   assert.partialDeepStrictEqual(helix, { classification: 'nebula', route: '/helix/', systemName: 'Solar System' });
   assert.throws(() => registry.requireSceneObject('milky-way'), /no scene of its own/);
   assert.throws(() => registry.requireSceneObject('pluto'), /Unknown/);
@@ -88,7 +87,6 @@ test('refuses a catalogue it cannot decode or a level without its host', async (
     [{ scenes: [{ ...scenes[0]!, discovery: { featured: 'yes' } as never }] }, /Invalid prepared object discovery/],
     [{ focuses: [{ ...focus, descriptor: null }] }, /Invalid catalogue entry/],
     [{ module: 'export const OTHER = [];\n' }, /exports no CATALOGUE_ENTRIES array/],
-    [{ overviews: [{ ...overview, sceneHostId: 'jupiter' }] }, /Scene host is not a registered scene: milky-way/],
     [{ overviews: {} }, /overviews/],
   ];
   for (const [records, error] of cases) {

@@ -1,4 +1,3 @@
-import { isSceneObject } from '@cssearth/objects';
 // Entry script: node site/build/prerender-level-pages.mts (in build:deploy, after bundle-netlify-functions.mts)
 /**
  * A level of the zoom ladder has no scene of its own: its page is the world host's page framed on it
@@ -34,7 +33,7 @@ if (typeof loaded !== 'object' || loaded === null || !('default' in loaded) || t
   throw new Error('netlify/functions-bundled/search.mjs has no default export handler; run site/build/bundle-netlify-functions.mts first.');
 }
 const handler = loaded.default as (request: Request) => Promise<Response>;
-const pages = readPreparedObjects(root).objects.filter(object => !isSceneObject(object)).map(object => object.id);
+const pages = readPreparedObjects(root).levels.map(level => level.id);
 for (const id of pages) {
   const response = await handler(new Request(`${origin}/.netlify/functions/search?object=${encodeURIComponent(id)}`));
   if (!response.ok) throw new Error(`${id}: the search function answered ${response.status} for /${id}/: ${(await response.text()).slice(0, 300)}`);

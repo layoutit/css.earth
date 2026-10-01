@@ -1,11 +1,12 @@
 import { objectIdAtPath } from '../root-object.mts';
-import { knownObject } from '../object-directory.mts';
+import { knownLevel } from '../object-directory.mts';
 import type { OverviewScope } from '../overview-context.mts';
 import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
 
 /** Every page is `/<id>/`. A page is either an object's own scene (a body, a star, a galaxy, a nebula, a cluster) or a level
  * of the zoom ladder the shared world draws around the mounted scene (the Milky Way, the Local Group, the nearby and the
- * observable universe). Both are entries of the one registry (`OBJECTS`). A level keeps whatever scene is mounted, and
+ * observable universe). An object is an entry of the one registry (`OBJECTS`); a level is one of the ladder's few views
+ * (`OVERVIEWS`). A level keeps whatever scene is mounted, and
  * its page opened cold mounts its host, the world's. This module
  * owns reading and writing those paths: every writer goes through it. The system overview of a star is the only overview
  * without an id of its own; it is its scene page's `overview=system`. */
@@ -15,7 +16,7 @@ export const WORLD_HOST_ID = SOLAR_SYSTEM_ID;
 
 /** The overviews that are pages: the registry's overview entries, every level of the zoom ladder above a star's system. */
 export type OverviewPageId = Exclude<OverviewScope, 'system'>;
-export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => typeof id === 'string' && knownObject(id)?.zoom !== undefined;
+export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => knownLevel(id) !== undefined;
 
 /** The page a URL names when it is something the mounted scene `sceneId` draws, not the scene itself; null on the
  * scene's own page. The URL is the selection from the moment it is named, before any bank has loaded. */

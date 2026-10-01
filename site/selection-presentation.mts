@@ -9,7 +9,7 @@ import { renderSourceLink, type SourceDocumentReference } from './source-link.mt
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
-import { knownObject } from './object-directory.mts';
+import { knownLevel } from './object-directory.mts';
 import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragment.mts';
 
 /** Present the selected subject in the retained cards and result rows. */
@@ -48,7 +48,7 @@ export function createSelectionPresentation(documentTarget: Document, {
   const objectName = (id: string) => WORLD_OBJECTS.find(object => object.id === id)?.name ?? '';
   const overviewName = ({ scope, systemId }: SceneOverview) => scope === 'system'
     ? systemById(WORLD_OBJECTS, systemId)?.name ?? 'Solar System'
-    : knownObject(scope)?.name ?? '';
+    : knownLevel(scope)?.name ?? '';
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     const overview = subject.kind === 'overview' ? subject.overview : null;
     // A level that is a member of a larger one (the Milky Way in the Local Group) is the subject its card measures from.

@@ -254,7 +254,7 @@ import Detached from './Detached.astro';
       <p class="object-destination-context"></p>
       <p class="object-destination-status" role="status"></p>
     </section></Detached>
-    {/* A page that opens on an overview or a catalogue focus shows that card; the body's waits off the page. */}
+    {/* A page that opens on an overview shows that card; the body's waits off the page. */}
     <Detached detached={pageId !== objectId}><ObjectInformationPanel {...Astro.props} /></Detached>
     <div class="object-sheet-sources"><SourcesLink objectId={objectId} name={Astro.props.title.label} /></div>
     </div>

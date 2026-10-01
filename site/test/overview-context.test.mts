@@ -88,11 +88,9 @@ test('zooming out from the Sun walks the registry overviews in their order, and 
 });
 
 test('the ladder is the overview entries: an authored fifth level is reached past its own threshold', async () => {
-  const { catalogueObject, isOverviewObject } = await import('@cssearth/objects');
-  const beyond = catalogueObject({ descriptor: { schema: 'cssearth-object@2', id: 'beyond-the-horizon', type: 'map-sphere', properties: { overview: { name: 'Beyond', description: 'A test level.', order: 5,
-    zoom: { enter: { distancePc: 3e10 }, returnBelow: { distancePc: 2e10 }, frame: { distance: { distancePc: 5e10 } } }, holds: [] } } }, sceneHostId: 'sun' },
-    () => async () => { throw new Error('unused'); });
-  assert.ok(isOverviewObject(beyond));
+  const { catalogueLevel } = await import('@cssearth/objects');
+  const beyond = catalogueLevel({ descriptor: { schema: 'cssearth-object@2', id: 'beyond-the-horizon', type: 'map-sphere', properties: { overview: { name: 'Beyond', description: 'A test level.', order: 5,
+    zoom: { enter: { distancePc: 3e10 }, returnBelow: { distancePc: 2e10 }, frame: { distance: { distancePc: 5e10 } } }, holds: [] } } } });
   const levels = [...OVERVIEWS, beyond], gpc = 1e9 * 3.085677581491367e16;
   assert.equal(overviewScopeAtCamera(camera(40 * gpc), 'observable-universe', context, undefined, levels), 'beyond-the-horizon');
   assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'observable-universe', context, undefined, levels), 'observable-universe');

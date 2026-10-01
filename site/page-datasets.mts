@@ -1,6 +1,7 @@
 import { publishDatasetPreview, sectionElements, showSection } from '@cssearth/renderer';
 import { objectIdAtPath } from './root-object.mts';
-import { knownObject } from './object-directory.mts';
+import { knownLevel } from './object-directory.mts';
+import { WORLD_HOST_ID } from './navigation/navigation-scope.mts';
 
 /** The datasets of a page the world draws around the mounted scene (an overview): its package's datasets, shown with the
  * shared dataset card inside its card and chosen, as on every page, by `?dataset=` on its own page. The card carries each
@@ -31,7 +32,8 @@ export function selectedPageDataset(url: string | URL, datasets: Pick<PageDatase
  * since choosing one would mean leaving that star for the page. */
 export function presentPageDatasets(document: ParentNode, url: string | URL, sceneId: string) {
   for (const datasets of readPageDatasets(document)) {
-    const page = knownObject(datasets.page), hosted = page?.zoom !== undefined && page.sceneHostId === sceneId;
+    // A level's datasets show on the scene that draws its page, the world's host.
+    const hosted = knownLevel(datasets.page) !== undefined && sceneId === WORLD_HOST_ID;
     if (datasets.root.hidden !== !hosted) datasets.root.hidden = !hosted;
     // Their tab goes with them: from another star the Observable Universe card showed a Datasets tab over nothing
     // (2026-10-01). A card left with no tab hides the row; one whose Datasets tab was open opens its first other tab.

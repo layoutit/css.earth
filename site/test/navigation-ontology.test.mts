@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
+import { OBJECTS, OVERVIEWS, SCENE_OBJECTS, requireObject, requirePage, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
-import { distanceDescription, isExtendedClassification, isOverviewObject, isPlacedObject, isSceneObject, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { distanceDescription, isExtendedClassification, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { resolve } from 'node:path';
@@ -21,13 +21,20 @@ test('every scene and every package the host draws has exactly one searchable de
   // A bank is context the world draws, never an object: none carries a catalogue entry.
   for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
   const overviews = await readOverviews(resolve('src/objects'));
-  assert.equal(OBJECTS.length, SCENE_OBJECTS.length + overviews.length);
-  for (const id of hosted) assert.ok(isSceneObject(requireObject(id)), id);
-  assert.deepEqual(OBJECTS.filter(isOverviewObject).map(object => object.id), overviews.map(overview => overview.id));
-  // One object can be more than one thing: the Local Group is a level and has a place in the world.
-  assert.ok(isPlacedObject(requireObject('local-group')) && isOverviewObject(requireObject('local-group')));
-  // Overviews are searched through their own rows (CatalogueOverviewRows.astro); everything else through the catalogue.
-  assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.filter(object => !isOverviewObject(object)).map(object => object.id)));
+  // The registry holds objects only, each with its own scene. A level of the zoom ladder is a view, not an object.
+  assert.equal(OBJECTS, SCENE_OBJECTS);
+  for (const id of hosted) assert.equal(requireSceneObject(id).id, id);
+  assert.deepEqual(OVERVIEWS.map(level => level.id), overviews.map(overview => overview.id));
+  for (const level of OVERVIEWS) assert.equal(OBJECTS.some(object => object.id === level.id), false, level.id);
+  // Every level still has its page: the layout and the sitemap find it, though the object registry does not hold it.
+  for (const level of OVERVIEWS) assert.equal(requirePage(level.id).route, `/${level.id}/`);
+  assert.equal(requirePage('mars').name, 'Mars');
+  const sitemap = await (await import('../pages/sitemap.xml.ts')).GET().text();
+  for (const level of OVERVIEWS) assert.ok(sitemap.includes(`/${level.id}/</loc>`), level.id);
+  // The Local Group is a level with a place of its own: the world draws and names it.
+  assert.ok(OVERVIEWS.find(level => level.id === 'local-group')?.worldFrame);
+  // Levels are searched through their own rows (CatalogueOverviewRows.astro); every object through the catalogue.
+  assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
   assert.equal(requireSceneObject('m31').id, 'm31');
   assert.throws(() => requireSceneObject('milky-way'), /no scene of its own/);
@@ -38,7 +45,7 @@ test('every scene and every package the host draws has exactly one searchable de
   // Each is a body of the world, placed by its own world frame.
   for (const id of hosted) {
     const object = requireObject(id);
-    assert.ok(isPlacedObject(object) && isExtendedClassification(object.classification) && Math.hypot(...object.worldFrame.originM) > 0, id);
+    assert.ok(isExtendedClassification(object.classification) && Math.hypot(...object.worldFrame.originM) > 0, id);
   }
 });
 
@@ -57,7 +64,6 @@ test('distance display and order use the prepared position, never the legacy orb
   assert.ok(!('distanceAu' in halley));
   assert.ok(SEARCH_OBJECTS.every((object, index) => index === 0 || object.distance.meters >= SEARCH_OBJECTS[index - 1]!.distance.meters));
   const cluster = requireObject('virgo-cluster');
-  assert.ok(isPlacedObject(cluster));
   // A cluster sits at its Cosmicflows-4 group's measured distance, a catalogue distance, not its redshift's comoving one.
   assert.equal(cluster.distance.quantity, 'catalogue');
   assert.equal(cluster.distance.epochJdTt, null, 'navigation epoch must not become a measured distance epoch');
@@ -89,9 +95,8 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   assert.equal(OBJECTS.some(o => o.id === satellite.id), false, 'a catalogue row without a package is data, never a destination');
   // The Milky Way row is detailed by the milky-way package, so it carries that id; its LVDB key stays in its source reference.
   assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'milky-way')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
-  assert.equal(isOverviewObject(OBJECTS.find(o => o.id === 'milky-way')!), true, 'a physical host does not fabricate a catalogue destination; its page is the overview');
+  assert.ok(OVERVIEWS.some(level => level.id === 'milky-way') && !OBJECTS.some(o => o.id === 'milky-way'), 'a physical host does not fabricate a catalogue destination; its page is the level');
   const m45 = OBJECTS.find(o => o.id === 'm45')!;
-  assert.ok(isPlacedObject(m45));
   assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
   assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
   assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);

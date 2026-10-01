@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { catalogueObject, isPlacedObject, isSceneObject } from '@cssearth/objects';
+import { catalogueObject } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { searchObjects } from '../search/object-search.mts';
 
@@ -17,7 +17,7 @@ test('a globular cluster package is an entry of the registry from its own descri
   assert.ok(Math.abs(distance.value - 100) < 1e-9);
   const focus = catalogueObject({ descriptor, distance, discovery: { featured: false, imagery: true, illustration: false } },
     () => async () => { throw new Error('unused'); });
-  assert.ok(isPlacedObject(focus) && isSceneObject(focus), 'a globular cluster is an object with a scene of its own, like any body');
+  assert.equal(typeof focus.loadScene, 'function', 'a globular cluster is an object with a scene of its own, like any body');
   const names = (focus as { searchNames?: readonly string[] }).searchNames;
   assert.ok(names);
   assert.equal(focus.classification, 'globular-cluster');

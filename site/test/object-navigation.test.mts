@@ -12,8 +12,8 @@ import { markerStyle, resolveMarkerStyle, validateMarkerPresentation } from "@cs
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
 test("search contains every object but the overviews, including the Sun; only planets enter the scale", () => {
-  // Overviews have no distance to order by; search lists them in their own rows (CatalogueOverviewRows.astro).
-  assert.deepEqual(new Set(SEARCH_OBJECTS), new Set(OBJECTS.filter(object => object.zoom === undefined)));
+  // The levels of the zoom ladder are not objects; search lists them in their own rows (CatalogueOverviewRows.astro).
+  assert.deepEqual(new Set(SEARCH_OBJECTS), new Set(OBJECTS));
   assert.ok(SEARCH_OBJECTS.some(({ id }) => id === "sun"));
   assert.ok(PLANET_NAVIGATION_OBJECTS.every(({ classification }) => classification === "planet"));
   const unknown = [
