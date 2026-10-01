@@ -10,6 +10,8 @@ export interface FlightBodyAnchor {
 // Apply the same scale to movement near BOTH bodies: destination-only range
 // control allows a nearby departing body to disappear in the first frame.
 const MAX_CLEARANCE_FRACTION = 10 ** .1 - 1;
+// The rounding of one sampled position, as a fraction of its focus distance plus its range: a sum and a product per axis.
+const POSITION_RESOLUTION = 4 * Number.EPSILON;
 
 /** Retimes the original curve without changing any position or orientation on it.
  * Call once per painted frame and retain the returned curve time across owners.
@@ -29,18 +31,28 @@ export function advanceSelectionFlightInto(flight: SelectionFlight, anchors: rea
   sampleSelectionFlightInto(flight, fromElapsedS, out);
   const x = out.positionM[0], y = out.positionM[1], z = out.positionM[2];
   const previousClearance = clearance(anchors, x, y, z);
+  const [focusX, focusY, focusZ] = flight.focusPositionM, focusDistanceM = Math.hypot(focusX, focusY, focusZ);
   const allowed = (time: number): boolean => {
     sampleSelectionFlightInto(flight, time, out);
     const [nextX, nextY, nextZ] = out.positionM;
     const limit = MAX_CLEARANCE_FRACTION * Math.min(previousClearance, clearance(anchors, nextX, nextY, nextZ));
-    return Math.hypot(nextX - x, nextY - y, nextZ - z) <= limit;
+    // A sample is its focus plus a direction times a range, so it resolves no finer than a few ulps of those two
+    // lengths: 64 m when the focus is a star 3.85e17 m away. A cap below that would be decided by rounding, so the
+    // cap is never smaller. Near the focus both lengths are small and the cap rules.
+    const resolution = POSITION_RESOLUTION * (focusDistanceM + Math.hypot(nextX - focusX, nextY - focusY, nextZ - focusZ));
+    return Math.hypot(nextX - x, nextY - y, nextZ - z) <= Math.max(limit, resolution);
   };
   const requested = Math.min(flight.durationS, requestedElapsedS);
   if (allowed(requested)) return requested;
+  // Bisect until the two times are neighbours. Leaving a 165 m body for a star 3.85e17 m away, the first permitted step
+  // is about 1e-17 s: 48 halvings of a 1/60 s frame stopped above it, kept `low` at the time it started from, and the
+  // flight never left its first frame (Itokawa to TRAPPIST-1, live, 2026-10-01).
   let low = fromElapsedS, high = requested;
-  for (let iteration = 0; iteration < 48; iteration++) {
+  for (let iteration = 0; iteration < 1100; iteration++) {
     const middle = (low + high) / 2;
+    if (middle <= low || middle >= high) break;
     if (allowed(middle)) low = middle; else high = middle;
+    if (low > fromElapsedS && high - low <= (low - fromElapsedS) * 2 ** -16) break;
   }
   sampleSelectionFlightInto(flight, low, out);
   return low;
