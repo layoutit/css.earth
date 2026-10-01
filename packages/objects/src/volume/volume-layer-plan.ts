@@ -51,4 +51,3 @@ export function readVolumeSlabInterval(value: unknown): VolumeSlabInterval {
       !integer(value.samples, 1, 4096)) throw new TypeError('Invalid physical volume slab interval.');
   return { start: value.start, end: value.end, samples: value.samples, startCell: value.startCell, endCell: value.endCell };
 }
-

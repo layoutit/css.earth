@@ -10,4 +10,3 @@ test('cutoff zero preserves every kept alpha and smooth cutoff distinguishes cen
   assert.ok(Math.abs(cloudDensityWeight(.5, filter) - .5) < 1e-14);
   assert.equal(cloudDensityWeight(.8, filter), 1);
 });
-

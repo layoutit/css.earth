@@ -39,4 +39,3 @@ export function readLayerOptimizationReport(value: unknown, plan: VolumeLayerPla
     targetNormalizedL1: value.targetNormalizedL1, estimatedNormalizedL1: { x: Number(errors.x), y: Number(errors.y), z: Number(errors.z) },
     status: met ? 'target-met' : 'budget-limited' };
 }
-

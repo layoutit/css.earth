@@ -15,4 +15,3 @@ export function cloudDensityWeight(density: number, filter: CloudDensityFilter):
   const width = cutoff * softness, low = cutoff - width / 2, t = Math.max(0, Math.min(1, (value - low) / width));
   return t * t * (3 - 2 * t);
 }
-
