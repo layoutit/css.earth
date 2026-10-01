@@ -1,0 +1,55 @@
+{
+  "id": "schlafly-2011-sfd-recalibration",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Measuring Reddening with SDSS Stellar Spectra and Recalibrating SFD",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2011ApJ...737..103S"
+    },
+    {
+      "type": "arxiv",
+      "value": "1012.4804"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...737..103S",
+      "label": "2011ApJ...737..103S"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1012.4804",
+      "label": "arXiv:1012.4804"
+    },
+    {
+      "role": "archive",
+      "url": "https://irsa.ipac.caltech.edu/applications/DUST/",
+      "label": "IRSA Galactic Dust Reddening and Extinction service"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/DUST/nph-dust?locstr=308.7175+60.15388889+equ+j2000",
+      "checkedOn": "2026-10-01",
+      "locator": "IRSA dust service at 308.7175, +60.15389 (NGC 6946): E(B-V) at the reference pixel 0.2945 mag (Schlafly & Finkbeiner 2011), 0.3425 mag (Schlegel et al. 1998); mean over the 5 arcmin region 0.2942 mag, standard deviation 0.0028 mag."
+    }
+  ],
+  "creators": [
+    "E. F. Schlafly",
+    "D. P. Finkbeiner"
+  ],
+  "publisher": "ApJ 737, 103",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Schlafly & Finkbeiner (2011), ApJ 737, 103; the values are served by the NASA/IPAC Infrared Science Archive.",
+      "scope": "The Milky Way's reddening toward NGC 6946",
+      "evidence": "https://irsa.ipac.caltech.edu/cgi-bin/DUST/nph-dust?locstr=308.7175+60.15388889+equ+j2000"
+    }
+  ]
+}

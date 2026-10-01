@@ -1,0 +1,41 @@
+{
+  "id": "noirlab-noao-ngc6946kpno",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spiral Galaxy NGC 6946",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "noao-ngc6946kpno"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-ngc6946kpno/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://storage.noirlab.edu/media/archives/images/large/noao-ngc6946kpno.jpg",
+      "label": "Large JPEG, 5430 x 3757 px"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://noirlab.edu/public/images/noao-ngc6946kpno/",
+      "checkedOn": "2026-10-01",
+      "locator": "5430 x 3757 px; 23.56 x 16.30 arcmin; centre RA 20h34m56.78s, Dec +60 08 26.66; north 90.0 deg left of vertical; U, B, V, R, I, H-alpha, [O III] and [S II] with the Mosaic I camera on the NSF Mayall 4-meter telescope. Measured against 284 Gaia DR3 stars the Large JPEG matches the page: centre 308.7365699, +60.1407805, 0.2604 arcsec per pixel, north 90.08 deg left of vertical (the recipe's observation). Found in the NOIRLab image archive search for NGC 6946."
+    }
+  ],
+  "publisher": "NSF NOIRLab",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "KPNO/NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage)/H. Schweiker (WIYN)",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/images/noao-ngc6946kpno/"
+    }
+  ]
+}

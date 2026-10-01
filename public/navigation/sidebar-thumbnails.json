@@ -115,6 +115,14 @@
       "bytes": 4464
     },
     {
+      "path": "src/objects/m101-layers/prepared/presentation.json",
+      "bytes": 1425
+    },
+    {
+      "path": "public/scenes/m101-layers/datasets/optical.webp",
+      "bytes": 11168
+    },
+    {
       "path": "src/objects/m2-9-volume/prepared/presentation.json",
       "bytes": 1863
     },
@@ -231,12 +239,28 @@
       "bytes": 5324
     },
     {
+      "path": "src/objects/ngc-2903-layers/prepared/presentation.json",
+      "bytes": 1458
+    },
+    {
+      "path": "public/scenes/ngc-2903-layers/datasets/optical.webp",
+      "bytes": 5180
+    },
+    {
       "path": "src/objects/ngc-300-layers/prepared/presentation.json",
       "bytes": 1424
     },
     {
       "path": "public/scenes/ngc-300-layers/datasets/optical.webp",
       "bytes": 15188
+    },
+    {
+      "path": "src/objects/ngc-6946-layers/prepared/presentation.json",
+      "bytes": 1494
+    },
+    {
+      "path": "public/scenes/ngc-6946-layers/datasets/optical.webp",
+      "bytes": 26340
     },
     {
       "path": "src/objects/omega-centauri-volume/prepared/presentation.json",
@@ -308,7 +332,7 @@
     },
     {
       "path": "src/objects/local-group/prepared/catalogue.json",
-      "bytes": 705298
+      "bytes": 706101
     }
   ],
   "images": {
@@ -501,6 +525,15 @@
       "credit": "CXC",
       "sourceUrl": "https://esahubble.org/images/potw1720f/"
     },
+    "m101-layers/optical": {
+      "url2x": "/navigation/focus-m101-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/m101-layers/prepared/presentation.json",
+        "public/scenes/m101-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m101ubviha/"
+    },
     "m2-9-volume/hst-optical": {
       "url2x": "/navigation/focus-m2-9-volume-hst-optical@2x.webp",
       "inputs": [
@@ -663,6 +696,15 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0902c/"
     },
+    "ngc-2903-layers/optical": {
+      "url2x": "/navigation/focus-ngc-2903-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-2903-layers/prepared/presentation.json",
+        "public/scenes/ngc-2903-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
     "ngc-300-layers/optical": {
       "url2x": "/navigation/focus-ngc-300-layers-optical@2x.webp",
       "inputs": [
@@ -671,6 +713,15 @@
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
+    },
+    "ngc-6946-layers/optical": {
+      "url2x": "/navigation/focus-ngc-6946-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-6946-layers/prepared/presentation.json",
+        "public/scenes/ngc-6946-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-ngc6946kpno/"
     },
     "omega-centauri-volume/eso1119b": {
       "url2x": "/navigation/focus-omega-centauri-volume-eso1119b@2x.webp",
@@ -773,6 +824,7 @@
     "helix-volume": "helix-volume/eso-wfi",
     "lmc-volume": "lmc-volume/horalek-widefield",
     "m1-volume": "m1-volume/hubble-optical",
+    "m101-layers": "m101-layers/optical",
     "m2-9-volume": "m2-9-volume/hst-optical",
     "m31-layers": "m31-layers/optical",
     "m33-layers": "m33-layers/optical",
@@ -784,7 +836,9 @@
     "m83-layers": "m83-layers/optical",
     "m87-volume": "m87-volume/eso-optical",
     "ngc-253-layers": "ngc-253-layers/optical",
+    "ngc-2903-layers": "ngc-2903-layers/optical",
     "ngc-300-layers": "ngc-300-layers/optical",
+    "ngc-6946-layers": "ngc-6946-layers/optical",
     "omega-centauri-volume": "omega-centauri-volume/eso1119b",
     "pds-70-disc": "pds-70-disc/dust",
     "smc-volume": "smc-volume/smc-horalek-wide",

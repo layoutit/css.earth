@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-2903",
+  "card": {
+    "text": "A barred spiral galaxy 9.2 million parsecs away, tilted 65° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2009aj-138-323t",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+        "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+        "checked": "2026-10-01",
+        "locator": "distance: 9.162 Mpc"
+      },
+      {
+        "catalogueId": "walter-2008-things",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2563",
+        "label": "Walter et al. (2008), THINGS: The H I Nearby Galaxy Survey, Table 1",
+        "checked": "2026-10-01",
+        "locator": "row NGC 2903: inclination 65 deg"
+      },
+      {
+        "catalogueId": "salo-2015-s4g-decompositions",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+        "label": "Salo et al. (2015), ApJS 219, 4, table7",
+        "checked": "2026-10-01",
+        "locator": "NGC2903, model _bdbarf: a Ferrers bar component"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A bar of stars crosses its centre, where stars are forming in a burst. Clouds of hydrogen lit by young stars line the bar.",
+    "sources": [
+      {
+        "catalogueId": "popping-2010-ngc2903-bar",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/521/A8/ReadMe",
+        "label": "Popping et al. (2010), A&A 521, A8",
+        "checked": "2026-10-01",
+        "quote": "The nearby barred spiral NGC 2903 has an active starburst at its centre and HII regions distributed along its bar."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 2903 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "SDSS9 color; Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-01",
+          "locator": "SDSS9 color"
+        }
+      ]
+    }
+  }
+}

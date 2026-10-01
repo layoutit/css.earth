@@ -30,6 +30,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/446/943/ReadMe",
       "checkedOn": "2026-09-29",
       "locator": "m81: 41 optical supernova remnants of M81 with J2000 positions; ngc300: 22 of NGC 300."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/446/943/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "m101: 73 optical supernova remnants of M101 with J2000 positions (from Matonick & Fesen 1997); ngc2903: 5 of NGC 2903 (from Sonbas et al. 2009)."
     }
   ],
   "creators": [
@@ -44,7 +49,7 @@
     {
       "kind": "credit",
       "text": "Cite Vucetic et al. (2015), MNRAS 446, 943.",
-      "scope": "M81 and NGC 300 supernova remnants",
+      "scope": "M81, NGC 300, M101 and NGC 2903 supernova remnants",
       "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/446/943/ReadMe"
     }
   ]

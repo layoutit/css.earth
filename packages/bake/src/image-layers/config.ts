@@ -5,7 +5,9 @@ export interface ImageLayerRecipe {
   schema: 'cssearth-image-layer-recipe@1';
   id: string;
   source: { path: string; dimensions: [number, number]; originalDimensions: [number, number];
-    parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string; license: 'CC-BY-4.0';
+    parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string;
+    /** `CC-BY` is an attribution licence stated without a version, as the Sloan Digital Sky Survey states its images'. */
+    license: 'CC-BY-4.0' | 'CC-BY';
     /** Milky Way stars in front of the galaxy, removed from the photograph before its layers are cut (./foreground.ts). */
     foregroundStars?: { path: string; raDegColumn: string; decDegColumn: string; gMagColumn: string; source: string; basis: string };
     /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
@@ -105,7 +107,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
   const kind = g.kind;
   if (kind !== 'inclined-disk' && kind !== 'line-of-sight-envelope') throw new TypeError('Unsupported image-layer geometry.');
   if (e.format !== 'webp') throw new TypeError('Image layers require WebP.');
-  if (s.license !== 'CC-BY-4.0') throw new TypeError('Unsupported source license declaration.');
+  if (s.license !== 'CC-BY-4.0' && s.license !== 'CC-BY') throw new TypeError(`Unsupported source license declaration: ${JSON.stringify(s.license)}; expected CC-BY-4.0 or CC-BY.`);
   if (!Array.isArray(g.depthWeights) || g.depthWeights.length < 3 || g.depthWeights.length > 64) throw new TypeError('depthWeights must contain 3-64 values.');
   const weights = g.depthWeights.map((v, i) => positive(v, `depthWeights[${i}]`));
   if(!Array.isArray(g.depthScales)||g.depthScales.length!==weights.length)throw new TypeError('depthScales must align with depthWeights.');

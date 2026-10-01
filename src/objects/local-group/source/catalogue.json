@@ -18,7 +18,7 @@
   },
   "provenance": {
     "path": "provenance.json",
-    "bytes": 7490
+    "bytes": 9162
   },
   "catalogueSourceId": "lvdb-v1.1.1",
   "membershipSourceId": "mcconnachie-table1-2019",
@@ -229,6 +229,18 @@
     "m49": {
       "id": "m49",
       "focusRadiusM": 2.628997299430645e+21
+    },
+    "ngc_6946": {
+      "id": "ngc-6946",
+      "focusRadiusM": 539993576760989250000
+    },
+    "m_101": {
+      "id": "m101",
+      "focusRadiusM": 901017853795479200000
+    },
+    "ngc_2903": {
+      "id": "ngc-2903",
+      "focusRadiusM": 617135516298273500000
     }
   },
   "distanceOverrides": {
@@ -240,6 +252,13 @@
         "statisticalPc": 470,
         "systematicPc": 810
       }
+    },
+    "m_101": {
+      "valuePc": 6714288.52926,
+      "minusPc": 137710.155706,
+      "plusPc": 140593.735267,
+      "method": "cepheids",
+      "sourceRef": "Riess2016ApJ...826...56R"
     }
   },
   "citedRows": {

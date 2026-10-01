@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-6946-layers",
+  "name": "Fireworks Galaxy (NGC 6946)",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-6946-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-6946-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-6946-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "NOIRLab · optical",
+      "title": "NGC 6946 in visible light",
+      "description": "The Mayall 4-metre view of NGC 6946 with Milky Way foreground stars removed and the whole-galaxy colour tied to RC3's measured B-V less the Milky Way's reddening, 0.51, on a disc tilted 33° with a 449 pc layer.",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "detail": "5430 × 3757 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Mayall 4-m Mosaic U B V R I, Hα, [O III], [S II]"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "5430 × 3757"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "23.57 × 16.31 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-6946-layers/source/source.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/noao-ngc6946kpno.jpg"
+      }
+    }
+  ]
+}

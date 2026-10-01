@@ -101,6 +101,18 @@
           "citation": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc."
         }
       ]
+    },
+    {
+      "id": "m101-distance-citation",
+      "url": "https://arxiv.org/abs/1604.01424",
+      "citation": "M101's distance, from its Cepheids: the distance its nearby-universe dot is placed at, in place of the catalogue's 2009 Extragalactic Distance Database modulus (29.21).",
+      "references": [
+        {
+          "id": "Riess2016ApJ...826...56R",
+          "url": "https://arxiv.org/abs/1604.01424",
+          "citation": "Riess et al. (2016), ApJ 826, 56, Table 5 (Approximations for Distance Parameters), row M101: Cepheid distance modulus mu_Ceph = 29.135 +/- 0.045, d = 6.71 Mpc."
+        }
+      ]
     }
   ],
   "release": {
@@ -118,6 +130,14 @@
       "statisticalPc": 470,
       "systematicPc": 810,
       "reason": "Direct published eclipsing-binary distance replaces older Cioni2000 modulus in this pinned LVDB release; errors remain separate."
+    },
+    "m_101": {
+      "publication": "Riess et al. (2016), ApJ 826, 56",
+      "url": "https://arxiv.org/abs/1604.01424",
+      "valuePc": 6714288.52926,
+      "minusPc": 137710.155706,
+      "plusPc": 140593.735267,
+      "reason": "Published Cepheid distance modulus 29.135 +/- 0.045 (Table 5) replaces the Tully2009 modulus 29.21 in this pinned LVDB release, so M101 sits where its nearby-universe dot does."
     }
   },
   "selection": {

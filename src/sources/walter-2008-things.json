@@ -1,0 +1,64 @@
+{
+  "id": "walter-2008-things",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "THINGS: The H I Nearby Galaxy Survey",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2008AJ....136.2563W"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/136/2563"
+    },
+    {
+      "type": "arxiv",
+      "value": "0810.2125"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2008AJ....136.2563W",
+      "label": "2008AJ....136.2563W"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2563",
+      "label": "CDS J/AJ/136/2563"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0810.2125",
+      "label": "arXiv:0810.2125"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/136/2563/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "table1 (properties of the THINGS sample galaxies): NGC 2903 at 143.04208, +21.50111, inclination 65 deg, position angle 204 deg (from de Blok et al. 2008); NGC 5457 (M101) at 210.80250, +54.34917, inclination 18 deg, position angle 39 deg (from Bosma et al. 1981); NGC 6946 at 308.71750, +60.15389, inclination 33 deg, position angle 243 deg (from de Blok et al. 2008). Query: SELECT * FROM \"J/AJ/136/2563/table1\" WHERE Name IN ('NGC 2903','NGC 6946','NGC 5457')"
+    }
+  ],
+  "creators": [
+    "F. Walter",
+    "E. Brinks",
+    "W. J. G. de Blok",
+    "F. Bigiel",
+    "R. C. Kennicutt",
+    "M. D. Thornley",
+    "A. Leroy"
+  ],
+  "publisher": "AJ 136, 2563",
+  "publicationDate": "2008",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Walter et al. (2008), AJ 136, 2563.",
+      "scope": "Disc centres and orientations of NGC 2903, M101 and NGC 6946",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/136/2563/ReadMe"
+    }
+  ]
+}
