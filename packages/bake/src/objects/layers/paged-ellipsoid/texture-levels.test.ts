@@ -110,3 +110,18 @@ test('a reuse run drops a texture level width the recipe no longer lists, at the
   assert.equal(keepTextureLevelWidths(published, [512, 1024, 2048], 2048), published, 'nothing dropped, nothing rebuilt');
   assert.throws(() => keepTextureLevelWidths(published, [256, 2048], 2048), /can only drop texture level widths/u);
 });
+
+test('pages of different sizes in one bank keep their packed offsets; only a sparser bank of the same page scales', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'texture-sheet-mixed-'));
+  const page = (size: number, colour: string) => sharp({ create: { width: size, height: size, channels: 4, background: colour } }).webp({ lossless: true }).toBuffer();
+  await writeFile(join(directory, 'test-surface.webp'), await page(32, '#ff0000'));
+  await writeFile(join(directory, 'test-surface-page-1.webp'), await page(16, '#0000ff'));
+  const levels = await prepareTextureLevels({ publicDirectory: directory,
+    config: { textureLevels: { widths: [16, 32], hysteresis: 0.2, texelsPerCssPixel: 2 }, atlas: { pageSize: 32, density: 16 },
+      camera: { logicalBodyDiameter: 460 }, publicBase: '/scenes/test/' },
+    banks: [{ id: 'normal', urls: ['/scenes/test/test-surface.webp', '/scenes/test/test-surface-page-1.webp'] }] });
+  const [coarse] = levels!.textureLevels.levels;
+  // Earth's polar bands are narrower pages than its middle bands: the 16 px page sits at 32 canonical px, 2 CSS px at
+  // density 16, not scaled by the widest page's width over its own.
+  assert.deepEqual(coarse!.tiles?.['page:normal:1'], { x: 2, y: 0, scale: 3 });
+});

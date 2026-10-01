@@ -159,9 +159,10 @@ export async function prepareTextureLevels({ config, plan, datasets, publicDirec
   const sheetUrls = new Map<string, { key: string; url: string; tiles: { x: number; y: number; scale: number }[] }>();
   const replaced = new Set<string>();
   // Every bank's pages cover the same CSS pages; a bank prepared at lower density (Earth's cutaway shell) has smaller
-  // page images. A tile offset is in CSS px of a page, so a packed position scales by the densest page's width over
-  // its own before the atlas density converts it.
-  const fullPageWidth = Math.max(...banks.flatMap(bank => bank.urls.map(url => pageDimensions.get(url)!.width)));
+  // page images. A tile offset is in CSS px of a page, so a packed position scales by the densest bank's width of that
+  // same page over its own before the atlas density converts it. Pages within one bank differ in size (Earth's polar
+  // bands are narrower), so the comparison is per page, never against the widest page of all.
+  const fullPageWidths = banks[0]!.urls.map((_, p) => Math.max(...banks.map(bank => pageDimensions.get(bank.urls[p]!)!.width)));
   for (const bank of banks) {
     const dimensions = bank.urls.map(url => pageDimensions.get(url)!);
     if (dimensions.some(page => page.width !== page.height)) continue;
@@ -188,7 +189,7 @@ export async function prepareTextureLevels({ config, plan, datasets, publicDirec
         const key = `sheet:${bank.id}:level:${levelWidth}`;
         entries.push({ key, url, decodedBytes: side * side * 4, pool: 'pages' });
         sheet = { key, url, tiles: dimensions.map((page, p) => {
-          const toCss = fullPageWidth / page.width / config.atlas.density;
+          const toCss = fullPageWidths[p]! / page.width / config.atlas.density;
           return { x: packed.positions[p]!.x * toCss, y: packed.positions[p]!.y * toCss, scale: packed.side / page.width };
         }) };
         sheetUrls.set(cacheKey, sheet);
