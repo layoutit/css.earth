@@ -59,6 +59,9 @@ export default defineConfig({
     // Workers are bundled on their own plugins. They read the objects package from its sources too, so a worker keeps only
     // the object contracts it calls; renderer modules in a worker keep the bundling they had.
     worker: { plugins: () => [packageSources(['@cssearth/objects'])] },
+    // Other sessions' worktrees under .claude/ and scratch runs in output/ are not this site: a change there forced a full
+    // reload of every module, longer than the module runner's 60 s limit, and froze a bake photographing the site (2026-09-30).
+    server: { watch: { ignored: ['**/.claude/**', '**/output/**'] } },
     define: {
       __CSSEARTH_VERSION__: JSON.stringify(cssEarthVersion()),
     },
