@@ -14,7 +14,6 @@ export * from './object.ts';
 export * from './observed-polar.ts';
 export * from './photometric-contract.ts';
 export * from './photometric-disc.ts';
-export * from './polar-continuation.ts';
 export * from './polar-dome.ts';
 export * from './polar-source-contract.ts';
 export * from './presentation-contract.ts';

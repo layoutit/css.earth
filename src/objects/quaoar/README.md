@@ -29,7 +29,8 @@ Ring-image check · Inspected views.
 - Oblate versus triaxial shape remains unresolved. The pole assumes alignment with
   the rings; 8.8394 h versus 17.6788 h spin interpretations remain model-dependent.
 - Ring widths are drawn as uniform circular bands. The dense arc is not
-  reconstructed, and gray color and opacity are not measured reflectance or optical depth.
+  reconstructed. Both rings are drawn at the published normal optical depth of about 0.004
+  ([Pereira et al. 2023](https://doi.org/10.1051/0004-6361/202346365)), one display level, so they barely show.
 - Surface detail is unresolved. No sidereal spin or precise rotational phase is installed.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Credits](NOTICE.md)
@@ -56,8 +57,8 @@ unmapped terrain.
 The adopted Q1R and Q2R radii are 4057.2 km and 2520 km. Q1R uses the 76.4 km width
 of the tenuous component measured at one Gemini chord as a circular schematic.
 Its actual width varies with azimuth; the dense arc is not reconstructed. Q2R uses
-the published typical 10 km width. Uniform gray and display opacity are
-illustrative. Both bands use the shared terrestrial ring preparation capability.
+the published typical 10 km width. Each ring's opacity is 1 − exp(−0.004), and its colour
+the neutral gray of a body without a measured colour; a display opacity of 0.4 was removed on 2026-10-01. Both bands use the shared terrestrial ring preparation capability.
 
 The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md) reproduces the
 pinned radii from [measurements](source/measurements.json).

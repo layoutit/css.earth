@@ -13,6 +13,11 @@
  * (https://www.w3.org/TR/css-color-4/#gamut-mapping). The measured colour itself stays in the catalogue and on the body. */
 export const SKY_BACKGROUND = '#000000';
 export const TEXT_CONTRAST_MINIMUM = 4.5;
+/** The catalogue colour of every body with no measured colour: one neutral gray, so no two unmeasured bodies differ by a
+ * colour nobody measured. It is achromatic, which is how the context tells it from a measured colour (contextColour). */
+export const NEUTRAL_CATALOGUE_COLOUR = '#9a9a9a';
+/** The same gray as sRGB bytes, for prepared images (a ring with no measured colour). */
+export const NEUTRAL_CATALOGUE_RGB: readonly [number, number, number] = [0x9a, 0x9a, 0x9a];
 /** The world context's own marker, orbit and label colour for a body with no colour of its own. */
 export const DEFAULT_CONTEXT_COLOUR = '#dfdfdf';
 

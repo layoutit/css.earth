@@ -19,42 +19,6 @@
     },
     {
       "kind": "download",
-      "path": "surface/juno-pia24239-north-pole-detail.tif",
-      "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
-      "groups": [
-        "refresh",
-        "refresh-polar"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "surface/juno-pia23808-north-polar-projection.jpg",
-      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
-      "groups": [
-        "refresh",
-        "refresh-polar"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
-      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg",
-      "groups": [
-        "refresh",
-        "refresh-polar"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "surface/juno-pia21382-south-pole-visible.jpg",
-      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg",
-      "groups": [
-        "refresh",
-        "refresh-polar"
-      ]
-    },
-    {
-      "kind": "download",
       "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
       "groups": [

@@ -54,7 +54,7 @@
       "id": "pds-rings-node-table",
       "subject": "PDS Rings Node Uranus ring table",
       "status": "included",
-      "finding": "Ring radii, widths and normal optical depths come from the PDS table, whose labels and measurements preparation verifies before baking one transparent ring texture and one planet-shadow texture; extremely narrow rings receive a recorded minimum-pixel presentation width while their radii and ordering stay put.",
+      "finding": "Ring radii, widths and normal optical depths come from the PDS table; each ring's opacity is 1 - exp(-optical depth) with no gain. Extremely narrow rings receive a recorded minimum-pixel presentation width while their radii and ordering are unchanged.",
       "evidence": [
         "https://pds-rings.seti.org/uranus/uranus_rings_table.html"
       ]
@@ -62,11 +62,12 @@
     {
       "id": "nasa-ring-colour-interpretation",
       "subject": "NASA public Uranus facts ring colours",
-      "status": "included",
-      "finding": "NASA's public facts supply the documented gray inner-ring, reddish Nu and blue Mu colour interpretation used for the prepared rings.",
+      "status": "excluded",
+      "finding": "NASA's facts page describes the inner rings as gray, Nu as reddish and Mu as blue, in words; no ring colour is measured as a value, so the hex colours once made from those words were removed and every ring is the neutral gray of a body without a measured colour.",
       "evidence": [
         "https://science.nasa.gov/uranus/facts/"
-      ]
+      ],
+      "revisitWhen": "A measured ring colour, as a spectrum or band ratios, is published."
     },
     {
       "id": "psg-charts",

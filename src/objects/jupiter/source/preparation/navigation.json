@@ -3,11 +3,7 @@
   "objectId": "jupiter",
   "owner": "object",
   "presentation": {
-    "size": 16,
-    "ringAngle": -2,
-    "ringExtra": 6,
-    "ringHeight": 3,
-    "ringOpacity": 0.25
+    "size": 16
   },
   "source": {
     "path": "presentation/navigation-marker.png"

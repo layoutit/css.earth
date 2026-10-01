@@ -6,7 +6,9 @@ export type SourcePin = s.Infer<typeof sourcePin>;
 export const webpEncoding = obj({quality: opt(n), alphaQuality: opt(n), lossless: opt(s.boolean), nearLossless: opt(s.boolean), smartSubsample: opt(s.boolean), effort: opt(n), preset: opt(s.literal('default', 'picture', 'photo', 'drawing', 'icon', 'text'))});
 const radiusMapping = s.union(obj({kind: s.literal('linear'), scale: n}), obj({kind: s.literal('piecewise-log'), knots: arr(vector2)}));
 export type RadiusMapping = s.Infer<typeof radiusMapping>;
-const bandCommon = {color: vector3, opacity: n, arcs: opt(obj({centers: arr(n), halfWidth: n}))};
+/** A ring band is drawn from its published normal optical depth alone: its opacity is 1 - exp(-opticalDepth) and its colour
+ * the neutral gray of a body with no measured colour (rings.ts). A recipe sets neither. */
+const bandCommon = {opticalDepth: n, arcs: opt(obj({centers: arr(n), halfWidth: n}))};
 const band = s.union(
   obj({...bandCommon, envelope: s.literal('constant'), bounds: vector2, inclusive: opt(s.tuple(s.boolean, s.boolean))}),
   obj({...bandCommon, envelope: s.literal('tent'), center: n, width: n, edgeGain: n, minimumHalfWidthPixels: opt(n)}),
@@ -18,7 +20,7 @@ export type RadialShadow = s.Infer<typeof shadow>;
 const overlay = obj({kind: s.literal('projected-strip-shadow'), bodyRadius: n, outerRadius: n, direction: vector2, color: vector3, startFraction: n, edgeFraction: n, maximumAlpha: n, centerInset: n, marginPixels: n, output: str, encoding: webpEncoding});
 export type RadialOverlay = s.Infer<typeof overlay>;
 const common = {size: n, densities: arr(n), output: str, encoding: webpEncoding, densityMode: opt(s.literal('independent', 'downsample-highest')), overlays: opt(arr(overlay))};
-const annular = obj({...common, kind: s.literal('annular-field'), outerRadius: n, grid: obj({centerInset: n, sampleOffset: n, marginPixels: n, scaleOrder: s.literal('divide-multiply', 'multiply-hypot')}), composition: s.literal('maximum', 'front-to-back'), alphaUnits: n, maximumAlpha: n, mapping: radiusMapping, bands: arr(band), defaultColor: opt(vector3), shadow: opt(shadow), wedges: opt(obj({count: n}))});
+const annular = obj({...common, kind: s.literal('annular-field'), outerRadius: n, grid: obj({centerInset: n, sampleOffset: n, marginPixels: n, scaleOrder: s.literal('divide-multiply', 'multiply-hypot')}), composition: s.literal('maximum', 'front-to-back'), alphaUnits: n, maximumAlpha: n, mapping: radiusMapping, bands: arr(band), shadow: opt(shadow), wedges: opt(obj({count: n}))});
 export type AnnularLayer = s.Infer<typeof annular>;
 const operationCommon = {bounds: vector2, inclusive: opt(s.tuple(s.boolean, s.boolean))};
 const operation = s.union(

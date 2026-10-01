@@ -10,7 +10,6 @@ import sharp from 'sharp';
 import {imageFixture} from '../../geometry/fixtures/fits-helpers.mts';
 import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '@cssearth/bake/objects/layers/giant';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from '@cssearth/bake/objects/layers/giant';
 const sourceDirectory=new URL('src/objects/jupiter/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/')).pathname;
 const recipe=JSON.parse(await readFile(sourceDirectory+'/preparation/observations.json','utf8'));
 
@@ -70,13 +69,4 @@ test('dated RGB maps intersect all component footprints and preserve the shared 
   assert.deepEqual(result.datasets.controls[0].step,dataset.control.step);
   assert.equal(result.assets.length,5);
  }finally{await rm(root,{recursive:true,force:true});}
-});
-
-test('measured polar harmonic continuation is bounded and leaves untransitioned rows intact',()=>{
- const source={data:Buffer.alloc(64*32*3,80),info:{width:64,height:32,channels:3}};
- const polar=preparePolarContinuationAtlas({source,tileSize:16,firstMeasuredRow:4,lastMeasuredRow:27,measuredHeight:32});
- assert.equal(polar.width,32);assert.equal(polar.height,16);assert.ok(polar.transparentPixelRatio>0);
- assert.ok(polar.data.some((value,index)=>index%4===3&&value===0));assert.ok(polar.data.some((value,index)=>index%4===3&&value===255));
- assert.deepEqual(preparePolarSurfaceTransition({source,polarDetails:{}}).data,source.data);
- assert.throws(()=>preparePolarContinuationAtlas({source,tileSize:8,firstMeasuredRow:4,lastMeasuredRow:27,measuredHeight:32}),/invalid/);
 });

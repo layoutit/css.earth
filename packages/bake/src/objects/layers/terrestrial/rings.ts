@@ -1,5 +1,6 @@
 import { shape, text, number, array } from '@cssearth/core';
-const parseRingProfile = shape({textureSize:number,bands:array(shape({id:text,segments:number,innerRadiusKm:number,outerRadiusKm:number,displayValue:number,displayOpacity:number,qualification:text}))});
+import { NEUTRAL_CATALOGUE_RGB } from '@cssearth/objects';
+const parseRingProfile = shape({textureSize:number,bands:array(shape({id:text,segments:number,innerRadiusKm:number,outerRadiusKm:number,normalOpacity:number,qualification:text}))});
 export type TerrestrialRings = ReturnType<typeof parseRingProfile>;
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -7,7 +8,8 @@ import { prepareRingLeaves } from '../shape-model/index.ts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/index.ts';
 import { publishedImageSize } from '../shape-model/index.ts';
 
-/** Ring geometry and display assumptions are authored by the body. */
+/** A ring is drawn from its measured dimensions and its published normal opacity, in the neutral gray of a body with no
+ * measured colour. A recipe sets no colour. */
 export function validateTerrestrialRings(input: unknown, referenceRadiusKm: number): asserts input is TerrestrialRings | undefined {
   if (input === undefined) return;
   const profile = parseRingProfile(input);
@@ -20,10 +22,9 @@ export function validateTerrestrialRings(input: unknown, referenceRadiusKm: numb
     if (!/^[a-z][a-z0-9-]*$/.test(band.id) || !Number.isInteger(band.segments) || band.segments < 16 || band.segments > 512 ||
         !Number.isFinite(band.innerRadiusKm) || band.innerRadiusKm <= referenceRadiusKm ||
         !Number.isFinite(band.outerRadiusKm) || band.outerRadiusKm <= band.innerRadiusKm ||
-        !Number.isInteger(band.displayValue) || band.displayValue < 0 || band.displayValue > 255 ||
-        !Number.isFinite(band.displayOpacity) || band.displayOpacity < 0 || band.displayOpacity > 1 ||
+        !Number.isFinite(band.normalOpacity) || band.normalOpacity < 0 || band.normalOpacity > 1 ||
         typeof band.qualification !== 'string' || !band.qualification.trim()) {
-      throw new TypeError('Invalid annulus dimensions or display interpretation.');
+      throw new TypeError('Invalid annulus dimensions or normal opacity.');
     }
   }
 }
@@ -54,7 +55,7 @@ export async function prepareTerrestrialRings({ config, publicDirectory }: {conf
         const coordinate=(axis:number)=>(m[axis] * x + m[4 + axis] * y + m[12 + axis]) / w;
         return [coordinate(0), coordinate(1), coordinate(2)];
       });
-      faces.push({ vertices, color: [band.displayValue, band.displayValue, band.displayValue, Math.round(band.displayOpacity * 255)] });
+      faces.push({ vertices, color: [...NEUTRAL_CATALOGUE_RGB, Math.round(band.normalOpacity * 255)] });
     });
   }
   const extent = Math.max(...faces.flatMap(face => face.vertices.flatMap(v => [Math.abs(v[0]), Math.abs(v[1])])));

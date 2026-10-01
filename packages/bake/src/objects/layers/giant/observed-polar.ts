@@ -1,6 +1,5 @@
 import type {Channels} from 'sharp';
-import type { ObservedRgb, PolarDetails } from './polar-continuation.ts';
-import type { DetailImage } from './polar-source-contract.ts';
+import type { ObservedRgb } from './polar-dome.ts';
 import { parseObservedPolarSource } from './polar-source-contract.ts';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -10,7 +9,6 @@ import {planetographicRowsToMeshLatitude} from '../../geometry/index.ts';
 import { readFitsPrimary } from '@cssearth/fits';
 import {verifyObservationSources} from '../observed-surfaces/index.ts';
 import { latitudeRasterBands } from './geometry.ts';
-import { preparePolarContinuationAtlas, preparePolarSurfaceTransition } from './polar-continuation.ts';
 import { compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings, type DomeRingWarp, type PoleProjection } from './polar-dome.ts';
 import { validateRelativePath } from './relative-path.ts';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../observed-surfaces/index.ts';
@@ -29,13 +27,12 @@ export function parseObservedPolarRecipe(input: unknown) {
     if(!/^[a-z][a-z0-9-]*$/.test(dataset.id)||ids.has(dataset.id))throw new TypeError('Invalid observed polar dataset operation.');
     ids.add(dataset.id);source(dataset.source);
     for(const filename of Object.values(dataset.files)){validateRelativePath(filename);if(outputs.has(filename))throw new TypeError('Observed polar outputs must be unique.');outputs.add(filename);}
-    for(const detail of Object.values(dataset.polarDetails??{})){source(detail.structure.path);if(detail.palette)source(detail.palette.path);}
-    if(dataset.operation==='rgb-polar-structure'&&(!Number.isInteger(dataset.coverage.columnStride)||dataset.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
+    if(dataset.operation==='rgb-measured-rows'&&(!Number.isInteger(dataset.coverage.columnStride)||dataset.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
     if(dataset.operation==='rgb-observed-gaps'){
       if(dataset.coverageSources.length!==3||!(dataset.planetographicAxisRatio>=1))throw new TypeError('RGB maps require three component coverage maps and an ellipsoid ratio.');
       dataset.coverageSources.forEach(source);
     }
-    if(dataset.operation==='scalar-observed-gaps'&&(!Array.isArray(dataset.palette)||dataset.palette.length<2||Object.keys(dataset.polarDetails??{}).length>0||dataset.scalar.range&&!(dataset.scalar.range[1]>dataset.scalar.range[0])))throw new TypeError('Invalid measured scalar parameters.');
+    if(dataset.operation==='scalar-observed-gaps'&&(!Array.isArray(dataset.palette)||dataset.palette.length<2||dataset.scalar.range&&!(dataset.scalar.range[1]>dataset.scalar.range[0])))throw new TypeError('Invalid measured scalar parameters.');
   }
   return {...config,sourcePins:[...sourcePaths].map(path=>({path}))};
 }
@@ -45,7 +42,6 @@ export function parseObservedPolarRecipe(input: unknown) {
 export function polarImageProjection(config: unknown): PoleProjection {
   const recipe=parseObservedPolarRecipe(config);
   const projections=recipe.datasets.map(dataset=>{
-    if(dataset.operation==='rgb-polar-structure')return{id:dataset.id,edgeLatitudeDegrees:dataset.continuation.measuredProjectionEdgeLatitudeDegrees??dataset.continuation.edgeLatitudeDegrees,scale:dataset.continuation.overlap??1.035};
     if((dataset.projection.projection??'latitude-linear')!=='latitude-linear')throw new TypeError(`${recipe.namespace} dataset ${dataset.id}: pole tiles in the ${dataset.projection.projection} projection cannot share a dome with latitude-linear ones.`);
     return{id:dataset.id,edgeLatitudeDegrees:dataset.projection.boundaryLatitudeDegrees,scale:dataset.projection.overlap??1.035};
   });
@@ -70,11 +66,6 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
     maps=new Map<string, {data: Uint8Array; width: number; height: number; channels: number}>(),
     coverage: Record<string, Record<string, unknown>>={},controls=[];
   const {width,height,polarTileSize}=recipe.dimensions;
-  const load=async (spec: DetailImage)=>{
-    let pipeline=sharp(requireSource(sources,spec.path)).removeAlpha();
-    if(spec.extract)pipeline=pipeline.extract(spec.extract);
-    return pipeline.resize(polarTileSize*2,polarTileSize*2,spec.resize).raw().toBuffer({resolveWithObject:true});
-  };
   const add=async(filename: string,data: Buffer)=>{
     const info=await sharp(data).metadata();
     if (!info.width || !info.height) throw new Error(`Observed asset has no dimensions: ${filename}`);
@@ -91,20 +82,23 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
   };
   for(const dataset of recipe.datasets) {
     let source1x: ObservedRgb,source2x: ObservedRgb;
-    let polar: ReturnType<typeof preparePolarContinuationAtlas> | ReturnType<typeof prepareMeasuredPolarAtlas>;
+    let polar: ReturnType<typeof prepareMeasuredPolarAtlas>;
     let sourceRange: [number,number] | undefined;
     let measured: {firstMeasuredRow: number; lastMeasuredRow: number; sourceMissingPixels?: number};
-    const bytes=requireSource(sources,dataset.source),details: PolarDetails={};
-    if(dataset.operation==='rgb-polar-structure') {
-      const original=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
-      measured=measureRgbCoverage(original,dataset.coverage);
-      source2x=await sharp(original.data,{raw:original.info}).resize(width*2,height*2,{fit:'fill'}).raw().toBuffer({resolveWithObject:true});
-      source1x=await sharp(original.data,{raw:original.info}).resize(width,height,{fit:'fill'}).raw().toBuffer({resolveWithObject:true});
-      for(const pole of ['north','south'] as const) { const detail=dataset.polarDetails[pole]; if(detail)details[pole]={...detail,structure:await load(detail.structure),palette:await load(detail.palette)}; }
-      const {edgeLatitudeDegrees,...continuation}=dataset.continuation;
-      polar=preparePolarContinuationAtlas({source:source2x,tileSize:polarTileSize*2,firstMeasuredRow:Math.round((90-edgeLatitudeDegrees)/180*(original.info.height-1)),lastMeasuredRow:Math.round((90+edgeLatitudeDegrees)/180*(original.info.height-1)),measuredHeight:original.info.height,polarDetails:details,...continuation});
-      source2x=preparePolarSurfaceTransition({source:source2x,polarDetails:details,...dataset.transition});
-      source1x=preparePolarSurfaceTransition({source:source1x,polarDetails:details,...dataset.transition});
+    const bytes=requireSource(sources,dataset.source);
+    if(dataset.operation==='rgb-measured-rows') {
+      // The map's own rows are all it shows: a row outside the pinned measured range is missing, and nothing is drawn into it.
+      const image=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
+      measured=measureRgbCoverage(image,dataset.coverage);
+      const pixels=image.info.width*image.info.height,data=Buffer.alloc(pixels*4),missing=new Uint8Array(pixels).fill(1);
+      for(let row=measured.firstMeasuredRow;row<=measured.lastMeasuredRow;row++)for(let column=0;column<image.info.width;column++){
+        const i=row*image.info.width+column;
+        data.set(image.data.subarray(i*image.info.channels,i*image.info.channels+3),i*4);data[i*4+3]=255;missing[i]=0;
+      }
+      const original={data,info:{width:image.info.width,height:image.info.height,channels:4},missing};
+      source1x=resizeObservedRgb(original,width,height);source2x=resizeObservedRgb(original,width*2,height*2);
+      measured={...measured,sourceMissingPixels:missing.reduce((sum,n)=>sum+n,0)};
+      polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...dataset.projection});
     } else if(dataset.operation==='rgb-observed-gaps') {
       const image=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
       const masks=dataset.coverageSources.map(path=>{

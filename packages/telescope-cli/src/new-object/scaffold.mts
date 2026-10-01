@@ -4,6 +4,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { NEUTRAL_CATALOGUE_COLOUR } from '@cssearth/objects';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
@@ -16,7 +17,7 @@ const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
 export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK?: number; readonly temperatureSource?: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number; readonly aliases?: readonly string[]; readonly featured?: true;
   /** A black hole instead of a star: its record's radius is the measured shadow, drawn black. It has no temperature, so its catalogue colour is the shared neutral gray. */
   readonly blackHole?: { readonly shadowSource: string } }
-const NEUTRAL_GRAY = '#9a9a9a', SHADOW_BLACK = '#000000';
+const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOUR, SHADOW_BLACK = '#000000';
 
 /** The emissive stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. The plates keep
  * their native sizes even when solar-system.json enlarges the sphere: the silhouette fit already draws them at the drawn sphere. */

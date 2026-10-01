@@ -62,8 +62,8 @@ export function parseRadialLayerRecipe(input: unknown) {
           (index > 0 && (knot[0] <= mapping.knots[index - 1][0] || knot[1] <= mapping.knots[index - 1][1])))) fail('invalid radius mapping.');
       if (!isArray(layer.bands) || layer.bands.length === 0) fail('empty annular field.');
       for (const band of layer.bands) {
-        if (!['constant', 'tent', 'smooth-annulus'].includes(band.envelope) || !color(band.color) ||
-            !Number.isFinite(band.opacity) || band.opacity < 0) fail('invalid band.');
+        if (!['constant', 'tent', 'smooth-annulus'].includes(band.envelope) || !positive(band.opticalDepth)) fail('invalid band.');
+        if ('color' in band || 'opacity' in band) fail('a band states its optical depth; its opacity and colour are not authored.');
         if (band.envelope === 'tent' ? !positive(band.center) || !positive(band.width) || !positive(band.edgeGain) : !pair(band.bounds)) fail('invalid radial bounds.');
         if (band.envelope === 'smooth-annulus' && (!isArray(band.fade) || band.fade.length !== 2 || !band.fade.every(positive) || band.bounds[0] <= band.fade[0])) fail('invalid annular fade.');
         if (band.arcs && (!isArray(band.arcs.centers) || band.arcs.centers.length === 0 || !band.arcs.centers.every(Number.isFinite) || !positive(band.arcs.halfWidth))) fail('invalid arcs.');

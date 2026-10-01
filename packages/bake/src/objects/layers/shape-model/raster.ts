@@ -1,3 +1,4 @@
+import { NEUTRAL_CATALOGUE_RGB } from '@cssearth/objects';
 import type { ShapeModelConfig } from './source.ts';
 import sharp from 'sharp';
 import { lambertAttenuationAtlas } from '../../geometry/index.ts';
@@ -69,7 +70,7 @@ export async function prepareRingRaster({ config, publicDirectory, publicBase }:
   const width = 2048, height = 32, ring = config.ring;
   if(!ring)throw new TypeError("Ring raster needs an authored ring.");
   await sharp({ create: { width, height, channels: 4,
-    background: { r: ring.displayValue, g: ring.displayValue, b: ring.displayValue, alpha: ring.displayOpacity } } })
+    background: { r: NEUTRAL_CATALOGUE_RGB[0], g: NEUTRAL_CATALOGUE_RGB[1], b: NEUTRAL_CATALOGUE_RGB[2], alpha: ring.normalOpacity } } })
     .webp({ lossless: true }).toFile(resolve(publicDirectory, 'ring.webp'));
   return { url: publicBase + 'ring.webp', width, height };
 }
