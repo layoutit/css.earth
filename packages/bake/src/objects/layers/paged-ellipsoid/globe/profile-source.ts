@@ -27,10 +27,7 @@ const scientific = union(
   object({kind: literal('gibs-mur-imagery'), ...enso}),
   object({kind: literal('gebco-elevation'), metadata: string, grid: object({width: number, height: number, firstIndex: number, stride: number, nativeCellDegrees: number}),
     palette: array(object({meters: number, color: string})), relief: optional(relief), blocks: optional(array(object({path: string, rowOffset: number, rows: number}))),
-    legend: object({image: string, width: number, height: number, minimum: number, maximum: number})}),
-  object({kind: literal('black-marble-radiance'), member: string, year: number, product: string, band: string, units: string, archiveBytes: number,
-    grid: object({width: number, height: number, cellDegrees: number, bounds: tuple(number, number, number, number)}),
-    display: object({missing: tuple(number, number, number), softening: number, maximum: number}), legend: object({image: string})}));
+    legend: object({image: string, width: number, height: number, minimum: number, maximum: number})}));
 const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfiguration, 'camera'> & {camera: Infer<typeof recipeCamera>}> = object({namespace: string, publicBase: string, sceneBodyKey: string,
   interiorRadiusKey: string, interiorSchema: string, interiorPath: string, equatorialRadiusKm: number, polarRadiusKm: number, geometry, camera: recipeCamera,
   atlas: object({pageSize: number, pageCells: number, density: number, gutter: number, sourceWidth: number}),

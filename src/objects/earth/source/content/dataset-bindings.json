@@ -45,7 +45,7 @@
       "surfaceUrl": "/scenes/earth/earth-night-lights.webp",
       "polesUrl": "/scenes/earth/earth-night-lights-poles.webp",
       "maximumZoom": 8,
-      "qualification": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
+      "qualification": "NASA Black Marble 2016 · Suomi NPP VIIRS night lights from the best cloud-free nights of each month. Land, ice and ocean are NASA's MODIS Blue Marble imagery, added for context. This is an annual composite, not live lighting.",
       "surfacePagePrefix": "earth-night-lights"
     },
     {
@@ -115,7 +115,7 @@
   "provenance": {
     "normal": "NASA Blue Marble Next Generation July 2004",
     "topography": "GEBCO_2026 terrain model: signed heights relative to mean sea level, with prepared hypsometric color and cartographic relief",
-    "nightLights": "NASA Black Marble VJ146A4 Collection 2 · 2025 AllAngle_Composite_Snow_Free radiance; public GeoTIFF mosaic by Jurij Stare, lightpollutionmap.info",
+    "nightLights": "NASA Black Marble 2016 colour map: Suomi NPP VIIRS night lights over NASA MODIS Blue Marble imagery",
     "clouds": "NASA Blue Marble archival clouds over the July 2004 visible-color mosaic"
   }
 }

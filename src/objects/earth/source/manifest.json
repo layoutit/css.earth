@@ -1064,32 +1064,6 @@
       }
     },
     {
-      "id": "nasa-black-marble-2025-public-radiance",
-      "path": "science/night-lights-2025/radiance.zip",
-      "origin": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
-      "credit": "NASA Black Marble science team; Jurij Stare, www.lightpollutionmap.info",
-      "license": "NASA Earth science open data (CC0); public mosaic with publisher attribution",
-      "licenseEvidence": [
-        "https://www.lightpollutionmap.info/help.html#faq",
-        "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy"
-      ],
-      "acquisition": "2025 VJ146A4.002 AllAngle_Composite_Snow_Free, public Float32 EPSG:4326 mosaic. Archive checked 2026-09-09; HTTP Last-Modified 2026-03-29. Native 15 arc-second cells, 75 N to 65 S. QA/count bands are not included by the mirror; -999.9 is missing and zero is valid thresholded background.",
-      "redistribution": "NASA factual radiance with NASA Black Marble and Jurij Stare / lightpollutionmap.info attribution; no map screenshots or sky-brightness model reused.",
-      "consumers": [
-        "datasets"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-nasa-black-marble-2025-public-radiance",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "natural-earth-populated-places",
       "path": "features/ne_10m_populated_places.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip",
@@ -1430,15 +1404,6 @@
     {
       "path": "interior/glad-m35-catalog.json",
       "purpose": "EarthScope catalog, citations and model revision history."
-    },
-    {
-      "path": "science/night-lights-2025/provenance.json",
-      "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
-      "kind": "authored-document",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sampling, units, color scale and coverage notes for VJ146A4.002."
-      }
     },
     {
       "id": "earth-preparation-features",

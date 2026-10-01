@@ -22,7 +22,6 @@ import { resolve } from "node:path";
 import sharp from "sharp";
 import { verifyPreparedMurImage, writeMurLegend } from "./globe/mur-image.ts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.ts";
-import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.ts";
 import { textureTintFactors } from "@layoutit/polycss";
 import { cutInteriorPoles } from "./interior-poles.ts";
 import { readMantleTomography, tomographyLegend } from "./tomography.ts";
@@ -68,10 +67,6 @@ if (mode !== 'materials') {
         const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
         input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
         await writeElevationLegend(map.scientific, output(map.scientific.legend.image));
-      } else if (map.scientific.kind === "black-marble-radiance") {
-        const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
-        input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
-        await writeNightLightsLegend(map.scientific, output(map.scientific.legend.image));
       } else if (map.scientific.kind === "gibs-mur-imagery") {
         input = await verifyPreparedMurImage(sourceDirectory, map.path, map.scientific);
         await writeMurLegend(sourceDirectory, output("earth-enso-legend.png"));
@@ -689,7 +684,6 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
   const width = config.surface.width;
   const height = config.surface.height;
   if (map.scientific?.kind === "gebco-elevation") return prepareElevationMap({ sourceDirectory, map: {path: requireString(map.path), scientific: map.scientific}, width, height });
-  if (map.scientific?.kind === "black-marble-radiance") return prepareNightLightsMap({ sourceDirectory, map: {path: requireString(map.path), scientific: map.scientific}, width, height });
   const input = sharp(Buffer.isBuffer(map.path) ? map.path : resolve(sourceDirectory, map.path));
   if (map.nativePhotographicSampling) {
     const { data, info } = await input.removeAlpha().raw().toBuffer({ resolveWithObject: true });

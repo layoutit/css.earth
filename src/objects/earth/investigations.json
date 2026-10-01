@@ -94,31 +94,31 @@
       ]
     },
     {
-      "id": "viirs-night-lights-2025",
-      "subject": "NASA VJ146A4.002 NOAA-20 VIIRS annual radiance, 2025",
+      "id": "black-marble-2016-colour",
+      "subject": "NASA Black Marble 2016 colour map",
       "status": "included",
-      "finding": "Night lights use the numerical radiance band of the processed annual product through Jurij Stare's public mirror, one Float32 band of 86,400 by 33,600 cells in EPSG:4326 with -999.9 as missing and zero as valid thresholded background; preparation averages radiance over display cells weighted by spherical area, marks a cell missing below half-area coverage and applies an authored warm logarithmic transfer with 0.25 softening and saturation at 100 nW/cm2/sr as display parameters rather than calibration factors.",
+      "finding": "Night lights use NASA's 2016 colour map at 3 km, 13,500 by 6,750 pixels: Suomi NPP VIIRS night lights composited from the best cloud-free nights of each month over each land mass, over NASA MODIS Blue Marble land, ice and ocean added for context. The image is resampled to the 8,192-column surface grid without colour changes.",
       "evidence": [
-        "https://doi.org/10.5067/VIIRS/VJ146A4.002"
+        "https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps",
+        "https://viirsland.gsfc.nasa.gov/Products/NASA/BlackMarble.html"
       ]
     },
     {
-      "id": "night-light-quality-bands",
-      "subject": "Quality and observation-count bands for the night lights",
-      "status": "unresolved",
-      "finding": "The mirror contains no observation-count or quality bands, so no further quality selection is possible and aurora and transient lighting remain in the source, especially at high latitudes; coverage also stops at 75 degrees north and 65 degrees south and missing coverage is gray.",
-      "revisitWhen": "A release supplies quality or observation-count bands, or gap-free polar coverage, for the annual radiance product.",
+      "id": "viirs-night-lights-2025",
+      "subject": "NASA VJ146A4.002 NOAA-20 VIIRS annual radiance, 2025",
+      "status": "excluded",
+      "finding": "The 2025 annual radiance, read from Jurij Stare's public Float32 mirror, area-averaged into the 8,192-column display grid and coloured on a warm logarithmic scale, rendered near-black on the globe: 87.5 percent of valid display cells are unlit and 90 percent of lit cells fall below 1.1 nW/cm2/sr. Lowering the scale cap from 100 to 21 nW/cm2/sr, the area-weighted 99.9th percentile, raised the default view's mean luminance only from 9.3 to 10.7 of 255 in same-build captures on 30 September 2026, so the night-lights view uses NASA's 2016 colour map instead.",
+      "revisitWhen": "NASA publishes a colour night-lights map newer than 2016.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L71",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L196"
+        "https://doi.org/10.5067/VIIRS/VJ146A4.002"
       ]
     },
     {
       "id": "night-light-alternative-sources",
       "subject": "Other 2025 night-light sources",
       "status": "excluded",
-      "finding": "The source survey of 2026-09-09 found that direct NASA 2025 annual granules require Earthdata authentication, NASA GIBS annual display mosaics still offer only 2012 and 2016, the EOG VNL v2.2 download directory returns HTTP 401, and OpenGeoHub's public 2024 derivative is older and rescales the numeric values; the selected mosaic retains original float radiance units with verifiable grid metadata and explicit attribution.",
-      "revisitWhen": "An account-free numerical annual mosaic of equal or later date becomes available.",
+      "finding": "The source survey of 2026-09-09 found that direct NASA 2025 annual granules require Earthdata authentication, NASA GIBS annual display mosaics still offer only 2012 and 2016, the EOG VNL v2.2 download directory returns HTTP 401, and OpenGeoHub's public 2024 derivative is older and rescales the numeric values; NASA's newest colour night-lights map is therefore still the 2016 one.",
+      "revisitWhen": "An account-free annual night-lights map newer than 2016 becomes available.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L201"
       ]
