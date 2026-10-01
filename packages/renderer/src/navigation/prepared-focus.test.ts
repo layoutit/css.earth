@@ -222,3 +222,13 @@ it('arrives on the line of sight from the Sun, celestial north up, whatever the 
   const axes = worldRotationFromQuaternion(orientationXyzw);
   assert.ok(axes[7] > 0);
 });
+
+it('holds its last frame while a flight passes through the body, and still refuses a camera placed inside it', async () => {
+  const f = fixture();
+  const before = f.orbit.captureWorldCamera(frame);
+  const inside = { ...before, pose: { ...before.pose, positionM: [frame.originM[0] + 50, frame.originM[1], frame.originM[2]] as const } };
+  await f.orbit.applyWorldCamera(inside, frame, new AbortController().signal);
+  assert.deepEqual(f.orbit.captureWorldCamera(frame).pose.positionM, before.pose.positionM, 'the flight step inside the body is not adopted');
+  assert.throws(() => f.orbit.applyWorldCamera(inside, frame), /inside the focused body/u);
+  f.orbit.destroy();
+});

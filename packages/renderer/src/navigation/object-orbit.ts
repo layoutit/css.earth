@@ -188,6 +188,10 @@ export function createRetainedCubicSkyOrbit({
     try {
       validateWorldFrame(frame);
       controls.stop();
+      // A flight to a body behind this one passes through it (Earth to Itokawa cut 5,512 km from Earth's centre and
+      // every frame of it failed the scene, 2026-10-01). The scene keeps its last frame for those steps; the flight
+      // goes on and the next step outside the body draws again.
+      if (signal && camera.contains(world, frame)) return publish(signal, departing);
       camera.adopt(world, frame);
       return publish(signal, departing);
     } catch (error) { retireFailure(error); throw error; }

@@ -29,21 +29,26 @@ export function vizierRows(tsv: string, columns: readonly string[], catalogue: s
 }
 const period = (row: Row, column: string, what: string) => { const value = Number(row[column]); if (!row[column] || !(value > 0)) throw new Error(`${what}: ${column} is empty.`); return value; };
 
-/** One Cepheid's draft: `name` as a reader meets it, `found` the sentence of who measured it. */
-export function draftM31Cepheid(star: { readonly name: string; readonly target: string; readonly periodDays: number; readonly periodSource: string; readonly paper: { url: string; credit: string };
-  readonly position: { catalogue: string; row: Record<string, string>; credit: string; url: string }; readonly found: string; readonly locator: string; readonly aliases?: readonly string[]; readonly featured?: true },
-  velocity: { value: number; uncertainty?: number; source: string; url: string }) {
-  const [modulus, error] = LI_2021.modulus, parsecs = 10 ** (modulus / 5 + 1), days = star.periodDays.toFixed(star.periodDays < 10 ? 2 : 1), kpc = Math.round(parsecs / 1000);
+/** A Local Group galaxy and its Cepheid distance: what places every Cepheid drafted in it. */
+export interface CepheidGalaxy { readonly name: string; readonly reader: string; readonly distance: { readonly credit: string; readonly paper: string; readonly modulus: readonly [number, number] } }
+const M31: CepheidGalaxy = { name: GALAXY, reader: 'the Andromeda Galaxy', distance: LI_2021 };
+export interface GalaxyCepheid { readonly name: string; readonly target: string; readonly periodDays: number; readonly periodSource: string; readonly paper: { url: string; credit: string };
+  readonly position: { catalogue: string; row: Record<string, string>; credit: string; url: string }; readonly found: string; readonly locator: string; readonly aliases?: readonly string[]; readonly featured?: true }
+
+/** One Cepheid's draft in `galaxy`: `name` as a reader meets it, `found` the sentence of who measured it. */
+export function draftGalaxyCepheid(star: GalaxyCepheid, galaxy: CepheidGalaxy, velocity: { value: number; uncertainty?: number; source: string; url: string }) {
+  const [modulus, error] = galaxy.distance.modulus, parsecs = 10 ** (modulus / 5 + 1), days = star.periodDays.toFixed(star.periodDays < 10 ? 2 : 1), kpc = Math.round(parsecs / 1000);
   return { ...relationCepheidDraft({
-    id: slug(star.name), name: star.name, target: star.target, galaxy: GALAXY, periodDays: star.periodDays, paper: star.paper, periodSource: star.periodSource, position: star.position,
-    description: `A Cepheid in the Andromeda Galaxy that pulsates every ${days} days.`,
+    id: slug(star.name), name: star.name, target: star.target, galaxy: galaxy.name, periodDays: star.periodDays, paper: star.paper, periodSource: star.periodSource, position: star.position,
+    description: `A Cepheid in ${galaxy.reader} that pulsates every ${days} days.`,
     distance: { value: Math.round(parsecs), uncertainty: Math.round(parsecs * Math.LN10 / 5 * error),
-      source: `${LI_2021.credit}, abstract: M31's Cepheid distance modulus ${modulus} +/- ${error} mag, 10^(mu/5 + 1) pc`, url: LI_2021.paper },
+      source: `${galaxy.distance.credit}, abstract: ${galaxy.name}'s Cepheid distance modulus ${modulus} +/- ${error} mag, 10^(mu/5 + 1) pc`, url: galaxy.distance.paper },
     velocity,
-    text: { card: `A Cepheid in the Andromeda Galaxy, ${kpc} kiloparsecs away, that swells and shrinks every ${days} days.`,
+    text: { card: `A Cepheid in ${galaxy.reader}, ${kpc} kiloparsecs away, that swells and shrinks every ${days} days.`,
       introduction: `${star.found} Its galaxy's distance, ${kpc} kiloparsecs, was measured from Cepheids like it.`, locator: star.locator },
   }), ...(star.aliases?.length ? { aliases: star.aliases } : {}), ...(star.featured ? { featured: true as const } : {}) };
 }
+export const draftM31Cepheid = (star: GalaxyCepheid, velocity: { value: number; uncertainty?: number; source: string; url: string }) => draftGalaxyCepheid(star, M31, velocity);
 
 /** `new-object --from-m31cepheids all | V1 | ID... --out spec.json`: Hubble's V1, every Cepheid of Li et al. (2021), or those named
  * by their table ID (CEPH-10.91809+41.18565). */

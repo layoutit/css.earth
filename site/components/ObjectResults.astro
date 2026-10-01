@@ -11,6 +11,7 @@ import CatalogueOverviewRows from './CatalogueOverviewRows.astro';
   <p class="object-error" role="alert" data-search-error hidden>
     Couldn't load search results. <button type="button" class="object-retry" data-search-retry>Retry</button>
   </p>
+  <p class="object-empty" data-search-busy hidden>Searching…</p>
   <p class="object-empty" aria-live="polite" hidden>No matching results</p>
   <slot />
 </div>

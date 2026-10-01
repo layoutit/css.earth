@@ -21,11 +21,8 @@
     ]
   },
   "packageCycles": [
-    {"nodes":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
-    {"nodes":["@cssearth/bake","@cssearth/renderer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
-    {"nodes":["@cssearth/bake","@cssearth/telescope-cli","@cssearth/renderer","@cssearth/volume-viewer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
-    {"nodes":["@cssearth/bake","@cssearth/telescope-cli","@cssearth/renderer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]},
-    {"nodes":["@cssearth/bake","@cssearth/telescope-cli"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/telescope-cli","@cssearth/volume-viewer"]}
+    {"nodes":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"]},
+    {"nodes":["@cssearth/bake","@cssearth/renderer"],"scc":["@cssearth/bake","@cssearth/renderer","@cssearth/volume-viewer"]}
   ],
   "rules": {
     "authoring-is-leaf": [],

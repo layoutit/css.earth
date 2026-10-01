@@ -21,8 +21,7 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
   other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. Receipts and ledgers record program paths
   where `src/archives/programs.mts` puts them. No archive module names a body (`archives/archive-scope.test.mts`).
-  `packages/bake/authoring/juno/juno.test.mts`
-  stays there until the stale JunoCam ledger is regenerated: its ledger-state check fails until then, and
+  The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `src/sphere/sphere-lane.mts` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and

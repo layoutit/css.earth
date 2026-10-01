@@ -530,6 +530,16 @@ test('a hosted body\'s package is written after phase one wrote its astronomy re
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 
+test('a paper cited by every star of a batch is read from its archive once; a failed read is asked again', async () => {
+  const { fetchPublication } = await import('./archives.mts');
+  let asked = 0, fail = true;
+  const archive = { async text() { asked++; if (fail) { fail = false; throw new Error('arXiv answered 503'); } return '<feed><entry><id>http://arxiv.org/abs/2304.00037v2</id><title>A paper</title><published>2023-03-31T00:00:00Z</published><author><name>L. Breuval</name></author></entry></feed>'; } } as unknown as Archive;
+  await assert.rejects(fetchPublication(archive, 'https://arxiv.org/abs/2304.00037'), /503/u);
+  const [first, second] = await Promise.all([fetchPublication(archive, 'https://arxiv.org/abs/2304.00037'), fetchPublication(archive, 'https://arxiv.org/abs/2304.00037')]);
+  assert.equal(asked, 2, 'one failed read, then one read shared by both stars');
+  assert.equal(first, second);
+});
+
 test('a DOI Crossref does not hold is read from DataCite, as the CDS VizieR catalogues are', async () => {
   const { fetchPublication } = await import('./archives.mts');
   const datacite = JSON.stringify({ data: { attributes: { titles: [{ title: 'Gaia DR2' }], publicationYear: 2018, publisher: 'Centre de Donnees Strasbourg (CDS)', creators: [{ name: 'European Space Agency' }] } } });
@@ -800,7 +810,7 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'sh0es', 'm31cepheids']);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'sh0es', 'm31cepheids', 'm33cepheids']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
 });
 
