@@ -151,9 +151,10 @@ export function createSceneRouter({
   windowTarget.addEventListener("pageshow", restoreCachedScene);
   documentTarget.addEventListener("visibilitychange", syncPlayback);
   reducedMotion?.addEventListener("change", syncReducedMotion);
-  mountTask = mountApplication();
+  const firstMount = mountApplication();
+  mountTask = firstMount;
   // Requests the head started for the first view and no reader took are dropped once it settles.
-  void mountTask.finally(releaseStartupRequests).catch(() => {});
+  void firstMount.finally(releaseStartupRequests).catch(() => {});
   // The iPad trace harness drives this same navigation path as the shell. Keep
   // the control out of ordinary builds; a performance build opts in explicitly.
   const control = DIAGNOSTICS_ENABLED ? Object.freeze({
@@ -376,6 +377,12 @@ export function createSceneRouter({
 
   async function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
     if (destroyed) return false;
+    // A selection made while the first view is still mounting leaves from it once it is drawn: until then there is no
+    // drawn camera to fly from. The latest selection still wins (readiness.prepare).
+    if (mountTask === firstMount && scenes.state.kind !== 'ready') {
+      await firstMount.catch(() => undefined);
+      if (destroyed) return false;
+    }
     if (intent.kind === 'focus' && scenes.current) id = objectId;
     else if (id !== objectId) {
       // A page of something the world draws (a link or history entry) opens on its scene (navigation-scope.mts): an
