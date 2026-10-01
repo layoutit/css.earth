@@ -25,6 +25,6 @@ test('registration detector settings reject unbounded, noninteger and incompatib
 
 test('composed sky band sources cache under their own name; publisher sources keep their downloaded name', () => {
   assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared' }), 'spitzer-mid-infrared.tif');
-  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared', skyBands: { path: 'src/objects/m8/source/sky-bands/spitzer-irac.json' } }),
+  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared', skyBands: { path: 'src/objects/m8-volume/source/sky-bands/spitzer-irac.json' } }),
     'spitzer-mid-infrared.skybands.png');
 });

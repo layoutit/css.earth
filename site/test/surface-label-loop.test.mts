@@ -24,7 +24,7 @@ test('surface labels keep no frame loop while they are off, the default', async 
   const labels = mountSurfaceFeatureLabels({ host: document.getElementById('host')!, plan, objectId: 'moon', target: document.getElementById('mesh')!,
     pickingHost: host, inputSurface: host, flightLimits: unused,
     navigation: { motion: createCameraMotion(), frame: { referenceFrame:'test',epochJdTt:1,originM:[0,0,0],presentationToReference:[1,0,0,0,1,0,0,0,1],metersPerUnit:1,bodyRadiusM:1 },
-      capture:unused,apply:unused,preparedFocus:unused,setPreparedFocus:unused,flyToPreparedFocus:unused,optics:unused,subscribe:unused },
+      capture:unused,apply:unused,optics:unused,subscribe:unused },
     scene: document.getElementById('scene')!, zoomRange: () => ({ minimum: 1, maximum: 2 }), lifetime, onError() {},
     // Hold the catalogue while checking the disabled loop, then explicitly release it to check pool allocation.
     transport: () => new Promise<Response>(resolve => { release = resolve; }) });

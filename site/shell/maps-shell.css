@@ -631,6 +631,8 @@
 .object-chart-figure > .object-chart { margin: 0; }
 .object-mobile-information-heading { display: none; }
 @media (min-width: 821px) and (orientation: landscape) {
+  /* The tabs' own padding is the gap under the header's divider (--explorer-divider-gap); the header adds none. */
+  .object-card > .object-selected-panel:has(+ :is(.object-card-tabs, .object-tabs)) { padding-bottom: 0; }
   .object-information-panel > .object-factsheet-content { padding-top: 8px; }
   .object-information-panel:has(> .object-card-tabs) > .object-dataset-content.atlas-tree-disclosure { padding-top: 8px; border-top: 0; }
   .object-information-panel:has(> .object-card-tabs) > .object-dataset-content > summary { display: none; }
@@ -732,9 +734,10 @@
 .object-dataset-content > .object-dataset-details {
   position: relative;
   width: auto;
-  margin-top: 8px;
+  /* The dataset rows end 4px above this box and its title's line starts 1px inside its padding. */
+  margin-top: calc(var(--explorer-divider-gap) - 2px);
   margin-inline: 0;
-  padding: 13px 0 0;
+  padding: calc(var(--explorer-divider-gap) + var(--explorer-divider-width) + 1px) 0 0;
   border: 0;
 }
 .object-dataset-content > .object-dataset-details::before {

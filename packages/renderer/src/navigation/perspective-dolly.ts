@@ -365,7 +365,7 @@ export function createPerspectiveDolly({
       );
       const opticalCenterX = bounds.x + bounds.width / 2 + principalOffset[0]!;
       const opticalCenterY = bounds.y + bounds.height / 2 + principalOffset[1]!;
-      return camera.trackball(Object.freeze({
+      return Object.freeze({
         centerX,
         centerY,
         opticalCenterX,
@@ -380,7 +380,7 @@ export function createPerspectiveDolly({
         viewportCenterY: (stageBounds.top ?? 0) + stageBounds.height / 2,
         // Pointer samples are re-based to the centre: tumble everywhere.
         tumbleOnly: TUMBLE_DRAG_MODELS.includes(cameraPlan.drag?.model ?? ""),
-      }));
+      });
     },
     state() {
       const { distance, bodyCenterKilometers } = camera.detailState();

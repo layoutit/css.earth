@@ -4,8 +4,8 @@ import type { ShellCamera } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import type { OverviewScope } from '../overview-context.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { isFocusDatasetUrl, withDataset } from '../dataset-url.mts';
-import { withOverviewScope, withPreparedFocus, withSatelliteSystemView } from './navigation-scope.mts';
+import { withDataset } from '../dataset-url.mts';
+import { withOverviewScope, withSatelliteSystemView } from './navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { selectionContext, selectionKey, selectionTargetFromUrl, type SelectionTarget, type SceneSubject } from '../scene/scene-selection.mts';
@@ -14,13 +14,11 @@ export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'po
 export type NavigationIntent =
   | { kind: 'object' }
   | { kind: 'satellite-system'; camera: 'frame' | 'preserve' }
-  | { kind: 'focus'; id: string }
   | { kind: 'feature'; id: string | null }
   | { kind: 'link'; url: string }
   | { kind: 'history'; url: string; history: NavigationHistory }
   | { kind: 'overview'; scope: OverviewScope; camera: 'frame' | 'preserve' };
 export type NavigationCamera =
-  | { kind: 'focus' }
   | { kind: 'surface' }
   | { kind: 'restore'; animate: boolean }
   | { kind: 'preserve' }
@@ -39,7 +37,7 @@ export interface ResolvedNavigation {
 /** Interpret destination intent here; dataset and camera owners still validate their payloads when applying them. */
 export function readNavigationSelection(url: URL, objectId: string, objects: SystemObjects) {
   return { subject: selectionTargetFromUrl(url, objectId, objects), savedView: url.searchParams.has('v'),
-    dataset: url.searchParams.has('dataset') || isFocusDatasetUrl(url, objectId), feature: url.searchParams.get('feature') };
+    dataset: url.searchParams.has('dataset'), feature: url.searchParams.get('feature') };
 }
 
 /** Resolve once, before cancellation: loading, preview, flight and arrival consume the same destination. */
@@ -81,15 +79,9 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const center = overviewTarget?.world ?? familyTarget
     ?? (firstHostSelection && !family ? navigation.systemTarget(targetRequest) : null)
     ?? (firstHostSelection ? navigation.centerTarget(targetRequest) : null);
-  if (intent.kind === 'focus') {
-    url.pathname = object.route;
-    url = withPreparedFocus(url, object.id, intent.id, null);
-    url.searchParams.delete('v');
-    // A focus picked from search or a list is a destination like any other: it adds a history entry, so Back returns to
-    // the subject before it (M 33, then LMC, then Back left the site, 2026-10-01). Picking the current one again replaces.
-  } else if (!linked) {
+  if (!linked) {
     url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
-    url = withDataset(withPreparedFocus(url, object.id, null, null), null);
+    url = withDataset(url, null);
     withOverviewScope(url, object.id, intent.kind === 'overview' ? intent.scope
       : center && intent.kind === 'object' && systemById(objects, object.id) ? 'system' : null);
     withSatelliteSystemView(url, intent.kind === 'satellite-system' || intent.kind === 'object' && familyTarget !== null);
@@ -103,7 +95,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     || intent.kind === 'satellite-system' && intent.camera === 'preserve'
     || current.reuseScene && (linked && selection.dataset || interruptedFlight);
   const camera: NavigationCamera = current.reuseScene && (intent.kind === 'feature' || selection.feature !== null)
-    ? { kind: 'surface' } : intent.kind === 'focus' ? { kind: 'focus' } : restore ? { kind: 'restore', animate: history.history === 'pop' }
+    ? { kind: 'surface' } : restore ? { kind: 'restore', animate: history.history === 'pop' }
     : keepCamera ? { kind: 'preserve' }
     : { kind: 'frame', framing: center ? 'center' : 'detail', world: center, focusPositionM: overviewTarget?.focusPositionM ?? null };
   if (current.reuseScene && !restore) {

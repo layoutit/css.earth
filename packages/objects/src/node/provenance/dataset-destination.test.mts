@@ -41,7 +41,7 @@ test('observation attribution is explicit and independent of descriptive process
   assert.equal(compileContributions([excludedParent], catalog, DATASET_ROUTES).edges.length, 0, 'a derived preview cannot reintroduce excluded illustration credit');
 });
 
-test('both graph compilers give bodies and catalogue focuses the same page dataset URLs', () => {
+test('both graph compilers give every object the same page dataset URLs', () => {
   const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/m42/', 'src/objects/m42')];
   const usage = compileSourceUsage(objects, sources, DATASET_ROUTES), contributions = compileContributions(objects, catalog, DATASET_ROUTES);
   assert.deepEqual(usage.datasets, contributions.datasets);

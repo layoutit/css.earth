@@ -1,42 +1,97 @@
 {
   "schema": "cssearth-object@2",
   "id": "omega-centauri",
-  "type": "volume-dataset-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Omega Centauri",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1339334776590029.8
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Omega Centauri",
+      "systemName": "Milky Way",
+      "classification": "globular-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 1119192839,
+      "description": "Omega Centauri is a globular star cluster in the Milky Way, about 5,426 parsecs away.",
+      "aliases": [
+        "NGC 5139",
+        "ω Centauri",
+        "Caldwell 80"
+      ],
+      "order": 5151,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -105005412559826930000,
-        -41769153670092810000,
-        -123207430757263850000
+        -105140549150265100000,
+        -41834040087509960000,
+        -123401250499199340000
       ],
-      "localToReferenceXyzw": [
-        0.7712350124749122,
-        -0.5231773789172258,
-        -0.20356010658195295,
-        0.3000754383991924
+      "presentationToReference": [
+        -0.7687566031478317,
+        0,
+        -0.6395414647359523,
+        -0.5867678218446865,
+        0.3977771559319137,
+        0.7053203934853722,
+        -0.25439498494319734,
+        -0.9174820620691818,
+        0.3057938152040233
       ],
-      "metersPerUnit": 811718046418199.9,
-      "boundsUnits": {
-        "min": [
-          -2190.705034159304,
-          -2194.8969278075674,
-          -4259.5353966530165
-        ],
-        "max": [
-          2190.705034159304,
-          2194.8969278075674,
-          4259.5353966530165
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/delivery.json"
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 4320434763193644.5,
+      "bodyRadiusM": 1339334776590029800
     }
   },
   "prepared": {
-    "format": "cssearth-volume-datasets@1",
-    "url": "prepared/datasets.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

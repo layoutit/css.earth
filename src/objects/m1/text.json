@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m1",
+  "card": {
+    "text": "The Crab combines an expanding supernova remnant with a pulsar wind nebula.",
+    "sources": [
+      {
+        "catalogueId": "martin-2021",
+        "url": "https://arxiv.org/pdf/2101.02709v1",
+        "label": "Martin, Milisavljevic & Drissen (2021), 3D mapping of the Crab Nebula with SITELLE. I",
+        "checked": "2026-10-01",
+        "locator": "distance: 2 kpc"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Crab combines an expanding supernova remnant with a pulsar wind nebula. It lies about 2,000 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "martin-2021",
+        "url": "https://arxiv.org/pdf/2101.02709v1",
+        "label": "Martin, Milisavljevic & Drissen (2021), 3D mapping of the Crab Nebula with SITELLE. I",
+        "checked": "2026-10-01",
+        "locator": "distance: 2 kpc"
+      }
+    ]
+  },
+  "datasets": {
+    "hubble-optical": {
+      "title": "Crab ejecta in optical emission lines",
+      "detail": "3864 × 3864 px",
+      "summary": "Optical line colors on expansion-inferred ejecta and a modeled pulsar wind; fine structure is softened.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic0515a",
+          "url": "https://esahubble.org/images/heic0515a/",
+          "label": "Crab Nebula · Hubble · optical lines; NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+          "checked": "2026-10-01",
+          "locator": "Crab Nebula · Hubble · optical lines"
+        }
+      ]
+    },
+    "webb-infrared": {
+      "title": "Crab filaments and wind in infrared",
+      "detail": "4000 × 3483 px",
+      "summary": "Infrared false color on expansion-inferred ejecta and a modeled pulsar wind; fine structure is softened.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2326a",
+          "url": "https://esawebb.org/images/weic2326a/",
+          "label": "Crab Nebula · Webb · near/mid-infrared; NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+          "checked": "2026-10-01",
+          "locator": "Crab Nebula · Webb · near/mid-infrared"
+        }
+      ]
+    },
+    "webb-components": {
+      "title": "Crab dust, sulfur and synchrotron",
+      "detail": "2958 × 2569 px",
+      "summary": "Published dust, sulfur and synchrotron component colors on an inferred 3D model; not measured material density.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2417a",
+          "url": "https://esawebb.org/images/weic2417a/",
+          "label": "Crab Nebula · Webb · dust, sulfur, synchrotron; NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+          "checked": "2026-10-01",
+          "locator": "Crab Nebula · Webb · dust, sulfur, synchrotron"
+        }
+      ]
+    },
+    "spitzer-infrared": {
+      "title": "Crab emission at 24 micrometres",
+      "detail": "5290 × 5290 px",
+      "summary": "Mid-infrared false color on inferred ejecta and pulsar-wind geometry; brightness is not calibrated.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-potw1720c",
+          "url": "https://esahubble.org/images/potw1720c/",
+          "label": "Crab Nebula · Spitzer · mid-infrared; JPL/Caltech",
+          "checked": "2026-10-01",
+          "locator": "Crab Nebula · Spitzer · mid-infrared"
+        }
+      ]
+    },
+    "vla-radio": {
+      "title": "Crab radio synchrotron emission",
+      "detail": "5290 × 5290 px",
+      "summary": "Radio display colors on modeled wind and ejecta geometry; no measured radio depth.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-potw1720b",
+          "url": "https://esahubble.org/images/potw1720b/",
+          "label": "Crab Nebula · VLA · radio synchrotron; NRAO/AUI/NSF",
+          "checked": "2026-10-01",
+          "locator": "Crab Nebula · VLA · radio synchrotron"
+        }
+      ]
+    },
+    "chandra-xray": {
+      "title": "Crab inner pulsar wind in X-rays",
+      "detail": "5290 × 5290 px",
+      "summary": "X-ray pulsar-wind display on published torus/jet assumptions; depth and emission strength are modeled.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-potw1720f",
+          "url": "https://esahubble.org/images/potw1720f/",
+          "label": "Crab Nebula · Chandra · X-ray pulsar wind; CXC",
+          "checked": "2026-10-01",
+          "locator": "Crab Nebula · Chandra · X-ray pulsar wind"
+        }
+      ]
+    }
+  }
+}

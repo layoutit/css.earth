@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-300",
+  "displayName": "NGC 300",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "2.089 Mpc (\u221256,940 / +58,530 pc)",
+        "source": {
+          "catalogueId": "publication-tully2009aj-138-323t",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+          "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 13.72\u00b0, Dec -37.68\u00b0",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Local volume, Field",
+        "source": {
+          "catalogueId": "publication-mcconnachie2012aj-144-4m",
+          "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
+          "label": "McConnachie (2012), AJ 144, 4, DOI 10.1088/0004-6256/144/1/4; author October 2019 Table 1 update, read from its text transcription (first seven pages, pypdf 5.9.0; numeric membership classifications unchanged).",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "half-light-radius",
+        "label": "Half-light radius",
+        "value": "3.039 kpc",
+        "source": {
+          "catalogueId": "publication-mcconnachie2012aj-144-4m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract",
+          "label": "McConnachie2012AJ....144....4M: The Observed Properties of Dwarf Galaxies in and around the Local Group",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "ngc-300-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-300-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-300-layers-optical",
+          "path": "../../ngc-300-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1037a/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+      "href": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "McConnachie (2012), AJ 144, 4, DOI 10.1088/0004-6256/144/1/4; author October 2019 Table 1 update, read from its text transcription (first seven pages, pypdf 5.9.0; numeric membership classifications unchanged).",
+      "href": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "McConnachie2012AJ....144....4M: The Observed Properties of Dwarf Galaxies in and around the Local Group",
+      "href": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+      "credit": "Tully2009AJ....138..323T: The Extragalactic Distance Database"
+    }
+  }
+}

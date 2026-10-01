@@ -1,0 +1,328 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m33-layers/source/source.jpg",
+      "origin": "https://www.eso.org/public/images/eso1424a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1424a/",
+      "title": "VST snaps a very detailed view of the Triangulum Galaxy",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "publisher publication JPEG. The hash identifies the local JPEG bytes, not a calibrated native scientific array; acquisition details and provider product ID are retained in source/provenance.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1424a",
+            "role": "material",
+            "evidence": "src/objects/m33-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; provider terms: https://www.eso.org/public/outreach/copyright/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vst",
+            "evidence": "https://www.eso.org/public/images/eso1424a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ciardullo-pne-table2",
+      "path": "src/objects/m33-layers/source/ciardullo-pne/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/614/167/table2.dat",
+      "title": "The Planetary Nebula System of M33, table2.dat",
+      "credit": "R. Ciardullo, P. R. Durrell, M. B. Laychak, K. A. Herrmann, K. Moody, G. H. Jacoby, J. J. Feldmeier; ApJ 614, 167",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through ciardullo-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ciardullo-2004-m33-pne",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/614/167/table2.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hodge-hii-table1",
+      "path": "src/objects/m33-layers/source/hodge-hii/table1.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/PASP/111/685/table1.dat",
+      "title": "The HII Regions of M33. II. A Photometric Catalog of 1272 Newly Identified Emission Regions, table1.dat",
+      "credit": "P. W. Hodge, J. Balsley, T. K. Wyder, B. P. Skelton; PASP 111, 685",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through hodge-hii/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hodge-1999-m33-hii-regions",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/PASP/111/685/table1.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lggs-stars-table5",
+      "path": "src/objects/m33-layers/source/lggs-stars/table5.dat.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/table5.dat.gz",
+      "title": "A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33, table5.dat.gz",
+      "credit": "P. Massey, K. A. G. Olsen, P. W. Hodge, S. B. Strong, G. H. Jacoby, W. Schlingman, R. C. Smith; AJ 131, 2478",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through lggs-stars/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "massey-2006-lggs-m33-stars",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/table5.dat.gz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "long-snr-table3",
+      "path": "src/objects/m33-layers/source/long-snr/table3.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/187/495/table3.dat",
+      "title": "The Chandra ACIS Survey of M33: X-ray, Optical, and Radio Properties of the Supernova Remnants, table3.dat",
+      "credit": "K. S. Long, W. P. Blair, P. F. Winkler, R. H. Becker, T. J. Gaetz, P. Ghavamian, D. J. Helfand, J. P. Hughes, R. P. Kirshner, K. D. Kuntz, E. K. McNeil, T. G. Pannuti, P. P. Plucinsky, D. Saul, R. Tüllmann, B. Williams; ApJS 187, 495",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through long-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "long-2010-m33-snrs",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/187/495/table3.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pellerin-cepheids-table3",
+      "path": "src/objects/m33-layers/source/pellerin-cepheids/table3.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/193/26/table3.dat",
+      "title": "The M33 Synoptic Stellar Survey. I. Cepheid Variables, table3.dat",
+      "credit": "A. Pellerin, L. M. Macri; ApJS 193, 26",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through pellerin-cepheids/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pellerin-2011-m33-cepheids",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/193/26/table3.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sarajedini-clusters-table3",
+      "path": "src/objects/m33-layers/source/sarajedini-clusters/table3.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/134/447/table3.dat",
+      "title": "A Catalog of Star Cluster Candidates in M33, table3.dat",
+      "credit": "A. Sarajedini, C. L. Mancone; AJ 134, 447",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through sarajedini-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sarajedini-2007-m33-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/134/447/table3.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lggs-stars-table9",
+      "path": "src/objects/m33-layers/source/lggs-stars/table9.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/table9.dat",
+      "title": "A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33, table9.dat",
+      "credit": "P. Massey, K. A. G. Olsen, P. W. Hodge, S. B. Strong, G. H. Jacoby, W. Schlingman, R. C. Smith; AJ 131, 2478",
+      "acquisition": "Published table downloaded unchanged from its CDS origin: the 361 spectroscopically confirmed members, kept beside the photometry and not drawn.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "massey-2006-lggs-m33-stars",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/table9.dat"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m33-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m33-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m33-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "stellar-extent",
+      "path": "src/objects/m33-layers/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mcconnachie-2010-m33-substructure",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/1009.2804"
+          }
+        ]
+      }
+    },
+    {
+      "id": "disc-geometry",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/disc-geometry.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored disc orientation that places catalogue dots on the photograph's disc; its values cite their papers inside the file.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "ciardullo-pne-points",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/ciardullo-pne/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the The Planetary Nebula System of M33 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "hodge-hii-points",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/hodge-hii/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the The HII Regions of M33. II. A Photometric Catalog of 1272 Newly Identified Emission Regions rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "lggs-stars-points",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/lggs-stars/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "long-snr-points",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/long-snr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the The Chandra ACIS Survey of M33: X-ray, Optical, and Radio Properties of the Supernova Remnants rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "pellerin-cepheids-points",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/pellerin-cepheids/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the The M33 Synoptic Stellar Survey. I. Cepheid Variables rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "sarajedini-clusters-points",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/sarajedini-clusters/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A Catalog of Star Cluster Candidates in M33 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "stars-merge",
+      "kind": "authored-document",
+      "path": "src/objects/m33-layers/source/stars/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

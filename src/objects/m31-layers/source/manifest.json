@@ -1,0 +1,345 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m31-layers/source/optical-composite.jpg",
+      "origin": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
+      "title": "Panorama of Spiral Galaxy, M31, with the Wide-field view of the Andromeda Galaxy in its gaps",
+      "credit": "Local Group Survey Team and T.A. Rector (University of Alaska Anchorage)/NOIRLab/NSF/AURA; outer disc: ESA/Hubble & Digitized Sky Survey 2, acknowledgment Davide De Martin (ESA/Hubble)",
+      "displayCredit": "NOIRLab · ESA/Hubble",
+      "acquisition": "Built offline by packages/bake/authoring/m31/compose-optical.mts from two publisher images: the NOIRLab Large JPEG of the Local Group Survey panorama (source/lggs-panorama.jpg, restored from its origin) and the ESA/Hubble heic1112f crop (source/source.jpg). Both are resampled into one frame along the major axis at 2 arcsec per pixel; the DSS2 view fills the survey mosaic's notches and the outer disc, histogram-matched to the survey over the pixels both cover (source/optical-composite.json). The hash identifies the local composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noao-m31lgs",
+            "role": "material",
+            "evidence": "src/objects/m31-layers/source/provenance.json"
+          },
+          {
+            "catalogueId": "esa-heic1112f",
+            "role": "material",
+            "evidence": "src/objects/m31-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "generator": "packages/bake/authoring/m31/compose-optical.mts",
+      "datasetId": "optical",
+      "license": "CC-BY-4.0 (both images); provider terms: https://noirlab.edu/public/copyright/ and https://esahubble.org/copyright/. Retain the complete recorded credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Local Group Survey (KPNO Mayall 4-m, Mosaic)",
+            "evidence": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
+            "reason": "The publisher's colour composite of ten Mosaic pointings in U, B, V, I and H-alpha; the retained record does not identify the individual exposures."
+          },
+          {
+            "kind": "unresolved",
+            "label": "Digitized Sky Survey 2",
+            "evidence": "https://esahubble.org/images/heic1112f/",
+            "reason": "The published display combines DSS2 red and blue survey plates. The retained record does not identify the individual plate exposures and acquisition instruments; ESA/Hubble is the publisher, not evidence of Hubble telescope acquisition."
+          }
+        ]
+      }
+    },
+    {
+      "id": "azimlu-hii-table2",
+      "path": "src/objects/m31-layers/source/azimlu-hii/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/142/139/table2.dat",
+      "title": "A new catalog of H II regions in M31, table2.dat",
+      "credit": "M. Azimlu, R. Marciniak, P. Barmby; AJ 142, 139",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through azimlu-hii/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "azimlu-2011-m31-hii-regions",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/142/139/table2.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lee-snr-table3",
+      "path": "src/objects/m31-layers/source/lee-snr/table3.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/786/130/table3.dat",
+      "title": "A new optical survey of supernova remnant candidates in M31, table3.dat",
+      "credit": "J. H. Lee, M. G. Lee; ApJ 786, 130",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through lee-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lee-2014-m31-snr-candidates",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/786/130/table3.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lggs-stars-table4",
+      "path": "src/objects/m31-layers/source/lggs-stars/table4.dat.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/table4.dat.gz",
+      "title": "A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33, table4.dat.gz",
+      "credit": "P. Massey, K. A. G. Olsen, P. W. Hodge, S. B. Strong, G. H. Jacoby, W. Schlingman, R. C. Smith; AJ 131, 2478",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through lggs-stars/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "massey-2006-lggs-m33-stars",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/table4.dat.gz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "merrett-pne-table3",
+      "path": "src/objects/m31-layers/source/merrett-pne/table3.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/table3.dat",
+      "title": "A deep kinematic survey of planetary nebulae in the Andromeda galaxy using the Planetary Nebula Spectrograph, table3.dat",
+      "credit": "H. R. Merrett, M. R. Merrifield, N. G. Douglas, K. Kuijken, A. J. Romanowsky, N. R. Napolitano, M. Arnaboldi, M. Capaccioli, K. C. Freeman, O. Gerhard, L. Coccato, D. Carter, N. W. Evans, M. I. Wilkinson, C. Halliday, T. J. Bridges; MNRAS 369, 120",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through merrett-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "merrett-2006-m31-planetary-nebulae",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/table3.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pandromeda-cepheids-table",
+      "path": "src/objects/m31-layers/source/pandromeda-cepheids/table.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/145/106/table.dat",
+      "title": "Properties of M31. II. A Cepheid disk sample derived from the first year of PS1 PAndromeda data, table.dat",
+      "credit": "M. Kodric, A. Riffeser, U. Hopp, S. Seitz, J. Koppenhoefer, R. Bender, C. Goessl, J. Snigula, C. -. Lee, C. -. Ngeow, K. C. Chambers, E. A. Magnier, P. A. Price, W. S. Burgett, K. W. Hodapp, N. Kaiser, R. -. Kudritzki; AJ 145, 106",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through pandromeda-cepheids/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kodric-2013-m31-cepheids",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/145/106/table.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "phat-clusters-table2",
+      "path": "src/objects/m31-layers/source/phat-clusters/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/802/127/table2.dat",
+      "title": "PHAT stellar cluster survey. II. Andromeda Project cluster catalog, table2.dat",
+      "credit": "L. C. Johnson, A. C. Seth, J. J. Dalcanton, M. L. Wallace, R. J. Simpson, C. J. Lintott, A. Kapadia, E. D. Skillman, N. Caldwell, M. Fouesneau, D. R. Weisz, B. F. Williams, L. C. Beerman, D. A. Gouliermis, A. Sarajedini; ApJ 802, 127",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through phat-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "johnson-2015-phat-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/802/127/table2.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "heic1112f-crop",
+      "path": "src/objects/m31-layers/source/source.jpg",
+      "origin": "https://esahubble.org/images/heic1112f/",
+      "sourceUrl": "https://esahubble.org/images/heic1112f/",
+      "title": "Wide-field view of the Andromeda Galaxy",
+      "credit": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "High-resolution crop/resample derived offline from the publisher Large JPEG; packages/bake/authoring/m31/compose-optical.mts fills the optical composite's notches and outer disc from it.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esa-heic1112f",
+            "role": "material",
+            "evidence": "src/objects/m31-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0; provider terms: https://esahubble.org/copyright/. Retain the complete recorded credit."
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m31-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m31-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m31-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "stellar-extent",
+      "path": "src/objects/m31-layers/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ibata-2005-m31-extended-disk",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/astro-ph/0504164"
+          }
+        ]
+      }
+    },
+    {
+      "id": "disc-geometry",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/disc-geometry.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored disc orientation that places catalogue dots on the photograph's disc; its values cite their papers inside the file.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "azimlu-hii-points",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/azimlu-hii/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A new catalog of H II regions in M31 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "lee-snr-points",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/lee-snr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A new optical survey of supernova remnant candidates in M31 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "lggs-stars-points",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/lggs-stars/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "merrett-pne-points",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/merrett-pne/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A deep kinematic survey of planetary nebulae in the Andromeda galaxy using the Planetary Nebula Spectrograph rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "pandromeda-cepheids-points",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/pandromeda-cepheids/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Properties of M31. II. A Cepheid disk sample derived from the first year of PS1 PAndromeda data rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "phat-clusters-points",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/phat-clusters/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the PHAT stellar cluster survey. II. Andromeda Project cluster catalog rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "stars-merge",
+      "kind": "authored-document",
+      "path": "src/objects/m31-layers/source/stars/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

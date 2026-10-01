@@ -25,6 +25,12 @@ test('document descriptions are optional without weakening generator identity', 
   assert.throws(() => parse({ ...manifest, generatedIntermediates: [{ ...base.generatedIntermediates[0], generator: '' }] }), /generator/);
 });
 
+test('only a manifest whose owner prepares nothing from input files may list no inputs', () => {
+  const manifest = { ...sourceManifest({}), inputs: [] };
+  assert.throws(() => validateSourceManifest('fixture', manifest), /inputs are empty/);
+  assert.deepEqual(validateSourceManifest('fixture', manifest, { inputs: 'optional' }).inputs, []);
+});
+
 test("validates and verifies every authoritative source entry class", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-source-manifest-"));
   temporary.push(root);

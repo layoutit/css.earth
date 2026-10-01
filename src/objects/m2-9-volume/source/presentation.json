@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m2-9-volume",
+  "name": "Twin Jet Nebula",
+  "defaultDataset": "hst-optical",
+  "bank": {
+    "path": "src/objects/m2-9-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "src/objects/m2-9-volume/source/bake-inputs/references/00-experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m2-9-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [
+    "image-frame",
+    "stellar-field"
+  ],
+  "datasets": [
+    {
+      "id": "hst-optical",
+      "label": "Hubble · optical",
+      "title": "The Twin Jet Nebula in visible light",
+      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300±200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Hubble optical colors on an assumed symmetric cloud; depth and inclination are not measured.",
+      "detail": "788 × 438 px",
+      "facts": [
+        {
+          "id": "source-pixels",
+          "label": "Accepted crop",
+          "value": "788 × 438 pixels"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "58.0350 × 32.2766 arcsec"
+        },
+        {
+          "id": "distance",
+          "label": "Adopted distance",
+          "value": "650 pc; published alternative 1300 ± 200 pc"
+        }
+      ],
+      "input": "hst-optical",
+      "preview": {
+        "path": ".local/nebula-lab/research/wenger/m2-9-original.jpg",
+        "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
+        "crop": {
+          "left": 6,
+          "top": 6,
+          "width": 788,
+          "height": 438
+        }
+      }
+    }
+  ]
+}

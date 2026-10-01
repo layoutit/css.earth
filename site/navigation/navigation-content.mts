@@ -13,9 +13,9 @@ export interface NavigationContent {
 }
 export type NavigationContentLoader = (object: ObjectEntry, options: { signal: AbortSignal }) => Promise<NavigationContent>;
 
-export function objectLinkIsCurrent(anchor: Pick<HTMLAnchorElement, 'origin' | 'pathname' | 'search' | 'hasAttribute'>,
+export function objectLinkIsCurrent(anchor: Pick<HTMLAnchorElement, 'origin' | 'pathname' | 'search'>,
   origin: string, route: string) {
-  if (anchor.hasAttribute('data-prepared-focus-id') || anchor.origin !== origin || anchor.pathname !== route) return false;
+  if (anchor.origin !== origin || anchor.pathname !== route) return false;
   const query = new URLSearchParams(anchor.search);
   return !query.has('overview');
 }

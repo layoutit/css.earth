@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "fornax-cluster",
+  "displayName": "Fornax Cluster",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Group distance",
+        "value": "19.66 Mpc",
+        "source": {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 54.62\u00b0, Dec -35.45\u00b0",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "X-ray selected galaxy cluster",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "0.0051",
+        "source": {
+          "catalogueId": "publication-2004a-a-425-367b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2004A&A...425..367B",
+          "label": "Redshift reference 2004A&A...425..367B, transcribed from MCXC-II.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "aperture",
+        "label": "R500 radius",
+        "value": "0.411 Mpc",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "members",
+    "controls": [
+      {
+        "id": "members",
+        "label": "Member galaxies",
+        "thumbnail": "fornax-cluster-dataset-members.webp",
+        "volume": {
+          "objectId": "fornax-cluster-members",
+          "datasetId": "members",
+          "surface": "members"
+        },
+        "source": {
+          "id": "fornax-cluster-members",
+          "path": "../../fornax-cluster-members/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/180"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+      "href": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Redshift reference 2004A&A...425..367B, transcribed from MCXC-II.",
+      "href": "https://ui.adsabs.harvard.edu/abs/2004A&A...425..367B"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "m83",
+  "classification": "galaxy",
+  "order": 5147,
+  "physical": {
+    "name": "M83",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M83 is recorded: it is an extended galaxy, and its package frames it at 9300 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 204.2504167,
+    "declinationDegrees": -29.8678,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 4897788.19368,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 519.1,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:m_083:location",
+      "distance": "Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 4897788.19368 pc (-67200.1732867/+68135.0208189); unspecified",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 83: 519.1 km/s, from 2004MNRAS.350.1195M (https://ui.adsabs.harvard.edu/abs/2004MNRAS.350.1195M/abstract)"
+    }
+  }
+}

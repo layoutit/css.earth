@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
 import { readCompactCompiler } from './compact-compiler.ts';
-const input = async () => JSON.parse(gunzipSync(await readFile('src/objects/m42/source/bake-inputs.json.gz')).toString());
+const input = async () => JSON.parse(gunzipSync(await readFile('src/objects/m42-volume/source/bake-inputs.json.gz')).toString());
 test('compact compiler validates the accepted field, material correspondence and sampling', async () => {
   const value = await input(), parsed = readCompactCompiler(value);
   assert.equal(parsed.objectId, 'm42');

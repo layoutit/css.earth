@@ -1,6 +1,6 @@
 # Lagoon · M8
 
-This lab holds the processing studies for the Lagoon Nebula, an asymmetric H II region and star-forming nebula. The [current shipped object record](../../../../src/objects/m8/README.md) owns the active sources, delivery evidence and known problems. Results below do not qualify later deliveries.
+This lab holds the processing studies for the Lagoon Nebula, an asymmetric H II region and star-forming nebula. The [current shipped object record](../../../../src/objects/m8-volume/README.md) owns the active sources, delivery evidence and known problems. Results below do not qualify later deliveries.
 
 The selected optical, near-infrared and mid-infrared images have verified native star separation and a shared 3D cloud. The geometry uses a paper-guided local PDR interpretation with explicitly authored depth across the wider field. It is relative display emission, not recovered gas or dust density.
 

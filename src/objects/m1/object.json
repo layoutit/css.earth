@@ -1,42 +1,97 @@
 {
   "schema": "cssearth-object@2",
   "id": "m1",
-  "type": "volume-dataset-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Crab Nebula",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 40627486340224.22
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Crab Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 412529612.5,
+      "description": "The Crab combines an expanding supernova remnant with a pulsar wind nebula.",
+      "aliases": [
+        "M1",
+        "NGC 1952",
+        "Crab"
+      ],
+      "order": 5139,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        6342260538817668000,
-        56859423001578635000,
-        23134959365503853000
+        6344354362860136000,
+        56860857745615634000,
+        23133406124448793000
       ],
-      "localToReferenceXyzw": [
-        0.031045928829824782,
-        0.5582208269556465,
-        0.8278320620053893,
-        0.04604058831023959
+      "presentationToReference": [
+        0.10282947758484867,
+        0,
+        0.9946989989638207,
+        0.9126184887074772,
+        0.3977771559319137,
+        -0.09434420113604366,
+        0.3956685388161502,
+        -0.9174820620691818,
+        -0.040903217139665576
       ],
-      "metersPerUnit": 299195741400000,
-      "boundsUnits": {
-        "min": [
-          -183.49862979538614,
-          -172.9527315312835,
-          -165.92213268854837
-        ],
-        "max": [
-          183.49862979538614,
-          172.9527315312835,
-          165.92213268854837
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/delivery.json"
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 131056407549110.38,
+      "bodyRadiusM": 40627486340224216
     }
   },
   "prepared": {
-    "format": "cssearth-volume-datasets@1",
-    "url": "prepared/datasets.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

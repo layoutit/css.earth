@@ -519,10 +519,10 @@ function validateState(state: OrbitalState, id: string, placed: boolean): void {
   identifier(state.centerBodyId, `${id} orbit parent`);
   [state.positionM, state.centerPositionM, state.normal, state.perihelionDirection].forEach((value, index) => { if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`${id} vector ${index} is invalid.`); });
   const axis = finite(state.semiMajorAxisM, `${id} semi-major axis`), eccentricity = state.eccentricity;
-  // Eccentricity 1 is a placed source moving straight along its line of sight (prepare-solar-geometry.mts): placed by its
-  // position, never drawn as a path.
+  // Eccentricity 1 is a placed source moving straight along its line of sight, or held still (prepare-solar-geometry.mts):
+  // placed by its position, never drawn as a path, and bound or unbound.
   if (!(Number.isFinite(eccentricity) && eccentricity >= 0 && (eccentricity !== 1 || placed) &&
-      (eccentricity < 1 ? axis > 0 : axis < 0)) || !Number.isFinite(state.trueAnomalyRadians) ||
+      (eccentricity < 1 ? axis > 0 : eccentricity === 1 ? axis !== 0 : axis < 0)) || !Number.isFinite(state.trueAnomalyRadians) ||
       1 + eccentricity * Math.cos(state.trueAnomalyRadians) <= 0 || Math.abs(dot(state.normal, state.perihelionDirection)) > 1e-8) {
     throw new TypeError(`${id} orbit is invalid.`);
   }

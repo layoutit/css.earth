@@ -1,0 +1,236 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m31-layers",
+  "source": {
+    "path": "optical-composite.jpg",
+    "dimensions": [
+      7560,
+      2520
+    ],
+    "originalDimensions": [
+      7560,
+      2520
+    ],
+    "publisherUrl": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
+    "downloadUrl": "https://storage.noirlab.edu/media/archives/images/large/noao-m31lgs_ubvIha.jpg",
+    "credit": "Local Group Survey Team and T.A. Rector (University of Alaska Anchorage); outer disc: ESA/Hubble & Digitized Sky Survey 2, acknowledgment Davide De Martin (ESA/Hubble)",
+    "license": "CC-BY-4.0",
+    "foregroundStars": {
+      "path": "gaia-dr3-foreground.csv",
+      "raDegColumn": "RA_ICRS",
+      "decDegColumn": "DE_ICRS",
+      "gMagColumn": "Gmag",
+      "source": "gaia-2023-dr3",
+      "basis": "Milky Way foreground stars by the criterion of Ren et al. (2021, Sect. 3.2): a Gaia parallax measured to better than 20% that places the star within 50 kpc (parallax above 0.02 mas), or a proper motion in right ascension or declination above 0.2 mas/yr plus 2 sigma, measured to better than 20%. Applied to Gaia DR3 within 2.3 deg of M31's centre, which covers the photograph's crop; the query is in the Gaia DR3 source record. Laid on M31's 77.5 deg disc, each of these round stars becomes a dash 4.6 times longer than it is wide."
+    },
+    "companions": {
+      "catalogue": "src/objects/local-group/source/lvdb/comb_all.csv",
+      "keys": [
+        "m_032",
+        "ngc_0205"
+      ],
+      "source": "lvdb-v1-1-1",
+      "basis": "M32 and NGC 205 are separate galaxies near M31 on the sky; laid on M31's disc with the rest of the photograph, each becomes a bright streak. Their centres and half-light ellipses are the Local Volume Database's (structure from McConnachie 2012); how far each glow reaches is measured in the image. Andromeda IX, the third companion in the field, does not show in it."
+    }
+  },
+  "observation": {
+    "centerRaDeg": 10.683916666666665,
+    "centerDecDeg": 41.26566666666666,
+    "fieldOfViewDeg": [
+      4.2,
+      1.4
+    ],
+    "northClockwiseDeg": 125.8
+  },
+  "target": {
+    "centerRaDeg": 10.683916666666665,
+    "centerDecDeg": 41.26566666666666,
+    "distancePc": 776247.1166286912
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 74,
+    "lineOfNodesPaDeg": 37.7,
+    "thicknessKpc": 2.05,
+    "depthWeights": [
+      0.005064612052871198,
+      0.006144991037439674,
+      0.007455835601229666,
+      0.009046308476916058,
+      0.010976059751911163,
+      0.013317464022473227,
+      0.016158334775736583,
+      0.019605217801541317,
+      0.02378738715223526,
+      0.028861693517418723,
+      0.03501844685010452,
+      0.042488553869976464,
+      0.05155217813312308,
+      0.06254924746090744,
+      0.07589220280514299,
+      0.09208146669097267,
+      0.09208146669097267,
+      0.07589220280514301,
+      0.06254924746090741,
+      0.05155217813312308,
+      0.042488553869976464,
+      0.03501844685010453,
+      0.028861693517418713,
+      0.02378738715223526,
+      0.019605217801541317,
+      0.016158334775736586,
+      0.013317464022473227,
+      0.010976059751911163,
+      0.009046308476916058,
+      0.007455835601229669,
+      0.006144991037439674,
+      0.005064612052871198
+    ],
+    "supportRadiusKpc": 27.2,
+    "supportTaperFraction": 0.75,
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "bulge": {
+      "source": "dorman-2013-m31-structural-decomposition",
+      "positionAngleDeg": 44.4,
+      "sersicIndex": 1.917,
+      "halfLightRadiusKpc": 0.778,
+      "surfaceBrightnessAtHalfLight": 17.849,
+      "skyEllipticity": 0.277,
+      "disc": {
+        "centralSurfaceBrightness": 18.901,
+        "scaleLengthKpc": 5.76,
+        "skyEllipticity": 0.725
+      },
+      "extentKpc": {
+        "radius": 5,
+        "height": 2.5
+      }
+    }
+  },
+  "bake": {
+    "maxFacePixels": 7560,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.006,
+    "encoding": {
+      "format": "webp",
+      "quality": 82,
+      "alphaQuality": 60
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 24,
+    "colourTie": {
+      "bv": 0.92,
+      "source": "rc3-1991",
+      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 224 a total (B-V)T of 0.92 +/- 0.02 as observed from Earth, through the Milky Way; corrected for Galactic and internal extinction it is 0.68 ((B-V)oT). The composite's own colour comes from its publisher's UBVI and H-alpha mapping, which runs red; red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for B-V 0.92, the function that colours the star dots."
+    }
+  },
+  "provenance": {
+    "path": "provenance.json"
+  },
+  "composition": {
+    "method": "packages/bake/authoring/m31/compose-optical.mts",
+    "frame": {
+      "centerRaDeg": 10.683916666666665,
+      "centerDecDeg": 41.26566666666666,
+      "fieldOfViewDeg": [
+        4.2,
+        1.4
+      ],
+      "northClockwiseDeg": 125.8,
+      "arcsecPerPixel": 2
+    },
+    "survey": {
+      "path": "lggs-panorama.jpg",
+      "dimensions": [
+        48327,
+        12185
+      ],
+      "observation": {
+        "centerRaDeg": 10.7045,
+        "centerDecDeg": 41.2102167,
+        "fieldOfViewDeg": [
+          3.627,
+          0.9145
+        ],
+        "northClockwiseDeg": 125.8
+      },
+      "publisherUrl": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
+      "downloadUrl": "https://storage.noirlab.edu/media/archives/images/large/noao-m31lgs_ubvIha.jpg",
+      "credit": "Local Group Survey Team and T.A. Rector (University of Alaska Anchorage)",
+      "license": "CC-BY-4.0"
+    },
+    "fill": {
+      "path": "source.jpg",
+      "dimensions": [
+        4783,
+        5000
+      ],
+      "originalDimensions": [
+        21299,
+        13775
+      ],
+      "parentPixelWindow": [
+        6000,
+        1000,
+        11000,
+        11500
+      ],
+      "observation": {
+        "centerRaDeg": 10.7523331482,
+        "centerDecDeg": 41.2596417071,
+        "fieldOfViewDeg": [
+          6.032166666666667,
+          3.9013333333333335
+        ],
+        "northClockwiseDeg": -1.92
+      },
+      "publisherUrl": "https://esahubble.org/images/heic1112f/",
+      "downloadUrl": "https://cdn.esahubble.org/archives/images/large/heic1112f.jpg",
+      "credit": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
+      "license": "CC-BY-4.0"
+    },
+    "featherArcsec": 120,
+    "noDataLevel": 2,
+    "basis": "The survey panorama is about three times sharper than the DSS2 view and in true UBVI and H-alpha colour, but it is a strip 55 arcmin wide whose notches reach 11.8 kpc into the disc; the DSS2 view fills them and the outer disc, its light histogram-matched to the survey's over the pixels both cover. The frame runs along the survey's strip at 2 arcsec per pixel. The 2 arcmin fade and the no-data level are presentation choices."
+  }
+}

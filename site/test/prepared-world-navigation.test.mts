@@ -11,7 +11,6 @@ import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts'
 import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 import type { SceneFactory } from '../browser/browser-types.mts';
@@ -26,7 +25,7 @@ type MockLease = { resources: Resources; destroy(): void; projection(): undefine
 type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; framingScale(): Promise<number>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
 type MockFactory = { navigation: MockPreparation };
 type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWorldNavigation>['prepare']>[0]>, 'toFactory'> & { toFactory?: MockFactory | Promise<MockFactory> };
-type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
+type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame> };
 const lifecycle = { ready: Promise.resolve(), sharedView: unusedSharedView, pause() {}, resume() {}, destroy() {} } satisfies Omit<ObjectSceneLifecycle, 'navigation'>;
 /** CSS presentation to a right-handed reference: a reflection. */
 const identity = [1,0,0,0,-1,0,0,0,1] as const;
@@ -44,9 +43,6 @@ function fixtureFactory(arrival?: PreparedArrivalView) {
   const windowTarget = { performance: { now: () => time }, matchMedia: () => ({ matches: true }), requestAnimationFrame(fn: FrameRequestCallback) { callbacks.set(++next, fn); return next; },
     cancelAnimationFrame(id: number) { callbacks.delete(id); } };
   const navigation: MockNavigation = { ...navigationFixture(frames[0], () => current, () => { throw new Error("optics overridden"); }), frame: frames[0], capture: () => current,
-    activePreparedFocus: null,
-    preparedFocus() { return this.activePreparedFocus; },
-    setPreparedFocus(focus) { this.activePreparedFocus = focus; },
     optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000, heightPixels: 2000,
       framingRadiusPixels: 200, detailHandoffDiameterPixels: 14, visibleRect: null }),
     apply(value) { current = value; paints.push(value); } };
@@ -440,21 +436,6 @@ test('the same object can recenter at overview distance without resetting to its
   closePose(f.navigation.capture().pose, targetWorldCamera.pose);
 });
 
-test('ordinary planet selection clears a prepared catalogue pivot for both same-owner focus and detail handoff', async () => {
-  for (const sameOwner of [true, false]) {
-    const f = fixtureFactory();
-    f.navigation.setPreparedFocus({ id: 'catalogue:7', positionM: [0,0,0], framingRadiusM: 1, limits: { minimumDistanceM: 1, maximumDistanceM: 1e20 } });
-    const before = f.navigation.capture();
-    const task = sameOwner
-      ? f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal, reducedMotion: true })
-      : f.start({ preserveView: true });
-    assert.equal(f.navigation.preparedFocus(), null);
-    assert.equal(f.navigation.capture(), before, 'Clearing the input pivot cannot move the existing observer');
-    const result = await drainFrames<void | WorldHandoff>(f, { task });
-    if (!sameOwner) { assert.ok(result); await result.afterMount(f.mounted()); }
-    f.controller.abort();
-  }
-});
 // The synthetic optics use a 2000px square viewport. A sphere beside the
 // eye plane can have a huge projected ellipse entirely outside that viewport.
 const proxyVisible = (view: WorldCameraPresentation) => view.silhouette !== null && view.centerPixels !== null &&

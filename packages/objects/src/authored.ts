@@ -1,5 +1,7 @@
 import type { ObjectDescriptor } from './descriptor.js';
 import { parseObjectDescriptor } from './parse.js';
+import { isRecord } from '@cssearth/core';
+import { isExtendedClassification } from './registry/object-schema.js';
 
 export type ShapeKind = 'sphere' | 'ellipsoid' | 'radial-terrain';
 /** A recipe input by id and package path. The source manifest declares the file once, never here. */
@@ -115,7 +117,8 @@ function parseMaterials(value: unknown, sourceIds: ReadonlySet<string>, frameIds
   unique(output.map(item => item.id), 'recipe.materials'); return freeze(output);
 }
 function parseSurfaces(value: unknown, sourceIds: ReadonlySet<string>, materialIds: ReadonlySet<string>, frameIds: ReadonlySet<string>): readonly SurfaceRecipe[] {
-  if (!Array.isArray(value) || !value.length) throw new TypeError('recipe.surfaces must be a nonempty array.');
+  // An object with no surface (a galaxy, a nebula, a cluster of galaxies) declares none: its datasets show companion banks.
+  if (!Array.isArray(value)) throw new TypeError('recipe.surfaces must be an array.');
   const output = value.map((item, index) => {
     const at = `recipe.surfaces[${index}]`, input = record(item, at); keys(input, ['id', 'source', 'projection', 'datasets'], at);
     if (input.projection !== 'equirectangular' && input.projection !== 'cubemap') throw new TypeError(`${at}.projection is not supported.`);
@@ -177,5 +180,10 @@ export function parseAuthoredObjectDescriptor(value: unknown): AuthoredObjectDes
   const descriptor = parseObjectDescriptor(value);
   const raw = descriptor.properties.recipe;
   if (raw === undefined) throw new TypeError('object.properties.recipe is required for authored objects.');
-  return freeze({ ...descriptor, recipe: parseAuthoredRecipe(raw) });
+  const recipe = parseAuthoredRecipe(raw), catalog = descriptor.properties.catalog;
+  // Only an object with no solid surface (a galaxy, a nebula, a cluster) may declare none: a body without surfaces is a mistake.
+  if (!recipe.surfaces.length && !(isRecord(catalog) && typeof catalog.classification === 'string' && isExtendedClassification(catalog.classification))) {
+    throw new TypeError(`${descriptor.id}: recipe.surfaces is empty, which only a galaxy, a galaxy cluster, a nebula or a globular cluster may declare.`);
+  }
+  return freeze({ ...descriptor, recipe });
 }

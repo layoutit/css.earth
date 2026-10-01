@@ -104,7 +104,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !SHELL_SETTING_NAMES.has(input.name));
-  const panels = new Map(sectionElements(document, '[data-dataset-details], [data-focus-dataset-details]').map(panel => [panel.id, panel]));
+  const panels = new Map(sectionElements(document, '[data-dataset-details], [data-page-dataset-details]').map(panel => [panel.id, panel]));
   const details = datasetInputs.map(input => {
     const id = input.getAttribute('aria-controls');
     const panel = id ? panels.get(id) ?? document.getElementById(id) : null;

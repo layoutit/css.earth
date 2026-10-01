@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { hasErrorCode } from '@cssearth/core';
 import { checkLineage, lineageSource } from '@cssearth/objects/provenance';
 import type { LineageSource, ObjectLineage } from '@cssearth/objects/provenance';
-import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
+import { sourceArray, sourceId, sourceObject, sourceText } from '@cssearth/objects/sources';
 
 /** Every record a context or image-layer manifest lists: its inputs, documents and generated intermediates. */
 export function manifestSources(manifest: Record<string, unknown>): LineageSource[] {
@@ -36,7 +36,10 @@ export async function contextLineages({ route, root = process.cwd(), input = (pa
         interpretation: { ...(typeof interpretation.kind === 'string' ? { kind: interpretation.kind } : {}),
           ...(typeof interpretation.sourceKind === 'string' ? { sourceKind: interpretation.sourceKind } : {}) } };
     });
-    results.push({ id, name: sourceText(presentation.name), route, base, controls: [],
+    // A bank that names its host object (`properties.host` in its descriptor) is seen on that object's page.
+    const descriptor = sourceObject(JSON.parse((await input(`${base}/object.json`)).toString()));
+    const properties = sourceObject(descriptor.properties), host = properties.host === undefined ? undefined : sourceId(properties.host);
+    results.push({ id, name: sourceText(presentation.name), route: host === undefined ? route : `/${host}/`, base, controls: [],
       lineage: checkLineage({ objectId: id, manifestPath: 'source/manifest.json', sources: manifestSources(manifest), products }) });
   }
   return results;

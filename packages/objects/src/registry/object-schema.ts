@@ -17,7 +17,15 @@ export interface ObjectWorldFrame {
   readonly orbitUpReference?: ObjectPositionM;
 }
 
-export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole';
+export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole'
+  | 'galaxy' | 'galaxy-cluster' | 'nebula' | 'globular-cluster';
+/** A body placed by its astrometry (a position and a distance) rather than an orbit: stars, black holes and the galaxies,
+ * clusters and nebulae beyond them. Each is a parentless world-context body; none draws a trajectory. */
+/** The placed bodies with no solid surface: their radius frames them, it occludes nothing. */
+export const EXTENDED_CLASSIFICATIONS: readonly ObjectClassification[] = Object.freeze(['galaxy', 'galaxy-cluster', 'nebula', 'globular-cluster']);
+export const isExtendedClassification = (classification: string | undefined): boolean => (EXTENDED_CLASSIFICATIONS as readonly (string | undefined)[]).includes(classification);
+export const PLACED_CLASSIFICATIONS: readonly ObjectClassification[] = Object.freeze(['star', 'black-hole', ...EXTENDED_CLASSIFICATIONS]);
+export const isPlacedClassification = (classification: string | undefined): boolean => (PLACED_CLASSIFICATIONS as readonly (string | undefined)[]).includes(classification);
 /** `Scene` is what the host's loader resolves to and `Signal` how the host cancels it (an `AbortSignal`); the registry only
  * checks that a loader is bound. */
 export interface ObjectDefinitionInput<Scene = unknown, Signal = unknown> {
@@ -27,7 +35,7 @@ export interface ObjectDefinitionInput<Scene = unknown, Signal = unknown> {
   color: string; distance: NavigationDistance; route: string; description: string;
   loadScene(signal?: Signal): Promise<Scene>; worldFrame: unknown; discovery?: ObjectDiscovery;
 }
-export type ObjectEntry<Scene = unknown, Signal = unknown> = Readonly<Omit<ObjectDefinitionInput<Scene, Signal>, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: ObjectWorldFrame }>;
+export type ObjectEntry<Scene = unknown, Signal = unknown> = Readonly<Omit<ObjectDefinitionInput<Scene, Signal>, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; worldFrame: ObjectWorldFrame }>;
 
 const OBJECT_INPUT_KEYS = new Set([
   "id",
@@ -48,6 +56,7 @@ const OBJECT_INPUT_KEYS = new Set([
 // list deliberately when a package introduces a new kind of body.
 export const OBJECT_CLASSIFICATIONS = Object.freeze([
   "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet", "black-hole",
+  "galaxy", "galaxy-cluster", "nebula", "globular-cluster",
 ]);
 
 export function defineObject<Scene, Signal>(input: ObjectDefinitionInput<Scene, Signal>): ObjectEntry<Scene, Signal> {
@@ -70,7 +79,6 @@ export function defineObject<Scene, Signal>(input: ObjectDefinitionInput<Scene, 
   }
 
   return Object.freeze({
-    kind: 'scene',
     id,
     name,
     systemName,
@@ -112,7 +120,7 @@ function nonEmpty(value: unknown): value is string {
 }
 // Registry capability data is numeric; importing a renderer entry here would
 // pull its native camera factory into every otherwise unrelated object route.
-function parseWorldFrame(value: unknown): ObjectWorldFrame {
+export function parseWorldFrame(value: unknown): ObjectWorldFrame {
   const fields = ['referenceFrame', 'epochJdTt', 'originM', 'presentationToReference', 'metersPerUnit', 'bodyRadiusM', 'orbitUpReference'];
   const vector = (input: unknown, length: number): input is number[] => isArray(input) && input.length === length && Array.from(input).every(Number.isFinite);
   if (!isRecord(value) || Object.getPrototypeOf(value) !== Object.prototype || Object.keys(value).some(key => !fields.includes(key)) ||

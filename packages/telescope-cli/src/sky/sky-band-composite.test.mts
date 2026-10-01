@@ -96,8 +96,8 @@ test('WISE bands mosaic pinned atlas tiles through a pinned tile list', async ()
       tiles: tiles.map((bytes, i) => ({ coaddId: `056${4 + i}p242_ac51`, bytes: bytes.length })) }));
     for (const [i, bytes] of tiles.entries()) await writeFile(join(cache, 'wise-atlas', `056${4 + i}p242_ac51-w4-int-3.fits.gz`), bytes);
     const composite = parseSkyBandComposite({ schema: 'cssearth-sky-band-composite@1', grid, backgroundPercentile: 5, peakPercentile: 100,
-      bands: [{ band: 'W4', tiles: { path: 'src/objects/m45/source/wise-atlas/w4.json' } }], display: { minimum: 0, stretch: 1, softening: 8 } });
-    const listPath = 'src/objects/m45/source/wise-atlas/w4.json';
+      bands: [{ band: 'W4', tiles: { path: 'src/objects/m45-volume/source/wise-atlas/w4.json' } }], display: { minimum: 0, stretch: 1, softening: 8 } });
+    const listPath = 'src/objects/m45-volume/source/wise-atlas/w4.json';
     const result = await composeSkyBands(composite, { input: async path => { assert.equal(path, listPath); return pinsList; }, cache });
     const acquisition = result.evidence.bands[0]!.acquisition as { kind: string; backgroundMatching: { medianOverlapStepDnBefore: number; medianOverlapStepDnAfter: number } };
     assert.equal(acquisition.kind, 'wise-atlas');

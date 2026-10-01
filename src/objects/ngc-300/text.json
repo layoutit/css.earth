@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-300",
+  "card": {
+    "text": "A galaxy 2.1 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2009aj-138-323t",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+        "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+        "checked": "2026-10-01",
+        "locator": "distance: 2.089 Mpc (−56,940 / +58,530 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 2.1 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2009aj-138-323t",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+        "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+        "checked": "2026-10-01",
+        "locator": "distance: 2.089 Mpc (−56,940 / +58,530 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Spiral galaxy NGC 300",
+      "detail": "7603 × 7603 px",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1037a",
+          "url": "https://www.eso.org/public/images/eso1037a/",
+          "label": "Spiral galaxy NGC 300; ESO",
+          "checked": "2026-10-01",
+          "locator": "Spiral galaxy NGC 300"
+        }
+      ]
+    }
+  }
+}

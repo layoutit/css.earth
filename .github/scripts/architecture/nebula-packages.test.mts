@@ -39,7 +39,7 @@ test('actual illegal imports, missing exports and line overflows fail the packag
     assert.ok(checkNebulaBoundaries(root).some(error => error.includes('relative import leaves package')));
     write(source, '\n'.repeat(601));
     assert.ok(checkNebulaBoundaries(root).some(error => error.includes('exceeds 600')));
-    write(source, "const source = 'src/objects/m42/source/config.json';\n");
+    write(source, "const source = 'src/objects/m42-volume/source/config.json';\n");
     assert.ok(checkNebulaBoundaries(root).some(error => error.includes('object/source path')));
     write(source, 'const load = (name: string) => import(name);\n');
     assert.ok(checkNebulaBoundaries(root).some(error => error.includes('unchecked boundary')));
@@ -64,7 +64,7 @@ test('the main volume entry keeps volume-core\'s platform ban and never reaches 
     assert.ok(check(node, `import '${bakeVolumeEntries.main}';`).some(error => error.includes('bake topic imports a bake entry')));
     assert.ok(check(node, "import '@cssearth/nebula-lab/cli';").some(error => error.includes('forbidden import lab')));
     assert.ok(check(node, "import 'undeclared-library';").some(error => error.includes('undeclared external dependency undeclared-library')));
-    assert.ok(check(node, "const source = 'src/objects/m42/source/config.json';").some(error => error.includes('object/source path')));
+    assert.ok(check(node, "const source = 'src/objects/m42-volume/source/config.json';").some(error => error.includes('object/source path')));
     assert.ok(check(node, 'const load = (name: string) => import(name);').some(error => error.includes('unchecked boundary')));
     assert.ok(check(main, '\n'.repeat(601)).some(error => error.includes('exceeds 600')));
     write('packages/bake/package.json', JSON.stringify({ name: bakePackage, private: true, exports: { './volume': './dist/volume.js' } }));

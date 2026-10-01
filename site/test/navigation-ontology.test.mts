@@ -2,30 +2,50 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
+import { OBJECTS, OVERVIEWS, SCENE_OBJECTS, requireObject, requirePage, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
-import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '@cssearth/bake/navigation';
-import { readOverviews } from '@cssearth/objects/node';
-import { distanceDescription, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
+import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
+import { distanceDescription, isExtendedClassification, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
+import { isRecord } from '@cssearth/core';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { resolve } from 'node:path';
 
-test('every prepared spatial subject and every scene has exactly one searchable destination', async () => {
-  const prepared = await readPreparedFocusObjects(resolve('src/objects'), 'sun');
-  const overviews = await readOverviews(resolve('src/objects'), 'sun');
-  assert.equal(OBJECTS.length, SCENE_OBJECTS.length + prepared.length + overviews.length);
-  assert.deepEqual(OBJECTS.filter(object => object.kind === 'prepared-focus'), prepared);
-  assert.deepEqual(OBJECTS.filter(object => object.kind === 'overview'), overviews);
-  // Overviews are searched through their own rows (CatalogueOverviewRows.astro); everything else through the catalogue.
-  assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.filter(object => object.kind !== 'overview').map(object => object.id)));
+test('every scene and every package the host draws has exactly one searchable destination, built from its own descriptor', async () => {
+  const descriptors = await readObjectDescriptors(resolve('src/objects'));
+  // A galaxy, a nebula or a cluster is an authored object like any body: its recipe declares no surface.
+  const hosted = [...descriptors].filter(([, descriptor]) => isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe)
+    && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length).map(([id]) => id);
+  assert.equal(hosted.length, 18);
+  // A bank is context the world draws, never an object: none carries a catalogue entry.
+  for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
+  const overviews = await readOverviews(resolve('src/objects'));
+  // The registry holds objects only, each with its own scene. A level of the zoom ladder is a view, not an object.
+  assert.equal(OBJECTS, SCENE_OBJECTS);
+  for (const id of hosted) assert.equal(requireSceneObject(id).id, id);
+  assert.deepEqual(OVERVIEWS.map(level => level.id), overviews.map(overview => overview.id));
+  for (const level of OVERVIEWS) assert.equal(OBJECTS.some(object => object.id === level.id), false, level.id);
+  // Every level still has its page: the layout and the sitemap find it, though the object registry does not hold it.
+  for (const level of OVERVIEWS) assert.equal(requirePage(level.id).route, `/${level.id}/`);
+  assert.equal(requirePage('mars').name, 'Mars');
+  const sitemap = await (await import('../pages/sitemap.xml.ts')).GET().text();
+  for (const level of OVERVIEWS) assert.ok(sitemap.includes(`/${level.id}/</loc>`), level.id);
+  // The Local Group is a level with a place of its own: the world draws and names it.
+  assert.ok(OVERVIEWS.find(level => level.id === 'local-group')?.worldFrame);
+  // Levels are searched through their own rows (CatalogueOverviewRows.astro); every object through the catalogue.
+  assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
-  assert.equal(requireObject('m31').kind, 'prepared-focus');
-  assert.throws(() => requireSceneObject('m31'), /not a scene owner/);
+  assert.equal(requireSceneObject('m31').id, 'm31');
+  assert.throws(() => requireSceneObject('milky-way'), /no scene of its own/);
   for (const [query, id] of [['Andromeda', 'm31'], ['M31', 'm31'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
     const object = requireObject(id!);
-    assert.equal(object.kind, 'prepared-focus');
-    assert.ok(object.kind === 'prepared-focus' && object.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))), query);
+    assert.ok((object.searchNames ?? []).some(name => name.includes(normalizeDestinationQuery(query!))), query);
+  }
+  // Each is a body of the world, placed by its own world frame.
+  for (const id of hosted) {
+    const object = requireObject(id);
+    assert.ok(isExtendedClassification(object.classification) && Math.hypot(...object.worldFrame.originM) > 0, id);
   }
 });
 
@@ -34,8 +54,9 @@ test('distance display and order use the prepared position, never the legacy orb
     const descriptor = JSON.parse(await readFile(`src/objects/${object.id}/object.json`, 'utf8'));
     const distance = prepareSceneDistance(descriptor);
     assert.deepEqual(object.distance, distance, object.id);
-    assert.equal(distance.epochJdTt, object.worldFrame?.epochJdTt);
-    assert.equal(distance.referencePoint, 'heliocentre');
+    // A body on an orbit has a distance at the frame's epoch; one placed by a catalogue distance has no epoch.
+    assert.equal(distance.epochJdTt, distance.quantity === 'catalogue' ? null : object.worldFrame?.epochJdTt, object.id);
+    assert.equal(distance.referencePoint, distance.quantity === 'catalogue' ? 'observer' : 'heliocentre', object.id);
   }
   const halley = requireSceneObject('comet-1p');
   assert.ok(halley.distance.value > 30 && halley.distance.value < 40);
@@ -43,7 +64,6 @@ test('distance display and order use the prepared position, never the legacy orb
   assert.ok(!('distanceAu' in halley));
   assert.ok(SEARCH_OBJECTS.every((object, index) => index === 0 || object.distance.meters >= SEARCH_OBJECTS[index - 1]!.distance.meters));
   const cluster = requireObject('virgo-cluster');
-  assert.ok(cluster.kind !== 'overview');
   // A cluster sits at its Cosmicflows-4 group's measured distance, a catalogue distance, not its redshift's comoving one.
   assert.equal(cluster.distance.quantity, 'catalogue');
   assert.equal(cluster.distance.epochJdTt, null, 'navigation epoch must not become a measured distance epoch');
@@ -63,9 +83,6 @@ test('galaxy citations resolve across the full prepared catalogue, including the
   }
   assert.equal(resolveSpatialCitation('Graczyk2020ApJ...904...13G', catalogue.sources)?.url, 'https://arxiv.org/abs/2010.08754');
   const galaxy = catalogue.objects[0]!;
-  const future = prepareFocusObject({ ...galaxy, id: 'future_galaxy', name: 'Future galaxy', aliases: ['New alias'] }, 'sun');
-  assert.equal(future.route, '/future_galaxy/');
-  assert.ok(future.searchNames.includes('new alias'));
   const broken = { ...catalogue, objects: [{ ...galaxy, distance: { ...galaxy.distance, sourceRef: 'missing-paper' } }] };
   assert.throws(() => parsePreparedGalaxyCatalog(broken), /Unresolved distance reference/);
 });
@@ -75,12 +92,11 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   const raw: unknown = JSON.parse(await readFile('src/objects/local-group/prepared/catalogue.json', 'utf8'));
   const catalogue = parsePreparedGalaxyCatalog(raw), satellite = catalogue.objects.find(o => o.id === 'andromeda_01')!;
   assert.equal(satellite.hostId, 'm31', 'a host its object package details takes the package id');
-  assert.equal(prepareFocusObject(satellite, 'sun').sceneHostId, 'sun');
+  assert.equal(OBJECTS.some(o => o.id === satellite.id), false, 'a catalogue row without a package is data, never a destination');
   // The Milky Way row is detailed by the milky-way package, so it carries that id; its LVDB key stays in its source reference.
   assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'milky-way')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
-  assert.equal(OBJECTS.find(o => o.id === 'milky-way')?.kind, 'overview', 'a physical host does not fabricate a catalogue destination; its page is the overview');
+  assert.ok(OVERVIEWS.some(level => level.id === 'milky-way') && !OBJECTS.some(o => o.id === 'milky-way'), 'a physical host does not fabricate a catalogue destination; its page is the level');
   const m45 = OBJECTS.find(o => o.id === 'm45')!;
-  assert.ok(m45.kind !== 'overview');
   assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
   assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
   assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);

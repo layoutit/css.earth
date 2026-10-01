@@ -1,0 +1,246 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "smc-volume",
+  "entries": [
+    {
+      "id": "dataset-optical",
+      "subject": "Publisher optical display image",
+      "status": "included",
+      "finding": "publisher-curated AstroPix JPEG derivative. Selected for image-layer display. The SMASH image covers the main optical body, not the full Bridge, Wing or tidal debris. Released foreground and background sources remain. This ledger consolidates existing records; no fresh source survey or visual qualification was performed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/recipe.json"
+      ]
+    },
+    {
+      "id": "parametric-depth",
+      "subject": "Parametric image-layer geometry",
+      "status": "included",
+      "finding": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. Adopted thickness: 25 kpc. The cited geometry reference is Ripepi et al. 2017, arXiv:1707.04500; the broad envelope is not a thin disk or per-pixel distance map. Selection does not independently qualify those adopted values.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/recipe.json"
+      ]
+    },
+    {
+      "id": "scientific-registration",
+      "survey": "scientific-registration",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/recipe.json"
+      ]
+    },
+    {
+      "id": "dataset-smc-horalek-wide",
+      "subject": "Horálek wide-field optical photograph",
+      "status": "included",
+      "finding": "Shipped dataset. Matched stars through VISTA to SMASH: 32,120 matches, held-out p90 1.53 native VISTA pixels, verified only inside the matched hull (50.5% of the field); the outer field is extrapolated. Display-stretched photograph, not calibrated surface brightness. This image is also the baseline the emission model was fitted to. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
+      "evidence": [
+        "https://noirlab.edu/public/images/iotw2615a/",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
+      ]
+    },
+    {
+      "id": "dataset-smc-vista",
+      "subject": "ESO VISTA VMC near-infrared image",
+      "status": "included",
+      "finding": "Shipped dataset. Fitted shared-star homography to the native SMASH TIFF. Publisher 4000-pixel derivative; the 43223 × 38236 publisher master was not acquired. Display colour, not calibrated photometry. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso1714a/",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
+      ]
+    },
+    {
+      "id": "dataset-smc-smash",
+      "subject": "NOIRLab SMASH DECam optical image",
+      "status": "included",
+      "finding": "Shipped dataset. Publisher AVM sky anchor with a reciprocal relative star check. Its absolute sky solution remains the publisher’s, not an independently verified catalogue solution. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noirlab2030b/",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
+      ]
+    },
+    {
+      "id": "dataset-smc-dss2",
+      "subject": "ESA/Hubble Digitized Sky Survey 2 plate composite",
+      "status": "included",
+      "finding": "Shipped dataset. Fitted shared-star homography to the native SMASH TIFF. Full-resolution publisher JPEG; the 421.7 MB TIFF was deferred. Smaller footprint than VISTA and SMASH, and not outer tidal-tail coverage. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
+      "evidence": [
+        "https://esahubble.org/images/heic0514c/",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
+      ]
+    },
+    {
+      "id": "dataset-smc-allwise-wide",
+      "subject": "AllWISE 10° colour HiPS infrared field",
+      "status": "included",
+      "finding": "Shipped dataset. Fixed publisher TAN WCS independently checked against 7,172 bright AllWISE W1 catalogue stars with unchanged control thresholds and no fitted transform. Survey coordinates and image share mission data; diffuse emission and depth are not validated. It recolours one shared finite emission geometry; switching datasets changes colour only, never depth.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
+      ]
+    },
+    {
+      "id": "envelope-shape",
+      "subject": "Broad envelope depth hypothesis",
+      "status": "included",
+      "finding": "The envelope carries 82.79% of the image light along the VMC-constrained ellipsoid’s own depth distribution; image brightness never sets depth. The ellipsoid is the better of two neutral candidates against the VMC red-clump observations (withheld deviance per observed count 0.45749 against the affine Garver simulation’s 0.60119, lower better), not a measured gas body.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/EMISSION-METHOD.md",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/fit-evidence.json",
+        "https://doi.org/10.1093/mnras/staa3857"
+      ]
+    },
+    {
+      "id": "component-depth",
+      "subject": "Finite detail component depths",
+      "status": "included",
+      "finding": "The 476 fitted detail components are placed at the strongest conditional mode of the Garver stellar simulation along each observer ray, with thickness bounded by feature size; 8 components (0.35% of projected light) found no support and keep an authored finite depth. These are conditional realizations, not recovered gas depth, and they are conditioned on the simulation the same VMC comparison disfavours.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/EMISSION-METHOD.md",
+        "https://doi.org/10.5061/dryad.1vhhmgr82"
+      ]
+    },
+    {
+      "id": "catalogue-stars",
+      "subject": "Published massive SMC stars",
+      "status": "included",
+      "finding": "All 1,803 Bonanos et al. (2010) table 3 rows with finite V ≤ 16 land inside the fit footprint and have positive joint support, so none is excluded. Angular positions are measured; each depth is a deterministic realization of the joint emission and ellipsoid density along its own sightline, not a distance and not evidence of membership in an emitting structure.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/stars/README.md"
+      ]
+    },
+    {
+      "id": "retired-image-layer",
+      "subject": "Superseded parametric image-layer delivery",
+      "status": "excluded",
+      "finding": "The previous SMC object distributed one SMASH image through 32 normalized parametric slabs with an authored 25 kpc thickness and no observational depth constraint. Its prepared bank and 96 layer images are removed; its source record, recipe and publisher photograph are retained as documents, and that photograph is now the SMASH dataset preview.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noirlab2030b/",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/recipe.json"
+      ],
+      "revisitWhen": "A future delivery needs a separable parametric envelope again, or the retired record is shown to misstate its own inputs."
+    },
+    {
+      "id": "fits-composites",
+      "subject": "Four survey-band FITS composites",
+      "status": "excluded",
+      "finding": "DSS2 blue/red plates, AllWISE W2/W1, AllWISE W4/W3/W1 and Herschel SPIRE 250 µm pass the registration gate and have baked datasets in the lab, but each carries an uncorrected defect: a smooth W2 background gradient toward the south-east, W3 Galactic cirrus and scattered light, SPIRE covering only about 26% of the rectified field, and uncorrected DSS2 plate-to-plate steps. They stay lab-only rather than shipping a known artefact as SMC structure.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=ESAVO%2FP%2FHERSCHEL%2FSPIRE-250&get=record&fmt=json",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fblue&get=record&fmt=json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/README-candidates.md",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json"
+      ],
+      "revisitWhen": "A background-gradient, cirrus and plate-step correction is implemented and inspected, or SPIRE coverage is extended over the rectified field."
+    },
+    {
+      "id": "rejected-candidates",
+      "subject": "Candidate fields that failed registration or qualification",
+      "status": "excluded",
+      "finding": "The WISE press image and the Irida amateur mosaic fail the unchanged alignment threshold and serve as wrong-scale negative controls. Standalone Spitzer is archived with a failed star-pattern fit. The Herschel + Spitzer and Herschel/Planck/IRAS companions carry publisher astrometry only, with no independent registration gate.",
+      "evidence": [
+        "https://wise.ssl.berkeley.edu/gallery_SMC.html",
+        "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic.htm",
+        "https://irsa.ipac.caltech.edu/data/SPITZER/SAGE-SMC/overview.html",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/registration/wise-press-sin-negative.json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/README.md"
+      ],
+      "revisitWhen": "One of these fields is re-acquired with its own qualified astrometric solution."
+    },
+    {
+      "id": "delivery-reproducibility",
+      "subject": "Reproducing the delivered bank from a clean checkout",
+      "status": "included",
+      "finding": "Resolved. The delivery is regenerated from its own checked-in inputs: 9.3 MB of compact replay inputs (fitted emission field, envelope gain map, neutral alpha bank, the VMC ellipsoid density grid, and per dataset the registered colour raster with an alpha-only coverage mask) plus numbered records of the laboratory inputs behind them. `prepare:nebulae --if-missing` rebuilds the bank and its axis atlases, and `prepared/**` is no longer tracked. Verified with the ignored laboratory caches moved aside: all 1,360 regenerated slice textures are byte-identical to the promotion output, every dataset is value-identical in label, stars, brightness, frame, provenance and leaf geometry, and the committed descriptor pin matches the regenerated bank. This replaces the earlier finding that a clean checkout could verify the bank but not regenerate it, and that the runtime loaded 272 slice images per dataset; it now loads three axis atlases. Re-proven on the merged tree: the restore is byte-identical across all 15 atlases, the bank and the delivery receipt, and re-preparing over an installed delivery is idempotent.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/compact/inputs.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/compact-delivery.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/nebula/finite-emission-object.ts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/volume/node/compact-inputs/finite-emission.ts"
+      ]
+    },
+    {
+      "id": "measured-depth",
+      "subject": "Measured three-dimensional structure",
+      "status": "unresolved",
+      "finding": "No part of this delivery measures the SMC’s three-dimensional gas or dust. A single optical image cannot constrain depth; the envelope is a fitted shape hypothesis over photometric red-clump distance estimates that have not been deconvolved into geometric depth, and the model records materialGatePassed: false. Front-image agreement and an inspected side view are not evidence of recovered structure.",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/staa3857",
+        "https://doi.org/10.5061/dryad.1vhhmgr82",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/EMISSION-METHOD.md",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/vmc/STRUCTURE-LIMITS.md"
+      ],
+      "revisitWhen": "An independent depth measurement or a published three-dimensional reconstruction of the SMC gas body becomes available."
+    },
+    {
+      "id": "vmc-intake",
+      "subject": "Frozen VMC red-clump intake",
+      "status": "unresolved",
+      "finding": "The pinned intake omitted unmatched entries at the right-ascension wrap; 476 published rows have negative RA. The fit footprint normalizes those angles and their missing matches are part of its retention mask, so the omission is inside the fitted region rather than silently dropped. Revising the intake is a separate versioned source correction and was not made here.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/504/2983",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/vmc/README.md"
+      ],
+      "revisitWhen": "The VMC intake is re-acquired with the wrap-corrected match set and the shape fit is re-run against it."
+    },
+    {
+      "id": "search-completeness",
+      "subject": "Completeness of the candidate search",
+      "status": "unresolved",
+      "finding": "This ledger records the fields, shapes and catalogues this round examined. It is not an exhaustive survey of available SMC imagery, distance tracers or published structure models, and no systematic archive sweep was performed.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?RA=13.5&DEC=-73&SR=2&get=record&fmt=json",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/README-candidates.md",
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/widefield-intake.json"
+      ],
+      "revisitWhen": "A systematic archive sweep for SMC imagery and distance tracers is run and recorded."
+    },
+    {
+      "id": "shell-focus-link",
+      "subject": "Direct /sun/?focus=smc physical-host closure",
+      "status": "unresolved",
+      "finding": "The failure came from serializing SMC without its positioned LMC host. Commit makes native focus fragments retain the transitive SMC to LMC to MW host chain and names SMC separately as the selected record. The focused unit check passes for that chain, a missing host and a cycle. The SMC browser inspection now opens the direct route, but this checkout does not hold the complete installed runtime closure needed to rerun it locally.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/site/focus-response.mts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/catalog/src/spatial-relations.ts",
+        "https://github.com/layoutit/css.earth/blob/main/site/focus-catalog.mts"
+      ],
+      "revisitWhen": "The direct SMC browser inspection runs against a complete installed runtime closure."
+    },
+    {
+      "id": "model-relocation",
+      "subject": "Owner relocation and the re-derived model identity",
+      "status": "included",
+      "finding": "Replaying the delivery may not import the laboratory or the fitting methods, so the envelope samplers, the observer-ray conversion, the depth-prior contract and the pinned-density loader moved to volume-core and volume-bake. Those paths are hashed into the model identity, so the accepted fit `smc-constrained-emission-envelope-ellipsoid` was re-derived rather than re-labelled. Nothing else changed. The emission field, the envelope, all 342 neutral textures and every registered raster are byte-identical, every fit metric matches to the last digit, and re-baking the nine datasets, the star layer and the promotion reproduced all 1,360 texture digests, all five stacks and frames and all 1,803 star points unchanged.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/constrained/EMISSION-METHOD.md",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/volume/fields/simulation-envelope.ts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/volume/node/compact-inputs/simulation-prior.ts"
+      ]
+    },
+    {
+      "id": "atlas-acceptance",
+      "subject": "Application acceptance of the regenerated atlas delivery",
+      "status": "included",
+      "finding": "Re-inspected in the running application after the delivery became regenerable and atlas-packed. Each dataset now decodes one texture at the Earth framing instead of 128, the world camera is unchanged across all five dataset switches, all 1,803 stars mount and the shared toggle removes and restores them, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views are unchanged from the slice delivery. The earlier inspection of the pre-relocation slice delivery is preserved beside it. Re-inspected again after merging origin/main (177 commits): unchanged verdict on the merged revision, with the same one-texture-per-dataset Earth framing, retained camera, star toggle and clean console.",
+      "evidence": []
+    }
+  ]
+}

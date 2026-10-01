@@ -108,7 +108,13 @@ function datasetControl(value: unknown): DatasetControl {
   // the marker to publish that dataset's legend beside this one's; without it the body is drawn in an unexplained scale.
   const volume = dataset.volume === undefined ? undefined : object(dataset.volume, 'dataset volume');
   const step = dataset.step === undefined ? undefined : object(dataset.step, 'dataset step');
+  // A dataset that is a bank's (a galaxy's image, a nebula's volume) publishes its own preview image; a body's dataset
+  // takes its preview from its surface minimap (PreparedObjectPanel.astro).
+  const texture = dataset.texture === undefined ? undefined : object(dataset.texture, 'dataset texture');
+  const attribution = texture?.attribution === undefined ? undefined : object(texture.attribution, 'texture attribution');
   return { id: text(dataset.id, 'dataset id'), label, thumbnailUrl: text(dataset.thumbnailUrl, 'dataset thumbnail'),
+    ...(texture === undefined ? {} : { texture: { url: text(texture.url, 'texture URL'), width: number(texture.width, 'texture width'), height: number(texture.height, 'texture height'),
+      attribution: attribution && { label: text(attribution.label, 'texture attribution'), url: optionalText(attribution.url, 'texture source') } } }),
     ...(noData === undefined ? {} : { noData }),
     ...(step === undefined ? {} : { step: { group: text(step.group, 'dataset step group'), label: text(step.label, 'dataset step label'),
       ...(step.autoplay === undefined ? {} : { autoplay: optionalBoolean(step.autoplay, 'dataset step autoplay') }),

@@ -14,7 +14,7 @@ export const objectAdapter = Object.freeze({
     } else {
       const directory = objects ? null : await import('./object-directory.mts');
       const loaded = directory ? await directory.loadObject(objectId) : objects!.find(({ id }) => id === objectId);
-      const objectRecord = loaded && (!directory || directory.isLoadedScene(loaded)) ? loaded as ObjectEntry : null;
+      const objectRecord = loaded ?? null;
       if (!objectRecord) throw new Error(`Unknown cssEarth object: ${objectId ?? "unknown"}.`);
       mount = await objectRecord.loadScene(signal);
     }

@@ -38,7 +38,7 @@ function renderMarker(documentTarget: Document, entry: ObjectResultEntry) {
     return image;
   }
   const marker = documentTarget.createElement('span');
-  if (entry.marker.kind === 'focus') {
+  if (entry.marker.kind === 'thumbnail') {
     marker.className = `object-navigation-marker ${entry.marker.thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker'}`;
     marker.setAttribute('aria-hidden', 'true');
     if (entry.marker.thumbnail) {
@@ -102,7 +102,6 @@ export function bindObjectResultView(documentTarget: Document, view: ObjectResul
   anchor.dataset.sourceLabel = entry.source.label;
   // A system row is a plain link to the system's overview, as the object list's overview rows are.
   if (entry.kind === 'scene') anchor.dataset.objectId = entry.id; else delete anchor.dataset.objectId;
-  if (entry.kind === 'prepared-focus') anchor.dataset.preparedFocusId = entry.id; else delete anchor.dataset.preparedFocusId;
   const selected = selection?.kind === entry.kind && selection.id === entry.id;
   anchor.classList.toggle('is-active', selected);
   if (selected) anchor.setAttribute('aria-current', 'page');

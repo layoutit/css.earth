@@ -1,0 +1,221 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "eso1119b",
+      "path": ".local/nebula-lab/observations/omega-centauri/sources/eso1119b.tif",
+      "origin": "https://www.eso.org/public/images/eso1119b/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1119b/",
+      "title": "Omega Centauri · VST/OmegaCAM · optical",
+      "credit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
+      "displayCredit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
+      "acquisition": "Unchanged native publisher TIFF restored through the pinned observation recipe. Integrated starlight is preserved. Embedded AVM includes the original reference grid and noncentral reference pixel; absolute astrometry remains publisher metadata.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1119b",
+            "role": "material",
+            "evidence": "src/objects/omega-centauri-volume/source/bake-inputs/references/05-observations.json#/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "eso1119b",
+      "license": "ESO image-use terms: https://www.eso.org/public/outreach/copyright/; retain the complete credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vst",
+            "evidence": "https://www.eso.org/public/images/eso1119b/"
+          }
+        ],
+        "observation": {
+          "id": "eso1119b",
+          "target": "Omega Centauri",
+          "observedAt": null,
+          "instrument": "OmegaCAM",
+          "bands": "Optical G (480nm) / R (625nm) / I (770nm)",
+          "evidence": "src/objects/omega-centauri-volume/source/bake-inputs/references/05-observations.json#/images/0; capture date is not inferred from the publication date."
+        }
+      }
+    },
+    {
+      "id": "eso0844a",
+      "path": ".local/nebula-lab/observations/omega-centauri/sources/eso0844a.tif",
+      "origin": "https://www.eso.org/public/images/eso0844a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso0844a/",
+      "title": "Omega Centauri · MPG/ESO 2.2-m WFI · optical",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "Unchanged native publisher TIFF restored through the pinned observation recipe. Integrated starlight is preserved. Embedded AVM includes the original reference grid and noncentral reference pixel; absolute astrometry remains publisher metadata.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0844a",
+            "role": "material",
+            "evidence": "src/objects/omega-centauri-volume/source/bake-inputs/references/05-observations.json#/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "eso0844a",
+      "license": "ESO image-use terms: https://www.eso.org/public/outreach/copyright/; retain the complete credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mpg-eso-2-2m",
+            "evidence": "https://www.eso.org/public/images/eso0844a/"
+          }
+        ],
+        "observation": {
+          "id": "eso0844a",
+          "target": "Omega Centauri",
+          "observedAt": null,
+          "instrument": "Wide Field Imager (WFI)",
+          "bands": "Optical B (451nm) / V (539nm) / I (783nm)",
+          "evidence": "src/objects/omega-centauri-volume/source/bake-inputs/references/05-observations.json#/images/1; capture date is not inferred from the publication date."
+        }
+      }
+    },
+    {
+      "id": "physical-evidence",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/04-physical-evidence.json",
+      "origin": "https://doi.org/10.1093/mnras/sts426",
+      "sourceUrl": "https://doi.org/10.1093/mnras/sts426",
+      "title": "Omega Centauri source evidence and model limits",
+      "credit": "D’Souza & Rix (2013); source interpretation by cssEarth",
+      "acquisition": "Byte-identical application copy of the physical-evidence ledger. The hash identifies this curated record; individual publications retain their own download identities and access qualifications.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dsouza-rix-2013",
+            "role": "method",
+            "evidence": "src/objects/omega-centauri-volume/source/bake-inputs/references/04-physical-evidence.json"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "photometric-mge",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/02-photometric-mge.json",
+      "origin": "https://doi.org/10.1093/mnras/sts426",
+      "sourceUrl": "https://doi.org/10.1093/mnras/sts426",
+      "title": "Omega Centauri published MGE and explicit transport choices",
+      "credit": "D’Souza & Rix (2013); source interpretation by cssEarth",
+      "acquisition": "Byte-identical recipe copy. Published angular widths are converted from arcmin to arcsec; the recipe pins the complete source PDF and evidence ledger. Near/far sign and six-sigma cutoff are authored.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dsouza-rix-2013",
+            "role": "method",
+            "evidence": "src/objects/omega-centauri-volume/source/bake-inputs/references/02-photometric-mge.json"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "distance",
+      "path": "src/objects/omega-centauri-volume/source/nebula.json",
+      "origin": "https://doi.org/10.1093/mnras/stab1474",
+      "sourceUrl": "https://doi.org/10.1093/mnras/stab1474",
+      "title": "Omega Centauri adopted cluster distance",
+      "credit": "Baumgardt & Vasiliev (2021); source interpretation by cssEarth",
+      "acquisition": "Source-owned catalogue record preserves the exact 5426 +/-47 pc value and full-paper download pin. This file hash identifies the catalogue record, not the remote paper.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "baumgardt-vasiliev-2021",
+            "role": "method",
+            "evidence": "src/objects/omega-centauri-volume/source/nebula.json"
+          }
+        ]
+      },
+      "dependencies": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe-compiler",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/01-compiler.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical source-owned scientific processing recipe; external input identities are retained in its content and the selected input records."
+      }
+    },
+    {
+      "id": "recipe-observation-structures",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/03-observation-structures.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical source-owned scientific processing recipe; external input identities are retained in its content and the selected input records."
+      }
+    },
+    {
+      "id": "recipe-observations",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs/references/05-observations.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical source-owned scientific processing recipe; external input identities are retained in its content and the selected input records."
+      }
+    },
+    {
+      "id": "compact-inputs",
+      "path": "src/objects/omega-centauri-volume/source/bake-inputs.json.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned pre-slice emission field, per-component materials and adaptive sampling; no derived runtime textures. Quantitative handoff qualification remains failed."
+      }
+    },
+    {
+      "id": "provenance-references",
+      "path": "src/objects/omega-centauri-volume/source/provenance-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Maps source-owned evidence bytes to their exact published research revision."
+      }
+    },
+    {
+      "id": "replay-references",
+      "path": "src/objects/omega-centauri-volume/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Maps retained research input identities to the application-owned copies."
+      }
+    },
+    {
+      "id": "document-request",
+      "path": "src/objects/omega-centauri-volume/source/request.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned application candidate recipe or presentation; qualification and published source identities are recorded explicitly."
+      }
+    },
+    {
+      "id": "document-delivery",
+      "path": "src/objects/omega-centauri-volume/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned application candidate recipe or presentation; qualification and published source identities are recorded explicitly."
+      }
+    },
+    {
+      "id": "document-presentation",
+      "path": "src/objects/omega-centauri-volume/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned application candidate recipe or presentation; qualification and published source identities are recorded explicitly."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

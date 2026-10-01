@@ -11,7 +11,7 @@ const test = sourceTest();
 const card = () => parseHTML(`<html><body><div data-page-datasets="observable-universe" data-default-dataset="cutaway"
   data-dataset-views='{"cutaway":"cutaway","full":"full"}'>
   <button name="dataset" value="cutaway" aria-pressed="true"></button><button name="dataset" value="full" aria-pressed="false"></button>
-  <div data-focus-dataset-details="cutaway"></div><div data-focus-dataset-details="full" hidden></div></div></body></html>`).document;
+  <div data-page-dataset-details="cutaway"></div><div data-page-dataset-details="full" hidden></div></div></body></html>`).document;
 
 test("a page's dataset is its own dataset while the address is that page, and its default elsewhere", () => {
   const [datasets] = readPageDatasets(card());
@@ -27,7 +27,7 @@ test('the card marks the chosen dataset on its host scene and hides its datasets
   assert.equal(root.hidden, false);
   assert.deepEqual([...document.querySelectorAll('button')].map(button => button.getAttribute('aria-pressed')), ['false', 'true']);
   // Only the chosen dataset's details are mounted; the other waits in a template (detached-sections.ts).
-  assert.deepEqual([...document.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')].map(detail => detail.dataset.focusDatasetDetails), ['full']);
+  assert.deepEqual([...document.querySelectorAll<HTMLElement>('[data-page-dataset-details]')].map(detail => detail.dataset.pageDatasetDetails), ['full']);
   // Another star zoomed out to the same level shows the level's card without them: choosing one would leave that star.
   presentPageDatasets(document, 'https://css.earth/trappist-1/?overview=system', 'trappist-1');
   assert.equal(root.hidden, true);

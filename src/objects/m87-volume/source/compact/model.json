@@ -1,0 +1,527 @@
+{
+  "schema": "cssearth-compact-symmetry@1",
+  "recipe": {
+    "schema": "cssearth-emission-inference@1",
+    "id": "m87-inferred",
+    "source": {
+      "url": "https://cdn.eso.org/images/large/eso1525a.jpg",
+      "width": 4001,
+      "height": 4000,
+      "publisher": "https://www.eso.org/public/images/eso1525a/",
+      "credit": "Chris Mihos (Case Western Reserve University)/ESO. Burrell Schmidt V-band deep image of the M87 halo, distributed by ESO as eso1525a."
+    },
+    "crop": {
+      "left": 298,
+      "top": 299,
+      "width": 3400,
+      "height": 3400
+    },
+    "pointMasks": [],
+    "neighbourMasks": {
+      "source": "rc3-1991",
+      "masks": [
+        {
+          "name": "IC   3467",
+          "x": 1039,
+          "y": 3498,
+          "radius": 66
+        },
+        {
+          "name": "IC   3466",
+          "x": 1234,
+          "y": 3424,
+          "radius": 36
+        },
+        {
+          "name": "IC   3461",
+          "x": 1258,
+          "y": 3246,
+          "radius": 42
+        },
+        {
+          "name": "RC3 188.0954 11.8942",
+          "x": 1052,
+          "y": 3233,
+          "radius": 40
+        },
+        {
+          "name": "IC   3459",
+          "x": 1338,
+          "y": 2538,
+          "radius": 70
+        },
+        {
+          "name": "A   1228+12",
+          "x": 2000,
+          "y": 2858,
+          "radius": 14
+        },
+        {
+          "name": "IC   3443",
+          "x": 1727,
+          "y": 2145,
+          "radius": 26
+        },
+        {
+          "name": "NGC  4478",
+          "x": 2322,
+          "y": 2154,
+          "radius": 118
+        },
+        {
+          "name": "NGC  4476",
+          "x": 2511,
+          "y": 2106,
+          "radius": 106
+        },
+        {
+          "name": "NGC  4486B",
+          "x": 2173,
+          "y": 1752,
+          "radius": 38
+        },
+        {
+          "name": "RC3 187.0262 12.0786",
+          "x": 3649,
+          "y": 2773,
+          "radius": 16
+        },
+        {
+          "name": "IC    794",
+          "x": 3625,
+          "y": 2737,
+          "radius": 82
+        },
+        {
+          "name": "RC3 187.3483 12.4506",
+          "x": 2866,
+          "y": 1851,
+          "radius": 40
+        },
+        {
+          "name": "RC3 187.4133 12.5472",
+          "x": 2708,
+          "y": 1611,
+          "radius": 28
+        },
+        {
+          "name": "IC   3388",
+          "x": 3427,
+          "y": 928,
+          "radius": 36
+        },
+        {
+          "name": "RC3 187.3129 12.9789",
+          "x": 2950,
+          "y": 539,
+          "radius": 28
+        },
+        {
+          "name": "IC   3393",
+          "x": 3286,
+          "y": 695,
+          "radius": 82
+        },
+        {
+          "name": "IC   3489",
+          "x": 532,
+          "y": 2350,
+          "radius": 34
+        },
+        {
+          "name": "RC3 187.9650 12.4825",
+          "x": 1370,
+          "y": 1772,
+          "radius": 26
+        },
+        {
+          "name": "IC   3457",
+          "x": 1374,
+          "y": 1338,
+          "radius": 76
+        },
+        {
+          "name": "IC   3475",
+          "x": 870,
+          "y": 1051,
+          "radius": 108
+        },
+        {
+          "name": "IC   3492",
+          "x": 477,
+          "y": 855,
+          "radius": 28
+        },
+        {
+          "name": "MCG  2-32-132",
+          "x": 539,
+          "y": 837,
+          "radius": 30
+        },
+        {
+          "name": "RC3 187.8325 12.7375",
+          "x": 1692,
+          "y": 1139,
+          "radius": 16
+        }
+      ]
+    },
+    "nativeRemoval": {
+      "directory": ".local/nebula-lab/m87/nox",
+      "model": {
+        "path": ".local/open-star-removal/noxGeneratorColor.pb"
+      }
+    },
+    "grid": {
+      "width": 150,
+      "height": 150,
+      "depth": 150
+    },
+    "prior": {
+      "axis": [
+        0.892608,
+        0.450878,
+        0
+      ],
+      "center": [
+        74.5,
+        74.5,
+        74.5
+      ],
+      "binWidth": 1
+    },
+    "tau": 0.001,
+    "iterations": 100,
+    "blackLevel": 0.063,
+    "displayExposure": 1.5,
+    "slices": 48,
+    "assumptions": [
+      "Depth follows the deprojected density (Prugniel & Simien 1997) of a Sérsic fit to Kormendy et al.'s (2009) Table 3 profile: n = 11.89, half-light radius 855.5 arcsec, on an oblate spheroid whose axis is M87's minor axis (position angle 243.2 degrees, from Table 3 at the half-light radius) in the plane of the sky, axis ratio 0.548 (1 - 0.452, the measured ellipticity). The photograph's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+      "The prior ends at 2.8 half-light radii (195 kpc), where Kormendy et al.'s profile stops (2443.7 arcsec, 199 kpc); light beyond that spheroid is not drawn.",
+      "The 3400 x 3400 px crop is centred on M87* (SIMBAD/ICRF3 position through the publisher registration, checked against 28 Gaia stars) and reaches 41 arcmin, where Kormendy et al.'s profile ends (2443.7 arcsec, 199 kpc at 16.8 Mpc).",
+      "NOX removes stars; 27 catalogued neighbouring galaxies (RC3, CDS VII/155) are masked afterwards at 3 times their D25 radius with the median of the light around them.",
+      "Every pixel is clamped to the median of the 61 px square around it, so star haloes and small background galaxies that NOX and the masks leave do not become rings in the axisymmetric fit.",
+      "Black level 0.063 is the median sky in the photograph's corners (16 of 255).",
+      "One V band, tinted by ESO: the colour is display colour, not calibrated photometry. Single-image depth is inferred under the symmetry prior, not measured."
+    ],
+    "compactClamp": {
+      "windowPx": 61,
+      "basis": "61 px (88 arcsec, 7 kpc) is about two and a half of the fit's 22.7 px cells: light more compact than that cannot be M87's smooth halo at this grid, and left in, the axisymmetric fit spreads it into rings."
+    },
+    "shapePrior": {
+      "components": [
+        {
+          "kind": "sersic",
+          "axis": [
+            0.892608,
+            0.450878,
+            0
+          ],
+          "radius": 26.038,
+          "radialSigma": 1,
+          "axialSigma": 1,
+          "weight": 1,
+          "sersicIndex": 11.89,
+          "axisRatio": 0.548
+        }
+      ],
+      "sigmaCutoff": 2.8
+    },
+    "modelReference": {
+      "paper": "https://arxiv.org/abs/0810.1681"
+    }
+  },
+  "channels": [
+    {
+      "path": "src/objects/m87-volume/source/compact/emission-0.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/m87-volume/source/compact/emission-1.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/m87-volume/source/compact/emission-2.f32.gz",
+      "bytes": 13500000
+    }
+  ],
+  "provenance": {
+    "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
+    "doi": "https://arxiv.org/abs/0810.1681",
+    "recipePath": "labs/nebula/models/m87/experiment.json",
+    "recipe": {
+      "schema": "cssearth-emission-inference@1",
+      "id": "m87-inferred",
+      "source": {
+        "url": "https://cdn.eso.org/images/large/eso1525a.jpg",
+        "width": 4001,
+        "height": 4000,
+        "publisher": "https://www.eso.org/public/images/eso1525a/",
+        "credit": "Chris Mihos (Case Western Reserve University)/ESO. Burrell Schmidt V-band deep image of the M87 halo, distributed by ESO as eso1525a."
+      },
+      "crop": {
+        "left": 298,
+        "top": 299,
+        "width": 3400,
+        "height": 3400
+      },
+      "pointMasks": [],
+      "neighbourMasks": {
+        "source": "rc3-1991",
+        "masks": [
+          {
+            "name": "IC   3467",
+            "x": 1039,
+            "y": 3498,
+            "radius": 66
+          },
+          {
+            "name": "IC   3466",
+            "x": 1234,
+            "y": 3424,
+            "radius": 36
+          },
+          {
+            "name": "IC   3461",
+            "x": 1258,
+            "y": 3246,
+            "radius": 42
+          },
+          {
+            "name": "RC3 188.0954 11.8942",
+            "x": 1052,
+            "y": 3233,
+            "radius": 40
+          },
+          {
+            "name": "IC   3459",
+            "x": 1338,
+            "y": 2538,
+            "radius": 70
+          },
+          {
+            "name": "A   1228+12",
+            "x": 2000,
+            "y": 2858,
+            "radius": 14
+          },
+          {
+            "name": "IC   3443",
+            "x": 1727,
+            "y": 2145,
+            "radius": 26
+          },
+          {
+            "name": "NGC  4478",
+            "x": 2322,
+            "y": 2154,
+            "radius": 118
+          },
+          {
+            "name": "NGC  4476",
+            "x": 2511,
+            "y": 2106,
+            "radius": 106
+          },
+          {
+            "name": "NGC  4486B",
+            "x": 2173,
+            "y": 1752,
+            "radius": 38
+          },
+          {
+            "name": "RC3 187.0262 12.0786",
+            "x": 3649,
+            "y": 2773,
+            "radius": 16
+          },
+          {
+            "name": "IC    794",
+            "x": 3625,
+            "y": 2737,
+            "radius": 82
+          },
+          {
+            "name": "RC3 187.3483 12.4506",
+            "x": 2866,
+            "y": 1851,
+            "radius": 40
+          },
+          {
+            "name": "RC3 187.4133 12.5472",
+            "x": 2708,
+            "y": 1611,
+            "radius": 28
+          },
+          {
+            "name": "IC   3388",
+            "x": 3427,
+            "y": 928,
+            "radius": 36
+          },
+          {
+            "name": "RC3 187.3129 12.9789",
+            "x": 2950,
+            "y": 539,
+            "radius": 28
+          },
+          {
+            "name": "IC   3393",
+            "x": 3286,
+            "y": 695,
+            "radius": 82
+          },
+          {
+            "name": "IC   3489",
+            "x": 532,
+            "y": 2350,
+            "radius": 34
+          },
+          {
+            "name": "RC3 187.9650 12.4825",
+            "x": 1370,
+            "y": 1772,
+            "radius": 26
+          },
+          {
+            "name": "IC   3457",
+            "x": 1374,
+            "y": 1338,
+            "radius": 76
+          },
+          {
+            "name": "IC   3475",
+            "x": 870,
+            "y": 1051,
+            "radius": 108
+          },
+          {
+            "name": "IC   3492",
+            "x": 477,
+            "y": 855,
+            "radius": 28
+          },
+          {
+            "name": "MCG  2-32-132",
+            "x": 539,
+            "y": 837,
+            "radius": 30
+          },
+          {
+            "name": "RC3 187.8325 12.7375",
+            "x": 1692,
+            "y": 1139,
+            "radius": 16
+          }
+        ]
+      },
+      "nativeRemoval": {
+        "directory": ".local/nebula-lab/m87/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "grid": {
+        "width": 150,
+        "height": 150,
+        "depth": 150
+      },
+      "prior": {
+        "axis": [
+          0.892608,
+          0.450878,
+          0
+        ],
+        "center": [
+          74.5,
+          74.5,
+          74.5
+        ],
+        "binWidth": 1
+      },
+      "tau": 0.001,
+      "iterations": 100,
+      "blackLevel": 0.063,
+      "displayExposure": 1.5,
+      "slices": 48,
+      "assumptions": [
+        "Depth follows the deprojected density (Prugniel & Simien 1997) of a Sérsic fit to Kormendy et al.'s (2009) Table 3 profile: n = 11.89, half-light radius 855.5 arcsec, on an oblate spheroid whose axis is M87's minor axis (position angle 243.2 degrees, from Table 3 at the half-light radius) in the plane of the sky, axis ratio 0.548 (1 - 0.452, the measured ellipticity). The photograph's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+        "The prior ends at 2.8 half-light radii (195 kpc), where Kormendy et al.'s profile stops (2443.7 arcsec, 199 kpc); light beyond that spheroid is not drawn.",
+        "The 3400 x 3400 px crop is centred on M87* (SIMBAD/ICRF3 position through the publisher registration, checked against 28 Gaia stars) and reaches 41 arcmin, where Kormendy et al.'s profile ends (2443.7 arcsec, 199 kpc at 16.8 Mpc).",
+        "NOX removes stars; 27 catalogued neighbouring galaxies (RC3, CDS VII/155) are masked afterwards at 3 times their D25 radius with the median of the light around them.",
+        "Every pixel is clamped to the median of the 61 px square around it, so star haloes and small background galaxies that NOX and the masks leave do not become rings in the axisymmetric fit.",
+        "Black level 0.063 is the median sky in the photograph's corners (16 of 255).",
+        "One V band, tinted by ESO: the colour is display colour, not calibrated photometry. Single-image depth is inferred under the symmetry prior, not measured."
+      ],
+      "compactClamp": {
+        "windowPx": 61,
+        "basis": "61 px (88 arcsec, 7 kpc) is about two and a half of the fit's 22.7 px cells: light more compact than that cannot be M87's smooth halo at this grid, and left in, the axisymmetric fit spreads it into rings."
+      },
+      "shapePrior": {
+        "components": [
+          {
+            "kind": "sersic",
+            "axis": [
+              0.892608,
+              0.450878,
+              0
+            ],
+            "radius": 26.038,
+            "radialSigma": 1,
+            "axialSigma": 1,
+            "weight": 1,
+            "sersicIndex": 11.89,
+            "axisRatio": 0.548
+          }
+        ],
+        "sigmaCutoff": 2.8
+      },
+      "modelReference": {
+        "paper": "https://arxiv.org/abs/0810.1681"
+      }
+    },
+    "nativeRemoval": {
+      "settings": {
+        "directory": ".local/nebula-lab/m87/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "source": ".local/nebula-lab/m87/nox-source.png",
+      "receipt": ".local/nebula-lab/m87/nox/result.json",
+      "diffuse": ".local/nebula-lab/m87/nox/diffuse.png",
+      "timing": {
+        "modelLoadSeconds": 0.5863976670079865,
+        "inferenceSeconds": 25.51664599578362,
+        "inferredTiles": 121,
+        "batchSize": 2,
+        "threads": 6
+      }
+    },
+    "uncoveredSignalFractions": [
+      0.04262553023988017,
+      0.03491308761340268,
+      0.032550068660677424
+    ],
+    "projectionCaveat": "Agreement on supported rays is imposed by normalization and does not validate depth geometry.",
+    "coordinateMeaning": "Image x right, y up in display; dimensionless units. No measured gas density, scale, distance or sky registration.",
+    "reports": [
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.1347987759169916
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.13108594094893963
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.13974224243113714
+      }
+    ]
+  },
+  "interpretation": "Three RGB emissivity voxel fields before optical integration, not rendered slices."
+}

@@ -1,42 +1,16 @@
-# Orion Nebula (M42)
+# Orion Nebula
 
-Two ESO datasets color a coherent, authored ionization-front hypothesis; **optical is the default**. Local literature constraints do not measure the depth of the entire wide field.
+Orion Nebula as an object of the world: its place, its card and its list marker. It has no surface. Its datasets show the [Orion Nebula volume](../m42-volume/README.md) bank, whose README holds the sources, processing, evidence and known problems of the imagery.
 
 ## Sources
 
-| Source / dataset | Selected image and coverage |
-| --- | --- |
-| [ESO optical, eso1723a](https://www.eso.org/public/images/eso1723a/) | i/Hα/r/G display; 4000 × 3106 pixels, 59.95′ × 46.56′. |
-| [ESO VISTA, eso1006a](https://www.eso.org/public/images/eso1006a/) | K/J/Z near-IR display; 3252 × 4000 pixels, 71.84′ × 88.35′. |
-| [Local physical evidence](source/bake-inputs/references/05-physical-evidence.json) | Wen–O’Dell, Henney and later Orion interpretations guide central topology; wide-field curvature and thickness are authored. |
+The card's facts cite their catalogues in [source/content/object.json](source/content/object.json); the [astronomy record](../../../packages/astronomy/data/bodies/m42.json) cites the position, distance and velocity that place it.
 
-Both publisher TIFFs retain their full footprints. Their RGB values are stretched display samples, not common flux units; resolution and coverage differ. The adopted distance is **414 ± 7 pc**, from [Menten et al. (2007), abstract](https://arxiv.org/abs/0709.0485).
+## Processing
 
-The [stellar field](source/stellar-field.json) contains 2780 Gaia candidates in an authored 50 pc sphere, G < 14; 1500 brightness-ranked points are delivered with a spherical fade. Positions use Bailer-Jones distance estimates, with uncertainty intervals retained. Image bounds do not determine stellar depth or selection.
-
-Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
-
-## Evidence
-
-- The [object descriptor](object.json) pins the installed bank; [delivery inputs](source/delivery.json) record saved controls and catalogue preparation. The source manifest distinguishes those inputs from generated delivery bytes.
-- The [fixed lab processing account](../../../labs/nebula/models/m42/README.md) records both-dataset browser checks, native stellar-light accounting and coherent-front projection comparisons. Its older result identities are historical, not a fresh acceptance of the current delivery.
-- This documentation review checks provenance and interpretation; it does not establish a cold replay, independent gas-depth validation or material acceptance.
+1. `pnpm prepare:objects --object=m42` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame; the framing radius is a presentation value ([solar-system.json](source/presentation/solar-system.json)).
+2. `node site/build/prepare/companion-context.mts m42` saves the list marker from the default dataset's picture.
 
 ## Known problems
 
-- A rectangular optical coverage transition, pale neutral residuals and fine oblique slice bands remain. Adding surrounding stars does not repair the cloud’s photographic boundary.
-- The roughly 0.2 pc star/front distance and 0.1 pc equivalent layer are local published models at the papers’ distance, not whole-field measurements.
-- Orion-S, foreground Veil alternatives, extinction and overlapping fronts remain incomplete. Downloaded central MUSE diagnostic maps have not been fitted; several lack required masks, units or complete WCS.
-
-<details>
-<summary>Methods and historical comparisons</summary>
-
-The [physical ledger](../../../labs/nebula/models/m42/physical-evidence.json) separates observed positions, published models and authored parameters; [depth-model.json](../../../labs/nebula/models/m42/depth-model.json) is the runnable hypothesis. The [fixed lab README](../../../labs/nebula/models/m42/README.md) preserves the earlier 355-support and saved-100%-detail comparisons, including their normalized-image error limits. General preparation is documented in the [nebula guide](../../../docs/nebulae/README.md).
-
-</details>
-
-## Compact delivery inputs
-
-The source-owned compact input pin in [delivery.json](source/delivery.json) retains the accepted pre-slice model, material and integration data. Ordinary preparation regenerates the runtime WebP Q80/A80 XYZ atlases and distant impostors without native observation downloads, star extraction or model fitting. Runtime images remain generated and ignored. The [shared bake guide](../../../docs/nebulae/README.md#compact-inputs-and-research-replay) distinguishes this replay from optional full research processing. Source observations and the model limitations above still apply.
-
-Application provenance reads the object-owned evidence and recipe copies recorded in [provenance references](source/provenance-references.json). Their original revisions are preserved; nested research paths describe historical inputs and are not application file reads.
+- The framing radius is a presentation value, not a measured extent.

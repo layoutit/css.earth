@@ -43,3 +43,20 @@ test('a star hosting planets flies to frame its system on the first click and op
   const second = select('eps-eridani');
   assert.equal(second.destination.camera.kind === 'frame' && second.destination.camera.framing, 'detail');
 });
+
+test('a galaxy picked from another galaxy\'s page is a destination like any body: it adds a history entry', () => {
+  const navigation = {
+    centerTarget() { return null; },
+    systemTarget() { assert.fail('a galaxy hosts no system'); },
+    overviewTarget() { assert.fail('object selection does not open an overview'); },
+  } as unknown as Parameters<typeof resolveNavigation>[1]['navigation'];
+  // M 33, then LMC from search, then Back must return to M 33 (it left the site on 2026-10-01).
+  const { destination } = resolveNavigation({ kind: 'object' }, {
+    object: requireSceneObject('lmc'), objects: WORLD_OBJECTS, navigation,
+    current: { objectId: 'm33', href: 'https://css.earth/m33/', subject: { kind: 'object', objectId: 'm33' },
+      centeredObjectId: null, hasPresented: true, reuseScene: false, mount: null, pending: null },
+  });
+  assert.equal(new URL(destination.url).pathname, '/lmc/');
+  assert.deepEqual(destination.history, { history: 'push' });
+  assert.deepEqual(destination.subject, { kind: 'object', objectId: 'lmc' });
+});

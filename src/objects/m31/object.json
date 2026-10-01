@@ -1,46 +1,95 @@
 {
   "schema": "cssearth-object@2",
   "id": "m31",
-  "type": "image-layer-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Andromeda Galaxy",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 771419395372841900
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M 31",
+      "systemName": "Local Group",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 160112461100,
+      "description": "A galaxy 776,247 parsecs away.",
+      "aliases": [
+        "Andromeda"
+      ],
+      "order": 5141,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        1.7692007869096456e+22,
-        3.337796281257527e+21,
-        1.5797893138497694e+22
+        1.7692007682599817e+22,
+        3.337796246072839e+21,
+        1.5797892971967474e+22
       ],
-      "localToReferenceXyzw": [
-        0.26331188380369325,
-        0.31763369940217334,
-        0.7012875471847867,
-        0.5813531293588998
+      "presentationToReference": [
+        0.8841998226395167,
+        0,
+        0.4671088456069389,
+        0.4285639868782094,
+        0.3977771559319137,
+        -0.8112374765565086,
+        0.18580522811616745,
+        -0.9174820620691818,
+        -0.35171449072504946
       ],
-      "metersPerUnit": 30856775814913670000,
-      "boundsUnits": {
-        "min": [
-          -22.28731515949301,
-          -25.381110577192132,
-          -32.120800654900336
-        ],
-        "max": [
-          21.141812397717374,
-          26.81327906792017,
-          33.1202840389268
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/recipe.json"
-    },
-    "cataloguePoints": [
-      "stars",
-      "dots"
-    ]
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2488449662493038000,
+      "bodyRadiusM": 771419395372841800000
+    }
   },
   "prepared": {
-    "format": "cssearth-image-layer-bank@1",
-    "url": "prepared/image-layers.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

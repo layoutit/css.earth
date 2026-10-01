@@ -76,7 +76,7 @@ export const worldVisibilityPolicy = {
 };
 
 /** Visibility of retained world bodies, labels and highlights. */
-export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLayer, 'setBodyVisibility' | 'setHighlightedClassification'>, lifetime: SceneLifetime) {
+export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLayer, 'setBodyVisibility'>, lifetime: SceneLifetime) {
   let illustrations = false;
   let highlighted: string | null = null;
   let selectedCometId: string | null = null;
@@ -122,7 +122,6 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
     setHighlightedClassification(classification: string | null) {
       if (lifetime.disposed || highlighted === classification) return;
       highlighted = classification;
-      layer.setHighlightedClassification(classification);
       update();
     },
   };

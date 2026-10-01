@@ -1,5 +1,4 @@
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from '../navigation/prepared-focus.js';
 
 export type ObjectWorldNavigationListener = (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 
@@ -15,9 +14,6 @@ export interface ObjectWorldNavigation {
   holdPresentation?(): () => void;
   capture(): WorldCameraPose;
   apply(pose: WorldCameraPose, options?: { signal: AbortSignal; departing?: boolean }): void | Promise<boolean>;
-  preparedFocus(): PreparedNavigationFocus | null;
-  setPreparedFocus(focus: PreparedNavigationFocus | null): void;
-  flyToPreparedFocus(focus: PreparedNavigationFocus, options?: PreparedFocusFlightOptions): Promise<{ completed: boolean }>;
   setZoomOutCentering?(enabled: boolean): void;
   /** True once every prepared detail group is connected and painted. */
   detailActivated?(): boolean;

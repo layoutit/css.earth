@@ -25,7 +25,7 @@ The [source recipe](../../labs/nebula/models/image-candidates.json) retains the 
 | Point stars | [Bonanos et al. (2009)](https://arxiv.org/abs/0905.1328), [CDS J/AJ/138/1003](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | 943 stars with measured sky positions and photometry. Depths are assigned from the density. All three datasets use identical positions. |
 | Surface color | The three registered observations above | Native star removal, then color sampling onto the fixed density. Uncovered density keeps neutral color. |
 
-The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image placement and color settings; the [app settings](../../src/objects/lmc/README.md#evidence) retain cloud and star display. Switching datasets changes the material while retaining the cloud, stars and camera.
+The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image placement and color settings; the [app settings](../../src/objects/lmc-volume/README.md#evidence) retain cloud and star display. Switching datasets changes the material while retaining the cloud, stars and camera.
 
 ## Extragalactic datasets
 
@@ -44,9 +44,9 @@ The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image pl
 | --- | --- | --- |
 | Milky Way exterior | [OpenSpace/AMNH/NAOJ volume](https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html) | 1,024 × 1,024 × 128 RGBA model, baked into its bulge and inner disc only. Simulation-based visualization. [Provenance](../../src/objects/milky-way/source/provenance.json). |
 | Milky Way interior | [NASA SVS, Deep Star Maps 2020](https://svs.gsfc.nasa.gov/4851/) | 8,192 × 4,096 Milky Way-only map derived from star catalogues; the panorama shell adds authored visual depth. Credits: NASA/Goddard SVS, Ernie Wright (USRA), ESA/Gaia/DPAC. [Provenance](../../src/objects/milky-way/source/sky/provenance.json). |
-| M31 | [ESA/Hubble & Digitized Sky Survey 2, heic1112f](https://esahubble.org/images/heic1112f/) | 4,783 × 5,000 crop/resample; 1 kpc parametric depth. Acknowledgment: Davide De Martin (ESA/Hubble). [Provenance](../../src/objects/m31/source/provenance.json). |
-| M33 | [ESO VST/OmegaCAM, eso1424a](https://www.eso.org/public/images/eso1424a/) | 4,000 × 3,355, g/r/Hα; 1.2 kpc parametric envelope. Excludes the larger H I outskirts. [Provenance](../../src/objects/m33/source/provenance.json). |
-| SMC | [SMASH/NOIRLab, noirlab2030b](https://noirlab.edu/public/images/noirlab2030b/) | 3,000 × 2,501, g/r/i/z; authored 25 kpc envelope. Excludes the full Bridge, Wing and tidal debris. [Full credit and provenance](../../src/objects/smc/source/provenance.json). |
+| M31 | [ESA/Hubble & Digitized Sky Survey 2, heic1112f](https://esahubble.org/images/heic1112f/) | 4,783 × 5,000 crop/resample; 1 kpc parametric depth. Acknowledgment: Davide De Martin (ESA/Hubble). [Provenance](../../src/objects/m31-layers/source/provenance.json). |
+| M33 | [ESO VST/OmegaCAM, eso1424a](https://www.eso.org/public/images/eso1424a/) | 4,000 × 3,355, g/r/Hα; 1.2 kpc parametric envelope. Excludes the larger H I outskirts. [Provenance](../../src/objects/m33-layers/source/provenance.json). |
+| SMC | [SMASH/NOIRLab, noirlab2030b](https://noirlab.edu/public/images/noirlab2030b/) | 3,000 × 2,501, g/r/i/z; authored 25 kpc envelope. Excludes the full Bridge, Wing and tidal debris. [Full credit and provenance](../../src/objects/smc-volume/source/provenance.json). |
 
 The Milky Way overview enables the galaxy's prepared depth layers; other destinations keep its distant views. M31, M33 and the SMC use image-derived parametric layers, not the LMC's star-removal and density-coloring pipeline.
 

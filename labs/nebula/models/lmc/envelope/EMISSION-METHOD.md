@@ -2,7 +2,7 @@
 
 This is a new inferred-emission model for the LMC. It does not repaint the unchanged stellar-density
 volume. Model `lmc-clouds-emission-envelope` and its three datasets are promoted to the application by
-[`app-datasets.json`](app-datasets.json); [the object's README](../../../../../src/objects/lmc/README.md)
+[`app-datasets.json`](app-datasets.json); [the object's README](../../../../../src/objects/lmc-volume/README.md)
 is the delivered account, and the `alignment-density-material-v1` datasets it replaced remain a historical
 reference.
 

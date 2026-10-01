@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-provenance-references@1",
+  "references": [
+    {
+      "originalPath": "labs/nebula/models/lmc/particles/source/provenance.json",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/particles/source/provenance.json",
+      "bytes": 2969
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/stars/source/catalogue.json",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/stars/source/catalogue.json",
+      "bytes": 2527
+    },
+    {
+      "originalPath": "labs/nebula/models/image-candidates.json",
+      "path": "src/objects/lmc-volume/source/evidence/image-candidates.json",
+      "bytes": 9320
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/bake.json",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/bake.json",
+      "bytes": 4432
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/full-density/source/volume.json",
+      "path": "src/objects/lmc-volume/source/compact/prior/volume.json",
+      "bytes": 1370
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/envelope/emission-envelope.json",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/envelope/emission-envelope.json",
+      "bytes": 1291
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/envelope/finite-datasets.json",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/envelope/finite-lenses.json",
+      "bytes": 8202
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/candidates/source/alignment-report.json",
+      "path": "src/objects/lmc-volume/source/evidence/lmc/candidates/source/alignment-report.json",
+      "bytes": 8098
+    }
+  ]
+}

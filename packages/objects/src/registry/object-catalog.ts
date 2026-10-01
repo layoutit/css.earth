@@ -1,13 +1,15 @@
+import { parseDistanceSubject } from '@cssearth/catalog';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { parseObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';
-import { defineObject } from './object-schema.js';
+import { defineObject, OBJECT_CLASSIFICATIONS } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
-import { definePreparedFocus } from './prepared-focus-object.js';
-import type { NavigableObject } from './prepared-focus-object.js';
-import { defineOverview } from './overview-object.js';
+import { destinationSearchNames } from './navigable-object.js';
+import type { NavigableObject } from './navigable-object.js';
+import { overviewLevel } from './overview-object.js';
+import type { OverviewObject } from './overview-object.js';
 
 /** `orbitsWithinAu`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
 /** `labelPlacement: 'centre'` captions the body over its middle instead of below it (Sgr A*'s black shadow). */
@@ -16,11 +18,8 @@ export interface CatalogContext { name?: string; color?: string; order?: number;
 export type CatalogEntry<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> & { readonly aliases: readonly string[]; order?: number; context?: CatalogContext };
 
 function classification(value: unknown): ObjectClassification {
-  switch (value) {
-    case 'star': case 'planet': case 'satellite': case 'dwarf-planet':
-    case 'asteroid': case 'comet': case 'trans-neptunian': case 'interstellar': case 'exoplanet': case 'black-hole': return value;
-    default: throw new TypeError('Invalid catalogue classification.');
-  }
+  if (!(OBJECT_CLASSIFICATIONS as readonly unknown[]).includes(value)) throw new TypeError(`Invalid catalogue classification: ${String(value)}.`);
+  return value as ObjectClassification;
 }
 
 function order(value: unknown): number | undefined {
@@ -45,9 +44,11 @@ export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDef
   const catalog = input.properties.catalog;
   if (!isRecord(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
   const { name, systemName, color, distanceAu, description } = catalog;
-  const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationDatasets', 'orientationReference'];
+  const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationDatasets', 'orientationReference', 'distanceSubject'];
   if (Object.keys(catalog).some(key => !keys.includes(key)) || typeof name !== 'string' || typeof systemName !== 'string' ||
       typeof color !== 'string' || typeof distanceAu !== 'number' || typeof description !== 'string') throw new TypeError(`Invalid catalogue metadata: ${input.id}.`);
+  // Another subject's distance the package adopts (a nebula placed at its star cluster's): navigation states it.
+  if (catalog.distanceSubject !== undefined) parseDistanceSubject(catalog.distanceSubject);
   if (catalog.orientationReference !== undefined && (!Number.isInteger(catalog.orientationReference) || Number(catalog.orientationReference) < 1)) throw new TypeError(`Invalid orientation reference: ${input.id}.`);
   if (catalog.featured !== undefined && typeof catalog.featured !== 'boolean' || catalog.illustrationDatasets !== undefined &&
       (!Array.isArray(catalog.illustrationDatasets) || !catalog.illustrationDatasets.every(id => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id)))) throw new TypeError(`Invalid discovery metadata: ${input.id}.`);
@@ -75,16 +76,32 @@ export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDef
     order: order(catalog.order), ...(context ? { context } : {}) };
 }
 
-/** One entry of the prepared catalogue, as `prepare:catalog` writes it and `/objects/<id>/entry.json` serves it: a scene
- * object's descriptor with its navigation distance and discovery, a prepared focus or an overview. `loadScene` binds a
- * scene object's descriptor to the host's scene loader. The catalogue's order and context stay out of the object. */
+/** One entry of the prepared catalogue, as `prepare:catalog` writes it and `/objects/<id>/entry.json` serves it: a package's
+ * descriptor with its navigation distance and discovery. What the object is comes from the descriptor alone; `loadScene`
+ * binds its scene to the host's loader. The catalogue's order and context stay out of the object. */
 export function catalogueObject<Scene, Signal>(value: unknown,
   loadScene: (descriptor: Record<string, unknown>) => ObjectDefinitionInput<Scene, Signal>['loadScene']): NavigableObject<Scene, Signal> {
-  if (!isRecord(value)) throw new TypeError('Invalid catalogue entry.');
-  if (value.kind === 'prepared-focus') return definePreparedFocus(value);
-  if (value.kind === 'overview') return defineOverview(value);
-  if (value.kind !== 'scene' || !isRecord(value.descriptor)) throw new TypeError('Invalid catalogue entry.');
-  const { order: _order, context: _context, ...object } = catalogEntry(value.descriptor, loadScene(value.descriptor),
-    parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
-  return object;
+  if (!isRecord(value) || !isRecord(value.descriptor) || !isRecord(value.descriptor.properties) || typeof value.descriptor.id !== 'string') throw new TypeError('Invalid catalogue entry.');
+  const descriptor = value.descriptor, id = value.descriptor.id;
+  if (value.descriptor.properties.catalog === undefined) throw new TypeError(`Invalid catalogue entry: ${id} has no catalogue entry.`);
+  if (overviewLevel(descriptor) !== null) throw new TypeError(`Invalid catalogue entry: ${id} is a level of the zoom ladder, not an object.`);
+  const { order: _order, context: _context, ...object } = catalogEntry(descriptor, loadScene(descriptor), parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
+  // An object with alternate names is found by them: search matches its id, its name and each alias.
+  return object.aliases.length ? { ...object, searchNames: Object.freeze(destinationSearchNames([id, object.name, ...object.aliases])) } : object;
+}
+
+/** One level of the zoom ladder, from its prepared row: its package's `properties.overview`, named by that block or, for a
+ * level with a place of its own (the Local Group), by its catalogue block, which also makes it a body of the world. */
+export function catalogueLevel(value: unknown): OverviewObject {
+  if (!isRecord(value) || !isRecord(value.descriptor) || !isRecord(value.descriptor.properties) || typeof value.descriptor.id !== 'string') throw new TypeError('Invalid level entry.');
+  const descriptor = value.descriptor, id = value.descriptor.id, level = overviewLevel(descriptor);
+  if (level === null) throw new TypeError(`Invalid level entry: ${id} authors no overview.`);
+  const placed = value.descriptor.properties.catalog === undefined ? null
+    : catalogEntry(descriptor, async () => { throw new Error(`${id} is a level: it has no scene of its own.`); }, parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
+  const { name: levelName, description: levelDescription, ...ladder } = level;
+  const name = placed?.name ?? levelName, description = placed?.description ?? levelDescription;
+  if (name === undefined || description === undefined) throw new TypeError(`Invalid level entry: ${id} has no name or description.`);
+  return Object.freeze({ id, name, description, route: `/${id}/`, ...ladder,
+    ...(placed ? { classification: placed.classification, ...(placed.classificationLabel === undefined ? {} : { classificationLabel: placed.classificationLabel }),
+      systemName: placed.systemName, color: placed.color, distance: placed.distance, worldFrame: placed.worldFrame, discovery: placed.discovery } : {}) });
 }

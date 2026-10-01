@@ -29,6 +29,23 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   // The generated module satisfies the frame preparers' contract as it is; typing it by the module keeps drift a type error.
   const geometry: SolarGeometry = solar as typeof import('../../../src/platform/solar-geometry.mts');
   const ecliptic = prepareEclipticPresentationFrame(geometry, descriptor.id);
+  if (!descriptor.recipe.surfaces.length) {
+    // No surface to orient: the scene stands in the ecliptic presentation frame at the object's place, framed at the
+    // radius its solar-system source authors, and the sky rides that frame.
+    const bodyToReference = solar.requireBodyFixedToIcrf(descriptor.id) as Matrix3;
+    const distanceM = solar.requireBodyOrbit(descriptor.id).heliocentricDistanceAu * solar.ASTRONOMICAL_UNIT_KILOMETERS * 1000;
+    const authored = sources.get('solar-system') as { bodyRadiusUnits: number; geometryScale?: number };
+    const renderedRadiusUnits = authored.bodyRadiusUnits * (authored.geometryScale ?? 1);
+    const frame = preparePhysicalWorldFrame({ referenceFrame: 'sun-icrf', epochJdTt: solar.SOLAR_GEOMETRY_EPOCH_JD_TT,
+      originM: transform(bodyToReference, solar.requireBodyFixedSunDirection(descriptor.id) as Vector3).map(component => -component * distanceM) as unknown as Vector3,
+      bodyToReference, bodyToPresentation: ecliptic.basis.flat() as unknown as Matrix3,
+      orbitUpReference: transform(bodyToReference, solar.requireBodyFixedEclipticNorth(descriptor.id)),
+      physicalRadiusM: descriptor.recipe.shape.radiusKm * 1000, renderedRadiusUnits });
+    const sky = { ...definition.sky, sceneRegistration: matrixCss(transpose(frame.presentationToReference)),
+      sceneRegistrationModel: 'icrf-in-authored-presentation-frame', sceneRegistrationEpoch: solar.SOLAR_GEOMETRY_EPOCH_LABEL };
+    return { definition: { ...definition, sky } as Input, frame, systemTransform: null, defaultCamera: null, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
+      frame, renderedRadiusUnits, model: 'ecliptic-presentation-frame', ephemerisSource: 'src/platform/solar-geometry.mts' } };
+  }
   const intended = ecliptic.basis.flat() as unknown as Matrix3, placement = await surfacePlacement(objectDirectory, bound, sources.get('features'));
   assertAtlasOrigins(descriptor.id, sources.get('raster'), placement);
   // The body is drawn in its ecliptic presentation frame: the outermost mesh node is solved through whatever the lane placed below it.

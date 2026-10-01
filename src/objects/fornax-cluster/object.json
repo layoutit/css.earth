@@ -1,14 +1,97 @@
 {
   "schema": "cssearth-object@2",
   "id": "fornax-cluster",
-  "type": "catalogue-point-bank",
+  "type": "layered-body",
   "properties": {
     "preparation": {
-      "source": "source/dots/points.json"
+      "schema": "cssearth-object-preparation@1",
+      "label": "Fornax Cluster",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 19120220621572740000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Fornax Cluster",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 4055320034000,
+      "description": "A cluster of galaxies 19.7 million parsecs away.",
+      "aliases": [
+        "RXCJ0338.4-3526",
+        "FORNAX",
+        "MCXC J0338.4-3526"
+      ],
+      "order": 5136,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.8617512664442404e+23,
+        4.029302349710151e+23,
+        -3.5184679460123856e+23
+      ],
+      "presentationToReference": [
+        0.7798248547008383,
+        0,
+        0.6259977603720448,
+        0.5743417160368334,
+        0.3977771559319137,
+        -0.7154753157437252,
+        0.24900760874053943,
+        -0.9174820620691818,
+        -0.3101965128279173
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 61678131037331420000,
+      "bodyRadiusM": 1.912022062157274e+22
     }
   },
   "prepared": {
-    "format": "cssearth-catalogue-points-bin@1",
-    "url": "prepared/dots.bin"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

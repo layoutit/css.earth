@@ -79,9 +79,11 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged });
   if (write || !result.definition) return result;
   const { prepareSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
-  // Minimaps render from the raw imagery; a reuse-images stage already carries the published ones.
-  if (!reuseImages) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, solarGeometry: await solarGeometry() });
-  if (!reuseImages) await assertMapsStartAtSurfaceMapEdge(objectDirectory, outputDirectory);
+  // Minimaps render from the raw imagery; a reuse-images stage already carries the published ones. An object with no
+  // surface has no map to draw.
+  const surfaced = result.descriptor.recipe.surfaces.length > 0;
+  if (!reuseImages && surfaced) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, solarGeometry: await solarGeometry() });
+  if (!reuseImages && surfaced) await assertMapsStartAtSurfaceMapEdge(objectDirectory, outputDirectory);
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   await assertDefaultViewsFaceDatasets(objectDirectory, prepared.definition as Record<string, unknown>, prepared.frame);
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
@@ -278,6 +280,19 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   await mkdir(outputDirectory, { recursive: true });
   const sourceDirectory = resolve(objectDirectory, 'source');
+  if (!descriptor.recipe.surfaces.length) {
+    // No surface to bake: the scene is the camera, sky and world frame, and its datasets show companion banks.
+    const { prepareSurfacelessScene, companionThumbnails } = await import('./surfaceless-scene.ts');
+    // Each dataset's thumbnail is a picture of the bank it shows, published as the object's own file.
+    await companionThumbnails({ objectDirectory, publicDirectory, content: required(sources, 'content').value });
+    const content = await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: relative(sourceDirectory, required(sources, 'content').path) } });
+    const prepared = await prepareSurfacelessScene({ source: physicalSolarSource(required(sources, 'solar-system').value), controls: content.controls as never, solarGeometry: await solarGeometry() as never });
+    await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(prepared.definition)}\n`);
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, objectDirectory: write ? objectDirectory : outputDirectory,
+      preparedDirectory: outputDirectory, values: [prepared.definition, content] });
+    if (write) await writePreparedObject(descriptor.id, prepared.definition as unknown as Record<string, unknown>);
+    return Object.freeze({ descriptor, sources, definition: prepared.definition, scene: prepared.scene }) as never;
+  }
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-layered-oblate-preparation@2') {
     genericLaneOnly();
     const { prepareLayeredOblateObject } = await import('@cssearth/bake/objects/layers/material-composition');

@@ -1,5 +1,6 @@
-import { createSystemFade, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
+import { createSystemFade, extendedRetirement, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
 import type { PositionM } from '@cssearth/engine';
+import { isExtendedClassification } from '@cssearth/objects';
 import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
@@ -98,17 +99,16 @@ const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.v
 export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
   const wantedOrbits = new Set<string>(), landmarkMoonIds = new Set(annotationLandmarks), declutterMarkers = createMarkerDeclutter(annotationPriorities);
-  const points = [plan.focus, ...plan.bodies], byId = new Map(points.map(point => [point.id, point]));
+  const points = [plan.focus, ...plan.bodies].map(body => 'classification' in body && isExtendedClassification(body.classification) ? { ...body, radiusM: 0 } : body), byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
   let systemFade = createSystemFade(plan);
   const entryOf = (body: (typeof points)[number]) => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
-    // A star placed by its own record, not one on an orbit: only such a star can belong to another galaxy's field.
-    const placedStar = orbit === null && 'classification' in body && body.classification === 'star';
+    const placedStar = orbit === null && 'classification' in body && body.classification === 'star'; // Placed by its own record: only such a star can be of another galaxy's field.
     const distanceFromSunM = Math.hypot(...body.positionM.map((value, axis) => value - plan.focus.positionM[axis]!));
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null, scale: markerScale(distanceFromSunM, placedStar ? plan.volume : undefined),
-      galaxyField: !placedStar || inGalaxyField(distanceFromSunM, plan.volume),
+      galaxyField: !placedStar || inGalaxyField(distanceFromSunM, plan.volume), kind: 'classification' in body ? body.classification : undefined, extended: 'classification' in body && isExtendedClassification(body.classification),
       closedOrbit: orbit?.fullTrail === true, drawnRadiusM: body.radiusM * ('billboard' in body && body.billboard ? Math.max(1, billboardImageScale(body.billboard, body.radiusM)) : 1),
       orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
@@ -165,7 +165,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const orbitFocus = (selectionPreview ? bodies[indexById.get(selectionPreview) ?? -1] : undefined) ?? selectedEntry;
       const orbitOverview = selectionPreview ? false : overview;
       const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
-      const selectedEye = frame.eye(selected);
+      const selectedEye = frame.eye(selected), fromFocus = Math.hypot(...frame.eye(plan.focus));
       // Past a system (bodies hidden, then ten times that), a star that is not featured gives way to the catalogue dots.
       const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), plan.system.hiddenDistanceM, plan.system.hiddenDistanceM * 10);
       const selectedDiameter = selectedEye[2] < -selected.radiusM
@@ -264,7 +264,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const prominentOrbiter = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
           (annotationPriorities[body.id] ?? 0) >= 3;
         const inFrame = depth > body.radiusM && Math.abs(bodyX) < width / 2 && Math.abs(bodyY) < height / 2;
-        const cover = inFrame ? occlusion.cover(eye, prepared[entry.index]!.drawnRadiusM, body.id) : null, visible = inFrame && cover !== true;
+        const cover = inFrame ? occlusion.cover(eye, prepared[entry.index]!.drawnRadiusM, body.id) : null, visible = inFrame && cover !== true && !(isSelected && entry.extended && !overview); // Up close a selected galaxy's image is its marker: a ring would cover what sits at its centre.
         // Planet circles and captions are orientation landmarks, not physical
         // sprites. Keep them through occultation and pin an off-screen planet to
         // the nearest stage edge; the body sprite itself remains truthful below.
@@ -343,16 +343,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           (annotationPriorities[body.id] ?? 0) >= 3;
         const proxyOpacity = highlighted || hostedPlanet ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const flightDestination = navigationInFlight && body.id === emphasizedId;
-        // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera over
-        // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
-        // so without this every star of the Milky Way stayed a dot from intergalactic distances. A body beyond it uses the cluster scale.
-        const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
-        // The focus, a featured star, a star outside the Milky Way and a black hole keep their dots; planets fade with their system.
+        // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera, as its name
+        // does below (a star in no system has no other fade); a galaxy or a cluster fades at its own scale (extendedRetirement).
+        const beyondLocalGroup = extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
           entry.galaxyField && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
-        // A retired galaxy level takes its own stars with it; a star of another galaxy (a Magellanic Cloud's, or one beyond the
-        // Local Group at the cluster scale) stays for that galaxy's view.
-        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField ? 1 : galaxyHost ? galaxyHandoff : 0;
+        // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy and a cluster keep their dots.
+        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField && entry.kind !== 'galaxy' && entry.kind !== 'galaxy-cluster' ? 1 : galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
@@ -361,7 +358,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
           (isLocator || hostedPlanet) && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
-          (!entry.indicatorHidden || hovered || isSelected);
+          (!entry.indicatorHidden || hovered || isSelected) && !(isSelected && entry.extended && !overview);
         const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
@@ -437,7 +434,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // read as neighbourhood: an inner planet is not less part of its system because the camera frames the outer one.
         // Past the Local Group scale the galaxies are named, not the stars inside them: a name fades with the body's distance
         // from the camera over the band where the overview becomes the Local Group (the cluster scale beyond it).
-        const galactic = 1 - logarithmicFade(Math.hypot(...frame.eye(body)), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
+        const galactic = 1 - (extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...frame.eye(body)), entry.scale.returnDistanceM, entry.scale.enterDistanceM));
         const alpha = flightDestination ? 1 : referenceAnnotationOnly ? galactic : targeted ? markerOpacity : Math.min(markerOpacity, galactic, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.

@@ -26,8 +26,8 @@ output/playwright/
 # Reacquirable binary source inputs. Source manifests, hashes, provenance,
 # licenses, configuration, and authored source modules remain tracked.
 src/objects/*/source/**/*.csv
-# LGGS M31 star table (12.5 MB); restored from its CDS origin (src/objects/m31/source/lggs-stars/points.json).
-src/objects/m31/source/lggs-stars/table4.dat.gz
+# LGGS M31 star table (12.5 MB); restored from its CDS origin (src/objects/m31-layers/source/lggs-stars/points.json).
+src/objects/m31-layers/source/lggs-stars/table4.dat.gz
 # Earth's dated NASA MUR tile archives (45 MB a day); restored from the source mirror (src/objects/earth/source/manifest.json).
 src/objects/earth/source/science/mur/*/tiles.tar.gz
 src/objects/*/source/**/*.fits
@@ -69,10 +69,10 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/mercury/source/features/tectonic/global-tectonic-map.zip
 
 # Offline-authored galaxy overview crops with no acquisition plan to restore them.
-!src/objects/lmc/source/source.jpg
-!src/objects/m31/source/source.jpg
-!src/objects/m33/source/source.jpg
-!src/objects/smc/source/source.jpg
+!src/objects/lmc-volume/source/source.jpg
+!src/objects/m31-layers/source/source.jpg
+!src/objects/m33-layers/source/source.jpg
+!src/objects/smc-volume/source/source.jpg
 !src/objects/milky-way/source/sky/nasa-preview.jpg
 
 # Retained upstream catalogue bytes with no acquisition plan to restore them.
@@ -207,12 +207,12 @@ src/objects/*/source/**/*.bpc
 !src/objects/*/source/science/geology-*/Screenshot *.png
 
 # SMC compact replay inputs: small PNGs prepare:nebulae needs to rebuild the dataset bank and the neutral emission volume.
-!src/objects/smc/source/compact/lenses/*/*.png
-!src/objects/smc/source/compact/neutral/slices/*/*.png
+!src/objects/smc-volume/source/compact/lenses/*/*.png
+!src/objects/smc-volume/source/compact/neutral/slices/*/*.png
 # LMC compact replay inputs, the same shape plus the model projection its dataset tone curves read.
-!src/objects/lmc/source/compact/lenses/*/*.png
-!src/objects/lmc/source/compact/neutral/slices/*/*.png
-!src/objects/lmc/source/compact/fit-projection.png
+!src/objects/lmc-volume/source/compact/lenses/*/*.png
+!src/objects/lmc-volume/source/compact/neutral/slices/*/*.png
+!src/objects/lmc-volume/source/compact/fit-projection.png
 
 # USGS Gazetteer nomenclature archives re-pinned this phase: named explicitly (not a glob) so tracking stays limited
 # to the bodies actually verified here; each manifest documents these as a committed public-domain snapshot.
@@ -314,15 +314,15 @@ src/objects/*/source/**/*.bpc
 /src/objects/eps-eridani-disc/.prepared-*/
 /src/objects/hd-181327-disc/.prepared-*/
 /src/objects/pds-70-disc/.prepared-*/
-/src/objects/m42/.prepared-*/
-/src/objects/helix/.prepared-*/
-/src/objects/m2-9/.prepared-*/
-/src/objects/m1/.prepared-*/
-/src/objects/smc/.prepared-*/
-/src/objects/lmc/.prepared-*/
-/src/objects/m45/.prepared-*/
-/src/objects/m8/.prepared-*/
-/src/objects/omega-centauri/.prepared-*/
+/src/objects/m42-volume/.prepared-*/
+/src/objects/helix-volume/.prepared-*/
+/src/objects/m2-9-volume/.prepared-*/
+/src/objects/m1-volume/.prepared-*/
+/src/objects/smc-volume/.prepared-*/
+/src/objects/lmc-volume/.prepared-*/
+/src/objects/m45-volume/.prepared-*/
+/src/objects/m8-volume/.prepared-*/
+/src/objects/omega-centauri-volume/.prepared-*/
 # SPICE kernels are restored from their origins, never committed: bank kernels by packages/bake/cli/kernel-bank.mts,
 # body kernels by their acquisition steps (packages/bake/cli/restore-source-inputs.mts), evidence kernels by the script
 # that reads them.

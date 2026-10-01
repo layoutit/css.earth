@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m8",
+  "displayName": "Lagoon Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1.326 kpc (\u221269 / +77 pc)",
+        "source": {
+          "catalogueId": "wright-2019-kinematics",
+          "url": "https://arxiv.org/pdf/1903.12176v1",
+          "label": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "eso-optical",
+    "controls": [
+      {
+        "id": "eso-optical",
+        "label": "ESO \u00b7 optical",
+        "thumbnail": "m8-dataset-eso-optical.webp",
+        "volume": {
+          "objectId": "m8-volume",
+          "datasetId": "eso-optical",
+          "surface": "eso-optical"
+        },
+        "source": {
+          "id": "m8-volume-eso-optical",
+          "path": "../../m8-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso0936a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "eso-vista",
+        "label": "ESO VISTA \u00b7 infrared",
+        "thumbnail": "m8-dataset-eso-vista.webp",
+        "volume": {
+          "objectId": "m8-volume",
+          "datasetId": "eso-vista",
+          "surface": "eso-vista"
+        },
+        "source": {
+          "id": "m8-volume-eso-vista",
+          "path": "../../m8-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1101d/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "spitzer-mid-infrared",
+        "label": "Spitzer \u00b7 infrared",
+        "thumbnail": "m8-dataset-spitzer-mid-infrared.webp",
+        "volume": {
+          "objectId": "m8-volume",
+          "datasetId": "spitzer-mid-infrared",
+          "surface": "spitzer-mid-infrared"
+        },
+        "source": {
+          "id": "m8-volume-spitzer-mid-infrared",
+          "path": "../../m8-volume/source/manifest.json",
+          "url": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+      "href": "https://arxiv.org/pdf/1903.12176v1"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/pdf/1903.12176v1",
+      "credit": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2"
+    }
+  }
+}

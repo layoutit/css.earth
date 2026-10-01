@@ -2,10 +2,52 @@
   "schema": "cssearth-inventory@1",
   "assets": [
     {
+      "location": "public",
+      "filename": "fornax-cluster-dataset-members.webp",
+      "bytes": 428,
+      "sha256": "d164249e8fa2cc0f4f33df1488093a1fec2fee5867c0bd9054c941f0f4aa6ad5"
+    },
+    {
       "location": "prepared",
-      "filename": "dots.bin",
-      "bytes": 3581,
-      "sha256": "253521ad89bd018222af8496f441177493677b77948290bb04dd922aea42f67d"
+      "filename": "content.json",
+      "bytes": 2996,
+      "sha256": "259c5773de63f94cc5c0446ac74f101f40f9fffa3107743fccbef19f57cdc863"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 483,
+      "sha256": "3d4bd17294c774793da4125a489366fa1e5218a296a04ff045053df6f7382bec"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 599,
+      "sha256": "a31c2f8ebcd6a7890d0a1ffc31220ffe576603fd185f5c46cb232a5194458790"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4643,
+      "sha256": "5f93f8824838cd6583ead493ec0760a91e65c2e1f7aacf5b25f9ff6254a49950"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3902,
+      "sha256": "0940583bde2747a66ad76c279321c133cb0d42fbbf2fa002b5a82693b0335f79"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1691,
+      "sha256": "3b6de8ed5f1b4b059513539538f95858fec85fb6b242df17700e3f792618429b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 653,
+      "sha256": "6bea3d12e3a9424792f75281081dbdc4693cb8a75c9df0e12b3e20e46f2a9e45"
     }
   ]
 }

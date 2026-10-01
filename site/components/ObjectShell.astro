@@ -1,8 +1,6 @@
 ---
 import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import ObjectInformationPanel from "./ObjectInformationPanel.astro";
-import PreparedClusterFacts from './PreparedClusterFacts.astro';
-import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../object-shell-types";
 import { OVERVIEWS, SCENE_OBJECTS } from "../objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
@@ -17,7 +15,6 @@ import ObjectCard from './ObjectCard.astro';
 import SystemHeaders from './SystemHeaders.astro';
 import SystemBodies from './SystemBodies.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
-import InformationTabs from './InformationTabs.astro';
 import Accordion from './Accordion.astro';
 import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
@@ -232,36 +229,7 @@ import Detached from './Detached.astro';
       </ObjectResults>
     </nav></Detached>}
     <div class="object-selected-content">
-    {!navigation && <Detached detached><div class="object-context" hidden><Detached detached><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
-        <section class="object-selected-panel">
-          {OVERVIEWS.map(({ id }) =>
-            <ObjectBreadcrumbs scope={id} currentPage={false} data-focus-breadcrumb-scope={id} hidden />)}
-          <div class="object-title-row">
-            <p class="object-title object-title-text" data-focus-name></p>
-            <div class="object-title-tags"><span class="object-classification-tag object-title-tag" data-focus-status></span></div>
-          </div>
-          <p class="object-introduction" data-focus-introduction hidden></p>
-          <a class="object-learn-more-link" data-focus-learn-more target="_blank" rel="noopener noreferrer" hidden>Learn more ↗</a>
-          <p class="object-introduction" data-focus-unavailable role="status" hidden
-            data-unavailable-objects={Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id).join(' ')}></p>
-        </section>
-        <InformationTabs idPrefix="prepared-focus" group="prepared-focus" tabs={[{id: 'dataset', label: 'Datasets'}, {id: 'factsheet', label: 'Factsheet'}]} />
-        <div class="object-card-tabpanel" id="prepared-focus-dataset-content" data-information-panel="dataset"
-          data-information-group="prepared-focus" role="region" aria-label="Datasets">
-          {/* The dataset banks are the same on every page; the first focus selection fetches them (`site/focus-fragment.mts`). */}
-          <div data-focus-banks-slot="datasets" hidden></div>
-        </div>
-        <Detached detached><div class="object-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
-          data-information-group="prepared-focus" role="region" aria-label="Factsheet">
-          <div class="object-factsheet-body"><div class="object-facts"><ul class="object-primary-facts">
-            <li data-focus-aliases-row hidden><span class="object-fact-label">Also known as</span><span class="object-fact-value" data-focus-aliases></span></li>
-            {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
-              <li><span class="object-fact-label" data-focus-fact-label={id}>{label}</span><span class="object-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
-          </ul></div></div>
-          <div data-focus-banks-slot="facts" hidden></div>
-          <PreparedClusterFacts />
-        </div></Detached>
-      </ObjectCard></Detached>
+    {!navigation && <Detached detached><div class="object-context" hidden>
       {OVERVIEWS.map(overview => <OverviewCard {overview} />)}
       <Detached detached><ObjectCard class="object-overview-card" data-system-results>
         {/* The Solar System's header and this page's own; the others arrive with the first overview of another system. */}
@@ -286,7 +254,7 @@ import Detached from './Detached.astro';
       <p class="object-destination-context"></p>
       <p class="object-destination-status" role="status"></p>
     </section></Detached>
-    {/* A page that opens on an overview or a catalogue focus shows that card; the body's waits off the page. */}
+    {/* A page that opens on an overview shows that card; the body's waits off the page. */}
     <Detached detached={pageId !== objectId}><ObjectInformationPanel {...Astro.props} /></Detached>
     <div class="object-sheet-sources"><SourcesLink objectId={objectId} name={Astro.props.title.label} /></div>
     </div>

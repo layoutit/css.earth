@@ -29,3 +29,14 @@ export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame
     subscribe: () => () => {},
   };
 }
+
+/** A bank of catalogue dots: one dataset, its members, with nothing to decode before it shows. */
+export function createPointFocusBank(objectId: string): PreparedFocusBank {
+  const state: PreparedFocusDatasets = { objectId, id: 'members', defaultDataset: 'members', selectedDataset: 'members', starsVisible: false,
+    datasets: [{ id: 'members', label: 'Members', title: 'Catalogue members', description: 'Prepared catalogue dots', sourceUrl: '' }] };
+  return {
+    objectId, framingRadiusM: () => { throw new TypeError('A bank of dots is framed by its scene.'); }, state: () => state, load: () => Promise.resolve(),
+    selectDataset(id) { if (id !== 'members') throw new TypeError('Unknown catalogue-point dataset.'); },
+    subscribe: () => () => {},
+  };
+}

@@ -185,9 +185,8 @@
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-label-visible="true"] > .context-caption::after {
   opacity: 1;
 }
-/* The galaxy catalogue (prepared-galaxy-catalog.ts): a zero-size root at the stage centre whose dots, R500 apertures,
-   kind markers and labels are placed from it. Their fades own opacity and visibility, the camera their transforms, an
-   aperture's ellipse its size, and a label's pick state its pointer events; the rest is fixed here. */
+/* The galaxy catalogue (prepared-galaxy-catalog.ts): a zero-size root at the stage centre whose dots are placed from it.
+   Their fade owns opacity and visibility and the camera their transforms; the rest is fixed here. */
 .prepared-galaxy-catalog {
   position: absolute;
   left: 50%;
@@ -196,24 +195,15 @@
   height: 0;
   pointer-events: none;
 }
-.prepared-galaxy-catalog [data-galaxy-dot],
-.prepared-galaxy-catalog [data-galaxy-label] {
+.prepared-galaxy-catalog [data-galaxy-dot] {
   position: absolute;
   left: 0;
   top: 0;
   pointer-events: none;
-}
-.prepared-galaxy-catalog [data-galaxy-dot] {
   width: 2px;
   height: 2px;
   border-radius: 50%;
   background: #c2ccd8;
-}
-.prepared-galaxy-catalog [data-galaxy-label] {
-  cursor: default;
-}
-.prepared-galaxy-catalog [data-galaxy-label][data-object-navigate] {
-  cursor: pointer;
 }
 /* Environment captions (environment-labels.ts): a zero-size root at the stage centre whose captions are placed from it.
    A caption's fade owns its visibility and opacity, and a link's fade its pointer events. */

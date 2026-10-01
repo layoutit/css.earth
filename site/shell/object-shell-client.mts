@@ -1,14 +1,13 @@
+import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from '../tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 import { createObjectBrowserController } from '../object-browser.mts';
-import { applySeoHead, focusSeo, objectSeo } from '../seo.mts';
-import { knownObject } from '../object-directory.mts';
+import { applySeoHead, objectSeo } from '../seo.mts';
+import { knownLevel, knownObject } from '../object-directory.mts';
 import { overviewPage } from '../navigation/navigation-scope.mts';
 import { presentPageDatasets } from '../page-datasets.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import { createPreparedFocusCard } from '../prepared-focus-card.mts';
-import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focus-fragment.mts';
 import { selectionKey } from '../scene/scene-selection.mts';
 import type { DestinationPresentation } from '../destination-browser.mts';
 import type { ShellCamera, PlaybackState } from '../browser/browser-types.mts';
@@ -61,23 +60,6 @@ export function mountObjectShell({
   let releaseArrivalControls = () => {};
   let navigationTransition: (ShellNavigationTransition & { cardSubject: 'body' | 'satellite-system' | null; retainsSourceCard: boolean }) | null = null;
   let camera: ShellCamera | null = null;
-  const focusRoot = sectionElements(drawer, '[data-prepared-focus-card]')[0] ?? null;
-  const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
-  const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
-  lifetime.onDispose(() => focusCard.destroy());
-  // The page ships the focus banks as a shared fragment; the first focus selection fetches it.
-  let focusBanks: Promise<void> | null = null;
-  function loadFocusBanks() {
-    if (!focusRoot || focusBanks || !focusBanksPending(focusRoot)) return;
-    focusBanks = fetchFocusFragment(url => windowTarget.fetch(url)).then(html => {
-      if (lifetime.disposed) return;
-      spliceFocusBanks(focusRoot, new windowTarget.DOMParser().parseFromString(html, 'text/html'));
-      focusCard.adoptBanks();
-    }).catch(error => {
-      focusBanks = null; // The next focus selection retries.
-      windowTarget.reportError(error);
-    });
-  }
   // The selected card panel stays retained across subject changes.
   let information: HTMLElement | null = null;
   // Switching between a body and its system changes layout, so it waits while the camera coasts and
@@ -123,36 +105,34 @@ export function mountObjectShell({
     // A page's datasets follow its address on every publication, a dataset-only change included (page-datasets.mts).
     presentPageDatasets(documentTarget, navigationHref(windowTarget), objectId);
     if (presentedSubject === subject) { updateBodyCard(); return; }
-    // What the world draws around the scene (a catalogue focus, an overview) is its own page, `/<id>/`.
+    // A level the world draws around the scene is its own page, `/<id>/`.
     const drawnPage = (selected: typeof subject | null) => {
-      if (selected?.kind === 'focus') return selected.record ? { id: selected.record.id, seo: focusSeo(selected.record) } : null;
-      const overview = selected?.kind === 'overview' ? knownObject(overviewPage(objectId, selected.overview.scope) ?? '') : undefined;
-      return overview?.kind === 'overview' ? { id: overview.id, seo: objectSeo(overview) } : null;
+      const overview = selected?.kind === 'overview' ? knownLevel(overviewPage(objectId, selected.overview.scope)) : undefined;
+      return overview ? { id: overview.id, seo: objectSeo(overview) } : null;
     };
     // Another star's scene zoomed out to an overview keeps its own address (a reload reopens that scene), but the tab
     // names what the card shows: the Milky Way from the ε Eridani system was still titled "ε Eridani" (2026-10-01).
     const titledOverview = (selected: typeof subject | null) => {
       if (selected?.kind !== 'overview' || selected.overview.scope === 'system' || drawnPage(selected)) return null;
-      const overview = knownObject(selected.overview.scope), scene = knownObject(objectId);
-      return overview?.kind === 'overview' && scene?.kind === 'scene' ? { route: scene.route, seo: { ...objectSeo(scene), title: objectSeo(overview).title } } : null;
+      const overview = knownLevel(selected.overview.scope), scene = knownObject(objectId);
+      return overview && scene ? { route: scene.route, seo: { ...objectSeo(scene), title: objectSeo(overview).title } } : null;
     };
-    const leftPage = presentedSubject?.kind === 'focus' || drawnPage(presentedSubject) !== null || titledOverview(presentedSubject) !== null;
+    const leftPage = drawnPage(presentedSubject) !== null || titledOverview(presentedSubject) !== null;
     presentedSubject = subject;
-    const focus = subject.kind === 'focus' ? subject : null, page = drawnPage(subject);
+    const page = drawnPage(subject);
     // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
     // (object-browser.mts bindObject).
     const titled = titledOverview(subject);
     if (page) presentPage(`/${page.id}/`, page.seo);
     else if (titled) presentPage(titled.route, titled.seo);
-    // A focus whose record is still loading is already this page's subject: its head waits for the record.
-    else if (leftPage && !focus) {
+    else if (leftPage) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
-      if (scene?.kind === 'scene') presentPage(scene.route, objectSeo(scene));
+      if (scene) presentPage(scene.route, objectSeo(scene));
     } else pendingPage = null;
-    focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
-    if (focus) loadFocusBanks();
     objectBrowser.refreshSelection();
-    viewReadout.setPreparedFocus(focus?.record ?? null);
+    // A galaxy, a cluster or a nebula has no surface to stand above: the readout measures to its centre.
+    const shown = knownObject(objectId);
+    viewReadout.setExtendedSubject(shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
     viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : 'system');
     updateBodyCard();
   }
@@ -311,7 +291,6 @@ export function mountObjectShell({
     settingsController.bindObject();
     bindCardMaps();
     const subject = readSelection();
-    viewReadout.setPreparedFocus(subject.kind === 'focus' ? subject.record : null);
     informationCard.activatePanels();
   }
 }

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "omega-centauri-volume",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -105005412559826930000,
+        -41769153670092810000,
+        -123207430757263850000
+      ],
+      "localToReferenceXyzw": [
+        0.7712350124749122,
+        -0.5231773789172258,
+        -0.20356010658195295,
+        0.3000754383991924
+      ],
+      "metersPerUnit": 811718046418199.9,
+      "boundsUnits": {
+        "min": [
+          -2190.705034159304,
+          -2194.8969278075674,
+          -4259.5353966530165
+        ],
+        "max": [
+          2190.705034159304,
+          2194.8969278075674,
+          4259.5353966530165
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "omega-centauri"
+  },
+  "prepared": {
+    "format": "cssearth-volume-datasets@1",
+    "url": "prepared/datasets.json"
+  }
+}

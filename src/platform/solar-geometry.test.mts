@@ -14,7 +14,6 @@ import { parseSolidReplayScene } from '@cssearth/bake/objects/layers/terrestrial
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 type Vector = readonly number[];
 type EpochStateSource = { centerBodyId: string; positionKm: Vector; parentHeliocentricState: { positionKm: Vector; velocityKmPerDay: Vector } };
@@ -86,8 +85,8 @@ test('all retained body centers are composed with their named parent at the fixe
 });
 
 test('regeneration retains every current registry orbit, including moons and comets', async () => {
-  const registry = SCENE_OBJECTS.filter(body =>
-    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'interstellar', 'comet', 'exoplanet', 'star', 'black-hole'].includes(body.classification) && body.id !== 'sun').map(body => body.id);
+  // Every body of the world but the Sun: the scenes, and the galaxies, clusters and nebulae the host draws.
+  const registry = readPreparedObjects(resolve(import.meta.dirname, '../..')).worldObjects.filter(body => body.id !== 'sun').map(body => body.id);
   // Then every star or planet on a hosted orbit around a packaged host, drawn from its astronomy record alone.
   const { BODIES, HOSTED_PLANET_IDS } = await import('@cssearth/astronomy');
   const records = BODIES as Readonly<Record<string, { readonly parent: string | null }>>;

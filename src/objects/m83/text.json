@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m83",
+  "card": {
+    "text": "A galaxy 4.9 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2009aj-138-323t",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+        "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+        "checked": "2026-10-01",
+        "locator": "distance: 4.898 Mpc (−67,200 / +68,140 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A galaxy 4.9 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2009aj-138-323t",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+        "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+        "checked": "2026-10-01",
+        "locator": "distance: 4.898 Mpc (−67,200 / +68,140 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "The Southern Pinwheel",
+      "detail": "2373 × 2164 px",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-m83",
+          "url": "https://www.eso.org/public/images/m83/",
+          "label": "The Southern Pinwheel; ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
+          "checked": "2026-10-01",
+          "locator": "The Southern Pinwheel"
+        }
+      ]
+    }
+  }
+}

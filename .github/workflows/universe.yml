@@ -36,6 +36,7 @@ jobs:
       run_universe_preparation: ${{ steps.classify.outputs.run_universe_preparation }}
       run_nebula: ${{ steps.classify.outputs.run_nebula }}
       test_packages: ${{ steps.affected.outputs.test_packages }}
+      test_files: ${{ steps.affected.outputs.test_files }}
       test_site: ${{ steps.affected.outputs.test_site }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -287,8 +288,9 @@ jobs:
     env:
       CI_UNIVERSE_LANE: ${{ matrix.lane }}
       CI_TEST_PACKAGES: ${{ needs.changes.outputs.test_packages }}
+      CI_TEST_FILES: ${{ needs.changes.outputs.test_files }}
       # A lane with nothing to test still reports, so the required check passes, but does no work.
-      CI_LANE_SKIP: ${{ (matrix.lane == 'packages' && needs.changes.outputs.test_packages == '') || (matrix.lane == 'site' && needs.changes.outputs.test_site != 'true') }}
+      CI_LANE_SKIP: ${{ (matrix.lane == 'packages' && needs.changes.outputs.test_packages == '' && needs.changes.outputs.test_files == '') || (matrix.lane == 'site' && needs.changes.outputs.test_site != 'true') }}
     needs: changes
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true' }}
     runs-on: ubuntu-latest
@@ -383,6 +385,8 @@ jobs:
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
             if [ "$CI_TEST_PACKAGES" != all ]; then
               tests=(); for name in $CI_TEST_PACKAGES; do tests+=("packages/$name/**/*.test.{ts,mts}"); done
+              # Tests that live in an offline tool but exercise a changed package (FOREIGN_TESTS in affected-tests.mts).
+              for file in $CI_TEST_FILES; do tests+=("$file"); done
               pnpm test:run "${tests[@]}"
               exit 0
             fi

@@ -8,7 +8,6 @@ import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/wor
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, streamWorldSystems } from './world-context-plan.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
@@ -23,7 +22,7 @@ import type { ApplicationWorldLayer } from './application-world-types.mts';
 
 export function createApplicationWorldContext() {
   return {
-    async mount({ stage, viewport, signal, onSelectFocus, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; viewport: ReturnType<typeof createCameraViewport>; signal?: AbortSignal; onSelectFocus(id: string): void; windowTarget?: Window | null }) {
+    async mount({ stage, viewport, signal, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; viewport: ReturnType<typeof createCameraViewport>; signal?: AbortSignal; windowTarget?: Window | null }) {
       const target = stage.ownerDocument.defaultView;
       if (!target || !windowTarget) throw new Error('World context requires a window.');
       const lifetime = createSceneLifetime();
@@ -49,15 +48,11 @@ export function createApplicationWorldContext() {
         const presentationHost = stage.closest<HTMLElement>('.object-world-stage') ?? stage;
         const layer = own(prepared.mount(stage, { presentationHost,
           requestPublication: () => refreshWorld(),
-          onSelectGalaxy: object => { if (!lifetime.disposed) onSelectFocus(object.id); },
         }));
         const occlusion = labelOcclusionFor(stage.ownerDocument);
         const updateOcclusion = () => { if (!lifetime.disposed) layer.setLabelBlockers(occlusion.read()); };
         updateOcclusion();
         lifetime.onDispose(occlusion.subscribe(updateOcclusion));
-        const contextNavigation = own(createPreparedContextNavigation({ layer, presentation: PREPARED_WORLD_PRESENTATION.galaxies,
-          unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
-          sources: prepared.catalogSources, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
         // The systems this page does not show arrive after its first view (startup-gate.ts), in a few batches; each joins
@@ -95,8 +90,6 @@ export function createApplicationWorldContext() {
           present: frames.present,
           createFramePresenter: frames.createFramePresenter,
           setNavigationInFlight: frames.setNavigationInFlight,
-          connectNavigation: contextNavigation.connect,
-          applyFocus: contextNavigation.apply,
           previewSelection(id?: string | null, framingScale?: number, edge?: PreparedLabelEdge) {
             if (!lifetime.disposed) layer.previewSelection(id, framingScale, edge);
           },

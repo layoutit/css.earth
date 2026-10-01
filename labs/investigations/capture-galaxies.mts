@@ -33,7 +33,7 @@ const receipt = {
   schema: 'cssearth-galaxy-documentation-captures@1',
   viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1,
   capture: 'Actual Chromium app viewport; WebP quality 90, no crop, resize, color or exposure changes.',
-  deliveryManifest: 'src/objects/lmc/source/lens-manifest.json',
+  deliveryManifest: 'src/objects/lmc-volume/source/lens-manifest.json',
   passed: false, images, errors,
 };
 await mkdir(resolve(root, 'docs/images/galaxies'), { recursive: true });

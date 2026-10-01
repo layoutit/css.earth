@@ -1,42 +1,96 @@
 {
   "schema": "cssearth-object@2",
   "id": "m42",
-  "type": "volume-dataset-bank",
+  "type": "layered-body",
   "properties": {
-    "frame": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Orion Nebula",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 148640444327520
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Orion Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 85393629.79,
+      "description": "The Orion Nebula is a Milky Way H II region about 414 parsecs away.",
+      "aliases": [
+        "M42",
+        "NGC 1976"
+      ],
+      "order": 5143,
+      "context": {}
+    },
+    "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        1388299297133001700,
-        12644723166596753000,
-        -1200350938996617000
+        1376373810181025800,
+        12643329345247054000,
+        -1202293075751324000
       ],
-      "localToReferenceXyzw": [
-        0.04008130032303666,
-        0.7385465250038857,
-        0.6720211238117233,
-        0.03647093253438646
+      "presentationToReference": [
+        0.12281785923797033,
+        0,
+        0.9924292284350569,
+        0.9105360149623231,
+        0.3977771559319137,
+        -0.11268318275257552,
+        0.3947656759506004,
+        -0.9174820620691818,
+        -0.04885413874532595
       ],
-      "metersPerUnit": 61933518469800,
-      "boundsUnits": {
-        "min": [
-          -2882.2208182738705,
-          -3792.864635137777,
-          -1185.3991963186154
-        ],
-        "max": [
-          2882.2208182738705,
-          3792.864635137777,
-          1185.3991963186154
-        ]
-      }
-    },
-    "preparation": {
-      "source": "source/delivery.json"
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 479485304282322.56,
+      "bodyRadiusM": 148640444327520000
     }
   },
   "prepared": {
-    "format": "cssearth-volume-datasets@1",
-    "url": "prepared/datasets.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }
