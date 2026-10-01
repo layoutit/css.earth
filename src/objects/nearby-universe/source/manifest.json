@@ -300,7 +300,7 @@
     },
     {
       "id": "galaxies-cepheid-hosts",
-      "path": "src/objects/nearby-universe/source/galaxies/cepheid-hosts.csv",
+      "path": "src/objects/nearby-universe/source/galaxies/cepheid-hosts.csv.gz",
       "origin": "https://arxiv.org/abs/1604.01424",
       "sourceUrl": "https://arxiv.org/abs/1604.01424",
       "title": "Galaxies of this table with a Cepheid distance from the Hubble Space Telescope",
@@ -324,7 +324,7 @@
     },
     {
       "id": "galaxies-2mrs-cepheid-hosts",
-      "path": "src/objects/nearby-universe/source/galaxies-2mrs/cepheid-hosts.csv",
+      "path": "src/objects/nearby-universe/source/galaxies-2mrs/cepheid-hosts.csv.gz",
       "origin": "https://arxiv.org/abs/1604.01424",
       "sourceUrl": "https://arxiv.org/abs/1604.01424",
       "title": "Galaxies of this table with a Cepheid distance from the Hubble Space Telescope",

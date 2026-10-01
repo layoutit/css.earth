@@ -41,7 +41,7 @@
       "note": "Columns 7 and 8: the group's dominant galaxy (table 2, 1PGC) and the group's distance modulus on the calibrated scale (table 3, DMzp), joined by PGC; column 8 is empty for the 7 galaxies whose group table 3 does not list."
     },
     "measuredDistance": {
-      "path": "cepheid-hosts.csv",
+      "path": "cepheid-hosts.csv.gz",
       "unit": "distance-modulus",
       "source": "arxiv-1604-01424",
       "basis": "Riess et al. (2016), table 5, column mu_Ceph: each host's distance modulus from its own Cepheids, measured by the Hubble Space Telescope to about 0.05 mag, where a group's average or a redshift places it megaparsecs away. The packaged Cepheids of these galaxies sit at the same distance."

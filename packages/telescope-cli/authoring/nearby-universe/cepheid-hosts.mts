@@ -10,10 +10,10 @@
  * its 2MASS identifier) is listed with that modulus. `packages/bake/cli/prepare-catalogue-points.mts` (`table.measuredDistance`)
  * then places the row there, instead of at its group's average or its redshift's distance.
  *
- * Output: `source/galaxies/cepheid-hosts.csv` and `source/galaxies-2mrs/cepheid-hosts.csv`, `name,distance`. It prints each match. */
+ * Output: `source/galaxies/cepheid-hosts.csv.gz` and `source/galaxies-2mrs/cepheid-hosts.csv.gz`, `name,distance`. It prints each match. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { gunzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 import { resolveSkyTarget, WORKSPACE } from '@cssearth/telescope/node';
 import { hostName, RIESS_2016_HOSTS } from '../../src/new-object/sh0es.mts';
 
@@ -40,4 +40,4 @@ for (const [host, [modulus]] of Object.entries(RIESS_2016_HOSTS)) {
   listed[bank]!.push(`${found[bank]!.row.name},${modulus}`);
   console.log(`${galaxy}: ${TABLES[bank]!.bank} ${found[bank]!.row.name}, ${found[bank]!.arcsec.toFixed(1)}" from SIMBAD's position, modulus ${modulus}`);
 }
-for (const [index, table] of TABLES.entries()) await writeFile(resolve(source, table.bank, 'cepheid-hosts.csv'), `name,distance\n${listed[index]!.join('\n')}\n`);
+for (const [index, table] of TABLES.entries()) await writeFile(resolve(source, table.bank, 'cepheid-hosts.csv.gz'), gzipSync(`name,distance\n${listed[index]!.join('\n')}\n`, { level: 9 }));

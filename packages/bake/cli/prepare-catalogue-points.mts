@@ -323,7 +323,7 @@ if (groupDistance) {
 const measuredDistance = table.measuredDistance;
 if (measuredDistance && (skyPlacement || measuredDistance.unit !== 'distance-modulus' || !measuredDistance.source || !measuredDistance.basis)) throw new TypeError(`${at('table.measuredDistance')} needs a path, unit distance-modulus, a source and a basis, and a table placed by distance.`);
 if (measuredDistance) await readFile(resolve(objectDirectory, '../../sources', `${measuredDistance.source}.json`)).catch(() => { throw new TypeError(`${at('table.measuredDistance.source')} ${measuredDistance.source} has no record in src/sources.`); });
-const measuredPlaced = measuredDistance ? placeMeasuredRows(converted.points, converted.names, await readFile(resolve(sourceDirectory, measuredDistance.path), 'utf8'), measuredDistance.path, frame.unit === 'Mpc' ? 1e-6 : 1e-3) : 0;
+const measuredPlaced = measuredDistance ? placeMeasuredRows(converted.points, converted.names, await readFile(resolve(sourceDirectory, measuredDistance.path)), measuredDistance.path, frame.unit === 'Mpc' ? 1e-6 : 1e-3) : 0;
 const discThickness = (recipe.frame as { discThickness?: unknown } | undefined)?.discThickness as undefined | {
   profile: 'sech2' | 'exponential'; scaleHeightPc: number | { atCentrePc: number; perKpcPc: number }; source: string; basis: string };
 const flare = typeof discThickness?.scaleHeightPc === 'object' && discThickness.scaleHeightPc !== null ? discThickness.scaleHeightPc : null;

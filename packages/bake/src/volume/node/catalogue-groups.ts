@@ -3,6 +3,7 @@
  * `packages/bake/cli/prepare-catalogue-points.mts` (`table.groupDistance`) and `merge-catalogue-points.mts`
  * (`densityCap.groupsFirst`) call these.
  */
+import { gunzipSync } from 'node:zlib';
 
 /** Members of each group of two or more at the group's distance, `distance(group)` in the points' unit: each on its own
  * sight line, moved along it by the sky-plane offset (from the members' mean direction, along the axis east of it) of the
@@ -87,10 +88,12 @@ export function selectByShell<T extends ShellPoint>(order: readonly T[], width: 
 
 /** Rows a paper measures one by one, at that distance on their own sight line whatever their column, redshift or group says:
  * a galaxy whose Cepheids Hubble measured is where they put it, not at its group's average (NGC 4536 was drawn 17 Mpc from
- * its Cepheids, by its redshift, 2026-10-01). `csv` is `name,distance` with distance moduli; `perPc` turns parsecs into the
+ * its Cepheids, by its redshift, 2026-10-01). `file` is a CSV, gzipped or not, of `name,distance` with distance moduli; `perPc` turns parsecs into the
  * points' unit. A listed row the table does not hold is a mistake in the list. Returns how many rows moved. */
-export function placeMeasuredRows(points: number[][], names: readonly string[], csv: string, path: string, perPc: number,
+export function placeMeasuredRows(points: number[][], names: readonly string[], file: Uint8Array | string, path: string, perPc: number,
   round = (value: number) => Math.round(value * 1e4) / 1e4): number {
+  // The tracked list is gzipped, as the tables are (a bare .csv under source/ is a download, and ignored).
+  const csv = typeof file === 'string' ? file : (path.endsWith('.gz') ? gunzipSync(file) : Buffer.from(file)).toString('utf8');
   const [header, ...lines] = csv.trim().split('\n');
   if (header !== 'name,distance') throw new TypeError(`${path}: the header is name,distance, not "${header}".`);
   const wanted = new Map(lines.map(line => {
