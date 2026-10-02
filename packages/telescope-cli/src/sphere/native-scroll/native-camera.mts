@@ -1,6 +1,6 @@
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
-import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { selectedPreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import { readPreparedTransform } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';

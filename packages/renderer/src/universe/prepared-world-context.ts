@@ -1,7 +1,7 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { isExtendedClassification } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
-import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
+import type { PreparedWorldContext, PreparedContextBody } from '@cssearth/objects';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';

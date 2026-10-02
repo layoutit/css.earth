@@ -8,7 +8,7 @@ import { loadNavigableObject } from '@cssearth/renderer/runtime/navigable-object
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import { requirePreparedCssDescriptor } from '@cssearth/renderer/prepared-object-decoder.ts';
-import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/validation/world-frame.ts';
+import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { record } from '@cssearth/renderer/validation/guards.ts';
 import type { ObjectMountOptions, ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 

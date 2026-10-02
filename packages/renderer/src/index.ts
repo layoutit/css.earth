@@ -27,10 +27,10 @@ export { parsePreparedObjectRuntime } from './validation/index.js';
 export type { ObjectDatasets } from './runtime/object-scene.js';
 export type { ObjectSharedView, ObjectSceneLifecycle } from './runtime/object-scene.js';
 export { loadNavigableObject } from './runtime/navigable-object-mount.js';
-export { parsePreparedWorldCameraFrame } from './validation/world-frame.js';
 export { worldCameraFromCenteredPresentation, presentWorldCamera } from './navigation/world-camera.js';
 export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldReflection, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
-export type { PreparedWorldCameraFrame, WorldCameraPose } from './navigation/world-camera.js';
+export type { WorldCameraPose } from './navigation/world-camera.js';
+
 export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './runtime/world-navigation-types.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
 export { preparedObjectCapabilities } from './runtime/capabilities.js';
@@ -54,17 +54,13 @@ export { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from 
 export { loadPreparedCssPointField } from './stars/loader.js';
 export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldStar, PointFieldRgb, PointFieldVector } from './stars/types.js';
 export { createWorldContextObjectRuntime } from './universe/world-context/world-context-runtime.js';
-export { worldCameraOf } from './universe/world-camera.js';
 export { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
 export type { PointSourcePublication, WorldContextPointAppearance, WorldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
-export { decodeWorldOrbitBank, decodeWorldOrbits, extendWorldContext, orbitVertices, parseCompleteWorldContext, parsePreparedSystemView, parsePreparedWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from './prepared-data/world-context.js';
-export { worldOrbitBankRegions } from './prepared-data/world-orbit-bank-regions.js';
 export { readPreparedBinary } from './prepared-data/prepared-binary.js';
 export { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from './prepared-data/catalogue-bank-binary.js';
 // Named so declaration builds of site modules that return world-context handles can reference them.
 export type { WorldBodyPresentation } from './universe/world-context/world-context-planner.js';
 export type { QueuedRequest } from './navigation/world-frame-queue.js';
-export type { PreparedContextFocus, PreparedContextPointSource, PreparedDeferredBody, PreparedWorldContext, PreparedWorldContextGeometry, PreparedWorldSystem } from './prepared-data/world-context.js';
 export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLeaf, PreparedVolumeLeafStyle, PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedVolumeStack, VolumeCameraPublication, VolumeAxis } from './volume/types.js';
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';

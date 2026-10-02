@@ -92,5 +92,7 @@ Prepared volume scene contracts and their pure validators/helpers live in `src/v
 
 The browser-safe main entry exports `PREPARED_CSS_OBJECT_FORMAT`, `expandWorldContextSummary()` and
 `expandWorldSystem()` from `src/prepared-data/`. The decoders expand compact body columns, shared tables,
-billboards and orbit centres before validation. Full world-context validation still lives in the renderer,
-where its shared geometry parser depends on camera/projection implementation.
+billboards and orbit centres before validation. Full world-context validation, world-camera frame and presentation data, system views, orbit centres and
+orbit-bank codecs live here too. JSON orbit arrays (`PreparedWorldContextData`) and decoded typed arrays
+(`PreparedWorldContextGeometry`) have distinct contracts. Projection, navigation and spatial preparation
+stay with their owners.

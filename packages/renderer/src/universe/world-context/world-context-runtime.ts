@@ -1,8 +1,8 @@
 import { createObjectRuntime } from '../../runtime/object-runtime.js';
 import type { ObjectRuntimeDefinition, ObjectMountOptions } from '../../runtime/object-runtime-types.js';
 import { requireCamera } from '../../validation/camera-controls.js';
-import { parsePreparedWorldCamera } from '../world-camera.js';
-import type { PreparedWorldCameraFrame } from '../../navigation/world-camera.js';
+import { parsePreparedWorldCamera } from '@cssearth/objects';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 
 /** Adapt the selected detail to the application's physical observer and prepared extent. `context` is a world camera
  * record (`world-camera.ts`; `worldCameraOf` picks it out of a world context). Keep its resource bank by identity:

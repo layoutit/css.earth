@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import type { PreparedCssPointField } from '../../stars/types.js';
-import { parsePreparedWorldContext } from '../../prepared-data/world-context.js';
+import { parsePreparedWorldContext } from '@cssearth/objects';
 import { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './world-context-point-source.js';
 
 const parsec = 3.085677581491367e16;

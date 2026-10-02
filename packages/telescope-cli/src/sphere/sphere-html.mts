@@ -5,7 +5,7 @@ import { initialObjectSelection } from '@cssearth/renderer/runtime/object-contra
 import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
 import { serializePreparedMatrix4 } from '@cssearth/core';
-import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/validation/world-frame.ts';
+import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';

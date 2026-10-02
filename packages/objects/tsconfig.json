@@ -4,7 +4,8 @@
     "strict": true,
     "noUncheckedIndexedAccess": false,
     "lib": [
-      "ES2022"
+      "ES2022",
+      "DOM"
     ],
     "rootDir": "src",
     "outDir": "dist",

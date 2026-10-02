@@ -1,4 +1,4 @@
-import { array, finite, numbers, positive, record, text } from '../validation/guards.js';
+import { array, finite, numbers, positive, record, text } from './world-guards.js';
 import { validateOrbitGeometry, vector } from './world-context.js';
 import type { PreparedContextGeometryBody, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from './world-context.js';
 

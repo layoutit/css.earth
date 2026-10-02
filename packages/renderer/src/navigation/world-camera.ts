@@ -8,17 +8,7 @@ import {
 } from './world-camera-math.js';
 import type { WorldRotation } from './world-camera-math.js';
 
-/** Prepared/resolved frame facts. No ephemeris or body geometry is derived here. */
-export interface PreparedWorldCameraFrame {
-  readonly referenceFrame: string;
-  readonly epochJdTt: number;
-  readonly originM: PositionM;
-  /** CSS presentation directions to reference directions: a reflection, since CSS 3D space is left-handed. */
-  readonly presentationToReference: WorldRotation;
-  readonly metersPerUnit: number;
-  readonly bodyRadiusM: number;
-  readonly orbitUpReference?: PositionM;
-}
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 
 export interface WorldCameraPose {
   readonly referenceFrame: string;

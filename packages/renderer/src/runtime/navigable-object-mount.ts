@@ -1,12 +1,12 @@
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject } from '../loader.js';
 import type { PreparedCssTransport } from '../loader.js';
-import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
+import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectSceneLifecycle } from './object-scene.js';
 import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import { createPreparedObjectNavigation } from './prepared-object-navigation.js';
 
-type Bind<Options> = (definition: ObjectRuntimeDefinition, frame: import('../navigation/world-camera.js').PreparedWorldCameraFrame) => (stage: HTMLElement, options: Options) => ObjectSceneLifecycle;
+type Bind<Options> = (definition: ObjectRuntimeDefinition, frame: import('@cssearth/objects').PreparedWorldCameraFrame) => (stage: HTMLElement, options: Options) => ObjectSceneLifecycle;
 
 /** Loading yields a native factory, not another mounted lifecycle. Preflight and mount share its definition. */
 export async function loadNavigableObject<Options>(input: unknown, transport: PreparedCssTransport, bind: Bind<Options>, signal?: AbortSignal) {

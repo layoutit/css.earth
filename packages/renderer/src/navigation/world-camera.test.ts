@@ -10,7 +10,8 @@ import { cross3, isRecord } from '@cssearth/core';
 import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
   BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../../src/platform/solar-geometry.mts';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera } from './world-camera.js';
-import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';
+import type { WorldCameraViewport } from './world-camera.js';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 
 /** The ecliptic presentation basis preparation derives (`@cssearth/bake/objects/scene`, which the renderer never imports): screen
  * left is the Sun projected onto the ecliptic plane, screen up is ecliptic north, and the third axis is their right-handed cross. */

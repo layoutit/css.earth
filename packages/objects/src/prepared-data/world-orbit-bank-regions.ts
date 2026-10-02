@@ -1,4 +1,4 @@
-import { array, numbers, record } from '../validation/guards.js';
+import { array, numbers, record } from './world-guards.js';
 import { WORLD_ORBITS_MAGIC, WORLD_ORBITS_VERSION } from './world-context.js';
 
 /** An orbit bank's typed sections, as the packed file shuffles them (@cssearth/objects prepared-binary.ts): vertices are

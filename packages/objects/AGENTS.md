@@ -17,8 +17,9 @@ inputs, joint parameters, authored shape settings, observation photo data and ma
 structural cancellation interfaces, and prepared catalogue stars. Writers and readers import these from
 `@cssearth/objects`; sampling, fitting, cancellation handling and file I/O remain outside this area.
 `src/prepared-data/` owns the prepared CSS object format identifier and compact world-summary/system table decoders,
-exported through the browser-safe main entry. Full world-context validation still resides in renderer pending extraction of shared frame/presentation contracts
-from camera/projection modules; do not import renderer implementation here.
+exported through the browser-safe main entry. It also owns full world-context, world-camera frame and presentation contracts, system views, orbit centres and
+JSON orbit data, and orbit-bank encoding, decoding and binary regions. Projection, navigation and spatial
+preparation stay with their owners; never import renderer implementation here.
 An object type describes supported behavior and data, not an individual planet.
 Do not ship per-object configuration, generated payload modules, shell content, or renderer code here.
 Keep one shared object contract; application discovery remains in the existing registry.

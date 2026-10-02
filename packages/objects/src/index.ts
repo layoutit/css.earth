@@ -41,3 +41,16 @@ export { expandWorldContextSummary, expandWorldSystem } from './prepared-data/wo
 export type { Cancellation } from './volume/cancellation.js';
 export type { ObservationMapping } from './volume/observation-mapping.js';
 export type { SimulationDepthPrior } from './volume/simulation-prior.js';
+export { parsePreparedWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldContextPlan, worldContextGeometry, orbitVertices, parsePreparedWorldSystem, extendWorldContext, parseCompleteWorldContext } from './prepared-data/world-context.js';
+export type { PreparedContextPoint, PreparedContextPointSource, PreparedContextBody, PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedContextCameraPresentation, PreparedVolumeOpacityProfile, PreparedWorldContext, PreparedWorldSystem, PreparedWorldContextGeometry } from './prepared-data/world-context.js';
+export { worldCameraOf, parsePreparedWorldCamera } from './prepared-data/world-camera.js';
+export { parsePreparedWorldCameraFrame } from './prepared-data/world-frame.js';
+export type { PreparedWorldCameraFrame } from './prepared-data/world-frame.js';
+export { decodeWorldOrbitBank, decodeWorldOrbits } from './prepared-data/world-orbit-bank.js';
+export { parsePreparedSystemView } from './prepared-data/world-system-view.js';
+export type { PreparedSystemViewCandidate, PreparedSystemView } from './prepared-data/world-system-view.js';
+export { worldOrbitBankRegions } from './prepared-data/world-orbit-bank-regions.js';
+export { worldOrbitBanks } from './prepared-data/world-orbit-encoder.js';
+export type { PreparedWorldContextData, PreparedOrbitDataLod } from './prepared-data/world-context-data.js';
+export type { LevelOfDetailPlan, OrbitLineFade } from './prepared-data/world-presentation.js';
+export type { PreparedOrbitCenter } from './prepared-data/prepared-orbit-centers.js';

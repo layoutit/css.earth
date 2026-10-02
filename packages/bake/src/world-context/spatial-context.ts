@@ -1,41 +1,19 @@
+import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData as PreparedWorldContext, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { prepareGroupView, prepareSystemView } from './system-view.ts';
-import type { PreparedSystemView, SystemViewPolicy } from './system-view.ts';
+import type { SystemViewPolicy } from './system-view.ts';
+import type { PreparedSystemView } from '@cssearth/objects';
 import { M_PER_AU } from '@cssearth/astronomy';
 import { prepareHyperbolicPath } from './hyperbolic-path.ts';
 
 export type Vector3 = readonly [number, number, number];
 
-export interface PreparedWorldCameraFrame {
-  readonly referenceFrame: string;
-  readonly epochJdTt: number;
-  readonly originM: Vector3;
-  readonly presentationToReference: readonly [number, number, number, number, number, number, number, number, number];
-  readonly metersPerUnit: number;
-  readonly bodyRadiusM: number;
-}
-export interface WorldContextCameraPresentation {
-  readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
-  readonly dolly: { readonly model: 'multiplicative-wheel-distance'; readonly wheelStepPerDelta: number; readonly minimumDistanceRadii: number; readonly maximumDistanceOverOrbitExtent: number };
-  readonly levelOfDetail: { readonly model: 'silhouette-diameter-crossfade'; readonly billboardFadeStartDiscPixels: number; readonly billboardFullDiscPixels: number; readonly markerFadeStartDiscPixels: number; readonly markerFullDiscPixels: number };
-  readonly orbitLineFade: { readonly visibleBelowDiscHeightShare: number; readonly hiddenAboveDiscHeightShare: number };
-  readonly drag: { readonly model: 'screen-axis-tumble' };
-}
 export interface SkyBaseline {
   readonly scenePitchDegrees: number; readonly sceneYawDegrees: number;
   readonly skyPitchDegrees: number; readonly skyYawDegrees: number; readonly skyRollDegrees: number;
   readonly source: string;
 }
-export interface WorldContextPointSource {
-  readonly absoluteMagnitude: number;
-  readonly color: string;
-  readonly proximityEnhancement?: {
-    readonly fullDistanceM: number;
-    readonly fadeOutDistanceM: number;
-    readonly radiusMultiplier: number;
-    readonly brightnessMultiplier: number;
-  };
-}
+
 /** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
  * (`contextColour` in @cssearth/objects). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
 /** `plainDot`: an asteroid that is not a map target (not a mission target, no real imagery). The world draws it as a plain
@@ -43,13 +21,7 @@ export interface WorldContextPointSource {
  * package's cited radius and effective temperature. */
 type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true; readonly dotColor?: string };
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
-export interface VolumeOpacityProfile {
-  readonly model: 'logarithmic-distance';
-  readonly nearOpacity: number;
-  readonly fullOpacity: number;
-  readonly fadeStartDistanceM: number;
-  readonly fullDistanceM: number;
-}
+
 export interface WorldContextSource {
   readonly schema: 'cssearth-world-context-source@1';
   readonly sky: SkyBaseline;
@@ -85,44 +57,6 @@ export interface OrbitalState {
  * centre of mass. The pair is one system, framed and aimed at that centre. */
 export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail' | 'none'; readonly classification?: string;
   readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 }; }
-/** A source-backed coordinate origin with no rendered body, surface or marker. */
-export interface WorldContextOrbitCenter { readonly positionM: Vector3; readonly centerBodyId: string; }
-export interface PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@2';
-  readonly orbitCenters?: Readonly<Record<string, WorldContextOrbitCenter>>;
-  readonly sky: { readonly sceneRegistration: string };
-  readonly frame: PreparedWorldCameraFrame;
-  readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number; readonly systemView?: PreparedSystemView };
-  /** Each classification framed by its members' prepared positions, keyed by classification. */
-  readonly classificationViews?: Readonly<Record<string, PreparedSystemView>>;
-  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
-    readonly systemView?: PreparedSystemView;
-    readonly placement?: 'approximate';
-    readonly unpackaged?: true;
-    readonly orbitsWithinM?: number;
-    /** Caption the body over its middle instead of below it. */
-    readonly labelPlacement?: 'centre';
-    readonly contextColor?: string;
-    readonly labelCase?: 'upper';
-    readonly classification?: string;
-    readonly systemName?: string;
-    readonly discovery?: Readonly<Record<string, unknown>>;
-    readonly plainDot?: true;
-    readonly dotColor?: string;
-    /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
-    readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
-    /** Absent for a placed body, which has a position but no orbit to draw. */
-    readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
-      readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
-      readonly extentChords: readonly number[]; readonly lod: PreparedOrbitLod;
-      /** Open trajectories carry N-1 chords, an explicit epoch vertex and a finite display window. */
-      readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
-      readonly trailModel?: 'finite-open-trajectory-constant-weight' } }[];
-  readonly camera: WorldContextSource['camera'];
-  readonly system: WorldContextSource['system'];
-  readonly volume: WorldContextSource['volume'];
-  readonly stars: WorldContextSource['stars'];
-}
 
 /** Validates authored numeric data without binding it to an ephemeris or renderer. */
 export function parseWorldContextSource(value: unknown): WorldContextSource {
@@ -313,82 +247,6 @@ export function outwardSphere(sphere: { readonly centerM: Vector3; readonly radi
 export function worldSystemViews(prepared: PreparedWorldContext) {
   return freeze([prepared.focus, ...prepared.bodies].flatMap(body => body.systemView
     ? [freeze({ schema: 'cssearth-world-system-view@1' as const, id: body.id, candidates: body.systemView.candidates })] : []));
-}
-
-/** The orbit bank's layout: `CSWO`, format version, header byte length (little-endian u32s), the UTF-8 JSON
- * header, then 8-byte-aligned sections. The header names each orbit's sections as [byteOffset, count] from the
- * start of the bank: vertices as Int32 x,y,z steps from the orbit's `vertexOriginM` in units of its `vertexStepM`,
- * trail weights as Float64, chord and vertex indices as Uint32. The planner worker reads them as typed-array views.
- * Version 2 stores vertices as Int32 steps from the vertex that pins the body, which decodes exactly: Float64 metres were
- * 98% of a bank's compressed bytes and do not compress. A step is the path's largest offset over 2^31 - 1; measured
- * across all 658 paths (2026-09-25, `orbitVertexError`), the worst error is 5.3e-10 of a path's span: 108 m on Earth's
- * orbit, 3,554 km on S85's 70,693 AU path around Sgr A*. */
-export const WORLD_ORBITS_MAGIC = 0x4f575343; // 'CSWO'
-export const WORLD_ORBITS_VERSION = 2;
-const INT32_STEPS = 0x7fffffff;
-/** A path's vertex origin and step, so every vertex is an Int32 count of steps. The origin is the vertex that pins the body
- * (the first, or an open trajectory's epoch vertex), so the body's own position decodes exactly. */
-export function orbitVertexQuantum(verticesM: readonly Vector3[], pinnedIndex = 0) {
-  const originM = verticesM[pinnedIndex]!;
-  const reach = Math.max(...verticesM.flatMap(vertex => vertex.map((value, axis) => Math.abs(value - originM[axis]!))));
-  return { originM, stepM: reach > 0 ? reach / INT32_STEPS : 1 };
-}
-/** The largest distance between a path's vertices and their Int32 encoding, in metres. */
-export function orbitVertexError(verticesM: readonly Vector3[], pinnedIndex = 0): number {
-  const { originM, stepM } = orbitVertexQuantum(verticesM, pinnedIndex);
-  return Math.max(...verticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => originM[axis]! + Math.round((value - originM[axis]!) / stepM) * stepM - value))));
-}
-export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
-  const sections: (Float64Array | Uint32Array | Int32Array)[] = [];
-  let offset = 0;
-  const section = (values: Float64Array | Uint32Array | Int32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
-  const f64 = (values: readonly number[]) => section(Float64Array.from(values));
-  const u32 = (values: readonly number[]) => {
-    if (values.some(value => !Number.isSafeInteger(value) || value < 0 || value > 0xffffffff)) throw new TypeError('Orbit bank indices must be unsigned 32-bit integers.');
-    return section(Uint32Array.from(values));
-  };
-  const bodies = prepared.bodies.flatMap(body => {
-    const orbit = body.orbit;
-    if (!orbit || !include(body)) return [];
-    const { originM, stepM } = orbitVertexQuantum(orbit.verticesM, orbit.closed === false ? orbit.bodyVertexIndex : 0);
-    const vertices = section(Int32Array.from(orbit.verticesM.flat(), (value, index) => Math.round((value - originM[index % 3]!) / stepM)));
-    return [{ id: body.id, vertexOriginM: originM, vertexStepM: stepM, vertices, trail: f64(orbit.trail), activeChords: u32(orbit.activeChords),
-      extentChords: u32(orbit.extentChords),
-      ...(orbit.closed === false ? { bodyVertexIndex: orbit.bodyVertexIndex, trailModel: orbit.trailModel } : {}),
-      levels: orbit.lod.levels.map(level => ({ vertexIndices: u32(level.vertexIndices), trail: f64(level.trail),
-        activeChords: u32(level.activeChords), deviationM: level.deviationM })) }];
-  });
-  const header = new TextEncoder().encode(JSON.stringify({ schema: 'cssearth-world-orbits@2', bodies }));
-  const dataStart = 12 + header.byteLength + (8 - (12 + header.byteLength) % 8) % 8;
-  const bytes = new Uint8Array(dataStart + offset);
-  const view = new DataView(bytes.buffer);
-  view.setUint32(0, WORLD_ORBITS_MAGIC, true); view.setUint32(4, WORLD_ORBITS_VERSION, true); view.setUint32(8, header.byteLength, true);
-  bytes.set(header, 12);
-  // Section offsets in the header are relative to the data start, which follows the padded header.
-  let at = dataStart;
-  for (const values of sections) {
-    bytes.set(new Uint8Array(values.buffer, values.byteOffset, values.byteLength), at);
-    at += values.byteLength; at += (8 - (at - dataStart) % 8) % 8;
-  }
-  return bytes;
-}
-/** One orbit bank per path, named by its body: the planner worker reads a path when a frame would draw it, so a page
- * downloads only the paths its views draw. A bank per orbit centre carried every path around that centre: the Sun view
- * drew 36 of the Sun's 124 paths and Jupiter's 7 of its moons' 28 (the Sun view read 194 KB brotli, 91 KB per path).
- * The asset host serves `.bin` uncompressed, so those brotli sizes were never sent: preparation packs each bank
- * (site/build/prepare/prepare-spatial-context.ts, `@cssearth/objects` prepared-binary.ts), which took the 1,463 published
- * banks from 6,225,752 to 3,026,744 bytes (2026-09-30). */
-export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
-  return prepared.bodies.filter(body => body.orbit).map(body => body.id).sort()
-    .map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.id === id) }));
-}
-export interface PreparedOrbitLodLevel {
-  readonly vertexIndices: readonly number[]; readonly trail: readonly number[];
-  readonly activeChords: readonly number[]; readonly deviationM: number;
-}
-export interface PreparedOrbitLod {
-  readonly bounds: { readonly centerM: Vector3; readonly radiusM: number };
-  readonly levels: readonly PreparedOrbitLodLevel[];
 }
 
 // Coarser chord banks for small projections. Each level keeps every step-th

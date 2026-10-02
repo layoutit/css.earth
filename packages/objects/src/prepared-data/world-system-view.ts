@@ -1,6 +1,6 @@
-import type { PositionM } from '@cssearth/engine';
-import { array, numbers, positive, record, text, unique } from '../validation/guards.js';
-import { validateWorldRotation } from '../navigation/world-camera-math.js';
+import type { WorldPosition as PositionM } from './world-frame.js';
+import { array, numbers, positive, record, text, unique } from './world-guards.js';
+import { validateWorldRotation } from '../registry/world-rotation.js';
 import type { PreparedContextBody, PreparedWorldContext } from './world-context.js';
 
 function vector(value: unknown, label: string): PositionM {
@@ -61,3 +61,5 @@ export function parseClassificationViews(value: unknown, bodies: readonly Prepar
   if (!entries.length) throw new TypeError('Classification views must name a classification.');
   return Object.freeze(Object.fromEntries(entries));
 }
+
+export interface PreparedSystemView { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[]; readonly candidates: readonly PreparedSystemViewCandidate[]; }

@@ -6,10 +6,12 @@ import type { StarId } from '@cssearth/astronomy';
 import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOUR, parseObjectDescriptor } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
-import { worldOrbitBankRegions } from '@cssearth/renderer';
+import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '@cssearth/bake/world-context';
-import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '@cssearth/bake/world-context';
+import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
+import { worldOrbitBanks } from '@cssearth/objects';
+import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
+import type { PreparedOrbitCenter as WorldContextOrbitCenter } from '@cssearth/objects';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; readonly centerParentBodyId?: string; }
 interface SolarGeometry {

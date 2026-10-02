@@ -1,4 +1,4 @@
-import type { PreparedWorldContext, PreparedVolumeOpacityProfile } from '../../prepared-data/world-context.js';
+import type { PreparedWorldContext, PreparedVolumeOpacityProfile } from '@cssearth/objects';
 
 export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;

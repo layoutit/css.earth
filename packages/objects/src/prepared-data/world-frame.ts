@@ -1,6 +1,19 @@
-import type { PreparedWorldCameraFrame } from '../navigation/world-camera.js';
-import { validateWorldReflection } from '../navigation/world-camera-math.js';
-import { finite, numbers, positive, record, text } from './guards.js';
+import { validateWorldReflection, type WorldRotation } from '../registry/world-rotation.js';
+import { finite, numbers, positive, record, text } from './world-guards.js';
+
+export type WorldPosition = readonly [number, number, number];
+/** Prepared/resolved frame facts. No ephemeris or body geometry is derived here. */
+export interface PreparedWorldCameraFrame {
+  readonly referenceFrame: string;
+  readonly epochJdTt: number;
+  readonly originM: WorldPosition;
+  /** CSS presentation directions to reference directions: a reflection, since CSS 3D space is left-handed. */
+  readonly presentationToReference: WorldRotation;
+  readonly metersPerUnit: number;
+  readonly bodyRadiusM: number;
+  readonly orbitUpReference?: WorldPosition;
+}
+
 
 export function parsePreparedWorldCameraFrame(input: unknown): PreparedWorldCameraFrame | null {
   if (input === undefined || input === null) return null;

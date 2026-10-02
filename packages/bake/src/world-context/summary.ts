@@ -1,6 +1,7 @@
+import type { PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
 import { outwardSphere } from './spatial-context.ts';
-import type { PreparedWorldContext, Vector3 } from './spatial-context.ts';
-import type { PreparedSystemView } from './system-view.ts';
+import type { Vector3 } from './spatial-context.ts';
+import type { PreparedSystemView } from '@cssearth/objects';
 
 export type Billboard = { readonly url: string; readonly size: number; readonly focalPixels: number; readonly distanceM: number };
 type Facts = Readonly<Record<string, unknown>>;
