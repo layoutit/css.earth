@@ -1,10 +1,12 @@
 import { execSync } from "node:child_process";
 import { rm } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
 import { defineConfig } from "astro/config";
 import { SITE_ORIGIN } from "./site/seo.mts";
 import { performanceSourceMaps } from "./site/build/source-maps.mts";
 import { packageSources } from "./site/build/package-sources.mts";
+import { inlinePageStylesheets } from "./site/build/inline-page-stylesheet.mts";
 import { searchServer } from './site/server/search-server.mts';
 import { prepareContextAvailability } from "./site/build/prepare/prepare-context-availability.mts";
 import { preparedMotionCss } from "./site/build/prepared-motion-css.mts";
@@ -30,9 +32,6 @@ export default defineConfig({
   outDir: "./dist",
   output: "static",
   devToolbar: { enabled: false },
-  // The one stylesheet blocks the first paint: inline, Earth painted at 292 ms against 768 ms linked, on a 1.6 Mbps,
-  // 150 ms link (2026-10-02). Navigation between bodies never reads another page's HTML, so nothing is sent twice.
-  build: { inlineStylesheets: 'always' },
   integrations: [{ name: 'prepared-context-availability', hooks: {
     'astro:config:setup': async ({ command, logger, updateConfig }) => {
       // Deploy builds only (CSSEARTH_ALLOW_MISSING_ASSETS=1, set by .github/workflows/deploy.yml): tolerate a
@@ -54,6 +53,10 @@ export default defineConfig({
       if (!assetOrigin()) return;
       await rm(new URL('scenes', dir), { recursive: true, force: true });
       logger.info('ASSET_ORIGIN is set: removed dist/scenes (textures and scene JSON resolve to the published bucket).');
+    },
+  } }, { name: 'inline-page-stylesheet', hooks: {
+    'astro:build:done': async ({ dir, logger }) => {
+      logger.info(`Inlined the stylesheet of ${await inlinePageStylesheets(fileURLToPath(dir))} pages.`);
     },
   } }],
   vite: {
