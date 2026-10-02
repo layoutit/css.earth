@@ -40,7 +40,7 @@ function citedGalaxy(value: unknown, key: string): CitedGalaxy {
   if (raDeg < 0 || raDeg >= 360 || decDeg < -90 || decDeg > 90) throw new TypeError(`Cited row ${key} has no usable ICRS position.`);
   if (!Array.isArray(r.aliases)) throw new TypeError(`Cited row ${key} aliases must be a list.`);
   const m = record(r.membership, `${key} membership`); keys(m, ['group', 'subgroup', 'basis', 'sourceRef'], `${key} membership`);
-  if (m.group !== 'galaxy-cluster' || m.subgroup !== 'virgo') throw new TypeError(`Cited row ${key} membership is a galaxy cluster's (galaxy-cluster, virgo), not ${String(m.group)}, ${String(m.subgroup)}.`);
+  if (m.group !== 'galaxy-cluster' || (m.subgroup !== 'virgo' && m.subgroup !== 'hydra' && m.subgroup !== 'centaurus')) throw new TypeError(`Cited row ${key} membership is a galaxy cluster's (galaxy-cluster; virgo, hydra or centaurus), not ${String(m.group)}, ${String(m.subgroup)}.`);
   return { name: text(r.name, `${key} name`), aliases: r.aliases.map(alias => text(alias, `${key} alias`)), raDeg, decDeg, positionRef: text(r.positionRef, `${key} position reference`),
     distance: distance(r.distance), membership: { group: m.group, subgroup: m.subgroup, basis: text(m.basis, `${key} membership basis`), sourceRef: text(m.sourceRef, `${key} membership reference`) } };
 }

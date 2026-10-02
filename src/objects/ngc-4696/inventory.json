@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "ngc-4696-dataset-legacy-optical.webp",
+      "bytes": 34258,
+      "sha256": "4657b8fa186b01c59ee398c09f6be5316975e0bd216e237b44e46fb648793dd0"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2936,
+      "sha256": "b5b6c2f21ca340caf84dca99998667fd370b61b7b3a86bef0d076c61b5849ed4"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 509,
+      "sha256": "571ee2534c1db84daa0b50e0c2e54f141021f3e917fc2e124d943cb66ca8bc86"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 605,
+      "sha256": "183b90bbb0c8eee5825a7faad9bf0e62c50510469006e3a83a39aa23af408c08"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4720,
+      "sha256": "7d99f712b703bf455a8a139de838d849ba67a97b552b9694c285b64b121e0f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3945,
+      "sha256": "b3f1281713ccd9119ed8d6e52c38b2ec537b60fd3c7c11c4fb1562edb379b173"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2578,
+      "sha256": "d4d569fd7456505e7f971f6b991813a8b95db92409036d8fc8950eb31588869f"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 649,
+      "sha256": "070697b6a6c7e610892a53adf007f87cdf369e764b7248115c74f1aa52c89c6e"
+    }
+  ]
+}

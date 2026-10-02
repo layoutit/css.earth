@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-3311",
+  "displayName": "NGC 3311",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "54.3 Mpc (−1,200,000 / +1,200,000 pc)",
+        "source": {
+          "catalogueId": "publication-tully2023apj-944-94t",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94/groups): group 1PGC 43296 (NGC 4696, 49 galaxies) DMzp = 33.027 +/- 0.048, 40.3 Mpc; group 1PGC 31478 (NGC 3311, 67 galaxies) DMzp = 33.673 +/- 0.046, 54.3 Mpc. A group's distance averages its members'.",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 159.2°, Dec −27.53°",
+        "source": {
+          "catalogueId": "publication-jarrett2000aj-119-2498j",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+          "label": "Jarrett et al. (2000), AJ 119, 2498: the 2MASS Extended Source Catalog (CDS VII/233), rows 2MASX J12484927-4118399 (NGC 4696) and 2MASX J10364282-2731420 (NGC 3311).",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Hydra I",
+        "source": {
+          "catalogueId": "publication-lauer2014apj-797-82l",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82",
+          "label": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82/bcg): Abell 3526, BCG N4696, heliocentric velocity 2904 +/- 40 km/s; Abell 1060, BCG N3311, 3858 +/- 5 km/s.",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "legacy-optical",
+    "controls": [
+      {
+        "id": "legacy-optical",
+        "label": "Legacy Surveys · optical",
+        "thumbnail": "ngc-3311-dataset-legacy-optical.webp",
+        "volume": {
+          "objectId": "ngc-3311-volume",
+          "datasetId": "legacy-optical",
+          "surface": "legacy-optical"
+        },
+        "source": {
+          "id": "ngc-3311-volume-legacy-optical",
+          "path": "../../ngc-3311-volume/source/manifest.json",
+          "url": "https://www.legacysurvey.org/dr10/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94/groups): group 1PGC 43296 (NGC 4696, 49 galaxies) DMzp = 33.027 +/- 0.048, 40.3 Mpc; group 1PGC 31478 (NGC 3311, 67 galaxies) DMzp = 33.673 +/- 0.046, 54.3 Mpc. A group's distance averages its members'.",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Jarrett et al. (2000), AJ 119, 2498: the 2MASS Extended Source Catalog (CDS VII/233), rows 2MASX J12484927-4118399 (NGC 4696) and 2MASX J10364282-2731420 (NGC 3311).",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82/bcg): Abell 3526, BCG N4696, heliocentric velocity 2904 +/- 40 km/s; Abell 1060, BCG N3311, 3858 +/- 5 km/s.",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "credit": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94/groups): group 1PGC 43296 (NGC 4696, 49 galaxies) DMzp = 33.027 +/- 0.048, 40.3 Mpc; group 1PGC 31478 (NGC 3311, 67 galaxies) DMzp = 33.673 +/- 0.046, 54.3 Mpc. A group's distance averages its members'."
+    }
+  }
+}
