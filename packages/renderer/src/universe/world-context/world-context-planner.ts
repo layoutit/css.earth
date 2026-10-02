@@ -5,7 +5,7 @@ import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldC
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
-import { contextOrbitOpacity, focusOwnOrbitOpacity, orbitFamilyEmphasis, selectedOrbitDepthFade } from '../context-presentation-policy.js';
+import { contextOrbitOpacity, focusOwnOrbitOpacity, outsideFamilyOrbitOpacity, selectedOrbitDepthFade } from '../context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../../solar-system/heliocentric-geometry.js';
 import { billboardImageScale } from '../../navigation/prepared-body-billboards.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../../solar-system/prepared-ring-projection.js';
@@ -187,7 +187,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // fetch other paths on a wider view or when the user targets them.
       const closeFamilyCenter = orbitFocus.orbit && !systemFade.isSystemStar(orbitFocus.orbit.centerBodyId)
         ? orbitFocus.orbit.centerBodyId : orbitFocus.body.id;
-      const familyOrbit = orbitFamilyEmphasis(emphasizedId, id => byId.get(id), systemFade.isSystemStar, point => Math.hypot(...frame.eye(point)), overview && view.overviewSelection === true);
+      const systemSubject = overview && view.overviewSelection === true, outsideFamilyOpacity = outsideFamilyOrbitOpacity(emphasizedId !== null && !systemFade.isSystemStar(closeFamilyCenter) ? byId.get(closeFamilyCenter) : undefined, host => Math.hypot(...frame.eye(host)), systemSubject);
       const near = opacity > 0 && orbitOpacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
@@ -243,7 +243,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           selectedId === entry.parent.id && !entry.hovered && entry.highlighted !== true && selectionPreview == null;
         const bodyOrbitOpacity = (isOrbitFocus || hostDetailSatellite ? ownOrbitOpacity : !orbitOverview && !nearSelected &&
           !entry.hovered && entry.highlighted !== true && body.id !== emphasizedId ? orbitOpacity * ownOrbitOpacity : orbitOpacity) *
-          (entry.orbit && !entry.hovered && entry.highlighted !== true ? familyOrbit(entry.orbit.centerBodyId) : 1); // paths outside the subject's family are dim context
+          (!nearSelected && !entry.hovered && entry.highlighted !== true && (systemSubject || body.id !== emphasizedId) ? outsideFamilyOpacity : 1); // paths outside the subject's family are dim context
         const systemOpacity = systemFade.of(entry.index);
         // A body of a faded-out system that nothing targets or shows has no marker, path or caption: the stub, unprojected.
         const retiredWithSystem = entry.retired = systemOpacity === 0 && entry.orbit !== null && !ownsDetail && !isOrbitFocus && body.id !== emphasizedId &&

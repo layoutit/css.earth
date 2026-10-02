@@ -21,29 +21,16 @@ export function focusOwnOrbitOpacity(fade: OrbitLineFade, discHeightShare: numbe
   return orbitLineOpacity(fade, discHeightShare);
 }
 
-interface FamilyPoint {
-  readonly id: string; readonly positionM: readonly number[];
-  readonly orbit?: { readonly centerBodyId: string; readonly lod?: { readonly bounds: { readonly radiusM: number } } } | null;
-}
-
 /** An orbit belongs to the family it circles, not the body travelling on it. While a planet, one of its moons or its
- * system is the subject, a path around anything outside that family, the host's own stellar orbit included, is dim
- * context. The family is the subject's outermost host below the system's star with everything that circles inside it.
- * The emphasis relaxes from half to twice the host's stellar-orbit radius, where the subject is the parent system
- * again; a selected system keeps it. 1/64 steps avoid rewriting opacity for tiny camera changes.
- * Returns the opacity of a path by the body it circles. */
-export function orbitFamilyEmphasis<Point extends FamilyPoint>(emphasizedId: string | null, pointOf: (id: string) => Point | undefined,
-  isSystemStar: (id: string) => boolean, cameraDistanceM: (point: Point) => number, selectedSystem: boolean): (centerBodyId: string) => number {
-  const familyOf = (id: string) => {
-    for (let center = pointOf(id)?.orbit?.centerBodyId, hops = 0; center !== undefined && !isSystemStar(center) && hops < 8;
-      center = pointOf(id)?.orbit?.centerBodyId, hops++) id = center;
-    return id;
-  };
-  const host = emphasizedId === null || isSystemStar(emphasizedId) ? undefined : pointOf(familyOf(emphasizedId));
-  if (!host?.orbit) return () => 1;
-  const star = pointOf(host.orbit.centerBodyId);
-  const radiusM = host.orbit.lod?.bounds.radiusM ?? Math.hypot(...host.positionM.map((value, axis) => value - (star?.positionM[axis] ?? 0)));
+ * moons view is the subject, a path around anything outside that family is dim context: the other planets' always, and
+ * the host's own path about its star when the subject is not the host itself. `host` is the family's host, absent when
+ * the subject is a star or nothing. The dimming relaxes from half to twice the host's distance from its star, where the
+ * subject is the parent system again; a selected moons view keeps it. 1/64 steps avoid rewriting opacity for tiny camera
+ * changes. */
+export function outsideFamilyOrbitOpacity<Host extends { readonly positionM: readonly number[]; readonly orbit?: { readonly centerPositionM: readonly number[] } | null }>(
+  host: Host | undefined, cameraDistanceM: (host: Host) => number, selectedSystem: boolean): number {
+  if (!host?.orbit) return 1;
+  const radiusM = Math.hypot(...host.positionM.map((value, axis) => value - host.orbit!.centerPositionM[axis]!));
   const t = selectedSystem || !(radiusM > 0) ? 0 : Math.max(0, Math.min(1, Math.log2(cameraDistanceM(host) / (.5 * radiusM)) / 2));
-  const unrelated = 1 - (1 - UNRELATED_ORBIT_OPACITY) * Math.round((1 - t * t * (3 - 2 * t)) * 64) / 64;
-  return centerBodyId => unrelated === 1 || centerBodyId === host.id || familyOf(centerBodyId) === host.id ? 1 : unrelated;
+  return 1 - (1 - UNRELATED_ORBIT_OPACITY) * Math.round((1 - t * t * (3 - 2 * t)) * 64) / 64;
 }

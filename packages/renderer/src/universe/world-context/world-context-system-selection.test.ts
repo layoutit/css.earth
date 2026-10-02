@@ -36,6 +36,10 @@ test('a selected satellite overview retains its selected host locator', () => {
   const dimmed = orbits(wide), plain = orbits({ ...wide, overviewSelection: false });
   const hovered = orbits({ ...wide, bodies: wide.bodies.map((body, at) => at === index('saturn') ? { ...body, hovered: true } : body) });
   for (const id of ['saturn', 'jupiter']) assert.deepEqual([dimmed.get(id), plain.get(id), hovered.get(id)], [.25, 1, id === 'saturn' ? 1 : .25], id);
+  // On the host's own page its path is the subject's and stays whole; the other planets' paths are still context.
+  const page = orbits({ ...wide, overview: false, overviewSelection: false });
+  assert.equal(page.get('jupiter'), 1);
+  assert.ok(page.get('saturn')! >= .25 && page.get('saturn')! < 1);
   assert.ok(moons.some(id => close.get(id) === 1));
   for (const id of moons) assert.equal(close.get(id), closePlain.get(id), id);
 });

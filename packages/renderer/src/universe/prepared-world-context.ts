@@ -660,7 +660,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const orbitPaint = entry.piecePool.presentation;
         if (entry.orbit && orbitShown) {
           if (orbitRenderer === 'bars' && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
-          if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
+          // In a moons view the host's own path about its star is context, not the subject: it is not drawn as selected.
+          const orbitSelection = overviewSelection ? 'false' : selection;
+          if (orbitPaint.dataset.contextSelected !== orbitSelection) orbitPaint.dataset.contextSelected = orbitSelection;
           fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * contextEmphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
