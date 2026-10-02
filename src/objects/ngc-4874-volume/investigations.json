@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-4874-volume",
+  "entries": [
+    {
+      "id": "sdss-colour",
+      "subject": "SDSS DR9 colour HiPS",
+      "status": "included",
+      "finding": "An 1800 x 1800 px hips2fits cutout of CDS/P/SDSS9/color, 8.0 arcmin wide on the 2MASS position. The core does not saturate (peak 184 of 255) and the light reaches the sky level about 240 arcsec out.",
+      "evidence": [
+        "https://www.sdss.org/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "legacy-surveys-colour",
+      "subject": "DESI Legacy Imaging Surveys DR10 colour HiPS",
+      "status": "excluded",
+      "finding": "Baked first, on 2026-10-02, and replaced. The composite saturates within about 10 arcsec of the core, which left a boxy core with bright lobes from the side and from above, and green and pink rings in the halo. It also carries a diffraction streak from HD 112887 and a strip of bad columns east of the core.",
+      "evidence": [
+        "https://www.legacysurvey.org/dr10/"
+      ]
+    },
+    {
+      "id": "mask-catalogues",
+      "subject": "Catalogues for the masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC alone left galaxies it lists without a D25 in the image; the 2MASS Extended Source Catalog sizes them. NOX leaves the haloes of bright stars, so Gaia DR3 stars brighter than G = 15 are masked too. At M87's three D25 radii a close neighbour's mask covers NGC 4874's own centre, so each mask stops at half its distance from the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+      ]
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Kluge et al. (2020), Table 4, row A1656: single Sérsic n = 9.00 +/- 0.90, r_e = 784 kpc. Their brightest cluster galaxy for Abell 1656 is NGC 4874. Used as published; no fit was made here.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/43"
+      ]
+    },
+    {
+      "id": "dullo-three-components",
+      "subject": "Dullo (2019) three-component fit",
+      "status": "excluded",
+      "finding": "Dullo's Tables 3 and 4 fit NGC 4874 with a core-Sérsic spheroid (n 4.0, R_e 4.9 arcsec), a Sérsic component (n 0.80, R_e 46.5 arcsec) and an exponential halo (scale 175.3 arcsec). The lab's isophote fill takes one Sérsic spheroid.",
+      "evidence": [
+        "https://arxiv.org/abs/1910.10240"
+      ],
+      "revisitWhen": "The lab fills masks for more than one spheroid."
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster dots",
+      "status": "deferred",
+      "finding": "Not drawn. Dots on a volume bank are listed in a table in the site's code, which this change does not touch.",
+      "revisitWhen": "The site table can take a new bank."
+    }
+  ]
+}

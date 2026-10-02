@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-1275",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 1275",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2055462407358844400
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 1275",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 14170392189175.52,
+      "description": "The central giant galaxy of the Perseus Cluster (Abell 426), 68.7 million parsecs away.",
+      "aliases": [
+        "Perseus A",
+        "3C 84",
+        "UGC 2669",
+        "PGC 12429"
+      ],
+      "order": 5156,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.0213979759758573e+24,
+        1.2151419027041062e+24,
+        1.4049857230007057e+24
+      ],
+      "presentationToReference": [
+        0.5209135505731913,
+        0,
+        0.8536094381092745,
+        0.7831713474782127,
+        0.3977771559319137,
+        -0.47792883853967066,
+        0.3395463345677462,
+        -0.9174820620691818,
+        -0.20720751063339918
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 6630523894705950000,
+      "bodyRadiusM": 2.0554624073588445e+21
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

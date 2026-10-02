@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-1275-volume",
+  "name": "NGC 1275",
+  "defaultDataset": "sdss-optical",
+  "bank": {
+    "path": "src/objects/ngc-1275-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/ngc-1275/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/ngc-1275-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "sdss-optical",
+      "label": "SDSS · optical",
+      "title": "NGC 1275 in visible light",
+      "description": "The Sloan Digital Sky Survey's view of NGC 1275 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Sahu, Graham & Davis's published Sérsic fit. Depth is modelled, not measured, and the spheroid ends where the survey image fades into its sky.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "1500 × 1500 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g, r, i"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.7 × 6.7 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "68.7 Mpc"
+        }
+      ],
+      "input": "sdss-optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/ngc-1275-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1500&height=1500&fov=0.111111&projection=TAN&coordsys=icrs&ra=49.950981&dec=41.511681&format=jpg"
+      }
+    }
+  ]
+}

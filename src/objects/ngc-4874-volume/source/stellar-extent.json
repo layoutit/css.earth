@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "ngc-4874-volume",
+  "radiusPc": 110654,
+  "definition": "Where the survey image of NGC 4874 fades into its sky, measured here on the cleaned cutout in 10 arcsec elliptical annuli: 240 arcsec along the major axis, 110.7 kpc at 95.1 Mpc. Not a published size of the galaxy.",
+  "quote": "240 arcsec",
+  "source": "sdss-dr9-color-hips",
+  "presentation": "Where the volume ends: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary of the galaxy."
+}

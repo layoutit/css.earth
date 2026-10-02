@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-1275-volume",
+  "entries": [
+    {
+      "id": "sdss-colour",
+      "subject": "SDSS DR9 colour HiPS",
+      "status": "included",
+      "finding": "A 1500 x 1500 px hips2fits cutout of CDS/P/SDSS9/color, 6.7 arcmin wide on the 2MASS position. The core does not saturate (peak 192 of 255). The red channel (i band) has an uneven sky, brighter than green and blue, so the recipe takes a black level per channel.",
+      "evidence": [
+        "https://www.sdss.org/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "other-survey-composites",
+      "subject": "Legacy Surveys DR10, Pan-STARRS DR1, DSS2, ZTF DR7 and SDSS color-alt HiPS",
+      "status": "excluded",
+      "finding": "Looked at as 900 px previews of the same field on 2026-10-02. The Legacy Surveys colour HiPS does not cover NGC 1275 (blank). Pan-STARRS subtracts the galaxies' own light as sky, leaving dark halos. DSS2 is photographic and saturates. ZTF has two bands. The CDS alternative SDSS composition has the same red sky and saturates the core."
+    },
+    {
+      "id": "mask-catalogues",
+      "subject": "Catalogues for the masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC alone left galaxies it lists without a D25 in the image; the 2MASS Extended Source Catalog sizes them. NOX leaves the haloes of bright stars, so Gaia DR3 stars brighter than G = 15 are masked too. At M87's three D25 radii a close neighbour's mask covers NGC 1275's own centre, so each mask stops at half its distance from the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+      ]
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Sahu, Graham & Davis (2020), Table A1, row 49: n_maj = 4.78, R_e,maj = 70.69 arcsec, their 2019 decomposition of the Spitzer 3.6 micron image. Used as published; no fit was made here. It is an infrared fit applied to an optical image.",
+      "evidence": [
+        "https://arxiv.org/abs/2101.04895"
+      ]
+    },
+    {
+      "id": "kluge-double-sersic",
+      "subject": "Kluge et al. (2020) double Sérsic fit",
+      "status": "excluded",
+      "finding": "Kluge et al.'s Table 4 row A426 fits NGC 1275 and the light around it with two Sérsic components (n 4.25, r_e 14.55 kpc; n 0.44, r_e 97.04 kpc). The lab's isophote fill takes one Sérsic spheroid, and two components need a relative weight in density that the table does not give.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/43"
+      ],
+      "revisitWhen": "The lab fills masks for more than one spheroid."
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster dots",
+      "status": "deferred",
+      "finding": "Not drawn. Dots on a volume bank are listed in a table in the site's code, which this change does not touch.",
+      "revisitWhen": "The site table can take a new bank."
+    }
+  ]
+}
