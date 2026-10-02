@@ -1554,6 +1554,38 @@ test('past the system scope only the star is drawn and mounted, and its members 
   layer.destroy();
 });
 
+test('a retired system measures an undrawn star caption once and then stops asking for frames', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(1);
+  const context = parsePreparedWorldContext({ ...base, bodies: [...base.bodies,
+    { id: 'far-star', name: 'Far Star', color: '#ffffff', positionM: [300, 0, 0], radiusM: 1 }] });
+  let requests = 0;
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: context,
+    sprites: { sun: sprite, mercury: sprite, venus: sprite, 'far-star': sprite }, requestPublication() { requests++; return true; } });
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 2000] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as OrientationXyzw } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
+  const planner = createWorldContextPlanner(worldContextGeometry(context));
+  const index = layer.inspect().findIndex(body => body.id === 'far-star');
+  // The frame the Andromeda page planned at rest: the star is not drawn, and its caption has no size yet, so the plan
+  // asks for its measurement. Each request publishes the same frame again, as the frame queue does.
+  const publish = () => {
+    const planned = planner(unpacked(layer.captureFrame(world, viewport).view));
+    layer.publish(world, viewport, { ...planned, labelMeasurements: [index], projectedBodies: planned.projectedBodies.map(body => body.index !== index ? body
+      : { ...body, visible: false, annotationVisible: false, labelShown: false, indicatorShown: false, markerOpacity: 0 }) });
+  };
+  layer.setSystemRetired(true); requests = 0;
+  const star = layer.inspect()[index]!, marker = star.billboard as unknown as FakeElement;
+  // The marker is attached and kept for the next frame, which measures it; then the retired star leaves the page.
+  publish(); assert.equal(star.mover.parentNode, layer.root); assert.equal(requests, 1);
+  publish(); assert.equal(marker.measurements, 1);
+  for (let frame = 0; frame < 4; frame++) publish();
+  assert.equal(marker.measurements, 1);
+  assert.equal(star.mover.parentNode, null);
+  assert.ok(requests <= 2, `an unchanged retired view asked for ${requests} publications`);
+  layer.destroy();
+});
+
 test('crowded labels keep selection and hover priority, disable hidden targets, and reappear with clearance', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);

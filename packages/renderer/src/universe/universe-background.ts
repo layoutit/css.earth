@@ -1,3 +1,4 @@
+import { writeData } from '../rendering/retained-write.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -126,7 +127,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       const completedContribution = outside;
       const alpha = completedContribution * detailContextOpacity;
       if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
-      if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - completedContribution);
+      if (skyLayer) writeData(skyLayer.root, 'skyContribution', String(1 - completedContribution));
       const imageAlpha = volumeSize;
       if (imageAlpha !== publishedImageAlpha) {
         volumeImage.style.opacity = skyLayer && imageAlpha === 1 ? '' : String(imageAlpha);

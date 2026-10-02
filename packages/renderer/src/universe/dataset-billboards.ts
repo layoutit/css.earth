@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { array, finite, positive, record, text } from '../validation/guards.js';
@@ -109,7 +110,7 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
       const projection = opacity > 0 ? projectVolumeImpostors({ world, viewport }, leaf.frame, leaf.bank, true) : null;
       const view = projection?.visible ? projection.views[0] : undefined;
       if (!projection || !view) {
-        if (leaf.shown && coasting) { if (leaf.node.style.opacity !== '0') leaf.node.style.opacity = '0'; leaf.style = ''; }
+        if (leaf.shown && coasting) { writeStyle(leaf.node, 'opacity', '0'); leaf.style = ''; }
         else if (leaf.shown) { leaf.node.style.display = 'none'; leaf.shown = false; }
         return;
       }
@@ -123,7 +124,7 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
         // The view matrix orients the billboard about its centre: scale the box to `d` first, then move its centre there.
         leaf.node.style.transform = `translate(${projection.x}px,${projection.y}px) matrix(${view.matrix.join(',')},0,0) ` +
           `scale(${d / box}) translate(${-box / 2}px,${-box / 2}px)`;
-        leaf.node.style.opacity = String(opacity);
+        writeStyle(leaf.node, 'opacity', String(opacity));
       }
       if (!leaf.shown) { leaf.node.style.display = 'block'; leaf.shown = true; }
     },

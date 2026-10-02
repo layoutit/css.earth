@@ -36,6 +36,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     root.append(element);
     return { object, element, transform: '' };
   });
+  root.dataset.catalogueCount = String(dots.length);
   let destroyed = false, dormant = false;
   return Object.freeze({ root, catalog,
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number) {
@@ -57,7 +58,6 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         }
         fader.set(dot.element, visible ? alpha : 0, 200);
       }
-      root.dataset.catalogueCount = String(dots.length);
     },
     inspect() { return { count: dots.length, clusterCount: clusterCatalog?.objects.length ?? 0 }; },
     destroy() {
