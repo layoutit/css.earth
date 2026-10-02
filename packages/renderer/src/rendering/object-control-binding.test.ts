@@ -113,6 +113,20 @@ test('sequence playback wraps, waits for the pending map, and pauses without ano
   h.binding.destroy();
 });
 
+test('a chosen dataset shows its load on its row until it commits', () => {
+  const h = sequence();
+  const busy = (selector: string) => h.document.querySelector(selector)?.getAttribute('aria-busy');
+  const root = h.document.querySelector('.object-datasets');
+  assert.equal(busy('[value="other"]'), 'false');
+  h.click('[value="other"]');
+  assert.equal(busy('[value="other"]'), 'true');
+  assert.equal(root?.getAttribute('data-dataset-loading'), 'true');
+  h.commit();
+  assert.equal(busy('[value="other"]'), 'false');
+  assert.equal(root?.getAttribute('data-dataset-loading'), 'false');
+  h.binding.destroy();
+});
+
 for (const autoplay of [true, false]) test(`a sequence stays paused even with legacy autoplay=${autoplay} until Play is pressed`, () => {
   mock.timers.enable({ apis: ['setTimeout', 'setInterval', 'setImmediate', 'Date'] });
   const h = sequence(autoplay);
