@@ -124,3 +124,15 @@ export { IMAGE_MESH_SCHEMA, parseImageMesh } from './prepared-data/image-mesh.js
 export type { PreparedImageMesh } from './prepared-data/image-mesh.js';
 export { DATASET_BILLBOARDS_SCHEMA, parseDatasetBillboards } from './prepared-data/dataset-billboards.js';
 export type { DatasetBankBillboard, DatasetBillboards } from './prepared-data/dataset-billboards.js';
+export { PREPARED_GALAXY_CATALOG_SCHEMA, parsePreparedGalaxyCatalog } from './prepared-data/galaxy-catalog.js';
+export type { SpatialCitation, SpatialCatalogSource, SpatialMeasurement, PreparedGalaxyRecord, PreparedGalaxyCatalog } from './prepared-data/galaxy-catalog.js';
+export { PREPARED_CLUSTER_CATALOG_SCHEMA, isPreparedCluster, parsePreparedClusterCatalog } from './prepared-data/cluster-catalog.js';
+export type { PreparedClusterRecord, PreparedCatalogObject, PreparedClusterCatalog } from './prepared-data/cluster-catalog.js';
+export { PREPARED_NEBULA_CATALOG_SCHEMA, isPreparedNebula, parsePreparedNebulaCatalog } from './prepared-data/nebula-catalog.js';
+export type { PreparedNebulaRecord, PreparedNebulaCatalog } from './prepared-data/nebula-catalog.js';
+export type { DistanceSubject, UnpositionedHost } from './prepared-data/spatial-relations.js';
+export { PREPARED_SURFACE_FEATURES_SCHEMA } from './prepared-data/surface-feature-types.js';
+export type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, ParsedSurfaceFeature, ParsedSurfaceFeatureCatalog, TraceSummary, SurfaceFeatureLandmarkEvidence } from './prepared-data/surface-feature-types.js';
+export { parsePreparedSurfaceFeatureCatalog } from './prepared-data/surface-feature-catalog.js';
+export { GALAXY_DISPLAY_SAMPLE_SCHEMA, parseGalaxyDisplaySample } from './prepared-data/galaxy-display-sample.js';
+export type { PreparedGalaxyDisplaySample, GalaxyDisplaySample } from './prepared-data/galaxy-display-sample.js';

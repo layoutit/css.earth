@@ -1,5 +1,6 @@
+import { PREPARED_GALAXY_CATALOG_SCHEMA, type PreparedGalaxyRecord, type PreparedGalaxyCatalog } from '@cssearth/objects';
 import { M_PER_PC } from '@cssearth/astronomy';
-import type { AuthorMetadata, CsvRow, GalaxyDistance, GalaxyMembership, GalaxyRecipe, GalaxySource, PreparedGalaxy, PreparedGalaxyCatalog, Vec3 } from './types.ts';
+import type { AuthorMetadata, CsvRow, GalaxyDistance, GalaxyMembership, GalaxyRecipe, GalaxySource, Vec3 } from './types.ts';
 
 /** Derived display coordinates: 12 significant digits, far below distance errors. */
 function rounded(value: number): number { return Number(value.toPrecision(12)); }
@@ -49,7 +50,7 @@ function distanceFromRow(row: CsvRow, author: AuthorMetadata, recipe: GalaxyReci
     ...(ep === undefined ? {} : { plusPc: rounded(10 ** ((modulus + ep + 5) / 5) - valuePc) }) };
 }
 
-function halfLightRadius(row: CsvRow, distance: GalaxyDistance): PreparedGalaxy['halfLightRadius'] {
+function halfLightRadius(row: CsvRow, distance: GalaxyDistance): PreparedGalaxyRecord['halfLightRadius'] {
   const angle = number(row.rhalf); if (angle === undefined || angle <= 0 || !row.ref_structure) return undefined;
   // Source rhalf is projected semi-major angular half-light radius, not a diameter.
   const perArcmin = Math.PI / (180 * 60), valuePc = distance.valuePc * angle * perArcmin;
@@ -63,7 +64,7 @@ function halfLightRadius(row: CsvRow, distance: GalaxyDistance): PreparedGalaxy[
 }
 
 export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: ReadonlyMap<string, AuthorMetadata>, table: ReadonlyMap<string, string>, recipe: GalaxyRecipe, sources: GalaxySource[]): PreparedGalaxyCatalog {
-  const objects: PreparedGalaxy[] = [], exclusions: { id: string; reason: string }[] = [], seen = new Set<string>(), kept = new Set<string>();
+  const objects: PreparedGalaxyRecord[] = [], exclusions: { id: string; reason: string }[] = [], seen = new Set<string>(), kept = new Set<string>();
   // One id per object: a row that an object package details takes the package's id, which names its page, selection and
   // links everywhere; the catalogue key stays in its source references.
   const objectId = (key: string) => recipe.detailObjects[key]?.id ?? key;
@@ -125,5 +126,5 @@ export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: Readonly
     if (hostId && !kept.has(hostId)) pending.push(hostId);
   }
   unpositionedHosts.sort((a, b) => a.id.localeCompare(b.id));
-  return { schema: 'cssearth-galaxy-catalog@1', unpositionedHosts, frame: recipe.frame, sources, objects, exclusions, selection: { description: recipe.description } };
+  return { schema: PREPARED_GALAXY_CATALOG_SCHEMA, unpositionedHosts, frame: recipe.frame, sources, objects, exclusions, selection: { description: recipe.description } };
 }

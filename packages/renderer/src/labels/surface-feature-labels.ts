@@ -21,7 +21,8 @@ import { flyToSurfaceDirection } from './surface-feature-flight.js';
 import type { SurfaceFlightHandle } from './surface-feature-flight.js';
 import { rotateWorldPosition } from '../navigation/world-camera-math.js';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
-import type { PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats } from './surface-feature-types.js';
+import type { SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats } from './surface-feature-types.js';
+import type { ParsedSurfaceFeature as PreparedSurfaceFeature, ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from '@cssearth/objects';
 
 import { surfaceFeatureCaption } from './surface-feature-caption.js';
 

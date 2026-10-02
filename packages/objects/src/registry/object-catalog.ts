@@ -1,4 +1,4 @@
-import { parseDistanceSubject } from '@cssearth/catalog';
+import { parseDistanceSubject } from '../prepared-data/spatial-relations.js';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { parseObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';

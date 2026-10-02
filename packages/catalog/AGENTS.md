@@ -71,3 +71,7 @@ data files against an old reader.
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+
+Prepared galaxy, cluster and nebula delivery formats and distance-subject records belong to `@cssearth/objects`.
+This package retains scientific classification and citation interpretation and imports those format contracts.
+The dependency is catalog → objects; objects does not import catalog.

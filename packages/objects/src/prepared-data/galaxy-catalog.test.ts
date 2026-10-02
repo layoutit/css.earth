@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parsePreparedGalaxyCatalog } from './spatial.js';
+import { parsePreparedGalaxyCatalog } from './galaxy-catalog.js';
 
 function fixture() {
   return { schema: 'cssearth-galaxy-catalog@1', frame: { referenceFrame: 'sun-icrf', epochJdTt: 1 },

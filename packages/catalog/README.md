@@ -26,19 +26,10 @@ needs separate evidence: the retained `scripts/check-parity.mts` runner referenc
 a missing `gen_fixture.py` and cannot currently establish it. See the
 [operator notes](AGENTS.md) before changing the format.
 
-`parsePreparedGalaxyCatalog` validates the separate `cssearth-galaxy-catalog@1`
-scientific JSON interchange in place. It retains measured distances and errors,
-ICRF positions, membership evidence, and source references without producing a
-second row bank. It does not change GXCT or infer membership from proximity.
-Prepared navigation framing remains distinct from measured half-light radii.
-
-`parsePreparedClusterCatalog` validates the separate `cssearth-cluster-catalog@1`
-interchange. Cluster centres carry their Cosmicflows-4 group distance, redshift references and the
-cosmology that checks their angular scale; R500 proper and comoving apertures remain distinct from cluster edges. A
-cluster may name the package that details it (`detailedObjectId`), as a galaxy does.
-`PreparedCatalogObject` composes galaxy, cluster and nebula records without assigning
-galaxy membership to other object types. `parsePreparedNebulaCatalog` validates
-source-backed sky centres, distances and classification independently of rendering. Source tables and coordinate preparation remain
+The prepared `cssearth-galaxy-catalog@1`, `cssearth-cluster-catalog@1` and nebula catalogue interchange formats, with
+their parsers (`parsePreparedGalaxyCatalog`, `parsePreparedClusterCatalog`, `parsePreparedNebulaCatalog`), are owned by
+`@cssearth/objects`. They carry measured distances, positions, membership evidence and source references without a second
+row bank, and do not change GXCT or infer membership from proximity. Source tables and coordinate preparation remain
 outside this package.
 
 ## Source size
@@ -46,3 +37,6 @@ outside this package.
 All source files, tests, tools, and generated code are limited to 600 physical
 lines. Run `pnpm lint:packages` from the repository root. Package instructions
 live in AGENTS.md; CLAUDE.md links to the same file.
+
+Prepared galaxy, cluster and nebula delivery formats are exported by `@cssearth/objects`.
+Catalog retains scientific classification and citation interpretation; the package dependency is catalog → objects.

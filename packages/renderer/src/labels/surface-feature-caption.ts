@@ -1,4 +1,4 @@
-import type { PreparedSurfaceFeature } from './surface-feature-types.js';
+import type { ParsedSurfaceFeature as PreparedSurfaceFeature } from '@cssearth/objects';
 
 const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
 const SITE_CODES = new Set(['LS', 'IM', 'SS', 'RT']);

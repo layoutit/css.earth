@@ -1,4 +1,4 @@
-import type { PreparedGalaxyCatalog } from '@cssearth/catalog';
+import { GALAXY_DISPLAY_SAMPLE_SCHEMA, type PreparedGalaxyDisplaySample, type PreparedGalaxyCatalog } from '@cssearth/objects';
 import { M_PER_PC } from '@cssearth/astronomy';
 import { keys } from './config.ts';
 import { requireRecord as record } from '@cssearth/core';
@@ -17,7 +17,7 @@ export function parseGalaxyDisplaySampling(value: unknown): GalaxyDisplaySamplin
 
 /** Stratified sampling balances sparse and dense cells within the declared display budget.
  * Every output identity retains its catalogue position and measurement references. */
-export function prepareGalaxyDisplaySample(catalog: PreparedGalaxyCatalog, sampling: GalaxyDisplaySampling) {
+export function prepareGalaxyDisplaySample(catalog: PreparedGalaxyCatalog, sampling: GalaxyDisplaySampling): PreparedGalaxyDisplaySample {
   const rows = catalog.objects.filter(row => row.membership.group === 'local-group' && !row.detailedObjectId);
   const cellSizeM = sampling.cellSizeMpc * 1e6 * M_PER_PC;
   const cells = new Map<string, typeof rows>();
@@ -34,6 +34,6 @@ export function prepareGalaxyDisplaySample(catalog: PreparedGalaxyCatalog, sampl
     const [key, cell] = next, index = used.get(key) ?? 0;
     selected.push(cell[index]!.id); used.set(key, index + 1);
   }
-  return { schema: 'cssearth-galaxy-display-sample@1', ids: selected, budget: sampling.budget, cellSizeM,
+  return { schema: GALAXY_DISPLAY_SAMPLE_SCHEMA, ids: selected, budget: sampling.budget, cellSizeM,
     method: 'Deterministic spatial-cell sampling weighted by square-root catalogue counts; unmodified catalogue positions. Display density is not mass density.' };
 }

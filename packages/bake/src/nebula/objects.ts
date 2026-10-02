@@ -9,7 +9,7 @@ import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promise
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
-import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
+import { parsePreparedNebulaCatalog } from '@cssearth/objects';
 
 import { prepareVolumeAtlases } from '../density/index.ts';
 

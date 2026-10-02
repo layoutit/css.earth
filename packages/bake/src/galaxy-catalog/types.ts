@@ -1,4 +1,4 @@
-import type { PreparedGalaxyRecord, PreparedGalaxyCatalog as Catalog, SpatialCitation } from '@cssearth/catalog';
+import type { PreparedGalaxyCatalog, SpatialCitation } from '@cssearth/objects';
 export type Vec3 = [number, number, number];
 export interface SourcePin { path: string; bytes: number }
 /** A pinned file, or a citation that only names the references a claim uses (a paper is cited, not retained). */
@@ -13,8 +13,6 @@ export interface GalaxyDistance {
   valuePc: number; minusPc?: number; plusPc?: number; method: string; sourceRef: string;
   uncertainty?: { statisticalPc: number; systematicPc: number };
 }
-export type PreparedGalaxy = PreparedGalaxyRecord;
-export type PreparedGalaxyCatalog = Catalog;
 export interface GalaxyRecipe {
   schema: 'cssearth-galaxy-catalog-source@1';
   frame: PreparedGalaxyCatalog['frame'];

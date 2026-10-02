@@ -1,6 +1,7 @@
-import { validateSpatialPosition } from './spatial-relations.ts';
-import type { PreparedGalaxyRecord, SpatialCatalogSource } from './spatial.js';
-import type { PreparedNebulaRecord } from './nebulae.js';
+export const PREPARED_CLUSTER_CATALOG_SCHEMA = 'cssearth-cluster-catalog@1';
+import { validateSpatialPosition } from './spatial-relations.js';
+import type { PreparedGalaxyRecord, SpatialCatalogSource } from './galaxy-catalog.js';
+import type { PreparedNebulaRecord } from './nebula-catalog.js';
 
 /** A catalogue centre and overdensity aperture, never a member-galaxy or density model. */
 export interface PreparedClusterRecord extends Pick<PreparedGalaxyRecord,
@@ -13,7 +14,7 @@ export interface PreparedClusterRecord extends Pick<PreparedGalaxyRecord,
 }
 export type PreparedCatalogObject = PreparedGalaxyRecord | PreparedClusterRecord | PreparedNebulaRecord;
 export interface PreparedClusterCatalog {
-  readonly schema: 'cssearth-cluster-catalog@1';
+  readonly schema: typeof PREPARED_CLUSTER_CATALOG_SCHEMA;
   readonly frame: { readonly referenceFrame: string; readonly epochJdTt: number };
   readonly sources: readonly SpatialCatalogSource[];
   readonly objects: readonly PreparedClusterRecord[];
@@ -25,16 +26,10 @@ export function isPreparedCluster(object: PreparedCatalogObject): object is Prep
   return 'kind' in object && object.kind === 'galaxy-cluster';
 }
 
-/** A catalogue subject the application can open: a galaxy cluster, or a subject an object package details. Only these are
- * clickable on the map and have a page; every other catalogue row is a label. */
-export function isNavigableCatalogObject(object: PreparedCatalogObject): boolean {
-  return isPreparedCluster(object) || Boolean(object.detailedObjectId);
-}
-
 /** Validate once without allocating another scientific row bank. */
 export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCatalog {
   const data = record(input);
-  if (data.schema !== 'cssearth-cluster-catalog@1') throw new TypeError('Unsupported cluster catalogue schema.');
+  if (data.schema !== PREPARED_CLUSTER_CATALOG_SCHEMA) throw new TypeError('Unsupported cluster catalogue schema.');
   const frame = record(data.frame); text(frame.referenceFrame); finite(frame.epochJdTt);
   const cosmology = record(data.cosmology);
   if (cosmology.model !== 'flat-lambda-cdm' || finite(cosmology.omegaMatter) < 0 || Number(cosmology.omegaMatter) > 1) throw new TypeError('Invalid cluster cosmology.');

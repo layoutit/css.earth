@@ -1,7 +1,7 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
-import { parsePreparedClusterCatalog } from '@cssearth/catalog';
+import { parsePreparedClusterCatalog } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { readInventory, updateInventory } from '@cssearth/objects/node';

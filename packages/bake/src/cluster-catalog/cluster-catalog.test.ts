@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parsePreparedClusterCatalog } from '@cssearth/catalog';
+import { parsePreparedClusterCatalog } from '@cssearth/objects';
 import { comovingDistanceMpc } from './prepare.ts';
 
 const directory = resolve('src/objects/galaxy-clusters');
