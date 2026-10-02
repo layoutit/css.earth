@@ -2,7 +2,7 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
-import { type DensityVolumeFrame, type Vector3, readVolumeLayerPlan, readLayerOptimizationReport, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile, readCompilerBakeResult, validCompilerName, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds } from '@cssearth/objects';
+import { type DensityVolumeFrame, type Vector3, readVolumeLayerPlan, readLayerOptimizationReport, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile, readCompilerBakeResult, validCompilerName, validCompilerImageWidth, COMPILER_IMAGE_WIDTH, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds } from '@cssearth/objects';
 import { type VolumeSlices } from '@cssearth/objects';
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
 import { optimizeVolumeLayers } from '../../sampling/layer-optimization.ts';
@@ -52,7 +52,7 @@ export interface BakeCompilerOptions {
   progress?(progress: CompilerBakeProgress): void;
 }
 
-const IMAGE_WIDTH = 512 as const, DEPTH_SAMPLES = 4 as const;
+const IMAGE_WIDTH = COMPILER_IMAGE_WIDTH, DEPTH_SAMPLES = 4 as const;
 const json = (value: unknown) => Buffer.from(JSON.stringify(value) + '\n');
 function cancel(signal?: AbortSignal) { if (signal?.aborted) throw new DOMException('Nebula compile cancelled.', 'AbortError'); }
 
@@ -65,7 +65,7 @@ export function compilerSampling(options: Pick<BakeCompilerOptions, 'boundsArcse
   if (options.historicalReplay && !options.sampling) throw new TypeError('Historical replay requires exact saved sampling.');
   if (options.sampling !== undefined) {
     const saved = options.sampling, counts = saved.sliceCounts;
-    if (!counts || saved.imageWidth !== IMAGE_WIDTH || saved.samplesPerSlab !== DEPTH_SAMPLES ||
+    if (!counts || !validCompilerImageWidth(saved.imageWidth) || saved.samplesPerSlab !== DEPTH_SAMPLES ||
         [counts.x, counts.y, counts.z].some(n => !Number.isInteger(n) || n < 1 || n > 512)) throw new TypeError('Invalid saved compiler sampling.');
     if (saved.layerPlan !== undefined) {
       const plan = readVolumeLayerPlan(saved.layerPlan);
@@ -181,8 +181,8 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   options.progress?.({ phase: 'volume', completed: 0, total: totalSlices * 2, message: 'Preparing shared neutral geometry' });
   let calls = 0;
   const baked = await bakeMasterVolumeSlices({ boundsKpc: localBounds, sliceCounts, samplesPerSlab: DEPTH_SAMPLES, ...(layerPlan ? { layerPlan } : {}),
-    exposureGain: 1, masterWidth: IMAGE_WIDTH, masterDirectory,
-    deliveryBanks: [{ width: IMAGE_WIDTH, outputDirectory: neutralDirectory, imageEncoding: { format: 'png' } }], unitsPerSourceUnit: 1,
+    exposureGain: 1, masterWidth: sampling.imageWidth, masterDirectory,
+    deliveryBanks: [{ width: sampling.imageWidth, outputDirectory: neutralDirectory, imageEncoding: { format: 'png' } }], unitsPerSourceUnit: 1,
     provenance, cropTransparent: true, allowEmpty: false, sampleEmission(x, y, z, out) {
       if ((++calls & 0xffff) === 0) cancel(signal);
       options.sampleEmission(x + origin[0], y + origin[1], z + origin[2], out);
