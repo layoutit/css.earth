@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "io-billboard.webp",
-      "bytes": 7526,
-      "sha256": "4e5634c033e13dfae53398d0e94042a515fb853201f0e8caf940af3167ad4986"
-    },
-    {
-      "location": "public",
       "filename": "io-dataset-elevation.webp",
       "bytes": 6266,
       "sha256": "7207216fca45cf217c577c3133f6c47871aafb9d5028a38b3a105755ec64843f"
@@ -57,9 +51,201 @@
     },
     {
       "location": "public",
+      "filename": "io-elevation-page-0-level-1040.webp",
+      "bytes": 54004,
+      "sha256": "3876025b4ede521607865d8f67c28a8efac269ed5b9c81f4a10bbd60f8a1d25e"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-0-level-2080.webp",
+      "bytes": 134714,
+      "sha256": "95e8e2a0d07a7389f3b0d58d1076b3d35d0af6cd46da43024448f19502ed51f6"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-0-level-520.webp",
+      "bytes": 21096,
+      "sha256": "3348f34c4a6b0cb17025ec49483d5ad1be19e77ebd7616b40bb5236473e1e6bb"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-0.webp",
+      "bytes": 219362,
+      "sha256": "e174ba51662dfd007d4eb0e92fe985fb91b041555d9b5b5cc36744435a25ed60"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-1-level-1040.webp",
+      "bytes": 153212,
+      "sha256": "03e5200d609d2b27f56eebf276401c81ac596a36ddb57dcb184d119032fd8edd"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-1-level-2080.webp",
+      "bytes": 405216,
+      "sha256": "d38a4d31512afc9b6a6d41d0f0255c7fad7acd732eb8dfd262d97e6d606070b7"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-1-level-520.webp",
+      "bytes": 53418,
+      "sha256": "468b0115d74c92fa4b9de4cb591d019f0ce8442520fda24963aa7ef226473c43"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-1.webp",
+      "bytes": 658676,
+      "sha256": "823d73b50f6ef53dfee17bcb13a99abcbc38e48709baaf8e69f06a1ffe18a7a6"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-2-level-1040.webp",
+      "bytes": 191938,
+      "sha256": "55092e1f8df932519ebdd6407ff165fd2dd57a87a0ed48b831b90075579b6918"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-2-level-2080.webp",
+      "bytes": 511008,
+      "sha256": "2707de8518684fedf45172fa5be77f2ba4cf6591cea1a59de2c59f5dfd2f1799"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-2-level-520.webp",
+      "bytes": 63766,
+      "sha256": "6be2c2df67668aa00fd28215ff4a3f5eec93e5067e97724079c142e1b6b4cbad"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-2.webp",
+      "bytes": 866750,
+      "sha256": "39e85a15cec921109f341b329c65c61bc1029af79b6d47c6216c459c1d43c221"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-3-level-1040.webp",
+      "bytes": 145244,
+      "sha256": "047625397b957004b7219e37122941bef685c924bb8c06456457cf0b744ef7af"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-3-level-2080.webp",
+      "bytes": 381376,
+      "sha256": "322636dd4b4b6911ad7bd948e6045cef058f9bf9a58522836fdfa2d0f9cf802a"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-3-level-520.webp",
+      "bytes": 51472,
+      "sha256": "c14f132d23281f314f88baeb9b92776d2d0b094b8e910903dfbb955b13abadd2"
+    },
+    {
+      "location": "public",
+      "filename": "io-elevation-page-3.webp",
+      "bytes": 675388,
+      "sha256": "a3313e2db3fdfaa3786cc9ce5822d41288de699dd19af9ed72f0967b4c15ee36"
+    },
+    {
+      "location": "public",
       "filename": "io-elevation@2x.webp",
       "bytes": 2482530,
       "sha256": "71689a9b373caa0fac4a4ac85cfe86f20b49890761013a865065d7aa2be35bea"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-0-level-1040.webp",
+      "bytes": 15824,
+      "sha256": "cbd29c0e4c34fe29bd04c568d87cf711b366b05f2176a9004bdc08175b737002"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-0-level-2080.webp",
+      "bytes": 38834,
+      "sha256": "d980b692fa921753417d7c44c7961ae9db79beb641b92d46b7969fb21544a050"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-0-level-4160.webp",
+      "bytes": 94668,
+      "sha256": "f57bfbca7702e7e83b901e54937f3ccaf10de153cb7384a373f2be3f9929d513"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-0.webp",
+      "bytes": 234798,
+      "sha256": "40ebab03fccfad4017340207a002cfffb850e214a2afd884162e3e0593b8cd35"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-1-level-1040.webp",
+      "bytes": 19824,
+      "sha256": "a761975df3d5bf1de3751f49197d8be17d1298b2497f23ef1b5a072c687e94bf"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-1-level-2080.webp",
+      "bytes": 48976,
+      "sha256": "4774cd7cad8ad163def8a771adaceceb6ef2c12b6bd2701587085f41430619bb"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-1-level-4160.webp",
+      "bytes": 119950,
+      "sha256": "d95684a7455c9c2c608ad5b271067872187914ee423f14b8662fbb0dea3a9836"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-1.webp",
+      "bytes": 291154,
+      "sha256": "5c8bf8b65ae7f60b9faa32580e18879ce3f19604cdb76b4eebd55f4198f6903c"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-2-level-1040.webp",
+      "bytes": 19168,
+      "sha256": "c500ad436c39b9e63be13cef4e11dcf8448ea43b901706e93cf5459e46a1f86a"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-2-level-2080.webp",
+      "bytes": 48266,
+      "sha256": "89404cab02b5e1fb5fe0ddcc139fed535eb4ede0b3d93c6101379cc6cbf94c31"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-2-level-4160.webp",
+      "bytes": 119856,
+      "sha256": "fb28b44bb749b5c86880389df712a72cc48a74c35d422c39ac8663cb3e3f98b6"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-2.webp",
+      "bytes": 291338,
+      "sha256": "eaff2c582edb5d461b35586f7506233e65ac1c4d557d553ccffc014316522c5b"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-3-level-1040.webp",
+      "bytes": 14986,
+      "sha256": "87cba6523c38c66cc6d62cc63e51b4f97a5fc041ebbcecbe3ed85d6b745097ff"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-3-level-2080.webp",
+      "bytes": 36702,
+      "sha256": "1ae5b5995e31bca82e585b235243dc1c1e5ed8e02521519055d3708b89a7e21f"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-3-level-4160.webp",
+      "bytes": 88064,
+      "sha256": "8b30d44f4565ddaffa4c42873c5c7a893ead26a92288233256572ce105c5e45e"
+    },
+    {
+      "location": "public",
+      "filename": "io-enhanced-page-3.webp",
+      "bytes": 220158,
+      "sha256": "5acb8a855f96f8de528b97f88d5ada13779f2f27bb0181d5b1c38d0c58a0e341"
     },
     {
       "location": "public",
@@ -75,9 +261,201 @@
     },
     {
       "location": "public",
+      "filename": "io-geology-page-0-level-1040.webp",
+      "bytes": 79498,
+      "sha256": "c86d697aefc5c9ccfddb31ba75454883c489c48b0f6d654d5cebf39de6376faf"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-0-level-2080.webp",
+      "bytes": 153744,
+      "sha256": "a349ce4d126ce6b2d88c578b81984cbbbef1b144cc0206b80dec1c9fe226ed3e"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-0-level-520.webp",
+      "bytes": 36608,
+      "sha256": "1c5521b1cce8e1edffa9d758de960ab469a34207597565172e97709dad23365d"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-0.webp",
+      "bytes": 43700,
+      "sha256": "76e8f5d80f4fedbcf997840ad33fe2debd89ff5d641b90456624d1220154fb3b"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-1-level-1040.webp",
+      "bytes": 131590,
+      "sha256": "7a6312926658ca165d7dd0ea342db4060be66a5f11fe476db807fa41c9f6325a"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-1-level-2080.webp",
+      "bytes": 262786,
+      "sha256": "e508c0993241abd49a4b9fe17410b6aa4d402a29071f85bb316926447b1ca71a"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-1-level-520.webp",
+      "bytes": 59094,
+      "sha256": "0d3d0a48944ba2549a0d177f2f9c18eb4218d81c4228f470708de21d80671017"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-1.webp",
+      "bytes": 50668,
+      "sha256": "5013d3cbb176395f3077fb27f199904a69a9aea36d54636b86bf26425b115450"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-2-level-1040.webp",
+      "bytes": 141252,
+      "sha256": "1d60d94a9b5c43ad78f0da2993d1ad017c546667b1e4c52234926c175aa061b3"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-2-level-2080.webp",
+      "bytes": 280806,
+      "sha256": "ed2b40af268636949bc8c05a0cdcfa068deff8e26fda2e127505725a54248bee"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-2-level-520.webp",
+      "bytes": 63354,
+      "sha256": "740840c6b33b9624d9306002ca8f173bea8d7a46c9366ca6879108a3b97bf8e6"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-2.webp",
+      "bytes": 52834,
+      "sha256": "657459136b9e24f3ed81d2885d73bfb9ffb35aa361a6c4634de6ec3af147aade"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-3-level-1040.webp",
+      "bytes": 75238,
+      "sha256": "1d7fd63898646006650d72dd607c1797736375b53f6dbf8c829d6b87e0ce8e55"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-3-level-2080.webp",
+      "bytes": 141738,
+      "sha256": "ec8124628a6d5f1f89d49f8a2fac9f0435fa895a8c27cb32af149782496511bb"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-3-level-520.webp",
+      "bytes": 35496,
+      "sha256": "36d43c785e3c0ea517ec28670b15e5a21428afc88499e9ea42b88359ab7b43fd"
+    },
+    {
+      "location": "public",
+      "filename": "io-geology-page-3.webp",
+      "bytes": 27164,
+      "sha256": "2cb134874f6e3ce5665673dd09e72064350370a382091cc241e60b76b8e21c94"
+    },
+    {
+      "location": "public",
       "filename": "io-geology@2x.webp",
       "bytes": 200696,
       "sha256": "1bfc6c35f2e1322770fcccd37365c7105572800160e89ccf336aef39f357332b"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-0-level-1040.webp",
+      "bytes": 11100,
+      "sha256": "e66feeeba7b381101074c34d9d542ba67bac7e45b3cb45239aa88b91cdd517fa"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-0-level-2080.webp",
+      "bytes": 28226,
+      "sha256": "603c60256773ad89cdafdca5b78a011143cf7e3dd893840e20fe9cbf8834c307"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-0-level-4160.webp",
+      "bytes": 69928,
+      "sha256": "f97209ac30ec1237299b4d2a939c86bbb2c84986b733fb11f0b5109c18a78d7f"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-0.webp",
+      "bytes": 171432,
+      "sha256": "b5404ea3fc4282a54cf31d06fda69504fca1dae3258bcd5fbee5c36b81008b79"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-1-level-1040.webp",
+      "bytes": 15882,
+      "sha256": "e7d81cc014fc93e5ddd7228b6b6c23c4becc3b3b99af896951a8b7efa8947eda"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-1-level-2080.webp",
+      "bytes": 43106,
+      "sha256": "64a2a9e73efef17b6ab31bc7ee4ed81fa26370b815e1f472adc6cd8ab200afc7"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-1-level-4160.webp",
+      "bytes": 111464,
+      "sha256": "d1e5b9a1317d5c622b6d3510b396b8fc435ff4fde34c814ef7b42989b7e57fe4"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-1.webp",
+      "bytes": 271638,
+      "sha256": "633d123e2b2815b4eeb833e022957ba7dae5900724c3a9a51d1bd973b7c356d4"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-2-level-1040.webp",
+      "bytes": 14788,
+      "sha256": "b3b3389e0d42b9b2c3c83be7a4af61a25d8d1664e7d4cfc74a4af8dfcbc817d7"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-2-level-2080.webp",
+      "bytes": 41398,
+      "sha256": "c64ca1f29d81b489d85ca6e55205f2ba9e36ac13bbc0c488aff2e12aa4bff3bb"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-2-level-4160.webp",
+      "bytes": 115172,
+      "sha256": "5feacf84b0ced31c1aa31ddfa9ffc0a2d0e627c46cd1bbe1355a30e5fbe0fc0e"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-2.webp",
+      "bytes": 297876,
+      "sha256": "3cb5072b7cacc861ec92229bfb6a1adc511a2ab690552f93c17dc8871fbe04b1"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-3-level-1040.webp",
+      "bytes": 10872,
+      "sha256": "d620afad766ca791359cc70002a5d1b3d88648d5f19354638ce247c219262cb6"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-3-level-2080.webp",
+      "bytes": 30368,
+      "sha256": "bfc25c143d229850cab69868021d15153984eac2a96e08fbbeac0c22f689160f"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-3-level-4160.webp",
+      "bytes": 84254,
+      "sha256": "8b81d252837ab666cfa7786ab69540459daae4115fda0b4c97af3687b30a9806"
+    },
+    {
+      "location": "public",
+      "filename": "io-normal-page-3.webp",
+      "bytes": 226678,
+      "sha256": "d7b652fb4a431e0b2a020c09e27cf6939bae1f208d1231cd0cb3be4a554dfbd0"
     },
     {
       "location": "public",
@@ -129,15 +507,303 @@
     },
     {
       "location": "public",
+      "filename": "io-spectral-slope-page-0-level-1040.webp",
+      "bytes": 14102,
+      "sha256": "fadecbc3ad5df7dfe0aedb7bf74f70057afb740c940f8b7c274ff7480e2d5e62"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-0-level-2080.webp",
+      "bytes": 19350,
+      "sha256": "ad065065bf065d5ff77694ea4a5449d151f561e3df46371b9341294cd7bb740d"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-0-level-520.webp",
+      "bytes": 10114,
+      "sha256": "766841c00cbaaee866a0c73f44256a1831b2a42aceee0d12bd571888a8b288ce"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-0.webp",
+      "bytes": 18208,
+      "sha256": "f67aed63c06b0cb6b3952614bba8d5fd2f822aff3e1a7a49129e5ff407bdd1b4"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-1-level-1040.webp",
+      "bytes": 23514,
+      "sha256": "d150c2f49ca8310211b9acd1cda8e859ed72d3c1470394192c94b23d6069f104"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-1-level-2080.webp",
+      "bytes": 27576,
+      "sha256": "e96349345b77410fbd38694aa0d0d014adaf130a30e5d9f9b43b8ccd471706a8"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-1-level-520.webp",
+      "bytes": 18846,
+      "sha256": "5ffe9298063fc6ea187c2d649a065e697d99ab940aecc13d92ea5e375d278f9d"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-1.webp",
+      "bytes": 12424,
+      "sha256": "aa48af03651e71eccf3cd28dd98caf2ab7f0309ac05beb7b4aa6c7a3f5656a61"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-2-level-1040.webp",
+      "bytes": 22920,
+      "sha256": "53b4e542a93da9a57cbebcc64dc2c1d5514e2202bf6194cca58360c21fa3eb44"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-2-level-2080.webp",
+      "bytes": 26092,
+      "sha256": "10fd07a3c8b484ef867b55adcc61185d15a0ab50fece47b7e4148746aabe792d"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-2-level-520.webp",
+      "bytes": 18444,
+      "sha256": "bf65a9b3138fc5218c0782f1ec15015d1501879b306c664f53acdcf3c82b6403"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-2.webp",
+      "bytes": 12580,
+      "sha256": "c9ead277ffd1093436b5cea4f6c6ecef39916baa8799d182b17bc5a4dd777a5b"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-3-level-1040.webp",
+      "bytes": 14642,
+      "sha256": "00e8bf3d83a0baa82dc5911884effe02b8cdd53f0f44783f6eb79e540bbdbc02"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-3-level-2080.webp",
+      "bytes": 20202,
+      "sha256": "6c0b46f073a7f36b177eabb9293d16eb242adb949e1f5292e5157a3d06085fc1"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-3-level-520.webp",
+      "bytes": 10318,
+      "sha256": "7e30fe48a9bb1c26e9e249b41368ee1e59f0f351e04595dafcc821e43aa34ee0"
+    },
+    {
+      "location": "public",
+      "filename": "io-spectral-slope-page-3.webp",
+      "bytes": 19666,
+      "sha256": "9db6745ecaf9e1f7c55dfa3ba1b3541a358c5e2330479dd7daf6034011ef2d67"
+    },
+    {
+      "location": "public",
       "filename": "io-spectral-slope@2x.webp",
       "bytes": 63272,
       "sha256": "1f1d7ce2e2d52ed63f7cf47db3e876731fe3e42a0e37c4493e2ee707f4bf1988"
     },
     {
       "location": "public",
+      "filename": "io-visible-absorption-page-0-level-1040.webp",
+      "bytes": 13712,
+      "sha256": "083b7b7bf888d9150091c084ee0ad17ef71a5b0a333c99f4fc0103470ff97568"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-0-level-2080.webp",
+      "bytes": 19120,
+      "sha256": "d250c813476afb8edc30c05b38630d40b82f2970503769386ac230263470c9e4"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-0-level-520.webp",
+      "bytes": 9678,
+      "sha256": "0ac40d017735ffeecd4ad8ffba3b6b30fca8ba33c1e25b3fb4fcb5537b151377"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-0.webp",
+      "bytes": 18080,
+      "sha256": "45d06764a1f303af969152ad9af340b6fd753203d77b844aba7e5bd3f4b1cff2"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-1-level-1040.webp",
+      "bytes": 21200,
+      "sha256": "412550262fa1b90d3e9f9ae78d286126f55f5ce64d01c172d85ff7b07a40a86d"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-1-level-2080.webp",
+      "bytes": 24516,
+      "sha256": "edbf91fb2f26af38cc5b69aa97c3e021dbe19491d5a9bdaf0e965a4a0ec3a1b9"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-1-level-520.webp",
+      "bytes": 16778,
+      "sha256": "ec502033c80b7dd9030360c5ae88cb01998472ec2abcfa429b335e308d684664"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-1.webp",
+      "bytes": 12058,
+      "sha256": "bf341e31a36a06773d2452099c69d2e567b39b67fef6b400149f42b89a38272d"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-2-level-1040.webp",
+      "bytes": 19958,
+      "sha256": "fec22dfaaef343ccc6fede406b04a763295a3ed35c0eb3ab9146b779b85c45d3"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-2-level-2080.webp",
+      "bytes": 22100,
+      "sha256": "7cb4d70a622e412f6c7bc19785c9c72dbe3cbbf676ce0c43a705898032095265"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-2-level-520.webp",
+      "bytes": 15934,
+      "sha256": "4100798e922fad9e1ba433f306d22920ab59161b4ea352323e04cf7d11b8611a"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-2.webp",
+      "bytes": 12050,
+      "sha256": "3d904be2909eac5ef5fca5cc4f7983f6a400db3cd62db190e1dc344e9e711457"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-3-level-1040.webp",
+      "bytes": 13936,
+      "sha256": "2b0c00e0bce3912b8b5fa3777fdf16ea4b0eaa5902c363aa99ef5877b4a7fb7f"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-3-level-2080.webp",
+      "bytes": 19852,
+      "sha256": "de26bf8c17157414064ba2359c786b8230b3d8ae1d6671597917060d5fc81d04"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-3-level-520.webp",
+      "bytes": 10018,
+      "sha256": "67c60a567d34ddf6aed69f51d3bc287a9afd02bd03a304f1fa5a8802056cb088"
+    },
+    {
+      "location": "public",
+      "filename": "io-visible-absorption-page-3.webp",
+      "bytes": 18136,
+      "sha256": "6afab38e0f5d3daeaac459d7a8a28166c73719c4c6eb40a458369a7978f1459e"
+    },
+    {
+      "location": "public",
       "filename": "io-visible-absorption@2x.webp",
       "bytes": 62358,
       "sha256": "6f697edc7ca013e8f61a9e97f21a93f2d7f409293833cde957d69e972955e8ea"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-0-level-1040.webp",
+      "bytes": 62490,
+      "sha256": "45888447f3e26254732bf9543e25e56005d31a9d5b8103f31dd750d3fb34dc8b"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-0-level-2080.webp",
+      "bytes": 142294,
+      "sha256": "4d99d82cf46f19891a78ad489541c5dda489149f745d8a48338ed6dd90e0faad"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-0-level-520.webp",
+      "bytes": 21846,
+      "sha256": "7aebca9705d8ff4d7e8330ad1315202b5aaf8f8f72294716a8bcbc83074f5ccd"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-0.webp",
+      "bytes": 70564,
+      "sha256": "7527a3671e1327ffdf84f5f3c7a82ef3687e901ebbe871b4e5596c86bb0d09e4"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-1-level-1040.webp",
+      "bytes": 84852,
+      "sha256": "89610a54e36d42d8f4f4ff8886a7407d81c45062df0e5db798fdf5560aaba472"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-1-level-2080.webp",
+      "bytes": 197610,
+      "sha256": "7d1ed71ad3065cb986503a877717e690fa61ceefb9ab5e379d376711073c2983"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-1-level-520.webp",
+      "bytes": 27824,
+      "sha256": "de545711f656b817ba87bb3fd23ae1b6ed9d4a2dce007f735efe20e247698fb1"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-1.webp",
+      "bytes": 91378,
+      "sha256": "cd80bfed57e26cfd0d5072a020c182e8899ff25f1810a9b2a78eed23fd1948de"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-2-level-1040.webp",
+      "bytes": 57752,
+      "sha256": "624a5c79b94d8bbd3579145b75508c6f3fd93ea396ded31ded547f72d3601f6d"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-2-level-2080.webp",
+      "bytes": 128314,
+      "sha256": "2e0686b84cd7e5a9e2bf0b95fa135bf252e0a78624e655833a7c05ba291d93d9"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-2-level-520.webp",
+      "bytes": 23188,
+      "sha256": "ddbe58a4a25c13ffee78405c970353abbe13c154b0bc510a8f487f8910d96847"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-2.webp",
+      "bytes": 58284,
+      "sha256": "ef99ffc7630ca1d3bc9a86ed55ca0fae94869587a2a475a6265909fdcd1fdc15"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-3-level-1040.webp",
+      "bytes": 6034,
+      "sha256": "dad713506752242ac26e2d103634433c719f42c15bf59325f47f0d4b7afc7fa3"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-3-level-2080.webp",
+      "bytes": 12804,
+      "sha256": "8b1bf2dbe18da806c6e063b684219fd420187bd840daf97cc6606809aa35e962"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-3-level-520.webp",
+      "bytes": 2998,
+      "sha256": "24409f6507eaff936a466411433b22d8f5e2e1b531db104f8b80b7cf784e3167"
+    },
+    {
+      "location": "public",
+      "filename": "io-volcanic-heat-page-3.webp",
+      "bytes": 16326,
+      "sha256": "f6794b59d10b19983292c933fd8e807751e16e5cc9e7b3404333824d16e9ff61"
     },
     {
       "location": "public",
@@ -364,14 +1030,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 82525,
-      "sha256": "3d328853a2357b69d170c548d2bd5fb51b9a9a1b29823fc32a8aa38b30ed962b"
+      "bytes": 80215,
+      "sha256": "20c2477198bf28448644fac71543e6d97a71e0baa5ecad6e780d94e42e19a19c"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 733,
-      "sha256": "9475890cdefd20fd7b0a63e6004378124da566f33062803b9487b8dfa5a60bf6"
+      "bytes": 671,
+      "sha256": "894573f0eeeb5dbe10cc13df2f8bc69c98acaa5637e1383ed58e1ff8de3bbdea"
     },
     {
       "location": "prepared",
@@ -454,14 +1120,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 349725,
-      "sha256": "84fc2c91d03ad04f12eb305a8b0038eccc995c2f835ed2eed2a02f04b21610f9"
+      "bytes": 378592,
+      "sha256": "033f95cc727b3609a899d152fe440af22c35987d58f8f108e98c9d01670d2aea"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 370312,
-      "sha256": "027e80c98e25b8badff20089312c6270cc37b9d8591dcf37afc93a9f46d6c9ed"
+      "bytes": 371420,
+      "sha256": "f45352e90ac25b4f69c94fcb55d6297fe70f7a0f127e344f9458490cfc53e3e1"
     },
     {
       "location": "prepared",
