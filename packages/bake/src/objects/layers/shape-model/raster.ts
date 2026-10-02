@@ -17,7 +17,7 @@ function uniformSurface(width:number, height:number, [red, green, blue]:readonly
 }
 
 /** One base-color map per dataset; view-dependent lighting is a separate prepared layer. A dataset is a measured uniform
- * colour, the neutral gray display convention, or an illustration carried through a published model's own UVs. */
+ * color, the neutral gray display convention, or an illustration carried through a published model's own UVs. */
 export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, datasetIds, readSource }:OutputDirectories & {config:ShapeModelConfig;axes:readonly number[];sourceDirectory:string;datasetIds:readonly string[];readSource:(path:string)=>Promise<Buffer>}) {
   const { width, height, latitudeSegments, longitudeSegments, poleSize } = config.mesh;
   const surfaces = config.surfaces ?? [];
@@ -33,10 +33,10 @@ export async function prepareModelRasters({ config, axes, publicDirectory, publi
     const surface = surfaces[index];
     let pixels:Buffer, source;
     if (!surface) {
-      // Without a surface the body shows the shared neutral gray (#808080 sRGB): a display convention, not a colour.
+      // Without a surface the body shows the shared neutral gray (#808080 sRGB): a display convention, not a color.
       pixels = uniformSurface(width, height, [128, 128, 128]); source = { neutral: true as const };
     } else if (surface.science.kind === 'disc-integrated-color') {
-      // The published whole-disc colour and V geometric albedo, uniform over the body: one mean, no map.
+      // The published whole-disc color and V geometric albedo, uniform over the body: one mean, no map.
       const color = await loadDiscIntegratedColor(readSource, surface.science, surface.source, readCie1931ColorMatching);
       pixels = uniformSurface(width, height, color.srgb);
       source = { discIntegratedColor: { source: surface.source, srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance } };

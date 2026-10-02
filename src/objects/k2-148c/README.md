@@ -8,7 +8,7 @@ It is one of 3 planets known around K2-148. Its orbit and size follow Hirano et 
 
 **Orbit.** Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): P 6.92251 d Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): a/R* 27.3; Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): inclination derived from its transit duration 2.0304 h and Rp/R* 0.0222 with its a/R* 23.2 (Winn 2010, eqs. 14 and 16) No archive row states an eccentricity; the orbit is taken as circular Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): transit mid-time 2457394.6522 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 357 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-148's measured colour (#ffc095, the colour dataset of k2-148 (src/objects/k2-148/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-148's measured color (#ffc095, the color dataset of k2-148 (src/objects/k2-148/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-148's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (42, 43), folded onto its orbit. Upper limits and rows without an error are left out.
 

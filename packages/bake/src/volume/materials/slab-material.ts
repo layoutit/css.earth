@@ -51,9 +51,9 @@ export function compilerSlabMaterial(sampleEmission: Sample, sampleMaterial: Mat
 type SlabMaterial = ReturnType<typeof compilerSlabMaterial>;
 /**
  * Fade chromaticity toward neutral where the delivered texel alpha is too small to carry it.
- * Browsers composite premultiplied 8-bit colour: at alpha 1–3 each channel rounds to a few levels,
+ * Browsers composite premultiplied 8-bit color: at alpha 1–3 each channel rounds to a few levels,
  * and stacked slabs turn that rounding into strong false tints. Alpha is computed exactly as the
- * emission bake does (1 − exp(−exposure · ∫emission)); colour reaches full strength at `fullChromaAlphaByte`.
+ * emission bake does (1 − exp(−exposure · ∫emission)); color reaches full strength at `fullChromaAlphaByte`.
  */
 export function alphaLimitedSlabMaterial(material: SlabMaterial, sampleEmission: Sample, exposureGain: number, fullChromaAlphaByte: number): SlabMaterial {
   if (!(exposureGain > 0) || !Number.isFinite(exposureGain) || !(fullChromaAlphaByte >= 1) || fullChromaAlphaByte > 255)
@@ -88,14 +88,14 @@ export function validateChannelGain(value: unknown): ChannelGain {
 /**
  * Split one dataset gain into the two parts that must straddle the alpha chroma limit.
  *
- * The limit fades chromaticity to neutral 255 where the delivered alpha is too small to carry colour,
+ * The limit fades chromaticity to neutral 255 where the delivered alpha is too small to carry color,
  * because browsers composite premultiplied 8-bit. A gain applied wholly after it multiplies that neutral
  * 255 by three different numbers and so paints a constant false tint over exactly the texels the limit
  * had just protected — measured at 0.09 and 0.21 mean saturation in the alpha 1..3 band on two LMC datasets.
  * A gain applied wholly before it is undone by the fade, which pulls every channel back toward 255.
  *
  * So the white balance (the ratios, at most 1 so nothing clips) belongs BEFORE the limit, where the fade
- * then neutralizes the corrected colour, and the exposure (the common factor) belongs AFTER it, where it
+ * then neutralizes the corrected color, and the exposure (the common factor) belongs AFTER it, where it
  * scales a neutral texel without tinting it. At full trust the two orders agree exactly; at zero trust only
  * this one stays neutral.
  */
@@ -222,7 +222,7 @@ export function datasetToneGains(curve: DatasetToneCurve, level: number, rgb: Ve
   return common > 0 ? common : 1;
 }
 
-/** Analytic render level of one channel under the curve: the level the bake paints where alpha carries colour. */
+/** Analytic render level of one channel under the curve: the level the bake paints where alpha carries color. */
 export function datasetToneRender(curve: DatasetToneCurve | null, channel: number, level: number, render: number): number {
   return curve ? Math.min(level, datasetToneValue(curve, channel, render)) : render;
 }

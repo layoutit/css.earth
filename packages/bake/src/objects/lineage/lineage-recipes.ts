@@ -18,7 +18,7 @@ export interface ProductBinding {
   limitations: string[];
 }
 const kind = (value: string) => ({ kind: value });
-/** An artist's surface (a model's base-colour texture or a published global map): shown unchanged, never an observation. */
+/** An artist's surface (a model's base-color texture or a published global map): shown unchanged, never an observation. */
 const illustration = (plan: Record<string, unknown>) => ['glb-base-color', 'equirectangular-illustration'].includes(String(maybeRecord(plan.science)?.kind));
 
 /**
@@ -158,7 +158,7 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
       if (!dataset) continue;
       const scientific = maybeRecord(map.scientific)?.kind, fill = maybeRecord(map.deepOceanFill);
       add(dataset.id, [text(map.path), ...paths(map.scientific), ...(map.compositeClouds ? [text(record(planSurface.clouds).path)] : []), ...(fill ? [text(fill.path)] : [])],
-        fill ? { interpretation: kind('observed-colour-with-depth-shaded-deep-ocean') }
+        fill ? { interpretation: kind('observed-color-with-depth-shaded-deep-ocean') }
           : scientific === 'gebco-elevation' ? { interpretation: kind('modeled-elevation') } : {});
     }
     for (const dataset of controls.filter(dataset => !products.some(product => product.id === dataset.id))) {

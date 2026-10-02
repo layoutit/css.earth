@@ -2,7 +2,7 @@
  * Per-channel levels, delta and transfer for one baked image dataset, from that dataset's own pinned rasters.
  *
  * The offline round measured the same three things from browser captures
- * (`output/lmc-improvement/colour/levels-panel.mts`). This route measures them from the files the result
+ * (`output/lmc-improvement/color/levels-panel.mts`). This route measures them from the files the result
  * already pins, so the lab can show them live without rendering anything:
  *
  *  - SOURCE  = `source/registered-image.png`, this dataset's own registered photograph, resampled onto the
@@ -82,7 +82,7 @@ export interface DatasetLevelMaterial { channelGain: ChannelGain | null; toneCur
 /**
  * The analytic render of one channel before any tone curve: the projection byte wearing the image's
  * peak-normalized chromaticity, times the dataset's recorded channel gain (clipped where it reaches full), as
- * the bake paints it where alpha carries colour.
+ * the bake paints it where alpha carries color.
  */
 export const untonedRender = (level: number, raw: number, peak: number, gain?: number) =>
   !(peak > 0) ? 0 : gain === undefined ? level * raw / peak : level * Math.min(255, 255 * raw / peak * gain) / 255;
@@ -254,7 +254,7 @@ export async function datasetLevels(root: string, prepared: PreparedReconstructi
       'projection wearing this dataset’s peak-normalized chromaticity and its own recorded channel gain and tone curve. Analytic light, so it reads brighter than the ' +
       'delivered bank, which loses the texels that round to zero in premultiplied 8-bit alpha. The chroma angle ' +
       'compares those two directly, so it is not the delivered hue error: the bank also averages chromaticity per ' +
-      'finite component and mixes in the envelope’s whitened colour.' };
+      'finite component and mixes in the envelope’s whitened color.' };
 }
 
 /** The measurement's inputs for one saved dataset: the pinned grid and the dataset's recorded material corrections. */

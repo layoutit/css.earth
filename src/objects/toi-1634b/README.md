@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1634. Its orbit and size follow Cloutier
 
 **Orbit.** Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): P 0.98934551 d Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): a/R* 7.054; Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): inclination 86.66 degrees Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): e 0 Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): transit mid-time 2459584.97039 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1634's measured colour (#ffc98a, the colour dataset of toi-1634 (src/objects/toi-1634/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1634's measured color (#ffc98a, the color dataset of toi-1634 (src/objects/toi-1634/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1634's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (18, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

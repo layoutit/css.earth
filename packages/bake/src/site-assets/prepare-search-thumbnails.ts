@@ -37,7 +37,7 @@ async function markerPicture(projectRoot: string, id: string): Promise<Buffer | 
   return readFile(resolve(directory, path));
 }
 
-/** Featured stars already publish an arrival image with their prepared photospheric colour and limb law.
+/** Featured stars already publish an arrival image with their prepared photospheric color and limb law.
  * Reuse those pixels for the sidebar and search, rather than the flat catalogue context disc. */
 async function featuredStarPreviews(projectRoot: string): Promise<ReadonlyMap<string, string>> {
   const module: unknown = await import(pathToFileURL(resolve(projectRoot, 'site/prepared-catalogue.mjs')).href);

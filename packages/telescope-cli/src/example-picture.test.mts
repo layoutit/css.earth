@@ -5,14 +5,14 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import sharp from 'sharp';
-import { binEventCounts, colourOf, displayOrder, examplePixels, northAndEastOnScreen, parseExampleRecipe, parseExampleRecipes, renderExamplePicture, stretchSample } from './example-picture.mts';
+import { binEventCounts, colorOf, displayOrder, examplePixels, northAndEastOnScreen, parseExampleRecipe, parseExampleRecipes, renderExamplePicture, stretchSample } from './example-picture.mts';
 
 const base = {
   id: 'probe', telescope: 'Test', instrument: 'Test camera', title: 'A probe', target: 'Nothing', date: '2026-01-01',
   source: { kind: 'fits-image', path: 'probe.fits', extension: 0, plane: 1 },
   unit: 'K', window: { x: 1, y: 1, width: 3, height: 2 },
   orientation: { mode: 'first-row-bottom', note: 'The first stored row at the bottom.' },
-  stretch: { kind: 'linear', black: 0, white: 1 }, colour: { kind: 'greys' }, enlarge: 2,
+  stretch: { kind: 'linear', black: 0, white: 1 }, color: { kind: 'greys' }, enlarge: 2,
   product: { command: 'node tools/objects/probe.mts', definition: 'tools/objects/probe/programs/probe.json' },
   note: 'A probe.',
 };
@@ -32,8 +32,8 @@ test('a recipe states everything a picture needs, and a malformed one is refused
     { ...base, stretch: { kind: 'linear', black: 1, white: 1 } }, { ...base, stretch: { kind: 'linear', black: 0, white: 1, softening: 1 } },
     { ...base, stretch: { kind: 'asinh', black: 0, white: 1 } }, { ...base, stretch: { kind: 'asinh', black: 0, white: 1, softening: 0 } },
     { ...base, orientation: { mode: 'sideways', note: 'n' } }, { ...base, source: { kind: 'jpeg', path: 'p' } },
-    { ...base, colour: { kind: 'ramp', stops: [[0.2, '#000000'], [1, '#ffffff']] } },
-    { ...base, colour: { kind: 'ramp', stops: [[0, '#000000'], [1, 'white']] } }, { ...base, enlarge: [2] }, { ...base, enlarge: [2, 0] },
+    { ...base, color: { kind: 'ramp', stops: [[0.2, '#000000'], [1, '#ffffff']] } },
+    { ...base, color: { kind: 'ramp', stops: [[0, '#000000'], [1, 'white']] } }, { ...base, enlarge: [2] }, { ...base, enlarge: [2, 0] },
     { ...base, product: { ...base.product, command: '' } }])
     assert.throws(() => parseExampleRecipe(bad), JSON.stringify(bad)?.slice(0, 120));
   assert.throws(() => parseExampleRecipes({ schema: 'other', examples: [base] }), /cssearth-telescope-examples@1/u);
@@ -50,15 +50,15 @@ test('a linear stretch clips outside its range and an asinh one lifts the faint 
   assert.ok(Number.isNaN(stretchSample(NaN, recipe.channels[0]!.stretch)));
 });
 
-test('greys and a stated ramp are interpolated in sRGB, and a missing sample needs a stated colour', () => {
-  assert.deepEqual(colourOf(0.5, { kind: 'greys' }), [128, 128, 128]);
-  const ramp = parseExampleRecipe({ ...base, colour: { kind: 'ramp', stops: [[0, '#000000'], [0.5, '#ff0000'], [1, '#ffffff']], missing: '#4a4a4a' } }).colour;
-  assert.deepEqual(colourOf(0, ramp), [0, 0, 0]);
-  assert.deepEqual(colourOf(0.25, ramp), [128, 0, 0]);
-  assert.deepEqual(colourOf(0.5, ramp), [255, 0, 0]);
-  assert.deepEqual(colourOf(0.75, ramp), [255, 128, 128]);
-  assert.deepEqual(colourOf(NaN, ramp), [74, 74, 74]);
-  assert.throws(() => colourOf(NaN, { kind: 'greys' }), /no value/u);
+test('greys and a stated ramp are interpolated in sRGB, and a missing sample needs a stated color', () => {
+  assert.deepEqual(colorOf(0.5, { kind: 'greys' }), [128, 128, 128]);
+  const ramp = parseExampleRecipe({ ...base, color: { kind: 'ramp', stops: [[0, '#000000'], [0.5, '#ff0000'], [1, '#ffffff']], missing: '#4a4a4a' } }).color;
+  assert.deepEqual(colorOf(0, ramp), [0, 0, 0]);
+  assert.deepEqual(colorOf(0.25, ramp), [128, 0, 0]);
+  assert.deepEqual(colorOf(0.5, ramp), [255, 0, 0]);
+  assert.deepEqual(colorOf(0.75, ramp), [255, 128, 128]);
+  assert.deepEqual(colorOf(NaN, ramp), [74, 74, 74]);
+  assert.throws(() => colorOf(NaN, { kind: 'greys' }), /no value/u);
 });
 
 test('the stored rows are turned the way the recipe states, and a sky image by its own world coordinates', () => {
@@ -115,7 +115,7 @@ test('three channels go straight into red, green and blue, each on its own stret
   const three = parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
     product: { command: base.product.command, definition: base.product.definition },
     channels: [channel('keV-soft', 10), channel('keV-medium', 4), channel('keV-hard', 2)],
-    colour: { kind: 'channels', missing: '#4a4a4a' } });
+    color: { kind: 'channels', missing: '#4a4a4a' } });
   assert.deepEqual(three.channels.map(each => each.unit), ['keV-soft', 'keV-medium', 'keV-hard']);
   // The same stored value reads differently in each channel because each has its own limits: 5, 2 and 1 are all halfway.
   const grid = { NAXIS1: 3, NAXIS2: 2, CRVAL1: 10 };
@@ -135,15 +135,15 @@ test('three channels go straight into red, green and blue, each on its own stret
   // A recipe cannot state three channels and a grey scale, or two channels, or channels binned differently.
   assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
     product: { command: base.product.command, definition: base.product.definition },
-    channels: [channel('a', 1), channel('b', 1), channel('c', 1)], colour: { kind: 'greys' } }), /draws them as channels/u);
+    channels: [channel('a', 1), channel('b', 1), channel('c', 1)], color: { kind: 'greys' } }), /draws them as channels/u);
   assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
     product: { command: base.product.command, definition: base.product.definition },
-    channels: [channel('a', 1), channel('b', 1)], colour: { kind: 'channels', missing: '#4a4a4a' } }), /exactly three channels/u);
+    channels: [channel('a', 1), channel('b', 1)], color: { kind: 'channels', missing: '#4a4a4a' } }), /exactly three channels/u);
   const events = (limits: readonly [number, number], binPixels = 2) => ({ label: 'band', unit: 'counts per bin', stretch: { kind: 'linear', black: 0, white: 1 },
     source: { kind: 'fits-events', path: 'e.fits', columns: ['x', 'y'], binPixels, origin: [0, 0], size: [4, 4], band: { column: 'energy', limits } } });
   assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
     product: { command: base.product.command, definition: base.product.definition },
-    channels: [events([1, 2]), events([2, 3]), events([3, 4], 4)], colour: { kind: 'channels', missing: '#4a4a4a' } }), /one set of bins/u);
+    channels: [events([1, 2]), events([2, 3]), events([3, 4], 4)], color: { kind: 'channels', missing: '#4a4a4a' } }), /one set of bins/u);
 });
 
 test('events are counted into square bins, and events outside the grid are dropped', () => {
@@ -172,7 +172,7 @@ test('every checked-in example states a product, a command and a pinned definiti
     assert.ok(example.note.length > 20, `${example.id} says what the picture shows and does not show`);
     assert.ok(!/[—–]/u.test(`${example.title}${example.note}${example.orientation.note}`), `${example.id} uses plain punctuation`);
     assert.ok(example.window.width * example.enlarge[0] <= 900 && example.window.height * example.enlarge[1] <= 900, `${example.id} fits in 900 pixels`);
-    // A sample with no value is drawn in a neutral grey, never in a colour that could be read as a measurement.
-    if (example.colour.missing) assert.match(example.colour.missing, /^#(\w\w)\1\1$/u, `${example.id} draws missing samples in a neutral grey`);
+    // A sample with no value is drawn in a neutral grey, never in a color that could be read as a measurement.
+    if (example.color.missing) assert.match(example.color.missing, /^#(\w\w)\1\1$/u, `${example.id} draws missing samples in a neutral grey`);
   }
 });

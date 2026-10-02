@@ -45,7 +45,7 @@
     },
     {
       "id": "gaia-dr3-xp-spectrum",
-      "subject": "Photosphere colour from the Gaia DR3 XP sampled spectrum",
+      "subject": "Photosphere color from the Gaia DR3 XP sampled spectrum",
       "status": "included",
       "finding": "has_xp_sampled is true. The DataLink sampled spectrum (343 samples, 336-1020 nm) through the CIE 1931 2-degree observer gives sRGB 255, 226, 207; one standard error at every sample moves the blue channel by 2 at most. The Gaia GSP-Phot temperature, 4897 K, is not used: the measured spectrum replaces a Planck model.",
       "evidence": [
@@ -138,7 +138,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for HD 189733 A",
       "status": "included",
-      "finding": "The spectrum colour dimmed toward the limb by the fitted law, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
+      "finding": "The spectrum color dimmed toward the limb by the fitted law, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733/source/presentation/context.png"
       ]

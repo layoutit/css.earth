@@ -2,7 +2,7 @@
 
 Kalliope is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. It is shown on the survey's released shape,
 with a shape-only view, an elevation map and a SPHERE photograph dataset. Shape-only views use the shared neutral gray
-(#808080 sRGB), a display convention, not a measured colour; gaps keep the missing-data grid.
+(#808080 sRGB), a display convention, not a measured color; gaps keep the missing-data grid.
 
 ## Sources
 
@@ -83,7 +83,7 @@ supports the radial-height dataset. Reduction softens small features.
   is not height above a gravitational equipotential.
 - Source constraints are uneven and ground-based; the 4096 × 2048 display map adds no observational resolution.
 - Rotation has an arbitrary display meridian, not an absolute rotational phase.
-- The SPHERE photograph shows photographed illumination, not albedo or colour. The frames see Kalliope from 20° to 77°
+- The SPHERE photograph shows photographed illumination, not albedo or color. The frames see Kalliope from 20° to 77°
   south, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

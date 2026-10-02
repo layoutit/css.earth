@@ -257,7 +257,7 @@
       "sourceUrl": "https://doi.org/10.3847/0067-0049/225/1/5",
       "title": "WISE x SuperCOSMOS galaxies outside DESI's footprint, at DESI's density in each redshift bin",
       "credit": "Bilicki et al. (2016), ApJS 225, 5; Wide Field Astronomy Unit, University of Edinburgh",
-      "acquisition": "The whole catalogue (the origin, 1,709,149,603 bytes) downloaded 2026-09-30 and read as a stream; the generator keeps the photometric redshift 0.1 to 0.4 galaxies brighter than absolute R -21.5 outside DESI's footprint, thinned in each redshift bin to the DESI sample's count per sky cell, and prints DESI's median colour per bin.",
+      "acquisition": "The whole catalogue (the origin, 1,709,149,603 bytes) downloaded 2026-09-30 and read as a stream; the generator keeps the photometric redshift 0.1 to 0.4 galaxies brighter than absolute R -21.5 outside DESI's footprint, thinned in each redshift bin to the DESI sample's count per sky cell, and prints DESI's median color per bin.",
       "generator": "packages/bake/authoring/nearby-universe/wisescos-sample.mts",
       "sourceBinding": {
         "kind": "catalogued",
@@ -354,7 +354,7 @@
       "path": "src/objects/nearby-universe-galaxies/source/galaxies/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored catalogue selection and colour classes.",
+      "acquisition": "Authored catalogue selection and color classes.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -426,7 +426,7 @@
       "path": "src/objects/nearby-universe-galaxies/source/desi-bright-galaxies/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored DESI bright-galaxy selection, colour and tone.",
+      "acquisition": "Authored DESI bright-galaxy selection, color and tone.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -438,7 +438,7 @@
       "path": "src/objects/nearby-universe-galaxies/source/desi-quasars/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored DESI quasar selection and colour.",
+      "acquisition": "Authored DESI quasar selection and color.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -510,7 +510,7 @@
       "path": "src/objects/nearby-universe-galaxies/source/wisescos-galaxies/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored WISE x SuperCOSMOS fill selection, colour and tone.",
+      "acquisition": "Authored WISE x SuperCOSMOS fill selection, color and tone.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -522,7 +522,7 @@
       "path": "src/objects/nearby-universe-galaxies/source/galaxies-2mrs/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored 2MRS selection, colour classes and tone.",
+      "acquisition": "Authored 2MRS selection, color classes and tone.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

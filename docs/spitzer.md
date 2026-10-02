@@ -97,7 +97,7 @@ establish that every one of Bennu's eleven indexed IRAC Map AORs, or another IRA
 
 The first version of this route rejected every pixel with any imask bit set. That looked cautious and was wrong. The picture
 showed it: two hard vertical lines and two rows of repeating ticks through the bright stars, which are the shapes of column
-pulldown and muxbleed. They were not artifacts that survived. They were holes, drawn in the renderer's colour for a pixel with
+pulldown and muxbleed. They were not artifacts that survived. They were holes, drawn in the renderer's color for a pixel with
 no data, over 2.57% of the pixels the archive covers; a detector column falls on nearly the same sky in every frame of a small
 dither, so once every frame's copy is thrown away nothing fills it.
 
@@ -145,8 +145,8 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 | Pinned observation and receipts | `packages/telescope-cli/src/archives/spitzer/programs/` |
 | Tests | [`packages/telescope-cli/src/archives/spitzer/spitzer.test.mts`](../packages/telescope-cli/src/archives/spitzer/spitzer.test.mts), 14 tests, no network |
 
-### Three gaps in the colour example
+### Three gaps in the color example
 
-The three small grey patches to the right of NGC 3132's central star are missing samples in channel 4 (8.0 µm), not dark features of the nebula. They cover 24 output pixels: rows 512–514 and columns 1177–1195 in zero-based mosaic coordinates. Channels 1 and 2 have data there. Each patch is covered by six channel-4 frames, but all six carry mask value 31, including the stray-light flag (bit 3). The archive mosaic retains values there with coverage about 5.8.
+The three small gray patches to the right of NGC 3132's central star are missing samples in channel 4 (8.0 µm), not dark features of the nebula. They cover 24 output pixels: rows 512–514 and columns 1177–1195 in zero-based mosaic coordinates. Channels 1 and 2 have data there. Each patch is covered by six channel-4 frames, but all six carry mask value 31, including the stray-light flag (bit 3). The archive mosaic retains values there with coverage about 5.8.
 
-The [IRAC handbook, section 7.1.1](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/34/) specifies fatal mask 32520 (bits 3 and 8–14). [Section 5.2.1](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/29/) explains that stray-light masking can leave gaps with small dithers. We retain that documented mask. A matched experiment found that dropping bit 3 improved channel-4 correlation from 0.98325 to 0.99840, but reduced agreement within the archive uncertainty in channels 1 and 2. Agreement with one mosaic is insufficient evidence to reinterpret a contamination flag. The colour renderer shows missing samples in grey; no interpolation or archive pixels fill these gaps.
+The [IRAC handbook, section 7.1.1](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/34/) specifies fatal mask 32520 (bits 3 and 8–14). [Section 5.2.1](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/29/) explains that stray-light masking can leave gaps with small dithers. We retain that documented mask. A matched experiment found that dropping bit 3 improved channel-4 correlation from 0.98325 to 0.99840, but reduced agreement within the archive uncertainty in channels 1 and 2. Agreement with one mosaic is insufficient evidence to reinterpret a contamination flag. The color renderer shows missing samples in gray; no interpolation or archive pixels fill these gaps.

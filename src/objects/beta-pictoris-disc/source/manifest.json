@@ -72,13 +72,13 @@
       "datasetId": "contrast"
     },
     {
-      "id": "colour-f435w-roll1",
+      "id": "color-f435w-roll1",
       "dependencies": [],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-beta-pictoris-disc-colour-f435w-roll1",
+            "catalogueId": "source-beta-pictoris-disc-color-f435w-roll1",
             "role": "material",
             "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
           }
@@ -92,16 +92,16 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "datasetId": "colour"
+      "datasetId": "color"
     },
     {
-      "id": "colour-f435w-roll2",
+      "id": "color-f435w-roll2",
       "dependencies": [],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-beta-pictoris-disc-colour-f435w-roll2",
+            "catalogueId": "source-beta-pictoris-disc-color-f435w-roll2",
             "role": "material",
             "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
           }
@@ -115,16 +115,16 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "datasetId": "colour"
+      "datasetId": "color"
     },
     {
-      "id": "colour-f606w-roll1",
+      "id": "color-f606w-roll1",
       "dependencies": [],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-beta-pictoris-disc-colour-f606w-roll1",
+            "catalogueId": "source-beta-pictoris-disc-color-f606w-roll1",
             "role": "material",
             "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
           }
@@ -138,16 +138,16 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "datasetId": "colour"
+      "datasetId": "color"
     },
     {
-      "id": "colour-f606w-roll2",
+      "id": "color-f606w-roll2",
       "dependencies": [],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-beta-pictoris-disc-colour-f606w-roll2",
+            "catalogueId": "source-beta-pictoris-disc-color-f606w-roll2",
             "role": "material",
             "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
           }
@@ -161,16 +161,16 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "datasetId": "colour"
+      "datasetId": "color"
     },
     {
-      "id": "colour-f814w-roll1",
+      "id": "color-f814w-roll1",
       "dependencies": [],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-beta-pictoris-disc-colour-f814w-roll1",
+            "catalogueId": "source-beta-pictoris-disc-color-f814w-roll1",
             "role": "material",
             "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
           }
@@ -184,16 +184,16 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "datasetId": "colour"
+      "datasetId": "color"
     },
     {
-      "id": "colour-f814w-roll2",
+      "id": "color-f814w-roll2",
       "dependencies": [],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-beta-pictoris-disc-colour-f814w-roll2",
+            "catalogueId": "source-beta-pictoris-disc-color-f814w-roll2",
             "role": "material",
             "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
           }
@@ -207,7 +207,7 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "datasetId": "colour"
+      "datasetId": "color"
     }
   ],
   "documents": [
@@ -244,11 +244,11 @@
       }
     },
     {
-      "id": "reconstruction-colour-json",
-      "path": "src/objects/beta-pictoris-disc/source/reconstruction-colour.json",
+      "id": "reconstruction-color-json",
+      "path": "src/objects/beta-pictoris-disc/source/reconstruction-color.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Object-owned record of the colour dataset reconstruction: the grid it solved on, the shown image it was fitted to and the settings that produced the density this package ships."
+        "reason": "Object-owned record of the color dataset reconstruction: the grid it solved on, the shown image it was fitted to and the settings that produced the density this package ships."
       }
     },
     {
@@ -318,24 +318,24 @@
       }
     },
     {
-      "id": "density-colour-ktx2",
-      "path": "src/objects/beta-pictoris-disc/source/density-colour.ktx2",
+      "id": "density-color-ktx2",
+      "path": "src/objects/beta-pictoris-disc/source/density-color.ktx2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
-      "id": "volume-colour-json",
-      "path": "src/objects/beta-pictoris-disc/source/volume-colour.json",
+      "id": "volume-color-json",
+      "path": "src/objects/beta-pictoris-disc/source/volume-color.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
-      "id": "previews-colour-png",
-      "path": "src/objects/beta-pictoris-disc/source/previews/colour.png",
+      "id": "previews-color-png",
+      "path": "src/objects/beta-pictoris-disc/source/previews/color.png",
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."

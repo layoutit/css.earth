@@ -6,7 +6,7 @@
       "id": "viking-mdim21-visible",
       "subject": "USGS Viking MDIM 2.1 colorized global mosaic",
       "status": "included",
-      "finding": "The visible surface is the 21,339 by 10,670 MDIM 2.1 mosaic at about 1 km per pixel with NASA Ames colour processing, resampled directly from its checked bytes with no exposure or sharpening curve.",
+      "finding": "The visible surface is the 21,339 by 10,670 MDIM 2.1 mosaic at about 1 km per pixel with NASA Ames color processing, resampled directly from its checked bytes with no exposure or sharpening curve.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L9",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L90",
@@ -16,19 +16,19 @@
     },
     {
       "id": "viking-first-column",
-      "subject": "Near-black first column of the Viking colour source",
+      "subject": "Near-black first column of the Viking color source",
       "status": "unresolved",
-      "finding": "The first column of the MDIM 2.1 colour source has mean brightness 4 against about 100, so a thin dark line can show along 180 degrees east at close zoom.",
-      "revisitWhen": "A corrected release of the Viking colour mosaic removes the dark first column.",
+      "finding": "The first column of the MDIM 2.1 color source has mean brightness 4 against about 100, so a thin dark line can show along 180 degrees east at close zoom.",
+      "revisitWhen": "A corrected release of the Viking color mosaic removes the dark first column.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L40"
       ]
     },
     {
       "id": "mola-shaded-relief",
-      "subject": "USGS MOLA colour shaded relief",
+      "subject": "USGS MOLA color shaded relief",
       "status": "included",
-      "finding": "The elevation display is the MOLA pseudo-colour shaded relief with its published palette legend, stitched from NASA Trek zoom-3 WMTS tiles and pinned in the source manifest; it is false colour.",
+      "finding": "The elevation display is the MOLA pseudo-color shaded relief with its published palette legend, stitched from NASA Trek zoom-3 WMTS tiles and pinned in the source manifest; it is false color.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L10",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L37",
@@ -352,7 +352,7 @@
       "id": "mola-roughness-kreslavsky",
       "subject": "MOLA kilometre-scale roughness, Kreslavsky and Head (2000), Zenodo 15734221",
       "status": "deferred",
-      "finding": "Numeric originals exist: E8R0, E8R1 and E8R2.raw, 2,880 by 1,440 bytes at 8 pixels per degree for the 0.6, 2.4 and 9.2 km baselines, CC BY 4.0. The read-me gives C = (1/l) 10^((DN-511)/80), the interquartile range of profile curvature. It recommends the colour composite for qualitative use, gives no missing-value code, and the files have no label. Trek and ASU show only the RGB composite. No shared reader decodes a headerless byte grid.",
+      "finding": "Numeric originals exist: E8R0, E8R1 and E8R2.raw, 2,880 by 1,440 bytes at 8 pixels per degree for the 0.6, 2.4 and 9.2 km baselines, CC BY 4.0. The read-me gives C = (1/l) 10^((DN-511)/80), the interquartile range of profile curvature. It recommends the color composite for qualitative use, gives no missing-value code, and the files have no label. Trek and ASU show only the RGB composite. No shared reader decodes a headerless byte grid.",
       "revisitWhen": "A shared headerless-grid reader with an authored exponential DN transform exists, and the missing-value code is confirmed.",
       "evidence": [
         "https://zenodo.org/records/15734221",
@@ -382,7 +382,7 @@
       "id": "dune-fields-hayward-2007",
       "subject": "Mars Global Digital Dune Database MC2-MC29, Hayward et al. (2007), USGS OFR 2007-1158",
       "status": "included",
-      "finding": "547 dune-field polygons, 65 N to 65 S, USGS public domain. The USGS shapefile names the flattened Mars 2000 ellipsoid in its .prj while its metadata calls the latitudes aerocentric, and neither shared polygon reader accepts a flattened ellipsoid. The Trek layer asked for the Mars 2000 sphere returns the same 547 polygons vertex for vertex, so the Enceladus route (geology-grid.py on the ArcGIS response) is used. Grid: 4,096 by 2,048 cells, pixel-centre inclusion, 70,230 km2 against the database's 69,750 km2; 89 fields (1.2% of the area) are smaller than one cell centre and do not show. Colour: the Trek layer's fill, #df73ff. The grid keeps the authors' confidence class (1: 424, 2: 115, 3: 8 fields) under one colour. Update: both polygon datasets are now drawn over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay) instead of the no-data grid; the chloride dataset joins the Aqueous minerals group.",
+      "finding": "547 dune-field polygons, 65 N to 65 S, USGS public domain. The USGS shapefile names the flattened Mars 2000 ellipsoid in its .prj while its metadata calls the latitudes aerocentric, and neither shared polygon reader accepts a flattened ellipsoid. The Trek layer asked for the Mars 2000 sphere returns the same 547 polygons vertex for vertex, so the Enceladus route (geology-grid.py on the ArcGIS response) is used. Grid: 4,096 by 2,048 cells, pixel-centre inclusion, 70,230 km2 against the database's 69,750 km2; 89 fields (1.2% of the area) are smaller than one cell centre and do not show. Color: the Trek layer's fill, #df73ff. The grid keeps the authors' confidence class (1: 424, 2: 115, 3: 8 fields) under one color. Update: both polygon datasets are now drawn over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay) instead of the no-data grid; the chloride dataset joins the Aqueous minerals group.",
       "evidence": [
         "https://pubs.usgs.gov/of/2007/1158/",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Dune_Field/MapServer/0"
@@ -392,7 +392,7 @@
       "id": "chloride-deposits-osterloo-2010",
       "subject": "Chloride-bearing materials from THEMIS, Osterloo et al. (2010), NASA Trek layer",
       "status": "included",
-      "finding": "642 deposit polygons in the Mars 2000 sphere, the layer's own source reference; the paper expanded the known sites from about 200 to about 640. Same route as the dune fields. 347 deposits (13.7% of the mapped area) are smaller than one 5.2 km cell centre and do not show; 676 cells hold the rest. The Trek renderer draws outlines only (#bee8ff); the fill is the layer's published jC_fillclr attribute, #009933, which every record carries. The DCS_spectr field (1 to 5) is not used because its meaning has not been read in the paper. The authors' own shapefile release, reportedly with the paper, was not retrieved: Wiley refused automated access. Update: both polygon datasets are now drawn over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay) instead of the no-data grid; the chloride dataset joins the Aqueous minerals group.",
+      "finding": "642 deposit polygons in the Mars 2000 sphere, the layer's own source reference; the paper expanded the known sites from about 200 to about 640. Same route as the dune fields. 347 deposits (13.7% of the mapped area) are smaller than one 5.2 km cell centre and do not show; 676 cells hold the rest. The Trek renderer draws outlines only (#bee8ff); the fill is the layer's published jC_fillclr attribute, #009933, which every record carries. The DCS_spectr field (1 to 5) is not used because its meaning has not been read in the paper. The authors' own shapefile release, reportedly with the paper, was not retrieved: Wiley refused automated access. Update: both polygon datasets are now drawn over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay) instead of the no-data grid; the chloride dataset joins the Aqueous minerals group.",
       "evidence": [
         "https://doi.org/10.1029/2010JE003613",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer/0"
@@ -402,7 +402,7 @@
       "id": "valley-networks-hynek-2010",
       "subject": "Valley networks, Hynek et al. (2010), NASA Trek layers Hynek_Valleys and Hynek_Valley_Networks",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 59,419 polyline segments with Strahler order (VNOrder 1 to 7) and 9,879 whole networks, Mars 2000 geographic degrees, about 720,000 km of valleys on the sphere. The source maps centrelines and gives no width; the Trek symbol is a 2-point screen stroke. No existing route draws a line: the categorical grid paints polygons only and the feature labels cap at about 40 visible names. At one 5.2 km cell per crossed cell the map covers 163,905 cells and reproduces the published pattern (output preview). The paper says the map was released on USGS PIGWAD; that original was not located. Update: Included as one category from Hynek_Valley_Networks (9,879 networks, 10 pages; the 59,419-segment layer carries the same vertices and Strahler order, but orders meet at junctions and a cell cannot hold two). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 163,901 cells; all but 3 of 1,172,096 vertices lie in a marked cell (the 3 sit on a cell edge). Colour: the Trek line symbol #edffe8. Needs the drafted null class field, because the layer has no class attribute. The paper's USGS PIGWAD release was not located.",
+      "finding": "Earlier finding (2026-09-27): 59,419 polyline segments with Strahler order (VNOrder 1 to 7) and 9,879 whole networks, Mars 2000 geographic degrees, about 720,000 km of valleys on the sphere. The source maps centrelines and gives no width; the Trek symbol is a 2-point screen stroke. No existing route draws a line: the categorical grid paints polygons only and the feature labels cap at about 40 visible names. At one 5.2 km cell per crossed cell the map covers 163,905 cells and reproduces the published pattern (output preview). The paper says the map was released on USGS PIGWAD; that original was not located. Update: Included as one category from Hynek_Valley_Networks (9,879 networks, 10 pages; the 59,419-segment layer carries the same vertices and Strahler order, but orders meet at junctions and a cell cannot hold two). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 163,901 cells; all but 3 of 1,172,096 vertices lie in a marked cell (the 3 sit on a cell edge). Color: the Trek line symbol #edffe8. Needs the drafted null class field, because the layer has no class attribute. The paper's USGS PIGWAD release was not located.",
       "evidence": [
         "https://doi.org/10.1029/2009JE003548",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valleys/MapServer/0",
@@ -413,7 +413,7 @@
       "id": "gullies-harrison-2015",
       "subject": "Global distribution of gullies, Harrison et al. (2015), Trek layer Gullied_Landform_Survey_2015",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 4,978 points (Mars 2000 sphere, east-positive -180 to 180) with setting and orientation (poleward 2,739, equatorward 1,166, east or west 797, none 276); the layer's jC_fillclr attribute colours the orientation classes. A point has no published footprint, so painting it on the texture would invent a size, and the feature labels cannot show thousands of unnamed points. Journal supplement not retrieved. Update: Included. 4,978 points in four orientation classes coloured by the layer's jC_fillclr attribute (pole-facing #00ffff, equator-facing #ff0000, east or west #ffff00, none #cc00cc). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 4,771 cells; 34 cells hold two orientations and take a declared shared class (white, ours). Journal supplement not retrieved.",
+      "finding": "Earlier finding (2026-09-27): 4,978 points (Mars 2000 sphere, east-positive -180 to 180) with setting and orientation (poleward 2,739, equatorward 1,166, east or west 797, none 276); the layer's jC_fillclr attribute colors the orientation classes. A point has no published footprint, so painting it on the texture would invent a size, and the feature labels cannot show thousands of unnamed points. Journal supplement not retrieved. Update: Included. 4,978 points in four orientation classes colored by the layer's jC_fillclr attribute (pole-facing #00ffff, equator-facing #ff0000, east or west #ffff00, none #cc00cc). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 4,771 cells; 34 cells hold two orientations and take a declared shared class (white, ours). Journal supplement not retrieved.",
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2015.01.022",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3"
@@ -423,7 +423,7 @@
       "id": "glacier-like-forms-souness-2012",
       "subject": "Glacier-like forms, Souness et al. (2012), Trek layer Glacier-like_Forms_GLFs_2012",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 1,309 points (727 north, 582 south) with head, terminus and centre coordinates and measured length, width and area; most are 1 to 10 km long, below or near one 5.2 km cell. Same gap as the gullies. The head-to-terminus line with the measured width would be a source-backed footprint, but no route draws it. Update: Included. 1,309 points at each GLF's measured centre, colour #00ccff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 1,193 cells. The measured head-to-terminus line and width are not drawn.",
+      "finding": "Earlier finding (2026-09-27): 1,309 points (727 north, 582 south) with head, terminus and centre coordinates and measured length, width and area; most are 1 to 10 km long, below or near one 5.2 km cell. Same gap as the gullies. The head-to-terminus line with the measured width would be a source-backed footprint, but no route draws it. Update: Included. 1,309 points at each GLF's measured centre, color #00ccff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 1,193 cells. The measured head-to-terminus line and width are not drawn.",
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2011.10.020",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/1"
@@ -433,7 +433,7 @@
       "id": "recessional-glfs-brough-2016",
       "subject": "Recessional glacier-like forms, Brough et al. (2016), Trek layer Recessional_GLF_Options_2016",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 436 points (197 north, 239 south) with the same measured fields as the GLF inventory. Same gap as the gullies; it would join a glacial-landforms group with the GLFs. Update: Included. 436 points, colour #ff33cc from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 407 cells.",
+      "finding": "Earlier finding (2026-09-27): 436 points (197 north, 239 south) with the same measured fields as the GLF inventory. Same gap as the gullies; it would join a glacial-landforms group with the GLFs. Update: Included. 436 points, color #ff33cc from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 407 cells.",
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2016.03.006",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/4"
@@ -443,7 +443,7 @@
       "id": "glacial-valleys-fassett-2010",
       "subject": "Supraglacial and proglacial valleys, Fassett et al. (2010), Trek layer Glacial_Valleys_2010",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 102 points with no attributes beyond a symbol; the valleys themselves are published as points, not traces. Same gap as the gullies. Update: Included. 102 points (the catalogue publishes each valley as a point), colour #ffffff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 101 cells.",
+      "finding": "Earlier finding (2026-09-27): 102 points with no attributes beyond a symbol; the valleys themselves are published as points, not traces. Same gap as the gullies. Update: Included. 102 points (the catalogue publishes each valley as a point), color #ffffff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 101 cells.",
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2010.02.021",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/0"
@@ -453,7 +453,7 @@
       "id": "alluvial-fans-moore-kraal",
       "subject": "Large alluvial fans, Moore and Howard (2005) and Kraal et al. (2008), Trek layer FanSurvey_2005_2008",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 44 points (31 and 13) with fan labels, area, relief, gradient and length. Same gap as the gullies; the small named set could also be feature labels, but those appear on the photograph datasets, not as a dataset of their own. Update: Included. 44 points, colour #006633 from jC_fillclr; this dark green sets the underlay brightness (0.4 keeps it 16.6 OKLab units from 95% of the terrain). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 44 cells.",
+      "finding": "Earlier finding (2026-09-27): 44 points (31 and 13) with fan labels, area, relief, gradient and length. Same gap as the gullies; the small named set could also be feature labels, but those appear on the photograph datasets, not as a dataset of their own. Update: Included. 44 points, color #006633 from jC_fillclr; this dark green sets the underlay brightness (0.4 keeps it 16.6 OKLab units from 95% of the terrain). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 44 cells.",
       "evidence": [
         "https://doi.org/10.1029/2004JE002352",
         "https://doi.org/10.1016/j.icarus.2007.09.028",
@@ -464,7 +464,7 @@
       "id": "hydrous-minerals-carter-2013",
       "subject": "Hydrous mineral detections from CRISM and OMEGA, Carter et al. (2013), Trek layer",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 1,648 points (CRISM 1,208 red, OMEGA 440 blue in the layer's attributes). At one cell per point, 177 cells hold both instruments; the rule for a shared cell would have to be declared. Same gap as the gullies. Journal supplement not retrieved (Wiley refused automated access). Update: Included. 1,648 points by instrument, CRISM #ff0000 and OMEGA #0099ff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 1,461 cells; 177 hold both instruments and take a declared shared class (white, ours). Journal supplement not retrieved (Wiley refused automated access).",
+      "finding": "Earlier finding (2026-09-27): 1,648 points (CRISM 1,208 red, OMEGA 440 blue in the layer's attributes). At one cell per point, 177 cells hold both instruments; the rule for a shared cell would have to be declared. Same gap as the gullies. Journal supplement not retrieved (Wiley refused automated access). Update: Included. 1,648 points by instrument, CRISM #ff0000 and OMEGA #0099ff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 1,461 cells; 177 hold both instruments and take a declared shared class (white, ours). Journal supplement not retrieved (Wiley refused automated access).",
       "evidence": [
         "https://doi.org/10.1029/2012JE004145",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer/0"
@@ -474,7 +474,7 @@
       "id": "aqueous-minerals-ehlmann-edwards-2014",
       "subject": "Aqueous mineral distribution, Ehlmann and Edwards (2014), Trek layer",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 4,572 points in five classes (phyllosilicate 3,441, sulfate 387, silica 364, chloride 344, carbonate 36) with per-class colours in the layer's attributes, compiled from CRISM, OMEGA and THEMIS. 11 cells would hold two classes. Same gap as the gullies. Its chloride points overlap the Osterloo deposits, which are included as polygons. Update: Included. 4,572 points in five classes coloured by jC_fillclr (phyllosilicate #0099ff, sulfate #ff6699, silica #9900cc, chloride #ffff00, carbonate #33cc00), the colours the Trek description names. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 2,373 cells; 11 hold two classes and take the shared class (white, ours).",
+      "finding": "Earlier finding (2026-09-27): 4,572 points in five classes (phyllosilicate 3,441, sulfate 387, silica 364, chloride 344, carbonate 36) with per-class colors in the layer's attributes, compiled from CRISM, OMEGA and THEMIS. 11 cells would hold two classes. Same gap as the gullies. Its chloride points overlap the Osterloo deposits, which are included as polygons. Update: Included. 4,572 points in five classes colored by jC_fillclr (phyllosilicate #0099ff, sulfate #ff6699, silica #9900cc, chloride #ffff00, carbonate #33cc00), the colors the Trek description names. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 2,373 cells; 11 hold two classes and take the shared class (white, ours).",
       "evidence": [
         "https://doi.org/10.1146/annurev-earth-060313-055024",
         "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0"
@@ -484,7 +484,7 @@
       "id": "rsl-gullies-new-icy-craters",
       "subject": "RSLs, fresh gullies, new and icy craters, Trek layer compiled from Daubar et al. (2013), Dundas et al. (2014, 2015), McEwen et al. (2014) and Ojha et al. (2014)",
       "status": "included",
-      "finding": "Earlier finding (2026-09-27): 508 HiRISE-located points with planetocentric latitude (LAT_oc): new craters 365, RSL 26 confirmed and 34 partial, active gullies 34, dune gullies 27, icy impact sites 22. The renderer symbols are picture markers per type. Same gap as the gullies. Update: Included as its own dataset, not in the water group: 365 of the 508 sites are new impact craters. Trek draws every type in #d3ffbe and tells them apart by symbol shape, which a cell cannot carry, so the dataset colours the four source catalogues (the layer's Ref field) with our palette, validated all-pairs; a six-type palette failed the normal-vision floor. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 489 cells; 18 hold two catalogues (16 are ice-exposing craters also listed as new craters) and take the shared class (white, ours).",
+      "finding": "Earlier finding (2026-09-27): 508 HiRISE-located points with planetocentric latitude (LAT_oc): new craters 365, RSL 26 confirmed and 34 partial, active gullies 34, dune gullies 27, icy impact sites 22. The renderer symbols are picture markers per type. Same gap as the gullies. Update: Included as its own dataset, not in the water group: 365 of the 508 sites are new impact craters. Trek draws every type in #d3ffbe and tells them apart by symbol shape, which a cell cannot carry, so the dataset colors the four source catalogues (the layer's Ref field) with our palette, validated all-pairs; a six-type palette failed the normal-vision floor. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in gray at 0.35 brightness, 6 bits per channel (raster underlay). 489 cells; 18 hold two catalogues (16 are ice-exposing craters also listed as new craters) and take the shared class (white, ours).",
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2013.04.009",
         "https://doi.org/10.1002/2013JE004482",
@@ -508,7 +508,7 @@
       "id": "catalogue-underlay-brightness",
       "subject": "Underlay brightness for the eleven catalogue datasets (presentation choice)",
       "status": "included",
-      "finding": "One underlay for every catalogue dataset: the Viking colour mosaic as Rec. 709 grey at 0.35 brightness, keeping 6 bits per channel. Grey and 6 bits keep each dataset lossless at about 2.0 MB at the 4,096 x 2,048 bake canvas, against 7.6 MB for the colour mosaic at 0.4 and 3.5 MB for 8-bit grey; 5 bits (1.3 MB) left visible blotches in the dimmed terrain. 0.35 is the brightest 0.05 step at which every legend colour stays at least 15 OKLab units (the dataviz normal-vision floor) from 95% of the grey terrain; the limit is the alluvial-fan green #006633 (15.7 at 0.35, 13.8 at 0.4, 18.0 at 0.3). Measured 2026-09-28 on the Viking MDIM 2.1 colour mosaic resampled to 1,024 x 512.",
+      "finding": "One underlay for every catalogue dataset: the Viking color mosaic as Rec. 709 gray at 0.35 brightness, keeping 6 bits per channel. Gray and 6 bits keep each dataset lossless at about 2.0 MB at the 4,096 x 2,048 bake canvas, against 7.6 MB for the color mosaic at 0.4 and 3.5 MB for 8-bit gray; 5 bits (1.3 MB) left visible blotches in the dimmed terrain. 0.35 is the brightest 0.05 step at which every legend color stays at least 15 OKLab units (the dataviz normal-vision floor) from 95% of the gray terrain; the limit is the alluvial-fan green #006633 (15.7 at 0.35, 13.8 at 0.4, 18.0 at 0.3). Measured 2026-09-28 on the Viking MDIM 2.1 color mosaic resampled to 1,024 x 512.",
       "evidence": [
         "https://trek.nasa.gov/mars/",
         "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
@@ -518,7 +518,7 @@
       "id": "mola-hrsc-blended-dem-200m",
       "subject": "USGS Mars MGS MOLA - MEX HRSC Blended DEM Global 200m, v2 (Fergason et al. 2018), as a replacement for the MOLA 463 m elevation source",
       "status": "excluded",
-      "finding": "No visible gain at the size the app shows. The Elevation view samples a 2,048 x 1,024 grid (drawn nearest onto the 4,096 x 2,048 canvas). Converted to that grid with the same GeoTIFF grid reader as MOLA (native cell under each output centre, no averaging), reading 218.5 MB of the 11.38 GB file by range requests, both maps agree on datum (metres above the areoid; mean difference -0.04 m). Height differences: median 4 m, 90th percentile 34 m, 99th percentile 118 m, largest 1,506 m; the 21 cells over 1 km sit on steep walls (Valles Marineris, crater rims) where the two nearest cells fall at different points. Painted by the app's own science painter on the 4,096 x 2,048 canvas, 10% of texels change by at least one colour level (at most 27 in one channel) and pixelmatch at threshold 0.1 finds 0 differing pixels. The blend would also add HRSC's CC BY-SA 3.0 IGO share-alike terms to this view.",
+      "finding": "No visible gain at the size the app shows. The Elevation view samples a 2,048 x 1,024 grid (drawn nearest onto the 4,096 x 2,048 canvas). Converted to that grid with the same GeoTIFF grid reader as MOLA (native cell under each output centre, no averaging), reading 218.5 MB of the 11.38 GB file by range requests, both maps agree on datum (metres above the areoid; mean difference -0.04 m). Height differences: median 4 m, 90th percentile 34 m, 99th percentile 118 m, largest 1,506 m; the 21 cells over 1 km sit on steep walls (Valles Marineris, crater rims) where the two nearest cells fall at different points. Painted by the app's own science painter on the 4,096 x 2,048 canvas, 10% of texels change by at least one color level (at most 27 in one channel) and pixelmatch at threshold 0.1 finds 0 differing pixels. The blend would also add HRSC's CC BY-SA 3.0 IGO share-alike terms to this view.",
       "revisitWhen": "The Elevation view gets a grid finer than about 1 km per cell, where the HRSC 200 m relief could differ visibly from MOLA.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_mex_hrsc_blended_dem_global_200m",

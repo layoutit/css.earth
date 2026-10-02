@@ -91,7 +91,7 @@ export async function prepareEncounters(sourceDirectory:string, width = 512) {
   const giottoRegistration=JSON.parse(await readFile(resolve(sourceDirectory,'reference/giotto-registration.json'),'utf8'));
   const shapeBytes=await readFile(resolve(sourceDirectory,'shape/1682q1halley.tab'));
   const mesh=parsePdsRadiusTable(shapeBytes.toString(),{stepDegrees:5,longitudeDirection:'east-positive',metersPerUnit:1000,expectedVertices:2522,expectedFaces:5040});
-  const photo=await sharp(resolve(sourceDirectory,'giotto/hmc_best.gif')).toColourspace('srgb').removeAlpha().raw().toBuffer({resolveWithObject:true});
+  const photo=await sharp(resolve(sourceDirectory,'giotto/hmc_best.gif')).toColorspace('srgb').removeAlpha().raw().toBuffer({resolveWithObject:true});
   const giotto=createGiottoSampler(mesh,giottoRegistration,{data:photo.data,...photo.info});
   const vega: {
     id: string;
@@ -171,7 +171,7 @@ export async function prepareEncounters(sourceDirectory:string, width = 512) {
   }
   const png=await sharp(rgb,{raw:{width,height,channels:3}}).png().toBuffer();
   const report={schema:'cssearth-halley-encounter-projection-report@1',
-    interpretation:'Approximate mixed-filter, mixed-date photographic mosaic; original illumination and coma contamination retained. Not albedo or true colour.',
+    interpretation:'Approximate mixed-filter, mixed-date photographic mosaic; original illumination and coma contamination retained. Not albedo or true color.',
     observations:[{id:'giotto',displayGain:1},...vega.map((o,i)=>({id:o.id,filter:o.filter,geometry:o.geometry,outline:o.outline,displayGain:gains[i]}))],
     selection:'Retain every accepted Giotto RGB sample. Else choose the qualified Vega sample with the smallest foreshortening-adjusted pixel size; ties follow observation order.',
     masks:registration.mask,photometricCorrection:'None. Only T11194 receives a fitted relative display gain; this is not a spectral or reflectance calibration.',clippedPixels,

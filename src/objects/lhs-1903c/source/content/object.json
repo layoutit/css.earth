@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by LHS 1903; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by LHS 1903; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "lhs-1903c-dataset-shape.webp",
         "surface": "lhs-1903c-surface-shape@2x.webp",
         "poles": "lhs-1903c-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of LHS 1903 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of lhs-1903's light, as its colour dataset measures it."
+        "notes": "No image or color of LHS 1903 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of lhs-1903's light, as its color dataset measures it."
       }
     ]
   },

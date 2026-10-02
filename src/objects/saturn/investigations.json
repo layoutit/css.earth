@@ -6,7 +6,7 @@
       "id": "opal-cycle32-visible-map",
       "subject": "Hubble OPAL Cycle 32 rotation-A global map of 2025-08-29",
       "status": "included",
-      "finding": "The body map is the archive's 1,800 by 900 F395N/F502N/F631N composite, resampled with a Lanczos-3 kernel to the 2,880 by 1,440 grid and retained byte-identical under the package's observations directory, with the declared solar colour applied in linear light.",
+      "finding": "The body map is the archive's 1,800 by 900 F395N/F502N/F631N composite, resampled with a Lanczos-3 kernel to the 2,880 by 1,440 grid and retained byte-identical under the package's observations directory, with the declared solar color applied in linear light.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/source/manifest.json",
         "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
@@ -43,11 +43,11 @@
       ]
     },
     {
-      "id": "radial-ring-colour",
-      "subject": "Radius-indexed ring colour dataset",
+      "id": "radial-ring-color",
+      "subject": "Radius-indexed ring color dataset",
       "status": "unresolved",
-      "finding": "No qualified radial colour dataset exists: the Cassini ISS natural-colour ring mosaics in the Photojournal are perspective views rather than radius-indexed strips, so the ring colour is uniform white under the declared solar tint.",
-      "revisitWhen": "A radius-indexed ring colour or reflectance profile is released.",
+      "finding": "No qualified radial color dataset exists: the Cassini ISS natural-color ring mosaics in the Photojournal are perspective views rather than radius-indexed strips, so the ring color is uniform white under the declared solar tint.",
+      "revisitWhen": "A radius-indexed ring color or reflectance profile is released.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L112"
       ]
@@ -56,7 +56,7 @@
       "id": "opal-uv-and-methane-datasets",
       "subject": "Hubble OPAL F225W and FQ889N single-band maps",
       "status": "included",
-      "finding": "The ultraviolet and methane datasets use the pinned 1,800 by 900 single-band maps, keeping rotation A intact rather than averaging temporally separated cloud detail with rotation B, filling only unmeasured polar and ring-occluded rows in the same longitude, applying a declared false-colour palette and a pansharpening pass clamped to 0.88-1.12 so the Hubble maps keep authority over broad spectral luminance; they are source-backed spectral interpretations, not pure single-band products or natural colour.",
+      "finding": "The ultraviolet and methane datasets use the pinned 1,800 by 900 single-band maps, keeping rotation A intact rather than averaging temporally separated cloud detail with rotation B, filling only unmeasured polar and ring-occluded rows in the same longitude, applying a declared false-color palette and a pansharpening pass clamped to 0.88-1.12 so the Hubble maps keep authority over broad spectral luminance; they are source-backed spectral interpretations, not pure single-band products or natural color.",
       "evidence": [
         "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
       ]
@@ -65,7 +65,7 @@
       "id": "hubble-ring-frames",
       "subject": "Hubble WFC3 programme 17843 ring frames of 2025-08-29",
       "status": "excluded",
-      "finding": "The ultraviolet, methane and thermal ring images recoloured the UVIS profile with hand-set per-ring gains that were only compared by eye with ifcu37ccq (F225W), ifcu37cdq (F631N) and ifcu37ceq (FQ889N); no ring brightness was measured from those frames, so the images were removed and every dataset shows the one measured ring profile.",
+      "finding": "The ultraviolet, methane and thermal ring images recolored the UVIS profile with hand-set per-ring gains that were only compared by eye with ifcu37ccq (F225W), ifcu37cdq (F631N) and ifcu37ceq (FQ889N); no ring brightness was measured from those frames, so the images were removed and every dataset shows the one measured ring profile.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#rings"
       ],
@@ -115,7 +115,7 @@
       "id": "mankovich-fuller-interior",
       "subject": "Mankovich and Fuller (2021) diffuse-core result and Movshovitz density profiles",
       "status": "included",
-      "finding": "The interior radial presentation follows the 2021 ring-seismology diffuse-core interpretation, which places the stable core-envelope transition out to about 60 percent of Saturn's radius, cross-checked against the CC0 Movshovitz density profiles, with composition and terminology checked against the NASA/JPL-Caltech interior cutaway illustration and no pixels from it redistributed; the visible radii and colours are declared presentation choices, not hard boundaries or measured colours.",
+      "finding": "The interior radial presentation follows the 2021 ring-seismology diffuse-core interpretation, which places the stable core-envelope transition out to about 60 percent of Saturn's radius, cross-checked against the CC0 Movshovitz density profiles, with composition and terminology checked against the NASA/JPL-Caltech interior cutaway illustration and no pixels from it redistributed; the visible radii and colors are declared presentation choices, not hard boundaries or measured colors.",
       "evidence": [
         "https://doi.org/10.1038/s41550-021-01448-3",
         "https://doi.org/10.7291/D1P07G"
@@ -125,7 +125,7 @@
       "id": "interior-shared-schematic-bank",
       "subject": "One schematic bank for the interior layers",
       "status": "included",
-      "finding": "The structural section, metallic-hydrogen and diffuse-core textures share one schematic bank because none of the observation datasets measures below Saturn's atmosphere, and the declared false-colour responses of the other datasets do not recolour the unobserved deep layers.",
+      "finding": "The structural section, metallic-hydrogen and diffuse-core textures share one schematic bank because none of the observation datasets measures below Saturn's atmosphere, and the declared false-color responses of the other datasets do not recolor the unobserved deep layers.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L232"
       ]
@@ -161,8 +161,8 @@
       ]
     },
     {
-      "id": "solar-colour-multiplier",
-      "subject": "Prepared 5,772 K solar colour multiplier",
+      "id": "solar-color-multiplier",
+      "subject": "Prepared 5,772 K solar color multiplier",
       "status": "included",
       "finding": "The #fff1ea multiplier is derived from a 5,772 K Planck distribution, taken from NASA's Sun fact sheet, through the CIE 1931 observer and linear sRGB/D65 normalized by its maximum channel and multiplied into the surface texels once during preparation; the README calls it a declared colorimetric display approximation, not flat white light or a full spectral renderer.",
       "evidence": [
@@ -229,7 +229,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Hubble OPAL Minnaert coefficients of the colour map per channel (red F631N 0.80, green F502N 0.65, blue F467M 0.86), the correction OPAL removed before projection, put back relative to the flood-lit disc centre. Blue took F395N's 0.40 until 2026-09-25; see opal-f467m-blue-limb.",
+      "finding": "Hubble OPAL Minnaert coefficients of the color map per channel (red F631N 0.80, green F502N 0.65, blue F467M 0.86), the correction OPAL removed before projection, put back relative to the flood-lit disc centre. Blue took F395N's 0.40 until 2026-09-25; see opal-f467m-blue-limb.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
       ]
@@ -244,7 +244,7 @@
     },
     {
       "id": "authored-limb-lighting",
-      "subject": "Authored limb lighting: pearl-blue limb colour, Oren-Nayar term, 0.05 ambient and smoothstep terminator adapted from OpenSpace",
+      "subject": "Authored limb lighting: pearl-blue limb color, Oren-Nayar term, 0.05 ambient and smoothstep terminator adapted from OpenSpace",
       "status": "excluded",
       "finding": "Replaced by the OPAL Minnaert laws of the map.",
       "evidence": [
@@ -253,10 +253,10 @@
       "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
-      "id": "karkoschka-whole-disc-colour",
-      "subject": "Colour tie of the OPAL visible map to Karkoschka's 1995 whole-disc spectrum",
+      "id": "karkoschka-whole-disc-color",
+      "subject": "Color tie of the OPAL visible map to Karkoschka's 1995 whole-disc spectrum",
       "status": "included",
-      "finding": "The OPAL colour TIF is arbitrarily scaled per channel and rendered 1.4 times too blue (map mean blue/red 0.65 in linear light). Karkoschka's full-disc albedo of Saturn (phase 5.7 degrees, rings edge-on, PDS 1995LOW.TAB) times a 5,772 K Planck spectrum through the CIE 1931 observer gives linear sRGB 0.6168, 0.4713, 0.2982 (#ceb794), green/red 0.7640 and blue/red 0.4834. Divided by the limb law's disc means (0.7694, 0.8698, 0.7354) the map targets are green/red 0.6759 and blue/red 0.5057; the solar-tinted map measured 0.9272 and 0.6953 (cosine-weighted, linear), so the gains are red 1, green 0.729, blue 0.7273. The swatch's independent Payne et al. (2026) spectrum agrees under a D65 white: green/red 0.863 and blue/red 0.589 against Karkoschka's 0.863 and 0.593.",
+      "finding": "The OPAL color TIF is arbitrarily scaled per channel and rendered 1.4 times too blue (map mean blue/red 0.65 in linear light). Karkoschka's full-disc albedo of Saturn (phase 5.7 degrees, rings edge-on, PDS 1995LOW.TAB) times a 5,772 K Planck spectrum through the CIE 1931 observer gives linear sRGB 0.6168, 0.4713, 0.2982 (#ceb794), green/red 0.7640 and blue/red 0.4834. Divided by the limb law's disc means (0.7694, 0.8698, 0.7354) the map targets are green/red 0.6759 and blue/red 0.5057; the solar-tinted map measured 0.9272 and 0.6953 (cosine-weighted, linear), so the gains are red 1, green 0.729, blue 0.7273. The swatch's independent Payne et al. (2026) spectrum agrees under a D65 white: green/red 0.863 and blue/red 0.589 against Karkoschka's 0.863 and 0.593.",
       "evidence": [
         "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl",
         "https://doi.org/10.1006/icar.1998.5913",
@@ -265,8 +265,8 @@
       ]
     },
     {
-      "id": "map-mean-colour-tie",
-      "subject": "Tying the map's own mean colour, rather than the lit disc, to Karkoschka's whole-disc colour",
+      "id": "map-mean-color-tie",
+      "subject": "Tying the map's own mean color, rather than the lit disc, to Karkoschka's whole-disc color",
       "status": "excluded",
       "finding": "Karkoschka measured the disc with its limb darkening; OPAL divided each filter's darkening out and the overlay puts it back per channel, so a map mean tied straight to the whole-disc ratios (gains green 0.824, blue 0.6952) renders a disc of green/red 0.856 instead of 0.764 and an olive limb (a* -5 at 0.85-0.95 of the radius) in a preview built with the lane's own surface and limb code.",
       "evidence": [
@@ -279,14 +279,14 @@
       "id": "opal-f467m-blue-limb",
       "subject": "Minnaert coefficient for the visible map's blue channel",
       "status": "included",
-      "finding": "The blue channel uses F467M's k 0.86 from the OPAL Cycle 32 README table (\"F467M 0.86 .00507\"), the README filter closest to the sRGB blue primary. F395N's 0.40 is violet light that carries 13 % of the true-colour blue channel in Saturn's sunlit spectrum; with it the limb brightened in blue and turned grey-blue (b* -16 at the rim, 0.95-0.99 of the radius) in the app. The map's blue data are still F395N.",
+      "finding": "The blue channel uses F467M's k 0.86 from the OPAL Cycle 32 README table (\"F467M 0.86 .00507\"), the README filter closest to the sRGB blue primary. F395N's 0.40 is violet light that carries 13 % of the true-color blue channel in Saturn's sunlit spectrum; with it the limb brightened in blue and turned gray-blue (b* -16 at the rim, 0.95-0.99 of the radius) in the app. The map's blue data are still F395N.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
       ]
     },
     {
       "id": "tied-map-luminance",
-      "subject": "Brightness of the colour-tied visible map",
+      "subject": "Brightness of the color-tied visible map",
       "status": "included",
       "finding": "The tie keeps red and lowers green and blue, so the map lost a fifth of its cosine-weighted luminance (0.426 to 0.337) and Saturn looked brown in the app (whole-disc Y 0.315 against 0.409 on main). The tied map now gets back its untied mean luminance with one factor on all three channels, 1.264, then a soft shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), on each texel's brightest channel, all channels by the same amount: 4.35 % of texels, none clipped, ratios kept. The factor alone clips red on 0.5 % of texels; the largest factor that clips nothing, 1.085, leaves the whole disc at Y 0.326. Chosen by the user on a preview built with the lane's own code, 2026-09-25.",
       "evidence": [
@@ -295,7 +295,7 @@
     },
     {
       "id": "opal-dated-visible-maps",
-      "subject": "Dated Hubble OPAL visible-colour sequence (8 rotations)",
+      "subject": "Dated Hubble OPAL visible-color sequence (8 rotations)",
       "status": "included",
       "finding": "One publisher RGB composite per included cycle, component FITS coverage, source-backed map frame and observation dates. Gray grid preserves missing coverage. Current scene lighting and rings remain a presentation, not the historical observing geometry. See the Hubble dates section of the README.",
       "evidence": [

@@ -1,7 +1,7 @@
 # Pinwheel Galaxy (M101)
 
-A ground-based photograph of M101, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, lies flat on its measured disc. Published catalogues of its HII regions, old star clusters,
+A ground-based photograph of M101, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, lies flat on its measured disc. Published catalogues of its HII regions, old star clusters,
 supernova remnants and planetary nebulae are drawn as dots on the same disc. Image brightness does not measure per-pixel
 distance.
 
@@ -31,7 +31,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   as stated. The stars then fall 1.1 px (median) from their images.
 - **Foreground stars:** 395 of the 679 Gaia foreground stars in the image are removed where they show; 100 on the
   galaxy's light are left.
-- **Colour:** tied to RC3's B-V of 0.45: red/green 1.299 and blue/green 1.035 against 1.037 and 1.037, so red × 0.798
+- **Color:** tied to RC3's B-V of 0.45: red/green 1.299 and blue/green 1.035 against 1.037 and 1.037, so red × 0.798
   and blue × 1.002. in linear light. The publisher's composite ran red, its H-alpha in pink.
 - **Disc:** inclination 18°, line of nodes 219°, support 29.2 kpc (where the frame stops on its tightest side), drawn as one flat image on the midplane. No bulge: S4G's bulge is flattened on the sky (axis ratio 0.59), which
   an oblate spheroid in a disc tilted 18° cannot be, and it holds 5% of the light. [Kormendy et al. (2010)](https://arxiv.org/abs/1009.3015) find a
@@ -52,9 +52,9 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | Supernova remnants (Vučetić et al. 2015) | 73 | none |
 | Planetary nebulae (Feldmeier et al. 1997) | 65 | none |
 
-Dots keep their place in the disc and rise along its axis to heights drawn from the 568 pc layer. Colours are the Milky
+Dots keep their place in the disc and rise along its axis to heights drawn from the 568 pc layer. Colors are the Milky
 Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and
-moves halfway from its kind's colour to the photograph's colour there. The brighter clusters belong to the halo, so on
+moves halfway from its kind's color to the photograph's color there. The brighter clusters belong to the halo, so on
 the disc their places are approximate.
 
 ## Evidence
@@ -64,7 +64,7 @@ the disc their places are approximate.
 The M101 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-01: the default
 arrival, then the camera turned to the side and to above the disc.
 
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Measured, chosen and inferred
 
@@ -77,7 +77,7 @@ arrival, then the camera turned to the side and to above the disc.
 | Near side at 309° | Inferred: trailing arms and the receding side |
 | B-V 0.45 | Measured: RC3 |
 | Support 29.2 kpc, fade from 21.9 kpc | Presentation: where the frame stops |
-| One flat image, 1,024 px on its face, background floor, face size, dot colours and tones | Presentation |
+| One flat image, 1,024 px on its face, background floor, face size, dot colors and tones | Presentation |
 
 ## Known problems
 

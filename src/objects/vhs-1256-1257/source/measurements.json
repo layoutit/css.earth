@@ -11,6 +11,6 @@
   "effectiveTemperatureSource": "2700 K: the best-fitting BT-Settl model to the pair's combined spectrum, Dupuy et al. (2023, MNRAS 519, 1688), section 4, https://arxiv.org/abs/2208.08448",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published model radius. The star's disc is not resolved; its colour is a blackbody at the published temperature."
+    "qualification": "A sphere at the published model radius. The star's disc is not resolved; its color is a blackbody at the published temperature."
   }
 }

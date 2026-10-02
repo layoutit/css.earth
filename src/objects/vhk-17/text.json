@@ -14,7 +14,7 @@
     ]
   },
   "introduction": {
-    "text": "The Hubble Space Telescope measured its brightness in three colours; its pulsation takes 23.3 days. Its galaxy's distance, 840 kiloparsecs, was measured from Cepheids like it.",
+    "text": "The Hubble Space Telescope measured its brightness in three colors; its pulsation takes 23.3 days. Its galaxy's distance, 840 kiloparsecs, was measured from Cepheids like it.",
     "sources": [
       {
         "catalogueId": "arxiv-2304-00037",
@@ -27,9 +27,9 @@
   },
   "datasets": {
     "color": {
-      "title": "Colour",
+      "title": "Photosphere color",
       "detail": "From its temperature",
-      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
     }
   }
 }

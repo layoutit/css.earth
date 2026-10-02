@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.892 +/- 0.026 solar radii from Southworth et al. 2016, the stellar radius of the default parameter set of WASP-42 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract); Mass 0.951 +/- 0.063 solar masses from Southworth et al. 2016, the stellar mass of the default parameter set of WASP-42 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract); temperature from Southworth et al. 2016, the stellar temperature of the default parameter set of WASP-42 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 6139698733664726784, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 6139698733664726784, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

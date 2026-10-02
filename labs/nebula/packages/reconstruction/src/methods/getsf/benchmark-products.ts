@@ -14,7 +14,7 @@ export type ComponentMaps = Record<'diffuse' | 'compact' | 'elongated' | 'residu
 /** The frozen benchmark crop, checked by its declared native dimensions. */
 export async function readBenchmarkImage(path: string, width: number, height: number): Promise<BenchmarkImage> {
   const bytes = await readFile(path);
-  const { data: rgb, info } = await sharp(bytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const { data: rgb, info } = await sharp(bytes).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== width || info.height !== height || info.channels !== 3)
     throw new Error(`Benchmark source ${path} is ${info.width}×${info.height}×${info.channels}, not ${width}×${height}×3.`);
   const luminance = new Float32Array(width * height);

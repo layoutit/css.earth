@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.484 +/- 0.0084 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 526: radius in solar radii, 0.484 +/- 0.0084, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112); Mass 0.52 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 526: mass 0.52 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); temperature from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 526: effective temperature in K, 3618 +/- 31, from this work (CHARA).
 
-Colour: Gaia DR3 XP spectrum, source 3741297293732404352, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 3741297293732404352, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

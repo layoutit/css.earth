@@ -8,7 +8,7 @@ It is the only planet known around MASCARA-4. Its orbit and size follow Zhang et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.8240691 d Zhang et al. 2022 (2022A&A...666A..47Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL__2022): a/R* 5.704; Zhang et al. 2022 (2022A&A...666A..47Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL__2022): inclination 86.89 degrees Dorval et al. 2020 (2020A&A...635A..60D), via the NASA Exoplanet Archive ps table (pl_refname DORVAL_ET_AL__2020): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459358.688506 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by mascara-4's measured colour (#c8d6ff, the colour dataset of mascara-4 (src/objects/mascara-4/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by mascara-4's measured color (#c8d6ff, the color dataset of mascara-4 (src/objects/mascara-4/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of MASCARA-4's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (38, 63, 90), folded onto its orbit. Upper limits and rows without an error are left out.
 

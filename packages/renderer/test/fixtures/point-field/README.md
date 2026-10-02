@@ -2,7 +2,7 @@
 
 The 255 rows sample the stellar neighbourhood bank: every 684th prepared row,
 all 96 coverage anchors and Sirius. Source-row ids are remapped to a dense local
-range; positions, decoded magnitudes, colours and names retain their source values.
+range; positions, decoded magnitudes, colors and names retain their source values.
 The hierarchy and 16,384-byte bank were prepared with the bake encoder and an
 eight-row leaf limit. `stars.bin` is that bank packed as the site publishes it
 (`@cssearth/objects` prepared-binary.ts); the manifest pins the unpacked bytes. The manifest counts agree with the bank. The fixture follows the current prepared-object schema (no direct-point pool) and was regenerated from the inventory-listed stellar neighbourhood data.

@@ -13,6 +13,6 @@
   "surfaceGravitySource": "log g 2.38 from 2021MNRAS.506..150B (GALAH DR3, a survey pipeline: no analysis of this star's own spectra is published); the 2 published values span log g 1.9191 to 2.3848, across which the limb law changes by at most 0.4% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2021MNRAS.506..150B)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
   }
 }

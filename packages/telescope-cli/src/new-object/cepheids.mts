@@ -3,7 +3,7 @@
  * 36 LMC and 6 SMC Cepheids (VizieR J/A+A/550/A70, table10). Its uncertainties are the paper's Monte-Carlo ones.
  *
  * The paper gives no temperature or mass: the draft leaves them out and names them, and the spec parser refuses it until a person
- * cites them. Its colour is the Planck spectrum at that temperature, because the paper's E(B-V) reddens every spectrum of the star
+ * cites them. Its color is the Planck spectrum at that temperature, because the paper's E(B-V) reddens every spectrum of the star
  * and its light changes through the pulsation. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
 

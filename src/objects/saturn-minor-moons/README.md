@@ -20,13 +20,13 @@ The dots are the app's catalogue dots: not clickable and not named. A moon with 
 
 ## Evidence
 
-![The Saturn system from 14 million km: the paged moons named, the others as 2 px grey dots](evidence/2026-10-01/saturn-system.webp)
+![The Saturn system from 14 million km: the paged moons named, the others as 2 px gray dots](evidence/2026-10-01/saturn-system.webp)
 
 A headless capture of this version's Saturn system overview. The bank reported 96 of its 245 dots inside this view and 25 inside Saturn's default view. The positions run from 4.7 to 36.9 million km from Saturn.
 
 ## Known problems
 
 - S/2009 S1 and S/2009 S2 have no Horizons ephemeris and are not drawn.
-- No colour is measured for these moons. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured colour (`NEUTRAL_CATALOGUE_COLOUR`); no group or family colouring is applied.
+- No color is measured for these moons. Every dot is `#9a9a9a`, the one neutral gray the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`); no group or family coloring is applied.
 - The 2 px dot size is a display choice, picked so the moons stand out from background stars. The moons are a few kilometres across and would be invisible at scale.
 - The positions hold for the world's one epoch; the dots do not move.

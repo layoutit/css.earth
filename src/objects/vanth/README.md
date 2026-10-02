@@ -24,6 +24,6 @@ No dated test report exists for this body yet.
 
 ## Known problems
 
-The body is drawn as a sphere with the shared grid that marks unmapped terrain. Its true shape, pole, rotation, colour and albedo pattern are not published, and none is shown. The radius is the approximate header value of the orbit solution, not a measurement cited to a paper here.
+The body is drawn as a sphere with the shared grid that marks unmapped terrain. Its true shape, pole, rotation, color and albedo pattern are not published, and none is shown. The radius is the approximate header value of the orbit solution, not a measurement cited to a paper here.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

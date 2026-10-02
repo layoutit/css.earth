@@ -73,7 +73,7 @@ test('pooled level matching gives every observation one gain from all boundary s
   const g = new Map<string, ColorBand[]>([observation('fine', [0, 180], [0.5, 0.4, 0.3], 0, 1), observation('coarse', [0, 200], [0.5, 0.4, 0.3], 100, 2)]);
   // Enough texels that one outlier is far below the 0.1 % the pooled clamp lets clip.
   const width = 720, height = 360, result = compose(g, { withheld: 'next-observation' }, width, height);
-  // A base twice as bright as the colour everywhere; one texel of the fine footprint is a bright outlier.
+  // A base twice as bright as the color everywhere; one texel of the fine footprint is a bright outlier.
   const base = { rgb: new Uint8Array(width * height * 3).fill(Math.round(255 * linearToSrgb(0.9))), missing: new Uint8Array(width * height) };
   const outlier = 180 * width + 50; result.rgb[outlier * 3] = 5;
   const perObservation = structuredClone(result);
@@ -85,14 +85,14 @@ test('pooled level matching gives every observation one gain from all boundary s
   assert.ok(pooled.every(level => level.pooled && level.clippedPixels! >= 1 && level.clippedPixels! < 5), 'only the outlier clips');
 });
 
-test('a band sample at or below zero is sky or a frame border, so the texel is never coloured', () => {
+test('a band sample at or below zero is sky or a frame border, so the texel is never colored', () => {
   const dark = new Map<string, ColorBand[]>([observation('fine', [0, 180], [0.5, 0.5, -0.01], 0, 1), observation('coarse', [0, 180], [0.5, 0.5, 0.5], 90, 2)]);
   const result = compose(dark);
   assert.equal(result.photometry.observations.fine!.correctedPixels, 0, 'the fine observation has no complete positive sample');
   assert.ok(ownerAt(result, 100) === 2, 'the coarse observation owns the texel instead');
 });
 
-test('band ratios scale the named bands so the footprint means meet the published whole-disc colour, and report both', () => {
+test('band ratios scale the named bands so the footprint means meet the published whole-disc color, and report both', () => {
   const result = compose(new Map<string, ColorBand[]>([observation('fine', [0, 180], [0.5, 0.4, 0.45], 0, 1)]),
     { bandRatios: { reference: FILTERS[0]!, ratios: { [FILTERS[1]!]: 1.0, [FILTERS[2]!]: 0.92 }, source: 'published' } });
   const tie = result.photometry.bandRatios!;

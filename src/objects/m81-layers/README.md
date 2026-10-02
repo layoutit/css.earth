@@ -1,7 +1,7 @@
 # Bode's Galaxy (M81)
 
-A ground-based photograph of M81, cleaned of the Milky Way stars in front of it and colour-tied to its measured integrated
-colour, is spread through a modelled disc and a round bulge. Published catalogues of its planetary nebulae, globular
+A ground-based photograph of M81, cleaned of the Milky Way stars in front of it and color-tied to its measured integrated
+color, is spread through a modelled disc and a round bulge. Published catalogues of its planetary nebulae, globular
 clusters and supernova remnants are drawn as dots on the same disc. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -29,7 +29,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   from the two cores; bright Gaia stars then land on their images.
 - **Foreground stars:** 1,343 of the 1,585 Gaia foreground stars in the image are removed where they show; 61 on
   extended light are left.
-- **Colour:** tied to RC3's B-V of 0.95: red/green 0.960 and blue/green 0.853 against 1.328 and 0.776, so red × 1.383
+- **Color:** tied to RC3's B-V of 0.95: red/green 0.960 and blue/green 0.853 against 1.328 and 0.776, so red × 1.383
   and blue × 0.909 in linear light. The publisher's composite had run green.
 - **Bulge:** S4G's fit splits the light; its bulge becomes an oblate spheroid with intrinsic axis ratio 0.47 (the one that
   projects to 0.654 at 59°), so seen from above it stays round. The fit's bulge falls off more slowly than its disc and
@@ -48,13 +48,13 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | Supernova remnants (Vučetić et al. 2015) | 41 | none |
 
 Dots keep their place in the disc and rise along its axis to heights drawn from the 368 pc layer; old objects near the
-centre are bulge members with the bulge's share of the light. Colours are the Milky Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and moves halfway from its kind's colour to the photograph's colour there, so dots sit in the galaxy's light instead of on it; flat tints read as dark specks on the bright bulge. Globular clusters belong to the halo, so on the disc their places are
+centre are bulge members with the bulge's share of the light. Colors are the Milky Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and moves halfway from its kind's color to the photograph's color there, so dots sit in the galaxy's light instead of on it; flat tints read as dark specks on the bright bulge. Globular clusters belong to the halo, so on the disc their places are
 approximate.
 
 ## Evidence
 
-- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
-- The prepared bank's `approximation.limitations` records the foreground, colour-tie and saturation counts quoted above.
+- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and color taken from the photograph. Captured on this branch on 2026-09-29.
+- The prepared bank's `approximation.limitations` records the foreground, color-tie and saturation counts quoted above.
 - Bytes: 150 layer images, 1.47 MB.
 - Tests: `packages/bake/src/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
 

@@ -43,7 +43,7 @@ test("context markers keep a complete disc without inventing missing terrain", a
 });
 
 test("rejects unsafe recipes and drifted source bytes", async (context) => {
-  for (const origin of ["Hubble OPAL colour map", "https://", "file:///local", "javascript:alert(1)"]) {
+  for (const origin of ["Hubble OPAL color map", "https://", "file:///local", "javascript:alert(1)"]) {
     assert.throws(() => validateMarkerDescriptor({ ...marsMarker, source: { ...marsMarker.source, origin } }), /source/u);
   }
   assert.throws(() => validateMarkerDescriptor({

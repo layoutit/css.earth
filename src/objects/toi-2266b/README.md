@@ -8,7 +8,7 @@ It is the only planet known around TOI-2266. Its orbit and size follow Parviaine
 
 **Orbit.** Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): P 2.326318 d Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): a/R* 18.43; Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): inclination 88.51 degrees No archive row states an eccentricity; the orbit is taken as circular Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): transit mid-time 2459255.6948195 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2266's measured colour (#ffcc80, the colour dataset of toi-2266 (src/objects/toi-2266/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-2266's measured color (#ffcc80, the color dataset of toi-2266 (src/objects/toi-2266/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2266's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (52, 78, 79), folded onto its orbit. Upper limits and rows without an error are left out.
 

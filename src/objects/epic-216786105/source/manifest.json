@@ -89,7 +89,7 @@
       "origin": "https://doi.org/10.1051/0004-6361/202346196",
       "credit": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 216786105: GALAH DR3 effective temperature 4665.3467 +/- 130 K (the catalogue's final uncertainty); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the published temperature and the colour computation applied",
+      "acquisition": "Authored method record: names the published temperature and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -97,7 +97,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the cited temperature; repinned when edited."
+        "reason": "Project-authored color recipe naming the cited temperature; repinned when edited."
       }
     },
     {
@@ -157,7 +157,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1051/0004-6361/202346196",
-      "credit": "The colour dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -173,7 +173,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

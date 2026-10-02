@@ -8,7 +8,7 @@ It is the only planet known around Kepler-736. Its orbit and size follow Morton 
 
 **Orbit.** Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 3.60147889 d Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): a/R* derived by Kepler's third law from its period 3.60147201 d, stellar mass 0.86 and radius 0.81 solar units; Q1-Q8 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q8_KOI_TABLE): inclination 88.81 degrees Q1-Q8 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q8_KOI_TABLE): e 0 Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454965.37354 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by kepler-736's measured colour (#ffe9d7, the colour dataset of kepler-736 (src/objects/kepler-736/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by kepler-736's measured color (#ffe9d7, the color dataset of kepler-736 (src/objects/kepler-736/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of Kepler-736's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
 

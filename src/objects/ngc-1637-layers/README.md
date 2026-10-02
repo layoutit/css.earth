@@ -1,7 +1,7 @@
 # NGC 1637
 
-An observatory photograph of NGC 1637, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no
+An observatory photograph of NGC 1637, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no
 dots. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -22,7 +22,7 @@ dots. Image brightness does not measure per-pixel distance.
   27 of the 32 Gaia stars in the frame have a star within 4 px, and Leroy et al.'s centre lands on the nucleus.
 - **Foreground stars:** 22 of the 41 Gaia foreground stars in the image are removed where they show; 18 on extended
   light are left.
-- **Colour:** tied to RC3's B-V of 0.64: red/green 1.071 and blue/green 1.031 against 1.116 and 0.900, so red × 1.042
+- **Color:** tied to RC3's B-V of 0.64: red/green 1.071 and blue/green 1.031 against 1.116 and 0.900, so red × 1.042
   and blue × 0.873 in linear light.
 - **Disc:** inclination 31.1°, line of nodes 20.6°, drawn as one flat image on the midplane. The
   support radius, 8.5 kpc, is where the frame stops on its tightest side; the image's ring median reaches its sky level
@@ -44,7 +44,7 @@ The NGC 1637 page in headless Chromium at 1440 × 900, device pixel ratio 2, on 
 arrival, then the camera turned toward the side and to above the disc, by the same drags as the other galaxies; at
 this tilt the side drag does not reach edge-on.
 
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Measured, chosen and inferred
 

@@ -2,7 +2,7 @@ import { isRecord as coreIsRecord } from '@cssearth/core';
 import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees, type SolarGeometry } from '../scene/index.ts';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
-// keeps `readObservation`, `loadScienceSurface`/`paintScienceSurface`, the mosaic and observed-colour
+// keeps `readObservation`, `loadScienceSurface`/`paintScienceSurface`, the mosaic and observed-color
 // preparers. Every branch returns finished
 // RGB(A) pixels at the requested density plus the `nearest` flag the packer needs.
 import { resolve } from 'node:path';
@@ -123,7 +123,7 @@ export function parseSynopticRecipe(value: unknown): SynopticRecipe {
     if (!input.continuum?.frames.length) throw new TypeError('An HMI continuum mosaic names its frames, their keywords and its limb-darkening pair.');
     return { source: { kind: 'hmi-continuum-mosaic', ...input.continuum }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
   }
-  if (!input.fits) throw new TypeError('A FITS synoptic map declares its FITS geometry and colour transform.');
+  if (!input.fits) throw new TypeError('A FITS synoptic map declares its FITS geometry and color transform.');
   if (input.fits.missingCoverage && input.polarStabilization) throw new TypeError('Marked FITS gaps cannot use polar continuation.');
   if (input.limb.mode === 'continuum-darkening') throw new TypeError('Continuum limb darkening needs the continuum mosaic source.');
   return { source: { kind: 'fits-map', fits: input.fits }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
@@ -237,7 +237,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     return pending;
   };
 
-  /** A controlled mosaic at one density, cached, so a colour dataset can use it as its monochrome base. */
+  /** A controlled mosaic at one density, cached, so a color dataset can use it as its monochrome base. */
   const mosaics = new Map<string, Promise<{ rgb: Uint8Array; missing: Uint8Array }>>();
   const mosaic = (surface: Surface, width: number, height: number) => {
     const key = `${surface.id}@${width}x${height}`;
@@ -350,7 +350,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const photometry = photometryRecipe ? { profile: photometryRecipe.profile, geometry: await loadControlledObservationGeometry({ sourceDirectory, entries: (await source.validateGroup(photometryRecipe.consumer)).map(shape({ path: text, id: text, imageId: text })), vectors: photometryRecipe.vectors }) } : null;
         const color = await prepareObservedColor({ sourceDirectory, entries: await source.validateGroup(plan.consumer), profile: recipe.profile, width, height, photometry });
         const baseSurface = surfaces.get(plan.monochromeBase);
-        if (!baseSurface?.science) throw new TypeError(`${objectId}/${surface.id}: colour base ${plan.monochromeBase} is not a science surface.`);
+        if (!baseSurface?.science) throw new TypeError(`${objectId}/${surface.id}: color base ${plan.monochromeBase} is not a science surface.`);
         const base = baseSurface.science.kind === 'terrestrial-mosaic' ? await mosaic({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height)
           : await observation({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height);
         if (photometry && !('owners' in color)) throw new Error('Corrected color has no observation ownership.');
@@ -414,10 +414,10 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         return { data, channels: 4, nearest: false };
       }
       case 'neutral-shape': {
-        // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.
+        // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured color.
         // The surface source names the authored record that states this, so the manifest still binds the dataset.
-        // Under `hostLight`, the gray keeps its brightness and takes the chromaticity of the host star's measured colour: a
-        // neutral reflector under its own star's light instead of under a white lamp. The host's colour dataset is the source.
+        // Under `hostLight`, the gray keeps its brightness and takes the chromaticity of the host star's measured color: a
+        // neutral reflector under its own star's light instead of under a white lamp. The host's color dataset is the source.
         const gray = surface.science.hostLight === undefined ? [128, 128, 128] as const : hostLitGray(requireString(requireRecord(surface.science.hostLight, 'science.hostLight').srgb, 'science.hostLight.srgb'));
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) { data[offset] = gray[0]; data[offset + 1] = gray[1]; data[offset + 2] = gray[2]; data[offset + 3] = 255; }
@@ -466,47 +466,47 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
             meaning: 'The image\'s light around the shadow on the display stretch; alpha is the light as a fraction of the stretch top, as a linear brightness image shows it. Inside the silhouette the plate is hidden by the sphere.' } } };
       }
       case 'disc-integrated-color': {
-        // An unresolved surface painted with its published whole-disc colour and geometric albedo: one measured mean, no map.
+        // An unresolved surface painted with its published whole-disc color and geometric albedo: one measured mean, no map.
         const source = await manifest;
         const color = await loadDiscIntegratedColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
           surface.science, surface.source, readCie1931ColorMatching);
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         return { data, channels: 4, nearest: true, report: { discIntegratedColor: { srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance,
-          meaning: 'Whole-disc colour and V geometric albedo from published photometry, uniform over the body; not a resolved surface map.' } } };
+          meaning: 'Whole-disc color and V geometric albedo from published photometry, uniform over the body; not a resolved surface map.' } } };
       }
       case 'disc-integrated-band-color': {
-        // An unresolved body painted with one false colour from its published flux densities in three infrared bands.
+        // An unresolved body painted with one false color from its published flux densities in three infrared bands.
         const source = await manifest;
         const color = await loadDiscBandColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); }, surface.source);
-        if (color.record.objectId !== objectId) throw new TypeError(`${objectId}/${surface.id}: ${surface.source} is the band colour of ${color.record.objectId}.`);
+        if (color.record.objectId !== objectId) throw new TypeError(`${objectId}/${surface.id}: ${surface.source} is the band color of ${color.record.objectId}.`);
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         // A self-luminous body owes the presentation its off-limb and limb plates, transparent: no light beyond the silhouette is observed.
         const plates = recipe.emission ? { plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : {};
         return { data, channels: 4, nearest: true, ...plates, report: { discIntegratedBandColor: { srgb: color.srgb, linearDisplay: color.linear, bands: color.record.bands, unit: color.record.unit,
           displayRange: color.record.displayRange, displayRangeSource: color.record.displayRangeSource, source: color.record.source,
-          meaning: 'Infrared false colour, uniform over the body: red, green and blue are the published flux densities in three bands, longest wavelength red, over one range shared with the bodies it names; not a natural colour and not a resolved surface map.' } } };
+          meaning: 'Infrared false color, uniform over the body: red, green and blue are the published flux densities in three bands, longest wavelength red, over one range shared with the bodies it names; not a natural color and not a resolved surface map.' } } };
       }
       case 'dayside-thermal-color': {
         // A transiting planet with a measured dayside brightness temperature (secondary eclipse) and no image: the whole disc takes
-        // the colour of a black body at that temperature, and the lighting bank turns the day side to its star. Reflected starlight
+        // the color of a black body at that temperature, and the lighting bank turns the day side to its star. Reflected starlight
         // is not added: the eclipse depth at the cited wavelength is thermal, and nothing measured says how much light the planet reflects.
         const source = await manifest;
         const { temperature, color } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); }, surface.science, surface.source);
-        if (recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a dayside thermal colour belongs to a lit body, not an emissive one.`);
+        if (recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a dayside thermal color belongs to a lit body, not an emissive one.`);
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         return { data, channels: 4, nearest: true, report: { daysideThermalColor: { srgb: color.srgb, temperature,
-          meaning: 'Colour of a black body at the dayside brightness temperature measured in secondary eclipse at the cited wavelength, uniform over the disc; the planet is unresolved, and reflected starlight is not included.' } } };
+          meaning: 'Color of a black body at the dayside brightness temperature measured in secondary eclipse at the cited wavelength, uniform over the disc; the planet is unresolved, and reflected starlight is not included.' } } };
       }
       case 'stellar-photometric-color': {
-        // A self-luminous photosphere with no image: one colour from its measured spectrum or catalogued photometric temperature, no map.
+        // A self-luminous photosphere with no image: one color from its measured spectrum or catalogued photometric temperature, no map.
         const source = await manifest;
         const { temperature, spectrum, color, range, limbDarkening, crossCheck } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
           surface.science, surface.source);
         const data = Buffer.alloc(width * height * 4);
-        // A published Roche-von Zeipel fit darkens the surface by latitude (gravity-darkening.mts); otherwise the colour is uniform.
+        // A published Roche-von Zeipel fit darkens the surface by latitude (gravity-darkening.mts); otherwise the color is uniform.
         const gravity = surface.science.gravityDarkening === undefined ? null : await (async () => {
           const path = requireString(surface.science.gravityDarkening, 'science.gravityDarkening');
           await source.validatePath(path);
@@ -518,7 +518,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           return { record, rows: gravityDarkenedRows(record, color, colorMatching, height), meanK: meanSurfaceTemperature(record), equatorK: surfaceTemperature(record, Math.PI / 2) };
         })();
         for (let offset = 0; offset < data.length; offset += 4) data.set([...(gravity ? gravity.rows[Math.floor(offset / 4 / width)]! : color.srgb), 255], offset);
-        if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar colour belongs to an emissive body.`);
+        if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar color belongs to an emissive body.`);
         if (surface.science.spotOccultation !== undefined && surface.science.spotFigure !== undefined)
           throw new TypeError(`${objectId}/${surface.id}: choose one spot interpretation per dataset.`);
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
@@ -540,7 +540,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           return { source: event.source, transitIndex: event.transitIndex, conjunctionBjdMinus2450000: event.conjunctionBjdMinus2450000,
             minimumAngularRadiusDegrees: event.minimumAngularRadiusDegrees, contrast: event.contrast, midEventOffsetSeconds: event.midEventOffsetSeconds,
             displayCentre: { x: centre.x, y: centre.y }, basis: 'published TESS spot-occultation candidate, minimum circular cap on a fixed camera-facing plate',
-            limitations: 'One transit chord, not a full map. Sky orientation and cap shape are display assumptions. TESS-band contrast is applied achromatically to Gaia colour. No rotation or evolution.' };
+            limitations: 'One transit chord, not a full map. Sky orientation and cap shape are display assumptions. TESS-band contrast is applied achromatically to Gaia color. No rotation or evolution.' };
         })();
         const spotFigure = surface.science.spotFigure === undefined ? null : await (async () => {
           if (!limbDarkening) throw new TypeError(`${objectId}/${surface.id}: a spot figure requires a limb plate.`);
@@ -559,7 +559,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
             spotToPhotosphereTessIntensityRatio: model.spotToPhotosphereTessIntensityRatio,
             projectedSpotFractionInFigure: baked.projectedSpotFraction,
             basis: 'published hypothetical dense-latitudinal-bands illustration, not an observed map',
-            limitations: 'Figure 7 left-panel layout is illustrative. Its transit-guide lines are removed. TESS-band intensity is applied achromatically to Gaia colour. The plate is stationary.' };
+            limitations: 'Figure 7 left-panel layout is illustrative. Its transit-guide lines are removed. TESS-band intensity is applied achromatically to Gaia color. The plate is stationary.' };
         })();
         const modeledLimb = limbDarkening !== null && (limbDarkening.recipe.source === 'grid' ||
           ('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior'));
@@ -574,7 +574,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
               ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
             ...(spot ? { spotOccultation: spot } : {}),
             ...(spotFigure ? { spotFigure } : {}),
-            meaning: `${temperature ? 'Planck colour at the catalogued photometric temperature' : range ? 'Colour of the measured Gaia XP spectrum' : 'Colour of the measured spectrum'}${limbDarkening
+            meaning: `${temperature ? 'Planck color at the catalogued photometric temperature' : range ? 'Color of the measured Gaia XP spectrum' : 'Color of the measured spectrum'}${limbDarkening
               ? `, dimmed toward the limb by a ${modeledLimb ? 'theoretical atmosphere model' : 'law fitted to transits'}; not a resolved photosphere.` : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);

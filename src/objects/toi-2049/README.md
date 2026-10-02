@@ -6,7 +6,7 @@ Its radius and temperature follow Guenther et al. 2026. The introduction is gene
 
 **Star.** Placement: Gaia DR3 source 2009110972943346304, parallax 1.754 ± 0.012 mas (570.16 pc). Radius 3.2 +/- 0.01 solar radii from Guenther et al. 2026, the stellar radius of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract). Mass 1.57 +/- 0.03 solar masses from Guenther et al. 2026, the stellar mass of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract). Temperature 6,164 K from Guenther et al. 2026, the stellar temperature of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive. log g 3.62 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2009110972943346304, through the CIE 1931 2° observer: #ffe7d5. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2009110972943346304, through the CIE 1931 2° observer: #ffe7d5. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,164 K and log g 3.62 (u1 0.386, u2 0.299): a model, because no fit of this star's limb is used.
 

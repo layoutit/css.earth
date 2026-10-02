@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 23.012 au and total mass 2.2277 solar masses, 74.0 years of 365.25 d. Stolker et al. (2025, arXiv:2507.06206): the orbitize! MultiNest fit to SPHERE/IRDIS and VLTI/GRAVITY astrometry with a total mass of 2.2 solar masses, distributed as a posterior of 10,443 samples by whereistheplanet 1.0.1 (post_hd135344ab.hdf5). Picked with packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py (src/objects/hd-135344-ab/source/orbits/pick.json): highest stored likelihood (ln L -8.39).",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 135344 Ab is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of HD 135344 Ab is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 1510,
   "effectiveTemperatureSource": "1510 +/- 35 K, Stolker et al. (2025), Table 5, https://arxiv.org/abs/2507.06206",

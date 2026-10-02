@@ -67,7 +67,7 @@ const pixel = (image: Raster, x: number, y: number, channel: number) => image.da
 
 /** The figure's dark bands of photographs and model renderings, top to bottom. A band is the bounding box of a connected
  * region of near-black pixels, the panels' shared background around which the bodies, labels and arrows sit as islands,
- * at least a quarter the size of the largest; a dark caption mark or colour bar is far smaller. */
+ * at least a quarter the size of the largest; a dark caption mark or color bar is far smaller. */
 export function figureBands(figure: Raster): Box[] {
   const { width, height } = figure, dark = new Uint8Array(width * height);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) dark[y * width + x] = +(Math.max(pixel(figure, x, y, 0), pixel(figure, x, y, 1), pixel(figure, x, y, 2)) < 16);
@@ -103,7 +103,7 @@ export function columnCells(figure: Raster, spec: Pick<ComparisonSpec, 'rows' | 
   };
 }
 
-/** The figures' spin-axis arrows are the only coloured ink on grey panels, so red is any pixel whose red channel clearly
+/** The figures' spin-axis arrows are the only colored ink on grey panels, so red is any pixel whose red channel clearly
  * leads the other two, including the arrow's darker anti-aliased fringe. */
 const isRed = (image: Raster, x: number, y: number) => { const r = pixel(image, x, y, 0), g = pixel(image, x, y, 1), b = pixel(image, x, y, 2); return r > 60 && r > 1.6 * g && r > 1.6 * b; };
 

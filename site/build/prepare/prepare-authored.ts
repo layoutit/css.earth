@@ -360,7 +360,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   // Scientific and observed surfaces are interpreted by their existing decoder owners (observation rasters,
-  // terrestrial decoders, GLB base colour, solar synoptic maps) before the raster lane packs them; src never imports tools.
+  // terrestrial decoders, GLB base color, solar synoptic maps) before the raster lane packs them; src never imports tools.
   const rasterConfig = parseRasterRecipe(required(sources, 'raster').value);
   const solarSource = physicalSolarSource(required(sources, 'solar-system').value);
   if (reuseImages && (source(sources, 'observations') || source(sources, 'rings')))

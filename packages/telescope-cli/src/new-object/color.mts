@@ -1,5 +1,5 @@
-/** A new star's colour dataset from the best spectrum any archive holds of it. The routes are tried in this order, and each candidate is
- * downloaded and read with the colour dataset's own reader (stellar-photometric-color.mts), so a route counts only if it yields a colour:
+/** A new star's color dataset from the best spectrum any archive holds of it. The routes are tried in this order, and each candidate is
+ * downloaded and read with the color dataset's own reader (stellar-photometric-color.mts), so a route counts only if it yields a color:
  *
  * 1. stis-ngsl: the HST/STIS Next Generation Spectral Library (space spectrophotometry, 168-1020 nm), by HD number.
  * 2. gaia-xp: the Gaia DR3 externally calibrated BP/RP sampled spectrum (space, absolute flux), when Gaia published one.
@@ -9,8 +9,8 @@
  * 6. burnashev: the Chilean catalogue in Burnashev's compilation (VizieR III/126 part2), by BS (HR) number; the scan that covers
  *    most of 380-780 nm.
  *
- * Space spectra come first, then the ground catalogues from the widest and finest sampling down. The first route read is the colour;
- * the next one is its cross-check, which preparation compares against CROSS_CHECK_AGREEMENT. With no spectrum at all the colour is a
+ * Space spectra come first, then the ground catalogues from the widest and finest sampling down. The first route read is the color;
+ * the next one is its cross-check, which preparation compares against CROSS_CHECK_AGREEMENT. With no spectrum at all the color is a
  * Planck spectrum at the cited temperature. Stretches of 380-780 nm with no sample are declared as gaps with their reason, as
  * the reader requires. */
 import { gunzipSync } from 'node:zlib';
@@ -61,7 +61,7 @@ const shared = new Map<string, Promise<Buffer>>();
 const once = (context: Context, url: string) => { let bytes = shared.get(url); if (!bytes) { bytes = context.archive.bytes(url); shared.set(url, bytes); bytes.catch(() => shared.delete(url)); } return bytes; };
 const download = (url: string) => (path: string) => ({ kind: 'download', groups: ['restore', 'refresh'], path, url });
 
-/** Read a candidate with the dataset's reader: its samples, its derived gaps and the colour they give. Throws when it yields none. */
+/** Read a candidate with the dataset's reader: its samples, its derived gaps and the color they give. Throws when it yields none. */
 function evaluate(bytes: Buffer, record: Omit<MeasuredSpectrumRecord, 'gaps'>, cmf: Map<number, readonly number[]>) {
   const spectrum = readMeasuredSpectrum(bytes, { ...record, gaps: [] }), gaps = coverageGaps(spectrum.wavelengthsNm);
   return { gaps, color: measuredSpectrumColor(spectrum, cmf, gaps) };
@@ -98,7 +98,7 @@ const ROUTES: Record<ColorRoute, Route> = {
     return { route: 'gaia-xp', label: 'Gaia DR3 XP', file: 'gaia-dr3-xp-sampled.csv', bytes, origin, license: GAIA_LICENSE,
       record: path => ({ path, format: 'gaia-xp-sampled', wavelength: { column: 'lambda', unit: 'nm' }, flux: { column: row.sourceId, kind: 'flux' } }),
       source: `Gaia DR3 XP spectrum, source ${row.sourceId}`,
-      note: "Gaia's own low-resolution spectrum of the star, calibrated to absolute flux. Its samples at the even wavelengths from 380 to 780 nm are weighted by the CIE 1931 2-degree observer. The range in the prepared report is the colour of the spectrum moved one standard error down and up at every sample.",
+      note: "Gaia's own low-resolution spectrum of the star, calibrated to absolute flux. Its samples at the even wavelengths from 380 to 780 nm are weighted by the CIE 1931 2-degree observer. The range in the prepared report is the color of the spectrum moved one standard error down and up at every sample.",
       credit: XP_CREDIT, restore, acquisition: `Download from ${service} in source/preparation/acquisition.json: the externally calibrated BP/RP sampled mean spectrum of source_id ${row.sourceId}, 343 samples from 336 to 1020 nm.`,
       catalogue: dataProduct(`gaia-dr3-xp-${row.sourceId}`, `Gaia DR3 XP sampled spectrum, source_id ${row.sourceId}`, ['Gaia DR3 XP source_id', row.sourceId], ['https://gea.esac.esa.int/archive/', 'Gaia Archive'],
         [origin === url ? url : `${ARI_TAP}?${new URLSearchParams(form)}`, 'XP sampled mean spectrum: 343 fluxes from 336 to 1020 nm in 2 nm steps, W m^-2 nm^-1'], XP_CREDIT, 'https://www.cosmos.esa.int/web/gaia-users/credits', 'European Space Agency, Gaia Data Processing and Analysis Consortium') };
@@ -125,7 +125,7 @@ const ROUTES: Record<ColorRoute, Route> = {
     return { route: 'kiehling', label: 'Kiehling', file: 'kiehling-1987.tsv', bytes: Buffer.from(text), origin: VIZIER_ASU, license: VIZIER_LICENSE,
       record: path => ({ path, format: 'tsv-columns', wavelength: { column: 'lambda', unit: 'nm' }, flux: { column: `m(HR${hr})`, kind: 'magnitude', missing: 99.999 } }),
       source: `Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. ${ids.main ?? `HR ${hr}`} is HR ${hr}.`,
-      note: "Ground-based photoelectric spectrophotometry, published as magnitudes normalised to the star's own flux near 555 nm; read here as flux 10^(-0.4 m). The calibration is relative, which is all a colour needs. The catalogue gives no observation dates.",
+      note: "Ground-based photoelectric spectrophotometry, published as magnitudes normalised to the star's own flux near 555 nm; read here as flux 10^(-0.4 m). The calibration is relative, which is all a color needs. The catalogue gives no observation dates.",
       credit: 'Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)',
       restore: path => ({ kind: 'request-download', groups: ['restore', 'refresh'], url: VIZIER_ASU, form, requiredText: [`m(HR${hr})`], replacements: [{ pattern: '^#.*\\n', flags: 'gm', replacement: '' }, { pattern: '^\\s*\\n', flags: 'gm', replacement: '' }], path }),
       acquisition: `VizieR ASU TSV for III/124/spectra, columns lambda and m(HR${hr}), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.`,
@@ -186,12 +186,12 @@ export interface ColorChoice {
 /** Below this G magnitude Gaia's BP/RP spectrum comes after the ground spectrophotometric catalogues, which were made for bright
  * stars. Gaia shortens its exposure of a bright star with gates chosen from an on-board magnitude that is uncertain at the bright end,
  * so some of its spectra are saturated (De Angeli et al. 2023, A&A 674, A2). Measured 2026-10-01 on 24 stars within 32 pc
- * that have both a Gaia spectrum and a ground or STIS one: the two colours differ by more than CROSS_CHECK_AGREEMENT levels for 6 of
+ * that have both a Gaia spectrum and a ground or STIS one: the two colors differ by more than CROSS_CHECK_AGREEMENT levels for 6 of
  * the 11 stars brighter than G 4.0 (up to 52 levels, Theta Ursae Majoris, G 3.07) and for none of the 13 fainter (11 at most). */
 export const XP_SATURATION_G = 4;
 const channelDifference = (a: StellarColor, b: StellarColor) => Math.max(...a.srgb.map((value, i) => Math.abs(value - b.srgb[i]!)));
 
-/** Try every route in order and write the colour record for the first, with the second as its cross-check. */
+/** Try every route in order and write the color record for the first, with the second as its cross-check. */
 export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids: Identifiers, archive: Archive, cmf: Map<number, readonly number[]>): Promise<ColorChoice> {
   const context: Context = { spec, row, ids, archive, cmf }, candidates: Candidate[] = [], tried: string[] = [];
   // Every route is probed at once; the candidates are then taken in the routes' quality order.
@@ -206,9 +206,9 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
   for (const { route, found } of ordered) {
     if (found === 'skipped') { tried.push(`${route}: skipped`); continue; }
     if (typeof found === 'string') { tried.push(`${route}: ${found}`); continue; }
-    if (candidates.length === 2) { tried.push(`${route}: found, not needed after the colour and its cross-check`); continue; }
+    if (candidates.length === 2) { tried.push(`${route}: found, not needed after the color and its cross-check`); continue; }
     try { candidates.push({ ...found, ...evaluate(found.bytes, found.record(''), cmf) }); }
-    catch (error) { tried.push(`${route}: the spectrum was found but gives no colour (${(error as Error).message})`); }
+    catch (error) { tried.push(`${route}: the spectrum was found but gives no color (${(error as Error).message})`); }
   }
   const [primary, second] = candidates, id = spec.id, files = new Map<string, Buffer>(), acquisition: Record<string, unknown>[] = [], inputs: Record<string, unknown>[] = [], catalogue: SourceRecord[] = [];
   const CMF_METHOD = { catalogueId: 'cie-1931-2deg-cmf', role: 'method', evidence: 'https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums' };
@@ -238,39 +238,39 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
   if (second) {
     const path = `photometry/crosscheck-${second.file}`, difference = channelDifference(primary.color, second.color);
     // Why they differ: the spec's own account, or Gaia's saturation when its spectrum is the cross-check of a star it saturates on.
-    const explained = spec.color?.disagreement ?? (saturated && second.route === 'gaia-xp' ? `The ${second.label} colour differs from the ${primary.label} colour by ${difference} levels. The star is G ${row!.g.toFixed(2)}, brighter than the G ${XP_SATURATION_G} under which Gaia's spectra can be saturated (De Angeli et al. 2023, A&A 674, A2; color.mts XP_SATURATION_G), so the ${primary.label} colour is used.` : undefined);
+    const explained = spec.color?.disagreement ?? (saturated && second.route === 'gaia-xp' ? `The ${second.label} color differs from the ${primary.label} color by ${difference} levels. The star is G ${row!.g.toFixed(2)}, brighter than the G ${XP_SATURATION_G} under which Gaia's spectra can be saturated (De Angeli et al. 2023, A&A 674, A2; color.mts XP_SATURATION_G), so the ${primary.label} color is used.` : undefined);
     addFile(second, path, `${id}-crosscheck-spectrum`);
     record.crossCheck = { source: second.source, spectrum: { ...second.record(path), gaps: second.gaps },
-      ...(difference > CROSS_CHECK_AGREEMENT ? { disagreement: explained ?? `TODO(new-object): the ${second.label} colour differs from the ${primary.label} colour by ${difference} levels; say why.` } : {}) };
+      ...(difference > CROSS_CHECK_AGREEMENT ? { disagreement: explained ?? `TODO(new-object): the ${second.label} color differs from the ${primary.label} color by ${difference} levels; say why.` } : {}) };
     if (difference > CROSS_CHECK_AGREEMENT && !explained) todo = `${second.label} disagrees with ${primary.label} by ${difference} levels`;
     crossCheck = { route: second.route, difference };
   }
   inputs.push({ id: `${id}-stellar-color`, path: 'photometry/stellar-color.json', origin: primary.origin, credit: `${primary.credit}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
-    acquisition: 'Authored method record: names the archived spectrum, how it is read and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'datasets'],
-    ...(primary.route === 'gaia-xp' ? { sourceBinding: { kind: 'local', reason: 'Project-authored colour recipe naming the Gaia DR3 spectrum bound above; repinned when edited.' } }
+    acquisition: 'Authored method record: names the archived spectrum, how it is read and the color computation applied', redistribution: 'Method record only', consumers: ['assets', 'datasets'],
+    ...(primary.route === 'gaia-xp' ? { sourceBinding: { kind: 'local', reason: 'Project-authored color recipe naming the Gaia DR3 spectrum bound above; repinned when edited.' } }
       : { sourceBinding: { kind: 'catalogued', references: [{ catalogueId: primary.catalogue!.id, role: 'material', evidence: `src/objects/${id}/source/photometry/stellar-color.json#/measuredSpectrum` }, CMF_METHOD] } }) });
   return { record, files, acquisition, inputs, catalogue, color: primary.color, route: primary.route, tried, ...(crossCheck ? { crossCheck } : {}), ...(todo ? { todo } : {}),
-    credits: [`Colour: ${primary.source}, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).${second ? ` Cross-check: ${second.source}.` : ''}`],
+    credits: [`Color: ${primary.source}, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).${second ? ` Cross-check: ${second.source}.` : ''}`],
     summary: `${primary.source}${second ? `, cross-checked against ${second.source} (${crossCheck!.difference} levels apart at most, the threshold is ${CROSS_CHECK_AGREEMENT})` : ''}${spec.color?.skip.length ? ` (the routes marked skipped are not used: ${spec.color.reason})` : ''}` };
 }
 
-/** The colour of a Planck spectrum at the cited temperature: for a star no archive holds a spectrum of, or a companion the archives
+/** The color of a Planck spectrum at the cited temperature: for a star no archive holds a spectrum of, or a companion the archives
  * do not resolve from its star. `why` opens the record's note. */
 export function planckChoice(id: string, t: Cited, why: string, tried: readonly string[], cmf: Map<number, readonly number[]>, gamut?: 'desaturate'): ColorChoice {
   const lower = t.uncertainty ? t.value - t.uncertainty : t.value, upper = t.uncertainty ? t.value + t.uncertainty : t.value;
   const record = { schema: 'cssearth-stellar-photometric-color@1', objectId: id, spectrum: 'planck', temperature: {
     published: { kelvin: t.value, lowerKelvin: lower, upperKelvin: upper, citation: `${t.source}${t.uncertainty ? `: ${t.value} +/- ${t.uncertainty} K` : `: ${t.value} K; the source gives no uncertainty, so the range is the value itself`}, ${t.url}` },
-    note: `${why}, so the colour is a Planck spectrum at its published temperature.` },
+    note: `${why}, so the color is a Planck spectrum at its published temperature.` },
     whitePoint: 'sRGB D65', normalization: 'brightest linear sRGB channel = 1', ...(gamut ? { gamut } : {}) };
   const inputs = [{ id: `${id}-stellar-color`, path: 'photometry/stellar-color.json', origin: t.url, credit: `${t.source}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
-    acquisition: 'Authored method record: names the published temperature and the colour computation applied', redistribution: 'Method record only', consumers: ['assets', 'datasets'],
-    sourceBinding: { kind: 'local', reason: 'Project-authored colour recipe naming the cited temperature; repinned when edited.' } }];
-  // Below about 1,800 K a black body's colour lies outside sRGB (a brown dwarf, a cool companion): it is then shown mixed with the
-  // least white that brings it inside, and the record says so; a colour inside the gamut keeps its record plain.
+    acquisition: 'Authored method record: names the published temperature and the color computation applied', redistribution: 'Method record only', consumers: ['assets', 'datasets'],
+    sourceBinding: { kind: 'local', reason: 'Project-authored color recipe naming the cited temperature; repinned when edited.' } }];
+  // Below about 1,800 K a black body's color lies outside sRGB (a brown dwarf, a cool companion): it is then shown mixed with the
+  // least white that brings it inside, and the record says so; a color inside the gamut keeps its record plain.
   let color: StellarColor, mapped = gamut;
   try { color = planckColor(t.value, cmf, gamut); } catch (error) { if (gamut || !/sRGB gamut/u.test((error as Error).message)) throw error; mapped = 'desaturate'; color = planckColor(t.value, cmf, mapped); }
   if (mapped && !gamut) Object.assign(record, { gamut: mapped });
   return { record, files: new Map(), acquisition: [], inputs, catalogue: [], color, route: 'planck', tried,
-    credits: [`Colour: a Planck spectrum at the temperature of ${t.source}, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).`],
+    credits: [`Color: a Planck spectrum at the temperature of ${t.source}, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).`],
     summary: `a Planck spectrum at ${t.value.toLocaleString('en-US')} K, because ${why.charAt(0).toLowerCase()}${why.slice(1)}` };
 }

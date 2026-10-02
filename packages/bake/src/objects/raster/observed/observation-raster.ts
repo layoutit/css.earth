@@ -62,7 +62,7 @@ export async function readObservation(sourceDirectory:string, entryInput:unknown
     grayAlpha[i * 2 + 1] = source.data[i] === validity.noData ? 0 : 255;
   }
   const { data, info } = await sharp(grayAlpha, { raw: { width: entry.width, height: entry.height, channels: 2 } })
-    .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+    .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.channels !== 4) throw new Error('Monochrome resampling must retain its validity channel.');
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
   for (let i = 0; i < missing.length; i++) {

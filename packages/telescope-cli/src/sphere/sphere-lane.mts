@@ -61,7 +61,7 @@ export async function measurementSphere(root: string, target: string, texture: s
   await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json'));
   const {inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context}=await inspectMeasurementSphere(root,target);
   // Keep the original packing, gutters, pole atlas and density. The standard raster lane
-  // receives already projected colours and uses nearest/lossless handling for measurements.
+  // receives already projected colors and uses nearest/lossless handling for measurements.
   const rasterDirectory = resolve(output, 'raster');
   await mkdir(rasterDirectory, { recursive: true });
   // Mercury's combined pole bank reads the unpacked source at its authored
@@ -100,7 +100,7 @@ export async function measurementSphere(root: string, target: string, texture: s
     // Mercury's row-bank presentation shares a combined pole atlas across datasets.
     ['poles', await dataUrl(resolve(rasterDirectory, poles))],
   ]);
-  // Preserve the exact prepared tree, facing/depth bindings and camera. Quantitative colour
+  // Preserve the exact prepared tree, facing/depth bindings and camera. Quantitative color
   // must not be multiplied by the photographic lighting plane, even at full phase.
   // Inactive datasets retain image-valued custom properties in the shared tree.
   // Clear only bindings to excluded assets; node identity and geometry stay intact.

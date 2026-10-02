@@ -83,7 +83,7 @@ if (!Number.isInteger(recipe.medianSize) || recipe.medianSize < 3 || recipe.medi
 await Promise.all([mkdir(recipe.outputDirectory, { recursive: true }), mkdir(recipe.cacheDirectory, { recursive: true })]);
 if (args.includes('--refresh-source')) {
   const bytes = await readFile(recipe.input.original.path);
-  const png = await sharp(bytes).rotate().extract(recipe.input.crop).removeAlpha().toColourspace('srgb').png().toBuffer();
+  const png = await sharp(bytes).rotate().extract(recipe.input.crop).removeAlpha().toColorspace('srgb').png().toBuffer();
   await writeFile(recipe.input.path, png);
 }
 const image = await readBenchmarkImage(recipe.input.path, recipe.input.width, recipe.input.height);

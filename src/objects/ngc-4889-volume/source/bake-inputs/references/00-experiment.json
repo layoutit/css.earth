@@ -6,7 +6,7 @@
     "width": 1800,
     "height": 1800,
     "publisher": "https://www.sdss.org/",
-    "credit": "Sloan Digital Sky Survey DR9, g, r and i colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+    "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
   },
   "crop": {
     "left": 0,
@@ -313,7 +313,7 @@
     "NOX removes stars; what it leaves is masked afterwards: 24 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 14 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 4 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes; chosen here from the haloes left in the cleaned cutouts). No mask reaches beyond half its distance from NGC 4889's centre, so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
     "Every pixel is clamped to the median of the 75 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
     "Black level per channel: the median of the cleaned cutout on the isophote where the prior ends (230 to 240 arcsec), red 0.035, green 0.031, blue 0.020 (9, 8 and 5 of 255), so the light fades to nothing at the spheroid's edge.",
-    "The colour is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
+    "The color is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
   ],
   "compactClamp": {
     "windowPx": 75,

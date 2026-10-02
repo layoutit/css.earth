@@ -8,7 +8,7 @@ It is the only planet known around TOI-6223. Its orbit and size follow Yalçinka
 
 **Orbit.** Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): P 3.855219 d Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): a/R* 14.99; Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): inclination 88.68 degrees No archive row states an eccentricity; the orbit is taken as circular Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): transit mid-time 2459856.48875 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-6223's measured colour (#ffbe8a, the colour dataset of toi-6223 (src/objects/toi-6223/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-6223's measured color (#ffbe8a, the color dataset of toi-6223 (src/objects/toi-6223/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-6223's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (84), folded onto its orbit. Upper limits and rows without an error are left out.
 

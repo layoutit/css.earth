@@ -8,7 +8,7 @@ It is the only planet known around WASP-189. Its orbit and size follow Lendl et 
 
 **Orbit.** Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 2.7240308 d Lendl et al. 2020 (2020A&A...643A..94L), via the NASA Exoplanet Archive ps table (pl_refname LENDL_ET_AL__2020): a/R* 4.6; Lendl et al. 2020 (2020A&A...643A..94L), via the NASA Exoplanet Archive ps table (pl_refname LENDL_ET_AL__2020): inclination 84.03 degrees Lendl et al. 2020 (2020A&A...643A..94L), via the NASA Exoplanet Archive ps table (pl_refname LENDL_ET_AL__2020): e 0 Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): transit mid-time 2456706.4566 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-189's measured colour (#c9d6ff, the colour dataset of wasp-189 (src/objects/wasp-189/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by wasp-189's measured color (#c9d6ff, the color dataset of wasp-189 (src/objects/wasp-189/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of WASP-189's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (51), folded onto its orbit. Upper limits and rows without an error are left out.
 

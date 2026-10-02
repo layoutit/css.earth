@@ -189,7 +189,7 @@ export async function prepareMaskedObservation(path: string,sourceEntry: unknown
   }finally{await tiff.close()}
   const pipeline=sharp(path).removeAlpha();
   if(policy.channels==='monochrome')pipeline.greyscale();
-  if(policy.colorSpace)pipeline.toColourspace(policy.colorSpace);
+  if(policy.colorSpace)pipeline.toColorspace(policy.colorSpace);
   const source=await pipeline.raw().toBuffer({resolveWithObject:true}),channels=source.info.channels;
   if(channels!==(policy.channels==='monochrome'?1:3))throw new Error(`Observed band count drifted: ${path}`);
   if (['source-georeferenced-bilinear','source-georeferenced-nearest'].includes(policy.resampling ?? "")) return resampleGeoreferencedObservation(source,entry,policy,{origin,resolution},width,height);

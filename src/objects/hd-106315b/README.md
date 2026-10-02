@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 106315. Its orbit and size follow Barros 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 9.58028883839 d Barros et al. 2017 (2017A&A...608A..25B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2017): a/R* 15.07; Barros et al. 2017 (2017A&A...608A..25B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2017): inclination 87.54 degrees Barros et al. 2017 (2017A&A...608A..25B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2017): e 0.093 Barros et al. 2017 (2017A&A...608A..25B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2017): omega 239 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459554.243825 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 13 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-106315's measured colour (#efeeff, the colour dataset of hd-106315 (src/objects/hd-106315/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hd-106315's measured color (#efeeff, the color dataset of hd-106315 (src/objects/hd-106315/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 106315's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (46, 91), folded onto its orbit. Upper limits and rows without an error are left out.
 

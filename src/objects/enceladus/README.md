@@ -1,6 +1,6 @@
 # Enceladus
 
-Enceladus (NAIF 602) is a moon of Saturn. It shows a controlled Cassini camera mosaic, a terrain model, a published infrared colour mosaic, a geologic map and two VIMS spectral views, on the IAU triaxial ellipsoid.
+Enceladus (NAIF 602) is a moon of Saturn. It shows a controlled Cassini camera mosaic, a terrain model, a published infrared color mosaic, a geologic map and two VIMS spectral views, on the IAU triaxial ellipsoid.
 
 ## Sources
 
@@ -20,7 +20,7 @@ The [investigation ledger](investigations.json) records source choices, trials a
 
 **Infrared color.** NASA's original 8192 × 4096 TIFF is used unchanged. The red channel is the 3.1/1.65 µm ratio, green 2.0 µm and blue 1.8 µm reflectance, combined with ISS camera detail. The published grid puts 0° at the image centre, so the reader rolls it into the 0–360° frame. We used the distributed grid, not the mislabeled longitudes in the paper's Figures 9 and 11 ([corrigendum](https://doi.org/10.1016/j.icarus.2020.113954)).
 
-**Geology.** Trek's file download answered "Access denied", so `source/geology/` keeps the layer's public ArcGIS query response: 13 polygons, one per unit, with the unit colours. Each polygon is rasterized at pixel centres into a 2048 × 1024 grid in the layer's own 252.1 km frame. Where units overlap, the smallest covering unit wins (`nestedUnits: "inner"` in `source/geology/prepare-grid.json`). Unit colours mark map units, not surface colour. Reproduce from the repository root:
+**Geology.** Trek's file download answered "Access denied", so `source/geology/` keeps the layer's public ArcGIS query response: 13 polygons, one per unit, with the unit colors. Each polygon is rasterized at pixel centres into a 2048 × 1024 grid in the layer's own 252.1 km frame. Where units overlap, the smallest covering unit wins (`nestedUnits: "inner"` in `source/geology/prepare-grid.json`). Unit colors mark map units, not surface color. Reproduce from the repository root:
 
     python packages/bake/src/objects/acquisition/geology-grid.py src/objects/enceladus/source/geology/prepare-grid.json
 
@@ -41,7 +41,7 @@ The [investigation ledger](investigations.json) records source choices, trials a
 - Elevation values are kilometres above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km, not heights above the 256.2 km cartographic sphere. They must not be added to the drawn IAU ellipsoid, whose axes differ slightly.
 - Infrared color is a seam-free display composite with no validity mask or numeric channels. Its red tint is not a heat, ice-abundance or crystallinity scale, and camera texture is finer than the infrared data.
 - VIMS views keep partial coverage and archive filtering; illumination is not photometrically corrected. [Filacchione et al. (2022)](https://doi.org/10.1016/j.icarus.2021.114803) would be a stronger basis, but its numeric maps have not been retrieved.
-- Geology: equatorial and heavily cratered plains share one colour (`#d7c29e`), so their boundary is invisible. The heavily cratered plains polygon has no holes where two other units sit, so the smallest-unit rule decides them. The line layer (ridges, troughs, scarps, contacts) is not shown. No browser check has been made yet.
+- Geology: equatorial and heavily cratered plains share one color (`#d7c29e`), so their boundary is invisible. The heavily cratered plains polygon has no holes where two other units sit, so the smallest-unit rule decides them. The line layer (ridges, troughs, scarps, contacts) is not shown. No browser check has been made yet.
 - Map-to-limb registration on the ellipsoid has not been checked against Cassini images.
 - The Schenk archive's prose swaps the image and DEM descriptions, and its catalogue dates precede Cassini's Saturn arrival; we do not reuse them.
 - Feature outlines are not published nomenclature boundaries.

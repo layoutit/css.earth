@@ -334,7 +334,7 @@
         "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=4000&height=4000&projection=TAN&fov=10&coordsys=icrs&ra=13.5&dec=-73&format=jpg",
         "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
-        "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+        "credit": "IPAC/NASA; color HiPS CDS (CNRS/Unistra)",
         "license": "ODbL-1.0",
         "label": "AllWISE · 10° infrared",
         "wcsSource": {
@@ -410,7 +410,7 @@
           "url": "https://www.herschel.caltech.edu/system/avm_image_sqls/binaries/36/original/nhsc2012-001b.tif?1543441451",
           "description": "Publisher astrometry or diagnostic relative fit; independent acceptance pending."
         },
-        "registrationNote": "Inspection candidate only; not approved for reconstruction. Whole bar and wing; dust-temperature colour composite. Same observation as Spitzer ssc2012-01b, excluded duplicate. Nonstellar compact dust structures must be preserved.",
+        "registrationNote": "Inspection candidate only; not approved for reconstruction. Whole bar and wing; dust-temperature color composite. Same observation as Spitzer ssc2012-01b, excluded duplicate. Nonstellar compact dust structures must be preserved.",
         "wcs": {
           "referenceDimension": [
             10000,

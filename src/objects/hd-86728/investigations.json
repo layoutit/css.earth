@@ -22,8 +22,8 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 746545172372256384, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 561: HR 3951; VizieR III/202 (3 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #fff3f3. Routes tried in order: stis-ngsl: HD 86728 is not in the library; pulkovo: HR 3951 is not in the catalogue; kiehling: HR 3951 is not among its 60 stars; burnashev: BS 3951 is not in part2; gaia-xp: used.",
       "evidence": [

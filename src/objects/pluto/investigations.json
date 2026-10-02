@@ -3,10 +3,10 @@
   "objectId": "pluto",
   "entries": [
     {
-      "id": "mvic-colour-mosaic",
-      "subject": "NASA/JHUAPL/SwRI New Horizons Ralph/MVIC global colour mosaic",
+      "id": "mvic-color-mosaic",
+      "subject": "NASA/JHUAPL/SwRI New Horizons Ralph/MVIC global color mosaic",
       "status": "included",
-      "finding": "The Color dataset uses the three-filter global mosaic published 20 January 2017, north up with Sputnik Planitia near the centre; it is the published colour product, not calibrated true-colour reflectance.",
+      "finding": "The Color dataset uses the three-filter global mosaic published 20 January 2017, north up with Sputnik Planitia near the centre; it is the published color product, not calibrated true-color reflectance.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/pluto/source/manifest.json",
         "https://science.nasa.gov/resource/pluto-global-color-map/"
@@ -107,7 +107,7 @@
       "id": "coverage-gaps",
       "subject": "Incomplete and uneven map coverage",
       "status": "unresolved",
-      "finding": "Neither mosaic nor the DEM covers all of Pluto, so a neutral gray cartographic grid marks identified gaps, painted before packing and never interpolated; for the colour JPEG only exactly black pixels connected to the southern border are marked, so a dark boundary fringe can remain and nonzero dark pixels are preserved without inpainting.",
+      "finding": "Neither mosaic nor the DEM covers all of Pluto, so a neutral gray cartographic grid marks identified gaps, painted before packing and never interpolated; for the color JPEG only exactly black pixels connected to the southern border are marked, so a dark boundary fringe can remain and nonzero dark pixels are preserved without inpainting.",
       "revisitWhen": "A global product with complete Pluto coverage, or a validity mask for these maps, is released.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/pluto/README.md#L66",

@@ -3,8 +3,8 @@
   "objectId": "ngc-2903-layers",
   "entries": [
     {
-      "id": "sdss-colour",
-      "subject": "SDSS DR9 colour HiPS",
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
       "status": "included",
       "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 20 arcmin wide at the survey's 0.4 arcsec per pixel. The bar and the star-forming centre are not saturated. Shallow: the outer arms are faint.",
       "evidence": [
@@ -13,18 +13,18 @@
       ]
     },
     {
-      "id": "legacy-surveys-colour",
-      "subject": "DESI Legacy Imaging Surveys DR9 and DR10 colour composites",
+      "id": "legacy-surveys-color",
+      "subject": "DESI Legacy Imaging Surveys DR9 and DR10 color composites",
       "status": "excluded",
-      "finding": "Looked at as 700 px previews on 2026-10-01. The DR10 colour HiPS has a purple band of corrupt coadd across the southern half of the disc. The DR9 viewer cutout is clean and deeper than SDSS, but its display stretch saturates the bar and the inner disc to white.",
+      "finding": "Looked at as 700 px previews on 2026-10-01. The DR10 color HiPS has a purple band of corrupt coadd across the southern half of the disc. The DR9 viewer cutout is clean and deeper than SDSS, but its display stretch saturates the bar and the inner disc to white.",
       "evidence": [
         "https://www.legacysurvey.org/viewer/cutout.jpg?ra=143.042&dec=21.501&layer=ls-dr9&pixscale=0.4&size=700"
       ],
       "revisitWhen": "A Legacy Surveys composite with an unsaturated centre is published, or the bake composes two images as M31's does."
     },
     {
-      "id": "pan-starrs-colour",
-      "subject": "Pan-STARRS DR1 colour HiPS",
+      "id": "pan-starrs-color",
+      "subject": "Pan-STARRS DR1 color HiPS",
       "status": "excluded",
       "finding": "Its sky subtraction leaves dark blocks across and around the disc (700 px preview, 2026-10-01).",
       "evidence": [

@@ -22,8 +22,8 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 4315804351350378496, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 857: HR 7373; VizieR III/202 (5 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffefe8. Routes tried in order: stis-ngsl: HD 182572 is not in the library; pulkovo: HR 7373 is not in the catalogue; kiehling: HR 7373 is not among its 60 stars; burnashev: BS 7373 is not in part2; gaia-xp: used.",
       "evidence": [

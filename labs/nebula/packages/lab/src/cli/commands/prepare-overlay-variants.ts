@@ -52,7 +52,7 @@ export async function prepareOverlayVariants(planPath: string, selected: string[
       if (metadata.width !== recipe.source.nativeDimensions[0] || metadata.height !== recipe.source.nativeDimensions[1])
         throw new TypeError('Separation changed the native pixel grid.');
       const maximum = Math.min(4096, Math.max(original.widthPx, original.heightPx));
-      const output = await sharp(bytes, { unlimited: true }).toColourspace('srgb')
+      const output = await sharp(bytes, { unlimited: true }).toColorspace('srgb')
         .resize({ width: maximum, height: maximum, fit: 'inside', withoutEnlargement: true })
         .webp({ quality: 92, alphaQuality: 100, effort: 5 }).toBuffer({ resolveWithObject: true });
       const texturePath = `${directory}/prepared/${selection.id}-${id}.webp`;

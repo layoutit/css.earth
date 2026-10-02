@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 13.1 +/- 0.3 solar radii from Primary radius 13.1 +/- 0.3 solar radii, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045); Mass 23.1 +/- 1.3 solar masses from Primary mass 23.1 +/- 1.3 solar masses, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045); temperature from Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2.
 
-Colour: a Planck spectrum at the temperature of Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: a Planck spectrum at the temperature of Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Reeve & Howarth (2016), MNRAS 456, 1294, via VizieR J/MNRAS/456/1294.
 

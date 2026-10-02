@@ -8,7 +8,7 @@ It is the only planet known around TOI-5143. Its orbit and size follow Radzom et
 
 **Orbit.** Radzom et al. 2025 (2025AJ....169..189R), via the NASA Exoplanet Archive ps table (pl_refname RADZOM_ET_AL__2025): P 5.2097118 d Radzom et al. 2025 (2025AJ....169..189R), via the NASA Exoplanet Archive ps table (pl_refname RADZOM_ET_AL__2025): a/R* 14.14; Radzom et al. 2025 (2025AJ....169..189R), via the NASA Exoplanet Archive ps table (pl_refname RADZOM_ET_AL__2025): inclination 86.02 degrees No archive row states an eccentricity; the orbit is taken as circular Radzom et al. 2025 (2025AJ....169..189R), via the NASA Exoplanet Archive ps table (pl_refname RADZOM_ET_AL__2025): transit mid-time 2459527.24264 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5143's measured colour (#ffe9d6, the colour dataset of toi-5143 (src/objects/toi-5143/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-5143's measured color (#ffe9d6, the color dataset of toi-5143 (src/objects/toi-5143/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-5143's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (45, 46, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

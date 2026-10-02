@@ -3,19 +3,19 @@
   "objectId": "neptune",
   "entries": [
     {
-      "id": "opal-cycle32-colour-map",
-      "subject": "Hubble OPAL Cycle 32 2025 colour global map",
+      "id": "opal-cycle32-color-map",
+      "subject": "Hubble OPAL Cycle 32 2025 color global map",
       "status": "included",
-      "finding": "The visible-detail globe uses the OPAL team's WFC3/UVIS F467M, F547M and F657N global map; the OPAL readme declares the TIFF arbitrarily scaled and contrast enhanced, so the normal dataset does not publish those display values as literal true colour.",
+      "finding": "The visible-detail globe uses the OPAL team's WFC3/UVIS F467M, F547M and F657N global map; the OPAL readme declares the TIFF arbitrarily scaled and contrast enhanced, so the normal dataset does not publish those display values as literal true color.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
       ]
     },
     {
-      "id": "irwin-2024-colour-reference",
-      "subject": "Irwin et al. (2024) true-colour Neptune reconstruction",
+      "id": "irwin-2024-color-reference",
+      "subject": "Irwin et al. (2024) true-color Neptune reconstruction",
       "status": "included",
-      "finding": "Preparation matches the mean and channel variation of a checked equatorial OPAL sample to the unobscured central region of this true-colour reconstruction distributed by the Royal Astronomical Society; the CC BY 4.0 reference is committed under source/color/.",
+      "finding": "Preparation matches the mean and channel variation of a checked equatorial OPAL sample to the unobscured central region of this true-color reconstruction distributed by the Royal Astronomical Society; the CC BY 4.0 reference is committed under source/color/.",
       "evidence": [
         "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg"
       ]
@@ -42,7 +42,7 @@
       "id": "high-latitude-coverage",
       "subject": "OPAL coverage near Neptune's north pole",
       "status": "unresolved",
-      "finding": "Measured on the pinned 2025 OPAL maps: coverage ends near 71 degrees north and thins toward it. At 619 and 845 nm the rows from 60 to 57 degrees north still hold dark swath seams (darkest pixel 0.37 to 0.77 of the row median, settling at about 0.80 from row 67), and the colour map keeps near-black swath edges down to 42 degrees north (ratio 0.87 from row 98), so preparation starts the fill at 57 degrees north for the two bands and 41 degrees north for colour and extends that row toward its longitudinal mean at the pole, which recovers no polar detail. An earlier recipe continued from 30 degrees north, overwriting observed cloud bands between 30 and 60 degrees north, and flipped the two narrow-band maps upside down; both are fixed.",
+      "finding": "Measured on the pinned 2025 OPAL maps: coverage ends near 71 degrees north and thins toward it. At 619 and 845 nm the rows from 60 to 57 degrees north still hold dark swath seams (darkest pixel 0.37 to 0.77 of the row median, settling at about 0.80 from row 67), and the color map keeps near-black swath edges down to 42 degrees north (ratio 0.87 from row 98), so preparation starts the fill at 57 degrees north for the two bands and 41 degrees north for color and extends that row toward its longitudinal mean at the pole, which recovers no polar detail. An earlier recipe continued from 30 degrees north, overwriting observed cloud bands between 30 and 60 degrees north, and flipped the two narrow-band maps upside down; both are fixed.",
       "revisitWhen": "An OPAL or other global release observes Neptune's high northern latitudes.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
@@ -71,7 +71,7 @@
       "id": "pds-rings-node-ring-table",
       "subject": "PDS Rings Node Neptune ring table",
       "status": "included",
-      "finding": "The PDS Rings Node table supplies the prepared ring radii, widths and normal optical depths; each ring's opacity is 1 - exp(-optical depth) and its colour the neutral gray of a body without a measured colour. Arago, the unnamed ring and the Adams arcs are not drawn: the table gives the first two no optical depth and the arcs no longitudes.",
+      "finding": "The PDS Rings Node table supplies the prepared ring radii, widths and normal optical depths; each ring's opacity is 1 - exp(-optical depth) and its color the neutral gray of a body without a measured color. Arago, the unnamed ring and the Adams arcs are not drawn: the table gives the first two no optical depth and the arcs no longitudes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/neptune/README.md#L21"
       ]
@@ -98,7 +98,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Hubble OPAL Minnaert coefficients of the colour map per channel (F657N 0.50, F547M 0.80, F467M 0.88), the correction OPAL removed before projection, put back relative to the flood-lit disc centre.",
+      "finding": "Hubble OPAL Minnaert coefficients of the color map per channel (F657N 0.50, F547M 0.80, F467M 0.88), the correction OPAL removed before projection, put back relative to the flood-lit disc centre.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt"
       ]
@@ -115,7 +115,7 @@
       "id": "authored-limb-lighting",
       "subject": "Authored limb lighting: a 0.35 flood-light limb floor, an ambient term and a terminator ramp",
       "status": "excluded",
-      "finding": "Replaced by the OPAL Minnaert law of the colour map.",
+      "finding": "Replaced by the OPAL Minnaert law of the color map.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
@@ -123,7 +123,7 @@
     },
     {
       "id": "opal-dated-visible-maps",
-      "subject": "Dated Hubble OPAL visible-colour sequence (9 rotations)",
+      "subject": "Dated Hubble OPAL visible-color sequence (9 rotations)",
       "status": "included",
       "finding": "One publisher RGB composite per included cycle, component FITS coverage, source-backed map frame and observation dates. Gray grid preserves missing coverage. Current scene lighting and rings remain a presentation, not the historical observing geometry. See the Hubble dates section of the README.",
       "evidence": [

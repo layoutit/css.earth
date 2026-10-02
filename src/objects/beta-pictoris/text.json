@@ -45,9 +45,9 @@
   },
   "datasets": {
     "color": {
-      "title": "Photosphere colour",
+      "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
-      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+      "summary": "The color of Gaia's spectrum of the star. No surface picture exists."
     },
     "debris-disc": {
       "title": "Debris disc, 2.1 and 4.1 µm",
@@ -75,13 +75,13 @@
         }
       ]
     },
-    "debris-disc-colour": {
-      "title": "Debris disc, colour",
+    "debris-disc-color": {
+      "title": "Debris disc, color",
       "detail": "Hubble ACS, 2003",
-      "summary": "The edge-on disc 29 to 135 au out in three Hubble filters, in its colour against the star. Its depth is reconstructed.",
+      "summary": "The edge-on disc 29 to 135 au out in three Hubble filters, in its color against the star. Its depth is reconstructed.",
       "sources": [
         {
-          "catalogueId": "source-beta-pictoris-disc-colour-f435w-roll1",
+          "catalogueId": "source-beta-pictoris-disc-color-f435w-roll1",
           "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
           "label": "HST programme 9987, ACS/HRC coronagraph images in three filters, starlight removed here",
           "checked": "2026-09-22"

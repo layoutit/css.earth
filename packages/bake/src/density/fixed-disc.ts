@@ -12,7 +12,7 @@ export function coreSupport(position: readonly number[], fadeStart: number, radi
   return 1 - t * t * (3 - 2 * t);
 }
 
-/** Keep the bulge: each slab keeps its original colours and only the optical depth inside the core support, which
+/** Keep the bulge: each slab keeps its original colors and only the optical depth inside the core support, which
  * falls smoothly to zero at the core radius. The outer disc is not drawn. */
 export async function prepareFixedDiscVolume({ volume, slices, recipe, outputDirectory, readResource }: {
   volume: PreparedCssVolume; slices: VolumeSlices; recipe: VolumeRecipe; outputDirectory: string;

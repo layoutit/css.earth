@@ -53,8 +53,8 @@
     "controls": [
       {
         "id": "infrared",
-        "label": "Infrared colour",
-        "qualification": "False colour from its measured flux in three infrared bands (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "label": "Infrared color",
+        "qualification": "False color from its measured flux in three infrared bands (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
         "thumbnail": "gj-504-b-dataset-infrared.webp",
         "surface": "gj-504-b-surface-infrared@2x.webp",
         "poles": "gj-504-b-poles-infrared@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...778L...4J"
         },
         "falseColor": true,
-        "notes": "GJ 504 b's brightness in three infrared bands as one colour: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko j), so the colour shows its band ratios; brightness is not compared across planets at different distances. Not a natural colour; nobody has resolved its disc."
+        "notes": "GJ 504 b's brightness in three infrared bands as one color: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko j), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
       },
       {
         "id": "illustration",
@@ -79,7 +79,7 @@
           "url": "https://eyes.nasa.gov/apps/exo/"
         },
         "falseColor": false,
-        "notes": "NASA's artist's concept of GJ 504 b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
+        "notes": "NASA's artist's concept of GJ 504 b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary."
       }
     ]
   },

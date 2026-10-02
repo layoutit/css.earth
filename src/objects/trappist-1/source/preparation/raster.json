@@ -26,7 +26,7 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by Gillon et al. (2016) I+z quadratic coefficients inferred from atmosphere tables. The disc is unresolved: the limb is a red-band model, not an image or a directly measured profile. Self-luminous, so no lighting.",
+        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by Gillon et al. (2016) I+z quadratic coefficients inferred from atmosphere tables. The disc is unresolved: the limb is a red-band model, not an image or a directly measured profile. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",
           "published": true,
@@ -53,7 +53,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "black alpha darkens the Gaia-coloured sphere according to the Gillon et al. (2016) I+z model-prior quadratic law; transparent outside the silhouette",
+        "composition": "black alpha darkens the Gaia-colored sphere according to the Gillon et al. (2016) I+z model-prior quadratic law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

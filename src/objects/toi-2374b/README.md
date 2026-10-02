@@ -8,7 +8,7 @@ It is the only planet known around TOI-2374. Its orbit and size follow Yee et al
 
 **Orbit.** Yee et al. 2025 (2025AJ....170..275Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): P 4.3136193 d Yee et al. 2025 (2025AJ....170..275Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): a/R* 14.57; Yee et al. 2025 (2025AJ....170..275Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): inclination 87.2 degrees No archive row states an eccentricity; the orbit is taken as circular Yee et al. 2025 (2025AJ....170..275Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL_2025): transit mid-time 2460069.26439 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2374's measured colour (#ffd7be, the colour dataset of toi-2374 (src/objects/toi-2374/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-2374's measured color (#ffd7be, the color dataset of toi-2374 (src/objects/toi-2374/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2374's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (28, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -31,10 +31,10 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
-      "finding": "The Gaia DR3 BP/RP sampled spectrum of source 5231963962676292224 (De Angeli et al. 2023, A&A 674, A2; Montegriffo et al. 2023, A&A 674, A3), weighted by the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0). No image of the star's surface exists.",
+      "finding": "The Gaia DR3 BP/RP sampled spectrum of source 5231963962676292224 (De Angeli et al. 2023, A&A 674, A2; Montegriffo et al. 2023, A&A 674, A3), weighted by the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0). No image of the star's surface exists.",
       "evidence": [
         "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5231963962676292224&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
         "https://gea.esac.esa.int/archive/"

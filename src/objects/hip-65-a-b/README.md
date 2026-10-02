@@ -8,7 +8,7 @@ It is the only planet known around HIP 65 A. Its orbit and size follow Nielsen e
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 0.98097217 d Nielsen et al. 2020 (2020A&A...639A..76N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): a/R* 5.289; Nielsen et al. 2020 (2020A&A...639A..76N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): inclination 77.18 degrees Nielsen et al. 2020 (2020A&A...639A..76N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): e 0 Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458658.653779 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hip-65-a's measured colour (#ffcdac, the colour dataset of hip-65-a (src/objects/hip-65-a/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hip-65-a's measured color (#ffcdac, the color dataset of hip-65-a (src/objects/hip-65-a/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HIP 65 A's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (102, 104, 105), folded onto its orbit. Upper limits and rows without an error are left out.
 

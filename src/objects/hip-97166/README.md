@@ -6,7 +6,7 @@ Its radius and temperature follow MacDougall et al. 2023. The introduction is ge
 
 **Star.** Placement: Gaia DR3 source 2288221003213039488, parallax 15.142 ± 0.010 mas (66.04 pc). Radius 0.8418 +/- 0.0123 solar radii from MacDougall et al. 2023, the stellar radius of the default parameter set of HIP 97166 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). Mass 0.9342 +/- 0.0158 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of HIP 97166 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). Temperature 5,216 K from MacDougall et al. 2023, the stellar temperature of the default parameter set of HIP 97166 b in the NASA Exoplanet Archive. log g 4.56 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2288221003213039488, through the CIE 1931 2° observer: #ffe5d3. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2288221003213039488, through the CIE 1931 2° observer: #ffe5d3. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,216 K and log g 4.56 (u1 0.596, u2 0.167): a model, because no fit of this star's limb is used.
 

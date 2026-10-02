@@ -1,6 +1,6 @@
 # Small Magellanic Cloud (SMC)
 
-Five published images colour one shared three-dimensional emission model; **Horálek optical is the default**. Each dataset carries the same 272 directional slices (80 x, 64 y, 128 z), packed into three WebP axis atlases, and the same 1,803 catalogue stars. Switching datasets changes colour and never geometry. Nothing here measures gas or dust depth.
+Five published images color one shared three-dimensional emission model; **Horálek optical is the default**. Each dataset carries the same 272 directional slices (80 x, 64 y, 128 z), packed into three WebP axis atlases, and the same 1,803 catalogue stars. Switching datasets changes color and never geometry. Nothing here measures gas or dust depth.
 
 The shape is a hypothesis with two parts. A broad envelope carries 82.79% of the image light along the depth distribution of a **VMC-constrained ellipsoid**, and 476 fitted detail components sit at conditional modes of the **Garver stellar simulation** along their own sightlines. Catalogue-star depths are realizations inside that model, not distances.
 
@@ -14,7 +14,7 @@ The shape is a hypothesis with two parts. A broad envelope carries 82.79% of the
 | [ESO VISTA, eso1714a](https://www.eso.org/public/images/eso1714a/) | Y/J/Ks near-infrared display; 4000 × 3540 pixels. |
 | [SMASH, noirlab2030b](https://noirlab.edu/public/images/noirlab2030b/) | DECam g/r/i/z optical survey image, 3827 × 3190 pixels; also the publisher sky anchor every relative registration is matched to. |
 | [DSS2, heic0514c](https://esahubble.org/images/heic0514c/) | 13096 × 13616-pixel photographic plate composite; narrower footprint than VISTA or SMASH. |
-| [AllWISE colour HiPS through CDS](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json) | W4/W2/W1 false colour over a 10° TAN field, 4000² pixels; not native detector sampling. |
+| [AllWISE color HiPS through CDS](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json) | W4/W2/W1 false color over a 10° TAN field, 4000² pixels; not native detector sampling. |
 | [Bonanos et al. (2010)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416) | Observed sky positions and Johnson V for 1,803 selected massive stars. |
 | [Nidever et al. (2011)](https://arxiv.org/abs/1104.2594) | [Stellar extent](source/stellar-extent.json): SMC red giants detected out to about 11 kpc. Inside that radius the SMC's caption hides. It marks where stars are still measured, not a boundary. |
 

@@ -17,7 +17,7 @@ export interface PreparedContextPoint {
   readonly id: string;
   readonly name: string;
   readonly color: string;
-  /** The colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour; absent, the
+  /** The color its marker, orbit and caption take in the world, prepared from its swatch or catalogue color; absent, the
    * world's default. Set inline on its elements, so no page carries a stylesheet rule per body. */
   readonly contextColor?: string;
   /** A star, black hole or planet: its caption is in capitals. */
@@ -31,7 +31,7 @@ export interface PreparedContextPoint {
   readonly billboard?: Readonly<{ url: string; size: number; focalPixels: number; distanceM: number }>;
   /** Not a map target: drawn as a plain dot, its path in its own bank (packages/bake/src/world-context/spatial-context.ts). */
   readonly plainDot?: true;
-  /** A star's dot colour: its colour dimmed by its luminosity, prepared from its package's cited radius and effective
+  /** A star's dot color: its color dimmed by its luminosity, prepared from its package's cited radius and effective
    * temperature (site/build/prepare/prepare-spatial-context.ts). Absent, the dot takes `color`. */
   readonly dotColor?: string;
   readonly positionM: PositionM;
@@ -168,8 +168,8 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
     // A body drawn from its astronomy record may have no measured radius: 0, drawn as its circle only.
     positionM: vector(input.positionM, 'point position'), radiusM: input.unpackaged === true && input.radiusM === 0 ? 0 : positive(input.radiusM, `point ${id} radius`),
     ...(input.contextColor === undefined ? {} : { contextColor: (() => {
-      const hex = text(input.contextColor, `point ${id} context colour`);
-      if (!/^#[a-f0-9]{6}$/i.test(hex)) throw new TypeError(`Context point ${id} colour ${hex} is not #rrggbb.`);
+      const hex = text(input.contextColor, `point ${id} context color`);
+      if (!/^#[a-f0-9]{6}$/i.test(hex)) throw new TypeError(`Context point ${id} color ${hex} is not #rrggbb.`);
       return hex;
     })() }),
     ...(input.labelCase === undefined ? {} : input.labelCase === 'upper' ? { labelCase: 'upper' as const }
@@ -189,8 +189,8 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
     ...(input.plainDot === undefined ? {} : input.plainDot === true ? { plainDot: true as const }
       : (() => { throw new TypeError(`Context point ${id} plain dot is ${String(input.plainDot)}, not true.`); })()),
     ...(input.dotColor === undefined ? {} : { dotColor: (() => {
-      const hex = text(input.dotColor, `point ${id} dot colour`);
-      if (!/^#[a-f0-9]{6}$/i.test(hex)) throw new TypeError(`Context point ${id} dot colour ${hex} is not #rrggbb.`);
+      const hex = text(input.dotColor, `point ${id} dot color`);
+      if (!/^#[a-f0-9]{6}$/i.test(hex)) throw new TypeError(`Context point ${id} dot color ${hex} is not #rrggbb.`);
       return hex;
     })() }) });
 }

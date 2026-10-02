@@ -54,7 +54,7 @@
     },
     {
       "kind": "limitation",
-      "text": "Longitudes are in Claudia Double Prime, 210 degrees from the Dawn Claudia frame of the other Vesta maps; unit names carry Dawn colour-ratio classes, not the map's own symbol colours.",
+      "text": "Longitudes are in Claudia Double Prime, 210 degrees from the Dawn Claudia frame of the other Vesta maps; unit names carry Dawn color-ratio classes, not the map's own symbol colors.",
       "scope": "Placement and legend",
       "evidence": "src/objects/vesta/investigations.json"
     }

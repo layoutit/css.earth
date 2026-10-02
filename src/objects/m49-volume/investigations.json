@@ -3,10 +3,10 @@
   "objectId": "m49-volume",
   "entries": [
     {
-      "id": "legacy-surveys-colour",
-      "subject": "DESI Legacy Imaging Surveys DR10 colour HiPS",
+      "id": "legacy-surveys-color",
+      "subject": "DESI Legacy Imaging Surveys DR10 color HiPS",
       "status": "included",
-      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/DESI-Legacy-Surveys/DR10/color, 35.1 arcmin wide on the 2MASS position. Colour from four bands, public with acknowledgment, and addressed by one URL. Its sky subtraction ends M49's light about 560 arcsec out.",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/DESI-Legacy-Surveys/DR10/color, 35.1 arcmin wide on the 2MASS position. Color from four bands, public with acknowledgment, and addressed by one URL. Its sky subtraction ends M49's light about 560 arcsec out.",
       "evidence": [
         "https://www.legacysurvey.org/dr10/",
         "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record"
@@ -25,7 +25,7 @@
     },
     {
       "id": "other-survey-composites",
-      "subject": "SDSS DR9, Pan-STARRS DR1 and DSS2 colour HiPS",
+      "subject": "SDSS DR9, Pan-STARRS DR1 and DSS2 color HiPS",
       "status": "excluded",
       "finding": "Looked at as 900 px previews of the same field on 2026-10-01. SDSS shows its frame mosaic as dark squares around M49, DSS2 is photographic and shows the galaxy only to about 3 arcmin, and Pan-STARRS subtracts the galaxy's own light as sky, leaving a dark ring about 1.5 arcmin out."
     },

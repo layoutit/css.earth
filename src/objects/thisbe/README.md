@@ -62,7 +62,7 @@ Meshoptimizer reports 2008.8 m estimated error, below the authored 2100 m thresh
 - The 4096 × 2048 display map does not add observational detail.
 - Prime-meridian display phase is arbitrary; no absolute rotational ephemeris is claimed.
 - The separate MPCD survey table reports an impossible latitude for Thisbe, so it is not used to orient this mesh.
-- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Thisbe from 16° north, so unseen surface keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination, not albedo or color. The frames see Thisbe from 16° north, so unseen surface keeps the missing-imagery grid.
 - Registration reports a conflict for `zimpol`; the dataset ships on the paper's comparison figure.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

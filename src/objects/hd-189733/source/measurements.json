@@ -9,6 +9,6 @@
   "radiusSource": "0.752 solar radii (523,166.4 km at 695,700 km per solar radius), the stellar radius Lally et al. (2025, arXiv:2503.20895, Table 1) fix for their eclipse map of HD 189733b. A model-dependent value; the interferometric diameter above gives 0.818 solar radii at the Gaia distance.",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the map paper's radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json) and dimmed toward the limb by a law fitted to TESS transits, because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
+    "qualification": "A sphere at the map paper's radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json) and dimmed toward the limb by a law fitted to TESS transits, because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
   }
 }

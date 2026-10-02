@@ -1,17 +1,17 @@
 /**
  * Merge prepared catalogue point banks into one bank of dots, drawn by the app like its other stars: projected every
- * frame, sharp at any zoom. `source/<id>/merge.json` lists the banks; each keeps its catalogue colour, and its opacity
- * darkens that colour, so every dot is opaque and only its colour carries its tone. An entry may be `{ bank, withinPcOfCentre, keepEvery, uncapped, basis }`: only points within that
+ * frame, sharp at any zoom. `source/<id>/merge.json` lists the banks; each keeps its catalogue color, and its opacity
+ * darkens that color, so every dot is opaque and only its color carries its tone. An entry may be `{ bank, withinPcOfCentre, keepEvery, uncapped, basis }`: only points within that
  * distance of the galaxy's centre (its volume or image-layer frame origin), and one in `keepEvery` of those in catalogue order; with
  * `uncapped`, the bank's points pass the density cap and take none of its room, so another bank's count does not change; with
  * `fadePcFromSun: [from, to]`, a point is kept whole within `from` parsecs of the Sun and with a chance falling linearly to none
  * at `to` (by a fixed hash of its order in the bank), so a census's edge fades into the level around it instead of ending.
  * A kinematic distance whose uncertainty (prepare-catalogue-points.mts `kinematicUncertainty`) exceeds `maxKinematicSigmaKpc` is left
  * out: those are the sources the rotation curve cannot place, and they pile onto a circle through the Sun and the
- * centre. `colourTowardWhite` mixes each colour that fraction of the way to white first (presentation: the catalogue
- * colours read as tints of starlight, not saturated signs). `colourGamma` then raises each colour channel to that power
- * (presentation: it deepens the coloured dots so they sit in the galaxy's backing while the whitest keep their
- * sparkle). A bank's `paletteTone` (prepare-catalogue-points.mts `toneBy`) then scales each colour, so a dimmer object is
+ * centre. `colorTowardWhite` mixes each color that fraction of the way to white first (presentation: the catalogue
+ * colors read as tints of starlight, not saturated signs). `colorGamma` then raises each color channel to that power
+ * (presentation: it deepens the colored dots so they sit in the galaxy's backing while the whitest keep their
+ * sparkle). A bank's `paletteTone` (prepare-catalogue-points.mts `toneBy`) then scales each color, so a dimmer object is
  * a darker dot. The points are written in a fixed shuffled order, so a thinned prefix thins every region alike.
  * `centreOnGalaxy` writes them around the galaxy's centre instead of the Sun (same axes and unit): the app thins a bank
  * by the camera's distance from its origin, so another galaxy's dots must have that galaxy as their origin.
@@ -67,9 +67,9 @@ if (!text(recipe.meaning)) fail('needs its meaning.');
 if ((recipe.maxKinematicSigmaKpc !== undefined || recipe.maxKinematicSigmaBasis !== undefined) && (!positive(recipe.maxKinematicSigmaKpc) || !text(recipe.maxKinematicSigmaBasis))) {
   fail('maxKinematicSigmaKpc is a positive number with its basis.');
 }
-if (recipe.colourGamma !== undefined && (!positive(recipe.colourGamma) || !text(recipe.colourGammaBasis))) fail('colourGamma is positive, with its basis.');
-if (recipe.colourTowardWhite !== undefined && (typeof recipe.colourTowardWhite !== 'number' || !(recipe.colourTowardWhite >= 0 && recipe.colourTowardWhite < 1) ||
-  !text(recipe.colourTowardWhiteBasis))) fail('colourTowardWhite is a fraction from 0 to 1, with its basis.');
+if (recipe.colorGamma !== undefined && (!positive(recipe.colorGamma) || !text(recipe.colorGammaBasis))) fail('colorGamma is positive, with its basis.');
+if (recipe.colorTowardWhite !== undefined && (typeof recipe.colorTowardWhite !== 'number' || !(recipe.colorTowardWhite >= 0 && recipe.colorTowardWhite < 1) ||
+  !text(recipe.colorTowardWhiteBasis))) fail('colorTowardWhite is a fraction from 0 to 1, with its basis.');
 
 type DiscCap = { mode: 'disc'; atSunPerKpc2: number; scaleLengthKpc: number; kernel: number; taper?: [number, number] };
 type VolumeCap = { mode: 'volume'; perMpc3: number; kernel: number; shell?: number; taper?: [number, number];
@@ -104,14 +104,14 @@ const cap = ((): DiscCap | VolumeCap | undefined => {
 if (recipe.within !== undefined && (!Array.isArray(recipe.within) || !recipe.within.every(bankId))) fail('within lists the enclosing levels\' ids.');
 
 const entries = (recipe.banks as (string | Entry)[]).map(value => typeof value === 'string' ? { bank: value } as Entry : value);
-const maxSigma = recipe.maxKinematicSigmaKpc as number | undefined, colourGamma = (recipe.colourGamma as number | undefined) ?? 1;
-const towardWhite = (recipe.colourTowardWhite as number | undefined) ?? 0;
-const graded = (colour: string) => '#' + [1, 3, 5].map(i => {
-  const channel = parseInt(colour.slice(i, i + 2), 16) / 255;
-  return Math.round(255 * (channel + (1 - channel) * towardWhite) ** colourGamma).toString(16).padStart(2, '0');
+const maxSigma = recipe.maxKinematicSigmaKpc as number | undefined, colorGamma = (recipe.colorGamma as number | undefined) ?? 1;
+const towardWhite = (recipe.colorTowardWhite as number | undefined) ?? 0;
+const graded = (color: string) => '#' + [1, 3, 5].map(i => {
+  const channel = parseInt(color.slice(i, i + 2), 16) / 255;
+  return Math.round(255 * (channel + (1 - channel) * towardWhite) ** colorGamma).toString(16).padStart(2, '0');
 }).join('');
-const toned = (colour: string, tone: number) => tone === 1 ? colour
-  : '#' + [1, 3, 5].map(i => Math.round(parseInt(colour.slice(i, i + 2), 16) * tone).toString(16).padStart(2, '0')).join('');
+const toned = (color: string, tone: number) => tone === 1 ? color
+  : '#' + [1, 3, 5].map(i => Math.round(parseInt(color.slice(i, i + 2), 16) * tone).toString(16).padStart(2, '0')).join('');
 // The galaxy's centre: its volume frame origin, read only by the rules that need it.
 const centreOnGalaxy = recipe.centreOnGalaxy === true;
 if (recipe.centreOnGalaxy !== undefined && (typeof recipe.centreOnGalaxy !== 'boolean' || cap)) fail('centreOnGalaxy is a boolean, for a bank without a density cap.');
@@ -130,8 +130,8 @@ const centreKpc = galaxyFrame ? galaxyFrame.originM.map(value => value / KPC_M) 
 const hex = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}$/iu.test(value);
 
 const unplaced: Record<string, number> = {}, kept: Record<string, number> = {};
-const merged: { reference: number[]; colour: string; radius: number; bank: string; group?: string }[] = [];
-// Whether any bank sizes its dots: only then is each palette entry a (colour, radius) pair with paletteRadiusPx.
+const merged: { reference: number[]; color: string; radius: number; bank: string; group?: string }[] = [];
+// Whether any bank sizes its dots: only then is each palette entry a (color, radius) pair with paletteRadiusPx.
 let sized = false;
 let bankFrame: ReturnType<typeof parseDensityVolumeFrame> | null = null, rawFrame: unknown = null;
 for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun } of entries) {
@@ -149,15 +149,15 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun }
   }
   bankFrame ??= parsedFrame; rawFrame ??= bank.frame;
   const palette = appearance.palette === undefined ? null : appearance.palette;
-  if (palette !== null && (!Array.isArray(palette) || !palette.every(hex))) throw new TypeError(`${bankIdValue}: the palette must be hex colours.`);
+  if (palette !== null && (!Array.isArray(palette) || !palette.every(hex))) throw new TypeError(`${bankIdValue}: the palette must be hex colors.`);
   const tones = appearance.paletteTone;
   if (tones !== undefined && (!Array.isArray(palette) || !Array.isArray(tones) || tones.length !== palette.length || !tones.every(value => typeof value === 'number' && value > 0 && value <= 1))) {
-    throw new TypeError(`${bankIdValue}: paletteTone holds one tone in (0, 1] per palette colour.`);
+    throw new TypeError(`${bankIdValue}: paletteTone holds one tone in (0, 1] per palette color.`);
   }
   // A bank sized by its magnitudes (prepare-catalogue-points.mts `sizeBy`) gives each palette entry its own radius.
   const radii = appearance.paletteRadiusPx;
   if (radii !== undefined && (!Array.isArray(palette) || !Array.isArray(radii) || radii.length !== palette.length || !radii.every(value => typeof value === 'number' && value > 0))) {
-    throw new TypeError(`${bankIdValue}: paletteRadiusPx holds one positive radius per palette colour.`);
+    throw new TypeError(`${bankIdValue}: paletteRadiusPx holds one positive radius per palette color.`);
   }
   if (radii !== undefined) sized = true;
   const sigmas = bank.kinematicSigmaKpc;
@@ -185,12 +185,12 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun }
       const kept = Math.max(0, Math.min(1, (fadePcFromSun[1] - fromSunPc) / (fadePcFromSun[1] - fadePcFromSun[0])));
       if (((Math.imul(index + 1, 2654435761) >>> 0) / 2 ** 32) >= kept) return;
     }
-    const colour = palette ? palette[point[3] as number] : appearance.colorCss;
-    if (!hex(colour)) throw new TypeError(`${bankIdValue}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
+    const color = palette ? palette[point[3] as number] : appearance.colorCss;
+    if (!hex(color)) throw new TypeError(`${bankIdValue}: point ${index} names palette color ${point[3]}, which the palette of ${palette!.length} lacks.`);
     const tone = (tones ? (tones as number[])[point[3] as number]! : 1) * layerTone;
     const group = groups ? (groups as string[])[index]! : '';
     const radius = radii ? (radii as number[])[point[3] as number]! : typeof appearance.radiusPx === 'number' ? appearance.radiusPx : 0.75;
-    merged.push({ reference: position, colour: toned(graded(colour), tone), radius, bank: bankIdValue, ...(group ? { group: `${bankIdValue}:${group}` } : {}) }); kept[bankIdValue]!++;
+    merged.push({ reference: position, color: toned(graded(color), tone), radius, bank: bankIdValue, ...(group ? { group: `${bankIdValue}:${group}` } : {}) }); kept[bankIdValue]!++;
   });
 }
 const hash = (index: number) => ((index + 1) * 2654435761) % 4294967296;
@@ -264,8 +264,8 @@ if (cap?.mode === 'volume' && cap.shell !== undefined) {
     return true;
   });
 }
-// A palette entry is a colour, or with sized banks a colour at one radius.
-const entryOf = (point: { colour: string; radius: number }) => sized ? `${point.colour}|${point.radius}` : point.colour;
+// A palette entry is a color, or with sized banks a color at one radius.
+const entryOf = (point: { color: string; radius: number }) => sized ? `${point.color}|${point.radius}` : point.color;
 const paletteEntries = [...new Set(ordered.map(entryOf))], paletteIndex = new Map(paletteEntries.map((entry, index) => [entry, index]));
 const palette = paletteEntries.map(entry => entry.split('|')[0]!), paletteRadiusPx = sized ? paletteEntries.map(entry => Number(entry.split('|')[1])) : null;
 // Around the galaxy's centre: its frame origin, the Sun-centred frame's axes and unit, bounds reaching the farthest dot.

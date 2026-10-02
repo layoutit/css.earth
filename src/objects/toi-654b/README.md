@@ -8,7 +8,7 @@ It is the only planet known around TOI-654. Its orbit and size follow Ikuta et a
 
 **Orbit.** Ikuta et al. 2025 (2025PASJ...77.1101I), via the NASA Exoplanet Archive ps table (pl_refname IKUTA_ET_AL_2025): P 1.527561 d Ikuta et al. 2025 (2025PASJ...77.1101I), via the NASA Exoplanet Archive ps table (pl_refname IKUTA_ET_AL_2025): a/R* derived from its semi-major axis 0.01944 au and stellar radius 0.43 solar radii; Ikuta et al. 2025 (2025PASJ...77.1101I), via the NASA Exoplanet Archive ps table (pl_refname IKUTA_ET_AL_2025): inclination 88.28 degrees Ikuta et al. 2025 (2025PASJ...77.1101I), via the NASA Exoplanet Archive ps table (pl_refname IKUTA_ET_AL_2025): e 0 Ikuta et al. 2025 (2025PASJ...77.1101I), via the NASA Exoplanet Archive ps table (pl_refname IKUTA_ET_AL_2025): transit mid-time 2459243.0584 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-654's measured colour (#ffcd8f, the colour dataset of toi-654 (src/objects/toi-654/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-654's measured color (#ffcd8f, the color dataset of toi-654 (src/objects/toi-654/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-654's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (62, 72, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

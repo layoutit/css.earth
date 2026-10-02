@@ -11,7 +11,7 @@ Six inspection references share one sky plane. The density remains in its indepe
 | [Horálek optical wide field](https://noirlab.edu/public/images/iotw2547a/) | 6582 × 4388 | 592 matched stars | CC BY 4.0 |
 | [ESO VST Tarantula](https://www.eso.org/public/images/eso1816a/) | 3985 × 4000 derivative | Publisher TAN WCS; not independently star-fitted | CC BY 4.0 |
 
-Gaia is a rendering of catalogue stars, not a nebular photograph. The creator describes synthetic filter colours and a 20 kpc foreground cutoff. No historical projection parameters or WCS were available; its measured registration does not invent a TAN projection. Different passbands and grades must remain separate until a later composition experiment.
+Gaia is a rendering of catalogue stars, not a nebular photograph. The creator describes synthetic filter colors and a 20 kpc foreground cutoff. No historical projection parameters or WCS were available; its measured registration does not invent a TAN projection. Different passbands and grades must remain separate until a later composition experiment.
 
 ## Measured shared-star fits
 

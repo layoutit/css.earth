@@ -6,7 +6,7 @@ Its radius and temperature follow Cañas et al. 2022. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 178924390478792320, parallax 8.839 ± 0.022 mas (113.14 pc). Radius 0.51 +/- 0.01 solar radii from Cañas et al. 2022, the stellar radius of the default parameter set of TOI-3714 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract). Mass 0.53 +/- 0.02 solar masses from Cañas et al. 2022, the stellar mass of the default parameter set of TOI-3714 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract). Temperature 3,660 K from Cañas et al. 2022, the stellar temperature of the default parameter set of TOI-3714 b in the NASA Exoplanet Archive. log g 4.75 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 178924390478792320, through the CIE 1931 2° observer: #ffc587. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 178924390478792320, through the CIE 1931 2° observer: #ffc587. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,660 K and log g 4.75 (u1 0.396, u2 0.363): a model, because no fit of this star's limb is used.
 

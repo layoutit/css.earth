@@ -248,7 +248,7 @@ test('an owner that asks for it gets elements hidden while their opacity is 0, a
   fader.destroy();other.destroy();
 });
 
-test('an opacity that rounds to 0 in 8-bit colour is written once, as 0', () => {
+test('an opacity that rounds to 0 in 8-bit color is written once, as 0', () => {
   const clock=new Clock(),element=new Element(),writes:string[]=[],fader=createOpacityFader(clock);
   const style=new Proxy(element.style,{set(target,key,value){if(key==='opacity')writes.push(String(value));target[key as string]=value;return true;}});
   const tracked={style} as unknown as HTMLElement;

@@ -26,7 +26,7 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (CALSPEC). The surface is darkened by latitude from the published Roche-von Zeipel fit of Monnier et al. (2012), ApJL 761, L3: the hot poles brighter and bluer, the cool equator dimmer and redder. The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+        "qualification": "Uniform photosphere color from the star's HST/STIS spectrum (CALSPEC). The surface is darkened by latitude from the published Roche-von Zeipel fit of Monnier et al. (2012), ApJL 761, L3: the hot poles brighter and bluer, the cool equator dimmer and redder. The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",
           "path": "photometry/claret-2011-v-quadratic.tsv",

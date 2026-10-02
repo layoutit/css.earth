@@ -10,8 +10,8 @@
  *   (GAIA-C3-TN-LU-LL-124, "Re-normalising the astrometric chi-square in Gaia DR2").
  * - A parallax of at least five standard errors, the generator's own floor (PARALLAX_FLOOR_SIGMA).
  *
- * The colour is the Planck spectrum at the GSP-Phot temperature: GSP-Phot's extinction says how much dust reddens the
- * spectrum, and the colour routes do not remove it. */
+ * The color is the Planck spectrum at the GSP-Phot temperature: GSP-Phot's extinction says how much dust reddens the
+ * spectrum, and the color routes do not remove it. */
 import { GAIA_TAP, type Archive } from './archives.mts';
 import { preferredName, simbadIdentifiers } from './display-name.mts';
 
@@ -54,7 +54,7 @@ export function draftFromGaia(row: ReturnType<typeof parseGaiaDraftRow>) {
       introduction: `Gaia's parallax, brightness and spectrum give it ${row.radius.toFixed(1)} solar radii and ${row.mass.toFixed(2)} solar masses (FLAME) and ${Math.round(teff).toLocaleString('en-US')} K at its surface (GSP-Phot).`,
       locator: `gaiadr3.astrophysical_parameters, ${name}: radius_flame, mass_flame, teff_gspphot` },
     color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'],
-      reason: `GSP-Phot fits an extinction A_G = ${row.extinction.toFixed(2)} mag toward this star (${GAIA_GSPPHOT.credit}, ag_gspphot), and the colour routes do not remove extinction; GSP-Phot measured its temperature` },
+      reason: `GSP-Phot fits an extinction A_G = ${row.extinction.toFixed(2)} mag toward this star (${GAIA_GSPPHOT.credit}, ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature` },
     planets: [], companions: [],
   };
 }

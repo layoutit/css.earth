@@ -1,8 +1,8 @@
 /** A star's limb darkening: the law a model-atmosphere grid gives at the star's own temperature, gravity and (for spherical models)
- * mass, read by the colour dataset's own interpolator (@cssearth/bake/objects/stellar, limb-laws.ts). The grids are tried in this order,
+ * mass, read by the color dataset's own interpolator (@cssearth/bake/objects/stellar, limb-laws.ts). The grids are tried in this order,
  * the first that holds a complete set of nodes around the star winning; every existing star keeps the grid it was read from.
  *
- * 1. Claret & Bloemen (2011), ATLAS models, Johnson V (VizieR J/A+A/529/A75, table-af): the visible band the colour is drawn in.
+ * 1. Claret & Bloemen (2011), ATLAS models, Johnson V (VizieR J/A+A/529/A75, table-af): the visible band the color is drawn in.
  * 2. Reeve & Howarth (2016), non-LTE TLUSTY models, Bessell V (J/MNRAS/456/1294, summary1): hot stars (27,500-55,000 K) down to
  *    the Eddington limit in gravity, where ATLAS stops. The OStar02 grid at solar abundance (code G, microturbulence 10 km/s); its
  *    "quad - 2" fit, least squares with the disc-centre intensity fixed. The table names each model by a file name

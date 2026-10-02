@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** JunoCam in the PDS: read a volume's index, and pin the calibrated colour images of one target as a program.
+/** JunoCam in the PDS: read a volume's index, and pin the calibrated color images of one target as a program.
  *
  *   node packages/telescope-cli/src/archives/juno/archive.mts <program id> <volume> <target> <naif id> <body frame> [--orbit <n>]
  *   node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45
@@ -85,7 +85,7 @@ const contentLength = async (url: string, fetcher: typeof fetch) => {
 };
 
 /** The calibrated images of one target in one volume that hold the red, green and blue strips. */
-export const colourImages = (rows: readonly IndexRow[], target: string, orbit?: number) => rows.filter(row => {
+export const colorImages = (rows: readonly IndexRow[], target: string, orbit?: number) => rows.filter(row => {
   if (row.TARGET_NAME.toUpperCase() !== target.toUpperCase() || row.STANDARD_DATA_PRODUCT_ID !== 'JUNOCAM-RDR') return false;
   const product = parseProductId(row.PRODUCT_ID), strips = FILTER_COMBINATIONS[product.filterCombination] ?? [];
   return ['RED', 'GREEN', 'BLUE'].every(strip => strips.includes(strip)) && (orbit === undefined || product.orbit === orbit);
@@ -93,8 +93,8 @@ export const colourImages = (rows: readonly IndexRow[], target: string, orbit?: 
 
 export async function pinProgram(id: string, volume: string, target: { name: string; naifId: number; bodyFrame: string }, kernels: readonly string[], orbit?: number, fetcher: typeof fetch = fetch): Promise<JunocamProgram> {
   if (!/^JNOJNC_\d{4}$/u.test(volume)) throw new TypeError('A JunoCam volume is named JNOJNC_nnnn.');
-  const rows = colourImages(parseIndex(await fetchText(`${VOLUMES}${volume}/INDEX/INDEX.TAB`, fetcher)), target.name, orbit);
-  if (!rows.length) throw new Error(`${volume} lists no calibrated colour image of ${target.name}${orbit === undefined ? '' : ` on orbit ${orbit}`}.`);
+  const rows = colorImages(parseIndex(await fetchText(`${VOLUMES}${volume}/INDEX/INDEX.TAB`, fetcher)), target.name, orbit);
+  if (!rows.length) throw new Error(`${volume} lists no calibrated color image of ${target.name}${orbit === undefined ? '' : ` on orbit ${orbit}`}.`);
   const images: ProgramImage[] = [];
   for (const row of rows) {
     const labelUrl = `${VOLUMES}${volume}/${row.FILE_SPECIFICATION_NAME}`, url = labelUrl.replace(/\.LBL$/u, '.IMG'), altitudeKm = indexNumber(row.SPACECRAFT_ALTITUDE);

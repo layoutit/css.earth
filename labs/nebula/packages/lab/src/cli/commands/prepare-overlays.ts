@@ -73,7 +73,7 @@ export async function prepareOverlays(path: string) {
       } else if (!input.registration) throw new TypeError(`Image needs a sky registration: ${input.id}`);
       const maxPixels = input.maxPixels ?? recipe.maxPixels;
       if (!Number.isInteger(maxPixels) || maxPixels < 256 || maxPixels > 8192) throw new TypeError('Invalid image preview resolution.');
-      const texture = await sharp(bytes, { unlimited: input.allowLargeTiff === true }).toColourspace('srgb').resize({ width: maxPixels, height: maxPixels,
+      const texture = await sharp(bytes, { unlimited: input.allowLargeTiff === true }).toColorspace('srgb').resize({ width: maxPixels, height: maxPixels,
         fit: 'inside', withoutEnlargement: true }).webp({ quality: 92, alphaQuality: 100, effort: 5 }).toBuffer({ resolveWithObject: true });
       const texturePath = `prepared/${input.id}.webp`, width = texture.info.width, height = texture.info.height;
       await writeFile(resolve(target.directory, texturePath), texture.data);

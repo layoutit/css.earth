@@ -95,8 +95,8 @@ export function parseTerrestrialProfile(input:unknown) {
     }
     if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'npy-lonlat-grid', 'pds3-grid', 'vicar-grid', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(dataset.format) || !dataset.grid ||
         (!meshGrid && !tableGrid && !facetTable && (typeof dataset.grid.width !== 'number' || !Number.isSafeInteger(dataset.grid.width) || typeof dataset.grid.height !== 'number' || !Number.isSafeInteger(dataset.grid.height) || dataset.grid.width <= 0 || dataset.grid.height <= 0)) ||
-        // A continuous ramp spans two or more colours over minimum < maximum; a categorical grid (checked above) spans its
-        // category indices 0..n-1 with one colour per category, which allows a one-class presence catalogue.
+        // A continuous ramp spans two or more colors over minimum < maximum; a categorical grid (checked above) spans its
+        // category indices 0..n-1 with one color per category, which allows a one-class presence catalogue.
         !(typeof dataset.minimum === 'number' && typeof dataset.maximum === 'number' && (dataset.categories ? dataset.minimum === 0 && dataset.maximum === dataset.categories.length - 1 : dataset.minimum < dataset.maximum)) ||
         !isArray(dataset.colors) || dataset.colors.length < (dataset.categories ? dataset.categories.length : 2) ||
         dataset.colors.some(color => typeof color !== "string" || !/^#[0-9a-f]{6}$/i.test(color)) ||

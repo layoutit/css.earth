@@ -121,7 +121,7 @@
       "origin": "https://archive.stsci.edu/prepds/stisngsl/",
       "credit": "NASA/STScI; STIS Next Generation Spectral Library v2 (Heap & Lindler), MAST; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -201,7 +201,7 @@
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://archive.stsci.edu/prepds/stisngsl/",
-      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by packages/telescope-cli/authoring/stellar-spectra/author.mts",
+      "credit": "Photosphere color from the measured spectrum as a uniform disc; rendered by packages/telescope-cli/authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -219,7 +219,7 @@
       "generator": "packages/telescope-cli/authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc; `author.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],

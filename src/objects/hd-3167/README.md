@@ -6,7 +6,7 @@ Its radius and temperature follow Coy et al. 2026. It is also HIP 2736. The intr
 
 **Star.** Placement: Gaia DR3 source 2554032474712538880, parallax 21.136 ± 0.019 mas (47.31 pc). Radius 0.871 +/- 0.015 solar radii from Coy et al. 2026, the stellar radius of the default parameter set of HD 3167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract). Mass 0.864 +/- 0.039 solar masses from Coy et al. 2026, the stellar mass of the default parameter set of HD 3167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract). Temperature 5,338 K from Coy et al. 2026, the stellar temperature of the default parameter set of HD 3167 b in the NASA Exoplanet Archive. log g 4.49 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2554032474712538880, through the CIE 1931 2° observer: #ffe9dd. Routes tried in order: stis-ngsl: HD 3167 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2554032474712538880, through the CIE 1931 2° observer: #ffe9dd. Routes tried in order: stis-ngsl: HD 3167 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,338 K and log g 4.49 (u1 0.563, u2 0.191): a model, because no fit of this star's limb is used.
 

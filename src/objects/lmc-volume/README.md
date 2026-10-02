@@ -1,6 +1,6 @@
 # Large Magellanic Cloud (LMC)
 
-Three published images colour one shared three-dimensional emission model; **Horálek optical is the default**. Each dataset carries the same 242 directional slices (97 x, 80 y, 65 z) and the same 1,042 catalogue stars, so switching datasets changes colour and never geometry. Nothing here measures gas or dust depth.
+Three published images color one shared three-dimensional emission model; **Horálek optical is the default**. Each dataset carries the same 242 directional slices (97 x, 80 y, 65 z) and the same 1,042 catalogue stars, so switching datasets changes color and never geometry. Nothing here measures gas or dust depth.
 
 The shape is a hypothesis with two parts. A broad envelope carries 80.75% of the Horálek image light along the depth distribution of the **Garver et al. stellar simulation**, and 470 fitted detail components sit at the strongest simulation mode along their own sightlines. The LMC has no observational depth tracer in this repository, so, unlike the SMC's ellipsoid, the envelope shape is the simulation's own and untested. Catalogue-star depths are realizations inside that model, not distances.
 
@@ -11,12 +11,12 @@ The shape is a hypothesis with two parts. A broad envelope carries 80.75% of the
 | [Garver, Nidever, Debattista & Deg simulation](https://doi.org/10.5061/dryad.1vhhmgr82) | Stellar-density prior: the envelope's depth distribution and the detail components' line-of-sight modes. |
 | [Horálek optical, iotw2547a](https://noirlab.edu/public/images/iotw2547a/) | 6582 × 4388-pixel visible-light photograph; also the image the emission model was fitted to. Acquisition instrument and exact bands unspecified. |
 | [ESO VISTA, eso1914a](https://www.eso.org/public/images/eso1914a/) | Y/J/Ks near-infrared display; 8954 × 10000 pixels. |
-| [NASA/IPAC AllWISE through CDS](https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html) | W4/W2/W1 false-colour HiPS mosaic; 6000² pixels across 24°, not native detector sampling. |
+| [NASA/IPAC AllWISE through CDS](https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html) | W4/W2/W1 false-color HiPS mosaic; 6000² pixels across 24°, not native detector sampling. |
 | [Bonanos et al. (2009)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | Observed sky positions and Johnson V for 1,042 selected massive stars; their depths are model-contained realizations. |
 | [SMASH, noirlab2030a](https://noirlab.edu/public/images/noirlab2030a/) | Shared sky-registration reference every image is matched to. |
 | [Nidever et al. (2019)](https://arxiv.org/abs/1805.02671) | [Stellar extent](source/stellar-extent.json): LMC stars detected out to R ≈ 21°, about 18.5 kpc. Inside that radius the LMC's caption hides; outside it the caption hangs under the LMC's framing sphere. It marks where stars are still measured, not a boundary. |
 
-Native photographs supply colour after registered star removal.
+Native photographs supply color after registered star removal.
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; the search was not exhaustive.
 
@@ -42,7 +42,7 @@ A browser capture of this page: the 35 packaged stars of the Cloud draw as dots,
 
 ## Known problems
 
-- **VISTA and AllWISE are brighter than their own images:** +17% and +264% after fitting. Every dataset shares the one opacity fitted to Horálek, so a tone curve can only dim or recolour inside it. AllWISE's own composite spans about 19 grey levels inside its footprint.
+- **VISTA and AllWISE are brighter than their own images:** +17% and +264% after fitting. Every dataset shares the one opacity fitted to Horálek, so a tone curve can only dim or recolor inside it. AllWISE's own composite spans about 19 gray levels inside its footprint.
 - The envelope is the simulation's shape hypothesis and the detail components are conditioned on the same simulation; neither is measured gas geometry. The model records `materialGatePassed: false`. The LMC has no depth tracer here to test it.
 - The fit is cut along the Horálek image's bottom edge, and its black point still clips the faint outer halo. The brightest 0.1% of pixels reach only 0.89–0.96 of the image.
 - A violet-blue patch can remain on the western footprint edge, and a small detached knot group appears above the body at oblique and side poses.

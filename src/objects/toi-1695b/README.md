@@ -8,7 +8,7 @@ It is the only planet known around TOI-1695. Its orbit and size follow Cherubim 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.13429456192 d Cherubim et al. 2023 (2023AJ....165..167C), via the NASA Exoplanet Archive ps table (pl_refname CHERUBIM_ET_AL_2023): a/R* derived from its semi-major axis 0.033548 au and stellar radius 0.515 solar radii; Cherubim et al. 2023 (2023AJ....165..167C), via the NASA Exoplanet Archive ps table (pl_refname CHERUBIM_ET_AL_2023): inclination 87.2 degrees Kiefer et al. 2023 (2023A&A...670A.136K), via the NASA Exoplanet Archive ps table (pl_refname KIEFER_ET_AL_2023): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458791.519137 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1695's measured colour (#ffc88f, the colour dataset of toi-1695 (src/objects/toi-1695/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1695's measured color (#ffc88f, the color dataset of toi-1695 (src/objects/toi-1695/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1695's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (79, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

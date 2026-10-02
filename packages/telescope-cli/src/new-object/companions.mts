@@ -8,7 +8,7 @@
 import type { Archive } from './archives.mts';
 import { hostId as idFor } from './identity.mts';
 
-// VizieR's ASU service, as the colour routes use it: its TAP mirror (tapvizier) sends an incomplete certificate chain that Node refuses.
+// VizieR's ASU service, as the color routes use it: its TAP mirror (tapvizier) sends an incomplete certificate chain that Node refuses.
 export const VIZIER_ASU = 'https://vizier.cds.unistra.fr/viz-bin/asu-tsv';
 export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync';
 /** El-Badry et al. (2021) section 3: pairs with R below 0.1 are bound with high confidence. */

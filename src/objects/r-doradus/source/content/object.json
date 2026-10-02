@@ -63,7 +63,7 @@
           "url": "https://doi.org/10.1038/s41586-024-07836-9"
         },
         "falseColor": true,
-        "notes": "One image of the photosphere made by the ALMA pipeline from band 7 visibilities of 18 July 2023, in the 331-345 GHz continuum, cast onto a sphere of the published radius. The restoring beam is 20.7 by 16.8 milliarcseconds across a 60 milliarcsecond disc, so about ten resolution elements cover the face and nothing finer than the beam is shown. The mottling is measured, not assumed: fitting a smooth disc through this image's own beam leaves a residual 7.0 times the image noise, against 3.0 times for the session's check quasar, which is a point source through the same beam. Individual convective cells are not resolved: the authors measure a dominant cell size of 13.1 milliarcseconds, smaller than the beam, so what is shown is convection smoothed to the resolution. The colours are a legend for relative brightness at 338 GHz on the heat scale used for the other stars here, not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+        "notes": "One image of the photosphere made by the ALMA pipeline from band 7 visibilities of 18 July 2023, in the 331-345 GHz continuum, cast onto a sphere of the published radius. The restoring beam is 20.7 by 16.8 milliarcseconds across a 60 milliarcsecond disc, so about ten resolution elements cover the face and nothing finer than the beam is shown. The mottling is measured, not assumed: fitting a smooth disc through this image's own beam leaves a residual 7.0 times the image noise, against 3.0 times for the session's check quasar, which is a point source through the same beam. Individual convective cells are not resolved: the authors measure a dominant cell size of 13.1 milliarcseconds, smaller than the beam, so what is shown is convection smoothed to the resolution. The colors are a legend for relative brightness at 338 GHz on the heat scale used for the other stars here, not color, temperature or albedo. The far hemisphere and the poles were not observed.",
         "noData": true,
         "legend": {
           "kind": "scale",
@@ -117,7 +117,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured color or brightness.",
         "thumbnail": "r-doradus-dataset-shape.webp",
         "surface": "r-doradus-surface-shape@2x.webp",
         "poles": "r-doradus-poles-shape@2x.webp",
@@ -127,12 +127,12 @@
           "url": "https://doi.org/10.1038/s41586-024-07836-9"
         },
         "falseColor": false,
-        "notes": "A sphere of the published radius with no image cast on it, for comparison with the ALMA dataset. Neutral gray is a display convention, not a measured colour; the display axis is celestial north at the star, also a convention."
+        "notes": "A sphere of the published radius with no image cast on it, for comparison with the ALMA dataset. Neutral gray is a display convention, not a measured color; the display axis is celestial north at the star, also a convention."
       },
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a published law.",
+        "qualification": "Color from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a published law.",
         "thumbnail": "r-doradus-dataset-color.webp",
         "surface": "r-doradus-surface-color@2x.webp",
         "poles": "r-doradus-poles-color@2x.webp",
@@ -142,7 +142,7 @@
           "url": "https://www.eso.org/sci/observing/tools/uvespop.html"
         },
         "falseColor": false,
-        "notes": "The colour of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the colour is uncertain; R Doradus also varies. No resolved image of the surface is cast here. The darkening toward the edge is the power law I(mu) = mu^0.61 that Ohnaka et al. (2019), ApJ 883, 89 fit to the star's resolved disc (VLT/AMBER K-band continuum near 2.3 um; not a visible band)."
+        "notes": "The color of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the color is uncertain; R Doradus also varies. No resolved image of the surface is cast here. The darkening toward the edge is the power law I(mu) = mu^0.61 that Ohnaka et al. (2019), ApJ 883, 89 fit to the star's resolved disc (VLT/AMBER K-band continuum near 2.3 um; not a visible band)."
       }
     ]
   },

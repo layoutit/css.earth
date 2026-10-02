@@ -8,7 +8,7 @@
  *   node packages/bake/authoring/voyager-iss/oracle.mts <object> --frames <directory of *_GEOMED.IMG/.LBL> [--write]
  *
  * Two references, chosen by the recipe's `oracle.reference`:
- * - `controlled-orthophotos` (the default): the controlled release's own colour frames, which the recipe lists as
+ * - `controlled-orthophotos` (the default): the controlled release's own color frames, which the recipe lists as
  *   `controlled-ortho`; their raw GEOMED products are read from the given directory (the same PDS Ring-Moon Systems Node
  *   volume as the pinned approach frames), so the comparison is frame against the same frame placed by bundle adjustment.
  * - `mosaic`: every limb-placed frame against a controlled cylindrical mosaic of the body (an ISIS cube pinned as another
@@ -133,7 +133,7 @@ export async function runOracle(objectId: string, framesDirectory: string | null
     if (!framesDirectory) throw new TypeError('The controlled-orthophoto oracle needs --frames <directory of the release\'s raw GEOMED frames>.');
     if (!recipe.controlledArchive || !recipe.controlledDirectory) throw new TypeError('The controlled-orthophoto oracle needs the recipe\'s controlled release.');
     method = `Recorded pointing plus limb fit, no datum shift; high-passed detail cross-correlated against the controlled orthophoto over ±${SEARCH_CELLS} cells at ${STEP_DEGREES}° cells.`;
-    framesNote = "PDS Ring-Moon Systems Node GEOMED products of the controlled release's own colour frames (not pinned; same volume as the pinned approach frames)";
+    framesNote = "PDS Ring-Moon Systems Node GEOMED products of the controlled release's own color frames (not pinned; same volume as the pinned approach frames)";
     const archive = resolve(sourceDirectory, recipe.controlledArchive), scratch = await mkdtemp(resolve(tmpdir(), 'cssearth-voyager-oracle-'));
     try {
       for (const observation of recipe.observations) for (const frame of observation.frames) {

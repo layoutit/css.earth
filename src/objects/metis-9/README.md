@@ -68,6 +68,6 @@ Limb columns: the position-angle residual between the projected limb and the pho
 - Shape uses the shared neutral-gray material, not photographed color or composition. Elevation includes global shape, not height above a gravitational equipotential.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. Reduction softens small features.
 - Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase, except for the photograph.
-- The SPHERE photograph shows photographed illumination, not albedo or colour. The frames see Metis from 3° to 9° south, so unseen surface keeps the missing-imagery grid. Nothing registers the frames against surface markings, because the two tests that would do so find nothing to lock onto. The dataset ships on the survey's own comparison figure, and the mesh, the rotation record and that figure all come from the same survey's images.
+- The SPHERE photograph shows photographed illumination, not albedo or color. The frames see Metis from 3° to 9° south, so unseen surface keeps the missing-imagery grid. Nothing registers the frames against surface markings, because the two tests that would do so find nothing to lock onto. The dataset ships on the survey's own comparison figure, and the mesh, the rotation record and that figure all come from the same survey's images.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

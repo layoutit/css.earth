@@ -65,7 +65,7 @@ Meshoptimizer estimates 1734.1 m error against an authored 1800 m threshold. Ind
 - Shape is not photographed color, reflectance, regolith or inferred composition. Elevation includes global shape, not height above a gravitational equipotential. Reduction softens small features.
 - Source constraints are uneven and ground-based; the 4096 × 2048 display map does not add observational resolution.
 - The display meridian is arbitrary, not an absolute rotational phase.
-- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Amphitrite from 34° south to 57° north, so unseen surface keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination, not albedo or color. The frames see Amphitrite from 34° south to 57° north, so unseen surface keeps the missing-imagery grid.
 - Registration reports a conflict for `zimpol`; the dataset ships on the paper's comparison figure.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

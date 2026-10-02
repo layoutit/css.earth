@@ -6,7 +6,7 @@ Its radius and temperature follow Thygesen et al. 2023. The introduction is gene
 
 **Star.** Placement: Gaia DR3 source 37619725922094336, parallax 7.082 ± 0.013 mas (141.21 pc). Radius 0.792 +/- 0.027 solar radii from Thygesen et al. 2023, the stellar radius of the default parameter set of K2-77 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). Mass 0.847 +/- 0.039 solar masses from Thygesen et al. 2023, the stellar mass of the default parameter set of K2-77 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). Temperature 5,160 K from Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-77 b in the NASA Exoplanet Archive. log g 4.57 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 37619725922094336, through the CIE 1931 2° observer: #ffd8bc. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 37619725922094336, through the CIE 1931 2° observer: #ffd8bc. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,160 K and log g 4.57 (u1 0.612, u2 0.154): a model, because no fit of this star's limb is used.
 

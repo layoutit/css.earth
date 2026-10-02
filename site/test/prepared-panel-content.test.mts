@@ -31,7 +31,7 @@ test('Betelgeuse atmosphere volumes remain on its body card', async () => {
 
 test('debris discs stay with their host system card', async () => {
   for (const [id, datasets] of [
-    ['beta-pictoris', ['debris-disc-visible', 'debris-disc-colour', 'debris-disc']],
+    ['beta-pictoris', ['debris-disc-visible', 'debris-disc-color', 'debris-disc']],
     ['hd-181327', ['debris-ring']],
     ['pds-70', ['dust-ring']],
   ] as const) {

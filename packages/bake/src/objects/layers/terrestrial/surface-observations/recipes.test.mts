@@ -29,9 +29,9 @@ test('a dataset refuses keys its format does not declare and a second display', 
     // A dataset without transfer limits refuses a transfer block; a dataset with them refuses an undeclared limit.
     ['transfer key', dataset => { const record = fixtureRecord(dataset); if (record.transfer === undefined) record.transfer = { maximumSeparationMeters: 1 }; else fixtureRecord(dataset, 'transfer')['maximumSeparation'] = 1; }],
     ['second display', dataset => { const display = fixtureRecord(dataset, 'display'); display[display.percentiles ? 'displayRange' : 'percentiles'] = [1, 99]; }],
-    // A palette needs two hex colours, and only a monochrome camera dataset may carry one.
-    ['one-colour palette', dataset => { fixtureRecord(dataset, 'display')['palette'] = ['#ffffff']; }],
-    ['named-colour palette', dataset => { fixtureRecord(dataset, 'display')['palette'] = ['black', 'white']; }],
+    // A palette needs two hex colors, and only a monochrome camera dataset may carry one.
+    ['one-color palette', dataset => { fixtureRecord(dataset, 'display')['palette'] = ['#ffffff']; }],
+    ['named-color palette', dataset => { fixtureRecord(dataset, 'display')['palette'] = ['black', 'white']; }],
   ];
   for (const { id, profile } of authored) profile.raster.surfaceObservations.forEach((_, index) => {
     for (const [name, change] of changes) {
@@ -59,7 +59,7 @@ test('NEAR MSI requires raw detector companions and bounded camera refinement wi
   }
 });
 
-test('a controlled camera names a published model or a disk function, never a mix, and filter colour refuses a single-filter model', () => {
+test('a controlled camera names a published model or a disk function, never a mix, and filter color refuses a single-filter model', () => {
   const ida = authored.find(body => body.id === 'ida'), proteus = authored.find(body => body.id === 'proteus');
   assert.ok(ida && proteus);
   const calibrated = ida.profile.raster.surfaceObservations.findIndex(dataset => fixtureRecord(dataset).id === 'calibrated');
@@ -69,7 +69,7 @@ test('a controlled camera names a published model or a disk function, never a mi
   const refused: [string, typeof ida, number, (dataset: unknown) => void][] = [
     ['mixed photometry block', ida, calibrated, dataset => { fixtureRecord(dataset, 'photometry')['weight'] = 0.5; }],
     ['published emission limit beyond the transfer limit', ida, calibrated, dataset => { fixtureRecord(dataset, 'photometry', 'limits')['maximumEmissionDegrees'] = 89; }],
-    ['single-filter model on filter colour', proteus, color, dataset => { fixtureRecord(dataset)['photometry'] = structuredClone(published); }],
+    ['single-filter model on filter color', proteus, color, dataset => { fixtureRecord(dataset)['photometry'] = structuredClone(published); }],
   ];
   for (const [name, body, index, change] of refused) {
     const changed = structuredClone(body.profile); change(changed.raster.surfaceObservations[index]);

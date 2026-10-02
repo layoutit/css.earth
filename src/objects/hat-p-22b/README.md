@@ -8,7 +8,7 @@ It is the only planet known around HAT-P-22. Its orbit and size follow Stassun e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.2122302 d Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): a/R* 8.58; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): inclination 86.9 degrees Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): e 0.016 Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): omega 156 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460362.105227 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hat-p-22's measured colour (#ffe9dc, the colour dataset of hat-p-22 (src/objects/hat-p-22/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hat-p-22's measured color (#ffe9dc, the color dataset of hat-p-22 (src/objects/hat-p-22/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HAT-P-22's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (21, 48, 75), folded onto its orbit. Upper limits and rows without an error are left out.
 

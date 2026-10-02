@@ -9,7 +9,7 @@ import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-comp
 import { publishedImageSize } from '../shape-model/index.ts';
 
 /** A ring is drawn from its measured dimensions and its published normal opacity, in the neutral gray of a body with no
- * measured colour. A recipe sets no colour. */
+ * measured color. A recipe sets no color. */
 export function validateTerrestrialRings(input: unknown, referenceRadiusKm: number): asserts input is TerrestrialRings | undefined {
   if (input === undefined) return;
   const profile = parseRingProfile(input);

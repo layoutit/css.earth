@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Derived: Kepler's third law with the semi-major axis below and the fitted masses of Zurlo et al. (2022, Table 3 model 1): the star 1.47 and this planet 9.19 Jupiter masses, 41021.8 d.",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius. No image, map or oblateness of HR 8799 d is measured; its colour is its whole-disc infrared photometry (photometry/jwst-nircam-band-color.json)."
+    "qualification": "A sphere at the published radius. No image, map or oblateness of HR 8799 d is measured; its color is its whole-disc infrared photometry (photometry/jwst-nircam-band-color.json)."
   },
   "effectiveTemperatureK": 1179,
   "effectiveTemperatureSource": "1179 K (+31/-28), the Bayesian model average of the GRAVITY and archival-spectrum retrievals, Nasedkin et al. (2024, A&A 687, A298; arXiv:2404.03776), Table 3. The planet is self-luminous: its light is its own heat (Nasedkin et al. 2024, abstract; Marois et al. 2010, abstract).",

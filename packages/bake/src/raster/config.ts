@@ -34,7 +34,7 @@ export interface SurfaceRasterRecipe {
         topography: string;
         references: string[];
     };
-    /** Scientific interpretation before packing (numeric grids, colour ramps, categorical palettes, tonal presentation,
+    /** Scientific interpretation before packing (numeric grids, color ramps, categorical palettes, tonal presentation,
      * missing-coverage grid): the static lane's observation fields, applied by an injected adapter. */
     science?: Record<string, unknown>;
     /** Draw this science dataset over an earlier surface: every cell its interpretation leaves empty takes that surface's

@@ -3,10 +3,10 @@
   "objectId": "eps-indi-ab",
   "entries": [
     {
-      "id": "band-colour",
-      "subject": "A false colour from three measured bands, as the HR 8799 planets have",
+      "id": "band-color",
+      "subject": "A false color from three measured bands, as the HR 8799 planets have",
       "status": "unresolved",
-      "finding": "Sanghi et al. (2026) measured this planet with JWST/NIRCam in F410M and F430M, two of the three bands (F410M, F430M, F460M) that colour HR 8799's planets; F460M is not measured, so no comparable three-band colour exists and it is the shared neutral gray.",
+      "finding": "Sanghi et al. (2026) measured this planet with JWST/NIRCam in F410M and F430M, two of the three bands (F410M, F430M, F460M) that color HR 8799's planets; F460M is not measured, so no comparable three-band color exists and it is the shared neutral gray.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
         "https://arxiv.org/abs/2603.08787"

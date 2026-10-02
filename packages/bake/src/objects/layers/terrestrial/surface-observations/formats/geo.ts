@@ -39,7 +39,7 @@ interface GeoSchema {
   /** The historical disk functions the format accepts, and whether it may name a published photometric model instead. */
   photometry: readonly string[]; published: boolean;
   display: 'percentiles' | 'displayRange'; maximumFrames: number;
-  /** A colour product's bands and quantity, which its decoder checks against the native label. The recipe declares only their common range. */
+  /** A color product's bands and quantity, which its decoder checks against the native label. The recipe declares only their common range. */
   color?: { bands: readonly string[]; inputQuantity: BandColorDisplay['inputQuantity']; units: string };
 }
 
@@ -62,7 +62,7 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
     photometry: ['retained-observation'], published: false, display: 'percentiles', maximumFrames: 8 },
   'nh-lorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, dataset: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
-  // Registered enhanced colour keeps its acquisition illumination. Its decoder checks these bands and data-number units against the label.
+  // Registered enhanced color keeps its acquisition illumination. Its decoder checks these bands and data-number units against the label.
   'nh-mvic-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'labelPath'] }, dataset: { required: ['filter'] },
     photometry: ['retained-observation'], published: false, display: 'displayRange', maximumFrames: 1,
     color: { bands: ['NIR', 'RED', 'BLUE'], inputQuantity: 'derived-band-value', units: 'archive-derived data numbers; enhanced NIR / RED / BLUE color' } },
@@ -70,7 +70,7 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
   [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, dataset: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   // The same camera for an archive whose bands are planes of one array. The composite is a scientific visualization
-  // of three calibrated bands, as every band composite here is; it is not a qualified natural-colour reconstruction.
+  // of three calibrated bands, as every band composite here is; it is not a qualified natural-color reconstruction.
   [SPICE_CAMERA_COLOR_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, dataset: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
     photometry: ['retained-observation'], published: true, display: 'displayRange', maximumFrames: 8,
     color: { bands: ['RED', 'GREEN', 'BLUE'], inputQuantity: 'radiance', units: 'calibrated radiance; the detector\'s red, green and blue bands' } },
@@ -112,9 +112,9 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
     { selections: ['lowest-emission', 'recipe-order', ...(recipe.format === 'osiris-geo' ? ['finest-resolution'] : [])], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (!recipe.filter || (recipe.format === 'amica-gaskell' && recipe.filter !== 'V') || recipe.frames.some(frame => !frame.startTime)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
-  // Every band composite is a scientific visualization, not natural colour: it states so and starts its range at zero.
+  // Every band composite is a scientific visualization, not natural color: it states so and starts its range at zero.
   if (schema.color && (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true))
-    throw new TypeError('Band colour requires source-derived bands, false color and retained illumination.');
+    throw new TypeError('Band color requires source-derived bands, false color and retained illumination.');
   if (recipe.radiometry !== undefined && recipe.radiometry !== 'radiance-factor') throw new TypeError('Invalid observation radiometry.');
   validatePhotometry(recipe, schema);
   if (recipe.spice) validateSpice(recipe.spice, recipe.frames);
@@ -285,7 +285,7 @@ export const geoFormat: SurfaceObservationFormat = {
       selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order'
         : recipe.selection === 'finest-resolution' ? 'finest-resolution' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
+      // A color product's floating bands are encoded once, after surface transfer, on the shared band display.
       display: { ...(range && color ? { range: 'stated-range', low: range[0], high: range[1], units: color.units,
           colorDisplay: bandColorDisplay(color.bands, color.inputQuantity, range) }
         : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }), ...displayBasis(recipe.display) }, photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits };

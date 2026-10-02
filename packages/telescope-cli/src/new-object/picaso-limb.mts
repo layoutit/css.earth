@@ -1,6 +1,6 @@
 /** The limb law of a brown dwarf colder than every published table: PICASO (Batalha et al. 2019) computes the V-band intensity
  * that the cloud-free Sonora Bobcat atmospheres (Marley et al. 2021) around the dwarf's temperature and gravity emit at eight
- * viewing angles, the quadratic law is fitted to each, and the colour dataset reads between those nodes as it reads any grid. The
+ * viewing angles, the quadratic law is fitted to each, and the color dataset reads between those nodes as it reads any grid. The
  * nodes are written as a small grid file beside the star, with each node's intensities, so the law can be checked without the
  * toolchain; `--star-limb` recomputes it (packages/telescope/toolchains/picaso-toolchain.json pins what runs). */
 import { bobcatNodes, picasoLimbNodes } from '@cssearth/telescope/node';

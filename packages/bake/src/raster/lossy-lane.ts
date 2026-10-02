@@ -7,7 +7,7 @@
  *   the three surfaces flag 549 to 1798 pixels.
  * - Deimos, already lossy, flags 485 of 26 million (0.002 %) at 75, 80 and 85 alike.
  * - An Earth ENSO page 2048 level, previously lossless, flags 2761 of 3.9 million (0.07 %), 2450 at 85: edges of its
- *   colour classes.
+ *   color classes.
  */
 import type { Sharp, WebpOptions } from 'sharp';
 import { mkdir, writeFile } from 'node:fs/promises';

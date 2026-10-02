@@ -14,7 +14,7 @@ import sharp from 'sharp';
 import { paintMissingCoverage } from '../../../raster/index.ts';
 
 /** Map the archive's categorical vertex flags, with nearest-grid sampling.
- * Colours are an authored legend, never a surface photograph or albedo map. */
+ * Colors are an authored legend, never a surface photograph or albedo map. */
 export async function preparePdsConstraintMap(mesh: ConstraintMesh, value: unknown) {
   const kind = shape({kind: optional(text)})(value).kind;
   if (kind === 'plate-coverage') return preparePlateCoverage(mesh, value);

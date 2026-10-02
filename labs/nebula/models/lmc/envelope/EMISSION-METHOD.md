@@ -49,7 +49,7 @@ Recipe `emission-envelope.json`; model `lmc-clouds-emission-envelope`.
 - Depth is trimmed to the image-weighted 0.5–99.5% simulation mass: −13,771…+16,341 arcseconds, that is
   −3.31…+3.93 kpc along the line of sight. Smallest fitted σ_z 0.147 kpc.
 - Slabs 123 × 128 × 50 at 0.305 kpc over −14.57…22.78 × −17.42…21.64 × −8.77…6.29 kpc. 301 baked quads;
-  all 301 material textures reproduce the newly fitted neutral alpha exactly, and the recolouring reports
+  all 301 material textures reproduce the newly fitted neutral alpha exactly, and the recoloring reports
   1,411,300 positive-alpha texels with none outside the image and none black.
 
 ## Datasets
@@ -62,7 +62,7 @@ Recipe `emission-envelope.json`; model `lmc-clouds-emission-envelope`.
 | `horalek-widefield` | `lmc-clouds-emission-envelope-horalek-widefield` |
 | `wise-wide-infrared` | `lmc-clouds-emission-envelope-wise-wide-infrared` |
 
-`.local/nebula-lab/finite-datasets-lmc-clouds-emission-envelope.json` indexes them. Each recolours the same neutral alpha with
+`.local/nebula-lab/finite-datasets-lmc-clouds-emission-envelope.json` indexes them. Each recolors the same neutral alpha with
 its own component and envelope chromaticity; the geometry never changes between them.
 
 ## Inspection against the shipped repaint
@@ -77,7 +77,7 @@ layer suppressed on both so only the volume material shows.
   halo, close to the photograph. The repaint blows its core out to white, loses the bar's shape, and
   prints the registered image's straight footprint edges into the volume as brightness steps.
 - **Both 90° side views.** Both follow the same simulation depth distribution, so the silhouettes agree.
-  The repaint's is crossed by regular coloured stripes; the new model's is smooth, and the fitted knots sit
+  The repaint's is crossed by regular colored stripes; the new model's is smooth, and the fitted knots sit
   at separate depths instead of being smeared through the whole body.
 - **Banding.** The recorded XYZ-bank handoff defect is a quantisation artifact, and the alpha histograms
   measure it. The repaint's texels sit at alpha 1–3 for 57%/56%/67% of the x/y/z banks, with bank median

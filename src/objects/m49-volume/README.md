@@ -9,7 +9,7 @@ clusters are drawn as dots through the same volume. **Depth is modelled, not mea
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [DESI Legacy Imaging Surveys DR10](https://www.legacysurvey.org/dr10/) | [Record](../../sources/desi-legacy-surveys-dr10-color-hips.json). The surveys' g, r, i, z colour composite as the CDS HiPS `CDS/P/DESI-Legacy-Surveys/DR10/color`, cut out by the CDS hips2fits service: 3000 × 3000 px over 35.1 × 35.1 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
+| [DESI Legacy Imaging Surveys DR10](https://www.legacysurvey.org/dr10/) | [Record](../../sources/desi-legacy-surveys-dr10-color-hips.json). The surveys' g, r, i, z color composite as the CDS HiPS `CDS/P/DESI-Legacy-Surveys/DR10/color`, cut out by the CDS hips2fits service: 3000 × 3000 px over 35.1 × 35.1 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
 | [Kormendy et al. (2009)](https://arxiv.org/abs/0810.1681) | [Record](../../sources/kormendy-2009-virgo-ellipticals.json). Table 1, row NGC 4472: the major-axis Sérsic fit, n = 5.99 (+0.31, −0.29), half-light radius 269.29 (+23.6, −18.6)″. [Table 3](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/182/216): V-band surface brightness, ellipticity and position angle along the major axis out to 1051.962″. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of the 29 neighbouring galaxies masked in the image. |
 | [Blakeslee et al. (2009)](https://arxiv.org/abs/0901.1138) | Table 2, row VCC 1226: 16.7 ± 0.6 Mpc from surface brightness fluctuations. Position from the 2MASS Extended Source Catalog. |
@@ -41,7 +41,7 @@ The Nebula Lab recipe is [labs/nebula/models/m49/experiment.json](../../../labs/
    next nearest pair is 2.6″ apart.
 
 Values chosen here, not measured: the display exposure 1.5 and the 150-cell grid are M87's; the mask radius of three
-D25 radii and the clamp window are M87's rules; the dots' colour is the Milky Way globular clusters'.
+D25 radii and the clamp window are M87's rules; the dots' color is the Milky Way globular clusters'.
 
 ## Evidence
 

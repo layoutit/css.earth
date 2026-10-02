@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-5126. Its orbit and size follow Fairning
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 17.9051919 d Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): a/R* 24.99; Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): inclination 89.23 degrees Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460258.338552 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 20 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5126's measured colour (#fef6ff, the colour dataset of toi-5126 (src/objects/toi-5126/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-5126's measured color (#fef6ff, the color dataset of toi-5126 (src/objects/toi-5126/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-5126's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (46, 48, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

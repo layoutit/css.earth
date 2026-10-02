@@ -6,7 +6,7 @@ Its radius and temperature follow Morello et al. 2026. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 1333818968701222272, parallax 13.277 ± 0.012 mas (75.32 pc). Radius 0.62 +/- 0.019 solar radii from Morello et al. 2026, the stellar radius of the default parameter set of TOI-2133 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract). Mass 0.644 +/- 0.019 solar masses from Morello et al. 2026, the stellar mass of the default parameter set of TOI-2133 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract). Temperature 4,250 K from Morello et al. 2026, the stellar temperature of the default parameter set of TOI-2133 b in the NASA Exoplanet Archive. log g 4.66 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1333818968701222272, through the CIE 1931 2° observer: #ffc399. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1333818968701222272, through the CIE 1931 2° observer: #ffc399. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,250 K and log g 4.66 (u1 0.725, u2 0.061): a model, because no fit of this star's limb is used.
 

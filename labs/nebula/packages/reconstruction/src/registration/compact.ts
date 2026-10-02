@@ -1,11 +1,11 @@
-/** Native, compact broad-band stars for sparse fields dominated by coloured filaments. */
+/** Native, compact broad-band stars for sparse fields dominated by colored filaments. */
 import sharp from 'sharp';
 import { detectStars, type Pair, type Star } from './stellar.ts';
 import { applyAffine, type Affine, type Point } from './affine.ts';
 
 export async function detectCompactStars(bytes: Buffer, native: Point, channel: 'minimum-rgb' | 'maximum-rgb' = 'minimum-rgb', maximumStars = 250): Promise<Star[]> {
   if (!Number.isInteger(maximumStars) || maximumStars < 1 || maximumStars > 500) throw new TypeError('Compact-star pool is bounded to 500.');
-  const { data, info } = await sharp(bytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const { data, info } = await sharp(bytes).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== native[0] || info.height !== native[1] || info.channels !== 3) throw new TypeError('Compact-star native grid differs.');
   const gray = Buffer.alloc(info.width * info.height);
   for (let i = 0; i < gray.length; i++) gray[i] = (channel === 'maximum-rgb' ? Math.max : Math.min)(data[i * 3]!, data[i * 3 + 1]!, data[i * 3 + 2]!);

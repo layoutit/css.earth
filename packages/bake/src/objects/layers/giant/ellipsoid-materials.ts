@@ -97,7 +97,7 @@ export function rasterEllipsoidMaterial(config: MaterialRaster,{size,state,palet
     let alpha=lighting.alphaOrder==='atmosphere-first'?1-(1-atmosphereAlpha)*(1-lightingAlpha):1-(1-lightingAlpha)*(1-atmosphereAlpha);
     const offset=(y*size+x)*4;
     if(silhouette){
-      if (!backingHit || !palette.base) throw new Error('Silhouette requires a backing intersection and base colour.');
+      if (!backingHit || !palette.base) throw new Error('Silhouette requires a backing intersection and base color.');
       const coverage=(normalAlignment: number)=>clamp((silhouette.fadeStart-normalAlignment)/(silhouette.fadeStart-silhouette.opaqueAt));
       const silhouetteCoverage=surfaceHit?Math.max(coverage(alignment),coverage(Math.max(0,dotVector(backingHit.normal,view)))):sideCoverage;
       const transmission=illumination*(1-atmosphereAlpha),resolvedAlpha=surfaceHit?alpha*(1-silhouetteCoverage)+silhouetteCoverage:sideCoverage;
@@ -136,7 +136,7 @@ export async function prepareEllipsoidMaterials({config: input,maps,radialLayer,
     const inputMap=maps.get(dataset.id);if(!inputMap)throw new Error(`Material dataset ${dataset.id} has no observed map.`);
     const map=shape({atmosphereColor:optional(array(number)),coverage:optional(shape({baselineColor:array(number)}))})(inputMap);
     const atmosphere=dataset.atmosphereFromMap?map.atmosphereColor:dataset.atmosphere;
-    if (!atmosphere) throw new TypeError('Material atmosphere colour is unavailable.');
+    if (!atmosphere) throw new TypeError('Material atmosphere color is unavailable.');
     const result: {fixed: Record<number, FixedMaterial>; shadowless: Record<number, FixedMaterial>}={fixed:{},shadowless:{}};
     for(const product of dataset.fixed){
       const prepared=rasterEllipsoidMaterial(config.raster,{size:product.size,state:config.fixedState,palette:{atmosphere,base:dataset.fixedBase},radialLayer,shadowless:product.shadowless,textureUrl:`${config.urlPrefix}${product.filename}`});
@@ -149,7 +149,7 @@ export async function prepareEllipsoidMaterials({config: input,maps,radialLayer,
       for(let column=0;column<bank.columns;column++){
         const frameIndex=rowIndex*bank.columns+column,scenePitchDegrees=bank.maximumScenePitchDegrees*(1-frameIndex/(bank.frames-1));
         const state={scenePitchDegrees,systemObliquityDegrees:bank.systemObliquity?bank.systemObliquity.degrees*scenePitchDegrees/bank.systemObliquity.referencePitch:config.fixedState.systemObliquityDegrees};
-        if (dataset.bankBaseFromCoverage && !map.coverage) throw new TypeError('Material coverage base colour is unavailable.');
+        if (dataset.bankBaseFromCoverage && !map.coverage) throw new TypeError('Material coverage base color is unavailable.');
         const frame=rasterEllipsoidMaterial(config.raster,{size:bank.frameSize,state,palette:{atmosphere,base:dataset.bankBaseFromCoverage?map.coverage?.baselineColor:dataset.fixedBase},radialLayer,textureUrl:`${config.urlPrefix}${filename}`});
         frameForegroundRingTexelCounts.push(frame.foregroundRingTexelCount);frameRingShadowTexelCounts.push(frame.ringShadowTexelCount);
         const frameX=column*stride+bank.gutter;writeMaterialAtlasTile({output:row,outputWidth:width,source:frame.rgba,sourceSize:bank.frameSize,frameX,frameY:bank.gutter,gutter:bank.gutter});

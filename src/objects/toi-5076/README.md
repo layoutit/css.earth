@@ -6,7 +6,7 @@ Its radius and temperature follow Heidari et al. 2025. It is also HIP 15683. The
 
 **Star.** Placement: Gaia DR3 source 55752218851048320, parallax 12.084 ± 0.014 mas (82.75 pc). Radius 0.844 +/- 0.02 solar radii from Heidari et al. 2025, the stellar radius of the default parameter set of TOI-5076 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract). Mass 0.789 +/- 0.046 solar masses from Heidari et al. 2025, the stellar mass of the default parameter set of TOI-5076 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract). Temperature 4,780 K from Heidari et al. 2025, the stellar temperature of the default parameter set of TOI-5076 b in the NASA Exoplanet Archive. log g 4.48 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 55752218851048320, through the CIE 1931 2° observer: #ffd9c1. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 55752218851048320, through the CIE 1931 2° observer: #ffd9c1. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,780 K and log g 4.48 (u1 0.718, u2 0.070): a model, because no fit of this star's limb is used.
 

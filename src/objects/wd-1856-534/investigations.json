@@ -13,8 +13,8 @@
       ]
     },
     {
-      "id": "gaia-colour",
-      "subject": "Photosphere colour",
+      "id": "gaia-color",
+      "subject": "Photosphere color",
       "status": "included",
       "finding": "Gaia DR3 publishes only the continuous BP/RP coefficients for source 2146576589564898688 (has_xp_sampled = false). They are sampled on the archive grid with GaiaXPy 2.1.4 (packages/bake/src/objects/stellar/xp-continuous-sample.py), as for TRAPPIST-1. Signal-to-noise is 2 at 380 nm and 17 to 34 from 500 to 780 nm.",
       "evidence": [

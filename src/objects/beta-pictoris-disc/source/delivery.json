@@ -16,7 +16,7 @@
       "path": "src/objects/beta-pictoris-disc/source/density-contrast.ktx2"
     },
     {
-      "path": "src/objects/beta-pictoris-disc/source/density-colour.ktx2"
+      "path": "src/objects/beta-pictoris-disc/source/density-color.ktx2"
     }
   ],
   "sky": {
@@ -56,11 +56,11 @@
       }
     },
     {
-      "id": "colour",
-      "label": "HST/ACS · debris disc, colour 0.43 to 0.81 µm",
+      "id": "color",
+      "label": "HST/ACS · debris disc, color 0.43 to 0.81 µm",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
       "recipe": {
-        "path": "src/objects/beta-pictoris-disc/source/volume-colour.json"
+        "path": "src/objects/beta-pictoris-disc/source/volume-color.json"
       }
     }
   ]

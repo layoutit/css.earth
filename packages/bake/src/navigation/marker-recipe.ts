@@ -95,7 +95,7 @@ async function orthographic(image: Sharp, { centerX, centerY }: { centerX: numbe
   if (!sourceWidth || Math.abs(sourceWidth / sourceHeight - 2) > 0.01) throw new TypeError("Navigation marker orthographic source is not a 2:1 map.");
   const mapWidth = Math.min(sourceWidth, 8 * tileSize), mapHeight = mapWidth / 2;
   const { data: map } = await image.resize({ width: mapWidth, height: mapHeight, fit: "fill", kernel: sharp.kernel.lanczos3 })
-    .toColourspace("srgb").ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    .toColorspace("srgb").ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   const out = Buffer.alloc(tileSize * tileSize * 4);
   const lon0 = (centerX - 0.5) * 2 * Math.PI, lat0 = (0.5 - centerY) * Math.PI;
   const texel = (x: number, y: number, channel: number) =>
@@ -126,7 +126,7 @@ export async function renderMarker(descriptor: MarkerDescriptor, { sourcePath, t
   let image = await readMarkerImage(descriptor.source, sourcePath);
   for (const operation of descriptor.operations) {
     if (operation.type === "missing-coverage") {
-      const { data, info } = await image.removeAlpha().toColourspace("srgb").raw().toBuffer({ resolveWithObject: true });
+      const { data, info } = await image.removeAlpha().toColorspace("srgb").raw().toBuffer({ resolveWithObject: true });
       const missing = blackFillCoverage(data, info, operation);
       image = sharp(paintMissingCoverage(data, info, missing), { raw: info });
     } else if (operation.type === "linear") image = image.linear(operation.multiplier, operation.offset);
@@ -153,7 +153,7 @@ export async function renderMarker(descriptor: MarkerDescriptor, { sourcePath, t
     else if (operation.type === "ellipse-mask") {
       if (operation.shading) {
         // Prepare full-phase curvature in the same footprint as the silhouette.
-        const { data, info } = await image.toColourspace("srgb").ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+        const { data, info } = await image.toColorspace("srgb").ensureAlpha().raw().toBuffer({ resolveWithObject: true });
         for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) {
           const dx = ((x + 0.5) / info.width - operation.cx) / operation.rx;
           const dy = ((y + 0.5) / info.height - operation.cy) / operation.ry;

@@ -8,7 +8,7 @@ It is one of 3 planets known around GJ 357. Its orbit and size follow Oddo et al
 
 **Orbit.** Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): P 3.9306 d Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): a/R* 22.89; Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): inclination 89.228 degrees No archive row states an eccentricity; the orbit is taken as circular Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): transit mid-time 2459272.6757 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by gj-357's measured colour (#ffc484, the colour dataset of gj-357 (src/objects/gj-357/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by gj-357's measured color (#ffc484, the color dataset of gj-357 (src/objects/gj-357/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of GJ 357's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (62, 89, 99), folded onto its orbit. Upper limits and rows without an error are left out.
 

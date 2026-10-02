@@ -13,7 +13,7 @@ export async function rectifyObservation(bytes: Buffer, mapping: ObservationMapp
   // Prefilter from the native source before the projective resampling, avoiding point-sampled stellar aliasing.
   // Pinned observatory TIFFs can contain strips larger than libtiff's default
   // allocation limit. Match the verified-original decoder used by star removal.
-  const source = await sharp(bytes, { unlimited: true }).toColourspace('srgb').removeAlpha()
+  const source = await sharp(bytes, { unlimited: true }).toColorspace('srgb').removeAlpha()
     .resize({ width: width * 2, height: width * 2, fit: 'inside', withoutEnlargement: true })
     .raw().toBuffer({ resolveWithObject: true });
   // A source that declares its own coverage keeps it: alpha 0 means unobserved, never zero brightness. The

@@ -6,7 +6,7 @@ Its radius and temperature follow Mireles et al. 2026. It is also HD 39474, HIP 
 
 **Star.** Placement: Gaia DR3 source 4767547667180525696, parallax 8.914 ± 0.014 mas (112.18 pc). Radius 1.31 +/- 0.01 solar radii from Mireles et al. 2026, the stellar radius of the default parameter set of TOI-201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract). Mass 1.32 +/- 0.02 solar masses from Mireles et al. 2026, the stellar mass of the default parameter set of TOI-201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract). Temperature 6,423 K from Mireles et al. 2026, the stellar temperature of the default parameter set of TOI-201 b in the NASA Exoplanet Archive. log g 4.32 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 4767547667180525696, through the CIE 1931 2° observer: #f8f4ff. Routes tried in order: stis-ngsl: HD 39474 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 4767547667180525696, through the CIE 1931 2° observer: #f8f4ff. Routes tried in order: stis-ngsl: HD 39474 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,423 K and log g 4.32 (u1 0.358, u2 0.312): a model, because no fit of this star's limb is used.
 

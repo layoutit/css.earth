@@ -66,6 +66,6 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - Shape uses the shared neutral-gray material, not photographed color or inferred composition. Elevation includes global shape, not height above a gravitational equipotential. Reduction softens small features, and a 4096 × 2048 display map does not add observational resolution.
 - Rotation has an explicitly arbitrary display meridian for the Shape and Elevation views.
-- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Sylvia from 18° south, so surface the survey did not see keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination, not albedo or color. The frames see Sylvia from 18° south, so surface the survey did not see keeps the missing-imagery grid.
 - Frame zimpol-20181112-061547 is left out: its limb fit does not settle, and the centre still moves 0.55 px.
 - The heliocentric conic serves the fixed-date context, not long-term perturbation ephemerides.

@@ -68,7 +68,7 @@ export function draftFromK2(row: ReturnType<typeof parseK2Row>) {
       introduction: `Its oscillations, recorded ${row.campaign === undefined ? `by ${mission}` : `in K2 campaign ${row.campaign}`}, give ${mass.value.toFixed(2)} solar masses and ${radius.value.toFixed(1)} solar radii; ${spectra} spectra give ${Math.round(row.teff[0]).toLocaleString('en-US')} K at its surface.`,
       locator: `${row.table}, ${name}: Mass-M, Rad-M, Dist-M, ${teff}` },
     color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'],
-      reason: `PARAM fits an extinction A_V = ${row.extinction.toFixed(2)} mag toward this star (${K2.credit}, ${row.table}, AV-M), and the colour routes do not remove extinction; ${spectra} measured its temperature` },
+      reason: `PARAM fits an extinction A_V = ${row.extinction.toFixed(2)} mag toward this star (${K2.credit}, ${row.table}, AV-M), and the color routes do not remove extinction; ${spectra} measured its temperature` },
     planets: [], companions: [],
   };
 }

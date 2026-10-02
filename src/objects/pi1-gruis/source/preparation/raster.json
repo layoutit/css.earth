@@ -47,7 +47,7 @@
           "metadata": {
             "label": "PIONIER reconstruction",
             "falseColor": true,
-            "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 909 squared visibilities and 603 closure phases measured by VLTI/PIONIER on four nights of September 2014 in the H band (1.62-1.73 micrometres, three channels), convolved to the 2.1 milliarcsecond interferometric beam and cast onto a sphere of the radius the disc and the Gaia parallax imply. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown. The colours are a legend for reconstructed relative intensity in one infrared band, not colour or temperature. The far hemisphere is unobserved."
+            "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 909 squared visibilities and 603 closure phases measured by VLTI/PIONIER on four nights of September 2014 in the H band (1.62-1.73 micrometres, three channels), convolved to the 2.1 milliarcsecond interferometric beam and cast onto a sphere of the radius the disc and the Gaia parallax imply. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown. The colors are a legend for reconstructed relative intensity in one infrared band, not color or temperature. The far hemisphere is unobserved."
           },
           "frames": [
             {
@@ -115,7 +115,7 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band).",
+        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band).",
         "limbDarkening": {
           "law": "power",
           "published": true,

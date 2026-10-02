@@ -9,7 +9,7 @@ import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/renderer/rendering/prepar
  * inside the prepared inner ellipsoid at every camera orientation. */
 export const interiorFillInset = (1 - 1e-6) / (1 + 4 / PREPARED_INTERIOR_DISC_SIZE);
 
-/** Colours a surface paints where it has no observation. They are a display convention, so a body that declares one
+/** Colors a surface paints where it has no observation. They are a display convention, so a body that declares one
  * keeps them out of the mean that stands in for its surface behind the leaves; otherwise a map that is mostly gap
  * gives an interior nothing like the part anyone looks at. */
 export interface SurfaceMeanExclusion { colors: readonly (readonly number[])[]; tolerance: number }

@@ -1,10 +1,10 @@
 # JunoCam
 
-JunoCam is the colour camera on NASA's Juno spacecraft. Its calibrated images reach this project from the PDS Cartography and Imaging Sciences Node, and its geometry from the Juno SPICE kernels NAIF publishes. This guide describes how one image becomes a photograph dataset on a body, what was measured on the four images of Europa, and what is not explained. The toolkit ships no dataset of its own: a body's package states one, as any other photograph dataset.
+JunoCam is the color camera on NASA's Juno spacecraft. Its calibrated images reach this project from the PDS Cartography and Imaging Sciences Node, and its geometry from the Juno SPICE kernels NAIF publishes. This guide describes how one image becomes a photograph dataset on a body, what was measured on the four images of Europa, and what is not explained. The toolkit ships no dataset of its own: a body's package states one, as any other photograph dataset.
 
 ## Why JunoCam needs its own route
 
-Juno spins twice a minute, and JunoCam has no shutter frame. Its detector carries four fixed filter strips: methane, blue, green and red. While the spin carries the scene across them, the camera reads the strips again and again, 0.37 s apart. One image file is that stack of strips, each 1648 × 128 pixels. A colour image of Europa has 84 of them: 28 frames through three filters.
+Juno spins twice a minute, and JunoCam has no shutter frame. Its detector carries four fixed filter strips: methane, blue, green and red. While the spin carries the scene across them, the camera reads the strips again and again, 0.37 s apart. One image file is that stack of strips, each 1648 × 128 pixels. A color image of Europa has 84 of them: 28 frames through three filters.
 
 So an image has no single camera. Each strip was read at its own instant, from its own place, with the spacecraft turned 4.5° further than for the strip before. The [`spice-camera`](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#formats) format reads one camera per image and cannot describe this. The `junocam-camera` format gives every strip its own camera and then joins them.
 
@@ -13,14 +13,14 @@ So an image has no single camera. Each strip was read at its own instant, from i
 1. **Read the label** ([`junocam.ts`](../packages/bake/src/objects/layers/terrestrial/missions/junocam.ts)). The PDS3 label states the start time, the delay between frames, the filter order and the size. Only full-resolution calibrated products (`JUNOCAM-RDR`, 16-bit) are accepted. Their samples are reflectance: 10000 is a white Lambertian surface lit at normal incidence at the target's distance from the Sun (product SIS, `SAMPLE_BITS`).
 2. **Build one camera per strip.** The instrument kernel `juno_junocam_v03.ti` gives the focal length, pixel pitch, each strip's optical centre, two radial distortion coefficients, a start-time bias of 61.88 ms and an interframe delta of 1 ms. A frame's epoch is the label's start time, plus the bias, plus one delay with its delta per frame. At that epoch the kernels give the spacecraft's position, the camera frame's orientation, the body's orientation and the Sun, with light time and stellar aberration. [`@cssearth/spice`](../packages/spice/README.md)'s `spiceCamera` builds the pinhole camera; the distortion applies on top.
 3. **Fit two epochs to the limb** ([`strip-refinement.ts`](../packages/bake/src/objects/layers/terrestrial/registration/strip-refinement.ts)). The kernel warns that the start time jitters by about 20 ms, and the spin turns the scene 6 pixels in that time. For each image two offsets are fitted to the lit limb that its strips show against the body's mesh: when the pointing is read, and where along its path the spacecraft is taken. Optics, distortion, the interframe delay and the Sun keep their source values. Limb points are split into a fit half and a holdout half. The holdout residual and both offsets must stay within the recipe's budget, or preparation stops.
-4. **Join the strips** ([`composite.mts`](../packages/bake/src/objects/layers/terrestrial/surface-observations/composite.ts)). Only the columns of a strip that can hold lit surface facing the camera are cast onto the mesh. Successive strips of one filter overlap by about 13 rows; a surface point in two strips is sampled in the one that holds it farther from the strip's edge. The strips of one filter make one band, and the red, green and blue bands make one colour photograph: a point is coloured only where all three bands see it.
+4. **Join the strips** ([`composite.mts`](../packages/bake/src/objects/layers/terrestrial/surface-observations/composite.ts)). Only the columns of a strip that can hold lit surface facing the camera are cast onto the mesh. Successive strips of one filter overlap by about 13 rows; a surface point in two strips is sampled in the one that holds it farther from the strip's edge. The strips of one filter make one band, and the red, green and blue bands make one color photograph: a point is colored only where all three bands see it.
 5. **Share the rest.** Footprints, photometry, selection between photographs, level matching, the display range and the report are the [surface-observation route](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md)'s, as for every other photograph.
 
 The kernels live in the shared bank [`src/spice/juno`](../src/spice/juno/manifest.json): only its manifest is committed, and `node packages/bake/cli/kernel-bank.mts acquire juno` restores every kernel from NAIF (the preparation tools restore the ones they need on their own). The reconstructed trajectory `spk_rec_220909_221019_221027.bsp` carries its own Jupiter system, including the Europa ephemeris the navigation team updated from the flyby, so no separate satellite ephemeris is loaded.
 
 ## Measured on Europa
 
-Juno passed Europa on 29 September 2022. With the bank's kernels the closest approach is 09:36:28.9 UTC, 1,915.3 km from Europa's centre, at 23.65 km/s. JunoCam took four colour images 97 to 291 s later, looking back at the sunlit sub-Jovian side. Measured on 19 September 2026.
+Juno passed Europa on 29 September 2022. With the bank's kernels the closest approach is 09:36:28.9 UTC, 1,915.3 km from Europa's centre, at 23.65 km/s. JunoCam took four color images 97 to 291 s later, looking back at the sunlit sub-Jovian side. Measured on 19 September 2026.
 
 **The reader against its sources.**
 
@@ -55,8 +55,8 @@ The pointing offsets are inside the kernel's stated jitter. The ephemeris offset
 
 ## Limits
 
-- Colour images only: the recipe takes the red, green and blue strips. The methane strip and single-filter images are read by the decoder and have no dataset format.
-- The colour is JunoCam's band ratios on one display range. It is not a natural-colour reconstruction, and the dataset says so.
+- Color images only: the recipe takes the red, green and blue strips. The methane strip and single-filter images are read by the decoder and have no dataset format.
+- The color is JunoCam's band ratios on one display range. It is not a natural-color reconstruction, and the dataset says so.
 - The limb fit needs a lit limb in view. An image that shows only surface, with no sky, cannot be fitted this way.
 - The fit moves two epochs. It cannot correct a pointing error across the scan; on Europa no such error was left to correct (under 1.2 px when fitted as a third parameter).
 - Summed or compressed-only products are refused: `SAMPLING_FACTOR` must be 1 and the product an RDR.
@@ -74,4 +74,4 @@ node --test packages/telescope-cli/src/archives/juno/*.test.mts packages/bake/au
 pnpm build:spice && pnpm --filter @cssearth/spice test
 ```
 
-`archive.mts` pins a target's calibrated colour images from a volume's index, by URL and size. `measure.mts` downloads what the work directory lacks (136 MB for Europa; `--raw <dir>` reads files already on disk), adds each digest to the program the first time it holds the bytes, fits every image and writes the receipt. The [archive ledger](junocam-ledger.md) says what else JunoCam photographed. A prepared dataset report carries the same fit for the mesh its package states.
+`archive.mts` pins a target's calibrated color images from a volume's index, by URL and size. `measure.mts` downloads what the work directory lacks (136 MB for Europa; `--raw <dir>` reads files already on disk), adds each digest to the program the first time it holds the bytes, fits every image and writes the receipt. The [archive ledger](junocam-ledger.md) says what else JunoCam photographed. A prepared dataset report carries the same fit for the mesh its package states.

@@ -13,6 +13,6 @@
   "surfaceGravitySource": "Luck (2018), AJ 156, 171, VizieR J/AJ/156/171/table11, recno 39, Name='VX Per', column Gavg ('Average gravity over cycle'; log g in dex, ReadMe unit label cm/s2): log g 1.64 averaged over the pulsation cycle (https://ui.adsabs.harvard.edu/abs/2018AJ....156..171L)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
   }
 }

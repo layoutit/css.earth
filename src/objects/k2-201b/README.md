@@ -8,7 +8,7 @@ It is one of 2 planets known around K2-201. Its orbit and size follow Mayo et al
 
 **Orbit.** Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): P 1.059806 d Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): a/R* 4.652897; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 84.41366 degrees No archive row states an eccentricity; the orbit is taken as circular Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): transit mid-time 2457301.9847 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 147 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-201's measured colour (#ffede1, the colour dataset of k2-201 (src/objects/k2-201/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-201's measured color (#ffede1, the color dataset of k2-201 (src/objects/k2-201/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-201's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (92), folded onto its orbit. Upper limits and rows without an error are left out.
 

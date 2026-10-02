@@ -6,7 +6,7 @@ Its radius and temperature follow Oddo et al. 2023. The introduction is generate
 
 **Star.** Placement: Gaia DR3 source 2912264564319611136, parallax 7.685 ± 0.015 mas (130.13 pc). Radius 0.831 +/- 0.021 solar radii from Oddo et al. 2023, the stellar radius of the default parameter set of TOI-470 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract). Mass 0.87 +/- 0.09 solar masses from Oddo et al. 2023, the stellar mass of the default parameter set of TOI-470 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract). Temperature 5,190 K from Oddo et al. 2023, the stellar temperature of the default parameter set of TOI-470 b in the NASA Exoplanet Archive. log g 4.54 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2912264564319611136, through the CIE 1931 2° observer: #ffe3d1. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2912264564319611136, through the CIE 1931 2° observer: #ffe3d1. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,190 K and log g 4.54 (u1 0.603, u2 0.161): a model, because no fit of this star's limb is used.
 

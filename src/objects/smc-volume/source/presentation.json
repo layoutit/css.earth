@@ -44,8 +44,8 @@
       "id": "smc-horalek-wide",
       "label": "Horálek optical",
       "title": "Petr Horálek’s wide-field SMC",
-      "description": "Optical photograph colours are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "description": "Optical photograph colors are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Optical photograph colors on an image-fitted emission model; gas and dust depth are not measured.",
       "detail": "6069 × 4045 px",
       "facts": [
         {
@@ -74,8 +74,8 @@
       "id": "smc-vista",
       "label": "ESO VISTA",
       "title": "SMC in VISTA near infrared",
-      "description": "Near-infrared false colour on an image-fitted emission model painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "description": "Near-infrared false color on an image-fitted emission model painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Near-infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
       "detail": "4000 × 3540 px",
       "facts": [
         {
@@ -104,8 +104,8 @@
       "id": "smc-smash",
       "label": "NOIRLab SMASH",
       "title": "SMC in the SMASH DECam survey",
-      "description": "DECam survey colours are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "DECam survey colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "description": "DECam survey colors are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "DECam survey colors on an image-fitted emission model; gas and dust depth are not measured.",
       "detail": "3827 × 3190 px",
       "facts": [
         {
@@ -134,8 +134,8 @@
       "id": "smc-dss2",
       "label": "DSS2 optical",
       "title": "SMC on Digitized Sky Survey 2 plates",
-      "description": "Photographic plate colours are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "Photographic plate colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "description": "Photographic plate colors are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Photographic plate colors on an image-fitted emission model; gas and dust depth are not measured.",
       "detail": "13096 × 13616 px",
       "facts": [
         {
@@ -164,14 +164,14 @@
       "id": "smc-allwise-wide",
       "label": "NASA AllWISE",
       "title": "SMC in AllWISE infrared",
-      "description": "AllWISE infrared false colour on an image-fitted emission model painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "description": "AllWISE infrared false color on an image-fitted emission model painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "AllWISE infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
       "detail": "4000 × 4000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Infrared display colour · W4 / W2 / W1"
+          "value": "Infrared display color · W4 / W2 / W1"
         },
         {
           "id": "source-pixels",

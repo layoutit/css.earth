@@ -9,7 +9,7 @@ import { raster, fileBytes, outputName } from './io.ts';
 import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
 /** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (`src/thread-pool/`). */
 export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
-/** A body's published limb: its models and the overlay's reference colour (packages/bake/src/photometry/limb.ts). */
+/** A body's published limb: its models and the overlay's reference color (packages/bake/src/photometry/limb.ts). */
 export interface PreparedLimb { readonly law: LimbLaw; readonly reference: Channels<number>; readonly referenceSource: string; readonly polarToEquatorial: number }
 
 /** One frame of the bank: the published limb law when the body has one, otherwise the shared bank's authored sphere law. */

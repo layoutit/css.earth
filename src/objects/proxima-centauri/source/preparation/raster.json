@@ -26,7 +26,7 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere colour from the star's HST/STIS spectrum (LowLib). 2009) and log g 5.0 (Pavlenko et al. 2017) the Claret (2017) PHOENIX-COND grid has no node at 3,000 K, log g 5.0 to interpolate from, and its PHOENIX-DRIFT grid stops at 3,000 K. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,098 K and log g 4.59 (u1 0.162, u2 0.488): a model, because no fit of this star's limb is used.",
+        "qualification": "Photosphere color from the star's HST/STIS spectrum (LowLib). 2009) and log g 5.0 (Pavlenko et al. 2017) the Claret (2017) PHOENIX-COND grid has no node at 3,000 K, log g 5.0 to interpolate from, and its PHOENIX-DRIFT grid stops at 3,000 K. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,098 K and log g 4.59 (u1 0.162, u2 0.488): a model, because no fit of this star's limb is used.",
         "limbDarkening": {
           "law": "quadratic",
           "path": "photometry/claret-2017-tess-quadratic.tsv",

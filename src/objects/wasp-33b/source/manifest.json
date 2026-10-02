@@ -89,7 +89,7 @@
       "origin": "https://ui.adsabs.harvard.edu/abs/2015A&A...584A..75V/abstract",
       "credit": "von Essen et al. 2015, dayside brightness temperature at 1.05 µm (NASA Exoplanet Archive emission table); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the archive row chosen and the colour computation applied",
+      "acquisition": "Authored method record: names the archive row chosen and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -97,7 +97,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the cited brightness temperature; repinned when edited."
+        "reason": "Project-authored color recipe naming the cited brightness temperature; repinned when edited."
       }
     },
     {
@@ -212,10 +212,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "dataset-colour-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
-      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"

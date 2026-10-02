@@ -25,7 +25,7 @@ import { isResultName } from '../../features/result-name.ts';
 export const DELIVERY_FACTOR = 61.0 / 53.5;
 /** |Δ| at or below this many levels is agreement and stays transparent. */
 export const AGREEMENT_TOLERANCE = 6;
-/** The colour scale saturates at ±this many levels. */
+/** The color scale saturates at ±this many levels. */
 export const DIFFERENCE_RANGE = 64;
 /** Rec. 709 luma weights, applied to the 8-bit channel levels. */
 const LUMA = [.2126, .7152, .0722] as const;
@@ -44,7 +44,7 @@ export interface DatasetDifference {
   /** Footprint shares, in percent. */
   agreePercent: number; tooDarkPercent: number; tooBrightPercent: number;
   meanSignedDelta: number;
-  /** The ramp itself, sampled at signed levels, so a legend draws exactly the colours the map uses. */
+  /** The ramp itself, sampled at signed levels, so a legend draws exactly the colors the map uses. */
   swatches: { levels: number; rgba: string }[];
   note: string;
 }
@@ -65,7 +65,7 @@ export function differenceField(grid: DatasetLevelGrid, material: DatasetLevelMa
 }
 
 /** One RGBA pixel of the diverging ramp: blue too dark, red too bright, transparent inside the tolerance. */
-export function differenceColour(delta: number, tolerance = AGREEMENT_TOLERANCE, range = DIFFERENCE_RANGE): [number, number, number, number] {
+export function differenceColor(delta: number, tolerance = AGREEMENT_TOLERANCE, range = DIFFERENCE_RANGE): [number, number, number, number] {
   if (!Number.isFinite(delta) || Math.abs(delta) <= tolerance) return [0, 0, 0, 0];
   const t = Math.min(1, (Math.abs(delta) - tolerance) / Math.max(1e-9, range - tolerance)), [from, to] = delta < 0 ? TOO_DARK : TOO_BRIGHT;
   return [0, 1, 2].map(c => Math.round(from[c]! + (to[c]! - from[c]!) * t)).concat(Math.round(110 + 145 * t)) as [number, number, number, number];
@@ -101,14 +101,14 @@ export async function datasetDifference(root: string, prepared: PreparedReconstr
   if (!footprint) throw new TypeError('This dataset image covers none of the model projection.');
   const framed = fieldInDatasetFrame(onGrid, grid.width, grid.height, bounds.projection, bounds.dataset);
   const rgba = Buffer.alloc(framed.width * framed.height * 4);
-  framed.field.forEach((delta, p) => rgba.set(differenceColour(delta), p * 4));
+  framed.field.forEach((delta, p) => rgba.set(differenceColor(delta), p * 4));
   const png = await sharp(rgba, { raw: { width: framed.width, height: framed.height, channels: 4 } }).png().toBuffer();
   const percent = (value: number) => +(value / footprint * 100).toFixed(2);
   const summary: DatasetDifference = { schema: 'cssearth-nebula-dataset-difference@1', resultId: prepared.resultId, imageId: prepared.imageId,
     width: framed.width, height: framed.height, rangeLevels: DIFFERENCE_RANGE, toleranceLevels: AGREEMENT_TOLERANCE,
     deliveryFactor, deliveryNote: `Render divided by ${deliveryFactor.toFixed(3)}; the default 1.140 = 61.0/53.5 is the analytic projection over a delivered-bank capture per footprint pixel (horalek-widefield).`,
     footprintPixels: footprint, agreePercent: percent(footprint - dark - bright), tooDarkPercent: percent(dark), tooBrightPercent: percent(bright),
-    meanSignedDelta: +(sum / footprint).toFixed(2), swatches: SWATCH_LEVELS.map(levels => ({ levels, rgba: rgbaCss(differenceColour(levels)) })),
+    meanSignedDelta: +(sum / footprint).toFixed(2), swatches: SWATCH_LEVELS.map(levels => ({ levels, rgba: rgbaCss(differenceColor(levels)) })),
     note: 'Luminance of the render, corrected for delivery loss, minus this dataset’s own sky-removed image. Blue: render too dark. ' +
       'Red: render too bright. Clear: within the tolerance, or outside the image footprint. Only meaningful from the Earth view.' };
   return { png, summary, field: onGrid, grid: { width: grid.width, height: grid.height } };

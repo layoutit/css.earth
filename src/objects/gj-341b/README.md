@@ -8,7 +8,7 @@ It is the only planet known around GJ 341. Its orbit and size follow DiTomasso e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.5768334 d DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): a/R* 24.5; DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): inclination 89.24 degrees DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460006.41417 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by gj-341's measured colour (#ffbf88, the colour dataset of gj-341 (src/objects/gj-341/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by gj-341's measured color (#ffbf88, the color dataset of gj-341 (src/objects/gj-341/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of GJ 341's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (62, 64, 89), folded onto its orbit. Upper limits and rows without an error are left out.
 

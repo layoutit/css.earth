@@ -8,12 +8,12 @@ The Virgo Cluster's member galaxies that the [Nearby Universe](../nearby-univers
 | --- | --- |
 | [Extended Virgo Cluster Catalog, Kim et al. (2014)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/215/22) | Table 2: J2000 position, membership from the Virgo infall model (MmI), morphology (TT1) and SDSS g and r magnitudes of the 1,028 certain members. |
 | [Cosmicflows-4, Tully et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) | Virgo's group distance (table 3, DMzp of group 41220: 31.048 mag, 16.2 Mpc), through the Nearby Universe's tracked table. |
-| [Kinney et al. (1996)](https://doi.org/10.1086/177583) | The type templates the Nearby Universe colours its galaxies with. |
+| [Kinney et al. (1996)](https://doi.org/10.1086/177583) | The type templates the Nearby Universe colors its galaxies with. |
 
 ## Processing
 
 1. [`members.mts`](../../../packages/bake/authoring/virgo-cluster/members.mts) keeps the 797 certain members more than 10 arcsec from every Cosmicflows-4 galaxy; the other 231 are in the field already. It reads each one's RC3 stage from its EVCC morphology (E and dE −5, S0 and dS0 −2, Sa 1, Sb 3, Sc 5, Sd 7, Sm 9, Irr 10) and its B magnitude from g and r ([Jester et al. 2005](https://doi.org/10.1086/432466): B = g + 0.39 (g − r) + 0.21).
-2. `packages/bake/cli/prepare-catalogue-points.mts` places every member at Virgo's group distance, spread in depth as widely as the members spread across the sky, and colours and tones it as the field does ([recipe](source/dots/points.json)): 797 dots, 8 KB.
+2. `packages/bake/cli/prepare-catalogue-points.mts` places every member at Virgo's group distance, spread in depth as widely as the members spread across the sky, and colors and tones it as the field does ([recipe](source/dots/points.json)): 797 dots, 8 KB.
 
 ## Evidence
 

@@ -4,7 +4,7 @@
 
 KELT-9b is the hottest known giant planet. It orbits the fast-spinning A star [KELT-9](../kelt-9/README.md) every 35.5 hours on a nearly polar orbit. Its one dataset is a brightness-temperature map drawn from a published phase-curve fit. No map of KELT-9b has been published ([ledger](investigations.json)).
 
-**The map.** Mansfield et al. (2020, [ApJL 888, L15](https://doi.org/10.3847/2041-8213/ab5b09); [arXiv:1910.01567](https://arxiv.org/abs/1910.01567)) observed a full orbit with Spitzer at 4.5 µm in October 2018 (program 14059). They fitted the planet's light with two sinusoids, one per orbit and one per half orbit (their equation 1). Their table is transcribed cell by cell in [phase-curve.json](source/science/mansfield-2020/phase-curve.json). Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232), equation 5) show that such a curve comes from exactly one map of longitude: each map sinusoid makes a light-curve sinusoid of the same order and phase, 2, π/2 and 2/3 times as large for orders 0, 1 and 2. The [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format inverts the fit that way. A phase curve carries no north–south information, so every latitude is drawn alike. The palette runs from 2,400 to 5,100 K in false colour.
+**The map.** Mansfield et al. (2020, [ApJL 888, L15](https://doi.org/10.3847/2041-8213/ab5b09); [arXiv:1910.01567](https://arxiv.org/abs/1910.01567)) observed a full orbit with Spitzer at 4.5 µm in October 2018 (program 14059). They fitted the planet's light with two sinusoids, one per orbit and one per half orbit (their equation 1). Their table is transcribed cell by cell in [phase-curve.json](source/science/mansfield-2020/phase-curve.json). Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232), equation 5) show that such a curve comes from exactly one map of longitude: each map sinusoid makes a light-curve sinusoid of the same order and phase, 2, π/2 and 2/3 times as large for orders 0, 1 and 2. The [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format inverts the fit that way. A phase curve carries no north–south information, so every latitude is drawn alike. The palette runs from 2,400 to 5,100 K in false color.
 
 | Quantity | This map | Mansfield et al. (2020), Table 1 |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ KELT-9b is the hottest known giant planet. It orbits the fast-spinning A star [K
 
 **Orbit and rotation.** Gaudi et al. (2017, [Nature 546, 514](https://doi.org/10.1038/nature22392), Extended Data Table 3, adopted Model 1) give the period, 0.03462 au, 86.79° inclination and the transit time. Their mass is 2.88 Jupiter masses. The radius is Ahlers et al. (2020)'s 1.84 Jupiter radii. The orbit sits on the volume-equivalent radius of the flattened star, so a/R* is 3.2046 here rather than the paper's 3.153 for its 2.362 solar-radius sphere. The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked, as the papers do. The planet is drawn emissive: the map is its own heat, not lit by its star.
 
-**Catalogue colour.** #f6aa3a, the dataset palette at the paper's 4,566 K day side, the rule WASP-43b's colour follows.
+**Catalogue color.** #f6aa3a, the dataset palette at the paper's 4,566 K day side, the rule WASP-43b's color follows.
 
 ## Evidence
 

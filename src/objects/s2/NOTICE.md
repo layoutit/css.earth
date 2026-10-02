@@ -4,4 +4,4 @@ Radius: Habibi et al. (2017), ApJ 847, 120, Table 3: 5.53 (+1.77/-0.79) solar ra
 
 Orbit: GRAVITY Collaboration (2022), A&A 657, L12, Table 1.
 
-Colour: a Planck spectrum at the cited temperature through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: a Planck spectrum at the cited temperature through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).

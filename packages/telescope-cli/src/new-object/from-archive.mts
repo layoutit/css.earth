@@ -99,7 +99,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     const period = assembled.orbit.periodDays, year = row.year ? `, found in ${row.year}` : '', radius = assembled.radius.value, mass = assembled.mass.value;
     const modelSize = assembled.radius.row.reference === 'CALCULATED_VALUE';
     const defaultRow = assembled.row ?? planetRows.find(entry => entry.isDefault)!;
-    // A measured dayside temperature in the archive's emission table gives the planet its thermal colour (planet-datasets.mts).
+    // A measured dayside temperature in the archive's emission table gives the planet its thermal color (planet-datasets.mts).
     if (!thermal) note.push(`${name}: ${why}; its gray takes the host's light`);
     const quotes = await wikipediaQuotes(archive, [name, hostname], [name, row.planet]);
     if (!quotes) note.push(`${name}: no Wikipedia lead to quote`);

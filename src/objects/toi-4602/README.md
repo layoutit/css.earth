@@ -6,7 +6,7 @@ Its radius and temperature follow Di Maio et al. 2026. It is also HD 25295, HIP 
 
 **Star.** Placement: Gaia DR3 source 169256041140206848, parallax 15.921 ± 0.028 mas (62.81 pc). Radius 1.08 +/- 0.1 solar radii from Di Maio et al. 2026, the stellar radius of the default parameter set of TOI-4602.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract). Mass 0.9 +/- 0.02 solar masses from Di Maio et al. 2026, the stellar mass of the default parameter set of TOI-4602.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract). Temperature 5,966 K from Di Maio et al. 2026, the stellar temperature of the default parameter set of TOI-4602.01 in the NASA Exoplanet Archive. log g 4.33 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 169256041140206848, through the CIE 1931 2° observer: #fff8fe. Routes tried in order: stis-ngsl: HD 25295 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 169256041140206848, through the CIE 1931 2° observer: #fff8fe. Routes tried in order: stis-ngsl: HD 25295 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,966 K and log g 4.33 (u1 0.420, u2 0.283): a model, because no fit of this star's limb is used.
 

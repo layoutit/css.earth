@@ -1,6 +1,6 @@
 // Selected-body locator: four open corners with 5px arms and 1.5px strokes, around the body the world emphasises. One
 // inline SVG serves every body: the world moves it into the emphasised marker, and its paths fill with `currentColor`, so
-// they take that marker's colour by inheritance. The resting corners fill a 16px square. The hover corners keep the same
+// they take that marker's color by inheritance. The resting corners fill a 16px square. The hover corners keep the same
 // arms on a 20px square drawn at 16px, so the marker's 1.25 hover scale restores them to 5px.
 const ARM = 5, STROKE = 1.5, SVG = 'http://www.w3.org/2000/svg';
 

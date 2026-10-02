@@ -3,8 +3,8 @@
   "objectId": "ngc-4889-volume",
   "entries": [
     {
-      "id": "sdss-colour",
-      "subject": "SDSS DR9 colour HiPS",
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
       "status": "included",
       "finding": "An 1800 x 1800 px hips2fits cutout of CDS/P/SDSS9/color, 8.0 arcmin wide on the 2MASS position. The core does not saturate (peak 219 of 255) and the light reaches the sky level about 240 arcsec out.",
       "evidence": [
@@ -13,8 +13,8 @@
       ]
     },
     {
-      "id": "legacy-surveys-colour",
-      "subject": "DESI Legacy Imaging Surveys DR10 colour HiPS",
+      "id": "legacy-surveys-color",
+      "subject": "DESI Legacy Imaging Surveys DR10 color HiPS",
       "status": "excluded",
       "finding": "Baked first, on 2026-10-02, and replaced. The composite saturates within about 20 arcsec of the core, so sight lines through the centre carried less light than the cusp of the fit gives them: from the side and from above the volume showed a dark band through the core between two bright lobes, and green and pink rings in the halo.",
       "evidence": [

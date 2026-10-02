@@ -128,7 +128,7 @@ const verified = aligned.every(row => row.registration.status !== 'publisher');
 type Layer = { path: string; width: number; height: number };
 const preview = async (output: string, layer: string, bytes: Buffer): Promise<Layer> => {
   const path = resolve(output, `${layer}.png`);
-  const info = await sharp(bytes).removeAlpha().toColourspace('srgb').resize({ width: 2048, height: 2048, fit: 'inside', withoutEnlargement: true }).png().toFile(path);
+  const info = await sharp(bytes).removeAlpha().toColorspace('srgb').resize({ width: 2048, height: 2048, fit: 'inside', withoutEnlargement: true }).png().toFile(path);
   return { path: relative(process.cwd(), path), width: info.width, height: info.height };
 };
 const images: Array<{ id: string; label: string; source: typeof recipe.images[number] & { path: string };

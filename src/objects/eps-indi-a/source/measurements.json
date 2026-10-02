@@ -11,7 +11,7 @@
   "effectiveTemperatureSource": "Lundkvist et al. (2024), as Sanghi et al. (2026) tabulate it, https://arxiv.org/abs/2603.08787",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
+    "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."
   },
   "surfaceGravityLogg": 4.63,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/eps-indi-a.json: 4.625"

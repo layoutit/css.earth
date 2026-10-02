@@ -26,11 +26,11 @@
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffd3b8, the colour dataset of wasp-29 (src/objects/wasp-29/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#ffd3b8, the color dataset of wasp-29 (src/objects/wasp-29/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "wasp-29",
           "srgb": "#ffd3b8",
-          "source": "the colour dataset of wasp-29 (src/objects/wasp-29/source/photometry/stellar-color.json)"
+          "source": "the color dataset of wasp-29 (src/objects/wasp-29/source/photometry/stellar-color.json)"
         }
       }
     }

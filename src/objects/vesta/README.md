@@ -24,7 +24,7 @@ Vesta uses Dawn framing-camera mosaics, spectral ratios and a terrain model in t
 
 ## Processing
 
-**Photographs, colour and terrain.** Each DLR image is placed in Claudia coordinates by its PDS label's pixels per degree and projection offsets ([LAMO label](source/reference/lamo-clear.lbl), [ratio label](source/reference/clementine.lbl)). Exact all-channel black is treated as likely fill, and the HAMO-1-2 mosaic fills northern gaps in the natural-colour and LAMO views in gray. The spectral ratios are shown unchanged: red 749/438 nm, green 749/917 nm, blue 438/749 nm. The terrain values are radii in metres, as the DLR release says. The radial model is simplified to 800 triangles with an 8 km allowance ([simplifier](https://github.com/zeux/meshoptimizer/blob/v1.2/js/README.md#simplifier)), with fixed-epoch lighting and no cast shadows.
+**Photographs, color and terrain.** Each DLR image is placed in Claudia coordinates by its PDS label's pixels per degree and projection offsets ([LAMO label](source/reference/lamo-clear.lbl), [ratio label](source/reference/clementine.lbl)). Exact all-channel black is treated as likely fill, and the HAMO-1-2 mosaic fills northern gaps in the natural-color and LAMO views in gray. The spectral ratios are shown unchanged: red 749/438 nm, green 749/917 nm, blue 438/749 nm. The terrain values are radii in metres, as the DLR release says. The radial model is simplified to 800 triangles with an 8 km allowance ([simplifier](https://github.com/zeux/meshoptimizer/blob/v1.2/js/README.md#simplifier)), with fixed-epoch lighting and no cast shadows.
 
 **GRaND element maps.** Dawn's gamma-ray and neutron detector measured the top few decimetres of regolith from about 210 km up.
 
@@ -49,7 +49,7 @@ The archive uses Claudia Double Prime, which the [GRaND catalogue](https://sbnar
 
 Each grid is read at Claudia longitude + 150°, so no cell is resampled. For scale, mean surface gravity is about 25,300 mGal.
 
-**Geology.** The Yingst et al. (2023) map has 136 polygons in 18 units in the authors' own colours. `geology-grid.py` rasterizes it at 2048 x 1024 in its own coordinates ([plan](source/geology/prepare-grid.json), [units](source/geology/vesta-geologic-units.json)). Contacts and linear features are not drawn.
+**Geology.** The Yingst et al. (2023) map has 136 polygons in 18 units in the authors' own colors. `geology-grid.py` rasterizes it at 2048 x 1024 in its own coordinates ([plan](source/geology/prepare-grid.json), [units](source/geology/vesta-geologic-units.json)). Contacts and linear features are not drawn.
 
 **Named features.** `presentation/surface-map.json` puts the map's left edge at 150° in the Gazetteer's Claudia Double Prime frame, and each anchor sits on the shape model.
 
@@ -72,7 +72,7 @@ Each grid is read at Claudia longitude + 150°, so no cell is resampled. For sca
 - Clear-filter photography keeps the seams of the original mosaic. North of LAMO coverage the 60 m/pixel HAMO mosaic shows instead, so resolution and sun angle change, and the pole is very dark.
 - Spectral ratios are not mineral abundances.
 - GRaND maps resolve about 300 km; their pixels are sampling. The coarse maps show blocks 15° to 20° tall, the fast neutron level has an arbitrary offset, and uncertainties are not drawn.
-- The geology dataset leaves 2,753 cells (0.13%) grey where the source has no polygon.
+- The geology dataset leaves 2,753 cells (0.13%) gray where the source has no polygon.
 - Gravity resolves about 42 km at best (55 km for Bouguer). Radial gravity omits J2 and is not an anomaly. The geoid is withheld poleward of 60°. The frame is close to, not exactly, Claudia Double Prime.
 - Terrain polar interpolation is not independent stereo coverage. The 8 km allowance is not an error bound.
 - Feature outlines are not published nomenclature boundaries. Placement uses osculating elements with limited temporal validity.

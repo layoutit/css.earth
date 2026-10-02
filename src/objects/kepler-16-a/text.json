@@ -29,9 +29,9 @@
   },
   "datasets": {
     "color": {
-      "title": "Colour",
+      "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
-      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
     }
   }
 }

@@ -2111,7 +2111,7 @@
     },
     {
       "path": "photometry/opal-2025-minnaert-f657n.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a colour map (F657N, F547M, F467M), red channel (F657N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a color map (F657N, F547M, F467M), red channel (F657N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2129,7 +2129,7 @@
     },
     {
       "path": "photometry/opal-2025-minnaert-f547m.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a colour map (F657N, F547M, F467M), green channel (F547M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a color map (F657N, F547M, F467M), green channel (F547M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2147,7 +2147,7 @@
     },
     {
       "path": "photometry/opal-2025-minnaert-f467m.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a colour map (F657N, F547M, F467M), blue channel (F467M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a color map (F657N, F547M, F467M), blue channel (F467M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1752. Its orbit and size follow Peláez-
 
 **Orbit.** Peláez-Torres et al. 2026 (2026MNRAS.548ag713P), via the NASA Exoplanet Archive ps table (pl_refname PELAEZ_TORRES_ET_AL_2026): P 0.9351861 d Peláez-Torres et al. 2026 (2026MNRAS.548ag713P), via the NASA Exoplanet Archive ps table (pl_refname PELAEZ_TORRES_ET_AL_2026): a/R* derived from its semi-major axis 0.01624 au and stellar radius 0.53 solar radii; Peláez-Torres et al. 2026 (2026MNRAS.548ag713P), via the NASA Exoplanet Archive ps table (pl_refname PELAEZ_TORRES_ET_AL_2026): inclination 86.75 degrees No archive row states an eccentricity; the orbit is taken as circular Peláez-Torres et al. 2026 (2026MNRAS.548ag713P), via the NASA Exoplanet Archive ps table (pl_refname PELAEZ_TORRES_ET_AL_2026): transit mid-time 2459334.47908 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1752's measured colour (#ffc68e, the colour dataset of toi-1752 (src/objects/toi-1752/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1752's measured color (#ffc68e, the color dataset of toi-1752 (src/objects/toi-1752/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1752's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

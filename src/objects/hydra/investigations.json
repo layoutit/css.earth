@@ -13,10 +13,10 @@
       ]
     },
     {
-      "id": "mvic-colour",
-      "subject": "MVIC colour sequence as a colour dataset",
+      "id": "mvic-color",
+      "subject": "MVIC color sequence as a color dataset",
       "status": "unresolved",
-      "finding": "The MVIC colour sequence is not used as colour: it has no qualified cross-band and image-to-mesh registration.",
+      "finding": "The MVIC color sequence is not used as color: it has no qualified cross-band and image-to-mesh registration.",
       "revisitWhen": "Cross-band and image-to-mesh registration qualify for this mesh.",
       "evidence": [
         "https://github.com/layoutit/css.earth/pull/184"

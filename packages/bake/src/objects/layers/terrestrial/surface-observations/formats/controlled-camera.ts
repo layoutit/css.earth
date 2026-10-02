@@ -1,7 +1,7 @@
 /**
  * Controlled shape cameras: calibrated photographs whose pointing a published control network states, such as the Thomas and Stooke
  * shape releases or the Galileo SSI image catalog. The camera looks at the body origin from a stated latitude, longitude and range, and
- * its rays are cast onto the source mesh the network was controlled to. Three filters can be shown together as colour.
+ * its rays are cast onto the source mesh the network was controlled to. Three filters can be shown together as color.
  */
 import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.ts';
 import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer, checkKeys } from '../../../../raster/index.ts';
@@ -114,7 +114,7 @@ function validateCameraDataset(value: unknown, sourceGeometry: unknown) {
 }
 
 function validateColorDataset(value: unknown, sourceGeometry: unknown) {
-  const record = requireRecord(value), context = `${CONTEXT} for filter colour`;
+  const record = requireRecord(value), context = `${CONTEXT} for filter color`;
   if (requireRecord(record.display).palette !== undefined) throw new TypeError(`Invalid source-bound ${context}: a palette belongs to a monochrome dataset.`);
   checkKeys(value, [...DATASET_KEYS, 'bands'], [...MOSAIC_KEYS, ...OPTIONAL_DATASET_KEYS, 'bandAlignment'], context);
   for (const set of requireArray(record.frames)) {
@@ -128,7 +128,7 @@ function validateColorDataset(value: unknown, sourceGeometry: unknown) {
   const recipe = decodeProfile(parseControlledColorDataset, value, `Invalid source-bound ${context}.`), filters = recipe.bands.map(band => band.filter);
   if (recipe.format !== 'controlled-shape-color' || recipe.bands.length !== 3 || recipe.bands.some((band, i) => band.channel !== BANDS[i] || !band.filter) ||
       new Set(filters).size !== 3 || recipe.metadata.falseColor !== true || recipe.display.displayRange?.[0] !== 0) {
-    throw new TypeError('Filter colour names three distinct filters in red, green and blue order, is false colour, and shows every band on one display range from 0.');
+    throw new TypeError('Filter color names three distinct filters in red, green and blue order, is false color, and shows every band on one display range from 0.');
   }
   validateEnvelope(recipe, colorPaths(recipe), { ...RULES, displays: ['displayRange'] }, context);
   validateTransfer(recipe.transfer, parseSurfaceGeometry(sourceGeometry), context);
@@ -263,12 +263,12 @@ export const controlledColorFormat: SurfaceObservationFormat = {
         // Calibrated SSI states its filter in both labels, which its loader checks against each other, and is I/F by its archive's definition.
         const ssi = source.encoding === 'fits-ssi-iof';
         const reflectance = ssi || pds3LabelHasReflectance(label), stated = ssi ? frame.filter === band.filter : pds3Values(label, 'FILTER_NAME')?.includes(band.filter);
-        if (!stated || !reflectance) throw new Error(`Band colour needs the actual filter and calibrated reflectance units in its native label: ${source.id}`);
+        if (!stated || !reflectance) throw new Error(`Band color needs the actual filter and calibrated reflectance units in its native label: ${source.id}`);
         bands.push(frame);
       }
       frames.push(bandSetFrame(set.id, bands));
     }
-    const units = `relative I/F in each filter${retained(recipe.photometry) ? ', with original illumination' : ', disk-normalized'}; false colour`;
+    const units = `relative I/F in each filter${retained(recipe.photometry) ? ', with original illumination' : ', disk-normalized'}; false color`;
     const result = datasetPolicy(recipe, frames, photometry, context, units, bandColorDisplay(recipe.bands.map(band => band.filter), 'radiance-factor', recipe.display.displayRange));
     return bandAlignment ? { ...result, policy: { ...result.policy, bandAlignment } } : result;
   },

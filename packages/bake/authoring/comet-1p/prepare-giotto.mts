@@ -97,7 +97,7 @@ export async function prepareGiottoProjection(sourceDirectory: string) {
   assert.equal(registration.schema, 'cssearth-halley-giotto-registration@1');
   const shapeBytes = await readFile(resolve(sourceDirectory, 'shape/1682q1halley.tab'));
   const mesh = parsePdsRadiusTable(shapeBytes.toString(), { stepDegrees:5, longitudeDirection:'east-positive', metersPerUnit:1000, expectedVertices:2522, expectedFaces:5040 });
-  const { data, info } = await sharp(resolve(sourceDirectory, 'giotto/hmc_best.gif')).toColourspace('srgb').removeAlpha().raw().toBuffer({ resolveWithObject:true });
+  const { data, info } = await sharp(resolve(sourceDirectory, 'giotto/hmc_best.gif')).toColorspace('srgb').removeAlpha().raw().toBuffer({ resolveWithObject:true });
   assert.equal(info.channels, 3);
   const sample = createGiottoSampler(mesh, registration, { data, ...info });
   const width = 512, height = 256, rgb = Buffer.alloc(width*height*3), validity = Buffer.alloc(width*height);

@@ -1,6 +1,6 @@
 /**
  * Prepare a published point catalogue beside an object as a bank of fixed 3D points. `source/<id>/points.json` names
- * the table, its columns, the rows the authors' own selection keeps, an optional colour column and the citation;
+ * the table, its columns, the rows the authors' own selection keeps, an optional color column and the citation;
  * Astropy converts each kept row's Galactic longitude, latitude and distance to Sun-centred ICRS Cartesian
  * coordinates (kpc, or Mpc when `frame.unit` says so). The bank is written where the recipe says: `published: true` for a
  * bank the app fetches (`prepared/<id>.json`, inventoried), otherwise a bake input for merge-catalogue-points or
@@ -18,16 +18,16 @@
  * (`frame.unit: 'pc'`, to 1e-4 pc) instead of around the Sun in kpc: a cluster a few parsecs across, 8 kpc away, whose
  * stars would otherwise fall on a 0.1 pc grid. The spheroid's centre must be that origin.
  *
- * `appearance.colorByClass` colours each row by the class its column's value falls in (below each class's `below`, the
- * last class above all of them): the colour of that class's published template spectrum, through the CIE 1931 observer
- * into sRGB as the app colours stars (packages/bake/src/objects/stellar/stellar-photometric-color.ts). A row without a
- * value takes `missing`, a named colour.
+ * `appearance.colorByClass` colors each row by the class its column's value falls in (below each class's `below`, the
+ * last class above all of them): the color of that class's published template spectrum, through the CIE 1931 observer
+ * into sRGB as the app colors stars (packages/bake/src/objects/stellar/stellar-photometric-color.ts). A row without a
+ * value takes `missing`, a named color.
  *
- * `appearance.toneBy` darkens each dot's colour with the object's measured brightness: its absolute magnitude (the
+ * `appearance.toneBy` darkens each dot's color with the object's measured brightness: its absolute magnitude (the
  * column's apparent magnitude at the row's distance) sets a tone from 1 at `brightMagnitude` and brighter, linearly in
  * magnitude down to `faintTone` at `faintMagnitude`, in `steps`; a row without a magnitude takes the faintest. The bank
- * carries each palette colour's tone (`paletteTone`); merge-catalogue-points.mts scales the final colour by it. Only the
- * colour changes, never the opacity.
+ * carries each palette color's tone (`paletteTone`); merge-catalogue-points.mts scales the final color by it. Only the
+ * color changes, never the opacity.
  *
  * Usage: node packages/bake/cli/prepare-catalogue-points.mts <object-directory> <id>
  */
@@ -118,8 +118,8 @@ type Spectrum = { path: string; bytes: number; wavelength: string; flux: string;
   endsNm?: { value: number; basis: string } };
 const appearance = recipe.appearance as { colorCss: string; radiusPx: number; opacity: number;
   colorBy?: { column: Column; stops: [number, string][]; steps: number };
-  /** Each row's measured B-V through the app's own catalogue star colour (@cssearth/engine catalogueColor), quantised to
-   * `steps` colours across `range`; a colour outside the range takes its end. */
+  /** Each row's measured B-V through the app's own catalogue star color (@cssearth/engine catalogueColor), quantised to
+   * `steps` colors across `range`; a color outside the range takes its end. */
   colorByBv?: { column: Column; range: [number, number]; steps: number; basis: string };
   colorByClass?: { column: Column; classes: { label: string; below?: number; spectrum: Spectrum }[]; missing: { label: string; colorCss: string; basis: string } };
   toneBy?: { magnitudeColumn: Column; band: string; brightMagnitude: number; faintMagnitude: number; faintTone: number; steps: number; basis: string;
@@ -127,12 +127,12 @@ const appearance = recipe.appearance as { colorCss: string; radiusPx: number; op
     nanomaggies?: true };
   /** Each dot's size from its rank by the tone's magnitude among the dots at about its distance (catalogue-tones.ts). */
   sizeBy?: CatalogueSizeBy;
-  /** Each row's colour from three flux columns, one per display channel, each times its scale, the brightest channel full:
-   * the colour an image made with those scales gives the object. */
+  /** Each row's color from three flux columns, one per display channel, each times its scale, the brightest channel full:
+   * the color an image made with those scales gives the object. */
   colorByBands?: { red: { column: Column; scale: number }; green: { column: Column; scale: number }; blue: { column: Column; scale: number };
     levels: number; basis: string };
-  /** Each row coloured by a template spectrum stretched to the row's redshift (a redshift-planck18 distance), rounded
-   * to `step`: the colour its light arrives with. */
+  /** Each row colored by a template spectrum stretched to the row's redshift (a redshift-planck18 distance), rounded
+   * to `step`: the color its light arrives with. */
   colorBySpectrumAtRedshift?: { spectrum: Spectrum; step: number; basis: string } };
 if (!['whitespace', 'fixed-width', 'csv'].includes(table.format)) throw new TypeError(`${at('table.format')} must be whitespace, fixed-width or csv (with a header row).`);
 if (!skyPlacement && !['pc', 'kpc', 'parallax-mas', 'distance-modulus', 'redshift-planck18'].includes(table.distanceUnit!)) {
@@ -147,7 +147,7 @@ if (!['galactic', 'icrs'].includes(frame.input) || frame.output !== 'sun-icrf' |
 if (skyPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty)) throw new TypeError(`${at('frame.placement')} ${String(frame.placement)} places ICRS rows in kpc, without kinematic distances.`);
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
 const hex = /^#[0-9a-f]{6}$/iu;
-if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex colour, a positive radius and an opacity in (0, 1].`);
+if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex color, a positive radius and an opacity in (0, 1].`);
 const sizeBy = appearance.sizeBy;
 const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, colorByBv = appearance.colorByBv, toneBy = appearance.toneBy,
   colorByBands = appearance.colorByBands, colorBySpectrumAtRedshift = appearance.colorBySpectrumAtRedshift;
@@ -175,11 +175,11 @@ if (colorByClass && (!Array.isArray(colorByClass.classes) || colorByClass.classe
     !colorByClass.classes.every((entry, index, all) => typeof entry.label === 'string' && entry.spectrum && typeof entry.spectrum.path === 'string' &&
       (index === all.length - 1 ? entry.below === undefined : Number.isFinite(entry.below) && (index === 0 || entry.below! > all[index - 1]!.below!))) ||
     !colorByClass.missing || !hex.test(colorByClass.missing.colorCss) || typeof colorByClass.missing.basis !== 'string')) {
-  throw new TypeError(`${at('appearance.colorByClass')} needs two or more labelled classes with a spectrum each, increasing 'below' bounds on all but the last, and a missing colour with its basis.`);
+  throw new TypeError(`${at('appearance.colorByClass')} needs two or more labelled classes with a spectrum each, increasing 'below' bounds on all but the last, and a missing color with its basis.`);
 }
 if (colorBy && (colorBy.stops.length < 2 || !colorBy.stops.every(([value, color], index) => Number.isFinite(value) && hex.test(color) &&
     (index === 0 || value > colorBy.stops[index - 1]![0])) || !Number.isInteger(colorBy.steps) || colorBy.steps < 2 || colorBy.steps > 64)) {
-  throw new TypeError(`${at('appearance.colorBy')} needs increasing numeric stops with hex colours and 2 to 64 steps.`);
+  throw new TypeError(`${at('appearance.colorBy')} needs increasing numeric stops with hex colors and 2 to 64 steps.`);
 }
 const source = String(recipe.source);
 await readFile(resolve(objectDirectory, '../../sources', `${source}.json`)).catch(() => { throw new TypeError(`${at('source')} ${source} has no record in src/sources.`); });
@@ -425,7 +425,7 @@ if (spheroidPlacement) {
   converted.points = placed.points; converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, placed.maxDistanceKpc);
 }
 
-// A colour column maps onto the stops' piecewise-linear sRGB ramp, quantised to a small palette the bank carries.
+// A color column maps onto the stops' piecewise-linear sRGB ramp, quantised to a small palette the bank carries.
 const mix = (a: string, b: string, t: number) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - t) + parseInt(b.slice(i, i + 2), 16) * t)
   .toString(16).padStart(2, '0')).join('');
 const ramp = (value: number) => {
@@ -435,9 +435,9 @@ const ramp = (value: number) => {
   return mix(c0, c1, v1 === v0 ? 0 : (clamped - v0) / (v1 - v0));
 };
 const { catalogueColor } = await import('@cssearth/engine');
-const bvColour = (bv: number) => '#' + catalogueColor(Number.NaN, bv).map(channel => Math.round(channel).toString(16).padStart(2, '0')).join('');
+const bvColor = (bv: number) => '#' + catalogueColor(Number.NaN, bv).map(channel => Math.round(channel).toString(16).padStart(2, '0')).join('');
 const palette = colorBy ? Array.from({ length: colorBy.steps }, (_, step) => ramp(colorBy.stops[0]![0] + (colorBy.stops.at(-1)![0] - colorBy.stops[0]![0]) * step / (colorBy.steps - 1)))
-  : colorByBv ? Array.from({ length: colorByBv.steps }, (_, step) => bvColour(colorByBv.range[0] + (colorByBv.range[1] - colorByBv.range[0]) * step / (colorByBv.steps - 1))) : null;
+  : colorByBv ? Array.from({ length: colorByBv.steps }, (_, step) => bvColor(colorByBv.range[0] + (colorByBv.range[1] - colorByBv.range[0]) * step / (colorByBv.steps - 1))) : null;
 const paletteIndex = (value: number | null) => {
   if (colorByBv) {
     if (value === null || !Number.isFinite(value)) throw new TypeError(`${at('appearance.colorByBv')}: a kept row has no ${JSON.stringify(colorByBv.column)} value.`);
@@ -448,9 +448,9 @@ const paletteIndex = (value: number | null) => {
   const [low, high] = [colorBy.stops[0]![0], colorBy.stops.at(-1)![0]];
   return Math.round((Math.max(low, Math.min(high, value)) - low) / (high - low) * (colorBy.steps - 1));
 };
-// Template colours: a template spectrum, linearly interpolated to the observer's 1 nm grid from 380 to 780 nm, through
-// the CIE 1931 2° observer into linear sRGB, brightest channel 1. A colour outside the sRGB gamut is refused. With a
-// redshift the spectrum is first stretched by 1 + z: the colour its light arrives with.
+// Template colors: a template spectrum, linearly interpolated to the observer's 1 nm grid from 380 to 780 nm, through
+// the CIE 1931 2° observer into linear sRGB, brightest channel 1. A color outside the sRGB gamut is refused. With a
+// redshift the spectrum is first stretched by 1 + z: the color its light arrives with.
 const cie = colorByClass || colorBySpectrumAtRedshift ? parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3) : null;
 const readSpectrum = async (spectrum: Spectrum, where: string) => {
   const bytes = await readFile(resolve(sourceDirectory, spectrum.path));
@@ -460,7 +460,7 @@ const readSpectrum = async (spectrum: Spectrum, where: string) => {
   const table = binaryTable(hdu), column = (name: string) => Array.from({ length: table.rows }, (_, row) => numbers(bytes, table, row, tableColumn(table, name))[0]!);
   return { wavelengths: column(spectrum.wavelength).map(value => value / 10), flux: column(spectrum.flux) };
 };
-const templateColour = ({ wavelengths, flux }: { wavelengths: number[]; flux: number[] }, spectrum: Spectrum, label: string, where: string, redshift = 0) => {
+const templateColor = ({ wavelengths, flux }: { wavelengths: number[]; flux: number[] }, spectrum: Spectrum, label: string, where: string, redshift = 0) => {
   const stretch = 1 + redshift, first = wavelengths[0]! * stretch, last = wavelengths.at(-1)! * stretch;
   if (!(first <= 380) || (last < 780) !== (spectrum.endsNm !== undefined) || (spectrum.endsNm && Math.abs(spectrum.endsNm.value - last) > 0.5)) {
     throw new TypeError(`${at(where)}: ${spectrum.path} covers ${first} to ${last} nm${redshift ? ` at z = ${redshift}` : ''}; a template ending before 780 nm must say so in endsNm, with its basis.`);
@@ -475,16 +475,16 @@ const templateColour = ({ wavelengths, flux }: { wavelengths: number[]; flux: nu
   if (raw.some(value => value < 0)) throw new TypeError(`${at(where)}: the ${label} template falls outside the sRGB gamut.`);
   return '#' + raw.map(value => Math.round(255 * linearToSrgb(value / peak)).toString(16).padStart(2, '0')).join('');
 };
-const classColours = colorByClass ? await Promise.all(colorByClass.classes.map(async ({ label, spectrum }) =>
-  templateColour(await readSpectrum(spectrum, 'appearance.colorByClass'), spectrum, label, 'appearance.colorByClass'))) : null;
-// Redshifted template colours, one per redshift step: each row's redshift rounded to the step.
+const classColors = colorByClass ? await Promise.all(colorByClass.classes.map(async ({ label, spectrum }) =>
+  templateColor(await readSpectrum(spectrum, 'appearance.colorByClass'), spectrum, label, 'appearance.colorByClass'))) : null;
+// Redshifted template colors, one per redshift step: each row's redshift rounded to the step.
 const redshiftSpectrum = colorBySpectrumAtRedshift ? await readSpectrum(colorBySpectrumAtRedshift.spectrum, 'appearance.colorBySpectrumAtRedshift') : null;
 const redshiftPalette: string[] = [], redshiftIndex = new Map<number, number>();
-const redshiftColour = (index: number) => {
+const redshiftColor = (index: number) => {
   const step = colorBySpectrumAtRedshift!.step, z = Math.round(converted.redshifts![index]! / step) * step, key = Number(z.toFixed(6));
   if (!redshiftIndex.has(key)) {
     redshiftIndex.set(key, redshiftPalette.length);
-    redshiftPalette.push(templateColour(redshiftSpectrum!, colorBySpectrumAtRedshift!.spectrum, `z = ${key}`, 'appearance.colorBySpectrumAtRedshift', key));
+    redshiftPalette.push(templateColor(redshiftSpectrum!, colorBySpectrumAtRedshift!.spectrum, `z = ${key}`, 'appearance.colorBySpectrumAtRedshift', key));
   }
   return redshiftIndex.get(key)!;
 };
@@ -493,39 +493,39 @@ const classIndex = (value: number | null) => value === null || !Number.isFinite(
 const reachKpc = Math.ceil(converted.maxDistanceKpc);
 const outputMpc = frame.unit === 'Mpc';
 const reach = aroundOriginM ? Math.ceil(Math.max(...converted.points.flat().map(Math.abs))) : outputMpc ? Math.ceil(converted.maxDistanceKpc / 1000) : reachKpc;
-const classPalette = classColours ? [...classColours, colorByClass!.missing.colorCss] : null;
-// Band colours: the three scaled fluxes, the brightest channel full, each channel in `levels` steps. A row with no
-// positive flux in any band takes the bank's colour.
+const classPalette = classColors ? [...classColors, colorByClass!.missing.colorCss] : null;
+// Band colors: the three scaled fluxes, the brightest channel full, each channel in `levels` steps. A row with no
+// positive flux in any band takes the bank's color.
 const bandPalette: string[] = [], bandIndex = new Map<string, number>();
-const bandColour = (index: number) => {
+const bandColor = (index: number) => {
   const channels = converted.bands[index], peak = channels ? Math.max(...channels) : 0;
   const levels = colorByBands!.levels;
-  const colour = !channels || !(peak > 0) ? appearance.colorCss
+  const color = !channels || !(peak > 0) ? appearance.colorCss
     : '#' + channels.map(value => Math.round(Math.round(value / peak * (levels - 1)) / (levels - 1) * 255).toString(16).padStart(2, '0')).join('');
-  if (!bandIndex.has(colour)) { bandIndex.set(colour, bandPalette.length); bandPalette.push(colour); }
-  return bandIndex.get(colour)!;
+  if (!bandIndex.has(color)) { bandIndex.set(color, bandPalette.length); bandPalette.push(color); }
+  return bandIndex.get(color)!;
 };
-const bandIndices = colorByBands ? converted.points.map((_, index) => bandColour(index)) : null;
-// Each point's colour before its tone, as an index into the base palette (one entry for a single-colour bank).
-const redshiftIndices = colorBySpectrumAtRedshift ? converted.points.map((_, index) => redshiftColour(index)) : null;
+const bandIndices = colorByBands ? converted.points.map((_, index) => bandColor(index)) : null;
+// Each point's color before its tone, as an index into the base palette (one entry for a single-color bank).
+const redshiftIndices = colorBySpectrumAtRedshift ? converted.points.map((_, index) => redshiftColor(index)) : null;
 const basePalette = colorByBands ? bandPalette : colorBySpectrumAtRedshift ? redshiftPalette : classPalette ?? palette ?? [appearance.colorCss];
 const baseIndex = (index: number) => bandIndices ? bandIndices[index]! : redshiftIndices ? redshiftIndices[index]! : colorByClass ? classIndex(converted.colors[index] ?? null) : palette ? paletteIndex(converted.colors[index] ?? null) : 0;
-// With a tone, a palette entry is a (colour, tone) pair, and with a size a (colour, tone, size) triple (catalogue-tones.ts).
+// With a tone, a palette entry is a (color, tone) pair, and with a size a (color, tone, size) triple (catalogue-tones.ts).
 const toned = toneBy ? toneCataloguePalette({ basePalette, baseIndices: converted.points.map((_, index) => baseIndex(index)),
   magnitudes: converted.magnitudes, distances: converted.points.map(point => Math.hypot(point[0]!, point[1]!, point[2]!)), toneBy, ...(sizeBy ? { sizeBy } : {}) }) : null;
 const pointIndex = toned ? toned.indices : converted.points.map((_, index) => baseIndex(index));
 const tonedPalette = toned?.palette ?? [], paletteTone = toned?.paletteTone ?? [], paletteRadiusPx = toned?.paletteRadiusPx ?? [];
 /** Every disc bank of catalogued objects takes each dot's look from the photograph under it, so the dots read as part of the galaxy's light:
  * a dot's tone follows the photograph's brightness there, relative to the 90th percentile over the bank's dots on the
- * photograph and never below PHOTOGRAPH_TONE_FLOOR, and its colour moves PHOTOGRAPH_COLOUR_MIX of the way to the
- * photograph's local colour, keeping a hint of its kind's. Positions stay the catalogue's. Tones come in eight steps and
- * colours in sixteen levels a channel, so the palette stays small. The photograph is the one the layers show
- * (prepareImageLayerFace): cleaned, levelled and colour-tied. Both constants are presentation choices, picked by eye
+ * photograph and never below PHOTOGRAPH_TONE_FLOOR, and its color moves PHOTOGRAPH_COLOR_MIX of the way to the
+ * photograph's local color, keeping a hint of its kind's. Positions stay the catalogue's. Tones come in eight steps and
+ * colors in sixteen levels a channel, so the palette stays small. The photograph is the one the layers show
+ * (prepareImageLayerFace): cleaned, levelled and color-tied. Both constants are presentation choices, picked by eye
  * from M81 rendered in the app at mixes 0, 0.5 and 0.8 against flat tints, which showed as dark specks on the bright
- * bulge. Star banks coloured by their measured B-V (colorByBv) keep their look: their colour is a measurement. */
-const PHOTOGRAPH_TONE_FLOOR = 0.15, PHOTOGRAPH_COLOUR_MIX = 0.5;
+ * bulge. Star banks colored by their measured B-V (colorByBv) keep their look: their color is a measurement. */
+const PHOTOGRAPH_TONE_FLOOR = 0.15, PHOTOGRAPH_COLOR_MIX = 0.5;
 if (discPlacement && (toneBy || colorBy || colorByClass || colorByBands || colorBySpectrumAtRedshift)) {
-  throw new TypeError(`${at('appearance')}: a disc bank takes its tone and colour from the photograph, or colorByBv for stars; got ${Object.keys(appearance).join(', ')}.`);
+  throw new TypeError(`${at('appearance')}: a disc bank takes its tone and color from the photograph, or colorByBv for stars; got ${Object.keys(appearance).join(', ')}.`);
 }
 const photographLook = discPlacement && !colorByBv ? await (async () => {
   const { parseImageLayerRecipe, imageLayerView, prepareImageLayerFace } = await import('@cssearth/bake/image-layers');
@@ -544,16 +544,16 @@ const photographLook = discPlacement && !colorByBv ? await (async () => {
   const sorted = samples.filter(s => s.inside).map(s => s.light).sort((a, b) => a - b), reference = Math.max(1, sorted[Math.floor(0.9 * (sorted.length - 1))] ?? 255);
   const hexOf = (rgb: number[]) => '#' + rgb.map(v => Math.round(Math.max(0, Math.min(255, v)) / 17) * 17).map(v => v.toString(16).padStart(2, '0')).join('');
   const own = [1, 3, 5].map(i => parseInt(appearance.colorCss.slice(i, i + 2), 16));
-  const entries = new Map<string, number>(), colours: string[] = [], tones: number[] = [];
+  const entries = new Map<string, number>(), colors: string[] = [], tones: number[] = [];
   const indices = samples.map(sample => {
     const peak = Math.max(...sample.rgb, 1), local = sample.rgb.map(v => v * 255 / peak), base = own;
-    const colour = hexOf(base.map((v, c) => v * (1 - PHOTOGRAPH_COLOUR_MIX) + local[c]! * PHOTOGRAPH_COLOUR_MIX));
+    const color = hexOf(base.map((v, c) => v * (1 - PHOTOGRAPH_COLOR_MIX) + local[c]! * PHOTOGRAPH_COLOR_MIX));
     const tone = Math.max(PHOTOGRAPH_TONE_FLOOR, Math.min(1, sample.light / reference)), step = Math.round(tone * 7) / 7;
-    const key = `${colour}:${step}`;
-    if (!entries.has(key)) { entries.set(key, colours.length); colours.push(colour); tones.push(Number(Math.max(PHOTOGRAPH_TONE_FLOOR, step).toFixed(4))); }
+    const key = `${color}:${step}`;
+    if (!entries.has(key)) { entries.set(key, colors.length); colors.push(color); tones.push(Number(Math.max(PHOTOGRAPH_TONE_FLOOR, step).toFixed(4))); }
     return entries.get(key)!;
   });
-  return { colours, tones, indices, reference: Number(reference.toFixed(1)) };
+  return { colors, tones, indices, reference: Number(reference.toFixed(1)) };
 })() : null;
 const magnitudes = converted.magnitudes.filter((value): value is number => value !== null && Number.isFinite(value)).sort((a, b) => a - b);
 // A bank without levels may be whole within a camera distance of its origin other than the renderer's 10 kpc: a galaxy
@@ -565,18 +565,18 @@ if (fullDetail !== undefined && (typeof fullDetail.units !== 'number' || !(fullD
 const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: aroundOriginM ?? [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: aroundOriginM ? 3.0856775814913673e16 : outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
-  appearance: photographLook ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, palette: photographLook.colours, paletteTone: photographLook.tones }
+  appearance: photographLook ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, palette: photographLook.colors, paletteTone: photographLook.tones }
     : { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
       ...(fullDetail ? { fullDetailUnits: fullDetail.units, fullDetailBasis: fullDetail.basis } : {}),
       ...(toneBy ? { palette: tonedPalette, paletteTone, ...(sizeBy ? { paletteRadiusPx, sizeBasis: sizeBy.basis } : {}) } : colorByBands ? { palette: bandPalette } : colorBySpectrumAtRedshift ? { palette: redshiftPalette } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
-  ...(colorBySpectrumAtRedshift ? { spectrumColour: { spectrum: colorBySpectrumAtRedshift.spectrum.path, step: colorBySpectrumAtRedshift.step, basis: colorBySpectrumAtRedshift.basis,
-    colours: Object.fromEntries([...redshiftIndex].map(([z, index]) => [z, redshiftPalette[index]])) } } : {}),
-  ...(colorByBands ? { bandColour: { red: colorByBands.red, green: colorByBands.green, blue: colorByBands.blue, levels: colorByBands.levels, basis: colorByBands.basis } } : {}),
+  ...(colorBySpectrumAtRedshift ? { spectrumColor: { spectrum: colorBySpectrumAtRedshift.spectrum.path, step: colorBySpectrumAtRedshift.step, basis: colorBySpectrumAtRedshift.basis,
+    colors: Object.fromEntries([...redshiftIndex].map(([z, index]) => [z, redshiftPalette[index]])) } } : {}),
+  ...(colorByBands ? { bandColor: { red: colorByBands.red, green: colorByBands.green, blue: colorByBands.blue, levels: colorByBands.levels, basis: colorByBands.basis } } : {}),
   ...(toneBy ? { tone: { band: toneBy.band, brightMagnitude: toneBy.brightMagnitude, faintMagnitude: toneBy.faintMagnitude, faintTone: toneBy.faintTone, basis: toneBy.basis,
     absoluteMagnitudePercentiles: Object.fromEntries([5, 25, 50, 75, 95].map(q => [q, Number(magnitudes[Math.floor(magnitudes.length * q / 100)]?.toFixed(2))])),
     withoutMagnitude: converted.magnitudes.length - magnitudes.length } } : {}),
   ...(colorByClass ? { classes: [...colorByClass.classes.map(({ label, below, spectrum }, index) => ({ label, ...(below === undefined ? {} : { below }),
-    spectrum: spectrum.path, ...(spectrum.endsNm ? { endsNm: spectrum.endsNm } : {}), colorCss: classColours![index],
+    spectrum: spectrum.path, ...(spectrum.endsNm ? { endsNm: spectrum.endsNm } : {}), colorCss: classColors![index],
     points: converted.colors.filter(value => classIndex(value) === index).length })),
     { label: colorByClass.missing.label, colorCss: colorByClass.missing.colorCss, basis: colorByClass.missing.basis, points: converted.colors.filter(value => classIndex(value) === colorByClass.classes.length).length }] } : {}),
   counts: { rows: converted.rows, selected: converted.selected, points: converted.points.length, missingDistance: converted.missingDistance,
@@ -591,7 +591,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
     : `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),
-  ...(photographLook ? { photographLook: { toneFloor: PHOTOGRAPH_TONE_FLOOR, colourMix: PHOTOGRAPH_COLOUR_MIX, referenceLight: photographLook.reference } } : {}),
+  ...(photographLook ? { photographLook: { toneFloor: PHOTOGRAPH_TONE_FLOOR, colorMix: PHOTOGRAPH_COLOR_MIX, referenceLight: photographLook.reference } } : {}),
   points: photographLook ? converted.points.map((point, index) => [...point, photographLook.indices[index]!])
     : toneBy || colorByClass || colorByBands || colorBySpectrumAtRedshift || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
 const outputPath = await writeCatalogueBank({ objectDirectory, id, bank, published });

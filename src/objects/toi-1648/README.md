@@ -6,7 +6,7 @@ Its radius and temperature follow Carleo et al. 2026. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 540977282990133888, parallax 14.335 ± 0.013 mas (69.76 pc). Radius 0.81 +/- 0.02 solar radii from Carleo et al. 2026, the stellar radius of the default parameter set of TOI-1648 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract). Mass 0.83 +/- 0.06 solar masses from Carleo et al. 2026, the stellar mass of the default parameter set of TOI-1648 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract). Temperature 4,850 K from Carleo et al. 2026, the stellar temperature of the default parameter set of TOI-1648 b in the NASA Exoplanet Archive. log g 4.54 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 540977282990133888, through the CIE 1931 2° observer: #ffdbc2. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 540977282990133888, through the CIE 1931 2° observer: #ffdbc2. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,850 K and log g 4.54 (u1 0.698, u2 0.085): a model, because no fit of this star's limb is used.
 

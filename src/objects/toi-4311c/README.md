@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-4311. Its orbit and size follow Eschen e
 
 **Orbit.** Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): P 15.070425 d Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): a/R* 28.43; Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): inclination 89.05 degrees No archive row states an eccentricity; the orbit is taken as circular Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): transit mid-time 2458394.7242 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 22 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-4311's measured colour (#ffe4d4, the colour dataset of toi-4311 (src/objects/toi-4311/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-4311's measured color (#ffe4d4, the color dataset of toi-4311 (src/objects/toi-4311/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-4311's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (97, 105, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

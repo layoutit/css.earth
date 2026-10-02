@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by Kepler-736; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by Kepler-736; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "kepler-736b-dataset-shape.webp",
         "surface": "kepler-736b-surface-shape@2x.webp",
         "poles": "kepler-736b-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of Kepler-736 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-736's light, as its colour dataset measures it."
+        "notes": "No image or color of Kepler-736 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of kepler-736's light, as its color dataset measures it."
       }
     ]
   },

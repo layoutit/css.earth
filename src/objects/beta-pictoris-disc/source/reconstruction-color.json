@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-circumstellar-reconstruction@2",
   "objectId": "beta-pictoris-disc",
-  "datasetId": "colour",
+  "datasetId": "color",
   "grid": {
     "size": 156,
     "halfUnits": 135
@@ -27,7 +27,7 @@
     "weights": "one for pixels with displayed data, zero under the inner edge and beyond the footprint; a voxel seen only through the blank inside the inner edge takes its group mean, and one seen only beyond the footprint stays empty"
   },
   "ktx2": {
-    "path": "density-colour.ktx2",
+    "path": "density-color.ktx2",
     "bytes": 1554371
   },
   "peak": 0.1585624170716853,

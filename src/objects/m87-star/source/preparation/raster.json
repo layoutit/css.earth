@@ -26,7 +26,7 @@
       "falseColor": false,
       "science": {
         "kind": "black-shadow",
-        "qualification": "The shadow drawn as a black disc that always faces the viewer, sized from the EHT-measured angular gravitational radius. A display convention; not an event horizon, a surface or a measured colour. No lighting. Around it, on the off-limb plate, the EHT 1.3 mm image of 2017 April 11: the eht-imaging pipeline of M87 Paper IV run once with its released fiducial parameters, on eht-imaging's own display colour map (matplotlib afmhot, linear, sampled at quarter steps), a legend for relative intensity and not a colour.",
+        "qualification": "The shadow drawn as a black disc that always faces the viewer, sized from the EHT-measured angular gravitational radius. A display convention; not an event horizon, a surface or a measured color. No lighting. Around it, on the off-limb plate, the EHT 1.3 mm image of 2017 April 11: the eht-imaging pipeline of M87 Paper IV run once with its released fiducial parameters, on eht-imaging's own display color map (matplotlib afmhot, linear, sampled at quarter steps), a legend for relative intensity and not a color.",
         "offLimb": {
           "path": "observations/eht-2017-04-11-fiducial.fits",
           "encoding": "fits-oi-reconstruction",

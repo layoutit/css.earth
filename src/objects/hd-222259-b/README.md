@@ -6,7 +6,7 @@ HD 222259B shares its motion through space with DS Tuc A, 237 AU away, so the tw
 
 **Star.** Placement: Gaia DR3 source 6387058411482257280, parallax 22.652 ± 0.013 mas (44.15 pc). Radius 0.848 +/- 0.063 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 410214984 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Mass 0.74 +/- 0.089 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 410214984 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Temperature 4,658 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 410214984 (VizieR IV/39/tic82). log g 4.45 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 6387058411482257280, through the CIE 1931 2° observer: #ffd8be. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 6387058411482257280, through the CIE 1931 2° observer: #ffd8be. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,658 K and log g 4.45 (u1 0.749, u2 0.044): a model, because no fit of this star's limb is used.
 

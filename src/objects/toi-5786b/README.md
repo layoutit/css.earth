@@ -8,7 +8,7 @@ It is the only planet known around TOI-5786. Its orbit and size follow Thomas et
 
 **Orbit.** Thomas et al. 2025 (2025A&A...694A.143T), via the NASA Exoplanet Archive ps table (pl_refname THOMAS_ET_AL_2025): P 12.779107 d Thomas et al. 2025 (2025A&A...694A.143T), via the NASA Exoplanet Archive ps table (pl_refname THOMAS_ET_AL_2025): a/R* 18; Thomas et al. 2025 (2025A&A...694A.143T), via the NASA Exoplanet Archive ps table (pl_refname THOMAS_ET_AL_2025): inclination 88.9 degrees No archive row states an eccentricity; the orbit is taken as circular Thomas et al. 2025 (2025A&A...694A.143T), via the NASA Exoplanet Archive ps table (pl_refname THOMAS_ET_AL_2025): transit mid-time 2460140.6139 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5786's measured colour (#faf5ff, the colour dataset of toi-5786 (src/objects/toi-5786/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-5786's measured color (#faf5ff, the color dataset of toi-5786 (src/objects/toi-5786/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-5786's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (74, 81), folded onto its orbit. Upper limits and rows without an error are left out.
 

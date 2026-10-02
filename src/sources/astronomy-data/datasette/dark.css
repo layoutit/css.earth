@@ -1,4 +1,4 @@
-/* cssEarth shell colours for Datasette */
+/* cssEarth shell colors for Datasette */
 :root { color-scheme: dark; }
 html, body, .bd, .hd, .ft, section.content { background: #000 !important; color: #dfdfdf !important; }
 .hd, .ft { border-color: rgb(255 255 255 / 12%) !important; }

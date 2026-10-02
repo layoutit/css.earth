@@ -3,8 +3,8 @@
   "objectId": "ngc-1275-volume",
   "entries": [
     {
-      "id": "sdss-colour",
-      "subject": "SDSS DR9 colour HiPS",
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
       "status": "included",
       "finding": "A 1500 x 1500 px hips2fits cutout of CDS/P/SDSS9/color, 6.7 arcmin wide on the 2MASS position. The core does not saturate (peak 192 of 255). The red channel (i band) has an uneven sky, brighter than green and blue, so the recipe takes a black level per channel.",
       "evidence": [
@@ -16,7 +16,7 @@
       "id": "other-survey-composites",
       "subject": "Legacy Surveys DR10, Pan-STARRS DR1, DSS2, ZTF DR7 and SDSS color-alt HiPS",
       "status": "excluded",
-      "finding": "Looked at as 900 px previews of the same field on 2026-10-02. The Legacy Surveys colour HiPS does not cover NGC 1275 (blank). Pan-STARRS subtracts the galaxies' own light as sky, leaving dark halos. DSS2 is photographic and saturates. ZTF has two bands. The CDS alternative SDSS composition has the same red sky and saturates the core."
+      "finding": "Looked at as 900 px previews of the same field on 2026-10-02. The Legacy Surveys color HiPS does not cover NGC 1275 (blank). Pan-STARRS subtracts the galaxies' own light as sky, leaving dark halos. DSS2 is photographic and saturates. ZTF has two bands. The CDS alternative SDSS composition has the same red sky and saturates the core."
     },
     {
       "id": "mask-catalogues",

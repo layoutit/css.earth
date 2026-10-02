@@ -57,7 +57,7 @@ numerical qualification records are tracked.
 Pleiades and Lagoon preserve identical geometry and alpha across their RGB datasets.
 Crab uses [explicit emitting components](sampled-volumes.md): the same coordinate
 frame, with different tracer emission weights. Its X-ray dataset must not become a
-recoloured optical shell. Each README and `processing-evidence.json` owns the
+recolored optical shell. Each README and `processing-evidence.json` owns the
 actual tested result, source receipts, camera checks and unresolved limitations.
 
 ## Historical intake checks

@@ -6,7 +6,7 @@ Its radius and temperature follow Bonomo et al. 2023. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 2129550445852902656, parallax 6.930 ± 0.010 mas (144.30 pc). Radius 1.2564 +/- 0.0084 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-68 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Mass 1.057 +/- 0.022 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-68 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Temperature 5,847 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-68 b in the NASA Exoplanet Archive. log g 4.26 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2129550445852902656, through the CIE 1931 2° observer: #fff4f4. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2129550445852902656, through the CIE 1931 2° observer: #fff4f4. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,847 K and log g 4.26 (u1 0.443, u2 0.270): a model, because no fit of this star's limb is used.
 

@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Trevascus et al. (2025, A&A; arXiv:2504.11210), Table 3, the \"Stable (incl. N-body)\" column: the posterior medians of the orbitize! fit to all published astrometry of b and c, including their new VLTI/GRAVITY epochs, keeping only orbits that do not cross and stay stable in N-body integration. Period from a^3 = (M* + M_planet) P^2 with the column's own stellar mass 0.952 M_sun and planet mass. Period 96.5 years.",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of PDS 70 b is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of PDS 70 b is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 1392,
   "effectiveTemperatureSource": "Wang et al. (2021, AJ 161, 148), the atmospheric fit with the highest evidence, https://arxiv.org/abs/2101.04187",

@@ -1,5 +1,5 @@
 /**
- * Author a body's Voyager colour frames as the per-frame products the observed-colour dataset reads: an equirectangular float32
+ * Author a body's Voyager color frames as the per-frame products the observed-color dataset reads: an equirectangular float32
  * GeoTIFF of calibrated I/F and a geometry label (exposure epoch and body rotation) for each frame.
  *
  *   node packages/bake/authoring/voyager-iss/author-color-frames.mts <object> [--write]
@@ -57,7 +57,7 @@ export const groundFloor = (placed: PlacedFrame) => placed.limb.levels.sky + 0.1
 export async function authorColorFrames(objectId: string, write: boolean) {
   const objectDirectory = resolve(root, 'src/objects', objectId), sourceDirectory = resolve(objectDirectory, 'source');
   const recipe: Recipe = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/voyager-color-frames.json'), 'utf8'));
-  if (recipe.schema !== 'cssearth-voyager-color-frames@1') throw new TypeError('Unknown Voyager colour frame recipe.');
+  if (recipe.schema !== 'cssearth-voyager-color-frames@1') throw new TypeError('Unknown Voyager color frame recipe.');
   const set = await loadKernelSet(await kernelBankPaths(recipe.kernelSet, recipe.kernels), { ckToleranceSeconds: recipe.ckToleranceSeconds });
   const radiusMeters = recipe.route.radiusKm * 1000, cell = recipe.cellDegrees, report: Record<string, unknown>[] = [];
   const registration = recipe.registration ?? 'limb';

@@ -17,7 +17,7 @@ function requireAtlas(atlas: PolarAtlas) {
 
 /**
  * The pole imagery laid over the map where it reaches, through the tile's own projection: each map texel poleward of the edge
- * takes the tile's colour over its own by the tile's alpha, the composite the flat overlay plate showed over the bands, now
+ * takes the tile's color over its own by the tile's alpha, the composite the flat overlay plate showed over the bands, now
  * registered to the map's longitudes. A dome ring carries the result, so one leaf family covers the polar latitudes.
  */
 export function compositePolarOverlay(map: ObservedRgb, atlas: PolarAtlas, {edgeLatitudeDegrees, scale}: PoleProjection): ObservedRgb {

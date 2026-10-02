@@ -27,7 +27,7 @@
       "nm": 545,
       "reason": "X-shooter splits the light at a dichroic: the UVB arm covers 299-556 nm and the VIS arm 534-1020 nm. The join is the middle of their overlap; there the two arms' median fluxes agree to 0.3% below 545 nm and 3.5% above it."
     },
-    "note": "The 5 arcsecond wide-slit exposure PENELLOPE takes for absolute flux calibration (ESO FLUXCAL ABSOLUTE), so slit losses do not tilt the colour. PDS 70 is a young star still accreting: its spectrum carries the accretion excess, which is part of its light. No second spectrum cross-checks it: Gaia has no BP/RP spectrum of this star, and the programme's other wide-slit night (2021-03-08) is refused because its two arms differ by 15.8% at the join."
+    "note": "The 5 arcsecond wide-slit exposure PENELLOPE takes for absolute flux calibration (ESO FLUXCAL ABSOLUTE), so slit losses do not tilt the color. PDS 70 is a young star still accreting: its spectrum carries the accretion excess, which is part of its light. No second spectrum cross-checks it: Gaia has no BP/RP spectrum of this star, and the programme's other wide-slit night (2021-03-08) is refused because its two arms differ by 15.8% at the join."
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1"

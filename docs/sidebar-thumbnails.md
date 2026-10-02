@@ -29,7 +29,7 @@ written as `focus-object-<id>@2x.webp`. The preparer measures the object's light
 image's median sky (its centroid and 2.25 standard deviations of its second moments),
 cuts the tile to that extent inside a 4 px margin, and fades the light to nothing before
 the extent's edge and before the image's own frame. Sky darker than level 32 becomes
-transparency in proportion, with the colour divided back, so over black the pixels are the
+transparency in proportion, with the color divided back, so over black the pixels are the
 image's own. No edge of the photograph reaches the panel, and a photograph that fills its
 frame (the LMC) fades out instead of ending in a rectangle. These tiles are decoration and
 take the decorative WebP encoding; dataset rows keep the complete lossless tiles.
@@ -49,7 +49,7 @@ circle marker. Their catalogue identity does not imply a photographic dataset.
 
 Featured-star rows in the Milky Way use the same 40 px search previews as search results.
 `pnpm prepare:search-thumbnails` resamples each featured star's published arrival image
-to 80 px, preserving its prepared photospheric colour and limb shading. These are the
+to 80 px, preserving its prepared photospheric color and limb shading. These are the
 existing package views, including their model qualifications; no new surface detail is authored.
 
 The shared shell renders each subject's header, tabs and content with `ObjectCard`,

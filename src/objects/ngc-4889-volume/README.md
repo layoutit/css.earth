@@ -8,7 +8,7 @@ follows a published fit to NGC 4889's profile. **Depth is modelled, not measured
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [Sloan Digital Sky Survey DR9](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i colour composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 1800 × 1800 px over 8.0 × 8.0 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
+| [Sloan Digital Sky Survey DR9](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i color composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 1800 × 1800 px over 8.0 × 8.0 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
 | [Dullo (2019)](https://arxiv.org/abs/1910.10240) | [Record](../../sources/dullo-2019-large-cores.json). Table 3, row NGC 4889: the core-Sérsic fit to the major-axis profile (Hubble F606W inside, SDSS r band outside), n = 13.3, half-light radius 563.9″, break radius 1.89″. The paper puts 20% on n and 25% on the radius. |
 | [2MASS Extended Source Catalog](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233) (Skrutskie et al. 2006) | Row 2MASX J13000809+2758372: position 195.033737°, +27.977024°; K-band 3σ isophote axis ratio 0.68 and position angle 85°. Also the sizes (K-band 20 mag isophotal radius) of 14 masked neighbours. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of 24 masked neighbouring galaxies. |

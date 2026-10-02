@@ -1,6 +1,6 @@
 // `@cssearth/bake/objects/raster` (Node only): the science and observation rasters preparation reads. Scientific surfaces
 // from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products, categorical geology and symbol overlays, published
-// exoplanet phase-curve and eclipse maps, observed colour rasters and their photometric composition, the records that describe
+// exoplanet phase-curve and eclipse maps, observed color rasters and their photometric composition, the records that describe
 // them, and the WISE atlas mosaic grid.
 // `npy-lonlat-grid` and `npy-pickle` each define an `NpyArray` type; the pickle reader's is exported and the lonlat grid's
 // `NpyArray` stays internal. The published phase-curve and eigenmap fits each define a brightness temperature, and the phase
@@ -48,7 +48,7 @@ export * from './numpy/tar-member.ts';
 export * from './tecplot-lonlat-map.ts';
 export * from './vtk-categories.ts';
 export * from './circle-catalogue.ts';
-export * from './whole-disc-colour.ts';
+export * from './whole-disc-color.ts';
 export * from './wise-atlas-mosaic.ts';
 export * from './eclipse-map/bare-rock.ts';
 export * from './eclipse-map/eigenmap-fit.ts';

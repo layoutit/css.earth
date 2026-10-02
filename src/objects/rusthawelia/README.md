@@ -2,7 +2,7 @@
 
 The asteroid 1171 Rusthawelia as a published convex lightcurve-inversion shape, scaled by a separate thermal diameter.
 There is no photographed surface or independently measured topography. Shape-only views use the shared neutral gray
-(#808080 sRGB), a display convention, not a measured colour; gaps keep the missing-data grid.
+(#808080 sRGB), a display convention, not a measured color; gaps keep the missing-data grid.
 
 ## Sources
 

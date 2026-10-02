@@ -14,7 +14,7 @@
   "assumptions": [
     "Concentric circular rings in the body equator; radius and width are held fixed at one measured contact instead of inventing unsampled azimuthal structure.",
     "The ring is drawn at its measured normal opacity as a constant alpha; it is occultation transmission evidence, not reflected-light brightness or a complete view-dependent optical model.",
-    "No ring colour is measured: the rings take the neutral gray of a body without a measured colour.",
+    "No ring color is measured: the rings take the neutral gray of a body without a measured color.",
     "The 2021 equivalent width of C2R (0.117 km) is opacity times radial width, and MUST NOT be used as a geometric ring width."
   ],
   "rings": [

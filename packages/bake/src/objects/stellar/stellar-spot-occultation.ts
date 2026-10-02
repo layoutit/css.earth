@@ -46,7 +46,7 @@ export function spotDiscCentre(event: SpotOccultation, orbit: SpotOrbit) {
 }
 
 /** Overlay a spherical cap at the paper's *minimum* angular radius. Coverage is supersampled only at its boundary.
- * Alpha adds an achromatic TESS-band contrast to the Gaia-colour photosphere: a visible display approximation.
+ * Alpha adds an achromatic TESS-band contrast to the Gaia-color photosphere: a visible display approximation.
  * The plate remains stationary; no stellar spin is inferred from one occultation. */
 export function addSpotOccultationToLimbPlate(plate: { data: Uint8Array; size: number; lossless: boolean },
   event: SpotOccultation, orbit: SpotOrbit) {

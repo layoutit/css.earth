@@ -176,7 +176,7 @@ For each open copy the command makes one plain request and reports the result:
 - `failed`, `closed` or `skipped`: an error, no open copy, or the request limit was reached.
 
 For HTML texts it prints figure captions and table titles that mention a map, mosaic, radiance,
-scale or colour bar, or that list orbits, times or distances. They are quoted as written, cut at
+scale or color bar, or that list orbits, times or distances. They are quoted as written, cut at
 300 characters. That is usually enough to see whether the paper made the map you want and which
 frames it used. For Io with JIRAM, Mura et al. (2024) shows up as fetchable with its list of
 observations (Table 1) and radiance maps (Figure 2).
@@ -550,7 +550,7 @@ The chart is a view of that result: the star at the origin, each candidate as a 
 ellipses, the measurement with its 1σ, 2σ and 3σ ellipses, orbits behind them, and east to the left, as
 [Ortiz Ceballos, Berger and Cendes (2026)](https://arxiv.org/abs/2609.16720) print it for the radio detection of β Pictoris b.
 
-`associate` also draws one chart of the whole system, with every measurement in the colour of the body it is closest to.
+`associate` also draws one chart of the whole system, with every measurement in the color of the body it is closest to.
 `--orbit-draws N` traces N draws of each planet's posterior instead of one line, so the spread of the orbit itself shows,
 and `--fit-astrometry` adds the astrometry the published fit was made from, which the prediction tool distributes beside
 its draws. Together those make the figure a system paper prints: every epoch, every orbit, and the predictions at the
@@ -854,7 +854,7 @@ disc, the query finds the recorded modes that have observed Europa. In plain lan
   rather than yes.
 - **JWST NIRCAM/IMAGE**, 6 observations: covers the wavelengths, produces images rather than cubes, and its checked program is
   of another object.
-- **Juno JUNOCAM**, 52 colour images, and the Hubble configurations: proven or partly proven routes, none covering 3.4 to 3.6
+- **Juno JUNOCAM**, 52 color images, and the Hubble configurations: proven or partly proven routes, none covering 3.4 to 3.6
   micrometres, so they sort below the three above.
 - One investigation entry about JWST carbon dioxide is left unassigned: it names the telescope but no single mode, and four
   JWST modes observed Europa.
@@ -1049,7 +1049,7 @@ These figures come from the local level-3 cube
 These figures use the product's MJy/sr units and quality mask. Pixel and plane selectors
 are zero-based. Astropy 8.0.1 reads the product; Matplotlib 3.11.2 renders the figures.
 
-![Eris NIRSpec image plane at 2.2997 micrometres, with source sky-coordinate axes and a surface-brightness colour bar](images/telescopes/eris-native-plane.png)
+![Eris NIRSpec image plane at 2.2997 micrometres, with source sky-coordinate axes and a surface-brightness color bar](images/telescopes/eris-native-plane.png)
 
 **Image:** plane 95 at 2.2997 µm, shown on the native image grid with source ICRS sky coordinates. The diamond-shaped
 footprint is the cube's sampled field, not Eris's surface. Masked samples are omitted.
@@ -1087,7 +1087,7 @@ region masks that channel instead of changing the measured area.
 ![Eris continuum-subtracted feature integral over 2.30–2.34 micrometres](images/telescopes/eris-feature-map.png)
 
 **Feature map:** the wavelength integral over 2.30–2.34 µm after subtracting a linear
-continuum anchored by weighted means over 2.26–2.29 and 2.35–2.38 µm. The colour scale
+continuum anchored by weighted means over 2.26–2.29 and 2.35–2.38 µm. The color scale
 is symmetric around zero: blue is negative (absorption relative to this continuum), red
 is positive. Values are MJy µm/sr, not total flux. This selected-window example does not
 establish a chemical identification or detection significance; field-edge residuals remain.
@@ -1125,7 +1125,7 @@ samples; units and missing-sample masks match exactly. Reproduction commands are
 
 ![Eris feature map, independent specutils reference, and their numerical difference](images/telescopes/eris-feature-map-oracle.png)
 
-The residual colour scales are in the stated physical units, at floating-point roundoff levels.
+The residual color scales are in the stated physical units, at floating-point roundoff levels.
 They are not science signal. Known-answer fixtures separately verify uncertainty propagation,
 including continuum and background contributions. These checks validate the extraction
 arithmetic; they share Astropy FITS/WCS decoding and do not establish calibration accuracy,
@@ -1236,7 +1236,7 @@ with `pnpm prepare:world-context` before exporting.
 
 The projection uses the pinned navigation ellipsoid. The display keeps the
 body package's standard reference sphere and physical scale; both are recorded.
-Quantitative colours are unlit. The output contains no PlanetMapper GUI, remote
+Quantitative colors are unlit. The output contains no PlanetMapper GUI, remote
 scripts, canvas or WebGL.
 
 Native resize handles store drag displacement in element dimensions. CSS view
@@ -1310,7 +1310,7 @@ is synthesized. Source request satisfaction is retained separately; projection
 
 The HTML preserves the target's prepared reference sphere and physical camera
 frame. It opens directly at the measurement with no startup flight; shared
-controls own drag and zoom. Colour is not relit. Grey is unobserved.
+controls own drag and zoom. Color is not relit. Gray is unobserved.
 
 #### Europa projection, standalone sphere and independent checks
 

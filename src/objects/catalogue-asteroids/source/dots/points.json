@@ -4,7 +4,7 @@
   "published": true,
   "host": "sun",
   "source": "jpl-small-body-database",
-  "meaning": "The asteroids inside Neptune's orbit that draw no marker of their own, one dot each: the brighter main-belt asteroids, Hildas and Jupiter Trojans of JPL's Small-Body Database where their orbits put them at the world's epoch, and the asteroids that have a page but are not mission targets at their own prepared positions. No colour is taken from the database: the dot is the neutral grey the app gives every body without a measured colour.",
+  "meaning": "The asteroids inside Neptune's orbit that draw no marker of their own, one dot each: the brighter main-belt asteroids, Hildas and Jupiter Trojans of JPL's Small-Body Database where their orbits put them at the world's epoch, and the asteroids that have a page but are not mission targets at their own prepared positions. No color is taken from the database: the dot is the neutral gray the app gives every body without a measured color.",
   "table": {
     "path": "positions.csv.gz",
     "origin": "https://ssd-api.jpl.nasa.gov/sbdb_query.api",

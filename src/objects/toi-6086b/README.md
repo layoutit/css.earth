@@ -8,7 +8,7 @@ It is the only planet known around TOI-6086. Its orbit and size follow Barkaoui 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.38885844017 d Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): a/R* 12.75; Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): inclination 87.3 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458984.759725 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 30 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-6086's measured colour (#ffc87e, the colour dataset of toi-6086 (src/objects/toi-6086/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-6086's measured color (#ffc87e, the color dataset of toi-6086 (src/objects/toi-6086/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-6086's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (53, 79, 80), folded onto its orbit. Upper limits and rows without an error are left out.
 

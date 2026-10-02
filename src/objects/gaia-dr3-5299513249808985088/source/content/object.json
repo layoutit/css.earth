@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "gaia-dr3-5299513249808985088-dataset-color.webp",
         "surface": "gaia-dr3-5299513249808985088-surface-color@2x.webp",
         "poles": "gaia-dr3-5299513249808985088-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://doi.org/10.1051/0004-6361/202243462"
         },
         "falseColor": false,
-        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,749 K and log g 0.49 (u1 1.014, u2 -0.171): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,749 K and log g 0.49 (u1 1.014, u2 -0.171): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

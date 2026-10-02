@@ -171,7 +171,7 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
         },
-        "notes": "Hydrogen in the top few decimetres of regolith, from epithermal neutrons counted by Dawn’s GRaND in its low orbit (Prettyman et al. 2012). One colour per archived 2-degree pixel, but each value blends about 300 km of surface, so the map is much blurrier than its pixels. Hydrogen is richest where dark, carbonaceous material fell on Vesta and poorest in the Rheasilvia basin. Moved from the archive’s Claudia Double Prime longitudes into the Claudia frame of the other maps.",
+        "notes": "Hydrogen in the top few decimetres of regolith, from epithermal neutrons counted by Dawn’s GRaND in its low orbit (Prettyman et al. 2012). One color per archived 2-degree pixel, but each value blends about 300 km of surface, so the map is much blurrier than its pixels. Hydrogen is richest where dark, carbonaceous material fell on Vesta and poorest in the Rheasilvia basin. Moved from the archive’s Claudia Double Prime longitudes into the Claudia frame of the other maps.",
         "step": {
           "group": "surface-elements",
           "label": "Hydrogen"
@@ -281,7 +281,7 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
         },
-        "notes": "Fast neutrons counted by Dawn’s GRaND after removing the part that follows hydrogen (Lawrence et al. 2013). What is left follows the average atomic mass of the regolith: heavier, iron-rich basaltic eucrite reads higher than the diogenite of the Rheasilvia basin. The whole map spans only about 5%. One colour per archived pixel, 20 degrees tall. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "notes": "Fast neutrons counted by Dawn’s GRaND after removing the part that follows hydrogen (Lawrence et al. 2013). What is left follows the average atomic mass of the regolith: heavier, iron-rich basaltic eucrite reads higher than the diogenite of the Rheasilvia basin. The whole map spans only about 5%. One color per archived pixel, 20 degrees tall. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
         "step": {
           "group": "surface-elements",
           "label": "Fast neutrons"
@@ -336,7 +336,7 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
         },
-        "notes": "High-energy gamma rays counted by Dawn’s GRaND, corrected for background, viewing geometry and cosmic-ray changes (Peplowski et al. 2013). The rate rises with the heavy major elements in the top few tens of decimetres: eucrite-like terrain reads higher than the diogenite-like floor of Rheasilvia. One colour per archived pixel, 15 degrees tall, each blending about 300 km. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "notes": "High-energy gamma rays counted by Dawn’s GRaND, corrected for background, viewing geometry and cosmic-ray changes (Peplowski et al. 2013). The rate rises with the heavy major elements in the top few tens of decimetres: eucrite-like terrain reads higher than the diogenite-like floor of Rheasilvia. One color per archived pixel, 15 degrees tall, each blending about 300 km. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
         "step": {
           "group": "surface-elements",
           "label": "High-energy gamma rays"
@@ -391,7 +391,7 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
         },
-        "notes": "How strongly the regolith absorbs slow neutrons, from thermal and epithermal neutrons counted by Dawn’s GRaND (Prettyman et al. 2013). Absorption depends on Fe, Ca, Al, Mg and other rock-forming elements and rises with the share of basaltic eucrite: the Rheasilvia basin reads low, the dark hemisphere high. One colour per archived pixel, 15 degrees tall, each blending about 300 km. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "notes": "How strongly the regolith absorbs slow neutrons, from thermal and epithermal neutrons counted by Dawn’s GRaND (Prettyman et al. 2013). Absorption depends on Fe, Ca, Al, Mg and other rock-forming elements and rises with the share of basaltic eucrite: the Rheasilvia basin reads low, the dark hemisphere high. One color per archived pixel, 15 degrees tall, each blending about 300 km. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
         "step": {
           "group": "surface-elements",
           "label": "Neutron absorption"
@@ -430,7 +430,7 @@
         "legend": {
           "kind": "categories",
           "title": "Geologic units",
-          "meta": "Unit names from the shapefile; colours from the authors' ArcMap layer (0005GeoUnits.lyr).",
+          "meta": "Unit names from the shapefile; colors from the authors' ArcMap layer (0005GeoUnits.lyr).",
           "sourceUrl": "https://doi.org/10.3847/PSJ/acebe9",
           "items": [
             {
@@ -512,7 +512,7 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.5281/zenodo.19475473"
         },
-        "notes": "Geologic units of the Yingst et al. (2023) global map, drawn in the authors' own ArcMap colours. Units combine landform with Dawn colour-ratio classes, so a name such as “light blue” describes the colour-ratio class, not the map colour. Moved from Claudia Double Prime into the Claudia frame of the other maps. Grey marks the few cells no polygon covers: a thin line at 30° E south of 25° S and the south-pole rows. Contacts and line features are not shown.",
+        "notes": "Geologic units of the Yingst et al. (2023) global map, drawn in the authors' own ArcMap colors. Units combine landform with Dawn color-ratio classes, so a name such as “light blue” describes the color-ratio class, not the map color. Moved from Claudia Double Prime into the Claudia frame of the other maps. Gray marks the few cells no polygon covers: a thin line at 30° E south of 25° S and the south-pole rows. Contacts and line features are not shown.",
         "noData": true
       },
       {

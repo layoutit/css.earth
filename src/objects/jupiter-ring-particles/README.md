@@ -30,5 +30,5 @@ A headless capture of this version's Jupiter default view.
 - **No dot is a measured particle.** Only each ring's share, boundaries and thickness are measured.
 - The dots are spread evenly through each ring's thickness and across its width. That is an assumption: the table gives only totals.
 - The table gives the main ring's optical depth as an upper limit, under 8 × 10⁻⁶, and the others as approximate; the recipe, and so the dots, use those figures as values.
-- The dots are `#9a9a9a`, the neutral grey; no ring colour is measured. Against black they look like background stars in a still image.
+- The dots are `#9a9a9a`, the neutral gray; no ring color is measured. Against black they look like background stars in a still image.
 - The dot layer sits behind the planet, and the dots do not orbit.

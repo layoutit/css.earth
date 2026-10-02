@@ -141,7 +141,7 @@
       "id": "photojournal-pia06432-cirs-temperature",
       "subject": "NASA PIA06432 Enceladus Temperature Map (Cassini CIRS, 14 July 2005)",
       "status": "excluded",
-      "finding": "Two globe pictures (648 x 371 px) with graticules but no printed coordinates; the caption gives none either. The left globe is a prediction, not data. The 65-85 K colour bar is there, but without a labelled grid the longitude origin and direction of the observed globe cannot be recovered.",
+      "finding": "Two globe pictures (648 x 371 px) with graticules but no printed coordinates; the caption gives none either. The left globe is a prediction, not data. The 65-85 K color bar is there, but without a labelled grid the longitude origin and direction of the observed globe cannot be recovered.",
       "revisitWhen": "A gridded CIRS temperature product for this observation is archived, or a version of the figure with labelled coordinates is published.",
       "evidence": [
         "https://science.nasa.gov/photojournal/enceladus-temperature-map/",
@@ -152,7 +152,7 @@
       "id": "photojournal-pia10360-south-polar-heat",
       "subject": "NASA PIA10360 Stripes and Heat Map Side-by-Side (Cassini CIRS, July 2005 map)",
       "status": "excluded",
-      "finding": "South polar map with labelled latitude circles (-60, -70, -80) and longitudes (0, 90, 180, 270), so the frame could be registered. The heat map has no colour bar and no values in the figure or caption. Its colours are blended semi-transparently over the camera mosaic, so a temperature cannot be read from a pixel.",
+      "finding": "South polar map with labelled latitude circles (-60, -70, -80) and longitudes (0, 90, 180, 270), so the frame could be registered. The heat map has no color bar and no values in the figure or caption. Its colors are blended semi-transparently over the camera mosaic, so a temperature cannot be read from a pixel.",
       "revisitWhen": "The CIRS temperature map behind the overlay is published with a scale, or as a numeric product.",
       "evidence": [
         "https://science.nasa.gov/photojournal/stripes-and-heat-map-side-by-side/",

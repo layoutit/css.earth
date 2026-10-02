@@ -37,7 +37,7 @@ export async function prepareDetection(root: string, value: unknown, progress: (
     try { return await validateDetectionResult(root, JSON.parse(await readFile(resolve(root, resultPath), 'utf8'))); }
     catch (error) { if (!(geometryRecord(error) && error.code === 'ENOENT')) throw error; }
   }
-  const rgb = await sharp(bytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const rgb = await sharp(bytes).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (rgb.info.width !== image.width || rgb.info.height !== image.height || rgb.info.channels !== 3 || rgb.data.length !== image.width * image.height * 3)
     throw new TypeError('Detector raster does not match the complete registered source.');
   progress({ stage: 'detecting', current: 0, total: 1, message: 'Finding connected contours' });

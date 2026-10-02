@@ -8,7 +8,7 @@
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source recipe authored from the previous Mars camera plan (defaultZoom 1.1, initial pitch 40 degrees) and the shared Mercury/Venus marker layout",
-      "redistribution": "Factual physical parameters and synthetic marker colours; no imagery",
+      "redistribution": "Factual physical parameters and synthetic marker colors; no imagery",
       "consumers": [
         "scene",
         "sky-sun",
@@ -966,12 +966,12 @@
       }
     },
     {
-      "id": "geology-colours",
+      "id": "geology-colors",
       "path": "geology/sim3292-colors.json",
       "origin": "https://pubs.usgs.gov/sim/3292/pdf/sim3292_map.pdf",
       "credit": "Tanaka et al. (2014), USGS Astrogeology",
       "license": "United States government scientific data; retain source credit",
-      "acquisition": "Read the published PDF legend vector fill colours; record their page bounds beside the colours.",
+      "acquisition": "Read the published PDF legend vector fill colors; record their page bounds beside the colors.",
       "redistribution": "Scientific data with author and agency credit",
       "consumers": [
         "geology"
@@ -1283,7 +1283,7 @@
         "https://pubs.usgs.gov/of/2007/1158/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/dune-fields/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the Trek layer's fill symbol, not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the Trek layer's fill symbol, not observations.",
       "consumers": [
         "datasets"
       ],
@@ -1355,7 +1355,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/valley-networks/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the Trek layer's line symbol, not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the Trek layer's line symbol, not observations.",
       "consumers": [
         "datasets"
       ],
@@ -1670,7 +1670,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/alluvial-fans/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
         "datasets"
       ],
@@ -1742,7 +1742,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/gullies/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), which follows the orientation class, not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr), which follows the orientation class, not observations.",
       "consumers": [
         "datasets"
       ],
@@ -1922,7 +1922,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/glacier-like-forms/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
         "datasets"
       ],
@@ -2021,7 +2021,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/recessional-glfs/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
         "datasets"
       ],
@@ -2093,7 +2093,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/glacial-valleys/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr), not observations.",
       "consumers": [
         "datasets"
       ],
@@ -2165,7 +2165,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/recent-activity/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from our categorical palette, validated for all-pair separation (Trek draws every type in #d3ffbe and tells them apart by symbol shape), not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from our categorical palette, validated for all-pair separation (Trek draws every type in #d3ffbe and tells them apart by symbol shape), not observations.",
       "consumers": [
         "datasets"
       ],
@@ -2237,7 +2237,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/hydrous-minerals/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), by instrument, not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr), by instrument, not observations.",
       "consumers": [
         "datasets"
       ],
@@ -2336,7 +2336,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/aqueous-minerals/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr), by class, not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr), by class, not observations.",
       "consumers": [
         "datasets"
       ],
@@ -2516,7 +2516,7 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST response pages using catalogues/chloride/prepare-grid.json.",
-      "redistribution": "Retain authors and the survey limits; colours come from the layer's published fill attribute (jC_fillclr); Trek draws outlines only, not observations.",
+      "redistribution": "Retain authors and the survey limits; colors come from the layer's published fill attribute (jC_fillclr); Trek draws outlines only, not observations.",
       "consumers": [
         "datasets"
       ],

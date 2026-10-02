@@ -24,7 +24,7 @@ test('a scaffold derives every number from the astronomy record and writes names
   assert.equal(descriptor.properties.catalog.distanceAu, Math.round(au(descriptor.properties.worldFrame) * 10) / 10);
   assert.equal(descriptor.properties.recipe.shape.radiusKm, record.physical.meanRadiusKm);
   const color = temperatureCatalogueColor(spec.temperatureK);
-  assert.equal(descriptor.properties.catalog.color, color, 'the catalogue colour is the star field colour at the cited temperature');
+  assert.equal(descriptor.properties.catalog.color, color, 'the catalogue color is the star field color at the cited temperature');
   assert.equal(json('source/preparation/geometry.json').surface.color, color);
   assert.equal(json('source/measurements.json').effectiveTemperatureK, spec.temperatureK);
   assert.equal(json('source/measurements.json').effectiveTemperatureSource, spec.temperatureSource);

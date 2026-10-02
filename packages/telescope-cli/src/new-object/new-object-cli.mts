@@ -10,8 +10,8 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>... --out entries.json
  *
- * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour dataset from the best archived
- * spectrum with its cross-check, the model limb law, the catalogue colour, marker, manifest, acquisition plan, source records and
+ * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the color dataset from the best archived
+ * spectrum with its cross-check, the model limb law, the catalogue color, marker, manifest, acquisition plan, source records and
  * credits (new-object/generate.mts). Only prose is left marked. The shape-only scaffold below stays for a star with no temperature
  * and for a black hole:
  *
@@ -21,7 +21,7 @@
  *
  * Requires packages/astronomy/data/bodies/<id>.json with a `star` block and `physical.meanRadiusKm`. Every number here is
  * derived from that record: the world-frame origin, the catalogue distance, the radius facts and the sky-north display axis
- * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
+ * (skyPlaneOrientation). The catalogue color is the cited effective temperature through the star field's color fit
  * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape dataset and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
  * src/objects/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
@@ -83,7 +83,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const lines = await rebuildExistingDatasets(process.cwd(), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if ((args.includes('--thermal') || args.includes('--host-light')) && !specPath) {
-    // Colour for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-datasets.mts).
+    // Color for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-datasets.mts).
     const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
     const lines = await rebuildExistingDatasets(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
@@ -92,7 +92,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { starLimb } = await import('./star-limb.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
     const ids = args.filter(argument => !argument.startsWith('--'));
     const results = await starLimb(process.cwd(), ids, { progress: line => process.stderr.write(`${line}\n`) });
-    process.stdout.write(`${results.map(result => `${result.id}: ${result.limb}${result.gravity ? `, log g ${result.gravity}` : ''}${result.colour ? `, colour ${result.colour}` : ''}`).join('\n')}\n`);
+    process.stdout.write(`${results.map(result => `${result.id}: ${result.limb}${result.gravity ? `, log g ${result.gravity}` : ''}${result.color ? `, color ${result.color}` : ''}`).join('\n')}\n`);
     const changed = results.filter(result => !result.limb.startsWith('NONE')).map(result => result.id);
     if (changed.length !== results.length) process.exitCode = 1;
     if (args.includes('--bake') && changed.length) {

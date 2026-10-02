@@ -47,7 +47,7 @@ export async function loadNativeObservationPoleSampler(input: string, plan: Obse
   if (plan.presentation) throw new TypeError('Native observation poles cannot reproduce the resized-map Sharp tonal presentation.');
   if (plan.coverage && plan.coverage.kind !== 'black-fill') throw new TypeError('Unsupported native observation coverage source.');
   const source = await sharp(input, {limitInputPixels: false}).raw().toBuffer({resolveWithObject:true});
-  const display = await sharp(input, {limitInputPixels: false}).removeAlpha().toColourspace('srgb').raw().toBuffer({resolveWithObject:true});
+  const display = await sharp(input, {limitInputPixels: false}).removeAlpha().toColorspace('srgb').raw().toBuffer({resolveWithObject:true});
   if (source.info.width !== display.info.width || source.info.height !== display.info.height || display.info.channels !== 3 ||
       source.info.width < 2 || source.info.height < 2) throw new Error('Native observation source decode drifted.');
   const missing = plan.coverage ? blackFillCoverage(source.data, source.info, {southConnected: plan.coverage.southConnected}) : null;
@@ -84,7 +84,7 @@ export async function observationRaster({ input, plan, width, height, elevation,
   else {
     let pipeline = sharp(input, { limitInputPixels: false }).resize(width, height, { fit: 'fill' }).removeAlpha();
     if (plan.presentation) pipeline = applyTonalPresentation(pipeline, plan.presentation);
-    if (plan.coverage) pipeline = pipeline.toColourspace('srgb');
+    if (plan.coverage) pipeline = pipeline.toColorspace('srgb');
     raster = await pipeline.raw().toBuffer({ resolveWithObject: true });
   }
   const { info } = raster;

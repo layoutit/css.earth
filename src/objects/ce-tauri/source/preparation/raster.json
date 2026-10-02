@@ -47,7 +47,7 @@
           "metadata": {
             "label": "PIONIER image, November 2016",
             "falseColor": true,
-            "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for November 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colours are a legend for reconstructed relative intensity in the H band, not colour or temperature. The far hemisphere is unobserved."
+            "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for November 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colors are a legend for reconstructed relative intensity in the H band, not color or temperature. The far hemisphere is unobserved."
           },
           "frames": [
             {
@@ -135,7 +135,7 @@
           "metadata": {
             "label": "PIONIER image, December 2016",
             "falseColor": true,
-            "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for December 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colours are a legend for reconstructed relative intensity in the H band, not colour or temperature. The far hemisphere is unobserved."
+            "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for December 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colors are a legend for reconstructed relative intensity in the H band, not color or temperature. The far hemisphere is unobserved."
           },
           "frames": [
             {
@@ -203,7 +203,7 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere colour from the star's Crimean photoelectric spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,801 K and log g -0.12 for 14.37 solar masses (u1 1.111, u2 -0.000); the model atmosphere is extended, and the law reaches zero at 99.5% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used.",
+        "qualification": "Photosphere color from the star's Crimean photoelectric spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,801 K and log g -0.12 for 14.37 solar masses (u1 1.111, u2 -0.000); the model atmosphere is extended, and the law reaches zero at 99.5% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used.",
         "limbDarkening": {
           "law": "quadratic",
           "path": "photometry/neilson-2013-v-quadratic.tsv",

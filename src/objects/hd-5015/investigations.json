@@ -22,8 +22,8 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 427322415301550208, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 38: HR 244; VizieR III/202 (3 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #faf5ff. Routes tried in order: stis-ngsl: HD 5015 is not in the library; pulkovo: HR 244 is not in the catalogue; kiehling: HR 244 is not among its 60 stars; burnashev: BS 244 is not in part2; gaia-xp: used.",
       "evidence": [

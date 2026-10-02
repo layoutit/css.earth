@@ -8,9 +8,9 @@
       "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=2500&height=2500&fov=0.182667&projection=TAN&coordsys=icrs&ra=192.205322&dec=-41.311089&format=jpg",
       "sourceUrl": "https://www.legacysurvey.org/dr10/",
       "title": "DESI Legacy Surveys color (g, r, i, z)",
-      "credit": "DESI Legacy Imaging Surveys DR10; colour HiPS by CDS (CNRS/Unistra)",
+      "credit": "DESI Legacy Imaging Surveys DR10; color HiPS by CDS (CNRS/Unistra)",
       "displayCredit": "Legacy Surveys / CDS",
-      "acquisition": "A 2500 x 2500 px tangent-plane cutout of the colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/ngc-4696/experiment.json) into its ignored cache.",
+      "acquisition": "A 2500 x 2500 px tangent-plane cutout of the color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/ngc-4696/experiment.json) into its ignored cache.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -30,7 +30,7 @@
             "kind": "unresolved",
             "label": "DECam g, r, i, z",
             "evidence": "https://www.legacysurvey.org/dr10/",
-            "reason": "The survey's colour composite of coadded images; the retained record does not identify the individual exposures."
+            "reason": "The survey's color composite of coadded images; the retained record does not identify the individual exposures."
           }
         ]
       }

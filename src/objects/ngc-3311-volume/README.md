@@ -9,7 +9,7 @@ the light along every sight line; the depth of that light follows a published fi
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [DESI Legacy Imaging Surveys DR10](https://www.legacysurvey.org/dr10/) | [Record](../../sources/desi-legacy-surveys-dr10-color-hips.json). The surveys' g, r, i, z colour composite as the CDS HiPS `CDS/P/DESI-Legacy-Surveys/DR10/color`, cut out by the CDS hips2fits service: 2200 × 2200 px over 9.3 × 9.3 arcmin (0.255″ per pixel), tangent projection, north up. A display composite, not calibrated photometry. |
+| [DESI Legacy Imaging Surveys DR10](https://www.legacysurvey.org/dr10/) | [Record](../../sources/desi-legacy-surveys-dr10-color-hips.json). The surveys' g, r, i, z color composite as the CDS HiPS `CDS/P/DESI-Legacy-Surveys/DR10/color`, cut out by the CDS hips2fits service: 2200 × 2200 px over 9.3 × 9.3 arcmin (0.255″ per pixel), tangent projection, north up. A display composite, not calibrated photometry. |
 | [Arnaboldi et al. (2012)](https://arxiv.org/abs/1205.5289) | [Record](../../sources/arnaboldi-2012-hydra-core.json). Table 2, column "allmask": the two-dimensional Sérsic fit to NGC 3311 in a VLT/FORS1 V-band image with the north-east excess masked, n = 4.8 ± 0.02, effective radius 198.8 ± 2.2″, axis ratio 0.93, major axis at position angle 32°. Fitted with NGC 3309's own Sérsic model (Table 1) over a 6.8 × 6.4′ field. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of the 16 neighbouring galaxies masked in the image. |
 | [Cosmicflows-4](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) (Tully et al. 2023) | Table 3, group 1PGC 31478: 54.3 Mpc. Position from the 2MASS Extended Source Catalog. See the [host](../ngc-3311/README.md). |
@@ -53,7 +53,7 @@ The NGC 3311 page in headless Chromium at 1440 × 900, device pixel ratio 2, on 
 arrival, then the camera turned to the side and to above the galaxy.
 
 - The volume reproduces the cleaned image along every sight line it covers (the method conditions on it); 0.7 to 3.8%
-  of the image's light, by colour channel, lies outside the spheroid and is not drawn (the red is a star's ghost in
+  of the image's light, by color channel, lies outside the spheroid and is not drawn (the red is a star's ghost in
   the north-east corner).
 - The cutout's registration is its request: the centroid of the bright core falls within 1 px (0.2″) of the image
   centre, the 2MASS position.

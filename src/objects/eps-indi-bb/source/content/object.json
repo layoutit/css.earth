@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "eps-indi-bb-dataset-shape.webp",
         "surface": "eps-indi-bb-surface-shape@2x.webp",
         "poles": "eps-indi-bb-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://arxiv.org/abs/2205.08077"
         },
         "falseColor": false,
-        "notes": "No image of its surface exists, and a blackbody colour would misrepresent a brown dwarf's absorbed visible spectrum (see the ledger). No spin axis is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+        "notes": "No image of its surface exists, and a blackbody color would misrepresent a brown dwarf's absorbed visible spectrum (see the ledger). No spin axis is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
       }
     ]
   },

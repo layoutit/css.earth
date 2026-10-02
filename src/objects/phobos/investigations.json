@@ -85,9 +85,9 @@
     },
     {
       "id": "hrsc-vnir-index-mosaic",
-      "subject": "MEX HRSC colour V/NIR spectral index mosaic, 14 m/pixel (NASA Trek Index_VNIR_mosaic)",
+      "subject": "MEX HRSC color V/NIR spectral index mosaic, 14 m/pixel (NASA Trek Index_VNIR_mosaic)",
       "status": "excluded",
-      "finding": "The only public copy is a four-band 8-bit RGBA render (5883 x 2920 cells, 0.0612 degrees) with nine flat colours: seven legend classes of V/NIR from 0.6 to 1.6, an undocumented white class and transparent no-coverage (35 percent of cells); no numeric index grid is published, the class bounds come from the Trek legend rather than a stated product label, and the shared GeoTIFF science loader reads only single-band values. The producer release on PDS (MEX-MSA-HRSC-5-REFDR-PHOBOS-MAPS-V1.0) holds only four blue, green, red and infrared orthoimage sets, not a global index grid, so a global index would have to be computed by us from regional images.",
+      "finding": "The only public copy is a four-band 8-bit RGBA render (5883 x 2920 cells, 0.0612 degrees) with nine flat colors: seven legend classes of V/NIR from 0.6 to 1.6, an undocumented white class and transparent no-coverage (35 percent of cells); no numeric index grid is published, the class bounds come from the Trek legend rather than a stated product label, and the shared GeoTIFF science loader reads only single-band values. The producer release on PDS (MEX-MSA-HRSC-5-REFDR-PHOBOS-MAPS-V1.0) holds only four blue, green, red and infrared orthoimage sets, not a global index grid, so a global index would have to be computed by us from regional images.",
       "revisitWhen": "MIIGAiK/MExLab or the HRSC team releases the numeric index grid (or a single-band class raster with documented class bounds) for Phobos.",
       "evidence": [
         "https://trek.nasa.gov/phobos/TrekWS/rest/cat/data/stream?label=Index_VNIR_mosaic",
@@ -101,7 +101,7 @@
       "id": "ph9224gt-crater-catalogue",
       "subject": "PH9224GT global catalogue of 9,224 Phobos craters (Salamuniccar et al. 2014), with its Trek crater count and abundance rasters",
       "status": "included",
-      "finding": "Crater catalogue dataset: every 0.125 degree cell a catalogued rim circle (published centre and angular radius, Radius_deg) crosses, drawn over the Monochrome mosaic in grey. The Trek ArcGIS layer returns all 9,224 points in five pages; its Radius_m equals Radius_deg on the 11.1 km sphere for every record. The catalogue names 15 craters; their centres lie 0.16 to 0.95 km from the IAU Gazetteer centres (Skyresh 3.25 km, where the Gazetteer is also 3.1 km from the SPC depression) and 0.06 to 0.64 km from the depression each makes in the SPC shape (Stickney 0.63, Hall 0.28, Roche 0.42 km). Needs the circle presence in geology-grid.py and a scientific underlay in the terrestrial lane.",
+      "finding": "Crater catalogue dataset: every 0.125 degree cell a catalogued rim circle (published centre and angular radius, Radius_deg) crosses, drawn over the Monochrome mosaic in gray. The Trek ArcGIS layer returns all 9,224 points in five pages; its Radius_m equals Radius_deg on the 11.1 km sphere for every record. The catalogue names 15 craters; their centres lie 0.16 to 0.95 km from the IAU Gazetteer centres (Skyresh 3.25 km, where the Gazetteer is also 3.1 km from the SPC depression) and 0.06 to 0.64 km from the depression each makes in the SPC shape (Stickney 0.63, Hall 0.28, Roche 0.42 km). Needs the circle presence in geology-grid.py and a scientific underlay in the terrestrial lane.",
       "evidence": [
         "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer",
         "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=PH9224GT_Phobos2000",

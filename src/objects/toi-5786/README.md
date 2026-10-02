@@ -6,7 +6,7 @@ Its radius and temperature follow Thomas et al. 2025. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 2032764938419327616, parallax 5.160 ± 0.012 mas (193.78 pc). Radius 1.36 +/- 0.03 solar radii from Thomas et al. 2025, the stellar radius of the default parameter set of TOI-5786 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract). Mass 1.23 +/- 0.04 solar masses from Thomas et al. 2025, the stellar mass of the default parameter set of TOI-5786 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract). Temperature 6,235 K from Thomas et al. 2025, the stellar temperature of the default parameter set of TOI-5786 b in the NASA Exoplanet Archive. log g 4.26 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2032764938419327616, through the CIE 1931 2° observer: #faf5ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2032764938419327616, through the CIE 1931 2° observer: #faf5ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,235 K and log g 4.26 (u1 0.379, u2 0.304): a model, because no fit of this star's limb is used.
 

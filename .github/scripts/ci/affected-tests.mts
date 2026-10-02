@@ -80,7 +80,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const manifest = read(`packages/${entry.name}/package.json`);
     return { directory: entry.name, name: String(manifest.name), dependencies: workspaceDependencies(manifest) };
   });
-  const paths = base ? execFileSync('git', ['diff', '--name-only', `${base}...HEAD`], { cwd: root, encoding: 'utf8' }).split('\n').filter(Boolean) : null;
+  const paths = base ? execFileSync('git', ['diff', '--name-only', `${base}...HEAD`], { cwd: root, encoding: 'utf8', maxBuffer: 1 << 30 }).split('\n').filter(Boolean) : null;
   const result = affectedTests(paths, packages, workspaceDependencies(read('package.json')));
   const testPackages = result.packages === 'all' ? 'all' : result.packages.join(' ');
   const testFiles = result.files.join(' ');

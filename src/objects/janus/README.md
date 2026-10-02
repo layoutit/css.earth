@@ -1,6 +1,6 @@
 # Janus
 
-Saturn's moon Janus on the Thomas 2018 shape model, with a Cassini monochrome mosaic, a three-filter false-colour view
+Saturn's moon Janus on the Thomas 2018 shape model, with a Cassini monochrome mosaic, a three-filter false-color view
 and an elevation map.
 
 ## Sources
@@ -50,7 +50,7 @@ missing-coverage grid.
 | green | GRN | n1627319647 | 2009-07-26T16:32:07.946 | 586 |
 | blue | UV3 | n1627319759 | 2009-07-26T16:33:49.367 | 584 |
 
-Only samples seen in all three filters are coloured, with incidence and emission under 75° and a two-pixel detector
+Only samples seen in all three filters are colored, with incidence and emission under 75° and a two-pixel detector
 inset. One common range, 0–0.8 I/F, maps them to linear channels, followed by the
 [shared IEC sRGB output transfer](../../../docs/color-preparation.md). There is no per-band equalization and no
 colorimetric transform, so even the visible-filter channels are labelled false color.
@@ -59,7 +59,7 @@ The initial camera looks toward 216°E, 0°N, close to the best fully lit source
 
 ## Evidence
 
-The false-colour footprint is a dark region covering part of the cratered hemisphere. It was inspected in the browser at
+The false-color footprint is a dark region covering part of the cratered hemisphere. It was inspected in the browser at
 DPR 1 and 2 with dragging, Shadows and the mobile selector, without page errors. The
 [shared color method](../../../docs/color-preparation.md) explains the display and its limits.
 
@@ -79,7 +79,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - **False color:** the three filters were taken in sequence, so this is not a simultaneous true-color photograph or a
   composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than the
-  Monochrome coverage. Small colour fringes can remain at sharp relief. The 0.003 I/F background rule is an approximate
+  Monochrome coverage. Small color fringes can remain at sharp relief. The 0.003 I/F background rule is an approximate
   coverage mask, not a detector-quality flag.
 - **Monochrome:** regions have different source resolution and some seams remain. This is a visualization mosaic, not
   a calibrated global albedo product.

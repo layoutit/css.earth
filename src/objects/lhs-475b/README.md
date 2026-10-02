@@ -8,7 +8,7 @@ It is the only planet known around LHS 475. Its orbit and size follow Lustig-Yae
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.02910765415 d Lustig-Yaeger et al. 2023 (2023NatAs...7.1317L), via the NASA Exoplanet Archive ps table (pl_refname LUSTIG_YAEGER_ET_AL_2023): a/R* 15.87235; Lustig-Yaeger et al. 2023 (2023NatAs...7.1317L), via the NASA Exoplanet Archive ps table (pl_refname LUSTIG_YAEGER_ET_AL_2023): inclination 87.194 degrees Ment et al. 2024 (2024AJ....167..197M), via the NASA Exoplanet Archive ps table (pl_refname MENT_ET_AL__2024): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460854.162728 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by lhs-475's measured colour (#ffc981, the colour dataset of lhs-475 (src/objects/lhs-475/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by lhs-475's measured color (#ffc981, the color dataset of lhs-475 (src/objects/lhs-475/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of LHS 475's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (94, 101, 102), folded onto its orbit. Upper limits and rows without an error are left out.
 

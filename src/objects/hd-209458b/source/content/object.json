@@ -41,7 +41,7 @@
       {
         "id": "thermal",
         "label": "Thermal glow",
-        "qualification": "Black-body colour at its measured dayside temperature, 1,499 K. The disc itself is unresolved.",
+        "qualification": "Black-body color at its measured dayside temperature, 1,499 K. The disc itself is unresolved.",
         "thumbnail": "hd-209458b-dataset-thermal.webp",
         "surface": "hd-209458b-surface-thermal@2x.webp",
         "poles": "hd-209458b-poles-thermal@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...790...53Z/abstract"
         },
         "falseColor": false,
-        "notes": "The colour of HD 209458 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+        "notes": "The color of HD 209458 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       },
       {
         "id": "temperature",
@@ -111,7 +111,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1405.5923"
         },
-        "notes": "Brightness temperature at 4.5 µm from Zellem et al. (2014)'s published fit to a Spitzer phase curve of January 2010. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 41° east of noon. The false colour runs from 850 to 1,600 K. With shadows on, the star's light darkens the night half."
+        "notes": "Brightness temperature at 4.5 µm from Zellem et al. (2014)'s published fit to a Spitzer phase curve of January 2010. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 41° east of noon. The false color runs from 850 to 1,600 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

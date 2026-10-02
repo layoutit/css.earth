@@ -24,7 +24,7 @@
         "reason": "the spectrum starts at 400 nm; its first 1 nm bin is held to 380 nm, where the observer's weight is small and a brown dwarf emits almost nothing"
       }
     ],
-    "note": "Relative flux in data units per pixel after the pipeline's flux calibration, which is all a colour needs. Below 650 nm the dwarf is so faint that single pixels have a signal-to-noise ratio near 1; a 1 nm bin below zero within three times its error is read as no emission, as for Gaia XP spectra. The colour range is the spectrum moved one standard error down and up at every pixel."
+    "note": "Relative flux in data units per pixel after the pipeline's flux calibration, which is all a color needs. Below 650 nm the dwarf is so faint that single pixels have a signal-to-noise ratio near 1; a 1 nm bin below zero within three times its error is read as no emission, as for Gaia XP spectra. The color range is the spectrum moved one standard error down and up at every pixel."
   },
   "gamut": "desaturate",
   "whitePoint": "sRGB D65",

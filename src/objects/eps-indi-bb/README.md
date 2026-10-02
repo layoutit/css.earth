@@ -10,7 +10,7 @@ Epsilon Indi Bb is the cooler of the two brown dwarfs far out from Epsilon Indi 
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray. King et al.'s resolved spectra start at 630 nm, and the missing blue part of the visible band would decide the colour, so no measured colour exists. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's colour, so none is used, and with no colour dataset there is no limb to draw ([ledger](investigations.json)).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray. King et al.'s resolved spectra start at 630 nm, and the missing blue part of the visible band would decide the color, so no measured color exists. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's color, so none is used, and with no color dataset there is no limb to draw ([ledger](investigations.json)).
 
 **Rotation.** No rotation period or spin axis of Epsilon Indi Bb on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -24,6 +24,6 @@ Run of 2026-09-23 (this version):
 
 - Ba is drawn at the pair's light centre, so Bb's orbit is drawn about Ba rather than about their centre of mass; the difference is up to 1.1 au.
 - The radius and temperature are model values.
-- No colour is drawn, and no spin axis is measured.
+- No color is drawn, and no spin axis is measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by Kepler-444; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by Kepler-444; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "kepler-444c-dataset-shape.webp",
         "surface": "kepler-444c-surface-shape@2x.webp",
         "poles": "kepler-444c-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of Kepler-444 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-444's light, as its colour dataset measures it."
+        "notes": "No image or color of Kepler-444 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of kepler-444's light, as its color dataset measures it."
       }
     ]
   },

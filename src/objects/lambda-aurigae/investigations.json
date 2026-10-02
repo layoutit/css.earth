@@ -22,8 +22,8 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 188771135583573504, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 344: HR 1729; VizieR III/202 (4 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #fff6fa. Routes tried in order: stis-ngsl: HD 34411 is not in the library; pulkovo: HR 1729 is not in the catalogue; kiehling: HR 1729 is not among its 60 stars; burnashev: BS 1729 is not in part2; gaia-xp: used.",
       "evidence": [

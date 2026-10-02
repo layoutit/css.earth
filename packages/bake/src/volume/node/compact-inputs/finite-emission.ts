@@ -3,9 +3,9 @@
  *
  * The fitted emission field, its envelope gain map, the neutral alpha bank and the pinned depth density
  * are delivered inputs, so no fit, star removal or registration runs here. Per dataset this repeats the
- * accepted material arithmetic exactly: bilinear registered colour inside the coverage mask, component
+ * accepted material arithmetic exactly: bilinear registered color inside the coverage mask, component
  * plus envelope emission through the same perspective transform, and the same alpha-limited slab
- * material recolouring the same neutral textures at the same encoder settings.
+ * material recoloring the same neutral textures at the same encoder settings.
  */
 import assert from 'node:assert/strict';
 import { readFile, mkdir } from 'node:fs/promises';

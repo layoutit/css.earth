@@ -128,7 +128,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     if (!(high > low)) throw new Error('Surface observation has no qualified radiance range.');
   }
   const colorDisplay = policy.display.range === 'stated-range' ? policy.display.colorDisplay : undefined, palette = policy.display.palette;
-  // The stretch is linear in the observed quantity; grey is sRGB-encoded like the colour bands, and a palette indexes the linear fraction.
+  // The stretch is linear in the observed quantity; grey is sRGB-encoded like the color bands, and a palette indexes the linear fraction.
   const displayColor = (radiance: number) => {
     const fraction = Math.max(0, Math.min(1, (radiance - low) / (high - low)));
     return palette ? interpolatePalette(palette, fraction) : Array(3).fill(Math.round(255 * linearToSrgb(fraction)));

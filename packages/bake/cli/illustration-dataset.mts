@@ -6,7 +6,7 @@
 //
 // A map is the texture NASA's Eyes on Exoplanets app wraps around the planet (credited NASA/JPL-Caltech; NASA calls each planet's look
 // an artist's concept). A model is a NASA Science 3D model credited to NASA Visualization Technology Applications and Development
-// (VTAD), whose base-colour texture is carried through its own UVs, as Eris's is. Either file is copied unchanged into
+// (VTAD), whose base-color texture is carried through its own UVs, as Eris's is. Either file is copied unchanged into
 // source/illustration/, restored from its origin by the acquisition plan, and listed in catalog.illustrationDatasets, so it never counts
 // as imagery. The default dataset is unchanged.
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -41,17 +41,17 @@ const record = model ? `source-${inputId}` : EYES_RECORD;
 // What differs between an Eyes map and a NASA 3D model: where it lives, who made it and how the lane reads it.
 const kind = model
   ? { origin: values.origin!, landing: values.landing!, credit: VTAD, title: `${name} 3D Model`,
-      acquisition: `Original GLB from the NASA Science resource page ${values.landing}, unchanged; its base-colour texture is the dataset.`,
+      acquisition: `Original GLB from the NASA Science resource page ${values.landing}, unchanged; its base-color texture is the dataset.`,
       science: { kind: 'glb-base-color', model: sourcePath }, qualification: `An artist's surface from NASA's ${name} 3D model; not an observation.`,
-      notes: `NASA's illustration of ${name}, from its 3D model. Nobody has resolved this planet's disc, so none of the colour or features in it was observed. Its longitudes are arbitrary.`,
+      notes: `NASA's illustration of ${name}, from its 3D model. Nobody has resolved this planet's disc, so none of the color or features in it was observed. Its longitudes are arbitrary.`,
       text: { title: 'NASA artist\'s texture', summary: 'NASA\'s illustrated surface from its 3D model. None of it was observed, and its longitudes are arbitrary.' },
-      finding: `the base-colour texture of NASA's ${name} 3D Model (${file}), carried through the model's own UVs onto the sphere, unrepainted, with arbitrary longitudes. No image resolves this planet; nothing in the texture was observed. The resource page gives the credit and a one-line description; it does not say how the texture was made.`,
+      finding: `the base-color texture of NASA's ${name} 3D Model (${file}), carried through the model's own UVs onto the sphere, unrepainted, with arbitrary longitudes. No image resolves this planet; nothing in the texture was observed. The resource page gives the credit and a one-line description; it does not say how the texture was made.`,
       evidence: [values.landing!, NASA_MEDIA],
-      notice: `base-colour texture of the ${name} 3D Model by ${VTAD}, ${values.landing}` }
+      notice: `base-color texture of the ${name} 3D Model by ${VTAD}, ${values.landing}` }
   : { origin: `${EYES_ASSETS}${file}`, landing: EYES_APP, credit: 'NASA/JPL-Caltech (Eyes on Exoplanets)', title: `Eyes on Exoplanets artist's concept map of ${name}`,
       acquisition: `Original JPEG from the Eyes on Exoplanets app, unchanged; the app's texture table names it as ${name}'s map.`,
       science: { kind: 'equirectangular-illustration' }, qualification: `NASA's artist's concept of ${name}, from Eyes on Exoplanets; not an observation.`,
-      notes: `NASA's artist's concept of ${name}: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary.`,
+      notes: `NASA's artist's concept of ${name}: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary.`,
       text: { title: 'NASA artist\'s concept', summary: 'The map NASA\'s Eyes on Exoplanets wraps around this planet. None of it was observed, and its longitudes are arbitrary.' },
       finding: `the map NASA's Eyes on Exoplanets app lists for ${name} (${file}), resized unchanged onto the sphere with its left edge at 0° longitude, so its longitudes are arbitrary. No image resolves this planet; nothing in the map was observed. NASA credits the app NASA/JPL-Caltech and calls each planet's look an artist's concept; the file itself carries no credit or date.`,
       evidence: [`${EYES_ASSETS}${file}`, EYES_TUTORIAL],

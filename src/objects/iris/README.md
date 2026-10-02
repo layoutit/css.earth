@@ -67,7 +67,7 @@ Independent nearest-triangle sampling (8192 area-stratified samples each way) me
 
 - Shape uses the neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
-- The SPHERE photograph is not albedo or colour. The frames see Iris from about 64° south, so the northern surface is unphotographed and keeps the grid. The native outlines fix the rotational phase to about a degree; the paper states no phase uncertainty.
+- The SPHERE photograph is not albedo or color. The frames see Iris from about 64° south, so the northern surface is unphotographed and keeps the grid. The native outlines fix the rotational phase to about a degree; the paper states no phase uncertainty.
 - The crater coordinates in Hanuš et al. (2019) Table 2 are not used. Projected as printed, they land a median 139 km from the authors' own contours in their Figure 4, and no rotation or mirror of the table fits all six named craters. Their longitude system is not stated.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

@@ -20,7 +20,7 @@
     {
       "id": "hd-110067-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: ESPRESSO spectral colour on the reference sphere, with the published ATLAS9 limb model",
+      "origin": "Repository-authored raster recipe: ESPRESSO spectral color on the reference sphere, with the published ATLAS9 limb model",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and attribution."
@@ -113,8 +113,8 @@
       "id": "hd-110067-stellar-color",
       "path": "photometry/stellar-color.json",
       "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
-      "credit": "ESO spectrum; cssEarth visible-colour integration",
-      "license": "Authored recipe; CIE-derived colour assets CC BY-SA 4.0",
+      "credit": "ESO spectrum; cssEarth visible-color integration",
+      "license": "Authored recipe; CIE-derived color assets CC BY-SA 4.0",
       "acquisition": "Project-authored interpretation of the selected native spectrum",
       "redistribution": "Project-authored recipe",
       "consumers": [
@@ -123,7 +123,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Selects the ESO spectrum and its physical wavelength/flux columns for the shared colour integrator."
+        "reason": "Selects the ESO spectrum and its physical wavelength/flux columns for the shared color integrator."
       }
     },
     {
@@ -155,8 +155,8 @@
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1038/s41586-023-06692-3",
-      "credit": "ESO ESPRESSO spectrum and CIE colour matching; cssEarth starMarker",
-      "license": "Derived colour marker under CC BY-SA 4.0",
+      "credit": "ESO ESPRESSO spectrum and CIE color matching; cssEarth starMarker",
+      "license": "Derived color marker under CC BY-SA 4.0",
       "consumers": [
         "navigation"
       ],
@@ -172,7 +172,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "starMarker for hd-110067 applies the same measured colour and published ATLAS9 limb-darkening law as the sphere."
+        "reason": "starMarker for hd-110067 applies the same measured color and published ATLAS9 limb-darkening law as the sphere."
       }
     }
   ],

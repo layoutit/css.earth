@@ -64,7 +64,7 @@ function encodeBand(image:Sharp, encoding:RecordValue|undefined, density:number)
   const pixels=image.removeAlpha();
   const grayscale=encoding.grayscale===true, chroma=encoding.chromaSubsampling;
   if(chroma!==undefined&&chroma!=='4:2:0'&&chroma!=='4:4:4') throw new TypeError('Unsupported selected band chroma sampling.');
-  return (grayscale?pixels.grayscale().toColourspace('b-w'):pixels).jpeg({quality,mozjpeg:encoder==='mozjpeg',progressive,...(chroma?{chromaSubsampling:chroma}: {})});
+  return (grayscale?pixels.grayscale().toColorspace('b-w'):pixels).jpeg({quality,mozjpeg:encoder==='mozjpeg',progressive,...(chroma?{chromaSubsampling:chroma}: {})});
 }
 async function nativeSampler(surface:Surface, config:Recipe, sourceDirectory:string, manifest:RecordValue):Promise<{sampler:NativeSampler; source:RecordValue}> {
   const source=sourceRecord(manifest,surface.source); await requireSourceFile(sourceDirectory,source);

@@ -88,7 +88,7 @@
       "path": "photometry/stellar-color.json",
       "origin": "https://arxiv.org/abs/1206.1770",
       "credit": "cssEarth",
-      "license": "Project-authored colour recipe",
+      "license": "Project-authored color recipe",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
       "consumers": [
@@ -96,7 +96,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the published temperature it applies."
+        "reason": "Project-authored color recipe naming the published temperature it applies."
       }
     },
     {
@@ -131,7 +131,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1206.1770",
-      "credit": "The colour dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -147,7 +147,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

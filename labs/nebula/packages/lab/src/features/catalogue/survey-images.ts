@@ -5,15 +5,15 @@ export const surveyImages = [
   { id: 'dss2', hips: 'CDS/P/DSS2/color', title: 'DSS2 · Optical', bands: 'Photographic blue / red · synthetic green',
     description: 'Optical structure and dust lanes; bright cores can saturate.',
     sourceUrl: 'https://archive.stsci.edu/dss/', propertiesUrl: 'https://alasky.cds.unistra.fr/DSS/DSSColor/properties',
-    credit: 'STScI / NASA · Palomar / UK Schmidt plates · CDS colour mosaic' },
+    credit: 'STScI / NASA · Palomar / UK Schmidt plates · CDS color mosaic' },
   { id: 'wise', hips: 'CDS/P/allWISE/color', title: 'WISE · Infrared', bands: 'RGB: 22 / 4.6 / 3.4 μm',
-    description: 'Warm dust and stars in mapped infrared colour; lower angular resolution than optical surveys.',
+    description: 'Warm dust and stars in mapped infrared color; lower angular resolution than optical surveys.',
     sourceUrl: 'https://irsa.ipac.caltech.edu/Missions/wise.html', propertiesUrl: 'https://alasky.cds.unistra.fr/AllWISE/RGB-W4-W2-W1/properties',
-    credit: 'NASA / JPL-Caltech / UCLA / IPAC · CDS colour mosaic' },
+    credit: 'NASA / JPL-Caltech / UCLA / IPAC · CDS color mosaic' },
   { id: '2mass', hips: 'CDS/P/2MASS/color', title: '2MASS · Near infrared', bands: 'RGB: Ks / H / J',
     description: 'Stellar structure through dust; diffuse gas may be faint or absent in these bands.',
     sourceUrl: 'https://irsa.ipac.caltech.edu/Missions/2mass.html', propertiesUrl: 'https://alasky.cds.unistra.fr/2MASS/Color/properties',
-    credit: 'UMass / IPAC-Caltech · NASA / NSF · CDS colour mosaic' },
+    credit: 'UMass / IPAC-Caltech · NASA / NSF · CDS color mosaic' },
 ] as const;
 export type SurveyImage = typeof surveyImages[number];
 

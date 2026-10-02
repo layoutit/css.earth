@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 60.562 au and total mass 1.6495 solar masses, 367.0 years of 365.25 d. Bowler et al. (2020, AJ 159, 63; arXiv:1911.10569): the orbitize! OFTI fit to the literature astrometry, distributed as a posterior of 1,000 samples by whereistheplanet 1.0.1 (post_hd95086b.hdf5). Desgrange et al. (2022) refit the orbit with two newer positions using their own code and publish no posterior; those positions test this orbit instead. Picked with packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py (src/objects/hd-95086-b/source/orbits/pick.json): highest stored likelihood (ln L -5.65).",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 95086 b is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of HD 95086 b is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 936,
   "effectiveTemperatureSource": "936 +66/-63 K, Malin et al. (2024), Table 8, https://arxiv.org/abs/2408.16843",

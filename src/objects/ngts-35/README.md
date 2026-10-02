@@ -6,7 +6,7 @@ Its radius and temperature follow Kendall et al. 2026. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 3531943236058701824, parallax 5.454 ± 0.016 mas (183.35 pc). Radius 0.753 +/- 0.051 solar radii from Kendall et al. 2026, the stellar radius of the default parameter set of NGTS-35 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract). Mass 0.789 +/- 0.035 solar masses from Kendall et al. 2026, the stellar mass of the default parameter set of NGTS-35 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract). Temperature 4,717 K from Kendall et al. 2026, the stellar temperature of the default parameter set of NGTS-35 b in the NASA Exoplanet Archive. log g 4.58 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 3531943236058701824, through the CIE 1931 2° observer: #ffd6b9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 3531943236058701824, through the CIE 1931 2° observer: #ffd6b9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,717 K and log g 4.58 (u1 0.733, u2 0.056): a model, because no fit of this star's limb is used.
 

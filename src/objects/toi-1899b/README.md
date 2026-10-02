@@ -8,7 +8,7 @@ It is the only planet known around TOI-1899. Its orbit and size follow Lin et al
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 29.09023727744 d Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): a/R* 54.01; Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): inclination 89.64 degrees Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): e 0.044 Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): omega -53 degrees, stored as 307 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458711.959967 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1899's measured colour (#ffbe8a, the colour dataset of toi-1899 (src/objects/toi-1899/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1899's measured color (#ffbe8a, the color dataset of toi-1899 (src/objects/toi-1899/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1899's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (75, 81, 82), folded onto its orbit. Upper limits and rows without an error are left out.
 

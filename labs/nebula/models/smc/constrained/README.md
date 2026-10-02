@@ -50,4 +50,4 @@ The receipt distinguishes affine refits under alternative uncertainty widths fro
 
 ## Image-conditioned emission trial
 
-The subsequent [finite-emission experiment](EMISSION-METHOD.md) uses this simulation only as a conditional depth prior and fits spatial emission structures from the registered optical image. It is separate from the neutral stellar-density fit above and from the rejected fixed-density colour-only bakes. Its inspection must establish visual direction before any application promotion.
+The subsequent [finite-emission experiment](EMISSION-METHOD.md) uses this simulation only as a conditional depth prior and fits spatial emission structures from the registered optical image. It is separate from the neutral stellar-density fit above and from the rejected fixed-density color-only bakes. Its inspection must establish visual direction before any application promotion.

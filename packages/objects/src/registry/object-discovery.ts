@@ -8,7 +8,7 @@ export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustra
   hostsImagery?: true;
   /** A numerical simulation, qualified separately from an artistic illustration. */
   simulation?: true;
-  /** A star without imagery whose colour dataset comes from its own measurements (a spectrum or a catalogued temperature): on the map. */
+  /** A star without imagery whose color dataset comes from its own measurements (a spectrum or a catalogued temperature): on the map. */
   sourceColor?: true; }
 
 export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> {
@@ -19,7 +19,7 @@ export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> 
   if (value.simulation !== undefined && (value.simulation !== true || !value.illustration)) throw new TypeError('A simulation must be a qualified model without observed imagery.');
   if (value.orientationReference !== undefined && (!Number.isInteger(value.orientationReference) || Number(value.orientationReference) < 1)) throw new TypeError('Invalid object orientation reference.');
   if (value.hostsImagery !== undefined && (value.hostsImagery !== true || value.imagery)) throw new TypeError('Only a star without imagery of its own is marked as hosting imagery.');
-  if (value.sourceColor !== undefined && (value.sourceColor !== true || value.imagery)) throw new TypeError('Only a body without imagery is marked by its source colour.');
+  if (value.sourceColor !== undefined && (value.sourceColor !== true || value.imagery)) throw new TypeError('Only a body without imagery is marked by its source color.');
   return Object.freeze({ ...(value.hostsImagery ? { hostsImagery: true as const } : {}), ...(value.sourceColor ? { sourceColor: true as const } : {}), featured: value.featured, imagery: value.imagery, illustration: value.illustration,
     ...(value.simulation ? { simulation: true as const } : {}),
     ...(value.arrival === undefined ? {} : { arrival: parseArrivalView(value.arrival) }),
@@ -31,7 +31,7 @@ export function discoveryDescription(discovery: ObjectDiscovery): string | null 
 }
 
 /** A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
- * that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose colour comes from
+ * that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose color comes from
  * its own measurements. */
 export function offTheMap(object: { classification: string; discovery: ObjectDiscovery }): boolean {
   return object.classification === 'star' && !object.discovery.imagery && !object.discovery.hostsImagery && !object.discovery.sourceColor;

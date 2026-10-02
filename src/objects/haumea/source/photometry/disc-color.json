@@ -5,7 +5,7 @@
     "source": "Rabinowitz et al. (2006), Photometric observations constraining the size, shape, and albedo of 2003 EL61, a rapidly rotating, Pluto-sized object in the Kuiper Belt, ApJ 639, 1238, doi:10.1086/499575, arXiv:astro-ph/0509401",
     "locator": "Section 3.4 and Table 3, weighted average of 2005 January 25-27 after subtracting the rotational light curve",
     "system": "Johnson-Cousins BVRI",
-    "note": "Rotation-corrected mean colours. Lacerda (2010) describes a darker, redder region seen in the light curve, so the surface colour is known to vary with rotation; these are the rotational mean.",
+    "note": "Rotation-corrected mean colors. Lacerda (2010) describes a darker, redder region seen in the light curve, so the surface color is known to vary with rotation; these are the rotational mean.",
     "indices": {
       "B-V": { "value": 0.626, "uncertainty": 0.025 },
       "V-R": { "value": 0.343, "uncertainty": 0.020 },

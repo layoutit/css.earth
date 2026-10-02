@@ -4,7 +4,7 @@
  * radius a pulse-profile fit infers, its spin, and the fit's hot regions as `cssearth-published-hot-regions@1`, which the
  * `published-hot-region-map` format draws without refitting (packages/bake/src/objects/raster/hot-region-map.ts). The record may add
  * `bulk`, the temperature another paper measures for the surface outside the hot regions; without it that surface is no data. No
- * visible colour is measured, so the astronomy record has no temperature and the catalogue dot is the shared neutral gray.
+ * visible color is measured, so the astronomy record has no temperature and the catalogue dot is the shared neutral gray.
  *
  *   { "pulsars": [{ "id", "name", "description", "system"?, "order"?, "aliases"?,
  *     "paper": { "url", "credit" },
@@ -31,7 +31,7 @@
 import { readFile } from 'node:fs/promises';
 import { skyBasis, directionFromRaDec } from '@cssearth/astronomy';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NEUTRAL_CATALOGUE_COLOUR } from '@cssearth/objects';
+import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
 import { parseHotRegionSamples, parsePublishedHotRegions, publishedHotRegionMap } from '@cssearth/bake/objects/raster';
 import { checkLimbLaw, fitQuadraticLimb, neutronStarLog10Gravity, nsxLimbProfile, readNsxTable, type NsxTable } from '@cssearth/bake/objects/stellar';
 import { CHECKED } from './color.mts';
@@ -117,7 +117,7 @@ export function pulsarRecord(spec: PulsarSpec, order: number) {
   return { id: spec.id, classification: 'star', order,
     physical: { name: spec.name, horizonsCode: null, meanRadiusKm: spec.radius.value, gravitationalParameterKm3PerS2: Number((GM_SUN * spec.mass.value).toFixed(5)), parent: null },
     physicalNotes: `A neutron star. Radius ${plus(spec.radius, 'km')}: inferred from the shape of its X-ray pulse, not imaged. Mass ${plus(spec.mass, 'solar masses')}; GM is that mass times the JPL solar GM. `
-      + `The record carries no effective temperature: no visible colour of the star is measured, and its surface temperatures are in its hot-region record. Spin ${spec.spin.frequencyHz} turns per second, the north rotation pole ${spec.spin.inclinationDegrees} degrees from the line of sight, from ${spec.spin.source} (${spec.spin.url}). `
+      + `The record carries no effective temperature: no visible color of the star is measured, and its surface temperatures are in its hot-region record. Spin ${spec.spin.frequencyHz} turns per second, the north rotation pole ${spec.spin.inclinationDegrees} degrees from the line of sight, from ${spec.spin.source} (${spec.spin.url}). `
       + 'presentationUp: the display axis has the published tilt; its position angle on the sky is a convention.',
     star: { rightAscensionDegrees: spec.position.rightAscensionDegrees, declinationDegrees: spec.position.declinationDegrees, positionEpochJulianYear: spec.position.epochJulianYear, distanceParsecs: spec.distance.value,
       properMotionRaMasPerYear: spec.position.properMotionRaMasPerYear, properMotionDecMasPerYear: spec.position.properMotionDecMasPerYear, radialVelocityKmPerS: spec.radialVelocity.value, presentationUp: 'display-axis',
@@ -214,7 +214,7 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
   files.set(`${s}/preparation/raster.json`, json(raster));
   const descriptor = read(`${o}/object.json`);
   descriptor.properties.recipe.surfaces[0].datasets = [{ id: dataset, source: 'content', material: 'emission' }];
-  descriptor.properties.catalog.color = NEUTRAL_CATALOGUE_COLOUR;
+  descriptor.properties.catalog.color = NEUTRAL_CATALOGUE_COLOR;
   files.set(`${o}/object.json`, json(descriptor));
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-${dataset}@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-${dataset}@2x.webp`;
@@ -242,7 +242,7 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
   content.datasets = { titleKey: 'datasets', defaultDataset: dataset, controls: [{ id: dataset, label: spec.hotRegions.label, qualification: `Published fit · ${spec.hotRegions.credit} · ${spec.hotRegions.observed}`,
     thumbnail: `${id}-dataset-${dataset}.webp`, surface: `${id}-surface-${dataset}@2x.webp`, poles: `${id}-poles-${dataset}@2x.webp`, source: { id: input, path: '../manifest.json', url: spec.hotRegions.url }, falseColor: true,
     legend: { kind: 'scale', title: bulk ? 'Surface temperature' : 'Hot-region temperature', labels, recipe: { palette, labels }, meta: 'million K', sourceUrl: spec.hotRegions.url },
-    notes: `The hot regions of ${spec.name} in ${spec.hotRegions.credit}'s fit to ${spec.hotRegions.observed}: ${regions.length} regions built from circles, ${millionKelvin(coolest)} to ${millionKelvin(hottest)}, covering ${(100 * share).toFixed(1)}% of the surface. The map draws ${drawnWords}. They are the shapes the fit allows, not an image. ${bulk ? `The rest of the surface is drawn at ${Math.round(bulk.kelvin).toLocaleString('en-US')} K, the temperature ${bulk.source} for the surface outside the hot regions.` : 'The gray grid is surface the fit gives no temperature.'} The disc is ${limbSentence}. The false colour runs from ${labels[0]} to ${labels[2]} million K.` }] };
+    notes: `The hot regions of ${spec.name} in ${spec.hotRegions.credit}'s fit to ${spec.hotRegions.observed}: ${regions.length} regions built from circles, ${millionKelvin(coolest)} to ${millionKelvin(hottest)}, covering ${(100 * share).toFixed(1)}% of the surface. The map draws ${drawnWords}. They are the shapes the fit allows, not an image. ${bulk ? `The rest of the surface is drawn at ${Math.round(bulk.kelvin).toLocaleString('en-US')} K, the temperature ${bulk.source} for the surface outside the hot regions.` : 'The gray grid is surface the fit gives no temperature.'} The disc is ${limbSentence}. The false color runs from ${labels[0]} to ${labels[2]} million K.` }] };
   content.provenance.physical.credit = `${spec.radius.source} radius; ${spec.position.source} position, motion and distance; published spin tilt, axis direction a display convention`;
   files.set(`${s}/content/object.json`, json(content));
 

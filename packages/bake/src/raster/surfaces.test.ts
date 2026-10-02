@@ -105,7 +105,7 @@ describe('native source pole sampling', () => {
             assert.throws(() => parseRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]}), /integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }
     });
-    it('draws a catalogue dataset over an earlier surface: empty cells take its pixels scaled, feature cells keep their colour', async () => {
+    it('draws a catalogue dataset over an earlier surface: empty cells take its pixels scaled, feature cells keep their color', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-underlay-'));
         try {
             await sharp({ create: { width: 64, height: 32, channels: 3, background: { r: 200, g: 100, b: 50 } } }).png().toFile(join(directory, 'photo.png'));
@@ -118,7 +118,7 @@ describe('native source pole sampling', () => {
                 thumbnail: { size: 8 }, surfaces: [photo, catalogue] };
             const captured: Uint8Array[] = [];
             await prepareSurfaces(parseRasterRecipe(recipe), directory, directory, async (_surface, width, height) => {
-                // The left half holds a catalogued feature; the right half is empty and painted with a stand-in grid colour.
+                // The left half holds a catalogued feature; the right half is empty and painted with a stand-in grid color.
                 const data = new Uint8Array(width * height * 3), missing = new Uint8Array(width * height);
                 for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
                     const i = y * width + x;
@@ -128,10 +128,10 @@ describe('native source pole sampling', () => {
                 return { data, channels: 3, nearest: true, missing };
             });
             const rgba = await sharp(join(directory, 'dunes@2x.webp')).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-            const colours = new Set<string>();
-            for (let i = 0; i < rgba.data.length; i += 4) if (rgba.data[i + 3]) colours.add([...rgba.data.subarray(i, i + 3)].join(','));
-            // Lossless: only the feature colour and the half-bright photograph remain; the stand-in grid colour is gone.
-            assert.deepEqual([...colours].sort(), ['100,50,25', '223,115,255']);
+            const colors = new Set<string>();
+            for (let i = 0; i < rgba.data.length; i += 4) if (rgba.data[i + 3]) colors.add([...rgba.data.subarray(i, i + 3)].join(','));
+            // Lossless: only the feature color and the half-bright photograph remain; the stand-in grid color is gone.
+            assert.deepEqual([...colors].sort(), ['100,50,25', '223,115,255']);
             assert.equal(captured.length, 1);
             // A grey, 6-bit underlay: Rec. 709 luma of (200, 100, 50) is 117.3, times 0.5 is 59 (58.6 rounded), keeping 6 bits is 56.
             await prepareSurfaces(parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, grayscale: true, bits: 6 } }] }), directory, directory,
@@ -163,7 +163,7 @@ describe('native source pole sampling', () => {
                 const { data } = await sharp(await readFile(join(directory, 'thumb-seam.webp'))).raw().toBuffer({ resolveWithObject: true });
                 return [...data.subarray((4 * 8 + 4) * 3, (4 * 8 + 4) * 3 + 3)];
             };
-            // Downscaling blends the narrow seam band with its blue surroundings, so compare channels rather than exact colours.
+            // Downscaling blends the narrow seam band with its blue surroundings, so compare channels rather than exact colors.
             const [defaultRed, , defaultBlue] = await centre({ size: 8 });
             assert.ok(defaultBlue > defaultRed + 200);
             const [seamRed, , seamBlue] = await centre({ size: 8, centerLongitudeDegrees: 0 });

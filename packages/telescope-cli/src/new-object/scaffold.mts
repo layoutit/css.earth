@@ -4,7 +4,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NEUTRAL_CATALOGUE_COLOUR } from '@cssearth/objects';
+import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
@@ -15,11 +15,11 @@ const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 69
 const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
 
 export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK?: number; readonly temperatureSource?: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number; readonly aliases?: readonly string[]; readonly featured?: true;
-  /** A black hole instead of a star: its record's radius is the measured shadow, drawn black. It has no temperature, so its catalogue colour is the shared neutral gray. */
+  /** A black hole instead of a star: its record's radius is the measured shadow, drawn black. It has no temperature, so its catalogue color is the shared neutral gray. */
   readonly blackHole?: { readonly shadowSource: string };
-  /** A neutron star instead of a star with a photosphere: no whole-surface temperature is measured, so it has no temperature, its catalogue colour is the shared neutral gray, and its generator writes its measurements (pulsar.mts). */
+  /** A neutron star instead of a star with a photosphere: no whole-surface temperature is measured, so it has no temperature, its catalogue color is the shared neutral gray, and its generator writes its measurements (pulsar.mts). */
   readonly neutronStar?: true }
-const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOUR, SHADOW_BLACK = '#000000';
+const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOR, SHADOW_BLACK = '#000000';
 
 /** The emissive stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. The plates keep
  * their native sizes even when solar-system.json enlarges the sphere: the silhouette fit already draws them at the drawn sphere. */
@@ -128,7 +128,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A star needs a lowercase id.');
   const blackHole = spec.blackHole;
   const temperature = blackHole || spec.neutronStar ? null : readStarTemperature({ effectiveTemperatureK: spec.temperatureK, effectiveTemperatureSource: spec.temperatureSource });
-  // A black hole's sphere is its shadow, drawn black; its catalogue dot has no measured colour.
+  // A black hole's sphere is its shadow, drawn black; its catalogue dot has no measured color.
   const color = temperature ? temperatureCatalogueColor(temperature.kelvin) : blackHole ? SHADOW_BLACK : NEUTRAL_GRAY, catalogColor = temperature ? color : NEUTRAL_GRAY;
   const body = requireRecord(bodyRecord, 'astronomy record'), star = requireRecord(body.star, 'star astrometry'), physical = requireRecord(body.physical, 'physical');
   if (body.id !== spec.id) throw new TypeError(`The astronomy record is for ${String(body.id)}, not ${spec.id}.`);
@@ -160,7 +160,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` },
     thumbnail: { size: 64, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: 'measurements.json', falseColor: false,
-      science: blackHole ? { kind: 'black-shadow', qualification: 'The measured shadow drawn as a black disc that always faces the viewer. A display convention; not an event horizon, a surface or a measured colour. No lighting.' }
+      science: blackHole ? { kind: 'black-shadow', qualification: 'The measured shadow drawn as a black disc that always faces the viewer. A display convention; not an event horizon, a surface or a measured color. No lighting.' }
         : { kind: 'neutral-shape', qualification: 'Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting.' } }],
     emission: { offLimbSize, limbSize: 512, bodyDiameter: BODY_DIAMETER_PX, offLimbOutput: `${id}-context-{id}{suffix}.webp`, limbOutput: `${id}-limb-{id}{suffix}.webp`, metadata: {
       schema: `css${id}-prepared-emission@1`, presentation: 'prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate',
@@ -202,7 +202,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
       { id: 'distance', label: 'Distance from the Sun', value: `${Math.round(astrometry.distanceParsecs)} parsecs`,
         source: { catalogueId: `${TODO}-distance-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'distanceParsecs; distanceSource' } },
     ], moreFacts: [] },
-    datasets: { titleKey: 'datasets', defaultDataset: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: 'A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.',
+    datasets: { titleKey: 'datasets', defaultDataset: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: 'A sphere of the published radius; the neutral gray is a display convention, not a measured color or brightness.',
       thumbnail: `${id}-dataset-shape.webp`, surface: `${id}-surface-shape@2x.webp`, poles: `${id}-poles-shape@2x.webp`, source: { id: `${id}-observational-measurements`, path: '../manifest.json', url: spec.paper },
       falseColor: false, notes: `No image of the photosphere is cast here (${TODO}: say why, and point at the ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention.` }] },
     settings: { titleKey: 'settings', controls: [] }, charts: [],

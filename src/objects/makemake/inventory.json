@@ -219,6 +219,12 @@
     },
     {
       "location": "public",
+      "filename": "makemake-billboard.webp",
+      "bytes": 5566,
+      "sha256": "ddc96350f8a662c2069d42a96e7d4b6e56a24570f806fab8e49b08ca2997251d"
+    },
+    {
+      "location": "public",
       "filename": "makemake-color-page-0-level-1040.webp",
       "bytes": 78,
       "sha256": "453c5321226f58126800dbfc58d865c605c93bb7746f16d66b3980378e96574d"
@@ -310,8 +316,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 83163,
-      "sha256": "9f878dd07382dbfb3fd2498ab82c1e98fc4acafa8e450236eecf52d4aa766c00"
+      "bytes": 83162,
+      "sha256": "d08602d04710a524baad734d26f8cac515591a897a26092eec0b385084b83d56"
     },
     {
       "location": "prepared",
@@ -334,8 +340,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1433,
-      "sha256": "68c8b84a774f2d321619bc933887d827bc7d6cfadc77ff8b73f65572847cbdea"
+      "bytes": 1432,
+      "sha256": "e6f2b9cc0d5a21348dfd62150f0f3cabe3260d0c1b684f5306bd806cfb182c97"
     },
     {
       "location": "prepared",
@@ -382,20 +388,14 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1062,
-      "sha256": "1ff7113454c3b53e8c469938b41b7741a0b9dbfec980ea39ded83ccc4a8ef201"
+      "bytes": 1059,
+      "sha256": "3753f9732af6b88a86e510dba8ded0dd1079425a875e037ed60750de97a03775"
     },
     {
       "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 1179,
       "sha256": "5d2525c0c8792dc418879c722a35abcf1f722936c3da03bd701d04da1d9ea307"
-    },
-    {
-      "location": "public",
-      "filename": "makemake-billboard.webp",
-      "bytes": 5566,
-      "sha256": "ddc96350f8a662c2069d42a96e7d4b6e56a24570f806fab8e49b08ca2997251d"
     }
   ]
 }

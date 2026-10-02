@@ -8,7 +8,7 @@ It is the only planet known around TOI-2136. Its orbit and size follow Gan et al
 
 **Orbit.** Kawauchi et al. 2022 (2022A&A...666A...4K), via the NASA Exoplanet Archive ps table (pl_refname KAWAUCHI_ET_AL_2022): P 7.851925 d Gan et al. 2022 (2022MNRAS.514.4120G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2022): a/R* 35.75; Gan et al. 2022 (2022MNRAS.514.4120G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2022): inclination 89.4 degrees Gan et al. 2022 (2022MNRAS.514.4120G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2022): e 0 Kawauchi et al. 2022 (2022A&A...666A...4K), via the NASA Exoplanet Archive ps table (pl_refname KAWAUCHI_ET_AL_2022): transit mid-time 2459214.00322 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2136's measured colour (#ffc884, the colour dataset of toi-2136 (src/objects/toi-2136/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-2136's measured color (#ffc884, the color dataset of toi-2136 (src/objects/toi-2136/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2136's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (74, 80, 81), folded onto its orbit. Upper limits and rows without an error are left out.
 

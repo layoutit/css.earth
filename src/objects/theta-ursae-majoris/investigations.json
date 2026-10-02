@@ -23,10 +23,10 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
-      "finding": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Theta Ursae Majoris is HR 3775., cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 543: HR 3775; VizieR III/202 (7 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #fbf8ff. Routes tried in order: stis-ngsl: HD 82328 is not in the library; kiehling: HR 3775 is not among its 60 stars; burnashev: BS 3775 is not in part2; gaia-xp: found, not needed after the colour and its cross-check; pulkovo: used.",
+      "finding": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Theta Ursae Majoris is HR 3775., cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 543: HR 3775; VizieR III/202 (7 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #fbf8ff. Routes tried in order: stis-ngsl: HD 82328 is not in the library; kiehling: HR 3775 is not among its 60 stars; burnashev: BS 3775 is not in part2; gaia-xp: found, not needed after the color and its cross-check; pulkovo: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"

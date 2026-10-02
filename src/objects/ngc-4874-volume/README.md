@@ -8,7 +8,7 @@ follows a published fit to NGC 4874's profile. **Depth is modelled, not measured
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [Sloan Digital Sky Survey DR9](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i colour composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 1800 × 1800 px over 8.0 × 8.0 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
+| [Sloan Digital Sky Survey DR9](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i color composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 1800 × 1800 px over 8.0 × 8.0 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
 | [Kluge et al. (2020)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/43) | [Record](../../sources/publication-kluge2020apjs-247-43k.json). Table 4, row A1656: the single Sérsic fit to the semimajor-axis g′ profile of NGC 4874 and the intracluster light, n = 9.00 ± 0.90, r_e = 784 (+291, −228) kpc at their 0.469 kpc per arcsec (Table 1), 1671.6″. |
 | [2MASS Extended Source Catalog](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233) (Skrutskie et al. 2006) | Row 2MASX J12593570+2757338: position 194.898788°, +27.959389°; K-band 3σ isophote axis ratio 0.94 and position angle 55°. Also the sizes (K-band 20 mag isophotal radius) of 20 masked neighbours. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of 33 masked neighbouring galaxies. |

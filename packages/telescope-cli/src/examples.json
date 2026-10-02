@@ -31,13 +31,13 @@
       ],
       "window": { "x": 267, "y": 267, "width": 490, "height": 490 },
       "orientation": { "mode": "sky", "note": "North up and east left, from the mosaics' own WCS." },
-      "colour": { "kind": "channels", "missing": "#4a4a4a" },
+      "color": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 1,
       "product": {
         "command": "node packages/telescope-cli/src/archives/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-<band> output/jwst-imaging/<band>-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json",
         "definition": "packages/telescope-cli/src/archives/jwst/imaging/programs/ngc-3132-2733.json"
       },
-      "note": "Representative colour, not what an eye would see: three infrared filters put into red, green and blue. All three mosaics were re-run onto one grid, so no channel is resampled. F187N and F405N are narrow filters on hydrogen lines, which is why the shells stand out. The product command records the historical run; its NGC 3132 shared-grid recipe is absent from this checkout, so it cannot currently be rerun here."
+      "note": "Representative color, not what an eye would see: three infrared filters put into red, green and blue. All three mosaics were re-run onto one grid, so no channel is resampled. F187N and F405N are narrow filters on hydrogen lines, which is why the shells stand out. The product command records the historical run; its NGC 3132 shared-grid recipe is absent from this checkout, so it cannot currently be rerun here."
     },
     {
       "id": "jwst-nirspec-sn1987a",
@@ -52,7 +52,7 @@
       "window": { "x": 1, "y": 1, "width": 85, "height": 93 },
       "orientation": { "mode": "sky", "note": "North up and east left, from the cube's own WCS." },
       "stretch": { "kind": "asinh", "black": 0, "white": 19200, "softening": 100 },
-      "colour": { "kind": "greys", "missing": "#4a4a4a" },
+      "color": { "kind": "greys", "missing": "#4a4a4a" },
       "enlarge": 9,
       "product": {
         "command": "node packages/telescope-cli/src/archives/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05",
@@ -73,7 +73,7 @@
       "window": { "x": 700, "y": 210, "width": 640, "height": 600 },
       "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the resampled mosaic, the first at the bottom." },
       "stretch": { "kind": "asinh", "black": 4.3, "white": 28, "softening": 1.5 },
-      "colour": { "kind": "greys", "missing": "#4a4a4a" },
+      "color": { "kind": "greys", "missing": "#4a4a4a" },
       "enlarge": 1,
       "product": {
         "command": "node packages/telescope-cli/src/archives/jwst/imaging/image3.mts ngc-6720-1558 MIRI-F770W output/jwst-ngc6720",
@@ -93,7 +93,7 @@
       "window": { "x": 1, "y": 1, "width": 360, "height": 180 },
       "orientation": { "mode": "first-row-top", "note": "A longitude-latitude map of the whole body. The first stored row is the north pole, the first column starts at 0 degrees east longitude and east runs to the right." },
       "stretch": { "kind": "linear", "black": -150, "white": 200 },
-      "colour": { "kind": "ramp", "stops": [[0, "#08203a"], [0.4, "#1f5f74"], [0.75, "#c8b26a"], [1, "#fff4d2"]], "missing": "#4a4a4a" },
+      "color": { "kind": "ramp", "stops": [[0, "#08203a"], [0.4, "#1f5f74"], [0.75, "#c8b26a"], [1, "#fff4d2"]], "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
         "command": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt",
@@ -114,7 +114,7 @@
       "window": { "x": 956, "y": 944, "width": 160, "height": 160 },
       "orientation": { "mode": "sky", "note": "North up and east left, from the image's own WCS." },
       "stretch": { "kind": "linear", "black": 55, "white": 102 },
-      "colour": { "kind": "ramp", "stops": [[0, "#000000"], [0.35, "#7a1500"], [0.7, "#e06b1e"], [1, "#fff6c8"]] },
+      "color": { "kind": "ramp", "stops": [[0, "#000000"], [0.35, "#7a1500"], [0.7, "#e06b1e"], [1, "#fff6c8"]] },
       "enlarge": 5,
       "product": {
         "command": "node packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
@@ -134,7 +134,7 @@
       "window": { "x": 1, "y": 1, "width": 128, "height": 128 },
       "orientation": { "mode": "sky", "note": "North up and east left, 0.78 milliarcseconds a pixel, from the reconstruction's own axes." },
       "stretch": { "kind": "linear", "black": 0, "white": 0.000493 },
-      "colour": { "kind": "greys" },
+      "color": { "kind": "greys" },
       "enlarge": 6,
       "product": {
         "command": "node packages/telescope-cli/src/archives/interferometry/image-star.mts packages/telescope-cli/src/archives/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse",
@@ -155,7 +155,7 @@
       "window": { "x": 700, "y": 734, "width": 140, "height": 140 },
       "orientation": { "mode": "first-row-bottom", "note": "The detector rows of the combined image, the first at the bottom. The reduced frame carries no world coordinates, so no sky direction is claimed." },
       "stretch": { "kind": "linear", "black": 0, "white": 6300 },
-      "colour": { "kind": "greys" },
+      "color": { "kind": "greys" },
       "enlarge": 5,
       "product": {
         "command": "node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47",
@@ -193,13 +193,13 @@
       ],
       "window": { "x": 1, "y": 1, "width": 350, "height": 350 },
       "orientation": { "mode": "first-row-bottom", "note": "Sky coordinates binned 2 by 2 pixels, 0.98 arcseconds a bin, the lowest row at the bottom. Sky x runs with falling right ascension and sky y with rising declination, so north is up and east is left." },
-      "colour": { "kind": "channels", "missing": "#4a4a4a" },
+      "color": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
         "command": "node packages/telescope-cli/src/archives/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi",
         "definition": "packages/telescope-cli/src/archives/chandra/programs/casa-acisi.json"
       },
-      "note": "Representative colour, not what an eye would see: the same event list split into a soft, a medium and a hard energy band, on one set of bins. One dot is one detected X-ray photon, so this is counts, not brightness, and the graininess is the photon statistics of a short exposure."
+      "note": "Representative color, not what an eye would see: the same event list split into a soft, a medium and a hard energy band, on one set of bins. One dot is one detected X-ray photon, so this is counts, not brightness, and the graininess is the photon statistics of a short exposure."
     },
     {
       "id": "spitzer-irac-ngc3132",
@@ -231,13 +231,13 @@
       ],
       "window": { "x": 1031, "y": 368, "width": 300, "height": 300 },
       "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the re-made mosaics, the first at the bottom. They keep the observation's own rotation: north is 303.4 degrees and east 213.4 degrees clockwise from up, measured from the mosaic's own WCS." },
-      "colour": { "kind": "channels", "missing": "#4a4a4a" },
+      "color": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
         "command": "node packages/telescope-cli/src/archives/spitzer/mosaic.mts ngc3132-4416768",
         "definition": "packages/telescope-cli/src/archives/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json"
       },
-      "note": "Representative colour, not what an eye would see: three of the four re-made IRAC channels put into red, green and blue. The four channels are mosaicked onto one grid, so no channel is resampled."
+      "note": "Representative color, not what an eye would see: three of the four re-made IRAC channels put into red, green and blue. The four channels are mosaicked onto one grid, so no channel is resampled."
     },
     {
       "id": "keck-kcwi-m42",
@@ -252,7 +252,7 @@
       "window": { "x": 1, "y": 1, "width": 24, "height": 69 },
       "orientation": { "mode": "first-row-bottom", "note": "The cube's spatial axes, the first stored row at the bottom. A column is one 0.68 arcsecond slice and a row 0.29 arcseconds along the slit, so each sample is drawn as a rectangle 14 pixels across and 6 down, which keeps the sky nearly square." },
       "stretch": { "kind": "linear", "black": -4000, "white": 10000 },
-      "colour": { "kind": "greys" },
+      "color": { "kind": "greys" },
       "enlarge": [14, 6],
       "product": {
         "command": "node packages/telescope-cli/src/archives/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits",
@@ -273,7 +273,7 @@
       "window": { "x": 1317, "y": 875, "width": 500, "height": 500 },
       "orientation": { "mode": "first-row-top", "note": "The stored rows of the stack, the first at the top, which puts north up: measured from the stack's own WCS, north is 0.1 degrees and east 269.9 degrees clockwise from up." },
       "stretch": { "kind": "asinh", "black": 3400, "white": 20000, "softening": 60 },
-      "colour": { "kind": "greys" },
+      "color": { "kind": "greys" },
       "enlarge": 1,
       "product": {
         "command": "node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science",
@@ -298,7 +298,7 @@
       "window": { "x": 300, "y": 1921, "width": 640, "height": 384 },
       "orientation": { "mode": "first-row-top", "note": "The three strips of the sixth frame in the order the instrument reads them out: blue at the top, then green, then red. Nothing is rotated, and the strips are not combined." },
       "stretch": { "kind": "linear", "black": 0, "white": 0.3 },
-      "colour": { "kind": "greys" },
+      "color": { "kind": "greys" },
       "enlarge": 1,
       "product": {
         "command": "node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc",

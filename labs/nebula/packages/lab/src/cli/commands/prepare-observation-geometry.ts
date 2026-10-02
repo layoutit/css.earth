@@ -33,7 +33,7 @@ for (const image of catalogue.images) {
   const panel = map.panels.find(item => item.id === 'source');
   if (!panel) throw new Error(`${image.id}: structure map ${image.directory}/map.json has no source panel.`);
   const sourceBytes = await readFile(resolve(image.directory, panel.file));
-  const decoded = await sharp(sourceBytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const decoded = await sharp(sourceBytes).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (decoded.info.width !== image.width || decoded.info.height !== image.height || decoded.info.channels !== 3 ||
       decoded.data.length !== image.width * image.height * 3 || image.width * image.height > 1_000_000)
     throw new Error(`${image.id}: source raster dimensions do not match its map or exceed the working limit.`);

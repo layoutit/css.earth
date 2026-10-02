@@ -18,7 +18,7 @@
       "epoch": "Observation dates not given in selected AVM/image page. Release: 2009-09-28.",
       "masterUrl": "https://cdn.eso.org/images/original/eso0936a.tif",
       "notes": [
-        "Broadband and narrowband colour composite; displayed RGB values have no common calibrated flux scale.",
+        "Broadband and narrowband color composite; displayed RGB values have no common calibrated flux scale.",
         "Publisher AVM reference grid is 7856 × 5261 with an off-centre reference pixel; preserve it instead of substituting TIFF dimensions.",
         "No independent registration or physical depth is established by this intake."
       ],
@@ -42,7 +42,7 @@
       "telescope": "VISTA · VIRCAM",
       "wavelengths": "J / H / Ks near-infrared filters per publisher caption; exact central wavelengths absent from selected record.",
       "coverage": "Full-field strip · 71.81′ × 39.54′; unchanged complete 4000 × 2202 Publication TIFF grid, rotated 29.5°.",
-      "quality": "Official outreach colour image. Sampling ≈1.077″/pixel; delivered PSF/seeing unknown.",
+      "quality": "Official outreach color image. Sampling ≈1.077″/pixel; delivered PSF/seeing unknown.",
       "epoch": "Observation dates not given in selected AVM/image page. Release: 2011-01-05.",
       "masterUrl": "https://cdn.eso.org/images/original/eso1101d.tif",
       "notes": [
@@ -75,7 +75,7 @@
       "masterUrl": "https://esahubble.org/media/archives/images/original/heic1808a.tif",
       "notes": [
         "A small central footprint, not a full Lagoon map. Surrounding blank space must remain unsupported.",
-        "Emission-line colours are a display mapping, not separate calibrated line maps.",
+        "Emission-line colors are a display mapping, not separate calibrated line maps.",
         "Embedded AVM retained exactly; publisher quality Full is metadata completeness, not our astrometric validation."
       ],
       "native": {
@@ -134,7 +134,7 @@
       "epoch": "AVM: IRAC starts 2005-09-16T14:19; MIPS starts 2005-09-27T08:05. Display release: 2011-09-14.",
       "masterUrl": "https://www.spitzer.caltech.edu/system/avm_images/binaries/4757/original/sig11-012.tif?1603796898",
       "notes": [
-        "The caption mentions IRAC alone, while the colour table and AVM correctly identify MIPS at 24 µm.",
+        "The caption mentions IRAC alone, while the color table and AVM correctly identify MIPS at 24 µm.",
         "The TIFF lacks spatial AVM. Exact ICRS TAN WCS and per-band start times come from IPAC AstroPix sig11-012; its matching source ID/native dimensions and publisher link are retained.",
         "No star-match check or quantitative dust-temperature/flux inference is claimed."
       ],

@@ -11,6 +11,6 @@
   "effectiveTemperatureSource": "Bruntt et al. (2010), MNRAS 405, 1907: 6,080 +/- 80 K, as tabulated by Alvarado-Gomez et al. (2018), Table 1 (https://arxiv.org/abs/1710.02438)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
   }
 }

@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.2992 +/- 0.0073 solar radii from Ghachoui et al. 2024, the stellar radius of the default parameter set of TOI-5713 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract); Mass 0.2653 +/- 0.0061 solar masses from Ghachoui et al. 2024, the stellar mass of the default parameter set of TOI-5713 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract); temperature from Ghachoui et al. 2024, the stellar temperature of the default parameter set of TOI-5713 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 1560676770454324224, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 1560676770454324224, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret (2017), A&A 600, A30, via VizieR J/A+A/600/A30.
 

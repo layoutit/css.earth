@@ -67,7 +67,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star, brighter and bluer at the poles from a fit to TESS transits; darkening toward the edge from a model atmosphere.",
+        "qualification": "Color from Gaia's spectrum of the star, brighter and bluer at the poles from a fit to TESS transits; darkening toward the edge from a model atmosphere.",
         "thumbnail": "kelt-9-dataset-color.webp",
         "surface": "kelt-9-surface-color@2x.webp",
         "poles": "kelt-9-poles-color@2x.webp",
@@ -77,7 +77,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of the star, a hot A star. Its fast spin flattens it, the equator 1.089 times the pole, and makes the poles hotter and brighter than the equator (Ahlers et al. 2020, from the uneven shape of KELT-9b's transits in TESS data). The rows are shaded from that fit's gravity-darkening exponent with the Roche model of the other fast-spinning stars: about 10,170 K at the poles and 9,670 K at the equator. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band. The spin axis leans about 87° from KELT-9b's orbit, so the planet passes over the poles."
+        "notes": "The color of Gaia DR3's measured spectrum of the star, a hot A star. Its fast spin flattens it, the equator 1.089 times the pole, and makes the poles hotter and brighter than the equator (Ahlers et al. 2020, from the uneven shape of KELT-9b's transits in TESS data). The rows are shaded from that fit's gravity-darkening exponent with the Roche model of the other fast-spinning stars: about 10,170 K at the poles and 9,670 K at the equator. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band. The spin axis leans about 87° from KELT-9b's orbit, so the planet passes over the poles."
       }
     ]
   },

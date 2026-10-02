@@ -1,7 +1,7 @@
 # Southern Pinwheel (M83)
 
-A ground-based photograph of M83, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, is spread through a modelled disc. Published catalogues of its supernova remnants, HII regions and
+A ground-based photograph of M83, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, is spread through a modelled disc. Published catalogues of its supernova remnants, HII regions and
 Wolf-Rayet sources are drawn as dots on the same disc. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -29,7 +29,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   within 2 px of their images.
 - **Foreground stars:** 69 of the 645 Gaia foreground stars in the image are removed where they show; 301 on the
   galaxy's light are left, and most of the rest are too faint to show.
-- **Colour:** tied to RC3's B-V of 0.66: red/green 1.162 and blue/green 1.263 against 1.126 and 0.891, so red × 0.969
+- **Color:** tied to RC3's B-V of 0.66: red/green 1.162 and blue/green 1.263 against 1.126 and 0.891, so red × 0.969
   and blue × 0.706 in linear light. The publisher's composite ran blue.
 - **Disc:** inclination 24°, line of nodes 45°, support 9.3 kpc (where the frame stops on its tightest side), 32 slabs
   with an exponential of 347 pc over ±3 scale heights. No bulge: S4G's nuclear bulge, round on the sky (axis ratio
@@ -43,15 +43,15 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | HII regions (Long et al. 2022) | 188 | none |
 | Wolf-Rayet sources (Hadfield et al. 2005) | 132 | none |
 
-Dots keep their place in the disc and rise along its axis to heights drawn from the 347 pc layer. Colours are the Milky
+Dots keep their place in the disc and rise along its axis to heights drawn from the 347 pc layer. Colors are the Milky
 Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and
-moves halfway from its kind's colour to the photograph's colour there.
+moves halfway from its kind's color to the photograph's color there.
 
 ## Evidence
 
 - In the app: the default view (left) and tilted (right), with the dots.
   Captured on this branch on 2026-09-29.
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Known problems
 

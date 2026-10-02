@@ -26,7 +26,7 @@
       "license": "MAST public science data terms"
     },
     {
-      "id": "ras-oxford-neptune-true-colour-reference",
+      "id": "ras-oxford-neptune-true-color-reference",
       "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
       "expectedBytes": 338632,
       "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
@@ -461,7 +461,7 @@
           "height": 200
         },
         "reference": {
-          "source": "Irwin et al. 2024 true-colour Neptune reconstruction",
+          "source": "Irwin et al. 2024 true-color Neptune reconstruction",
           "credit": "Patrick Irwin, University of Oxford, and NASA",
           "distribution": "Royal Astronomical Society CC BY 4.0",
           "sourcePath": "source/color/ras-oxford-neptune-true-colors-2024.jpg"

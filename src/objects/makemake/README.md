@@ -1,6 +1,6 @@
 # Makemake
 
-No image resolves Makemake's surface. The display uses a sphere at its approximate 715 km radius. The Color dataset shows one colour for the whole body, computed from photometry of the unresolved disc, and an Illustration dataset shows NASA artwork.
+No image resolves Makemake's surface. The display uses a sphere at its approximate 715 km radius. The Color dataset shows one color for the whole body, computed from photometry of the unresolved disc, and an Illustration dataset shows NASA artwork.
 
 The [navigation marker](source/preparation/navigation.json) keeps the schematic silhouette and whole-disc color, with prepared full-phase curvature shading.
 
@@ -15,31 +15,31 @@ The [navigation marker](source/preparation/navigation.json) keeps the schematic 
 | Solar B−V, V−R, V−I | 0.653, 0.356, 0.701, each ± 0.003 mag | [Ramírez et al. (2012)](https://doi.org/10.1088/0004-637X/752/1/5), ApJ 752, 5, abstract (line-depth-ratio solution) |
 | B, V, R, I effective wavelengths | 438.1, 544.5, 641.1, 798.2 nm | [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/theory/fps/index.php?mode=browse&gname=Generic&gname2=Bessell), Generic/Bessell, checked 2026-09-16 |
 
-The values are transcribed in [the colour record](source/photometry/disc-color.json). Hromakina et al. found no colour change with rotation, within the uncertainties. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference).
+The values are transcribed in [the color record](source/photometry/disc-color.json). Hromakina et al. found no color change with rotation, within the uncertainties. The [CIE 1931 2° color-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference).
 
-The Illustration dataset is not an observation. It shows the base-colour texture of NASA's [Makemake 3D Model](https://science.nasa.gov/resource/makemake-3d-model/), credited to NASA Visualization Technology Applications and Development (VTAD). The original GLB is pinned in [the manifest](source/manifest.json). NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)). The resource page does not say how the texture was made; its terrain, albedo pattern and colour are the artist's.
+The Illustration dataset is not an observation. It shows the base-color texture of NASA's [Makemake 3D Model](https://science.nasa.gov/resource/makemake-3d-model/), credited to NASA Visualization Technology Applications and Development (VTAD). The original GLB is pinned in [the manifest](source/manifest.json). NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)). The resource page does not say how the texture was made; its terrain, albedo pattern and color are the artist's.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Processing
 
-The `disc-integrated-color` method ([disc-integrated-color.ts](../../../packages/bake/src/objects/color/disc-integrated-color.ts)) turns each colour index minus the solar index into reflectance relative to V: 0.789, 1, 1.051 and 0.954 at B, V, R and I. It joins those points with straight lines, integrates them with the CIE 1931 functions under D65 from 380 to 780 nm, scales so V reflectance equals the albedo, and converts to sRGB with the IEC 61966-2-1 matrix. The result, sRGB 240, 233, 211 (#f0e9d3), fills the whole surface map. The navigation marker and catalogue colour use the same value.
+The `disc-integrated-color` method ([disc-integrated-color.ts](../../../packages/bake/src/objects/color/disc-integrated-color.ts)) turns each color index minus the solar index into reflectance relative to V: 0.789, 1, 1.051 and 0.954 at B, V, R and I. It joins those points with straight lines, integrates them with the CIE 1931 functions under D65 from 380 to 780 nm, scales so V reflectance equals the albedo, and converts to sRGB with the IEC 61966-2-1 matrix. The result, sRGB 240, 233, 211 (#f0e9d3), fills the whole surface map. The navigation marker and catalogue color use the same value.
 
 The Illustration texture is carried through the model's own texture coordinates onto the sphere and not repainted. Its longitudes are arbitrary. Color stays the default dataset, and the illustration never counts as imagery: Makemake stays "Shape only".
 
 ## Evidence
 
-Each published colour uncertainty moves an sRGB channel by at most 3 of 255 (B−V ± 0.03 moves blue from 211 to 209–214). The older MBOSS colours from Rabinowitz et al. (2007), which have no V−R, move blue to 218. A 10% lower albedo gives 229, 222, 202.
+Each published color uncertainty moves an sRGB channel by at most 3 of 255 (B−V ± 0.03 moves blue from 211 to 209–214). The older MBOSS colors from Rabinowitz et al. (2007), which have no V−R, move blue to 218. A 10% lower albedo gives 229, 222, 202.
 
-The illustration's area-weighted mean colour is sRGB 160, 119, 103 (#a07767) against the measured #f0e9d3; its linear luminance is about 27% of the measured colour's.
+The illustration's area-weighted mean color is sRGB 160, 119, 103 (#a07767) against the measured #f0e9d3; its linear luminance is about 27% of the measured color's.
 
 ## Known problems
 
-- The colour assumes a straight-line spectrum between the four filter wavelengths, continued with the B−V slope below 438 nm. The effective wavelengths are SVO's values for Vega. The error this adds is not verified against a measured visible spectrum.
+- The color assumes a straight-line spectrum between the four filter wavelengths, continued with the B−V slope below 438 nm. The effective wavelengths are SVO's values for Vega. The error this adds is not verified against a measured visible spectrum.
 - The rendered disc brightness under the shared lighting is not checked against the albedo.
 - Hromakina et al. note the albedo would be about 10% lower if an undetected satellite adds light. The published 0.82 is used unchanged.
-- A uniform colour hides any albedo pattern. Hromakina et al. mention that thermal modelling has needed two albedo terrains; no map of them exists.
-- The Illustration is far darker and redder than the measured colour. It is shown as NASA published it.
+- A uniform color hides any albedo pattern. Hromakina et al. mention that thermal modelling has needed two albedo terrains; no map of them exists.
+- The Illustration is far darker and redder than the measured color. It is shown as NASA published it.
 - Display pole and meridian are arbitrary. The rotation period does not drive an invented ephemeris.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

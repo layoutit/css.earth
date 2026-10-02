@@ -54,7 +54,7 @@
       {
         "id": "thermal",
         "label": "Thermal glow",
-        "qualification": "Black-body colour at its measured dayside temperature, 3,398 K. The disc itself is unresolved.",
+        "qualification": "Black-body color at its measured dayside temperature, 3,398 K. The disc itself is unresolved.",
         "thumbnail": "wasp-33b-dataset-thermal.webp",
         "surface": "wasp-33b-surface-thermal@2x.webp",
         "poles": "wasp-33b-poles-thermal@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...584A..75V/abstract"
         },
         "falseColor": false,
-        "notes": "The colour of WASP-33 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 1.05 µm (LBT Consortium Large Binocular Telescope (LBT) at Mount Graham International Observatory Large Binocular Camera). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+        "notes": "The color of WASP-33 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 1.05 µm (LBT Consortium Large Binocular Telescope (LBT) at Mount Graham International Observatory Large Binocular Camera). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

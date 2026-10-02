@@ -78,7 +78,7 @@ These change paint every frame on purpose, and each has a budget:
 | Exception | What changes | Budget | Why it stays |
 | --- | --- | --- | --- |
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
-| Batched star points (`universe/batched-spatial-points.ts`) | SVG paths of round-capped dots (`M x y h0`), one per prepared paint colour with its alpha byte; a turn or a zoom warps the last paint, and dots a zoom adds arrive through the pacer; a camera that travels without turning repaints them at most every 25 ms and keeps the paint between | One retained path per colour | Camera motion changes paint, never DOM shape |
+| Batched star points (`universe/batched-spatial-points.ts`) | SVG paths of round-capped dots (`M x y h0`), one per prepared paint color with its alpha byte; a turn or a zoom warps the last paint, and dots a zoom adds arrive through the pacer; a camera that travels without turning repaints them at most every 25 ms and keeps the paint between | One retained path per color | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 
@@ -117,7 +117,7 @@ startup bank or first-input refinement gate. Saved reloads prepare the shared wo
 when their camera cannot use the default arrival billboard; world attachment must not restyle a finished surface.
 
 World bodies use their prepared arrival billboard directly, with its baked body radius inside the image. There is no
-world marker atlas or separate context photograph swap. Unresolved bodies use colour dots without fetching images;
+world marker atlas or separate context photograph swap. Unresolved bodies use color dots without fetching images;
 menu and search icons remain UI assets. A mounting scene keeps its camera private until its frame presenter is enabled,
 so resource refreshes cannot expose it before activation. The selected host keeps the same billboard/detail
 opacity split when a flight ends on its system card. Overview controls annotations and orbit context; it does

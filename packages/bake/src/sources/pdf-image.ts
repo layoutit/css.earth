@@ -63,7 +63,7 @@ export function readPdfImage(pdf: Uint8Array, objectNumber: number): PdfImage {
   if (filter !== 'FlateDecode') throw new TypeError(`Object ${objectNumber} uses ${filter ?? 'no or a chained'} filter; only FlateDecode is read.`);
   if (dict.has('DecodeParms')) throw new TypeError(`Object ${objectNumber} states decode parameters (a predictor); they are not read.`);
   const space = name('ColorSpace'), channels = space === 'DeviceRGB' ? 3 : space === 'DeviceGray' ? 1 : 0;
-  if (!channels) throw new TypeError(`Object ${objectNumber} is in ${space ?? 'an indirect or indexed'} colour space; only DeviceRGB and DeviceGray are read.`);
+  if (!channels) throw new TypeError(`Object ${objectNumber} is in ${space ?? 'an indirect or indexed'} color space; only DeviceRGB and DeviceGray are read.`);
   const width = dict.get('Width'), height = dict.get('Height');
   if (dict.get('BitsPerComponent') !== 8 || typeof width !== 'number' || typeof height !== 'number' || !(width > 0 && height > 0)) throw new TypeError(`Object ${objectNumber} is not an eight-bit image of stated size.`);
   const keyword = text.slice(dictEnd).match(/^\s*stream(\r\n|\n)/);

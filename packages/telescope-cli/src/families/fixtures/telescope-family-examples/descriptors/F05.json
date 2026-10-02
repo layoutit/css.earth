@@ -28,7 +28,7 @@
   },
   "members": [
     {
-      "id": "colours",
+      "id": "colors",
       "path": "../../../../../../../src/objects/haumea/source/photometry/disc-color.json",
       "role": "science",
       "mediaType": "application/json"
@@ -43,7 +43,7 @@
       ],
       "locations": [
         {
-          "memberId": "colours"
+          "memberId": "colors"
         }
       ],
       "representation": {
@@ -58,7 +58,7 @@
           "role": "spectral-sampling",
           "coordinates": {
             "kind": "lookup",
-            "memberId": "colours",
+            "memberId": "colors",
             "locator": "effective_wavelength",
             "binBounds": false
           },

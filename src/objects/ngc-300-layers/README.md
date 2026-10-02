@@ -1,7 +1,7 @@
 # NGC 300
 
-A ground-based photograph of NGC 300, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, is spread through a modelled disc. Published catalogues of its planetary nebulae, HII regions,
+A ground-based photograph of NGC 300, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, is spread through a modelled disc. Published catalogues of its planetary nebulae, HII regions,
 Cepheids, OB associations and supernova remnants are drawn as dots on the same disc. Image brightness does not measure
 per-pixel distance.
 
@@ -31,7 +31,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   With the centre moved, they fall within a few pixels of their images; the stated orientation fits.
 - **Foreground stars:** 145 of the 567 Gaia foreground stars in the image are removed where they show; 125 on the
   galaxy's light are left, and most of the rest are too faint to show at the 3000 px face size.
-- **Colour:** tied to RC3's B-V of 0.59: red/green 1.099 and blue/green 1.183 against 1.085 and 0.919, so red × 0.987
+- **Color:** tied to RC3's B-V of 0.59: red/green 1.099 and blue/green 1.183 against 1.085 and 0.919, so red × 0.987
   and blue × 0.777 in linear light. The publisher's composite ran blue.
 - **Disc:** inclination 44°, line of nodes 110°, support 9.4 kpc (where the frame stops on its tightest side), 32 slabs
   with an exponential of 211 pc over ±3 scale heights. No bulge: S4G fits NGC 300 with a disc alone.
@@ -46,15 +46,15 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | OB associations (Pietrzyński et al. 2001) | 117 | none |
 | Supernova remnants (Vučetić et al. 2015) | 22 | none |
 
-Dots keep their place in the disc and rise along its axis to heights drawn from the 211 pc layer. Colours are the Milky
+Dots keep their place in the disc and rise along its axis to heights drawn from the 211 pc layer. Colors are the Milky
 Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and
-moves halfway from its kind's colour to the photograph's colour there.
+moves halfway from its kind's color to the photograph's color there.
 
 ## Evidence
 
 - In the app: the default view (left) and tilted (right), with the dots.
   Captured on this branch on 2026-09-29.
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Known problems
 

@@ -16,7 +16,7 @@ import type { BandColorDisplay } from '../../../color/index.ts';
 /** A decoded photograph: calibrated values and the archive's own verdict on each pixel. */
 export interface ObservationImage {
   width: number; height: number; values: ArrayLike<number>;
-  /** Registered filter planes shown together as colour: interpolated like the values and displayed on one common linear scale. */
+  /** Registered filter planes shown together as color: interpolated like the values and displayed on one common linear scale. */
   colorValues?: readonly ArrayLike<number>[];
   /** Why the detector or the archive's quality data disqualify a pixel, or null. Geometry and photometry are judged later. */
   reject(index: number): string | null;
@@ -123,7 +123,7 @@ export interface SurfacePolicy {
   retainsIllumination: boolean;
   limits: Record<string, unknown>;
   limitations?: string;
-  /** The filter bands' camera alignment a colour format measured once for the whole dataset. */
+  /** The filter bands' camera alignment a color format measured once for the whole dataset. */
   bandAlignment?: Record<string, unknown>;
   /** The registration stage's measurement of the dataset, attached after loading. */
   registration?: Record<string, unknown>;

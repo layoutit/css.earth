@@ -8,7 +8,7 @@ It is one of 3 planets known around GJ 9827. Its orbit and size follow Passegger
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.2089755 d Passegger et al. 2024 (2024A&A...684A..22P), via the NASA Exoplanet Archive ps table (pl_refname PASSEGGER_ET_AL_2024): a/R* derived from its semi-major axis 0.0189 au and stellar radius 0.58 solar radii; Passegger et al. 2024 (2024A&A...684A..22P), via the NASA Exoplanet Archive ps table (pl_refname PASSEGGER_ET_AL_2024): inclination 87.6 degrees Fridén et al. 2026 (2026A&A...710A.242F), via the NASA Exoplanet Archive ps table (pl_refname FRIDEN_ET_AL_2026): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460231.733831 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by gj-9827's measured colour (#ffd8b0, the colour dataset of gj-9827 (src/objects/gj-9827/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by gj-9827's measured color (#ffd8b0, the color dataset of gj-9827 (src/objects/gj-9827/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of GJ 9827's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 70, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -2,8 +2,8 @@
  * and radius from its oscillations (the Mosser scale, the catalogue's recommended values), temperature from APOGEE spectra, and the
  * star's Gaia DR3 source, which places it. One VizieR request per star (J/ApJS/276/69, table4).
  *
- * The colour is the Planck spectrum at the APOGEE temperature: these giants lie hundreds to thousands of parsecs away in the Galactic
- * plane, where interstellar dust reddens their spectra, and the colour routes do not remove it.
+ * The color is the Planck spectrum at the APOGEE temperature: these giants lie hundreds to thousands of parsecs away in the Galactic
+ * plane, where interstellar dust reddens their spectra, and the color routes do not remove it.
  *
  * Only the Gold and Silver categories are drafted: at least two measured large-frequency separations, not flagged as outliers. Any
  * other category, or a value the catalogue leaves empty (-9999), is refused with the star's KIC number and the reason. */
@@ -42,7 +42,7 @@ export function draftFromApokasc(row: ReturnType<typeof parseApokascRow>) {
     text: { card: `A ${row.state === 'RGB' ? 'red giant' : row.state === 'RC' ? 'red-clump giant' : 'giant'} in the Kepler field, ${radius.value.toFixed(0)} times the Sun's width, weighed by its starquakes.`,
       introduction: `Its oscillations give ${mass.value.toFixed(2)} solar masses and ${radius.value.toFixed(1)} solar radii; APOGEE spectra give ${Math.round(row.teff[0]).toLocaleString('en-US')} K at its surface.`,
       locator: `table4, KIC ${row.kic}: Mass, Radius, Teff` },
-    color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'], reason: 'The star lies in the Galactic plane hundreds to thousands of parsecs away, where interstellar dust reddens its spectra, and the colour routes do not remove it; APOGEE measured its temperature' },
+    color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'], reason: 'The star lies in the Galactic plane hundreds to thousands of parsecs away, where interstellar dust reddens its spectra, and the color routes do not remove it; APOGEE measured its temperature' },
     planets: [], companions: [],
   };
 }

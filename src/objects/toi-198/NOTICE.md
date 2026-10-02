@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.418 +/- 0.029 solar radii from Zapatero Osorio et al. 2026, the stellar radius of the default parameter set of TOI-198 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract); Mass 0.417 +/- 0.045 solar masses from Zapatero Osorio et al. 2026, the stellar mass of the default parameter set of TOI-198 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract); temperature from Zapatero Osorio et al. 2026, the stellar temperature of the default parameter set of TOI-198 b in the NASA Exoplanet Archive.
 
-Colour: a Planck spectrum at the temperature of Zapatero Osorio et al. 2026, the stellar temperature of the default parameter set of TOI-198 b in the NASA Exoplanet Archive, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: a Planck spectrum at the temperature of Zapatero Osorio et al. 2026, the stellar temperature of the default parameter set of TOI-198 b in the NASA Exoplanet Archive, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

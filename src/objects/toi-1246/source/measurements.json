@@ -13,6 +13,6 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1246.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.509, rounded to two decimals",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
   }
 }

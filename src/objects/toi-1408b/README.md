@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1408. Its orbit and size follow Korth et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.4247042 d Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): a/R* 8.13; Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): inclination 82.4 degrees Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): e 0.0023 Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): omega 170 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460661.181674 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1408's measured colour (#faf5ff, the colour dataset of toi-1408 (src/objects/toi-1408/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1408's measured color (#faf5ff, the color dataset of toi-1408 (src/objects/toi-1408/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1408's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

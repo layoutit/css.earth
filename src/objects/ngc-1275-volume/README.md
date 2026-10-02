@@ -8,7 +8,7 @@ follows a published fit to NGC 1275's profile. **Depth is modelled, not measured
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [Sloan Digital Sky Survey DR9](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i colour composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 1500 × 1500 px over 6.7 × 6.7 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
+| [Sloan Digital Sky Survey DR9](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i color composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 1500 × 1500 px over 6.7 × 6.7 arcmin, tangent projection, north up. A display composite, not calibrated photometry. |
 | [Sahu, Graham & Davis (2020)](https://arxiv.org/abs/2101.04895) | [Record](../../sources/sahu-2020-spheroid-sersic.json). Table A1, row 49, NGC 1275: the major-axis Sérsic fit to the spheroid in the Spitzer 3.6 μm image, n = 4.78, half-light radius 70.69″. |
 | [2MASS Extended Source Catalog](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233) (Skrutskie et al. 2006) | Row 2MASX J03194823+4130420: position 49.950981°, +41.511681°; K-band 3σ isophote axis ratio 0.83 and position angle −80°. Also the sizes (K-band 20 mag isophotal radius) of 14 masked neighbours. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of 13 masked neighbouring galaxies. |

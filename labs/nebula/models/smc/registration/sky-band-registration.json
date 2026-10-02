@@ -36,7 +36,7 @@
   "fixedWcsChecks": [
     {
       "imageId": "smc-allwise-wide",
-      "blueChannel": "AllWISE W1 colour HiPS blue channel",
+      "blueChannel": "AllWISE W1 color HiPS blue channel",
       "receipt": "labs/nebula/models/smc/registration/allwise-catalogue-direction-gate.json"
     }
   ],
@@ -44,7 +44,7 @@
     {
       "label": "shifted-40px",
       "imageId": "smc-allwise-wide",
-      "blueChannel": "AllWISE W1 colour HiPS blue channel",
+      "blueChannel": "AllWISE W1 color HiPS blue channel",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",

@@ -55,9 +55,9 @@
       "id": "makemake-disc-color",
       "path": "photometry/disc-color.json",
       "origin": "https://doi.org/10.1051/0004-6361/201935274",
-      "credit": "Hromakina et al. (2019), A&A 625, A46; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
+      "credit": "Hromakina et al. (2019), A&A 625, A46; solar colors Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed B-V, V-R, V-I and V geometric albedo (Hromakina 2019 sections 3.4 and 4), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "acquisition": "Transcribed B-V, V-R, V-I and V geometric albedo (Hromakina 2019 sections 3.4 and 4), solar color indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
       "redistribution": "Factual parameter transcription only; no article text or figures",
       "consumers": [
         "assets",
@@ -251,7 +251,7 @@
       "path": "presentation/navigation-marker.svg",
       "id": "makemake-schematic-marker",
       "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
-      "credit": "cssEarth schematic; fill is the measured whole-disc colour",
+      "credit": "cssEarth schematic; fill is the measured whole-disc color",
       "license": "MIT, cssEarth authored schematic"
     },
     {

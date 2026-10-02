@@ -8,7 +8,7 @@ It is the only planet known around TOI-778. Its orbit and size follow Clark et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.6336155 d Clark et al. 2023 (2023AJ....165..207C), via the NASA Exoplanet Archive ps table (pl_refname CLARK_ET_AL__2023): a/R* 7.6; Clark et al. 2023 (2023AJ....165..207C), via the NASA Exoplanet Archive ps table (pl_refname CLARK_ET_AL__2023): inclination 84.7 degrees Clark et al. 2023 (2023AJ....165..207C), via the NASA Exoplanet Archive ps table (pl_refname CLARK_ET_AL__2023): e 0.21 Clark et al. 2023 (2023AJ....165..207C), via the NASA Exoplanet Archive ps table (pl_refname CLARK_ET_AL__2023): omega 28 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459574.942709 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-778's measured colour (#eaeaff, the colour dataset of toi-778 (src/objects/toi-778/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-778's measured color (#eaeaff, the color dataset of toi-778 (src/objects/toi-778/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-778's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (10, 37, 91), folded onto its orbit. Upper limits and rows without an error are left out.
 

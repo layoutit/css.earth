@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by TOI-4511; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by TOI-4511; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "toi-4511b-dataset-shape.webp",
         "surface": "toi-4511b-surface-shape@2x.webp",
         "poles": "toi-4511b-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of TOI-4511 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-4511's light, as its colour dataset measures it."
+        "notes": "No image or color of TOI-4511 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of toi-4511's light, as its color dataset measures it."
       }
     ]
   },

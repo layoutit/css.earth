@@ -1,6 +1,6 @@
 import { RASTER_DENSITY, type AtmosphereRecipe } from './config.ts';
 import { raster, assetPath } from './io.ts';
-import { limbFactors, limbOverlay, scatteringAngles, silhouetteColourWeight, srgbToLinear, linearToSrgb, loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '../photometry/index.ts';
+import { limbFactors, limbOverlay, scatteringAngles, silhouetteColorWeight, srgbToLinear, linearToSrgb, loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '../photometry/index.ts';
 import type { PreparedLimb } from './lighting.ts';
 
 /**
@@ -8,8 +8,8 @@ import type { PreparedLimb } from './lighting.ts';
  * the halo from its PSG limb profile when the recipe names one, from the visible edge outward, lit where the tangent point faces the Sun
  * (../photometry). Three atlases share the frames:
  * - material: disc law and halo, drawn over the visible map;
- * - observation: the same, drawn over the false-colour datasets. The disc law of Venus and Mars is grey or nearly so
- *   (packages/bake/src/photometry/limb.ts), so it does not tint their false colours;
+ * - observation: the same, drawn over the false-color datasets. The disc law of Venus and Mars is grey or nearly so
+ *   (packages/bake/src/photometry/limb.ts), so it does not tint their false colors;
  * - lighting: the disc law alone.
  * The last frame is the shadowless flood frame (light along the view).
  */
@@ -39,7 +39,7 @@ interface FrameOptions {
     light: readonly number[]; recipe: AtmosphereRecipe; limb: PreparedLimb; table: LimbProfile | null;
 }
 
-/** A colour with straight alpha composited over another. */
+/** A color with straight alpha composited over another. */
 function over([tr, tg, tb, ta]: readonly number[], [br, bg, bb, ba]: readonly number[]) {
     const alpha = ta + ba * (1 - ta);
     if (alpha <= 0) return [0, 0, 0, 0];
@@ -77,9 +77,9 @@ function writeFrame({ material, observation, lighting, width, tileSize, frameX, 
                 const normal = [materialX, materialY, Math.sqrt(Math.max(0, 1 - Math.min(1, materialRadius) ** 2))];
                 const { incidence, emission, phase } = scatteringAngles(normal, light, view, emissionFloor);
                 const [r, g, b, a] = limbOverlay(limbFactors(limb.law, incidence, emission, phase), limb.reference);
-                // Where the mesh may not reach, the overlay only darkens, so no colour outlines the planet. Past the
+                // Where the mesh may not reach, the overlay only darkens, so no color outlines the planet. Past the
                 // visible edge a lit halo is drawn over that darkening, so the halo, not a dark ring, meets the disc.
-                const keep = silhouetteColourWeight(radius, limb.polarToEquatorial), disc = [r * keep, g * keep, b * keep, a];
+                const keep = silhouetteColorWeight(radius, limb.polarToEquatorial), disc = [r * keep, g * keep, b * keep, a];
                 const drawn = halo ? over(halo, disc) : disc;
                 add(sums[0], drawn); add(sums[1], drawn); add(sums[2], disc);
                 continue;

@@ -62,8 +62,8 @@ for (const [index, level] of levels!.entries()) if (level.screenBudget !== undef
   fail(`${String(level.bank)}: a level's screenBudget is a positive whole number on an inner level of a bank with a screenBudget, got ${JSON.stringify(level.screenBudget)}.`);
 }
 const palette: string[] = [], points: number[][] = [], counts: number[] = [];
-// Each level's dots, read first: a palette entry is a colour, or once any level sizes its dots a (colour, radius) pair.
-const levelEntries: { position: number[]; colour: string; radius: number }[][] = [];
+// Each level's dots, read first: a palette entry is a color, or once any level sizes its dots a (color, radius) pair.
+const levelEntries: { position: number[]; color: string; radius: number }[][] = [];
 let sized = false;
 let frame: unknown = null, metersPerUnit = 0;
 for (const [index, level] of levels!.entries()) {
@@ -80,22 +80,22 @@ for (const [index, level] of levels!.entries()) {
   else if (parsed.metersPerUnit !== metersPerUnit || parsed.originM.some(value => value !== 0)) fail(`${String(level.bank)} is not in the first level's frame and unit.`);
   const levelPalette = bank.appearance!.palette as string[], levelRadii = bank.appearance!.paletteRadiusPx;
   if (levelRadii !== undefined && (!Array.isArray(levelRadii) || levelRadii.length !== levelPalette.length || !levelRadii.every(value => typeof value === 'number' && value > 0))) {
-    fail(`${String(level.bank)}: paletteRadiusPx holds one positive radius per palette colour.`);
+    fail(`${String(level.bank)}: paletteRadiusPx holds one positive radius per palette color.`);
   }
   levelEntries.push((bank.points as number[][]).map(point => {
-    const colour = levelPalette[point[3]!];
-    if (typeof colour !== 'string') fail(`${String(level.bank)} names a colour its palette lacks.`);
+    const color = levelPalette[point[3]!];
+    if (typeof color !== 'string') fail(`${String(level.bank)} names a color its palette lacks.`);
     const radius = levelRadii ? (levelRadii as number[])[point[3]!]! : typeof bank.appearance!.radiusPx === 'number' ? bank.appearance!.radiusPx : 0.75;
     if (levelRadii) sized = true;
-    return { position: [point[0]!, point[1]!, point[2]!], colour: colour!, radius };
+    return { position: [point[0]!, point[1]!, point[2]!], color: color!, radius };
   }));
   counts.push((bank.points as unknown[]).length);
 }
 const keys: string[] = [], paletteRadiusPx: number[] = [];
-for (const entries of levelEntries) for (const { position, colour, radius } of entries) {
-  const key = sized ? `${colour}|${radius}` : colour;
+for (const entries of levelEntries) for (const { position, color, radius } of entries) {
+  const key = sized ? `${color}|${radius}` : color;
   let entry = keys.indexOf(key);
-  if (entry < 0) { entry = keys.push(key) - 1; palette.push(colour); paletteRadiusPx.push(radius); }
+  if (entry < 0) { entry = keys.push(key) - 1; palette.push(color); paletteRadiusPx.push(radius); }
   points.push([...position, entry]);
 }
 const output = { schema: 'cssearth-catalogue-points@1', id, source: 'stack', meaning: recipe.meaning, frame,

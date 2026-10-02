@@ -26,11 +26,11 @@
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#eaebff, the colour dataset of kelt-7 (src/objects/kelt-7/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#eaebff, the color dataset of kelt-7 (src/objects/kelt-7/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "kelt-7",
           "srgb": "#eaebff",
-          "source": "the colour dataset of kelt-7 (src/objects/kelt-7/source/photometry/stellar-color.json)"
+          "source": "the color dataset of kelt-7 (src/objects/kelt-7/source/photometry/stellar-color.json)"
         }
       }
     }

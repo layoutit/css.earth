@@ -54,7 +54,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's published temperature. The disc itself is unresolved.",
         "thumbnail": "roxs-42b-companion-dataset-color.webp",
         "surface": "roxs-42b-companion-surface-color@2x.webp",
         "poles": "roxs-42b-companion-poles-color@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://arxiv.org/abs/2402.09533"
         },
         "falseColor": false,
-        "notes": "The colour of a 2,600 K blackbody, Inglis et al.'s (2024) model temperature for this star from the pair's blended optical spectrum, modelled as the sum of the two stars."
+        "notes": "The color of a 2,600 K blackbody, Inglis et al.'s (2024) model temperature for this star from the pair's blended optical spectrum, modelled as the sum of the two stars."
       }
     ]
   },

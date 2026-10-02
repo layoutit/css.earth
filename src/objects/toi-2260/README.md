@@ -6,7 +6,7 @@ Its radius and temperature follow Giacalone et al. 2022. The introduction is gen
 
 **Star.** Placement: Gaia DR3 source 1411414596649598208, parallax 9.888 ± 0.012 mas (101.13 pc). Radius 0.94 +/- 0.05 solar radii from Giacalone et al. 2022, the stellar radius of the default parameter set of TOI-2260 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract). Mass 0.99 +/- 0.04 solar masses from Giacalone et al. 2022, the stellar mass of the default parameter set of TOI-2260 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract). Temperature 5,534 K from Giacalone et al. 2022, the stellar temperature of the default parameter set of TOI-2260 b in the NASA Exoplanet Archive. log g 4.49 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1411414596649598208, through the CIE 1931 2° observer: #ffece0. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1411414596649598208, through the CIE 1931 2° observer: #ffece0. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,534 K and log g 4.49 (u1 0.514, u2 0.225): a model, because no fit of this star's limb is used.
 

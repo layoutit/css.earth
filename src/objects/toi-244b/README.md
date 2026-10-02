@@ -8,7 +8,7 @@ It is the only planet known around TOI-244. Its orbit and size follow Castro-Gon
 
 **Orbit.** Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): P 7.39726 d Castro-González et al. 2023 (2023A&A...675A..52C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2023): a/R* 28.1; Castro-González et al. 2023 (2023A&A...675A..52C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2023): inclination 88.32 degrees No archive row states an eccentricity; the orbit is taken as circular Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): transit mid-time 2459489.1482 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-244's measured colour (#ffc988, the colour dataset of toi-244 (src/objects/toi-244/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-244's measured color (#ffc988, the color dataset of toi-244 (src/objects/toi-244/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-244's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (104, 105, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

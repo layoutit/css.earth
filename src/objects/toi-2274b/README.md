@@ -8,7 +8,7 @@ It is the only planet known around TOI-2274. Its orbit and size follow Peláez-T
 
 **Orbit.** Peláez-Torres et al. 2024 (2024A&A...690A..62P), via the NASA Exoplanet Archive ps table (pl_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): P 2.67963 d Peláez-Torres et al. 2024 (2024A&A...690A..62P), via the NASA Exoplanet Archive ps table (pl_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): a/R* 16.91; Peláez-Torres et al. 2024 (2024A&A...690A..62P), via the NASA Exoplanet Archive ps table (pl_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): inclination 87.37 degrees No archive row states an eccentricity; the orbit is taken as circular Peláez-Torres et al. 2024 (2024A&A...690A..62P), via the NASA Exoplanet Archive ps table (pl_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): transit mid-time 2458685.3661 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2274's measured colour (#ffbe8e, the colour dataset of toi-2274 (src/objects/toi-2274/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-2274's measured color (#ffbe8e, the color dataset of toi-2274 (src/objects/toi-2274/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2274's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (74, 80, 81), folded onto its orbit. Upper limits and rows without an error are left out.
 

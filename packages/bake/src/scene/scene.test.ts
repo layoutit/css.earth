@@ -45,7 +45,7 @@ async function prepareAuthored(id:string,direction:[number,number,number],edit:(
   const url=(template:string)=>raster.publicBase+outputName(template,RASTER_DENSITY);
   assets.interior={cutaway:source.presentation.cutaway,metallicCoreRadiusFraction:source.metallicCoreRadiusFraction,coreUrl:url(raster.interior.coreOutput),corePolesUrl:url(raster.interior.corePolesOutput),sectionUrl:url(raster.interior.sectionOutput),outerPolesUrl:url(raster.interior.outerPolesOutput)};
  }
- // The scene record carries the atmosphere bake's metadata; a fixed reference colour and outer radius stand in for the bake.
+ // The scene record carries the atmosphere bake's metadata; a fixed reference color and outer radius stand in for the bake.
  if(raster.atmosphere){const atmosphere=raster.atmosphere,halo=atmosphere.halo===undefined?null:await loadLimbProfile(join(fixtureRoot,root),atmosphere.halo);assets.atmosphere={limb:{model:'published-photometric-models-relative-to-the-flood-lit-disc-centre',models:atmosphere.limb.models,referenceColor:[128,128,128],referenceSource:'fixture'},halo:halo?{model:'nasa-psg-full-phase-limb-profile-single-scattering-day-side',table:atmosphere.halo!,radiusKm:halo.radiusKm,edgeAltitudeKm:atmosphere.haloEdgeAltitudeKm!,topAltitudeKm:halo.altitudesKm[halo.altitudesKm.length-1],outerRadiusScale:1}:null};}
  const outputDirectory=await mkdtemp(join(tmpdir(),'geometry-parity-'));
  try{

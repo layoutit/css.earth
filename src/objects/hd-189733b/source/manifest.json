@@ -57,7 +57,7 @@
     {
       "id": "hd-189733b-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the deposited MIRI temperature map on the reference sphere, false colour, observed longitudes only, transparent plates",
+      "origin": "Repository-authored raster recipe: the deposited MIRI temperature map on the reference sphere, false color, observed longitudes only, transparent plates",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."

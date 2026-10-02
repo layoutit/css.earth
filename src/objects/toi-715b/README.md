@@ -8,7 +8,7 @@ It is the only planet known around TOI-715. Its orbit and size follow Dransfield
 
 **Orbit.** Dransfield et al. 2024 (2024MNRAS.527...35D), via the NASA Exoplanet Archive ps table (pl_refname DRANSFIELD_ET_AL_2024): P 19.288004 d Dransfield et al. 2024 (2024MNRAS.527...35D), via the NASA Exoplanet Archive ps table (pl_refname DRANSFIELD_ET_AL_2024): a/R* derived from its semi-major axis 0.083 au and stellar radius 0.24 solar radii; Dransfield et al. 2024 (2024MNRAS.527...35D), via the NASA Exoplanet Archive ps table (pl_refname DRANSFIELD_ET_AL_2024): inclination 89.856 degrees No archive row states an eccentricity; the orbit is taken as circular Dransfield et al. 2024 (2024MNRAS.527...35D), via the NASA Exoplanet Archive ps table (pl_refname DRANSFIELD_ET_AL_2024): transit mid-time 2459002.63051 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-715's measured colour (#ffca7b, the colour dataset of toi-715 (src/objects/toi-715/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-715's measured color (#ffca7b, the color dataset of toi-715 (src/objects/toi-715/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-715's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (96, 97, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

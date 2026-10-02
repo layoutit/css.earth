@@ -6,7 +6,7 @@ Its radius and temperature follow Bonomo et al. 2023. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 2643952940813536768, parallax 16.130 ± 0.018 mas (62.00 pc). Radius 0.681 +/- 0.018 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of K2-141 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Mass 0.708 +/- 0.028 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of K2-141 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Temperature 4,570 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of K2-141 b in the NASA Exoplanet Archive. log g 4.62 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2643952940813536768, through the CIE 1931 2° observer: #ffccac. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2643952940813536768, through the CIE 1931 2° observer: #ffccac. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,570 K and log g 4.62 (u1 0.762, u2 0.031): a model, because no fit of this star's limb is used.
 

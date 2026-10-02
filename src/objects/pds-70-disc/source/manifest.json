@@ -40,7 +40,7 @@
       "path": "src/objects/pds-70-disc/source/benisty-2021-figure-1-colormap.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The publisher's colour map the dust dataset is shown in, read from the published figure as the file itself records (the colour bar of Benisty et al. (2021), Figure 1, left panel (robust 0.5), decoded from the figure in the paper's arXiv source: matplotlib's inferno map, linear from -24.71 to 389.56 microJy/beam)."
+        "reason": "The publisher's color map the dust dataset is shown in, read from the published figure as the file itself records (the color bar of Benisty et al. (2021), Figure 1, left panel (robust 0.5), decoded from the figure in the paper's arXiv source: matplotlib's inferno map, linear from -24.71 to 389.56 microJy/beam)."
       }
     },
     {

@@ -32,7 +32,7 @@ Both photographs are sampled from their original grids with a 2 × 2 footprint i
 
 **Relative albedo.** Values are dimensionless and normalised around 1, shown on a 0.5–1.5 scale that saturates above 1.5. The GeoTIFF ends at 359.151742419° East and 89.575871210° South, and those strips stay missing.
 
-**VIMS.** The [VIMS interpretation](source/vims/INTERPRETATION.md) defines the fields and conversion; `source/vims/prepare-maps.json` specifies it. Infrared shows three measured reflectance channels in false colour. Ice absorption is a continuum-relative indicator. The archived mission-to-mosaic reduction is not reproduced.
+**VIMS.** The [VIMS interpretation](source/vims/INTERPRETATION.md) defines the fields and conversion; `source/vims/prepare-maps.json` specifies it. Infrared shows three measured reflectance channels in false color. Ice absorption is a continuum-relative indicator. The archived mission-to-mosaic reduction is not reproduced.
 
 Rings are not rendered: the debris disk inferred by [Jones et al. 2008](https://doi.org/10.1126/science.1151524) was not found by the Cassini imaging search of [Tiscareno et al. 2010](https://doi.org/10.1029/2010GL043663). The very tenuous exosphere gets no halo.
 

@@ -77,7 +77,7 @@ self-luminous, so the map is evenly bright, without the star's shading.
   mostly the detector's settling over the first hours of the phase curve.
 - **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations
   of -1.2 to +0.1 minutes are not drawn.
-- **The Illustration dataset is art, not data.** Nobody has resolved this planet's disc. Its colours, clouds and terrain
+- **The Illustration dataset is art, not data.** Nobody has resolved this planet's disc. Its colors, clouds and terrain
   are the artist's, its longitudes are arbitrary, and NASA does not say how it was made.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

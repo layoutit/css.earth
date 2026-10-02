@@ -32,7 +32,7 @@ test('a self-luminous planet scaffolds the emissive build Beta Pictoris c was ma
   assert.equal(made(`${o}/source/measurements.json`).effectiveTemperatureK, 1250);
 });
 
-test('a star on a hosted orbit scaffolds as a self-luminous star with its temperature colour', async () => {
+test('a star on a hosted orbit scaffolds as a self-luminous star with its temperature color', async () => {
   const { readFile } = await import('node:fs/promises');
   const json = async (path: string) => JSON.parse(await readFile(new URL(`../../../../${path}`, import.meta.url), 'utf8')) as Record<string, any>;
   const [body, host] = [await json('packages/astronomy/data/bodies/vhs-1256-1257-companion.json'), await json('packages/astronomy/data/bodies/vhs-1256-1257.json')];

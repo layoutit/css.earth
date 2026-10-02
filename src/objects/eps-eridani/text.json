@@ -43,9 +43,9 @@
   },
   "datasets": {
     "color": {
-      "title": "Colour",
+      "title": "Photosphere color",
       "detail": "From its spectrum",
-      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
     },
     "dust-ring": {
       "title": "Dust ring, 1.3 mm",

@@ -6,7 +6,7 @@ Its radius and temperature follow Gan et al. 2022. The introduction is generated
 
 **Star.** Placement: Gaia DR3 source 2096535783864546944, parallax 29.976 ± 0.017 mas (33.36 pc). Radius 0.34 +/- 0.02 solar radii from Gan et al. 2022, the stellar radius of the default parameter set of TOI-2136 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract). Mass 0.34 +/- 0.02 solar masses from Gan et al. 2022, the stellar mass of the default parameter set of TOI-2136 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract). Temperature 3,342 K from Gan et al. 2022, the stellar temperature of the default parameter set of TOI-2136 b in the NASA Exoplanet Archive. log g 4.91 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2096535783864546944, through the CIE 1931 2° observer: #ffc884. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2096535783864546944, through the CIE 1931 2° observer: #ffc884. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,342 K and log g 4.91 (u1 0.158, u2 0.453): a model, because no fit of this star's limb is used.
 

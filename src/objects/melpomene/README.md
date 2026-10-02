@@ -65,6 +65,6 @@ Independent nearest-triangle sampling (8192 area-stratified samples each way) me
 
 - Shape uses the neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
-- The SPHERE photograph is not albedo or colour. The frames see Melpomene from 5° south to 56° north, so surface the survey did not see keeps the missing-imagery grid.
+- The SPHERE photograph is not albedo or color. The frames see Melpomene from 5° south to 56° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

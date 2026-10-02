@@ -6,7 +6,7 @@ Its radius and temperature follow Mayo et al. 2018. The introduction is generate
 
 **Star.** Placement: Gaia DR3 source 3607243530404017280, parallax 6.173 ± 0.019 mas (162.00 pc). Radius 0.912206 +/- 0.095801 solar radii from Mayo et al. 2018, the stellar radius of the default parameter set of K2-190 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract). Mass 0.904597 +/- 0.032702 solar masses from Mayo et al. 2018, the stellar mass of the default parameter set of K2-190 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract). Temperature 5,631 K from Mayo et al. 2018, the stellar temperature of the default parameter set of K2-190 b in the NASA Exoplanet Archive. log g 4.47 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 3607243530404017280, through the CIE 1931 2° observer: #fff0e9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 3607243530404017280, through the CIE 1931 2° observer: #fff0e9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,631 K and log g 4.47 (u1 0.491, u2 0.239): a model, because no fit of this star's limb is used.
 

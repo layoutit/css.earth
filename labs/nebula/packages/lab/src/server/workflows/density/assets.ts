@@ -45,7 +45,7 @@ export async function bakePreviews(root: string, catalogue: any, ids: string[]) 
       } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
       console.log(`IMAGE_BAKE ${input.id}: preparing native-image preview`);
       const maximum = input.maxPixels ?? catalogue.maxPixels;
-      const pixels = await sharp(original, { unlimited: input.allowLargeTiff === true }).toColourspace('srgb')
+      const pixels = await sharp(original, { unlimited: input.allowLargeTiff === true }).toColorspace('srgb')
         .resize({ width: maximum, height: maximum, fit: 'inside', withoutEnlargement: true })
         .webp({ quality: 92, alphaQuality: 100, effort: 5 }).toBuffer();
       await writeAtomic(resolve(root, target.directory, overlay.texturePath), pixels);
@@ -69,7 +69,7 @@ export async function bakeSeparationPreviews(root: string, planPath: string, ima
     const file = layer.id === 'diffuse' ? 'diffuse.png' : 'stars.png';
     const original = await pinned(root, { path: `${recipe.outputDirectory}/${file}` });
     const maximum = Math.max(layer.widthPx, layer.heightPx);
-    const pixels = await sharp(original, { unlimited: true }).toColourspace('srgb')
+    const pixels = await sharp(original, { unlimited: true }).toColorspace('srgb')
       .resize({ width: maximum, height: maximum, fit: 'inside', withoutEnlargement: true })
       .webp({ quality: 92, alphaQuality: 100, effort: 5 }).toBuffer();
     await writeAtomic(resolve(root, layer.texturePath), pixels);

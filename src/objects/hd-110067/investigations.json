@@ -36,7 +36,7 @@
       "id": "published-limb-model",
       "subject": "ESPRESSO-band limb darkening",
       "status": "included",
-      "finding": "Zak et al. (2024), section 4: fixed model coefficients u1=0.564 and u2=0.145 from ExoCTK ATLAS9 in 380–788 nm. Applied achromatically to the measured colour; not a fitted or resolved intensity profile.",
+      "finding": "Zak et al. (2024), section 4: fixed model coefficients u1=0.564 and u2=0.145 from ExoCTK ATLAS9 in 380–788 nm. Applied achromatically to the measured color; not a fitted or resolved intensity profile.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202450570"
       ]

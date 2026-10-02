@@ -70,6 +70,6 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 - Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation includes global shape, not height above a gravitational equipotential.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
 - Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
-- The SPHERE photograph shows photographed illumination, not albedo or colour. The frames see Pallas from 63° to 70° south, so surface the survey did not see keeps the missing-imagery grid.
+- The SPHERE photograph shows photographed illumination, not albedo or color. The frames see Pallas from 63° to 70° south, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

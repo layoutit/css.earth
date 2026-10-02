@@ -55,6 +55,6 @@ Top: the M87 page, front and two turns. Bottom: the M87\* page from 720,000 ligh
 ## Known problems
 
 - One smooth spheroid: the halo's asymmetries and tidal features are spread through it like the rest of its light.
-- The colour is ESO's tint of a one-band image.
+- The color is ESO's tint of a one-band image.
 - The two globular-cluster catalogues overlap in the centre: a cluster in both is drawn twice.
 - The jet is not drawn.

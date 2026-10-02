@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1224. Its orbit and size follow Thao et 
 
 **Orbit.** Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): P 4.1782745 d Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): a/R* 18.9; Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): inclination 89.19 degrees No archive row states an eccentricity; the orbit is taken as circular Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): transit mid-time 2458327.70236 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1224's measured colour (#ffc684, the colour dataset of toi-1224 (src/objects/toi-1224/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1224's measured color (#ffc684, the color dataset of toi-1224 (src/objects/toi-1224/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1224's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (68, 93, 95), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 175.931 au and total mass 0.1853 solar masses, 5,421.2 years of 365.25 d. Poon et al. (2024, AJ 168, 270; doi:10.3847/1538-3881/ad84e5; arXiv:2410.02672), section 3.4: orbitize! OFTI on the four Keck/NIRC2 positions of b relative to A of Dupuy et al. (2023, Table 2), total mass 0.152 +/- 0.010 solar masses (Dupuy et al.) and parallax 47.27 +/- 0.47 mas; they report a 383 +99/-150 au, e 0.70 +0.07/-0.09, i 23 +10/-13 degrees and release no posterior. The maximum of orbitize!'s own posterior (ln L -31.23), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (packages/telescope-cli/src/new-object/hosted-orbits/orbitize-fit.py, src/objects/vhs-1256-1257-b/source/orbits/fit.json).",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of VHS 1256-1257 b is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of VHS 1256-1257 b is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 1100,
   "effectiveTemperatureSource": "1100 K: the best-matching model of Miles et al. (2023, ApJL 946, L6) to the JWST NIRSpec and MIRI spectrum, https://arxiv.org/abs/2209.00620",

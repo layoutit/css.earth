@@ -8,7 +8,7 @@ It is the only planet known around TOI-1080. Its orbit and size follow Gómez Ma
 
 **Orbit.** Gómez Maqueo Chew et al. 2026 (2026MNRAS.548ag438G), via the NASA Exoplanet Archive ps table (pl_refname GOMEZ_MAQUEO_CHEW_ET_AL_2026): P 3.9652482 d Gómez Maqueo Chew et al. 2026 (2026MNRAS.548ag438G), via the NASA Exoplanet Archive ps table (pl_refname GOMEZ_MAQUEO_CHEW_ET_AL_2026): a/R* 29.3; Gómez Maqueo Chew et al. 2026 (2026MNRAS.548ag438G), via the NASA Exoplanet Archive ps table (pl_refname GOMEZ_MAQUEO_CHEW_ET_AL_2026): inclination 89.26 degrees No archive row states an eccentricity; the orbit is taken as circular Gómez Maqueo Chew et al. 2026 (2026MNRAS.548ag438G), via the NASA Exoplanet Archive ps table (pl_refname GOMEZ_MAQUEO_CHEW_ET_AL_2026): transit mid-time 2459756.40002 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1080's measured colour (#ffc676, the colour dataset of toi-1080 (src/objects/toi-1080/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1080's measured color (#ffc676, the color dataset of toi-1080 (src/objects/toi-1080/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1080's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (93, 103, 104), folded onto its orbit. Upper limits and rows without an error are left out.
 

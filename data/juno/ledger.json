@@ -43,7 +43,7 @@
     {
       "target": "JUPITER",
       "images": 41339,
-      "colourImages": 16420,
+      "colorImages": 16420,
       "orbits": [
         0,
         1,
@@ -134,7 +134,7 @@
     {
       "target": "SPACE",
       "images": 399,
-      "colourImages": 199,
+      "colorImages": 199,
       "orbits": [
         0
       ],
@@ -145,7 +145,7 @@
     {
       "target": "IO",
       "images": 255,
-      "colourImages": 247,
+      "colorImages": 247,
       "orbits": [
         8,
         10,
@@ -192,7 +192,7 @@
     {
       "target": "EUROPA",
       "images": 52,
-      "colourImages": 52,
+      "colorImages": 52,
       "orbits": [
         17,
         18,
@@ -208,7 +208,7 @@
     {
       "target": "J RINGS",
       "images": 52,
-      "colourImages": 3,
+      "colorImages": 3,
       "orbits": [
         1,
         3,
@@ -235,7 +235,7 @@
     {
       "target": "GANYMEDE",
       "images": 34,
-      "colourImages": 34,
+      "colorImages": 34,
       "orbits": [
         1,
         24,
@@ -250,7 +250,7 @@
     {
       "target": "EARTH",
       "images": 18,
-      "colourImages": 6,
+      "colorImages": 6,
       "orbits": [
         0
       ],
@@ -261,7 +261,7 @@
     {
       "target": "THEBE",
       "images": 9,
-      "colourImages": 9,
+      "colorImages": 9,
       "orbits": [
         68,
         70,
@@ -275,7 +275,7 @@
     {
       "target": "AMALTHEA",
       "images": 6,
-      "colourImages": 6,
+      "colorImages": 6,
       "orbits": [
         63,
         66
@@ -287,7 +287,7 @@
     {
       "target": "MOON",
       "images": 2,
-      "colourImages": 1,
+      "colorImages": 1,
       "orbits": [
         0
       ],
@@ -310,7 +310,7 @@
     {
       "id": "jupiter",
       "target": "JUPITER",
-      "colourImages": 16420,
+      "colorImages": 16420,
       "measuredImages": 0,
       "programs": [],
       "castBy": [],
@@ -320,7 +320,7 @@
     {
       "id": "io",
       "target": "IO",
-      "colourImages": 247,
+      "colorImages": 247,
       "measuredImages": 0,
       "programs": [],
       "castBy": [],
@@ -330,7 +330,7 @@
     {
       "id": "europa",
       "target": "EUROPA",
-      "colourImages": 52,
+      "colorImages": 52,
       "measuredImages": 4,
       "programs": [
         "europa-pj45"
@@ -342,7 +342,7 @@
     {
       "id": "ganymede",
       "target": "GANYMEDE",
-      "colourImages": 34,
+      "colorImages": 34,
       "measuredImages": 0,
       "programs": [],
       "castBy": [],
@@ -352,7 +352,7 @@
     {
       "id": "earth",
       "target": "EARTH",
-      "colourImages": 6,
+      "colorImages": 6,
       "measuredImages": 0,
       "programs": [],
       "castBy": [],
@@ -362,7 +362,7 @@
     {
       "id": "thebe",
       "target": "THEBE",
-      "colourImages": 9,
+      "colorImages": 9,
       "measuredImages": 0,
       "programs": [],
       "castBy": [],
@@ -372,7 +372,7 @@
     {
       "id": "amalthea",
       "target": "AMALTHEA",
-      "colourImages": 6,
+      "colorImages": 6,
       "measuredImages": 0,
       "programs": [],
       "castBy": [],
@@ -382,7 +382,7 @@
     {
       "id": "moon",
       "target": "MOON",
-      "colourImages": 1,
+      "colorImages": 1,
       "measuredImages": 0,
       "programs": [],
       "castBy": [],

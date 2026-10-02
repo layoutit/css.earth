@@ -1,7 +1,7 @@
 # NGC 3521
 
-An observatory photograph of NGC 3521, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no dots. Image brightness does not measure per-pixel distance.
+An observatory photograph of NGC 3521, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no dots. Image brightness does not measure per-pixel distance.
 
 ## Sources
 
@@ -20,7 +20,7 @@ integrated colour, lies flat on its measured disc. No catalogue of its nebulae o
   a star within 4 px, and the catalogued centre lands on the nucleus.
 - **Foreground stars:** 28 of the 29 Gaia foreground stars in the image are removed where they show; 0 on extended
   light are left.
-- **Colour:** tied to RC3's B-V of 0.81: red/green 1.234 and blue/green 1.028 against 1.227 and 0.825, so red × 0.994
+- **Color:** tied to RC3's B-V of 0.81: red/green 1.234 and blue/green 1.028 against 1.227 and 0.825, so red × 0.994
   and blue × 0.803. in linear light.
 - **Disc:** inclination 73°, line of nodes 160°, drawn as one flat image on the midplane. The support radius, 10.9 kpc, is where the frame stops on its tightest side.
 - **Near side:** the catalogue gives the tilt, not which edge is nearer. The dust lanes stand out against the bulge on the west
@@ -37,7 +37,7 @@ integrated colour, lies flat on its measured disc. No catalogue of its nebulae o
 The NGC 3521 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-02: the default
 arrival, then the camera turned toward the side and to above the disc.
 
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Measured, chosen and inferred
 

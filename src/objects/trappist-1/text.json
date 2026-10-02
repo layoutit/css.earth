@@ -29,9 +29,9 @@
   },
   "datasets": {
     "color": {
-      "title": "Photosphere colour",
+      "title": "Photosphere color",
       "detail": "From its spectrum",
-      "summary": "Gaia colour with modeled I+z limb darkening from Gillon et al. (2016); no resolved image.",
+      "summary": "Gaia color with modeled I+z limb darkening from Gillon et al. (2016); no resolved image.",
       "sources": [
         {
           "catalogueId": "gaia-dr3-trappist-1",

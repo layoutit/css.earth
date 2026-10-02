@@ -42,7 +42,7 @@ Repeat `--object` for more targets; `--max-images` accepts 1–12 per object and
 
 ## Recognition previews and apparent extents
 
-[presentation.json](presentation.json) adds 110 north-up ICRS DSS2 colour cutouts, 192×192 pixels, for recognising targets. They are not science observations or reconstruction inputs. Local JPEGs stay ignored; the supplement pins their service URLs and dimensions. To restore them:
+[presentation.json](presentation.json) adds 110 north-up ICRS DSS2 color cutouts, 192×192 pixels, for recognising targets. They are not science observations or reconstruction inputs. Local JPEGs stay ignored; the supplement pins their service URLs and dimensions. To restore them:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -53,7 +53,7 @@ pnpm lab:nebula
 
 `--object=m42` restricts restoration to one object. The command never overwrites the catalogue or archive inventory.
 
-- **Image source:** [CDS DSS2 colour HiPS properties](https://alasky.cds.unistra.fr/DSS/DSSColor/properties), DOI [10.26093/cds/aladin/ht9n-7r](https://doi.org/10.26093/cds/aladin/ht9n-7r), through [HiPS2FITS](https://alasky.cds.unistra.fr/hips-image-services/hips2fits). Red and blue photographic plates make the RGB composite, with green as their mean; this is not calibrated photometry. Credit: Digitized Sky Survey, STScI/NASA; colour composition and HiPS by CDS. The HiPS properties declare ODbL-1.0; the plates keep the [STScI-listed copyright provisions](https://archive.stsci.edu/dss/copyright.html). The full acknowledgement is in [the source properties](presentation-sources/dss2-properties.txt).
+- **Image source:** [CDS DSS2 color HiPS properties](https://alasky.cds.unistra.fr/DSS/DSSColor/properties), DOI [10.26093/cds/aladin/ht9n-7r](https://doi.org/10.26093/cds/aladin/ht9n-7r), through [HiPS2FITS](https://alasky.cds.unistra.fr/hips-image-services/hips2fits). Red and blue photographic plates make the RGB composite, with green as their mean; this is not calibrated photometry. Credit: Digitized Sky Survey, STScI/NASA; color composition and HiPS by CDS. The HiPS properties declare ODbL-1.0; the plates keep the [STScI-listed copyright provisions](https://archive.stsci.edu/dss/copyright.html). The full acknowledgement is in [the source properties](presentation-sources/dss2-properties.txt).
 - **Historical apparent extents:** the [NASA/GSFC HEASARC Messier table](https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html), mainly Hirshfeld & Sinnott's *Sky Catalog 2000.0*, Volume 2 (1985), kept in [the query response](presentation-sources/facts.xml). Its 109 rows omit M102. M8/M17/M20 use the diffuse-nebula dimensions, and M43/M78/M82 fill unknown axes. All are approximate historical measures.
 - **M16:** [Sharpless (1959), CDS VII/20](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/20), Sh 2-49, reports a **90′ maximum H II-region diameter** for the extended Eagle region ([retrieved row](presentation-sources/sharpless.tsv)). Its B1900 centre is not substituted for the ICRS coordinates.
 - **M40/M73:** M40's **50″ optical-pair separation** is labelled as such, not a nebula diameter. M73's extent stays unknown.
@@ -63,13 +63,13 @@ Thumbnail framing uses 1.4× the adopted major extent with a 180″ minimum, or 
 
 ## Centered survey images
 
-The catalogue gallery uses CDS HiPS colour products through the [HiPS2FITS JPEG cutout service](https://alasky.cds.unistra.fr/hips-image-services/hips2fits), centred on each object at its display extent. No mosaics are committed.
+The catalogue gallery uses CDS HiPS color products through the [HiPS2FITS JPEG cutout service](https://alasky.cds.unistra.fr/hips-image-services/hips2fits), centred on each object at its display extent. No mosaics are committed.
 
 | Product | Published mapping and provenance |
 | --- | --- |
-| `CDS/P/DSS2/color` | Red/blue photographic plates, with green from their mean; STScI/NASA with Palomar and UK Schmidt plates; colour/HiPS processing CDS. [Published properties and full plate acknowledgement](https://alasky.cds.unistra.fr/DSS/DSSColor/properties), [survey source](https://archive.stsci.edu/dss/). The existing DSS acknowledgement above also applies. |
-| `CDS/P/allWISE/color` | Red W4 (22μm), green W2 (4.6μm), blue W1 (3.4μm), from atlas imagery. NASA-funded WISE/NEOWISE; UCLA, JPL-Caltech and IPAC; CDS colour/HiPS product. [Published properties and acknowledgement](https://alasky.cds.unistra.fr/AllWISE/RGB-W4-W2-W1/properties), [IRSA mission and release documentation](https://irsa.ipac.caltech.edu/Missions/wise.html). Atlas seams can be conspicuous, including around M24. |
-| `CDS/P/2MASS/color` | Near-infrared J/H/Ks colour; University of Massachusetts and IPAC/Caltech, funded by NASA and NSF; CDS colour/HiPS product. [Published properties](https://alasky.cds.unistra.fr/2MASS/Color/properties), [IRSA source and acknowledgement](https://irsa.ipac.caltech.edu/Missions/2mass.html). Strong stellar signal does not imply visible diffuse gas. |
+| `CDS/P/DSS2/color` | Red/blue photographic plates, with green from their mean; STScI/NASA with Palomar and UK Schmidt plates; color/HiPS processing CDS. [Published properties and full plate acknowledgement](https://alasky.cds.unistra.fr/DSS/DSSColor/properties), [survey source](https://archive.stsci.edu/dss/). The existing DSS acknowledgement above also applies. |
+| `CDS/P/allWISE/color` | Red W4 (22μm), green W2 (4.6μm), blue W1 (3.4μm), from atlas imagery. NASA-funded WISE/NEOWISE; UCLA, JPL-Caltech and IPAC; CDS color/HiPS product. [Published properties and acknowledgement](https://alasky.cds.unistra.fr/AllWISE/RGB-W4-W2-W1/properties), [IRSA mission and release documentation](https://irsa.ipac.caltech.edu/Missions/wise.html). Atlas seams can be conspicuous, including around M24. |
+| `CDS/P/2MASS/color` | Near-infrared J/H/Ks color; University of Massachusetts and IPAC/Caltech, funded by NASA and NSF; CDS color/HiPS product. [Published properties](https://alasky.cds.unistra.fr/2MASS/Color/properties), [IRSA source and acknowledgement](https://irsa.ipac.caltech.edu/Missions/2mass.html). Strong stellar signal does not imply visible diffuse gas. |
 
 All views use TAN/ICRS, zero rotation and the same centre and field. This gives a shared sky comparison, not a fitted registration or complete faint-emission coverage.
 

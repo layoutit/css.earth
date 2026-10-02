@@ -97,7 +97,7 @@
         ]
       ],
       "steps": 15,
-      "basis": "This catalogue has no g, r and z fluxes to colour a galaxy as DESI's are coloured. Each galaxy takes the median colour DESI's own galaxies show in its redshift bin (column 6, bins 0.02 wide from 0.1): each channel's median over the prepared DESI bank's colours, which wisescos-sample.mts prints. The colour says how galaxies at that distance look, not how this one does."
+      "basis": "This catalogue has no g, r and z fluxes to color a galaxy as DESI's are colored. Each galaxy takes the median color DESI's own galaxies show in its redshift bin (column 6, bins 0.02 wide from 0.1): each channel's median over the prepared DESI bank's colors, which wisescos-sample.mts prints. The color says how galaxies at that distance look, not how this one does."
     },
     "toneBy": {
       "magnitudeColumn": 5,
