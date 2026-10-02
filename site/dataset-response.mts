@@ -3,12 +3,16 @@ import { parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/
 import { parseHTML } from 'linkedom';
 
 import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedDataset,loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
-import { parseSharedView, formatSharedView } from '@cssearth/renderer/navigation';
+import { parseSharedView, formatSharedView, type SharedView } from '@cssearth/renderer/navigation';
+import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
+import { serializePreparedMatrix4 } from '@cssearth/core';
+import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
 
 import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
 import { preparedObjectUrl } from './prepared-object-path.mts';
+import { defaultWidthShare } from './default-width-share.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -117,11 +121,21 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   if (activeDataset) stage.dataset.preparedDataset = activeDataset;
   stage.dataset.preparedSettings = JSON.stringify(settings);
   stage.innerHTML = selected.html;
-  if (saved) {
-    const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
-    if (!frame) throw new RangeError('A saved view requires a prepared world frame.');
+  const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
+  if (saved && !frame) throw new RangeError('A saved view requires a prepared world frame.');
+  // Without a saved view the scene takes the pose of a fresh mount, framed at the landscape share of the viewport width the
+  // live camera fits a body to (camera-layout.ts); CSS resolves the focal length, so every screen gets that share. The
+  // prepared tree's own pose is only a mount point: it leaves depth unscaled, which drew each polar cap as a hole, and its
+  // fixed size overflowed a phone (2026-10-02).
+  const share = defaultWidthShare(definition.camera);
+  const view: SharedView | null = saved ?? (frame && share ? {
+    camera: { distanceKilometers: distanceForSilhouetteRadius(frame.bodyRadiusM, 1, share.diameterOverFocal / 2) / 1000, pose: { schema: 'cssearth-camera-pose@2',
+      scene: serializePreparedMatrix4(preparedSceneMatrix(definition.camera, definition.camera.defaultControlPitchDegrees, definition.camera.defaultControlYawDegrees)) } },
+    playback: { speed: 1, motionRequested: false, times: (definition.motion ?? []).map(() => 0) }, preparedEpochJdTt: frame.epochJdTt,
+  } : null);
+  if (view && frame) {
     try {
-      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, saved);
+      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, view);
       // The frame publisher writes the lighting and material frames of this camera by their prepared address: give
       // each its published URL, as the scene's own textures have. A saved Moon link asked the site for
       // /scenes/moon/lighting-2x-shadowless.webp and got 404 (2026-10-01).
@@ -130,12 +144,12 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
       const addresses = new Set(styled.flatMap(node => node.getAttribute('style')!.match(SCENE_ADDRESSES) ?? []));
       await Promise.all([...addresses].map(address => published.ensure(keys.get(address) ?? '', address)));
       for (const node of styled) node.setAttribute('style', node.getAttribute('style')!.replace(SCENE_ADDRESSES, address => published.url(address)));
-      stage.dataset.preparedView = formatSharedView(saved).slice(2);
+      if (saved) stage.dataset.preparedView = formatSharedView(saved).slice(2);
     } catch (error) {
       // A view that reads but names no camera this scene can take (a rotation that is not orthonormal, a distance out
       // of range) is answered like one that does not read: the page without it, never a failed function. One such link
       // answered 502 with the function's stack (2026-10-01).
-      if (views.length && (error instanceof TypeError || error instanceof RangeError)) throw new UnreadableSavedView(views[0]!);
+      if (saved && views.length && (error instanceof TypeError || error instanceof RangeError)) throw new UnreadableSavedView(views[0]!);
       throw error;
     }
   }
