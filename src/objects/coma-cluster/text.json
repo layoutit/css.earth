@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "coma-cluster",
+  "card": {
+    "text": "A cluster of galaxies 95.1 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+        "checked": "2026-10-02",
+        "locator": "distance: 95.10 Mpc"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "An X-ray selected cluster of galaxies at redshift 0.0231, with an R500 radius of 1.132 million parsecs.",
+    "sources": [
+      {
+        "catalogueId": "mcxc-ii-2024",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+        "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+        "checked": "2026-10-02",
+        "locator": "MCXC J1259.7+2756 row: z 0.0231, R500 1.132 Mpc"
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Coma Cluster catalogue members",
+      "summary": "One dot per member galaxy the Nearby Universe field does not draw. A member's depth is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "kang-2025-coma-redshifts",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/278/51",
+          "label": "Kang et al. (2025), ApJS 278, 51; CDS J/ApJS/278/51; Redshifts within 132 arcmin of the Coma cluster centre, with a membership flag",
+          "checked": "2026-10-02",
+          "locator": "table2: 1,826 rows with Mm = 1"
+        },
+        {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 3 (group distance modulus, DMzp)",
+          "checked": "2026-10-02",
+          "locator": "group 44715: DMzp 34.891 mag"
+        }
+      ]
+    }
+  }
+}

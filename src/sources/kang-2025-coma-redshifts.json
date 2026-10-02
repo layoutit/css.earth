@@ -1,0 +1,52 @@
+{
+  "id": "kang-2025-coma-redshifts",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Redshift catalog of objects within 132 arcmin of the Coma cluster center",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2025ApJS..278...51K"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/278/51"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...51K",
+      "label": "2025ApJS..278...51K"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/278/51",
+      "label": "CDS J/ApJS/278/51"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/278/51/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "table2: 37,758 objects with a redshift, J2000 positions, r magnitude and a membership flag Mm; 1,826 rows have Mm = 1 (member of the Coma cluster)."
+    }
+  ],
+  "creators": [
+    "W. Kang",
+    "H. S. Hwang",
+    "N. Okabe",
+    "C. Park"
+  ],
+  "publisher": "ApJS 278, 51",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kang et al. (2025), ApJS 278, 51.",
+      "scope": "Coma cluster member galaxies",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/278/51/ReadMe"
+    }
+  ]
+}

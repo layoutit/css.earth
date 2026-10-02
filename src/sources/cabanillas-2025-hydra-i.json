@@ -1,0 +1,54 @@
+{
+  "id": "cabanillas-2025-hydra-i",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Catalog of 196 galaxies of the nearby Hydra I cluster out to 1.75 r200",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2025A&A...704A.264C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/704/A264"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.264C",
+      "label": "2025A&A...704A.264C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/704/A264",
+      "label": "CDS J/A+A/704/A264"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/704/A264/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "tables12: 196 galaxies of the Hydra I cluster with J2000 positions and redshifts from 0.0077 to 0.0176."
+    }
+  ],
+  "creators": [
+    "C. Cabanillas de la Casa",
+    "K. M. Hess",
+    "L. Verdes-Montenegro",
+    "R. Kotulla",
+    "H. Chen",
+    "T. H. Jarrett"
+  ],
+  "publisher": "A&A 704, A264",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Cabanillas de la Casa et al. (2025), A&A 704, A264.",
+      "scope": "Hydra I cluster galaxies with a redshift",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/704/A264/ReadMe"
+    }
+  ]
+}

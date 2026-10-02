@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [
+    {
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+ID%2C+Name%2C+RAJ2000%2C+DEJ2000%2C+z%2C+gMAG%2C+rMAG+FROM+%22J%2FA%2BA%2F704%2FA264%2Ftables12%22",
+      "credit": "The member dots of the Hydra Cluster members bank as they lie on the sky; drawn by site/build/prepare/companion-context.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/hydra-cluster-members/source/manifest.json)."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet and dataset list."
+      }
+    },
+    {
+      "path": "presentation/solar-system.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored framing: the radius the page frames the cluster at, a presentation value."
+      }
+    },
+    {
+      "path": "preparation/navigation.json"
+    }
+  ]
+}
