@@ -88,11 +88,23 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
         if (presenter.kind === 'detached') presenter.enabled = true;
         else if (presenter.kind === 'attached') presenter.inner.enable();
       },
+      // Without a world there is nothing to plan ahead.
+      warm() { return presenter.kind === 'attached' ? presenter.inner.warm() : false; },
       destroy() {
         const previous = presenter; presenter = { kind: 'disposed' };
         if (previous.kind === 'attached') previous.inner.destroy();
       },
     };
+  }
+
+  /** The world's selection for a session: the star a level is seen around, or the body itself, with its caption's framing.
+   * A cold startup selects as soon as its detail's navigation facts exist, so the world's first plan can be made behind
+   * the paint gate (`SceneFramePresenter.warm`); `connect` selects again, which changes nothing when it is the same. */
+  function select(session: SceneSession, navigation: NonNullable<NonNullable<SceneSession['mount']>['navigation']>) {
+    const world = mounted();
+    if (!world || !isCurrent(session)) return;
+    // A level is the world seen around its centre: the world selects that star, and the level is its overview scope.
+    world.selectObject?.(worldSubject(session.objectId), worldSubjectFrame(session.objectId, navigation.frame), navigation.framingScale, navigation.labelEdge);
   }
 
   function connect(session: SceneSession) {
@@ -101,8 +113,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     connectedSession = session;
     session.own(() => { if (connectedSession === session) connectedSession = null; });
     session.framePresenter?.attach?.(world);
-    // A level is the world seen around its centre: the world selects that star, and the level is its overview scope.
-    world.selectObject?.(worldSubject(session.objectId), worldSubjectFrame(session.objectId, navigation.frame), navigation.framingScale, navigation.labelEdge);
+    select(session, navigation);
     session.own(navigation.subscribe(frame => {
       if (isCurrent(session) && mounted() === world) onCameraChange(session, frame);
     }));
@@ -120,5 +131,5 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     viewport = null;
   }
 
-  return { get current() { return mounted(); }, get viewport() { return sharedViewport(); }, ensure, connect, createFramePresenter, destroy };
+  return { get current() { return mounted(); }, get viewport() { return sharedViewport(); }, ensure, select, connect, createFramePresenter, destroy };
 }

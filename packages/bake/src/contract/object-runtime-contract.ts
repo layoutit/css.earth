@@ -1,6 +1,6 @@
 import { OBJECT_RUNTIME_SCHEMA, type PreparedAssets } from '@cssearth/objects';
 
-import { PREPARED_PRESENTATION_SCHEMA} from "../presentation/index.ts";
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 
 import { requirePreparedPresentation } from "../presentation/index.ts";
 import type { PreparedPresentationContract } from "../presentation/index.ts";

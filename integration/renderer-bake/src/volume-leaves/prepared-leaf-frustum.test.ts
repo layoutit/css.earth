@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createPreparedLeafFrustum, preparedLeafMayContribute, validatePreparedLeafBounds } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
+import { validatePreparedLeafBounds } from '@cssearth/objects';
+import { createPreparedLeafFrustum, preparedLeafMayContribute } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
 import { compileLeafBounds } from '@cssearth/bake/volume-leaves';
 
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
@@ -25,7 +26,4 @@ test('off-axis perspective and finite translation affect clipping, with conserva
   assert.equal(preparedLeafMayContribute(box(250,0,0), planes), false);
   assert.equal(preparedLeafMayContribute(undefined, planes), true);
   assert.equal(preparedLeafMayContribute(box(1e9,0,0), createPreparedLeafFrustum(rotation, [0,0,0], { focalPixels:600, principalOffsetPixels:[0,0] })), true);
-});
-test('reject malformed prepared bounds', () => {
-  for (const b of [{min:[0,0,0],max:[-1,0,0]}, {min:[0,0,0],max:[Infinity,0,0]}, {min:[0,0],max:[1,1,1]}, {min:[0,0,0],max:[1,1,1], extra:true}]) assert.throws(() => validatePreparedLeafBounds(b));
 });

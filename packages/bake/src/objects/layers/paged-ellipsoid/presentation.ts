@@ -21,7 +21,7 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds = ['atmosphere'] as const;
 import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/rendering/prepared-object-assets.ts";
-import { PREPARED_PRESENTATION_SCHEMA } from "../../../presentation/index.ts";
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../scene/index.ts";
 import { tiledTextureKeys } from "@cssearth/renderer/rendering/prepared-texture-levels.ts";

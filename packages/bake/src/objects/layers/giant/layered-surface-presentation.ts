@@ -11,7 +11,7 @@ import type {PreparedCubicSkyPlan} from '../../../presentation/index.ts';
 import type {PreparedDirectionalSunPlan} from '../../../presentation/index.ts';
 import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} from '@layoutit/polycss';
 import {preparedResourcePool} from '@cssearth/renderer/rendering/prepared-object-assets.ts';
-import {PREPARED_PRESENTATION_SCHEMA} from '../../../presentation/index.ts';
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '../../../presentation/index.ts';
 import {rasterEllipsoidMaterial} from './ellipsoid-materials.ts';
 import {prepareMaterialTracks} from '../../../presentation/index.ts';

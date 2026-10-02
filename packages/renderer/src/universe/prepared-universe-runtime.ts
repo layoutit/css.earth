@@ -213,6 +213,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let captionBody: typeof selected = selected;
         let previewCaption: typeof selected | null = null;
         let selectedEdge: PreparedLabelEdge | undefined, previewEdge: PreparedLabelEdge | undefined;
+        // The first `selectObject` always applies: the mounted default differs from a selection in its caption framing.
+        let selectionApplied = false, selectedFramingScale = 1;
         const caption = () => previewCaption ?? captionBody;
         const captionFlags = () => ({ overview: selectionPreview ? false : overview, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
@@ -315,6 +317,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 : `frame ${frame.referenceFrame} at ${frame.epochJdTt}, radius ${frame.bodyRadiusM} m, origin ${frame.originM.join(', ')}; context ${plan.frame.referenceFrame} at ${plan.frame.epochJdTt}, radius ${body.radiusM} m, position ${body.positionM.join(', ')}`}.`);
             }
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
+            // The same selection again changes no policy: a frame planned for it stays valid (world-frame-queue.ts `warm`).
+            if (selectionApplied && selected === body && selectedEdge === edge && selectedFramingScale === framingScale) return;
+            selectionApplied = true; selectedFramingScale = framingScale;
             selected = body;
             selectedSystem = 'orbit' in body && body.orbit ? [body.id, body.orbit.centerBodyId] : [body.id];
             selectedEdge = edge;

@@ -36,6 +36,8 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "counter-rotation"; systemTransform: string | null }
 );
 
+export type PreparedPoseKeyframe = { offset: number; transform: string };
+
 export interface PreparedPresentationDefinition {
   textureLevels?: PreparedTextureLevels;
   /** The resource catalogue; presentation reads only its capability fallbacks. */
@@ -45,7 +47,7 @@ export interface PreparedPresentationDefinition {
    * in without demand or textures until `adoptPreparedDatasetTables` replaces them. */
   deferredDatasets?: readonly string[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[];
-  animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
+  animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: PreparedPoseKeyframe[]; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
   /** Infinite motion: a spin resolved from source CSS, or a star's light curve as opacity. */
   motion?: readonly { target: number; id: string; keyframes: ({ offset: number; transform: string } | { offset: number; opacity: string })[]; duration: number; timings: readonly { when: Readonly<Record<string, string | number | boolean | null>>; duration: number }[] }[];
   features?: PreparedSurfaceFeaturePlan;

@@ -26,7 +26,10 @@ export function readStartupSavedView(url: string, preparedView?: string) {
 
 /** The same prepared cover and resource lease as fly-to, owned by the initial session. */
 export async function prepareStartupBillboard(stage: HTMLElement, factory: SceneFactory, viewport: CameraViewport,
-  url: string, sceneId: string, signal: AbortSignal) {
+  url: string, sceneId: string, signal: AbortSignal,
+  /** Called once the photograph is placed, before the scene's images are requested: what else the page builds for the
+   * first view (the world, the shell) runs while they download instead of after. */
+  onCover: () => void = () => {}) {
   const document = stage.ownerDocument, window = document.defaultView;
   const metadata = document.querySelector<HTMLScriptElement>('script[data-startup-discovery]');
   const image = document.querySelector<HTMLImageElement>('img[data-startup-billboard]');
@@ -53,6 +56,7 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
     if (!window.performance.getEntriesByName('cssearth:startup-billboard').length) window.performance.mark('cssearth:startup-billboard');
     // The billboard is the loading state: once it shows, the ring leaves. Without one, the ring waits for the detail.
     if (cover) removeLoader();
+    onCover();
     pending = createPreparedArrival(signal, cover, () => {
       window.performance.mark('cssearth:startup-detail-ready');
       // The world's background banks held for this moment start once the browser is idle (startup-gate.ts).

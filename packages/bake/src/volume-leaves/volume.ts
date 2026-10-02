@@ -6,7 +6,7 @@ import { type DensityVolumeFrame, type Axis, type Vector3 } from '@cssearth/obje
 import type { VolumeRecipe } from '@cssearth/objects';
 import type { VolumeSlices } from '@cssearth/objects';
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../scene/index.ts';
-import type { PreparedLeafBounds } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
+import type { PreparedLeafBounds } from '@cssearth/objects';
 import type { PreparedCssVolume, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';
 export type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
