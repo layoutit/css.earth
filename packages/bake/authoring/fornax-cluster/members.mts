@@ -21,6 +21,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
+import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
 const repository = resolve(import.meta.dirname, '../../../..');
 const fccPath = resolve(process.argv[2] ?? resolve(repository, 'output/clusters/fcc-p2tbl2.dat.gz'));
@@ -73,21 +74,9 @@ const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env,
 if (run.status !== 0) throw new Error(`${fccPath}: the FK4 to ICRS conversion failed: ${run.stderr.slice(-2000)}`);
 const icrs = JSON.parse(run.stdout) as [number, number][];
 
-const radius = MATCH_ARCSEC / 3600, cells = new Map<string, [number, number][]>();
-const cell = (ra: number, dec: number) => [Math.floor(dec / radius), Math.floor(ra * Math.cos(dec * Math.PI / 180) / radius)];
-for (const row of field) {
-  const ra = Number(row[raAt!]), dec = Number(row[decAt!]), key = cell(ra, dec).join(',');
-  cells.set(key, [...cells.get(key) ?? [], [ra, dec]]);
-}
-const inField = (ra: number, dec: number) => {
-  const [y, x] = cell(ra, dec);
-  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-    for (const [fra, fdec] of cells.get(`${y! + dy},${x! + dx}`) ?? []) {
-      if (Math.hypot((ra - fra) * Math.cos(dec * Math.PI / 180), dec - fdec) <= radius) return true;
-    }
-  }
-  return false;
-};
+const inField = createRaDecCatalogueMatcher(field.map(row => {
+  return [Number(row[raAt!]), Number(row[decAt!])];
+}), MATCH_ARCSEC, 'degrees');
 let drawnByField = 0;
 const kept = definite.flatMap((row, index) => {
   const [ra, dec] = icrs[index]!;

@@ -19,6 +19,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
+import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
 const repository = resolve(import.meta.dirname, '../../../..');
 const evccPath = resolve(process.argv[2] ?? resolve(repository, 'output/clusters/evcc-table2.dat'));
@@ -47,21 +48,9 @@ const moduli = new Set(field.filter(row => row[groupAt!] === VIRGO_GROUP).map(ro
 if (moduli.size !== 1) throw new TypeError(`${fieldPath}: group ${VIRGO_GROUP} has ${moduli.size} distance moduli, not one.`);
 const virgoModulus = [...moduli][0]!;
 // Cosmicflows-4 positions in cells a match radius wide.
-const radius = MATCH_ARCSEC / 3600, cells = new Map<string, [number, number][]>();
-const cell = (ra: number, dec: number) => [Math.floor(dec / radius), Math.floor(ra * Math.cos(dec * Math.PI / 180) / radius)];
-for (const row of field) {
-  const ra = Number(row[raAt!]), dec = Number(row[decAt!]), key = cell(ra, dec).join(',');
-  cells.set(key, [...cells.get(key) ?? [], [ra, dec]]);
-}
-const inField = (ra: number, dec: number) => {
-  const [y, x] = cell(ra, dec);
-  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-    for (const [fra, fdec] of cells.get(`${y! + dy},${x! + dx}`) ?? []) {
-      if (Math.hypot((ra - fra) * Math.cos(dec * Math.PI / 180), dec - fdec) <= radius) return true;
-    }
-  }
-  return false;
-};
+const inField = createRaDecCatalogueMatcher(field.map(row => {
+  return [Number(row[raAt!]), Number(row[decAt!])];
+}), MATCH_ARCSEC, 'degrees');
 const lines = (await readFile(evccPath, 'utf8')).split('\n').filter(line => line.trim());
 if (lines.length !== 1589) throw new TypeError(`${evccPath}: EVCC table 2 has 1,589 rows, not ${lines.length}.`);
 let members = 0, drawnByField = 0;

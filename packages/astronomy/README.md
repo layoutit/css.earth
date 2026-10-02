@@ -4,6 +4,14 @@ Time scales, float64 vectors and the reference-frame tree behind [cssEarth](http
 
 Zero dependencies, zero browser globals. Everything here runs in Node, a worker, or the browser.
 
+`createRaDecCatalogueMatcher(positionsDeg, matchArcsec, comparison)` indexes
+RA/declination pairs and returns a position predicate. Catalogue coordinates stay
+in degrees to preserve the authoring arithmetic; `comparison` selects `degrees`
+(the default) or `arcseconds` for the historical rounding difference. Numeric
+non-finite positions remain accepted and do not match. The radius must be finite
+and positive. The legacy 3x3 cell lookup deliberately does not wrap RA at zero;
+the known seam defect is tracked in issue #1151.
+
 Maintainers add physical values and retained orbit data in
 `data/bodies/<id>.json`. Acquisition choices and source URLs stay with each
 record; independent shared vector samples live in `data/fixtures/`.

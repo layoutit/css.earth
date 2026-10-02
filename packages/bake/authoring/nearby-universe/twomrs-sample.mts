@@ -20,6 +20,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
+import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
 const repository = resolve(import.meta.dirname, '../../../..');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/2mrs/table3.dat.gz'));
@@ -35,21 +36,10 @@ const dipole = unit(DIPOLE_L, DIPOLE_B);
 const [fieldHeader, ...fieldRows] = gunzipSync(await readFile(fieldPath)).toString('utf8').trim().split('\n');
 const names = fieldHeader!.split(','), raAt = names.indexOf('RAJ2000'), decAt = names.indexOf('DEJ2000');
 if (raAt < 0 || decAt < 0) throw new TypeError(`${fieldPath}: needs RAJ2000 and DEJ2000 columns, not "${fieldHeader}".`);
-const radius = MATCH_ARCSEC / 3600, cells = new Map<string, [number, number][]>();
-const cell = (ra: number, dec: number) => [Math.floor(dec / radius), Math.floor(ra * Math.cos(dec * Math.PI / 180) / radius)];
-for (const row of fieldRows) {
-  const fields = row.split(','), ra = Number(fields[raAt]), dec = Number(fields[decAt]), key = cell(ra, dec).join(',');
-  cells.set(key, [...cells.get(key) ?? [], [ra, dec]]);
-}
-const inField = (ra: number, dec: number) => {
-  const [y, x] = cell(ra, dec);
-  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-    for (const [fra, fdec] of cells.get(`${y! + dy},${x! + dx}`) ?? []) {
-      if (Math.hypot((ra - fra) * Math.cos(dec * Math.PI / 180), dec - fdec) <= radius) return true;
-    }
-  }
-  return false;
-};
+const inField = createRaDecCatalogueMatcher(fieldRows.map(row => {
+  const fields = row.split(',');
+  return [Number(fields[raAt]), Number(fields[decAt])];
+}), MATCH_ARCSEC, 'degrees');
 
 // Table 3 byte columns (ReadMe): 1-16 ID, 18-26 RAdeg, 28-36 DEdeg, 38-46 GLON, 48-56 GLAT, 58-63 Kcmag, 165-169 type, 174-178 cz.
 const lines = gunzipSync(await readFile(inputPath)).toString('utf8').split('\n').filter(line => line.trim());
