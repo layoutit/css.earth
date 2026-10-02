@@ -219,12 +219,6 @@
     },
     {
       "location": "public",
-      "filename": "pluto-billboard.webp",
-      "bytes": 11368,
-      "sha256": "62d248ac3699be7e0e34c3a8c28c02d59898e60ed76d72786454a371a9488008"
-    },
-    {
-      "location": "public",
       "filename": "pluto-dataset-methane-ice.webp",
       "bytes": 2566,
       "sha256": "ece12a4b24eb6cd6ed591a10d3189658325f1519bab86155091341dab74a0527"
@@ -267,15 +261,87 @@
     },
     {
       "location": "public",
+      "filename": "pluto-methane-ice-page-0-level-1040.webp",
+      "bytes": 441020,
+      "sha256": "d2a9117fd1954710da0ea1eb2873314b329f297796ffa1f50d6bc1019f2b1437"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-methane-ice-page-0-level-2080.webp",
+      "bytes": 1110210,
+      "sha256": "8c17a7eb7a59731de6055d3e32a984043eb5cdb3caa3b8921dc232c0d5540efb"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-methane-ice-page-0-level-520.webp",
+      "bytes": 140654,
+      "sha256": "688ee8534f8c1f7014ed0e85d936ac746f0bcb6c31ea166b2fa0caa1af4ca478"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-methane-ice-page-0.webp",
+      "bytes": 686980,
+      "sha256": "94c1051ea136f654aaddceab90febd1c13d75e354eacdb7d23fdcb068d1f4428"
+    },
+    {
+      "location": "public",
       "filename": "pluto-methane-ice@2x.webp",
       "bytes": 686980,
       "sha256": "94c1051ea136f654aaddceab90febd1c13d75e354eacdb7d23fdcb068d1f4428"
     },
     {
       "location": "public",
+      "filename": "pluto-monochrome-page-0-level-1040.webp",
+      "bytes": 89468,
+      "sha256": "84f851bcc8a650b1c499da0a0d8780f72fea7bfc445c5d8ef8df249f87e2ef42"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-monochrome-page-0-level-2080.webp",
+      "bytes": 317270,
+      "sha256": "1b51d62182b116b78da5780c3bb12ca3376445116875b74de14063057d195022"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-monochrome-page-0-level-520.webp",
+      "bytes": 24456,
+      "sha256": "52762df1c63dc3f8a947d1dd6c7fd639651584af82641eef5bdc8c1197a1ef4e"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-monochrome-page-0.webp",
+      "bytes": 1016802,
+      "sha256": "f83a81c10e58ec79c37bd0fdc378d2707ec1803f20174c436820c497bd72d4ba"
+    },
+    {
+      "location": "public",
       "filename": "pluto-monochrome@2x.webp",
       "bytes": 1016802,
       "sha256": "f83a81c10e58ec79c37bd0fdc378d2707ec1803f20174c436820c497bd72d4ba"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-nitrogen-ice-page-0-level-1040.webp",
+      "bytes": 421756,
+      "sha256": "cb80d638924d27b5f7c8100ef3bff5c1dd9e7dc53e6bc99d8bb3df878aefbff6"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-nitrogen-ice-page-0-level-2080.webp",
+      "bytes": 1044206,
+      "sha256": "c2c805af8fcc8f83ef73b3d59f84e2909e18331993c5f2b7aa15bc35fbf72793"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-nitrogen-ice-page-0-level-520.webp",
+      "bytes": 132858,
+      "sha256": "5fdb57bc647290d281ccb5af5101dabf41ce1293000e169f3cdc037294faf3e4"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-nitrogen-ice-page-0.webp",
+      "bytes": 651824,
+      "sha256": "c09199a45de3fca077c1a61e3a30bd5a02fe0cf783b22767a6a57779c179a52a"
     },
     {
       "location": "public",
@@ -321,15 +387,87 @@
     },
     {
       "location": "public",
+      "filename": "pluto-surface-page-0-level-1040.webp",
+      "bytes": 79250,
+      "sha256": "1d9d2060978e2fb74d49b66f7f89f899b4a428f8645050eff38fda8c0ce04c73"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-surface-page-0-level-2080.webp",
+      "bytes": 211024,
+      "sha256": "d8307727b94a197ac14701185de99c4282d5f74c8f088bd8f4a887bf85a8cf34"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-surface-page-0-level-520.webp",
+      "bytes": 24020,
+      "sha256": "8ceee78094efb6c803acd73abb7e41a3f54bba70d83b15e75a5ce3ca29019647"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-surface-page-0.webp",
+      "bytes": 489244,
+      "sha256": "9dc145f43dad6e36fca489729f6e725fa692ca3796ac31a77b6b6e8aa01e9072"
+    },
+    {
+      "location": "public",
       "filename": "pluto-surface@2x.webp",
       "bytes": 489244,
       "sha256": "9dc145f43dad6e36fca489729f6e725fa692ca3796ac31a77b6b6e8aa01e9072"
     },
     {
       "location": "public",
+      "filename": "pluto-topography-page-0-level-1040.webp",
+      "bytes": 50038,
+      "sha256": "87d27201e758905ad51b084bf19eecaf76d87a1f642e135e8d0049622a2fceb3"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-topography-page-0-level-2080.webp",
+      "bytes": 194936,
+      "sha256": "49c1b40d05639a46de35f3653ee32a09ff6eda2480892cc3a2220f8a0c33dc77"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-topography-page-0-level-520.webp",
+      "bytes": 12736,
+      "sha256": "3d6eb1cbe7793e173dc07d8a0fcbd5a60a7b274e03b614a913dfeeb5dc5ea398"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-topography-page-0.webp",
+      "bytes": 653894,
+      "sha256": "deb53f0d188a8e2fda54807ab74c939747958e143cd6d0b261e28dff12007f80"
+    },
+    {
+      "location": "public",
       "filename": "pluto-topography@2x.webp",
       "bytes": 653894,
       "sha256": "deb53f0d188a8e2fda54807ab74c939747958e143cd6d0b261e28dff12007f80"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-water-ice-page-0-level-1040.webp",
+      "bytes": 370108,
+      "sha256": "1ab0d14484d6fa43a8c29464c4f824ec05bb6682b96b6fc17341c21118159354"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-water-ice-page-0-level-2080.webp",
+      "bytes": 886550,
+      "sha256": "0f9ea7ba987f2295a95e2b743b886fa6d51179f932d66134b3fdb8f9177ca671"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-water-ice-page-0-level-520.webp",
+      "bytes": 120112,
+      "sha256": "f9345f4dc1ba24fe661b94537d4d311529ddd3776aa8ac40be282a5840121d72"
+    },
+    {
+      "location": "public",
+      "filename": "pluto-water-ice-page-0.webp",
+      "bytes": 567644,
+      "sha256": "c61cfd11e0b0a450cc3f28a85239ef6b654204f9cfe6107501646e9cfaa0aea2"
     },
     {
       "location": "public",
@@ -346,14 +484,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84273,
-      "sha256": "d74765a4104eb696d77ee4c3d0ca2d44fe4bf6c29f7ed94f54eb0d0ac79f3961"
+      "bytes": 82060,
+      "sha256": "6f212e8108448d1d2de2fee1218270e949db9c068f248114b650acf354ee9eed"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 796,
-      "sha256": "22e54748a3352c7afbf9b3239b8e94c7e7801e6dba52105391b7b4da02438cea"
+      "bytes": 734,
+      "sha256": "0f4f47ed96dbfb25c81e27c9f2c81252ee309a6b8487a9ee9f153396fb4903fa"
     },
     {
       "location": "prepared",
@@ -430,14 +568,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 370989,
-      "sha256": "6ac9667291f31a8a07cf9efbe256b9e3cb857d3502bbdddf886921aef3f5abf7"
+      "bytes": 375935,
+      "sha256": "6541f8a4a6a99d2f64c79310728ee10777c465c2368549e57935f157959dfeeb"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 388573,
-      "sha256": "a0931a35858f7f874cb1ad4d79c086e9c03087f70f8062e3f1651f44bb8aefca"
+      "bytes": 389767,
+      "sha256": "a5e804da04bea26a0767352bee2b4609b610d02af9e5a38649668c4994628024"
     },
     {
       "location": "prepared",
