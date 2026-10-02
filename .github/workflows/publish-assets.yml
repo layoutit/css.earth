@@ -141,6 +141,7 @@ jobs:
             pnpm prepare:catalog
             pnpm build:astronomy
             node packages/bake/cli/prepare-solar-geometry.mts
+            pnpm build:objects
             pnpm build:catalog
             node packages/bake/cli/prepare-objects.mts "--object=$OBJECT"
           fi
