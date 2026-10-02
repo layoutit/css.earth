@@ -13,6 +13,16 @@ type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOb
 
 import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/rendering/prepared-object-assets.ts";
 import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
+import sharp from 'sharp';
+import { basename, resolve } from 'node:path';
+
+/** The ring image is also published at these widths, smallest first: an arrival waits for the rings, and at 4 Mbps the
+ * 4096-pixel image (5.3 MB) held the flight from Earth to Saturn for 15.3 s (2026-10-02). */
+const RING_LEVEL_WIDTHS = [1024, 2048] as const;
+/** The share of a threshold a silhouette must cross back before the level changes again: the raster pages' value. */
+const RING_LEVEL_HYSTERESIS = 0.2;
+/** Ring texels per CSS pixel a level must still give: the canonical @2x density. */
+const RING_TEXELS_PER_CSS_PIXEL = 2;
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
@@ -71,10 +81,27 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
       rowBanks.set(resource, { ...rows, pool });
     }
   }
+  // Each ring image reduced to the level widths, drawn once per file: the datasets share one ring image.
+  const ringLevelUrls = new Map<string, string[]>();
+  for (const dataset of exteriorDatasets) {
+    const url = canonicalPreparedAsset(requireString(dataset.ringUrl), dataset.ring2xUrl);
+    if (ringLevelUrls.has(url)) continue;
+    const file = resolve(publicDirectory, basename(url)), { width } = await sharp(file).metadata();
+    if (!width || RING_LEVEL_WIDTHS.some(level => level >= width)) throw new Error(`Layered ring image ${url} is ${width} pixels wide; its levels are ${RING_LEVEL_WIDTHS.join(' and ')}.`);
+    ringLevelUrls.set(url, await Promise.all(RING_LEVEL_WIDTHS.map(async level => {
+      const name = basename(url).replace(/(?:@2x)?\.webp$/u, `-level-${level}.webp`);
+      await sharp(file).resize(level, level).webp({ lossless: true, effort: 6 }).toFile(resolve(publicDirectory, name));
+      return url.slice(0, url.length - basename(url).length) + name;
+    })));
+  }
+  const ringKeys = exteriorDatasets.map(dataset => `rings:${dataset.id}`);
+  const ringLevelEntries = exteriorDatasets.flatMap(dataset => ringLevelUrls.get(canonicalPreparedAsset(requireString(dataset.ringUrl), dataset.ring2xUrl))!
+    .map((url, level) => ({ key: `rings:${dataset.id}:level:${RING_LEVEL_WIDTHS[level]}`, url, pool: "rings" })));
   const entries = [
     { key: "ring-shadow", url: `/scenes/${namespace}/${namespace}-ring-shadow.webp`, pool: "warm" },
     ...interior,
-    ...exteriorDatasets.flatMap(dataset => datasetAssets(dataset).map(entry => ({ ...entry, pool: dataset.id === datasets.defaultDataset ? "warm" : "datasets" }))),
+    ...exteriorDatasets.flatMap(dataset => datasetAssets(dataset).map(entry => ({ ...entry, pool: ringKeys.includes(entry.key) ? "rings" : dataset.id === datasets.defaultDataset ? "warm" : "datasets" }))),
+    ...ringLevelEntries,
     ...[...rowBanks.values()].flatMap(({ entries, pool }) => entries.map(entry => ({ ...entry, pool }))),
     ...[...stills.values()].map(({ entry, pool }) => ({ ...entry, pool })),
   ];
@@ -88,7 +115,10 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   const system = b.mesh(`${namespace}-system`, plan.systemTransform);
   b.append(null, cameraNode); b.append(cameraNode, scene); b.append(scene, system);
   const ring = b.mesh(`${namespace}-ring-orbit ${namespace}-ring-plane`, plan.meshTransform);
-  b.append(system, ring); b.append(ring, b.leaf(plan.ringPlane));
+  const ringLeaf = b.leaf(plan.ringPlane);
+  // The ring image is a texture the levels swap by the silhouette's size; each variant writes its dataset's.
+  ringLeaf.style.backgroundImage = `var(--${namespace}-rings)`;
+  b.append(system, ring); b.append(ring, ringLeaf);
   const ringShadow = b.mesh(`${namespace}-ring-shadow`, plan.meshTransform);
   b.append(system, ringShadow); b.append(ringShadow, b.leaf(plan.ringShadowPlane));
   const carriers = new Map<string,PreparedNode>();
@@ -180,16 +210,28 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
       writes: [...cutaway ? [{ kind: "style", target: index(cutaway), name: "display", value: interiorView ? "block" : "none" }] : [],
         { kind: "attribute", target: -1, name: "data-view", value: interiorView ? "interior" : null },
         { kind: "attribute", target: -1, name: "data-dataset", value: interiorView || dataset.id === datasets.defaultDataset ? null : dataset.id },
+        { kind: "texture", target: index(ring), name: `--${namespace}-rings`, resource: `rings:${content.id}`, quoted: true },
         { kind: "class", target: -1, name: `${namespace}-hide-rings`, value: !rings },
         { kind: "class", target: -1, name: `${namespace}-hide-shadows`, value: !shadows }],
       materials: [{ track: "exterior", bank: material, mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
         ...cutaway ? [{ track: "interior", bank: interiorView ? material : "normal", mode: interiorView && !shadows ? "fixed" as const : "frames" as const, enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] : []] };
   })));
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+  // The ring image's side over the body's diameter, both in scene units: its texels span that many silhouette diameters.
+  const ringStyle = String(plan.ringPlane.style);
+  const ringMatrix = prepareTransform(/(?:^|;)transform:(matrix3d\([^)]*\))/u.exec(ringStyle)?.[1]), ringBox = Number.parseFloat(/--polycss-atlas-width:([\d.]+)px/u.exec(ringStyle)?.[1] ?? '');
+  const ringSpan = ringBox * Math.hypot(ringMatrix[0]!, ringMatrix[1]!, ringMatrix[2]!) / (2 * shape.equatorialRadius * shape.tileSize);
+  if (!(ringSpan > 1)) throw new Error(`Layered ring plane spans ${ringSpan} body diameters.`);
+  // A level of width w gives the canonical density while w ≥ density · span · D, so the next is chosen from D = w / (density · span).
+  const textureLevels = { hysteresis: RING_LEVEL_HYSTERESIS, levels: [...RING_LEVEL_WIDTHS, null].map((width, level) => ({
+    minimumDiameter: level === 0 ? 0 : RING_LEVEL_WIDTHS[level - 1]! / (RING_TEXELS_PER_CSS_PIXEL * ringSpan),
+    resources: Object.fromEntries(ringKeys.map(key => [key, width === null ? key : `${key}:level:${width}`])) })) };
+  const firstLevel = textureLevels.levels[0]!.resources;
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, textureLevels, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+      preparedResourcePool("rings", entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }),
       preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: 8, concurrency: 8 }),
       ...cutawayShown ? [preparedResourcePool("interior", entries, { retention: "selection", decoding: "sync" })] : [],
       ...["exterior-material", ...cutawayShown ? ["interior-material"] : []].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],
-      startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key)] },
+      startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key), firstLevel[`rings:${normal.id}`]!] },
     tree, variants, materials: [track("exterior", exteriorLeaf, exteriorAtlas, false), ...interiorLeaf ? [track("interior", interiorLeaf, interiorAtlas, true)] : []],
     viewBindings: [{ kind: "counter-rotation", target: index(materialCounter), systemTransform: materialSystem.style.transform }], animations: [] };
 }

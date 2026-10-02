@@ -88,6 +88,15 @@ dataset with hand-set band gains.
 
 ![Ring detail before and after removing the seeded dots](evidence/2026-10-01/ring-tracers-before-after.webp)
 
+The ring image is also published 1,024 and 2,048 pixels wide, and the size of
+Saturn on screen picks which one is drawn: an arrival waits for the rings, and
+at 4 Mbps the 4,096-pixel image (5.3 MB) held the flight from Earth for 15.3 s.
+With the levels the same flight takes 7.4 s and 0.93 MB of Saturn's images
+(a phone-sized view, 2026-10-02). Left the full image, right the level a phone
+picks.
+
+![Saturn on a phone with the full ring image and with its level](evidence/2026-10-02/ring-levels-phone.webp)
+
 The mutual shadows of body and rings are prepared from one fixed light and keep
 the ring gaps. They are cross-checked against NASA's
 [Saturn shadow on the rings](https://science.nasa.gov/photojournal/saturns-shadow-upon-the-rings/)
