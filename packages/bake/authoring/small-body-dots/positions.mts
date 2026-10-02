@@ -1,8 +1,8 @@
 /**
- * The small bodies of one population that have no page, each at its position at the world's epoch.
+ * The small bodies of a bank's populations that have no page, each at its position at the world's epoch.
  *
- * A dots package names its population in `source/dots/query.json`: the orbit classes of JPL's Small-Body Database and
- * the cuts that keep the bodies a dot can stand for. One request lists those objects with their osculating heliocentric
+ * A dots package names its populations in `source/dots/query.json`: for each, the orbit classes of JPL's Small-Body
+ * Database and the cuts that keep the bodies a dot can stand for. One request for each population lists those objects with their osculating heliocentric
  * elements: ecliptic of J2000, at the epoch of each orbit solution. Each orbit is carried from its perihelion passage to
  * the Sun's prepared epoch as an unperturbed ellipse about the Sun, and turned to ICRF axes. An object that has an object
  * package is left out: it has its own marker. Writes `name,xKm,yKm,zKm` and reports how far each left-out object's ellipse
@@ -12,40 +12,61 @@
  */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { gzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 
 const root = resolve(import.meta.dirname, '../../../..'), objects = resolve(root, 'src/objects');
 const id = process.argv[2];
 if (!id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: positions.mts <object id>');
 const queryPath = resolve(objects, id, 'source/dots/query.json');
 const query = JSON.parse(await readFile(queryPath, 'utf8')) as Record<string, unknown>;
-const QUERY_FIELDS = ['classes', 'pageClassifications', 'loosestConditionCode', 'faintestAbsoluteMagnitude'];
-const unknown = Object.keys(query).filter(field => !QUERY_FIELDS.includes(field));
-if (unknown.length) throw new TypeError(`${queryPath}: unknown ${unknown.join(', ')}; a query holds ${QUERY_FIELDS.join(', ')}.`);
-const optionalNumber = (field: string) => {
-  const value = query[field];
-  if (value !== undefined && (typeof value !== 'number' || !Number.isFinite(value))) throw new TypeError(`${queryPath}: ${field} must be a number when given, got ${JSON.stringify(value)}.`);
-  return value as number | undefined;
+const refuseUnknown = (value: Record<string, unknown>, fields: readonly string[], at: string) => {
+  const unknown = Object.keys(value).filter(field => !fields.includes(field));
+  if (unknown.length) throw new TypeError(`${queryPath}: ${at} has unknown ${unknown.join(', ')}; it holds ${fields.join(', ')}.`);
 };
-const names = (field: string, pattern: RegExp, example: string) => {
-  const value = query[field];
+const names = (value: unknown, at: string, pattern: RegExp, example: string) => {
   if (!Array.isArray(value) || !value.length || !value.every((name): name is string => typeof name === 'string' && pattern.test(name))) {
-    throw new TypeError(`${queryPath}: ${field} must list names such as "${example}", got ${JSON.stringify(value)}.`);
+    throw new TypeError(`${queryPath}: ${at} must list names such as "${example}", got ${JSON.stringify(value)}.`);
   }
   return value;
 };
-/** The database's orbit classes, and the classifications of the pages those bodies can have: a moon or a comet that
- * shares an asteroid's name (Europa, Halley) is another body. */
-const classes = names('classes', /^[A-Za-z]{3}$/u, 'TNO'), pageClassifications = names('pageClassifications', /^[a-z-]+$/u, 'asteroid');
-/** The loosest orbit drawn. The condition code is the Minor Planet Center's uncertainty parameter, 0 to 9: how far an
- * object can drift along its orbit from the predicted place in ten years. At 6 that is under 2.1 degrees; at 7 it is up to
- * 9.2 degrees and at 9 more than 40.7 (https://minorplanetcenter.net/iau/info/UValue.html). */
-const loosest = optionalNumber('loosestConditionCode');
-/** The faintest absolute magnitude drawn, where a population is too large to draw whole. */
-const faintest = optionalNumber('faintestAbsoluteMagnitude');
+refuseUnknown(query, ['pageClassifications', 'populations', 'pagesTable'], 'the query');
+/** The classifications of the pages these bodies can have: a moon or a comet that shares an asteroid's name (Europa,
+ * Halley) is another body. */
+const pageClassifications = names(query.pageClassifications, 'pageClassifications', /^[a-z-]+$/u, 'asteroid');
+/** A `name,xKm,yKm,zKm` table beside the query whose rows join the bank as they are: the pages that draw no marker of
+ * their own, at their prepared positions (site/build/prepare/paged-asteroid-dot-positions.mts). */
+const pagesTable = query.pagesTable;
+if (pagesTable !== undefined && (typeof pagesTable !== 'string' || !/^[a-z0-9.-]+\.csv\.gz$/u.test(pagesTable))) throw new TypeError(`${queryPath}: pagesTable must name a .csv.gz table beside the query, got ${JSON.stringify(pagesTable)}.`);
 const FIELDS = ['pdes', 'name', 'full_name', 'e', 'q', 'i', 'om', 'w', 'tp', 'condition_code'] as const;
-const url = `https://ssd-api.jpl.nasa.gov/sbdb_query.api?${new URLSearchParams({ fields: FIELDS.join(','), 'sb-class': classes.join(','), 'full-prec': 'true',
-  ...(faintest === undefined ? {} : { 'sb-cdata': JSON.stringify({ AND: [`H|LE|${faintest}`] }) }) })}`;
+if (!Array.isArray(query.populations) || !query.populations.length) throw new TypeError(`${queryPath}: populations must list at least one population, got ${JSON.stringify(query.populations)}.`);
+/** One population of a bank: the banks of one host draw as one layer, so the populations that share a region share a bank. */
+const populations = query.populations.map((entry: unknown, index) => {
+  const at = `populations[${index}]`;
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) throw new TypeError(`${queryPath}: ${at} must be an object, got ${JSON.stringify(entry)}.`);
+  const population = entry as Record<string, unknown>;
+  refuseUnknown(population, ['classes', 'loosestConditionCode', 'faintestAbsoluteMagnitude', 'constraints'], at);
+  const optionalNumber = (field: string) => {
+    const value = population[field];
+    if (value !== undefined && (typeof value !== 'number' || !Number.isFinite(value))) throw new TypeError(`${queryPath}: ${at}.${field} must be a number when given, got ${JSON.stringify(value)}.`);
+    return value as number | undefined;
+  };
+  /** The database's orbit classes. */
+  const classes = names(population.classes, `${at}.classes`, /^[A-Za-z]{3}$/u, 'TNO');
+  /** The loosest orbit drawn. The condition code is the Minor Planet Center's uncertainty parameter, 0 to 9: how far an
+   * object can drift along its orbit from the predicted place in ten years. At 6 that is under 2.1 degrees; at 7 it is up to
+   * 9.2 degrees and at 9 more than 40.7 (https://minorplanetcenter.net/iau/info/UValue.html). */
+  const loosest = optionalNumber('loosestConditionCode');
+  /** The faintest absolute magnitude drawn, where a population is too large to draw whole. */
+  const faintest = optionalNumber('faintestAbsoluteMagnitude');
+  /** Further cuts in the database's own constraint form, such as "a|RG|3.7|4.2" for a semi-major axis between 3.7 and 4.2 au. */
+  const constraints = population.constraints === undefined ? [] : population.constraints;
+  if (!Array.isArray(constraints) || !constraints.every((cut): cut is string => typeof cut === 'string' && /^[a-zA-Z_]+\|(?:EQ|NE|LT|GT|LE|GE|RG)\|[-\d.|]+$/u.test(cut))) {
+    throw new TypeError(`${queryPath}: ${at}.constraints must list Small-Body Database constraints such as "a|RG|3.7|4.2", got ${JSON.stringify(population.constraints)}.`);
+  }
+  const cuts = [...(faintest === undefined ? [] : [`H|LE|${faintest}`]), ...constraints];
+  return { loosest, url: `https://ssd-api.jpl.nasa.gov/sbdb_query.api?${new URLSearchParams({ fields: FIELDS.join(','), 'sb-class': classes.join(','), 'full-prec': 'true',
+    ...(cuts.length ? { 'sb-cdata': JSON.stringify({ AND: cuts }) } : {}) })}` };
+});
 /** IAU 2012 astronomical unit, the J2000 obliquity JPL's ecliptic frame uses (IAU 1976, 84381.448 arcseconds), and the
  * Gaussian gravitational constant: the Sun's pull on a massless body, in au^1.5 per day. */
 const KM_PER_AU = 149_597_870.7, OBLIQUITY_RAD = 84381.448 / 3600 * Math.PI / 180, GAUSSIAN_K = 0.01720209895;
@@ -53,16 +74,20 @@ const sun = JSON.parse(await readFile(resolve(objects, 'sun/object.json'), 'utf8
 const epochJdTt = sun.properties.worldFrame.epochJdTt;
 if (!Number.isFinite(epochJdTt)) throw new TypeError(`src/objects/sun/object.json properties.worldFrame.epochJdTt must be a Julian date, got ${JSON.stringify(epochJdTt)}.`);
 
-const response = await fetch(url, { signal: AbortSignal.timeout(300_000) });
-if (!response.ok) throw new Error(`${url} answered ${response.status} ${response.statusText}.`);
-const answer = await response.json() as { fields?: unknown; data?: unknown };
-if (JSON.stringify(answer.fields) !== JSON.stringify(FIELDS) || !Array.isArray(answer.data)) {
-  throw new TypeError(`${url}: expected the fields ${FIELDS.join(', ')} and a data table, got fields ${JSON.stringify(answer.fields)}.`);
+/** The rows of one population's request. */
+async function request(url: string): Promise<unknown[][]> {
+  const response = await fetch(url, { signal: AbortSignal.timeout(300_000) });
+  if (!response.ok) throw new Error(`${url} answered ${response.status} ${response.statusText}.`);
+  const answer = await response.json() as { fields?: unknown; data?: unknown };
+  if (JSON.stringify(answer.fields) !== JSON.stringify(FIELDS) || !Array.isArray(answer.data)) {
+    throw new TypeError(`${url}: expected the fields ${FIELDS.join(', ')} and a data table, got fields ${JSON.stringify(answer.fields)}.`);
+  }
+  return answer.data as unknown[][];
 }
 
 interface Row { readonly name: string; readonly designations: readonly string[]; readonly km: [number, number, number] }
 /** The position in kilometres, ICRF axes, of an unperturbed ellipse at the world's epoch. */
-function position(row: readonly unknown[], index: number): Row {
+function position(row: readonly unknown[], index: number, url: string): Row {
   const pdes = row[0], name = row[1], fullName = row[2];
   if (typeof pdes !== 'string' || !pdes || name !== null && typeof name !== 'string' || typeof fullName !== 'string') {
     throw new TypeError(`${url} row ${index}: expected a designation, a name or null and a full name, got ${JSON.stringify(row)}.`);
@@ -111,8 +136,8 @@ const offsetAu = (km: readonly number[], page: { originM: readonly number[] }) =
 
 const rows: string[] = [], pagedOffsets: { id: string; au: number }[] = [], loose = new Map<string, number>(), written = new Set<string>();
 let farthestAu = 0, nearestAu = Infinity;
-for (const [index, row] of (answer.data as unknown[][]).entries()) {
-  const { name, designations, km } = position(row, index);
+for (const { url, loosest } of populations) for (const [index, row] of (await request(url)).entries()) {
+  const { name, designations, km } = position(row, index, url);
   const page = designations.map(designation => paged.get(key(designation))).find(Boolean);
   if (page) { pagedOffsets.push({ id: page.id, au: offsetAu(km, page) }); continue; }
   if (loosest !== undefined) {
@@ -126,9 +151,29 @@ for (const [index, row] of (answer.data as unknown[][]).entries()) {
   farthestAu = Math.max(farthestAu, au); nearestAu = Math.min(nearestAu, au);
   rows.push(`${name},${km.map(value => value.toFixed(0)).join(',')}`);
 }
+let pageRows = 0;
+if (pagesTable !== undefined) {
+  const tablePath = resolve(objects, id, 'source/dots', pagesTable);
+  const [header, ...lines] = gunzipSync(await readFile(tablePath)).toString('utf8').split('\n').filter(Boolean);
+  if (header !== 'name,xKm,yKm,zKm') throw new TypeError(`${tablePath}: the header must be name,xKm,yKm,zKm, got ${JSON.stringify(header)}.`);
+  for (const line of lines) {
+    const name = line.split(',')[0]!;
+    if (written.has(name)) throw new TypeError(`${tablePath}: ${name} is already a row of the catalogue.`);
+    written.add(name); rows.push(line); pageRows++;
+  }
+}
+// From far away the app draws only the first rows of a bank. In the order of a hash of each name (FNV-1a), any first
+// part holds every population and every region in proportion, so a thinned view loses no swarm whole.
+const order = (line: string) => {
+  let hash = 0x811c9dc5;
+  for (const unit of line.slice(0, line.indexOf(','))) hash = Math.imul(hash ^ unit.codePointAt(0)!, 0x01000193) >>> 0;
+  return hash;
+};
+rows.sort((left, right) => order(left) - order(right) || (left < right ? -1 : 1));
 const output = resolve(objects, id, 'source/dots/positions.csv.gz');
 await writeFile(output, gzipSync(`name,xKm,yKm,zKm\n${rows.join('\n')}\n`));
+if (pagesTable !== undefined) console.log(`Joined ${pageRows} rows of ${pagesTable}.`);
 console.log(`Wrote ${rows.length} positions at JD ${epochJdTt} TT to ${output}, ${nearestAu.toFixed(1)} to ${farthestAu.toFixed(1)} au from the Sun.`);
 pagedOffsets.sort((left, right) => right.au - left.au);
 console.log(`Left out, with a page (${pagedOffsets.length}); ellipse to prepared position, au: ${pagedOffsets.map(({ id: pageId, au }) => `${pageId} ${au.toFixed(4)}`).join(', ')}.`);
-if (loosest !== undefined) console.log(`Left out, orbit looser than condition code ${loosest}: ${[...loose].sort().map(([code, count]) => `code ${code} (${count})`).join(', ') || 'none'}.`);
+if (loose.size) console.log(`Left out, orbit looser than its population's condition code: ${[...loose].sort().map(([code, count]) => `code ${code} (${count})`).join(', ') || 'none'}.`);

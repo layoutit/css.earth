@@ -13,7 +13,7 @@ The 4,167 objects past Neptune that have a well-known orbit and no page of their
 
 ## Processing
 
-1. [`positions.mts`](../../../packages/bake/authoring/small-body-dots/positions.mts) asks the database once for the class in [`query.json`](source/dots/query.json). It carries each orbit from its perihelion passage to the world's epoch, JD 2461286.5 TT (2026-09-03), as an unperturbed ellipse about the Sun, and turns the result from ecliptic to ICRF axes. It leaves out every object whose name or designation is an object package's (29), and every orbit with a condition code above 6 or none (449 at code 7, 691 at 8, 1,943 at 9, 14 with none): a dot that can be tens of degrees along its orbit from the object does not mark where it is. It writes [`positions.csv.gz`](source/dots/positions.csv.gz).
+1. [`positions.mts`](../../../packages/bake/authoring/small-body-dots/positions.mts) asks the database once for the class in [`query.json`](source/dots/query.json). It carries each orbit from its perihelion passage to the world's epoch, JD 2461286.5 TT (2026-09-03), as an unperturbed ellipse about the Sun, and turns the result from ecliptic to ICRF axes. It leaves out every object whose name or designation is an object package's (29), and every orbit with a condition code above 6 or none (449 at code 7, 691 at 8, 1,943 at 9, 14 with none): a dot that can be tens of degrees along its orbit from the object does not mark where it is. It writes the rows in the order of a hash of each name, so the first rows the app draws from afar cover the whole belt, to [`positions.csv.gz`](source/dots/positions.csv.gz).
 2. `packages/bake/cli/prepare-body-points.mts` writes the positions as a point bank whose origin is the Sun. The bank is held in gigametres, rounded to 100 km, because a megametre bank reaches only 215 million km.
 
 The dots are the app's catalogue dots: not clickable and not named.
@@ -28,7 +28,7 @@ The dots lie 2.5 to 123.9 au from the Sun: 315 inside 30 au, 3,637 between 30 an
 
 ## Evidence
 
-![The Solar System from 211 au: the Kuiper belt as grey dots outside Neptune's orbit](evidence/2026-10-01/solar-system.webp)
+![The Solar System from 211 au: the Kuiper belt as grey dots outside Neptune's orbit](evidence/2026-10-02/solar-system.webp)
 
 A headless capture of this version's Solar System overview at 211 au.
 
@@ -37,6 +37,6 @@ A headless capture of this version's Solar System overview at 211 au.
 - The dots are the objects found so far with well-known orbits, not the belt. Leaving out the loose orbits removes most of the deep search fields, such as the one made for New Horizons around Arrokoth. They gather where surveys have looked, and they thin out with distance because fainter objects go unseen.
 - The database's trans-Neptunian class is set by semi-major axis alone. 315 of the dots are now inside Neptune's distance, on stretched orbits.
 - Each orbit is carried as an unperturbed ellipse, without the planets' pulls. The script checks the result only for the 29 objects with pages.
-- No colour is taken from the database. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured colour (`NEUTRAL_CATALOGUE_COLOUR`). The 2 px dot size and half opacity are display choices.
+- No colour is taken from the database. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured colour (`NEUTRAL_CATALOGUE_COLOUR`). The 1.5 px dot size and half opacity are display choices.
 - The dots do not draw while a moon is selected: a moon's system is the moon and its planet.
 - The positions hold for the world's one epoch; the dots do not move.

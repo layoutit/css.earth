@@ -3,7 +3,8 @@
  *
  * Only an asteroid that is a JPL mission target keeps a marker on the map (jpl-mission-targets.mts). Every other asteroid
  * package still has its place in the world, prepared from JPL Horizons (`properties.worldFrame.originM` of its
- * descriptor): this writes those places as `name,xKm,yKm,zKm`, relative to the Sun, for the `paged-asteroid-dots` bank.
+ * descriptor): this writes those places as `name,xKm,yKm,zKm`, relative to the Sun, for the `catalogue-asteroids` bank to join
+ * (packages/bake/authoring/small-body-dots/positions.mts `pagesTable`).
  *
  * Usage: node site/build/prepare/paged-asteroid-dot-positions.mts
  */
@@ -27,6 +28,6 @@ for (const id of (await readdir(objects)).sort()) {
   }
   rows.push(`${id},${(originM as number[]).map((value, axis) => ((value - sunM[axis]!) / 1000).toFixed(0)).join(',')}`);
 }
-const output = resolve(objects, 'paged-asteroid-dots/source/dots/positions.csv.gz');
+const output = resolve(objects, 'catalogue-asteroids/source/dots/paged-positions.csv.gz');
 await writeFile(output, gzipSync(`name,xKm,yKm,zKm\n${rows.join('\n')}\n`));
 console.log(`Wrote ${rows.length} positions at JD ${epochJdTt} TT to ${output}.`);

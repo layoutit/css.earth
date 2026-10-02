@@ -1,11 +1,15 @@
 {
-  "classes": [
-    "TNO"
-  ],
   "pageClassifications": [
     "asteroid",
     "dwarf-planet",
     "trans-neptunian"
   ],
-  "loosestConditionCode": 6
+  "populations": [
+    {
+      "classes": [
+        "TNO"
+      ],
+      "loosestConditionCode": 6
+    }
+  ]
 }
