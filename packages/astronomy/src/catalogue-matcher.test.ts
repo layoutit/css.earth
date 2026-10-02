@@ -18,6 +18,8 @@ for (const comparison of ['degrees', 'arcseconds'] satisfies CatalogueMatchCompa
     assert.equal(matches(0, radiusDeg), true);
     assert.equal(matches(0, -radiusDeg), true);
     assert.equal(matches(0, radiusDeg * 1.001), false);
+    // Field and query sit in neighbouring RA cells, so only the 3x3 traversal finds them.
+    assert.equal(createRaDecCatalogueMatcher([[0.0027, 0]], 10, comparison)(0.0029, 0), true);
   });
 
   test(`${comparison}: numeric non-finite positions retain their non-matching behaviour`, () => {
@@ -41,6 +43,7 @@ test('comparison modes preserve multiplication rounding at the radius', () => {
   const decDeg = matchArcsec / 3600;
   assert.equal(createRaDecCatalogueMatcher([[0, 0]], matchArcsec, 'degrees')(0, decDeg), true);
   assert.equal(createRaDecCatalogueMatcher([[0, 0]], matchArcsec, 'arcseconds')(0, decDeg), false);
+  assert.equal(createRaDecCatalogueMatcher([[0, 0]], matchArcsec)(0, decDeg), true);
 });
 
 test('validates external shapes, numbers, radius and comparison without coercion', () => {
