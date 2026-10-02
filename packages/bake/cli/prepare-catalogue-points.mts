@@ -13,6 +13,11 @@
  * along their sight lines through the disc's published thickness. Right ascension and declination may
  * also be sexagesimal columns (`raH`, `raM`, `raS`, `decSign`, `decD`, `decM`, `decS`).
  *
+ * `frame.placement: 'spheroid'` draws each ICRS row's depth from a published spheroid's density along its sight line.
+ * With `frame.around` (an object id and a basis) the bank is written around that object's world origin in parsecs
+ * (`frame.unit: 'pc'`, to 1e-4 pc) instead of around the Sun in kpc: a cluster a few parsecs across, 8 kpc away, whose
+ * stars would otherwise fall on a 0.1 pc grid. The spheroid's centre must be that origin.
+ *
  * `appearance.colorByClass` colours each row by the class its column's value falls in (below each class's `below`, the
  * last class above all of them): the colour of that class's published template spectrum, through the CIE 1931 observer
  * into sRGB as the app colours stars (packages/bake/src/objects/stellar/stellar-photometric-color.ts). A row without a
@@ -33,7 +38,7 @@ import { readFitsHdus, binaryTable, tableColumn, numbers } from '@cssearth/bake/
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
 import { spectrumLinearSrgb } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, placeGroupMembers, placeMeasuredRows, recipePublished, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
+import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, parseCatalogueSpheroid, placeGroupMembers, placeMeasuredRows, placeSpheroidRows, recipePublished, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectDirectoryArgument, id] = process.argv.slice(2);
 if (!objectDirectoryArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare-catalogue-points.mts <object-directory> <id>');
@@ -106,7 +111,8 @@ if (kinematicUncertainty && (typeof kinematicUncertainty.basis !== 'string' || !
     !(kinematicUncertainty.rotation.theta0KmS > 0) || !(kinematicUncertainty.rotation.sigmaVKmS > 0) || table.distanceUnit !== 'kpc')) {
   throw new TypeError(`${at('kinematicUncertainty')} needs a kinematic rule, the rotation curve, a basis and kpc distances.`);
 }
-const frame = recipe.frame as { input: string; output: string; epochJdTt: number; unit?: 'kpc' | 'Mpc'; placement?: 'image-layer-disc' | 'spheroid' };
+const frame = recipe.frame as { input: string; output: string; epochJdTt: number; unit?: 'pc' | 'kpc' | 'Mpc'; placement?: 'image-layer-disc' | 'spheroid';
+  around?: { object: string; basis: string } };
 type Spectrum = { path: string; bytes: number; wavelength: string; flux: string; wavelengthUnit: 'angstrom';
   /** A template that ends inside the visible range: no light is counted past its last sample, and `basis` says why that holds. */
   endsNm?: { value: number; basis: string } };
@@ -132,7 +138,11 @@ if (!['whitespace', 'fixed-width', 'csv'].includes(table.format)) throw new Type
 if (!skyPlacement && !['pc', 'kpc', 'parallax-mas', 'distance-modulus', 'redshift-planck18'].includes(table.distanceUnit!)) {
   throw new TypeError(`${at('table.distanceUnit')} must be pc, kpc, parallax-mas, distance-modulus or redshift-planck18.`);
 }
-if (frame.unit !== undefined && frame.unit !== 'kpc' && frame.unit !== 'Mpc') throw new TypeError(`${at('frame.unit')} must be kpc or Mpc.`);
+if (frame.unit !== undefined && frame.unit !== 'pc' && frame.unit !== 'kpc' && frame.unit !== 'Mpc') throw new TypeError(`${at('frame.unit')} must be pc, kpc or Mpc.`);
+if ((frame.unit === 'pc') !== (frame.around !== undefined) || (frame.around !== undefined && (!spheroidPlacement || typeof frame.around.object !== 'string'
+    || !/^[a-z0-9][a-z0-9-]*$/u.test(frame.around.object) || typeof frame.around.basis !== 'string' || !frame.around.basis))) {
+  throw new TypeError(`${at('frame.around')} is { object, basis } on a spheroid placement with frame.unit pc, and pc is its only unit; got ${JSON.stringify(frame.around)} with unit ${String(frame.unit)}.`);
+}
 if (!['galactic', 'icrs'].includes(frame.input) || frame.output !== 'sun-icrf' || !Number.isFinite(frame.epochJdTt)) throw new TypeError(`${at('frame')} must convert galactic or icrs to sun-icrf at a finite epoch.`);
 if (skyPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty)) throw new TypeError(`${at('frame.placement')} ${String(frame.placement)} places ICRS rows in kpc, without kinematic distances.`);
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
@@ -148,7 +158,8 @@ if (colorByBv && (!Array.isArray(colorByBv.range) || !(colorByBv.range[0] < colo
     || colorByBv.steps < 2 || colorByBv.steps > 64 || typeof colorByBv.basis !== 'string' || !colorByBv.basis)) {
   throw new TypeError(`${at('appearance.colorByBv')} takes a rising [low, high] B-V range, 2-64 steps and a basis; got ${JSON.stringify(colorByBv)}.`);
 }
-if (skyPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a ${String(frame.placement)} placement has none.`);
+// A spheroid's rows take their tone at the spheroid's own distance: their drawn depths barely change it.
+if (discPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a ${String(frame.placement)} placement has none.`);
 if (colorBySpectrumAtRedshift && (table.distanceUnit !== 'redshift-planck18' || !colorBySpectrumAtRedshift.spectrum || !(colorBySpectrumAtRedshift.step > 0) ||
     typeof colorBySpectrumAtRedshift.basis !== 'string')) {
   throw new TypeError(`${at('appearance.colorBySpectrumAtRedshift')} needs a redshift-planck18 distance, a spectrum, a positive step and a basis.`);
@@ -264,7 +275,9 @@ with opener(r['table'], 'rt', encoding='utf8') as handle:
       if mtext and r['nanomaggies']: magnitude = 22.5 - 2.5 * math.log10(float(mtext)) if float(mtext) > 0 else None
       elif mtext: magnitude = float(mtext)
       if magnitude is not None and r['unit'] != 'redshift-planck18':
-        parsecs = d if r['unit'] in ('pc', 'distance-modulus') else d * 1000
+        # A row placed without a distance of its own takes its tone at the distance of what it is placed in.
+        if d is None and r['placementPc'] is None: raise ValueError('a tone needs a distance: %s has none' % name)
+        parsecs = r['placementPc'] if d is None else d if r['unit'] in ('pc', 'distance-modulus') else d * 1000
         magnitude -= 5 * math.log10(parsecs / 10)
     bands = [max(0.0, float(field(line, c['column']) or 0) * c['scale']) for c in r['bands']] if r['bands'] else None
     kept.append((name, l, b, d, color, kinematic_sigma(line, l, b, d) if r['weight'] else None, magnitude, bands))
@@ -296,7 +309,8 @@ const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env,
     fromName: table.galacticFromName === true, byFlag: table.distanceByFlag ?? null, icrs: icrsInput, csv: table.format === 'csv', weight: kinematicUncertainty ?? null, firstOf: table.distanceFirstOf ?? null, onePerName: table.onePerName === true,
     exclude: table.exclude ? { ...table.exclude, path: resolve(sourceDirectory, table.exclude.path) } : null, group: groupDistance ?? null,
     disc: skyPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
-    bands: colorByBands ? [colorByBands.red, colorByBands.green, colorByBands.blue] : null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
+    bands: colorByBands ? [colorByBands.red, colorByBands.green, colorByBands.blue] : null, outUnit: frame.unit ?? 'kpc',
+    placementPc: spheroidPlacement ? (recipe.frame as { spheroid?: { distancePc?: unknown } }).spheroid?.distancePc ?? null : null, ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
 const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; excluded: number; astropy: string; points: number[][]; names: string[]; colors: (number | null)[];
   magnitudes: (number | null)[]; bands: (number[] | null)[]; redshifts: number[] | null;
@@ -393,39 +407,22 @@ if (discPlacement) {
   });
 }
 
-/** A spheroid placement (`frame.spheroid`): the deprojected Sérsic density (Prugniel & Simien 1997) of a published fit, on
- * an oblate spheroid whose axis lies in the plane of the sky at a position angle, ending at `cutoffHalfLightRadii`. Each row
- * sits along its sight line at a depth drawn from that density, seeded like the disc heights. The depth is drawn, not
- * measured; the same density spreads the galaxy's light in depth (its nebula-lab recipe's `shapePrior`). */
+// A spheroid placement (`frame.spheroid`, catalogue-spheroid.ts): each row's depth drawn along its sight line; with
+// `frame.around`, around that object's world origin in pc.
+let aroundOriginM: number[] | null = null;
 if (spheroidPlacement) {
-  const sph = (recipe.frame as { spheroid?: Record<string, unknown> }).spheroid;
-  const num = (key: string) => { const value = sph?.[key]; if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at(`frame.spheroid.${key}`)} must be a finite number, got ${JSON.stringify(value)}.`); return value; };
-  if (!sph || typeof sph.source !== 'string' || !sph.source || typeof sph.basis !== 'string' || !sph.basis) throw new TypeError(`${at('frame.spheroid')} needs its fit's numbers, a source and a basis; got ${JSON.stringify(sph)}.`);
-  const [ra0, dec0, distanceKpc, re, n, q, pa, cutoff] = ['centerRaDeg', 'centerDecDeg', 'distancePc', 'halfLightRadiusKpc', 'sersicIndex', 'axisRatio', 'axisPositionAngleDeg', 'cutoffHalfLightRadii'].map(num) as number[];
-  const rad = Math.PI / 180, unit = (raDeg: number, decDeg: number) => [Math.cos(decDeg * rad) * Math.cos(raDeg * rad), Math.cos(decDeg * rad) * Math.sin(raDeg * rad), Math.sin(decDeg * rad)];
-  const target = unit(ra0!, dec0!), northPole = [0, 0, 1], dotv = (a: number[], b: number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
-  const northRaw = northPole.map((v, i) => v - dotv(northPole, target) * target[i]!), northLength = Math.hypot(...northRaw), north = northRaw.map(v => v / northLength);
-  const east = [north[1]! * target[2]! - north[2]! * target[1]!, north[2]! * target[0]! - north[0]! * target[2]!, north[0]! * target[1]! - north[1]! * target[0]!];
-  const axis = [0, 1, 2].map(i => Math.sin(pa! * rad) * east[i]! + Math.cos(pa! * rad) * north[i]!), dKpc = distanceKpc! / 1000;
-  const p = 1 - 0.6097 / n! + 0.05463 / (n! * n!), b = 1.9992 * n! - 0.3271;
-  const density = (point: number[]) => {
-    const offset = point.map((v, i) => v - target[i]! * dKpc), axial = dotv(offset, axis), radial = Math.sqrt(Math.max(0, dotv(offset, offset) - axial * axial));
-    const m = Math.hypot(radial, axial / q!) / re!;
-    return m >= cutoff! ? 0 : Math.max(m, .01) ** -p * Math.exp(-b * (Math.max(m, .01) ** (1 / n!) - 1));
-  };
-  const { createHash } = await import('node:crypto');
-  const draw = (index: number, salt: string) => (Number(createHash('sha256').update(`${id}:${index}${salt}`).digest().readBigUInt64BE(0) >> 11n) + 0.5) / 2 ** 53;
-  const reach = cutoff! * re!, samples = 400;
-  converted.points = converted.sky!.map(([ra, dec], index) => {
-    const ray = unit(ra, dec), weights: number[] = [];
-    for (let k = 0; k < samples; k++) { const t = dKpc - reach + (k + 0.5) / samples * 2 * reach; weights.push(density(ray.map(v => v * t))); }
-    const total = weights.reduce((a, c) => a + c, 0);
-    // A row whose sight line misses the spheroid stays at the galaxy's distance.
-    let distance = dKpc;
-    if (total > 0) { const want = draw(index, ':depth') * total; let k = 0, running = weights[0]!; while (running < want && k < samples - 1) running += weights[++k]!; distance = dKpc - reach + (k + 0.5) / samples * 2 * reach; }
-    converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, distance);
-    return ray.map(value => Math.round(value * distance * 1e4) / 1e4);
-  });
+  if (frame.around) {
+    const descriptorPath = resolve(objectDirectory, '..', frame.around.object, 'object.json');
+    const worldFrame = (JSON.parse(await readFile(descriptorPath, 'utf8')) as { properties?: { worldFrame?: { referenceFrame?: unknown; epochJdTt?: unknown; originM?: unknown } } }).properties?.worldFrame;
+    const origin = worldFrame?.originM;
+    if (worldFrame?.referenceFrame !== frame.output || worldFrame.epochJdTt !== frame.epochJdTt || !Array.isArray(origin) || origin.length !== 3 || !origin.every(Number.isFinite)) {
+      throw new TypeError(`${descriptorPath}: properties.worldFrame must be a ${frame.output} frame at epoch ${frame.epochJdTt} with an originM, got ${JSON.stringify(worldFrame)}.`);
+    }
+    aroundOriginM = origin as number[];
+  }
+  const placed = placeSpheroidRows({ sky: converted.sky!, spheroid: parseCatalogueSpheroid((recipe.frame as { spheroid?: unknown }).spheroid, at('frame.spheroid')), id,
+    ...(aroundOriginM ? { aroundOriginM } : {}), at: at('frame.spheroid') });
+  converted.points = placed.points; converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, placed.maxDistanceKpc);
 }
 
 // A colour column maps onto the stops' piecewise-linear sRGB ramp, quantised to a small palette the bank carries.
@@ -494,7 +491,8 @@ const redshiftColour = (index: number) => {
 const classIndex = (value: number | null) => value === null || !Number.isFinite(value) ? colorByClass!.classes.length
   : Math.max(0, colorByClass!.classes.findIndex(entry => entry.below === undefined || value < entry.below));
 const reachKpc = Math.ceil(converted.maxDistanceKpc);
-const outputMpc = frame.unit === 'Mpc', reach = outputMpc ? Math.ceil(converted.maxDistanceKpc / 1000) : reachKpc;
+const outputMpc = frame.unit === 'Mpc';
+const reach = aroundOriginM ? Math.ceil(Math.max(...converted.points.flat().map(Math.abs))) : outputMpc ? Math.ceil(converted.maxDistanceKpc / 1000) : reachKpc;
 const classPalette = classColours ? [...classColours, colorByClass!.missing.colorCss] : null;
 // Band colours: the three scaled fluxes, the brightest channel full, each channel in `levels` steps. A row with no
 // positive flux in any band takes the bank's colour.
@@ -565,8 +563,8 @@ if (fullDetail !== undefined && (typeof fullDetail.units !== 'number' || !(fullD
   throw new TypeError(`${at('appearance.fullDetail')} needs positive units and a basis, got ${JSON.stringify(fullDetail)}.`);
 }
 const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
-  frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
-    metersPerUnit: outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
+  frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: aroundOriginM ?? [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+    metersPerUnit: aroundOriginM ? 3.0856775814913673e16 : outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
   appearance: photographLook ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, palette: photographLook.colours, paletteTone: photographLook.tones }
     : { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
       ...(fullDetail ? { fullDetailUnits: fullDetail.units, fullDetailBasis: fullDetail.basis } : {}),
@@ -589,7 +587,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   ...(groupDistance ? { groupDistance: { source: groupDistance.source, depth: groupDistance.depth, basis: groupDistance.basis, placed: groupPlaced },
     groups: converted.groups!.map(([group]) => group) } : {}),
   ...(table.exclude ? { exclusion: { path: table.exclude.path, withinArcsec: table.exclude.withinArcsec, source: table.exclude.source, basis: table.exclude.basis } } : {}),
-  conversion: spheroidPlacement ? 'Right ascension and declination at a depth drawn from the spheroid\'s density along the sight line (frame.spheroid), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.' : discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
+  conversion: spheroidPlacement ? 'Right ascension and declination at a depth drawn from the spheroid\'s density along the sight line (frame.spheroid), ' + (frame.around ? `ICRS axes around ${frame.around.object}'s origin, pc, rounded to 0.0001 pc.` : 'heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.') : discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
     : `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),

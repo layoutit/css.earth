@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "nuclear-cluster",
+  "published": true,
+  "table": {
+    "path": "sample.csv.gz",
+    "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/631/A20/central&-c=266.4168166%20-29.0078250&-c.rm=6&-out=RAJ2000,DEJ2000,Jmag,Hmag,Ksmag&-out.max=999999&Ksmag=%3C16",
+    "generator": "packages/bake/authoring/milky-way/nuclear-cluster-sample.mts",
+    "bytes": 85556,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "Ksmag": 4
+    }
+  },
+  "sample": "The tracked file keeps 5,610 of the 155,866 stars the GALACTICNUCLEUS central catalogue lists within 6 arcminutes of Sgr A* brighter than Ks 16 (nuclear-cluster-sample.mts): those brighter than Ks 14, where the survey is as complete in the crowded centre as around it, and redder than H - Ks 1.3, the Galactic centre's own stars; inside two half-light radii of the cluster, on ellipses flattened 0.71 along the Galactic plane; each kept with the chance that it is the cluster's, one minus the star density of the 5 to 6 arcminute ring over that of its own half-arcminute ring (0.88 at the centre, 0.11 at the edge), drawn by its position; with a name from its position, RA, DEC and Ks.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "pc",
+    "placement": "spheroid",
+    "around": {
+      "object": "sgr-a-star",
+      "basis": "The cluster is centred on the black hole (Schödel et al. 2014, A&A 566, A47), so its stars are written around Sgr A*'s world origin, in parsecs: the S-stars on their orbits sit in the same frame."
+    },
+    "converter": "Each sky position at a depth drawn from the spheroid's density along its sight line (frame.spheroid).",
+    "spheroid": {
+      "centerRaDeg": 266.4168166,
+      "centerDecDeg": -29.007825,
+      "distancePc": 8277,
+      "halfLightRadiusKpc": 0.0051,
+      "sersicIndex": 2.2,
+      "axisRatio": 0.71,
+      "axisPositionAngleDeg": -58.6,
+      "cutoffHalfLightRadii": 2,
+      "source": "gallego-cano-2020-nuclear-star-cluster",
+      "basis": "Gallego-Cano et al.'s (2020, A&A 634, A71; arXiv:2001.08182) Sérsic fit to the nuclear star cluster's star counts: effective radius 5.1 +/- 1.0 pc, index 2.2 +/- 0.7, axis ratio 0.71 +/- 0.10, flattened along the Galactic plane, so its axis points to Galactic north (position angle -58.6 degrees at Sgr A*). Centre and distance are Sgr A*'s (SIMBAD; GRAVITY Collaboration 2022, 8277 pc). The sample ends at two effective radii, and so does the spheroid. Each star's depth is drawn from it, not measured."
+    }
+  },
+  "source": "nogueras-lara-2019-galacticnucleus",
+  "meaning": "Stars of the Milky Way's nuclear star cluster around Sgr A*, from the GALACTICNUCLEUS survey (Nogueras-Lara et al. 2019, A&A 631, A20): one dot per star at its measured sky position, at a depth along the sight line drawn from the cluster's measured shape.",
+  "appearance": {
+    "colorCss": "#ffd5b4",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the app's catalogue star colour for B-V 1.2, a red giant's. The survey's own colours measure the dust in front of each star, not the star.",
+    "fullDetail": {
+      "units": 100,
+      "basis": "Presentation choice: the cluster is whole within 100 pc of Sgr A*, ten times its reach; farther out it thins and then fades as it shrinks to a few pixels."
+    },
+    "toneBy": {
+      "magnitudeColumn": 4,
+      "band": "Ks, as observed through the dust, at Sgr A*'s 8277 pc",
+      "brightMagnitude": -4.6,
+      "faintMagnitude": -0.6,
+      "faintTone": 0.45,
+      "steps": 6,
+      "basis": "Presentation choice: full tone at Ks 10 and brighter (absolute -4.6 at 8277 pc with no correction for dust), falling linearly in magnitude to 0.45 at the sample's Ks 14 limit, so the brightest giants stand out from the red clump."
+    }
+  }
+}

@@ -11,6 +11,7 @@ test('the Milky Way backing dims its blurred outer disc close up while its rings
   const backing = parseGalaxyBacking(prepared());
   assert.equal(backing.nearFade?.nearOpacity, 0, 'the outer disc goes entirely close up');
   assert.deepEqual(backing.nearFade?.fadeM.map(m => m / KPC_M), [12, 1.5]);
+  assert.deepEqual(backing.centreFadeM?.map(m => +(m / KPC_M).toFixed(6)), [1.5, 0.3], 'every layer goes as the camera closes on the centre');
   assert.deepEqual(backing.sections?.map(section => section.texturePath), ['backing/middle.webp', 'backing/inner.webp', 'backing/bulge.webp']);
   // Stacked over the result below, the rings reach 45, 70 and 100 percent close up.
   const [middle, inner, bulge] = backing.sections!.map(section => section.nearOpacity);
@@ -23,6 +24,7 @@ test('a backing refuses a malformed near fade or section, naming the bank and th
   const sections = data.sections as Record<string, unknown>[];
   assert.throws(() => parseGalaxyBacking({ ...data, nearFade: { nearOpacity: 1.5, fadeM: [2, 1] } }), /backing: backing nearFade needs a nearOpacity in \[0, 1\]/);
   assert.throws(() => parseGalaxyBacking({ ...data, nearFade: { nearOpacity: .5, fadeM: [1, 2] } }), /far above near/);
+  assert.throws(() => parseGalaxyBacking({ ...data, centreFadeM: [1, 2] }), /centreFadeM is \[far, near\] metres/);
   assert.throws(() => parseGalaxyBacking({ ...data, sections: [{ ...sections[0], texturePath: '../x.webp' }] }), /backing: backing section 0 needs a texture path/);
   assert.throws(() => parseGalaxyBacking({ ...data, sections: 'rings' }), /backing: backing sections must be a list/);
 });

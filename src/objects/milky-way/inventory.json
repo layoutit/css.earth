@@ -4,8 +4,8 @@
     {
       "location": "prepared",
       "filename": "backing.json",
-      "bytes": 1743,
-      "sha256": "bd52e30567dd48dd9794de7708de46f3614fe0feef174b4120ae7809fdadc5aa"
+      "bytes": 1800,
+      "sha256": "59ae94439b18ffc63a3fd1c01ccdf8756e0e8befb260b7f71393b575223bcb1f"
     },
     {
       "location": "prepared",
@@ -42,6 +42,12 @@
       "filename": "globular-clusters.bin",
       "bytes": 2513,
       "sha256": "3cb903542f6f8636a934e2fd3767df44482e6b8f74f3089fb32bb745e3a09983"
+    },
+    {
+      "location": "prepared",
+      "filename": "nuclear-cluster.bin",
+      "bytes": 53163,
+      "sha256": "043cfd33a73ee7c645b734e6ba8cf612c994c8d2adfa044cba4322284387a140"
     },
     {
       "location": "prepared",
