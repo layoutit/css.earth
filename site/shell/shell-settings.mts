@@ -35,7 +35,11 @@ export function createSettingsController(
   // It stays off: the next scene's controller takes over the same panel, and a page without script never ran this.
   panel.querySelector('.object-settings-submit')?.remove();
   const opening = (event: Event) => {
-    if (event.target instanceof windowTarget.Element && event.target.closest(`[popovertarget="${panel.id}"]`)) showSection(panel, true);
+    if (!(event.target instanceof windowTarget.Element) || !event.target.closest(`[popovertarget="${panel.id}"]`)) return;
+    showSection(panel, true);
+    // A body arrived at in the session brings the button back with its page's panel: it showed again under the toggles
+    // on TRAPPIST-1e opened from its system (2026-10-02).
+    panel.querySelector('.object-settings-submit')?.remove();
   };
   documentTarget.addEventListener('click', opening, { capture: true, signal: events.signal });
   panel.addEventListener('toggle', event => { if ((event as ToggleEvent).newState === 'closed') showSection(panel, false); }, { signal: events.signal });

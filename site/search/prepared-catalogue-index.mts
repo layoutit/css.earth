@@ -7,6 +7,7 @@ import { sourceDocumentation, systemSourceDocumentation } from '../source-docume
 import { allPlanetarySystems } from '../object-systems.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
+import { listDistance } from './list-distance.mts';
 
 /** A result row shows an object by its marker. */
 export function objectResultMarker(object: { readonly id: string; readonly color: string }) {
@@ -21,7 +22,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
     entries: Object.freeze([...SEARCH_OBJECTS.map((object): CatalogueIndexEntry => {
       const title = distanceDescription(object.distance);
       const source = sourceDocumentation(object.id, object.name);
-      const value = String(Number(object.distance.value.toFixed(3)));
+      const { value, unit } = listDistance(object.distance);
       return Object.freeze({
         kind: 'scene' as const,
         id: object.id,
@@ -34,8 +35,8 @@ export function preparedCatalogueIndex(): CatalogueIndex {
         illustration: object.discovery.illustration,
         distanceMeters: object.distance.meters,
         // A search row always states the distance; what kind of model draws it is the object page's business.
-        detail: Object.freeze({ text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
-          title, ariaLabel: `${value} ${object.distance.unit}. ${title}` }),
+        detail: Object.freeze({ text: `${value} ${unit}`, value, unit,
+          title, ariaLabel: `${value} ${unit}. ${title}` }),
         source: Object.freeze({ subject: `object:${object.id}`, document: source.href, label: source.label }),
         marker: objectResultMarker(object),
       });
@@ -48,7 +49,7 @@ export function preparedCatalogueIndex(): CatalogueIndex {
 function systemEntries(): CatalogueIndexEntry[] {
   return allPlanetarySystems(SCENE_OBJECTS).map(system => {
     const star = SCENE_OBJECTS.find(object => object.id === system.id)!, source = systemSourceDocumentation(system);
-    const title = distanceDescription(star.distance), value = String(Number(star.distance.value.toFixed(3)));
+    const title = distanceDescription(star.distance), { value, unit } = listDistance(star.distance);
     return Object.freeze({
       kind: 'system' as const,
       id: system.id,
@@ -61,7 +62,7 @@ function systemEntries(): CatalogueIndexEntry[] {
       illustration: false,
       candidate: false,
       distanceMeters: star.distance.meters,
-      detail: Object.freeze({ text: `${value} ${star.distance.unit}`, value, unit: star.distance.unit, title, ariaLabel: `${value} ${star.distance.unit}. ${title}` }),
+      detail: Object.freeze({ text: `${value} ${unit}`, value, unit, title, ariaLabel: `${value} ${unit}. ${title}` }),
       source: Object.freeze({ subject: `overview:system:${system.id}`, document: source.href, label: source.label }),
       marker: Object.freeze({ kind: 'scene' as const, id: star.id, color: star.color }),
     });
