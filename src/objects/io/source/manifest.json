@@ -1026,6 +1026,16 @@
             "evidence": "Appendix B processed M-band radiance, longitude, latitude, emission, range and saturation mask, through PJ55."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "juno",
+            "missionId": "juno",
+            "evidence": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip — Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction"
+          }
+        ]
       }
     },
     {

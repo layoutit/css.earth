@@ -3419,6 +3419,467 @@
           }
         ]
       }
+    },
+    {
+      "id": "kaguya",
+      "name": {
+        "value": "Kaguya",
+        "citations": [
+          {
+            "catalogueId": "reference-kaguya",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "SELENE",
+          "citations": [
+            {
+              "catalogueId": "reference-kaguya",
+              "checkedOn": "2026-10-02"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A Japanese orbiter that studied the Moon's origin, geology and surface environment with fifteen instruments and two small sub-satellites.",
+        "citations": [
+          {
+            "catalogueId": "reference-kaguya",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-kaguya",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-kaguya",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2007",
+        "citations": [
+          {
+            "catalogueId": "reference-kaguya",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "deep-impact",
+      "name": {
+        "value": "Deep Impact",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-impact",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "EPOXI",
+          "citations": [
+            {
+              "catalogueId": "reference-deep-impact",
+              "checkedOn": "2026-10-02"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "Sent an impactor into comet Tempel 1 to reveal the material beneath its surface, then flew past comet Hartley 2.",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-impact",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-impact",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-impact",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2005",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-impact",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stardust",
+      "name": {
+        "value": "Stardust",
+        "citations": [
+          {
+            "catalogueId": "reference-stardust",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Stardust-NExT",
+          "citations": [
+            {
+              "catalogueId": "reference-stardust",
+              "checkedOn": "2026-10-02"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "The first spacecraft to bring samples of a comet to Earth. It flew past comet Wild 2, asteroid Annefrank and later comet Tempel 1.",
+        "citations": [
+          {
+            "catalogueId": "reference-stardust",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "sample-return",
+        "citations": [
+          {
+            "catalogueId": "reference-stardust",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-stardust",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "1999",
+        "citations": [
+          {
+            "catalogueId": "reference-stardust",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "deep-space-1",
+      "name": {
+        "value": "Deep Space 1",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-space-1",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "DS1",
+          "citations": [
+            {
+              "catalogueId": "reference-deep-space-1",
+              "checkedOn": "2026-10-02"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "An engineering test flight for new technologies, including ion engines, that flew past asteroid Braille and comet Borrelly.",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-space-1",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-space-1",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-space-1",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "1998",
+        "citations": [
+          {
+            "catalogueId": "reference-deep-space-1",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lucy",
+      "name": {
+        "value": "Lucy",
+        "citations": [
+          {
+            "catalogueId": "reference-lucy",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The first spacecraft to explore the Jupiter Trojan asteroids, passing the main-belt asteroids Dinkinesh and Donaldjohanson on its way.",
+        "citations": [
+          {
+            "catalogueId": "reference-lucy",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-lucy",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-lucy",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "reference-lucy",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stereo",
+      "name": {
+        "value": "STEREO",
+        "citations": [
+          {
+            "catalogueId": "reference-stereo",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Solar TErrestrial RElations Observatory",
+          "citations": [
+            {
+              "catalogueId": "reference-stereo",
+              "checkedOn": "2026-10-02"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "Twin spacecraft that study the structure and evolution of solar storms as they leave the Sun.",
+        "citations": [
+          {
+            "catalogueId": "reference-stereo",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-stereo",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-stereo",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2006",
+        "citations": [
+          {
+            "catalogueId": "reference-stereo",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "giotto",
+      "name": {
+        "value": "Giotto",
+        "citations": [
+          {
+            "catalogueId": "reference-giotto",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Europe's first deep space mission, built to photograph and study Halley's comet from close to its nucleus.",
+        "citations": [
+          {
+            "catalogueId": "reference-giotto",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-giotto",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-giotto",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "1985",
+        "citations": [
+          {
+            "catalogueId": "reference-giotto",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nicer",
+      "name": {
+        "value": "NICER",
+        "citations": [
+          {
+            "catalogueId": "reference-nicer",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Neutron star Interior Composition Explorer",
+          "citations": [
+            {
+              "catalogueId": "reference-nicer",
+              "checkedOn": "2026-10-02"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "An X-ray telescope on the International Space Station that studies neutron stars and black holes.",
+        "citations": [
+          {
+            "catalogueId": "reference-nicer",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-nicer",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-nicer",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "band": {
+        "value": "X-ray",
+        "citations": [
+          {
+            "catalogueId": "reference-nicer",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2017",
+        "citations": [
+          {
+            "catalogueId": "reference-nicer",
+            "checkedOn": "2026-10-02"
+          }
+        ]
+      }
     }
   ],
   "missions": [

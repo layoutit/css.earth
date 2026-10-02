@@ -28,6 +28,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-space-1",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.tab \u2014 NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team"
+          }
+        ]
       }
     },
     {
@@ -53,6 +62,15 @@
             "catalogueId": "source-comet-19p-dlr-dem",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-space-1",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/dlrdem.tab \u2014 NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team"
           }
         ]
       }
@@ -83,6 +101,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-space-1",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_x_component.cub \u2014 NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team"
+          }
+        ]
       }
     },
     {
@@ -109,6 +136,15 @@
             "catalogueId": "source-comet-19p-micas-y",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-space-1",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_y_component.cub \u2014 NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team"
           }
         ]
       }
@@ -139,6 +175,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-space-1",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_z_component.cub \u2014 NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team"
+          }
+        ]
       }
     },
     {
@@ -165,6 +210,15 @@
             "catalogueId": "source-comet-19p-micas-orthophoto",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-space-1",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub \u2014 NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team"
           }
         ]
       }

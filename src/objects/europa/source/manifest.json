@@ -19678,6 +19678,15 @@
             "evidence": "src/objects/europa/source/manifest.json#/inputs/401"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits — NASA/ESA/CSA JWST, NIRSpec GTO programme 1250 (PI G. Villanueva); MAST (STScI)"
+          }
+        ]
       }
     },
     {
@@ -20418,6 +20427,15 @@
             "evidence": "src/objects/europa/source/manifest.json@0000000000000000000000000000000000000000#/inputs/432"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits — NASA/ESA/CSA JWST, NIRSpec programmes 1250 (PI G. Villanueva), 4023 and 9230; MAST (STScI)"
+          }
+        ]
       }
     },
     {
@@ -20443,6 +20461,16 @@
             "catalogueId": "source-europa-hst-sodium-chloride",
             "role": "material",
             "evidence": "src/objects/europa/source/manifest.json@0000000000000000000000000000000000000000#/inputs/433"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://mast.stsci.edu/search/ui/#/hst — NASA/ESA Hubble Space Telescope, programme 14650 (PI M. Brown); MAST (STScI)"
           }
         ]
       }

@@ -524,6 +524,16 @@
             "evidence": "src/objects/venus/source/science/usgs/emissivity-isis.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif — NASA; mission team; USGS Astrogeology; Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley (MIT)"
+          }
+        ]
       }
     },
     {
@@ -645,6 +655,16 @@
             "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/freeair.dat"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/freeair.dat — NASA/JPL Magellan Gravity Science Team (W. L. Sjogren); PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -667,6 +687,16 @@
             "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/bouguer.dat"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/bouguer.dat — NASA/JPL Magellan Gravity Science Team (W. L. Sjogren); PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -687,6 +717,16 @@
             "catalogueId": "magellan-gravity-shgj120p",
             "role": "material",
             "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/geoid.dat"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/geoid.dat — NASA/JPL Magellan Gravity Science Team (W. L. Sjogren); PDS Geosciences Node"
           }
         ]
       }

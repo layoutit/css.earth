@@ -25,6 +25,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab — Farnham, Duxbury and Li (2005); NASA/Stardust/PDS"
+          }
+        ]
       }
     },
     {
@@ -48,6 +57,15 @@
             "catalogueId": "source-comet-81p-pds-observed-reference",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab — Farnham, Duxbury and Li (2005); NASA/Stardust/PDS"
           }
         ]
       }
@@ -113,6 +131,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -136,6 +163,15 @@
             "catalogueId": "source-comet-81p-n2073we02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -183,6 +219,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2075we02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -206,6 +251,15 @@
             "catalogueId": "source-comet-81p-n2075we02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2075we02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -252,6 +306,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2077we02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -275,6 +338,15 @@
             "catalogueId": "source-comet-81p-n2077we02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2077we02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -321,6 +393,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2069we02_rr.fit — NASA/JPL-Caltech, Stardust team; NASA PDS"
+          }
+        ]
       }
     },
     {
@@ -344,6 +425,15 @@
             "catalogueId": "source-comet-81p-stereo-trajectory-lbl",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2069we02_rr.lbl — NASA/JPL-Caltech, Stardust team; NASA PDS"
           }
         ]
       }
@@ -371,6 +461,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -394,6 +493,15 @@
             "catalogueId": "source-comet-81p-n2079we02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }

@@ -49,6 +49,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "giotto",
+            "evidence": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif — Max Planck Institute for Solar System Research; Giotto HMC team"
+          }
+        ]
       }
     },
     {
@@ -72,6 +81,15 @@
             "catalogueId": "source-comet-1p-giotto-source-2",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "giotto",
+            "evidence": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/catalog/fig67.tif — Max Planck Institute for Solar System Research; Giotto HMC team"
           }
         ]
       }
@@ -208,6 +226,15 @@
             "catalogueId": "giotto-halley-hmc-best",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "giotto",
+            "evidence": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif — © MPS 1986, 1996; Giotto HMC team; shape by Philip Stooke with pointing by Alain Abergel"
           }
         ]
       }
@@ -451,6 +478,15 @@
             "catalogueId": "giotto-halley-hmc-best",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "giotto",
+            "evidence": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif — © MPS; Giotto HMC team; Vega 2 TVS and KFKI teams; IHW / NASA PDS; shape by Stooke with pointing by Abergel"
           }
         ]
       }

@@ -24,6 +24,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab — Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -118,6 +127,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab — Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -143,6 +161,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000632_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -166,6 +193,15 @@
             "catalogueId": "source-comet-9p-iv05070405-9000632-001-r-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000632_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -212,6 +248,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000639_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -235,6 +280,15 @@
             "catalogueId": "source-comet-9p-iv05070405-9000639-001-r-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000639_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -281,6 +335,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000654_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -304,6 +367,15 @@
             "catalogueId": "source-comet-9p-iv05070405-9000654-001-r-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000654_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -350,6 +422,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30036te02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -373,6 +454,15 @@
             "catalogueId": "source-comet-9p-n30036te02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30036te02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -419,6 +509,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30039te02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -442,6 +541,15 @@
             "catalogueId": "source-comet-9p-n30039te02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30039te02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -488,6 +596,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30042te02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -511,6 +628,15 @@
             "catalogueId": "source-comet-9p-n30042te02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30042te02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -557,6 +683,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -580,6 +715,15 @@
             "catalogueId": "source-comet-9p-iv05070405-9000644-001-r-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -626,6 +770,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -649,6 +802,15 @@
             "catalogueId": "source-comet-9p-iv05070405-9000673-001-r-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -695,6 +857,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -718,6 +889,15 @@
             "catalogueId": "source-comet-9p-n30033te02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -764,6 +944,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -787,6 +976,15 @@
             "catalogueId": "source-comet-9p-n30045te02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -833,6 +1031,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -856,6 +1063,15 @@
             "catalogueId": "source-comet-9p-n30048te02-rr-labelpath",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "stardust",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -903,6 +1119,15 @@
             "locator": "PRODUCT_ID; DATA_SET_ID"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -927,6 +1152,15 @@
             "role": "material",
             "evidence": "Native PDS label src/objects/comet-9p/source/photography/deep-impact/iv05070405_9000675_001_r.lbl identifies the FITS product and its detached label.",
             "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -974,6 +1208,15 @@
             "locator": "PRODUCT_ID; DATA_SET_ID"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -998,6 +1241,15 @@
             "role": "material",
             "evidence": "Native PDS label src/objects/comet-9p/source/photography/deep-impact/iv05070405_9000680_001_r.lbl identifies the FITS product and its detached label.",
             "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -1045,6 +1297,15 @@
             "locator": "PRODUCT_ID; DATA_SET_ID"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.fit — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1069,6 +1330,15 @@
             "role": "material",
             "evidence": "Native PDS label src/objects/comet-9p/source/photography/deep-impact/iv05070405_9000688_001_r.lbl identifies the FITS product and its detached label.",
             "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.lbl — NASA/JPL-Caltech, mission science team; NASA Planetary Data System"
           }
         ]
       }
@@ -1228,6 +1498,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_001_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1251,6 +1530,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_001_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1278,6 +1566,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_002_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1301,6 +1598,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_002_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1328,6 +1634,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_003_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1351,6 +1666,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_003_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1378,6 +1702,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_004_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1401,6 +1734,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_004_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1428,6 +1770,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_005_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1451,6 +1802,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_005_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1478,6 +1838,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_006_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1501,6 +1870,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_006_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1528,6 +1906,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_007_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1551,6 +1938,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_007_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1578,6 +1974,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_008_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1601,6 +2006,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_008_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1628,6 +2042,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_009_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1651,6 +2074,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_009_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1678,6 +2110,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_010_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1701,6 +2142,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_010_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1728,6 +2178,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_011_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1751,6 +2210,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_011_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1778,6 +2246,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_012_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1801,6 +2278,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_012_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1828,6 +2314,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_013_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1851,6 +2346,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_013_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1878,6 +2382,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_014_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1901,6 +2414,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_014_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1928,6 +2450,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_015_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -1951,6 +2482,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_015_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -1978,6 +2518,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_016_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2001,6 +2550,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_016_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2028,6 +2586,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_017_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2051,6 +2618,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_017_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2078,6 +2654,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_018_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2101,6 +2686,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_018_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2128,6 +2722,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_019_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2151,6 +2754,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_019_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2178,6 +2790,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_020_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2201,6 +2822,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_020_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2228,6 +2858,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_021_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2251,6 +2890,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_021_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2278,6 +2926,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_022_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2301,6 +2958,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_022_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2328,6 +2994,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_023_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2351,6 +3026,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_023_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2378,6 +3062,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_024_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2401,6 +3094,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_024_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2428,6 +3130,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_025_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2451,6 +3162,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_025_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2478,6 +3198,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_026_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2501,6 +3230,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_026_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2528,6 +3266,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_027_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2551,6 +3298,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_027_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2578,6 +3334,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_028_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2601,6 +3366,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_028_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2628,6 +3402,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_029_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2651,6 +3434,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_029_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2678,6 +3470,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_030_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2701,6 +3502,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_030_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2728,6 +3538,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_031_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2751,6 +3570,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_031_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2778,6 +3606,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_032_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2801,6 +3638,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_032_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2828,6 +3674,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_033_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2851,6 +3706,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_033_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2878,6 +3742,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_034_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2901,6 +3774,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_034_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2928,6 +3810,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_035_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -2951,6 +3842,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_035_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -2978,6 +3878,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_036_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -3001,6 +3910,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_036_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -3028,6 +3946,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_037_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -3051,6 +3978,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_037_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -3078,6 +4014,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_038_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -3101,6 +4046,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_038_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -3128,6 +4082,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_039_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -3151,6 +4114,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_039_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -3178,6 +4150,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_040_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -3201,6 +4182,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_040_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -3228,6 +4218,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/calib/sunspec/hriir_020601_2_0.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -3251,6 +4250,15 @@
             "catalogueId": "deep-impact-tempel1-hrii-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/calib/sunspec/hriir_020601_2_0.tab — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }
@@ -3278,6 +4286,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/data/rad/2005/185/hv05070405_9000844_001_r.fit — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
+          }
+        ]
       }
     },
     {
@@ -3301,6 +4318,15 @@
             "catalogueId": "deep-impact-tempel1-hri-v3",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "deep-impact",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/data/rad/2005/185/hv05070405_9000844_001_r.lbl — NASA Deep Impact/EPOXI mission team; NASA Planetary Data System"
           }
         ]
       }

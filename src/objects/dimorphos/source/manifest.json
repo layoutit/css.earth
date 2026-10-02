@@ -34,6 +34,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj — NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team"
+          }
+        ]
       }
     },
     {
@@ -85,6 +94,15 @@
             "catalogueId": "source-dimorphos-dimorphos-relative-albedo",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits — NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)"
           }
         ]
       }

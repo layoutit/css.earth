@@ -45,7 +45,16 @@
       "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
       "acquisition": "Cut out of the archive's own pipeline cube member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits through its SODA service, on the circle about the observation's phase centre that the origin URL requests. packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts keeps the channels within 32 km/s of 8 km/s LSRK in a box 300 mas either way of the phase centre, and subtracts from each pixel the median of the 1738 channels more than 120 km/s from the line. The pipeline removes the continuum before imaging, so that median is only its residual. The archive product is 72 GB; this is the part of it that carries the line around this star.",
       "license": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line.",
-      "datasetId": "sio-2023"
+      "datasetId": "sio-2023",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "alma",
+            "evidence": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits&CIRCLE=88.79312208+7.40713833+0.00025 — ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member uid://A001/X360d/Xae"
+          }
+        ]
+      }
     },
     {
       "id": "matisse-2020-02-continuum-4mas",
@@ -68,7 +77,17 @@
       "displayCredit": "ESO/VLTI/MATISSE; reconstruction by this repository",
       "acquisition": "The same bytes Betelgeuse’s own package ships, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star’s drawn sphere.",
       "license": "Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.",
-      "datasetId": "emission-2020"
+      "datasetId": "emission-2020",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455 — Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)"
+          }
+        ]
+      }
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-n-i-dolp",
@@ -135,7 +154,16 @@
       "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
       "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.656. V-band degree of linear polarisation; the quantity the 2024 dataset carries.",
       "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
-      "datasetId": "zimpol-v"
+      "datasetId": "zimpol-v",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.656 — ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12"
+          }
+        ]
+      }
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-v-phase3",

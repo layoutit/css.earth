@@ -31,6 +31,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lucy",
+            "evidence": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds \u2014 DLR/Lucy shape team, Stefano Mottola and Frank Preusker; Marchi et al. (2026), Science, doi:10.1126/science.aec0503; NASA PDS/NAIF"
+          }
+        ]
       }
     },
     {
@@ -53,6 +62,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lucy",
+            "evidence": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds \u2014 DLR/Lucy shape team, Stefano Mottola and Frank Preusker; Marchi et al. (2026), Science, doi:10.1126/science.aec0503; NASA PDS/NAIF"
+          }
+        ]
       }
     },
     {
@@ -73,6 +91,15 @@
             "catalogueId": "source-donaldjohanson-donaldjohanson-observations-lor-0798443290-04598-00035-1x1-sci-03-fit",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lucy",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.fit \u2014 NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker"
           }
         ]
       }
@@ -119,6 +146,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lucy",
+            "evidence": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/pck/donaldjohanson_v12.tpc \u2014 NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker"
+          }
+        ]
       }
     },
     {
@@ -139,6 +175,15 @@
             "catalogueId": "source-donaldjohanson-donaldjohanson-reference-lor-0798443290-04598-00035-1x1-sci-03-xml",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lucy",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.xml \u2014 NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker"
           }
         ]
       }
@@ -217,6 +262,15 @@
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lucy",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.fit \u2014 NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker"
+          }
+        ]
       }
     },
     {
@@ -237,6 +291,15 @@
             "catalogueId": "lucy-llorri-0798443242",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lucy",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml \u2014 NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker"
           }
         ]
       }

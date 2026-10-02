@@ -707,6 +707,16 @@
             "evidence": "src/objects/mercury/source/science/gravity/ggmes_100v08_sha.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe — A. Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center; NASA Solar System Treks"
+          }
+        ]
       }
     },
     {
@@ -738,6 +748,16 @@
             "catalogueId": "genova-2019-mercury-hgm008",
             "role": "method",
             "evidence": "https://doi.org/10.1029/2018GL081135"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6 — A. Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center; NASA Solar System Treks"
           }
         ]
       }
