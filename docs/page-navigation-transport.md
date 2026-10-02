@@ -248,6 +248,15 @@ failed startup cases verify that settings, choices and scene elements survive.
 
 ![A native Titan search in the existing Saturn scene with JavaScript disabled](images/native-search.png)
 
+On 2026-10-02 the deployed site was loaded with JavaScript disabled and showed three faults. Pressing Enter in the
+search field listed the planets, because the first browse pill was the form's default button; the form now carries
+its own. A dataset, settings or saved-view response drew its scene under the default arrival photograph; the
+photograph now shows only over the empty default stage. At phone width the sheet, with search and the card, stayed
+hidden waiting for its controller; it now rests at its peek, and its handle opens it.
+`site/test/rendered-page.test.mts` checks all three in the built pages.
+
+![Saturn at phone width with JavaScript disabled: the search field and the card's sheet at its peek](images/native-phone.png)
+
 The earlier continuous Saturn capture
 was recorded, before native dataset submits were added.
 At 1280×900, application scripts are held for the first ten seconds,

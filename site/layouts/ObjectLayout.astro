@@ -133,8 +133,15 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     <slot name="object-head" />
     {tabStyles.map(({ key, css }) => <style is:inline data-object-style={key} set:html={css} />)}
     {!navigation && <noscript><style is:inline>.startup-loading { display: none; }</style></noscript>}
+    {/* The phone sheet waits, hidden, for its controller to publish a snap state (shell-layout.css). Without script it
+        rests at its peek, and its handle's checkbox opens it. */}
+    <noscript><style is:inline>
+      body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; }
+    </style></noscript>
+    {/* Only the default view's empty stage shows the photograph: a native dataset, settings or saved-view response
+        draws its scene into the stage and marks it (dataset-response.mts). */}
     {startup && <noscript><style is:inline>
-      img[data-startup-billboard] { opacity: 1 !important; width: 70vmin; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+      .object-stage:not([data-prepared-object]) ~ img[data-startup-billboard] { opacity: 1 !important; width: 70vmin; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }
     </style></noscript>}
     <title>{seo.title}</title>
     {!navigation && <ObjectSwatchStyles />}
