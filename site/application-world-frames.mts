@@ -1,6 +1,7 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import { createWorldFrameQueue } from '@cssearth/renderer/universe';
-import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ApplicationWorldLayer, ApplicationWorldPlanner, ApplicationWorldMoonLabels } from './application-world-types.mts';
 
 interface WorldFramesOptions {

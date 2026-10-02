@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
-import { worldCameraFromCenteredPresentation, presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { prepareArrivalBillboard, canUseArrivalBillboard, frameArrivalBillboard } from '../arrival-billboard.mts';
 import type { PreparedArrivalView } from '@cssearth/objects';
 

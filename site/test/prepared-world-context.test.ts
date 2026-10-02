@@ -1,5 +1,5 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import { required } from '@cssearth/objects/node/contract';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';

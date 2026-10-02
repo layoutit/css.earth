@@ -12,7 +12,7 @@ import { OVERVIEWS } from '../objects.mts';
 // The same validated plan the application mounts; the raw JSON import is untyped.
 const context = parsePreparedWorldContext(preparedContext);
 
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 

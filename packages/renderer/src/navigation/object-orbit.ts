@@ -13,7 +13,8 @@ import type { CameraDelta, CameraAngles, CameraPose, Vector3 } from './types.js'
 import type { PerspectiveDolly, PerspectivePublication, PerspectiveWorldContext } from './perspective-dolly.js';
 import type { PhysicalSharedCamera } from './view-url.js';
 
-import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from './world-camera.js';
 
 import type { PositionM } from '@cssearth/engine';
 import { bindWorldCameraPicking } from './world-camera-picking.js';

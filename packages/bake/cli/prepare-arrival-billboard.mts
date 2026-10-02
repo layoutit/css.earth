@@ -9,8 +9,8 @@ import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
 import { arrivalLook, writeWorldBillboard } from '@cssearth/bake/site-assets';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
-import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation/prepared-arrival-view.ts';
-import { worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import { preparedDefaultViewRotation } from '@cssearth/objects';
+import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
 import { parseArrivalBillboard } from '@cssearth/objects';
 import { readInventory, readPreparedObjects, updateInventory } from '@cssearth/objects/node';
 

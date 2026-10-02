@@ -12,7 +12,8 @@ import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scal
 import { mountPreparedWorldContext, type BodyVisibility, type WorldBodyAnnotations } from './prepared-world-context.js';
 
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
 

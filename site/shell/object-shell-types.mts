@@ -3,7 +3,7 @@ import type { BrowserWindow, ShellCamera, PlaybackState } from '../browser/brows
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectEntry } from '../objects.mts';
 import type { SceneSubject, SceneView, SelectionTarget } from '../scene/scene-selection.mts';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { DestinationPresentation } from '../destination-browser.mts';
 
 export interface ShellOptions {

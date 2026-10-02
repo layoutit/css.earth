@@ -1,7 +1,7 @@
 import { eyeDistanceM } from '@cssearth/engine';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 /** `system` is the planetary system of the mounted star, and every other scope is an overview's id (its registry entry,
  * KNOWN_OVERVIEWS); every scope is measured from that star (overviewScopeAtCamera). */

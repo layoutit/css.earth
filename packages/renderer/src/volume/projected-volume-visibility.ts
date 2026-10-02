@@ -1,7 +1,8 @@
 import { DEFAULT_POINT_VISIBILITY, type PreparedPointVisibility, type DensityVolumeFrame } from '@cssearth/objects';
 import { presentPhysicalPoseInVolume, eyeDistanceM } from '@cssearth/engine';
 
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssCameraAxesFromOrientation } from '@cssearth/engine';
 import { dot3 as dot } from '@cssearth/core';
 

@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation/prepared-arrival-view.ts';
+import { preparedDefaultViewRotation } from '@cssearth/objects';
 import { prepareObjectDiscovery } from '../build/prepare/prepare-object-discovery.mts';
 import { parseObjectDiscovery } from '@cssearth/objects';
 

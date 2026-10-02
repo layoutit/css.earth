@@ -103,3 +103,9 @@ fitting, selection, decompression, compilation and file I/O stay with bake, reco
 Contract tests use node:test in the packages lane; replay and selection conformance stay with their owners.
 
 `src/prepared-data/` also owns canonical image density/resource addresses and pools, tile leaf styles and keys, silhouette-step walking, interior-disc size, shell material addresses, marker and shell-control validation, surface fly-to conventions and feature-bank hashing. `src/stars/` owns the luminance threshold; `src/volume/` owns the CSS compiler budget and pure topology equality. Numeric camera orientation and solar geometry belong to engine.
+
+`src/prepared-data/world-camera-conversion.ts` owns validated presentation-to-world pose conversion,
+its shared pose and presentation data shapes, projection-scale, focus-frame and viewport validation.
+`prepared-arrival-view.ts` owns the validated default-view rotation reader. Both use browser-safe engine
+math; objects depends on engine, which never imports objects. Runtime viewport/layout and presentation
+projection stay in renderer. Shell facing-level selection remains in renderer.

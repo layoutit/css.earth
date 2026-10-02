@@ -9,7 +9,8 @@ import type { BodyProjection } from '@cssearth/engine';
 import type { VisibleRect } from '@cssearth/engine';
 import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from './world-camera.js';
-import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from './world-camera.js';
 
 import { createPreparedCamera } from './prepared-camera.js';
 import { createCameraOrientation } from './camera-orientation.js';

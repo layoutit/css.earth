@@ -1,7 +1,8 @@
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
 const world = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5,

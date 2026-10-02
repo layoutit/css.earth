@@ -1,5 +1,6 @@
 import { parseGalaxyDisplaySample, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog, type PreparedCatalogObject } from '@cssearth/objects';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { projectCatalogPosition } from './galaxy-catalog-layout.js';
 

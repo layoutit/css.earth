@@ -7,7 +7,7 @@ import type { SceneLifetime } from "@cssearth/engine";
 import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 
-import type { WorldCameraPose } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
 
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
 import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';

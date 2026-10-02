@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { type PreparedCssSky, type DensityVolumeFrame, type PreparedCssVolume, type PreparedCssImageLayers, type PreparedVolumeDatasets } from '@cssearth/objects';
 
-import type { WorldCameraPose } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals, waitFor } from '@cssearth/objects/node/contract';
 
 // linkedom has no layout delivery; caption geometry has explicit observer tests.

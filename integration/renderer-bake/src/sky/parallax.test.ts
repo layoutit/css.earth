@@ -5,7 +5,7 @@ import { compileCssSky } from '@cssearth/bake/sky';
 import { preparedSkyCameraTransform } from '@cssearth/renderer/sky/prepared-sky-runtime.ts';
 import { validatePreparedCssSky, type PreparedCssVolume } from '@cssearth/objects';
 import type { BakedSky } from '@cssearth/bake/sky';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 
 const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11] } as const;
 const origin = [1000, -2000, 3000] as const;

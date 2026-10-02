@@ -3,7 +3,7 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { worldRotationCss } from '@cssearth/engine';
-import type { WorldCameraPose } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { mountPreparedCssSurfaceShell } from './prepared-shell-runtime.js';
 import { type PreparedCssSurfaceShell, validatePreparedCssSurfaceShell } from '@cssearth/objects';

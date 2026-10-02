@@ -1,7 +1,8 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { worldRotationCss } from '@cssearth/engine';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { validatePreparedCssSurfaceShell, shellMaterialAddress, type PreparedCssSurfaceShell } from '@cssearth/objects';
 

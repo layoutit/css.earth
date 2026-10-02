@@ -7,9 +7,11 @@ import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
 
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 
-import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport, worldCameraFromCenteredPresentation } from '../navigation/world-camera.js';
+import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
+import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from '../navigation/world-camera.js';
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { viewSunDirectionToPhysicalLightDirection } from '@cssearth/engine';

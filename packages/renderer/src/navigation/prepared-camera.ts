@@ -6,8 +6,10 @@ import type { CameraAngles, CameraDelta, CameraPose, CameraUpdate } from './type
 
 import { createCameraOrientation } from './camera-orientation.js';
 import { distanceForSilhouetteRadius, rotationFromMatrix3d, silhouetteRadiusAtDistance } from '@cssearth/engine';
-import { cameraProjectionScale, worldCameraViewport, presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
-import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import { cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from '@cssearth/objects';
+import { worldCameraViewport, presentWorldCamera } from './world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from './world-camera.js';
 
 import { scaleWorldPosition, validateWorldPosition } from '@cssearth/engine';
 import type { PerspectiveWorldContext } from './perspective-dolly.js';

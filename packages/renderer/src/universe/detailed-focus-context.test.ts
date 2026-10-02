@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
-import type { WorldCameraPose } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
 
 const focus = { positionM: [1e12, -2e12, 3e12] as const, framingRadiusM: 1e6 };
 const world = (radii: number): WorldCameraPose => ({ referenceFrame: 'fixture', epochJdTt: 1,

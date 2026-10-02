@@ -2,7 +2,8 @@ import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, type DatasetBankBillboard, type Datas
 
 import { writeStyle } from '../rendering/retained-write.js';
 
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 
 import { projectVolumeImpostors } from '../volume/volume-impostor-projection.js';
 

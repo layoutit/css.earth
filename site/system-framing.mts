@@ -2,7 +2,7 @@ import { eyeDistanceM } from '@cssearth/engine';
 import { cross3 as cross } from '@cssearth/core';
 import type { WorldRotation } from '@cssearth/objects';
 import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { PreparedWorldContext } from '@cssearth/objects';

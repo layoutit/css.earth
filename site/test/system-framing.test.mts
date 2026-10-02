@@ -14,7 +14,7 @@ import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
 import { parsePreparedWorldContext } from '@cssearth/objects';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
