@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gamma-serpentis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gamma Serpentis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1024070.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gamma-serpentis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gamma Serpentis",
+      "classification": "star",
+      "color": "#f1f5ff",
+      "distanceAu": 2321525,
+      "description": "A naked-eye star 11 parsecs away whose disc the CHARA Array measured: 1.5 times the Sun's width.",
+      "systemName": "Gamma Serpentis system",
+      "aliases": [
+        "HD 142860"
+      ],
+      "order": 5353,
+      "context": {
+        "order": 5350
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -171658337824973300,
+        -286998113356631040,
+        93698753617462510
+      ],
+      "presentationToReference": [
+        -0.49426293206513683,
+        -0.13852463518582753,
+        -0.858204567357345,
+        -0.8263655054703514,
+        -0.23159259664464935,
+        0.5133078224108022,
+        0.2698596030440733,
+        -0.9628996804579499,
+        0.000004344313269428066
+      ],
+      "orbitUpReference": [
+        0.13852463518582753,
+        0.23159259664464935,
+        0.9628996804579499
+      ],
+      "metersPerUnit": 3303452.9032258065,
+      "bodyRadiusM": 1024070400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

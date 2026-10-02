@@ -1,0 +1,47 @@
+{
+  "id": "hd-173667",
+  "name": "110 Herculis",
+  "system": "110 Herculis system",
+  "description": "A naked-eye star 19.2 parsecs away, 2.1 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 173667"
+  ],
+  "target": "HD 173667",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 2.064,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 173667: radius in solar radii, from the limb-darkened angular diameter 1 +/- 0.006 mas (CHARA) and the Hipparcos parallax, 2.064 +/- 0.017",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 1.422,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 173667: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.422 +/- 0.009",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.009
+  },
+  "temperature": {
+    "value": 6376,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 173667: effective temperature in K, from the angular diameter and the bolometric flux, 6376 +/- 39",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 39
+  },
+  "distance": {
+    "value": 19.209,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 173667: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 52.06 +/- 0.24 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.089
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 19 parsecs away whose disc the CHARA Array measured: 2.1 times the Sun's width.",
+    "introduction": "Its disc spans 1 milliarcseconds, which gives 2.064 solar radii and 6,376 K at its surface.",
+    "locator": "Tables 5 and 10, HD 173667: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5357
+}

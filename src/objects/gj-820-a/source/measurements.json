@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gj-820-a",
+  "angularDiameterMas": 1.76,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 459,927 km at 3.50 pc = 1.76 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 3.4965652573897277,
+  "distanceSource": "Gaia DR3 parallax 285.9949 +/- 0.0599 mas (same row, RUWE 1.20): 3.50 pc, no zero-point correction",
+  "radiusKm": 459927.3,
+  "radiusSource": "Radius 0.6611 +/- 0.0048 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820A: radius in solar radii, 0.6611 +/- 0.0048, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112): 459,927 km at 695,700 km per solar radius. Mass 0.68 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820A: mass 0.68 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 4361 +/- 17 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820A: effective temperature in K, 4361 +/- 17, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4361,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820A: effective temperature in K, 4361 +/- 17, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
+  "surfaceGravityLogg": 4.63,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-820-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.630, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 201091) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gj-880",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2828928008202069376: position at J2016.0. Distance: Gaia DR3 parallax 145.6234 +/- 0.0255 mas (same row, RUWE 1.05): 6.87 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -1034.733, -284.131 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.5477 +/- 0.0048 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 880: radius in solar radii, 0.5477 +/- 0.0048, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112). Mass 0.569 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 880: mass 0.569 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112). Temperature 3713 +/- 11 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 880: effective temperature in K, 3713 +/- 11, from this work (CHARA).",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/757/2/112"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 3,713 K, because no archive holds a spectrum of this star (stis-ngsl: HD 216899 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #ffcd97. Routes tried in order: stis-ngsl: HD 216899 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/757/2/112"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,713 K and log g 4.72 (u1 0.399, u2 0.355): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

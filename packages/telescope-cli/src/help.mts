@@ -17,7 +17,7 @@ Human entry points:
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
-  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... --out SPEC.json
+  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-chara HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... --out SPEC.json
   telescope ascl SOFTWARE [--json]
   telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
   telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
@@ -46,7 +46,7 @@ cross-checked against the next; a model limb law from Claret's grids; manifest, 
 Only prose is left marked TODO(new-object), unless the spec carries drafted text. --from-archive writes a spec for planet hosts from the
 NASA Exoplanet Archive's default parameter sets (their transiting planets, with drafted text); --from-debcat drafts both stars of
 an eclipsing binary from DEBCat, --from-apokasc a Kepler-field giant from APOKASC-3, --from-cepheids a Cepheid from Groenewegen
-(2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, --from-sh0es the Cepheids Hubble found in a SN Ia host galaxy (Hoffmann et al. 2016), --from-m31cepheids Hubble's V1 and the Cepheids Hubble measured in Andromeda (Li et al. 2021), --from-m33cepheids those it measured in Triangulum (Breuval et al. 2023), each naming what the spec still needs from the paper; --check runs the bake's first steps on
+(2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, --from-chara a nearby star whose disc CHARA measured (Boyajian et al. 2012), --from-sh0es the Cepheids Hubble found in a SN Ia host galaxy (Hoffmann et al. 2016), --from-m31cepheids Hubble's V1 and the Cepheids Hubble measured in Andromeda (Li et al. 2021), --from-m33cepheids those it measured in Triangulum (Breuval et al. 2023), each naming what the spec still needs from the paper; --check runs the bake's first steps on
 what was generated; --skip-existing leaves objects already in the universe alone. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
 using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.

@@ -1,0 +1,47 @@
+{
+  "id": "hd-90839",
+  "name": "36 Ursae Majoris",
+  "system": "36 Ursae Majoris system",
+  "description": "A naked-eye star 12.8 parsecs away, 1.1 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 90839"
+  ],
+  "target": "HD 90839",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.091,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 90839: radius in solar radii, from the limb-darkened angular diameter 0.794 +/- 0.014 mas (CHARA) and the Hipparcos parallax, 1.091 +/- 0.02",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 1.119,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 90839: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.119 +/- 0.035",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.035
+  },
+  "temperature": {
+    "value": 6233,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 90839: effective temperature in K, from the angular diameter and the bolometric flux, 6233 +/- 68",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 68
+  },
+  "distance": {
+    "value": 12.778,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 90839: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 78.26 +/- 0.29 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.047
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 13 parsecs away whose disc the CHARA Array measured: 1.1 times the Sun's width.",
+    "introduction": "Its disc spans 0.794 milliarcseconds, which gives 1.091 solar radii and 6,233 K at its surface.",
+    "locator": "Tables 5 and 10, HD 90839: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5414
+}

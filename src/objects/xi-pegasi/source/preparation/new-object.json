@@ -1,0 +1,52 @@
+{
+  "id": "xi-pegasi",
+  "name": "Xi Pegasi",
+  "system": "Xi Pegasi system",
+  "description": "A naked-eye star 16.3 parsecs away, 1.9 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 215648"
+  ],
+  "order": 5363,
+  "target": "HD 215648",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.912,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 215648: radius in solar radii, from the limb-darkened angular diameter 1.091 +/- 0.008 mas (CHARA) and the Hipparcos parallax, 1.912 +/- 0.016",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.016
+  },
+  "mass": {
+    "value": 1.192,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 215648: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.192 +/- 0.011",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.011
+  },
+  "temperature": {
+    "value": 6167,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 215648: effective temperature in K, from the angular diameter and the bolometric flux, 6167 +/- 36",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 36
+  },
+  "distance": {
+    "value": 16.295,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 215648: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 61.37 +/- 0.2 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.053
+  },
+  "color": {
+    "skip": [],
+    "reason": "",
+    "disagreement": "Not explained. The Kharitonov colour differs from the Pulkovo colour by 13 levels in one channel, 1 over the agreement threshold. Both are ground spectrophotometry of the same star; the Pulkovo colour is used because that catalogue comes first in the route order."
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 16 parsecs away whose disc the CHARA Array measured: 1.9 times the Sun's width.",
+    "introduction": "Its disc spans 1.091 milliarcseconds, which gives 1.912 solar radii and 6,167 K at its surface.",
+    "locator": "Tables 5 and 10, HD 215648: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

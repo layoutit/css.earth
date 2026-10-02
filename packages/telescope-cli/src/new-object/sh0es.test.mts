@@ -54,6 +54,16 @@ test('a catalogue-placed star cites what Gaia would have given, and its row must
   assert.deepEqual([found.ra, found.dec], [188.59811, 2.17822]);
   assert.throws(() => parseCatalogueRow(table.join('\n'), position, 'test'), /test: VizieR J\/ApJ\/830\/10\/table5 row Gal = N4536, ID = 38676 matches 0 rows, not one/u);
   assert.throws(() => parseCatalogueRow([...table, row('N4536', '386760', 11.854)].join('\n'), position, 'test'), /the row found has ID = 386760, not 38676/u);
+  assert.equal(found.epoch, 2000, 'a row without `motion` is a J2000 position');
+});
+
+test('a star too bright for Gaia is placed by its Hipparcos row, at that row\'s epoch and with its proper motion', () => {
+  // Procyon's row as VizieR serves it, 2026-10-01: V/137D/XHIP.
+  const xhip = ['HIP\tRAJ2000\tDEJ2000\tpmRA\tpmDE', ' \tdeg\tdeg\tmas/yr\tmas/yr', '------\t------', ' 37279\t114.82724194\t+05.22750767\t -716.57\t-1034.58'].join('\n');
+  const position = { catalogue: 'V/137D/XHIP', row: { HIP: '37279' }, credit: 'Anderson & Francis (2012)', url: 'https://arxiv.org/abs/1108.4971', motion: { epoch: 1991.25, ra: 'pmRA', dec: 'pmDE' } };
+  const found = parseCatalogueRow(xhip, position, 'procyon');
+  assert.deepEqual([found.ra, found.dec, found.epoch, found.pmra, found.pmdec], [114.82724194, 5.22750767, 1991.25, -716.57, -1034.58]);
+  assert.throws(() => parseCatalogueRow(xhip, { ...position, motion: { epoch: 1991.25, ra: 'pmRA', dec: 'pmDec' } }, 'procyon'), /procyon: VizieR V\/137D\/XHIP row HIP = 37279 has no proper motion in pmDec \(no such column\)/u);
 });
 
 test('a whole package for a star Gaia cannot see: the archived row placed and declared, no Gaia file, cited distance and velocity', async () => {

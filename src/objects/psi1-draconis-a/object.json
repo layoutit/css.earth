@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "psi1-draconis-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Psi1 Draconis A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1620285.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/psi1-draconis-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Psi1 Draconis A",
+      "classification": "star",
+      "color": "#fff3f1",
+      "distanceAu": 4710257.1,
+      "description": "A naked-eye star 23 parsecs away whose disc the CHARA Array measured: 2.3 times the Sun's width.",
+      "systemName": "Psi1 Draconis A system",
+      "aliases": [
+        "HD 162003"
+      ],
+      "order": 5355,
+      "context": {
+        "order": 5352
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -17003069358714326,
+        -215358533247913820,
+        670712582794012200
+      ],
+      "presentationToReference": [
+        -0.024128945405926985,
+        -0.0749318006590186,
+        -0.9968966943688774,
+        -0.30561389975356124,
+        -0.9488957601021838,
+        0.07872090406949685,
+        0.9518497456379437,
+        -0.30656493881410474,
+        0.000004345823537956583
+      ],
+      "orbitUpReference": [
+        0.0749318006590186,
+        0.9488957601021838,
+        0.30656493881410474
+      ],
+      "metersPerUnit": 5226726.774193549,
+      "bodyRadiusM": 1620285300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

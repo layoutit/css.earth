@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "groombridge-34-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Groombridge 34 A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 268748.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/groombridge-34-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Groombridge 34 A",
+      "classification": "star",
+      "color": "#ffc084",
+      "distanceAu": 734830.7,
+      "description": "A nearby red dwarf whose disc was measured by interferometry: 39% of the Sun's width.",
+      "systemName": "Groombridge 34 system",
+      "aliases": [
+        "GJ 15 A"
+      ],
+      "order": 5365,
+      "context": {
+        "order": 5362
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        78784320696828270,
+        6373637661015363,
+        76399060680126660
+      ],
+      "presentationToReference": [
+        0.7166977342931036,
+        0.6927180334142522,
+        0.08053622689090252,
+        0.05798071731770669,
+        0.05589571600654475,
+        -0.996751676874155,
+        0.6949694914731553,
+        -0.7190392166737547,
+        0.00010395545768806937
+      ],
+      "orbitUpReference": [
+        -0.6927180334142522,
+        -0.05589571600654475,
+        0.7190392166737547
+      ],
+      "metersPerUnit": 866931.9354838709,
+      "bodyRadiusM": 268748900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

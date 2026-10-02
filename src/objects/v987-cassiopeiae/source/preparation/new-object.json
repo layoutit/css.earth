@@ -1,0 +1,42 @@
+{
+  "id": "v987-cassiopeiae",
+  "name": "V987 Cassiopeiae",
+  "system": "V987 Cassiopeiae system",
+  "description": "A naked-eye star 10.1 parsecs away, 83% of the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 10780"
+  ],
+  "target": "HD 10780",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 0.825,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 10780: radius in solar radii, from the limb-darkened angular diameter 0.763 +/- 0.019 mas (CHARA) and the Hipparcos parallax, 0.825 +/- 0.021",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.021
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5396,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 10780: effective temperature in K, from the angular diameter and the bolometric flux, 5396 +/- 72",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 72
+  },
+  "distance": {
+    "value": 10.066,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 10780: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 99.34 +/- 0.53 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.054
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 10 parsecs away whose disc the CHARA Array measured: 83% of the Sun's width.",
+    "introduction": "Its disc spans 0.763 milliarcseconds, which gives 0.825 solar radii and 5,396 K at its surface.",
+    "locator": "Tables 5 and 10, HD 10780: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5400
+}

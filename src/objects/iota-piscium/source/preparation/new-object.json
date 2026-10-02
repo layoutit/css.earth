@@ -1,0 +1,47 @@
+{
+  "id": "iota-piscium",
+  "name": "Iota Piscium",
+  "system": "Iota Piscium system",
+  "description": "A naked-eye star 13.7 parsecs away, 1.6 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 222368"
+  ],
+  "target": "HD 222368",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.595,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 222368: radius in solar radii, from the limb-darkened angular diameter 1.082 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 1.595 +/- 0.014",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 1.268,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 222368: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.268 +/- 0.009",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.009
+  },
+  "temperature": {
+    "value": 6288,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 222368: effective temperature in K, from the angular diameter and the bolometric flux, 6288 +/- 37",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 37
+  },
+  "distance": {
+    "value": 13.716,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 222368: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 72.91 +/- 0.15 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.028
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 14 parsecs away whose disc the CHARA Array measured: 1.6 times the Sun's width.",
+    "introduction": "Its disc spans 1.082 milliarcseconds, which gives 1.595 solar radii and 6,288 K at its surface.",
+    "locator": "Tables 5 and 10, HD 222368: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5364
+}

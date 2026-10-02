@@ -1,0 +1,42 @@
+{
+  "id": "mu-cassiopeiae",
+  "name": "Mu Cassiopeiae",
+  "system": "Mu Cassiopeiae system",
+  "description": "A naked-eye star 7.6 parsecs away, 79% of the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 6582"
+  ],
+  "target": "HD 6582",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 0.79,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 6582: radius in solar radii, from the limb-darkened angular diameter 0.972 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 0.79 +/- 0.009",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.009
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5264,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 6582: effective temperature in K, from the angular diameter and the bolometric flux, 5264 +/- 32",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 32
+  },
+  "distance": {
+    "value": 7.553,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 6582: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 132.4 +/- 0.6 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.034
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 8 parsecs away whose disc the CHARA Array measured: 79% of the Sun's width.",
+    "introduction": "Its disc spans 0.972 milliarcseconds, which gives 0.79 solar radii and 5,264 K at its surface.",
+    "locator": "Tables 5 and 10, HD 6582: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5399
+}

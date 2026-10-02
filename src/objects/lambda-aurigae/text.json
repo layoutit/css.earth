@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lambda-aurigae",
+  "card": {
+    "text": "A naked-eye star 13 parsecs away whose disc the CHARA Array measured: 1.3 times the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+        "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+        "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+        "checked": "2026-10-02",
+        "locator": "Tables 5 and 10, HD 34411: limb-darkened diameter, R, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 0.981 milliarcseconds, which gives 1.331 solar radii and 5,749 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+        "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+        "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+        "checked": "2026-10-02",
+        "locator": "Tables 5 and 10, HD 34411: limb-darkened diameter, R, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

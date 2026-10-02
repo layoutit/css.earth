@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kappa-ceti",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3269362645115584640: position at J2016.0. Distance: Boyajian et al. (2012), ApJ 746, 101, HD 20630: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 109.39 +/- 0.27 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 9.142 +/- 0.023 pc; Gaia DR3 parallax 107.8023 +/- 0.1838 mas (same row, RUWE 1.34), 586.6 standard errors, is not used. Proper motion: Gaia DR3 (same row): 269.298, 93.957 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.919 +/- 0.025 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 20630: radius in solar radii, from the limb-darkened angular diameter 0.936 +/- 0.025 mas (CHARA) and the Hipparcos parallax, 0.919 +/- 0.025 (https://doi.org/10.1088/0004-637X/746/1/101). Mass 1.037 +/- 0.042 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 20630: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.037 +/- 0.042 (https://doi.org/10.1088/0004-637X/746/1/101). Temperature 5776 +/- 81 K from Boyajian et al. (2012), ApJ 746, 101, HD 20630: effective temperature in K, from the angular diameter and the bolometric flux, 5776 +/- 81.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 20630: 168-1020 nm, through the CIE 1931 2-degree observer: #fff3ee. Routes tried in order: gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 996 is not in the catalogue; kiehling: HR 996 is not among its 60 stars; kharitonov: HR 996 is not in the catalogue; burnashev: BS 996 is not in part2; stis-ngsl: used.",
+      "evidence": [
+        "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd020630/h_stis_ngsl_hd020630_v2.fits"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,776 K and log g 4.53 (u1 0.460, u2 0.260): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

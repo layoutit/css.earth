@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "achird",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Achird",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 722832.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/achird-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Achird",
+      "classification": "star",
+      "color": "#fff4f1",
+      "distanceAu": 1227707,
+      "description": "A naked-eye star 6 parsecs away whose disc the CHARA Array measured: the Sun's width.",
+      "systemName": "Achird system",
+      "aliases": [
+        "HD 4614"
+      ],
+      "order": 5397,
+      "context": {
+        "order": 5394
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        95596565788203360,
+        20828092485511544,
+        155432781794724030
+      ],
+      "presentationToReference": [
+        0.5204780968632756,
+        0.8269313844921176,
+        0.2128075093306921,
+        0.11339911738518751,
+        0.18007686812540555,
+        -0.9770941416989491,
+        0.8463115211680883,
+        -0.5326882830587651,
+        0.00004722352850713604
+      ],
+      "orbitUpReference": [
+        -0.8269313844921176,
+        -0.18007686812540555,
+        0.5326882830587651
+      ],
+      "metersPerUnit": 2331717.0967741935,
+      "bodyRadiusM": 722832300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

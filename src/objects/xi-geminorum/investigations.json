@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "xi-geminorum",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3352485999058854912: position at J2016.0. Distance: Boyajian et al. (2012), ApJ 746, 101, HD 48737: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 55.55 +/- 0.19 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 18.002 +/- 0.062 pc; Gaia DR3 parallax 54.1894 +/- 0.2369 mas (same row, RUWE 1.85), 228.7 standard errors, is not used. Proper motion: Gaia DR3 (same row): -114.564, -191.671 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 3352485999058854912 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1088/0004-637X/746/1/101",
+        "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 2.71 +/- 0.021 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 48737: radius in solar radii, from the limb-darkened angular diameter 1.401 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 2.71 +/- 0.021 (https://doi.org/10.1088/0004-637X/746/1/101). Mass 1.706 +/- 0.012 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 48737: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.706 +/- 0.012 (https://doi.org/10.1088/0004-637X/746/1/101). Temperature 6480 +/- 39 K from Boyajian et al. (2012), ApJ 746, 101, HD 48737: effective temperature in K, from the angular diameter and the bolometric flux, 6480 +/- 39.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 448: HR 2484; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 88 (BS 2484) (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #f5efff. Routes tried in order: stis-ngsl: HD 48737 is not in the library; pulkovo: HR 2484 is not in the catalogue; kiehling: HR 2484 is not among its 60 stars; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; kharitonov: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+        "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,480 K and log g 3.8 (u1 0.352, u2 0.313): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

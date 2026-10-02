@@ -1,0 +1,30 @@
+{
+ "id": "zosma",
+ "classification": "star",
+ "order": 5349,
+ "physical": {
+  "name": "Zosma",
+  "horizonsCode": null,
+  "meanRadiusKm": 1778904.9,
+  "gravitationalParameterKm3PerS2": 273520338926.43704,
+  "parent": null,
+  "effectiveTemperatureK": 8085
+ },
+ "physicalNotes": "Radius 2.557 +/- 0.02 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 97603: radius in solar radii, from the limb-darkened angular diameter 1.328 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 2.557 +/- 0.02 (https://doi.org/10.1088/0004-637X/746/1/101): 1,778,905 km at 695,700 km per solar radius. Mass 2.061 +/- 0.006 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 97603: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 2.061 +/- 0.006 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 8085 +/- 42 K from Boyajian et al. (2012), ApJ 746, 101, HD 97603: effective temperature in K, from the angular diameter and the bolometric flux, 8085 +/- 42 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 168.52777245409249,
+  "declinationDegrees": 20.523137041266512,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 17.915,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": -20.9,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3990320597065899776 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/zosma/source/photometry/gaia-dr3-source.csv; cross-identification HD 97603, HR 4357, HIP 54872: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3990320597065899776",
+   "distance": "Boyajian et al. (2012), ApJ 746, 101, HD 97603: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 55.82 +/- 0.25 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 17.915 +/- 0.08 pc; Gaia DR3 gives this source no parallax (a two-parameter solution)",
+   "properMotion": "Gaia DR3 source 3990320597065899776 is a two-parameter solution with no proper motion; zero is assumed (at 18 pc, 1 mas/yr would be 0 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 3990320597065899776 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract)"
+  }
+ }
+}

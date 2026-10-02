@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gj-412-a",
+  "angularDiameterMas": 0.76,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 277,028 km at 4.90 pc = 0.76 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 4.90466333147386,
+  "distanceSource": "Gaia DR3 parallax 203.8876 +/- 0.0332 mas (same row, RUWE 0.94): 4.90 pc, no zero-point correction",
+  "radiusKm": 277027.7,
+  "radiusSource": "Radius 0.3982 +/- 0.0091 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 412A: radius in solar radii, 0.3982 +/- 0.0091, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112): 277,028 km at 695,700 km per solar radius. Mass 0.403 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 412A: mass 0.403 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 3497 +/- 39 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 412A: effective temperature in K, 3497 +/- 39, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3497,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 412A: effective temperature in K, 3497 +/- 39, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
+  "surfaceGravityLogg": 4.84,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-412-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.843, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

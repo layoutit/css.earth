@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "merak",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Merak",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2101709.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/merak-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Merak",
+      "classification": "star",
+      "color": "#b9caff",
+      "distanceAu": 5044382.6,
+      "description": "A naked-eye star 24 parsecs away whose disc the CHARA Array measured: 3.0 times the Sun's width.",
+      "systemName": "Merak system",
+      "aliases": [
+        "HD 95418"
+      ],
+      "order": 5415,
+      "context": {
+        "order": 5412
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -404416983931779000,
+        104880054281725000,
+        628420123010043000
+      ],
+      "presentationToReference": [
+        -0.5359164001014637,
+        -0.8060855755111893,
+        0.2510371626972444,
+        0.13898264259579693,
+        0.20905377806688372,
+        0.9679774495994479,
+        0.8327529268392739,
+        -0.5536447984301459,
+        0.0000034447263157737
+      ],
+      "orbitUpReference": [
+        0.8060855755111893,
+        -0.20905377806688372,
+        0.5536447984301459
+      ],
+      "metersPerUnit": 6779708.709677421,
+      "bodyRadiusM": 2101709700.0000002
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

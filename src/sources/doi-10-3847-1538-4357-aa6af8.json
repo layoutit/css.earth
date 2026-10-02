@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-3847-1538-4357-aa6af8",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bond et al. (2017): The Sirius System and Its Astrophysical Puzzles: Hubble Space Telescope and Ground-based Astrometry<sup>∗</sup>",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/aa6af8"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+      "checkedOn": "2026-10-02",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bond et al. (2017), The Astrophysical Journal 840 70",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-4357/aa6af8"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 840 70",
+  "creators": [
+    "Howard E. Bond",
+    "Gail H. Schaefer",
+    "Ronald L. Gilliland",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}
