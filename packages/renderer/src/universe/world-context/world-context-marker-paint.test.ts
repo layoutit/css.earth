@@ -19,9 +19,9 @@ test('a marker moved by less than a thousandth of a pixel is not written again',
   const style = { visibility: '', willChange: '', zIndex: '', opacity: '1',
     get transform() { return transform; }, set transform(value: string) { writes.push(value); transform = value; } };
   Object.defineProperty(mover, 'style', { configurable: true, value: style });
-  const frame = (x: number): Frame => ({ projected: { x, y: 377.25, markerOpacity: 1 } as Frame['projected'], billboardShown: true, plannedShown: true,
+  const frame = (x: number): Frame => ({ projected: { x, y: 377.25, markerOpacity: 1, emphasis: 1 } as Frame['projected'], billboardShown: true, plannedShown: true,
     markerShown: true, markerDiameter: 8, flatDot: true, zIndex: '3600', selected: false, hovered: false, animated: false, coast: false,
-    policyChanged: false, emphasis: 1 });
+    policyChanged: false });
   paint.publish(frame(567.5162251070), fader);
   paint.publish(frame(567.5162989), fader);
   assert.deepEqual(writes, ['translate(567.516px,377.25px) translate(-50%,-50%)']);
