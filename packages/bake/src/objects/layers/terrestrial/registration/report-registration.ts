@@ -1,3 +1,4 @@
+import { isFiniteNumber } from '@cssearth/core';
 /**
  * The registration stage's numbers as a body README states them, generated from the prepared report so no residual
  * is ever typed by hand. The README carries the block between two markers; `--write` replaces it, and the shared
@@ -34,7 +35,7 @@ export function registrationVerdict(registration: Record<string, unknown>): 'reg
     if (agreement !== null && agreement > VERDICT_DEGREES) continue;
     measured.push(record.medianOffsetDegrees);
   }
-  const offsets = measured.filter((value): value is number => typeof value === 'number' && Number.isFinite(value));
+  const offsets = measured.filter(isFiniteNumber);
   return !offsets.length ? 'no verdict' : offsets.every(value => Math.abs(value) <= VERDICT_DEGREES) ? 'registered' : 'conflict';
 }
 

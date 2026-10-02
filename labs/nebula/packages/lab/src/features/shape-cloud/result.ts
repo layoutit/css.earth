@@ -1,10 +1,11 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readShapeCloudSettings } from './model.ts';
 import { readShapeCloudQuality } from './quality.ts';
 import { readShapeCloudComparison } from './comparison-result.ts';
 import type { ShapeCloudPin, ShapeCloudResult } from './types.ts';
 import { isVariantName } from '../variant-name.ts';
 import { geometryFile } from '../geometry/jobs-model.ts';
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 export function readShapeCloudPin(value: unknown): ShapeCloudPin {
   if (!record(value) || typeof value.path !== 'string' || !value.path.startsWith('.local/nebula-lab/') || /[\\?#\u0000]/.test(value.path) ||
       value.path.split('/').some(part => part === '..' || part === '.' || !part) || Object.keys(value).join() !== 'path')

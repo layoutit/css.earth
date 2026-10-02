@@ -1,5 +1,5 @@
 /** Explicit, bounded image fitting on fixed measured and inferred spatial supports. */
-const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+import { isRecord } from '@cssearth/core';
 import type { EmissionVector3 } from './coordinates.js';
 
 export interface SampledEmissionFit {
@@ -26,7 +26,7 @@ function ids(value: unknown): string[] {
   return value;
 }
 export function readSampledEmissionFit(value: unknown): SampledEmissionFit {
-  if (!jointRecord(value)) throw new TypeError('Invalid sampled emission fit.');
+  if (!isRecord(value)) throw new TypeError('Invalid sampled emission fit.');
   const axis = vector(value.axis), radiiArcsec = vector(value.radiiArcsec);
   if (Math.abs(Math.hypot(...axis) - 1) > 1e-6 || radiiArcsec.some(n => n <= 0))
     throw new TypeError('Emission-fit envelope requires a unit axis and positive radii.');
@@ -34,7 +34,7 @@ export function readSampledEmissionFit(value: unknown): SampledEmissionFit {
   if (![imageWidth, iterations].every(Number.isInteger)) throw new TypeError('Emission-fit sampling must be integral.');
   let detail: SampledEmissionFit['detail'];
   if (value.detail !== undefined) {
-    if (!jointRecord(value.detail) || !Array.isArray(value.detail.scalesArcsec) || value.detail.scalesArcsec.length < 1 || value.detail.scalesArcsec.length > 4)
+    if (!isRecord(value.detail) || !Array.isArray(value.detail.scalesArcsec) || value.detail.scalesArcsec.length < 1 || value.detail.scalesArcsec.length > 4)
       throw new TypeError('Invalid finite detail scales.');
     const scalesArcsec = value.detail.scalesArcsec.map(v => number(v, 1, 1e3)), maximumAtoms = number(value.detail.maximumAtoms, 1, 3500);
     if (!Number.isInteger(maximumAtoms) || new Set(scalesArcsec).size !== scalesArcsec.length) throw new TypeError('Invalid finite detail budget.');

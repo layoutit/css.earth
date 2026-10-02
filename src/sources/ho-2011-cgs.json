@@ -30,6 +30,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/21/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "cgs, row NGC 6744 (Seq 530): total apparent magnitudes Btmag 9.87 +/- 0.21 and Vtmag 9.25 +/- 0.11, Galactic extinction AB 0.185. Query: SELECT * FROM \"J/ApJS/197/21/cgs\" WHERE Name LIKE '%6744%'"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/21/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "cgs, row NGC 4696 (Seq 415): distance 37.6 Mpc, scale 10.94 kpc per arcmin, diameter at 26.5 B mag per square arcsec D26.5 = 10.96 arcmin, I-band photometric major axis at position angle 92.1 +/- 1.3 degrees, ellipticity 0.379. Row NGC 3311 (Seq 351) has no diameters or position angle. Query: SELECT * FROM \"J/ApJS/197/21/cgs\" WHERE Name LIKE '%4696%' OR Name LIKE '%3311%'"
     }
   ],
   "creators": [
@@ -47,6 +52,12 @@
       "kind": "credit",
       "text": "Cite Ho et al. (2011), ApJS 197, 21.",
       "scope": "NGC 6744's integrated color",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/21/ReadMe"
+    },
+    {
+      "kind": "credit",
+      "text": "Cite Ho et al. (2011), ApJS 197, 21.",
+      "scope": "NGC 4696's scale, outer diameter and position angle",
       "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/21/ReadMe"
     }
   ]

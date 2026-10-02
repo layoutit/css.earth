@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { EvidenceGrid, EvidenceSettings } from './model.ts';
 
 export interface RidgeGraphSettings {
@@ -35,7 +36,7 @@ export interface RidgeGraph {
   diagnostics: { thresholdPixels: number; skeletonPixels: number; retainedComponents: number; discardedComponents: number; thinningPasses: number };
   interpretation: string;
 }
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 export function readRidgeGraphSettings(value: unknown): RidgeGraphSettings {
   if (!record(value) || typeof value.threshold !== 'number' || !Number.isFinite(value.threshold) || value.threshold <= 0 || value.threshold > 1 ||
       typeof value.minLengthArcseconds !== 'number' || !Number.isFinite(value.minLengthArcseconds) || value.minLengthArcseconds < 0 || value.minLengthArcseconds > 3600)

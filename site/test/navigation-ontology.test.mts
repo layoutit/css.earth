@@ -19,7 +19,7 @@ test('every scene and every package the host draws has exactly one searchable de
     && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length).map(([id]) => id);
   // Galaxies, nebulae and clusters, the four levels of the zoom ladder, and five places of the Nearby Universe (the Shapley
   // Supercluster, the Hercules and Leo clusters, the Great Attractor and the Local Void) that show its galaxy field.
-  assert.equal(hosted.length, 43);
+  assert.equal(hosted.length, 45);
   // A bank is context the world draws, never an object: none carries a catalogue entry.
   for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
   const overviews = await readOverviews(resolve('src/objects'));

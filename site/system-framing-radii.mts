@@ -1,4 +1,4 @@
-import type { PreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
+import type { PreparedWorldContext } from '@cssearth/objects';
 import { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE } from './runtime-policy.mts';
 
 /** Camera framing consumes the prepared orbit bounds, never orbit vertices. */

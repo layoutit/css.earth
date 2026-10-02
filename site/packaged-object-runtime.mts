@@ -1,5 +1,5 @@
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
-import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { SceneFactory } from './browser/browser-types.mts';
 import { requiredElement } from './browser/browser-types.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';

@@ -1,8 +1,9 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Shared bounded settings for explicit offline geometric detection. */
 export interface DetectionSettings {
   iterations: number; seed: number; minRadiusFraction: number; maxCandidates: number; sensitivity: number;
 }
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 function bounded(value: unknown, fallback: number, name: string, min: number, max: number, integer = false): number {
   if (value === undefined) return fallback;
   if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max || (integer && !Number.isInteger(value)))

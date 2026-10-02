@@ -1,9 +1,10 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Local copies retain historical research JSON pins without making application replay load lab models. */
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pinned, type Pin } from '../volume/node/index.ts';
-const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
+const record = coreIsRecord;
 export async function verifyReplayReferences(root: string, directory: string, references: readonly Pin[]) {
   const needsCopies = references.some(pin => pin.path.startsWith('labs/'));
   let copies: {originalPath: string; path: string}[] = [];

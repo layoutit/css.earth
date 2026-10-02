@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "dots",
+  "published": true,
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000%2C+%27abell-2744%27+AS+grp%2C+1257621141.76+AS+distpc%2C+mF160W%2C+zsp%2C+r_zsp+FROM+%22J%2FA%2BA%2F670%2FA60%2Ftableb1%22+WHERE+Type%3D%27s%27+ORDER+BY+ID",
+    "bytes": 14069,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 5
+    },
+    "distanceUnit": "pc",
+    "groupDistance": {
+      "group": 4,
+      "distance": 5,
+      "depth": "isotropic",
+      "source": "planck-2018-cosmology",
+      "basis": "Every member sits at the cluster's distance, the Planck 2018 comoving distance of its MCXC-II redshift 0.3066 (1,257,621,141.76 pc, the Abell 2744 package's own; the query writes it into each row), spread in depth as widely as the members spread across the sky: that the cluster's core is as deep as it is wide is an assumption, not a measurement of any member's depth. The members' own redshifts are not used for depth: inside a cluster they measure motion, not distance."
+    }
+  },
+  "sample": "The 202 galaxies table B1 of Bergamini et al. (2023) marks as spectroscopic cluster members of Abell 2744 (Type = s); its 23 photometric members (Type = p) are left out. All 202 kept.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "bergamini-2023-a2744-members",
+  "meaning": "Spectroscopically confirmed member galaxies of Abell 2744 from the cluster member catalogue of Bergamini et al. (2023), one dot each at the cluster's distance. Drawn when the cluster is selected.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "toneBy": {
+      "magnitudeColumn": 6,
+      "band": "HST F160W (AB), the table's mF160W, as observed",
+      "brightMagnitude": -23,
+      "faintMagnitude": -18,
+      "faintTone": 0.3,
+      "steps": 8,
+      "basis": "A display scale, not a rest-frame luminosity: each member's F160W magnitude minus the distance modulus of the comoving distance it is placed at (40.50 mag) darkens its color, from full at -23 to 30% at -18, linear in magnitude. The members run from 16.88 to 23.83 mag, so from -23.6 to -16.7 on this scale. No k-correction is applied and the luminosity-distance modulus is not used; the table gives no type or color, so every dot is white."
+    },
+    "fullDetail": {
+      "units": 3800,
+      "basis": "Presentation choice: whole within 3,800 Mpc of the Sun, three times the cluster's distance, so every member shows while the cluster is selected and framed (the bank's origin is the Sun; the renderer's default of 10 kpc suits a galaxy's own dots)."
+    }
+  }
+}

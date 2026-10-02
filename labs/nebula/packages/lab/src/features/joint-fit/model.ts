@@ -1,7 +1,8 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 export * from '@cssearth/nebula-reconstruction/methods/joint/model';
 import {jointRecord, jointPath, readJointControls, type JointControls} from '@cssearth/nebula-reconstruction/methods/joint/model';
 import type { Matrix } from '../observations/models/model.ts';
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const finite = coreIsFiniteNumber;
 const range = (v: unknown, min: number, max: number): v is number => finite(v) && v >= min && v <= max;
 export interface JointRequest {
   action: 'apply'; imageId: 'joint-fit'; cataloguePath: string; recipePath: string;

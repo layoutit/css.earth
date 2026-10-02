@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-4696-volume",
+  "entries": [
+    {
+      "id": "legacy-surveys-color",
+      "subject": "DESI Legacy Imaging Surveys DR10 color HiPS",
+      "status": "included",
+      "finding": "A 2500 x 2500 px hips2fits cutout of CDS/P/DESI-Legacy-Surveys/DR10/color, 11.0 arcmin wide on the 2MASS position, at the survey's 0.262 arcsec pixel. The core saturates only within about 3 arcsec. Its sky subtraction ends the galaxy's light about 200 arcsec out and leaves straight tile edges.",
+      "evidence": [
+        "https://www.legacysurvey.org/dr10/",
+        "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=2500&height=2500&fov=0.182667&projection=TAN&coordsys=icrs&ra=192.205322&dec=-41.311089&format=jpg"
+      ]
+    },
+    {
+      "id": "other-survey-composites",
+      "subject": "DSS2 and SkyMapper color HiPS",
+      "status": "excluded",
+      "finding": "Looked at as 900 px previews of the same field on 2026-10-02. DSS2 is photographic and shallower; SkyMapper is shallower than the Legacy Surveys composite. Pan-STARRS does not reach declination -41."
+    },
+    {
+      "id": "eso-archive-images",
+      "subject": "ESO archive imaging (VST OmegaCAM, FORS)",
+      "status": "deferred",
+      "finding": "Not used: the lab recipe reads a published display image by URL, and ESO archive products are calibrated FITS frames that need a mosaic, a stated display transfer and a local-input route.",
+      "revisitWhen": "The lab recipe can read a prepared local image, or the outer halo is wanted."
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Gao et al.'s (2020) Table 2 single-Sérsic R-band fit to NGC 4696 (n = 2.99, r_e = 16.65 kpc, ellipticity 0.219) is used as published; no fit was made here. Its radius is converted with Ho et al.'s (2011) scale for the galaxy, and its position angle is theirs. Huang et al. (2013) fit the same survey's ellipticals with three components; one component is what the lab's isophote fill reads.",
+      "evidence": [
+        "https://arxiv.org/abs/2001.00331",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/20"
+      ]
+    },
+    {
+      "id": "neighbour-catalogue",
+      "subject": "Catalogue for the neighbour masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC (Paturel et al. 2003) lists 93 galaxies with a D25 within 0.5 degrees; the 7 whose masks reach the cutout are masked.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237"
+      ]
+    },
+    {
+      "id": "dark-artefacts",
+      "subject": "Saturation trail and star holes",
+      "status": "included",
+      "finding": "The survey image carries a dark magenta saturation trail 55 arcsec long 47 arcsec north of the core and dark holes at bright stars. M49's clamp only lowers pixels and kept them; the isophote fill only lowers too. The recipe's median now also raises a pixel darker than its window (compactClamp.fillDark)."
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster and compact object catalogues",
+      "status": "deferred",
+      "finding": "Harris et al. (2006) publish no cluster positions at CDS. Mieske et al. (2007), CDS J/A+A/472/111 table1, lists 27 compact objects of the Centaurus Cluster with positions and velocities. Not drawn: a volume bank's dots are switched on by a table in the site's runtime code, which this change does not touch.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/472/111"
+      ],
+      "revisitWhen": "The dots of a volume bank are declared in its package."
+    }
+  ]
+}

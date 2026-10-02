@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-3311-volume",
+  "entries": [
+    {
+      "id": "legacy-surveys-color",
+      "subject": "DESI Legacy Imaging Surveys DR10 color HiPS",
+      "status": "included",
+      "finding": "A 2200 x 2200 px hips2fits cutout of CDS/P/DESI-Legacy-Surveys/DR10/color, 9.3 arcmin wide on the 2MASS position. The two bright stars 8 and 10 arcmin away fall outside it; the ghost of one reddens the north-east corner.",
+      "evidence": [
+        "https://www.legacysurvey.org/dr10/",
+        "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=2200&height=2200&fov=0.155644&projection=TAN&coordsys=icrs&ra=159.178421&dec=-27.528339&format=jpg"
+      ]
+    },
+    {
+      "id": "other-survey-composites",
+      "subject": "DSS2, Pan-STARRS DR1 and SkyMapper color HiPS",
+      "status": "excluded",
+      "finding": "Looked at as 900 px previews of the same field on 2026-10-02. DSS2 is photographic and shallower, SkyMapper is shallower, and Pan-STARRS at declination -27.5 is at the edge of its coverage and subtracts the galaxies' own light as sky."
+    },
+    {
+      "id": "eso-archive-images",
+      "subject": "ESO archive imaging (VLT/FORS1 V band, ESO/MPI 2.2 m WFI)",
+      "status": "deferred",
+      "finding": "The images Arnaboldi et al. fitted. Not used: the lab recipe reads a published display image by URL, and these are calibrated FITS frames that need a stated display transfer and a local-input route.",
+      "evidence": [
+        "https://arxiv.org/abs/1205.5289"
+      ],
+      "revisitWhen": "The lab recipe can read a prepared local image."
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Arnaboldi et al.'s (2012) Table 2 'allmask' fit (n = 4.8, r_e = 198.8 arcsec, axis ratio 0.93, position angle 32) is used as published; no fit was made here. Their 'cmask' fit (n = 5.0, 270.6 arcsec) leaves the north-east excess in and over-predicts the south-west; their maximal symmetric model (n = 10.5, 850 arcsec) is a one-sided profile fit. Barbosa et al. (2018) describe the same light with four components, which the lab's isophote fill cannot read.",
+      "evidence": [
+        "https://arxiv.org/abs/1205.5289",
+        "https://arxiv.org/abs/1710.08941"
+      ]
+    },
+    {
+      "id": "ngc-3309",
+      "subject": "The neighbour NGC 3309",
+      "status": "included",
+      "finding": "Masked and filled from NGC 3311's isophotes, not drawn. Five mask radii were tried: three D25 radii covers the whole galaxy; one D25 radius (125 arcsec) covers NGC 3311's core, where the isophote fill has nothing to read and left a hole; half the distance (52 arcsec) left NGC 3309's outer light as a ring around a dark disc; 77 arcsec left a bright arc; 95 arcsec leaves a fainter arc farther out and is used. A second spheroid for NGC 3309 from Arnaboldi et al.'s Table 1 needs the lab to condition one image on two components.",
+      "revisitWhen": "The lab can share an image between two spheroids."
+    },
+    {
+      "id": "neighbour-catalogue",
+      "subject": "Catalogue for the neighbour masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC (Paturel et al. 2003) lists 125 galaxies (types G and GM) with a D25 within 0.5 degrees; the 16 whose masks reach the cutout are masked. Type GM is needed: PGC 31476, 120 arcsec south, is one.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237"
+      ]
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster and compact object catalogues",
+      "status": "deferred",
+      "finding": "Wehner et al. (2008) publish no cluster positions at CDS. Misgeld et al. (2011), CDS J/A+A/531/A4 tablea1, lists 118 globular clusters and ultra-compact dwarfs of the Hydra I core with positions and velocities. Not drawn: a volume bank's dots are switched on by a table in the site's runtime code, which this change does not touch.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/531/A4"
+      ],
+      "revisitWhen": "The dots of a volume bank are declared in its package."
+    }
+  ]
+}

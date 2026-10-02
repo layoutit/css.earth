@@ -1,14 +1,14 @@
 import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { orbitVertices, parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
+import { orbitVertices, parsePreparedWorldContext } from '@cssearth/objects';
 import { mountPreparedWorldContext } from '@cssearth/renderer/universe/prepared-world-context.ts';
 import { mountPreparedOrbitLines } from '@cssearth/renderer/solar-system/prepared-orbit-lines.ts';
 import { mountPreparedCssSky, preparedSkyCameraTransform } from '@cssearth/renderer/sky/prepared-sky-runtime.ts';
 import { loadPreparedCssVolume } from '@cssearth/renderer/volume/loader.ts';
 import { savedWorldCamera } from '@cssearth/renderer/navigation/saved-world-camera.ts';
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/renderer/navigation/world-camera-math.ts';
-import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import type { OrbitSegment } from '@cssearth/renderer/solar-system/types.ts';

@@ -1,3 +1,6 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
+import { scanCssDeclarations } from './css-declaration-scanner.ts';
+
 // Leaf boxes as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
 //
 // The node builder and the bindings work in the variable form leaf-box.ts describes: each leaf's lengths and transform are
@@ -40,7 +43,7 @@ const seamTerm = (k: string) => `calc(1 + var(${SURFACE_SEAM_OUTSET_PROPERTY}, 0
 const SEAM = new RegExp(String.raw`^ translate\(50%, 50%\) scale\(calc\(1 \+ var\(${SURFACE_SEAM_OUTSET_PROPERTY}, 0\) \* (${NUMBER})\), calc\(1 \+ var\(${SURFACE_SEAM_OUTSET_PROPERTY}, 0\) \* (${NUMBER})\)\) translate\(-50%, -50%\)$`);
 /** The properties a record carries; the node's static style drops them too, since the record overrides them. */
 const OWNED = ['width', 'height', 'background-size', 'background-position', 'transform', '--polycss-atlas-width', '--polycss-atlas-height'];
-const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
+const isRecord = coreIsRecord;
 const leafBoxBinding = (value: unknown): value is Binding => isRecord(value) && value.kind === 'silhouette-step-property' && value.property === LEAF_BOX_PROPERTY;
 const seamBinding = (value: unknown): value is Binding => isRecord(value) && value.kind === 'silhouette-step-property' && value.property === SURFACE_SEAM_OUTSET_PROPERTY;
 
@@ -69,19 +72,9 @@ function length(value: string, where: () => string) {
 }
 /** A static style without the named declarations. Semicolons inside quotes or parentheses (URLs) do not split. */
 function withoutDeclarations(style: string, names: readonly string[]) {
-  const parts: string[] = [];
-  let start = 0, depth = 0, quote = '';
-  for (let at = 0; at <= style.length; at++) {
-    const char = style[at];
-    if (quote) { if (char === quote && style[at - 1] !== '\\') quote = ''; continue; }
-    if (char === '"' || char === "'") quote = char;
-    else if (char === '(') depth++;
-    else if (char === ')') depth--;
-    else if ((char === ';' || at === style.length) && depth === 0) { parts.push(style.slice(start, at)); start = at + 1; }
-  }
-  return parts.map(part => part.trim()).filter(part => {
+  return [...scanCssDeclarations(style)].filter(part => {
     const colon = part.indexOf(':');
-    return part !== '' && (colon < 0 || !names.includes(part.slice(0, colon).trim()));
+    return colon < 0 || !names.includes(part.slice(0, colon).trim());
   }).map(part => `${part};`).join('');
 }
 function interned(tree: Tree, nodes: readonly TreeNode[]): Tree {

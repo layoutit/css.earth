@@ -1,10 +1,11 @@
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 import type { Point } from './model';
 import type { StructureImage } from './structures-model';
 
 import type {GeometryCandidate,GeometryMap} from '@cssearth/nebula-reconstruction/evidence/geometry/contracts';
 export type {GeometryCandidate,GeometryMap} from '@cssearth/nebula-reconstruction/evidence/geometry/contracts';
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
-const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
+const record = coreIsRecord;
+const finite = coreIsFiniteNumber;
 const unit = (value: unknown): value is number => finite(value) && value >= 0 && value <= 1;
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0;
 const point = (value: unknown): value is Point => Array.isArray(value) && value.length === 2 && value.every(finite);

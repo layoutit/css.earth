@@ -1,11 +1,12 @@
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 export type CatalogueColor=(temperature:number,colorIndex:number)=>readonly [number,number,number];
 import type { EmissionFieldModel } from '@cssearth/bake/volume';
 import type { CompilerStarInput } from '@cssearth/objects';
 import type { CompilerStarMaterial } from '@cssearth/objects';
 import { createCompilerStarDepthSampler } from './compiler.ts';
 
-const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const record = coreIsRecord;
+const finite = coreIsFiniteNumber;
 const text = (v: unknown): v is string => typeof v === 'string' && v.trim().length > 0 && v.length <= 128;
 const coordinate = (ra: unknown, dec: unknown): boolean => finite(ra) && ra >= 0 && ra < 360 && finite(dec) && dec >= -90 && dec <= 90;
 const error = (v: unknown): v is number | null => v === null || finite(v) && v >= 0;

@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 /** Local native-pixel analysis. This endpoint never replaces a source or prepares a cloud. */
 import { spawn } from 'node:child_process';
@@ -10,7 +11,7 @@ import { prepareNativePreservation } from '@cssearth/nebula-reconstruction/star-
 
 import type { RemovalRequest, RemovalProgress } from '../../features/star-removal/star-removal-types.ts';
 export type { RemovalRequest, RemovalProgress } from '../../features/star-removal/star-removal-types.ts';
-const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 const numeric = (value: unknown, low: number, high: number) => typeof value === 'number' && Number.isFinite(value) && value >= low && value <= high;
 const keys = (value: Record<string, unknown>, allowed: string[]) => Object.keys(value).every(key => allowed.includes(key));
 const scriptPath = 'labs/nebula/packages/reconstruction/src/star-removal/star-removal.py';

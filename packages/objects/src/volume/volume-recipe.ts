@@ -33,7 +33,7 @@ function positive(value: unknown, at: string, integer = false): number {
   if (n <= 0 || (integer && !Number.isInteger(n))) throw new TypeError(`${at} must be positive${integer ? ' integer' : ''}.`);
   return n;
 }
-export function text(value: unknown, at: string): string {
+function text(value: unknown, at: string): string {
   if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
   return value;
 }
@@ -42,7 +42,7 @@ function sourcePath(value: unknown): string {
   if (path.startsWith('/') || path.split('/').includes('..') || /[\\\u0000]/.test(path)) throw new TypeError('Source must be contained and relative.');
   return path;
 }
-export function triple(value: unknown, at: string): Vector3 {
+function triple(value: unknown, at: string): Vector3 {
   if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${at} must contain three numbers.`);
   return [finite(value[0], at), finite(value[1], at), finite(value[2], at)];
 }

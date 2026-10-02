@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import type { WorldRotation } from '@cssearth/objects';
 import type { SurfaceAxes, MapViewport } from './surface-map-context.mts';
 import { rotateWorldPosition } from '@cssearth/renderer/navigation';
 import { dotN as dot } from '@cssearth/core';

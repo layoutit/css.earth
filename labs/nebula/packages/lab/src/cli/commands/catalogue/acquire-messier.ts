@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Metadata acquisition only. Never downloads or processes science images. */
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -22,9 +23,7 @@ const types: Record<string, string> = {
 };
 const preferredAliases = ['Omega Nebula', 'Dumbbell Nebula', 'Praesepe Cluster', 'Pleiades', 'Whirlpool Galaxy', 'Little Dumbbell Nebula'];
 
-function record(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
+const record = coreIsRecord;
 function string(value: unknown): string {
   if (typeof value !== 'string' || !value.trim()) throw new TypeError('Missing source text.');
   return value.trim().replace(/\s+/g, ' ');

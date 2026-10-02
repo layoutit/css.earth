@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import { createCameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
 import { selectPreparedResponsiveZoom, type ResponsiveZoomPlan } from '@cssearth/renderer/navigation/camera-layout.ts';
 import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
@@ -12,7 +13,7 @@ export interface StartupCover {
   readonly bodyRadiusM: number;
 }
 
-const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
+const finite = coreIsFiniteNumber;
 
 /** Validates the baked cover; anything else leaves the photograph to the scene's own startup (startup-billboard.mts). */
 export function parseStartupCover(value: unknown): StartupCover | null {

@@ -8,7 +8,7 @@ import { applyUnderlay, withAlpha, type ObservationInterpretation, type Interpre
 import { composeLimbPreview } from './emission-preview.ts';
 import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.ts';
 import { missingCoverageColor } from './missing-coverage.ts';
-import { RASTER_LEVEL_FACTORS, rasterPagePlan, rasterPageOutput, type RasterPagePlan } from './pages.ts';
+import { rasterPagePlan, rasterPageOutput, type RasterPagePlan } from './pages.ts';
 type NativePoleSampler = { readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean; };
 
 /** Sample the original image in the exact normalized 2:1 domain used by the established `fit: 'fill'` resize.
@@ -58,7 +58,7 @@ async function writeRasterPages(image: Sharp, pages: RasterPagePlan, bands: numb
     const rows = info.height / bands * pages.bandsPerPage, stride = info.width * 4;
     for (let page = 0; page < pages.pageCount; page++) {
         const pixels = data.subarray(page * rows * stride, (page + 1) * rows * stride);
-        for (const factor of RASTER_LEVEL_FACTORS) {
+        for (const factor of pages.reductions) {
             const width = info.width / factor, height = rows / factor;
             if (!Number.isInteger(width) || !Number.isInteger(height)) throw new RangeError(`Page ${page} (${info.width} × ${rows}) does not reduce by ${factor}.`);
             let level = raster(pixels, info.width, rows);

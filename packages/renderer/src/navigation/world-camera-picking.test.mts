@@ -5,7 +5,7 @@ import { getEventListeners } from 'node:events';
 import { runtimePolicy } from '../../test/runtime-policy-fixture.mts';
 import runtimeDefinition from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
 import { presentWorldCamera, worldCameraFromPresentation } from './world-camera.ts';
-import type { PreparedWorldCameraFrame } from './world-camera.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { CameraDelta } from './types.ts';
 import { hitsProjectedBody } from './world-camera-hit.ts';
 import { bindWorldCameraPicking } from './world-camera-picking.ts';

@@ -1,3 +1,6 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
+import { scanCssDeclarations } from './css-declaration-scanner.ts';
+
 // Clean prepared nodes (the last step of the presentation bindings, prepared-presentation-bindings.ts, and of the node
 // builder's finish, prepared-node-tree.ts).
 //
@@ -39,22 +42,11 @@ export function preparedPropertyName({ name, custom }: Pick<Property, 'name' | '
 /** A static style's declarations, split where CSS splits them: not inside quotes or parentheses (URLs). */
 function declarations(style: string) {
   const parts: { name: string; text: string }[] = [];
-  let start = 0, depth = 0, quote = '';
-  for (let at = 0; at <= style.length; at++) {
-    const char = style[at];
-    if (quote) { if (char === quote && style[at - 1] !== '\\') quote = ''; continue; }
-    if (char === '"' || char === "'") quote = char;
-    else if (char === '(') depth++;
-    else if (char === ')') depth--;
-    else if ((char === ';' || at === style.length) && depth === 0) {
-      const text = style.slice(start, at).trim(), colon = text.indexOf(':');
-      if (text) {
-        if (colon < 1) throw new TypeError(`Prepared CSS declaration is invalid: ${text}`);
-        const name = text.slice(0, colon).trim();
-        parts.push({ name: name.startsWith('--') ? name : name.toLowerCase(), text });
-      }
-      start = at + 1;
-    }
+  for (const text of scanCssDeclarations(style)) {
+    const colon = text.indexOf(':');
+    if (colon < 1) throw new TypeError(`Prepared CSS declaration is invalid: ${text}`);
+    const name = text.slice(0, colon).trim();
+    parts.push({ name: name.startsWith('--') ? name : name.toLowerCase(), text });
   }
   return parts;
 }
@@ -131,7 +123,7 @@ export function withoutCleanLeaves<D extends { tree: Tree }>(definition: D): D {
 
 /** withoutCleanLeaves for a value read from disk: checks the shape it reads before expanding, so a reader needs no cast. */
 export function expandCleanLeaves(value: unknown): unknown {
-  const record = (item: unknown): item is Record<string, unknown> => typeof item === 'object' && item !== null && !Array.isArray(item);
+  const record = coreIsRecord;
   if (!record(value) || !record(value.tree) || !Array.isArray(value.tree.nodes) || !Array.isArray(value.tree.properties)) return value;
   return withoutCleanLeaves(value as unknown as { tree: Tree });
 }

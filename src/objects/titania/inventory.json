@@ -219,12 +219,6 @@
     },
     {
       "location": "public",
-      "filename": "titania-billboard.webp",
-      "bytes": 7240,
-      "sha256": "e33cf6d99418897cc487b01f354673d553894516f30dcb8d3ba5aea0036663ad"
-    },
-    {
-      "location": "public",
       "filename": "titania-dataset-elevation.webp",
       "bytes": 124,
       "sha256": "225252df40cf87b0c6bb881171836789e7c073e94d29c2c0761264ee44ef29e0"
@@ -249,6 +243,30 @@
     },
     {
       "location": "public",
+      "filename": "titania-elevation-page-0-level-1040.webp",
+      "bytes": 36688,
+      "sha256": "25c18560dc2f37dfd7ff32d500fdd4a6bee133b5933969539eb9c75743dd60aa"
+    },
+    {
+      "location": "public",
+      "filename": "titania-elevation-page-0-level-2080.webp",
+      "bytes": 90984,
+      "sha256": "4a4b3357f36810732d15eeced3d30b7282f189e7a41c0ab0dac689af8696a29e"
+    },
+    {
+      "location": "public",
+      "filename": "titania-elevation-page-0-level-520.webp",
+      "bytes": 14526,
+      "sha256": "1f55a40c79abfbac42a85d6f776fffdae8b2e31d1b1977f641a72ec136e11ad7"
+    },
+    {
+      "location": "public",
+      "filename": "titania-elevation-page-0.webp",
+      "bytes": 230470,
+      "sha256": "2ddc9c70e5343f5c36e61b89c3ab3d09d616b46dfe490ac9c390cb69c0946c2e"
+    },
+    {
+      "location": "public",
       "filename": "titania-elevation@2x.webp",
       "bytes": 230470,
       "sha256": "2ddc9c70e5343f5c36e61b89c3ab3d09d616b46dfe490ac9c390cb69c0946c2e"
@@ -261,9 +279,57 @@
     },
     {
       "location": "public",
+      "filename": "titania-geology-page-0-level-1040.webp",
+      "bytes": 66780,
+      "sha256": "70a8fd4bfe56293c831097e2ea96835a7008b405144481d183ac328e49286264"
+    },
+    {
+      "location": "public",
+      "filename": "titania-geology-page-0-level-2080.webp",
+      "bytes": 114078,
+      "sha256": "dd738664bb2ee7420ec94095588d1ff2494aefda2720af81077de1ce066d63b6"
+    },
+    {
+      "location": "public",
+      "filename": "titania-geology-page-0-level-520.webp",
+      "bytes": 36660,
+      "sha256": "eaefa8ee61380b39489366b44fe22476f4b17608d70477466c7feb67e2e97323"
+    },
+    {
+      "location": "public",
+      "filename": "titania-geology-page-0.webp",
+      "bytes": 35532,
+      "sha256": "58dc68f6b1f914e5ca8b8e336f01f62857e88c8cfb386da977041672ed26e725"
+    },
+    {
+      "location": "public",
       "filename": "titania-geology@2x.webp",
       "bytes": 35532,
       "sha256": "58dc68f6b1f914e5ca8b8e336f01f62857e88c8cfb386da977041672ed26e725"
+    },
+    {
+      "location": "public",
+      "filename": "titania-normal-page-0-level-1040.webp",
+      "bytes": 50734,
+      "sha256": "2f628192b9e2eabc83e6238cd1b803cd8076eb562e5f8b123d3d72a6a40968a7"
+    },
+    {
+      "location": "public",
+      "filename": "titania-normal-page-0-level-2080.webp",
+      "bytes": 126404,
+      "sha256": "81782765281c8455ac25dfe20754b4224d56a54471aef865d8bbf12e75b3c784"
+    },
+    {
+      "location": "public",
+      "filename": "titania-normal-page-0-level-520.webp",
+      "bytes": 14050,
+      "sha256": "ce553a9aa3aa14b093e2ebd8f7494291c89cf4cd12bdb7440ddf24cab3e5b27f"
+    },
+    {
+      "location": "public",
+      "filename": "titania-normal-page-0.webp",
+      "bytes": 283052,
+      "sha256": "6da111cb5c30108831da0198a800bdd542dc2f09f72f37f59b1d053ef0f882b5"
     },
     {
       "location": "public",
@@ -297,6 +363,30 @@
     },
     {
       "location": "public",
+      "filename": "titania-voyager-color-page-0-level-1040.webp",
+      "bytes": 27110,
+      "sha256": "2b36f954fa500ca62c791a66125a59d2ce6714531a6e4cc32afaa86fddada2c7"
+    },
+    {
+      "location": "public",
+      "filename": "titania-voyager-color-page-0-level-2080.webp",
+      "bytes": 71006,
+      "sha256": "91cbe8768900bedb1b80fa7387b47c2c20de669929bc425fa173c7e42f6a7aa8"
+    },
+    {
+      "location": "public",
+      "filename": "titania-voyager-color-page-0-level-520.webp",
+      "bytes": 8150,
+      "sha256": "b1f0122ab9d2f63c1db8e509cf9665de2f5a4cbcdbbac8d1b88a92c6c203cbda"
+    },
+    {
+      "location": "public",
+      "filename": "titania-voyager-color-page-0.webp",
+      "bytes": 178812,
+      "sha256": "426f1b810a99b1903d8eefb85f593909b002fa58672c81f254f3d3c757de85db"
+    },
+    {
+      "location": "public",
       "filename": "titania-voyager-color@2x.webp",
       "bytes": 178812,
       "sha256": "426f1b810a99b1903d8eefb85f593909b002fa58672c81f254f3d3c757de85db"
@@ -310,14 +400,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 88877,
-      "sha256": "e8089765d2efe6005c2a83c6ebfb07e9e3aeeebad29652d63a4a20ccb957b310"
+      "bytes": 86931,
+      "sha256": "d8f6e4df6cf7d100ec9f0c15d80f512a494ccc695229b6d60bf80b103f83e196"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 738,
-      "sha256": "d2165b077ebe4c9ce7fbcb057c7beac1ecfa52ac7c63d323ce56f067b620e6da"
+      "bytes": 676,
+      "sha256": "0be43664b86c0b4a808fc9b74a974c4d1e2b41732f179d2615aa811ab61fcd49"
     },
     {
       "location": "prepared",
@@ -382,14 +472,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 363207,
-      "sha256": "e28c8b110d1b79fb4d8e1b47ae8ab9148ee35328b19d8ed43ee5fd8adb36a010"
+      "bytes": 366920,
+      "sha256": "f45f18e1ba978b8620eee264bf8229ed1ae45cd4d8468dde09333c93b970cb14"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 389459,
-      "sha256": "9151df7a2859c163b6f64a14721b9d13b6ee90d1465eeffac6858a9395749164"
+      "bytes": 390469,
+      "sha256": "0ff9af4a21f6dfd1ab0db446b4d972011d9b95bdc520e9951d8c67ae4ff58339"
     },
     {
       "location": "prepared",
@@ -420,6 +510,12 @@
       "filename": "world-navigation.json",
       "bytes": 1223,
       "sha256": "1dd0c7236fd4ac3a44f5e7d2c5a12d8f439b13765ad9a115772e090a2625e2d1"
+    },
+    {
+      "location": "public",
+      "filename": "titania-billboard.webp",
+      "bytes": 7240,
+      "sha256": "e33cf6d99418897cc487b01f354673d553894516f30dcb8d3ba5aea0036663ad"
     }
   ]
 }

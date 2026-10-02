@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import {jointPath,jointRecord} from '../joint/model.ts';
 import type { EmissionComponent } from '@cssearth/bake/volume';
 type Pair = [number, number];
@@ -19,7 +20,7 @@ export interface DepthRecipe {
   detailThicknessRatio: number; minimumThicknessArcsec: number;
   interpretation: string;
 }
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const finite = coreIsFiniteNumber;
 const number = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 const id = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
 function pair(v: unknown, low: number, high: number): Pair {

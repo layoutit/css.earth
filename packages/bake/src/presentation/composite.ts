@@ -4,7 +4,7 @@ import type { PreparedVariant, PreparedWrite } from '@cssearth/renderer/renderin
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
 import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
-import { RASTER_LEVEL_FACTORS, RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
+import { RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
 import type { PreparedResourceEntry } from '@cssearth/renderer/rendering/prepared-residency.ts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
@@ -130,7 +130,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
  * to `surface:<dataset>:<page>:level:<width>`, the page's `-level-<width>` file (preparation/raster/pages.ts). */
 function pagedSurface(pages: RasterPagePlan | undefined, datasets: PresentationInputs['datasets']) {
   if (!pages) return null;
-  const last = RASTER_LEVEL_FACTORS.length - 1, entries: PreparedResourceEntry[] = [];
+  const entries: PreparedResourceEntry[] = [];
   const levels = pages.levelDiameters.map(minimumDiameter => ({ minimumDiameter, resources: {} as Record<string, string> }));
   const keys = (id: string) => Array.from({ length: pages.pageCount }, (_, page) => `surface:${id}:${page}`);
   let largest = 0;
@@ -138,12 +138,16 @@ function pagedSurface(pages: RasterPagePlan | undefined, datasets: PresentationI
     const url = canonicalPreparedAsset(dataset.surfaceUrl, dataset.surface2xUrl), cut = url.lastIndexOf('/') + 1, name = url.slice(cut);
     const surface = pages.surfaces.find(entry => entry.name === name);
     if (!surface) throw new TypeError(`Dataset ${dataset.id} shows ${name}, which is not a paged surface of this body (${pages.surfaces.map(entry => entry.name).join(', ')}).`);
-    for (const [page, key] of keys(dataset.id).entries()) RASTER_LEVEL_FACTORS.forEach((factor, level) => {
-      const width = surface.width / factor, resource = level === last ? key : `${key}:level:${width}`;
-      entries.push({ key: resource, url: url.slice(0, cut) + rasterPageName(name, page, level === last ? undefined : width),
-        pool: 'pages', decodedBytes: width * surface.pageRows / factor * 4 });
-      levels[level]!.resources[key] = resource;
-    });
+    for (const [page, key] of keys(dataset.id).entries()) {
+      // One resource per published reduction; a level names the reduction this surface shows there (pages.ts).
+      const resources = new Map(pages.reductions.map(factor => {
+        const width = surface.width / factor, resource = factor === 1 ? key : `${key}:level:${width}`;
+        entries.push({ key: resource, url: url.slice(0, cut) + rasterPageName(name, page, factor === 1 ? undefined : width),
+          pool: 'pages', decodedBytes: width * surface.pageRows / factor * 4 });
+        return [factor as number, resource] as const;
+      }));
+      surface.levelReductions.forEach((reduction, level) => { levels[level]!.resources[key] = resources.get(reduction)!; });
+    }
     largest = Math.max(largest, surface.width * surface.pageRows * 4 * pages.pageCount);
   }
   // Two complete datasets at full resolution can coexist during a dataset switch, as Earth's pages allow.

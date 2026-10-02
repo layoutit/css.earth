@@ -32,11 +32,8 @@ export interface ResponsiveFit {
   squareAspectRatio: number; maximumHeightShare: number; maximumMobilePreviewShare: number;
   minimumZoom: number; maximumZoom: number;
 }
-export interface LevelOfDetailPlan {
-  model: string; billboardFadeStartDiscPixels: number; billboardFullDiscPixels: number;
-  markerFadeStartDiscPixels: number; markerFullDiscPixels: number;
-}
-export interface OrbitLineFade { visibleBelowDiscHeightShare: number; hiddenAboveDiscHeightShare: number; }
+import type { LevelOfDetailPlan, OrbitLineFade } from '@cssearth/objects';
+
 export interface CameraPlan extends PitchCalibration {
   cameraModel: string; pitchBounded: boolean; yawBounded: boolean;
   minimumControlPitchDegrees: number; defaultControlYawDegrees: number;

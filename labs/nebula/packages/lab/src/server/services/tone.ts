@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { createConcurrencyLimit } from './concurrency.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
@@ -19,7 +20,7 @@ interface SourceResource { path: string; width: number; height: number; layer?: 
 interface Subject { id: string; density?: { directory: string; overlays?: string } }
 /** In-memory cache key part that changes whenever a file is replaced; never written anywhere. */
 async function fileStamp(path: string) { const value = await stat(path); return [value.dev, value.ino, value.size, value.mtimeMs, value.ctimeMs].join(':'); }
-const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 export function parseTonePreparationRequest(input: unknown): TonePreparationRequest {
   if (!record(input) ||
       (input.removalResultId !== undefined && (input.target !== 'image' || typeof input.removalResultId !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(input.removalResultId))) ||

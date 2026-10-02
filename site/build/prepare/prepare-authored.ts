@@ -1,3 +1,4 @@
+import { readNonArrayRecord } from '@cssearth/core';
 import { isRecord } from '@cssearth/core';
 import '@cssearth/bake/thread-pool';
 import { execFileSync } from 'node:child_process';
@@ -32,7 +33,7 @@ export interface AuthoredPreparationResult { readonly descriptor: AuthoredObject
   readonly recomputedImages?: readonly string[]; }
 type Input = Record<string, unknown>;
 
-function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }
+function record(value: unknown, at: string): Input { return readNonArrayRecord(value, at, () => { throw new TypeError(`${at} must be an object.`); }); }
 function source(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource | undefined { return sources.get(id); }
 /** A star, a black hole or an emissive body is its own light, so it gets no directional Sun; every other body is lit by one. */
 function litBySun(descriptor: AuthoredObjectDescriptor, presentation: unknown): boolean {

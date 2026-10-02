@@ -1,9 +1,11 @@
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 /** Offline, verified sampling context of one saved simulation-guided finite emission model for catalogue star depths. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { type DensityVolumeFrame, type Bounds3, type Vector3 } from '@cssearth/objects';
-import { type ObservationMapping, type EmissionFieldModel, createEmissionField, createIntegratedSignalSampler } from '@cssearth/bake/volume';
+import type { ObservationMapping } from '@cssearth/objects';
+import { type EmissionFieldModel, createEmissionField, createIntegratedSignalSampler } from '@cssearth/bake/volume';
 import { createEnvelopeSampler, validateEnvelopeSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 import { verifyFiniteMaterialArtifacts } from '../../../cli/commands/finite-density-material-artifacts.ts';
@@ -12,8 +14,8 @@ import { loadSimulationPrior } from '../../../cli/commands/simulation-prior.ts';
 
 export const finiteModelDirectory = (resultId: string) => `.local/nebula-lab/reconstructions/${resultId}`;
 const KPC_M = 3.085677581491367e19;
-const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
-const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
+const record = coreIsRecord;
+const finite = coreIsFiniteNumber;
 function vector(value: unknown, length: number, label: string): number[] {
   if (!Array.isArray(value) || value.length !== length || !value.every(finite)) throw new TypeError(`Invalid ${label}.`);
   return value;

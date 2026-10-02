@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import { isRecord as record } from '@cssearth/core';
 /** Read-only archive discovery. An image candidate is not an accepted reconstruction input. */
 export const archiveProviders = ['mast', 'irsa', 'eso'] as const;
@@ -22,7 +23,7 @@ export interface ArchiveQuery {
 const archiveQueryKeys = ['provider', 'status', 'queriedAt', 'endpoint', 'query', 'radiusDegrees', 'matchedCount', 'matchedEstimatedBytes',
   'matchedUnknownSizeCount', 'images', 'error', 'imagesPath', 'imageCount'];
 function text(value: unknown): value is string { return typeof value === 'string'; }
-function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
+const finite = coreIsFiniteNumber;
 function nullableNumber(value: unknown): boolean { return value === null || finite(value); }
 function positiveOrNull(value: unknown): boolean { return value === null || (finite(value) && value > 0); }
 function strings(value: unknown): value is string[] { return Array.isArray(value) && value.every(text); }

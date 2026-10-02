@@ -1,0 +1,185 @@
+{
+  "schema": "cssearth-emission-inference@1",
+  "id": "ngc-3311-inferred",
+  "source": {
+    "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=2200&height=2200&fov=0.155644&projection=TAN&coordsys=icrs&ra=159.178421&dec=-27.528339&format=jpg",
+    "width": 2200,
+    "height": 2200,
+    "publisher": "https://www.legacysurvey.org/dr10/",
+    "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+  },
+  "crop": {
+    "left": 0,
+    "top": 0,
+    "width": 2200,
+    "height": 2200
+  },
+  "pointMasks": [],
+  "neighbourMasks": {
+    "source": "paturel-2003-hyperleda-pgc",
+    "fill": "isophote",
+    "masks": [
+      {
+        "name": "PGC 31438 (NGC3308)",
+        "x": 2183,
+        "y": -184,
+        "radius": 587
+      },
+      {
+        "name": "PGC 31513 (NGC3312)",
+        "x": 72,
+        "y": 1610,
+        "radius": 574
+      },
+      {
+        "name": "PGC 31466 (NGC3309)",
+        "x": 1477,
+        "y": 950,
+        "radius": 373
+      },
+      {
+        "name": "PGC 31430 (NGC3307)",
+        "x": 2438,
+        "y": 1116,
+        "radius": 345
+      },
+      {
+        "name": "PGC 31476 ([RC2]A1034-27A)",
+        "x": 1184,
+        "y": 1563,
+        "radius": 233
+      },
+      {
+        "name": "PGC 31450",
+        "x": 1816,
+        "y": 471,
+        "radius": 233
+      },
+      {
+        "name": "PGC 31444",
+        "x": 2040,
+        "y": 1854,
+        "radius": 204
+      },
+      {
+        "name": "PGC 31464",
+        "x": 1508,
+        "y": 405,
+        "radius": 199
+      },
+      {
+        "name": "PGC 31483",
+        "x": 991,
+        "y": 271,
+        "radius": 181
+      },
+      {
+        "name": "PGC 31465",
+        "x": 1482,
+        "y": 283,
+        "radius": 117
+      },
+      {
+        "name": "PGC 141485",
+        "x": 787,
+        "y": 703,
+        "radius": 114
+      },
+      {
+        "name": "PGC 141484",
+        "x": 1106,
+        "y": 1912,
+        "radius": 107
+      },
+      {
+        "name": "PGC 753828",
+        "x": 714,
+        "y": 880,
+        "radius": 105
+      },
+      {
+        "name": "PGC 141487",
+        "x": 594,
+        "y": 1229,
+        "radius": 100
+      },
+      {
+        "name": "PGC 141474",
+        "x": 2145,
+        "y": 1057,
+        "radius": 87
+      },
+      {
+        "name": "PGC 141483",
+        "x": 1226,
+        "y": 1390,
+        "radius": 79
+      }
+    ]
+  },
+  "nativeRemoval": {
+    "directory": ".local/nebula-lab/ngc-3311/nox",
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
+  },
+  "grid": {
+    "width": 150,
+    "height": 150,
+    "depth": 150
+  },
+  "prior": {
+    "axis": [
+      0.848048,
+      -0.529919,
+      0
+    ],
+    "center": [
+      74.5,
+      74.5,
+      74.5
+    ],
+    "binWidth": 1
+  },
+  "tau": 0.001,
+  "iterations": 100,
+  "blackLevel": 0.098,
+  "displayExposure": 1.5,
+  "slices": 48,
+  "assumptions": [
+    "Depth follows the deprojected density (Prugniel & Simien 1997) of Arnaboldi et al.'s (2012) Table 2 two-dimensional Sérsic fit to NGC 3311 in the V band with the north-east excess masked (column 'allmask'): n = 4.8 +/- 0.02, effective radius 198.8 +/- 2.2 arcsec, axis ratio 0.93, major axis at position angle 32 degrees. The spheroid is oblate about the minor axis (position angle 122 degrees), placed in the plane of the sky. The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+    "The prior ends at 1.409 half-light radii, 280.2 arcsec (73.8 kpc at 54.3 Mpc): the half-diagonal of the 6.8 x 6.4 arcmin field Arnaboldi et al. fitted. A presentation choice: the fit is not extended beyond the field it was made on; light beyond that spheroid is not drawn.",
+    "The 2200 x 2200 px cutout is requested on NGC 3311's 2MASS Extended Source Catalog position (2MASX J10364282-2731420: 159.178421, -27.528339) in a tangent projection, north up and east left, 0.155644 degrees wide (twice 280.2 arcsec), 0.255 arcsec per pixel, so its registration is the request's. The centroid of the bright core falls within 1 px (0.2 arcsec) of the image centre.",
+    "NOX removes stars; 16 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius, never more than half their distance from the centre, so no mask covers NGC 3311's own halo on the far side of its core. NGC 3309, 103 arcsec from the centre and inside NGC 3311's light, is the exception: it is masked to 95 arcsec, as far as a mask reaches without covering NGC 3311's innermost isophotes whole (its outer quarter is feathered). Both limits are presentation choices. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the fit's axis ratio and position angle), never more than it held. NGC 3309 is not drawn; an arc of its outer light remains west of its mask.",
+    "Every pixel takes the median of the 37 px square around it, so star haloes and small background galaxies that NOX and the masks leave, and the survey's saturation bleed trails and the dark holes it leaves at bright stars, are not spread through the spheroid.",
+    "Black level 0.098 (25 of 255) is the median of the cutout's bottom-right 150 px corner and of the 150 px square at the middle of its bottom edge. The other three corners hold NGC 3312, the galaxies around NGC 3308 and a bright star's ghost and are not sky.",
+    "The color is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 3311's faint outer light. Single-image depth is modelled by the prior, not measured."
+  ],
+  "compactClamp": {
+    "windowPx": 37,
+    "basis": "37 px (9.4 arcsec, 2.5 kpc) is about two and a half of the grid's 14.7 px cells, the proportion M87's recipe uses: light more compact than that cannot be NGC 3311's smooth light at this grid.",
+    "fillDark": true
+  },
+  "shapePrior": {
+    "components": [
+      {
+        "kind": "sersic",
+        "axis": [
+          0.848048,
+          -0.529919,
+          0
+        ],
+        "radius": 53.22,
+        "radialSigma": 1,
+        "axialSigma": 1,
+        "weight": 1,
+        "sersicIndex": 4.8,
+        "axisRatio": 0.93
+      }
+    ],
+    "sigmaCutoff": 1.409
+  },
+  "modelReference": {
+    "paper": "https://arxiv.org/abs/1205.5289"
+  }
+}

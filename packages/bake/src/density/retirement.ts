@@ -2,7 +2,6 @@
 import { readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { containedPath } from '../volume/node/index.ts';
-import { text } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 
 function texturePath(outputDirectory: string, value: unknown): string {
@@ -37,4 +36,9 @@ export async function retireVolumeTextures(outputDirectory: string, previous: st
   const keep = new Set(current.map(path => texturePath(outputDirectory, path)));
   const retired = [...new Set(previous.map(path => texturePath(outputDirectory, path)))].filter(path => !keep.has(path));
   for (const path of retired) await rm(path, { force: true });
+}
+
+function text(value: unknown, at: string): string {
+  if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
+  return value;
 }

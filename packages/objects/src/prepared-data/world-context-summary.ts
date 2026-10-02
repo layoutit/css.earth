@@ -1,3 +1,4 @@
+import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA } from './world-schemas.js';
 import { checks, failure } from '@cssearth/core';
 
 const { array, positive, record, text, unique } = checks(failure('Prepared presentation: '));
@@ -15,7 +16,7 @@ export function expandWorldContextSummary(value: unknown): unknown {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
   const input = record(value, 'world context summary');
   // A value without the tables (a copy of a parsed summary a caller changed) is already in that shape, for the checks to read.
-  if (input.schema !== 'cssearth-world-context-summary@2' || input.systemNames === undefined) return value;
+  if (input.schema !== PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA || input.systemNames === undefined) return value;
   const { systemNames, discoveries, billboard, bodies, deferred, ...rest } = input;
   const tables = readTables({ systemNames, discoveries, billboard }, 'world context summary');
   const rows = transpose(bodies, 'world context summary bodies');
@@ -37,7 +38,7 @@ export function expandWorldContextSummary(value: unknown): unknown {
 export function expandWorldSystem(value: unknown, placed: (id: string) => unknown): Record<string, unknown> {
   const input = record(value, 'world system', ['schema', 'id', 'systemNames', 'discoveries', 'billboard', 'orbitCenters', 'orbitBanks', 'bodies']);
   const where = `world system ${String(input.id)}`;
-  if (input.schema !== 'cssearth-world-system@1') throw new TypeError(`${where} is ${String(input.schema)}, not cssearth-world-system@1.`);
+  if (input.schema !== PREPARED_WORLD_SYSTEM_SCHEMA) throw new TypeError(`${where} is ${String(input.schema)}, not ${PREPARED_WORLD_SYSTEM_SCHEMA}.`);
   const { systemNames, discoveries, billboard, bodies, ...rest } = input;
   const tables = readTables({ systemNames, discoveries, billboard }, where);
   const rows = transpose(bodies, `${where} bodies`);

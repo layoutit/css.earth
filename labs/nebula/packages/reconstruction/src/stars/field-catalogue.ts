@@ -1,6 +1,7 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 const HIP_COLUMNS = ['HIP', 'RAICRS', 'DEICRS', 'Vmag', 'B-V', 'e_B-V', 'Plx', 'e_Plx', 'pmRA', 'pmDE', 'e_pmRA', 'e_pmDE'];
 const TYCHO_COLUMNS = ['TYC1', 'TYC2', 'TYC3', 'RAmdeg', 'DEmdeg', 'pmRA', 'pmDE', 'e_pmRA', 'e_pmDE', 'BTmag', 'e_BTmag', 'VTmag', 'e_VTmag', 'HIP'];
-const record = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+const record = coreIsRecord;
 const text = (v: unknown, label: string): string => { if (typeof v !== 'string' || !v) throw new TypeError(`Missing ${label}.`); return v; };
 const num = (v: string | undefined): number | null => {
   if (!v?.trim()) return null;
