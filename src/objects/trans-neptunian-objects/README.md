@@ -26,6 +26,12 @@ After the left-out objects were removed, no dot lay within 0.05 au of any Solar 
 
 The dots lie 2.5 to 123.9 au from the Sun: 315 inside 30 au, 3,637 between 30 and 50 au, and 215 beyond.
 
+## Evidence
+
+![The Solar System from 211 au: the Kuiper belt as grey dots outside Neptune's orbit](evidence/2026-10-01/solar-system.webp)
+
+A headless capture of this version's Solar System overview at 211 au.
+
 ## Known problems
 
 - The dots are the objects found so far with well-known orbits, not the belt. Leaving out the loose orbits removes most of the deep search fields, such as the one made for New Horizons around Arrokoth. They gather where surveys have looked, and they thin out with distance because fainter objects go unseen.

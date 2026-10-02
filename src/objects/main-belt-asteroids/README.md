@@ -26,6 +26,12 @@ After the left-out asteroids were removed, no dot lay within 0.002 au of any Sol
 
 The dots lie 1.7 to 5.1 au from the Sun.
 
+## Evidence
+
+![The inner Solar System from 10 au: the main belt as grey dots between Mars and Jupiter](evidence/2026-10-01/inner-system.webp)
+
+A headless capture of this version's Sun page at 10 au. The mission-target asteroids keep a ring and a name and draw no orbit.
+
 ## Known problems
 
 - Only the brighter asteroids are drawn. The magnitude limit of 13 is a display choice that keeps the bank near 6,000 dots; the fainter main-belt asteroids, the great majority, are left out.
