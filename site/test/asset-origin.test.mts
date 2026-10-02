@@ -87,7 +87,10 @@ test('an installed scene image is inlined as a data URI, and a missing one leave
   const root = await mkdtemp(join(tmpdir(), 'asset-origin-inline-'));
   await mkdir(join(root, 'public/scenes/body'), { recursive: true });
   await writeFile(join(root, 'public/scenes/body/body-arrival.webp'), Buffer.from([1, 2, 3]));
-  assert.equal(await inlineSceneImage('/scenes/body/body-arrival.webp', root), 'data:image/webp;base64,AQID');
-  assert.equal(await inlineSceneImage('/scenes/other/other-arrival.webp', root), null);
-  assert.equal(await inlineSceneImage('/scenes/body/../../../secret.webp', root), null);
+  assert.equal(await inlineSceneImage('body', '/scenes/body/body-arrival.webp', root), 'data:image/webp;base64,AQID');
+  // A deploy's discovery names the published address: the same file, found by its name.
+  assert.equal(await inlineSceneImage('body', `https://assets.example/runtime-assets/${'a'.repeat(64)}/body-arrival.webp`, root), 'data:image/webp;base64,AQID');
+  assert.equal(await inlineSceneImage('other', '/scenes/other/other-arrival.webp', root), null);
+  assert.equal(await inlineSceneImage('../..', '/scenes/body/body-arrival.webp', root), null);
+  assert.equal(await inlineSceneImage('body', '/scenes/body/body-arrival.png', root), null);
 });

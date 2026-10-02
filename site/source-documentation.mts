@@ -21,12 +21,31 @@ const checked = new Set<string>();
 // Each object's provider index, computed when the source catalogue was written (@cssearth/objects/provenance source-credits.ts).
 const CREDITS = parseSourceCredits(credits), PROVIDERS = CREDITS.providers;
 const ICONS = parseSourceIcons(JSON.parse(readFileSync(resolve(root, 'site/source/source-icons.json'), 'utf8')));
-/** The rows of an object's Sources tab: each published source it uses, once, with the address of its site's favicon when one is recorded. */
-export const objectSourceRows = (objectId: string) => (CREDITS.sources[objectId] ?? []).map(id => {
+/** The object and the banks its datasets are drawn from (a nebula's volume, a galaxy's layers): a body's sources include
+ * theirs. The Crab listed one source of its volume's sixteen, and its footer one credited name (2026-10-02). */
+const owners = new Map<string, readonly string[]>();
+function lineageOwners(objectId: string): readonly string[] {
+  let known = owners.get(objectId);
+  if (!known) {
+    const file = resolve(root, 'src/objects', objectId, 'source/content/object.json');
+    const content: unknown = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null;
+    const controls: unknown = content && typeof content === 'object' && 'datasets' in content && content.datasets && typeof content.datasets === 'object' && 'controls' in content.datasets ? content.datasets.controls : [];
+    const banks = (Array.isArray(controls) ? controls : []).flatMap((control: unknown) => {
+      const volume: unknown = control && typeof control === 'object' && 'volume' in control ? control.volume : null;
+      const bank: unknown = volume && typeof volume === 'object' && 'objectId' in volume ? volume.objectId : null;
+      return typeof bank === 'string' && /^[a-z0-9][a-z0-9-]*$/u.test(bank) ? [bank] : [];
+    });
+    known = Object.freeze([...new Set([objectId, ...banks])]);
+    owners.set(objectId, known);
+  }
+  return known;
+}
+/** The rows of an object's Sources tab: each published source it and its datasets' banks use, once, with the address of its site's favicon when one is recorded. */
+export const objectSourceRows = (objectId: string) => [...new Set(lineageOwners(objectId).flatMap(owner => CREDITS.sources[owner] ?? []))].map(id => {
   const row = CREDITS.records[id]!;
   return { ...row, iconSrc: ICONS[row.icon]?.assetUrl };
 });
-const sourceProviders = (objectId: string): readonly string[] => PROVIDERS[objectId] ?? [];
+const sourceProviders = (objectId: string): readonly string[] => [...new Set(lineageOwners(objectId).flatMap(owner => PROVIDERS[owner] ?? []))];
 const creditLabel = (providers: readonly string[]) => {
   if (!providers.length) return 'Sources';
   const shown: string[] = [];

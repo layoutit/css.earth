@@ -64,7 +64,7 @@ const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId =
 // A page that places its own photograph carries the image itself: on a 1.6 Mbps, 150 ms link Earth's photograph showed at
 // 2.02 s inline against 2.42 s from the asset origin, for the same bytes (2026-10-02). Other pages name its address.
 const startupImageSource = startupCover && startup?.arrival?.billboard
-  ? await inlineSceneImage(startup.arrival.billboard.url) ?? startupImage : startupImage;
+  ? await inlineSceneImage(objectRecord.id, startup.arrival.billboard.url) ?? startupImage : startupImage;
 // The scene's textures, and a photograph the page does not carry, come from the asset origin: dial that origin with the
 // head, or the first request pays the DNS and TLS setup (430 ms of a cold iPad load against 33 ms on a warm connection,
 // 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
