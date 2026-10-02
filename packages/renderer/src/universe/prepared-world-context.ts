@@ -722,7 +722,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
         if (paintedOrder.length !== paintedBodies.size) paintedOrder = [...paintedBodies].sort((a, b) => a.index - b.index);
       }
-      if (measured || attachMarkers.size > 0) { invalidatePolicy(); refresh(); }
+      // A flight publishes its next view anyway, and its end refreshes (setNavigationInFlight): a refresh here replanned
+      // the view just shown and took the flight's next frame, so the camera moved every other frame (2026-10-01: 58 of
+      // 910 frames held on three flights into planetary systems, 16 of 870 with this guard).
+      if (measured || attachMarkers.size > 0) { invalidatePolicy(); if (!navigationInFlight) refresh(); }
     },
     destroy() { if (!destroyed) { destroyed = true; interactions.destroy();
       if (annotationFrame !== null) clock.cancel(annotationFrame);
