@@ -1,13 +1,13 @@
+import { discoverRoot } from '@cssearth/core/node';
 import { DatabaseSync } from "node:sqlite";
-import { createRequire } from "node:module";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import { array, object, string, number } from "./collect/client.ts";
 export { array, object, string, number };
 // The checkout this module's own @cssearth/bake install sits in, independent of the caller's cwd (as
 // packages/bake/src/navigation/prepare-navigation.ts and check-deploy-assets.ts resolve it).
 /** The checkout this command's own package install belongs to, for other astronomy-data modules and CLI commands that
  * resolve scratch output directories the same way instead of against the caller's cwd. */
-export const checkoutRoot = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+export const checkoutRoot = discoverRoot({ strategy: 'package-location', fromUrl: import.meta.url, packageSpecifier: '@cssearth/bake/package.json', rootOffset: '../..', missing: { behavior: 'throw' } });
 /** The astronomy data ledger and its documents, in the checkout this command's own package install belongs to. */
 export const root = resolve(checkoutRoot, "src/sources/astronomy-data");
 export const databasePath = resolve(

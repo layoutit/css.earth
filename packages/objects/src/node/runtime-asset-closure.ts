@@ -1,4 +1,4 @@
-import { sha256 } from '@cssearth/core/node';
+import { sha256, discoverGitRoot } from '@cssearth/core/node';
 import { isArray, isRecord, hasErrorCode } from '@cssearth/core';
 import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
@@ -26,7 +26,7 @@ const SHA256 = /^[0-9a-f]{64}$/u;
 
 let cachedRepoRoot: Promise<string | null> | undefined;
 function repoRoot(): Promise<string | null> {
-  cachedRepoRoot ??= execFileAsync("git", ["rev-parse", "--show-toplevel"]).then(({ stdout }) => stdout.trim(), () => null);
+  cachedRepoRoot ??= discoverGitRoot({ missing: { behavior: 'undefined' } }).then(root => root ?? null);
   return cachedRepoRoot;
 }
 

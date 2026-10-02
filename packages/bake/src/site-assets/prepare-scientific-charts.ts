@@ -1,3 +1,4 @@
+import { discoverRoot } from '@cssearth/core/node';
 import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
 import {decodeProfile} from "../objects/raster/index.ts";
@@ -6,13 +7,12 @@ const parsePhase=shape(phaseFields);
 const parseContext=shape({schema:text,sources:shape({photometricPhase:requireRecord}),planets:dictionary(shape({phase:parsePhase}))});
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { createRequire } from "node:module";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 
 import { renderPhotometricPhaseChart } from '../objects/charts/index.ts';
 
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const projectRoot = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+const projectRoot = discoverRoot({ strategy: 'package-location', fromUrl: import.meta.url, packageSpecifier: '@cssearth/bake/package.json', rootOffset: '../..', missing: { behavior: 'throw' } });
 const contextPath = resolve(
   projectRoot,
   "site/source/scientific-charts/planetary-context.json",
