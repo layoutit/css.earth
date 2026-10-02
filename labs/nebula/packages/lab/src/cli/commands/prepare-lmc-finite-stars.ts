@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /**
  * Offline preparation of the published Bonanos et al. (2009) massive LMC star sample inside the current
  * finite LMC emission model, through the shared finite-model star placement.
@@ -33,7 +34,7 @@ export const LAYER_BASE_NAME = 'stars-envelope';
 export const INPUT_ROWS = 1268;
 export { finiteModelStarsIndex, MAGNITUDE_LIMIT };
 export type LmcStarSelection = FiniteStarSelection;
-const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
+const record = coreIsRecord;
 
 /** CDS J/AJ/138/1003 table3.dat bytes (1-based, inclusive) from the pinned ReadMe. Blank optional fields are NaN. */
 export function readBonanos2009Row(line: string): CatalogueStarRow {

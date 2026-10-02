@@ -1,3 +1,4 @@
+import { readNonArrayRecord, readNonblankText, readFiniteNumber, readPositiveNumber } from '@cssearth/core';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
@@ -11,10 +12,10 @@ type Vec = readonly [number, number, number];
 type RecordValue = Record<string, unknown>;
 
 const root = process.cwd();
-const record = (value: unknown, at: string): RecordValue => { if (value === null || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as RecordValue; };
-const text = (value: unknown, at: string): string => { if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${at} must be text.`); return value; };
-const finite = (value: unknown, at: string): number => { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be finite.`); return value; };
-const positive = (value: unknown, at: string): number => { const result = finite(value, at); if (!(result > 0)) throw new TypeError(`${at} must be positive.`); return result; };
+const record = (value: unknown, at: string): RecordValue => { return readNonArrayRecord(value, at, () => { throw new TypeError(`${at} must be an object.`); }); };
+const text = (value: unknown, at: string): string => { return readNonblankText(value, at, () => { throw new TypeError(`${at} must be text.`); }); };
+const finite = (value: unknown, at: string): number => { return readFiniteNumber(value, at, () => { throw new TypeError(`${at} must be finite.`); }); };
+const positive = (value: unknown, at: string): number => { const result = finite(value, at); return readPositiveNumber(result, at, () => { throw new TypeError(`${at} must be positive.`); }); };
 const pixel = (value: unknown, at: string): Pixel => { if (!Array.isArray(value) || value.length !== 2) throw new TypeError(`${at} must have two components.`); return [finite(value[0], `${at}[0]`), finite(value[1], `${at}[1]`)]; };
 
 const safePath = (base: string, path: unknown, at: string) => {

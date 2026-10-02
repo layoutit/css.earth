@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { PreparedShapeScene } from '@cssearth/objects';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 export function assertSharedGeometry(neutral: PreparedCssVolume, textured: PreparedCssVolume, result: PreparedShapeScene): void {
@@ -22,4 +23,4 @@ function checkProvenance(value: unknown, result: PreparedShapeScene): void {
     throw new TypeError('Prepared cloud provenance differs from its result.');
   }
 }
-function record(value: unknown): value is Record<string, unknown> { return Boolean(value) && typeof value === 'object' && !Array.isArray(value); }
+const record = coreIsRecord;

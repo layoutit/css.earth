@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees, type SolarGeometry } from '../scene/index.ts';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
@@ -35,7 +36,7 @@ interface Options { readonly objectId: string; readonly displayName: string; rea
    * Full preparation (and solar synoptic preparation) verifies the entire package. */
   readonly sourceVerification?: 'complete' | 'photographs' | 'selected-surfaces'; }
 
-const plainRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+const plainRecord = coreIsRecord;
 const emissionSchema = object({ offLimbSize: number, limbSize: number, bodyDiameter: number, offLimbOutput: string, limbOutput: string, metadata: plainRecord });
 /** Validate a raw raster recipe down to the facts the interpreter needs; the lane validates the rest when it packs. */
 export function parseInterpreterRecipe(value: unknown): InterpreterRecipe {

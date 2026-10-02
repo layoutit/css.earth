@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
 // Leaf boxes as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
@@ -42,7 +43,7 @@ const seamTerm = (k: string) => `calc(1 + var(${SURFACE_SEAM_OUTSET_PROPERTY}, 0
 const SEAM = new RegExp(String.raw`^ translate\(50%, 50%\) scale\(calc\(1 \+ var\(${SURFACE_SEAM_OUTSET_PROPERTY}, 0\) \* (${NUMBER})\), calc\(1 \+ var\(${SURFACE_SEAM_OUTSET_PROPERTY}, 0\) \* (${NUMBER})\)\) translate\(-50%, -50%\)$`);
 /** The properties a record carries; the node's static style drops them too, since the record overrides them. */
 const OWNED = ['width', 'height', 'background-size', 'background-position', 'transform', '--polycss-atlas-width', '--polycss-atlas-height'];
-const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
+const isRecord = coreIsRecord;
 const leafBoxBinding = (value: unknown): value is Binding => isRecord(value) && value.kind === 'silhouette-step-property' && value.property === LEAF_BOX_PROPERTY;
 const seamBinding = (value: unknown): value is Binding => isRecord(value) && value.kind === 'silhouette-step-property' && value.property === SURFACE_SEAM_OUTSET_PROPERTY;
 

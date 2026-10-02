@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Enforce the internal nebula dependency graph against actual source imports. The architecture check runs it as its
  * `nebula-boundaries` rule (`rules.mts`), with the inbound closure in `nebula-inbound.mts`. */
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
@@ -100,7 +101,7 @@ function manifest(directory: string): { name?: unknown; private?: unknown; expor
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Invalid package manifest.');
   return value;
 }
-const record = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 
 /** No computed module loading, object/source paths or celestial-id branches: the host supplies those. */
 function hostNeutral(label: string, syntax: ts.SourceFile, computed: boolean, objectIds: Set<string>, errors: string[]) {

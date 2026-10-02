@@ -1,3 +1,4 @@
+import { readNonArrayRecord, readNonblankText } from '@cssearth/core';
 /** Registration evidence for composites built from pinned survey bands on one exact TAN request grid.
  * A composite with enough catalogue stars in its blue channel runs the unchanged fixed-WCS catalogue gate.
  * A composite the gate cannot qualify may inherit the grid only from a passing composite on the identical grid;
@@ -23,14 +24,8 @@ export interface SkyBandRegistrationRecipe {
   negativeControls: { label: string; imageId: string; blueChannel: string; wcs: ImageWcs; receipt: string }[];
 }
 
-function record(value: unknown, label: string): Record<string, unknown> {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object.`);
-  return value as Record<string, unknown>;
-}
-function text(value: unknown, label: string): string {
-  if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${label} must be non-empty text.`);
-  return value;
-}
+function record(value: unknown, label: string): Record<string, unknown> { return readNonArrayRecord(value, label, () => { throw new TypeError(`${label} must be an object.`); }); }
+function text(value: unknown, label: string): string { return readNonblankText(value, label, () => { throw new TypeError(`${label} must be non-empty text.`); }); }
 const id = (value: unknown, label: string) => { const s = text(value, label); if (!/^[a-z0-9-]+$/.test(s)) throw new TypeError(`${label} must be a safe id.`); return s; };
 const relativePath = (value: unknown, label: string) => {
   const s = text(value, label);

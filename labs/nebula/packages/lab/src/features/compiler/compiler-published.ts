@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readCompilerRecipe, readCompilerRequest, type CompilerRequest } from './model.ts';
 import { readCompilerResult, type CompilerResult } from './result.ts';
 import { sampledOwnerPins } from '../sampled-prior/ownership.ts';
@@ -6,7 +7,7 @@ import { verifySampledEvidence } from '@cssearth/objects';
 
 interface Pin { path: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 function pin(value: unknown): Pin {
   if (!record(value) || typeof value.path !== 'string' || !/^(?:labs\/nebula\/|\.local\/nebula-lab\/)/.test(value.path) || Object.keys(value).join() !== 'path' ||
       value.path.split('/').some(part => part === '..' || part === '.' || part === '') || /[\\?#\s]/.test(value.path))

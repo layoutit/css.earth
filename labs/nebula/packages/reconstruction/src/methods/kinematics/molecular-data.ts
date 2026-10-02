@@ -1,5 +1,6 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { MolecularCatalogue, MolecularColumn, MolecularPoint, MolecularPointing, MolecularRecipe, MolecularSourcePin } from './molecular-types.ts';
-const isRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isRecord = coreIsRecord;
 const record = (v: unknown) => { if (!isRecord(v)) throw new TypeError('Expected molecular evidence object.'); return v; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v.trim() || v.length > 8192) throw new TypeError('Expected molecular evidence text.'); return v; };
 const number = (v: unknown, min: number, max: number) => { if (typeof v !== 'number' || !Number.isFinite(v) || v < min || v > max) throw new TypeError('Invalid molecular numeric value.'); return v; };

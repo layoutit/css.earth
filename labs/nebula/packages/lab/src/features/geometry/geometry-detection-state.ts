@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { readGeometryMap, type GeometryMap } from '../observations/models/geometry-model';
 import type { StructureImage } from '../observations/models/structures-model';
@@ -16,7 +17,7 @@ interface Completed { result: DetectionResult; geometry: GeometryMap }
 interface Session { key: string; value: SavedDetection; geometries: Record<string, GeometryMap> }
 type Scheduler = ReturnType<typeof createShapeCloudScheduler<DetectionSettings, Completed>>;
 const defaults = (): SavedDetection => ({ settings: readDetectionSettings(), appliedSettings: readDetectionSettings(), quality: 'detailed' });
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 const message = (reason: unknown) => reason instanceof Error ? reason.message : 'Detector failed.';
 const settingsKey = (value: DetectionSettings) => JSON.stringify(value);
 const samePin = (a?: Pin, b?: Pin) => a?.file === b?.file;

@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/objects';
 export { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/objects';
 import { readCompilerTargetControls, type CompilerTargetControls } from '@cssearth/nebula-reconstruction/methods/inference/target';
@@ -14,7 +15,7 @@ export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: stri
   observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string; sampledRecipe?: string; photometricPriorRecipe?: string;
   defaultSourceId: string; maximumStars: number; interpretation: string;
   defaultControls?: CompilerControls; sourceWeights?: Record<string, number>; starCatalogue?: CompilerStarCatalogue; observedStars?: ObservedStarCataloguePin; targetControls?: CompilerTargetControls; emissionWindow?: CompilerEmissionWindow }
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const finite = coreIsFiniteNumber;
 const range = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 export function readCompilerRequest(v: unknown): CompilerRequest {
   if (!jointRecord(v) || v.action !== 'apply' || v.imageId !== 'compiler' || !jointPath(v.recipePath) || !v.recipePath.startsWith('labs/nebula/models/') ||

@@ -1,5 +1,6 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { CalibrationAnchor, KinematicParameters, PreparedKinematics, SlitEvidence, VelocityPoint } from './types.ts';
-const isRecord = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const isRecord = coreIsRecord;
 export function record(value: unknown): Record<string, unknown> {
   if (!isRecord(value)) throw new TypeError('Expected an object.'); return value;
 }

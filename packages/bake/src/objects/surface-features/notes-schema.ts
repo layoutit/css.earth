@@ -1,7 +1,7 @@
-import { isRecord } from '@cssearth/core';
-const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { if (!isRecord(value)) throw new TypeError(`${label} must be an object.`); return value; };
+import { readNonArrayRecord, readTextAllowEmpty } from '@cssearth/core';
+const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { return readNonArrayRecord(value, label, () => { throw new TypeError(`${label} must be an object.`); }); };
 const requireArray = (value: unknown, label = 'Source value'): unknown[] => { if (!Array.isArray(value)) throw new TypeError(`${label} must be an array.`); return value; };
-const requireString = (value: unknown, label = 'Source value'): string => { if (typeof value !== 'string') throw new TypeError(`${label} must be a string.`); return value; };
+const requireString = (value: unknown, label = 'Source value'): string => { return readTextAllowEmpty(value, label, () => { throw new TypeError(`${label} must be a string.`); }); };
 // The pinned notes document: Wikipedia lead summaries joined to Gazetteer feature ids through Wikidata.
 export const FEATURE_NOTES_SCHEMA = 'cssearth-surface-feature-notes@1';
 export const MAXIMUM_NOTE_CHARACTERS = 320;
@@ -38,4 +38,3 @@ export function trimExtract(extract: string): string {
   for (const sentence of sentences) { if ((out + sentence).trim().length > MAXIMUM_NOTE_CHARACTERS) break; out += sentence; }
   return (out.trim() || text.slice(0, MAXIMUM_NOTE_CHARACTERS - 1).trim() + '…');
 }
-

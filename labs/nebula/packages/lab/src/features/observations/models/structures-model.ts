@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 import type { Matrix, Observations, Point } from './model';
 
 export const structureLayers = ['source', 'combined', 'diffuse', 'arcs', 'knots', 'unassigned'] as const;
@@ -24,8 +25,8 @@ export interface ReviewMap {
   regions: ReviewRegion[]; atlases: { file: string; width: number; height: number }[];
   metrics: { reconstructionMaxError: number; unassignedFraction: number };
 }
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
-const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
+const record = coreIsRecord;
+const finite = coreIsFiniteNumber;
 const integer = (value: unknown, min = 0): value is number => finite(value) && Number.isInteger(value) && value >= min;
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0;
 const path = (value: unknown): value is string => text(value) && !value.startsWith('/') && !/[\\:?#]/.test(value) && value.split('/').every(part => part !== '..' && part !== '.');

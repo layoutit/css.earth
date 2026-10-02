@@ -1,10 +1,11 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Restore an accepted source-owned compact delivery; no lab recipes, caches or research services. */
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Pin } from '../volume/node/index.ts';
 import { prepareFiniteEmissionObject } from './finite-emission-object.ts';
-const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
+const record = coreIsRecord;
 function pin(value: unknown): Pin {
   assert.ok(record(value) && typeof value.path === 'string');
   return {path:value.path};

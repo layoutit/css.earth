@@ -1,4 +1,4 @@
-import { isArray, isRecord, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
+import { isArray, isRecord, isFiniteNumber, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 /** Decode source samples for compact spectrum charts independently of the other chart kinds and @cssearth/bake. */
 export interface SpectrumRecipe {id:string;title:string;description:string;output:string;metadata:Record<string,unknown>;kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
 export interface SpectrumPoint {wavelength: number; total: number;}
@@ -37,7 +37,7 @@ export async function readSpectrumData(sourceDirectory: string, input: unknown) 
     return path.split('.').reduce<unknown>((entry, key) => isRecord(entry) ? entry[key] : isArray(entry) && /^\d+$/.test(key) ? entry[Number(key)] : undefined, value);
   };
   const numbers = (value: unknown): number[] => {
-    if (!isArray(value) || !value.every((item): item is number => typeof item === 'number' && Number.isFinite(item))) throw new TypeError('Spectrum must contain finite samples.');
+    if (!isArray(value) || !value.every(isFiniteNumber)) throw new TypeError('Spectrum must contain finite samples.');
     return value;
   };
   let points: SpectrumPoint[];

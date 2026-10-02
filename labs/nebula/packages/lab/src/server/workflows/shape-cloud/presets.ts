@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Checked-in authored fits are separate from detection evidence and browser drafts. */
 import type { StructureImage } from '../../../features/observations/models/structures-model.ts';
 import type { GeometryMap } from '../../../features/observations/models/geometry-model.ts';
@@ -8,7 +9,7 @@ export interface ShapeCloudPreset {
   width: number; height: number;
   settings: ShapeCloudSettings; note: string;
 }
-const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+const record = coreIsRecord;
 const text = (v: unknown): v is string => typeof v === 'string' && v.length > 0;
 export function readShapeCloudPreset(value: unknown): ShapeCloudPreset {
   if (!record(value) || value.schema !== 'cssearth-shape-cloud-fit@1' || !text(value.id) || !/^[a-z0-9-]+$/.test(value.id) ||

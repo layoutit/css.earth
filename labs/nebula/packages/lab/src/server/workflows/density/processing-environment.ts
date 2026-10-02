@@ -1,8 +1,9 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Read only the processing prerequisites from the canonical bake recipe. */
 import type { BakeRecipe } from './config.ts';
 
 export type ProcessingEnvironmentRecipe = Pick<BakeRecipe, 'environment'> & { removal: Pick<BakeRecipe['removal'], 'model'> };
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 export function readProcessingEnvironmentRecipe(value: unknown): ProcessingEnvironmentRecipe {
   if (!record(value) || value.schema !== 'cssearth-nebula-bake@1' || !record(value.environment) || !record(value.removal) || !record(value.removal.model))
     throw new TypeError('Expected the processing environment and model in a nebula bake recipe.');

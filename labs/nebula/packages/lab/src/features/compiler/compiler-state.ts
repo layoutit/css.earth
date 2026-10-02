@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { useEffect, useRef, useState } from 'react';
 import { readCloudJob, activeCloudJob, type CloudJob } from '../shape-cloud/shape-cloud-client';
 import { readCompilerRequest, type CompilerRequest } from './model.ts';
@@ -7,7 +8,7 @@ import { localFile } from '../legacy-viewer/controller';
 
 interface Pointer { id: string; signature: string; request: CompilerRequest }
 interface Ledger { active?: Pointer; completed?: Pointer; paused?: string; cancelRequested?: boolean }
-const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const object = coreIsRecord;
 const signature = (request: CompilerRequest) => JSON.stringify({ version: 'compiler-session@1', request });
 function readPointer(value: unknown): Pointer {
   if (!object(value) || typeof value.id !== 'string' || !/^[a-f0-9-]{36}$/.test(value.id) || typeof value.signature !== 'string') throw new TypeError('Invalid compiler job pointer.');
