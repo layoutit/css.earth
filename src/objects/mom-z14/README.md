@@ -1,6 +1,6 @@
 # MoM-z14
 
-MoM-z14 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [MoM-z14 volume](../mom-z14-volume/README.md) bank, whose README holds the picture's source, the published shape, evidence and known problems.
+MoM-z14 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [MoM-z14 picture](../mom-z14-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems.
 
 ## Sources
 
@@ -12,7 +12,7 @@ MoM-z14 as an object of the world: its place, its card and its list marker. It h
 ## Processing
 
 1. The [astronomy record](../../../packages/astronomy/data/bodies/mom-z14.json) places the object at the published position and the comoving distance of its redshift, the project's convention for objects placed by redshift.
-2. `node packages/bake/cli/prepare-object.mts mom-z14` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame; the page frames the object at 14.6 kpc comoving, half the width of the picture that is drawn ([solar-system.json](source/presentation/solar-system.json)).
+2. `node packages/bake/cli/prepare-object.mts mom-z14` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame; the page frames the object at 14.6 kpc, half the short side of its picture ([solar-system.json](source/presentation/solar-system.json)).
 3. `node site/build/prepare/companion-context.mts mom-z14` saves the list marker from the dataset's picture.
 
 ## Known problems

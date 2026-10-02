@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "mom-z14-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "originalDimensions": [
+      1024,
+      1024
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2603a/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2603a.jpg",
+    "credit": "NASA, ESA, CSA, STScI, R. Naidu (MIT), Image Processing: J. DePasquale (STScI)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 150.0933255,
+    "centerDecDeg": 2.2731627,
+    "fieldOfViewDeg": [
+      0.0001614167,
+      0.0001614167
+    ],
+    "northClockwiseDeg": -90.14
+  },
+  "target": {
+    "centerRaDeg": 150.0933255,
+    "centerDecDeg": 2.2731627,
+    "distancePc": 10381694323.464087
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "thicknessKpc": 0.0146,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 21.095,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.078,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "COSMOS Field MoM-z14 Galaxy (NIRCam pullout image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "weic2603a",
+  "sourcePage": "https://esawebb.org/images/weic2603a/",
+  "download": "https://cdn.esawebb.org/archives/images/large/weic2603a.jpg",
+  "credit": "NASA, ESA, CSA, STScI, R. Naidu (MIT), Image Processing: J. DePasquale (STScI)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      24567,
+      10239
+    ],
+    "bands": [
+      "Webb NIRCam F090W",
+      "F115W",
+      "F150W",
+      "F200W",
+      "F250M",
+      "F277W",
+      "F335M",
+      "F356W",
+      "F410M",
+      "F444W"
+    ],
+    "fieldOfViewDeg": [
+      0.0001614167,
+      0.0001614167
+    ]
+  },
+  "checkedSource": {
+    "kind": "Window of the Large JPEG",
+    "dimensions": [
+      1024,
+      1024
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "reference": "A picture of the sky, centred on the object, so its plane faces the Sun. The recipe's inclination of 0.001° is not a measurement: the bake needs a plane with some depth along the sight line, and this is the smallest tilt that gives it one."
+  },
+  "registration": {
+    "method": "The publisher's file carries no sky tags. Nine saturated stars of the field were matched to Gaia DR3 (least squares, rms 0.47 arcsec): 0.2453 arcsec per pixel at the 4,000 px Publication JPEG, 0.0399 arcsec per pixel at full size, north 90.1° left of vertical; the paper's position falls 0.4 arcsec from the centre of the small square the publisher draws on the field. That square is 22 px inside (0.879 arcsec) and the enlarged view 4,537 px inside, so one pixel of the enlarged view is 0.000194 arcsec, to about 5% (one pixel of the square). The window is 3,000 px of the enlarged view centred on the galaxy's light, clear of the publisher's label.",
+    "pixelArcsec": 0.0005675,
+    "northClockwiseDeg": -90.14
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the object's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "A 3,000 px window of the publisher's enlarged view, centred on the galaxy; the publisher's label lies outside it. The enlarged view is the publisher's resampling of a few native pixels.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/large/weic2603a.jpg",
+    "dimensions": [
+      24567,
+      10239
+    ],
+    "window": [
+      19662,
+      5605,
+      3000,
+      3000
+    ],
+    "outputDimensions": [
+      1024,
+      1024
+    ],
+    "operation": "packages/bake/authoring/far-destinations/picture-source.mts: download the publisher's Large JPEG, cut the window and resize it to 1024 x 1024 px with a Lanczos kernel; JPEG quality 95."
+  }
+}
