@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-82885",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "11 Leonis Minoris",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 697787.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-82885-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "11 Leonis Minoris",
+      "classification": "star",
+      "color": "#ffede4",
+      "distanceAu": 2345056.6,
+      "description": "A naked-eye star 11 parsecs away whose disc the CHARA Array measured: the Sun's width.",
+      "systemName": "11 Leonis Minoris system",
+      "aliases": [
+        "HD 82885"
+      ],
+      "order": 5412,
+      "context": {
+        "order": 5409
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -229899884927649380,
+        167596988746931360,
+        205252990572592160
+      ],
+      "presentationToReference": [
+        -0.6553236047816919,
+        -0.47280643622335017,
+        0.5890713427775145,
+        0.4777308303314165,
+        0.34464227993112595,
+        0.8080810309831129,
+        0.5850848030557486,
+        -0.8109721158891041,
+        -0.000021990118372549655
+      ],
+      "orbitUpReference": [
+        0.47280643622335017,
+        -0.34464227993112595,
+        0.8109721158891041
+      ],
+      "metersPerUnit": 2250926.129032258,
+      "bodyRadiusM": 697787100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

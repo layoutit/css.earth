@@ -1,0 +1,43 @@
+{
+  "id": "alsafi",
+  "name": "Alsafi",
+  "system": "Alsafi system",
+  "description": "A naked-eye star 5.8 parsecs away, 78% of the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 185144"
+  ],
+  "featured": true,
+  "target": "HD 185144",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 0.776,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 185144: radius in solar radii, from the limb-darkened angular diameter 1.254 +/- 0.012 mas (CHARA) and the Hipparcos parallax, 0.776 +/- 0.008",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.008
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5255,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 185144: effective temperature in K, from the angular diameter and the bolometric flux, 5255 +/- 31",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 31
+  },
+  "distance": {
+    "value": 5.755,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 185144: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 173.77 +/- 0.18 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.006
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 6 parsecs away whose disc the CHARA Array measured: 78% of the Sun's width.",
+    "introduction": "Its disc spans 1.254 milliarcseconds, which gives 0.776 solar radii and 5,255 K at its surface.",
+    "locator": "Tables 5 and 10, HD 185144: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5424
+}

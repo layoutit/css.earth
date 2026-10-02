@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "cf-ursae-majoris",
+  "angularDiameterMas": 0.7,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 473,772 km at 9.09 pc = 0.7 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 9.093,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 103095: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 109.98 +/- 0.41 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 9.093 +/- 0.034 pc; Gaia DR3 parallax 109.0296 +/- 0.0197 mas (same row, RUWE 0.88), 5538.4 standard errors, is not used",
+  "radiusKm": 473771.7,
+  "radiusSource": "Radius 0.681 +/- 0.006 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 103095: radius in solar radii, from the limb-darkened angular diameter 0.696 +/- 0.005 mas (CHARA) and the Hipparcos parallax, 0.681 +/- 0.006 (https://doi.org/10.1088/0004-637X/746/1/101): 473,772 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4759 +/- 20 K from Boyajian et al. (2012), ApJ 746, 101, HD 103095: effective temperature in K, from the angular diameter and the bolometric flux, 4759 +/- 20 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4759,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 103095: effective temperature in K, from the angular diameter and the bolometric flux, 4759 +/- 20 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.72,
+  "surfaceGravitySource": "log g 4.72 from 2025A&A...698A..93J; the 115 published values span log g 3.77 to 5, across which the limb law changes by at most 0.6% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2025A%26A...698A..93J)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

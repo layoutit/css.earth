@@ -1,0 +1,47 @@
+{
+  "id": "psi1-draconis-a",
+  "name": "Psi1 Draconis A",
+  "system": "Psi1 Draconis A system",
+  "description": "A naked-eye star 22.8 parsecs away, 2.3 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 162003"
+  ],
+  "target": "HD 162003",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 2.329,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 162003: radius in solar radii, from the limb-darkened angular diameter 0.949 +/- 0.026 mas (CHARA) and the Hipparcos parallax, 2.329 +/- 0.067",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.067
+  },
+  "mass": {
+    "value": 1.311,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 162003: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.311 +/- 0.016",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.016
+  },
+  "temperature": {
+    "value": 6014,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 162003: effective temperature in K, from the angular diameter and the bolometric flux, 6014 +/- 90",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 90
+  },
+  "distance": {
+    "value": 22.836,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 162003: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 43.79 +/- 0.45 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.235
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 23 parsecs away whose disc the CHARA Array measured: 2.3 times the Sun's width.",
+    "introduction": "Its disc spans 0.949 milliarcseconds, which gives 2.329 solar radii and 6,014 K at its surface.",
+    "locator": "Tables 5 and 10, HD 162003: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5355
+}

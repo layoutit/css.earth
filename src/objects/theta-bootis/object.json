@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "theta-bootis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Theta Bootis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1205648.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/theta-bootis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Theta Bootis",
+      "classification": "star",
+      "color": "#fff8ff",
+      "distanceAu": 2996796.8,
+      "description": "A naked-eye star 15 parsecs away whose disc the CHARA Array measured: 1.7 times the Sun's width.",
+      "systemName": "Theta Bootis system",
+      "aliases": [
+        "HD 126660"
+      ],
+      "order": 5422,
+      "context": {
+        "order": 5419
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -223210334972543170,
+        -163942243935842800,
+        352542064369800960
+      ],
+      "presentationToReference": [
+        -0.4978748155334367,
+        -0.633790680165316,
+        -0.5919713183872446,
+        -0.36567623259354615,
+        -0.46552221730168925,
+        0.8059590300472537,
+        0.7863851225536616,
+        -0.617736544923566,
+        -0.00000959989004108776
+      ],
+      "orbitUpReference": [
+        0.633790680165316,
+        0.46552221730168925,
+        0.617736544923566
+      ],
+      "metersPerUnit": 3889187.419354839,
+      "bodyRadiusM": 1205648100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

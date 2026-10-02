@@ -1,0 +1,47 @@
+{
+  "id": "beta-comae-berenices",
+  "name": "Beta Comae Berenices",
+  "system": "Beta Comae Berenices system",
+  "description": "A naked-eye star 9.1 parsecs away, 1.1 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 114710"
+  ],
+  "target": "HD 114710",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.106,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 114710: radius in solar radii, from the limb-darkened angular diameter 1.127 +/- 0.011 mas (CHARA) and the Hipparcos parallax, 1.106 +/- 0.011",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 1.045,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 114710: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.045 +/- 0.013",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.013
+  },
+  "temperature": {
+    "value": 5936,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 114710: effective temperature in K, from the angular diameter and the bolometric flux, 5936 +/- 33",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 33
+  },
+  "distance": {
+    "value": 9.13,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 114710: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 109.53 +/- 0.17 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.014
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 9 parsecs away whose disc the CHARA Array measured: 1.1 times the Sun's width.",
+    "introduction": "Its disc spans 1.127 milliarcseconds, which gives 1.106 solar radii and 5,936 K at its surface.",
+    "locator": "Tables 5 and 10, HD 114710: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5420
+}

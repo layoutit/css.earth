@@ -1,0 +1,47 @@
+{
+  "id": "lambda-geminorum",
+  "name": "Lambda Geminorum",
+  "system": "Lambda Geminorum system",
+  "description": "A naked-eye star 30.9 parsecs away, 2.8 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 56537"
+  ],
+  "order": 5408,
+  "target": "HD 56537",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 2.777,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 56537: radius in solar radii, from the limb-darkened angular diameter 0.835 +/- 0.013 mas (CHARA) and the Hipparcos parallax, 2.777 +/- 0.047",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.047
+  },
+  "mass": {
+    "value": 2.111,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 56537: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 2.111 +/- 0.01",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 8007,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 56537: effective temperature in K, from the angular diameter and the bolometric flux, 8007 +/- 77",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 77
+  },
+  "distance": {
+    "value": 30.902,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 56537: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 32.36 +/- 0.22 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.21
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 31 parsecs away whose disc the CHARA Array measured: 2.8 times the Sun's width.",
+    "introduction": "Its disc spans 0.835 milliarcseconds, which gives 2.777 solar radii and 8,007 K at its surface.",
+    "locator": "Tables 5 and 10, HD 56537: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

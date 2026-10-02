@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-33",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 33",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 483789.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-33-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 33",
+      "classification": "star",
+      "color": "#ffe2d2",
+      "distanceAu": 1533602.7,
+      "description": "A nearby orange dwarf whose disc was measured by interferometry: 70% of the Sun's width.",
+      "systemName": "GJ 33 system",
+      "order": 5366,
+      "context": {
+        "order": 5363
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        223376498618947900,
+        47893306282390300,
+        21080980582375524
+      ],
+      "presentationToReference": [
+        0.97363644351888,
+        0.08990305629285333,
+        0.20964139934924794,
+        0.208753690447163,
+        0.019272079771759883,
+        -0.9777783407633659,
+        0.0919454869833037,
+        -0.9957640420352981,
+        0.0000035955754237332737
+      ],
+      "orbitUpReference": [
+        -0.08990305629285333,
+        -0.019272079771759883,
+        0.9957640420352981
+      ],
+      "metersPerUnit": 1560612.2580645161,
+      "bodyRadiusM": 483789800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

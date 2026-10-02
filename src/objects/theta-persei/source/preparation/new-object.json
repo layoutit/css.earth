@@ -1,0 +1,47 @@
+{
+  "id": "theta-persei",
+  "name": "Theta Persei",
+  "system": "Theta Persei system",
+  "description": "A naked-eye star 11.1 parsecs away, 1.3 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 16895"
+  ],
+  "order": 5401,
+  "target": "HD 16895",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.319,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 16895: radius in solar radii, from the limb-darkened angular diameter 1.103 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 1.319 +/- 0.011",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 1.138,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 16895: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.138 +/- 0.01",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 6157,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 16895: effective temperature in K, from the angular diameter and the bolometric flux, 6157 +/- 37",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 37
+  },
+  "distance": {
+    "value": 11.126,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 16895: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 89.88 +/- 0.23 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.028
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 11 parsecs away whose disc the CHARA Array measured: 1.3 times the Sun's width.",
+    "introduction": "Its disc spans 1.103 milliarcseconds, which gives 1.319 solar radii and 6,157 K at its surface.",
+    "locator": "Tables 5 and 10, HD 16895: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

@@ -1,0 +1,49 @@
+{
+  "id": "merak",
+  "name": "Merak",
+  "system": "Merak system",
+  "description": "A naked-eye star 24.5 parsecs away, 3.0 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 95418"
+  ],
+  "featured": true,
+  "order": 5415,
+  "target": "HD 95418",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 3.021,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 95418: radius in solar radii, from the limb-darkened angular diameter 1.149 +/- 0.014 mas (CHARA) and the Hipparcos parallax, 3.021 +/- 0.038",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.038
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 9377,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 95418: effective temperature in K, from the angular diameter and the bolometric flux, 9377 +/- 75",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 75
+  },
+  "radialVelocity": {
+    "value": -13.1,
+    "source": "SIMBAD's radial velocity for Gaia DR3 856096765753549056 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract",
+    "uncertainty": 0.1
+  },
+  "distance": {
+    "value": 24.456,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 95418: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 40.89 +/- 0.16 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.096
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 24 parsecs away whose disc the CHARA Array measured: 3.0 times the Sun's width.",
+    "introduction": "Its disc spans 1.149 milliarcseconds, which gives 3.021 solar radii and 9,377 K at its surface.",
+    "locator": "Tables 5 and 10, HD 95418: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

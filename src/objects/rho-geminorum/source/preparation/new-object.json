@@ -1,0 +1,47 @@
+{
+  "id": "rho-geminorum",
+  "name": "Rho Geminorum",
+  "system": "Rho Geminorum system",
+  "description": "A naked-eye star 18.0 parsecs away, 1.7 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 58946"
+  ],
+  "target": "HD 58946",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.655,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 58946: radius in solar radii, from the limb-darkened angular diameter 0.853 +/- 0.014 mas (CHARA) and the Hipparcos parallax, 1.655 +/- 0.028",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.028
+  },
+  "mass": {
+    "value": 1.355,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 58946: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.355 +/- 0.013",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.013
+  },
+  "temperature": {
+    "value": 6899,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 58946: effective temperature in K, from the angular diameter and the bolometric flux, 6899 +/- 63",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 63
+  },
+  "distance": {
+    "value": 18.047,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 58946: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 55.41 +/- 0.25 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.081
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 18 parsecs away whose disc the CHARA Array measured: 1.7 times the Sun's width.",
+    "introduction": "Its disc spans 0.853 milliarcseconds, which gives 1.655 solar radii and 6,899 K at its surface.",
+    "locator": "Tables 5 and 10, HD 58946: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5409
+}

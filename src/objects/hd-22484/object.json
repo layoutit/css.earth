@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-22484",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "10 Tauri",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1128425.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-22484-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "10 Tauri",
+      "classification": "star",
+      "color": "#fefaff",
+      "distanceAu": 2880757.3,
+      "description": "A naked-eye star 14 parsecs away whose disc the CHARA Array measured: 1.6 times the Sun's width.",
+      "systemName": "10 Tauri system",
+      "aliases": [
+        "HD 22484"
+      ],
+      "order": 5404,
+      "context": {
+        "order": 5401
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        251983518444025730,
+        349596468270802240,
+        2994300620270209.5
+      ],
+      "presentationToReference": [
+        0.5847092646233225,
+        0.004077187201349986,
+        0.8112326746428415,
+        0.8112129520964604,
+        0.005656744570092583,
+        -0.5847234795968215,
+        0.006972963114708567,
+        -0.9999756885971748,
+        -8.389188377967124e-8
+      ],
+      "orbitUpReference": [
+        -0.004077187201349986,
+        -0.005656744570092583,
+        0.9999756885971748
+      ],
+      "metersPerUnit": 3640081.935483871,
+      "bodyRadiusM": 1128425400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "epsilon-serpentis",
+  "name": "Epsilon Serpentis",
+  "system": "Epsilon Serpentis system",
+  "description": "A naked-eye star 21.6 parsecs away, 1.8 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 141795"
+  ],
+  "order": 5352,
+  "target": "HD 141795",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.783,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 141795: radius in solar radii, from the limb-darkened angular diameter 0.768 +/- 0.017 mas (CHARA) and the Hipparcos parallax, 1.783 +/- 0.04",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 1.82,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 141795: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.82 +/- 0.026",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.026
+  },
+  "temperature": {
+    "value": 8084,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 141795: effective temperature in K, from the angular diameter and the bolometric flux, 8084 +/- 102",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 102
+  },
+  "distance": {
+    "value": 21.608,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 141795: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 46.28 +/- 0.19 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.089
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 22 parsecs away whose disc the CHARA Array measured: 1.8 times the Sun's width.",
+    "introduction": "Its disc spans 0.768 milliarcseconds, which gives 1.783 solar radii and 8,084 K at its surface.",
+    "locator": "Tables 5 and 10, HD 141795: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

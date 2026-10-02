@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alsafi",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alsafi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 539863.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alsafi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alsafi",
+      "classification": "star",
+      "color": "#ffebdb",
+      "distanceAu": 1187113.7,
+      "description": "A naked-eye star 6 parsecs away whose disc the CHARA Array measured: 78% of the Sun's width.",
+      "systemName": "Alsafi system",
+      "aliases": [
+        "HD 185144"
+      ],
+      "order": 5424,
+      "context": {
+        "order": 5421
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        24234373677980256,
+        -56809305215460590,
+        166503738211682750
+      ],
+      "presentationToReference": [
+        0.13642965605749968,
+        0.36782177898838037,
+        -0.9198337283715223,
+        -0.31981323766334663,
+        -0.862446277575997,
+        -0.3923084389999713,
+        0.9376067629679942,
+        -0.3476975081836645,
+        0.000028974996398341006
+      ],
+      "orbitUpReference": [
+        -0.36782177898838037,
+        0.862446277575997,
+        0.3476975081836645
+      ],
+      "metersPerUnit": 1741494.1935483871,
+      "bodyRadiusM": 539863200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,7 +1,8 @@
 /** The name a star is shown by, chosen from the designations SIMBAD lists for it, in one order of preference:
  *
  * 1. a proper name (SIMBAD `NAME Betelgeuse`);
- * 2. a Bayer or Flamsteed designation (`* alf Ori`, `* 55 Cnc`), spelled out as a reader meets it (Alpha Orionis, 55 Cancri);
+ * 2. a Bayer or Flamsteed designation (`* alf Ori`, `* 55 Cnc`), the Bayer letter first, spelled out as a reader meets it
+ *    (Alpha Orionis, 55 Cancri);
  * 3. a variable-star designation (`V* RR Lyr`, `HV 2827`, `VHK 45`: the Harvard variables, and van den Bergh, Herbst & Kowal's
  *    1975 variables of M33);
  * 4. a catalogue number that reads as a name: HD, HIP, GJ, then the surveys in `SURVEYS`, in that order;
@@ -25,8 +26,12 @@ export function preferredName(identifiers: readonly string[]): { readonly name: 
   const ids = identifiers.map(collapse), found = (test: (id: string) => boolean) => ids.find(test);
   const proper = found(id => id.startsWith('NAME '));
   if (proper) return { name: proper.slice(5), step: 'proper', identifier: proper };
-  const bayer = found(id => id.startsWith('* '));
-  if (bayer) return { name: spelledOut(bayer.slice(2)), step: 'bayer-flamsteed', identifier: bayer };
+  // A Bayer letter before a Flamsteed number, and the plain letter before its numbered form (kap Cet before kap01 Cet): SIMBAD
+  // lists them in no order. Its dotted two-letter abbreviations (mu., nu., pi., xi.) are the letters themselves, and its padded
+  // index (chi01 Ori) is the plain one (Chi1 Orionis).
+  const letter = (id: string) => /^\* +([a-z]+)\.?(\d*) /u.exec(id), listed = ids.filter(id => id.startsWith('* '));
+  const bayer = listed.find(id => letter(id)?.[2] === '') ?? listed.find(id => letter(id)) ?? listed[0];
+  if (bayer) return { name: spelledOut(bayer.slice(2).trim().replace(/^([a-z]+)\./u, '$1').replace(/^([a-z]+)0(\d) /u, '$1$2 ')), step: 'bayer-flamsteed', identifier: bayer };
   const variable = found(id => id.startsWith('V* ')) ?? found(id => /^(?:HV|VHK) \d+$/u.test(id));
   if (variable) return { name: variable.startsWith('V* ') ? spelledOut(variable.slice(3)) : variable, step: 'variable', identifier: variable };
   for (const prefix of [...CATALOGUES, ...SURVEYS]) {

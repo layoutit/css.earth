@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "chara",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Chara",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 781271.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/chara-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Chara",
+      "classification": "star",
+      "color": "#fff8fd",
+      "distanceAu": 1740888.8,
+      "description": "A naked-eye star 8 parsecs away whose disc the CHARA Array measured: 1.1 times the Sun's width.",
+      "systemName": "Chara system",
+      "aliases": [
+        "HD 109358"
+      ],
+      "order": 5419,
+      "context": {
+        "order": 5416
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -193363841806177250,
+        -28652277004179988,
+        172089961208947200
+      ],
+      "presentationToReference": [
+        -0.7424797219034327,
+        -0.653630413958658,
+        -0.14659858290732156,
+        -0.11001919778832359,
+        -0.09688612495473149,
+        0.9891960649483348,
+        0.6607720020402008,
+        -0.7505866776991779,
+        -0.000024089318908855083
+      ],
+      "orbitUpReference": [
+        0.653630413958658,
+        0.09688612495473149,
+        0.7505866776991779
+      ],
+      "metersPerUnit": 2520229.35483871,
+      "bodyRadiusM": 781271100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

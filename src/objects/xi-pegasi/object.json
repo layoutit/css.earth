@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xi-pegasi",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Xi Pegasi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1330178.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xi-pegasi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Xi Pegasi",
+      "classification": "star",
+      "color": "#fff8fc",
+      "distanceAu": 3361071.9,
+      "description": "A naked-eye star 16 parsecs away whose disc the CHARA Array measured: 1.9 times the Sun's width.",
+      "systemName": "Xi Pegasi system",
+      "aliases": [
+        "HD 215648"
+      ],
+      "order": 5363,
+      "context": {
+        "order": 5360
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        466585435020075800,
+        -154534102977122750,
+        105992127128202190
+      ],
+      "presentationToReference": [
+        0.9279521360288427,
+        0.20013276942389224,
+        -0.3144069144313327,
+        -0.3073397499176216,
+        -0.06628714784392853,
+        -0.9492883082348013,
+        0.21082483572881533,
+        -0.9775238557873871,
+        0.000002545127973116949
+      ],
+      "orbitUpReference": [
+        -0.20013276942389224,
+        0.06628714784392853,
+        0.9775238557873871
+      ],
+      "metersPerUnit": 4290898.064516129,
+      "bodyRadiusM": 1330178400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

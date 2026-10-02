@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "alpha-lacertae",
+  "angularDiameterMas": 0.63,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,490,885 km at 31.45 pc = 0.63 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 31.447,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 213558: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 31.8 +/- 0.12 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 31.447 +/- 0.119 pc; Gaia DR3 parallax 31.4943 +/- 0.2017 mas (same row, RUWE 2.82), 156.2 standard errors, is not used",
+  "radiusKm": 1490885.1,
+  "radiusSource": "Radius 2.143 +/- 0.074 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 213558: radius in solar radii, from the limb-darkened angular diameter 0.634 +/- 0.022 mas (CHARA) and the Hipparcos parallax, 2.143 +/- 0.074 (https://doi.org/10.1088/0004-637X/746/1/101): 1,490,885 km at 695,700 km per solar radius. Mass 2.209 +/- 0.037 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 213558: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 2.209 +/- 0.037 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 9131 +/- 167 K from Boyajian et al. (2012), ApJ 746, 101, HD 213558: effective temperature in K, from the angular diameter and the bolometric flux, 9131 +/- 167 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 9131,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 213558: effective temperature in K, from the angular diameter and the bolometric flux, 9131 +/- 167 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.12,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/alpha-lacertae.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.120, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1065) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

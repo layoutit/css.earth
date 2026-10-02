@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-820-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "61 Cygni A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 459927.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-820-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "61 Cygni A",
+      "classification": "star",
+      "color": "#ffcfaa",
+      "distanceAu": 721069.9,
+      "description": "A nearby orange dwarf whose disc was measured by interferometry: 66% of the Sun's width.",
+      "systemName": "61 Cygni system",
+      "aliases": [
+        "GJ 820 A"
+      ],
+      "order": 5387,
+      "context": {
+        "order": 5384
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        61269554077724510,
+        -57607794564506776,
+        67553181437283870
+      ],
+      "presentationToReference": [
+        0.5680683459496636,
+        0.45603052262479843,
+        -0.6850799345803135,
+        -0.5341179238481905,
+        -0.42901349441413733,
+        -0.7284678888150594,
+        0.6261121287390239,
+        -0.7797330210047053,
+        0.00013491020616168898
+      ],
+      "orbitUpReference": [
+        -0.45603052262479843,
+        0.42901349441413733,
+        0.7797330210047053
+      ],
+      "metersPerUnit": 1483636.4516129033,
+      "bodyRadiusM": 459927300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,30 @@
+{
+ "id": "gj-809",
+ "classification": "star",
+ "order": 5383,
+ "physical": {
+  "name": "GJ 809",
+  "horizonsCode": null,
+  "meanRadiusKm": 380687,
+  "gravitationalParameterKm3PerS2": 76044228144.03125,
+  "parent": null,
+  "effectiveTemperatureK": 3692
+ },
+ "physicalNotes": "Radius 0.5472 +/- 0.0067 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 809: radius in solar radii, 0.5472 +/- 0.0067, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112): 380,687 km at 695,700 km per solar radius. Mass 0.573 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 809: mass 0.573 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 3692 +/- 22 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 809: effective temperature in K, 3692 +/- 22, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 313.3324563031005,
+  "declinationDegrees": 62.150957701503515,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 7.03956239488709,
+  "properMotionRaMasPerYear": 0.2591201846900617,
+  "properMotionDecMasPerYear": -773.0957499352076,
+  "radialVelocityKmPerS": -17.7865,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2195886971653527168 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-809/source/photometry/gaia-dr3-source.csv; cross-identification HD 199305, HIP 103096: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2195886971653527168",
+   "distance": "Gaia DR3 parallax 142.0543 +/- 0.0160 mas (same row, RUWE 0.87): 7.04 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 0.259, -773.096 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -17.79 +/- 0.13 km/s"
+  }
+ }
+}

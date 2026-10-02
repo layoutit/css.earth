@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "kappa-ceti",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 20630: 168-1020 nm",
+    "path": "photometry/h_stis_ngsl_hd020630_v2.fits",
+    "format": "fits-table",
+    "extension": "1",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "service": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd020630/h_stis_ngsl_hd020630_v2.fits",
+    "checked": "2026-10-02",
+    "gaps": [],
+    "note": "Space spectrophotometry from the Hubble Space Telescope; the file header marks it DATAQUAL good."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

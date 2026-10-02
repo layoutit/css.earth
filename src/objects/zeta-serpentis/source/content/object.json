@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "zeta-serpentis",
+  "displayName": "Zeta Serpentis",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "23.6 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), ApJ 746, 101, HD 164259: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 42.44 +/- 0.33 mas, inverted",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "zeta-serpentis-dataset-color.webp",
+        "surface": "zeta-serpentis-surface-color@2x.webp",
+        "poles": "zeta-serpentis-poles-color@2x.webp",
+        "source": {
+          "id": "zeta-serpentis-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4177224620176470912&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,529 K and log g 4.01 (u1 0.348, u2 0.315): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Boyajian et al. (2012), ApJ 746, 101",
+      "href": "https://doi.org/10.1088/0004-637X/746/1/101"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+      "credit": "Boyajian et al. (2012), ApJ 746, 101"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/zeta-serpentis.json",
+      "credit": "Boyajian et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

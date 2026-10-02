@@ -22,6 +22,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   tess: { names: 'TIC', draft: async (names, { archive }) => (await import('./k2.mts')).draftsFromTess(names, archive) },
   // A star anywhere on the sky from Gaia DR3 alone: FLAME radius and mass, GSP-Phot temperature, its parallax (gaia.mts).
   gaia: { names: 'SOURCE_ID', draft: async (names, { archive }) => (await import('./gaia.mts')).draftsFromGaia(names, archive) },
+  // A nearby A, F or G star whose disc the CHARA Array measured (Boyajian et al. 2012) (chara.mts).
+  chara: { names: 'HD', draft: async (names, { archive }) => (await import('./chara.mts')).draftsFromChara(names, archive) },
   // A Cepheid Hubble found in another galaxy (Hoffmann et al. 2016), placed by its catalogue row: HOST (N4536) or HOST/ID (sh0es.mts).
   sh0es: { names: 'HOST[/ID]', draft: async (names, { archive }) => (await import('./sh0es.mts')).draftsFromSh0es(names, archive) },
   // A Cepheid in the Andromeda Galaxy: Hubble's V1, or those Hubble measured for its distance (Li et al. 2021) (m31-cepheids.mts).

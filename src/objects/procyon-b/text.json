@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "procyon-b",
+  "card": {
+    "text": "A white dwarf that orbits Procyon every 41 years: 0.59 solar masses within 1.2% of the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-813-2-106",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "label": "Bond et al. 2015",
+        "checked": "2026-10-02",
+        "locator": "Tables 8 and 10; section 8"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its orbit, tracked by Hubble for two decades, gives a mass of 0.592 solar masses; its spectrum gives 7,740 K.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-813-2-106",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "label": "Bond et al. 2015",
+        "checked": "2026-10-02",
+        "locator": "Tables 8 and 10; section 8"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light."
+    }
+  }
+}

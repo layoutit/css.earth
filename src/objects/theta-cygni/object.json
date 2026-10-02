@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "theta-cygni",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Theta Cygni",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1180602.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/theta-cygni-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Theta Cygni",
+      "classification": "star",
+      "color": "#e5e8ff",
+      "distanceAu": 3781185.2,
+      "description": "A naked-eye star 18 parsecs away whose disc the CHARA Array measured: 1.7 times the Sun's width.",
+      "systemName": "Theta Cygni system",
+      "aliases": [
+        "HD 185395"
+      ],
+      "order": 5360,
+      "context": {
+        "order": 5357
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        147838441346493100,
+        -330334756165653000,
+        434730812601322100
+      ],
+      "presentationToReference": [
+        0.26136120621086933,
+        0.31394387690395725,
+        -0.9127593122190059,
+        -0.5839935103257938,
+        -0.7014849548920657,
+        -0.40849778207162085,
+        0.7685323023694948,
+        -0.639810987882038,
+        -2.3276906340086043e-7
+      ],
+      "orbitUpReference": [
+        -0.31394387690395725,
+        0.7014849548920657,
+        0.639810987882038
+      ],
+      "metersPerUnit": 3808396.4516129033,
+      "bodyRadiusM": 1180602900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
