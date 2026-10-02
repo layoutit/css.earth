@@ -8,9 +8,9 @@ import { CONTEXT_ROUTE } from '@cssearth/objects/provenance';
 test('each catalogue context reads its products and sources from its source records alone', async () => {
   const read: string[] = [];
   const contexts = await contextLineages({ route: CONTEXT_ROUTE, input: path => { read.push(path); return readFile(path); } });
-  assert.deepEqual(contexts.map(context => context.id), ['fornax-cluster-members', 'galaxy-clusters', 'jupiter-minor-moons', 'local-group-galaxies', 'main-belt-asteroids', 'nearby-universe-galaxies', 'neptune-minor-moons', 'nuclear-star-cluster', 'observable-universe-cmb', 'paged-asteroid-dots', 'saturn-minor-moons', 'trans-neptunian-objects', 'uranus-minor-moons', 'virgo-cluster-members']);
+  assert.deepEqual(contexts.map(context => context.id), ['fornax-cluster-members', 'galaxy-clusters', 'jupiter-minor-moons', 'jupiter-ring-particles', 'local-group-galaxies', 'main-belt-asteroids', 'nearby-universe-galaxies', 'neptune-minor-moons', 'neptune-ring-particles', 'nuclear-star-cluster', 'observable-universe-cmb', 'paged-asteroid-dots', 'saturn-minor-moons', 'saturn-ring-particles', 'trans-neptunian-objects', 'uranus-minor-moons', 'uranus-ring-particles', 'virgo-cluster-members']);
   // A bank that names its host object is linked to that object's page; the rest to the route passed in, the Sun's scene.
-  assert.deepEqual(contexts.map(context => context.route), ['/fornax-cluster/', '/sun/', '/jupiter/', '/local-group/', '/sun/', '/nearby-universe/', '/neptune/', '/sgr-a-star/', '/observable-universe/', '/sun/', '/saturn/', '/sun/', '/uranus/', '/virgo-cluster/']);
+  assert.deepEqual(contexts.map(context => context.route), ['/fornax-cluster/', '/sun/', '/jupiter/', '/jupiter/', '/local-group/', '/sun/', '/nearby-universe/', '/neptune/', '/neptune/', '/sgr-a-star/', '/observable-universe/', '/sun/', '/saturn/', '/saturn/', '/sun/', '/uranus/', '/uranus/', '/virgo-cluster/']);
   assert.ok(read.every(path => /\/(object|source\/(presentation|manifest))\.json$/u.test(path)), 'nothing prepared is read');
   for (const context of contexts) {
     assert.ok(context.lineage.products.length, context.id);

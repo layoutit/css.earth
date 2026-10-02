@@ -1,0 +1,29 @@
+{
+  "provenance": {
+    "name": "Uranus's ring particles",
+    "products": [
+      {
+        "id": "dots",
+        "label": "PDS Rings Node Uranus ring table",
+        "process": "Choose a ring in proportion to its opacity, 1 - exp(-tau), times its published width times its radius; place a dot in Uranus's ring plane within that width; repeat 600 times. The dot's longitude and its place across the width come from a seeded generator.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions",
+          "ring-table"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "No ring particle has a measured position. Only each ring's share of the dots is measured; each dot's longitude is drawn from a seeded generator.",
+          "The 600 dots and their size are display choices. At the density of Saturn's dots Uranus would have about 5. The dots are the neutral grey of the ring lines."
+        ]
+      }
+    ]
+  }
+}

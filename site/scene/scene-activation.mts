@@ -1,4 +1,4 @@
-import { isLevelObject, levelCentre } from '../level-view.mts';
+import { ladderOf } from '../level-view.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
@@ -28,20 +28,13 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
     const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
-    if (initialSelection?.subject.view === 'system' && !initialSelection.savedView) {
-      const target = navigation.overviewTarget({ scope: 'system', objectId, fromId: objectId, mount });
+    // A page that opens on the zoom ladder (a star's system, a level) opens framed as that rung says, around its centre.
+    const ladder = initialSelection && !initialSelection.savedView ? ladderOf(initialSelection.subject) : null;
+    if (ladder) {
+      const target = navigation.overviewTarget({ scope: ladder.scope, objectId: ladder.centreId, fromId: objectId, mount, view: 'default' });
       if (target) {
         const framed = await session.wait(navigation.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,
-          targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
-        if (framed.cancelled || !isCurrent(session)) return false;
-      }
-    }
-    // A level's page opens framed as its ladder says, around its centre (the world's host on a page opened cold).
-    if (initialSelection?.subject.view === 'body' && isLevelObject(objectId) && !initialSelection.savedView) {
-      const target = navigation.overviewTarget({ scope: objectId, objectId: levelCentre(), fromId: objectId, mount, view: 'default' });
-      if (target) {
-        const framed = await session.wait(navigation.focus({ objectId, mount, signal: session.signal, reducedMotion: true,
           targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
         if (framed.cancelled || !isCurrent(session)) return false;
       }

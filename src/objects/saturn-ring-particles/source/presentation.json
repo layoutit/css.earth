@@ -1,0 +1,29 @@
+{
+  "provenance": {
+    "name": "Saturn's ring particles",
+    "products": [
+      {
+        "id": "dots",
+        "label": "Cassini UVIS alpha Virginis occultation, 2006 day 285",
+        "process": "Choose a kilometre bin of the occultation profile in proportion to its opacity, 1 - exp(-tau), times its radius; place a dot in Saturn's ring plane at that radius; repeat 4,000 times. The dot's longitude and its place inside the bin come from a seeded generator.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions",
+          "ring-occultation-profile"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "No ring particle has a measured position. Only the radial density of the dots is measured; each dot's longitude is drawn from a seeded generator.",
+          "The number of dots (4,000) and their size are display choices. The dots take the ring image's colour."
+        ]
+      }
+    ]
+  }
+}

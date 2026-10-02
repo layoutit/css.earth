@@ -1,0 +1,30 @@
+{
+  "provenance": {
+    "name": "Neptune's ring particles",
+    "products": [
+      {
+        "id": "dots",
+        "label": "PDS Rings Node Neptune ring table",
+        "process": "Choose a ring in proportion to its opacity, 1 - exp(-tau), times its published width times its radius; place a dot in Neptune's ring plane within that width; repeat 600 times. The dot's longitude and its place across the width come from a seeded generator.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions",
+          "ring-table"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "No ring particle has a measured position. Only each ring's share of the dots is measured; each dot's longitude is drawn from a seeded generator.",
+          "Neptune's rings are nearly invisible at their true opacity; the 600 dots are a display choice. At the density of Saturn's dots Neptune would have none.",
+          "The Adams ring's arcs are not drawn: the table gives no longitudes for them at this epoch."
+        ]
+      }
+    ]
+  }
+}

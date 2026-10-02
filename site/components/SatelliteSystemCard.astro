@@ -21,13 +21,13 @@ import Detached from './Detached.astro';
 ---
 
 {system && host && source && <>
-  <Detached {detached}><ObjectCardHeader title={{ label: system.name }} heading={false} introduction={PREPARED_WORLD_PRESENTATION.satelliteSystemIntroductions[hostId]} data-satellite-system
+  <Detached {detached}><ObjectCardHeader title={{ label: system.name }} heading={false} introduction={PREPARED_WORLD_PRESENTATION.satelliteSystemIntroductions[hostId]} data-view-part="moons"
     data-source-subject={`satellite-system:${hostId}`} data-source-document={source.href} data-source-label={source.label}>
     <ObjectBreadcrumbs objectId={hostId} satelliteSystem />
   </ObjectCardHeader></Detached>
-  <Detached {detached}><InformationTabs idPrefix={`${hostId}-system`} group="satellite-system" satelliteSystem
+  <Detached {detached}><InformationTabs idPrefix={`${hostId}-system`} group="satellite-system" viewPart="moons"
     label={`${system.name} information`} tabs={[{ id: 'moons', label: 'Celestial bodies', count: moons.length + 1 }]} /></Detached>
-  <Detached {detached}><div id={`${hostId}-system-moons-content`} class="object-results-scroll object-card-tabpanel" data-satellite-system
+  <Detached {detached}><div id={`${hostId}-system-moons-content`} class="object-results-scroll object-card-tabpanel" data-view-part="moons"
     role="region" aria-label={`Bodies in the ${system.name}`}>
     <MoonList {moons} {host} />
   </div></Detached>

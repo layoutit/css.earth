@@ -1,16 +1,17 @@
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import { overviewScopeAtCamera } from '../overview-context.mts';
-import { overviewScopeFromUrl, satelliteSystemFromUrl, withOverviewScope, withSatelliteSystemView } from '../navigation/navigation-scope.mts';
+import { PAGE_VIEWS, viewFromUrl, withView, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { SYSTEM_RANGES } from '../system-framing.mts';
-import { isLevelObject, levelCentre } from '../level-view.mts';
+import { ladderOf, subjectOfScope } from '../level-view.mts';
 
-/** The camera has crossed into a level that is an object, or back into the centre's system: the view is handed to that scene. */
-export interface LadderHandover { readonly objectId: string; readonly centreId: string; readonly to: 'level' | 'system' }
+/** The camera has crossed into a rung of the zoom ladder another scene shows (a level, or back to the centre's own system): the
+ * view is handed to that scene. */
+export interface LadderHandover { readonly objectId: string; readonly view: 'body' | 'system'; readonly centreId: string }
 
 /** How far out an object is seen: on the body, out to its moons, or (a star) out to its planetary system. */
-export type SceneView = 'body' | 'moons' | 'system';
+export type SceneView = PageView;
 /** The one selection: an object, and how far out it is seen. A planet's moons and a star's planetary system are views of
  * that planet and that star, not other kinds of subject. */
 export interface SceneSubject { readonly objectId: string; readonly view: SceneView }
@@ -18,15 +19,15 @@ export type SceneContext = SceneSubject;
 export type SelectionTarget = SceneSubject;
 
 export function selectionTargetFromUrl(url: URL, objectId: string, objects: SystemObjects): SelectionTarget {
-  if (satelliteSystemFromUrl(url) && satelliteSystemByHost(objectId)) return { objectId, view: 'moons' };
-  // A system overview is a view of its star's page: on any other page the address names the body.
-  const system = overviewScopeFromUrl(url) ? systemById(objects, objectId) : null;
-  return { objectId, view: system ? 'system' : 'body' };
+  // A view the object does not have (the moons of a body without any, the system of a body that is not a star with one)
+  // is the body.
+  const view = viewFromUrl(url), has = view === 'moons' ? satelliteSystemByHost(objectId) : view === 'system' ? systemById(objects, objectId) : true;
+  return { objectId, view: has ? view : 'body' };
 }
 
 /** Identity used by navigation rows, source links and per-selection reading positions. */
 export function selectionKey(subject: SelectionTarget): string {
-  return subject.view === 'body' ? `object:${subject.objectId}` : subject.view === 'moons' ? `satellite-system:${subject.objectId}` : `overview:system:${subject.objectId}`;
+  return `${PAGE_VIEWS[subject.view].identity}:${subject.objectId}`;
 }
 
 /** One committed subject. Mounted scene ownership and temporary browsing/flight previews remain independent. */
@@ -54,24 +55,19 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
     /** Follows the zoom ladder: true when the selection changed in place, a hand-over when the camera has crossed into
      * another scene's level (the router replaces the scene once the crossing has held), false otherwise. */
     followCamera(world: WorldCameraPose): boolean | LadderHandover {
-      const context = subject, level = isLevelObject(scene) ? scene : null;
-      // A mounted level is seen around its centre; an overview, around its system's star.
-      if (context.view !== 'system' && !(context.view === 'body' && level)) return false;
-      const centreId = context.view === 'system' ? context.objectId : levelCentre();
-      const previous = context.view === 'system' ? 'system' : level!;
-      const star = systemById(systems, centreId);
-      const scope = overviewScopeAtCamera(world, previous, undefined,
+      const ladder = ladderOf(subject);
+      if (!ladder) return false;
+      const { centreId } = ladder, star = systemById(systems, centreId);
+      const scope = overviewScopeAtCamera(world, ladder.scope, undefined,
         star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id) } : undefined);
-      if (scope === previous) return false;
-      if (scope === scene && level) return publish({ objectId: scene, view: 'body' });
-      if (isLevelObject(scope)) return { objectId: scope, centreId, to: 'level' };
-      if (level && scope === 'system') return { objectId: centreId, centreId, to: 'system' };
-      // The star's own system is the only overview left to select in place; a level is another scene.
-      return scope === 'system' ? publish({ objectId: centreId, view: 'system' }) : false;
+      if (scope === ladder.scope) return false;
+      // The rung the camera crossed into is a selection of the mounted scene (a star's own system), or of another scene.
+      const next = subjectOfScope(scope, centreId);
+      return next.objectId === scene ? publish(next) : { ...next, centreId };
     },
     /** Project the committed identity while preserving camera, dataset and diagnostic URL payloads. */
     url(value: string | URL) {
-      return withSatelliteSystemView(withOverviewScope(new URL(value), subject.view === 'system'), subject.view === 'moons').href;
+      return withView(new URL(value), subject.view).href;
     },
   };
 }

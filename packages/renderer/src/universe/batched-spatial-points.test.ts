@@ -231,3 +231,21 @@ test('a turn warps the paint only while no dot grows or shrinks by more than a t
   assert.equal(svg.style.transform, '');
   field.destroy();
 });
+
+test('a dot seen through an occluding disc is painted by a fainter path of its colour, most at the disc\'s centre', () => {
+  const { document } = parseHTML('<div id="host"></div>');
+  // The camera at the origin looks down -z at a disc of radius 2 at z = -5. Sight lines to the four points cross its plane
+  // at the centre, at 0.95 of the radius, outside the disc, and not at all (the last point is in front of it).
+  const field = mountBatchedSpatialPoints({ host: document.getElementById('host')!,
+    frame: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+      metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } },
+    points: [[0, 0, -10], [3.8, 0, -10], [10, 0, -10], [0, 0, -3]].map(positionUnits => ({ positionUnits: positionUnits as unknown as readonly [number, number, number] })),
+    className: 'test-points', stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'],
+    occluder: { centreUnits: [0, 0, -5], normal: [0, 0, 1], radiusUnits: 2 } });
+  field.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } },
+    viewport: { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 4000, heightPixels: 800 } });
+  const dots = Object.fromEntries([...field.root.querySelectorAll('path')].map(path => [path.getAttribute('stroke'), (path.getAttribute('d') ?? '').split('M').length - 1]));
+  assert.deepEqual(dots, { '#ffffffff': 2, '#ffffff40': 1, '#ffffff66': 0, '#ffffff8c': 0, '#ffffffb3': 0, '#ffffffd9': 1 });
+  assert.equal(field.stats().visiblePoints, 4);
+  field.destroy();
+});

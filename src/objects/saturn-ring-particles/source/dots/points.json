@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-body-points-source@1",
+  "id": "dots",
+  "published": true,
+  "host": "saturn",
+  "source": "source-saturn-cassini-uvis-alpvir-2006-285-occultation",
+  "meaning": "Dots across Saturn's rings whose density follows the Cassini UVIS occultation profile the ring image is made from. The position of a single dot is not a measurement: no ring particle has a measured position, so each dot's longitude and its place inside its kilometre bin come from a seeded generator.",
+  "table": {
+    "path": "positions.csv.gz",
+    "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+    "generator": "packages/bake/authoring/ring-particles/positions.mts"
+  },
+  "frame": {
+    "input": "host-centred-icrf-km",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "appearance": {
+    "colorCss": "#fff1ea",
+    "radiusPx": 0.75,
+    "opacity": 1
+  }
+}
