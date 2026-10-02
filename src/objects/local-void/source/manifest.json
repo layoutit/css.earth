@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [
+    {
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "credit": "Tully et al. (2023), Cosmicflows-4, and the other catalogues of the Nearby Universe galaxies bank; its galaxies as dots on the sky, drawn by site/build/prepare/companion-context.mts",
+      "license": "See src/objects/nearby-universe-galaxies/source/manifest.json",
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/nearby-universe-galaxies/source/manifest.json)."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet and dataset list."
+      }
+    },
+    {
+      "path": "presentation/solar-system.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored framing: the radius the page frames the region with few galaxies at, a presentation value."
+      }
+    },
+    {
+      "path": "preparation/navigation.json"
+    }
+  ]
+}
