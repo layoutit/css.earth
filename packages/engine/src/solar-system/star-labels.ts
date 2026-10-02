@@ -1,5 +1,6 @@
 import type { Exposure } from './star-photometry.js';
-import type { Vector2, Vector3, Matrix3, VisibleRect } from './types.js';
+import type { Vector3 } from '../navigation/math-types.js';
+import type { Vector2, Matrix3, VisibleRect } from './types.js';
 export interface CatalogueStar { id?:string; hip?:number; name:string; direction:Vector3; magnitude:number; }
 export interface StarLabelView { stars:readonly CatalogueStar[];rotation:Matrix3;focal:number;principalOffset:Vector2;visibleRect:VisibleRect;exposure:Exposure; }
 export type StarLabel = NonNullable<ReturnType<typeof selectStarLabel>>;

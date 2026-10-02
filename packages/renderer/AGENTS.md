@@ -4,7 +4,7 @@ Own the CSS renderer runtime: loading, decoding and validating prepared objects,
 navigation, retained CSS rendering of bodies, skies, stars, volumes, image layers and labels, and the universe context
 around the focused object. The site and the preparation tools reach it through `@cssearth/renderer` and its subpaths.
 The compilers that write the renderer's prepared formats are preparation code; they live in `@cssearth/bake` and import
-this package. Shared format identifiers and compact world-summary/system table decoders live in
+the shared contracts directly. Shared format identifiers and compact world-summary/system table decoders live in
 `@cssearth/objects`; world-context validation, camera frame/presentation data, system views and orbit-bank codecs also live there.
 Catalogue bank codecs and point-field data, manifest and binary bank contracts live in `@cssearth/objects` too.
 Camera projection, star loading and navigation remain here.
@@ -55,7 +55,7 @@ retained sky mounting, camera projection and direction computation remain here.
 
 Prepared CSS volume, impostor, dataset, embedded catalogue point, image-layer and surface-shell formats
 and validators belong to `@cssearth/objects`. This package keeps transport, projection, compositing,
-topology comparison and retained mounting; preparation imports the shared format contracts directly.
+retained mounting; preparation imports the shared format contracts directly.
 
 Universe catalogue point banks, galaxy backings, image meshes and dataset billboards have browser-safe
 format contracts and schema identifiers in `packages/objects/src/prepared-data/`, exported by `@cssearth/objects`.
@@ -66,3 +66,7 @@ Contract tests use node:test in the packages lane.
 Prepared spatial catalogue and surface-feature parsers belong to `@cssearth/objects`; import their records there.
 Surface-feature parsers retain normalized reader projections of the shared wire records. Transport, projection and
 label mounting stay here.
+
+Shared resource/address and image-density conventions, tile styles, silhouette walking, interior-disc size, shell material addresses, feature-bank hashing, marker/control validation, fly-to conventions and volume topology equality belong to objects. Numeric camera orientation math and solar geometry belong to engine; no re-export shims remain here.
+
+Validated world-camera pose/presentation conversion and the default-view reader remain here: they combine objects-owned validation with engine math.

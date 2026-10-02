@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtemp, realpath, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -30,5 +30,19 @@ test('bundles preserve imported source URLs and text while only the real entry r
     const source = pathToFileURL(dependency).href;
     assert.deepEqual(JSON.parse(result.stdout), { source, spaced: source, bracket: source, literal: 'import.meta.url',
       template: `literal import.meta.url / ${source}`, pattern: 'import.meta.url' });
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('workspace packages that ship built ES modules stay external instead of inlining their CommonJS build', async () => {
+  const directory = await realpath(await mkdtemp(join(tmpdir(), 'nebula-module-external-')));
+  const entry = join(directory, 'entry.ts'), outfile = join(directory, 'bundle.mjs');
+  try {
+    await writeFile(entry, `${['bake', 'core', 'engine', 'fits', 'objects', 'spice', 'telescope'].map((name, index) => `import * as owner${index} from '@cssearth/${name}';`).join('\n')}
+      console.log(typeof owner0, typeof owner1, typeof owner2, typeof owner3, typeof owner4, typeof owner5, typeof owner6);`);
+    await buildLabModule({ entryPoints: [entry], outfile, bundle: true, platform: 'node', format: 'esm', packages: 'external' });
+    const bundle = await readFile(outfile, 'utf8');
+    for (const name of ['bake', 'core', 'engine', 'fits', 'objects', 'spice', 'telescope'])
+      assert.match(bundle, new RegExp(`from "@cssearth/${name}"`), `@cssearth/${name} is bundled instead of imported`);
+    assert.doesNotMatch(bundle, /__require\("@cssearth\//, 'a workspace CommonJS build was inlined');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

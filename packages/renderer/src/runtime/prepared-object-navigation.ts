@@ -12,7 +12,7 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport, worldCameraFromCenteredPresentation } from '../navigation/world-camera.js';
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
-import { viewSunDirectionToPhysicalLightDirection } from '../solar-system/directional-sun-coordinate.js';
+import { viewSunDirectionToPhysicalLightDirection } from '@cssearth/engine';
 import { initialObjectSelection } from './object-contract.js';
 import { resolvePreparedPresentation } from '../rendering/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { surfaceFeatureBankIndex } from './surface-feature-banks.js';
+import { surfaceFeatureBankIndex } from '@cssearth/objects';
 
 test('surface feature bank addresses are stable and bounded', () => {
   assert.equal(surfaceFeatureBankIndex('12345', 64), 24);

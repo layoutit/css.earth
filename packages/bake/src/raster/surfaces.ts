@@ -1,8 +1,8 @@
 import sharp, { type Sharp } from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '@cssearth/objects';
-import { RASTER_DENSITY, type RasterRecipe } from './config.ts';
+import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
+import { type RasterRecipe } from './config.ts';
 import { raster, readRgba, assetPath } from './io.ts';
 import { applyUnderlay, withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.ts';
 import { composeLimbPreview } from './emission-preview.ts';

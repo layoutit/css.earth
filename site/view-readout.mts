@@ -8,7 +8,7 @@ import { sectionElements } from '@cssearth/renderer';
 import type { SurfaceMapReader } from './minimap/surface-map-context.mts';
 import { parseSurfaceMapConfig } from './minimap/surface-map-context.mts';
 import type { OverviewScope } from './overview-context.mts';
-import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
+import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
 import { measureView } from './minimap/view-measure.mts';
 import { surfaceMapContext, surfaceMapViewport } from './minimap/surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';

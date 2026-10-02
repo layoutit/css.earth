@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
+import type { Vector3 } from '@cssearth/engine';
 import { preparedControlPitch } from '@cssearth/engine';
 import { LOPSIDED_COVERAGE, MINIMUM_COVERED_SHARE, prepareDefaultCameraAngles } from '@cssearth/bake/objects/scene';
 import { authoredFocusDatasets, coverageDirection, coveredShare, faceDatasetData } from '@cssearth/bake/objects/default-view';

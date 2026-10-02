@@ -39,3 +39,5 @@ Object JSON descriptors and generated assets live outside packages. Mercury and
 Venus share implementations selected by capabilities; packages contain no
 per-planet code or data folders. Concrete CSS/DOM rendering belongs to the
 application renderer. Earth is a future consumer, outside this migration's scope.
+
+Numeric camera orientation math, heliocentric geometry and solar direction conversions live in `src/navigation/` and `src/solar-system/`, exported by the main entry. They depend on core numerics; no renderer, DOM or resource-loading implementation is imported. Flat solar matrices use the public `FlatMatrix3` name; navigation `Matrix3` remains nested.

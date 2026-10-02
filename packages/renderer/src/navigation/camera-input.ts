@@ -15,7 +15,8 @@ export type MatrixDragControls = ReturnType<typeof createUnboundedMatrixDragCont
 import { createSceneLifetime } from "@cssearth/engine";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity, poleTumbleTurn, poleGrabTurn, poleTurnRotation, rotateVector } from "@cssearth/engine";
 import { advanceDragThrow, createDragHistory, estimateDragThrow, TRACKBALL_DRAG_INERTIA, projectTrackballDelta, recordDragSample, resetDragHistory } from "@cssearth/engine";
-import { SURFACE_FLY_TO, planSurfaceFlyTo, sampleSurfaceFlyTo } from "./surface-fly-to.js";
+import { planSurfaceFlyTo, sampleSurfaceFlyTo } from './surface-fly-to.js';
+import { SURFACE_FLY_TO } from '@cssearth/objects';
 import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
 import { clearCursor, setBaseCursor } from './cursor-state.js';
 import { cameraMotionSignalFor } from './camera-motion-signal.js';

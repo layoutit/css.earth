@@ -23,3 +23,5 @@ Do not import the application, legacy runtime, or object-specific configuration.
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+
+Numeric camera orientation math, heliocentric geometry and solar direction conversions live in `src/navigation/` and `src/solar-system/`, exported by the main entry. They depend on core numerics; no renderer, DOM or resource-loading implementation is imported. Flat solar matrices use the public `FlatMatrix3` name; navigation `Matrix3` remains nested.

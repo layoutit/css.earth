@@ -37,7 +37,7 @@ export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
   { name: '@cssearth/volume-viewer', command: 'pnpm --filter @cssearth/volume-viewer build', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
   // The CLI bundles its workspace dependencies into one file, so any of their sources makes it stale.
   { name: '@cssearth/telescope-cli', command: 'pnpm --filter @cssearth/telescope-cli build', output: 'packages/telescope-cli/dist/telescope.mjs',
-    sources: ['packages/telescope-cli/src', ...['telescope', 'core', 'bake', 'objects', 'fits', 'renderer', 'astronomy', 'spice'].map(name => `packages/${name}/src`)] },
+    sources: ['packages/telescope-cli/src', ...['telescope', 'core', 'engine', 'bake', 'objects', 'fits', 'renderer', 'astronomy', 'spice'].map(name => `packages/${name}/src`)] },
 ]);
 
 const SOURCE = /\.(?:ts|mts|json)$/u, SKIP = new Set(['dist', 'node_modules']);

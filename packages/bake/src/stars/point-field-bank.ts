@@ -4,7 +4,7 @@ import type { StarsRecipe } from './types.ts';
 import type { PreparedCssPointField, PreparedPointFieldBank, PreparedPointFieldQuantization } from '@cssearth/objects';
 import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_MAGNITUDE_DIVISOR,
   decodePointFieldBank, decodeStarMagnitude, pointFieldBankHeader, pointFieldBankLayout } from '@cssearth/objects';
-import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/renderer/stars/point-field-projection.ts';
+import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
 
 type Photometry = PreparedCssPointField['photometry'];
 

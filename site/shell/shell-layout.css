@@ -699,7 +699,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* The peek is a shared layout stop, independent of card length and destination.
        Cap it to the available sheet height on short viewports. */
     --sheet-tucked: calc(20px + var(--explorer-safe-bottom));
-    --sheet-peek: min(var(--sheet-height), calc(280px + var(--explorer-safe-bottom)));
+    --sheet-peek: min(var(--sheet-height), calc(240px + var(--explorer-safe-bottom)));
     --sheet-half: max(50dvh, var(--sheet-peek));
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
@@ -825,10 +825,11 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   /* The scene uses the space returned by the tucked sheet. Other stops leave the camera framed for the peek. */
   body[data-object-shell] .object-viewport { bottom: var(--sheet-peek); }
   body[data-object-shell][data-sheet="tucked"] .object-viewport { bottom: var(--sheet-tucked); }
-  /* The camera centres the body above the search. Opening the sheet from the content stops does not re-centre it. */
+  /* The camera centres the body above the middle of the search. Opening the sheet from the content stops does not
+     re-centre it. */
   body[data-object-shell] .object-viewport-search-band {
     display: block;
-    height: calc(var(--sheet-lift) - 8px);
+    height: calc(var(--sheet-lift) - 8px - var(--explorer-search-height) / 2);
   }
 
   /* The result list scrolls itself (the catalogue window reads its scroll), so it takes the open sheet's height
@@ -873,6 +874,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* Between the former 176 px stop and the oversized 320 px stop; two columns need less height. */
     --sheet-peek: min(var(--sheet-height), calc(248px + var(--explorer-safe-bottom)));
   }
+  /* Tablets centre the body above the whole search; only phones reach to its middle. */
+  body[data-object-shell] .object-viewport-search-band { height: calc(var(--sheet-lift) - 8px); }
   .explorer-shell-header { column-gap: 20px; }
 
   .object-search-toolbar { right: auto; width: var(--tablet-search-width); }

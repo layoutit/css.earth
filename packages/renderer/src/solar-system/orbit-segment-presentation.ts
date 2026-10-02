@@ -1,4 +1,4 @@
-import type { OrbitSegment } from './types.js';
+import type { OrbitSegment } from '@cssearth/engine';
 
 /** CSS unit-bar transform for an already projected, clipped prepared chord. */
 export function orbitSegmentTransform([x0, y0, x1, y1]: OrbitSegment): string {

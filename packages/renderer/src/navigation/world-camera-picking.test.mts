@@ -4,7 +4,7 @@ import { afterEach, test, mock } from 'node:test';
 import { getEventListeners } from 'node:events';
 import { runtimePolicy } from '../../test/runtime-policy-fixture.mts';
 import runtimeDefinition from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
-import { presentWorldCamera, worldCameraFromPresentation } from './world-camera.ts';
+import { presentWorldCamera, worldCameraFromPresentation } from './world-camera.js';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { CameraDelta } from './types.ts';
 import { hitsProjectedBody } from './world-camera-hit.ts';
@@ -332,7 +332,6 @@ test('hover clears before a drag and on leaving the scene', () => {
   f.destroy();
 });
 
-
 test('label, circle and visible orbit share hover, pointer cursor and single-click navigation', () => {
   const f = fixture();
   const group = new FakeSurface(), orbit = new FakeSurface();
@@ -375,7 +374,6 @@ test('faded orbit chords and empty orbit groups cannot select a body', () => {
   }
   f.destroy();
 });
-
 
 test('hover coalesces pointer events and follows the latest published targets while stationary', () => {
   const f = fixture();

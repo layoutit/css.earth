@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import { type ObjectRuntimeDefinition, requireObjectRuntimeDefinition } from '@cssearth/objects';
+import { requireObjectRuntimeDefinition, CANONICAL_PREPARED_IMAGE_DENSITY, type ObjectRuntimeDefinition } from '@cssearth/objects';
 
 import { initialStageSelection } from './initial-stage-selection.js';
 import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
@@ -18,7 +18,6 @@ import { publishObjectDiagnostics } from "./object-diagnostics.js";
 export type { ObjectMountOptions, ObjectRuntimeView } from './object-runtime-types.js';
 export type ObjectRuntimeServices = typeof nativeServices;
 
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../rendering/prepared-object-assets.js";
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "./scene-native-waits.js";
 import { createPreparedResidency } from "../rendering/prepared-residency.js";

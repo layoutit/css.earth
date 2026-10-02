@@ -1,7 +1,7 @@
 import { fromEyeM } from '@cssearth/engine';
 import { type PreparedLeafBounds, type PreparedCssSky, validatePreparedCssSky, validatePreparedSkyParallax, type PreparedCssVolume } from '@cssearth/objects';
 import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../rendering/prepared-leaf-frustum.js';
-import { cssViewFromOrientation, worldRotationCss } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, worldRotationCss } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 
 import { afterStartup, startupOpen } from '../rendering/startup-gate.js';

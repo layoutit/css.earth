@@ -10,7 +10,7 @@ import { preparedObjectCapabilities } from '@cssearth/renderer';
 import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding, createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation } from "@cssearth/renderer/testing";
 
 import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
-import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
+import { viewSunDirectionToPreparedLightDirection } from '@cssearth/engine';
 import { createSceneLifetime } from "@cssearth/engine";
 import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { initialObjectSelection } from "@cssearth/renderer/testing";

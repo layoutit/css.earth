@@ -122,7 +122,7 @@ export default defineConfig(options => ({
     await emitDeclarations(); return options.watch ? await watchDeclarationSources() : undefined
   },
   clean: true,
-  // Topics read renderer constants, types and validators from its source subpaths (`@cssearth/renderer/rendering/*.ts`).
+  // Topics read shared conventions from objects and numerics from engine; remaining renderer uses name source subpaths.
   // Those subpaths are TypeScript whose sibling imports name `.js`, which Node cannot load, so they are bundled; the
   // renderer's built entries would be too, but no topic imports one.
   noExternal: [/^@cssearth\/renderer\//],

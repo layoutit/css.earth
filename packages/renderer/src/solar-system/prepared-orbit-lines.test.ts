@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { mountPreparedOrbitLines, ORBIT_OPACITY_LEVELS } from './prepared-orbit-lines.js';
-import type { OrbitSegment } from './types.js';
+import type { OrbitSegment } from '@cssearth/engine';
 
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
@@ -85,7 +85,6 @@ test('bars keep their host as presentation and an orbit-less root gets bars what
   const fallback = mountPreparedOrbitLines(detached, { renderer: 'strokes', capacity: 4 });
   assert.equal(fallback.presentation, detached);
 });
-
 
 test('detached orbit owners attach only a populated group on demand and reuse it', () => {
   const { root } = world(), host = root.ownerDocument.createElement('div');

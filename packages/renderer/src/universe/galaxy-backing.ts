@@ -1,5 +1,5 @@
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
-import { worldRotationCss } from '../navigation/world-camera-math.js';
+import { worldRotationCss } from '@cssearth/engine';
 import { type PreparedGalaxyBacking } from '@cssearth/objects';
 import type { VolumeCameraPublication } from '../volume/types.js';
 

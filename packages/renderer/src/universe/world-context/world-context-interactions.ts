@@ -1,6 +1,6 @@
 import { screenPicking, type ScreenPickTarget } from '../../navigation/screen-picking.js';
 import { bindObjectNavigationTarget } from '../../solar-system/heliocentric-navigation.js';
-import type { OrbitSegment } from '../../solar-system/types.js';
+import type { OrbitSegment } from '@cssearth/engine';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
 import type { PlannedWorldContext } from './world-context-planner.js';
 

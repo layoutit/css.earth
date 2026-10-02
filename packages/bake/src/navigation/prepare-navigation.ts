@@ -4,9 +4,8 @@ import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 
 import sharp from "sharp";
-import type { ObjectEntry } from '@cssearth/objects';
+import { validateMarkerPresentation, type ObjectEntry, type MarkerPresentation } from '@cssearth/objects';
 import type { MarkerDescriptor } from './marker-recipe.ts';
-import type { MarkerPresentation } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 type MarkerPlanet = Pick<ObjectEntry, 'id' | 'classification'>;
@@ -16,7 +15,6 @@ type MoveNavigationFile = (source: string, target: string) => Promise<void>;
 interface MarkerLoadOptions { planets?: readonly MarkerPlanet[]; projectRoot?: string; }
 interface NavigationOptions extends MarkerLoadOptions { objectIds?: readonly string[]; catalogOnly?: boolean; outputRoot?: string; presentationPath?: string; moveFile?: MoveNavigationFile; }
 interface MarkerRenderOptions { projectRoot: string; outputRoot: string; descriptors: readonly MarkerDescriptor[]; }
-
 
 import {
   NAVIGATION_BLACKHOLE_SOURCE,
@@ -34,7 +32,6 @@ import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
 } from "./marker-recipe.ts";
-import { validateMarkerPresentation } from "@cssearth/renderer/navigation/marker-presentation.ts";
 import { optimizePreparedQ75Webp } from "../delivery/index.ts";
 import { encodeLossyWebp } from '../raster/index.ts';
 import { loadAstronomyPackage } from "../astronomy/index.ts";
@@ -605,4 +602,3 @@ async function loadObjectDescriptor(objectId: string, projectRoot: string): Prom
     throw new TypeError(`src/objects/${objectId}/object.json: scene object ${objectId} has no authored recipe (properties.recipe), so it has no marker descriptor.`);
   return loadObjectMarkerDescriptor(objectId, projectRoot);
 }
-

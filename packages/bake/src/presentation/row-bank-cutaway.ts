@@ -1,12 +1,10 @@
-import { type PreparedVariant, type PreparedWrite } from '@cssearth/objects';
+import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCHEMA, type PreparedVariant, type PreparedWrite } from '@cssearth/objects';
 
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
 import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
-import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareRowBankCutaway(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, datasets, sun } = input;

@@ -1,7 +1,7 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { composeDragRotation, eyeDistanceM, fromEyeM } from '@cssearth/engine';
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
-import { rotateWorldPosition, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
 

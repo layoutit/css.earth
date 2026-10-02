@@ -1,6 +1,6 @@
 import { requireCamera, type WorldRotation } from '@cssearth/objects';
 
-import { preparedSceneMatrix } from './prepared-camera-basis.js';
+import { preparedSceneMatrix } from '@cssearth/engine';
 
 /** Reuse the exact package pose used by a fresh mount; catalogue preparation calls this once. */
 export function preparedDefaultViewRotation(camera: unknown): WorldRotation {

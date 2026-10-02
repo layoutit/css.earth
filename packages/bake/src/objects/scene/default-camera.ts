@@ -1,4 +1,4 @@
-import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
+import type { Vector3 } from '@cssearth/engine';
 import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.ts";
 import type { SolarGeometry } from "./solar-geometry.ts";
 
