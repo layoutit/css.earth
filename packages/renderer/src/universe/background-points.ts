@@ -1,18 +1,20 @@
-import { mountCataloguePoints } from './catalogue-points.js';
+import { mountCataloguePoints, type CataloguePointOccluder } from './catalogue-points.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 /** The galaxies beyond the Local Group draw at this share of their dots' own opacity: a backdrop behind the object in view.
  * A presentation choice, set by eye in the app. */
-const BACKGROUND_OPACITY = 0.75;
+const BACKGROUND_OPACITY = 0.6;
 /** A background bank, and the camera distance it begins at: it is fetched there and fades in over the next doubling. */
 export interface BackgroundPointBank { readonly url: string; readonly fromDistanceM?: number }
 
 /**
  * The galaxies beyond the Local Group: prepared catalogue point banks (the field and its nested levels around the Milky
  * Way), each fetched the first time the camera is far enough out to show it. A far survey (DESI's shells, 0.7 Gpc and
- * beyond) begins farther out, so the Local Group and Nearby Universe never download it.
+ * beyond) begins farther out, so the Local Group and Nearby Universe never download it. `occluder` is our galaxy's disc:
+ * the galaxies seen through it are dimmed, so they do not compete with its own dots.
  */
-export function mountBackgroundPoints(host: HTMLElement, before: Element, sources: readonly BackgroundPointBank[], loadBank: (url: string) => Promise<unknown>) {
-  const banks = sources.map(source => ({ from: source.fromDistanceM, bank: mountCataloguePoints({ host, before, url: source.url, loadBank }) }));
+export function mountBackgroundPoints(host: HTMLElement, before: Element, sources: readonly BackgroundPointBank[], loadBank: (url: string) => Promise<unknown>,
+  occluder?: CataloguePointOccluder) {
+  const banks = sources.map(source => ({ from: source.fromDistanceM, bank: mountCataloguePoints({ host, before, url: source.url, loadBank, ...(occluder ? { occluder } : {}) }) }));
   return {
     /** `outside` is how far the camera is out of our galaxy (volumeOutsideFade): the galaxies beyond show only there. */
     publish(publication: VolumeCameraPublication, distanceM: number, outside: number) {

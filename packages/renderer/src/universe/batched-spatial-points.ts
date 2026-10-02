@@ -37,6 +37,14 @@ const SETTLE_MS = 120;
  * all; the frames between keep the last paint, a frame behind the travel. A pause repaints exactly (SETTLE_MS), so a
  * still view is unchanged. */
 const MOTION_REPAINT_MS = 25;
+/** A dot seen through an occluding disc (a galaxy's, from outside it) is dimmed by where its sight line crosses the disc:
+ * most at the centre, to OCCLUDED_FLOOR of its opacity, and not at all at the disc's edge, along (1 - (r/R)^2)^2, which
+ * reaches the edge with no step and no slope, so the disc's outline does not show in the dots. The dimming is painted in
+ * OCCLUDED_STEPS even steps of opacity, one fainter path each. PROTOTYPE values, guessed on 2026-10-01. */
+const OCCLUDED_FLOOR = .25, OCCLUDED_STEPS = 5;
+const OCCLUDED_OPACITIES = Array.from({ length: OCCLUDED_STEPS }, (_, step) => OCCLUDED_FLOOR + (1 - OCCLUDED_FLOOR) * step / OCCLUDED_STEPS);
+/** A flat disc in a field's own frame: its centre, unit normal and radius, in the field's units. */
+export interface BatchedSpatialPointOccluder { readonly centreUnits: VolumeVector; readonly normal: VolumeVector; readonly radiusUnits: number }
 
 type Matrix3 = [number, number, number, number, number, number, number, number, number];
 const multiply = (a: Matrix3, b: Matrix3): Matrix3 => [0, 1, 2, 3, 4, 5, 6, 7, 8].map(index => {
@@ -82,8 +90,11 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   /** Called after the exact repaint that follows a pause, so an owner that reads `stats()` (a screen budget) can settle
    * on it: the counts of the paint before may be a paced frame's. */
   onSettle?(): void;
+  /** A disc that dims the dots behind it (OCCLUDED_FLOOR): a dot whose sight line from the camera crosses the disc
+   * before reaching the dot is painted by a fainter path of its own colour. */
+  occluder?: BatchedSpatialPointOccluder;
 } & ({ parts: readonly BatchedSpatialPointPart<T>[] } | BatchedSpatialPointPart<T>)) {
-  const { host, before, frame, className, now = () => performance.now(), onSettle } = options;
+  const { host, before, frame, className, now = () => performance.now(), onSettle, occluder } = options;
   const inputs = 'parts' in options ? options.parts : [options];
   if (!inputs.length) throw new TypeError(`${className}: a point field needs a part.`);
   const root = host.ownerDocument.createElement('div'); root.className = className; root.ariaHidden = 'true';
@@ -100,8 +111,13 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // cellStart to cellStart of the next: the prefix a frame draws ends a run early, and a point keeps its own index for its
   // rank. One cell holds everything without cells.
   const parts = inputs.map(({ points, cells, stylePoint, drawnCount, paintPalette, keepFraction }) => {
-    const paint = mountPointPaths(root, paintPalette, svg);
+    // Behind an occluder a dot is painted by a fainter path of its colour, one for each level: more paths, no more dots.
+    const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
+    const drawnStyle = (point: T) => { const style = stylePoint(point); return style && style.opacity > 0 && style.radiusPx > 0 ? style : null; };
+    const paint = mountPointPaths(root, occluder ? [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor =>
+      points.flatMap(point => { const style = drawnStyle(point); return style ? [dimmed(style, factor)] : []; }))] : paintPalette, svg);
     const positions = new Float64Array(points.length * 3), paths = new Int32Array(points.length), margins = new Float64Array(points.length);
+    const occludedPaths = OCCLUDED_OPACITIES.map(() => new Int32Array(occluder ? points.length : 0));
     const ranks = new Float64Array(points.length);
     points.forEach((point, index) => {
       positions.set(point.positionUnits, index * 3);
@@ -109,6 +125,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       const style = stylePoint(point);
       if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; return; }
       paths[index] = paint.entry(pointPaint(style), Math.max(.5, style.radiusPx));
+      if (occluder) OCCLUDED_OPACITIES.forEach((factor, level) => { occludedPaths[level]![index] = paint.entry(dimmed(style, factor), Math.max(.5, style.radiusPx)); });
       margins[index] = Math.max(2, style.radiusPx);
     });
     const cellCount = cells ? cells.boxes.length / 6 : 1, cellStart = new Int32Array(cellCount + 1), order = new Int32Array(points.length);
@@ -119,7 +136,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // The widest margin a drawn point has: a cell is out of view when even its nearest corner is beyond it.
     let widestMargin = 0;
     for (let index = 0; index < points.length; index++) if (paths[index]! >= 0) widestMargin = Math.max(widestMargin, margins[index]!);
-    return { points, cells, drawnCount, keepFraction, paint, positions, paths, margins, ranks, cellCount, cellStart, order,
+    return { points, cells, drawnCount, keepFraction, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
       boxes: cells?.boxes ?? new Float64Array(6), widestMargin, culled: new Int32Array(cellCount),
       last: { visiblePoints: 0, candidates: 0, skippedCells: 0, residentElements: 0, publishMs: 0 } as BatchedSpatialPointStats };
   });
@@ -208,9 +225,12 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     const [px, py, pz] = local.positionUnits, focal = viewport.focalPixels, [ox, oy] = viewport.principalOffsetPixels;
     const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
     const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = r as unknown as [number, number, number, number, number, number, number, number, number];
+    // The occluder's plane from the camera: a sight line `camera + t offset` crosses it at t = side / (normal · offset).
+    const [onx, ony, onz] = occluder?.normal ?? [0, 0, 0], [ocx, ocy, ocz] = occluder?.centreUnits ?? [0, 0, 0];
+    const side = onx * (ocx - px) + ony * (ocy - py) + onz * (ocz - pz), occluderRadius = occluder?.radiusUnits ?? 0;
     parts.forEach((part, partIndex) => {
       const partStarted = performance.now();
-      const { positions, paths, margins, ranks, cellCount, cellStart, order, boxes, culled, paint, cells } = part;
+      const { positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order, boxes, culled, paint, cells } = part;
       const count = counts[partIndex]!, keep = keeps[partIndex]!;
       let visible = 0, candidates = 0;
       paint.begin(viewport);
@@ -260,7 +280,18 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           const inView = Math.abs(sx) <= halfWidth + margin && Math.abs(sy) <= halfHeight + margin;
           if (inView) candidates++;
           if (keep < 1 && ranks[index]! >= keep) continue;
-          paint.add(path, sx, sy);
+          let target = path;
+          if (occluder) {
+            const along = onx * x + ony * y + onz * z, t = along === 0 ? -1 : side / along;
+            if (t > 0 && t < 1) {
+              const hx = px + t * x - ocx, hy = py + t * y - ocy, hz = pz + t * z - ocz, share = (hx * hx + hy * hy + hz * hz) / (occluderRadius * occluderRadius);
+              if (share < 1) {
+                const step = Math.floor((1 - (1 - share) * (1 - share)) * OCCLUDED_STEPS);
+                if (step < OCCLUDED_STEPS) target = occludedPaths[step]![index]!;
+              }
+            }
+          }
+          paint.add(target, sx, sy);
           if (inView) visible++;
         }
       }
